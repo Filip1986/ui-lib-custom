@@ -1,15 +1,19 @@
-<div class="demo-page">
-  <div class="demo-page__header">
-    <h1 class="demo-page__title">MegaMenu</h1>
-    <p class="demo-page__description">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>MegaMenu</h1>
+      <code class="demo-page-header__import">import &#123; MegaMenu &#125; from 'ui-lib-custom/mega-menu'</code>
+    </div>
+    <p class="demo-page-header__description">
       A horizontal (or vertical) navigation bar where top-level items open multi-column
       mega panels of grouped sub-items. Supports three design variants, three sizes, keyboard
       navigation, disabled items, separators, URL links, and command callbacks.
     </p>
-  </div>
+  </header>
 
   <!-- ── Basic Horizontal ──────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic-horizontal" data-doc-anchor>
     <h2 class="demo-section__title">Basic Horizontal</h2>
     <p class="demo-section__desc">
       Default horizontal orientation. Click a top-level item with sub-items to open its
@@ -24,7 +28,7 @@
   </section>
 
   <!-- ── Vertical Orientation ─────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="vertical-orientation" data-doc-anchor>
     <h2 class="demo-section__title">Vertical Orientation</h2>
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> for a stacked list. Mega panels
@@ -39,7 +43,7 @@
   </section>
 
   <!-- ── Disabled Items ───────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="disabled-items" data-doc-anchor>
     <h2 class="demo-section__title">Disabled Items &amp; Separators</h2>
     <p class="demo-section__desc">
       Top-level items and sub-items can be disabled. Sub-items support separator lines
@@ -55,7 +59,7 @@
   </section>
 
   <!-- ── Command Callbacks ────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="command-callbacks" data-doc-anchor>
     <h2 class="demo-section__title">Command Callbacks</h2>
     <p class="demo-section__desc">
       Sub-items can invoke a <code>command</code> function when activated.
@@ -73,7 +77,7 @@
   </section>
 
   <!-- ── itemClick Output ─────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="item-click-output" data-doc-anchor>
     <h2 class="demo-section__title">itemClick Output</h2>
     <p class="demo-section__desc">
       The <code>(itemClick)</code> output fires a <code>MegaMenuCommandEvent</code>
@@ -100,7 +104,7 @@
   </section>
 
   <!-- ── Variants ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__desc">
       Three design variants: <strong>material</strong>, <strong>bootstrap</strong>, and
@@ -117,7 +121,7 @@
   </section>
 
   <!-- ── Sizes ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__desc">
       Three size tokens: <strong>sm</strong>, <strong>md</strong>, and <strong>lg</strong>.
@@ -133,7 +137,7 @@
   </section>
 
   <!-- ── Playground ───────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
     <p class="demo-section__desc">
       Combine variant, size, and orientation interactively.
@@ -187,7 +191,7 @@
   </section>
 
   <!-- ── API Reference ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-section__subtitle">MegaMenu Inputs</h3>
@@ -407,4 +411,14 @@
       </table>
     </div>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

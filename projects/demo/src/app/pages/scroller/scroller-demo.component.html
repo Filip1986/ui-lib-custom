@@ -1,16 +1,20 @@
-<section class="scroller-demo">
-  <h1>Virtual Scroller</h1>
-  <p class="scroller-demo__intro">
-    Renders only the items currently visible in the viewport plus a configurable tolerance buffer,
-    keeping large lists performant without changing the external API.
-  </p>
+<app-doc-page-layout [sections]="sections">
 
-  <!-- ======================================================================
-       Scenario 1 – Vertical list  (10 000 items)
-       ====================================================================== -->
-  <div class="scroller-demo__section">
-    <h2>Vertical (10 000 items)</h2>
-    <p>Default orientation — list scrolls downward. Each item is 64 px tall.</p>
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Virtual Scroller</h1>
+      <code class="demo-page-header__import">import &#123; VirtualScrollerComponent &#125; from 'ui-lib-custom/virtual-scroller'</code>
+    </div>
+    <p class="demo-page-header__description">
+      Renders only the items currently visible in the viewport plus a configurable tolerance buffer,
+      keeping large lists performant without changing the external API.
+    </p>
+  </header>
+
+  <!-- Scenario 1 – Vertical list  (10 000 items) -->
+  <section class="demo-section" id="vertical" data-doc-anchor>
+    <h2 class="demo-section__title">Vertical (10 000 items)</h2>
+    <p class="demo-section__description">Default orientation — list scrolls downward. Each item is 64 px tall.</p>
     <ui-lib-virtual-scroller
       [items]="verticalItems"
       [itemSize]="64"
@@ -26,14 +30,12 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </div>
+  </section>
 
-  <!-- ======================================================================
-       Scenario 2 – Horizontal list  (1 000 items)
-       ====================================================================== -->
-  <div class="scroller-demo__section">
-    <h2>Horizontal (1 000 items)</h2>
-    <p>Orientation set to <code>horizontal</code>. Each item is 120 px wide.</p>
+  <!-- Scenario 2 – Horizontal list  (1 000 items) -->
+  <section class="demo-section" id="horizontal" data-doc-anchor>
+    <h2 class="demo-section__title">Horizontal (1 000 items)</h2>
+    <p class="demo-section__description">Orientation set to <code>horizontal</code>. Each item is 120 px wide.</p>
     <ui-lib-virtual-scroller
       [items]="horizontalItems"
       [itemSize]="120"
@@ -47,14 +49,12 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </div>
+  </section>
 
-  <!-- ======================================================================
-       Scenario 3 – Lazy loading
-       ====================================================================== -->
-  <div class="scroller-demo__section">
-    <h2>Lazy Loading</h2>
-    <p>
+  <!-- Scenario 3 – Lazy loading -->
+  <section class="demo-section" id="lazy-loading" data-doc-anchor>
+    <h2 class="demo-section__title">Lazy Loading</h2>
+    <p class="demo-section__description">
       Items are fetched in pages as the user scrolls.
       <code>(lazyLoad)</code> fires with the required <code>first</code> / <code>last</code> index window.
     </p>
@@ -82,14 +82,12 @@
         }
       </ng-template>
     </ui-lib-virtual-scroller>
-  </div>
+  </section>
 
-  <!-- ======================================================================
-       Scenario 4 – Custom skeleton loader
-       ====================================================================== -->
-  <div class="scroller-demo__section">
-    <h2>Custom Loader Template</h2>
-    <p>
+  <!-- Scenario 4 – Custom skeleton loader -->
+  <section class="demo-section" id="custom-loader" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Loader Template</h2>
+    <p class="demo-section__description">
       Pass a <code>uiScrollerLoader</code> template to replace the default spinner with
       any content — here a card skeleton.
     </p>
@@ -124,14 +122,12 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </div>
+  </section>
 
-  <!-- ======================================================================
-       Scenario 5 – Disabled (bypass virtualization)
-       ====================================================================== -->
-  <div class="scroller-demo__section">
-    <h2>Disabled Mode</h2>
-    <p>
+  <!-- Scenario 5 – Disabled (bypass virtualization) -->
+  <section class="demo-section" id="disabled-mode" data-doc-anchor>
+    <h2 class="demo-section__title">Disabled Mode</h2>
+    <p class="demo-section__description">
       When <code>[disabled]="true"</code> all items are rendered without virtualization —
       useful for small lists or print/export paths.
     </p>
@@ -158,14 +154,12 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </div>
+  </section>
 
-  <!-- ======================================================================
-       Scenario 6 – Large uniform items  (5 000 items)
-       ====================================================================== -->
-  <div class="scroller-demo__section">
-    <h2>Large Items (5 000 items)</h2>
-    <p>Each item is 96 px — demonstrates the buffer tolerance with taller rows.</p>
+  <!-- Scenario 6 – Large uniform items  (5 000 items) -->
+  <section class="demo-section" id="large-items" data-doc-anchor>
+    <h2 class="demo-section__title">Large Items (5 000 items)</h2>
+    <p class="demo-section__description">Each item is 96 px — demonstrates the buffer tolerance with taller rows.</p>
     <ui-lib-virtual-scroller
       [items]="largeItems"
       [itemSize]="96"
@@ -179,13 +173,21 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
+  </section>
+
+  <!-- Usage example -->
+  <section class="demo-section" id="basic-usage" data-doc-anchor>
+    <h2 class="demo-section__title">Basic Usage</h2>
+    <pre class="scroller-demo__code"><code>{{ demoCode() }}</code></pre>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-  <!-- ======================================================================
-       Usage example
-       ====================================================================== -->
-  <div class="scroller-demo__section scroller-demo__section--code">
-    <h2>Basic Usage</h2>
-    <pre class="scroller-demo__code"><code>{{ demoCode() }}</code></pre>
-  </div>
-</section>
+</app-doc-page-layout>

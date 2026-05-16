@@ -1,0 +1,22 @@
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Splitter</h1>
+      <code class="demo-page-header__import">import &#123; Splitter &#125; from 'ui-lib-custom/splitter'</code>
+    </div>
+    <p class="demo-page-header__description">
+      Coming soon — the Splitter component is under active development.
+    </p>
+  </header>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

@@ -1,36 +1,41 @@
-<div class="demo-page">
-  <div class="demo-header">
-    <h1>TreeTable</h1>
-    <p class="demo-description">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>TreeTable</h1>
+      <code class="demo-page-header__import">import &#123; TreeTableComponent &#125; from 'ui-lib-custom/tree-table'</code>
+    </div>
+    <p class="demo-page-header__description">
       Hierarchical data displayed as an expandable table. Supports sorting, global filter,
       single / multiple / checkbox selection, custom cell templates, and all three design variants.
     </p>
-  </div>
-
-  <!-- ─── Variant switcher ────────────────────────────────────────────────── -->
-  <div class="demo-controls">
-    <div class="demo-control-group">
-      <span class="demo-control-label">Variant</span>
-      <div class="demo-button-group">
-        @for (v of ['material', 'bootstrap', 'minimal']; track v) {
-          <ui-lib-button
-            type="button"
-            [appearance]="activeVariant() === v ? 'solid' : 'outline'"
-            severity="primary"
-            size="sm"
-            (click)="setVariant($any(v))"
-          >{{ v }}</ui-lib-button>
-        }
+    <div class="demo-page-header__preview">
+      <!-- Variant switcher -->
+      <div class="demo-controls">
+        <div class="demo-control-group">
+          <span class="demo-control-label">Variant</span>
+          <div class="demo-button-group">
+            @for (v of ['material', 'bootstrap', 'minimal']; track v) {
+              <ui-lib-button
+                type="button"
+                [appearance]="activeVariant() === v ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                (click)="setVariant($any(v))"
+              >{{ v }}</ui-lib-button>
+            }
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 1 — Basic file system tree table
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Basic — File System</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic — File System</h2>
+    <p class="demo-section__description">
       A three-level file-system tree. The <code>name</code> column is the expander column.
       Click the toggle arrows to expand or collapse folders.
     </p>
@@ -46,9 +51,9 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 2 — Sorting
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Sorting</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="sorting" data-doc-anchor>
+    <h2 class="demo-section__title">Sorting</h2>
+    <p class="demo-section__description">
       Click any sortable column header to cycle: unsorted → ascending → descending → unsorted.
       Sorting is applied within each group of siblings independently.
     </p>
@@ -64,9 +69,9 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 3 — Global filter
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Global Filter</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="global-filter" data-doc-anchor>
+    <h2 class="demo-section__title">Global Filter</h2>
+    <p class="demo-section__description">
       Type in the search box to filter rows. Parent nodes remain visible when any of
       their descendants match the search text.
     </p>
@@ -87,9 +92,9 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 4 — Selection modes
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Selection Modes</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="selection-modes" data-doc-anchor>
+    <h2 class="demo-section__title">Selection Modes</h2>
+    <p class="demo-section__description">
       Switch between single, multiple, and checkbox selection. Checkbox mode cascades
       selection to all descendant rows and shows a "partial" state on parents.
     </p>
@@ -166,9 +171,9 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 5 — Custom cell templates
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Custom Cell Templates</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="custom-cell-templates" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Cell Templates</h2>
+    <p class="demo-section__description">
       Use <code>[uiTreeTableColumnBody]</code> to inject custom HTML into any cell.
       The template receives the full <code>TreeTableNode</code> as <code>$implicit</code>.
     </p>
@@ -212,9 +217,9 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 6 — Organisation data + all features combined
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Organisation Data — All Features</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="organisation-data" data-doc-anchor>
+    <h2 class="demo-section__title">Organisation Data — All Features</h2>
+    <p class="demo-section__description">
       Sorting, global filter, and checkbox selection combined. Uses a different
       data shape to demonstrate field flexibility.
     </p>
@@ -252,9 +257,9 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        SCENARIO 7 — Sizes
        ═══════════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Sizes</h2>
-    <p class="demo-section-description">Three density levels: sm, md (default), and lg.</p>
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">Three density levels: sm, md (default), and lg.</p>
 
     @for (size of ['sm', 'md', 'lg']; track size) {
       <h3 class="demo-subsection-title">{{ size }}</h3>
@@ -269,4 +274,14 @@
       </ui-lib-tree-table>
     }
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

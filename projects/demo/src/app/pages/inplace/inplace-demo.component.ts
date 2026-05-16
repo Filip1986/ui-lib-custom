@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Inplace } from 'ui-lib-custom/inplace';
 import type { InplaceVariant } from 'ui-lib-custom/inplace';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Inplace component.
@@ -10,12 +13,30 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-inplace-demo',
   standalone: true,
-  imports: [Inplace, Button],
+  imports: [Inplace, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InplaceDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'closable', label: 'Closable' },
+    { id: 'rich-content', label: 'Rich Content' },
+    { id: 'disabled', label: 'Disabled' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'events', label: 'Events' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly variants: InplaceVariant[] = ['material', 'bootstrap', 'minimal'];
 
   // Basic demo

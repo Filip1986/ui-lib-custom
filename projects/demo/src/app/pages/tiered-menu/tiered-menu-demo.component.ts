@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { TieredMenu } from 'ui-lib-custom/tiered-menu';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -14,6 +14,9 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
   readonly element: string;
@@ -40,12 +43,33 @@ interface KeyboardRow {
     TableColumnComponent,
     TableColumnBodyDirective,
     DocCodeSnippetComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TieredMenuDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'nested-submenus', label: 'Nested Submenus' },
+    { id: 'popup-mode', label: 'Popup Mode' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'item-states', label: 'Item States' },
+    { id: 'url-items', label: 'URL Items' },
+    { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;

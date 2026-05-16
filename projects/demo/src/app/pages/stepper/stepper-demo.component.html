@@ -1,16 +1,18 @@
-<div class="demo-page">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Stepper</h1>
-    <p class="demo-hero__subtitle">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Stepper</h1>
+      <code class="demo-page-header__import">import &#123; Stepper &#125; from 'ui-lib-custom/stepper'</code>
+    </div>
+    <p class="demo-page-header__description">
       A multi-step wizard component for guiding users through sequential workflows.
       Supports horizontal and vertical orientations, linear enforcement, and three design variants.
     </p>
-  </div>
+  </header>
 
-  <!-- ── Basic Usage ─────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- Basic Usage -->
+  <section class="demo-section" id="basic-usage" data-doc-anchor>
     <h2 class="demo-section__title">Basic Usage</h2>
     <p class="demo-section__desc">
       A simple three-step horizontal stepper. Users can click any step header to navigate freely.
@@ -75,8 +77,8 @@
     </div>
   </section>
 
-  <!-- ── Linear Mode ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- Linear Mode -->
+  <section class="demo-section" id="linear-mode" data-doc-anchor>
     <h2 class="demo-section__title">Linear Mode</h2>
     <p class="demo-section__desc">
       With <code>linear</code> enabled, users must complete steps in order. Clicking ahead is blocked.
@@ -141,8 +143,8 @@
     </div>
   </section>
 
-  <!-- ── Vertical Orientation ───────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- Vertical Orientation -->
+  <section class="demo-section" id="vertical-orientation" data-doc-anchor>
     <h2 class="demo-section__title">Vertical Orientation</h2>
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> to stack steps vertically with inline content.
@@ -207,8 +209,8 @@
     </div>
   </section>
 
-  <!-- ── Variants ────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- Variants -->
+  <section class="demo-section" id="design-variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__desc">
       Three variants to match your design system: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
@@ -337,8 +339,8 @@
     </div>
   </section>
 
-  <!-- ── Playground ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- Playground -->
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
     <p class="demo-section__desc">Experiment with all configuration options live.</p>
 
@@ -477,8 +479,8 @@
     </div>
   </section>
 
-  <!-- ── API Reference ───────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- API Reference -->
+  <section class="demo-section" id="api-reference" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-api-subtitle">Stepper — <code>ui-lib-stepper</code></h3>
@@ -627,4 +629,13 @@
     </table>
   </section>
 
-</div>
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

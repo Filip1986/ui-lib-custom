@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
 import type {
   ButtonAppearance,
@@ -15,6 +21,9 @@ import {
 } from 'ui-lib-custom/table';
 import { Panel } from 'ui-lib-custom/panel';
 import { Card } from 'ui-lib-custom/card';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface ButtonLogEntry {
   timestamp: string;
@@ -43,6 +52,8 @@ interface ApiRow {
     TableColumnBodyDirective,
     Panel,
     Card,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
@@ -50,6 +61,30 @@ interface ApiRow {
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonsComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'all-appearances', label: 'All Appearances' },
+    { id: 'glass-shadow', label: 'Glass Shadow' },
+    { id: 'framed', label: 'Framed' },
+    { id: 'appearance-severity', label: 'Appearance × Severity' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'icons', label: 'Icons' },
+    { id: 'pill-raised', label: 'Pill & Raised' },
+    { id: 'states', label: 'States' },
+    { id: 'badges', label: 'Badges' },
+    { id: 'tactile', label: 'Tactile' },
+    { id: 'expressive', label: 'Expressive Appearances' },
+    { id: 'button-groups', label: 'Button Groups' },
+    { id: 'full-width', label: 'Full Width' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'event-log', label: 'Event Log' },
+  ];
+
   public readonly activeVariant: WritableSignal<ButtonVariant> = signal<ButtonVariant>('material');
   public readonly eventLog: WritableSignal<ButtonLogEntry[]> = signal<ButtonLogEntry[]>([]);
 
@@ -228,6 +263,10 @@ export class ButtonsComponent {
       description: 'Maps to aria-checked for checkable button roles.',
     },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public setVariant(variant: ButtonVariant): void {
     this.activeVariant.set(variant);

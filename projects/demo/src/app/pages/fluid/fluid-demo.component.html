@@ -1,26 +1,30 @@
-<section class="fluid-demo" data-testid="fluid-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="fd-hero">
-    <h1 class="fd-hero__title">Fluid</h1>
-    <p class="fd-hero__lead">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Fluid</h1>
+      <code class="demo-page-header__import">import &#123; Fluid, FluidDirective &#125; from 'ui-lib-custom/fluid'</code>
+    </div>
+    <p class="demo-page-header__description">
       A layout wrapper that stretches all descendant form controls — inputs, textareas,
       selects, and buttons — to 100&nbsp;% of the available width.
       Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an
       attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage.
     </p>
-    <div class="fd-hero__tags">
-      <span class="fd-tag">Component</span>
-      <span class="fd-tag">Directive</span>
-      <span class="fd-tag">Layout</span>
-      <span class="fd-tag">Misc</span>
+    <div class="demo-page-header__preview">
+      <div class="fd-hero__tags">
+        <span class="fd-tag">Component</span>
+        <span class="fd-tag">Directive</span>
+        <span class="fd-tag">Layout</span>
+        <span class="fd-tag">Misc</span>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- ── Section 1: Component usage ── -->
-  <div class="fd-section">
-    <h2 class="fd-section__title">Using the Component</h2>
-    <p class="fd-section__desc">
+  <section class="demo-section" id="using-the-component" data-doc-anchor>
+    <h2 class="demo-section__title">Using the Component</h2>
+    <p class="demo-section__desc">
       Wrap any form or container with <code>&lt;ui-lib-fluid&gt;</code>.
       All child inputs, textareas, and buttons grow to fill the full width.
     </p>
@@ -60,12 +64,12 @@
         <ui-lib-button severity="primary" type="button">Submit</ui-lib-button>
       </ui-lib-fluid>
     </div>
-  </div>
+  </section>
 
   <!-- ── Section 2: Directive usage ── -->
-  <div class="fd-section">
-    <h2 class="fd-section__title">Using the Directive</h2>
-    <p class="fd-section__desc">
+  <section class="demo-section" id="using-the-directive" data-doc-anchor>
+    <h2 class="demo-section__title">Using the Directive</h2>
+    <p class="demo-section__desc">
       Apply <code>uiLibFluid</code> as an attribute on any existing element to avoid
       adding an extra wrapper to the DOM. The directive adds the same
       <code>ui-lib-fluid</code> CSS class to the host.
@@ -96,12 +100,12 @@
         </div>
       </form>
     </div>
-  </div>
+  </section>
 
   <!-- ── Section 3: Conditional fluid via binding ── -->
-  <div class="fd-section">
-    <h2 class="fd-section__title">Conditional Fluid</h2>
-    <p class="fd-section__desc">
+  <section class="demo-section" id="conditional-fluid" data-doc-anchor>
+    <h2 class="demo-section__title">Conditional Fluid</h2>
+    <p class="demo-section__desc">
       Bind <code>[uiLibFluid]="expression"</code> to toggle the fluid layout
       at runtime. When <code>false</code>, inputs and buttons revert to their natural
       intrinsic sizes.
@@ -132,12 +136,12 @@
         </ui-lib-button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ── Section 4: Attribute-only shorthand ── -->
-  <div class="fd-section">
-    <h2 class="fd-section__title">Attribute Shorthand</h2>
-    <p class="fd-section__desc">
+  <section class="demo-section" id="attribute-shorthand" data-doc-anchor>
+    <h2 class="demo-section__title">Attribute Shorthand</h2>
+    <p class="demo-section__desc">
       The directive supports attribute-only usage — just add <code>uiLibFluid</code>
       without a binding. It defaults to <code>true</code> through Angular's
       <code>booleanAttribute</code> transform.
@@ -156,16 +160,16 @@
         <ui-lib-button severity="primary" type="button">Go</ui-lib-button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ── Section 5: API reference ── -->
-  <div class="fd-section">
-    <h2 class="fd-section__title">API Reference</h2>
+  <section class="demo-section" id="api-reference" data-doc-anchor>
+    <h2 class="demo-section__title">API Reference</h2>
 
-    <h3 class="fd-section__title" style="font-size: 1rem; margin-top: 1rem;">
+    <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1rem;">
       &lt;ui-lib-fluid&gt; — Component
     </h3>
-    <p class="fd-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
+    <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
     <div class="fd-table-wrap">
       <table class="fd-api-table">
         <thead>
@@ -187,10 +191,10 @@
       </table>
     </div>
 
-    <h3 class="fd-section__title" style="font-size: 1rem; margin-top: 1.5rem;">
+    <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1.5rem;">
       [uiLibFluid] — Directive
     </h3>
-    <p class="fd-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
+    <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
     <div class="fd-table-wrap">
       <table class="fd-api-table">
         <thead>
@@ -214,7 +218,15 @@
         </tbody>
       </table>
     </div>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
-
+</app-doc-page-layout>

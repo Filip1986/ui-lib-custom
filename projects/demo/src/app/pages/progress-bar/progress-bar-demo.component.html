@@ -1,18 +1,21 @@
-<section class="progress-bar-demo">
-  <!-- ---- Hero --------------------------------------------------------- -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">ProgressBar</h1>
-    <p class="demo-hero__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>ProgressBar</h1>
+      <code class="demo-page-header__import">import &#123; ProgressBar &#125; from 'ui-lib-custom/progress-bar'</code>
+    </div>
+    <p class="demo-page-header__description">
       A horizontal bar that visualises a completion percentage or signals an ongoing
       operation with a smooth animation.
     </p>
-    <p class="demo-hero__import">
-      <code>import &#123; ProgressBar &#125; from 'ui-lib-custom/progress-bar'</code>
-    </p>
-  </div>
+    <div class="demo-page-header__preview">
+      <ui-lib-progress-bar [value]="basicValue()" />
+    </div>
+  </header>
 
   <!-- ---- Basic -------------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       Pass a number from <code>0</code> to <code>100</code> via <code>[value]</code>.
@@ -22,10 +25,10 @@
       <ui-lib-progress-bar [value]="basicValue()" />
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- No label ----------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="no-label" data-doc-anchor>
     <h2 class="demo-section__title">No label</h2>
     <p class="demo-section__description">
       Set <code>[showValue]="false"</code> to hide the percentage text — useful for
@@ -40,10 +43,10 @@
       }
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" size="sm" [showValue]="false" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- Custom label ------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="custom-label" data-doc-anchor>
     <h2 class="demo-section__title">Custom label</h2>
     <p class="demo-section__description">
       Override the default percentage text with any string via <code>[label]</code>.
@@ -52,10 +55,10 @@
       <ui-lib-progress-bar [value]="60" label="Uploading…" />
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="60" label="Uploading…" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- Indeterminate ------------------------------------------------ -->
-  <div class="demo-section">
+  <section class="demo-section" id="indeterminate" data-doc-anchor>
     <h2 class="demo-section__title">Indeterminate</h2>
     <p class="demo-section__description">
       Use <code>mode="indeterminate"</code> when the duration is unknown. The fill bar
@@ -71,10 +74,10 @@
       }
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar mode="indeterminate" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- Variants ----------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three design variants — <code>material</code> (pill-shaped, subtle inset shadow),
@@ -89,10 +92,10 @@
       }
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" variant="bootstrap" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- Sizes -------------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       Three size tokens control bar height: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
@@ -106,10 +109,10 @@
       }
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" size="lg" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- Custom colour ------------------------------------------------ -->
-  <div class="demo-section">
+  <section class="demo-section" id="custom-colour" data-doc-anchor>
     <h2 class="demo-section__title">Custom colour</h2>
     <p class="demo-section__description">
       Supply any valid CSS colour string via <code>[color]</code> to override
@@ -121,10 +124,10 @@
       <ui-lib-progress-bar [value]="90" color="#ef4444" label="90%" />
     </div>
     <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="40" color="#10b981" label="40%" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ---- Dynamic ------------------------------------------------------ -->
-  <div class="demo-section">
+  <section class="demo-section" id="dynamic-value" data-doc-anchor>
     <h2 class="demo-section__title">Dynamic value</h2>
     <p class="demo-section__description">
       The fill transitions smoothly when the value changes reactively.
@@ -137,10 +140,10 @@
         <span class="demo-value-display">{{ dynamicValue() }}%</span>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ---- API table ---------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
     <table class="demo-api-table">
       <thead>
@@ -202,5 +205,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
-</section>
+
+</app-doc-page-layout>

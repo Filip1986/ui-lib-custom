@@ -1,18 +1,21 @@
-<section class="class-names-demo">
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">ClassNames</h1>
-    <p class="demo-hero__lead">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>ClassNames</h1>
+      <code class="demo-page-header__import">import &#123; classNames, ClassNamesPipe &#125; from 'ui-lib-custom/class-names'</code>
+    </div>
+    <p class="demo-page-header__description">
       A utility function and Angular pipe for composing CSS class strings from strings, conditional
       objects, and arrays — similar to the popular
       <code>classnames</code> npm package and PrimeNG's <code>classNames</code> utility.
     </p>
-  </div>
+  </header>
 
   <!-- Section: Function usage -->
-  <div class="demo-section">
+  <section class="demo-section" id="function-usage" data-doc-anchor>
     <h2 class="demo-section__title">Function Usage</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Import <code>classNames</code> and call it from TypeScript. Strings, objects
       (keys with truthy values included), arrays, and falsy values (ignored) are all accepted.
     </p>
@@ -40,12 +43,12 @@ classNames(['base', &#123; highlight: true &#125;])
 classNames('btn', null, undefined, false, 'icon')
 // → 'btn icon'</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Section: Pipe usage -->
-  <div class="demo-section">
+  <section class="demo-section" id="pipe-usage" data-doc-anchor>
     <h2 class="demo-section__title">Pipe Usage</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Import <code>ClassNamesPipe</code> into your standalone component and use
       <code>classNames</code> as a template pipe. Pass additional arguments after the colon.
     </p>
@@ -67,12 +70,12 @@ classNames('btn', null, undefined, false, 'icon')
   `,
 &#125;)</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Section: Interactive playground -->
-  <div class="demo-section">
+  <section class="demo-section" id="interactive-playground" data-doc-anchor>
     <h2 class="demo-section__title">Interactive Playground</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Toggle the flags below and watch the resolved class string update in real time.
     </p>
 
@@ -119,10 +122,10 @@ classNames('btn', null, undefined, false, 'icon')
         }}</code>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Section: API reference -->
-  <div class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-subsection-title">classNames(...values)</h3>
@@ -179,5 +182,15 @@ classNames('btn', null, undefined, false, 'icon')
   | Record&lt;string, boolean | null | undefined | false&gt;
   | ClassNameValue[];</code></pre>
     </div>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
-</section>
+
+</app-doc-page-layout>

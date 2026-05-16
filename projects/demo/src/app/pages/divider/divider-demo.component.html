@@ -1,22 +1,24 @@
-<section class="demo-page" data-testid="divider-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Divider</h1>
-    <p class="demo-hero__desc">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Divider</h1>
+      <code class="demo-page-header__import">import &#123; Divider &#125; from 'ui-lib-custom/divider'</code>
+    </div>
+    <p class="demo-page-header__description">
       A visual separator that divides content horizontally or vertically.
       Supports solid, dashed, and dotted lines, optional projected label content,
       flexible alignment, and three design variants.
     </p>
-    <div class="demo-hero__preview">
+    <div class="demo-page-header__preview">
       <p>Above the divider</p>
       <ui-lib-divider />
       <p>Below the divider</p>
     </div>
-  </div>
+  </header>
 
   <!-- Section 1: Basic -->
-  <div class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__desc">
       A plain horizontal divider with no content.
@@ -24,10 +26,10 @@
     <p>Content above</p>
     <ui-lib-divider />
     <p>Content below</p>
-  </div>
+  </section>
 
   <!-- Section 2: With Label -->
-  <div class="demo-section">
+  <section class="demo-section" id="with-label" data-doc-anchor>
     <h2 class="demo-section__title">With Label</h2>
     <p class="demo-section__desc">
       Project text or other elements into the divider using content projection.
@@ -35,10 +37,10 @@
     <p>Sign in with email</p>
     <ui-lib-divider>OR</ui-lib-divider>
     <p>Sign in with SSO</p>
-  </div>
+  </section>
 
   <!-- Section 3: Alignment -->
-  <div class="demo-section">
+  <section class="demo-section" id="alignment" data-doc-anchor>
     <h2 class="demo-section__title">Alignment</h2>
     <p class="demo-section__desc">
       Use the <code>align</code> input to position the label at
@@ -49,10 +51,10 @@
         <ui-lib-divider [align]="align">{{ align }}</ui-lib-divider>
       </div>
     }
-  </div>
+  </section>
 
   <!-- Section 4: Line Types -->
-  <div class="demo-section">
+  <section class="demo-section" id="line-types" data-doc-anchor>
     <h2 class="demo-section__title">Line Types</h2>
     <p class="demo-section__desc">
       Three line styles are available via the <code>type</code> input:
@@ -63,10 +65,10 @@
         <ui-lib-divider [type]="type">{{ type }}</ui-lib-divider>
       </div>
     }
-  </div>
+  </section>
 
   <!-- Section 5: Vertical -->
-  <div class="demo-section">
+  <section class="demo-section" id="vertical" data-doc-anchor>
     <h2 class="demo-section__title">Vertical</h2>
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> to render a vertical separator.
@@ -88,10 +90,10 @@
       <ui-lib-divider orientation="vertical">OR</ui-lib-divider>
       <div class="demo-vertical-panel">Panel B</div>
     </div>
-  </div>
+  </section>
 
   <!-- Section 6: Vertical Alignment -->
-  <div class="demo-section">
+  <section class="demo-section" id="vertical-alignment" data-doc-anchor>
     <h2 class="demo-section__title">Vertical Alignment</h2>
     <p class="demo-section__desc">
       For vertical dividers, use <code>align="top"</code>, <code>align="center"</code>,
@@ -104,10 +106,10 @@
         </div>
       }
     </div>
-  </div>
+  </section>
 
   <!-- Section 7: Design Variants -->
-  <div class="demo-section">
+  <section class="demo-section" id="design-variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__desc">
       Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
@@ -119,10 +121,10 @@
         <ui-lib-divider [variant]="variant" type="dashed" />
       </div>
     }
-  </div>
+  </section>
 
   <!-- Section 8: Interactive Playground -->
-  <div class="demo-section">
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
     <p class="demo-section__desc">Customise the divider using the controls below.</p>
 
@@ -266,10 +268,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- API Table -->
-  <div class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
     <table class="demo-api-table">
       <thead>
@@ -317,6 +319,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>

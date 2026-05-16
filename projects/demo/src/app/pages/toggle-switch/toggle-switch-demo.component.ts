@@ -1,10 +1,19 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToggleSwitch } from 'ui-lib-custom/toggle-switch';
 import { Button } from 'ui-lib-custom/button';
 import type { ToggleSwitchSize, ToggleSwitchVariant } from 'ui-lib-custom/toggle-switch';
 import { Card } from 'ui-lib-custom/card';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the ToggleSwitch component.
@@ -12,13 +21,38 @@ import { Card } from 'ui-lib-custom/card';
 @Component({
   selector: 'app-toggle-switch-demo',
   standalone: true,
-  imports: [ToggleSwitch, Card, FormsModule, ReactiveFormsModule, Button],
+  imports: [
+    ToggleSwitch,
+    Card,
+    FormsModule,
+    ReactiveFormsModule,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './toggle-switch-demo.component.html',
   styleUrl: './toggle-switch-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class ToggleSwitchDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'disabled-readonly', label: 'Disabled & Readonly' },
+    { id: 'ngmodel', label: 'ngModel' },
+    { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'playground', label: 'Playground' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly variants: ToggleSwitchVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: ToggleSwitchSize[] = ['sm', 'md', 'lg'];
 

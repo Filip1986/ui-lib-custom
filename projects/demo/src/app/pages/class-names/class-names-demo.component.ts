@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the classNames utility and ClassNamesPipe.
@@ -9,12 +12,23 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-class-names-demo',
   standalone: true,
-  imports: [ClassNamesPipe, Button],
+  imports: [ClassNamesPipe, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassNamesDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'function-usage', label: 'Function Usage' },
+    { id: 'pipe-usage', label: 'Pipe Usage' },
+    { id: 'interactive-playground', label: 'Interactive Playground' },
+    { id: 'api', label: 'API Reference' },
+  ];
+
   /** Controls the active state for the playground element. */
   public readonly isActive: WritableSignal<boolean> = signal<boolean>(true);
 
@@ -39,6 +53,10 @@ export class ClassNamesDemoComponent {
       'btn--disabled': this.isDisabled(),
     })
   );
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public toggleActive(): void {
     this.isActive.update((value: boolean): boolean => !value);

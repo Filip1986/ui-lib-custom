@@ -1,24 +1,28 @@
-<section class="tooltip-demo" data-testid="tooltip-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="tooltip-hero">
-    <h1 class="tooltip-hero__title">Tooltip</h1>
-    <p class="tooltip-hero__lead">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Tooltip</h1>
+      <code class="demo-page-header__import">import &#123; Tooltip &#125; from 'ui-lib-custom/tooltip'</code>
+    </div>
+    <p class="demo-page-header__description">
       An attribute directive that attaches a floating label to any host element.
       Triggered by hover or focus, supports four positions, show/hide delays,
       three design variants, and auto-flip when space is limited.
     </p>
-    <div class="tooltip-hero__tags">
-      <span class="tooltip-tag">Directive</span>
-      <span class="tooltip-tag">Overlay</span>
-      <span class="tooltip-tag">A11y</span>
+    <div class="demo-page-header__preview">
+      <div class="tooltip-hero__tags">
+        <span class="tooltip-tag">Directive</span>
+        <span class="tooltip-tag">Overlay</span>
+        <span class="tooltip-tag">A11y</span>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- Section 1: Basic -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Basic</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
       Add <code>[uiLibTooltip]</code> with the label text to any element.
       The tooltip appears above the host by default.
     </p>
@@ -28,12 +32,12 @@
       <ui-lib-button uiLibTooltip="Share with others">Share</ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Save the document"&gt;Save&lt;/button&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 2: Positions -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Positions</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="positions" data-doc-anchor>
+    <h2 class="demo-section__title">Positions</h2>
+    <p class="demo-section__description">
       Use <code>tooltipPosition</code> to control placement:
       <code>top</code>, <code>bottom</code>, <code>left</code>, or <code>right</code>.
       The tooltip flips automatically if there is insufficient space in the requested direction.
@@ -48,12 +52,12 @@
 &lt;button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom"&gt;Bottom&lt;/button&gt;
 &lt;button uiLibTooltip="Left tooltip" tooltipPosition="left"&gt;Left&lt;/button&gt;
 &lt;button uiLibTooltip="Right tooltip" tooltipPosition="right"&gt;Right&lt;/button&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 3: Focus event -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Focus event</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="focus-event" data-doc-anchor>
+    <h2 class="demo-section__title">Focus event</h2>
+    <p class="demo-section__description">
       Set <code>tooltipEvent="focus"</code> to show the tooltip on keyboard focus instead of hover.
       Useful for form inputs to provide contextual guidance.
       Use <code>"both"</code> to support both hover and focus.
@@ -74,12 +78,12 @@
     </div>
     <pre class="tooltip-code"><code>&lt;input uiLibTooltip="Enter your full name" tooltipEvent="focus" /&gt;
 &lt;input uiLibTooltip="Accepts hover and focus" tooltipEvent="both" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 4: Show and hide delays -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Show &amp; hide delays</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="show-hide-delays" data-doc-anchor>
+    <h2 class="demo-section__title">Show &amp; hide delays</h2>
+    <p class="demo-section__description">
       Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to
       debounce rapid mouse movements. Useful in dense UIs to avoid tooltip flicker.
     </p>
@@ -105,12 +109,12 @@
       </ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Appears after 400 ms" [showDelay]="400"&gt;Hover&lt;/button&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 5: Disabled -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Disabled</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="disabled" data-doc-anchor>
+    <h2 class="demo-section__title">Disabled</h2>
+    <p class="demo-section__description">
       Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely.
       Bind to a signal for runtime toggling.
     </p>
@@ -126,12 +130,12 @@
       </ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Hidden" [tooltipDisabled]="isDisabled"&gt;Hover&lt;/button&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 6: Variants -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Variants</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
       Three design variants are available: <code>material</code>, <code>bootstrap</code>,
       and <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant
       is inherited from <code>ThemeConfigService</code>.
@@ -160,12 +164,12 @@
       </ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Material tooltip" tooltipVariant="material"&gt;Material&lt;/button&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 7: Long text -->
-  <div class="tooltip-section">
-    <h2 class="tooltip-section__title">Long text</h2>
-    <p class="tooltip-section__desc">
+  <section class="demo-section" id="long-text" data-doc-anchor>
+    <h2 class="demo-section__title">Long text</h2>
+    <p class="demo-section__description">
       The tooltip wraps text at <code>14rem</code> max width and breaks long words automatically.
     </p>
     <div class="tooltip-row">
@@ -176,13 +180,13 @@
         Hover for long text
       </ui-lib-button>
     </div>
-  </div>
+  </section>
 
   <!-- API table -->
-  <div class="tooltip-section tooltip-api">
-    <h2 class="tooltip-section__title">API</h2>
-    <h3 class="tooltip-api__subtitle">Selector: <code>[uiLibTooltip]</code></h3>
-    <table class="tooltip-api__table">
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API</h2>
+    <h3 class="demo-section__subtitle">Selector: <code>[uiLibTooltip]</code></h3>
+    <table class="demo-api-table">
       <thead>
         <tr>
           <th>Input</th>
@@ -236,6 +240,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>

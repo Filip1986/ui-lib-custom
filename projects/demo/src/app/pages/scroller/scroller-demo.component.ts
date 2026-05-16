@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
-import type { WritableSignal, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller';
 import { Button } from 'ui-lib-custom/button';
 import { ScrollerItemDirective, ScrollerLoaderDirective } from 'ui-lib-custom/virtual-scroller';
 import type { VirtualScrollerLazyLoadEvent } from 'ui-lib-custom/virtual-scroller';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface DemoItem {
   id: number;
@@ -66,12 +69,32 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     ScrollerItemDirective,
     ScrollerLoaderDirective,
     Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollerDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'vertical', label: 'Vertical (10 000 items)' },
+    { id: 'horizontal', label: 'Horizontal (1 000 items)' },
+    { id: 'lazy-loading', label: 'Lazy Loading' },
+    { id: 'custom-loader', label: 'Custom Loader Template' },
+    { id: 'disabled-mode', label: 'Disabled Mode' },
+    { id: 'large-items', label: 'Large Items (5 000 items)' },
+    { id: 'basic-usage', label: 'Basic Usage' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ---------------------------------------------------------------------------
   // Scenario 1: Vertical — 10 000 items
   // ---------------------------------------------------------------------------

@@ -1,15 +1,19 @@
-<div class="message-demo">
-  <header class="message-demo__header">
-    <h1 class="message-demo__title">Message</h1>
-    <p class="message-demo__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Message</h1>
+      <code class="demo-page-header__import">import &#123; Message &#125; from 'ui-lib-custom/message'</code>
+    </div>
+    <p class="demo-page-header__description">
       Inline severity-based messages for contextual feedback. Supports six severity levels,
       three design variants, three sizes, and an optional close action.
     </p>
   </header>
 
   <!-- ─── Playground ─────────────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">Playground</h2>
+  <section class="demo-section" id="playground" data-doc-anchor>
+    <h2 class="demo-section__title">Playground</h2>
     <div class="message-demo__controls">
       <label class="message-demo__control-label">
         Severity
@@ -78,9 +82,9 @@
   </section>
 
   <!-- ─── Severities ─────────────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">Severities</h2>
-    <p class="message-demo__section-desc">
+  <section class="demo-section" id="severities" data-doc-anchor>
+    <h2 class="demo-section__title">Severities</h2>
+    <p class="demo-section__description">
       Six severity levels, each with a colour palette and a default icon.
     </p>
     <div class="message-demo__stack">
@@ -112,9 +116,9 @@
   </section>
 
   <!-- ─── Variants ───────────────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">Variants</h2>
-    <p class="message-demo__section-desc">
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
       Three design variants — material (elevated), bootstrap (filled), and minimal (accent border).
     </p>
     @for (variant of variants; track variant) {
@@ -147,9 +151,9 @@
   </section>
 
   <!-- ─── Sizes ───────────────────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">Sizes</h2>
-    <p class="message-demo__section-desc">Three size tokens: sm, md (default), lg.</p>
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">Three size tokens: sm, md (default), lg.</p>
     <div class="message-demo__stack">
       <ui-lib-message
         severity="info"
@@ -170,9 +174,9 @@
   </section>
 
   <!-- ─── Closable ───────────────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">Closable</h2>
-    <p class="message-demo__section-desc">
+  <section class="demo-section" id="closable" data-doc-anchor>
+    <h2 class="demo-section__title">Closable</h2>
+    <p class="demo-section__description">
       Set <code>closable</code> to show a close button and listen to the <code>close</code> output.
     </p>
     <div class="message-demo__stack">
@@ -195,9 +199,9 @@
   </section>
 
   <!-- ─── Content projection ─────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">Content Projection</h2>
-    <p class="message-demo__section-desc">
+  <section class="demo-section" id="content-projection" data-doc-anchor>
+    <h2 class="demo-section__title">Content Projection</h2>
+    <p class="demo-section__description">
       Rich content can be projected as children instead of using the <code>text</code> input.
     </p>
     <div class="message-demo__stack">
@@ -212,8 +216,8 @@
   </section>
 
   <!-- ─── API Reference ──────────────────────────────────────────── -->
-  <section class="message-demo__section">
-    <h2 class="message-demo__section-title">API Reference</h2>
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="message-demo__api-subtitle">Inputs</h3>
     <table class="message-demo__table">
@@ -289,4 +293,14 @@
       </tbody>
     </table>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

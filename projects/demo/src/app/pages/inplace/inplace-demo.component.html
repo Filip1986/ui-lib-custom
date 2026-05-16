@@ -1,17 +1,17 @@
-<section class="inplace-demo">
-  <!-- ---- Hero --------------------------------------------------------- -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Inplace</h1>
-    <p class="demo-hero__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Inplace</h1>
+      <code class="demo-page-header__import">import &#123; Inplace &#125; from 'ui-lib-custom/inplace'</code>
+    </div>
+    <p class="demo-page-header__description">
       Inline editing — switch between a read-only display and an editable content slot on click.
     </p>
-    <p class="demo-hero__import">
-      <code>import &#123; Inplace &#125; from 'ui-lib-custom/inplace'</code>
-    </p>
-  </div>
+  </header>
 
   <!-- ---- Basic -------------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       Click the display slot to switch to edit mode. The <code>[(active)]</code> model binding
@@ -34,10 +34,10 @@
         <p class="demo-field__note">Active: <code>{{ basicActive() }}</code></p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ---- Closable ----------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="closable" data-doc-anchor>
     <h2 class="demo-section__title">Closable</h2>
     <p class="demo-section__description">
       Set <code>[closable]="true"</code> to render a close button inside the content slot that
@@ -58,10 +58,10 @@
         </ui-lib-inplace>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ---- Rich content ------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="rich-content" data-doc-anchor>
     <h2 class="demo-section__title">Rich Content</h2>
     <p class="demo-section__description">
       Any content can be projected into the <code>inplaceDisplay</code> and
@@ -79,10 +79,10 @@
         </div>
       </ui-lib-inplace>
     </div>
-  </div>
+  </section>
 
   <!-- ---- Disabled ----------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="disabled" data-doc-anchor>
     <h2 class="demo-section__title">Disabled</h2>
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent the display slot from activating.
@@ -95,10 +95,10 @@
         <input inplaceContent class="inplace-demo__input" type="text" />
       </ui-lib-inplace>
     </div>
-  </div>
+  </section>
 
   <!-- ---- Variants ----------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three built-in variants — <code>material</code>, <code>bootstrap</code>, and
@@ -128,10 +128,10 @@
         </div>
       }
     </div>
-  </div>
+  </section>
 
   <!-- ---- Event log ---------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="events" data-doc-anchor>
     <h2 class="demo-section__title">Events</h2>
     <p class="demo-section__description">
       Toggle the variant examples above to see <code>(activated)</code> and
@@ -152,10 +152,10 @@
         </ui-lib-button>
       }
     </div>
-  </div>
+  </section>
 
   <!-- ---- API ---------------------------------------------------------- -->
-  <div class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-table__heading">Inputs</h3>
@@ -250,6 +250,15 @@
         </tr>
       </tbody>
     </table>
-  </div>
-</section>
+  </section>
 
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

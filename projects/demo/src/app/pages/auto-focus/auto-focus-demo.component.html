@@ -1,24 +1,28 @@
-<section class="auto-focus-demo" data-testid="auto-focus-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="af-hero">
-    <h1 class="af-hero__title">AutoFocus</h1>
-    <p class="af-hero__lead">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>AutoFocus</h1>
+      <code class="demo-page-header__import">import &#123; AutoFocus &#125; from 'ui-lib-custom/auto-focus'</code>
+    </div>
+    <p class="demo-page-header__description">
       A lightweight directive that programmatically focuses the host element after
       view initialization — a reliable, Angular-first alternative to the native
       <code>autofocus</code> attribute.
     </p>
-    <div class="af-hero__tags">
-      <span class="af-tag">Directive</span>
-      <span class="af-tag">Misc</span>
-      <span class="af-tag">A11y</span>
+    <div class="demo-page-header__preview">
+      <div class="af-hero__tags">
+        <span class="af-tag">Directive</span>
+        <span class="af-tag">Misc</span>
+        <span class="af-tag">A11y</span>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- ── Section 1: Basic usage ── -->
-  <div class="af-section">
-    <h2 class="af-section__title">Basic Usage</h2>
-    <p class="af-section__desc">
+  <section class="demo-section" id="basic-usage" data-doc-anchor>
+    <h2 class="demo-section__title">Basic Usage</h2>
+    <p class="demo-section__description">
       Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied
       automatically after the view initializes.
     </p>
@@ -33,12 +37,12 @@
       />
     </div>
     <pre class="af-code"><code>&lt;input uiLibAutoFocus /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ── Section 2: Conditional focus ── -->
-  <div class="af-section">
-    <h2 class="af-section__title">Conditional Focus</h2>
-    <p class="af-section__desc">
+  <section class="demo-section" id="conditional-focus" data-doc-anchor>
+    <h2 class="demo-section__title">Conditional Focus</h2>
+    <p class="demo-section__description">
       Bind the <code>autofocus</code> input to control whether focus is applied.
       Useful when rendering inputs inside dialogs, drawers, or dynamic forms.
     </p>
@@ -63,12 +67,12 @@
     <pre class="af-code"><code>&#64;if (show) &#123;
   &lt;input uiLibAutoFocus /&gt;
 &#125;</code></pre>
-  </div>
+  </section>
 
   <!-- ── Section 3: Disable autofocus ── -->
-  <div class="af-section">
-    <h2 class="af-section__title">Disable Autofocus</h2>
-    <p class="af-section__desc">
+  <section class="demo-section" id="disable-autofocus" data-doc-anchor>
+    <h2 class="demo-section__title">Disable Autofocus</h2>
+    <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent focus from being applied —
       for example when the feature is toggled off by the user.
     </p>
@@ -87,11 +91,11 @@
       />
     </div>
     <pre class="af-code"><code>&lt;input uiLibAutoFocus [disabled]="!isEnabled" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ── Section 4: API ── -->
-  <div class="af-section">
-    <h2 class="af-section__title">API</h2>
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API</h2>
 
     <h3 class="af-sub-title">Directive selector</h3>
     <pre class="af-code"><code>import {{ '{' }} AutoFocus {{ '}' }} from 'ui-lib-custom/auto-focus';</code></pre>
@@ -126,6 +130,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>

@@ -1,25 +1,25 @@
-<section class="progress-spinner-demo" data-testid="progress-spinner-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="ps-hero">
-    <h1 class="ps-hero__title">ProgressSpinner</h1>
-    <p class="ps-hero__lead">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>ProgressSpinner</h1>
+      <code class="demo-page-header__import">import &#123; ProgressSpinner &#125; from 'ui-lib-custom/progress-spinner'</code>
+    </div>
+    <p class="demo-page-header__description">
       An animated circular spinner that signals an indeterminate loading state.
       Uses a CSS <code>stroke-dashoffset</code> animation on an SVG circle combined with a
       continuous rotation to produce the characteristic "arc chase" effect.
       Three design variants, three sizes, and full CSS-variable theming.
     </p>
-    <div class="ps-hero__tags">
-      <span class="ps-tag">Component</span>
-      <span class="ps-tag">Misc</span>
-      <span class="ps-tag">A11y</span>
+    <div class="demo-page-header__preview">
+      <ui-lib-progress-spinner />
     </div>
-  </div>
+  </header>
 
   <!-- Section 1: Basic -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Basic</h2>
-    <p class="ps-section__desc">
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
       Drop in <code>&lt;ui-lib-progress-spinner /&gt;</code> with no inputs for a default
       medium-sized, theme-variant spinner.
     </p>
@@ -27,12 +27,12 @@
       <ui-lib-progress-spinner />
     </div>
     <pre class="ps-code"><code>&lt;ui-lib-progress-spinner /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 2: Sizes -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Sizes</h2>
-    <p class="ps-section__desc">
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">
       The <code>size</code> input accepts <code>'sm'</code>, <code>'md'</code>, or
       <code>'lg'</code>.
     </p>
@@ -44,12 +44,12 @@
     <pre class="ps-code"><code>&lt;ui-lib-progress-spinner size="sm" /&gt;
 &lt;ui-lib-progress-spinner size="md" /&gt;
 &lt;ui-lib-progress-spinner size="lg" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 3: Variants -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Variants</h2>
-    <p class="ps-section__desc">
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
       Override the global theme variant with the <code>variant</code> input.
       <code>'material'</code> cycles through multiple colours,
       <code>'bootstrap'</code> uses a solid primary blue, and
@@ -72,12 +72,12 @@
     <pre class="ps-code"><code>&lt;ui-lib-progress-spinner variant="material" /&gt;
 &lt;ui-lib-progress-spinner variant="bootstrap" /&gt;
 &lt;ui-lib-progress-spinner variant="minimal" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 4: Custom animation speed -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Animation Duration</h2>
-    <p class="ps-section__desc">
+  <section class="demo-section" id="animation-duration" data-doc-anchor>
+    <h2 class="demo-section__title">Animation Duration</h2>
+    <p class="demo-section__description">
       Control the rotation speed with <code>animationDuration</code>.
       Accepts any CSS <code>&lt;time&gt;</code> value.
     </p>
@@ -98,12 +98,12 @@
     <pre class="ps-code"><code>&lt;ui-lib-progress-spinner animationDuration="4s" /&gt;
 &lt;ui-lib-progress-spinner animationDuration="2s" /&gt;
 &lt;ui-lib-progress-spinner animationDuration="750ms" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 5: Custom stroke width and fill -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Stroke Width &amp; Fill</h2>
-    <p class="ps-section__desc">
+  <section class="demo-section" id="stroke-width-fill" data-doc-anchor>
+    <h2 class="demo-section__title">Stroke Width &amp; Fill</h2>
+    <p class="demo-section__description">
       <code>strokeWidth</code> controls the arc thickness (SVG units).
       <code>fill</code> sets the interior fill colour of the circle.
     </p>
@@ -115,12 +115,12 @@
     <pre class="ps-code"><code>&lt;ui-lib-progress-spinner strokeWidth="1" /&gt;
 &lt;ui-lib-progress-spinner strokeWidth="4" /&gt;
 &lt;ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" /&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 6: Loading overlay pattern -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Loading Overlay Pattern</h2>
-    <p class="ps-section__desc">
+  <section class="demo-section" id="loading-overlay" data-doc-anchor>
+    <h2 class="demo-section__title">Loading Overlay Pattern</h2>
+    <p class="demo-section__description">
       Combine <code>ProgressSpinner</code> with a semi-transparent overlay to block content
       during async operations.
     </p>
@@ -139,12 +139,12 @@
     &lt;ui-lib-progress-spinner size="lg" /&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- Section 7: Interactive playground -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">Playground</h2>
-    <p class="ps-section__desc">Adjust the controls to explore available combinations.</p>
+  <section class="demo-section" id="playground" data-doc-anchor>
+    <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__description">Adjust the controls to explore available combinations.</p>
 
     <div class="ps-playground">
       <div class="ps-playground__preview">
@@ -199,11 +199,11 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Section 8: API table -->
-  <div class="ps-section">
-    <h2 class="ps-section__title">API</h2>
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API</h2>
     <h3 class="ps-section__subtitle">Inputs</h3>
     <table class="ps-table">
       <thead>
@@ -259,7 +259,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
-
+</app-doc-page-layout>

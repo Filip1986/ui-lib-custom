@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Menu } from 'ui-lib-custom/menu';
 import { Button } from 'ui-lib-custom/button';
 import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
@@ -9,6 +9,9 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
   readonly element: string;
@@ -66,12 +69,37 @@ interface CssTokenRow {
     TableColumnComponent,
     TableColumnBodyDirective,
     DocCodeSnippetComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic-inline', label: 'Basic (Inline)' },
+    { id: 'with-separator', label: 'With Separator' },
+    { id: 'disabled-items', label: 'Disabled Items' },
+    { id: 'grouped-items', label: 'Grouped Items' },
+    { id: 'popup-mode', label: 'Popup Mode' },
+    { id: 'popup-with-groups', label: 'Popup with Groups' },
+    { id: 'commands-events', label: 'Commands & Events' },
+    { id: 'url-items', label: 'URL Items' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
 
   public readonly snippets: {

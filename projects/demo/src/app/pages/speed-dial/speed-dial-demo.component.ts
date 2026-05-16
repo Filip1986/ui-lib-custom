@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Icon } from 'ui-lib-custom/icon';
 import {
   SpeedDialComponent,
@@ -12,6 +18,9 @@ import type {
   SpeedDialItemCommandEvent,
   SpeedDialVariant,
 } from 'ui-lib-custom/speed-dial';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface SpeedDialLogEntry {
   timestamp: string;
@@ -25,13 +34,40 @@ interface SpeedDialLogEntry {
 @Component({
   selector: 'app-speed-dial-demo',
   standalone: true,
-  imports: [Icon, SpeedDialComponent, SpeedDialIconDirective, SpeedDialItemDirective],
+  imports: [
+    Icon,
+    SpeedDialComponent,
+    SpeedDialIconDirective,
+    SpeedDialItemDirective,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './speed-dial-demo.component.html',
   styleUrl: './speed-dial-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class SpeedDialDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'linear', label: 'Linear' },
+    { id: 'circle', label: 'Circle' },
+    { id: 'semi-circle', label: 'Semi-Circle' },
+    { id: 'quarter-circle', label: 'Quarter-Circle' },
+    { id: 'tooltip', label: 'Tooltip' },
+    { id: 'mask', label: 'Mask' },
+    { id: 'custom-template', label: 'Custom Template' },
+    { id: 'disabled', label: 'Disabled' },
+    { id: 'event-log', label: 'Event Log' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly activeVariant: WritableSignal<SpeedDialVariant> =
     signal<SpeedDialVariant>('material');
   public readonly eventLog: WritableSignal<SpeedDialLogEntry[]> = signal<SpeedDialLogEntry[]>([]);

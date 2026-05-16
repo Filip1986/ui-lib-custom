@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the FocusTrap directive.
@@ -10,12 +13,27 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-focus-trap-demo',
   standalone: true,
-  imports: [FocusTrapDirective, Button],
+  imports: [FocusTrapDirective, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FocusTrapDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'toggle-trap', label: 'Toggle Trap' },
+    { id: 'modal-overlay-pattern', label: 'Modal Overlay Pattern' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly isModalOpen: WritableSignal<boolean> = signal<boolean>(false);
   public readonly isTrapEnabled: WritableSignal<boolean> = signal<boolean>(true);
   public readonly formName: WritableSignal<string> = signal<string>('');

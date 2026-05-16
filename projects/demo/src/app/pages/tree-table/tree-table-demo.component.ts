@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { TreeTableComponent } from 'ui-lib-custom/tree-table';
 import { TreeTableColumnComponent } from 'ui-lib-custom/tree-table';
 import { TreeTableColumnBodyDirective } from 'ui-lib-custom/tree-table';
@@ -9,6 +9,9 @@ import type {
   TreeTableVariant,
 } from 'ui-lib-custom/tree-table';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the TreeTable component.
@@ -18,12 +21,36 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-tree-table-demo',
   standalone: true,
-  imports: [TreeTableComponent, TreeTableColumnComponent, TreeTableColumnBodyDirective, Button],
+  imports: [
+    TreeTableComponent,
+    TreeTableColumnComponent,
+    TreeTableColumnBodyDirective,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeTableDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'sorting', label: 'Sorting' },
+    { id: 'global-filter', label: 'Global Filter' },
+    { id: 'selection-modes', label: 'Selection Modes' },
+    { id: 'custom-cell-templates', label: 'Custom Cell Templates' },
+    { id: 'organisation-data', label: 'Organisation Data' },
+    { id: 'sizes', label: 'Sizes' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ─── Active variant + size ────────────────────────────────────────────────
 
   public readonly activeVariant: WritableSignal<TreeTableVariant> =

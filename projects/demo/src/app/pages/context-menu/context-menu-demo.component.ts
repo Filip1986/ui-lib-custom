@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { ContextMenu } from 'ui-lib-custom/context-menu';
 import type { ContextMenuItem, ContextMenuItemCommandEvent } from 'ui-lib-custom/context-menu';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the ContextMenu component.
@@ -9,12 +12,33 @@ import type { ContextMenuItem, ContextMenuItemCommandEvent } from 'ui-lib-custom
 @Component({
   selector: 'app-context-menu-demo',
   standalone: true,
-  imports: [ContextMenu],
+  imports: [ContextMenu, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './context-menu-demo.component.html',
   styleUrl: './context-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'with-separator', label: 'With Separator' },
+    { id: 'disabled-items', label: 'Disabled Items' },
+    { id: 'nested-submenu', label: 'Nested Submenu' },
+    { id: 'image-target', label: 'Image Target' },
+    { id: 'command-callback', label: 'Command Callback & itemClick Output' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ── Basic ──────────────────────────────────────────────────────────────────
 
   public readonly basicItems: ContextMenuItem[] = [

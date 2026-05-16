@@ -1,4 +1,5 @@
-<div class="demo-page">
+<app-doc-page-layout [sections]="sections">
+
   <!-- Global ConfirmPopup instance (service-driven) -->
   <ui-lib-confirm-popup />
 
@@ -13,17 +14,19 @@
     (rejected)="lastResult.set('Declarative rejected')"
   />
 
-  <!-- ---- Hero ---- -->
-  <section class="demo-hero">
-    <h1 class="demo-hero__title">ConfirmPopup</h1>
-    <p class="demo-hero__subtitle">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>ConfirmPopup</h1>
+      <code class="demo-page-header__import">import &#123; ConfirmPopup, ConfirmPopupService &#125; from 'ui-lib-custom/confirm-popup'</code>
+    </div>
+    <p class="demo-page-header__description">
       A lightweight anchored popup for inline confirmations — positions itself next to the trigger
       element with an arrow indicator. No modal backdrop, less visual disruption than ConfirmDialog.
     </p>
-  </section>
+  </header>
 
   <!-- ---- Basic usage ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__desc">
       Call <code>ConfirmPopupService.confirm(&#123; target, message &#125;)</code> from a click
@@ -42,7 +45,7 @@ this.confirmPopupService.confirm(&#123;
   </section>
 
   <!-- ---- With icon ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="with-icon" data-doc-anchor>
     <h2 class="demo-section__title">With Icon &amp; Custom Labels</h2>
     <p class="demo-section__desc">
       Pass an <code>icon</code> CSS class (PrimeIcons / FontAwesome) to render an icon beside the
@@ -66,7 +69,7 @@ this.confirmPopupService.confirm(&#123;
   </section>
 
   <!-- ---- Button severities ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="button-severities" data-doc-anchor>
     <h2 class="demo-section__title">Button Severities</h2>
     <p class="demo-section__desc">
       The accept and reject buttons support six severity values:
@@ -83,7 +86,7 @@ this.confirmPopupService.confirm(&#123;
   </section>
 
   <!-- ---- Design variants ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="design-variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__desc">
       The popup supports three design variants: <code>material</code> (pill buttons, large radius),
@@ -101,7 +104,7 @@ this.confirmPopupService.confirm(&#123;
   </section>
 
   <!-- ---- Declarative usage ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="declarative-usage" data-doc-anchor>
     <h2 class="demo-section__title">Declarative Usage</h2>
     <p class="demo-section__desc">
       Use <code>[(visible)]</code> for full two-way binding without the service.
@@ -123,7 +126,7 @@ this.confirmPopupService.confirm(&#123;
   </section>
 
   <!-- ---- Result log ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="result-log" data-doc-anchor>
     <h2 class="demo-section__title">Result Log</h2>
     <p class="demo-section__desc">Last interaction result:</p>
     <div class="demo-result">
@@ -133,7 +136,7 @@ this.confirmPopupService.confirm(&#123;
   </section>
 
   <!-- ---- API reference ---- -->
-  <section class="demo-section">
+  <section class="demo-section" id="api-reference" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-table__heading">Inputs</h3>
@@ -198,4 +201,14 @@ this.confirmPopupService.confirm(&#123;
       </table>
     </div>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

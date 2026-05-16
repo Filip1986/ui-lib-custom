@@ -1,29 +1,34 @@
-<div class="speed-dial-demo">
-  <header class="speed-dial-demo__header">
-    <h1 class="speed-dial-demo__title">SpeedDial</h1>
-    <p class="speed-dial-demo__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>SpeedDial</h1>
+      <code class="demo-page-header__import">import &#123; SpeedDialComponent &#125; from 'ui-lib-custom/speed-dial'</code>
+    </div>
+    <p class="demo-page-header__description">
       Floating action menu with linear and radial layouts, template customization, tooltips, and masking.
     </p>
-
-    <!-- Variant switcher -->
-    <div class="speed-dial-demo__variant-switcher" role="group" aria-label="Select variant">
-      @for (v of variants; track v) {
-        <button
-          type="button"
-          class="speed-dial-demo__variant-btn"
-          [class.speed-dial-demo__variant-btn--active]="activeVariant() === v"
-          (click)="setVariant(v)"
-        >
-          {{ v }}
-        </button>
-      }
+    <div class="demo-page-header__preview">
+      <!-- Variant switcher -->
+      <div class="speed-dial-demo__variant-switcher" role="group" aria-label="Select variant">
+        @for (v of variants; track v) {
+          <button
+            type="button"
+            class="speed-dial-demo__variant-btn"
+            [class.speed-dial-demo__variant-btn--active]="activeVariant() === v"
+            (click)="setVariant(v)"
+          >
+            {{ v }}
+          </button>
+        }
+      </div>
     </div>
   </header>
 
-  <!-- ── Section 1: Linear ─────────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Linear</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 1: Linear -->
+  <section class="demo-section" id="linear" data-doc-anchor>
+    <h2 class="demo-section__title">Linear</h2>
+    <p class="demo-section__description">
       Default linear layout. Use <code>direction</code> to expand up, down, left, or right.
     </p>
 
@@ -44,10 +49,10 @@
     </div>
   </section>
 
-  <!-- ── Section 2: Circle ─────────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Circle</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 2: Circle -->
+  <section class="demo-section" id="circle" data-doc-anchor>
+    <h2 class="demo-section__title">Circle</h2>
+    <p class="demo-section__description">
       Set <code>type="circle"</code> and <code>[radius]</code> to place items radially around the trigger.
     </p>
 
@@ -64,10 +69,10 @@
     </div>
   </section>
 
-  <!-- ── Section 3: Semi-Circle ────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Semi-Circle</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 3: Semi-Circle -->
+  <section class="demo-section" id="semi-circle" data-doc-anchor>
+    <h2 class="demo-section__title">Semi-Circle</h2>
+    <p class="demo-section__description">
       <code>type="semi-circle"</code> fans items out in a half-circle in the specified direction.
     </p>
 
@@ -90,10 +95,10 @@
     </div>
   </section>
 
-  <!-- ── Section 4: Quarter-Circle ─────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Quarter-Circle</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 4: Quarter-Circle -->
+  <section class="demo-section" id="quarter-circle" data-doc-anchor>
+    <h2 class="demo-section__title">Quarter-Circle</h2>
+    <p class="demo-section__description">
       <code>type="quarter-circle"</code> places items in a 90° arc using compound directions.
     </p>
 
@@ -116,10 +121,10 @@
     </div>
   </section>
 
-  <!-- ── Section 5: Tooltip ────────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Tooltip</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 5: Tooltip -->
+  <section class="demo-section" id="tooltip" data-doc-anchor>
+    <h2 class="demo-section__title">Tooltip</h2>
+    <p class="demo-section__description">
       Set a <code>tooltip</code> on each <code>SpeedDialItem</code> to show labels on hover.
     </p>
 
@@ -134,10 +139,10 @@
     </div>
   </section>
 
-  <!-- ── Section 6: Mask ───────────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Mask</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 6: Mask -->
+  <section class="demo-section" id="mask" data-doc-anchor>
+    <h2 class="demo-section__title">Mask</h2>
+    <p class="demo-section__description">
       Set <code>[mask]="true"</code> to render a backdrop overlay while the dial is open.
     </p>
 
@@ -153,10 +158,10 @@
     </div>
   </section>
 
-  <!-- ── Section 7: Custom Template ───────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Custom Template</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 7: Custom Template -->
+  <section class="demo-section" id="custom-template" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Template</h2>
+    <p class="demo-section__description">
       Use <code>speedDialIcon</code> to customise the trigger icon and <code>speedDialItem</code>
       to render each action with a fully custom template.
     </p>
@@ -184,10 +189,10 @@
     </div>
   </section>
 
-  <!-- ── Section 8: Disabled ───────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Disabled</h2>
-    <p class="speed-dial-demo__section-desc">
+  <!-- Section 8: Disabled -->
+  <section class="demo-section" id="disabled" data-doc-anchor>
+    <h2 class="demo-section__title">Disabled</h2>
+    <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent the dial from opening.
     </p>
 
@@ -202,9 +207,9 @@
     </div>
   </section>
 
-  <!-- ── Event log ─────────────────────────────────────────────────────────── -->
-  <section class="speed-dial-demo__section">
-    <h2 class="speed-dial-demo__section-title">Event Log</h2>
+  <!-- Event log -->
+  <section class="demo-section" id="event-log" data-doc-anchor>
+    <h2 class="demo-section__title">Event Log</h2>
     <div class="speed-dial-demo__log-panel">
       @if (eventLog().length === 0) {
         <p class="speed-dial-demo__log-empty">Interact with the dials above to see events.</p>
@@ -220,4 +225,14 @@
       }
     </div>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

@@ -1,23 +1,26 @@
-<div class="demo-page">
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">ConfirmDialog</h1>
-    <p class="demo-hero__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>ConfirmDialog</h1>
+      <code class="demo-page-header__import">import &#123; ConfirmDialog, ConfirmationService &#125; from 'ui-lib-custom/confirm-dialog'</code>
+    </div>
+    <p class="demo-page-header__description">
       A modal confirmation overlay with configurable accept/reject actions. Supports both declarative
       binding and programmatic use via <code>ConfirmationService</code>.
     </p>
-  </div>
-
-  <!-- Result banner -->
-  <div class="demo-result-banner">
-    <span class="demo-result-label">Last action:</span>
-    <span class="demo-result-value">{{ lastResult() }}</span>
-  </div>
+    <div class="demo-page-header__preview">
+      <div class="demo-result-banner">
+        <span class="demo-result-label">Last action:</span>
+        <span class="demo-result-value">{{ lastResult() }}</span>
+      </div>
+    </div>
+  </header>
 
   <!-- Section: Basic -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Declarative usage — bind <code>[(visible)]</code> and listen to <code>(accepted)</code> /
       <code>(rejected)</code> outputs.
     </p>
@@ -35,9 +38,9 @@
   </section>
 
   <!-- Section: Dismissable mask -->
-  <section class="demo-section">
+  <section class="demo-section" id="dismissable-backdrop" data-doc-anchor>
     <h2 class="demo-section__title">Dismissable Backdrop</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Set <code>dismissableMask</code> to close the dialog by clicking the backdrop.
     </p>
     <div class="demo-card">
@@ -55,9 +58,9 @@
   </section>
 
   <!-- Section: No close button -->
-  <section class="demo-section">
+  <section class="demo-section" id="non-closable" data-doc-anchor>
     <h2 class="demo-section__title">Non-Closable</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Set <code>closable="false"</code> to require the user to choose an action.
     </p>
     <div class="demo-card">
@@ -75,9 +78,9 @@
   </section>
 
   <!-- Section: With icon -->
-  <section class="demo-section">
+  <section class="demo-section" id="with-icon" data-doc-anchor>
     <h2 class="demo-section__title">With Icon</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Pass an icon CSS class via the <code>icon</code> input to render a visual cue beside the
       message.
     </p>
@@ -96,9 +99,9 @@
   </section>
 
   <!-- Section: Danger severity -->
-  <section class="demo-section">
+  <section class="demo-section" id="danger-severity" data-doc-anchor>
     <h2 class="demo-section__title">Danger Severity</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Use <code>acceptSeverity="danger"</code> to signal a destructive action.
     </p>
     <div class="demo-card">
@@ -120,9 +123,9 @@
   </section>
 
   <!-- Section: Position -->
-  <section class="demo-section">
+  <section class="demo-section" id="position" data-doc-anchor>
     <h2 class="demo-section__title">Top Position</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Use <code>position="top"</code> to anchor the dialog to the top of the viewport.
     </p>
     <div class="demo-card">
@@ -140,9 +143,9 @@
   </section>
 
   <!-- Section: Service-driven -->
-  <section class="demo-section">
+  <section class="demo-section" id="programmatic" data-doc-anchor>
     <h2 class="demo-section__title">Programmatic — ConfirmationService</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Use <code>ConfirmationService.confirm(&#123; ... &#125;)</code> to trigger the dialog from any
       component. Place a single <code>&lt;ui-lib-confirm-dialog /&gt;</code> in your layout shell.
     </p>
@@ -158,9 +161,9 @@
   </section>
 
   <!-- Section: Variants -->
-  <section class="demo-section">
+  <section class="demo-section" id="design-variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Three variants adapt the visual style to your project theme. Use the <code>variant</code> input
       or rely on <code>ThemeConfigService</code> for the global default.
     </p>
@@ -179,7 +182,7 @@
   </section>
 
   <!-- API Reference -->
-  <section class="demo-section demo-section--api">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-api__subtitle">Inputs</h3>
@@ -315,4 +318,14 @@
       </tbody>
     </table>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

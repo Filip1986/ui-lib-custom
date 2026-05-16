@@ -1,14 +1,22 @@
-<div class="demo-page">
-  <h1 class="demo-page__title">Menu</h1>
-  <p class="demo-page__description">
-    A flexible navigation panel supporting both inline and popup modes. Items can be organised into
-    labelled groups, separated by dividers, and decorated with icons. Implements the
-    <strong>roving tabindex</strong> pattern for accessible keyboard navigation.
-  </p>
-  <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Menu</h1>
+      <code class="demo-page-header__import">import &#123; Menu &#125; from 'ui-lib-custom/menu'</code>
+    </div>
+    <p class="demo-page-header__description">
+      A flexible navigation panel supporting both inline and popup modes. Items can be organised into
+      labelled groups, separated by dividers, and decorated with icons. Implements the
+      <strong>roving tabindex</strong> pattern for accessible keyboard navigation.
+    </p>
+    <div class="demo-page-header__preview">
+      <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+    </div>
+  </header>
 
   <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Overview</h2>
     <p class="demo-section__description">
       <code>Menu</code> renders an accessible, keyboard-navigable menu panel that supports flat and
@@ -32,7 +40,7 @@
   </section>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic-inline" data-doc-anchor>
     <h2 class="demo-section__title">Basic (Inline)</h2>
     <p class="demo-section__description">
       The default inline mode renders the menu panel directly in the document flow. Pass a
@@ -54,7 +62,7 @@
   </section>
 
   <!-- ── With Separator ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="with-separator" data-doc-anchor>
     <h2 class="demo-section__title">With Separator</h2>
     <p class="demo-section__description">
       Add <code>&#123; separator: true &#125;</code> to insert a horizontal divider between groups
@@ -67,7 +75,7 @@
   </section>
 
   <!-- ── Disabled Items ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="disabled-items" data-doc-anchor>
     <h2 class="demo-section__title">Disabled Items</h2>
     <p class="demo-section__description">
       Set <code>disabled: true</code> on any item to make it non-interactive and visually muted.
@@ -80,7 +88,7 @@
   </section>
 
   <!-- ── Grouped ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="grouped-items" data-doc-anchor>
     <h2 class="demo-section__title">Grouped Items</h2>
     <p class="demo-section__description">
       Provide an <code>items</code> array on a top-level entry to create a labelled section. The
@@ -94,7 +102,7 @@
   </section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="popup-mode" data-doc-anchor>
     <h2 class="demo-section__title">Popup Mode</h2>
     <p class="demo-section__description">
       Set <code>[popup]="true"</code> and control visibility via <code>toggle(event)</code>,
@@ -133,7 +141,7 @@
   </section>
 
   <!-- ── Popup Grouped ─────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="popup-with-groups" data-doc-anchor>
     <h2 class="demo-section__title">Popup with Groups</h2>
     <p class="demo-section__description">
       Grouped items work in popup mode too — the labelled sections are rendered inline within the
@@ -169,7 +177,7 @@
   </section>
 
   <!-- ── Commands & Events ─────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="commands-events" data-doc-anchor>
     <h2 class="demo-section__title">Commands &amp; Events</h2>
     <p class="demo-section__description">
       Use the <code>command</code> callback on individual items for item-local behaviour, or listen
@@ -192,7 +200,7 @@
   </section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="url-items" data-doc-anchor>
     <h2 class="demo-section__title">URL Items</h2>
     <p class="demo-section__description">
       Set <code>url</code> on an item to render it as a native <code>&lt;a href&gt;</code> element.
@@ -205,7 +213,7 @@
   </section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
@@ -230,7 +238,7 @@
   </section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>. The size
@@ -254,7 +262,7 @@
   </section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
@@ -359,7 +367,7 @@
   </section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="accessibility" data-doc-anchor>
     <h2 class="demo-section__title">Accessibility</h2>
 
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -422,4 +430,14 @@
       </li>
     </ul>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>
