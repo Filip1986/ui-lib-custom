@@ -1,0 +1,332 @@
+// CodeSnippet component styles
+// Selector: ui-lib-code-snippet
+// Variants: material | bootstrap | minimal
+// Sizes: sm | md | lg
+
+ui-lib-code-snippet {
+  // --- Design tokens: dark editor palette (overridable via CSS vars) ---
+  --uilib-code-snippet-bg: #1e1e2e;
+  --uilib-code-snippet-header-bg: #181825;
+  --uilib-code-snippet-line-nr-bg: #181825;
+  --uilib-code-snippet-text: #cdd6f4;
+  --uilib-code-snippet-line-nr-text: #45475a;
+  --uilib-code-snippet-border: #313244;
+  --uilib-code-snippet-tab-bg: #1e1e2e;
+  --uilib-code-snippet-tab-border: #313244;
+  --uilib-code-snippet-copy-btn-text: #7f849c;
+  --uilib-code-snippet-copy-btn-text-hover: #cdd6f4;
+  --uilib-code-snippet-copy-btn-bg-hover: #313244;
+  --uilib-code-snippet-copied-text: #a6e3a1;
+  --uilib-code-snippet-dot-close: #ff5f56;
+  --uilib-code-snippet-dot-minimize: #ffbd2e;
+  --uilib-code-snippet-dot-maximize: #27c93f;
+  --uilib-code-snippet-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+  // --- Size scale ---
+  --uilib-code-snippet-font-size-sm: 0.75rem;
+  --uilib-code-snippet-font-size-md: 0.8125rem;
+  --uilib-code-snippet-font-size-lg: 0.9375rem;
+  --uilib-code-snippet-padding-sm: 0.5rem 0.75rem;
+  --uilib-code-snippet-padding-md: 0.75rem 1.25rem;
+  --uilib-code-snippet-padding-lg: 1rem 1.5rem;
+  --uilib-code-snippet-line-height: 1.65;
+
+  // Transition
+  --uilib-code-snippet-transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  display: block;
+}
+
+// ─── Card container (shared across all variants) ──────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--uilib-code-snippet-border);
+  background: var(--uilib-code-snippet-bg);
+  color: var(--uilib-code-snippet-text);
+  font-family: var(--uilib-code-snippet-font);
+  transition: var(--uilib-code-snippet-transition);
+
+  // ── Size variants ──────────────────────────────────────────────────────────
+
+  &.ui-lib-code-snippet--sm {
+    font-size: var(--uilib-code-snippet-font-size-sm);
+  }
+
+  &.ui-lib-code-snippet--md {
+    font-size: var(--uilib-code-snippet-font-size-md);
+  }
+
+  &.ui-lib-code-snippet--lg {
+    font-size: var(--uilib-code-snippet-font-size-lg);
+  }
+
+  // ── Material variant ───────────────────────────────────────────────────────
+
+  &.ui-lib-code-snippet--material {
+    border-radius: var(--uilib-radius-lg, 1rem);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.4),
+        0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  // ── Bootstrap variant ──────────────────────────────────────────────────────
+
+  &.ui-lib-code-snippet--bootstrap {
+    border-radius: var(--uilib-radius-sm, 0.375rem);
+    border-width: 2px;
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  // ── Minimal variant ────────────────────────────────────────────────────────
+
+  &.ui-lib-code-snippet--minimal {
+    border-radius: var(--uilib-radius-md, 0.5rem);
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+      border-color: var(--uilib-code-snippet-border);
+    }
+  }
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  background: var(--uilib-code-snippet-header-bg);
+  border-bottom: 1px solid var(--uilib-code-snippet-border);
+}
+
+// ─── Window chrome ─────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__window-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+
+  &--close {
+    background: var(--uilib-code-snippet-dot-close);
+  }
+  &--minimize {
+    background: var(--uilib-code-snippet-dot-minimize);
+  }
+  &--maximize {
+    background: var(--uilib-code-snippet-dot-maximize);
+  }
+}
+
+// ─── Tab bar ──────────────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__tabs {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: var(--uilib-code-snippet-tab-bg);
+  border: 1px solid var(--uilib-code-snippet-tab-border);
+  border-radius: var(--uilib-radius-sm, 0.25rem);
+  max-width: 200px;
+  overflow: hidden;
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--uilib-code-snippet-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--uilib-font-ui, inherit), sans-serif;
+}
+
+// ─── Copy button ──────────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0.375rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--uilib-radius-sm, 0.25rem);
+  background: transparent;
+  color: var(--uilib-code-snippet-copy-btn-text);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+  margin-left: auto;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--uilib-code-snippet-copy-btn-text-hover);
+    background: var(--uilib-code-snippet-copy-btn-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-focus-ring, var(--uilib-color-primary-500, #6366f1));
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed='true'] {
+    color: var(--uilib-code-snippet-copied-text);
+  }
+
+  // Minimum 44×44 touch target (visually smaller, touch area larger)
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -0.5rem;
+  }
+
+  position: relative;
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__copy-icon {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+  pointer-events: none;
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__body {
+  display: flex;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--uilib-code-snippet-bg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--uilib-code-snippet-border);
+    border-radius: 0.25rem;
+
+    &:hover {
+      background: var(--uilib-code-snippet-copy-btn-bg-hover);
+    }
+  }
+}
+
+// ─── Line numbers ─────────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__line-numbers {
+  flex-shrink: 0;
+  padding: 1.25rem 0.75rem 1.25rem 0;
+  background: var(--uilib-code-snippet-line-nr-bg);
+  border-right: 1px solid var(--uilib-code-snippet-border);
+  text-align: right;
+  user-select: none;
+  min-width: 2.5rem;
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__line-number {
+  color: var(--uilib-code-snippet-line-nr-text);
+  font-size: inherit;
+  line-height: var(--uilib-code-snippet-line-height);
+  padding-left: 0.5rem;
+}
+
+// ─── Code area ────────────────────────────────────────────────────────────────
+
+ui-lib-code-snippet .ui-lib-code-snippet__code-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: visible;
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__pre {
+  margin: 0;
+  padding: 1.25rem;
+  background: transparent;
+  overflow: visible;
+  white-space: pre;
+  tab-size: 2;
+  font-family: var(--uilib-code-snippet-font);
+  font-size: inherit;
+  line-height: var(--uilib-code-snippet-line-height);
+}
+
+ui-lib-code-snippet .ui-lib-code-snippet__code {
+  display: block;
+  color: var(--uilib-code-snippet-text);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background: transparent;
+}
+
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-code-snippet .ui-lib-code-snippet__card {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
+    transition: none;
+  }
+}
+
+// ─── Forced colors (high contrast) ───────────────────────────────────────────
+
+@media (forced-colors: active) {
+  ui-lib-code-snippet .ui-lib-code-snippet__card {
+    border: 2px solid ButtonText;
+  }
+
+  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
+    border: 1px solid ButtonText;
+    forced-color-adjust: none;
+  }
+
+  ui-lib-code-snippet .ui-lib-code-snippet__dot {
+    forced-color-adjust: none;
+  }
+}

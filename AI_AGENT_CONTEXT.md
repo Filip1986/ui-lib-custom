@@ -27,6 +27,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `CodeSnippet` -> ⏳ scaffolded (component, entry point, demo, spec — ESLint + build not yet verified)
+
 - `Accordion` -> ✅ complete + hardened (6-phase, score 9.0/10, 51 tests — 33 unit + 18 a11y)
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
@@ -79,6 +81,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-16 [New component: CodeSnippet — full scaffold complete]
+Changed:
+  - projects/ui-lib-custom/src/lib/code-snippet/ (new: code-snippet.ts, .html, .scss, .spec.ts, .types.ts, index.ts, README.md)
+  - projects/ui-lib-custom/code-snippet/ (new secondary entry point: ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (added code-snippet to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added code-snippet import test)
+  - projects/demo/src/app/pages/code-snippet/ (new: code-snippet-demo.component.ts/.html/.scss)
+  - projects/demo/src/app/app.routes.ts (added /code-snippet lazy route)
+State: CodeSnippet component fully scaffolded. Selector: ui-lib-code-snippet. Package: ui-lib-custom/code-snippet. Data-display category. Features: macOS window chrome (traffic-light dots), language-labelled tab bar, optional line numbers, copy-to-clipboard button with 2 s visual feedback, three design variants (material/bootstrap/minimal), three sizes (sm/md/lg), maxHeight scroll, full a11y (role=region, aria-label, aria-hidden line numbers, aria-pressed copy button, prefers-reduced-motion, forced-colors). Build and lint NOT yet verified — must run from main repo root.
+Verification:
+  (not yet run — run from D:/Work/Personal/Github/ui-lib-custom):
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/code-snippet/ --max-warnings 0
+  node_modules/.bin/ng build ui-lib-custom
+  node_modules/.bin/jest --testPathPatterns="src/lib/code-snippet/" --no-coverage
+Terminal notes: node_modules not present in worktree — run all tools from main repo root with paths pointing to worktree files.
+Next step: Run ESLint + build + tests from main repo root. Then serve demo to visually verify /code-snippet route.
 
 Date: 2026-05-15 [Phase 0 infrastructure gaps closed — z-index manager wired into Dialog and Drawer]
 Changed:

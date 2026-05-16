@@ -1,0 +1,84 @@
+<div
+  [class]="rootClasses()"
+  role="region"
+  [attr.aria-label]="accessibleLabel()"
+>
+  <!-- Header: window chrome, filename tab, copy button -->
+  <div class="ui-lib-code-snippet__header">
+    @if (showWindowChrome()) {
+      <div class="ui-lib-code-snippet__window-chrome" aria-hidden="true">
+        <span class="ui-lib-code-snippet__dot ui-lib-code-snippet__dot--close"></span>
+        <span class="ui-lib-code-snippet__dot ui-lib-code-snippet__dot--minimize"></span>
+        <span class="ui-lib-code-snippet__dot ui-lib-code-snippet__dot--maximize"></span>
+      </div>
+    }
+
+    <div class="ui-lib-code-snippet__tabs">
+      <div class="ui-lib-code-snippet__tab">
+        <span class="ui-lib-code-snippet__tab-label">{{ displayFilename() }}</span>
+      </div>
+    </div>
+
+    @if (showCopyButton()) {
+      <button
+        type="button"
+        class="ui-lib-code-snippet__copy-btn"
+        [attr.aria-label]="copied() ? 'Copied!' : 'Copy code to clipboard'"
+        [attr.aria-pressed]="copied()"
+        (click)="onCopy()"
+      >
+        @if (copied()) {
+          <!-- Checkmark icon -->
+          <svg
+            class="ui-lib-code-snippet__copy-icon ui-lib-code-snippet__copy-icon--check"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        } @else {
+          <!-- Copy icon -->
+          <svg
+            class="ui-lib-code-snippet__copy-icon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+        }
+      </button>
+    }
+  </div>
+
+  <!-- Body: optional line numbers + code -->
+  <div
+    class="ui-lib-code-snippet__body"
+    [style.max-height]="maxHeight()"
+  >
+    @if (showLineNumbers()) {
+      <div class="ui-lib-code-snippet__line-numbers" aria-hidden="true">
+        @for (line of lines(); track $index) {
+          <div class="ui-lib-code-snippet__line-number">{{ $index + 1 }}</div>
+        }
+      </div>
+    }
+
+    <div class="ui-lib-code-snippet__code-wrap">
+      <pre
+        class="ui-lib-code-snippet__pre"
+        [attr.data-language]="language()"
+      ><code class="ui-lib-code-snippet__code">{{ code() }}</code></pre>
+    </div>
+  </div>
+</div>
