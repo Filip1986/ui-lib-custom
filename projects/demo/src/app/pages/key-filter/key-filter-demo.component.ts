@@ -6,6 +6,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { Card } from 'ui-lib-custom/card';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 type KeyFilterDemoSnippetKey =
   | 'alphanum'
@@ -32,6 +33,7 @@ type KeyFilterDemoSnippetKey =
     DocDemoViewportComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     KeyFilterDirective,
   ],
   templateUrl: './key-filter-demo.component.html',
@@ -39,6 +41,9 @@ type KeyFilterDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeyFilterDemoComponent {
+  public readonly importCode: string =
+    "import { KeyFilterDirective } from 'ui-lib-custom/key-filter'";
+
   public readonly sections: DocSection[] = [
     { id: 'alphanum', label: 'Alphanumeric' },
     { id: 'alpha', label: 'Alpha' },

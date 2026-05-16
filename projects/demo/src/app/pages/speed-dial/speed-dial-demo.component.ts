@@ -18,6 +18,7 @@ import type {
   SpeedDialItemCommandEvent,
   SpeedDialVariant,
 } from 'ui-lib-custom/speed-dial';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -35,6 +36,7 @@ interface SpeedDialLogEntry {
   selector: 'app-speed-dial-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Icon,
     SpeedDialComponent,
     SpeedDialIconDirective,
@@ -48,6 +50,8 @@ interface SpeedDialLogEntry {
   encapsulation: ViewEncapsulation.None,
 })
 export class SpeedDialDemoComponent {
+  public readonly importCode: string =
+    "import { SpeedDialComponent } from 'ui-lib-custom/speed-dial'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

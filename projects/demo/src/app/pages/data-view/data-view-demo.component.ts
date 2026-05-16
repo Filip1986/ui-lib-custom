@@ -5,6 +5,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   DataViewComponent,
   DataViewEmptyDirective,
@@ -55,6 +56,7 @@ type DataViewDemoSnippetKey =
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     Stack,
     Inline,
     Grid,
@@ -74,6 +76,9 @@ type DataViewDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataViewDemoComponent {
+  public readonly importCode: string =
+    "import { DataViewComponent } from 'ui-lib-custom/data-view'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic-list', label: 'Basic List' },
     { id: 'basic-grid', label: 'Basic Grid' },

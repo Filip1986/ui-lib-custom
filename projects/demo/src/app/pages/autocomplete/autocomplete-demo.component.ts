@@ -12,6 +12,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   AutoCompleteEmptyDirective,
   AutoCompleteFooterDirective,
@@ -62,6 +63,7 @@ type AutoCompleteDemoSnippetKey =
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     UiLibAutoComplete,
     AutoCompleteItemDirective,
     AutoCompleteSelectedItemDirective,
@@ -75,6 +77,9 @@ type AutoCompleteDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoCompleteDemoComponent {
+  public readonly importCode: string =
+    "import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'objects', label: 'Objects' },

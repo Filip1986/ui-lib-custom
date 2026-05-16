@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, computed, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Bind } from 'ui-lib-custom/bind';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -14,12 +15,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-bind-demo',
   standalone: true,
-  imports: [Bind, JsonPipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Bind, JsonPipe, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BindDemoComponent {
+  public readonly importCode: string = "import { Bind } from 'ui-lib-custom/bind'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

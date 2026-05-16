@@ -3,6 +3,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import {
   OrderListComponent,
@@ -105,6 +106,7 @@ const SNIPPETS: Record<string, string> = {
     DocPageLayoutComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     Stack,
     OrderListComponent,
     OrderListItemDirective,
@@ -116,6 +118,9 @@ const SNIPPETS: Record<string, string> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListDemoComponent {
+  public readonly importCode: string =
+    "import { OrderListComponent } from 'ui-lib-custom/order-list'";
+
   // -------------------------------------------------------------------------
   // Sections
   // -------------------------------------------------------------------------

@@ -6,6 +6,7 @@ import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-
 import { Card } from 'ui-lib-custom/card';
 import { Icon } from 'ui-lib-custom/icon';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type {
   SplitButtonItem,
   SplitButtonItemCommandEvent,
@@ -24,6 +25,7 @@ import type {
     CodePreviewComponent,
     Card,
     Icon,
+    CodeSnippet,
     SplitButtonComponent,
     SplitButtonContentDirective,
   ],
@@ -32,6 +34,9 @@ import type {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitButtonDemoComponent {
+  public readonly importCode: string =
+    "import { SplitButtonComponent } from 'ui-lib-custom/split-button'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'icons', label: 'Icons' },

@@ -15,6 +15,7 @@ import type {
   UploadSelectEvent,
   UploadVariant,
 } from 'ui-lib-custom/upload';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -32,6 +33,7 @@ interface UploadLogEntry {
   selector: 'app-upload-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     UploadComponent,
     UploadEmptyDirective,
     UploadFileDirective,
@@ -45,6 +47,7 @@ interface UploadLogEntry {
   encapsulation: ViewEncapsulation.None,
 })
 export class UploadDemoComponent {
+  public readonly importCode: string = "import { UploadComponent } from 'ui-lib-custom/upload'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

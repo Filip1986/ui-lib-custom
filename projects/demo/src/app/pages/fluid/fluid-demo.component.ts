@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Fluid, FluidDirective } from 'ui-lib-custom/fluid';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -13,12 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-fluid-demo',
   standalone: true,
-  imports: [Fluid, FluidDirective, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Fluid, FluidDirective, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FluidDemoComponent {
+  public readonly importCode: string =
+    "import { Fluid, FluidDirective } from 'ui-lib-custom/fluid'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

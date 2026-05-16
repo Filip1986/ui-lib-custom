@@ -8,6 +8,7 @@ import {
   TableColumnComponent,
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -58,6 +59,7 @@ interface KeyboardRow {
   selector: 'app-panel-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Panel,
     Button,
     TableComponent,
@@ -72,6 +74,7 @@ interface KeyboardRow {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelDemoComponent {
+  public readonly importCode: string = "import { Panel } from 'ui-lib-custom/panel'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

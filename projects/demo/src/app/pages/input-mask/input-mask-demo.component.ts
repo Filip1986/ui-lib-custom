@@ -15,6 +15,7 @@ import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputMaskComponent } from 'ui-lib-custom/input-mask';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 interface InputMaskSizeItem {
   readonly label: string;
@@ -52,6 +53,7 @@ type InputMaskDemoSnippetKey =
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     FloatLabelComponent,
     InputMaskComponent,
   ],
@@ -60,6 +62,9 @@ type InputMaskDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputMaskDemoComponent {
+  public readonly importCode: string =
+    "import { InputMaskComponent } from 'ui-lib-custom/input-mask'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'mask-formats', label: 'Mask Formats' },

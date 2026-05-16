@@ -13,6 +13,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   UiLibCascadeSelect,
   CascadeSelectOptionDirective,
@@ -61,6 +62,7 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     UiLibCascadeSelect,
     CascadeSelectOptionDirective,
     CascadeSelectValueDirective,
@@ -75,6 +77,9 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CascadeSelectDemoComponent {
+  public readonly importCode: string =
+    "import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'template', label: 'Template' },

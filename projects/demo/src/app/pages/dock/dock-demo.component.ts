@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Dock } from 'ui-lib-custom/dock';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -19,12 +20,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-dock-demo',
   standalone: true,
-  imports: [Dock, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Dock, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DockDemoComponent {
+  public readonly importCode: string = "import { Dock } from 'ui-lib-custom/dock'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

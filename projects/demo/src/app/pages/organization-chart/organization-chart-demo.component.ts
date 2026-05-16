@@ -3,6 +3,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
 import type {
   OrganizationChartNode,
@@ -100,6 +101,7 @@ const SNIPPETS: Record<string, string> = {
     DocPageLayoutComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     OrganizationChart,
     OrgChartNodeTemplateDirective,
   ],
@@ -108,6 +110,9 @@ const SNIPPETS: Record<string, string> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrganizationChartDemoComponent {
+  public readonly importCode: string =
+    "import { OrganizationChart } from 'ui-lib-custom/organization-chart'";
+
   // ─── Navigation sections ───────────────────────────────────────────────────
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },

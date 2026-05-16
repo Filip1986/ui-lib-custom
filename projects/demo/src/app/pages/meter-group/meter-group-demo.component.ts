@@ -9,6 +9,7 @@ import type {
   MeterItem,
 } from 'ui-lib-custom/meter-group';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -20,12 +21,20 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-meter-group-demo',
   standalone: true,
-  imports: [MeterGroup, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    CodeSnippet,
+    MeterGroup,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeterGroupDemoComponent {
+  public readonly importCode: string = "import { MeterGroup } from 'ui-lib-custom/meter-group'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

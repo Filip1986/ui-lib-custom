@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -13,12 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-animated-on-scroll-demo',
   standalone: true,
-  imports: [AnimateOnScroll, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, AnimateOnScroll, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './animated-on-scroll-demo.component.html',
   styleUrl: './animated-on-scroll-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimatedOnScrollDemoComponent {
+  public readonly importCode: string =
+    "import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

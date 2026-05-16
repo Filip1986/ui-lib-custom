@@ -9,6 +9,7 @@ import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { Icon } from 'ui-lib-custom/icon';
 import { IconFieldComponent, InputIconComponent } from 'ui-lib-custom/icon-field';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { UiLibInput } from 'ui-lib-custom/input';
 
 type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | 'variants';
@@ -28,6 +29,7 @@ type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | '
     Card,
     UiLibInput,
     Icon,
+    CodeSnippet,
     IconFieldComponent,
     InputIconComponent,
     FloatLabelComponent,
@@ -37,6 +39,9 @@ type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | '
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconFieldDemoComponent {
+  public readonly importCode: string =
+    "import { IconFieldComponent, InputIconComponent } from 'ui-lib-custom/icon-field'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'template', label: 'Template' },

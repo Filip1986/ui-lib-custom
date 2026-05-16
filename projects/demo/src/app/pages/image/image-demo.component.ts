@@ -5,6 +5,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Image } from 'ui-lib-custom/image';
 
 type SnippetKey =
@@ -22,12 +23,21 @@ type SnippetKey =
 @Component({
   selector: 'app-image-demo',
   standalone: true,
-  imports: [DocPageLayoutComponent, DocDemoViewportComponent, CodePreviewComponent, Card, Image],
+  imports: [
+    DocPageLayoutComponent,
+    DocDemoViewportComponent,
+    CodePreviewComponent,
+    Card,
+    CodeSnippet,
+    Image,
+  ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageDemoComponent {
+  public readonly importCode: string = "import { Image } from 'ui-lib-custom/image'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'preview', label: 'Preview' },

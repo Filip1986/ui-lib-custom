@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Menu } from 'ui-lib-custom/menu';
 import { Button } from 'ui-lib-custom/button';
 import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
@@ -63,6 +64,7 @@ interface CssTokenRow {
   selector: 'app-menu-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Menu,
     Button,
     TableComponent,
@@ -77,6 +79,7 @@ interface CssTokenRow {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuDemoComponent {
+  public readonly importCode: string = "import { Menu } from 'ui-lib-custom/menu'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

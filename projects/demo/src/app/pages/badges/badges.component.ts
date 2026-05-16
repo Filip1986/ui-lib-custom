@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, signal, ViewChild } from '@angular/
 import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Badge } from 'ui-lib-custom/badge';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
@@ -34,6 +35,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   imports: [
     Badge,
     Button,
+    CodeSnippet,
     Tabs,
     Tab,
     DocPageLayoutComponent,
@@ -50,6 +52,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgesComponent {
+  public readonly importCode: string = "import { Badge } from 'ui-lib-custom/badge'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

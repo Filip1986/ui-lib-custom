@@ -12,6 +12,7 @@ import type {
   TimelineSize,
   TimelineVariant,
 } from 'ui-lib-custom/timeline';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -34,6 +35,7 @@ interface OrderStep {
   selector: 'app-timeline-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     TimelineComponent,
     TimelineContentDirective,
     TimelineMarkerDirective,
@@ -46,6 +48,7 @@ interface OrderStep {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimelineDemoComponent {
+  public readonly importCode: string = "import { TimelineComponent } from 'ui-lib-custom/timeline'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

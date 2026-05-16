@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { GalleriaComponent } from 'ui-lib-custom/galleria';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -78,12 +79,20 @@ const DEMO_IMAGES: GalleriaImage[] = [
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [GalleriaComponent, FormsModule, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    GalleriaComponent,
+    FormsModule,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent {
+  public readonly importCode: string = "import { GalleriaComponent } from 'ui-lib-custom/galleria'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

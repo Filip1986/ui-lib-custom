@@ -13,6 +13,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { InputOtpComponent } from 'ui-lib-custom/input-otp';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 type InputOtpDemoSnippetKey =
   | 'basic'
@@ -39,6 +40,7 @@ type InputOtpDemoSnippetKey =
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     InputOtpComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
@@ -46,6 +48,9 @@ type InputOtpDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputOtpDemoComponent {
+  public readonly importCode: string =
+    "import { InputOtpComponent } from 'ui-lib-custom/input-otp'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'mask', label: 'Mask' },

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { CarouselComponent } from 'ui-lib-custom/carousel';
 import type { CarouselResponsiveOption } from 'ui-lib-custom/carousel';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -21,12 +22,13 @@ interface DemoProduct {
 @Component({
   selector: 'app-carousel-demo',
   standalone: true,
-  imports: [CarouselComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, CarouselComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselDemoComponent {
+  public readonly importCode: string = "import { CarouselComponent } from 'ui-lib-custom/carousel'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

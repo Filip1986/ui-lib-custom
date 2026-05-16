@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Accordion, AccordionPanel, AccordionToggleIcon } from 'ui-lib-custom/accordion';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { AccordionExpandMode, AccordionSize, AccordionVariant } from 'ui-lib-custom/accordion';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
@@ -57,6 +58,7 @@ type AccordionTab =
     Accordion,
     AccordionPanel,
     AccordionToggleIcon,
+    CodeSnippet,
     Badge,
     Card,
     Button,
@@ -76,6 +78,9 @@ type AccordionTab =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionComponent {
+  public readonly importCode: string =
+    "import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

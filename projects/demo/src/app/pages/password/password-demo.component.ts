@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PasswordComponent } from 'ui-lib-custom/password';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -12,6 +13,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-password-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     PasswordComponent,
     ReactiveFormsModule,
     DocPageLayoutComponent,
@@ -23,6 +25,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordDemoComponent {
+  public readonly importCode: string = "import { PasswordComponent } from 'ui-lib-custom/password'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { AutoFocus } from 'ui-lib-custom/auto-focus';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -13,12 +14,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-auto-focus-demo',
   standalone: true,
-  imports: [AutoFocus, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, AutoFocus, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './auto-focus-demo.component.html',
   styleUrl: './auto-focus-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoFocusDemoComponent {
+  public readonly importCode: string = "import { AutoFocus } from 'ui-lib-custom/auto-focus'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

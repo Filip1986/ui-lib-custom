@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Tree } from 'ui-lib-custom/tree';
 import { TreeNodeTemplateDirective } from 'ui-lib-custom/tree';
 import type { TreeNode, TreeSelectionMode } from 'ui-lib-custom/tree';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,12 +16,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-tree-demo',
   standalone: true,
-  imports: [Tree, TreeNodeTemplateDirective, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Tree, TreeNodeTemplateDirective, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './tree-demo.component.html',
   styleUrl: './tree-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeDemoComponent {
+  public readonly importCode: string = "import { Tree } from 'ui-lib-custom/tree'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

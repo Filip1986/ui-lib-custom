@@ -9,6 +9,7 @@ import type {
   TreeTableVariant,
 } from 'ui-lib-custom/tree-table';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -22,6 +23,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-tree-table-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     TreeTableComponent,
     TreeTableColumnComponent,
     TreeTableColumnBodyDirective,
@@ -34,6 +36,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeTableDemoComponent {
+  public readonly importCode: string =
+    "import { TreeTableComponent } from 'ui-lib-custom/tree-table'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

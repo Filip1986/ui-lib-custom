@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Avatar } from 'ui-lib-custom/avatar';
 import { AvatarGroup } from 'ui-lib-custom/avatar';
 import type { AvatarSize, AvatarShape, AvatarVariant } from 'ui-lib-custom/avatar';
@@ -14,12 +15,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-avatar-demo',
   standalone: true,
-  imports: [Avatar, AvatarGroup, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Avatar, AvatarGroup, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarDemoComponent {
+  public readonly importCode: string = "import { Avatar, AvatarGroup } from 'ui-lib-custom/avatar'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
