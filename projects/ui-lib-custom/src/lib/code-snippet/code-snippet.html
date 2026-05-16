@@ -78,7 +78,7 @@
       <pre
         class="ui-lib-code-snippet__pre"
         [attr.data-language]="language()"
-      ><code class="ui-lib-code-snippet__code">{{ code() }}</code></pre>
+      ><code class="ui-lib-code-snippet__code" [innerHTML]="highlightedCode()"></code></pre>
     </div>
   </div>
 </div>

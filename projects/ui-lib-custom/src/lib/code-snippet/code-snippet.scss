@@ -279,6 +279,92 @@ ui-lib-code-snippet .ui-lib-code-snippet__code {
   background: transparent;
 }
 
+// ─── Syntax token colours (VS Code–inspired dark palette) ────────────────────
+
+ui-lib-code-snippet {
+  --uilib-syntax-keyword: #569cd6;
+  --uilib-syntax-string: #ce9178;
+  --uilib-syntax-comment: #6a9955;
+  --uilib-syntax-number: #b5cea8;
+  --uilib-syntax-decorator: #dcdcaa;
+  --uilib-syntax-type: #4ec9b0;
+  --uilib-syntax-function: #dcdcaa;
+  --uilib-syntax-variable: #bd63c5;
+  --uilib-syntax-at-rule: #c586c0;
+  --uilib-syntax-property: #9cdcfe;
+  --uilib-syntax-selector: #d7ba7d;
+  --uilib-syntax-unit: #b5cea8;
+  --uilib-syntax-tag: #4ec9b0;
+  --uilib-syntax-attr-name: #9cdcfe;
+  --uilib-syntax-attr-value: #ce9178;
+  --uilib-syntax-binding: #4fc1ff;
+  --uilib-syntax-interpolation: #dcdcaa;
+  --uilib-syntax-operator: #d4d4d4;
+  --uilib-syntax-punctuation: #808080;
+}
+
+ui-lib-code-snippet .uilib-token-keyword {
+  color: var(--uilib-syntax-keyword);
+  font-weight: 600;
+}
+
+ui-lib-code-snippet .uilib-token-string {
+  color: var(--uilib-syntax-string);
+}
+ui-lib-code-snippet .uilib-token-comment {
+  color: var(--uilib-syntax-comment);
+  font-style: italic;
+}
+ui-lib-code-snippet .uilib-token-number {
+  color: var(--uilib-syntax-number);
+}
+ui-lib-code-snippet .uilib-token-decorator {
+  color: var(--uilib-syntax-decorator);
+}
+ui-lib-code-snippet .uilib-token-type {
+  color: var(--uilib-syntax-type);
+}
+ui-lib-code-snippet .uilib-token-function {
+  color: var(--uilib-syntax-function);
+}
+ui-lib-code-snippet .uilib-token-variable {
+  color: var(--uilib-syntax-variable);
+}
+ui-lib-code-snippet .uilib-token-at-rule {
+  color: var(--uilib-syntax-at-rule);
+}
+ui-lib-code-snippet .uilib-token-property {
+  color: var(--uilib-syntax-property);
+}
+ui-lib-code-snippet .uilib-token-selector {
+  color: var(--uilib-syntax-selector);
+}
+ui-lib-code-snippet .uilib-token-unit {
+  color: var(--uilib-syntax-unit);
+}
+ui-lib-code-snippet .uilib-token-tag {
+  color: var(--uilib-syntax-tag);
+}
+ui-lib-code-snippet .uilib-token-attr-name {
+  color: var(--uilib-syntax-attr-name);
+}
+ui-lib-code-snippet .uilib-token-attr-value {
+  color: var(--uilib-syntax-attr-value);
+}
+ui-lib-code-snippet .uilib-token-binding {
+  color: var(--uilib-syntax-binding);
+  font-weight: 500;
+}
+ui-lib-code-snippet .uilib-token-interpolation {
+  color: var(--uilib-syntax-interpolation);
+}
+ui-lib-code-snippet .uilib-token-operator {
+  color: var(--uilib-syntax-operator);
+}
+ui-lib-code-snippet .uilib-token-punctuation {
+  color: var(--uilib-syntax-punctuation);
+}
+
 // ─── Reduced motion ───────────────────────────────────────────────────────────
 
 @media (prefers-reduced-motion: reduce) {

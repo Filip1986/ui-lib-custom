@@ -474,18 +474,6 @@ export class SidebarComponent {
           group: 'Misc',
         },
         {
-          label: 'CodeSnippet',
-          icon: 'pi pi-circle',
-          route: '/code-snippet',
-          group: 'Misc',
-        },
-        {
-          label: 'ClassNames',
-          icon: 'pi pi-circle',
-          route: '/class-names',
-          group: 'Misc',
-        },
-        {
           label: 'FocusTrap',
           icon: 'pi pi-circle',
           route: '/focus-trap',
@@ -679,6 +667,28 @@ export class SidebarComponent {
           group: 'Panel',
         },
       ]),
+    },
+    {
+      label: 'Utilities',
+      icon: 'pi pi-wrench',
+      expanded: false,
+      items: [
+        {
+          label: 'ClassNames',
+          icon: 'pi pi-circle',
+          route: '/class-names',
+        },
+        {
+          label: 'CodeSnippet',
+          icon: 'pi pi-circle',
+          route: '/code-snippet',
+        },
+        {
+          label: 'SyntaxHighlighter',
+          icon: 'pi pi-circle',
+          route: '/syntax-highlighter',
+        },
+      ],
     },
     {
       label: 'Templates',

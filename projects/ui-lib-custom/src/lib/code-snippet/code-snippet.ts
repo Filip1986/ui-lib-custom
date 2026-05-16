@@ -12,7 +12,10 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
+import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { highlight, escapeForCode } from '../syntax-highlighter/syntax-highlighter';
+import type { SyntaxLanguage } from '../syntax-highlighter/syntax-highlighter.types';
 import type {
   CodeSnippetLanguage,
   CodeSnippetVariant,
@@ -37,8 +40,12 @@ const LANGUAGE_LABELS: Record<CodeSnippetLanguage, string> = {
   text: 'Plain Text',
 } as const;
 
+/** Languages the built-in syntax tokenizer supports. */
+const HIGHLIGHTED_LANGUAGES: Set<string> = new Set<string>(['typescript', 'html', 'scss', 'css']);
+
 /**
  * Code snippet display component with macOS-style window chrome, line numbers, and copy-to-clipboard.
+ * TypeScript, HTML, SCSS, and CSS code is syntax-highlighted using the built-in tokenizer.
  */
 @Component({
   selector: 'ui-lib-code-snippet',
@@ -52,7 +59,7 @@ const LANGUAGE_LABELS: Record<CodeSnippetLanguage, string> = {
 export class CodeSnippet {
   /** The raw code string to display. */
   public readonly code: InputSignal<string> = input<string>('');
-  /** Programming language — used to label the tab. */
+  /** Programming language — used to label the tab and select the syntax tokenizer. */
   public readonly language: InputSignal<CodeSnippetLanguage> = input<CodeSnippetLanguage>('text');
   /** Optional filename shown in the tab bar. Falls back to the language label. */
   public readonly filename: InputSignal<string | null> = input<string | null>(null);
@@ -76,6 +83,7 @@ export class CodeSnippet {
   public readonly codeCopied: OutputEmitterRef<void> = output<void>();
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+  private readonly sanitizer: DomSanitizer = inject(DomSanitizer);
 
   /** Whether the copy-success state is currently active. */
   public readonly copied: WritableSignal<boolean> = signal<boolean>(false);
@@ -110,6 +118,16 @@ export class CodeSnippet {
     const extra: string | null = this.styleClass();
     if (extra !== null) classes.push(extra);
     return classes.join(' ');
+  });
+
+  /** Syntax-highlighted HTML for the code body, safe to bind with [innerHTML]. */
+  public readonly highlightedCode: Signal<SafeHtml> = computed<SafeHtml>((): SafeHtml => {
+    const language: CodeSnippetLanguage = this.language();
+    const rawCode: string = this.code();
+    const html: string = HIGHLIGHTED_LANGUAGES.has(language)
+      ? highlight(rawCode, language as SyntaxLanguage)
+      : escapeForCode(rawCode);
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   });
 
   /** Handles the copy button click. Delegates to the async clipboard operation. */
