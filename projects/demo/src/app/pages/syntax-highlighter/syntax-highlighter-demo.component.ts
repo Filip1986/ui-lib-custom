@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
@@ -14,7 +12,7 @@ import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
 @Component({
   selector: 'app-syntax-highlighter-demo',
   standalone: true,
-  imports: [CodeSnippet, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [CodeSnippet, DocPageLayoutComponent, DocCodeSnippetComponent],
   templateUrl: './syntax-highlighter-demo.component.html',
   styleUrl: './syntax-highlighter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
