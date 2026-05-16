@@ -257,6 +257,10 @@
       "esm2022": "./esm2022/class-names/index.mjs",
       "esm": "./esm2022/class-names/index.mjs"
     },
+    "./code-snippet": {
+      "esm2022": "./esm2022/code-snippet/index.mjs",
+      "esm": "./esm2022/code-snippet/index.mjs"
+    },
     "./focus-trap": {
       "esm2022": "./esm2022/focus-trap/index.mjs",
       "esm": "./esm2022/focus-trap/index.mjs"
@@ -526,6 +530,9 @@
       ],
       "class-names": [
         "./class-names/index.d.ts"
+      ],
+      "code-snippet": [
+        "./code-snippet/index.d.ts"
       ],
       "focus-trap": [
         "./focus-trap/index.d.ts"

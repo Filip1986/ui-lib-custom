@@ -278,6 +278,15 @@ export const routes: Routes = [
     title: 'Chip - UI Components Library',
   },
   {
+    path: 'code-snippet',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/code-snippet/code-snippet-demo.component').then(
+        (m: { CodeSnippetDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.CodeSnippetDemoComponent
+      ),
+    title: 'Code Snippet - UI Components Library',
+  },
+  {
     path: 'class-names',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/class-names/class-names-demo.component').then(

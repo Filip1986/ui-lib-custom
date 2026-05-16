@@ -5,6 +5,7 @@ import type * as UiLibButton from 'ui-lib-custom/button';
 import type * as UiLibCard from 'ui-lib-custom/card';
 import type * as UiLibCheckbox from 'ui-lib-custom/checkbox';
 import type * as UiLibChart from 'ui-lib-custom/chart';
+import type * as UiLibCodeSnippet from 'ui-lib-custom/code-snippet';
 import type * as UiLibColorPicker from 'ui-lib-custom/color-picker';
 import type * as UiLibCore from 'ui-lib-custom/core';
 import type * as UiLibDataView from 'ui-lib-custom/data-view';
@@ -133,6 +134,11 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibChart = await import('ui-lib-custom/chart');
     expect(mod.ChartComponent).toBeDefined();
     expect(mod.BarChartComponent).toBeDefined();
+  });
+
+  it('should import from code-snippet', async (): Promise<void> => {
+    const mod: typeof UiLibCodeSnippet = await import('ui-lib-custom/code-snippet');
+    expect(mod.CodeSnippet).toBeDefined();
   });
 
   it('should import from color-picker', async (): Promise<void> => {
