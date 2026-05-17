@@ -9,7 +9,7 @@ import { SHADOWS } from 'ui-lib-custom/tokens';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 interface ElevationExample {
   level: number;
@@ -35,7 +35,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     Tab,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './shadows.component.html',
   styleUrl: './shadows.component.scss',

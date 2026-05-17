@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /**
  * Demo section for semantic spacing tokens.
@@ -41,7 +41,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     Tab,
     DocDemoViewportComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './semantic-spacing-section.component.html',
   styleUrl: './layouts.component.scss',

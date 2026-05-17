@@ -6,7 +6,6 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -15,14 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-bottom-sheet-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    BottomSheet,
-    Button,
-    DocPageLayoutComponent,
-    DocTocComponent,
-    DocCodeSnippetComponent,
-  ],
+  imports: [CodeSnippet, BottomSheet, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './bottom-sheet-demo.component.html',
   styleUrl: './bottom-sheet-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

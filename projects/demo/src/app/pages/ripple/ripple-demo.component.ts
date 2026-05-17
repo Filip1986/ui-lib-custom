@@ -5,7 +5,6 @@ import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -14,14 +13,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-ripple-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    Ripple,
-    Button,
-    DocPageLayoutComponent,
-    DocTocComponent,
-    DocCodeSnippetComponent,
-  ],
+  imports: [CodeSnippet, Ripple, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

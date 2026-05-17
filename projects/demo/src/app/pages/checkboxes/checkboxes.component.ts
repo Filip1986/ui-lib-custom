@@ -25,7 +25,6 @@ import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
 
@@ -47,7 +46,6 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     Card,
     Button,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
     DocDemoViewportComponent,
     FormsModule,
     ReactiveFormsModule,

@@ -39,7 +39,7 @@
         &nbsp;— last change: {{ lastEvent.value }}
       }
     </p>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
   </section>
 
   <!-- ---- Pre-selected --------------------------------------------- -->
@@ -52,7 +52,7 @@
       <ui-lib-rating [(ngModel)]="preselectedRating" />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ preselectedRating }}</strong></p>
-    <app-doc-code-snippet title="Pre-selected" [code]="snippets.preSelected" />
+    <ui-lib-code-snippet filename="Pre-selected" [code]="snippets.preSelected" />
   </section>
 
   <!-- ---- No Cancel ------------------------------------------------ -->
@@ -65,7 +65,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="noCancelRating" [cancel]="false" />
     </div>
-    <app-doc-code-snippet title="No cancel" [code]="snippets.noCancel" />
+    <ui-lib-code-snippet filename="No cancel" [code]="snippets.noCancel" />
   </section>
 
   <!-- ---- Variants ------------------------------------------------- -->
@@ -90,7 +90,7 @@
         <ui-lib-rating variant="minimal" [ngModel]="4" [cancel]="false" [readonly]="true" />
       </div>
     </div>
-    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
   </section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
@@ -113,7 +113,7 @@
         <ui-lib-rating size="lg" [ngModel]="3" [cancel]="false" [readonly]="true" />
       </div>
     </div>
-    <app-doc-code-snippet title="Sizes" [code]="snippets.sizes" />
+    <ui-lib-code-snippet filename="Sizes" [code]="snippets.sizes" />
   </section>
 
   <!-- ---- Custom Star Count ---------------------------------------- -->
@@ -126,7 +126,7 @@
       <ui-lib-rating [stars]="10" [(ngModel)]="tenStarRating" />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ tenStarRating }}</strong></p>
-    <app-doc-code-snippet title="Custom star count" [code]="snippets.starCount" />
+    <ui-lib-code-snippet filename="Custom star count" [code]="snippets.starCount" />
   </section>
 
   <!-- ---- Readonly ------------------------------------------------- -->
@@ -140,7 +140,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [readonly]="true" [(ngModel)]="readonlyRating" />
     </div>
-    <app-doc-code-snippet title="Readonly" [code]="snippets.readonly" />
+    <ui-lib-code-snippet filename="Readonly" [code]="snippets.readonly" />
   </section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
@@ -153,7 +153,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
     </div>
-    <app-doc-code-snippet title="Disabled" [code]="snippets.disabled" />
+    <ui-lib-code-snippet filename="Disabled" [code]="snippets.disabled" />
   </section>
 
   <!-- ---- Events --------------------------------------------------- -->
@@ -181,7 +181,7 @@
         <li class="demo-rating-event-log__empty">No events yet — click a star or use Tab / keyboard.</li>
       }
     </ul>
-    <app-doc-code-snippet title="Events" [code]="snippets.events" />
+    <ui-lib-code-snippet filename="Events" [code]="snippets.events" />
   </section>
 
   <!-- ---- Custom Templates ----------------------------------------- -->
@@ -199,7 +199,7 @@
       </ui-lib-rating>
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ customTemplateRating ?? 'none' }}</strong></p>
-    <app-doc-code-snippet title="Custom templates" [code]="snippets.customTemplates" />
+    <ui-lib-code-snippet filename="Custom templates" [code]="snippets.customTemplates" />
   </section>
 
   <!-- ---- Inline Styles -------------------------------------------- -->
@@ -218,7 +218,7 @@
       />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ styledRating ?? 'none' }}</strong></p>
-    <app-doc-code-snippet title="Inline styles" [code]="snippets.inlineStyles" />
+    <ui-lib-code-snippet filename="Inline styles" [code]="snippets.inlineStyles" />
   </section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
@@ -242,7 +242,7 @@
       </form>
     </div>
     <p class="demo-rating-hint">Form value: <strong>{{ reviewForm.value | json }}</strong></p>
-    <app-doc-code-snippet title="Reactive forms" [code]="snippets.reactiveForms" />
+    <ui-lib-code-snippet filename="Reactive forms" [code]="snippets.reactiveForms" />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

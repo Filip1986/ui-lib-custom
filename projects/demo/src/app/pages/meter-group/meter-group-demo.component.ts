@@ -12,7 +12,6 @@ import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -21,14 +20,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-meter-group-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    MeterGroup,
-    Button,
-    DocPageLayoutComponent,
-    DocTocComponent,
-    DocCodeSnippetComponent,
-  ],
+  imports: [CodeSnippet, MeterGroup, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

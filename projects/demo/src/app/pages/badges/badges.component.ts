@@ -10,7 +10,6 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
@@ -39,7 +38,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Tabs,
     Tab,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
     DocDemoViewportComponent,
     Card,
     FormsModule,

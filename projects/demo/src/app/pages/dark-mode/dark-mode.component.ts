@@ -14,7 +14,7 @@ import { UiLibSelect } from 'ui-lib-custom/select';
 import type { SelectOption } from 'ui-lib-custom/select';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /**
  * Demo page for dark mode theming.
@@ -35,7 +35,7 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
     UiLibInput,
     UiLibSelect,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './dark-mode.component.html',
   styleUrl: './dark-mode.component.scss',

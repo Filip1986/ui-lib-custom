@@ -6,7 +6,6 @@ import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -15,14 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-chip-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    Chip,
-    Button,
-    DocPageLayoutComponent,
-    DocTocComponent,
-    DocCodeSnippetComponent,
-  ],
+  imports: [CodeSnippet, Chip, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

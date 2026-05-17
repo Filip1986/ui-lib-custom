@@ -33,7 +33,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="basicOpen.set(true)">Open Sheet</ui-lib-button>
     </div>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
   </section>
 
   <!-- ---- With Header ---------------------------------------------- -->
@@ -46,7 +46,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="headerOpen.set(true)">Open with Header</ui-lib-button>
     </div>
-    <app-doc-code-snippet title="With header" [code]="snippets.withHeader" />
+    <ui-lib-code-snippet filename="With header" [code]="snippets.withHeader" />
   </section>
 
   <!-- ---- Footer Slot ---------------------------------------------- -->
@@ -59,7 +59,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="footerOpen.set(true)">Open with Footer</ui-lib-button>
     </div>
-    <app-doc-code-snippet title="Footer slot" [code]="snippets.footerSlot" />
+    <ui-lib-code-snippet filename="Footer slot" [code]="snippets.footerSlot" />
   </section>
 
   <!-- ---- Backdrop Dismiss ----------------------------------------- -->
@@ -72,7 +72,7 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="noBackdropOpen.set(true)">Open (backdrop locked)</ui-lib-button>
     </div>
-    <app-doc-code-snippet title="Disable backdrop dismiss" [code]="snippets.backdropDismiss" />
+    <ui-lib-code-snippet filename="Disable backdrop dismiss" [code]="snippets.backdropDismiss" />
   </section>
 
   <!-- ---- Variants ------------------------------------------------- -->
@@ -87,7 +87,7 @@
         <ui-lib-button (click)="openVariant(variant)">{{ variant }}</ui-lib-button>
       }
     </div>
-    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

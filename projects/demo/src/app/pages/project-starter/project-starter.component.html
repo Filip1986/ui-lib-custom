@@ -163,10 +163,10 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
-      <app-doc-code-snippet
+      <ui-lib-code-snippet
         title="Theme persistence"
         [code]="snippets.usage"
-      ></app-doc-code-snippet>
+      ></ui-lib-code-snippet>
     </ui-lib-card>
   }
 
@@ -180,11 +180,11 @@
       <section class="local-install-section">
         <h3>Step 0 — build the library</h3>
         <p>Every method below requires a fresh build output in <code>dist/ui-lib-custom/</code>.</p>
-        <app-doc-code-snippet
+        <ui-lib-code-snippet
           title="Build"
           language="bash"
           [code]="snippets.buildLib"
-        ></app-doc-code-snippet>
+        ></ui-lib-code-snippet>
       </section>
 
       <section class="local-install-section">
@@ -193,31 +193,31 @@
           Creates a global symlink so your consumer project always sees the latest build.
           Re-run <code>npm run build</code> in this workspace and the consumer picks up changes immediately.
         </p>
-        <app-doc-code-snippet
+        <ui-lib-code-snippet
           title="1. Register the link (run from dist/ui-lib-custom, not the repo root)"
           language="bash"
           [code]="snippets.npmLink1"
-        ></app-doc-code-snippet>
-        <app-doc-code-snippet
+        ></ui-lib-code-snippet>
+        <ui-lib-code-snippet
           title="2. Use the link in your other project"
           language="bash"
           [code]="snippets.npmLink2"
-        ></app-doc-code-snippet>
-        <app-doc-code-snippet
+        ></ui-lib-code-snippet>
+        <ui-lib-code-snippet
           title="3. Import components and directives (secondary entry points)"
           language="typescript"
           [code]="snippets.npmLinkImport"
-        ></app-doc-code-snippet>
-        <app-doc-code-snippet
+        ></ui-lib-code-snippet>
+        <ui-lib-code-snippet
           title="4. Add global theme styles (src/styles.scss)"
           language="scss"
           [code]="snippets.globalStyles"
-        ></app-doc-code-snippet>
-        <app-doc-code-snippet
+        ></ui-lib-code-snippet>
+        <ui-lib-code-snippet
           title="5. Add body-level directive styles (e.g. Tooltip)"
           language="scss"
           [code]="snippets.tooltipStyles"
-        ></app-doc-code-snippet>
+        ></ui-lib-code-snippet>
       </section>
 
       <section class="local-install-section">
@@ -226,11 +226,11 @@
           Point your <code>package.json</code> directly at the <code>dist/</code> folder.
           No global symlink needed — good for one-off integration tests.
         </p>
-        <app-doc-code-snippet
+        <ui-lib-code-snippet
           title="package.json + install"
           language="json"
           [code]="snippets.filePath"
-        ></app-doc-code-snippet>
+        ></ui-lib-code-snippet>
       </section>
 
       <section class="local-install-section">
@@ -239,16 +239,16 @@
           When you are ready to share the library, update the package name and publish from
           <code>dist/ui-lib-custom/</code>.
         </p>
-        <app-doc-code-snippet
+        <ui-lib-code-snippet
           title="Update package name"
           language="json"
           [code]="snippets.publishPackageJson"
-        ></app-doc-code-snippet>
-        <app-doc-code-snippet
+        ></ui-lib-code-snippet>
+        <ui-lib-code-snippet
           title="Publish steps"
           language="bash"
           [code]="snippets.publishSteps"
-        ></app-doc-code-snippet>
+        ></ui-lib-code-snippet>
       </section>
     </ui-lib-card>
   }

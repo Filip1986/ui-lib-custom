@@ -7,7 +7,6 @@ import type { RadioButtonChangeEvent } from 'ui-lib-custom/radio-button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface CityOption {
@@ -29,7 +28,6 @@ interface CityOption {
     JsonPipe,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocCodeSnippetComponent,
   ],
   templateUrl: './radio-button-demo.component.html',
   styleUrl: './radio-button-demo.component.scss',

@@ -10,7 +10,7 @@
         and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired
         colours. Fully integrated with <code>ui-lib-code-snippet</code>.
       </p>
-      <app-doc-code-snippet [code]="importCode" language="typescript" />
+      <ui-lib-code-snippet [code]="importCode" language="typescript" />
     </div>
 
     <!-- ── Overview ────────────────────────────────────────────────────────── -->
@@ -103,13 +103,13 @@
       </p>
 
       <h3 class="demo-section__subtitle">highlight()</h3>
-      <app-doc-code-snippet [code]="snippets.highlightUsage" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.highlightUsage" language="typescript" />
 
       <h3 class="demo-section__subtitle">tokenize()</h3>
-      <app-doc-code-snippet [code]="snippets.tokenizeUsage" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.tokenizeUsage" language="typescript" />
 
       <h3 class="demo-section__subtitle">escapeForCode()</h3>
-      <app-doc-code-snippet [code]="snippets.escapeUsage" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript" />
     </section>
 
     <!-- ── API ──────────────────────────────────────────────────────────────── -->
@@ -154,7 +154,7 @@
       </div>
 
       <h3 class="demo-section__subtitle" style="margin-top: 1.5rem;">SyntaxToken</h3>
-      <app-doc-code-snippet
+      <ui-lib-code-snippet
         [code]="syntaxTokenInterfaceCode"
         language="typescript"
       />
@@ -245,7 +245,7 @@
         Override any token colour via CSS custom properties on the host element or a parent
         container. All token colours are exposed as <code>--uilib-syntax-*</code> variables.
       </p>
-      <app-doc-code-snippet [code]="snippets.themeOverride" language="scss" />
+      <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss" />
     </section>
 
   </div>
