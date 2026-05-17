@@ -1,20 +1,18 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Virtual Scroller</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Virtual Scroller</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       Renders only the items currently visible in the viewport plus a configurable tolerance buffer,
       keeping large lists performant without changing the external API.
     </p>
-  </header>
+  </div>
 
   <!-- Scenario 1 – Vertical list  (10 000 items) -->
   <section class="demo-section" id="vertical" data-doc-anchor>

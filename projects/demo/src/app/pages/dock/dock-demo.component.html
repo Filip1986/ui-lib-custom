@@ -1,21 +1,19 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Dock</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Dock</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A macOS-style icon bar with a hover magnification effect. Items scale up smoothly when
       hovered, with neighbouring items receiving a proportional cascade. Supports four positions
       (bottom, top, left, right), three design variants, and three size tokens.
     </p>
-  </header>
+  </div>
 
   <!-- ── Basic ──────────────────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>

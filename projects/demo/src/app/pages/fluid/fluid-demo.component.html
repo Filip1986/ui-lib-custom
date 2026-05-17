@@ -1,16 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Fluid</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Fluid</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A layout wrapper that stretches all descendant form controls — inputs, textareas,
       selects, and buttons — to 100&nbsp;% of the available width.
       Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an
@@ -24,7 +22,7 @@
         <span class="fd-tag">Misc</span>
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- ── Section 1: Component usage ── -->
   <section class="demo-section" id="using-the-component" data-doc-anchor>

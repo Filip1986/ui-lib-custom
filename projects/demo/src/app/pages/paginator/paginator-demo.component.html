@@ -1,21 +1,19 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Paginator</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Paginator</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       Paginator provides page-based navigation for any list or data set.
       It supports three visual variants, three sizes, optional first/last buttons,
       a rows-per-page dropdown, a jump-to-page input, and content projection slots.
     </p>
-  </header>
+  </div>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
   <section class="demo-section" id="variants" data-doc-anchor>

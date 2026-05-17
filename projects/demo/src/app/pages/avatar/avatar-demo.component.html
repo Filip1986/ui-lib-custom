@@ -1,16 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Avatar</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Avatar</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       Represents a person or entity with an image, initials, or icon.
       Supports three shapes, three sizes, and three theme variants.
       Group multiple avatars with <code>AvatarGroup</code> for a stacked appearance.
@@ -36,7 +34,7 @@
         <ui-lib-avatar icon="pi pi-user" size="md" />
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- Section 1: Image avatars -->
   <section class="demo-section" id="image" data-doc-anchor>
