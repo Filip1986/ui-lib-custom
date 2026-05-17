@@ -13,7 +13,6 @@ import { IconButton, Alert } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.component';
 import { FormsModule } from '@angular/forms';
 
@@ -38,7 +37,6 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     Tab,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     IconBasicExampleComponent,
     FormsModule,
   ],

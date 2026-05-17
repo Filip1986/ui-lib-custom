@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { Card } from 'ui-lib-custom/card';
@@ -31,7 +30,6 @@ type KeyFilterDemoSnippetKey =
     FormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     Card,
     CodeSnippet,
     KeyFilterDirective,

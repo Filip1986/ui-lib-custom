@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -60,7 +59,6 @@ type AutoCompleteDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
-    CodePreviewComponent,
     Card,
     Button,
     CodeSnippet,

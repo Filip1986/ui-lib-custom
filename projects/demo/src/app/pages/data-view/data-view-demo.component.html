@@ -16,7 +16,6 @@
   <div class="examples">
     <section id="basic-list" data-doc-anchor class="example-section">
       <h3>1. Basic List</h3>
-      <app-code-preview [code]="snippet('basicList')">
         <ui-lib-card>
           <ui-lib-data-view [value]="shortProducts" [trackBy]="trackByProduct">
             <ng-template uiDataViewListItem let-item>
@@ -35,12 +34,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basicList')" />
     </section>
 
     <section id="basic-grid" data-doc-anchor class="example-section">
       <h3>2. Basic Grid</h3>
-      <app-code-preview [code]="snippet('basicGrid')">
         <ui-lib-card>
           <ui-lib-data-view [value]="shortProducts" layout="grid" [gridColumns]="4" [trackBy]="trackByProduct">
             <ng-template uiDataViewGridItem let-item>
@@ -52,12 +50,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basicGrid')" />
     </section>
 
     <section id="layout-switching" data-doc-anchor class="example-section">
       <h3>3. Layout Switching</h3>
-      <app-code-preview [code]="snippet('layoutSwitching')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-inline [gap]="2" align="center">
@@ -85,12 +82,11 @@
             </ui-lib-data-view>
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('layoutSwitching')" />
     </section>
 
     <section id="pagination-client" data-doc-anchor class="example-section">
       <h3>4. Pagination (Client-Side)</h3>
-      <app-code-preview [code]="snippet('paginationClient')">
         <ui-lib-card>
           <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
             <ng-template uiDataViewListItem let-item>
@@ -101,12 +97,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('paginationClient')" />
     </section>
 
     <section id="rows-per-page" data-doc-anchor class="example-section">
       <h3>5. Rows Per Page</h3>
-      <app-code-preview [code]="snippet('rowsPerPage')">
         <ui-lib-card>
           <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]">
             <ng-template uiDataViewListItem let-item>
@@ -117,12 +112,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('rowsPerPage')" />
     </section>
 
     <section id="pagination-position" data-doc-anchor class="example-section">
       <h3>6. Pagination Position</h3>
-      <app-code-preview [code]="snippet('paginationPosition')">
         <ui-lib-grid minColumnWidth="320px" [spacing]="4">
           <ui-lib-card>
             <h4 class="mini-heading">Top</h4>
@@ -151,12 +145,11 @@
             </ui-lib-data-view>
           </ui-lib-card>
         </ui-lib-grid>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('paginationPosition')" />
     </section>
 
     <section id="custom-page-report" data-doc-anchor class="example-section">
       <h3>7. Custom Page Report</h3>
-      <app-code-preview [code]="snippet('customPageReport')">
         <ui-lib-card>
           <ui-lib-data-view
             [value]="products"
@@ -173,7 +166,7 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('customPageReport')" />
     </section>
 
     <section id="server-side-pagination" data-doc-anchor class="example-section">
@@ -182,7 +175,6 @@
         This mock keeps <code>totalRecords</code> fixed and swaps in a sliced page on
         <code>pageChange</code> to emulate backend-driven pagination.
       </p>
-      <app-code-preview [code]="snippet('serverSidePagination')">
         <ui-lib-card>
           <ui-lib-data-view
             [value]="serverProducts"
@@ -205,12 +197,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('serverSidePagination')" />
     </section>
 
     <section id="sorting" data-doc-anchor class="example-section">
       <h3>9. Sorting (External Controls)</h3>
-      <app-code-preview [code]="snippet('sorting')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-inline [gap]="2" align="center">
@@ -232,12 +223,11 @@
             </ui-lib-data-view>
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('sorting')" />
     </section>
 
     <section id="custom-templates" data-doc-anchor class="example-section">
       <h3>10. Custom Templates</h3>
-      <app-code-preview [code]="snippet('customTemplates')">
         <ui-lib-card>
           <ui-lib-data-view
             [value]="customTemplateProducts"
@@ -287,12 +277,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('customTemplates')" />
     </section>
 
     <section id="empty-state" data-doc-anchor class="example-section">
       <h3>11. Empty State</h3>
-      <app-code-preview [code]="snippet('emptyState')">
         <ui-lib-grid minColumnWidth="340px" [spacing]="4">
           <ui-lib-card>
             <h4 class="mini-heading">Default Empty Message</h4>
@@ -311,12 +300,11 @@
             </ui-lib-data-view>
           </ui-lib-card>
         </ui-lib-grid>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('emptyState')" />
     </section>
 
     <section id="loading-state" data-doc-anchor class="example-section">
       <h3>12. Loading State</h3>
-      <app-code-preview [code]="snippet('loadingState')">
         <ui-lib-grid minColumnWidth="340px" [spacing]="4">
           <ui-lib-card>
             <h4 class="mini-heading">Default Loading</h4>
@@ -332,12 +320,11 @@
             </ui-lib-data-view>
           </ui-lib-card>
         </ui-lib-grid>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('loadingState')" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>13. Sizes</h3>
-      <app-code-preview [code]="snippet('sizes')">
         <ui-lib-grid minColumnWidth="280px" [spacing]="4" class="size-grid">
           <ui-lib-card>
             <h4 class="mini-heading">Small</h4>
@@ -366,12 +353,11 @@
             </ui-lib-data-view>
           </ui-lib-card>
         </ui-lib-grid>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
     </section>
 
     <section id="grid-columns" data-doc-anchor class="example-section">
       <h3>14. Grid Column Count</h3>
-      <app-code-preview [code]="snippet('gridColumns')">
         <ui-lib-grid minColumnWidth="340px" [spacing]="4">
           <ui-lib-card>
             <h4 class="mini-heading">2 Columns</h4>
@@ -400,12 +386,11 @@
             </ui-lib-data-view>
           </ui-lib-card>
         </ui-lib-grid>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('gridColumns')" />
     </section>
 
     <section id="custom-paginator-slots" data-doc-anchor class="example-section">
       <h3>15. Custom Paginator Slots</h3>
-      <app-code-preview [code]="snippet('customPaginatorSlots')">
         <ui-lib-card>
           <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]">
             <ng-template uiDataViewPaginatorLeft>
@@ -424,12 +409,11 @@
             </ng-template>
           </ui-lib-data-view>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('customPaginatorSlots')" />
     </section>
 
     <section id="theme-integration" data-doc-anchor class="example-section">
       <h3>16. Theme Integration</h3>
-      <app-code-preview [code]="snippet('themeIntegration')">
         <ui-lib-grid minColumnWidth="320px" [spacing]="4" class="theme-grid">
           <ui-lib-card class="theme-surface theme-surface--material">
             <h4 class="mini-heading">Material Profile</h4>
@@ -458,7 +442,7 @@
             </ui-lib-data-view>
           </ui-lib-card>
         </ui-lib-grid>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('themeIntegration')" />
     </section>
   </div>
 </app-doc-page-layout>

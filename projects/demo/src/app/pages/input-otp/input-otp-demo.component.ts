@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { Button } from 'ui-lib-custom/button';
@@ -37,7 +36,6 @@ type InputOtpDemoSnippetKey =
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     Card,
     Button,
     CodeSnippet,

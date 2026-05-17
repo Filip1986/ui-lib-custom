@@ -16,16 +16,14 @@
   <div class="examples">
     <section id="numerals" data-doc-anchor class="example-section">
       <h3>1. Numerals</h3>
-      <app-code-preview [code]="snippet('numerals')">
         <ui-lib-card>
           <uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('numerals')" />
     </section>
 
     <section id="decimal" data-doc-anchor class="example-section">
       <h3>2. Decimal</h3>
-      <app-code-preview [code]="snippet('decimal')">
         <ui-lib-card>
           <uilib-input-number
             [(ngModel)]="decimalValue"
@@ -34,12 +32,11 @@
             placeholder="0.00"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('decimal')" />
     </section>
 
     <section id="locale" data-doc-anchor class="example-section">
       <h3>3. Locale</h3>
-      <app-code-preview [code]="snippet('locale')">
         <ui-lib-card>
           <div class="row-4">
             <div>
@@ -60,12 +57,11 @@
             </div>
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('locale')" />
     </section>
 
     <section id="currency" data-doc-anchor class="example-section">
       <h3>4. Currency</h3>
-      <app-code-preview [code]="snippet('currency')">
         <ui-lib-card>
           <div class="row-2">
             <uilib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
@@ -90,12 +86,11 @@
             />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('currency')" />
     </section>
 
     <section id="prefix-suffix" data-doc-anchor class="example-section">
       <h3>5. Prefix &amp; Suffix</h3>
-      <app-code-preview [code]="snippet('prefixSuffix')">
         <ui-lib-card>
           <div class="row-2">
             <uilib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
@@ -104,12 +99,11 @@
             <uilib-input-number [(ngModel)]="temperature" suffix=" °C" />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('prefixSuffix')" />
     </section>
 
     <section id="buttons-stacked" data-doc-anchor class="example-section">
       <h3>6. Buttons Stacked</h3>
-      <app-code-preview [code]="snippet('buttonsStacked')">
         <ui-lib-card>
           <uilib-input-number
             [(ngModel)]="stackedAmount"
@@ -118,12 +112,11 @@
             [showButtons]="true"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('buttonsStacked')" />
     </section>
 
     <section id="buttons-horizontal" data-doc-anchor class="example-section">
       <h3>7. Buttons Horizontal</h3>
-      <app-code-preview [code]="snippet('buttonsHorizontal')">
         <ui-lib-card>
           <uilib-input-number
             [(ngModel)]="horizontalAmount"
@@ -134,12 +127,11 @@
             buttonLayout="horizontal"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('buttonsHorizontal')" />
     </section>
 
     <section id="buttons-vertical" data-doc-anchor class="example-section">
       <h3>8. Buttons Vertical</h3>
-      <app-code-preview [code]="snippet('buttonsVertical')">
         <ui-lib-card>
           <uilib-input-number
             [(ngModel)]="verticalAmount"
@@ -147,21 +139,19 @@
             buttonLayout="vertical"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('buttonsVertical')" />
     </section>
 
     <section id="step" data-doc-anchor class="example-section">
       <h3>9. Step</h3>
-      <app-code-preview [code]="snippet('step')">
         <ui-lib-card>
           <uilib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('step')" />
     </section>
 
     <section id="min-max" data-doc-anchor class="example-section">
       <h3>10. Min &amp; Max</h3>
-      <app-code-preview [code]="snippet('minMax')">
         <ui-lib-card>
           <uilib-input-number
             [(ngModel)]="boundedValue"
@@ -170,12 +160,11 @@
             [showButtons]="true"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('minMax')" />
     </section>
 
     <section id="float-label" data-doc-anchor class="example-section">
       <h3>11. Float Label</h3>
-      <app-code-preview [code]="snippet('floatLabel')">
         <ui-lib-card>
           <div class="row-3">
             <uilib-float-label variant="over">
@@ -192,12 +181,11 @@
             </uilib-float-label>
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" />
     </section>
 
     <section id="clear-icon" data-doc-anchor class="example-section">
       <h3>12. Clear Icon</h3>
-      <app-code-preview [code]="snippet('clearIcon')">
         <ui-lib-card>
           <uilib-input-number
             [(ngModel)]="clearableValue"
@@ -205,12 +193,11 @@
             [showButtons]="true"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('clearIcon')" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>13. Sizes</h3>
-      <app-code-preview [code]="snippet('sizes')">
         <ui-lib-card>
           <div class="row-3">
             <uilib-input-number [(ngModel)]="sizeValues.sm" size="sm" placeholder="Small" />
@@ -218,33 +205,30 @@
             <uilib-input-number [(ngModel)]="sizeValues.lg" size="lg" placeholder="Large" />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
     </section>
 
     <section id="disabled-invalid" data-doc-anchor class="example-section">
       <h3>14. Disabled &amp; Invalid</h3>
-      <app-code-preview [code]="snippet('disabledInvalid')">
         <ui-lib-card>
           <div class="row-2">
             <uilib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
             <uilib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('disabledInvalid')" />
     </section>
 
     <section id="filled" data-doc-anchor class="example-section">
       <h3>15. Filled</h3>
-      <app-code-preview [code]="snippet('filled')">
         <ui-lib-card>
           <uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
     </section>
 
     <section id="fluid" data-doc-anchor class="example-section">
       <h3>16. Fluid</h3>
-      <app-code-preview [code]="snippet('fluid')">
         <ui-lib-card>
           <div class="fluid-wrap">
             <uilib-input-number
@@ -255,13 +239,12 @@
             />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('fluid')" />
     </section>
 
     <section id="reactive-forms" data-doc-anchor class="example-section">
       <h3>17. Reactive Forms</h3>
       <ui-lib-card>
-        <app-code-preview [code]="snippet('reactive')">
           <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
             <uilib-input-number
               formControlName="amount"
@@ -277,7 +260,7 @@
               <p class="submitted-text">Submitted amount: {{ submittedAmount }}</p>
             }
           </form>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </ui-lib-card>
     </section>
   </div>

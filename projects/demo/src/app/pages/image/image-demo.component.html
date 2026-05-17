@@ -22,7 +22,6 @@
         <p class="section-text">
           Provide <code>src</code> and <code>alt</code> to render a simple image.
         </p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-image
@@ -31,7 +30,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <!-- ── b. Preview ───────────────────────────────────────────────────────── -->
@@ -43,7 +42,6 @@
           Inside the overlay you can <strong>zoom in/out</strong> and <strong>rotate</strong>
           the image, or press <kbd>Escape</kbd> to close.
         </p>
-        <app-code-preview [code]="snippet('preview')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-image
@@ -58,7 +56,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('preview')" />
       </section>
 
       <!-- ── c. Custom Indicator ──────────────────────────────────────────────── -->
@@ -68,7 +66,6 @@
           Replace the default eye-icon indicator with your own content using the
           <code>#imageIndicator</code> template slot.
         </p>
-        <app-code-preview [code]="snippet('customIndicator')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-image
@@ -82,7 +79,7 @@
               </ui-lib-image>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('customIndicator')" />
       </section>
 
       <!-- ── d. Error Fallback ─────────────────────────────────────────────────── -->
@@ -92,7 +89,6 @@
           Pass <code>errorSrc</code> to display an alternative image when the primary source
           fails to load.
         </p>
-        <app-code-preview [code]="snippet('errorFallback')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-image
@@ -102,7 +98,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('errorFallback')" />
       </section>
 
       <!-- ── e. Sizes ──────────────────────────────────────────────────────────── -->
@@ -112,7 +108,6 @@
           Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>)
           to control border-radius scaling and indicator icon sizing.
         </p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="demo-row demo-row--align-end">
               <div class="size-item">
@@ -144,7 +139,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <!-- ── f. Variants ───────────────────────────────────────────────────────── -->
@@ -155,7 +150,6 @@
           <code>bootstrap</code> (visible border, tighter radius), and <code>minimal</code>
           (no rounding).
         </p>
-        <app-code-preview [code]="snippet('variants')">
           <ui-lib-card>
             <div class="demo-row">
               <div class="variant-item">
@@ -187,7 +181,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
       </section>
 
       <!-- ── g. Custom Error Template ─────────────────────────────────────────── -->
@@ -197,7 +191,6 @@
           Use the <code>#imageError</code> template slot to render your own placeholder
           when the image fails to load and no <code>errorSrc</code> is set.
         </p>
-        <app-code-preview [code]="snippet('customError')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-image src="https://this-will-fail.invalid/broken.jpg" alt="Broken image">
@@ -210,7 +203,7 @@
               </ui-lib-image>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('customError')" />
       </section>
 
       <!-- ── h. Dimensions ─────────────────────────────────────────────────────── -->
@@ -220,7 +213,6 @@
           Pass <code>width</code> and <code>height</code> to constrain the image element size.
           These are forwarded directly to the underlying <code>&lt;img&gt;</code> element.
         </p>
-        <app-code-preview [code]="snippet('dimensions')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-image
@@ -231,7 +223,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('dimensions')" />
       </section>
 
       <!-- ── i. Two-Way Binding ──────────────────────────────────────────────── -->
@@ -241,7 +233,6 @@
           Use <code>[(previewVisible)]</code> to control and react to the overlay open state
           programmatically.
         </p>
-        <app-code-preview [code]="snippet('twoWayBinding')">
           <ui-lib-card>
             <div class="demo-col">
               <div class="demo-row">
@@ -255,7 +246,7 @@
               <p class="value-text">Preview open: <strong>{{ previewVisible() }}</strong></p>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('twoWayBinding')" />
       </section>
 
       <!-- ── API Table ─────────────────────────────────────────────────────────── -->

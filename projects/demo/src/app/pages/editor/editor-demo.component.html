@@ -18,7 +18,6 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Two-way binding with live HTML output.</p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="stack-md">
               <ui-lib-editor
@@ -28,17 +27,16 @@
               <pre class="value-pre">{{ basicHtml }}</pre>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>b. ReadOnly</h3>
         <p class="section-text">Pre-populated editor content in readonly mode.</p>
-        <app-code-preview [code]="snippet('readonly')">
           <ui-lib-card>
             <ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" />
       </section>
 
       <section id="custom-toolbar" data-doc-anchor class="example-section">
@@ -46,7 +44,6 @@
         <p class="section-text">
           Project your own toolbar and execute commands with a template reference variable.
         </p>
-        <app-code-preview [code]="snippet('customToolbar')">
           <ui-lib-card>
             <div class="stack-md">
               <ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
@@ -101,13 +98,12 @@
               <pre class="value-pre">{{ customToolbarHtml }}</pre>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('customToolbar')" />
       </section>
 
       <section id="template-driven" data-doc-anchor class="example-section">
         <h3>d. Template-Driven Form</h3>
         <p class="section-text">Required validation, submit action, and form state.</p>
-        <app-code-preview [code]="snippet('templateDriven')">
           <ui-lib-card>
             <form #templateForm="ngForm" (ngSubmit)="submitTemplateDriven(templateForm)" class="stack-md">
               <ui-lib-editor
@@ -124,13 +120,12 @@
               <pre class="value-pre">{{ templateDrivenSubmittedHtml ?? 'No submission yet' }}</pre>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')" />
       </section>
 
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>e. Reactive Form</h3>
         <p class="section-text">Reactive control binding with required validation.</p>
-        <app-code-preview [code]="snippet('reactive')">
           <ui-lib-card>
             <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
               <ui-lib-editor formControlName="content" placeholder="Required content..."></ui-lib-editor>
@@ -142,13 +137,12 @@
               <pre class="value-pre">{{ reactiveSubmittedHtml ?? 'No submission yet' }}</pre>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
         <h3>f. Variants</h3>
         <p class="section-text">Material, Bootstrap, and Minimal side by side.</p>
-        <app-code-preview [code]="snippet('variants')">
           <ui-lib-card>
             <div class="row-3">
               <div class="variant-column">
@@ -165,13 +159,12 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>g. Sizes</h3>
         <p class="section-text">Small, medium, and large size options.</p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="row-3">
               <div class="variant-column">
@@ -188,33 +181,30 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
         <h3>h. Filled</h3>
         <p class="section-text">Filled editor style useful on elevated backgrounds.</p>
-        <app-code-preview [code]="snippet('filled')">
           <ui-lib-card>
             <ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>i. Disabled</h3>
         <p class="section-text">Non-interactive state with preloaded content.</p>
-        <app-code-preview [code]="snippet('disabled')">
           <ui-lib-card>
             <ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
       </section>
 
       <section id="events" data-doc-anchor class="example-section">
         <h3>j. Events</h3>
         <p class="section-text">Visible event log for text and selection changes.</p>
-        <app-code-preview [code]="snippet('events')">
           <ui-lib-card>
             <div class="stack-md">
               <ui-lib-editor
@@ -237,7 +227,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('events')" />
       </section>
     </div>
   </app-doc-demo-viewport>

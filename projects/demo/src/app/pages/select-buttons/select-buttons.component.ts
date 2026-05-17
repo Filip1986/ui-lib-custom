@@ -20,7 +20,6 @@ import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { Icon } from 'ui-lib-custom/icon';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
 
@@ -43,7 +42,6 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
     Inline,
     Grid,
     DocPageLayoutComponent,
-    CodePreviewComponent,
     VariantComparisonComponent,
     SelectButtonBasicExampleComponent,
   ],

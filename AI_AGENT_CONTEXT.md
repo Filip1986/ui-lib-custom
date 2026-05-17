@@ -27,7 +27,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
-- `CodeSnippet` -> ⏳ scaffolded (component, entry point, demo, spec — ESLint + build not yet verified)
+- `CodeSnippet` -> ✅ integrated app-wide (demo build clean; all 36 demo pages migrated from app-code-preview)
 
 - `Accordion` -> ✅ complete + hardened (6-phase, score 9.0/10, 51 tests — 33 unit + 18 a11y)
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
@@ -81,6 +81,20 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-17 [Demo refactor: replaced app-code-preview with ui-lib-code-snippet app-wide]
+Changed:
+  - projects/demo/src/app/pages/**/*.html (36 files — app-code-preview → ui-lib-code-snippet)
+  - projects/demo/src/app/pages/**/*.ts (36 files — CodePreviewComponent import/declaration removed)
+  - projects/demo/src/app/pages/tree-select/tree-select-demo.component.ts (added CodeSnippet import; it was missing)
+  - projects/demo/src/app/pages/layouts/layouts.component.ts (added CodeSnippet import; it was missing)
+  - projects/demo/src/app/shared/index.ts (removed re-export of deleted CodePreviewComponent)
+  - projects/demo/src/app/shared/components/code-preview/ (DELETED — CodePreviewComponent fully removed)
+State: All 36 demo pages now use ui-lib-code-snippet directly. CodePreviewComponent is gone. No remaining app-code-preview references anywhere in the codebase. Demo build compiles cleanly — no template errors. Pre-existing SCSS budget warnings in roadmap/vision/button/date-picker remain (pre-existing, not new).
+Verification:
+  grep CodePreviewComponent|app-code-preview projects/demo/src → 0 matches
+  ng build demo (worktree) → zero template errors; only pre-existing SCSS budget warnings
+Next step: Run ESLint + full test suite, then serve demo to visually verify code snippets render correctly on several demo pages.
 
 Date: 2026-05-16 [New component: CodeSnippet — full scaffold complete]
 Changed:

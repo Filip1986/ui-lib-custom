@@ -16,7 +16,6 @@
 	<div class="examples">
 	  <section id="basic" data-doc-anchor class="example-section">
 		<h3>1. Basic</h3>
-		<app-code-preview [code]="snippet('basic')">
 		  <ui-lib-card>
 			<ui-lib-cascade-select
 			  [(ngModel)]="basicCode"
@@ -28,12 +27,11 @@
 			  placeholder="Select city"
 			/>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('basic')" />
 	  </section>
 
 	  <section id="template" data-doc-anchor class="example-section">
 		<h3>2. Template</h3>
-		<app-code-preview [code]="snippet('template')">
 		  <ui-lib-card>
 			<ui-lib-cascade-select
 			  [(ngModel)]="templatedCode"
@@ -72,12 +70,11 @@
 			  </ng-template>
 			</ui-lib-cascade-select>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('template')" />
 	  </section>
 
 	  <section id="loading" data-doc-anchor class="example-section">
 		<h3>3. Loading</h3>
-		<app-code-preview [code]="snippet('loading')">
 		  <ui-lib-card>
 			<div class="form-stack">
 			  <ui-lib-button type="button" color="secondary" (click)="toggleLoading()">
@@ -98,12 +95,11 @@
 			  </ui-lib-cascade-select>
 			</div>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('loading')" />
 	  </section>
 
 	  <section id="clear" data-doc-anchor class="example-section">
 		<h3>4. Clear Icon</h3>
-		<app-code-preview [code]="snippet('clear')">
 		  <ui-lib-card>
 			<ui-lib-cascade-select
 			  [(ngModel)]="clearableCode"
@@ -115,12 +111,11 @@
 			  optionValue="code"
 			/>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('clear')" />
 	  </section>
 
 	  <section id="sizes" data-doc-anchor class="example-section">
 		<h3>5. Sizes</h3>
-		<app-code-preview [code]="snippet('sizes')">
 		  <ui-lib-card>
 			<div class="row-3">
 			  <ui-lib-cascade-select
@@ -155,12 +150,11 @@
 			  />
 			</div>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
 	  </section>
 
 	  <section id="filled" data-doc-anchor class="example-section">
 		<h3>6. Filled</h3>
-		<app-code-preview [code]="snippet('filled')">
 		  <ui-lib-card>
 			<ui-lib-cascade-select
 			  [(ngModel)]="filledCode"
@@ -174,12 +168,11 @@
 			  placeholder="Filled variant"
 			/>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('filled')" />
 	  </section>
 
 	  <section id="fluid" data-doc-anchor class="example-section">
 		<h3>7. Fluid</h3>
-		<app-code-preview [code]="snippet('fluid')">
 		  <ui-lib-card>
 			<div class="narrow-parent">
 			  <ui-lib-cascade-select
@@ -194,12 +187,11 @@
 			  />
 			</div>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('fluid')" />
 	  </section>
 
 	  <section id="states" data-doc-anchor class="example-section">
 		<h3>8. States</h3>
-		<app-code-preview [code]="snippet('states')">
 		  <ui-lib-card>
 			<div class="row-2">
 			  <ui-lib-cascade-select
@@ -224,12 +216,11 @@
 			  />
 			</div>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('states')" />
 	  </section>
 
 	  <section id="forms" data-doc-anchor class="example-section">
 		<h3>9. Forms (Template-driven)</h3>
-		<app-code-preview [code]="snippet('forms')">
 		  <ui-lib-card>
 			<form #demoForm="ngForm" (ngSubmit)="submitTemplateDriven()" class="form-stack">
 			  <ui-lib-cascade-select
@@ -251,12 +242,11 @@
 			  }
 			</form>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('forms')" />
 	  </section>
 
 	  <section id="reactive-forms" data-doc-anchor class="example-section">
 		<h3>10. Reactive Forms</h3>
-		<app-code-preview [code]="snippet('reactive')">
 		  <ui-lib-card>
 			<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
 			  <ui-lib-cascade-select
@@ -275,12 +265,11 @@
 			  }
 			</form>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
 	  </section>
 
 	  <section id="variants" data-doc-anchor class="example-section">
 		<h3>11. Variants</h3>
-		<app-code-preview [code]="snippet('variants')">
 		  <ui-lib-card>
 			<div class="row-3">
 			  <ui-lib-cascade-select
@@ -315,12 +304,11 @@
 			  />
 			</div>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('variants')" />
 	  </section>
 
 	  <section id="clipping" data-doc-anchor class="example-section">
 		<h3>12. Clipping Container (Overflow Hidden)</h3>
-		<app-code-preview [code]="snippet('clipping')">
 		  <ui-lib-card>
 			<div class="clipping-card">
 			  <ui-lib-cascade-select
@@ -337,7 +325,7 @@
 			  </p>
 			</div>
 		  </ui-lib-card>
-		</app-code-preview>
+		<ui-lib-code-snippet language="html" [code]="snippet('clipping')" />
 	  </section>
 	</div>
   </app-doc-demo-viewport>

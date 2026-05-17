@@ -17,7 +17,6 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Label floats on focus and stays floated while value is present.</p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="stack-md">
               <uilib-float-label>
@@ -32,12 +31,11 @@
               <span class="value-text">Value: {{ basicValue || '(empty)' }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
       <section id="variants" data-doc-anchor class="example-section">
         <h3>b. Variants</h3>
         <p class="section-text">Over, In, and On label positioning variants.</p>
-        <app-code-preview [code]="snippet('variants')">
           <ui-lib-card>
             <div class="row-3">
               <div class="variant-column">
@@ -75,12 +73,11 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
       </section>
       <section id="with-select" data-doc-anchor class="example-section">
         <h3>c. With Select</h3>
         <p class="section-text">Uses wrapper state classes from `ui-lib-select` host.</p>
-        <app-code-preview [code]="snippet('select')">
           <ui-lib-card>
             <div class="stack-md">
               <uilib-float-label>
@@ -94,12 +91,11 @@
               <span class="value-text">Selected: {{ selectedCity || '(none)' }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('select')" />
       </section>
       <section id="with-textarea" data-doc-anchor class="example-section">
         <h3>d. With Textarea</h3>
         <p class="section-text">Label stays top-aligned for textarea controls.</p>
-        <app-code-preview [code]="snippet('textarea')">
           <ui-lib-card>
             <uilib-float-label>
               <textarea
@@ -111,12 +107,11 @@
               <label>Notes</label>
             </uilib-float-label>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('textarea')" />
       </section>
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>e. Invalid</h3>
         <p class="section-text">Required validation with dirty state across all variants.</p>
-        <app-code-preview [code]="snippet('invalid')">
           <ui-lib-card>
             <form [formGroup]="invalidForm" class="stack-md" novalidate>
               <div class="row-3">
@@ -138,12 +133,11 @@
               </ui-lib-button>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
       </section>
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>f. Reactive Forms</h3>
         <p class="section-text">FloatLabel inside a FormGroup with native and wrapper controls.</p>
-        <app-code-preview [code]="snippet('reactive')">
           <ui-lib-card>
             <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
               <uilib-float-label>
@@ -162,7 +156,7 @@
               <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </section>
     </div>
   </app-doc-demo-viewport>

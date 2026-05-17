@@ -20,7 +20,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { FormsModule } from '@angular/forms';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
@@ -53,7 +52,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     FormsModule,
-    CodePreviewComponent,
     VariantComparisonComponent,
     CardBasicExampleComponent,
     ThemeScopeDirective,

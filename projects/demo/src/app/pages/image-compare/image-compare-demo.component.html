@@ -25,7 +25,6 @@
           and <code>rightAlt</code>. Drag the handle to reveal more of either image.
           Use <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> keys for keyboard navigation.
         </p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
@@ -36,7 +35,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <!-- ── b. Two-Way Binding ───────────────────────────────────────────── -->
@@ -46,7 +45,6 @@
           Use <code>[(value)]</code> to read and control the slider position (0–100)
           programmatically.
         </p>
-        <app-code-preview [code]="snippet('twoWayBinding')">
           <ui-lib-card>
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
@@ -59,7 +57,7 @@
             </div>
             <p class="value-text">Position: <strong>{{ position() }}%</strong></p>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('twoWayBinding')" />
       </section>
 
       <!-- ── c. Sizes ─────────────────────────────────────────────────────── -->
@@ -69,7 +67,6 @@
           Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>)
           to scale the handle button.
         </p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="demo-col">
               <div class="size-item">
@@ -110,7 +107,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <!-- ── d. Variants ──────────────────────────────────────────────────── -->
@@ -121,7 +118,6 @@
           <code>bootstrap</code> (border, tighter radius), and <code>minimal</code>
           (no rounding).
         </p>
-        <app-code-preview [code]="snippet('variants')">
           <ui-lib-card>
             <div class="demo-col">
               <div class="variant-item">
@@ -162,7 +158,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
       </section>
 
       <!-- ── e. Disabled ──────────────────────────────────────────────────── -->
@@ -171,7 +167,6 @@
         <p class="section-text">
           Set <code>[disabled]="true"</code> to prevent the user from moving the slider.
         </p>
-        <app-code-preview [code]="snippet('disabled')">
           <ui-lib-card>
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
@@ -183,7 +178,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
       </section>
 
       <!-- ── f. Custom Label ──────────────────────────────────────────────── -->
@@ -193,7 +188,6 @@
           Use the <code>ariaLabel</code> input to provide a descriptive accessible label
           for the slider handle.
         </p>
-        <app-code-preview [code]="snippet('customLabel')">
           <ui-lib-card>
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
@@ -205,7 +199,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('customLabel')" />
       </section>
 
       <!-- ── API Table ─────────────────────────────────────────────────────── -->
