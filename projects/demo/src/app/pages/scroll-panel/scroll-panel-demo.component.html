@@ -1,23 +1,22 @@
-<div class="demo-page">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- ── Hero ─────────────────────────────────────────────────────────── -->
-  <section class="demo-hero">
-    <h1 class="demo-hero__title">ScrollPanel</h1>
+  <div class="doc-header" docHeader>
+    <h1>ScrollPanel</h1>
     <ui-lib-code-snippet
       language="typescript"
       [showLineNumbers]="false"
       size="sm"
       [code]="importCode"
     />
-    <p class="demo-hero__description">
+    <p class="doc-description">
       A styled scrollable container with variant-aware custom scrollbar theming.
       Constrain width and height via CSS or inline styles; content that overflows
       will scroll with beautifully themed scrollbars.
     </p>
-  </section>
+  </div>
 
   <!-- ── Basic Usage ───────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic-usage" data-doc-anchor>
     <h2 class="demo-section__title">Basic Usage</h2>
     <p class="demo-section__description">
       Wrap any content in <code>&lt;ui-lib-scroll-panel&gt;</code> and constrain its
@@ -42,7 +41,7 @@
   </section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three design variants are available: <code>material</code>, <code>bootstrap</code>,
@@ -72,7 +71,7 @@
   </section>
 
   <!-- ── Horizontal Scroll ─────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="horizontal" data-doc-anchor>
     <h2 class="demo-section__title">Horizontal &amp; Both Axes</h2>
     <p class="demo-section__description">
       When the content is wider than the container, a horizontal scrollbar appears.
@@ -100,7 +99,7 @@
   </section>
 
   <!-- ── Interactive Variant Switcher ─────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="interactive-variant-switcher" data-doc-anchor>
     <h2 class="demo-section__title">Interactive Variant Switcher</h2>
     <p class="demo-section__description">
       Switch between variants at runtime. The scrollbar styling updates immediately
@@ -137,7 +136,7 @@
   </section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="custom-css-properties" data-doc-anchor>
     <h2 class="demo-section__title">Custom Scrollbar via CSS Properties</h2>
     <p class="demo-section__description">
       All scrollbar visuals are driven by CSS custom properties. Override them
@@ -163,7 +162,7 @@
   </section>
 
   <!-- ── API Reference ─────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api-reference" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
@@ -241,4 +240,13 @@
     </table>
   </section>
 
-</div>
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>
