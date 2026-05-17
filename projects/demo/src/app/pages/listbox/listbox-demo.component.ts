@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -33,12 +35,20 @@ type ListboxDemoSnippetKey =
     Card,
     CodeSnippet,
     ListboxComponent,
+    DocTocComponent,
   ],
   templateUrl: './listbox-demo.component.html',
   styleUrl: './listbox-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListboxDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string = "import { ListboxComponent } from 'ui-lib-custom/listbox'";
 
   public readonly sections: DocSection[] = [

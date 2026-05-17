@@ -1,5 +1,6 @@
 ﻿import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +10,7 @@ import {
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -59,6 +61,7 @@ type AutoCompleteDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     Card,
     Button,
     CodeSnippet,
@@ -78,6 +81,9 @@ export class AutoCompleteDemoComponent {
   public readonly importCode: string =
     "import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'objects', label: 'Objects' },
@@ -95,6 +101,10 @@ export class AutoCompleteDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<AutoCompleteDemoSnippetKey, string> = {
     basic: `<ui-lib-autocomplete

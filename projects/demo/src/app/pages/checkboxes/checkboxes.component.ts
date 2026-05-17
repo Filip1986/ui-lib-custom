@@ -5,6 +5,7 @@ import {
   ViewEncapsulation,
   computed,
   signal,
+  viewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import {
@@ -23,6 +24,7 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
@@ -45,6 +47,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     Card,
     Button,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -58,6 +61,9 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
 export class CheckboxesComponent {
   public readonly importCode: string = "import { Checkbox } from 'ui-lib-custom/checkbox'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
@@ -65,6 +71,10 @@ export class CheckboxesComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: CheckboxSize[] = ['sm', 'md', 'lg'];

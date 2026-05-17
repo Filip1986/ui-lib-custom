@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild, type WritableSignal } from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
@@ -118,12 +120,20 @@ const SNIPPETS: Record<string, string> = {
     PickListSourceHeaderDirective,
     PickListTargetHeaderDirective,
     PickListEmptyDirective,
+    DocTocComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
   styleUrl: './pick-list-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PickListDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string =
     "import { PickListComponent } from 'ui-lib-custom/pick-list'";
 

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Card } from 'ui-lib-custom/card';
@@ -15,13 +16,16 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
 @Component({
   selector: 'app-image-compare-demo',
   standalone: true,
-  imports: [DocPageLayoutComponent, DocDemoViewportComponent, Card, CodeSnippet, ImageCompare],
+  imports: [DocPageLayoutComponent, DocTocComponent, DocDemoViewportComponent, Card, CodeSnippet, ImageCompare],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageCompareDemoComponent {
   public readonly importCode: string = "import { ImageCompare } from 'ui-lib-custom/image-compare'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
 
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
@@ -34,6 +38,10 @@ export class ImageCompareDemoComponent {
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly position: WritableSignal<number> = signal<number>(50);
 

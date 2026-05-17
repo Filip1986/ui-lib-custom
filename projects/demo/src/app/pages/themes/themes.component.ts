@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal, viewChild } from '@angular/core';
+import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Badge } from 'ui-lib-custom/badge';
@@ -10,6 +10,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Router } from '@angular/router';
@@ -36,6 +37,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     UiLibInput,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
+    DocTocComponent,
     CodeSnippet,
   ],
   templateUrl: './themes.component.html',
@@ -43,6 +45,13 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemesComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   private readonly router: Router = inject(Router);
 

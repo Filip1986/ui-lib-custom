@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -52,6 +54,7 @@ type DataViewDemoSnippetKey =
   imports: [
     CommonModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     Card,
     Button,
     CodeSnippet,
@@ -77,6 +80,9 @@ export class DataViewDemoComponent {
   public readonly importCode: string =
     "import { DataViewComponent } from 'ui-lib-custom/data-view'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic-list', label: 'Basic List' },
     { id: 'basic-grid', label: 'Basic Grid' },
@@ -95,6 +101,10 @@ export class DataViewDemoComponent {
     { id: 'custom-paginator-slots', label: 'Custom Paginator Slots' },
     { id: 'theme-integration', label: 'Theme Integration' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<DataViewDemoSnippetKey, string> = {
     basicList: `<ui-lib-data-view [value]="products">

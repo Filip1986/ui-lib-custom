@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeScopeDirective, DarkThemeDirective, LightThemeDirective } from 'ui-lib-custom/theme';
 import type { ThemeScopeConfig } from 'ui-lib-custom/theme';
@@ -9,6 +10,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /**
@@ -28,6 +30,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     UiLibInput,
     Checkbox,
     DocPageLayoutComponent,
+    DocTocComponent,
     CodeSnippet,
   ],
   templateUrl: './scoped-theming.component.html',
@@ -35,6 +38,13 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScopedThemingComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic Scoped Themes' },
     { id: 'directive', label: 'Directive Usage' },

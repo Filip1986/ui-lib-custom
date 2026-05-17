@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Card } from 'ui-lib-custom/card';
@@ -22,13 +23,16 @@ type SnippetKey =
 @Component({
   selector: 'app-image-demo',
   standalone: true,
-  imports: [DocPageLayoutComponent, DocDemoViewportComponent, Card, CodeSnippet, Image],
+  imports: [DocPageLayoutComponent, DocTocComponent, DocDemoViewportComponent, Card, CodeSnippet, Image],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageDemoComponent {
   public readonly importCode: string = "import { Image } from 'ui-lib-custom/image'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
 
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
@@ -43,6 +47,10 @@ export class ImageDemoComponent {
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
 

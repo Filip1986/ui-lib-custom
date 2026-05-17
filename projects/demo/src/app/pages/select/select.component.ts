@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewChild,
   signal,
   computed,
   inject,
   effect,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { SelectBasicExampleComponent } from '@demo/examples/select-basic-example.component';
@@ -55,12 +57,20 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Card,
     VariantComparisonComponent,
     SelectBasicExampleComponent,
+    DocTocComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string = "import { UiLibSelect } from 'ui-lib-custom/select'";
 
   public readonly sections: DocSection[] = [

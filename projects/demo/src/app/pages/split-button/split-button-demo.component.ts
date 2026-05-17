@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild, type WritableSignal } from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { Icon } from 'ui-lib-custom/icon';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
@@ -26,12 +28,20 @@ import type {
     CodeSnippet,
     SplitButtonComponent,
     SplitButtonContentDirective,
+    DocTocComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitButtonDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string =
     "import { SplitButtonComponent } from 'ui-lib-custom/split-button'";
 

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card } from 'ui-lib-custom/card';
 import type { CardElevation } from 'ui-lib-custom/card';
@@ -9,6 +9,7 @@ import { SHADOWS } from 'ui-lib-custom/tokens';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 interface ElevationExample {
@@ -35,6 +36,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     Tab,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
+    DocTocComponent,
     CodeSnippet,
   ],
   templateUrl: './shadows.component.html',
@@ -42,6 +44,13 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShadowsComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +10,7 @@ import {
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Card } from 'ui-lib-custom/card';
 import { UiLibInput } from 'ui-lib-custom/input';
@@ -41,6 +43,7 @@ type FloatLabelDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     Card,
     UiLibInput,
@@ -57,6 +60,9 @@ export class FloatLabelDemoComponent {
   public readonly importCode: string =
     "import { FloatLabelComponent } from 'ui-lib-custom/float-label'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'variants', label: 'Variants' },
@@ -65,6 +71,10 @@ export class FloatLabelDemoComponent {
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive', label: 'Reactive Forms' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<FloatLabelDemoSnippetKey, string> = {
     basic: `<uilib-float-label>

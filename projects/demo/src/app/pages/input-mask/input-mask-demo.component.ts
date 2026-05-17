@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,6 +11,7 @@ import {
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
@@ -48,6 +50,7 @@ type InputMaskDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     Card,
     Button,
@@ -62,6 +65,9 @@ type InputMaskDemoSnippetKey =
 export class InputMaskDemoComponent {
   public readonly importCode: string =
     "import { InputMaskComponent } from 'ui-lib-custom/input-mask'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
 
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
@@ -78,6 +84,10 @@ export class InputMaskDemoComponent {
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<InputMaskDemoSnippetKey, string> = {
     basic: `<uilib-input-mask

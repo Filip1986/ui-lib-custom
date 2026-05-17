@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   FormControl,
@@ -10,6 +11,7 @@ import {
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { UiLibTextarea } from 'ui-lib-custom/textarea';
@@ -42,12 +44,20 @@ type TextareaDemoSnippetKey =
     Card,
     Button,
     UiLibTextarea,
+    DocTocComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string = "import { UiLibTextarea } from 'ui-lib-custom/textarea'";
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },

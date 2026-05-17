@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
@@ -36,6 +38,7 @@ type InputGroupDemoSnippetKey =
     CommonModule,
     FormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     Card,
     UiLibInput,
@@ -54,6 +57,9 @@ export class InputGroupDemoComponent {
   public readonly importCode: string =
     "import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple' },
@@ -62,6 +68,10 @@ export class InputGroupDemoComponent {
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<InputGroupDemoSnippetKey, string> = {
     basic: `<uilib-input-group>

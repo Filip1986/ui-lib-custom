@@ -9,7 +9,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
- *
+ * Demo page for the Toast component.
  */
 @Component({
   selector: 'app-toast-demo',

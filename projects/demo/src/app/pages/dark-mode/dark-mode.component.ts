@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
@@ -13,6 +13,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import type { SelectOption } from 'ui-lib-custom/select';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
@@ -35,6 +36,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     UiLibInput,
     UiLibSelect,
     DocPageLayoutComponent,
+    DocTocComponent,
     CodeSnippet,
   ],
   templateUrl: './dark-mode.component.html',
@@ -43,6 +45,9 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 })
 export class DarkModeComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
 
   public readonly mode: Signal<ThemeMode> = computed<ThemeMode>(
     (): ThemeMode => this.themeService.mode()
@@ -59,6 +64,10 @@ export class DarkModeComponent {
     { id: 'showcase', label: 'Component Showcase' },
     { id: 'implementation', label: 'Implementation' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly selectOptions: SelectOption[] = [
     { label: 'Option One', value: 'one' },

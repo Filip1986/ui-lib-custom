@@ -1,8 +1,9 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  signal,
   ViewChild,
+  signal,
+  viewChild,
   computed,
   inject,
   effect,
@@ -20,6 +21,7 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
@@ -51,6 +53,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Tabs,
     Tab,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
     FormsModule,
@@ -64,6 +67,9 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
 export class InputsComponent {
   public readonly importCode: string = "import { UiLibInput } from 'ui-lib-custom/input'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
@@ -72,6 +78,10 @@ export class InputsComponent {
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
