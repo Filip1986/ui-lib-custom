@@ -1,14 +1,27 @@
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
+
+const VALID_LANGUAGES: ReadonlySet<string> = new Set<string>([
+  'javascript',
+  'typescript',
+  'html',
+  'css',
+  'scss',
+  'json',
+  'bash',
+  'shell',
+  'text',
+]);
 
 /**
- * Renders a copyable code snippet block for documentation pages.
+ * Thin wrapper around ui-lib-code-snippet for documentation pages.
+ * Keeps the existing @Input() API so all demo pages remain unchanged.
  */
 @Component({
   selector: 'app-doc-code-snippet',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CodeSnippet],
   templateUrl: './doc-code-snippet.component.html',
   styleUrl: './doc-code-snippet.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,38 +29,13 @@ import { CommonModule } from '@angular/common';
 export class DocCodeSnippetComponent {
   @Input() public title: string = 'Code';
   @Input({ required: true }) public code: string = '';
-  @Input() public language: string = '';
+  @Input() public language: string = 'text';
 
-  public readonly copied: WritableSignal<boolean> = signal<boolean>(false);
-
-  public async copy(): Promise<void> {
-    const text: string = this.code.trimEnd();
-
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      this.fallbackCopy(text);
-    }
-
-    this.showCopiedState();
+  public get filename(): string | null {
+    return this.title !== 'Code' ? this.title : null;
   }
 
-  private fallbackCopy(text: string): void {
-    const textarea: HTMLTextAreaElement = document.createElement('textarea');
-    textarea.value = text;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    textarea.style.left = '-9999px';
-
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-  }
-
-  private showCopiedState(): void {
-    this.copied.set(true);
-    setTimeout((): void => this.copied.set(false), 1500);
+  public get codeLanguage(): CodeSnippetLanguage {
+    return VALID_LANGUAGES.has(this.language) ? (this.language as CodeSnippetLanguage) : 'text';
   }
 }
