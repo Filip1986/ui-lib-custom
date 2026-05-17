@@ -14,7 +14,9 @@
   </div>
 
     <app-tabs-basic-example />
-  <ui-lib-code-snippet language="html" [code]="tabsExample" />
+  <ui-lib-code-snippet language="html" [code]="tabsExample" 
+    [showLineNumbers]="true"
+    />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -548,14 +550,46 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
-      <ui-lib-code-snippet filename="Basic" [code]="snippets.basic"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Icon tabs" [code]="snippets.icons"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Vertical" [code]="snippets.vertical"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Closable" [code]="snippets.closable"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Controlled" [code]="snippets.controlled"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Scrollable" [code]="snippets.scrollable"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Tab menu" [code]="snippets.tabMenu"></ui-lib-code-snippet>
-      <ui-lib-code-snippet filename="Per-tab lazy" [code]="snippets.perTabLazy" />
+      <ui-lib-code-snippet
+        language="html"
+        filename="Basic" [code]="snippets.basic"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Icon tabs" [code]="snippets.icons"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Vertical" [code]="snippets.vertical"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Closable" [code]="snippets.closable"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Controlled" [code]="snippets.controlled"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Scrollable" [code]="snippets.scrollable"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Tab menu" [code]="snippets.tabMenu"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Per-tab lazy" [code]="snippets.perTabLazy" 
+        [showLineNumbers]="true"
+        />
     </ui-lib-card>
   }
 

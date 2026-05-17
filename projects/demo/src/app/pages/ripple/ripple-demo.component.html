@@ -35,7 +35,11 @@
       <ui-lib-button severity="secondary" uiLibRipple>Secondary Button</ui-lib-button>
       <ui-lib-button severity="danger" uiLibRipple>Danger Button</ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Basic" [code]="snippets.basic" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Dark ripple ---------------------------------------------- -->
@@ -61,7 +65,11 @@
         Click me — card surface
       </div>
     </div>
-    <ui-lib-code-snippet filename="Dark ripple" [code]="snippets.darkRipple" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Dark ripple" [code]="snippets.darkRipple" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Custom duration ------------------------------------------ -->
@@ -76,7 +84,11 @@
       <ui-lib-button severity="primary" uiLibRipple>Default (600ms)</ui-lib-button>
       <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'">Slow (1200ms)</ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="Custom duration" [code]="snippets.customDuration" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Custom duration" [code]="snippets.customDuration" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
@@ -98,7 +110,11 @@
         Toggle ripple (currently: {{ isDisabled() ? 'OFF' : 'ON' }})
       </ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="Disabled" [code]="snippets.disabled" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Disabled" [code]="snippets.disabled" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Any element ---------------------------------------------- -->
@@ -122,7 +138,11 @@
         </li>
       </ul>
     </div>
-    <ui-lib-code-snippet filename="Any element" [code]="snippets.anyElement" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Any element" [code]="snippets.anyElement" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

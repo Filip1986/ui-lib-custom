@@ -31,7 +31,11 @@
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-meter-group [values]="basicItems" />
     </div>
-    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Basic" [code]="snippets.basic" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Label Position ------------------------------------------- -->
@@ -52,7 +56,11 @@
         <ui-lib-meter-group [values]="storageItems" labelPosition="end" />
       </div>
     </div>
-    <ui-lib-code-snippet filename="Label position" [code]="snippets.labelPosition" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Label position" [code]="snippets.labelPosition" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
@@ -69,7 +77,11 @@
         </div>
       }
     </div>
-    <ui-lib-code-snippet filename="Sizes" [code]="snippets.sizes" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Sizes" [code]="snippets.sizes" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Design Variants ------------------------------------------ -->
@@ -89,7 +101,11 @@
         </div>
       }
     </div>
-    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Variants" [code]="snippets.variants" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Vertical Orientation -------------------------------------- -->
@@ -109,7 +125,11 @@
         <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="start" />
       </div>
     </div>
-    <ui-lib-code-snippet filename="Vertical" [code]="snippets.vertical" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Vertical" [code]="snippets.vertical" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- No Legend ------------------------------------------------ -->
@@ -122,7 +142,11 @@
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-meter-group [values]="basicItems" [showLabels]="false" />
     </div>
-    <ui-lib-code-snippet filename="No legend" [code]="snippets.noLegend" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="No legend" [code]="snippets.noLegend" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Playground ----------------------------------------------- -->

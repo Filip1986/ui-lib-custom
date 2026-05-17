@@ -38,7 +38,11 @@
         &nbsp;— last change: {{ lastEvent.value }}
       }
     </p>
-    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Basic" [code]="snippets.basic" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Pre-selected --------------------------------------------- -->
@@ -51,7 +55,11 @@
       <ui-lib-rating [(ngModel)]="preselectedRating" />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ preselectedRating }}</strong></p>
-    <ui-lib-code-snippet filename="Pre-selected" [code]="snippets.preSelected" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Pre-selected" [code]="snippets.preSelected" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- No Cancel ------------------------------------------------ -->
@@ -64,7 +72,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="noCancelRating" [cancel]="false" />
     </div>
-    <ui-lib-code-snippet filename="No cancel" [code]="snippets.noCancel" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="No cancel" [code]="snippets.noCancel" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Variants ------------------------------------------------- -->
@@ -89,7 +101,11 @@
         <ui-lib-rating variant="minimal" [ngModel]="4" [cancel]="false" [readonly]="true" />
       </div>
     </div>
-    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Variants" [code]="snippets.variants" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
@@ -112,7 +128,11 @@
         <ui-lib-rating size="lg" [ngModel]="3" [cancel]="false" [readonly]="true" />
       </div>
     </div>
-    <ui-lib-code-snippet filename="Sizes" [code]="snippets.sizes" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Sizes" [code]="snippets.sizes" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Custom Star Count ---------------------------------------- -->
@@ -125,7 +145,11 @@
       <ui-lib-rating [stars]="10" [(ngModel)]="tenStarRating" />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ tenStarRating }}</strong></p>
-    <ui-lib-code-snippet filename="Custom star count" [code]="snippets.starCount" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Custom star count" [code]="snippets.starCount" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Readonly ------------------------------------------------- -->
@@ -139,7 +163,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [readonly]="true" [(ngModel)]="readonlyRating" />
     </div>
-    <ui-lib-code-snippet filename="Readonly" [code]="snippets.readonly" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Readonly" [code]="snippets.readonly" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
@@ -152,7 +180,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
     </div>
-    <ui-lib-code-snippet filename="Disabled" [code]="snippets.disabled" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Disabled" [code]="snippets.disabled" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Events --------------------------------------------------- -->
@@ -180,7 +212,11 @@
         <li class="demo-rating-event-log__empty">No events yet — click a star or use Tab / keyboard.</li>
       }
     </ul>
-    <ui-lib-code-snippet filename="Events" [code]="snippets.events" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Events" [code]="snippets.events" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Custom Templates ----------------------------------------- -->
@@ -198,7 +234,11 @@
       </ui-lib-rating>
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ customTemplateRating ?? 'none' }}</strong></p>
-    <ui-lib-code-snippet filename="Custom templates" [code]="snippets.customTemplates" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Custom templates" [code]="snippets.customTemplates" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Inline Styles -------------------------------------------- -->
@@ -217,7 +257,11 @@
       />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ styledRating ?? 'none' }}</strong></p>
-    <ui-lib-code-snippet filename="Inline styles" [code]="snippets.inlineStyles" />
+    <ui-lib-code-snippet
+      language="css"
+      filename="Inline styles" [code]="snippets.inlineStyles" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
@@ -241,7 +285,11 @@
       </form>
     </div>
     <p class="demo-rating-hint">Form value: <strong>{{ reviewForm.value | json }}</strong></p>
-    <ui-lib-code-snippet filename="Reactive forms" [code]="snippets.reactiveForms" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Reactive forms" [code]="snippets.reactiveForms" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

@@ -26,7 +26,9 @@
               <span class="value-text">Selected HEX {{ displayHexValue(basicHex) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="inline" data-doc-anchor class="example-section">
@@ -35,7 +37,9 @@
           <ui-lib-card>
             <ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('inline')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('inline')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="formats" data-doc-anchor class="example-section">
@@ -57,7 +61,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('formats')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('formats')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="template-driven" data-doc-anchor class="example-section">
@@ -76,7 +82,9 @@
               }
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="reactive" data-doc-anchor class="example-section">
@@ -91,7 +99,9 @@
               }
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
@@ -103,7 +113,9 @@
               <span class="value-text">Disabled value {{ displayHexValue(disabledValue) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
@@ -125,7 +137,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="clipping" data-doc-anchor class="example-section">
@@ -139,7 +153,9 @@
               <p class="value-text clipping-note">Selected {{ displayHexValue(clippingValue) }}</p>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('clipping')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('clipping')" 
+          [showLineNumbers]="true"
+          />
       </section>
     </div>
   </app-doc-demo-viewport>

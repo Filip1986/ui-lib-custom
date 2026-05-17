@@ -16,7 +16,9 @@
       <strong>accordion + menu</strong> accessibility pattern.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet [code]="snippets.import" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.import" language="typescript" 
+        [showLineNumbers]="true"
+        />
     </div>
   </header>
 
@@ -29,7 +31,9 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="basicModel" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.basic" language="html" />
+    <ui-lib-code-snippet [code]="snippets.basic" language="html" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ── Initially Expanded ─────────────────────────────────────────────── -->
@@ -41,7 +45,9 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="expandedModel" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.expanded" language="typescript" />
+    <ui-lib-code-snippet [code]="snippets.expanded" language="typescript" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ── Multiple Mode ──────────────────────────────────────────────────── -->
@@ -54,7 +60,9 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="multipleModel" [multiple]="true" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.multiple" language="html" />
+    <ui-lib-code-snippet [code]="snippets.multiple" language="html" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ── Nested Sub-Items ───────────────────────────────────────────────── -->
@@ -91,7 +99,9 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="urlModel" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.urlItems" language="typescript" />
+    <ui-lib-code-snippet [code]="snippets.urlItems" language="typescript" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ── Variants ───────────────────────────────────────────────────────── -->
@@ -168,7 +178,9 @@
         }
       </div>
     </div>
-    <ui-lib-code-snippet [code]="snippets.events" language="html" />
+    <ui-lib-code-snippet [code]="snippets.events" language="html" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ── API ────────────────────────────────────────────────────────────── -->

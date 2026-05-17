@@ -14,7 +14,9 @@
   </div>
 
     <app-checkbox-basic-example />
-  <ui-lib-code-snippet language="html" [code]="checkboxExample" />
+  <ui-lib-code-snippet language="html" [code]="checkboxExample" 
+    [showLineNumbers]="true"
+    />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -540,7 +542,11 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
-      <ui-lib-code-snippet filename="Usage" [code]="snippets.usage"></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Usage" [code]="snippets.usage"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
     </ui-lib-card>
   }
 
