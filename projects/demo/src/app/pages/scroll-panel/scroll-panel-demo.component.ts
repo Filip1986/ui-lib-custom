@@ -1,23 +1,43 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { WritableSignal, Signal } from '@angular/core';
 import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 import type { ScrollPanelVariant } from 'ui-lib-custom/scroll-panel';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
- * Demo page for the ScrollPanel component.
+ *
  */
 @Component({
   selector: 'app-scroll-panel-demo',
   standalone: true,
-  imports: [CodeSnippet, ScrollPanel, Button],
+  imports: [CodeSnippet, ScrollPanel, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollPanelDemoComponent {
   public readonly importCode: string = "import { ScrollPanel } from 'ui-lib-custom/scroll-panel'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'horizontal', label: 'Horizontal & Both Axes' },
+    { id: 'interactive-variant-switcher', label: 'Interactive Variant Switcher' },
+    { id: 'custom-css-properties', label: 'Custom CSS Properties' },
+    { id: 'api-reference', label: 'API Reference' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly snippetBasicUsage: string = `<ui-lib-scroll-panel style="height: 200px;">\n  <p>Long content...</p>\n  <p>More content...</p>\n</ui-lib-scroll-panel>`;
   public readonly snippetVariants: string = `<ui-lib-scroll-panel [variant]="'material'" style="height: 200px;">...</ui-lib-scroll-panel>\n<ui-lib-scroll-panel [variant]="'bootstrap'" style="height: 200px;">...</ui-lib-scroll-panel>\n<ui-lib-scroll-panel [variant]="'minimal'" style="height: 200px;">...</ui-lib-scroll-panel>`;
   public readonly snippetHorizontal: string = `<ui-lib-scroll-panel style="height: 160px; width: 100%;">\n  <div style="display: flex; gap: 1rem; width: max-content;">\n    <!-- wide content -->\n  </div>\n</ui-lib-scroll-panel>`;

@@ -1,22 +1,45 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
+import type { WritableSignal, Signal } from '@angular/core';
 import { Toast, ToastService } from 'ui-lib-custom/toast';
 import type { ToastPosition, ToastSeverity, ToastVariant } from 'ui-lib-custom/toast';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
- * Demo page for the Toast component.
+ *
  */
 @Component({
   selector: 'app-toast-demo',
   standalone: true,
-  imports: [Toast, Button],
+  imports: [Toast, Button, CodeSnippet, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './toast-demo.component.html',
   styleUrl: './toast-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastDemoComponent {
   private readonly toastService: ToastService = inject(ToastService);
+
+  public readonly importCode: string = "import { Toast, ToastService } from 'ui-lib-custom/toast'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'severities', label: 'Severities' },
+    { id: 'multiple-toasts', label: 'Multiple Toasts' },
+    { id: 'sticky-non-closable', label: 'Sticky & Non-Closable' },
+    { id: 'auto-dismiss-duration', label: 'Auto-dismiss Duration' },
+    { id: 'position-variant', label: 'Position & Variant' },
+    { id: 'keyed-containers', label: 'Keyed Containers' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   /** Currently selected position for interactive demos. */
   public readonly selectedPosition: WritableSignal<ToastPosition> =
@@ -38,7 +61,6 @@ export class ToastDemoComponent {
   /** Available variants. */
   public readonly variants: ToastVariant[] = ['material', 'bootstrap', 'minimal'];
 
-  /** Show a success toast. */
   public showSuccess(): void {
     this.toastService.add({
       severity: 'success',
@@ -48,7 +70,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show an info toast. */
   public showInfo(): void {
     this.toastService.add({
       severity: 'info',
@@ -58,7 +79,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show a warning toast. */
   public showWarn(): void {
     this.toastService.add({
       severity: 'warn',
@@ -68,7 +88,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show an error toast. */
   public showError(): void {
     this.toastService.add({
       severity: 'error',
@@ -78,7 +97,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show multiple toasts at once. */
   public showMultiple(): void {
     this.toastService.add({
       severity: 'success',
@@ -93,7 +111,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show a sticky toast that does not auto-dismiss. */
   public showSticky(): void {
     this.toastService.add({
       severity: 'warn',
@@ -103,7 +120,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show a toast without a close button. */
   public showNonClosable(): void {
     this.toastService.add({
       severity: 'info',
@@ -114,7 +130,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show a toast with a short life for the quick-dismiss demo. */
   public showShortLife(): void {
     this.toastService.add({
       severity: 'success',
@@ -124,7 +139,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show a toast with a long life. */
   public showLongLife(): void {
     this.toastService.add({
       severity: 'info',
@@ -134,7 +148,6 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Show a toast routed to the secondary keyed container. */
   public showKeyed(): void {
     this.toastService.add({
       key: 'secondary',
@@ -145,12 +158,10 @@ export class ToastDemoComponent {
     });
   }
 
-  /** Clear all toasts. */
   public clearAll(): void {
     this.toastService.clear();
   }
 
-  /** Show a toast using the currently selected position and variant. */
   public showPositioned(severity: ToastSeverity): void {
     this.toastService.add({
       severity,
