@@ -14,21 +14,19 @@
     (rejected)="lastResult.set('Declarative rejected')"
   />
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>ConfirmPopup</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>ConfirmPopup</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A lightweight anchored popup for inline confirmations — positions itself next to the trigger
       element with an arrow indicator. No modal backdrop, less visual disruption than ConfirmDialog.
     </p>
-  </header>
+  </div>
 
   <!-- ---- Basic usage ---- -->
   <section class="demo-section" id="basic" data-doc-anchor>

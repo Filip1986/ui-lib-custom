@@ -1,21 +1,19 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>MegaMenu</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>MegaMenu</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A horizontal (or vertical) navigation bar where top-level items open multi-column
       mega panels of grouped sub-items. Supports three design variants, three sizes, keyboard
       navigation, disabled items, separators, URL links, and command callbacks.
     </p>
-  </header>
+  </div>
 
   <!-- ── Basic Horizontal ──────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic-horizontal" data-doc-anchor>

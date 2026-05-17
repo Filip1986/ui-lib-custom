@@ -1,20 +1,18 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Fieldset</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Fieldset</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A labelled content container with an optional collapse/expand animation.
       Use it to group related form fields or information sections under a clear heading.
     </p>
-  </header>
+  </div>
 
   <!-- ── Basic ────────────────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>

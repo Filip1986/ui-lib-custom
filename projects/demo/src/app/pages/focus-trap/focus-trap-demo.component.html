@@ -1,16 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>FocusTrap</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>FocusTrap</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A directive that constrains keyboard focus within a container element.
       Tab and Shift+Tab cycle only among the focusable descendants of the host,
       preventing focus from escaping — essential for accessible modals, dialogs,
@@ -23,7 +21,7 @@
         <span class="ft-tag">A11y</span>
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- ── Section 1: Basic usage ── -->
   <section class="demo-section" id="basic-usage" data-doc-anchor>

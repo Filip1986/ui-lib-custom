@@ -1,20 +1,18 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Timeline</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Timeline</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A data-display component for rendering a series of events along a vertical or horizontal axis.
       Supports custom marker, content, and opposite-side templates.
     </p>
-  </header>
+  </div>
 
   <!-- =========================================================== -->
   <!-- 1. Basic Vertical (left-align, default dot markers)          -->

@@ -1,22 +1,20 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Skeleton</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Skeleton</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.
     </p>
     <div class="demo-page-header__preview">
       <ui-lib-skeleton width="100%" height="2rem" />
     </div>
-  </header>
+  </div>
 
   <!-- Basic shapes -->
   <section class="demo-section" id="shapes" data-doc-anchor>

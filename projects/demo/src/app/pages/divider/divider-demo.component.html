@@ -1,16 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Divider</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Divider</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A visual separator that divides content horizontally or vertically.
       Supports solid, dashed, and dotted lines, optional projected label content,
       flexible alignment, and three design variants.
@@ -20,7 +18,7 @@
       <ui-lib-divider />
       <p>Below the divider</p>
     </div>
-  </header>
+  </div>
 
   <!-- Section 1: Basic -->
   <section class="demo-section" id="basic" data-doc-anchor>

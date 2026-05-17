@@ -1,16 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Bind</h1>
-      <ui-lib-code-snippet
-        language="typescript"
-        [showLineNumbers]="false"
-        size="sm"
-        [code]="importCode"
-      />
-    </div>
-    <p class="demo-page-header__description">
+  <div class="doc-header" docHeader>
+    <h1>Bind</h1>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode"
+    />
+    <p class="doc-description">
       A utility directive that applies a dynamic record of key-value pairs as
       DOM properties on the host element — the Angular-first equivalent of
       PrimeNG&#39;s <code>pBind</code>.
@@ -21,7 +19,7 @@
         <span class="bd-tag">Misc</span>
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- Section 1: Basic usage -->
   <section class="demo-section" id="basic-usage" data-doc-anchor>
