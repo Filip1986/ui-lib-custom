@@ -42,7 +42,13 @@
       <code>threshold</code> input (pixels, default: 400).
     </p>
     <div class="demo-section__preview demo-section__preview--code">
-      <pre class="demo-code-block"><code>&lt;ui-lib-scroll-top [threshold]="200" /&gt;</code></pre>
+      <ui-lib-code-snippet
+        language="html"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetThreshold"
+      />
     </div>
   </div>
 
@@ -65,10 +71,13 @@
       </div>
     </div>
     <div class="demo-section__code">
-      <pre class="demo-code-block"><code>&lt;div style="height: 300px; overflow-y: auto; position: relative;"&gt;
-  &lt;ui-lib-scroll-top target="parent" [threshold]="100" /&gt;
-  &lt;!-- scrollable content --&gt;
-&lt;/div&gt;</code></pre>
+      <ui-lib-code-snippet
+        language="html"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetParentTarget"
+      />
     </div>
   </div>
 

@@ -42,7 +42,13 @@
         uiLibAutoFocus
       />
     </div>
-    <pre class="af-code"><code>&lt;input uiLibAutoFocus /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasicUsage"
+    />
   </section>
 
   <!-- ── Section 2: Conditional focus ── -->
@@ -70,9 +76,13 @@
         </div>
       }
     </div>
-    <pre class="af-code"><code>&#64;if (show) &#123;
-  &lt;input uiLibAutoFocus /&gt;
-&#125;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetConditional"
+    />
   </section>
 
   <!-- ── Section 3: Disable autofocus ── -->
@@ -96,7 +106,13 @@
         [disabled]="!enableFocus()"
       />
     </div>
-    <pre class="af-code"><code>&lt;input uiLibAutoFocus [disabled]="!isEnabled" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetDisabled"
+    />
   </section>
 
   <!-- ── Section 4: API ── -->
@@ -104,8 +120,20 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="af-sub-title">Directive selector</h3>
-    <pre class="af-code"><code>import {{ '{' }} AutoFocus {{ '}' }} from 'ui-lib-custom/auto-focus';</code></pre>
-    <pre class="af-code"><code>[uiLibAutoFocus]</code></pre>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetImport"
+    />
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetSelector"
+    />
 
     <h3 class="af-sub-title">Inputs</h3>
     <table class="af-table">

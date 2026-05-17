@@ -29,7 +29,13 @@
       <ui-lib-mega-menu [model]="basicModel" />
     </div>
     <div class="demo-section__code">
-      <pre><code>&lt;ui-lib-mega-menu [model]="items" /&gt;</code></pre>
+      <ui-lib-code-snippet
+        language="html"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetBasicHorizontal"
+      />
     </div>
   </section>
 
@@ -44,7 +50,13 @@
       <ui-lib-mega-menu [model]="verticalModel" orientation="vertical" />
     </div>
     <div class="demo-section__code">
-      <pre><code>&lt;ui-lib-mega-menu [model]="items" orientation="vertical" /&gt;</code></pre>
+      <ui-lib-code-snippet
+        language="html"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetVertical"
+      />
     </div>
   </section>
 
@@ -59,8 +71,13 @@
       <ui-lib-mega-menu [model]="disabledModel" />
     </div>
     <div class="demo-section__code">
-      <pre><code>&#123; label: "Save As", disabled: true &#125;
-&#123; separator: true &#125;</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetDisabledSeparator"
+      />
     </div>
   </section>
 
@@ -78,7 +95,13 @@
       </div>
     </div>
     <div class="demo-section__code">
-      <pre><code>&#123; label: "Delete", command: (&#123; item &#125;) =&gt; console.log(item) &#125;</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetCommand"
+      />
     </div>
   </section>
 
@@ -105,7 +128,13 @@
       </div>
     </div>
     <div class="demo-section__code">
-      <pre><code>&lt;ui-lib-mega-menu [model]="items" (itemClick)="onItemClick($event)" /&gt;</code></pre>
+      <ui-lib-code-snippet
+        language="html"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetItemClick"
+      />
     </div>
   </section>
 

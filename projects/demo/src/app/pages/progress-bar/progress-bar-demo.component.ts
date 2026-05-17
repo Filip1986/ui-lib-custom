@@ -21,6 +21,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class ProgressBarDemoComponent {
   public readonly importCode: string = "import { ProgressBar } from 'ui-lib-custom/progress-bar'";
+  public readonly snippetBasic: string = `<ui-lib-progress-bar [value]="75" />`;
+  public readonly snippetNoLabel: string = `<ui-lib-progress-bar [value]="75" size="sm" [showValue]="false" />`;
+  public readonly snippetCustomLabel: string = `<ui-lib-progress-bar [value]="60" label="Uploading…" />`;
+  public readonly snippetIndeterminate: string = `<ui-lib-progress-bar mode="indeterminate" />`;
+  public readonly snippetVariants: string = `<ui-lib-progress-bar [value]="75" variant="bootstrap" />`;
+  public readonly snippetSizes: string = `<ui-lib-progress-bar [value]="75" size="lg" />`;
+  public readonly snippetCustomColour: string = `<ui-lib-progress-bar [value]="40" color="#10b981" label="40%" />`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

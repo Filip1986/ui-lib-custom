@@ -20,6 +20,12 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class FieldsetDemoComponent {
   public readonly importCode: string = "import { Fieldset } from 'ui-lib-custom/fieldset'";
+  public readonly snippetBasic: string = `<ui-lib-fieldset legend="Personal Information">\n  <!-- content -->\n</ui-lib-fieldset>`;
+  public readonly snippetToggleable: string = `<ui-lib-fieldset\n  legend="Advanced Options"\n  [toggleable]="true"\n  [(collapsed)]="isCollapsed"\n>\n  <!-- content -->\n</ui-lib-fieldset>`;
+  public readonly snippetPreCollapsed: string = `<ui-lib-fieldset\n  legend="Hidden by Default"\n  [toggleable]="true"\n  [collapsed]="true"\n>\n  <p>Revealed on click</p>\n</ui-lib-fieldset>`;
+  public readonly snippetCustomLegend: string = `<ui-lib-fieldset [toggleable]="true">\n  <span fieldsetLegend>\n    <i class="pi pi-user"></i> User <strong>Profile</strong>\n  </span>\n  <p>Body content</p>\n</ui-lib-fieldset>`;
+  public readonly snippetVariants: string = `<ui-lib-fieldset variant="material" legend="Material" />\n<ui-lib-fieldset variant="bootstrap" legend="Bootstrap" />\n<ui-lib-fieldset variant="minimal" legend="Minimal" />`;
+  public readonly snippetToggleEvent: string = `<ui-lib-fieldset\n  legend="Event Demo"\n  [toggleable]="true"\n  (toggled)="onToggle($event)"\n></ui-lib-fieldset>\n\n// component.ts\nonToggle(event: FieldsetToggleEvent): void {\n  console.log('collapsed:', event.collapsed);\n}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

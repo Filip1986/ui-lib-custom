@@ -22,6 +22,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 export class AnimatedOnScrollDemoComponent {
   public readonly importCode: string =
     "import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll'";
+  public readonly snippetStagger: string = `<div class="uilib-aos-slide-up"\n     uiLibAnimateOnScroll enterClass="uilib-aos-active"\n     style="--uilib-animate-on-scroll-delay: 300ms">`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

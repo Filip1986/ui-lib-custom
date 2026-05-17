@@ -133,6 +133,11 @@ export class LongDialogContentComponent {
 export class DynamicDialogDemoComponent {
   public readonly importCode: string =
     "import { DialogService } from 'ui-lib-custom/dynamic-dialog'";
+  public readonly snippetBasicOpen: string = `const ref = this.dialogService.open(MyComponent, {\n  header: 'Welcome',\n  width: '32rem',\n});`;
+  public readonly snippetPassingData: string = `// Caller\nconst ref = this.dialogService.open(DataDialogContentComponent, {\n  header: 'User Details',\n  data: { userId: 42, name: 'Filip Luca' },\n});\nref.onClose.subscribe((result) => console.log(result));\n\n// Guest component\nconfig = inject(DYNAMIC_DIALOG_CONFIG);\nref    = inject(DynamicDialogRef);\n\nthis.userId = (this.config.data as any).userId;\nthis.ref.close({ confirmed: true });`;
+  public readonly snippetScrollable: string = `this.dialogService.open(LongContentComponent, {\n  header: 'Scrollable',\n  width: '38rem',\n  height: '50vh',\n});`;
+  public readonly snippetVariant: string = `this.dialogService.open(MyComponent, { variant: 'bootstrap' });`;
+  public readonly snippetPosition: string = `this.dialogService.open(MyComponent, { position: 'top' });`;
   private readonly dialogService: DialogService = inject(DialogService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

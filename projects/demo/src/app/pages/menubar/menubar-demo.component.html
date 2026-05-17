@@ -28,8 +28,13 @@
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="basicModel" />
     </div>
-    <pre class="demo-section__code"><code>&#123;&#123; basicModel &#125;&#125;
-&lt;ui-lib-menubar [model]="basicModel" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasic"
+    />
   </section>
 
   <!-- Nested submenus -->
@@ -102,10 +107,13 @@
         <span menubarEnd class="demo-user">&#128100; Account</span>
       </ui-lib-menubar>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-menubar [model]="items"&gt;
-  &lt;span menubarStart&gt;MyApp&lt;/span&gt;
-  &lt;button menubarEnd&gt;Sign In&lt;/button&gt;
-&lt;/ui-lib-menubar&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetStartEnd"
+    />
   </section>
 
   <!-- Variants -->

@@ -27,6 +27,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class DockDemoComponent {
   public readonly importCode: string = "import { Dock } from 'ui-lib-custom/dock'";
+  public readonly snippetBasic: string = `{} osItems: DockItem[] = [\n  { label: 'Finder', icon: 'pi pi-folder', command: handler },\n  { label: 'Terminal', icon: 'pi pi-code', command: handler },\n  // ...\n];\n\n<ui-lib-dock [items]="osItems" position="bottom" variant="material" />`;
+  public readonly snippetVariants: string = `<ui-lib-dock [items]="items" variant="material" />\n<ui-lib-dock [items]="items" variant="bootstrap" />\n<ui-lib-dock [items]="items" variant="minimal" />`;
+  public readonly snippetSizes: string = `<ui-lib-dock [items]="items" size="sm" />\n<ui-lib-dock [items]="items" size="md" />\n<ui-lib-dock [items]="items" size="lg" />`;
+  public readonly snippetPositions: string = `<ui-lib-dock [items]="items" position="bottom" />\n<ui-lib-dock [items]="items" position="top" />\n<ui-lib-dock [items]="items" position="left" />\n<ui-lib-dock [items]="items" position="right" />`;
+  public readonly snippetNoMagnification: string = `<ui-lib-dock [items]="items" [magnification]="false" />`;
+  public readonly snippetDisabledItems: string = `const items: DockItem[] = [\n  { label: 'Home', icon: 'pi pi-home', command: handler },\n  { label: 'Search', icon: 'pi pi-search', disabled: true },\n  // ...\n];`;
+  public readonly snippetLinkItems: string = `// Anchor with external URL\n{ label: 'Anthropic', icon: 'pi pi-external-link', url: 'https://anthropic.com', target: '_blank' }\n\n// Angular RouterLink\n{ label: 'Home', icon: 'pi pi-home', routerLink: '/' }\n\n// Button with command\n{ label: 'Settings', icon: 'pi pi-cog', command: handler }`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

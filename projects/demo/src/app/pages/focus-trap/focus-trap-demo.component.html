@@ -51,10 +51,13 @@
         </div>
       </div>
     </div>
-    <pre class="ft-code"><code>&lt;div uiLibFocusTrap&gt;
-  &lt;input type="text" /&gt;
-  &lt;button&gt;Submit&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasicUsage"
+    />
   </section>
 
   <!-- ── Section 2: Toggle on/off ── -->
@@ -91,9 +94,13 @@
         </div>
       </div>
     </div>
-    <pre class="ft-code"><code>&lt;div [uiLibFocusTrap]="isActive"&gt;
-  &lt;input type="text" /&gt;
-&lt;/div&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetToggleTrap"
+    />
   </section>
 
   <!-- ── Section 3: Modal overlay pattern ── -->
@@ -114,12 +121,13 @@
         Open Modal
       </ui-lib-button>
     </div>
-    <pre class="ft-code"><code>&#64;if (isModalOpen) &#123;
-  &lt;div class="modal" role="dialog" aria-modal="true" [uiLibFocusTrap]="true"&gt;
-    &lt;h2&gt;Dialog title&lt;/h2&gt;
-    &lt;button (click)="closeModal()"&gt;Close&lt;/button&gt;
-  &lt;/div&gt;
-&#125;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetModalPattern"
+    />
   </section>
 
   <!-- ── Section 4: API ── -->
@@ -127,10 +135,22 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="ft-sub-title">Import</h3>
-    <pre class="ft-code"><code>import {{ '{' }} FocusTrapDirective {{ '}' }} from 'ui-lib-custom/focus-trap';</code></pre>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetImport"
+    />
 
     <h3 class="ft-sub-title">Selector</h3>
-    <pre class="ft-code"><code>[uiLibFocusTrap]</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetSelector"
+    />
 
     <h3 class="ft-sub-title">Inputs</h3>
     <table class="ft-table">

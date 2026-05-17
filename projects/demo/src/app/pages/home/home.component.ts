@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { Badge } from 'ui-lib-custom/badge';
@@ -12,12 +13,15 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Card, Button, Badge, DocPageLayoutComponent],
+  imports: [CommonModule, CodeSnippet, Card, Button, Badge, DocPageLayoutComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
+  public readonly snippetInstall: string = `npm install @filip86/ui-components`;
+  public readonly snippetImport: string = `import { Button, Card } from '@filip86/ui-components';\n\n@Component({\n  standalone: true,\n  imports: [Button, Card],\n  // ...\n})`;
+
   public readonly sections: DocSection[] = [
     { id: 'quick-links', label: 'Quick Links' },
     { id: 'features', label: 'Features' },

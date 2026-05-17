@@ -21,6 +21,43 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 export class ClassNamesDemoComponent {
   public readonly importCode: string =
     "import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names'";
+  public readonly snippetFunctionUsage: string = `import { classNames } from 'ui-lib-custom/class-names';
+
+// Strings
+classNames('foo', 'bar')
+// → 'foo bar'
+
+// Conditional via boolean expression
+classNames('btn', isActive && 'btn--active')
+// → 'btn btn--active'  (when isActive = true)
+
+// Object: keys with truthy values included
+classNames({ active: true, disabled: false })
+// → 'active'
+
+// Array: recursively flattened
+classNames(['base', { highlight: true }])
+// → 'base highlight'
+
+// Falsy values are silently ignored
+classNames('btn', null, undefined, false, 'icon')
+// → 'btn icon'`;
+  public readonly snippetPipeUsage: string = `import { ClassNamesPipe } from 'ui-lib-custom/class-names';
+
+@Component({
+  imports: [ClassNamesPipe],
+  template: \`
+    <!-- Object syntax -->
+    <div [class]="{ active: isActive, hidden: isHidden } | classNames"></div>
+
+    <!-- String with extra object arg -->
+    <div [class]="'btn' | classNames:{ 'btn--lg': isLarge }"></div>
+
+    <!-- Array flattening -->
+    <div [class]="['base', isActive && 'active'] | classNames"></div>
+  \`,
+})`;
+  public readonly snippetClassNameValueType: string = `type ClassNameValue =\n  | string\n  | null\n  | undefined\n  | false\n  | Record<string, boolean | null | undefined | false>\n  | ClassNameValue[];`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

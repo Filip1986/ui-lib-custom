@@ -22,6 +22,11 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 export class FocusTrapDemoComponent {
   public readonly importCode: string =
     "import { FocusTrapDirective } from 'ui-lib-custom/focus-trap'";
+  public readonly snippetBasicUsage: string = `<div uiLibFocusTrap>\n  <input type="text" />\n  <button>Submit</button>\n</div>`;
+  public readonly snippetToggleTrap: string = `<div [uiLibFocusTrap]="isActive">\n  <input type="text" />\n</div>`;
+  public readonly snippetModalPattern: string = `@if (isModalOpen) {\n  <div class="modal" role="dialog" aria-modal="true" [uiLibFocusTrap]="true">\n    <h2>Dialog title</h2>\n    <button (click)="closeModal()">Close</button>\n  </div>\n}`;
+  public readonly snippetImport: string = `import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';`;
+  public readonly snippetSelector: string = `[uiLibFocusTrap]`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

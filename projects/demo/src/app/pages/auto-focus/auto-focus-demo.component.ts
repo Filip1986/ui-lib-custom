@@ -21,6 +21,11 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class AutoFocusDemoComponent {
   public readonly importCode: string = "import { AutoFocus } from 'ui-lib-custom/auto-focus'";
+  public readonly snippetBasicUsage: string = `<input uiLibAutoFocus />`;
+  public readonly snippetConditional: string = `@if (show) {\n  <input uiLibAutoFocus />\n}`;
+  public readonly snippetDisabled: string = `<input uiLibAutoFocus [disabled]="!isEnabled" />`;
+  public readonly snippetImport: string = `import { AutoFocus } from 'ui-lib-custom/auto-focus';`;
+  public readonly snippetSelector: string = `[uiLibAutoFocus]`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

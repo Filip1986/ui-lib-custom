@@ -41,9 +41,13 @@
         Hover me — tooltip set via <code>uiLibBind</code>
       </div>
     </div>
-    <pre class="bd-code"><code>&lt;div [uiLibBind]="&#123; id: 'my-box', title: 'Tooltip text', tabIndex: 0 &#125;"&gt;
-  Content
-&lt;/div&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasicUsage"
+    />
   </section>
 
   <!-- Section 2: Interactive playground -->
@@ -126,17 +130,26 @@
         </div>
       </div>
     </div>
-    <pre class="bd-code"><code>&lt;!-- numeric property --&gt;
-&lt;div [uiLibBind]="&#123; tabIndex: 2 &#125;"&gt;Focusable&lt;/div&gt;
-&lt;!-- boolean property --&gt;
-&lt;div [uiLibBind]="&#123; hidden: true &#125;"&gt;Hidden&lt;/div&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBooleanNumeric"
+    />
   </section>
 
   <!-- Section 4: API table -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
     <h3 class="bd-sub-title">Selector</h3>
-    <pre class="bd-code"><code>[uiLibBind]</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetSelector"
+    />
     <h3 class="bd-sub-title">Inputs</h3>
     <table class="bd-table">
       <thead>
@@ -161,7 +174,13 @@
       </tbody>
     </table>
     <h3 class="bd-sub-title">Host class</h3>
-    <pre class="bd-code"><code>ui-lib-bind</code></pre>
+    <ui-lib-code-snippet
+      language="text"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetHostClass"
+    />
   </section>
 
   <div class="demo-page-rail" docRail>
