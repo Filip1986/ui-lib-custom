@@ -19,7 +19,9 @@
         <ui-lib-card>
           <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('basicBar')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('basicBar')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="basic-line" data-doc-anchor class="example-section">
@@ -27,7 +29,9 @@
         <ui-lib-card>
           <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('basicLine')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('basicLine')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="pie-chart" data-doc-anchor class="example-section">
@@ -35,7 +39,9 @@
         <ui-lib-card>
           <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('pie')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('pie')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="doughnut-chart" data-doc-anchor class="example-section">
@@ -43,7 +49,9 @@
         <ui-lib-card>
           <ui-lib-doughnut-chart [data]="channelMixData" ariaLabel="Acquisition channel doughnut chart" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('doughnut')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('doughnut')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="generic-radar" data-doc-anchor class="example-section">
@@ -55,7 +63,9 @@
             [ariaLabel]="'Platform capability radar chart'"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('radar')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('radar')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="generic-polar-area" data-doc-anchor class="example-section">
@@ -67,7 +77,9 @@
             [ariaLabel]="'Roadmap priority polar area chart'"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('polarArea')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('polarArea')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="generic-bubble" data-doc-anchor class="example-section">
@@ -79,7 +91,9 @@
             [ariaLabel]="'Customer segment bubble chart'"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('bubble')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('bubble')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="generic-scatter" data-doc-anchor class="example-section">
@@ -91,7 +105,9 @@
             [ariaLabel]="'Campaign conversion scatter plot'"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('scatter')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('scatter')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="multi-dataset-bar" data-doc-anchor class="example-section">
@@ -99,7 +115,9 @@
         <ui-lib-card>
           <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('multiDatasetBar')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('multiDatasetBar')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="stacked-bar" data-doc-anchor class="example-section">
@@ -107,7 +125,9 @@
         <ui-lib-card>
           <ui-lib-bar-chart [data]="stackedCostData" [options]="stackedBarOptions" ariaLabel="Stacked cost chart" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('stackedBar')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('stackedBar')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="line-area-fill" data-doc-anchor class="example-section">
@@ -115,7 +135,9 @@
         <ui-lib-card>
           <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('lineArea')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('lineArea')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="mixed-chart" data-doc-anchor class="example-section">
@@ -128,7 +150,9 @@
             [ariaLabel]="'Mixed revenue and conversion chart'"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('mixed')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('mixed')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
@@ -149,7 +173,9 @@
             </ui-lib-stack>
           </ui-lib-grid>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="custom-dimensions" data-doc-anchor class="example-section">
@@ -162,7 +188,9 @@
             ariaLabel="Custom dimension line chart"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('customDimensions')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('customDimensions')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="dynamic-data-update" data-doc-anchor class="example-section">
@@ -176,7 +204,9 @@
             <ui-lib-bar-chart [data]="dynamicRevenueData" ariaLabel="Dynamic revenue bar chart" />
           </ui-lib-stack>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('dynamicUpdate')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('dynamicUpdate')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="theme-integration" data-doc-anchor class="example-section">
@@ -217,7 +247,9 @@
             </div>
           </ui-lib-stack>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('themeIntegration')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('themeIntegration')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="click-events" data-doc-anchor class="example-section">
@@ -232,7 +264,9 @@
             <p class="selection-feedback" aria-live="polite">{{ selectedPointLabel }}</p>
           </ui-lib-stack>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('clickEvents')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('clickEvents')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <section id="custom-options" data-doc-anchor class="example-section">
@@ -244,7 +278,9 @@
             ariaLabel="Custom legend and tooltip chart"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('customOptions')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('customOptions')" 
+        [showLineNumbers]="true"
+        />
     </section>
   </div>
 </app-doc-page-layout>

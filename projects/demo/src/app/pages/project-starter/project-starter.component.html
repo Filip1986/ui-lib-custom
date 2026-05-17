@@ -164,8 +164,10 @@
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
       <ui-lib-code-snippet
+        language="html"
         title="Theme persistence"
         [code]="snippets.usage"
+        [showLineNumbers]="true"
       ></ui-lib-code-snippet>
     </ui-lib-card>
   }
@@ -184,6 +186,7 @@
           title="Build"
           language="bash"
           [code]="snippets.buildLib"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
       </section>
 
@@ -197,26 +200,31 @@
           title="1. Register the link (run from dist/ui-lib-custom, not the repo root)"
           language="bash"
           [code]="snippets.npmLink1"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
         <ui-lib-code-snippet
           title="2. Use the link in your other project"
           language="bash"
           [code]="snippets.npmLink2"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
         <ui-lib-code-snippet
           title="3. Import components and directives (secondary entry points)"
           language="typescript"
           [code]="snippets.npmLinkImport"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
         <ui-lib-code-snippet
           title="4. Add global theme styles (src/styles.scss)"
           language="scss"
           [code]="snippets.globalStyles"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
         <ui-lib-code-snippet
           title="5. Add body-level directive styles (e.g. Tooltip)"
           language="scss"
           [code]="snippets.tooltipStyles"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
       </section>
 
@@ -230,6 +238,7 @@
           title="package.json + install"
           language="json"
           [code]="snippets.filePath"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
       </section>
 
@@ -243,11 +252,13 @@
           title="Update package name"
           language="json"
           [code]="snippets.publishPackageJson"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
         <ui-lib-code-snippet
           title="Publish steps"
           language="bash"
           [code]="snippets.publishSteps"
+          [showLineNumbers]="true"
         ></ui-lib-code-snippet>
       </section>
     </ui-lib-card>

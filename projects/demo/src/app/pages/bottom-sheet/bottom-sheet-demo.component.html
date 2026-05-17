@@ -32,7 +32,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="basicOpen.set(true)">Open Sheet</ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Basic" [code]="snippets.basic" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- With Header ---------------------------------------------- -->
@@ -45,7 +49,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="headerOpen.set(true)">Open with Header</ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="With header" [code]="snippets.withHeader" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="With header" [code]="snippets.withHeader" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Footer Slot ---------------------------------------------- -->
@@ -58,7 +66,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="footerOpen.set(true)">Open with Footer</ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="Footer slot" [code]="snippets.footerSlot" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Footer slot" [code]="snippets.footerSlot" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Backdrop Dismiss ----------------------------------------- -->
@@ -71,7 +83,11 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-button (click)="noBackdropOpen.set(true)">Open (backdrop locked)</ui-lib-button>
     </div>
-    <ui-lib-code-snippet filename="Disable backdrop dismiss" [code]="snippets.backdropDismiss" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Disable backdrop dismiss" [code]="snippets.backdropDismiss" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- Variants ------------------------------------------------- -->
@@ -86,7 +102,11 @@
         <ui-lib-button (click)="openVariant(variant)">{{ variant }}</ui-lib-button>
       }
     </div>
-    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Variants" [code]="snippets.variants" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

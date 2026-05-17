@@ -31,7 +31,9 @@
               <span class="value-text">Value: {{ basicValue || '(empty)' }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+          [showLineNumbers]="true"
+          />
       </section>
       <section id="variants" data-doc-anchor class="example-section">
         <h3>b. Variants</h3>
@@ -73,7 +75,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+          [showLineNumbers]="true"
+          />
       </section>
       <section id="with-select" data-doc-anchor class="example-section">
         <h3>c. With Select</h3>
@@ -91,7 +95,9 @@
               <span class="value-text">Selected: {{ selectedCity || '(none)' }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('select')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('select')" 
+          [showLineNumbers]="true"
+          />
       </section>
       <section id="with-textarea" data-doc-anchor class="example-section">
         <h3>d. With Textarea</h3>
@@ -107,7 +113,9 @@
               <label>Notes</label>
             </uilib-float-label>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('textarea')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('textarea')" 
+          [showLineNumbers]="true"
+          />
       </section>
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>e. Invalid</h3>
@@ -133,7 +141,9 @@
               </ui-lib-button>
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
+          [showLineNumbers]="true"
+          />
       </section>
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>f. Reactive Forms</h3>
@@ -156,7 +166,9 @@
               <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+          [showLineNumbers]="true"
+          />
       </section>
     </div>
   </app-doc-demo-viewport>

@@ -10,7 +10,9 @@
         and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired
         colours. Fully integrated with <code>ui-lib-code-snippet</code>.
       </p>
-      <ui-lib-code-snippet [code]="importCode" language="typescript" />
+      <ui-lib-code-snippet [code]="importCode" language="typescript" 
+        [showLineNumbers]="false"
+        />
     </div>
 
     <!-- ── Overview ────────────────────────────────────────────────────────── -->
@@ -61,6 +63,7 @@
         language="typescript"
         filename="user-card.component.ts"
         [code]="tsCode"
+        [showLineNumbers]="true"
       />
     </section>
 
@@ -77,6 +80,7 @@
         language="html"
         filename="user-card.component.html"
         [code]="htmlCode"
+        [showLineNumbers]="true"
       />
     </section>
 
@@ -91,6 +95,7 @@
         language="scss"
         filename="user-card.component.scss"
         [code]="scssCode"
+        [showLineNumbers]="true"
       />
     </section>
 
@@ -103,13 +108,19 @@
       </p>
 
       <h3 class="demo-section__subtitle">highlight()</h3>
-      <ui-lib-code-snippet [code]="snippets.highlightUsage" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.highlightUsage" language="typescript" 
+        [showLineNumbers]="true"
+        />
 
       <h3 class="demo-section__subtitle">tokenize()</h3>
-      <ui-lib-code-snippet [code]="snippets.tokenizeUsage" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.tokenizeUsage" language="typescript" 
+        [showLineNumbers]="true"
+        />
 
       <h3 class="demo-section__subtitle">escapeForCode()</h3>
-      <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- ── API ──────────────────────────────────────────────────────────────── -->
@@ -157,6 +168,7 @@
       <ui-lib-code-snippet
         [code]="syntaxTokenInterfaceCode"
         language="typescript"
+        [showLineNumbers]="true"
       />
     </section>
 
@@ -245,7 +257,9 @@
         Override any token colour via CSS custom properties on the host element or a parent
         container. All token colours are exposed as <code>--uilib-syntax-*</code> variables.
       </p>
-      <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss" />
+      <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss" 
+        [showLineNumbers]="true"
+        />
     </section>
 
   </div>

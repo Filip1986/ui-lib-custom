@@ -43,7 +43,11 @@
         <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" />
       }
     </div>
-    <ui-lib-code-snippet filename="Severity" [code]="snippets.severity" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Severity" [code]="snippets.severity" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -59,7 +63,11 @@
       <ui-lib-tag value="Medium" size="md" severity="primary" />
       <ui-lib-tag value="Large"  size="lg" severity="primary" />
     </div>
-    <ui-lib-code-snippet filename="Sizes" [code]="snippets.sizes" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Sizes" [code]="snippets.sizes" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -75,7 +83,11 @@
         <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" [rounded]="true" />
       }
     </div>
-    <ui-lib-code-snippet filename="Rounded" [code]="snippets.rounded" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Rounded" [code]="snippets.rounded" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -94,7 +106,11 @@
       <ui-lib-tag value="Danger"  icon="pi pi-times-circle"         severity="danger" />
       <ui-lib-tag value="Info"    icon="pi pi-info-circle"          severity="info" />
     </div>
-    <ui-lib-code-snippet filename="Icons" [code]="snippets.icons" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Icons" [code]="snippets.icons" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -113,7 +129,11 @@
       <ui-lib-tag value="Urgent" severity="danger"  [dismissible]="true" icon="pi pi-flag" />
       <ui-lib-tag value="Stable" severity="success" [dismissible]="true" [rounded]="true" />
     </div>
-    <ui-lib-code-snippet filename="Dismissible" [code]="snippets.dismissible" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Dismissible" [code]="snippets.dismissible" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -140,7 +160,11 @@
         </div>
       </div>
     }
-    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet
+      language="html"
+      filename="Variants" [code]="snippets.variants" 
+      [showLineNumbers]="true"
+      />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════

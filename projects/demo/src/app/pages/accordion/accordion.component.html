@@ -14,7 +14,9 @@
   </div>
 
     <app-accordion-basic-example />
-  <ui-lib-code-snippet language="html" [code]="accordionExample" />
+  <ui-lib-code-snippet language="html" [code]="accordionExample" 
+    [showLineNumbers]="true"
+    />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -266,7 +268,9 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="snippets.controlled" language="typescript" />
+      <ui-lib-code-snippet [code]="snippets.controlled" language="typescript" 
+        [showLineNumbers]="true"
+        />
     </ui-lib-card>
   }
 
@@ -289,7 +293,9 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="snippets.customHeader" language="html" />
+      <ui-lib-code-snippet [code]="snippets.customHeader" language="html" 
+        [showLineNumbers]="true"
+        />
     </ui-lib-card>
   }
 
@@ -357,8 +363,12 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="iconSnippets.customIcons" language="html" />
-      <ui-lib-code-snippet [code]="iconSnippets.iconPosition" language="html" />
+      <ui-lib-code-snippet [code]="iconSnippets.customIcons" language="html" 
+        [showLineNumbers]="true"
+        />
+      <ui-lib-code-snippet [code]="iconSnippets.iconPosition" language="html" 
+        [showLineNumbers]="true"
+        />
     </ui-lib-card>
   }
 
@@ -380,7 +390,9 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-        <ui-lib-code-snippet [code]="iconSnippets.toggleTemplate" language="html" />
+        <ui-lib-code-snippet [code]="iconSnippets.toggleTemplate" language="html" 
+          [showLineNumbers]="true"
+          />
       </ui-lib-card>
 
       <ui-lib-card [showHeader]="true" [showFooter]="false">
@@ -544,7 +556,9 @@
           <div>Emits every toggle interaction.</div>
         </div>
       </div>
-      <ui-lib-code-snippet [code]="snippets.basic" language="html" />
+      <ui-lib-code-snippet [code]="snippets.basic" language="html" 
+        [showLineNumbers]="true"
+        />
     </ui-lib-card>
   }
 

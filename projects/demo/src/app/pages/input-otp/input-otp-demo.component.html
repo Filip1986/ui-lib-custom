@@ -30,7 +30,9 @@
               <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- b. Mask -->
@@ -45,7 +47,9 @@
               [(ngModel)]="maskValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('mask')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('mask')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- c. Integer Only -->
@@ -63,7 +67,9 @@
               <span class="value-text">Value: {{ formatValue(integerValue) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('integerOnly')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('integerOnly')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- d. Sizes -->
@@ -86,7 +92,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- e. Filled -->
@@ -101,7 +109,9 @@
               [(ngModel)]="filledValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- f. Disabled -->
@@ -116,7 +126,9 @@
               [(ngModel)]="disabledValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- g. Invalid -->
@@ -131,7 +143,9 @@
               [(ngModel)]="invalidValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- h. Read Only -->
@@ -146,7 +160,9 @@
               [(ngModel)]="readonlyValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- i. Reactive Forms -->
@@ -175,7 +191,9 @@
               </div>
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
     </div>

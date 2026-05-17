@@ -32,7 +32,9 @@
               <span class="value-text">Value: "{{ basicValue }}"</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Auto Resize -->
@@ -52,7 +54,9 @@
               [(ngModel)]="autoResizeValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('autoResize')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('autoResize')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Counter -->
@@ -68,7 +72,9 @@
               [(ngModel)]="counterValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('counter')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('counter')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Max Length -->
@@ -87,7 +93,9 @@
               [(ngModel)]="maxLengthValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('maxLength')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('maxLength')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Sizes -->
@@ -119,7 +127,9 @@
               />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Variants -->
@@ -151,7 +161,9 @@
               />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Disabled -->
@@ -166,7 +178,9 @@
               [(ngModel)]="disabledValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Readonly -->
@@ -181,7 +195,9 @@
               [(ngModel)]="readonlyValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Invalid -->
@@ -197,7 +213,9 @@
               [(ngModel)]="invalidValue"
             />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <!-- Reactive Forms -->
@@ -227,7 +245,9 @@
               <p class="value-text">Submitted: "{{ reactiveSubmittedValue }}"</p>
             }
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
     </div>

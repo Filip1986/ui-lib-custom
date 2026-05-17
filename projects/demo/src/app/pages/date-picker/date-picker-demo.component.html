@@ -23,7 +23,9 @@
               <span class="value-text">Value: {{ formatValue(basicDate) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="format" data-doc-anchor class="example-section">
@@ -34,7 +36,9 @@
               <span class="value-text">Value: {{ formatValue(formattedDate) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('format')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('format')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="icon" data-doc-anchor class="example-section">
@@ -42,7 +46,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('icon')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('icon')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="min-max" data-doc-anchor class="example-section">
@@ -57,7 +63,9 @@
               <span class="value-text">Allowed window: {{ formatValue(minDate) }} - {{ formatValue(maxDate) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('minMax')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('minMax')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="multiple" data-doc-anchor class="example-section">
@@ -68,7 +76,9 @@
               <span class="value-text">Selected: {{ formatValue(multipleDates) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('multiple')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('multiple')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="range" data-doc-anchor class="example-section">
@@ -79,7 +89,9 @@
               <span class="value-text">Selected: {{ formatValue(rangeDates) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('range')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('range')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="button-bar" data-doc-anchor class="example-section">
@@ -87,7 +99,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('buttonBar')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('buttonBar')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="time" data-doc-anchor class="example-section">
@@ -109,7 +123,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('time24') + '\n' + snippet('time12')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('time24') + '\n' + snippet('time12')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="time-only" data-doc-anchor class="example-section">
@@ -117,7 +133,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('timeOnly')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('timeOnly')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="month-picker" data-doc-anchor class="example-section">
@@ -125,7 +143,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('monthPicker')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('monthPicker')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="year-picker" data-doc-anchor class="example-section">
@@ -133,7 +153,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('yearPicker')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('yearPicker')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="multiple-months" data-doc-anchor class="example-section">
@@ -141,7 +163,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('multipleMonths')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('multipleMonths')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="inline" data-doc-anchor class="example-section">
@@ -149,7 +173,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('inline')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('inline')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
@@ -161,7 +187,9 @@
               <ui-lib-date-picker [(ngModel)]="sizeValues.lg" size="lg" />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
@@ -182,7 +210,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
@@ -190,7 +220,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
@@ -198,7 +230,9 @@
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="invalid" data-doc-anchor class="example-section">
@@ -209,7 +243,9 @@
               <span class="error-text">Please select a valid date.</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="reactive-forms" data-doc-anchor class="example-section">
@@ -226,7 +262,9 @@
               </div>
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+          [showLineNumbers]="true"
+          />
       </section>
     </div>
   </app-doc-demo-viewport>

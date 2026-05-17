@@ -27,7 +27,9 @@
         <ui-lib-card>
           <ui-lib-organization-chart [value]="basicNodes()" />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 2. Collapsible -->
@@ -53,7 +55,9 @@
             </div>
           }
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('collapsible')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('collapsible')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 3. Single Selection -->
@@ -77,7 +81,9 @@
             Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
           </p>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('singleSelection')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('singleSelection')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 4. Multiple Selection -->
@@ -100,7 +106,9 @@
             Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
           </p>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('multipleSelection')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('multipleSelection')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 5. Custom Template -->
@@ -123,7 +131,9 @@
             </ng-template>
           </ui-lib-organization-chart>
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('customTemplate')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('customTemplate')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 6. Bootstrap Variant -->
@@ -140,7 +150,9 @@
             [collapsible]="true"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('bootstrap')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('bootstrap')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 7. Minimal Variant -->
@@ -157,7 +169,9 @@
             [collapsible]="true"
           />
         </ui-lib-card>
-      <ui-lib-code-snippet language="html" [code]="snippet('minimal')" />
+      <ui-lib-code-snippet language="html" [code]="snippet('minimal')" 
+        [showLineNumbers]="true"
+        />
     </section>
 
     <!-- 8. Accessibility -->

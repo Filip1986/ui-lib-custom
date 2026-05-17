@@ -120,7 +120,11 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false">
       <div card-header>Usage</div>
-      <ui-lib-code-snippet filename="Usage" [code]="usageSnippet"></ui-lib-code-snippet>
+      <ui-lib-code-snippet
+        language="html"
+        filename="Usage" [code]="usageSnippet"
+        [showLineNumbers]="true"
+        ></ui-lib-code-snippet>
     </ui-lib-card>
   }
 

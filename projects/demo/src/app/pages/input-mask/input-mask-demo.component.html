@@ -24,7 +24,9 @@
               <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="mask-formats" data-doc-anchor class="example-section">
@@ -50,7 +52,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('formats')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('formats')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="optional" data-doc-anchor class="example-section">
@@ -66,7 +70,9 @@
               <span class="value-text">Value: {{ formatValue(optionalValue) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('optional')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('optional')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="slot-character" data-doc-anchor class="example-section">
@@ -88,7 +94,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('slotChars')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('slotChars')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="unmask" data-doc-anchor class="example-section">
@@ -108,7 +116,9 @@
               </div>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('unmask')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('unmask')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
@@ -117,7 +127,9 @@
           <ui-lib-card>
             <uilib-input-mask mask="(999) 999-9999" [filled]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="filledValue" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="float-label" data-doc-anchor class="example-section">
@@ -129,7 +141,9 @@
               <label>Phone</label>
             </uilib-float-label>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="ifta-label" data-doc-anchor class="example-section">
@@ -141,7 +155,9 @@
               <label>Phone</label>
             </uilib-float-label>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('iftaLabel')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('iftaLabel')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
@@ -157,7 +173,9 @@
               }
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="fluid" data-doc-anchor class="example-section">
@@ -169,7 +187,9 @@
               <span class="value-text">Value: {{ formatValue(fluidValue) }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('fluid')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('fluid')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
@@ -178,7 +198,9 @@
           <ui-lib-card>
             <uilib-input-mask mask="(999) 999-9999" [disabled]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="disabledValue" />
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="invalid" data-doc-anchor class="example-section">
@@ -190,7 +212,9 @@
               <span class="error-text">Please provide a complete phone number.</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
+          [showLineNumbers]="true"
+          />
       </section>
 
       <section id="reactive-forms" data-doc-anchor class="example-section">
@@ -208,7 +232,9 @@
               </div>
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+          [showLineNumbers]="true"
+          />
       </section>
     </div>
   </app-doc-demo-viewport>
