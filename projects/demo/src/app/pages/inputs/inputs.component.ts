@@ -1,6 +1,7 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  ViewChild,
   signal,
   viewChild,
   computed,

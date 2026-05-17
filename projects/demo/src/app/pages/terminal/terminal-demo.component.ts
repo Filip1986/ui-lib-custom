@@ -25,7 +25,7 @@ const HELP_TEXT: string = [
 ].join('\n');
 
 /**
- *
+ * Demo page for the Terminal component.
  */
 @Component({
   selector: 'app-terminal-demo',

@@ -9,7 +9,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
- *
+ * Demo page for the ScrollPanel component.
  */
 @Component({
   selector: 'app-scroll-panel-demo',

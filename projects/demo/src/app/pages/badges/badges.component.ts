@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, viewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Badge } from 'ui-lib-custom/badge';
