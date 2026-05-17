@@ -54,7 +54,7 @@
         &nbsp;— last change: {{ lastChangeEvent.value }}
       }
     </p>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
   </section>
 
   <!-- ---- Variants ------------------------------------------------- -->
@@ -91,7 +91,7 @@
         </div>
       </div>
     </div>
-    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+    <ui-lib-code-snippet filename="Variants" [code]="snippets.variants" />
   </section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
@@ -107,7 +107,7 @@
         <ui-lib-radio-button name="size-demo" value="lg" label="Large (lg)"  size="lg" />
       </div>
     </div>
-    <app-doc-code-snippet title="Sizes" [code]="snippets.sizes" />
+    <ui-lib-code-snippet filename="Sizes" [code]="snippets.sizes" />
   </section>
 
   <!-- ---- Filled Appearance ---------------------------------------- -->
@@ -130,7 +130,7 @@
         }
       </div>
     </div>
-    <app-doc-code-snippet title="Filled" [code]="snippets.filled" />
+    <ui-lib-code-snippet filename="Filled" [code]="snippets.filled" />
   </section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
@@ -146,7 +146,7 @@
         <ui-lib-radio-button name="disabled-demo" value="option-b" label="Option B (disabled, checked)"   [disabled]="true" [(ngModel)]="disabledValue" />
       </div>
     </div>
-    <app-doc-code-snippet title="Disabled" [code]="snippets.disabled" />
+    <ui-lib-code-snippet filename="Disabled" [code]="snippets.disabled" />
   </section>
 
   <!-- ---- With ngModel --------------------------------------------- -->
@@ -172,7 +172,7 @@
       </fieldset>
     </div>
     <p class="demo-radio-hint">Selected fruit: <strong>{{ selectedFruit }}</strong></p>
-    <app-doc-code-snippet title="With ngModel" [code]="snippets.ngmodel" />
+    <ui-lib-code-snippet filename="With ngModel" [code]="snippets.ngmodel" />
   </section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
@@ -201,7 +201,7 @@
       </form>
     </div>
     <p class="demo-radio-hint">Form value: <strong>{{ planForm.value | json }}</strong></p>
-    <app-doc-code-snippet title="Reactive forms" [code]="snippets.reactiveForms" />
+    <ui-lib-code-snippet filename="Reactive forms" [code]="snippets.reactiveForms" />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

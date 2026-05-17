@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /**
  * Demo section for stack layout usage.
@@ -40,7 +40,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     UiLibSelect,
     DocDemoViewportComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './stack-section.component.html',
   styleUrl: './layouts.component.scss',

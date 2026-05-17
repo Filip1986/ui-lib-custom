@@ -36,7 +36,7 @@
       <ui-lib-button severity="secondary" uiLibRipple>Secondary Button</ui-lib-button>
       <ui-lib-button severity="danger" uiLibRipple>Danger Button</ui-lib-button>
     </div>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+    <ui-lib-code-snippet filename="Basic" [code]="snippets.basic" />
   </section>
 
   <!-- ---- Dark ripple ---------------------------------------------- -->
@@ -62,7 +62,7 @@
         Click me — card surface
       </div>
     </div>
-    <app-doc-code-snippet title="Dark ripple" [code]="snippets.darkRipple" />
+    <ui-lib-code-snippet filename="Dark ripple" [code]="snippets.darkRipple" />
   </section>
 
   <!-- ---- Custom duration ------------------------------------------ -->
@@ -77,7 +77,7 @@
       <ui-lib-button severity="primary" uiLibRipple>Default (600ms)</ui-lib-button>
       <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'">Slow (1200ms)</ui-lib-button>
     </div>
-    <app-doc-code-snippet title="Custom duration" [code]="snippets.customDuration" />
+    <ui-lib-code-snippet filename="Custom duration" [code]="snippets.customDuration" />
   </section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
@@ -99,7 +99,7 @@
         Toggle ripple (currently: {{ isDisabled() ? 'OFF' : 'ON' }})
       </ui-lib-button>
     </div>
-    <app-doc-code-snippet title="Disabled" [code]="snippets.disabled" />
+    <ui-lib-code-snippet filename="Disabled" [code]="snippets.disabled" />
   </section>
 
   <!-- ---- Any element ---------------------------------------------- -->
@@ -123,7 +123,7 @@
         </li>
       </ul>
     </div>
-    <app-doc-code-snippet title="Any element" [code]="snippets.anyElement" />
+    <ui-lib-code-snippet filename="Any element" [code]="snippets.anyElement" />
   </section>
 
   <!-- ---- API ------------------------------------------------------ -->

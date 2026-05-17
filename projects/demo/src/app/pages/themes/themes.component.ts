@@ -14,7 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Router } from '@angular/router';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
@@ -36,7 +36,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     UiLibInput,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './themes.component.html',
   styleUrl: './themes.component.scss',

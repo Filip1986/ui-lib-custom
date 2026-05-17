@@ -9,7 +9,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /**
  * Demo page for scoped theming examples.
@@ -28,7 +28,7 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
     UiLibInput,
     Checkbox,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './scoped-theming.component.html',
   styleUrl: './scoped-theming.component.scss',

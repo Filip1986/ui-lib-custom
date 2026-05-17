@@ -23,7 +23,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
@@ -53,7 +52,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Tabs,
     Tab,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
     FormsModule,

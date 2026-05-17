@@ -5,7 +5,7 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /**
  * Demo section for design tokens usage.
@@ -13,7 +13,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 @Component({
   selector: 'app-layout-design-tokens-section',
   standalone: true,
-  imports: [Card, Tabs, Tab, DocPageLayoutComponent, DocCodeSnippetComponent],
+  imports: [Card, Tabs, Tab, DocPageLayoutComponent, CodeSnippet],
   templateUrl: './design-tokens-section.component.html',
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

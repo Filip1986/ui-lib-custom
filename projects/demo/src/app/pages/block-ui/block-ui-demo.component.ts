@@ -5,7 +5,6 @@ import { BlockUI } from 'ui-lib-custom/block-ui';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -14,14 +13,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-block-ui-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    BlockUI,
-    Button,
-    DocPageLayoutComponent,
-    DocTocComponent,
-    DocCodeSnippetComponent,
-  ],
+  imports: [CodeSnippet, BlockUI, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './block-ui-demo.component.html',
   styleUrl: './block-ui-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

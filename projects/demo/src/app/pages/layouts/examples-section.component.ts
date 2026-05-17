@@ -7,7 +7,7 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -27,7 +27,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     Tab,
     DocDemoViewportComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    CodeSnippet,
   ],
   templateUrl: './examples-section.component.html',
   styleUrl: './layouts.component.scss',

@@ -11,7 +11,6 @@ import {
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface InputRow {
@@ -67,7 +66,6 @@ interface KeyboardRow {
     TableColumnBodyDirective,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocCodeSnippetComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',

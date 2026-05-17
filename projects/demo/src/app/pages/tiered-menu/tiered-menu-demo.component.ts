@@ -14,7 +14,6 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -44,7 +43,6 @@ interface KeyboardRow {
     TableComponent,
     TableColumnComponent,
     TableColumnBodyDirective,
-    DocCodeSnippetComponent,
     DocPageLayoutComponent,
     DocTocComponent,
   ],

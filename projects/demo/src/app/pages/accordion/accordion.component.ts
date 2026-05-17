@@ -22,7 +22,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { AccordionBasicExampleComponent } from '@demo/examples/accordion-basic-example.component';
@@ -68,7 +67,6 @@ type AccordionTab =
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
-    DocCodeSnippetComponent,
     CodePreviewComponent,
     VariantComparisonComponent,
     AccordionBasicExampleComponent,

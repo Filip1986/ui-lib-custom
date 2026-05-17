@@ -5,7 +5,6 @@ import { PasswordComponent } from 'ui-lib-custom/password';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /** Demo page for the Password component. */
@@ -18,7 +17,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocCodeSnippetComponent,
   ],
   templateUrl: './password-demo.component.html',
   styleUrl: './password-demo.component.scss',
