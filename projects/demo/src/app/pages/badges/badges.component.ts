@@ -11,7 +11,6 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
 
@@ -41,7 +40,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocDemoViewportComponent,
     Card,
     FormsModule,
-    CodePreviewComponent,
     VariantComparisonComponent,
     BadgeBasicExampleComponent,
   ],

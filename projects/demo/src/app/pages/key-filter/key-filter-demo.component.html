@@ -22,7 +22,6 @@
         <p class="section-text">
           The default preset — allows letters and digits, blocks everything else.
         </p>
-        <app-code-preview [code]="snippet('alphanum')">
           <ui-lib-card>
             <input
               class="demo-input"
@@ -31,57 +30,52 @@
               placeholder="Enter account ID"
             />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('alphanum')" />
       </section>
 
       <section id="alpha" data-doc-anchor class="example-section">
         <h3>b. Alpha</h3>
         <p class="section-text">Letters only — digits and symbols are blocked.</p>
-        <app-code-preview [code]="snippet('alpha')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'alpha'" placeholder="Letters only" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('alpha')" />
       </section>
 
       <section id="pint" data-doc-anchor class="example-section">
         <h3>c. Positive Integer</h3>
         <p class="section-text">Digits only, no minus sign — use for unsigned whole numbers.</p>
-        <app-code-preview [code]="snippet('pint')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'pint'" placeholder="Positive integers only" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('pint')" />
       </section>
 
       <section id="int" data-doc-anchor class="example-section">
         <h3>d. Integer</h3>
         <p class="section-text">Digits and minus sign — use for signed whole numbers.</p>
-        <app-code-preview [code]="snippet('int')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'int'" placeholder="Integers (with minus)" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('int')" />
       </section>
 
       <section id="num" data-doc-anchor class="example-section">
         <h3>e. Number</h3>
         <p class="section-text">Digits, minus, and decimal point — use for floating-point values.</p>
-        <app-code-preview [code]="snippet('num')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'num'" placeholder="Numbers (decimal, minus)" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('num')" />
       </section>
 
       <section id="hex" data-doc-anchor class="example-section">
         <h3>f. Hexadecimal</h3>
         <p class="section-text">Digits 0–9 and letters a–f (case-insensitive).</p>
-        <app-code-preview [code]="snippet('hex')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('hex')" />
       </section>
 
       <section id="money" data-doc-anchor class="example-section">
@@ -89,11 +83,10 @@
         <p class="section-text">
           Digits, minus, decimal point, and thousands separator comma.
         </p>
-        <app-code-preview [code]="snippet('money')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'money'" placeholder="Money (digits, - . ,)" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('money')" />
       </section>
 
       <section id="email" data-doc-anchor class="example-section">
@@ -101,11 +94,10 @@
         <p class="section-text">
           Characters valid in email addresses per RFC 5321 local-part and domain rules.
         </p>
-        <app-code-preview [code]="snippet('email')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="'email'" placeholder="Email characters" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('email')" />
       </section>
 
       <section id="custom" data-doc-anchor class="example-section">
@@ -114,11 +106,10 @@
           Pass any <code>RegExp</code> to filter per character. This example restricts input
           to vowels only.
         </p>
-        <app-code-preview [code]="snippet('custom')">
           <ui-lib-card>
             <input class="demo-input" [uilibKeyFilter]="vowelPattern" placeholder="Vowels only (a e i o u)" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('custom')" />
       </section>
 
       <section id="bypass" data-doc-anchor class="example-section">
@@ -127,7 +118,6 @@
           Set <code>keyFilterBypass</code> to <code>true</code> to suspend all filtering at runtime.
           Toggle below to see the effect on a <code>pint</code>-filtered input.
         </p>
-        <app-code-preview [code]="snippet('bypass')">
           <ui-lib-card>
             <div class="stack-sm">
               <label class="inline-checkbox">
@@ -146,7 +136,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('bypass')" />
       </section>
 
     </div>

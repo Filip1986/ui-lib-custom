@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
@@ -99,7 +98,6 @@ const SNIPPETS: Record<string, string> = {
   standalone: true,
   imports: [
     DocPageLayoutComponent,
-    CodePreviewComponent,
     Card,
     CodeSnippet,
     OrganizationChart,

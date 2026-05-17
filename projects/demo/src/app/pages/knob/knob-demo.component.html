@@ -23,7 +23,6 @@
         <p class="section-text">
           Default knob with ngModel binding. Drag up/down or use arrow keys to change the value.
         </p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -36,7 +35,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <!-- b. Sizes -->
@@ -45,7 +44,6 @@
         <p class="section-text">
           Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
         </p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="knob-row knob-row--align-end">
               <div class="knob-item">
@@ -77,7 +75,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <!-- c. Step -->
@@ -86,7 +84,6 @@
         <p class="section-text">
           Use <code>[step]</code> to control the increment. This knob snaps to 0, 25, 50, 75, 100.
         </p>
-        <app-code-preview [code]="snippet('step')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -100,7 +97,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('step')" />
       </section>
 
       <!-- d. Min / Max -->
@@ -109,7 +106,6 @@
         <p class="section-text">
           Constrain the value range. This knob spans &minus;50 to +50 in steps of 10.
         </p>
-        <app-code-preview [code]="snippet('minmax')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -125,7 +121,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('minmax')" />
       </section>
 
       <!-- e. Value Template -->
@@ -135,7 +131,6 @@
           Pass a <code>valueTemplate</code> string to format the centre label.
           Use <code>&#123;value&#125;</code> as the interpolation placeholder.
         </p>
-        <app-code-preview [code]="snippet('template')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -158,7 +153,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('template')" />
       </section>
 
       <!-- f. Custom Colors -->
@@ -168,7 +163,6 @@
           Override arc and text colours per-instance via <code>valueColor</code>
           and <code>textColor</code> inputs.
         </p>
-        <app-code-preview [code]="snippet('colors')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -203,7 +197,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('colors')" />
       </section>
 
       <!-- g. Disabled -->
@@ -212,7 +206,6 @@
         <p class="section-text">
           A disabled knob is visually muted and ignores all interaction.
         </p>
-        <app-code-preview [code]="snippet('disabled')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -226,7 +219,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
       </section>
 
       <!-- h. Read-only -->
@@ -235,7 +228,6 @@
         <p class="section-text">
           A read-only knob is focusable but does not respond to drag or keyboard input.
         </p>
-        <app-code-preview [code]="snippet('readonly')">
           <ui-lib-card>
             <div class="knob-row">
               <div class="knob-item">
@@ -249,7 +241,7 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" />
       </section>
 
       <!-- i. Reactive Forms -->
@@ -258,7 +250,6 @@
         <p class="section-text">
           Knobs work with Angular reactive forms out of the box via CVA.
         </p>
-        <app-code-preview [code]="snippet('reactive')">
           <ui-lib-card>
             <form [formGroup]="reactiveForm">
               <div class="knob-row">
@@ -279,7 +270,7 @@
               </div>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </section>
 
     </div>

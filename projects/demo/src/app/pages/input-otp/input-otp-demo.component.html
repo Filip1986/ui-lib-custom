@@ -20,7 +20,6 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Four-cell OTP with ngModel binding and live value preview.</p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="stack-sm">
               <uilib-input-otp
@@ -31,14 +30,13 @@
               <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <!-- b. Mask -->
       <section id="mask" data-doc-anchor class="example-section">
         <h3>b. Mask</h3>
         <p class="section-text">Password-style dots for sensitive codes such as PINs.</p>
-        <app-code-preview [code]="snippet('mask')">
           <ui-lib-card>
             <uilib-input-otp
               [length]="6"
@@ -47,14 +45,13 @@
               [(ngModel)]="maskValue"
             />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('mask')" />
       </section>
 
       <!-- c. Integer Only -->
       <section id="integer-only" data-doc-anchor class="example-section">
         <h3>c. Integer Only</h3>
         <p class="section-text">Restricts each cell to digits 0–9, rejecting all other keystrokes.</p>
-        <app-code-preview [code]="snippet('integerOnly')">
           <ui-lib-card>
             <div class="stack-sm">
               <uilib-input-otp
@@ -66,14 +63,13 @@
               <span class="value-text">Value: {{ formatValue(integerValue) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('integerOnly')" />
       </section>
 
       <!-- d. Sizes -->
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>d. Sizes</h3>
         <p class="section-text">Three size tokens — <code>sm</code>, <code>md</code> (default), <code>lg</code>.</p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="stack-md">
               <div class="stack-xs">
@@ -90,14 +86,13 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <!-- e. Filled -->
       <section id="filled" data-doc-anchor class="example-section">
         <h3>e. Filled</h3>
         <p class="section-text">Filled background variant for surfaces that need stronger contrast.</p>
-        <app-code-preview [code]="snippet('filled')">
           <ui-lib-card>
             <uilib-input-otp
               [length]="4"
@@ -106,14 +101,13 @@
               [(ngModel)]="filledValue"
             />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
       </section>
 
       <!-- f. Disabled -->
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>f. Disabled</h3>
         <p class="section-text">All cells are non-interactive and rendered with reduced opacity.</p>
-        <app-code-preview [code]="snippet('disabled')">
           <ui-lib-card>
             <uilib-input-otp
               [length]="4"
@@ -122,14 +116,13 @@
               [(ngModel)]="disabledValue"
             />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
       </section>
 
       <!-- g. Invalid -->
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>g. Invalid</h3>
         <p class="section-text">Error border applied to all cells when validation fails.</p>
-        <app-code-preview [code]="snippet('invalid')">
           <ui-lib-card>
             <uilib-input-otp
               [length]="4"
@@ -138,14 +131,13 @@
               [(ngModel)]="invalidValue"
             />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
       </section>
 
       <!-- h. Read Only -->
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>h. Read Only</h3>
         <p class="section-text">Cells display a value but do not accept new input.</p>
-        <app-code-preview [code]="snippet('readonly')">
           <ui-lib-card>
             <uilib-input-otp
               [length]="4"
@@ -154,7 +146,7 @@
               [(ngModel)]="readonlyValue"
             />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" />
       </section>
 
       <!-- i. Reactive Forms -->
@@ -164,7 +156,6 @@
           Six-digit numeric code with <code>Validators.required</code> and
           <code>Validators.minLength(6)</code>. Invalid styling activates on touch.
         </p>
-        <app-code-preview [code]="snippet('reactive')">
           <ui-lib-card>
             <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
               <div class="stack-md">
@@ -184,7 +175,7 @@
               </div>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </section>
 
     </div>

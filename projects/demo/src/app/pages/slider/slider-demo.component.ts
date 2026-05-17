@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { Card } from 'ui-lib-custom/card';
@@ -31,7 +30,6 @@ type SliderDemoSnippetKey =
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     CodeSnippet,
     Card,
     Slider,

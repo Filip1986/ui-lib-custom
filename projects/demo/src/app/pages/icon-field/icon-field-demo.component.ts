@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { Icon } from 'ui-lib-custom/icon';
@@ -25,7 +24,6 @@ type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | '
     FormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     Card,
     UiLibInput,
     Icon,

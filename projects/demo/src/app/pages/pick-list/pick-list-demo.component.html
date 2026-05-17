@@ -22,7 +22,6 @@
         Use <code>[(source)]</code> and <code>[(target)]</code> two-way bindings to let the component
         manage transfers. <code>trackBy</code> identifies items by a property key.
       </p>
-      <app-code-preview [code]="snippet('basic')">
         <ui-lib-card>
           <ui-lib-pick-list
             [source]="basicSource()"
@@ -34,7 +33,7 @@
             targetHeader="Selected"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
     </section>
 
     <!-- 2. Filter -->
@@ -44,7 +43,6 @@
         Set <code>filterBy</code> to show independent filter inputs above each list.
         Filtering never mutates the underlying arrays.
       </p>
-      <app-code-preview [code]="snippet('filter')">
         <ui-lib-card>
           <ui-lib-pick-list
             [source]="filterSource()"
@@ -57,7 +55,7 @@
             targetFilterPlaceholder="Search selected…"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('filter')" />
     </section>
 
     <!-- 3. Custom Templates -->
@@ -68,7 +66,6 @@
         <code>uiPickListItem</code>, and <code>uiPickListEmpty</code> directives for fully
         custom rendering. The item template receives <code>let-item</code> as its implicit context.
       </p>
-      <app-code-preview [code]="snippet('templates')">
         <ui-lib-card>
           <ui-lib-pick-list
             [source]="templateSource()"
@@ -95,7 +92,7 @@
             </ng-template>
           </ui-lib-pick-list>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('templates')" />
     </section>
 
     <!-- 4. Drag & Drop -->
@@ -106,7 +103,6 @@
         them, or dragging between lists to transfer them. A drop indicator line shows the
         insertion point.
       </p>
-      <app-code-preview [code]="snippet('dragDrop')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-pick-list
@@ -125,7 +121,7 @@
             <p class="demo-event-log">Last action: <code>{{ lastEventLog() }}</code></p>
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('dragDrop')" />
     </section>
 
     <!-- 5. Accessibility -->

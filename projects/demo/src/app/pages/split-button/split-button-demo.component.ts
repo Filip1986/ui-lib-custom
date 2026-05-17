@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { Icon } from 'ui-lib-custom/icon';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
@@ -22,7 +21,6 @@ import type {
   imports: [
     CommonModule,
     DocPageLayoutComponent,
-    CodePreviewComponent,
     Card,
     Icon,
     CodeSnippet,

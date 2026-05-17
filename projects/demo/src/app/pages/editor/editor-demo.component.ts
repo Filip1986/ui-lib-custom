@@ -11,7 +11,6 @@ import type { NgForm } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -42,7 +41,6 @@ type EditorDemoSnippetKey =
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     Button,
     Card,
     CodeSnippet,

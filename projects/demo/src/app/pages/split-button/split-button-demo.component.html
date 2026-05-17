@@ -18,17 +18,15 @@
     <section id="basic" data-doc-anchor class="example-section">
       <h3>Basic</h3>
       <p>Default SplitButton with label and action menu model.</p>
-      <app-code-preview [code]="snippet('basic')">
         <ui-lib-card>
           <ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
     </section>
 
     <section id="icons" data-doc-anchor class="example-section">
       <h3>Icons</h3>
       <p>Leading icon on the primary action with icon-capable menu actions.</p>
-      <app-code-preview [code]="snippet('icons')">
         <ui-lib-card>
           <ui-lib-split-button
             label="Add"
@@ -37,13 +35,12 @@
             (onClick)="onPrimaryAction()"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('icons')" />
     </section>
 
     <section id="severity" data-doc-anchor class="example-section">
       <h3>Severity</h3>
       <p>All severity tokens in one row.</p>
-      <app-code-preview [code]="snippet('severity')">
         <ui-lib-card>
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
@@ -56,13 +53,12 @@
             }
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('severity')" />
     </section>
 
     <section id="disabled" data-doc-anchor class="example-section">
       <h3>Disabled</h3>
       <p>Disable all controls, only the main action, or only the menu trigger.</p>
-      <app-code-preview [code]="snippet('disabled')">
         <ui-lib-card>
           <div class="split-grid split-grid--three">
             <ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
@@ -75,13 +71,12 @@
             />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
     </section>
 
     <section id="raised" data-doc-anchor class="example-section">
       <h3>Raised</h3>
       <p>Raised style across all severities.</p>
-      <app-code-preview [code]="snippet('raised')">
         <ui-lib-card>
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
@@ -89,13 +84,12 @@
             }
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('raised')" />
     </section>
 
     <section id="rounded" data-doc-anchor class="example-section">
       <h3>Rounded</h3>
       <p>Rounded style across all severities.</p>
-      <app-code-preview [code]="snippet('rounded')">
         <ui-lib-card>
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
@@ -103,13 +97,12 @@
             }
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('rounded')" />
     </section>
 
     <section id="text" data-doc-anchor class="example-section">
       <h3>Text</h3>
       <p>Text style across all severities.</p>
-      <app-code-preview [code]="snippet('text')">
         <ui-lib-card>
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
@@ -117,13 +110,12 @@
             }
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('text')" />
     </section>
 
     <section id="raised-text" data-doc-anchor class="example-section">
       <h3>Raised Text</h3>
       <p>Raised + text modifiers combined.</p>
-      <app-code-preview [code]="snippet('raisedText')">
         <ui-lib-card>
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
@@ -137,13 +129,12 @@
             }
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('raisedText')" />
     </section>
 
     <section id="outlined" data-doc-anchor class="example-section">
       <h3>Outlined</h3>
       <p>Outlined style across all severities.</p>
-      <app-code-preview [code]="snippet('outlined')">
         <ui-lib-card>
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
@@ -151,13 +142,12 @@
             }
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('outlined')" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>Sizes</h3>
       <p>Small, medium, and large size tokens.</p>
-      <app-code-preview [code]="snippet('sizes')">
         <ui-lib-card>
           <div class="split-grid split-grid--three">
             <ui-lib-split-button label="Small" size="sm" [model]="items" />
@@ -165,13 +155,12 @@
             <ui-lib-split-button label="Large" size="lg" [model]="items" />
           </div>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
     </section>
 
     <section id="template" data-doc-anchor class="example-section">
       <h3>Template</h3>
       <p>Custom primary-content projection via <code>[splitButtonContent]</code>.</p>
-      <app-code-preview [code]="snippet('template')">
         <ui-lib-card>
           <ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
             <ng-template splitButtonContent>
@@ -182,7 +171,7 @@
             </ng-template>
           </ui-lib-split-button>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('template')" />
     </section>
 
     <section id="accessibility" data-doc-anchor class="example-section">

@@ -33,7 +33,6 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
 
@@ -77,7 +76,6 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
-    CodePreviewComponent,
     VariantComparisonComponent,
     TabsBasicExampleComponent,
   ],

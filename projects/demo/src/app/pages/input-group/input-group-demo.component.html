@@ -18,7 +18,6 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Leading and trailing addon cells around a single input.</p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <uilib-input-group>
               <uilib-input-group-addon>$</uilib-input-group-addon>
@@ -30,13 +29,12 @@
               <uilib-input-group-addon>.00</uilib-input-group-addon>
             </uilib-input-group>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <section id="multiple" data-doc-anchor class="example-section">
         <h3>b. Multiple</h3>
         <p class="section-text">One leading addon with two trailing addon cells.</p>
-        <app-code-preview [code]="snippet('multiple')">
           <ui-lib-card>
             <uilib-input-group>
               <uilib-input-group-addon>$</uilib-input-group-addon>
@@ -49,13 +47,12 @@
               <uilib-input-group-addon>USD</uilib-input-group-addon>
             </uilib-input-group>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('multiple')" />
       </section>
 
       <section id="button" data-doc-anchor class="example-section">
         <h3>c. Button</h3>
         <p class="section-text">Addon can host a `ui-lib-button` with seamless border stitching.</p>
-        <app-code-preview [code]="snippet('button')">
           <ui-lib-card>
             <uilib-input-group>
               <ui-lib-input
@@ -68,13 +65,12 @@
               </uilib-input-group-addon>
             </uilib-input-group>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('button')" />
       </section>
 
       <section id="checkbox-radio" data-doc-anchor class="example-section">
         <h3>d. Checkbox &amp; Radio</h3>
         <p class="section-text">Grouped controls can include `ui-lib-checkbox` as an inline action cell.</p>
-        <app-code-preview [code]="snippet('checkboxRadio')">
           <ui-lib-card>
             <div class="stack-md">
               <uilib-input-group>
@@ -109,13 +105,12 @@
               </uilib-input-group>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('checkboxRadio')" />
       </section>
 
       <section id="float-label" data-doc-anchor class="example-section">
         <h3>e. Float Label</h3>
         <p class="section-text">All FloatLabel variants compose directly inside InputGroup.</p>
-        <app-code-preview [code]="snippet('floatLabel')">
           <ui-lib-card>
             <div class="stack-md">
               <uilib-input-group>
@@ -155,13 +150,12 @@
               </uilib-input-group>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>f. Sizes</h3>
         <p class="section-text">Input size variants inside InputGroup with matching addon edges.</p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="stack-md">
               @for (item of sizeItems; track item.size) {
@@ -177,7 +171,7 @@
               }
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
     </div>
   </app-doc-demo-viewport>

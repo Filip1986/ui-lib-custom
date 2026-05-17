@@ -21,7 +21,6 @@
       <p class="example-description">
         Click items to select them, then use the control buttons (or keyboard shortcuts) to reorder.
       </p>
-      <app-code-preview [code]="snippet('basic')">
         <ui-lib-card>
           <ui-lib-order-list
             [value]="products()"
@@ -38,7 +37,7 @@
             </ng-template>
           </ui-lib-order-list>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
     </section>
 
     <!-- 2. Filter -->
@@ -48,7 +47,6 @@
         Set <code>filterBy="name"</code> to render an inline search field.
         The visible list updates as you type; the underlying array is never mutated.
       </p>
-      <app-code-preview [code]="snippet('filter')">
         <ui-lib-card>
           <ui-lib-order-list
             [value]="filterProducts()"
@@ -64,7 +62,7 @@
             </ng-template>
           </ui-lib-order-list>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('filter')" />
     </section>
 
     <!-- 3. Custom Templates -->
@@ -74,7 +72,6 @@
         Use <code>uiOrderListHeader</code>, <code>uiOrderListItem</code>, and
         <code>uiOrderListEmpty</code> directives for fully custom rendering.
       </p>
-      <app-code-preview [code]="snippet('template')">
         <ui-lib-card>
           <ui-lib-order-list
             [value]="templateProducts()"
@@ -100,7 +97,7 @@
             </ng-template>
           </ui-lib-order-list>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('template')" />
     </section>
 
     <!-- 4. Drag & Drop -->
@@ -110,7 +107,6 @@
         Enable <code>[dragDrop]="true"</code> to let users reorder by dragging.
         A drop indicator line shows the insertion point.
       </p>
-      <app-code-preview [code]="snippet('dragDrop')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-order-list
@@ -129,7 +125,7 @@
             <p class="demo-event-log">Last reorder: <code>{{ lastReorderEvent() }}</code></p>
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('dragDrop')" />
     </section>
 
     <!-- 5. Accessibility -->

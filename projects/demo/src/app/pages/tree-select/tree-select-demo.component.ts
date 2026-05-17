@@ -4,9 +4,9 @@ import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type {
   TreeNode,
   TreeSelectSelectionMode,
@@ -72,8 +72,8 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     TreeSelect,
+    CodeSnippet,
   ],
   templateUrl: './tree-select-demo.component.html',
   styleUrl: './tree-select-demo.component.scss',

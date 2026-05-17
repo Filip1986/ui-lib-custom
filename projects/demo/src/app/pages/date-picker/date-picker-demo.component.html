@@ -17,40 +17,36 @@
     <div class="examples">
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="row-inline">
               <ui-lib-date-picker [(ngModel)]="basicDate" />
               <span class="value-text">Value: {{ formatValue(basicDate) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <section id="format" data-doc-anchor class="example-section">
         <h3>b. Format</h3>
-        <app-code-preview [code]="snippet('format')">
           <ui-lib-card>
             <div class="row-inline">
               <ui-lib-date-picker [(ngModel)]="formattedDate" dateFormat="yy-mm-dd" />
               <span class="value-text">Value: {{ formatValue(formattedDate) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('format')" />
       </section>
 
       <section id="icon" data-doc-anchor class="example-section">
         <h3>c. Icon</h3>
-        <app-code-preview [code]="snippet('icon')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('icon')" />
       </section>
 
       <section id="min-max" data-doc-anchor class="example-section">
         <h3>d. Min/Max</h3>
-        <app-code-preview [code]="snippet('minMax')">
           <ui-lib-card>
             <div class="stack-sm">
               <ui-lib-date-picker
@@ -61,45 +57,41 @@
               <span class="value-text">Allowed window: {{ formatValue(minDate) }} - {{ formatValue(maxDate) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('minMax')" />
       </section>
 
       <section id="multiple" data-doc-anchor class="example-section">
         <h3>e. Multiple</h3>
-        <app-code-preview [code]="snippet('multiple')">
           <ui-lib-card>
             <div class="stack-sm">
               <ui-lib-date-picker [(ngModel)]="multipleDates" selectionMode="multiple" />
               <span class="value-text">Selected: {{ formatValue(multipleDates) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('multiple')" />
       </section>
 
       <section id="range" data-doc-anchor class="example-section">
         <h3>f. Range</h3>
-        <app-code-preview [code]="snippet('range')">
           <ui-lib-card>
             <div class="stack-sm">
               <ui-lib-date-picker [(ngModel)]="rangeDates" selectionMode="range" />
               <span class="value-text">Selected: {{ formatValue(rangeDates) }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('range')" />
       </section>
 
       <section id="button-bar" data-doc-anchor class="example-section">
         <h3>g. Button Bar</h3>
-        <app-code-preview [code]="snippet('buttonBar')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('buttonBar')" />
       </section>
 
       <section id="time" data-doc-anchor class="example-section">
         <h3>h. Time</h3>
-        <app-code-preview [code]="snippet('time24') + '\n' + snippet('time12')">
           <ui-lib-card>
             <div class="row-2">
               <div class="stack-sm">
@@ -117,57 +109,51 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('time24') + '\n' + snippet('time12')" />
       </section>
 
       <section id="time-only" data-doc-anchor class="example-section">
         <h3>i. Time Only</h3>
-        <app-code-preview [code]="snippet('timeOnly')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('timeOnly')" />
       </section>
 
       <section id="month-picker" data-doc-anchor class="example-section">
         <h3>j. Month Picker</h3>
-        <app-code-preview [code]="snippet('monthPicker')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('monthPicker')" />
       </section>
 
       <section id="year-picker" data-doc-anchor class="example-section">
         <h3>k. Year Picker</h3>
-        <app-code-preview [code]="snippet('yearPicker')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('yearPicker')" />
       </section>
 
       <section id="multiple-months" data-doc-anchor class="example-section">
         <h3>l. Multiple Months</h3>
-        <app-code-preview [code]="snippet('multipleMonths')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('multipleMonths')" />
       </section>
 
       <section id="inline" data-doc-anchor class="example-section">
         <h3>m. Inline</h3>
-        <app-code-preview [code]="snippet('inline')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('inline')" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>n. Sizes</h3>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="row-3">
               <ui-lib-date-picker [(ngModel)]="sizeValues.sm" size="sm" />
@@ -175,12 +161,11 @@
               <ui-lib-date-picker [(ngModel)]="sizeValues.lg" size="lg" />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
         <h3>o. Variants</h3>
-        <app-code-preview [code]="snippet('variants')">
           <ui-lib-card>
             <div class="row-3">
               <div class="stack-sm">
@@ -197,42 +182,38 @@
               </div>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
         <h3>p. Filled</h3>
-        <app-code-preview [code]="snippet('filled')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('filled')" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>q. Disabled</h3>
-        <app-code-preview [code]="snippet('disabled')">
           <ui-lib-card>
             <ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
       </section>
 
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>r. Invalid</h3>
-        <app-code-preview [code]="snippet('invalid')">
           <ui-lib-card>
             <div class="stack-sm">
               <ui-lib-date-picker [(ngModel)]="invalidDate" [invalid]="true" />
               <span class="error-text">Please select a valid date.</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" />
       </section>
 
       <section id="reactive-forms" data-doc-anchor class="example-section">
         <h3>s. Reactive Forms</h3>
-        <app-code-preview [code]="snippet('reactive')">
           <ui-lib-card>
             <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
               <ui-lib-date-picker
@@ -245,7 +226,7 @@
               </div>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </section>
     </div>
   </app-doc-demo-viewport>

@@ -24,11 +24,10 @@
         <code>[value]</code>. Set <code>expanded: true</code> on any node to
         show its children by default.
       </p>
-      <app-code-preview [code]="snippet('basic')">
         <ui-lib-card>
           <ui-lib-organization-chart [value]="basicNodes()" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
     </section>
 
     <!-- 2. Collapsible -->
@@ -39,7 +38,6 @@
         every node that has children. Clicking it fires
         <code>(nodeExpand)</code> or <code>(nodeCollapse)</code>.
       </p>
-      <app-code-preview [code]="snippet('collapsible')">
         <ui-lib-card>
           <ui-lib-organization-chart
             [value]="collapsibleNodes()"
@@ -55,7 +53,7 @@
             </div>
           }
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('collapsible')" />
     </section>
 
     <!-- 3. Single Selection -->
@@ -66,7 +64,6 @@
         <code>[(selection)]</code> to track the selected node. Clicking a
         selected node deselects it.
       </p>
-      <app-code-preview [code]="snippet('singleSelection')">
         <ui-lib-card>
           <ui-lib-organization-chart
             [value]="singleNodes()"
@@ -80,7 +77,7 @@
             Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
           </p>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('singleSelection')" />
     </section>
 
     <!-- 4. Multiple Selection -->
@@ -90,7 +87,6 @@
         Set <code>selectionMode="multiple"</code> to allow selecting several
         nodes simultaneously. The <code>selection</code> binding holds an array.
       </p>
-      <app-code-preview [code]="snippet('multipleSelection')">
         <ui-lib-card>
           <ui-lib-organization-chart
             [value]="multipleNodes()"
@@ -104,7 +100,7 @@
             Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
           </p>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('multipleSelection')" />
     </section>
 
     <!-- 5. Custom Template -->
@@ -116,7 +112,6 @@
         full <code>OrganizationChartNode</code> including any <code>data</code>
         you attach.
       </p>
-      <app-code-preview [code]="snippet('customTemplate')">
         <ui-lib-card>
           <ui-lib-organization-chart [value]="customTemplateNodes()">
             <ng-template uiOrgChartNode let-node>
@@ -128,7 +123,7 @@
             </ng-template>
           </ui-lib-organization-chart>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('customTemplate')" />
     </section>
 
     <!-- 6. Bootstrap Variant -->
@@ -138,7 +133,6 @@
         Set <code>variant="bootstrap"</code> for a flat, border-based style
         consistent with Bootstrap-themed applications.
       </p>
-      <app-code-preview [code]="snippet('bootstrap')">
         <ui-lib-card>
           <ui-lib-organization-chart
             [value]="bootstrapNodes()"
@@ -146,7 +140,7 @@
             [collapsible]="true"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('bootstrap')" />
     </section>
 
     <!-- 7. Minimal Variant -->
@@ -156,7 +150,6 @@
         <code>variant="minimal"</code> removes all card chrome, using only
         dashed connector lines for a lightweight look.
       </p>
-      <app-code-preview [code]="snippet('minimal')">
         <ui-lib-card>
           <ui-lib-organization-chart
             [value]="minimalNodes()"
@@ -164,7 +157,7 @@
             [collapsible]="true"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('minimal')" />
     </section>
 
     <!-- 8. Accessibility -->

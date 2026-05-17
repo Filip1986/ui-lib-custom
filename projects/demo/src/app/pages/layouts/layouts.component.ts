@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,7 +16,6 @@ import { LayoutCompositionSectionComponent } from './composition-section.compone
 import { DesignTokensSectionComponent } from './design-tokens-section.component';
 import { ThemedLayoutsSectionComponent } from './themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './examples-section.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
 
 /**
@@ -27,6 +27,7 @@ import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example
   imports: [
     Card,
     Button,
+    CodeSnippet,
     FormsModule,
     DocPageLayoutComponent,
     SemanticSpacingSectionComponent,
@@ -38,7 +39,6 @@ import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example
     DesignTokensSectionComponent,
     ThemedLayoutsSectionComponent,
     LayoutExamplesSectionComponent,
-    CodePreviewComponent,
     LayoutBasicExampleComponent,
   ],
   templateUrl: './layouts.component.html',

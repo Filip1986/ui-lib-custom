@@ -16,43 +16,38 @@
   <div class="examples">
     <section id="basic-bar" data-doc-anchor class="example-section">
       <h3>1. Basic Bar Chart</h3>
-      <app-code-preview [code]="snippet('basicBar')">
         <ui-lib-card>
           <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basicBar')" />
     </section>
 
     <section id="basic-line" data-doc-anchor class="example-section">
       <h3>2. Basic Line Chart</h3>
-      <app-code-preview [code]="snippet('basicLine')">
         <ui-lib-card>
           <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('basicLine')" />
     </section>
 
     <section id="pie-chart" data-doc-anchor class="example-section">
       <h3>3. Pie Chart</h3>
-      <app-code-preview [code]="snippet('pie')">
         <ui-lib-card>
           <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('pie')" />
     </section>
 
     <section id="doughnut-chart" data-doc-anchor class="example-section">
       <h3>4. Doughnut Chart</h3>
-      <app-code-preview [code]="snippet('doughnut')">
         <ui-lib-card>
           <ui-lib-doughnut-chart [data]="channelMixData" ariaLabel="Acquisition channel doughnut chart" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('doughnut')" />
     </section>
 
     <section id="generic-radar" data-doc-anchor class="example-section">
       <h3>5. Generic Chart (Radar)</h3>
-      <app-code-preview [code]="snippet('radar')">
         <ui-lib-card>
           <ui-lib-chart
             type="radar"
@@ -60,12 +55,11 @@
             [ariaLabel]="'Platform capability radar chart'"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('radar')" />
     </section>
 
     <section id="generic-polar-area" data-doc-anchor class="example-section">
       <h3>6. Generic Chart (Polar Area)</h3>
-      <app-code-preview [code]="snippet('polarArea')">
         <ui-lib-card>
           <ui-lib-chart
             type="polarArea"
@@ -73,12 +67,11 @@
             [ariaLabel]="'Roadmap priority polar area chart'"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('polarArea')" />
     </section>
 
     <section id="generic-bubble" data-doc-anchor class="example-section">
       <h3>7. Generic Chart (Bubble)</h3>
-      <app-code-preview [code]="snippet('bubble')">
         <ui-lib-card>
           <ui-lib-chart
             type="bubble"
@@ -86,12 +79,11 @@
             [ariaLabel]="'Customer segment bubble chart'"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('bubble')" />
     </section>
 
     <section id="generic-scatter" data-doc-anchor class="example-section">
       <h3>8. Generic Chart (Scatter)</h3>
-      <app-code-preview [code]="snippet('scatter')">
         <ui-lib-card>
           <ui-lib-chart
             type="scatter"
@@ -99,39 +91,35 @@
             [ariaLabel]="'Campaign conversion scatter plot'"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('scatter')" />
     </section>
 
     <section id="multi-dataset-bar" data-doc-anchor class="example-section">
       <h3>9. Multi-Dataset Bar</h3>
-      <app-code-preview [code]="snippet('multiDatasetBar')">
         <ui-lib-card>
           <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('multiDatasetBar')" />
     </section>
 
     <section id="stacked-bar" data-doc-anchor class="example-section">
       <h3>10. Stacked Bar</h3>
-      <app-code-preview [code]="snippet('stackedBar')">
         <ui-lib-card>
           <ui-lib-bar-chart [data]="stackedCostData" [options]="stackedBarOptions" ariaLabel="Stacked cost chart" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('stackedBar')" />
     </section>
 
     <section id="line-area-fill" data-doc-anchor class="example-section">
       <h3>11. Line with Area Fill</h3>
-      <app-code-preview [code]="snippet('lineArea')">
         <ui-lib-card>
           <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('lineArea')" />
     </section>
 
     <section id="mixed-chart" data-doc-anchor class="example-section">
       <h3>12. Mixed Chart</h3>
-      <app-code-preview [code]="snippet('mixed')">
         <ui-lib-card>
           <ui-lib-chart
             type="bar"
@@ -140,12 +128,11 @@
             [ariaLabel]="'Mixed revenue and conversion chart'"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('mixed')" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>13. Sizes</h3>
-      <app-code-preview [code]="snippet('sizes')">
         <ui-lib-card>
           <ui-lib-grid [columns]="3" spacing="md" class="size-grid">
             <ui-lib-stack [gap]="2">
@@ -162,12 +149,11 @@
             </ui-lib-stack>
           </ui-lib-grid>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
     </section>
 
     <section id="custom-dimensions" data-doc-anchor class="example-section">
       <h3>14. Custom Dimensions</h3>
-      <app-code-preview [code]="snippet('customDimensions')">
         <ui-lib-card>
           <ui-lib-line-chart
             [data]="customDimensionData"
@@ -176,12 +162,11 @@
             ariaLabel="Custom dimension line chart"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('customDimensions')" />
     </section>
 
     <section id="dynamic-data-update" data-doc-anchor class="example-section">
       <h3>15. Dynamic Data Update</h3>
-      <app-code-preview [code]="snippet('dynamicUpdate')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-inline [gap]="2" align="center">
@@ -191,7 +176,7 @@
             <ui-lib-bar-chart [data]="dynamicRevenueData" ariaLabel="Dynamic revenue bar chart" />
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('dynamicUpdate')" />
     </section>
 
     <section id="theme-integration" data-doc-anchor class="example-section">
@@ -200,7 +185,6 @@
         This example swaps chart CSS variable profiles to demonstrate the theme-token bridge used by
         <code>ChartThemeService</code>.
       </p>
-      <app-code-preview [code]="snippet('themeIntegration')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-inline [gap]="2" align="center">
@@ -233,12 +217,11 @@
             </div>
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('themeIntegration')" />
     </section>
 
     <section id="click-events" data-doc-anchor class="example-section">
       <h3>17. Click Events</h3>
-      <app-code-preview [code]="snippet('clickEvents')">
         <ui-lib-card>
           <ui-lib-stack [gap]="3">
             <ui-lib-bar-chart
@@ -249,12 +232,11 @@
             <p class="selection-feedback" aria-live="polite">{{ selectedPointLabel }}</p>
           </ui-lib-stack>
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('clickEvents')" />
     </section>
 
     <section id="custom-options" data-doc-anchor class="example-section">
       <h3>18. Custom Options</h3>
-      <app-code-preview [code]="snippet('customOptions')">
         <ui-lib-card>
           <ui-lib-doughnut-chart
             [data]="customOptionsData"
@@ -262,7 +244,7 @@
             ariaLabel="Custom legend and tooltip chart"
           />
         </ui-lib-card>
-      </app-code-preview>
+      <ui-lib-code-snippet language="html" [code]="snippet('customOptions')" />
     </section>
   </div>
 </app-doc-page-layout>

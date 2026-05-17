@@ -10,7 +10,6 @@ import {
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { ColorPicker } from 'ui-lib-custom';
@@ -39,7 +38,6 @@ type DemoSnippetKey =
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     Card,
     Button,
     CodeSnippet,

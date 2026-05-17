@@ -23,7 +23,6 @@
           A minimal toggle bound with <code>[(checked)]</code>. The default labels are
           <em>Yes</em> (on) and <em>No</em> (off).
         </p>
-        <app-code-preview [code]="snippet('basic')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-toggle-button
@@ -32,7 +31,7 @@
               <span class="value-text">Value: {{ basicChecked() }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')" />
       </section>
 
       <!-- ── b. Custom Labels ──────────────────────────────────────────────── -->
@@ -42,7 +41,6 @@
           Use <code>onLabel</code> and <code>offLabel</code> to display context-specific text for
           each state.
         </p>
-        <app-code-preview [code]="snippet('labels')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-toggle-button
@@ -64,7 +62,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('labels')" />
       </section>
 
       <!-- ── c. Icons ──────────────────────────────────────────────────────── -->
@@ -74,7 +72,6 @@
           Provide <code>onIcon</code> and <code>offIcon</code> to show a different icon for each
           state. Use <code>iconPos="right"</code> to place the icon after the label.
         </p>
-        <app-code-preview [code]="snippet('icons')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-toggle-button
@@ -102,7 +99,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('icons')" />
       </section>
 
       <!-- ── d. Sizes ──────────────────────────────────────────────────────── -->
@@ -112,7 +109,6 @@
           Three size tokens are available: <code>sm</code>, <code>md</code> (default), and
           <code>lg</code>.
         </p>
-        <app-code-preview [code]="snippet('sizes')">
           <ui-lib-card>
             <div class="demo-row demo-row--align-center">
               <ui-lib-toggle-button
@@ -135,7 +131,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" />
       </section>
 
       <!-- ── e. Variants ───────────────────────────────────────────────────── -->
@@ -146,7 +142,6 @@
           elevation when checked), <code>bootstrap</code> (tighter corners), and
           <code>minimal</code> (pill-shaped, translucent fills).
         </p>
-        <app-code-preview [code]="snippet('variants')">
           <ui-lib-card>
             <div class="demo-grid">
               @for (variant of variantOptions; track variant) {
@@ -181,7 +176,7 @@
               }
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')" />
       </section>
 
       <!-- ── f. Allow Empty ────────────────────────────────────────────────── -->
@@ -191,7 +186,6 @@
           When <code>[allowEmpty]="false"</code> the button cannot be unchecked once activated.
           Useful for confirm-type toggles.
         </p>
-        <app-code-preview [code]="snippet('allowEmpty')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-toggle-button
@@ -203,7 +197,7 @@
               <span class="value-text">State: {{ allowEmptyChecked() ? 'confirmed' : 'pending' }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('allowEmpty')" />
       </section>
 
       <!-- ── g. Disabled ───────────────────────────────────────────────────── -->
@@ -213,7 +207,6 @@
           Set <code>[disabled]="true"</code> to prevent interaction. Both off and on states are
           shown at reduced opacity.
         </p>
-        <app-code-preview [code]="snippet('disabled')">
           <ui-lib-card>
             <div class="demo-row">
               <ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />
@@ -225,7 +218,7 @@
               />
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" />
       </section>
 
       <!-- ── h. Forms ──────────────────────────────────────────────────────── -->
@@ -235,7 +228,6 @@
           ToggleButton implements <code>ControlValueAccessor</code> and works with both
           <code>[(ngModel)]</code> and reactive forms.
         </p>
-        <app-code-preview [code]="snippet('ngModel')">
           <ui-lib-card>
             <h4 class="subsection-label">ngModel</h4>
             <div class="demo-row">
@@ -248,9 +240,8 @@
               <span class="value-text">ngModel: {{ ngModelValue }}</span>
             </div>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('ngModel')" />
 
-        <app-code-preview [code]="snippet('reactive')">
           <ui-lib-card>
             <h4 class="subsection-label">Reactive Forms</h4>
             <form [formGroup]="reactiveForm" class="demo-form">
@@ -277,7 +268,7 @@
               </div>
             </form>
           </ui-lib-card>
-        </app-code-preview>
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" />
       </section>
 
       <!-- ── i. Events ─────────────────────────────────────────────────────── -->

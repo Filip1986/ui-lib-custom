@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -53,7 +52,6 @@ type DataViewDemoSnippetKey =
   imports: [
     CommonModule,
     DocPageLayoutComponent,
-    CodePreviewComponent,
     Card,
     Button,
     CodeSnippet,
