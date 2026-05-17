@@ -22,6 +22,10 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class BindDemoComponent {
   public readonly importCode: string = "import { Bind } from 'ui-lib-custom/bind'";
+  public readonly snippetBasicUsage: string = `<div [uiLibBind]="{ id: 'my-box', title: 'Tooltip text', tabIndex: 0 }">\n  Content\n</div>`;
+  public readonly snippetBooleanNumeric: string = `<!-- numeric property -->\n<div [uiLibBind]="{ tabIndex: 2 }">Focusable</div>\n<!-- boolean property -->\n<div [uiLibBind]="{ hidden: true }">Hidden</div>`;
+  public readonly snippetSelector: string = `[uiLibBind]`;
+  public readonly snippetHostClass: string = `ui-lib-bind`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

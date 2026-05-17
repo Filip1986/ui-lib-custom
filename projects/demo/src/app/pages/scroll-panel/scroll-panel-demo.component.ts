@@ -18,6 +18,11 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 })
 export class ScrollPanelDemoComponent {
   public readonly importCode: string = "import { ScrollPanel } from 'ui-lib-custom/scroll-panel'";
+  public readonly snippetBasicUsage: string = `<ui-lib-scroll-panel style="height: 200px;">\n  <p>Long content...</p>\n  <p>More content...</p>\n</ui-lib-scroll-panel>`;
+  public readonly snippetVariants: string = `<ui-lib-scroll-panel [variant]="'material'" style="height: 200px;">...</ui-lib-scroll-panel>\n<ui-lib-scroll-panel [variant]="'bootstrap'" style="height: 200px;">...</ui-lib-scroll-panel>\n<ui-lib-scroll-panel [variant]="'minimal'" style="height: 200px;">...</ui-lib-scroll-panel>`;
+  public readonly snippetHorizontal: string = `<ui-lib-scroll-panel style="height: 160px; width: 100%;">\n  <div style="display: flex; gap: 1rem; width: max-content;">\n    <!-- wide content -->\n  </div>\n</ui-lib-scroll-panel>`;
+  public readonly snippetInteractive: string = `<ui-lib-scroll-panel [variant]="activeVariant()" style="height: 200px;">\n  <!-- content -->\n</ui-lib-scroll-panel>`;
+  public readonly snippetCssProperties: string = `.my-panel {\n  --uilib-scroll-panel-scrollbar-width: 10px;\n  --uilib-scroll-panel-scrollbar-thumb-bg: #f97316;\n  --uilib-scroll-panel-scrollbar-thumb-bg-hover: #ea580c;\n  --uilib-scroll-panel-scrollbar-track-bg: #fff7ed;\n  --uilib-scroll-panel-border-color: #fed7aa;\n}`;
 
   public readonly activeVariant: WritableSignal<ScrollPanelVariant> =
     signal<ScrollPanelVariant>('material');

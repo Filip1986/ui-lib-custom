@@ -31,10 +31,13 @@
           Open Dialog
         </ui-lib-button>
       </div>
-      <pre class="demo-card__code"><code>const ref = this.dialogService.open(MyComponent, &#123;
-  header: 'Welcome',
-  width: '32rem',
-&#125;);</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetBasicOpen"
+      />
     </div>
   </section>
 
@@ -54,19 +57,13 @@
           <p class="demo-result">Result: <strong>{{ lastResult }}</strong></p>
         }
       </div>
-      <pre class="demo-card__code"><code>// Caller
-const ref = this.dialogService.open(DataDialogContentComponent, &#123;
-  header: 'User Details',
-  data: &#123; userId: 42, name: 'Filip Luca' &#125;,
-&#125;);
-ref.onClose.subscribe((result) =&gt; console.log(result));
-
-// Guest component
-config = inject(DYNAMIC_DIALOG_CONFIG);
-ref    = inject(DynamicDialogRef);
-
-this.userId = (this.config.data as any).userId;
-this.ref.close(&#123; confirmed: true &#125;);</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetPassingData"
+      />
     </div>
   </section>
 
@@ -83,11 +80,13 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
           Open Scrollable
         </ui-lib-button>
       </div>
-      <pre class="demo-card__code"><code>this.dialogService.open(LongContentComponent, &#123;
-  header: 'Scrollable',
-  width: '38rem',
-  height: '50vh',
-&#125;);</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetScrollable"
+      />
     </div>
   </section>
 
@@ -109,7 +108,13 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
           Minimal
         </ui-lib-button>
       </div>
-      <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; variant: 'bootstrap' &#125;);</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetVariant"
+      />
     </div>
   </section>
 
@@ -128,7 +133,13 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
         <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('left')">Left</ui-lib-button>
         <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('right')">Right</ui-lib-button>
       </div>
-      <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; position: 'top' &#125;);</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetPosition"
+      />
     </div>
   </section>
 

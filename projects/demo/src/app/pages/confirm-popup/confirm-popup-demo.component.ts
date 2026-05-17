@@ -30,6 +30,9 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 export class ConfirmPopupDemoComponent {
   public readonly importCode: string =
     "import { ConfirmPopup, ConfirmPopupService } from 'ui-lib-custom/confirm-popup'";
+  public readonly snippetBasicConfirm: string = `// component.ts\nthis.confirmPopupService.confirm({\n  target: event.currentTarget as HTMLElement,\n  message: 'Are you sure you want to proceed?',\n  accept: () => this.proceed(),\n});`;
+  public readonly snippetIconConfirm: string = `this.confirmPopupService.confirm({\n  target: event.currentTarget as HTMLElement,\n  message: 'Are you sure you want to delete this file?',\n  icon: 'pi pi-exclamation-triangle',\n  acceptLabel: 'Delete',\n  rejectLabel: 'Keep',\n  acceptSeverity: 'danger',\n  accept: () => this.deleteFile(),\n});`;
+  public readonly snippetDeclarativeUsage: string = `<ui-lib-confirm-popup\n  key="declarative"\n  [(visible)]="visible"\n  message="Proceed with this action?"\n  acceptLabel="Yes, proceed"\n  rejectLabel="Cancel"\n  (accepted)="onAccepted()"\n  (rejected)="onRejected()"\n/>`;
   private readonly confirmPopupService: ConfirmPopupService = inject(ConfirmPopupService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

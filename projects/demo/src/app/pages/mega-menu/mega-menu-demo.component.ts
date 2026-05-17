@@ -27,6 +27,11 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class MegaMenuDemoComponent {
   public readonly importCode: string = "import { MegaMenu } from 'ui-lib-custom/mega-menu'";
+  public readonly snippetBasicHorizontal: string = `<ui-lib-mega-menu [model]="items" />`;
+  public readonly snippetVertical: string = `<ui-lib-mega-menu [model]="items" orientation="vertical" />`;
+  public readonly snippetDisabledSeparator: string = `{ label: "Save As", disabled: true }\n{ separator: true }`;
+  public readonly snippetCommand: string = `{ label: "Delete", command: ({ item }) => console.log(item) }`;
+  public readonly snippetItemClick: string = `<ui-lib-mega-menu [model]="items" (itemClick)="onItemClick($event)" />`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

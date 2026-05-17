@@ -26,6 +26,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class MenubarDemoComponent {
   public readonly importCode: string = "import { Menubar } from 'ui-lib-custom/menubar'";
+  public readonly snippetBasic: string = `{{ basicModel }}\n<ui-lib-menubar [model]="basicModel" />`;
+  public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">\n  <span menubarStart>MyApp</span>\n  <button menubarEnd>Sign In</button>\n</ui-lib-menubar>`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

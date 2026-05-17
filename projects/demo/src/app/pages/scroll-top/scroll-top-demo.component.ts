@@ -15,6 +15,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 })
 export class ScrollTopDemoComponent {
   public readonly importCode: string = "import { ScrollTop } from 'ui-lib-custom/scroll-top'";
+  public readonly snippetThreshold: string = `<ui-lib-scroll-top [threshold]="200" />`;
+  public readonly snippetParentTarget: string = `<div style="height: 300px; overflow-y: auto; position: relative;">\n  <ui-lib-scroll-top target="parent" [threshold]="100" />\n  <!-- scrollable content -->\n</div>`;
 
   /** Items for the scrollable container demo. */
   public readonly dummyItems: number[] = Array.from(

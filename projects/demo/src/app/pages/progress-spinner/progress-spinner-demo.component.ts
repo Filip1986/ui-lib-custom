@@ -22,6 +22,12 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 export class ProgressSpinnerDemoComponent {
   public readonly importCode: string =
     "import { ProgressSpinner } from 'ui-lib-custom/progress-spinner'";
+  public readonly snippetBasic: string = `<ui-lib-progress-spinner />`;
+  public readonly snippetSizes: string = `<ui-lib-progress-spinner size="sm" />\n<ui-lib-progress-spinner size="md" />\n<ui-lib-progress-spinner size="lg" />`;
+  public readonly snippetVariants: string = `<ui-lib-progress-spinner variant="material" />\n<ui-lib-progress-spinner variant="bootstrap" />\n<ui-lib-progress-spinner variant="minimal" />`;
+  public readonly snippetAnimationDuration: string = `<ui-lib-progress-spinner animationDuration="4s" />\n<ui-lib-progress-spinner animationDuration="2s" />\n<ui-lib-progress-spinner animationDuration="750ms" />`;
+  public readonly snippetStrokeWidth: string = `<ui-lib-progress-spinner strokeWidth="1" />\n<ui-lib-progress-spinner strokeWidth="4" />\n<ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" />`;
+  public readonly snippetLoadingOverlay: string = `<div class="loading-wrapper">\n  <div class="content">…</div>\n  <div class="overlay">\n    <ui-lib-progress-spinner size="lg" />\n  </div>\n</div>`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

@@ -32,7 +32,13 @@
     <div class="ps-row">
       <ui-lib-progress-spinner />
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasic"
+    />
   </section>
 
   <!-- Section 2: Sizes -->
@@ -47,9 +53,13 @@
       <ui-lib-progress-spinner size="md" />
       <ui-lib-progress-spinner size="lg" />
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner size="sm" /&gt;
-&lt;ui-lib-progress-spinner size="md" /&gt;
-&lt;ui-lib-progress-spinner size="lg" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetSizes"
+    />
   </section>
 
   <!-- Section 3: Variants -->
@@ -75,9 +85,13 @@
         <span class="ps-variant-card__label">minimal</span>
       </div>
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner variant="material" /&gt;
-&lt;ui-lib-progress-spinner variant="bootstrap" /&gt;
-&lt;ui-lib-progress-spinner variant="minimal" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetVariants"
+    />
   </section>
 
   <!-- Section 4: Custom animation speed -->
@@ -101,9 +115,13 @@
         <span>Fast (750ms)</span>
       </div>
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner animationDuration="4s" /&gt;
-&lt;ui-lib-progress-spinner animationDuration="2s" /&gt;
-&lt;ui-lib-progress-spinner animationDuration="750ms" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetAnimationDuration"
+    />
   </section>
 
   <!-- Section 5: Custom stroke width and fill -->
@@ -118,9 +136,13 @@
       <ui-lib-progress-spinner strokeWidth="4" variant="bootstrap" size="lg" ariaLabel="Thick spinner" />
       <ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" variant="bootstrap" size="lg" ariaLabel="Filled spinner" />
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner strokeWidth="1" /&gt;
-&lt;ui-lib-progress-spinner strokeWidth="4" /&gt;
-&lt;ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetStrokeWidth"
+    />
   </section>
 
   <!-- Section 6: Loading overlay pattern -->
@@ -139,12 +161,13 @@
         <ui-lib-progress-spinner size="lg" variant="material" />
       </div>
     </div>
-    <pre class="ps-code"><code>&lt;div class="loading-wrapper"&gt;
-  &lt;div class="content"&gt;…&lt;/div&gt;
-  &lt;div class="overlay"&gt;
-    &lt;ui-lib-progress-spinner size="lg" /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetLoadingOverlay"
+    />
   </section>
 
   <!-- Section 7: Interactive playground -->

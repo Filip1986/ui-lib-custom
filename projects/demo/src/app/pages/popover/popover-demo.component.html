@@ -42,11 +42,13 @@
       </ui-lib-popover>
     </div>
 
-    <pre class="demo-code"><code>&lt;button #trigger (click)="op.toggle(trigger)"&gt;Toggle&lt;/button&gt;
-
-&lt;ui-lib-popover #op&gt;
-  &lt;p&gt;Popover body content.&lt;/p&gt;
-&lt;/ui-lib-popover&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasic"
+    />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -75,9 +77,13 @@
       </ui-lib-popover>
     </div>
 
-    <pre class="demo-code"><code>&lt;ui-lib-popover #op header="User Details" [showCloseButton]="true"&gt;
-  &lt;!-- content --&gt;
-&lt;/ui-lib-popover&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetHeaderClose"
+    />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -222,7 +228,13 @@
       </p>
     </ui-lib-popover>
 
-    <pre class="demo-code"><code>&lt;ui-lib-popover [(visible)]="isOpen"&gt;...&lt;/ui-lib-popover&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetDeclarative"
+    />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════

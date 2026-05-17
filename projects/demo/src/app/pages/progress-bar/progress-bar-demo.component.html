@@ -30,7 +30,13 @@
     <div class="demo-section__preview">
       <ui-lib-progress-bar [value]="basicValue()" />
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasic"
+    />
   </section>
 
   <!-- ---- No label ----------------------------------------------------- -->
@@ -48,7 +54,13 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" size="sm" [showValue]="false" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetNoLabel"
+    />
   </section>
 
   <!-- ---- Custom label ------------------------------------------------- -->
@@ -60,7 +72,13 @@
     <div class="demo-section__preview">
       <ui-lib-progress-bar [value]="60" label="Uploading…" />
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="60" label="Uploading…" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetCustomLabel"
+    />
   </section>
 
   <!-- ---- Indeterminate ------------------------------------------------ -->
@@ -79,7 +97,13 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar mode="indeterminate" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetIndeterminate"
+    />
   </section>
 
   <!-- ---- Variants ----------------------------------------------------- -->
@@ -97,7 +121,13 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" variant="bootstrap" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetVariants"
+    />
   </section>
 
   <!-- ---- Sizes -------------------------------------------------------- -->
@@ -114,7 +144,13 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" size="lg" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetSizes"
+    />
   </section>
 
   <!-- ---- Custom colour ------------------------------------------------ -->
@@ -129,7 +165,13 @@
       <ui-lib-progress-bar [value]="65" color="#f59e0b" label="65%" />
       <ui-lib-progress-bar [value]="90" color="#ef4444" label="90%" />
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="40" color="#10b981" label="40%" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetCustomColour"
+    />
   </section>
 
   <!-- ---- Dynamic ------------------------------------------------------ -->

@@ -27,27 +27,13 @@
     </p>
 
     <div class="demo-card">
-      <pre class="demo-code"><code>import &#123; classNames &#125; from 'ui-lib-custom/class-names';
-
-// Strings
-classNames('foo', 'bar')
-// → 'foo bar'
-
-// Conditional via boolean expression
-classNames('btn', isActive &amp;&amp; 'btn--active')
-// → 'btn btn--active'  (when isActive = true)
-
-// Object: keys with truthy values included
-classNames(&#123; active: true, disabled: false &#125;)
-// → 'active'
-
-// Array: recursively flattened
-classNames(['base', &#123; highlight: true &#125;])
-// → 'base highlight'
-
-// Falsy values are silently ignored
-classNames('btn', null, undefined, false, 'icon')
-// → 'btn icon'</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetFunctionUsage"
+      />
     </div>
   </section>
 
@@ -60,21 +46,13 @@ classNames('btn', null, undefined, false, 'icon')
     </p>
 
     <div class="demo-card">
-      <pre class="demo-code"><code>import &#123; ClassNamesPipe &#125; from 'ui-lib-custom/class-names';
-
-@Component(&#123;
-  imports: [ClassNamesPipe],
-  template: `
-    &lt;!-- Object syntax --&gt;
-    &lt;div [class]="&#123; active: isActive, hidden: isHidden &#125; | classNames"&gt;&lt;/div&gt;
-
-    &lt;!-- String with extra object arg --&gt;
-    &lt;div [class]="'btn' | classNames:&#123; 'btn--lg': isLarge &#125;"&gt;&lt;/div&gt;
-
-    &lt;!-- Array flattening --&gt;
-    &lt;div [class]="['base', isActive &amp;&amp; 'active'] | classNames"&gt;&lt;/div&gt;
-  `,
-&#125;)</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetPipeUsage"
+      />
     </div>
   </section>
 
@@ -180,13 +158,13 @@ classNames('btn', null, undefined, false, 'icon')
 
     <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNameValue type</h3>
     <div class="demo-card">
-      <pre class="demo-code"><code>type ClassNameValue =
-  | string
-  | null
-  | undefined
-  | false
-  | Record&lt;string, boolean | null | undefined | false&gt;
-  | ClassNameValue[];</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="snippetClassNameValueType"
+      />
     </div>
   </section>
 

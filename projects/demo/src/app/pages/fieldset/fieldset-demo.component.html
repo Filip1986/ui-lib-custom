@@ -45,9 +45,13 @@
         </div>
       </ui-lib-fieldset>
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-fieldset legend="Personal Information"&gt;
-  &lt;!-- content --&gt;
-&lt;/ui-lib-fieldset&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasic"
+    />
   </section>
 
   <!-- ── Toggleable ───────────────────────────────────────────────────────── -->
@@ -78,13 +82,13 @@
         Collapsed: <strong>{{ isBasicCollapsed() }}</strong>
       </p>
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-fieldset
-  legend="Advanced Options"
-  [toggleable]="true"
-  [(collapsed)]="isCollapsed"
-&gt;
-  &lt;!-- content --&gt;
-&lt;/ui-lib-fieldset&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetToggleable"
+    />
   </section>
 
   <!-- ── Pre-collapsed ────────────────────────────────────────────────────── -->
@@ -105,13 +109,13 @@
         </p>
       </ui-lib-fieldset>
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-fieldset
-  legend="Hidden by Default"
-  [toggleable]="true"
-  [collapsed]="true"
-&gt;
-  &lt;p&gt;Revealed on click&lt;/p&gt;
-&lt;/ui-lib-fieldset&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetPreCollapsed"
+    />
   </section>
 
   <!-- ── Custom Legend ────────────────────────────────────────────────────── -->
@@ -132,12 +136,13 @@
         </p>
       </ui-lib-fieldset>
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-fieldset [toggleable]="true"&gt;
-  &lt;span fieldsetLegend&gt;
-    &lt;i class="pi pi-user"&gt;&lt;/i&gt; User &lt;strong&gt;Profile&lt;/strong&gt;
-  &lt;/span&gt;
-  &lt;p&gt;Body content&lt;/p&gt;
-&lt;/ui-lib-fieldset&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetCustomLegend"
+    />
   </section>
 
   <!-- ── Variants ─────────────────────────────────────────────────────────── -->
@@ -160,9 +165,13 @@
         </ui-lib-fieldset>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-fieldset variant="material" legend="Material" /&gt;
-&lt;ui-lib-fieldset variant="bootstrap" legend="Bootstrap" /&gt;
-&lt;ui-lib-fieldset variant="minimal" legend="Minimal" /&gt;</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetVariants"
+    />
   </section>
 
   <!-- ── Toggle Event ─────────────────────────────────────────────────────── -->
@@ -180,16 +189,13 @@
         <p class="demo-paragraph">Toggle me to see the event fire.</p>
       </ui-lib-fieldset>
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-fieldset
-  legend="Event Demo"
-  [toggleable]="true"
-  (toggled)="onToggle($event)"
-&gt;&lt;/ui-lib-fieldset&gt;
-
-// component.ts
-onToggle(event: FieldsetToggleEvent): void &#123;
-  console.log('collapsed:', event.collapsed);
-&#125;</code></pre>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetToggleEvent"
+    />
   </section>
 
   <!-- ── API ──────────────────────────────────────────────────────────────── -->

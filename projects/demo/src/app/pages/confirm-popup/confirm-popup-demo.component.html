@@ -42,12 +42,13 @@
       <ui-lib-button (click)="confirmBasic($event)">Confirm action</ui-lib-button>
     </div>
 
-    <pre class="demo-code">// component.ts
-this.confirmPopupService.confirm(&#123;
-  target: event.currentTarget as HTMLElement,
-  message: 'Are you sure you want to proceed?',
-  accept: () =&gt; this.proceed(),
-&#125;);</pre>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetBasicConfirm"
+    />
   </section>
 
   <!-- ---- With icon ---- -->
@@ -63,15 +64,13 @@ this.confirmPopupService.confirm(&#123;
       </ui-lib-button>
     </div>
 
-    <pre class="demo-code">this.confirmPopupService.confirm(&#123;
-  target: event.currentTarget as HTMLElement,
-  message: 'Are you sure you want to delete this file?',
-  icon: 'pi pi-exclamation-triangle',
-  acceptLabel: 'Delete',
-  rejectLabel: 'Keep',
-  acceptSeverity: 'danger',
-  accept: () =&gt; this.deleteFile(),
-&#125;);</pre>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetIconConfirm"
+    />
   </section>
 
   <!-- ---- Button severities ---- -->
@@ -120,15 +119,13 @@ this.confirmPopupService.confirm(&#123;
       <ui-lib-button (click)="declarativeVisible.set(true)">Open declarative popup</ui-lib-button>
     </div>
 
-    <pre class="demo-code">&lt;ui-lib-confirm-popup
-  key="declarative"
-  [(visible)]="visible"
-  message="Proceed with this action?"
-  acceptLabel="Yes, proceed"
-  rejectLabel="Cancel"
-  (accepted)="onAccepted()"
-  (rejected)="onRejected()"
-/&gt;</pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showWindowChrome]="false"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="snippetDeclarativeUsage"
+    />
   </section>
 
   <!-- ---- Result log ---- -->

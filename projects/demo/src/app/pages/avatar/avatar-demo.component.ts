@@ -22,6 +22,12 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class AvatarDemoComponent {
   public readonly importCode: string = "import { Avatar, AvatarGroup } from 'ui-lib-custom/avatar'";
+  public readonly snippetImage: string = `<ui-lib-avatar image="/photo.jpg" imageAlt="Jane Doe" size="md" />`;
+  public readonly snippetLabel: string = `<ui-lib-avatar label="JD" size="md" />`;
+  public readonly snippetIcon: string = `<ui-lib-avatar icon="pi pi-user" size="md" />`;
+  public readonly snippetShape: string = `<ui-lib-avatar label="JD" shape="square" />`;
+  public readonly snippetVariant: string = `<ui-lib-avatar label="VT" variant="material" />`;
+  public readonly snippetAvatarGroup: string = `<ui-lib-avatar-group ariaLabel="Project team">\n  <ui-lib-avatar image="/amy.jpg" imageAlt="Amy" />\n  <ui-lib-avatar image="/bob.jpg" imageAlt="Bob" />\n  <ui-lib-avatar label="+3" />\n</ui-lib-avatar-group>`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
