@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -65,6 +67,7 @@ type ThemeCssVariables = {
   imports: [
     CommonModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     Card,
     Button,
     CodeSnippet,
@@ -87,6 +90,9 @@ export class ChartDemoComponent {
 
   private static defaultsProvided: boolean = false;
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic-bar', label: 'Basic Bar Chart' },
     { id: 'basic-line', label: 'Basic Line Chart' },
@@ -107,6 +113,10 @@ export class ChartDemoComponent {
     { id: 'click-events', label: 'Click Events' },
     { id: 'custom-options', label: 'Custom Options' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<ChartDemoSnippetKey, string> = {
     basicBar: `<ui-lib-bar-chart [data]="monthlyRevenueData" />`,

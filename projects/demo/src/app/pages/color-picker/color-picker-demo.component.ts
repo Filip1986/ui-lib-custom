@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +10,7 @@ import {
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
@@ -37,6 +39,7 @@ type DemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     Card,
     Button,
@@ -50,6 +53,9 @@ type DemoSnippetKey =
 export class ColorPickerDemoComponent {
   public readonly importCode: string = "import { ColorPicker } from 'ui-lib-custom'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'inline', label: 'Inline' },
@@ -60,6 +66,10 @@ export class ColorPickerDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<DemoSnippetKey, string> = {
     basic: `<ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />

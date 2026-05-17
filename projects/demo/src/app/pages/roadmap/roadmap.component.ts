@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 export interface ComponentScore {
@@ -104,12 +105,19 @@ export interface LaunchStep {
 @Component({
   selector: 'app-roadmap',
   standalone: true,
-  imports: [CommonModule, RouterModule, DocPageLayoutComponent],
+  imports: [CommonModule, RouterModule, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './roadmap.component.html',
   styleUrl: './roadmap.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoadmapComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly sections: DocSection[] = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'milestone-progress', label: 'Milestones' },

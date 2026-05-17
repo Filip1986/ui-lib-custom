@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
@@ -19,6 +21,7 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
   imports: [
     CommonModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     VariantComparisonComponent,
     Card,
     Button,
@@ -33,6 +36,9 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
 export class DialogDemoComponent {
   public readonly importCode: string = "import { DialogComponent } from 'ui-lib-custom/dialog'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'custom-header-footer', label: 'Custom Header & Footer' },
@@ -45,6 +51,10 @@ export class DialogDemoComponent {
     { id: 'headless', label: 'Headless' },
     { id: 'variant-switcher', label: 'Variant Switcher' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public basicVisible: boolean = false;
   public customVisible: boolean = false;

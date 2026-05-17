@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,6 +11,7 @@ import {
 import type { NgForm } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
@@ -40,6 +42,7 @@ type EditorDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     Button,
     Card,
@@ -54,6 +57,9 @@ type EditorDemoSnippetKey =
 export class EditorDemoComponent {
   public readonly importCode: string = "import { EditorComponent } from 'ui-lib-custom/editor'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'readonly', label: 'Readonly' },
@@ -66,6 +72,10 @@ export class EditorDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'events', label: 'Events' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<EditorDemoSnippetKey, string> = {
     basic: `<ui-lib-editor [(ngModel)]="basicHtml" placeholder="Write something..."></ui-lib-editor>

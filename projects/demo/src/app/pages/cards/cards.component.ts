@@ -5,7 +5,7 @@ import {
   computed,
   inject,
   effect,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Card } from 'ui-lib-custom/card';
@@ -17,6 +17,7 @@ import { SHADOWS } from 'ui-lib-custom/tokens';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { FormsModule } from '@angular/forms';
@@ -50,6 +51,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Tabs,
     Tab,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     FormsModule,
     VariantComparisonComponent,
@@ -63,6 +65,9 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
 export class CardsComponent {
   public readonly importCode: string = "import { Card } from 'ui-lib-custom/card'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
@@ -71,6 +76,10 @@ export class CardsComponent {
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 

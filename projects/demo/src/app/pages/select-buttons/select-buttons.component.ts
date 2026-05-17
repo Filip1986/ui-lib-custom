@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -20,6 +21,7 @@ import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { Icon } from 'ui-lib-custom/icon';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
 
@@ -42,6 +44,7 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
     Inline,
     Grid,
     DocPageLayoutComponent,
+    DocTocComponent,
     VariantComparisonComponent,
     SelectButtonBasicExampleComponent,
   ],
@@ -50,6 +53,13 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonsComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string = "import { SelectButton } from 'ui-lib-custom/select-button'";
 
   public readonly sections: DocSection[] = [

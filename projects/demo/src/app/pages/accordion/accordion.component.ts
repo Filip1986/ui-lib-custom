@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ViewChild,
   computed,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Accordion, AccordionPanel, AccordionToggleIcon } from 'ui-lib-custom/accordion';
@@ -19,6 +19,7 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
@@ -64,6 +65,7 @@ type AccordionTab =
     Tab,
     Icon,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
     VariantComparisonComponent,
@@ -76,6 +78,9 @@ type AccordionTab =
 export class AccordionComponent {
   public readonly importCode: string =
     "import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
 
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
@@ -90,6 +95,10 @@ export class AccordionComponent {
     { id: 'api-reference', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly activeTab: WritableSignal<AccordionTab> = signal<AccordionTab>('playground');
 

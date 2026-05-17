@@ -1,10 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { Badge } from 'ui-lib-custom/badge';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -13,12 +15,15 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CodeSnippet, Card, Button, Badge, DocPageLayoutComponent],
+  imports: [CommonModule, CodeSnippet, Card, Button, Badge, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly snippetInstall: string = `npm install @filip86/ui-components`;
   public readonly snippetImport: string = `import { Button, Card } from '@filip86/ui-components';\n\n@Component({\n  standalone: true,\n  imports: [Button, Card],\n  // ...\n})`;
 
@@ -30,4 +35,8 @@ export class HomeComponent {
     { id: 'getting-started', label: 'Getting Started' },
     { id: 'profiling-notes', label: 'Profiling Notes' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 }

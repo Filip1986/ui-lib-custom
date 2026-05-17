@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -33,12 +35,20 @@ type KeyFilterDemoSnippetKey =
     Card,
     CodeSnippet,
     KeyFilterDirective,
+    DocTocComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeyFilterDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string =
     "import { KeyFilterDirective } from 'ui-lib-custom/key-filter'";
 

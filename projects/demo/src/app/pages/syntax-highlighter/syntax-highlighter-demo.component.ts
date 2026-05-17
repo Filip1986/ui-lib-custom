@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/
 import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
 
@@ -11,7 +12,7 @@ import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
 @Component({
   selector: 'app-syntax-highlighter-demo',
   standalone: true,
-  imports: [CodeSnippet, DocPageLayoutComponent, CodeSnippet],
+  imports: [CodeSnippet, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './syntax-highlighter-demo.component.html',
   styleUrl: './syntax-highlighter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +26,10 @@ export class SyntaxHighlighterDemoComponent {
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

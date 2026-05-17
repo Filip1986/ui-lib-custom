@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +10,7 @@ import {
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { InputOtpComponent } from 'ui-lib-custom/input-otp';
@@ -35,6 +37,7 @@ type InputOtpDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocTocComponent,
     DocDemoViewportComponent,
     Card,
     Button,
@@ -49,6 +52,9 @@ export class InputOtpDemoComponent {
   public readonly importCode: string =
     "import { InputOtpComponent } from 'ui-lib-custom/input-otp'";
 
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'mask', label: 'Mask' },
@@ -60,6 +66,10 @@ export class InputOtpDemoComponent {
     { id: 'readonly', label: 'Read Only' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly snippets: Record<InputOtpDemoSnippetKey, string> = {
     basic:

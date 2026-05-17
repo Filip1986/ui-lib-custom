@@ -6,6 +6,7 @@ import {
   effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -31,6 +32,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
@@ -75,6 +77,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     Checkbox,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
+    DocTocComponent,
     ThemeScopeDirective,
     VariantComparisonComponent,
     TabsBasicExampleComponent,
@@ -84,6 +87,13 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly importCode: string =
     "import { Tabs, Tab, TabLabel, TabContent } from 'ui-lib-custom/tabs'";
   public readonly sections: DocSection[] = [

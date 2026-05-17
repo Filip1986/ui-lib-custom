@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
@@ -12,6 +12,7 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
@@ -33,6 +34,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
     UiLibSelect,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
+    DocTocComponent,
     CodeSnippet,
   ],
   templateUrl: './project-starter.component.html',
@@ -40,6 +42,13 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectStarterComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
   public readonly themeName: WritableSignal<string> = signal<string>('my-theme');
