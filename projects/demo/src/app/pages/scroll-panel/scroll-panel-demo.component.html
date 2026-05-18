@@ -184,52 +184,7 @@
     </table>
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-scroll-panel-bg</code></td>
-          <td>Background colour of the container</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-border-color</code></td>
-          <td>Border colour</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-border-radius</code></td>
-          <td>Border radius</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-scrollbar-width</code></td>
-          <td>Width (and height) of the scrollbar</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-scrollbar-track-bg</code></td>
-          <td>Track background colour</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-scrollbar-thumb-bg</code></td>
-          <td>Thumb colour (default state)</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-scrollbar-thumb-bg-hover</code></td>
-          <td>Thumb colour on hover</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-scrollbar-radius</code></td>
-          <td>Thumb and track border radius</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-scroll-panel-transition</code></td>
-          <td>Transition duration for colour changes</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </section>
 
   <div class="demo-page-rail" docRail>

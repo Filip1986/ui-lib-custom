@@ -201,52 +201,7 @@
 
     <div id="api-css" data-doc-anchor>
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>--uilib-block-ui-mask-bg</code></td>
-            <td><code>rgba(0,0,0,0.4)</code></td>
-            <td>Mask background colour (overridden per variant).</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-block-ui-mask-bg-material</code></td>
-            <td><code>rgba(0,0,0,0.3)</code></td>
-            <td>Mask colour for the <code>material</code> variant.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-block-ui-mask-bg-bootstrap</code></td>
-            <td><code>rgba(0,0,0,0.5)</code></td>
-            <td>Mask colour for the <code>bootstrap</code> variant.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-block-ui-mask-bg-minimal</code></td>
-            <td><code>rgba(0,0,0,0.15)</code></td>
-            <td>Mask colour for the <code>minimal</code> variant.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-block-ui-transition-duration</code></td>
-            <td><code>0.2s</code></td>
-            <td>Fade duration; overridden to <code>0</code> under <code>prefers-reduced-motion</code>.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-block-ui-transition</code></td>
-            <td><code>opacity var(…) ease</code></td>
-            <td>Full transition shorthand.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-block-ui-z-index</code></td>
-            <td><code>var(--uilib-z-overlay, 100)</code></td>
-            <td>Z-index of the mask layer.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
 
   </section>

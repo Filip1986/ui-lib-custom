@@ -6,6 +6,8 @@ import { Button } from 'ui-lib-custom/button';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -21,6 +23,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './block-ui-demo.component.html',
   styleUrl: './block-ui-demo.component.scss',
@@ -30,6 +33,45 @@ export class BlockUiDemoComponent {
   public readonly importCode: string = "import { BlockUI } from 'ui-lib-custom/block-ui'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-block-ui-mask-bg',
+      default: 'rgba(0,0,0,0.4)',
+      description: 'Mask background colour (overridden per variant).',
+    },
+    {
+      variable: '--uilib-block-ui-mask-bg-material',
+      default: 'rgba(0,0,0,0.3)',
+      description: 'Mask colour for the <code>material</code> variant.',
+    },
+    {
+      variable: '--uilib-block-ui-mask-bg-bootstrap',
+      default: 'rgba(0,0,0,0.5)',
+      description: 'Mask colour for the <code>bootstrap</code> variant.',
+    },
+    {
+      variable: '--uilib-block-ui-mask-bg-minimal',
+      default: 'rgba(0,0,0,0.15)',
+      description: 'Mask colour for the <code>minimal</code> variant.',
+    },
+    {
+      variable: '--uilib-block-ui-transition-duration',
+      default: '0.2s',
+      description:
+        'Fade duration; overridden to <code>0</code> under <code>prefers-reduced-motion</code>.',
+    },
+    {
+      variable: '--uilib-block-ui-transition',
+      default: 'opacity var(…) ease',
+      description: 'Full transition shorthand.',
+    },
+    {
+      variable: '--uilib-block-ui-z-index',
+      default: 'var(--uilib-z-overlay, 100)',
+      description: 'Z-index of the mask layer.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

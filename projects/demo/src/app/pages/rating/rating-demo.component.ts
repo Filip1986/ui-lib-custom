@@ -8,6 +8,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -25,6 +27,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './rating-demo.component.html',
   styleUrl: './rating-demo.component.scss',
@@ -34,6 +37,39 @@ export class RatingDemoComponent {
   public readonly importCode: string = "import { Rating } from 'ui-lib-custom/rating'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-rating-star-on-color', description: 'Filled star colour.' },
+    { variable: '--uilib-rating-star-off-color', description: 'Empty star colour.' },
+    { variable: '--uilib-rating-star-hover-color', description: 'Hovered star colour.' },
+    { variable: '--uilib-rating-cancel-color', description: 'Cancel button icon colour.' },
+    {
+      variable: '--uilib-rating-cancel-hover-color',
+      description: 'Cancel button icon hover colour.',
+    },
+    { variable: '--uilib-rating-gap', description: 'Gap between stars.' },
+    {
+      variable: '--uilib-rating-star-size-sm',
+      description: 'Star size for <code>size="sm"</code>.',
+    },
+    {
+      variable: '--uilib-rating-star-size-md',
+      description: 'Star size for <code>size="md"</code> (default).',
+    },
+    {
+      variable: '--uilib-rating-star-size-lg',
+      description: 'Star size for <code>size="lg"</code>.',
+    },
+    {
+      variable: '--uilib-rating-focus-shadow',
+      description: 'Focus ring box-shadow applied to the active star.',
+    },
+    {
+      variable: '--uilib-rating-transition-duration',
+      description:
+        'Transition duration. Set to <code>0ms</code> for <code>prefers-reduced-motion: reduce</code>.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

@@ -436,60 +436,7 @@
   <!-- ---- CSS Custom Properties ------------------------------------ -->
   <section class="demo-section" id="css-vars" data-doc-anchor>
     <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-rating-star-on-color</code></td>
-          <td>Filled star colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-off-color</code></td>
-          <td>Empty star colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-hover-color</code></td>
-          <td>Hovered star colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-cancel-color</code></td>
-          <td>Cancel button icon colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-cancel-hover-color</code></td>
-          <td>Cancel button icon hover colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-gap</code></td>
-          <td>Gap between stars.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-size-sm</code></td>
-          <td>Star size for <code>size="sm"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-size-md</code></td>
-          <td>Star size for <code>size="md"</code> (default).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-size-lg</code></td>
-          <td>Star size for <code>size="lg"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-focus-shadow</code></td>
-          <td>Focus ring box-shadow applied to the active star.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-transition-duration</code></td>
-          <td>Transition duration. Set to <code>0ms</code> for <code>prefers-reduced-motion: reduce</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </section>
 
   <!-- ---- Accessibility -------------------------------------------- -->

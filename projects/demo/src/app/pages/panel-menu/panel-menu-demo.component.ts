@@ -15,6 +15,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
@@ -44,6 +46,7 @@ interface KeyboardRow {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
@@ -361,6 +364,30 @@ import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
     const state: string = event.expanded ? 'expanded' : 'collapsed';
     this.logEvent(`panelToggle: "${event.item.label ?? ''}" ${state}`);
   }
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-panel-menu-bg', description: 'Panel background.' },
+    { variable: '--uilib-panel-menu-border', description: 'Root panel border.' },
+    { variable: '--uilib-panel-menu-radius', description: 'Root panel corner radius.' },
+    { variable: '--uilib-panel-menu-header-bg', description: 'Root header background.' },
+    {
+      variable: '--uilib-panel-menu-header-bg-hover',
+      description: 'Root header hover background.',
+    },
+    {
+      variable: '--uilib-panel-menu-header-bg-active',
+      description: 'Expanded root header background.',
+    },
+    { variable: '--uilib-panel-menu-header-color', description: 'Root header text color.' },
+    { variable: '--uilib-panel-menu-item-bg-hover', description: 'Sub-item hover background.' },
+    { variable: '--uilib-panel-menu-item-color', description: 'Sub-item text color.' },
+    { variable: '--uilib-panel-menu-indent', description: 'Nested indentation per depth level.' },
+    {
+      variable: '--uilib-panel-menu-transition-duration',
+      description: 'Expand/collapse transition timing.',
+    },
+    { variable: '--uilib-panel-menu-focus-shadow', description: 'Focus-visible ring shadow.' },
+  ];
 
   // ── Accessibility data ────────────────────────────────────────────────
 

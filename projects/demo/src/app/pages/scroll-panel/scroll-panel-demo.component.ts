@@ -7,6 +7,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -22,6 +24,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
@@ -32,6 +35,36 @@ export class ScrollPanelDemoComponent {
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-scroll-panel-bg', description: 'Background colour of the container.' },
+    { variable: '--uilib-scroll-panel-border-color', description: 'Border colour.' },
+    { variable: '--uilib-scroll-panel-border-radius', description: 'Border radius.' },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-width',
+      description: 'Width (and height) of the scrollbar.',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-track-bg',
+      description: 'Track background colour.',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-thumb-bg',
+      description: 'Thumb colour (default state).',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-thumb-bg-hover',
+      description: 'Thumb colour on hover.',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-radius',
+      description: 'Thumb and track border radius.',
+    },
+    {
+      variable: '--uilib-scroll-panel-transition',
+      description: 'Transition duration for colour changes.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'basic-usage', label: 'Basic Usage' },

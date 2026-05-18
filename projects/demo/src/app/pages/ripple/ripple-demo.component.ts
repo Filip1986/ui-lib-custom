@@ -6,6 +6,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -21,6 +23,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',
@@ -30,6 +33,20 @@ export class RippleDemoComponent {
   public readonly importCode: string = "import { Ripple } from 'ui-lib-custom/ripple'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-ripple-color',
+      default: 'rgba(255, 255, 255, 0.35)',
+      description: 'Wave background colour.',
+    },
+    { variable: '--uilib-ripple-duration', default: '600ms', description: 'Animation duration.' },
+    {
+      variable: '--uilib-ripple-easing',
+      default: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Animation timing function.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

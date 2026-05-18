@@ -1,0 +1,71 @@
+.css-vars-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--uilib-surface-border, #e5e7eb);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-top: 1rem;
+
+  &--no-default &__row {
+    grid-template-columns: 1.5fr 2fr;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--uilib-surface-border, #e5e7eb);
+    background: var(--uilib-surface-card, #fff);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &--header {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--uilib-surface-text-muted, #6b7280);
+      background: var(--uilib-surface-ground, #f9fafb);
+      align-items: center;
+    }
+  }
+
+  &__var {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.8125rem;
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    background: var(--uilib-surface-ground, #f3f4f6);
+    color: var(--uilib-color-primary-700, #4338ca);
+    word-break: break-all;
+  }
+
+  &__default {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.8125rem;
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    background: var(--uilib-surface-ground, #f3f4f6);
+    color: var(--uilib-surface-text-muted, #6b7280);
+    word-break: break-all;
+  }
+
+  &__description {
+    color: var(--uilib-surface-text-muted, #6b7280);
+    line-height: 1.5;
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.8125em;
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background: var(--uilib-surface-ground, #f3f4f6);
+      color: var(--uilib-surface-text, inherit);
+    }
+  }
+}

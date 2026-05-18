@@ -361,23 +361,7 @@
     </ui-lib-table>
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-    <ui-lib-table [value]="cssTokenRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Token" field="token" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.token"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Default" field="default" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.default"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-css-vars-table [rows]="cssVarRows" />
   </section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->

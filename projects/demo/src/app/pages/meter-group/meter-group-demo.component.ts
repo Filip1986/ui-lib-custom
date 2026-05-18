@@ -13,6 +13,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -28,6 +30,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
@@ -37,6 +40,45 @@ export class MeterGroupDemoComponent {
   public readonly importCode: string = "import { MeterGroup } from 'ui-lib-custom/meter-group'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-meter-group-height', description: 'Bar height (horizontal orientation).' },
+    {
+      variable: '--uilib-meter-group-height-sm',
+      description: 'Bar height for <code>size="sm"</code>.',
+    },
+    {
+      variable: '--uilib-meter-group-height-lg',
+      description: 'Bar height for <code>size="lg"</code>.',
+    },
+    {
+      variable: '--uilib-meter-group-width-vertical',
+      description: 'Bar width (vertical orientation).',
+    },
+    {
+      variable: '--uilib-meter-group-height-vertical',
+      description: 'Bar height (vertical orientation).',
+    },
+    {
+      variable: '--uilib-meter-group-border-radius',
+      description: 'Bar and segment corner radius.',
+    },
+    { variable: '--uilib-meter-group-bg', description: 'Background track colour.' },
+    { variable: '--uilib-meter-group-segment-gap', description: 'Gap between segments.' },
+    { variable: '--uilib-meter-group-label-font-size', description: 'Legend font size.' },
+    { variable: '--uilib-meter-group-label-color', description: 'Legend label text colour.' },
+    { variable: '--uilib-meter-group-label-value-color', description: 'Legend value text colour.' },
+    { variable: '--uilib-meter-group-swatch-size', description: 'Legend colour swatch size.' },
+    {
+      variable: '--uilib-meter-group-swatch-border-radius',
+      description: 'Legend swatch border radius.',
+    },
+    {
+      variable: '--uilib-meter-group-transition',
+      description:
+        'Segment transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

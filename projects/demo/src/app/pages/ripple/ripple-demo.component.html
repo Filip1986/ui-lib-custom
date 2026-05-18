@@ -183,32 +183,7 @@
 
     <div id="api-css" data-doc-anchor>
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>--uilib-ripple-color</code></td>
-            <td><code>rgba(255, 255, 255, 0.35)</code></td>
-            <td>Wave background colour.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-ripple-duration</code></td>
-            <td><code>600ms</code></td>
-            <td>Animation duration.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-ripple-easing</code></td>
-            <td><code>cubic-bezier(0.4, 0, 0.2, 1)</code></td>
-            <td>Animation timing function.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
 
   </section>

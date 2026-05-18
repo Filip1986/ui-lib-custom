@@ -389,64 +389,7 @@
   <!-- ---- CSS Custom Properties ------------------------------------ -->
   <section class="demo-section" id="css-vars" data-doc-anchor>
     <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-chip-bg</code></td>
-          <td>Chip background colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-color</code></td>
-          <td>Chip text colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-border</code></td>
-          <td>Chip border shorthand.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-border-radius</code></td>
-          <td>Chip border radius.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-padding-y</code></td>
-          <td>Vertical padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-padding-x</code></td>
-          <td>Horizontal padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-gap</code></td>
-          <td>Gap between icon, image, label, and remove button.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-font-size</code></td>
-          <td>Font size.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-font-weight</code></td>
-          <td>Font weight.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-image-size</code></td>
-          <td>Circular image diameter.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-remove-bg-hover</code></td>
-          <td>Remove button hover background.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-transition</code></td>
-          <td>Transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </section>
 
   <!-- ---- Accessibility -------------------------------------------- -->

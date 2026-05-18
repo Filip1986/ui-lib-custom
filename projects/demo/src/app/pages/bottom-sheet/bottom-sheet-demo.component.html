@@ -209,72 +209,7 @@
 
     <div id="api-css" data-doc-anchor>
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>--uilib-bottom-sheet-panel-bg</code></td>
-            <td><code>var(--uilib-surface, #fff)</code></td>
-            <td>Panel background colour.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-panel-shadow</code></td>
-            <td>elevation shadow</td>
-            <td>Box-shadow above the panel.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-border-radius</code></td>
-            <td><code>16px</code></td>
-            <td>Top corner radius of the panel.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-backdrop-bg</code></td>
-            <td><code>rgba(0,0,0,.48)</code></td>
-            <td>Backdrop overlay colour.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-z-index</code></td>
-            <td><code>var(--uilib-z-overlay, 1000)</code></td>
-            <td>Stack order of the sheet.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-transition-duration</code></td>
-            <td><code>0.32s</code></td>
-            <td>Slide-in/out animation duration. Overridden to <code>0</code> under <code>prefers-reduced-motion</code>.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-transition-easing</code></td>
-            <td><code>cubic-bezier(0.32, 0.72, 0, 1)</code></td>
-            <td>Slide-in/out animation easing.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-padding</code></td>
-            <td><code>var(--uilib-spacing-5, 1.25rem)</code></td>
-            <td>Internal content padding.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-header-border</code></td>
-            <td><code>1px solid …</code></td>
-            <td>Header bottom border.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-title-color</code></td>
-            <td><code>var(--uilib-color-text-primary)</code></td>
-            <td>Header title text colour.</td>
-          </tr>
-          <tr>
-            <td><code>--uilib-bottom-sheet-close-color</code></td>
-            <td><code>var(--uilib-color-text-secondary)</code></td>
-            <td>Close button icon colour.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
 
   </section>
