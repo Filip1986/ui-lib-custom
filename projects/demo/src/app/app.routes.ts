@@ -295,6 +295,15 @@ export const routes: Routes = [
     title: 'ClassNames - UI Components Library',
   },
   {
+    path: 'keyboard-guide',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/keyboard-guide/keyboard-guide-demo.component').then(
+        (m: { KeyboardGuideDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.KeyboardGuideDemoComponent
+      ),
+    title: 'Keyboard Guide - UI Components Library',
+  },
+  {
     path: 'syntax-highlighter',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/syntax-highlighter/syntax-highlighter-demo.component').then(
