@@ -8,6 +8,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface CityOption {
@@ -30,6 +32,7 @@ interface CityOption {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './radio-button-demo.component.html',
   styleUrl: './radio-button-demo.component.scss',
@@ -39,6 +42,45 @@ export class RadioButtonDemoComponent {
   public readonly importCode: string = "import { RadioButton } from 'ui-lib-custom/radio-button'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-radio-button-gap',
+      description: 'Gap between the radio control and its label.',
+    },
+    { variable: '--uilib-radio-button-border-color', description: 'Default border colour.' },
+    { variable: '--uilib-radio-button-border-hover', description: 'Border colour on hover.' },
+    { variable: '--uilib-radio-button-border-active', description: 'Border colour when checked.' },
+    { variable: '--uilib-radio-button-bg', description: 'Background colour of the radio control.' },
+    {
+      variable: '--uilib-radio-button-bg-checked',
+      description: 'Background colour when checked (filled appearance).',
+    },
+    {
+      variable: '--uilib-radio-button-dot-color',
+      description: 'Colour of the inner dot when checked.',
+    },
+    { variable: '--uilib-radio-button-focus-ring', description: 'Focus ring box-shadow.' },
+    {
+      variable: '--uilib-radio-button-size-sm',
+      description: 'Control diameter for <code>size="sm"</code>.',
+    },
+    {
+      variable: '--uilib-radio-button-size-md',
+      description: 'Control diameter for <code>size="md"</code> (default).',
+    },
+    {
+      variable: '--uilib-radio-button-size-lg',
+      description: 'Control diameter for <code>size="lg"</code>.',
+    },
+    { variable: '--uilib-radio-button-font', description: 'Font applied to the label text.' },
+    { variable: '--uilib-radio-button-label-color', description: 'Colour of the label text.' },
+    {
+      variable: '--uilib-radio-button-transition-duration',
+      description:
+        'Transition duration. Set to <code>0ms</code> for <code>prefers-reduced-motion: reduce</code>.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

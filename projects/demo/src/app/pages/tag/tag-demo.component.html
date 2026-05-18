@@ -318,23 +318,7 @@
       Override any of these on the host element or an ancestor to theme the tag without
       touching component internals.
     </p>
-    <ui-lib-table [value]="cssVarRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Variable" field="variable" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <code>{{ row.variable }}</code>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Default" field="default" width="220px">
-        <ng-template uiTableColumnBody let-row>
-          <code>{{ row.default }}</code>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-css-vars-table [rows]="cssVarRows" />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════

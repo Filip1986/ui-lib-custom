@@ -7,6 +7,8 @@ import { Button } from 'ui-lib-custom/button';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -22,6 +24,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
@@ -31,6 +34,27 @@ export class ChipDemoComponent {
   public readonly importCode: string = "import { Chip } from 'ui-lib-custom/chip'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-chip-bg', description: 'Chip background colour.' },
+    { variable: '--uilib-chip-color', description: 'Chip text colour.' },
+    { variable: '--uilib-chip-border', description: 'Chip border shorthand.' },
+    { variable: '--uilib-chip-border-radius', description: 'Chip border radius.' },
+    { variable: '--uilib-chip-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-chip-padding-x', description: 'Horizontal padding.' },
+    {
+      variable: '--uilib-chip-gap',
+      description: 'Gap between icon, image, label, and remove button.',
+    },
+    { variable: '--uilib-chip-font-size', description: 'Font size.' },
+    { variable: '--uilib-chip-font-weight', description: 'Font weight.' },
+    { variable: '--uilib-chip-image-size', description: 'Circular image diameter.' },
+    { variable: '--uilib-chip-remove-bg-hover', description: 'Remove button hover background.' },
+    {
+      variable: '--uilib-chip-transition',
+      description: 'Transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

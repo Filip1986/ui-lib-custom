@@ -12,6 +12,8 @@ import {
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
@@ -51,12 +53,6 @@ interface MenuItemRow {
   readonly description: string;
 }
 
-interface CssTokenRow {
-  readonly token: string;
-  readonly default: string;
-  readonly description: string;
-}
-
 /**
  * Demo page for the Menu component.
  */
@@ -72,6 +68,7 @@ interface CssTokenRow {
     TableColumnBodyDirective,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
+    DocCssVarsTableComponent,
     DocTocComponent,
   ],
   templateUrl: './menu-demo.component.html',
@@ -448,65 +445,61 @@ onItemClick(event: MenuItemCommandEvent): void {
     },
   ];
 
-  public readonly cssTokenRows: CssTokenRow[] = [
+  public readonly cssVarRows: CssVarRow[] = [
     {
-      token: '<code>--uilib-menu-bg</code>',
-      default: '<code>var(--uilib-surface-overlay, #fff)</code>',
+      variable: '--uilib-menu-bg',
+      default: 'var(--uilib-surface-overlay, #fff)',
       description: 'Panel background colour.',
     },
     {
-      token: '<code>--uilib-menu-border</code>',
-      default: '<code>1px solid var(--uilib-color-neutral-200)</code>',
+      variable: '--uilib-menu-border',
+      default: '1px solid var(--uilib-color-neutral-200)',
       description: 'Panel border.',
     },
     {
-      token: '<code>--uilib-menu-shadow</code>',
-      default: '<code>var(--uilib-shadow-md)</code>',
+      variable: '--uilib-menu-shadow',
+      default: 'var(--uilib-shadow-md)',
       description: 'Panel box-shadow.',
     },
     {
-      token: '<code>--uilib-menu-radius</code>',
-      default: '<code>var(--uilib-radius-md, 0.375rem)</code>',
+      variable: '--uilib-menu-radius',
+      default: 'var(--uilib-radius-md, 0.375rem)',
       description: 'Panel border-radius.',
     },
+    { variable: '--uilib-menu-min-width', default: '12rem', description: 'Minimum panel width.' },
     {
-      token: '<code>--uilib-menu-min-width</code>',
-      default: '<code>12rem</code>',
-      description: 'Minimum panel width.',
-    },
-    {
-      token: '<code>--uilib-menu-padding</code>',
-      default: '<code>var(--uilib-spacing-1, 0.25rem)</code>',
+      variable: '--uilib-menu-padding',
+      default: 'var(--uilib-spacing-1, 0.25rem)',
       description: 'Vertical panel padding.',
     },
     {
-      token: '<code>--uilib-menu-item-padding-y</code>',
-      default: '<code>var(--uilib-spacing-2, 0.5rem)</code>',
+      variable: '--uilib-menu-item-padding-y',
+      default: 'var(--uilib-spacing-2, 0.5rem)',
       description: 'Item vertical padding.',
     },
     {
-      token: '<code>--uilib-menu-item-padding-x</code>',
-      default: '<code>var(--uilib-spacing-3, 0.75rem)</code>',
+      variable: '--uilib-menu-item-padding-x',
+      default: 'var(--uilib-spacing-3, 0.75rem)',
       description: 'Item horizontal padding.',
     },
     {
-      token: '<code>--uilib-menu-item-bg-hover</code>',
-      default: '<code>var(--uilib-color-neutral-100, #f3f4f6)</code>',
+      variable: '--uilib-menu-item-bg-hover',
+      default: 'var(--uilib-color-neutral-100, #f3f4f6)',
       description: 'Hover/focus background.',
     },
     {
-      token: '<code>--uilib-menu-item-color-disabled</code>',
-      default: '<code>var(--uilib-color-neutral-400, #9ca3af)</code>',
+      variable: '--uilib-menu-item-color-disabled',
+      default: 'var(--uilib-color-neutral-400, #9ca3af)',
       description: 'Disabled item text colour.',
     },
     {
-      token: '<code>--uilib-menu-separator-color</code>',
-      default: '<code>var(--uilib-color-neutral-200, #e5e7eb)</code>',
+      variable: '--uilib-menu-separator-color',
+      default: 'var(--uilib-color-neutral-200, #e5e7eb)',
       description: 'Separator line colour.',
     },
     {
-      token: '<code>--uilib-menu-focus-shadow</code>',
-      default: '<code>0 0 0 2px color-mix(...)</code>',
+      variable: '--uilib-menu-focus-shadow',
+      default: '0 0 0 2px color-mix(...)',
       description: 'Focus-visible ring.',
     },
   ];

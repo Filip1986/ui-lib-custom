@@ -337,72 +337,7 @@
   <!-- ---- CSS Custom Properties ------------------------------------ -->
   <section class="demo-section" id="css-vars" data-doc-anchor>
     <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-meter-group-height</code></td>
-          <td>Bar height (horizontal orientation).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-height-sm</code></td>
-          <td>Bar height for <code>size="sm"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-height-lg</code></td>
-          <td>Bar height for <code>size="lg"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-width-vertical</code></td>
-          <td>Bar width (vertical orientation).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-height-vertical</code></td>
-          <td>Bar height (vertical orientation).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-border-radius</code></td>
-          <td>Bar and segment corner radius.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-bg</code></td>
-          <td>Background track colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-segment-gap</code></td>
-          <td>Gap between segments.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-label-font-size</code></td>
-          <td>Legend font size.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-label-color</code></td>
-          <td>Legend label text colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-label-value-color</code></td>
-          <td>Legend value text colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-swatch-size</code></td>
-          <td>Legend colour swatch size.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-swatch-border-radius</code></td>
-          <td>Legend swatch border radius.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-meter-group-transition</code></td>
-          <td>Segment transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </section>
 
   <!-- ---- Accessibility -------------------------------------------- -->

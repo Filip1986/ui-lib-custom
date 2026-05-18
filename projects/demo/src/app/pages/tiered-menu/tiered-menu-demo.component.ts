@@ -17,6 +17,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
@@ -47,6 +49,7 @@ interface KeyboardRow {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
@@ -223,6 +226,74 @@ import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
     },
     { separator: true },
     { label: 'Logout', icon: 'pi pi-sign-out' },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-tiered-menu-panel-bg',
+      default: 'var(--uilib-surface, #fff)',
+      description: 'Panel background colour.',
+    },
+    {
+      variable: '--uilib-tiered-menu-panel-border',
+      default: 'var(--uilib-color-border, #e5e7eb)',
+      description: 'Panel border colour.',
+    },
+    {
+      variable: '--uilib-tiered-menu-panel-radius',
+      default: '0.375rem',
+      description: 'Panel border-radius.',
+    },
+    {
+      variable: '--uilib-tiered-menu-panel-shadow',
+      default: 'var(--uilib-shadow-md)',
+      description: 'Panel box-shadow.',
+    },
+    {
+      variable: '--uilib-tiered-menu-min-width',
+      default: '12rem',
+      description: 'Minimum panel width.',
+    },
+    {
+      variable: '--uilib-tiered-menu-font-size',
+      default: '0.875rem',
+      description: 'Item font size.',
+    },
+    {
+      variable: '--uilib-tiered-menu-item-padding',
+      default: '0.5rem 0.875rem',
+      description: 'Item padding.',
+    },
+    {
+      variable: '--uilib-tiered-menu-item-color',
+      default: 'var(--uilib-color-text, #1f2937)',
+      description: 'Item text colour.',
+    },
+    {
+      variable: '--uilib-tiered-menu-item-color-hover',
+      default: 'var(--uilib-color-primary, #6366f1)',
+      description: 'Hover text colour.',
+    },
+    {
+      variable: '--uilib-tiered-menu-item-bg-hover',
+      default: 'var(--uilib-surface-hover, #f3f4f6)',
+      description: 'Hover background.',
+    },
+    {
+      variable: '--uilib-tiered-menu-separator-color',
+      default: 'var(--uilib-color-border, #e5e7eb)',
+      description: 'Separator line colour.',
+    },
+    {
+      variable: '--uilib-tiered-menu-focus-ring',
+      default: 'var(--uilib-color-primary, #6366f1)',
+      description: 'Focus ring colour.',
+    },
+    {
+      variable: '--uilib-tiered-menu-disabled-opacity',
+      default: '0.45',
+      description: 'Disabled item opacity.',
+    },
   ];
 
   // ── Accessibility data ────────────────────────────────────────────────────

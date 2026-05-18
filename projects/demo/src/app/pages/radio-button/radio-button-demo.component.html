@@ -359,72 +359,7 @@
   <!-- ---- CSS Custom Properties ------------------------------------ -->
   <section class="demo-section" id="css-vars" data-doc-anchor>
     <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-radio-button-gap</code></td>
-          <td>Gap between the radio control and its label.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-border-color</code></td>
-          <td>Default border colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-border-hover</code></td>
-          <td>Border colour on hover.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-border-active</code></td>
-          <td>Border colour when checked.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-bg</code></td>
-          <td>Background colour of the radio control.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-bg-checked</code></td>
-          <td>Background colour when checked (filled appearance).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-dot-color</code></td>
-          <td>Colour of the inner dot when checked.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-focus-ring</code></td>
-          <td>Focus ring box-shadow.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-size-sm</code></td>
-          <td>Control diameter for <code>size="sm"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-size-md</code></td>
-          <td>Control diameter for <code>size="md"</code> (default).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-size-lg</code></td>
-          <td>Control diameter for <code>size="lg"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-font</code></td>
-          <td>Font applied to the label text.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-label-color</code></td>
-          <td>Colour of the label text.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-radio-button-transition-duration</code></td>
-          <td>Transition duration. Set to <code>0ms</code> for <code>prefers-reduced-motion: reduce</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </section>
 
   <!-- ---- Accessibility -------------------------------------------- -->

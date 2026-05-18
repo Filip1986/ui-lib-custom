@@ -263,25 +263,7 @@
     </table>
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Token</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>--uilib-panel-menu-bg</code></td><td>Panel background.</td></tr>
-        <tr><td><code>--uilib-panel-menu-border</code></td><td>Root panel border.</td></tr>
-        <tr><td><code>--uilib-panel-menu-radius</code></td><td>Root panel corner radius.</td></tr>
-        <tr><td><code>--uilib-panel-menu-header-bg</code></td><td>Root header background.</td></tr>
-        <tr><td><code>--uilib-panel-menu-header-bg-hover</code></td><td>Root header hover background.</td></tr>
-        <tr><td><code>--uilib-panel-menu-header-bg-active</code></td><td>Expanded root header background.</td></tr>
-        <tr><td><code>--uilib-panel-menu-header-color</code></td><td>Root header text color.</td></tr>
-        <tr><td><code>--uilib-panel-menu-item-bg-hover</code></td><td>Sub-item hover background.</td></tr>
-        <tr><td><code>--uilib-panel-menu-item-color</code></td><td>Sub-item text color.</td></tr>
-        <tr><td><code>--uilib-panel-menu-indent</code></td><td>Nested indentation per depth level.</td></tr>
-        <tr><td><code>--uilib-panel-menu-transition-duration</code></td><td>Expand/collapse transition timing.</td></tr>
-        <tr><td><code>--uilib-panel-menu-focus-shadow</code></td><td>Focus-visible ring shadow.</td></tr>
-      </tbody>
-    </table>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────── -->

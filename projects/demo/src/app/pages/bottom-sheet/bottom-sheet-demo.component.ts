@@ -7,6 +7,8 @@ import { Button } from 'ui-lib-custom/button';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -22,6 +24,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './bottom-sheet-demo.component.html',
   styleUrl: './bottom-sheet-demo.component.scss',
@@ -31,6 +34,65 @@ export class BottomSheetDemoComponent {
   public readonly importCode: string = "import { BottomSheet } from 'ui-lib-custom/bottom-sheet'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-bottom-sheet-panel-bg',
+      default: 'var(--uilib-surface, #fff)',
+      description: 'Panel background colour.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-panel-shadow',
+      default: 'elevation shadow',
+      description: 'Box-shadow above the panel.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-border-radius',
+      default: '16px',
+      description: 'Top corner radius of the panel.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-backdrop-bg',
+      default: 'rgba(0,0,0,.48)',
+      description: 'Backdrop overlay colour.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-z-index',
+      default: 'var(--uilib-z-overlay, 1000)',
+      description: 'Stack order of the sheet.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-transition-duration',
+      default: '0.32s',
+      description:
+        'Slide-in/out animation duration. Overridden to <code>0</code> under <code>prefers-reduced-motion</code>.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-transition-easing',
+      default: 'cubic-bezier(0.32, 0.72, 0, 1)',
+      description: 'Slide-in/out animation easing.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-padding',
+      default: 'var(--uilib-spacing-5, 1.25rem)',
+      description: 'Internal content padding.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-header-border',
+      default: '1px solid …',
+      description: 'Header bottom border.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-title-color',
+      default: 'var(--uilib-color-text-primary)',
+      description: 'Header title text colour.',
+    },
+    {
+      variable: '--uilib-bottom-sheet-close-color',
+      default: 'var(--uilib-color-text-secondary)',
+      description: 'Close button icon colour.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },

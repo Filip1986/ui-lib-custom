@@ -12,6 +12,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface TagInputRow {
@@ -24,12 +26,6 @@ interface TagInputRow {
 interface TagOutputRow {
   readonly name: string;
   readonly type: string;
-  readonly description: string;
-}
-
-interface CssVarRow {
-  readonly variable: string;
-  readonly default: string;
   readonly description: string;
 }
 
@@ -62,6 +58,7 @@ interface KeyboardRow {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',

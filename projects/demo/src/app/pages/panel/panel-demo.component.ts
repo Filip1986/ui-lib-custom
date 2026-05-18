@@ -12,6 +12,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface InputRow {
@@ -30,12 +32,6 @@ interface OutputRow {
 interface ProjectionRow {
   readonly slot: string;
   readonly selector: string;
-  readonly description: string;
-}
-
-interface CssTokenRow {
-  readonly variable: string;
-  readonly default: string;
   readonly description: string;
 }
 
@@ -68,6 +64,7 @@ interface KeyboardRow {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
@@ -226,75 +223,75 @@ export class PanelDemoComponent {
     },
   ];
 
-  public readonly cssTokenRows: CssTokenRow[] = [
+  public readonly cssVarRows: CssVarRow[] = [
     {
-      variable: '<code>--uilib-panel-border-color</code>',
-      default: '<code>var(--uilib-surface-300)</code>',
+      variable: '--uilib-panel-border-color',
+      default: 'var(--uilib-surface-300)',
       description: 'Panel border colour.',
     },
     {
-      variable: '<code>--uilib-panel-border-radius</code>',
-      default: '<code>var(--uilib-radius-md)</code>',
+      variable: '--uilib-panel-border-radius',
+      default: 'var(--uilib-radius-md)',
       description: 'Panel corner radius.',
     },
     {
-      variable: '<code>--uilib-panel-header-bg</code>',
-      default: '<code>var(--uilib-surface)</code>',
+      variable: '--uilib-panel-header-bg',
+      default: 'var(--uilib-surface)',
       description: 'Header background.',
     },
     {
-      variable: '<code>--uilib-panel-header-color</code>',
-      default: '<code>var(--uilib-color-text)</code>',
+      variable: '--uilib-panel-header-color',
+      default: 'var(--uilib-color-text)',
       description: 'Header text colour.',
     },
     {
-      variable: '<code>--uilib-panel-header-font-size</code>',
-      default: '<code>0.9375rem</code>',
+      variable: '--uilib-panel-header-font-size',
+      default: '0.9375rem',
       description: 'Header font size.',
     },
     {
-      variable: '<code>--uilib-panel-header-font-weight</code>',
-      default: '<code>600</code>',
+      variable: '--uilib-panel-header-font-weight',
+      default: '600',
       description: 'Header font weight.',
     },
     {
-      variable: '<code>--uilib-panel-header-padding</code>',
-      default: '<code>0.75rem 1rem</code>',
+      variable: '--uilib-panel-header-padding',
+      default: '0.75rem 1rem',
       description: 'Header padding.',
     },
     {
-      variable: '<code>--uilib-panel-content-padding</code>',
-      default: '<code>1rem</code>',
+      variable: '--uilib-panel-content-padding',
+      default: '1rem',
       description: 'Body content padding.',
     },
     {
-      variable: '<code>--uilib-panel-footer-bg</code>',
-      default: '<code>var(--uilib-surface-50)</code>',
+      variable: '--uilib-panel-footer-bg',
+      default: 'var(--uilib-surface-50)',
       description: 'Footer background.',
     },
     {
-      variable: '<code>--uilib-panel-footer-padding</code>',
-      default: '<code>0.75rem 1rem</code>',
+      variable: '--uilib-panel-footer-padding',
+      default: '0.75rem 1rem',
       description: 'Footer padding.',
     },
     {
-      variable: '<code>--uilib-panel-toggle-color</code>',
-      default: '<code>var(--uilib-color-primary)</code>',
+      variable: '--uilib-panel-toggle-color',
+      default: 'var(--uilib-color-primary)',
       description: 'Toggle button icon colour.',
     },
     {
-      variable: '<code>--uilib-panel-toggle-hover-bg</code>',
-      default: '<code>var(--uilib-surface-100)</code>',
+      variable: '--uilib-panel-toggle-hover-bg',
+      default: 'var(--uilib-surface-100)',
       description: 'Toggle button hover background.',
     },
     {
-      variable: '<code>--uilib-panel-toggle-size</code>',
-      default: '<code>1.75rem</code>',
+      variable: '--uilib-panel-toggle-size',
+      default: '1.75rem',
       description: 'Toggle button width and height.',
     },
     {
-      variable: '<code>--uilib-panel-transition</code>',
-      default: '<code>200ms ease</code>',
+      variable: '--uilib-panel-transition',
+      default: '200ms ease',
       description: 'Collapse animation duration and easing.',
     },
   ];

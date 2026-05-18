@@ -82,6 +82,21 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-18 [New shared component: DocCssVarsTableComponent — all demo pages migrated]
+Changed:
+  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.ts (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.html (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.scss (NEW)
+  - projects/demo/src/app/shared/index.ts (added DocCssVarsTableComponent export)
+  - 13 demo pages migrated (TS + HTML): tag, panel, menu, tiered-menu, panel-menu, ripple, block-ui, bottom-sheet, chip, meter-group, radio-button, rating, scroll-panel
+State: All demo pages now use <app-doc-css-vars-table> for CSS Custom Properties sections. Component renders a token-grid-style bordered table (design taken from SyntaxHighlighter demo). [showDefault]="false" produces a 2-column layout; default is 3-column (Variable / Default / Description). CssVarRow interface exported from shared/index.ts. Build and lint NOT yet re-verified after migration — run from main repo root.
+Verification:
+  (not yet run — run from D:/Work/ArtificialSense/ui-lib-custom):
+  npx eslint projects/demo/src/app/shared/doc-page/ --max-warnings 0
+  ng build demo
+Terminal notes: node_modules not present in worktree — run all tools from main repo root.
+Next step: Run ESLint on shared/doc-page/ and ng build demo to verify all 13 pages compile cleanly.
+
 Date: 2026-05-17 [Demo refactor: replaced app-code-preview with ui-lib-code-snippet app-wide]
 Changed:
   - projects/demo/src/app/pages/**/*.html (36 files — app-code-preview → ui-lib-code-snippet)
