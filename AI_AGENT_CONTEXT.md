@@ -82,6 +82,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-18 [Audit prompt system + DocQualityBadgeComponent]
+Changed:
+  - docs/prompts/audit/README.md (NEW — system overview and priority order)
+  - docs/prompts/audit/PHASE1_AUDIT.md (NEW — read-only gap report prompt, all 11 categories)
+  - docs/prompts/audit/PHASE2_FIX.md (NEW — fix pass prompt)
+  - docs/prompts/audit/PHASE3_FINALIZE.md (NEW — doc update + quality badge wiring prompt)
+  - docs/prompts/audit/QUICKSTART.md (NEW — step-by-step single component guide)
+  - projects/demo/src/app/shared/doc-page/doc-quality-badge.component.ts (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-quality-badge.component.html (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-quality-badge.component.scss (NEW)
+  - projects/demo/src/app/shared/index.ts (added DocQualityBadgeComponent export)
+  - projects/demo/src/app/pages/accordion/accordion.component.ts (DocQualityBadgeComponent + qualityAudit data)
+  - projects/demo/src/app/pages/accordion/accordion.component.html (app-doc-quality-badge added)
+  - projects/demo/src/app/pages/tag/tag-demo.component.ts (DocQualityBadgeComponent + qualityAudit data)
+  - projects/demo/src/app/pages/tag/tag-demo.component.html (app-doc-quality-badge added)
+  - projects/demo/src/app/pages/panel/panel-demo.component.ts (DocQualityBadgeComponent + qualityAudit data)
+  - projects/demo/src/app/pages/panel/panel-demo.component.html (app-doc-quality-badge added)
+State: Full agentic audit system in place. DocQualityBadgeComponent renders a collapsible quality
+  report on each demo page showing 10 category score chips (color-coded by value), average score,
+  gate status (all ≥ 8 / below gate), APG pattern link, competitive parity status, unchecked backlog,
+  and human-verification pending list. Collapsed by default. Wired into accordion/tag/panel as proof
+  of concept — all at Tier 1 with humanPending items listed. Build and lint verified clean.
+  Audit prompts: PHASE1 (gap report only), PHASE2 (fix pass), PHASE3 (finalize + badge update).
+  PHASE3 now instructs the agent to update qualityAudit data and confirm badge in template.
+Verification:
+  eslint doc-quality-badge.component.ts + 3 demo pages → PASS (0 warnings)
+  ng build demo → PASS (zero errors, only pre-existing SCSS budget warnings)
+Next step: Run the Phase 1 audit on Button — highest public scrutiny, sets the template for all others.
+  Command: paste PHASE1_AUDIT.md with [COMPONENT]=button into a new Claude Code session.
+
 Date: 2026-05-18 [New shared component: DocKeyboardNavComponent — 6 demo pages migrated]
 Changed:
   - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.ts (NEW)

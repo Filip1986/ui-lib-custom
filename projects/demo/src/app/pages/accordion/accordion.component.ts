@@ -27,6 +27,8 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { AccordionBasicExampleComponent } from '@demo/examples/accordion-basic-example.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 interface FaqItem {
   value: string;
@@ -73,6 +75,7 @@ type AccordionTab =
     ThemeScopeDirective,
     VariantComparisonComponent,
     AccordionBasicExampleComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -213,6 +216,33 @@ export class AccordionComponent {
   <ui-lib-accordion-panel header="Two" value="two" />
 </ui-lib-accordion>`,
   } as const;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-15',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+    apgPattern: {
+      name: 'Accordion',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/accordion/',
+    },
+    humanPending: [
+      'NVDA + Chrome — state change announcements',
+      'VoiceOver + Safari — aria-expanded on panel headers',
+      'Visual contrast ratio — focus ring vs. background',
+    ],
+  };
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
