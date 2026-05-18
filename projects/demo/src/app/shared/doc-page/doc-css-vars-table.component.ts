@@ -19,4 +19,15 @@ export interface CssVarRow {
 export class DocCssVarsTableComponent {
   public readonly rows: Signal<readonly CssVarRow[]> = input.required<readonly CssVarRow[]>();
   public readonly showDefault: Signal<boolean> = input<boolean>(true);
+
+  public extractColor(value: string | undefined): string | null {
+    if (!value) return null;
+    const hex: RegExpMatchArray | null = value.match(/#[0-9a-fA-F]{3,8}/);
+    if (hex) return hex[0];
+    const rgba: RegExpMatchArray | null = value.match(/rgba?\([^)]+\)/);
+    if (rgba) return rgba[0];
+    const hsl: RegExpMatchArray | null = value.match(/hsla?\([^)]+\)/);
+    if (hsl) return hsl[0];
+    return null;
+  }
 }

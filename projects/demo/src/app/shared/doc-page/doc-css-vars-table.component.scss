@@ -13,7 +13,7 @@
   &__row {
     display: grid;
     grid-template-columns: 1.5fr 1fr 2fr;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
     padding: 0.625rem 1rem;
     font-size: 0.875rem;
@@ -31,26 +31,42 @@
       letter-spacing: 0.04em;
       color: var(--uilib-surface-text-muted, #6b7280);
       background: var(--uilib-surface-ground, #f9fafb);
-      align-items: center;
     }
   }
 
   &__var {
     font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     font-size: 0.8125rem;
-    padding: 0.15em 0.4em;
+    padding: 0.2em 0.5em;
     border-radius: 0.25rem;
-    background: var(--uilib-surface-ground, #f3f4f6);
-    color: var(--uilib-color-primary-700, #4338ca);
+    background: #1e1e2e;
+    color: #9cdcfe;
     word-break: break-all;
+  }
+
+  &__swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    color: var(--uilib-surface-text, inherit);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 0.875rem;
+      height: 0.875rem;
+      border-radius: 50%;
+      background: var(--swatch);
+      flex-shrink: 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
   }
 
   &__default {
     font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     font-size: 0.8125rem;
-    padding: 0.15em 0.4em;
-    border-radius: 0.25rem;
-    background: var(--uilib-surface-ground, #f3f4f6);
     color: var(--uilib-surface-text-muted, #6b7280);
     word-break: break-all;
   }
