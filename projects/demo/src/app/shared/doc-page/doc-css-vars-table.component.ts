@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
-import type { Signal } from '@angular/core';
+import type { InputSignal } from '@angular/core';
 
 export interface CssVarRow {
   readonly variable: string;
@@ -17,6 +17,6 @@ export interface CssVarRow {
   styleUrl: './doc-css-vars-table.component.scss',
 })
 export class DocCssVarsTableComponent {
-  public readonly rows: Signal<readonly CssVarRow[]> = input.required<readonly CssVarRow[]>();
-  public readonly showDefault: Signal<boolean> = input<boolean>(true);
+  public readonly rows: InputSignal<readonly CssVarRow[]> = input.required<readonly CssVarRow[]>();
+  public readonly showDefault: InputSignal<boolean> = input<boolean>(true);
 }
