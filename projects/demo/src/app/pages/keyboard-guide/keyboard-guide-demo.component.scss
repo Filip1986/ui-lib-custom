@@ -326,6 +326,7 @@ $amber-600: #d97706;
   min-width: 2.5rem;
   font-size: 0.7rem;
   padding: 0;
+  border-radius: 0; // down arrow has no rounding; top/left/right override below
 }
 
 .kb-key--arrow-top {

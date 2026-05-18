@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, HostListener, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import type { Signal, WritableSignal, OnDestroy } from '@angular/core';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -33,6 +41,7 @@ export class KeyboardGuideDemoComponent implements OnDestroy {
     ReadonlySet<string>
   >(new Set(['ctrl', 'k']));
 
+  private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly highlightTimer: ReturnType<typeof setTimeout>;
 
   constructor() {
@@ -53,11 +62,13 @@ export class KeyboardGuideDemoComponent implements OnDestroy {
       next.add(normalized);
       return next;
     });
+    this.cdr.markForCheck();
   }
 
   @HostListener('window:keyup')
   public onKeyUp(): void {
     this.pressedKeys.set(new Set());
+    this.cdr.markForCheck();
   }
 
   public isActive(keyId: string): boolean {
