@@ -679,6 +679,11 @@ export class SidebarComponent {
           route: '/class-names',
         },
         {
+          label: 'KeyboardGuide',
+          icon: 'pi pi-circle',
+          route: '/keyboard-guide',
+        },
+        {
           label: 'CodeSnippet',
           icon: 'pi pi-circle',
           route: '/code-snippet',

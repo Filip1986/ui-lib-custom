@@ -1,0 +1,389 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header docHeader title="Extended Navigation">
+    <p class="doc-description">
+      Complete Windows keyboard support including Function keys and Navigation clusters.
+      Perfectly mapped for advanced grid interactions and accessibility workflows.
+      Press any key to see it highlighted in real time.
+    </p>
+  </app-doc-page-header>
+
+  <!-- Section: Keyboard layout -->
+  <section class="demo-section" id="keyboard" data-doc-anchor>
+    <h2 class="demo-section__title">Keyboard Layout</h2>
+    <p class="demo-section__description">
+      Full 104-key standard PC layout. Press any key on your keyboard to see it activate below.
+    </p>
+
+    <div class="kb-board">
+      <!-- Board header -->
+      <div class="kb-board__header">
+        <div class="kb-board__meta">
+          <div class="kb-board__meta-item">
+            <span class="kb-board__meta-label">Device Profile</span>
+            <span class="kb-board__meta-value">104-Key Standard PC</span>
+          </div>
+          <div class="kb-board__meta-divider"></div>
+          <div class="kb-board__meta-item">
+            <span class="kb-board__meta-label">Shortcuts</span>
+            <span class="kb-board__meta-value">PC Bindings Enabled</span>
+          </div>
+        </div>
+        <div class="kb-board__profile-badge">Full Extended</div>
+      </div>
+
+      <!-- Keyboard rows -->
+      <div class="kb-keys">
+
+        <!-- Row 1: Function row -->
+        <div class="kb-row kb-row--fn">
+          <div class="kb-key kb-key--muted kb-key--fn-h"
+               [class.kb-key--active]="isActive('esc')">ESC</div>
+          <div class="kb-fn-group">
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f1')">F1</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f2')">F2</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f3')">F3</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f4')">F4</div>
+          </div>
+          <div class="kb-fn-group">
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f5')">F5</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f6')">F6</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f7')">F7</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f8')">F8</div>
+          </div>
+          <div class="kb-fn-group">
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f9')">F9</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f10')">F10</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f11')">F11</div>
+            <div class="kb-key kb-key--light kb-key--fn-h" [class.kb-key--active]="isActive('f12')">F12</div>
+          </div>
+        </div>
+
+        <!-- Row 2: Number row -->
+        <div class="kb-row">
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('`')">
+            <span class="kb-key__top">~</span><span class="kb-key__bot">`</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('1')">
+            <span class="kb-key__top">!</span><span class="kb-key__bot">1</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('2')">
+            <span class="kb-key__top">&#64;</span><span class="kb-key__bot">2</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('3')">
+            <span class="kb-key__top">#</span><span class="kb-key__bot">3</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('4')">
+            <span class="kb-key__top">$</span><span class="kb-key__bot">4</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('5')">
+            <span class="kb-key__top">%</span><span class="kb-key__bot">5</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('6')">
+            <span class="kb-key__top">^</span><span class="kb-key__bot">6</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('7')">
+            <span class="kb-key__top">&amp;</span><span class="kb-key__bot">7</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('8')">
+            <span class="kb-key__top">*</span><span class="kb-key__bot">8</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('9')">
+            <span class="kb-key__top">(</span><span class="kb-key__bot">9</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('0')">
+            <span class="kb-key__top">)</span><span class="kb-key__bot">0</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('-')">
+            <span class="kb-key__top">_</span><span class="kb-key__bot">-</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('=')">
+            <span class="kb-key__top">+</span><span class="kb-key__bot">=</span>
+          </div>
+          <div class="kb-key kb-key--light kb-key--flex kb-key--between"
+               [class.kb-key--active]="isActive('backspace')">
+            <span class="kb-key__icon-lg">⌫</span>
+            <span class="kb-key__label">Delete</span>
+          </div>
+        </div>
+
+        <!-- Row 3: QWERTY row -->
+        <div class="kb-row">
+          <div class="kb-key kb-key--light kb-key--tab kb-key--between"
+               [class.kb-key--active]="isActive('tab')">
+            <span class="kb-key__label">Tab</span>
+            <span class="kb-key__icon-lg">⇥</span>
+          </div>
+          <div class="kb-key" [class.kb-key--active]="isActive('q')">Q</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('w')">W</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('e')">E</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('r')">R</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('t')">T</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('y')">Y</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('u')">U</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('i')">I</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('o')">O</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('p')">P</div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('[')">
+            <span class="kb-key__top">&#123;</span><span class="kb-key__bot">[</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive(']')">
+            <span class="kb-key__top">&#125;</span><span class="kb-key__bot">]</span>
+          </div>
+          <div class="kb-key kb-key--dual kb-key--flex" [class.kb-key--active]="isActive('\\')">
+            <span class="kb-key__top">|</span><span class="kb-key__bot">\</span>
+          </div>
+        </div>
+
+        <!-- Row 4: Home row -->
+        <div class="kb-row">
+          <div class="kb-key kb-key--light kb-key--caps"
+               [class.kb-key--active]="isActive('capslock')">
+            <span class="kb-caps-dot"></span>
+            <span class="kb-key__label">Caps Lock</span>
+          </div>
+          <div class="kb-key" [class.kb-key--active]="isActive('a')">A</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('s')">S</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('d')">D</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('f')">F</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('g')">G</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('h')">H</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('j')">J</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('k')"
+               [class.kb-key--highlight]="isHighlighted('k')">K</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('l')">L</div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive(';')">
+            <span class="kb-key__top">:</span><span class="kb-key__bot">;</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive(&quot;'&quot;)">
+            <span class="kb-key__top">"</span><span class="kb-key__bot">'</span>
+          </div>
+          <div class="kb-key kb-key--light kb-key--flex kb-key--between"
+               [class.kb-key--active]="isActive('enter')">
+            <span class="kb-key__icon-lg">↵</span>
+            <span class="kb-key__label">Enter</span>
+          </div>
+        </div>
+
+        <!-- Row 5: Shift row -->
+        <div class="kb-row">
+          <div class="kb-key kb-key--light kb-key--shift-l kb-key--between"
+               [class.kb-key--active]="isActive('shift')">
+            <span class="kb-key__label">Shift</span>
+            <span class="kb-key__icon-lg">⇧</span>
+          </div>
+          <div class="kb-key" [class.kb-key--active]="isActive('z')">Z</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('x')">X</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('c')">C</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('v')">V</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('b')">B</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('n')">N</div>
+          <div class="kb-key" [class.kb-key--active]="isActive('m')">M</div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive(',')">
+            <span class="kb-key__top">&lt;</span><span class="kb-key__bot">,</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('.')">
+            <span class="kb-key__top">&gt;</span><span class="kb-key__bot">.</span>
+          </div>
+          <div class="kb-key kb-key--dual" [class.kb-key--active]="isActive('/')">
+            <span class="kb-key__top">?</span><span class="kb-key__bot">/</span>
+          </div>
+          <div class="kb-key kb-key--light kb-key--flex kb-key--between"
+               [class.kb-key--active]="isActive('shift')">
+            <span class="kb-key__label">Shift</span>
+            <span class="kb-key__icon-lg">⇧</span>
+          </div>
+        </div>
+
+        <!-- Row 6: Bottom row + Navigation cluster -->
+        <div class="kb-row kb-row--bottom">
+          <div class="kb-key kb-key--muted kb-key--ctrl kb-key--bottom-left"
+               [class.kb-key--active]="isActive('ctrl')"
+               [class.kb-key--highlight]="isHighlighted('ctrl')">Ctrl</div>
+          <div class="kb-key kb-key--muted kb-key--win"
+               [class.kb-key--active]="isActive('win')">
+            <svg class="kb-win-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+            </svg>
+          </div>
+          <div class="kb-key kb-key--muted kb-key--alt kb-key--bottom-left"
+               [class.kb-key--active]="isActive('alt')">Alt</div>
+          <div class="kb-key kb-key--flex"
+               [class.kb-key--active]="isActive('space')">
+            <span class="kb-space-label">Windows Space Engine</span>
+          </div>
+          <div class="kb-key kb-key--muted kb-key--alt kb-key--bottom-right"
+               [class.kb-key--active]="isActive('alt')">Alt</div>
+          <div class="kb-key kb-key--muted kb-key--win"
+               [class.kb-key--active]="isActive('win')">
+            <svg class="kb-win-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+            </svg>
+          </div>
+          <div class="kb-key kb-key--muted kb-key--ctrl kb-key--bottom-right"
+               [class.kb-key--active]="isActive('ctrl')"
+               [class.kb-key--highlight]="isHighlighted('ctrl')">Ctrl</div>
+
+          <!-- Navigation cluster -->
+          <div class="kb-nav-cluster">
+            <!-- Top nav row: Ins Home PgUp -->
+            <div class="kb-nav-row">
+              <div class="kb-key kb-key--nav" [class.kb-key--active]="isActive('ins')">Ins</div>
+              <div class="kb-key kb-key--nav" [class.kb-key--active]="isActive('home')">Home</div>
+              <div class="kb-key kb-key--nav" [class.kb-key--active]="isActive('pgup')">PgUp</div>
+            </div>
+            <!-- Mid nav row: Del End PgDn -->
+            <div class="kb-nav-row">
+              <div class="kb-key kb-key--nav kb-key--muted" [class.kb-key--active]="isActive('del')">Del</div>
+              <div class="kb-key kb-key--nav" [class.kb-key--active]="isActive('end')">End</div>
+              <div class="kb-key kb-key--nav" [class.kb-key--active]="isActive('pgdn')">PgDn</div>
+            </div>
+            <!-- Arrow cluster -->
+            <div class="kb-arrow-cluster">
+              <div class="kb-key kb-key--arrow kb-key--arrow-top"
+                   [class.kb-key--active]="isActive('arrowup')">↑</div>
+              <div class="kb-arrow-row">
+                <div class="kb-key kb-key--arrow kb-key--arrow-left"
+                     [class.kb-key--active]="isActive('arrowleft')">←</div>
+                <div class="kb-key kb-key--arrow"
+                     [class.kb-key--active]="isActive('arrowdown')">↓</div>
+                <div class="kb-key kb-key--arrow kb-key--arrow-right"
+                     [class.kb-key--active]="isActive('arrowright')">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /kb-keys -->
+
+      <!-- Ctrl+K shortcut banner -->
+      <div class="kb-shortcut-banner">
+        <div class="kb-shortcut-banner__keys">
+          <div class="kb-sm-key">Ctrl</div>
+          <span class="kb-shortcut-banner__plus">+</span>
+          <div class="kb-sm-key">K</div>
+        </div>
+        <div class="kb-shortcut-banner__divider"></div>
+        <p class="kb-shortcut-banner__text">Search Everywhere &amp; Command Center</p>
+      </div>
+
+    </div><!-- /kb-board -->
+  </section>
+
+  <!-- Section: Shortcut reference cards -->
+  <section class="demo-section" id="shortcuts" data-doc-anchor>
+    <h2 class="demo-section__title">Shortcut Reference</h2>
+    <p class="demo-section__description">
+      Common keyboard shortcuts organised by workflow — form navigation, list &amp; data, and productivity.
+    </p>
+
+    <div class="kb-cards">
+
+      <!-- Card 1: Form Navigation -->
+      <div class="kb-card">
+        <div class="kb-card__icon kb-card__icon--sky">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 5h16M4 12h16M4 19h7"/>
+            <path d="M15 15l3 3 3-3"/>
+            <path d="M18 18V9"/>
+          </svg>
+        </div>
+        <h3 class="kb-card__title">Form Navigation</h3>
+        <ul class="kb-card__list">
+          <li class="kb-card__item">
+            <span class="kb-card__action">Next Input</span>
+            <div class="kb-sm-key">Tab ⇥</div>
+          </li>
+          <li class="kb-card__item">
+            <span class="kb-card__action">Previous Input</span>
+            <div class="kb-combo">
+              <div class="kb-sm-key kb-sm-key--muted">Shift ⇧</div>
+              <span class="kb-combo__plus">+</span>
+              <div class="kb-sm-key">Tab</div>
+            </div>
+          </li>
+          <li class="kb-card__item">
+            <span class="kb-card__action">Quick Exit</span>
+            <div class="kb-sm-key kb-sm-key--muted">Esc</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 2: List & Data -->
+      <div class="kb-card">
+        <div class="kb-card__icon kb-card__icon--emerald">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </div>
+        <h3 class="kb-card__title">List &amp; Data</h3>
+        <ul class="kb-card__list">
+          <li class="kb-card__item">
+            <span class="kb-card__action">Jump to Start</span>
+            <div class="kb-sm-key">Home</div>
+          </li>
+          <li class="kb-card__item">
+            <span class="kb-card__action">Jump to End</span>
+            <div class="kb-sm-key">End</div>
+          </li>
+          <li class="kb-card__item">
+            <span class="kb-card__action">Scroll Page</span>
+            <div class="kb-combo">
+              <div class="kb-sm-key">PgUp</div>
+              <div class="kb-sm-key">PgDn</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 3: Productivity -->
+      <div class="kb-card">
+        <div class="kb-card__icon kb-card__icon--amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3 class="kb-card__title">Productivity</h3>
+        <ul class="kb-card__list">
+          <li class="kb-card__item">
+            <span class="kb-card__action">App Help</span>
+            <div class="kb-sm-key">F1</div>
+          </li>
+          <li class="kb-card__item">
+            <span class="kb-card__action">Quick Save</span>
+            <div class="kb-combo">
+              <div class="kb-sm-key kb-sm-key--muted">Ctrl</div>
+              <span class="kb-combo__plus">+</span>
+              <div class="kb-sm-key">S</div>
+            </div>
+          </li>
+          <li class="kb-card__item">
+            <span class="kb-card__action">Undo Last</span>
+            <div class="kb-combo">
+              <div class="kb-sm-key kb-sm-key--muted">Ctrl</div>
+              <span class="kb-combo__plus">+</span>
+              <div class="kb-sm-key">Z</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /kb-cards -->
+  </section>
+
+  <!-- TOC rail -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>
