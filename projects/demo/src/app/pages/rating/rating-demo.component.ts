@@ -11,6 +11,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Rating component.
@@ -28,6 +30,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageLayoutComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './rating-demo.component.html',
   styleUrl: './rating-demo.component.scss',
@@ -234,4 +237,22 @@ export class RatingDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
+  };
 }

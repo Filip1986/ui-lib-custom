@@ -14,6 +14,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the MegaMenu component.
@@ -28,6 +30,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
@@ -35,6 +38,28 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class MegaMenuDemoComponent {
   public readonly importCode: string = "import { MegaMenu } from 'ui-lib-custom/mega-menu'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    apgPattern: {
+      name: 'Navigation',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/',
+    },
+    competitiveParity: 'pending',
+  };
   public readonly snippetBasicHorizontal: string = `<ui-lib-mega-menu [model]="items" />`;
   public readonly snippetVertical: string = `<ui-lib-mega-menu [model]="items" orientation="vertical" />`;
   public readonly snippetDisabledSeparator: string = `{ label: "Save As", disabled: true }\n{ separator: true }`;

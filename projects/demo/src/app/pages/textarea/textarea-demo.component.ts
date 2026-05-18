@@ -17,6 +17,8 @@ import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { UiLibTextarea } from 'ui-lib-custom/textarea';
 import type { TextareaChangeEvent } from 'ui-lib-custom/textarea';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type TextareaDemoSnippetKey =
   | 'basic'
@@ -47,12 +49,31 @@ type TextareaDemoSnippetKey =
     Button,
     UiLibTextarea,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

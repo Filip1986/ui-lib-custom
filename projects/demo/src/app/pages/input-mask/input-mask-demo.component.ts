@@ -18,6 +18,8 @@ import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputMaskComponent } from 'ui-lib-custom/input-mask';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 interface InputMaskSizeItem {
   readonly label: string;
@@ -59,12 +61,31 @@ type InputMaskDemoSnippetKey =
     FloatLabelComponent,
     InputMaskComponent,
     DocPageHeaderComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './input-mask-demo.component.html',
   styleUrl: './input-mask-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputMaskDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { InputMaskComponent } from 'ui-lib-custom/input-mask'";
 

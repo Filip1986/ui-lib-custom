@@ -9,6 +9,8 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { KnobComponent } from 'ui-lib-custom/knob';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type KnobDemoSnippetKey =
   | 'basic'
@@ -37,6 +39,7 @@ type KnobDemoSnippetKey =
     KnobComponent,
     DocTocComponent,
     DocPageHeaderComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',
@@ -112,4 +115,22 @@ export class KnobDemoComponent {
   public get contrastControl(): FormControl<number> {
     return this.reactiveForm.get('contrast') as FormControl<number>;
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
+  };
 }

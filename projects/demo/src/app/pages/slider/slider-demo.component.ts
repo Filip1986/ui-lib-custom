@@ -9,6 +9,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { Slider } from 'ui-lib-custom/slider';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type SliderDemoSnippetKey =
   | 'basic'
@@ -38,6 +40,7 @@ type SliderDemoSnippetKey =
     Card,
     Slider,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
@@ -115,4 +118,22 @@ export class SliderDemoComponent {
   public get brightnessControl(): FormControl<number> {
     return this.reactiveForm.get('brightness') as FormControl<number>;
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
+  };
 }

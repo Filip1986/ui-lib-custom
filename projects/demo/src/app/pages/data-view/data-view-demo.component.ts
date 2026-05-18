@@ -5,6 +5,8 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -73,6 +75,7 @@ type DataViewDemoSnippetKey =
     DataViewLoadingDirective,
     DataViewPaginatorLeftDirective,
     DataViewPaginatorRightDirective,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './data-view-demo.component.html',
   styleUrl: './data-view-demo.component.scss',
@@ -81,6 +84,24 @@ type DataViewDemoSnippetKey =
 export class DataViewDemoComponent {
   public readonly importCode: string =
     "import { DataViewComponent } from 'ui-lib-custom/data-view'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);

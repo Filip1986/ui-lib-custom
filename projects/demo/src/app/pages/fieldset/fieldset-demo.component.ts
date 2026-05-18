@@ -7,6 +7,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Fieldset component.
@@ -14,12 +16,37 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 @Component({
   selector: 'app-fieldset-demo',
   standalone: true,
-  imports: [CodeSnippet, Fieldset, DocPageLayoutComponent, DocTocComponent, DocPageHeaderComponent],
+  imports: [
+    CodeSnippet,
+    Fieldset,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocPageHeaderComponent,
+    DocQualityBadgeComponent,
+  ],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FieldsetDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Fieldset } from 'ui-lib-custom/fieldset'";
   public readonly snippetBasic: string = `<ui-lib-fieldset legend="Personal Information">\n  <!-- content -->\n</ui-lib-fieldset>`;
   public readonly snippetToggleable: string = `<ui-lib-fieldset\n  legend="Advanced Options"\n  [toggleable]="true"\n  [(collapsed)]="isCollapsed"\n>\n  <!-- content -->\n</ui-lib-fieldset>`;

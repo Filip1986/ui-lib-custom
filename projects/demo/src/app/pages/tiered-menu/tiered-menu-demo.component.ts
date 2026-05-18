@@ -22,6 +22,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 interface AriaRow {
   readonly element: string;
@@ -48,6 +50,7 @@ interface AriaRow {
     DocTocComponent,
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
@@ -55,6 +58,28 @@ interface AriaRow {
 })
 export class TieredMenuDemoComponent {
   public readonly importCode: string = "import { TieredMenu } from 'ui-lib-custom/tiered-menu'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    apgPattern: {
+      name: 'Menu Button',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/',
+    },
+    competitiveParity: 'pending',
+  };
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

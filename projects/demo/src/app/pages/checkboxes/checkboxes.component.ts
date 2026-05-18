@@ -29,6 +29,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
@@ -54,6 +56,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     FormsModule,
     ReactiveFormsModule,
     CheckboxBasicExampleComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -61,6 +64,24 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxesComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Checkbox } from 'ui-lib-custom/checkbox'";
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

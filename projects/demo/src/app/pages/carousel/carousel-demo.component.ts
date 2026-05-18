@@ -6,6 +6,8 @@ import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 interface DemoProduct {
   name: string;
@@ -22,12 +24,36 @@ interface DemoProduct {
 @Component({
   selector: 'app-carousel-demo',
   standalone: true,
-  imports: [CarouselComponent, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CarouselComponent,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+  ],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { CarouselComponent } from 'ui-lib-custom/carousel'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);

@@ -8,6 +8,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Drawer component.
@@ -22,6 +24,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',
@@ -29,6 +32,28 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class DrawerDemoComponent {
   public readonly importCode: string = "import { Drawer } from 'ui-lib-custom/drawer'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 9,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    apgPattern: {
+      name: 'Dialog (Modal)',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+    },
+    competitiveParity: 'pending',
+  };
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

@@ -32,6 +32,8 @@ import {
   AUTOCOMPLETE_LARGE_DATASET,
 } from './autocomplete-demo.data';
 import type { DemoCountry, DemoGroup } from './autocomplete-demo.data';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type AutoCompleteDemoSnippetKey =
   | 'basic'
@@ -74,12 +76,32 @@ type AutoCompleteDemoSnippetKey =
     AutoCompleteHeaderDirective,
     AutoCompleteFooterDirective,
     AutoCompleteEmptyDirective,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
   styleUrl: './autocomplete-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoCompleteDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Combobox', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/' },
+  };
+
   public readonly importCode: string =
     "import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete'";
 

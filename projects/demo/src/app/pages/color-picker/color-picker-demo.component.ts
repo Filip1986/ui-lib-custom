@@ -18,6 +18,8 @@ import { Button } from 'ui-lib-custom/button';
 import { ColorPicker } from 'ui-lib-custom';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ColorPickerValue, HsbColor, RgbColor } from 'ui-lib-custom';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type DemoSnippetKey =
   | 'basic'
@@ -47,6 +49,7 @@ type DemoSnippetKey =
     Button,
     CodeSnippet,
     ColorPicker,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',
@@ -167,4 +170,21 @@ export class ColorPickerDemoComponent {
   public displayHsbValue(value: HsbColor): string {
     return `HSB h:${value.h} s:${value.s} b:${value.b}`;
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
 }

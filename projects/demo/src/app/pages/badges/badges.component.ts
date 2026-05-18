@@ -12,6 +12,8 @@ import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
@@ -46,12 +48,31 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     VariantComparisonComponent,
     BadgeBasicExampleComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgesComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Badge } from 'ui-lib-custom/badge'";
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

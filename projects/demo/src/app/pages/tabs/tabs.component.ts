@@ -32,6 +32,8 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
@@ -83,6 +85,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     ThemeScopeDirective,
     VariantComparisonComponent,
     TabsBasicExampleComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -91,6 +94,25 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
 export class TabsComponent {
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    apgPattern: { name: 'Tabs', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/' },
+    competitiveParity: 'pending',
+  };
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);

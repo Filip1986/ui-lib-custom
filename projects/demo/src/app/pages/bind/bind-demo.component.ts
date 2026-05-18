@@ -8,6 +8,8 @@ import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Bind directive.
@@ -24,12 +26,31 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BindDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Bind } from 'ui-lib-custom/bind'";
   public readonly snippetBasicUsage: string = `<div [uiLibBind]="{ id: 'my-box', title: 'Tooltip text', tabIndex: 0 }">\n  Content\n</div>`;
   public readonly snippetBooleanNumeric: string = `<!-- numeric property -->\n<div [uiLibBind]="{ tabIndex: 2 }">Focusable</div>\n<!-- boolean property -->\n<div [uiLibBind]="{ hidden: true }">Hidden</div>`;

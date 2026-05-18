@@ -8,6 +8,24 @@ import {
 } from '@angular/core';
 import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 
+export interface CategoryCheckpointCount {
+  readonly checked: number;
+  readonly total: number;
+}
+
+export interface CategoryCheckpoints {
+  readonly api?: CategoryCheckpointCount;
+  readonly a11y?: CategoryCheckpointCount;
+  readonly perf?: CategoryCheckpointCount;
+  readonly comp?: CategoryCheckpointCount;
+  readonly theme?: CategoryCheckpointCount;
+  readonly dx?: CategoryCheckpointCount;
+  readonly docs?: CategoryCheckpointCount;
+  readonly polish?: CategoryCheckpointCount;
+  readonly angular?: CategoryCheckpointCount;
+  readonly feel?: CategoryCheckpointCount;
+}
+
 export interface QualityCategoryScores {
   readonly api: number;
   readonly a11y: number;
@@ -25,17 +43,47 @@ export interface ComponentQualityAudit {
   readonly date: string;
   readonly tier: 1 | 2;
   readonly scores: QualityCategoryScores;
+  // Tier 2 only: per-category checkpoint counts (score = checked/total × 10)
+  readonly checkpoints?: CategoryCheckpoints;
   readonly competitiveParity: 'pass' | 'fail' | 'pending';
   readonly apgPattern?: { readonly name: string; readonly url: string };
-  readonly unchecked?: readonly string[];
   readonly humanPending?: readonly string[];
 }
 
 interface CategoryDisplay {
+  readonly key: keyof QualityCategoryScores;
   readonly label: string;
+  readonly description: string;
   readonly abbr: string;
   readonly score: number;
+  readonly checkpointCount?: CategoryCheckpointCount;
 }
+
+const CATEGORY_TOTALS: Record<keyof QualityCategoryScores, number> = {
+  api: 16,
+  a11y: 28,
+  perf: 20,
+  comp: 14,
+  theme: 15,
+  dx: 17,
+  docs: 18,
+  polish: 15,
+  angular: 16,
+  feel: 10,
+};
+
+const CATEGORY_DESCRIPTIONS: Record<keyof QualityCategoryScores, string> = {
+  api: 'Signal inputs/outputs, naming consistency, intelligent defaults',
+  a11y: 'ARIA roles, keyboard navigation, focus management, screen reader support, reduced motion',
+  perf: 'Render efficiency, signal usage, memory management, tree-shaking, bundle impact',
+  comp: 'Content projection, composability, directive alternatives, extension points',
+  theme: 'CSS custom properties, dark mode, variant switching, design token coverage',
+  dx: 'TypeScript completions, minimal boilerplate, clear error states, developer ergonomics',
+  docs: 'README completeness, API reference, usage examples, a11y notes, edge cases',
+  polish: 'Animation quality, interaction feedback, visual consistency, perceptible responsiveness',
+  angular: 'Signals-first, OnPush, standalone, SSR-safe, zoneless-compatible, hydration',
+  feel: 'Emotional quality — satisfying to use, makes developers smile',
+};
 
 /**
  *
@@ -81,19 +129,57 @@ export class DocQualityBadgeComponent {
     readonly CategoryDisplay[]
   >((): readonly CategoryDisplay[] => {
     const s: QualityCategoryScores = this.audit().scores;
-    return [
-      { label: 'API Clarity', abbr: 'API', score: s.api },
-      { label: 'Accessibility', abbr: 'A11y', score: s.a11y },
-      { label: 'Performance', abbr: 'Perf', score: s.perf },
-      { label: 'Composability', abbr: 'Comp', score: s.comp },
-      { label: 'Theming', abbr: 'Theme', score: s.theme },
-      { label: 'Developer Experience', abbr: 'DX', score: s.dx },
-      { label: 'Documentation', abbr: 'Docs', score: s.docs },
-      { label: 'Visual & Interaction Polish', abbr: 'Polish', score: s.polish },
-      { label: 'Angular Integration', abbr: 'Angular', score: s.angular },
-      { label: 'Emotional Quality', abbr: 'Feel', score: s.feel },
+    const cp: CategoryCheckpoints | undefined = this.audit().checkpoints;
+    const keys: (keyof QualityCategoryScores)[] = [
+      'api',
+      'a11y',
+      'perf',
+      'comp',
+      'theme',
+      'dx',
+      'docs',
+      'polish',
+      'angular',
+      'feel',
     ];
+    const labels: Record<keyof QualityCategoryScores, string> = {
+      api: 'API Clarity',
+      a11y: 'Accessibility',
+      perf: 'Performance',
+      comp: 'Composability',
+      theme: 'Theming',
+      dx: 'Developer Experience',
+      docs: 'Documentation',
+      polish: 'Polish',
+      angular: 'Angular Integration',
+      feel: 'Emotional Quality',
+    };
+    const abbrs: Record<keyof QualityCategoryScores, string> = {
+      api: 'API',
+      a11y: 'A11y',
+      perf: 'Perf',
+      comp: 'Comp',
+      theme: 'Theme',
+      dx: 'DX',
+      docs: 'Docs',
+      polish: 'Polish',
+      angular: 'Angular',
+      feel: 'Feel',
+    };
+    return keys.map((key: keyof QualityCategoryScores): CategoryDisplay => {
+      const checkpointCount: CategoryCheckpointCount | undefined = cp?.[key];
+      const base: Omit<CategoryDisplay, 'checkpointCount'> = {
+        key,
+        label: labels[key],
+        description: CATEGORY_DESCRIPTIONS[key],
+        abbr: abbrs[key],
+        score: s[key],
+      };
+      return checkpointCount !== undefined ? { ...base, checkpointCount } : base;
+    });
   });
+
+  public readonly checkpointTotals: typeof CATEGORY_TOTALS = CATEGORY_TOTALS;
 
   public scoreGrade(score: number): 'excellent' | 'pass' | 'warn' | 'fail' {
     if (score >= 9) return 'excellent';
@@ -103,6 +189,6 @@ export class DocQualityBadgeComponent {
   }
 
   public toggle(): void {
-    this.isExpanded.update((v: boolean): boolean => !v);
+    this.isExpanded.update((value: boolean): boolean => !value);
   }
 }

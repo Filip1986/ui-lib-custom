@@ -11,6 +11,8 @@ import { Card } from 'ui-lib-custom/card';
 import { Icon } from 'ui-lib-custom/icon';
 import { DialogComponent } from 'ui-lib-custom/dialog';
 import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for Dialog component capabilities.
@@ -28,6 +30,7 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
     Button,
     Icon,
     DialogComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
@@ -122,4 +125,25 @@ export class DialogDemoComponent {
   public setVariant(variant: DialogVariant): void {
     this.selectedVariant = variant;
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 9,
+      theme: 8,
+      dx: 9,
+      docs: 8,
+      polish: 9,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: {
+      name: 'Dialog (Modal)',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+    },
+  };
 }

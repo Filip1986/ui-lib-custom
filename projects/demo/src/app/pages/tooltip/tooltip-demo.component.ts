@@ -7,6 +7,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Tooltip directive.
@@ -21,12 +23,31 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Tooltip } from 'ui-lib-custom/tooltip'";
   public readonly snippetBasic: string = `<button uiLibTooltip="Save the document">Save</button>`;
   public readonly snippetPositions: string = `<button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</button>\n<button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</button>\n<button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</button>\n<button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</button>`;

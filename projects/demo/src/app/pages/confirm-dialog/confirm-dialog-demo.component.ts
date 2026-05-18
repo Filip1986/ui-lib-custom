@@ -11,6 +11,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the ConfirmDialog component.
@@ -25,6 +27,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
@@ -33,6 +36,28 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 export class ConfirmDialogDemoComponent {
   public readonly importCode: string =
     "import { ConfirmDialog, ConfirmationService } from 'ui-lib-custom/confirm-dialog'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    apgPattern: {
+      name: 'Alert and Message Dialogs',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/',
+    },
+    competitiveParity: 'pending',
+  };
   private readonly confirmationService: ConfirmationService = inject(ConfirmationService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

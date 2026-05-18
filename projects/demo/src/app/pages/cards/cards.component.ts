@@ -26,6 +26,8 @@ import { FormsModule } from '@angular/forms';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -60,12 +62,31 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     VariantComparisonComponent,
     CardBasicExampleComponent,
     ThemeScopeDirective,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Card } from 'ui-lib-custom/card'";
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

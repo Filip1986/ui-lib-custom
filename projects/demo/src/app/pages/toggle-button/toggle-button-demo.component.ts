@@ -17,6 +17,8 @@ import type {
   ToggleButtonSize,
   ToggleButtonVariant,
 } from 'ui-lib-custom/toggle-button';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type SnippetKey =
   | 'basic'
@@ -48,12 +50,31 @@ type SnippetKey =
     Button,
     ToggleButton,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './toggle-button-demo.component.html',
   styleUrl: './toggle-button-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleButtonDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
