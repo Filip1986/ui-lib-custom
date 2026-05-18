@@ -5,6 +5,8 @@ import type { ContextMenuItem, ContextMenuItemCommandEvent } from 'ui-lib-custom
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
@@ -13,7 +15,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-context-menu-demo',
   standalone: true,
-  imports: [ContextMenu, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    ContextMenu,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocKeyboardNavComponent,
+  ],
   templateUrl: './context-menu-demo.component.html',
   styleUrl: './context-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -144,6 +152,35 @@ export class ContextMenuDemoComponent {
     { label: 'Action One', icon: 'pi pi-star' },
     { label: 'Action Two', icon: 'pi pi-heart' },
     { label: 'Action Three', icon: 'pi pi-check' },
+  ];
+
+  // ── Keyboard navigation data ───────────────────────────────────────────────
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '↓ / ↑',
+      action: 'Move focus to the next or previous enabled item (skips separators and disabled).',
+    },
+    {
+      key: '→',
+      action: 'Open the submenu of the focused item and move focus to its first item.',
+    },
+    {
+      key: '←',
+      action: 'Close the current submenu and return focus to the parent item.',
+    },
+    {
+      key: 'Enter / Space',
+      action: 'Activate the focused item.',
+    },
+    {
+      key: 'Escape',
+      action: 'Close the menu (or close just the submenu when inside a submenu).',
+    },
+    {
+      key: 'Home / End',
+      action: 'Jump to the first or last item in the top-level menu.',
+    },
   ];
 
   // ── Private helpers ────────────────────────────────────────────────────────

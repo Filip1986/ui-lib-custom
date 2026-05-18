@@ -14,6 +14,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface TagInputRow {
@@ -36,12 +38,6 @@ interface AriaRow {
   readonly notes: string;
 }
 
-interface KeyboardRow {
-  readonly key: string;
-  readonly target: string;
-  readonly action: string;
-}
-
 /**
  * Demo page for the Tag component.
  */
@@ -59,6 +55,7 @@ interface KeyboardRow {
     DocPageLayoutComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',
@@ -267,7 +264,7 @@ export class TagDemoComponent {
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab',
       target: 'Dismiss button',
