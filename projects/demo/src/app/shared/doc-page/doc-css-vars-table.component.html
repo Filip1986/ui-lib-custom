@@ -16,9 +16,13 @@
     <div class="css-vars-table__row" role="row">
       <code class="css-vars-table__cell css-vars-table__var" role="cell">{{ row.variable }}</code>
       @if (showDefault()) {
-        <code class="css-vars-table__cell css-vars-table__cell--default css-vars-table__default" role="cell">
-          {{ row.default ?? '' }}
-        </code>
+        <span class="css-vars-table__cell css-vars-table__cell--default" role="cell">
+          @if (extractColor(row.default); as color) {
+            <span class="css-vars-table__swatch" [style.--swatch]="color">{{ row.default ?? '' }}</span>
+          } @else {
+            <code class="css-vars-table__default">{{ row.default ?? '' }}</code>
+          }
+        </span>
       }
       <span
         class="css-vars-table__cell css-vars-table__cell--description css-vars-table__description"
