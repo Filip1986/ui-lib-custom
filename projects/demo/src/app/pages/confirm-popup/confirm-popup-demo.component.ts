@@ -5,6 +5,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ConfirmPopup, ConfirmPopupService } from 'ui-lib-custom/confirm-popup';
 import type { ConfirmPopupButtonSeverity, ConfirmPopupVariant } from 'ui-lib-custom/confirm-popup';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -20,6 +21,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     ConfirmPopup,
     TitleCasePipe,
     Button,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
   ],

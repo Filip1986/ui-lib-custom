@@ -1,18 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <div class="doc-header" docHeader>
-    <h1>ScrollTop</h1>
-    <ui-lib-code-snippet
-      language="typescript"
-      [showLineNumbers]="false"
-      size="sm"
-      [code]="importCode"
-    />
-    <p class="doc-description">
-      A floating button that appears once the page is scrolled past a configurable threshold.
-      Clicking it smoothly returns the user to the top of the page or a scrollable container.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="ScrollTop"
+    [importCode]="importCode"
+    description="A floating button that appears once the page is scrolled past a configurable threshold. Clicking it smoothly returns the user to the top of the page or a scrollable container."
+  />
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 1: Basic usage (window target)                              -->

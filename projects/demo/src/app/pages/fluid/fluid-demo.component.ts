@@ -6,6 +6,7 @@ import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 
 /**
  * Demo page for the Fluid component and FluidDirective.
@@ -14,7 +15,15 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-fluid-demo',
   standalone: true,
-  imports: [CodeSnippet, Fluid, FluidDirective, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Fluid,
+    FluidDirective,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocPageHeaderComponent,
+  ],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -5,6 +5,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Drawer } from 'ui-lib-custom/drawer';
 import type { DrawerPosition, DrawerVariant } from 'ui-lib-custom/drawer';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,7 +16,15 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-drawer-demo',
   standalone: true,
-  imports: [CodeSnippet, Drawer, TitleCasePipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Drawer,
+    TitleCasePipe,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

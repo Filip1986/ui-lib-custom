@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
@@ -12,6 +19,7 @@ import type { ThemeMode } from 'ui-lib-custom/theme';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import type { SelectOption } from 'ui-lib-custom/select';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -35,6 +43,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     Tab,
     UiLibInput,
     UiLibSelect,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     CodeSnippet,

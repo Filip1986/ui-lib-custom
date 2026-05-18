@@ -15,6 +15,7 @@ import type {
   GalleriaThumbnailsPosition,
   GalleriaVariant,
 } from 'ui-lib-custom/galleria';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -84,6 +85,7 @@ const DEMO_IMAGES: GalleriaImage[] = [
     GalleriaComponent,
     FormsModule,
     Button,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
   ],

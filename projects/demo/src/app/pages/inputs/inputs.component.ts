@@ -21,6 +21,7 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -53,6 +54,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Tabs,
     Tab,
     DocPageLayoutComponent,
+    DocPageHeaderComponent,
     DocTocComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,

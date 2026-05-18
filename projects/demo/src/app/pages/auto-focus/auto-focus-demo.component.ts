@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { AutoFocus } from 'ui-lib-custom/auto-focus';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -14,7 +15,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-auto-focus-demo',
   standalone: true,
-  imports: [CodeSnippet, AutoFocus, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    AutoFocus,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './auto-focus-demo.component.html',
   styleUrl: './auto-focus-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

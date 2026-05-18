@@ -23,6 +23,7 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -46,6 +47,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     Tab,
     Card,
     Button,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,

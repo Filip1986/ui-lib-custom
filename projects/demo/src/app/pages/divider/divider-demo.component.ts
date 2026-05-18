@@ -9,6 +9,7 @@ import type {
   DividerVariant,
 } from 'ui-lib-custom/divider';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -19,7 +20,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  imports: [CodeSnippet, Divider, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Divider,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

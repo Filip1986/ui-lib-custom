@@ -11,6 +11,7 @@ import type { ContainerSize, InsetToken } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -33,6 +34,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     Tab,
     UiLibSelect,
     DocDemoViewportComponent,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     CodeSnippet,
   ],

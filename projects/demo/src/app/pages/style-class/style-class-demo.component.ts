@@ -3,6 +3,7 @@ import type { Signal } from '@angular/core';
 import { StyleClass } from 'ui-lib-custom/style-class';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,7 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-style-class-demo',
   standalone: true,
-  imports: [CodeSnippet, StyleClass, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    StyleClass,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './style-class-demo.component.html',
   styleUrl: './style-class-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

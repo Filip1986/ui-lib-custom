@@ -13,6 +13,7 @@ import type {
   TimelineVariant,
 } from 'ui-lib-custom/timeline';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -40,6 +41,7 @@ interface OrderStep {
     TimelineContentDirective,
     TimelineMarkerDirective,
     TimelineOppositeDirective,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
   ],

@@ -10,6 +10,7 @@ import type {
   DockSize,
   DockVariant,
 } from 'ui-lib-custom/dock';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -20,7 +21,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-dock-demo',
   standalone: true,
-  imports: [CodeSnippet, Dock, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Dock,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
@@ -20,6 +21,7 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
   standalone: true,
   imports: [
     CommonModule,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     VariantComparisonComponent,

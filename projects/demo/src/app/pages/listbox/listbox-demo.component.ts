@@ -5,6 +5,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
@@ -31,6 +32,7 @@ type ListboxDemoSnippetKey =
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
+    DocPageHeaderComponent,
     DocDemoViewportComponent,
     Card,
     CodeSnippet,

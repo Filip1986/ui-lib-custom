@@ -6,6 +6,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { Checkbox } from 'ui-lib-custom/checkbox';
@@ -48,6 +49,7 @@ type InputGroupDemoSnippetKey =
     FloatLabelComponent,
     InputGroupComponent,
     InputGroupAddonComponent,
+    DocPageHeaderComponent,
   ],
   templateUrl: './input-group-demo.component.html',
   styleUrl: './input-group-demo.component.scss',
