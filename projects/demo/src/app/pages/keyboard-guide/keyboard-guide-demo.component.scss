@@ -154,7 +154,8 @@ $amber-600: #d97706;
     color: $zinc-500;
   }
 
-  // ── State: pressed ──
+  // ── State: pressed (physical keyboard via signal, or mouse click via :active) ──
+  &:active,
   &--active {
     background: $zinc-100 !important;
     border-color: $zinc-500 !important;
