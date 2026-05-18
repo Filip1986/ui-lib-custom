@@ -4,6 +4,7 @@ import { ProgressBar } from 'ui-lib-custom/progress-bar';
 import type { ProgressBarVariant } from 'ui-lib-custom/progress-bar';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -14,7 +15,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-progress-bar-demo',
   standalone: true,
-  imports: [CodeSnippet, ProgressBar, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    ProgressBar,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './progress-bar-demo.component.html',
   styleUrl: './progress-bar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

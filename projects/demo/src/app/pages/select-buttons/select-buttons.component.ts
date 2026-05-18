@@ -19,6 +19,7 @@ import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { Icon } from 'ui-lib-custom/icon';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
@@ -43,6 +44,7 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
     Stack,
     Inline,
     Grid,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     VariantComparisonComponent,

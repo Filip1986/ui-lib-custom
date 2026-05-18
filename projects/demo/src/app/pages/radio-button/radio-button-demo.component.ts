@@ -5,6 +5,7 @@ import { JsonPipe } from '@angular/common';
 import { RadioButton } from 'ui-lib-custom/radio-button';
 import type { RadioButtonChangeEvent } from 'ui-lib-custom/radio-button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -26,6 +27,7 @@ interface CityOption {
     FormsModule,
     ReactiveFormsModule,
     JsonPipe,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
   ],

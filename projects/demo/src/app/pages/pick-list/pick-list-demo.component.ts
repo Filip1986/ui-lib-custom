@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal, viewChild, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  viewChild,
+  type WritableSignal,
+} from '@angular/core';
 import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
@@ -111,6 +118,7 @@ const SNIPPETS: Record<string, string> = {
   selector: 'app-pick-list-demo',
   standalone: true,
   imports: [
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     Card,
     CodeSnippet,

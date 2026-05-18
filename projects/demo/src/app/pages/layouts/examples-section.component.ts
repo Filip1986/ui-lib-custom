@@ -6,6 +6,7 @@ import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -26,6 +27,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     Tabs,
     Tab,
     DocDemoViewportComponent,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     CodeSnippet,
   ],

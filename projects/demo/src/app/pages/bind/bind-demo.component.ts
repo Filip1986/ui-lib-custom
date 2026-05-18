@@ -4,6 +4,7 @@ import { JsonPipe } from '@angular/common';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Bind } from 'ui-lib-custom/bind';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,7 +16,15 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-bind-demo',
   standalone: true,
-  imports: [CodeSnippet, Bind, JsonPipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Bind,
+    JsonPipe,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

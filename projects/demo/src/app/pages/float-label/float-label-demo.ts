@@ -12,6 +12,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { Card } from 'ui-lib-custom/card';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Button } from 'ui-lib-custom/button';
@@ -51,6 +52,7 @@ type FloatLabelDemoSnippetKey =
     FloatLabelComponent,
     CodeSnippet,
     Button,
+    DocPageHeaderComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',

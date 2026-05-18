@@ -1,18 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <div class="doc-header" docHeader>
-    <h1>Timeline</h1>
-    <ui-lib-code-snippet
-      language="typescript"
-      [showLineNumbers]="false"
-      size="sm"
-      [code]="importCode"
-    />
-    <p class="doc-description">
-      A data-display component for rendering a series of events along a vertical or horizontal axis.
-      Supports custom marker, content, and opposite-side templates.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="Timeline"
+    [importCode]="importCode"
+    description="A data-display component for rendering a series of events along a vertical or horizontal axis. Supports custom marker, content, and opposite-side templates."
+  />
 
   <!-- =========================================================== -->
   <!-- 1. Basic Vertical (left-align, default dot markers)          -->

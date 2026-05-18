@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
@@ -53,6 +54,7 @@ type InputNumberSnippetKey =
     CodeSnippet,
     FloatLabelComponent,
     InputNumberComponent,
+    DocPageHeaderComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',

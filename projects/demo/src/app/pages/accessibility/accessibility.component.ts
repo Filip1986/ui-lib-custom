@@ -8,6 +8,7 @@ import { Checkbox } from 'ui-lib-custom/checkbox';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import type { SelectOption } from 'ui-lib-custom/select';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -20,6 +21,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
   standalone: true,
   imports: [
     CommonModule,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     Card,

@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -38,6 +39,7 @@ type DemoSnippetKey =
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,

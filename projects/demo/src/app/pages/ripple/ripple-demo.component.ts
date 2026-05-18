@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Ripple } from 'ui-lib-custom/ripple';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,7 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-ripple-demo',
   standalone: true,
-  imports: [CodeSnippet, Ripple, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Ripple,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

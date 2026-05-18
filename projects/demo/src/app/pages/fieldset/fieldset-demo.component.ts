@@ -6,6 +6,7 @@ import type { FieldsetVariant } from 'ui-lib-custom/fieldset';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 
 /**
  * Demo page for the Fieldset component.
@@ -13,7 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-fieldset-demo',
   standalone: true,
-  imports: [CodeSnippet, Fieldset, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Fieldset, DocPageLayoutComponent, DocTocComponent, DocPageHeaderComponent],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

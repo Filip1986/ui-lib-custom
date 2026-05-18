@@ -14,6 +14,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.component';
 import { FormsModule } from '@angular/forms';
 
@@ -41,6 +42,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     DocDemoViewportComponent,
     IconBasicExampleComponent,
     FormsModule,
+    DocPageHeaderComponent,
   ],
   templateUrl: './icons-demo.component.html',
   styleUrl: './icons-demo.component.scss',

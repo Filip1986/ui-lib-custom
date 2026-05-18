@@ -1,13 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
-  <div class="doc-header" docHeader>
-    <h1>Library Roadmap &amp; Progress</h1>
-    <p class="doc-description">
-      A comprehensive view of where the library stands today, what has been achieved, what is
-      actively in-flight, and what comes next on the path to v1.0 and beyond.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="Library Roadmap &amp; Progress"
+    description="A comprehensive view of where the library stands today, what has been achieved, what is actively in-flight, and what comes next on the path to v1.0 and beyond."
+  />
 
   <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
   <section id="dashboard" data-doc-anchor class="roadmap-section">

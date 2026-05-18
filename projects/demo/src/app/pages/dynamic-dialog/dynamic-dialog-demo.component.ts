@@ -12,6 +12,7 @@ import type {
   DynamicDialogPosition,
 } from 'ui-lib-custom/dynamic-dialog';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -125,7 +126,7 @@ export class LongDialogContentComponent {
 @Component({
   selector: 'app-dynamic-dialog-demo',
   standalone: true,
-  imports: [CodeSnippet, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Button, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
