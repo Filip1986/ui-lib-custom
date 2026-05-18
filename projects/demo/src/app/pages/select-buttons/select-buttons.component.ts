@@ -25,6 +25,8 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for select button variants.
@@ -49,12 +51,31 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
     DocTocComponent,
     VariantComparisonComponent,
     SelectButtonBasicExampleComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonsComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

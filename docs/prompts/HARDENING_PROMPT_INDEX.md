@@ -1,214 +1,194 @@
 # Hardening Prompt Index
 
-> **Purpose:** Single index of all component hardening session prompts.
-> Work top to bottom within each tier. Each prompt file is a self-contained session guide.
+> **Purpose:** Quick-reference record of all Tier 1 hardening results and the Tier 2 audit queue.
 >
-> **Folder convention:**
-> - `docs/prompts/completed/` — prompts for components with all 10 scores ≥ 8 (🟢 in COMPONENT_SCORES.md)
-> - `docs/prompts/needs-hardening/` — prompts for components not yet formally scored (🔴 or 🟡)
+> **Tier 1 hardening** — All 100 components completed. Per-component prompt files have been
+> deleted (they were one-time-use scaffolding). The reusable workflow and accumulated lessons
+> live in [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](COMPONENT_EVOLUTION_PROMPTS.md).
 >
-> **Last reconciled:** 2026-05-15 — matched against actual scores in `docs/COMPONENT_SCORES.md`.
-
----
-
-## Completed Hardenings (all scores ≥ 8 — prompt files in `docs/prompts/completed/`)
-
-| Component       | Tier        | Avg   | Prompt File                                 |
-|-----------------|-------------|-------|---------------------------------------------|
-| Dialog          | Tier 1 #1   | 8.6   | `SESSION_START_DIALOG_HARDENING.md`         |
-| Select          | Tier 1 #2   | 8.2   | `SESSION_START_SELECT_HARDENING.md`         |
-| AutoComplete    | Tier 1 #3   | 8.2   | `SESSION_START_AUTOCOMPLETE_HARDENING.md`   |
-| DynamicDialog   | Tier 1 #4   | 8.3   | `SESSION_START_DYNAMIC_DIALOG_HARDENING.md` |
-| Drawer          | Tier 1 #5   | 8.5   | `SESSION_START_DRAWER_HARDENING.md`         |
-| ConfirmDialog   | Tier 1 #6   | 8.3   | `SESSION_START_CONFIRM_DIALOG_HARDENING.md` |
-| ConfirmPopup    | Tier 1 #7   | 8.9   | `CONFIRM_POPUP_HARDENING_PROMPT.md`         |
-| Popover         | Tier 1 #8   | 9.0   | `POPOVER_HARDENING_PROMPT.md`               |
-| Tooltip         | Tier 1 #9   | 9.0   | `TOOLTIP_HARDENING_PROMPT.md`               |
-| Toast           | Tier 1 #10  | 9.1   | `TOAST_HARDENING_PROMPT.md`                 |
-| Menubar         | Tier 2 #11  | 9.0   | `MENUBAR_HARDENING_PROMPT.md`               |
-| Menu            | Tier 2 #12  | 9.0   | `menu-hardening-prompt.md`                  |
-| TieredMenu      | Tier 2 #13  | 9.0   | *(hardened without dedicated prompt)*       |
-| ContextMenu     | Tier 2 #14  | 9.0   | `context-menu-hardening-prompt.md`          |
-| PanelMenu       | Tier 2 #15  | 9.0   | `panel-menu-hardening-prompt.md`            |
-| MegaMenu        | Tier 2 #16  | 9.0   | *(hardened without dedicated prompt)*       |
-| Tabs            | Tier 2 #17  | 9.0   | *(hardened without dedicated prompt)*       |
-| Accordion       | Tier 2 #18  | 9.0   | *(hardened without dedicated prompt)*       |
-| Stepper         | Tier 2 #19  | 9.0   | *(hardened without dedicated prompt)*       |
-| Breadcrumb      | Tier 2 #20  | 9.0   | *(hardened without dedicated prompt)*       |
-| Input           | Tier 3 #21  | 8.8   | `input-hardening-prompt.md`                 |
-| Checkbox        | Tier 3 #22  | 9.0   | *(hardened without dedicated prompt)*       |
-| RadioButton     | Tier 3 #23  | 8.8   | `radio-button-hardening-prompt.md`          |
-| CascadeSelect   | Tier 3 #25  | 8.2   | *(hardened without dedicated prompt)*       |
-| InputNumber     | Tier 3 #26  | 9.0   | *(hardened without dedicated prompt)*       |
-| Slider          | Tier 3 #27  | 8.8   | `slider-hardening-prompt.md`                |
-| ColorPicker     | Tier 3 #28  | 8.2   | *(hardened without dedicated prompt)*       |
-| Password        | Tier 3 #29  | 8.7   | `password-hardening-prompt.md`              |
-| Rating          | Tier 3 #30  | 8.7   | `rating-hardening-prompt.md`                |
-| Knob            | Tier 3 #31  | 8.2   | *(hardened without dedicated prompt)*       |
-| Table           | Tier 4 #32  | 8.6   | `table-hardening-prompt.md`                 |
-| TreeTable       | Tier 4 #33  | 8.5   | `tree-table-hardening-prompt.md`            |
-| Tree            | Tier 4 #34  | 8.6   | `tree-hardening-prompt.md`                  |
-| TreeSelect      | Tier 4 #35  | 8.6   | `tree-select-hardening-prompt.md`           |
-| Listbox         | Tier 4 #36  | 8.6   | `listbox-hardening-prompt.md`               |
-| Paginator       | Tier 4 #37  | 8.5   | `paginator-hardening-prompt.md`             |
-| DataView        | Tier 4 #38  | 8.3   | `data-view-hardening-prompt.md`             |
-| OrderList       | Tier 4 #39  | 8.7   | `order-list-hardening-prompt.md`            |
-| PickList        | Tier 4 #40  | 8.7   | `pick-list-hardening-prompt.md`             |
-| Button          | Tier 5 #41  | 8.9   | `button-hardening-prompt.md`                |
-| Alert           | Tier 5 #42  | 8.5   | `alert-hardening-prompt.md`                 |
-| Message         | Tier 5 #43  | 8.6   | `message-hardening-prompt.md`               |
-| ProgressBar     | Tier 5 #44  | 8.6   | `progress-bar-hardening-prompt.md`          |
-| Carousel        | Tier 5 #45  | 8.3   | `carousel-hardening-prompt.md`              |
-| Galleria        | Tier 5 #46  | 8.3   | `galleria-hardening-prompt.md`              |
-| SpeedDial       | Tier 5 #47  | 8.8   | `speed-dial-hardening-prompt.md`            |
-| SelectButton    | Tier 5 #48  | 8.7   | `select-button-hardening-prompt.md`         |
-| InputOtp        | Tier 5 #49  | 8.7   | `input-otp-hardening-prompt.md`             |
-| VirtualScroller | Tier 5 #50  | 8.5   | `virtual-scroller-hardening-prompt.md`      |
-| Card            | Tier 6 #51  | 9.0   | `card-hardening-prompt.md`                  |
-| Badge           | Tier 6 #52  | 8.4   | `badge-hardening-prompt.md`                 |
-| Tag             | Tier 6 #53  | 8.9   | `tag-hardening-prompt.md`                   |
-| Chip            | Tier 6 #54  | 8.5   | `chip-hardening-prompt.md`                  |
-| Skeleton        | Tier 6 #55  | 8.6   | `skeleton-hardening-prompt.md`              |
-| ProgressSpinner | Tier 6 #56  | 8.9   | `progress-spinner-hardening-prompt.md`      |
-| MeterGroup      | Tier 6 #57  | 8.3   | `meter-group-hardening-prompt.md`           |
-| Divider         | Tier 6 #58  | 8.7   | `divider-hardening-prompt.md`               |
-| Toolbar         | Tier 6 #59  | 8.9   | `toolbar-hardening-prompt.md`               |
-| Panel           | Tier 6 #60  | 9.0   | `panel-hardening-prompt.md`                 |
-| Fieldset        | Tier 6 #61  | 9.0   | `fieldset-hardening-prompt.md`              |
-| ScrollPanel     | Tier 6 #62  | 8.9   | `scroll-panel-hardening-prompt.md`          |
-| Inplace         | Tier 6 #63  | 8.9   | `inplace-hardening-prompt.md`               |
-| BlockUI         | Tier 6 #64  | 9.0   | `block-ui-hardening-prompt.md`              |
-| Avatar          | Tier 6 #65  | 8.2   | `avatar-hardening-prompt.md`                |
-| Image           | Tier 6 #66  | 8.7   | `image-hardening-prompt.md`                 |
-| ImageCompare    | Tier 6 #67  | 8.9   | `image-compare-hardening-prompt.md`         |
-| SplitButton     | Tier 6 #68  | 8.6   | `split-button-hardening-prompt.md`          |
-| Upload          | Tier 6 #69  | 8.9   | `upload-hardening-prompt.md`                |
-| Terminal        | Tier 6 #70  | 8.9   | `terminal-hardening-prompt.md`              |
-| Timeline        | Tier 6 #71  | 8.3   | `timeline-sessions-hardening-prompt.md`     |
-| Chart           | Tier 6 #72  | 8.9   | `chart-hardening-prompt.md`                 |
-| FocusTrap       | Tier 6 #73  | 8.4   | `focus-trap-hardening-prompt.md`            |
-| Ripple          | Tier 6 #74  | 8.7   | `ripple-hardening-prompt.md`                |
-| ScrollTop       | Tier 6 #75  | 8.4   | `scroll-top-hardening-prompt.md`            |
-| BottomSheet     | Tier 6 #76  | 8.5   | `bottom-sheet-hardening-prompt.md`          |
-
-**New components (post-queue) — also completed:**
-
-| Component         | Avg   | Prompt File                              |
-|-------------------|-------|------------------------------------------|
-| Textarea          | 8.7   | `textarea-hardening-prompt.md`           |
-| ToggleButton      | 8.7   | `toggle-button-hardening-prompt.md`      |
-| InputMask         | 8.7   | `input-mask-hardening-prompt.md`         |
-| KeyFilter         | 8.6   | `key-filter-hardening-prompt.md`         |
-| FormField         | 8.7   | `form-field-hardening-prompt.md`         |
-| FloatLabel        | 8.7   | `float-label-hardening-prompt.md`        |
-| InputGroup        | 8.7   | `input-group-hardening-prompt.md`        |
-| IconField         | 8.7   | `icon-field-hardening-prompt.md`         |
-| Stack             | 9.0   | `stack-hardening-prompt.md`              |
-| Inline            | 9.0   | `inline-hardening-prompt.md`             |
-| Grid              | 9.0   | `grid-hardening-prompt.md`               |
-| Container         | 8.9   | `container-hardening-prompt.md`          |
-| Fluid             | 8.7   | `fluid-hardening-prompt.md`              |
-| Dock              | 9.0   | `dock-hardening-prompt.md`               |
-| OrganizationChart | 8.3   | `organization-chart-hardening-prompt.md` |
-| ButtonGroup       | 8.7   | `button-group-hardening-prompt.md`       |
-| StyleClass        | 8.7   | `style-class-hardening-prompt.md`        |
-| AnimateOnScroll   | 8.6   | `animate-on-scroll-hardening-prompt.md`  |
-| AutoFocus         | 8.7   | `auto-focus-hardening-prompt.md`         |
-| ClassNames        | 9.1   | `class-names-hardening-prompt.md`        |
-| Bind              | 8.6   | `bind-hardening-prompt.md`               |
-| ToggleSwitch      | 8.8   | `toggle-switch-hardening-prompt.md`      |
-| Icon              | 8.7   | `icon-hardening-prompt.md`               |
-| IconButton        | 8.6   | `icon-button-hardening-prompt.md`        |
-
----
-
-## Needs Hardening — Work Top to Bottom (prompt files in `docs/prompts/needs-hardening/`)
-
-> **0 components remain. All components in the original 76-item queue and all new components have been formally hardened and scored. 🎉**
-
-_The `needs-hardening/` folder is empty. When a new component is added to the library, create a prompt file there and add it to this section._
-
----
-
-## Tier 2 — SCORING_CRITERIA.md Checkpoint Audits
-
-> **Status: Not yet started.** All 100 components have Tier 1 scores (hardening estimates).
-> Tier 2 produces checkpoint-verified scores (score = verified checkboxes / total × 10).
-> Required before benchmark article. Required before v1.0.
+> **Tier 2 audits** — Checkpoint-verified scoring against `docs/SCORING_CRITERIA.md`.
+> Use the agentic audit system at [`docs/prompts/audit/`](audit/README.md) to run these.
 >
-> **Prompt:** `docs/prompts/SCORING_CRITERIA_AUDIT_PROMPT.md`
-
-Run in priority order:
-
-### Priority 1 — Cited in the benchmark article (audit these first)
-
-| Component    | Tier 1 Avg | Tier 2 Status   | Risk                                             |
-|--------------|------------|-----------------|--------------------------------------------------|
-| Button       | 8.9        | ⬜ Not audited   | Low — but foundational                           |
-| Dialog       | 8.6        | ⬜ Not audited   | Medium — killer demo moment                      |
-| Select       | 8.2        | ⬜ Not audited   | High — hardest ARIA pattern, lowest Tier 1 score |
-| AutoComplete | 8.2        | ⬜ Not audited   | High — same reason as Select                     |
-| Toast        | 9.1        | ⬜ Not audited   | Medium — live region, a11y engineer scrutiny     |
-| Menubar      | 9.0        | ⬜ Not audited   | Medium — WAI-ARIA APG pattern benchmark          |
-| Table        | 8.6        | ⬜ Not audited   | Medium — enterprise scrutiny on grid ARIA        |
-
-### Priority 2 — Most at risk (currently 8.2–8.3 Tier 1 scores)
-
-| Component         | Tier 1 Avg | Tier 2 Status   |
-|-------------------|------------|-----------------|
-| Select            | 8.2        | ⬜ Not audited   |
-| AutoComplete      | 8.2        | ⬜ Not audited   |
-| CascadeSelect     | 8.2        | ⬜ Not audited   |
-| Knob              | 8.2        | ⬜ Not audited   |
-| ColorPicker       | 8.2        | ⬜ Not audited   |
-| Avatar            | 8.2        | ⬜ Not audited   |
-| DatePicker        | 8.3        | ⬜ Not audited   |
-| DynamicDialog     | 8.3        | ⬜ Not audited   |
-| ConfirmDialog     | 8.3        | ⬜ Not audited   |
-| DataView          | 8.3        | ⬜ Not audited   |
-| Timeline          | 8.3        | ⬜ Not audited   |
-| OrganizationChart | 8.3        | ⬜ Not audited   |
-| Carousel          | 8.3        | ⬜ Not audited   |
-| Galleria          | 8.3        | ⬜ Not audited   |
-| MeterGroup        | 8.3        | ⬜ Not audited   |
-| Badge             | 8.4        | ⬜ Not audited   |
-| ScrollTop         | 8.4        | ⬜ Not audited   |
-| FocusTrap         | 8.4        | ⬜ Not audited   |
-
-### Priority 3 — Remaining 75+ components
-
-All remaining components should be audited before v1.0. Work top-to-bottom through the
-completed hardenings table above, starting at the lowest Tier 1 average scores.
+> **Last updated:** 2026-05-18
 
 ---
 
-## How to Use These Prompts
+## Tier 1 Completed Hardenings
 
-1. Pick the next component in priority order (top to bottom within the Needs Hardening section).
-2. Open the prompt file listed above from `docs/prompts/needs-hardening/`.
-3. Read the **Step 1** file list — read ALL listed files before writing any code.
-4. Run **Phase 3 (Accessibility) FIRST** — that is always the critical priority.
-5. Complete Phases 1, 2, 4, 5, 6 in order.
-6. Run validation commands (ESLint → Jest → ng build → entry-points).
-7. Score the component and update `docs/COMPONENT_SCORES.md`.
-8. Move the prompt file from `needs-hardening/` to `completed/`.
-9. Update `AI_AGENT_CONTEXT.md` with the handoff block.
+All 100 components formally hardened and scored ≥ 8.0. These are Tier 1 (qualitative) scores —
+see the Tier 2 queue below for checkpoint-verified audits.
+
+### Original 76-component queue
+
+| Component       | Queue      | Tier 1 Avg |
+|-----------------|------------|------------|
+| Dialog          | Tier 1 #1  | 8.6        |
+| Select          | Tier 1 #2  | 8.2        |
+| AutoComplete    | Tier 1 #3  | 8.2        |
+| DynamicDialog   | Tier 1 #4  | 8.3        |
+| Drawer          | Tier 1 #5  | 8.5        |
+| ConfirmDialog   | Tier 1 #6  | 8.3        |
+| ConfirmPopup    | Tier 1 #7  | 8.9        |
+| Popover         | Tier 1 #8  | 9.0        |
+| Tooltip         | Tier 1 #9  | 9.0        |
+| Toast           | Tier 1 #10 | 9.1        |
+| Menubar         | Tier 2 #11 | 9.0        |
+| Menu            | Tier 2 #12 | 9.0        |
+| TieredMenu      | Tier 2 #13 | 9.0        |
+| ContextMenu     | Tier 2 #14 | 9.0        |
+| PanelMenu       | Tier 2 #15 | 9.0        |
+| MegaMenu        | Tier 2 #16 | 9.0        |
+| Tabs            | Tier 2 #17 | 9.0        |
+| Accordion       | Tier 2 #18 | 9.0        |
+| Stepper         | Tier 2 #19 | 9.0        |
+| Breadcrumb      | Tier 2 #20 | 9.0        |
+| Input           | Tier 3 #21 | 8.8        |
+| Checkbox        | Tier 3 #22 | 9.0        |
+| RadioButton     | Tier 3 #23 | 8.8        |
+| DatePicker      | Tier 3 #24 | 8.3        |
+| CascadeSelect   | Tier 3 #25 | 8.2        |
+| InputNumber     | Tier 3 #26 | 9.0        |
+| Slider          | Tier 3 #27 | 8.8        |
+| ColorPicker     | Tier 3 #28 | 8.2        |
+| Password        | Tier 3 #29 | 8.7        |
+| Rating          | Tier 3 #30 | 8.7        |
+| Knob            | Tier 3 #31 | 8.2        |
+| Table           | Tier 4 #32 | 8.6        |
+| TreeTable       | Tier 4 #33 | 8.5        |
+| Tree            | Tier 4 #34 | 8.6        |
+| TreeSelect      | Tier 4 #35 | 8.6        |
+| Listbox         | Tier 4 #36 | 8.6        |
+| Paginator       | Tier 4 #37 | 8.5        |
+| DataView        | Tier 4 #38 | 8.3        |
+| OrderList       | Tier 4 #39 | 8.7        |
+| PickList        | Tier 4 #40 | 8.7        |
+| Button          | Tier 5 #41 | 8.9        |
+| Alert           | Tier 5 #42 | 8.5        |
+| Message         | Tier 5 #43 | 8.6        |
+| ProgressBar     | Tier 5 #44 | 8.6        |
+| Carousel        | Tier 5 #45 | 8.3        |
+| Galleria        | Tier 5 #46 | 8.3        |
+| SpeedDial       | Tier 5 #47 | 8.8        |
+| SelectButton    | Tier 5 #48 | 8.7        |
+| InputOtp        | Tier 5 #49 | 8.7        |
+| VirtualScroller | Tier 5 #50 | 8.5        |
+| Card            | Tier 6 #51 | 9.0        |
+| Badge           | Tier 6 #52 | 8.4        |
+| Tag             | Tier 6 #53 | 8.9        |
+| Chip            | Tier 6 #54 | 8.5        |
+| Skeleton        | Tier 6 #55 | 8.6        |
+| ProgressSpinner | Tier 6 #56 | 8.9        |
+| MeterGroup      | Tier 6 #57 | 8.3        |
+| Divider         | Tier 6 #58 | 8.7        |
+| Toolbar         | Tier 6 #59 | 8.9        |
+| Panel           | Tier 6 #60 | 9.0        |
+| Fieldset        | Tier 6 #61 | 9.0        |
+| ScrollPanel     | Tier 6 #62 | 8.9        |
+| Inplace         | Tier 6 #63 | 8.9        |
+| BlockUI         | Tier 6 #64 | 9.0        |
+| Avatar          | Tier 6 #65 | 8.2        |
+| Image           | Tier 6 #66 | 8.7        |
+| ImageCompare    | Tier 6 #67 | 8.9        |
+| SplitButton     | Tier 6 #68 | 8.6        |
+| Upload          | Tier 6 #69 | 8.9        |
+| Terminal        | Tier 6 #70 | 8.9        |
+| Timeline        | Tier 6 #71 | 8.3        |
+| Chart           | Tier 6 #72 | 8.9        |
+| FocusTrap       | Tier 6 #73 | 8.4        |
+| Ripple          | Tier 6 #74 | 8.7        |
+| ScrollTop       | Tier 6 #75 | 8.4        |
+| BottomSheet     | Tier 6 #76 | 8.5        |
+
+### New components (post-queue)
+
+| Component         | Tier 1 Avg |
+|-------------------|------------|
+| Textarea          | 8.7        |
+| ToggleButton      | 8.7        |
+| ToggleSwitch      | 8.8        |
+| InputMask         | 8.7        |
+| KeyFilter         | 8.6        |
+| FormField         | 8.7        |
+| FloatLabel        | 8.7        |
+| InputGroup        | 8.7        |
+| IconField         | 8.7        |
+| Stack             | 9.0        |
+| Inline            | 9.0        |
+| Grid              | 9.0        |
+| Container         | 8.9        |
+| Fluid             | 8.7        |
+| Dock              | 9.0        |
+| OrganizationChart | 8.3        |
+| Icon              | 8.7        |
+| IconButton        | 8.6        |
+| ButtonGroup       | 8.7        |
+| StyleClass        | 8.7        |
+| AnimateOnScroll   | 8.6        |
+| AutoFocus         | 8.7        |
+| ClassNames        | 9.1        |
+| Bind              | 8.6        |
 
 ---
 
-## Lessons Reference
+## Tier 2 — Checkpoint Audits
 
-For accumulated lessons from all previous hardenings, see the **Accumulated Lessons** section
-in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
+> **Tool:** [`docs/prompts/audit/`](audit/README.md) — agentic 3-phase system for Claude Code.
+> Chat-interface alternative: [`docs/prompts/SCORING_CRITERIA_AUDIT_PROMPT.md`](SCORING_CRITERIA_AUDIT_PROMPT.md).
 
-The most impactful recurring lessons (apply to every session):
-1. **Module-level ID counter** for any component that uses IDs in templates
-2. **Roving tabindex** for all widget patterns (menus, tabs, toolbars, listboxes)
-3. **Focus restoration** for all popup/overlay components on close
-4. **`prefers-reduced-motion`** in every component with transitions or animations
-5. **ESLint in `bash.exe` only** — PowerShell returns exit 1 even on clean runs
-6. **`role="separator"` must NOT have `aria-hidden="true"`** inside menu/listbox roles
-7. **`role="alert"` only for errors** — use `role="status"` for success/info/warn
-8. **Dismiss button labels must be specific** — not generic "Dismiss" — include context
-9. **`aria-pressed` for toggle buttons, `aria-checked` for checkboxes/radios, `role=switch` for on/off controls** — never mix these up
-10. **Icon-only interactive elements MUST have `aria-label`** — no exceptions
+Run in this order — highest public scrutiny and lowest Tier 1 scores first.
+
+### Priority 1 — Benchmark article (audit before publishing)
+
+| Component    | Tier 1 Avg | Tier 2 Status  |
+|--------------|------------|----------------|
+| Button       | 8.9        | ⬜ Not audited  |
+| Dialog       | 8.6        | ⬜ Not audited  |
+| Select       | 8.2        | ⬜ Not audited  |
+| AutoComplete | 8.2        | ⬜ Not audited  |
+| Toast        | 9.1        | ⬜ Not audited  |
+| Menubar      | 9.0        | ⬜ Not audited  |
+| Table        | 8.6        | ⬜ Not audited  |
+
+### Priority 2 — Most at risk (Tier 1 avg 8.2–8.4)
+
+| Component         | Tier 1 Avg | Tier 2 Status  |
+|-------------------|------------|----------------|
+| Select            | 8.2        | ⬜ Not audited  |
+| AutoComplete      | 8.2        | ⬜ Not audited  |
+| CascadeSelect     | 8.2        | ⬜ Not audited  |
+| Knob              | 8.2        | ⬜ Not audited  |
+| ColorPicker       | 8.2        | ⬜ Not audited  |
+| Avatar            | 8.2        | ⬜ Not audited  |
+| DatePicker        | 8.3        | ⬜ Not audited  |
+| DynamicDialog     | 8.3        | ⬜ Not audited  |
+| ConfirmDialog     | 8.3        | ⬜ Not audited  |
+| DataView          | 8.3        | ⬜ Not audited  |
+| Timeline          | 8.3        | ⬜ Not audited  |
+| OrganizationChart | 8.3        | ⬜ Not audited  |
+| Carousel          | 8.3        | ⬜ Not audited  |
+| Galleria          | 8.3        | ⬜ Not audited  |
+| MeterGroup        | 8.3        | ⬜ Not audited  |
+| Badge             | 8.4        | ⬜ Not audited  |
+| ScrollTop         | 8.4        | ⬜ Not audited  |
+| FocusTrap         | 8.4        | ⬜ Not audited  |
+
+### Priority 3 — Remaining components
+
+Work through all remaining components before v1.0, highest-scrutiny categories first.
+
+---
+
+## Key Lessons (apply to every new component or re-hardening)
+
+For the full accumulated lessons list see [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](COMPONENT_EVOLUTION_PROMPTS.md).
+
+The highest-impact recurring patterns:
+
+1. **Module-level ID counter** — any component that uses `id` in templates needs a unique counter
+2. **Roving tabindex** — all composite widgets (menus, tabs, toolbars, listboxes) use `tabindex="-1"` on children
+3. **Focus restoration** — all popup/overlay components restore focus to the trigger on close
+4. **`prefers-reduced-motion`** — every component with transitions or animations must include this block
+5. **`role="alert"` only for errors** — use `role="status"` for success/info/warn
+6. **Dismiss button labels must be specific** — include context, not just "Dismiss"
+7. **`aria-pressed` for toggle buttons, `aria-checked` for checkboxes/radios, `role=switch` for on/off** — never mix
+8. **Icon-only interactive elements MUST have `aria-label`** — no exceptions

@@ -16,6 +16,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 // ---- Guest components rendered inside the dialog ----
 
@@ -126,7 +128,14 @@ export class LongDialogContentComponent {
 @Component({
   selector: 'app-dynamic-dialog-demo',
   standalone: true,
-  imports: [CodeSnippet, Button, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+  ],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -134,6 +143,28 @@ export class LongDialogContentComponent {
 export class DynamicDialogDemoComponent {
   public readonly importCode: string =
     "import { DialogService } from 'ui-lib-custom/dynamic-dialog'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    apgPattern: {
+      name: 'Dialog (Modal)',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+    },
+    competitiveParity: 'pending',
+  };
   public readonly snippetBasicOpen: string = `const ref = this.dialogService.open(MyComponent, {\n  header: 'Welcome',\n  width: '32rem',\n});`;
   public readonly snippetPassingData: string = `// Caller\nconst ref = this.dialogService.open(DataDialogContentComponent, {\n  header: 'User Details',\n  data: { userId: 42, name: 'Filip Luca' },\n});\nref.onClose.subscribe((result) => console.log(result));\n\n// Guest component\nconfig = inject(DYNAMIC_DIALOG_CONFIG);\nref    = inject(DynamicDialogRef);\n\nthis.userId = (this.config.data as any).userId;\nthis.ref.close({ confirmed: true });`;
   public readonly snippetScrollable: string = `this.dialogService.open(LongContentComponent, {\n  header: 'Scrollable',\n  width: '38rem',\n  height: '50vh',\n});`;

@@ -13,6 +13,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 const HELP_TEXT: string = [
   'Available commands:',
@@ -30,12 +32,36 @@ const HELP_TEXT: string = [
 @Component({
   selector: 'app-terminal-demo',
   standalone: true,
-  imports: [Terminal, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    Terminal,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+  ],
   templateUrl: './terminal-demo.component.html',
   styleUrl: './terminal-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TerminalDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   private readonly terminalService: TerminalService = inject(TerminalService);
 
   public readonly importCode: string =

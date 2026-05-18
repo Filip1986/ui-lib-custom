@@ -14,6 +14,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Dock component.
@@ -28,6 +30,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
@@ -35,6 +38,24 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class DockDemoComponent {
   public readonly importCode: string = "import { Dock } from 'ui-lib-custom/dock'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
   public readonly snippetBasic: string = `{} osItems: DockItem[] = [\n  { label: 'Finder', icon: 'pi pi-folder', command: handler },\n  { label: 'Terminal', icon: 'pi pi-code', command: handler },\n  // ...\n];\n\n<ui-lib-dock [items]="osItems" position="bottom" variant="material" />`;
   public readonly snippetVariants: string = `<ui-lib-dock [items]="items" variant="material" />\n<ui-lib-dock [items]="items" variant="bootstrap" />\n<ui-lib-dock [items]="items" variant="minimal" />`;
   public readonly snippetSizes: string = `<ui-lib-dock [items]="items" size="sm" />\n<ui-lib-dock [items]="items" size="md" />\n<ui-lib-dock [items]="items" size="lg" />`;

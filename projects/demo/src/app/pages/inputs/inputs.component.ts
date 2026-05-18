@@ -24,6 +24,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
@@ -61,12 +63,31 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     VariantComparisonComponent,
     InputBasicExampleComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputsComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { UiLibInput } from 'ui-lib-custom/input'";
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

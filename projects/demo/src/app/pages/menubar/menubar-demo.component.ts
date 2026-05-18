@@ -13,6 +13,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Menubar component.
@@ -27,6 +29,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
@@ -34,6 +37,25 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class MenubarDemoComponent {
   public readonly importCode: string = "import { Menubar } from 'ui-lib-custom/menubar'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    apgPattern: { name: 'Menubar', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/' },
+    competitiveParity: 'pending',
+  };
   public readonly snippetBasic: string = `{{ basicModel }}\n<ui-lib-menubar [model]="basicModel" />`;
   public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">\n  <span menubarStart>MyApp</span>\n  <button menubarEnd>Sign In</button>\n</ui-lib-menubar>`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

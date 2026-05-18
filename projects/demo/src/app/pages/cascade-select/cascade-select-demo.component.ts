@@ -32,6 +32,8 @@ import {
   type CascadeCity,
   type CascadeState,
 } from './cascade-select-demo.data';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type CascadeSelectDemoSnippetKey =
   | 'basic'
@@ -74,12 +76,31 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     CascadeSelectLoadingDirective,
     CascadeSelectDropdownIconDirective,
     CascadeSelectOptionGroupIconDirective,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CascadeSelectDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select'";
 

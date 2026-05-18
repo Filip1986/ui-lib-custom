@@ -6,6 +6,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
  * Demo page for the Fluid component and FluidDirective.
@@ -21,12 +23,31 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
     DocPageLayoutComponent,
     DocTocComponent,
     DocPageHeaderComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FluidDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 8,
+      dx: 9,
+      docs: 8,
+      polish: 9,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { Fluid, FluidDirective } from 'ui-lib-custom/fluid'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

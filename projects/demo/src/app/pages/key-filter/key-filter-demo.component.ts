@@ -9,6 +9,8 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type KeyFilterDemoSnippetKey =
   | 'alphanum'
@@ -38,6 +40,7 @@ type KeyFilterDemoSnippetKey =
     CodeSnippet,
     KeyFilterDirective,
     DocTocComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',
@@ -96,4 +99,21 @@ export class KeyFilterDemoComponent {
   public snippet(key: KeyFilterDemoSnippetKey): string {
     return this.snippets[key];
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
 }

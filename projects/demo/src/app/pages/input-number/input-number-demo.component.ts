@@ -17,6 +17,8 @@ import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputNumberComponent } from 'ui-lib-custom/input-number';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type InputNumberSnippetKey =
   | 'numerals'
@@ -55,12 +57,32 @@ type InputNumberSnippetKey =
     FloatLabelComponent,
     InputNumberComponent,
     DocPageHeaderComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNumberDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Spinbutton', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/' },
+  };
+
   public readonly importCode: string =
     "import { InputNumberComponent } from 'ui-lib-custom/input-number'";
 

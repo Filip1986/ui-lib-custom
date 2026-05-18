@@ -16,6 +16,8 @@ import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
 import { InputOtpComponent } from 'ui-lib-custom/input-otp';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 type InputOtpDemoSnippetKey =
   | 'basic'
@@ -45,6 +47,7 @@ type InputOtpDemoSnippetKey =
     CodeSnippet,
     InputOtpComponent,
     DocPageHeaderComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
   styleUrl: './input-otp-demo.component.scss',
@@ -144,4 +147,21 @@ export class InputOtpDemoComponent {
   public formatValue(value: string): string {
     return value.length > 0 ? value : 'empty';
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
 }
