@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -26,6 +26,10 @@ export class SyntaxHighlighterDemoComponent {
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly activeSectionId: Signal<string | null> = computed<string | null>(
+    (): string | null => this.layout()?.activeSectionId() ?? null
+  );
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);

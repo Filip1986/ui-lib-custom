@@ -10,7 +10,7 @@
         and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired
         colours. Fully integrated with <code>ui-lib-code-snippet</code>.
       </p>
-      <ui-lib-code-snippet [code]="importCode" language="typescript" 
+      <ui-lib-code-snippet [code]="importCode" language="typescript"
         [showLineNumbers]="false"
         />
     </div>
@@ -108,17 +108,17 @@
       </p>
 
       <h3 class="demo-section__subtitle">highlight()</h3>
-      <ui-lib-code-snippet [code]="snippets.highlightUsage" language="typescript" 
+      <ui-lib-code-snippet [code]="snippets.highlightUsage" language="typescript"
         [showLineNumbers]="true"
         />
 
       <h3 class="demo-section__subtitle">tokenize()</h3>
-      <ui-lib-code-snippet [code]="snippets.tokenizeUsage" language="typescript" 
+      <ui-lib-code-snippet [code]="snippets.tokenizeUsage" language="typescript"
         [showLineNumbers]="true"
         />
 
       <h3 class="demo-section__subtitle">escapeForCode()</h3>
-      <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript" 
+      <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript"
         [showLineNumbers]="true"
         />
     </section>
@@ -257,7 +257,7 @@
         Override any token colour via CSS custom properties on the host element or a parent
         container. All token colours are exposed as <code>--uilib-syntax-*</code> variables.
       </p>
-      <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss" 
+      <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss"
         [showLineNumbers]="true"
         />
     </section>
@@ -268,7 +268,7 @@
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
       [sections]="sections"
-      [activeId]="layout()?.activeSectionId() ?? null"
+      [activeId]="activeSectionId()"
       (sectionSelected)="scrollTo($event)"
     />
   </div>
