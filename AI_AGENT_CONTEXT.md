@@ -82,6 +82,29 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-18 [New shared component: DocKeyboardNavComponent — 6 demo pages migrated]
+Changed:
+  - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.ts (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.html (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.scss (NEW)
+  - projects/demo/src/app/shared/index.ts (added DocKeyboardNavComponent + KeyboardNavRow export)
+  - 6 demo pages migrated (TS + HTML): context-menu, menu, tiered-menu, panel-menu, tag, panel
+State: All 6 demo pages with keyboard navigation sections now use <app-doc-keyboard-nav [rows]="keyboardRows" />.
+  Component parses key strings: ' / ' splits alternatives, '+' splits combos — renders each token as a key-cap badge (white bg, subtle bottom shadow, uppercase monospace).
+  KeyboardNavRow interface: { key: string; suffix?: string; target?: string; action: string }.
+  suffix renders italic context text after the badges (e.g. "on header"). target triggers an auto-detected "Target" column.
+  Local KeyboardRow interfaces removed from all 6 demo TS files. All <kbd> tags stripped from key strings; arrow keys standardised to ↓/↑/←/→ symbols.
+  context-menu: migrated from raw <table> to DocKeyboardNavComponent; keyboardRows data added to TS.
+  menu/tiered-menu/panel-menu: migrated from ui-lib-table. panel-menu uses suffix field.
+  tag/panel: migrated from ui-lib-table with target column; target auto-shows 3-column layout.
+Verification:
+  (not yet run — run from D:/Work/ArtificialSense/ui-lib-custom):
+  npx eslint projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.ts --max-warnings 0
+  npx eslint projects/demo/src/app/pages/context-menu/ projects/demo/src/app/pages/menu/ projects/demo/src/app/pages/tiered-menu/ projects/demo/src/app/pages/panel-menu/ projects/demo/src/app/pages/tag/ projects/demo/src/app/pages/panel/ --max-warnings 0
+  ng build demo
+Terminal notes: node_modules not present in worktree — run all tools from main repo root.
+Next step: Run ESLint on shared/doc-page/ and the 6 migrated pages, then ng build demo to verify all compile cleanly.
+
 Date: 2026-05-18 [New shared component: DocCssVarsTableComponent — all demo pages migrated]
 Changed:
   - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.ts (NEW)

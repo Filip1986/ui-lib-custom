@@ -14,6 +14,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface InputRow {
@@ -42,12 +44,6 @@ interface AriaRow {
   readonly notes: string;
 }
 
-interface KeyboardRow {
-  readonly key: string;
-  readonly target: string;
-  readonly action: string;
-}
-
 /**
  * Demo page for the Panel component.
  */
@@ -65,6 +61,7 @@ interface KeyboardRow {
     DocPageLayoutComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
@@ -353,19 +350,19 @@ export class PanelDemoComponent {
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
-      key: '<kbd>Tab</kbd>',
+      key: 'Tab',
       target: 'Toggle button',
       action: 'Moves focus to or away from the toggle button.',
     },
     {
-      key: '<kbd>Enter</kbd>',
+      key: 'Enter',
       target: 'Toggle button',
       action: 'Toggles the panel open or collapsed.',
     },
     {
-      key: '<kbd>Space</kbd>',
+      key: 'Space',
       target: 'Toggle button',
       action: 'Toggles the panel open or collapsed.',
     },

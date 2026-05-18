@@ -1,0 +1,121 @@
+// ─── Colour tokens (local — no raw values in components) ──────────────────────
+$zinc-100: #f4f4f5;
+$zinc-200: #e4e4e7;
+$zinc-300: #d4d4d8;
+$zinc-400: #a1a1aa;
+$zinc-500: #71717a;
+$zinc-600: #52525b;
+$zinc-700: #3f3f46;
+$zinc-900: #18181b;
+
+// ─── Table shell ──────────────────────────────────────────────────────────────
+.doc-keyboard-nav {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+// ─── Header cells ─────────────────────────────────────────────────────────────
+.doc-keyboard-nav__th {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: $zinc-500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid $zinc-200;
+
+  &--key {
+    width: 260px;
+  }
+  &--target {
+    width: 160px;
+  }
+}
+
+// ─── Body cells ───────────────────────────────────────────────────────────────
+.doc-keyboard-nav__td {
+  padding: 0.75rem;
+  border-bottom: 1px solid $zinc-100;
+  vertical-align: middle;
+  color: $zinc-700;
+  line-height: 1.5;
+
+  code {
+    font-size: 0.8125rem;
+    background: $zinc-100;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    color: $zinc-700;
+    font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  }
+
+  &--target {
+    font-size: 0.8125rem;
+    color: $zinc-500;
+  }
+}
+
+.doc-keyboard-nav__row:last-child .doc-keyboard-nav__td {
+  border-bottom: none;
+}
+
+// ─── Key cell layout ──────────────────────────────────────────────────────────
+.doc-keyboard-nav__keys {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.doc-keyboard-nav__combo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+// ─── Individual key badge (matches kb-sm-key light variant) ───────────────────
+.doc-keyboard-nav__key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.75rem;
+  min-width: 1.75rem;
+  padding: 0 0.5rem;
+  border-radius: 0.3125rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  user-select: none;
+  font-family: inherit;
+  // Key-cap look
+  background: #fff;
+  border: 1px solid $zinc-200;
+  color: $zinc-700;
+  box-shadow:
+    0 2px 0 0 $zinc-200,
+    0 1px 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+// ─── Separators ───────────────────────────────────────────────────────────────
+.doc-keyboard-nav__alt-sep {
+  font-size: 0.75rem;
+  color: $zinc-400;
+  font-weight: 500;
+}
+
+.doc-keyboard-nav__combo-plus {
+  font-size: 0.625rem;
+  color: $zinc-400;
+  font-weight: 700;
+}
+
+// ─── Context suffix (e.g. "on header") ────────────────────────────────────────
+.doc-keyboard-nav__suffix {
+  font-size: 0.75rem;
+  color: $zinc-500;
+  font-style: italic;
+  white-space: nowrap;
+}

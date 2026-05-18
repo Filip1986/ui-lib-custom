@@ -355,23 +355,7 @@
 
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Key" field="key" width="200px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.key"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Target" field="target" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span>{{ row.target }}</span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Action" field="action">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.action"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

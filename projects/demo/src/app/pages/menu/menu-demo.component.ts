@@ -14,6 +14,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
@@ -21,11 +23,6 @@ interface AriaRow {
   readonly attribute: string;
   readonly value: string;
   readonly notes: string;
-}
-
-interface KeyboardRow {
-  readonly key: string;
-  readonly action: string;
 }
 
 interface InputRow {
@@ -69,6 +66,7 @@ interface MenuItemRow {
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
     DocTocComponent,
   ],
   templateUrl: './menu-demo.component.html',
@@ -576,26 +574,26 @@ onItemClick(event: MenuItemCommandEvent): void {
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
-      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd>',
+      key: '↓ / ↑',
       action: 'Move focus to the next or previous enabled item (wraps, skips disabled).',
     },
     {
-      key: '<kbd>Home</kbd> / <kbd>End</kbd>',
+      key: 'Home / End',
       action: 'Jump to the first or last enabled item.',
     },
     {
-      key: '<kbd>Enter</kbd> / <kbd>Space</kbd>',
+      key: 'Enter / Space',
       action: 'Activate the focused item.',
     },
     {
-      key: '<kbd>Escape</kbd>',
+      key: 'Escape',
       action:
         'Close the popup panel and restore focus to the trigger element. No-op in inline mode.',
     },
     {
-      key: '<kbd>Tab</kbd>',
+      key: 'Tab',
       action: 'Close the popup and move focus naturally to the next focusable element.',
     },
   ];

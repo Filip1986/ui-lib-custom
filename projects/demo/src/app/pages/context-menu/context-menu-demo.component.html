@@ -311,40 +311,7 @@
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
   <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
     <h2 class="demo-section__title">Keyboard Navigation</h2>
-    <table class="api-table">
-      <thead>
-        <tr>
-          <th>Key</th>
-          <th>Behaviour</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><kbd>↓</kbd> / <kbd>↑</kbd></td>
-          <td>Move focus to the next / previous enabled menu item (skips separators and disabled).</td>
-        </tr>
-        <tr>
-          <td><kbd>→</kbd></td>
-          <td>Open the submenu of the focused item and move focus to its first item.</td>
-        </tr>
-        <tr>
-          <td><kbd>←</kbd></td>
-          <td>Close the current submenu and return focus to the parent item.</td>
-        </tr>
-        <tr>
-          <td><kbd>Enter</kbd> / <kbd>Space</kbd></td>
-          <td>Activate the focused item.</td>
-        </tr>
-        <tr>
-          <td><kbd>Escape</kbd></td>
-          <td>Close the menu (or close just the submenu from within a submenu).</td>
-        </tr>
-        <tr>
-          <td><kbd>Home</kbd> / <kbd>End</kbd></td>
-          <td>Jump to the first / last item in the top-level menu.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
   </section>
 
   <div class="demo-page-rail" docRail>

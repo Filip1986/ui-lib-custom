@@ -17,6 +17,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
@@ -24,11 +26,6 @@ interface AriaRow {
   readonly attribute: string;
   readonly value: string;
   readonly notes: string;
-}
-
-interface KeyboardRow {
-  readonly key: string;
-  readonly action: string;
 }
 
 /**
@@ -47,6 +44,7 @@ interface KeyboardRow {
     DocPageLayoutComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
@@ -466,29 +464,34 @@ import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
-      key: '<kbd>Enter</kbd> / <kbd>Space</kbd> on header',
+      key: 'Enter / Space',
+      suffix: 'on header',
       action: 'Toggle the root panel open or closed.',
     },
     {
-      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on header',
+      key: '↓ / ↑',
+      suffix: 'on header',
       action: 'Move focus to the next or previous enabled root panel header (wraps).',
     },
     {
-      key: '<kbd>Home</kbd> / <kbd>End</kbd> on header',
+      key: 'Home / End',
+      suffix: 'on header',
       action: 'Jump to the first or last enabled root panel header.',
     },
     {
-      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on sub-item',
+      key: '↓ / ↑',
+      suffix: 'on sub-item',
       action: 'Move focus between items within the current sub-menu.',
     },
     {
-      key: '<kbd>Escape</kbd> on sub-item',
+      key: 'Escape',
+      suffix: 'on sub-item',
       action: 'Return focus to the owning root panel header.',
     },
     {
-      key: '<kbd>Tab</kbd> / <kbd>Shift+Tab</kbd>',
+      key: 'Tab / Shift+Tab',
       action: 'Move focus naturally through the page via browser tab order.',
     },
   ];

@@ -393,18 +393,7 @@
     </ui-lib-table>
 
     <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
-    <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Key" field="key" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.key"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Action" field="action">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.action"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
 
     <h3 class="demo-section__subtitle">Notes</h3>
     <ul class="demo-list">
