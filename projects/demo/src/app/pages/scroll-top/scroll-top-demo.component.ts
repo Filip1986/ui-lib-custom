@@ -2,6 +2,7 @@ import type { Signal } from '@angular/core';
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { ScrollTop } from 'ui-lib-custom/scroll-top';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -12,7 +13,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-scroll-top-demo',
   standalone: true,
-  imports: [CodeSnippet, ScrollTop, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    ScrollTop,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './scroll-top-demo.component.html',
   styleUrl: './scroll-top-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

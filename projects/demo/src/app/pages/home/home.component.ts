@@ -8,6 +8,7 @@ import { Badge } from 'ui-lib-custom/badge';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 
 /**
  * Demo home page entry for the component library.
@@ -15,7 +16,16 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CodeSnippet, Card, Button, Badge, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CommonModule,
+    CodeSnippet,
+    Card,
+    Button,
+    Badge,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocPageHeaderComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

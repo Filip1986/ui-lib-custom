@@ -9,6 +9,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -32,6 +33,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
     Button,
     UiLibInput,
     UiLibSelect,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     DocTocComponent,

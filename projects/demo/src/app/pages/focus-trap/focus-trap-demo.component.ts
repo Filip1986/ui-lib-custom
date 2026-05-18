@@ -6,6 +6,7 @@ import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 
 /**
  * Demo page for the FocusTrap directive.
@@ -14,7 +15,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-focus-trap-demo',
   standalone: true,
-  imports: [CodeSnippet, FocusTrapDirective, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    FocusTrapDirective,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocPageHeaderComponent,
+  ],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

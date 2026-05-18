@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Skeleton } from 'ui-lib-custom/skeleton';
 import type { SkeletonVariant } from 'ui-lib-custom/skeleton';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,7 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-skeleton-demo',
   standalone: true,
-  imports: [CodeSnippet, Skeleton, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Skeleton, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './skeleton-demo.component.html',
   styleUrl: './skeleton-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

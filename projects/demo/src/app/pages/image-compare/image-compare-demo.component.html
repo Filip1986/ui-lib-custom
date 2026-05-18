@@ -1,18 +1,10 @@
 <app-doc-page-layout [sections]="sections">
-  <div class="doc-header" docHeader>
-    <h1>ImageCompare</h1>
-    <ui-lib-code-snippet
-      language="typescript"
-      [showLineNumbers]="false"
-      size="sm"
-      [code]="importCode"
-    />
-    <p class="doc-description">
-      Displays two images overlaid with a draggable divider, allowing the user to compare
-      a "before" and "after" image by sliding the handle horizontally. Supports keyboard
-      navigation, two-way value binding, three design variants, and three size tokens.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="ImageCompare"
+    [importCode]="importCode"
+    description="Displays two images overlaid with a draggable divider, allowing the user to compare a &quot;before&quot; and &quot;after&quot; image by sliding the handle horizontally. Supports keyboard navigation, two-way value binding, three design variants, and three size tokens."
+  />
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">

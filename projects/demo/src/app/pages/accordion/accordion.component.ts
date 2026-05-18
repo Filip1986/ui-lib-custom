@@ -19,6 +19,7 @@ import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -65,6 +66,7 @@ type AccordionTab =
     Tabs,
     Tab,
     Icon,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,

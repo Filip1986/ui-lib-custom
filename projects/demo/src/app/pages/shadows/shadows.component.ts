@@ -6,6 +6,7 @@ import type { CardElevation } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { SHADOWS } from 'ui-lib-custom/tokens';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -34,6 +35,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     Card,
     Tabs,
     Tab,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     DocTocComponent,

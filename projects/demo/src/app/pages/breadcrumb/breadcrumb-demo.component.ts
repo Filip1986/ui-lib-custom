@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Breadcrumb } from 'ui-lib-custom/breadcrumb';
 import type { BreadcrumbItem, BreadcrumbItemClickEvent } from 'ui-lib-custom/breadcrumb';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,7 +14,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-breadcrumb-demo',
   standalone: true,
-  imports: [CodeSnippet, Breadcrumb, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Breadcrumb,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './breadcrumb-demo.component.html',
   styleUrl: './breadcrumb-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

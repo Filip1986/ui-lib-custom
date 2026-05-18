@@ -11,6 +11,7 @@ import type {
   MegaMenuVariant,
 } from 'ui-lib-custom/mega-menu';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
@@ -20,7 +21,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-mega-menu-demo',
   standalone: true,
-  imports: [CodeSnippet, MegaMenu, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    MegaMenu,
+    Button,
+    DocPageLayoutComponent,
+    DocPageHeaderComponent,
+    DocTocComponent,
+  ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

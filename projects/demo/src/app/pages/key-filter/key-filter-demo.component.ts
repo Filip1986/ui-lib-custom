@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Card } from 'ui-lib-custom/card';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
@@ -31,6 +32,7 @@ type KeyFilterDemoSnippetKey =
   imports: [
     FormsModule,
     DocPageLayoutComponent,
+    DocPageHeaderComponent,
     DocDemoViewportComponent,
     Card,
     CodeSnippet,

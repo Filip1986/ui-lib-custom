@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -23,7 +24,15 @@ type SnippetKey =
 @Component({
   selector: 'app-image-demo',
   standalone: true,
-  imports: [DocPageLayoutComponent, DocTocComponent, DocDemoViewportComponent, Card, CodeSnippet, Image],
+  imports: [
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocDemoViewportComponent,
+    Card,
+    CodeSnippet,
+    Image,
+    DocPageHeaderComponent,
+  ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

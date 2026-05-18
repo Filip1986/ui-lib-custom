@@ -10,6 +10,7 @@ import type {
   MenubarVariant,
 } from 'ui-lib-custom/menubar';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
@@ -19,7 +20,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-menubar-demo',
   standalone: true,
-  imports: [CodeSnippet, Menubar, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Menubar,
+    Button,
+    DocPageLayoutComponent,
+    DocPageHeaderComponent,
+    DocTocComponent,
+  ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

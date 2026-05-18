@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -16,7 +17,15 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
 @Component({
   selector: 'app-image-compare-demo',
   standalone: true,
-  imports: [DocPageLayoutComponent, DocTocComponent, DocDemoViewportComponent, Card, CodeSnippet, ImageCompare],
+  imports: [
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocDemoViewportComponent,
+    Card,
+    CodeSnippet,
+    ImageCompare,
+    DocPageHeaderComponent,
+  ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

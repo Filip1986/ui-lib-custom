@@ -5,6 +5,7 @@ import { Message } from 'ui-lib-custom/message';
 import type { MessageSeverity, MessageVariant, MessageSize } from 'ui-lib-custom/message';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
@@ -14,7 +15,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-message-demo',
   standalone: true,
-  imports: [CodeSnippet, Message, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Message,
+    Button,
+    DocPageLayoutComponent,
+    DocPageHeaderComponent,
+    DocTocComponent,
+  ],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

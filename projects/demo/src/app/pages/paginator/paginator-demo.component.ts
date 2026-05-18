@@ -4,6 +4,7 @@ import { PaginatorComponent } from 'ui-lib-custom/paginator';
 import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
@@ -14,7 +15,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-paginator-demo',
   standalone: true,
-  imports: [CodeSnippet, PaginatorComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    PaginatorComponent,
+    DocPageLayoutComponent,
+    DocPageHeaderComponent,
+    DocTocComponent,
+  ],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,6 +10,7 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
@@ -70,6 +71,7 @@ interface CssTokenRow {
     TableColumnComponent,
     TableColumnBodyDirective,
     DocPageLayoutComponent,
+    DocPageHeaderComponent,
     DocTocComponent,
   ],
   templateUrl: './menu-demo.component.html',

@@ -8,6 +8,7 @@ import { Card } from 'ui-lib-custom/card';
 import { Badge } from 'ui-lib-custom/badge';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Checkbox } from 'ui-lib-custom/checkbox';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
@@ -29,6 +30,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     Badge,
     UiLibInput,
     Checkbox,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     CodeSnippet,

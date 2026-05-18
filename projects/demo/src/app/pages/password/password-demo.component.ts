@@ -3,6 +3,7 @@ import type { Signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PasswordComponent } from 'ui-lib-custom/password';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,6 +16,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     CodeSnippet,
     PasswordComponent,
     ReactiveFormsModule,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
   ],

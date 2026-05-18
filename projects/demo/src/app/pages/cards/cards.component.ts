@@ -17,6 +17,7 @@ import { Button } from 'ui-lib-custom/button';
 import { SHADOWS } from 'ui-lib-custom/tokens';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -49,6 +50,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Card,
     Button,
     CodeSnippet,
+    DocPageHeaderComponent,
     Tabs,
     Tab,
     DocPageLayoutComponent,

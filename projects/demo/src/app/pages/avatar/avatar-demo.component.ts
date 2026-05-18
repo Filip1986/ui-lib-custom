@@ -5,6 +5,7 @@ import { Avatar } from 'ui-lib-custom/avatar';
 import { AvatarGroup } from 'ui-lib-custom/avatar';
 import type { AvatarSize, AvatarShape, AvatarVariant } from 'ui-lib-custom/avatar';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,7 +16,15 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-avatar-demo',
   standalone: true,
-  imports: [CodeSnippet, Avatar, AvatarGroup, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Avatar,
+    AvatarGroup,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

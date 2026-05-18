@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ContextMenu } from 'ui-lib-custom/context-menu';
 import type { ContextMenuItem, ContextMenuItemCommandEvent } from 'ui-lib-custom/context-menu';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,7 +14,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-context-menu-demo',
   standalone: true,
-  imports: [CodeSnippet, ContextMenu, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    ContextMenu,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './context-menu-demo.component.html',
   styleUrl: './context-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

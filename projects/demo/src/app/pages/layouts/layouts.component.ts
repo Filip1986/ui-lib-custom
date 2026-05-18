@@ -5,6 +5,7 @@ import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import type { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -31,6 +32,7 @@ import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example
     CodeSnippet,
     FormsModule,
     DocPageLayoutComponent,
+    DocPageHeaderComponent,
     SemanticSpacingSectionComponent,
     StackSectionComponent,
     InlineSectionComponent,

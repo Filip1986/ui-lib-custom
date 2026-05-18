@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from 
 import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -105,7 +106,13 @@ export interface LaunchStep {
 @Component({
   selector: 'app-roadmap',
   standalone: true,
-  imports: [CommonModule, RouterModule, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './roadmap.component.html',
   styleUrl: './roadmap.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

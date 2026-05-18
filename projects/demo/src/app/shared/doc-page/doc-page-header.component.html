@@ -1,0 +1,15 @@
+<div class="doc-header">
+  <h1>{{ title() }}</h1>
+  @if (importCode()) {
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="false"
+      size="sm"
+      [code]="importCode()"
+    />
+  }
+  @if (description()) {
+    <p class="doc-description">{{ description() }}</p>
+  }
+  <ng-content />
+</div>

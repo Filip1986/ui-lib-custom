@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,7 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-class-names-demo',
   standalone: true,
-  imports: [CodeSnippet, ClassNamesPipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    ClassNamesPipe,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

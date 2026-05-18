@@ -29,6 +29,7 @@ import { UiLibSelect } from 'ui-lib-custom/select';
 import type { SelectOption } from 'ui-lib-custom/select';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -64,6 +65,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   standalone: true,
   imports: [
     CodeSnippet,
+    DocPageHeaderComponent,
     CommonModule,
     FormsModule,
     Tabs,

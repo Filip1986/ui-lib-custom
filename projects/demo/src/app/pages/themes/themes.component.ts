@@ -9,6 +9,7 @@ import { Inline } from 'ui-lib-custom/layout';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -35,6 +36,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     Badge,
     Inline,
     UiLibInput,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     DocTocComponent,
