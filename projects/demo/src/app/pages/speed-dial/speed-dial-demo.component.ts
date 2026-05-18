@@ -18,7 +18,6 @@ import type {
   SpeedDialItemCommandEvent,
   SpeedDialVariant,
 } from 'ui-lib-custom/speed-dial';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -37,7 +36,6 @@ interface SpeedDialLogEntry {
   selector: 'app-speed-dial-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Icon,
     SpeedDialComponent,
     SpeedDialIconDirective,

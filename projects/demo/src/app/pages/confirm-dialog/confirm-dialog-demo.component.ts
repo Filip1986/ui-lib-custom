@@ -1,7 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ConfirmDialog, ConfirmationService } from 'ui-lib-custom/confirm-dialog';
 import type {
   ConfirmDialogButtonSeverity,
@@ -20,7 +19,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-confirm-dialog-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     ConfirmDialog,
     TitleCasePipe,
     Button,

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Message } from 'ui-lib-custom/message';
 import type { MessageSeverity, MessageVariant, MessageSize } from 'ui-lib-custom/message';
 import { Button } from 'ui-lib-custom/button';
@@ -15,14 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-message-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    Message,
-    Button,
-    DocPageLayoutComponent,
-    DocPageHeaderComponent,
-    DocTocComponent,
-  ],
+  imports: [Message, Button, DocPageLayoutComponent, DocPageHeaderComponent, DocTocComponent],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

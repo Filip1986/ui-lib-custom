@@ -11,7 +11,6 @@ import { ToggleSwitch } from 'ui-lib-custom/toggle-switch';
 import { Button } from 'ui-lib-custom/button';
 import type { ToggleSwitchSize, ToggleSwitchVariant } from 'ui-lib-custom/toggle-switch';
 import { Card } from 'ui-lib-custom/card';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -24,7 +23,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-toggle-switch-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     ToggleSwitch,
     Card,
     FormsModule,

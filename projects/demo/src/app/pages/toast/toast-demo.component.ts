@@ -3,7 +3,6 @@ import type { WritableSignal, Signal } from '@angular/core';
 import { Toast, ToastService } from 'ui-lib-custom/toast';
 import type { ToastPosition, ToastSeverity, ToastVariant } from 'ui-lib-custom/toast';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -15,14 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-toast-demo',
   standalone: true,
-  imports: [
-    Toast,
-    Button,
-    CodeSnippet,
-    DocPageHeaderComponent,
-    DocPageLayoutComponent,
-    DocTocComponent,
-  ],
+  imports: [Toast, Button, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './toast-demo.component.html',
   styleUrl: './toast-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

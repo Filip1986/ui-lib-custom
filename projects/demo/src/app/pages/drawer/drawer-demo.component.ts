@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Drawer } from 'ui-lib-custom/drawer';
 import type { DrawerPosition, DrawerVariant } from 'ui-lib-custom/drawer';
 import { Button } from 'ui-lib-custom/button';
@@ -17,7 +16,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-drawer-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Drawer,
     TitleCasePipe,
     Button,

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Breadcrumb } from 'ui-lib-custom/breadcrumb';
 import type { BreadcrumbItem, BreadcrumbItemClickEvent } from 'ui-lib-custom/breadcrumb';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
@@ -14,13 +13,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-breadcrumb-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    Breadcrumb,
-    DocPageHeaderComponent,
-    DocPageLayoutComponent,
-    DocTocComponent,
-  ],
+  imports: [Breadcrumb, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './breadcrumb-demo.component.html',
   styleUrl: './breadcrumb-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

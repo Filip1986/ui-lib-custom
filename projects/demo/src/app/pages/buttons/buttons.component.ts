@@ -6,7 +6,6 @@ import {
   viewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Button } from 'ui-lib-custom/button';
 import type {
   ButtonAppearance,
@@ -47,7 +46,6 @@ interface ApiRow {
   selector: 'app-buttons',
   standalone: true,
   imports: [
-    CodeSnippet,
     Button,
     ButtonGroup,
     TableComponent,

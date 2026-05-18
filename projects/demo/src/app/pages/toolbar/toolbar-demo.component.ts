@@ -3,7 +3,6 @@ import type { WritableSignal, Signal } from '@angular/core';
 import { Toolbar } from 'ui-lib-custom/toolbar';
 import type { ToolbarSize, ToolbarVariant } from 'ui-lib-custom/toolbar';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -15,14 +14,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-toolbar-demo',
   standalone: true,
-  imports: [
-    Toolbar,
-    Button,
-    CodeSnippet,
-    DocPageHeaderComponent,
-    DocPageLayoutComponent,
-    DocTocComponent,
-  ],
+  imports: [Toolbar, Button, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './toolbar-demo.component.html',
   styleUrl: './toolbar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

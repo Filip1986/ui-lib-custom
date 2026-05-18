@@ -3,7 +3,6 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Tree } from 'ui-lib-custom/tree';
 import { TreeNodeTemplateDirective } from 'ui-lib-custom/tree';
 import type { TreeNode, TreeSelectionMode } from 'ui-lib-custom/tree';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -18,7 +17,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-tree-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Tree,
     TreeNodeTemplateDirective,
     DocPageHeaderComponent,

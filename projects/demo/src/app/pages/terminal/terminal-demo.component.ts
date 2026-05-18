@@ -9,7 +9,6 @@ import {
 import type { WritableSignal, Signal } from '@angular/core';
 import { Terminal, TerminalService } from 'ui-lib-custom/terminal';
 import type { TerminalCommand, TerminalVariant } from 'ui-lib-custom/terminal';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -31,7 +30,7 @@ const HELP_TEXT: string = [
 @Component({
   selector: 'app-terminal-demo',
   standalone: true,
-  imports: [Terminal, CodeSnippet, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [Terminal, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './terminal-demo.component.html',
   styleUrl: './terminal-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { GalleriaComponent } from 'ui-lib-custom/galleria';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -81,7 +80,6 @@ const DEMO_IMAGES: GalleriaImage[] = [
   selector: 'app-gallery',
   standalone: true,
   imports: [
-    CodeSnippet,
     GalleriaComponent,
     FormsModule,
     Button,

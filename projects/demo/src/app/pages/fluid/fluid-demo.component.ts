@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Fluid, FluidDirective } from 'ui-lib-custom/fluid';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -16,7 +15,6 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
   selector: 'app-fluid-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Fluid,
     FluidDirective,
     Button,

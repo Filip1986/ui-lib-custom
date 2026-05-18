@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Divider } from 'ui-lib-custom/divider';
 import type {
   DividerAlign,
@@ -20,14 +19,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    Divider,
-    Button,
-    DocPageHeaderComponent,
-    DocPageLayoutComponent,
-    DocTocComponent,
-  ],
+  imports: [Divider, Button, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

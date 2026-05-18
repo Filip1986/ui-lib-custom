@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Inplace } from 'ui-lib-custom/inplace';
 import type { InplaceVariant } from 'ui-lib-custom/inplace';
 import { Button } from 'ui-lib-custom/button';
@@ -15,14 +14,7 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 @Component({
   selector: 'app-inplace-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    Inplace,
-    Button,
-    DocPageLayoutComponent,
-    DocTocComponent,
-    DocPageHeaderComponent,
-  ],
+  imports: [Inplace, Button, DocPageLayoutComponent, DocTocComponent, DocPageHeaderComponent],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { CarouselComponent } from 'ui-lib-custom/carousel';
 import type { CarouselResponsiveOption } from 'ui-lib-custom/carousel';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
@@ -23,13 +22,7 @@ interface DemoProduct {
 @Component({
   selector: 'app-carousel-demo',
   standalone: true,
-  imports: [
-    CodeSnippet,
-    CarouselComponent,
-    DocPageHeaderComponent,
-    DocPageLayoutComponent,
-    DocTocComponent,
-  ],
+  imports: [CarouselComponent, DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

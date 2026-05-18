@@ -8,7 +8,6 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Icon } from 'ui-lib-custom/icon';
 import { DialogComponent } from 'ui-lib-custom/dialog';
 import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
@@ -27,7 +26,6 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
     VariantComparisonComponent,
     Card,
     Button,
-    CodeSnippet,
     Icon,
     DialogComponent,
   ],

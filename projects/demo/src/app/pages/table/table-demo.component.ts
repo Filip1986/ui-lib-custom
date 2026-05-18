@@ -11,7 +11,6 @@ import {
 } from 'ui-lib-custom/table';
 import type { TableSelectionMode, TableSortEvent, TableVariant } from 'ui-lib-custom/table';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -32,7 +31,6 @@ interface Product {
   selector: 'app-table-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     FormsModule,
     TableComponent,
     TableColumnComponent,
