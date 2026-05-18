@@ -16,6 +16,8 @@ import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-tab
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '../../shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '../../shared/doc-page/doc-quality-badge.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface InputRow {
@@ -62,12 +64,40 @@ interface AriaRow {
     DocTocComponent,
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-15',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+    apgPattern: {
+      name: 'Disclosure (Show/Hide)',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/',
+    },
+    humanPending: [
+      'NVDA + Chrome — aria-expanded announcement on toggle button',
+      'VoiceOver + Safari — role="region" + aria-labelledby wiring',
+      'Visual contrast — focus ring on toggle button',
+    ],
+  };
+
   public readonly importCode: string = "import { Panel } from 'ui-lib-custom/panel'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
