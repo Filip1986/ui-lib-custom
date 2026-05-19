@@ -1,14 +1,15 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Breadcrumb" [importCode]="importCode">
-    <p class="doc-description">
-      A breadcrumb displays a hierarchical navigation trail, helping users understand where they are
-      in an application and navigate back to parent sections.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-breadcrumb [items]="basicItems" />
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Breadcrumb"
+    [importCode]="importCode"
+    description="A breadcrumb displays a hierarchical navigation trail, helping users understand where they are in an application and navigate back to parent sections."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-breadcrumb [items]="basicItems" />
+  </div>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>

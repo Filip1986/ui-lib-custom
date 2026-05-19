@@ -1,17 +1,18 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="ConfirmDialog" [importCode]="importCode">
-    <p class="doc-description">
-      A modal confirmation overlay with configurable accept/reject actions. Supports both declarative
-      binding and programmatic use via <code>ConfirmationService</code>.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="demo-result-banner">
-        <span class="demo-result-label">Last action:</span>
-        <span class="demo-result-value">{{ lastResult() }}</span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="ConfirmDialog"
+    [importCode]="importCode"
+    description="A modal confirmation overlay with configurable accept/reject actions. Supports both declarative binding and programmatic use via <code>ConfirmationService</code>."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="demo-result-banner">
+      <span class="demo-result-label">Last action:</span>
+      <span class="demo-result-value">{{ lastResult() }}</span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- Section: Basic -->
   <section class="demo-section" id="basic" data-doc-anchor>

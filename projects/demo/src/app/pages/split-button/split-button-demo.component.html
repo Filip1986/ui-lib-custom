@@ -1,11 +1,12 @@
 <app-doc-page-layout [sections]="sections">
-  <app-doc-page-header docHeader title="SplitButton" [importCode]="importCode">
-    <p class="doc-description">
-      SplitButton combines a primary action with a secondary menu so related operations stay grouped
-      without duplicating controls.
-    </p>
-    <p class="action-log" aria-live="polite">{{ lastAction() }}</p>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="SplitButton"
+    [importCode]="importCode"
+    description="SplitButton combines a primary action with a secondary menu so related operations stay grouped without duplicating controls."
+  />
+
+  <p class="action-log" aria-live="polite">{{ lastAction() }}</p>
 
   <div class="examples">
     <section id="basic" data-doc-anchor class="example-section">

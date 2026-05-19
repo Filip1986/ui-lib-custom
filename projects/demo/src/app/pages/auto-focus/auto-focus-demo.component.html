@@ -1,19 +1,19 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="AutoFocus" [importCode]="importCode">
-    <p class="doc-description">
-      A lightweight directive that programmatically focuses the host element after
-      view initialization — a reliable, Angular-first alternative to the native
-      <code>autofocus</code> attribute.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="af-hero__tags">
-        <span class="af-tag">Directive</span>
-        <span class="af-tag">Misc</span>
-        <span class="af-tag">A11y</span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="AutoFocus"
+    [importCode]="importCode"
+    description="A lightweight directive that programmatically focuses the host element after view initialization — a reliable, Angular-first alternative to the native <code>autofocus</code> attribute."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="af-hero__tags">
+      <span class="af-tag">Directive</span>
+      <span class="af-tag">Misc</span>
+      <span class="af-tag">A11y</span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Basic usage ── -->
   <section class="demo-section" id="basic-usage" data-doc-anchor>

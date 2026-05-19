@@ -1,7 +1,7 @@
 <div class="doc-header">
   <h1>{{ title() }}</h1>
   @if (description()) {
-    <p class="doc-description">{{ description() }}</p>
+    <p class="doc-description" [innerHTML]="description()"></p>
   }
   <ng-content />
   @if (importCode()) {

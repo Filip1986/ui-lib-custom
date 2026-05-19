@@ -1,40 +1,40 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="AnimateOnScroll" [importCode]="importCode">
-    <p class="doc-description">
-      Trigger smooth CSS transitions as elements enter the viewport &mdash; powered
-      entirely by the native <code>IntersectionObserver</code> API with no
-      external animation libraries required.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="aos-hero__chips">
-        <span class="aos-chip uilib-aos-fade-in"
-              uiLibAnimateOnScroll enterClass="uilib-aos-active"
-              [threshold]="0"
-              style="--uilib-animate-on-scroll-delay: 0ms">
-          <i class="pi pi-bolt"></i> Native API
-        </span>
-        <span class="aos-chip uilib-aos-fade-in"
-              uiLibAnimateOnScroll enterClass="uilib-aos-active"
-              [threshold]="0"
-              style="--uilib-animate-on-scroll-delay: 80ms">
-          <i class="pi pi-check"></i> Zero dependencies
-        </span>
-        <span class="aos-chip uilib-aos-fade-in"
-              uiLibAnimateOnScroll enterClass="uilib-aos-active"
-              [threshold]="0"
-              style="--uilib-animate-on-scroll-delay: 160ms">
-          <i class="pi pi-palette"></i> CSS-variable theming
-        </span>
-        <span class="aos-chip uilib-aos-fade-in"
-              uiLibAnimateOnScroll enterClass="uilib-aos-active"
-              [threshold]="0"
-              style="--uilib-animate-on-scroll-delay: 240ms">
-          <i class="pi pi-refresh"></i> Enter &amp; leave events
-        </span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="AnimateOnScroll"
+    [importCode]="importCode"
+    description="Trigger smooth CSS transitions as elements enter the viewport &mdash; powered entirely by the native <code>IntersectionObserver</code> API with no external animation libraries required."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="aos-hero__chips">
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 0ms">
+        <i class="pi pi-bolt"></i> Native API
+      </span>
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 80ms">
+        <i class="pi pi-check"></i> Zero dependencies
+      </span>
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 160ms">
+        <i class="pi pi-palette"></i> CSS-variable theming
+      </span>
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 240ms">
+        <i class="pi pi-refresh"></i> Enter &amp; leave events
+      </span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- FADE IN -->
   <section class="demo-section" id="fade-in" data-doc-anchor>

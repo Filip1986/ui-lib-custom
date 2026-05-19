@@ -1,26 +1,26 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Button" [importCode]="importCode">
-    <p class="doc-description">
-      Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised
-      modifiers — all from a single <code>ui-lib-button</code> element.
-    </p>
-    <div class="demo-page-header__preview">
-      <!-- Variant switcher -->
-      <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
-        @for (v of variants; track v) {
-          <button
-            type="button"
-            class="buttons-demo__variant-btn"
-            [class.buttons-demo__variant-btn--active]="activeVariant() === v"
-            (click)="setVariant(v)"
-          >
-            {{ v }}
-          </button>
-        }
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="Button"
+    [importCode]="importCode"
+    description="Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised modifiers — all from a single <code>ui-lib-button</code> element."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
+      @for (v of variants; track v) {
+        <button
+          type="button"
+          class="buttons-demo__variant-btn"
+          [class.buttons-demo__variant-btn--active]="activeVariant() === v"
+          (click)="setVariant(v)"
+        >
+          {{ v }}
+        </button>
+      }
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Basic ──────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>

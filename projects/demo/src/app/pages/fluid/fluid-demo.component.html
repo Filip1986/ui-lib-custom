@@ -1,21 +1,20 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Fluid" [importCode]="importCode">
-    <p class="doc-description">
-      A layout wrapper that stretches all descendant form controls — inputs, textareas,
-      selects, and buttons — to 100&nbsp;% of the available width.
-      Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an
-      attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="fd-hero__tags">
-        <span class="fd-tag">Component</span>
-        <span class="fd-tag">Directive</span>
-        <span class="fd-tag">Layout</span>
-        <span class="fd-tag">Misc</span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="Fluid"
+    [importCode]="importCode"
+    description="A layout wrapper that stretches all descendant form controls — inputs, textareas, selects, and buttons — to 100&nbsp;% of the available width. Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="fd-hero__tags">
+      <span class="fd-tag">Component</span>
+      <span class="fd-tag">Directive</span>
+      <span class="fd-tag">Layout</span>
+      <span class="fd-tag">Misc</span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Component usage ── -->
   <section class="demo-section" id="using-the-component" data-doc-anchor>

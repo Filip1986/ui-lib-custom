@@ -1,20 +1,21 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Carousel" [importCode]="importCode">
-    <p class="doc-description">
-      A content slider with support for multiple visible items, responsive breakpoints,
-      autoplay, circular mode, touch/swipe navigation, and three design variants.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-carousel [value]="slides">
-        <ng-template #carouselItem let-slide>
-          <div class="demo-slide demo-slide--basic">
-            <span>{{ slide }}</span>
-          </div>
-        </ng-template>
-      </ui-lib-carousel>
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Carousel"
+    [importCode]="importCode"
+    description="A content slider with support for multiple visible items, responsive breakpoints, autoplay, circular mode, touch/swipe navigation, and three design variants."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-carousel [value]="slides">
+      <ng-template #carouselItem let-slide>
+        <div class="demo-slide demo-slide--basic">
+          <span>{{ slide }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
 
   <!-- ─── Basic (1 visible) ──────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>

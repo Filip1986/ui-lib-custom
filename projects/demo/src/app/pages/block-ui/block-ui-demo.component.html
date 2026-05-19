@@ -1,22 +1,20 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="BlockUI" [importCode]="importCode">
-    <p class="doc-description">
-      Overlay a mask over any section to prevent user interaction — ideal for loading states,
-      disabled form sections, and confirmation flows. Wrap content in
-      <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask.
-      Blocked content receives the <code>inert</code> attribute, making all descendants
-      non-focusable by keyboard.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-block-ui [blocked]="false">
-        <div class="demo-block-panel demo-block-panel--preview">
-          <strong>Protected content</strong>
-          <p>Bind <code>[(blocked)]</code> to overlay the mask.</p>
-        </div>
-      </ui-lib-block-ui>
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="BlockUI"
+    [importCode]="importCode"
+    description="Overlay a mask over any section to prevent user interaction — ideal for loading states, disabled form sections, and confirmation flows. Wrap content in <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask. Blocked content receives the <code>inert</code> attribute, making all descendants non-focusable by keyboard."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-block-ui [blocked]="false">
+      <div class="demo-block-panel demo-block-panel--preview">
+        <strong>Protected content</strong>
+        <p>Bind <code>[(blocked)]</code> to overlay the mask.</p>
+      </div>
+    </ui-lib-block-ui>
+  </div>
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <section class="demo-section" id="basic" data-doc-anchor>

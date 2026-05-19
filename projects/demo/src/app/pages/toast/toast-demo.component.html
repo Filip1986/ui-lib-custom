@@ -4,14 +4,12 @@
 
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Toast" [importCode]="importCode">
-    <p class="doc-description">
-      The Toast component provides a lightweight notification overlay driven by an
-      injectable <code>ToastService</code>. Place one <code>&lt;ui-lib-toast /&gt;</code>
-      in your app shell and call <code>toastService.add()</code> from anywhere in
-      the application.
-    </p>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Toast"
+    [importCode]="importCode"
+    description="The Toast component provides a lightweight notification overlay driven by an injectable <code>ToastService</code>. Place one <code>&lt;ui-lib-toast /&gt;</code> in your app shell and call <code>toastService.add()</code> from anywhere in the application."
+  />
 
   <!-- ─── Section: Severities ───────────────────────────────────────────────── -->
   <section class="demo-section" id="severities" data-doc-anchor>

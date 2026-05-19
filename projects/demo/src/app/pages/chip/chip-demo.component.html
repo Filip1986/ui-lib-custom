@@ -1,22 +1,22 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Chip" [importCode]="importCode">
-    <p class="doc-description">
-      Compact inline element representing an attribute, tag, or dismissible item.
-      Supports an optional leading icon or image, a removable close button,
-      three sizes, and three design variants.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-chip label="Angular" icon="pi pi-bolt" />
-      <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
-      <ui-lib-chip
-        label="Amy"
-        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-        imageAlt="Amy Elsner"
-      />
-      <ui-lib-chip label="Removable" [removable]="true" />
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Chip"
+    [importCode]="importCode"
+    description="Compact inline element representing an attribute, tag, or dismissible item. Supports an optional leading icon or image, a removable close button, three sizes, and three design variants."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-chip label="Angular" icon="pi pi-bolt" />
+    <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
+    <ui-lib-chip
+      label="Amy"
+      image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+      imageAlt="Amy Elsner"
+    />
+    <ui-lib-chip label="Removable" [removable]="true" />
+  </div>
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <section class="demo-section" id="basic" data-doc-anchor>
