@@ -3,6 +3,7 @@
   @if (description()) {
     <p class="doc-description">{{ description() }}</p>
   }
+  <ng-content />
   @if (importCode()) {
     <ui-lib-code-snippet
       language="typescript"
@@ -11,6 +12,5 @@
       [code]="importCode()"
     />
   }
-  <ng-content />
   <ui-lib-divider [decorative]="true" />
 </div>
