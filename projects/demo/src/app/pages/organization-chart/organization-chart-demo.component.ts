@@ -13,6 +13,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
 import { Panel } from 'ui-lib-custom/panel';
 import type {
@@ -116,6 +117,7 @@ const SNIPPETS: Record<string, string> = {
     OrgChartNodeTemplateDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './organization-chart-demo.component.html',
   styleUrl: './organization-chart-demo.component.scss',
@@ -228,6 +230,147 @@ export class OrganizationChartDemoComponent {
   public readonly eventLog: WritableSignal<string[]> = signal([]);
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
+  public readonly snippetsTs: Record<string, string> = {
+    basic: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+}`,
+    collapsible: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type {
+  OrganizationChartNode,
+  OrganizationChartNodeExpandEvent,
+} from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+
+  public onNodeExpand(event: OrganizationChartNodeExpandEvent): void {
+    console.log('Expanded:', event.node.label);
+  }
+
+  public onNodeCollapse(event: OrganizationChartNodeExpandEvent): void {
+    console.log('Collapsed:', event.node.label);
+  }
+}`,
+    singleSelection: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+  public readonly selection = signal<OrganizationChartNode | null>(null);
+}`,
+    multipleSelection: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+  public readonly selection = signal<OrganizationChartNode[]>([]);
+}`,
+    customTemplate: `import { Component, signal } from '@angular/core';
+import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart, OrgChartNodeTemplateDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    {
+      key: 'ceo',
+      label: 'Alice Chen',
+      data: { role: 'Chief Executive Officer' },
+      expanded: true,
+      children: [],
+    },
+  ]);
+
+  public initials(label: string | undefined): string {
+    if (!label) return '?';
+    return label.split(' ').map((w: string): string => w[0] ?? '').slice(0, 2).join('').toUpperCase();
+  }
+}`,
+    bootstrap: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+}`,
+    minimal: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+}`,
+  };
+
+  public snippetTs(key: string): string {
+    return this.snippetsTs[key] ?? '';
+  }
+
   public snippet(key: string): string {
     return SNIPPETS[key] ?? '';
   }

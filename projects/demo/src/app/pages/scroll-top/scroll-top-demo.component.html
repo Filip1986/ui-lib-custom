@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ScrollTop"
@@ -13,8 +12,8 @@
   <section class="demo-section" id="basic-usage" data-doc-anchor>
     <h2 class="demo-section__title">Basic Usage</h2>
     <p class="demo-section__description">
-      Scroll down this page to see the button appear in the bottom-right corner.
-      The default threshold is <code>400px</code> and the default target is the window.
+      Scroll down this page to see the button appear in the bottom-right corner. The default
+      threshold is <code>400px</code> and the default target is the window.
     </p>
     <div class="demo-section__preview">
       <p class="demo-hint">⬇ Scroll down the page to reveal the ScrollTop button.</p>
@@ -34,11 +33,10 @@
       <code>threshold</code> input (pixels, default: 400).
     </p>
     <div class="demo-section__preview demo-section__preview--code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="snippetThreshold"
+        [typescript]="snippetThresholdTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetThreshold"
       />
     </div>
   </section>
@@ -50,8 +48,8 @@
     <h2 class="demo-section__title">Parent Container Target</h2>
     <p class="demo-section__description">
       Set <code>target="parent"</code> to watch a scrollable parent element instead of the window.
-      The button is positioned <code>absolute</code> inside the container.
-      The parent must have <code>position: relative</code> and <code>overflow-y: auto</code>.
+      The button is positioned <code>absolute</code> inside the container. The parent must have
+      <code>position: relative</code> and <code>overflow-y: auto</code>.
     </p>
     <div class="demo-section__preview">
       <div class="demo-scrollable-container">
@@ -62,11 +60,10 @@
       </div>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="snippetParentTarget"
+        [typescript]="snippetParentTargetTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetParentTarget"
       />
     </div>
   </section>
@@ -78,8 +75,8 @@
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three design variants: <code>material</code> (default — pill, primary colour + shadow),
-      <code>bootstrap</code> (square corners, Bootstrap blue), and
-      <code>minimal</code> (muted surface + border).
+      <code>bootstrap</code> (square corners, Bootstrap blue), and <code>minimal</code> (muted
+      surface + border).
     </p>
     <div class="demo-section__preview demo-section__preview--row">
       <div class="demo-variant-wrapper">
@@ -139,8 +136,8 @@
   <section class="demo-section" id="custom-icon" data-doc-anchor>
     <h2 class="demo-section__title">Custom Icon</h2>
     <p class="demo-section__description">
-      Use the <code>icon</code> input to supply any PrimeIcons class string.
-      The default is <code>pi pi-arrow-up</code>.
+      Use the <code>icon</code> input to supply any PrimeIcons class string. The default is
+      <code>pi pi-arrow-up</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--row">
       <div class="demo-forced-visible">
@@ -264,5 +261,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -22,6 +22,7 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 type SnippetKey =
   | 'basic'
   | 'labels'
@@ -54,6 +55,7 @@ type SnippetKey =
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './toggle-button-demo.component.html',
   styleUrl: './toggle-button-demo.component.scss',
@@ -204,8 +206,131 @@ export class ToggleButtonDemoComponent {
 </form>`,
   };
 
+  public readonly snippetsTs: Record<SnippetKey, string> = {
+    basic: `import { Component, signal } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isActive = signal<boolean>(false);
+}`,
+
+    labels: `import { Component, signal } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly status = signal<boolean>(false);
+}`,
+
+    icons: `import { Component, signal } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly muted = signal<boolean>(false);
+}`,
+
+    iconRight: `import { Component, signal } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly muted = signal<boolean>(false);
+}`,
+
+    sizes: `import { Component } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+
+    variants: `import { Component } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+
+    allowEmpty: `import { Component } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+
+    disabled: `import { Component } from '@angular/core';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+
+    ngModel: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public notificationsEnabled: boolean = false;
+}`,
+
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToggleButton } from 'ui-lib-custom/toggle-button';
+
+@Component({
+  standalone: true,
+  imports: [ToggleButton, ReactiveFormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly form = new FormGroup({
+    notifications: new FormControl<boolean>(false),
+    darkMode: new FormControl<boolean>(true),
+  });
+}`,
+  };
+
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: SnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public readonly keyboardRows: KeyboardNavRow[] = [

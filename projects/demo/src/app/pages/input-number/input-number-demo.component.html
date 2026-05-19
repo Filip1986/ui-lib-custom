@@ -9,285 +9,257 @@
   <div class="examples">
     <section id="numerals" data-doc-anchor class="example-section">
       <h3>1. Numerals</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('numerals')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('numerals')" [typescript]="snippet('numeralsTs')" />
     </section>
 
     <section id="decimal" data-doc-anchor class="example-section">
       <h3>2. Decimal</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number
-            [(ngModel)]="decimalValue"
-            [minFractionDigits]="2"
-            [maxFractionDigits]="4"
-            placeholder="0.00"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('decimal')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number
+          [(ngModel)]="decimalValue"
+          [minFractionDigits]="2"
+          [maxFractionDigits]="4"
+          placeholder="0.00"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('decimal')" [typescript]="snippet('decimalTs')" />
     </section>
 
     <section id="locale" data-doc-anchor class="example-section">
       <h3>3. Locale</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-4">
-            <div>
-              <label class="field-label">en-US</label>
-              <uilib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
-            </div>
-            <div>
-              <label class="field-label">de-DE</label>
-              <uilib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
-            </div>
-            <div>
-              <label class="field-label">en-IN</label>
-              <uilib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
-            </div>
-            <div>
-              <label class="field-label">jp-JP</label>
-              <uilib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />
-            </div>
+      <ui-lib-panel variant="minimal">
+        <div class="row-4">
+          <div>
+            <label class="field-label">en-US</label>
+            <uilib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
           </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('locale')" 
-        [showLineNumbers]="true"
-        />
+          <div>
+            <label class="field-label">de-DE</label>
+            <uilib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
+          </div>
+          <div>
+            <label class="field-label">en-IN</label>
+            <uilib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
+          </div>
+          <div>
+            <label class="field-label">jp-JP</label>
+            <uilib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />
+          </div>
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('locale')" [typescript]="snippet('localeTs')" />
     </section>
 
     <section id="currency" data-doc-anchor class="example-section">
       <h3>4. Currency</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-2">
-            <uilib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
-            <uilib-input-number
-              [(ngModel)]="currencyValues.eur"
-              mode="currency"
-              currency="EUR"
-              locale="de-DE"
-            />
-            <uilib-input-number
-              [(ngModel)]="currencyValues.inr"
-              mode="currency"
-              currency="INR"
-              currencyDisplay="code"
-              locale="en-IN"
-            />
-            <uilib-input-number
-              [(ngModel)]="currencyValues.jpy"
-              mode="currency"
-              currency="JPY"
-              locale="ja-JP"
-            />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('currency')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <div class="row-2">
+          <uilib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
+          <uilib-input-number
+            [(ngModel)]="currencyValues.eur"
+            mode="currency"
+            currency="EUR"
+            locale="de-DE"
+          />
+          <uilib-input-number
+            [(ngModel)]="currencyValues.inr"
+            mode="currency"
+            currency="INR"
+            currencyDisplay="code"
+            locale="en-IN"
+          />
+          <uilib-input-number
+            [(ngModel)]="currencyValues.jpy"
+            mode="currency"
+            currency="JPY"
+            locale="ja-JP"
+          />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('currency')" [typescript]="snippet('currencyTs')" />
     </section>
 
     <section id="prefix-suffix" data-doc-anchor class="example-section">
       <h3>5. Prefix &amp; Suffix</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-2">
-            <uilib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
-            <uilib-input-number [(ngModel)]="completionPercent" suffix=" %" />
-            <uilib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
-            <uilib-input-number [(ngModel)]="temperature" suffix=" °C" />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('prefixSuffix')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <div class="row-2">
+          <uilib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
+          <uilib-input-number [(ngModel)]="completionPercent" suffix=" %" />
+          <uilib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
+          <uilib-input-number [(ngModel)]="temperature" suffix=" °C" />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('prefixSuffix')"
+        [typescript]="snippet('prefixSuffixTs')"
+      />
     </section>
 
     <section id="buttons-stacked" data-doc-anchor class="example-section">
       <h3>6. Buttons Stacked</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number
-            [(ngModel)]="stackedAmount"
-            mode="currency"
-            currency="USD"
-            [showButtons]="true"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('buttonsStacked')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number
+          [(ngModel)]="stackedAmount"
+          mode="currency"
+          currency="USD"
+          [showButtons]="true"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('buttonsStacked')"
+        [typescript]="snippet('buttonsStackedTs')"
+      />
     </section>
 
     <section id="buttons-horizontal" data-doc-anchor class="example-section">
       <h3>7. Buttons Horizontal</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number
-            [(ngModel)]="horizontalAmount"
-            mode="currency"
-            currency="EUR"
-            locale="de-DE"
-            [showButtons]="true"
-            buttonLayout="horizontal"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('buttonsHorizontal')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number
+          [(ngModel)]="horizontalAmount"
+          mode="currency"
+          currency="EUR"
+          locale="de-DE"
+          [showButtons]="true"
+          buttonLayout="horizontal"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('buttonsHorizontal')"
+        [typescript]="snippet('buttonsHorizontalTs')"
+      />
     </section>
 
     <section id="buttons-vertical" data-doc-anchor class="example-section">
       <h3>8. Buttons Vertical</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number
-            [(ngModel)]="verticalAmount"
-            [showButtons]="true"
-            buttonLayout="vertical"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('buttonsVertical')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number
+          [(ngModel)]="verticalAmount"
+          [showButtons]="true"
+          buttonLayout="vertical"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('buttonsVertical')"
+        [typescript]="snippet('buttonsVerticalTs')"
+      />
     </section>
 
     <section id="step" data-doc-anchor class="example-section">
       <h3>9. Step</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('step')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('step')" [typescript]="snippet('stepTs')" />
     </section>
 
     <section id="min-max" data-doc-anchor class="example-section">
       <h3>10. Min &amp; Max</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number
-            [(ngModel)]="boundedValue"
-            [min]="0"
-            [max]="100"
-            [showButtons]="true"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('minMax')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number [(ngModel)]="boundedValue" [min]="0" [max]="100" [showButtons]="true" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('minMax')" [typescript]="snippet('minMaxTs')" />
     </section>
 
     <section id="float-label" data-doc-anchor class="example-section">
       <h3>11. Float Label</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-3">
-            <uilib-float-label variant="over">
-              <uilib-input-number [(ngModel)]="floatValues.over" inputId="input-number-over" />
-              <label for="input-number-over">Amount (over)</label>
-            </uilib-float-label>
-            <uilib-float-label variant="in">
-              <uilib-input-number [(ngModel)]="floatValues.in" inputId="input-number-in" />
-              <label for="input-number-in">Amount (in)</label>
-            </uilib-float-label>
-            <uilib-float-label variant="on">
-              <uilib-input-number [(ngModel)]="floatValues.on" inputId="input-number-on" />
-              <label for="input-number-on">Amount (on)</label>
-            </uilib-float-label>
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <div class="row-3">
+          <uilib-float-label variant="over">
+            <uilib-input-number [(ngModel)]="floatValues.over" inputId="input-number-over" />
+            <label for="input-number-over">Amount (over)</label>
+          </uilib-float-label>
+          <uilib-float-label variant="in">
+            <uilib-input-number [(ngModel)]="floatValues.in" inputId="input-number-in" />
+            <label for="input-number-in">Amount (in)</label>
+          </uilib-float-label>
+          <uilib-float-label variant="on">
+            <uilib-input-number [(ngModel)]="floatValues.on" inputId="input-number-on" />
+            <label for="input-number-on">Amount (on)</label>
+          </uilib-float-label>
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('floatLabel')" [typescript]="snippet('floatLabelTs')" />
     </section>
 
     <section id="clear-icon" data-doc-anchor class="example-section">
       <h3>12. Clear Icon</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number
-            [(ngModel)]="clearableValue"
-            [showClear]="true"
-            [showButtons]="true"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('clearIcon')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number [(ngModel)]="clearableValue" [showClear]="true" [showButtons]="true" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('clearIcon')" [typescript]="snippet('clearIconTs')" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>13. Sizes</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-3">
-            <uilib-input-number [(ngModel)]="sizeValues.sm" size="sm" placeholder="Small" />
-            <uilib-input-number [(ngModel)]="sizeValues.md" size="md" placeholder="Medium" />
-            <uilib-input-number [(ngModel)]="sizeValues.lg" size="lg" placeholder="Large" />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <div class="row-3">
+          <uilib-input-number [(ngModel)]="sizeValues.sm" size="sm" placeholder="Small" />
+          <uilib-input-number [(ngModel)]="sizeValues.md" size="md" placeholder="Medium" />
+          <uilib-input-number [(ngModel)]="sizeValues.lg" size="lg" placeholder="Large" />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
     </section>
 
     <section id="disabled-invalid" data-doc-anchor class="example-section">
       <h3>14. Disabled &amp; Invalid</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-2">
-            <uilib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
-            <uilib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('disabledInvalid')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <div class="row-2">
+          <uilib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
+          <uilib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('disabledInvalid')"
+        [typescript]="snippet('disabledInvalidTs')"
+      />
     </section>
 
     <section id="filled" data-doc-anchor class="example-section">
       <h3>15. Filled</h3>
-        <ui-lib-panel variant="minimal">
-          <uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('filled')" [typescript]="snippet('filledTs')" />
     </section>
 
     <section id="fluid" data-doc-anchor class="example-section">
       <h3>16. Fluid</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="fluid-wrap">
-            <uilib-input-number
-              [(ngModel)]="fluidValue"
-              [fluid]="true"
-              [showButtons]="true"
-              buttonLayout="horizontal"
-            />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('fluid')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <div class="fluid-wrap">
+          <uilib-input-number
+            [(ngModel)]="fluidValue"
+            [fluid]="true"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+          />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('fluid')" [typescript]="snippet('fluidTs')" />
     </section>
 
     <section id="reactive-forms" data-doc-anchor class="example-section">
       <h3>17. Reactive Forms</h3>
       <ui-lib-panel variant="minimal">
-          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
-            <uilib-input-number
-              formControlName="amount"
-              [min]="0"
-              [max]="1000"
-              [showButtons]="true"
-            />
-            <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
-            @if (amountControl().touched && amountControl().invalid) {
-              <p class="error-text">Amount is required and must be between 0 and 1000.</p>
-            }
-            @if (submittedAmount !== null) {
-              <p class="submitted-text">Submitted amount: {{ submittedAmount }}</p>
-            }
-          </form>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
+        <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
+          <uilib-input-number
+            formControlName="amount"
+            [min]="0"
+            [max]="1000"
+            [showButtons]="true"
           />
+          <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
+          @if (amountControl().touched && amountControl().invalid) {
+            <p class="error-text">Amount is required and must be between 0 and 1000.</p>
+          }
+          @if (submittedAmount !== null) {
+            <p class="submitted-text">Submitted amount: {{ submittedAmount }}</p>
+          }
+        </form>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippet('reactiveTs')" />
       </ui-lib-panel>
     </section>
   </div>
@@ -301,6 +273,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

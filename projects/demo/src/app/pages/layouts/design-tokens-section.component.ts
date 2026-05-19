@@ -6,6 +6,7 @@ import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -14,7 +15,15 @@ import { Panel } from 'ui-lib-custom/panel';
 @Component({
   selector: 'app-layout-design-tokens-section',
   standalone: true,
-  imports: [Panel, Tabs, Tab, DocPageHeaderComponent, DocPageLayoutComponent, CodeSnippet],
+  imports: [
+    Panel,
+    Tabs,
+    Tab,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    CodeSnippet,
+    DocCodeExampleComponent,
+  ],
   templateUrl: './design-tokens-section.component.html',
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,6 +37,22 @@ export class DesignTokensSectionComponent {
   --uilib-inset-lg: 24px;
 }
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Stack } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Stack],
+  templateUrl: './my.component.html',
+  styles: [\`
+    :host {
+      /* Override spacing tokens per component */
+      --uilib-spacing-md: 20px;
+    }
+  \`],
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

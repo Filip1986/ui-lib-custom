@@ -8,207 +8,192 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-
       <!-- Basic -->
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">A simple labeled textarea bound with <code>ngModel</code>.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm">
-              <ui-lib-textarea
-                label="Description"
-                placeholder="Enter a description..."
-                [rows]="3"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="basicValue"
-              />
-              <span class="value-text">Value: "{{ basicValue }}"</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <ui-lib-textarea
+              label="Description"
+              placeholder="Enter a description..."
+              [rows]="3"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="basicValue"
+            />
+            <span class="value-text">Value: "{{ basicValue }}"</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
       </section>
 
       <!-- Auto Resize -->
       <section id="auto-resize" data-doc-anchor class="example-section">
         <h3>b. Auto Resize</h3>
         <p class="section-text">
-          When <code>autoResize</code> is true the textarea grows in height automatically to fit
-          its content.
+          When <code>autoResize</code> is true the textarea grows in height automatically to fit its
+          content.
         </p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-textarea
-              label="Notes"
-              placeholder="Type here — the textarea will grow..."
-              [autoResize]="true"
-              [rows]="3"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="autoResizeValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('autoResize')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <ui-lib-textarea
+            label="Notes"
+            placeholder="Type here — the textarea will grow..."
+            [autoResize]="true"
+            [rows]="3"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="autoResizeValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="snippet('autoResize')"
+          [typescript]="snippetTs('autoResize')"
+        />
       </section>
 
       <!-- Counter -->
       <section id="counter" data-doc-anchor class="example-section">
         <h3>c. Counter</h3>
         <p class="section-text">Display a live character count below the textarea.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-textarea
-              label="Bio"
-              placeholder="Tell us about yourself..."
-              [showCounter]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="counterValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('counter')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <ui-lib-textarea
+            label="Bio"
+            placeholder="Tell us about yourself..."
+            [showCounter]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="counterValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('counter')" [typescript]="snippetTs('counter')" />
       </section>
 
       <!-- Max Length -->
       <section id="max-length" data-doc-anchor class="example-section">
         <h3>d. Max Length</h3>
         <p class="section-text">
-          Combine <code>maxLength</code> with <code>showCounter</code> to display a count / limit indicator.
+          Combine <code>maxLength</code> with <code>showCounter</code> to display a count / limit
+          indicator.
         </p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-textarea
-              label="Tweet"
-              placeholder="What's happening?"
-              [showCounter]="true"
-              [maxLength]="280"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="maxLengthValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('maxLength')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <ui-lib-textarea
+            label="Tweet"
+            placeholder="What's happening?"
+            [showCounter]="true"
+            [maxLength]="280"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="maxLengthValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('maxLength')" [typescript]="snippetTs('maxLength')" />
       </section>
 
       <!-- Sizes -->
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>e. Sizes</h3>
         <p class="section-text">Three size tokens: sm, md, lg.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <ui-lib-textarea
-                label="Small"
-                size="sm"
-                placeholder="Small (sm)..."
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="sizeSm"
-              />
-              <ui-lib-textarea
-                label="Medium"
-                size="md"
-                placeholder="Medium (md)..."
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="sizeMd"
-              />
-              <ui-lib-textarea
-                label="Large"
-                size="lg"
-                placeholder="Large (lg)..."
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="sizeLg"
-              />
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <ui-lib-textarea
+              label="Small"
+              size="sm"
+              placeholder="Small (sm)..."
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="sizeSm"
+            />
+            <ui-lib-textarea
+              label="Medium"
+              size="md"
+              placeholder="Medium (md)..."
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="sizeMd"
+            />
+            <ui-lib-textarea
+              label="Large"
+              size="lg"
+              placeholder="Large (lg)..."
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="sizeLg"
+            />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
       </section>
 
       <!-- Variants -->
       <section id="variants" data-doc-anchor class="example-section">
         <h3>f. Variants</h3>
         <p class="section-text">Three design variants: material, bootstrap, minimal.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <ui-lib-textarea
-                label="Material"
-                variant="material"
-                placeholder="Material variant..."
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="variantMaterial"
-              />
-              <ui-lib-textarea
-                label="Bootstrap"
-                variant="bootstrap"
-                placeholder="Bootstrap variant..."
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="variantBootstrap"
-              />
-              <ui-lib-textarea
-                label="Minimal"
-                variant="minimal"
-                placeholder="Minimal variant..."
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="variantMinimal"
-              />
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <ui-lib-textarea
+              label="Material"
+              variant="material"
+              placeholder="Material variant..."
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="variantMaterial"
+            />
+            <ui-lib-textarea
+              label="Bootstrap"
+              variant="bootstrap"
+              placeholder="Bootstrap variant..."
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="variantBootstrap"
+            />
+            <ui-lib-textarea
+              label="Minimal"
+              variant="minimal"
+              placeholder="Minimal variant..."
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="variantMinimal"
+            />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
       </section>
 
       <!-- Disabled -->
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>g. Disabled</h3>
         <p class="section-text">The textarea is non-interactive and visually dimmed.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-textarea
-              label="Comments"
-              [disabled]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="disabledValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <ui-lib-textarea
+            label="Comments"
+            [disabled]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="disabledValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
       </section>
 
       <!-- Readonly -->
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>h. Read-only</h3>
         <p class="section-text">Focusable but not editable — content can be selected and copied.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-textarea
-              label="Terms"
-              [readonly]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="readonlyValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <ui-lib-textarea
+            label="Terms"
+            [readonly]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="readonlyValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippetTs('readonly')" />
       </section>
 
       <!-- Invalid -->
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>i. Invalid</h3>
         <p class="section-text">Pass an <code>error</code> string to show a validation message.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-textarea
-              label="Address"
-              error="This field is required"
-              [required]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="invalidValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <ui-lib-textarea
+            label="Address"
+            error="This field is required"
+            [required]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="invalidValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippetTs('invalid')" />
       </section>
 
       <!-- Reactive Forms -->
@@ -217,32 +202,31 @@
         <p class="section-text">
           Full integration with Angular reactive forms including validation state and error display.
         </p>
-          <ui-lib-panel variant="minimal">
-            <form class="stack-md" [formGroup]="form" (ngSubmit)="submitForm()">
-              <ui-lib-textarea
-                label="Feedback"
-                placeholder="Share your thoughts..."
-                [showCounter]="true"
-                [maxLength]="500"
-                [required]="true"
-                [error]="form.controls.feedback.invalid && form.controls.feedback.touched
+        <ui-lib-panel variant="minimal">
+          <form class="stack-md" [formGroup]="form" (ngSubmit)="submitForm()">
+            <ui-lib-textarea
+              label="Feedback"
+              placeholder="Share your thoughts..."
+              [showCounter]="true"
+              [maxLength]="500"
+              [required]="true"
+              [error]="
+                form.controls.feedback.invalid && form.controls.feedback.touched
                   ? 'Feedback is required'
-                  : null"
-                formControlName="feedback"
-              />
-              <div class="form-actions">
-                <ui-lib-button type="submit">Submit</ui-lib-button>
-              </div>
-            </form>
-            @if (reactiveSubmittedValue) {
-              <p class="value-text">Submitted: "{{ reactiveSubmittedValue }}"</p>
-            }
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
+                  : null
+              "
+              formControlName="feedback"
+            />
+            <div class="form-actions">
+              <ui-lib-button type="submit">Submit</ui-lib-button>
+            </div>
+          </form>
+          @if (reactiveSubmittedValue) {
+            <p class="value-text">Submitted: "{{ reactiveSubmittedValue }}"</p>
+          }
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
       </section>
-
     </div>
   </app-doc-demo-viewport>
 
@@ -255,5 +239,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

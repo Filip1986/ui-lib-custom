@@ -11,6 +11,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the Fieldset component.
@@ -26,6 +27,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',
@@ -52,10 +54,58 @@ export class FieldsetDemoComponent {
 
   public readonly importCode: string = "import { Fieldset } from 'ui-lib-custom/fieldset'";
   public readonly snippetBasic: string = `<ui-lib-fieldset legend="Personal Information">\n  <!-- content -->\n</ui-lib-fieldset>`;
+  public readonly snippetBasicTs: string = `import { Component } from '@angular/core';
+import { Fieldset } from 'ui-lib-custom/fieldset';
+
+@Component({
+  standalone: true,
+  imports: [Fieldset],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetToggleable: string = `<ui-lib-fieldset\n  legend="Advanced Options"\n  [toggleable]="true"\n  [(collapsed)]="isCollapsed"\n>\n  <!-- content -->\n</ui-lib-fieldset>`;
+  public readonly snippetToggleableTs: string = `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Fieldset } from 'ui-lib-custom/fieldset';
+
+@Component({
+  standalone: true,
+  imports: [Fieldset],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isCollapsed: WritableSignal<boolean> = signal<boolean>(false);
+}`;
   public readonly snippetPreCollapsed: string = `<ui-lib-fieldset\n  legend="Hidden by Default"\n  [toggleable]="true"\n  [collapsed]="true"\n>\n  <p>Revealed on click</p>\n</ui-lib-fieldset>`;
+  public readonly snippetPreCollapsedTs: string = `import { Component } from '@angular/core';
+import { Fieldset } from 'ui-lib-custom/fieldset';
+
+@Component({
+  standalone: true,
+  imports: [Fieldset],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetCustomLegend: string = `<ui-lib-fieldset [toggleable]="true">\n  <span fieldsetLegend>\n    <i class="pi pi-user"></i> User <strong>Profile</strong>\n  </span>\n  <p>Body content</p>\n</ui-lib-fieldset>`;
+  public readonly snippetCustomLegendTs: string = `import { Component } from '@angular/core';
+import { Fieldset } from 'ui-lib-custom/fieldset';
+
+@Component({
+  standalone: true,
+  imports: [Fieldset],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetVariants: string = `<ui-lib-fieldset variant="material" legend="Material" />\n<ui-lib-fieldset variant="bootstrap" legend="Bootstrap" />\n<ui-lib-fieldset variant="minimal" legend="Minimal" />`;
+  public readonly snippetVariantsTs: string = `import { Component } from '@angular/core';
+import { Fieldset } from 'ui-lib-custom/fieldset';
+
+@Component({
+  standalone: true,
+  imports: [Fieldset],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetToggleEvent: string = `<ui-lib-fieldset\n  legend="Event Demo"\n  [toggleable]="true"\n  (toggled)="onToggle($event)"\n></ui-lib-fieldset>\n\n// component.ts\nonToggle(event: FieldsetToggleEvent): void {\n  console.log('collapsed:', event.collapsed);\n}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);

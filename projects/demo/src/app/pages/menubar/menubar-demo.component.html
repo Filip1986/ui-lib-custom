@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="Menubar"
@@ -17,20 +16,15 @@
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="basicModel" />
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetBasic"
-    />
+    <app-doc-code-example [html]="snippetBasic" [typescript]="snippetBasicTs" />
   </section>
 
   <!-- Nested submenus -->
   <section class="demo-section" id="nested-submenus" data-doc-anchor>
     <h2 class="demo-section__title">Nested Submenus</h2>
     <p class="demo-section__description">
-      Sub-items with an <code>items</code> array open a nested panel to the right.
-      Hover over an item with the &#8250; caret to see the nested panel.
+      Sub-items with an <code>items</code> array open a nested panel to the right. Hover over an
+      item with the &#8250; caret to see the nested panel.
     </p>
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="nestedModel" />
@@ -56,7 +50,9 @@
     </p>
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="commandModel" />
-      <p class="demo-hint">Last action: <strong>{{ lastClickedLabel() }}</strong></p>
+      <p class="demo-hint">
+        Last action: <strong>{{ lastClickedLabel() }}</strong>
+      </p>
     </div>
   </section>
 
@@ -95,20 +91,15 @@
         <span menubarEnd class="demo-user">&#128100; Account</span>
       </ui-lib-menubar>
     </div>
-    <ui-lib-code-snippet
-      language="html"
-      [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetStartEnd"
-    />
+    <app-doc-code-example [html]="snippetStartEnd" [typescript]="snippetStartEndTs" />
   </section>
 
   <!-- Variants -->
   <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
-      Three built-in design variants: <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code>.
+      Three built-in design variants: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>.
     </p>
     <div class="demo-section__variants">
       <div class="demo-section__variant-row">
@@ -163,7 +154,8 @@
               size="sm"
               type="button"
               (click)="setVariant(v)"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -177,7 +169,8 @@
               size="sm"
               type="button"
               (click)="setSize(s)"
-            >{{ s }}</ui-lib-button>
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -206,51 +199,137 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td><code>model</code></td><td><code>MenubarItem[]</code></td><td><code>[]</code></td><td>Array of top-level navigation items.</td></tr>
-        <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Design variant; inherits from ThemeConfigService when null.</td></tr>
-        <tr><td><code>size</code></td><td><code>'sm' | 'md' | 'lg'</code></td><td><code>'md'</code></td><td>Size token controlling font-size and padding.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS class appended to the host element.</td></tr>
-        <tr><td><code>ariaLabel</code></td><td><code>string</code></td><td><code>'Navigation'</code></td><td>Accessible label for the nav landmark.</td></tr>
+        <tr>
+          <td><code>model</code></td>
+          <td><code>MenubarItem[]</code></td>
+          <td><code>[]</code></td>
+          <td>Array of top-level navigation items.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant; inherits from ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size token controlling font-size and padding.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class appended to the host element.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Navigation'</code></td>
+          <td>Accessible label for the nav landmark.</td>
+        </tr>
       </tbody>
     </table>
 
     <h3 class="demo-section__subtitle">Menubar Outputs</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Output</th><th>Type</th><th>Description</th></tr>
+        <tr>
+          <th>Output</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td><code>(itemClick)</code></td><td><code>MenubarCommandEvent</code></td><td>Emitted when a non-disabled leaf item is activated.</td></tr>
+        <tr>
+          <td><code>(itemClick)</code></td>
+          <td><code>MenubarCommandEvent</code></td>
+          <td>Emitted when a non-disabled leaf item is activated.</td>
+        </tr>
       </tbody>
     </table>
 
     <h3 class="demo-section__subtitle">MenubarItem</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td><code>label</code></td><td><code>string</code></td><td>Display text.</td></tr>
-        <tr><td><code>icon</code></td><td><code>string</code></td><td>Icon class or ui-lib-icon name.</td></tr>
-        <tr><td><code>disabled</code></td><td><code>boolean</code></td><td>Prevents interaction.</td></tr>
-        <tr><td><code>visible</code></td><td><code>boolean</code></td><td>When false, hides the item.</td></tr>
-        <tr><td><code>separator</code></td><td><code>boolean</code></td><td>Renders a visual separator instead.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string</code></td><td>Extra CSS class on the item element.</td></tr>
-        <tr><td><code>url</code></td><td><code>string</code></td><td>Renders item as &lt;a href&gt; when set (leaf items).</td></tr>
-        <tr><td><code>target</code></td><td><code>string</code></td><td>anchor target for url-based items.</td></tr>
-        <tr><td><code>items</code></td><td><code>MenubarItem[]</code></td><td>Nested children — opens a sub-panel.</td></tr>
-        <tr><td><code>command</code></td><td><code>(event) =&gt; void</code></td><td>Callback when the item is activated.</td></tr>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string</code></td>
+          <td>Display text.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td>Icon class or ui-lib-icon name.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>Prevents interaction.</td>
+        </tr>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean</code></td>
+          <td>When false, hides the item.</td>
+        </tr>
+        <tr>
+          <td><code>separator</code></td>
+          <td><code>boolean</code></td>
+          <td>Renders a visual separator instead.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string</code></td>
+          <td>Extra CSS class on the item element.</td>
+        </tr>
+        <tr>
+          <td><code>url</code></td>
+          <td><code>string</code></td>
+          <td>Renders item as &lt;a href&gt; when set (leaf items).</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>string</code></td>
+          <td>anchor target for url-based items.</td>
+        </tr>
+        <tr>
+          <td><code>items</code></td>
+          <td><code>MenubarItem[]</code></td>
+          <td>Nested children — opens a sub-panel.</td>
+        </tr>
+        <tr>
+          <td><code>command</code></td>
+          <td><code>(event) =&gt; void</code></td>
+          <td>Callback when the item is activated.</td>
+        </tr>
       </tbody>
     </table>
 
     <h3 class="demo-section__subtitle">Content Projection</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Selector</th><th>Description</th></tr>
+        <tr>
+          <th>Selector</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td><code>[menubarStart]</code></td><td>Content rendered in the leading area (e.g. logo).</td></tr>
-        <tr><td><code>[menubarEnd]</code></td><td>Content rendered in the trailing area (e.g. action buttons).</td></tr>
+        <tr>
+          <td><code>[menubarStart]</code></td>
+          <td>Content rendered in the leading area (e.g. logo).</td>
+        </tr>
+        <tr>
+          <td><code>[menubarEnd]</code></td>
+          <td>Content rendered in the trailing area (e.g. action buttons).</td>
+        </tr>
       </tbody>
     </table>
   </section>
@@ -270,5 +349,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

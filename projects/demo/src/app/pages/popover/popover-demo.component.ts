@@ -12,6 +12,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the Popover component.
@@ -28,6 +29,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',
@@ -54,8 +56,11 @@ export class PopoverDemoComponent {
     competitiveParity: 'pending',
   };
   public readonly snippetBasic: string = `<button #trigger (click)="op.toggle(trigger)">Toggle</button>\n\n<ui-lib-popover #op>\n  <p>Popover body content.</p>\n</ui-lib-popover>`;
+  public readonly snippetBasicTs: string = `import { Component } from '@angular/core';\nimport { Popover } from 'ui-lib-custom/popover';\n\n@Component({\n  standalone: true,\n  imports: [Popover],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
   public readonly snippetHeaderClose: string = `<ui-lib-popover #op header="User Details" [showCloseButton]="true">\n  <!-- content -->\n</ui-lib-popover>`;
+  public readonly snippetHeaderCloseTs: string = `import { Component } from '@angular/core';\nimport { Popover } from 'ui-lib-custom/popover';\n\n@Component({\n  standalone: true,\n  imports: [Popover],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
   public readonly snippetDeclarative: string = `<ui-lib-popover [(visible)]="isOpen">...</ui-lib-popover>`;
+  public readonly snippetDeclarativeTs: string = `import { Component, signal } from '@angular/core';\nimport { Popover } from 'ui-lib-custom/popover';\n\n@Component({\n  standalone: true,\n  imports: [Popover],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly isOpen = signal(false);\n}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

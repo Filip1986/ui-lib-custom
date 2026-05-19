@@ -9,6 +9,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the StyleClass directive.
@@ -24,6 +25,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './style-class-demo.component.html',
   styleUrl: './style-class-demo.component.scss',
@@ -49,11 +51,28 @@ export class StyleClassDemoComponent {
   };
 
   public readonly importCode: string = "import { StyleClass } from 'ui-lib-custom/style-class'";
+
+  private readonly snippetStyleClassTs: string = `import { Component } from '@angular/core';
+import { StyleClass } from 'ui-lib-custom/style-class';
+
+@Component({
+  standalone: true,
+  imports: [StyleClass],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
+
   public readonly snippetToggleMode: string = `<button\n  [uiLibStyleClass]="'@next'"\n  toggleClass="sc-panel--open"\n>\n  Toggle Panel\n</button>\n<div class="sc-panel">...</div>`;
+  public readonly snippetToggleModeTs: string = this.snippetStyleClassTs;
   public readonly snippetFadeAnimation: string = `<button\n  [uiLibStyleClass]="'@next'"\n  enterFromClass="hidden"\n  enterActiveClass="fade-in"\n  leaveActiveClass="fade-out"\n  leaveToClass="hidden"\n  [hideOnOutsideClick]="true"\n>Show Panel</button>\n<div class="hidden">...</div>`;
+  public readonly snippetFadeAnimationTs: string = this.snippetStyleClassTs;
   public readonly snippetSlideAnimation: string = `<button\n  [uiLibStyleClass]="'@next'"\n  enterFromClass="slide-hidden"\n  enterActiveClass="slide-down"\n  enterDoneClass="slide-open"\n  leaveActiveClass="slide-up"\n  leaveDoneClass="slide-hidden"\n>Toggle Slide</button>`;
+  public readonly snippetSlideAnimationTs: string = this.snippetStyleClassTs;
   public readonly snippetSpecialSelectors: string = `<!-- @prev -->\n<div class="target">Prev target</div>\n<button [uiLibStyleClass]="'@prev'"\n        toggleClass="is-active">Toggle</button>\n\n<!-- @parent -->\n<div class="parent">\n  <button [uiLibStyleClass]="'@parent'"\n          toggleClass="is-active">Toggle</button>\n</div>`;
+  public readonly snippetSpecialSelectorsTs: string = this.snippetStyleClassTs;
   public readonly snippetCssSelector: string = `<button\n  [uiLibStyleClass]="'#my-panel'"\n  toggleClass="is-open"\n>Toggle</button>\n\n<div id="my-panel">...</div>`;
+  public readonly snippetCssSelectorTs: string = this.snippetStyleClassTs;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

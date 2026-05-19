@@ -10,158 +10,146 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Label floats on focus and stays floated while value is present.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <uilib-float-label>
-                <ui-lib-input
-                  placeholder=" "
-                  [label]="''"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="basicValue"
-                />
-                <label>Username</label>
-              </uilib-float-label>
-              <span class="value-text">Value: {{ basicValue || '(empty)' }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <uilib-float-label>
+              <ui-lib-input
+                placeholder=" "
+                [label]="''"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+              />
+              <label>Username</label>
+            </uilib-float-label>
+            <span class="value-text">Value: {{ basicValue || '(empty)' }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
       </section>
       <section id="variants" data-doc-anchor class="example-section">
         <h3>b. Variants</h3>
         <p class="section-text">Over, In, and On label positioning variants.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="row-3">
-              <div class="variant-column">
-                <p class="variant-title">over</p>
-                <uilib-float-label variant="over">
-                  <input
-                    placeholder=" "
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="variantValues.over"
-                  />
-                  <label>Over label</label>
-                </uilib-float-label>
-              </div>
-              <div class="variant-column">
-                <p class="variant-title">in</p>
-                <uilib-float-label variant="in">
-                  <input
-                    placeholder=" "
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="variantValues.in"
-                  />
-                  <label>In label</label>
-                </uilib-float-label>
-              </div>
-              <div class="variant-column">
-                <p class="variant-title">on</p>
-                <uilib-float-label variant="on">
-                  <input
-                    placeholder=" "
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="variantValues.on"
-                  />
-                  <label>On label</label>
-                </uilib-float-label>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            <div class="variant-column">
+              <p class="variant-title">over</p>
+              <uilib-float-label variant="over">
+                <input
+                  placeholder=" "
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="variantValues.over"
+                />
+                <label>Over label</label>
+              </uilib-float-label>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
-          [showLineNumbers]="true"
-          />
+            <div class="variant-column">
+              <p class="variant-title">in</p>
+              <uilib-float-label variant="in">
+                <input
+                  placeholder=" "
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="variantValues.in"
+                />
+                <label>In label</label>
+              </uilib-float-label>
+            </div>
+            <div class="variant-column">
+              <p class="variant-title">on</p>
+              <uilib-float-label variant="on">
+                <input
+                  placeholder=" "
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="variantValues.on"
+                />
+                <label>On label</label>
+              </uilib-float-label>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
       </section>
       <section id="with-select" data-doc-anchor class="example-section">
         <h3>c. With Select</h3>
         <p class="section-text">Uses wrapper state classes from `ui-lib-select` host.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <uilib-float-label>
-                <ui-lib-select
-                  [options]="cityOptions"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="selectedCity"
-                />
-                <label>City</label>
-              </uilib-float-label>
-              <span class="value-text">Selected: {{ selectedCity || '(none)' }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('select')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <uilib-float-label>
+              <ui-lib-select
+                [options]="cityOptions"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="selectedCity"
+              />
+              <label>City</label>
+            </uilib-float-label>
+            <span class="value-text">Selected: {{ selectedCity || '(none)' }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('select')" [typescript]="snippetTs('select')" />
       </section>
       <section id="with-textarea" data-doc-anchor class="example-section">
         <h3>d. With Textarea</h3>
         <p class="section-text">Label stays top-aligned for textarea controls.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-float-label>
-              <textarea
-                placeholder=" "
-                rows="4"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="notes"
-              ></textarea>
-              <label>Notes</label>
-            </uilib-float-label>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('textarea')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <uilib-float-label>
+            <textarea
+              placeholder=" "
+              rows="4"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="notes"
+            ></textarea>
+            <label>Notes</label>
+          </uilib-float-label>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('textarea')" [typescript]="snippetTs('textarea')" />
       </section>
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>e. Invalid</h3>
         <p class="section-text">Required validation with dirty state across all variants.</p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="invalidForm" class="stack-md" novalidate>
-              <div class="row-3">
-                <uilib-float-label variant="over">
-                  <input placeholder=" " formControlName="over" />
-                  <label>Required over</label>
-                </uilib-float-label>
-                <uilib-float-label variant="in">
-                  <input placeholder=" " formControlName="in" />
-                  <label>Required in</label>
-                </uilib-float-label>
-                <uilib-float-label variant="on">
-                  <input placeholder=" " formControlName="on" />
-                  <label>Required on</label>
-                </uilib-float-label>
-              </div>
-              <ui-lib-button type="button" severity="primary" (click)="markInvalidAsDirty()">
-                Mark invalid controls dirty
-              </ui-lib-button>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="invalidForm" class="stack-md" novalidate>
+            <div class="row-3">
+              <uilib-float-label variant="over">
+                <input placeholder=" " formControlName="over" />
+                <label>Required over</label>
+              </uilib-float-label>
+              <uilib-float-label variant="in">
+                <input placeholder=" " formControlName="in" />
+                <label>Required in</label>
+              </uilib-float-label>
+              <uilib-float-label variant="on">
+                <input placeholder=" " formControlName="on" />
+                <label>Required on</label>
+              </uilib-float-label>
+            </div>
+            <ui-lib-button type="button" severity="primary" (click)="markInvalidAsDirty()">
+              Mark invalid controls dirty
+            </ui-lib-button>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippetTs('invalid')" />
       </section>
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>f. Reactive Forms</h3>
         <p class="section-text">FloatLabel inside a FormGroup with native and wrapper controls.</p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
-              <uilib-float-label>
-                <input placeholder=" " formControlName="firstName" />
-                <label>First name</label>
-              </uilib-float-label>
-              <uilib-float-label>
-                <ui-lib-select [options]="cityOptions" formControlName="city" />
-                <label>City</label>
-              </uilib-float-label>
-              <uilib-float-label variant="in">
-                <textarea placeholder=" " rows="3" formControlName="bio"></textarea>
-                <label>Bio</label>
-              </uilib-float-label>
-              <ui-lib-button type="submit" severity="primary">Submit reactive form</ui-lib-button>
-              <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
+            <uilib-float-label>
+              <input placeholder=" " formControlName="firstName" />
+              <label>First name</label>
+            </uilib-float-label>
+            <uilib-float-label>
+              <ui-lib-select [options]="cityOptions" formControlName="city" />
+              <label>City</label>
+            </uilib-float-label>
+            <uilib-float-label variant="in">
+              <textarea placeholder=" " rows="3" formControlName="bio"></textarea>
+              <label>Bio</label>
+            </uilib-float-label>
+            <ui-lib-button type="submit" severity="primary">Submit reactive form</ui-lib-button>
+            <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
       </section>
     </div>
   </app-doc-demo-viewport>
@@ -176,5 +164,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

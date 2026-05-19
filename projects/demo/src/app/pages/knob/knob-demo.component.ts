@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -40,6 +41,7 @@ type KnobDemoSnippetKey =
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',
@@ -106,6 +108,124 @@ export class KnobDemoComponent {
 
   public snippet(key: KnobDemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  private readonly snippetsTs: Record<KnobDemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 40;
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 40;
+}`,
+    step: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 0;
+}`,
+    minmax: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = -20;
+}`,
+    template: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 60;
+}`,
+    colors: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 75;
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 55;
+}`,
+    readonly: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 30;
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { KnobComponent } from 'ui-lib-custom/knob';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, KnobComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly form: FormGroup = new FormGroup({
+    brightness: new FormControl<number>(70),
+    contrast: new FormControl<number>(50),
+  });
+}`,
+  };
+
+  public snippetTs(key: KnobDemoSnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public get brightnessControl(): FormControl<number> {

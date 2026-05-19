@@ -11,223 +11,293 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Phone mask with ngModel and a live model preview.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm">
-              <uilib-input-mask mask="(999) 999-9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="basicValue" />
-              <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <uilib-input-mask
+              mask="(999) 999-9999"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="basicValue"
+            />
+            <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippet('basicTs')" />
       </section>
 
       <section id="mask-formats" data-doc-anchor class="example-section">
         <h3>b. Mask Formats</h3>
         <p class="section-text">Phone, date, SSN, and mixed alphanumeric serial examples.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <div class="stack-xs">
-                <label>Phone</label>
-                <uilib-input-mask mask="(999) 999-9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="formatValues.phone" />
-              </div>
-              <div class="stack-xs">
-                <label>Date</label>
-                <uilib-input-mask mask="99/99/9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="formatValues.date" />
-              </div>
-              <div class="stack-xs">
-                <label>SSN</label>
-                <uilib-input-mask mask="999-99-9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="formatValues.ssn" />
-              </div>
-              <div class="stack-xs">
-                <label>Serial</label>
-                <uilib-input-mask mask="a*-999-a999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="formatValues.serial" />
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <div class="stack-xs">
+              <label>Phone</label>
+              <uilib-input-mask
+                mask="(999) 999-9999"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="formatValues.phone"
+              />
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('formats')" 
-          [showLineNumbers]="true"
-          />
+            <div class="stack-xs">
+              <label>Date</label>
+              <uilib-input-mask
+                mask="99/99/9999"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="formatValues.date"
+              />
+            </div>
+            <div class="stack-xs">
+              <label>SSN</label>
+              <uilib-input-mask
+                mask="999-99-9999"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="formatValues.ssn"
+              />
+            </div>
+            <div class="stack-xs">
+              <label>Serial</label>
+              <uilib-input-mask
+                mask="a*-999-a999"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="formatValues.serial"
+              />
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('formats')" [typescript]="snippet('formatsTs')" />
       </section>
 
       <section id="optional" data-doc-anchor class="example-section">
         <h3>c. Optional</h3>
         <p class="section-text">Optional extension segment (`?`) with autoClear toggle.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm">
-              <label class="inline-checkbox">
-                <input type="checkbox" [ngModelOptions]="{ standalone: true }" [(ngModel)]="optionalAutoClear" />
-                autoClear
-              </label>
-              <uilib-input-mask mask="(999) 999-9999? x99999" [autoClear]="optionalAutoClear" [ngModelOptions]="{ standalone: true }" [(ngModel)]="optionalValue" />
-              <span class="value-text">Value: {{ formatValue(optionalValue) }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('optional')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <label class="inline-checkbox">
+              <input
+                type="checkbox"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="optionalAutoClear"
+              />
+              autoClear
+            </label>
+            <uilib-input-mask
+              mask="(999) 999-9999? x99999"
+              [autoClear]="optionalAutoClear"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="optionalValue"
+            />
+            <span class="value-text">Value: {{ formatValue(optionalValue) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('optional')" [typescript]="snippet('optionalTs')" />
       </section>
 
       <section id="slot-character" data-doc-anchor class="example-section">
         <h3>d. Slot Character</h3>
         <p class="section-text">Compare `_`, `#`, and `*` placeholder slot characters.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="row-3">
-              <div class="stack-xs">
-                <label>_</label>
-                <uilib-input-mask mask="999-999" slotChar="_" [keepBuffer]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="slotValues.underscore" />
-              </div>
-              <div class="stack-xs">
-                <label>#</label>
-                <uilib-input-mask mask="999-999" slotChar="#" [keepBuffer]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="slotValues.hash" />
-              </div>
-              <div class="stack-xs">
-                <label>*</label>
-                <uilib-input-mask mask="999-999" slotChar="*" [keepBuffer]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="slotValues.star" />
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            <div class="stack-xs">
+              <label>_</label>
+              <uilib-input-mask
+                mask="999-999"
+                slotChar="_"
+                [keepBuffer]="true"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="slotValues.underscore"
+              />
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('slotChars')" 
-          [showLineNumbers]="true"
-          />
+            <div class="stack-xs">
+              <label>#</label>
+              <uilib-input-mask
+                mask="999-999"
+                slotChar="#"
+                [keepBuffer]="true"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="slotValues.hash"
+              />
+            </div>
+            <div class="stack-xs">
+              <label>*</label>
+              <uilib-input-mask
+                mask="999-999"
+                slotChar="*"
+                [keepBuffer]="true"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="slotValues.star"
+              />
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('slotChars')" [typescript]="snippet('slotCharsTs')" />
       </section>
 
       <section id="unmask" data-doc-anchor class="example-section">
         <h3>e. Unmask</h3>
         <p class="section-text">Side-by-side formatted model output and raw unmasked output.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="row-2">
-              <div class="stack-xs">
-                <p class="variant-title">Formatted model (`unmask=false`)</p>
-                <uilib-input-mask mask="(999) 999-9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="maskedModel" />
-                <span class="value-text">{{ formatValue(maskedModel) }}</span>
-              </div>
-              <div class="stack-xs">
-                <p class="variant-title">Raw model (`unmask=true`)</p>
-                <uilib-input-mask mask="(999) 999-9999" [unmask]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="unmaskedModel" />
-                <span class="value-text">{{ formatValue(unmaskedModel) }}</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="row-2">
+            <div class="stack-xs">
+              <p class="variant-title">Formatted model (`unmask=false`)</p>
+              <uilib-input-mask
+                mask="(999) 999-9999"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="maskedModel"
+              />
+              <span class="value-text">{{ formatValue(maskedModel) }}</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('unmask')" 
-          [showLineNumbers]="true"
-          />
+            <div class="stack-xs">
+              <p class="variant-title">Raw model (`unmask=true`)</p>
+              <uilib-input-mask
+                mask="(999) 999-9999"
+                [unmask]="true"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="unmaskedModel"
+              />
+              <span class="value-text">{{ formatValue(unmaskedModel) }}</span>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('unmask')" [typescript]="snippet('unmaskTs')" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
         <h3>f. Filled</h3>
         <p class="section-text">Filled state styling using the `filled` input.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-mask mask="(999) 999-9999" [filled]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="filledValue" />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <uilib-input-mask
+            mask="(999) 999-9999"
+            [filled]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="filledValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippet('filledTs')" />
       </section>
 
       <section id="float-label" data-doc-anchor class="example-section">
         <h3>g. Float Label</h3>
         <p class="section-text">`uilib-input-mask` composed inside `uilib-float-label`.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-float-label>
-              <uilib-input-mask mask="(999) 999-9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="floatValue" />
-              <label>Phone</label>
-            </uilib-float-label>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <uilib-float-label>
+            <uilib-input-mask
+              mask="(999) 999-9999"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="floatValue"
+            />
+            <label>Phone</label>
+          </uilib-float-label>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="snippet('floatLabel')"
+          [typescript]="snippet('floatLabelTs')"
+        />
       </section>
 
       <section id="ifta-label" data-doc-anchor class="example-section">
         <h3>h. Ifta Label</h3>
         <p class="section-text">Inline label style via `uilib-float-label` with `variant="in"`.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-float-label variant="in">
-              <uilib-input-mask mask="(999) 999-9999" [ngModelOptions]="{ standalone: true }" [(ngModel)]="iftaValue" />
-              <label>Phone</label>
-            </uilib-float-label>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('iftaLabel')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <uilib-float-label variant="in">
+            <uilib-input-mask
+              mask="(999) 999-9999"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="iftaValue"
+            />
+            <label>Phone</label>
+          </uilib-float-label>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('iftaLabel')" [typescript]="snippet('iftaLabelTs')" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>i. Sizes</h3>
         <p class="section-text">Small, medium, and large InputMask size variants.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="row-3">
-              @for (item of sizeItems; track item.size) {
-                <div class="stack-xs">
-                  <label>{{ item.label }}</label>
-                  <uilib-input-mask mask="(999) 999-9999" [size]="item.size" [ngModelOptions]="{ standalone: true }" [(ngModel)]="item.value" />
-                </div>
-              }
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            @for (item of sizeItems; track item.size) {
+              <div class="stack-xs">
+                <label>{{ item.label }}</label>
+                <uilib-input-mask
+                  mask="(999) 999-9999"
+                  [size]="item.size"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="item.value"
+                />
+              </div>
+            }
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
       </section>
 
       <section id="fluid" data-doc-anchor class="example-section">
         <h3>j. Fluid</h3>
         <p class="section-text">Full-width mask input using the `fluid` input.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm fluid-wrap">
-              <uilib-input-mask mask="(999) 999-9999" [fluid]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="fluidValue" />
-              <span class="value-text">Value: {{ formatValue(fluidValue) }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('fluid')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm fluid-wrap">
+            <uilib-input-mask
+              mask="(999) 999-9999"
+              [fluid]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="fluidValue"
+            />
+            <span class="value-text">Value: {{ formatValue(fluidValue) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('fluid')" [typescript]="snippet('fluidTs')" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>k. Disabled</h3>
         <p class="section-text">Disabled input with a pre-filled value.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-mask mask="(999) 999-9999" [disabled]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="disabledValue" />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <uilib-input-mask
+            mask="(999) 999-9999"
+            [disabled]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="disabledValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippet('disabledTs')" />
       </section>
 
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>l. Invalid</h3>
         <p class="section-text">Invalid state styling for validation feedback scenarios.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm">
-              <uilib-input-mask mask="(999) 999-9999" [invalid]="true" [ngModelOptions]="{ standalone: true }" [(ngModel)]="invalidValue" />
-              <span class="error-text">Please provide a complete phone number.</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <uilib-input-mask
+              mask="(999) 999-9999"
+              [invalid]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="invalidValue"
+            />
+            <span class="error-text">Please provide a complete phone number.</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippet('invalidTs')" />
       </section>
 
       <section id="reactive-forms" data-doc-anchor class="example-section">
         <h3>m. Reactive Forms</h3>
         <p class="section-text">ControlValueAccessor integration in a typed FormGroup.</p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
-              <uilib-input-mask mask="(999) 999-9999" formControlName="phone" [invalid]="reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched" />
-              @if (reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched) {
-                <span class="error-text">Phone number is required.</span>
-              }
-              <div class="row-inline">
-                <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-                <span class="value-text">Submitted: {{ formatValue(reactiveSubmittedValue) }}</span>
-              </div>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
+            <uilib-input-mask
+              mask="(999) 999-9999"
+              formControlName="phone"
+              [invalid]="reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched"
+            />
+            @if (reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched) {
+              <span class="error-text">Phone number is required.</span>
+            }
+            <div class="row-inline">
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <span class="value-text">Submitted: {{ formatValue(reactiveSubmittedValue) }}</span>
+            </div>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippet('reactiveTs')" />
       </section>
     </div>
   </app-doc-demo-viewport>
@@ -241,6 +311,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

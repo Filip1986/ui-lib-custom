@@ -24,6 +24,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface AriaRow {
   readonly element: string;
@@ -51,6 +52,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
@@ -102,16 +104,41 @@ export class TieredMenuDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly nested: string;
     readonly popup: string;
+    readonly popupTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly itemStates: string;
     readonly urlItems: string;
   } = {
     import: `import { TieredMenu } from 'ui-lib-custom/tiered-menu';
 import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
     basic: `<ui-lib-tiered-menu [model]="items" (itemClick)="onItemClick($event)" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem, TieredMenuItemCommandEvent } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'New File', icon: 'pi pi-file' },
+    { label: 'Open', icon: 'pi pi-folder-open' },
+    { separator: true },
+    { label: 'Save', icon: 'pi pi-save' },
+  ];
+
+  onItemClick(event: TieredMenuItemCommandEvent): void {
+    console.log('Clicked:', event.item.label);
+  }
+}`,
     nested: `items: TieredMenuItem[] = [
   {
     label: 'File', icon: 'pi pi-file',
@@ -137,12 +164,63 @@ import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
   Open Menu ▾
 </ui-lib-button>
 <ui-lib-tiered-menu #popupMenu [model]="items" [popup]="true" />`,
+    popupTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import { Button } from 'ui-lib-custom/button';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'Profile', icon: 'pi pi-user' },
+    { label: 'Settings', icon: 'pi pi-cog' },
+    { separator: true },
+    { label: 'Logout', icon: 'pi pi-sign-out' },
+  ];
+}`,
     variants: `<ui-lib-tiered-menu [model]="items" variant="material"  />
 <ui-lib-tiered-menu [model]="items" variant="bootstrap" />
 <ui-lib-tiered-menu [model]="items" variant="minimal"   />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'Dashboard', icon: 'pi pi-home' },
+    { label: 'Reports', icon: 'pi pi-chart-line' },
+    { separator: true },
+    { label: 'Settings', icon: 'pi pi-cog' },
+  ];
+}`,
     sizes: `<ui-lib-tiered-menu [model]="items" size="sm" />
 <ui-lib-tiered-menu [model]="items" size="md" />
 <ui-lib-tiered-menu [model]="items" size="lg" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'Item One', icon: 'pi pi-circle' },
+    { label: 'Item Two', icon: 'pi pi-circle' },
+    { label: 'Item Three', icon: 'pi pi-circle' },
+  ];
+}`,
     itemStates: `items: TieredMenuItem[] = [
   { label: 'Enabled',  icon: 'pi pi-check' },
   { label: 'Disabled', icon: 'pi pi-ban',  disabled: true },

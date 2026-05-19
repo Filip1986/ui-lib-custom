@@ -6,10 +6,8 @@
     description="Accessible, signal-friendly checkbox supporting binary and group modes, customizable values, and form integrations."
   />
 
-    <app-checkbox-basic-example />
-  <ui-lib-code-snippet language="html" [code]="checkboxExample" 
-    [showLineNumbers]="true"
-    />
+  <app-checkbox-basic-example />
+  <app-doc-code-example [html]="checkboxExample" [typescript]="checkboxExampleTs" />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -202,7 +200,11 @@
               [(checked)]="indeterminateChecked"
               (checkedChange)="onIndeterminateChange($event)"
             />
-            <ui-lib-button size="sm" variant="minimal" appearance="ghost" (click)="resetIndeterminateState()"
+            <ui-lib-button
+              size="sm"
+              variant="minimal"
+              appearance="ghost"
+              (click)="resetIndeterminateState()"
               >Reset to mixed</ui-lib-button
             >
           </div>
@@ -305,7 +307,10 @@
 
   @if (activeTab() === 'variants') {
     <ui-lib-panel variant="minimal">
-      <p>All three variants are shown in both outlined and filled appearance, plus size and state examples.</p>
+      <p>
+        All three variants are shown in both outlined and filled appearance, plus size and state
+        examples.
+      </p>
 
       <h3>Outlined vs Filled across variants</h3>
       <div class="appearance-matrix">
@@ -410,7 +415,11 @@
 
         <div class="form-card">
           <h3>Template-driven required</h3>
-          <form #templateForm="ngForm" class="form-stack" (ngSubmit)="submitTemplateForm(templateForm)">
+          <form
+            #templateForm="ngForm"
+            class="form-stack"
+            (ngSubmit)="submitTemplateForm(templateForm)"
+          >
             <ui-lib-checkbox
               name="templateAccepted"
               [required]="true"
@@ -525,10 +534,11 @@
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="snippets.usage"
+        language="typescript"
+        filename="Usage"
+        [code]="snippets.usage"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      ></ui-lib-code-snippet>
     </ui-lib-panel>
   }
 
@@ -536,20 +546,20 @@
     <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li>
-          <strong>Native semantics:</strong> a hidden native input owns checkbox ARIA semantics
-          and keyboard behavior.
+          <strong>Native semantics:</strong> a hidden native input owns checkbox ARIA semantics and
+          keyboard behavior.
         </li>
         <li>
-          <strong>Keyboard:</strong> focus and toggle are driven by the input, with visible
-          focus styling on the custom box.
+          <strong>Keyboard:</strong> focus and toggle are driven by the input, with visible focus
+          styling on the custom box.
         </li>
         <li>
           <strong>Labeling:</strong> support inline label text, projected content,
           <code>ariaLabel</code>, and external <code>label[for]</code> through <code>inputId</code>.
         </li>
         <li>
-          <strong>Modes:</strong> binary mode uses scalar values, while group mode uses arrays;
-          both are form-compatible.
+          <strong>Modes:</strong> binary mode uses scalar values, while group mode uses arrays; both
+          are form-compatible.
         </li>
       </ul>
     </ui-lib-panel>
@@ -564,5 +574,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

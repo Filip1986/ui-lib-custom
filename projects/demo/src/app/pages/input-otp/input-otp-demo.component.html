@@ -8,154 +8,161 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-
       <!-- a. Basic -->
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Four-cell OTP with ngModel binding and live value preview.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm">
-              <uilib-input-otp
-                [length]="4"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="basicValue"
-              />
-              <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <uilib-input-otp
+              [length]="4"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="basicValue"
+            />
+            <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippet('basicTs')" />
       </section>
 
       <!-- b. Mask -->
       <section id="mask" data-doc-anchor class="example-section">
         <h3>b. Mask</h3>
         <p class="section-text">Password-style dots for sensitive codes such as PINs.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-otp
-              [length]="6"
-              [mask]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="maskValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('mask')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <uilib-input-otp
+            [length]="6"
+            [mask]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="maskValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('mask')" [typescript]="snippet('maskTs')" />
       </section>
 
       <!-- c. Integer Only -->
       <section id="integer-only" data-doc-anchor class="example-section">
         <h3>c. Integer Only</h3>
-        <p class="section-text">Restricts each cell to digits 0–9, rejecting all other keystrokes.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-sm">
-              <uilib-input-otp
-                [length]="4"
-                [integerOnly]="true"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="integerValue"
-              />
-              <span class="value-text">Value: {{ formatValue(integerValue) }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('integerOnly')" 
-          [showLineNumbers]="true"
-          />
+        <p class="section-text">
+          Restricts each cell to digits 0–9, rejecting all other keystrokes.
+        </p>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <uilib-input-otp
+              [length]="4"
+              [integerOnly]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="integerValue"
+            />
+            <span class="value-text">Value: {{ formatValue(integerValue) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="snippet('integerOnly')"
+          [typescript]="snippet('integerOnlyTs')"
+        />
       </section>
 
       <!-- d. Sizes -->
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>d. Sizes</h3>
-        <p class="section-text">Three size tokens — <code>sm</code>, <code>md</code> (default), <code>lg</code>.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <div class="stack-xs">
-                <label>Small</label>
-                <uilib-input-otp [length]="4" size="sm" [ngModelOptions]="{ standalone: true }" [(ngModel)]="sizeValues.sm" />
-              </div>
-              <div class="stack-xs">
-                <label>Medium</label>
-                <uilib-input-otp [length]="4" size="md" [ngModelOptions]="{ standalone: true }" [(ngModel)]="sizeValues.md" />
-              </div>
-              <div class="stack-xs">
-                <label>Large</label>
-                <uilib-input-otp [length]="4" size="lg" [ngModelOptions]="{ standalone: true }" [(ngModel)]="sizeValues.lg" />
-              </div>
+        <p class="section-text">
+          Three size tokens — <code>sm</code>, <code>md</code> (default), <code>lg</code>.
+        </p>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <div class="stack-xs">
+              <label>Small</label>
+              <uilib-input-otp
+                [length]="4"
+                size="sm"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizeValues.sm"
+              />
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
+            <div class="stack-xs">
+              <label>Medium</label>
+              <uilib-input-otp
+                [length]="4"
+                size="md"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizeValues.md"
+              />
+            </div>
+            <div class="stack-xs">
+              <label>Large</label>
+              <uilib-input-otp
+                [length]="4"
+                size="lg"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizeValues.lg"
+              />
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
       </section>
 
       <!-- e. Filled -->
       <section id="filled" data-doc-anchor class="example-section">
         <h3>e. Filled</h3>
-        <p class="section-text">Filled background variant for surfaces that need stronger contrast.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-otp
-              [length]="4"
-              [filled]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="filledValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
-          [showLineNumbers]="true"
+        <p class="section-text">
+          Filled background variant for surfaces that need stronger contrast.
+        </p>
+        <ui-lib-panel variant="minimal">
+          <uilib-input-otp
+            [length]="4"
+            [filled]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="filledValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippet('filledTs')" />
       </section>
 
       <!-- f. Disabled -->
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>f. Disabled</h3>
         <p class="section-text">All cells are non-interactive and rendered with reduced opacity.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-otp
-              [length]="4"
-              [disabled]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="disabledValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <uilib-input-otp
+            [length]="4"
+            [disabled]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="disabledValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippet('disabledTs')" />
       </section>
 
       <!-- g. Invalid -->
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>g. Invalid</h3>
         <p class="section-text">Error border applied to all cells when validation fails.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-otp
-              [length]="4"
-              [invalid]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="invalidValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <uilib-input-otp
+            [length]="4"
+            [invalid]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="invalidValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippet('invalidTs')" />
       </section>
 
       <!-- h. Read Only -->
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>h. Read Only</h3>
         <p class="section-text">Cells display a value but do not accept new input.</p>
-          <ui-lib-panel variant="minimal">
-            <uilib-input-otp
-              [length]="4"
-              [readonly]="true"
-              [ngModelOptions]="{ standalone: true }"
-              [(ngModel)]="readonlyValue"
-            />
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <uilib-input-otp
+            [length]="4"
+            [readonly]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="readonlyValue"
           />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippet('readonlyTs')" />
       </section>
 
       <!-- i. Reactive Forms -->
@@ -165,30 +172,27 @@
           Six-digit numeric code with <code>Validators.required</code> and
           <code>Validators.minLength(6)</code>. Invalid styling activates on touch.
         </p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-              <div class="stack-md">
-                <uilib-input-otp
-                  [length]="6"
-                  [integerOnly]="true"
-                  formControlName="code"
-                  [invalid]="reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched"
-                />
-                <ui-lib-button type="submit" color="primary">Verify</ui-lib-button>
-                @if (submittedCode !== null) {
-                  <span class="value-text">Submitted: {{ submittedCode }}</span>
-                }
-                @if (reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched) {
-                  <span class="error-text">Please enter all 6 digits.</span>
-                }
-              </div>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+            <div class="stack-md">
+              <uilib-input-otp
+                [length]="6"
+                [integerOnly]="true"
+                formControlName="code"
+                [invalid]="reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched"
+              />
+              <ui-lib-button type="submit" color="primary">Verify</ui-lib-button>
+              @if (submittedCode !== null) {
+                <span class="value-text">Submitted: {{ submittedCode }}</span>
+              }
+              @if (reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched) {
+                <span class="error-text">Please enter all 6 digits.</span>
+              }
+            </div>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippet('reactiveTs')" />
       </section>
-
     </div>
   </app-doc-demo-viewport>
 
@@ -202,5 +206,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

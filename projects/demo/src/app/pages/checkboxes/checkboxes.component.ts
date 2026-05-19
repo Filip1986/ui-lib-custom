@@ -32,6 +32,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };
@@ -57,6 +58,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     ReactiveFormsModule,
     CheckboxBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -196,6 +198,17 @@ export class SettingsComponent {
   } as const;
 
   public readonly checkboxExample: string = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
+  public readonly checkboxExampleTs: string = `import { Component } from '@angular/core';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+
+@Component({
+  standalone: true,
+  imports: [Checkbox],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public checkedPrimary: boolean = false;
+}`;
 
   public selectVariant(value: CheckboxVariant): void {
     this.variant.set(value);

@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="TieredMenu" [importCode]="importCode">
     <p class="doc-description">
       A hierarchical flyout menu supporting arbitrarily deep nesting. Works in both
@@ -7,9 +6,11 @@
       ARIA roles, and keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet [code]="snippets.import" language="typescript"
+      <ui-lib-code-snippet
+        [code]="snippets.import"
+        language="typescript"
         [showLineNumbers]="true"
-        />
+      />
     </div>
   </app-doc-page-header>
 
@@ -52,9 +53,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.basic" language="html" 
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.basic" [typescript]="snippets.basicTs" />
   </section>
 
   <!-- ── Nested ────────────────────────────────────────────────────────────── -->
@@ -74,9 +73,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.nested" language="typescript" 
-      [showLineNumbers]="true"
-      />
+    <ui-lib-code-snippet [code]="snippets.nested" language="typescript" [showLineNumbers]="true" />
   </section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
@@ -113,9 +110,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.popup" language="html" 
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.popup" [typescript]="snippets.popupTs" />
   </section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
@@ -137,7 +132,8 @@
               size="sm"
               type="button"
               (click)="setVariant($any(v))"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -145,9 +141,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="nestedItems" [variant]="variant()" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.variants" language="html" 
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.variants" [typescript]="snippets.variantsTs" />
   </section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
@@ -168,7 +162,8 @@
               size="sm"
               type="button"
               (click)="setSize($any(s))"
-            >{{ s }}</ui-lib-button>
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -176,9 +171,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="basicItems" [size]="size()" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.sizes" language="html" 
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.sizes" [typescript]="snippets.sizesTs" />
   </section>
 
   <!-- ── Item States ───────────────────────────────────────────────────────── -->
@@ -199,9 +192,11 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.itemStates" language="typescript" 
+    <ui-lib-code-snippet
+      [code]="snippets.itemStates"
+      language="typescript"
       [showLineNumbers]="true"
-      />
+    />
   </section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
@@ -214,9 +209,11 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="urlItems" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.urlItems" language="typescript" 
+    <ui-lib-code-snippet
+      [code]="snippets.urlItems"
+      language="typescript"
       [showLineNumbers]="true"
-      />
+    />
   </section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
@@ -226,26 +223,39 @@
     <h3 class="demo-section__subtitle">Inputs</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
           <td><code>model</code></td>
           <td><code>TieredMenuItem[]</code></td>
           <td><code>[]</code></td>
-          <td>Array of items to display. Items with an <code>items</code> array open nested flyout panels.</td>
+          <td>
+            Array of items to display. Items with an <code>items</code> array open nested flyout
+            panels.
+          </td>
         </tr>
         <tr>
           <td><code>popup</code></td>
           <td><code>boolean</code></td>
           <td><code>false</code></td>
-          <td>When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.</td>
+          <td>
+            When <code>true</code>, renders as a floating fixed overlay. Control with
+            <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.
+          </td>
         </tr>
         <tr>
           <td><code>variant</code></td>
           <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
           <td><code>null</code></td>
-          <td>Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
+          <td>
+            Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.
+          </td>
         </tr>
         <tr>
           <td><code>size</code></td>
@@ -271,7 +281,11 @@
     <h3 class="demo-section__subtitle">Outputs</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Name</th><th>Payload</th><th>Description</th></tr>
+        <tr>
+          <th>Name</th>
+          <th>Payload</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
@@ -295,13 +309,19 @@
     <h3 class="demo-section__subtitle">Methods</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Name</th><th>Parameters</th><th>Description</th></tr>
+        <tr>
+          <th>Name</th>
+          <th>Parameters</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
           <td><code>show(event)</code></td>
           <td><code>MouseEvent | KeyboardEvent</code></td>
-          <td>Opens the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.</td>
+          <td>
+            Opens the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.
+          </td>
         </tr>
         <tr>
           <td><code>hide()</code></td>
@@ -319,19 +339,69 @@
     <h3 class="demo-section__subtitle">TieredMenuItem</h3>
     <table class="demo-api-table">
       <thead>
-        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td><code>label</code></td><td><code>string?</code></td><td>Display text for the item.</td></tr>
-        <tr><td><code>icon</code></td><td><code>string?</code></td><td>Icon class applied to a <code>&lt;span aria-hidden="true"&gt;</code>.</td></tr>
-        <tr><td><code>items</code></td><td><code>TieredMenuItem[]?</code></td><td>Child items — renders a right-arrow caret and opens a flyout sub-panel on hover or <kbd>ArrowRight</kbd>.</td></tr>
-        <tr><td><code>disabled</code></td><td><code>boolean?</code></td><td>When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and <code>tabindex="-1"</code>.</td></tr>
-        <tr><td><code>separator</code></td><td><code>boolean?</code></td><td>Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.</td></tr>
-        <tr><td><code>visible</code></td><td><code>boolean?</code></td><td>When explicitly <code>false</code>, excludes the item from the rendered list.</td></tr>
-        <tr><td><code>url</code></td><td><code>string?</code></td><td>Renders the item as <code>&lt;a href="..."&gt;</code>.</td></tr>
-        <tr><td><code>target</code></td><td><code>string?</code></td><td><code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).</td></tr>
-        <tr><td><code>command</code></td><td><code>function?</code></td><td>Callback invoked when the item is activated.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string?</code></td><td>Extra CSS class added to the <code>&lt;li&gt;</code> element.</td></tr>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string?</code></td>
+          <td>Display text for the item.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string?</code></td>
+          <td>Icon class applied to a <code>&lt;span aria-hidden="true"&gt;</code>.</td>
+        </tr>
+        <tr>
+          <td><code>items</code></td>
+          <td><code>TieredMenuItem[]?</code></td>
+          <td>
+            Child items — renders a right-arrow caret and opens a flyout sub-panel on hover or
+            <kbd>ArrowRight</kbd>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean?</code></td>
+          <td>
+            When <code>true</code>, item is non-interactive; gets
+            <code>aria-disabled="true"</code> and <code>tabindex="-1"</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>separator</code></td>
+          <td><code>boolean?</code></td>
+          <td>Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.</td>
+        </tr>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean?</code></td>
+          <td>When explicitly <code>false</code>, excludes the item from the rendered list.</td>
+        </tr>
+        <tr>
+          <td><code>url</code></td>
+          <td><code>string?</code></td>
+          <td>Renders the item as <code>&lt;a href="..."&gt;</code>.</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>string?</code></td>
+          <td><code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>command</code></td>
+          <td><code>function?</code></td>
+          <td>Callback invoked when the item is activated.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string?</code></td>
+          <td>Extra CSS class added to the <code>&lt;li&gt;</code> element.</td>
+        </tr>
       </tbody>
     </table>
 
@@ -378,8 +448,8 @@
       </li>
       <li>
         Popup trigger ARIA wiring is the consumer's responsibility — the component exposes
-        <code>menuId</code> and <code>isVisible()</code> for binding <code>aria-controls</code>
-        and <code>aria-expanded</code>.
+        <code>menuId</code> and <code>isVisible()</code> for binding <code>aria-controls</code> and
+        <code>aria-expanded</code>.
       </li>
       <li>
         Both SCSS files include <code>@media (prefers-reduced-motion: reduce)</code> blocks that
@@ -397,5 +467,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

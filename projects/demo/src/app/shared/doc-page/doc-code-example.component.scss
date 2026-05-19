@@ -1,0 +1,14 @@
+.doc-code-example {
+  .ui-lib-tabs {
+    // Remove default tabs padding so code snippet fills the panel flush
+    .ui-lib-tabs__panels {
+      padding: 0;
+    }
+  }
+
+  ui-lib-code-snippet {
+    // Suppress rounded top corners so they don't double up with the tab bar
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}

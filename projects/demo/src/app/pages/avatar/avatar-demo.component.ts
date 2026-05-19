@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Avatar } from 'ui-lib-custom/avatar';
 import { AvatarGroup } from 'ui-lib-custom/avatar';
@@ -20,6 +21,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
   standalone: true,
   imports: [
     CodeSnippet,
+    DocCodeExampleComponent,
     Avatar,
     AvatarGroup,
     Button,
@@ -53,11 +55,65 @@ export class AvatarDemoComponent {
 
   public readonly importCode: string = "import { Avatar, AvatarGroup } from 'ui-lib-custom/avatar'";
   public readonly snippetImage: string = `<ui-lib-avatar image="/photo.jpg" imageAlt="Jane Doe" size="md" />`;
+  public readonly snippetImageTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetLabel: string = `<ui-lib-avatar label="JD" size="md" />`;
+  public readonly snippetLabelTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetIcon: string = `<ui-lib-avatar icon="pi pi-user" size="md" />`;
+  public readonly snippetIconTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetShape: string = `<ui-lib-avatar label="JD" shape="square" />`;
+  public readonly snippetShapeTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetVariant: string = `<ui-lib-avatar label="VT" variant="material" />`;
+  public readonly snippetVariantTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetAvatarGroup: string = `<ui-lib-avatar-group ariaLabel="Project team">\n  <ui-lib-avatar image="/amy.jpg" imageAlt="Amy" />\n  <ui-lib-avatar image="/bob.jpg" imageAlt="Bob" />\n  <ui-lib-avatar label="+3" />\n</ui-lib-avatar-group>`;
+  public readonly snippetAvatarGroupTs: string = `import { Component } from '@angular/core';
+import { Avatar, AvatarGroup } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar, AvatarGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

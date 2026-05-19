@@ -12,6 +12,7 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the ScrollPanel component.
@@ -28,6 +29,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
@@ -101,9 +103,50 @@ export class ScrollPanelDemoComponent {
   }
 
   public readonly snippetBasicUsage: string = `<ui-lib-scroll-panel style="height: 200px;">\n  <p>Long content...</p>\n  <p>More content...</p>\n</ui-lib-scroll-panel>`;
+  public readonly snippetBasicUsageTs: string = `import { Component } from '@angular/core';
+import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
+
+@Component({
+  standalone: true,
+  imports: [ScrollPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetVariants: string = `<ui-lib-scroll-panel [variant]="'material'" style="height: 200px;">...</ui-lib-scroll-panel>\n<ui-lib-scroll-panel [variant]="'bootstrap'" style="height: 200px;">...</ui-lib-scroll-panel>\n<ui-lib-scroll-panel [variant]="'minimal'" style="height: 200px;">...</ui-lib-scroll-panel>`;
+  public readonly snippetVariantsTs: string = `import { Component } from '@angular/core';
+import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
+
+@Component({
+  standalone: true,
+  imports: [ScrollPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetHorizontal: string = `<ui-lib-scroll-panel style="height: 160px; width: 100%;">\n  <div style="display: flex; gap: 1rem; width: max-content;">\n    <!-- wide content -->\n  </div>\n</ui-lib-scroll-panel>`;
+  public readonly snippetHorizontalTs: string = `import { Component } from '@angular/core';
+import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
+
+@Component({
+  standalone: true,
+  imports: [ScrollPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetInteractive: string = `<ui-lib-scroll-panel [variant]="activeVariant()" style="height: 200px;">\n  <!-- content -->\n</ui-lib-scroll-panel>`;
+  public readonly snippetInteractiveTs: string = `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
+import type { ScrollPanelVariant } from 'ui-lib-custom/scroll-panel';
+
+@Component({
+  standalone: true,
+  imports: [ScrollPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly activeVariant: WritableSignal<ScrollPanelVariant> =
+    signal<ScrollPanelVariant>('material');
+}`;
   public readonly snippetCssProperties: string = `.my-panel {\n  --uilib-scroll-panel-scrollbar-width: 10px;\n  --uilib-scroll-panel-scrollbar-thumb-bg: #f97316;\n  --uilib-scroll-panel-scrollbar-thumb-bg-hover: #ea580c;\n  --uilib-scroll-panel-scrollbar-track-bg: #fff7ed;\n  --uilib-scroll-panel-border-color: #fed7aa;\n}`;
 
   public readonly activeVariant: WritableSignal<ScrollPanelVariant> =

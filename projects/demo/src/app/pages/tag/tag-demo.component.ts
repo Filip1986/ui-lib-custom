@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { Tag } from 'ui-lib-custom/tag';
 import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
 import { Button } from 'ui-lib-custom/button';
@@ -48,6 +49,7 @@ interface AriaRow {
   standalone: true,
   imports: [
     CodeSnippet,
+    DocCodeExampleComponent,
     Tag,
     Button,
     TableComponent,
@@ -331,11 +333,17 @@ export class TagDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly severity: string;
+    readonly severityTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly rounded: string;
+    readonly roundedTs: string;
     readonly icons: string;
+    readonly iconsTs: string;
     readonly dismissible: string;
+    readonly dismissibleTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { Tag } from 'ui-lib-custom/tag';`,
     severity: `<ui-lib-tag value="Primary"   severity="primary" />
@@ -345,23 +353,81 @@ export class TagDemoComponent {
 <ui-lib-tag value="Warning"   severity="warn" />
 <ui-lib-tag value="Danger"    severity="danger" />
 <ui-lib-tag value="Contrast"  severity="contrast" />`,
+    severityTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     sizes: `<ui-lib-tag value="Small"  size="sm" severity="primary" />
 <ui-lib-tag value="Medium" size="md" severity="primary" />
 <ui-lib-tag value="Large"  size="lg" severity="primary" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     rounded: `<ui-lib-tag value="Primary" severity="primary" [rounded]="true" />
 <ui-lib-tag value="Success" severity="success" [rounded]="true" />`,
+    roundedTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     icons: `<ui-lib-tag value="Primary" icon="pi pi-tag"                  severity="primary" />
 <ui-lib-tag value="Success" icon="pi pi-check-circle"          severity="success" />
 <ui-lib-tag value="Warning" icon="pi pi-exclamation-triangle"  severity="warn" />`,
+    iconsTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     dismissible: `<ui-lib-tag
   value="Python"
   severity="info"
   [dismissible]="true"
   (removed)="removeTag()"
 />`,
+    dismissibleTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public removeTag(): void {
+    // hide or remove tag from your data model
+  }
+}`,
     variants: `<ui-lib-tag value="Tag" severity="primary" variant="material" />
 <ui-lib-tag value="Tag" severity="primary" variant="bootstrap" />
 <ui-lib-tag value="Tag" severity="primary" variant="minimal" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   // ---- Playground ---------------------------------------------------------

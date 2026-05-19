@@ -26,6 +26,7 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -52,6 +53,7 @@ import { Panel } from 'ui-lib-custom/panel';
     VariantComparisonComponent,
     SelectButtonBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -99,7 +101,7 @@ export class SelectButtonsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly snippets: { usage: string } = {
+  public readonly snippets: { usage: string; usageTs: string; selectButtonExampleTs: string } = {
     usage: `import { SelectButton } from 'ui-lib-custom';
 
 @Component({
@@ -113,6 +115,38 @@ export class Example {
     { label: 'Two', value: 2 },
   ];
   value = 1;
+}`,
+    usageTs: `import { Component } from '@angular/core';
+import { SelectButton } from 'ui-lib-custom/select-button';
+import type { SelectButtonOption } from 'ui-lib-custom/select-button';
+
+@Component({
+  standalone: true,
+  imports: [SelectButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly options: SelectButtonOption[] = [
+    { label: 'One', value: 1 },
+    { label: 'Two', value: 2 },
+  ];
+  value: number = 1;
+}`,
+    selectButtonExampleTs: `import { Component } from '@angular/core';
+import { SelectButton } from 'ui-lib-custom/select-button';
+import type { SelectButtonOption } from 'ui-lib-custom/select-button';
+
+@Component({
+  standalone: true,
+  imports: [SelectButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly basicOptions: SelectButtonOption[] = [
+    { label: 'One-Way', value: 'one-way' },
+    { label: 'Return', value: 'return' },
+  ];
+  basicValue: string = 'one-way';
 }`,
   };
 

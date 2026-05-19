@@ -13,6 +13,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the ConfirmPopup component.
@@ -30,6 +31,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
@@ -59,6 +61,7 @@ export class ConfirmPopupDemoComponent {
   public readonly snippetBasicConfirm: string = `// component.ts\nthis.confirmPopupService.confirm({\n  target: event.currentTarget as HTMLElement,\n  message: 'Are you sure you want to proceed?',\n  accept: () => this.proceed(),\n});`;
   public readonly snippetIconConfirm: string = `this.confirmPopupService.confirm({\n  target: event.currentTarget as HTMLElement,\n  message: 'Are you sure you want to delete this file?',\n  icon: 'pi pi-exclamation-triangle',\n  acceptLabel: 'Delete',\n  rejectLabel: 'Keep',\n  acceptSeverity: 'danger',\n  accept: () => this.deleteFile(),\n});`;
   public readonly snippetDeclarativeUsage: string = `<ui-lib-confirm-popup\n  key="declarative"\n  [(visible)]="visible"\n  message="Proceed with this action?"\n  acceptLabel="Yes, proceed"\n  rejectLabel="Cancel"\n  (accepted)="onAccepted()"\n  (rejected)="onRejected()"\n/>`;
+  public readonly snippetDeclarativeUsageTs: string = `import { Component, signal } from '@angular/core';\nimport { ConfirmPopup } from 'ui-lib-custom/confirm-popup';\n\n@Component({\n  standalone: true,\n  imports: [ConfirmPopup],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly visible = signal(false);\n\n  onAccepted(): void { /* handle accept */ }\n  onRejected(): void { /* handle reject */ }\n}`;
   private readonly confirmPopupService: ConfirmPopupService = inject(ConfirmPopupService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

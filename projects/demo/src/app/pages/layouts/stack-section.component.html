@@ -103,11 +103,11 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="usageSnippet"
+      <app-doc-code-example
+        [html]="usageSnippet"
+        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      />
     </ui-lib-panel>
   }
 

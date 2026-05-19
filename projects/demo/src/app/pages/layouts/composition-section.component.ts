@@ -27,6 +27,7 @@ import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -51,6 +52,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     CodeSnippet,
+    DocCodeExampleComponent,
   ],
   templateUrl: './composition-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -70,6 +72,16 @@ export class LayoutCompositionSectionComponent {
   </ui-lib-stack>
 </ui-lib-container>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Container, Grid, Stack } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Container, Grid, Stack],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

@@ -30,6 +30,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Panel } from 'ui-lib-custom/panel';
 
 interface FaqItem {
@@ -79,6 +80,7 @@ type AccordionTab =
     AccordionBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -192,7 +194,9 @@ export class AccordionComponent {
 
   public readonly snippets: {
     readonly basic: string;
+    readonly basicTs: string;
     readonly customHeader: string;
+    readonly customHeaderTs: string;
     readonly controlled: string;
   } = {
     basic: `<ui-lib-accordion variant="material" expandMode="single">
@@ -203,6 +207,15 @@ export class AccordionComponent {
     Items can be returned within 30 days of purchase.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`,
+    basicTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     customHeader: `<ui-lib-accordion>
   <ui-lib-accordion-panel value="faq-1">
     <div accordionHeader class="header-row">
@@ -211,6 +224,16 @@ export class AccordionComponent {
     Content goes here.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`,
+    customHeaderTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+import { Icon } from 'ui-lib-custom/icon';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel, Icon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     controlled: `<ui-lib-accordion
   expandMode="multiple"
   [expandedPanels]="expanded"
@@ -286,17 +309,43 @@ export class AccordionComponent {
   }
 
   public readonly iconSnippets: Readonly<
-    Record<'customIcons' | 'iconPosition' | 'toggleTemplate', string>
+    Record<
+      | 'customIcons'
+      | 'customIconsTs'
+      | 'iconPosition'
+      | 'iconPositionTs'
+      | 'toggleTemplate'
+      | 'toggleTemplateTs',
+      string
+    >
   > = {
     customIcons: `<ui-lib-accordion-panel
   header="Using Plus/Minus"
   expandIcon="minus"
   collapseIcon="plus"
 />`,
+    customIconsTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     iconPosition: `<ui-lib-accordion-panel
   iconPosition="start"
   header="Icon at Start"
 />`,
+    iconPositionTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     toggleTemplate: `<ui-lib-accordion-panel>
   <ng-template accordionToggleIcon let-expanded>
     <span class="custom-indicator" [class.active]="expanded">
@@ -305,6 +354,15 @@ export class AccordionComponent {
   </ng-template>
   Content
 </ui-lib-accordion-panel>`,
+    toggleTemplateTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel, AccordionToggleIcon } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel, AccordionToggleIcon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   };
 
   public readonly reduceMotionDemo: WritableSignal<boolean> = signal<boolean>(false);
@@ -321,6 +379,16 @@ export class AccordionComponent {
     Items can be returned within 30 days of purchase.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`;
+
+  public readonly accordionExampleTs: string = `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: 'Enter / Space', suffix: 'on header', action: 'Toggles the panel open or closed.' },

@@ -11,6 +11,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ListboxChangeEvent, ListboxOption } from 'ui-lib-custom/listbox';
@@ -44,6 +45,7 @@ type ListboxDemoSnippetKey =
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './listbox-demo.component.html',
   styleUrl: './listbox-demo.component.scss',
@@ -198,8 +200,171 @@ export class ListboxDemoComponent {
       '<form [formGroup]="form">\n  <ui-lib-listbox [options]="cities" formControlName="city" />\n</form>',
   };
 
+  private readonly snippetsTs: Record<ListboxDemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public selectedCity: unknown = null;
+}`,
+    multiple: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public selectedCities: unknown[] = [];
+}`,
+    filter: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public selectedCity: unknown = null;
+}`,
+    'filter-match-modes': `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public value: unknown = null;
+}`,
+    groups: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly groupedCities: Array<{ label: string; items: ListboxOption[] }> = [
+    { label: 'Germany', items: [{ label: 'Berlin', value: 'berlin' }] },
+    { label: 'UK', items: [{ label: 'London', value: 'london' }] },
+  ];
+  public selectedCity: unknown = null;
+}`,
+    checkbox: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public selectedCities: unknown[] = [];
+}`,
+    'toggle-all': `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public selectedCities: unknown[] = [];
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+  public value: unknown = null;
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ListboxComponent } from 'ui-lib-custom/listbox';
+import type { ListboxOption } from 'ui-lib-custom/listbox';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, ListboxComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cities: ListboxOption[] = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+  ];
+
+  public readonly form = new FormGroup({
+    city: new FormControl<unknown>(null),
+  });
+}`,
+  };
+
   public snippet(key: ListboxDemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: ListboxDemoSnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public readonly keyboardRows: KeyboardNavRow[] = [

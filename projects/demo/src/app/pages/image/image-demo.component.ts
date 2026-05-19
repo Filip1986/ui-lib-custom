@@ -7,6 +7,7 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Image } from 'ui-lib-custom/image';
 
@@ -35,6 +36,7 @@ type SnippetKey =
     Image,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
@@ -138,7 +140,98 @@ export class ImageDemoComponent {
 <p>Preview open: {{ previewVisible() }}</p>`,
   };
 
+  private readonly snippetsTs: Record<SnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    preview: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    customIndicator: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    errorFallback: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    sizes: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    variants: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    customError: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    dimensions: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    twoWayBinding: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
+}`,
+  };
+
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: SnippetKey): string {
+    return this.snippetsTs[key];
   }
 }

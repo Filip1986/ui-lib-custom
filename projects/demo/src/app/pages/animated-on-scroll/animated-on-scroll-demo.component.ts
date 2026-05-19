@@ -8,6 +8,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the AnimateOnScroll directive.
@@ -24,6 +25,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './animated-on-scroll-demo.component.html',
   styleUrl: './animated-on-scroll-demo.component.scss',
@@ -51,6 +53,16 @@ export class AnimatedOnScrollDemoComponent {
   public readonly importCode: string =
     "import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll'";
   public readonly snippetStagger: string = `<div class="uilib-aos-slide-up"\n     uiLibAnimateOnScroll enterClass="uilib-aos-active"\n     style="--uilib-animate-on-scroll-delay: 300ms">`;
+  public readonly snippetStaggerTs: string = `import { Component } from '@angular/core';
+import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll';
+
+@Component({
+  standalone: true,
+  imports: [AnimateOnScroll],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

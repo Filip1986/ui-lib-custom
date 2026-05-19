@@ -18,26 +18,44 @@ import { InputNumberComponent } from 'ui-lib-custom/input-number';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type InputNumberSnippetKey =
   | 'numerals'
+  | 'numeralsTs'
   | 'decimal'
+  | 'decimalTs'
   | 'locale'
+  | 'localeTs'
   | 'currency'
+  | 'currencyTs'
   | 'prefixSuffix'
+  | 'prefixSuffixTs'
   | 'buttonsStacked'
+  | 'buttonsStackedTs'
   | 'buttonsHorizontal'
+  | 'buttonsHorizontalTs'
   | 'buttonsVertical'
+  | 'buttonsVerticalTs'
   | 'step'
+  | 'stepTs'
   | 'minMax'
+  | 'minMaxTs'
   | 'floatLabel'
+  | 'floatLabelTs'
   | 'clearIcon'
+  | 'clearIconTs'
   | 'sizes'
+  | 'sizesTs'
   | 'disabledInvalid'
+  | 'disabledInvalidTs'
   | 'filled'
+  | 'filledTs'
   | 'fluid'
-  | 'reactive';
+  | 'fluidTs'
+  | 'reactive'
+  | 'reactiveTs';
 
 /**
  * Demo page for InputNumber modes, formatting, controls, and forms.
@@ -58,6 +76,7 @@ type InputNumberSnippetKey =
     InputNumberComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
@@ -115,30 +134,105 @@ export class InputNumberDemoComponent {
 
   public readonly snippets: Record<InputNumberSnippetKey, string> = {
     numerals: `<uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />`,
+    numeralsTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  quantity: number | null = 1234;
+}`,
     decimal: `<uilib-input-number
   [(ngModel)]="decimalValue"
   [minFractionDigits]="2"
   [maxFractionDigits]="4"
   placeholder="0.00"
 />`,
+    decimalTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  decimalValue: number | null = 42.5;
+}`,
     locale: `<uilib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
 <uilib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
 <uilib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
 <uilib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />`,
+    localeTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  localeValues = { enUS: 1234567.89, deDE: 1234567.89, enIN: 1234567.89, jpJP: 1234567.89 };
+}`,
     currency: `<uilib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
 <uilib-input-number [(ngModel)]="currencyValues.eur" mode="currency" currency="EUR" locale="de-DE" />
 <uilib-input-number [(ngModel)]="currencyValues.inr" mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
 <uilib-input-number [(ngModel)]="currencyValues.jpy" mode="currency" currency="JPY" locale="ja-JP" />`,
+    currencyTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  currencyValues = { usd: 1499.5, eur: 1499.5, inr: 1499.5, jpy: 1499 };
+}`,
     prefixSuffix: `<uilib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
 <uilib-input-number [(ngModel)]="completionPercent" suffix=" %" />
 <uilib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
 <uilib-input-number [(ngModel)]="temperature" suffix=" °C" />`,
+    prefixSuffixTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  distanceMiles: number | null = 120;
+  completionPercent: number | null = 88;
+  expiresInDays: number | null = 45;
+  temperature: number | null = 22;
+}`,
     buttonsStacked: `<uilib-input-number
   [(ngModel)]="stackedAmount"
   mode="currency"
   currency="USD"
   [showButtons]="true"
 />`,
+    buttonsStackedTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  stackedAmount: number | null = 1200;
+}`,
     buttonsHorizontal: `<uilib-input-number
   [(ngModel)]="horizontalAmount"
   mode="currency"
@@ -147,18 +241,66 @@ export class InputNumberDemoComponent {
   [showButtons]="true"
   buttonLayout="horizontal"
 />`,
+    buttonsHorizontalTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  horizontalAmount: number | null = 800;
+}`,
     buttonsVertical: `<uilib-input-number
   [(ngModel)]="verticalAmount"
   [showButtons]="true"
   buttonLayout="vertical"
 />`,
+    buttonsVerticalTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  verticalAmount: number | null = 10;
+}`,
     step: `<uilib-input-number [(ngModel)]="stepValue" [step]="0.25" />`,
+    stepTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  stepValue: number | null = 1.5;
+}`,
     minMax: `<uilib-input-number
   [(ngModel)]="boundedValue"
   [min]="0"
   [max]="100"
   [showButtons]="true"
 />`,
+    minMaxTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  boundedValue: number | null = 40;
+}`,
     floatLabel: `<uilib-float-label variant="over">
   <uilib-input-number [(ngModel)]="floatValues.over" inputId="float-over" />
   <label for="float-over">Over</label>
@@ -171,27 +313,122 @@ export class InputNumberDemoComponent {
   <uilib-input-number [(ngModel)]="floatValues.on" inputId="float-on" />
   <label for="float-on">On</label>
 </uilib-float-label>`,
+    floatLabelTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FloatLabelComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  floatValues = { over: 100, in: 200, on: 300 };
+}`,
     clearIcon: `<uilib-input-number
   [(ngModel)]="clearableValue"
   [showClear]="true"
   [showButtons]="true"
 />`,
+    clearIconTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  clearableValue: number | null = 99;
+}`,
     sizes: `<uilib-input-number [(ngModel)]="sizeValues.sm" size="sm" />
 <uilib-input-number [(ngModel)]="sizeValues.md" size="md" />
 <uilib-input-number [(ngModel)]="sizeValues.lg" size="lg" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  sizeValues = { sm: 10, md: 20, lg: 30 };
+}`,
     disabledInvalid: `<uilib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
 <uilib-input-number [(ngModel)]="invalidValue" [invalid]="true" />`,
+    disabledInvalidTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  disabledValue: number | null = 50;
+  invalidValue: number | null = null;
+}`,
     filled: `<uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />`,
+    filledTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  filledValue: number | null = 64;
+}`,
     fluid: `<uilib-input-number
   [(ngModel)]="fluidValue"
   [fluid]="true"
   [showButtons]="true"
   buttonLayout="horizontal"
 />`,
+    fluidTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  fluidValue: number | null = 500;
+}`,
     reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
   <uilib-input-number formControlName="amount" [min]="0" [max]="1000" [showButtons]="true" />
   <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
 </form>`,
+    reactiveTs: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { InputNumberComponent } from 'ui-lib-custom/input-number';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [InputNumberComponent, Button, ReactiveFormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  reactiveForm = new FormGroup({
+    amount: new FormControl<number | null>(null, {
+      validators: [Validators.required, Validators.min(0), Validators.max(1000)],
+    }),
+  });
+
+  submitReactive(): void {
+    this.reactiveForm.markAllAsTouched();
+  }
+}`,
   };
 
   public quantity: number | null = 1234;

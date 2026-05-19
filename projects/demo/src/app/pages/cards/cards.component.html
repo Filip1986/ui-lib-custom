@@ -6,10 +6,12 @@
     description="Versatile card component with headers, footers, borders, and elevation. Use the controls to adjust the live card."
   />
 
-    <app-card-basic-example />
-  <ui-lib-code-snippet language="html" [code]="cardExample" 
+  <app-card-basic-example />
+  <app-doc-code-example
+    [html]="cardExample"
+    [typescript]="cardExampleTs"
     [showLineNumbers]="true"
-    />
+  />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -285,11 +287,7 @@
                 <ui-lib-button [variant]="variant()" color="primary" size="sm"
                   >Action</ui-lib-button
                 >
-                <ui-lib-button
-                  [variant]="variant()"
-                  appearance="ghost"
-                  color="secondary"
-                  size="sm"
+                <ui-lib-button [variant]="variant()" appearance="ghost" color="secondary" size="sm"
                   >Secondary</ui-lib-button
                 >
               </div>
@@ -396,11 +394,7 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
-      <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="snippets.usage"
-        [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      <app-doc-code-example [typescript]="snippets.usage" [showLineNumbers]="true" />
     </ui-lib-card>
   }
 
@@ -439,5 +433,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -18,6 +18,7 @@ import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import { DocQualityBadgeComponent } from '../../shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '../../shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface InputRow {
@@ -65,6 +66,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
@@ -138,18 +140,35 @@ export class PanelDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly toggleable: string;
+    readonly toggleableTs: string;
     readonly collapsedDefault: string;
+    readonly collapsedDefaultTs: string;
     readonly customHeader: string;
+    readonly customHeaderTs: string;
     readonly headerIcons: string;
+    readonly headerIconsTs: string;
     readonly footer: string;
+    readonly footerTs: string;
     readonly noHeader: string;
+    readonly noHeaderTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { Panel } from 'ui-lib-custom/panel';`,
     basic: `<ui-lib-panel header="Introduction">
   <p>Panel body content.</p>
 </ui-lib-panel>`,
+    basicTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     toggleable: `<ui-lib-panel
   header="Collapsible Section"
   [toggleable]="true"
@@ -158,9 +177,34 @@ export class PanelDemoComponent {
 >
   <p>Click the chevron button in the header to toggle visibility.</p>
 </ui-lib-panel>`,
+    toggleableTs: `import { Component, signal } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+import type { PanelToggleEvent } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isCollapsed = signal<boolean>(false);
+
+  public handleToggle(event: PanelToggleEvent): void {
+    console.log('Toggled:', event.collapsed);
+  }
+}`,
     collapsedDefault: `<ui-lib-panel header="Advanced Options" [toggleable]="true" [collapsed]="true">
   <p>Hidden until expanded.</p>
 </ui-lib-panel>`,
+    collapsedDefaultTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     customHeader: `<ui-lib-panel [toggleable]="true">
   <span panelHeader>
     <strong>Featured</strong>
@@ -168,11 +212,32 @@ export class PanelDemoComponent {
   </span>
   <p>Body content.</p>
 </ui-lib-panel>`,
+    customHeaderTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     headerIcons: `<ui-lib-panel header="Report" [toggleable]="true">
   <button panelIcons type="button" (click)="refresh()">↻</button>
   <button panelIcons type="button" (click)="download()">↓</button>
   <p>Body content.</p>
 </ui-lib-panel>`,
+    headerIconsTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public refresh(): void { /* reload data */ }
+  public download(): void { /* export data */ }
+}`,
     footer: `<ui-lib-panel header="Terms of Service">
   <p>Body content.</p>
   <div panelFooter>
@@ -180,6 +245,15 @@ export class PanelDemoComponent {
     <button type="button">Accept</button>
   </div>
 </ui-lib-panel>`,
+    footerTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     noHeader: `<!-- No header input — header area is automatically hidden -->
 <ui-lib-panel>
   <p>This panel has no header. The header area is not rendered.</p>
@@ -193,9 +267,27 @@ export class PanelDemoComponent {
     <button type="button">Confirm</button>
   </div>
 </ui-lib-panel>`,
+    noHeaderTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     variants: `<ui-lib-panel header="Material Panel"  variant="material"  [toggleable]="true" />
 <ui-lib-panel header="Bootstrap Panel" variant="bootstrap" [toggleable]="true" />
 <ui-lib-panel header="Minimal Panel"   variant="minimal"   [toggleable]="true" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   // ---- API data -----------------------------------------------------------

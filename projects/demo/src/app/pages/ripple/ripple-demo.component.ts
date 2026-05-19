@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { Ripple } from 'ui-lib-custom/ripple';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -22,6 +23,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
   standalone: true,
   imports: [
     CodeSnippet,
+    DocCodeExampleComponent,
     Ripple,
     Button,
     DocPageHeaderComponent,
@@ -100,15 +102,30 @@ export class RippleDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly darkRipple: string;
+    readonly darkRippleTs: string;
     readonly customDuration: string;
+    readonly customDurationTs: string;
     readonly disabled: string;
+    readonly disabledTs: string;
     readonly anyElement: string;
+    readonly anyElementTs: string;
   } = {
     import: `import { Ripple } from 'ui-lib-custom/ripple';`,
     basic: `<ui-lib-button severity="primary" uiLibRipple>Primary Button</ui-lib-button>
 <ui-lib-button severity="secondary" uiLibRipple>Secondary Button</ui-lib-button>
 <ui-lib-button severity="danger" uiLibRipple>Danger Button</ui-lib-button>`,
+    basicTs: `import { Component } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Ripple } from 'ui-lib-custom/ripple';
+
+@Component({
+  standalone: true,
+  imports: [Button, Ripple],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     darkRipple: `<!-- Use a dark ripple colour on light or white surfaces -->
 <ui-lib-button appearance="soft" uiLibRipple [rippleColor]="'rgba(0,0,0,0.12)'">
   Light Button
@@ -118,17 +135,63 @@ export class RippleDemoComponent {
 <div uiLibRipple [rippleColor]="'rgba(99,102,241,0.25)'">
   Click me — card surface
 </div>`,
+    darkRippleTs: `import { Component } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Ripple } from 'ui-lib-custom/ripple';
+
+@Component({
+  standalone: true,
+  imports: [Button, Ripple],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     customDuration: `<ui-lib-button uiLibRipple [rippleDuration]="'200ms'">Fast (200ms)</ui-lib-button>
 <ui-lib-button uiLibRipple>Default (600ms)</ui-lib-button>
 <ui-lib-button uiLibRipple [rippleDuration]="'1200ms'">Slow (1200ms)</ui-lib-button>`,
+    customDurationTs: `import { Component } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Ripple } from 'ui-lib-custom/ripple';
+
+@Component({
+  standalone: true,
+  imports: [Button, Ripple],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     disabled: `<ui-lib-button uiLibRipple [disabled]="isDisabled()">
   {{ isDisabled() ? 'Ripple disabled' : 'Ripple enabled' }}
 </ui-lib-button>`,
+    disabledTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Ripple } from 'ui-lib-custom/ripple';
+
+@Component({
+  standalone: true,
+  imports: [Button, Ripple],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isDisabled: WritableSignal<boolean> = signal<boolean>(false);
+
+  public toggleDisabled(): void {
+    this.isDisabled.set(!this.isDisabled());
+  }
+}`,
     anyElement: `<ul>
   <li uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">List item one</li>
   <li uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">List item two</li>
   <li uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">List item three</li>
 </ul>`,
+    anyElementTs: `import { Component } from '@angular/core';
+import { Ripple } from 'ui-lib-custom/ripple';
+
+@Component({
+  standalone: true,
+  imports: [Ripple],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   public readonly isDisabled: WritableSignal<boolean> = signal<boolean>(false);

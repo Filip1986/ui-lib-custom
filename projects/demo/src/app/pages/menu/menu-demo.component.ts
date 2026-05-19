@@ -19,6 +19,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface AriaRow {
   readonly element: string;
@@ -71,6 +72,7 @@ interface MenuItemRow {
     DocKeyboardNavComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
@@ -128,17 +130,41 @@ export class MenuDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly separator: string;
     readonly grouped: string;
     readonly popup: string;
+    readonly popupTs: string;
     readonly commands: string;
     readonly urlItems: string;
     readonly variants: string;
+    readonly variantsTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
   } = {
     import: `import { Menu } from 'ui-lib-custom/menu';
 import type { MenuItem } from 'ui-lib-custom/menu';`,
     basic: `<ui-lib-menu [model]="items" (itemClick)="onItemClick($event)" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'Profile', icon: 'pi pi-user' },
+    { label: 'Messages', icon: 'pi pi-envelope' },
+    { label: 'Settings', icon: 'pi pi-cog' },
+  ];
+
+  onItemClick(event: MenuItemCommandEvent): void {
+    console.log('Clicked:', event.item.label);
+  }
+}`,
     separator: `items: MenuItem[] = [
   { label: 'New File', icon: 'pi pi-file' },
   { label: 'Open',     icon: 'pi pi-folder-open' },
@@ -173,6 +199,24 @@ import type { MenuItem } from 'ui-lib-custom/menu';`,
   Options
 </ui-lib-button>
 <ui-lib-menu #popupMenu [model]="items" [popup]="true" />`,
+    popupTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import { Button } from 'ui-lib-custom/button';
+import type { MenuItem } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'View Details', icon: 'pi pi-eye' },
+    { label: 'Edit', icon: 'pi pi-pencil' },
+    { separator: true },
+    { label: 'Move to Trash', icon: 'pi pi-trash' },
+  ];
+}`,
     commands: `items: MenuItem[] = [
   {
     label: 'Download',
@@ -194,9 +238,42 @@ onItemClick(event: MenuItemCommandEvent): void {
     variants: `<ui-lib-menu [model]="items" variant="material"  />
 <ui-lib-menu [model]="items" variant="bootstrap" />
 <ui-lib-menu [model]="items" variant="minimal"   />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import type { MenuItem } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'Dashboard', icon: 'pi pi-home' },
+    { label: 'Reports', icon: 'pi pi-chart-line' },
+    { separator: true },
+    { label: 'Settings', icon: 'pi pi-cog' },
+  ];
+}`,
     sizes: `<ui-lib-menu [model]="items" size="sm" />
 <ui-lib-menu [model]="items" size="md" />
 <ui-lib-menu [model]="items" size="lg" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import type { MenuItem } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'Item One', icon: 'pi pi-circle' },
+    { label: 'Item Two', icon: 'pi pi-circle' },
+    { label: 'Item Three', icon: 'pi pi-circle' },
+  ];
+}`,
   } as const;
 
   public readonly basicItems: MenuItem[] = [

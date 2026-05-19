@@ -12,6 +12,7 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import type {
   TreeNode,
   TreeSelectSelectionMode,
@@ -79,6 +80,7 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     DocDemoViewportComponent,
     TreeSelect,
     CodeSnippet,
+    DocCodeExampleComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
@@ -238,6 +240,184 @@ export class TreeSelectDemoComponent {
   />
 </form>`,
   };
+
+  public readonly snippetsTs: Readonly<Record<string, string>> = {
+    basic: `import { Component, signal } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'documents', label: 'Documents', children: [
+      { key: 'resume', label: 'Resume.docx' },
+    ] },
+  ];
+  public readonly selectedNode = signal<TreeNode | null>(null);
+}`,
+    multiple: `import { Component, signal } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'documents', label: 'Documents', children: [
+      { key: 'resume', label: 'Resume.docx' },
+    ] },
+  ];
+  public readonly selectedNodes = signal<TreeNode[]>([]);
+}`,
+    checkbox: `import { Component, signal } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'documents', label: 'Documents', children: [
+      { key: 'resume', label: 'Resume.docx' },
+    ] },
+  ];
+  public readonly checkedNodes = signal<TreeNode[]>([]);
+}`,
+    filter: `import { Component, signal } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'documents', label: 'Documents', children: [
+      { key: 'resume', label: 'Resume.docx' },
+    ] },
+  ];
+  public readonly selectedNode = signal<TreeNode | null>(null);
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'a', label: 'Item A' },
+    { key: 'b', label: 'Item B' },
+  ];
+}`,
+    variants: `import { Component } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'a', label: 'Item A' },
+    { key: 'b', label: 'Item B' },
+  ];
+}`,
+    showClear: `import { Component, signal } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'a', label: 'Item A' },
+  ];
+  public readonly selectedNode = signal<TreeNode | null>(null);
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [{ key: 'a', label: 'Item A' }];
+}`,
+    loading: `import { Component } from '@angular/core';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [];
+}`,
+    ngModel: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'a', label: 'Item A' },
+  ];
+  public selectedNode: TreeNode | null = null;
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TreeSelect } from 'ui-lib-custom/tree-select';
+import type { TreeNode } from 'ui-lib-custom/tree-select';
+
+@Component({
+  standalone: true,
+  imports: [TreeSelect, ReactiveFormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes: TreeNode[] = [
+    { key: 'a', label: 'Item A' },
+  ];
+  public readonly form = new FormGroup({
+    selectedNode: new FormControl<TreeNode | null>(null),
+  });
+}`,
+  };
+
+  public snippetTs(key: string): string {
+    return this.snippetsTs[key] ?? '';
+  }
 
   public onSelectionChange(value: unknown): void {
     // Selection change logged via event binding in template

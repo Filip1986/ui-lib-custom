@@ -11,6 +11,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ImageCompare } from 'ui-lib-custom/image-compare';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' | 'customLabel';
 
 /**
@@ -28,6 +29,7 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
     ImageCompare,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
@@ -128,7 +130,71 @@ export class ImageCompareDemoComponent {
 />`,
   };
 
+  private readonly snippetsTs: Record<SnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    twoWayBinding: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly position: WritableSignal<number> = signal<number>(50);
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    variants: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    disabled: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    customLabel: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+  };
+
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: SnippetKey): string {
+    return this.snippetsTs[key];
   }
 }

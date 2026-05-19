@@ -6,7 +6,6 @@
   />
 
   <ui-lib-panel variant="minimal">
-
     <div class="demo-row">
       <ui-lib-panel variant="minimal">
         <p>Uses global theme.</p>
@@ -26,7 +25,6 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-
     <div class="demo-row">
       <div [uiLibTheme]="'dark'" class="theme-section">
         <h4>Dark Section (directive)</h4>
@@ -44,7 +42,6 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-
     <div class="demo-row">
       <div [uiLibTheme]="customBlueTheme" class="theme-section">
         <h4>Blue Theme</h4>
@@ -63,7 +60,6 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-
     <div [uiLibDarkTheme]="true" class="theme-section">
       <h4>Dark Outer Scope</h4>
       <ui-lib-button>Dark Button</ui-lib-button>
@@ -81,21 +77,14 @@
   </ui-lib-panel>
 
   <ui-lib-panel variant="minimal">
-
     <h4>Component Theme Input</h4>
-    <ui-lib-code-snippet [code]="componentThemeCode" language="html" 
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="componentThemeCode" [typescript]="componentThemeCodeTs" />
 
     <h4>Directive Usage</h4>
-    <ui-lib-code-snippet [code]="directiveCode" language="html" 
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="directiveCode" [typescript]="directiveCodeTs" />
 
     <h4>Custom Colors</h4>
-    <ui-lib-code-snippet [code]="customColorsCode" language="typescript" 
-      [showLineNumbers]="true"
-      />
+    <ui-lib-code-snippet [code]="customColorsCode" language="typescript" [showLineNumbers]="true" />
   </ui-lib-panel>
 
   <div class="demo-page-rail" docRail>
@@ -106,5 +95,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

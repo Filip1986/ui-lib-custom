@@ -20,6 +20,7 @@ import { EditorComponent, EditorToolbarDirective } from 'ui-lib-custom/editor';
 import type { EditorSelectionChangeEvent, EditorTextChangeEvent } from 'ui-lib-custom/editor';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 type EditorDemoSnippetKey =
   | 'basic'
   | 'readonly'
@@ -51,6 +52,7 @@ type EditorDemoSnippetKey =
     CodeSnippet,
     EditorComponent,
     EditorToolbarDirective,
+    DocCodeExampleComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',
@@ -165,8 +167,167 @@ export class EditorDemoComponent {
   public eventsHtml: string = '<p>Select text and type to emit events.</p>';
   public readonly eventLog: string[] = [];
 
+  private readonly snippetsTs: Record<EditorDemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public basicHtml: string = '<p>Welcome to the <strong>Editor</strong>.</p>';
+}`,
+    readonly: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly readonlyHtml: string = '<h2>Readonly</h2><p><strong>Important</strong> details.</p>';
+}`,
+    customToolbar: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent, EditorToolbarDirective } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent, EditorToolbarDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public customToolbarHtml: string = '<p>Use the projected toolbar controls.</p>';
+
+  public onCustomHeadingChange(editor: EditorComponent, event: Event): void {
+    const selectElement = event.target instanceof HTMLSelectElement ? event.target : null;
+    if (!selectElement) return;
+    editor.executeCommand('formatBlock', selectElement.value);
+  }
+}`,
+    templateDriven: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import type { NgForm } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public templateDrivenHtml: string = '';
+
+  public submitTemplateDriven(form: NgForm): void {
+    form.control.markAllAsTouched();
+  }
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, EditorComponent, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly reactiveForm = new FormGroup({
+    content: new FormControl<string | null>('', { validators: [Validators.required] }),
+  });
+}`,
+    variants: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly variantValues = {
+    material: '<p>Material variant content.</p>',
+    bootstrap: '<p>Bootstrap variant content.</p>',
+    minimal: '<p>Minimal variant content.</p>',
+  };
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly sizeValues = {
+    sm: '<p>Small editor.</p>',
+    md: '<p>Medium editor.</p>',
+    lg: '<p>Large editor.</p>',
+  };
+}`,
+    filled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public filledHtml: string = '<p>Filled mode editor.</p>';
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly disabledHtml: string = '<p>This editor is disabled.</p>';
+}`,
+    events: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorComponent } from 'ui-lib-custom/editor';
+import type { EditorTextChangeEvent, EditorSelectionChangeEvent } from 'ui-lib-custom/editor';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, EditorComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public eventsHtml: string = '<p>Select text and type to emit events.</p>';
+
+  public onTextChange(event: EditorTextChangeEvent): void {
+    console.log('textChange', event.htmlValue);
+  }
+
+  public onSelectionChange(event: EditorSelectionChangeEvent): void {
+    console.log('selectionChange', event.selection?.toString());
+  }
+}`,
+  };
+
   public snippet(key: EditorDemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: EditorDemoSnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public submitTemplateDriven(form: NgForm): void {

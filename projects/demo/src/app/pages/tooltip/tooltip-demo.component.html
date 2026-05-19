@@ -1,10 +1,9 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header docHeader title="Tooltip" [importCode]="importCode">
     <p class="doc-description">
-      An attribute directive that attaches a floating label to any host element.
-      Triggered by hover or focus, supports four positions, show/hide delays,
-      three design variants, and auto-flip when space is limited.
+      An attribute directive that attaches a floating label to any host element. Triggered by hover
+      or focus, supports four positions, show/hide delays, three design variants, and auto-flip when
+      space is limited.
     </p>
     <div class="demo-page-header__preview">
       <div class="tooltip-hero__tags">
@@ -19,19 +18,18 @@
   <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
-      Add <code>[uiLibTooltip]</code> with the label text to any element.
-      The tooltip appears above the host by default.
+      Add <code>[uiLibTooltip]</code> with the label text to any element. The tooltip appears above
+      the host by default.
     </p>
     <div class="tooltip-row">
       <ui-lib-button uiLibTooltip="Save the document">Save</ui-lib-button>
       <ui-lib-button uiLibTooltip="Delete this item">Delete</ui-lib-button>
       <ui-lib-button uiLibTooltip="Share with others">Share</ui-lib-button>
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetBasic"
+      [typescript]="snippetBasicTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetBasic"
     />
   </section>
 
@@ -39,9 +37,9 @@
   <section class="demo-section" id="positions" data-doc-anchor>
     <h2 class="demo-section__title">Positions</h2>
     <p class="demo-section__description">
-      Use <code>tooltipPosition</code> to control placement:
-      <code>top</code>, <code>bottom</code>, <code>left</code>, or <code>right</code>.
-      The tooltip flips automatically if there is insufficient space in the requested direction.
+      Use <code>tooltipPosition</code> to control placement: <code>top</code>, <code>bottom</code>,
+      <code>left</code>, or <code>right</code>. The tooltip flips automatically if there is
+      insufficient space in the requested direction.
     </p>
     <div class="tooltip-row tooltip-row--positions">
       <ui-lib-button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</ui-lib-button>
@@ -49,11 +47,10 @@
       <ui-lib-button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</ui-lib-button>
       <ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetPositions"
+      [typescript]="snippetPositionsTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetPositions"
     />
   </section>
 
@@ -62,8 +59,8 @@
     <h2 class="demo-section__title">Focus event</h2>
     <p class="demo-section__description">
       Set <code>tooltipEvent="focus"</code> to show the tooltip on keyboard focus instead of hover.
-      Useful for form inputs to provide contextual guidance.
-      Use <code>"both"</code> to support both hover and focus.
+      Useful for form inputs to provide contextual guidance. Use <code>"both"</code> to support both
+      hover and focus.
     </p>
     <div class="tooltip-row">
       <input
@@ -79,11 +76,10 @@
         tooltipEvent="both"
       />
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetFocusEvent"
+      [typescript]="snippetFocusEventTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetFocusEvent"
     />
   </section>
 
@@ -91,35 +87,24 @@
   <section class="demo-section" id="show-hide-delays" data-doc-anchor>
     <h2 class="demo-section__title">Show &amp; hide delays</h2>
     <p class="demo-section__description">
-      Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to
-      debounce rapid mouse movements. Useful in dense UIs to avoid tooltip flicker.
+      Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to debounce rapid mouse
+      movements. Useful in dense UIs to avoid tooltip flicker.
     </p>
     <div class="tooltip-row">
-      <ui-lib-button
-        uiLibTooltip="Appears after 400 ms"
-        [showDelay]="400"
-      >
+      <ui-lib-button uiLibTooltip="Appears after 400 ms" [showDelay]="400">
         400 ms show delay
       </ui-lib-button>
-      <ui-lib-button
-        uiLibTooltip="Stays 600 ms after leaving"
-        [hideDelay]="600"
-      >
+      <ui-lib-button uiLibTooltip="Stays 600 ms after leaving" [hideDelay]="600">
         600 ms hide delay
       </ui-lib-button>
-      <ui-lib-button
-        uiLibTooltip="Both delays combined"
-        [showDelay]="300"
-        [hideDelay]="400"
-      >
+      <ui-lib-button uiLibTooltip="Both delays combined" [showDelay]="300" [hideDelay]="400">
         Show 300 ms / Hide 400 ms
       </ui-lib-button>
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetShowHideDelays"
+      [typescript]="snippetShowHideDelaysTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetShowHideDelays"
     />
   </section>
 
@@ -127,25 +112,21 @@
   <section class="demo-section" id="disabled" data-doc-anchor>
     <h2 class="demo-section__title">Disabled</h2>
     <p class="demo-section__description">
-      Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely.
-      Bind to a signal for runtime toggling.
+      Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely. Bind to a signal
+      for runtime toggling.
     </p>
     <div class="tooltip-row">
-      <ui-lib-button
-        uiLibTooltip="You will never see this"
-        [tooltipDisabled]="tooltipDisabled()"
-      >
+      <ui-lib-button uiLibTooltip="You will never see this" [tooltipDisabled]="tooltipDisabled()">
         {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
       </ui-lib-button>
       <ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
         Toggle disabled
       </ui-lib-button>
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetDisabled"
+      [typescript]="snippetDisabledTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetDisabled"
     />
   </section>
 
@@ -153,9 +134,9 @@
   <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
-      Three design variants are available: <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant
-      is inherited from <code>ThemeConfigService</code>.
+      Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant is inherited
+      from <code>ThemeConfigService</code>.
     </p>
     <div class="tooltip-row">
       <ui-lib-button
@@ -180,11 +161,10 @@
         Minimal
       </ui-lib-button>
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetVariants"
+      [typescript]="snippetVariantsTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetVariants"
     />
   </section>
 
@@ -274,5 +254,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

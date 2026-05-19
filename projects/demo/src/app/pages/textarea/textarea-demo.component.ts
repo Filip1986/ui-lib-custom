@@ -18,6 +18,7 @@ import { UiLibTextarea } from 'ui-lib-custom/textarea';
 import type { TextareaChangeEvent } from 'ui-lib-custom/textarea';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type TextareaDemoSnippetKey =
@@ -50,6 +51,7 @@ type TextareaDemoSnippetKey =
     UiLibTextarea,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
@@ -160,6 +162,135 @@ export class TextareaDemoComponent {
   });
 
   public reactiveSubmittedValue: string | null = null;
+
+  public readonly snippetsTs: Record<TextareaDemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public basicValue: string = '';
+}`,
+    autoResize: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public autoResizeValue: string = '';
+}`,
+    counter: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public counterValue: string = '';
+}`,
+    maxLength: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public maxLengthValue: string = '';
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public sizeSm: string = '';
+}`,
+    variants: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public variantMaterial: string = '';
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public disabledValue: string = 'This field cannot be edited.';
+}`,
+    readonly: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonlyValue: string = 'You can read but not edit this content.';
+}`,
+    invalid: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public invalidValue: string = '';
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UiLibTextarea } from 'ui-lib-custom/textarea';
+
+@Component({
+  standalone: true,
+  imports: [UiLibTextarea, ReactiveFormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly form = new FormGroup({
+    feedback: new FormControl<string | null>(null, { validators: [Validators.required] }),
+  });
+}`,
+  };
+
+  public snippetTs(key: TextareaDemoSnippetKey): string {
+    return this.snippetsTs[key];
+  }
 
   public snippet(key: TextareaDemoSnippetKey): string {
     return this.snippets[key];

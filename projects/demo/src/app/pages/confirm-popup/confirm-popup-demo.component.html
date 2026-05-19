@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <!-- Global ConfirmPopup instance (service-driven) -->
   <ui-lib-confirm-popup />
 
@@ -66,8 +65,8 @@
     <h2 class="demo-section__title">Button Severities</h2>
     <p class="demo-section__desc">
       The accept and reject buttons support six severity values:
-      <code>primary</code>, <code>secondary</code>, <code>success</code>,
-      <code>danger</code>, <code>warning</code>, <code>info</code>.
+      <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>danger</code>,
+      <code>warning</code>, <code>info</code>.
     </p>
     <div class="demo-row demo-row--wrap">
       @for (severity of severities; track severity) {
@@ -83,8 +82,8 @@
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__desc">
       The popup supports three design variants: <code>material</code> (pill buttons, large radius),
-      <code>bootstrap</code> (border, square corners), and <code>minimal</code> (subtle, flat).
-      Each trigger below opens a popup in its respective variant.
+      <code>bootstrap</code> (border, square corners), and <code>minimal</code> (subtle, flat). Each
+      trigger below opens a popup in its respective variant.
     </p>
     <div class="demo-row demo-row--wrap">
       @for (variant of variants; track variant) {
@@ -100,18 +99,17 @@
   <section class="demo-section" id="declarative-usage" data-doc-anchor>
     <h2 class="demo-section__title">Declarative Usage</h2>
     <p class="demo-section__desc">
-      Use <code>[(visible)]</code> for full two-way binding without the service.
-      Outputs <code>(accepted)</code> and <code>(rejected)</code> let you react to user choices.
+      Use <code>[(visible)]</code> for full two-way binding without the service. Outputs
+      <code>(accepted)</code> and <code>(rejected)</code> let you react to user choices.
     </p>
     <div class="demo-row">
       <ui-lib-button (click)="declarativeVisible.set(true)">Open declarative popup</ui-lib-button>
     </div>
 
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetDeclarativeUsage"
+      [typescript]="snippetDeclarativeUsageTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetDeclarativeUsage"
     />
   </section>
 
@@ -141,17 +139,72 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>visible</code></td><td><code>model&lt;boolean&gt;</code></td><td><code>false</code></td><td>Two-way visibility binding</td></tr>
-          <tr><td><code>key</code></td><td><code>string</code></td><td><code>''</code></td><td>Key for targeting a specific popup instance</td></tr>
-          <tr><td><code>message</code></td><td><code>string</code></td><td><code>'Are you sure…'</code></td><td>Confirmation message text</td></tr>
-          <tr><td><code>icon</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Icon CSS class before the message</td></tr>
-          <tr><td><code>acceptLabel</code></td><td><code>string</code></td><td><code>'Yes'</code></td><td>Accept button label</td></tr>
-          <tr><td><code>rejectLabel</code></td><td><code>string</code></td><td><code>'No'</code></td><td>Reject button label</td></tr>
-          <tr><td><code>acceptSeverity</code></td><td><code>ConfirmPopupButtonSeverity</code></td><td><code>'primary'</code></td><td>Accept button colour severity</td></tr>
-          <tr><td><code>rejectSeverity</code></td><td><code>ConfirmPopupButtonSeverity</code></td><td><code>'secondary'</code></td><td>Reject button colour severity</td></tr>
-          <tr><td><code>defaultFocus</code></td><td><code>ConfirmPopupDefaultFocus</code></td><td><code>'accept'</code></td><td>Button focused on open</td></tr>
-          <tr><td><code>variant</code></td><td><code>ConfirmPopupVariant | null</code></td><td><code>null</code></td><td>Design variant (inherits from theme when null)</td></tr>
-          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS classes on host</td></tr>
+          <tr>
+            <td><code>visible</code></td>
+            <td><code>model&lt;boolean&gt;</code></td>
+            <td><code>false</code></td>
+            <td>Two-way visibility binding</td>
+          </tr>
+          <tr>
+            <td><code>key</code></td>
+            <td><code>string</code></td>
+            <td><code>''</code></td>
+            <td>Key for targeting a specific popup instance</td>
+          </tr>
+          <tr>
+            <td><code>message</code></td>
+            <td><code>string</code></td>
+            <td><code>'Are you sure…'</code></td>
+            <td>Confirmation message text</td>
+          </tr>
+          <tr>
+            <td><code>icon</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Icon CSS class before the message</td>
+          </tr>
+          <tr>
+            <td><code>acceptLabel</code></td>
+            <td><code>string</code></td>
+            <td><code>'Yes'</code></td>
+            <td>Accept button label</td>
+          </tr>
+          <tr>
+            <td><code>rejectLabel</code></td>
+            <td><code>string</code></td>
+            <td><code>'No'</code></td>
+            <td>Reject button label</td>
+          </tr>
+          <tr>
+            <td><code>acceptSeverity</code></td>
+            <td><code>ConfirmPopupButtonSeverity</code></td>
+            <td><code>'primary'</code></td>
+            <td>Accept button colour severity</td>
+          </tr>
+          <tr>
+            <td><code>rejectSeverity</code></td>
+            <td><code>ConfirmPopupButtonSeverity</code></td>
+            <td><code>'secondary'</code></td>
+            <td>Reject button colour severity</td>
+          </tr>
+          <tr>
+            <td><code>defaultFocus</code></td>
+            <td><code>ConfirmPopupDefaultFocus</code></td>
+            <td><code>'accept'</code></td>
+            <td>Button focused on open</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>ConfirmPopupVariant | null</code></td>
+            <td><code>null</code></td>
+            <td>Design variant (inherits from theme when null)</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Extra CSS classes on host</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -167,8 +220,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>accepted</code></td><td><code>void</code></td><td>Emitted when accept button is clicked</td></tr>
-          <tr><td><code>rejected</code></td><td><code>void</code></td><td>Emitted when reject / overlay / Escape is triggered</td></tr>
+          <tr>
+            <td><code>accepted</code></td>
+            <td><code>void</code></td>
+            <td>Emitted when accept button is clicked</td>
+          </tr>
+          <tr>
+            <td><code>rejected</code></td>
+            <td><code>void</code></td>
+            <td>Emitted when reject / overlay / Escape is triggered</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -184,9 +245,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>confirm</code></td><td><code>(config: ConfirmPopupConfig) =&gt; void</code></td><td>Show popup anchored to target</td></tr>
-          <tr><td><code>close</code></td><td><code>(key?: string) =&gt; void</code></td><td>Programmatically close popup</td></tr>
-          <tr><td><code>confirmation</code></td><td><code>Signal&lt;ConfirmPopupConfig | null&gt;</code></td><td>Current config signal</td></tr>
+          <tr>
+            <td><code>confirm</code></td>
+            <td><code>(config: ConfirmPopupConfig) =&gt; void</code></td>
+            <td>Show popup anchored to target</td>
+          </tr>
+          <tr>
+            <td><code>close</code></td>
+            <td><code>(key?: string) =&gt; void</code></td>
+            <td>Programmatically close popup</td>
+          </tr>
+          <tr>
+            <td><code>confirmation</code></td>
+            <td><code>Signal&lt;ConfirmPopupConfig | null&gt;</code></td>
+            <td>Current config signal</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -207,5 +280,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

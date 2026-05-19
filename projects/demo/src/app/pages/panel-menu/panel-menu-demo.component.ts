@@ -22,6 +22,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface AriaRow {
   readonly element: string;
@@ -48,6 +49,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
@@ -98,25 +100,107 @@ export class PanelMenuDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly expanded: string;
     readonly multiple: string;
+    readonly multipleTs: string;
     readonly urlItems: string;
     readonly events: string;
+    readonly eventsTs: string;
   } = {
     import: `import { PanelMenu } from 'ui-lib-custom/panel-menu';
 import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
     basic: `<ui-lib-panel-menu [model]="items" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';
+
+@Component({
+  standalone: true,
+  imports: [PanelMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: PanelMenuItem[] = [
+    {
+      label: 'Account',
+      icon: 'pi pi-user',
+      items: [
+        { label: 'Profile', icon: 'pi pi-id-card' },
+        { label: 'Security', icon: 'pi pi-lock' },
+      ],
+    },
+    {
+      label: 'Support',
+      icon: 'pi pi-question-circle',
+      items: [{ label: 'Documentation', icon: 'pi pi-book' }],
+    },
+  ];
+}`,
     expanded: `items: PanelMenuItem[] = [
   { label: 'File', expanded: true, items: [...] },
   { label: 'Edit', items: [...] },
 ];`,
     multiple: `<ui-lib-panel-menu [model]="items" [multiple]="true" />`,
+    multipleTs: `import { Component } from '@angular/core';
+import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';
+
+@Component({
+  standalone: true,
+  imports: [PanelMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: PanelMenuItem[] = [
+    {
+      label: 'Frontend',
+      icon: 'pi pi-desktop',
+      items: [{ label: 'Angular' }, { label: 'React' }],
+    },
+    {
+      label: 'Backend',
+      icon: 'pi pi-server',
+      items: [{ label: 'Node.js' }, { label: 'Python' }],
+    },
+  ];
+}`,
     urlItems: `{ label: 'Angular Docs', url: 'https://angular.dev', target: '_blank' }`,
     events: `<ui-lib-panel-menu
   [model]="items"
   (itemClick)="onItemClick($event)"
   (panelToggle)="onPanelToggle($event)"
 />`,
+    eventsTs: `import { Component } from '@angular/core';
+import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem, PanelMenuCommandEvent, PanelMenuPanelToggleEvent } from 'ui-lib-custom/panel-menu';
+
+@Component({
+  standalone: true,
+  imports: [PanelMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: PanelMenuItem[] = [
+    {
+      label: 'Actions',
+      icon: 'pi pi-bolt',
+      expanded: true,
+      items: [
+        { label: 'Download', icon: 'pi pi-download' },
+        { label: 'Share', icon: 'pi pi-share-alt' },
+      ],
+    },
+  ];
+
+  onItemClick(event: PanelMenuCommandEvent): void {
+    console.log('Item clicked:', event.item.label);
+  }
+
+  onPanelToggle(event: PanelMenuPanelToggleEvent): void {
+    console.log('Panel toggled:', event.item.label, event.expanded);
+  }
+}`,
   } as const;
 
   // ── Basic ───────────────────────────────────────────────────────────────

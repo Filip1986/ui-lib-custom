@@ -18,6 +18,7 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -49,6 +50,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     VariantComparisonComponent,
     BadgeBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -121,14 +123,17 @@ export class BadgesComponent {
   ];
   public readonly sizes: BadgeSize[] = ['sm', 'md', 'lg'];
 
-  public readonly snippets: { readonly usage: string } = {
-    usage: `import { Badge } from 'ui-lib-custom';
+  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
+    usage: `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`,
+    usageTs: `import { Component } from '@angular/core';
+import { Badge } from 'ui-lib-custom/badge';
 
 @Component({
+  standalone: true,
   imports: [Badge],
-  template: \
-    '<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>'
-})`,
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
@@ -170,4 +175,13 @@ export class BadgesComponent {
   }
 
   public readonly badgeExample: string = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
+  public readonly badgeExampleTs: string = `import { Component } from '@angular/core';
+import { Badge } from 'ui-lib-custom/badge';
+
+@Component({
+  standalone: true,
+  imports: [Badge],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 }

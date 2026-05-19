@@ -15,6 +15,7 @@ import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -38,6 +39,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     CodeSnippet,
+    DocCodeExampleComponent,
   ],
   templateUrl: './inline-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -53,6 +55,16 @@ export class InlineSectionComponent {
   <span class="chip">Tag 3</span>
 </ui-lib-inline>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Inline } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Inline],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

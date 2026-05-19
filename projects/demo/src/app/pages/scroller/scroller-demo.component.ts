@@ -12,6 +12,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface DemoItem {
   id: number;
@@ -69,6 +70,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
   standalone: true,
   imports: [
     CodeSnippet,
+    DocCodeExampleComponent,
     CommonModule,
     VirtualScrollerComponent,
     ScrollerItemDirective,
@@ -203,5 +205,28 @@ export class ScrollerDemoComponent {
     <div class="item">{{ item.label }}</div>
   </ng-template>
 </ui-lib-virtual-scroller>`
+  );
+
+  protected readonly demoCodeTs: Signal<string> = computed(
+    (): string =>
+      `import { Component } from '@angular/core';
+import {
+  VirtualScrollerComponent,
+  ScrollerItemDirective,
+} from 'ui-lib-custom/virtual-scroller';
+
+interface Item { id: number; label: string; }
+
+@Component({
+  standalone: true,
+  imports: [VirtualScrollerComponent, ScrollerItemDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: Item[] = Array.from({ length: 10_000 }, (_, index) => ({
+    id: index,
+    label: \`Item \${index + 1}\`,
+  }));
+}`
   );
 }

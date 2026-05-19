@@ -30,6 +30,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type TabKey =
@@ -66,6 +67,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -121,7 +123,11 @@ export class SelectComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets: { readonly usage: string } = {
+  public readonly snippets: {
+    readonly usage: string;
+    readonly usageTs: string;
+    readonly selectExampleTs: string;
+  } = {
     usage: `import { UiLibSelect } from 'ui-lib-custom';
 
 @Component({
@@ -130,6 +136,39 @@ export class SelectComponent {
   template: '<ui-lib-select [options]="[{ label: \'One\', value: 1 }]" label="Choose"></ui-lib-select>'
 })
 export class Example {}`,
+    usageTs: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly options: SelectOption[] = [
+    { label: 'Alpha', value: 'alpha' },
+    { label: 'Beta', value: 'beta' },
+  ];
+  readonly value = signal<SelectOption['value'] | null>(null);
+}`,
+    selectExampleTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly options: SelectOption[] = [
+    { label: 'Alpha', value: 'alpha' },
+    { label: 'Beta', value: 'beta' },
+  ];
+}`,
   } as const;
 
   public readonly selectExample: string = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;

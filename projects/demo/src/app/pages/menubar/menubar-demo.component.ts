@@ -17,6 +17,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the Menubar component.
@@ -33,6 +34,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
@@ -59,8 +61,50 @@ export class MenubarDemoComponent {
     apgPattern: { name: 'Menubar', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/' },
     competitiveParity: 'pending',
   };
-  public readonly snippetBasic: string = `{{ basicModel }}\n<ui-lib-menubar [model]="basicModel" />`;
-  public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">\n  <span menubarStart>MyApp</span>\n  <button menubarEnd>Sign In</button>\n</ui-lib-menubar>`;
+  public readonly snippetBasic: string = `<ui-lib-menubar [model]="basicModel" />`;
+  public readonly snippetBasicTs: string = `import { Component } from '@angular/core';
+import { Menubar } from 'ui-lib-custom/menubar';
+import type { MenubarItem } from 'ui-lib-custom/menubar';
+
+@Component({
+  standalone: true,
+  imports: [Menubar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly basicModel: MenubarItem[] = [
+    {
+      label: 'File',
+      items: [
+        { label: 'New', icon: 'pi pi-file' },
+        { label: 'Open', icon: 'pi pi-folder-open' },
+        { separator: true },
+        { label: 'Save', icon: 'pi pi-save' },
+      ],
+    },
+    { label: 'Edit', items: [{ label: 'Undo' }, { label: 'Redo' }] },
+    { label: 'Help', items: [{ label: 'About' }] },
+  ];
+}`;
+  public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">
+  <span menubarStart>MyApp</span>
+  <button menubarEnd>Sign In</button>
+</ui-lib-menubar>`;
+  public readonly snippetStartEndTs: string = `import { Component } from '@angular/core';
+import { Menubar } from 'ui-lib-custom/menubar';
+import type { MenubarItem } from 'ui-lib-custom/menubar';
+
+@Component({
+  standalone: true,
+  imports: [Menubar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenubarItem[] = [
+    { label: 'Home' },
+    { label: 'About' },
+  ];
+}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

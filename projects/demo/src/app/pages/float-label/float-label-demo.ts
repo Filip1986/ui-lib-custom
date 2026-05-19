@@ -15,6 +15,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Button } from 'ui-lib-custom/button';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -56,6 +57,7 @@ type FloatLabelDemoSnippetKey =
     Button,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',
@@ -203,8 +205,107 @@ export class FloatLabelDemoComponent {
   public submittedReactiveValue: { firstName: string; city: string | null; bio: string } | null =
     null;
 
+  public readonly snippetsTs: Record<FloatLabelDemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+import { UiLibInput } from 'ui-lib-custom/input';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, FloatLabelComponent, UiLibInput],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public basicValue: string = '';
+}`,
+    variants: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, FloatLabelComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly variantValues: { over: string; in: string; on: string } = {
+    over: '',
+    in: '',
+    on: '',
+  };
+}`,
+    select: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+import { UiLibSelect } from 'ui-lib-custom/select';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, FloatLabelComponent, UiLibSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public selectedCity: string | null = null;
+  public readonly cityOptions = [
+    { label: 'Amsterdam', value: 'amsterdam' },
+    { label: 'Berlin', value: 'berlin' },
+    { label: 'Lisbon', value: 'lisbon' },
+  ];
+}`,
+    textarea: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, FloatLabelComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public notes: string = '';
+}`,
+    invalid: `import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, FloatLabelComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly invalidForm = new FormGroup({
+    over: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    in: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    on: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+  });
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+import { UiLibSelect } from 'ui-lib-custom/select';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, FloatLabelComponent, UiLibSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly reactiveForm = new FormGroup({
+    firstName: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    city: new FormControl<string | null>(null, { validators: [Validators.required] }),
+    bio: new FormControl('', { nonNullable: true }),
+  });
+}`,
+  };
+
   public snippet(key: FloatLabelDemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: FloatLabelDemoSnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public markInvalidAsDirty(): void {

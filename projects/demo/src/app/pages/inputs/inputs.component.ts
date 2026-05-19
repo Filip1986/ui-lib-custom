@@ -25,6 +25,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
@@ -64,6 +65,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     VariantComparisonComponent,
     InputBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -117,15 +119,17 @@ export class InputsComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets: { readonly usage: string } = {
-    usage: `import { UiLibInput } from 'ui-lib-custom';
+  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
+    usage: `<ui-lib-input label="Email" placeholder="you@example.com" />`,
+    usageTs: `import { Component } from '@angular/core';
+import { UiLibInput } from 'ui-lib-custom/input';
 
 @Component({
   standalone: true,
   imports: [UiLibInput],
-  template: '<ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>'
+  templateUrl: './my.component.html',
 })
-export class Example {}`,
+export class MyComponent {}`,
   } as const;
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
@@ -247,4 +251,13 @@ export class Example {}`,
   public readonly labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
 
   public readonly inputExample: string = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
+  public readonly inputExampleTs: string = `import { Component } from '@angular/core';
+import { UiLibInput } from 'ui-lib-custom/input';
+
+@Component({
+  standalone: true,
+  imports: [UiLibInput],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 }

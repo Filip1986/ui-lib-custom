@@ -8,28 +8,25 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-
       <!-- a. Basic -->
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">
           Default knob with ngModel binding. Drag up/down or use arrow keys to change the value.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="basicValue"
-                  ariaLabel="Basic value"
-                />
-                <span class="knob-caption">Value: {{ basicValue }}</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+                ariaLabel="Basic value"
+              />
+              <span class="knob-caption">Value: {{ basicValue }}</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
       </section>
 
       <!-- b. Sizes -->
@@ -38,40 +35,38 @@
         <p class="section-text">
           Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row knob-row--align-end">
-              <div class="knob-item">
-                <uilib-knob
-                  size="sm"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="basicValue"
-                  ariaLabel="Small knob"
-                />
-                <span class="knob-caption">sm</span>
-              </div>
-              <div class="knob-item">
-                <uilib-knob
-                  size="md"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="basicValue"
-                  ariaLabel="Medium knob"
-                />
-                <span class="knob-caption">md</span>
-              </div>
-              <div class="knob-item">
-                <uilib-knob
-                  size="lg"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="basicValue"
-                  ariaLabel="Large knob"
-                />
-                <span class="knob-caption">lg</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row knob-row--align-end">
+            <div class="knob-item">
+              <uilib-knob
+                size="sm"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+                ariaLabel="Small knob"
+              />
+              <span class="knob-caption">sm</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
+            <div class="knob-item">
+              <uilib-knob
+                size="md"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+                ariaLabel="Medium knob"
+              />
+              <span class="knob-caption">md</span>
+            </div>
+            <div class="knob-item">
+              <uilib-knob
+                size="lg"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+                ariaLabel="Large knob"
+              />
+              <span class="knob-caption">lg</span>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
       </section>
 
       <!-- c. Step -->
@@ -80,22 +75,20 @@
         <p class="section-text">
           Use <code>[step]</code> to control the increment. This knob snaps to 0, 25, 50, 75, 100.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  [step]="25"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="stepValue"
-                  ariaLabel="Step knob"
-                />
-                <span class="knob-caption">step=25 &middot; value={{ stepValue }}</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                [step]="25"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="stepValue"
+                ariaLabel="Step knob"
+              />
+              <span class="knob-caption">step=25 &middot; value={{ stepValue }}</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('step')" 
-          [showLineNumbers]="true"
-          />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('step')" [typescript]="snippetTs('step')" />
       </section>
 
       <!-- d. Min / Max -->
@@ -104,128 +97,118 @@
         <p class="section-text">
           Constrain the value range. This knob spans &minus;50 to +50 in steps of 10.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  [min]="-50"
-                  [max]="50"
-                  [step]="10"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="minmaxValue"
-                  ariaLabel="Min max knob"
-                />
-                <span class="knob-caption">value={{ minmaxValue }}</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                [min]="-50"
+                [max]="50"
+                [step]="10"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="minmaxValue"
+                ariaLabel="Min max knob"
+              />
+              <span class="knob-caption">value={{ minmaxValue }}</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('minmax')" 
-          [showLineNumbers]="true"
-          />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('minmax')" [typescript]="snippetTs('minmax')" />
       </section>
 
       <!-- e. Value Template -->
       <section id="template" data-doc-anchor class="example-section">
         <h3>e. Value Template</h3>
         <p class="section-text">
-          Pass a <code>valueTemplate</code> string to format the centre label.
-          Use <code>&#123;value&#125;</code> as the interpolation placeholder.
+          Pass a <code>valueTemplate</code> string to format the centre label. Use
+          <code>&#123;value&#125;</code> as the interpolation placeholder.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  valueTemplate="{value}&#176;"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="templateValue"
-                  ariaLabel="Temperature knob"
-                />
-                <span class="knob-caption">degrees</span>
-              </div>
-              <div class="knob-item">
-                <uilib-knob
-                  valueTemplate="{value}%"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="templateValue"
-                  ariaLabel="Percentage knob"
-                />
-                <span class="knob-caption">percent</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                valueTemplate="{value}&#176;"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="templateValue"
+                ariaLabel="Temperature knob"
+              />
+              <span class="knob-caption">degrees</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('template')" 
-          [showLineNumbers]="true"
-          />
+            <div class="knob-item">
+              <uilib-knob
+                valueTemplate="{value}%"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="templateValue"
+                ariaLabel="Percentage knob"
+              />
+              <span class="knob-caption">percent</span>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('template')" [typescript]="snippetTs('template')" />
       </section>
 
       <!-- f. Custom Colors -->
       <section id="colors" data-doc-anchor class="example-section">
         <h3>f. Custom Colors</h3>
         <p class="section-text">
-          Override arc and text colours per-instance via <code>valueColor</code>
-          and <code>textColor</code> inputs.
+          Override arc and text colours per-instance via <code>valueColor</code> and
+          <code>textColor</code> inputs.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  valueColor="#f59e0b"
-                  textColor="#b45309"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="colorsValue"
-                  ariaLabel="Amber knob"
-                />
-                <span class="knob-caption">amber</span>
-              </div>
-              <div class="knob-item">
-                <uilib-knob
-                  valueColor="#10b981"
-                  textColor="#065f46"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="colorsValue"
-                  ariaLabel="Emerald knob"
-                />
-                <span class="knob-caption">emerald</span>
-              </div>
-              <div class="knob-item">
-                <uilib-knob
-                  valueColor="#ef4444"
-                  textColor="#991b1b"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="colorsValue"
-                  ariaLabel="Red knob"
-                />
-                <span class="knob-caption">red</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                valueColor="#f59e0b"
+                textColor="#b45309"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="colorsValue"
+                ariaLabel="Amber knob"
+              />
+              <span class="knob-caption">amber</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('colors')" 
-          [showLineNumbers]="true"
-          />
+            <div class="knob-item">
+              <uilib-knob
+                valueColor="#10b981"
+                textColor="#065f46"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="colorsValue"
+                ariaLabel="Emerald knob"
+              />
+              <span class="knob-caption">emerald</span>
+            </div>
+            <div class="knob-item">
+              <uilib-knob
+                valueColor="#ef4444"
+                textColor="#991b1b"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="colorsValue"
+                ariaLabel="Red knob"
+              />
+              <span class="knob-caption">red</span>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('colors')" [typescript]="snippetTs('colors')" />
       </section>
 
       <!-- g. Disabled -->
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>g. Disabled</h3>
-        <p class="section-text">
-          A disabled knob is visually muted and ignores all interaction.
-        </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  [disabled]="true"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="disabledValue"
-                  ariaLabel="Disabled knob"
-                />
-                <span class="knob-caption">disabled</span>
-              </div>
+        <p class="section-text">A disabled knob is visually muted and ignores all interaction.</p>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                [disabled]="true"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="disabledValue"
+                ariaLabel="Disabled knob"
+              />
+              <span class="knob-caption">disabled</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-          [showLineNumbers]="true"
-          />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
       </section>
 
       <!-- h. Read-only -->
@@ -234,55 +217,42 @@
         <p class="section-text">
           A read-only knob is focusable but does not respond to drag or keyboard input.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="knob-row">
-              <div class="knob-item">
-                <uilib-knob
-                  [readonly]="true"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="readonlyValue"
-                  ariaLabel="Readonly knob"
-                />
-                <span class="knob-caption">readonly</span>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="knob-row">
+            <div class="knob-item">
+              <uilib-knob
+                [readonly]="true"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="readonlyValue"
+                ariaLabel="Readonly knob"
+              />
+              <span class="knob-caption">readonly</span>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
-          [showLineNumbers]="true"
-          />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippetTs('readonly')" />
       </section>
 
       <!-- i. Reactive Forms -->
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>i. Reactive Forms</h3>
-        <p class="section-text">
-          Knobs work with Angular reactive forms out of the box via CVA.
-        </p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="reactiveForm">
-              <div class="knob-row">
-                <div class="knob-item">
-                  <uilib-knob
-                    formControlName="brightness"
-                    ariaLabel="Brightness"
-                  />
-                  <span class="knob-caption">brightness={{ brightnessControl.value }}</span>
-                </div>
-                <div class="knob-item">
-                  <uilib-knob
-                    formControlName="contrast"
-                    ariaLabel="Contrast"
-                  />
-                  <span class="knob-caption">contrast={{ contrastControl.value }}</span>
-                </div>
+        <p class="section-text">Knobs work with Angular reactive forms out of the box via CVA.</p>
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm">
+            <div class="knob-row">
+              <div class="knob-item">
+                <uilib-knob formControlName="brightness" ariaLabel="Brightness" />
+                <span class="knob-caption">brightness={{ brightnessControl.value }}</span>
               </div>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
+              <div class="knob-item">
+                <uilib-knob formControlName="contrast" ariaLabel="Contrast" />
+                <span class="knob-caption">contrast={{ contrastControl.value }}</span>
+              </div>
+            </div>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
       </section>
-
     </div>
   </app-doc-demo-viewport>
 
@@ -296,5 +266,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

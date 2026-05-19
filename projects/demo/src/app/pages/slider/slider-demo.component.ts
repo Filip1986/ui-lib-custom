@@ -3,6 +3,7 @@ import type { Signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -44,6 +45,7 @@ type SliderDemoSnippetKey =
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
@@ -113,6 +115,136 @@ export class SliderDemoComponent {
 
   public snippet(key: SliderDemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  private readonly snippetsTs: Record<SliderDemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 40;
+}`,
+    range: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  rangeValue: [number, number] = [20, 75];
+}`,
+    step: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 0;
+}`,
+    minmax: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = -10;
+}`,
+    vertical: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 60;
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 50;
+}`,
+    animate: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 30;
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 55;
+}`,
+    readonly: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  value: number = 35;
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Slider } from 'ui-lib-custom/slider';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, Slider],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly form: FormGroup = new FormGroup({
+    volume: new FormControl<number>(60),
+    brightness: new FormControl<number>(40),
+  });
+}`,
+  };
+
+  public snippetTs(key: SliderDemoSnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public get volumeControl(): FormControl<number> {

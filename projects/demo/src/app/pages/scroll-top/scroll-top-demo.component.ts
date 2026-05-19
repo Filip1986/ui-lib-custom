@@ -8,6 +8,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the ScrollTop component.
@@ -22,6 +23,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './scroll-top-demo.component.html',
   styleUrl: './scroll-top-demo.component.scss',
@@ -66,7 +68,25 @@ export class ScrollTopDemoComponent {
   }
 
   public readonly snippetThreshold: string = `<ui-lib-scroll-top [threshold]="200" />`;
+  public readonly snippetThresholdTs: string = `import { Component } from '@angular/core';
+import { ScrollTop } from 'ui-lib-custom/scroll-top';
+
+@Component({
+  standalone: true,
+  imports: [ScrollTop],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly snippetParentTarget: string = `<div style="height: 300px; overflow-y: auto; position: relative;">\n  <ui-lib-scroll-top target="parent" [threshold]="100" />\n  <!-- scrollable content -->\n</div>`;
+  public readonly snippetParentTargetTs: string = `import { Component } from '@angular/core';
+import { ScrollTop } from 'ui-lib-custom/scroll-top';
+
+@Component({
+  standalone: true,
+  imports: [ScrollTop],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   /** Items for the scrollable container demo. */
   public readonly dummyItems: number[] = Array.from(

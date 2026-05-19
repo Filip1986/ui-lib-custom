@@ -28,6 +28,7 @@ import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.com
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -63,6 +64,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     CardBasicExampleComponent,
     ThemeScopeDirective,
     DocQualityBadgeComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -136,6 +138,15 @@ export class Example {}`,
   Card content
   <div card-footer>Actions</div>
 </ui-lib-card>`;
+  public readonly cardExampleTs: string = `import { Component } from '@angular/core';
+import { Card } from 'ui-lib-custom/card';
+
+@Component({
+  standalone: true,
+  imports: [Card],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly variant: WritableSignal<CardVariant> = signal<CardVariant>('material');
   public readonly elevation: WritableSignal<CardElevation> = signal<CardElevation>('medium');
