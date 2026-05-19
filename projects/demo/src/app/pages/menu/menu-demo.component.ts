@@ -19,37 +19,14 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface AriaRow {
   readonly element: string;
   readonly attribute: string;
   readonly value: string;
   readonly notes: string;
-}
-
-interface InputRow {
-  readonly name: string;
-  readonly type: string;
-  readonly default: string;
-  readonly description: string;
-}
-
-interface OutputRow {
-  readonly name: string;
-  readonly payload: string;
-  readonly description: string;
-}
-
-interface MethodRow {
-  readonly name: string;
-  readonly parameters: string;
-  readonly description: string;
-}
-
-interface MenuItemRow {
-  readonly property: string;
-  readonly type: string;
-  readonly description: string;
 }
 
 /**
@@ -71,6 +48,7 @@ interface MenuItemRow {
     DocKeyboardNavComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
@@ -329,141 +307,136 @@ onItemClick(event: MenuItemCommandEvent): void {
 
   // ── API data ──────────────────────────────────────────────────────────────
 
-  public readonly inputRows: InputRow[] = [
+  public readonly apiInputRows: ApiPropRow[] = [
     {
-      name: '<code>model</code>',
-      type: '<code>MenuItem[]</code>',
-      default: '<code>[]</code>',
+      name: 'model',
+      type: 'MenuItem[]',
+      default: '[]',
       description:
         'Items to render. Top-level items with an <code>items</code> array act as labelled group headers.',
     },
     {
-      name: '<code>popup</code>',
-      type: '<code>boolean</code>',
-      default: '<code>false</code>',
+      name: 'popup',
+      type: 'boolean',
+      default: 'false',
       description:
         'When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.',
     },
     {
-      name: '<code>variant</code>',
-      type: "<code>'material' | 'bootstrap' | 'minimal' | null</code>",
-      default: '<code>null</code>',
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
       description:
         'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
     },
     {
-      name: '<code>size</code>',
-      type: "<code>'sm' | 'md' | 'lg'</code>",
-      default: "<code>'md'</code>",
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
       description: 'Size token controlling item padding and font size.',
     },
     {
-      name: '<code>styleClass</code>',
-      type: '<code>string | null</code>',
-      default: '<code>null</code>',
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
       description: 'Extra CSS class applied to the host element.',
     },
     {
-      name: '<code>ariaLabel</code>',
-      type: '<code>string</code>',
-      default: "<code>'Menu'</code>",
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Menu'",
       description:
         'Accessible label for the <code>role="menu"</code> panel. Provide a unique value when multiple menus appear on screen.',
     },
   ];
 
-  public readonly outputRows: OutputRow[] = [
+  public readonly apiOutputRows: ApiPropRow[] = [
     {
-      name: '<code>itemClick</code>',
-      payload: '<code>MenuItemCommandEvent</code>',
+      name: 'itemClick',
+      type: 'MenuItemCommandEvent',
       description: 'Emitted when a non-disabled leaf item is activated (click or keyboard).',
     },
     {
-      name: '<code>menuShow</code>',
-      payload: '<code>MouseEvent</code>',
+      name: 'menuShow',
+      type: 'MouseEvent',
       description: 'Emitted when the popup panel becomes visible. Popup mode only.',
     },
     {
-      name: '<code>menuHide</code>',
-      payload: '<code>void</code>',
+      name: 'menuHide',
+      type: 'void',
       description: 'Emitted when the popup panel is hidden. Popup mode only.',
     },
   ];
 
-  public readonly methodRows: MethodRow[] = [
+  public readonly apiMethodRows: ApiPropRow[] = [
     {
-      name: '<code>toggle(event)</code>',
-      parameters: '<code>MouseEvent</code>',
+      name: 'toggle(event)',
+      type: 'MouseEvent',
       description:
         'Toggles the popup open or closed anchored to the trigger. No-op in inline mode.',
     },
     {
-      name: '<code>show(event)</code>',
-      parameters: '<code>MouseEvent</code>',
+      name: 'show(event)',
+      type: 'MouseEvent',
       description:
         'Shows the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.',
     },
     {
-      name: '<code>hide()</code>',
-      parameters: '—',
+      name: 'hide()',
+      type: '—',
       description:
         'Hides the popup and restores focus to the trigger element. No-op in inline mode.',
     },
   ];
 
-  public readonly menuItemRows: MenuItemRow[] = [
+  public readonly apiMenuItemRows: ApiPropRow[] = [
+    { name: 'label', type: 'string?', description: 'Display text for the item or group header.' },
     {
-      property: '<code>label</code>',
-      type: '<code>string?</code>',
-      description: 'Display text for the item or group header.',
-    },
-    {
-      property: '<code>icon</code>',
-      type: '<code>string?</code>',
+      name: 'icon',
+      type: 'string?',
       description:
         'Icon class rendered in a decorative <code>&lt;span aria-hidden="true"&gt;</code>.',
     },
     {
-      property: '<code>disabled</code>',
-      type: '<code>boolean?</code>',
+      name: 'disabled',
+      type: 'boolean?',
       description:
         'When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and excluded from keyboard navigation.',
     },
     {
-      property: '<code>separator</code>',
-      type: '<code>boolean?</code>',
+      name: 'separator',
+      type: 'boolean?',
       description: 'Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.',
     },
     {
-      property: '<code>visible</code>',
-      type: '<code>boolean?</code>',
+      name: 'visible',
+      type: 'boolean?',
       description: 'When explicitly <code>false</code>, excludes the item from rendering.',
     },
     {
-      property: '<code>items</code>',
-      type: '<code>MenuItem[]?</code>',
+      name: 'items',
+      type: 'MenuItem[]?',
       description:
         'Child items — makes the parent a labelled group header (<code>role="group"</code>).',
     },
     {
-      property: '<code>url</code>',
-      type: '<code>string?</code>',
+      name: 'url',
+      type: 'string?',
       description: 'Renders the item as <code>&lt;a href="..."&gt;</code>.',
     },
     {
-      property: '<code>target</code>',
-      type: '<code>string?</code>',
-      description:
-        "<code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).",
+      name: 'target',
+      type: 'string?',
+      description: "Target attribute for URL-based items (e.g. <code>'_blank'</code>).",
     },
     {
-      property: '<code>styleClass</code>',
-      type: '<code>string?</code>',
+      name: 'styleClass',
+      type: 'string?',
       description: 'Extra CSS class added to the rendered link element.',
     },
     {
-      property: '<code>command</code>',
-      type: '<code>function?</code>',
+      name: 'command',
+      type: 'function?',
       description: 'Callback invoked when the item is activated (click or keyboard).',
     },
   ];

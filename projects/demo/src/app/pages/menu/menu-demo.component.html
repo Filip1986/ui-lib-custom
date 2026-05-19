@@ -56,7 +56,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.basic" language="html" 
+    <ui-lib-code-snippet [code]="snippets.basic" language="html"
       [showLineNumbers]="true"
       />
   </section>
@@ -71,7 +71,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="separatorItems" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.separator" language="typescript" 
+    <ui-lib-code-snippet [code]="snippets.separator" language="typescript"
       [showLineNumbers]="true"
       />
   </section>
@@ -100,7 +100,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="groupedItems" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.grouped" language="typescript" 
+    <ui-lib-code-snippet [code]="snippets.grouped" language="typescript"
       [showLineNumbers]="true"
       />
   </section>
@@ -141,7 +141,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.popup" language="html" 
+    <ui-lib-code-snippet [code]="snippets.popup" language="html"
       [showLineNumbers]="true"
       />
   </section>
@@ -202,7 +202,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.commands" language="typescript" 
+    <ui-lib-code-snippet [code]="snippets.commands" language="typescript"
       [showLineNumbers]="true"
       />
   </section>
@@ -217,7 +217,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="urlItems" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.urlItems" language="typescript" 
+    <ui-lib-code-snippet [code]="snippets.urlItems" language="typescript"
       [showLineNumbers]="true"
       />
   </section>
@@ -244,7 +244,7 @@
         <ui-lib-menu [model]="variantItems" variant="minimal" />
       </div>
     </div>
-    <ui-lib-code-snippet [code]="snippets.variants" language="html" 
+    <ui-lib-code-snippet [code]="snippets.variants" language="html"
       [showLineNumbers]="true"
       />
   </section>
@@ -270,7 +270,7 @@
         <ui-lib-menu [model]="sizeItems" size="lg" />
       </div>
     </div>
-    <ui-lib-code-snippet [code]="snippets.sizes" language="html" 
+    <ui-lib-code-snippet [code]="snippets.sizes" language="html"
       [showLineNumbers]="true"
       />
   </section>
@@ -280,85 +280,16 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Name" field="name" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.name"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Type" field="type" width="220px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.type"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Default" field="default" width="120px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.default"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-section__subtitle">Outputs</h3>
-    <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Name" field="name" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.name"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Payload" field="payload" width="200px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.payload"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">Methods</h3>
-    <ui-lib-table [value]="methodRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Name" field="name" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.name"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Parameters" field="parameters" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.parameters"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-api-reference kind="property" [rows]="apiMethodRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">MenuItem</h3>
-    <ui-lib-table [value]="menuItemRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Property" field="property" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.property"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Type" field="type" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.type"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-api-reference kind="name" [rows]="apiMenuItemRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" />

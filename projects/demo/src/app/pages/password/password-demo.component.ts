@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /** Demo page for the Password component. */
 @Component({
@@ -25,6 +27,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './password-demo.component.html',
   styleUrl: './password-demo.component.scss',
@@ -159,5 +162,116 @@ export class PasswordDemoComponent {
       key: 'Enter / Space',
       action: 'Activates the toggle-mask or clear button when one of them has focus.',
     },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description:
+        'Design variant. Does <strong>not</strong> inherit from <code>ThemeConfigService</code> — set explicitly.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Component density.',
+    },
+    {
+      name: 'appearance',
+      type: "'outlined' | 'filled'",
+      default: "'outlined'",
+      description: 'Solid-background filled style vs. default outlined style.',
+    },
+    {
+      name: 'feedback',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'Shows a strength meter panel on focus. Set to <code>false</code> for a plain field.',
+    },
+    {
+      name: 'toggleMask',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a show/hide eye button with <code>aria-pressed</code>.',
+    },
+    {
+      name: 'showClear',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows an inline clear button when the field has a value.',
+    },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Stretches the field to fill its container.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the field. Also driven by <code>FormControl.disable()</code>.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the input read-only.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies invalid/error styles. Does not render an error message.',
+    },
+    { name: 'placeholder', type: 'string', description: 'Native input placeholder.' },
+    {
+      name: 'inputId',
+      type: 'string',
+      description: 'Overrides the auto-generated id on the native <code>&lt;input&gt;</code>.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      description: 'Applied to the native input when no visible label is used.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string',
+      description: 'Overrides the auto-linked label id. Prefer a visible label when possible.',
+    },
+    {
+      name: 'promptLabel',
+      type: 'string',
+      default: "'Enter a password'",
+      description: 'Strength panel text before typing begins.',
+    },
+    {
+      name: 'weakLabel',
+      type: 'string',
+      default: "'Weak'",
+      description: 'Strength panel text for a weak password.',
+    },
+    {
+      name: 'mediumLabel',
+      type: 'string',
+      default: "'Medium'",
+      description: 'Strength panel text for a medium-strength password.',
+    },
+    {
+      name: 'strongLabel',
+      type: 'string',
+      default: "'Strong'",
+      description: 'Strength panel text for a strong password.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    { name: 'focused', type: 'Event', description: 'Fires when the input gains focus.' },
+    { name: 'blurred', type: 'Event', description: 'Fires when the input loses focus.' },
+    { name: 'cleared', type: 'void', description: 'Fires when the clear button is clicked.' },
   ];
 }

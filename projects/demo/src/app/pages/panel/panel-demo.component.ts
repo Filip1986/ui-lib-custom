@@ -19,25 +19,8 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import { DocQualityBadgeComponent } from '../../shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '../../shared/doc-page/doc-quality-badge.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-
-interface InputRow {
-  readonly input: string;
-  readonly type: string;
-  readonly default: string;
-  readonly description: string;
-}
-
-interface OutputRow {
-  readonly output: string;
-  readonly type: string;
-  readonly description: string;
-}
-
-interface ProjectionRow {
-  readonly slot: string;
-  readonly selector: string;
-  readonly description: string;
-}
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface AriaRow {
   readonly element: string;
@@ -65,6 +48,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
@@ -200,67 +184,63 @@ export class PanelDemoComponent {
 
   // ---- API data -----------------------------------------------------------
 
-  public readonly inputRows: InputRow[] = [
+  public readonly apiInputRows: ApiPropRow[] = [
     {
-      input: '<code>header</code>',
-      type: '<code>string</code>',
-      default: "<code>''</code>",
+      name: 'header',
+      type: 'string',
+      default: "''",
       description: 'Header title text. Use <code>[panelHeader]</code> projection for rich HTML.',
     },
     {
-      input: '<code>toggleable</code>',
-      type: '<code>boolean</code>',
-      default: '<code>false</code>',
+      name: 'toggleable',
+      type: 'boolean',
+      default: 'false',
       description: 'Whether the body can be collapsed and expanded.',
     },
     {
-      input: '<code>collapsed</code>',
-      type: '<code>boolean</code> (model)',
-      default: '<code>false</code>',
+      name: 'collapsed',
+      type: 'boolean (model)',
+      default: 'false',
       description: 'Two-way bound collapsed state. Use <code>[(collapsed)]</code> with a signal.',
     },
     {
-      input: '<code>variant</code>',
-      type: "<code>'material' | 'bootstrap' | 'minimal' | null</code>",
-      default: '<code>null</code>',
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
       description:
         'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
     },
     {
-      input: '<code>styleClass</code>',
-      type: '<code>string | null</code>',
-      default: '<code>null</code>',
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
       description: 'Additional CSS classes added to the host element.',
     },
   ];
 
-  public readonly outputRows: OutputRow[] = [
+  public readonly apiOutputRows: ApiPropRow[] = [
     {
-      output: '<code>toggled</code>',
-      type: '<code>PanelToggleEvent</code>',
+      name: 'toggled',
+      type: 'PanelToggleEvent',
       description: 'Emitted when the collapsed state changes via the toggle button.',
     },
   ];
 
-  public readonly projectionRows: ProjectionRow[] = [
+  public readonly apiProjectionRows: ApiPropRow[] = [
+    { name: 'Body', type: '(default)', description: 'Main body content.' },
     {
-      slot: 'Body',
-      selector: '<em>(default)</em>',
-      description: 'Main body content.',
-    },
-    {
-      slot: 'Custom header',
-      selector: '<code>[panelHeader]</code>',
+      name: 'Custom header',
+      type: '[panelHeader]',
       description: 'Replaces the text header area. The toggle button is preserved.',
     },
     {
-      slot: 'Header icons',
-      selector: '<code>[panelIcons]</code>',
+      name: 'Header icons',
+      type: '[panelIcons]',
       description: 'Action elements placed in the header right area, before the toggle button.',
     },
     {
-      slot: 'Footer',
-      selector: '<code>[panelFooter]</code>',
+      name: 'Footer',
+      type: '[panelFooter]',
       description: 'Content below the body. Always visible regardless of collapsed state.',
     },
   ];

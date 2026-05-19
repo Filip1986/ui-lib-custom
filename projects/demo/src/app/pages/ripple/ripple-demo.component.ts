@@ -13,6 +13,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Ripple directive.
@@ -28,8 +30,9 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocPageLayoutComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
-    DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',
@@ -150,6 +153,29 @@ export class RippleDemoComponent {
     {
       key: 'Space',
       action: 'Same as <kbd>Enter</kbd> for <code>&lt;button&gt;</code> elements.',
+    },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, no ripple wave is produced on click.',
+    },
+    {
+      name: 'rippleColor',
+      type: 'string',
+      default: "''",
+      description:
+        'Inline override for <code>--uilib-ripple-color</code>. Any valid CSS colour (e.g. <code>rgba(0,0,0,0.12)</code>).',
+    },
+    {
+      name: 'rippleDuration',
+      type: 'string',
+      default: "''",
+      description:
+        "Inline override for <code>--uilib-ripple-duration</code> (e.g. <code>'400ms'</code>).",
     },
   ];
 }

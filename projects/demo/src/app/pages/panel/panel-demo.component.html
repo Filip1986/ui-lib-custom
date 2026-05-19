@@ -334,50 +334,13 @@
     <!-- Inputs -->
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Input" field="input" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.input"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Type" field="type" width="220px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.type"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Default" field="default" width="120px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.default"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.description"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <!-- Outputs -->
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Output" field="output" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.output"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Type" field="type" width="200px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.type"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.description"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
       <p class="demo-section__description" style="margin-top:0.75rem;">
         <code>PanelToggleEvent</code> shape:
         <code>&#123; collapsed: boolean; originalEvent?: Event &#125;</code>
@@ -387,23 +350,7 @@
     <!-- Content Projection -->
     <div id="api-projection" data-doc-anchor>
       <h3 class="demo-section__subtitle">Content Projection</h3>
-      <ui-lib-table [value]="projectionRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Slot" field="slot" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.slot"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Selector" field="selector" width="180px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.selector"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.description"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+      <app-doc-api-reference kind="name" [rows]="apiProjectionRows" [showDefault]="false" />
     </div>
   </section>
 

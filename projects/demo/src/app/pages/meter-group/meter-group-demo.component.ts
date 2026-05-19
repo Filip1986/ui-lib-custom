@@ -20,6 +20,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the MeterGroup component.
@@ -37,6 +39,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
@@ -245,6 +248,87 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';`,
       key: 'Tab / Shift+Tab',
       action:
         'Skips meter segments and legend items — MeterGroup is informational and non-interactive, nothing is focusable.',
+    },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'values',
+      type: 'MeterItem[]',
+      default: '[]',
+      description: 'Array of meter segments to render.',
+    },
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value of the range.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value of the range.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Bar direction.',
+    },
+    {
+      name: 'showLabels',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show or hide the legend.',
+    },
+    {
+      name: 'labelPosition',
+      type: "'start' | 'end'",
+      default: "'end'",
+      description:
+        'Legend placement — <code>start</code> is above / left, <code>end</code> is below / right.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Bar thickness size token.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description:
+        'Visual design variant; falls back to <code>ThemeConfigService</code> when null.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Meter group'",
+      description: 'Accessible label for the meter container group.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes appended to the host element.',
+    },
+  ];
+
+  public readonly apiMeterItemRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      required: true,
+      description: 'Display label shown in the legend and used as the segment aria-label.',
+    },
+    {
+      name: 'value',
+      type: 'number',
+      required: true,
+      description: 'Numeric value measured against min / max.',
+    },
+    {
+      name: 'color',
+      type: 'string',
+      required: true,
+      description: 'CSS colour string for the segment fill (hex, rgb, hsl, named colour).',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      description: 'Optional PrimeIcons class shown inside the legend colour swatch.',
     },
   ];
 }

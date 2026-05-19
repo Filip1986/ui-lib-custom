@@ -218,118 +218,12 @@
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>values</code></td>
-            <td><code>MeterItem[]</code></td>
-            <td><code>[]</code></td>
-            <td>Array of meter segments to render.</td>
-          </tr>
-          <tr>
-            <td><code>min</code></td>
-            <td><code>number</code></td>
-            <td><code>0</code></td>
-            <td>Minimum value of the range.</td>
-          </tr>
-          <tr>
-            <td><code>max</code></td>
-            <td><code>number</code></td>
-            <td><code>100</code></td>
-            <td>Maximum value of the range.</td>
-          </tr>
-          <tr>
-            <td><code>orientation</code></td>
-            <td><code>'horizontal' | 'vertical'</code></td>
-            <td><code>'horizontal'</code></td>
-            <td>Bar direction.</td>
-          </tr>
-          <tr>
-            <td><code>showLabels</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Show or hide the legend.</td>
-          </tr>
-          <tr>
-            <td><code>labelPosition</code></td>
-            <td><code>'start' | 'end'</code></td>
-            <td><code>'end'</code></td>
-            <td>Legend placement — <code>start</code> is above / left, <code>end</code> is below / right.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Bar thickness size token.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Visual design variant; falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabel</code></td>
-            <td><code>string</code></td>
-            <td><code>'Meter group'</code></td>
-            <td>Accessible label for the meter container group (<code>aria-label</code> on the group element).</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Extra CSS classes appended to the host element.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-meter-item" data-doc-anchor>
       <h3 class="demo-section__subtitle">MeterItem</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string</code></td>
-            <td>Yes</td>
-            <td>Display label shown in the legend and used as the segment <code>aria-label</code>.</td>
-          </tr>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>number</code></td>
-            <td>Yes</td>
-            <td>Numeric value measured against <code>min</code> / <code>max</code>.</td>
-          </tr>
-          <tr>
-            <td><code>color</code></td>
-            <td><code>string</code></td>
-            <td>Yes</td>
-            <td>CSS colour string for the segment fill (hex, rgb, hsl, named colour).</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string</code></td>
-            <td>No</td>
-            <td>Optional PrimeIcons class shown inside the legend colour swatch.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="property" [rows]="apiMeterItemRows" [showDefault]="false" />
     </div>
 
   </section>

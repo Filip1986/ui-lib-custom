@@ -217,61 +217,8 @@
   <!-- Section 8: API table -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
-    <h3 class="ps-section__subtitle">Inputs</h3>
-    <table class="ps-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>strokeWidth</code></td>
-          <td><code>string</code></td>
-          <td><code>'2'</code></td>
-          <td>SVG stroke-width of the circle arc.</td>
-        </tr>
-        <tr>
-          <td><code>fill</code></td>
-          <td><code>string</code></td>
-          <td><code>'none'</code></td>
-          <td>SVG fill colour of the circle interior.</td>
-        </tr>
-        <tr>
-          <td><code>animationDuration</code></td>
-          <td><code>string</code></td>
-          <td><code>'2s'</code></td>
-          <td>Duration of one rotation/dash cycle. Accepts any CSS &lt;time&gt;.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size token controlling the overall diameter.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to global theme when <code>null</code>.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS class(es) applied to the host element.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string</code></td>
-          <td><code>'Loading...'</code></td>
-          <td>Screen-reader accessible label.</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
