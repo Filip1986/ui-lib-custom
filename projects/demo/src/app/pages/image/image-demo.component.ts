@@ -7,10 +7,9 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Image } from 'ui-lib-custom/image';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type SnippetKey =
@@ -37,7 +36,7 @@ type SnippetKey =
     Image,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
@@ -77,7 +76,6 @@ export class ImageDemoComponent {
     { id: 'custom-error', label: 'Custom Error' },
     { id: 'dimensions', label: 'Dimensions' },
     { id: 'two-way-binding', label: 'Two-Way Binding' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────
@@ -85,43 +83,6 @@ export class ImageDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    { name: 'src', type: 'string', description: 'Image URL (required).' },
-    { name: 'alt', type: 'string', default: "''", description: 'Alt text.' },
-    {
-      name: 'preview',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables a click-to-preview modal.',
-    },
-    {
-      name: 'previewSrc',
-      type: 'string | null',
-      default: 'null',
-      description: 'Separate high-resolution preview image URL.',
-    },
-    {
-      name: 'loading',
-      type: "'lazy' | 'eager'",
-      default: "'lazy'",
-      description: 'Native loading attribute.',
-    },
-    {
-      name: 'fit',
-      type: "'cover' | 'contain' | 'fill' | 'none'",
-      default: "'cover'",
-      description: 'CSS object-fit mode.',
-    },
-    { name: 'width', type: 'string | null', default: 'null', description: 'CSS width.' },
-    { name: 'height', type: 'string | null', default: 'null', description: 'CSS height.' },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Additional CSS class.',
-    },
-  ];
 
   public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
 
@@ -179,91 +140,98 @@ export class ImageDemoComponent {
 <p>Preview open: {{ previewVisible() }}</p>`,
   };
 
+  private readonly snippetsTs: Record<SnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    preview: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    customIndicator: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    errorFallback: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    sizes: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    variants: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    customError: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    dimensions: `import { Component } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    twoWayBinding: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Image } from 'ui-lib-custom/image';
+
+@Component({
+  standalone: true,
+  imports: [Image],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
+}`,
+  };
+
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
   }
 
-  public readonly apiInputRows: readonly ApiPropRow[] = [
-    { name: 'src', type: 'string', default: "''", description: 'URL of the image.' },
-    { name: 'alt', type: 'string', default: "''", description: 'Alt text for the image.' },
-    {
-      name: 'width',
-      type: 'string | null',
-      default: 'null',
-      description: 'HTML width attribute for the img element.',
-    },
-    {
-      name: 'height',
-      type: 'string | null',
-      default: 'null',
-      description: 'HTML height attribute for the img element.',
-    },
-    {
-      name: 'preview',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables the click-to-preview lightbox.',
-    },
-    {
-      name: 'imageStyle',
-      type: 'Record<string,string> | null',
-      default: 'null',
-      description: 'Inline styles applied to the img element.',
-    },
-    {
-      name: 'imageClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS class on the img element.',
-    },
-    {
-      name: 'errorSrc',
-      type: 'string | null',
-      default: 'null',
-      description: 'Fallback src when the primary src fails.',
-    },
-    {
-      name: 'variant',
-      type: 'ImageVariant | null',
-      default: 'null',
-      description: 'Design variant; inherits from ThemeConfigService when null.',
-    },
-    { name: 'size', type: 'ImageSize', default: "'md'", description: 'Component size token.' },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS class on the host element.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Preview image'",
-      description: 'Accessible label for the preview indicator button.',
-    },
-    {
-      name: 'previewVisible',
-      type: 'boolean',
-      default: 'false',
-      description: 'Two-way binding for overlay open state.',
-    },
-  ];
-
-  public readonly apiOutputRows: readonly ApiPropRow[] = [
-    { name: 'loadEvent', type: 'Event', description: 'Emitted when the image loads successfully.' },
-    { name: 'errorEvent', type: 'Event', description: 'Emitted when the image fails to load.' },
-  ];
-
-  public readonly apiSlotRows: readonly ApiPropRow[] = [
-    {
-      name: '#imageIndicator',
-      type: 'slot',
-      description: 'Custom content for the hover preview indicator.',
-    },
-    {
-      name: '#imageError',
-      type: 'slot',
-      description: 'Custom content shown when the image fails to load.',
-    },
-  ];
+  public snippetTs(key: SnippetKey): string {
+    return this.snippetsTs[key];
+  }
 }

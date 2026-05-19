@@ -9,378 +9,400 @@
   <div class="examples">
     <section id="basic" data-doc-anchor class="example-section">
       <h3>1. Basic</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="basicValue"
-            [suggestions]="basicSuggestions"
-            [delay]="150"
-            placeholder="Search framework"
-            (completeMethod)="onBasicComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="basicValue"
+          [suggestions]="basicSuggestions"
+          [delay]="150"
+          placeholder="Search framework"
+          (completeMethod)="onBasicComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('basic')"
+        [typescript]="snippetsTs.basicTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="objects" data-doc-anchor class="example-section">
       <h3>2. Objects</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="objectValue"
-            [suggestions]="countrySuggestions"
-            optionLabel="name"
-            optionValue="code"
-            placeholder="Select country"
-            (completeMethod)="onCountryComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('objects')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="objectValue"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          placeholder="Select country"
+          (completeMethod)="onCountryComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('objects')"
+        [typescript]="snippetsTs.objectsTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="dropdown" data-doc-anchor class="example-section">
       <h3>3. Dropdown</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="dropdownValue"
-            [suggestions]="countrySuggestions"
-            optionLabel="name"
-            optionValue="code"
-            [dropdown]="true"
-            dropdownMode="current"
-            (completeMethod)="onCountryComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('dropdown')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="dropdownValue"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          [dropdown]="true"
+          dropdownMode="current"
+          (completeMethod)="onCountryComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('dropdown')"
+        [typescript]="snippetsTs.dropdownTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="force-selection" data-doc-anchor class="example-section">
       <h3>4. Force Selection</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="forceSelectionValue"
-            [suggestions]="countrySuggestions"
-            optionLabel="name"
-            optionValue="code"
-            [forceSelection]="true"
-            [autoClear]="true"
-            placeholder="Must match an option"
-            (completeMethod)="onCountryComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('forceSelection')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="forceSelectionValue"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          [forceSelection]="true"
+          [autoClear]="true"
+          placeholder="Must match an option"
+          (completeMethod)="onCountryComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('forceSelection')"
+        [typescript]="snippetsTs.forceSelectionTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="multiple" data-doc-anchor class="example-section">
       <h3>5. Multiple</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="multipleValue"
-            [suggestions]="countrySuggestions"
-            optionLabel="name"
-            optionValue="code"
-            [multiple]="true"
-            placeholder="Select multiple countries"
-            (completeMethod)="onCountryComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('multiple')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="multipleValue"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          [multiple]="true"
+          placeholder="Select multiple countries"
+          (completeMethod)="onCountryComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('multiple')"
+        [typescript]="snippetsTs.multipleTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="multiple-advanced" data-doc-anchor class="example-section">
       <h3>6. Multiple Advanced</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="multipleAdvancedValue"
-            [suggestions]="countrySuggestions"
-            optionLabel="name"
-            optionValue="code"
-            [multiple]="true"
-            [dropdown]="true"
-            [addOnBlur]="true"
-            [addOnTab]="true"
-            separator=","
-            [unique]="true"
-            placeholder="Type and separate by comma"
-            (completeMethod)="onCountryComplete($event)"
-          >
-            <ng-template uiAutoCompleteSelectedItem let-code>
-              <span class="chip-template">Chip: {{ code }}</span>
-            </ng-template>
-          </ui-lib-autocomplete>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('multipleAdvanced')"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="multipleAdvancedValue"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          [multiple]="true"
+          [dropdown]="true"
+          [addOnBlur]="true"
+          [addOnTab]="true"
+          separator=","
+          [unique]="true"
+          placeholder="Type and separate by comma"
+          (completeMethod)="onCountryComplete($event)"
+        >
+          <ng-template uiAutoCompleteSelectedItem let-code>
+            <span class="chip-template">Chip: {{ code }}</span>
+          </ng-template>
+        </ui-lib-autocomplete>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('multipleAdvanced')"
+        [typescript]="snippetsTs.multipleAdvancedTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
 
     <section id="grouped" data-doc-anchor class="example-section">
       <h3>7. Grouped</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="groupedValue"
-            [suggestions]="groupedCitySuggestions"
-            [group]="true"
-            optionLabel="label"
-            optionValue="value"
-            [optionGroupLabel]="'label'"
-            [optionGroupChildren]="'items'"
-            placeholder="Search city"
-            (completeMethod)="onGroupedCitiesComplete($event)"
-          >
-            <ng-template uiAutoCompleteGroup let-groupData>
-              <strong>{{ groupData.label }}</strong>
-            </ng-template>
-          </ui-lib-autocomplete>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('grouped')"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="groupedValue"
+          [suggestions]="groupedCitySuggestions"
+          [group]="true"
+          optionLabel="label"
+          optionValue="value"
+          [optionGroupLabel]="'label'"
+          [optionGroupChildren]="'items'"
+          placeholder="Search city"
+          (completeMethod)="onGroupedCitiesComplete($event)"
+        >
+          <ng-template uiAutoCompleteGroup let-groupData>
+            <strong>{{ groupData.label }}</strong>
+          </ng-template>
+        </ui-lib-autocomplete>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('grouped')"
+        [typescript]="snippetsTs.groupedTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
 
     <section id="virtual-scroll" data-doc-anchor class="example-section">
       <h3>8. Virtual Scroll</h3>
-        <ui-lib-panel variant="minimal">
-          <p class="example-note">Dataset size: 10,000 items</p>
-          <ui-lib-autocomplete
-            [(ngModel)]="virtualValue"
-            [suggestions]="virtualSuggestions"
-            optionLabel="label"
-            optionValue="value"
-            [virtualScroll]="true"
-            [virtualScrollItemSize]="44"
-            scrollHeight="240px"
-            placeholder="Search item"
-            (completeMethod)="onVirtualComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('virtual')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <p class="example-note">Dataset size: 10,000 items</p>
+        <ui-lib-autocomplete
+          [(ngModel)]="virtualValue"
+          [suggestions]="virtualSuggestions"
+          optionLabel="label"
+          optionValue="value"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="44"
+          scrollHeight="240px"
+          placeholder="Search item"
+          (completeMethod)="onVirtualComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('virtual')"
+        [typescript]="snippetsTs.virtualTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="templates" data-doc-anchor class="example-section">
       <h3>9. Templates</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="templateValue"
-            [suggestions]="countrySuggestions"
-            optionLabel="name"
-            optionValue="code"
-            [multiple]="true"
-            [dropdown]="true"
-            (completeMethod)="onCountryComplete($event)"
-          >
-            <ng-template uiAutoCompleteHeader>
-              <div class="template-header">Country Picker</div>
-            </ng-template>
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="templateValue"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          [multiple]="true"
+          [dropdown]="true"
+          (completeMethod)="onCountryComplete($event)"
+        >
+          <ng-template uiAutoCompleteHeader>
+            <div class="template-header">Country Picker</div>
+          </ng-template>
 
-            <ng-template uiAutoCompleteItem let-country>
-              <span>{{ country.name }} ({{ country.code }})</span>
-            </ng-template>
+          <ng-template uiAutoCompleteItem let-country>
+            <span>{{ country.name }} ({{ country.code }})</span>
+          </ng-template>
 
-            <ng-template uiAutoCompleteSelectedItem let-chip>
-              <span class="chip-template">{{ chip }}</span>
-            </ng-template>
+          <ng-template uiAutoCompleteSelectedItem let-chip>
+            <span class="chip-template">{{ chip }}</span>
+          </ng-template>
 
-            <ng-template uiAutoCompleteFooter>
-              <small>{{ countrySuggestions.length }} options</small>
-            </ng-template>
+          <ng-template uiAutoCompleteFooter>
+            <small>{{ countrySuggestions.length }} options</small>
+          </ng-template>
 
-            <ng-template uiAutoCompleteEmpty>
-              <em>No matches found.</em>
-            </ng-template>
-          </ui-lib-autocomplete>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('templates')"
+          <ng-template uiAutoCompleteEmpty>
+            <em>No matches found.</em>
+          </ng-template>
+        </ui-lib-autocomplete>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('templates')"
+        [typescript]="snippetsTs.templatesTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>10. Sizes</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-3">
-            <ui-lib-autocomplete
-              [(ngModel)]="smallValue"
-              [suggestions]="basicSuggestions"
-              size="sm"
-              placeholder="Small"
-              (completeMethod)="onBasicComplete($event)"
-            />
-            <ui-lib-autocomplete
-              [(ngModel)]="mediumValue"
-              [suggestions]="basicSuggestions"
-              size="md"
-              placeholder="Medium"
-              (completeMethod)="onBasicComplete($event)"
-            />
-            <ui-lib-autocomplete
-              [(ngModel)]="largeValue"
-              [suggestions]="basicSuggestions"
-              size="lg"
-              placeholder="Large"
-              (completeMethod)="onBasicComplete($event)"
-            />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
+      <ui-lib-panel variant="minimal">
+        <div class="row-3">
+          <ui-lib-autocomplete
+            [(ngModel)]="smallValue"
+            [suggestions]="basicSuggestions"
+            size="sm"
+            placeholder="Small"
+            (completeMethod)="onBasicComplete($event)"
+          />
+          <ui-lib-autocomplete
+            [(ngModel)]="mediumValue"
+            [suggestions]="basicSuggestions"
+            size="md"
+            placeholder="Medium"
+            (completeMethod)="onBasicComplete($event)"
+          />
+          <ui-lib-autocomplete
+            [(ngModel)]="largeValue"
+            [suggestions]="basicSuggestions"
+            size="lg"
+            placeholder="Large"
+            (completeMethod)="onBasicComplete($event)"
+          />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('sizes')"
+        [typescript]="snippetsTs.sizesTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
 
     <section id="filled" data-doc-anchor class="example-section">
       <h3>11. Filled</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-autocomplete
-            [(ngModel)]="filledValue"
-            [suggestions]="basicSuggestions"
-            [filled]="true"
-            [showClear]="true"
-            placeholder="Filled style"
-            (completeMethod)="onBasicComplete($event)"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('filled')"
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-autocomplete
+          [(ngModel)]="filledValue"
+          [suggestions]="basicSuggestions"
+          [filled]="true"
+          [showClear]="true"
+          placeholder="Filled style"
+          (completeMethod)="onBasicComplete($event)"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('filled')"
+        [typescript]="snippetsTs.filledTs"
+        [showLineNumbers]="true"
+      />
     </section>
 
     <section id="disabled-invalid" data-doc-anchor class="example-section">
       <h3>12. Disabled & Invalid</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-2">
-            <ui-lib-autocomplete
-              [(ngModel)]="disabledValue"
-              [suggestions]="basicSuggestions"
-              [disabled]="true"
-              placeholder="Disabled"
-            />
-            <ui-lib-autocomplete
-              [(ngModel)]="invalidValue"
-              [suggestions]="basicSuggestions"
-              [invalid]="true"
-              placeholder="Invalid"
-              (completeMethod)="onBasicComplete($event)"
-            />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('states')"
+      <ui-lib-panel variant="minimal">
+        <div class="row-2">
+          <ui-lib-autocomplete
+            [(ngModel)]="disabledValue"
+            [suggestions]="basicSuggestions"
+            [disabled]="true"
+            placeholder="Disabled"
+          />
+          <ui-lib-autocomplete
+            [(ngModel)]="invalidValue"
+            [suggestions]="basicSuggestions"
+            [invalid]="true"
+            placeholder="Invalid"
+            (completeMethod)="onBasicComplete($event)"
+          />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('states')"
+        [typescript]="snippetsTs.statesTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
 
     <section id="forms" data-doc-anchor class="example-section">
       <h3>13. Forms</h3>
       <ui-lib-panel variant="minimal">
         <h4>Reactive Form</h4>
-          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
-            <ui-lib-autocomplete
-              formControlName="country"
-              [suggestions]="countrySuggestions"
-              optionLabel="name"
-              optionValue="code"
-              placeholder="Reactive country"
-              (completeMethod)="onCountryComplete($event)"
-            />
-            <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
-            @if (countryControl().touched && countryControl().invalid) {
-              <p class="error-text">Country is required.</p>
-            }
-          </form>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
-          [showLineNumbers]="true"
-          />
-
-        <h4>Template-driven</h4>
+        <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
           <ui-lib-autocomplete
-            [(ngModel)]="templateModel"
-            [ngModelOptions]="{ standalone: true }"
+            formControlName="country"
             [suggestions]="countrySuggestions"
             optionLabel="name"
             optionValue="code"
-            placeholder="Template model"
+            placeholder="Reactive country"
             (completeMethod)="onCountryComplete($event)"
           />
-        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')"
+          <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
+          @if (countryControl().touched && countryControl().invalid) {
+            <p class="error-text">Country is required.</p>
+          }
+        </form>
+        <app-doc-code-example
+          [html]="snippet('reactive')"
+          [typescript]="snippetsTs.reactiveTs"
           [showLineNumbers]="true"
-          />
+        />
+
+        <h4>Template-driven</h4>
+        <ui-lib-autocomplete
+          [(ngModel)]="templateModel"
+          [ngModelOptions]="{ standalone: true }"
+          [suggestions]="countrySuggestions"
+          optionLabel="name"
+          optionValue="code"
+          placeholder="Template model"
+          (completeMethod)="onCountryComplete($event)"
+        />
+        <app-doc-code-example
+          [html]="snippet('templateDriven')"
+          [typescript]="snippetsTs.templateDrivenTs"
+          [showLineNumbers]="true"
+        />
       </ui-lib-panel>
     </section>
 
     <section id="variants" data-doc-anchor class="example-section">
       <h3>14. Variants</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="row-3">
-            <ui-lib-autocomplete
-              [(ngModel)]="variantModels['material']"
-              variant="material"
-              [suggestions]="basicSuggestions"
-              placeholder="Material"
-              (completeMethod)="onBasicComplete($event)"
-            />
-            <ui-lib-autocomplete
-              [(ngModel)]="variantModels['bootstrap']"
-              variant="bootstrap"
-              [suggestions]="basicSuggestions"
-              placeholder="Bootstrap"
-              (completeMethod)="onBasicComplete($event)"
-            />
-            <ui-lib-autocomplete
-              [(ngModel)]="variantModels['minimal']"
-              variant="minimal"
-              [suggestions]="basicSuggestions"
-              placeholder="Minimal"
-              (completeMethod)="onBasicComplete($event)"
-            />
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('variants')"
+      <ui-lib-panel variant="minimal">
+        <div class="row-3">
+          <ui-lib-autocomplete
+            [(ngModel)]="variantModels['material']"
+            variant="material"
+            [suggestions]="basicSuggestions"
+            placeholder="Material"
+            (completeMethod)="onBasicComplete($event)"
+          />
+          <ui-lib-autocomplete
+            [(ngModel)]="variantModels['bootstrap']"
+            variant="bootstrap"
+            [suggestions]="basicSuggestions"
+            placeholder="Bootstrap"
+            (completeMethod)="onBasicComplete($event)"
+          />
+          <ui-lib-autocomplete
+            [(ngModel)]="variantModels['minimal']"
+            variant="minimal"
+            [suggestions]="basicSuggestions"
+            placeholder="Minimal"
+            (completeMethod)="onBasicComplete($event)"
+          />
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('variants')"
+        [typescript]="snippetsTs.variantsTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
 
     <section id="clipping" data-doc-anchor class="example-section">
       <h3>15. Clipping Container (Overflow Hidden)</h3>
-        <ui-lib-panel variant="minimal">
-          <div class="clipping-card">
-            <ui-lib-autocomplete
-              [(ngModel)]="clippingValue"
-              [suggestions]="countrySuggestions"
-              optionLabel="name"
-              optionValue="code"
-              placeholder="Open inside clipped card"
-              (completeMethod)="onCountryComplete($event)"
-            />
-            <p class="clipping-note">
-              Default behavior uses <code>appendTo='body'</code>, so the dropdown panel is not
-              clipped by this container.
-            </p>
-          </div>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('clipping')"
+      <ui-lib-panel variant="minimal">
+        <div class="clipping-card">
+          <ui-lib-autocomplete
+            [(ngModel)]="clippingValue"
+            [suggestions]="countrySuggestions"
+            optionLabel="name"
+            optionValue="code"
+            placeholder="Open inside clipped card"
+            (completeMethod)="onCountryComplete($event)"
+          />
+          <p class="clipping-note">
+            Default behavior uses <code>appendTo='body'</code>, so the dropdown panel is not clipped
+            by this container.
+          </p>
+        </div>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('clipping')"
+        [typescript]="snippetsTs.clippingTs"
         [showLineNumbers]="true"
-        />
+      />
     </section>
   </div>
-
-  <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
-    <p class="demo-section__description">
-      All inputs accepted by <code>ui-lib-autocomplete</code>. Import from
-      <code>ui-lib-custom/autocomplete</code>.
-    </p>
-    <app-doc-api-reference [rows]="apiRows" />
-  </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
@@ -391,5 +413,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

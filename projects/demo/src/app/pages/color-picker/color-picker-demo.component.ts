@@ -19,8 +19,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ColorPickerValue, HsbColor, RgbColor } from 'ui-lib-custom';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type DemoSnippetKey =
@@ -52,7 +51,7 @@ type DemoSnippetKey =
     CodeSnippet,
     ColorPicker,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',
@@ -73,52 +72,11 @@ export class ColorPickerDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'value',
-      type: 'string | RgbColor | HsbColor | null',
-      default: 'null',
-      description: 'The selected color value.',
-    },
-    {
-      name: 'format',
-      type: "'hex' | 'rgb' | 'hsb'",
-      default: "'hex'",
-      description: 'Output format of the selected color.',
-    },
-    {
-      name: 'inline',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders the picker inline instead of in a popup.',
-    },
-    {
-      name: 'disabled',
-      type: 'boolean',
-      default: 'false',
-      description: 'Disables the color picker.',
-    },
-    {
-      name: 'inputId',
-      type: 'string',
-      default: "''",
-      description: 'Id of the associated color input.',
-    },
-    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
-    {
-      name: 'appendTo',
-      type: "string | HTMLElement | 'body'",
-      default: "'body'",
-      description: 'Target element for portal rendering.',
-    },
-  ];
 
   public readonly snippets: Record<DemoSnippetKey, string> = {
     basic: `<ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />
@@ -175,8 +133,130 @@ export class ColorPickerDemoComponent {
   };
   public clippingValue: string = '6366f1';
 
+  public readonly snippetsTs: Record<DemoSnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public basicHex: string = '6466f1';
+}`,
+    inline: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public inlineHex: string = '3b82f6';
+}`,
+    formats: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+import type { HsbColor, RgbColor } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public hexValue: string = '6466f1';
+  public rgbValue: RgbColor = { r: 100, g: 102, b: 241 };
+  public hsbValue: HsbColor = { h: 239, s: 59, b: 95 };
+}`,
+    templateDriven: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public templateDrivenValue: string = '22c55e';
+
+  public submitTemplateDriven(): void {
+    // handle form submit
+  }
+}`,
+    reactive: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, ColorPicker, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly reactiveForm = new FormGroup({
+    color: new FormControl<string | null>('0ea5e9', { validators: [Validators.required] }),
+  });
+
+  public submitReactive(): void {
+    this.reactiveForm.markAllAsTouched();
+  }
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public disabledValue: string = 'ef4444';
+}`,
+    variants: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly variantValues = {
+    material: 'a855f7',
+    bootstrap: 'f97316',
+    minimal: '14b8a6',
+  };
+}`,
+    clipping: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ColorPicker } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, ColorPicker],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public clippingValue: string = '6366f1';
+}`,
+  };
+
   public snippet(key: DemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: DemoSnippetKey): string {
+    return this.snippetsTs[key];
   }
 
   public submitTemplateDriven(): void {

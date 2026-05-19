@@ -8,26 +8,23 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-
       <!-- a. Basic -->
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">
           Default horizontal slider with ngModel binding. Drag the handle or use arrow keys.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="basicValue"
-                ariaLabel="Basic slider"
-              />
-              <span class="slider-caption">Value: {{ basicValue }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="basicValue"
+              ariaLabel="Basic slider"
+            />
+            <span class="slider-caption">Value: {{ basicValue }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
       </section>
 
       <!-- b. Range -->
@@ -37,42 +34,41 @@
           Enable <code>[range]="true"</code> to get a two-handle range picker. The value becomes a
           <code>[start, end]</code> tuple.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [range]="true"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="rangeValue"
-                ariaLabel="Range slider"
-              />
-              <span class="slider-caption">Range: {{ rangeValue[0] }} &ndash; {{ rangeValue[1] }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('range')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [range]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="rangeValue"
+              ariaLabel="Range slider"
+            />
+            <span class="slider-caption"
+              >Range: {{ rangeValue[0] }} &ndash; {{ rangeValue[1] }}</span
+            >
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('range')" [typescript]="snippetTs('range')" />
       </section>
 
       <!-- c. Step -->
       <section id="step" data-doc-anchor class="example-section">
         <h3>c. Step</h3>
         <p class="section-text">
-          Use <code>[step]</code> to control snap granularity. This slider snaps to 0, 25, 50, 75, 100.
+          Use <code>[step]</code> to control snap granularity. This slider snaps to 0, 25, 50, 75,
+          100.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [step]="25"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="stepValue"
-                ariaLabel="Step slider"
-              />
-              <span class="slider-caption">step=25 &middot; value={{ stepValue }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('step')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [step]="25"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="stepValue"
+              ariaLabel="Step slider"
+            />
+            <span class="slider-caption">step=25 &middot; value={{ stepValue }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('step')" [typescript]="snippetTs('step')" />
       </section>
 
       <!-- d. Min / Max -->
@@ -81,22 +77,20 @@
         <p class="section-text">
           Constrain the value range. This slider spans &minus;50 to +50 in steps of 10.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [min]="-50"
-                [max]="50"
-                [step]="10"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="minmaxValue"
-                ariaLabel="Min max slider"
-              />
-              <span class="slider-caption">value={{ minmaxValue }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('minmax')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [min]="-50"
+              [max]="50"
+              [step]="10"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="minmaxValue"
+              ariaLabel="Min max slider"
+            />
+            <span class="slider-caption">value={{ minmaxValue }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('minmax')" [typescript]="snippetTs('minmax')" />
       </section>
 
       <!-- e. Vertical -->
@@ -105,20 +99,18 @@
         <p class="section-text">
           Set <code>orientation="vertical"</code> to render a vertical track. Drag up to increase.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-vertical-row">
-              <ui-lib-slider
-                orientation="vertical"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="verticalValue"
-                ariaLabel="Vertical slider"
-              />
-              <span class="slider-caption">value={{ verticalValue }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('vertical')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-vertical-row">
+            <ui-lib-slider
+              orientation="vertical"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="verticalValue"
+              ariaLabel="Vertical slider"
+            />
+            <span class="slider-caption">value={{ verticalValue }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('vertical')" [typescript]="snippetTs('vertical')" />
       </section>
 
       <!-- f. Sizes -->
@@ -127,40 +119,38 @@
         <p class="section-text">
           Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-sizes">
-              <div class="slider-size-row">
-                <span class="size-label">sm</span>
-                <ui-lib-slider
-                  size="sm"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="sizesValue"
-                  ariaLabel="Small slider"
-                />
-              </div>
-              <div class="slider-size-row">
-                <span class="size-label">md</span>
-                <ui-lib-slider
-                  size="md"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="sizesValue"
-                  ariaLabel="Medium slider"
-                />
-              </div>
-              <div class="slider-size-row">
-                <span class="size-label">lg</span>
-                <ui-lib-slider
-                  size="lg"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="sizesValue"
-                  ariaLabel="Large slider"
-                />
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="slider-sizes">
+            <div class="slider-size-row">
+              <span class="size-label">sm</span>
+              <ui-lib-slider
+                size="sm"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizesValue"
+                ariaLabel="Small slider"
+              />
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
-          [showLineNumbers]="true"
-          />
+            <div class="slider-size-row">
+              <span class="size-label">md</span>
+              <ui-lib-slider
+                size="md"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizesValue"
+                ariaLabel="Medium slider"
+              />
+            </div>
+            <div class="slider-size-row">
+              <span class="size-label">lg</span>
+              <ui-lib-slider
+                size="lg"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizesValue"
+                ariaLabel="Large slider"
+              />
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
       </section>
 
       <!-- g. Animated -->
@@ -170,42 +160,36 @@
           Pass <code>[animate]="true"</code> to enable smooth CSS transitions on the fill bar and
           handle.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [animate]="true"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="animateValue"
-                ariaLabel="Animated slider"
-              />
-              <span class="slider-caption">value={{ animateValue }}</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('animate')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [animate]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="animateValue"
+              ariaLabel="Animated slider"
+            />
+            <span class="slider-caption">value={{ animateValue }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('animate')" [typescript]="snippetTs('animate')" />
       </section>
 
       <!-- h. Disabled -->
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>h. Disabled</h3>
-        <p class="section-text">
-          A disabled slider is visually muted and ignores all interaction.
-        </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [disabled]="true"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="disabledValue"
-                ariaLabel="Disabled slider"
-              />
-              <span class="slider-caption">disabled</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
-          [showLineNumbers]="true"
-          />
+        <p class="section-text">A disabled slider is visually muted and ignores all interaction.</p>
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [disabled]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="disabledValue"
+              ariaLabel="Disabled slider"
+            />
+            <span class="slider-caption">disabled</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
       </section>
 
       <!-- i. Read-only -->
@@ -214,49 +198,42 @@
         <p class="section-text">
           A read-only slider is focusable but does not respond to drag or keyboard input.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="slider-row">
-              <ui-lib-slider
-                [readonly]="true"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="readonlyValue"
-                ariaLabel="Readonly slider"
-              />
-              <span class="slider-caption">readonly</span>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')"
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="slider-row">
+            <ui-lib-slider
+              [readonly]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="readonlyValue"
+              ariaLabel="Readonly slider"
+            />
+            <span class="slider-caption">readonly</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippetTs('readonly')" />
       </section>
 
       <!-- j. Reactive Forms -->
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>j. Reactive Forms</h3>
-        <p class="section-text">
-          Sliders work with Angular reactive forms out of the box via CVA.
-        </p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="reactiveForm">
-              <div class="slider-sizes">
-                <div class="slider-size-row">
-                  <span class="size-label">Volume</span>
-                  <ui-lib-slider formControlName="volume" ariaLabel="Volume" />
-                  <span class="slider-caption">{{ volumeControl.value }}</span>
-                </div>
-                <div class="slider-size-row">
-                  <span class="size-label">Brightness</span>
-                  <ui-lib-slider formControlName="brightness" ariaLabel="Brightness" />
-                  <span class="slider-caption">{{ brightnessControl.value }}</span>
-                </div>
+        <p class="section-text">Sliders work with Angular reactive forms out of the box via CVA.</p>
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm">
+            <div class="slider-sizes">
+              <div class="slider-size-row">
+                <span class="size-label">Volume</span>
+                <ui-lib-slider formControlName="volume" ariaLabel="Volume" />
+                <span class="slider-caption">{{ volumeControl.value }}</span>
               </div>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
-          [showLineNumbers]="true"
-          />
+              <div class="slider-size-row">
+                <span class="size-label">Brightness</span>
+                <ui-lib-slider formControlName="brightness" ariaLabel="Brightness" />
+                <span class="slider-caption">{{ brightnessControl.value }}</span>
+              </div>
+            </div>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
       </section>
-
     </div>
   </app-doc-demo-viewport>
 
@@ -286,5 +263,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -33,8 +33,7 @@ import {
 import type { DemoCountry, DemoGroup } from './autocomplete-demo.data';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type AutoCompleteDemoSnippetKey =
@@ -54,6 +53,24 @@ type AutoCompleteDemoSnippetKey =
   | 'templateDriven'
   | 'variants'
   | 'clipping';
+
+type AutoCompleteDemoSnippetTsKey =
+  | 'basicTs'
+  | 'objectsTs'
+  | 'dropdownTs'
+  | 'forceSelectionTs'
+  | 'multipleTs'
+  | 'multipleAdvancedTs'
+  | 'groupedTs'
+  | 'virtualTs'
+  | 'templatesTs'
+  | 'sizesTs'
+  | 'filledTs'
+  | 'statesTs'
+  | 'reactiveTs'
+  | 'templateDrivenTs'
+  | 'variantsTs'
+  | 'clippingTs';
 
 /**
  * Demo page for AutoComplete component features and patterns.
@@ -79,7 +96,7 @@ type AutoCompleteDemoSnippetKey =
     AutoCompleteFooterDirective,
     AutoCompleteEmptyDirective,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
   styleUrl: './autocomplete-demo.component.scss',
@@ -127,167 +144,369 @@ export class AutoCompleteDemoComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'suggestions',
-      type: 'unknown[]',
-      default: '[]',
-      description: 'List of suggestions to display in the overlay panel.',
-    },
-    {
-      name: 'optionLabel',
-      type: 'string | undefined',
-      default: 'undefined',
-      description: 'Property name to use as the display label for object options.',
-    },
-    {
-      name: 'optionValue',
-      type: 'string | undefined',
-      default: 'undefined',
-      description: 'Property name to use as the value for object options.',
-    },
-    {
-      name: 'optionDisabled',
-      type: 'string | undefined',
-      default: 'undefined',
-      description: 'Property name to mark an option as disabled.',
-    },
-    {
-      name: 'optionGroupLabel',
-      type: 'string',
-      default: "'label'",
-      description: 'Property name for the label of an option group.',
-    },
-    {
-      name: 'optionGroupChildren',
-      type: 'string',
-      default: "'items'",
-      description: 'Property name for the children of an option group.',
-    },
-    {
-      name: 'dropdown',
-      type: 'boolean',
-      default: 'false',
-      description: 'Adds a dropdown button to show all suggestions.',
-    },
-    {
-      name: 'multiple',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables multi-value selection as chips.',
-    },
-    {
-      name: 'forceSelection',
-      type: 'boolean',
-      default: 'false',
-      description: 'Requires the user to select a suggestion from the list.',
-    },
-    {
-      name: 'completeOnFocus',
-      type: 'boolean',
-      default: 'false',
-      description: 'Triggers suggestions when the field receives focus.',
-    },
-    {
-      name: 'autoClear',
-      type: 'boolean',
-      default: 'true',
-      description:
-        'Clears the input when the value is not a valid selection (with forceSelection).',
-    },
-    {
-      name: 'unique',
-      type: 'boolean',
-      default: 'false',
-      description: 'Prevents duplicate values in multiple mode.',
-    },
-    {
-      name: 'minLength',
-      type: 'number',
-      default: '1',
-      description: 'Minimum characters to trigger the suggestion query.',
-    },
-    {
-      name: 'delay',
-      type: 'number',
-      default: '300',
-      description: 'Debounce delay in milliseconds before calling completeMethod.',
-    },
-    {
-      name: 'maxlength',
-      type: 'number | null',
-      default: 'null',
-      description: 'Maximum character length for the input.',
-    },
-    {
-      name: 'virtualScroll',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables virtual scrolling for large suggestion lists.',
-    },
-    {
-      name: 'virtualScrollItemSize',
-      type: 'number',
-      default: '0',
-      description: 'Item height in pixels for virtual scrolling calculations.',
-    },
-    {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
-      description: 'Size of the input field.',
-    },
-    {
-      name: 'placeholder',
-      type: 'string',
-      default: "''",
-      description: 'Placeholder text for the input.',
-    },
-    {
-      name: 'showClear',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows a clear button to reset the value.',
-    },
-    {
-      name: 'fluid',
-      type: 'boolean',
-      default: 'false',
-      description: 'Makes the component expand to fill its container width.',
-    },
-    {
-      name: 'filled',
-      type: 'boolean',
-      default: 'false',
-      description: 'Applies a filled background style.',
-    },
-    {
-      name: 'group',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables grouped option mode.',
-    },
-    {
-      name: 'scrollHeight',
-      type: 'string',
-      default: "'200px'",
-      description: 'Max height of the suggestion panel.',
-    },
-    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
-    {
-      name: 'inputId',
-      type: 'string',
-      default: "''",
-      description: 'Id applied to the inner input element for label association.',
-    },
+  public readonly snippetsTs: Record<AutoCompleteDemoSnippetTsKey, string> = {
+    basicTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  basicValue: string | null = null;
+  basicSuggestions: string[] = [];
+
+  onBasicComplete(event: AutoCompleteCompleteEvent): void {
+    const query = event.query.toLowerCase();
+    this.basicSuggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(query));
+  }
+}`,
+    objectsTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  objectValue: string | null = null;
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }, { name: 'France', code: 'FR' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    dropdownTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  dropdownValue: string | null = null;
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    forceSelectionTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  forceSelectionValue: string | null = null;
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    multipleTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  multipleValue: unknown[] = [];
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    multipleAdvancedTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+  UiLibAutoComplete,
+  AutoCompleteSelectedItemDirective,
+} from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete, AutoCompleteSelectedItemDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  multipleAdvancedValue: unknown[] = [];
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    groupedTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete, AutoCompleteGroupDirective } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface CityItem { label: string; value: string; }
+interface Group { label: string; items: CityItem[]; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete, AutoCompleteGroupDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  groupedValue: string | null = null;
+  groupedCitySuggestions: Group[] = [];
+  readonly allGroups: Group[] = [
+    { label: 'Germany', items: [{ label: 'Berlin', value: 'berlin' }] },
   ];
+
+  onGroupedCitiesComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.groupedCitySuggestions = this.allGroups
+      .map(g => ({ ...g, items: g.items.filter(c => c.label.toLowerCase().includes(q)) }))
+      .filter(g => g.items.length > 0);
+  }
+}`,
+    virtualTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  virtualValue: string | null = null;
+  virtualSuggestions: Array<{ label: string; value: string }> = [];
+
+  onVirtualComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.virtualSuggestions = Array.from({ length: 100 }, (_, i) => ({ label: \`Item \${i}\`, value: \`item-\${i}\` }))
+      .filter(item => item.label.toLowerCase().includes(q));
+  }
+}`,
+    templatesTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+  UiLibAutoComplete,
+  AutoCompleteHeaderDirective,
+  AutoCompleteItemDirective,
+  AutoCompleteSelectedItemDirective,
+  AutoCompleteFooterDirective,
+  AutoCompleteEmptyDirective,
+} from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [
+    FormsModule, UiLibAutoComplete,
+    AutoCompleteHeaderDirective, AutoCompleteItemDirective,
+    AutoCompleteSelectedItemDirective, AutoCompleteFooterDirective,
+    AutoCompleteEmptyDirective,
+  ],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  templateValue: unknown[] = [];
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    sizesTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  smallValue: string | null = null;
+  mediumValue: string | null = null;
+  largeValue: string | null = null;
+  suggestions: string[] = [];
+
+  onComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
+  }
+}`,
+    filledTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  filledValue: string | null = null;
+  suggestions: string[] = [];
+
+  onComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
+  }
+}`,
+    statesTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  disabledValue: string | null = 'disabled';
+  invalidValue: string | null = null;
+}`,
+    reactiveTs: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly reactiveForm = new FormGroup({
+    country: new FormControl<string | null>(null, { validators: [Validators.required] }),
+  });
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    templateDrivenTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  templateModel: string | null = null;
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+    variantsTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  materialValue: string | null = null;
+  bootstrapValue: string | null = null;
+  minimalValue: string | null = null;
+  suggestions: string[] = [];
+
+  onComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
+  }
+}`,
+    clippingTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
+import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
+
+interface Country { name: string; code: string; }
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibAutoComplete],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  clippingValue: string | null = null;
+  countrySuggestions: Country[] = [];
+  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
+
+  onCountryComplete(event: AutoCompleteCompleteEvent): void {
+    const q = event.query.toLowerCase();
+    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+  }
+}`,
+  };
 
   public readonly snippets: Record<AutoCompleteDemoSnippetKey, string> = {
     basic: `<ui-lib-autocomplete

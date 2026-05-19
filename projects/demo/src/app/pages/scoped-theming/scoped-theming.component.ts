@@ -12,6 +12,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -34,6 +35,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocPageLayoutComponent,
     DocTocComponent,
     CodeSnippet,
+    DocCodeExampleComponent,
   ],
   templateUrl: './scoped-theming.component.html',
   styleUrl: './scoped-theming.component.scss',
@@ -83,6 +85,16 @@ export class ScopedThemingComponent {
   Dark themed card
 </ui-lib-card>`;
 
+  public readonly componentThemeCodeTs: string = `import { Component } from '@angular/core';
+import { ThemeScopeDirective } from 'ui-lib-custom/theme';
+
+@Component({
+  standalone: true,
+  imports: [ThemeScopeDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+
   public readonly directiveCode: string = `<!-- Using directive -->
 <div [uiLibTheme]="'dark'">
   <ui-lib-button>Dark button</ui-lib-button>
@@ -92,6 +104,20 @@ export class ScopedThemingComponent {
 <section uiLibDarkTheme>
   <ui-lib-button>Dark button</ui-lib-button>
 </section>`;
+
+  public readonly directiveCodeTs: string = `import { Component } from '@angular/core';
+import {
+  ThemeScopeDirective,
+  DarkThemeDirective,
+} from 'ui-lib-custom/theme';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [ThemeScopeDirective, DarkThemeDirective, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly customColorsCode: string = `// In component
 customTheme: ThemeScopeConfig = {

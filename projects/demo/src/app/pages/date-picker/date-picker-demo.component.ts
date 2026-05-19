@@ -19,31 +19,50 @@ import { DatePickerComponent } from 'ui-lib-custom/date-picker';
 import type { ThemeVariant } from 'ui-lib-custom/core';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type DatePickerDemoSnippetKey =
   | 'basic'
+  | 'basicTs'
   | 'format'
+  | 'formatTs'
   | 'icon'
+  | 'iconTs'
   | 'minMax'
+  | 'minMaxTs'
   | 'multiple'
+  | 'multipleTs'
   | 'range'
+  | 'rangeTs'
   | 'buttonBar'
+  | 'buttonBarTs'
   | 'time24'
+  | 'time24Ts'
   | 'time12'
+  | 'time12Ts'
   | 'timeOnly'
+  | 'timeOnlyTs'
   | 'monthPicker'
+  | 'monthPickerTs'
   | 'yearPicker'
+  | 'yearPickerTs'
   | 'multipleMonths'
+  | 'multipleMonthsTs'
   | 'inline'
+  | 'inlineTs'
   | 'sizes'
+  | 'sizesTs'
   | 'variants'
+  | 'variantsTs'
   | 'filled'
+  | 'filledTs'
   | 'disabled'
+  | 'disabledTs'
   | 'invalid'
-  | 'reactive';
+  | 'invalidTs'
+  | 'reactive'
+  | 'reactiveTs';
 
 /**
  * Demo page for DatePicker component scenarios and form integrations.
@@ -64,7 +83,7 @@ type DatePickerDemoSnippetKey =
     CodeSnippet,
     DatePickerComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
   styleUrl: './date-picker-demo.component.scss',
@@ -119,140 +138,298 @@ export class DatePickerDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'dateFormat',
-      type: 'string',
-      default: "'mm/dd/yy'",
-      description: 'Format string for the displayed date.',
-    },
-    {
-      name: 'inline',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders the calendar inline.',
-    },
-    {
-      name: 'showIcon',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows a calendar toggle icon.',
-    },
-    {
-      name: 'iconDisplay',
-      type: "'input' | 'button'",
-      default: "'input'",
-      description: 'Position of the calendar icon.',
-    },
-    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
-    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
-    {
-      name: 'minDate',
-      type: 'Date | null',
-      default: 'null',
-      description: 'Minimum selectable date.',
-    },
-    {
-      name: 'maxDate',
-      type: 'Date | null',
-      default: 'null',
-      description: 'Maximum selectable date.',
-    },
-    {
-      name: 'disabledDates',
-      type: 'Date[]',
-      default: '[]',
-      description: 'Array of dates to disable.',
-    },
-    {
-      name: 'disabledDays',
-      type: 'number[]',
-      default: '[]',
-      description: 'Day indices (0=Sun) to disable.',
-    },
-    {
-      name: 'view',
-      type: "'date' | 'month' | 'year'",
-      default: "'date'",
-      description: 'Calendar view granularity.',
-    },
-    {
-      name: 'numberOfMonths',
-      type: 'number',
-      default: '1',
-      description: 'Number of months to display at once.',
-    },
-    { name: 'showTime', type: 'boolean', default: 'false', description: 'Enables time selection.' },
-    {
-      name: 'timeOnly',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows only the time picker.',
-    },
-    {
-      name: 'hourFormat',
-      type: "'12' | '24'",
-      default: "'24'",
-      description: 'Hour format for time picker.',
-    },
-    {
-      name: 'showButtonBar',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows Today/Clear buttons.',
-    },
-    {
-      name: 'inputId',
-      type: 'string',
-      default: "''",
-      description: 'Id for the inner input element.',
-    },
-  ];
-
   public readonly snippets: Record<DatePickerDemoSnippetKey, string> = {
     basic: `<ui-lib-date-picker [(ngModel)]="basicDate" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  basicDate: Date | null = new Date();
+}`,
     format: `<ui-lib-date-picker [(ngModel)]="formattedDate" dateFormat="yy-mm-dd" />`,
+    formatTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  formattedDate: Date | null = new Date();
+}`,
     icon: `<ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />`,
+    iconTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  iconDate: Date | null = new Date();
+}`,
     minMax: `<ui-lib-date-picker
   [(ngModel)]="constrainedDate"
   [minDate]="minDate"
   [maxDate]="maxDate"
 />`,
+    minMaxTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  minDate: Date = new Date(2026, 2, 5);
+  maxDate: Date = new Date(2026, 2, 26);
+  constrainedDate: Date | null = new Date(2026, 2, 12);
+}`,
     multiple: `<ui-lib-date-picker [(ngModel)]="multipleDates" selectionMode="multiple" />`,
+    multipleTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  multipleDates: Date[] | null = null;
+}`,
     range: `<ui-lib-date-picker [(ngModel)]="rangeDates" selectionMode="range" />`,
+    rangeTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  rangeDates: Date[] | null = null;
+}`,
     buttonBar: `<ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />`,
+    buttonBarTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  buttonBarDate: Date | null = new Date();
+}`,
     time24: `<ui-lib-date-picker [(ngModel)]="timeDate24" [showTime]="true" hourFormat="24" />`,
+    time24Ts: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  timeDate24: Date | null = new Date();
+}`,
     time12: `<ui-lib-date-picker
   [(ngModel)]="timeDate12"
   [showTime]="true"
   hourFormat="12"
   [showSeconds]="true"
 />`,
+    time12Ts: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  timeDate12: Date | null = new Date();
+}`,
     timeOnly: `<ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />`,
+    timeOnlyTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  timeOnlyValue: Date | null = new Date();
+}`,
     monthPicker: `<ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />`,
+    monthPickerTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  monthValue: Date | null = new Date();
+}`,
     yearPicker: `<ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />`,
+    yearPickerTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  yearValue: Date | null = new Date();
+}`,
     multipleMonths: `<ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />`,
+    multipleMonthsTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  multipleMonthDate: Date | null = new Date();
+}`,
     inline: `<ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />`,
+    inlineTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  inlineDate: Date | null = new Date();
+}`,
     sizes: `<ui-lib-date-picker [(ngModel)]="sizeValues.sm" size="sm" />
 <ui-lib-date-picker [(ngModel)]="sizeValues.md" size="md" />
 <ui-lib-date-picker [(ngModel)]="sizeValues.lg" size="lg" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  sizeValues = { sm: new Date(), md: new Date(), lg: new Date() };
+}`,
     variants: `<ui-lib-date-picker [(ngModel)]="variantValues.material" variant="material" />
 <ui-lib-date-picker [(ngModel)]="variantValues.bootstrap" variant="bootstrap" />
 <ui-lib-date-picker [(ngModel)]="variantValues.minimal" variant="minimal" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  variantValues = { material: new Date(), bootstrap: new Date(), minimal: new Date() };
+}`,
     filled: `<ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />`,
+    filledTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  filledDate: Date | null = new Date();
+}`,
     disabled: `<ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />`,
+    disabledTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  disabledDate: Date | null = new Date();
+}`,
     invalid: `<ui-lib-date-picker [(ngModel)]="invalidDate" [invalid]="true" />`,
+    invalidTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  invalidDate: Date | null = null;
+}`,
     reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
   <ui-lib-date-picker formControlName="appointment" />
   <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
 </form>`,
+    reactiveTs: `import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DatePickerComponent } from 'ui-lib-custom/date-picker';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [DatePickerComponent, Button, ReactiveFormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  reactiveForm = new FormGroup({
+    appointment: new FormControl<Date | null>(null, { validators: [Validators.required] }),
+  });
+
+  submitReactive(): void {
+    this.reactiveForm.markAllAsTouched();
+  }
+}`,
   };
 
   public basicDate: Date | null = this.createDate(2026, 2, 20);

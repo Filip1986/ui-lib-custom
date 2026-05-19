@@ -33,8 +33,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -43,6 +41,7 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 interface DemoTab {
@@ -91,7 +90,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     TabsBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -124,76 +123,6 @@ export class TabsComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tab bar size.' },
-    {
-      name: 'orientation',
-      type: "'horizontal' | 'vertical'",
-      default: "'horizontal'",
-      description: 'Tab bar orientation.',
-    },
-    {
-      name: 'activation',
-      type: "'auto' | 'manual'",
-      default: "'auto'",
-      description: 'Whether tabs activate on focus or require Enter/Space.',
-    },
-    {
-      name: 'align',
-      type: "'start' | 'center' | 'end' | 'stretch'",
-      default: "'start'",
-      description: 'Tab label alignment.',
-    },
-    {
-      name: 'mode',
-      type: "'default' | 'scrollable' | 'paginated'",
-      default: "'default'",
-      description: 'Layout mode for overflowing tabs.',
-    },
-    {
-      name: 'selectedValue',
-      type: 'TabsValue | null',
-      default: 'null',
-      description: 'Controlled selected tab value.',
-    },
-    {
-      name: 'defaultValue',
-      type: 'TabsValue | null',
-      default: 'null',
-      description: 'Initial selected value (uncontrolled mode).',
-    },
-    {
-      name: 'lazy',
-      type: "boolean | 'first'",
-      default: 'false',
-      description: 'Lazy rendering of tab content.',
-    },
-    {
-      name: 'closable',
-      type: 'boolean',
-      default: 'false',
-      description: 'Allows tabs to be closed.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string | null',
-      default: 'null',
-      description: 'Accessible label for the tab list.',
-    },
-    {
-      name: 'dir',
-      type: "'ltr' | 'rtl' | 'auto'",
-      default: "'auto'",
-      description: 'Text directionality.',
-    },
-  ];
-
   public readonly importCode: string =
     "import { Tabs, Tab, TabLabel, TabContent } from 'ui-lib-custom/tabs'";
   public readonly sections: DocSection[] = [
@@ -203,7 +132,6 @@ export class TabsComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
@@ -413,6 +341,122 @@ export class TabsComponent {
 </ui-lib-tabs>`,
   } as const;
 
+  public readonly snippetsTs: {
+    readonly basic: string;
+    readonly icons: string;
+    readonly vertical: string;
+    readonly closable: string;
+    readonly controlled: string;
+    readonly scrollable: string;
+    readonly tabMenu: string;
+    readonly perTabLazy: string;
+  } = {
+    basic: `import { Component } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    icons: `import { Component } from '@angular/core';
+import { Tabs, Tab, TabLabel } from 'ui-lib-custom/tabs';
+import { Icon } from 'ui-lib-custom/icon';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab, TabLabel, Icon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    vertical: `import { Component } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    closable: `import { Component } from '@angular/core';
+import { signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly tabs: WritableSignal<{ value: string; label: string }[]> = signal([
+    { value: 'alpha', label: 'Alpha' },
+    { value: 'beta', label: 'Beta' },
+  ]);
+
+  onClose(event: { value: TabsValue | null; index: number }): void {
+    this.tabs.update(tabs => tabs.filter(t => t.value !== event.value));
+  }
+}`,
+    controlled: `import { Component, computed, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly index: WritableSignal<number> = signal(0);
+  readonly selectedIndex: Signal<number> = computed(() => this.index());
+
+  onIndexChange(event: { value: TabsValue | null; index: number }): void {
+    this.index.set(event.index);
+  }
+}`,
+    scrollable: `import { Component } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    tabMenu: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly activeRoute: WritableSignal<string> = signal('/overview');
+
+  onNavigate(value: TabsValue | null): void {
+    if (typeof value === 'string') {
+      this.activeRoute.set(value);
+    }
+  }
+}`,
+    perTabLazy: `import { Component } from '@angular/core';
+import { Tabs, Tab, TabContent } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab, TabContent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+  } as const;
+
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
   );
@@ -498,6 +542,16 @@ export class TabsComponent {
   <ui-lib-tab label="Home">Home content</ui-lib-tab>
   <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
 </ui-lib-tabs>`;
+
+  public readonly tabsExampleTs: string = `import { Component } from '@angular/core';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

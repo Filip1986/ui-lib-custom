@@ -1,26 +1,25 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header
-    docHeader
-    title="AutoFocus"
-    [importCode]="importCode"
-    description="A lightweight directive that programmatically focuses the host element after view initialization — a reliable, Angular-first alternative to the native <code>autofocus</code> attribute."
-  />
-
-  <div class="demo-page-header__preview">
-    <div class="af-hero__tags">
-      <span class="af-tag">Directive</span>
-      <span class="af-tag">Misc</span>
-      <span class="af-tag">A11y</span>
+  <app-doc-page-header docHeader title="AutoFocus" [importCode]="importCode">
+    <p class="doc-description">
+      A lightweight directive that programmatically focuses the host element after view
+      initialization — a reliable, Angular-first alternative to the native
+      <code>autofocus</code> attribute.
+    </p>
+    <div class="demo-page-header__preview">
+      <div class="af-hero__tags">
+        <span class="af-tag">Directive</span>
+        <span class="af-tag">Misc</span>
+        <span class="af-tag">A11y</span>
+      </div>
     </div>
-  </div>
+  </app-doc-page-header>
 
   <!-- ── Section 1: Basic usage ── -->
   <section class="demo-section" id="basic-usage" data-doc-anchor>
     <h2 class="demo-section__title">Basic Usage</h2>
     <p class="demo-section__description">
-      Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied
-      automatically after the view initializes.
+      Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied automatically after
+      the view initializes.
     </p>
     <div class="af-demo-card">
       <label class="af-label" for="basic-input">Name</label>
@@ -32,11 +31,10 @@
         uiLibAutoFocus
       />
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetBasicUsage"
+      [typescript]="snippetBasicUsageTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetBasicUsage"
     />
   </section>
 
@@ -44,12 +42,16 @@
   <section class="demo-section" id="conditional-focus" data-doc-anchor>
     <h2 class="demo-section__title">Conditional Focus</h2>
     <p class="demo-section__description">
-      Bind the <code>autofocus</code> input to control whether focus is applied.
-      Useful when rendering inputs inside dialogs, drawers, or dynamic forms.
+      Bind the <code>autofocus</code> input to control whether focus is applied. Useful when
+      rendering inputs inside dialogs, drawers, or dynamic forms.
     </p>
     <div class="af-demo-card">
       <ui-lib-button type="button" (click)="toggleConditional()">
-        @if (showConditional()) { Hide input } @else { Show input }
+        @if (showConditional()) {
+          Hide input
+        } @else {
+          Show input
+        }
       </ui-lib-button>
 
       @if (showConditional()) {
@@ -65,11 +67,10 @@
         </div>
       }
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetConditional"
+      [typescript]="snippetConditionalTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetConditional"
     />
   </section>
 
@@ -77,8 +78,8 @@
   <section class="demo-section" id="disable-autofocus" data-doc-anchor>
     <h2 class="demo-section__title">Disable Autofocus</h2>
     <p class="demo-section__description">
-      Set <code>[disabled]="true"</code> to prevent focus from being applied —
-      for example when the feature is toggled off by the user.
+      Set <code>[disabled]="true"</code> to prevent focus from being applied — for example when the
+      feature is toggled off by the user.
     </p>
     <div class="af-demo-card">
       <ui-lib-button type="button" (click)="toggleFocus()">
@@ -94,11 +95,10 @@
         [disabled]="!enableFocus()"
       />
     </div>
-    <ui-lib-code-snippet
-      language="html"
+    <app-doc-code-example
+      [html]="snippetDisabled"
+      [typescript]="snippetDisabledTs"
       [showLineNumbers]="true"
-      size="sm"
-      [code]="snippetDisabled"
     />
   </section>
 
@@ -121,7 +121,30 @@
     />
 
     <h3 class="af-sub-title">Inputs</h3>
-    <app-doc-api-reference [rows]="apiRows" />
+    <table class="af-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When <code>true</code>, focus is skipped on mount.</td>
+        </tr>
+        <tr>
+          <td><code>selector</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Optional child selector used as the focus target instead of the host.</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
@@ -134,5 +157,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

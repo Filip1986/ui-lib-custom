@@ -6,10 +6,12 @@
     description="Expand and collapse content panels with accessible keyboard navigation, variants, and signal inputs."
   />
 
-    <app-accordion-basic-example />
-  <ui-lib-code-snippet language="html" [code]="accordionExample"
+  <app-accordion-basic-example />
+  <app-doc-code-example
+    [html]="accordionExample"
+    [typescript]="accordionExampleTs"
     [showLineNumbers]="true"
-    />
+  />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -35,7 +37,7 @@
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
       <ui-lib-panel variant="minimal">
-          <p class="card-description">Variant and size</p>
+        <p class="card-description">Variant and size</p>
 
         <div class="control-grid">
           <div class="control">
@@ -230,11 +232,7 @@
       </p>
       <app-doc-demo-viewport>
         <div class="doc-demo">
-          <ui-lib-button
-            size="sm"
-            variant="minimal"
-            appearance="ghost"
-            (click)="resetControlled()"
+          <ui-lib-button size="sm" variant="minimal" appearance="ghost" (click)="resetControlled()"
             >Reset</ui-lib-button
           >
           <ui-lib-accordion
@@ -253,9 +251,11 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="snippets.controlled" language="typescript"
+      <ui-lib-code-snippet
+        [code]="snippets.controlled"
+        language="typescript"
         [showLineNumbers]="true"
-        />
+      />
     </ui-lib-panel>
   }
 
@@ -277,9 +277,11 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="snippets.customHeader" language="html"
+      <app-doc-code-example
+        [html]="snippets.customHeader"
+        [typescript]="snippets.customHeaderTs"
         [showLineNumbers]="true"
-        />
+      />
     </ui-lib-panel>
   }
 
@@ -345,12 +347,16 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="iconSnippets.customIcons" language="html"
+      <app-doc-code-example
+        [html]="iconSnippets.customIcons"
+        [typescript]="iconSnippets.customIconsTs"
         [showLineNumbers]="true"
-        />
-      <ui-lib-code-snippet [code]="iconSnippets.iconPosition" language="html"
+      />
+      <app-doc-code-example
+        [html]="iconSnippets.iconPosition"
+        [typescript]="iconSnippets.iconPositionTs"
         [showLineNumbers]="true"
-        />
+      />
     </ui-lib-panel>
   }
 
@@ -371,9 +377,11 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-        <ui-lib-code-snippet [code]="iconSnippets.toggleTemplate" language="html"
+        <app-doc-code-example
+          [html]="iconSnippets.toggleTemplate"
+          [typescript]="iconSnippets.toggleTemplateTs"
           [showLineNumbers]="true"
-          />
+        />
       </ui-lib-panel>
 
       <ui-lib-panel variant="minimal">
@@ -489,10 +497,53 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <app-doc-api-reference [rows]="accordionApiRows" />
-      <ui-lib-code-snippet [code]="snippets.basic" language="html"
+      <div class="api-table">
+        <div class="api-row api-header">
+          <div>Name</div>
+          <div>Type</div>
+          <div>Description</div>
+        </div>
+        <div class="api-row">
+          <div>variant</div>
+          <div><code>AccordionVariant</code></div>
+          <div>Visual style: material | bootstrap | minimal.</div>
+        </div>
+        <div class="api-row">
+          <div>size</div>
+          <div><code>AccordionSize</code></div>
+          <div>Spacing scale: sm | md | lg.</div>
+        </div>
+        <div class="api-row">
+          <div>expandMode</div>
+          <div><code>'single' | 'multiple'</code></div>
+          <div>Allow one or many panels to be expanded.</div>
+        </div>
+        <div class="api-row">
+          <div>expandedPanels</div>
+          <div><code>string[]</code></div>
+          <div>Controlled list of expanded panel ids.</div>
+        </div>
+        <div class="api-row">
+          <div>defaultExpandedPanels</div>
+          <div><code>string[]</code></div>
+          <div>Uncontrolled initial expanded panels.</div>
+        </div>
+        <div class="api-row">
+          <div>expandedChange</div>
+          <div><code>Event&lt;AccordionChangeEvent&gt;</code></div>
+          <div>Emits on expansion state changes.</div>
+        </div>
+        <div class="api-row">
+          <div>panelToggle</div>
+          <div><code>Event&lt;AccordionChangeEvent&gt;</code></div>
+          <div>Emits every toggle interaction.</div>
+        </div>
+      </div>
+      <app-doc-code-example
+        [html]="snippets.basic"
+        [typescript]="snippets.basicTs"
         [showLineNumbers]="true"
-        />
+      />
     </ui-lib-panel>
   }
 
@@ -530,5 +581,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

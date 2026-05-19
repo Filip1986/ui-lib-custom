@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Chip } from 'ui-lib-custom/chip';
 import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
@@ -25,6 +26,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   standalone: true,
   imports: [
     CodeSnippet,
+    DocCodeExampleComponent,
     Chip,
     Button,
     DocPageHeaderComponent,
@@ -118,27 +120,79 @@ export class ChipDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly icon: string;
+    readonly iconTs: string;
     readonly image: string;
+    readonly imageTs: string;
     readonly removable: string;
+    readonly removableTs: string;
     readonly selectable: string;
+    readonly selectableTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { Chip } from 'ui-lib-custom/chip';`,
     basic: `<ui-lib-chip label="Action" />
 <ui-lib-chip label="Comedy" />
 <ui-lib-chip label="Mystery" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     icon: `<ui-lib-chip label="Angular"  icon="pi pi-bolt" />
 <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
 <ui-lib-chip label="Starred"  icon="pi pi-star" />`,
+    iconTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     image: `<ui-lib-chip label="Amy"   image="/assets/amy.png"   imageAlt="Amy Elsner" />
 <ui-lib-chip label="Asiya" image="/assets/asiya.png" imageAlt="Asiya Javayant" />`,
+    imageTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     removable: `<ui-lib-chip
   label="Angular"
   [removable]="true"
   (removed)="removeChip('Angular')"
 />`,
+    removableTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly activeChips: WritableSignal<string[]> = signal<string[]>(['Angular']);
+
+  public removeChip(label: string): void {
+    this.activeChips.update((chips: string[]): string[] =>
+      chips.filter((chip: string): boolean => chip !== label)
+    );
+  }
+}`,
     selectable: `<div role="listbox" aria-label="Frameworks" aria-multiselectable="true">
   <ui-lib-chip
     label="Angular"
@@ -147,12 +201,42 @@ export class ChipDemoComponent {
     (selectedChange)="isSelected = $event"
   />
 </div>`,
+    selectableTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isSelected: WritableSignal<boolean> = signal<boolean>(false);
+}`,
     sizes: `<ui-lib-chip label="Small"  size="sm" icon="pi pi-tag" />
 <ui-lib-chip label="Medium" size="md" icon="pi pi-tag" />
 <ui-lib-chip label="Large"  size="lg" icon="pi pi-tag" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     variants: `<ui-lib-chip label="Label only" variant="material" />
 <ui-lib-chip label="Label only" variant="bootstrap" />
 <ui-lib-chip label="Label only" variant="minimal" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   // ---- Removable demo -----------------------------------------------------

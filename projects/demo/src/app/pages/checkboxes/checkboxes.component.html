@@ -6,10 +6,8 @@
     description="Accessible, signal-friendly checkbox supporting binary and group modes, customizable values, and form integrations."
   />
 
-    <app-checkbox-basic-example />
-  <ui-lib-code-snippet language="html" [code]="checkboxExample"
-    [showLineNumbers]="true"
-    />
+  <app-checkbox-basic-example />
+  <app-doc-code-example [html]="checkboxExample" [typescript]="checkboxExampleTs" />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -202,7 +200,11 @@
               [(checked)]="indeterminateChecked"
               (checkedChange)="onIndeterminateChange($event)"
             />
-            <ui-lib-button size="sm" variant="minimal" appearance="ghost" (click)="resetIndeterminateState()"
+            <ui-lib-button
+              size="sm"
+              variant="minimal"
+              appearance="ghost"
+              (click)="resetIndeterminateState()"
               >Reset to mixed</ui-lib-button
             >
           </div>
@@ -305,7 +307,10 @@
 
   @if (activeTab() === 'variants') {
     <ui-lib-panel variant="minimal">
-      <p>All three variants are shown in both outlined and filled appearance, plus size and state examples.</p>
+      <p>
+        All three variants are shown in both outlined and filled appearance, plus size and state
+        examples.
+      </p>
 
       <h3>Outlined vs Filled across variants</h3>
       <div class="appearance-matrix">
@@ -410,7 +415,11 @@
 
         <div class="form-card">
           <h3>Template-driven required</h3>
-          <form #templateForm="ngForm" class="form-stack" (ngSubmit)="submitTemplateForm(templateForm)">
+          <form
+            #templateForm="ngForm"
+            class="form-stack"
+            (ngSubmit)="submitTemplateForm(templateForm)"
+          >
             <ui-lib-checkbox
               name="templateAccepted"
               [required]="true"
@@ -434,18 +443,102 @@
   }
 
   @if (activeTab() === 'api-reference') {
-    <section id="api-reference" data-doc-anchor>
-      <app-doc-api-reference [rows]="apiRows" />
-    </section>
+    <ui-lib-panel variant="minimal">
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>label</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Optional text label (use projection for custom markup).</td>
+          </tr>
+          <tr>
+            <td><code>description</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Supporting text rendered under the label.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+            <td><code>'material'</code></td>
+            <td>Controls visual treatment of the control box.</td>
+          </tr>
+          <tr>
+            <td><code>appearance</code></td>
+            <td><code>'outlined' | 'filled'</code></td>
+            <td><code>'outlined'</code></td>
+            <td>Toggles outlined and filled visual surfaces.</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>'sm' | 'md' | 'lg'</code></td>
+            <td><code>'md'</code></td>
+            <td>Adjusts checkbox dimensions and typography.</td>
+          </tr>
+          <tr>
+            <td><code>binary</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>When false with <code>value</code>, uses array/group mode.</td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td><code>unknown</code></td>
+            <td><code>null</code></td>
+            <td>Group-mode value represented by a single checkbox.</td>
+          </tr>
+          <tr>
+            <td><code>trueValue / falseValue</code></td>
+            <td><code>unknown</code></td>
+            <td><code>true / false</code></td>
+            <td>Binary-mode model values emitted for checked and unchecked states.</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Disables click and keyboard interaction.</td>
+          </tr>
+          <tr>
+            <td><code>readonly</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Prevents value changes while keeping focus and semantics.</td>
+          </tr>
+          <tr>
+            <td><code>indeterminate</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Shows the mixed state (aria-checked="mixed").</td>
+          </tr>
+          <tr>
+            <td><code>checked</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Two-way bound value via <code>[(checked)]</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="snippets.usage"
+        language="typescript"
+        filename="Usage"
+        [code]="snippets.usage"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      ></ui-lib-code-snippet>
     </ui-lib-panel>
   }
 
@@ -453,20 +546,20 @@
     <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li>
-          <strong>Native semantics:</strong> a hidden native input owns checkbox ARIA semantics
-          and keyboard behavior.
+          <strong>Native semantics:</strong> a hidden native input owns checkbox ARIA semantics and
+          keyboard behavior.
         </li>
         <li>
-          <strong>Keyboard:</strong> focus and toggle are driven by the input, with visible
-          focus styling on the custom box.
+          <strong>Keyboard:</strong> focus and toggle are driven by the input, with visible focus
+          styling on the custom box.
         </li>
         <li>
           <strong>Labeling:</strong> support inline label text, projected content,
           <code>ariaLabel</code>, and external <code>label[for]</code> through <code>inputId</code>.
         </li>
         <li>
-          <strong>Modes:</strong> binary mode uses scalar values, while group mode uses arrays;
-          both are form-compatible.
+          <strong>Modes:</strong> binary mode uses scalar values, while group mode uses arrays; both
+          are form-compatible.
         </li>
       </ul>
     </ui-lib-panel>
@@ -481,5 +574,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -12,6 +12,7 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
@@ -67,6 +68,32 @@ const SNIPPETS: Record<string, string> = {
   </ng-template>
 </ui-lib-order-list>`,
 
+  basicTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import {
+  OrderListComponent,
+  OrderListItemDirective,
+} from 'ui-lib-custom/order-list';
+
+interface Product { id: number; name: string; price: number; }
+
+@Component({
+  standalone: true,
+  imports: [OrderListComponent, OrderListItemDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly products: WritableSignal<Product[]> = signal([
+    { id: 1, name: 'Wireless Headphones', price: 79.99 },
+    { id: 2, name: 'Mechanical Keyboard', price: 129.99 },
+  ]);
+  public readonly selection: WritableSignal<Product[]> = signal([]);
+
+  public formatPrice(price: number): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+  }
+}`,
+
   filter: `<ui-lib-order-list
   [value]="filterProducts"
   filterBy="name"
@@ -76,6 +103,27 @@ const SNIPPETS: Record<string, string> = {
     <span>{{ item.name }}</span>
   </ng-template>
 </ui-lib-order-list>`,
+
+  filterTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import {
+  OrderListComponent,
+  OrderListItemDirective,
+} from 'ui-lib-custom/order-list';
+
+interface Product { id: number; name: string; }
+
+@Component({
+  standalone: true,
+  imports: [OrderListComponent, OrderListItemDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly filterProducts: WritableSignal<Product[]> = signal([
+    { id: 1, name: 'Wireless Headphones' },
+    { id: 2, name: 'Mechanical Keyboard' },
+  ]);
+}`,
 
   template: `<ui-lib-order-list [value]="templateProducts" [(selection)]="templateSelection">
   <ng-template uiOrderListHeader>
@@ -94,6 +142,42 @@ const SNIPPETS: Record<string, string> = {
   </ng-template>
 </ui-lib-order-list>`,
 
+  templateTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import {
+  OrderListComponent,
+  OrderListItemDirective,
+  OrderListHeaderDirective,
+  OrderListEmptyDirective,
+} from 'ui-lib-custom/order-list';
+
+interface Product { id: number; name: string; category: string; rating: number; price: number; }
+
+@Component({
+  standalone: true,
+  imports: [
+    OrderListComponent,
+    OrderListItemDirective,
+    OrderListHeaderDirective,
+    OrderListEmptyDirective,
+  ],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly templateProducts: WritableSignal<Product[]> = signal([
+    { id: 1, name: 'Wireless Headphones', category: 'Audio', rating: 4, price: 79.99 },
+  ]);
+  public readonly templateSelection: WritableSignal<Product[]> = signal([]);
+
+  public starsLabel(rating: number): string {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  }
+
+  public formatPrice(price: number): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+  }
+}`,
+
   dragDrop: `<ui-lib-order-list
   [value]="dragProducts"
   [dragDrop]="true"
@@ -103,6 +187,32 @@ const SNIPPETS: Record<string, string> = {
     <span>{{ item.name }}</span>
   </ng-template>
 </ui-lib-order-list>`,
+
+  dragDropTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import {
+  OrderListComponent,
+  OrderListItemDirective,
+} from 'ui-lib-custom/order-list';
+import type { OrderListReorderEvent } from 'ui-lib-custom/order-list';
+
+interface Product { id: number; name: string; }
+
+@Component({
+  standalone: true,
+  imports: [OrderListComponent, OrderListItemDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly dragProducts: WritableSignal<Product[]> = signal([
+    { id: 1, name: 'Wireless Headphones' },
+    { id: 2, name: 'Mechanical Keyboard' },
+  ]);
+
+  public onReorder(event: OrderListReorderEvent): void {
+    console.log('Reordered', event);
+  }
+}`,
 };
 
 // ---------------------------------------------------------------------------
@@ -121,6 +231,7 @@ const SNIPPETS: Record<string, string> = {
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     CodeSnippet,
+    DocCodeExampleComponent,
     Stack,
     OrderListComponent,
     OrderListItemDirective,

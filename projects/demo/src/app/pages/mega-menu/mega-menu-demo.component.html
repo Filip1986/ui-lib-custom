@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="MegaMenu"
@@ -11,18 +10,16 @@
   <section class="demo-section" id="basic-horizontal" data-doc-anchor>
     <h2 class="demo-section__title">Basic Horizontal</h2>
     <p class="demo-section__desc">
-      Default horizontal orientation. Click a top-level item with sub-items to open its
-      mega panel. Simple items (like "Documentation") act as direct links.
+      Default horizontal orientation. Click a top-level item with sub-items to open its mega panel.
+      Simple items (like "Documentation") act as direct links.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="basicModel" />
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
-        [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetBasicHorizontal"
+      <app-doc-code-example
+        [html]="snippetBasicHorizontal"
+        [typescript]="snippetBasicHorizontalTs"
       />
     </div>
   </section>
@@ -31,19 +28,13 @@
   <section class="demo-section" id="vertical-orientation" data-doc-anchor>
     <h2 class="demo-section__title">Vertical Orientation</h2>
     <p class="demo-section__desc">
-      Set <code>orientation="vertical"</code> for a stacked list. Mega panels
-      open to the right.
+      Set <code>orientation="vertical"</code> for a stacked list. Mega panels open to the right.
     </p>
     <div class="demo-section__content demo-section__content--vertical">
       <ui-lib-mega-menu [model]="verticalModel" orientation="vertical" />
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
-        [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetVertical"
-      />
+      <app-doc-code-example [html]="snippetVertical" [typescript]="snippetVerticalTs" />
     </div>
   </section>
 
@@ -51,8 +42,8 @@
   <section class="demo-section" id="disabled-items" data-doc-anchor>
     <h2 class="demo-section__title">Disabled Items &amp; Separators</h2>
     <p class="demo-section__desc">
-      Top-level items and sub-items can be disabled. Sub-items support separator lines
-      to visually group related entries.
+      Top-level items and sub-items can be disabled. Sub-items support separator lines to visually
+      group related entries.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="disabledModel" />
@@ -71,8 +62,8 @@
   <section class="demo-section" id="command-callbacks" data-doc-anchor>
     <h2 class="demo-section__title">Command Callbacks</h2>
     <p class="demo-section__desc">
-      Sub-items can invoke a <code>command</code> function when activated.
-      The last activated item is shown below.
+      Sub-items can invoke a <code>command</code> function when activated. The last activated item
+      is shown below.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="commandModel" />
@@ -94,8 +85,8 @@
   <section class="demo-section" id="item-click-output" data-doc-anchor>
     <h2 class="demo-section__title">itemClick Output</h2>
     <p class="demo-section__desc">
-      The <code>(itemClick)</code> output fires a <code>MegaMenuCommandEvent</code>
-      containing the activated <code>item</code> and the originating DOM event.
+      The <code>(itemClick)</code> output fires a <code>MegaMenuCommandEvent</code> containing the
+      activated <code>item</code> and the originating DOM event.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="eventModel" (itemClick)="handleItemClick($event)" />
@@ -113,12 +104,7 @@
       </div>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
-        [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetItemClick"
-      />
+      <app-doc-code-example [html]="snippetItemClick" [typescript]="snippetItemClickTs" />
     </div>
   </section>
 
@@ -158,9 +144,7 @@
   <!-- ── Playground ───────────────────────────────────────────────────────── -->
   <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
-    <p class="demo-section__desc">
-      Combine variant, size, and orientation interactively.
-    </p>
+    <p class="demo-section__desc">Combine variant, size, and orientation interactively.</p>
     <div class="demo-controls">
       <div class="demo-control-group">
         <span class="demo-control-label">Variant</span>
@@ -170,7 +154,8 @@
               [variant]="playgroundVariant() === v ? 'material' : 'minimal'"
               size="sm"
               (click)="setPlaygroundVariant(v)"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -182,7 +167,8 @@
               [variant]="playgroundSize() === s ? 'material' : 'minimal'"
               size="sm"
               (click)="setPlaygroundSize(s)"
-            >{{ s }}</ui-lib-button>
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -194,12 +180,16 @@
               [variant]="playgroundOrientation() === o ? 'material' : 'minimal'"
               size="sm"
               (click)="setPlaygroundOrientation(o)"
-            >{{ o }}</ui-lib-button>
+              >{{ o }}</ui-lib-button
+            >
           }
         </div>
       </div>
     </div>
-    <div class="demo-section__content" [class.demo-section__content--vertical]="playgroundOrientation() === 'vertical'">
+    <div
+      class="demo-section__content"
+      [class.demo-section__content--vertical]="playgroundOrientation() === 'vertical'"
+    >
       <ui-lib-mega-menu
         [model]="basicModel"
         [variant]="playgroundVariant()"
@@ -244,5 +234,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

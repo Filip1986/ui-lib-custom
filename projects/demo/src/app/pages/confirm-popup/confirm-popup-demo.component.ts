@@ -13,8 +13,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the ConfirmPopup component.
@@ -32,7 +31,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
@@ -62,6 +61,7 @@ export class ConfirmPopupDemoComponent {
   public readonly snippetBasicConfirm: string = `// component.ts\nthis.confirmPopupService.confirm({\n  target: event.currentTarget as HTMLElement,\n  message: 'Are you sure you want to proceed?',\n  accept: () => this.proceed(),\n});`;
   public readonly snippetIconConfirm: string = `this.confirmPopupService.confirm({\n  target: event.currentTarget as HTMLElement,\n  message: 'Are you sure you want to delete this file?',\n  icon: 'pi pi-exclamation-triangle',\n  acceptLabel: 'Delete',\n  rejectLabel: 'Keep',\n  acceptSeverity: 'danger',\n  accept: () => this.deleteFile(),\n});`;
   public readonly snippetDeclarativeUsage: string = `<ui-lib-confirm-popup\n  key="declarative"\n  [(visible)]="visible"\n  message="Proceed with this action?"\n  acceptLabel="Yes, proceed"\n  rejectLabel="Cancel"\n  (accepted)="onAccepted()"\n  (rejected)="onRejected()"\n/>`;
+  public readonly snippetDeclarativeUsageTs: string = `import { Component, signal } from '@angular/core';\nimport { ConfirmPopup } from 'ui-lib-custom/confirm-popup';\n\n@Component({\n  standalone: true,\n  imports: [ConfirmPopup],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly visible = signal(false);\n\n  onAccepted(): void { /* handle accept */ }\n  onRejected(): void { /* handle reject */ }\n}`;
   private readonly confirmPopupService: ConfirmPopupService = inject(ConfirmPopupService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -77,7 +77,6 @@ export class ConfirmPopupDemoComponent {
     { id: 'result-log', label: 'Result Log' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly variants: ConfirmPopupVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -96,51 +95,6 @@ export class ConfirmPopupDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'group',
-      type: 'string',
-      default: "'default'",
-      description: 'Message group linking this popup to ConfirmationService.confirm() calls.',
-    },
-    {
-      name: 'acceptLabel',
-      type: 'string',
-      default: "'Yes'",
-      description: 'Label for the accept button.',
-    },
-    {
-      name: 'rejectLabel',
-      type: 'string',
-      default: "'No'",
-      description: 'Label for the reject button.',
-    },
-    {
-      name: 'acceptIcon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Icon for the accept button.',
-    },
-    {
-      name: 'rejectIcon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Icon for the reject button.',
-    },
-    {
-      name: 'appendTo',
-      type: "'body' | HTMLElement | string",
-      default: "'body'",
-      description: 'Target element for portal rendering.',
-    },
-    {
-      name: 'autoZIndex',
-      type: 'boolean',
-      default: 'true',
-      description: 'Automatically manages z-index layering.',
-    },
-  ];
 
   public confirmBasic(event: MouseEvent): void {
     this.confirmPopupService.confirm({
@@ -213,88 +167,6 @@ export class ConfirmPopupDemoComponent {
       key: 'Escape',
       action:
         'Closes the popup (treated as rejection) and returns focus to the triggering element.',
-    },
-  ];
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'visible',
-      type: 'model<boolean>',
-      default: 'false',
-      description: 'Two-way visibility binding.',
-    },
-    {
-      name: 'key',
-      type: 'string',
-      default: "''",
-      description: 'Key for targeting a specific popup instance.',
-    },
-    {
-      name: 'message',
-      type: 'string',
-      default: "'Are you sure…'",
-      description: 'Confirmation message text.',
-    },
-    {
-      name: 'icon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Icon CSS class before the message.',
-    },
-    { name: 'acceptLabel', type: 'string', default: "'Yes'", description: 'Accept button label.' },
-    { name: 'rejectLabel', type: 'string', default: "'No'", description: 'Reject button label.' },
-    {
-      name: 'acceptSeverity',
-      type: 'ConfirmPopupButtonSeverity',
-      default: "'primary'",
-      description: 'Accept button colour severity.',
-    },
-    {
-      name: 'rejectSeverity',
-      type: 'ConfirmPopupButtonSeverity',
-      default: "'secondary'",
-      description: 'Reject button colour severity.',
-    },
-    {
-      name: 'defaultFocus',
-      type: 'ConfirmPopupDefaultFocus',
-      default: "'accept'",
-      description: 'Button focused on open.',
-    },
-    {
-      name: 'variant',
-      type: 'ConfirmPopupVariant | null',
-      default: 'null',
-      description: 'Design variant (inherits from theme when null).',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS classes on host.',
-    },
-  ];
-
-  public readonly apiOutputRows: ApiPropRow[] = [
-    { name: 'accepted', type: 'void', description: 'Emitted when accept button is clicked.' },
-    {
-      name: 'rejected',
-      type: 'void',
-      description: 'Emitted when reject / overlay / Escape is triggered.',
-    },
-  ];
-
-  public readonly apiServiceRows: ApiPropRow[] = [
-    {
-      name: 'confirm',
-      type: '(config: ConfirmPopupConfig) => void',
-      description: 'Show popup anchored to target.',
-    },
-    { name: 'close', type: '(key?: string) => void', description: 'Programmatically close popup.' },
-    {
-      name: 'confirmation',
-      type: 'Signal<ConfirmPopupConfig | null>',
-      description: 'Current config signal.',
     },
   ];
 }

@@ -12,6 +12,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
@@ -74,6 +75,27 @@ const SNIPPETS: Record<string, string> = {
   targetHeader="Selected"
 />`,
 
+  basicTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { PickListComponent } from 'ui-lib-custom/pick-list';
+
+interface Country { code: string; name: string; }
+
+@Component({
+  standalone: true,
+  imports: [PickListComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly source: WritableSignal<Country[]> = signal([
+    { code: 'DE', name: 'Germany' },
+    { code: 'FR', name: 'France' },
+  ]);
+  public readonly target: WritableSignal<Country[]> = signal([
+    { code: 'US', name: 'United States' },
+  ]);
+}`,
+
   filter: `<ui-lib-pick-list
   [(source)]="source"
   [(target)]="target"
@@ -82,6 +104,25 @@ const SNIPPETS: Record<string, string> = {
   sourceFilterPlaceholder="Search available…"
   targetFilterPlaceholder="Search selected…"
 />`,
+
+  filterTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { PickListComponent } from 'ui-lib-custom/pick-list';
+
+interface Country { code: string; name: string; }
+
+@Component({
+  standalone: true,
+  imports: [PickListComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly source: WritableSignal<Country[]> = signal([
+    { code: 'DE', name: 'Germany' },
+    { code: 'FR', name: 'France' },
+  ]);
+  public readonly target: WritableSignal<Country[]> = signal([]);
+}`,
 
   templates: `<ui-lib-pick-list [(source)]="source" [(target)]="target" trackBy="code">
   <ng-template uiPickListSourceHeader>
@@ -102,6 +143,39 @@ const SNIPPETS: Record<string, string> = {
   </ng-template>
 </ui-lib-pick-list>`,
 
+  templatesTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import {
+  PickListComponent,
+  PickListItemDirective,
+  PickListSourceHeaderDirective,
+  PickListTargetHeaderDirective,
+  PickListEmptyDirective,
+} from 'ui-lib-custom/pick-list';
+
+interface Country { code: string; name: string; region: string; }
+
+@Component({
+  standalone: true,
+  imports: [
+    PickListComponent,
+    PickListItemDirective,
+    PickListSourceHeaderDirective,
+    PickListTargetHeaderDirective,
+    PickListEmptyDirective,
+  ],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly source: WritableSignal<Country[]> = signal([
+    { code: 'DE', name: 'Germany', region: 'Europe' },
+    { code: 'FR', name: 'France', region: 'Europe' },
+  ]);
+  public readonly target: WritableSignal<Country[]> = signal([
+    { code: 'US', name: 'United States', region: 'Americas' },
+  ]);
+}`,
+
   dragDrop: `<ui-lib-pick-list
   [(source)]="source"
   [(target)]="target"
@@ -110,6 +184,37 @@ const SNIPPETS: Record<string, string> = {
   (movedToTarget)="onMoveToTarget($event)"
   (movedToSource)="onMoveToSource($event)"
 />`,
+
+  dragDropTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { PickListComponent } from 'ui-lib-custom/pick-list';
+import type {
+  PickListMoveToTargetEvent,
+  PickListMoveToSourceEvent,
+} from 'ui-lib-custom/pick-list';
+
+interface Country { code: string; name: string; }
+
+@Component({
+  standalone: true,
+  imports: [PickListComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly source: WritableSignal<Country[]> = signal([
+    { code: 'DE', name: 'Germany' },
+    { code: 'FR', name: 'France' },
+  ]);
+  public readonly target: WritableSignal<Country[]> = signal([]);
+
+  public onMoveToTarget(event: PickListMoveToTargetEvent): void {
+    console.log('Moved to target', event.items);
+  }
+
+  public onMoveToSource(event: PickListMoveToSourceEvent): void {
+    console.log('Returned to source', event.items);
+  }
+}`,
 };
 
 // ---------------------------------------------------------------------------
@@ -128,6 +233,7 @@ const SNIPPETS: Record<string, string> = {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     CodeSnippet,
+    DocCodeExampleComponent,
     Stack,
     PickListComponent,
     PickListItemDirective,

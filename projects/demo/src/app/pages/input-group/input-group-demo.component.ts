@@ -9,14 +9,13 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Button } from 'ui-lib-custom/button';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { InputGroupAddonComponent, InputGroupComponent } from 'ui-lib-custom/input-group';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 interface InputGroupSizeItem {
@@ -27,11 +26,17 @@ interface InputGroupSizeItem {
 
 type InputGroupDemoSnippetKey =
   | 'basic'
+  | 'basicTs'
   | 'multiple'
+  | 'multipleTs'
   | 'button'
+  | 'buttonTs'
   | 'checkboxRadio'
+  | 'checkboxRadioTs'
   | 'floatLabel'
-  | 'sizes';
+  | 'floatLabelTs'
+  | 'sizes'
+  | 'sizesTs';
 
 /**
  * Demo page for InputGroup and InputGroupAddon layout composition.
@@ -55,7 +60,7 @@ type InputGroupDemoSnippetKey =
     InputGroupAddonComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './input-group-demo.component.html',
   styleUrl: './input-group-demo.component.scss',
@@ -93,21 +98,11 @@ export class InputGroupDemoComponent {
     { id: 'checkbox-radio', label: 'Checkbox & Radio' },
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: '(projection)',
-      type: 'ng-content',
-      description:
-        'Project add-ons, buttons, or text before/after the input using the [prefix] and [suffix] slots.',
-    },
-  ];
 
   public readonly snippets: Record<InputGroupDemoSnippetKey, string> = {
     basic: `<uilib-input-group>
@@ -115,18 +110,49 @@ export class InputGroupDemoComponent {
   <ui-lib-input placeholder="Amount" />
   <uilib-input-group-addon>.00</uilib-input-group-addon>
 </uilib-input-group>`,
+    basicTs: `import { Component } from '@angular/core';
+import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
+import { UiLibInput } from 'ui-lib-custom/input';
+
+@Component({
+  standalone: true,
+  imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     multiple: `<uilib-input-group>
   <uilib-input-group-addon>$</uilib-input-group-addon>
   <ui-lib-input placeholder="Invoice amount" />
   <uilib-input-group-addon>.00</uilib-input-group-addon>
   <uilib-input-group-addon>USD</uilib-input-group-addon>
 </uilib-input-group>`,
+    multipleTs: `import { Component } from '@angular/core';
+import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
+import { UiLibInput } from 'ui-lib-custom/input';
+
+@Component({
+  standalone: true,
+  imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     button: `<uilib-input-group>
   <ui-lib-input placeholder="Search products" />
   <uilib-input-group-addon>
     <ui-lib-button appearance="solid" size="sm">Search</ui-lib-button>
   </uilib-input-group-addon>
 </uilib-input-group>`,
+    buttonTs: `import { Component } from '@angular/core';
+import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     checkboxRadio: `<uilib-input-group>
   <uilib-input-group-addon>
     <ui-lib-checkbox [binary]="true" [(ngModel)]="acceptTerms" />
@@ -141,6 +167,21 @@ export class InputGroupDemoComponent {
   <ui-lib-input placeholder="Priority tag" />
   <uilib-input-group-addon>Only</uilib-input-group-addon>
 </uilib-input-group>`,
+    checkboxRadioTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+
+@Component({
+  standalone: true,
+  imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput, Checkbox, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  acceptTerms: boolean = false;
+  priorityOnly: boolean = true;
+}`,
     floatLabel: `<uilib-input-group>
   <uilib-input-group-addon>@</uilib-input-group-addon>
   <uilib-float-label variant="over">
@@ -164,6 +205,20 @@ export class InputGroupDemoComponent {
     <label>On label</label>
   </uilib-float-label>
 </uilib-input-group>`,
+    floatLabelTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+
+@Component({
+  standalone: true,
+  imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput, FloatLabelComponent, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  floatValues = { over: '', in: '', on: '' };
+}`,
     sizes: `<uilib-input-group>
   <uilib-input-group-addon>$</uilib-input-group-addon>
   <ui-lib-input size="sm" placeholder="Small" />
@@ -178,6 +233,16 @@ export class InputGroupDemoComponent {
   <uilib-input-group-addon>$</uilib-input-group-addon>
   <ui-lib-input size="lg" placeholder="Large" />
 </uilib-input-group>`,
+    sizesTs: `import { Component } from '@angular/core';
+import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
+import { UiLibInput } from 'ui-lib-custom/input';
+
+@Component({
+  standalone: true,
+  imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   };
 
   public basicAmount: string = '';

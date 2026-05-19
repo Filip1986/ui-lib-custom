@@ -13,6 +13,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
 import { Panel } from 'ui-lib-custom/panel';
 import type {
@@ -20,8 +21,6 @@ import type {
   OrganizationChartNodeSelectEvent,
   OrganizationChartNodeExpandEvent,
 } from 'ui-lib-custom/organization-chart';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 // ─── Shared tree data ────────────────────────────────────────────────────────
 
@@ -118,7 +117,7 @@ const SNIPPETS: Record<string, string> = {
     OrgChartNodeTemplateDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './organization-chart-demo.component.html',
   styleUrl: './organization-chart-demo.component.scss',
@@ -150,39 +149,6 @@ export class OrganizationChartDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'value',
-      type: 'OrgChartNode | null',
-      default: 'null',
-      description: 'Root node of the organisation tree.',
-    },
-    {
-      name: 'selectionMode',
-      type: "'single' | 'multiple' | null",
-      default: 'null',
-      description: 'Node selection mode.',
-    },
-    {
-      name: 'preserveSpace',
-      type: 'boolean',
-      default: 'true',
-      description: 'Keeps space for collapsed sub-trees.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Organization chart'",
-      description: 'Accessible label for the chart.',
-    },
-  ];
-
   public readonly importCode: string =
     "import { OrganizationChart } from 'ui-lib-custom/organization-chart'";
 
@@ -195,7 +161,6 @@ export class OrganizationChartDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'bootstrap', label: 'Bootstrap Variant' },
     { id: 'minimal', label: 'Minimal Variant' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   // ─── Tree data (each demo section gets its own independent copy) ───────────
@@ -265,6 +230,147 @@ export class OrganizationChartDemoComponent {
   public readonly eventLog: WritableSignal<string[]> = signal([]);
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
+  public readonly snippetsTs: Record<string, string> = {
+    basic: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+}`,
+    collapsible: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type {
+  OrganizationChartNode,
+  OrganizationChartNodeExpandEvent,
+} from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+
+  public onNodeExpand(event: OrganizationChartNodeExpandEvent): void {
+    console.log('Expanded:', event.node.label);
+  }
+
+  public onNodeCollapse(event: OrganizationChartNodeExpandEvent): void {
+    console.log('Collapsed:', event.node.label);
+  }
+}`,
+    singleSelection: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+  public readonly selection = signal<OrganizationChartNode | null>(null);
+}`,
+    multipleSelection: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+  public readonly selection = signal<OrganizationChartNode[]>([]);
+}`,
+    customTemplate: `import { Component, signal } from '@angular/core';
+import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart, OrgChartNodeTemplateDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    {
+      key: 'ceo',
+      label: 'Alice Chen',
+      data: { role: 'Chief Executive Officer' },
+      expanded: true,
+      children: [],
+    },
+  ]);
+
+  public initials(label: string | undefined): string {
+    if (!label) return '?';
+    return label.split(' ').map((w: string): string => w[0] ?? '').slice(0, 2).join('').toUpperCase();
+  }
+}`,
+    bootstrap: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+}`,
+    minimal: `import { Component, signal } from '@angular/core';
+import { OrganizationChart } from 'ui-lib-custom/organization-chart';
+import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
+
+@Component({
+  standalone: true,
+  imports: [OrganizationChart],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly nodes = signal<OrganizationChartNode[]>([
+    { key: 'ceo', label: 'CEO', expanded: true, children: [
+      { key: 'cto', label: 'CTO' },
+    ] },
+  ]);
+}`,
+  };
+
+  public snippetTs(key: string): string {
+    return this.snippetsTs[key] ?? '';
+  }
+
   public snippet(key: string): string {
     return SNIPPETS[key] ?? '';
   }
@@ -308,68 +414,4 @@ export class OrganizationChartDemoComponent {
   private appendLog(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 10));
   }
-
-  public readonly apiInputRows: readonly ApiPropRow[] = [
-    {
-      name: 'value',
-      type: 'OrganizationChartNode[]',
-      default: '[]',
-      description: 'Root nodes of the chart.',
-    },
-    {
-      name: 'selection',
-      type: 'OrganizationChartNode | OrganizationChartNode[] | null',
-      default: 'null',
-      description: 'Selected node(s).',
-    },
-    {
-      name: 'selectionMode',
-      type: "'single' | 'multiple' | null",
-      default: 'null',
-      description: 'Selection mode.',
-    },
-    {
-      name: 'collapsible',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables expand/collapse on nodes with children.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Theme variant override.',
-    },
-  ];
-
-  public readonly apiOutputRows: readonly ApiPropRow[] = [
-    {
-      name: 'nodeSelect',
-      type: 'OrganizationChartNodeSelectEvent',
-      description: 'When a node is selected.',
-    },
-    {
-      name: 'nodeUnselect',
-      type: 'OrganizationChartNodeUnselectEvent',
-      description: 'When a node is deselected.',
-    },
-    {
-      name: 'nodeExpand',
-      type: 'OrganizationChartNodeExpandEvent',
-      description: 'When a node is expanded.',
-    },
-    {
-      name: 'nodeCollapse',
-      type: 'OrganizationChartNodeCollapseEvent',
-      description: 'When a node is collapsed.',
-    },
-  ];
-
-  public readonly apiSlotRows: readonly ApiPropRow[] = [
-    {
-      name: 'uiOrgChartNode',
-      type: '$implicit: OrganizationChartNode',
-      description: 'Custom node content.',
-    },
-  ];
 }

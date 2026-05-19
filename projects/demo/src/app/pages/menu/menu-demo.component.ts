@@ -19,14 +19,38 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface AriaRow {
   readonly element: string;
   readonly attribute: string;
   readonly value: string;
   readonly notes: string;
+}
+
+interface InputRow {
+  readonly name: string;
+  readonly type: string;
+  readonly default: string;
+  readonly description: string;
+}
+
+interface OutputRow {
+  readonly name: string;
+  readonly payload: string;
+  readonly description: string;
+}
+
+interface MethodRow {
+  readonly name: string;
+  readonly parameters: string;
+  readonly description: string;
+}
+
+interface MenuItemRow {
+  readonly property: string;
+  readonly type: string;
+  readonly description: string;
 }
 
 /**
@@ -48,7 +72,7 @@ interface AriaRow {
     DocKeyboardNavComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
@@ -101,64 +125,46 @@ export class MenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    { name: 'model', type: 'MenuItem[]', default: '[]', description: 'Array of menu items.' },
-    {
-      name: 'popup',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders as a popup panel toggled by toggle().',
-    },
-    {
-      name: 'appendTo',
-      type: "'body' | HTMLElement | string",
-      default: 'null',
-      description: 'Target element for portal rendering (popup mode).',
-    },
-    {
-      name: 'autoZIndex',
-      type: 'boolean',
-      default: 'true',
-      description: 'Automatically manages z-index layering.',
-    },
-    {
-      name: 'baseZIndex',
-      type: 'number',
-      default: '0',
-      description: 'Base z-index when autoZIndex is enabled.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
-    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
-    {
-      name: 'ariaLabel',
-      type: 'string | null',
-      default: 'null',
-      description: 'Accessible label for the menu.',
-    },
-  ];
-
   public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
 
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly separator: string;
     readonly grouped: string;
     readonly popup: string;
+    readonly popupTs: string;
     readonly commands: string;
     readonly urlItems: string;
     readonly variants: string;
+    readonly variantsTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
   } = {
     import: `import { Menu } from 'ui-lib-custom/menu';
 import type { MenuItem } from 'ui-lib-custom/menu';`,
     basic: `<ui-lib-menu [model]="items" (itemClick)="onItemClick($event)" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'Profile', icon: 'pi pi-user' },
+    { label: 'Messages', icon: 'pi pi-envelope' },
+    { label: 'Settings', icon: 'pi pi-cog' },
+  ];
+
+  onItemClick(event: MenuItemCommandEvent): void {
+    console.log('Clicked:', event.item.label);
+  }
+}`,
     separator: `items: MenuItem[] = [
   { label: 'New File', icon: 'pi pi-file' },
   { label: 'Open',     icon: 'pi pi-folder-open' },
@@ -193,6 +199,24 @@ import type { MenuItem } from 'ui-lib-custom/menu';`,
   Options
 </ui-lib-button>
 <ui-lib-menu #popupMenu [model]="items" [popup]="true" />`,
+    popupTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import { Button } from 'ui-lib-custom/button';
+import type { MenuItem } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'View Details', icon: 'pi pi-eye' },
+    { label: 'Edit', icon: 'pi pi-pencil' },
+    { separator: true },
+    { label: 'Move to Trash', icon: 'pi pi-trash' },
+  ];
+}`,
     commands: `items: MenuItem[] = [
   {
     label: 'Download',
@@ -214,9 +238,42 @@ onItemClick(event: MenuItemCommandEvent): void {
     variants: `<ui-lib-menu [model]="items" variant="material"  />
 <ui-lib-menu [model]="items" variant="bootstrap" />
 <ui-lib-menu [model]="items" variant="minimal"   />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import type { MenuItem } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'Dashboard', icon: 'pi pi-home' },
+    { label: 'Reports', icon: 'pi pi-chart-line' },
+    { separator: true },
+    { label: 'Settings', icon: 'pi pi-cog' },
+  ];
+}`,
     sizes: `<ui-lib-menu [model]="items" size="sm" />
 <ui-lib-menu [model]="items" size="md" />
 <ui-lib-menu [model]="items" size="lg" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { Menu } from 'ui-lib-custom/menu';
+import type { MenuItem } from 'ui-lib-custom/menu';
+
+@Component({
+  standalone: true,
+  imports: [Menu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenuItem[] = [
+    { label: 'Item One', icon: 'pi pi-circle' },
+    { label: 'Item Two', icon: 'pi pi-circle' },
+    { label: 'Item Three', icon: 'pi pi-circle' },
+  ];
+}`,
   } as const;
 
   public readonly basicItems: MenuItem[] = [
@@ -349,136 +406,141 @@ onItemClick(event: MenuItemCommandEvent): void {
 
   // ── API data ──────────────────────────────────────────────────────────────
 
-  public readonly apiInputRows: ApiPropRow[] = [
+  public readonly inputRows: InputRow[] = [
     {
-      name: 'model',
-      type: 'MenuItem[]',
-      default: '[]',
+      name: '<code>model</code>',
+      type: '<code>MenuItem[]</code>',
+      default: '<code>[]</code>',
       description:
         'Items to render. Top-level items with an <code>items</code> array act as labelled group headers.',
     },
     {
-      name: 'popup',
-      type: 'boolean',
-      default: 'false',
+      name: '<code>popup</code>',
+      type: '<code>boolean</code>',
+      default: '<code>false</code>',
       description:
         'When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.',
     },
     {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
+      name: '<code>variant</code>',
+      type: "<code>'material' | 'bootstrap' | 'minimal' | null</code>",
+      default: '<code>null</code>',
       description:
         'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
     },
     {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
+      name: '<code>size</code>',
+      type: "<code>'sm' | 'md' | 'lg'</code>",
+      default: "<code>'md'</code>",
       description: 'Size token controlling item padding and font size.',
     },
     {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
+      name: '<code>styleClass</code>',
+      type: '<code>string | null</code>',
+      default: '<code>null</code>',
       description: 'Extra CSS class applied to the host element.',
     },
     {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Menu'",
+      name: '<code>ariaLabel</code>',
+      type: '<code>string</code>',
+      default: "<code>'Menu'</code>",
       description:
         'Accessible label for the <code>role="menu"</code> panel. Provide a unique value when multiple menus appear on screen.',
     },
   ];
 
-  public readonly apiOutputRows: ApiPropRow[] = [
+  public readonly outputRows: OutputRow[] = [
     {
-      name: 'itemClick',
-      type: 'MenuItemCommandEvent',
+      name: '<code>itemClick</code>',
+      payload: '<code>MenuItemCommandEvent</code>',
       description: 'Emitted when a non-disabled leaf item is activated (click or keyboard).',
     },
     {
-      name: 'menuShow',
-      type: 'MouseEvent',
+      name: '<code>menuShow</code>',
+      payload: '<code>MouseEvent</code>',
       description: 'Emitted when the popup panel becomes visible. Popup mode only.',
     },
     {
-      name: 'menuHide',
-      type: 'void',
+      name: '<code>menuHide</code>',
+      payload: '<code>void</code>',
       description: 'Emitted when the popup panel is hidden. Popup mode only.',
     },
   ];
 
-  public readonly apiMethodRows: ApiPropRow[] = [
+  public readonly methodRows: MethodRow[] = [
     {
-      name: 'toggle(event)',
-      type: 'MouseEvent',
+      name: '<code>toggle(event)</code>',
+      parameters: '<code>MouseEvent</code>',
       description:
         'Toggles the popup open or closed anchored to the trigger. No-op in inline mode.',
     },
     {
-      name: 'show(event)',
-      type: 'MouseEvent',
+      name: '<code>show(event)</code>',
+      parameters: '<code>MouseEvent</code>',
       description:
         'Shows the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.',
     },
     {
-      name: 'hide()',
-      type: '—',
+      name: '<code>hide()</code>',
+      parameters: '—',
       description:
         'Hides the popup and restores focus to the trigger element. No-op in inline mode.',
     },
   ];
 
-  public readonly apiMenuItemRows: ApiPropRow[] = [
-    { name: 'label', type: 'string?', description: 'Display text for the item or group header.' },
+  public readonly menuItemRows: MenuItemRow[] = [
     {
-      name: 'icon',
-      type: 'string?',
+      property: '<code>label</code>',
+      type: '<code>string?</code>',
+      description: 'Display text for the item or group header.',
+    },
+    {
+      property: '<code>icon</code>',
+      type: '<code>string?</code>',
       description:
         'Icon class rendered in a decorative <code>&lt;span aria-hidden="true"&gt;</code>.',
     },
     {
-      name: 'disabled',
-      type: 'boolean?',
+      property: '<code>disabled</code>',
+      type: '<code>boolean?</code>',
       description:
         'When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and excluded from keyboard navigation.',
     },
     {
-      name: 'separator',
-      type: 'boolean?',
+      property: '<code>separator</code>',
+      type: '<code>boolean?</code>',
       description: 'Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.',
     },
     {
-      name: 'visible',
-      type: 'boolean?',
+      property: '<code>visible</code>',
+      type: '<code>boolean?</code>',
       description: 'When explicitly <code>false</code>, excludes the item from rendering.',
     },
     {
-      name: 'items',
-      type: 'MenuItem[]?',
+      property: '<code>items</code>',
+      type: '<code>MenuItem[]?</code>',
       description:
         'Child items — makes the parent a labelled group header (<code>role="group"</code>).',
     },
     {
-      name: 'url',
-      type: 'string?',
+      property: '<code>url</code>',
+      type: '<code>string?</code>',
       description: 'Renders the item as <code>&lt;a href="..."&gt;</code>.',
     },
     {
-      name: 'target',
-      type: 'string?',
-      description: "Target attribute for URL-based items (e.g. <code>'_blank'</code>).",
+      property: '<code>target</code>',
+      type: '<code>string?</code>',
+      description:
+        "<code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).",
     },
     {
-      name: 'styleClass',
-      type: 'string?',
+      property: '<code>styleClass</code>',
+      type: '<code>string?</code>',
       description: 'Extra CSS class added to the rendered link element.',
     },
     {
-      name: 'command',
-      type: 'function?',
+      property: '<code>command</code>',
+      type: '<code>function?</code>',
       description: 'Callback invoked when the item is activated (click or keyboard).',
     },
   ];

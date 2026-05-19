@@ -16,12 +16,11 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the MeterGroup component.
@@ -39,7 +38,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
@@ -143,11 +142,17 @@ export class MeterGroupDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly labelPosition: string;
+    readonly labelPositionTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
     readonly vertical: string;
+    readonly verticalTs: string;
     readonly noLegend: string;
+    readonly noLegendTs: string;
   } = {
     import: `import { MeterGroup } from 'ui-lib-custom/meter-group';
 import type { MeterItem } from 'ui-lib-custom/meter-group';`,
@@ -159,23 +164,122 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';`,
 ];
 
 <ui-lib-meter-group [values]="storageItems" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { MeterGroup } from 'ui-lib-custom/meter-group';
+import type { MeterItem } from 'ui-lib-custom/meter-group';
+
+@Component({
+  standalone: true,
+  imports: [MeterGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly storageItems: MeterItem[] = [
+    { label: 'Apps',     value: 16, color: '#34d399' },
+    { label: 'Messages', value: 8,  color: '#818cf8' },
+    { label: 'Media',    value: 24, color: '#fb923c' },
+    { label: 'System',   value: 10, color: '#f87171' },
+  ];
+}`,
     labelPosition: `<!-- legend above the bar -->
 <ui-lib-meter-group [values]="items" labelPosition="start" />
 
 <!-- legend below the bar (default) -->
 <ui-lib-meter-group [values]="items" labelPosition="end" />`,
+    labelPositionTs: `import { Component } from '@angular/core';
+import { MeterGroup } from 'ui-lib-custom/meter-group';
+import type { MeterItem } from 'ui-lib-custom/meter-group';
+
+@Component({
+  standalone: true,
+  imports: [MeterGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: MeterItem[] = [
+    { label: 'Documents', value: 38, color: '#0ea5e9' },
+    { label: 'Videos',    value: 21, color: '#d946ef' },
+    { label: 'Photos',    value: 17, color: '#f59e0b' },
+    { label: 'Other',     value: 12, color: '#6b7280' },
+  ];
+}`,
     sizes: `<ui-lib-meter-group [values]="items" size="sm" [showLabels]="false" />
 <ui-lib-meter-group [values]="items" size="md" [showLabels]="false" />
 <ui-lib-meter-group [values]="items" size="lg" [showLabels]="false" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { MeterGroup } from 'ui-lib-custom/meter-group';
+import type { MeterItem } from 'ui-lib-custom/meter-group';
+
+@Component({
+  standalone: true,
+  imports: [MeterGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: MeterItem[] = [
+    { label: 'Used',   value: 45, color: '#6366f1' },
+    { label: 'Cached', value: 25, color: '#a5b4fc' },
+    { label: 'Free',   value: 30, color: '#e0e7ff' },
+  ];
+}`,
     variants: `<ui-lib-meter-group [values]="items" variant="material"  [showLabels]="false" />
 <ui-lib-meter-group [values]="items" variant="bootstrap" [showLabels]="false" />
 <ui-lib-meter-group [values]="items" variant="minimal"   [showLabels]="false" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { MeterGroup } from 'ui-lib-custom/meter-group';
+import type { MeterItem } from 'ui-lib-custom/meter-group';
+
+@Component({
+  standalone: true,
+  imports: [MeterGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: MeterItem[] = [
+    { label: 'Used',   value: 45, color: '#6366f1' },
+    { label: 'Cached', value: 25, color: '#a5b4fc' },
+    { label: 'Free',   value: 30, color: '#e0e7ff' },
+  ];
+}`,
     vertical: `<ui-lib-meter-group
   [values]="cpuItems"
   orientation="vertical"
   labelPosition="end"
 />`,
+    verticalTs: `import { Component } from '@angular/core';
+import { MeterGroup } from 'ui-lib-custom/meter-group';
+import type { MeterItem } from 'ui-lib-custom/meter-group';
+
+@Component({
+  standalone: true,
+  imports: [MeterGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly cpuItems: MeterItem[] = [
+    { label: 'User',    value: 42, color: '#818cf8' },
+    { label: 'System',  value: 18, color: '#fb923c' },
+    { label: 'I/O Wait', value: 8, color: '#f87171' },
+  ];
+}`,
     noLegend: `<ui-lib-meter-group [values]="items" [showLabels]="false" />`,
+    noLegendTs: `import { Component } from '@angular/core';
+import { MeterGroup } from 'ui-lib-custom/meter-group';
+import type { MeterItem } from 'ui-lib-custom/meter-group';
+
+@Component({
+  standalone: true,
+  imports: [MeterGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: MeterItem[] = [
+    { label: 'Apps',     value: 16, color: '#34d399' },
+    { label: 'Messages', value: 8,  color: '#818cf8' },
+    { label: 'Media',    value: 24, color: '#fb923c' },
+    { label: 'System',   value: 10, color: '#f87171' },
+  ];
+}`,
   } as const;
 
   // ---- Static demo data ---------------------------------------------------
@@ -243,136 +347,11 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';`,
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'value',
-      type: 'MeterItem[]',
-      description: 'Array of meter items with value, label, and optional color (required).',
-    },
-    {
-      name: 'min',
-      type: 'number',
-      default: '0',
-      description: 'Minimum value for relative bar scaling.',
-    },
-    {
-      name: 'max',
-      type: 'number',
-      default: '100',
-      description: 'Maximum value for relative bar scaling.',
-    },
-    {
-      name: 'orientation',
-      type: "'horizontal' | 'vertical'",
-      default: "'horizontal'",
-      description: 'Meter bar axis.',
-    },
-    {
-      name: 'labelPosition',
-      type: "'start' | 'end'",
-      default: "'end'",
-      description: 'Position of item labels relative to the bar.',
-    },
-    {
-      name: 'labelOrientation',
-      type: "'horizontal' | 'vertical'",
-      default: "'horizontal'",
-      description: 'Orientation of the label list.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string | null',
-      default: 'null',
-      description: 'Accessible label for the meter group.',
-    },
-  ];
-
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab / Shift+Tab',
       action:
         'Skips meter segments and legend items — MeterGroup is informational and non-interactive, nothing is focusable.',
-    },
-  ];
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'values',
-      type: 'MeterItem[]',
-      default: '[]',
-      description: 'Array of meter segments to render.',
-    },
-    { name: 'min', type: 'number', default: '0', description: 'Minimum value of the range.' },
-    { name: 'max', type: 'number', default: '100', description: 'Maximum value of the range.' },
-    {
-      name: 'orientation',
-      type: "'horizontal' | 'vertical'",
-      default: "'horizontal'",
-      description: 'Bar direction.',
-    },
-    {
-      name: 'showLabels',
-      type: 'boolean',
-      default: 'true',
-      description: 'Show or hide the legend.',
-    },
-    {
-      name: 'labelPosition',
-      type: "'start' | 'end'",
-      default: "'end'",
-      description:
-        'Legend placement — <code>start</code> is above / left, <code>end</code> is below / right.',
-    },
-    {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
-      description: 'Bar thickness size token.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description:
-        'Visual design variant; falls back to <code>ThemeConfigService</code> when null.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Meter group'",
-      description: 'Accessible label for the meter container group.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS classes appended to the host element.',
-    },
-  ];
-
-  public readonly apiMeterItemRows: ApiPropRow[] = [
-    {
-      name: 'label',
-      type: 'string',
-      required: true,
-      description: 'Display label shown in the legend and used as the segment aria-label.',
-    },
-    {
-      name: 'value',
-      type: 'number',
-      required: true,
-      description: 'Numeric value measured against min / max.',
-    },
-    {
-      name: 'color',
-      type: 'string',
-      required: true,
-      description: 'CSS colour string for the segment fill (hex, rgb, hsl, named colour).',
-    },
-    {
-      name: 'icon',
-      type: 'string',
-      description: 'Optional PrimeIcons class shown inside the legend colour swatch.',
     },
   ];
 }

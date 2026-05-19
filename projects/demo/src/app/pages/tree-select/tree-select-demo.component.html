@@ -3,7 +3,6 @@
   description="TreeSelect renders a hierarchical tree structure inside a dropdown overlay, supporting single, multiple, and checkbox node selection."
   [sections]="sections"
 >
-
   <!-- ─── Basic ─────────────────────────────────────────────────────────── -->
   <section id="basic">
     <app-doc-demo-viewport label="Basic — Single Selection">
@@ -21,9 +20,7 @@
           </p>
         }
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -44,9 +41,7 @@
           </p>
         }
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('multiple')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('multiple')" [typescript]="snippetTs('multiple')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -67,9 +62,7 @@
           </p>
         }
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('checkbox')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('checkbox')" [typescript]="snippetTs('checkbox')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -87,9 +80,7 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('filter')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('filter')" [typescript]="snippetTs('filter')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -116,9 +107,7 @@
           [(selection)]="sizeLgSelection"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -148,9 +137,7 @@
           [(selection)]="variantSelections['minimal']"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('variants')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -167,9 +154,7 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('showClear')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('showClear')" [typescript]="snippetTs('showClear')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -184,9 +169,7 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -201,9 +184,7 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('loading')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('loading')" [typescript]="snippetTs('loading')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -221,9 +202,7 @@
         />
         <pre style="margin-top: 0.5rem; font-size: 0.75rem">{{ ngModelValue | json }}</pre>
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('ngModel')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('ngModel')" [typescript]="snippetTs('ngModel')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -248,9 +227,7 @@
           <pre style="font-size: 0.75rem">{{ reactiveForm.value | json }}</pre>
         </form>
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
     </app-doc-demo-viewport>
   </section>
 
@@ -280,6 +257,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

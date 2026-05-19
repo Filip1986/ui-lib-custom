@@ -19,6 +19,7 @@ import { ThemedLayoutsSectionComponent } from './themed-layouts-section.componen
 import { LayoutExamplesSectionComponent } from './examples-section.component';
 import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
 
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page aggregating layout primitives and sections.
@@ -44,6 +45,7 @@ import { Panel } from 'ui-lib-custom/panel';
     LayoutExamplesSectionComponent,
     LayoutBasicExampleComponent,
     DocTocComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
@@ -148,4 +150,15 @@ export class LayoutsComponent {
   <ui-lib-card>Card A</ui-lib-card>
   <ui-lib-card>Card B</ui-lib-card>
 </ui-lib-stack>`;
+
+  public readonly layoutExampleTs: string = `import { Component } from '@angular/core';
+import { Stack } from 'ui-lib-custom/stack';
+import { Card } from 'ui-lib-custom/card';
+
+@Component({
+  standalone: true,
+  imports: [Stack, Card],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 }

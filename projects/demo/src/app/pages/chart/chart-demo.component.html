@@ -9,197 +9,185 @@
   <div class="examples">
     <section id="basic-bar" data-doc-anchor class="example-section">
       <h3>1. Basic Bar Chart</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basicBar')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('basicBar')" [typescript]="snippet('basicBarTs')" />
     </section>
 
     <section id="basic-line" data-doc-anchor class="example-section">
       <h3>2. Basic Line Chart</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basicLine')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('basicLine')" [typescript]="snippet('basicLineTs')" />
     </section>
 
     <section id="pie-chart" data-doc-anchor class="example-section">
       <h3>3. Pie Chart</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('pie')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('pie')" [typescript]="snippet('pieTs')" />
     </section>
 
     <section id="doughnut-chart" data-doc-anchor class="example-section">
       <h3>4. Doughnut Chart</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-doughnut-chart [data]="channelMixData" ariaLabel="Acquisition channel doughnut chart" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('doughnut')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-doughnut-chart
+          [data]="channelMixData"
+          ariaLabel="Acquisition channel doughnut chart"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('doughnut')" [typescript]="snippet('doughnutTs')" />
     </section>
 
     <section id="generic-radar" data-doc-anchor class="example-section">
       <h3>5. Generic Chart (Radar)</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-chart
-            type="radar"
-            [data]="radarCapabilityData"
-            [ariaLabel]="'Platform capability radar chart'"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('radar')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-chart
+          type="radar"
+          [data]="radarCapabilityData"
+          [ariaLabel]="'Platform capability radar chart'"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('radar')" [typescript]="snippet('radarTs')" />
     </section>
 
     <section id="generic-polar-area" data-doc-anchor class="example-section">
       <h3>6. Generic Chart (Polar Area)</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-chart
-            type="polarArea"
-            [data]="polarPriorityData"
-            [ariaLabel]="'Roadmap priority polar area chart'"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('polarArea')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-chart
+          type="polarArea"
+          [data]="polarPriorityData"
+          [ariaLabel]="'Roadmap priority polar area chart'"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('polarArea')" [typescript]="snippet('polarAreaTs')" />
     </section>
 
     <section id="generic-bubble" data-doc-anchor class="example-section">
       <h3>7. Generic Chart (Bubble)</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-chart
-            type="bubble"
-            [data]="bubbleSegmentData"
-            [ariaLabel]="'Customer segment bubble chart'"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('bubble')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-chart
+          type="bubble"
+          [data]="bubbleSegmentData"
+          [ariaLabel]="'Customer segment bubble chart'"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('bubble')" [typescript]="snippet('bubbleTs')" />
     </section>
 
     <section id="generic-scatter" data-doc-anchor class="example-section">
       <h3>8. Generic Chart (Scatter)</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-chart
-            type="scatter"
-            [data]="scatterConversionData"
-            [ariaLabel]="'Campaign conversion scatter plot'"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('scatter')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-chart
+          type="scatter"
+          [data]="scatterConversionData"
+          [ariaLabel]="'Campaign conversion scatter plot'"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('scatter')" [typescript]="snippet('scatterTs')" />
     </section>
 
     <section id="multi-dataset-bar" data-doc-anchor class="example-section">
       <h3>9. Multi-Dataset Bar</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('multiDatasetBar')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('multiDatasetBar')"
+        [typescript]="snippet('multiDatasetBarTs')"
+      />
     </section>
 
     <section id="stacked-bar" data-doc-anchor class="example-section">
       <h3>10. Stacked Bar</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-bar-chart [data]="stackedCostData" [options]="stackedBarOptions" ariaLabel="Stacked cost chart" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('stackedBar')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-bar-chart
+          [data]="stackedCostData"
+          [options]="stackedBarOptions"
+          ariaLabel="Stacked cost chart"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('stackedBar')" [typescript]="snippet('stackedBarTs')" />
     </section>
 
     <section id="line-area-fill" data-doc-anchor class="example-section">
       <h3>11. Line with Area Fill</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('lineArea')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('lineArea')" [typescript]="snippet('lineAreaTs')" />
     </section>
 
     <section id="mixed-chart" data-doc-anchor class="example-section">
       <h3>12. Mixed Chart</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-chart
-            type="bar"
-            [data]="mixedKpiData"
-            [options]="mixedChartOptions"
-            [ariaLabel]="'Mixed revenue and conversion chart'"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('mixed')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-chart
+          type="bar"
+          [data]="mixedKpiData"
+          [options]="mixedChartOptions"
+          [ariaLabel]="'Mixed revenue and conversion chart'"
         />
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('mixed')" [typescript]="snippet('mixedTs')" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>13. Sizes</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-grid [columns]="3" spacing="md" class="size-grid">
-            <ui-lib-stack [gap]="2">
-              <p class="mini-heading">Small</p>
-              <ui-lib-bar-chart [data]="sizePreviewData" size="sm" ariaLabel="Small chart" />
-            </ui-lib-stack>
-            <ui-lib-stack [gap]="2">
-              <p class="mini-heading">Medium</p>
-              <ui-lib-bar-chart [data]="sizePreviewData" size="md" ariaLabel="Medium chart" />
-            </ui-lib-stack>
-            <ui-lib-stack [gap]="2">
-              <p class="mini-heading">Large</p>
-              <ui-lib-bar-chart [data]="sizePreviewData" size="lg" ariaLabel="Large chart" />
-            </ui-lib-stack>
-          </ui-lib-grid>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-grid [columns]="3" spacing="md" class="size-grid">
+          <ui-lib-stack [gap]="2">
+            <p class="mini-heading">Small</p>
+            <ui-lib-bar-chart [data]="sizePreviewData" size="sm" ariaLabel="Small chart" />
+          </ui-lib-stack>
+          <ui-lib-stack [gap]="2">
+            <p class="mini-heading">Medium</p>
+            <ui-lib-bar-chart [data]="sizePreviewData" size="md" ariaLabel="Medium chart" />
+          </ui-lib-stack>
+          <ui-lib-stack [gap]="2">
+            <p class="mini-heading">Large</p>
+            <ui-lib-bar-chart [data]="sizePreviewData" size="lg" ariaLabel="Large chart" />
+          </ui-lib-stack>
+        </ui-lib-grid>
+      </ui-lib-panel>
+      <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
     </section>
 
     <section id="custom-dimensions" data-doc-anchor class="example-section">
       <h3>14. Custom Dimensions</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-line-chart
-            [data]="customDimensionData"
-            height="320px"
-            width="640px"
-            ariaLabel="Custom dimension line chart"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('customDimensions')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-line-chart
+          [data]="customDimensionData"
+          height="320px"
+          width="640px"
+          ariaLabel="Custom dimension line chart"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('customDimensions')"
+        [typescript]="snippet('customDimensionsTs')"
+      />
     </section>
 
     <section id="dynamic-data-update" data-doc-anchor class="example-section">
       <h3>15. Dynamic Data Update</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-stack [gap]="3">
-            <ui-lib-inline [gap]="2" align="center">
-              <ui-lib-button color="primary" (click)="randomizeRevenueData()">Randomize Revenue</ui-lib-button>
-              <span class="helper-text">Updates chart data reactively.</span>
-            </ui-lib-inline>
-            <ui-lib-bar-chart [data]="dynamicRevenueData" ariaLabel="Dynamic revenue bar chart" />
-          </ui-lib-stack>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('dynamicUpdate')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-stack [gap]="3">
+          <ui-lib-inline [gap]="2" align="center">
+            <ui-lib-button color="primary" (click)="randomizeRevenueData()"
+              >Randomize Revenue</ui-lib-button
+            >
+            <span class="helper-text">Updates chart data reactively.</span>
+          </ui-lib-inline>
+          <ui-lib-bar-chart [data]="dynamicRevenueData" ariaLabel="Dynamic revenue bar chart" />
+        </ui-lib-stack>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('dynamicUpdate')"
+        [typescript]="snippet('dynamicUpdateTs')"
+      />
     </section>
 
     <section id="theme-integration" data-doc-anchor class="example-section">
@@ -208,72 +196,75 @@
         This example swaps chart CSS variable profiles to demonstrate the theme-token bridge used by
         <code>ChartThemeService</code>.
       </p>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-stack [gap]="3">
-            <ui-lib-inline [gap]="2" align="center">
-              <ui-lib-button
-                [severity]="selectedThemeProfile === 'material' ? 'primary' : 'secondary'"
-                (click)="setThemeProfile('material', themeBridgeChart)"
-              >
-                Material
-              </ui-lib-button>
-              <ui-lib-button
-                [severity]="selectedThemeProfile === 'bootstrap' ? 'primary' : 'secondary'"
-                (click)="setThemeProfile('bootstrap', themeBridgeChart)"
-              >
-                Bootstrap
-              </ui-lib-button>
-              <ui-lib-button
-                [severity]="selectedThemeProfile === 'minimal' ? 'primary' : 'secondary'"
-                (click)="setThemeProfile('minimal', themeBridgeChart)"
-              >
-                Minimal
-              </ui-lib-button>
-            </ui-lib-inline>
+      <ui-lib-panel variant="minimal">
+        <ui-lib-stack [gap]="3">
+          <ui-lib-inline [gap]="2" align="center">
+            <ui-lib-button
+              [severity]="selectedThemeProfile === 'material' ? 'primary' : 'secondary'"
+              (click)="setThemeProfile('material', themeBridgeChart)"
+            >
+              Material
+            </ui-lib-button>
+            <ui-lib-button
+              [severity]="selectedThemeProfile === 'bootstrap' ? 'primary' : 'secondary'"
+              (click)="setThemeProfile('bootstrap', themeBridgeChart)"
+            >
+              Bootstrap
+            </ui-lib-button>
+            <ui-lib-button
+              [severity]="selectedThemeProfile === 'minimal' ? 'primary' : 'secondary'"
+              (click)="setThemeProfile('minimal', themeBridgeChart)"
+            >
+              Minimal
+            </ui-lib-button>
+          </ui-lib-inline>
 
-            <div class="theme-bridge-surface" [ngStyle]="themeCssVariables()">
-              <ui-lib-line-chart
-                #themeBridgeChart
-                [data]="themeBridgeData"
-                ariaLabel="Theme bridge line chart"
-              />
-            </div>
-          </ui-lib-stack>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('themeIntegration')" 
-        [showLineNumbers]="true"
-        />
+          <div class="theme-bridge-surface" [ngStyle]="themeCssVariables()">
+            <ui-lib-line-chart
+              #themeBridgeChart
+              [data]="themeBridgeData"
+              ariaLabel="Theme bridge line chart"
+            />
+          </div>
+        </ui-lib-stack>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('themeIntegration')"
+        [typescript]="snippet('themeIntegrationTs')"
+      />
     </section>
 
     <section id="click-events" data-doc-anchor class="example-section">
       <h3>17. Click Events</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-stack [gap]="3">
-            <ui-lib-bar-chart
-              [data]="clickableRevenueData"
-              ariaLabel="Clickable revenue chart"
-              (chartClick)="onChartClick($event)"
-            />
-            <p class="selection-feedback" aria-live="polite">{{ selectedPointLabel }}</p>
-          </ui-lib-stack>
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('clickEvents')" 
-        [showLineNumbers]="true"
-        />
+      <ui-lib-panel variant="minimal">
+        <ui-lib-stack [gap]="3">
+          <ui-lib-bar-chart
+            [data]="clickableRevenueData"
+            ariaLabel="Clickable revenue chart"
+            (chartClick)="onChartClick($event)"
+          />
+          <p class="selection-feedback" aria-live="polite">{{ selectedPointLabel }}</p>
+        </ui-lib-stack>
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('clickEvents')"
+        [typescript]="snippet('clickEventsTs')"
+      />
     </section>
 
     <section id="custom-options" data-doc-anchor class="example-section">
       <h3>18. Custom Options</h3>
-        <ui-lib-panel variant="minimal">
-          <ui-lib-doughnut-chart
-            [data]="customOptionsData"
-            [options]="customLegendOptions"
-            ariaLabel="Custom legend and tooltip chart"
-          />
-        </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('customOptions')" 
-        [showLineNumbers]="true"
+      <ui-lib-panel variant="minimal">
+        <ui-lib-doughnut-chart
+          [data]="customOptionsData"
+          [options]="customLegendOptions"
+          ariaLabel="Custom legend and tooltip chart"
         />
+      </ui-lib-panel>
+      <app-doc-code-example
+        [html]="snippet('customOptions')"
+        [typescript]="snippet('customOptionsTs')"
+      />
     </section>
   </div>
 
@@ -297,6 +288,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

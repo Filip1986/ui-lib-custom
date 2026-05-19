@@ -5,10 +5,8 @@
     description="Performance-first layout components using signals, OnPush change detection, and design tokens. Each component renders a single element with zero runtime overhead."
   />
 
-    <app-layout-basic-example />
-  <ui-lib-code-snippet language="html" [code]="layoutExample" 
-    [showLineNumbers]="true"
-    />
+  <app-layout-basic-example />
+  <app-doc-code-example [html]="layoutExample" [typescript]="layoutExampleTs" />
 
   <div class="viewport-control-stack">
     <ui-lib-panel variant="minimal">
@@ -87,5 +85,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

@@ -10,8 +10,7 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the Bind directive.
@@ -29,7 +28,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
@@ -56,7 +55,27 @@ export class BindDemoComponent {
 
   public readonly importCode: string = "import { Bind } from 'ui-lib-custom/bind'";
   public readonly snippetBasicUsage: string = `<div [uiLibBind]="{ id: 'my-box', title: 'Tooltip text', tabIndex: 0 }">\n  Content\n</div>`;
+  public readonly snippetBasicUsageTs: string = `import { Component } from '@angular/core';
+import { Bind } from 'ui-lib-custom/bind';
+
+@Component({
+  standalone: true,
+  imports: [Bind],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
   public readonly snippetBooleanNumeric: string = `<!-- numeric property -->\n<div [uiLibBind]="{ tabIndex: 2 }">Focusable</div>\n<!-- boolean property -->\n<div [uiLibBind]="{ hidden: true }">Hidden</div>`;
+  public readonly snippetBooleanNumericTs: string = `import { Component } from '@angular/core';
+import { Bind } from 'ui-lib-custom/bind';
+
+@Component({
+  standalone: true,
+  imports: [Bind],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
   public readonly snippetSelector: string = `[uiLibBind]`;
   public readonly snippetHostClass: string = `ui-lib-bind`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -106,16 +125,6 @@ export class BindDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: readonly ApiPropRow[] = [
-    {
-      name: 'uiLibBind',
-      type: 'Record<string, unknown>',
-      default: '{}',
-      description:
-        'An object whose enumerable own properties are set as DOM properties on the host element. Properties removed between updates are reset to null.',
-    },
-  ];
 
   public setPreset(preset: 'alpha' | 'beta' | 'gamma'): void {
     this.activeIdPreset.set(preset);

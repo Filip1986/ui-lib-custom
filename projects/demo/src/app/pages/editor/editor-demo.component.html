@@ -11,29 +11,25 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Two-way binding with live HTML output.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <ui-lib-editor
-                [(ngModel)]="basicHtml"
-                placeholder="Write something with bold, lists, and links..."
-              ></ui-lib-editor>
-              <pre class="value-pre">{{ basicHtml }}</pre>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <ui-lib-editor
+              [(ngModel)]="basicHtml"
+              placeholder="Write something with bold, lists, and links..."
+            ></ui-lib-editor>
+            <pre class="value-pre">{{ basicHtml }}</pre>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
       </section>
 
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>b. ReadOnly</h3>
         <p class="section-text">Pre-populated editor content in readonly mode.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippetTs('readonly')" />
       </section>
 
       <section id="custom-toolbar" data-doc-anchor class="example-section">
@@ -41,206 +37,209 @@
         <p class="section-text">
           Project your own toolbar and execute commands with a template reference variable.
         </p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
-                <div editorToolbar class="custom-toolbar">
-                  <select
-                    class="custom-toolbar-select"
-                    [value]="editor.toolbarState().blockFormat"
-                    aria-label="Heading level"
-                    (mousedown)="onToolbarMouseDown($event)"
-                    (change)="onCustomHeadingChange(editor, $event)"
-                  >
-                    <option value="p">Normal</option>
-                    <option value="h1">Heading 1</option>
-                    <option value="h2">Heading 2</option>
-                    <option value="h3">Heading 3</option>
-                  </select>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
+              <div editorToolbar class="custom-toolbar">
+                <select
+                  class="custom-toolbar-select"
+                  [value]="editor.toolbarState().blockFormat"
+                  aria-label="Heading level"
+                  (mousedown)="onToolbarMouseDown($event)"
+                  (change)="onCustomHeadingChange(editor, $event)"
+                >
+                  <option value="p">Normal</option>
+                  <option value="h1">Heading 1</option>
+                  <option value="h2">Heading 2</option>
+                  <option value="h3">Heading 3</option>
+                </select>
 
-                  <button
-                    type="button"
-                    class="custom-toolbar-button"
-                    aria-label="Bold"
-                    [attr.aria-pressed]="editor.toolbarState().bold"
-                    (mousedown)="onToolbarMouseDown($event)"
-                    (click)="editor.executeCommand('bold')"
-                  >
-                    B
-                  </button>
+                <button
+                  type="button"
+                  class="custom-toolbar-button"
+                  aria-label="Bold"
+                  [attr.aria-pressed]="editor.toolbarState().bold"
+                  (mousedown)="onToolbarMouseDown($event)"
+                  (click)="editor.executeCommand('bold')"
+                >
+                  B
+                </button>
 
-                  <button
-                    type="button"
-                    class="custom-toolbar-button"
-                    aria-label="Italic"
-                    [attr.aria-pressed]="editor.toolbarState().italic"
-                    (mousedown)="onToolbarMouseDown($event)"
-                    (click)="editor.executeCommand('italic')"
-                  >
-                    I
-                  </button>
+                <button
+                  type="button"
+                  class="custom-toolbar-button"
+                  aria-label="Italic"
+                  [attr.aria-pressed]="editor.toolbarState().italic"
+                  (mousedown)="onToolbarMouseDown($event)"
+                  (click)="editor.executeCommand('italic')"
+                >
+                  I
+                </button>
 
-                  <button
-                    type="button"
-                    class="custom-toolbar-button"
-                    aria-label="Underline"
-                    [attr.aria-pressed]="editor.toolbarState().underline"
-                    (mousedown)="onToolbarMouseDown($event)"
-                    (click)="editor.executeCommand('underline')"
-                  >
-                    U
-                  </button>
-                </div>
-              </ui-lib-editor>
-              <pre class="value-pre">{{ customToolbarHtml }}</pre>
-            </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('customToolbar')" 
-          [showLineNumbers]="true"
-          />
+                <button
+                  type="button"
+                  class="custom-toolbar-button"
+                  aria-label="Underline"
+                  [attr.aria-pressed]="editor.toolbarState().underline"
+                  (mousedown)="onToolbarMouseDown($event)"
+                  (click)="editor.executeCommand('underline')"
+                >
+                  U
+                </button>
+              </div>
+            </ui-lib-editor>
+            <pre class="value-pre">{{ customToolbarHtml }}</pre>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="snippet('customToolbar')"
+          [typescript]="snippetTs('customToolbar')"
+        />
       </section>
 
       <section id="template-driven" data-doc-anchor class="example-section">
         <h3>d. Template-Driven Form</h3>
         <p class="section-text">Required validation, submit action, and form state.</p>
-          <ui-lib-panel variant="minimal">
-            <form #templateForm="ngForm" (ngSubmit)="submitTemplateDriven(templateForm)" class="stack-md">
-              <ui-lib-editor
-                name="templateContent"
-                required
-                [(ngModel)]="templateDrivenHtml"
-                placeholder="Required content..."
-              ></ui-lib-editor>
-              <div class="row-inline">
-                <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-                <span class="value-text">Valid: {{ templateForm.valid }}</span>
-                <span class="value-text">Touched: {{ templateForm.touched }}</span>
-              </div>
-              <pre class="value-pre">{{ templateDrivenSubmittedHtml ?? 'No submission yet' }}</pre>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <form
+            #templateForm="ngForm"
+            (ngSubmit)="submitTemplateDriven(templateForm)"
+            class="stack-md"
+          >
+            <ui-lib-editor
+              name="templateContent"
+              required
+              [(ngModel)]="templateDrivenHtml"
+              placeholder="Required content..."
+            ></ui-lib-editor>
+            <div class="row-inline">
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <span class="value-text">Valid: {{ templateForm.valid }}</span>
+              <span class="value-text">Touched: {{ templateForm.touched }}</span>
+            </div>
+            <pre class="value-pre">{{ templateDrivenSubmittedHtml ?? 'No submission yet' }}</pre>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="snippet('templateDriven')"
+          [typescript]="snippetTs('templateDriven')"
+        />
       </section>
 
       <section id="reactive" data-doc-anchor class="example-section">
         <h3>e. Reactive Form</h3>
         <p class="section-text">Reactive control binding with required validation.</p>
-          <ui-lib-panel variant="minimal">
-            <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
-              <ui-lib-editor formControlName="content" placeholder="Required content..."></ui-lib-editor>
-              <div class="row-inline">
-                <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-                <span class="value-text">Valid: {{ reactiveForm.valid }}</span>
-                <span class="value-text">Touched: {{ reactiveForm.touched }}</span>
-              </div>
-              <pre class="value-pre">{{ reactiveSubmittedHtml ?? 'No submission yet' }}</pre>
-            </form>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
+            <ui-lib-editor
+              formControlName="content"
+              placeholder="Required content..."
+            ></ui-lib-editor>
+            <div class="row-inline">
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <span class="value-text">Valid: {{ reactiveForm.valid }}</span>
+              <span class="value-text">Touched: {{ reactiveForm.touched }}</span>
+            </div>
+            <pre class="value-pre">{{ reactiveSubmittedHtml ?? 'No submission yet' }}</pre>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
         <h3>f. Variants</h3>
         <p class="section-text">Material, Bootstrap, and Minimal side by side.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="row-3">
-              <div class="variant-column">
-                <p class="variant-title">Material</p>
-                <ui-lib-editor variant="material" [(ngModel)]="variantValues.material"></ui-lib-editor>
-              </div>
-              <div class="variant-column">
-                <p class="variant-title">Bootstrap</p>
-                <ui-lib-editor variant="bootstrap" [(ngModel)]="variantValues.bootstrap"></ui-lib-editor>
-              </div>
-              <div class="variant-column">
-                <p class="variant-title">Minimal</p>
-                <ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal"></ui-lib-editor>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            <div class="variant-column">
+              <p class="variant-title">Material</p>
+              <ui-lib-editor
+                variant="material"
+                [(ngModel)]="variantValues.material"
+              ></ui-lib-editor>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
-          [showLineNumbers]="true"
-          />
+            <div class="variant-column">
+              <p class="variant-title">Bootstrap</p>
+              <ui-lib-editor
+                variant="bootstrap"
+                [(ngModel)]="variantValues.bootstrap"
+              ></ui-lib-editor>
+            </div>
+            <div class="variant-column">
+              <p class="variant-title">Minimal</p>
+              <ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal"></ui-lib-editor>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>g. Sizes</h3>
         <p class="section-text">Small, medium, and large size options.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="row-3">
-              <div class="variant-column">
-                <p class="variant-title">sm</p>
-                <ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm"></ui-lib-editor>
-              </div>
-              <div class="variant-column">
-                <p class="variant-title">md</p>
-                <ui-lib-editor size="md" [(ngModel)]="sizeValues.md"></ui-lib-editor>
-              </div>
-              <div class="variant-column">
-                <p class="variant-title">lg</p>
-                <ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg"></ui-lib-editor>
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            <div class="variant-column">
+              <p class="variant-title">sm</p>
+              <ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm"></ui-lib-editor>
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
+            <div class="variant-column">
+              <p class="variant-title">md</p>
+              <ui-lib-editor size="md" [(ngModel)]="sizeValues.md"></ui-lib-editor>
+            </div>
+            <div class="variant-column">
+              <p class="variant-title">lg</p>
+              <ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg"></ui-lib-editor>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
         <h3>h. Filled</h3>
         <p class="section-text">Filled editor style useful on elevated backgrounds.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippetTs('filled')" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>i. Disabled</h3>
         <p class="section-text">Non-interactive state with preloaded content.</p>
-          <ui-lib-panel variant="minimal">
-            <ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
       </section>
 
       <section id="events" data-doc-anchor class="example-section">
         <h3>j. Events</h3>
         <p class="section-text">Visible event log for text and selection changes.</p>
-          <ui-lib-panel variant="minimal">
-            <div class="stack-md">
-              <ui-lib-editor
-                [(ngModel)]="eventsHtml"
-                (textChange)="onTextChange($event)"
-                (selectionChange)="onSelectionChange($event)"
-              ></ui-lib-editor>
-              <div class="row-inline">
-                <ui-lib-button type="button" color="secondary" (click)="clearEventLog()"
-                  >Clear Log</ui-lib-button
-                >
-              </div>
-              <div class="event-log" aria-live="polite">
-                @if (eventLog.length === 0) {
-                  <p class="event-log-empty">No events yet.</p>
-                }
-                @for (entry of eventLog; track entry) {
-                  <div class="event-log-line">{{ entry }}</div>
-                }
-              </div>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <ui-lib-editor
+              [(ngModel)]="eventsHtml"
+              (textChange)="onTextChange($event)"
+              (selectionChange)="onSelectionChange($event)"
+            ></ui-lib-editor>
+            <div class="row-inline">
+              <ui-lib-button type="button" color="secondary" (click)="clearEventLog()"
+                >Clear Log</ui-lib-button
+              >
             </div>
-          </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('events')" 
-          [showLineNumbers]="true"
-          />
+            <div class="event-log" aria-live="polite">
+              @if (eventLog.length === 0) {
+                <p class="event-log-empty">No events yet.</p>
+              }
+              @for (entry of eventLog; track entry) {
+                <div class="event-log-line">{{ entry }}</div>
+              }
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="snippet('events')" [typescript]="snippetTs('events')" />
       </section>
     </div>
   </app-doc-demo-viewport>
@@ -263,6 +262,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

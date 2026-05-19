@@ -6,10 +6,12 @@
     description="Dropdown component with search, multi-select, and templates. Use the controls to see live changes."
   />
 
-    <app-select-basic-example />
-  <ui-lib-code-snippet language="html" [code]="selectExample"
+  <app-select-basic-example />
+  <app-doc-code-example
+    [html]="selectExample"
+    [typescript]="snippets.selectExampleTs"
     [showLineNumbers]="true"
-    />
+  />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -30,7 +32,7 @@
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
       <ui-lib-panel variant="minimal">
-          <p class="card-description">Choose variant and follow theme defaults.</p>
+        <p class="card-description">Choose variant and follow theme defaults.</p>
 
         <div class="control">
           <label>Variant</label>
@@ -59,7 +61,7 @@
       </ui-lib-panel>
 
       <ui-lib-panel variant="minimal">
-          <p class="card-description">Toggle selection, search, and states.</p>
+        <p class="card-description">Toggle selection, search, and states.</p>
 
         <div class="toggles">
           <label
@@ -98,7 +100,7 @@
       </ui-lib-panel>
 
       <ui-lib-panel variant="minimal">
-          <p class="card-description">Set placeholder text.</p>
+        <p class="card-description">Set placeholder text.</p>
 
         <div class="control">
           <label>Placeholder</label>
@@ -171,7 +173,6 @@
     </div>
 
     <ui-lib-panel variant="minimal">
-
       <app-doc-demo-viewport>
         <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
           <ui-lib-select
@@ -284,11 +285,11 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="snippets.usage"
+      <app-doc-code-example
+        [html]="snippets.usage"
+        [typescript]="snippets.usageTs"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      />
     </ui-lib-panel>
   }
 
@@ -340,5 +341,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

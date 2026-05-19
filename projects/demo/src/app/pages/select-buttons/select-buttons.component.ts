@@ -26,10 +26,7 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -56,8 +53,7 @@ import { Panel } from 'ui-lib-custom/panel';
     VariantComparisonComponent,
     SelectButtonBasicExampleComponent,
     DocQualityBadgeComponent,
-    DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -103,20 +99,9 @@ export class SelectButtonsComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
-  // -------------------------------------------------------------------------
-  // Keyboard navigation rows
-  // -------------------------------------------------------------------------
-
-  public readonly keyboardRows: KeyboardNavRow[] = [
-    { key: 'Tab / Shift+Tab', action: 'Move focus into / out of the button group.' },
-    { key: '← / →', action: 'Move focus between options within the group.' },
-    { key: 'Space / Enter', action: 'Toggle selection of the focused option.' },
-  ];
-
-  public readonly snippets: { usage: string } = {
+  public readonly snippets: { usage: string; usageTs: string; selectButtonExampleTs: string } = {
     usage: `import { SelectButton } from 'ui-lib-custom';
 
 @Component({
@@ -130,6 +115,38 @@ export class Example {
     { label: 'Two', value: 2 },
   ];
   value = 1;
+}`,
+    usageTs: `import { Component } from '@angular/core';
+import { SelectButton } from 'ui-lib-custom/select-button';
+import type { SelectButtonOption } from 'ui-lib-custom/select-button';
+
+@Component({
+  standalone: true,
+  imports: [SelectButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly options: SelectButtonOption[] = [
+    { label: 'One', value: 1 },
+    { label: 'Two', value: 2 },
+  ];
+  value: number = 1;
+}`,
+    selectButtonExampleTs: `import { Component } from '@angular/core';
+import { SelectButton } from 'ui-lib-custom/select-button';
+import type { SelectButtonOption } from 'ui-lib-custom/select-button';
+
+@Component({
+  standalone: true,
+  imports: [SelectButton],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly basicOptions: SelectButtonOption[] = [
+    { label: 'One-Way', value: 'one-way' },
+    { label: 'Return', value: 'return' },
+  ];
+  basicValue: string = 'one-way';
 }`,
   };
 
@@ -219,39 +236,4 @@ export class Example {
   public markInvalidTouched(): void {
     this.invalidTouched = true;
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'options',
-      type: 'SelectButtonOption[]',
-      default: '[]',
-      description: 'Options to render.',
-    },
-    {
-      name: 'value',
-      type: 'any | any[] | null',
-      default: 'null',
-      description: 'Selected value(s).',
-    },
-    { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multi-select.' },
-    {
-      name: 'variant',
-      type: 'material | bootstrap | minimal',
-      default: 'material',
-      description: 'Visual variant.',
-    },
-    {
-      name: 'size',
-      type: 'small | medium | large',
-      default: 'medium',
-      description: 'Size preset.',
-    },
-    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable interaction.' },
-    { name: 'invalid', type: 'boolean', default: 'false', description: 'Invalid state.' },
-    {
-      name: 'onChange',
-      type: 'SelectButtonChangeEvent',
-      description: 'Emits when selection changes.',
-    },
-  ];
 }

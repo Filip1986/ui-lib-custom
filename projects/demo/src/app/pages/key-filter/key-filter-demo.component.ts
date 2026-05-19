@@ -10,8 +10,7 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type KeyFilterDemoSnippetKey =
@@ -25,6 +24,18 @@ type KeyFilterDemoSnippetKey =
   | 'email'
   | 'custom'
   | 'bypass';
+
+type KeyFilterDemoSnippetTsKey =
+  | 'alphanumTs'
+  | 'alphaTs'
+  | 'pintTs'
+  | 'intTs'
+  | 'numTs'
+  | 'hexTs'
+  | 'moneyTs'
+  | 'emailTs'
+  | 'customTs'
+  | 'bypassTs';
 
 /**
  * Demo page for the KeyFilter directive, showing all built-in presets,
@@ -43,7 +54,7 @@ type KeyFilterDemoSnippetKey =
     KeyFilterDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',
@@ -56,38 +67,6 @@ export class KeyFilterDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'uilibKeyFilter',
-      type: 'KeyFilterPreset | RegExp',
-      description: 'Preset name or custom regex controlling which keys are accepted.',
-    },
-    {
-      name: 'keyFilterBypass',
-      type: 'boolean',
-      default: 'false',
-      description: 'Disables filtering when true.',
-    },
-    {
-      name: 'hintText',
-      type: 'string | null',
-      default: 'null',
-      description: 'Screen reader hint describing allowed characters.',
-    },
-    {
-      name: 'pattern',
-      type: 'KeyFilterPreset | null',
-      default: 'null',
-      description: 'Named preset alias (alternative to the main input).',
-    },
-    {
-      name: 'regex',
-      type: 'RegExp | null',
-      default: 'null',
-      description: 'Custom regex alias (alternative to the main input).',
-    },
-  ];
 
   public readonly importCode: string =
     "import { KeyFilterDirective } from 'ui-lib-custom/key-filter'";
@@ -103,7 +82,6 @@ export class KeyFilterDemoComponent {
     { id: 'email', label: 'Email' },
     { id: 'custom', label: 'Custom RegExp' },
     { id: 'bypass', label: 'Bypass' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly snippets: Record<KeyFilterDemoSnippetKey, string> = {
@@ -126,6 +104,52 @@ export class KeyFilterDemoComponent {
     ].join('\n'),
   };
 
+  private readonly keyFilterBaseTs: string = `import { Component } from '@angular/core';
+import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
+
+@Component({
+  standalone: true,
+  imports: [KeyFilterDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
+
+  public readonly snippetsTs: Record<KeyFilterDemoSnippetTsKey, string> = {
+    alphanumTs: this.keyFilterBaseTs,
+    alphaTs: this.keyFilterBaseTs,
+    pintTs: this.keyFilterBaseTs,
+    intTs: this.keyFilterBaseTs,
+    numTs: this.keyFilterBaseTs,
+    hexTs: this.keyFilterBaseTs,
+    moneyTs: this.keyFilterBaseTs,
+    emailTs: this.keyFilterBaseTs,
+    customTs: `import { Component } from '@angular/core';
+import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
+
+@Component({
+  standalone: true,
+  imports: [KeyFilterDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly vowelPattern: RegExp = /[aeiouAEIOU]/;
+}
+`,
+    bypassTs: `import { Component } from '@angular/core';
+import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
+
+@Component({
+  standalone: true,
+  imports: [KeyFilterDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public bypassEnabled: boolean = false;
+}
+`,
+  };
+
   /** Custom vowel-only filter for the RegExp demo. */
   public readonly vowelPattern: RegExp = /[aeiouAEIOU]/;
 
@@ -134,6 +158,10 @@ export class KeyFilterDemoComponent {
 
   public snippet(key: KeyFilterDemoSnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: KeyFilterDemoSnippetTsKey): string {
+    return this.snippetsTs[key];
   }
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',

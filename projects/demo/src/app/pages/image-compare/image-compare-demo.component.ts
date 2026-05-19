@@ -7,14 +7,11 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ImageCompare } from 'ui-lib-custom/image-compare';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' | 'customLabel';
 
 /**
@@ -32,8 +29,7 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
     ImageCompare,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
-    DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
@@ -71,18 +67,6 @@ export class ImageCompareDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'custom-label', label: 'Custom Label' },
     { id: 'api', label: 'API' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
-  ];
-
-  // ─── Keyboard navigation rows ─────────────────────────────────────────────
-
-  public readonly keyboardRows: KeyboardNavRow[] = [
-    { key: '→ / ↑', action: 'Move divider 1% to the right.' },
-    { key: '← / ↓', action: 'Move divider 1% to the left.' },
-    { key: 'PageUp', action: 'Move divider 10% to the right.' },
-    { key: 'PageDown', action: 'Move divider 10% to the left.' },
-    { key: 'Home', action: 'Move divider to 0% (far left).' },
-    { key: 'End', action: 'Move divider to 100% (far right).' },
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────
@@ -90,112 +74,6 @@ export class ImageCompareDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    { name: 'before', type: 'string', description: 'URL of the before image (required).' },
-    { name: 'after', type: 'string', description: 'URL of the after image (required).' },
-    {
-      name: 'beforeAlt',
-      type: 'string',
-      default: "'Before'",
-      description: 'Alt text for the before image.',
-    },
-    {
-      name: 'afterAlt',
-      type: 'string',
-      default: "'After'",
-      description: 'Alt text for the after image.',
-    },
-    {
-      name: 'position',
-      type: 'number',
-      default: '50',
-      description: 'Initial divider position as a percentage (0–100).',
-    },
-    {
-      name: 'orientation',
-      type: "'horizontal' | 'vertical'",
-      default: "'horizontal'",
-      description: 'Divider axis.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Image comparison'",
-      description: 'Accessible label for the comparison region.',
-    },
-  ];
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'leftImage',
-      type: 'string',
-      default: "''",
-      description: 'URL of the left (before) image.',
-    },
-    { name: 'leftAlt', type: 'string', default: "''", description: 'Alt text for the left image.' },
-    {
-      name: 'rightImage',
-      type: 'string',
-      default: "''",
-      description: 'URL of the right (after) image.',
-    },
-    {
-      name: 'rightAlt',
-      type: 'string',
-      default: "''",
-      description: 'Alt text for the right image.',
-    },
-    {
-      name: 'value (model)',
-      type: 'number',
-      default: '50',
-      description: 'Slider position as a percentage (0–100). Supports two-way binding.',
-    },
-    {
-      name: 'disabled',
-      type: 'boolean',
-      default: 'false',
-      description: 'When true, the slider cannot be moved.',
-    },
-    {
-      name: 'variant',
-      type: 'ImageCompareVariant | null',
-      default: 'null',
-      description: 'Design variant; inherits from ThemeConfigService when null.',
-    },
-    {
-      name: 'size',
-      type: 'ImageCompareSize',
-      default: "'md'",
-      description: 'Handle size token (sm / md / lg).',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS class on the host element.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Image comparison slider'",
-      description: 'Accessible label for the slider handle.',
-    },
-  ];
-
-  public readonly apiOutputRows: ApiPropRow[] = [
-    {
-      name: 'slideStart',
-      type: 'number',
-      description: 'Emitted with the current position when the user starts dragging.',
-    },
-    {
-      name: 'slideEnd',
-      type: 'number',
-      description: 'Emitted with the final position when the user releases the handle.',
-    },
-  ];
 
   public readonly position: WritableSignal<number> = signal<number>(50);
 
@@ -252,7 +130,71 @@ export class ImageCompareDemoComponent {
 />`,
   };
 
+  private readonly snippetsTs: Record<SnippetKey, string> = {
+    basic: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    twoWayBinding: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly position: WritableSignal<number> = signal<number>(50);
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    variants: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    disabled: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+    customLabel: `import { Component } from '@angular/core';
+import { ImageCompare } from 'ui-lib-custom/image-compare';
+
+@Component({
+  standalone: true,
+  imports: [ImageCompare],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
+  };
+
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
+  }
+
+  public snippetTs(key: SnippetKey): string {
+    return this.snippetsTs[key];
   }
 }

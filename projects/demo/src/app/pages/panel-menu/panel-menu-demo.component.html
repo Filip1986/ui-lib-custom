@@ -1,11 +1,16 @@
 <app-doc-page-layout [sections]="sections">
-
-  <app-doc-page-header docHeader title="PanelMenu" [importCode]="importCode"
-    description="An accordion-style, hierarchical navigation menu driven by a data model. Root items act as collapsible panels; leaf items are directly activatable. Implements the &lt;strong&gt;accordion + menu&lt;/strong&gt; accessibility pattern.">
+  <app-doc-page-header docHeader title="PanelMenu" [importCode]="importCode">
+    <p class="doc-description">
+      An accordion-style, hierarchical navigation menu driven by a data model. Root items act as
+      collapsible panels; leaf items are directly activatable. Implements the
+      <strong>accordion + menu</strong> accessibility pattern.
+    </p>
     <div class="demo-page-header__preview">
-      <ui-lib-code-snippet [code]="snippets.import" language="typescript"
+      <ui-lib-code-snippet
+        [code]="snippets.import"
+        language="typescript"
         [showLineNumbers]="true"
-        />
+      />
     </div>
   </app-doc-page-header>
 
@@ -18,9 +23,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="basicModel" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.basic" language="html"
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.basic" [typescript]="snippets.basicTs" />
   </section>
 
   <!-- ── Initially Expanded ─────────────────────────────────────────────── -->
@@ -32,9 +35,11 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="expandedModel" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.expanded" language="typescript"
+    <ui-lib-code-snippet
+      [code]="snippets.expanded"
+      language="typescript"
       [showLineNumbers]="true"
-      />
+    />
   </section>
 
   <!-- ── Multiple Mode ──────────────────────────────────────────────────── -->
@@ -47,9 +52,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="multipleModel" [multiple]="true" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.multiple" language="html"
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.multiple" [typescript]="snippets.multipleTs" />
   </section>
 
   <!-- ── Nested Sub-Items ───────────────────────────────────────────────── -->
@@ -86,9 +89,11 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="urlModel" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.urlItems" language="typescript"
+    <ui-lib-code-snippet
+      [code]="snippets.urlItems"
+      language="typescript"
       [showLineNumbers]="true"
-      />
+    />
   </section>
 
   <!-- ── Variants ───────────────────────────────────────────────────────── -->
@@ -141,8 +146,8 @@
   <section class="demo-section" id="events" data-doc-anchor>
     <h2 class="demo-section__title">Events</h2>
     <p class="demo-section__description">
-      <code>(itemClick)</code> fires when a leaf item is activated.
-      <code>(panelToggle)</code> fires when a root panel expands or collapses.
+      <code>(itemClick)</code> fires when a leaf item is activated. <code>(panelToggle)</code> fires
+      when a root panel expands or collapses.
     </p>
     <div class="demo-section__preview demo-panel-menu-events-preview">
       <div class="demo-section__preview--narrow">
@@ -165,9 +170,7 @@
         }
       </div>
     </div>
-    <ui-lib-code-snippet [code]="snippets.events" language="html"
-      [showLineNumbers]="true"
-      />
+    <app-doc-code-example [html]="snippets.events" [typescript]="snippets.eventsTs" />
   </section>
 
   <!-- ── API ────────────────────────────────────────────────────────────── -->
@@ -175,13 +178,150 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <app-doc-api-reference [rows]="apiInputRows" />
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>model</code></td>
+          <td><code>PanelMenuItem[]</code></td>
+          <td><code>[]</code></td>
+          <td>Array of root-level menu items.</td>
+        </tr>
+        <tr>
+          <td><code>multiple</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Allow multiple root panels open at once.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>
+            Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size token controlling font size and padding.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class on the host element.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Panel Menu'</code></td>
+          <td>Accessible label for the root navigation landmark.</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3 class="demo-section__subtitle">Outputs</h3>
-    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Payload</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>itemClick</code></td>
+          <td><code>PanelMenuCommandEvent</code></td>
+          <td>Emitted when a non-disabled leaf item is activated.</td>
+        </tr>
+        <tr>
+          <td><code>panelToggle</code></td>
+          <td><code>PanelMenuPanelToggleEvent</code></td>
+          <td>
+            Emitted when a root panel expands or collapses; payload includes <code>item</code>,
+            <code>expanded</code>, and <code>key</code>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3 class="demo-section__subtitle">PanelMenuItem</h3>
-    <app-doc-api-reference kind="property" [rows]="apiPanelMenuItemRows" [showDefault]="false" />
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string</code></td>
+          <td>Display text.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td>Icon CSS class rendered before the label.</td>
+        </tr>
+        <tr>
+          <td><code>expanded</code></td>
+          <td><code>boolean</code></td>
+          <td>Initial expansion state (root items only).</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>Prevents interaction; adds <code>aria-disabled="true"</code>.</td>
+        </tr>
+        <tr>
+          <td><code>separator</code></td>
+          <td><code>boolean</code></td>
+          <td>Renders a visual divider.</td>
+        </tr>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean</code></td>
+          <td>Hides the item when <code>false</code>.</td>
+        </tr>
+        <tr>
+          <td><code>items</code></td>
+          <td><code>PanelMenuItem[]</code></td>
+          <td>Child items — makes this item a collapsible panel or group.</td>
+        </tr>
+        <tr>
+          <td><code>command</code></td>
+          <td><code>(event) =&gt; void</code></td>
+          <td>Callback invoked when a leaf item is activated.</td>
+        </tr>
+        <tr>
+          <td><code>url</code></td>
+          <td><code>string</code></td>
+          <td>Renders the item as an anchor link.</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>string</code></td>
+          <td>Link target attribute (e.g. <code>'_blank'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string</code></td>
+          <td>Extra CSS class on the item element.</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
@@ -222,8 +362,8 @@
     <ul class="demo-list">
       <li>
         Every component instance generates unique IDs for root header/content pairs so
-        <code>aria-controls</code> ↔ <code>id</code> and
-        <code>aria-labelledby</code> ↔ header <code>id</code> are always correctly wired.
+        <code>aria-controls</code> ↔ <code>id</code> and <code>aria-labelledby</code> ↔ header
+        <code>id</code> are always correctly wired.
       </li>
       <li>
         Root header buttons keep toggle behaviour semantic and screen-reader friendly — they are
@@ -245,5 +385,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

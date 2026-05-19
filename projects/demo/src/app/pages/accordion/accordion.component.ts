@@ -30,9 +30,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Panel } from 'ui-lib-custom/panel';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface FaqItem {
   value: string;
@@ -81,7 +80,7 @@ type AccordionTab =
     AccordionBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -107,64 +106,11 @@ export class AccordionComponent {
     { id: 'api-reference', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'value',
-      type: 'string | string[] | null',
-      default: 'null',
-      description: 'Active tab value(s). Can be a single string or array for multiple mode.',
-    },
-    {
-      name: 'multiple',
-      type: 'boolean',
-      default: 'false',
-      description: 'Allows expanding multiple panels simultaneously.',
-    },
-    {
-      name: 'lazy',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders panel content lazily (only when first opened).',
-    },
-    {
-      name: 'expandIcon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Icon for the expand chevron.',
-    },
-    {
-      name: 'collapseIcon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Icon for the collapse chevron.',
-    },
-    {
-      name: 'toggleIconPos',
-      type: "'start' | 'end'",
-      default: "'end'",
-      description: 'Position of the toggle icon relative to the header label.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Accordion size.' },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Additional CSS class.',
-    },
-  ];
 
   public readonly activeTab: WritableSignal<AccordionTab> = signal<AccordionTab>('playground');
 
@@ -248,7 +194,9 @@ export class AccordionComponent {
 
   public readonly snippets: {
     readonly basic: string;
+    readonly basicTs: string;
     readonly customHeader: string;
+    readonly customHeaderTs: string;
     readonly controlled: string;
   } = {
     basic: `<ui-lib-accordion variant="material" expandMode="single">
@@ -259,6 +207,15 @@ export class AccordionComponent {
     Items can be returned within 30 days of purchase.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`,
+    basicTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     customHeader: `<ui-lib-accordion>
   <ui-lib-accordion-panel value="faq-1">
     <div accordionHeader class="header-row">
@@ -267,6 +224,16 @@ export class AccordionComponent {
     Content goes here.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`,
+    customHeaderTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+import { Icon } from 'ui-lib-custom/icon';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel, Icon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     controlled: `<ui-lib-accordion
   expandMode="multiple"
   [expandedPanels]="expanded"
@@ -342,17 +309,43 @@ export class AccordionComponent {
   }
 
   public readonly iconSnippets: Readonly<
-    Record<'customIcons' | 'iconPosition' | 'toggleTemplate', string>
+    Record<
+      | 'customIcons'
+      | 'customIconsTs'
+      | 'iconPosition'
+      | 'iconPositionTs'
+      | 'toggleTemplate'
+      | 'toggleTemplateTs',
+      string
+    >
   > = {
     customIcons: `<ui-lib-accordion-panel
   header="Using Plus/Minus"
   expandIcon="minus"
   collapseIcon="plus"
 />`,
+    customIconsTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     iconPosition: `<ui-lib-accordion-panel
   iconPosition="start"
   header="Icon at Start"
 />`,
+    iconPositionTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     toggleTemplate: `<ui-lib-accordion-panel>
   <ng-template accordionToggleIcon let-expanded>
     <span class="custom-indicator" [class.active]="expanded">
@@ -361,6 +354,15 @@ export class AccordionComponent {
   </ng-template>
   Content
 </ui-lib-accordion-panel>`,
+    toggleTemplateTs: `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel, AccordionToggleIcon } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel, AccordionToggleIcon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   };
 
   public readonly reduceMotionDemo: WritableSignal<boolean> = signal<boolean>(false);
@@ -378,6 +380,16 @@ export class AccordionComponent {
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`;
 
+  public readonly accordionExampleTs: string = `import { Component } from '@angular/core';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+
+@Component({
+  standalone: true,
+  imports: [Accordion, AccordionPanel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: 'Enter / Space', suffix: 'on header', action: 'Toggles the panel open or closed.' },
     { key: '↓ / ↑', action: 'Moves focus to the next or previous panel header.' },
@@ -386,47 +398,6 @@ export class AccordionComponent {
       key: 'Tab / Shift+Tab',
       action:
         'Moves focus into or out of the accordion in the standard tab order. Open panel content is included.',
-    },
-  ];
-
-  public readonly accordionApiRows: readonly ApiPropRow[] = [
-    {
-      name: 'variant',
-      type: 'AccordionVariant',
-      default: 'null',
-      description: 'Visual style: material | bootstrap | minimal.',
-    },
-    {
-      name: 'size',
-      type: 'AccordionSize',
-      default: "'md'",
-      description: 'Spacing scale: sm | md | lg.',
-    },
-    {
-      name: 'expandMode',
-      type: "'single' | 'multiple'",
-      default: "'single'",
-      description: 'Allow one or many panels to be expanded.',
-    },
-    {
-      name: 'expandedPanels',
-      type: 'string[]',
-      description: 'Controlled list of expanded panel ids.',
-    },
-    {
-      name: 'defaultExpandedPanels',
-      type: 'string[]',
-      description: 'Uncontrolled initial expanded panels.',
-    },
-    {
-      name: 'expandedChange',
-      type: 'OutputEmitterRef<AccordionChangeEvent>',
-      description: 'Emits on expansion state changes.',
-    },
-    {
-      name: 'panelToggle',
-      type: 'OutputEmitterRef<AccordionChangeEvent>',
-      description: 'Emits every toggle interaction.',
     },
   ];
 }

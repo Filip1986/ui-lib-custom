@@ -17,8 +17,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the Menubar component.
@@ -35,7 +34,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
@@ -62,8 +61,50 @@ export class MenubarDemoComponent {
     apgPattern: { name: 'Menubar', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/' },
     competitiveParity: 'pending',
   };
-  public readonly snippetBasic: string = `{{ basicModel }}\n<ui-lib-menubar [model]="basicModel" />`;
-  public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">\n  <span menubarStart>MyApp</span>\n  <button menubarEnd>Sign In</button>\n</ui-lib-menubar>`;
+  public readonly snippetBasic: string = `<ui-lib-menubar [model]="basicModel" />`;
+  public readonly snippetBasicTs: string = `import { Component } from '@angular/core';
+import { Menubar } from 'ui-lib-custom/menubar';
+import type { MenubarItem } from 'ui-lib-custom/menubar';
+
+@Component({
+  standalone: true,
+  imports: [Menubar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly basicModel: MenubarItem[] = [
+    {
+      label: 'File',
+      items: [
+        { label: 'New', icon: 'pi pi-file' },
+        { label: 'Open', icon: 'pi pi-folder-open' },
+        { separator: true },
+        { label: 'Save', icon: 'pi pi-save' },
+      ],
+    },
+    { label: 'Edit', items: [{ label: 'Undo' }, { label: 'Redo' }] },
+    { label: 'Help', items: [{ label: 'About' }] },
+  ];
+}`;
+  public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">
+  <span menubarStart>MyApp</span>
+  <button menubarEnd>Sign In</button>
+</ui-lib-menubar>`;
+  public readonly snippetStartEndTs: string = `import { Component } from '@angular/core';
+import { Menubar } from 'ui-lib-custom/menubar';
+import type { MenubarItem } from 'ui-lib-custom/menubar';
+
+@Component({
+  standalone: true,
+  imports: [Menubar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: MenubarItem[] = [
+    { label: 'Home' },
+    { label: 'About' },
+  ];
+}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -85,46 +126,6 @@ export class MenubarDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'model',
-      type: 'MenuItem[]',
-      default: '[]',
-      description: 'Array of top-level menu bar items.',
-    },
-    {
-      name: 'breakpoint',
-      type: 'string',
-      default: "'960px'",
-      description: 'Screen width below which the menu bar collapses to a mobile hamburger view.',
-    },
-    {
-      name: 'scrollHeight',
-      type: 'string | null',
-      default: 'null',
-      description: 'CSS max-height for overlay sub-menus.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Menubar'",
-      description: 'Accessible label for the navigation region.',
-    },
-    {
-      name: 'ariaLabelledBy',
-      type: 'string | null',
-      default: 'null',
-      description: 'Id of an external label element.',
-    },
-  ];
 
   // ── Basic model ───────────────────────────────────────────────────────────
 
@@ -328,81 +329,6 @@ export class MenubarDemoComponent {
     {
       key: 'Home / End',
       action: 'Move focus to the first or last item in the current menu level.',
-    },
-  ];
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'model',
-      type: 'MenubarItem[]',
-      default: '[]',
-      description: 'Array of top-level navigation items.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant; inherits from ThemeConfigService when null.',
-    },
-    {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
-      description: 'Size token controlling font-size and padding.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS class appended to the host element.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Navigation'",
-      description: 'Accessible label for the nav landmark.',
-    },
-  ];
-
-  public readonly apiOutputRows: ApiPropRow[] = [
-    {
-      name: 'itemClick',
-      type: 'MenubarCommandEvent',
-      description: 'Emitted when a non-disabled leaf item is activated.',
-    },
-  ];
-
-  public readonly apiMenubarItemRows: ApiPropRow[] = [
-    { name: 'label', type: 'string', description: 'Display text.' },
-    { name: 'icon', type: 'string', description: 'Icon class or ui-lib-icon name.' },
-    { name: 'disabled', type: 'boolean', description: 'Prevents interaction.' },
-    { name: 'visible', type: 'boolean', description: 'When false, hides the item.' },
-    { name: 'separator', type: 'boolean', description: 'Renders a visual separator instead.' },
-    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
-    {
-      name: 'url',
-      type: 'string',
-      description: 'Renders item as &lt;a href&gt; when set (leaf items).',
-    },
-    { name: 'target', type: 'string', description: 'Anchor target for url-based items.' },
-    { name: 'items', type: 'MenubarItem[]', description: 'Nested children — opens a sub-panel.' },
-    {
-      name: 'command',
-      type: '(event) => void',
-      description: 'Callback when the item is activated.',
-    },
-  ];
-
-  public readonly apiSlotRows: ApiPropRow[] = [
-    {
-      name: '[menubarStart]',
-      type: '',
-      description: 'Content rendered in the leading area (e.g. logo).',
-    },
-    {
-      name: '[menubarEnd]',
-      type: '',
-      description: 'Content rendered in the trailing area (e.g. action buttons).',
     },
   ];
 }

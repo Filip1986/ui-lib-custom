@@ -18,9 +18,27 @@ import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import { DocQualityBadgeComponent } from '../../shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '../../shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+
+interface InputRow {
+  readonly input: string;
+  readonly type: string;
+  readonly default: string;
+  readonly description: string;
+}
+
+interface OutputRow {
+  readonly output: string;
+  readonly type: string;
+  readonly description: string;
+}
+
+interface ProjectionRow {
+  readonly slot: string;
+  readonly selector: string;
+  readonly description: string;
+}
 
 interface AriaRow {
   readonly element: string;
@@ -48,7 +66,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
@@ -122,18 +140,35 @@ export class PanelDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly toggleable: string;
+    readonly toggleableTs: string;
     readonly collapsedDefault: string;
+    readonly collapsedDefaultTs: string;
     readonly customHeader: string;
+    readonly customHeaderTs: string;
     readonly headerIcons: string;
+    readonly headerIconsTs: string;
     readonly footer: string;
+    readonly footerTs: string;
     readonly noHeader: string;
+    readonly noHeaderTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { Panel } from 'ui-lib-custom/panel';`,
     basic: `<ui-lib-panel header="Introduction">
   <p>Panel body content.</p>
 </ui-lib-panel>`,
+    basicTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     toggleable: `<ui-lib-panel
   header="Collapsible Section"
   [toggleable]="true"
@@ -142,9 +177,34 @@ export class PanelDemoComponent {
 >
   <p>Click the chevron button in the header to toggle visibility.</p>
 </ui-lib-panel>`,
+    toggleableTs: `import { Component, signal } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+import type { PanelToggleEvent } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isCollapsed = signal<boolean>(false);
+
+  public handleToggle(event: PanelToggleEvent): void {
+    console.log('Toggled:', event.collapsed);
+  }
+}`,
     collapsedDefault: `<ui-lib-panel header="Advanced Options" [toggleable]="true" [collapsed]="true">
   <p>Hidden until expanded.</p>
 </ui-lib-panel>`,
+    collapsedDefaultTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     customHeader: `<ui-lib-panel [toggleable]="true">
   <span panelHeader>
     <strong>Featured</strong>
@@ -152,11 +212,32 @@ export class PanelDemoComponent {
   </span>
   <p>Body content.</p>
 </ui-lib-panel>`,
+    customHeaderTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     headerIcons: `<ui-lib-panel header="Report" [toggleable]="true">
   <button panelIcons type="button" (click)="refresh()">↻</button>
   <button panelIcons type="button" (click)="download()">↓</button>
   <p>Body content.</p>
 </ui-lib-panel>`,
+    headerIconsTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public refresh(): void { /* reload data */ }
+  public download(): void { /* export data */ }
+}`,
     footer: `<ui-lib-panel header="Terms of Service">
   <p>Body content.</p>
   <div panelFooter>
@@ -164,6 +245,15 @@ export class PanelDemoComponent {
     <button type="button">Accept</button>
   </div>
 </ui-lib-panel>`,
+    footerTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     noHeader: `<!-- No header input — header area is automatically hidden -->
 <ui-lib-panel>
   <p>This panel has no header. The header area is not rendered.</p>
@@ -177,70 +267,92 @@ export class PanelDemoComponent {
     <button type="button">Confirm</button>
   </div>
 </ui-lib-panel>`,
+    noHeaderTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     variants: `<ui-lib-panel header="Material Panel"  variant="material"  [toggleable]="true" />
 <ui-lib-panel header="Bootstrap Panel" variant="bootstrap" [toggleable]="true" />
 <ui-lib-panel header="Minimal Panel"   variant="minimal"   [toggleable]="true" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Panel } from 'ui-lib-custom/panel';
+
+@Component({
+  standalone: true,
+  imports: [Panel],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   // ---- API data -----------------------------------------------------------
 
-  public readonly apiInputRows: ApiPropRow[] = [
+  public readonly inputRows: InputRow[] = [
     {
-      name: 'header',
-      type: 'string',
-      default: "''",
+      input: '<code>header</code>',
+      type: '<code>string</code>',
+      default: "<code>''</code>",
       description: 'Header title text. Use <code>[panelHeader]</code> projection for rich HTML.',
     },
     {
-      name: 'toggleable',
-      type: 'boolean',
-      default: 'false',
+      input: '<code>toggleable</code>',
+      type: '<code>boolean</code>',
+      default: '<code>false</code>',
       description: 'Whether the body can be collapsed and expanded.',
     },
     {
-      name: 'collapsed',
-      type: 'boolean (model)',
-      default: 'false',
+      input: '<code>collapsed</code>',
+      type: '<code>boolean</code> (model)',
+      default: '<code>false</code>',
       description: 'Two-way bound collapsed state. Use <code>[(collapsed)]</code> with a signal.',
     },
     {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
+      input: '<code>variant</code>',
+      type: "<code>'material' | 'bootstrap' | 'minimal' | null</code>",
+      default: '<code>null</code>',
       description:
         'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
     },
     {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
+      input: '<code>styleClass</code>',
+      type: '<code>string | null</code>',
+      default: '<code>null</code>',
       description: 'Additional CSS classes added to the host element.',
     },
   ];
 
-  public readonly apiOutputRows: ApiPropRow[] = [
+  public readonly outputRows: OutputRow[] = [
     {
-      name: 'toggled',
-      type: 'PanelToggleEvent',
+      output: '<code>toggled</code>',
+      type: '<code>PanelToggleEvent</code>',
       description: 'Emitted when the collapsed state changes via the toggle button.',
     },
   ];
 
-  public readonly apiProjectionRows: ApiPropRow[] = [
-    { name: 'Body', type: '(default)', description: 'Main body content.' },
+  public readonly projectionRows: ProjectionRow[] = [
     {
-      name: 'Custom header',
-      type: '[panelHeader]',
+      slot: 'Body',
+      selector: '<em>(default)</em>',
+      description: 'Main body content.',
+    },
+    {
+      slot: 'Custom header',
+      selector: '<code>[panelHeader]</code>',
       description: 'Replaces the text header area. The toggle button is preserved.',
     },
     {
-      name: 'Header icons',
-      type: '[panelIcons]',
+      slot: 'Header icons',
+      selector: '<code>[panelIcons]</code>',
       description: 'Action elements placed in the header right area, before the toggle button.',
     },
     {
-      name: 'Footer',
-      type: '[panelFooter]',
+      slot: 'Footer',
+      selector: '<code>[panelFooter]</code>',
       description: 'Content below the body. Always visible regardless of collapsed state.',
     },
   ];
@@ -431,45 +543,4 @@ export class PanelDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    { name: 'header', type: 'string', default: "''", description: 'Panel header text.' },
-    {
-      name: 'toggleable',
-      type: 'boolean',
-      default: 'false',
-      description: 'Makes the panel body collapsible.',
-    },
-    {
-      name: 'collapsed',
-      type: 'boolean',
-      default: 'false',
-      description: 'Controls the collapsed state (two-way via [(collapsed)]).',
-    },
-    {
-      name: 'expandIcon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Custom expand icon.',
-    },
-    {
-      name: 'collapseIcon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Custom collapse icon.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Panel size.' },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Additional CSS class.',
-    },
-  ];
 }

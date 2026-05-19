@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
 import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
@@ -25,6 +26,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   standalone: true,
   imports: [
     CodeSnippet,
+    DocCodeExampleComponent,
     BottomSheet,
     Button,
     DocPageHeaderComponent,
@@ -155,10 +157,15 @@ export class BottomSheetDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly withHeader: string;
+    readonly withHeaderTs: string;
     readonly footerSlot: string;
+    readonly footerSlotTs: string;
     readonly backdropDismiss: string;
+    readonly backdropDismissTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
 import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';`,
@@ -167,9 +174,35 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';`,
 <ui-lib-bottom-sheet [(visible)]="isOpen">
   <p>Sheet content goes here.</p>
 </ui-lib-bottom-sheet>`,
+    basicTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
+
+@Component({
+  standalone: true,
+  imports: [Button, BottomSheet],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
+}`,
     withHeader: `<ui-lib-bottom-sheet [(visible)]="isOpen" header="Share">
   <p>Choose where to share this item.</p>
 </ui-lib-bottom-sheet>`,
+    withHeaderTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
+
+@Component({
+  standalone: true,
+  imports: [Button, BottomSheet],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
+}`,
     footerSlot: `<ui-lib-bottom-sheet [(visible)]="isOpen" header="Confirm action">
   <p>Are you sure you want to proceed?</p>
   <div bottomSheetFooter>
@@ -177,13 +210,56 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';`,
     <ui-lib-button (click)="confirm()">Confirm</ui-lib-button>
   </div>
 </ui-lib-bottom-sheet>`,
+    footerSlotTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
+
+@Component({
+  standalone: true,
+  imports: [Button, BottomSheet],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
+
+  public confirm(): void {
+    this.isOpen.set(false);
+  }
+}`,
     backdropDismiss: `<!-- backdrop click does NOT close the sheet -->
 <ui-lib-bottom-sheet [(visible)]="isOpen" [closeOnBackdrop]="false">
   <p>Use the close button or Escape to dismiss.</p>
 </ui-lib-bottom-sheet>`,
+    backdropDismissTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
+
+@Component({
+  standalone: true,
+  imports: [Button, BottomSheet],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
+}`,
     variants: `<ui-lib-bottom-sheet [(visible)]="isOpen" variant="material"  header="Material" />
 <ui-lib-bottom-sheet [(visible)]="isOpen" variant="bootstrap" header="Bootstrap" />
 <ui-lib-bottom-sheet [(visible)]="isOpen" variant="minimal"   header="Minimal" />`,
+    variantsTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
+
+@Component({
+  standalone: true,
+  imports: [Button, BottomSheet],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
+}`,
   } as const;
 
   public readonly variants: BottomSheetVariant[] = ['material', 'bootstrap', 'minimal'];

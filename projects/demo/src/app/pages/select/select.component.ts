@@ -28,10 +28,9 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { SelectBasicExampleComponent } from '@demo/examples/select-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type TabKey =
@@ -68,7 +67,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -101,67 +100,6 @@ export class SelectComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'options',
-      type: 'SelectOption[]',
-      default: '[]',
-      description: 'Array of option objects.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Select size.' },
-    {
-      name: 'multiple',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables multi-selection.',
-    },
-    {
-      name: 'searchable',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows a search input in the dropdown.',
-    },
-    {
-      name: 'placeholder',
-      type: 'string',
-      default: "'Select...'",
-      description: 'Placeholder text.',
-    },
-    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the select.' },
-    {
-      name: 'loading',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows a loading indicator.',
-    },
-    { name: 'label', type: 'string', default: "''", description: 'Label text.' },
-    {
-      name: 'invalid',
-      type: 'boolean',
-      default: 'false',
-      description: 'Marks the select as invalid.',
-    },
-    {
-      name: 'required',
-      type: 'boolean',
-      default: 'false',
-      description: 'Marks the select as required.',
-    },
-    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
-    {
-      name: 'ariaLabelledBy',
-      type: 'string | null',
-      default: 'null',
-      description: 'Id of an external label element.',
-    },
-  ];
-
   public readonly importCode: string = "import { UiLibSelect } from 'ui-lib-custom/select'";
 
   public readonly sections: DocSection[] = [
@@ -172,7 +110,6 @@ export class SelectComponent {
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
@@ -186,7 +123,11 @@ export class SelectComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets: { readonly usage: string } = {
+  public readonly snippets: {
+    readonly usage: string;
+    readonly usageTs: string;
+    readonly selectExampleTs: string;
+  } = {
     usage: `import { UiLibSelect } from 'ui-lib-custom';
 
 @Component({
@@ -195,6 +136,39 @@ export class SelectComponent {
   template: '<ui-lib-select [options]="[{ label: \'One\', value: 1 }]" label="Choose"></ui-lib-select>'
 })
 export class Example {}`,
+    usageTs: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly options: SelectOption[] = [
+    { label: 'Alpha', value: 'alpha' },
+    { label: 'Beta', value: 'beta' },
+  ];
+  readonly value = signal<SelectOption['value'] | null>(null);
+}`,
+    selectExampleTs: `import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, UiLibSelect],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly options: SelectOption[] = [
+    { label: 'Alpha', value: 'alpha' },
+    { label: 'Beta', value: 'beta' },
+  ];
+}`,
   } as const;
 
   public readonly selectExample: string = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;

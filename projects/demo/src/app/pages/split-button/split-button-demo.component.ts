@@ -14,12 +14,9 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Icon } from 'ui-lib-custom/icon';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Panel } from 'ui-lib-custom/panel';
 import type {
   SplitButtonItem,
@@ -44,8 +41,7 @@ import type {
     SplitButtonContentDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
@@ -77,65 +73,6 @@ export class SplitButtonDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'label',
-      type: 'string',
-      default: "''",
-      description: 'Label for the primary action button.',
-    },
-    {
-      name: 'icon',
-      type: 'string | null',
-      default: 'null',
-      description: 'Icon for the primary button.',
-    },
-    {
-      name: 'iconPos',
-      type: "'left' | 'right'",
-      default: "'left'",
-      description: 'Primary icon position.',
-    },
-    {
-      name: 'model',
-      type: 'MenuItem[]',
-      default: '[]',
-      description: 'Array of dropdown menu items.',
-    },
-    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables both buttons.' },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
-    {
-      name: 'appendTo',
-      type: "'body' | string",
-      default: "'body'",
-      description: 'Portal target element.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Additional CSS class.',
-    },
-    {
-      name: 'tabindex',
-      type: 'number',
-      default: '0',
-      description: 'Tab order of the primary button.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string | null',
-      default: 'null',
-      description: 'Accessible label for the primary button.',
-    },
-  ];
-
   public readonly importCode: string =
     "import { SplitButtonComponent } from 'ui-lib-custom/split-button'";
 
@@ -152,23 +89,7 @@ export class SplitButtonDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'template', label: 'Template' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'api-reference', label: 'API Reference' },
-    { id: 'api', label: 'API Reference' },
-  ];
-
-  // -------------------------------------------------------------------------
-  // Keyboard navigation rows
-  // -------------------------------------------------------------------------
-
-  public readonly keyboardRows: KeyboardNavRow[] = [
-    { key: 'Tab / Shift+Tab', action: 'Move focus between the main button and menu trigger.' },
-    { key: 'Space / Enter', target: 'Main button', action: 'Execute the primary action.' },
-    { key: 'Space / Enter / ↓', target: 'Menu trigger', action: 'Open the dropdown menu.' },
-    { key: 'Escape', action: 'Close the open menu and return focus to the menu trigger.' },
-    { key: '↓ / ↑', action: 'Navigate between menu items.' },
-    { key: 'Home / End', action: 'Jump to first / last menu item.' },
-    { key: 'Space / Enter', target: 'Menu item', action: 'Activate the focused menu item.' },
   ];
 
   public readonly severities: readonly SplitButtonSeverity[] = [
@@ -238,6 +159,164 @@ export class SplitButtonDemoComponent {
 
   public readonly iconItems: SplitButtonItem[] = [...this.items];
 
+  public readonly snippetsTs: Record<string, string> = {
+    basic: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: SplitButtonItem[] = [
+    { label: 'Update', icon: 'pencil' },
+    { label: 'Delete', icon: 'trash' },
+  ];
+
+  public onPrimaryAction(): void {
+    console.log('Primary action triggered');
+  }
+}`,
+    icons: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: SplitButtonItem[] = [
+    { label: 'Update', icon: 'pencil' },
+    { label: 'Delete', icon: 'trash' },
+  ];
+}`,
+    severity: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly severity: SplitButtonSeverity = 'success';
+  public readonly items: SplitButtonItem[] = [
+    { label: 'Update', icon: 'pencil' },
+  ];
+}`,
+    disabled: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    raised: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly severity: SplitButtonSeverity = 'primary';
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    rounded: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly severity: SplitButtonSeverity = 'primary';
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    text: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly severity: SplitButtonSeverity = 'primary';
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    raisedText: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly severity: SplitButtonSeverity = 'primary';
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    outlined: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly severity: SplitButtonSeverity = 'primary';
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    sizes: `import { Component } from '@angular/core';
+import { SplitButtonComponent } from 'ui-lib-custom/split-button';
+import type { SplitButtonItem } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+    template: `import { Component } from '@angular/core';
+import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
+import { Icon } from 'ui-lib-custom/icon';
+import type { SplitButtonItem } from 'ui-lib-custom/split-button';
+
+@Component({
+  standalone: true,
+  imports: [SplitButtonComponent, SplitButtonContentDirective, Icon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
+}`,
+  };
+
+  public snippetTs(key: string): string {
+    return this.snippetsTs[key] ?? '';
+  }
+
   public snippet(key: string): string {
     return this.snippets[key] ?? '';
   }
@@ -250,22 +329,4 @@ export class SplitButtonDemoComponent {
     const label: string = event.item.label ?? 'Unknown action';
     this.lastAction.set(`Menu action: ${label}`);
   }
-
-  public readonly apiInputRows: readonly ApiPropRow[] = [
-    { name: 'label', type: 'string', default: "''", description: 'Main button label text.' },
-    { name: 'model', type: 'SplitButtonItem[]', default: '[]', description: 'Menu item list.' },
-    {
-      name: 'severity',
-      type: 'SplitButtonSeverity',
-      default: "'primary'",
-      description: 'Visual severity token.',
-    },
-    {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
-      description: 'Size scale for button pair.',
-    },
-    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables both buttons.' },
-  ];
 }

@@ -20,6 +20,7 @@ import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.com
 import { FormsModule } from '@angular/forms';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 /**
@@ -34,6 +35,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     TitleCasePipe,
     Icon,
     CodeSnippet,
+    DocCodeExampleComponent,
     IconButton,
     Alert,
     Button,
@@ -142,11 +144,29 @@ export class IconsDemoComponent {
     }
   );
 
-  public readonly snippets: { readonly usage: string } = {
+  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
     usage: `<ui-lib-icon name="search" size="lg" variant="material" />`,
+    usageTs: `import { Component } from '@angular/core';
+import { Icon } from 'ui-lib-custom/icon';
+
+@Component({
+  standalone: true,
+  imports: [Icon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   public readonly iconExample: string = `<ui-lib-icon name="search" size="lg" variant="material" />`;
+  public readonly iconExampleTs: string = `import { Component } from '@angular/core';
+import { Icon } from 'ui-lib-custom/icon';
+
+@Component({
+  standalone: true,
+  imports: [Icon],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public onSearch(event: Event): void {
     this.searchQuery.set((event.target as HTMLInputElement).value);

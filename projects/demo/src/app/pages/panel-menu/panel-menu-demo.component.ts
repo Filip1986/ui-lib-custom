@@ -22,8 +22,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface AriaRow {
   readonly element: string;
@@ -50,7 +49,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
@@ -98,62 +97,110 @@ export class PanelMenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'model',
-      type: 'MenuItem[]',
-      default: '[]',
-      description: 'Array of menu items with nested children.',
-    },
-    {
-      name: 'multiple',
-      type: 'boolean',
-      default: 'false',
-      description: 'Allows expanding multiple panels at once.',
-    },
-    {
-      name: 'transitionOptions',
-      type: 'string',
-      default: "'400ms cubic-bezier(0.86, 0, 0.07, 1)'",
-      description: 'CSS transition timing for panel open/close.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Panel menu'",
-      description: 'Accessible label for the menu navigation.',
-    },
-  ];
-
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly expanded: string;
     readonly multiple: string;
+    readonly multipleTs: string;
     readonly urlItems: string;
     readonly events: string;
+    readonly eventsTs: string;
   } = {
     import: `import { PanelMenu } from 'ui-lib-custom/panel-menu';
 import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
     basic: `<ui-lib-panel-menu [model]="items" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';
+
+@Component({
+  standalone: true,
+  imports: [PanelMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: PanelMenuItem[] = [
+    {
+      label: 'Account',
+      icon: 'pi pi-user',
+      items: [
+        { label: 'Profile', icon: 'pi pi-id-card' },
+        { label: 'Security', icon: 'pi pi-lock' },
+      ],
+    },
+    {
+      label: 'Support',
+      icon: 'pi pi-question-circle',
+      items: [{ label: 'Documentation', icon: 'pi pi-book' }],
+    },
+  ];
+}`,
     expanded: `items: PanelMenuItem[] = [
   { label: 'File', expanded: true, items: [...] },
   { label: 'Edit', items: [...] },
 ];`,
     multiple: `<ui-lib-panel-menu [model]="items" [multiple]="true" />`,
+    multipleTs: `import { Component } from '@angular/core';
+import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';
+
+@Component({
+  standalone: true,
+  imports: [PanelMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: PanelMenuItem[] = [
+    {
+      label: 'Frontend',
+      icon: 'pi pi-desktop',
+      items: [{ label: 'Angular' }, { label: 'React' }],
+    },
+    {
+      label: 'Backend',
+      icon: 'pi pi-server',
+      items: [{ label: 'Node.js' }, { label: 'Python' }],
+    },
+  ];
+}`,
     urlItems: `{ label: 'Angular Docs', url: 'https://angular.dev', target: '_blank' }`,
     events: `<ui-lib-panel-menu
   [model]="items"
   (itemClick)="onItemClick($event)"
   (panelToggle)="onPanelToggle($event)"
 />`,
+    eventsTs: `import { Component } from '@angular/core';
+import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem, PanelMenuCommandEvent, PanelMenuPanelToggleEvent } from 'ui-lib-custom/panel-menu';
+
+@Component({
+  standalone: true,
+  imports: [PanelMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: PanelMenuItem[] = [
+    {
+      label: 'Actions',
+      icon: 'pi pi-bolt',
+      expanded: true,
+      items: [
+        { label: 'Download', icon: 'pi pi-download' },
+        { label: 'Share', icon: 'pi pi-share-alt' },
+      ],
+    },
+  ];
+
+  onItemClick(event: PanelMenuCommandEvent): void {
+    console.log('Item clicked:', event.item.label);
+  }
+
+  onPanelToggle(event: PanelMenuPanelToggleEvent): void {
+    console.log('Panel toggled:', event.item.label, event.expanded);
+  }
+}`,
   } as const;
 
   // ── Basic ───────────────────────────────────────────────────────────────
@@ -557,92 +604,4 @@ import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
   private logEvent(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 8));
   }
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'model',
-      type: 'PanelMenuItem[]',
-      default: '[]',
-      description: 'Array of root-level menu items.',
-    },
-    {
-      name: 'multiple',
-      type: 'boolean',
-      default: 'false',
-      description: 'Allow multiple root panels open at once.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description:
-        'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
-    },
-    {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
-      description: 'Size token controlling font size and padding.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS class on the host element.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Panel Menu'",
-      description: 'Accessible label for the root navigation landmark.',
-    },
-  ];
-
-  public readonly apiOutputRows: ApiPropRow[] = [
-    {
-      name: 'itemClick',
-      type: 'PanelMenuCommandEvent',
-      description: 'Emitted when a non-disabled leaf item is activated.',
-    },
-    {
-      name: 'panelToggle',
-      type: 'PanelMenuPanelToggleEvent',
-      description:
-        'Emitted when a root panel expands or collapses; payload includes <code>item</code>, <code>expanded</code>, and <code>key</code>.',
-    },
-  ];
-
-  public readonly apiPanelMenuItemRows: ApiPropRow[] = [
-    { name: 'label', type: 'string', description: 'Display text.' },
-    { name: 'icon', type: 'string', description: 'Icon CSS class rendered before the label.' },
-    {
-      name: 'expanded',
-      type: 'boolean',
-      description: 'Initial expansion state (root items only).',
-    },
-    {
-      name: 'disabled',
-      type: 'boolean',
-      description: 'Prevents interaction; adds <code>aria-disabled="true"</code>.',
-    },
-    { name: 'separator', type: 'boolean', description: 'Renders a visual divider.' },
-    { name: 'visible', type: 'boolean', description: 'Hides the item when <code>false</code>.' },
-    {
-      name: 'items',
-      type: 'PanelMenuItem[]',
-      description: 'Child items — makes this item a collapsible panel or group.',
-    },
-    {
-      name: 'command',
-      type: '(event) => void',
-      description: 'Callback invoked when a leaf item is activated.',
-    },
-    { name: 'url', type: 'string', description: 'Renders the item as an anchor link.' },
-    {
-      name: 'target',
-      type: 'string',
-      description: "Link target attribute (e.g. <code>'_blank'</code>).",
-    },
-    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
-  ];
 }

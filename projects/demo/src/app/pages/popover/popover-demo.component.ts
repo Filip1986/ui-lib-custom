@@ -12,8 +12,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the Popover component.
@@ -30,7 +29,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',
@@ -57,8 +56,11 @@ export class PopoverDemoComponent {
     competitiveParity: 'pending',
   };
   public readonly snippetBasic: string = `<button #trigger (click)="op.toggle(trigger)">Toggle</button>\n\n<ui-lib-popover #op>\n  <p>Popover body content.</p>\n</ui-lib-popover>`;
+  public readonly snippetBasicTs: string = `import { Component } from '@angular/core';\nimport { Popover } from 'ui-lib-custom/popover';\n\n@Component({\n  standalone: true,\n  imports: [Popover],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
   public readonly snippetHeaderClose: string = `<ui-lib-popover #op header="User Details" [showCloseButton]="true">\n  <!-- content -->\n</ui-lib-popover>`;
+  public readonly snippetHeaderCloseTs: string = `import { Component } from '@angular/core';\nimport { Popover } from 'ui-lib-custom/popover';\n\n@Component({\n  standalone: true,\n  imports: [Popover],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
   public readonly snippetDeclarative: string = `<ui-lib-popover [(visible)]="isOpen">...</ui-lib-popover>`;
+  public readonly snippetDeclarativeTs: string = `import { Component, signal } from '@angular/core';\nimport { Popover } from 'ui-lib-custom/popover';\n\n@Component({\n  standalone: true,\n  imports: [Popover],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly isOpen = signal(false);\n}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -86,52 +88,6 @@ export class PopoverDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'dismissable',
-      type: 'boolean',
-      default: 'true',
-      description: 'Closes the popover when clicking outside.',
-    },
-    {
-      name: 'showCloseIcon',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows a close icon button inside the popover.',
-    },
-    { name: 'baseZIndex', type: 'number', default: '0', description: 'Base CSS z-index.' },
-    {
-      name: 'autoZIndex',
-      type: 'boolean',
-      default: 'true',
-      description: 'Automatically manages z-index layering.',
-    },
-    {
-      name: 'appendTo',
-      type: "'body' | string | HTMLElement",
-      default: "'body'",
-      description: 'Portal target element.',
-    },
-    {
-      name: 'focusOnShow',
-      type: 'boolean',
-      default: 'true',
-      description: 'Moves focus to the popover content when shown.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string | null',
-      default: 'null',
-      description: 'Accessible label for the popover region.',
-    },
-    {
-      name: 'ariaLabelledBy',
-      type: 'string | null',
-      default: 'null',
-      description: 'Id of an external label element.',
-    },
-  ];
-
   public onShown(): void {
     this.lastEvent.set('shown');
   }
@@ -153,70 +109,6 @@ export class PopoverDemoComponent {
       key: 'Enter / Space',
       target: 'Close button',
       action: 'Closes the popover (when a close button is rendered).',
-    },
-  ];
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'visible',
-      type: 'boolean',
-      default: 'false',
-      description: 'Two-way visibility binding via [(visible)].',
-    },
-    {
-      name: 'header',
-      type: 'string | null',
-      default: 'null',
-      description: 'Optional header text shown at the top of the panel.',
-    },
-    {
-      name: 'showCloseButton',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders a close (×) button in the header area.',
-    },
-    {
-      name: 'dismissable',
-      type: 'boolean',
-      default: 'true',
-      description: 'Clicking outside the panel closes the popover.',
-    },
-    {
-      name: 'closeOnEscape',
-      type: 'boolean',
-      default: 'true',
-      description: 'Pressing Escape closes the popover.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant; inherits from the global theme when null.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS classes on the host element.',
-    },
-  ];
-
-  public readonly apiOutputRows: ApiPropRow[] = [
-    { name: 'shown', type: 'void', description: 'Emitted after the popover becomes visible.' },
-    { name: 'hidden', type: 'void', description: 'Emitted after the popover is hidden.' },
-  ];
-
-  public readonly apiMethodRows: ApiPropRow[] = [
-    {
-      name: 'show',
-      type: '(target: HTMLElement) => void',
-      description: 'Show the popover anchored to target.',
-    },
-    { name: 'hide', type: '() => void', description: 'Hide the popover.' },
-    {
-      name: 'toggle',
-      type: '(target: HTMLElement) => void',
-      description: 'Show if hidden, hide if visible.',
     },
   ];
 }

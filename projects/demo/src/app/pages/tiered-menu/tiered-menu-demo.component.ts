@@ -24,8 +24,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 interface AriaRow {
   readonly element: string;
@@ -53,7 +52,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
@@ -102,66 +101,44 @@ export class TieredMenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'model',
-      type: 'MenuItem[]',
-      default: '[]',
-      description: 'Array of menu items with nested sub-menus.',
-    },
-    {
-      name: 'popup',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders as a popup toggled by toggle().',
-    },
-    {
-      name: 'appendTo',
-      type: "'body' | HTMLElement | string",
-      default: 'null',
-      description: 'Portal target element (popup mode).',
-    },
-    {
-      name: 'autoZIndex',
-      type: 'boolean',
-      default: 'true',
-      description: 'Automatically manages z-index layering.',
-    },
-    {
-      name: 'baseZIndex',
-      type: 'number',
-      default: '0',
-      description: 'Base z-index when autoZIndex is enabled.',
-    },
-    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
-    {
-      name: 'ariaLabel',
-      type: 'string | null',
-      default: 'null',
-      description: 'Accessible label for the menu.',
-    },
-  ];
-
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly nested: string;
     readonly popup: string;
+    readonly popupTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly itemStates: string;
     readonly urlItems: string;
   } = {
     import: `import { TieredMenu } from 'ui-lib-custom/tiered-menu';
 import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
     basic: `<ui-lib-tiered-menu [model]="items" (itemClick)="onItemClick($event)" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem, TieredMenuItemCommandEvent } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'New File', icon: 'pi pi-file' },
+    { label: 'Open', icon: 'pi pi-folder-open' },
+    { separator: true },
+    { label: 'Save', icon: 'pi pi-save' },
+  ];
+
+  onItemClick(event: TieredMenuItemCommandEvent): void {
+    console.log('Clicked:', event.item.label);
+  }
+}`,
     nested: `items: TieredMenuItem[] = [
   {
     label: 'File', icon: 'pi pi-file',
@@ -187,12 +164,63 @@ import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
   Open Menu ▾
 </ui-lib-button>
 <ui-lib-tiered-menu #popupMenu [model]="items" [popup]="true" />`,
+    popupTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import { Button } from 'ui-lib-custom/button';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu, Button],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'Profile', icon: 'pi pi-user' },
+    { label: 'Settings', icon: 'pi pi-cog' },
+    { separator: true },
+    { label: 'Logout', icon: 'pi pi-sign-out' },
+  ];
+}`,
     variants: `<ui-lib-tiered-menu [model]="items" variant="material"  />
 <ui-lib-tiered-menu [model]="items" variant="bootstrap" />
 <ui-lib-tiered-menu [model]="items" variant="minimal"   />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'Dashboard', icon: 'pi pi-home' },
+    { label: 'Reports', icon: 'pi pi-chart-line' },
+    { separator: true },
+    { label: 'Settings', icon: 'pi pi-cog' },
+  ];
+}`,
     sizes: `<ui-lib-tiered-menu [model]="items" size="sm" />
 <ui-lib-tiered-menu [model]="items" size="md" />
 <ui-lib-tiered-menu [model]="items" size="lg" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';
+
+@Component({
+  standalone: true,
+  imports: [TieredMenu],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  readonly items: TieredMenuItem[] = [
+    { label: 'Item One', icon: 'pi pi-circle' },
+    { label: 'Item Two', icon: 'pi pi-circle' },
+    { label: 'Item Three', icon: 'pi pi-circle' },
+  ];
+}`,
     itemStates: `items: TieredMenuItem[] = [
   { label: 'Enabled',  icon: 'pi pi-check' },
   { label: 'Disabled', icon: 'pi pi-ban',  disabled: true },
@@ -471,136 +499,4 @@ import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
   public setSize(value: TieredMenuSize): void {
     this.size.set(value);
   }
-
-  public readonly apiInputRows: ApiPropRow[] = [
-    {
-      name: 'model',
-      type: 'TieredMenuItem[]',
-      default: '[]',
-      description:
-        'Array of items to display. Items with an <code>items</code> array open nested flyout panels.',
-    },
-    {
-      name: 'popup',
-      type: 'boolean',
-      default: 'false',
-      description:
-        'When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description:
-        'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
-    },
-    {
-      name: 'size',
-      type: "'sm' | 'md' | 'lg'",
-      default: "'md'",
-      description: 'Size token affecting font size, padding, and minimum panel width.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string | null',
-      default: 'null',
-      description: 'Extra CSS class applied to the host element.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Menu'",
-      description: 'Accessible name for the root <code>&lt;ul role="menu"&gt;</code> panel.',
-    },
-  ];
-
-  public readonly apiOutputRows: ApiPropRow[] = [
-    {
-      name: 'itemClick',
-      type: 'TieredMenuItemCommandEvent',
-      description: 'Emitted when a non-disabled leaf item is activated (click or keyboard).',
-    },
-    {
-      name: 'menuShow',
-      type: 'MouseEvent | KeyboardEvent',
-      description: 'Emitted when the popup panel becomes visible. Popup mode only.',
-    },
-    {
-      name: 'menuHide',
-      type: 'void',
-      description: 'Emitted when the popup panel is hidden. Popup mode only.',
-    },
-  ];
-
-  public readonly apiMethodRows: ApiPropRow[] = [
-    {
-      name: 'show(event)',
-      type: 'MouseEvent | KeyboardEvent',
-      description:
-        'Opens the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.',
-    },
-    {
-      name: 'hide()',
-      type: '—',
-      description:
-        'Closes the popup and restores focus to the trigger element. No-op in inline mode.',
-    },
-    {
-      name: 'toggle(event)',
-      type: 'MouseEvent | KeyboardEvent',
-      description: 'Calls <code>show()</code> or <code>hide()</code> based on current visibility.',
-    },
-  ];
-
-  public readonly apiTieredMenuItemRows: ApiPropRow[] = [
-    { name: 'label', type: 'string?', description: 'Display text for the item.' },
-    {
-      name: 'icon',
-      type: 'string?',
-      description: 'Icon class applied to a <code>&lt;span aria-hidden="true"&gt;</code>.',
-    },
-    {
-      name: 'items',
-      type: 'TieredMenuItem[]?',
-      description:
-        'Child items — renders a right-arrow caret and opens a flyout sub-panel on hover or <kbd>ArrowRight</kbd>.',
-    },
-    {
-      name: 'disabled',
-      type: 'boolean?',
-      description:
-        'When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and <code>tabindex="-1"</code>.',
-    },
-    {
-      name: 'separator',
-      type: 'boolean?',
-      description: 'Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.',
-    },
-    {
-      name: 'visible',
-      type: 'boolean?',
-      description: 'When explicitly <code>false</code>, excludes the item from the rendered list.',
-    },
-    {
-      name: 'url',
-      type: 'string?',
-      description: 'Renders the item as <code>&lt;a href="..."&gt;</code>.',
-    },
-    {
-      name: 'target',
-      type: 'string?',
-      description:
-        "<code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).",
-    },
-    {
-      name: 'command',
-      type: 'function?',
-      description: 'Callback invoked when the item is activated.',
-    },
-    {
-      name: 'styleClass',
-      type: 'string?',
-      description: 'Extra CSS class added to the <code>&lt;li&gt;</code> element.',
-    },
-  ];
 }

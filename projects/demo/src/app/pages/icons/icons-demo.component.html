@@ -6,10 +6,8 @@
     description="Semantic icons with size, variant, and button integrations plus full search."
   />
 
-    <app-icon-basic-example />
-  <ui-lib-code-snippet language="html" [code]="iconExample" 
-    [showLineNumbers]="true"
-    />
+  <app-icon-basic-example />
+  <app-doc-code-example [html]="iconExample" [typescript]="iconExampleTs" />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -172,11 +170,7 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <ui-lib-code-snippet
-        language="html"
-        filename="Basic icon" [code]="snippets.usage"
-        [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
+      <app-doc-code-example [html]="snippets.usage" [typescript]="snippets.usageTs" />
     </ui-lib-panel>
   }
 
@@ -185,7 +179,10 @@
       <ul class="doc-list">
         <li>Decorative icons stay hidden with <code>aria-hidden="true"</code> by default.</li>
         <li>Use <code>ariaLabel</code> only when the icon itself must be announced as an image.</li>
-        <li>For clickable actions, put the accessible name on the button or link rather than the icon name.</li>
+        <li>
+          For clickable actions, put the accessible name on the button or link rather than the icon
+          name.
+        </li>
       </ul>
     </ui-lib-panel>
   }
@@ -200,5 +197,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

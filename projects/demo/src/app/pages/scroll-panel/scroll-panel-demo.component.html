@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ScrollPanel"
@@ -11,9 +10,9 @@
   <section class="demo-section" id="basic-usage" data-doc-anchor>
     <h2 class="demo-section__title">Basic Usage</h2>
     <p class="demo-section__description">
-      Wrap any content in <code>&lt;ui-lib-scroll-panel&gt;</code> and constrain its
-      height. The inner content scrolls vertically while the custom scrollbar is styled
-      to match the active variant.
+      Wrap any content in <code>&lt;ui-lib-scroll-panel&gt;</code> and constrain its height. The
+      inner content scrolls vertically while the custom scrollbar is styled to match the active
+      variant.
     </p>
     <div class="demo-section__preview">
       <ui-lib-scroll-panel class="demo-panel--fixed-height">
@@ -23,11 +22,10 @@
       </ui-lib-scroll-panel>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="snippetBasicUsage"
+        [typescript]="snippetBasicUsageTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetBasicUsage"
       />
     </div>
   </section>
@@ -36,9 +34,8 @@
   <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
-      Three design variants are available: <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code>. Each variant applies a distinct scrollbar style and border
-      treatment.
+      Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. Each variant applies a distinct scrollbar style and border treatment.
     </p>
     <div class="demo-section__preview demo-variants-grid">
       @for (variant of variants; track variant) {
@@ -53,11 +50,10 @@
       }
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="snippetVariants"
+        [typescript]="snippetVariantsTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetVariants"
       />
     </div>
   </section>
@@ -66,8 +62,8 @@
   <section class="demo-section" id="horizontal" data-doc-anchor>
     <h2 class="demo-section__title">Horizontal &amp; Both Axes</h2>
     <p class="demo-section__description">
-      When the content is wider than the container, a horizontal scrollbar appears.
-      Both axes are supported simultaneously.
+      When the content is wider than the container, a horizontal scrollbar appears. Both axes are
+      supported simultaneously.
     </p>
     <div class="demo-section__preview">
       <ui-lib-scroll-panel class="demo-panel--horizontal">
@@ -81,11 +77,10 @@
       </ui-lib-scroll-panel>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="snippetHorizontal"
+        [typescript]="snippetHorizontalTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetHorizontal"
       />
     </div>
   </section>
@@ -94,8 +89,8 @@
   <section class="demo-section" id="interactive-variant-switcher" data-doc-anchor>
     <h2 class="demo-section__title">Interactive Variant Switcher</h2>
     <p class="demo-section__description">
-      Switch between variants at runtime. The scrollbar styling updates immediately
-      via CSS custom properties.
+      Switch between variants at runtime. The scrollbar styling updates immediately via CSS custom
+      properties.
     </p>
     <div class="demo-section__preview">
       <div class="demo-controls">
@@ -118,11 +113,10 @@
       </ui-lib-scroll-panel>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="snippetInteractive"
+        [typescript]="snippetInteractiveTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetInteractive"
       />
     </div>
   </section>
@@ -131,13 +125,11 @@
   <section class="demo-section" id="custom-css-properties" data-doc-anchor>
     <h2 class="demo-section__title">Custom Scrollbar via CSS Properties</h2>
     <p class="demo-section__description">
-      All scrollbar visuals are driven by CSS custom properties. Override them
-      on the component or a parent to create a bespoke style without changing the variant.
+      All scrollbar visuals are driven by CSS custom properties. Override them on the component or a
+      parent to create a bespoke style without changing the variant.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-scroll-panel
-        class="demo-panel--fixed-height demo-panel--custom-theme"
-      >
+      <ui-lib-scroll-panel class="demo-panel--fixed-height demo-panel--custom-theme">
         @for (paragraph of longParagraphs; track paragraph) {
           <p class="demo-text">{{ paragraph }}</p>
         }
@@ -174,5 +166,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

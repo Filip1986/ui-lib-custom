@@ -11,8 +11,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 /**
  * Demo page for the FocusTrap directive.
@@ -30,7 +29,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
@@ -58,8 +57,11 @@ export class FocusTrapDemoComponent {
   public readonly importCode: string =
     "import { FocusTrapDirective } from 'ui-lib-custom/focus-trap'";
   public readonly snippetBasicUsage: string = `<div uiLibFocusTrap>\n  <input type="text" />\n  <button>Submit</button>\n</div>`;
+  public readonly snippetBasicUsageTs: string = `import { Component } from '@angular/core';\nimport { FocusTrapDirective } from 'ui-lib-custom/focus-trap';\n\n@Component({\n  standalone: true,\n  imports: [FocusTrapDirective],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
   public readonly snippetToggleTrap: string = `<div [uiLibFocusTrap]="isActive">\n  <input type="text" />\n</div>`;
+  public readonly snippetToggleTrapTs: string = `import { Component, signal } from '@angular/core';\nimport { FocusTrapDirective } from 'ui-lib-custom/focus-trap';\n\n@Component({\n  standalone: true,\n  imports: [FocusTrapDirective],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly isActive = signal(true);\n\n  toggleTrap(): void {\n    this.isActive.set(!this.isActive());\n  }\n}`;
   public readonly snippetModalPattern: string = `@if (isModalOpen) {\n  <div class="modal" role="dialog" aria-modal="true" [uiLibFocusTrap]="true">\n    <h2>Dialog title</h2>\n    <button (click)="closeModal()">Close</button>\n  </div>\n}`;
+  public readonly snippetModalPatternTs: string = `import { Component, signal } from '@angular/core';\nimport { FocusTrapDirective } from 'ui-lib-custom/focus-trap';\n\n@Component({\n  standalone: true,\n  imports: [FocusTrapDirective],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly isModalOpen = signal(false);\n\n  openModal(): void { this.isModalOpen.set(true); }\n  closeModal(): void { this.isModalOpen.set(false); }\n}`;
   public readonly snippetImport: string = `import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';`;
   public readonly snippetSelector: string = `[uiLibFocusTrap]`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -112,16 +114,6 @@ export class FocusTrapDemoComponent {
     {
       key: 'Shift+Tab',
       action: 'Moves focus backward. Wraps from first to last.',
-    },
-  ];
-
-  public readonly apiRows: readonly ApiPropRow[] = [
-    {
-      name: 'uiLibFocusTrap',
-      type: 'boolean',
-      default: 'true',
-      description:
-        'When true, keyboard focus is trapped within the host element. Set to false to release the trap at runtime.',
     },
   ];
 }

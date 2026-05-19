@@ -25,8 +25,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
@@ -66,7 +65,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     VariantComparisonComponent,
     InputBasicExampleComponent,
     DocQualityBadgeComponent,
-    DocApiReferenceComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -103,93 +102,11 @@ export class InputsComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    { name: 'label', type: 'string', default: "''", description: 'Floating or static label text.' },
-    {
-      name: 'type',
-      type: "'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search'",
-      default: "'text'",
-      description: 'Native input type.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
-    {
-      name: 'labelFloat',
-      type: "'over' | 'in' | 'on'",
-      default: "'over'",
-      description: 'Float label animation style.',
-    },
-    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
-    {
-      name: 'error',
-      type: 'string | null',
-      default: 'null',
-      description: 'Validation error message displayed below the input.',
-    },
-    {
-      name: 'hint',
-      type: 'string | null',
-      default: 'null',
-      description: 'Helper text displayed below the input.',
-    },
-    {
-      name: 'invalid',
-      type: 'boolean',
-      default: 'false',
-      description: 'Marks the input as invalid.',
-    },
-    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
-    {
-      name: 'readonly',
-      type: 'boolean',
-      default: 'false',
-      description: 'Makes the input read-only.',
-    },
-    {
-      name: 'required',
-      type: 'boolean',
-      default: 'false',
-      description: 'Marks the input as required.',
-    },
-    {
-      name: 'showCounter',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows a character counter.',
-    },
-    {
-      name: 'maxLength',
-      type: 'number | null',
-      default: 'null',
-      description: 'Maximum character length.',
-    },
-    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
-    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
-    {
-      name: 'id',
-      type: 'string | null',
-      default: 'null',
-      description: 'Id applied to the inner input.',
-    },
-    {
-      name: 'name',
-      type: 'string | null',
-      default: 'null',
-      description: 'Name attribute for form submission.',
-    },
-  ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
@@ -202,15 +119,17 @@ export class InputsComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets: { readonly usage: string } = {
-    usage: `import { UiLibInput } from 'ui-lib-custom';
+  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
+    usage: `<ui-lib-input label="Email" placeholder="you@example.com" />`,
+    usageTs: `import { Component } from '@angular/core';
+import { UiLibInput } from 'ui-lib-custom/input';
 
 @Component({
   standalone: true,
   imports: [UiLibInput],
-  template: '<ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>'
+  templateUrl: './my.component.html',
 })
-export class Example {}`,
+export class MyComponent {}`,
   } as const;
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
@@ -332,4 +251,13 @@ export class Example {}`,
   public readonly labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
 
   public readonly inputExample: string = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
+  public readonly inputExampleTs: string = `import { Component } from '@angular/core';
+import { UiLibInput } from 'ui-lib-custom/input';
+
+@Component({
+  standalone: true,
+  imports: [UiLibInput],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 }
