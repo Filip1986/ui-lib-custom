@@ -7,15 +7,7 @@ import {
 } from '@angular/core';
 import type { InputSignal, Signal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-
-interface CodeTab {
-  readonly label: string;
-  readonly value: string;
-  readonly code: string;
-  readonly language: CodeSnippetLanguage;
-}
+import type { CodeSnippetFile } from 'ui-lib-custom/code-snippet';
 
 /** Renders one or more code snippets as a tabbed block (HTML / TypeScript / SCSS). */
 @Component({
@@ -23,7 +15,7 @@ interface CodeTab {
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [CodeSnippet, Tabs, Tab],
+  imports: [CodeSnippet],
   templateUrl: './doc-code-example.component.html',
   styleUrl: './doc-code-example.component.scss',
 })
@@ -33,22 +25,22 @@ export class DocCodeExampleComponent {
   public readonly scss: InputSignal<string | null> = input<string | null>(null);
   public readonly showLineNumbers: InputSignal<boolean> = input<boolean>(true);
 
-  public readonly tabs: Signal<readonly CodeTab[]> = computed((): readonly CodeTab[] => {
-    const result: CodeTab[] = [];
-    const htmlCode: string | null = this.html();
-    const tsCode: string | null = this.typescript();
-    const scssCode: string | null = this.scss();
-    if (htmlCode) {
-      result.push({ label: 'HTML', value: 'html', code: htmlCode, language: 'html' });
+  public readonly files: Signal<readonly CodeSnippetFile[]> = computed(
+    (): readonly CodeSnippetFile[] => {
+      const result: CodeSnippetFile[] = [];
+      const htmlCode: string | null = this.html();
+      const tsCode: string | null = this.typescript();
+      const scssCode: string | null = this.scss();
+      if (htmlCode) {
+        result.push({ filename: 'template.html', language: 'html', code: htmlCode });
+      }
+      if (tsCode) {
+        result.push({ filename: 'component.ts', language: 'typescript', code: tsCode });
+      }
+      if (scssCode) {
+        result.push({ filename: 'styles.scss', language: 'scss', code: scssCode });
+      }
+      return result;
     }
-    if (tsCode) {
-      result.push({ label: 'TypeScript', value: 'ts', code: tsCode, language: 'typescript' });
-    }
-    if (scssCode) {
-      result.push({ label: 'SCSS', value: 'scss', code: scssCode, language: 'scss' });
-    }
-    return result;
-  });
-
-  public readonly isSingleTab: Signal<boolean> = computed((): boolean => this.tabs().length === 1);
+  );
 }
