@@ -149,7 +149,9 @@ export class CodeSnippet {
     (): CodeSnippetFile => {
       const fileList: readonly CodeSnippetFile[] = this.effectiveFiles();
       const index: number = Math.min(this.activeTabIndex(), fileList.length - 1);
-      return fileList[index];
+      // effectiveFiles always has ≥1 entry; non-null assertion is safe after clamping
+
+      return fileList[index]!;
     }
   );
 
