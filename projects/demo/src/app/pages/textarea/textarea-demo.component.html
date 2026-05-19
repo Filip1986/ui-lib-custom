@@ -13,7 +13,7 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">A simple labeled textarea bound with <code>ngModel</code>.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-sm">
               <ui-lib-textarea
                 label="Description"
@@ -24,7 +24,7 @@
               />
               <span class="value-text">Value: "{{ basicValue }}"</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
           [showLineNumbers]="true"
           />
@@ -37,7 +37,7 @@
           When <code>autoResize</code> is true the textarea grows in height automatically to fit
           its content.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <ui-lib-textarea
               label="Notes"
               placeholder="Type here — the textarea will grow..."
@@ -46,7 +46,7 @@
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="autoResizeValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('autoResize')" 
           [showLineNumbers]="true"
           />
@@ -56,7 +56,7 @@
       <section id="counter" data-doc-anchor class="example-section">
         <h3>c. Counter</h3>
         <p class="section-text">Display a live character count below the textarea.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <ui-lib-textarea
               label="Bio"
               placeholder="Tell us about yourself..."
@@ -64,7 +64,7 @@
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="counterValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('counter')" 
           [showLineNumbers]="true"
           />
@@ -76,7 +76,7 @@
         <p class="section-text">
           Combine <code>maxLength</code> with <code>showCounter</code> to display a count / limit indicator.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <ui-lib-textarea
               label="Tweet"
               placeholder="What's happening?"
@@ -85,7 +85,7 @@
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="maxLengthValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('maxLength')" 
           [showLineNumbers]="true"
           />
@@ -95,7 +95,7 @@
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>e. Sizes</h3>
         <p class="section-text">Three size tokens: sm, md, lg.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-md">
               <ui-lib-textarea
                 label="Small"
@@ -119,7 +119,7 @@
                 [(ngModel)]="sizeLg"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
           [showLineNumbers]="true"
           />
@@ -129,7 +129,7 @@
       <section id="variants" data-doc-anchor class="example-section">
         <h3>f. Variants</h3>
         <p class="section-text">Three design variants: material, bootstrap, minimal.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-md">
               <ui-lib-textarea
                 label="Material"
@@ -153,7 +153,7 @@
                 [(ngModel)]="variantMinimal"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
           [showLineNumbers]="true"
           />
@@ -163,14 +163,14 @@
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>g. Disabled</h3>
         <p class="section-text">The textarea is non-interactive and visually dimmed.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <ui-lib-textarea
               label="Comments"
               [disabled]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="disabledValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
           [showLineNumbers]="true"
           />
@@ -180,14 +180,14 @@
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>h. Read-only</h3>
         <p class="section-text">Focusable but not editable — content can be selected and copied.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <ui-lib-textarea
               label="Terms"
               [readonly]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="readonlyValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
           [showLineNumbers]="true"
           />
@@ -197,7 +197,7 @@
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>i. Invalid</h3>
         <p class="section-text">Pass an <code>error</code> string to show a validation message.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <ui-lib-textarea
               label="Address"
               error="This field is required"
@@ -205,7 +205,7 @@
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="invalidValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
           [showLineNumbers]="true"
           />
@@ -217,7 +217,7 @@
         <p class="section-text">
           Full integration with Angular reactive forms including validation state and error display.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <form class="stack-md" [formGroup]="form" (ngSubmit)="submitForm()">
               <ui-lib-textarea
                 label="Feedback"
@@ -237,7 +237,7 @@
             @if (reactiveSubmittedValue) {
               <p class="value-text">Submitted: "{{ reactiveSubmittedValue }}"</p>
             }
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
           [showLineNumbers]="true"
           />

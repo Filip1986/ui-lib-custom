@@ -12,9 +12,9 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
+import { Panel } from 'ui-lib-custom/panel';
 import {
   OrderListComponent,
   OrderListItemDirective,
@@ -113,9 +113,9 @@ const SNIPPETS: Record<string, string> = {
   selector: 'app-order-list-demo',
   standalone: true,
   imports: [
+    Panel,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
-    Card,
     CodeSnippet,
     Stack,
     OrderListComponent,

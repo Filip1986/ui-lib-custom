@@ -18,7 +18,7 @@
           Single-select listbox bound with <code>ngModel</code>.
           Click an option to select it; click the same option again to deselect.
         </p>
-          <ui-lib-card class="demo-card">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-listbox
                 [options]="cities"
@@ -29,7 +29,7 @@
               />
               <p class="demo-value">Selected: <code>{{ basicValue | json }}</code></p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')"
           [showLineNumbers]="true"
           />
@@ -42,7 +42,7 @@
           Enable <code>[multiple]="true"</code> to let users pick several items.
           Each click toggles individual selection.
         </p>
-          <ui-lib-card class="demo-card">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-listbox
                 [options]="cities"
@@ -53,7 +53,7 @@
               />
               <p class="demo-value">Selected: <code>{{ multipleValue | json }}</code></p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('multiple')"
           [showLineNumbers]="true"
           />
@@ -67,7 +67,7 @@
           Options are narrowed in real-time using the <code>contains</code>
           strategy by default.
         </p>
-          <ui-lib-card class="demo-card">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-listbox
                 [options]="cities"
@@ -79,7 +79,7 @@
               />
               <p class="demo-value">Selected: <code>{{ filterValue | json }}</code></p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('filter')"
           [showLineNumbers]="true"
           />
@@ -93,7 +93,7 @@
           <code>contains</code> (default), <code>startsWith</code>,
           <code>endsWith</code>, or <code>equals</code>.
         </p>
-          <ui-lib-card class="demo-card demo-card--two-col">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <span class="demo-label">startsWith</span>
               <ui-lib-listbox
@@ -118,7 +118,7 @@
                 [(ngModel)]="filterMatchModeValue"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('filter-match-modes')"
           [showLineNumbers]="true"
           />
@@ -132,7 +132,7 @@
           Use <code>optionGroupLabel</code> and <code>optionGroupChildren</code>
           to map your data shape.
         </p>
-          <ui-lib-card class="demo-card">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-listbox
                 [options]="groupedCities"
@@ -146,7 +146,7 @@
               />
               <p class="demo-value">Selected: <code>{{ groupValue | json }}</code></p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('groups')"
           [showLineNumbers]="true"
           />
@@ -159,7 +159,7 @@
           Combine <code>[multiple]="true"</code> and <code>[checkbox]="true"</code>
           to render a checkbox beside each option for visual multi-select affordance.
         </p>
-          <ui-lib-card class="demo-card">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-listbox
                 [options]="cities"
@@ -171,7 +171,7 @@
               />
               <p class="demo-value">Selected: <code>{{ checkboxValue | json }}</code></p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('checkbox')"
           [showLineNumbers]="true"
           />
@@ -184,7 +184,7 @@
           Add <code>[showToggleAll]="true"</code> in multiple + checkbox mode to
           show a header checkbox that selects or deselects all non-disabled options.
         </p>
-          <ui-lib-card class="demo-card">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-listbox
                 [options]="cities"
@@ -200,7 +200,7 @@
                 <code>{{ toggleAllValue | json }}</code>
               </p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('toggle-all')"
           [showLineNumbers]="true"
           />
@@ -213,7 +213,7 @@
           <code>[disabled]="true"</code> prevents all interaction. Individual options
           can also be disabled via an <code>disabled: true</code> field on the option object.
         </p>
-          <ui-lib-card class="demo-card demo-card--two-col">
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <span class="demo-label">Component disabled</span>
               <ui-lib-listbox
@@ -233,7 +233,7 @@
                 [(ngModel)]="disabledValue"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
           [showLineNumbers]="true"
           />
@@ -247,7 +247,7 @@
           <code>form.disable()</code> propagates the disabled state automatically
           via <code>setDisabledState</code>.
         </p>
-          <ui-lib-card class="demo-card demo-card--two-col">
+          <ui-lib-panel variant="minimal">
             <form [formGroup]="form" class="demo-form">
               <div class="demo-row">
                 <span class="demo-label">Single (formControlName="city")</span>
@@ -265,7 +265,7 @@
                 <p class="demo-value">Value: <code>{{ citiesControl.value | json }}</code></p>
               </div>
             </form>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
           [showLineNumbers]="true"
           />

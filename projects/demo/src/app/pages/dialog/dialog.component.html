@@ -10,7 +10,7 @@
     <section id="basic" class="example-section">
       <h3>Basic</h3>
       <p>Simple modal dialog with header text and body content.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="basicVisible = true"
           [attr.aria-expanded]="basicVisible"
@@ -24,13 +24,13 @@
             <p>Update profile details and save changes when finished.</p>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="custom-header-footer" class="example-section">
       <h3>Custom Header & Footer</h3>
       <p>Projected header and footer content with custom actions.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="customVisible = true"
           [attr.aria-expanded]="customVisible"
@@ -56,13 +56,13 @@
             <ui-lib-button color="primary" (click)="customVisible = false">Save</ui-lib-button>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="position" class="example-section">
       <h3>Position</h3>
       <p>Open dialogs from 9 predefined viewport positions.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <div class="position-grid">
           @for (position of positions; track position) {
             <ui-lib-button
@@ -91,13 +91,13 @@
             </ui-lib-dialog>
           }
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="maximizable" class="example-section">
       <h3>Maximizable</h3>
       <p>Enable maximize/minimize action in the dialog header.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="maximizableVisible = true"
           [attr.aria-expanded]="maximizableVisible"
@@ -116,13 +116,13 @@
             <p>Use the maximize button to expand this dialog to full viewport size.</p>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="long-content" class="example-section">
       <h3>Long Content</h3>
       <p>Demonstrates internal scrolling for long dialog body content.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="longContentVisible = true"
           [attr.aria-expanded]="longContentVisible"
@@ -138,13 +138,13 @@
             }
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="without-modal" class="example-section">
       <h3>Without Modal</h3>
       <p>Dialog without backdrop for non-blocking secondary interactions.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="nonModalVisible = true"
           [attr.aria-expanded]="nonModalVisible"
@@ -158,13 +158,13 @@
             <p>This dialog keeps background context visible and interactive.</p>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="responsive" class="example-section">
       <h3>Responsive</h3>
       <p>Uses breakpoints to adapt width based on viewport size.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="responsiveVisible = true"
           [attr.aria-expanded]="responsiveVisible"
@@ -183,13 +183,13 @@
             <p>Resize the browser window to observe width changes at configured breakpoints.</p>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="draggable" class="example-section">
       <h3>Draggable</h3>
       <p>Drag the dialog by its header area.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="draggableVisible = true"
           [attr.aria-expanded]="draggableVisible"
@@ -208,13 +208,13 @@
             <p>Click and drag from the header to reposition this dialog.</p>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="headless" class="example-section">
       <h3>Headless</h3>
       <p>Fully custom dialog chrome using the headless projection slot.</p>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           (click)="headlessVisible = true"
           [attr.aria-expanded]="headlessVisible"
@@ -262,7 +262,7 @@
             </footer>
           </section>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="variant-switcher" class="example-section">
@@ -271,7 +271,7 @@
         Switch the active variant and compare Material, Bootstrap, and Minimal styles side by side.
       </p>
 
-      <ui-lib-card class="variant-switcher-card">
+      <ui-lib-panel variant="minimal">
         <div class="variant-switcher-controls">
           <ui-lib-button
             size="sm"
@@ -324,9 +324,9 @@
             </p>
           </div>
         </ui-lib-dialog>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <app-variant-comparison>
           <div material>
             <ui-lib-button
@@ -385,7 +385,7 @@
             </ui-lib-dialog>
           </div>
         </app-variant-comparison>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
   </div>
 

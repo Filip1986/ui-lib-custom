@@ -11,9 +11,9 @@
     <section id="basic" data-doc-anchor class="example-section">
       <h3>Basic</h3>
       <p>Default SplitButton with label and action menu model.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
         [showLineNumbers]="true"
         />
@@ -22,14 +22,14 @@
     <section id="icons" data-doc-anchor class="example-section">
       <h3>Icons</h3>
       <p>Leading icon on the primary action with icon-capable menu actions.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-split-button
             label="Add"
             icon="plus"
             [model]="iconItems"
             (onClick)="onPrimaryAction()"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('icons')" 
         [showLineNumbers]="true"
         />
@@ -38,7 +38,7 @@
     <section id="severity" data-doc-anchor class="example-section">
       <h3>Severity</h3>
       <p>All severity tokens in one row.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
               <ui-lib-split-button
@@ -49,7 +49,7 @@
               />
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('severity')" 
         [showLineNumbers]="true"
         />
@@ -58,7 +58,7 @@
     <section id="disabled" data-doc-anchor class="example-section">
       <h3>Disabled</h3>
       <p>Disable all controls, only the main action, or only the menu trigger.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--three">
             <ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
             <ui-lib-split-button label="Main Disabled" [model]="items" [buttonDisabled]="true" />
@@ -69,7 +69,7 @@
               (onClick)="onPrimaryAction()"
             />
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
         [showLineNumbers]="true"
         />
@@ -78,13 +78,13 @@
     <section id="raised" data-doc-anchor class="example-section">
       <h3>Raised</h3>
       <p>Raised style across all severities.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
               <ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [model]="items" />
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('raised')" 
         [showLineNumbers]="true"
         />
@@ -93,13 +93,13 @@
     <section id="rounded" data-doc-anchor class="example-section">
       <h3>Rounded</h3>
       <p>Rounded style across all severities.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
               <ui-lib-split-button [label]="severity" [severity]="severity" [rounded]="true" [model]="items" />
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('rounded')" 
         [showLineNumbers]="true"
         />
@@ -108,13 +108,13 @@
     <section id="text" data-doc-anchor class="example-section">
       <h3>Text</h3>
       <p>Text style across all severities.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
               <ui-lib-split-button [label]="severity" [severity]="severity" [text]="true" [model]="items" />
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('text')" 
         [showLineNumbers]="true"
         />
@@ -123,7 +123,7 @@
     <section id="raised-text" data-doc-anchor class="example-section">
       <h3>Raised Text</h3>
       <p>Raised + text modifiers combined.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
               <ui-lib-split-button
@@ -135,7 +135,7 @@
               />
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('raisedText')" 
         [showLineNumbers]="true"
         />
@@ -144,13 +144,13 @@
     <section id="outlined" data-doc-anchor class="example-section">
       <h3>Outlined</h3>
       <p>Outlined style across all severities.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--severity">
             @for (severity of severities; track severity) {
               <ui-lib-split-button [label]="severity" [severity]="severity" [outlined]="true" [model]="items" />
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('outlined')" 
         [showLineNumbers]="true"
         />
@@ -159,13 +159,13 @@
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>Sizes</h3>
       <p>Small, medium, and large size tokens.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="split-grid split-grid--three">
             <ui-lib-split-button label="Small" size="sm" [model]="items" />
             <ui-lib-split-button label="Medium" size="md" [model]="items" />
             <ui-lib-split-button label="Large" size="lg" [model]="items" />
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
         [showLineNumbers]="true"
         />
@@ -174,7 +174,7 @@
     <section id="template" data-doc-anchor class="example-section">
       <h3>Template</h3>
       <p>Custom primary-content projection via <code>[splitButtonContent]</code>.</p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
             <ng-template splitButtonContent>
               <span class="template-content">
@@ -183,7 +183,7 @@
               </span>
             </ng-template>
           </ui-lib-split-button>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('template')" 
         [showLineNumbers]="true"
         />
@@ -205,7 +205,7 @@
 
     <section id="api-reference" data-doc-anchor class="example-section">
       <h3>API Reference</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <table class="doc-table">
           <thead>
             <tr>
@@ -248,7 +248,7 @@
             </tr>
           </tbody>
         </table>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
   </div>
 

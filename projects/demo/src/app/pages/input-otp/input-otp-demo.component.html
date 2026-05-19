@@ -13,7 +13,7 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Four-cell OTP with ngModel binding and live value preview.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-sm">
               <uilib-input-otp
                 [length]="4"
@@ -22,7 +22,7 @@
               />
               <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
           [showLineNumbers]="true"
           />
@@ -32,14 +32,14 @@
       <section id="mask" data-doc-anchor class="example-section">
         <h3>b. Mask</h3>
         <p class="section-text">Password-style dots for sensitive codes such as PINs.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-otp
               [length]="6"
               [mask]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="maskValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('mask')" 
           [showLineNumbers]="true"
           />
@@ -49,7 +49,7 @@
       <section id="integer-only" data-doc-anchor class="example-section">
         <h3>c. Integer Only</h3>
         <p class="section-text">Restricts each cell to digits 0–9, rejecting all other keystrokes.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-sm">
               <uilib-input-otp
                 [length]="4"
@@ -59,7 +59,7 @@
               />
               <span class="value-text">Value: {{ formatValue(integerValue) }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('integerOnly')" 
           [showLineNumbers]="true"
           />
@@ -69,7 +69,7 @@
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>d. Sizes</h3>
         <p class="section-text">Three size tokens — <code>sm</code>, <code>md</code> (default), <code>lg</code>.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-md">
               <div class="stack-xs">
                 <label>Small</label>
@@ -84,7 +84,7 @@
                 <uilib-input-otp [length]="4" size="lg" [ngModelOptions]="{ standalone: true }" [(ngModel)]="sizeValues.lg" />
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
           [showLineNumbers]="true"
           />
@@ -94,14 +94,14 @@
       <section id="filled" data-doc-anchor class="example-section">
         <h3>e. Filled</h3>
         <p class="section-text">Filled background variant for surfaces that need stronger contrast.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-otp
               [length]="4"
               [filled]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="filledValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
           [showLineNumbers]="true"
           />
@@ -111,14 +111,14 @@
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>f. Disabled</h3>
         <p class="section-text">All cells are non-interactive and rendered with reduced opacity.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-otp
               [length]="4"
               [disabled]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="disabledValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
           [showLineNumbers]="true"
           />
@@ -128,14 +128,14 @@
       <section id="invalid" data-doc-anchor class="example-section">
         <h3>g. Invalid</h3>
         <p class="section-text">Error border applied to all cells when validation fails.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-otp
               [length]="4"
               [invalid]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="invalidValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('invalid')" 
           [showLineNumbers]="true"
           />
@@ -145,14 +145,14 @@
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>h. Read Only</h3>
         <p class="section-text">Cells display a value but do not accept new input.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-otp
               [length]="4"
               [readonly]="true"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="readonlyValue"
             />
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
           [showLineNumbers]="true"
           />
@@ -165,7 +165,7 @@
           Six-digit numeric code with <code>Validators.required</code> and
           <code>Validators.minLength(6)</code>. Invalid styling activates on touch.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
               <div class="stack-md">
                 <uilib-input-otp
@@ -183,7 +183,7 @@
                 }
               </div>
             </form>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
           [showLineNumbers]="true"
           />

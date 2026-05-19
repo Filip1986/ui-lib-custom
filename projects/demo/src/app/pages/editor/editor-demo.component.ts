@@ -15,11 +15,11 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { EditorComponent, EditorToolbarDirective } from 'ui-lib-custom/editor';
 import type { EditorSelectionChangeEvent, EditorTextChangeEvent } from 'ui-lib-custom/editor';
 
+import { Panel } from 'ui-lib-custom/panel';
 type EditorDemoSnippetKey =
   | 'basic'
   | 'readonly'
@@ -39,6 +39,7 @@ type EditorDemoSnippetKey =
   selector: 'app-editor-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -47,7 +48,6 @@ type EditorDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    Card,
     CodeSnippet,
     EditorComponent,
     EditorToolbarDirective,

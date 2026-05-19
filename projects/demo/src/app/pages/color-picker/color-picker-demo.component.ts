@@ -13,7 +13,6 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { ColorPicker } from 'ui-lib-custom';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -21,6 +20,7 @@ import type { ColorPickerValue, HsbColor, RgbColor } from 'ui-lib-custom';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type DemoSnippetKey =
   | 'basic'
   | 'inline'
@@ -38,6 +38,7 @@ type DemoSnippetKey =
   selector: 'app-color-picker-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -45,7 +46,6 @@ type DemoSnippetKey =
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     Button,
     CodeSnippet,
     ColorPicker,

@@ -15,7 +15,7 @@
         Use <code>[(source)]</code> and <code>[(target)]</code> two-way bindings to let the component
         manage transfers. <code>trackBy</code> identifies items by a property key.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-pick-list
             [source]="basicSource()"
             (sourceChange)="basicSource.set($any($event))"
@@ -25,7 +25,7 @@
             sourceHeader="Available"
             targetHeader="Selected"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
         [showLineNumbers]="true"
         />
@@ -38,7 +38,7 @@
         Set <code>filterBy</code> to show independent filter inputs above each list.
         Filtering never mutates the underlying arrays.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-pick-list
             [source]="filterSource()"
             (sourceChange)="filterSource.set($any($event))"
@@ -49,7 +49,7 @@
             sourceFilterPlaceholder="Search available…"
             targetFilterPlaceholder="Search selected…"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('filter')" 
         [showLineNumbers]="true"
         />
@@ -63,7 +63,7 @@
         <code>uiPickListItem</code>, and <code>uiPickListEmpty</code> directives for fully
         custom rendering. The item template receives <code>let-item</code> as its implicit context.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-pick-list
             [source]="templateSource()"
             (sourceChange)="templateSource.set($any($event))"
@@ -88,7 +88,7 @@
               <span>No items here.</span>
             </ng-template>
           </ui-lib-pick-list>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('templates')" 
         [showLineNumbers]="true"
         />
@@ -102,7 +102,7 @@
         them, or dragging between lists to transfer them. A drop indicator line shows the
         insertion point.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-stack [gap]="3">
             <ui-lib-pick-list
               [source]="dragSource()"
@@ -119,7 +119,7 @@
             />
             <p class="demo-event-log">Last action: <code>{{ lastEventLog() }}</code></p>
           </ui-lib-stack>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('dragDrop')" 
         [showLineNumbers]="true"
         />
@@ -128,7 +128,7 @@
     <!-- 5. Accessibility -->
     <section id="accessibility" data-doc-anchor class="example-section">
       <h3>5. Accessibility</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>
             <h4>Keyboard shortcuts</h4>
@@ -159,13 +159,13 @@
             </ul>
           </div>
         </ui-lib-stack>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <!-- 6. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
       <h3>6. API Reference</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>
             <h4>Inputs</h4>
@@ -222,7 +222,7 @@
             </table>
           </div>
         </ui-lib-stack>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
   </div>

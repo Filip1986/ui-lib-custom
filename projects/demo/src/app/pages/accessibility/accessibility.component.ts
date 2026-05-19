@@ -3,7 +3,6 @@ import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -13,6 +12,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for accessibility guidance and examples.
  */
@@ -20,11 +20,11 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
   selector: 'app-accessibility-page',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    Card,
     Button,
     UiLibInput,
     UiLibSelect,

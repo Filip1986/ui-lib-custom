@@ -27,8 +27,7 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Demo controls</div>
+    <ui-lib-panel variant="minimal">
       <div class="control-grid">
         <div class="control">
           <label>Variant</label>
@@ -108,11 +107,10 @@
           </label>
         </div>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
 
     <div class="viewport-control-stack">
-      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>Viewport width</div>
+      <ui-lib-panel variant="minimal">
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
@@ -141,10 +139,9 @@
             >
           </div>
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>Density</div>
+      <ui-lib-panel variant="minimal">
         <div class="density-controls">
           <ui-lib-button
             size="sm"
@@ -168,11 +165,10 @@
             >Compact</ui-lib-button
           >
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Binary + indeterminate</div>
+    <ui-lib-panel variant="minimal">
       <p>Basic two-state checkbox behavior plus indeterminate interaction.</p>
 
       <app-doc-demo-viewport>
@@ -212,10 +208,9 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Group mode (4 options)</div>
+    <ui-lib-panel variant="minimal">
       <p>Set <code>binary</code> to false and bind an array model.</p>
 
       <app-doc-demo-viewport>
@@ -237,10 +232,9 @@
           <div class="doc-note"><strong>Selected:</strong> {{ groupSelectionText() }}</div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Dynamic checkboxes from list</div>
+    <ui-lib-panel variant="minimal">
       <p>Options can be generated at runtime and still use array-based group mode.</p>
 
       <div class="dynamic-controls">
@@ -283,10 +277,9 @@
           <div class="doc-note"><strong>Selected:</strong> {{ dynamicSelectionText() }}</div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Custom trueValue / falseValue</div>
+    <ui-lib-panel variant="minimal">
       <p>Binary mode can emit any value pair while preserving checkbox behavior.</p>
 
       <app-doc-demo-viewport>
@@ -307,12 +300,11 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'variants') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
-      <div card-header>Appearance, variants, sizes, and states</div>
+    <ui-lib-panel variant="minimal">
       <p>All three variants are shown in both outlined and filled appearance, plus size and state examples.</p>
 
       <h3>Outlined vs Filled across variants</h3>
@@ -369,10 +361,9 @@
           [(ngModel)]="checkedSecondary"
         />
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Form integration</div>
+    <ui-lib-panel variant="minimal">
       <p>Reactive and template-driven examples with validation.</p>
 
       <div class="forms-grid">
@@ -439,12 +430,11 @@
           </form>
         </div>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <table class="doc-properties">
         <thead>
           <tr>
@@ -529,23 +519,21 @@
           </tr>
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         filename="Usage" [code]="snippets.usage"
         [showLineNumbers]="true"
         ></ui-lib-code-snippet>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
+    <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li>
           <strong>Native semantics:</strong> a hidden native input owns checkbox ARIA semantics
@@ -564,7 +552,7 @@
           both are form-compatible.
         </li>
       </ul>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <app-doc-quality-badge [audit]="qualityAudit" />

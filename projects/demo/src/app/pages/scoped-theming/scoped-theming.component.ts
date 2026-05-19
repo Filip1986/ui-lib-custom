@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ThemeScopeDirective, DarkThemeDirective, LightThemeDirective } from 'ui-lib-custom/theme';
 import type { ThemeScopeConfig } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Badge } from 'ui-lib-custom/badge';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Checkbox } from 'ui-lib-custom/checkbox';
@@ -14,6 +13,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for scoped theming examples.
  */
@@ -21,12 +21,12 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-scoped-theming-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     ThemeScopeDirective,
     DarkThemeDirective,
     LightThemeDirective,
     Button,
-    Card,
     Badge,
     UiLibInput,
     Checkbox,

@@ -15,14 +15,14 @@
         <p class="section-text">
           Provide <code>src</code> and <code>alt</code> to render a simple image.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-image
                 src="https://picsum.photos/seed/demo/400/300"
                 alt="A scenic landscape"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
           [showLineNumbers]="true"
           />
@@ -37,7 +37,7 @@
           Inside the overlay you can <strong>zoom in/out</strong> and <strong>rotate</strong>
           the image, or press <kbd>Escape</kbd> to close.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-image
                 src="https://picsum.photos/seed/preview1/400/300"
@@ -50,7 +50,7 @@
                 [preview]="true"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('preview')" 
           [showLineNumbers]="true"
           />
@@ -63,7 +63,7 @@
           Replace the default eye-icon indicator with your own content using the
           <code>#imageIndicator</code> template slot.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-image
                 src="https://picsum.photos/seed/custom/400/300"
@@ -75,7 +75,7 @@
                 </ng-template>
               </ui-lib-image>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('customIndicator')" 
           [showLineNumbers]="true"
           />
@@ -88,7 +88,7 @@
           Pass <code>errorSrc</code> to display an alternative image when the primary source
           fails to load.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-image
                 src="https://this-will-fail.invalid/broken.jpg"
@@ -96,7 +96,7 @@
                 alt="Fallback on error"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('errorFallback')" 
           [showLineNumbers]="true"
           />
@@ -109,7 +109,7 @@
           Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>)
           to control border-radius scaling and indicator icon sizing.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row demo-row--align-end">
               <div class="size-item">
                 <ui-lib-image
@@ -139,7 +139,7 @@
                 <span class="size-label">lg</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
           [showLineNumbers]="true"
           />
@@ -153,7 +153,7 @@
           <code>bootstrap</code> (visible border, tighter radius), and <code>minimal</code>
           (no rounding).
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <div class="variant-item">
                 <ui-lib-image
@@ -183,7 +183,7 @@
                 <span class="size-label">minimal</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
           [showLineNumbers]="true"
           />
@@ -196,7 +196,7 @@
           Use the <code>#imageError</code> template slot to render your own placeholder
           when the image fails to load and no <code>errorSrc</code> is set.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-image src="https://this-will-fail.invalid/broken.jpg" alt="Broken image">
                 <ng-template #imageError>
@@ -207,7 +207,7 @@
                 </ng-template>
               </ui-lib-image>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('customError')" 
           [showLineNumbers]="true"
           />
@@ -220,7 +220,7 @@
           Pass <code>width</code> and <code>height</code> to constrain the image element size.
           These are forwarded directly to the underlying <code>&lt;img&gt;</code> element.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-image
                 src="https://picsum.photos/seed/wide/800/200"
@@ -229,7 +229,7 @@
                 height="100"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('dimensions')" 
           [showLineNumbers]="true"
           />
@@ -242,7 +242,7 @@
           Use <code>[(previewVisible)]</code> to control and react to the overlay open state
           programmatically.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-col">
               <div class="demo-row">
                 <ui-lib-image
@@ -254,7 +254,7 @@
               </div>
               <p class="value-text">Preview open: <strong>{{ previewVisible() }}</strong></p>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('twoWayBinding')" 
           [showLineNumbers]="true"
           />

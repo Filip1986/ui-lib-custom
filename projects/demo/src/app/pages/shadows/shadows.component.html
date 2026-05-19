@@ -19,15 +19,13 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
       <p>All numeric shadows from the library <code>SHADOWS</code> tokens.</p>
 
       <app-doc-demo-viewport>
         <div class="card-grid scrollable-grid" tabindex="0" aria-label="Shadow examples">
           @for (example of examples; track example.level) {
-            <ui-lib-card variant="material" [style.box-shadow]="shadowValues[example.token]">
-              <div card-header>{{ example.label }}</div>
+            <ui-lib-panel variant="minimal">
               <p>{{ example.description }}</p>
               <div card-footer class="card-footer-meta">
                 <div>
@@ -39,16 +37,15 @@
                   <code>{{ shadowValues[example.token] }}</code>
                 </div>
               </div>
-            </ui-lib-card>
+            </ui-lib-panel>
           }
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <p>Shadow token names and values available from the design tokens.</p>
       <table class="doc-properties">
         <thead>
@@ -74,18 +71,17 @@
           }
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         filename="Usage" [code]="snippets.usage"
         [showLineNumbers]="true"
         ></ui-lib-code-snippet>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <div class="demo-page-rail" docRail>

@@ -15,7 +15,7 @@
         <p class="section-text">
           Default horizontal slider with ngModel binding. Drag the handle or use arrow keys.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [ngModelOptions]="{ standalone: true }"
@@ -24,7 +24,7 @@
               />
               <span class="slider-caption">Value: {{ basicValue }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')"
           [showLineNumbers]="true"
           />
@@ -37,7 +37,7 @@
           Enable <code>[range]="true"</code> to get a two-handle range picker. The value becomes a
           <code>[start, end]</code> tuple.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [range]="true"
@@ -47,7 +47,7 @@
               />
               <span class="slider-caption">Range: {{ rangeValue[0] }} &ndash; {{ rangeValue[1] }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('range')"
           [showLineNumbers]="true"
           />
@@ -59,7 +59,7 @@
         <p class="section-text">
           Use <code>[step]</code> to control snap granularity. This slider snaps to 0, 25, 50, 75, 100.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [step]="25"
@@ -69,7 +69,7 @@
               />
               <span class="slider-caption">step=25 &middot; value={{ stepValue }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('step')"
           [showLineNumbers]="true"
           />
@@ -81,7 +81,7 @@
         <p class="section-text">
           Constrain the value range. This slider spans &minus;50 to +50 in steps of 10.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [min]="-50"
@@ -93,7 +93,7 @@
               />
               <span class="slider-caption">value={{ minmaxValue }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('minmax')"
           [showLineNumbers]="true"
           />
@@ -105,7 +105,7 @@
         <p class="section-text">
           Set <code>orientation="vertical"</code> to render a vertical track. Drag up to increase.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-vertical-row">
               <ui-lib-slider
                 orientation="vertical"
@@ -115,7 +115,7 @@
               />
               <span class="slider-caption">value={{ verticalValue }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('vertical')"
           [showLineNumbers]="true"
           />
@@ -127,7 +127,7 @@
         <p class="section-text">
           Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-sizes">
               <div class="slider-size-row">
                 <span class="size-label">sm</span>
@@ -157,7 +157,7 @@
                 />
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
           [showLineNumbers]="true"
           />
@@ -170,7 +170,7 @@
           Pass <code>[animate]="true"</code> to enable smooth CSS transitions on the fill bar and
           handle.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [animate]="true"
@@ -180,7 +180,7 @@
               />
               <span class="slider-caption">value={{ animateValue }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('animate')"
           [showLineNumbers]="true"
           />
@@ -192,7 +192,7 @@
         <p class="section-text">
           A disabled slider is visually muted and ignores all interaction.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [disabled]="true"
@@ -202,7 +202,7 @@
               />
               <span class="slider-caption">disabled</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
           [showLineNumbers]="true"
           />
@@ -214,7 +214,7 @@
         <p class="section-text">
           A read-only slider is focusable but does not respond to drag or keyboard input.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="slider-row">
               <ui-lib-slider
                 [readonly]="true"
@@ -224,7 +224,7 @@
               />
               <span class="slider-caption">readonly</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('readonly')"
           [showLineNumbers]="true"
           />
@@ -236,7 +236,7 @@
         <p class="section-text">
           Sliders work with Angular reactive forms out of the box via CVA.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <form [formGroup]="reactiveForm">
               <div class="slider-sizes">
                 <div class="slider-size-row">
@@ -251,7 +251,7 @@
                 </div>
               </div>
             </form>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
           [showLineNumbers]="true"
           />

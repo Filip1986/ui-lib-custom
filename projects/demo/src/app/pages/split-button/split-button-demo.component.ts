@@ -13,10 +13,10 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { Card } from 'ui-lib-custom/card';
 import { Icon } from 'ui-lib-custom/icon';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { Panel } from 'ui-lib-custom/panel';
 import type {
   SplitButtonItem,
   SplitButtonItemCommandEvent,
@@ -30,10 +30,10 @@ import type {
   selector: 'app-split-button-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
-    Card,
     Icon,
     CodeSnippet,
     SplitButtonComponent,

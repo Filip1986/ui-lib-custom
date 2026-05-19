@@ -7,10 +7,10 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Image } from 'ui-lib-custom/image';
 
+import { Panel } from 'ui-lib-custom/panel';
 type SnippetKey =
   | 'basic'
   | 'preview'
@@ -27,10 +27,10 @@ type SnippetKey =
   selector: 'app-image-demo',
   standalone: true,
   imports: [
+    Panel,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     CodeSnippet,
     Image,
     DocPageHeaderComponent,

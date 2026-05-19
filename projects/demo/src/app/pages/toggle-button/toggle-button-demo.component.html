@@ -16,14 +16,14 @@
           A minimal toggle bound with <code>[(checked)]</code>. The default labels are
           <em>Yes</em> (on) and <em>No</em> (off).
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-toggle-button
                 [(checked)]="basicChecked"
               />
               <span class="value-text">Value: {{ basicChecked() }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')"
           [showLineNumbers]="true"
           />
@@ -36,7 +36,7 @@
           Use <code>onLabel</code> and <code>offLabel</code> to display context-specific text for
           each state.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-toggle-button
                 onLabel="Active"
@@ -56,7 +56,7 @@
                 [(checked)]="labelsChecked"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('labels')"
           [showLineNumbers]="true"
           />
@@ -69,7 +69,7 @@
           Provide <code>onIcon</code> and <code>offIcon</code> to show a different icon for each
           state. Use <code>iconPos="right"</code> to place the icon after the label.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-toggle-button
                 onLabel="Muted"
@@ -95,7 +95,7 @@
                 [(checked)]="iconLeftChecked"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('icons')"
           [showLineNumbers]="true"
           />
@@ -108,7 +108,7 @@
           Three size tokens are available: <code>sm</code>, <code>md</code> (default), and
           <code>lg</code>.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row demo-row--align-center">
               <ui-lib-toggle-button
                 size="sm"
@@ -129,7 +129,7 @@
                 [(checked)]="sizeLgChecked"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
           [showLineNumbers]="true"
           />
@@ -143,7 +143,7 @@
           elevation when checked), <code>bootstrap</code> (tighter corners), and
           <code>minimal</code> (pill-shaped, translucent fills).
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-grid">
               @for (variant of variantOptions; track variant) {
                 <div class="demo-grid-row">
@@ -176,7 +176,7 @@
                 </div>
               }
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('variants')"
           [showLineNumbers]="true"
           />
@@ -189,7 +189,7 @@
           When <code>[allowEmpty]="false"</code> the button cannot be unchecked once activated.
           Useful for confirm-type toggles.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-toggle-button
                 [allowEmpty]="false"
@@ -199,7 +199,7 @@
               />
               <span class="value-text">State: {{ allowEmptyChecked() ? 'confirmed' : 'pending' }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('allowEmpty')"
           [showLineNumbers]="true"
           />
@@ -212,7 +212,7 @@
           Set <code>[disabled]="true"</code> to prevent interaction. Both off and on states are
           shown at reduced opacity.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-row">
               <ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />
               <ui-lib-toggle-button
@@ -222,7 +222,7 @@
                 offLabel="Off"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
           [showLineNumbers]="true"
           />
@@ -235,7 +235,7 @@
           ToggleButton implements <code>ControlValueAccessor</code> and works with both
           <code>[(ngModel)]</code> and reactive forms.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <h4 class="subsection-label">ngModel</h4>
             <div class="demo-row">
               <ui-lib-toggle-button
@@ -246,12 +246,12 @@
               />
               <span class="value-text">ngModel: {{ ngModelValue }}</span>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('ngModel')"
           [showLineNumbers]="true"
           />
 
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <h4 class="subsection-label">Reactive Forms</h4>
             <form [formGroup]="reactiveForm" class="demo-form">
               <label class="form-row">
@@ -276,7 +276,7 @@
                 Form value: {{ reactiveForm.value | json }}
               </div>
             </form>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
           [showLineNumbers]="true"
           />
@@ -289,7 +289,7 @@
           The <code>(change)</code>, <code>(focus)</code>, and <code>(blur)</code> outputs expose
           interaction events.
         </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="demo-row">
             <ui-lib-toggle-button
               onLabel="On"
@@ -307,7 +307,7 @@
               <div class="event-log__empty">Interact with the button above to see events.</div>
             }
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       </section>
 
     </div>

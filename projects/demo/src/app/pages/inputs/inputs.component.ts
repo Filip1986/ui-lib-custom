@@ -16,7 +16,6 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { InputVariant, InputType, InputLabelFloat } from 'ui-lib-custom/input';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Button } from 'ui-lib-custom/button';
@@ -31,6 +30,7 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -48,10 +48,10 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   selector: 'app-inputs',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     UiLibInput,
     Button,
-    Card,
     CodeSnippet,
     Tabs,
     Tab,

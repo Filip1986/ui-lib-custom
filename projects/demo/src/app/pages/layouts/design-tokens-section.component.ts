@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
@@ -8,13 +7,14 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for design tokens usage.
  */
 @Component({
   selector: 'app-layout-design-tokens-section',
   standalone: true,
-  imports: [Card, Tabs, Tab, DocPageHeaderComponent, DocPageLayoutComponent, CodeSnippet],
+  imports: [Panel, Tabs, Tab, DocPageHeaderComponent, DocPageLayoutComponent, CodeSnippet],
   templateUrl: './design-tokens-section.component.html',
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

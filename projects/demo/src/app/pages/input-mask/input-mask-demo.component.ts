@@ -14,13 +14,13 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputMaskComponent } from 'ui-lib-custom/input-mask';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -49,13 +49,13 @@ type InputMaskDemoSnippetKey =
   selector: 'app-input-mask-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     Button,
     CodeSnippet,
     FloatLabelComponent,

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card } from 'ui-lib-custom/card';
 import type { CardElevation } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
@@ -13,6 +12,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 interface ElevationExample {
   level: number;
   label: string;
@@ -31,8 +31,8 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   selector: 'app-shadows',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
-    Card,
     Tabs,
     Tab,
     DocPageHeaderComponent,

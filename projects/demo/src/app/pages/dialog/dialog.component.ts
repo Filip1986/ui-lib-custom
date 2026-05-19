@@ -7,7 +7,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Icon } from 'ui-lib-custom/icon';
 import { DialogComponent } from 'ui-lib-custom/dialog';
 import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
@@ -16,6 +15,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for Dialog component capabilities.
  */
@@ -23,12 +23,12 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
   selector: 'app-dialog-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     VariantComparisonComponent,
-    Card,
     Button,
     Icon,
     DialogComponent,

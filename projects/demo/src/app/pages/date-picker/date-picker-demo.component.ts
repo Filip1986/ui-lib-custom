@@ -14,13 +14,13 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DatePickerComponent } from 'ui-lib-custom/date-picker';
 import type { ThemeVariant } from 'ui-lib-custom/core';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type DatePickerDemoSnippetKey =
   | 'basic'
   | 'format'
@@ -50,6 +50,7 @@ type DatePickerDemoSnippetKey =
   selector: 'app-date-picker-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -58,7 +59,6 @@ type DatePickerDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    Card,
     CodeSnippet,
     DatePickerComponent,
     DocQualityBadgeComponent,

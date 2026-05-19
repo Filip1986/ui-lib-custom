@@ -6,7 +6,6 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
 import type { IconSize } from 'ui-lib-custom/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { IconButton, Alert } from 'ui-lib-custom';
@@ -20,6 +19,7 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.component';
 import { FormsModule } from '@angular/forms';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 /**
@@ -29,6 +29,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
   selector: 'app-icons-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     TitleCasePipe,
     Icon,
@@ -36,7 +37,6 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     IconButton,
     Alert,
     Button,
-    Card,
     Tabs,
     Tab,
     DocPageLayoutComponent,

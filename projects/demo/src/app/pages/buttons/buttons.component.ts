@@ -20,7 +20,6 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { Panel } from 'ui-lib-custom/panel';
-import { Card } from 'ui-lib-custom/card';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -54,7 +53,6 @@ interface ApiRow {
     TableColumnComponent,
     TableColumnBodyDirective,
     Panel,
-    Card,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,

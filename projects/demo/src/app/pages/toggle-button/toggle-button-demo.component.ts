@@ -8,7 +8,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { ToggleButton } from 'ui-lib-custom/toggle-button';
 import type {
@@ -22,6 +21,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type SnippetKey =
   | 'basic'
   | 'labels'
@@ -41,6 +41,7 @@ type SnippetKey =
   selector: 'app-toggle-button-demo',
   standalone: true,
   imports: [
+    Panel,
     CodeSnippet,
     JsonPipe,
     FormsModule,
@@ -48,7 +49,6 @@ type SnippetKey =
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    Card,
     Button,
     ToggleButton,
     DocTocComponent,

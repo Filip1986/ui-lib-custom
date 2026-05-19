@@ -1,5 +1,4 @@
-﻿<ui-lib-card [showHeader]="true" [showFooter]="false" id="themed-layouts" data-doc-anchor>
-  <div card-header>Themed Layouts</div>
+<ui-lib-panel variant="minimal">
   <p>
     Layout primitives inherit CSS variables. Use scoped themes to preview light/dark surfaces side
     by side.
@@ -148,23 +147,21 @@
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <p class="no-margin">
         Use <code>data-theme</code> scopes or theme services to preview palettes.
       </p>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <div class="doc-demo-group">
         <p>
           Scoped themes are applied via <code>data-theme</code> plus your CSS variables. Layout
           props respond to semantic spacing and inset tokens.
         </p>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
-</ui-lib-card>
+</ui-lib-panel>

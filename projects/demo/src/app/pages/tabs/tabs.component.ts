@@ -22,7 +22,6 @@ import type {
   TabsScrollBehavior,
   TabsMode,
 } from 'ui-lib-custom/tabs';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { Icon } from 'ui-lib-custom/icon';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -43,6 +42,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 interface DemoTab {
   value: TabsValue;
   label: string;
@@ -68,6 +68,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   selector: 'app-tabs-demo',
   standalone: true,
   imports: [
+    Panel,
     CodeSnippet,
     DocPageHeaderComponent,
     CommonModule,
@@ -76,7 +77,6 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     Tab,
     TabLabel,
     TabContent,
-    Card,
     Button,
     Icon,
     UiLibSelect,

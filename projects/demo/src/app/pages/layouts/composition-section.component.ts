@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import type { GridAlign, GridJustify } from 'ui-lib-custom/layout';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
@@ -29,6 +28,7 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for layout composition patterns.
  */
@@ -36,10 +36,10 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-layout-composition-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Container,
     Stack,
     Grid,

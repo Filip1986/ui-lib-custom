@@ -16,7 +16,6 @@ import type {
   SelectButtonVariant,
 } from 'ui-lib-custom/select-button';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { Icon } from 'ui-lib-custom/icon';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
@@ -28,6 +27,7 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for select button variants.
  */
@@ -35,6 +35,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
   selector: 'app-select-buttons',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -42,7 +43,6 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     CodeSnippet,
     Icon,
     Button,
-    Card,
     Stack,
     Inline,
     Grid,

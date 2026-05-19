@@ -25,12 +25,8 @@
   <!-- ── Section 1: Basic ──────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
-    <ui-lib-card
-      [variant]="activeVariant()"
-      subtitle="Default solid button with primary severity."
-      [showFooter]="false"
-    >
-      <span card-header>Basic</span>
+    <p class="demo-section__description">Default solid button with primary severity.</p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row">
         <ui-lib-button [variant]="activeVariant()" (click)="logEvent('Default clicked')">
           Default
@@ -50,18 +46,17 @@
           Secondary
         </ui-lib-button>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 2: All Appearances ──────────────────────────────────────── -->
   <section class="demo-section" id="all-appearances" data-doc-anchor>
     <h2 class="demo-section__title">All Appearances</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>All Appearances</span>
-      <span card-subtitle>
-        Use <code>appearance</code> to pick any of the 12 visual styles. Every appearance composes
-        with any <code>severity</code>.
-      </span>
+    <p class="demo-section__description">
+      Use <code>appearance</code> to pick any of the 12 visual styles. Every appearance composes
+      with any <code>severity</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
         @for (a of appearances; track a) {
           <ui-lib-button
@@ -74,20 +69,19 @@
           </ui-lib-button>
         }
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section: Glass Shadow ──────────────────────────────────────────────── -->
   <section class="demo-section buttons-demo__section--glass-shadow" id="glass-shadow" data-doc-anchor>
     <h2 class="demo-section__title">Glass Shadow</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Glass Shadow</span>
-      <span card-subtitle>
-        A two-layer effect: a vivid gradient shadow offset behind a glassmorphic foreground button.
-        Hover shifts the shadow outward; active press snaps the button toward it.
-        Customize colors via <code>--uilib-button-glass-shadow-from</code> and
-        <code>--uilib-button-glass-shadow-to</code>.
-      </span>
+    <p class="demo-section__description">
+      A two-layer effect: a vivid gradient shadow offset behind a glassmorphic foreground button.
+      Hover shifts the shadow outward; active press snaps the button toward it.
+      Customize colors via <code>--uilib-button-glass-shadow-from</code> and
+      <code>--uilib-button-glass-shadow-to</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__glass-shadow-showcase">
         <!-- Default warm gradient -->
         <div class="buttons-demo__glass-shadow-cell">
@@ -163,20 +157,19 @@
           </ui-lib-button>
         </div>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section: Framed ──────────────────────────────────────────────────────── -->
   <section class="demo-section buttons-demo__section--framed" id="framed" data-doc-anchor>
     <h2 class="demo-section__title">Framed</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Framed</span>
-      <span card-subtitle>
-        A premium geometric design: solid button body framed by a thick outer border, with an
-        L-shaped offset frame that shifts on hover and snaps on press. Customize colors via
-        <code>--uilib-button-framed-bg</code>, <code>--uilib-button-framed-border-color</code>, and
-        <code>--uilib-button-framed-frame-color</code>.
-      </span>
+    <p class="demo-section__description">
+      A premium geometric design: solid button body framed by a thick outer border, with an
+      L-shaped offset frame that shifts on hover and snaps on press. Customize colors via
+      <code>--uilib-button-framed-bg</code>, <code>--uilib-button-framed-border-color</code>, and
+      <code>--uilib-button-framed-frame-color</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__framed-showcase">
         <!-- Default (yellow + white border + yellow frame) -->
         <div class="buttons-demo__framed-cell">
@@ -255,17 +248,16 @@
           </ui-lib-button>
         </div>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 3: Appearance × Severity matrix ─────────────────────────── -->
   <section class="demo-section" id="appearance-severity" data-doc-anchor>
     <h2 class="demo-section__title">Appearance × Severity</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Appearance × Severity</span>
-      <span card-subtitle>
-        Key appearances paired with every severity — demonstrating the two-axis model.
-      </span>
+    <p class="demo-section__description">
+      Key appearances paired with every severity — demonstrating the two-axis model.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__matrix">
         @for (a of matrixAppearances; track a) {
           <div class="buttons-demo__matrix-row">
@@ -285,17 +277,16 @@
           </div>
         }
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 4: Sizes ──────────────────────────────────────────────────── -->
   <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Sizes</span>
-      <span card-subtitle>
-        Three sizes: <code>sm</code>, <code>md</code>, and <code>lg</code>.
-      </span>
+    <p class="demo-section__description">
+      Three sizes: <code>sm</code>, <code>md</code>, and <code>lg</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__size-grid">
         @for (s of sizes; track s) {
           <div>
@@ -306,18 +297,17 @@
           </div>
         }
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 5: Icons ──────────────────────────────────────────────────── -->
   <section class="demo-section" id="icons" data-doc-anchor>
     <h2 class="demo-section__title">Icons</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Icons</span>
-      <span card-subtitle>
-        Add icons on any side with <code>icon</code> and <code>iconPosition</code>. Set
-        <code>iconOnly</code> for square icon-only buttons.
-      </span>
+    <p class="demo-section__description">
+      Add icons on any side with <code>icon</code> and <code>iconPosition</code>. Set
+      <code>iconOnly</code> for square icon-only buttons.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
         <ui-lib-button [variant]="activeVariant()" icon="arrow-left">Back</ui-lib-button>
         <ui-lib-button [variant]="activeVariant()" icon="arrow-right" iconPosition="right">
@@ -336,18 +326,17 @@
           ariaLabel="More options"
         />
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 6: Pill & Raised modifiers ──────────────────────────────── -->
   <section class="demo-section" id="pill-raised" data-doc-anchor>
     <h2 class="demo-section__title">Pill &amp; Raised</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Pill &amp; Raised</span>
-      <span card-subtitle>
-        <code>pill</code> applies a full 999 px border-radius; <code>raised</code> adds a drop
-        shadow. Both are orthogonal modifiers that compose with any appearance or severity.
-      </span>
+    <p class="demo-section__description">
+      <code>pill</code> applies a full 999 px border-radius; <code>raised</code> adds a drop
+      shadow. Both are orthogonal modifiers that compose with any appearance or severity.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
         <ui-lib-button [variant]="activeVariant()" [raised]="true" severity="primary">
           Raised
@@ -378,18 +367,17 @@
           Soft Pill
         </ui-lib-button>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 7: States ────────────────────────────────────────────────── -->
   <section class="demo-section" id="states" data-doc-anchor>
     <h2 class="demo-section__title">States</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>States</span>
-      <span card-subtitle>
-        <code>disabled</code> prevents interaction; <code>loading</code> shows a spinner and blocks
-        clicks.
-      </span>
+    <p class="demo-section__description">
+      <code>disabled</code> prevents interaction; <code>loading</code> shows a spinner and blocks
+      clicks.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row">
         <ui-lib-button [variant]="activeVariant()" [disabled]="true" severity="primary">
           Disabled
@@ -406,18 +394,17 @@
           Loading outline
         </ui-lib-button>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 8: Badges ────────────────────────────────────────────────── -->
   <section class="demo-section" id="badges" data-doc-anchor>
     <h2 class="demo-section__title">Badges</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Badges</span>
-      <span card-subtitle>
-        Use the <code>badge</code> input to overlay a small counter. Control colour with
-        <code>badgeSeverity</code>.
-      </span>
+    <p class="demo-section__description">
+      Use the <code>badge</code> input to overlay a small counter. Control colour with
+      <code>badgeSeverity</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row">
         <ui-lib-button [variant]="activeVariant()" badge="5" severity="primary">
           Notifications
@@ -438,18 +425,17 @@
           ariaLabel="Mail"
         />
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 9: Tactile ───────────────────────────────────────────────── -->
   <section class="demo-section" id="tactile" data-doc-anchor>
     <h2 class="demo-section__title">Tactile</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Tactile</span>
-      <span card-subtitle>
-        <code>appearance="tactile"</code> renders a glossy 3D button with gradient fill, inset
-        highlight, and a press-down active state. Severity controls the colour palette.
-      </span>
+    <p class="demo-section__description">
+      <code>appearance="tactile"</code> renders a glossy 3D button with gradient fill, inset
+      highlight, and a press-down active state. Severity controls the colour palette.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__tactile-grid">
         <ui-lib-button
           appearance="tactile"
@@ -522,18 +508,17 @@
           Contrast
         </ui-lib-button>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 10: Expressive appearances ──────────────────────────────── -->
   <section class="demo-section" id="expressive" data-doc-anchor>
     <h2 class="demo-section__title">Expressive Appearances</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Expressive Appearances</span>
-      <span card-subtitle>
-        <code>elevated</code>, <code>gradient</code>, <code>glass</code>, and <code>neon</code>
-        showcase advanced CSS effects — each driven by the same severity tokens.
-      </span>
+    <p class="demo-section__description">
+      <code>elevated</code>, <code>gradient</code>, <code>glass</code>, and <code>neon</code>
+      showcase advanced CSS effects — each driven by the same severity tokens.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__row buttons-demo__row--wrap">
         <ui-lib-button
           [variant]="activeVariant()"
@@ -623,17 +608,16 @@
           Flat Secondary
         </ui-lib-button>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 11: Button Groups ────────────────────────────────────────── -->
   <section class="demo-section" id="button-groups" data-doc-anchor>
     <h2 class="demo-section__title">Button Groups</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Button Groups</span>
-      <span card-subtitle>
-        Wrap buttons in <code>ui-lib-button-group</code> to join them visually.
-      </span>
+    <p class="demo-section__description">
+      Wrap buttons in <code>ui-lib-button-group</code> to join them visually.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__group-grid">
         <div>
           <p class="buttons-demo__size-label">Horizontal</p>
@@ -670,17 +654,16 @@
           </ui-lib-button-group>
         </div>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 12: Full Width ────────────────────────────────────────────── -->
   <section class="demo-section" id="full-width" data-doc-anchor>
     <h2 class="demo-section__title">Full Width</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Full Width</span>
-      <span card-subtitle>
-        Set <code>[fullWidth]="true"</code> for a button that fills its container.
-      </span>
+    <p class="demo-section__description">
+      Set <code>[fullWidth]="true"</code> for a button that fills its container.
+    </p>
+    <ui-lib-panel variant="minimal">
       <ui-lib-button
         [variant]="activeVariant()"
         [fullWidth]="true"
@@ -689,7 +672,7 @@
       >
         Full Width Button
       </ui-lib-button>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Section 13: Accessibility ──────────────────────────────────────── -->
@@ -701,7 +684,7 @@
     </p>
 
     <div class="buttons-demo__a11y-grid">
-      <ui-lib-panel header="Keyboard navigation" [variant]="activeVariant()">
+      <ui-lib-panel header="Keyboard navigation" variant="minimal">
         <ul class="buttons-demo__a11y-list">
           <li>
             <kbd class="buttons-demo__kbd">Tab</kbd> /
@@ -720,7 +703,7 @@
         </ul>
       </ui-lib-panel>
 
-      <ui-lib-panel header="ARIA attributes" [variant]="activeVariant()">
+      <ui-lib-panel header="ARIA attributes" variant="minimal">
         <ul class="buttons-demo__a11y-list">
           <li>
             <strong>Icon-only buttons</strong> must provide <code>ariaLabel</code> — without visible
@@ -736,7 +719,7 @@
         </ul>
       </ui-lib-panel>
 
-      <ui-lib-panel header="Colour &amp; contrast" [variant]="activeVariant()">
+      <ui-lib-panel header="Colour &amp; contrast" variant="minimal">
         <ul class="buttons-demo__a11y-list">
           <li>
             All built-in severity colours are tested to meet <strong>WCAG 2.1 AA</strong> contrast
@@ -750,7 +733,7 @@
         </ul>
       </ui-lib-panel>
 
-      <ui-lib-panel header="Loading state" [variant]="activeVariant()">
+      <ui-lib-panel header="Loading state" variant="minimal">
         <ul class="buttons-demo__a11y-list">
           <li>
             When <code>[loading]="true"</code>, the button is automatically disabled and
@@ -800,12 +783,11 @@
   <!-- ── Section 14: API Reference ────────────────────────────────────────── -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>API Reference</span>
-      <span card-subtitle>
-        All inputs accepted by <code>ui-lib-button</code>. Import from
-        <code>ui-lib-custom/button</code>.
-      </span>
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-button</code>. Import from
+      <code>ui-lib-custom/button</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__table-wrap">
         <ui-lib-table
           [value]="apiRows"
@@ -832,18 +814,16 @@
           <ui-lib-table-column field="description" header="Description" />
         </ui-lib-table>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->
   <section class="demo-section" id="event-log" data-doc-anchor>
     <h2 class="demo-section__title">Event Log</h2>
-    <ui-lib-card
-      [variant]="activeVariant()"
-      subtitle="Interact with the buttons above to see events."
-      [showFooter]="false"
-    >
-      <span card-header>Event Log</span>
+    <p class="demo-section__description">
+      Interact with the buttons above to see events.
+    </p>
+    <ui-lib-panel variant="minimal">
       <div class="buttons-demo__log-panel">
         @if (eventLog().length === 0) {
           <p class="buttons-demo__log-empty">No events yet.</p>
@@ -858,7 +838,7 @@
           </ul>
         }
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

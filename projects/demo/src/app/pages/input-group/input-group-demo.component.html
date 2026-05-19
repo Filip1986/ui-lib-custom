@@ -11,7 +11,7 @@
       <section id="basic" data-doc-anchor class="example-section">
         <h3>a. Basic</h3>
         <p class="section-text">Leading and trailing addon cells around a single input.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-group>
               <uilib-input-group-addon>$</uilib-input-group-addon>
               <ui-lib-input
@@ -21,7 +21,7 @@
               />
               <uilib-input-group-addon>.00</uilib-input-group-addon>
             </uilib-input-group>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
           [showLineNumbers]="true"
           />
@@ -30,7 +30,7 @@
       <section id="multiple" data-doc-anchor class="example-section">
         <h3>b. Multiple</h3>
         <p class="section-text">One leading addon with two trailing addon cells.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-group>
               <uilib-input-group-addon>$</uilib-input-group-addon>
               <ui-lib-input
@@ -41,7 +41,7 @@
               <uilib-input-group-addon>.00</uilib-input-group-addon>
               <uilib-input-group-addon>USD</uilib-input-group-addon>
             </uilib-input-group>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('multiple')" 
           [showLineNumbers]="true"
           />
@@ -50,7 +50,7 @@
       <section id="button" data-doc-anchor class="example-section">
         <h3>c. Button</h3>
         <p class="section-text">Addon can host a `ui-lib-button` with seamless border stitching.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <uilib-input-group>
               <ui-lib-input
                 placeholder="Search products"
@@ -61,7 +61,7 @@
                 <ui-lib-button appearance="solid" size="sm">Search</ui-lib-button>
               </uilib-input-group-addon>
             </uilib-input-group>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('button')" 
           [showLineNumbers]="true"
           />
@@ -70,7 +70,7 @@
       <section id="checkbox-radio" data-doc-anchor class="example-section">
         <h3>d. Checkbox &amp; Radio</h3>
         <p class="section-text">Grouped controls can include `ui-lib-checkbox` as an inline action cell.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-md">
               <uilib-input-group>
                 <uilib-input-group-addon>
@@ -103,7 +103,7 @@
                 <uilib-input-group-addon>Only</uilib-input-group-addon>
               </uilib-input-group>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('checkboxRadio')" 
           [showLineNumbers]="true"
           />
@@ -112,7 +112,7 @@
       <section id="float-label" data-doc-anchor class="example-section">
         <h3>e. Float Label</h3>
         <p class="section-text">All FloatLabel variants compose directly inside InputGroup.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-md">
               <uilib-input-group>
                 <uilib-input-group-addon>&#64;</uilib-input-group-addon>
@@ -150,7 +150,7 @@
                 </uilib-float-label>
               </uilib-input-group>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" 
           [showLineNumbers]="true"
           />
@@ -159,7 +159,7 @@
       <section id="sizes" data-doc-anchor class="example-section">
         <h3>f. Sizes</h3>
         <p class="section-text">Input size variants inside InputGroup with matching addon edges.</p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="stack-md">
               @for (item of sizeItems; track item.size) {
                 <uilib-input-group>
@@ -173,7 +173,7 @@
                 </uilib-input-group>
               }
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
           [showLineNumbers]="true"
           />

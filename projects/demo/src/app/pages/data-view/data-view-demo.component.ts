@@ -8,7 +8,6 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   DataViewComponent,
@@ -28,6 +27,7 @@ import type { SelectButtonOption } from 'ui-lib-custom/select-button';
 import { DATA_VIEW_DEMO_PRODUCTS } from './data-view-demo.data';
 import type { DemoInventoryStatus, DemoProduct } from './data-view-demo.data';
 
+import { Panel } from 'ui-lib-custom/panel';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 type DataViewDemoSnippetKey =
@@ -55,11 +55,11 @@ type DataViewDemoSnippetKey =
   selector: 'app-data-view-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    Card,
     Button,
     CodeSnippet,
     Stack,

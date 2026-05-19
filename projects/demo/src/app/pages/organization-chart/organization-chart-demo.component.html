@@ -16,9 +16,9 @@
         <code>[value]</code>. Set <code>expanded: true</code> on any node to
         show its children by default.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart [value]="basicNodes()" />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
         [showLineNumbers]="true"
         />
@@ -32,7 +32,7 @@
         every node that has children. Clicking it fires
         <code>(nodeExpand)</code> or <code>(nodeCollapse)</code>.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart
             [value]="collapsibleNodes()"
             [collapsible]="true"
@@ -46,7 +46,7 @@
               }
             </div>
           }
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('collapsible')" 
         [showLineNumbers]="true"
         />
@@ -60,7 +60,7 @@
         <code>[(selection)]</code> to track the selected node. Clicking a
         selected node deselects it.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart
             [value]="singleNodes()"
             selectionMode="single"
@@ -72,7 +72,7 @@
           <p class="demo-selection-status">
             Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
           </p>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('singleSelection')" 
         [showLineNumbers]="true"
         />
@@ -85,7 +85,7 @@
         Set <code>selectionMode="multiple"</code> to allow selecting several
         nodes simultaneously. The <code>selection</code> binding holds an array.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart
             [value]="multipleNodes()"
             selectionMode="multiple"
@@ -97,7 +97,7 @@
           <p class="demo-selection-status">
             Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
           </p>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('multipleSelection')" 
         [showLineNumbers]="true"
         />
@@ -112,7 +112,7 @@
         full <code>OrganizationChartNode</code> including any <code>data</code>
         you attach.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart [value]="customTemplateNodes()">
             <ng-template uiOrgChartNode let-node>
               <div class="demo-person-node">
@@ -122,7 +122,7 @@
               </div>
             </ng-template>
           </ui-lib-organization-chart>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('customTemplate')" 
         [showLineNumbers]="true"
         />
@@ -135,13 +135,13 @@
         Set <code>variant="bootstrap"</code> for a flat, border-based style
         consistent with Bootstrap-themed applications.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart
             [value]="bootstrapNodes()"
             variant="bootstrap"
             [collapsible]="true"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('bootstrap')" 
         [showLineNumbers]="true"
         />
@@ -154,13 +154,13 @@
         <code>variant="minimal"</code> removes all card chrome, using only
         dashed connector lines for a lightweight look.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart
             [value]="minimalNodes()"
             variant="minimal"
             [collapsible]="true"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('minimal')" 
         [showLineNumbers]="true"
         />
@@ -169,7 +169,7 @@
     <!-- 8. Accessibility -->
     <section id="accessibility" data-doc-anchor class="example-section">
       <h3>8. Accessibility</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ul>
           <li>Each node is a <code>button</code> fully keyboard-focusable and activatable.</li>
           <li>Collapsed subtrees are hidden with <code>aria-hidden="true"</code>.</li>
@@ -177,13 +177,13 @@
           <li>Selection uses <code>aria-selected</code> on node buttons.</li>
           <li>Provide a label with <code>[ariaLabel]</code> on the component.</li>
         </ul>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <!-- 9. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
       <h3>9. API Reference</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <div class="doc-stack">
           <div>
             <h4>Inputs</h4>
@@ -220,7 +220,7 @@
             </table>
           </div>
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
   </div>

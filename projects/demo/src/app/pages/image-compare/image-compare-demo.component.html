@@ -17,7 +17,7 @@
           and <code>rightAlt</code>. Drag the handle to reveal more of either image.
           Use <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> keys for keyboard navigation.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
                 leftImage="https://picsum.photos/seed/before1/800/400"
@@ -26,7 +26,7 @@
                 rightAlt="After"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
           [showLineNumbers]="true"
           />
@@ -39,7 +39,7 @@
           Use <code>[(value)]</code> to read and control the slider position (0–100)
           programmatically.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
                 leftImage="https://picsum.photos/seed/before2/800/400"
@@ -50,7 +50,7 @@
               />
             </div>
             <p class="value-text">Position: <strong>{{ position() }}%</strong></p>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('twoWayBinding')" 
           [showLineNumbers]="true"
           />
@@ -63,7 +63,7 @@
           Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>)
           to scale the handle button.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-col">
               <div class="size-item">
                 <span class="size-label">sm</span>
@@ -102,7 +102,7 @@
                 </div>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
           [showLineNumbers]="true"
           />
@@ -116,7 +116,7 @@
           <code>bootstrap</code> (border, tighter radius), and <code>minimal</code>
           (no rounding).
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-col">
               <div class="variant-item">
                 <span class="size-label">material</span>
@@ -155,7 +155,7 @@
                 </div>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
           [showLineNumbers]="true"
           />
@@ -167,7 +167,7 @@
         <p class="section-text">
           Set <code>[disabled]="true"</code> to prevent the user from moving the slider.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
                 leftImage="https://picsum.photos/seed/before9/800/400"
@@ -177,7 +177,7 @@
                 [disabled]="true"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
           [showLineNumbers]="true"
           />
@@ -190,7 +190,7 @@
           Use the <code>ariaLabel</code> input to provide a descriptive accessible label
           for the slider handle.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="demo-compare-wrapper">
               <ui-lib-image-compare
                 leftImage="https://picsum.photos/seed/before10/800/400"
@@ -200,7 +200,7 @@
                 ariaLabel="Compare photo filters"
               />
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('customLabel')" 
           [showLineNumbers]="true"
           />

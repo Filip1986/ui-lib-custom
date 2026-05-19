@@ -16,7 +16,6 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { SelectOption, SelectVariant } from 'ui-lib-custom/select';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
@@ -32,6 +31,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -49,6 +49,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   selector: 'app-select',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     UiLibSelect,
@@ -60,7 +61,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
-    Card,
     VariantComparisonComponent,
     SelectBasicExampleComponent,
     DocTocComponent,

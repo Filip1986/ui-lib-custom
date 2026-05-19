@@ -7,13 +7,13 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { Card } from 'ui-lib-custom/card';
 import { Slider } from 'ui-lib-custom/slider';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type SliderDemoSnippetKey =
   | 'basic'
   | 'range'
@@ -33,13 +33,13 @@ type SliderDemoSnippetKey =
   selector: 'app-slider-demo',
   standalone: true,
   imports: [
+    Panel,
     FormsModule,
     ReactiveFormsModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     CodeSnippet,
-    Card,
     Slider,
     DocTocComponent,
     DocQualityBadgeComponent,

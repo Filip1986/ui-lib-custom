@@ -20,8 +20,7 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
       <p class="lead">
         Manage theme presets and preview common components with the selected theme.
       </p>
@@ -80,18 +79,16 @@
       <app-doc-demo-viewport>
         <div class="doc-demo">
           <div class="preview-grid">
-            <ui-lib-card variant="material" elevation="medium">
-              <div card-header>Buttons</div>
+            <ui-lib-panel variant="minimal">
               <div class="stack">
                 <ui-lib-button color="primary">Primary</ui-lib-button>
                 <ui-lib-button color="secondary">Secondary</ui-lib-button>
                 <ui-lib-button color="success">Success</ui-lib-button>
                 <ui-lib-button color="danger">Danger</ui-lib-button>
               </div>
-            </ui-lib-card>
+            </ui-lib-panel>
 
-            <ui-lib-card variant="material" elevation="medium">
-              <div card-header>Inputs</div>
+            <ui-lib-panel variant="minimal">
               <div class="stack">
                 <ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>
                 <ui-lib-input
@@ -101,25 +98,23 @@
                   placeholder="••••••"
                 ></ui-lib-input>
               </div>
-            </ui-lib-card>
+            </ui-lib-panel>
 
-            <ui-lib-card variant="material" elevation="medium">
-              <div card-header>Select</div>
+            <ui-lib-panel variant="minimal">
               <ui-lib-select
                 label="Status"
                 [options]="sampleOptions"
                 [searchable]="true"
               ></ui-lib-select>
-            </ui-lib-card>
+            </ui-lib-panel>
           </div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <table class="doc-properties">
         <thead>
           <tr>
@@ -156,24 +151,22 @@
           </tr>
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         title="Theme persistence"
         [code]="snippets.usage"
         [showLineNumbers]="true"
       ></ui-lib-code-snippet>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'local-install') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="local-install" data-doc-anchor>
-      <div card-header>Use this library in another project</div>
+    <ui-lib-panel variant="minimal">
       <p class="lead">
         Three ways to consume <code>ui-lib-custom</code> locally before publishing to a registry.
       </p>
@@ -260,7 +253,7 @@
           [showLineNumbers]="true"
         ></ui-lib-code-snippet>
       </section>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <div class="demo-page-rail" docRail>

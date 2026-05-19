@@ -15,13 +15,13 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { Card } from 'ui-lib-custom/card';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Button } from 'ui-lib-custom/button';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 interface DemoOption {
   label: string;
   value: string;
@@ -42,13 +42,13 @@ type FloatLabelDemoSnippetKey =
   selector: 'app-float-label-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     UiLibInput,
     UiLibSelect,
     FloatLabelComponent,

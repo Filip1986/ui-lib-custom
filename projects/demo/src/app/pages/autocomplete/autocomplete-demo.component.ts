@@ -12,7 +12,6 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
@@ -35,6 +34,7 @@ import type { DemoCountry, DemoGroup } from './autocomplete-demo.data';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type AutoCompleteDemoSnippetKey =
   | 'basic'
   | 'objects'
@@ -60,13 +60,13 @@ type AutoCompleteDemoSnippetKey =
   selector: 'app-autocomplete-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    Card,
     Button,
     CodeSnippet,
     UiLibAutoComplete,

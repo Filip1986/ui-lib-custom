@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { FormsModule } from '@angular/forms';
@@ -20,6 +19,7 @@ import { ThemedLayoutsSectionComponent } from './themed-layouts-section.componen
 import { LayoutExamplesSectionComponent } from './examples-section.component';
 import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page aggregating layout primitives and sections.
  */
@@ -27,7 +27,7 @@ import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example
   selector: 'app-layouts',
   standalone: true,
   imports: [
-    Card,
+    Panel,
     Button,
     CodeSnippet,
     FormsModule,

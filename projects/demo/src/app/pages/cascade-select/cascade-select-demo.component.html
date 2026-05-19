@@ -10,7 +10,7 @@
 	<div class="examples">
 	  <section id="basic" data-doc-anchor class="example-section">
 		<h3>1. Basic</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<ui-lib-cascade-select
 			  [(ngModel)]="basicCode"
 			  [options]="countries"
@@ -20,7 +20,7 @@
 			  optionValue="code"
 			  placeholder="Select city"
 			/>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('basic')" 
     [showLineNumbers]="true"
     />
@@ -28,7 +28,7 @@
 
 	  <section id="template" data-doc-anchor class="example-section">
 		<h3>2. Template</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<ui-lib-cascade-select
 			  [(ngModel)]="templatedCode"
 			  [options]="countries"
@@ -65,7 +65,7 @@
 				<small>{{ countries.length }} countries</small>
 			  </ng-template>
 			</ui-lib-cascade-select>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('template')" 
     [showLineNumbers]="true"
     />
@@ -73,7 +73,7 @@
 
 	  <section id="loading" data-doc-anchor class="example-section">
 		<h3>3. Loading</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<div class="form-stack">
 			  <ui-lib-button type="button" color="secondary" (click)="toggleLoading()">
 				Toggle Loading ({{ loading ? 'On' : 'Off' }})
@@ -92,7 +92,7 @@
 				</ng-template>
 			  </ui-lib-cascade-select>
 			</div>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('loading')" 
     [showLineNumbers]="true"
     />
@@ -100,7 +100,7 @@
 
 	  <section id="clear" data-doc-anchor class="example-section">
 		<h3>4. Clear Icon</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<ui-lib-cascade-select
 			  [(ngModel)]="clearableCode"
 			  [options]="countries"
@@ -110,7 +110,7 @@
 			  optionLabel="cname"
 			  optionValue="code"
 			/>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('clear')" 
     [showLineNumbers]="true"
     />
@@ -118,7 +118,7 @@
 
 	  <section id="sizes" data-doc-anchor class="example-section">
 		<h3>5. Sizes</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<div class="row-3">
 			  <ui-lib-cascade-select
 				[(ngModel)]="smallCode"
@@ -151,7 +151,7 @@
 				placeholder="Large"
 			  />
 			</div>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
     [showLineNumbers]="true"
     />
@@ -159,7 +159,7 @@
 
 	  <section id="filled" data-doc-anchor class="example-section">
 		<h3>6. Filled</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<ui-lib-cascade-select
 			  [(ngModel)]="filledCode"
 			  [options]="countries"
@@ -171,7 +171,7 @@
 			  optionValue="code"
 			  placeholder="Filled variant"
 			/>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('filled')" 
     [showLineNumbers]="true"
     />
@@ -179,7 +179,7 @@
 
 	  <section id="fluid" data-doc-anchor class="example-section">
 		<h3>7. Fluid</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<div class="narrow-parent">
 			  <ui-lib-cascade-select
 				[(ngModel)]="fluidCode"
@@ -192,7 +192,7 @@
 				placeholder="Fluid in container"
 			  />
 			</div>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('fluid')" 
     [showLineNumbers]="true"
     />
@@ -200,7 +200,7 @@
 
 	  <section id="states" data-doc-anchor class="example-section">
 		<h3>8. States</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<div class="row-2">
 			  <ui-lib-cascade-select
 				[(ngModel)]="disabledCode"
@@ -223,7 +223,7 @@
 				placeholder="Invalid"
 			  />
 			</div>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('states')" 
     [showLineNumbers]="true"
     />
@@ -231,7 +231,7 @@
 
 	  <section id="forms" data-doc-anchor class="example-section">
 		<h3>9. Forms (Template-driven)</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<form #demoForm="ngForm" (ngSubmit)="submitTemplateDriven()" class="form-stack">
 			  <ui-lib-cascade-select
 				name="city"
@@ -251,7 +251,7 @@
 				<p class="error-text">City is required.</p>
 			  }
 			</form>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('forms')" 
     [showLineNumbers]="true"
     />
@@ -259,7 +259,7 @@
 
 	  <section id="reactive-forms" data-doc-anchor class="example-section">
 		<h3>10. Reactive Forms</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
 			  <ui-lib-cascade-select
 				formControlName="city"
@@ -276,7 +276,7 @@
 				<p class="error-text">City is required.</p>
 			  }
 			</form>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
     [showLineNumbers]="true"
     />
@@ -284,7 +284,7 @@
 
 	  <section id="variants" data-doc-anchor class="example-section">
 		<h3>11. Variants</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<div class="row-3">
 			  <ui-lib-cascade-select
 				[(ngModel)]="variantModels['material']"
@@ -317,7 +317,7 @@
 				placeholder="Minimal"
 			  />
 			</div>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('variants')" 
     [showLineNumbers]="true"
     />
@@ -325,7 +325,7 @@
 
 	  <section id="clipping" data-doc-anchor class="example-section">
 		<h3>12. Clipping Container (Overflow Hidden)</h3>
-		  <ui-lib-card>
+    <ui-lib-panel variant="minimal">
 			<div class="clipping-card">
 			  <ui-lib-cascade-select
 				[(ngModel)]="clippingCode"
@@ -340,7 +340,7 @@
 				Default behavior uses <code>appendTo='body'</code>, so the panel is not clipped by this container.
 			  </p>
 			</div>
-		  </ui-lib-card>
+		  </ui-lib-panel>
 		<ui-lib-code-snippet language="html" [code]="snippet('clipping')" 
     [showLineNumbers]="true"
     />

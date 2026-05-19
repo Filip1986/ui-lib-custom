@@ -34,11 +34,9 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>
-          <div class="card-title">Appearance</div>
+      <ui-lib-panel variant="minimal">
           <p class="card-description">Variant and size</p>
-        </div>
+
         <div class="control-grid">
           <div class="control">
             <label>Variant</label>
@@ -91,11 +89,10 @@
             </div>
           </div>
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
       <p>Adjust the controls above to see the accordion update live.</p>
 
       <app-doc-demo-viewport>
@@ -109,12 +106,11 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'variants') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
-      <div card-header>Variant comparison</div>
+    <ui-lib-panel variant="minimal">
       <p>Compare accordion variants with the same FAQ content.</p>
 
       <app-variant-comparison>
@@ -148,12 +144,11 @@
           </ui-lib-accordion>
         </div>
       </app-variant-comparison>
-    </ui-lib-card>
+    </ui-lib-panel>
 
     <div class="demo-grid" id="variants" data-doc-anchor>
       @for (variant of variantExamples; track variant) {
-        <ui-lib-card [showHeader]="true" [showFooter]="false">
-          <div card-header>{{ variant | titlecase }} variant</div>
+        <ui-lib-panel variant="minimal">
           <app-doc-demo-viewport>
             <div class="doc-demo">
               <ui-lib-accordion [variant]="variant">
@@ -165,7 +160,7 @@
               </ui-lib-accordion>
             </div>
           </app-doc-demo-viewport>
-        </ui-lib-card>
+        </ui-lib-panel>
       }
     </div>
   }
@@ -173,8 +168,7 @@
   @if (activeTab() === 'sizes') {
     <div class="demo-grid" id="sizes" data-doc-anchor>
       @for (size of sizeExamples; track size) {
-        <ui-lib-card [showHeader]="true" [showFooter]="false">
-          <div card-header>Size: {{ size }}</div>
+        <ui-lib-panel variant="minimal">
           <app-doc-demo-viewport>
             <div class="doc-demo">
               <ui-lib-accordion [size]="size">
@@ -186,11 +180,10 @@
               </ui-lib-accordion>
             </div>
           </app-doc-demo-viewport>
-        </ui-lib-card>
+        </ui-lib-panel>
       }
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Side-by-side size comparison</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="size-comparison">
             <div class="size-column">
@@ -225,13 +218,12 @@
             </div>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
   }
 
   @if (activeTab() === 'controlled') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="controlled" data-doc-anchor>
-      <div card-header>Controlled mode</div>
+    <ui-lib-panel variant="minimal">
       <p>
         Manage expanded panels externally via <code>expandedPanels</code> and respond to
         <code>expandedChange</code>.
@@ -264,12 +256,11 @@
       <ui-lib-code-snippet [code]="snippets.controlled" language="typescript"
         [showLineNumbers]="true"
         />
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'custom-headers') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="custom-headers" data-doc-anchor>
-      <div card-header>Custom headers</div>
+    <ui-lib-panel variant="minimal">
       <p>Use the <code>accordionHeader</code> directive for custom header content.</p>
       <app-doc-demo-viewport>
         <div class="doc-demo">
@@ -289,12 +280,11 @@
       <ui-lib-code-snippet [code]="snippets.customHeader" language="html"
         [showLineNumbers]="true"
         />
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'disabled') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="disabled" data-doc-anchor>
-      <div card-header>Disabled panels</div>
+    <ui-lib-panel variant="minimal">
       <p>Disabled panels cannot be toggled and are skipped by keyboard navigation.</p>
       <app-doc-demo-viewport>
         <div class="doc-demo">
@@ -311,12 +301,11 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'icons') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="icons" data-doc-anchor>
-      <div card-header>Icon customization</div>
+    <ui-lib-panel variant="minimal">
       <p>Swap icon names, move icon placement, or hide the icon entirely.</p>
       <app-doc-demo-viewport>
         <div class="doc-demo">
@@ -362,13 +351,12 @@
       <ui-lib-code-snippet [code]="iconSnippets.iconPosition" language="html"
         [showLineNumbers]="true"
         />
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'toggle-icons') {
     <div class="demo-grid" id="toggle-icons" data-doc-anchor>
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Custom toggle icon template</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-accordion>
@@ -386,10 +374,9 @@
         <ui-lib-code-snippet [code]="iconSnippets.toggleTemplate" language="html"
           [showLineNumbers]="true"
           />
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Animated toggle icon</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-accordion>
@@ -411,10 +398,9 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Toggle icon with badge</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-accordion>
@@ -430,14 +416,13 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
   }
 
   @if (activeTab() === 'animations') {
     <div class="demo-grid" id="animations" data-doc-anchor>
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Default animation</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-accordion>
@@ -449,10 +434,9 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Reduced motion (simulated)</div>
+      <ui-lib-panel variant="minimal">
         <ui-lib-button
           size="sm"
           variant="minimal"
@@ -472,10 +456,9 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Custom transition speeds</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="animation-speed-grid">
             <div class="doc-demo demo-fast-motion">
@@ -500,13 +483,12 @@
             </div>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <div class="api-table">
         <div class="api-row api-header">
           <div>Name</div>
@@ -552,12 +534,11 @@
       <ui-lib-code-snippet [code]="snippets.basic" language="html"
         [showLineNumbers]="true"
         />
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
+    <ui-lib-panel variant="minimal">
       <ul class="a11y-list">
         <li>Header buttons use <code>role="button"</code> with <code>aria-expanded</code>.</li>
         <li>
@@ -571,7 +552,7 @@
           collapsed.
         </li>
       </ul>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->

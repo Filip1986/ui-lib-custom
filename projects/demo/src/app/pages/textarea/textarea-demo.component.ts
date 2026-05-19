@@ -14,12 +14,12 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { UiLibTextarea } from 'ui-lib-custom/textarea';
 import type { TextareaChangeEvent } from 'ui-lib-custom/textarea';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TextareaDemoSnippetKey =
   | 'basic'
   | 'autoResize'
@@ -39,13 +39,13 @@ type TextareaDemoSnippetKey =
   selector: 'app-textarea-demo',
   standalone: true,
   imports: [
+    Panel,
     CodeSnippet,
     FormsModule,
     ReactiveFormsModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    Card,
     Button,
     UiLibTextarea,
     DocTocComponent,

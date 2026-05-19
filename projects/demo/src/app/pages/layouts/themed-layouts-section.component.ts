@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { Container, Grid, Stack, Inline } from 'ui-lib-custom/layout';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -31,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for themed layout examples.
  */
@@ -38,10 +38,10 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-layout-themed-layouts-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Container,
     Stack,
     Grid,

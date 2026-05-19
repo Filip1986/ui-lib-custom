@@ -8,7 +8,6 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   BarChartComponent,
@@ -22,6 +21,7 @@ import type { ChartClickEvent, ChartData, ChartOptions } from 'ui-lib-custom/cha
 import type { TooltipItem } from 'chart.js';
 import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 
+import { Panel } from 'ui-lib-custom/panel';
 type ChartDemoSnippetKey =
   | 'basicBar'
   | 'basicLine'
@@ -68,11 +68,11 @@ type ThemeCssVariables = {
   selector: 'app-chart-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    Card,
     Button,
     CodeSnippet,
     Stack,

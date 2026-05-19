@@ -9,13 +9,13 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { Card } from 'ui-lib-custom/card';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { Icon } from 'ui-lib-custom/icon';
 import { IconFieldComponent, InputIconComponent } from 'ui-lib-custom/icon-field';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { UiLibInput } from 'ui-lib-custom/input';
 
+import { Panel } from 'ui-lib-custom/panel';
 type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | 'variants';
 
 /**
@@ -25,12 +25,12 @@ type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | '
   selector: 'app-icon-field-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     UiLibInput,
     Icon,
     CodeSnippet,

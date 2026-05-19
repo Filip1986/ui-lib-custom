@@ -13,12 +13,12 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { InputOtpComponent } from 'ui-lib-custom/input-otp';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type InputOtpDemoSnippetKey =
   | 'basic'
   | 'mask'
@@ -37,12 +37,12 @@ type InputOtpDemoSnippetKey =
   selector: 'app-input-otp-demo',
   standalone: true,
   imports: [
+    Panel,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     Button,
     CodeSnippet,
     InputOtpComponent,

@@ -11,8 +11,7 @@
     />
 
   <div class="viewport-control-stack">
-    <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Viewport width</div>
+    <ui-lib-panel variant="minimal">
       <div class="viewport-controls">
         <div class="preset-buttons">
           @for (preset of viewportPresets; track preset.key) {
@@ -41,10 +40,9 @@
           >
         </div>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
 
-    <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Density</div>
+    <ui-lib-panel variant="minimal">
       <div class="density-controls">
         <ui-lib-button
           size="sm"
@@ -68,7 +66,7 @@
           >Compact</ui-lib-button
         >
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   </div>
 
   <app-layout-semantic-spacing-section />

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Inline } from 'ui-lib-custom/layout';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
@@ -18,6 +17,7 @@ import { Router } from '@angular/router';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
 /**
@@ -27,11 +27,11 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   selector: 'app-themes',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Tabs,
     Tab,
-    Card,
     Button,
     Badge,
     Inline,

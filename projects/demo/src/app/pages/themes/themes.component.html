@@ -21,8 +21,7 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
       <p class="lead">Save or load themes and preview light/dark panels side by side.</p>
 
       <div class="theme-actions">
@@ -66,10 +65,9 @@
                   <ui-lib-badge color="warning" variant="outline">Warning</ui-lib-badge>
                 </ui-lib-inline>
 
-                <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
-                  <div card-header>Light Surface</div>
+                <ui-lib-panel variant="minimal">
                   <p>Cards, buttons, and badges inherit CSS variables for this theme.</p>
-                </ui-lib-card>
+                </ui-lib-panel>
               </div>
             </div>
 
@@ -88,21 +86,19 @@
                   <ui-lib-badge color="warning" variant="outline">Warning</ui-lib-badge>
                 </ui-lib-inline>
 
-                <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
-                  <div card-header>Dark Surface</div>
+                <ui-lib-panel variant="minimal">
                   <p>Scoped <code>data-theme="dark"</code> overrides CSS vars for this panel.</p>
-                </ui-lib-card>
+                </ui-lib-panel>
               </div>
             </div>
           </div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <table class="doc-properties">
         <thead>
           <tr>
@@ -129,19 +125,18 @@
           </tr>
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         title="Toggle data-theme"
         [code]="snippets.usage"
         [showLineNumbers]="true"
       ></ui-lib-code-snippet>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <div class="demo-page-rail" docRail>

@@ -14,25 +14,25 @@
   <div class="examples">
     <section id="basic">
       <h3>Basic</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="multiple">
       <h3>Multiple Selection</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-select-button
           [options]="multipleOptions"
           [multiple]="true"
           [(value)]="multipleValue"
         />
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="custom-template">
       <h3>Custom Template</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-select-button [options]="justifyOptions" [(value)]="justifyValue">
           <ng-template #item let-option>
             <ui-lib-inline align="center" [gap]="2">
@@ -41,44 +41,44 @@
             </ui-lib-inline>
           </ng-template>
         </ui-lib-select-button>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="sizes">
       <h3>Sizes</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
           @for (size of sizes; track size) {
             <ui-lib-select-button [options]="sizeOptions" [size]="size" [(value)]="sizeValue" />
           }
         </ui-lib-stack>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="fluid">
       <h3>Fluid</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-select-button [options]="fluidOptions" [fluid]="true" [(value)]="fluidValue" />
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="disabled">
       <h3>Disabled</h3>
       <ui-lib-grid minColumnWidth="260px" [spacing]="4">
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Component Disabled</p>
           <ui-lib-select-button [options]="basicOptions" [disabled]="true" [(value)]="basicValue" />
-        </ui-lib-card>
-        <ui-lib-card>
+        </ui-lib-panel>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Per-Option Disabled</p>
           <ui-lib-select-button [options]="disabledOptions" [(value)]="disabledValue" />
-        </ui-lib-card>
+        </ui-lib-panel>
       </ui-lib-grid>
     </section>
 
     <section id="invalid">
       <h3>Invalid State</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="2">
           <ui-lib-select-button
             [options]="invalidOptions"
@@ -90,12 +90,12 @@
             <span class="hint">Select a value to clear invalid state.</span>
           </ui-lib-inline>
         </ui-lib-stack>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="variants">
       <h3>Variants</h3>
-      <ui-lib-card class="variant-compare-card">
+      <ui-lib-panel variant="minimal">
         <app-variant-comparison>
           <div material>
             <ui-lib-select-button
@@ -121,57 +121,57 @@
             />
           </div>
         </app-variant-comparison>
-      </ui-lib-card>
+      </ui-lib-panel>
 
       <ui-lib-grid minColumnWidth="260px" [spacing]="4">
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Material</p>
           <ui-lib-select-button
             [options]="variantOptions"
             variant="material"
             [(value)]="materialValue"
           />
-        </ui-lib-card>
-        <ui-lib-card>
+        </ui-lib-panel>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Bootstrap</p>
           <ui-lib-select-button
             [options]="variantOptions"
             variant="bootstrap"
             [(value)]="bootstrapValue"
           />
-        </ui-lib-card>
-        <ui-lib-card>
+        </ui-lib-panel>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Minimal</p>
           <ui-lib-select-button
             [options]="variantOptions"
             variant="minimal"
             [(value)]="minimalValue"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       </ui-lib-grid>
     </section>
 
     <section id="forms">
       <h3>Forms Integration</h3>
       <ui-lib-grid minColumnWidth="260px" [spacing]="4">
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Template-driven</p>
           <ui-lib-select-button [options]="formOptions" [(ngModel)]="templateValue" />
           <p class="hint">Value: {{ templateValue }}</p>
-        </ui-lib-card>
-        <ui-lib-card>
+        </ui-lib-panel>
+        <ui-lib-panel variant="minimal">
           <p class="section-label">Reactive</p>
           <form [formGroup]="form">
             <ui-lib-select-button [options]="formOptions" formControlName="selection" />
           </form>
           <p class="hint">Value: {{ form.controls.selection.value }}</p>
-        </ui-lib-card>
+        </ui-lib-panel>
       </ui-lib-grid>
     </section>
 
     <section id="api">
       <h3>API Reference</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <table class="api-table">
           <thead>
             <tr>
@@ -232,12 +232,12 @@
             </tr>
           </tbody>
         </table>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="accessibility">
       <h3>Accessibility</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ul class="doc-list">
           <li>Use clear labels for each option and avoid icon-only buttons without text.</li>
           <li>
@@ -245,7 +245,7 @@
           </li>
           <li>For multi-select, announce changes in selection count where possible.</li>
         </ul>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
   </div>
 

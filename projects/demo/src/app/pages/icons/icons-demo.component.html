@@ -26,8 +26,7 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
       <p class="lead">
         Preview icon sizes, variants, buttons, alerts, and search the full icon set.
       </p>
@@ -132,12 +131,11 @@
           </section>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <table class="doc-properties">
         <thead>
           <tr>
@@ -169,29 +167,27 @@
           </tr>
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         filename="Basic icon" [code]="snippets.usage"
         [showLineNumbers]="true"
         ></ui-lib-code-snippet>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
+    <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li>Decorative icons stay hidden with <code>aria-hidden="true"</code> by default.</li>
         <li>Use <code>ariaLabel</code> only when the icon itself must be announced as an image.</li>
         <li>For clickable actions, put the accessible name on the button or link rather than the icon name.</li>
       </ul>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <app-doc-quality-badge [audit]="qualityAudit" />

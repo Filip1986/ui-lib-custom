@@ -6,12 +6,12 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { Card } from 'ui-lib-custom/card';
 import { KnobComponent } from 'ui-lib-custom/knob';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type KnobDemoSnippetKey =
   | 'basic'
   | 'sizes'
@@ -30,11 +30,11 @@ type KnobDemoSnippetKey =
   selector: 'app-knob-demo',
   standalone: true,
   imports: [
+    Panel,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    Card,
     CodeSnippet,
     KnobComponent,
     DocTocComponent,

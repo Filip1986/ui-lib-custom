@@ -10,7 +10,6 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToggleSwitch } from 'ui-lib-custom/toggle-switch';
 import { Button } from 'ui-lib-custom/button';
 import type { ToggleSwitchSize, ToggleSwitchVariant } from 'ui-lib-custom/toggle-switch';
-import { Card } from 'ui-lib-custom/card';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -20,6 +19,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for the ToggleSwitch component.
  */
@@ -27,8 +27,8 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
   selector: 'app-toggle-switch-demo',
   standalone: true,
   imports: [
+    Panel,
     ToggleSwitch,
-    Card,
     FormsModule,
     ReactiveFormsModule,
     Button,

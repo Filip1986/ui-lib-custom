@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -25,6 +24,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for dark mode theming.
  */
@@ -32,12 +32,12 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-dark-mode',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     Accordion,
     AccordionPanel,
     Badge,
     Button,
-    Card,
     Checkbox,
     Tabs,
     Tab,

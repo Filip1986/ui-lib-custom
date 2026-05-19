@@ -21,7 +21,6 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { CheckboxAppearance, CheckboxSize, CheckboxVariant } from 'ui-lib-custom/checkbox';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -32,6 +31,7 @@ import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-exa
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };
@@ -43,11 +43,11 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
   selector: 'app-checkboxes',
   standalone: true,
   imports: [
+    Panel,
     Checkbox,
     CodeSnippet,
     Tabs,
     Tab,
-    Card,
     Button,
     DocPageHeaderComponent,
     DocPageLayoutComponent,

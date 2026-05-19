@@ -12,7 +12,6 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputNumberComponent } from 'ui-lib-custom/input-number';
@@ -20,6 +19,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type InputNumberSnippetKey =
   | 'numerals'
   | 'decimal'
@@ -46,12 +46,12 @@ type InputNumberSnippetKey =
   selector: 'app-input-number-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
-    Card,
     Button,
     CodeSnippet,
     FloatLabelComponent,

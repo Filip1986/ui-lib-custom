@@ -28,11 +28,9 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>
-          <div class="card-title">Style</div>
+      <ui-lib-panel variant="minimal">
           <p class="card-description">Variant, size, orientation, alignment.</p>
-        </div>
+
         <div class="control-grid">
           <div class="control">
             <label>Variant</label>
@@ -102,13 +100,11 @@
             </div>
           </div>
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>
-          <div class="card-title">Behavior</div>
+      <ui-lib-panel variant="minimal">
           <p class="card-description">Closable, lazy rendering, disabled.</p>
-        </div>
+
         <div class="control-grid small">
           <div class="control">
             <label>Lazy rendering</label>
@@ -155,11 +151,10 @@
             />
           </div>
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
       <p>Adjust the controls above to see the tabs update live.</p>
 
       <app-doc-demo-viewport>
@@ -189,11 +184,10 @@
           </ui-lib-tabs>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
 
     <div class="demo-grid">
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Basic tabs</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs>
@@ -203,10 +197,9 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Scrollable tabs</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo scrollable-demo">
             <ui-lib-tabs scrollBehavior="arrows">
@@ -218,10 +211,9 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Tab menu</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs
@@ -240,10 +232,9 @@
             <div class="doc-note">Selected route: {{ navActive() }}</div>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Icon tabs</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs variant="material">
@@ -258,10 +249,9 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Icon + text (stacked)</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs variant="material" iconPosition="top">
@@ -276,10 +266,9 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Vertical tabs</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs orientation="vertical" size="sm">
@@ -291,10 +280,9 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Closable tabs</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs [closable]="true" (tabClose)="onCloseTab($event)">
@@ -313,10 +301,9 @@
             >
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Disabled tabs</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs>
@@ -326,10 +313,9 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Lazy loading</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs lazy="keep-alive">
@@ -341,35 +327,33 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Per-tab lazy</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs>
               <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
               <ui-lib-tab label="Lazy keep-alive" lazy="keep-alive">
                 <ng-template uiLibTabContent>
-                  <ui-lib-card [showHeader]="false" [showFooter]="false">
+                  <ui-lib-panel variant="minimal">
                     <div>Deferred content (cached once activated).</div>
-                  </ui-lib-card>
+                  </ui-lib-panel>
                 </ng-template>
               </ui-lib-tab>
               <ui-lib-tab label="Lazy unmount" lazy="unmount">
                 <ng-template uiLibTabContent>
-                  <ui-lib-card [showHeader]="false" [showFooter]="false">
+                  <ui-lib-panel variant="minimal">
                     <div>Deferred content (destroyed on blur).</div>
-                  </ui-lib-card>
+                  </ui-lib-panel>
                 </ng-template>
               </ui-lib-tab>
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card [showHeader]="true" [showFooter]="false">
-        <div card-header>Controlled mode</div>
+      <ui-lib-panel variant="minimal">
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <div class="control-row">
@@ -395,13 +379,12 @@
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
   }
 
   @if (activeTab() === 'variants') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
-      <div card-header>Variants</div>
+    <ui-lib-panel variant="minimal">
       <p>Compare the three tab variants with a shared tab set.</p>
 
       <app-variant-comparison>
@@ -429,12 +412,11 @@
           </ui-lib-tabs>
         </div>
       </app-variant-comparison>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <table class="doc-properties">
         <thead>
           <tr>
@@ -537,12 +519,11 @@
           </tr>
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         filename="Basic" [code]="snippets.basic"
@@ -583,12 +564,11 @@
         filename="Per-tab lazy" [code]="snippets.perTabLazy"
         [showLineNumbers]="true"
         />
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
+    <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li>
           Uses <code>role="tablist"</code>, <code>role="tab"</code>, and
@@ -608,11 +588,10 @@
           <code>aria-label</code> for icon-only tabs.
         </li>
       </ul>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false">
-    <div card-header>RTL Tabs</div>
+  <ui-lib-panel variant="minimal">
     <app-doc-demo-viewport>
       <section class="doc-demo rtl-demo" dir="rtl">
         <h3>RTL Mode</h3>
@@ -623,7 +602,7 @@
         </ui-lib-tabs>
       </section>
     </app-doc-demo-viewport>
-  </ui-lib-card>
+  </ui-lib-panel>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
   <section class="demo-section" id="keyboard-navigation" data-doc-anchor>

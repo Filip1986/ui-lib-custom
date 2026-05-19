@@ -9,7 +9,7 @@
   <div class="examples">
     <section id="basic" data-doc-anchor class="example-section">
       <h3>1. Basic</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="basicValue"
             [suggestions]="basicSuggestions"
@@ -17,7 +17,7 @@
             placeholder="Search framework"
             (completeMethod)="onBasicComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
         [showLineNumbers]="true"
         />
@@ -25,7 +25,7 @@
 
     <section id="objects" data-doc-anchor class="example-section">
       <h3>2. Objects</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="objectValue"
             [suggestions]="countrySuggestions"
@@ -34,7 +34,7 @@
             placeholder="Select country"
             (completeMethod)="onCountryComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('objects')" 
         [showLineNumbers]="true"
         />
@@ -42,7 +42,7 @@
 
     <section id="dropdown" data-doc-anchor class="example-section">
       <h3>3. Dropdown</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="dropdownValue"
             [suggestions]="countrySuggestions"
@@ -52,7 +52,7 @@
             dropdownMode="current"
             (completeMethod)="onCountryComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('dropdown')" 
         [showLineNumbers]="true"
         />
@@ -60,7 +60,7 @@
 
     <section id="force-selection" data-doc-anchor class="example-section">
       <h3>4. Force Selection</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="forceSelectionValue"
             [suggestions]="countrySuggestions"
@@ -71,7 +71,7 @@
             placeholder="Must match an option"
             (completeMethod)="onCountryComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('forceSelection')" 
         [showLineNumbers]="true"
         />
@@ -79,7 +79,7 @@
 
     <section id="multiple" data-doc-anchor class="example-section">
       <h3>5. Multiple</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="multipleValue"
             [suggestions]="countrySuggestions"
@@ -89,7 +89,7 @@
             placeholder="Select multiple countries"
             (completeMethod)="onCountryComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('multiple')" 
         [showLineNumbers]="true"
         />
@@ -97,7 +97,7 @@
 
     <section id="multiple-advanced" data-doc-anchor class="example-section">
       <h3>6. Multiple Advanced</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="multipleAdvancedValue"
             [suggestions]="countrySuggestions"
@@ -116,7 +116,7 @@
               <span class="chip-template">Chip: {{ code }}</span>
             </ng-template>
           </ui-lib-autocomplete>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('multipleAdvanced')" 
         [showLineNumbers]="true"
         />
@@ -124,7 +124,7 @@
 
     <section id="grouped" data-doc-anchor class="example-section">
       <h3>7. Grouped</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="groupedValue"
             [suggestions]="groupedCitySuggestions"
@@ -140,7 +140,7 @@
               <strong>{{ groupData.label }}</strong>
             </ng-template>
           </ui-lib-autocomplete>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('grouped')" 
         [showLineNumbers]="true"
         />
@@ -148,7 +148,7 @@
 
     <section id="virtual-scroll" data-doc-anchor class="example-section">
       <h3>8. Virtual Scroll</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <p class="example-note">Dataset size: 10,000 items</p>
           <ui-lib-autocomplete
             [(ngModel)]="virtualValue"
@@ -161,7 +161,7 @@
             placeholder="Search item"
             (completeMethod)="onVirtualComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('virtual')" 
         [showLineNumbers]="true"
         />
@@ -169,7 +169,7 @@
 
     <section id="templates" data-doc-anchor class="example-section">
       <h3>9. Templates</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="templateValue"
             [suggestions]="countrySuggestions"
@@ -199,7 +199,7 @@
               <em>No matches found.</em>
             </ng-template>
           </ui-lib-autocomplete>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('templates')" 
         [showLineNumbers]="true"
         />
@@ -207,7 +207,7 @@
 
     <section id="sizes" data-doc-anchor class="example-section">
       <h3>10. Sizes</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="row-3">
             <ui-lib-autocomplete
               [(ngModel)]="smallValue"
@@ -231,7 +231,7 @@
               (completeMethod)="onBasicComplete($event)"
             />
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
         [showLineNumbers]="true"
         />
@@ -239,7 +239,7 @@
 
     <section id="filled" data-doc-anchor class="example-section">
       <h3>11. Filled</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-autocomplete
             [(ngModel)]="filledValue"
             [suggestions]="basicSuggestions"
@@ -248,7 +248,7 @@
             placeholder="Filled style"
             (completeMethod)="onBasicComplete($event)"
           />
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
         [showLineNumbers]="true"
         />
@@ -256,7 +256,7 @@
 
     <section id="disabled-invalid" data-doc-anchor class="example-section">
       <h3>12. Disabled & Invalid</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="row-2">
             <ui-lib-autocomplete
               [(ngModel)]="disabledValue"
@@ -272,7 +272,7 @@
               (completeMethod)="onBasicComplete($event)"
             />
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('states')" 
         [showLineNumbers]="true"
         />
@@ -280,7 +280,7 @@
 
     <section id="forms" data-doc-anchor class="example-section">
       <h3>13. Forms</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <h4>Reactive Form</h4>
           <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
             <ui-lib-autocomplete
@@ -313,12 +313,12 @@
         <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')" 
           [showLineNumbers]="true"
           />
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <section id="variants" data-doc-anchor class="example-section">
       <h3>14. Variants</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="row-3">
             <ui-lib-autocomplete
               [(ngModel)]="variantModels['material']"
@@ -342,7 +342,7 @@
               (completeMethod)="onBasicComplete($event)"
             />
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
         [showLineNumbers]="true"
         />
@@ -350,7 +350,7 @@
 
     <section id="clipping" data-doc-anchor class="example-section">
       <h3>15. Clipping Container (Overflow Hidden)</h3>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="clipping-card">
             <ui-lib-autocomplete
               [(ngModel)]="clippingValue"
@@ -365,7 +365,7 @@
               clipped by this container.
             </p>
           </div>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('clipping')" 
         [showLineNumbers]="true"
         />

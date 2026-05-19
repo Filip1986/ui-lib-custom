@@ -15,7 +15,7 @@
         <p class="section-text">
           Default knob with ngModel binding. Drag up/down or use arrow keys to change the value.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -26,7 +26,7 @@
                 <span class="knob-caption">Value: {{ basicValue }}</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
           [showLineNumbers]="true"
           />
@@ -38,7 +38,7 @@
         <p class="section-text">
           Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row knob-row--align-end">
               <div class="knob-item">
                 <uilib-knob
@@ -68,7 +68,7 @@
                 <span class="knob-caption">lg</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
           [showLineNumbers]="true"
           />
@@ -80,7 +80,7 @@
         <p class="section-text">
           Use <code>[step]</code> to control the increment. This knob snaps to 0, 25, 50, 75, 100.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -92,7 +92,7 @@
                 <span class="knob-caption">step=25 &middot; value={{ stepValue }}</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('step')" 
           [showLineNumbers]="true"
           />
@@ -104,7 +104,7 @@
         <p class="section-text">
           Constrain the value range. This knob spans &minus;50 to +50 in steps of 10.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -118,7 +118,7 @@
                 <span class="knob-caption">value={{ minmaxValue }}</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('minmax')" 
           [showLineNumbers]="true"
           />
@@ -131,7 +131,7 @@
           Pass a <code>valueTemplate</code> string to format the centre label.
           Use <code>&#123;value&#125;</code> as the interpolation placeholder.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -152,7 +152,7 @@
                 <span class="knob-caption">percent</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('template')" 
           [showLineNumbers]="true"
           />
@@ -165,7 +165,7 @@
           Override arc and text colours per-instance via <code>valueColor</code>
           and <code>textColor</code> inputs.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -198,7 +198,7 @@
                 <span class="knob-caption">red</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('colors')" 
           [showLineNumbers]="true"
           />
@@ -210,7 +210,7 @@
         <p class="section-text">
           A disabled knob is visually muted and ignores all interaction.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -222,7 +222,7 @@
                 <span class="knob-caption">disabled</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
           [showLineNumbers]="true"
           />
@@ -234,7 +234,7 @@
         <p class="section-text">
           A read-only knob is focusable but does not respond to drag or keyboard input.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <div class="knob-row">
               <div class="knob-item">
                 <uilib-knob
@@ -246,7 +246,7 @@
                 <span class="knob-caption">readonly</span>
               </div>
             </div>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('readonly')" 
           [showLineNumbers]="true"
           />
@@ -258,7 +258,7 @@
         <p class="section-text">
           Knobs work with Angular reactive forms out of the box via CVA.
         </p>
-          <ui-lib-card>
+          <ui-lib-panel variant="minimal">
             <form [formGroup]="reactiveForm">
               <div class="knob-row">
                 <div class="knob-item">
@@ -277,7 +277,7 @@
                 </div>
               </div>
             </form>
-          </ui-lib-card>
+          </ui-lib-panel>
         <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
           [showLineNumbers]="true"
           />

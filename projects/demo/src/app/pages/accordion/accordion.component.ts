@@ -14,7 +14,6 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { AccordionExpandMode, AccordionSize, AccordionVariant } from 'ui-lib-custom/accordion';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Icon } from 'ui-lib-custom/icon';
@@ -31,6 +30,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { Panel } from 'ui-lib-custom/panel';
 
 interface FaqItem {
   value: string;
@@ -59,13 +59,13 @@ type AccordionTab =
   selector: 'app-accordion-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     Accordion,
     AccordionPanel,
     AccordionToggleIcon,
     CodeSnippet,
     Badge,
-    Card,
     Button,
     Tabs,
     Tab,

@@ -5,7 +5,6 @@ import { Badge } from 'ui-lib-custom/badge';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
@@ -18,6 +17,7 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -35,6 +35,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   selector: 'app-badges',
   standalone: true,
   imports: [
+    Panel,
     Badge,
     Button,
     CodeSnippet,
@@ -44,7 +45,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     FormsModule,
     VariantComparisonComponent,
     BadgeBasicExampleComponent,

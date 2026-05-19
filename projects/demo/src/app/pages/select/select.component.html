@@ -29,11 +29,9 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>
-          <div class="card-title">Style</div>
+      <ui-lib-panel variant="minimal">
           <p class="card-description">Choose variant and follow theme defaults.</p>
-        </div>
+
         <div class="control">
           <label>Variant</label>
           <div class="chips">
@@ -58,13 +56,11 @@
             Follow theme variant</label
           >
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>
-          <div class="card-title">Behavior</div>
+      <ui-lib-panel variant="minimal">
           <p class="card-description">Toggle selection, search, and states.</p>
-        </div>
+
         <div class="toggles">
           <label
             ><input
@@ -99,13 +95,11 @@
             Loading</label
           >
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>
-          <div class="card-title">Content</div>
+      <ui-lib-panel variant="minimal">
           <p class="card-description">Set placeholder text.</p>
-        </div>
+
         <div class="control">
           <label>Placeholder</label>
           <input
@@ -114,12 +108,11 @@
             (input)="placeholder.set($any($event.target).value)"
           />
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
 
     <div class="viewport-control-stack">
-      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>Viewport width</div>
+      <ui-lib-panel variant="minimal">
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
@@ -148,10 +141,9 @@
             >
           </div>
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
 
-      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-        <div card-header>Density</div>
+      <ui-lib-panel variant="minimal">
         <div class="density-controls">
           <ui-lib-button
             size="sm"
@@ -175,11 +167,10 @@
             >Compact</ui-lib-button
           >
         </div>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
 
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
+    <ui-lib-panel variant="minimal">
 
       <app-doc-demo-viewport>
         <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
@@ -200,12 +191,11 @@
           <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
         </div>
       </app-doc-demo-viewport>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'variants') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
-      <div card-header>Variants</div>
+    <ui-lib-panel variant="minimal">
       <p>Compare select variants using the same options and behavior.</p>
 
       <app-variant-comparison>
@@ -242,12 +232,11 @@
           ></ui-lib-select>
         </div>
       </app-variant-comparison>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <table class="doc-properties">
         <thead>
           <tr>
@@ -290,23 +279,21 @@
           </tr>
         </tbody>
       </table>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
+    <ui-lib-panel variant="minimal">
       <ui-lib-code-snippet
         language="html"
         filename="Usage" [code]="snippets.usage"
         [showLineNumbers]="true"
         ></ui-lib-code-snippet>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'performance') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
-      <div card-header>Performance Features</div>
+    <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
         <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
@@ -315,18 +302,17 @@
         <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
         <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
       </ul>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
+    <ui-lib-panel variant="minimal">
       <ul class="doc-list">
         <li>Use a clear <code>label</code> for the trigger button.</li>
         <li>Ensure listbox options are keyboard navigable.</li>
         <li>Announce selection changes for screen readers.</li>
       </ul>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->

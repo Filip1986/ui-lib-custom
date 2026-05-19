@@ -14,7 +14,7 @@
       <p class="example-description">
         Click items to select them, then use the control buttons (or keyboard shortcuts) to reorder.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-order-list
             [value]="products()"
             (valueChange)="products.set($any($event))"
@@ -29,7 +29,7 @@
               </div>
             </ng-template>
           </ui-lib-order-list>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
         [showLineNumbers]="true"
         />
@@ -42,7 +42,7 @@
         Set <code>filterBy="name"</code> to render an inline search field.
         The visible list updates as you type; the underlying array is never mutated.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-order-list
             [value]="filterProducts()"
             (valueChange)="filterProducts.set($any($event))"
@@ -56,7 +56,7 @@
               </div>
             </ng-template>
           </ui-lib-order-list>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('filter')" 
         [showLineNumbers]="true"
         />
@@ -69,7 +69,7 @@
         Use <code>uiOrderListHeader</code>, <code>uiOrderListItem</code>, and
         <code>uiOrderListEmpty</code> directives for fully custom rendering.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-order-list
             [value]="templateProducts()"
             (valueChange)="templateProducts.set($any($event))"
@@ -93,7 +93,7 @@
               <span>No products match the current filter.</span>
             </ng-template>
           </ui-lib-order-list>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('template')" 
         [showLineNumbers]="true"
         />
@@ -106,7 +106,7 @@
         Enable <code>[dragDrop]="true"</code> to let users reorder by dragging.
         A drop indicator line shows the insertion point.
       </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <ui-lib-stack [gap]="3">
             <ui-lib-order-list
               [value]="dragProducts()"
@@ -123,7 +123,7 @@
             </ui-lib-order-list>
             <p class="demo-event-log">Last reorder: <code>{{ lastReorderEvent() }}</code></p>
           </ui-lib-stack>
-        </ui-lib-card>
+        </ui-lib-panel>
       <ui-lib-code-snippet language="html" [code]="snippet('dragDrop')" 
         [showLineNumbers]="true"
         />
@@ -132,7 +132,7 @@
     <!-- 5. Accessibility -->
     <section id="accessibility" data-doc-anchor class="example-section">
       <h3>5. Accessibility</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>
             <h4>Keyboard shortcuts</h4>
@@ -162,13 +162,13 @@
             </ul>
           </div>
         </ui-lib-stack>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
     <!-- 6. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
       <h3>6. API Reference</h3>
-      <ui-lib-card>
+      <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>
             <h4>Inputs</h4>
@@ -220,7 +220,7 @@
             </table>
           </div>
         </ui-lib-stack>
-      </ui-lib-card>
+      </ui-lib-panel>
     </section>
 
   </div>

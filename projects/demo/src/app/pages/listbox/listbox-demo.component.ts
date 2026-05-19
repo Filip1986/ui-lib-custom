@@ -11,11 +11,11 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { Card } from 'ui-lib-custom/card';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ListboxChangeEvent, ListboxOption } from 'ui-lib-custom/listbox';
 
+import { Panel } from 'ui-lib-custom/panel';
 type ListboxDemoSnippetKey =
   | 'basic'
   | 'multiple'
@@ -32,13 +32,13 @@ type ListboxDemoSnippetKey =
   selector: 'app-listbox-demo',
   standalone: true,
   imports: [
+    Panel,
     JsonPipe,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocDemoViewportComponent,
-    Card,
     CodeSnippet,
     ListboxComponent,
     DocTocComponent,

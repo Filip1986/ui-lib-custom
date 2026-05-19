@@ -10,13 +10,13 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { InputGroupAddonComponent, InputGroupComponent } from 'ui-lib-custom/input-group';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 interface InputGroupSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -38,12 +38,12 @@ type InputGroupDemoSnippetKey =
   selector: 'app-input-group-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     UiLibInput,
     Button,
     CodeSnippet,

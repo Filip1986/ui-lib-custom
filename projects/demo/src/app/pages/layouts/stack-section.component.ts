@@ -7,7 +7,6 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Grid, Stack } from 'ui-lib-custom/layout';
 import type { StackDirection, StackAlign, StackJustify } from 'ui-lib-custom/layout';
 import { STACK_TOKENS } from 'ui-lib-custom/tokens';
@@ -23,6 +22,7 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for stack layout usage.
  */
@@ -30,10 +30,10 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-layout-stack-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Grid,
     Stack,
     Tabs,
