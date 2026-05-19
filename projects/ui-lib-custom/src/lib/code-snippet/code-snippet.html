@@ -1,5 +1,5 @@
 <div [class]="rootClasses()" role="region" [attr.aria-label]="accessibleLabel()">
-  <!-- Header: window chrome, filename tab, copy button -->
+  <!-- Header: window chrome, tab bar, copy button -->
   <div class="ui-lib-code-snippet__header">
     @if (showWindowChrome()) {
       <div class="ui-lib-code-snippet__window-chrome" aria-hidden="true">
@@ -9,17 +9,36 @@
       </div>
     }
 
-    <div class="ui-lib-code-snippet__tabs">
-      <div class="ui-lib-code-snippet__tab">
-        @if (languageIcon()) {
-          <iconify-icon
-            class="ui-lib-code-snippet__tab-icon"
-            [attr.icon]="languageIcon()"
-            aria-hidden="true"
-          ></iconify-icon>
-        }
-        <span class="ui-lib-code-snippet__tab-label">{{ displayFilename() }}</span>
-      </div>
+    <!-- Tab bar — interactive when multiple files are present -->
+    <div
+      class="ui-lib-code-snippet__tabs"
+      [class.ui-lib-code-snippet__tabs--multi]="isMultiTab()"
+      [attr.role]="isMultiTab() ? 'tablist' : null"
+      [attr.aria-label]="isMultiTab() ? 'File tabs' : null"
+    >
+      @for (file of effectiveFiles(); track file.filename; let index = $index) {
+        <button
+          type="button"
+          class="ui-lib-code-snippet__tab"
+          [class.ui-lib-code-snippet__tab--active]="activeTabIndex() === index"
+          [attr.role]="isMultiTab() ? 'tab' : null"
+          [attr.id]="isMultiTab() ? tabId(index) : null"
+          [attr.aria-controls]="isMultiTab() ? panelId(index) : null"
+          [attr.aria-selected]="isMultiTab() ? (activeTabIndex() === index) : null"
+          [attr.tabindex]="isMultiTab() ? (activeTabIndex() === index ? 0 : -1) : null"
+          (click)="selectTab(index)"
+          (keydown)="onTabKeydown($event, index)"
+        >
+          @if (fileIcon(file.language) !== null) {
+            <iconify-icon
+              class="ui-lib-code-snippet__tab-icon"
+              [attr.icon]="fileIcon(file.language)"
+              aria-hidden="true"
+            ></iconify-icon>
+          }
+          <span class="ui-lib-code-snippet__tab-label">{{ file.filename }}</span>
+        </button>
+      }
     </div>
 
     @if (showCopyButton()) {
@@ -64,8 +83,14 @@
     }
   </div>
 
-  <!-- Body: optional line numbers + code -->
-  <div class="ui-lib-code-snippet__body" [style.max-height]="maxHeight()">
+  <!-- Body: optional line numbers + code — scoped to the active tab's content -->
+  <div
+    class="ui-lib-code-snippet__body"
+    [style.max-height]="maxHeight()"
+    [attr.role]="isMultiTab() ? 'tabpanel' : null"
+    [attr.id]="isMultiTab() ? panelId(activeTabIndex()) : null"
+    [attr.aria-labelledby]="isMultiTab() ? tabId(activeTabIndex()) : null"
+  >
     @if (showLineNumbers()) {
       <div class="ui-lib-code-snippet__line-numbers" aria-hidden="true">
         @for (line of lines(); track $index) {
@@ -77,7 +102,7 @@
     <div class="ui-lib-code-snippet__code-wrap">
       <pre
         class="ui-lib-code-snippet__pre"
-        [attr.data-language]="language()"
+        [attr.data-language]="activeFile().language"
       ><code class="ui-lib-code-snippet__code" [innerHTML]="highlightedCode()"></code></pre>
     </div>
   </div>
