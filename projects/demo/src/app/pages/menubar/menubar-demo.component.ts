@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Menubar } from 'ui-lib-custom/menubar';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -26,7 +25,6 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
   selector: 'app-menubar-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Menubar,
     Button,
     DocPageLayoutComponent,

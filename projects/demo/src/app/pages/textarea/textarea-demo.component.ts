@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   FormControl,
   FormGroup,
@@ -21,6 +20,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type TextareaDemoSnippetKey =
   | 'basic'
   | 'autoResize'
@@ -41,7 +42,6 @@ type TextareaDemoSnippetKey =
   standalone: true,
   imports: [
     Panel,
-    CodeSnippet,
     FormsModule,
     ReactiveFormsModule,
     DocPageHeaderComponent,
@@ -52,6 +52,7 @@ type TextareaDemoSnippetKey =
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
@@ -309,4 +310,41 @@ export class MyComponent {
       this.reactiveSubmittedValue = this.form.controls.feedback.value;
     }
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    {
+      name: 'label',
+      type: 'string',
+      default: "''",
+      description: 'Label text rendered above the textarea.',
+    },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+    { name: 'rows', type: 'number', default: '3', description: 'Initial visible row count.' },
+    {
+      name: 'autoResize',
+      type: 'boolean',
+      default: 'false',
+      description: 'Grows the textarea to fit its content.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the textarea.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the textarea read-only.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+  ];
 }

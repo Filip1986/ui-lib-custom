@@ -14,7 +14,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   UiLibCascadeSelect,
   CascadeSelectOptionDirective,
@@ -36,6 +35,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type CascadeSelectDemoSnippetKey =
   | 'basic'
   | 'template'
@@ -68,7 +69,6 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    CodeSnippet,
     UiLibCascadeSelect,
     CascadeSelectOptionDirective,
     CascadeSelectValueDirective,
@@ -79,6 +79,7 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     CascadeSelectOptionGroupIconDirective,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',
@@ -445,4 +446,54 @@ export class MyComponent {
     const node: Partial<CascadeNode> = option as Partial<CascadeNode>;
     return node.icon ?? 'pi pi-circle';
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'The hierarchical option array.',
+    },
+    {
+      name: 'optionLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name for the display label.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Property name for the value.',
+    },
+    { name: 'placeholder', type: 'string', default: "'Select'", description: 'Placeholder text.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | undefined",
+      default: 'undefined',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading indicator.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the component full-width.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'ARIA label.' },
+  ];
 }

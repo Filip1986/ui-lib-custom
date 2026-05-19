@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
 import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
@@ -26,7 +25,6 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   standalone: true,
   imports: [
     CodeSnippet,
-    DocCodeExampleComponent,
     BottomSheet,
     Button,
     DocPageHeaderComponent,

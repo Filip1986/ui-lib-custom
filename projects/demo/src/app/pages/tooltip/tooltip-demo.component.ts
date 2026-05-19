@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/
 import type { Signal, WritableSignal } from '@angular/core';
 import { Tooltip } from 'ui-lib-custom/tooltip';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -10,6 +9,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Tooltip directive.
@@ -18,7 +19,6 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
   selector: 'app-tooltip-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Tooltip,
     Button,
     DocPageHeaderComponent,
@@ -26,6 +26,7 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',
@@ -82,4 +83,34 @@ export class TooltipDemoComponent {
   }
 
   public readonly tooltipDisabled: WritableSignal<boolean> = signal<boolean>(false);
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'uiLibTooltip', type: 'string', default: "''", description: 'Tooltip text content.' },
+    {
+      name: 'tooltipPosition',
+      type: "'top' | 'bottom' | 'left' | 'right'",
+      default: "'top'",
+      description: 'Preferred tooltip placement.',
+    },
+    {
+      name: 'tooltipEvent',
+      type: "'hover' | 'focus' | 'both'",
+      default: "'hover'",
+      description: 'Trigger event for the tooltip.',
+    },
+    { name: 'showDelay', type: 'number', default: '0', description: 'Delay in ms before showing.' },
+    { name: 'hideDelay', type: 'number', default: '0', description: 'Delay in ms before hiding.' },
+    {
+      name: 'tooltipDisabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Hides the tooltip entirely when true.',
+    },
+    {
+      name: 'tooltipVariant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+  ];
 }

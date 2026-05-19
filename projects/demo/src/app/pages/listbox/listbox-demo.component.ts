@@ -13,7 +13,6 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ListboxChangeEvent, ListboxOption } from 'ui-lib-custom/listbox';
 
 import { Panel } from 'ui-lib-custom/panel';
@@ -40,7 +39,6 @@ type ListboxDemoSnippetKey =
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocDemoViewportComponent,
-    CodeSnippet,
     ListboxComponent,
     DocTocComponent,
     DocQualityBadgeComponent,

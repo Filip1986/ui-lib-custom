@@ -9,7 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the StyleClass directive.
@@ -25,7 +26,7 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './style-class-demo.component.html',
   styleUrl: './style-class-demo.component.scss',
@@ -89,4 +90,49 @@ export class MyComponent {}
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiLibStyleClass',
+      type: 'string',
+      description: 'CSS selector for the target element. Required.',
+      required: true,
+    },
+    {
+      name: 'enterActiveClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied during the enter transition.',
+    },
+    {
+      name: 'leaveActiveClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied during the leave transition.',
+    },
+    {
+      name: 'enterToClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied at the end of the enter transition.',
+    },
+    {
+      name: 'leaveToClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied at the end of the leave transition.',
+    },
+    {
+      name: 'toggleClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) toggled on each trigger click.',
+    },
+    {
+      name: 'hideOnOutsideClick',
+      type: 'boolean',
+      default: 'false',
+      description: 'Triggers the leave transition when clicking outside.',
+    },
+  ];
 }

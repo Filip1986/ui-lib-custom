@@ -5,7 +5,6 @@ import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller';
 import { Button } from 'ui-lib-custom/button';
 import { ScrollerItemDirective, ScrollerLoaderDirective } from 'ui-lib-custom/virtual-scroller';
 import type { VirtualScrollerLazyLoadEvent } from 'ui-lib-custom/virtual-scroller';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -13,6 +12,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface DemoItem {
   id: number;
@@ -69,7 +70,6 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
   selector: 'app-scroller-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     DocCodeExampleComponent,
     CommonModule,
     VirtualScrollerComponent,
@@ -80,6 +80,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
@@ -229,4 +230,44 @@ export class MyComponent {
   }));
 }`
   );
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'items',
+      type: 'unknown[] | null | undefined',
+      default: 'null',
+      description: 'Array of items to virtualise.',
+    },
+    {
+      name: 'itemSize',
+      type: 'number | [number, number]',
+      default: '0',
+      description: 'Height or width of each item in pixels.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'CSS height of the scroll viewport.',
+    },
+    {
+      name: 'orientation',
+      type: "'vertical' | 'horizontal' | 'both'",
+      default: "'vertical'",
+      description: 'Scroll axis.',
+    },
+    { name: 'lazy', type: 'boolean', default: 'false', description: 'Enables lazy loading.' },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables virtual scrolling.',
+    },
+    {
+      name: 'showLoader',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading overlay during lazy loads.',
+    },
+  ];
 }

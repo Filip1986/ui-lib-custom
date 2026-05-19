@@ -15,12 +15,13 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { EditorComponent, EditorToolbarDirective } from 'ui-lib-custom/editor';
 import type { EditorSelectionChangeEvent, EditorTextChangeEvent } from 'ui-lib-custom/editor';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type EditorDemoSnippetKey =
   | 'basic'
   | 'readonly'
@@ -49,10 +50,10 @@ type EditorDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    CodeSnippet,
     EditorComponent,
     EditorToolbarDirective,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',
@@ -385,4 +386,39 @@ export class MyComponent {
       this.eventLog.length = 12;
     }
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Editor size.' },
+    {
+      name: 'placeholder',
+      type: 'string',
+      default: "''",
+      description: 'Placeholder text in the empty editor.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the editor read-only.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the editor.' },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a filled background style.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the editor region.',
+    },
+  ];
 }

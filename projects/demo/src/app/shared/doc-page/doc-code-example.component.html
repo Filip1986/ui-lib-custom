@@ -1,7 +1,7 @@
 @if (isSingleTab()) {
   <ui-lib-code-snippet
-    [language]="tabs()[0].language"
-    [code]="tabs()[0].code"
+    [language]="tabs()[0]!.language"
+    [code]="tabs()[0]!.code"
     [showLineNumbers]="showLineNumbers()"
   />
 } @else {
@@ -10,7 +10,7 @@
       variant="minimal"
       size="sm"
       ariaLabel="Code example"
-      [defaultValue]="tabs()[0].value"
+      [defaultValue]="tabs()[0]!.value"
     >
       @for (tab of tabs(); track tab.value) {
         <ui-lib-tab [value]="tab.value" [label]="tab.label">

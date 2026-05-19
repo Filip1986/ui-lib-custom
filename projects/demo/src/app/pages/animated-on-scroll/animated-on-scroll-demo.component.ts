@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -19,7 +18,6 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
   selector: 'app-animated-on-scroll-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     AnimateOnScroll,
     DocPageHeaderComponent,
     DocPageLayoutComponent,

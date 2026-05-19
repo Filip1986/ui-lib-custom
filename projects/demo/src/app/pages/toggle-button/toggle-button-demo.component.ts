@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
@@ -23,6 +22,8 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type SnippetKey =
   | 'basic'
   | 'labels'
@@ -43,7 +44,6 @@ type SnippetKey =
   standalone: true,
   imports: [
     Panel,
-    CodeSnippet,
     JsonPipe,
     FormsModule,
     ReactiveFormsModule,
@@ -56,6 +56,7 @@ type SnippetKey =
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './toggle-button-demo.component.html',
   styleUrl: './toggle-button-demo.component.scss',
@@ -341,6 +342,42 @@ export class MyComponent {
     {
       key: 'Tab / Shift+Tab',
       action: 'Moves focus to or from the toggle button in the standard tab order.',
+    },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'onLabel', type: 'string', default: "'Yes'", description: 'Label shown when pressed.' },
+    {
+      name: 'offLabel',
+      type: 'string',
+      default: "'No'",
+      description: 'Label shown when not pressed.',
+    },
+    {
+      name: 'onIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon class when pressed.',
+    },
+    {
+      name: 'offIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon class when not pressed.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the button.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the button.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Button size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
     },
   ];
 }

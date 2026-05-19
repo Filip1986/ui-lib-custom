@@ -11,7 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the FocusTrap directive.
@@ -29,7 +30,7 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
-    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
@@ -114,6 +115,15 @@ export class FocusTrapDemoComponent {
     {
       key: 'Shift+Tab',
       action: 'Moves focus backward. Wraps from first to last.',
+    },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiLibFocusTrap',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, keyboard focus is contained within the host element.',
     },
   ];
 }

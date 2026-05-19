@@ -5,7 +5,6 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
@@ -21,7 +20,6 @@ import { Panel } from 'ui-lib-custom/panel';
     Tab,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
-    CodeSnippet,
     DocCodeExampleComponent,
   ],
   templateUrl: './design-tokens-section.component.html',

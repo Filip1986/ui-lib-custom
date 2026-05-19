@@ -9,7 +9,6 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   DataViewComponent,
   DataViewEmptyDirective,
@@ -29,6 +28,8 @@ import { DATA_VIEW_DEMO_PRODUCTS } from './data-view-demo.data';
 import type { DemoInventoryStatus, DemoProduct } from './data-view-demo.data';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 type DataViewDemoSnippetKey =
@@ -62,7 +63,6 @@ type DataViewDemoSnippetKey =
     DocPageLayoutComponent,
     DocTocComponent,
     Button,
-    CodeSnippet,
     Stack,
     Inline,
     Grid,
@@ -78,6 +78,7 @@ type DataViewDemoSnippetKey =
     DataViewPaginatorRightDirective,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './data-view-demo.component.html',
   styleUrl: './data-view-demo.component.scss',
@@ -539,4 +540,50 @@ export class MyComponent {
   public trackByProduct(_index: number, product: DemoProduct): number {
     return product.id;
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'T[]',
+      description: 'Array of items to display. Required.',
+      required: true,
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading skeleton.',
+    },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'No records found.'",
+      description: 'Message when the list is empty.',
+    },
+    {
+      name: 'gridColumns',
+      type: 'number',
+      default: '3',
+      description: 'Number of columns in the grid layout.',
+    },
+    {
+      name: 'paginator',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables pagination controls.',
+    },
+    {
+      name: 'rows',
+      type: 'number',
+      default: '10',
+      description: 'Rows per page when paginator is enabled.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Data list'",
+      description: 'Accessible label for the data list region.',
+    },
+  ];
 }

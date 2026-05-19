@@ -13,7 +13,6 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import type {
   TreeNode,
@@ -81,7 +80,6 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     TreeSelect,
-    CodeSnippet,
     DocCodeExampleComponent,
     DocTocComponent,
     DocQualityBadgeComponent,

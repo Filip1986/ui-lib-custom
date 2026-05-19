@@ -13,7 +13,6 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   AutoCompleteEmptyDirective,
   AutoCompleteFooterDirective,
@@ -87,7 +86,6 @@ type AutoCompleteDemoSnippetTsKey =
     DocPageLayoutComponent,
     DocTocComponent,
     Button,
-    CodeSnippet,
     UiLibAutoComplete,
     AutoCompleteItemDirective,
     AutoCompleteSelectedItemDirective,

@@ -8,7 +8,6 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   BarChartComponent,
   ChartComponent,
@@ -23,6 +22,8 @@ import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type ChartDemoSnippetKey =
   | 'basicBar'
   | 'basicBarTs'
@@ -93,7 +94,6 @@ type ThemeCssVariables = {
     DocPageLayoutComponent,
     DocTocComponent,
     Button,
-    CodeSnippet,
     Stack,
     Inline,
     Grid,
@@ -104,6 +104,7 @@ type ThemeCssVariables = {
     DoughnutChartComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './chart-demo.component.html',
   styleUrl: './chart-demo.component.scss',
@@ -813,4 +814,51 @@ export class MyComponent {
   private randomBetween(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'data',
+      type: "ChartData<'bar'> | null",
+      default: 'null',
+      description: 'Chart.js data configuration.',
+    },
+    {
+      name: 'options',
+      type: "ChartOptions<'bar'> | null",
+      default: 'null',
+      description: 'Chart.js options object.',
+    },
+    {
+      name: 'plugins',
+      type: 'Plugin[]',
+      default: '[]',
+      description: 'Additional Chart.js plugins.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Predefined size preset.',
+    },
+    {
+      name: 'responsive',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables responsive resizing.',
+    },
+    {
+      name: 'maintainAspectRatio',
+      type: 'boolean',
+      default: 'true',
+      description: 'Keeps the configured aspect ratio.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Chart'",
+      description: 'Accessible label for the canvas element.',
+    },
+    { name: 'height', type: 'string | null', default: 'null', description: 'Explicit height.' },
+    { name: 'width', type: 'string | null', default: 'null', description: 'Explicit width.' },
+  ];
 }

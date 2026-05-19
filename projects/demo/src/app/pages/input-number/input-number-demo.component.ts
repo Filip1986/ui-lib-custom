@@ -15,12 +15,13 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputNumberComponent } from 'ui-lib-custom/input-number';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type InputNumberSnippetKey =
   | 'numerals'
   | 'numeralsTs'
@@ -71,12 +72,12 @@ type InputNumberSnippetKey =
     DocPageLayoutComponent,
     DocTocComponent,
     Button,
-    CodeSnippet,
     FloatLabelComponent,
     InputNumberComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
@@ -515,4 +516,37 @@ export class MyComponent {
 
     this.submittedAmount = this.amountControl().value;
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'mode',
+      type: "'decimal' | 'currency'",
+      default: "'decimal'",
+      description: 'Formatting mode.',
+    },
+    { name: 'prefix', type: 'string', default: "''", description: 'Text prefix.' },
+    { name: 'suffix', type: 'string', default: "''", description: 'Text suffix.' },
+    { name: 'min', type: 'number | null', default: 'null', description: 'Minimum allowed value.' },
+    { name: 'max', type: 'number | null', default: 'null', description: 'Maximum allowed value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Increment/decrement step.' },
+    {
+      name: 'showButtons',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders +/- spinner buttons.',
+    },
+    {
+      name: 'buttonLayout',
+      type: "'stacked' | 'horizontal' | 'vertical'",
+      default: "'stacked'",
+      description: 'Button placement.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+  ];
 }

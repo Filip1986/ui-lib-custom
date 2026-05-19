@@ -15,13 +15,14 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
 import { ColorPicker } from 'ui-lib-custom';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ColorPickerValue, HsbColor, RgbColor } from 'ui-lib-custom';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type DemoSnippetKey =
   | 'basic'
   | 'inline'
@@ -48,10 +49,10 @@ type DemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    CodeSnippet,
     ColorPicker,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',
@@ -311,4 +312,33 @@ export class MyComponent {
     },
     competitiveParity: 'pending',
   };
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'format',
+      type: "'hex' | 'rgb' | 'hsb'",
+      default: "'hex'",
+      description: 'Color output format.',
+    },
+    {
+      name: 'inline',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders the picker inline instead of as a dropdown.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the color picker.',
+    },
+    { name: 'inputId', type: 'string', default: "''", description: 'Id of the trigger element.' },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order index.' },
+  ];
 }

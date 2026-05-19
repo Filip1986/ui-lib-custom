@@ -13,11 +13,8 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
-import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import {
@@ -232,7 +229,6 @@ export class MyComponent {
     Panel,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
-    CodeSnippet,
     DocCodeExampleComponent,
     Stack,
     PickListComponent,
@@ -242,8 +238,6 @@ export class MyComponent {
     PickListEmptyDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocKeyboardNavComponent,
-    DocApiReferenceComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
   styleUrl: './pick-list-demo.component.scss',

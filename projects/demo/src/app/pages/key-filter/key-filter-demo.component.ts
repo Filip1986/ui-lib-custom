@@ -7,12 +7,13 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type KeyFilterDemoSnippetKey =
   | 'alphanum'
   | 'alpha'
@@ -50,11 +51,11 @@ type KeyFilterDemoSnippetTsKey =
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocDemoViewportComponent,
-    CodeSnippet,
     KeyFilterDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',
@@ -180,4 +181,25 @@ export class MyComponent {
     },
     competitiveParity: 'pending',
   };
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'uilibKeyFilter',
+      type: 'KeyFilterPreset | RegExp',
+      description: 'Preset name or a custom RegExp pattern. Required.',
+      required: true,
+    },
+    {
+      name: 'keyFilterBypass',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, the filter is bypassed.',
+    },
+    {
+      name: 'hintText',
+      type: 'string | null',
+      default: 'null',
+      description: 'Screen-reader hint text.',
+    },
+  ];
 }

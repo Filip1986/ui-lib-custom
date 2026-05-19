@@ -19,6 +19,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the MegaMenu component.
@@ -36,6 +38,7 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
@@ -495,5 +498,54 @@ export class MyComponent {
     },
     { key: 'Escape', action: 'Close the open panel and return focus to the triggering root item.' },
     { key: 'Home / End', action: 'Jump to the first or last item in the current column.' },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'model', type: 'MegaMenuItem[]', default: '[]', description: 'Top-level menu items.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Mega menu orientation.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Menu'",
+      description: 'ARIA label for the navigation landmark.',
+    },
+  ];
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(itemClick)',
+      type: 'OutputEmitterRef<MouseEvent>',
+      description: 'Emitted when a leaf item is clicked.',
+    },
+  ];
+  public readonly apiMenuItemRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string | undefined', description: 'Item label text.' },
+    { name: 'icon', type: 'string | undefined', description: 'CSS icon class.' },
+    { name: 'items', type: 'MegaMenuSubColumn[][] | undefined', description: 'Sub-column groups.' },
+    { name: 'disabled', type: 'boolean | undefined', description: 'Disables the item.' },
+  ];
+  public readonly apiSubColumnRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string | undefined', description: 'Column header label.' },
+    {
+      name: 'items',
+      type: 'MegaMenuSubItem[] | undefined',
+      description: 'Items inside the column.',
+    },
+  ];
+  public readonly apiSubItemRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string | undefined', description: 'Item label text.' },
+    { name: 'icon', type: 'string | undefined', description: 'CSS icon class.' },
+    { name: 'disabled', type: 'boolean | undefined', description: 'Disables the item.' },
   ];
 }

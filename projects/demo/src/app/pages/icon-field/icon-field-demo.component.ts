@@ -14,7 +14,6 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { Icon } from 'ui-lib-custom/icon';
 import { IconFieldComponent, InputIconComponent } from 'ui-lib-custom/icon-field';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { UiLibInput } from 'ui-lib-custom/input';
 
 import { Panel } from 'ui-lib-custom/panel';
@@ -36,7 +35,6 @@ type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | '
     DocDemoViewportComponent,
     UiLibInput,
     Icon,
-    CodeSnippet,
     DocCodeExampleComponent,
     IconFieldComponent,
     InputIconComponent,

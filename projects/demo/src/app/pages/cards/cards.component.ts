@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Card } from 'ui-lib-custom/card';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { CardVariant, CardElevation } from 'ui-lib-custom/card';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
@@ -52,7 +51,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   imports: [
     Card,
     Button,
-    CodeSnippet,
     DocPageHeaderComponent,
     Tabs,
     Tab,

@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
@@ -30,7 +29,6 @@ import { Panel } from 'ui-lib-custom/panel';
   imports: [
     Panel,
     Button,
-    CodeSnippet,
     FormsModule,
     DocPageLayoutComponent,
     DocPageHeaderComponent,

@@ -12,7 +12,6 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
 import { Panel } from 'ui-lib-custom/panel';
@@ -112,7 +111,6 @@ const SNIPPETS: Record<string, string> = {
     Panel,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
-    CodeSnippet,
     OrganizationChart,
     OrgChartNodeTemplateDirective,
     DocTocComponent,

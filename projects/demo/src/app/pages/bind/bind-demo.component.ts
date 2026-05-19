@@ -10,7 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Bind directive.
@@ -28,7 +29,7 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
-    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
@@ -141,4 +142,14 @@ export class MyComponent {}
   public toggleTabIndex(): void {
     this.includeTabIndex.update((value: boolean): boolean => !value);
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiLibBind',
+      type: 'Record<string, unknown>',
+      default: '{}',
+      description:
+        'An object whose keys are HTML attribute/property names and values are the values to apply.',
+    },
+  ];
 }

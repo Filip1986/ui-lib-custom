@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { Ripple } from 'ui-lib-custom/ripple';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -25,7 +24,6 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   standalone: true,
   imports: [
     CodeSnippet,
-    DocCodeExampleComponent,
     Ripple,
     Button,
     DocPageHeaderComponent,

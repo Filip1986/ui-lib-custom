@@ -38,12 +38,13 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 interface DemoTab {
   value: TabsValue;
   label: string;
@@ -70,7 +71,6 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   standalone: true,
   imports: [
     Panel,
-    CodeSnippet,
     DocPageHeaderComponent,
     CommonModule,
     FormsModule,
@@ -91,6 +91,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -561,5 +562,52 @@ export class MyComponent {}`;
     { key: 'Home / End', action: 'Move focus to the first or last tab header.' },
     { key: 'Tab', action: 'Move focus from the tab list into the active panel content.' },
     { key: 'Shift+Tab', action: 'Return focus from panel content to the tab list.' },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tab strip size.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Orientation of the tab list.',
+    },
+    {
+      name: 'activation',
+      type: "'auto' | 'manual'",
+      default: "'auto'",
+      description: 'Tab activation mode.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the tab list.',
+    },
+    {
+      name: 'defaultValue',
+      type: 'string | number | null',
+      default: 'null',
+      description: 'Initially selected tab value.',
+    },
+    {
+      name: 'selectedValue',
+      type: 'string | number | null',
+      default: 'null',
+      description: 'Controlled selected tab value.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a close button on each tab.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all tabs.' },
   ];
 }

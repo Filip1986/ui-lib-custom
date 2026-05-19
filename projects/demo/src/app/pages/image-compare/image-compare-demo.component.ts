@@ -7,7 +7,6 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ImageCompare } from 'ui-lib-custom/image-compare';
 
 import { Panel } from 'ui-lib-custom/panel';
@@ -25,7 +24,6 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    CodeSnippet,
     ImageCompare,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,

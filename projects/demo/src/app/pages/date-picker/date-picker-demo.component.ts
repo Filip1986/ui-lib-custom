@@ -14,7 +14,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DatePickerComponent } from 'ui-lib-custom/date-picker';
 import type { ThemeVariant } from 'ui-lib-custom/core';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
@@ -22,6 +21,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type DatePickerDemoSnippetKey =
   | 'basic'
   | 'basicTs'
@@ -80,10 +81,10 @@ type DatePickerDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    CodeSnippet,
     DatePickerComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
   styleUrl: './date-picker-demo.component.scss',
@@ -526,4 +527,58 @@ export class MyComponent {
       hour12: false,
     });
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'selectionMode',
+      type: "'single' | 'multiple' | 'range'",
+      default: "'single'",
+      description: 'Controls single, multiple, or range selection.',
+    },
+    {
+      name: 'dateFormat',
+      type: 'string',
+      default: "'mm/dd/yy'",
+      description: 'Date display format string.',
+    },
+    {
+      name: 'inline',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders the calendar inline.',
+    },
+    {
+      name: 'showIcon',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a calendar icon button.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Input placeholder text.' },
+    {
+      name: 'minDate',
+      type: 'Date | null',
+      default: 'null',
+      description: 'Earliest selectable date.',
+    },
+    {
+      name: 'maxDate',
+      type: 'Date | null',
+      default: 'null',
+      description: 'Latest selectable date.',
+    },
+    {
+      name: 'view',
+      type: "'date' | 'month' | 'year'",
+      default: "'date'",
+      description: 'Calendar granularity.',
+    },
+    {
+      name: 'showTime',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds time picker below the calendar.',
+    },
+    { name: 'hourFormat', type: "'12' | '24'", default: "'24'", description: 'Time format.' },
+  ];
 }

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -15,6 +14,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type SliderDemoSnippetKey =
   | 'basic'
   | 'range'
@@ -40,12 +41,12 @@ type SliderDemoSnippetKey =
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodeSnippet,
     Slider,
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
@@ -298,5 +299,33 @@ export class MyComponent {
       key: 'Page Up',
       action: 'Increase the value by a larger step (10× step or 10% of range).',
     },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Value increment.' },
+    { name: 'range', type: 'boolean', default: 'false', description: 'Enables range selection.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Slider orientation.',
+    },
+    { name: 'animate', type: 'boolean', default: 'false', description: 'Animates thumb movement.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the slider.' },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the slider thumb.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Slider size.' },
   ];
 }

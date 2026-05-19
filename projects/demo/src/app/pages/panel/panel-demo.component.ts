@@ -8,7 +8,6 @@ import {
   TableColumnComponent,
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -54,7 +53,6 @@ interface AriaRow {
   selector: 'app-panel-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Panel,
     Button,
     TableComponent,

@@ -9,7 +9,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { SelectButton } from 'ui-lib-custom/select-button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type {
   SelectButtonOption,
   SelectButtonSize,
@@ -41,7 +40,6 @@ import { Panel } from 'ui-lib-custom/panel';
     FormsModule,
     ReactiveFormsModule,
     SelectButton,
-    CodeSnippet,
     Icon,
     Button,
     Stack,

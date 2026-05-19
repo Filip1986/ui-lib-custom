@@ -12,7 +12,6 @@ import {
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UiLibSelect } from 'ui-lib-custom/select';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { SelectOption, SelectVariant } from 'ui-lib-custom/select';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
@@ -33,6 +32,8 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -55,7 +56,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     UiLibSelect,
     Button,
-    CodeSnippet,
     Tabs,
     Tab,
     DocPageHeaderComponent,
@@ -68,6 +68,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -298,5 +299,47 @@ export class MyComponent {
       action: 'Select the focused option and close the panel.',
     },
     { key: 'Escape', action: 'Close the panel without selecting and return focus to the trigger.' },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'SelectOption[]',
+      default: '[]',
+      description: 'Array of option objects.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Select size.' },
+    { name: 'multiple', type: 'boolean', default: 'false', description: 'Allows multi-selection.' },
+    {
+      name: 'searchable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds a search input inside the dropdown.',
+    },
+    {
+      name: 'placeholder',
+      type: 'string',
+      default: "'Select...'",
+      description: 'Placeholder text.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the select.' },
+    {
+      name: 'label',
+      type: 'string',
+      default: "''",
+      description: 'Visible label rendered above the select.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
   ];
 }

@@ -8,7 +8,6 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Image } from 'ui-lib-custom/image';
 
 import { Panel } from 'ui-lib-custom/panel';
@@ -32,7 +31,6 @@ type SnippetKey =
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    CodeSnippet,
     Image,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,

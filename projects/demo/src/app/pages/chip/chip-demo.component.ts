@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Chip } from 'ui-lib-custom/chip';
 import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
@@ -26,7 +25,6 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   standalone: true,
   imports: [
     CodeSnippet,
-    DocCodeExampleComponent,
     Chip,
     Button,
     DocPageHeaderComponent,

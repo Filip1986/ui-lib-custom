@@ -8,11 +8,12 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { KnobComponent } from 'ui-lib-custom/knob';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type KnobDemoSnippetKey =
   | 'basic'
   | 'sizes'
@@ -36,12 +37,12 @@ type KnobDemoSnippetKey =
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodeSnippet,
     KnobComponent,
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',
@@ -253,4 +254,42 @@ export class MyComponent {
     competitiveParity: 'pending',
     apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
   };
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Value increment per key press.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Preset size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'strokeWidth',
+      type: 'number',
+      default: '14',
+      description: 'Arc stroke width in SVG units.',
+    },
+    {
+      name: 'showValue',
+      type: 'boolean',
+      default: 'true',
+      description: 'Renders the current value inside the knob.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the knob.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the knob read-only.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'ARIA label for the knob.',
+    },
+  ];
 }

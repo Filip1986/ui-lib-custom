@@ -16,12 +16,13 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -71,12 +72,12 @@ type InputMaskDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    CodeSnippet,
     FloatLabelComponent,
     InputMaskComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-mask-demo.component.html',
   styleUrl: './input-mask-demo.component.scss',
@@ -439,4 +440,63 @@ export class MyComponent {
   public formatValue(value: string | null): string {
     return value ?? 'null';
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'mask',
+      type: 'string',
+      default: "''",
+      description: "Mask pattern, e.g. '(999) 999-9999'.",
+    },
+    {
+      name: 'slotChar',
+      type: 'string',
+      default: "'_'",
+      description: 'Character shown for empty mask slots.',
+    },
+    {
+      name: 'autoClear',
+      type: 'boolean',
+      default: 'true',
+      description: 'Clears the field when incomplete on blur.',
+    },
+    {
+      name: 'unmask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Emits the raw unmasked value.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the input read-only.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the input.',
+    },
+    {
+      name: 'maskHint',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible hint for the expected format.',
+    },
+    {
+      name: 'errorMessage',
+      type: 'string | null',
+      default: 'null',
+      description: 'Error message in an aria-live region.',
+    },
+  ];
 }

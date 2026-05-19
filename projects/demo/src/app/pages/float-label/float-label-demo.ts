@@ -20,9 +20,10 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { Button } from 'ui-lib-custom/button';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 interface DemoOption {
   label: string;
   value: string;
@@ -53,11 +54,11 @@ type FloatLabelDemoSnippetKey =
     UiLibInput,
     UiLibSelect,
     FloatLabelComponent,
-    CodeSnippet,
     Button,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',
@@ -329,4 +330,13 @@ export class MyComponent {
       bio: this.reactiveForm.controls.bio.value,
     };
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'over' | 'in' | 'on'",
+      default: "'over'",
+      description: 'Controls the label animation style.',
+    },
+  ];
 }

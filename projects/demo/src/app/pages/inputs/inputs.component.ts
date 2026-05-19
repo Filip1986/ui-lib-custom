@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import type { NgForm } from '@angular/forms';
 import { UiLibInput } from 'ui-lib-custom/input';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { InputVariant, InputType, InputLabelFloat } from 'ui-lib-custom/input';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
@@ -32,6 +31,8 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -53,7 +54,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     CommonModule,
     UiLibInput,
     Button,
-    CodeSnippet,
     Tabs,
     Tab,
     DocPageLayoutComponent,
@@ -66,6 +66,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     InputBasicExampleComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -260,4 +261,59 @@ import { UiLibInput } from 'ui-lib-custom/input';
   templateUrl: './my.component.html',
 })
 export class MyComponent {}`;
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      default: "''",
+      description: 'Visible label rendered above or inside the input.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
+    { name: 'type', type: 'string', default: "'text'", description: 'HTML input type.' },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+    {
+      name: 'error',
+      type: 'string | null',
+      default: 'null',
+      description: 'Error message below the field.',
+    },
+    {
+      name: 'hint',
+      type: 'string | null',
+      default: 'null',
+      description: 'Hint text below the field.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the input read-only.',
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as required.',
+    },
+    {
+      name: 'showClear',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a clear icon button.',
+    },
+  ];
 }

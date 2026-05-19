@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { Tag } from 'ui-lib-custom/tag';
 import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
 import { Button } from 'ui-lib-custom/button';
@@ -38,7 +37,6 @@ interface AriaRow {
   standalone: true,
   imports: [
     CodeSnippet,
-    DocCodeExampleComponent,
     Tag,
     Button,
     TableComponent,

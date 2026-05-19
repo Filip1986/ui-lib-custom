@@ -14,12 +14,13 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type InputOtpDemoSnippetKey =
   | 'basic'
   | 'basicTs'
@@ -54,11 +55,11 @@ type InputOtpDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    CodeSnippet,
     InputOtpComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
   styleUrl: './input-otp-demo.component.scss',
@@ -292,4 +293,28 @@ export class MyComponent {
     },
     competitiveParity: 'pending',
   };
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'length', type: 'number', default: '4', description: 'Number of OTP digit cells.' },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: "'One-time passcode'",
+      description: 'ARIA label for the group.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes all cells read-only.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all cells.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the group as invalid.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Cell size.' },
+  ];
 }

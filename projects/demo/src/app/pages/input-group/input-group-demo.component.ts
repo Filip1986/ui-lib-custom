@@ -14,10 +14,11 @@ import { Checkbox } from 'ui-lib-custom/checkbox';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { InputGroupAddonComponent, InputGroupComponent } from 'ui-lib-custom/input-group';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 interface InputGroupSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -53,7 +54,6 @@ type InputGroupDemoSnippetKey =
     DocDemoViewportComponent,
     UiLibInput,
     Button,
-    CodeSnippet,
     Checkbox,
     FloatLabelComponent,
     InputGroupComponent,
@@ -61,6 +61,7 @@ type InputGroupDemoSnippetKey =
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-group-demo.component.html',
   styleUrl: './input-group-demo.component.scss',
@@ -268,4 +269,13 @@ export class MyComponent {}`,
   public snippet(key: InputGroupDemoSnippetKey): string {
     return this.snippets[key];
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: '(no inputs)',
+      type: '—',
+      description:
+        'InputGroup is a structural wrapper. Place uilib-input-group-addon and form controls as children.',
+    },
+  ];
 }

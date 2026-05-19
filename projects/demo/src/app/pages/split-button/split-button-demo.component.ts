@@ -15,7 +15,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Icon } from 'ui-lib-custom/icon';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Panel } from 'ui-lib-custom/panel';
 import type {
@@ -36,7 +35,6 @@ import type {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     Icon,
-    CodeSnippet,
     SplitButtonComponent,
     SplitButtonContentDirective,
     DocTocComponent,

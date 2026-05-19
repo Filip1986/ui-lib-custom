@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, ViewChild, signal, viewChild } from
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Badge } from 'ui-lib-custom/badge';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
@@ -39,7 +38,6 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     Panel,
     Badge,
     Button,
-    CodeSnippet,
     Tabs,
     Tab,
     DocPageHeaderComponent,
