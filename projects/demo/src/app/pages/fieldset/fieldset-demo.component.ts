@@ -11,6 +11,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Fieldset component.
@@ -103,5 +104,56 @@ export class FieldsetDemoComponent {
       key: 'Tab / Shift+Tab',
       action: 'Moves focus to or from the legend toggle button in the standard tab order.',
     },
+  ];
+
+  public readonly inputRows: readonly ApiPropRow[] = [
+    {
+      name: 'legend',
+      type: 'string',
+      default: "''",
+      description: 'Text label rendered in the legend header.',
+    },
+    {
+      name: 'toggleable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables collapse/expand on legend click.',
+    },
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      default: 'false',
+      description: 'Current collapsed state. Supports <code>[(collapsed)]</code> two-way binding.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Falls back to global theme when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes on the host element.',
+    },
+  ];
+
+  public readonly outputRows: readonly ApiPropRow[] = [
+    {
+      name: 'toggled',
+      type: 'FieldsetToggleEvent',
+      description:
+        'Emitted when the panel collapses or expands. Carries <code>{ collapsed: boolean }</code>.',
+    },
+  ];
+
+  public readonly slotRows: readonly ApiPropRow[] = [
+    {
+      name: '[fieldsetLegend]',
+      type: '—',
+      description: 'Custom HTML for the legend / header area.',
+    },
+    { name: '(default)', type: '—', description: 'Body content rendered inside the panel.' },
   ];
 }

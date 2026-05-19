@@ -10,6 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ProgressBar component.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './progress-bar-demo.component.html',
   styleUrl: './progress-bar-demo.component.scss',
@@ -78,6 +81,57 @@ export class ProgressBarDemoComponent {
 
   public readonly variants: ProgressBarVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: ('sm' | 'md' | 'lg')[] = ['sm', 'md', 'lg'];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'number',
+      default: '0',
+      description: 'Progress value from 0 to 100 (clamped automatically).',
+    },
+    {
+      name: 'mode',
+      type: "'determinate' | 'indeterminate'",
+      default: "'determinate'",
+      description: 'Display mode.',
+    },
+    {
+      name: 'showValue',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether to show the percentage label inside the fill.',
+    },
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom label; overrides the computed percentage string.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Bar height size token.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'color',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom fill colour; overrides the CSS variable.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes added to the host element.',
+    },
+  ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);

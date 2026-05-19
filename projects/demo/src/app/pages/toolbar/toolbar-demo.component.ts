@@ -9,6 +9,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Toolbar component.
@@ -23,6 +25,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './toolbar-demo.component.html',
   styleUrl: './toolbar-demo.component.scss',
@@ -80,4 +83,49 @@ export class ToolbarDemoComponent {
   public setSize(size: ToolbarSize): void {
     this.playgroundSize.set(size);
   }
+
+  public readonly inputRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Controls toolbar height and padding.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label; recommended when multiple toolbars are on one page.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes added to the host element.',
+    },
+  ];
+
+  public readonly slotRows: readonly ApiPropRow[] = [
+    {
+      name: '[uiToolbarStart]',
+      type: '—',
+      description: 'Content projected into the leading (left) group.',
+    },
+    {
+      name: '[uiToolbarCenter]',
+      type: '—',
+      description: 'Content projected into the centered group.',
+    },
+    {
+      name: '[uiToolbarEnd]',
+      type: '—',
+      description: 'Content projected into the trailing (right) group.',
+    },
+  ];
 }

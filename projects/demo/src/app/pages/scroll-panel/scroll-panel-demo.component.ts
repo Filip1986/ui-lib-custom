@@ -12,6 +12,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ScrollPanel component.
@@ -28,6 +30,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
@@ -94,6 +97,21 @@ export class ScrollPanelDemoComponent {
     { id: 'interactive-variant-switcher', label: 'Interactive Variant Switcher' },
     { id: 'custom-css-properties', label: 'Custom CSS Properties' },
     { id: 'api-reference', label: 'API Reference' },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Falls back to <code>ThemeConfigService</code> when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes applied to the host element.',
+    },
   ];
 
   public scrollTo(id: string): void {

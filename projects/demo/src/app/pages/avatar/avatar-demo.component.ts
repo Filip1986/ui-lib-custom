@@ -11,6 +11,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Avatar and AvatarGroup components.
@@ -27,6 +29,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
@@ -80,6 +83,72 @@ export class AvatarDemoComponent {
   public readonly playgroundShape: WritableSignal<AvatarShape> = signal<AvatarShape>('circle');
   public readonly playgroundVariant: WritableSignal<AvatarVariant> =
     signal<AvatarVariant>('material');
+
+  public readonly avatarInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL of the image to display.',
+    },
+    {
+      name: 'imageAlt',
+      type: 'string',
+      default: "'Avatar'",
+      description: 'Alt text for the image (used as aria-label).',
+    },
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Initials or short text shown when no image is set.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class string for an icon (e.g. <code>pi pi-user</code>).',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size of the avatar.',
+    },
+    {
+      name: 'shape',
+      type: "'circle' | 'square'",
+      default: "'circle'",
+      description: 'Shape of the avatar.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Inherits global theme when null.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Overrides the auto-resolved accessible label.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes to append to the host element.',
+    },
+  ];
+
+  public readonly avatarGroupInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the group (role="group").',
+    },
+  ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);

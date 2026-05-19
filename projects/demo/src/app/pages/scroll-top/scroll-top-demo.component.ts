@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ScrollTop component.
@@ -22,6 +24,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './scroll-top-demo.component.html',
   styleUrl: './scroll-top-demo.component.scss',
@@ -79,4 +82,58 @@ export class ScrollTopDemoComponent {
     { length: 8 },
     (_: unknown, index: number): number => index + 1
   );
+
+  public readonly inputRows: readonly ApiPropRow[] = [
+    {
+      name: 'threshold',
+      type: 'number',
+      default: '400',
+      description: 'Scroll distance (px) before the button becomes visible.',
+    },
+    {
+      name: 'target',
+      type: "'window' | 'parent'",
+      default: "'window'",
+      description: 'Scroll target: the global window or the immediate parent element.',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      default: "'pi pi-arrow-up'",
+      description: 'CSS class(es) for the icon inside the button.',
+    },
+    {
+      name: 'behavior',
+      type: "'smooth' | 'auto'",
+      default: "'smooth'",
+      description: 'Native scroll-behavior applied when scrolling to top.',
+    },
+    {
+      name: 'buttonAriaLabel',
+      type: 'string',
+      default: "'Scroll to top'",
+      description: 'Accessible label for the button element.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Button size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Falls back to global ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes added to the host element.',
+    },
+  ];
+
+  public readonly propertyRows: readonly ApiPropRow[] = [
+    {
+      name: 'isVisible',
+      type: 'WritableSignal<boolean>',
+      description: 'Whether the button is currently visible. You can set this manually.',
+    },
+  ];
 }

@@ -14,6 +14,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Divider component.
@@ -28,6 +30,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
@@ -53,6 +56,40 @@ export class DividerDemoComponent {
   };
 
   public readonly importCode: string = "import { Divider } from 'ui-lib-custom/divider'";
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Direction of the divider line.',
+    },
+    {
+      name: 'type',
+      type: "'solid' | 'dashed' | 'dotted'",
+      default: "'solid'",
+      description: 'Visual style of the divider line.',
+    },
+    {
+      name: 'align',
+      type: "'left' | 'center' | 'right' | 'top' | 'bottom' | null",
+      default: 'null',
+      description:
+        'Position of the projected content. Horizontal: left/center/right; Vertical: top/center/bottom.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes added to the host element.',
+    },
+  ];
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

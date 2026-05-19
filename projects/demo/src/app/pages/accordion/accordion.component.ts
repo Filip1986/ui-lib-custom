@@ -31,6 +31,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface FaqItem {
   value: string;
@@ -79,6 +81,7 @@ type AccordionTab =
     AccordionBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -330,6 +333,47 @@ export class AccordionComponent {
       key: 'Tab / Shift+Tab',
       action:
         'Moves focus into or out of the accordion in the standard tab order. Open panel content is included.',
+    },
+  ];
+
+  public readonly accordionApiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: 'AccordionVariant',
+      default: 'null',
+      description: 'Visual style: material | bootstrap | minimal.',
+    },
+    {
+      name: 'size',
+      type: 'AccordionSize',
+      default: "'md'",
+      description: 'Spacing scale: sm | md | lg.',
+    },
+    {
+      name: 'expandMode',
+      type: "'single' | 'multiple'",
+      default: "'single'",
+      description: 'Allow one or many panels to be expanded.',
+    },
+    {
+      name: 'expandedPanels',
+      type: 'string[]',
+      description: 'Controlled list of expanded panel ids.',
+    },
+    {
+      name: 'defaultExpandedPanels',
+      type: 'string[]',
+      description: 'Uncontrolled initial expanded panels.',
+    },
+    {
+      name: 'expandedChange',
+      type: 'OutputEmitterRef<AccordionChangeEvent>',
+      description: 'Emits on expansion state changes.',
+    },
+    {
+      name: 'panelToggle',
+      type: 'OutputEmitterRef<AccordionChangeEvent>',
+      description: 'Emits every toggle interaction.',
     },
   ];
 }

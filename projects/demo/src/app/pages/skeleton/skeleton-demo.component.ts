@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Skeleton component.
@@ -21,6 +23,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './skeleton-demo.component.html',
   styleUrl: './skeleton-demo.component.scss',
@@ -59,6 +62,57 @@ export class SkeletonDemoComponent {
     { id: 'custom-sizes', label: 'Custom Sizes' },
     { id: 'custom-border-radius', label: 'Custom Border Radius' },
     { id: 'api', label: 'API' },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'shape',
+      type: "'rectangle' | 'circle'",
+      default: "'rectangle'",
+      description: 'Shape of the placeholder.',
+    },
+    {
+      name: 'width',
+      type: 'string',
+      default: "'100%'",
+      description: 'CSS width value. Overridden by <code>size</code>.',
+    },
+    {
+      name: 'height',
+      type: 'string',
+      default: "'1rem'",
+      description: 'CSS height value. Overridden by <code>size</code>.',
+    },
+    {
+      name: 'size',
+      type: 'string | null',
+      default: 'null',
+      description: 'Sets both width and height. Useful for circles.',
+    },
+    {
+      name: 'borderRadius',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom border-radius, overrides shape default.',
+    },
+    {
+      name: 'animation',
+      type: "'wave' | 'none'",
+      default: "'wave'",
+      description: 'Shimmer animation type.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to ThemeConfigService.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes on the host element.',
+    },
   ];
 
   public scrollTo(id: string): void {

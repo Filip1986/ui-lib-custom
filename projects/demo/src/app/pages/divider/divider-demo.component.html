@@ -269,52 +269,7 @@
   <!-- API Table -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>orientation</code></td>
-          <td><code>'horizontal' | 'vertical'</code></td>
-          <td><code>'horizontal'</code></td>
-          <td>Direction of the divider line.</td>
-        </tr>
-        <tr>
-          <td><code>type</code></td>
-          <td><code>'solid' | 'dashed' | 'dotted'</code></td>
-          <td><code>'solid'</code></td>
-          <td>Visual style of the divider line.</td>
-        </tr>
-        <tr>
-          <td><code>align</code></td>
-          <td><code>'left' | 'center' | 'right' | 'top' | 'bottom' | null</code></td>
-          <td><code>null</code> (resolves to <code>'center'</code>)</td>
-          <td>
-            Position of the projected content along the divider.
-            Horizontal dividers support <code>left</code> / <code>center</code> / <code>right</code>;
-            vertical dividers support <code>top</code> / <code>center</code> / <code>bottom</code>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes added to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

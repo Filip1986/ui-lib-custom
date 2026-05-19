@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Tooltip directive.
@@ -24,6 +26,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',
@@ -67,6 +70,46 @@ export class TooltipDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'long-text', label: 'Long Text' },
     { id: 'api', label: 'API' },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'uiLibTooltip', type: 'string', default: "''", description: 'The tooltip label text.' },
+    {
+      name: 'tooltipPosition',
+      type: "'top' | 'bottom' | 'left' | 'right'",
+      default: "'top'",
+      description: 'Preferred position. Flips automatically when space is lacking.',
+    },
+    {
+      name: 'tooltipEvent',
+      type: "'hover' | 'focus' | 'both'",
+      default: "'hover'",
+      description: 'Which host events trigger the tooltip.',
+    },
+    {
+      name: 'showDelay',
+      type: 'number',
+      default: '0',
+      description: 'Milliseconds to wait before showing.',
+    },
+    {
+      name: 'hideDelay',
+      type: 'number',
+      default: '0',
+      description: 'Milliseconds to wait before hiding.',
+    },
+    {
+      name: 'tooltipDisabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevent the tooltip from showing.',
+    },
+    {
+      name: 'tooltipVariant',
+      type: 'TooltipVariant | null',
+      default: 'null',
+      description: 'Design variant. Falls back to <code>ThemeConfigService</code>.',
+    },
   ];
 
   public scrollTo(id: string): void {

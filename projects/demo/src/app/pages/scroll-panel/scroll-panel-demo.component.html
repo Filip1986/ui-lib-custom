@@ -158,30 +158,7 @@
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Visual variant. Falls back to <code>ThemeConfigService</code> when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes applied to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" [showDefault]="true" />
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
