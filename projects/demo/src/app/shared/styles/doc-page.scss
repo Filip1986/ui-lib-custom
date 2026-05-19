@@ -579,30 +579,9 @@
 }
 
 // ---- TOC rail ------------------------------------------------------------
-
-.demo-page-rail {
-  position: sticky;
-  top: 96px;
-  align-self: start;
-  padding: 1rem;
-  background: var(--uilib-surface-0, #fff);
-  border: 1px solid var(--uilib-surface-200, #e5e7eb);
-  border-radius: 0.5rem;
-
-  &__title {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--uilib-muted, #6b7280);
-    margin: 0 0 0.75rem;
-    padding: 0 0.625rem;
-  }
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
-}
+// Rail styles are owned by doc-page-layout.component.scss via ::ng-deep.
+// No per-page import needed — all pages using app-doc-page-layout get
+// the correct rail appearance automatically.
 
 // ==========================================================================
 // Shared demo-page styles
