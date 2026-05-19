@@ -24,7 +24,7 @@
               <span class="value-text">Value: {{ basicChecked() }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')"
           [showLineNumbers]="true"
           />
       </section>
@@ -57,7 +57,7 @@
               />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('labels')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('labels')"
           [showLineNumbers]="true"
           />
       </section>
@@ -96,7 +96,7 @@
               />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('icons')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('icons')"
           [showLineNumbers]="true"
           />
       </section>
@@ -130,7 +130,7 @@
               />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
           [showLineNumbers]="true"
           />
       </section>
@@ -177,7 +177,7 @@
               }
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')"
           [showLineNumbers]="true"
           />
       </section>
@@ -200,7 +200,7 @@
               <span class="value-text">State: {{ allowEmptyChecked() ? 'confirmed' : 'pending' }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('allowEmpty')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('allowEmpty')"
           [showLineNumbers]="true"
           />
       </section>
@@ -223,7 +223,7 @@
               />
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
           [showLineNumbers]="true"
           />
       </section>
@@ -247,7 +247,7 @@
               <span class="value-text">ngModel: {{ ngModelValue }}</span>
             </div>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('ngModel')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('ngModel')"
           [showLineNumbers]="true"
           />
 
@@ -277,7 +277,7 @@
               </div>
             </form>
           </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
           [showLineNumbers]="true"
           />
       </section>
@@ -312,6 +312,12 @@
 
     </div>
   </app-doc-demo-viewport>
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
+    <h2 class="demo-section__title">Keyboard Navigation</h2>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

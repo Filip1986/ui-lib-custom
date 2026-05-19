@@ -8,6 +8,8 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type {
@@ -79,6 +81,7 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     CodeSnippet,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './tree-select-demo.component.html',
   styleUrl: './tree-select-demo.component.scss',
@@ -122,6 +125,7 @@ export class TreeSelectDemoComponent {
     { id: 'loading', label: 'Loading' },
     { id: 'ngModel', label: 'ngModel' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly nodes: TreeNode[] = SAMPLE_TREE_NODES;
@@ -244,4 +248,13 @@ export class TreeSelectDemoComponent {
   public snippet(key: string): string {
     return this.snippets[key] ?? '';
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Enter / Space', suffix: 'on trigger', action: 'Opens or closes the tree panel.' },
+    { key: '↓ / ↑', suffix: 'in panel', action: 'Move focus between visible tree nodes.' },
+    { key: '→', suffix: 'in panel', action: 'Expand a collapsed node.' },
+    { key: '←', suffix: 'in panel', action: 'Collapse an expanded node or move to parent.' },
+    { key: 'Enter / Space', suffix: 'on node', action: 'Select the focused node.' },
+    { key: 'Escape', action: 'Closes the panel and returns focus to the trigger.' },
+  ];
 }

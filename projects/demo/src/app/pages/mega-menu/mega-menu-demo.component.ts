@@ -16,6 +16,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the MegaMenu component.
@@ -31,6 +33,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageHeaderComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
@@ -79,6 +82,7 @@ export class MegaMenuDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'playground', label: 'Playground' },
     { id: 'api', label: 'API Reference' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -405,4 +409,19 @@ export class MegaMenuDemoComponent {
     const newEntry: string = `Clicked: "${event.item.label ?? 'unknown'}"`;
     this.itemClickLog.set([newEntry, ...log].slice(0, 6));
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '← / →',
+      action:
+        'Move focus between root-level items (horizontal) or between category panels (vertical).',
+    },
+    { key: '↓ / ↑', action: 'Navigate items inside the open panel column.' },
+    {
+      key: 'Enter / Space',
+      action: 'Activate the focused item, or open/close the associated panel.',
+    },
+    { key: 'Escape', action: 'Close the open panel and return focus to the triggering root item.' },
+    { key: 'Home / End', action: 'Jump to the first or last item in the current column.' },
+  ];
 }

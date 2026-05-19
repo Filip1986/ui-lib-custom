@@ -19,6 +19,8 @@ import type {
 } from 'ui-lib-custom/toggle-button';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 type SnippetKey =
   | 'basic'
@@ -51,6 +53,7 @@ type SnippetKey =
     ToggleButton,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './toggle-button-demo.component.html',
   styleUrl: './toggle-button-demo.component.scss',
@@ -93,6 +96,7 @@ export class ToggleButtonDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'forms', label: 'Forms' },
     { id: 'events', label: 'Events' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly variantOptions: ToggleButtonVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -203,4 +207,15 @@ export class ToggleButtonDemoComponent {
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Space / Enter',
+      action: 'Toggles the button between on and off states.',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Moves focus to or from the toggle button in the standard tab order.',
+    },
+  ];
 }

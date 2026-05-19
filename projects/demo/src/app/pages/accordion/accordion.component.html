@@ -7,7 +7,7 @@
   />
 
     <app-accordion-basic-example />
-  <ui-lib-code-snippet language="html" [code]="accordionExample" 
+  <ui-lib-code-snippet language="html" [code]="accordionExample"
     [showLineNumbers]="true"
     />
 
@@ -261,7 +261,7 @@
           </div>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="snippets.controlled" language="typescript" 
+      <ui-lib-code-snippet [code]="snippets.controlled" language="typescript"
         [showLineNumbers]="true"
         />
     </ui-lib-card>
@@ -286,7 +286,7 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="snippets.customHeader" language="html" 
+      <ui-lib-code-snippet [code]="snippets.customHeader" language="html"
         [showLineNumbers]="true"
         />
     </ui-lib-card>
@@ -356,10 +356,10 @@
           </ui-lib-accordion>
         </div>
       </app-doc-demo-viewport>
-      <ui-lib-code-snippet [code]="iconSnippets.customIcons" language="html" 
+      <ui-lib-code-snippet [code]="iconSnippets.customIcons" language="html"
         [showLineNumbers]="true"
         />
-      <ui-lib-code-snippet [code]="iconSnippets.iconPosition" language="html" 
+      <ui-lib-code-snippet [code]="iconSnippets.iconPosition" language="html"
         [showLineNumbers]="true"
         />
     </ui-lib-card>
@@ -383,7 +383,7 @@
             </ui-lib-accordion>
           </div>
         </app-doc-demo-viewport>
-        <ui-lib-code-snippet [code]="iconSnippets.toggleTemplate" language="html" 
+        <ui-lib-code-snippet [code]="iconSnippets.toggleTemplate" language="html"
           [showLineNumbers]="true"
           />
       </ui-lib-card>
@@ -549,7 +549,7 @@
           <div>Emits every toggle interaction.</div>
         </div>
       </div>
-      <ui-lib-code-snippet [code]="snippets.basic" language="html" 
+      <ui-lib-code-snippet [code]="snippets.basic" language="html"
         [showLineNumbers]="true"
         />
     </ui-lib-card>
@@ -573,6 +573,12 @@
       </ul>
     </ui-lib-card>
   }
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
+    <h2 class="demo-section__title">Keyboard Navigation</h2>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

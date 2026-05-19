@@ -23,7 +23,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
   </section>
@@ -48,7 +48,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Label position" [code]="snippets.labelPosition" 
+      filename="Label position" [code]="snippets.labelPosition"
       [showLineNumbers]="true"
       />
   </section>
@@ -69,7 +69,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes" 
+      filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
   </section>
@@ -93,7 +93,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
   </section>
@@ -117,7 +117,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Vertical" [code]="snippets.vertical" 
+      filename="Vertical" [code]="snippets.vertical"
       [showLineNumbers]="true"
       />
   </section>
@@ -134,7 +134,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="No legend" [code]="snippets.noLegend" 
+      filename="No legend" [code]="snippets.noLegend"
       [showLineNumbers]="true"
       />
   </section>
@@ -418,28 +418,7 @@
       <p class="demo-section__description">
         MeterGroup is informational and non-interactive — it adds no tabbable controls.
       </p>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Behaviour</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Tab</code> / <code>Shift+Tab</code></td>
-            <td>Skips meter segments and legend items — nothing is focusable.</td>
-          </tr>
-          <tr>
-            <td>Arrow keys</td>
-            <td>No component-specific keyboard handling.</td>
-          </tr>
-          <tr>
-            <td><code>Enter</code> / <code>Space</code></td>
-            <td>No component-specific keyboard handling.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

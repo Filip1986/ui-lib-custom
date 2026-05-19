@@ -29,6 +29,8 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { SelectBasicExampleComponent } from '@demo/examples/select-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 type TabKey =
   | 'playground'
@@ -63,6 +65,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     SelectBasicExampleComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -104,6 +107,7 @@ export class SelectComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
@@ -244,4 +248,16 @@ export class Example {}`,
   public onClear(): void {
     this.value.set(this.multiple() ? [] : null);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Enter / Space / ↓', suffix: 'on trigger', action: 'Opens the dropdown panel.' },
+    { key: '↓ / ↑', suffix: 'in panel', action: 'Move focus to the next or previous option.' },
+    { key: 'Home / End', suffix: 'in panel', action: 'Jump to the first or last option.' },
+    {
+      key: 'Enter / Space',
+      suffix: 'on option',
+      action: 'Select the focused option and close the panel.',
+    },
+    { key: 'Escape', action: 'Close the panel without selecting and return focus to the trigger.' },
+  ];
 }

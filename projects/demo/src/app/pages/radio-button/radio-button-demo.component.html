@@ -45,7 +45,7 @@
     </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
   </section>
@@ -86,7 +86,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
   </section>
@@ -106,7 +106,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes" 
+      filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
   </section>
@@ -133,7 +133,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Filled" [code]="snippets.filled" 
+      filename="Filled" [code]="snippets.filled"
       [showLineNumbers]="true"
       />
   </section>
@@ -153,7 +153,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled" 
+      filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
   </section>
@@ -183,7 +183,7 @@
     <p class="demo-radio-hint">Selected fruit: <strong>{{ selectedFruit }}</strong></p>
     <ui-lib-code-snippet
       language="html"
-      filename="With ngModel" [code]="snippets.ngmodel" 
+      filename="With ngModel" [code]="snippets.ngmodel"
       [showLineNumbers]="true"
       />
   </section>
@@ -216,7 +216,7 @@
     <p class="demo-radio-hint">Form value: <strong>{{ planForm.value | json }}</strong></p>
     <ui-lib-code-snippet
       language="html"
-      filename="Reactive forms" [code]="snippets.reactiveForms" 
+      filename="Reactive forms" [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
       />
   </section>
@@ -422,36 +422,7 @@
 
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Enters the group; browser focuses the checked radio (or the first if none checked).</td>
-          </tr>
-          <tr>
-            <td><code>Shift+Tab</code></td>
-            <td>Leaves the group.</td>
-          </tr>
-          <tr>
-            <td><code>ArrowDown</code> / <code>ArrowRight</code></td>
-            <td>Moves focus to the next non-disabled radio, wrapping around; selects it.</td>
-          </tr>
-          <tr>
-            <td><code>ArrowUp</code> / <code>ArrowLeft</code></td>
-            <td>Moves focus to the previous non-disabled radio, wrapping around; selects it.</td>
-          </tr>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Selects the focused radio (native browser behaviour).</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

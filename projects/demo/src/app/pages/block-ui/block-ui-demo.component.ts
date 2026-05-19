@@ -11,6 +11,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the BlockUI component.
@@ -27,6 +29,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './block-ui-demo.component.html',
   styleUrl: './block-ui-demo.component.scss',
@@ -169,4 +172,17 @@ export class BlockUiDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Keyboard focus cannot enter the blocked content while <code>blocked = true</code> — the content wrapper receives <code>inert</code>, making all descendants non-focusable.',
+    },
+    {
+      key: 'Any key',
+      action:
+        'No special handling on the mask overlay. All standard interactions remain available outside the blocked area.',
+    },
+  ];
 }

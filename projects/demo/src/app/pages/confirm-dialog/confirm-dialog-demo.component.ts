@@ -13,6 +13,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the ConfirmDialog component.
@@ -28,6 +30,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
@@ -74,6 +77,7 @@ export class ConfirmDialogDemoComponent {
     { id: 'programmatic', label: 'Programmatic' },
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'api', label: 'API Reference' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly variants: ConfirmDialogVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -174,4 +178,20 @@ export class ConfirmDialogDemoComponent {
       reject: (): void => this.lastResult.set(`✗ ${variant} rejected`),
     });
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Cycles focus between the Accept and Reject buttons inside the dialog.',
+    },
+    {
+      key: 'Enter / Space',
+      action: 'Activates the focused button (Accept or Reject).',
+    },
+    {
+      key: 'Escape',
+      action:
+        'Closes the dialog (treated as rejection) and returns focus to the triggering element.',
+    },
+  ];
 }

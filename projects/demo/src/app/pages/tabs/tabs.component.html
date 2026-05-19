@@ -7,7 +7,7 @@
   />
 
     <app-tabs-basic-example />
-  <ui-lib-code-snippet language="html" [code]="tabsExample" 
+  <ui-lib-code-snippet language="html" [code]="tabsExample"
     [showLineNumbers]="true"
     />
 
@@ -580,7 +580,7 @@
         ></ui-lib-code-snippet>
       <ui-lib-code-snippet
         language="html"
-        filename="Per-tab lazy" [code]="snippets.perTabLazy" 
+        filename="Per-tab lazy" [code]="snippets.perTabLazy"
         [showLineNumbers]="true"
         />
     </ui-lib-card>
@@ -624,6 +624,12 @@
       </section>
     </app-doc-demo-viewport>
   </ui-lib-card>
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
+    <h2 class="demo-section__title">Keyboard Navigation</h2>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

@@ -15,6 +15,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the TreeTable component.
@@ -33,6 +35,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
@@ -70,6 +73,7 @@ export class TreeTableDemoComponent {
     { id: 'custom-cell-templates', label: 'Custom Cell Templates' },
     { id: 'organisation-data', label: 'Organisation Data' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -278,4 +282,12 @@ export class TreeTableDemoComponent {
     };
     return iconMap[type] ?? 'pi pi-file';
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '↓ / ↑', action: 'Move focus between rows.' },
+    { key: '→', action: 'Expand a collapsed row group.' },
+    { key: '←', action: 'Collapse an expanded row group.' },
+    { key: 'Enter / Space', action: 'Select the focused row (respects selection mode).' },
+    { key: 'Home / End', action: 'Move focus to the first or last row.' },
+  ];
 }

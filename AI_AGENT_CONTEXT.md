@@ -82,6 +82,17 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-18 [DocKeyboardNavComponent — fixed errors + completed stepper migration]
+Changed:
+  - projects/demo/src/app/pages/accordion/accordion.component.ts (fixed: keyboardRows was outside class body — moved inside class)
+  - projects/demo/src/app/pages/dialog/dialog.component.ts (fixed: DialogComponent was missing from imports array)
+  - projects/demo/src/app/pages/stepper/stepper-demo.component.html (added keyboard-navigation section with <app-doc-keyboard-nav [rows]="keyboardRows" />)
+State: All demo pages with keyboard navigation sections now compile cleanly. DocKeyboardNavComponent is used in all 37 HTML pages that have keyboard navigation content. Build produces zero errors (pre-existing SCSS budget warning on roadmap/button/date-picker only). ESLint passes on all 3 modified files.
+Verification:
+  npx eslint projects/demo/src/app/pages/accordion/ projects/demo/src/app/pages/dialog/ projects/demo/src/app/pages/stepper/ --max-warnings 0 → PASS
+  ng build demo → PASS (zero errors; only pre-existing SCSS budget warnings)
+Next step: Run ESLint on all demo pages broadly to catch any remaining import-path issues (some pages use relative paths instead of @demo/ alias for DocKeyboardNavComponent import — those should still compile but are style non-conformant per AGENTS.md rules).
+
 Date: 2026-05-18 [Audit prompt system + DocQualityBadgeComponent]
 Changed:
   - docs/prompts/audit/README.md (NEW — system overview and priority order)

@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Chip component.
@@ -28,6 +30,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
@@ -220,4 +223,22 @@ export class ChipDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Space / Enter',
+      target: 'Selectable chip',
+      action: 'Toggles the selected state and emits <code>(selectedChange)</code>.',
+    },
+    {
+      key: 'Tab',
+      target: 'Selectable chip',
+      action: 'Moves focus to / from the chip in the standard tab order.',
+    },
+    {
+      key: 'Space / Enter',
+      target: 'Remove button',
+      action: 'Activates the remove button (native button behaviour).',
+    },
+  ];
 }

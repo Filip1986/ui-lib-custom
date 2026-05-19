@@ -9,6 +9,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the FocusTrap directive.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
@@ -65,6 +68,7 @@ export class FocusTrapDemoComponent {
     { id: 'toggle-trap', label: 'Toggle Trap' },
     { id: 'modal-overlay-pattern', label: 'Modal Overlay Pattern' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -95,4 +99,16 @@ export class FocusTrapDemoComponent {
   public onFormEmailChange(event: Event): void {
     this.formEmail.set((event.target as HTMLInputElement).value);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus forward through focusable elements inside the trap. Wraps from last to first.',
+    },
+    {
+      key: 'Shift+Tab',
+      action: 'Moves focus backward. Wraps from first to last.',
+    },
+  ];
 }

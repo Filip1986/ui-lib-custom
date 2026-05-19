@@ -9,6 +9,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Fieldset component.
@@ -23,6 +25,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',
@@ -66,6 +69,7 @@ export class FieldsetDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'toggle-event', label: 'Toggle Event' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -88,4 +92,16 @@ export class FieldsetDemoComponent {
   public setPlaygroundVariant(variant: FieldsetVariant): void {
     this.playgroundVariant.set(variant);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Enter / Space',
+      suffix: 'on legend toggle button',
+      action: 'Toggles the panel open or closed (only when <code>[toggleable]="true"</code>).',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Moves focus to or from the legend toggle button in the standard tab order.',
+    },
+  ];
 }

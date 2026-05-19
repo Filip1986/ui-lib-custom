@@ -18,6 +18,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the MeterGroup component.
@@ -34,6 +36,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
@@ -236,4 +239,12 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';`,
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Skips meter segments and legend items — MeterGroup is informational and non-interactive, nothing is focusable.',
+    },
+  ];
 }

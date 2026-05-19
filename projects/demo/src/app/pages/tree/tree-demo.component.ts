@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Tree component.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './tree-demo.component.html',
   styleUrl: './tree-demo.component.scss',
@@ -62,6 +65,7 @@ export class TreeDemoComponent {
     { id: 'custom-node-template', label: 'Custom Node Template' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'variants', label: 'Variants' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -265,4 +269,15 @@ export class TreeDemoComponent {
     }
     return nodes.map((n: TreeNode): string => n.label ?? '—').join(', ');
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '↓ / ↑', action: 'Move focus between visible tree nodes.' },
+    { key: '→', action: 'Expand a collapsed node; move into first child if already expanded.' },
+    {
+      key: '←',
+      action: 'Collapse an expanded node; move focus to the parent node if already collapsed.',
+    },
+    { key: 'Enter / Space', action: 'Select the focused node (respects selection mode).' },
+    { key: 'Home / End', action: 'Move focus to the first or last visible node.' },
+  ];
 }

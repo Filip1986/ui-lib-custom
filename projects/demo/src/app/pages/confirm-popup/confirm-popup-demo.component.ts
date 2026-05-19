@@ -11,6 +11,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the ConfirmPopup component.
@@ -27,6 +29,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
@@ -70,6 +73,7 @@ export class ConfirmPopupDemoComponent {
     { id: 'declarative-usage', label: 'Declarative Usage' },
     { id: 'result-log', label: 'Result Log' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly variants: ConfirmPopupVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -146,4 +150,20 @@ export class ConfirmPopupDemoComponent {
       },
     });
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Cycles focus between the Accept and Reject buttons inside the popup.',
+    },
+    {
+      key: 'Enter / Space',
+      action: 'Activates the focused button (Accept or Reject).',
+    },
+    {
+      key: 'Escape',
+      action:
+        'Closes the popup (treated as rejection) and returns focus to the triggering element.',
+    },
+  ];
 }

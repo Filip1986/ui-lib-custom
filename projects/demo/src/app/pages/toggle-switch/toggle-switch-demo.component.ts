@@ -17,6 +17,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the ToggleSwitch component.
@@ -34,6 +36,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './toggle-switch-demo.component.html',
   styleUrl: './toggle-switch-demo.component.scss',
@@ -71,6 +74,7 @@ export class ToggleSwitchDemoComponent {
     { id: 'ngmodel', label: 'ngModel' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'playground', label: 'Playground' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -116,4 +120,15 @@ export class ToggleSwitchDemoComponent {
   public reactiveFormText(): string {
     return this.notificationsControl.value ? 'Enabled' : 'Disabled';
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Space',
+      action: 'Toggles the switch between on and off.',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Moves focus to or from the toggle switch in the standard tab order.',
+    },
+  ];
 }

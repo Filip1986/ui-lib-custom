@@ -10,6 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Drawer component.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',
@@ -66,6 +69,7 @@ export class DrawerDemoComponent {
     { id: 'with-footer', label: 'With Footer' },
     { id: 'full-screen', label: 'Full Screen' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -90,4 +94,20 @@ export class DrawerDemoComponent {
     this.currentVariant.set(variant);
     this.variantOpen.set(true);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Escape',
+      action: 'Closes the drawer and returns focus to the previously-focused element.',
+    },
+    {
+      key: 'Tab',
+      action:
+        'Cycles focus forward through all focusable elements inside the drawer panel. Wraps from last to first.',
+    },
+    {
+      key: 'Shift+Tab',
+      action: 'Cycles focus backward through all focusable elements. Wraps from first to last.',
+    },
+  ];
 }

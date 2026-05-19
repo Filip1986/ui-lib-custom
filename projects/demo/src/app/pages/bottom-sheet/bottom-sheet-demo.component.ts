@@ -12,6 +12,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the BottomSheet component.
@@ -28,6 +30,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './bottom-sheet-demo.component.html',
   styleUrl: './bottom-sheet-demo.component.scss',
@@ -200,4 +203,21 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';`,
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Escape',
+      action:
+        'Closes the sheet (when <code>[closeOnEscape]="true"</code>) and returns focus to the previously focused element.',
+    },
+    {
+      key: 'Tab',
+      action:
+        'Cycles focus forward through all focusable elements inside the panel. Wraps from last to first.',
+    },
+    {
+      key: 'Shift+Tab',
+      action: 'Cycles focus backward through all focusable elements. Wraps from first to last.',
+    },
+  ];
 }

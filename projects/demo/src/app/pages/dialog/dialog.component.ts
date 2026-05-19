@@ -13,6 +13,8 @@ import { DialogComponent } from 'ui-lib-custom/dialog';
 import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for Dialog component capabilities.
@@ -30,7 +32,9 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     Button,
     Icon,
     DialogComponent,
+    DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
@@ -53,6 +57,7 @@ export class DialogDemoComponent {
     { id: 'draggable', label: 'Draggable' },
     { id: 'headless', label: 'Headless' },
     { id: 'variant-switcher', label: 'Variant Switcher' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -146,4 +151,26 @@ export class DialogDemoComponent {
       url: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
     },
   };
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Escape',
+      action:
+        'Closes the dialog and returns focus to the previously-focused element (when closable).',
+    },
+    {
+      key: 'Tab',
+      action:
+        'Cycles focus forward through all focusable elements inside the dialog. Wraps from last to first.',
+    },
+    {
+      key: 'Shift+Tab',
+      action: 'Cycles focus backward through all focusable elements. Wraps from first to last.',
+    },
+    {
+      key: 'Enter / Space',
+      target: 'Close button',
+      action: 'Closes the dialog.',
+    },
+  ];
 }

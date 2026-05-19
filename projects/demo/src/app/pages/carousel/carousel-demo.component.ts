@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 interface DemoProduct {
   name: string;
@@ -30,6 +32,7 @@ interface DemoProduct {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
@@ -71,6 +74,7 @@ export class CarouselDemoComponent {
     { id: 'minimal-variant', label: 'Minimal Variant' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'hidden-controls', label: 'Hidden Navigators & Indicators' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   /** Sample products used across all demo scenarios. */
@@ -113,4 +117,15 @@ export class CarouselDemoComponent {
   public onPageChange(event: { page: number }): void {
     this.lastPage = event.page;
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', action: 'Navigate to the previous or next page of items.' },
+    {
+      key: 'Enter / Space',
+      target: 'Navigator button',
+      action: 'Activate the previous/next button.',
+    },
+    { key: 'Enter / Space', target: 'Indicator dot', action: 'Jump directly to that page.' },
+    { key: 'Tab / Shift+Tab', action: 'Move focus between navigator buttons and indicator dots.' },
+  ];
 }

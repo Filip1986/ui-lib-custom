@@ -10,6 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Stepper component.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './stepper-demo.component.html',
   styleUrl: './stepper-demo.component.scss',
@@ -61,6 +64,7 @@ export class StepperDemoComponent {
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -107,4 +111,15 @@ export class StepperDemoComponent {
   public handleStepChange(event: StepChangeEvent): void {
     this.lastStepChange.set(event);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', suffix: 'on step header', action: 'Move focus between step headers.' },
+    {
+      key: 'Enter / Space',
+      suffix: 'on step header',
+      action: 'Navigate to the focused step (non-linear mode) or activate action.',
+    },
+    { key: 'Tab / Shift+Tab', action: 'Move focus between elements within the active step panel.' },
+    { key: 'Home / End', action: 'Move focus to the first or last step header.' },
+  ];
 }

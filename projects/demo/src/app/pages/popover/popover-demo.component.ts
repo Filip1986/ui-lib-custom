@@ -10,6 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Popover component.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',
@@ -66,6 +69,7 @@ export class PopoverDemoComponent {
     { id: 'events', label: 'Events' },
     { id: 'declarative', label: 'Declarative' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly variants: PopoverVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -86,4 +90,20 @@ export class PopoverDemoComponent {
   public onHidden(): void {
     this.lastEvent.set('hidden');
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Escape',
+      action: 'Closes the popover and returns focus to the trigger element.',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Cycles focus through focusable elements inside the popover panel.',
+    },
+    {
+      key: 'Enter / Space',
+      target: 'Close button',
+      action: 'Closes the popover (when a close button is rendered).',
+    },
+  ];
 }

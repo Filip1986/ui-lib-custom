@@ -32,7 +32,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
   </section>
@@ -51,7 +51,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Icon" [code]="snippets.icon" 
+      filename="Icon" [code]="snippets.icon"
       [showLineNumbers]="true"
       />
   </section>
@@ -83,7 +83,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Image" [code]="snippets.image" 
+      filename="Image" [code]="snippets.image"
       [showLineNumbers]="true"
       />
   </section>
@@ -118,7 +118,7 @@
     }
     <ui-lib-code-snippet
       language="html"
-      filename="Removable" [code]="snippets.removable" 
+      filename="Removable" [code]="snippets.removable"
       [showLineNumbers]="true"
       />
   </section>
@@ -149,7 +149,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Selectable" [code]="snippets.selectable" 
+      filename="Selectable" [code]="snippets.selectable"
       [showLineNumbers]="true"
       />
   </section>
@@ -167,7 +167,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes" 
+      filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
   </section>
@@ -194,7 +194,7 @@
     }
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
   </section>
@@ -467,37 +467,7 @@
 
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Target</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Selectable chip</td>
-            <td>Toggles the selected state and emits <code>(selectedChange)</code>.</td>
-          </tr>
-          <tr>
-            <td><code>Enter</code></td>
-            <td>Selectable chip</td>
-            <td>Toggles the selected state and emits <code>(selectedChange)</code>.</td>
-          </tr>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Selectable chip</td>
-            <td>Moves focus to / from the chip in the standard tab order.</td>
-          </tr>
-          <tr>
-            <td><code>Space</code> / <code>Enter</code></td>
-            <td>Remove button</td>
-            <td>Activates the remove button (browser default button behaviour).</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

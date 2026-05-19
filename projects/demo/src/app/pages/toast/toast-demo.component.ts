@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Toast component.
@@ -23,6 +25,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './toast-demo.component.html',
   styleUrl: './toast-demo.component.scss',
@@ -62,6 +65,7 @@ export class ToastDemoComponent {
     { id: 'position-variant', label: 'Position & Variant' },
     { id: 'keyed-containers', label: 'Keyed Containers' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -197,4 +201,21 @@ export class ToastDemoComponent {
       life: 5000,
     });
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Escape',
+      action:
+        'Dismisses the focused toast notification (when <code>[closable]="true"</code>) and returns focus to the previously focused element.',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Moves focus between the notification and its close button.',
+    },
+    {
+      key: 'Enter / Space',
+      target: 'Close button',
+      action: 'Dismisses the toast.',
+    },
+  ];
 }

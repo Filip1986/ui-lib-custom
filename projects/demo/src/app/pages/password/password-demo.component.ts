@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /** Demo page for the Password component. */
 @Component({
@@ -22,6 +24,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './password-demo.component.html',
   styleUrl: './password-demo.component.scss',
@@ -145,4 +148,16 @@ export class PasswordDemoComponent {
     },
     competitiveParity: 'pending',
   };
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus to the input, then to the toggle-mask button, then the clear button (when visible).',
+    },
+    {
+      key: 'Enter / Space',
+      action: 'Activates the toggle-mask or clear button when one of them has focus.',
+    },
+  ];
 }

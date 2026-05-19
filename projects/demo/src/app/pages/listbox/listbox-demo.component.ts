@@ -9,6 +9,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { Card } from 'ui-lib-custom/card';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -41,6 +43,7 @@ type ListboxDemoSnippetKey =
     ListboxComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './listbox-demo.component.html',
   styleUrl: './listbox-demo.component.scss',
@@ -85,6 +88,7 @@ export class ListboxDemoComponent {
     { id: 'toggle-all', label: 'Toggle All' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   // ── Options ────────────────────────────────────────────────────────────────
@@ -197,4 +201,15 @@ export class ListboxDemoComponent {
   public snippet(key: ListboxDemoSnippetKey): string {
     return this.snippets[key];
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '↓ / ↑', action: 'Move focus to the next or previous option.' },
+    { key: 'Home / End', action: 'Move focus to the first or last option.' },
+    {
+      key: 'Enter / Space',
+      action: 'Select the focused option (deselects in multiple mode if already selected).',
+    },
+    { key: 'Shift+↓ / Shift+↑', action: 'Extend the selection range (multiple mode).' },
+    { key: 'Ctrl+A', action: 'Select all options (multiple mode).' },
+  ];
 }

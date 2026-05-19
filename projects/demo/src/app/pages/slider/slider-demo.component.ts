@@ -11,6 +11,8 @@ import { Card } from 'ui-lib-custom/card';
 import { Slider } from 'ui-lib-custom/slider';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 type SliderDemoSnippetKey =
   | 'basic'
@@ -41,6 +43,7 @@ type SliderDemoSnippetKey =
     Slider,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
@@ -66,6 +69,7 @@ export class SliderDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'readonly', label: 'Read-only' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public basicValue: number = 40;
@@ -136,4 +140,31 @@ export class SliderDemoComponent {
     competitiveParity: 'pending',
     apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
   };
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '← / ↓',
+      action: 'Decrease the value by one step.',
+    },
+    {
+      key: '→ / ↑',
+      action: 'Increase the value by one step.',
+    },
+    {
+      key: 'Home',
+      action: 'Set the value to the minimum.',
+    },
+    {
+      key: 'End',
+      action: 'Set the value to the maximum.',
+    },
+    {
+      key: 'Page Down',
+      action: 'Decrease the value by a larger step (10× step or 10% of range).',
+    },
+    {
+      key: 'Page Up',
+      action: 'Increase the value by a larger step (10× step or 10% of range).',
+    },
+  ];
 }

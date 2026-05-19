@@ -13,6 +13,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 interface CityOption {
   label: string;
@@ -36,6 +38,7 @@ interface CityOption {
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './radio-button-demo.component.html',
   styleUrl: './radio-button-demo.component.scss',
@@ -241,4 +244,28 @@ export class RadioButtonDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Enters the radio group; browser focuses the checked radio (or first if none checked).',
+    },
+    {
+      key: 'Shift+Tab',
+      action: 'Leaves the radio group.',
+    },
+    {
+      key: '↓ / →',
+      action: 'Moves focus to the next non-disabled radio, wrapping around, and selects it.',
+    },
+    {
+      key: '↑ / ←',
+      action: 'Moves focus to the previous non-disabled radio, wrapping around, and selects it.',
+    },
+    {
+      key: 'Space',
+      action: 'Selects the focused radio (native browser behaviour).',
+    },
+  ];
 }

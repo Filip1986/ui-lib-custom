@@ -9,6 +9,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Inplace component.
@@ -23,6 +25,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
@@ -60,6 +63,7 @@ export class InplaceDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'events', label: 'Events' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -114,4 +118,17 @@ export class InplaceDemoComponent {
   public clearLog(): void {
     this.eventLog.set([]);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Enter / Space',
+      suffix: 'on display content',
+      action: 'Activates the inplace component, replacing display content with editing content.',
+    },
+    {
+      key: 'Escape',
+      suffix: 'when active',
+      action: 'Deactivates the component and restores the display content (closable mode).',
+    },
+  ];
 }

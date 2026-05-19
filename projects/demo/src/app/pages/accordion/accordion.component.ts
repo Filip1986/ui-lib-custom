@@ -29,6 +29,8 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { AccordionBasicExampleComponent } from '@demo/examples/accordion-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 interface FaqItem {
   value: string;
@@ -76,6 +78,7 @@ type AccordionTab =
     VariantComparisonComponent,
     AccordionBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -100,6 +103,7 @@ export class AccordionComponent {
     { id: 'animations', label: 'Animations' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -317,4 +321,15 @@ export class AccordionComponent {
     Items can be returned within 30 days of purchase.
   </ui-lib-accordion-panel>
 </ui-lib-accordion>`;
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Enter / Space', suffix: 'on header', action: 'Toggles the panel open or closed.' },
+    { key: '↓ / ↑', action: 'Moves focus to the next or previous panel header.' },
+    { key: 'Home / End', action: 'Moves focus to the first or last panel header.' },
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Moves focus into or out of the accordion in the standard tab order. Open panel content is included.',
+    },
+  ];
 }

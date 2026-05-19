@@ -27,7 +27,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
   </section>
@@ -57,7 +57,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Dark ripple" [code]="snippets.darkRipple" 
+      filename="Dark ripple" [code]="snippets.darkRipple"
       [showLineNumbers]="true"
       />
   </section>
@@ -76,7 +76,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom duration" [code]="snippets.customDuration" 
+      filename="Custom duration" [code]="snippets.customDuration"
       [showLineNumbers]="true"
       />
   </section>
@@ -102,7 +102,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled" 
+      filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
   </section>
@@ -130,7 +130,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Any element" [code]="snippets.anyElement" 
+      filename="Any element" [code]="snippets.anyElement"
       [showLineNumbers]="true"
       />
   </section>
@@ -224,27 +224,7 @@
 
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Enter</code></td>
-            <td>
-              Fires the native <code>click</code> event on <code>&lt;button&gt;</code> /
-              <code>&lt;a&gt;</code> elements — ripple responds automatically.
-            </td>
-          </tr>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Same as above for <code>&lt;button&gt;</code> elements.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

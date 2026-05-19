@@ -24,7 +24,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
   </section>
@@ -41,7 +41,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="With header" [code]="snippets.withHeader" 
+      filename="With header" [code]="snippets.withHeader"
       [showLineNumbers]="true"
       />
   </section>
@@ -58,7 +58,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Footer slot" [code]="snippets.footerSlot" 
+      filename="Footer slot" [code]="snippets.footerSlot"
       [showLineNumbers]="true"
       />
   </section>
@@ -75,7 +75,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disable backdrop dismiss" [code]="snippets.backdropDismiss" 
+      filename="Disable backdrop dismiss" [code]="snippets.backdropDismiss"
       [showLineNumbers]="true"
       />
   </section>
@@ -94,7 +94,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
   </section>
@@ -269,28 +269,7 @@
 
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Escape</code></td>
-            <td>Closes the sheet (when <code>[closeOnEscape]="true"</code>) and returns focus to the previously focused element.</td>
-          </tr>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Cycles focus forward through all focusable elements inside the panel. Wraps from last to first.</td>
-          </tr>
-          <tr>
-            <td><code>Shift+Tab</code></td>
-            <td>Cycles focus backward. Wraps from first to last.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

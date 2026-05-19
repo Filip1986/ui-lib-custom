@@ -11,6 +11,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Ripple directive.
@@ -27,6 +29,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',
@@ -137,4 +140,16 @@ export class RippleDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Enter',
+      action:
+        'Fires the native <code>click</code> event on <code>&lt;button&gt;</code> / <code>&lt;a&gt;</code> elements — the ripple effect responds automatically.',
+    },
+    {
+      key: 'Space',
+      action: 'Same as <kbd>Enter</kbd> for <code>&lt;button&gt;</code> elements.',
+    },
+  ];
 }

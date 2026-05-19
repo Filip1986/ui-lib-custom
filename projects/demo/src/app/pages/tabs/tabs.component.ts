@@ -34,6 +34,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
@@ -86,6 +88,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     VariantComparisonComponent,
     TabsBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -126,6 +129,7 @@ export class TabsComponent {
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
@@ -420,4 +424,14 @@ export class TabsComponent {
   <ui-lib-tab label="Home">Home content</ui-lib-tab>
   <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
 </ui-lib-tabs>`;
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '← / →',
+      action: 'Move focus between tab headers. Activates the focused tab automatically.',
+    },
+    { key: 'Home / End', action: 'Move focus to the first or last tab header.' },
+    { key: 'Tab', action: 'Move focus from the tab list into the active panel content.' },
+    { key: 'Shift+Tab', action: 'Return focus from panel content to the tab list.' },
+  ];
 }

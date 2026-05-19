@@ -15,6 +15,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Menubar component.
@@ -30,6 +32,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageHeaderComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
@@ -73,6 +76,7 @@ export class MenubarDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'playground', label: 'Playground' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -272,4 +276,15 @@ export class MenubarDemoComponent {
   public setSize(value: MenubarSize): void {
     this.playgroundSize.set(value);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', action: 'Move focus between top-level menu items.' },
+    { key: '↓ / ↑', action: 'Open a submenu or navigate within an open submenu.' },
+    { key: 'Enter / Space', action: 'Activate the focused item or open/close its submenu.' },
+    { key: 'Escape', action: 'Close the open submenu and return focus to the parent item.' },
+    {
+      key: 'Home / End',
+      action: 'Move focus to the first or last item in the current menu level.',
+    },
+  ];
 }

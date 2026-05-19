@@ -16,6 +16,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Dock component.
@@ -31,6 +33,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
@@ -77,6 +80,7 @@ export class DockDemoComponent {
     { id: 'link-items', label: 'Link Items' },
     { id: 'playground', label: 'Interactive Playground' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {
@@ -237,4 +241,17 @@ export class DockDemoComponent {
   public setPosition(position: DockPosition): void {
     this.position.set(position);
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', suffix: 'horizontal dock', action: 'Move focus between dock items.' },
+    { key: '↑ / ↓', suffix: 'vertical dock', action: 'Move focus between dock items.' },
+    {
+      key: 'Enter / Space',
+      action: 'Activate the focused dock item (runs command or follows link).',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Move focus into or out of the dock in the standard tab order.',
+    },
+  ];
 }

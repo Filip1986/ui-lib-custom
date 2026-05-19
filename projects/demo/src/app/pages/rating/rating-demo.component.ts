@@ -13,6 +13,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Rating component.
@@ -31,6 +33,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './rating-demo.component.html',
   styleUrl: './rating-demo.component.scss',
@@ -255,4 +258,23 @@ export class RatingDemoComponent {
     competitiveParity: 'pending',
     apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
   };
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '→ / ↑',
+      action: 'Increase rating by one (wraps at <code>stars</code> maximum).',
+    },
+    {
+      key: '← / ↓',
+      action: 'Decrease rating by one (minimum is 1).',
+    },
+    {
+      key: 'Delete / Backspace',
+      action: 'Clear the rating — only available when <code>[cancel]="true"</code>.',
+    },
+    {
+      key: '1–9',
+      action: 'Jump directly to that star value (if within the <code>stars</code> range).',
+    },
+  ];
 }
