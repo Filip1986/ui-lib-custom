@@ -205,6 +205,52 @@
 }
 
 .csd-card {
+  &--full {
+    width: 100%;
+  }
+}
+
+// ── Multi-tab section ─────────────────────────────────────────────────────────
+.csd-multitab-section {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.csd-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 0.5rem;
+}
+
+.csd-section-desc {
+  color: #94a3b8;
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.875em;
+    color: #a5b4fc;
+    background: rgba(99, 102, 241, 0.12);
+    padding: 0.1em 0.35em;
+    border-radius: 0.25rem;
+  }
+
+  kbd {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.8em;
+    color: #cbd5e1;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-bottom-width: 2px;
+    padding: 0.1em 0.4em;
+    border-radius: 0.25rem;
+  }
 }
 
 // ── Footer ────────────────────────────────────────────────────────────────────
