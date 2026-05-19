@@ -14,11 +14,6 @@ import type {
   ButtonVariant,
 } from 'ui-lib-custom/button';
 import { ButtonGroup } from 'ui-lib-custom';
-import {
-  TableComponent,
-  TableColumnComponent,
-  TableColumnBodyDirective,
-} from 'ui-lib-custom/table';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -28,17 +23,12 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface ButtonLogEntry {
   timestamp: string;
   message: string;
-}
-
-interface ApiRow {
-  name: string;
-  type: string;
-  default: string;
-  description: string;
 }
 
 /**
@@ -51,15 +41,13 @@ interface ApiRow {
   imports: [
     Button,
     ButtonGroup,
-    TableComponent,
-    TableColumnComponent,
-    TableColumnBodyDirective,
     Panel,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
@@ -145,7 +133,7 @@ export class ButtonsComponent {
 
   public readonly sizes: ButtonSize[] = ['sm', 'md', 'lg'];
 
-  public readonly apiRows: ApiRow[] = [
+  public readonly apiRows: ApiPropRow[] = [
     {
       name: 'variant',
       type: "'material' | 'bootstrap' | 'minimal' | null",

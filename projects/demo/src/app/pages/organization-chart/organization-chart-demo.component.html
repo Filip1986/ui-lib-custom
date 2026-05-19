@@ -19,7 +19,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-organization-chart [value]="basicNodes()" />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')"
         [showLineNumbers]="true"
         />
     </section>
@@ -47,7 +47,7 @@
             </div>
           }
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('collapsible')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('collapsible')"
         [showLineNumbers]="true"
         />
     </section>
@@ -73,7 +73,7 @@
             Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
           </p>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('singleSelection')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('singleSelection')"
         [showLineNumbers]="true"
         />
     </section>
@@ -98,7 +98,7 @@
             Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
           </p>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('multipleSelection')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('multipleSelection')"
         [showLineNumbers]="true"
         />
     </section>
@@ -123,7 +123,7 @@
             </ng-template>
           </ui-lib-organization-chart>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('customTemplate')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('customTemplate')"
         [showLineNumbers]="true"
         />
     </section>
@@ -142,7 +142,7 @@
             [collapsible]="true"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('bootstrap')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('bootstrap')"
         [showLineNumbers]="true"
         />
     </section>
@@ -161,7 +161,7 @@
             [collapsible]="true"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('minimal')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('minimal')"
         [showLineNumbers]="true"
         />
     </section>
@@ -180,47 +180,17 @@
       </ui-lib-panel>
     </section>
 
-    <!-- 9. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
       <h3>9. API Reference</h3>
-      <ui-lib-panel variant="minimal">
-        <div class="doc-stack">
-          <div>
-            <h4>Inputs</h4>
-            <table class="doc-table">
-              <thead><tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>value</code></td><td><code>OrganizationChartNode[]</code></td><td><code>[]</code></td><td>Root nodes of the chart.</td></tr>
-                <tr><td><code>selection</code></td><td><code>OrganizationChartNode | OrganizationChartNode[] | null</code></td><td><code>null</code></td><td>Selected node(s).</td></tr>
-                <tr><td><code>selectionMode</code></td><td><code>'single' | 'multiple' | null</code></td><td><code>null</code></td><td>Selection mode.</td></tr>
-                <tr><td><code>collapsible</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Enables expand/collapse on nodes with children.</td></tr>
-                <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Theme variant override.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Outputs</h4>
-            <table class="doc-table">
-              <thead><tr><th>Output</th><th>Payload</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>nodeSelect</code></td><td><code>OrganizationChartNodeSelectEvent</code></td><td>When a node is selected.</td></tr>
-                <tr><td><code>nodeUnselect</code></td><td><code>OrganizationChartNodeUnselectEvent</code></td><td>When a node is deselected.</td></tr>
-                <tr><td><code>nodeExpand</code></td><td><code>OrganizationChartNodeExpandEvent</code></td><td>When a node is expanded.</td></tr>
-                <tr><td><code>nodeCollapse</code></td><td><code>OrganizationChartNodeCollapseEvent</code></td><td>When a node is collapsed.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Template Slots</h4>
-            <table class="doc-table">
-              <thead><tr><th>Directive</th><th>Context</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>uiOrgChartNode</code></td><td><code>$implicit: OrganizationChartNode</code></td><td>Custom node content.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </ui-lib-panel>
+
+      <h4>Inputs</h4>
+      <app-doc-api-reference [rows]="apiInputRows" />
+
+      <h4>Outputs</h4>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+
+      <h4>Template Slots</h4>
+      <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </section>
 
   </div>

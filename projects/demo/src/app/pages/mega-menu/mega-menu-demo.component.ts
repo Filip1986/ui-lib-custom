@@ -18,6 +18,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the MegaMenu component.
@@ -34,6 +36,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
@@ -423,5 +426,113 @@ export class MegaMenuDemoComponent {
     },
     { key: 'Escape', action: 'Close the open panel and return focus to the triggering root item.' },
     { key: 'Home / End', action: 'Jump to the first or last item in the current column.' },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MegaMenuItem[]',
+      default: '[]',
+      description: 'Array of top-level navigation items.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Layout direction of the navigation bar.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token applied to link padding and font size.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Navigation'",
+      description: 'Accessible label for the nav landmark.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'MegaMenuCommandEvent',
+      description: 'Emitted when a non-disabled sub-item is activated (click or keyboard).',
+    },
+  ];
+
+  public readonly apiMenuItemRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', description: 'Display label for the top-level item.' },
+    { name: 'icon', type: 'string', description: 'Icon CSS class rendered before the label.' },
+    {
+      name: 'items',
+      type: 'MegaMenuSubColumn[]',
+      description: 'When present, opens a mega panel with these columns.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'Prevents interaction with the top-level item.',
+    },
+    { name: 'visible', type: 'boolean', description: 'When false, hides the item entirely.' },
+    {
+      name: 'url',
+      type: 'string',
+      description: 'Renders the item as an anchor tag when no sub-items are present.',
+    },
+    {
+      name: 'target',
+      type: 'string',
+      description: "Target attribute for url-based items (e.g. '_blank').",
+    },
+    {
+      name: 'styleClass',
+      type: 'string',
+      description: 'Extra CSS class on the root item element.',
+    },
+    {
+      name: 'command',
+      type: '(event) => void',
+      description: 'Callback for simple items without sub-items.',
+    },
+  ];
+
+  public readonly apiSubColumnRows: ApiPropRow[] = [
+    {
+      name: 'header',
+      type: 'string',
+      description: 'Optional column header label rendered above the item list.',
+    },
+    {
+      name: 'items',
+      type: 'MegaMenuSubItem[]',
+      description: 'Sub-items displayed in this column.',
+    },
+  ];
+
+  public readonly apiSubItemRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', description: 'Display label.' },
+    { name: 'icon', type: 'string', description: 'Icon CSS class.' },
+    { name: 'disabled', type: 'boolean', description: 'Prevents interaction.' },
+    { name: 'visible', type: 'boolean', description: 'When false, hides the item.' },
+    { name: 'separator', type: 'boolean', description: 'Renders a visual divider line.' },
+    { name: 'url', type: 'string', description: 'Renders as an anchor tag.' },
+    { name: 'target', type: 'string', description: 'Target for url-based items.' },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
+    { name: 'command', type: '(event) => void', description: 'Callback invoked on activation.' },
   ];
 }

@@ -20,6 +20,8 @@ import type {
   OrganizationChartNodeSelectEvent,
   OrganizationChartNodeExpandEvent,
 } from 'ui-lib-custom/organization-chart';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 // ─── Shared tree data ────────────────────────────────────────────────────────
 
@@ -116,6 +118,7 @@ const SNIPPETS: Record<string, string> = {
     OrgChartNodeTemplateDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './organization-chart-demo.component.html',
   styleUrl: './organization-chart-demo.component.scss',
@@ -271,4 +274,68 @@ export class OrganizationChartDemoComponent {
   private appendLog(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 10));
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'OrganizationChartNode[]',
+      default: '[]',
+      description: 'Root nodes of the chart.',
+    },
+    {
+      name: 'selection',
+      type: 'OrganizationChartNode | OrganizationChartNode[] | null',
+      default: 'null',
+      description: 'Selected node(s).',
+    },
+    {
+      name: 'selectionMode',
+      type: "'single' | 'multiple' | null",
+      default: 'null',
+      description: 'Selection mode.',
+    },
+    {
+      name: 'collapsible',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables expand/collapse on nodes with children.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Theme variant override.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'nodeSelect',
+      type: 'OrganizationChartNodeSelectEvent',
+      description: 'When a node is selected.',
+    },
+    {
+      name: 'nodeUnselect',
+      type: 'OrganizationChartNodeUnselectEvent',
+      description: 'When a node is deselected.',
+    },
+    {
+      name: 'nodeExpand',
+      type: 'OrganizationChartNodeExpandEvent',
+      description: 'When a node is expanded.',
+    },
+    {
+      name: 'nodeCollapse',
+      type: 'OrganizationChartNodeCollapseEvent',
+      description: 'When a node is collapsed.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiOrgChartNode',
+      type: '$implicit: OrganizationChartNode',
+      description: 'Custom node content.',
+    },
+  ];
 }

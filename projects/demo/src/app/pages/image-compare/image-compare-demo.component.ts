@@ -11,6 +11,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ImageCompare } from 'ui-lib-custom/image-compare';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' | 'customLabel';
@@ -31,6 +33,7 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
@@ -87,6 +90,77 @@ export class ImageCompareDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'leftImage',
+      type: 'string',
+      default: "''",
+      description: 'URL of the left (before) image.',
+    },
+    { name: 'leftAlt', type: 'string', default: "''", description: 'Alt text for the left image.' },
+    {
+      name: 'rightImage',
+      type: 'string',
+      default: "''",
+      description: 'URL of the right (after) image.',
+    },
+    {
+      name: 'rightAlt',
+      type: 'string',
+      default: "''",
+      description: 'Alt text for the right image.',
+    },
+    {
+      name: 'value (model)',
+      type: 'number',
+      default: '50',
+      description: 'Slider position as a percentage (0–100). Supports two-way binding.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, the slider cannot be moved.',
+    },
+    {
+      name: 'variant',
+      type: 'ImageCompareVariant | null',
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: 'ImageCompareSize',
+      default: "'md'",
+      description: 'Handle size token (sm / md / lg).',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Image comparison slider'",
+      description: 'Accessible label for the slider handle.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'slideStart',
+      type: 'number',
+      description: 'Emitted with the current position when the user starts dragging.',
+    },
+    {
+      name: 'slideEnd',
+      type: 'number',
+      description: 'Emitted with the final position when the user releases the handle.',
+    },
+  ];
 
   public readonly position: WritableSignal<number> = signal<number>(50);
 

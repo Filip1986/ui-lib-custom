@@ -152,59 +152,15 @@
     <!-- 7. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
       <h3>7. API Reference</h3>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-stack [gap]="4">
-          <div>
-            <h4>Inputs</h4>
-            <table class="doc-table">
-              <thead><tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>value</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Ordered list items — two-way via <code>[(value)]</code>.</td></tr>
-                <tr><td><code>selection</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Selected items — two-way via <code>[(selection)]</code>.</td></tr>
-                <tr><td><code>header</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Static header text.</td></tr>
-                <tr><td><code>filterBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Dot-notation filter field. Shows filter input when set.</td></tr>
-                <tr><td><code>filterPlaceholder</code></td><td><code>string</code></td><td><code>'Filter'</code></td><td>Filter input placeholder.</td></tr>
-                <tr><td><code>filterMatchMode</code></td><td><code>'contains' | 'startsWith' | 'endsWith' | 'equals'</code></td><td><code>'contains'</code></td><td>Matching strategy.</td></tr>
-                <tr><td><code>filterLocale</code></td><td><code>string | undefined</code></td><td><code>undefined</code></td><td>BCP 47 locale for comparisons.</td></tr>
-                <tr><td><code>dragDrop</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Enables native HTML5 drag-and-drop.</td></tr>
-                <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disables all interaction.</td></tr>
-                <tr><td><code>metaKeySelection</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Requires Ctrl/Meta to multi-select.</td></tr>
-                <tr><td><code>stripedRows</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Alternating row background.</td></tr>
-                <tr><td><code>controlsPosition</code></td><td><code>'left' | 'right' | 'top'</code></td><td><code>'left'</code></td><td>Control buttons position.</td></tr>
-                <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Theme variant override.</td></tr>
-                <tr><td><code>size</code></td><td><code>'sm' | 'md' | 'lg'</code></td><td><code>'md'</code></td><td>Size scale.</td></tr>
-                <tr><td><code>trackBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Property path for identity.</td></tr>
-                <tr><td><code>ariaLabel</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Listbox accessible label.</td></tr>
-                <tr><td><code>ariaLabelledBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>ID(s) labelling the listbox.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Outputs</h4>
-            <table class="doc-table">
-              <thead><tr><th>Output</th><th>Payload</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>reordered</code></td><td><code>OrderListReorderEvent</code></td><td>After any reorder (buttons or DnD).</td></tr>
-                <tr><td><code>selectionChanged</code></td><td><code>OrderListSelectionChangeEvent</code></td><td>When selection changes.</td></tr>
-                <tr><td><code>filtered</code></td><td><code>OrderListFilterEvent</code></td><td>When filter query changes.</td></tr>
-                <tr><td><code>dragDropped</code></td><td><code>OrderListDragDropEvent</code></td><td>After a drag-and-drop reorder.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Template Slots</h4>
-            <table class="doc-table">
-              <thead><tr><th>Directive</th><th>Context</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>uiOrderListItem</code></td><td><code>$implicit: T</code></td><td>Custom item row.</td></tr>
-                <tr><td><code>uiOrderListHeader</code></td><td>—</td><td>Custom header.</td></tr>
-                <tr><td><code>uiOrderListEmpty</code></td><td><code>filter: boolean</code></td><td>Empty / no-filter-match state.</td></tr>
-                <tr><td><code>uiOrderListFilter</code></td><td>—</td><td>Replaces default filter input.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </ui-lib-stack>
-      </ui-lib-panel>
+
+      <h4>Inputs</h4>
+      <app-doc-api-reference [rows]="apiInputRows" />
+
+      <h4>Outputs</h4>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+
+      <h4>Template Slots</h4>
+      <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </section>
 
   </div>

@@ -301,136 +301,13 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Dock Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>items</code></td>
-          <td><code>DockItem[]</code></td>
-          <td><code>[]</code></td>
-          <td>Array of items to display in the dock.</td>
-        </tr>
-        <tr>
-          <td><code>position</code></td>
-          <td><code>'bottom' | 'top' | 'left' | 'right'</code></td>
-          <td><code>'bottom'</code></td>
-          <td>Edge of the container where the dock is anchored.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design-system variant. Falls back to ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Controls item and icon dimensions via design tokens.</td>
-        </tr>
-        <tr>
-          <td><code>magnification</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Whether the hover magnification effect is enabled.</td>
-        </tr>
-        <tr>
-          <td><code>magnificationLevel</code></td>
-          <td><code>number</code></td>
-          <td><code>1.5</code></td>
-          <td>Maximum scale factor applied to the directly hovered item. Values 1.2–2.5 work well.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS class appended to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-section__subtitle">Dock Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>itemClick</code></td>
-          <td><code>DockItemCommandEvent</code></td>
-          <td>Emitted when any enabled item is clicked or activated via keyboard.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">DockItem Interface</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>string</code></td>
-          <td>Accessible label and tooltip text shown on hover.</td>
-        </tr>
-        <tr>
-          <td><code>icon</code></td>
-          <td><code>string</code></td>
-          <td>Icon class(es) applied to the icon element (e.g. <code>'pi pi-home'</code>).</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td>When true, the item is non-interactive and styled as disabled.</td>
-        </tr>
-        <tr>
-          <td><code>visible</code></td>
-          <td><code>boolean</code></td>
-          <td>When explicitly false, the item is excluded from the rendered list.</td>
-        </tr>
-        <tr>
-          <td><code>command</code></td>
-          <td><code>(event: DockItemCommandEvent) =&gt; void</code></td>
-          <td>Callback invoked when the item is activated. Renders as a button.</td>
-        </tr>
-        <tr>
-          <td><code>url</code></td>
-          <td><code>string</code></td>
-          <td>External URL. Renders as an <code>&lt;a href&gt;</code> element.</td>
-        </tr>
-        <tr>
-          <td><code>routerLink</code></td>
-          <td><code>string | string[]</code></td>
-          <td>Angular Router link. Renders as a <code>[routerLink]</code> anchor.</td>
-        </tr>
-        <tr>
-          <td><code>target</code></td>
-          <td><code>string</code></td>
-          <td>Anchor <code>target</code> attribute (e.g. <code>'_blank'</code>).</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string</code></td>
-          <td>Extra CSS class added to the item list element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="property" [rows]="apiDockItemRows" [showDefault]="false" />
   </section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->

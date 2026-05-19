@@ -28,6 +28,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -55,6 +57,7 @@ import { Panel } from 'ui-lib-custom/panel';
     SelectButtonBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -216,4 +219,39 @@ export class Example {
   public markInvalidTouched(): void {
     this.invalidTouched = true;
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'SelectButtonOption[]',
+      default: '[]',
+      description: 'Options to render.',
+    },
+    {
+      name: 'value',
+      type: 'any | any[] | null',
+      default: 'null',
+      description: 'Selected value(s).',
+    },
+    { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multi-select.' },
+    {
+      name: 'variant',
+      type: 'material | bootstrap | minimal',
+      default: 'material',
+      description: 'Visual variant.',
+    },
+    {
+      name: 'size',
+      type: 'small | medium | large',
+      default: 'medium',
+      description: 'Size preset.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable interaction.' },
+    { name: 'invalid', type: 'boolean', default: 'false', description: 'Invalid state.' },
+    {
+      name: 'onChange',
+      type: 'SelectButtonChangeEvent',
+      description: 'Emits when selection changes.',
+    },
+  ];
 }

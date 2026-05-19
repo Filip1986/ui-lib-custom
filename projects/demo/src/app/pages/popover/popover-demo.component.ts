@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Popover component.
@@ -28,6 +30,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',
@@ -104,6 +107,70 @@ export class PopoverDemoComponent {
       key: 'Enter / Space',
       target: 'Close button',
       action: 'Closes the popover (when a close button is rendered).',
+    },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'visible',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way visibility binding via [(visible)].',
+    },
+    {
+      name: 'header',
+      type: 'string | null',
+      default: 'null',
+      description: 'Optional header text shown at the top of the panel.',
+    },
+    {
+      name: 'showCloseButton',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders a close (×) button in the header area.',
+    },
+    {
+      name: 'dismissable',
+      type: 'boolean',
+      default: 'true',
+      description: 'Clicking outside the panel closes the popover.',
+    },
+    {
+      name: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'Pressing Escape closes the popover.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant; inherits from the global theme when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes on the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    { name: 'shown', type: 'void', description: 'Emitted after the popover becomes visible.' },
+    { name: 'hidden', type: 'void', description: 'Emitted after the popover is hidden.' },
+  ];
+
+  public readonly apiMethodRows: ApiPropRow[] = [
+    {
+      name: 'show',
+      type: '(target: HTMLElement) => void',
+      description: 'Show the popover anchored to target.',
+    },
+    { name: 'hide', type: '() => void', description: 'Hide the popover.' },
+    {
+      name: 'toggle',
+      type: '(target: HTMLElement) => void',
+      description: 'Show if hidden, hide if visible.',
     },
   ];
 }

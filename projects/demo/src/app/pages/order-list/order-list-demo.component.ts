@@ -17,6 +17,8 @@ import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
   OrderListComponent,
   OrderListItemDirective,
@@ -127,6 +129,7 @@ const SNIPPETS: Record<string, string> = {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './order-list-demo.component.html',
   styleUrl: './order-list-demo.component.scss',
@@ -252,4 +255,129 @@ export class OrderListDemoComponent {
   public snippet(key: string): string {
     return SNIPPETS[key] ?? '';
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Ordered list items — two-way via [(value)].',
+    },
+    {
+      name: 'selection',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Selected items — two-way via [(selection)].',
+    },
+    { name: 'header', type: 'string | null', default: 'null', description: 'Static header text.' },
+    {
+      name: 'filterBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Dot-notation filter field. Shows filter input when set.',
+    },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Filter'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'filterMatchMode',
+      type: "'contains' | 'startsWith' | 'endsWith' | 'equals'",
+      default: "'contains'",
+      description: 'Matching strategy.',
+    },
+    {
+      name: 'filterLocale',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'BCP 47 locale for comparisons.',
+    },
+    {
+      name: 'dragDrop',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables native HTML5 drag-and-drop.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables all interaction.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Ctrl/Meta to multi-select.',
+    },
+    {
+      name: 'stripedRows',
+      type: 'boolean',
+      default: 'false',
+      description: 'Alternating row background.',
+    },
+    {
+      name: 'controlsPosition',
+      type: "'left' | 'right' | 'top'",
+      default: "'left'",
+      description: 'Control buttons position.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Theme variant override.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size scale.' },
+    {
+      name: 'trackBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property path for identity.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Listbox accessible label.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'ID(s) labelling the listbox.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'reordered',
+      type: 'OrderListReorderEvent',
+      description: 'After any reorder (buttons or DnD).',
+    },
+    {
+      name: 'selectionChanged',
+      type: 'OrderListSelectionChangeEvent',
+      description: 'When selection changes.',
+    },
+    { name: 'filtered', type: 'OrderListFilterEvent', description: 'When filter query changes.' },
+    {
+      name: 'dragDropped',
+      type: 'OrderListDragDropEvent',
+      description: 'After a drag-and-drop reorder.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    { name: 'uiOrderListItem', type: '$implicit: T', description: 'Custom item row.' },
+    { name: 'uiOrderListHeader', type: '—', description: 'Custom header.' },
+    {
+      name: 'uiOrderListEmpty',
+      type: 'filter: boolean',
+      description: 'Empty / no-filter-match state.',
+    },
+    { name: 'uiOrderListFilter', type: '—', description: 'Replaces default filter input.' },
+  ];
 }

@@ -342,91 +342,15 @@
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Reference</span>
     </div>
-    <table class="aos-table uilib-aos-slide-up"
-           uiLibAnimateOnScroll enterClass="uilib-aos-active">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>enterClass</code></td>
-          <td>input&lt;string&gt;</td>
-          <td><code>''</code></td>
-          <td>Space-separated CSS class(es) added when the element enters the viewport.</td>
-        </tr>
-        <tr>
-          <td><code>leaveClass</code></td>
-          <td>input&lt;string&gt;</td>
-          <td><code>''</code></td>
-          <td>Space-separated CSS class(es) added when the element leaves the viewport (<code>once</code> must be false).</td>
-        </tr>
-        <tr>
-          <td><code>threshold</code></td>
-          <td>input&lt;number&gt;</td>
-          <td><code>0.1</code></td>
-          <td>Ratio of element visibility required to trigger (0&ndash;1).</td>
-        </tr>
-        <tr>
-          <td><code>rootMargin</code></td>
-          <td>input&lt;string&gt;</td>
-          <td><code>'0px'</code></td>
-          <td>IntersectionObserver root margin (e.g. <code>'-50px 0px'</code>).</td>
-        </tr>
-        <tr>
-          <td><code>once</code></td>
-          <td>input&lt;boolean&gt;</td>
-          <td><code>true</code></td>
-          <td>Unobserves the element after the first enter event.</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td>input&lt;boolean&gt;</td>
-          <td><code>false</code></td>
-          <td>Skips observer setup entirely when true.</td>
-        </tr>
-        <tr>
-          <td><code>(enter)</code></td>
-          <td>output&lt;void&gt;</td>
-          <td>&mdash;</td>
-          <td>Emitted each time the element enters the viewport.</td>
-        </tr>
-        <tr>
-          <td><code>(leave)</code></td>
-          <td>output&lt;void&gt;</td>
-          <td>&mdash;</td>
-          <td>Emitted each time the element leaves the viewport (<code>once</code> must be false).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-animate-on-scroll-duration</code></td>
-          <td>CSS var</td>
-          <td><code>600ms</code></td>
-          <td>Transition duration for all built-in presets.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-animate-on-scroll-easing</code></td>
-          <td>CSS var</td>
-          <td><code>cubic-bezier(0.4,0,0.2,1)</code></td>
-          <td>Easing function for all built-in presets.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-animate-on-scroll-delay</code></td>
-          <td>CSS var</td>
-          <td><code>0ms</code></td>
-          <td>Per-element delay &mdash; set inline for stagger effects.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-animate-on-scroll-distance</code></td>
-          <td>CSS var</td>
-          <td><code>30px</code></td>
-          <td>Translation distance used by slide-* presets.</td>
-        </tr>
-      </tbody>
-    </table>
+
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiInputRows" />
+
+    <h3 class="demo-section__subtitle">Outputs</h3>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+
+    <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
+    <app-doc-api-reference kind="name" [rows]="apiCssVarRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

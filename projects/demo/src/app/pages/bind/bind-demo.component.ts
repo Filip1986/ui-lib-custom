@@ -10,6 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Bind directive.
@@ -27,6 +29,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
@@ -103,6 +106,16 @@ export class BindDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiLibBind',
+      type: 'Record<string, unknown>',
+      default: '{}',
+      description:
+        'An object whose enumerable own properties are set as DOM properties on the host element. Properties removed between updates are reset to null.',
+    },
+  ];
 
   public setPreset(preset: 'alpha' | 'beta' | 'gamma'): void {
     this.activeIdPreset.set(preset);

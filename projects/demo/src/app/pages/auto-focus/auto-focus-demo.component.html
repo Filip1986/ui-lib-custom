@@ -121,34 +121,7 @@
     />
 
     <h3 class="af-sub-title">Inputs</h3>
-    <table class="af-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>
-            When <code>true</code>, focus is skipped on mount.
-          </td>
-        </tr>
-        <tr>
-          <td><code>selector</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>
-            Optional child selector used as the focus target instead of the host.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

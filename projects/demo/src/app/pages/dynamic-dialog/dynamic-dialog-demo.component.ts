@@ -18,6 +18,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 // ---- Guest components rendered inside the dialog ----
 
@@ -135,6 +137,7 @@ export class LongDialogContentComponent {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
@@ -256,4 +259,83 @@ export class DynamicDialogDemoComponent {
       closable: false,
     });
   }
+
+  public readonly apiConfigRows: ApiPropRow[] = [
+    { name: 'header', type: 'string', default: "''", description: 'Dialog title text.' },
+    { name: 'width', type: 'string', description: 'CSS width of the panel.' },
+    { name: 'height', type: 'string', description: 'CSS height of the panel.' },
+    {
+      name: 'modal',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show semi-transparent backdrop.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show × close button in header.',
+    },
+    {
+      name: 'dismissableMask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Click backdrop to close.',
+    },
+    {
+      name: 'blockScroll',
+      type: 'boolean',
+      default: 'true',
+      description: 'Lock body scroll while open.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on host.',
+    },
+    {
+      name: 'data',
+      type: 'unknown',
+      description: 'Passed to guest via <code>DYNAMIC_DIALOG_CONFIG</code>.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'inherited',
+      description: 'Design variant override.',
+    },
+    {
+      name: 'position',
+      type: "'center' | 'top' | 'bottom' | 'left' | 'right'",
+      default: "'center'",
+      description: 'Viewport anchor position.',
+    },
+  ];
+
+  public readonly apiRefRows: ApiPropRow[] = [
+    {
+      name: 'onClose',
+      type: 'Observable<unknown>',
+      description: 'Emits once when dialog closes (with optional data).',
+    },
+    {
+      name: 'close(data?)',
+      type: 'void',
+      description: 'Close the dialog and pass optional return data.',
+    },
+  ];
+
+  public readonly apiTokenRows: ApiPropRow[] = [
+    {
+      name: 'DYNAMIC_DIALOG_CONFIG',
+      type: 'DynamicDialogConfig',
+      description: 'Full config available to guest components via <code>inject()</code>.',
+    },
+    {
+      name: 'DynamicDialogRef',
+      type: 'DynamicDialogRef',
+      description: 'Dialog handle available to guest components via <code>inject()</code>.',
+    },
+  ];
 }

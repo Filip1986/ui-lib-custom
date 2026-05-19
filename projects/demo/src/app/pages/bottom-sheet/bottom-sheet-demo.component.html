@@ -104,107 +104,17 @@
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>visible</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Controls open/close state. Two-way bindable via <code>[(visible)]</code>. A <code>model()</code> signal internally.</td>
-          </tr>
-          <tr>
-            <td><code>header</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Optional header text. When set, renders a title bar with a close button and wires <code>aria-labelledby</code>.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Visual variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>showBackdrop</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Whether to show the semi-transparent backdrop behind the panel.</td>
-          </tr>
-          <tr>
-            <td><code>closeOnBackdrop</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Whether clicking the backdrop closes the sheet.</td>
-          </tr>
-          <tr>
-            <td><code>closeOnEscape</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Whether pressing <kbd>Escape</kbd> closes the sheet.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes applied to the host element.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Payload</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>(shown)</code></td>
-            <td><code>void</code></td>
-            <td>Emits after the sheet transitions to open.</td>
-          </tr>
-          <tr>
-            <td><code>(hidden)</code></td>
-            <td><code>void</code></td>
-            <td>Emits after the sheet transitions to closed.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
     <div id="api-slots" data-doc-anchor>
       <h3 class="demo-section__subtitle">Content Slots</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Selector</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><em>default</em></td>
-            <td>Main body content rendered inside a scrollable content area.</td>
-          </tr>
-          <tr>
-            <td><code>[bottomSheetFooter]</code></td>
-            <td>Sticky footer pinned to the bottom of the panel. Hidden when empty.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </div>
 
     <div id="api-css" data-doc-anchor>

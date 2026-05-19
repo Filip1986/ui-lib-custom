@@ -13,6 +13,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ConfirmPopup component.
@@ -30,6 +32,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
@@ -164,6 +167,88 @@ export class ConfirmPopupDemoComponent {
       key: 'Escape',
       action:
         'Closes the popup (treated as rejection) and returns focus to the triggering element.',
+    },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'visible',
+      type: 'model<boolean>',
+      default: 'false',
+      description: 'Two-way visibility binding.',
+    },
+    {
+      name: 'key',
+      type: 'string',
+      default: "''",
+      description: 'Key for targeting a specific popup instance.',
+    },
+    {
+      name: 'message',
+      type: 'string',
+      default: "'Are you sure…'",
+      description: 'Confirmation message text.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon CSS class before the message.',
+    },
+    { name: 'acceptLabel', type: 'string', default: "'Yes'", description: 'Accept button label.' },
+    { name: 'rejectLabel', type: 'string', default: "'No'", description: 'Reject button label.' },
+    {
+      name: 'acceptSeverity',
+      type: 'ConfirmPopupButtonSeverity',
+      default: "'primary'",
+      description: 'Accept button colour severity.',
+    },
+    {
+      name: 'rejectSeverity',
+      type: 'ConfirmPopupButtonSeverity',
+      default: "'secondary'",
+      description: 'Reject button colour severity.',
+    },
+    {
+      name: 'defaultFocus',
+      type: 'ConfirmPopupDefaultFocus',
+      default: "'accept'",
+      description: 'Button focused on open.',
+    },
+    {
+      name: 'variant',
+      type: 'ConfirmPopupVariant | null',
+      default: 'null',
+      description: 'Design variant (inherits from theme when null).',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes on host.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    { name: 'accepted', type: 'void', description: 'Emitted when accept button is clicked.' },
+    {
+      name: 'rejected',
+      type: 'void',
+      description: 'Emitted when reject / overlay / Escape is triggered.',
+    },
+  ];
+
+  public readonly apiServiceRows: ApiPropRow[] = [
+    {
+      name: 'confirm',
+      type: '(config: ConfirmPopupConfig) => void',
+      description: 'Show popup anchored to target.',
+    },
+    { name: 'close', type: '(key?: string) => void', description: 'Programmatically close popup.' },
+    {
+      name: 'confirmation',
+      type: 'Signal<ConfirmPopupConfig | null>',
+      description: 'Current config signal.',
     },
   ];
 }

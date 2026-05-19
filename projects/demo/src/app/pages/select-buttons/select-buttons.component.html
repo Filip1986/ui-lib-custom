@@ -171,68 +171,7 @@
 
     <section id="api">
       <h3>API Reference</h3>
-      <ui-lib-panel variant="minimal">
-        <table class="api-table">
-          <thead>
-            <tr>
-              <th>Input / Output</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>options</td>
-              <td>SelectButtonOption[]</td>
-              <td>[]</td>
-              <td>Options to render.</td>
-            </tr>
-            <tr>
-              <td>value</td>
-              <td>any | any[] | null</td>
-              <td>null</td>
-              <td>Selected value(s).</td>
-            </tr>
-            <tr>
-              <td>multiple</td>
-              <td>boolean</td>
-              <td>false</td>
-              <td>Enable multi-select.</td>
-            </tr>
-            <tr>
-              <td>variant</td>
-              <td>material | bootstrap | minimal</td>
-              <td>material</td>
-              <td>Visual variant.</td>
-            </tr>
-            <tr>
-              <td>size</td>
-              <td>small | medium | large</td>
-              <td>medium</td>
-              <td>Size preset.</td>
-            </tr>
-            <tr>
-              <td>disabled</td>
-              <td>boolean</td>
-              <td>false</td>
-              <td>Disable interaction.</td>
-            </tr>
-            <tr>
-              <td>invalid</td>
-              <td>boolean</td>
-              <td>false</td>
-              <td>Invalid state.</td>
-            </tr>
-            <tr>
-              <td>onChange</td>
-              <td>SelectButtonChangeEvent</td>
-              <td>-</td>
-              <td>Emits when selection changes.</td>
-            </tr>
-          </tbody>
-        </table>
-      </ui-lib-panel>
+      <app-doc-api-reference [rows]="apiRows" />
     </section>
 
     <section id="accessibility">

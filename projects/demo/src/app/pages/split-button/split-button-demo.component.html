@@ -210,50 +210,7 @@
 
     <section id="api-reference" data-doc-anchor class="example-section">
       <h3>API Reference</h3>
-      <ui-lib-panel variant="minimal">
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Input</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>label</code></td>
-              <td><code>string</code></td>
-              <td><code>''</code></td>
-              <td>Main button label text.</td>
-            </tr>
-            <tr>
-              <td><code>model</code></td>
-              <td><code>SplitButtonItem[]</code></td>
-              <td><code>[]</code></td>
-              <td>Menu item list.</td>
-            </tr>
-            <tr>
-              <td><code>severity</code></td>
-              <td><code>SplitButtonSeverity</code></td>
-              <td><code>'primary'</code></td>
-              <td>Visual severity token.</td>
-            </tr>
-            <tr>
-              <td><code>size</code></td>
-              <td><code>'sm' | 'md' | 'lg'</code></td>
-              <td><code>'md'</code></td>
-              <td>Size scale for button pair.</td>
-            </tr>
-            <tr>
-              <td><code>disabled</code></td>
-              <td><code>boolean</code></td>
-              <td><code>false</code></td>
-              <td>Disables both buttons.</td>
-            </tr>
-          </tbody>
-        </table>
-      </ui-lib-panel>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </section>
   </div>
 

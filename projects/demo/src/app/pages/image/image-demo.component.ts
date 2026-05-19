@@ -9,6 +9,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Image } from 'ui-lib-custom/image';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type SnippetKey =
@@ -35,6 +37,7 @@ type SnippetKey =
     Image,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
@@ -141,4 +144,88 @@ export class ImageDemoComponent {
   public snippet(key: SnippetKey): string {
     return this.snippets[key];
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'src', type: 'string', default: "''", description: 'URL of the image.' },
+    { name: 'alt', type: 'string', default: "''", description: 'Alt text for the image.' },
+    {
+      name: 'width',
+      type: 'string | null',
+      default: 'null',
+      description: 'HTML width attribute for the img element.',
+    },
+    {
+      name: 'height',
+      type: 'string | null',
+      default: 'null',
+      description: 'HTML height attribute for the img element.',
+    },
+    {
+      name: 'preview',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables the click-to-preview lightbox.',
+    },
+    {
+      name: 'imageStyle',
+      type: 'Record<string,string> | null',
+      default: 'null',
+      description: 'Inline styles applied to the img element.',
+    },
+    {
+      name: 'imageClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the img element.',
+    },
+    {
+      name: 'errorSrc',
+      type: 'string | null',
+      default: 'null',
+      description: 'Fallback src when the primary src fails.',
+    },
+    {
+      name: 'variant',
+      type: 'ImageVariant | null',
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    { name: 'size', type: 'ImageSize', default: "'md'", description: 'Component size token.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Preview image'",
+      description: 'Accessible label for the preview indicator button.',
+    },
+    {
+      name: 'previewVisible',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way binding for overlay open state.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    { name: 'loadEvent', type: 'Event', description: 'Emitted when the image loads successfully.' },
+    { name: 'errorEvent', type: 'Event', description: 'Emitted when the image fails to load.' },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: '#imageIndicator',
+      type: 'slot',
+      description: 'Custom content for the hover preview indicator.',
+    },
+    {
+      name: '#imageError',
+      type: 'slot',
+      description: 'Custom content shown when the image fails to load.',
+    },
+  ];
 }

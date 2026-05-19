@@ -13,6 +13,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the BlockUI component.
@@ -30,6 +32,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './block-ui-demo.component.html',
   styleUrl: './block-ui-demo.component.scss',
@@ -183,6 +186,48 @@ export class BlockUiDemoComponent {
       key: 'Any key',
       action:
         'No special handling on the mask overlay. All standard interactions remain available outside the blocked area.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'blocked',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Whether the content is blocked. Two-way bindable via [(blocked)]. A model() signal internally.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class(es) applied to the host element.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index for the mask layer. Uses the CSS variable default when 0.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: 'default',
+      type: 'slot',
+      description: 'The content to be protected by the block mask.',
+    },
+    {
+      name: '[blockTemplate]',
+      type: 'slot',
+      description:
+        "Content projected into the mask overlay (e.g. a spinner or status message). Announced by screen readers via the mask's live region.",
     },
   ];
 }

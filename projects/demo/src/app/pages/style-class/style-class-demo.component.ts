@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the StyleClass directive.
@@ -24,6 +26,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './style-class-demo.component.html',
   styleUrl: './style-class-demo.component.scss',
@@ -70,4 +73,75 @@ export class StyleClassDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'uiLibStyleClass',
+      type: 'string',
+      description:
+        'Target selector: <code>@next</code>, <code>@prev</code>, <code>@parent</code>, <code>@grandparent</code>, or a CSS selector.',
+      required: true,
+    },
+    {
+      name: 'toggleClass',
+      type: 'string',
+      default: "''",
+      description: 'Single class to toggle. When set, bypasses the full enter/leave lifecycle.',
+    },
+    {
+      name: 'enterFromClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied at the start of enter.',
+    },
+    {
+      name: 'enterActiveClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied during enter (e.g. animation class).',
+    },
+    {
+      name: 'enterToClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied at end of enter transition.',
+    },
+    {
+      name: 'enterDoneClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) kept after enter completes.',
+    },
+    {
+      name: 'leaveFromClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied at the start of leave.',
+    },
+    {
+      name: 'leaveActiveClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied during leave (e.g. animation class).',
+    },
+    {
+      name: 'leaveToClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) applied at end of leave transition.',
+    },
+    {
+      name: 'leaveDoneClass',
+      type: 'string',
+      default: "''",
+      description: 'Class(es) kept after leave completes.',
+    },
+    {
+      name: 'hideOnOutsideClick',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'When <code>true</code>, clicking outside the target triggers leave / toggles off.',
+    },
+  ];
 }

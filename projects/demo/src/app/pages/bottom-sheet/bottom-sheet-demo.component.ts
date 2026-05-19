@@ -14,6 +14,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the BottomSheet component.
@@ -31,6 +33,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './bottom-sheet-demo.component.html',
   styleUrl: './bottom-sheet-demo.component.scss',
@@ -218,6 +221,79 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';`,
     {
       key: 'Shift+Tab',
       action: 'Cycles focus backward through all focusable elements. Wraps from first to last.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'visible',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Controls open/close state. Two-way bindable via [(visible)]. A model() signal internally.',
+    },
+    {
+      name: 'header',
+      type: 'string',
+      default: "''",
+      description:
+        'Optional header text. When set, renders a title bar with a close button and wires aria-labelledby.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'showBackdrop',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether to show the semi-transparent backdrop behind the panel.',
+    },
+    {
+      name: 'closeOnBackdrop',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether clicking the backdrop closes the sheet.',
+    },
+    {
+      name: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether pressing Escape closes the sheet.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes applied to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(shown)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emits after the sheet transitions to open.',
+    },
+    {
+      name: '(hidden)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emits after the sheet transitions to closed.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: 'default',
+      type: 'slot',
+      description: 'Main body content rendered inside a scrollable content area.',
+    },
+    {
+      name: '[bottomSheetFooter]',
+      type: 'slot',
+      description: 'Sticky footer pinned to the bottom of the panel. Hidden when empty.',
     },
   ];
 }

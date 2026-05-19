@@ -138,28 +138,7 @@
       [code]="snippetSelector"
     />
     <h3 class="bd-sub-title">Inputs</h3>
-    <table class="bd-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>uiLibBind</code></td>
-          <td><code>Record&lt;string, unknown&gt;</code></td>
-          <td><code>&#123;&#125;</code></td>
-          <td>
-            An object whose enumerable own properties are set as DOM properties
-            on the host element. Properties removed between updates are reset to
-            <code>null</code>.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
     <h3 class="bd-sub-title">Host class</h3>
     <ui-lib-code-snippet
       language="text"

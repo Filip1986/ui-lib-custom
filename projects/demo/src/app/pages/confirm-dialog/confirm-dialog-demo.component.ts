@@ -15,6 +15,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ConfirmDialog component.
@@ -31,6 +33,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
@@ -192,6 +195,99 @@ export class ConfirmDialogDemoComponent {
       key: 'Escape',
       action:
         'Closes the dialog (treated as rejection) and returns focus to the triggering element.',
+    },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'visible',
+      type: 'boolean (model)',
+      default: 'false',
+      description: 'Two-way visibility binding.',
+    },
+    {
+      name: 'key',
+      type: 'string',
+      default: "''",
+      description: 'Targets service calls to this instance.',
+    },
+    { name: 'header', type: 'string', default: "'Confirmation'", description: 'Dialog title.' },
+    {
+      name: 'message',
+      type: 'string',
+      default: "'Are you sure…'",
+      description: 'Confirmation message.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class for message icon.',
+    },
+    { name: 'acceptLabel', type: 'string', default: "'Yes'", description: 'Accept button label.' },
+    { name: 'rejectLabel', type: 'string', default: "'No'", description: 'Reject button label.' },
+    {
+      name: 'acceptSeverity',
+      type: 'ConfirmDialogButtonSeverity',
+      default: "'primary'",
+      description: 'Accept button colour scheme.',
+    },
+    {
+      name: 'rejectSeverity',
+      type: 'ConfirmDialogButtonSeverity',
+      default: "'secondary'",
+      description: 'Reject button colour scheme.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show/hide the × close button.',
+    },
+    {
+      name: 'dismissableMask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Close on backdrop click.',
+    },
+    {
+      name: 'blockScroll',
+      type: 'boolean',
+      default: 'true',
+      description: 'Lock body scroll while open.',
+    },
+    {
+      name: 'position',
+      type: 'ConfirmDialogPosition',
+      default: "'center'",
+      description: 'Panel position on the viewport.',
+    },
+    {
+      name: 'defaultFocus',
+      type: 'ConfirmDialogDefaultFocus',
+      default: "'accept'",
+      description: 'Which button gets initial focus.',
+    },
+    {
+      name: 'variant',
+      type: 'ConfirmDialogVariant | null',
+      default: 'null',
+      description: 'Design variant override.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes on the host.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    { name: 'accepted', type: 'void', description: 'Emitted when the user clicks Accept.' },
+    {
+      name: 'rejected',
+      type: 'void',
+      description: 'Emitted when the user clicks Reject or closes.',
     },
   ];
 }

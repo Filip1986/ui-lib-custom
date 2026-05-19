@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Toast component.
@@ -26,6 +28,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './toast-demo.component.html',
   styleUrl: './toast-demo.component.scss',
@@ -216,6 +219,100 @@ export class ToastDemoComponent {
       key: 'Enter / Space',
       target: 'Close button',
       action: 'Dismisses the toast.',
+    },
+  ];
+
+  public readonly apiContainerInputRows: ApiPropRow[] = [
+    {
+      name: 'position',
+      type: 'ToastPosition',
+      default: "'top-right'",
+      description: 'Screen position of the toast container.',
+    },
+    {
+      name: 'life',
+      type: 'number',
+      default: '3000',
+      description: 'Default auto-dismiss duration (ms) for all messages.',
+    },
+    {
+      name: 'variant',
+      type: 'ToastVariant | null',
+      default: 'null',
+      description: 'Design variant. Falls back to ThemeConfigService global variant.',
+    },
+    {
+      name: 'key',
+      type: 'string | null',
+      default: 'null',
+      description: 'Only renders messages whose key matches this value.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class(es) applied to the host element.',
+    },
+  ];
+
+  public readonly apiMessageRows: ApiPropRow[] = [
+    {
+      name: 'id',
+      type: 'string',
+      default: 'auto',
+      description: 'Unique identifier — auto-generated if omitted.',
+    },
+    {
+      name: 'key',
+      type: 'string',
+      description: 'Routes the message to the matching container key.',
+    },
+    {
+      name: 'severity',
+      type: 'ToastSeverity',
+      default: "'info'",
+      description: 'Controls colour palette and default icon.',
+    },
+    { name: 'summary', type: 'string', description: 'Bold headline of the notification.' },
+    { name: 'detail', type: 'string', description: 'Body text of the notification.' },
+    {
+      name: 'life',
+      type: 'number',
+      default: 'container life',
+      description: 'Per-message auto-dismiss duration (ms).',
+    },
+    {
+      name: 'sticky',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, the toast never auto-dismisses.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'true',
+      description: 'When false, the close button is hidden.',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      default: 'severity default',
+      description: 'Custom icon name overriding the severity default.',
+    },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class(es) on the item element.' },
+  ];
+
+  public readonly apiServiceRows: ApiPropRow[] = [
+    {
+      name: 'add',
+      type: '(message: ToastMessage) => void',
+      description: 'Enqueue a new toast notification.',
+    },
+    { name: 'remove', type: '(id: string) => void', description: 'Remove a toast by its ID.' },
+    {
+      name: 'clear',
+      type: '(key?: string) => void',
+      description: 'Clear all messages, or only those matching a key.',
     },
   ];
 }

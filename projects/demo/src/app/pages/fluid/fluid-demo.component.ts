@@ -8,6 +8,8 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Fluid component and FluidDirective.
@@ -24,6 +26,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',
@@ -69,6 +72,25 @@ export class FluidDemoComponent {
   public readonly isFluid: WritableSignal<boolean> = signal<boolean>(true);
   public readonly name: WritableSignal<string> = signal<string>('');
   public readonly email: WritableSignal<string> = signal<string>('');
+
+  public readonly fluidComponentRows: ApiPropRow[] = [
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes appended to the host element.',
+    },
+  ];
+
+  public readonly fluidDirectiveRows: ApiPropRow[] = [
+    {
+      name: 'uiLibFluid',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'When <code>true</code> the <code>ui-lib-fluid</code> class is applied to the host. Supports attribute-only usage (<code>&lt;div uiLibFluid&gt;</code>).',
+    },
+  ];
 
   public toggleFluid(): void {
     this.isFluid.set(!this.isFluid());

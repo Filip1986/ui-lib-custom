@@ -16,6 +16,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import {
   PickListComponent,
@@ -135,6 +137,7 @@ const SNIPPETS: Record<string, string> = {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
   styleUrl: './pick-list-demo.component.scss',
@@ -274,4 +277,165 @@ export class PickListDemoComponent {
   public snippet(key: string): string {
     return SNIPPETS[key] ?? '';
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'source',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Source list items — two-way via [(source)].',
+    },
+    {
+      name: 'target',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Target list items — two-way via [(target)].',
+    },
+    {
+      name: 'sourceSelection',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Selected source items — two-way.',
+    },
+    {
+      name: 'targetSelection',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Selected target items — two-way.',
+    },
+    {
+      name: 'sourceHeader',
+      type: 'string | null',
+      default: 'null',
+      description: 'Static source list header text.',
+    },
+    {
+      name: 'targetHeader',
+      type: 'string | null',
+      default: 'null',
+      description: 'Static target list header text.',
+    },
+    {
+      name: 'filterBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Dot-notation property for filtering. Shows filter inputs when set.',
+    },
+    {
+      name: 'sourceFilterPlaceholder',
+      type: 'string',
+      default: "'Filter'",
+      description: 'Placeholder for the source filter input.',
+    },
+    {
+      name: 'targetFilterPlaceholder',
+      type: 'string',
+      default: "'Filter'",
+      description: 'Placeholder for the target filter input.',
+    },
+    {
+      name: 'filterMatchMode',
+      type: "'contains' | 'startsWith' | 'endsWith' | 'equals'",
+      default: "'contains'",
+      description: 'Matching strategy.',
+    },
+    {
+      name: 'showSourceControls',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show reorder controls next to source list.',
+    },
+    {
+      name: 'showTargetControls',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show reorder controls next to target list.',
+    },
+    {
+      name: 'dragDrop',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables drag-and-drop reorder and transfer.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables all interaction.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Ctrl/Meta held for multi-select.',
+    },
+    {
+      name: 'stripedRows',
+      type: 'boolean',
+      default: 'false',
+      description: 'Alternating row background.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Theme variant override.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size scale.' },
+    {
+      name: 'trackBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property path for item identity.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'movedToTarget',
+      type: 'PickListMoveToTargetEvent',
+      description: 'After selected source items transferred to target.',
+    },
+    {
+      name: 'movedAllToTarget',
+      type: 'PickListMoveAllToTargetEvent',
+      description: 'After all source items transferred.',
+    },
+    {
+      name: 'movedToSource',
+      type: 'PickListMoveToSourceEvent',
+      description: 'After selected target items returned to source.',
+    },
+    {
+      name: 'movedAllToSource',
+      type: 'PickListMoveAllToSourceEvent',
+      description: 'After all target items returned.',
+    },
+    {
+      name: 'sourceSelectionChanged',
+      type: 'PickListSelectionChangeEvent',
+      description: 'When source selection changes.',
+    },
+    {
+      name: 'targetSelectionChanged',
+      type: 'PickListSelectionChangeEvent',
+      description: 'When target selection changes.',
+    },
+    {
+      name: 'reordered',
+      type: 'PickListReorderEvent',
+      description: 'After a reorder within either list.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiPickListItem',
+      type: '$implicit: T',
+      description: 'Custom item row for both lists.',
+    },
+    { name: 'uiPickListSourceHeader', type: '—', description: 'Custom source list header.' },
+    { name: 'uiPickListTargetHeader', type: '—', description: 'Custom target list header.' },
+    { name: 'uiPickListEmpty', type: '—', description: 'Empty state for either list.' },
+  ];
 }

@@ -279,109 +279,12 @@
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Text displayed inside the chip.</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>CSS class for a leading icon (e.g. <code>"pi pi-user"</code>). Ignored when <code>image</code> is also set.</td>
-          </tr>
-          <tr>
-            <td><code>image</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>URL of a circular thumbnail image rendered at the start of the chip.</td>
-          </tr>
-          <tr>
-            <td><code>imageAlt</code></td>
-            <td><code>string</code></td>
-            <td><code>"Chip"</code></td>
-            <td>Alt text for the chip image. Provide a meaningful description for real user images.</td>
-          </tr>
-          <tr>
-            <td><code>removable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>When true, a close button is rendered. Emits <code>(removed)</code> on click.</td>
-          </tr>
-          <tr>
-            <td><code>removeIcon</code></td>
-            <td><code>string</code></td>
-            <td><code>"pi pi-times"</code></td>
-            <td>CSS class for the remove button icon.</td>
-          </tr>
-          <tr>
-            <td><code>selectable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>When true, the chip is keyboard-focusable and toggleable. Pair with <code>[selected]</code> and <code>(selectedChange)</code>.</td>
-          </tr>
-          <tr>
-            <td><code>selected</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Selected state for selectable chips.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>"sm" | "md" | "lg"</code></td>
-            <td><code>"md"</code></td>
-            <td>Size of the chip.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>"material" | "bootstrap" | "minimal" | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes applied to the host element.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>(removed)</code></td>
-            <td><code>OutputEmitterRef&lt;MouseEvent&gt;</code></td>
-            <td>Emitted when the remove button is clicked. The chip does not auto-hide — manage visibility in the parent.</td>
-          </tr>
-          <tr>
-            <td><code>(selectedChange)</code></td>
-            <td><code>OutputEmitterRef&lt;boolean&gt;</code></td>
-            <td>Emitted when a selectable chip is toggled; provides the new selected value.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
   </section>

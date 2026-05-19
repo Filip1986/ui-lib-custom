@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the AnimateOnScroll directive.
@@ -24,6 +26,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './animated-on-scroll-demo.component.html',
   styleUrl: './animated-on-scroll-demo.component.scss',
@@ -69,4 +72,84 @@ export class AnimatedOnScrollDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'enterClass',
+      type: 'string',
+      default: "''",
+      description: 'Space-separated CSS class(es) added when the element enters the viewport.',
+    },
+    {
+      name: 'leaveClass',
+      type: 'string',
+      default: "''",
+      description:
+        'Space-separated CSS class(es) added when the element leaves the viewport (once must be false).',
+    },
+    {
+      name: 'threshold',
+      type: 'number',
+      default: '0.1',
+      description: 'Ratio of element visibility required to trigger (0–1).',
+    },
+    {
+      name: 'rootMargin',
+      type: 'string',
+      default: "'0px'",
+      description: "IntersectionObserver root margin (e.g. '-50px 0px').",
+    },
+    {
+      name: 'once',
+      type: 'boolean',
+      default: 'true',
+      description: 'Unobserves the element after the first enter event.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Skips observer setup entirely when true.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(enter)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted each time the element enters the viewport.',
+    },
+    {
+      name: '(leave)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted each time the element leaves the viewport (once must be false).',
+    },
+  ];
+
+  public readonly apiCssVarRows: readonly ApiPropRow[] = [
+    {
+      name: '--uilib-animate-on-scroll-duration',
+      type: 'CSS var',
+      default: '600ms',
+      description: 'Transition duration for all built-in presets.',
+    },
+    {
+      name: '--uilib-animate-on-scroll-easing',
+      type: 'CSS var',
+      default: 'cubic-bezier(0.4,0,0.2,1)',
+      description: 'Easing function for all built-in presets.',
+    },
+    {
+      name: '--uilib-animate-on-scroll-delay',
+      type: 'CSS var',
+      default: '0ms',
+      description: 'Per-element delay — set inline for stagger effects.',
+    },
+    {
+      name: '--uilib-animate-on-scroll-distance',
+      type: 'CSS var',
+      default: '30px',
+      description: 'Translation distance used by slide-* presets.',
+    },
+  ];
 }

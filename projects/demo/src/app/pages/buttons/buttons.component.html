@@ -770,34 +770,7 @@
       All inputs accepted by <code>ui-lib-button</code>. Import from
       <code>ui-lib-custom/button</code>.
     </p>
-    <ui-lib-panel variant="minimal">
-      <div class="buttons-demo__table-wrap">
-        <ui-lib-table
-          [value]="apiRows"
-          [variant]="activeVariant()"
-          [stripedRows]="true"
-          [rowHover]="true"
-          ariaLabel="Button component API reference"
-        >
-          <ui-lib-table-column field="name" header="Input" width="160px">
-            <ng-template uiTableColumnBody let-row>
-              <code class="buttons-demo__api-code buttons-demo__api-code--name">{{ row.name }}</code>
-            </ng-template>
-          </ui-lib-table-column>
-          <ui-lib-table-column field="type" header="Type" width="300px">
-            <ng-template uiTableColumnBody let-row>
-              <code class="buttons-demo__api-code">{{ row.type }}</code>
-            </ng-template>
-          </ui-lib-table-column>
-          <ui-lib-table-column field="default" header="Default" width="100px">
-            <ng-template uiTableColumnBody let-row>
-              <code class="buttons-demo__api-code">{{ row.default }}</code>
-            </ng-template>
-          </ui-lib-table-column>
-          <ui-lib-table-column field="description" header="Description" />
-        </ui-lib-table>
-      </div>
-    </ui-lib-panel>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->

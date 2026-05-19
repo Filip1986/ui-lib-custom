@@ -22,6 +22,8 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface AriaRow {
   readonly element: string;
@@ -48,6 +50,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
@@ -520,4 +523,92 @@ import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
   private logEvent(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 8));
   }
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'PanelMenuItem[]',
+      default: '[]',
+      description: 'Array of root-level menu items.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allow multiple root panels open at once.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description:
+        'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling font size and padding.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Panel Menu'",
+      description: 'Accessible label for the root navigation landmark.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'PanelMenuCommandEvent',
+      description: 'Emitted when a non-disabled leaf item is activated.',
+    },
+    {
+      name: 'panelToggle',
+      type: 'PanelMenuPanelToggleEvent',
+      description:
+        'Emitted when a root panel expands or collapses; payload includes <code>item</code>, <code>expanded</code>, and <code>key</code>.',
+    },
+  ];
+
+  public readonly apiPanelMenuItemRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', description: 'Display text.' },
+    { name: 'icon', type: 'string', description: 'Icon CSS class rendered before the label.' },
+    {
+      name: 'expanded',
+      type: 'boolean',
+      description: 'Initial expansion state (root items only).',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'Prevents interaction; adds <code>aria-disabled="true"</code>.',
+    },
+    { name: 'separator', type: 'boolean', description: 'Renders a visual divider.' },
+    { name: 'visible', type: 'boolean', description: 'Hides the item when <code>false</code>.' },
+    {
+      name: 'items',
+      type: 'PanelMenuItem[]',
+      description: 'Child items — makes this item a collapsible panel or group.',
+    },
+    {
+      name: 'command',
+      type: '(event) => void',
+      description: 'Callback invoked when a leaf item is activated.',
+    },
+    { name: 'url', type: 'string', description: 'Renders the item as an anchor link.' },
+    {
+      name: 'target',
+      type: 'string',
+      description: "Link target attribute (e.g. <code>'_blank'</code>).",
+    },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
+  ];
 }

@@ -15,6 +15,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Icon } from 'ui-lib-custom/icon';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
@@ -43,6 +45,7 @@ import type {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
@@ -187,4 +190,22 @@ export class SplitButtonDemoComponent {
     const label: string = event.item.label ?? 'Unknown action';
     this.lastAction.set(`Menu action: ${label}`);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Main button label text.' },
+    { name: 'model', type: 'SplitButtonItem[]', default: '[]', description: 'Menu item list.' },
+    {
+      name: 'severity',
+      type: 'SplitButtonSeverity',
+      default: "'primary'",
+      description: 'Visual severity token.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size scale for button pair.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables both buttons.' },
+  ];
 }

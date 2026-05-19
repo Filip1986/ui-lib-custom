@@ -148,64 +148,15 @@
     <!-- 7. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
       <h3>7. API Reference</h3>
-      <ui-lib-panel variant="minimal">
-        <ui-lib-stack [gap]="4">
-          <div>
-            <h4>Inputs</h4>
-            <table class="doc-table">
-              <thead><tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>source</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Source list items — two-way via <code>[(source)]</code>.</td></tr>
-                <tr><td><code>target</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Target list items — two-way via <code>[(target)]</code>.</td></tr>
-                <tr><td><code>sourceSelection</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Selected source items — two-way.</td></tr>
-                <tr><td><code>targetSelection</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Selected target items — two-way.</td></tr>
-                <tr><td><code>sourceHeader</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Static source list header text.</td></tr>
-                <tr><td><code>targetHeader</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Static target list header text.</td></tr>
-                <tr><td><code>filterBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Dot-notation property for filtering. Shows filter inputs when set.</td></tr>
-                <tr><td><code>sourceFilterPlaceholder</code></td><td><code>string</code></td><td><code>'Filter'</code></td><td>Placeholder for the source filter input.</td></tr>
-                <tr><td><code>targetFilterPlaceholder</code></td><td><code>string</code></td><td><code>'Filter'</code></td><td>Placeholder for the target filter input.</td></tr>
-                <tr><td><code>filterMatchMode</code></td><td><code>'contains' | 'startsWith' | 'endsWith' | 'equals'</code></td><td><code>'contains'</code></td><td>Matching strategy.</td></tr>
-                <tr><td><code>showSourceControls</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show reorder controls next to source list.</td></tr>
-                <tr><td><code>showTargetControls</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show reorder controls next to target list.</td></tr>
-                <tr><td><code>dragDrop</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Enables drag-and-drop reorder and transfer.</td></tr>
-                <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disables all interaction.</td></tr>
-                <tr><td><code>metaKeySelection</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Requires Ctrl/Meta held for multi-select.</td></tr>
-                <tr><td><code>stripedRows</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Alternating row background.</td></tr>
-                <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Theme variant override.</td></tr>
-                <tr><td><code>size</code></td><td><code>'sm' | 'md' | 'lg'</code></td><td><code>'md'</code></td><td>Size scale.</td></tr>
-                <tr><td><code>trackBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Property path for item identity.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Outputs</h4>
-            <table class="doc-table">
-              <thead><tr><th>Output</th><th>Payload</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>movedToTarget</code></td><td><code>PickListMoveToTargetEvent</code></td><td>After selected source items transferred to target.</td></tr>
-                <tr><td><code>movedAllToTarget</code></td><td><code>PickListMoveAllToTargetEvent</code></td><td>After all source items transferred.</td></tr>
-                <tr><td><code>movedToSource</code></td><td><code>PickListMoveToSourceEvent</code></td><td>After selected target items returned to source.</td></tr>
-                <tr><td><code>movedAllToSource</code></td><td><code>PickListMoveAllToSourceEvent</code></td><td>After all target items returned.</td></tr>
-                <tr><td><code>sourceSelectionChanged</code></td><td><code>PickListSelectionChangeEvent</code></td><td>When source selection changes.</td></tr>
-                <tr><td><code>targetSelectionChanged</code></td><td><code>PickListSelectionChangeEvent</code></td><td>When target selection changes.</td></tr>
-                <tr><td><code>reordered</code></td><td><code>PickListReorderEvent</code></td><td>After a reorder within either list.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Template Slots</h4>
-            <table class="doc-table">
-              <thead><tr><th>Directive</th><th>Context</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><code>uiPickListItem</code></td><td><code>$implicit: T</code></td><td>Custom item row for both lists.</td></tr>
-                <tr><td><code>uiPickListSourceHeader</code></td><td>—</td><td>Custom source list header.</td></tr>
-                <tr><td><code>uiPickListTargetHeader</code></td><td>—</td><td>Custom target list header.</td></tr>
-                <tr><td><code>uiPickListEmpty</code></td><td>—</td><td>Empty state for either list.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </ui-lib-stack>
-      </ui-lib-panel>
+
+      <h4>Inputs</h4>
+      <app-doc-api-reference [rows]="apiInputRows" />
+
+      <h4>Outputs</h4>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+
+      <h4>Template Slots</h4>
+      <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </section>
 
   </div>

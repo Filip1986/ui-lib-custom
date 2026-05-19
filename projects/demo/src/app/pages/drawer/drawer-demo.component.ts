@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Drawer component.
@@ -28,6 +30,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',
@@ -108,6 +111,89 @@ export class DrawerDemoComponent {
     {
       key: 'Shift+Tab',
       action: 'Cycles focus backward through all focusable elements. Wraps from first to last.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'visible',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way binding to control open/close.',
+    },
+    { name: 'header', type: 'string', default: "''", description: 'Header title text.' },
+    {
+      name: 'position',
+      type: "'left' | 'right' | 'top' | 'bottom'",
+      default: "'right'",
+      description: 'Which edge the drawer slides from.',
+    },
+    {
+      name: 'size',
+      type: 'string',
+      default: "'300px'",
+      description: 'Panel width (left/right) or height (top/bottom).',
+    },
+    {
+      name: 'modal',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show the semi-transparent backdrop.',
+    },
+    {
+      name: 'closeOnBackdrop',
+      type: 'boolean',
+      default: 'true',
+      description: 'Close on backdrop click.',
+    },
+    {
+      name: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'Close on Escape key.',
+    },
+    {
+      name: 'blockScroll',
+      type: 'boolean',
+      default: 'true',
+      description: 'Lock body scroll while open.',
+    },
+    {
+      name: 'showCloseButton',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show the built-in X close button.',
+    },
+    {
+      name: 'variant',
+      type: 'DrawerVariant | null',
+      default: 'null',
+      description: 'Visual variant (inherits from theme service).',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes on the host.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    { name: 'shown', type: 'OutputEmitterRef<void>', description: 'Emits after the drawer opens.' },
+    {
+      name: 'hidden',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emits after the drawer closes.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    { name: 'default', type: 'slot', description: 'Scrollable main content.' },
+    { name: '[drawerHeader]', type: 'slot', description: 'Replaces the header title area.' },
+    {
+      name: '[drawerFooter]',
+      type: 'slot',
+      description: 'Sticky footer at the bottom of the panel.',
     },
   ];
 }

@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the classNames utility and ClassNamesPipe.
@@ -24,6 +26,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
@@ -126,6 +129,28 @@ classNames('btn', null, undefined, false, 'icon')
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly classnamesFnRows: readonly ApiPropRow[] = [
+    {
+      name: '...values',
+      type: 'ClassNameValue[]',
+      description:
+        'One or more values. Strings are included as-is. Object keys with truthy values are included. Arrays are recursively processed. Falsy primitives are ignored.',
+    },
+  ];
+
+  public readonly classnamesPipeRows: readonly ApiPropRow[] = [
+    {
+      name: 'value (primary)',
+      type: 'ClassNameValue',
+      description: 'The primary value passed before the pipe symbol.',
+    },
+    {
+      name: '...additional',
+      type: 'ClassNameValue[]',
+      description: 'Optional extra values passed as pipe arguments after :.',
+    },
+  ];
 
   public toggleActive(): void {
     this.isActive.update((value: boolean): boolean => !value);
