@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { UploadComponent } from 'ui-lib-custom/upload';
-import { Button } from 'ui-lib-custom/button';
 import { UploadEmptyDirective, UploadFileDirective } from 'ui-lib-custom/upload';
 import type {
   UploadHandlerEvent,
@@ -40,7 +39,6 @@ interface UploadLogEntry {
     UploadComponent,
     UploadEmptyDirective,
     UploadFileDirective,
-    Button,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,

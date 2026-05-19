@@ -4,21 +4,6 @@
     <p class="doc-description">
       Advanced file uploader with drag-and-drop, image previews, validation, and custom upload mode.
     </p>
-    <div class="demo-page-header__preview">
-      <div class="upload-demo__variant-switcher" role="group" aria-label="Select variant">
-        @for (variant of variants; track variant) {
-          <ui-lib-button
-            type="button"
-            [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
-            severity="primary"
-            size="sm"
-            (click)="setVariant(variant)"
-          >
-            {{ variant }}
-          </ui-lib-button>
-        }
-      </div>
-    </div>
   </app-doc-page-header>
 
   <!-- ── Section 1: Basic single-file upload ─────────────────────────────── -->

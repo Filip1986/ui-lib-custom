@@ -5,25 +5,6 @@
       Hierarchical data displayed as an expandable table. Supports sorting, global filter,
       single / multiple / checkbox selection, custom cell templates, and all three design variants.
     </p>
-    <div class="demo-page-header__preview">
-      <!-- Variant switcher -->
-      <div class="demo-controls">
-        <div class="demo-control-group">
-          <span class="demo-control-label">Variant</span>
-          <div class="demo-button-group">
-            @for (v of ['material', 'bootstrap', 'minimal']; track v) {
-              <ui-lib-button
-                type="button"
-                [appearance]="activeVariant() === v ? 'solid' : 'outline'"
-                severity="primary"
-                size="sm"
-                (click)="setVariant($any(v))"
-              >{{ v }}</ui-lib-button>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
   </app-doc-page-header>
 
   <!-- ═══════════════════════════════════════════════════════════════════════

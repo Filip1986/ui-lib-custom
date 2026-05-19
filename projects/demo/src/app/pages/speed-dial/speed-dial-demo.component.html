@@ -2,21 +2,6 @@
 
   <app-doc-page-header docHeader title="SpeedDial" [importCode]="importCode"
     description="Floating action menu with linear and radial layouts, template customization, tooltips, and masking.">
-    <div class="demo-page-header__preview">
-      <!-- Variant switcher -->
-      <div class="speed-dial-demo__variant-switcher" role="group" aria-label="Select variant">
-        @for (v of variants; track v) {
-          <button
-            type="button"
-            class="speed-dial-demo__variant-btn"
-            [class.speed-dial-demo__variant-btn--active]="activeVariant() === v"
-            (click)="setVariant(v)"
-          >
-            {{ v }}
-          </button>
-        }
-      </div>
-    </div>
   </app-doc-page-header>
 
   <!-- Section 1: Linear -->
