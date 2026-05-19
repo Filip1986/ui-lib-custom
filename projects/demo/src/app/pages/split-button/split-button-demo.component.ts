@@ -77,6 +77,65 @@ export class SplitButtonDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      default: "''",
+      description: 'Label for the primary action button.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the primary button.',
+    },
+    {
+      name: 'iconPos',
+      type: "'left' | 'right'",
+      default: "'left'",
+      description: 'Primary icon position.',
+    },
+    {
+      name: 'model',
+      type: 'MenuItem[]',
+      default: '[]',
+      description: 'Array of dropdown menu items.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables both buttons.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    {
+      name: 'appendTo',
+      type: "'body' | string",
+      default: "'body'",
+      description: 'Portal target element.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+    {
+      name: 'tabindex',
+      type: 'number',
+      default: '0',
+      description: 'Tab order of the primary button.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the primary button.',
+    },
+  ];
+
   public readonly importCode: string =
     "import { SplitButtonComponent } from 'ui-lib-custom/split-button'";
 
@@ -95,6 +154,7 @@ export class SplitButtonDemoComponent {
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   // -------------------------------------------------------------------------

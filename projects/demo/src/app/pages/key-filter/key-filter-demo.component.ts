@@ -10,6 +10,8 @@ import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type KeyFilterDemoSnippetKey =
@@ -41,6 +43,7 @@ type KeyFilterDemoSnippetKey =
     KeyFilterDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',
@@ -53,6 +56,38 @@ export class KeyFilterDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'uilibKeyFilter',
+      type: 'KeyFilterPreset | RegExp',
+      description: 'Preset name or custom regex controlling which keys are accepted.',
+    },
+    {
+      name: 'keyFilterBypass',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables filtering when true.',
+    },
+    {
+      name: 'hintText',
+      type: 'string | null',
+      default: 'null',
+      description: 'Screen reader hint describing allowed characters.',
+    },
+    {
+      name: 'pattern',
+      type: 'KeyFilterPreset | null',
+      default: 'null',
+      description: 'Named preset alias (alternative to the main input).',
+    },
+    {
+      name: 'regex',
+      type: 'RegExp | null',
+      default: 'null',
+      description: 'Custom regex alias (alternative to the main input).',
+    },
+  ];
 
   public readonly importCode: string =
     "import { KeyFilterDirective } from 'ui-lib-custom/key-filter'";
@@ -68,6 +103,7 @@ export class KeyFilterDemoComponent {
     { id: 'email', label: 'Email' },
     { id: 'custom', label: 'Custom RegExp' },
     { id: 'bypass', label: 'Bypass' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly snippets: Record<KeyFilterDemoSnippetKey, string> = {

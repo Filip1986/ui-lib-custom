@@ -7,6 +7,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
@@ -84,6 +86,7 @@ type ThemeCssVariables = {
     PieChartComponent,
     DoughnutChartComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './chart-demo.component.html',
   styleUrl: './chart-demo.component.scss',
@@ -135,11 +138,78 @@ export class ChartDemoComponent {
     { id: 'theme-integration', label: 'Theme Integration' },
     { id: 'click-events', label: 'Click Events' },
     { id: 'custom-options', label: 'Custom Options' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'type',
+      type: 'ChartType',
+      description: "Chart.js chart type (required). E.g. 'bar', 'line', 'pie'.",
+    },
+    {
+      name: 'data',
+      type: 'ChartData',
+      description: 'Chart.js data object with labels and datasets.',
+    },
+    {
+      name: 'options',
+      type: 'ChartOptions',
+      description: 'Chart.js options object for customizing behaviour and appearance.',
+    },
+    {
+      name: 'plugins',
+      type: 'Plugin[]',
+      default: '[]',
+      description: 'Chart.js plugin instances to register.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Preset size of the chart container.',
+    },
+    {
+      name: 'responsive',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables responsive resizing.',
+    },
+    {
+      name: 'maintainAspectRatio',
+      type: 'boolean',
+      default: 'true',
+      description: 'Keeps the original aspect ratio on resize.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Chart'",
+      description: 'Accessible label for the canvas element.',
+    },
+    {
+      name: 'showDataTable',
+      type: 'boolean',
+      default: 'true',
+      description: 'Renders an accessible data table below the chart.',
+    },
+    {
+      name: 'height',
+      type: 'string | null',
+      default: 'null',
+      description: 'Explicit CSS height override.',
+    },
+    {
+      name: 'width',
+      type: 'string | null',
+      default: 'null',
+      description: 'Explicit CSS width override.',
+    },
+  ];
 
   public readonly snippets: Record<ChartDemoSnippetKey, string> = {
     basicBar: `<ui-lib-bar-chart [data]="monthlyRevenueData" />`,

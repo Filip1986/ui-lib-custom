@@ -13,6 +13,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
@@ -49,6 +51,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     VariantComparisonComponent,
     BadgeBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -90,6 +93,46 @@ export class BadgesComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to the global theme when null.',
+    },
+    {
+      name: 'color',
+      type: "'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral'",
+      default: "'primary'",
+      description: 'Semantic color role of the badge.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Badge size.' },
+    {
+      name: 'pill',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies full pill border-radius.',
+    },
+    {
+      name: 'dot',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders as a small dot indicator (no label).',
+    },
+    {
+      name: 'decorative',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the badge as purely decorative (aria-hidden).',
+    },
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text label displayed inside the badge.',
+    },
+  ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 

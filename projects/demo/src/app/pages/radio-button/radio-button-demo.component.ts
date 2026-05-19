@@ -248,6 +248,50 @@ export class RadioButtonDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'unknown', description: 'Value this radio represents.' },
+    { name: 'name', type: 'string', default: "''", description: 'Radio group name.' },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Id for the inner input element.',
+    },
+    { name: 'label', type: 'string | null', default: 'null', description: 'Label text.' },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Radio button size.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the radio button.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the radio read-only.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab',

@@ -7,7 +7,7 @@
   />
 
     <app-checkbox-basic-example />
-  <ui-lib-code-snippet language="html" [code]="checkboxExample" 
+  <ui-lib-code-snippet language="html" [code]="checkboxExample"
     [showLineNumbers]="true"
     />
 
@@ -434,92 +434,9 @@
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-panel variant="minimal">
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Optional text label (use projection for custom markup).</td>
-          </tr>
-          <tr>
-            <td><code>description</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Supporting text rendered under the label.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-            <td><code>'material'</code></td>
-            <td>Controls visual treatment of the control box.</td>
-          </tr>
-          <tr>
-            <td><code>appearance</code></td>
-            <td><code>'outlined' | 'filled'</code></td>
-            <td><code>'outlined'</code></td>
-            <td>Toggles outlined and filled visual surfaces.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Adjusts checkbox dimensions and typography.</td>
-          </tr>
-          <tr>
-            <td><code>binary</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>When false with <code>value</code>, uses array/group mode.</td>
-          </tr>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>unknown</code></td>
-            <td><code>null</code></td>
-            <td>Group-mode value represented by a single checkbox.</td>
-          </tr>
-          <tr>
-            <td><code>trueValue / falseValue</code></td>
-            <td><code>unknown</code></td>
-            <td><code>true / false</code></td>
-            <td>Binary-mode model values emitted for checked and unchecked states.</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Disables click and keyboard interaction.</td>
-          </tr>
-          <tr>
-            <td><code>readonly</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Prevents value changes while keeping focus and semantics.</td>
-          </tr>
-          <tr>
-            <td><code>indeterminate</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Shows the mixed state (aria-checked="mixed").</td>
-          </tr>
-          <tr>
-            <td><code>checked</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Two-way bound value via <code>[(checked)]</code>.</td>
-          </tr>
-        </tbody>
-      </table>
-    </ui-lib-panel>
+    <section id="api-reference" data-doc-anchor>
+      <app-doc-api-reference [rows]="apiRows" />
+    </section>
   }
 
   @if (activeTab() === 'usage') {

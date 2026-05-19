@@ -9,6 +9,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
@@ -44,6 +46,7 @@ type ListboxDemoSnippetKey =
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './listbox-demo.component.html',
   styleUrl: './listbox-demo.component.scss',
@@ -76,6 +79,91 @@ export class ListboxDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'options', type: 'unknown[]', default: '[]', description: 'Options array.' },
+    {
+      name: 'optionLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name for the display label.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string',
+      default: "'value'",
+      description: 'Property name for the value.',
+    },
+    {
+      name: 'optionDisabled',
+      type: 'string',
+      default: "'disabled'",
+      description: 'Property name to mark an option as disabled.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables multi-selection.',
+    },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Shows a filter input.' },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'No results found.'",
+      description: 'Message shown when no options match.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string',
+      default: "'200px'",
+      description: 'Max height of the listbox.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the listbox read-only.',
+    },
+    {
+      name: 'showToggleAll',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a Select All toggle (multiple mode).',
+    },
+    {
+      name: 'checkbox',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders checkboxes alongside options.',
+    },
+    {
+      name: 'striped',
+      type: 'boolean',
+      default: 'false',
+      description: 'Alternates row background colors.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "''",
+      description: 'Accessible label for the listbox element.',
+    },
+  ];
+
   public readonly importCode: string = "import { ListboxComponent } from 'ui-lib-custom/listbox'";
 
   public readonly sections: DocSection[] = [
@@ -89,6 +177,7 @@ export class ListboxDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'reactive', label: 'Reactive Forms' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   // ── Options ────────────────────────────────────────────────────────────────

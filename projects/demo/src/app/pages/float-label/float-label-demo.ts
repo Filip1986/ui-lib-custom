@@ -15,6 +15,8 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Button } from 'ui-lib-custom/button';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -56,6 +58,7 @@ type FloatLabelDemoSnippetKey =
     Button,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',
@@ -93,11 +96,21 @@ export class FloatLabelDemoComponent {
     { id: 'with-textarea', label: 'With Textarea' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'over' | 'in' | 'on'",
+      default: "'over'",
+      description: 'Animation variant controlling where the label floats.',
+    },
+  ];
 
   public readonly snippets: Record<FloatLabelDemoSnippetKey, string> = {
     basic: `<uilib-float-label>

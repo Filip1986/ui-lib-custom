@@ -8,10 +8,20 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 /**
  * Placeholder demo page for the upcoming Splitter component.
  */
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+/**
+ *
+ */
 @Component({
   selector: 'app-splitter-demo',
   standalone: true,
-  imports: [DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocApiReferenceComponent,
+  ],
   templateUrl: './splitter-demo.component.html',
   styleUrl: './splitter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,9 +31,20 @@ export class SplitterDemoComponent {
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
-  public readonly sections: DocSection[] = [{ id: 'overview', label: 'Overview' }];
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'api', label: 'API Reference' },
+  ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: '(coming soon)',
+      type: '—',
+      description: 'This component is under development. API will be documented on release.',
+    },
+  ];
 }

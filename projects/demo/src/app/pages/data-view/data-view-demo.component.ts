@@ -7,6 +7,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Button } from 'ui-lib-custom/button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
@@ -76,6 +78,7 @@ type DataViewDemoSnippetKey =
     DataViewPaginatorLeftDirective,
     DataViewPaginatorRightDirective,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './data-view-demo.component.html',
   styleUrl: './data-view-demo.component.scss',
@@ -123,11 +126,77 @@ export class DataViewDemoComponent {
     { id: 'grid-columns', label: 'Grid Columns' },
     { id: 'custom-paginator-slots', label: 'Custom Paginator Slots' },
     { id: 'theme-integration', label: 'Theme Integration' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'T[]', description: 'Data array to display (required).' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows skeleton loading state.',
+    },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'No records found.'",
+      description: 'Message shown when value is empty.',
+    },
+    {
+      name: 'gridColumns',
+      type: 'number',
+      default: '3',
+      description: 'Number of columns in grid layout.',
+    },
+    {
+      name: 'gridGap',
+      type: 'string',
+      default: "'1rem'",
+      description: 'CSS gap between grid items.',
+    },
+    {
+      name: 'dataKey',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property for tracking identity in layout transitions.',
+    },
+    {
+      name: 'paginator',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables built-in pagination.',
+    },
+    {
+      name: 'rows',
+      type: 'number',
+      default: '10',
+      description: 'Items per page when paginator is enabled.',
+    },
+    {
+      name: 'totalRecords',
+      type: 'number | null',
+      default: 'null',
+      description: 'Total record count for server-side pagination.',
+    },
+    {
+      name: 'rowsPerPageOptions',
+      type: 'number[] | null',
+      default: 'null',
+      description: 'Options for the rows-per-page selector.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Data list'",
+      description: 'Accessible label for the data view region.',
+    },
+  ];
 
   public readonly snippets: Record<DataViewDemoSnippetKey, string> = {
     basicList: `<ui-lib-data-view [value]="products">

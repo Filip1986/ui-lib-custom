@@ -111,6 +111,58 @@ export class ConfirmDialogDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'group',
+      type: 'string',
+      default: "'default'",
+      description:
+        'Message group — links this dialog to matching ConfirmationService.confirm() calls.',
+    },
+    {
+      name: 'acceptLabel',
+      type: 'string',
+      default: "'Yes'",
+      description: 'Label for the accept button.',
+    },
+    {
+      name: 'rejectLabel',
+      type: 'string',
+      default: "'No'",
+      description: 'Label for the reject button.',
+    },
+    {
+      name: 'acceptIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the accept button.',
+    },
+    {
+      name: 'rejectIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the reject button.',
+    },
+    {
+      name: 'breakpoints',
+      type: 'Record<string, string>',
+      default: '{}',
+      description: 'Responsive width breakpoints.',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | HTMLElement | string",
+      default: "'body'",
+      description: 'Target element for portal rendering.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of the heading element.',
+    },
+  ];
+
   public confirmBasic(): void {
     this.basicVisible.set(true);
   }

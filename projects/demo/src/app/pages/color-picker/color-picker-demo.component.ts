@@ -19,6 +19,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ColorPickerValue, HsbColor, RgbColor } from 'ui-lib-custom';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type DemoSnippetKey =
@@ -50,6 +52,7 @@ type DemoSnippetKey =
     CodeSnippet,
     ColorPicker,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',
@@ -70,11 +73,52 @@ export class ColorPickerDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'string | RgbColor | HsbColor | null',
+      default: 'null',
+      description: 'The selected color value.',
+    },
+    {
+      name: 'format',
+      type: "'hex' | 'rgb' | 'hsb'",
+      default: "'hex'",
+      description: 'Output format of the selected color.',
+    },
+    {
+      name: 'inline',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders the picker inline instead of in a popup.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the color picker.',
+    },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Id of the associated color input.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
+    {
+      name: 'appendTo',
+      type: "string | HTMLElement | 'body'",
+      default: "'body'",
+      description: 'Target element for portal rendering.',
+    },
+  ];
 
   public readonly snippets: Record<DemoSnippetKey, string> = {
     basic: `<ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />

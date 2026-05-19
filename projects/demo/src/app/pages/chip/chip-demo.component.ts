@@ -227,6 +227,50 @@ export class ChipDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Chip label text.' },
+    { name: 'icon', type: 'string | null', default: 'null', description: 'Leading icon name.' },
+    { name: 'removable', type: 'boolean', default: 'false', description: 'Shows a remove button.' },
+    {
+      name: 'removeIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom remove icon name.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL for an avatar image inside the chip.',
+    },
+    { name: 'imageAlt', type: 'string', default: "''", description: 'Alt text for the image.' },
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warning' | 'danger' | 'secondary' | null",
+      default: 'null',
+      description: 'Severity colour.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a fully rounded pill shape.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Chip size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Space / Enter',

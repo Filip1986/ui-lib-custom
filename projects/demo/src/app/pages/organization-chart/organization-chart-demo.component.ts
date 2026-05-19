@@ -150,6 +150,39 @@ export class OrganizationChartDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'OrgChartNode | null',
+      default: 'null',
+      description: 'Root node of the organisation tree.',
+    },
+    {
+      name: 'selectionMode',
+      type: "'single' | 'multiple' | null",
+      default: 'null',
+      description: 'Node selection mode.',
+    },
+    {
+      name: 'preserveSpace',
+      type: 'boolean',
+      default: 'true',
+      description: 'Keeps space for collapsed sub-trees.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Organization chart'",
+      description: 'Accessible label for the chart.',
+    },
+  ];
+
   public readonly importCode: string =
     "import { OrganizationChart } from 'ui-lib-custom/organization-chart'";
 
@@ -162,6 +195,7 @@ export class OrganizationChartDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'bootstrap', label: 'Bootstrap Variant' },
     { id: 'minimal', label: 'Minimal Variant' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   // ─── Tree data (each demo section gets its own independent copy) ───────────

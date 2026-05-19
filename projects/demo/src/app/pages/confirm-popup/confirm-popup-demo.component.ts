@@ -77,6 +77,7 @@ export class ConfirmPopupDemoComponent {
     { id: 'result-log', label: 'Result Log' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly variants: ConfirmPopupVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -95,6 +96,51 @@ export class ConfirmPopupDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'group',
+      type: 'string',
+      default: "'default'",
+      description: 'Message group linking this popup to ConfirmationService.confirm() calls.',
+    },
+    {
+      name: 'acceptLabel',
+      type: 'string',
+      default: "'Yes'",
+      description: 'Label for the accept button.',
+    },
+    {
+      name: 'rejectLabel',
+      type: 'string',
+      default: "'No'",
+      description: 'Label for the reject button.',
+    },
+    {
+      name: 'acceptIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the accept button.',
+    },
+    {
+      name: 'rejectIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the reject button.',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | HTMLElement | string",
+      default: "'body'",
+      description: 'Target element for portal rendering.',
+    },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+  ];
 
   public confirmBasic(event: MouseEvent): void {
     this.confirmPopupService.confirm({

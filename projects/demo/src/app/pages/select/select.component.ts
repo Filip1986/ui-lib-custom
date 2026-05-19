@@ -28,6 +28,8 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { SelectBasicExampleComponent } from '@demo/examples/select-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -66,6 +68,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -98,6 +101,67 @@ export class SelectComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'SelectOption[]',
+      default: '[]',
+      description: 'Array of option objects.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Select size.' },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables multi-selection.',
+    },
+    {
+      name: 'searchable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a search input in the dropdown.',
+    },
+    {
+      name: 'placeholder',
+      type: 'string',
+      default: "'Select...'",
+      description: 'Placeholder text.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the select.' },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading indicator.',
+    },
+    { name: 'label', type: 'string', default: "''", description: 'Label text.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the select as invalid.',
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the select as required.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+  ];
+
   public readonly importCode: string = "import { UiLibSelect } from 'ui-lib-custom/select'";
 
   public readonly sections: DocSection[] = [
@@ -108,6 +172,7 @@ export class SelectComponent {
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');

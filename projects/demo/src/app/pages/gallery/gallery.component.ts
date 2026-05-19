@@ -139,6 +139,57 @@ export class GalleryComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'images',
+      type: 'GalleryImage[]',
+      default: '[]',
+      description: 'Array of image objects with src, alt, and optional caption.',
+    },
+    {
+      name: 'thumbnails',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows thumbnail strip navigation.',
+    },
+    {
+      name: 'showIndicators',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows position indicator dots.',
+    },
+    {
+      name: 'circular',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables infinite looping.',
+    },
+    {
+      name: 'autoplay',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables automatic slideshow.',
+    },
+    {
+      name: 'autoplayInterval',
+      type: 'number',
+      default: '3000',
+      description: 'Milliseconds per slide in autoplay mode.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Gallery'",
+      description: 'Accessible label for the gallery region.',
+    },
+  ];
+
   public readonly images: GalleriaImage[] = DEMO_IMAGES;
 
   // Basic demo state

@@ -9,6 +9,8 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Button } from 'ui-lib-custom/button';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
@@ -53,6 +55,7 @@ type InputGroupDemoSnippetKey =
     InputGroupAddonComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-group-demo.component.html',
   styleUrl: './input-group-demo.component.scss',
@@ -90,11 +93,21 @@ export class InputGroupDemoComponent {
     { id: 'checkbox-radio', label: 'Checkbox & Radio' },
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: '(projection)',
+      type: 'ng-content',
+      description:
+        'Project add-ons, buttons, or text before/after the input using the [prefix] and [suffix] slots.',
+    },
+  ];
 
   public readonly snippets: Record<InputGroupDemoSnippetKey, string> = {
     basic: `<uilib-input-group>

@@ -18,7 +18,7 @@
             (completeMethod)="onBasicComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')"
         [showLineNumbers]="true"
         />
     </section>
@@ -35,7 +35,7 @@
             (completeMethod)="onCountryComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('objects')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('objects')"
         [showLineNumbers]="true"
         />
     </section>
@@ -53,7 +53,7 @@
             (completeMethod)="onCountryComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('dropdown')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('dropdown')"
         [showLineNumbers]="true"
         />
     </section>
@@ -72,7 +72,7 @@
             (completeMethod)="onCountryComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('forceSelection')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('forceSelection')"
         [showLineNumbers]="true"
         />
     </section>
@@ -90,7 +90,7 @@
             (completeMethod)="onCountryComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('multiple')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('multiple')"
         [showLineNumbers]="true"
         />
     </section>
@@ -117,7 +117,7 @@
             </ng-template>
           </ui-lib-autocomplete>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('multipleAdvanced')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('multipleAdvanced')"
         [showLineNumbers]="true"
         />
     </section>
@@ -141,7 +141,7 @@
             </ng-template>
           </ui-lib-autocomplete>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('grouped')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('grouped')"
         [showLineNumbers]="true"
         />
     </section>
@@ -162,7 +162,7 @@
             (completeMethod)="onVirtualComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('virtual')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('virtual')"
         [showLineNumbers]="true"
         />
     </section>
@@ -200,7 +200,7 @@
             </ng-template>
           </ui-lib-autocomplete>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('templates')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('templates')"
         [showLineNumbers]="true"
         />
     </section>
@@ -232,7 +232,7 @@
             />
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
         [showLineNumbers]="true"
         />
     </section>
@@ -249,7 +249,7 @@
             (completeMethod)="onBasicComplete($event)"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('filled')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('filled')"
         [showLineNumbers]="true"
         />
     </section>
@@ -273,7 +273,7 @@
             />
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('states')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('states')"
         [showLineNumbers]="true"
         />
     </section>
@@ -296,7 +296,7 @@
               <p class="error-text">Country is required.</p>
             }
           </form>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('reactive')"
           [showLineNumbers]="true"
           />
 
@@ -310,7 +310,7 @@
             placeholder="Template model"
             (completeMethod)="onCountryComplete($event)"
           />
-        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('templateDriven')"
           [showLineNumbers]="true"
           />
       </ui-lib-panel>
@@ -343,7 +343,7 @@
             />
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('variants')"
         [showLineNumbers]="true"
         />
     </section>
@@ -366,11 +366,21 @@
             </p>
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('clipping')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('clipping')"
         [showLineNumbers]="true"
         />
     </section>
   </div>
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API Reference</h2>
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-autocomplete</code>. Import from
+      <code>ui-lib-custom/autocomplete</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

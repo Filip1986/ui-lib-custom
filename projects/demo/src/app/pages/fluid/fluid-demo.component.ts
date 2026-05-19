@@ -63,11 +63,21 @@ export class FluidDemoComponent {
     { id: 'conditional-fluid', label: 'Conditional Fluid' },
     { id: 'attribute-shorthand', label: 'Attribute Shorthand' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: '(structural)',
+      type: 'directive',
+      description:
+        'Apply [uilibFluid] to any element to make its child form controls expand to full width.',
+    },
+  ];
 
   public readonly isFluid: WritableSignal<boolean> = signal<boolean>(true);
   public readonly name: WritableSignal<string> = signal<string>('');

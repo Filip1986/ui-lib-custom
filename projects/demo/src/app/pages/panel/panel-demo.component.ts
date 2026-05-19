@@ -431,4 +431,45 @@ export class PanelDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'header', type: 'string', default: "''", description: 'Panel header text.' },
+    {
+      name: 'toggleable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the panel body collapsible.',
+    },
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      default: 'false',
+      description: 'Controls the collapsed state (two-way via [(collapsed)]).',
+    },
+    {
+      name: 'expandIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom expand icon.',
+    },
+    {
+      name: 'collapseIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom collapse icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Panel size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 }

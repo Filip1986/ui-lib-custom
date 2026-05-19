@@ -19,6 +19,8 @@ import { DatePickerComponent } from 'ui-lib-custom/date-picker';
 import type { ThemeVariant } from 'ui-lib-custom/core';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type DatePickerDemoSnippetKey =
@@ -62,6 +64,7 @@ type DatePickerDemoSnippetKey =
     CodeSnippet,
     DatePickerComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
   styleUrl: './date-picker-demo.component.scss',
@@ -116,11 +119,102 @@ export class DatePickerDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'dateFormat',
+      type: 'string',
+      default: "'mm/dd/yy'",
+      description: 'Format string for the displayed date.',
+    },
+    {
+      name: 'inline',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders the calendar inline.',
+    },
+    {
+      name: 'showIcon',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a calendar toggle icon.',
+    },
+    {
+      name: 'iconDisplay',
+      type: "'input' | 'button'",
+      default: "'input'",
+      description: 'Position of the calendar icon.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+    {
+      name: 'minDate',
+      type: 'Date | null',
+      default: 'null',
+      description: 'Minimum selectable date.',
+    },
+    {
+      name: 'maxDate',
+      type: 'Date | null',
+      default: 'null',
+      description: 'Maximum selectable date.',
+    },
+    {
+      name: 'disabledDates',
+      type: 'Date[]',
+      default: '[]',
+      description: 'Array of dates to disable.',
+    },
+    {
+      name: 'disabledDays',
+      type: 'number[]',
+      default: '[]',
+      description: 'Day indices (0=Sun) to disable.',
+    },
+    {
+      name: 'view',
+      type: "'date' | 'month' | 'year'",
+      default: "'date'",
+      description: 'Calendar view granularity.',
+    },
+    {
+      name: 'numberOfMonths',
+      type: 'number',
+      default: '1',
+      description: 'Number of months to display at once.',
+    },
+    { name: 'showTime', type: 'boolean', default: 'false', description: 'Enables time selection.' },
+    {
+      name: 'timeOnly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows only the time picker.',
+    },
+    {
+      name: 'hourFormat',
+      type: "'12' | '24'",
+      default: "'24'",
+      description: 'Hour format for time picker.',
+    },
+    {
+      name: 'showButtonBar',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows Today/Clear buttons.',
+    },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Id for the inner input element.',
+    },
+  ];
 
   public readonly snippets: Record<DatePickerDemoSnippetKey, string> = {
     basic: `<ui-lib-date-picker [(ngModel)]="basicDate" />`,

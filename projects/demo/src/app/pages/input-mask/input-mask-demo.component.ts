@@ -19,6 +19,8 @@ import { InputMaskComponent } from 'ui-lib-custom/input-mask';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 interface InputMaskSizeItem {
@@ -62,6 +64,7 @@ type InputMaskDemoSnippetKey =
     InputMaskComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-mask-demo.component.html',
   styleUrl: './input-mask-demo.component.scss',
@@ -106,11 +109,85 @@ export class InputMaskDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'mask',
+      type: 'string',
+      default: "''",
+      description: 'Mask pattern. Use 9 for digit, a for letter, * for alphanumeric.',
+    },
+    {
+      name: 'slotChar',
+      type: 'string',
+      default: "'_'",
+      description: 'Placeholder character for empty mask slots.',
+    },
+    {
+      name: 'autoClear',
+      type: 'boolean',
+      default: 'true',
+      description: 'Clears the input when an incomplete mask is present on blur.',
+    },
+    {
+      name: 'unmask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Emits values without mask characters.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies filled background style.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the input read-only.',
+    },
+    {
+      name: 'placeholder',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Placeholder text.',
+    },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Expands to fill container width.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the input as invalid.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'errorMessage',
+      type: 'string | null',
+      default: 'null',
+      description: 'Validation error message.',
+    },
+    {
+      name: 'maskHint',
+      type: 'string | null',
+      default: 'null',
+      description: 'Screen reader hint about the expected mask format.',
+    },
+  ];
 
   public readonly snippets: Record<InputMaskDemoSnippetKey, string> = {
     basic: `<uilib-input-mask

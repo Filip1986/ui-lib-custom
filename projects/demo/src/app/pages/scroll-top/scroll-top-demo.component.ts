@@ -68,6 +68,33 @@ export class ScrollTopDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'target',
+      type: "'window' | 'parent'",
+      default: "'window'",
+      description: 'Scroll target: the window or the nearest scrollable parent.',
+    },
+    {
+      name: 'threshold',
+      type: 'number',
+      default: '400',
+      description: 'Scroll distance (px) before the button appears.',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      default: "'arrow-up'",
+      description: 'Icon name for the button.',
+    },
+    {
+      name: 'behavior',
+      type: "'smooth' | 'instant' | 'auto'",
+      default: "'smooth'",
+      description: 'CSS scroll-behavior value.',
+    },
+  ];
+
   public readonly snippetThreshold: string = `<ui-lib-scroll-top [threshold]="200" />`;
   public readonly snippetParentTarget: string = `<div style="height: 300px; overflow-y: auto; position: relative;">\n  <ui-lib-scroll-top target="parent" [threshold]="100" />\n  <!-- scrollable content -->\n</div>`;
 

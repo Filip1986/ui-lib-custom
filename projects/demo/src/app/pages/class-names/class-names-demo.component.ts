@@ -130,6 +130,15 @@ classNames('btn', null, undefined, false, 'icon')
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'classNames',
+      type: 'ClassNamesInput',
+      description:
+        'Object whose keys are class names and values are boolean conditions, or an array/string of class names.',
+    },
+  ];
+
   public readonly classnamesFnRows: readonly ApiPropRow[] = [
     {
       name: '...values',

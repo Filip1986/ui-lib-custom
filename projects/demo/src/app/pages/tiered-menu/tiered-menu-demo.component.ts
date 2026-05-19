@@ -102,6 +102,53 @@ export class TieredMenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MenuItem[]',
+      default: '[]',
+      description: 'Array of menu items with nested sub-menus.',
+    },
+    {
+      name: 'popup',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders as a popup toggled by toggle().',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | HTMLElement | string",
+      default: 'null',
+      description: 'Portal target element (popup mode).',
+    },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index when autoZIndex is enabled.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the menu.',
+    },
+  ];
+
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;

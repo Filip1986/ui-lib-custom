@@ -74,6 +74,62 @@ export class StyleClassDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'selector',
+      type: 'string',
+      description: 'CSS selector for the target element (required).',
+    },
+    {
+      name: 'enterFromClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class applied before enter animation.',
+    },
+    {
+      name: 'enterActiveClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class applied during enter animation.',
+    },
+    {
+      name: 'enterToClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class applied after enter animation.',
+    },
+    {
+      name: 'leaveFromClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class applied before leave animation.',
+    },
+    {
+      name: 'leaveActiveClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class applied during leave animation.',
+    },
+    {
+      name: 'leaveToClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class applied after leave animation.',
+    },
+    {
+      name: 'hideOnOutsideClick',
+      type: 'boolean',
+      default: 'false',
+      description: 'Hides the target when clicking outside.',
+    },
+    {
+      name: 'toggleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class to toggle on each trigger click.',
+    },
+  ];
+
   public readonly apiInputRows: ApiPropRow[] = [
     {
       name: 'uiLibStyleClass',

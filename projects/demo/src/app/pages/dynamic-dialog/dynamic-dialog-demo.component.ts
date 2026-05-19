@@ -189,11 +189,54 @@ export class DynamicDialogDemoComponent {
     { id: 'dynamic-dialog-config', label: 'DynamicDialogConfig' },
     { id: 'dynamic-dialog-ref', label: 'DynamicDialogRef' },
     { id: 'injection-tokens', label: 'Injection Tokens' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: '(service)',
+      type: 'DialogService',
+      description:
+        'Inject DialogService and call open() to programmatically render any component inside a dialog.',
+    },
+    {
+      name: 'header',
+      type: 'string',
+      description: '(DynamicDialogConfig) Title shown in the dialog header.',
+    },
+    {
+      name: 'data',
+      type: 'unknown',
+      description:
+        '(DynamicDialogConfig) Arbitrary data passed to the embedded component via DynamicDialogRef.',
+    },
+    {
+      name: 'modal',
+      type: 'boolean',
+      default: 'true',
+      description: '(DynamicDialogConfig) Shows a backdrop overlay.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'true',
+      description: '(DynamicDialogConfig) Shows the close button.',
+    },
+    {
+      name: 'width',
+      type: 'string',
+      description: '(DynamicDialogConfig) CSS width of the dialog.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string',
+      description: '(DynamicDialogConfig) Additional CSS class applied to the dialog.',
+    },
+  ];
 
   protected lastResult: string = '';
 

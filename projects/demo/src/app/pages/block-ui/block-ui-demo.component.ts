@@ -176,6 +176,45 @@ export class BlockUiDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'blocked',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, overlays the content with a blocking mask and spinner.',
+    },
+    {
+      name: 'fullPage',
+      type: 'boolean',
+      default: 'false',
+      description: 'Blocks the entire page instead of the host element.',
+    },
+    {
+      name: 'zIndex',
+      type: 'number',
+      default: '998',
+      description: 'CSS z-index of the blocking overlay.',
+    },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index when autoZIndex is enabled.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Loading'",
+      description: 'Accessible label for the loading spinner.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab / Shift+Tab',

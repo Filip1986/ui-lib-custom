@@ -207,6 +207,54 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';`,
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'header', type: 'string', default: "''", description: 'Sheet header text.' },
+    { name: 'closable', type: 'boolean', default: 'true', description: 'Shows the close button.' },
+    {
+      name: 'closeOnBackdrop',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the sheet when the backdrop is tapped.',
+    },
+    {
+      name: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the sheet on Escape key.',
+    },
+    {
+      name: 'snapPoints',
+      type: 'number[]',
+      default: '[0.4, 0.9]',
+      description: 'Fraction of viewport height at which the sheet can snap.',
+    },
+    {
+      name: 'defaultSnapPoint',
+      type: 'number',
+      default: '0.4',
+      description: 'Initial snap point fraction.',
+    },
+    {
+      name: 'hasHandle',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows the drag handle indicator.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Escape',

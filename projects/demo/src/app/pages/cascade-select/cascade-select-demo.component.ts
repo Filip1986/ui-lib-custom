@@ -33,6 +33,8 @@ import {
 } from './cascade-select-demo.data';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type CascadeSelectDemoSnippetKey =
@@ -77,6 +79,7 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     CascadeSelectDropdownIconDirective,
     CascadeSelectOptionGroupIconDirective,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',
@@ -120,11 +123,87 @@ export class CascadeSelectDemoComponent {
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'List of options to display.',
+    },
+    {
+      name: 'optionLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name for the display label.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Property name to use as the value.',
+    },
+    {
+      name: 'optionGroupLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name for group labels.',
+    },
+    {
+      name: 'optionGroupChildren',
+      type: 'string[]',
+      default: '[]',
+      description: 'Property names for nested children arrays.',
+    },
+    { name: 'placeholder', type: 'string', default: "'Select'", description: 'Placeholder text.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | undefined",
+      default: 'undefined',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the component as invalid.',
+    },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading indicator.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Expands to fill container width.',
+    },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies filled background style.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Id for the inner input element.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
 
   public readonly snippets: Record<CascadeSelectDemoSnippetKey, string> = {
     basic: `<ui-lib-cascade-select

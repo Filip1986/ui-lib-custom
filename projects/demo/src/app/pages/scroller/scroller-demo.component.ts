@@ -12,6 +12,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface DemoItem {
   id: number;
@@ -78,6 +80,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
@@ -116,11 +119,110 @@ export class ScrollerDemoComponent {
     { id: 'disabled-mode', label: 'Disabled Mode' },
     { id: 'large-items', label: 'Large Items (5 000 items)' },
     { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'items',
+      type: 'unknown[] | null | undefined',
+      description: 'Array of items to render virtually.',
+    },
+    {
+      name: 'itemSize',
+      type: 'number | [number, number]',
+      default: '0',
+      description: 'Item height (or [width, height] for 2D) in pixels.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'CSS height of the scroll viewport.',
+    },
+    {
+      name: 'lazy',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables lazy loading; fires lazyLoad event as user scrolls.',
+    },
+    {
+      name: 'loading',
+      type: 'boolean | undefined',
+      default: 'undefined',
+      description: 'Controlled loading state for lazy mode.',
+    },
+    {
+      name: 'loaderDisabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables built-in loader rows.',
+    },
+    {
+      name: 'showLoader',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows loader items while more data loads.',
+    },
+    {
+      name: 'step',
+      type: 'number',
+      default: '0',
+      description: 'Number of additional items to render outside the viewport.',
+    },
+    {
+      name: 'delay',
+      type: 'number',
+      default: '0',
+      description: 'Delay in ms before rendering after scroll.',
+    },
+    {
+      name: 'appendOnly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Only appends new items, never removes old ones.',
+    },
+    {
+      name: 'inline',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the scroller inline (no fixed height).',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables virtual scrolling and renders all items.',
+    },
+    {
+      name: 'columns',
+      type: 'unknown[] | null | undefined',
+      default: 'null',
+      description: 'Column definitions for 2D virtual scrolling.',
+    },
+    {
+      name: 'tabIndex',
+      type: 'number',
+      default: '0',
+      description: 'Tab order of the scroll container.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "''",
+      description: 'Accessible label for the scroll region.',
+    },
+    {
+      name: 'contentRole',
+      type: "'list' | 'grid'",
+      default: "'list'",
+      description: 'ARIA role applied to the scroll content.',
+    },
+  ];
 
   // ---------------------------------------------------------------------------
   // Scenario 1: Vertical — 10 000 items

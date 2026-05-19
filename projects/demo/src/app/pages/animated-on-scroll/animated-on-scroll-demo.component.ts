@@ -73,6 +73,39 @@ export class AnimatedOnScrollDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'enterClass',
+      type: 'string',
+      default: "'animate-in'",
+      description: 'CSS class added when the element scrolls into view.',
+    },
+    {
+      name: 'leaveClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class added when the element scrolls out of view.',
+    },
+    {
+      name: 'threshold',
+      type: 'number',
+      default: '0.1',
+      description: 'IntersectionObserver threshold (0–1) that triggers the animation.',
+    },
+    {
+      name: 'rootMargin',
+      type: 'string',
+      default: "'0px'",
+      description: 'IntersectionObserver rootMargin CSS string.',
+    },
+    {
+      name: 'once',
+      type: 'boolean',
+      default: 'true',
+      description: 'Fires the animation only the first time the element enters the viewport.',
+    },
+  ];
+
   public readonly apiInputRows: readonly ApiPropRow[] = [
     {
       name: 'enterClass',

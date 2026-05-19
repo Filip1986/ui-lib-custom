@@ -15,6 +15,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -36,6 +38,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
@@ -74,11 +77,64 @@ export class TreeTableDemoComponent {
     { id: 'organisation-data', label: 'Organisation Data' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'TreeTableNode[]',
+      default: '[]',
+      description: 'Root rows of the tree table.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Table size.' },
+    {
+      name: 'globalFilter',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables a global filter input.',
+    },
+    {
+      name: 'globalFilterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Global filter placeholder.',
+    },
+    {
+      name: 'scrollable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables vertical scrolling.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS height of the scroll viewport.',
+    },
+    {
+      name: 'caption',
+      type: 'string',
+      default: "''",
+      description: 'Table caption for accessibility.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "''",
+      description: 'Accessible label for the tree table.',
+    },
+  ];
 
   // ─── Active variant + size ────────────────────────────────────────────────
 

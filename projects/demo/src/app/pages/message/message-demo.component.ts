@@ -69,6 +69,53 @@ export class MessageDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warn' | 'error' | 'secondary' | 'contrast'",
+      default: "'info'",
+      description: 'Severity level that controls the icon and colour.',
+    },
+    {
+      name: 'text',
+      type: 'string',
+      default: "''",
+      description: 'Message text. Use content projection for rich markup.',
+    },
+    {
+      name: 'detail',
+      type: 'string | null',
+      default: 'null',
+      description: 'Secondary detail text rendered below the main message.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom severity icon override.',
+    },
+    { name: 'closable', type: 'boolean', default: 'false', description: 'Shows a close button.' },
+    {
+      name: 'life',
+      type: 'number',
+      default: '0',
+      description: 'Auto-dismiss delay in milliseconds. 0 disables auto-dismiss.',
+    },
+    {
+      name: 'sticky',
+      type: 'boolean',
+      default: 'false',
+      description: 'Keeps the message visible even if life is set.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Message size.' },
+  ];
+
   public readonly severities: MessageSeverity[] = [
     'success',
     'info',

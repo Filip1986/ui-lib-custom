@@ -144,6 +144,32 @@ export class RippleDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: '[uilibRipple]',
+      type: 'directive',
+      description: 'Apply to any element to add a Material-style ink ripple on click.',
+    },
+    {
+      name: 'rippleColor',
+      type: 'string',
+      default: "'currentColor'",
+      description: 'CSS colour of the ripple (accepts any valid CSS colour value).',
+    },
+    {
+      name: 'rippleOpacity',
+      type: 'number',
+      default: '0.12',
+      description: 'Opacity multiplier applied to the ripple colour.',
+    },
+    {
+      name: 'rippleDuration',
+      type: 'number',
+      default: '400',
+      description: 'Ripple animation duration in milliseconds.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Enter',

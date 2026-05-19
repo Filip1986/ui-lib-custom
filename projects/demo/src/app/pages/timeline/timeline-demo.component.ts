@@ -18,6 +18,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface ProjectEvent {
   status: string;
@@ -45,6 +47,7 @@ interface OrderStep {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './timeline-demo.component.html',
   styleUrl: './timeline-demo.component.scss',
@@ -82,11 +85,47 @@ export class TimelineDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'right-alignment', label: 'Right Alignment' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'T[]', description: 'Array of timeline items (required).' },
+    {
+      name: 'layout',
+      type: "'vertical' | 'horizontal'",
+      default: "'vertical'",
+      description: 'Timeline axis direction.',
+    },
+    {
+      name: 'align',
+      type: "'left' | 'right' | 'alternate'",
+      default: "'left'",
+      description: 'Content alignment relative to the spine.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Timeline size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Timeline'",
+      description: 'Accessible label for the timeline list.',
+    },
+  ];
 
   /** Events used in basic vertical demo. */
   public readonly basicEvents: ProjectEvent[] = [

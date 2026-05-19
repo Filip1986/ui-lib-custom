@@ -17,6 +17,8 @@ import { InputOtpComponent } from 'ui-lib-custom/input-otp';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type InputOtpDemoSnippetKey =
@@ -48,6 +50,7 @@ type InputOtpDemoSnippetKey =
     InputOtpComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
   styleUrl: './input-otp-demo.component.scss',
@@ -70,11 +73,61 @@ export class InputOtpDemoComponent {
     { id: 'invalid', label: 'Invalid' },
     { id: 'readonly', label: 'Read Only' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'length', type: 'number', default: '6', description: 'Number of OTP digit slots.' },
+    {
+      name: 'mask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Masks the entered digits as password dots.',
+    },
+    {
+      name: 'integerOnly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Restricts input to digits only.',
+    },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies filled background style.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all inputs.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the inputs read-only.',
+    },
+    { name: 'invalid', type: 'boolean', default: 'false', description: 'Marks inputs as invalid.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
+    {
+      name: 'tabindex',
+      type: 'number | null',
+      default: 'null',
+      description: 'Tab order of the first digit.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: "'One-time passcode'",
+      description: 'Accessible label for the OTP group.',
+    },
+    {
+      name: 'id',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id applied to the container element.',
+    },
+  ];
 
   public readonly snippets: Record<InputOtpDemoSnippetKey, string> = {
     basic:

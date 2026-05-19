@@ -161,6 +161,35 @@ export class BreadcrumbDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'MenuItem[]', default: '[]', description: 'Array of breadcrumb items.' },
+    {
+      name: 'home',
+      type: 'MenuItem | null',
+      default: 'null',
+      description: 'Home item placed at the start of the breadcrumb.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Breadcrumb size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Breadcrumb'",
+      description: 'Accessible label for the nav landmark.',
+    },
+  ];
+
   public readonly apiInputRows: readonly ApiPropRow[] = [
     {
       name: 'items',

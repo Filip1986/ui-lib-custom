@@ -86,6 +86,46 @@ export class MenubarDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MenuItem[]',
+      default: '[]',
+      description: 'Array of top-level menu bar items.',
+    },
+    {
+      name: 'breakpoint',
+      type: 'string',
+      default: "'960px'",
+      description: 'Screen width below which the menu bar collapses to a mobile hamburger view.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS max-height for overlay sub-menus.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Menubar'",
+      description: 'Accessible label for the navigation region.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+  ];
+
   // ── Basic model ───────────────────────────────────────────────────────────
 
   public readonly basicModel: MenubarItem[] = [

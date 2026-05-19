@@ -134,6 +134,78 @@ export class PasswordDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'toggleMask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows eye toggle to reveal/mask the password.',
+    },
+    {
+      name: 'feedback',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a strength meter overlay on focus.',
+    },
+    {
+      name: 'promptLabel',
+      type: 'string',
+      default: "'Enter a password'",
+      description: 'Strength meter label before any input.',
+    },
+    {
+      name: 'weakLabel',
+      type: 'string',
+      default: "'Weak'",
+      description: 'Strength label for weak passwords.',
+    },
+    {
+      name: 'mediumLabel',
+      type: 'string',
+      default: "'Medium'",
+      description: 'Strength label for medium passwords.',
+    },
+    {
+      name: 'strongLabel',
+      type: 'string',
+      default: "'Strong'",
+      description: 'Strength label for strong passwords.',
+    },
+    {
+      name: 'mediumRegex',
+      type: 'RegExp',
+      description: 'Regex defining the medium strength threshold.',
+    },
+    {
+      name: 'strongRegex',
+      type: 'RegExp',
+      description: 'Regex defining the strong strength threshold.',
+    },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the input as invalid.',
+    },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Expands to fill container width.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,

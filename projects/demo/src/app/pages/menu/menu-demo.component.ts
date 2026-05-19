@@ -101,6 +101,48 @@ export class MenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'MenuItem[]', default: '[]', description: 'Array of menu items.' },
+    {
+      name: 'popup',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders as a popup panel toggled by toggle().',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | HTMLElement | string",
+      default: 'null',
+      description: 'Target element for portal rendering (popup mode).',
+    },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index when autoZIndex is enabled.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the menu.',
+    },
+  ];
+
   public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
 
   public readonly snippets: {

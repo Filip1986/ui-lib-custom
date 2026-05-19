@@ -28,6 +28,8 @@ import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.com
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -63,6 +65,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     CardBasicExampleComponent,
     ThemeScopeDirective,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -104,6 +107,93 @@ export class CardsComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to the global theme when null.',
+    },
+    {
+      name: 'elevation',
+      type: "'none' | 'low' | 'medium' | 'high'",
+      default: "'medium'",
+      description: 'Shadow depth applied to the card.',
+    },
+    {
+      name: 'bordered',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds a border around the card.',
+    },
+    {
+      name: 'hoverable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds a hover elevation effect.',
+    },
+    {
+      name: 'showHeader',
+      type: 'boolean | null',
+      default: 'null',
+      description: 'Explicitly show or hide the header slot. Defaults to auto-detect.',
+    },
+    {
+      name: 'showFooter',
+      type: 'boolean | null',
+      default: 'null',
+      description: 'Explicitly show or hide the footer slot. Defaults to auto-detect.',
+    },
+    {
+      name: 'shadow',
+      type: 'string | null',
+      default: 'null',
+      description: 'Inline CSS value for the --uilib-card-shadow custom property.',
+    },
+    {
+      name: 'headerBg',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom background color for the header area.',
+    },
+    {
+      name: 'footerBg',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom background color for the footer area.',
+    },
+    {
+      name: 'headerIcon',
+      type: 'SemanticIcon | string | null',
+      default: 'null',
+      description: 'Icon displayed in the header.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds a close button in the header.',
+    },
+    {
+      name: 'subtitle',
+      type: 'string | null',
+      default: 'null',
+      description: 'Subtitle text rendered below the card header.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the card element.',
+    },
+    {
+      name: 'theme',
+      type: 'ThemeScopeInput | null',
+      default: 'null',
+      description: 'Scoped theme override applied to this card only.',
+    },
+  ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 

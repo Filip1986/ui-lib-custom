@@ -73,11 +73,61 @@ export class DrawerDemoComponent {
     { id: 'full-screen', label: 'Full Screen' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'header', type: 'string', default: "''", description: 'Drawer header text.' },
+    {
+      name: 'position',
+      type: "'left' | 'right' | 'top' | 'bottom'",
+      default: "'left'",
+      description: 'Edge the drawer slides in from.',
+    },
+    { name: 'modal', type: 'boolean', default: 'true', description: 'Shows a backdrop overlay.' },
+    { name: 'closable', type: 'boolean', default: 'true', description: 'Shows the close button.' },
+    {
+      name: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the drawer on Escape key.',
+    },
+    {
+      name: 'dismissable',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the drawer when clicking the backdrop.',
+    },
+    {
+      name: 'blockScroll',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents page scrolling while open.',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | string",
+      default: "'body'",
+      description: 'Target element for portal rendering.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+  ];
 
   public readonly basicOpen: WritableSignal<boolean> = signal<boolean>(false);
   public readonly positionOpen: WritableSignal<boolean> = signal<boolean>(false);

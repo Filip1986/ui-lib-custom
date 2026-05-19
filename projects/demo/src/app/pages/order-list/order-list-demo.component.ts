@@ -161,6 +161,77 @@ export class OrderListDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Two-way bound list of items (use [(value)]).',
+    },
+    { name: 'header', type: 'string', default: "''", description: 'List header text.' },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Shows a filter input.' },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'filterField',
+      type: 'string',
+      default: "'label'",
+      description: 'Object property to filter on.',
+    },
+    {
+      name: 'dataKey',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property for unique item identity.',
+    },
+    {
+      name: 'selection',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Selected items array (two-way via [(selection)]).',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string',
+      default: "'250px'",
+      description: 'CSS height of the item list.',
+    },
+    {
+      name: 'dragdrop',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables drag-and-drop reordering.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Meta/Ctrl for multi-selection.',
+    },
+    {
+      name: 'controls',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows up/down/top/bottom control buttons.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Order list'",
+      description: 'Accessible label for the list.',
+    },
+  ];
+
   public readonly importCode: string =
     "import { OrderListComponent } from 'ui-lib-custom/order-list'";
 

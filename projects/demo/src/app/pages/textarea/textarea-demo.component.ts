@@ -18,6 +18,8 @@ import { UiLibTextarea } from 'ui-lib-custom/textarea';
 import type { TextareaChangeEvent } from 'ui-lib-custom/textarea';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type TextareaDemoSnippetKey =
@@ -50,6 +52,7 @@ type TextareaDemoSnippetKey =
     UiLibTextarea,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
@@ -81,6 +84,76 @@ export class TextareaDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Label text.' },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Textarea size.' },
+    { name: 'rows', type: 'number', default: '3', description: 'Initial number of visible rows.' },
+    {
+      name: 'maxRows',
+      type: 'number | null',
+      default: 'null',
+      description: 'Maximum rows for auto-resize mode.',
+    },
+    {
+      name: 'resize',
+      type: "'none' | 'vertical' | 'horizontal' | 'both'",
+      default: "'vertical'",
+      description: 'Manual resize handle direction.',
+    },
+    {
+      name: 'autoResize',
+      type: 'boolean',
+      default: 'false',
+      description: 'Grows with content up to maxRows.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the textarea.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the textarea read-only.',
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the textarea as required.',
+    },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the textarea as invalid.',
+    },
+    {
+      name: 'showCounter',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a character counter.',
+    },
+    {
+      name: 'maxLength',
+      type: 'number | null',
+      default: 'null',
+      description: 'Maximum character length.',
+    },
+    {
+      name: 'error',
+      type: 'string | null',
+      default: 'null',
+      description: 'Validation error message.',
+    },
+    { name: 'hint', type: 'string | null', default: 'null', description: 'Helper hint message.' },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
+
   public readonly importCode: string = "import { UiLibTextarea } from 'ui-lib-custom/textarea'";
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
@@ -93,6 +166,7 @@ export class TextareaDemoComponent {
     { id: 'readonly', label: 'Read-only' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly snippets: Record<TextareaDemoSnippetKey, string> = {

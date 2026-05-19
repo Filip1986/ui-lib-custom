@@ -169,6 +169,82 @@ export class PickListDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'source',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Source list items (two-way via [(source)]).',
+    },
+    {
+      name: 'target',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Target list items (two-way via [(target)]).',
+    },
+    {
+      name: 'sourceHeader',
+      type: 'string',
+      default: "'Source'",
+      description: 'Header text for the source list.',
+    },
+    {
+      name: 'targetHeader',
+      type: 'string',
+      default: "'Target'",
+      description: 'Header text for the target list.',
+    },
+    {
+      name: 'filter',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows filter inputs above both lists.',
+    },
+    { name: 'filterBy', type: 'string', default: "'label'", description: 'Property to filter on.' },
+    {
+      name: 'sourceFilterPlaceholder',
+      type: 'string',
+      default: "'Search'",
+      description: 'Source filter placeholder.',
+    },
+    {
+      name: 'targetFilterPlaceholder',
+      type: 'string',
+      default: "'Search'",
+      description: 'Target filter placeholder.',
+    },
+    {
+      name: 'dataKey',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property for unique item identity.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Meta/Ctrl for multi-selection.',
+    },
+    {
+      name: 'dragdrop',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables drag-and-drop between lists.',
+    },
+    {
+      name: 'breakpoint',
+      type: 'string',
+      default: "'960px'",
+      description: 'Breakpoint at which the layout switches to vertical stacking.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Pick list'",
+      description: 'Accessible label for the pick list.',
+    },
+  ];
+
   public readonly importCode: string =
     "import { PickListComponent } from 'ui-lib-custom/pick-list'";
 

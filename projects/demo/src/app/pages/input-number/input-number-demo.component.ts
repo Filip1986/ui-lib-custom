@@ -18,6 +18,8 @@ import { InputNumberComponent } from 'ui-lib-custom/input-number';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type InputNumberSnippetKey =
@@ -58,6 +60,7 @@ type InputNumberSnippetKey =
     InputNumberComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
@@ -107,11 +110,106 @@ export class InputNumberDemoComponent {
     { id: 'filled', label: 'Filled' },
     { id: 'fluid', label: 'Fluid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'mode',
+      type: "'decimal' | 'currency'",
+      default: "'decimal'",
+      description: 'Formatting mode.',
+    },
+    {
+      name: 'format',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables locale-aware number formatting.',
+    },
+    {
+      name: 'locale',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'BCP 47 locale tag for formatting.',
+    },
+    {
+      name: 'currency',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'ISO 4217 currency code (currency mode only).',
+    },
+    {
+      name: 'useGrouping',
+      type: 'boolean',
+      default: 'true',
+      description: 'Adds thousands separators.',
+    },
+    {
+      name: 'minFractionDigits',
+      type: 'number | null',
+      default: 'null',
+      description: 'Minimum decimal digits.',
+    },
+    {
+      name: 'maxFractionDigits',
+      type: 'number | null',
+      default: 'null',
+      description: 'Maximum decimal digits.',
+    },
+    {
+      name: 'prefix',
+      type: 'string',
+      default: "''",
+      description: 'Text prepended to the displayed value.',
+    },
+    {
+      name: 'suffix',
+      type: 'string',
+      default: "''",
+      description: 'Text appended to the displayed value.',
+    },
+    { name: 'min', type: 'number | null', default: 'null', description: 'Minimum allowed value.' },
+    { name: 'max', type: 'number | null', default: 'null', description: 'Maximum allowed value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Increment/decrement step.' },
+    {
+      name: 'showButtons',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows increment/decrement spinner buttons.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the input read-only.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size.' },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Expands to fill container width.',
+    },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies filled background style.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+  ];
 
   public readonly snippets: Record<InputNumberSnippetKey, string> = {
     numerals: `<uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />`,

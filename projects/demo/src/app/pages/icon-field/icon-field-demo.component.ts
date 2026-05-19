@@ -9,6 +9,8 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { Icon } from 'ui-lib-custom/icon';
 import { IconFieldComponent, InputIconComponent } from 'ui-lib-custom/icon-field';
@@ -39,6 +41,7 @@ type IconFieldDemoSnippetKey = 'basic' | 'template' | 'floatLabel' | 'sizes' | '
     FloatLabelComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './icon-field-demo.component.html',
   styleUrl: './icon-field-demo.component.scss',
@@ -75,11 +78,21 @@ export class IconFieldDemoComponent {
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'variants', label: 'Variants' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'iconPosition',
+      type: "'left' | 'right'",
+      default: "'left'",
+      description: 'Icon position relative to the input.',
+    },
+  ];
 
   public readonly snippets: Record<IconFieldDemoSnippetKey, string> = {
     basic: `<uilib-icon-field iconPosition="left">

@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -33,6 +35,7 @@ interface DemoProduct {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
@@ -75,6 +78,7 @@ export class CarouselDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'hidden-controls', label: 'Hidden Navigators & Indicators' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   /** Sample products used across all demo scenarios. */
@@ -112,6 +116,82 @@ export class CarouselDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Array of items to display in the carousel.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Carousel size.' },
+    {
+      name: 'numVisible',
+      type: 'number',
+      default: '1',
+      description: 'Number of visible items at once.',
+    },
+    {
+      name: 'numScroll',
+      type: 'number',
+      default: '1',
+      description: 'Number of items to scroll per click.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Scroll axis.',
+    },
+    {
+      name: 'circular',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables infinite looping.',
+    },
+    {
+      name: 'showNavigators',
+      type: 'boolean',
+      default: 'true',
+      description: 'Toggles prev/next navigation buttons.',
+    },
+    {
+      name: 'showIndicators',
+      type: 'boolean',
+      default: 'true',
+      description: 'Toggles page indicator dots.',
+    },
+    {
+      name: 'autoplayInterval',
+      type: 'number',
+      default: '0',
+      description: 'Autoplay interval in milliseconds. 0 disables autoplay.',
+    },
+    {
+      name: 'responsiveOptions',
+      type: 'CarouselResponsiveOption[]',
+      default: '[]',
+      description: 'Breakpoint-specific numVisible/numScroll overrides.',
+    },
+    {
+      name: 'verticalViewportHeight',
+      type: 'string',
+      default: "'300px'",
+      description: 'Viewport height when orientation is vertical.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Carousel'",
+      description: 'Accessible label for the carousel region.',
+    },
+  ];
 
   /** Update the displayed page index when the carousel emits a page change. */
   public onPageChange(event: { page: number }): void {

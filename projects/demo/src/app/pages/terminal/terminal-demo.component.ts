@@ -15,6 +15,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 const HELP_TEXT: string = [
   'Available commands:',
@@ -38,6 +40,7 @@ const HELP_TEXT: string = [
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './terminal-demo.component.html',
   styleUrl: './terminal-demo.component.scss',
@@ -73,11 +76,33 @@ export class TerminalDemoComponent {
   public readonly sections: DocSection[] = [
     { id: 'variants', label: 'Variants' },
     { id: 'interactive', label: 'Interactive' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'welcomeMessage',
+      type: 'string',
+      default: "''",
+      description: 'Message shown when the terminal initialises.',
+    },
+    {
+      name: 'prompt',
+      type: 'string',
+      default: "'$'",
+      description: 'Prompt string displayed before each input line.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+  ];
 
   public readonly activeVariant: WritableSignal<TerminalVariant> =
     signal<TerminalVariant>('material');

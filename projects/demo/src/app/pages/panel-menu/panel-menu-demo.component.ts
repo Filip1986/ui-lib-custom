@@ -98,6 +98,40 @@ export class PanelMenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MenuItem[]',
+      default: '[]',
+      description: 'Array of menu items with nested children.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allows expanding multiple panels at once.',
+    },
+    {
+      name: 'transitionOptions',
+      type: 'string',
+      default: "'400ms cubic-bezier(0.86, 0, 0.07, 1)'",
+      description: 'CSS transition timing for panel open/close.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Panel menu'",
+      description: 'Accessible label for the menu navigation.',
+    },
+  ];
+
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;

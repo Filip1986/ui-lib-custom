@@ -77,6 +77,7 @@ export class ImageDemoComponent {
     { id: 'custom-error', label: 'Custom Error' },
     { id: 'dimensions', label: 'Dimensions' },
     { id: 'two-way-binding', label: 'Two-Way Binding' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────
@@ -84,6 +85,43 @@ export class ImageDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'src', type: 'string', description: 'Image URL (required).' },
+    { name: 'alt', type: 'string', default: "''", description: 'Alt text.' },
+    {
+      name: 'preview',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables a click-to-preview modal.',
+    },
+    {
+      name: 'previewSrc',
+      type: 'string | null',
+      default: 'null',
+      description: 'Separate high-resolution preview image URL.',
+    },
+    {
+      name: 'loading',
+      type: "'lazy' | 'eager'",
+      default: "'lazy'",
+      description: 'Native loading attribute.',
+    },
+    {
+      name: 'fit',
+      type: "'cover' | 'contain' | 'fill' | 'none'",
+      default: "'cover'",
+      description: 'CSS object-fit mode.',
+    },
+    { name: 'width', type: 'string | null', default: 'null', description: 'CSS width.' },
+    { name: 'height', type: 'string | null', default: 'null', description: 'CSS height.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 
   public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
 

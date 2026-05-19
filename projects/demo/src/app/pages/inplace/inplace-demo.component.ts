@@ -73,6 +73,34 @@ export class InplaceDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'active',
+      type: 'boolean',
+      default: 'false',
+      description: 'Controls whether the edit content is shown (two-way via [(active)]).',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a close button to revert to display mode.',
+    },
+    {
+      name: 'preventClick',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables toggling on click.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+  ];
+
   public readonly variants: InplaceVariant[] = ['material', 'bootstrap', 'minimal'];
 
   // Basic demo

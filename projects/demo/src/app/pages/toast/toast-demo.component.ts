@@ -75,6 +75,46 @@ export class ToastDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'group',
+      type: 'string',
+      default: "'default'",
+      description: 'Message group linking this component to MessageService.add() calls.',
+    },
+    {
+      name: 'position',
+      type: "'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right' | 'center'",
+      default: "'top-right'",
+      description: 'Screen position where toasts appear.',
+    },
+    {
+      name: 'preventOpenDuplicates',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents showings toasts with the same id while one is already visible.',
+    },
+    {
+      name: 'preventDuplicates',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents duplicates including ones that have already been removed.',
+    },
+    {
+      name: 'breakpoints',
+      type: 'Record<string, Record<string, string>>',
+      default: '{}',
+      description: 'Responsive overrides keyed by min-width.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'baseZIndex', type: 'number', default: '0', description: 'Base CSS z-index.' },
+  ];
+
   /** Currently selected position for interactive demos. */
   public readonly selectedPosition: WritableSignal<ToastPosition> =
     signal<ToastPosition>('top-right');

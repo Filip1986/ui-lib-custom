@@ -154,6 +154,64 @@ export class AvatarDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text (usually initials) shown inside the avatar.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon name used as the avatar graphic.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL or data URL of the avatar image.',
+    },
+    {
+      name: 'imageAlt',
+      type: 'string',
+      default: "'avatar'",
+      description: 'Alt text for the image.',
+    },
+    {
+      name: 'shape',
+      type: "'circle' | 'square'",
+      default: "'circle'",
+      description: 'Avatar shape.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      default: "'md'",
+      description: 'Avatar size preset.',
+    },
+    {
+      name: 'status',
+      type: "'online' | 'offline' | 'away' | 'busy' | null",
+      default: 'null',
+      description: 'Presence status indicator dot.',
+    },
+    {
+      name: 'badge',
+      type: 'string | null',
+      default: 'null',
+      description: 'Badge text shown on the avatar corner.',
+    },
+    {
+      name: 'badgeSeverity',
+      type: "'info' | 'success' | 'warning' | 'danger'",
+      default: "'info'",
+      description: 'Badge colour severity.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
+
   public setSize(size: AvatarSize): void {
     this.playgroundSize.set(size);
   }

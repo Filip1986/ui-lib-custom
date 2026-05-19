@@ -79,6 +79,47 @@ export class FieldsetDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'legend', type: 'string', default: "''", description: 'Legend text for the fieldset.' },
+    {
+      name: 'toggleable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allows collapsing the fieldset body.',
+    },
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      default: 'false',
+      description: 'Controls the collapsed state (two-way via [(collapsed)]).',
+    },
+    {
+      name: 'expandIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom expand icon.',
+    },
+    {
+      name: 'collapseIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom collapse icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Fieldset size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
+
   public readonly isBasicCollapsed: WritableSignal<boolean> = signal<boolean>(false);
   public readonly isAdvancedCollapsed: WritableSignal<boolean> = signal<boolean>(true);
   public readonly playgroundToggleable: WritableSignal<boolean> = signal<boolean>(true);

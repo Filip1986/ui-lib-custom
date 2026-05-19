@@ -33,6 +33,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -89,6 +91,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     TabsBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -121,6 +124,76 @@ export class TabsComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tab bar size.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Tab bar orientation.',
+    },
+    {
+      name: 'activation',
+      type: "'auto' | 'manual'",
+      default: "'auto'",
+      description: 'Whether tabs activate on focus or require Enter/Space.',
+    },
+    {
+      name: 'align',
+      type: "'start' | 'center' | 'end' | 'stretch'",
+      default: "'start'",
+      description: 'Tab label alignment.',
+    },
+    {
+      name: 'mode',
+      type: "'default' | 'scrollable' | 'paginated'",
+      default: "'default'",
+      description: 'Layout mode for overflowing tabs.',
+    },
+    {
+      name: 'selectedValue',
+      type: 'TabsValue | null',
+      default: 'null',
+      description: 'Controlled selected tab value.',
+    },
+    {
+      name: 'defaultValue',
+      type: 'TabsValue | null',
+      default: 'null',
+      description: 'Initial selected value (uncontrolled mode).',
+    },
+    {
+      name: 'lazy',
+      type: "boolean | 'first'",
+      default: 'false',
+      description: 'Lazy rendering of tab content.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allows tabs to be closed.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the tab list.',
+    },
+    {
+      name: 'dir',
+      type: "'ltr' | 'rtl' | 'auto'",
+      default: "'auto'",
+      description: 'Text directionality.',
+    },
+  ];
+
   public readonly importCode: string =
     "import { Tabs, Tab, TabLabel, TabContent } from 'ui-lib-custom/tabs'";
   public readonly sections: DocSection[] = [
@@ -130,6 +203,7 @@ export class TabsComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');

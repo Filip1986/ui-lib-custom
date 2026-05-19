@@ -35,6 +35,11 @@ type EditorDemoSnippetKey =
 /**
  * Demo page for Editor component usage, forms integration, and event behavior.
  */
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+/**
+ *
+ */
 @Component({
   selector: 'app-editor-demo',
   standalone: true,
@@ -51,6 +56,7 @@ type EditorDemoSnippetKey =
     CodeSnippet,
     EditorComponent,
     EditorToolbarDirective,
+    DocApiReferenceComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',
@@ -73,11 +79,48 @@ export class EditorDemoComponent {
     { id: 'filled', label: 'Filled' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'events', label: 'Events' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Editor size.' },
+    {
+      name: 'placeholder',
+      type: 'string',
+      default: "''",
+      description: 'Placeholder text shown when the editor is empty.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the editor read-only.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the editor.' },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a filled background style.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+  ];
 
   public readonly snippets: Record<EditorDemoSnippetKey, string> = {
     basic: `<ui-lib-editor [(ngModel)]="basicHtml" placeholder="Write something..."></ui-lib-editor>

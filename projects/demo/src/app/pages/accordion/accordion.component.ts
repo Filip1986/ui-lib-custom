@@ -107,11 +107,64 @@ export class AccordionComponent {
     { id: 'api-reference', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'string | string[] | null',
+      default: 'null',
+      description: 'Active tab value(s). Can be a single string or array for multiple mode.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allows expanding multiple panels simultaneously.',
+    },
+    {
+      name: 'lazy',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders panel content lazily (only when first opened).',
+    },
+    {
+      name: 'expandIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the expand chevron.',
+    },
+    {
+      name: 'collapseIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon for the collapse chevron.',
+    },
+    {
+      name: 'toggleIconPos',
+      type: "'start' | 'end'",
+      default: "'end'",
+      description: 'Position of the toggle icon relative to the header label.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Accordion size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 
   public readonly activeTab: WritableSignal<AccordionTab> = signal<AccordionTab>('playground');
 

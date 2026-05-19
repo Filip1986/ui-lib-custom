@@ -33,6 +33,8 @@ import {
 import type { DemoCountry, DemoGroup } from './autocomplete-demo.data';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type AutoCompleteDemoSnippetKey =
@@ -77,6 +79,7 @@ type AutoCompleteDemoSnippetKey =
     AutoCompleteFooterDirective,
     AutoCompleteEmptyDirective,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
   styleUrl: './autocomplete-demo.component.scss',
@@ -124,11 +127,167 @@ export class AutoCompleteDemoComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'suggestions',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'List of suggestions to display in the overlay panel.',
+    },
+    {
+      name: 'optionLabel',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Property name to use as the display label for object options.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Property name to use as the value for object options.',
+    },
+    {
+      name: 'optionDisabled',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Property name to mark an option as disabled.',
+    },
+    {
+      name: 'optionGroupLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name for the label of an option group.',
+    },
+    {
+      name: 'optionGroupChildren',
+      type: 'string',
+      default: "'items'",
+      description: 'Property name for the children of an option group.',
+    },
+    {
+      name: 'dropdown',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds a dropdown button to show all suggestions.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables multi-value selection as chips.',
+    },
+    {
+      name: 'forceSelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires the user to select a suggestion from the list.',
+    },
+    {
+      name: 'completeOnFocus',
+      type: 'boolean',
+      default: 'false',
+      description: 'Triggers suggestions when the field receives focus.',
+    },
+    {
+      name: 'autoClear',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'Clears the input when the value is not a valid selection (with forceSelection).',
+    },
+    {
+      name: 'unique',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents duplicate values in multiple mode.',
+    },
+    {
+      name: 'minLength',
+      type: 'number',
+      default: '1',
+      description: 'Minimum characters to trigger the suggestion query.',
+    },
+    {
+      name: 'delay',
+      type: 'number',
+      default: '300',
+      description: 'Debounce delay in milliseconds before calling completeMethod.',
+    },
+    {
+      name: 'maxlength',
+      type: 'number | null',
+      default: 'null',
+      description: 'Maximum character length for the input.',
+    },
+    {
+      name: 'virtualScroll',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables virtual scrolling for large suggestion lists.',
+    },
+    {
+      name: 'virtualScrollItemSize',
+      type: 'number',
+      default: '0',
+      description: 'Item height in pixels for virtual scrolling calculations.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size of the input field.',
+    },
+    {
+      name: 'placeholder',
+      type: 'string',
+      default: "''",
+      description: 'Placeholder text for the input.',
+    },
+    {
+      name: 'showClear',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a clear button to reset the value.',
+    },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the component expand to fill its container width.',
+    },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a filled background style.',
+    },
+    {
+      name: 'group',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables grouped option mode.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string',
+      default: "'200px'",
+      description: 'Max height of the suggestion panel.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Id applied to the inner input element for label association.',
+    },
+  ];
 
   public readonly snippets: Record<AutoCompleteDemoSnippetKey, string> = {
     basic: `<ui-lib-autocomplete

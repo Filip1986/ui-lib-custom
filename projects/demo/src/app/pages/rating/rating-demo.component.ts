@@ -243,6 +243,50 @@ export class RatingDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'stars', type: 'number', default: '5', description: 'Total number of stars.' },
+    {
+      name: 'cancel',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a cancel button to clear the rating.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables interaction.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the rating read-only.',
+    },
+    {
+      name: 'onIcon',
+      type: 'string',
+      default: "'star-fill'",
+      description: 'Icon name for a selected star.',
+    },
+    {
+      name: 'offIcon',
+      type: 'string',
+      default: "'star'",
+      description: 'Icon name for an unselected star.',
+    },
+    {
+      name: 'cancelIcon',
+      type: 'string',
+      default: "'x'",
+      description: 'Icon name for the cancel button.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Star size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,

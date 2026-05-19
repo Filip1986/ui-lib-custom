@@ -16,6 +16,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -37,6 +39,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './toggle-switch-demo.component.html',
   styleUrl: './toggle-switch-demo.component.scss',
@@ -75,11 +78,55 @@ export class ToggleSwitchDemoComponent {
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'playground', label: 'Playground' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text label rendered beside the switch.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Switch size.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the switch.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the switch read-only.',
+    },
+    {
+      name: 'autofocus',
+      type: 'boolean',
+      default: 'false',
+      description: 'Auto-focuses on render.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    {
+      name: 'inputId',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id for the inner input element.',
+    },
+    {
+      name: 'name',
+      type: 'string | null',
+      default: 'null',
+      description: 'Name attribute for form submission.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 
   public readonly variants: ToggleSwitchVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: ToggleSwitchSize[] = ['sm', 'md', 'lg'];

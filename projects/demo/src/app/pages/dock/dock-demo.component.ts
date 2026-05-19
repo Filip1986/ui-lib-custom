@@ -90,6 +90,40 @@ export class DockDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'DockItem[]', default: '[]', description: 'Array of dock items.' },
+    {
+      name: 'position',
+      type: "'bottom' | 'top' | 'left' | 'right'",
+      default: "'bottom'",
+      description: 'Position of the dock on screen.',
+    },
+    {
+      name: 'magnification',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables zoom magnification on hover.',
+    },
+    {
+      name: 'magnificationScale',
+      type: 'number',
+      default: '1.5',
+      description: 'Scale multiplier applied to hovered items.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Dock'",
+      description: 'Accessible label for the dock navigation.',
+    },
+  ];
+
   // ── Controls ──────────────────────────────────────────────────────────────
 
   public readonly variant: WritableSignal<DockVariant> = signal<DockVariant>('material');

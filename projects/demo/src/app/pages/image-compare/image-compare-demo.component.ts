@@ -91,6 +91,41 @@ export class ImageCompareDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'before', type: 'string', description: 'URL of the before image (required).' },
+    { name: 'after', type: 'string', description: 'URL of the after image (required).' },
+    {
+      name: 'beforeAlt',
+      type: 'string',
+      default: "'Before'",
+      description: 'Alt text for the before image.',
+    },
+    {
+      name: 'afterAlt',
+      type: 'string',
+      default: "'After'",
+      description: 'Alt text for the after image.',
+    },
+    {
+      name: 'position',
+      type: 'number',
+      default: '50',
+      description: 'Initial divider position as a percentage (0–100).',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Divider axis.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Image comparison'",
+      description: 'Accessible label for the comparison region.',
+    },
+  ];
+
   public readonly apiInputRows: ApiPropRow[] = [
     {
       name: 'leftImage',

@@ -5,6 +5,8 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the SyntaxHighlighter utility.
@@ -12,7 +14,7 @@ import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
 @Component({
   selector: 'app-syntax-highlighter-demo',
   standalone: true,
-  imports: [CodeSnippet, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, DocPageLayoutComponent, DocTocComponent, DocApiReferenceComponent],
   templateUrl: './syntax-highlighter-demo.component.html',
   styleUrl: './syntax-highlighter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -223,4 +225,24 @@ export class SyntaxHighlighterDemoComponent {
     if (language === 'html') return this.htmlCode;
     return this.scssCode;
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'highlight(code, language)',
+      type: 'string → string',
+      description:
+        'Returns an HTML string with token spans. The output is HTML-escaped and safe to set as innerHTML.',
+    },
+    {
+      name: 'tokenize(code, language)',
+      type: 'string → SyntaxToken[]',
+      description: 'Returns an array of typed token objects ({type, value}) for custom rendering.',
+    },
+    {
+      name: 'escapeForCode(code)',
+      type: 'string → string',
+      description:
+        'HTML-escapes a raw string without tokenising — useful for languages without a built-in tokeniser (JSON, Bash, Text).',
+    },
+  ];
 }

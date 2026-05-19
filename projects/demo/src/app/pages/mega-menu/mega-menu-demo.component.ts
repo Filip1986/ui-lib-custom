@@ -92,6 +92,46 @@ export class MegaMenuDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MegaMenuItem[]',
+      default: '[]',
+      description: 'Array of mega-menu items with nested category columns.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Menu bar orientation.',
+    },
+    {
+      name: 'breakpoint',
+      type: 'string',
+      default: "'960px'",
+      description: 'Screen width below which the menu switches to mobile layout.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS max-height for the overlay panel.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Mega menu'",
+      description: 'Accessible label for the menu bar navigation.',
+    },
+  ];
+
   // ── Basic model ───────────────────────────────────────────
 
   public readonly basicModel: MegaMenuItem[] = [

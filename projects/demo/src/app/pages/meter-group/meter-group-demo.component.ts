@@ -243,6 +243,50 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';`,
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'MeterItem[]',
+      description: 'Array of meter items with value, label, and optional color (required).',
+    },
+    {
+      name: 'min',
+      type: 'number',
+      default: '0',
+      description: 'Minimum value for relative bar scaling.',
+    },
+    {
+      name: 'max',
+      type: 'number',
+      default: '100',
+      description: 'Maximum value for relative bar scaling.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Meter bar axis.',
+    },
+    {
+      name: 'labelPosition',
+      type: "'start' | 'end'",
+      default: "'end'",
+      description: 'Position of item labels relative to the bar.',
+    },
+    {
+      name: 'labelOrientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Orientation of the label list.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the meter group.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab / Shift+Tab',

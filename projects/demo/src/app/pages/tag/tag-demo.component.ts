@@ -391,4 +391,34 @@ export class TagDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'string', default: "''", description: 'Tag label text.' },
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warning' | 'danger' | 'secondary' | 'contrast' | null",
+      default: 'null',
+      description: 'Severity level controlling the colour preset.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a fully rounded pill shape.',
+    },
+    { name: 'icon', type: 'string | null', default: 'null', description: 'Leading icon name.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tag size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 }

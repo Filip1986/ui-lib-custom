@@ -10,6 +10,8 @@ import { KnobComponent } from 'ui-lib-custom/knob';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type KnobDemoSnippetKey =
@@ -40,6 +42,7 @@ type KnobDemoSnippetKey =
     DocTocComponent,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',
@@ -53,6 +56,62 @@ export class KnobDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Increment/decrement step.' },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Knob diameter preset.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'strokeWidth',
+      type: 'number',
+      default: '14',
+      description: 'SVG stroke width of the progress arc.',
+    },
+    {
+      name: 'showValue',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows the numeric value inside the knob.',
+    },
+    {
+      name: 'valueTemplate',
+      type: 'string | null',
+      default: 'null',
+      description: 'String template with {value} placeholder for custom display.',
+    },
+    {
+      name: 'valueColor',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS color for the progress arc.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables interaction.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables value changes while keeping focus.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Accessible label.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
+  ];
+
   public readonly importCode: string = "import { KnobComponent } from 'ui-lib-custom/knob'";
 
   public readonly sections: DocSection[] = [
@@ -65,6 +124,7 @@ export class KnobDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'readonly', label: 'Read-only' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public basicValue: number = 40;

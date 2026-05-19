@@ -69,6 +69,37 @@ export class ToolbarDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Toolbar'",
+      description: 'Accessible label for the toolbar region.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Toolbar size.' },
+    {
+      name: '(start slot)',
+      type: 'ng-content[start]',
+      description: 'Project content into the start (left) of the toolbar.',
+    },
+    {
+      name: '(center slot)',
+      type: 'ng-content[center]',
+      description: 'Project content into the center of the toolbar.',
+    },
+    {
+      name: '(end slot)',
+      type: 'ng-content[end]',
+      description: 'Project content into the end (right) of the toolbar.',
+    },
+  ];
+
   public readonly variants: ToolbarVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: ToolbarSize[] = ['sm', 'md', 'lg'];
 

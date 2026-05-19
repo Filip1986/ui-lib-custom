@@ -12,6 +12,8 @@ import { DialogComponent } from 'ui-lib-custom/dialog';
 import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -35,6 +37,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
@@ -58,11 +61,95 @@ export class DialogDemoComponent {
     { id: 'headless', label: 'Headless' },
     { id: 'variant-switcher', label: 'Variant Switcher' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'header', type: 'string', default: "''", description: 'Dialog header text.' },
+    {
+      name: 'modal',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether to render a backdrop overlay.',
+    },
+    { name: 'closable', type: 'boolean', default: 'true', description: 'Shows the close button.' },
+    {
+      name: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the dialog on Escape key.',
+    },
+    {
+      name: 'dismissableMask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Closes the dialog when clicking the backdrop.',
+    },
+    {
+      name: 'draggable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the dialog draggable.',
+    },
+    {
+      name: 'maximizable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Adds a maximize toggle button.',
+    },
+    {
+      name: 'blockScroll',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents page scrolling while the dialog is open.',
+    },
+    {
+      name: 'position',
+      type: "'center' | 'top' | 'bottom' | 'left' | 'right' | 'topleft' | 'topright' | 'bottomleft' | 'bottomright'",
+      default: "'center'",
+      description: 'Screen position of the dialog.',
+    },
+    {
+      name: 'breakpoints',
+      type: 'Record<string, string>',
+      default: '{}',
+      description: 'Responsive width breakpoints.',
+    },
+    {
+      name: 'variant',
+      type: 'DialogVariant | undefined',
+      default: 'undefined',
+      description: 'Design variant.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class applied to the dialog.',
+    },
+    {
+      name: 'headless',
+      type: 'boolean',
+      default: 'false',
+      description: 'Removes the default header for fully custom content.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Id of the element labelling the dialog.',
+    },
+    {
+      name: 'ariaDescribedBy',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Id of the element describing the dialog.',
+    },
+  ];
 
   public basicVisible: boolean = false;
   public customVisible: boolean = false;

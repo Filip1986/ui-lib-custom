@@ -10,6 +10,8 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Slider } from 'ui-lib-custom/slider';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -44,6 +46,7 @@ type SliderDemoSnippetKey =
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
@@ -56,6 +59,57 @@ export class SliderDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Increment step.' },
+    {
+      name: 'range',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables two-handle range selection.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Slider axis.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the slider.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the slider read-only.',
+    },
+    {
+      name: 'animate',
+      type: 'boolean',
+      default: 'false',
+      description: 'Animates value changes on click.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Slider size.' },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+    {
+      name: 'valueTextFn',
+      type: '(value: number) => string',
+      description: 'Function returning the aria-valuetext for screen readers.',
+    },
+  ];
 
   public readonly importCode: string = "import { Slider } from 'ui-lib-custom/slider'";
   public readonly sections: DocSection[] = [
@@ -70,6 +124,7 @@ export class SliderDemoComponent {
     { id: 'readonly', label: 'Read-only' },
     { id: 'reactive', label: 'Reactive Forms' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public basicValue: number = 40;

@@ -30,6 +30,8 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
 import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
@@ -57,6 +59,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     ReactiveFormsModule,
     CheckboxBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -98,6 +101,112 @@ export class CheckboxesComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Optional text label. Use content projection for custom markup.',
+    },
+    {
+      name: 'description',
+      type: 'string | null',
+      default: 'null',
+      description: 'Supporting text rendered below the label.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to the global theme when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Adjusts checkbox dimensions and typography.',
+    },
+    {
+      name: 'appearance',
+      type: "'outlined' | 'filled'",
+      default: "'outlined'",
+      description: 'Toggles outlined and filled visual surfaces.',
+    },
+    {
+      name: 'binary',
+      type: 'boolean',
+      default: 'false',
+      description: 'Scalar true/false mode. When false, uses array group mode.',
+    },
+    {
+      name: 'value',
+      type: 'unknown | null',
+      default: 'null',
+      description: 'The value this checkbox represents in group mode.',
+    },
+    {
+      name: 'trueValue',
+      type: 'unknown',
+      default: 'true',
+      description: 'Model value emitted when checked (binary mode).',
+    },
+    {
+      name: 'falseValue',
+      type: 'unknown',
+      default: 'false',
+      description: 'Model value emitted when unchecked (binary mode).',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables click and keyboard interaction.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents value changes while keeping focus and semantics.',
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the native input as required for form validation.',
+    },
+    {
+      name: 'indeterminate',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders the mixed state (aria-checked="mixed").',
+    },
+    {
+      name: 'checkboxIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom icon name for the checked visual.',
+    },
+    {
+      name: 'autofocus',
+      type: 'boolean',
+      default: 'false',
+      description: 'Automatically focuses the input on render.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order of the component.' },
+    {
+      name: 'inputId',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id applied to the inner input for label association.',
+    },
+    {
+      name: 'name',
+      type: 'string | null',
+      default: 'null',
+      description: 'The name attribute for form submission.',
+    },
+  ];
 
   public readonly variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: CheckboxSize[] = ['sm', 'md', 'lg'];

@@ -86,6 +86,52 @@ export class PopoverDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'dismissable',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the popover when clicking outside.',
+    },
+    {
+      name: 'showCloseIcon',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a close icon button inside the popover.',
+    },
+    { name: 'baseZIndex', type: 'number', default: '0', description: 'Base CSS z-index.' },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | string | HTMLElement",
+      default: "'body'",
+      description: 'Portal target element.',
+    },
+    {
+      name: 'focusOnShow',
+      type: 'boolean',
+      default: 'true',
+      description: 'Moves focus to the popover content when shown.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the popover region.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label element.',
+    },
+  ];
+
   public onShown(): void {
     this.lastEvent.set('shown');
   }

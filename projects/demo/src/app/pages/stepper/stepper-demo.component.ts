@@ -68,11 +68,51 @@ export class StepperDemoComponent {
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'number | string | null',
+      default: 'null',
+      description: 'Active step value (two-way via [(value)]).',
+    },
+    {
+      name: 'activeStep',
+      type: 'number',
+      default: '0',
+      description: 'Zero-based active step index.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Stepper layout direction.',
+    },
+    {
+      name: 'linear',
+      type: 'boolean',
+      default: 'false',
+      description: 'Forces sequential navigation.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Steps'",
+      description: 'Accessible label for the step navigation.',
+    },
+  ];
 
   // Basic example
   public readonly basicStep: WritableSignal<number> = signal<number>(0);
