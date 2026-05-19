@@ -33,7 +33,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
   </section>
@@ -73,7 +73,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Toggleable" [code]="snippets.toggleable" 
+      filename="Toggleable" [code]="snippets.toggleable"
       [showLineNumbers]="true"
       />
   </section>
@@ -98,7 +98,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Collapsed by Default" [code]="snippets.collapsedDefault" 
+      filename="Collapsed by Default" [code]="snippets.collapsedDefault"
       [showLineNumbers]="true"
       />
   </section>
@@ -127,7 +127,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom Header" [code]="snippets.customHeader" 
+      filename="Custom Header" [code]="snippets.customHeader"
       [showLineNumbers]="true"
       />
   </section>
@@ -150,7 +150,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Header Icons" [code]="snippets.headerIcons" 
+      filename="Header Icons" [code]="snippets.headerIcons"
       [showLineNumbers]="true"
       />
   </section>
@@ -178,9 +178,47 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Footer" [code]="snippets.footer" 
+      filename="Footer" [code]="snippets.footer"
       [showLineNumbers]="true"
       />
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       NO HEADER
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="no-header" data-doc-anchor>
+    <h2 class="demo-section__title">No Header</h2>
+    <p class="demo-section__description">
+      When no <code>header</code> input, no <code>[panelHeader]</code> content, and no
+      <code>[panelIcons]</code> content is provided, the header area is automatically hidden.
+      The panel renders as a clean, borderless-top content card.
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
+      <!-- Panel with no header at all -->
+      <ui-lib-panel>
+        <p style="margin:0; font-size:0.875rem;">
+          This panel has no <code>header</code> input — the header area is completely hidden.
+          Only the body content and border are visible.
+        </p>
+      </ui-lib-panel>
+
+      <!-- Panel with footer but no header -->
+      <ui-lib-panel>
+        <p style="margin:0; font-size:0.875rem;">
+          A footer can still be used without a header.
+        </p>
+        <div panelFooter class="demo-footer-actions">
+          <ui-lib-button type="button" severity="secondary" size="sm">Cancel</ui-lib-button>
+          <ui-lib-button type="button" severity="primary" size="sm">Confirm</ui-lib-button>
+        </div>
+      </ui-lib-panel>
+    </div>
+    <ui-lib-code-snippet
+      language="html"
+      filename="No Header"
+      [code]="snippets.noHeader"
+      [showLineNumbers]="true"
+    />
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -207,7 +245,7 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
   </section>

@@ -110,6 +110,7 @@ export class PanelDemoComponent {
     { id: 'custom-header', label: 'Custom Header' },
     { id: 'header-icons', label: 'Header Icons' },
     { id: 'footer', label: 'Footer' },
+    { id: 'no-header', label: 'No Header' },
     { id: 'variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
     {
@@ -142,6 +143,7 @@ export class PanelDemoComponent {
     readonly customHeader: string;
     readonly headerIcons: string;
     readonly footer: string;
+    readonly noHeader: string;
     readonly variants: string;
   } = {
     import: `import { Panel } from 'ui-lib-custom/panel';`,
@@ -176,6 +178,19 @@ export class PanelDemoComponent {
   <div panelFooter>
     <button type="button">Decline</button>
     <button type="button">Accept</button>
+  </div>
+</ui-lib-panel>`,
+    noHeader: `<!-- No header input — header area is automatically hidden -->
+<ui-lib-panel>
+  <p>This panel has no header. The header area is not rendered.</p>
+</ui-lib-panel>
+
+<!-- With a footer, but still no header -->
+<ui-lib-panel>
+  <p>Body content.</p>
+  <div panelFooter>
+    <button type="button">Cancel</button>
+    <button type="button">Confirm</button>
   </div>
 </ui-lib-panel>`,
     variants: `<ui-lib-panel header="Material Panel"  variant="material"  [toggleable]="true" />
