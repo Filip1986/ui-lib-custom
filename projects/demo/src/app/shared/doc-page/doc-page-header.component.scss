@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.doc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--uilib-page-fg, #0f172a);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .doc-description {
+    font-size: 1.0625rem;
+    color: var(--uilib-muted, #6b7280);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .doc-lead {
+    font-size: 1.0625rem;
+    color: var(--uilib-muted, #6b7280);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  ui-lib-code-snippet {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .doc-header {
+    gap: 0.75rem;
+
+    h1 {
+      font-size: 1.625rem;
+    }
+  }
+}

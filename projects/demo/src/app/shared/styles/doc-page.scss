@@ -10,32 +10,8 @@
   }
 }
 
-.doc-header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--uilib-page-fg, #0f172a);
-    margin: 0 0 0.5rem;
-  }
-
-  .doc-description {
-    font-size: 1rem;
-    color: var(--uilib-muted, #6b7280);
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .doc-lead {
-    font-size: 1rem;
-    color: var(--uilib-muted, #6b7280);
-    line-height: 1.7;
-    margin: 0;
-  }
-}
+// .doc-header styles live in doc-page-header.component.scss (component-scoped).
+// Page-level overrides can be added here if a specific page needs to customise the header.
 
 .doc-demo {
   background: #f8f9fa;
@@ -390,12 +366,6 @@
 
 // Responsive
 @media (max-width: 768px) {
-  .doc-header {
-    h1 {
-      font-size: 2rem;
-    }
-  }
-
   .doc-demo {
     padding: 1.5rem;
   }

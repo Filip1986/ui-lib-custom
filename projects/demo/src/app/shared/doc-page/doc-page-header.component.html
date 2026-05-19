@@ -1,5 +1,8 @@
 <div class="doc-header">
   <h1>{{ title() }}</h1>
+  @if (description()) {
+    <p class="doc-description">{{ description() }}</p>
+  }
   @if (importCode()) {
     <ui-lib-code-snippet
       language="typescript"
@@ -8,8 +11,6 @@
       [code]="importCode()"
     />
   }
-  @if (description()) {
-    <p class="doc-description">{{ description() }}</p>
-  }
   <ng-content />
+  <ui-lib-divider [decorative]="true" />
 </div>
