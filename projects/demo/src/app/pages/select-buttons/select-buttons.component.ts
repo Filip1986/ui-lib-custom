@@ -26,6 +26,8 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**
@@ -52,6 +54,7 @@ import { Panel } from 'ui-lib-custom/panel';
     VariantComparisonComponent,
     SelectButtonBasicExampleComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -97,6 +100,17 @@ export class SelectButtonsComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+  ];
+
+  // -------------------------------------------------------------------------
+  // Keyboard navigation rows
+  // -------------------------------------------------------------------------
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab / Shift+Tab', action: 'Move focus into / out of the button group.' },
+    { key: '← / →', action: 'Move focus between options within the group.' },
+    { key: 'Space / Enter', action: 'Toggle selection of the focused option.' },
   ];
 
   public readonly snippets: { usage: string } = {

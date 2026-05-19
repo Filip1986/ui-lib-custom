@@ -7,6 +7,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ImageCompare } from 'ui-lib-custom/image-compare';
 
@@ -28,6 +30,7 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
     ImageCompare,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
@@ -65,6 +68,18 @@ export class ImageCompareDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'custom-label', label: 'Custom Label' },
     { id: 'api', label: 'API' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+  ];
+
+  // ─── Keyboard navigation rows ─────────────────────────────────────────────
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '→ / ↑', action: 'Move divider 1% to the right.' },
+    { key: '← / ↓', action: 'Move divider 1% to the left.' },
+    { key: 'PageUp', action: 'Move divider 10% to the right.' },
+    { key: 'PageDown', action: 'Move divider 10% to the left.' },
+    { key: 'Home', action: 'Move divider to 0% (far left).' },
+    { key: 'End', action: 'Move divider to 100% (far right).' },
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────

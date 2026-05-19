@@ -27,7 +27,7 @@
               />
             </div>
           </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('basic')"
           [showLineNumbers]="true"
           />
       </section>
@@ -51,7 +51,7 @@
             </div>
             <p class="value-text">Position: <strong>{{ position() }}%</strong></p>
           </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('twoWayBinding')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('twoWayBinding')"
           [showLineNumbers]="true"
           />
       </section>
@@ -103,7 +103,7 @@
               </div>
             </div>
           </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
           [showLineNumbers]="true"
           />
       </section>
@@ -156,7 +156,7 @@
               </div>
             </div>
           </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('variants')"
           [showLineNumbers]="true"
           />
       </section>
@@ -178,7 +178,7 @@
               />
             </div>
           </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
           [showLineNumbers]="true"
           />
       </section>
@@ -201,7 +201,7 @@
               />
             </div>
           </ui-lib-panel>
-        <ui-lib-code-snippet language="html" [code]="snippet('customLabel')" 
+        <ui-lib-code-snippet language="html" [code]="snippet('customLabel')"
           [showLineNumbers]="true"
           />
       </section>
@@ -245,23 +245,13 @@
               <tr><td><code>slideEnd</code></td><td>number</td><td>Emitted with the final position when the user releases the handle.</td></tr>
             </tbody>
           </table>
-          <table class="api-table" style="margin-top: 1rem">
-            <thead>
-              <tr>
-                <th>Keyboard</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><kbd>ArrowRight</kbd> / <kbd>ArrowUp</kbd></td><td>Move divider 1% to the right.</td></tr>
-              <tr><td><kbd>ArrowLeft</kbd> / <kbd>ArrowDown</kbd></td><td>Move divider 1% to the left.</td></tr>
-              <tr><td><kbd>PageUp</kbd></td><td>Move divider 10% to the right.</td></tr>
-              <tr><td><kbd>PageDown</kbd></td><td>Move divider 10% to the left.</td></tr>
-              <tr><td><kbd>Home</kbd></td><td>Move divider to 0% (far left).</td></tr>
-              <tr><td><kbd>End</kbd></td><td>Move divider to 100% (far right).</td></tr>
-            </tbody>
-          </table>
         </div>
+      </section>
+
+      <!-- ── Keyboard Navigation ──────────────────────────────────────────── -->
+      <section id="keyboard-navigation" data-doc-anchor class="example-section">
+        <h3>Keyboard Navigation</h3>
+        <app-doc-keyboard-nav [rows]="keyboardRows" />
       </section>
 
     </div>

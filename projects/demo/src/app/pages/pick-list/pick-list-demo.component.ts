@@ -15,6 +15,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import {
   PickListComponent,
   PickListItemDirective,
@@ -132,6 +134,7 @@ const SNIPPETS: Record<string, string> = {
     PickListEmptyDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
   styleUrl: './pick-list-demo.component.scss',
@@ -176,7 +179,25 @@ export class PickListDemoComponent {
     { id: 'templates', label: 'Custom Templates' },
     { id: 'drag-drop', label: 'Drag & Drop' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'api', label: 'API Reference' },
+  ];
+
+  // -------------------------------------------------------------------------
+  // Keyboard navigation rows
+  // -------------------------------------------------------------------------
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '↓ / ↑', action: 'Navigate items in the focused list.' },
+    { key: 'Space / Enter', action: 'Toggle selection of focused item.' },
+    { key: 'Ctrl+A', action: 'Select all visible items in the focused list.' },
+    { key: 'Escape', action: 'Clear selection in the focused list.' },
+    { key: 'Ctrl+→', action: 'Transfer selected source items to target.' },
+    { key: 'Ctrl+←', action: 'Return selected target items to source.' },
+    { key: 'Ctrl+↑', action: 'Move selected items up within their list.' },
+    { key: 'Ctrl+↓', action: 'Move selected items down within their list.' },
+    { key: 'Ctrl+Home', action: 'Move selected items to top of list.' },
+    { key: 'Ctrl+End', action: 'Move selected items to bottom of list.' },
   ];
 
   // -------------------------------------------------------------------------

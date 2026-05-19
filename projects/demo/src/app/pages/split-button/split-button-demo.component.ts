@@ -14,6 +14,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Icon } from 'ui-lib-custom/icon';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Panel } from 'ui-lib-custom/panel';
@@ -40,6 +42,7 @@ import type {
     SplitButtonContentDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
@@ -87,7 +90,22 @@ export class SplitButtonDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'template', label: 'Template' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'api-reference', label: 'API Reference' },
+  ];
+
+  // -------------------------------------------------------------------------
+  // Keyboard navigation rows
+  // -------------------------------------------------------------------------
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab / Shift+Tab', action: 'Move focus between the main button and menu trigger.' },
+    { key: 'Space / Enter', target: 'Main button', action: 'Execute the primary action.' },
+    { key: 'Space / Enter / ↓', target: 'Menu trigger', action: 'Open the dropdown menu.' },
+    { key: 'Escape', action: 'Close the open menu and return focus to the menu trigger.' },
+    { key: '↓ / ↑', action: 'Navigate between menu items.' },
+    { key: 'Home / End', action: 'Jump to first / last menu item.' },
+    { key: 'Space / Enter', target: 'Menu item', action: 'Activate the focused menu item.' },
   ];
 
   public readonly severities: readonly SplitButtonSeverity[] = [

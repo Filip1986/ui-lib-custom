@@ -30,7 +30,7 @@
             </ng-template>
           </ui-lib-order-list>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')"
         [showLineNumbers]="true"
         />
     </section>
@@ -57,7 +57,7 @@
             </ng-template>
           </ui-lib-order-list>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('filter')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('filter')"
         [showLineNumbers]="true"
         />
     </section>
@@ -94,7 +94,7 @@
             </ng-template>
           </ui-lib-order-list>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('template')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('template')"
         [showLineNumbers]="true"
         />
     </section>
@@ -124,7 +124,7 @@
             <p class="demo-event-log">Last reorder: <code>{{ lastReorderEvent() }}</code></p>
           </ui-lib-stack>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('dragDrop')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('dragDrop')"
         [showLineNumbers]="true"
         />
     </section>
@@ -133,41 +133,25 @@
     <section id="accessibility" data-doc-anchor class="example-section">
       <h3>5. Accessibility</h3>
       <ui-lib-panel variant="minimal">
-        <ui-lib-stack [gap]="4">
-          <div>
-            <h4>Keyboard shortcuts</h4>
-            <table class="doc-table">
-              <thead><tr><th>Key</th><th>Action</th></tr></thead>
-              <tbody>
-                <tr><td><kbd>Arrow Down / Up</kbd></td><td>Navigate focus between items (wraps).</td></tr>
-                <tr><td><kbd>Home / End</kbd></td><td>Jump focus to first / last item.</td></tr>
-                <tr><td><kbd>Space</kbd> / <kbd>Enter</kbd></td><td>Toggle selection of focused item.</td></tr>
-                <tr><td><kbd>Ctrl+A</kbd></td><td>Select all visible items.</td></tr>
-                <tr><td><kbd>Escape</kbd></td><td>Clear selection.</td></tr>
-                <tr><td><kbd>Alt+↑</kbd> / <kbd>Ctrl+↑</kbd></td><td>Move selected items up.</td></tr>
-                <tr><td><kbd>Alt+↓</kbd> / <kbd>Ctrl+↓</kbd></td><td>Move selected items down.</td></tr>
-                <tr><td><kbd>Alt+Home</kbd></td><td>Move selected items to top.</td></tr>
-                <tr><td><kbd>Alt+End</kbd></td><td>Move selected items to bottom.</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>ARIA</h4>
-            <ul>
-              <li>List container: <code>role="listbox"</code>, <code>aria-multiselectable="true"</code>.</li>
-              <li>Each item: <code>role="option"</code>, <code>aria-selected</code>.</li>
-              <li>Control buttons carry configurable <code>aria-label</code> inputs.</li>
-              <li>All reorder and drag moves are announced via <code>LiveAnnouncerService</code>.</li>
-              <li>Provide a label with <code>[ariaLabel]</code> or <code>[ariaLabelledBy]</code>.</li>
-            </ul>
-          </div>
-        </ui-lib-stack>
+        <ul>
+          <li>List container: <code>role="listbox"</code>, <code>aria-multiselectable="true"</code>.</li>
+          <li>Each item: <code>role="option"</code>, <code>aria-selected</code>.</li>
+          <li>Control buttons carry configurable <code>aria-label</code> inputs.</li>
+          <li>All reorder and drag moves are announced via <code>LiveAnnouncerService</code>.</li>
+          <li>Provide a label with <code>[ariaLabel]</code> or <code>[ariaLabelledBy]</code>.</li>
+        </ul>
       </ui-lib-panel>
     </section>
 
-    <!-- 6. API Reference -->
+    <!-- 6. Keyboard Navigation -->
+    <section id="keyboard-navigation" data-doc-anchor class="example-section">
+      <h3>6. Keyboard Navigation</h3>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
+    </section>
+
+    <!-- 7. API Reference -->
     <section id="api" data-doc-anchor class="example-section">
-      <h3>6. API Reference</h3>
+      <h3>7. API Reference</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>

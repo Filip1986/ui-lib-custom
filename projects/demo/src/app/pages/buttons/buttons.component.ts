@@ -26,6 +26,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 interface ButtonLogEntry {
   timestamp: string;
@@ -57,6 +59,7 @@ interface ApiRow {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
@@ -284,6 +287,11 @@ export class ButtonsComponent {
       default: 'null',
       description: 'Maps to aria-checked for checkable button roles.',
     },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab / Shift+Tab', action: 'Move focus to / from the button.' },
+    { key: 'Space / Enter', action: 'Activate the button (native browser behaviour).' },
   ];
 
   public scrollTo(id: string): void {

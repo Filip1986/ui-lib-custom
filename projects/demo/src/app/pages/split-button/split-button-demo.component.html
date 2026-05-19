@@ -14,7 +14,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('basic')"
         [showLineNumbers]="true"
         />
     </section>
@@ -30,7 +30,7 @@
             (onClick)="onPrimaryAction()"
           />
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('icons')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('icons')"
         [showLineNumbers]="true"
         />
     </section>
@@ -50,7 +50,7 @@
             }
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('severity')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('severity')"
         [showLineNumbers]="true"
         />
     </section>
@@ -70,7 +70,7 @@
             />
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('disabled')"
         [showLineNumbers]="true"
         />
     </section>
@@ -85,7 +85,7 @@
             }
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('raised')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('raised')"
         [showLineNumbers]="true"
         />
     </section>
@@ -100,7 +100,7 @@
             }
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('rounded')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('rounded')"
         [showLineNumbers]="true"
         />
     </section>
@@ -115,7 +115,7 @@
             }
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('text')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('text')"
         [showLineNumbers]="true"
         />
     </section>
@@ -136,7 +136,7 @@
             }
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('raisedText')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('raisedText')"
         [showLineNumbers]="true"
         />
     </section>
@@ -151,7 +151,7 @@
             }
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('outlined')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('outlined')"
         [showLineNumbers]="true"
         />
     </section>
@@ -166,7 +166,7 @@
             <ui-lib-split-button label="Large" size="lg" [model]="items" />
           </div>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('sizes')"
         [showLineNumbers]="true"
         />
     </section>
@@ -184,7 +184,7 @@
             </ng-template>
           </ui-lib-split-button>
         </ui-lib-panel>
-      <ui-lib-code-snippet language="html" [code]="snippet('template')" 
+      <ui-lib-code-snippet language="html" [code]="snippet('template')"
         [showLineNumbers]="true"
         />
     </section>
@@ -201,6 +201,11 @@
         <li>Focus returns to the menu button when the menu closes from Escape or item activation.</li>
         <li>This demo reports command results in a polite live region at the top of the page.</li>
       </ul>
+    </section>
+
+    <section id="keyboard-navigation" data-doc-anchor class="example-section">
+      <h3>Keyboard Navigation</h3>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </section>
 
     <section id="api-reference" data-doc-anchor class="example-section">
