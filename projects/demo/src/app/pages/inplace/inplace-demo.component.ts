@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Inplace component.
@@ -26,6 +28,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
@@ -69,6 +72,34 @@ export class InplaceDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'active',
+      type: 'boolean',
+      default: 'false',
+      description: 'Controls whether the edit content is shown (two-way via [(active)]).',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a close button to revert to display mode.',
+    },
+    {
+      name: 'preventClick',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables toggling on click.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+  ];
 
   public readonly variants: InplaceVariant[] = ['material', 'bootstrap', 'minimal'];
 
@@ -129,6 +160,72 @@ export class InplaceDemoComponent {
       key: 'Escape',
       suffix: 'when active',
       action: 'Deactivates the component and restores the display content (closable mode).',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'active',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way bindable; controls whether the editor is shown.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents activation when set to true.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders a close button inside the content slot.',
+    },
+    {
+      name: 'closeIcon',
+      type: 'string',
+      default: "'pi pi-times'",
+      description: 'CSS class for the close button icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant; falls back to global ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes added to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(activated)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted when the component transitions to the active (editing) state.',
+    },
+    {
+      name: '(deactivated)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted when the component transitions back to the display (inactive) state.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: '[inplaceDisplay]',
+      type: 'slot',
+      description: 'Shown when the component is inactive. Click activates the editor.',
+    },
+    {
+      name: '[inplaceContent]',
+      type: 'slot',
+      description:
+        'Shown when the component is active. Any element or component can be projected here.',
     },
   ];
 }

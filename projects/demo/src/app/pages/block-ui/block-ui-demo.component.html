@@ -1,22 +1,20 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="BlockUI" [importCode]="importCode">
-    <p class="doc-description">
-      Overlay a mask over any section to prevent user interaction — ideal for loading states,
-      disabled form sections, and confirmation flows. Wrap content in
-      <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask.
-      Blocked content receives the <code>inert</code> attribute, making all descendants
-      non-focusable by keyboard.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-block-ui [blocked]="false">
-        <div class="demo-block-panel demo-block-panel--preview">
-          <strong>Protected content</strong>
-          <p>Bind <code>[(blocked)]</code> to overlay the mask.</p>
-        </div>
-      </ui-lib-block-ui>
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="BlockUI"
+    [importCode]="importCode"
+    description="Overlay a mask over any section to prevent user interaction — ideal for loading states, disabled form sections, and confirmation flows. Wrap content in <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask. Blocked content receives the <code>inert</code> attribute, making all descendants non-focusable by keyboard."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-block-ui [blocked]="false">
+      <div class="demo-block-panel demo-block-panel--preview">
+        <strong>Protected content</strong>
+        <p>Bind <code>[(blocked)]</code> to overlay the mask.</p>
+      </div>
+    </ui-lib-block-ui>
+  </div>
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <section class="demo-section" id="basic" data-doc-anchor>
@@ -133,70 +131,12 @@
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>blocked</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>
-              Whether the content is blocked. Two-way bindable via <code>[(blocked)]</code>.
-              A <code>model()</code> signal internally.
-            </td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Visual variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS class(es) applied to the host element.</td>
-          </tr>
-          <tr>
-            <td><code>baseZIndex</code></td>
-            <td><code>number</code></td>
-            <td><code>0</code></td>
-            <td>Base z-index for the mask layer. Uses the CSS variable default when <code>0</code>.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-slots" data-doc-anchor>
       <h3 class="demo-section__subtitle">Content Slots</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Slot</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><em>default</em></td>
-            <td>The content to be protected by the block mask.</td>
-          </tr>
-          <tr>
-            <td><code>[blockTemplate]</code></td>
-            <td>
-              Content projected into the mask overlay (e.g. a spinner or status message).
-              Announced by screen readers via the mask's live region.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
     </div>
 
     <div id="api-css" data-doc-anchor>

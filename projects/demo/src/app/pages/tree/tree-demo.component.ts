@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
@@ -28,6 +30,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tree-demo.component.html',
   styleUrl: './tree-demo.component.scss',
@@ -66,11 +69,55 @@ export class TreeDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'variants', label: 'Variants' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'TreeNode[]', default: '[]', description: 'Array of root tree nodes.' },
+    {
+      name: 'selectionMode',
+      type: "'single' | 'multiple' | 'checkbox' | null",
+      default: 'null',
+      description: 'Node selection mode.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tree size.' },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Shows a filter input.' },
+    {
+      name: 'filterBy',
+      type: 'string',
+      default: "'label'",
+      description: 'Node property to filter on.',
+    },
+    {
+      name: 'filterMode',
+      type: "'lenient' | 'strict'",
+      default: "'lenient'",
+      description: 'Filter matching strategy.',
+    },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "''",
+      description: 'Accessible label for the tree.',
+    },
+    { name: 'styleClass', type: 'string', default: "''", description: 'Additional CSS class.' },
+  ];
 
   // ─── File-system demo data ────────────────────────────────────────────────
 

@@ -6,21 +6,6 @@
       Use the <code>uiToolbarStart</code>, <code>uiToolbarCenter</code>, and
       <code>uiToolbarEnd</code> attribute selectors to place content in the corresponding slot.
     </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-toolbar>
-        <div uiToolbarStart>
-          <ui-lib-button type="button">← Back</ui-lib-button>
-          <ui-lib-button type="button">⊞ Grid</ui-lib-button>
-        </div>
-        <div uiToolbarCenter>
-          <strong>My Application</strong>
-        </div>
-        <div uiToolbarEnd>
-          <ui-lib-button type="button">🔔</ui-lib-button>
-          <ui-lib-button type="button">⚙ Settings</ui-lib-button>
-        </div>
-      </ui-lib-toolbar>
-    </div>
   </app-doc-page-header>
 
   <!-- Section 1: Start Only -->
@@ -188,66 +173,10 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Controls toolbar height and padding.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Accessible label; recommended when multiple toolbars are on one page.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes added to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="inputRows" />
 
     <h3 class="demo-section__subtitle">Content Projection Slots</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Selector</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>[uiToolbarStart]</code></td>
-          <td>Content projected into the leading (left) group.</td>
-        </tr>
-        <tr>
-          <td><code>[uiToolbarCenter]</code></td>
-          <td>Content projected into the centered group.</td>
-        </tr>
-        <tr>
-          <td><code>[uiToolbarEnd]</code></td>
-          <td>Content projected into the trailing (right) group.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="property" [rows]="slotRows" [showDefault]="false" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

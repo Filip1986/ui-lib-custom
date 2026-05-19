@@ -10,6 +10,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ProgressSpinner component.
@@ -25,6 +27,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',
@@ -75,6 +78,51 @@ export class ProgressSpinnerDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'strokeWidth',
+      type: 'string',
+      default: "'2'",
+      description: 'SVG stroke-width of the circle arc.',
+    },
+    {
+      name: 'fill',
+      type: 'string',
+      default: "'none'",
+      description: 'SVG fill colour of the circle interior.',
+    },
+    {
+      name: 'animationDuration',
+      type: 'string',
+      default: "'2s'",
+      description: 'Duration of one rotation/dash cycle. Accepts any CSS <time>.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling the overall diameter.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to global theme when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class(es) applied to the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Loading...'",
+      description: 'Screen-reader accessible label.',
+    },
+  ];
 
   // ---- Interactive controls -----------------------------------------------
   public readonly interactiveSize: WritableSignal<ProgressSpinnerSize> =

@@ -1,26 +1,26 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Button" [importCode]="importCode">
-    <p class="doc-description">
-      Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised
-      modifiers — all from a single <code>ui-lib-button</code> element.
-    </p>
-    <div class="demo-page-header__preview">
-      <!-- Variant switcher -->
-      <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
-        @for (v of variants; track v) {
-          <button
-            type="button"
-            class="buttons-demo__variant-btn"
-            [class.buttons-demo__variant-btn--active]="activeVariant() === v"
-            (click)="setVariant(v)"
-          >
-            {{ v }}
-          </button>
-        }
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="Button"
+    [importCode]="importCode"
+    description="Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised modifiers — all from a single <code>ui-lib-button</code> element."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
+      @for (v of variants; track v) {
+        <button
+          type="button"
+          class="buttons-demo__variant-btn"
+          [class.buttons-demo__variant-btn--active]="activeVariant() === v"
+          (click)="setVariant(v)"
+        >
+          {{ v }}
+        </button>
+      }
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Basic ──────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>
@@ -684,24 +684,7 @@
     </p>
 
     <div class="buttons-demo__a11y-grid">
-      <ui-lib-panel header="Keyboard navigation" variant="minimal">
-        <ul class="buttons-demo__a11y-list">
-          <li>
-            <kbd class="buttons-demo__kbd">Tab</kbd> /
-            <kbd class="buttons-demo__kbd">Shift + Tab</kbd>
-            — moves focus to / from the button.
-          </li>
-          <li>
-            <kbd class="buttons-demo__kbd">Space</kbd> /
-            <kbd class="buttons-demo__kbd">Enter</kbd>
-            — activates the button (native browser behaviour).
-          </li>
-          <li>
-            Disabled buttons (<code>[disabled]="true"</code>) are excluded from the tab order
-            automatically.
-          </li>
-        </ul>
-      </ui-lib-panel>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
 
       <ui-lib-panel header="ARIA attributes" variant="minimal">
         <ul class="buttons-demo__a11y-list">
@@ -787,34 +770,7 @@
       All inputs accepted by <code>ui-lib-button</code>. Import from
       <code>ui-lib-custom/button</code>.
     </p>
-    <ui-lib-panel variant="minimal">
-      <div class="buttons-demo__table-wrap">
-        <ui-lib-table
-          [value]="apiRows"
-          [variant]="activeVariant()"
-          [stripedRows]="true"
-          [rowHover]="true"
-          ariaLabel="Button component API reference"
-        >
-          <ui-lib-table-column field="name" header="Input" width="160px">
-            <ng-template uiTableColumnBody let-row>
-              <code class="buttons-demo__api-code buttons-demo__api-code--name">{{ row.name }}</code>
-            </ng-template>
-          </ui-lib-table-column>
-          <ui-lib-table-column field="type" header="Type" width="300px">
-            <ng-template uiTableColumnBody let-row>
-              <code class="buttons-demo__api-code">{{ row.type }}</code>
-            </ng-template>
-          </ui-lib-table-column>
-          <ui-lib-table-column field="default" header="Default" width="100px">
-            <ng-template uiTableColumnBody let-row>
-              <code class="buttons-demo__api-code">{{ row.default }}</code>
-            </ng-template>
-          </ui-lib-table-column>
-          <ui-lib-table-column field="description" header="Description" />
-        </ui-lib-table>
-      </div>
-    </ui-lib-panel>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->

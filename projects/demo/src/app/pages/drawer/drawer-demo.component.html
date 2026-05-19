@@ -133,53 +133,13 @@
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-subsection__title">Inputs</h3>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>visible</code></td><td><code>model&lt;boolean&gt;</code></td><td><code>false</code></td><td>Two-way binding to control open/close.</td></tr>
-          <tr><td><code>header</code></td><td><code>string</code></td><td><code>''</code></td><td>Header title text.</td></tr>
-          <tr><td><code>position</code></td><td><code>'left'|'right'|'top'|'bottom'</code></td><td><code>'right'</code></td><td>Which edge the drawer slides from.</td></tr>
-          <tr><td><code>size</code></td><td><code>string</code></td><td><code>'300px'</code></td><td>Panel width (left/right) or height (top/bottom).</td></tr>
-          <tr><td><code>modal</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the semi-transparent backdrop.</td></tr>
-          <tr><td><code>closeOnBackdrop</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Close on backdrop click.</td></tr>
-          <tr><td><code>closeOnEscape</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Close on Escape key.</td></tr>
-          <tr><td><code>blockScroll</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Lock body scroll while open.</td></tr>
-          <tr><td><code>showCloseButton</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the built-in X close button.</td></tr>
-          <tr><td><code>variant</code></td><td><code>DrawerVariant | null</code></td><td><code>null</code></td><td>Visual variant (inherits from theme service).</td></tr>
-          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS classes on the host.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-subsection__title">Outputs</h3>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>shown</code></td><td><code>void</code></td><td>Emits after the drawer opens.</td></tr>
-          <tr><td><code>hidden</code></td><td><code>void</code></td><td>Emits after the drawer closes.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-subsection__title">Content Projection</h3>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr><th>Slot</th><th>Selector</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Body</td><td><em>(default)</em></td><td>Scrollable main content.</td></tr>
-          <tr><td>Custom header</td><td><code>[drawerHeader]</code></td><td>Replaces the header title area.</td></tr>
-          <tr><td>Footer</td><td><code>[drawerFooter]</code></td><td>Sticky footer at the bottom of the panel.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
   </section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->

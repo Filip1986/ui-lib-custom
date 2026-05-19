@@ -20,19 +20,8 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import { DocQualityBadgeComponent } from '../../shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '../../shared/doc-page/doc-quality-badge.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
-
-interface TagInputRow {
-  readonly name: string;
-  readonly type: string;
-  readonly default: string;
-  readonly description: string;
-}
-
-interface TagOutputRow {
-  readonly name: string;
-  readonly type: string;
-  readonly description: string;
-}
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface AriaRow {
   readonly attribute: string;
@@ -61,6 +50,7 @@ interface AriaRow {
     DocCssVarsTableComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',
@@ -124,7 +114,7 @@ export class TagDemoComponent {
 
   // ---- API table data -------------------------------------------------------
 
-  public readonly inputRows: TagInputRow[] = [
+  public readonly apiInputRows: ApiPropRow[] = [
     {
       name: 'value',
       type: 'string | null',
@@ -177,10 +167,10 @@ export class TagDemoComponent {
     },
   ];
 
-  public readonly outputRows: TagOutputRow[] = [
+  public readonly apiOutputRows: ApiPropRow[] = [
     {
       name: 'removed',
-      type: 'OutputEmitterRef&lt;MouseEvent&gt;',
+      type: 'OutputEmitterRef<MouseEvent>',
       description:
         'Emitted when the dismiss button is clicked. The tag is not auto-removed — control visibility from the parent.',
     },
@@ -467,4 +457,34 @@ export class MyComponent {}`,
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'string', default: "''", description: 'Tag label text.' },
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warning' | 'danger' | 'secondary' | 'contrast' | null",
+      default: 'null',
+      description: 'Severity level controlling the colour preset.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a fully rounded pill shape.',
+    },
+    { name: 'icon', type: 'string | null', default: 'null', description: 'Leading icon name.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tag size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 }

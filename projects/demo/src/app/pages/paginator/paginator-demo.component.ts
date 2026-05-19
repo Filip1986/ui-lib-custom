@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Paginator component.
@@ -22,6 +24,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageHeaderComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',
@@ -60,11 +63,93 @@ export class PaginatorDemoComponent {
     { id: 'jump-to-page', label: 'Jump To Page' },
     { id: 'without-first-last', label: 'Without First / Last Icons' },
     { id: 'arrows-only', label: 'Page Links Off' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'totalRecords',
+      type: 'number',
+      default: '0',
+      description: 'Total number of records to paginate.',
+    },
+    {
+      name: 'rows',
+      type: 'number',
+      description: 'Number of records per page (two-way bindable via [(rows)]).',
+    },
+    {
+      name: 'first',
+      type: 'number',
+      description:
+        'Zero-based index of the first record on the current page (two-way bindable via [(first)]).',
+    },
+    {
+      name: 'pageLinkSize',
+      type: 'number',
+      default: '5',
+      description: 'Number of page links displayed.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Paginator size.' },
+    {
+      name: 'alwaysShow',
+      type: 'boolean',
+      default: 'true',
+      description: 'Always renders the paginator even when there is only one page.',
+    },
+    {
+      name: 'showFirstLastIcon',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows first/last page buttons.',
+    },
+    {
+      name: 'showPageLinks',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows numbered page links.',
+    },
+    {
+      name: 'showCurrentPageReport',
+      type: 'boolean',
+      default: 'false',
+      description: "Shows a 'Showing X to Y of Z' report.",
+    },
+    {
+      name: 'currentPageReportTemplate',
+      type: 'string',
+      default: "'{first} - {last} of {totalRecords}'",
+      description: 'Template for the page report text.',
+    },
+    {
+      name: 'rowsPerPageOptions',
+      type: 'number[] | null',
+      default: 'null',
+      description: 'Options for the rows-per-page dropdown.',
+    },
+    {
+      name: 'showJumpToPageInput',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a page-number jump input.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Pagination'",
+      description: 'Accessible label for the pagination nav.',
+    },
+  ];
 
   // ── Shared state ────────────────────────────────────────────────────────────
   public readonly totalRecords: WritableSignal<number> = signal(120);

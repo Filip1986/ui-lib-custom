@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { UploadComponent } from 'ui-lib-custom/upload';
-import { Button } from 'ui-lib-custom/button';
 import { UploadEmptyDirective, UploadFileDirective } from 'ui-lib-custom/upload';
 import type {
   UploadHandlerEvent,
@@ -21,6 +20,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface UploadLogEntry {
   timestamp: string;
@@ -38,11 +39,11 @@ interface UploadLogEntry {
     UploadComponent,
     UploadEmptyDirective,
     UploadFileDirective,
-    Button,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './upload-demo.component.html',
   styleUrl: './upload-demo.component.scss',
@@ -64,11 +65,105 @@ export class UploadDemoComponent {
     { id: 'custom-file-template', label: 'Custom File Template' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'event-log', label: 'Event Log' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Design variant.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Upload widget size.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allows multiple file selection.',
+    },
+    {
+      name: 'accept',
+      type: 'string',
+      default: "''",
+      description: 'Accepted file types (MIME or extension).',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the upload widget.',
+    },
+    {
+      name: 'auto',
+      type: 'boolean',
+      default: 'false',
+      description: 'Uploads automatically on file selection.',
+    },
+    {
+      name: 'maxFileSize',
+      type: 'number | null',
+      default: 'null',
+      description: 'Maximum file size in bytes.',
+    },
+    {
+      name: 'fileLimit',
+      type: 'number | null',
+      default: 'null',
+      description: 'Maximum number of files allowed.',
+    },
+    {
+      name: 'chooseLabel',
+      type: 'string',
+      default: "'Choose'",
+      description: 'Label for the choose button.',
+    },
+    {
+      name: 'uploadLabel',
+      type: 'string',
+      default: "'Upload'",
+      description: 'Label for the upload button.',
+    },
+    {
+      name: 'cancelLabel',
+      type: 'string',
+      default: "'Cancel'",
+      description: 'Label for the cancel button.',
+    },
+    {
+      name: 'showUploadButton',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows the upload button.',
+    },
+    {
+      name: 'showCancelButton',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows the cancel button.',
+    },
+    {
+      name: 'customUpload',
+      type: 'boolean',
+      default: 'false',
+      description: 'Delegates upload to the uploadHandler output instead of auto-uploading.',
+    },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'Drag and drop files here'",
+      description: 'Message shown when no files are selected.',
+    },
+  ];
 
   public readonly activeVariant: WritableSignal<UploadVariant> = signal<UploadVariant>('material');
   public readonly eventLog: WritableSignal<UploadLogEntry[]> = signal<UploadLogEntry[]>([]);

@@ -15,6 +15,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface CityOption {
   label: string;
@@ -39,6 +41,7 @@ interface CityOption {
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './radio-button-demo.component.html',
   styleUrl: './radio-button-demo.component.scss',
@@ -245,6 +248,50 @@ export class RadioButtonDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'unknown', description: 'Value this radio represents.' },
+    { name: 'name', type: 'string', default: "''", description: 'Radio group name.' },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Id for the inner input element.',
+    },
+    { name: 'label', type: 'string | null', default: 'null', description: 'Label text.' },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Radio button size.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the radio button.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the radio read-only.',
+    },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab',
@@ -267,5 +314,104 @@ export class RadioButtonDemoComponent {
       key: 'Space',
       action: 'Selects the focused radio (native browser behaviour).',
     },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Visible label text. Content projection is an alternative.',
+    },
+    {
+      name: 'inputId',
+      type: 'string | null',
+      default: 'null',
+      description: 'Forwarded to the native <code>&lt;input&gt;</code> id.',
+    },
+    {
+      name: 'name',
+      type: 'string | null',
+      default: 'null',
+      description: 'Must be identical across all buttons in a group.',
+    },
+    {
+      name: 'value',
+      type: 'unknown',
+      default: 'null',
+      description: 'The value this radio button represents in the group.',
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      default: 'false',
+      description: 'Sets <code>aria-required</code> on the native input.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents value changes while remaining visible.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Sets <code>aria-disabled</code> on the native input. Skipped during arrow-key navigation.',
+    },
+    {
+      name: 'tabindex',
+      type: 'number',
+      default: '0',
+      description: 'Applied when the radio is checked (roving tabindex pattern).',
+    },
+    {
+      name: 'autofocus',
+      type: 'boolean',
+      default: 'false',
+      description: 'Focuses this radio after first render.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Used when no visible label is provided.',
+    },
+    {
+      name: 'ariaLabelledby',
+      type: 'string | null',
+      default: 'null',
+      description: 'Explicit override; takes precedence over the auto-generated label id.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Inherits from <code>ThemeConfigService</code> when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Component density.',
+    },
+    {
+      name: 'appearance',
+      type: "'outlined' | 'filled'",
+      default: "'outlined'",
+      description: 'Visual style — <code>filled</code> uses a solid checked background.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'change',
+      type: 'RadioButtonChangeEvent',
+      description:
+        'Fires when this button is selected. Payload: <code>{ value, originalEvent }</code>.',
+    },
+    { name: 'focus', type: 'FocusEvent', description: 'Emitted when the radio receives focus.' },
+    { name: 'blur', type: 'FocusEvent', description: 'Emitted when the radio loses focus.' },
   ];
 }

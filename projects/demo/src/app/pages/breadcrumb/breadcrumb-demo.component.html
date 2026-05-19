@@ -1,14 +1,15 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Breadcrumb" [importCode]="importCode">
-    <p class="doc-description">
-      A breadcrumb displays a hierarchical navigation trail, helping users understand where they are
-      in an application and navigate back to parent sections.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-breadcrumb [items]="basicItems" />
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Breadcrumb"
+    [importCode]="importCode"
+    description="A breadcrumb displays a hierarchical navigation trail, helping users understand where they are in an application and navigate back to parent sections."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-breadcrumb [items]="basicItems" />
+  </div>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────── -->
   <section class="demo-section" id="basic" data-doc-anchor>
@@ -130,125 +131,15 @@
   <!-- ── API Table ─────────────────────────────────────────────────────── -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
-    <table class="api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>items</code></td>
-          <td><code>BreadcrumbItem[]</code></td>
-          <td><code>[]</code></td>
-          <td>The navigation items to display.</td>
-        </tr>
-        <tr>
-          <td><code>home</code></td>
-          <td><code>BreadcrumbItem | null</code></td>
-          <td><code>null</code></td>
-          <td>Optional home item prepended before <code>items</code>.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design-system variant; falls back to ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size token controlling font size and spacing.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS class appended to host.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string</code></td>
-          <td><code>'Breadcrumb'</code></td>
-          <td>Accessible label for the <code>&lt;nav&gt;</code> landmark.</td>
-        </tr>
-      </tbody>
-    </table>
 
-    <h3>Outputs</h3>
-    <table class="api-table">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>itemClick</code></td>
-          <td><code>BreadcrumbItemClickEvent</code></td>
-          <td>Emitted when any breadcrumb item is clicked or activated via keyboard.</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
-    <h3>BreadcrumbItem interface</h3>
-    <table class="api-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>string?</code></td>
-          <td>Display text for the item.</td>
-        </tr>
-        <tr>
-          <td><code>url</code></td>
-          <td><code>string?</code></td>
-          <td>External href URL.</td>
-        </tr>
-        <tr>
-          <td><code>routerLink</code></td>
-          <td><code>string | string[]</code></td>
-          <td>Angular RouterLink for in-app navigation.</td>
-        </tr>
-        <tr>
-          <td><code>icon</code></td>
-          <td><code>string?</code></td>
-          <td>Icon class name rendered before the label.</td>
-        </tr>
-        <tr>
-          <td><code>target</code></td>
-          <td><code>string?</code></td>
-          <td>Anchor target (e.g. <code>_blank</code>).</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean?</code></td>
-          <td>When true, the item is non-interactive.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string?</code></td>
-          <td>Extra CSS class on the item.</td>
-        </tr>
-        <tr>
-          <td><code>command</code></td>
-          <td><code>(event: BreadcrumbItemClickEvent) => void</code></td>
-          <td>Callback invoked when the item is activated.</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3 class="demo-section__subtitle">Outputs</h3>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+
+    <h3 class="demo-section__subtitle">BreadcrumbItem interface</h3>
+    <app-doc-api-reference kind="property" [rows]="apiBreadcrumbItemRows" [showDefault]="false" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

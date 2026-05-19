@@ -218,107 +218,13 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-subsection__title">Inputs</h3>
-    <table class="demo-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>visible</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Two-way visibility binding via <code>[(visible)]</code>.</td>
-        </tr>
-        <tr>
-          <td><code>header</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Optional header text shown at the top of the panel.</td>
-        </tr>
-        <tr>
-          <td><code>showCloseButton</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Renders a close (&#x00D7;) button in the header area.</td>
-        </tr>
-        <tr>
-          <td><code>dismissable</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Clicking outside the panel closes the popover.</td>
-        </tr>
-        <tr>
-          <td><code>closeOnEscape</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Pressing Escape closes the popover.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from the global theme when <code>null</code>.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes on the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-subsection__title">Outputs</h3>
-    <table class="demo-table">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Payload</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>shown</code></td>
-          <td><code>void</code></td>
-          <td>Emitted after the popover becomes visible.</td>
-        </tr>
-        <tr>
-          <td><code>hidden</code></td>
-          <td><code>void</code></td>
-          <td>Emitted after the popover is hidden.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-subsection__title">Public Methods</h3>
-    <table class="demo-table">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>show(target: HTMLElement)</code></td>
-          <td>Show the popover anchored to <code>target</code>.</td>
-        </tr>
-        <tr>
-          <td><code>hide()</code></td>
-          <td>Hide the popover.</td>
-        </tr>
-        <tr>
-          <td><code>toggle(target: HTMLElement)</code></td>
-          <td>Show if hidden, hide if visible.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="property" [rows]="apiMethodRows" [showDefault]="false" />
   </section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->

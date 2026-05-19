@@ -24,6 +24,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface SpeedDialLogEntry {
   timestamp: string;
@@ -46,6 +48,7 @@ interface SpeedDialLogEntry {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './speed-dial-demo.component.html',
   styleUrl: './speed-dial-demo.component.scss',
@@ -87,11 +90,95 @@ export class SpeedDialDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'event-log', label: 'Event Log' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'SpeedDialItem[]',
+      default: '[]',
+      description: 'Array of action items.',
+    },
+    {
+      name: 'type',
+      type: "'linear' | 'circle' | 'semi-circle' | 'quarter-circle'",
+      default: "'linear'",
+      description: 'Layout type of the action items.',
+    },
+    {
+      name: 'direction',
+      type: "'up' | 'down' | 'left' | 'right'",
+      default: "'up'",
+      description: 'Direction the items expand toward.',
+    },
+    {
+      name: 'radius',
+      type: 'number',
+      default: '0',
+      description: 'Radius in pixels for circle/semi-circle layouts.',
+    },
+    {
+      name: 'mask',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a full-screen backdrop mask when open.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the speed dial.',
+    },
+    {
+      name: 'hideOnClickOutside',
+      type: 'boolean',
+      default: 'true',
+      description: 'Closes the dial when clicking outside.',
+    },
+    {
+      name: 'rotateAnimation',
+      type: 'boolean',
+      default: 'true',
+      description: 'Rotates the toggle icon when open.',
+    },
+    {
+      name: 'showIcon',
+      type: 'string',
+      default: "'plus'",
+      description: 'Icon name for the closed state.',
+    },
+    {
+      name: 'hideIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon name for the open state (defaults to showIcon if null).',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size.' },
+    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order.' },
+    {
+      name: 'buttonAriaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the toggle button.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the speed dial group.',
+    },
+  ];
 
   public readonly activeVariant: WritableSignal<SpeedDialVariant> =
     signal<SpeedDialVariant>('material');

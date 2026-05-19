@@ -16,6 +16,10 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
   OrderListComponent,
   OrderListItemDirective,
@@ -235,6 +239,8 @@ export class MyComponent {
     OrderListEmptyDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './order-list-demo.component.html',
   styleUrl: './order-list-demo.component.scss',
@@ -266,6 +272,77 @@ export class OrderListDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Two-way bound list of items (use [(value)]).',
+    },
+    { name: 'header', type: 'string', default: "''", description: 'List header text.' },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Shows a filter input.' },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'filterField',
+      type: 'string',
+      default: "'label'",
+      description: 'Object property to filter on.',
+    },
+    {
+      name: 'dataKey',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property for unique item identity.',
+    },
+    {
+      name: 'selection',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Selected items array (two-way via [(selection)]).',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string',
+      default: "'250px'",
+      description: 'CSS height of the item list.',
+    },
+    {
+      name: 'dragdrop',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables drag-and-drop reordering.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Meta/Ctrl for multi-selection.',
+    },
+    {
+      name: 'controls',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows up/down/top/bottom control buttons.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Order list'",
+      description: 'Accessible label for the list.',
+    },
+  ];
+
   public readonly importCode: string =
     "import { OrderListComponent } from 'ui-lib-custom/order-list'";
 
@@ -279,7 +356,24 @@ export class OrderListDemoComponent {
     { id: 'templates', label: 'Custom Templates' },
     { id: 'drag-drop', label: 'Drag & Drop' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'api', label: 'API Reference' },
+  ];
+
+  // -------------------------------------------------------------------------
+  // Keyboard navigation rows
+  // -------------------------------------------------------------------------
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '↓ / ↑', action: 'Navigate focus between items (wraps).' },
+    { key: 'Home / End', action: 'Jump focus to first / last item.' },
+    { key: 'Space / Enter', action: 'Toggle selection of focused item.' },
+    { key: 'Ctrl+A', action: 'Select all visible items.' },
+    { key: 'Escape', action: 'Clear selection.' },
+    { key: 'Alt+↑ / Ctrl+↑', action: 'Move selected items up.' },
+    { key: 'Alt+↓ / Ctrl+↓', action: 'Move selected items down.' },
+    { key: 'Alt+Home', action: 'Move selected items to top.' },
+    { key: 'Alt+End', action: 'Move selected items to bottom.' },
   ];
 
   // -------------------------------------------------------------------------
@@ -343,4 +437,129 @@ export class OrderListDemoComponent {
   public snippet(key: string): string {
     return SNIPPETS[key] ?? '';
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Ordered list items — two-way via [(value)].',
+    },
+    {
+      name: 'selection',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Selected items — two-way via [(selection)].',
+    },
+    { name: 'header', type: 'string | null', default: 'null', description: 'Static header text.' },
+    {
+      name: 'filterBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Dot-notation filter field. Shows filter input when set.',
+    },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Filter'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'filterMatchMode',
+      type: "'contains' | 'startsWith' | 'endsWith' | 'equals'",
+      default: "'contains'",
+      description: 'Matching strategy.',
+    },
+    {
+      name: 'filterLocale',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'BCP 47 locale for comparisons.',
+    },
+    {
+      name: 'dragDrop',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables native HTML5 drag-and-drop.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables all interaction.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Ctrl/Meta to multi-select.',
+    },
+    {
+      name: 'stripedRows',
+      type: 'boolean',
+      default: 'false',
+      description: 'Alternating row background.',
+    },
+    {
+      name: 'controlsPosition',
+      type: "'left' | 'right' | 'top'",
+      default: "'left'",
+      description: 'Control buttons position.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Theme variant override.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size scale.' },
+    {
+      name: 'trackBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property path for identity.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Listbox accessible label.',
+    },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'ID(s) labelling the listbox.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'reordered',
+      type: 'OrderListReorderEvent',
+      description: 'After any reorder (buttons or DnD).',
+    },
+    {
+      name: 'selectionChanged',
+      type: 'OrderListSelectionChangeEvent',
+      description: 'When selection changes.',
+    },
+    { name: 'filtered', type: 'OrderListFilterEvent', description: 'When filter query changes.' },
+    {
+      name: 'dragDropped',
+      type: 'OrderListDragDropEvent',
+      description: 'After a drag-and-drop reorder.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    { name: 'uiOrderListItem', type: '$implicit: T', description: 'Custom item row.' },
+    { name: 'uiOrderListHeader', type: '—', description: 'Custom header.' },
+    {
+      name: 'uiOrderListEmpty',
+      type: 'filter: boolean',
+      description: 'Empty / no-filter-match state.',
+    },
+    { name: 'uiOrderListFilter', type: '—', description: 'Replaces default filter input.' },
+  ];
 }

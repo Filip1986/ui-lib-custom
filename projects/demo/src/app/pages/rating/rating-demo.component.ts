@@ -15,6 +15,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Rating component.
@@ -34,6 +36,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './rating-demo.component.html',
   styleUrl: './rating-demo.component.scss',
@@ -240,6 +243,50 @@ export class RatingDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'stars', type: 'number', default: '5', description: 'Total number of stars.' },
+    {
+      name: 'cancel',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a cancel button to clear the rating.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables interaction.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the rating read-only.',
+    },
+    {
+      name: 'onIcon',
+      type: 'string',
+      default: "'star-fill'",
+      description: 'Icon name for a selected star.',
+    },
+    {
+      name: 'offIcon',
+      type: 'string',
+      default: "'star'",
+      description: 'Icon name for an unselected star.',
+    },
+    {
+      name: 'cancelIcon',
+      type: 'string',
+      default: "'x'",
+      description: 'Icon name for the cancel button.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Star size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -260,14 +307,8 @@ export class RatingDemoComponent {
   };
 
   public readonly keyboardRows: KeyboardNavRow[] = [
-    {
-      key: '→ / ↑',
-      action: 'Increase rating by one (wraps at <code>stars</code> maximum).',
-    },
-    {
-      key: '← / ↓',
-      action: 'Decrease rating by one (minimum is 1).',
-    },
+    { key: '→ / ↑', action: 'Increase rating by one (wraps at <code>stars</code> maximum).' },
+    { key: '← / ↓', action: 'Decrease rating by one (minimum is 1).' },
     {
       key: 'Delete / Backspace',
       action: 'Clear the rating — only available when <code>[cancel]="true"</code>.',
@@ -276,5 +317,117 @@ export class RatingDemoComponent {
       key: '1–9',
       action: 'Jump directly to that star value (if within the <code>stars</code> range).',
     },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'number | null',
+      default: 'null',
+      description:
+        'Current rating. Two-way bindable via <code>[(value)]</code> or <code>ngModel</code>.',
+    },
+    { name: 'stars', type: 'number', default: '5', description: 'Number of star icons to render.' },
+    {
+      name: 'cancel',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a clear button and enables Delete / Backspace keyboard clearing.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the component. Also controlled via CVA <code>setDisabledState</code>.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Visible but not interactive. Changes host role to <code>"img"</code>.',
+    },
+    {
+      name: 'autofocus',
+      type: 'boolean',
+      default: 'false',
+      description: 'Focuses the first star after first render.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Rating'",
+      description:
+        'Accessible label for the radiogroup. Overridden with descriptive text in readonly mode.',
+    },
+    {
+      name: 'ariaLabelledby',
+      type: 'string | null',
+      default: 'null',
+      description: 'Overrides <code>ariaLabel</code> when set. Ignored in readonly mode.',
+    },
+    {
+      name: 'iconOnClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on filled star icons.',
+    },
+    {
+      name: 'iconOnStyle',
+      type: 'Record<string, string> | null',
+      default: 'null',
+      description: 'Inline styles on filled star icons.',
+    },
+    {
+      name: 'iconOffClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on empty star icons.',
+    },
+    {
+      name: 'iconOffStyle',
+      type: 'Record<string, string> | null',
+      default: 'null',
+      description: 'Inline styles on empty star icons.',
+    },
+    {
+      name: 'iconCancelClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the cancel icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Inherits from <code>ThemeConfigService</code> when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Component density.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'change',
+      type: 'RatingChangeEvent',
+      description:
+        'Emitted on every value change, including clears. Value is <code>number | null</code>.',
+    },
+    {
+      name: 'rate',
+      type: 'RatingRateEvent',
+      description: 'Emitted only when a star is selected (value is always a positive integer).',
+    },
+    {
+      name: 'cleared',
+      type: 'Event',
+      description:
+        'Emitted when the rating is cleared via cancel button, toggle-deselect, or Delete key.',
+    },
+    { name: 'focus', type: 'FocusEvent', description: 'Emitted when any star receives focus.' },
+    { name: 'blur', type: 'FocusEvent', description: 'Emitted when any star loses focus.' },
   ];
 }

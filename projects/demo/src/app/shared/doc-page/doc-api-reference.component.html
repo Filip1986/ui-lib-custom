@@ -1,0 +1,52 @@
+@if (title()) {
+  <h3 class="doc-api-reference__title">{{ title() }}</h3>
+}
+
+<ui-lib-table
+  [value]="tableRows()"
+  [showGridlines]="true"
+  size="sm"
+  variant="minimal"
+  styleClass="doc-api-reference__table"
+  [ariaLabel]="title() || (nameColumnLabel() + ' reference')"
+>
+  <!-- Name / Input / Output / Property column -->
+  <ui-lib-table-column field="name" [header]="nameColumnLabel()" width="18%">
+    <ng-template uiTableColumnBody let-row>
+      <span class="doc-api-reference__name-cell">
+        <code class="doc-api-reference__name">{{ row.name }}</code>
+        @if (row.required) {
+          <span class="doc-api-reference__required" aria-label="required">*</span>
+        }
+      </span>
+    </ng-template>
+  </ui-lib-table-column>
+
+  <!-- Type column -->
+  <ui-lib-table-column field="type" header="Type" width="22%">
+    <ng-template uiTableColumnBody let-row>
+      <code class="doc-api-reference__type">{{ row.type }}</code>
+    </ng-template>
+  </ui-lib-table-column>
+
+  <!-- Default column (conditional) -->
+  @if (showDefaultColumn()) {
+    <ui-lib-table-column field="default" header="Default" width="15%">
+      <ng-template uiTableColumnBody let-row>
+        @if (row.default !== undefined) {
+          <code class="doc-api-reference__default">{{ row.default }}</code>
+        } @else {
+          <span class="doc-api-reference__no-default" aria-label="no default">—</span>
+        }
+      </ng-template>
+    </ui-lib-table-column>
+  }
+
+  <!-- Description column -->
+  <ui-lib-table-column field="description" header="Description">
+    <ng-template uiTableColumnBody let-row>
+      <span [innerHTML]="row.description"></span>
+    </ng-template>
+  </ui-lib-table-column>
+</ui-lib-table>
+

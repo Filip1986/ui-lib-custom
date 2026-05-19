@@ -1,16 +1,7 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="RadioButton" [importCode]="importCode">
-    <p class="doc-description">
-      Accessible radio button that implements <code>ControlValueAccessor</code> — works with
-      <code>ngModel</code> and reactive forms. Supports arrow-key group navigation,
-      three design variants, three sizes, and a filled appearance.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-radio-button name="hero" value="a" label="Option A" />
-      <ui-lib-radio-button name="hero" value="b" label="Option B" />
-      <ui-lib-radio-button name="hero" value="c" label="Option C" />
-    </div>
+  <app-doc-page-header docHeader title="RadioButton" [importCode]="importCode"
+    description="Accessible radio button that implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports arrow-key group navigation, three design variants, three sizes, and a filled appearance.">
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
@@ -226,132 +217,12 @@
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Visible label text. Content projection is an alternative.</td>
-          </tr>
-          <tr>
-            <td><code>inputId</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Forwarded to the native <code>&lt;input&gt;</code> id.</td>
-          </tr>
-          <tr>
-            <td><code>name</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Must be identical across all buttons in a group.</td>
-          </tr>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>unknown</code></td>
-            <td><code>null</code></td>
-            <td>The value this radio button represents in the group.</td>
-          </tr>
-          <tr>
-            <td><code>required</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Sets <code>aria-required</code> on the native input.</td>
-          </tr>
-          <tr>
-            <td><code>readonly</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Prevents value changes while remaining visible.</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Sets <code>aria-disabled</code> on the native input. Skipped during arrow-key navigation.</td>
-          </tr>
-          <tr>
-            <td><code>tabindex</code></td>
-            <td><code>number</code></td>
-            <td><code>0</code></td>
-            <td>Applied when the radio is checked (roving tabindex pattern).</td>
-          </tr>
-          <tr>
-            <td><code>autofocus</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Focuses this radio after first render.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabel</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Used when no visible label is provided.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabelledby</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Explicit override; takes precedence over the auto-generated label id.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Component density.</td>
-          </tr>
-          <tr>
-            <td><code>appearance</code></td>
-            <td><code>'outlined' | 'filled'</code></td>
-            <td><code>'outlined'</code></td>
-            <td>Visual style — <code>filled</code> uses a solid checked background.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Payload</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>(change)</code></td>
-            <td><code>RadioButtonChangeEvent</code></td>
-            <td>Fires when this button is selected. Payload: <code>&#123; value, originalEvent &#125;</code>.</td>
-          </tr>
-          <tr>
-            <td><code>(focus)</code></td>
-            <td><code>FocusEvent</code></td>
-            <td>Emitted when the radio receives focus.</td>
-          </tr>
-          <tr>
-            <td><code>(blur)</code></td>
-            <td><code>FocusEvent</code></td>
-            <td>Emitted when the radio loses focus.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
   </section>

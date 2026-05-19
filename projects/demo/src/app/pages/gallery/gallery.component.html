@@ -411,64 +411,13 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-sub-title">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>value</td><td>unknown[]</td><td>[]</td><td>Array of data items to display.</td></tr>
-        <tr><td>activeIndex</td><td>number (model)</td><td>0</td><td>Active item index — two-way bindable.</td></tr>
-        <tr><td>visible</td><td>boolean (model)</td><td>false</td><td>Fullscreen overlay open state — two-way bindable.</td></tr>
-        <tr><td>numVisible</td><td>number</td><td>3</td><td>Number of thumbnails visible in the strip.</td></tr>
-        <tr><td>numScroll</td><td>number</td><td>1</td><td>Thumbnails scrolled per navigator click.</td></tr>
-        <tr><td>thumbnailsPosition</td><td>'bottom' | 'top' | 'left' | 'right'</td><td>'bottom'</td><td>Position of the thumbnail strip.</td></tr>
-        <tr><td>indicatorsPosition</td><td>'bottom' | 'top' | 'left' | 'right'</td><td>'bottom'</td><td>Position of the indicator dots.</td></tr>
-        <tr><td>showThumbnails</td><td>boolean</td><td>true</td><td>Render the thumbnail strip.</td></tr>
-        <tr><td>showIndicators</td><td>boolean</td><td>false</td><td>Render dot indicators.</td></tr>
-        <tr><td>showIndicatorsOnItem</td><td>boolean</td><td>false</td><td>Overlay dot indicators on the active item.</td></tr>
-        <tr><td>showItemNavigators</td><td>boolean</td><td>true</td><td>Always show prev/next arrows on the item.</td></tr>
-        <tr><td>showItemNavigatorsOnHover</td><td>boolean</td><td>false</td><td>Show prev/next arrows only on hover.</td></tr>
-        <tr><td>showThumbnailNavigators</td><td>boolean</td><td>true</td><td>Show scroll arrows on the thumbnail strip.</td></tr>
-        <tr><td>circular</td><td>boolean</td><td>false</td><td>Wrap navigation around the item list.</td></tr>
-        <tr><td>autoPlay</td><td>boolean</td><td>false</td><td>Automatically advance to the next item.</td></tr>
-        <tr><td>transitionInterval</td><td>number</td><td>4000</td><td>Autoplay interval in milliseconds.</td></tr>
-        <tr><td>fullScreen</td><td>boolean</td><td>false</td><td>Enable the fullscreen toggle button.</td></tr>
-        <tr><td>variant</td><td>'material' | 'bootstrap' | 'minimal' | null</td><td>null</td><td>Design variant; inherits theme default when null.</td></tr>
-        <tr><td>size</td><td>'sm' | 'md' | 'lg'</td><td>'md'</td><td>Controls thumbnail size token.</td></tr>
-        <tr><td>styleClass</td><td>string | null</td><td>null</td><td>Extra CSS class applied to the host.</td></tr>
-        <tr><td>containerStyle</td><td>Record&lt;string, string&gt; | null</td><td>null</td><td>Inline styles for the gallery container.</td></tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-sub-title">Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Payload</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>activeIndexChange</td><td>number</td><td>Emitted when the active index changes.</td></tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-sub-title">Template Slots (ng-template)</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Reference</th><th>Context</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>#galleriaItem</td><td>let-item ($implicit)</td><td>Renders the main active item.</td></tr>
-        <tr><td>#galleriaThumbnail</td><td>let-item ($implicit)</td><td>Renders each thumbnail.</td></tr>
-        <tr><td>#galleriaCaption</td><td>let-item ($implicit)</td><td>Caption overlay on the active item.</td></tr>
-        <tr><td>#galleriaHeader</td><td>—</td><td>Content rendered above the gallery.</td></tr>
-        <tr><td>#galleriaFooter</td><td>—</td><td>Content rendered below the gallery.</td></tr>
-        <tr><td>#galleriaIndicator</td><td>let-index, let-active="active"</td><td>Custom indicator button content.</td></tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

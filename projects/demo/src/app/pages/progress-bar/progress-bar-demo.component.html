@@ -1,13 +1,7 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="ProgressBar" [importCode]="importCode">
-    <p class="doc-description">
-      A horizontal bar that visualises a completion percentage or signals an ongoing
-      operation with a smooth animation.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-progress-bar [value]="basicValue()" />
-    </div>
+  <app-doc-page-header docHeader title="ProgressBar" [importCode]="importCode"
+    description="A horizontal bar that visualises a completion percentage or signals an ongoing operation with a smooth animation.">
   </app-doc-page-header>
 
   <!-- ---- Basic -------------------------------------------------------- -->
@@ -176,66 +170,7 @@
   <!-- ---- API table ---------------------------------------------------- -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>value</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Progress value from 0 to 100 (clamped automatically).</td>
-        </tr>
-        <tr>
-          <td><code>mode</code></td>
-          <td><code>'determinate' | 'indeterminate'</code></td>
-          <td><code>'determinate'</code></td>
-          <td>Display mode.</td>
-        </tr>
-        <tr>
-          <td><code>showValue</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Whether to show the percentage label inside the fill.</td>
-        </tr>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Custom label; overrides the computed percentage string.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Bar height size token.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>color</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Custom fill colour; overrides the CSS variable.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes added to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

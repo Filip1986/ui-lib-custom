@@ -1,12 +1,7 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Skeleton" [importCode]="importCode">
-    <p class="doc-description">
-      Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-skeleton width="100%" height="2rem" />
-    </div>
+  <app-doc-page-header docHeader title="Skeleton" [importCode]="importCode"
+    description="Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.">
   </app-doc-page-header>
 
   <!-- Basic shapes -->
@@ -140,68 +135,7 @@
   <!-- API Table -->
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
-    <div class="api-table-wrapper">
-      <table class="api-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>shape</code></td>
-            <td><code>'rectangle' | 'circle'</code></td>
-            <td><code>'rectangle'</code></td>
-            <td>Shape of the placeholder.</td>
-          </tr>
-          <tr>
-            <td><code>width</code></td>
-            <td><code>string</code></td>
-            <td><code>'100%'</code></td>
-            <td>CSS width value. Overridden by <code>size</code>.</td>
-          </tr>
-          <tr>
-            <td><code>height</code></td>
-            <td><code>string</code></td>
-            <td><code>'1rem'</code></td>
-            <td>CSS height value. Overridden by <code>size</code>.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Sets both width and height. Useful for circles.</td>
-          </tr>
-          <tr>
-            <td><code>borderRadius</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Custom border-radius, overrides shape default.</td>
-          </tr>
-          <tr>
-            <td><code>animation</code></td>
-            <td><code>'wave' | 'none'</code></td>
-            <td><code>'wave'</code></td>
-            <td>Shimmer animation type.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Falls back to ThemeConfigService.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes on the host element.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

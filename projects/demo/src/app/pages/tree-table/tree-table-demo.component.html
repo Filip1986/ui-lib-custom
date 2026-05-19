@@ -5,25 +5,6 @@
       Hierarchical data displayed as an expandable table. Supports sorting, global filter,
       single / multiple / checkbox selection, custom cell templates, and all three design variants.
     </p>
-    <div class="demo-page-header__preview">
-      <!-- Variant switcher -->
-      <div class="demo-controls">
-        <div class="demo-control-group">
-          <span class="demo-control-label">Variant</span>
-          <div class="demo-button-group">
-            @for (v of ['material', 'bootstrap', 'minimal']; track v) {
-              <ui-lib-button
-                type="button"
-                [appearance]="activeVariant() === v ? 'solid' : 'outline'"
-                severity="primary"
-                size="sm"
-                (click)="setVariant($any(v))"
-              >{{ v }}</ui-lib-button>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
   </app-doc-page-header>
 
   <!-- ═══════════════════════════════════════════════════════════════════════
@@ -277,6 +258,16 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </section>
 
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API Reference</h2>
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-tree-table</code>. Import from
+      <code>ui-lib-custom/tree-table</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

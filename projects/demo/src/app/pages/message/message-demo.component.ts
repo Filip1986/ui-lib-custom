@@ -9,6 +9,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Message component.
@@ -23,6 +25,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageHeaderComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
@@ -65,6 +68,53 @@ export class MessageDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warn' | 'error' | 'secondary' | 'contrast'",
+      default: "'info'",
+      description: 'Severity level that controls the icon and colour.',
+    },
+    {
+      name: 'text',
+      type: 'string',
+      default: "''",
+      description: 'Message text. Use content projection for rich markup.',
+    },
+    {
+      name: 'detail',
+      type: 'string | null',
+      default: 'null',
+      description: 'Secondary detail text rendered below the main message.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom severity icon override.',
+    },
+    { name: 'closable', type: 'boolean', default: 'false', description: 'Shows a close button.' },
+    {
+      name: 'life',
+      type: 'number',
+      default: '0',
+      description: 'Auto-dismiss delay in milliseconds. 0 disables auto-dismiss.',
+    },
+    {
+      name: 'sticky',
+      type: 'boolean',
+      default: 'false',
+      description: 'Keeps the message visible even if life is set.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Message size.' },
+  ];
 
   public readonly severities: MessageSeverity[] = [
     'success',
@@ -117,4 +167,57 @@ export class MessageDemoComponent {
   public isSeverityClosed(severity: MessageSeverity): boolean {
     return this.closedSeverities().has(severity);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'severity',
+      type: "'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast'",
+      default: "'info'",
+      description: 'Controls the colour palette and default icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. When null, inherits the ThemeConfigService variant.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size of the message.',
+    },
+    {
+      name: 'text',
+      type: 'string | null',
+      default: 'null',
+      description: 'Optional text content. Can be combined with content projection.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom icon name to override the severity-driven icon.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a close button when true.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class(es) appended to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'close',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted when the close button is clicked.',
+    },
+  ];
 }

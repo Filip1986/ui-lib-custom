@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Stepper component.
@@ -28,6 +30,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './stepper-demo.component.html',
   styleUrl: './stepper-demo.component.scss',
@@ -65,11 +68,51 @@ export class StepperDemoComponent {
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'number | string | null',
+      default: 'null',
+      description: 'Active step value (two-way via [(value)]).',
+    },
+    {
+      name: 'activeStep',
+      type: 'number',
+      default: '0',
+      description: 'Zero-based active step index.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Stepper layout direction.',
+    },
+    {
+      name: 'linear',
+      type: 'boolean',
+      default: 'false',
+      description: 'Forces sequential navigation.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Steps'",
+      description: 'Accessible label for the step navigation.',
+    },
+  ];
 
   // Basic example
   public readonly basicStep: WritableSignal<number> = signal<number>(0);
@@ -121,5 +164,93 @@ export class StepperDemoComponent {
     },
     { key: 'Tab / Shift+Tab', action: 'Move focus between elements within the active step panel.' },
     { key: 'Home / End', action: 'Move focus to the first or last step header.' },
+  ];
+
+  public readonly apiStepperInputRows: ApiPropRow[] = [
+    {
+      name: 'activeStep',
+      type: 'number',
+      default: '0',
+      description:
+        'Active step index (0-based). Supports two-way binding with <code>[(activeStep)]</code>.',
+    },
+    {
+      name: 'linear',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, users must progress through steps sequentially.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Layout orientation of the stepper.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes to apply to the host element.',
+    },
+  ];
+
+  public readonly apiStepperOutputRows: ApiPropRow[] = [
+    {
+      name: 'stepChange',
+      type: 'StepChangeEvent',
+      description:
+        'Emitted after the active step changes. Contains <code>activeStep</code> and <code>previousStep</code>.',
+    },
+  ];
+
+  public readonly apiStepperMethodRows: ApiPropRow[] = [
+    { name: 'nextStep()', type: '', description: 'Advances to the next step if one exists.' },
+    { name: 'prevStep()', type: '', description: 'Returns to the previous step if one exists.' },
+    {
+      name: 'goToStep(index)',
+      type: '',
+      description: 'Navigates directly to the given step index.',
+    },
+    { name: 'isFirstStep()', type: '', description: 'Returns true when on the first step.' },
+    { name: 'isLastStep()', type: '', description: 'Returns true when on the last step.' },
+  ];
+
+  public readonly apiStepperPanelInputRows: ApiPropRow[] = [
+    {
+      name: 'header',
+      type: 'string',
+      default: "''",
+      description: 'Text label shown in the step header.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents navigation to this step.',
+    },
+  ];
+
+  public readonly apiStepperPanelSlotRows: ApiPropRow[] = [
+    {
+      name: '#stepperContent',
+      type: '',
+      description: "Main body rendered in the active step's content area.",
+    },
+    {
+      name: '#stepperFooter',
+      type: '',
+      description: 'Footer area — typically holds navigation buttons.',
+    },
+    {
+      name: '#stepperHeader',
+      type: '',
+      description: 'Custom HTML for the step header label (overrides <code>header</code> input).',
+    },
   ];
 }

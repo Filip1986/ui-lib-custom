@@ -18,6 +18,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Dock component.
@@ -34,6 +36,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
@@ -86,6 +89,40 @@ export class DockDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'DockItem[]', default: '[]', description: 'Array of dock items.' },
+    {
+      name: 'position',
+      type: "'bottom' | 'top' | 'left' | 'right'",
+      default: "'bottom'",
+      description: 'Position of the dock on screen.',
+    },
+    {
+      name: 'magnification',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables zoom magnification on hover.',
+    },
+    {
+      name: 'magnificationScale',
+      type: 'number',
+      default: '1.5',
+      description: 'Scale multiplier applied to hovered items.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Dock'",
+      description: 'Accessible label for the dock navigation.',
+    },
+  ];
 
   // ── Controls ──────────────────────────────────────────────────────────────
 
@@ -252,6 +289,100 @@ export class DockDemoComponent {
     {
       key: 'Tab / Shift+Tab',
       action: 'Move focus into or out of the dock in the standard tab order.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'items',
+      type: 'DockItem[]',
+      default: '[]',
+      description: 'Array of items to display in the dock.',
+    },
+    {
+      name: 'position',
+      type: "'bottom' | 'top' | 'left' | 'right'",
+      default: "'bottom'",
+      description: 'Edge of the container where the dock is anchored.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design-system variant. Falls back to ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Controls item and icon dimensions via design tokens.',
+    },
+    {
+      name: 'magnification',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether the hover magnification effect is enabled.',
+    },
+    {
+      name: 'magnificationLevel',
+      type: 'number',
+      default: '1.5',
+      description:
+        'Maximum scale factor applied to the directly hovered item. Values 1.2–2.5 work well.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'DockItemCommandEvent',
+      description: 'Emitted when any enabled item is clicked or activated via keyboard.',
+    },
+  ];
+
+  public readonly apiDockItemRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      description: 'Accessible label and tooltip text shown on hover.',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      description: "Icon class(es) applied to the icon element (e.g. 'pi pi-home').",
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'When true, the item is non-interactive and styled as disabled.',
+    },
+    {
+      name: 'visible',
+      type: 'boolean',
+      description: 'When explicitly false, the item is excluded from the rendered list.',
+    },
+    {
+      name: 'command',
+      type: '(event: DockItemCommandEvent) => void',
+      description: 'Callback invoked when the item is activated. Renders as a button.',
+    },
+    { name: 'url', type: 'string', description: 'External URL. Renders as an <a href> element.' },
+    {
+      name: 'routerLink',
+      type: 'string | string[]',
+      description: 'Angular Router link. Renders as a [routerLink] anchor.',
+    },
+    { name: 'target', type: 'string', description: "Anchor target attribute (e.g. '_blank')." },
+    {
+      name: 'styleClass',
+      type: 'string',
+      description: 'Extra CSS class added to the item list element.',
     },
   ];
 }

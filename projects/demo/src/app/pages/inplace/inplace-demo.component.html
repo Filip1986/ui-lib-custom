@@ -156,97 +156,13 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-table__heading">Inputs</h3>
-    <table class="demo-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>active</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Two-way bindable; controls whether the editor is shown.</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Prevents activation when set to true.</td>
-        </tr>
-        <tr>
-          <td><code>closable</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Renders a close button inside the content slot.</td>
-        </tr>
-        <tr>
-          <td><code>closeIcon</code></td>
-          <td><code>string</code></td>
-          <td><code>'pi pi-times'</code></td>
-          <td>CSS class for the close button icon.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Visual variant; falls back to global ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes added to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-table__heading">Outputs</h3>
-    <table class="demo-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>(activated)</code></td>
-          <td><code>void</code></td>
-          <td>Emitted when the component transitions to the active (editing) state.</td>
-        </tr>
-        <tr>
-          <td><code>(deactivated)</code></td>
-          <td><code>void</code></td>
-          <td>Emitted when the component transitions back to the display (inactive) state.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-table__heading">Content Projection</h3>
-    <table class="demo-table">
-      <thead>
-        <tr>
-          <th>Slot selector</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>[inplaceDisplay]</code></td>
-          <td>Shown when the component is inactive. Click activates the editor.</td>
-        </tr>
-        <tr>
-          <td><code>[inplaceContent]</code></td>
-          <td>Shown when the component is active. Any element or component can be projected here.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
   </section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->

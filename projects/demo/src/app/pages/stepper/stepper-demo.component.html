@@ -480,149 +480,16 @@
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-api-subtitle">Stepper — <code>ui-lib-stepper</code></h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>activeStep</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Active step index (0-based). Supports two-way binding with <code>[(activeStep)]</code>.</td>
-        </tr>
-        <tr>
-          <td><code>linear</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, users must progress through steps sequentially.</td>
-        </tr>
-        <tr>
-          <td><code>orientation</code></td>
-          <td><code>'horizontal' | 'vertical'</code></td>
-          <td><code>'horizontal'</code></td>
-          <td>Layout orientation of the stepper.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes to apply to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiStepperInputRows" />
 
-    <table class="demo-api-table demo-api-table--mt">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Payload</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>stepChange</code></td>
-          <td><code>StepChangeEvent</code></td>
-          <td>Emitted after the active step changes. Contains <code>activeStep</code> and <code>previousStep</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="output" [rows]="apiStepperOutputRows" [showDefault]="false" />
 
-    <table class="demo-api-table demo-api-table--mt">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>nextStep()</code></td>
-          <td>Advances to the next step if one exists.</td>
-        </tr>
-        <tr>
-          <td><code>prevStep()</code></td>
-          <td>Returns to the previous step if one exists.</td>
-        </tr>
-        <tr>
-          <td><code>goToStep(index)</code></td>
-          <td>Navigates directly to the given step index.</td>
-        </tr>
-        <tr>
-          <td><code>isFirstStep()</code></td>
-          <td>Returns true when on the first step.</td>
-        </tr>
-        <tr>
-          <td><code>isLastStep()</code></td>
-          <td>Returns true when on the last step.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="property" [rows]="apiStepperMethodRows" [showDefault]="false" />
 
     <h3 class="demo-api-subtitle demo-api-subtitle--mt">StepperPanel — <code>ui-lib-stepper-panel</code></h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>header</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>Text label shown in the step header.</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Prevents navigation to this step.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiStepperPanelInputRows" />
 
-    <table class="demo-api-table demo-api-table--mt">
-      <thead>
-        <tr>
-          <th>Content Slot</th>
-          <th>Template Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Step content</td>
-          <td><code>#stepperContent</code></td>
-          <td>Main body rendered in the active step's content area.</td>
-        </tr>
-        <tr>
-          <td>Step footer</td>
-          <td><code>#stepperFooter</code></td>
-          <td>Footer area — typically holds navigation buttons.</td>
-        </tr>
-        <tr>
-          <td>Custom header</td>
-          <td><code>#stepperHeader</code></td>
-          <td>Custom HTML for the step header label (overrides <code>header</code> input).</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="name" [rows]="apiStepperPanelSlotRows" [showDefault]="false" />
   </section>
 
   <section class="demo-section" id="keyboard-navigation" data-doc-anchor>

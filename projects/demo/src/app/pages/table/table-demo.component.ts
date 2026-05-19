@@ -17,6 +17,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 interface Product {
   id: number;
@@ -45,6 +47,7 @@ interface Product {
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -79,11 +82,101 @@ export class TableDemoComponent {
     { id: 'interactive-demo', label: 'Interactive Demo' },
     { id: 'all-variants', label: 'All Variants' },
     { id: 'scrollable-table', label: 'Scrollable Table' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'unknown[]', default: '[]', description: 'Data array to display.' },
+    {
+      name: 'dataKey',
+      type: 'string | null',
+      default: 'null',
+      description: 'Property for unique row identity.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Table size.' },
+    {
+      name: 'selectionMode',
+      type: "'single' | 'multiple' | null",
+      default: 'null',
+      description: 'Row selection mode.',
+    },
+    {
+      name: 'metaKeySelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Requires Meta/Ctrl for multiple selection.',
+    },
+    {
+      name: 'paginator',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables built-in pagination.',
+    },
+    {
+      name: 'rowsPerPageOptions',
+      type: 'number[]',
+      default: '[10, 25, 50]',
+      description: 'Options for the rows-per-page selector.',
+    },
+    {
+      name: 'multiSortMode',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allows sorting by multiple columns.',
+    },
+    {
+      name: 'globalFilterFields',
+      type: 'string[] | null',
+      default: 'null',
+      description: 'Fields to search in the global filter.',
+    },
+    {
+      name: 'globalFilterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Global filter input placeholder.',
+    },
+    {
+      name: 'stripedRows',
+      type: 'boolean',
+      default: 'false',
+      description: 'Alternates row background colors.',
+    },
+    {
+      name: 'rowHover',
+      type: 'boolean',
+      default: 'false',
+      description: 'Highlights rows on hover.',
+    },
+    {
+      name: 'showGridlines',
+      type: 'boolean',
+      default: 'false',
+      description: 'Displays column gridlines.',
+    },
+    {
+      name: 'scrollable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables vertical scrolling with a fixed header.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS height of the scroll viewport.',
+    },
+  ];
 
   public readonly products: WritableSignal<Product[]> = signal<Product[]>([
     {

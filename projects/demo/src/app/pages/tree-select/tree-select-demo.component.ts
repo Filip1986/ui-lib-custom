@@ -8,6 +8,8 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
@@ -84,6 +86,7 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './tree-select-demo.component.html',
   styleUrl: './tree-select-demo.component.scss',
@@ -115,6 +118,48 @@ export class TreeSelectDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'nodes',
+      type: 'TreeNode[]',
+      default: '[]',
+      description: 'Root nodes of the selection tree.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    { name: 'placeholder', type: 'string', default: "'Select'", description: 'Placeholder text.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    { name: 'loading', type: 'boolean', default: 'false', description: 'Shows a loading state.' },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Enables an inline filter.' },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Filter input placeholder.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    { name: 'invalid', type: 'boolean', default: 'false', description: 'Marks as invalid.' },
+    { name: 'required', type: 'boolean', default: 'false', description: 'Marks as required.' },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'No results'",
+      description: 'Message shown when there are no nodes.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label.',
+    },
+  ];
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple Selection' },
@@ -128,6 +173,7 @@ export class TreeSelectDemoComponent {
     { id: 'ngModel', label: 'ngModel' },
     { id: 'reactive', label: 'Reactive Forms' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly nodes: TreeNode[] = SAMPLE_TREE_NODES;

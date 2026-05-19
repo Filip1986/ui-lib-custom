@@ -10,32 +10,8 @@
   }
 }
 
-.doc-header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--uilib-page-fg, #0f172a);
-    margin: 0 0 0.5rem;
-  }
-
-  .doc-description {
-    font-size: 1rem;
-    color: var(--uilib-muted, #6b7280);
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  .doc-lead {
-    font-size: 1rem;
-    color: var(--uilib-muted, #6b7280);
-    line-height: 1.7;
-    margin: 0;
-  }
-}
+// .doc-header styles live in doc-page-header.component.scss (component-scoped).
+// Page-level overrides can be added here if a specific page needs to customise the header.
 
 .doc-demo {
   background: #f8f9fa;
@@ -390,12 +366,6 @@
 
 // Responsive
 @media (max-width: 768px) {
-  .doc-header {
-    h1 {
-      font-size: 2rem;
-    }
-  }
-
   .doc-demo {
     padding: 1.5rem;
   }
@@ -609,30 +579,9 @@
 }
 
 // ---- TOC rail ------------------------------------------------------------
-
-.demo-page-rail {
-  position: sticky;
-  top: 96px;
-  align-self: start;
-  padding: 1rem;
-  background: var(--uilib-surface-0, #fff);
-  border: 1px solid var(--uilib-surface-200, #e5e7eb);
-  border-radius: 0.5rem;
-
-  &__title {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--uilib-muted, #6b7280);
-    margin: 0 0 0.75rem;
-    padding: 0 0.625rem;
-  }
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
-}
+// Rail styles are owned by doc-page-layout.component.scss via ::ng-deep.
+// No per-page import needed — all pages using app-doc-page-layout get
+// the correct rail appearance automatically.
 
 // ==========================================================================
 // Shared demo-page styles

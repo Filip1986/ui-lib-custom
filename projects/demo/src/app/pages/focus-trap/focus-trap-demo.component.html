@@ -1,20 +1,19 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="FocusTrap" [importCode]="importCode">
-    <p class="doc-description">
-      A directive that constrains keyboard focus within a container element.
-      Tab and Shift+Tab cycle only among the focusable descendants of the host,
-      preventing focus from escaping — essential for accessible modals, dialogs,
-      and side panels.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="ft-hero__tags">
-        <span class="ft-tag">Directive</span>
-        <span class="ft-tag">Misc</span>
-        <span class="ft-tag">A11y</span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="FocusTrap"
+    [importCode]="importCode"
+    description="A directive that constrains keyboard focus within a container element. Tab and Shift+Tab cycle only among the focusable descendants of the host, preventing focus from escaping — essential for accessible modals, dialogs, and side panels."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="ft-hero__tags">
+      <span class="ft-tag">Directive</span>
+      <span class="ft-tag">Misc</span>
+      <span class="ft-tag">A11y</span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Basic usage ── -->
   <section class="demo-section" id="basic-usage" data-doc-anchor>
@@ -138,47 +137,10 @@
     />
 
     <h3 class="ft-sub-title">Inputs</h3>
-    <table class="ft-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>uiLibFocusTrap</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>
-            When <code>true</code>, keyboard focus is trapped within the host
-            element. Set to <code>false</code> to release the trap at runtime.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
 
     <h3 class="ft-sub-title">Keyboard behavior</h3>
-    <table class="ft-table">
-      <thead>
-        <tr>
-          <th>Key</th>
-          <th>Behavior</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>Tab</code></td>
-          <td>Move focus to the next focusable descendant; wraps to first from last.</td>
-        </tr>
-        <tr>
-          <td><code>Shift + Tab</code></td>
-          <td>Move focus to the previous focusable descendant; wraps to last from first.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
 
     <h3 class="ft-sub-title">Accessible elements included</h3>
     <p class="ft-section__desc">

@@ -5,13 +5,6 @@
       or focus, supports four positions, show/hide delays, three design variants, and auto-flip when
       space is limited.
     </p>
-    <div class="demo-page-header__preview">
-      <div class="tooltip-hero__tags">
-        <span class="tooltip-tag">Directive</span>
-        <span class="tooltip-tag">Overlay</span>
-        <span class="tooltip-tag">A11y</span>
-      </div>
-    </div>
   </app-doc-page-header>
 
   <!-- Section 1: Basic -->
@@ -188,60 +181,7 @@
   <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
     <h3 class="demo-section__subtitle">Selector: <code>[uiLibTooltip]</code></h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>uiLibTooltip</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>The tooltip label text.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipPosition</code></td>
-          <td><code>'top' | 'bottom' | 'left' | 'right'</code></td>
-          <td><code>'top'</code></td>
-          <td>Preferred position. Flips automatically when space is lacking.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipEvent</code></td>
-          <td><code>'hover' | 'focus' | 'both'</code></td>
-          <td><code>'hover'</code></td>
-          <td>Which host events trigger the tooltip.</td>
-        </tr>
-        <tr>
-          <td><code>showDelay</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Milliseconds to wait before showing.</td>
-        </tr>
-        <tr>
-          <td><code>hideDelay</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Milliseconds to wait before hiding.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipDisabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Prevent the tooltip from showing.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipVariant</code></td>
-          <td><code>TooltipVariant | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to <code>ThemeConfigService</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

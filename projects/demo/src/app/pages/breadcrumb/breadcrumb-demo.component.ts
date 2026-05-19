@@ -8,6 +8,8 @@ import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Breadcrumb component.
@@ -21,6 +23,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocPageLayoutComponent,
     DocTocComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './breadcrumb-demo.component.html',
   styleUrl: './breadcrumb-demo.component.scss',
@@ -157,6 +160,101 @@ export class BreadcrumbDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'MenuItem[]', default: '[]', description: 'Array of breadcrumb items.' },
+    {
+      name: 'home',
+      type: 'MenuItem | null',
+      default: 'null',
+      description: 'Home item placed at the start of the breadcrumb.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Breadcrumb size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Breadcrumb'",
+      description: 'Accessible label for the nav landmark.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'items',
+      type: 'BreadcrumbItem[]',
+      default: '[]',
+      description: 'The navigation items to display.',
+    },
+    {
+      name: 'home',
+      type: 'BreadcrumbItem | null',
+      default: 'null',
+      description: 'Optional home item prepended before items.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design-system variant; falls back to ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling font size and spacing.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to host.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Breadcrumb'",
+      description: 'Accessible label for the <nav> landmark.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'BreadcrumbItemClickEvent',
+      description: 'Emitted when any breadcrumb item is clicked or activated via keyboard.',
+    },
+  ];
+
+  public readonly apiBreadcrumbItemRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string?', description: 'Display text for the item.' },
+    { name: 'url', type: 'string?', description: 'External href URL.' },
+    {
+      name: 'routerLink',
+      type: 'string | string[]',
+      description: 'Angular RouterLink for in-app navigation.',
+    },
+    { name: 'icon', type: 'string?', description: 'Icon class name rendered before the label.' },
+    { name: 'target', type: 'string?', description: 'Anchor target (e.g. _blank).' },
+    { name: 'disabled', type: 'boolean?', description: 'When true, the item is non-interactive.' },
+    { name: 'styleClass', type: 'string?', description: 'Extra CSS class on the item.' },
+    {
+      name: 'command',
+      type: '(event: BreadcrumbItemClickEvent) => void',
+      description: 'Callback invoked when the item is activated.',
+    },
+  ];
 
   public onItemClick(event: BreadcrumbItemClickEvent): void {
     this.logEvent(`itemClick: ${event.item.label ?? 'unknown'}`);

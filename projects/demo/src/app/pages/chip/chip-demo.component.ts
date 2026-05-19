@@ -15,6 +15,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the Chip component.
@@ -33,6 +35,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
@@ -308,6 +311,50 @@ export class MyComponent {}`,
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Chip label text.' },
+    { name: 'icon', type: 'string | null', default: 'null', description: 'Leading icon name.' },
+    { name: 'removable', type: 'boolean', default: 'false', description: 'Shows a remove button.' },
+    {
+      name: 'removeIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom remove icon name.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL for an avatar image inside the chip.',
+    },
+    { name: 'imageAlt', type: 'string', default: "''", description: 'Alt text for the image.' },
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warning' | 'danger' | 'secondary' | null",
+      default: 'null',
+      description: 'Severity colour.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a fully rounded pill shape.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Chip size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Space / Enter',
@@ -323,6 +370,87 @@ export class MyComponent {}`,
       key: 'Space / Enter',
       target: 'Remove button',
       action: 'Activates the remove button (native button behaviour).',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text displayed inside the chip.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description:
+        'CSS class for a leading icon (e.g. "pi pi-user"). Ignored when image is also set.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL of a circular thumbnail image rendered at the start of the chip.',
+    },
+    {
+      name: 'imageAlt',
+      type: 'string',
+      default: "'Chip'",
+      description:
+        'Alt text for the chip image. Provide a meaningful description for real user images.',
+    },
+    {
+      name: 'removable',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, a close button is rendered. Emits (removed) on click.',
+    },
+    {
+      name: 'removeIcon',
+      type: 'string',
+      default: "'pi pi-times'",
+      description: 'CSS class for the remove button icon.',
+    },
+    {
+      name: 'selectable',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'When true, the chip is keyboard-focusable and toggleable. Pair with [selected] and (selectedChange).',
+    },
+    {
+      name: 'selected',
+      type: 'boolean',
+      default: 'false',
+      description: 'Selected state for selectable chips.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the chip.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes applied to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(removed)',
+      type: 'OutputEmitterRef<MouseEvent>',
+      description:
+        'Emitted when the remove button is clicked. The chip does not auto-hide — manage visibility in the parent.',
+    },
+    {
+      name: '(selectedChange)',
+      type: 'OutputEmitterRef<boolean>',
+      description: 'Emitted when a selectable chip is toggled; provides the new selected value.',
     },
   ];
 }

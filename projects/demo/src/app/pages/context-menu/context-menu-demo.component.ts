@@ -10,6 +10,8 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the ContextMenu component.
@@ -24,6 +26,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     DocTocComponent,
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './context-menu-demo.component.html',
   styleUrl: './context-menu-demo.component.scss',
@@ -73,6 +76,47 @@ export class ContextMenuDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'MenuItem[]', default: '[]', description: 'Array of menu items.' },
+    {
+      name: 'global',
+      type: 'boolean',
+      default: 'false',
+      description: 'Listens for the contextmenu event on the whole document.',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | HTMLElement | string",
+      default: "'body'",
+      description: 'Target element for portal rendering.',
+    },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index when autoZIndex is enabled.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Menu item size.' },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Context menu'",
+      description: 'Accessible label for the menu.',
+    },
+  ];
 
   // ── Basic ──────────────────────────────────────────────────────────────────
 
@@ -213,4 +257,96 @@ export class ContextMenuDemoComponent {
   private logEvent(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 6));
   }
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'ContextMenuItem[]',
+      default: '[]',
+      description: 'Array of menu items to display.',
+    },
+    {
+      name: 'global',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'When true, listens to <code>contextmenu</code> events on the entire document automatically.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design-system variant; falls back to ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Controls font size and item padding.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Context Menu'",
+      description: 'Accessible label applied to the menu panel (<code>aria-label</code>).',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'ContextMenuItemCommandEvent',
+      description: 'Emitted when a non-disabled leaf item is activated.',
+    },
+    { name: 'menuShow', type: 'MouseEvent', description: 'Emitted when the menu becomes visible.' },
+    { name: 'menuHide', type: 'void', description: 'Emitted when the menu is hidden.' },
+  ];
+
+  public readonly apiMethodRows: ApiPropRow[] = [
+    {
+      name: 'show',
+      type: '(event: MouseEvent): void',
+      description:
+        'Opens the menu at the cursor position. Calls <code>event.preventDefault()</code> to suppress the native context menu.',
+    },
+    { name: 'hide', type: '(): void', description: 'Hides the menu. No-op when already hidden.' },
+    {
+      name: 'toggle',
+      type: '(event: MouseEvent): void',
+      description: 'Toggles visibility at the cursor position.',
+    },
+  ];
+
+  public readonly apiContextMenuItemRows: ApiPropRow[] = [
+    { name: 'label', type: 'string?', description: 'Display text for the item.' },
+    { name: 'icon', type: 'string?', description: 'Icon class name rendered before the label.' },
+    { name: 'disabled', type: 'boolean?', description: 'When true, the item is non-interactive.' },
+    {
+      name: 'separator',
+      type: 'boolean?',
+      description: 'When true, renders a visual separator instead of a menu item.',
+    },
+    {
+      name: 'visible',
+      type: 'boolean?',
+      description: 'When explicitly false, the item is excluded from the rendered list.',
+    },
+    { name: 'styleClass', type: 'string?', description: 'Extra CSS class on the item element.' },
+    {
+      name: 'items',
+      type: 'ContextMenuItem[]?',
+      description: 'Nested items displayed as a submenu.',
+    },
+    {
+      name: 'command',
+      type: '(event: ContextMenuItemCommandEvent) => void',
+      description: 'Callback invoked when the item is activated.',
+    },
+  ];
 }
