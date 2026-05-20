@@ -40,6 +40,7 @@ export class HomeComponent {
   public readonly sections: DocSection[] = [
     { id: 'quick-links', label: 'Quick Links' },
     { id: 'features', label: 'Features' },
+    { id: 'pro-roadmap', label: 'Pro Roadmap' },
     { id: 'quick-preview', label: 'Quick Preview' },
     { id: 'theme-preview', label: 'Theme Preview' },
     { id: 'getting-started', label: 'Getting Started' },
