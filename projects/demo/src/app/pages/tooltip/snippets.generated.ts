@@ -25,10 +25,7 @@ import { Button } from 'ui-lib-custom/button';
   standalone: true,
   imports: [Tooltip, Button],
   template: \`
-    <ui-lib-button
-      uiLibTooltip="You will never see this"
-      [tooltipDisabled]="tooltipDisabled()"
-    >
+    <ui-lib-button uiLibTooltip="You will never see this" [tooltipDisabled]="tooltipDisabled()">
       {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
     </ui-lib-button>
     <ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
