@@ -94,14 +94,297 @@ export const routes: Routes = [
     component: ProjectStarterComponent,
     title: 'Project Starter - UI Components Library',
   },
+  { path: 'templates/starter-template', redirectTo: 'templates/app-shell', pathMatch: 'full' },
   {
-    path: 'templates/starter-template',
+    path: 'templates/app-shell',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/starter-template/starter-template.component').then(
-        (m: { StarterTemplateComponent: Type<unknown> }): Type<unknown> =>
-          m.StarterTemplateComponent
+      import('./pages/templates/app-shell/app-shell-template.component').then(
+        (m: { AppShellTemplateComponent: Type<unknown> }): Type<unknown> =>
+          m.AppShellTemplateComponent
       ),
-    title: 'Starter Template - UI Components Library',
+    title: 'App Shell Template - UI Components Library',
+  },
+  {
+    path: 'templates/auth-pages',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/templates/auth-pages/auth-pages-template.component').then(
+        (m: { AuthPagesTemplateComponent: Type<unknown> }): Type<unknown> =>
+          m.AuthPagesTemplateComponent
+      ),
+    title: 'Auth Pages Template - UI Components Library',
+  },
+  {
+    path: 'templates/settings-page',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/templates/settings-page/settings-page-template.component').then(
+        (m: { SettingsPageTemplateComponent: Type<unknown> }): Type<unknown> =>
+          m.SettingsPageTemplateComponent
+      ),
+    title: 'Settings Page Template - UI Components Library',
+  },
+  {
+    path: 'templates/error-pages',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/templates/error-pages/error-pages-template.component').then(
+        (m: { ErrorPagesTemplateComponent: Type<unknown> }): Type<unknown> =>
+          m.ErrorPagesTemplateComponent
+      ),
+    title: 'Error Pages Template - UI Components Library',
+  },
+  {
+    path: 'templates/team-profile',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/templates/team-profile/team-profile-template.component').then(
+        (m: { TeamProfileTemplateComponent: Type<unknown> }): Type<unknown> =>
+          m.TeamProfileTemplateComponent
+      ),
+    title: 'Team & Profile Template - UI Components Library',
+  },
+  // ── Pro Templates (coming soon) ───────────────────────────────────────────
+  {
+    path: 'templates/pro-admin-dashboard',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Admin Dashboard Template — Pro - UI Components Library',
+    data: {
+      componentName: 'Admin Dashboard Template',
+      tagline: 'A complete analytics & admin portal template for Angular teams.',
+      description:
+        'A multi-page admin dashboard template featuring a sidebar navigation shell, KPI stat cards, interactive charts (bar, line, pie), a data table with filtering, and a notification centre. Requires Analytics Pro and Advanced Data Grid.',
+      icon: 'pi-chart-pie',
+      tier: 'pro',
+      features: [
+        'Full multi-page admin shell (sidebar + topbar + breadcrumbs)',
+        'KPI stat cards with trend indicators',
+        'Interactive chart panel (bar, line, pie via Analytics Pro)',
+        'Data table with server-side filter & sort (via Data Grid)',
+        'Notification centre with real-time updates',
+        'Dark mode and brand theming out of the box',
+        'Role-based navigation (admin vs viewer)',
+        'Responsive down to tablet breakpoints',
+      ],
+      useCases: [
+        'SaaS admin portals',
+        'Business intelligence dashboards',
+        'Internal operations tools',
+        'Customer success platforms',
+        'E-commerce back-office',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'templates/pro-saas-shell',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'SaaS App Shell Template — Pro - UI Components Library',
+    data: {
+      componentName: 'SaaS App Shell Template',
+      tagline: 'The full application scaffolding every SaaS product needs.',
+      description:
+        'A production-ready SaaS shell with multi-tenant navigation, role-based menu visibility, onboarding wizard, plan upgrade gate, and a complete settings section. Wire in your auth service and launch.',
+      icon: 'pi-desktop',
+      tier: 'pro',
+      features: [
+        'Multi-tenant workspace switcher',
+        'Role-based menu visibility (admin/member/viewer)',
+        'Onboarding wizard with progress tracking',
+        'Plan upgrade gate with feature preview',
+        'Full settings section (profile, team, billing, API keys)',
+        'Global command palette (⌘K)',
+        'Announcement banner system',
+        'Mobile-responsive with drawer navigation',
+      ],
+      useCases: [
+        'B2B SaaS products',
+        'Developer tools & platforms',
+        'Project management tools',
+        'Analytics and reporting SaaS',
+        'Team collaboration apps',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'templates/pro-crm',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'CRM Interface Template — Pro - UI Components Library',
+    data: {
+      componentName: 'CRM Interface Template',
+      tagline: 'Contacts, pipeline, and activity — a full CRM shell for Angular.',
+      description:
+        'A multi-page CRM template with a contacts directory (searchable table), deal pipeline (kanban-style stages), company profiles, and an activity timeline. Powered by Advanced Data Grid and Workflow Builder.',
+      icon: 'pi-user-plus',
+      tier: 'pro',
+      features: [
+        'Contacts directory with advanced search & filters',
+        'Deal pipeline with drag-and-drop kanban stages',
+        'Company and contact detail pages',
+        'Activity timeline (calls, emails, meetings)',
+        'Task and follow-up management',
+        'Email template composer',
+        'CSV import / export',
+        'Customisable pipeline stages',
+      ],
+      useCases: [
+        'Sales CRM tools',
+        'Customer success platforms',
+        'Real estate management',
+        'Recruitment and HR tools',
+        'Partner relationship management',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'templates/pro-ecommerce',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'E-commerce Admin Template — Pro - UI Components Library',
+    data: {
+      componentName: 'E-commerce Admin Template',
+      tagline: 'Product catalog, orders, and inventory — your store back-office.',
+      description:
+        'A full e-commerce administration template: product catalog with bulk editing, order management with fulfilment workflow, inventory tracking, and revenue analytics. Built on Advanced Data Grid and Analytics Pro.',
+      icon: 'pi-shopping-cart',
+      tier: 'enterprise',
+      features: [
+        'Product catalog with image upload and variant management',
+        'Bulk editing via data grid (price, stock, status)',
+        'Order management with fulfilment status workflow',
+        'Inventory tracking with low-stock alerts',
+        'Revenue and sales analytics dashboard',
+        'Customer list with order history',
+        'Discount and coupon management',
+        'Shipping zone and carrier configuration',
+      ],
+      useCases: [
+        'E-commerce platforms',
+        'Retail and wholesale management',
+        'Marketplace admin portals',
+        'Subscription box services',
+        'B2B procurement portals',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'templates/pro-project-board',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Project Board Template — Pro - UI Components Library',
+    data: {
+      componentName: 'Project Board Template',
+      tagline: 'Kanban, backlog, sprints, and Gantt — all in one project template.',
+      description:
+        'A complete project management interface: kanban board with drag-and-drop cards, backlog with priority sorting, sprint planning, and a Gantt view for milestone timelines. Built on Workflow Builder and Gantt & Scheduler.',
+      icon: 'pi-list',
+      tier: 'pro',
+      features: [
+        'Kanban board with drag-and-drop card management',
+        'Backlog list with priority, label, and assignee filters',
+        'Sprint planning with velocity tracking',
+        'Gantt timeline for milestone and release planning',
+        'Task detail drawer (description, comments, attachments)',
+        'Team workload view',
+        'Time tracking per task',
+        'GitHub / GitLab integration hooks',
+      ],
+      useCases: [
+        'Software development teams',
+        'Product management',
+        'Agency project tracking',
+        'Design sprint management',
+        'Marketing campaign planning',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'templates/pro-landing-page',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Landing Page Kit Template — Pro - UI Components Library',
+    data: {
+      componentName: 'Landing Page Kit',
+      tagline: 'Hero, features, pricing, FAQ — every marketing section, ready to use.',
+      description:
+        'A composable landing page kit with 12+ pre-built sections: animated hero, feature grid, social proof, pricing table, FAQ accordion, and CTA banner. Mix and match sections to assemble any product marketing page.',
+      icon: 'pi-globe',
+      tier: 'pro',
+      features: [
+        'Animated hero section (particle or gradient variants)',
+        'Feature grid (icon cards, screenshot highlights)',
+        'Social proof (logos, testimonials, star ratings)',
+        'Pricing table with annual/monthly toggle',
+        'FAQ accordion section',
+        'CTA banner (newsletter, trial sign-up)',
+        'Footer with sitemap and social links',
+        'Cookie consent banner',
+      ],
+      useCases: [
+        'SaaS product landing pages',
+        'Developer tool marketing sites',
+        'Agency and portfolio pages',
+        'Product launch pages',
+        'Conference and event sites',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'templates/pro-ai-shell',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'AI App Shell Template — Pro - UI Components Library',
+    data: {
+      componentName: 'AI App Shell Template',
+      tagline: 'The complete shell for your AI-powered Angular application.',
+      description:
+        "A full application shell purpose-built for AI products: streaming chat interface, prompt history sidebar, model selector, token usage dashboard, and agent status tracker. Requires AI UI Kit. The Angular ecosystem's first AI app shell.",
+      icon: 'pi-comments',
+      tier: 'pro',
+      features: [
+        'Streaming chat interface (SSE / WebSocket)',
+        'Conversation history sidebar with search',
+        'Model selector and parameter controls',
+        'Token usage and cost dashboard',
+        'Agent workflow status panel',
+        'Prompt template library',
+        'File attachment and context management',
+        'Export conversation to PDF / Markdown',
+      ],
+      useCases: [
+        'AI assistant and chatbot products',
+        'Internal copilot tools',
+        'LLM-powered SaaS applications',
+        'Code review and dev tooling',
+        'Document analysis platforms',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
   },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
   { path: 'tabs', component: TabsComponent, title: 'Tabs - UI Components Library' },

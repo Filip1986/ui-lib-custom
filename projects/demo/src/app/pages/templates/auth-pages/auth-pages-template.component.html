@@ -1,0 +1,277 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Auth Pages Template"
+    description="Production-ready Login, Register, and Forgot Password screens built with ui-lib-custom components. Drop them into any Angular app in minutes."
+    [tags]="['Free', 'Forms', 'Template']"
+  />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+  <!-- Overview ─────────────────────────────────────────────────────────────── -->
+  <section id="overview" data-doc-anchor>
+    <h2>Overview</h2>
+    <p>
+      Three complete authentication screens — Login, Register, and Forgot Password — all styled
+      with CSS variables so they automatically inherit your brand theme. Keyboard-accessible and
+      screen-reader ready.
+    </p>
+    <div class="auth-feature-grid">
+      <div class="auth-feature-item">
+        <i class="pi pi-sign-in"></i>
+        <div>
+          <strong>Login</strong>
+          <p>Email/password form with "Remember me" and OAuth social buttons.</p>
+        </div>
+      </div>
+      <div class="auth-feature-item">
+        <i class="pi pi-user-plus"></i>
+        <div>
+          <strong>Register</strong>
+          <p>Name, email, password, and confirm-password with inline validation hints.</p>
+        </div>
+      </div>
+      <div class="auth-feature-item">
+        <i class="pi pi-lock-open"></i>
+        <div>
+          <strong>Forgot Password</strong>
+          <p>Single-field email form with clear confirmation feedback.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Preview ─────────────────────────────────────────────────────────── -->
+  <section id="preview" data-doc-anchor>
+    <h2>Live Preview</h2>
+
+    <!-- Tab switcher -->
+    <div class="auth-tab-bar" role="tablist" aria-label="Auth page variants">
+      <button
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'login'"
+        [class.active]="activeTab() === 'login'"
+        (click)="setTab('login')"
+      >Login</button>
+      <button
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'register'"
+        [class.active]="activeTab() === 'register'"
+        (click)="setTab('register')"
+      >Register</button>
+      <button
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'forgot'"
+        [class.active]="activeTab() === 'forgot'"
+        (click)="setTab('forgot')"
+      >Forgot Password</button>
+    </div>
+
+    <div class="auth-preview-area">
+
+      <!-- Login ─── -->
+      @if (activeTab() === 'login') {
+        <ui-lib-panel class="auth-card">
+          <div class="auth-brand">
+            <i class="pi pi-th-large auth-brand-icon"></i>
+            <span class="auth-brand-name">MyApp</span>
+          </div>
+          <h2 class="auth-heading">Welcome back</h2>
+          <p class="auth-subheading">Sign in to your account</p>
+
+          <div class="auth-form">
+            <div class="auth-field">
+              <label for="login-email" class="auth-label">Email address</label>
+              <div class="auth-input-wrap">
+                <i class="pi pi-envelope auth-input-icon"></i>
+                <input
+                  id="login-email"
+                  type="email"
+                  class="auth-input"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <div class="auth-label-row">
+                <label for="login-password" class="auth-label">Password</label>
+                <a href="#" class="auth-link" (click)="setTab('forgot'); $event.preventDefault()">
+                  Forgot password?
+                </a>
+              </div>
+              <div class="auth-input-wrap">
+                <i class="pi pi-lock auth-input-icon"></i>
+                <input
+                  id="login-password"
+                  type="password"
+                  class="auth-input"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                />
+              </div>
+            </div>
+
+            <label class="auth-checkbox-row">
+              <input type="checkbox" class="auth-checkbox" />
+              <span class="auth-checkbox-label">Remember me for 30 days</span>
+            </label>
+
+            <ui-lib-button variant="material" label="Sign in" leftIcon="pi pi-sign-in" />
+
+            <ui-lib-divider label="or continue with" />
+
+            <div class="auth-social-row">
+              <button class="auth-social-btn" type="button" aria-label="Sign in with Google">
+                <i class="pi pi-google"></i> Google
+              </button>
+              <button class="auth-social-btn" type="button" aria-label="Sign in with GitHub">
+                <i class="pi pi-github"></i> GitHub
+              </button>
+            </div>
+          </div>
+
+          <p class="auth-footer-text">
+            Don't have an account?
+            <a href="#" class="auth-link" (click)="setTab('register'); $event.preventDefault()">
+              Sign up free
+            </a>
+          </p>
+        </ui-lib-panel>
+      }
+
+      <!-- Register ─── -->
+      @if (activeTab() === 'register') {
+        <ui-lib-panel class="auth-card">
+          <div class="auth-brand">
+            <i class="pi pi-th-large auth-brand-icon"></i>
+            <span class="auth-brand-name">MyApp</span>
+          </div>
+          <h2 class="auth-heading">Create an account</h2>
+          <p class="auth-subheading">Start your free trial today</p>
+
+          <div class="auth-form">
+            <div class="auth-field-row">
+              <div class="auth-field">
+                <label for="reg-fname" class="auth-label">First name</label>
+                <div class="auth-input-wrap">
+                  <i class="pi pi-user auth-input-icon"></i>
+                  <input id="reg-fname" type="text" class="auth-input" placeholder="Jane" autocomplete="given-name" />
+                </div>
+              </div>
+              <div class="auth-field">
+                <label for="reg-lname" class="auth-label">Last name</label>
+                <div class="auth-input-wrap">
+                  <input id="reg-lname" type="text" class="auth-input" placeholder="Smith" autocomplete="family-name" />
+                </div>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="reg-email" class="auth-label">Email address</label>
+              <div class="auth-input-wrap">
+                <i class="pi pi-envelope auth-input-icon"></i>
+                <input id="reg-email" type="email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="reg-password" class="auth-label">Password</label>
+              <div class="auth-input-wrap">
+                <i class="pi pi-lock auth-input-icon"></i>
+                <input id="reg-password" type="password" class="auth-input" placeholder="Min 8 characters" autocomplete="new-password" />
+              </div>
+              <div class="auth-password-strength">
+                <div class="auth-strength-bar auth-strength-bar--weak"></div>
+                <div class="auth-strength-bar"></div>
+                <div class="auth-strength-bar"></div>
+                <div class="auth-strength-bar"></div>
+                <span class="auth-strength-label">Weak</span>
+              </div>
+            </div>
+
+            <label class="auth-checkbox-row">
+              <input type="checkbox" class="auth-checkbox" />
+              <span class="auth-checkbox-label">
+                I agree to the <a href="#" class="auth-link">Terms of Service</a> and
+                <a href="#" class="auth-link">Privacy Policy</a>
+              </span>
+            </label>
+
+            <ui-lib-button variant="material" label="Create account" leftIcon="pi pi-user-plus" />
+          </div>
+
+          <p class="auth-footer-text">
+            Already have an account?
+            <a href="#" class="auth-link" (click)="setTab('login'); $event.preventDefault()">
+              Sign in
+            </a>
+          </p>
+        </ui-lib-panel>
+      }
+
+      <!-- Forgot Password ─── -->
+      @if (activeTab() === 'forgot') {
+        <ui-lib-panel class="auth-card">
+          <div class="auth-brand">
+            <i class="pi pi-th-large auth-brand-icon"></i>
+            <span class="auth-brand-name">MyApp</span>
+          </div>
+          <h2 class="auth-heading">Reset your password</h2>
+          <p class="auth-subheading">
+            Enter your email and we'll send you a reset link.
+          </p>
+
+          <div class="auth-form">
+            <div class="auth-field">
+              <label for="forgot-email" class="auth-label">Email address</label>
+              <div class="auth-input-wrap">
+                <i class="pi pi-envelope auth-input-icon"></i>
+                <input
+                  id="forgot-email"
+                  type="email"
+                  class="auth-input"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <ui-lib-button variant="material" label="Send reset link" leftIcon="pi pi-send" />
+
+            <div class="auth-back-link">
+              <a href="#" class="auth-link" (click)="setTab('login'); $event.preventDefault()">
+                <i class="pi pi-arrow-left"></i> Back to sign in
+              </a>
+            </div>
+          </div>
+        </ui-lib-panel>
+      }
+
+    </div>
+  </section>
+
+  <!-- Usage ────────────────────────────────────────────────────────────────── -->
+  <section id="usage" data-doc-anchor>
+    <h2>Usage</h2>
+    <p>
+      The snippet below shows the minimal structure for the Login page. Wire the form to your
+      Angular Reactive Form and add your auth service calls.
+    </p>
+    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <div class="auth-download-cta">
+      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
+      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+    </div>
+  </section>
+
+</app-doc-page-layout>
