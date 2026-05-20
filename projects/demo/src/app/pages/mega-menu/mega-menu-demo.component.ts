@@ -21,6 +21,14 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicHorizontalHtml,
+  basicHorizontalTs,
+  verticalHtml,
+  verticalTs,
+  itemClickHtml,
+  itemClickTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the MegaMenu component.
@@ -45,6 +53,13 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MegaMenuDemoComponent {
+  public readonly basicHorizontalHtml: string = basicHorizontalHtml;
+  public readonly basicHorizontalTs: string = basicHorizontalTs;
+  public readonly verticalHtml: string = verticalHtml;
+  public readonly verticalTs: string = verticalTs;
+  public readonly itemClickHtml: string = itemClickHtml;
+  public readonly itemClickTs: string = itemClickTs;
+
   public readonly importCode: string = "import { MegaMenu } from 'ui-lib-custom/mega-menu'";
 
   public readonly qualityAudit: ComponentQualityAudit = {
@@ -68,81 +83,8 @@ export class MegaMenuDemoComponent {
     },
     competitiveParity: 'pending',
   };
-  public readonly snippetBasicHorizontal: string = `<ui-lib-mega-menu [model]="items" />`;
-  public readonly snippetBasicHorizontalTs: string = `import { Component } from '@angular/core';
-import { MegaMenu } from 'ui-lib-custom/mega-menu';
-import type { MegaMenuItem } from 'ui-lib-custom/mega-menu';
-
-@Component({
-  standalone: true,
-  imports: [MegaMenu],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MegaMenuItem[] = [
-    {
-      label: 'Products',
-      items: [
-        {
-          header: 'Design Tools',
-          items: [
-            { label: 'Figma Plugin', icon: 'pi pi-palette' },
-            { label: 'CLI Toolkit', icon: 'pi pi-terminal' },
-          ],
-        },
-      ],
-    },
-    { label: 'Docs', url: 'https://example.com/docs', target: '_blank' },
-  ];
-}`;
-  public readonly snippetVertical: string = `<ui-lib-mega-menu [model]="items" orientation="vertical" />`;
-  public readonly snippetVerticalTs: string = `import { Component } from '@angular/core';
-import { MegaMenu } from 'ui-lib-custom/mega-menu';
-import type { MegaMenuItem } from 'ui-lib-custom/mega-menu';
-
-@Component({
-  standalone: true,
-  imports: [MegaMenu],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MegaMenuItem[] = [
-    {
-      label: 'Overview',
-      items: [{ header: 'Dashboard', items: [{ label: 'Analytics', icon: 'pi pi-chart-bar' }] }],
-    },
-    {
-      label: 'Settings',
-      items: [{ items: [{ label: 'General', icon: 'pi pi-cog' }] }],
-    },
-  ];
-}`;
   public readonly snippetDisabledSeparator: string = `{ label: "Save As", disabled: true }\n{ separator: true }`;
   public readonly snippetCommand: string = `{ label: "Delete", command: ({ item }) => console.log(item) }`;
-  public readonly snippetItemClick: string = `<ui-lib-mega-menu [model]="items" (itemClick)="onItemClick($event)" />`;
-  public readonly snippetItemClickTs: string = `import { Component } from '@angular/core';
-import { MegaMenu } from 'ui-lib-custom/mega-menu';
-import type { MegaMenuItem, MegaMenuCommandEvent } from 'ui-lib-custom/mega-menu';
-
-@Component({
-  standalone: true,
-  imports: [MegaMenu],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MegaMenuItem[] = [
-    {
-      label: 'Navigate',
-      items: [
-        { header: 'Pages', items: [{ label: 'Home' }, { label: 'About' }] },
-      ],
-    },
-  ];
-
-  onItemClick(event: MegaMenuCommandEvent): void {
-    console.log('Clicked:', event.item.label);
-  }
-}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

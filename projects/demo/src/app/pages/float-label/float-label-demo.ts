@@ -24,18 +24,24 @@ import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicHtml,
+  basicTs,
+  variantsHtml,
+  variantsTs,
+  selectHtml,
+  selectTs,
+  textareaHtml,
+  textareaTs,
+  invalidHtml,
+  invalidTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 interface DemoOption {
   label: string;
   value: string;
 }
-
-type FloatLabelDemoSnippetKey =
-  | 'basic'
-  | 'variants'
-  | 'select'
-  | 'textarea'
-  | 'invalid'
-  | 'reactive';
 
 /**
  * Demo page for FloatLabel variants and form integration.
@@ -65,6 +71,19 @@ type FloatLabelDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FloatLabelDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly selectHtml: string = selectHtml;
+  public readonly selectTs: string = selectTs;
+  public readonly textareaHtml: string = textareaHtml;
+  public readonly textareaTs: string = textareaTs;
+  public readonly invalidHtml: string = invalidHtml;
+  public readonly invalidTs: string = invalidTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -101,61 +120,6 @@ export class FloatLabelDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: Record<FloatLabelDemoSnippetKey, string> = {
-    basic: `<uilib-float-label>
-  <ui-lib-input placeholder=" " [(ngModel)]="basicValue" [label]="''" />
-  <label>Username</label>
-</uilib-float-label>`,
-    variants: `<uilib-float-label variant="over">
-  <input placeholder=" " [(ngModel)]="variantValues.over" />
-  <label>Over</label>
-</uilib-float-label>
-<uilib-float-label variant="in">
-  <input placeholder=" " [(ngModel)]="variantValues.in" />
-  <label>In</label>
-</uilib-float-label>
-<uilib-float-label variant="on">
-  <input placeholder=" " [(ngModel)]="variantValues.on" />
-  <label>On</label>
-</uilib-float-label>`,
-    select: `<uilib-float-label>
-  <ui-lib-select [(ngModel)]="selectedCity" [options]="cityOptions" />
-  <label>City</label>
-</uilib-float-label>`,
-    textarea: `<uilib-float-label>
-  <textarea placeholder=" " [(ngModel)]="notes"></textarea>
-  <label>Notes</label>
-</uilib-float-label>`,
-    invalid: `<form [formGroup]="invalidForm">
-  <uilib-float-label variant="over">
-    <input placeholder=" " formControlName="over" />
-    <label>Required (over)</label>
-  </uilib-float-label>
-  <uilib-float-label variant="in">
-    <input placeholder=" " formControlName="in" />
-    <label>Required (in)</label>
-  </uilib-float-label>
-  <uilib-float-label variant="on">
-    <input placeholder=" " formControlName="on" />
-    <label>Required (on)</label>
-  </uilib-float-label>
-</form>`,
-    reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <uilib-float-label>
-    <input placeholder=" " formControlName="firstName" />
-    <label>First name</label>
-  </uilib-float-label>
-  <uilib-float-label>
-    <ui-lib-select [options]="cityOptions" formControlName="city" />
-    <label>City</label>
-  </uilib-float-label>
-  <uilib-float-label variant="in">
-    <textarea placeholder=" " formControlName="bio"></textarea>
-    <label>Bio</label>
-  </uilib-float-label>
-</form>`,
-  };
 
   public basicValue: string = '';
   public readonly variantValues: { over: string; in: string; on: string } = {
@@ -205,109 +169,6 @@ export class FloatLabelDemoComponent {
 
   public submittedReactiveValue: { firstName: string; city: string | null; bio: string } | null =
     null;
-
-  public readonly snippetsTs: Record<FloatLabelDemoSnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-import { UiLibInput } from 'ui-lib-custom/input';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, FloatLabelComponent, UiLibInput],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public basicValue: string = '';
-}`,
-    variants: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, FloatLabelComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly variantValues: { over: string; in: string; on: string } = {
-    over: '',
-    in: '',
-    on: '',
-  };
-}`,
-    select: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-import { UiLibSelect } from 'ui-lib-custom/select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, FloatLabelComponent, UiLibSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public selectedCity: string | null = null;
-  public readonly cityOptions = [
-    { label: 'Amsterdam', value: 'amsterdam' },
-    { label: 'Berlin', value: 'berlin' },
-    { label: 'Lisbon', value: 'lisbon' },
-  ];
-}`,
-    textarea: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, FloatLabelComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public notes: string = '';
-}`,
-    invalid: `import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, FloatLabelComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly invalidForm = new FormGroup({
-    over: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    in: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    on: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-  });
-}`,
-    reactive: `import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-import { UiLibSelect } from 'ui-lib-custom/select';
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, FloatLabelComponent, UiLibSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly reactiveForm = new FormGroup({
-    firstName: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    city: new FormControl<string | null>(null, { validators: [Validators.required] }),
-    bio: new FormControl('', { nonNullable: true }),
-  });
-}`,
-  };
-
-  public snippet(key: FloatLabelDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: FloatLabelDemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
 
   public markInvalidAsDirty(): void {
     this.invalidForm.markAllAsTouched();

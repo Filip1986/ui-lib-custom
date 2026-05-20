@@ -21,25 +21,26 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type InputOtpDemoSnippetKey =
-  | 'basic'
-  | 'basicTs'
-  | 'mask'
-  | 'maskTs'
-  | 'integerOnly'
-  | 'integerOnlyTs'
-  | 'sizes'
-  | 'sizesTs'
-  | 'filled'
-  | 'filledTs'
-  | 'disabled'
-  | 'disabledTs'
-  | 'invalid'
-  | 'invalidTs'
-  | 'readonly'
-  | 'readonlyTs'
-  | 'reactive'
-  | 'reactiveTs';
+import {
+  basicHtml,
+  basicTs,
+  maskHtml,
+  maskTs,
+  integerOnlyHtml,
+  integerOnlyTs,
+  sizesHtml,
+  sizesTs,
+  filledHtml,
+  filledTs,
+  disabledHtml,
+  disabledTs,
+  invalidHtml,
+  invalidTs,
+  readonlyHtml,
+  readonlyTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
 /**
  * Demo page for InputOtp — OTP entry with mask, integer-only, sizes, and form integration.
@@ -66,6 +67,25 @@ type InputOtpDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputOtpDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly maskHtml: string = maskHtml;
+  public readonly maskTs: string = maskTs;
+  public readonly integerOnlyHtml: string = integerOnlyHtml;
+  public readonly integerOnlyTs: string = integerOnlyTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTs: string = filledTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly invalidHtml: string = invalidHtml;
+  public readonly invalidTs: string = invalidTs;
+  public readonly readonlyHtml: string = readonlyHtml;
+  public readonly readonlyTs: string = readonlyTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
   public readonly importCode: string =
     "import { InputOtpComponent } from 'ui-lib-custom/input-otp'";
 
@@ -87,155 +107,6 @@ export class InputOtpDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: Record<InputOtpDemoSnippetKey, string> = {
-    basic:
-      '<uilib-input-otp [length]="4" [(ngModel)]="basicValue" [ngModelOptions]="{ standalone: true }" />',
-    basicTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  basicValue: string = '';
-}`,
-    mask: '<uilib-input-otp [length]="6" [mask]="true" [(ngModel)]="maskValue" [ngModelOptions]="{ standalone: true }" />',
-    maskTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  maskValue: string = '';
-}`,
-    integerOnly:
-      '<uilib-input-otp [length]="4" [integerOnly]="true" [(ngModel)]="integerValue" [ngModelOptions]="{ standalone: true }" />',
-    integerOnlyTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  integerValue: string = '';
-}`,
-    sizes: [
-      '<uilib-input-otp [length]="4" size="sm" [(ngModel)]="sizeValues.sm" [ngModelOptions]="{ standalone: true }" />',
-      '<uilib-input-otp [length]="4" size="md" [(ngModel)]="sizeValues.md" [ngModelOptions]="{ standalone: true }" />',
-      '<uilib-input-otp [length]="4" size="lg" [(ngModel)]="sizeValues.lg" [ngModelOptions]="{ standalone: true }" />',
-    ].join('\n'),
-    sizesTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  sizeValues = { sm: '', md: '', lg: '' };
-}`,
-    filled:
-      '<uilib-input-otp [length]="4" [filled]="true" [(ngModel)]="filledValue" [ngModelOptions]="{ standalone: true }" />',
-    filledTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  filledValue: string = '1234';
-}`,
-    disabled:
-      '<uilib-input-otp [length]="4" [disabled]="true" [(ngModel)]="disabledValue" [ngModelOptions]="{ standalone: true }" />',
-    disabledTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  disabledValue: string = '1234';
-}`,
-    invalid:
-      '<uilib-input-otp [length]="4" [invalid]="true" [(ngModel)]="invalidValue" [ngModelOptions]="{ standalone: true }" />',
-    invalidTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  invalidValue: string = '12';
-}`,
-    readonly:
-      '<uilib-input-otp [length]="4" [readonly]="true" [(ngModel)]="readonlyValue" [ngModelOptions]="{ standalone: true }" />',
-    readonlyTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonlyValue: string = '5678';
-}`,
-    reactive: [
-      '<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">',
-      '  <uilib-input-otp',
-      '    [length]="6"',
-      '    [integerOnly]="true"',
-      '    formControlName="code"',
-      '    [invalid]="reactiveForm.controls.code.invalid && reactiveForm.controls.code.touched"',
-      '  />',
-      '  <ui-lib-button type="submit" color="primary">Verify</ui-lib-button>',
-      '</form>',
-    ].join('\n'),
-    reactiveTs: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputOtpComponent } from 'ui-lib-custom/input-otp';
-import { Button } from 'ui-lib-custom/button';
-
-@Component({
-  standalone: true,
-  imports: [InputOtpComponent, Button, ReactiveFormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  reactiveForm = new FormGroup({
-    code: new FormControl<string | null>(null, {
-      validators: [Validators.required, Validators.minLength(6)],
-    }),
-  });
-
-  onSubmit(): void {
-    this.reactiveForm.markAllAsTouched();
-  }
-}`,
-  };
 
   public basicValue: string = '';
   public maskValue: string = '';
@@ -261,10 +132,6 @@ export class MyComponent {
   });
 
   public submittedCode: string | null = null;
-
-  public snippet(key: InputOtpDemoSnippetKey): string {
-    return this.snippets[key];
-  }
 
   public onSubmit(): void {
     this.reactiveForm.markAllAsTouched();

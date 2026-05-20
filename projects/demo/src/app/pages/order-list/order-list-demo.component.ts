@@ -27,6 +27,16 @@ import type {
   OrderListReorderEvent,
   OrderListSelectionChangeEvent,
 } from 'ui-lib-custom/order-list';
+import {
+  basicHtml,
+  basicTs,
+  filterHtml,
+  filterTs,
+  templateHtml,
+  templateTs,
+  dragDropHtml,
+  dragDropTs,
+} from './snippets.generated';
 
 // ---------------------------------------------------------------------------
 // Demo data model
@@ -54,163 +64,6 @@ const DEMO_PRODUCTS: DemoProduct[] = [
 // ---------------------------------------------------------------------------
 // Demo code snippets
 // ---------------------------------------------------------------------------
-
-const SNIPPETS: Record<string, string> = {
-  basic: `<ui-lib-order-list [value]="products" [(selection)]="selection">
-  <ng-template uiOrderListItem let-item>
-    <div class="demo-ol-row">
-      <span class="demo-ol-name">{{ item.name }}</span>
-      <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
-    </div>
-  </ng-template>
-</ui-lib-order-list>`,
-
-  basicTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-} from 'ui-lib-custom/order-list';
-
-interface Product { id: number; name: string; price: number; }
-
-@Component({
-  standalone: true,
-  imports: [OrderListComponent, OrderListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products: WritableSignal<Product[]> = signal([
-    { id: 1, name: 'Wireless Headphones', price: 79.99 },
-    { id: 2, name: 'Mechanical Keyboard', price: 129.99 },
-  ]);
-  public readonly selection: WritableSignal<Product[]> = signal([]);
-
-  public formatPrice(price: number): string {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-  }
-}`,
-
-  filter: `<ui-lib-order-list
-  [value]="filterProducts"
-  filterBy="name"
-  filterPlaceholder="Search products…"
->
-  <ng-template uiOrderListItem let-item>
-    <span>{{ item.name }}</span>
-  </ng-template>
-</ui-lib-order-list>`,
-
-  filterTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-} from 'ui-lib-custom/order-list';
-
-interface Product { id: number; name: string; }
-
-@Component({
-  standalone: true,
-  imports: [OrderListComponent, OrderListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly filterProducts: WritableSignal<Product[]> = signal([
-    { id: 1, name: 'Wireless Headphones' },
-    { id: 2, name: 'Mechanical Keyboard' },
-  ]);
-}`,
-
-  template: `<ui-lib-order-list [value]="templateProducts" [(selection)]="templateSelection">
-  <ng-template uiOrderListHeader>
-    <span>Products ({{ templateProducts().length }})</span>
-  </ng-template>
-  <ng-template uiOrderListItem let-item>
-    <div class="demo-ol-card-row">
-      <span class="demo-ol-category-badge">{{ item.category }}</span>
-      <strong class="demo-ol-name">{{ item.name }}</strong>
-      <span class="demo-ol-stars">{{ starsLabel(item.rating) }}</span>
-      <span class="demo-ol-price">{{ formatPrice(item.price) }}</span>
-    </div>
-  </ng-template>
-  <ng-template uiOrderListEmpty>
-    <span>No products match the current filter.</span>
-  </ng-template>
-</ui-lib-order-list>`,
-
-  templateTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-  OrderListHeaderDirective,
-  OrderListEmptyDirective,
-} from 'ui-lib-custom/order-list';
-
-interface Product { id: number; name: string; category: string; rating: number; price: number; }
-
-@Component({
-  standalone: true,
-  imports: [
-    OrderListComponent,
-    OrderListItemDirective,
-    OrderListHeaderDirective,
-    OrderListEmptyDirective,
-  ],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly templateProducts: WritableSignal<Product[]> = signal([
-    { id: 1, name: 'Wireless Headphones', category: 'Audio', rating: 4, price: 79.99 },
-  ]);
-  public readonly templateSelection: WritableSignal<Product[]> = signal([]);
-
-  public starsLabel(rating: number): string {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  }
-
-  public formatPrice(price: number): string {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-  }
-}`,
-
-  dragDrop: `<ui-lib-order-list
-  [value]="dragProducts"
-  [dragDrop]="true"
-  (reordered)="onReorder($event)"
->
-  <ng-template uiOrderListItem let-item>
-    <span>{{ item.name }}</span>
-  </ng-template>
-</ui-lib-order-list>`,
-
-  dragDropTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-} from 'ui-lib-custom/order-list';
-import type { OrderListReorderEvent } from 'ui-lib-custom/order-list';
-
-interface Product { id: number; name: string; }
-
-@Component({
-  standalone: true,
-  imports: [OrderListComponent, OrderListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly dragProducts: WritableSignal<Product[]> = signal([
-    { id: 1, name: 'Wireless Headphones' },
-    { id: 2, name: 'Mechanical Keyboard' },
-  ]);
-
-  public onReorder(event: OrderListReorderEvent): void {
-    console.log('Reordered', event);
-  }
-}`,
-};
 
 // ---------------------------------------------------------------------------
 // Component
@@ -241,6 +94,15 @@ export class MyComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly filterHtml: string = filterHtml;
+  public readonly filterTs: string = filterTs;
+  public readonly templateHtml: string = templateHtml;
+  public readonly templateTs: string = templateTs;
+  public readonly dragDropHtml: string = dragDropHtml;
+  public readonly dragDropTs: string = dragDropTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -426,10 +288,6 @@ export class OrderListDemoComponent {
 
   public starsLabel(rating: number): string {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  }
-
-  public snippet(key: string): string {
-    return SNIPPETS[key] ?? '';
   }
 
   public readonly apiInputRows: readonly ApiPropRow[] = [

@@ -1,0 +1,18 @@
+<ui-lib-pick-list [(source)]="source" [(target)]="target" trackBy="code">
+  <ng-template uiPickListSourceHeader>
+    <span>Available countries</span>
+  </ng-template>
+  <ng-template uiPickListTargetHeader>
+    <span>Selected countries</span>
+  </ng-template>
+  <ng-template uiPickListItem let-country>
+    <div class="demo-pl-row">
+      <span class="demo-pl-code">{{ country.code }}</span>
+      <span class="demo-pl-name">{{ country.name }}</span>
+      <span class="demo-pl-region">{{ country.region }}</span>
+    </div>
+  </ng-template>
+  <ng-template uiPickListEmpty>
+    <span>No items here.</span>
+  </ng-template>
+</ui-lib-pick-list>

@@ -1,0 +1,14 @@
+<form #f="ngForm">
+  <ui-lib-cascade-select
+    name="city"
+    required
+    [(ngModel)]="templateDrivenCode"
+    #cityModel="ngModel"
+    [invalid]="cityModel.invalid && cityModel.touched"
+    [options]="countries"
+    optionGroupLabel="name"
+    [optionGroupChildren]="['states', 'cities']"
+    optionLabel="cname"
+    optionValue="code"
+  />
+</form>

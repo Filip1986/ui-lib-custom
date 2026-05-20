@@ -19,7 +19,7 @@
             <span class="value-text">Selected HEX {{ displayHexValue(basicHex) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
       </section>
 
       <section id="inline" data-doc-anchor class="example-section">
@@ -28,7 +28,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('inline')" [typescript]="snippetTs('inline')" />
+        <app-doc-code-example [html]="inlineHtml" [typescript]="inlineTs" />
       </section>
 
       <section id="formats" data-doc-anchor class="example-section">
@@ -50,7 +50,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('formats')" [typescript]="snippetTs('formats')" />
+        <app-doc-code-example [html]="formatsHtml" [typescript]="formatsTs" />
       </section>
 
       <section id="template-driven" data-doc-anchor class="example-section">
@@ -72,8 +72,8 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('templateDriven')"
-          [typescript]="snippetTs('templateDriven')"
+          [html]="templateDrivenHtml"
+          [typescript]="templateDrivenTs"
         />
       </section>
 
@@ -91,7 +91,7 @@
             }
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
@@ -103,7 +103,7 @@
             <span class="value-text">Disabled value {{ displayHexValue(disabledValue) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
@@ -125,7 +125,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
+        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
       </section>
 
       <section id="clipping" data-doc-anchor class="example-section">
@@ -140,7 +140,7 @@
             <p class="value-text clipping-note">Selected {{ displayHexValue(clippingValue) }}</p>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('clipping')" [typescript]="snippetTs('clipping')" />
+        <app-doc-code-example [html]="clippingHtml" [typescript]="clippingTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

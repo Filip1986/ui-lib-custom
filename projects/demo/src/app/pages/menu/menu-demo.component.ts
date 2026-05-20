@@ -20,6 +20,21 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import {
+  basicHtml,
+  basicTs,
+  popupHtml,
+  popupTs,
+  variantsHtml,
+  variantsTs,
+  sizesHtml,
+  sizesTs,
+  importTs,
+  separatorTs,
+  groupedTs,
+  commandsTs,
+  urlItemsTs,
+} from './snippets.generated';
 
 interface AriaRow {
   readonly element: string;
@@ -79,6 +94,20 @@ interface MenuItemRow {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly popupHtml: string = popupHtml;
+  public readonly popupTs: string = popupTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly importTs: string = importTs;
+  public readonly separatorTs: string = separatorTs;
+  public readonly groupedTs: string = groupedTs;
+  public readonly commandsTs: string = commandsTs;
+  public readonly urlItemsTs: string = urlItemsTs;
+
   public readonly importCode: string = "import { Menu } from 'ui-lib-custom/menu'";
 
   public readonly qualityAudit: ComponentQualityAudit = {
@@ -126,155 +155,6 @@ export class MenuDemoComponent {
   }
 
   public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
-
-  public readonly snippets: {
-    readonly import: string;
-    readonly basic: string;
-    readonly basicTs: string;
-    readonly separator: string;
-    readonly grouped: string;
-    readonly popup: string;
-    readonly popupTs: string;
-    readonly commands: string;
-    readonly urlItems: string;
-    readonly variants: string;
-    readonly variantsTs: string;
-    readonly sizes: string;
-    readonly sizesTs: string;
-  } = {
-    import: `import { Menu } from 'ui-lib-custom/menu';
-import type { MenuItem } from 'ui-lib-custom/menu';`,
-    basic: `<ui-lib-menu [model]="items" (itemClick)="onItemClick($event)" />`,
-    basicTs: `import { Component } from '@angular/core';
-import { Menu } from 'ui-lib-custom/menu';
-import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
-
-@Component({
-  standalone: true,
-  imports: [Menu],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MenuItem[] = [
-    { label: 'Profile', icon: 'pi pi-user' },
-    { label: 'Messages', icon: 'pi pi-envelope' },
-    { label: 'Settings', icon: 'pi pi-cog' },
-  ];
-
-  onItemClick(event: MenuItemCommandEvent): void {
-    console.log('Clicked:', event.item.label);
-  }
-}`,
-    separator: `items: MenuItem[] = [
-  { label: 'New File', icon: 'pi pi-file' },
-  { label: 'Open',     icon: 'pi pi-folder-open' },
-  { separator: true },
-  { label: 'Save',     icon: 'pi pi-save' },
-  { label: 'Exit',     icon: 'pi pi-times' },
-];`,
-    grouped: `items: MenuItem[] = [
-  {
-    label: 'Account',
-    items: [
-      { label: 'Profile',       icon: 'pi pi-user' },
-      { label: 'Security',      icon: 'pi pi-lock' },
-      { label: 'Notifications', icon: 'pi pi-bell' },
-    ],
-  },
-  {
-    label: 'Workspace',
-    items: [
-      { label: 'Projects',  icon: 'pi pi-briefcase' },
-      { label: 'Billing',   icon: 'pi pi-credit-card' },
-    ],
-  },
-];`,
-    popup: `<!-- trigger button wires aria-haspopup, aria-expanded, aria-controls -->
-<ui-lib-button
-  [attr.aria-haspopup]="'menu'"
-  [attr.aria-expanded]="popupMenu.isVisible()"
-  [attr.aria-controls]="popupMenu.menuId"
-  (click)="popupMenu.toggle($event)"
->
-  Options
-</ui-lib-button>
-<ui-lib-menu #popupMenu [model]="items" [popup]="true" />`,
-    popupTs: `import { Component } from '@angular/core';
-import { Menu } from 'ui-lib-custom/menu';
-import { Button } from 'ui-lib-custom/button';
-import type { MenuItem } from 'ui-lib-custom/menu';
-
-@Component({
-  standalone: true,
-  imports: [Menu, Button],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MenuItem[] = [
-    { label: 'View Details', icon: 'pi pi-eye' },
-    { label: 'Edit', icon: 'pi pi-pencil' },
-    { separator: true },
-    { label: 'Move to Trash', icon: 'pi pi-trash' },
-  ];
-}`,
-    commands: `items: MenuItem[] = [
-  {
-    label: 'Download',
-    icon: 'pi pi-download',
-    command: (event) => console.log('clicked', event.item.label),
-  },
-];
-
-// Or via the itemClick output:
-onItemClick(event: MenuItemCommandEvent): void {
-  console.log(event.item.label);
-}`,
-    urlItems: `items: MenuItem[] = [
-  { label: 'Documentation', url: 'https://angular.dev', target: '_blank' },
-  { label: 'GitHub',        url: 'https://github.com', target: '_blank' },
-  { separator: true },
-  { label: 'Command item',  icon: 'pi pi-star' },
-];`,
-    variants: `<ui-lib-menu [model]="items" variant="material"  />
-<ui-lib-menu [model]="items" variant="bootstrap" />
-<ui-lib-menu [model]="items" variant="minimal"   />`,
-    variantsTs: `import { Component } from '@angular/core';
-import { Menu } from 'ui-lib-custom/menu';
-import type { MenuItem } from 'ui-lib-custom/menu';
-
-@Component({
-  standalone: true,
-  imports: [Menu],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MenuItem[] = [
-    { label: 'Dashboard', icon: 'pi pi-home' },
-    { label: 'Reports', icon: 'pi pi-chart-line' },
-    { separator: true },
-    { label: 'Settings', icon: 'pi pi-cog' },
-  ];
-}`,
-    sizes: `<ui-lib-menu [model]="items" size="sm" />
-<ui-lib-menu [model]="items" size="md" />
-<ui-lib-menu [model]="items" size="lg" />`,
-    sizesTs: `import { Component } from '@angular/core';
-import { Menu } from 'ui-lib-custom/menu';
-import type { MenuItem } from 'ui-lib-custom/menu';
-
-@Component({
-  standalone: true,
-  imports: [Menu],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly items: MenuItem[] = [
-    { label: 'Item One', icon: 'pi pi-circle' },
-    { label: 'Item Two', icon: 'pi pi-circle' },
-    { label: 'Item Three', icon: 'pi pi-circle' },
-  ];
-}`,
-  } as const;
 
   public readonly basicItems: MenuItem[] = [
     { label: 'Profile', icon: 'pi pi-user' },

@@ -7,7 +7,7 @@
     </p>
     <div class="demo-page-header__preview">
       <ui-lib-code-snippet
-        [code]="snippets.import"
+        [code]="importTs"
         language="typescript"
         [showLineNumbers]="true"
       />
@@ -23,7 +23,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="basicModel" />
     </div>
-    <app-doc-code-example [html]="snippets.basic" [typescript]="snippets.basicTs" />
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
   </section>
 
   <!-- ── Initially Expanded ─────────────────────────────────────────────── -->
@@ -36,7 +36,7 @@
       <ui-lib-panel-menu [model]="expandedModel" />
     </div>
     <ui-lib-code-snippet
-      [code]="snippets.expanded"
+      [code]="expandedTs"
       language="typescript"
       [showLineNumbers]="true"
     />
@@ -52,7 +52,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-panel-menu [model]="multipleModel" [multiple]="true" />
     </div>
-    <app-doc-code-example [html]="snippets.multiple" [typescript]="snippets.multipleTs" />
+    <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
   </section>
 
   <!-- ── Nested Sub-Items ───────────────────────────────────────────────── -->
@@ -90,7 +90,7 @@
       <ui-lib-panel-menu [model]="urlModel" />
     </div>
     <ui-lib-code-snippet
-      [code]="snippets.urlItems"
+      [code]="urlItemsTs"
       language="typescript"
       [showLineNumbers]="true"
     />
@@ -170,7 +170,7 @@
         }
       </div>
     </div>
-    <app-doc-code-example [html]="snippets.events" [typescript]="snippets.eventsTs" />
+    <app-doc-code-example [html]="eventsHtml" [typescript]="eventsTs" />
   </section>
 
   <!-- ── API ────────────────────────────────────────────────────────────── -->

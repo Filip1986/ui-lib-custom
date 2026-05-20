@@ -1,0 +1,22 @@
+<ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
+  <div editorToolbar>
+    <select
+      [value]="editor.toolbarState().blockFormat"
+      (mousedown)="$event.preventDefault()"
+      (change)="onCustomHeadingChange(editor, $event)"
+    >
+      <option value="p">Normal</option>
+      <option value="h1">Heading 1</option>
+      <option value="h2">Heading 2</option>
+    </select>
+
+    <button
+      type="button"
+      [attr.aria-pressed]="editor.toolbarState().bold"
+      (mousedown)="$event.preventDefault()"
+      (click)="editor.executeCommand('bold')"
+    >
+      B
+    </button>
+  </div>
+</ui-lib-editor>

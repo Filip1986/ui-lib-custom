@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { iconExampleHtml, iconExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 /**
@@ -52,6 +53,11 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconsDemoComponent {
+  public readonly iconExampleHtml: string = iconExampleHtml;
+  public readonly iconExampleTs: string = iconExampleTs;
+  public readonly usageHtml: string = usageHtml;
+  public readonly usageTs: string = usageTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -141,30 +147,6 @@ export class IconsDemoComponent {
       );
     }
   );
-
-  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
-    usage: `<ui-lib-icon name="search" size="lg" variant="material" />`,
-    usageTs: `import { Component } from '@angular/core';
-import { Icon } from 'ui-lib-custom/icon';
-
-@Component({
-  standalone: true,
-  imports: [Icon],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-  } as const;
-
-  public readonly iconExample: string = `<ui-lib-icon name="search" size="lg" variant="material" />`;
-  public readonly iconExampleTs: string = `import { Component } from '@angular/core';
-import { Icon } from 'ui-lib-custom/icon';
-
-@Component({
-  standalone: true,
-  imports: [Icon],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   public onSearch(event: Event): void {
     this.searchQuery.set((event.target as HTMLInputElement).value);

@@ -29,6 +29,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { usageSnippetHtml, usageSnippetTs } from './snippets.generated';
 /**
  * Demo section for layout composition patterns.
  */
@@ -57,29 +58,10 @@ import { Panel } from 'ui-lib-custom/panel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutCompositionSectionComponent {
+  public readonly usageSnippetHtml: string = usageSnippetHtml;
+  public readonly usageSnippetTs: string = usageSnippetTs;
+
   public readonly sections: DocSection[] = [{ id: 'composition', label: 'Composition' }];
-
-  public readonly usageSnippet: string = `
-<ui-lib-container size="lg" inset="lg">
-  <ui-lib-stack spacing="lg">
-    <ui-lib-grid [columns]="3" spacing="md">
-      <div class="card">Card 1</div>
-      <div class="card">Card 2</div>
-      <div class="card">Card 3</div>
-    </ui-lib-grid>
-  </ui-lib-stack>
-</ui-lib-container>
-`;
-
-  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
-import { Container, Grid, Stack } from 'ui-lib-custom/layout';
-
-@Component({
-  standalone: true,
-  imports: [Container, Grid, Stack],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

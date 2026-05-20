@@ -7,7 +7,7 @@
     </p>
     <div class="demo-page-header__preview">
       <ui-lib-code-snippet
-        [code]="snippets.import"
+        [code]="importTs"
         language="typescript"
         [showLineNumbers]="true"
       />
@@ -57,7 +57,7 @@
         </ul>
       </div>
     }
-    <app-doc-code-example [html]="snippets.basic" [typescript]="snippets.basicTs" />
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
   </section>
 
   <!-- ── With Separator ────────────────────────────────────────────────────── -->
@@ -71,7 +71,7 @@
       <ui-lib-menu [model]="separatorItems" />
     </div>
     <ui-lib-code-snippet
-      [code]="snippets.separator"
+      [code]="separatorTs"
       language="typescript"
       [showLineNumbers]="true"
     />
@@ -101,7 +101,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="groupedItems" />
     </div>
-    <ui-lib-code-snippet [code]="snippets.grouped" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet [code]="groupedTs" language="typescript" [showLineNumbers]="true" />
   </section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
@@ -140,7 +140,7 @@
         </ul>
       </div>
     }
-    <app-doc-code-example [html]="snippets.popup" [typescript]="snippets.popupTs" />
+    <app-doc-code-example [html]="popupHtml" [typescript]="popupTs" />
   </section>
 
   <!-- ── Popup Grouped ─────────────────────────────────────────────────────── -->
@@ -200,7 +200,7 @@
       </div>
     }
     <ui-lib-code-snippet
-      [code]="snippets.commands"
+      [code]="commandsTs"
       language="typescript"
       [showLineNumbers]="true"
     />
@@ -217,7 +217,7 @@
       <ui-lib-menu [model]="urlItems" />
     </div>
     <ui-lib-code-snippet
-      [code]="snippets.urlItems"
+      [code]="urlItemsTs"
       language="typescript"
       [showLineNumbers]="true"
     />
@@ -245,7 +245,7 @@
         <ui-lib-menu [model]="variantItems" variant="minimal" />
       </div>
     </div>
-    <app-doc-code-example [html]="snippets.variants" [typescript]="snippets.variantsTs" />
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
   </section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
@@ -269,7 +269,7 @@
         <ui-lib-menu [model]="sizeItems" size="lg" />
       </div>
     </div>
-    <app-doc-code-example [html]="snippets.sizes" [typescript]="snippets.sizesTs" />
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
   </section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->

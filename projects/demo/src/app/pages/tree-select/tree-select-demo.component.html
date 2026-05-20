@@ -20,7 +20,7 @@
           </p>
         }
       </div>
-      <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -41,7 +41,7 @@
           </p>
         }
       </div>
-      <app-doc-code-example [html]="snippet('multiple')" [typescript]="snippetTs('multiple')" />
+      <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -62,7 +62,7 @@
           </p>
         }
       </div>
-      <app-doc-code-example [html]="snippet('checkbox')" [typescript]="snippetTs('checkbox')" />
+      <app-doc-code-example [html]="checkboxHtml" [typescript]="checkboxTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -80,7 +80,7 @@
           style="max-width: 320px"
         />
       </div>
-      <app-doc-code-example [html]="snippet('filter')" [typescript]="snippetTs('filter')" />
+      <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -107,7 +107,7 @@
           [(selection)]="sizeLgSelection"
         />
       </div>
-      <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
+      <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -137,7 +137,7 @@
           [(selection)]="variantSelections['minimal']"
         />
       </div>
-      <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
+      <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -154,7 +154,7 @@
           style="max-width: 320px"
         />
       </div>
-      <app-doc-code-example [html]="snippet('showClear')" [typescript]="snippetTs('showClear')" />
+      <app-doc-code-example [html]="showClearHtml" [typescript]="showClearTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -169,7 +169,7 @@
           style="max-width: 320px"
         />
       </div>
-      <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
+      <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -184,7 +184,7 @@
           style="max-width: 320px"
         />
       </div>
-      <app-doc-code-example [html]="snippet('loading')" [typescript]="snippetTs('loading')" />
+      <app-doc-code-example [html]="loadingHtml" [typescript]="loadingTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -202,7 +202,7 @@
         />
         <pre style="margin-top: 0.5rem; font-size: 0.75rem">{{ ngModelValue | json }}</pre>
       </div>
-      <app-doc-code-example [html]="snippet('ngModel')" [typescript]="snippetTs('ngModel')" />
+      <app-doc-code-example [html]="ngModelHtml" [typescript]="ngModelTs" />
     </app-doc-demo-viewport>
   </section>
 
@@ -227,7 +227,7 @@
           <pre style="font-size: 0.75rem">{{ reactiveForm.value | json }}</pre>
         </form>
       </div>
-      <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
+      <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
     </app-doc-demo-viewport>
   </section>
 

@@ -22,7 +22,7 @@
             <uilib-input-group-addon>.00</uilib-input-group-addon>
           </uilib-input-group>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippet('basicTs')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTsTs" />
       </section>
 
       <section id="multiple" data-doc-anchor class="example-section">
@@ -40,7 +40,7 @@
             <uilib-input-group-addon>USD</uilib-input-group-addon>
           </uilib-input-group>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('multiple')" [typescript]="snippet('multipleTs')" />
+        <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTsTs" />
       </section>
 
       <section id="button" data-doc-anchor class="example-section">
@@ -58,7 +58,7 @@
             </uilib-input-group-addon>
           </uilib-input-group>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('button')" [typescript]="snippet('buttonTs')" />
+        <app-doc-code-example [html]="buttonHtml" [typescript]="buttonTsTs" />
       </section>
 
       <section id="checkbox-radio" data-doc-anchor class="example-section">
@@ -101,8 +101,8 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('checkboxRadio')"
-          [typescript]="snippet('checkboxRadioTs')"
+          [html]="checkboxRadioHtml"
+          [typescript]="checkboxRadioTsTs"
         />
       </section>
 
@@ -149,8 +149,8 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('floatLabel')"
-          [typescript]="snippet('floatLabelTs')"
+          [html]="floatLabelHtml"
+          [typescript]="floatLabelTsTs"
         />
       </section>
 
@@ -172,7 +172,7 @@
             }
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

@@ -8,7 +8,7 @@
 
   <app-accordion-basic-example />
   <app-doc-code-example
-    [html]="accordionExample"
+    [html]="accordionExampleHtml"
     [typescript]="accordionExampleTs"
     [showLineNumbers]="true"
   />
@@ -252,7 +252,7 @@
         </div>
       </app-doc-demo-viewport>
       <ui-lib-code-snippet
-        [code]="snippets.controlled"
+        [code]="controlledTs"
         language="typescript"
         [showLineNumbers]="true"
       />
@@ -278,8 +278,8 @@
         </div>
       </app-doc-demo-viewport>
       <app-doc-code-example
-        [html]="snippets.customHeader"
-        [typescript]="snippets.customHeaderTs"
+        [html]="customHeaderHtml"
+        [typescript]="customHeaderTs"
         [showLineNumbers]="true"
       />
     </ui-lib-panel>
@@ -348,13 +348,13 @@
         </div>
       </app-doc-demo-viewport>
       <app-doc-code-example
-        [html]="iconSnippets.customIcons"
-        [typescript]="iconSnippets.customIconsTs"
+        [html]="customIconsHtml"
+        [typescript]="customIconsTs"
         [showLineNumbers]="true"
       />
       <app-doc-code-example
-        [html]="iconSnippets.iconPosition"
-        [typescript]="iconSnippets.iconPositionTs"
+        [html]="iconPositionHtml"
+        [typescript]="iconPositionTs"
         [showLineNumbers]="true"
       />
     </ui-lib-panel>
@@ -378,8 +378,8 @@
           </div>
         </app-doc-demo-viewport>
         <app-doc-code-example
-          [html]="iconSnippets.toggleTemplate"
-          [typescript]="iconSnippets.toggleTemplateTs"
+          [html]="toggleTemplateHtml"
+          [typescript]="toggleTemplateTs"
           [showLineNumbers]="true"
         />
       </ui-lib-panel>
@@ -540,8 +540,8 @@
         </div>
       </div>
       <app-doc-code-example
-        [html]="snippets.basic"
-        [typescript]="snippets.basicTs"
+        [html]="basicHtml"
+        [typescript]="basicTs"
         [showLineNumbers]="true"
       />
     </ui-lib-panel>

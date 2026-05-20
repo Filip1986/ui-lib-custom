@@ -21,7 +21,7 @@
             <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippet('basicTs')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTsTs" />
       </section>
 
       <section id="mask-formats" data-doc-anchor class="example-section">
@@ -63,7 +63,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('formats')" [typescript]="snippet('formatsTs')" />
+        <app-doc-code-example [html]="formatsHtml" [typescript]="formatsTsTs" />
       </section>
 
       <section id="optional" data-doc-anchor class="example-section">
@@ -88,7 +88,7 @@
             <span class="value-text">Value: {{ formatValue(optionalValue) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('optional')" [typescript]="snippet('optionalTs')" />
+        <app-doc-code-example [html]="optionalHtml" [typescript]="optionalTsTs" />
       </section>
 
       <section id="slot-character" data-doc-anchor class="example-section">
@@ -128,7 +128,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('slotChars')" [typescript]="snippet('slotCharsTs')" />
+        <app-doc-code-example [html]="slotCharsHtml" [typescript]="slotCharsTsTs" />
       </section>
 
       <section id="unmask" data-doc-anchor class="example-section">
@@ -157,7 +157,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('unmask')" [typescript]="snippet('unmaskTs')" />
+        <app-doc-code-example [html]="unmaskHtml" [typescript]="unmaskTsTs" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
@@ -171,7 +171,7 @@
             [(ngModel)]="filledValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippet('filledTs')" />
+        <app-doc-code-example [html]="filledHtml" [typescript]="filledTsTs" />
       </section>
 
       <section id="float-label" data-doc-anchor class="example-section">
@@ -188,8 +188,8 @@
           </uilib-float-label>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('floatLabel')"
-          [typescript]="snippet('floatLabelTs')"
+          [html]="floatLabelHtml"
+          [typescript]="floatLabelTsTs"
         />
       </section>
 
@@ -206,7 +206,7 @@
             <label>Phone</label>
           </uilib-float-label>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('iftaLabel')" [typescript]="snippet('iftaLabelTs')" />
+        <app-doc-code-example [html]="iftaLabelHtml" [typescript]="iftaLabelTsTs" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
@@ -227,7 +227,7 @@
             }
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
       </section>
 
       <section id="fluid" data-doc-anchor class="example-section">
@@ -244,7 +244,7 @@
             <span class="value-text">Value: {{ formatValue(fluidValue) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('fluid')" [typescript]="snippet('fluidTs')" />
+        <app-doc-code-example [html]="fluidHtml" [typescript]="fluidTsTs" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
@@ -258,7 +258,7 @@
             [(ngModel)]="disabledValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippet('disabledTs')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTsTs" />
       </section>
 
       <section id="invalid" data-doc-anchor class="example-section">
@@ -275,7 +275,7 @@
             <span class="error-text">Please provide a complete phone number.</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippet('invalidTs')" />
+        <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTsTs" />
       </section>
 
       <section id="reactive-forms" data-doc-anchor class="example-section">
@@ -297,7 +297,7 @@
             </div>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippet('reactiveTs')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTsTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

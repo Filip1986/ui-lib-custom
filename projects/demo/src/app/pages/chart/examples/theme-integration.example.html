@@ -1,0 +1,8 @@
+<ui-lib-inline [gap]="2">
+  <ui-lib-button (click)="setThemeProfile('material', themeChart)">Material</ui-lib-button>
+  <ui-lib-button (click)="setThemeProfile('bootstrap', themeChart)">Bootstrap</ui-lib-button>
+  <ui-lib-button (click)="setThemeProfile('minimal', themeChart)">Minimal</ui-lib-button>
+</ui-lib-inline>
+<div [ngStyle]="themeCssVariables()">
+  <ui-lib-line-chart #themeChart [data]="themeBridgeData" />
+</div>

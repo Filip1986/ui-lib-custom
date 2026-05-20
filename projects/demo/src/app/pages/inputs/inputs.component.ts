@@ -33,6 +33,7 @@ import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.c
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -73,6 +74,11 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputsComponent {
+  public readonly inputExampleHtml: string = inputExampleHtml;
+  public readonly inputExampleTs: string = inputExampleTs;
+  public readonly usageHtml: string = usageHtml;
+  public readonly usageTs: string = usageTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -119,19 +125,6 @@ export class InputsComponent {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
-
-  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
-    usage: `<ui-lib-input label="Email" placeholder="you@example.com" />`,
-    usageTs: `import { Component } from '@angular/core';
-import { UiLibInput } from 'ui-lib-custom/input';
-
-@Component({
-  standalone: true,
-  imports: [UiLibInput],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-  } as const;
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
@@ -250,17 +243,6 @@ export class MyComponent {}`,
     'url',
   ];
   public readonly labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
-
-  public readonly inputExample: string = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
-  public readonly inputExampleTs: string = `import { Component } from '@angular/core';
-import { UiLibInput } from 'ui-lib-custom/input';
-
-@Component({
-  standalone: true,
-  imports: [UiLibInput],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   public readonly apiRows: readonly ApiPropRow[] = [
     {

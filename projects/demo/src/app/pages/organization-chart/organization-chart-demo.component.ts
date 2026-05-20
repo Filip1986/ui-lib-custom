@@ -20,6 +20,22 @@ import type {
   OrganizationChartNodeSelectEvent,
   OrganizationChartNodeExpandEvent,
 } from 'ui-lib-custom/organization-chart';
+import {
+  basicHtml,
+  basicTs,
+  collapsibleHtml,
+  collapsibleTs,
+  singleSelectionHtml,
+  singleSelectionTs,
+  multipleSelectionHtml,
+  multipleSelectionTs,
+  customTemplateHtml,
+  customTemplateTs,
+  bootstrapHtml,
+  bootstrapTs,
+  minimalHtml,
+  minimalTs,
+} from './snippets.generated';
 
 // ─── Shared tree data ────────────────────────────────────────────────────────
 
@@ -58,49 +74,6 @@ function makeCompanyTree(expanded: boolean = true): OrganizationChartNode[] {
 
 // ─── Code snippets ────────────────────────────────────────────────────────────
 
-const SNIPPETS: Record<string, string> = {
-  basic: `<ui-lib-organization-chart [value]="nodes" />`,
-
-  collapsible: `<ui-lib-organization-chart
-  [value]="nodes"
-  [collapsible]="true"
-/>`,
-
-  singleSelection: `<ui-lib-organization-chart
-  [value]="nodes"
-  selectionMode="single"
-  [(selection)]="selection"
-/>`,
-
-  multipleSelection: `<ui-lib-organization-chart
-  [value]="nodes"
-  selectionMode="multiple"
-  [(selection)]="selection"
-/>`,
-
-  customTemplate: `<ui-lib-organization-chart [value]="nodes">
-  <ng-template uiOrgChartNode let-node>
-    <div class="custom-node">
-      <span class="custom-node__avatar">{{ initials(node.label) }}</span>
-      <strong class="custom-node__name">{{ node.label }}</strong>
-      <span class="custom-node__role">{{ node.data?.role }}</span>
-    </div>
-  </ng-template>
-</ui-lib-organization-chart>`,
-
-  bootstrap: `<ui-lib-organization-chart
-  [value]="nodes"
-  variant="bootstrap"
-  [collapsible]="true"
-/>`,
-
-  minimal: `<ui-lib-organization-chart
-  [value]="nodes"
-  variant="minimal"
-  [collapsible]="true"
-/>`,
-};
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 /** Demo page for the OrganizationChart component, showcasing all variants and features. */
@@ -122,6 +95,21 @@ const SNIPPETS: Record<string, string> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrganizationChartDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly collapsibleHtml: string = collapsibleHtml;
+  public readonly collapsibleTs: string = collapsibleTs;
+  public readonly singleSelectionHtml: string = singleSelectionHtml;
+  public readonly singleSelectionTs: string = singleSelectionTs;
+  public readonly multipleSelectionHtml: string = multipleSelectionHtml;
+  public readonly multipleSelectionTs: string = multipleSelectionTs;
+  public readonly customTemplateHtml: string = customTemplateHtml;
+  public readonly customTemplateTs: string = customTemplateTs;
+  public readonly bootstrapHtml: string = bootstrapHtml;
+  public readonly bootstrapTs: string = bootstrapTs;
+  public readonly minimalHtml: string = minimalHtml;
+  public readonly minimalTs: string = minimalTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -228,150 +216,6 @@ export class OrganizationChartDemoComponent {
   public readonly eventLog: WritableSignal<string[]> = signal([]);
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
-  public readonly snippetsTs: Record<string, string> = {
-    basic: `import { Component, signal } from '@angular/core';
-import { OrganizationChart } from 'ui-lib-custom/organization-chart';
-import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    { key: 'ceo', label: 'CEO', expanded: true, children: [
-      { key: 'cto', label: 'CTO' },
-    ] },
-  ]);
-}`,
-    collapsible: `import { Component, signal } from '@angular/core';
-import { OrganizationChart } from 'ui-lib-custom/organization-chart';
-import type {
-  OrganizationChartNode,
-  OrganizationChartNodeExpandEvent,
-} from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    { key: 'ceo', label: 'CEO', expanded: true, children: [
-      { key: 'cto', label: 'CTO' },
-    ] },
-  ]);
-
-  public onNodeExpand(event: OrganizationChartNodeExpandEvent): void {
-    console.log('Expanded:', event.node.label);
-  }
-
-  public onNodeCollapse(event: OrganizationChartNodeExpandEvent): void {
-    console.log('Collapsed:', event.node.label);
-  }
-}`,
-    singleSelection: `import { Component, signal } from '@angular/core';
-import { OrganizationChart } from 'ui-lib-custom/organization-chart';
-import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    { key: 'ceo', label: 'CEO', expanded: true, children: [
-      { key: 'cto', label: 'CTO' },
-    ] },
-  ]);
-  public readonly selection = signal<OrganizationChartNode | null>(null);
-}`,
-    multipleSelection: `import { Component, signal } from '@angular/core';
-import { OrganizationChart } from 'ui-lib-custom/organization-chart';
-import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    { key: 'ceo', label: 'CEO', expanded: true, children: [
-      { key: 'cto', label: 'CTO' },
-    ] },
-  ]);
-  public readonly selection = signal<OrganizationChartNode[]>([]);
-}`,
-    customTemplate: `import { Component, signal } from '@angular/core';
-import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
-import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart, OrgChartNodeTemplateDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    {
-      key: 'ceo',
-      label: 'Alice Chen',
-      data: { role: 'Chief Executive Officer' },
-      expanded: true,
-      children: [],
-    },
-  ]);
-
-  public initials(label: string | undefined): string {
-    if (!label) return '?';
-    return label.split(' ').map((w: string): string => w[0] ?? '').slice(0, 2).join('').toUpperCase();
-  }
-}`,
-    bootstrap: `import { Component, signal } from '@angular/core';
-import { OrganizationChart } from 'ui-lib-custom/organization-chart';
-import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    { key: 'ceo', label: 'CEO', expanded: true, children: [
-      { key: 'cto', label: 'CTO' },
-    ] },
-  ]);
-}`,
-    minimal: `import { Component, signal } from '@angular/core';
-import { OrganizationChart } from 'ui-lib-custom/organization-chart';
-import type { OrganizationChartNode } from 'ui-lib-custom/organization-chart';
-
-@Component({
-  standalone: true,
-  imports: [OrganizationChart],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly nodes = signal<OrganizationChartNode[]>([
-    { key: 'ceo', label: 'CEO', expanded: true, children: [
-      { key: 'cto', label: 'CTO' },
-    ] },
-  ]);
-}`,
-  };
-
-  public snippetTs(key: string): string {
-    return this.snippetsTs[key] ?? '';
-  }
-
-  public snippet(key: string): string {
-    return SNIPPETS[key] ?? '';
-  }
 
   public initials(label: string | undefined): string {
     if (!label) return '?';

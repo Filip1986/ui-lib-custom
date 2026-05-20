@@ -23,15 +23,24 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type DemoSnippetKey =
-  | 'basic'
-  | 'inline'
-  | 'formats'
-  | 'templateDriven'
-  | 'reactive'
-  | 'disabled'
-  | 'variants'
-  | 'clipping';
+import {
+  basicHtml,
+  basicTs,
+  inlineHtml,
+  inlineTs,
+  formatsHtml,
+  formatsTs,
+  templateDrivenHtml,
+  templateDrivenTs,
+  reactiveHtml,
+  reactiveTs,
+  disabledHtml,
+  disabledTs,
+  variantsHtml,
+  variantsTs,
+  clippingHtml,
+  clippingTs,
+} from './snippets.generated';
 
 /**
  * Demo page for ColorPicker component usage and forms integration.
@@ -59,6 +68,23 @@ type DemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorPickerDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly inlineHtml: string = inlineHtml;
+  public readonly inlineTs: string = inlineTs;
+  public readonly formatsHtml: string = formatsHtml;
+  public readonly formatsTs: string = formatsTs;
+  public readonly templateDrivenHtml: string = templateDrivenHtml;
+  public readonly templateDrivenTs: string = templateDrivenTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly clippingHtml: string = clippingHtml;
+  public readonly clippingTs: string = clippingTs;
+
   public readonly importCode: string = "import { ColorPicker } from 'ui-lib-custom'";
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -78,30 +104,6 @@ export class ColorPickerDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: Record<DemoSnippetKey, string> = {
-    basic: `<ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />
-<p>Selected HEX #{{ basicHex }}</p>`,
-    inline: `<ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />`,
-    formats: `<ui-lib-color-picker [(ngModel)]="hexValue" format="hex" />
-<ui-lib-color-picker [(ngModel)]="rgbValue" format="rgb" />
-<ui-lib-color-picker [(ngModel)]="hsbValue" format="hsb" />`,
-    templateDriven: `<form #f="ngForm" (ngSubmit)="submitTemplateDriven()">
-  <ui-lib-color-picker name="templateColor" [(ngModel)]="templateDrivenValue" format="hex" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-</form>`,
-    reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <ui-lib-color-picker formControlName="color" format="hex" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-</form>`,
-    disabled: `<ui-lib-color-picker [disabled]="true" [(ngModel)]="disabledValue" format="hex" />`,
-    variants: `<ui-lib-color-picker variant="material" [(ngModel)]="variantValues.material" />
-<ui-lib-color-picker variant="bootstrap" [(ngModel)]="variantValues.bootstrap" />
-<ui-lib-color-picker variant="minimal" [(ngModel)]="variantValues.minimal" />`,
-    clipping: `<div class="clipping-card">
-  <ui-lib-color-picker [(ngModel)]="clippingValue" format="hex" />
-</div>`,
-  };
 
   public basicHex: string = '6466f1';
   public inlineHex: string = '3b82f6';
@@ -133,132 +135,6 @@ export class ColorPickerDemoComponent {
     minimal: '14b8a6',
   };
   public clippingValue: string = '6366f1';
-
-  public readonly snippetsTs: Record<DemoSnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public basicHex: string = '6466f1';
-}`,
-    inline: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public inlineHex: string = '3b82f6';
-}`,
-    formats: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-import type { HsbColor, RgbColor } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public hexValue: string = '6466f1';
-  public rgbValue: RgbColor = { r: 100, g: 102, b: 241 };
-  public hsbValue: HsbColor = { h: 239, s: 59, b: 95 };
-}`,
-    templateDriven: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-import { Button } from 'ui-lib-custom/button';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker, Button],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public templateDrivenValue: string = '22c55e';
-
-  public submitTemplateDriven(): void {
-    // handle form submit
-  }
-}`,
-    reactive: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-import { Button } from 'ui-lib-custom/button';
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, ColorPicker, Button],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly reactiveForm = new FormGroup({
-    color: new FormControl<string | null>('0ea5e9', { validators: [Validators.required] }),
-  });
-
-  public submitReactive(): void {
-    this.reactiveForm.markAllAsTouched();
-  }
-}`,
-    disabled: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public disabledValue: string = 'ef4444';
-}`,
-    variants: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly variantValues = {
-    material: 'a855f7',
-    bootstrap: 'f97316',
-    minimal: '14b8a6',
-  };
-}`,
-    clipping: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ColorPicker } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, ColorPicker],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public clippingValue: string = '6366f1';
-}`,
-  };
-
-  public snippet(key: DemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: DemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
 
   public submitTemplateDriven(): void {
     this.templateDrivenSubmittedValue = this.templateDrivenValue;

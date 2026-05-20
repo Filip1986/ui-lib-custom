@@ -35,41 +35,40 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
-type AutoCompleteDemoSnippetKey =
-  | 'basic'
-  | 'objects'
-  | 'dropdown'
-  | 'forceSelection'
-  | 'multiple'
-  | 'multipleAdvanced'
-  | 'grouped'
-  | 'virtual'
-  | 'templates'
-  | 'sizes'
-  | 'filled'
-  | 'states'
-  | 'reactive'
-  | 'templateDriven'
-  | 'variants'
-  | 'clipping';
-
-type AutoCompleteDemoSnippetTsKey =
-  | 'basicTs'
-  | 'objectsTs'
-  | 'dropdownTs'
-  | 'forceSelectionTs'
-  | 'multipleTs'
-  | 'multipleAdvancedTs'
-  | 'groupedTs'
-  | 'virtualTs'
-  | 'templatesTs'
-  | 'sizesTs'
-  | 'filledTs'
-  | 'statesTs'
-  | 'reactiveTs'
-  | 'templateDrivenTs'
-  | 'variantsTs'
-  | 'clippingTs';
+import {
+  basicHtml,
+  basicTs,
+  objectsHtml,
+  objectsTs,
+  dropdownHtml,
+  dropdownTs,
+  forceSelectionHtml,
+  forceSelectionTs,
+  multipleHtml,
+  multipleTs,
+  multipleAdvancedHtml,
+  multipleAdvancedTs,
+  groupedHtml,
+  groupedTs,
+  virtualHtml,
+  virtualTs,
+  templatesHtml,
+  templatesTs,
+  sizesHtml,
+  sizesTs,
+  filledHtml,
+  filledTs,
+  statesHtml,
+  statesTs,
+  reactiveHtml,
+  reactiveTs,
+  templateDrivenHtml,
+  templateDrivenTs,
+  variantsHtml,
+  variantsTs,
+  clippingHtml,
+  clippingTs,
+} from './snippets.generated';
 
 /**
  * Demo page for AutoComplete component features and patterns.
@@ -101,6 +100,39 @@ type AutoCompleteDemoSnippetTsKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoCompleteDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly objectsHtml: string = objectsHtml;
+  public readonly objectsTs: string = objectsTs;
+  public readonly dropdownHtml: string = dropdownHtml;
+  public readonly dropdownTs: string = dropdownTs;
+  public readonly forceSelectionHtml: string = forceSelectionHtml;
+  public readonly forceSelectionTs: string = forceSelectionTs;
+  public readonly multipleHtml: string = multipleHtml;
+  public readonly multipleTs: string = multipleTs;
+  public readonly multipleAdvancedHtml: string = multipleAdvancedHtml;
+  public readonly multipleAdvancedTs: string = multipleAdvancedTs;
+  public readonly groupedHtml: string = groupedHtml;
+  public readonly groupedTs: string = groupedTs;
+  public readonly virtualHtml: string = virtualHtml;
+  public readonly virtualTs: string = virtualTs;
+  public readonly templatesHtml: string = templatesHtml;
+  public readonly templatesTs: string = templatesTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTs: string = filledTs;
+  public readonly statesHtml: string = statesHtml;
+  public readonly statesTs: string = statesTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+  public readonly templateDrivenHtml: string = templateDrivenHtml;
+  public readonly templateDrivenTs: string = templateDrivenTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly clippingHtml: string = clippingHtml;
+  public readonly clippingTs: string = clippingTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -148,490 +180,6 @@ export class AutoCompleteDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly snippetsTs: Record<AutoCompleteDemoSnippetTsKey, string> = {
-    basicTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  basicValue: string | null = null;
-  basicSuggestions: string[] = [];
-
-  onBasicComplete(event: AutoCompleteCompleteEvent): void {
-    const query = event.query.toLowerCase();
-    this.basicSuggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(query));
-  }
-}`,
-    objectsTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  objectValue: string | null = null;
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }, { name: 'France', code: 'FR' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    dropdownTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  dropdownValue: string | null = null;
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    forceSelectionTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  forceSelectionValue: string | null = null;
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    multipleTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  multipleValue: unknown[] = [];
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    multipleAdvancedTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-  UiLibAutoComplete,
-  AutoCompleteSelectedItemDirective,
-} from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete, AutoCompleteSelectedItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  multipleAdvancedValue: unknown[] = [];
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    groupedTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete, AutoCompleteGroupDirective } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface CityItem { label: string; value: string; }
-interface Group { label: string; items: CityItem[]; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete, AutoCompleteGroupDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  groupedValue: string | null = null;
-  groupedCitySuggestions: Group[] = [];
-  readonly allGroups: Group[] = [
-    { label: 'Germany', items: [{ label: 'Berlin', value: 'berlin' }] },
-  ];
-
-  onGroupedCitiesComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.groupedCitySuggestions = this.allGroups
-      .map(g => ({ ...g, items: g.items.filter(c => c.label.toLowerCase().includes(q)) }))
-      .filter(g => g.items.length > 0);
-  }
-}`,
-    virtualTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  virtualValue: string | null = null;
-  virtualSuggestions: Array<{ label: string; value: string }> = [];
-
-  onVirtualComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.virtualSuggestions = Array.from({ length: 100 }, (_, i) => ({ label: \`Item \${i}\`, value: \`item-\${i}\` }))
-      .filter(item => item.label.toLowerCase().includes(q));
-  }
-}`,
-    templatesTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-  UiLibAutoComplete,
-  AutoCompleteHeaderDirective,
-  AutoCompleteItemDirective,
-  AutoCompleteSelectedItemDirective,
-  AutoCompleteFooterDirective,
-  AutoCompleteEmptyDirective,
-} from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [
-    FormsModule, UiLibAutoComplete,
-    AutoCompleteHeaderDirective, AutoCompleteItemDirective,
-    AutoCompleteSelectedItemDirective, AutoCompleteFooterDirective,
-    AutoCompleteEmptyDirective,
-  ],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  templateValue: unknown[] = [];
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    sizesTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  smallValue: string | null = null;
-  mediumValue: string | null = null;
-  largeValue: string | null = null;
-  suggestions: string[] = [];
-
-  onComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
-  }
-}`,
-    filledTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  filledValue: string | null = null;
-  suggestions: string[] = [];
-
-  onComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
-  }
-}`,
-    statesTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  disabledValue: string | null = 'disabled';
-  invalidValue: string | null = null;
-}`,
-    reactiveTs: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly reactiveForm = new FormGroup({
-    country: new FormControl<string | null>(null, { validators: [Validators.required] }),
-  });
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    templateDrivenTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  templateModel: string | null = null;
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-    variantsTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  materialValue: string | null = null;
-  bootstrapValue: string | null = null;
-  minimalValue: string | null = null;
-  suggestions: string[] = [];
-
-  onComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
-  }
-}`,
-    clippingTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
-import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
-
-interface Country { name: string; code: string; }
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibAutoComplete],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  clippingValue: string | null = null;
-  countrySuggestions: Country[] = [];
-  readonly allCountries: Country[] = [{ name: 'Germany', code: 'DE' }];
-
-  onCountryComplete(event: AutoCompleteCompleteEvent): void {
-    const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
-  }
-}`,
-  };
-
-  public readonly snippets: Record<AutoCompleteDemoSnippetKey, string> = {
-    basic: `<ui-lib-autocomplete
-  [suggestions]="basicSuggestions"
-  [delay]="150"
-  placeholder="Search framework"
-  (completeMethod)="onBasicComplete($event)"
-/>`,
-    objects: `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  placeholder="Select country"
-  (completeMethod)="onCountryComplete($event)"
-/>`,
-    dropdown: `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  [dropdown]="true"
-  dropdownMode="current"
-  (completeMethod)="onCountryComplete($event)"
-/>`,
-    forceSelection: `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  [forceSelection]="true"
-  [autoClear]="true"
-  (completeMethod)="onCountryComplete($event)"
-/>`,
-    multiple: `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  [multiple]="true"
-  (completeMethod)="onCountryComplete($event)"
-/>`,
-    multipleAdvanced: `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  [multiple]="true"
-  [dropdown]="true"
-  [addOnBlur]="true"
-  [addOnTab]="true"
-  separator=","
-  [unique]="true"
-  (completeMethod)="onCountryComplete($event)"
->
-  <ng-template uiAutoCompleteSelectedItem let-code="code">
-    <span class="chip-template">{{ code }}</span>
-  </ng-template>
-</ui-lib-autocomplete>`,
-    grouped: `<ui-lib-autocomplete
-  [suggestions]="groupedCitySuggestions"
-  [group]="true"
-  optionLabel="label"
-  optionValue="value"
-  [optionGroupLabel]="'label'"
-  [optionGroupChildren]="'items'"
-  (completeMethod)="onGroupedCitiesComplete($event)"
-/>`,
-    virtual: `<ui-lib-autocomplete
-  [suggestions]="virtualSuggestions"
-  optionLabel="label"
-  optionValue="value"
-  [virtualScroll]="true"
-  [virtualScrollItemSize]="44"
-  scrollHeight="240px"
-  (completeMethod)="onVirtualComplete($event)"
-/>`,
-    templates: `<ui-lib-autocomplete
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  [multiple]="true"
-  (completeMethod)="onCountryComplete($event)"
->
-  <ng-template uiAutoCompleteHeader>
-    <strong>Choose country</strong>
-  </ng-template>
-  <ng-template uiAutoCompleteItem let-country="country">
-    <span>{{ country.name }} ({{ country.code }})</span>
-  </ng-template>
-  <ng-template uiAutoCompleteFooter>
-    <small>{{ countrySuggestions.length }} options</small>
-  </ng-template>
-</ui-lib-autocomplete>`,
-    sizes: `<ui-lib-autocomplete size="sm" />
-<ui-lib-autocomplete size="md" />
-<ui-lib-autocomplete size="lg" />`,
-    filled: `<ui-lib-autocomplete [filled]="true" [showClear]="true" />`,
-    states: `<ui-lib-autocomplete [disabled]="true" />
-<ui-lib-autocomplete [invalid]="true" />`,
-    reactive: `<form [formGroup]="reactiveForm">
-  <ui-lib-autocomplete
-    formControlName="country"
-    [suggestions]="countrySuggestions"
-    optionLabel="name"
-    optionValue="code"
-    (completeMethod)="onCountryComplete($event)"
-  />
-</form>`,
-    templateDriven: `<ui-lib-autocomplete
-  [(ngModel)]="templateModel"
-  [ngModelOptions]="{ standalone: true }"
-  [suggestions]="countrySuggestions"
-  optionLabel="name"
-  optionValue="code"
-  (completeMethod)="onCountryComplete($event)"
-/>`,
-    variants: `<ui-lib-autocomplete variant="material" />
-<ui-lib-autocomplete variant="bootstrap" />
-<ui-lib-autocomplete variant="minimal" />`,
-    clipping: `<div class="clipping-card">
-  <ui-lib-autocomplete
-    [(ngModel)]="clippingValue"
-    [suggestions]="countrySuggestions"
-    optionLabel="name"
-    optionValue="code"
-    placeholder="Open inside clipped card"
-    (completeMethod)="onCountryComplete($event)"
-  />
-</div>`,
-  };
-
   public basicSuggestions: string[] = [...AUTOCOMPLETE_BASIC_STRINGS];
   public countrySuggestions: DemoCountry[] = [...AUTOCOMPLETE_COUNTRIES];
   public groupedCitySuggestions: DemoGroup[] = [...AUTOCOMPLETE_GROUPED_CITIES];
@@ -669,10 +217,6 @@ export class MyComponent {
     bootstrap: null,
     minimal: null,
   };
-
-  public snippet(key: AutoCompleteDemoSnippetKey): string {
-    return this.snippets[key];
-  }
 
   public countryControl(): FormControl<string | null> {
     return this.reactiveForm.controls['country'] as FormControl<string | null>;
