@@ -1,0 +1,75 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    [title]="data.componentName"
+    [description]="data.description"
+  />
+
+  <!-- ── Overview ─────────────────────────────────────────────────────── -->
+  <section class="coming-soon-section" id="overview" data-doc-anchor>
+    <div class="coming-soon-banner" role="status" aria-label="Under development">
+      <div class="coming-soon-banner__icon">
+        <ui-lib-icon name="clock" size="lg" aria-hidden="true" />
+      </div>
+      <div class="coming-soon-banner__content">
+        <p class="coming-soon-banner__heading">Under Development</p>
+        <p class="coming-soon-banner__body">
+          <strong>{{ data.componentName }}</strong> is planned for a future release.
+          It appears in the menu so you can discover what's coming and track its progress
+          on the <a routerLink="/roadmap" fragment="build-queue" class="coming-soon-link">Roadmap</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="coming-soon-rationale">
+      <h3 class="coming-soon-rationale__heading">Why this component?</h3>
+      <p class="coming-soon-rationale__body">{{ data.rationale }}</p>
+    </div>
+  </section>
+
+  <!-- ── Details ──────────────────────────────────────────────────────── -->
+  <section class="coming-soon-section" id="details" data-doc-anchor>
+    <h2 class="coming-soon-section__title">Details</h2>
+    <dl class="coming-soon-details">
+      <div class="coming-soon-details__row">
+        <dt class="coming-soon-details__label">Build Queue Priority</dt>
+        <dd class="coming-soon-details__value">
+          <span class="coming-soon-badge coming-soon-badge--priority">#{{ data.priority }}</span>
+        </dd>
+      </div>
+      <div class="coming-soon-details__row">
+        <dt class="coming-soon-details__label">Category</dt>
+        <dd class="coming-soon-details__value">{{ data.group }}</dd>
+      </div>
+      <div class="coming-soon-details__row">
+        <dt class="coming-soon-details__label">Complexity</dt>
+        <dd class="coming-soon-details__value">
+          <span class="coming-soon-badge coming-soon-badge--complexity">{{ data.complexity }}</span>
+        </dd>
+      </div>
+      <div class="coming-soon-details__row">
+        <dt class="coming-soon-details__label">Reference Implementations</dt>
+        <dd class="coming-soon-details__value coming-soon-details__value--muted">{{ data.reference }}</dd>
+      </div>
+    </dl>
+
+    <div class="coming-soon-cta">
+      <a routerLink="/roadmap" fragment="build-queue" class="coming-soon-cta__link">
+        <ui-lib-icon name="map" size="sm" aria-hidden="true" />
+        View full Build Queue on the Roadmap
+      </a>
+    </div>
+  </section>
+
+  <!-- ── TOC rail ─────────────────────────────────────────────────────── -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

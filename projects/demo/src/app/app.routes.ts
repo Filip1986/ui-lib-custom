@@ -708,10 +708,20 @@ export const routes: Routes = [
   {
     path: 'splitter',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/splitter/splitter-demo.component').then(
-        (m: { SplitterDemoComponent: Type<unknown> }): Type<unknown> => m.SplitterDemoComponent
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
       ),
-    title: 'Splitter - UI Components Library',
+    title: 'Splitter — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Splitter',
+      description: 'Two or more resizable panes for IDE-style layouts, dashboards, and editors.',
+      rationale:
+        'Two or more resizable panes; needed in IDEs, dashboards, editors. PrimeNG, Ng-Zorro, shadcn all have it.',
+      complexity: 'Medium-High',
+      reference: 'PrimeNG Splitter, shadcn Resizable',
+      priority: 9,
+      group: 'Panel',
+    },
   },
   {
     path: 'stepper',
@@ -866,6 +876,214 @@ export const routes: Routes = [
         (m: { RoadmapComponent: Type<unknown> }): Type<unknown> => m.RoadmapComponent
       ),
     title: 'Roadmap & Progress - UI Components Library',
+  },
+  // ── Build Queue — coming soon ──────────────────────────────────────────
+  {
+    path: 'date-range-picker',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'DateRangePicker — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'DateRangePicker',
+      description:
+        'Date range selection — pick a start and end date with a single intuitive picker.',
+      rationale:
+        'Every major library has it. Date range selection is a daily developer need. PrimeNG, Material, Ng-Zorro all ship one.',
+      complexity: 'Medium',
+      reference: 'PrimeNG DatePicker, Material DateRangePicker',
+      priority: 1,
+      group: 'Form',
+    },
+  },
+  {
+    path: 'time-picker',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'TimePicker — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'TimePicker',
+      description: 'Standalone time input for scheduling, booking, and time-entry UIs.',
+      rationale:
+        'Standalone time input; extremely common in scheduling / booking UIs. Very low a11y complexity.',
+      complexity: 'Low-Medium',
+      reference: 'PrimeNG TimePicker, Ng-Zorro TimePicker',
+      priority: 2,
+      group: 'Form',
+    },
+  },
+  {
+    path: 'empty-state',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Empty State — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Empty State',
+      description:
+        'A polished "no data" placeholder component every app needs — almost no library ships it properly.',
+      rationale:
+        '"No data" placeholder; every app needs this; almost no library ships it as a proper component. Highest bang-for-buck.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Empty',
+      priority: 3,
+      group: 'Misc',
+    },
+  },
+  {
+    path: 'statistic',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Statistic — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Statistic',
+      description:
+        'Key metric display with label, value, and trend indicator — ubiquitous in dashboards.',
+      rationale:
+        'Key metric display with label + trend; ubiquitous in dashboards. Only Ng-Zorro has it — big differentiator.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Statistic',
+      priority: 4,
+      group: 'Data',
+    },
+  },
+  {
+    path: 'typography',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Typography — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Typography',
+      description:
+        'Semantic Heading, Text, Code, and Link components with token-driven styling for a complete design-system feel.',
+      rationale:
+        'Semantic Heading / Text / Code / Link with token-driven styling. shadcn and Ng-Zorro have it; gives library a complete design-system feel.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Typography, shadcn Typography',
+      priority: 5,
+      group: 'Misc',
+    },
+  },
+  {
+    path: 'descriptions',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Descriptions — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Descriptions',
+      description: 'Key-value pair display for detail views, profile pages, and record summaries.',
+      rationale:
+        'Key-value pair display; common in detail views. Only Ng-Zorro ships this — easy differentiator win.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Descriptions',
+      priority: 6,
+      group: 'Data',
+    },
+  },
+  {
+    path: 'segmented-control',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Segmented Control — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Segmented Control',
+      description:
+        'View-switcher control for Grid/List toggles, Day/Week/Month selectors — distinct from SelectButton.',
+      rationale:
+        'View-switcher pattern (Grid/List, Day/Week/Month); distinct from SelectButton (which is a toggle).',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Segmented',
+      priority: 7,
+      group: 'Form',
+    },
+  },
+  {
+    path: 'kbd',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Kbd — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Kbd',
+      description:
+        'Display keyboard shortcuts inline in tooltips, menus, and command palettes with styled key badges.',
+      rationale:
+        'Display keyboard shortcuts inline in tooltips and menus. Only shadcn ships this — small but DX-delightful differentiator.',
+      complexity: 'Very Low',
+      reference: 'shadcn/ui Kbd',
+      priority: 8,
+      group: 'Misc',
+    },
+  },
+  {
+    path: 'scroll-area',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Scroll Area — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Scroll Area',
+      description:
+        'Custom-styled scrollbar overlay that preserves native scroll behaviour — no Angular library ships this today.',
+      rationale:
+        'Custom-styled scrollbar overlay preserving native scroll. Radix and shadcn ship it — no Angular libraries do.',
+      complexity: 'Medium',
+      reference: 'Radix ScrollArea, shadcn Scroll Area',
+      priority: 10,
+      group: 'Panel',
+    },
+  },
+  {
+    path: 'calendar',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Calendar — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Calendar',
+      description:
+        'Full month/year grid for scheduling and event display — distinct from the DatePicker.',
+      rationale:
+        'Full month/year grid for scheduling and event display; distinct from DatePicker. 4 of 6 reference libraries have it.',
+      complexity: 'High',
+      reference: 'PrimeNG Calendar, Ng-Zorro Calendar',
+      priority: 11,
+      group: 'Data',
+    },
+  },
+  {
+    path: 'navigation-menu',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/coming-soon/coming-soon-page.component').then(
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+      ),
+    title: 'Navigation Menu — Coming Soon - UI Components Library',
+    data: {
+      componentName: 'Navigation Menu',
+      description:
+        'Top-level horizontal navigation with rich dropdown panels — distinct from Menubar.',
+      rationale:
+        'Top-level horizontal nav with rich dropdown panels; distinct from Menubar. shadcn and Radix both have it first-class.',
+      complexity: 'Medium',
+      reference: 'Radix NavigationMenu, shadcn Navigation Menu',
+      priority: 12,
+      group: 'Menu',
+    },
   },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
