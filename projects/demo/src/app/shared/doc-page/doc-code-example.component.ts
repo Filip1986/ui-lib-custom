@@ -25,22 +25,20 @@ export class DocCodeExampleComponent {
   public readonly scss: InputSignal<string | null> = input<string | null>(null);
   public readonly showLineNumbers: InputSignal<boolean> = input<boolean>(true);
 
-  public readonly files: Signal<readonly CodeSnippetFile[]> = computed(
-    (): readonly CodeSnippetFile[] => {
-      const result: CodeSnippetFile[] = [];
-      const htmlCode: string | null = this.html();
-      const tsCode: string | null = this.typescript();
-      const scssCode: string | null = this.scss();
-      if (htmlCode) {
-        result.push({ filename: 'template.html', language: 'html', code: htmlCode });
-      }
-      if (tsCode) {
-        result.push({ filename: 'component.ts', language: 'typescript', code: tsCode });
-      }
-      if (scssCode) {
-        result.push({ filename: 'styles.scss', language: 'scss', code: scssCode });
-      }
-      return result;
+  public readonly files: Signal<CodeSnippetFile[]> = computed((): CodeSnippetFile[] => {
+    const result: CodeSnippetFile[] = [];
+    const htmlCode: string | null = this.html();
+    const tsCode: string | null = this.typescript();
+    const scssCode: string | null = this.scss();
+    if (tsCode) {
+      result.push({ filename: 'component.ts', language: 'typescript', code: tsCode });
     }
-  );
+    if (htmlCode) {
+      result.push({ filename: 'template.html', language: 'html', code: htmlCode });
+    }
+    if (scssCode) {
+      result.push({ filename: 'styles.scss', language: 'scss', code: scssCode });
+    }
+    return result;
+  });
 }

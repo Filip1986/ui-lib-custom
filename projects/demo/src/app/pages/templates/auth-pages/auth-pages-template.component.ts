@@ -8,7 +8,6 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Panel } from 'ui-lib-custom/panel';
 import { Button } from 'ui-lib-custom/button';
 import { Divider } from 'ui-lib-custom/divider';
-import { Icon } from 'ui-lib-custom/icon';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /** Free template: Auth Pages (Login, Register, Forgot Password) using ui-lib-custom. */
@@ -23,7 +22,6 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     Panel,
     Button,
     Divider,
-    Icon,
     CodeSnippet,
   ],
   templateUrl: './auth-pages-template.component.html',

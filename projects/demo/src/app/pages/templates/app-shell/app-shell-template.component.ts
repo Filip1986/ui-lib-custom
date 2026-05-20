@@ -7,10 +7,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Panel } from 'ui-lib-custom/panel';
 import { Button } from 'ui-lib-custom/button';
-import { Badge } from 'ui-lib-custom/badge';
 import { Avatar } from 'ui-lib-custom/avatar';
-import { Icon } from 'ui-lib-custom/icon';
-import { Tag } from 'ui-lib-custom/tag';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 /** Free template: App Shell layout using the ui-lib-custom component library. */
@@ -24,10 +21,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     DocTocComponent,
     Panel,
     Button,
-    Badge,
     Avatar,
-    Icon,
-    Tag,
     CodeSnippet,
   ],
   templateUrl: './app-shell-template.component.html',

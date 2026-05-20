@@ -35,7 +35,7 @@
       <!-- Profile card (left) -->
       <ui-lib-panel class="profile-card">
         <div class="profile-avatar-wrap">
-          <ui-lib-avatar label="JD" shape="circle" size="xlarge" />
+           <ui-lib-avatar label="JD" shape="circle" size="lg" />
           <span class="profile-status-dot profile-status-dot--online" aria-label="Online"></span>
         </div>
         <h3 class="profile-name">Jane Doe</h3>
@@ -84,28 +84,28 @@
           <h4 class="profile-section-label">Recent Activity</h4>
           <ul class="feed-list" role="list">
             <li class="feed-item">
-              <ui-lib-avatar label="JD" shape="circle" size="normal" />
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
               <div class="feed-content">
                 <p>Completed design review for <strong>Dashboard v3</strong></p>
                 <span class="feed-time">Today at 10:32 AM</span>
               </div>
             </li>
             <li class="feed-item">
-              <ui-lib-avatar label="JD" shape="circle" size="normal" />
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
               <div class="feed-content">
                 <p>Commented on <strong>Button component accessibility</strong></p>
                 <span class="feed-time">Yesterday at 3:15 PM</span>
               </div>
             </li>
             <li class="feed-item">
-              <ui-lib-avatar label="JD" shape="circle" size="normal" />
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
               <div class="feed-content">
                 <p>Merged PR <strong>#214 — Token system update</strong></p>
                 <span class="feed-time">May 18 at 9:00 AM</span>
               </div>
             </li>
             <li class="feed-item">
-              <ui-lib-avatar label="JD" shape="circle" size="normal" />
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
               <div class="feed-content">
                 <p>Created new project <strong>AI UI Kit wireframes</strong></p>
                 <span class="feed-time">May 15 at 2:45 PM</span>
@@ -161,7 +161,7 @@
       @for (member of teamMembers; track member.name) {
         <ui-lib-panel class="member-card">
           <div class="member-avatar-wrap">
-            <ui-lib-avatar [label]="member.initials" shape="circle" size="large" />
+            <ui-lib-avatar [label]="member.initials" shape="circle" size="lg" />
             <span
               class="member-status-dot"
               [class.member-status-dot--online]="member.status === 'online'"
@@ -184,7 +184,7 @@
       <div class="team-avatar-group-wrap">
         <ui-lib-avatar-group>
           @for (member of teamMembers; track member.name) {
-            <ui-lib-avatar [label]="member.initials" shape="circle" size="normal" />
+            <ui-lib-avatar [label]="member.initials" shape="circle" size="md" />
           }
         </ui-lib-avatar-group>
         <span class="team-count">{{ teamMembers.length }} members</span>

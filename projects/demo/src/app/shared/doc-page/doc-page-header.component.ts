@@ -20,4 +20,5 @@ export class DocPageHeaderComponent {
   public readonly title: InputSignal<string> = input.required<string>();
   public readonly importCode: InputSignal<string> = input<string>('');
   public readonly description: InputSignal<string> = input<string>('');
+  public readonly tags: InputSignal<string[]> = input<string[]>([]);
 }

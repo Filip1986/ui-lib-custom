@@ -3,6 +3,13 @@
   @if (description()) {
     <p class="doc-description" [innerHTML]="description()"></p>
   }
+  @if (tags().length) {
+    <div class="doc-header-tags">
+      @for (tag of tags(); track tag) {
+        <span class="doc-header-tag">{{ tag }}</span>
+      }
+    </div>
+  }
   <ng-content />
   @if (importCode()) {
     <ui-lib-code-snippet
