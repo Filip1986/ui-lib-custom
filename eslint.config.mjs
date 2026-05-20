@@ -125,6 +125,18 @@ export default [
       '@typescript-eslint/typedef': 'off',
     },
   },
+  // Demo example files — user-facing code that intentionally uses relaxed conventions.
+  {
+    files: ['**/examples/*.example.ts'],
+    rules: {
+      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
+      '@typescript-eslint/typedef': 'off',
+      '@typescript-eslint/explicit-member-accessibility': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/require-description': 'off',
+    },
+  },
   // Angular HTML template parsing (add template rules here when needed).
   {
     files: ['**/*.html'],

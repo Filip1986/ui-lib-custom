@@ -1,0 +1,132 @@
+/* eslint-disable */
+// AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
+// Do not edit manually.
+
+export const basicTs = `import { Component } from '@angular/core';
+import { Tooltip } from 'ui-lib-custom/tooltip';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [Tooltip, Button],
+  template: \`
+    <ui-lib-button uiLibTooltip="Save the document">Save</ui-lib-button>
+    <ui-lib-button uiLibTooltip="Delete this item">Delete</ui-lib-button>
+    <ui-lib-button uiLibTooltip="Share with others">Share</ui-lib-button>
+  \`,
+})
+export class BasicTooltipExample {}`;
+
+export const disabledTs = `import { Component, signal } from '@angular/core';
+import { Tooltip } from 'ui-lib-custom/tooltip';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [Tooltip, Button],
+  template: \`
+    <ui-lib-button
+      uiLibTooltip="You will never see this"
+      [tooltipDisabled]="tooltipDisabled()"
+    >
+      {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
+    </ui-lib-button>
+    <ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
+      Toggle disabled
+    </ui-lib-button>
+  \`,
+})
+export class DisabledTooltipExample {
+  readonly tooltipDisabled = signal(false);
+}`;
+
+export const focusEventTs = `import { Component } from '@angular/core';
+import { Tooltip } from 'ui-lib-custom/tooltip';
+
+@Component({
+  standalone: true,
+  imports: [Tooltip],
+  template: \`
+    <input
+      placeholder="Tab to this field"
+      uiLibTooltip="Enter your full name"
+      tooltipEvent="focus"
+    />
+    <input
+      placeholder="Hover or tab here"
+      uiLibTooltip="Accepts hover and focus"
+      tooltipEvent="both"
+    />
+  \`,
+})
+export class FocusEventTooltipExample {}`;
+
+export const positionsTs = `import { Component } from '@angular/core';
+import { Tooltip } from 'ui-lib-custom/tooltip';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [Tooltip, Button],
+  template: \`
+    <ui-lib-button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</ui-lib-button>
+    <ui-lib-button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</ui-lib-button>
+    <ui-lib-button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</ui-lib-button>
+    <ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>
+  \`,
+})
+export class PositionsTooltipExample {}`;
+
+export const showHideDelaysTs = `import { Component } from '@angular/core';
+import { Tooltip } from 'ui-lib-custom/tooltip';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [Tooltip, Button],
+  template: \`
+    <ui-lib-button uiLibTooltip="Appears after 400 ms" [showDelay]="400">
+      400 ms show delay
+    </ui-lib-button>
+    <ui-lib-button uiLibTooltip="Stays 600 ms after leaving" [hideDelay]="600">
+      600 ms hide delay
+    </ui-lib-button>
+    <ui-lib-button uiLibTooltip="Both delays combined" [showDelay]="300" [hideDelay]="400">
+      Show 300 ms / Hide 400 ms
+    </ui-lib-button>
+  \`,
+})
+export class ShowHideDelaysTooltipExample {}`;
+
+export const variantsTs = `import { Component } from '@angular/core';
+import { Tooltip } from 'ui-lib-custom/tooltip';
+import { Button } from 'ui-lib-custom/button';
+
+@Component({
+  standalone: true,
+  imports: [Tooltip, Button],
+  template: \`
+    <ui-lib-button
+      uiLibTooltip="Material — elevated shadow, large radius"
+      tooltipVariant="material"
+      tooltipPosition="bottom"
+    >
+      Material
+    </ui-lib-button>
+    <ui-lib-button
+      uiLibTooltip="Bootstrap — dark background, tight radius"
+      tooltipVariant="bootstrap"
+      tooltipPosition="bottom"
+    >
+      Bootstrap
+    </ui-lib-button>
+    <ui-lib-button
+      uiLibTooltip="Minimal — uses page foreground colour"
+      tooltipVariant="minimal"
+      tooltipPosition="bottom"
+    >
+      Minimal
+    </ui-lib-button>
+  \`,
+})
+export class VariantsTooltipExample {}`;

@@ -11,6 +11,14 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicTs,
+  disabledTs,
+  focusEventTs,
+  positionsTs,
+  showHideDelaysTs,
+  variantsTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the Tooltip directive.
@@ -52,18 +60,12 @@ export class TooltipDemoComponent {
   };
 
   public readonly importCode: string = "import { Tooltip } from 'ui-lib-custom/tooltip'";
-  public readonly snippetBasic: string = `<button uiLibTooltip="Save the document">Save</button>`;
-  public readonly snippetBasicTs: string = `import { Component } from '@angular/core';\nimport { Tooltip } from 'ui-lib-custom/tooltip';\n\n@Component({\n  standalone: true,\n  imports: [Tooltip],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
-  public readonly snippetPositions: string = `<button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</button>\n<button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</button>\n<button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</button>\n<button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</button>`;
-  public readonly snippetPositionsTs: string = `import { Component } from '@angular/core';\nimport { Tooltip } from 'ui-lib-custom/tooltip';\n\n@Component({\n  standalone: true,\n  imports: [Tooltip],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
-  public readonly snippetFocusEvent: string = `<input uiLibTooltip="Enter your full name" tooltipEvent="focus" />\n<input uiLibTooltip="Accepts hover and focus" tooltipEvent="both" />`;
-  public readonly snippetFocusEventTs: string = `import { Component } from '@angular/core';\nimport { Tooltip } from 'ui-lib-custom/tooltip';\n\n@Component({\n  standalone: true,\n  imports: [Tooltip],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
-  public readonly snippetShowHideDelays: string = `<button uiLibTooltip="Appears after 400 ms" [showDelay]="400">Hover</button>`;
-  public readonly snippetShowHideDelaysTs: string = `import { Component } from '@angular/core';\nimport { Tooltip } from 'ui-lib-custom/tooltip';\n\n@Component({\n  standalone: true,\n  imports: [Tooltip],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
-  public readonly snippetDisabled: string = `<button uiLibTooltip="Hidden" [tooltipDisabled]="isDisabled">Hover</button>`;
-  public readonly snippetDisabledTs: string = `import { Component, signal } from '@angular/core';\nimport { Tooltip } from 'ui-lib-custom/tooltip';\n\n@Component({\n  standalone: true,\n  imports: [Tooltip],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {\n  readonly isDisabled = signal(false);\n}`;
-  public readonly snippetVariants: string = `<button uiLibTooltip="Material tooltip" tooltipVariant="material">Material</button>`;
-  public readonly snippetVariantsTs: string = `import { Component } from '@angular/core';\nimport { Tooltip } from 'ui-lib-custom/tooltip';\n\n@Component({\n  standalone: true,\n  imports: [Tooltip],\n  templateUrl: './my.component.html',\n})\nexport class MyComponent {}`;
+  public readonly basicTs: string = basicTs;
+  public readonly positionsTs: string = positionsTs;
+  public readonly focusEventTs: string = focusEventTs;
+  public readonly showHideDelaysTs: string = showHideDelaysTs;
+  public readonly disabledTs: string = disabledTs;
+  public readonly variantsTs: string = variantsTs;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [
