@@ -146,6 +146,7 @@ describe('SidebarComponent ordering', (): void => {
       'MegaMenu',
       'Menu',
       'Menubar',
+      'NavigationMenu',
       'PanelMenu',
       'TieredMenu',
     ]);
