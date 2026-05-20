@@ -22,6 +22,30 @@ import type {
   SplitButtonItemCommandEvent,
   SplitButtonSeverity,
 } from 'ui-lib-custom/split-button';
+import {
+  basicHtml,
+  basicTs,
+  iconsHtml,
+  iconsTs,
+  severityHtml,
+  severityTs,
+  disabledHtml,
+  disabledTs,
+  raisedHtml,
+  raisedTs,
+  roundedHtml,
+  roundedTs,
+  textHtml,
+  textTs,
+  raisedTextHtml,
+  raisedTextTs,
+  outlinedHtml,
+  outlinedTs,
+  sizesHtml,
+  sizesTs,
+  templateHtml,
+  templateTs,
+} from './snippets.generated';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.
@@ -46,6 +70,29 @@ import type {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitButtonDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly iconsHtml: string = iconsHtml;
+  public readonly iconsTs: string = iconsTs;
+  public readonly severityHtml: string = severityHtml;
+  public readonly severityTs: string = severityTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly raisedHtml: string = raisedHtml;
+  public readonly raisedTs: string = raisedTs;
+  public readonly roundedHtml: string = roundedHtml;
+  public readonly roundedTs: string = roundedTs;
+  public readonly textHtml: string = textHtml;
+  public readonly textTs: string = textTs;
+  public readonly raisedTextHtml: string = raisedTextHtml;
+  public readonly raisedTextTs: string = raisedTextTs;
+  public readonly outlinedHtml: string = outlinedHtml;
+  public readonly outlinedTs: string = outlinedTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly templateHtml: string = templateHtml;
+  public readonly templateTs: string = templateTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -101,33 +148,6 @@ export class SplitButtonDemoComponent {
     'contrast',
   ];
 
-  public readonly snippets: Record<string, string> = {
-    basic: `<ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />`,
-    icons: `<ui-lib-split-button label="Add" icon="plus" [model]="items" />`,
-    severity: `<ui-lib-split-button
-  [label]="severity"
-  [severity]="severity"
-  [model]="items"
-/>`,
-    disabled: `<ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
-<ui-lib-split-button label="Main disabled" [model]="items" [buttonDisabled]="true" />
-<ui-lib-split-button label="Menu disabled" [model]="items" [menuButtonDisabled]="true" />`,
-    raised: `<ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [model]="items" />`,
-    rounded: `<ui-lib-split-button [label]="severity" [severity]="severity" [rounded]="true" [model]="items" />`,
-    text: `<ui-lib-split-button [label]="severity" [severity]="severity" [text]="true" [model]="items" />`,
-    raisedText: `<ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [text]="true" [model]="items" />`,
-    outlined: `<ui-lib-split-button [label]="severity" [severity]="severity" [outlined]="true" [model]="items" />`,
-    sizes: `<ui-lib-split-button label="Small" size="sm" [model]="items" />
-<ui-lib-split-button label="Medium" size="md" [model]="items" />
-<ui-lib-split-button label="Large" size="lg" [model]="items" />`,
-    template: `<ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
-  <ng-template splitButtonContent>
-    <ui-lib-icon name="save" />
-    <span>Save Template</span>
-  </ng-template>
-</ui-lib-split-button>`,
-  };
-
   public readonly lastAction: WritableSignal<string> = signal<string>('No action yet.');
 
   public readonly items: SplitButtonItem[] = [
@@ -156,168 +176,6 @@ export class SplitButtonDemoComponent {
   ];
 
   public readonly iconItems: SplitButtonItem[] = [...this.items];
-
-  public readonly snippetsTs: Record<string, string> = {
-    basic: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: SplitButtonItem[] = [
-    { label: 'Update', icon: 'pencil' },
-    { label: 'Delete', icon: 'trash' },
-  ];
-
-  public onPrimaryAction(): void {
-    console.log('Primary action triggered');
-  }
-}`,
-    icons: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: SplitButtonItem[] = [
-    { label: 'Update', icon: 'pencil' },
-    { label: 'Delete', icon: 'trash' },
-  ];
-}`,
-    severity: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly severity: SplitButtonSeverity = 'success';
-  public readonly items: SplitButtonItem[] = [
-    { label: 'Update', icon: 'pencil' },
-  ];
-}`,
-    disabled: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    raised: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly severity: SplitButtonSeverity = 'primary';
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    rounded: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly severity: SplitButtonSeverity = 'primary';
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    text: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly severity: SplitButtonSeverity = 'primary';
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    raisedText: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly severity: SplitButtonSeverity = 'primary';
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    outlined: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly severity: SplitButtonSeverity = 'primary';
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { SplitButtonComponent } from 'ui-lib-custom/split-button';
-import type { SplitButtonItem } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-    template: `import { Component } from '@angular/core';
-import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
-import { Icon } from 'ui-lib-custom/icon';
-import type { SplitButtonItem } from 'ui-lib-custom/split-button';
-
-@Component({
-  standalone: true,
-  imports: [SplitButtonComponent, SplitButtonContentDirective, Icon],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: SplitButtonItem[] = [{ label: 'Update' }];
-}`,
-  };
-
-  public snippetTs(key: string): string {
-    return this.snippetsTs[key] ?? '';
-  }
-
-  public snippet(key: string): string {
-    return this.snippets[key] ?? '';
-  }
 
   public onPrimaryAction(): void {
     this.lastAction.set('Primary action: Save');

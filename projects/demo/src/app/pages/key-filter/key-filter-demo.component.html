@@ -21,7 +21,7 @@
             placeholder="Enter account ID"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('alphanum')" [typescript]="snippetTs('alphanumTs')" />
+        <app-doc-code-example [html]="alphanumHtml" [typescript]="alphanumTs" />
       </section>
 
       <section id="alpha" data-doc-anchor class="example-section">
@@ -30,7 +30,7 @@
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'alpha'" placeholder="Letters only" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('alpha')" [typescript]="snippetTs('alphaTs')" />
+        <app-doc-code-example [html]="alphaHtml" [typescript]="alphaTs" />
       </section>
 
       <section id="pint" data-doc-anchor class="example-section">
@@ -43,7 +43,7 @@
             placeholder="Positive integers only"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('pint')" [typescript]="snippetTs('pintTs')" />
+        <app-doc-code-example [html]="pintHtml" [typescript]="pintTs" />
       </section>
 
       <section id="int" data-doc-anchor class="example-section">
@@ -52,7 +52,7 @@
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'int'" placeholder="Integers (with minus)" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('int')" [typescript]="snippetTs('intTs')" />
+        <app-doc-code-example [html]="intHtml" [typescript]="intTs" />
       </section>
 
       <section id="num" data-doc-anchor class="example-section">
@@ -67,7 +67,7 @@
             placeholder="Numbers (decimal, minus)"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('num')" [typescript]="snippetTs('numTs')" />
+        <app-doc-code-example [html]="numHtml" [typescript]="numTs" />
       </section>
 
       <section id="hex" data-doc-anchor class="example-section">
@@ -76,7 +76,7 @@
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('hex')" [typescript]="snippetTs('hexTs')" />
+        <app-doc-code-example [html]="hexHtml" [typescript]="hexTs" />
       </section>
 
       <section id="money" data-doc-anchor class="example-section">
@@ -89,7 +89,7 @@
             placeholder="Money (digits, - . ,)"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('money')" [typescript]="snippetTs('moneyTs')" />
+        <app-doc-code-example [html]="moneyHtml" [typescript]="moneyTs" />
       </section>
 
       <section id="email" data-doc-anchor class="example-section">
@@ -100,7 +100,7 @@
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'email'" placeholder="Email characters" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('email')" [typescript]="snippetTs('emailTs')" />
+        <app-doc-code-example [html]="emailHtml" [typescript]="emailTs" />
       </section>
 
       <section id="custom" data-doc-anchor class="example-section">
@@ -116,7 +116,7 @@
             placeholder="Vowels only (a e i o u)"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('custom')" [typescript]="snippetTs('customTs')" />
+        <app-doc-code-example [html]="customHtml" [typescript]="customTs" />
       </section>
 
       <section id="bypass" data-doc-anchor class="example-section">
@@ -143,7 +143,7 @@
             />
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('bypass')" [typescript]="snippetTs('bypassTs')" />
+        <app-doc-code-example [html]="bypassHtml" [typescript]="bypassTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

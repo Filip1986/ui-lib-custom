@@ -28,6 +28,7 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { cardExampleHtml, cardExampleTs, usageTs } from './snippets.generated';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -69,6 +70,10 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsComponent {
+  public readonly cardExampleHtml: string = cardExampleHtml;
+  public readonly cardExampleTs: string = cardExampleTs;
+  public readonly usageTs: string = usageTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -115,36 +120,6 @@ export class CardsComponent {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
-
-  public readonly snippets: { readonly usage: string } = {
-    usage: `import { Card } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [Card],
-  template:
-    '<ui-lib-card showHeader>\n' +
-    '  <div card-header>Title</div>\n' +
-    '  Body content\n' +
-    '</ui-lib-card>'
-})
-export class Example {}`,
-  } as const;
-
-  public readonly cardExample: string = `<ui-lib-card>
-  <div card-header>Card Title</div>
-  Card content
-  <div card-footer>Actions</div>
-</ui-lib-card>`;
-  public readonly cardExampleTs: string = `import { Component } from '@angular/core';
-import { Card } from 'ui-lib-custom/card';
-
-@Component({
-  standalone: true,
-  imports: [Card],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   public readonly variant: WritableSignal<CardVariant> = signal<CardVariant>('material');
   public readonly elevation: WritableSignal<CardElevation> = signal<CardElevation>('medium');

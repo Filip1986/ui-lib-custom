@@ -21,7 +21,7 @@
             <span class="value-text">Value: {{ basicChecked() }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
       </section>
 
       <!-- ── b. Custom Labels ──────────────────────────────────────────────── -->
@@ -52,7 +52,7 @@
             />
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('labels')" [typescript]="snippetTs('labels')" />
+        <app-doc-code-example [html]="labelsHtml" [typescript]="labelsTs" />
       </section>
 
       <!-- ── c. Icons ──────────────────────────────────────────────────────── -->
@@ -89,7 +89,7 @@
             />
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('icons')" [typescript]="snippetTs('icons')" />
+        <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
       </section>
 
       <!-- ── d. Sizes ──────────────────────────────────────────────────────── -->
@@ -121,7 +121,7 @@
             />
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
       </section>
 
       <!-- ── e. Variants ───────────────────────────────────────────────────── -->
@@ -166,7 +166,7 @@
             }
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
+        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
       </section>
 
       <!-- ── f. Allow Empty ────────────────────────────────────────────────── -->
@@ -190,8 +190,8 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('allowEmpty')"
-          [typescript]="snippetTs('allowEmpty')"
+          [html]="allowEmptyHtml"
+          [typescript]="allowEmptyTs"
         />
       </section>
 
@@ -208,7 +208,7 @@
             <ui-lib-toggle-button [disabled]="true" [checked]="true" onLabel="On" offLabel="Off" />
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </section>
 
       <!-- ── h. Forms ──────────────────────────────────────────────────────── -->
@@ -230,7 +230,7 @@
             <span class="value-text">ngModel: {{ ngModelValue }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('ngModel')" [typescript]="snippetTs('ngModel')" />
+        <app-doc-code-example [html]="ngModelHtml" [typescript]="ngModelTs" />
 
         <ui-lib-panel variant="minimal">
           <h4 class="subsection-label">Reactive Forms</h4>
@@ -252,7 +252,7 @@
             <div class="form-value">Form value: {{ reactiveForm.value | json }}</div>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
       </section>
 
       <!-- ── i. Events ─────────────────────────────────────────────────────── -->

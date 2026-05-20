@@ -82,6 +82,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-20 [Batch-1 snippet migration — 20 demo pages to example-file pattern]
+Changed:
+  - scripts/migrate-snippets-batch.mjs (NEW — AST-free migration script; string-aware parsing, handles all 3 legacy snippet patterns)
+  - 20 pages migrated: animated-on-scroll, auto-focus, badges, cards, checkboxes, fieldset, icon-field, image-compare, key-filter, knob, meter-group, popover, scoped-theming, scroll-panel, scroll-top, select, select-buttons, slider, split-button, toggle-button
+  - Each page: examples/ folder created, snippets.generated.ts generated, component TS/HTML updated
+  - key-filter: 8 TS example files created manually (keyFilterBaseTs computed values); bypass.example.html created manually
+  - meter-group: variants/vertical/no-legend HTML-only example files added for [code] bindings
+  - checkboxes: usage.example.ts/html added for [code] binding
+  - select: usage.example.ts/html corrected (was TypeScript code in HTML slot)
+  - cards: usage.example.ts rewritten as valid component; usage.example.html created
+  - scoped-theming: Card import added to component-theme-code.example.ts; [uiLibDarkTheme] fixed to boolean binding
+  - auto-focus: conditional.example.html fixed @if (show()) signal call syntax
+State: All 20 pages migrated. Demo build zero errors. Typecheck clean.
+Verification:
+  node scripts/generate-snippets.mjs → PASS (21 pages including tooltip)
+  npm run build:demo → PASS (zero errors; only pre-existing budget warnings)
+  npm run typecheck → PASS (zero errors)
+Next step: Run batch 2 — remaining ~36 demo pages that still use hand-written snippet strings. Pages to target: accordion, autocomplete, cascade-select, chart, color-picker, confirm-popup, data-view, date-picker, dialog, divider, drawer, editor, float-label, icons, image, input-group, input-mask, input-number, input-otp, inputs, layouts, listbox, mega-menu, menu, menubar, order-list, organization-chart, panel, panel-menu, pick-list, rating, scroller, tabs, textarea, tiered-menu, tree-select.
+
 Date: 2026-05-20 [Code snippet infrastructure — raw example files pattern]
 Changed:
   - scripts/generate-snippets.mjs (NEW — pre-build generator, reads *.example.ts/html/scss, writes snippets.generated.ts per page)

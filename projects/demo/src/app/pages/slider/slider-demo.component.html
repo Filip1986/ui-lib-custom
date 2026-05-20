@@ -24,7 +24,7 @@
             <span class="slider-caption">Value: {{ basicValue }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
       </section>
 
       <!-- b. Range -->
@@ -47,7 +47,7 @@
             >
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('range')" [typescript]="snippetTs('range')" />
+        <app-doc-code-example [html]="rangeHtml" [typescript]="rangeTs" />
       </section>
 
       <!-- c. Step -->
@@ -68,7 +68,7 @@
             <span class="slider-caption">step=25 &middot; value={{ stepValue }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('step')" [typescript]="snippetTs('step')" />
+        <app-doc-code-example [html]="stepHtml" [typescript]="stepTs" />
       </section>
 
       <!-- d. Min / Max -->
@@ -90,7 +90,7 @@
             <span class="slider-caption">value={{ minmaxValue }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('minmax')" [typescript]="snippetTs('minmax')" />
+        <app-doc-code-example [html]="minmaxHtml" [typescript]="minmaxTs" />
       </section>
 
       <!-- e. Vertical -->
@@ -110,7 +110,7 @@
             <span class="slider-caption">value={{ verticalValue }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('vertical')" [typescript]="snippetTs('vertical')" />
+        <app-doc-code-example [html]="verticalHtml" [typescript]="verticalTs" />
       </section>
 
       <!-- f. Sizes -->
@@ -150,7 +150,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
       </section>
 
       <!-- g. Animated -->
@@ -171,7 +171,7 @@
             <span class="slider-caption">value={{ animateValue }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('animate')" [typescript]="snippetTs('animate')" />
+        <app-doc-code-example [html]="animateHtml" [typescript]="animateTs" />
       </section>
 
       <!-- h. Disabled -->
@@ -189,7 +189,7 @@
             <span class="slider-caption">disabled</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </section>
 
       <!-- i. Read-only -->
@@ -209,7 +209,7 @@
             <span class="slider-caption">readonly</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippetTs('readonly')" />
+        <app-doc-code-example [html]="readonlyHtml" [typescript]="readonlyTs" />
       </section>
 
       <!-- j. Reactive Forms -->
@@ -232,7 +232,7 @@
             </div>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

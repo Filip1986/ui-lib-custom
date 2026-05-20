@@ -14,7 +14,7 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
     </section>
 
     <section id="icons" data-doc-anchor class="example-section">
@@ -28,7 +28,7 @@
           (onClick)="onPrimaryAction()"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('icons')" [typescript]="snippetTs('icons')" />
+      <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
     </section>
 
     <section id="severity" data-doc-anchor class="example-section">
@@ -46,7 +46,7 @@
           }
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('severity')" [typescript]="snippetTs('severity')" />
+      <app-doc-code-example [html]="severityHtml" [typescript]="severityTs" />
     </section>
 
     <section id="disabled" data-doc-anchor class="example-section">
@@ -64,7 +64,7 @@
           />
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
+      <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
     </section>
 
     <section id="raised" data-doc-anchor class="example-section">
@@ -82,7 +82,7 @@
           }
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('raised')" [typescript]="snippetTs('raised')" />
+      <app-doc-code-example [html]="raisedHtml" [typescript]="raisedTs" />
     </section>
 
     <section id="rounded" data-doc-anchor class="example-section">
@@ -100,7 +100,7 @@
           }
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('rounded')" [typescript]="snippetTs('rounded')" />
+      <app-doc-code-example [html]="roundedHtml" [typescript]="roundedTs" />
     </section>
 
     <section id="text" data-doc-anchor class="example-section">
@@ -118,7 +118,7 @@
           }
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('text')" [typescript]="snippetTs('text')" />
+      <app-doc-code-example [html]="textHtml" [typescript]="textTs" />
     </section>
 
     <section id="raised-text" data-doc-anchor class="example-section">
@@ -137,7 +137,7 @@
           }
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('raisedText')" [typescript]="snippetTs('raisedText')" />
+      <app-doc-code-example [html]="raisedTextHtml" [typescript]="raisedTextTs" />
     </section>
 
     <section id="outlined" data-doc-anchor class="example-section">
@@ -155,7 +155,7 @@
           }
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('outlined')" [typescript]="snippetTs('outlined')" />
+      <app-doc-code-example [html]="outlinedHtml" [typescript]="outlinedTs" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
@@ -168,7 +168,7 @@
           <ui-lib-split-button label="Large" size="lg" [model]="items" />
         </div>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
+      <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
     </section>
 
     <section id="template" data-doc-anchor class="example-section">
@@ -184,7 +184,7 @@
           </ng-template>
         </ui-lib-split-button>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('template')" [typescript]="snippetTs('template')" />
+      <app-doc-code-example [html]="templateHtml" [typescript]="templateTs" />
     </section>
 
     <section id="accessibility" data-doc-anchor class="example-section">

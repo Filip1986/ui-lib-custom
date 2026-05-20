@@ -33,6 +33,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { checkboxExampleHtml, checkboxExampleTs, usageTs } from './snippets.generated';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };
@@ -66,6 +67,10 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxesComponent {
+  public readonly checkboxExampleHtml: string = checkboxExampleHtml;
+  public readonly checkboxExampleTs: string = checkboxExampleTs;
+  public readonly usageTs: string = usageTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -171,44 +176,6 @@ export class CheckboxesComponent {
   public readonly playgroundDescription: Signal<string | null> = computed<string | null>(
     (): string | null => (this.showDescription() ? this.description() : null)
   );
-
-  public readonly snippets: { readonly usage: string } = {
-    usage: `import { Checkbox } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [Checkbox],
-  template: \`
-    <ui-lib-checkbox
-      label="Sync data"
-      description="Keep devices aligned"
-      variant="material"
-      appearance="filled"
-      size="md"
-      [binary]="true"
-      [trueValue]="'ENABLED'"
-      [falseValue]="'DISABLED'"
-      [(ngModel)]="syncStatus">
-    </ui-lib-checkbox>
-  \`
-})
-export class SettingsComponent {
-  syncStatus = 'DISABLED';
-}`,
-  } as const;
-
-  public readonly checkboxExample: string = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
-  public readonly checkboxExampleTs: string = `import { Component } from '@angular/core';
-import { Checkbox } from 'ui-lib-custom/checkbox';
-
-@Component({
-  standalone: true,
-  imports: [Checkbox],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public checkedPrimary: boolean = false;
-}`;
 
   public selectVariant(value: CheckboxVariant): void {
     this.variant.set(value);

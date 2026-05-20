@@ -10,6 +10,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { thresholdHtml, thresholdTs, parentTargetHtml, parentTargetTs } from './snippets.generated';
 
 /**
  * Demo page for the ScrollTop component.
@@ -31,6 +32,11 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollTopDemoComponent {
+  public readonly thresholdHtml: string = thresholdHtml;
+  public readonly thresholdTs: string = thresholdTs;
+  public readonly parentTargetHtml: string = parentTargetHtml;
+  public readonly parentTargetTs: string = parentTargetTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -67,27 +73,6 @@ export class ScrollTopDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippetThreshold: string = `<ui-lib-scroll-top [threshold]="200" />`;
-  public readonly snippetThresholdTs: string = `import { Component } from '@angular/core';
-import { ScrollTop } from 'ui-lib-custom/scroll-top';
-
-@Component({
-  standalone: true,
-  imports: [ScrollTop],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
-  public readonly snippetParentTarget: string = `<div style="height: 300px; overflow-y: auto; position: relative;">\n  <ui-lib-scroll-top target="parent" [threshold]="100" />\n  <!-- scrollable content -->\n</div>`;
-  public readonly snippetParentTargetTs: string = `import { Component } from '@angular/core';
-import { ScrollTop } from 'ui-lib-custom/scroll-top';
-
-@Component({
-  standalone: true,
-  imports: [ScrollTop],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   /** Items for the scrollable container demo. */
   public readonly dummyItems: number[] = Array.from(

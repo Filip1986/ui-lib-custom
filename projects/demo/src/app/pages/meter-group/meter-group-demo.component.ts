@@ -21,6 +21,17 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
+import {
+  basicHtml,
+  basicTs,
+  labelPositionHtml,
+  labelPositionTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  verticalHtml,
+  noLegendHtml,
+} from './snippets.generated';
 
 /**
  * Demo page for the MeterGroup component.
@@ -45,6 +56,16 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeterGroupDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly labelPositionHtml: string = labelPositionHtml;
+  public readonly labelPositionTs: string = labelPositionTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly verticalHtml: string = verticalHtml;
+  public readonly noLegendHtml: string = noLegendHtml;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -138,149 +159,6 @@ export class MeterGroupDemoComponent {
   public readonly labelPositions: MeterGroupLabelPosition[] = ['start', 'end'];
   public readonly sizes: MeterGroupSize[] = ['sm', 'md', 'lg'];
   public readonly variants: MeterGroupVariant[] = ['material', 'bootstrap', 'minimal'];
-
-  public readonly snippets: {
-    readonly import: string;
-    readonly basic: string;
-    readonly basicTs: string;
-    readonly labelPosition: string;
-    readonly labelPositionTs: string;
-    readonly sizes: string;
-    readonly sizesTs: string;
-    readonly variants: string;
-    readonly variantsTs: string;
-    readonly vertical: string;
-    readonly verticalTs: string;
-    readonly noLegend: string;
-    readonly noLegendTs: string;
-  } = {
-    import: `import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';`,
-    basic: `storageItems: MeterItem[] = [
-  { label: 'Apps',     value: 16, color: '#34d399' },
-  { label: 'Messages', value: 8,  color: '#818cf8' },
-  { label: 'Media',    value: 24, color: '#fb923c' },
-  { label: 'System',   value: 10, color: '#f87171' },
-];
-
-<ui-lib-meter-group [values]="storageItems" />`,
-    basicTs: `import { Component } from '@angular/core';
-import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';
-
-@Component({
-  standalone: true,
-  imports: [MeterGroup],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly storageItems: MeterItem[] = [
-    { label: 'Apps',     value: 16, color: '#34d399' },
-    { label: 'Messages', value: 8,  color: '#818cf8' },
-    { label: 'Media',    value: 24, color: '#fb923c' },
-    { label: 'System',   value: 10, color: '#f87171' },
-  ];
-}`,
-    labelPosition: `<!-- legend above the bar -->
-<ui-lib-meter-group [values]="items" labelPosition="start" />
-
-<!-- legend below the bar (default) -->
-<ui-lib-meter-group [values]="items" labelPosition="end" />`,
-    labelPositionTs: `import { Component } from '@angular/core';
-import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';
-
-@Component({
-  standalone: true,
-  imports: [MeterGroup],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: MeterItem[] = [
-    { label: 'Documents', value: 38, color: '#0ea5e9' },
-    { label: 'Videos',    value: 21, color: '#d946ef' },
-    { label: 'Photos',    value: 17, color: '#f59e0b' },
-    { label: 'Other',     value: 12, color: '#6b7280' },
-  ];
-}`,
-    sizes: `<ui-lib-meter-group [values]="items" size="sm" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" size="md" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" size="lg" [showLabels]="false" />`,
-    sizesTs: `import { Component } from '@angular/core';
-import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';
-
-@Component({
-  standalone: true,
-  imports: [MeterGroup],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: MeterItem[] = [
-    { label: 'Used',   value: 45, color: '#6366f1' },
-    { label: 'Cached', value: 25, color: '#a5b4fc' },
-    { label: 'Free',   value: 30, color: '#e0e7ff' },
-  ];
-}`,
-    variants: `<ui-lib-meter-group [values]="items" variant="material"  [showLabels]="false" />
-<ui-lib-meter-group [values]="items" variant="bootstrap" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" variant="minimal"   [showLabels]="false" />`,
-    variantsTs: `import { Component } from '@angular/core';
-import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';
-
-@Component({
-  standalone: true,
-  imports: [MeterGroup],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: MeterItem[] = [
-    { label: 'Used',   value: 45, color: '#6366f1' },
-    { label: 'Cached', value: 25, color: '#a5b4fc' },
-    { label: 'Free',   value: 30, color: '#e0e7ff' },
-  ];
-}`,
-    vertical: `<ui-lib-meter-group
-  [values]="cpuItems"
-  orientation="vertical"
-  labelPosition="end"
-/>`,
-    verticalTs: `import { Component } from '@angular/core';
-import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';
-
-@Component({
-  standalone: true,
-  imports: [MeterGroup],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly cpuItems: MeterItem[] = [
-    { label: 'User',    value: 42, color: '#818cf8' },
-    { label: 'System',  value: 18, color: '#fb923c' },
-    { label: 'I/O Wait', value: 8, color: '#f87171' },
-  ];
-}`,
-    noLegend: `<ui-lib-meter-group [values]="items" [showLabels]="false" />`,
-    noLegendTs: `import { Component } from '@angular/core';
-import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';
-
-@Component({
-  standalone: true,
-  imports: [MeterGroup],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly items: MeterItem[] = [
-    { label: 'Apps',     value: 16, color: '#34d399' },
-    { label: 'Messages', value: 8,  color: '#818cf8' },
-    { label: 'Media',    value: 24, color: '#fb923c' },
-    { label: 'System',   value: 10, color: '#f87171' },
-  ];
-}`,
-  } as const;
 
   // ---- Static demo data ---------------------------------------------------
 
