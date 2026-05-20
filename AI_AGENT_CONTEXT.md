@@ -82,6 +82,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-20 [Code snippet infrastructure — raw example files pattern]
+Changed:
+  - scripts/generate-snippets.mjs (NEW — pre-build generator, reads *.example.ts/html/scss, writes snippets.generated.ts per page)
+  - projects/demo/src/app/pages/tooltip/examples/ (NEW — 6 example files: basic, positions, focus-event, show-hide-delays, disabled, variants)
+  - projects/demo/src/app/pages/tooltip/snippets.generated.ts (NEW — auto-generated, committed)
+  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.ts (replaced 12 hand-written snippet strings with 6 imports from snippets.generated)
+  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.html (6 app-doc-code-example usages updated to use new property names, html tab dropped)
+  - eslint.config.mjs (added override for **/examples/*.example.ts — relaxes library-level rules for user-facing example code)
+  - package.json (added snippets, preserve:demo, prebuild:demo scripts)
+State: Pattern is fully operational. Tooltip is the reference implementation. Build clean, lint clean, tsc clean. Two pre-existing budget warnings remain (unrelated).
+Verification:
+  node scripts/generate-snippets.mjs → PASS
+  npx eslint projects/demo/src/app/pages/tooltip/ --max-warnings 0 → PASS
+  tsc --noEmit -p projects/demo/tsconfig.app.json → PASS
+  ng build demo → PASS (only pre-existing budget warnings)
+Next step: Migrate remaining demo pages that use hand-written snippet strings to the new example-file pattern. Pages that use DocCodeExampleComponent are the priority. Run `grep -r "DocCodeExampleComponent" projects/demo/src/app/pages/ --include="*.ts" -l` to enumerate them.
+
 Date: 2026-05-19 [Demo build errors fixed — DocApiReferenceComponent + apiRows + doc-code-example]
 Changed:
   - scripts/fix-demo-imports-v2.py (ran script — added DocApiReferenceComponent import + apiRows to 28 demo pages)
