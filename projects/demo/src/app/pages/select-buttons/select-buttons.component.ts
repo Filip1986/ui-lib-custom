@@ -28,6 +28,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { selectButtonExampleHtml, selectButtonExampleTs } from './snippets.generated';
 /**
  * Demo page for select button variants.
  */
@@ -58,6 +59,9 @@ import { Panel } from 'ui-lib-custom/panel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonsComponent {
+  public readonly selectButtonExampleHtml: string = selectButtonExampleHtml;
+  public readonly selectButtonExampleTs: string = selectButtonExampleTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -98,57 +102,6 @@ export class SelectButtonsComponent {
     { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
-
-  public readonly snippets: { usage: string; usageTs: string; selectButtonExampleTs: string } = {
-    usage: `import { SelectButton } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [SelectButton],
-  template: \`<ui-lib-select-button [options]="options" [(value)]="value" />\`,
-})
-export class Example {
-  options = [
-    { label: 'One', value: 1 },
-    { label: 'Two', value: 2 },
-  ];
-  value = 1;
-}`,
-    usageTs: `import { Component } from '@angular/core';
-import { SelectButton } from 'ui-lib-custom/select-button';
-import type { SelectButtonOption } from 'ui-lib-custom/select-button';
-
-@Component({
-  standalone: true,
-  imports: [SelectButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly options: SelectButtonOption[] = [
-    { label: 'One', value: 1 },
-    { label: 'Two', value: 2 },
-  ];
-  value: number = 1;
-}`,
-    selectButtonExampleTs: `import { Component } from '@angular/core';
-import { SelectButton } from 'ui-lib-custom/select-button';
-import type { SelectButtonOption } from 'ui-lib-custom/select-button';
-
-@Component({
-  standalone: true,
-  imports: [SelectButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly basicOptions: SelectButtonOption[] = [
-    { label: 'One-Way', value: 'one-way' },
-    { label: 'Return', value: 'return' },
-  ];
-  basicValue: string = 'one-way';
-}`,
-  };
-
-  public readonly selectButtonExample: string = `<ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />`;
 
   // Basic
   public readonly basicOptions: SelectButtonOption[] = [

@@ -18,6 +18,7 @@ import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.c
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { badgeExampleHtml, badgeExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -55,6 +56,11 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgesComponent {
+  public readonly badgeExampleHtml: string = badgeExampleHtml;
+  public readonly badgeExampleTs: string = badgeExampleTs;
+  public readonly usageHtml: string = usageHtml;
+  public readonly usageTs: string = usageTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -121,19 +127,6 @@ export class BadgesComponent {
   ];
   public readonly sizes: BadgeSize[] = ['sm', 'md', 'lg'];
 
-  public readonly snippets: { readonly usage: string; readonly usageTs: string } = {
-    usage: `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`,
-    usageTs: `import { Component } from '@angular/core';
-import { Badge } from 'ui-lib-custom/badge';
-
-@Component({
-  standalone: true,
-  imports: [Badge],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-  } as const;
-
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
   public get viewportPresets(): ViewportPreset[] {
@@ -171,15 +164,4 @@ export class MyComponent {}`,
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
-
-  public readonly badgeExample: string = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
-  public readonly badgeExampleTs: string = `import { Component } from '@angular/core';
-import { Badge } from 'ui-lib-custom/badge';
-
-@Component({
-  standalone: true,
-  imports: [Badge],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 }

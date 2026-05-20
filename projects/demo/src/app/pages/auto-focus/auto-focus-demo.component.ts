@@ -10,6 +10,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import {
+  basicUsageHtml,
+  basicUsageTs,
+  conditionalHtml,
+  conditionalTs,
+  disabledHtml,
+  disabledTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the AutoFocus directive.
@@ -33,6 +41,13 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoFocusDemoComponent {
+  public readonly basicUsageHtml: string = basicUsageHtml;
+  public readonly basicUsageTs: string = basicUsageTs;
+  public readonly conditionalHtml: string = conditionalHtml;
+  public readonly conditionalTs: string = conditionalTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -52,43 +67,7 @@ export class AutoFocusDemoComponent {
   };
 
   public readonly importCode: string = "import { AutoFocus } from 'ui-lib-custom/auto-focus'";
-  public readonly snippetBasicUsage: string = `<input uiLibAutoFocus />`;
-  public readonly snippetBasicUsageTs: string = `import { Component } from '@angular/core';
-import { AutoFocus } from 'ui-lib-custom/auto-focus';
 
-@Component({
-  standalone: true,
-  imports: [AutoFocus],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}
-`;
-  public readonly snippetConditional: string = `@if (show) {\n  <input uiLibAutoFocus />\n}`;
-  public readonly snippetConditionalTs: string = `import { Component, signal } from '@angular/core';
-import { AutoFocus } from 'ui-lib-custom/auto-focus';
-
-@Component({
-  standalone: true,
-  imports: [AutoFocus],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly show = signal<boolean>(false);
-}
-`;
-  public readonly snippetDisabled: string = `<input uiLibAutoFocus [disabled]="!isEnabled" />`;
-  public readonly snippetDisabledTs: string = `import { Component, signal } from '@angular/core';
-import { AutoFocus } from 'ui-lib-custom/auto-focus';
-
-@Component({
-  standalone: true,
-  imports: [AutoFocus],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly isEnabled = signal<boolean>(true);
-}
-`;
   public readonly snippetImport: string = `import { AutoFocus } from 'ui-lib-custom/auto-focus';`;
   public readonly snippetSelector: string = `[uiLibAutoFocus]`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

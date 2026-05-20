@@ -14,16 +14,26 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type KnobDemoSnippetKey =
-  | 'basic'
-  | 'sizes'
-  | 'step'
-  | 'minmax'
-  | 'template'
-  | 'colors'
-  | 'disabled'
-  | 'readonly'
-  | 'reactive';
+import {
+  basicHtml,
+  basicTs,
+  sizesHtml,
+  sizesTs,
+  stepHtml,
+  stepTs,
+  minmaxHtml,
+  minmaxTs,
+  templateHtml,
+  templateTs,
+  colorsHtml,
+  colorsTs,
+  disabledHtml,
+  disabledTs,
+  readonlyHtml,
+  readonlyTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the Knob component — circular dial for numeric input.
@@ -49,6 +59,25 @@ type KnobDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KnobDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly stepHtml: string = stepHtml;
+  public readonly stepTs: string = stepTs;
+  public readonly minmaxHtml: string = minmaxHtml;
+  public readonly minmaxTs: string = minmaxTs;
+  public readonly templateHtml: string = templateHtml;
+  public readonly templateTs: string = templateTs;
+  public readonly colorsHtml: string = colorsHtml;
+  public readonly colorsTs: string = colorsTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly readonlyHtml: string = readonlyHtml;
+  public readonly readonlyTs: string = readonlyTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -82,152 +111,6 @@ export class KnobDemoComponent {
     brightness: new FormControl<number>(70),
     contrast: new FormControl<number>(50),
   });
-
-  private readonly snippets: Record<KnobDemoSnippetKey, string> = {
-    basic: '<uilib-knob [(ngModel)]="value" />',
-
-    sizes:
-      '<!-- Small -->\n<uilib-knob size="sm" [(ngModel)]="value" />\n\n<!-- Medium (default) -->\n<uilib-knob size="md" [(ngModel)]="value" />\n\n<!-- Large -->\n<uilib-knob size="lg" [(ngModel)]="value" />',
-
-    step: '<!-- Snaps to 0, 25, 50, 75, 100 -->\n<uilib-knob [step]="25" [(ngModel)]="value" />',
-
-    minmax:
-      '<!-- -50 to +50, step 10 -->\n<uilib-knob [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />',
-
-    template:
-      '<uilib-knob valueTemplate="{value}\u00b0" [(ngModel)]="value" />\n\n<uilib-knob valueTemplate="{value}%" [(ngModel)]="value" />',
-
-    colors: '<uilib-knob valueColor="#f59e0b" textColor="#b45309" [(ngModel)]="value" />',
-
-    disabled: '<uilib-knob [disabled]="true" [(ngModel)]="value" />',
-
-    readonly: '<uilib-knob [readonly]="true" [(ngModel)]="value" />',
-
-    reactive:
-      '<form [formGroup]="form">\n  <uilib-knob formControlName="brightness" />\n  <uilib-knob formControlName="contrast" />\n</form>',
-  };
-
-  public snippet(key: KnobDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  private readonly snippetsTs: Record<KnobDemoSnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 40;
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 40;
-}`,
-    step: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 0;
-}`,
-    minmax: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = -20;
-}`,
-    template: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 60;
-}`,
-    colors: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 75;
-}`,
-    disabled: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 55;
-}`,
-    readonly: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 30;
-}`,
-    reactive: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { KnobComponent } from 'ui-lib-custom/knob';
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, KnobComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly form: FormGroup = new FormGroup({
-    brightness: new FormControl<number>(70),
-    contrast: new FormControl<number>(50),
-  });
-}`,
-  };
-
-  public snippetTs(key: KnobDemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
 
   public get brightnessControl(): FormControl<number> {
     return this.reactiveForm.get('brightness') as FormControl<number>;

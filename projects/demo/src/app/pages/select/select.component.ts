@@ -34,6 +34,7 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { selectExampleHtml, selectExampleTs, usageHtml, usageTs } from './snippets.generated';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -75,6 +76,11 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
+  public readonly selectExampleHtml: string = selectExampleHtml;
+  public readonly selectExampleTs: string = selectExampleTs;
+  public readonly usageHtml: string = usageHtml;
+  public readonly usageTs: string = usageTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -123,56 +129,6 @@ export class SelectComponent {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
-
-  public readonly snippets: {
-    readonly usage: string;
-    readonly usageTs: string;
-    readonly selectExampleTs: string;
-  } = {
-    usage: `import { UiLibSelect } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [UiLibSelect],
-  template: '<ui-lib-select [options]="[{ label: \'One\', value: 1 }]" label="Choose"></ui-lib-select>'
-})
-export class Example {}`,
-    usageTs: `import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibSelect } from 'ui-lib-custom/select';
-import type { SelectOption } from 'ui-lib-custom/select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly options: SelectOption[] = [
-    { label: 'Alpha', value: 'alpha' },
-    { label: 'Beta', value: 'beta' },
-  ];
-  readonly value = signal<SelectOption['value'] | null>(null);
-}`,
-    selectExampleTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibSelect } from 'ui-lib-custom/select';
-import type { SelectOption } from 'ui-lib-custom/select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly options: SelectOption[] = [
-    { label: 'Alpha', value: 'alpha' },
-    { label: 'Beta', value: 'beta' },
-  ];
-}`,
-  } as const;
-
-  public readonly selectExample: string = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 

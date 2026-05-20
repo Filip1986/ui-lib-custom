@@ -15,6 +15,12 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import {
+  componentThemeCodeHtml,
+  componentThemeCodeTs,
+  directiveCodeHtml,
+  directiveCodeTs,
+} from './snippets.generated';
 /**
  * Demo page for scoped theming examples.
  */
@@ -42,6 +48,11 @@ import { Panel } from 'ui-lib-custom/panel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScopedThemingComponent {
+  public readonly componentThemeCodeHtml: string = componentThemeCodeHtml;
+  public readonly componentThemeCodeTs: string = componentThemeCodeTs;
+  public readonly directiveCodeHtml: string = directiveCodeHtml;
+  public readonly directiveCodeTs: string = directiveCodeTs;
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -74,50 +85,6 @@ export class ScopedThemingComponent {
       '--uilib-surface': '#fffde7',
     },
   };
-
-  public readonly componentThemeCode: string = `<!-- String shorthand -->
-<ui-lib-card theme="dark">
-  Dark themed card
-</ui-lib-card>
-
-<!-- Full config -->
-<ui-lib-card [theme]="{ colorScheme: 'dark' }">
-  Dark themed card
-</ui-lib-card>`;
-
-  public readonly componentThemeCodeTs: string = `import { Component } from '@angular/core';
-import { ThemeScopeDirective } from 'ui-lib-custom/theme';
-
-@Component({
-  standalone: true,
-  imports: [ThemeScopeDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
-
-  public readonly directiveCode: string = `<!-- Using directive -->
-<div [uiLibTheme]="'dark'">
-  <ui-lib-button>Dark button</ui-lib-button>
-</div>
-
-<!-- Shorthand directives -->
-<section uiLibDarkTheme>
-  <ui-lib-button>Dark button</ui-lib-button>
-</section>`;
-
-  public readonly directiveCodeTs: string = `import { Component } from '@angular/core';
-import {
-  ThemeScopeDirective,
-  DarkThemeDirective,
-} from 'ui-lib-custom/theme';
-import { Button } from 'ui-lib-custom/button';
-
-@Component({
-  standalone: true,
-  imports: [ThemeScopeDirective, DarkThemeDirective, Button],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   public readonly customColorsCode: string = `// In component
 customTheme: ThemeScopeConfig = {

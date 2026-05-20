@@ -16,17 +16,28 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type SliderDemoSnippetKey =
-  | 'basic'
-  | 'range'
-  | 'step'
-  | 'minmax'
-  | 'vertical'
-  | 'sizes'
-  | 'animate'
-  | 'disabled'
-  | 'readonly'
-  | 'reactive';
+import {
+  basicHtml,
+  basicTs,
+  rangeHtml,
+  rangeTs,
+  stepHtml,
+  stepTs,
+  minmaxHtml,
+  minmaxTs,
+  verticalHtml,
+  verticalTs,
+  sizesHtml,
+  sizesTs,
+  animateHtml,
+  animateTs,
+  disabledHtml,
+  disabledTs,
+  readonlyHtml,
+  readonlyTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the Slider component — linear track control for numeric values.
@@ -53,6 +64,27 @@ type SliderDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly rangeHtml: string = rangeHtml;
+  public readonly rangeTs: string = rangeTs;
+  public readonly stepHtml: string = stepHtml;
+  public readonly stepTs: string = stepTs;
+  public readonly minmaxHtml: string = minmaxHtml;
+  public readonly minmaxTs: string = minmaxTs;
+  public readonly verticalHtml: string = verticalHtml;
+  public readonly verticalTs: string = verticalTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly animateHtml: string = animateHtml;
+  public readonly animateTs: string = animateTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly readonlyHtml: string = readonlyHtml;
+  public readonly readonlyTs: string = readonlyTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -89,164 +121,6 @@ export class SliderDemoComponent {
     volume: new FormControl<number>(60),
     brightness: new FormControl<number>(40),
   });
-
-  private readonly snippets: Record<SliderDemoSnippetKey, string> = {
-    basic: '<ui-lib-slider [(ngModel)]="value" />',
-
-    range: '<ui-lib-slider [range]="true" [(ngModel)]="rangeValue" />',
-
-    step: '<!-- Snaps to 0, 25, 50, 75, 100 -->\n<ui-lib-slider [step]="25" [(ngModel)]="value" />',
-
-    minmax: '<ui-lib-slider [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />',
-
-    vertical: '<ui-lib-slider orientation="vertical" [(ngModel)]="value" />',
-
-    sizes:
-      '<ui-lib-slider size="sm" [(ngModel)]="value" />\n<ui-lib-slider size="md" [(ngModel)]="value" />\n<ui-lib-slider size="lg" [(ngModel)]="value" />',
-
-    animate: '<ui-lib-slider [animate]="true" [(ngModel)]="value" />',
-
-    disabled: '<ui-lib-slider [disabled]="true" [(ngModel)]="value" />',
-
-    readonly: '<ui-lib-slider [readonly]="true" [(ngModel)]="value" />',
-
-    reactive:
-      '<form [formGroup]="form">\n  <ui-lib-slider formControlName="volume" />\n  <ui-lib-slider formControlName="brightness" />\n</form>',
-  };
-
-  public snippet(key: SliderDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  private readonly snippetsTs: Record<SliderDemoSnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 40;
-}`,
-    range: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  rangeValue: [number, number] = [20, 75];
-}`,
-    step: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 0;
-}`,
-    minmax: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = -10;
-}`,
-    vertical: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 60;
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 50;
-}`,
-    animate: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 30;
-}`,
-    disabled: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 55;
-}`,
-    readonly: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  value: number = 35;
-}`,
-    reactive: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Slider } from 'ui-lib-custom/slider';
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, Slider],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly form: FormGroup = new FormGroup({
-    volume: new FormControl<number>(60),
-    brightness: new FormControl<number>(40),
-  });
-}`,
-  };
-
-  public snippetTs(key: SliderDemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
 
   public get volumeControl(): FormControl<number> {
     return this.reactiveForm.get('volume') as FormControl<number>;

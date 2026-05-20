@@ -24,17 +24,26 @@ import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type SnippetKey =
-  | 'basic'
-  | 'labels'
-  | 'icons'
-  | 'iconRight'
-  | 'sizes'
-  | 'variants'
-  | 'allowEmpty'
-  | 'disabled'
-  | 'ngModel'
-  | 'reactive';
+import {
+  basicHtml,
+  basicTs,
+  labelsHtml,
+  labelsTs,
+  iconsHtml,
+  iconsTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  variantsTs,
+  allowEmptyHtml,
+  allowEmptyTs,
+  disabledHtml,
+  disabledTs,
+  ngModelHtml,
+  ngModelTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the ToggleButton component.
@@ -63,6 +72,25 @@ type SnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleButtonDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly labelsHtml: string = labelsHtml;
+  public readonly labelsTs: string = labelsTs;
+  public readonly iconsHtml: string = iconsHtml;
+  public readonly iconsTs: string = iconsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly allowEmptyHtml: string = allowEmptyHtml;
+  public readonly allowEmptyTs: string = allowEmptyTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly ngModelHtml: string = ngModelHtml;
+  public readonly ngModelTs: string = ngModelTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -147,191 +175,6 @@ export class ToggleButtonDemoComponent {
 
   public clearEventLog(): void {
     this.eventLog.set([]);
-  }
-
-  public readonly snippets: Record<SnippetKey, string> = {
-    basic: `<ui-lib-toggle-button [(checked)]="isActive" />`,
-
-    labels: `<ui-lib-toggle-button
-  onLabel="Active"
-  offLabel="Inactive"
-  [(checked)]="status"
-/>`,
-
-    icons: `<ui-lib-toggle-button
-  onLabel="Muted"
-  offLabel="Sound"
-  onIcon="volumeOff"
-  offIcon="volumeHigh"
-  [(checked)]="muted"
-/>`,
-
-    iconRight: `<ui-lib-toggle-button
-  onLabel="Muted"
-  offLabel="Sound"
-  onIcon="volumeOff"
-  offIcon="volumeHigh"
-  iconPos="right"
-  [(checked)]="muted"
-/>`,
-
-    sizes: `<!-- Small -->
-<ui-lib-toggle-button size="sm" onLabel="On" offLabel="Off" />
-
-<!-- Medium (default) -->
-<ui-lib-toggle-button size="md" onLabel="On" offLabel="Off" />
-
-<!-- Large -->
-<ui-lib-toggle-button size="lg" onLabel="On" offLabel="Off" />`,
-
-    variants: `<!-- Material -->
-<ui-lib-toggle-button variant="material" />
-
-<!-- Bootstrap -->
-<ui-lib-toggle-button variant="bootstrap" />
-
-<!-- Minimal -->
-<ui-lib-toggle-button variant="minimal" />`,
-
-    allowEmpty: `<!-- Cannot uncheck once checked -->
-<ui-lib-toggle-button [allowEmpty]="false" onLabel="Confirmed" offLabel="Confirm" />`,
-
-    disabled: `<ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />`,
-
-    ngModel: `<ui-lib-toggle-button [(ngModel)]="notificationsEnabled" />`,
-
-    reactive: `<!-- Reactive Forms -->
-<form [formGroup]="form">
-  <ui-lib-toggle-button formControlName="notifications" />
-  <ui-lib-toggle-button formControlName="darkMode" />
-</form>`,
-  };
-
-  public readonly snippetsTs: Record<SnippetKey, string> = {
-    basic: `import { Component, signal } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly isActive = signal<boolean>(false);
-}`,
-
-    labels: `import { Component, signal } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly status = signal<boolean>(false);
-}`,
-
-    icons: `import { Component, signal } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly muted = signal<boolean>(false);
-}`,
-
-    iconRight: `import { Component, signal } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly muted = signal<boolean>(false);
-}`,
-
-    sizes: `import { Component } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-
-    variants: `import { Component } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-
-    allowEmpty: `import { Component } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-
-    disabled: `import { Component } from '@angular/core';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-
-    ngModel: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public notificationsEnabled: boolean = false;
-}`,
-
-    reactive: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ToggleButton } from 'ui-lib-custom/toggle-button';
-
-@Component({
-  standalone: true,
-  imports: [ToggleButton, ReactiveFormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly form = new FormGroup({
-    notifications: new FormControl<boolean>(false),
-    darkMode: new FormControl<boolean>(true),
-  });
-}`,
-  };
-
-  public snippet(key: SnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: SnippetKey): string {
-    return this.snippetsTs[key];
   }
 
   public readonly keyboardRows: KeyboardNavRow[] = [

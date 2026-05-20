@@ -11,7 +11,20 @@ import { ImageCompare } from 'ui-lib-custom/image-compare';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' | 'customLabel';
+import {
+  basicHtml,
+  basicTs,
+  twoWayBindingHtml,
+  twoWayBindingTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  variantsTs,
+  disabledHtml,
+  disabledTs,
+  customLabelHtml,
+  customLabelTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the ImageCompare component.
@@ -34,6 +47,19 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageCompareDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly twoWayBindingHtml: string = twoWayBindingHtml;
+  public readonly twoWayBindingTs: string = twoWayBindingTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly customLabelHtml: string = customLabelHtml;
+  public readonly customLabelTs: string = customLabelTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -76,123 +102,4 @@ export class ImageCompareDemoComponent {
   public readonly position: WritableSignal<number> = signal<number>(50);
 
   // ─── Code snippets ────────────────────────────────────────────────────────────
-
-  private readonly snippets: Record<SnippetKey, string> = {
-    basic: `<ui-lib-image-compare
-  leftImage="https://picsum.photos/seed/before/800/400"
-  leftAlt="Before"
-  rightImage="https://picsum.photos/seed/after/800/400"
-  rightAlt="After"
-/>`,
-    twoWayBinding: `<ui-lib-image-compare
-  leftImage="https://picsum.photos/seed/before/800/400"
-  leftAlt="Before"
-  rightImage="https://picsum.photos/seed/after/800/400"
-  rightAlt="After"
-  [(value)]="position"
-/>
-<p>Position: {{ position() }}%</p>`,
-    sizes: `<ui-lib-image-compare
-  leftImage="..." rightImage="..."
-  size="sm"
-/>
-<ui-lib-image-compare
-  leftImage="..." rightImage="..."
-  size="md"
-/>
-<ui-lib-image-compare
-  leftImage="..." rightImage="..."
-  size="lg"
-/>`,
-    variants: `<ui-lib-image-compare
-  leftImage="..." rightImage="..."
-  variant="material"
-/>
-<ui-lib-image-compare
-  leftImage="..." rightImage="..."
-  variant="bootstrap"
-/>
-<ui-lib-image-compare
-  leftImage="..." rightImage="..."
-  variant="minimal"
-/>`,
-    disabled: `<ui-lib-image-compare
-  leftImage="..."
-  rightImage="..."
-  [disabled]="true"
-/>`,
-    customLabel: `<ui-lib-image-compare
-  leftImage="..."
-  rightImage="..."
-  ariaLabel="Compare photo filters"
-/>`,
-  };
-
-  private readonly snippetsTs: Record<SnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { ImageCompare } from 'ui-lib-custom/image-compare';
-
-@Component({
-  standalone: true,
-  imports: [ImageCompare],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    twoWayBinding: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { ImageCompare } from 'ui-lib-custom/image-compare';
-
-@Component({
-  standalone: true,
-  imports: [ImageCompare],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly position: WritableSignal<number> = signal<number>(50);
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { ImageCompare } from 'ui-lib-custom/image-compare';
-
-@Component({
-  standalone: true,
-  imports: [ImageCompare],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    variants: `import { Component } from '@angular/core';
-import { ImageCompare } from 'ui-lib-custom/image-compare';
-
-@Component({
-  standalone: true,
-  imports: [ImageCompare],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    disabled: `import { Component } from '@angular/core';
-import { ImageCompare } from 'ui-lib-custom/image-compare';
-
-@Component({
-  standalone: true,
-  imports: [ImageCompare],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    customLabel: `import { Component } from '@angular/core';
-import { ImageCompare } from 'ui-lib-custom/image-compare';
-
-@Component({
-  standalone: true,
-  imports: [ImageCompare],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-  };
-
-  public snippet(key: SnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: SnippetKey): string {
-    return this.snippetsTs[key];
-  }
 }

@@ -14,29 +14,28 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type KeyFilterDemoSnippetKey =
-  | 'alphanum'
-  | 'alpha'
-  | 'pint'
-  | 'int'
-  | 'num'
-  | 'hex'
-  | 'money'
-  | 'email'
-  | 'custom'
-  | 'bypass';
-
-type KeyFilterDemoSnippetTsKey =
-  | 'alphanumTs'
-  | 'alphaTs'
-  | 'pintTs'
-  | 'intTs'
-  | 'numTs'
-  | 'hexTs'
-  | 'moneyTs'
-  | 'emailTs'
-  | 'customTs'
-  | 'bypassTs';
+import {
+  alphanumHtml,
+  alphaHtml,
+  pintHtml,
+  intHtml,
+  numHtml,
+  hexHtml,
+  moneyHtml,
+  emailHtml,
+  customHtml,
+  customTs,
+  bypassHtml,
+  bypassTs,
+  alphanumTs,
+  alphaTs,
+  pintTs,
+  intTs,
+  numTs,
+  hexTs,
+  moneyTs,
+  emailTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the KeyFilter directive, showing all built-in presets,
@@ -62,6 +61,27 @@ type KeyFilterDemoSnippetTsKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeyFilterDemoComponent {
+  public readonly alphanumHtml: string = alphanumHtml;
+  public readonly alphanumTs: string = alphanumTs;
+  public readonly alphaHtml: string = alphaHtml;
+  public readonly alphaTs: string = alphaTs;
+  public readonly pintHtml: string = pintHtml;
+  public readonly pintTs: string = pintTs;
+  public readonly intHtml: string = intHtml;
+  public readonly intTs: string = intTs;
+  public readonly numHtml: string = numHtml;
+  public readonly numTs: string = numTs;
+  public readonly hexHtml: string = hexHtml;
+  public readonly hexTs: string = hexTs;
+  public readonly moneyHtml: string = moneyHtml;
+  public readonly moneyTs: string = moneyTs;
+  public readonly emailHtml: string = emailHtml;
+  public readonly emailTs: string = emailTs;
+  public readonly customHtml: string = customHtml;
+  public readonly customTs: string = customTs;
+  public readonly bypassHtml: string = bypassHtml;
+  public readonly bypassTs: string = bypassTs;
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -85,85 +105,12 @@ export class KeyFilterDemoComponent {
     { id: 'bypass', label: 'Bypass' },
   ];
 
-  public readonly snippets: Record<KeyFilterDemoSnippetKey, string> = {
-    alphanum:
-      '<input [uilibKeyFilter]="\'alphanum\'" hintText="Letters and numbers only" placeholder="Enter account ID" />',
-    alpha: '<input [uilibKeyFilter]="\'alpha\'" placeholder="Letters only" />',
-    pint: '<input [uilibKeyFilter]="\'pint\'" placeholder="Positive integers only" />',
-    int: '<input [uilibKeyFilter]="\'int\'" placeholder="Integers (with minus sign)" />',
-    num: '<input [uilibKeyFilter]="\'num\'" placeholder="Numbers (decimal, minus)" />',
-    hex: '<input [uilibKeyFilter]="\'hex\'" placeholder="Hex digits (0-9, a-f)" />',
-    money: '<input [uilibKeyFilter]="\'money\'" placeholder="Money (digits, - . ,)" />',
-    email: '<input [uilibKeyFilter]="\'email\'" placeholder="Email characters" />',
-    custom: '<input [uilibKeyFilter]="vowelPattern" placeholder="Vowels only (a e i o u)" />',
-    bypass: [
-      '<input',
-      '  [uilibKeyFilter]="\'pint\'"',
-      '  [keyFilterBypass]="bypassEnabled"',
-      '  placeholder="Positive integers (bypass toggleable)"',
-      '/>',
-    ].join('\n'),
-  };
-
-  private readonly keyFilterBaseTs: string = `import { Component } from '@angular/core';
-import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
-
-@Component({
-  standalone: true,
-  imports: [KeyFilterDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}
-`;
-
-  public readonly snippetsTs: Record<KeyFilterDemoSnippetTsKey, string> = {
-    alphanumTs: this.keyFilterBaseTs,
-    alphaTs: this.keyFilterBaseTs,
-    pintTs: this.keyFilterBaseTs,
-    intTs: this.keyFilterBaseTs,
-    numTs: this.keyFilterBaseTs,
-    hexTs: this.keyFilterBaseTs,
-    moneyTs: this.keyFilterBaseTs,
-    emailTs: this.keyFilterBaseTs,
-    customTs: `import { Component } from '@angular/core';
-import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
-
-@Component({
-  standalone: true,
-  imports: [KeyFilterDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly vowelPattern: RegExp = /[aeiouAEIOU]/;
-}
-`,
-    bypassTs: `import { Component } from '@angular/core';
-import { KeyFilterDirective } from 'ui-lib-custom/key-filter';
-
-@Component({
-  standalone: true,
-  imports: [KeyFilterDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public bypassEnabled: boolean = false;
-}
-`,
-  };
-
   /** Custom vowel-only filter for the RegExp demo. */
   public readonly vowelPattern: RegExp = /[aeiouAEIOU]/;
 
   /** Controls the bypass demo toggle. */
   public bypassEnabled: boolean = false;
 
-  public snippet(key: KeyFilterDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: KeyFilterDemoSnippetTsKey): string {
-    return this.snippetsTs[key];
-  }
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
