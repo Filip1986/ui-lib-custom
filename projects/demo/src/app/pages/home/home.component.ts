@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Button } from 'ui-lib-custom/button';
 import { Badge } from 'ui-lib-custom/badge';
@@ -19,6 +20,7 @@ import { Panel } from 'ui-lib-custom/panel';
   imports: [
     Panel,
     CommonModule,
+    RouterModule,
     CodeSnippet,
     Button,
     Badge,
@@ -40,6 +42,7 @@ export class HomeComponent {
   public readonly sections: DocSection[] = [
     { id: 'quick-links', label: 'Quick Links' },
     { id: 'features', label: 'Features' },
+    { id: 'pro-teaser', label: 'Pro Edition' },
     { id: 'quick-preview', label: 'Quick Preview' },
     { id: 'theme-preview', label: 'Theme Preview' },
     { id: 'getting-started', label: 'Getting Started' },

@@ -1085,6 +1085,298 @@ export const routes: Routes = [
       group: 'Menu',
     },
   },
+  // ── Pro & Enterprise routes ───────────────────────────────────────────────
+  {
+    path: 'pro-data-grid',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Advanced Data Grid — Pro - UI Components Library',
+    data: {
+      componentName: 'Advanced Data Grid',
+      tagline:
+        'Enterprise-grade data grid for Angular — signals-first, accessible, production-ready.',
+      description:
+        'A fully-featured data grid built specifically for Angular 17+ with signals, zoneless support, and elite accessibility. Virtual scroll, Excel-like editing, server-side operations, and tree-table mode — all in one composable component.',
+      icon: 'pi-table',
+      tier: 'pro',
+      features: [
+        'Virtual scroll — millions of rows at 60 fps',
+        'Column pinning, grouping, and reordering',
+        'Excel-like inline cell editing',
+        'Server-side filter, sort, and pagination',
+        'Tree-table mode with lazy loading',
+        'Aggregations, summaries, and pivot',
+        'Drag-to-reorder rows and columns',
+        'State persistence (sort, filters, column order)',
+        'Full keyboard navigation — WAI-ARIA grid pattern',
+        'Export to CSV / Excel',
+      ],
+      useCases: [
+        'Financial dashboards & trading portals',
+        'Admin portals & back-office tools',
+        'Analytics platforms',
+        'ERP & enterprise SaaS',
+        'Data exploration tools',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-workflow-builder',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Workflow Builder — Pro - UI Components Library',
+    data: {
+      componentName: 'Workflow & Visual Builder',
+      tagline: 'Drag-and-drop visual workflow designer and query builder for Angular.',
+      description:
+        'A composable visual builder toolkit: drag-drop pipeline canvas, nested query builder that compiles to SQL / MongoDB / Elasticsearch, and a lightweight BPMN-style editor. Built for process automation, CRM pipelines, and rule-engine UIs.',
+      icon: 'pi-sitemap',
+      tier: 'pro',
+      features: [
+        'Drag-drop node canvas with snap-to-grid',
+        'Nested query builder → SQL / Mongo / Elastic output',
+        'BPMN-lite process editor',
+        'Form builder with conditional logic',
+        'Survey / questionnaire builder',
+        'Rule engine UI (condition trees)',
+        'Undo / redo history',
+        'Export to JSON / BPMN XML',
+        'Full keyboard and screen-reader support',
+      ],
+      useCases: [
+        'Business process automation',
+        'CRM and sales pipeline tools',
+        'ETL and data transformation',
+        'Approval workflow systems',
+        'Low-code / no-code platforms',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-form-engine',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Dynamic Form Engine — Pro - UI Components Library',
+    data: {
+      componentName: 'Dynamic Form Engine',
+      tagline: 'JSON-schema-driven forms with signals-first validation and conditional logic.',
+      description:
+        'Render complete, validated, conditional Angular Reactive Forms from a JSON schema at runtime. Handles multi-step wizards, complex cross-field validation, and large-form performance — all without writing template code.',
+      icon: 'pi-file-edit',
+      tier: 'pro',
+      features: [
+        'JSON Schema → form renderer (no template code)',
+        'Conditional field show/hide and enable/disable',
+        'Cross-field and async validation DSL',
+        'Multi-step wizard with progress tracking',
+        'Repeatable field groups (arrays)',
+        'Large-form performance (virtual sub-sections)',
+        'Deep Angular Reactive Forms integration',
+        'Custom field-type registry',
+        'Form state serialisation and restoration',
+      ],
+      useCases: [
+        'Enterprise onboarding & KYC flows',
+        'Survey and questionnaire platforms',
+        'Configuration and settings wizards',
+        'Compliance and regulatory forms',
+        'Dynamic product configurators',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-gantt',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Gantt & Scheduler — Pro - UI Components Library',
+    data: {
+      componentName: 'Gantt & Scheduler',
+      tagline: 'Resource scheduling, project timelines, and calendar planning for Angular.',
+      description:
+        'A fully-featured Gantt chart and resource scheduler: drag scheduling, dependency arrows, zoom levels from hours to years, and calendar integration. The component teams always need and never want to build.',
+      icon: 'pi-calendar',
+      tier: 'enterprise',
+      features: [
+        'Drag-to-resize and drag-to-move tasks',
+        'Resource allocation grid',
+        'Task dependency arrows',
+        'Zoom: hours → days → weeks → months → quarters → years',
+        'Baseline and critical-path highlighting',
+        'Calendar integration (blocked days, holidays)',
+        'Milestone markers',
+        'Export to PDF / image',
+        'Full keyboard accessibility',
+      ],
+      useCases: [
+        'Project management tools',
+        'HR and workforce scheduling',
+        'Manufacturing and operations',
+        'Logistics and delivery planning',
+        'Construction and facility management',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-ai-kit',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'AI UI Kit — Pro - UI Components Library',
+    data: {
+      componentName: 'AI UI Kit',
+      tagline: 'Angular-native UI components for AI-powered applications.',
+      description:
+        "The Angular ecosystem's first dedicated AI UI kit: streaming chat, prompt playground, token usage viewer, AI diff/review panels, and agent workflow builder. React has it — now Angular does too.",
+      icon: 'pi-comments',
+      tier: 'pro',
+      features: [
+        'Streaming chat widget (SSE / WebSocket)',
+        'Prompt playground with model selector',
+        'AI diff / change review panel',
+        'Token usage and cost viewer',
+        'Agent workflow status tracker',
+        'Streaming text renderer (token-by-token)',
+        'Markdown + code block output rendering',
+        'Conversation history with branching',
+        'Accessible: ARIA live regions for streaming output',
+      ],
+      useCases: [
+        'AI chat and assistant applications',
+        'Code review and dev tooling',
+        'Document analysis and annotation',
+        'LLM-powered SaaS products',
+        'Internal copilot tools',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-analytics',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Analytics & Charts Pro — Pro - UI Components Library',
+    data: {
+      componentName: 'Analytics & Charts Pro',
+      tagline:
+        'Advanced data visualisation beyond basic charts — realtime, interactive, composable.',
+      description:
+        'The Chart component handles bar, line, pie, and scatter. Analytics Pro goes further: TradingView-like candlesticks, org charts with drag-and-drop, network graphs, heatmaps, and realtime dashboard widget primitives.',
+      icon: 'pi-chart-bar',
+      tier: 'pro',
+      features: [
+        'Candlestick / OHLC chart (TradingView-like)',
+        'Org chart with drag-and-drop editing',
+        'Network / dependency graph',
+        'Heatmap with drill-down',
+        'Realtime dashboard widget containers',
+        'Funnel and waterfall charts',
+        'Gantt-style timeline chart',
+        'Cross-chart brushing and filtering',
+        'Export to SVG / PNG / PDF',
+      ],
+      useCases: [
+        'Financial and trading platforms',
+        'Business intelligence dashboards',
+        'DevOps and monitoring portals',
+        'Sales analytics and CRM',
+        'HR org management tools',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-rich-text',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Rich Text & Document — Pro - UI Components Library',
+    data: {
+      componentName: 'Rich Text & Document',
+      tagline: 'Document editing experience for Angular — collaborative, extensible, accessible.',
+      description:
+        'A Notion-like block editor, collaborative editing via CRDT, PDF annotation viewer, and a document approval / review flow — all Angular-native. Most rich-text editors are React-first; this one is built for Angular from day one.',
+      icon: 'pi-pen-to-square',
+      tier: 'pro',
+      features: [
+        'Notion-like block editor (paragraphs, headings, lists, code)',
+        'Collaborative editing (CRDT-based)',
+        'PDF viewer with annotation and highlight',
+        'Diff / change viewer (side-by-side and inline)',
+        'Document approval and review workflow',
+        'Markdown ↔ rich-text hybrid mode',
+        'Mention and link autocompletion',
+        'Comment threads and resolutions',
+        'Accessible: full keyboard editing, screen reader support',
+      ],
+      useCases: [
+        'CMS and content platforms',
+        'Document management systems',
+        'Contract review and legal tools',
+        'Knowledge bases and wikis',
+        'Collaborative note-taking apps',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
+  {
+    path: 'pro-dev-tools',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
+        (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
+          m.ProComingSoonPageComponent
+      ),
+    title: 'Developer Experience Tools — Pro - UI Components Library',
+    data: {
+      componentName: 'Developer Experience Tools',
+      tagline: 'Internal tooling components for developer-facing Angular applications.',
+      description:
+        'Everything platform and DevOps teams need to build polished internal tools: log viewer with live filtering, feature-flag dashboard, permission/role editor, API explorer, and audit trail viewer. Batteries included.',
+      icon: 'pi-wrench',
+      tier: 'pro',
+      features: [
+        'Log viewer with live filtering and ANSI colour support',
+        'Feature flag dashboard (toggle, percentage rollout)',
+        'Permission / role editor with role matrix',
+        'API explorer (OpenAPI-driven request builder)',
+        'Audit trail viewer with diff expansion',
+        'Environment config panel',
+        'JSON / YAML diff viewer',
+        'Error replay and trace viewer',
+        'Accessible: keyboard-navigable log streams',
+      ],
+      useCases: [
+        'Internal admin portals',
+        'DevOps and platform engineering',
+        'SaaS admin and ops panels',
+        'Developer portal tools',
+        'Compliance and audit dashboards',
+      ],
+      githubUrl: 'https://github.com/Filip1986/ui-lib-custom',
+    },
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
