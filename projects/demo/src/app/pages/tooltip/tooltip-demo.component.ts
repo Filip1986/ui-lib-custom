@@ -12,11 +12,17 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
+  basicHtml,
   basicTs,
+  disabledHtml,
   disabledTs,
+  focusEventHtml,
   focusEventTs,
+  positionsHtml,
   positionsTs,
+  showHideDelaysHtml,
   showHideDelaysTs,
+  variantsHtml,
   variantsTs,
 } from './snippets.generated';
 
@@ -61,11 +67,17 @@ export class TooltipDemoComponent {
 
   public readonly importCode: string = "import { Tooltip } from 'ui-lib-custom/tooltip'";
   public readonly basicTs: string = basicTs;
+  public readonly basicHtml: string = basicHtml;
   public readonly positionsTs: string = positionsTs;
+  public readonly positionsHtml: string = positionsHtml;
   public readonly focusEventTs: string = focusEventTs;
+  public readonly focusEventHtml: string = focusEventHtml;
   public readonly showHideDelaysTs: string = showHideDelaysTs;
+  public readonly showHideDelaysHtml: string = showHideDelaysHtml;
   public readonly disabledTs: string = disabledTs;
+  public readonly disabledHtml: string = disabledHtml;
   public readonly variantsTs: string = variantsTs;
+  public readonly variantsHtml: string = variantsHtml;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

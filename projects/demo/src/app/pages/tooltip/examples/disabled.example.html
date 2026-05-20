@@ -1,0 +1,9 @@
+<ui-lib-button
+  uiLibTooltip="You will never see this"
+  [tooltipDisabled]="tooltipDisabled()"
+>
+  {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
+</ui-lib-button>
+<ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
+  Toggle disabled
+</ui-lib-button>
