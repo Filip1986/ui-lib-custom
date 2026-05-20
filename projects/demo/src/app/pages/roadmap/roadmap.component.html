@@ -457,6 +457,52 @@
     </div>
   </section>
 
+  <!-- ── Pro & Enterprise Strategy ────────────────────────────────────────── -->
+  <section id="pro-strategy" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Pro &amp; Enterprise Strategy</h2>
+    <p class="section-subtitle">
+      Beyond commodity components, these are the categories enterprise Angular teams need most and
+      are willing to pay for. Angular-native, signals-first, and deeply accessible — that combination
+      is the competitive differentiator.
+    </p>
+
+    <div class="pro-categories-grid">
+      @for (category of proCategories; track trackByProCategory($index, category)) {
+        <div class="pro-category-card">
+          <i [class]="'pi ' + category.icon"></i>
+          <h4>{{ category.name }}</h4>
+          <p>{{ category.description }}</p>
+          <span class="pro-priority-badge" [class]="'pro-priority-badge--' + category.priority">
+            Priority {{ category.rank }}
+          </span>
+        </div>
+      }
+    </div>
+
+    <div class="pro-value-drivers">
+      <h3 class="competitive-group-title">What Enterprise Teams Actually Pay For</h3>
+      <div class="value-drivers-list" role="list">
+        @for (driver of valueDrivers; track trackByString($index, driver)) {
+          <div class="value-driver-item" role="listitem">
+            <span class="value-driver-check">✓</span>
+            <span>{{ driver }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="pro-business-model">
+      <h3 class="competitive-group-title">Business Model</h3>
+      <p class="section-subtitle">
+        Freemium open-source core (MIT) + team / org licence for pro features. Industry-specific
+        components justify higher per-component pricing due to encoded domain knowledge.
+        The Angular ecosystem gap is the opportunity: premium React tooling either never reaches
+        Angular or arrives as a mediocre wrapper — "Angular-native and deeply polished" is
+        itself the product.
+      </p>
+    </div>
+  </section>
+
   <!-- ── Launch Sequence ────────────────────────────────────────────────── -->
   <section id="launch-sequence" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">Launch Path</h2>
