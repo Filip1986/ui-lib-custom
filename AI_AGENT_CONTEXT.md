@@ -82,6 +82,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-20 [Batch-2 snippet migration — remaining 32 demo pages to example-file pattern]
+Changed:
+  - scripts/migrate-snippets-batch.mjs (improved: hyphenated keys, concat expressions, array-of-strings, module-level const records, --no-warn-ignored in lint-staged-eslint.sh)
+  - .prettierignore (added **/examples/*.example.ts — partial TS files Prettier can't parse)
+  - eslint.config.mjs (added **/examples/*.example.ts to global ignores)
+  - scripts/lint-staged-eslint.sh (added --no-warn-ignored flag)
+  - projects/demo/tsconfig.app.json (added **/examples/*.example.ts to exclude)
+  - 32 pages migrated: accordion, autocomplete, cascade-select, chart, color-picker, confirm-popup, data-view, date-picker, editor, float-label, icons, image, input-group, input-mask, input-number, input-otp, inputs, layouts, listbox, mega-menu, menu, menubar, order-list, organization-chart, panel, panel-menu, pick-list, tabs, textarea, tiered-menu, tree-select (scroller intentionally skipped — uses computed signals)
+  - EditorDemoComponent mutable state props renamed *Html→*Content to avoid conflicts with generated snippet properties
+  - Removed unused *SnippetKey type aliases from 14 component files
+State: PR #202 open at https://github.com/Filip1986/ui-lib-custom/pull/202. All 52 demo pages now on example-file pattern (excluding scroller).
+Verification:
+  ng build demo → PASS (zero errors; only pre-existing budget warnings)
+  tsc -p projects/demo/tsconfig.app.json --noEmit → PASS
+  git commit pre-commit hook (prettier + eslint) → PASS
+Next step: Merge PR #202. Then next milestone: runtime variant switcher, theme preset management, or broader axe-core audit.
+
 Date: 2026-05-20 [Batch-1 snippet migration — 20 demo pages to example-file pattern]
 Changed:
   - scripts/migrate-snippets-batch.mjs (NEW — AST-free migration script; string-aware parsing, handles all 3 legacy snippet patterns)
