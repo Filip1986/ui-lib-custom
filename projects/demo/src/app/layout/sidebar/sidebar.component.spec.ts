@@ -152,18 +152,46 @@ describe('SidebarComponent ordering', (): void => {
     ]);
   });
 
-  it('adds Templates as a collapsed top-level section', (): void => {
+  it('adds Templates as a collapsed top-level section with free and pro groups', (): void => {
     const templatesMenu: NavItem | undefined = getTopLevelMenu('Templates');
 
     expect(templatesMenu).toBeTruthy();
     expect(templatesMenu?.expanded).toBe(false);
-    expect(templatesMenu?.items).toEqual([
-      {
-        label: 'Starter Template',
-        icon: 'pi pi-circle',
-        route: '/templates/starter-template',
-        badge: 'TODO',
-      },
+
+    const items: NavItem[] = templatesMenu?.items ?? [];
+
+    // Should have two group labels: Free and Pro
+    const groupLabels: string[] = items
+      .filter((item: NavItem): boolean => item.isGroupLabel === true)
+      .map((item: NavItem): string => item.label);
+    expect(groupLabels).toEqual(['Free', 'Pro']);
+
+    // Free group: 5 templates, none with SOON badge
+    const freeStart: number = items.findIndex(
+      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Free'
+    );
+    const proStart: number = items.findIndex(
+      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Pro'
+    );
+    const freeItems: NavItem[] = items.slice(freeStart + 1, proStart);
+    expect(freeItems.length).toBe(5);
+    expect(freeItems.every((item: NavItem): boolean => !item.badge)).toBe(true);
+
+    // Pro group: 7 templates, all with SOON badge
+    const proItems: NavItem[] = items.slice(proStart + 1);
+    expect(proItems.length).toBe(7);
+    expect(proItems.every((item: NavItem): boolean => item.badge === 'SOON')).toBe(true);
+
+    // Free item routes
+    const freeRoutes: (string | undefined)[] = freeItems.map(
+      (item: NavItem): string | undefined => item.route
+    );
+    expect(freeRoutes).toEqual([
+      '/templates/app-shell',
+      '/templates/auth-pages',
+      '/templates/settings-page',
+      '/templates/error-pages',
+      '/templates/team-profile',
     ]);
   });
 
