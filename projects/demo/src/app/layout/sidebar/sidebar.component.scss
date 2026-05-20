@@ -205,6 +205,37 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.3px;
+  flex-shrink: 0;
+
+  &--soon {
+    border-color: color-mix(in srgb, #d97706 40%, transparent);
+    color: #b45309;
+    background: color-mix(in srgb, #d97706 10%, transparent);
+  }
+
+  &--pro {
+    border: none;
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    color: #fff;
+    letter-spacing: 0.4px;
+  }
+}
+
+.nav-header--pro {
+  border-left: 3px solid #d97706 !important;
+  background: color-mix(in srgb, #d97706 5%, transparent);
+
+  i {
+    color: #d97706 !important;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, #d97706 10%, transparent);
+  }
+
+  .toggle-icon {
+    color: #d97706 !important;
+  }
 }
 
 .sidebar-tip {

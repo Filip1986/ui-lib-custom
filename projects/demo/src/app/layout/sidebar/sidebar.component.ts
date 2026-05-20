@@ -80,6 +80,62 @@ export class SidebarComponent {
       ],
     },
     {
+      label: 'Pro & Enterprise',
+      icon: 'pi pi-star',
+      badge: 'PRO',
+      expanded: false,
+      items: [
+        {
+          label: 'Advanced Data Grid',
+          icon: 'pi pi-table',
+          route: '/pro-data-grid',
+          badge: 'SOON',
+        },
+        {
+          label: 'Workflow Builder',
+          icon: 'pi pi-sitemap',
+          route: '/pro-workflow-builder',
+          badge: 'SOON',
+        },
+        {
+          label: 'Dynamic Form Engine',
+          icon: 'pi pi-file-edit',
+          route: '/pro-form-engine',
+          badge: 'SOON',
+        },
+        {
+          label: 'Gantt & Scheduler',
+          icon: 'pi pi-calendar',
+          route: '/pro-gantt',
+          badge: 'SOON',
+        },
+        {
+          label: 'AI UI Kit',
+          icon: 'pi pi-comments',
+          route: '/pro-ai-kit',
+          badge: 'SOON',
+        },
+        {
+          label: 'Analytics Pro',
+          icon: 'pi pi-chart-bar',
+          route: '/pro-analytics',
+          badge: 'SOON',
+        },
+        {
+          label: 'Rich Text & Document',
+          icon: 'pi pi-pen-to-square',
+          route: '/pro-rich-text',
+          badge: 'SOON',
+        },
+        {
+          label: 'Dev Experience Tools',
+          icon: 'pi pi-wrench',
+          route: '/pro-dev-tools',
+          badge: 'SOON',
+        },
+      ],
+    },
+    {
       label: 'Layout',
       icon: 'pi pi-th-large',
       expanded: false,
