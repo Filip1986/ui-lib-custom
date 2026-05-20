@@ -13,12 +13,11 @@ export const componentThemeCodeHtml = `<!-- String shorthand -->
 </ui-lib-card>`;
 
 export const componentThemeCodeTs = `import { Component } from '@angular/core';
-import { ThemeScopeDirective } from 'ui-lib-custom/theme';
 import { Card } from 'ui-lib-custom/card';
 
 @Component({
   standalone: true,
-  imports: [ThemeScopeDirective, Card],
+  imports: [Card],
   templateUrl: './component-theme-code.example.html',
 })
 export class MyComponent {}`;
@@ -34,10 +33,7 @@ export const directiveCodeHtml = `<!-- Using directive -->
 </section>`;
 
 export const directiveCodeTs = `import { Component } from '@angular/core';
-import {
-  ThemeScopeDirective,
-  DarkThemeDirective,
-} from 'ui-lib-custom/theme';
+import { ThemeScopeDirective, DarkThemeDirective } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
 
 @Component({

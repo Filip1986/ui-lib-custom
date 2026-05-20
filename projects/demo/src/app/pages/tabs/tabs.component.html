@@ -7,7 +7,7 @@
   />
 
   <app-tabs-basic-example />
-  <app-doc-code-example [html]="tabsExample" [typescript]="tabsExampleTs" />
+  <app-doc-code-example [html]="tabsExampleHtml" [typescript]="tabsExampleTs" />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -522,14 +522,14 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <app-doc-code-example [html]="snippets.basic" [typescript]="snippetsTs.basic" />
-      <app-doc-code-example [html]="snippets.icons" [typescript]="snippetsTs.icons" />
-      <app-doc-code-example [html]="snippets.vertical" [typescript]="snippetsTs.vertical" />
-      <app-doc-code-example [html]="snippets.closable" [typescript]="snippetsTs.closable" />
-      <app-doc-code-example [html]="snippets.controlled" [typescript]="snippetsTs.controlled" />
-      <app-doc-code-example [html]="snippets.scrollable" [typescript]="snippetsTs.scrollable" />
-      <app-doc-code-example [html]="snippets.tabMenu" [typescript]="snippetsTs.tabMenu" />
-      <app-doc-code-example [html]="snippets.perTabLazy" [typescript]="snippetsTs.perTabLazy" />
+      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+      <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
+      <app-doc-code-example [html]="verticalHtml" [typescript]="verticalTs" />
+      <app-doc-code-example [html]="closableHtml" [typescript]="closableTs" />
+      <app-doc-code-example [html]="controlledHtml" [typescript]="controlledTs" />
+      <app-doc-code-example [html]="scrollableHtml" [typescript]="scrollableTs" />
+      <app-doc-code-example [html]="tabMenuHtml" [typescript]="tabMenuTs" />
+      <app-doc-code-example [html]="perTabLazyHtml" [typescript]="perTabLazyTs" />
     </ui-lib-panel>
   }
 

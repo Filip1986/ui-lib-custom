@@ -14,22 +14,22 @@
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
             <ui-lib-editor
-              [(ngModel)]="basicHtml"
+              [(ngModel)]="basicContent"
               placeholder="Write something with bold, lists, and links..."
             ></ui-lib-editor>
             <pre class="value-pre">{{ basicHtml }}</pre>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
       </section>
 
       <section id="readonly" data-doc-anchor class="example-section">
         <h3>b. ReadOnly</h3>
         <p class="section-text">Pre-populated editor content in readonly mode.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>
+          <ui-lib-editor [readonly]="true" [ngModel]="readonlyContent"></ui-lib-editor>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippetTs('readonly')" />
+        <app-doc-code-example [html]="readonlyHtml" [typescript]="readonlyTs" />
       </section>
 
       <section id="custom-toolbar" data-doc-anchor class="example-section">
@@ -39,7 +39,7 @@
         </p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
+            <ui-lib-editor #editor [(ngModel)]="customToolbarContent">
               <div editorToolbar class="custom-toolbar">
                 <select
                   class="custom-toolbar-select"
@@ -92,8 +92,8 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('customToolbar')"
-          [typescript]="snippetTs('customToolbar')"
+          [html]="customToolbarHtml"
+          [typescript]="customToolbarTs"
         />
       </section>
 
@@ -109,7 +109,7 @@
             <ui-lib-editor
               name="templateContent"
               required
-              [(ngModel)]="templateDrivenHtml"
+              [(ngModel)]="templateDrivenContent"
               placeholder="Required content..."
             ></ui-lib-editor>
             <div class="row-inline">
@@ -121,8 +121,8 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('templateDriven')"
-          [typescript]="snippetTs('templateDriven')"
+          [html]="templateDrivenHtml"
+          [typescript]="templateDrivenTs"
         />
       </section>
 
@@ -143,7 +143,7 @@
             <pre class="value-pre">{{ reactiveSubmittedHtml ?? 'No submission yet' }}</pre>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippetTs('reactive')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
@@ -171,7 +171,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippetTs('variants')" />
+        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
@@ -193,25 +193,25 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippetTs('sizes')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
         <h3>h. Filled</h3>
         <p class="section-text">Filled editor style useful on elevated backgrounds.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>
+          <ui-lib-editor [filled]="true" [(ngModel)]="filledContent"></ui-lib-editor>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippetTs('filled')" />
+        <app-doc-code-example [html]="filledHtml" [typescript]="filledTs" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
         <h3>i. Disabled</h3>
         <p class="section-text">Non-interactive state with preloaded content.</p>
         <ui-lib-panel variant="minimal">
-          <ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>
+          <ui-lib-editor [disabled]="true" [ngModel]="disabledContent"></ui-lib-editor>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippetTs('disabled')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </section>
 
       <section id="events" data-doc-anchor class="example-section">
@@ -220,7 +220,7 @@
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
             <ui-lib-editor
-              [(ngModel)]="eventsHtml"
+              [(ngModel)]="eventsContent"
               (textChange)="onTextChange($event)"
               (selectionChange)="onSelectionChange($event)"
             ></ui-lib-editor>
@@ -239,7 +239,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('events')" [typescript]="snippetTs('events')" />
+        <app-doc-code-example [html]="eventsHtml" [typescript]="eventsTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

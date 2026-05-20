@@ -1,0 +1,6 @@
+<uilib-input-mask
+  mask="(999) 999-9999"
+  [ngModelOptions]="{ standalone: true }"
+  [(ngModel)]="basicValue"
+/>
+<p>Value: {{ basicValue ?? 'null' }}</p>

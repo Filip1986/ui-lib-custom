@@ -45,6 +45,26 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  tabsExampleHtml,
+  tabsExampleTs,
+  basicHtml,
+  basicTs,
+  iconsHtml,
+  iconsTs,
+  verticalHtml,
+  verticalTs,
+  closableHtml,
+  closableTs,
+  controlledHtml,
+  controlledTs,
+  scrollableHtml,
+  scrollableTs,
+  tabMenuHtml,
+  tabMenuTs,
+  perTabLazyHtml,
+  perTabLazyTs,
+} from './snippets.generated';
 interface DemoTab {
   value: TabsValue;
   label: string;
@@ -98,6 +118,25 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
+  public readonly tabsExampleHtml: string = tabsExampleHtml;
+  public readonly tabsExampleTs: string = tabsExampleTs;
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly iconsHtml: string = iconsHtml;
+  public readonly iconsTs: string = iconsTs;
+  public readonly verticalHtml: string = verticalHtml;
+  public readonly verticalTs: string = verticalTs;
+  public readonly closableHtml: string = closableHtml;
+  public readonly closableTs: string = closableTs;
+  public readonly controlledHtml: string = controlledHtml;
+  public readonly controlledTs: string = controlledTs;
+  public readonly scrollableHtml: string = scrollableHtml;
+  public readonly scrollableTs: string = scrollableTs;
+  public readonly tabMenuHtml: string = tabMenuHtml;
+  public readonly tabMenuTs: string = tabMenuTs;
+  public readonly perTabLazyHtml: string = perTabLazyHtml;
+  public readonly perTabLazyTs: string = perTabLazyTs;
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -284,180 +323,6 @@ export class TabsComponent {
       ? (item as { value: TabsValue }).value
       : index;
 
-  public readonly snippets: {
-    readonly basic: string;
-    readonly icons: string;
-    readonly vertical: string;
-    readonly closable: string;
-    readonly controlled: string;
-    readonly scrollable: string;
-    readonly tabMenu: string;
-    readonly perTabLazy: string;
-  } = {
-    basic: `<ui-lib-tabs>
-  <ui-lib-tab label="Home">Home content</ui-lib-tab>
-  <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
-</ui-lib-tabs>`,
-    icons: `<ui-lib-tabs variant="material">
-  <ui-lib-tab>
-    <ng-template uiLibTabLabel><ui-lib-icon name="home" /> Home</ng-template>
-    Home content
-  </ui-lib-tab>
-  <ui-lib-tab>
-    <ng-template uiLibTabLabel><ui-lib-icon name="settings" /> Settings</ng-template>
-    Settings content
-  </ui-lib-tab>
-</ui-lib-tabs>`,
-    vertical: `<ui-lib-tabs orientation="vertical">
-  <ui-lib-tab label="Overview">Overview</ui-lib-tab>
-  <ui-lib-tab label="Billing">Billing</ui-lib-tab>
-  <ui-lib-tab label="Integrations">Integrations</ui-lib-tab>
-</ui-lib-tabs>`,
-    closable: `<ui-lib-tabs [closable]="true" (tabClose)="onClose($event)">
-  <ui-lib-tab value="alpha" label="Alpha">Alpha</ui-lib-tab>
-  <ui-lib-tab value="beta" label="Beta">Beta</ui-lib-tab>
-</ui-lib-tabs>`,
-    controlled: `<ui-lib-tabs [selectedIndex]="index" (selectedIndexChange)="index = $event">
-  <ui-lib-tab label="One">One</ui-lib-tab>
-  <ui-lib-tab label="Two">Two</ui-lib-tab>
-</ui-lib-tabs>`,
-    scrollable: `<ui-lib-tabs scrollBehavior="arrows">
-  <ui-lib-tab label="Overview">Overview</ui-lib-tab>
-  <ui-lib-tab label="Billing">Billing</ui-lib-tab>
-  <ui-lib-tab label="Usage">Usage</ui-lib-tab>
-  <ui-lib-tab label="Security">Security</ui-lib-tab>
-</ui-lib-tabs>`,
-    tabMenu: `<ui-lib-tabs mode="navigation" (navigate)="onNavigate($event.value)">
-  <ui-lib-tab value="/overview" label="Overview" />
-  <ui-lib-tab value="/billing" label="Billing" />
-  <ui-lib-tab value="/usage" label="Usage" />
-</ui-lib-tabs>`,
-    perTabLazy: `<ui-lib-tabs>
-  <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
-  <ui-lib-tab label="Lazy" lazy="unmount">
-    <ng-template uiLibTabContent>
-      <heavy-component />
-    </ng-template>
-  </ui-lib-tab>
-</ui-lib-tabs>`,
-  } as const;
-
-  public readonly snippetsTs: {
-    readonly basic: string;
-    readonly icons: string;
-    readonly vertical: string;
-    readonly closable: string;
-    readonly controlled: string;
-    readonly scrollable: string;
-    readonly tabMenu: string;
-    readonly perTabLazy: string;
-  } = {
-    basic: `import { Component } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    icons: `import { Component } from '@angular/core';
-import { Tabs, Tab, TabLabel } from 'ui-lib-custom/tabs';
-import { Icon } from 'ui-lib-custom/icon';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab, TabLabel, Icon],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    vertical: `import { Component } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    closable: `import { Component } from '@angular/core';
-import { signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly tabs: WritableSignal<{ value: string; label: string }[]> = signal([
-    { value: 'alpha', label: 'Alpha' },
-    { value: 'beta', label: 'Beta' },
-  ]);
-
-  onClose(event: { value: TabsValue | null; index: number }): void {
-    this.tabs.update(tabs => tabs.filter(t => t.value !== event.value));
-  }
-}`,
-    controlled: `import { Component, computed, signal } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly index: WritableSignal<number> = signal(0);
-  readonly selectedIndex: Signal<number> = computed(() => this.index());
-
-  onIndexChange(event: { value: TabsValue | null; index: number }): void {
-    this.index.set(event.index);
-  }
-}`,
-    scrollable: `import { Component } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    tabMenu: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import type { TabsValue } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  readonly activeRoute: WritableSignal<string> = signal('/overview');
-
-  onNavigate(value: TabsValue | null): void {
-    if (typeof value === 'string') {
-      this.activeRoute.set(value);
-    }
-  }
-}`,
-    perTabLazy: `import { Component } from '@angular/core';
-import { Tabs, Tab, TabContent } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab, TabContent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-  } as const;
-
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
   );
@@ -538,21 +403,6 @@ export class MyComponent {}`,
   public selectControlled(index: number): void {
     this.controlledIndex.set(index);
   }
-
-  public readonly tabsExample: string = `<ui-lib-tabs>
-  <ui-lib-tab label="Home">Home content</ui-lib-tab>
-  <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
-</ui-lib-tabs>`;
-
-  public readonly tabsExampleTs: string = `import { Component } from '@angular/core';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-
-@Component({
-  standalone: true,
-  imports: [Tabs, Tab],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`;
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

@@ -1,0 +1,11 @@
+<ui-lib-data-view
+  [value]="serverProducts"
+  [loading]="serverLoading"
+  [paginator]="true"
+  [rows]="serverRows"
+  [totalRecords]="serverTotalRecords"
+  [first]="serverFirst"
+  (pageChange)="onServerPageChange($event)"
+>
+  ...
+</ui-lib-data-view>

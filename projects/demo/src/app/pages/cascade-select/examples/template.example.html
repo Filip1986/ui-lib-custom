@@ -1,0 +1,13 @@
+<ui-lib-cascade-select
+  [(ngModel)]="templatedCode"
+  [options]="countries"
+  optionGroupLabel="name"
+  [optionGroupChildren]="['states', 'cities']"
+  optionLabel="cname"
+  optionValue="code"
+>
+  <ng-template uiCascadeSelectOption let-option>
+    <i [class]="resolveNodeIcon(option)"></i>
+    <span>{{ resolveNodeLabel(option) }}</span>
+  </ng-template>
+</ui-lib-cascade-select>

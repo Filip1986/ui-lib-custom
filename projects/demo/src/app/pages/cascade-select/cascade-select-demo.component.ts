@@ -37,19 +37,32 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type CascadeSelectDemoSnippetKey =
-  | 'basic'
-  | 'template'
-  | 'loading'
-  | 'clear'
-  | 'sizes'
-  | 'filled'
-  | 'fluid'
-  | 'states'
-  | 'forms'
-  | 'reactive'
-  | 'variants'
-  | 'clipping';
+import {
+  basicHtml,
+  basicTs,
+  templateHtml,
+  templateTs,
+  loadingHtml,
+  loadingTs,
+  clearHtml,
+  clearTs,
+  sizesHtml,
+  sizesTs,
+  filledHtml,
+  filledTs,
+  fluidHtml,
+  fluidTs,
+  statesHtml,
+  statesTs,
+  formsHtml,
+  formsTs,
+  reactiveHtml,
+  reactiveTs,
+  variantsHtml,
+  variantsTs,
+  clippingHtml,
+  clippingTs,
+} from './snippets.generated';
 
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
@@ -86,6 +99,31 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CascadeSelectDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly templateHtml: string = templateHtml;
+  public readonly templateTs: string = templateTs;
+  public readonly loadingHtml: string = loadingHtml;
+  public readonly loadingTs: string = loadingTs;
+  public readonly clearHtml: string = clearHtml;
+  public readonly clearTs: string = clearTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTs: string = filledTs;
+  public readonly fluidHtml: string = fluidHtml;
+  public readonly fluidTs: string = fluidTs;
+  public readonly statesHtml: string = statesHtml;
+  public readonly statesTs: string = statesTs;
+  public readonly formsHtml: string = formsHtml;
+  public readonly formsTs: string = formsTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly clippingHtml: string = clippingHtml;
+  public readonly clippingTs: string = clippingTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -129,95 +167,6 @@ export class CascadeSelectDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly snippets: Record<CascadeSelectDemoSnippetKey, string> = {
-    basic: `<ui-lib-cascade-select
-  [(ngModel)]="cityCode"
-  [options]="countries"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
-  placeholder="Select city"
-/>`,
-    template: `<ui-lib-cascade-select
-  [(ngModel)]="templatedCode"
-  [options]="countries"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
->
-  <ng-template uiCascadeSelectOption let-option>
-    <i [class]="resolveNodeIcon(option)"></i>
-    <span>{{ resolveNodeLabel(option) }}</span>
-  </ng-template>
-</ui-lib-cascade-select>`,
-    loading: `<ui-lib-cascade-select
-  [(ngModel)]="loadingCode"
-  [options]="countries"
-  [loading]="loading"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
-/>`,
-    clear: `<ui-lib-cascade-select
-  [(ngModel)]="clearableCode"
-  [options]="countries"
-  [showClear]="true"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
-/>`,
-    sizes: `<ui-lib-cascade-select size="sm" />
-<ui-lib-cascade-select size="md" />
-<ui-lib-cascade-select size="lg" />`,
-    filled: `<ui-lib-cascade-select [filled]="true" />`,
-    fluid: `<ui-lib-cascade-select [fluid]="true" />`,
-    states: `<ui-lib-cascade-select [disabled]="true" />
-<ui-lib-cascade-select [invalid]="true" />`,
-    forms: `<form #f="ngForm">
-  <ui-lib-cascade-select
-    name="city"
-    required
-    [(ngModel)]="templateDrivenCode"
-    #cityModel="ngModel"
-    [invalid]="cityModel.invalid && cityModel.touched"
-    [options]="countries"
-    optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
-    optionLabel="cname"
-    optionValue="code"
-  />
-</form>`,
-    reactive: `<form [formGroup]="reactiveForm">
-  <ui-lib-cascade-select
-    formControlName="city"
-    [invalid]="cityControl().invalid && cityControl().touched"
-    [options]="countries"
-    optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
-    optionLabel="cname"
-    optionValue="code"
-  />
-</form>`,
-    variants: `<ui-lib-cascade-select variant="material" />
-<ui-lib-cascade-select variant="bootstrap" />
-<ui-lib-cascade-select variant="minimal" />`,
-    clipping: `<div class="clipping-card">
-  <ui-lib-cascade-select
-    [(ngModel)]="clippingCode"
-    [options]="countries"
-    optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
-    optionLabel="cname"
-    optionValue="code"
-    placeholder="Open inside clipped card"
-  />
-</div>`,
-  };
-
   public readonly countries: CascadeCountry[] = CASCADE_SELECT_COUNTRIES;
 
   public basicCode: string | null = null;
@@ -249,171 +198,6 @@ export class CascadeSelectDemoComponent {
   public clippingCode: string | null = null;
 
   public loading: boolean = true;
-
-  public readonly snippetsTs: Record<CascadeSelectDemoSnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public cityCode: string | null = null;
-  public countries = [/* your country data */];
-}`,
-    template: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect, CascadeSelectOptionDirective } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibCascadeSelect, CascadeSelectOptionDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public templatedCode: string | null = null;
-  public countries = [/* your country data */];
-
-  public resolveNodeLabel(option: unknown): string {
-    const node = option as { cname?: string; name?: string };
-    return node.cname ?? node.name ?? '';
-  }
-
-  public resolveNodeIcon(option: unknown): string {
-    const node = option as { icon?: string };
-    return node.icon ?? 'pi pi-circle';
-  }
-}`,
-    loading: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public loadingCode: string | null = null;
-  public loading: boolean = true;
-  public countries = [/* your country data */];
-}`,
-    clear: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public clearableCode: string | null = 'SYD';
-  public countries = [/* your country data */];
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    filled: `import { Component } from '@angular/core';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    fluid: `import { Component } from '@angular/core';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    states: `import { Component } from '@angular/core';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    forms: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public templateDrivenCode: string | null = null;
-  public countries = [/* your country data */];
-}`,
-    reactive: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [ReactiveFormsModule, UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly reactiveForm = new FormGroup({
-    city: new FormControl<string | null>(null, { validators: [Validators.required] }),
-  });
-
-  public cityControl(): FormControl<string | null> {
-    return this.reactiveForm.controls['city'] as FormControl<string | null>;
-  }
-
-  public countries = [/* your country data */];
-}`,
-    variants: `import { Component } from '@angular/core';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    clipping: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
-
-@Component({
-  standalone: true,
-  imports: [FormsModule, UiLibCascadeSelect],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public clippingCode: string | null = null;
-  public countries = [/* your country data */];
-}`,
-  };
-
-  public snippet(key: CascadeSelectDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: CascadeSelectDemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
 
   public cityControl(): FormControl<string | null> {
     return this.reactiveForm.controls['city'] as FormControl<string | null>;

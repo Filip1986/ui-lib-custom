@@ -30,25 +30,41 @@ import type { DemoInventoryStatus, DemoProduct } from './data-view-demo.data';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicListHtml,
+  basicListTs,
+  basicGridHtml,
+  basicGridTs,
+  layoutSwitchingHtml,
+  layoutSwitchingTs,
+  paginationClientHtml,
+  paginationClientTs,
+  rowsPerPageHtml,
+  rowsPerPageTs,
+  paginationPositionHtml,
+  paginationPositionTs,
+  customPageReportHtml,
+  customPageReportTs,
+  serverSidePaginationHtml,
+  serverSidePaginationTs,
+  sortingHtml,
+  sortingTs,
+  customTemplatesHtml,
+  customTemplatesTs,
+  emptyStateHtml,
+  emptyStateTs,
+  loadingStateHtml,
+  loadingStateTs,
+  sizesHtml,
+  sizesTs,
+  gridColumnsHtml,
+  gridColumnsTs,
+  customPaginatorSlotsHtml,
+  customPaginatorSlotsTs,
+  themeIntegrationHtml,
+  themeIntegrationTs,
+} from './snippets.generated';
 type DataViewSortField = 'name' | 'price' | 'rating';
-
-type DataViewDemoSnippetKey =
-  | 'basicList'
-  | 'basicGrid'
-  | 'layoutSwitching'
-  | 'paginationClient'
-  | 'rowsPerPage'
-  | 'paginationPosition'
-  | 'customPageReport'
-  | 'serverSidePagination'
-  | 'sorting'
-  | 'customTemplates'
-  | 'emptyState'
-  | 'loadingState'
-  | 'sizes'
-  | 'gridColumns'
-  | 'customPaginatorSlots'
-  | 'themeIntegration';
 
 /**
  * Demo page for DataView list/grid rendering, paginator modes, templates, and theming.
@@ -85,6 +101,39 @@ type DataViewDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataViewDemoComponent {
+  public readonly basicListHtml: string = basicListHtml;
+  public readonly basicListTs: string = basicListTs;
+  public readonly basicGridHtml: string = basicGridHtml;
+  public readonly basicGridTs: string = basicGridTs;
+  public readonly layoutSwitchingHtml: string = layoutSwitchingHtml;
+  public readonly layoutSwitchingTs: string = layoutSwitchingTs;
+  public readonly paginationClientHtml: string = paginationClientHtml;
+  public readonly paginationClientTs: string = paginationClientTs;
+  public readonly rowsPerPageHtml: string = rowsPerPageHtml;
+  public readonly rowsPerPageTs: string = rowsPerPageTs;
+  public readonly paginationPositionHtml: string = paginationPositionHtml;
+  public readonly paginationPositionTs: string = paginationPositionTs;
+  public readonly customPageReportHtml: string = customPageReportHtml;
+  public readonly customPageReportTs: string = customPageReportTs;
+  public readonly serverSidePaginationHtml: string = serverSidePaginationHtml;
+  public readonly serverSidePaginationTs: string = serverSidePaginationTs;
+  public readonly sortingHtml: string = sortingHtml;
+  public readonly sortingTs: string = sortingTs;
+  public readonly customTemplatesHtml: string = customTemplatesHtml;
+  public readonly customTemplatesTs: string = customTemplatesTs;
+  public readonly emptyStateHtml: string = emptyStateHtml;
+  public readonly emptyStateTs: string = emptyStateTs;
+  public readonly loadingStateHtml: string = loadingStateHtml;
+  public readonly loadingStateTs: string = loadingStateTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly gridColumnsHtml: string = gridColumnsHtml;
+  public readonly gridColumnsTs: string = gridColumnsTs;
+  public readonly customPaginatorSlotsHtml: string = customPaginatorSlotsHtml;
+  public readonly customPaginatorSlotsTs: string = customPaginatorSlotsTs;
+  public readonly themeIntegrationHtml: string = themeIntegrationHtml;
+  public readonly themeIntegrationTs: string = themeIntegrationTs;
+
   public readonly importCode: string =
     "import { DataViewComponent } from 'ui-lib-custom/data-view'";
 
@@ -132,82 +181,6 @@ export class DataViewDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly snippets: Record<DataViewDemoSnippetKey, string> = {
-    basicList: `<ui-lib-data-view [value]="products">
-  <ng-template uiDataViewListItem let-item>
-    <article class="demo-card">{{ item.name }}</article>
-  </ng-template>
-</ui-lib-data-view>`,
-    basicGrid: `<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="4">
-  <ng-template uiDataViewGridItem let-item>
-    <article class="demo-grid-card">{{ item.name }}</article>
-  </ng-template>
-</ui-lib-data-view>`,
-    layoutSwitching: `<ui-lib-select-button [options]="layoutOptions" [(value)]="switchableLayout" />
-<ui-lib-data-view [value]="products" [(layout)]="switchableLayout">...</ui-lib-data-view>`,
-    paginationClient: `<ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">...</ui-lib-data-view>`,
-    rowsPerPage: `<ui-lib-data-view
-  [value]="products"
-  [paginator]="true"
-  [rows]="5"
-  [rowsPerPageOptions]="[5, 10, 25]"
->
-  ...
-</ui-lib-data-view>`,
-    paginationPosition: `<ui-lib-data-view [paginator]="true" paginatorPosition="top">...</ui-lib-data-view>
-<ui-lib-data-view [paginator]="true" paginatorPosition="bottom">...</ui-lib-data-view>
-<ui-lib-data-view [paginator]="true" paginatorPosition="both">...</ui-lib-data-view>`,
-    customPageReport: `<ui-lib-data-view
-  [value]="products"
-  [paginator]="true"
-  [rows]="5"
-  currentPageReportTemplate="Page {currentPage} of {totalPages} ({first}-{last} / {totalRecords})"
->
-  ...
-</ui-lib-data-view>`,
-    serverSidePagination: `<ui-lib-data-view
-  [value]="serverProducts"
-  [loading]="serverLoading"
-  [paginator]="true"
-  [rows]="serverRows"
-  [totalRecords]="serverTotalRecords"
-  [first]="serverFirst"
-  (pageChange)="onServerPageChange($event)"
->
-  ...
-</ui-lib-data-view>`,
-    sorting: `<ui-lib-select-button [options]="sortFieldOptions" [(value)]="sortField" />
-<ui-lib-select-button [options]="sortOrderOptions" [(value)]="sortOrder" />
-<ui-lib-data-view [value]="sortedProducts">...</ui-lib-data-view>`,
-    customTemplates: `<ui-lib-data-view [value]="customTemplateProducts" [paginator]="true" [rows]="6">
-  <ng-template uiDataViewHeader>...</ng-template>
-  <ng-template uiDataViewFooter>...</ng-template>
-  <ng-template uiDataViewListItem let-item>...</ng-template>
-  <ng-template uiDataViewGridItem let-item>...</ng-template>
-</ui-lib-data-view>`,
-    emptyState: `<ui-lib-data-view [value]="[]" emptyMessage="No inventory records found." />
-<ui-lib-data-view [value]="[]">
-  <ng-template uiDataViewEmpty>No products available.</ng-template>
-</ui-lib-data-view>`,
-    loadingState: `<ui-lib-data-view [value]="products" [loading]="true" />
-<ui-lib-data-view [value]="products" [loading]="true">
-  <ng-template uiDataViewLoading>Syncing catalog...</ng-template>
-</ui-lib-data-view>`,
-    sizes: `<ui-lib-data-view [value]="miniProducts" size="sm">...</ui-lib-data-view>
-<ui-lib-data-view [value]="miniProducts" size="md">...</ui-lib-data-view>
-<ui-lib-data-view [value]="miniProducts" size="lg">...</ui-lib-data-view>`,
-    gridColumns: `<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="2">...</ui-lib-data-view>
-<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="3">...</ui-lib-data-view>
-<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="4">...</ui-lib-data-view>`,
-    customPaginatorSlots: `<ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
-  <ng-template uiDataViewPaginatorLeft>Left slot content</ng-template>
-  <ng-template uiDataViewPaginatorRight>Right slot content</ng-template>
-</ui-lib-data-view>`,
-    themeIntegration: `<div class="theme-surface material">...</div>
-<div class="theme-surface bootstrap">...</div>
-<div class="theme-surface minimal">...</div>`,
-  };
-
   public readonly products: DemoProduct[] = [...DATA_VIEW_DEMO_PRODUCTS];
   public readonly shortProducts: DemoProduct[] = DATA_VIEW_DEMO_PRODUCTS.slice(0, 18);
   public readonly miniProducts: DemoProduct[] = DATA_VIEW_DEMO_PRODUCTS.slice(0, 4);
@@ -238,246 +211,6 @@ export class DataViewDemoComponent {
   public readonly serverTotalRecords: number = DATA_VIEW_DEMO_PRODUCTS.length;
   public serverLoading: boolean = false;
   public serverProducts: DemoProduct[] = DATA_VIEW_DEMO_PRODUCTS.slice(0, 5);
-
-  public readonly snippetsTs: Record<DataViewDemoSnippetKey, string> = {
-    basicList: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [{ name: 'Product A' }, { name: 'Product B' }];
-}`,
-    basicGrid: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewGridItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewGridItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [{ name: 'Product A' }, { name: 'Product B' }];
-}`,
-    layoutSwitching: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective, DataViewGridItemDirective } from 'ui-lib-custom/data-view';
-import type { DataViewLayout } from 'ui-lib-custom/data-view';
-import { SelectButton } from 'ui-lib-custom/select-button';
-import type { SelectButtonOption } from 'ui-lib-custom/select-button';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective, DataViewGridItemDirective, SelectButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [{ name: 'Product A' }];
-  public readonly layoutOptions: SelectButtonOption[] = [
-    { label: 'List', value: 'list' },
-    { label: 'Grid', value: 'grid' },
-  ];
-  public switchableLayout: DataViewLayout = 'list';
-}`,
-    paginationClient: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    rowsPerPage: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    paginationPosition: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    customPageReport: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    serverSidePagination: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-import type { DataViewPageEvent } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public serverProducts = [/* initial page */];
-  public serverLoading: boolean = false;
-  public serverRows: number = 5;
-  public serverFirst: number = 0;
-  public readonly serverTotalRecords: number = 100;
-
-  public onServerPageChange(event: DataViewPageEvent): void {
-    this.serverLoading = true;
-    this.serverFirst = event.first;
-    this.serverRows = event.rows;
-    // fetch page from backend
-    this.serverLoading = false;
-  }
-}`,
-    sorting: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-import type { DataViewSortOrder } from 'ui-lib-custom/data-view';
-import { SelectButton } from 'ui-lib-custom/select-button';
-import type { SelectButtonOption } from 'ui-lib-custom/select-button';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective, SelectButton],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public sortField: string = 'name';
-  public sortOrder: DataViewSortOrder = 1;
-  public readonly sortFieldOptions: SelectButtonOption[] = [
-    { label: 'Name', value: 'name' },
-    { label: 'Price', value: 'price' },
-  ];
-  public readonly sortOrderOptions: SelectButtonOption[] = [
-    { label: 'Ascending', value: 1 },
-    { label: 'Descending', value: -1 },
-  ];
-}`,
-    customTemplates: `import { Component } from '@angular/core';
-import {
-  DataViewComponent,
-  DataViewHeaderDirective,
-  DataViewFooterDirective,
-  DataViewListItemDirective,
-  DataViewGridItemDirective,
-} from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [
-    DataViewComponent,
-    DataViewHeaderDirective,
-    DataViewFooterDirective,
-    DataViewListItemDirective,
-    DataViewGridItemDirective,
-  ],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    emptyState: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewEmptyDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewEmptyDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    loadingState: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewLoadingDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewLoadingDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewListItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [{ name: 'Product A' }];
-}`,
-    gridColumns: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewGridItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewGridItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    customPaginatorSlots: `import { Component } from '@angular/core';
-import {
-  DataViewComponent,
-  DataViewListItemDirective,
-  DataViewPaginatorLeftDirective,
-  DataViewPaginatorRightDirective,
-} from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [
-    DataViewComponent,
-    DataViewListItemDirective,
-    DataViewPaginatorLeftDirective,
-    DataViewPaginatorRightDirective,
-  ],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [/* array of products */];
-}`,
-    themeIntegration: `import { Component } from '@angular/core';
-import { DataViewComponent, DataViewGridItemDirective } from 'ui-lib-custom/data-view';
-
-@Component({
-  standalone: true,
-  imports: [DataViewComponent, DataViewGridItemDirective],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly products = [{ name: 'Product A' }];
-}`,
-  };
-
-  public snippet(key: DataViewDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: DataViewDemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
 
   public sortedProducts(): DemoProduct[] {
     const productsCopy: DemoProduct[] = [...this.products];

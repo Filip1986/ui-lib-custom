@@ -23,39 +23,39 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicHtml,
+  basicTsTs,
+  formatsHtml,
+  formatsTsTs,
+  optionalHtml,
+  optionalTsTs,
+  slotCharsHtml,
+  slotCharsTsTs,
+  unmaskHtml,
+  unmaskTsTs,
+  filledHtml,
+  filledTsTs,
+  floatLabelHtml,
+  floatLabelTsTs,
+  iftaLabelHtml,
+  iftaLabelTsTs,
+  sizesHtml,
+  sizesTsTs,
+  fluidHtml,
+  fluidTsTs,
+  disabledHtml,
+  disabledTsTs,
+  invalidHtml,
+  invalidTsTs,
+  reactiveHtml,
+  reactiveTsTs,
+} from './snippets.generated';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
   value: string | null;
 }
-
-type InputMaskDemoSnippetKey =
-  | 'basic'
-  | 'basicTs'
-  | 'formats'
-  | 'formatsTs'
-  | 'optional'
-  | 'optionalTs'
-  | 'slotChars'
-  | 'slotCharsTs'
-  | 'unmask'
-  | 'unmaskTs'
-  | 'filled'
-  | 'filledTs'
-  | 'floatLabel'
-  | 'floatLabelTs'
-  | 'iftaLabel'
-  | 'iftaLabelTs'
-  | 'sizes'
-  | 'sizesTs'
-  | 'fluid'
-  | 'fluidTs'
-  | 'disabled'
-  | 'disabledTs'
-  | 'invalid'
-  | 'invalidTs'
-  | 'reactive'
-  | 'reactiveTs';
 
 /**
  * Demo page for InputMask behavior, appearance states, and form integration.
@@ -84,6 +84,33 @@ type InputMaskDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputMaskDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTsTs: string = basicTsTs;
+  public readonly formatsHtml: string = formatsHtml;
+  public readonly formatsTsTs: string = formatsTsTs;
+  public readonly optionalHtml: string = optionalHtml;
+  public readonly optionalTsTs: string = optionalTsTs;
+  public readonly slotCharsHtml: string = slotCharsHtml;
+  public readonly slotCharsTsTs: string = slotCharsTsTs;
+  public readonly unmaskHtml: string = unmaskHtml;
+  public readonly unmaskTsTs: string = unmaskTsTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTsTs: string = filledTsTs;
+  public readonly floatLabelHtml: string = floatLabelHtml;
+  public readonly floatLabelTsTs: string = floatLabelTsTs;
+  public readonly iftaLabelHtml: string = iftaLabelHtml;
+  public readonly iftaLabelTsTs: string = iftaLabelTsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTsTs: string = sizesTsTs;
+  public readonly fluidHtml: string = fluidHtml;
+  public readonly fluidTsTs: string = fluidTsTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTsTs: string = disabledTsTs;
+  public readonly invalidHtml: string = invalidHtml;
+  public readonly invalidTsTs: string = invalidTsTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTsTs: string = reactiveTsTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -127,248 +154,6 @@ export class InputMaskDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: Record<InputMaskDemoSnippetKey, string> = {
-    basic: `<uilib-input-mask
-  mask="(999) 999-9999"
-  [ngModelOptions]="{ standalone: true }"
-  [(ngModel)]="basicValue"
-/>
-<p>Value: {{ basicValue ?? 'null' }}</p>`,
-    basicTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  basicValue: string | null = null;
-}`,
-    formats: `<uilib-input-mask mask="(999) 999-9999" [(ngModel)]="formatValues.phone" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="99/99/9999" [(ngModel)]="formatValues.date" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="999-99-9999" [(ngModel)]="formatValues.ssn" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="a*-999-a999" [(ngModel)]="formatValues.serial" [ngModelOptions]="{ standalone: true }" />`,
-    formatsTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  formatValues = { phone: null, date: null, ssn: null, serial: null };
-}`,
-    optional: `<uilib-input-mask
-  mask="(999) 999-9999? x99999"
-  [autoClear]="optionalAutoClear"
-  [(ngModel)]="optionalValue"
-  [ngModelOptions]="{ standalone: true }"
-/>`,
-    optionalTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  optionalAutoClear = true;
-  optionalValue: string | null = null;
-}`,
-    slotChars: `<uilib-input-mask mask="999-999" slotChar="_" [keepBuffer]="true" [(ngModel)]="slotValues.underscore" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="999-999" slotChar="#" [keepBuffer]="true" [(ngModel)]="slotValues.hash" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="999-999" slotChar="*" [keepBuffer]="true" [(ngModel)]="slotValues.star" [ngModelOptions]="{ standalone: true }" />`,
-    slotCharsTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  slotValues = { underscore: null, hash: null, star: null };
-}`,
-    unmask: `<uilib-input-mask mask="(999) 999-9999" [(ngModel)]="maskedModel" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="(999) 999-9999" [unmask]="true" [(ngModel)]="unmaskedModel" [ngModelOptions]="{ standalone: true }" />`,
-    unmaskTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  maskedModel: string | null = null;
-  unmaskedModel: string | null = null;
-}`,
-    filled: `<uilib-input-mask
-  mask="(999) 999-9999"
-  [filled]="true"
-  [(ngModel)]="filledValue"
-  [ngModelOptions]="{ standalone: true }"
-/>`,
-    filledTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  filledValue: string | null = '5551234567';
-}`,
-    floatLabel: `<uilib-float-label>
-  <uilib-input-mask
-    mask="(999) 999-9999"
-    [(ngModel)]="floatValue"
-    [ngModelOptions]="{ standalone: true }"
-  />
-  <label>Phone</label>
-</uilib-float-label>`,
-    floatLabelTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FloatLabelComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  floatValue: string | null = null;
-}`,
-    iftaLabel: `<uilib-float-label variant="in">
-  <uilib-input-mask
-    mask="(999) 999-9999"
-    [(ngModel)]="iftaValue"
-    [ngModelOptions]="{ standalone: true }"
-  />
-  <label>Phone</label>
-</uilib-float-label>`,
-    iftaLabelTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-import { FloatLabelComponent } from 'ui-lib-custom/float-label';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FloatLabelComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  iftaValue: string | null = null;
-}`,
-    sizes: `<uilib-input-mask mask="(999) 999-9999" size="sm" [(ngModel)]="sizeValues.sm" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="(999) 999-9999" size="md" [(ngModel)]="sizeValues.md" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-mask mask="(999) 999-9999" size="lg" [(ngModel)]="sizeValues.lg" [ngModelOptions]="{ standalone: true }" />`,
-    sizesTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  sizeValues = { sm: null, md: null, lg: null };
-}`,
-    fluid: `<uilib-input-mask
-  mask="(999) 999-9999"
-  [fluid]="true"
-  [(ngModel)]="fluidValue"
-  [ngModelOptions]="{ standalone: true }"
-/>`,
-    fluidTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  fluidValue: string | null = null;
-}`,
-    disabled: `<uilib-input-mask
-  mask="(999) 999-9999"
-  [disabled]="true"
-  [(ngModel)]="disabledValue"
-  [ngModelOptions]="{ standalone: true }"
-/>`,
-    disabledTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  disabledValue: string | null = '5551234567';
-}`,
-    invalid: `<uilib-input-mask
-  mask="(999) 999-9999"
-  [invalid]="true"
-  [(ngModel)]="invalidValue"
-  [ngModelOptions]="{ standalone: true }"
-/>`,
-    invalidTs: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  invalidValue: string | null = '12';
-}`,
-    reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <uilib-input-mask
-    mask="(999) 999-9999"
-    formControlName="phone"
-    [invalid]="reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched"
-  />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-</form>`,
-    reactiveTs: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-import { Button } from 'ui-lib-custom/button';
-
-@Component({
-  standalone: true,
-  imports: [InputMaskComponent, Button, ReactiveFormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  reactiveForm = new FormGroup({
-    phone: new FormControl<string | null>(null, { validators: [Validators.required] }),
-  });
-
-  submitReactive(): void {
-    this.reactiveForm.markAllAsTouched();
-  }
-}`,
-  };
 
   public basicValue: string | null = null;
 
@@ -427,10 +212,6 @@ export class MyComponent {
   });
 
   public reactiveSubmittedValue: string | null = null;
-
-  public snippet(key: InputMaskDemoSnippetKey): string {
-    return this.snippets[key];
-  }
 
   public submitReactive(): void {
     this.reactiveForm.markAllAsTouched();

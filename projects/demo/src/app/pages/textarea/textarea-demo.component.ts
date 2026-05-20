@@ -22,17 +22,28 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-type TextareaDemoSnippetKey =
-  | 'basic'
-  | 'autoResize'
-  | 'counter'
-  | 'maxLength'
-  | 'sizes'
-  | 'variants'
-  | 'disabled'
-  | 'readonly'
-  | 'invalid'
-  | 'reactive';
+import {
+  basicHtml,
+  basicTs,
+  autoResizeHtml,
+  autoResizeTs,
+  counterHtml,
+  counterTs,
+  maxLengthHtml,
+  maxLengthTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  variantsTs,
+  disabledHtml,
+  disabledTs,
+  readonlyHtml,
+  readonlyTs,
+  invalidHtml,
+  invalidTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
 /**
  * Demo page for the Textarea component — all features, states, and form integration.
@@ -59,6 +70,27 @@ type TextareaDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly autoResizeHtml: string = autoResizeHtml;
+  public readonly autoResizeTs: string = autoResizeTs;
+  public readonly counterHtml: string = counterHtml;
+  public readonly counterTs: string = counterTs;
+  public readonly maxLengthHtml: string = maxLengthHtml;
+  public readonly maxLengthTs: string = maxLengthTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly readonlyHtml: string = readonlyHtml;
+  public readonly readonlyTs: string = readonlyTs;
+  public readonly invalidHtml: string = invalidHtml;
+  public readonly invalidTs: string = invalidTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -97,29 +129,6 @@ export class TextareaDemoComponent {
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
   ];
-
-  public readonly snippets: Record<TextareaDemoSnippetKey, string> = {
-    basic:
-      '<ui-lib-textarea label="Description" placeholder="Enter a description..." [(ngModel)]="basicValue" [ngModelOptions]="{ standalone: true }" />',
-    autoResize:
-      '<ui-lib-textarea label="Notes" [autoResize]="true" [rows]="3" [(ngModel)]="autoResizeValue" [ngModelOptions]="{ standalone: true }" />',
-    counter:
-      '<ui-lib-textarea label="Bio" [showCounter]="true" [(ngModel)]="counterValue" [ngModelOptions]="{ standalone: true }" />',
-    maxLength:
-      '<ui-lib-textarea label="Tweet" [showCounter]="true" [maxLength]="280" [(ngModel)]="maxLengthValue" [ngModelOptions]="{ standalone: true }" />',
-    sizes:
-      '<ui-lib-textarea label="Small" size="sm" [(ngModel)]="sizeSm" [ngModelOptions]="{ standalone: true }" />',
-    variants:
-      '<ui-lib-textarea label="Material" variant="material" [(ngModel)]="variantMaterial" [ngModelOptions]="{ standalone: true }" />',
-    disabled:
-      '<ui-lib-textarea label="Comments" [disabled]="true" [(ngModel)]="disabledValue" [ngModelOptions]="{ standalone: true }" />',
-    readonly:
-      '<ui-lib-textarea label="Terms" [readonly]="true" [(ngModel)]="readonlyValue" [ngModelOptions]="{ standalone: true }" />',
-    invalid:
-      '<ui-lib-textarea label="Address" error="This field is required" [required]="true" [(ngModel)]="invalidValue" [ngModelOptions]="{ standalone: true }" />',
-    reactive:
-      '<ui-lib-textarea label="Feedback" [showCounter]="true" [maxLength]="500" [required]="true" formControlName="feedback" />',
-  };
 
   // Basic
   public basicValue: string = '';
@@ -163,139 +172,6 @@ export class TextareaDemoComponent {
   });
 
   public reactiveSubmittedValue: string | null = null;
-
-  public readonly snippetsTs: Record<TextareaDemoSnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public basicValue: string = '';
-}`,
-    autoResize: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public autoResizeValue: string = '';
-}`,
-    counter: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public counterValue: string = '';
-}`,
-    maxLength: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public maxLengthValue: string = '';
-}`,
-    sizes: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public sizeSm: string = '';
-}`,
-    variants: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public variantMaterial: string = '';
-}`,
-    disabled: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public disabledValue: string = 'This field cannot be edited.';
-}`,
-    readonly: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonlyValue: string = 'You can read but not edit this content.';
-}`,
-    invalid: `import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, FormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public invalidValue: string = '';
-}`,
-    reactive: `import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UiLibTextarea } from 'ui-lib-custom/textarea';
-
-@Component({
-  standalone: true,
-  imports: [UiLibTextarea, ReactiveFormsModule],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly form = new FormGroup({
-    feedback: new FormControl<string | null>(null, { validators: [Validators.required] }),
-  });
-}`,
-  };
-
-  public snippetTs(key: TextareaDemoSnippetKey): string {
-    return this.snippetsTs[key];
-  }
-
-  public snippet(key: TextareaDemoSnippetKey): string {
-    return this.snippets[key];
-  }
 
   public onInputEvent(event: TextareaChangeEvent): void {
     this.eventLog.unshift(event.value.slice(0, 40));

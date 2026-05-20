@@ -7,7 +7,7 @@
     </p>
     <div class="demo-page-header__preview">
       <ui-lib-code-snippet
-        [code]="snippets.import"
+        [code]="importTs"
         language="typescript"
         [showLineNumbers]="true"
       />
@@ -53,7 +53,7 @@
         </ul>
       </div>
     }
-    <app-doc-code-example [html]="snippets.basic" [typescript]="snippets.basicTs" />
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
   </section>
 
   <!-- ── Nested ────────────────────────────────────────────────────────────── -->
@@ -73,7 +73,7 @@
         </ul>
       </div>
     }
-    <ui-lib-code-snippet [code]="snippets.nested" language="typescript" [showLineNumbers]="true" />
+    <ui-lib-code-snippet [code]="nestedTs" language="typescript" [showLineNumbers]="true" />
   </section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
@@ -110,7 +110,7 @@
         </ul>
       </div>
     }
-    <app-doc-code-example [html]="snippets.popup" [typescript]="snippets.popupTs" />
+    <app-doc-code-example [html]="popupHtml" [typescript]="popupTs" />
   </section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
@@ -141,7 +141,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="nestedItems" [variant]="variant()" />
     </div>
-    <app-doc-code-example [html]="snippets.variants" [typescript]="snippets.variantsTs" />
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
   </section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
@@ -171,7 +171,7 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="basicItems" [size]="size()" />
     </div>
-    <app-doc-code-example [html]="snippets.sizes" [typescript]="snippets.sizesTs" />
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
   </section>
 
   <!-- ── Item States ───────────────────────────────────────────────────────── -->
@@ -193,7 +193,7 @@
       </div>
     }
     <ui-lib-code-snippet
-      [code]="snippets.itemStates"
+      [code]="itemStatesTs"
       language="typescript"
       [showLineNumbers]="true"
     />
@@ -210,7 +210,7 @@
       <ui-lib-tiered-menu [model]="urlItems" />
     </div>
     <ui-lib-code-snippet
-      [code]="snippets.urlItems"
+      [code]="urlItemsTs"
       language="typescript"
       [showLineNumbers]="true"
     />

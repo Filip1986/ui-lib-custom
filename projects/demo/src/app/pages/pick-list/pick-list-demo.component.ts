@@ -30,6 +30,16 @@ import type {
   PickListMoveToSourceEvent,
   PickListReorderEvent,
 } from 'ui-lib-custom/pick-list';
+import {
+  basicHtml,
+  basicTs,
+  filterHtml,
+  filterTs,
+  templatesHtml,
+  templatesTs,
+  dragDropHtml,
+  dragDropTs,
+} from './snippets.generated';
 
 // ---------------------------------------------------------------------------
 // Demo data model
@@ -63,157 +73,6 @@ const SELECTED_COUNTRIES: DemoCountry[] = [
 // Code snippets
 // ---------------------------------------------------------------------------
 
-const SNIPPETS: Record<string, string> = {
-  basic: `<ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
-  trackBy="name"
-  sourceHeader="Available"
-  targetHeader="Selected"
-/>`,
-
-  basicTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { PickListComponent } from 'ui-lib-custom/pick-list';
-
-interface Country { code: string; name: string; }
-
-@Component({
-  standalone: true,
-  imports: [PickListComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly source: WritableSignal<Country[]> = signal([
-    { code: 'DE', name: 'Germany' },
-    { code: 'FR', name: 'France' },
-  ]);
-  public readonly target: WritableSignal<Country[]> = signal([
-    { code: 'US', name: 'United States' },
-  ]);
-}`,
-
-  filter: `<ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
-  trackBy="name"
-  filterBy="name"
-  sourceFilterPlaceholder="Search available…"
-  targetFilterPlaceholder="Search selected…"
-/>`,
-
-  filterTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { PickListComponent } from 'ui-lib-custom/pick-list';
-
-interface Country { code: string; name: string; }
-
-@Component({
-  standalone: true,
-  imports: [PickListComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly source: WritableSignal<Country[]> = signal([
-    { code: 'DE', name: 'Germany' },
-    { code: 'FR', name: 'France' },
-  ]);
-  public readonly target: WritableSignal<Country[]> = signal([]);
-}`,
-
-  templates: `<ui-lib-pick-list [(source)]="source" [(target)]="target" trackBy="code">
-  <ng-template uiPickListSourceHeader>
-    <span>Available countries</span>
-  </ng-template>
-  <ng-template uiPickListTargetHeader>
-    <span>Selected countries</span>
-  </ng-template>
-  <ng-template uiPickListItem let-country>
-    <div class="demo-pl-row">
-      <span class="demo-pl-code">{{ country.code }}</span>
-      <span class="demo-pl-name">{{ country.name }}</span>
-      <span class="demo-pl-region">{{ country.region }}</span>
-    </div>
-  </ng-template>
-  <ng-template uiPickListEmpty>
-    <span>No items here.</span>
-  </ng-template>
-</ui-lib-pick-list>`,
-
-  templatesTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import {
-  PickListComponent,
-  PickListItemDirective,
-  PickListSourceHeaderDirective,
-  PickListTargetHeaderDirective,
-  PickListEmptyDirective,
-} from 'ui-lib-custom/pick-list';
-
-interface Country { code: string; name: string; region: string; }
-
-@Component({
-  standalone: true,
-  imports: [
-    PickListComponent,
-    PickListItemDirective,
-    PickListSourceHeaderDirective,
-    PickListTargetHeaderDirective,
-    PickListEmptyDirective,
-  ],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly source: WritableSignal<Country[]> = signal([
-    { code: 'DE', name: 'Germany', region: 'Europe' },
-    { code: 'FR', name: 'France', region: 'Europe' },
-  ]);
-  public readonly target: WritableSignal<Country[]> = signal([
-    { code: 'US', name: 'United States', region: 'Americas' },
-  ]);
-}`,
-
-  dragDrop: `<ui-lib-pick-list
-  [(source)]="source"
-  [(target)]="target"
-  trackBy="code"
-  [dragDrop]="true"
-  (movedToTarget)="onMoveToTarget($event)"
-  (movedToSource)="onMoveToSource($event)"
-/>`,
-
-  dragDropTs: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { PickListComponent } from 'ui-lib-custom/pick-list';
-import type {
-  PickListMoveToTargetEvent,
-  PickListMoveToSourceEvent,
-} from 'ui-lib-custom/pick-list';
-
-interface Country { code: string; name: string; }
-
-@Component({
-  standalone: true,
-  imports: [PickListComponent],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly source: WritableSignal<Country[]> = signal([
-    { code: 'DE', name: 'Germany' },
-    { code: 'FR', name: 'France' },
-  ]);
-  public readonly target: WritableSignal<Country[]> = signal([]);
-
-  public onMoveToTarget(event: PickListMoveToTargetEvent): void {
-    console.log('Moved to target', event.items);
-  }
-
-  public onMoveToSource(event: PickListMoveToSourceEvent): void {
-    console.log('Returned to source', event.items);
-  }
-}`,
-};
-
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
@@ -244,6 +103,15 @@ export class MyComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PickListDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly filterHtml: string = filterHtml;
+  public readonly filterTs: string = filterTs;
+  public readonly templatesHtml: string = templatesHtml;
+  public readonly templatesTs: string = templatesTs;
+  public readonly dragDropHtml: string = dragDropHtml;
+  public readonly dragDropTs: string = dragDropTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -449,10 +317,6 @@ export class PickListDemoComponent {
   // -------------------------------------------------------------------------
 
   public readonly defaults: typeof PICK_LIST_DEFAULTS = PICK_LIST_DEFAULTS;
-
-  public snippet(key: string): string {
-    return SNIPPETS[key] ?? '';
-  }
 
   public readonly apiInputRows: readonly ApiPropRow[] = [
     {

@@ -27,26 +27,38 @@ const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const PAGES_DIR = join(ROOT, 'projects', 'demo', 'src', 'app', 'pages');
 
 const BATCH_PAGES = [
-  'animated-on-scroll',
-  'auto-focus',
-  'badges',
-  'cards',
-  'checkboxes',
-  'fieldset',
-  'icon-field',
-  'image-compare',
-  'key-filter',
-  'knob',
-  'meter-group',
-  'popover',
-  'scoped-theming',
-  'scroll-panel',
-  'scroll-top',
-  'select',
-  'select-buttons',
-  'slider',
-  'split-button',
-  'toggle-button',
+  'accordion',
+  'autocomplete',
+  'cascade-select',
+  'chart',
+  'color-picker',
+  'confirm-popup',
+  'data-view',
+  'date-picker',
+  'editor',
+  'float-label',
+  'icons',
+  'image',
+  'input-group',
+  'input-mask',
+  'input-number',
+  'input-otp',
+  'inputs',
+  'layouts',
+  'listbox',
+  'mega-menu',
+  'menu',
+  'menubar',
+  'order-list',
+  'organization-chart',
+  'panel',
+  'panel-menu',
+  'pick-list',
+  'scroller',
+  'tabs',
+  'textarea',
+  'tiered-menu',
+  'tree-select',
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -154,6 +166,7 @@ function isInSpan(pos, spans) {
 
 /**
  * Extract all string-valued properties from an object literal whose opening { is at startBrace.
+ * Also supports array-of-strings values — they are joined with '\n'.
  */
 function extractObjectProps(src, startBrace) {
   const props = {};
@@ -181,6 +194,21 @@ function extractObjectProps(src, startBrace) {
     if (src[i] === '`' || src[i] === "'" || src[i] === '"') {
       try { const { value, end } = extractStringAt(src, i); props[key] = value; i = end + 1; }
       catch { /* skip */ }
+    } else if (src[i] === '[') {
+      // Array-of-strings: collect all string literals and join with '\n'
+      const parts = [];
+      i++; // skip '['
+      while (i < src.length && src[i] !== ']') {
+        while (i < src.length && /\s/.test(src[i])) i++;
+        if (src[i] === ']') break;
+        if (src[i] === '`' || src[i] === "'" || src[i] === '"') {
+          try { const { value, end } = extractStringAt(src, i); parts.push(value); i = end + 1; }
+          catch { i++; }
+        } else if (src[i] === ',') { i++; }
+        else { i++; } // skip non-string items
+      }
+      if (src[i] === ']') i++; // skip ']'
+      if (parts.length > 0) props[key] = parts.join('\n');
     } else {
       // Skip non-string value
       let depth = 0;
@@ -207,19 +235,41 @@ function camelToKebab(str) {
   return str.replace(/([A-Z])/g, (c) => '-' + c.toLowerCase()).replace(/^-/, '');
 }
 
+/** Convert kebab-case to camelCase: 'filter-match-modes' → 'filterMatchModes' */
+function hyphenToCamel(str) {
+  return str.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // HTML template parser — find all [html]/[typescript] binding pairs
 // ─────────────────────────────────────────────────────────────────────────────
 
 function parseHtmlBindings(htmlSrc) {
   const results = [];
-  const tagRe = /<app-doc-code-example([\s\S]*?)(?:\/>|>)/g;
   let m;
+  // app-doc-code-example [html]/[typescript] pairs
+  const tagRe = /<app-doc-code-example([\s\S]*?)(?:\/>|>)/g;
   while ((m = tagRe.exec(htmlSrc)) !== null) {
     const attrs = m[1];
     const htmlBind = attrs.match(/\[html\]\s*=\s*"([^"]+)"/)?.[1]?.trim() ?? null;
     const tsBind = attrs.match(/\[typescript\]\s*=\s*"([^"]+)"/)?.[1]?.trim() ?? null;
     if (htmlBind || tsBind) results.push({ html: htmlBind, typescript: tsBind });
+  }
+  // ui-lib-code-snippet [code]="snippets.*" single-slot bindings
+  const codeRe = /<ui-lib-code-snippet([\s\S]*?)(?:\/>|\s*>)/g;
+  while ((m = codeRe.exec(htmlSrc)) !== null) {
+    const attrs = m[1];
+    const codeBind = attrs.match(/\[code\]\s*=\s*"([^"]+)"/)?.[1]?.trim() ?? null;
+    if (!codeBind) continue;
+    // Only migrate snippets-record patterns, not direct class properties like snippetBasic
+    if (!codeBind.match(/^snippets?\.|^snippet(?:Ts)?\(/)) continue;
+    const language = attrs.match(/language\s*=\s*"([^"]+)"/)?.[1]?.trim() ?? null;
+    const isTs = language === 'typescript' || language === 'scss';
+    if (isTs) {
+      results.push({ html: null, typescript: codeBind });
+    } else {
+      results.push({ html: codeBind, typescript: null });
+    }
   }
   return results;
 }
@@ -229,10 +279,10 @@ function parseHtmlBindings(htmlSrc) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function findInRecord(tsSrc, recordName, key) {
-  // Match "readonly name ... = {" — using [^=;]* to skip any type annotation, then require "="
-  // This avoids matching the type-annotation brace in patterns like "snippets: { type } = { value }".
+  // Match both class properties ("readonly name = {") and module-level consts ("const name = {").
+  // [^=;]* skips type annotations, then requires "=" to find the assignment brace.
   const re = new RegExp(
-    `(?:private|public|protected)?\\s*readonly\\s+${recordName}\\b[^=]*=\\s*\\{`,
+    `(?:(?:private|public|protected)?\\s*readonly\\s+${recordName}\\b[^=;]*=\\s*\\{|const\\s+${recordName}\\b[^=;]*=\\s*\\{)`,
     'g',
   );
   const spans = getStringSpans(tsSrc);
@@ -267,15 +317,33 @@ function findDirectProperty(tsSrc, propName) {
 
 function resolveExpression(expr, tsSrc) {
   if (!expr) return null;
-  // Pattern A: snippet('key') / snippetTs('key')
-  const getterM = expr.match(/^snippet(?:Ts)?\('(\w+)'\)$/);
+  // Pattern A: snippet('key') / snippetTs('key')  — key may be hyphenated
+  const getterM = expr.match(/^snippet(?:Ts)?\('([\w-]+)'\)$/);
   if (getterM) {
     const key = getterM[1];
-    return findInRecord(tsSrc, expr.startsWith('snippetTs(') ? 'snippetsTs' : 'snippets', key);
+    const recordName = expr.startsWith('snippetTs(') ? 'snippetsTs' : 'snippets';
+    // Try lowercase (class property) then uppercase (module-level const e.g. SNIPPETS)
+    return findInRecord(tsSrc, recordName, key) ?? findInRecord(tsSrc, recordName.toUpperCase(), key);
   }
   // Pattern C: obj.key
   const dotM = expr.match(/^(\w+)\.(\w+)$/);
   if (dotM) return findInRecord(tsSrc, dotM[1], dotM[2]);
+  // Pattern D: concatenated expressions joined by +, e.g. snippet('a') + '\n' + snippet('b')
+  if (expr.includes('+')) {
+    const parts = expr.split(/\s*\+\s*/);
+    const resolved = [];
+    for (const part of parts) {
+      const trimmed = part.trim();
+      if (trimmed.startsWith("'") || trimmed.startsWith('"') || trimmed.startsWith('`')) {
+        try { resolved.push(extractStringAt(trimmed, 0).value); } catch { return null; }
+      } else {
+        const val = resolveExpression(trimmed, tsSrc);
+        if (val === null) return null;
+        resolved.push(val);
+      }
+    }
+    return resolved.join('');
+  }
   // Pattern B: direct property
   return findDirectProperty(tsSrc, expr);
 }
@@ -286,15 +354,20 @@ function resolveExpression(expr, tsSrc) {
 
 function parseBinding(expr) {
   if (!expr) return null;
-  // snippet('key') → html
-  const hg = expr.match(/^snippet\('(\w+)'\)$/);
-  if (hg) return { base: hg[1], type: 'html' };
+  // snippet('key') → html  (key may be hyphenated, e.g. 'filter-match-modes')
+  const hg = expr.match(/^snippet\('([\w-]+)'\)$/);
+  if (hg) return { base: hyphenToCamel(hg[1]), type: 'html' };
   // snippetTs('key') → ts  (strip trailing Ts from key if present, e.g. 'alphanumTs' → 'alphanum')
-  const tg = expr.match(/^snippetTs\('(\w+)'\)$/);
+  const tg = expr.match(/^snippetTs\('([\w-]+)'\)$/);
   if (tg) {
-    let key = tg[1];
+    let key = hyphenToCamel(tg[1]);
     if (key.endsWith('Ts')) key = key.slice(0, -2);
     return { base: key, type: 'ts' };
+  }
+  // Concatenated: snippet('x') + '\n' + snippet('y') — use first key as base
+  if (expr.includes('+')) {
+    const firstKey = expr.match(/snippet\('([\w-]+)'\)/)?.[1];
+    if (firstKey) return { base: hyphenToCamel(firstKey), type: 'html' };
   }
   // obj.keyTs → ts, obj.key → html
   const dot = expr.match(/^(\w+)\.(\w+)$/);
@@ -330,7 +403,12 @@ function buildPairs(bindings, tsSrc) {
       if (!expr) continue;
       const parsed = parseBinding(expr);
       if (!parsed) continue;
-      const { base } = parsed;
+      let { base } = parsed;
+      // When the TS slot uses snippet('fooTs'), parseBinding gives base='fooTs'.
+      // Strip the Ts suffix so both slots share the same base key.
+      if (forcedType === 'ts' && base.endsWith('Ts') && base.length > 2) {
+        base = base.slice(0, -2);
+      }
       if (!map.has(base)) map.set(base, {});
       const entry = map.get(base);
       if (forcedType === 'html') {
@@ -376,11 +454,12 @@ function writeExampleFiles(pageDir, pairs) {
 function updateHtmlFile(htmlPath, pairs) {
   let src = readFileSync(htmlPath, 'utf8');
 
-  // Collect all (from → to) replacements, sort longest-first to avoid partial replacements
+  // Collect all (from → to) replacements, sort longest-first to avoid partial replacements.
+  // Only replace bindings whose value was successfully resolved (html/ts != null).
   const reps = [];
-  for (const [base, { oldHtmlExpr, oldTsExpr }] of pairs) {
-    if (oldHtmlExpr) reps.push({ from: oldHtmlExpr, to: base + 'Html' });
-    if (oldTsExpr)   reps.push({ from: oldTsExpr,   to: base + 'Ts'   });
+  for (const [base, { oldHtmlExpr, oldTsExpr, html, ts }] of pairs) {
+    if (oldHtmlExpr && html != null) reps.push({ from: oldHtmlExpr, to: base + 'Html' });
+    if (oldTsExpr   && ts   != null) reps.push({ from: oldTsExpr,   to: base + 'Ts'   });
   }
   reps.sort((a, b) => b.from.length - a.from.length);
 
@@ -433,12 +512,13 @@ function removeDirectProp(src, propName) {
 
 /**
  * Remove a Record-style snippet object (snippets, snippetsTs, iconSnippets, …).
- * Also removes the associated getter methods snippet(key)/snippetTs(key).
+ * Matches both class properties ("private/public readonly name = {") and
+ * module-level consts ("const name = {").
  */
 function removeRecordObject(src, objectName) {
   const spans = getStringSpans(src);
   const re = new RegExp(
-    `(?:private|public)\\s+readonly\\s+${objectName}\\b[^=]*=\\s*\\{`,
+    `(?:(?:private|public)\\s+readonly\\s+${objectName}\\b[^=;]*=\\s*\\{|const\\s+${objectName}\\b[^=;]*=\\s*\\{)`,
     'g',
   );
   let m;
@@ -507,10 +587,12 @@ function updateTsFile(tsPath, pairs) {
   // 1. Remove getter methods
   src = removeGetterMethods(src);
 
-  // 2. Remove Record objects (snippets, snippetsTs, iconSnippets)
+  // 2. Remove Record objects (class properties and module-level consts)
   src = removeRecordObject(src, 'snippets');
   src = removeRecordObject(src, 'snippetsTs');
   src = removeRecordObject(src, 'iconSnippets');
+  src = removeRecordObject(src, 'SNIPPETS');
+  src = removeRecordObject(src, 'SNIPPETS_TS');
 
   // 3. Remove direct properties referenced in HTML bindings
   const directPropNames = new Set();

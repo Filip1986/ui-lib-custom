@@ -12,7 +12,7 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('basicBar')" [typescript]="snippet('basicBarTs')" />
+      <app-doc-code-example [html]="basicBarHtml" [typescript]="basicBarTsTs" />
     </section>
 
     <section id="basic-line" data-doc-anchor class="example-section">
@@ -20,7 +20,7 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('basicLine')" [typescript]="snippet('basicLineTs')" />
+      <app-doc-code-example [html]="basicLineHtml" [typescript]="basicLineTsTs" />
     </section>
 
     <section id="pie-chart" data-doc-anchor class="example-section">
@@ -28,7 +28,7 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('pie')" [typescript]="snippet('pieTs')" />
+      <app-doc-code-example [html]="pieHtml" [typescript]="pieTsTs" />
     </section>
 
     <section id="doughnut-chart" data-doc-anchor class="example-section">
@@ -39,7 +39,7 @@
           ariaLabel="Acquisition channel doughnut chart"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('doughnut')" [typescript]="snippet('doughnutTs')" />
+      <app-doc-code-example [html]="doughnutHtml" [typescript]="doughnutTsTs" />
     </section>
 
     <section id="generic-radar" data-doc-anchor class="example-section">
@@ -51,7 +51,7 @@
           [ariaLabel]="'Platform capability radar chart'"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('radar')" [typescript]="snippet('radarTs')" />
+      <app-doc-code-example [html]="radarHtml" [typescript]="radarTsTs" />
     </section>
 
     <section id="generic-polar-area" data-doc-anchor class="example-section">
@@ -63,7 +63,7 @@
           [ariaLabel]="'Roadmap priority polar area chart'"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('polarArea')" [typescript]="snippet('polarAreaTs')" />
+      <app-doc-code-example [html]="polarAreaHtml" [typescript]="polarAreaTsTs" />
     </section>
 
     <section id="generic-bubble" data-doc-anchor class="example-section">
@@ -75,7 +75,7 @@
           [ariaLabel]="'Customer segment bubble chart'"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('bubble')" [typescript]="snippet('bubbleTs')" />
+      <app-doc-code-example [html]="bubbleHtml" [typescript]="bubbleTsTs" />
     </section>
 
     <section id="generic-scatter" data-doc-anchor class="example-section">
@@ -87,7 +87,7 @@
           [ariaLabel]="'Campaign conversion scatter plot'"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('scatter')" [typescript]="snippet('scatterTs')" />
+      <app-doc-code-example [html]="scatterHtml" [typescript]="scatterTsTs" />
     </section>
 
     <section id="multi-dataset-bar" data-doc-anchor class="example-section">
@@ -96,8 +96,8 @@
         <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('multiDatasetBar')"
-        [typescript]="snippet('multiDatasetBarTs')"
+        [html]="multiDatasetBarHtml"
+        [typescript]="multiDatasetBarTsTs"
       />
     </section>
 
@@ -110,7 +110,7 @@
           ariaLabel="Stacked cost chart"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('stackedBar')" [typescript]="snippet('stackedBarTs')" />
+      <app-doc-code-example [html]="stackedBarHtml" [typescript]="stackedBarTsTs" />
     </section>
 
     <section id="line-area-fill" data-doc-anchor class="example-section">
@@ -118,7 +118,7 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('lineArea')" [typescript]="snippet('lineAreaTs')" />
+      <app-doc-code-example [html]="lineAreaHtml" [typescript]="lineAreaTsTs" />
     </section>
 
     <section id="mixed-chart" data-doc-anchor class="example-section">
@@ -131,7 +131,7 @@
           [ariaLabel]="'Mixed revenue and conversion chart'"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('mixed')" [typescript]="snippet('mixedTs')" />
+      <app-doc-code-example [html]="mixedHtml" [typescript]="mixedTsTs" />
     </section>
 
     <section id="sizes" data-doc-anchor class="example-section">
@@ -152,7 +152,7 @@
           </ui-lib-stack>
         </ui-lib-grid>
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
+      <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
     </section>
 
     <section id="custom-dimensions" data-doc-anchor class="example-section">
@@ -166,8 +166,8 @@
         />
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('customDimensions')"
-        [typescript]="snippet('customDimensionsTs')"
+        [html]="customDimensionsHtml"
+        [typescript]="customDimensionsTsTs"
       />
     </section>
 
@@ -185,8 +185,8 @@
         </ui-lib-stack>
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('dynamicUpdate')"
-        [typescript]="snippet('dynamicUpdateTs')"
+        [html]="dynamicUpdateHtml"
+        [typescript]="dynamicUpdateTsTs"
       />
     </section>
 
@@ -229,8 +229,8 @@
         </ui-lib-stack>
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('themeIntegration')"
-        [typescript]="snippet('themeIntegrationTs')"
+        [html]="themeIntegrationHtml"
+        [typescript]="themeIntegrationTsTs"
       />
     </section>
 
@@ -247,8 +247,8 @@
         </ui-lib-stack>
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('clickEvents')"
-        [typescript]="snippet('clickEventsTs')"
+        [html]="clickEventsHtml"
+        [typescript]="clickEventsTsTs"
       />
     </section>
 
@@ -262,8 +262,8 @@
         />
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('customOptions')"
-        [typescript]="snippet('customOptionsTs')"
+        [html]="customOptionsHtml"
+        [typescript]="customOptionsTsTs"
       />
     </section>
   </div>

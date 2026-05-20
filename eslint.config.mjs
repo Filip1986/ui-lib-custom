@@ -23,6 +23,9 @@ export default [
       '**/node_modules/**',
       '**/.angular/**',
       '.claude/**',
+      // Demo example files contain intentionally partial TypeScript snippets
+      // (class members, fragments, HTML strings) that cannot be parsed as modules.
+      '**/examples/*.example.ts',
     ],
   },
   // TypeScript + Angular rules for source files.

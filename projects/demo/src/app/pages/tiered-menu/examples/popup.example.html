@@ -1,0 +1,10 @@
+<!-- trigger button wires aria-haspopup, aria-expanded, aria-controls -->
+<ui-lib-button
+  [attr.aria-haspopup]="'menu'"
+  [attr.aria-expanded]="popupMenu.isVisible()"
+  [attr.aria-controls]="popupMenu.menuId"
+  (click)="popupMenu.toggle($event)"
+>
+  Open Menu ▾
+</ui-lib-button>
+<ui-lib-tiered-menu #popupMenu [model]="items" [popup]="true" />

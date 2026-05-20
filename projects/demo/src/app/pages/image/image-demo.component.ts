@@ -11,16 +11,27 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { Image } from 'ui-lib-custom/image';
 
 import { Panel } from 'ui-lib-custom/panel';
-type SnippetKey =
-  | 'basic'
-  | 'preview'
-  | 'customIndicator'
-  | 'errorFallback'
-  | 'sizes'
-  | 'variants'
-  | 'customError'
-  | 'dimensions'
-  | 'twoWayBinding'; /**
+import {
+  basicHtml,
+  basicTs,
+  previewHtml,
+  previewTs,
+  customIndicatorHtml,
+  customIndicatorTs,
+  errorFallbackHtml,
+  errorFallbackTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  variantsTs,
+  customErrorHtml,
+  customErrorTs,
+  dimensionsHtml,
+  dimensionsTs,
+  twoWayBindingHtml,
+  twoWayBindingTs,
+} from './snippets.generated';
+/**
  * Demo page for the Image component.
  */
 @Component({
@@ -41,6 +52,25 @@ type SnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly previewHtml: string = previewHtml;
+  public readonly previewTs: string = previewTs;
+  public readonly customIndicatorHtml: string = customIndicatorHtml;
+  public readonly customIndicatorTs: string = customIndicatorTs;
+  public readonly errorFallbackHtml: string = errorFallbackHtml;
+  public readonly errorFallbackTs: string = errorFallbackTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly customErrorHtml: string = customErrorHtml;
+  public readonly customErrorTs: string = customErrorTs;
+  public readonly dimensionsHtml: string = dimensionsHtml;
+  public readonly dimensionsTs: string = dimensionsTs;
+  public readonly twoWayBindingHtml: string = twoWayBindingHtml;
+  public readonly twoWayBindingTs: string = twoWayBindingTs;
+
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -85,151 +115,4 @@ export class ImageDemoComponent {
   public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
 
   // ─── Code snippets ────────────────────────────────────────────────────────────
-
-  private readonly snippets: Record<SnippetKey, string> = {
-    basic: `<ui-lib-image
-  src="https://picsum.photos/seed/demo/400/300"
-  alt="A scenic landscape"
-/>`,
-    preview: `<ui-lib-image
-  src="https://picsum.photos/seed/preview/400/300"
-  alt="Click to preview"
-  [preview]="true"
-/>`,
-    customIndicator: `<ui-lib-image
-  src="https://picsum.photos/seed/custom/400/300"
-  alt="Custom indicator demo"
-  [preview]="true"
->
-  <ng-template #imageIndicator>
-    <span style="font-size: 1.5rem">🔍</span>
-  </ng-template>
-</ui-lib-image>`,
-    errorFallback: `<ui-lib-image
-  src="https://invalid-url/broken.jpg"
-  errorSrc="https://picsum.photos/seed/fallback/400/300"
-  alt="Image with fallback"
-/>`,
-    sizes: `<ui-lib-image src="..." alt="Small" size="sm" [preview]="true" />
-<ui-lib-image src="..." alt="Medium" size="md" [preview]="true" />
-<ui-lib-image src="..." alt="Large" size="lg" [preview]="true" />`,
-    variants: `<ui-lib-image src="..." alt="Material" variant="material" [preview]="true" />
-<ui-lib-image src="..." alt="Bootstrap" variant="bootstrap" [preview]="true" />
-<ui-lib-image src="..." alt="Minimal" variant="minimal" [preview]="true" />`,
-    customError: `<ui-lib-image src="https://invalid-url/broken.jpg" alt="Broken image">
-  <ng-template #imageError>
-    <div class="my-error">
-      <span>⚠️ Could not load image</span>
-    </div>
-  </ng-template>
-</ui-lib-image>`,
-    dimensions: `<ui-lib-image
-  src="https://picsum.photos/seed/wide/800/200"
-  alt="Wide image"
-  width="400"
-  height="100"
-/>`,
-    twoWayBinding: `<ui-lib-image
-  src="https://picsum.photos/seed/binding/400/300"
-  alt="Two-way binding demo"
-  [preview]="true"
-  [(previewVisible)]="previewVisible"
-/>
-<p>Preview open: {{ previewVisible() }}</p>`,
-  };
-
-  private readonly snippetsTs: Record<SnippetKey, string> = {
-    basic: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    preview: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    customIndicator: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    errorFallback: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    sizes: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    variants: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    customError: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    dimensions: `import { Component } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {}`,
-    twoWayBinding: `import { Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
-import { Image } from 'ui-lib-custom/image';
-
-@Component({
-  standalone: true,
-  imports: [Image],
-  templateUrl: './my.component.html',
-})
-export class MyComponent {
-  public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
-}`,
-  };
-
-  public snippet(key: SnippetKey): string {
-    return this.snippets[key];
-  }
-
-  public snippetTs(key: SnippetKey): string {
-    return this.snippetsTs[key];
-  }
 }

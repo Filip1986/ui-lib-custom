@@ -17,7 +17,7 @@
       <ui-lib-panel variant="minimal">
         <ui-lib-organization-chart [value]="basicNodes()" />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('basic')" [typescript]="snippetTs('basic')" />
+      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
     </section>
 
     <!-- 2. Collapsible -->
@@ -43,8 +43,8 @@
         }
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('collapsible')"
-        [typescript]="snippetTs('collapsible')"
+        [html]="collapsibleHtml"
+        [typescript]="collapsibleTs"
       />
     </section>
 
@@ -69,8 +69,8 @@
         </p>
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('singleSelection')"
-        [typescript]="snippetTs('singleSelection')"
+        [html]="singleSelectionHtml"
+        [typescript]="singleSelectionTs"
       />
     </section>
 
@@ -95,8 +95,8 @@
         </p>
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('multipleSelection')"
-        [typescript]="snippetTs('multipleSelection')"
+        [html]="multipleSelectionHtml"
+        [typescript]="multipleSelectionTs"
       />
     </section>
 
@@ -121,8 +121,8 @@
         </ui-lib-organization-chart>
       </ui-lib-panel>
       <app-doc-code-example
-        [html]="snippet('customTemplate')"
-        [typescript]="snippetTs('customTemplate')"
+        [html]="customTemplateHtml"
+        [typescript]="customTemplateTs"
       />
     </section>
 
@@ -140,7 +140,7 @@
           [collapsible]="true"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('bootstrap')" [typescript]="snippetTs('bootstrap')" />
+      <app-doc-code-example [html]="bootstrapHtml" [typescript]="bootstrapTs" />
     </section>
 
     <!-- 7. Minimal Variant -->
@@ -157,7 +157,7 @@
           [collapsible]="true"
         />
       </ui-lib-panel>
-      <app-doc-code-example [html]="snippet('minimal')" [typescript]="snippetTs('minimal')" />
+      <app-doc-code-example [html]="minimalHtml" [typescript]="minimalTs" />
     </section>
 
     <!-- 8. Accessibility -->

@@ -16,7 +16,7 @@
             <span class="value-text">Value: {{ formatValue(basicDate) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippet('basicTs')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
       </section>
 
       <section id="format" data-doc-anchor class="example-section">
@@ -27,7 +27,7 @@
             <span class="value-text">Value: {{ formatValue(formattedDate) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('format')" [typescript]="snippet('formatTs')" />
+        <app-doc-code-example [html]="formatHtml" [typescript]="formatTs" />
       </section>
 
       <section id="icon" data-doc-anchor class="example-section">
@@ -35,7 +35,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('icon')" [typescript]="snippet('iconTs')" />
+        <app-doc-code-example [html]="iconHtml" [typescript]="iconTs" />
       </section>
 
       <section id="min-max" data-doc-anchor class="example-section">
@@ -52,7 +52,7 @@
             >
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('minMax')" [typescript]="snippet('minMaxTs')" />
+        <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTs" />
       </section>
 
       <section id="multiple" data-doc-anchor class="example-section">
@@ -63,7 +63,7 @@
             <span class="value-text">Selected: {{ formatValue(multipleDates) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('multiple')" [typescript]="snippet('multipleTs')" />
+        <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
       </section>
 
       <section id="range" data-doc-anchor class="example-section">
@@ -74,7 +74,7 @@
             <span class="value-text">Selected: {{ formatValue(rangeDates) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('range')" [typescript]="snippet('rangeTs')" />
+        <app-doc-code-example [html]="rangeHtml" [typescript]="rangeTs" />
       </section>
 
       <section id="button-bar" data-doc-anchor class="example-section">
@@ -82,7 +82,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('buttonBar')" [typescript]="snippet('buttonBarTs')" />
+        <app-doc-code-example [html]="buttonBarHtml" [typescript]="buttonBarTs" />
       </section>
 
       <section id="time" data-doc-anchor class="example-section">
@@ -105,8 +105,8 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('time24') + '\n' + snippet('time12')"
-          [typescript]="snippet('time24Ts')"
+          [html]="time24Html"
+          [typescript]="time24Ts"
         />
       </section>
 
@@ -115,7 +115,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('timeOnly')" [typescript]="snippet('timeOnlyTs')" />
+        <app-doc-code-example [html]="timeOnlyHtml" [typescript]="timeOnlyTs" />
       </section>
 
       <section id="month-picker" data-doc-anchor class="example-section">
@@ -124,8 +124,8 @@
           <ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('monthPicker')"
-          [typescript]="snippet('monthPickerTs')"
+          [html]="monthPickerHtml"
+          [typescript]="monthPickerTs"
         />
       </section>
 
@@ -135,8 +135,8 @@
           <ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('yearPicker')"
-          [typescript]="snippet('yearPickerTs')"
+          [html]="yearPickerHtml"
+          [typescript]="yearPickerTs"
         />
       </section>
 
@@ -146,8 +146,8 @@
           <ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('multipleMonths')"
-          [typescript]="snippet('multipleMonthsTs')"
+          [html]="multipleMonthsHtml"
+          [typescript]="multipleMonthsTs"
         />
       </section>
 
@@ -156,7 +156,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('inline')" [typescript]="snippet('inlineTs')" />
+        <app-doc-code-example [html]="inlineHtml" [typescript]="inlineTs" />
       </section>
 
       <section id="sizes" data-doc-anchor class="example-section">
@@ -168,7 +168,7 @@
             <ui-lib-date-picker [(ngModel)]="sizeValues.lg" size="lg" />
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
       </section>
 
       <section id="variants" data-doc-anchor class="example-section">
@@ -189,7 +189,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('variants')" [typescript]="snippet('variantsTs')" />
+        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
       </section>
 
       <section id="filled" data-doc-anchor class="example-section">
@@ -197,7 +197,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippet('filledTs')" />
+        <app-doc-code-example [html]="filledHtml" [typescript]="filledTs" />
       </section>
 
       <section id="disabled" data-doc-anchor class="example-section">
@@ -205,7 +205,7 @@
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippet('disabledTs')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </section>
 
       <section id="invalid" data-doc-anchor class="example-section">
@@ -216,7 +216,7 @@
             <span class="error-text">Please select a valid date.</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippet('invalidTs')" />
+        <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTs" />
       </section>
 
       <section id="reactive-forms" data-doc-anchor class="example-section">
@@ -236,7 +236,7 @@
             </div>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippet('reactiveTs')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

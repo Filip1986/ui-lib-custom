@@ -20,7 +20,7 @@ export class MyComponent {
   ];
 
   public onPrimaryAction(): void {
-    console.log('Primary action triggered');
+    // primary action handler
   }
 }`;
 
@@ -140,9 +140,7 @@ import type { SplitButtonItem, SplitButtonSeverity } from 'ui-lib-custom/split-b
 })
 export class MyComponent {
   public readonly severity: SplitButtonSeverity = 'success';
-  public readonly items: SplitButtonItem[] = [
-    { label: 'Update', icon: 'pencil' },
-  ];
+  public readonly items: SplitButtonItem[] = [{ label: 'Update', icon: 'pencil' }];
 }`;
 
 export const sizesHtml = `<ui-lib-split-button label="Small" size="sm" [model]="items" />

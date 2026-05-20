@@ -22,7 +22,7 @@
             <span class="value-text">Value: {{ formatValue(basicValue) }}</span>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('basic')" [typescript]="snippet('basicTs')" />
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
       </section>
 
       <!-- b. Mask -->
@@ -37,7 +37,7 @@
             [(ngModel)]="maskValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('mask')" [typescript]="snippet('maskTs')" />
+        <app-doc-code-example [html]="maskHtml" [typescript]="maskTs" />
       </section>
 
       <!-- c. Integer Only -->
@@ -58,8 +58,8 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example
-          [html]="snippet('integerOnly')"
-          [typescript]="snippet('integerOnlyTs')"
+          [html]="integerOnlyHtml"
+          [typescript]="integerOnlyTs"
         />
       </section>
 
@@ -100,7 +100,7 @@
             </div>
           </div>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('sizes')" [typescript]="snippet('sizesTs')" />
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
       </section>
 
       <!-- e. Filled -->
@@ -117,7 +117,7 @@
             [(ngModel)]="filledValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('filled')" [typescript]="snippet('filledTs')" />
+        <app-doc-code-example [html]="filledHtml" [typescript]="filledTs" />
       </section>
 
       <!-- f. Disabled -->
@@ -132,7 +132,7 @@
             [(ngModel)]="disabledValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('disabled')" [typescript]="snippet('disabledTs')" />
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
       </section>
 
       <!-- g. Invalid -->
@@ -147,7 +147,7 @@
             [(ngModel)]="invalidValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('invalid')" [typescript]="snippet('invalidTs')" />
+        <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTs" />
       </section>
 
       <!-- h. Read Only -->
@@ -162,7 +162,7 @@
             [(ngModel)]="readonlyValue"
           />
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('readonly')" [typescript]="snippet('readonlyTs')" />
+        <app-doc-code-example [html]="readonlyHtml" [typescript]="readonlyTs" />
       </section>
 
       <!-- i. Reactive Forms -->
@@ -191,7 +191,7 @@
             </div>
           </form>
         </ui-lib-panel>
-        <app-doc-code-example [html]="snippet('reactive')" [typescript]="snippet('reactiveTs')" />
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
       </section>
     </div>
   </app-doc-demo-viewport>

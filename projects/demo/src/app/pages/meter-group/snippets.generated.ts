@@ -15,10 +15,10 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';
 })
 export class MyComponent {
   public readonly storageItems: MeterItem[] = [
-    { label: 'Apps',     value: 16, color: '#34d399' },
-    { label: 'Messages', value: 8,  color: '#818cf8' },
-    { label: 'Media',    value: 24, color: '#fb923c' },
-    { label: 'System',   value: 10, color: '#f87171' },
+    { label: 'Apps', value: 16, color: '#34d399' },
+    { label: 'Messages', value: 8, color: '#818cf8' },
+    { label: 'Media', value: 24, color: '#fb923c' },
+    { label: 'System', value: 10, color: '#f87171' },
   ];
 }`;
 
@@ -40,9 +40,9 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';
 export class MyComponent {
   public readonly items: MeterItem[] = [
     { label: 'Documents', value: 38, color: '#0ea5e9' },
-    { label: 'Videos',    value: 21, color: '#d946ef' },
-    { label: 'Photos',    value: 17, color: '#f59e0b' },
-    { label: 'Other',     value: 12, color: '#6b7280' },
+    { label: 'Videos', value: 21, color: '#d946ef' },
+    { label: 'Photos', value: 17, color: '#f59e0b' },
+    { label: 'Other', value: 12, color: '#6b7280' },
   ];
 }`;
 
@@ -63,9 +63,9 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';
 })
 export class MyComponent {
   public readonly items: MeterItem[] = [
-    { label: 'Used',   value: 45, color: '#6366f1' },
+    { label: 'Used', value: 45, color: '#6366f1' },
     { label: 'Cached', value: 25, color: '#a5b4fc' },
-    { label: 'Free',   value: 30, color: '#e0e7ff' },
+    { label: 'Free', value: 30, color: '#e0e7ff' },
   ];
 }`;
 

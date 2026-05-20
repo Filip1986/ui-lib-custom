@@ -1,0 +1,9 @@
+<ui-lib-organization-chart [value]="nodes">
+  <ng-template uiOrgChartNode let-node>
+    <div class="custom-node">
+      <span class="custom-node__avatar">{{ initials(node.label) }}</span>
+      <strong class="custom-node__name">{{ node.label }}</strong>
+      <span class="custom-node__role">{{ node.data?.role }}</span>
+    </div>
+  </ng-template>
+</ui-lib-organization-chart>
