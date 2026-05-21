@@ -107,34 +107,7 @@
 
   @if (activeTab() === 'api') {
     <ui-lib-panel variant="minimal">
-      <div class="doc-demo-group">
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>size</code></td>
-              <td><code>'sm' | 'md' | 'lg'</code></td>
-              <td>Max-width preset.</td>
-            </tr>
-            <tr>
-              <td><code>inset</code></td>
-              <td><code>SpacingToken</code></td>
-              <td>Semantic padding inside the container.</td>
-            </tr>
-            <tr>
-              <td><code>fullWidth</code></td>
-              <td><code>boolean</code></td>
-              <td>Stretch container to parent width.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 </app-doc-page-layout>

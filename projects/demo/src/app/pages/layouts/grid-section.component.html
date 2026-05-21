@@ -129,34 +129,7 @@
 
   @if (activeTab() === 'api') {
     <ui-lib-panel variant="minimal">
-      <div class="doc-demo-group">
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>columns</code></td>
-              <td><code>number</code></td>
-              <td>Total columns for fixed grid.</td>
-            </tr>
-            <tr>
-              <td><code>minColumnWidth</code></td>
-              <td><code>string</code></td>
-              <td>Auto-fit minimum width (e.g. 200px).</td>
-            </tr>
-            <tr>
-              <td><code>spacing</code></td>
-              <td><code>SpacingToken</code></td>
-              <td>Semantic gap between cells.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 </app-doc-page-layout>

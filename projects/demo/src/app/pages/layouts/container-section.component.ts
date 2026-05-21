@@ -14,7 +14,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for container layout usage.
@@ -37,6 +38,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './container-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -44,6 +46,16 @@ import { Panel } from 'ui-lib-custom/panel';
 })
 export class ContainerSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'container', label: 'Container' }];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Max-width preset.' },
+    { name: 'inset', type: 'SpacingToken', description: 'Semantic padding inside the container.' },
+    {
+      name: 'fullWidth',
+      type: 'boolean',
+      description: 'Stretch container to parent width.',
+    },
+  ];
 
   public readonly usageSnippet: string = `
 <ui-lib-container size="md" inset="lg">

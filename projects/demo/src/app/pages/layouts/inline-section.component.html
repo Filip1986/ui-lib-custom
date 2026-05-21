@@ -105,39 +105,7 @@
 
   @if (activeTab() === 'api') {
     <ui-lib-panel variant="minimal">
-      <div class="doc-demo-group">
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>spacing</code></td>
-              <td><code>SpacingToken</code></td>
-              <td>Semantic gap between children.</td>
-            </tr>
-            <tr>
-              <td><code>justify</code></td>
-              <td><code>'start' | 'center' | 'end' | 'space-between'</code></td>
-              <td>Main-axis distribution.</td>
-            </tr>
-            <tr>
-              <td><code>align</code></td>
-              <td><code>'start' | 'center' | 'end' | 'stretch'</code></td>
-              <td>Cross-axis alignment for wrapped rows.</td>
-            </tr>
-            <tr>
-              <td><code>wrap</code></td>
-              <td><code>boolean</code></td>
-              <td>Allow items to wrap to the next line.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 </app-doc-page-layout>

@@ -15,7 +15,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for inline layout usage.
@@ -38,6 +39,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './inline-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -45,6 +47,25 @@ import { Panel } from 'ui-lib-custom/panel';
 })
 export class InlineSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'inline', label: 'Inline' }];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'spacing', type: 'SpacingToken', description: 'Semantic gap between children.' },
+    {
+      name: 'justify',
+      type: "'start' | 'center' | 'end' | 'space-between'",
+      description: 'Main-axis distribution.',
+    },
+    {
+      name: 'align',
+      type: "'start' | 'center' | 'end' | 'stretch'",
+      description: 'Cross-axis alignment for wrapped rows.',
+    },
+    {
+      name: 'wrap',
+      type: 'boolean',
+      description: 'Allow items to wrap to the next line.',
+    },
+  ];
 
   public readonly usageSnippet: string = `
 <ui-lib-inline spacing="sm" justify="center">

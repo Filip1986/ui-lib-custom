@@ -497,48 +497,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <div class="api-table">
-        <div class="api-row api-header">
-          <div>Name</div>
-          <div>Type</div>
-          <div>Description</div>
-        </div>
-        <div class="api-row">
-          <div>variant</div>
-          <div><code>AccordionVariant</code></div>
-          <div>Visual style: material | bootstrap | minimal.</div>
-        </div>
-        <div class="api-row">
-          <div>size</div>
-          <div><code>AccordionSize</code></div>
-          <div>Spacing scale: sm | md | lg.</div>
-        </div>
-        <div class="api-row">
-          <div>expandMode</div>
-          <div><code>'single' | 'multiple'</code></div>
-          <div>Allow one or many panels to be expanded.</div>
-        </div>
-        <div class="api-row">
-          <div>expandedPanels</div>
-          <div><code>string[]</code></div>
-          <div>Controlled list of expanded panel ids.</div>
-        </div>
-        <div class="api-row">
-          <div>defaultExpandedPanels</div>
-          <div><code>string[]</code></div>
-          <div>Uncontrolled initial expanded panels.</div>
-        </div>
-        <div class="api-row">
-          <div>expandedChange</div>
-          <div><code>Event&lt;AccordionChangeEvent&gt;</code></div>
-          <div>Emits on expansion state changes.</div>
-        </div>
-        <div class="api-row">
-          <div>panelToggle</div>
-          <div><code>Event&lt;AccordionChangeEvent&gt;</code></div>
-          <div>Emits every toggle interaction.</div>
-        </div>
-      </div>
+      <app-doc-api-reference [rows]="apiRows" />
       <app-doc-code-example
         [html]="basicHtml"
         [typescript]="basicTs"

@@ -113,39 +113,7 @@
 
   @if (activeTab() === 'api') {
     <ui-lib-panel variant="minimal">
-      <div class="doc-demo-group">
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>spacing</code></td>
-              <td><code>SpacingToken</code></td>
-              <td>Semantic gap between children.</td>
-            </tr>
-            <tr>
-              <td><code>direction</code></td>
-              <td><code>'vertical' | 'horizontal'</code></td>
-              <td>Flow direction of children.</td>
-            </tr>
-            <tr>
-              <td><code>align</code></td>
-              <td><code>'start' | 'center' | 'end' | 'stretch'</code></td>
-              <td>Cross-axis alignment.</td>
-            </tr>
-            <tr>
-              <td><code>justify</code></td>
-              <td><code>'start' | 'center' | 'end' | 'space-between'</code></td>
-              <td>Main-axis distribution.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 </app-doc-page-layout>

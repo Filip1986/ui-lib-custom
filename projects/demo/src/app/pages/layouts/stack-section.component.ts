@@ -21,7 +21,8 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
-
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for stack layout usage.
@@ -43,6 +44,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './stack-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -50,6 +52,25 @@ import { Panel } from 'ui-lib-custom/panel';
 })
 export class StackSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'stack', label: 'Stack' }];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'spacing', type: 'SpacingToken', description: 'Semantic gap between children.' },
+    {
+      name: 'direction',
+      type: "'vertical' | 'horizontal'",
+      description: 'Flow direction of children.',
+    },
+    {
+      name: 'align',
+      type: "'start' | 'center' | 'end' | 'stretch'",
+      description: 'Cross-axis alignment.',
+    },
+    {
+      name: 'justify',
+      type: "'start' | 'center' | 'end' | 'space-between'",
+      description: 'Main-axis distribution.',
+    },
+  ];
 
   public readonly usageSnippet: string = `
 <ui-lib-stack spacing="md" direction="horizontal" justify="space-between">

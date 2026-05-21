@@ -115,42 +115,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>saveToLocalStorage(name)</code></td>
-            <td><code>void</code></td>
-            <td>Persists current theme preset under the provided name.</td>
-          </tr>
-          <tr>
-            <td><code>loadFromLocalStorage(name)</code></td>
-            <td><code>void</code></td>
-            <td>Loads a saved preset and applies it.</td>
-          </tr>
-          <tr>
-            <td><code>exportAsJSON(preset)</code></td>
-            <td><code>string</code></td>
-            <td>Exports the preset to JSON for reuse.</td>
-          </tr>
-          <tr>
-            <td><code>exportAsCSS(preset)</code></td>
-            <td><code>string</code></td>
-            <td>Exports CSS variables for runtime theming.</td>
-          </tr>
-          <tr>
-            <td><code>exportAsScss(preset)</code></td>
-            <td><code>string</code></td>
-            <td>Exports SCSS variables for build-time theming.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiRows" kind="name" [showDefault]="false" />
     </ui-lib-panel>
   }
 

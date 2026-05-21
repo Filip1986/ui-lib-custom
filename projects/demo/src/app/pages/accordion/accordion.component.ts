@@ -31,6 +31,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { Panel } from 'ui-lib-custom/panel';
 import {
   accordionExampleHtml,
@@ -99,6 +101,7 @@ type AccordionTab =
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
@@ -295,6 +298,44 @@ export class AccordionComponent {
   public toggleReducedMotion(): void {
     this.reduceMotionDemo.update((value: boolean): boolean => !value);
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: 'AccordionVariant',
+      description: 'Visual style: material | bootstrap | minimal.',
+    },
+    {
+      name: 'size',
+      type: 'AccordionSize',
+      description: 'Spacing scale: sm | md | lg.',
+    },
+    {
+      name: 'expandMode',
+      type: "'single' | 'multiple'",
+      description: 'Allow one or many panels to be expanded.',
+    },
+    {
+      name: 'expandedPanels',
+      type: 'string[]',
+      description: 'Controlled list of expanded panel ids.',
+    },
+    {
+      name: 'defaultExpandedPanels',
+      type: 'string[]',
+      description: 'Uncontrolled initial expanded panels.',
+    },
+    {
+      name: 'expandedChange',
+      type: 'OutputEmitterRef<AccordionChangeEvent>',
+      description: 'Emits on expansion state changes.',
+    },
+    {
+      name: 'panelToggle',
+      type: 'OutputEmitterRef<AccordionChangeEvent>',
+      description: 'Emits every toggle interaction.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: 'Enter / Space', suffix: 'on header', action: 'Toggles the panel open or closed.' },
