@@ -36,6 +36,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Knob component — circular dial for numeric input.
  */
@@ -55,6 +57,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',
@@ -176,5 +180,19 @@ export class KnobDemoComponent {
       default: 'undefined',
       description: 'ARIA label for the knob.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-knob-track-color', description: 'Track colour.' },
+    { variable: '--uilib-knob-range-color', description: 'Range text colour.' },
+    { variable: '--uilib-knob-text-color', description: 'Text text colour.' },
+    { variable: '--uilib-knob-text-size', description: 'Text size.' },
+    { variable: '--uilib-knob-text-weight', description: 'Text Weight.' },
+    { variable: '--uilib-knob-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-knob-size-md', description: 'Size — md.' },
+    { variable: '--uilib-knob-size-lg', description: 'Size — lg.' },
+    { variable: '--uilib-knob-focus-ring-color', description: 'Focus ring colour.' },
+    { variable: '--uilib-knob-focus-ring-width', description: 'Focus ring width.' },
+    { variable: '--uilib-knob-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-knob-transition-duration', description: 'Transition Duration.' },
   ];
 }

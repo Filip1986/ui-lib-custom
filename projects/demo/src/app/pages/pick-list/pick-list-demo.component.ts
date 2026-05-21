@@ -41,6 +41,8 @@ import {
   dragDropTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 
 // ---------------------------------------------------------------------------
 // Demo data model
@@ -100,6 +102,8 @@ const SELECTED_COUNTRIES: DemoCountry[] = [
     DocQualityBadgeComponent,
 
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
   styleUrl: './pick-list-demo.component.scss',
@@ -230,6 +234,7 @@ export class PickListDemoComponent {
     { id: 'drag-drop', label: 'Drag & Drop' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -480,5 +485,64 @@ export class PickListDemoComponent {
     { name: 'uiPickListSourceHeader', type: '—', description: 'Custom source list header.' },
     { name: 'uiPickListTargetHeader', type: '—', description: 'Custom target list header.' },
     { name: 'uiPickListEmpty', type: '—', description: 'Empty state for either list.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-pick-list-gap', description: 'Gap.' },
+    { variable: '--uilib-pick-list-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-pick-list-max-height', description: 'Maximum height.' },
+    { variable: '--uilib-pick-list-bg', description: 'Background colour.' },
+    { variable: '--uilib-pick-list-border', description: 'Border shorthand.' },
+    { variable: '--uilib-pick-list-radius', description: 'Border radius.' },
+    { variable: '--uilib-pick-list-item-padding', description: 'Item padding.' },
+    { variable: '--uilib-pick-list-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-pick-list-item-bg-hover', description: 'Item background colour (hover).' },
+    {
+      variable: '--uilib-pick-list-item-bg-selected',
+      description: 'Item background colour (selected).',
+    },
+    { variable: '--uilib-pick-list-item-color', description: 'Item text colour.' },
+    {
+      variable: '--uilib-pick-list-item-color-selected',
+      description: 'Item text colour (selected).',
+    },
+    { variable: '--uilib-pick-list-item-border-bottom', description: 'Item Border Bottom.' },
+    { variable: '--uilib-pick-list-item-drag-opacity', description: 'Item Drag opacity.' },
+    {
+      variable: '--uilib-pick-list-drop-indicator-color',
+      description: 'Drop Indicator text colour.',
+    },
+    { variable: '--uilib-pick-list-drop-indicator-height', description: 'Drop Indicator height.' },
+    { variable: '--uilib-pick-list-item-bg-striped', description: 'Item Bg Striped.' },
+    { variable: '--uilib-pick-list-filter-padding', description: 'Filter padding.' },
+    { variable: '--uilib-pick-list-filter-border', description: 'Filter border shorthand.' },
+    { variable: '--uilib-pick-list-filter-bg', description: 'Filter background colour.' },
+    { variable: '--uilib-pick-list-filter-radius', description: 'Filter border radius.' },
+    { variable: '--uilib-pick-list-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-pick-list-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-pick-list-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-pick-list-header-border', description: 'Header border shorthand.' },
+    { variable: '--uilib-pick-list-control-size', description: 'Control size.' },
+    { variable: '--uilib-pick-list-control-bg', description: 'Control background colour.' },
+    { variable: '--uilib-pick-list-control-color', description: 'Control text colour.' },
+    {
+      variable: '--uilib-pick-list-control-bg-hover',
+      description: 'Control background colour (hover).',
+    },
+    { variable: '--uilib-pick-list-control-radius', description: 'Control border radius.' },
+    { variable: '--uilib-pick-list-control-gap', description: 'Control gap.' },
+    { variable: '--uilib-pick-list-control-border', description: 'Control border shorthand.' },
+    { variable: '--uilib-pick-list-transfer-size', description: 'Transfer size.' },
+    { variable: '--uilib-pick-list-transfer-bg', description: 'Transfer background colour.' },
+    { variable: '--uilib-pick-list-transfer-color', description: 'Transfer text colour.' },
+    {
+      variable: '--uilib-pick-list-transfer-bg-hover',
+      description: 'Transfer background colour (hover).',
+    },
+    { variable: '--uilib-pick-list-transfer-radius', description: 'Transfer border radius.' },
+    { variable: '--uilib-pick-list-transfer-gap', description: 'Transfer gap.' },
+    { variable: '--uilib-pick-list-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-pick-list-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-pick-list-transition', description: 'Transition.' },
+    { variable: '--uilib-pick-list-font-size', description: 'Font size.' },
   ];
 }

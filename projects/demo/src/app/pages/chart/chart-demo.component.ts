@@ -64,6 +64,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 type ChartThemeProfileKey = 'material' | 'bootstrap' | 'minimal';
 
 type RefreshableChart = {
@@ -108,6 +110,8 @@ type ThemeCssVariables = {
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './chart-demo.component.html',
   styleUrl: './chart-demo.component.scss',
@@ -511,5 +515,28 @@ export class ChartDemoComponent {
     },
     { name: 'height', type: 'string | null', default: 'null', description: 'Explicit height.' },
     { name: 'width', type: 'string | null', default: 'null', description: 'Explicit width.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-chart-min-height-sm', description: 'Minimum height — sm.' },
+    { variable: '--uilib-chart-min-height-md', description: 'Minimum height — md.' },
+    { variable: '--uilib-chart-min-height-lg', description: 'Minimum height — lg.' },
+    { variable: '--uilib-chart-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-chart-font-family', description: 'Font family.' },
+    { variable: '--uilib-chart-font-size', description: 'Font size.' },
+    { variable: '--uilib-chart-font-color', description: 'Font text colour.' },
+    { variable: '--uilib-chart-grid-color', description: 'Grid text colour.' },
+    { variable: '--uilib-chart-border-color', description: 'Border colour.' },
+    { variable: '--uilib-chart-background-color', description: 'Background text colour.' },
+    { variable: '--uilib-chart-tooltip-background', description: 'Tooltip Background.' },
+    { variable: '--uilib-chart-tooltip-font-color', description: 'Tooltip Font text colour.' },
+    { variable: '--uilib-chart-legend-font-color', description: 'Legend Font text colour.' },
+    { variable: '--uilib-chart-color-1', description: 'Color 1.' },
+    { variable: '--uilib-chart-color-2', description: 'Color 2.' },
+    { variable: '--uilib-chart-color-3', description: 'Color 3.' },
+    { variable: '--uilib-chart-color-4', description: 'Color 4.' },
+    { variable: '--uilib-chart-color-5', description: 'Color 5.' },
+    { variable: '--uilib-chart-color-6', description: 'Color 6.' },
+    { variable: '--uilib-chart-color-7', description: 'Color 7.' },
+    { variable: '--uilib-chart-color-8', description: 'Color 8.' },
   ];
 }

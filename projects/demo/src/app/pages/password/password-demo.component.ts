@@ -15,6 +15,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /** Demo page for the Password component. */
 @Component({
   selector: 'app-password-demo',
@@ -30,6 +32,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './password-demo.component.html',
   styleUrl: './password-demo.component.scss',
@@ -347,5 +351,22 @@ export class PasswordDemoComponent {
     { name: 'focused', type: 'Event', description: 'Fires when the input gains focus.' },
     { name: 'blurred', type: 'Event', description: 'Fires when the input loses focus.' },
     { name: 'cleared', type: 'void', description: 'Fires when the clear button is clicked.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-password-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-password-border-color', description: 'Border colour.' },
+    { variable: '--uilib-password-border-color-hover', description: 'Border colour (hover).' },
+    { variable: '--uilib-password-border-color-focus', description: 'Border colour (focus).' },
+    { variable: '--uilib-password-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-password-panel-border-radius', description: 'Panel border radius.' },
+    { variable: '--uilib-password-panel-shadow', description: 'Panel box shadow.' },
+    {
+      variable: '--uilib-password-meter-transition-duration',
+      description: 'Meter Transition Duration.',
+    },
+    {
+      variable: '--uilib-password-meter-color-transition-duration',
+      description: 'Meter Color Transition Duration.',
+    },
   ];
 }

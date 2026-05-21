@@ -52,6 +52,8 @@ import {
   reactiveTsTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -80,6 +82,8 @@ interface InputMaskSizeItem {
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './input-mask-demo.component.html',
   styleUrl: './input-mask-demo.component.scss',
@@ -281,5 +285,26 @@ export class InputMaskDemoComponent {
       default: 'null',
       description: 'Error message in an aria-live region.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-input-mask-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-input-mask-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-input-mask-font-size', description: 'Font size.' },
+    { variable: '--uilib-input-mask-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-input-mask-border-color', description: 'Border colour.' },
+    { variable: '--uilib-input-mask-bg', description: 'Background colour.' },
+    { variable: '--uilib-input-mask-text-color', description: 'Text text colour.' },
+    { variable: '--uilib-input-mask-placeholder-color', description: 'Placeholder text colour.' },
+    { variable: '--uilib-input-mask-focus-border-color', description: 'Focus Border text colour.' },
+    { variable: '--uilib-input-mask-focus-ring', description: 'Focus ring.' },
+    {
+      variable: '--uilib-input-mask-invalid-border-color',
+      description: 'Invalid Border text colour.',
+    },
+    { variable: '--uilib-input-mask-icon-color', description: 'Icon colour.' },
+    { variable: '--uilib-input-mask-filled-bg', description: 'Filled background colour.' },
+    { variable: '--uilib-input-mask-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-input-mask-clear-icon-size', description: 'Clear Icon size.' },
+    { variable: '--uilib-input-mask-error-color', description: 'Error text colour.' },
   ];
 }

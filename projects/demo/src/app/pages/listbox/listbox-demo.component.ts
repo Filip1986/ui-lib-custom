@@ -38,6 +38,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /** Demo page for the Listbox component. */
 @Component({
   selector: 'app-listbox-demo',
@@ -56,6 +58,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './listbox-demo.component.html',
   styleUrl: './listbox-demo.component.scss',
@@ -212,5 +216,84 @@ export class ListboxDemoComponent {
     },
     { key: 'Shift+↓ / Shift+↑', action: 'Extend the selection range (multiple mode).' },
     { key: 'Ctrl+A', action: 'Select all options (multiple mode).' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-listbox-width', description: 'Width.' },
+    { variable: '--uilib-listbox-bg', description: 'Background colour.' },
+    { variable: '--uilib-listbox-border', description: 'Border shorthand.' },
+    { variable: '--uilib-listbox-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-listbox-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-listbox-filter-padding', description: 'Filter padding.' },
+    { variable: '--uilib-listbox-filter-border-bottom', description: 'Filter Border Bottom.' },
+    { variable: '--uilib-listbox-filter-bg', description: 'Filter background colour.' },
+    { variable: '--uilib-listbox-filter-icon-color', description: 'Filter Icon text colour.' },
+    { variable: '--uilib-listbox-filter-input-color', description: 'Filter Input text colour.' },
+    {
+      variable: '--uilib-listbox-filter-input-placeholder-color',
+      description: 'Filter Input Placeholder text colour.',
+    },
+    { variable: '--uilib-listbox-filter-focus-ring', description: 'Filter focus ring.' },
+    { variable: '--uilib-listbox-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-listbox-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-listbox-header-border-bottom', description: 'Header Border Bottom.' },
+    { variable: '--uilib-listbox-list-padding', description: 'List padding.' },
+    { variable: '--uilib-listbox-item-padding-sm', description: 'Item padding — sm.' },
+    { variable: '--uilib-listbox-item-padding-md', description: 'Item padding — md.' },
+    { variable: '--uilib-listbox-item-padding-lg', description: 'Item padding — lg.' },
+    { variable: '--uilib-listbox-item-padding', description: 'Item padding.' },
+    { variable: '--uilib-listbox-item-color', description: 'Item text colour.' },
+    { variable: '--uilib-listbox-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-listbox-item-bg-hover', description: 'Item background colour (hover).' },
+    {
+      variable: '--uilib-listbox-item-bg-selected',
+      description: 'Item background colour (selected).',
+    },
+    {
+      variable: '--uilib-listbox-item-color-selected',
+      description: 'Item text colour (selected).',
+    },
+    { variable: '--uilib-listbox-item-bg-focused', description: 'Item Bg Focused.' },
+    { variable: '--uilib-listbox-item-font-size-sm', description: 'Item font size — sm.' },
+    { variable: '--uilib-listbox-item-font-size-md', description: 'Item font size — md.' },
+    { variable: '--uilib-listbox-item-font-size-lg', description: 'Item font size — lg.' },
+    { variable: '--uilib-listbox-item-font-size', description: 'Item font size.' },
+    { variable: '--uilib-listbox-item-border-radius', description: 'Item Border border radius.' },
+    { variable: '--uilib-listbox-item-gap', description: 'Item gap.' },
+    { variable: '--uilib-listbox-item-bg-striped', description: 'Item Bg Striped.' },
+    {
+      variable: '--uilib-listbox-item-color-disabled',
+      description: 'Item text colour (disabled).',
+    },
+    { variable: '--uilib-listbox-item-cursor-disabled', description: 'Item cursor (disabled).' },
+    { variable: '--uilib-listbox-group-padding', description: 'Group padding.' },
+    { variable: '--uilib-listbox-group-font-size', description: 'Group Font size.' },
+    { variable: '--uilib-listbox-group-font-weight', description: 'Group font weight.' },
+    { variable: '--uilib-listbox-group-color', description: 'Group text colour.' },
+    { variable: '--uilib-listbox-group-text-transform', description: 'Group text transform.' },
+    { variable: '--uilib-listbox-group-letter-spacing', description: 'Group letter spacing.' },
+    { variable: '--uilib-listbox-checkbox-size', description: 'Checkbox size.' },
+    { variable: '--uilib-listbox-checkbox-border', description: 'Checkbox border shorthand.' },
+    {
+      variable: '--uilib-listbox-checkbox-border-radius',
+      description: 'Checkbox Border border radius.',
+    },
+    {
+      variable: '--uilib-listbox-checkbox-bg-checked',
+      description: 'Checkbox background colour (checked).',
+    },
+    {
+      variable: '--uilib-listbox-checkbox-border-checked',
+      description: 'Checkbox border shorthand (checked).',
+    },
+    {
+      variable: '--uilib-listbox-checkbox-color-checked',
+      description: 'Checkbox text colour (checked).',
+    },
+    { variable: '--uilib-listbox-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-listbox-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-listbox-empty-padding', description: 'Empty padding.' },
+    { variable: '--uilib-listbox-empty-color', description: 'Empty text colour.' },
+    { variable: '--uilib-listbox-empty-font-size', description: 'Empty Font size.' },
+    { variable: '--uilib-listbox-transition', description: 'Transition.' },
   ];
 }
