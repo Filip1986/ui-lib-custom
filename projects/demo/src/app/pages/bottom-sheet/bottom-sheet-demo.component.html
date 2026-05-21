@@ -11,8 +11,7 @@
   </div>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Bind <code>[(visible)]</code> to control the sheet. Click the backdrop or press
       <kbd>Escape</kbd> to dismiss. Sheet instances live outside the layout wrapper so they render
@@ -27,11 +26,10 @@
       [code]="snippets.basic"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- With Header ---------------------------------------------- -->
-  <section class="demo-section" id="with-header" data-doc-anchor>
-    <h2 class="demo-section__title">With Header</h2>
+  <app-doc-section id="with-header" title="With Header">
     <p class="demo-section__description">
       Pass the <code>header</code> input to render a title bar with an accessible close button. The
       panel gets <code>aria-labelledby</code> pointing to the title automatically.
@@ -45,11 +43,10 @@
       [code]="snippets.withHeader"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Footer Slot ---------------------------------------------- -->
-  <section class="demo-section" id="footer-slot" data-doc-anchor>
-    <h2 class="demo-section__title">Footer Slot</h2>
+  <app-doc-section id="footer-slot" title="Footer Slot">
     <p class="demo-section__description">
       Project an element with the <code>[bottomSheetFooter]</code> attribute for a sticky action
       area pinned to the bottom of the panel.
@@ -63,11 +60,10 @@
       [code]="snippets.footerSlot"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Backdrop Dismiss ----------------------------------------- -->
-  <section class="demo-section" id="backdrop-dismiss" data-doc-anchor>
-    <h2 class="demo-section__title">Backdrop Dismiss</h2>
+  <app-doc-section id="backdrop-dismiss" title="Backdrop Dismiss">
     <p class="demo-section__description">
       Set <code>[closeOnBackdrop]="false"</code> to prevent clicking the backdrop from closing the
       sheet. The close button and <kbd>Escape</kbd> key still work.
@@ -81,11 +77,10 @@
       [code]="snippets.backdropDismiss"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants adjust the panel shape and shadow. When <code>variant</code> is
       <code>null</code> (default), it inherits from <code>ThemeConfigService</code>.
@@ -101,10 +96,10 @@
       [code]="snippets.variants"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <app-doc-api-reference [rows]="apiInputRows" />
@@ -124,10 +119,10 @@
       <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <table class="doc-properties">
@@ -202,7 +197,7 @@
         disabled when the user prefers reduced motion.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
   <app-doc-quality-badge [audit]="qualityAudit" />

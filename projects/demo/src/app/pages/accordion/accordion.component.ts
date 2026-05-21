@@ -48,6 +48,7 @@ import {
   controlledTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface FaqItem {
   value: string;
   header: string;
@@ -96,6 +97,7 @@ type AccordionTab =
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',

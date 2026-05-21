@@ -19,6 +19,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { basicHtml, basicTs, startEndHtml, startEndTs } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Menubar component.
  */
@@ -34,6 +35,7 @@ import { basicHtml, basicTs, startEndHtml, startEndTs } from './snippets.generat
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',

@@ -18,6 +18,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Rating component.
  */
@@ -37,6 +38,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './rating-demo.component.html',
   styleUrl: './rating-demo.component.scss',

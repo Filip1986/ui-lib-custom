@@ -14,6 +14,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 interface DemoItem {
   id: number;
@@ -81,6 +82,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',

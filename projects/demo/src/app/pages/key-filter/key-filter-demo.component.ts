@@ -37,6 +37,7 @@ import {
   emailTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the KeyFilter directive, showing all built-in presets,
  * custom RegExp usage, and the bypass toggle.
@@ -55,6 +56,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',

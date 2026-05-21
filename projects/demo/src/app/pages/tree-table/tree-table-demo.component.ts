@@ -20,6 +20,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the TreeTable component.
  * Showcases: basic table, expand/collapse, sorting, global filter,
@@ -39,6 +40,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',

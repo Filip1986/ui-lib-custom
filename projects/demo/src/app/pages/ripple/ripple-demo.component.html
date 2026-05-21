@@ -5,8 +5,7 @@
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Add <code>uiLibRipple</code> to any element. The default ripple colour is a semi-transparent
       white, suitable for dark or coloured surfaces.
@@ -21,11 +20,10 @@
       filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Dark ripple ---------------------------------------------- -->
-  <section class="demo-section" id="dark-ripple" data-doc-anchor>
-    <h2 class="demo-section__title">Dark Ripple</h2>
+  <app-doc-section id="dark-ripple" title="Dark Ripple">
     <p class="demo-section__description">
       Use <code>[rippleColor]="'rgba(0,0,0,0.12)'"</code> for light-coloured or white surfaces
       where the default white ripple would be invisible.
@@ -51,11 +49,10 @@
       filename="Dark ripple" [code]="snippets.darkRipple"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Custom duration ------------------------------------------ -->
-  <section class="demo-section" id="custom-duration" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Duration</h2>
+  <app-doc-section id="custom-duration" title="Custom Duration">
     <p class="demo-section__description">
       Control the animation speed with <code>[rippleDuration]</code>. Accepts any CSS time value
       such as <code>'200ms'</code> or <code>'1.2s'</code>.
@@ -70,11 +67,10 @@
       filename="Custom duration" [code]="snippets.customDuration"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to suppress the wave while keeping the host element
       fully interactive. Toggle the button below to compare the two states.
@@ -96,11 +92,10 @@
       filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Any element ---------------------------------------------- -->
-  <section class="demo-section" id="any-element" data-doc-anchor>
-    <h2 class="demo-section__title">Any Element</h2>
+  <app-doc-section id="any-element" title="Any Element">
     <p class="demo-section__description">
       The directive works on any HTML element — <code>&lt;div&gt;</code>,
       <code>&lt;li&gt;</code>, images, or custom components. The host automatically
@@ -124,10 +119,10 @@
       filename="Any element" [code]="snippets.anyElement"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
@@ -142,10 +137,10 @@
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -201,7 +196,7 @@
       </li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
   <app-doc-quality-badge [audit]="qualityAudit" />

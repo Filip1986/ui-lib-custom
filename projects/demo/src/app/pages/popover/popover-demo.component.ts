@@ -23,6 +23,7 @@ import {
   declarativeTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Popover component.
  */
@@ -39,6 +40,7 @@ import {
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',

@@ -16,6 +16,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { declarativeUsageHtml, declarativeUsageTs } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the ConfirmPopup component.
  */
@@ -33,6 +34,7 @@ import { declarativeUsageHtml, declarativeUsageTs } from './snippets.generated';
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',

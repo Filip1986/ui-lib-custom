@@ -82,6 +82,29 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [Demo page standardization — app-doc-section migration complete, build clean]
+Changed:
+  - projects/demo/src/app/shared/doc-page/doc-section.component.ts (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-section.component.html (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-aria-table.component.ts (NEW)
+  - projects/demo/src/app/shared/doc-page/doc-aria-table.component.html (NEW)
+  - projects/demo/src/app/shared/index.ts (exports added for both new components)
+  - scripts/migrate-doc-sections.mjs (NEW — bulk migration: 80 pages' demo-section patterns → app-doc-section)
+  - scripts/fix-section-imports.mjs (NEW — fixed 7 files where DocSectionComponent import landed at EOF)
+  - scripts/fix-section-tags.mjs (NEW — token+stack fixer: converts remaining plain <section id="X"> to app-doc-section and reverts no-id section closings)
+  - 80+ demo pages: <section class="demo-section"> → <app-doc-section id="X" title="TITLE">
+  - 22 pages fixed for mismatched closing tags (plain sections whose </section> was wrongly converted)
+  - dynamic-dialog: DocSectionComponent moved from inner component to main DynamicDialogDemoComponent
+  - projects/demo/src/app/pages/chip/chip-demo.component.html (golden template, DocAriaTableComponent)
+State: Build zero errors. All demo pages now use app-doc-section. Shared DocSectionComponent wraps every doc section with correct data-doc-anchor, class, id host bindings. DocAriaTableComponent created as chip golden template.
+Verification:
+  node scripts/migrate-doc-sections.mjs → 80 pages migrated
+  node scripts/fix-section-imports.mjs → 7 import placements fixed
+  node scripts/fix-section-tags.mjs → 22 tag mismatches fixed
+  ng build demo → PASS (zero errors; only pre-existing budget warnings)
+  tsc -p projects/demo/tsconfig.app.json --noEmit → PASS
+Next step: (1) Add DocAriaTableComponent usage to remaining pages that still use raw ui-lib-table for ARIA attributes. (2) Add missing CSS Custom Properties / Accessibility sections to pages that lack them. (3) Consider migrating autocomplete/toggle-button/cascade-select pages from example-section → full doc-page-layout pattern for visual consistency.
+
 Date: 2026-05-20 [Batch-2 snippet migration — remaining 32 demo pages to example-file pattern]
 Changed:
   - scripts/migrate-snippets-batch.mjs (improved: hyphenated keys, concat expressions, array-of-strings, module-level const records, --no-warn-ignored in lint-staged-eslint.sh)
@@ -99,220 +122,5 @@ Verification:
   git commit pre-commit hook (prettier + eslint) → PASS
 Next step: Merge PR #202. Then next milestone: runtime variant switcher, theme preset management, or broader axe-core audit.
 
-Date: 2026-05-20 [Batch-1 snippet migration — 20 demo pages to example-file pattern]
+<!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 Changed:
-  - scripts/migrate-snippets-batch.mjs (NEW — AST-free migration script; string-aware parsing, handles all 3 legacy snippet patterns)
-  - 20 pages migrated: animated-on-scroll, auto-focus, badges, cards, checkboxes, fieldset, icon-field, image-compare, key-filter, knob, meter-group, popover, scoped-theming, scroll-panel, scroll-top, select, select-buttons, slider, split-button, toggle-button
-  - Each page: examples/ folder created, snippets.generated.ts generated, component TS/HTML updated
-  - key-filter: 8 TS example files created manually (keyFilterBaseTs computed values); bypass.example.html created manually
-  - meter-group: variants/vertical/no-legend HTML-only example files added for [code] bindings
-  - checkboxes: usage.example.ts/html added for [code] binding
-  - select: usage.example.ts/html corrected (was TypeScript code in HTML slot)
-  - cards: usage.example.ts rewritten as valid component; usage.example.html created
-  - scoped-theming: Card import added to component-theme-code.example.ts; [uiLibDarkTheme] fixed to boolean binding
-  - auto-focus: conditional.example.html fixed @if (show()) signal call syntax
-State: All 20 pages migrated. Demo build zero errors. Typecheck clean.
-Verification:
-  node scripts/generate-snippets.mjs → PASS (21 pages including tooltip)
-  npm run build:demo → PASS (zero errors; only pre-existing budget warnings)
-  npm run typecheck → PASS (zero errors)
-Next step: Run batch 2 — remaining ~36 demo pages that still use hand-written snippet strings. Pages to target: accordion, autocomplete, cascade-select, chart, color-picker, confirm-popup, data-view, date-picker, dialog, divider, drawer, editor, float-label, icons, image, input-group, input-mask, input-number, input-otp, inputs, layouts, listbox, mega-menu, menu, menubar, order-list, organization-chart, panel, panel-menu, pick-list, rating, scroller, tabs, textarea, tiered-menu, tree-select.
-
-Date: 2026-05-20 [Code snippet infrastructure — raw example files pattern]
-Changed:
-  - scripts/generate-snippets.mjs (NEW — pre-build generator, reads *.example.ts/html/scss, writes snippets.generated.ts per page)
-  - projects/demo/src/app/pages/tooltip/examples/ (NEW — 6 example files: basic, positions, focus-event, show-hide-delays, disabled, variants)
-  - projects/demo/src/app/pages/tooltip/snippets.generated.ts (NEW — auto-generated, committed)
-  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.ts (replaced 12 hand-written snippet strings with 6 imports from snippets.generated)
-  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.html (6 app-doc-code-example usages updated to use new property names, html tab dropped)
-  - eslint.config.mjs (added override for **/examples/*.example.ts — relaxes library-level rules for user-facing example code)
-  - package.json (added snippets, preserve:demo, prebuild:demo scripts)
-State: Pattern is fully operational. Tooltip is the reference implementation. Build clean, lint clean, tsc clean. Two pre-existing budget warnings remain (unrelated).
-Verification:
-  node scripts/generate-snippets.mjs → PASS
-  npx eslint projects/demo/src/app/pages/tooltip/ --max-warnings 0 → PASS
-  tsc --noEmit -p projects/demo/tsconfig.app.json → PASS
-  ng build demo → PASS (only pre-existing budget warnings)
-Next step: Migrate remaining demo pages that use hand-written snippet strings to the new example-file pattern. Pages that use DocCodeExampleComponent are the priority. Run `grep -r "DocCodeExampleComponent" projects/demo/src/app/pages/ --include="*.ts" -l` to enumerate them.
-
-Date: 2026-05-19 [Demo build errors fixed — DocApiReferenceComponent + apiRows + doc-code-example]
-Changed:
-  - scripts/fix-demo-imports-v2.py (ran script — added DocApiReferenceComponent import + apiRows to 28 demo pages)
-  - projects/demo/src/app/shared/doc-page/doc-code-example.component.html (added `!` non-null assertions on tabs()[0] to fix TS2532)
-  - angular.json (bumped anyComponentStyle budget: warning 30kB, error 45kB — roadmap SCSS is 34.53 kB)
-State: Demo build is zero-errors. Only remaining item is a CSS budget WARNING for roadmap.component.scss (34.53 kB vs 30 kB warning threshold) — pre-existing, non-blocking.
-Verification:
-  python scripts/fix-demo-imports-v2.py → PASS (28 components patched)
-  ng build demo → PASS (zero errors; only pre-existing roadmap SCSS budget warning)
-Next step: Run npm run serve:demo and visually verify a few demo pages that had missing apiRows. Then proceed with Phase 4 — full axe-core audit (npm run test:a11y:all).
-
-Date: 2026-05-18 [DocKeyboardNavComponent — fixed errors + completed stepper migration]
-Changed:
-  - projects/demo/src/app/pages/accordion/accordion.component.ts (fixed: keyboardRows was outside class body — moved inside class)
-  - projects/demo/src/app/pages/dialog/dialog.component.ts (fixed: DialogComponent was missing from imports array)
-  - projects/demo/src/app/pages/stepper/stepper-demo.component.html (added keyboard-navigation section with <app-doc-keyboard-nav [rows]="keyboardRows" />)
-State: All demo pages with keyboard navigation sections now compile cleanly. DocKeyboardNavComponent is used in all 37 HTML pages that have keyboard navigation content. Build produces zero errors (pre-existing SCSS budget warning on roadmap/button/date-picker only). ESLint passes on all 3 modified files.
-Verification:
-  npx eslint projects/demo/src/app/pages/accordion/ projects/demo/src/app/pages/dialog/ projects/demo/src/app/pages/stepper/ --max-warnings 0 → PASS
-  ng build demo → PASS (zero errors; only pre-existing SCSS budget warnings)
-Next step: Run ESLint on all demo pages broadly to catch any remaining import-path issues (some pages use relative paths instead of @demo/ alias for DocKeyboardNavComponent import — those should still compile but are style non-conformant per AGENTS.md rules).
-
-Date: 2026-05-18 [Audit prompt system + DocQualityBadgeComponent]
-Changed:
-  - docs/prompts/audit/README.md (NEW — system overview and priority order)
-  - docs/prompts/audit/PHASE1_AUDIT.md (NEW — read-only gap report prompt, all 11 categories)
-  - docs/prompts/audit/PHASE2_FIX.md (NEW — fix pass prompt)
-  - docs/prompts/audit/PHASE3_FINALIZE.md (NEW — doc update + quality badge wiring prompt)
-  - docs/prompts/audit/QUICKSTART.md (NEW — step-by-step single component guide)
-  - projects/demo/src/app/shared/doc-page/doc-quality-badge.component.ts (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-quality-badge.component.html (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-quality-badge.component.scss (NEW)
-  - projects/demo/src/app/shared/index.ts (added DocQualityBadgeComponent export)
-  - projects/demo/src/app/pages/accordion/accordion.component.ts (DocQualityBadgeComponent + qualityAudit data)
-  - projects/demo/src/app/pages/accordion/accordion.component.html (app-doc-quality-badge added)
-  - projects/demo/src/app/pages/tag/tag-demo.component.ts (DocQualityBadgeComponent + qualityAudit data)
-  - projects/demo/src/app/pages/tag/tag-demo.component.html (app-doc-quality-badge added)
-  - projects/demo/src/app/pages/panel/panel-demo.component.ts (DocQualityBadgeComponent + qualityAudit data)
-  - projects/demo/src/app/pages/panel/panel-demo.component.html (app-doc-quality-badge added)
-State: Full agentic audit system in place. DocQualityBadgeComponent renders a collapsible quality
-  report on each demo page showing 10 category score chips (color-coded by value), average score,
-  gate status (all ≥ 8 / below gate), APG pattern link, competitive parity status, unchecked backlog,
-  and human-verification pending list. Collapsed by default. Wired into accordion/tag/panel as proof
-  of concept — all at Tier 1 with humanPending items listed. Build and lint verified clean.
-  Audit prompts: PHASE1 (gap report only), PHASE2 (fix pass), PHASE3 (finalize + badge update).
-  PHASE3 now instructs the agent to update qualityAudit data and confirm badge in template.
-Verification:
-  eslint doc-quality-badge.component.ts + 3 demo pages → PASS (0 warnings)
-  ng build demo → PASS (zero errors, only pre-existing SCSS budget warnings)
-Next step: Run the Phase 1 audit on Button — highest public scrutiny, sets the template for all others.
-  Command: paste PHASE1_AUDIT.md with [COMPONENT]=button into a new Claude Code session.
-
-Date: 2026-05-18 [New shared component: DocKeyboardNavComponent — 6 demo pages migrated]
-Changed:
-  - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.ts (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.html (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.scss (NEW)
-  - projects/demo/src/app/shared/index.ts (added DocKeyboardNavComponent + KeyboardNavRow export)
-  - 6 demo pages migrated (TS + HTML): context-menu, menu, tiered-menu, panel-menu, tag, panel
-State: All 6 demo pages with keyboard navigation sections now use <app-doc-keyboard-nav [rows]="keyboardRows" />.
-  Component parses key strings: ' / ' splits alternatives, '+' splits combos — renders each token as a key-cap badge (white bg, subtle bottom shadow, uppercase monospace).
-  KeyboardNavRow interface: { key: string; suffix?: string; target?: string; action: string }.
-  suffix renders italic context text after the badges (e.g. "on header"). target triggers an auto-detected "Target" column.
-  Local KeyboardRow interfaces removed from all 6 demo TS files. All <kbd> tags stripped from key strings; arrow keys standardised to ↓/↑/←/→ symbols.
-  context-menu: migrated from raw <table> to DocKeyboardNavComponent; keyboardRows data added to TS.
-  menu/tiered-menu/panel-menu: migrated from ui-lib-table. panel-menu uses suffix field.
-  tag/panel: migrated from ui-lib-table with target column; target auto-shows 3-column layout.
-Verification:
-  (not yet run — run from D:/Work/ArtificialSense/ui-lib-custom):
-  npx eslint projects/demo/src/app/shared/doc-page/doc-keyboard-nav.component.ts --max-warnings 0
-  npx eslint projects/demo/src/app/pages/context-menu/ projects/demo/src/app/pages/menu/ projects/demo/src/app/pages/tiered-menu/ projects/demo/src/app/pages/panel-menu/ projects/demo/src/app/pages/tag/ projects/demo/src/app/pages/panel/ --max-warnings 0
-  ng build demo
-Terminal notes: node_modules not present in worktree — run all tools from main repo root.
-Next step: Run ESLint on shared/doc-page/ and the 6 migrated pages, then ng build demo to verify all compile cleanly.
-
-Date: 2026-05-18 [New shared component: DocCssVarsTableComponent — all demo pages migrated]
-Changed:
-  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.ts (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.html (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.scss (NEW)
-  - projects/demo/src/app/shared/index.ts (added DocCssVarsTableComponent export)
-  - 13 demo pages migrated (TS + HTML): tag, panel, menu, tiered-menu, panel-menu, ripple, block-ui, bottom-sheet, chip, meter-group, radio-button, rating, scroll-panel
-State: All demo pages now use <app-doc-css-vars-table> for CSS Custom Properties sections. Component renders a token-grid-style bordered table (design taken from SyntaxHighlighter demo). [showDefault]="false" produces a 2-column layout; default is 3-column (Variable / Default / Description). CssVarRow interface exported from shared/index.ts. Build and lint NOT yet re-verified after migration — run from main repo root.
-Verification:
-  (not yet run — run from D:/Work/ArtificialSense/ui-lib-custom):
-  npx eslint projects/demo/src/app/shared/doc-page/ --max-warnings 0
-  ng build demo
-Terminal notes: node_modules not present in worktree — run all tools from main repo root.
-Next step: Run ESLint on shared/doc-page/ and ng build demo to verify all 13 pages compile cleanly.
-
-Date: 2026-05-17 [Demo refactor: replaced app-code-preview with ui-lib-code-snippet app-wide]
-Changed:
-  - projects/demo/src/app/pages/**/*.html (36 files — app-code-preview → ui-lib-code-snippet)
-  - projects/demo/src/app/pages/**/*.ts (36 files — CodePreviewComponent import/declaration removed)
-  - projects/demo/src/app/pages/tree-select/tree-select-demo.component.ts (added CodeSnippet import; it was missing)
-  - projects/demo/src/app/pages/layouts/layouts.component.ts (added CodeSnippet import; it was missing)
-  - projects/demo/src/app/shared/index.ts (removed re-export of deleted CodePreviewComponent)
-  - projects/demo/src/app/shared/components/code-preview/ (DELETED — CodePreviewComponent fully removed)
-State: All 36 demo pages now use ui-lib-code-snippet directly. CodePreviewComponent is gone. No remaining app-code-preview references anywhere in the codebase. Demo build compiles cleanly — no template errors. Pre-existing SCSS budget warnings in roadmap/vision/button/date-picker remain (pre-existing, not new).
-Verification:
-  grep CodePreviewComponent|app-code-preview projects/demo/src → 0 matches
-  ng build demo (worktree) → zero template errors; only pre-existing SCSS budget warnings
-Next step: Run ESLint + full test suite, then serve demo to visually verify code snippets render correctly on several demo pages.
-
-Date: 2026-05-16 [New component: CodeSnippet — full scaffold complete]
-Changed:
-  - projects/ui-lib-custom/src/lib/code-snippet/ (new: code-snippet.ts, .html, .scss, .spec.ts, .types.ts, index.ts, README.md)
-  - projects/ui-lib-custom/code-snippet/ (new secondary entry point: ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (added code-snippet to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added code-snippet import test)
-  - projects/demo/src/app/pages/code-snippet/ (new: code-snippet-demo.component.ts/.html/.scss)
-  - projects/demo/src/app/app.routes.ts (added /code-snippet lazy route)
-State: CodeSnippet component fully scaffolded. Selector: ui-lib-code-snippet. Package: ui-lib-custom/code-snippet. Data-display category. Features: macOS window chrome (traffic-light dots), language-labelled tab bar, optional line numbers, copy-to-clipboard button with 2 s visual feedback, three design variants (material/bootstrap/minimal), three sizes (sm/md/lg), maxHeight scroll, full a11y (role=region, aria-label, aria-hidden line numbers, aria-pressed copy button, prefers-reduced-motion, forced-colors). Build and lint NOT yet verified — must run from main repo root.
-Verification:
-  (not yet run — run from D:/Work/Personal/Github/ui-lib-custom):
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/code-snippet/ --max-warnings 0
-  node_modules/.bin/ng build ui-lib-custom
-  node_modules/.bin/jest --testPathPatterns="src/lib/code-snippet/" --no-coverage
-Terminal notes: node_modules not present in worktree — run all tools from main repo root with paths pointing to worktree files.
-Next step: Run ESLint + build + tests from main repo root. Then serve demo to visually verify /code-snippet route.
-
-Date: 2026-05-15 [Phase 0 infrastructure gaps closed — z-index manager wired into Dialog and Drawer]
-Changed:
-  - projects/ui-lib-custom/src/lib/dialog/dialog.component.ts (import + call claimOverlayZIndex on open, releaseOverlayZIndex on close)
-  - projects/ui-lib-custom/src/lib/drawer/drawer.ts (same pattern)
-  - docs/ROADMAP.md (Phase 0 all items checked off; Phases 1–3 marked complete; Phase 4 marked active; progress summary updated to reflect 76+ / 76 components green)
-State: Phase 0 COMPLETE. All five infrastructure items confirmed done (icon-button entry point, alert entry point, overlay z-index manager, knip, reference docs). Dialog and Drawer now participate in the shared claimOverlayZIndex stacking system — nested dropdowns (AutoComplete, CascadeSelect, ColorPicker, DatePicker) opened inside a dialog will always stack above it. ROADMAP now accurately reflects current state: Phase 4 (Public Beta) is the active phase.
-Verification:
-  eslint projects/ui-lib-custom/src/lib/dialog/ projects/ui-lib-custom/src/lib/drawer/ --max-warnings 0 (PASS)
-  ng build ui-lib-custom (PASS, zero errors, zero warnings)
-Terminal notes: node_modules not present in worktree — run all tools from main repo root (D:/Work/Personal/Github/ui-lib-custom) with paths pointing to worktree files.
-Next step: Begin Phase 4 — start with the full axe-core audit (npm run test:a11y:all) then Storybook integration, then npm publish prep.
-
-Date: 2026-05-15 [Full hardening audit — ToggleSwitch, Icon, IconButton confirmed complete]
-Changed:
-  - docs/COMPONENT_SCORES.md (scored ToggleSwitch 8.8, Icon 8.7, IconButton 8.6; fixed ToggleButton avg 8.7, KeyFilter avg 8.6, DataView avg 8.3; added ⏳ status symbol; reverted premature ✅ Done badges)
-  - docs/prompts/HARDENING_PROMPT_INDEX.md (moved Grid/AutoFocus/FloatLabel/Bind/ToggleSwitch/Icon/IconButton to completed; Needs Hardening now empty)
-  - docs/prompts/needs-hardening/ → docs/prompts/completed/ (moved all 7 remaining files)
-  - AI_AGENT_CONTEXT.md (updated active focus, next queue, component delta)
-State: All 76 original queue items + all new components (ToggleSwitch, Icon, IconButton, Grid, AutoFocus, FloatLabel, Bind, and 17 others) fully hardened and scored ≥ 8.0. Library hardening milestone COMPLETE. needs-hardening/ folder is empty.
-Verification:
-  node_modules/.bin/jest --testPathPatterns="src/lib/toggle-switch/|src/lib/icon/|src/lib/icon-button/" --no-coverage (125/125 PASS)
-Terminal notes: Confirmed via source review that all 3 components had already implemented every criterion from their hardening prompts (aria-readonly, forced-colors, prefers-reduced-motion, DEV warnings, live announcer, native disabled, 44px touch targets, compile-time required inputs). Score discrepancy originated from premature ✅ Done badges in the queue table without corresponding score rows.
-Next step: Begin next milestone — runtime variant switcher and theme preset management.
-
-Date: 2026-05-19 [DocApiReferenceComponent — 100% demo page coverage]
-Changed:
-  - projects/demo/src/app/pages/autocomplete/autocomplete-demo.component.ts/.html
-  - projects/demo/src/app/pages/badges/badges.component.ts/.html
-  - projects/demo/src/app/pages/cards/cards.component.ts/.html
-  - projects/demo/src/app/pages/checkboxes/checkboxes.component.ts/.html
-  - projects/demo/src/app/pages/code-snippet/code-snippet-demo.component.ts/.html
-  - projects/demo/src/app/pages/syntax-highlighter/syntax-highlighter-demo.component.ts/.html
-  - All 35 other missing component demo pages (batch-processed via Python scripts, then cleaned up)
-State: Every component demo page now uses DocApiReferenceComponent with a proper apiRows: ApiPropRow[] definition. Hand-coded HTML API tables in badges/cards/checkboxes replaced with the standardized component. 95 out of 108 demo page HTML files include app-doc-api-reference; remaining 13 are intentionally exempt informational pages (home, vision, roadmap, themes, accessibility, dark-mode, keyboard-guide, icons, scoped-theming, shadows, project-starter, starter-template, layouts sub-sections).
-Verification:
-  npm run typecheck (PASS — zero TS errors across all 5 tsconfigs)
-  grep -rl "app-doc-api-reference" projects/demo/src/app/pages/ | wc -l → 95
-Terminal notes: Python batch scripts placed in tmp_scripts/ (Windows-native path D:/Work/ArtificialSense/ui-lib-custom/tmp_scripts/); removed after completion.
-Next step: Begin Phase 4 — full axe-core audit (npm run test:a11y:all), Storybook integration, or runtime variant switcher.
-
-Date: 2026-05-15 [FloatLabel component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/float-label/float-label.ts
-  - projects/ui-lib-custom/src/lib/float-label/float-label.scss
-  - projects/ui-lib-custom/src/lib/float-label/float-label.spec.ts
-  - projects/ui-lib-custom/src/lib/float-label/float-label.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/float-label/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: FloatLabel now auto-wires projected labels to native controls (including nested inputs inside wrapper components), injects the blank placeholder needed for CSS-only `:placeholder-shown` float detection when omitted, preserves CSS-only float state via `:focus-within`, mirrors projected label IDs to host-level controls like Select through `aria-labelledby`, and documents the legacy `uilib-` selector plus FormField/InputGroup composition guidance. Added focused unit + accessibility coverage for generated label/control wiring, placeholder injection, pointer-event safety, and stylesheet token contracts, and formally recorded FloatLabel as scored/complete.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/float-label/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/float-label/" --no-coverage (42/42 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Recent GitHub Actions runs on the working branch were checked via MCP and were `action_required` rather than failed-job runs. Playwright MCP browser was locked, so Chromium was installed with `npx playwright install chromium` and the float-label demo screenshot was captured via Node Playwright at `/tmp/float-label-hardening.png`.
-Next step: Continue with the next unscored new layout/utility component in `docs/prompts/needs-hardening/` using the same score-first hardening flow.
-
-

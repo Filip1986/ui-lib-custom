@@ -22,6 +22,7 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the ToggleSwitch component.
  */
@@ -40,6 +41,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './toggle-switch-demo.component.html',
   styleUrl: './toggle-switch-demo.component.scss',

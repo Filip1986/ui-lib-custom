@@ -44,6 +44,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 const SAMPLE_TREE_NODES: TreeNode[] = [
   {
     key: 'documents',
@@ -109,6 +110,7 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './tree-select-demo.component.html',
   styleUrl: './tree-select-demo.component.scss',

@@ -45,6 +45,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Textarea component — all features, states, and form integration.
  */
@@ -64,6 +65,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',

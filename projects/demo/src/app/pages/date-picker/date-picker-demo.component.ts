@@ -64,6 +64,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for DatePicker component scenarios and form integrations.
  */
@@ -84,6 +85,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
   styleUrl: './date-picker-demo.component.scss',

@@ -38,6 +38,7 @@ import {
   variantsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface InputRow {
   readonly input: string;
   readonly type: string;
@@ -83,6 +84,7 @@ interface AriaRow {
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',

@@ -8,7 +8,7 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">
           Simple popup picker with template-driven binding and displayed hex value.
@@ -20,18 +20,18 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="inline" data-doc-anchor class="example-section">
+      <app-doc-section id="inline" title="Inline">
         <h3>b. Inline</h3>
         <p class="section-text">Permanently visible picker panel embedded in content flow.</p>
         <ui-lib-panel variant="minimal">
           <ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />
         </ui-lib-panel>
         <app-doc-code-example [html]="inlineHtml" [typescript]="inlineTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="formats" data-doc-anchor class="example-section">
+      <app-doc-section id="formats" title="Formats">
         <h3>c. Formats</h3>
         <p class="section-text">Hex, RGB, and HSB model formats side by side.</p>
         <ui-lib-panel variant="minimal">
@@ -51,9 +51,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="formatsHtml" [typescript]="formatsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="template-driven" data-doc-anchor class="example-section">
+      <app-doc-section id="template-driven" title="Template Driven Form">
         <h3>d. Template Driven Form</h3>
         <p class="section-text">Template-driven form submit flow with selected color output.</p>
         <ui-lib-panel variant="minimal">
@@ -75,9 +75,9 @@
           [html]="templateDrivenHtml"
           [typescript]="templateDrivenTs"
         />
-      </section>
+      </app-doc-section>
 
-      <section id="reactive" data-doc-anchor class="example-section">
+      <app-doc-section id="reactive" title="Reactive Form">
         <h3>e. Reactive Form</h3>
         <p class="section-text">Reactive form control with submit output and validation trigger.</p>
         <ui-lib-panel variant="minimal">
@@ -92,9 +92,9 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>f. Disabled</h3>
         <p class="section-text">Disabled picker demonstrating non-interactive state.</p>
         <ui-lib-panel variant="minimal">
@@ -104,9 +104,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="variants" data-doc-anchor class="example-section">
+      <app-doc-section id="variants" title="Variants">
         <h3>g. Variants</h3>
         <p class="section-text">Material, Bootstrap, and Minimal variants side by side.</p>
         <ui-lib-panel variant="minimal">
@@ -126,9 +126,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="clipping" data-doc-anchor class="example-section">
+      <app-doc-section id="clipping" title="Clipping Container (Overflow Hidden)">
         <h3>h. Clipping Container (Overflow Hidden)</h3>
         <p class="section-text">
           Popup panel opens outside this clipped container using default
@@ -141,20 +141,19 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="clippingHtml" [typescript]="clippingTs" />
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-color-picker</code>. Import from
       <code>ui-lib-custom/color-picker</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

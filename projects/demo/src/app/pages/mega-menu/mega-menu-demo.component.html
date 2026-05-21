@@ -7,8 +7,7 @@
   />
 
   <!-- ── Basic Horizontal ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic-horizontal" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Horizontal</h2>
+  <app-doc-section id="basic-horizontal" title="Basic Horizontal">
     <p class="demo-section__desc">
       Default horizontal orientation. Click a top-level item with sub-items to open its mega panel.
       Simple items (like "Documentation") act as direct links.
@@ -22,11 +21,10 @@
         [typescript]="basicHorizontalTs"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Vertical Orientation ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="vertical-orientation" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Orientation</h2>
+  <app-doc-section id="vertical-orientation" title="Vertical Orientation">
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> for a stacked list. Mega panels open to the right.
     </p>
@@ -36,11 +34,10 @@
     <div class="demo-section__code">
       <app-doc-code-example [html]="verticalHtml" [typescript]="verticalTs" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Disabled Items ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-items" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Items &amp; Separators</h2>
+  <app-doc-section id="disabled-items" title="Disabled Items &amp; Separators">
     <p class="demo-section__desc">
       Top-level items and sub-items can be disabled. Sub-items support separator lines to visually
       group related entries.
@@ -56,11 +53,10 @@
         [code]="snippetDisabledSeparator"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Command Callbacks ────────────────────────────────────────────────── -->
-  <section class="demo-section" id="command-callbacks" data-doc-anchor>
-    <h2 class="demo-section__title">Command Callbacks</h2>
+  <app-doc-section id="command-callbacks" title="Command Callbacks">
     <p class="demo-section__desc">
       Sub-items can invoke a <code>command</code> function when activated. The last activated item
       is shown below.
@@ -79,11 +75,10 @@
         [code]="snippetCommand"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── itemClick Output ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="item-click-output" data-doc-anchor>
-    <h2 class="demo-section__title">itemClick Output</h2>
+  <app-doc-section id="item-click-output" title="itemClick Output">
     <p class="demo-section__desc">
       The <code>(itemClick)</code> output fires a <code>MegaMenuCommandEvent</code> containing the
       activated <code>item</code> and the originating DOM event.
@@ -106,11 +101,10 @@
     <div class="demo-section__code">
       <app-doc-code-example [html]="itemClickHtml" [typescript]="itemClickTs" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__desc">
       Three design variants: <strong>material</strong>, <strong>bootstrap</strong>, and
       <strong>minimal</strong>. Each adapts colours, borders, and shadows to its design system.
@@ -123,11 +117,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__desc">
       Three size tokens: <strong>sm</strong>, <strong>md</strong>, and <strong>lg</strong>.
     </p>
@@ -139,11 +132,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Playground ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__desc">Combine variant, size, and orientation interactively.</p>
     <div class="demo-controls">
       <div class="demo-control-group">
@@ -197,11 +189,10 @@
         [orientation]="playgroundOrientation()"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API Reference ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-section__subtitle">MegaMenu Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -217,13 +208,12 @@
 
     <h3 class="demo-section__subtitle">MegaMenuSubItem Interface</h3>
     <app-doc-api-reference kind="property" [rows]="apiSubItemRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

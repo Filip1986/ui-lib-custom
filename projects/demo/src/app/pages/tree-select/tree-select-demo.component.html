@@ -4,7 +4,7 @@
   [sections]="sections"
 >
   <!-- ─── Basic ─────────────────────────────────────────────────────────── -->
-  <section id="basic">
+  <app-doc-section id="basic" title="Basic">
     <app-doc-demo-viewport label="Basic — Single Selection">
       <div demo>
         <ui-lib-tree-select
@@ -22,10 +22,10 @@
       </div>
       <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Multiple ──────────────────────────────────────────────────────── -->
-  <section id="multiple">
+  <app-doc-section id="multiple" title="Multiple">
     <app-doc-demo-viewport label="Multiple Selection">
       <div demo>
         <ui-lib-tree-select
@@ -43,10 +43,10 @@
       </div>
       <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Checkbox ──────────────────────────────────────────────────────── -->
-  <section id="checkbox">
+  <app-doc-section id="checkbox" title="Checkbox">
     <app-doc-demo-viewport label="Checkbox Selection">
       <div demo>
         <ui-lib-tree-select
@@ -64,10 +64,10 @@
       </div>
       <app-doc-code-example [html]="checkboxHtml" [typescript]="checkboxTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Filter ────────────────────────────────────────────────────────── -->
-  <section id="filter">
+  <app-doc-section id="filter" title="Filter">
     <app-doc-demo-viewport label="With Filter">
       <div demo>
         <ui-lib-tree-select
@@ -82,10 +82,10 @@
       </div>
       <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Sizes ─────────────────────────────────────────────────────────── -->
-  <section id="sizes">
+  <app-doc-section id="sizes" title="Sizes">
     <app-doc-demo-viewport label="Sizes">
       <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
         <ui-lib-tree-select
@@ -109,10 +109,10 @@
       </div>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Variants ──────────────────────────────────────────────────────── -->
-  <section id="variants">
+  <app-doc-section id="variants" title="Variants">
     <app-doc-demo-viewport label="Variants">
       <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
         <label style="font-size: 0.75rem; color: var(--uilib-muted)">Material</label>
@@ -139,10 +139,10 @@
       </div>
       <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Show Clear ────────────────────────────────────────────────────── -->
-  <section id="show-clear">
+  <app-doc-section id="show-clear" title="Show Clear">
     <app-doc-demo-viewport label="Show Clear Button">
       <div demo>
         <ui-lib-tree-select
@@ -156,10 +156,10 @@
       </div>
       <app-doc-code-example [html]="showClearHtml" [typescript]="showClearTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Disabled ──────────────────────────────────────────────────────── -->
-  <section id="disabled">
+  <app-doc-section id="disabled" title="Disabled">
     <app-doc-demo-viewport label="Disabled">
       <div demo>
         <ui-lib-tree-select
@@ -171,10 +171,10 @@
       </div>
       <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Loading ───────────────────────────────────────────────────────── -->
-  <section id="loading">
+  <app-doc-section id="loading" title="Loading">
     <app-doc-demo-viewport label="Loading State">
       <div demo>
         <ui-lib-tree-select
@@ -186,10 +186,10 @@
       </div>
       <app-doc-code-example [html]="loadingHtml" [typescript]="loadingTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── ngModel ───────────────────────────────────────────────────────── -->
-  <section id="ngModel">
+  <app-doc-section id="ngModel" title="NgModel">
     <app-doc-demo-viewport label="ngModel Binding">
       <div demo>
         <ui-lib-tree-select
@@ -204,10 +204,10 @@
       </div>
       <app-doc-code-example [html]="ngModelHtml" [typescript]="ngModelTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Reactive Forms ────────────────────────────────────────────────── -->
-  <section id="reactive">
+  <app-doc-section id="reactive" title="Reactive">
     <app-doc-demo-viewport label="Reactive Forms">
       <div demo>
         <form [formGroup]="reactiveForm" style="display: flex; flex-direction: column; gap: 1rem">
@@ -229,24 +229,22 @@
       </div>
       <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-tree-select</code>. Import from
       <code>ui-lib-custom/tree-select</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

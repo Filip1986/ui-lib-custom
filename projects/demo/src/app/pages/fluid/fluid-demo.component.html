@@ -17,8 +17,7 @@
   </div>
 
   <!-- ── Section 1: Component usage ── -->
-  <section class="demo-section" id="using-the-component" data-doc-anchor>
-    <h2 class="demo-section__title">Using the Component</h2>
+  <app-doc-section id="using-the-component" title="Using the Component">
     <p class="demo-section__desc">
       Wrap any form or container with <code>&lt;ui-lib-fluid&gt;</code>.
       All child inputs, textareas, and buttons grow to fill the full width.
@@ -59,11 +58,10 @@
         <ui-lib-button severity="primary" type="button">Submit</ui-lib-button>
       </ui-lib-fluid>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 2: Directive usage ── -->
-  <section class="demo-section" id="using-the-directive" data-doc-anchor>
-    <h2 class="demo-section__title">Using the Directive</h2>
+  <app-doc-section id="using-the-directive" title="Using the Directive">
     <p class="demo-section__desc">
       Apply <code>uiLibFluid</code> as an attribute on any existing element to avoid
       adding an extra wrapper to the DOM. The directive adds the same
@@ -95,11 +93,10 @@
         </div>
       </form>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 3: Conditional fluid via binding ── -->
-  <section class="demo-section" id="conditional-fluid" data-doc-anchor>
-    <h2 class="demo-section__title">Conditional Fluid</h2>
+  <app-doc-section id="conditional-fluid" title="Conditional Fluid">
     <p class="demo-section__desc">
       Bind <code>[uiLibFluid]="expression"</code> to toggle the fluid layout
       at runtime. When <code>false</code>, inputs and buttons revert to their natural
@@ -131,11 +128,10 @@
         </ui-lib-button>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 4: Attribute-only shorthand ── -->
-  <section class="demo-section" id="attribute-shorthand" data-doc-anchor>
-    <h2 class="demo-section__title">Attribute Shorthand</h2>
+  <app-doc-section id="attribute-shorthand" title="Attribute Shorthand">
     <p class="demo-section__desc">
       The directive supports attribute-only usage — just add <code>uiLibFluid</code>
       without a binding. It defaults to <code>true</code> through Angular's
@@ -155,11 +151,10 @@
         <ui-lib-button severity="primary" type="button">Go</ui-lib-button>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 5: API reference ── -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api-reference" title="API Reference">
 
     <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1rem;">
       &lt;ui-lib-fluid&gt; — Component
@@ -172,7 +167,7 @@
     </h3>
     <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
     <app-doc-api-reference [rows]="fluidDirectiveRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

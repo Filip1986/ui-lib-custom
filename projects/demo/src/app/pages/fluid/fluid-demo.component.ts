@@ -11,6 +11,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Fluid component and FluidDirective.
  * Demonstrates how ui-lib-fluid stretches form controls to full width.
@@ -27,6 +28,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',

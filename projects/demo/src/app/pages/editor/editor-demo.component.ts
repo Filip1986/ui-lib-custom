@@ -45,6 +45,7 @@ import {
   eventsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for Editor component usage, forms integration, and event behavior.
  */
@@ -65,6 +66,7 @@ import {
     EditorToolbarDirective,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',

@@ -18,6 +18,7 @@ import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.comp
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface CityOption {
   label: string;
   value: string;
@@ -42,6 +43,7 @@ interface CityOption {
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './radio-button-demo.component.html',
   styleUrl: './radio-button-demo.component.scss',

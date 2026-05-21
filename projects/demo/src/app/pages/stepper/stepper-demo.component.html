@@ -8,8 +8,7 @@
   />
 
   <!-- Basic Usage -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__desc">
       A simple three-step horizontal stepper. Users can click any step header to navigate freely.
     </p>
@@ -71,11 +70,10 @@
         </ui-lib-stepper-panel>
       </ui-lib-stepper>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Linear Mode -->
-  <section class="demo-section" id="linear-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Linear Mode</h2>
+  <app-doc-section id="linear-mode" title="Linear Mode">
     <p class="demo-section__desc">
       With <code>linear</code> enabled, users must complete steps in order. Clicking ahead is blocked.
     </p>
@@ -137,11 +135,10 @@
         </ui-lib-stepper-panel>
       </ui-lib-stepper>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Vertical Orientation -->
-  <section class="demo-section" id="vertical-orientation" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Orientation</h2>
+  <app-doc-section id="vertical-orientation" title="Vertical Orientation">
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> to stack steps vertically with inline content.
     </p>
@@ -203,11 +200,10 @@
         </ui-lib-stepper-panel>
       </ui-lib-stepper>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       Three variants to match your design system: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
     </p>
@@ -333,11 +329,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__desc">Experiment with all configuration options live.</p>
 
     <div class="demo-card demo-card--playground">
@@ -473,11 +468,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api-reference" title="API Reference">
 
     <h3 class="demo-api-subtitle">Stepper — <code>ui-lib-stepper</code></h3>
     <app-doc-api-reference [rows]="apiStepperInputRows" />
@@ -490,12 +484,11 @@
     <app-doc-api-reference [rows]="apiStepperPanelInputRows" />
 
     <app-doc-api-reference kind="name" [rows]="apiStepperPanelSlotRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

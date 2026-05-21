@@ -21,8 +21,7 @@
   />
 
   <!-- ---- Basic usage ---- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__desc">
       Call <code>ConfirmPopupService.confirm(&#123; target, message &#125;)</code> from a click
       handler, passing <code>event.currentTarget</code> as the anchor.
@@ -37,11 +36,10 @@
       size="sm"
       [code]="snippetBasicConfirm"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- With icon ---- -->
-  <section class="demo-section" id="with-icon" data-doc-anchor>
-    <h2 class="demo-section__title">With Icon &amp; Custom Labels</h2>
+  <app-doc-section id="with-icon" title="With Icon &amp; Custom Labels">
     <p class="demo-section__desc">
       Pass an <code>icon</code> CSS class (PrimeIcons / FontAwesome) to render an icon beside the
       message. Customise button labels and severity independently.
@@ -58,11 +56,10 @@
       size="sm"
       [code]="snippetIconConfirm"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Button severities ---- -->
-  <section class="demo-section" id="button-severities" data-doc-anchor>
-    <h2 class="demo-section__title">Button Severities</h2>
+  <app-doc-section id="button-severities" title="Button Severities">
     <p class="demo-section__desc">
       The accept and reject buttons support six severity values:
       <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>danger</code>,
@@ -75,11 +72,10 @@
         </ui-lib-button>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Design variants ---- -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       The popup supports three design variants: <code>material</code> (pill buttons, large radius),
       <code>bootstrap</code> (border, square corners), and <code>minimal</code> (subtle, flat). Each
@@ -93,11 +89,10 @@
         </ui-lib-button>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Declarative usage ---- -->
-  <section class="demo-section" id="declarative-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Declarative Usage</h2>
+  <app-doc-section id="declarative-usage" title="Declarative Usage">
     <p class="demo-section__desc">
       Use <code>[(visible)]</code> for full two-way binding without the service. Outputs
       <code>(accepted)</code> and <code>(rejected)</code> let you react to user choices.
@@ -111,21 +106,19 @@
       [typescript]="declarativeUsageTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Result log ---- -->
-  <section class="demo-section" id="result-log" data-doc-anchor>
-    <h2 class="demo-section__title">Result Log</h2>
+  <app-doc-section id="result-log" title="Result Log">
     <p class="demo-section__desc">Last interaction result:</p>
     <div class="demo-result">
       <span class="demo-result__label">Result:</span>
       <span class="demo-result__value">{{ lastResult() }}</span>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- API reference ---- -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api-reference" title="API Reference">
 
     <h3 class="demo-table__heading">Inputs</h3>
     <div class="demo-table-wrapper">
@@ -263,13 +256,12 @@
         </tbody>
       </table>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

@@ -64,6 +64,7 @@ import {
   themeIntegrationHtml,
   themeIntegrationTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 /**
@@ -95,6 +96,7 @@ type DataViewSortField = 'name' | 'price' | 'rating';
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './data-view-demo.component.html',
   styleUrl: './data-view-demo.component.scss',

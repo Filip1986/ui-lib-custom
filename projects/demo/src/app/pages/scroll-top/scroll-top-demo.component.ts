@@ -12,6 +12,7 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { thresholdHtml, thresholdTs, parentTargetHtml, parentTargetTs } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the ScrollTop component.
  */
@@ -26,6 +27,7 @@ import { thresholdHtml, thresholdTs, parentTargetHtml, parentTargetTs } from './
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './scroll-top-demo.component.html',
   styleUrl: './scroll-top-demo.component.scss',

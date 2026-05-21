@@ -33,6 +33,7 @@ import {
   noLegendHtml,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the MeterGroup component.
  */
@@ -50,6 +51,7 @@ import {
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',

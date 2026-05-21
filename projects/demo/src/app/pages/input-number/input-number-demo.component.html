@@ -7,15 +7,15 @@
   />
 
   <div class="examples">
-    <section id="numerals" data-doc-anchor class="example-section">
+    <app-doc-section id="numerals" title="Numerals">
       <h3>1. Numerals</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
       </ui-lib-panel>
       <app-doc-code-example [html]="numeralsHtml" [typescript]="numeralsTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="decimal" data-doc-anchor class="example-section">
+    <app-doc-section id="decimal" title="Decimal">
       <h3>2. Decimal</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number
@@ -26,9 +26,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="decimalHtml" [typescript]="decimalTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="locale" data-doc-anchor class="example-section">
+    <app-doc-section id="locale" title="Locale">
       <h3>3. Locale</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-4">
@@ -51,9 +51,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="localeHtml" [typescript]="localeTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="currency" data-doc-anchor class="example-section">
+    <app-doc-section id="currency" title="Currency">
       <h3>4. Currency</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
@@ -80,9 +80,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="currencyHtml" [typescript]="currencyTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="prefix-suffix" data-doc-anchor class="example-section">
+    <app-doc-section id="prefix-suffix" title="Prefix &amp; Suffix">
       <h3>5. Prefix &amp; Suffix</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
@@ -96,9 +96,9 @@
         [html]="prefixSuffixHtml"
         [typescript]="prefixSuffixTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="buttons-stacked" data-doc-anchor class="example-section">
+    <app-doc-section id="buttons-stacked" title="Buttons Stacked">
       <h3>6. Buttons Stacked</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number
@@ -112,9 +112,9 @@
         [html]="buttonsStackedHtml"
         [typescript]="buttonsStackedTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="buttons-horizontal" data-doc-anchor class="example-section">
+    <app-doc-section id="buttons-horizontal" title="Buttons Horizontal">
       <h3>7. Buttons Horizontal</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number
@@ -130,9 +130,9 @@
         [html]="buttonsHorizontalHtml"
         [typescript]="buttonsHorizontalTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="buttons-vertical" data-doc-anchor class="example-section">
+    <app-doc-section id="buttons-vertical" title="Buttons Vertical">
       <h3>8. Buttons Vertical</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number
@@ -145,25 +145,25 @@
         [html]="buttonsVerticalHtml"
         [typescript]="buttonsVerticalTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="step" data-doc-anchor class="example-section">
+    <app-doc-section id="step" title="Step">
       <h3>9. Step</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="stepHtml" [typescript]="stepTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="min-max" data-doc-anchor class="example-section">
+    <app-doc-section id="min-max" title="Min &amp; Max">
       <h3>10. Min &amp; Max</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number [(ngModel)]="boundedValue" [min]="0" [max]="100" [showButtons]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="float-label" data-doc-anchor class="example-section">
+    <app-doc-section id="float-label" title="Float Label">
       <h3>11. Float Label</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-3">
@@ -182,17 +182,17 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="floatLabelHtml" [typescript]="floatLabelTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="clear-icon" data-doc-anchor class="example-section">
+    <app-doc-section id="clear-icon" title="Clear Icon">
       <h3>12. Clear Icon</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number [(ngModel)]="clearableValue" [showClear]="true" [showButtons]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="clearIconHtml" [typescript]="clearIconTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="sizes" data-doc-anchor class="example-section">
+    <app-doc-section id="sizes" title="Sizes">
       <h3>13. Sizes</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-3">
@@ -202,9 +202,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="disabled-invalid" data-doc-anchor class="example-section">
+    <app-doc-section id="disabled-invalid" title="Disabled &amp; Invalid">
       <h3>14. Disabled &amp; Invalid</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
@@ -216,17 +216,17 @@
         [html]="disabledInvalidHtml"
         [typescript]="disabledInvalidTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="filled" data-doc-anchor class="example-section">
+    <app-doc-section id="filled" title="Filled">
       <h3>15. Filled</h3>
       <ui-lib-panel variant="minimal">
         <uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="filledHtml" [typescript]="filledTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="fluid" data-doc-anchor class="example-section">
+    <app-doc-section id="fluid" title="Fluid">
       <h3>16. Fluid</h3>
       <ui-lib-panel variant="minimal">
         <div class="fluid-wrap">
@@ -239,9 +239,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="fluidHtml" [typescript]="fluidTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="reactive-forms" data-doc-anchor class="example-section">
+    <app-doc-section id="reactive-forms" title="Reactive Forms">
       <h3>17. Reactive Forms</h3>
       <ui-lib-panel variant="minimal">
         <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
@@ -261,19 +261,18 @@
         </form>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTsTs" />
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
   </div>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>uilib-input-number</code>. Import from
       <code>ui-lib-custom/input-number</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

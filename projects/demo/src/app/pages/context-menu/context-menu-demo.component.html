@@ -8,47 +8,42 @@
   />
 
   <!-- ── Basic ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-hint">Right-click the box below to open the menu.</p>
     <div class="demo-target" (contextmenu)="basicMenu.show($event)">Right-click here</div>
     <ui-lib-context-menu #basicMenu [model]="basicItems" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Separator ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="with-separator" data-doc-anchor>
-    <h2 class="demo-section__title">With Separator</h2>
+  <app-doc-section id="with-separator" title="With Separator">
     <p class="demo-hint">
       Add a <code>&#123; separator: true &#125;</code> item to insert a horizontal divider line.
     </p>
     <div class="demo-target" (contextmenu)="sepMenu.show($event)">Right-click here</div>
     <ui-lib-context-menu #sepMenu [model]="separatorItems" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Disabled ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-items" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Items</h2>
+  <app-doc-section id="disabled-items" title="Disabled Items">
     <p class="demo-hint">
       Set <code>disabled: true</code> on any item to make it non-interactive and visually muted.
     </p>
     <div class="demo-target" (contextmenu)="disabledMenu.show($event)">Right-click here</div>
     <ui-lib-context-menu #disabledMenu [model]="disabledItems" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Submenu ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="nested-submenu" data-doc-anchor>
-    <h2 class="demo-section__title">Nested Submenu</h2>
+  <app-doc-section id="nested-submenu" title="Nested Submenu">
     <p class="demo-hint">
       Provide an <code>items</code> array on any item to create a submenu.
       Hover or press <kbd>→</kbd> to expand it.
     </p>
     <div class="demo-target" (contextmenu)="submenuMenu.show($event)">Right-click here</div>
     <ui-lib-context-menu #submenuMenu [model]="submenuItems" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Image target ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="image-target" data-doc-anchor>
-    <h2 class="demo-section__title">Image Target</h2>
+  <app-doc-section id="image-target" title="Image Target">
     <p class="demo-hint">Attach the context menu to any element — here an image placeholder.</p>
     <div
       class="demo-image-target"
@@ -59,11 +54,10 @@
       🖼 Right-click this image
     </div>
     <ui-lib-context-menu #imageMenu [model]="imageItems" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Command callbacks ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="command-callback" data-doc-anchor>
-    <h2 class="demo-section__title">Command Callback &amp; itemClick Output</h2>
+  <app-doc-section id="command-callback" title="Command Callback &amp; itemClick Output">
     <p class="demo-hint">
       Use the <code>command</code> callback on each item or listen to the <code>itemClick</code>
       output on the component.
@@ -82,11 +76,10 @@
         }
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <div class="demo-column">
       <div class="demo-label-row">
         <span class="demo-label">Material</span>
@@ -110,11 +103,10 @@
         <ui-lib-context-menu #minimalMenu [model]="basicItems" variant="minimal" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <div class="demo-column">
       <div class="demo-label-row">
         <span class="demo-label">sm</span>
@@ -138,11 +130,10 @@
         <ui-lib-context-menu #lgMenu [model]="sizeItems" size="lg" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API Table ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3>Outputs</h3>
@@ -153,13 +144,12 @@
 
     <h3>ContextMenuItem interface</h3>
     <app-doc-api-reference kind="property" [rows]="apiContextMenuItemRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

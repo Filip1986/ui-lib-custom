@@ -7,8 +7,7 @@
   />
 
   <!-- ── Basic ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       A simple non-toggleable fieldset with a legend label and body content.
     </p>
@@ -39,11 +38,10 @@
       [typescript]="basicTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Toggleable ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="toggleable" data-doc-anchor>
-    <h2 class="demo-section__title">Toggleable</h2>
+  <app-doc-section id="toggleable" title="Toggleable">
     <p class="demo-section__description">
       Set <code>[toggleable]="true"</code> to let users collapse and expand the panel. Use
       <code>[(collapsed)]</code> for two-way binding.
@@ -74,11 +72,10 @@
       [typescript]="toggleableTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Pre-collapsed ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="pre-collapsed" data-doc-anchor>
-    <h2 class="demo-section__title">Pre-collapsed</h2>
+  <app-doc-section id="pre-collapsed" title="Pre-collapsed">
     <p class="demo-section__description">
       Pass <code>[collapsed]="true"</code> to start the fieldset in its collapsed state.
     </p>
@@ -98,11 +95,10 @@
       [typescript]="preCollapsedTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Custom Legend ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="custom-legend" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Legend</h2>
+  <app-doc-section id="custom-legend" title="Custom Legend">
     <p class="demo-section__description">
       Project any HTML into the legend area using the
       <code>[fieldsetLegend]</code> attribute selector.
@@ -121,11 +117,10 @@
       [typescript]="customLegendTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three built-in design variants: <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code>.
@@ -144,11 +139,10 @@
       [typescript]="variantsTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Toggle Event ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="toggle-event" data-doc-anchor>
-    <h2 class="demo-section__title">Toggle Event</h2>
+  <app-doc-section id="toggle-event" title="Toggle Event">
     <p class="demo-section__description">
       Listen to the <code>(toggled)</code> output to react when the panel opens or closes.
     </p>
@@ -167,11 +161,10 @@
       size="sm"
       [code]="snippetToggleEvent"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── API ──────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-api__subtitle">Inputs</h3>
     <table class="demo-api-table">
@@ -257,13 +250,12 @@
         </tr>
       </tbody>
     </table>
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

@@ -18,6 +18,7 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { Panel } from 'ui-lib-custom/panel';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for Dialog component capabilities.
  */
@@ -38,6 +39,7 @@ import { Panel } from 'ui-lib-custom/panel';
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',

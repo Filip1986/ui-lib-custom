@@ -13,6 +13,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the ProgressSpinner component.
  */
@@ -28,6 +29,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',

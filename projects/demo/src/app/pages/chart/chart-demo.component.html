@@ -7,31 +7,31 @@
   />
 
   <div class="examples">
-    <section id="basic-bar" data-doc-anchor class="example-section">
+    <app-doc-section id="basic-bar" title="Basic Bar Chart">
       <h3>1. Basic Bar Chart</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-bar-chart [data]="monthlyRevenueData" ariaLabel="Monthly revenue bar chart" />
       </ui-lib-panel>
       <app-doc-code-example [html]="basicBarHtml" [typescript]="basicBarTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="basic-line" data-doc-anchor class="example-section">
+    <app-doc-section id="basic-line" title="Basic Line Chart">
       <h3>2. Basic Line Chart</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-line-chart [data]="userGrowthData" ariaLabel="User growth trend line chart" />
       </ui-lib-panel>
       <app-doc-code-example [html]="basicLineHtml" [typescript]="basicLineTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="pie-chart" data-doc-anchor class="example-section">
+    <app-doc-section id="pie-chart" title="Pie Chart">
       <h3>3. Pie Chart</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-pie-chart [data]="marketShareData" ariaLabel="Market share pie chart" />
       </ui-lib-panel>
       <app-doc-code-example [html]="pieHtml" [typescript]="pieTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="doughnut-chart" data-doc-anchor class="example-section">
+    <app-doc-section id="doughnut-chart" title="Doughnut Chart">
       <h3>4. Doughnut Chart</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-doughnut-chart
@@ -40,9 +40,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="doughnutHtml" [typescript]="doughnutTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="generic-radar" data-doc-anchor class="example-section">
+    <app-doc-section id="generic-radar" title="Generic Chart (Radar)">
       <h3>5. Generic Chart (Radar)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
@@ -52,9 +52,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="radarHtml" [typescript]="radarTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="generic-polar-area" data-doc-anchor class="example-section">
+    <app-doc-section id="generic-polar-area" title="Generic Chart (Polar Area)">
       <h3>6. Generic Chart (Polar Area)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
@@ -64,9 +64,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="polarAreaHtml" [typescript]="polarAreaTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="generic-bubble" data-doc-anchor class="example-section">
+    <app-doc-section id="generic-bubble" title="Generic Chart (Bubble)">
       <h3>7. Generic Chart (Bubble)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
@@ -76,9 +76,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="bubbleHtml" [typescript]="bubbleTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="generic-scatter" data-doc-anchor class="example-section">
+    <app-doc-section id="generic-scatter" title="Generic Chart (Scatter)">
       <h3>8. Generic Chart (Scatter)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
@@ -88,9 +88,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="scatterHtml" [typescript]="scatterTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="multi-dataset-bar" data-doc-anchor class="example-section">
+    <app-doc-section id="multi-dataset-bar" title="Multi-Dataset Bar">
       <h3>9. Multi-Dataset Bar</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-bar-chart [data]="regionalRevenueData" ariaLabel="Quarterly revenue by segment" />
@@ -99,9 +99,9 @@
         [html]="multiDatasetBarHtml"
         [typescript]="multiDatasetBarTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="stacked-bar" data-doc-anchor class="example-section">
+    <app-doc-section id="stacked-bar" title="Stacked Bar">
       <h3>10. Stacked Bar</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-bar-chart
@@ -111,17 +111,17 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="stackedBarHtml" [typescript]="stackedBarTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="line-area-fill" data-doc-anchor class="example-section">
+    <app-doc-section id="line-area-fill" title="Line with Area Fill">
       <h3>11. Line with Area Fill</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-line-chart [data]="trafficAreaData" ariaLabel="Weekly site sessions area chart" />
       </ui-lib-panel>
       <app-doc-code-example [html]="lineAreaHtml" [typescript]="lineAreaTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="mixed-chart" data-doc-anchor class="example-section">
+    <app-doc-section id="mixed-chart" title="Mixed Chart">
       <h3>12. Mixed Chart</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-chart
@@ -132,9 +132,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="mixedHtml" [typescript]="mixedTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="sizes" data-doc-anchor class="example-section">
+    <app-doc-section id="sizes" title="Sizes">
       <h3>13. Sizes</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-grid [columns]="3" spacing="md" class="size-grid">
@@ -153,9 +153,9 @@
         </ui-lib-grid>
       </ui-lib-panel>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="custom-dimensions" data-doc-anchor class="example-section">
+    <app-doc-section id="custom-dimensions" title="Custom Dimensions">
       <h3>14. Custom Dimensions</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-line-chart
@@ -169,9 +169,9 @@
         [html]="customDimensionsHtml"
         [typescript]="customDimensionsTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="dynamic-data-update" data-doc-anchor class="example-section">
+    <app-doc-section id="dynamic-data-update" title="Dynamic Data Update">
       <h3>15. Dynamic Data Update</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
@@ -188,9 +188,9 @@
         [html]="dynamicUpdateHtml"
         [typescript]="dynamicUpdateTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="theme-integration" data-doc-anchor class="example-section">
+    <app-doc-section id="theme-integration" title="Theme Integration">
       <h3>16. Theme Integration</h3>
       <p>
         This example swaps chart CSS variable profiles to demonstrate the theme-token bridge used by
@@ -232,9 +232,9 @@
         [html]="themeIntegrationHtml"
         [typescript]="themeIntegrationTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="click-events" data-doc-anchor class="example-section">
+    <app-doc-section id="click-events" title="Click Events">
       <h3>17. Click Events</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
@@ -250,9 +250,9 @@
         [html]="clickEventsHtml"
         [typescript]="clickEventsTsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="custom-options" data-doc-anchor class="example-section">
+    <app-doc-section id="custom-options" title="Custom Options">
       <h3>18. Custom Options</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-doughnut-chart
@@ -265,19 +265,18 @@
         [html]="customOptionsHtml"
         [typescript]="customOptionsTsTs"
       />
-    </section>
+    </app-doc-section>
   </div>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-chart</code>. Import from
       <code>ui-lib-custom/chart</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

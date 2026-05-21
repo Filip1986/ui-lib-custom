@@ -5,8 +5,7 @@
   </app-doc-page-header>
 
   <!-- Section 1: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Drop in <code>&lt;ui-lib-progress-spinner /&gt;</code> with no inputs for a default
       medium-sized, theme-variant spinner.
@@ -20,11 +19,10 @@
       size="sm"
       [code]="snippetBasic"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Sizes -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       The <code>size</code> input accepts <code>'sm'</code>, <code>'md'</code>, or
       <code>'lg'</code>.
@@ -40,11 +38,10 @@
       size="sm"
       [code]="snippetSizes"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Override the global theme variant with the <code>variant</code> input.
       <code>'material'</code> cycles through multiple colours,
@@ -71,11 +68,10 @@
       size="sm"
       [code]="snippetVariants"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Custom animation speed -->
-  <section class="demo-section" id="animation-duration" data-doc-anchor>
-    <h2 class="demo-section__title">Animation Duration</h2>
+  <app-doc-section id="animation-duration" title="Animation Duration">
     <p class="demo-section__description">
       Control the rotation speed with <code>animationDuration</code>.
       Accepts any CSS <code>&lt;time&gt;</code> value.
@@ -100,11 +96,10 @@
       size="sm"
       [code]="snippetAnimationDuration"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Custom stroke width and fill -->
-  <section class="demo-section" id="stroke-width-fill" data-doc-anchor>
-    <h2 class="demo-section__title">Stroke Width &amp; Fill</h2>
+  <app-doc-section id="stroke-width-fill" title="Stroke Width &amp; Fill">
     <p class="demo-section__description">
       <code>strokeWidth</code> controls the arc thickness (SVG units).
       <code>fill</code> sets the interior fill colour of the circle.
@@ -120,11 +115,10 @@
       size="sm"
       [code]="snippetStrokeWidth"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: Loading overlay pattern -->
-  <section class="demo-section" id="loading-overlay" data-doc-anchor>
-    <h2 class="demo-section__title">Loading Overlay Pattern</h2>
+  <app-doc-section id="loading-overlay" title="Loading Overlay Pattern">
     <p class="demo-section__description">
       Combine <code>ProgressSpinner</code> with a semi-transparent overlay to block content
       during async operations.
@@ -144,11 +138,10 @@
       size="sm"
       [code]="snippetLoadingOverlay"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 7: Interactive playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Adjust the controls to explore available combinations.</p>
 
     <div class="ps-playground">
@@ -204,14 +197,13 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: API table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

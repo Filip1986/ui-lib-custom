@@ -21,6 +21,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 // ---- Guest components rendered inside the dialog ----
 
 /**
@@ -138,6 +139,7 @@ export class LongDialogContentComponent {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',

@@ -8,7 +8,7 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-      <section id="alphanum" data-doc-anchor class="example-section">
+      <app-doc-section id="alphanum" title="Alphanumeric">
         <h3>a. Alphanumeric</h3>
         <p class="section-text">
           The default preset — allows letters and digits, blocks everything else.
@@ -22,18 +22,18 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="alphanumHtml" [typescript]="alphanumTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="alpha" data-doc-anchor class="example-section">
+      <app-doc-section id="alpha" title="Alpha">
         <h3>b. Alpha</h3>
         <p class="section-text">Letters only — digits and symbols are blocked.</p>
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'alpha'" placeholder="Letters only" />
         </ui-lib-panel>
         <app-doc-code-example [html]="alphaHtml" [typescript]="alphaTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="pint" data-doc-anchor class="example-section">
+      <app-doc-section id="pint" title="Positive Integer">
         <h3>c. Positive Integer</h3>
         <p class="section-text">Digits only, no minus sign — use for unsigned whole numbers.</p>
         <ui-lib-panel variant="minimal">
@@ -44,18 +44,18 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="pintHtml" [typescript]="pintTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="int" data-doc-anchor class="example-section">
+      <app-doc-section id="int" title="Integer">
         <h3>d. Integer</h3>
         <p class="section-text">Digits and minus sign — use for signed whole numbers.</p>
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'int'" placeholder="Integers (with minus)" />
         </ui-lib-panel>
         <app-doc-code-example [html]="intHtml" [typescript]="intTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="num" data-doc-anchor class="example-section">
+      <app-doc-section id="num" title="Number">
         <h3>e. Number</h3>
         <p class="section-text">
           Digits, minus, and decimal point — use for floating-point values.
@@ -68,18 +68,18 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="numHtml" [typescript]="numTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="hex" data-doc-anchor class="example-section">
+      <app-doc-section id="hex" title="Hexadecimal">
         <h3>f. Hexadecimal</h3>
         <p class="section-text">Digits 0–9 and letters a–f (case-insensitive).</p>
         <ui-lib-panel variant="minimal">
           <input class="demo-input" [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />
         </ui-lib-panel>
         <app-doc-code-example [html]="hexHtml" [typescript]="hexTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="money" data-doc-anchor class="example-section">
+      <app-doc-section id="money" title="Money">
         <h3>g. Money</h3>
         <p class="section-text">Digits, minus, decimal point, and thousands separator comma.</p>
         <ui-lib-panel variant="minimal">
@@ -90,9 +90,9 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="moneyHtml" [typescript]="moneyTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="email" data-doc-anchor class="example-section">
+      <app-doc-section id="email" title="Email">
         <h3>h. Email</h3>
         <p class="section-text">
           Characters valid in email addresses per RFC 5321 local-part and domain rules.
@@ -101,9 +101,9 @@
           <input class="demo-input" [uilibKeyFilter]="'email'" placeholder="Email characters" />
         </ui-lib-panel>
         <app-doc-code-example [html]="emailHtml" [typescript]="emailTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="custom" data-doc-anchor class="example-section">
+      <app-doc-section id="custom" title="Custom RegExp">
         <h3>i. Custom RegExp</h3>
         <p class="section-text">
           Pass any <code>RegExp</code> to filter per character. This example restricts input to
@@ -117,9 +117,9 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="customHtml" [typescript]="customTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="bypass" data-doc-anchor class="example-section">
+      <app-doc-section id="bypass" title="Bypass">
         <h3>j. Bypass</h3>
         <p class="section-text">
           Set <code>keyFilterBypass</code> to <code>true</code> to suspend all filtering at runtime.
@@ -144,20 +144,19 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="bypassHtml" [typescript]="bypassTs" />
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>[uilibKeyFilter]</code>. Import from
       <code>ui-lib-custom/key-filter</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

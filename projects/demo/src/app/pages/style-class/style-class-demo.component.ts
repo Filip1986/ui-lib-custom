@@ -11,6 +11,7 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 /**
  * Demo page for the StyleClass directive.
@@ -27,6 +28,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './style-class-demo.component.html',
   styleUrl: './style-class-demo.component.scss',

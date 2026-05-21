@@ -45,6 +45,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the ToggleButton component.
  */
@@ -66,6 +67,7 @@ import {
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './toggle-button-demo.component.html',
   styleUrl: './toggle-button-demo.component.scss',

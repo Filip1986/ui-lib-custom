@@ -8,8 +8,7 @@
   />
 
   <!-- Section: Function usage -->
-  <section class="demo-section" id="function-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Function Usage</h2>
+  <app-doc-section id="function-usage" title="Function Usage">
     <p class="demo-section__description">
       Import <code>classNames</code> and call it from TypeScript. Strings, objects
       (keys with truthy values included), arrays, and falsy values (ignored) are all accepted.
@@ -23,11 +22,10 @@
         [code]="snippetFunctionUsage"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section: Pipe usage -->
-  <section class="demo-section" id="pipe-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Pipe Usage</h2>
+  <app-doc-section id="pipe-usage" title="Pipe Usage">
     <p class="demo-section__description">
       Import <code>ClassNamesPipe</code> into your standalone component and use
       <code>classNames</code> as a template pipe. Pass additional arguments after the colon.
@@ -41,11 +39,10 @@
         [code]="snippetPipeUsage"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section: Interactive playground -->
-  <section class="demo-section" id="interactive-playground" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Playground</h2>
+  <app-doc-section id="interactive-playground" title="Interactive Playground">
     <p class="demo-section__description">
       Toggle the flags below and watch the resolved class string update in real time.
     </p>
@@ -93,11 +90,10 @@
         }}</code>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section: API reference -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-subsection-title">classNames(...values)</h3>
     <app-doc-api-reference kind="name" [rows]="classnamesFnRows" [showDefault]="false" />
@@ -114,7 +110,7 @@
         [code]="snippetClassNameValueType"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

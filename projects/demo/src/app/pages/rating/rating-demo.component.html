@@ -5,8 +5,7 @@
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Bind the selected value with <code>[(ngModel)]</code>. Clicking the currently
       selected star deselects it (clears to <code>null</code>).
@@ -25,11 +24,10 @@
       filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Pre-selected --------------------------------------------- -->
-  <section class="demo-section" id="pre-selected" data-doc-anchor>
-    <h2 class="demo-section__title">Pre-selected</h2>
+  <app-doc-section id="pre-selected" title="Pre-selected">
     <p class="demo-section__description">
       Initialise the bound value to a number to show a pre-selected rating.
     </p>
@@ -42,11 +40,10 @@
       filename="Pre-selected" [code]="snippets.preSelected"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- No Cancel ------------------------------------------------ -->
-  <section class="demo-section" id="no-cancel" data-doc-anchor>
-    <h2 class="demo-section__title">No Cancel</h2>
+  <app-doc-section id="no-cancel" title="No Cancel">
     <p class="demo-section__description">
       Set <code>[cancel]="false"</code> to hide the clear button and disable
       keyboard clearing (Delete / Backspace).
@@ -59,11 +56,10 @@
       filename="No cancel" [code]="snippets.noCancel"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
       When <code>variant</code> is <code>null</code> (default) it inherits from
@@ -88,11 +84,10 @@
       filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -115,11 +110,10 @@
       filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Custom Star Count ---------------------------------------- -->
-  <section class="demo-section" id="star-count" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Star Count</h2>
+  <app-doc-section id="star-count" title="Custom Star Count">
     <p class="demo-section__description">
       Use <code>[stars]</code> to render any number of stars (default is 5).
     </p>
@@ -132,11 +126,10 @@
       filename="Custom star count" [code]="snippets.starCount"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Readonly ------------------------------------------------- -->
-  <section class="demo-section" id="readonly" data-doc-anchor>
-    <h2 class="demo-section__title">Readonly</h2>
+  <app-doc-section id="readonly" title="Readonly">
     <p class="demo-section__description">
       Set <code>[readonly]="true"</code> for a non-interactive display.
       The component switches to <code>role="img"</code> with a descriptive
@@ -150,11 +143,10 @@
       filename="Readonly" [code]="snippets.readonly"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent interaction.
       Can also be controlled programmatically via <code>FormControl.disable()</code>.
@@ -167,11 +159,10 @@
       filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Events --------------------------------------------------- -->
-  <section class="demo-section" id="events" data-doc-anchor>
-    <h2 class="demo-section__title">Events</h2>
+  <app-doc-section id="events" title="Events">
     <p class="demo-section__description">
       Four output events: <code>(change)</code> fires on every value change,
       <code>(rate)</code> fires only on star selection, <code>(cleared)</code>
@@ -199,11 +190,10 @@
       filename="Events" [code]="snippets.events"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Custom Templates ----------------------------------------- -->
-  <section class="demo-section" id="custom-templates" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Templates</h2>
+  <app-doc-section id="custom-templates" title="Custom Templates">
     <p class="demo-section__description">
       Project named <code>&lt;ng-template&gt;</code> references to replace the
       default star glyph: <code>#onicon</code> (filled), <code>#officon</code> (empty),
@@ -221,11 +211,10 @@
       filename="Custom templates" [code]="snippets.customTemplates"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Inline Styles -------------------------------------------- -->
-  <section class="demo-section" id="inline-styles" data-doc-anchor>
-    <h2 class="demo-section__title">Inline Styles</h2>
+  <app-doc-section id="inline-styles" title="Inline Styles">
     <p class="demo-section__description">
       Use <code>[iconOnStyle]</code> and <code>[iconOffStyle]</code> to apply arbitrary
       CSS to each icon element. Accepts a <code>Record&lt;string, string&gt;</code>.
@@ -244,11 +233,10 @@
       filename="Inline styles" [code]="snippets.inlineStyles"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
-  <section class="demo-section" id="reactive-forms" data-doc-anchor>
-    <h2 class="demo-section__title">Reactive Forms</h2>
+  <app-doc-section id="reactive-forms" title="Reactive Forms">
     <p class="demo-section__description">
       Use <code>formControlName</code> or <code>[formControl]</code> for reactive form
       integration. <code>FormControl.disable()</code> propagates through
@@ -272,10 +260,10 @@
       filename="Reactive forms" [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
@@ -287,16 +275,15 @@
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -393,7 +380,7 @@
       </li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
   <app-doc-quality-badge [audit]="qualityAudit" />

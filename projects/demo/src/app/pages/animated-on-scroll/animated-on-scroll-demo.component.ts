@@ -10,6 +10,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { staggerHtml, staggerTs } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the AnimateOnScroll directive.
  * Shows all built-in SCSS preset classes and demonstrates repeat mode,
@@ -25,6 +26,7 @@ import { staggerHtml, staggerTs } from './snippets.generated';
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './animated-on-scroll-demo.component.html',
   styleUrl: './animated-on-scroll-demo.component.scss',

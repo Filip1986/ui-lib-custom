@@ -8,19 +8,17 @@
   />
 
   <!-- ── Basic Tree ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic-tree" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Tree</h2>
+  <app-doc-section id="basic-tree" title="Basic Tree">
     <p class="demo-section__description">
       A read-only tree with no selection. Click the chevron to expand or collapse subtrees.
     </p>
     <div class="demo-card">
       <ui-lib-tree [value]="fileSystemNodes" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Single Selection ────────────────────────────────────────────────── -->
-  <section class="demo-section" id="single-selection" data-doc-anchor>
-    <h2 class="demo-section__title">Single Selection</h2>
+  <app-doc-section id="single-selection" title="Single Selection">
     <p class="demo-section__description">
       Click a node to select it. Click the same node again to deselect.
     </p>
@@ -34,11 +32,10 @@
         Selected: <strong>{{ getSelectionLabel(singleSelection(), 'single') }}</strong>
       </p>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Multiple Selection ──────────────────────────────────────────────── -->
-  <section class="demo-section" id="multiple-selection" data-doc-anchor>
-    <h2 class="demo-section__title">Multiple Selection</h2>
+  <app-doc-section id="multiple-selection" title="Multiple Selection">
     <p class="demo-section__description">
       Click any number of nodes to build up a selection. Click again to deselect.
     </p>
@@ -52,11 +49,10 @@
         Selected: <strong>{{ getSelectionLabel(multipleSelection(), 'multiple') }}</strong>
       </p>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Checkbox Selection ──────────────────────────────────────────────── -->
-  <section class="demo-section" id="checkbox-selection" data-doc-anchor>
-    <h2 class="demo-section__title">Checkbox Selection</h2>
+  <app-doc-section id="checkbox-selection" title="Checkbox Selection">
     <p class="demo-section__description">
       Checking a parent cascades to all its descendants. A dash indicates a partially
       selected parent.
@@ -71,11 +67,10 @@
         Selected: <strong>{{ getSelectionLabel(checkboxSelection(), 'multiple') }}</strong>
       </p>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Filter ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="filter" data-doc-anchor>
-    <h2 class="demo-section__title">Filter</h2>
+  <app-doc-section id="filter" title="Filter">
     <p class="demo-section__description">
       Type into the search box to filter the tree. Lenient mode (default) shows
       matching nodes and all their ancestors.
@@ -87,11 +82,10 @@
         filterPlaceholder="Search countries and cities..."
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Custom Template ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="custom-node-template" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Node Template</h2>
+  <app-doc-section id="custom-node-template" title="Custom Node Template">
     <p class="demo-section__description">
       Use <code>ng-template uiTreeNode</code> with an optional <code>uiTreeNodeType</code>
       to override rendering per node type. Unmatched nodes fall back to the default template.
@@ -112,11 +106,10 @@
         </ng-template>
       </ui-lib-tree>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -134,11 +127,10 @@
         <ui-lib-tree [value]="variantNodes" size="lg" selectionMode="single" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       The three design variants — <code>material</code>, <code>bootstrap</code>,
       and <code>minimal</code> — adapt to the active theme.
@@ -172,24 +164,22 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-tree</code>. Import from
       <code>ui-lib-custom/tree</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

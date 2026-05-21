@@ -9,7 +9,7 @@
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
       <!-- ── a. Basic ─────────────────────────────────────────────────────── -->
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">
           A minimal toggle bound with <code>[(checked)]</code>. The default labels are
@@ -22,10 +22,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── b. Custom Labels ──────────────────────────────────────────────── -->
-      <section id="labels" data-doc-anchor class="example-section">
+      <app-doc-section id="labels" title="Custom Labels">
         <h3>b. Custom Labels</h3>
         <p class="section-text">
           Use <code>onLabel</code> and <code>offLabel</code> to display context-specific text for
@@ -53,10 +53,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="labelsHtml" [typescript]="labelsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── c. Icons ──────────────────────────────────────────────────────── -->
-      <section id="icons" data-doc-anchor class="example-section">
+      <app-doc-section id="icons" title="Icons">
         <h3>c. Icons</h3>
         <p class="section-text">
           Provide <code>onIcon</code> and <code>offIcon</code> to show a different icon for each
@@ -90,10 +90,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── d. Sizes ──────────────────────────────────────────────────────── -->
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>d. Sizes</h3>
         <p class="section-text">
           Three size tokens are available: <code>sm</code>, <code>md</code> (default), and
@@ -122,10 +122,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── e. Variants ───────────────────────────────────────────────────── -->
-      <section id="variants" data-doc-anchor class="example-section">
+      <app-doc-section id="variants" title="Variants">
         <h3>e. Variants</h3>
         <p class="section-text">
           All three design variants are supported: <code>material</code> (default rounded, subtle
@@ -167,10 +167,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── f. Allow Empty ────────────────────────────────────────────────── -->
-      <section id="allow-empty" data-doc-anchor class="example-section">
+      <app-doc-section id="allow-empty" title="Allow Empty">
         <h3>f. Allow Empty</h3>
         <p class="section-text">
           When <code>[allowEmpty]="false"</code> the button cannot be unchecked once activated.
@@ -193,10 +193,10 @@
           [html]="allowEmptyHtml"
           [typescript]="allowEmptyTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── g. Disabled ───────────────────────────────────────────────────── -->
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>g. Disabled</h3>
         <p class="section-text">
           Set <code>[disabled]="true"</code> to prevent interaction. Both off and on states are
@@ -209,10 +209,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── h. Forms ──────────────────────────────────────────────────────── -->
-      <section id="forms" data-doc-anchor class="example-section">
+      <app-doc-section id="forms" title="Forms Integration">
         <h3>h. Forms Integration</h3>
         <p class="section-text">
           ToggleButton implements <code>ControlValueAccessor</code> and works with both
@@ -253,10 +253,10 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── i. Events ─────────────────────────────────────────────────────── -->
-      <section id="events" data-doc-anchor class="example-section">
+      <app-doc-section id="events" title="Events">
         <h3>i. Events</h3>
         <p class="section-text">
           The <code>(change)</code>, <code>(focus)</code>, and <code>(blur)</code> outputs expose
@@ -277,26 +277,24 @@
             }
           </div>
         </ui-lib-panel>
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-toggle-button</code>. Import from
       <code>ui-lib-custom/toggle-button</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

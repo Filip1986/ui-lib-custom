@@ -8,8 +8,7 @@
   />
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">Three visual styles: <code>material</code> (default), <code>bootstrap</code>, and <code>minimal</code>.</p>
 
     <div class="paginator-demo__group">
@@ -44,11 +43,10 @@
         (pageChange)="onPageChange($event)"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">Control button dimensions with the <code>size</code> input: <code>sm</code>, <code>md</code> (default), <code>lg</code>.</p>
 
     <div class="paginator-demo__group">
@@ -65,11 +63,10 @@
       <label class="paginator-demo__label">Large (lg)</label>
       <ui-lib-paginator [totalRecords]="60" [rows]="10" size="lg" variant="material" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Current page report ────────────────────────────────────────────────── -->
-  <section class="demo-section" id="current-page-report" data-doc-anchor>
-    <h2 class="demo-section__title">Current Page Report</h2>
+  <app-doc-section id="current-page-report" title="Current Page Report">
     <p class="demo-section__description">
       Enable <code>showCurrentPageReport</code> to display a summary.
       Placeholders: <code>&#123;currentPage&#125;</code>, <code>&#123;totalPages&#125;</code>,
@@ -88,11 +85,10 @@
         (pageChange)="onPageChange($event)"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Rows per page ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="rows-per-page" data-doc-anchor>
-    <h2 class="demo-section__title">Rows Per Page</h2>
+  <app-doc-section id="rows-per-page" title="Rows Per Page">
     <p class="demo-section__description">Pass an array of numbers to <code>rowsPerPageOptions</code> to show a dropdown.</p>
 
     <div class="paginator-demo__group">
@@ -107,11 +103,10 @@
         (pageChange)="onLargePageChange($event)"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Jump to page ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="jump-to-page" data-doc-anchor>
-    <h2 class="demo-section__title">Jump To Page</h2>
+  <app-doc-section id="jump-to-page" title="Jump To Page">
     <p class="demo-section__description">Enable <code>showJumpToPageInput</code> to show a numeric input. Type a page number and press <kbd>Enter</kbd>.</p>
 
     <div class="paginator-demo__group">
@@ -122,11 +117,10 @@
         [showJumpToPageInput]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── No first/last icons ────────────────────────────────────────────────── -->
-  <section class="demo-section" id="without-first-last" data-doc-anchor>
-    <h2 class="demo-section__title">Without First / Last Icons</h2>
+  <app-doc-section id="without-first-last" title="Without First / Last Icons">
 
     <div class="paginator-demo__group">
       <ui-lib-paginator
@@ -136,11 +130,10 @@
         variant="material"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Page links off ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="arrows-only" data-doc-anchor>
-    <h2 class="demo-section__title">Page Links Off (arrows only)</h2>
+  <app-doc-section id="arrows-only" title="Page Links Off (arrows only)">
 
     <div class="paginator-demo__group">
       <ui-lib-paginator
@@ -151,28 +144,26 @@
         variant="material"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Event output ───────────────────────────────────────────────────────── -->
   @if (lastEvent()) {
-    <section class="demo-section" id="events" data-doc-anchor>
-      <h2 class="demo-section__title">Events</h2>
+    <app-doc-section id="events" title="Events">
       <div class="paginator-demo__event">
         <strong>Last event:</strong> <code>{{ lastEvent() }}</code>
       </div>
-    </section>
+    </app-doc-section>
   }
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-paginator</code>. Import from
       <code>ui-lib-custom/paginator</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

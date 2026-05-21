@@ -17,8 +17,7 @@
   </div>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Toggle <code>blocked</code> to overlay a semi-transparent mask on the wrapped content.
       The content remains in the DOM but receives <code>inert</code>, preventing pointer
@@ -41,11 +40,10 @@
       filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Custom Mask ---------------------------------------------- -->
-  <section class="demo-section" id="custom-mask" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Mask</h2>
+  <app-doc-section id="custom-mask" title="Custom Mask">
     <p class="demo-section__description">
       Project content into the mask overlay using the <code>[blockTemplate]</code> attribute
       selector. Ideal for spinners, progress indicators, or status messages. The mask element
@@ -73,11 +71,10 @@
       filename="Custom mask" [code]="snippets.customMask"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three visual variants adjust the mask opacity and backdrop treatment to match your design
       system. When <code>variant</code> is <code>null</code> (default), it inherits from
@@ -124,10 +121,10 @@
       filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
@@ -144,10 +141,10 @@
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -227,7 +224,7 @@
       </li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
   <app-doc-quality-badge [audit]="qualityAudit" />

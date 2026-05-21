@@ -30,8 +30,7 @@
   </div>
 
   <!-- Section 1: Image avatars -->
-  <section class="demo-section" id="image" data-doc-anchor>
-    <h2 class="demo-section__title">Image</h2>
+  <app-doc-section id="image" title="Image">
     <p class="demo-section__description">
       Provide an <code>image</code> URL to display a photo. Use <code>imageAlt</code>
       to set the accessible description.
@@ -59,11 +58,10 @@
       size="sm"
       [code]="snippetImage"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Label avatars -->
-  <section class="demo-section" id="label" data-doc-anchor>
-    <h2 class="demo-section__title">Label (Initials)</h2>
+  <app-doc-section id="label" title="Label (Initials)">
     <p class="demo-section__description">
       When no image is available, set <code>label</code> to display initials or a short text.
     </p>
@@ -78,11 +76,10 @@
       size="sm"
       [code]="snippetLabel"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Icon avatars -->
-  <section class="demo-section" id="icon" data-doc-anchor>
-    <h2 class="demo-section__title">Icon</h2>
+  <app-doc-section id="icon" title="Icon">
     <p class="demo-section__description">
       Set <code>icon</code> to a PrimeIcons class string to render an icon inside the avatar.
     </p>
@@ -97,11 +94,10 @@
       size="sm"
       [code]="snippetIcon"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Shapes -->
-  <section class="demo-section" id="shapes" data-doc-anchor>
-    <h2 class="demo-section__title">Shapes</h2>
+  <app-doc-section id="shapes" title="Shapes">
     <p class="demo-section__description">
       Use <code>shape="circle"</code> (default) or <code>shape="square"</code>.
     </p>
@@ -137,11 +133,10 @@
       size="sm"
       [code]="snippetShape"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three visual variants match the global theme: <code>material</code>, <code>bootstrap</code>,
       and <code>minimal</code>.
@@ -160,11 +155,10 @@
       size="sm"
       [code]="snippetVariant"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: AvatarGroup -->
-  <section class="demo-section" id="avatar-group" data-doc-anchor>
-    <h2 class="demo-section__title">Avatar Group</h2>
+  <app-doc-section id="avatar-group" title="Avatar Group">
     <p class="demo-section__description">
       Wrap multiple avatars in <code>ui-lib-avatar-group</code> to stack them with overlap.
       Set <code>ariaLabel</code> on the group for accessibility.
@@ -192,11 +186,10 @@
       size="sm"
       [code]="snippetAvatarGroup"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 7: Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Combine options to preview the result live.</p>
     <div class="av-playground">
       <div class="av-playground__preview">
@@ -252,16 +245,15 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: API Reference -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <h3 class="av-subsection">Avatar Inputs</h3>
     <app-doc-api-reference [rows]="avatarInputRows" />
     <h3 class="av-subsection">AvatarGroup Inputs</h3>
     <app-doc-api-reference [rows]="avatarGroupInputRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

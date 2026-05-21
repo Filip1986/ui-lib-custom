@@ -9,7 +9,7 @@
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
       <!-- Basic -->
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">A simple labeled textarea bound with <code>ngModel</code>.</p>
         <ui-lib-panel variant="minimal">
@@ -25,10 +25,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Auto Resize -->
-      <section id="auto-resize" data-doc-anchor class="example-section">
+      <app-doc-section id="auto-resize" title="Auto Resize">
         <h3>b. Auto Resize</h3>
         <p class="section-text">
           When <code>autoResize</code> is true the textarea grows in height automatically to fit its
@@ -48,10 +48,10 @@
           [html]="autoResizeHtml"
           [typescript]="autoResizeTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- Counter -->
-      <section id="counter" data-doc-anchor class="example-section">
+      <app-doc-section id="counter" title="Counter">
         <h3>c. Counter</h3>
         <p class="section-text">Display a live character count below the textarea.</p>
         <ui-lib-panel variant="minimal">
@@ -64,10 +64,10 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="counterHtml" [typescript]="counterTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Max Length -->
-      <section id="max-length" data-doc-anchor class="example-section">
+      <app-doc-section id="max-length" title="Max Length">
         <h3>d. Max Length</h3>
         <p class="section-text">
           Combine <code>maxLength</code> with <code>showCounter</code> to display a count / limit
@@ -84,10 +84,10 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="maxLengthHtml" [typescript]="maxLengthTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Sizes -->
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>e. Sizes</h3>
         <p class="section-text">Three size tokens: sm, md, lg.</p>
         <ui-lib-panel variant="minimal">
@@ -116,10 +116,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Variants -->
-      <section id="variants" data-doc-anchor class="example-section">
+      <app-doc-section id="variants" title="Variants">
         <h3>f. Variants</h3>
         <p class="section-text">Three design variants: material, bootstrap, minimal.</p>
         <ui-lib-panel variant="minimal">
@@ -148,10 +148,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Disabled -->
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>g. Disabled</h3>
         <p class="section-text">The textarea is non-interactive and visually dimmed.</p>
         <ui-lib-panel variant="minimal">
@@ -163,10 +163,10 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Readonly -->
-      <section id="readonly" data-doc-anchor class="example-section">
+      <app-doc-section id="readonly" title="Read-only">
         <h3>h. Read-only</h3>
         <p class="section-text">Focusable but not editable — content can be selected and copied.</p>
         <ui-lib-panel variant="minimal">
@@ -178,10 +178,10 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="readonlyHtml" [typescript]="readonlyTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Invalid -->
-      <section id="invalid" data-doc-anchor class="example-section">
+      <app-doc-section id="invalid" title="Invalid">
         <h3>i. Invalid</h3>
         <p class="section-text">Pass an <code>error</code> string to show a validation message.</p>
         <ui-lib-panel variant="minimal">
@@ -194,10 +194,10 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTs" />
-      </section>
+      </app-doc-section>
 
       <!-- Reactive Forms -->
-      <section id="reactive-forms" data-doc-anchor class="example-section">
+      <app-doc-section id="reactive-forms" title="Reactive Forms">
         <h3>j. Reactive Forms</h3>
         <p class="section-text">
           Full integration with Angular reactive forms including validation state and error display.
@@ -226,20 +226,19 @@
           }
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-textarea</code>. Import from
       <code>ui-lib-custom/textarea</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

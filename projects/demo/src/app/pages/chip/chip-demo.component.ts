@@ -6,6 +6,7 @@ import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
@@ -16,6 +17,8 @@ import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '../../shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '../../shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for the Chip component.
@@ -29,11 +32,13 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     Button,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
+    DocSectionComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
@@ -368,6 +373,67 @@ export class MyComponent {}`,
       key: 'Space / Enter',
       target: 'Remove button',
       action: 'Activates the remove button (native button behaviour).',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      attribute: 'role',
+      element: 'Host',
+      value: 'option | group',
+      notes:
+        '<code>option</code> for non-removable chips; <code>group</code> for removable chips to allow a nested interactive button.',
+    },
+    {
+      attribute: 'aria-label',
+      element: 'Host',
+      value: 'label value',
+      notes:
+        'Set to the <code>label</code> input value. Omitted when <code>label</code> is <code>null</code>.',
+    },
+    {
+      attribute: 'aria-selected',
+      element: 'Host',
+      value: '"true" / "false"',
+      notes: 'Only present when <code>[selectable]="true"</code>.',
+    },
+    {
+      attribute: 'tabindex',
+      element: 'Host',
+      value: '"0"',
+      notes: 'Only present when <code>[selectable]="true"</code>.',
+    },
+    {
+      attribute: 'id',
+      element: 'Host',
+      value: 'ui-lib-chip-{n}',
+      notes: 'Auto-generated. Unique per instance; stable for the component lifetime.',
+    },
+    {
+      attribute: 'aria-label',
+      element: 'Remove button',
+      value: '"Remove {label}"',
+      notes:
+        'Auto-generated from the <code>label</code> input; provides an accessible name for the close action.',
+    },
+    {
+      attribute: 'aria-hidden',
+      element: 'Leading icon',
+      value: '"true"',
+      notes: 'Decorative icon hidden from screen readers.',
+    },
+    {
+      attribute: 'aria-hidden',
+      element: 'Remove icon',
+      value: '"true"',
+      notes: 'Decorative icon hidden from screen readers.',
+    },
+    {
+      attribute: 'alt',
+      element: 'Image',
+      value: 'imageAlt value',
+      notes:
+        'Defaults to <code>"Chip"</code>. Provide a meaningful description for real user images.',
     },
   ];
 

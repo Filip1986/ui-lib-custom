@@ -47,8 +47,7 @@
   </app-doc-page-header>
 
   <!-- FADE IN -->
-  <section class="demo-section" id="fade-in" data-doc-anchor>
-    <h2 class="demo-section__title">Fade In</h2>
+  <app-doc-section id="fade-in" title="Fade In">
     <p class="demo-section__description">
       Elements fade from fully transparent to fully opaque as they enter the viewport. Use
       <code>class="uilib-aos-fade-in"</code> with <code>enterClass="uilib-aos-active"</code>.
@@ -96,11 +95,10 @@
         <p class="aos-card__text">Signal-based inputs, explicit types, and zero-config defaults.</p>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- SLIDE UP -->
-  <section class="demo-section" id="slide-up" data-doc-anchor>
-    <h2 class="demo-section__title">Slide Up</h2>
+  <app-doc-section id="slide-up" title="Slide Up">
     <p class="demo-section__description">
       Elements rise from slightly below their final position while fading in. Ideal for stacked
       content lists and feature grids.
@@ -144,11 +142,10 @@
         <p class="aos-card__text">Signal inputs update the observer options without recreating.</p>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- SLIDE DOWN -->
-  <section class="demo-section" id="slide-down" data-doc-anchor>
-    <h2 class="demo-section__title">Slide Down</h2>
+  <app-doc-section id="slide-down" title="Slide Down">
     <p class="demo-section__description">
       Elements drop from above their final position. Good for nav menus, banners, or header-adjacent
       content.
@@ -194,11 +191,10 @@
         <p class="aos-card__text">Built-in filtering for data tables, listboxes, and tree views.</p>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- SLIDE LEFT / RIGHT -->
-  <section class="demo-section" id="slide-left-right" data-doc-anchor>
-    <h2 class="demo-section__title">Slide Left &amp; Right</h2>
+  <app-doc-section id="slide-left-right" title="Slide Left &amp; Right">
     <p class="demo-section__description">
       Alternate direction for each row to create a dynamic timeline-style reveal. Left slides in
       from the left; right slides in from the right.
@@ -266,11 +262,10 @@
         <div class="aos-split-item__spacer"></div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ZOOM IN / ZOOM OUT -->
-  <section class="demo-section" id="zoom" data-doc-anchor>
-    <h2 class="demo-section__title">Zoom In &amp; Zoom Out</h2>
+  <app-doc-section id="zoom" title="Zoom In &amp; Zoom Out">
     <p class="demo-section__description">
       Elements scale from slightly smaller (zoom in) or slightly larger (zoom out) to their natural
       size while fading in.
@@ -306,11 +301,10 @@
         <p class="aos-zoom-card__text">Scales down from 115% to 100%</p>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- STAGGER -->
-  <section class="demo-section" id="stagger" data-doc-anchor>
-    <h2 class="demo-section__title">Stagger Effect</h2>
+  <app-doc-section id="stagger" title="Stagger Effect">
     <p class="demo-section__description">
       Override <code>--uilib-animate-on-scroll-delay</code> on each element with an increasing
       value. All elements share the same directive and preset &mdash; only the CSS variable changes.
@@ -385,11 +379,10 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- REPEAT MODE -->
-  <section class="demo-section" id="repeat-on-scroll" data-doc-anchor>
-    <h2 class="demo-section__title">Repeat on Scroll</h2>
+  <app-doc-section id="repeat-on-scroll" title="Repeat on Scroll">
     <p class="demo-section__description">
       Set <code>[once]="false"</code> to re-animate every time the element enters the viewport.
       Scroll these cards out of view and back again.
@@ -439,11 +432,10 @@
         <p class="aos-card__text">Animates every time it enters the viewport.</p>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API REFERENCE -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <p class="demo-section__description">
       Apply the directive with the <code>uiLibAnimateOnScroll</code>
       attribute selector. Import preset classes in your
@@ -548,7 +540,7 @@
         </tr>
       </tbody>
     </table>
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

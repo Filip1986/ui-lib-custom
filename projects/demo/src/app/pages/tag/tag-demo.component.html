@@ -11,8 +11,7 @@
   <!-- ══════════════════════════════════════════════════════════════════
        SEVERITY
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="severity" data-doc-anchor>
-    <h2 class="demo-section__title">Severity</h2>
+  <app-doc-section id="severity" title="Severity">
     <p class="demo-section__description">
       Use the <code>severity</code> input to communicate meaning through colour.
       Seven values are available: <code>primary</code>, <code>secondary</code>,
@@ -29,13 +28,12 @@
       filename="Severity" [code]="snippets.severity"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        SIZES
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -49,13 +47,12 @@
       filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        ROUNDED
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="rounded" data-doc-anchor>
-    <h2 class="demo-section__title">Rounded</h2>
+  <app-doc-section id="rounded" title="Rounded">
     <p class="demo-section__description">
       Set <code>[rounded]="true"</code> to apply fully rounded (pill) corners.
     </p>
@@ -69,13 +66,12 @@
       filename="Rounded" [code]="snippets.rounded"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        WITH ICONS
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="icons" data-doc-anchor>
-    <h2 class="demo-section__title">With Icons</h2>
+  <app-doc-section id="icons" title="With Icons">
     <p class="demo-section__description">
       Provide a PrimeIcons class via the <code>icon</code> input to render a leading icon.
       Icons are always marked <code>aria-hidden="true"</code> — they are decorative.
@@ -92,13 +88,12 @@
       filename="Icons" [code]="snippets.icons"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        DISMISSIBLE
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="dismissible" data-doc-anchor>
-    <h2 class="demo-section__title">Dismissible</h2>
+  <app-doc-section id="dismissible" title="Dismissible">
     <p class="demo-section__description">
       Set <code>[dismissible]="true"</code> to render a remove button.
       The button receives an auto-generated <code>aria-label</code> such as
@@ -115,13 +110,12 @@
       filename="Dismissible" [code]="snippets.dismissible"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        DESIGN VARIANTS
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code>. When <code>variant</code> is <code>null</code> (the default),
@@ -146,13 +140,12 @@
       filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        PLAYGROUND
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Customise the tag using the controls below.</p>
 
     <div class="demo-playground">
@@ -246,13 +239,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        API
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
@@ -263,25 +255,23 @@
       <h3 class="demo-section__subtitle">Outputs</h3>
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        CSS CUSTOM PROPERTIES
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
     <p class="demo-section__description">
       Override any of these on the host element or an ancestor to theme the tag without
       touching component internals.
     </p>
     <app-doc-css-vars-table [rows]="cssVarRows" />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        ACCESSIBILITY
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-    <h2 class="demo-section__title">Accessibility</h2>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -330,7 +320,7 @@
         or icon.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

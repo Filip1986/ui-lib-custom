@@ -7,8 +7,7 @@
   />
 
   <!-- ── Basic Usage ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
       Wrap any content in <code>&lt;ui-lib-scroll-panel&gt;</code> and constrain its height. The
       inner content scrolls vertically while the custom scrollbar is styled to match the active
@@ -28,11 +27,10 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code>. Each variant applies a distinct scrollbar style and border treatment.
@@ -56,11 +54,10 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Horizontal Scroll ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="horizontal" data-doc-anchor>
-    <h2 class="demo-section__title">Horizontal &amp; Both Axes</h2>
+  <app-doc-section id="horizontal" title="Horizontal &amp; Both Axes">
     <p class="demo-section__description">
       When the content is wider than the container, a horizontal scrollbar appears. Both axes are
       supported simultaneously.
@@ -83,11 +80,10 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Interactive Variant Switcher ─────────────────────────────────── -->
-  <section class="demo-section" id="interactive-variant-switcher" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Variant Switcher</h2>
+  <app-doc-section id="interactive-variant-switcher" title="Interactive Variant Switcher">
     <p class="demo-section__description">
       Switch between variants at runtime. The scrollbar styling updates immediately via CSS custom
       properties.
@@ -119,11 +115,10 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
-  <section class="demo-section" id="custom-css-properties" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Scrollbar via CSS Properties</h2>
+  <app-doc-section id="custom-css-properties" title="Custom Scrollbar via CSS Properties">
     <p class="demo-section__description">
       All scrollbar visuals are driven by CSS custom properties. Override them on the component or a
       parent to create a bespoke style without changing the variant.
@@ -143,18 +138,17 @@
         [code]="snippetCssProperties"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API Reference ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api-reference" title="API Reference">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiRows" [showDefault]="true" />
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

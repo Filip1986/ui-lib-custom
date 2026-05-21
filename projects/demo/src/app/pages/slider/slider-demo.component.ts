@@ -39,6 +39,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Slider component — linear track control for numeric values.
  */
@@ -58,6 +59,7 @@ import {
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',

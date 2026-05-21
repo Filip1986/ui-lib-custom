@@ -7,7 +7,7 @@
   />
 
   <div class="examples">
-    <section id="basic" class="example-section">
+    <app-doc-section id="basic" title="Basic">
       <h3>Basic</h3>
       <p>Simple modal dialog with header text and body content.</p>
       <ui-lib-panel variant="minimal">
@@ -25,9 +25,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="custom-header-footer" class="example-section">
+    <app-doc-section id="custom-header-footer" title="Custom Header & Footer">
       <h3>Custom Header & Footer</h3>
       <p>Projected header and footer content with custom actions.</p>
       <ui-lib-panel variant="minimal">
@@ -57,9 +57,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="position" class="example-section">
+    <app-doc-section id="position" title="Position">
       <h3>Position</h3>
       <p>Open dialogs from 9 predefined viewport positions.</p>
       <ui-lib-panel variant="minimal">
@@ -92,9 +92,9 @@
           }
         </div>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="maximizable" class="example-section">
+    <app-doc-section id="maximizable" title="Maximizable">
       <h3>Maximizable</h3>
       <p>Enable maximize/minimize action in the dialog header.</p>
       <ui-lib-panel variant="minimal">
@@ -117,9 +117,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="long-content" class="example-section">
+    <app-doc-section id="long-content" title="Long Content">
       <h3>Long Content</h3>
       <p>Demonstrates internal scrolling for long dialog body content.</p>
       <ui-lib-panel variant="minimal">
@@ -139,9 +139,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="without-modal" class="example-section">
+    <app-doc-section id="without-modal" title="Without Modal">
       <h3>Without Modal</h3>
       <p>Dialog without backdrop for non-blocking secondary interactions.</p>
       <ui-lib-panel variant="minimal">
@@ -159,9 +159,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="responsive" class="example-section">
+    <app-doc-section id="responsive" title="Responsive">
       <h3>Responsive</h3>
       <p>Uses breakpoints to adapt width based on viewport size.</p>
       <ui-lib-panel variant="minimal">
@@ -184,9 +184,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="draggable" class="example-section">
+    <app-doc-section id="draggable" title="Draggable">
       <h3>Draggable</h3>
       <p>Drag the dialog by its header area.</p>
       <ui-lib-panel variant="minimal">
@@ -209,9 +209,9 @@
           </div>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="headless" class="example-section">
+    <app-doc-section id="headless" title="Headless">
       <h3>Headless</h3>
       <p>Fully custom dialog chrome using the headless projection slot.</p>
       <ui-lib-panel variant="minimal">
@@ -224,12 +224,7 @@
         </ui-lib-button>
 
         <ui-lib-dialog [(visible)]="headlessVisible" [headless]="true" [modal]="true">
-          <section
-            uiLibDialogHeadless
-            class="headless-shell"
-            aria-labelledby="dialog-headless-title"
-            id="dialog-headless-content"
-          >
+          <app-doc-section id="dialog-headless-content" title="Dialog Headless Content">
             <header class="headless-shell__header">
               <h4 id="dialog-headless-title">Custom Design Review</h4>
               <ui-lib-button
@@ -260,12 +255,12 @@
                 >Confirm</ui-lib-button
               >
             </footer>
-          </section>
+          </app-doc-section>
         </ui-lib-dialog>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="variant-switcher" class="example-section">
+    <app-doc-section id="variant-switcher" title="Variant Switcher">
       <h3>Variant Switcher</h3>
       <p>
         Switch the active variant and compare Material, Bootstrap, and Minimal styles side by side.
@@ -386,25 +381,23 @@
           </div>
         </app-variant-comparison>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
   </div>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-dialog</code>. Import from
       <code>ui-lib-custom/dialog</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

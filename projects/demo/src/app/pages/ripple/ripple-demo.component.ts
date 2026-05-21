@@ -15,6 +15,7 @@ import { DocKeyboardNavComponent } from '../../shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '../../shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 /**
  * Demo page for the Ripple directive.
@@ -33,6 +34,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',

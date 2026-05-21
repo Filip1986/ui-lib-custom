@@ -8,13 +8,20 @@ import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the SyntaxHighlighter utility.
  */
 @Component({
   selector: 'app-syntax-highlighter-demo',
   standalone: true,
-  imports: [CodeSnippet, DocPageLayoutComponent, DocTocComponent, DocApiReferenceComponent],
+  imports: [
+    CodeSnippet,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+  ],
   templateUrl: './syntax-highlighter-demo.component.html',
   styleUrl: './syntax-highlighter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
