@@ -40,7 +40,7 @@ export class MyComponent {
   ]);
 
   onClose(event: { value: TabsValue | null; index: number }): void {
-    this.tabs.update(tabs => tabs.filter(t => t.value !== event.value));
+    this.tabs.update((tabs) => tabs.filter((t) => t.value !== event.value));
   }
 }`;
 

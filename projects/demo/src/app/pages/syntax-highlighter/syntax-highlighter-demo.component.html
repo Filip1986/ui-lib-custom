@@ -273,6 +273,18 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      Wrap highlighted output in <code>&lt;pre&gt;&lt;code&gt;</code> to give it proper
+      semantics. Add <code>tabindex="0"</code> on the <code>&lt;pre&gt;</code> when the block
+      may overflow so keyboard users can scroll it.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

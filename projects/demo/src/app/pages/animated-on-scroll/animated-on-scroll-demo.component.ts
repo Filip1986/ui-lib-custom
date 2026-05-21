@@ -11,6 +11,10 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { staggerHtml, staggerTs } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for the AnimateOnScroll directive.
  * Shows all built-in SCSS preset classes and demonstrates repeat mode,
@@ -27,6 +31,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './animated-on-scroll-demo.component.html',
   styleUrl: './animated-on-scroll-demo.component.scss',
@@ -70,9 +76,35 @@ export class AnimatedOnScrollDemoComponent {
     { id: 'stagger', label: 'Stagger Effect' },
     { id: 'repeat-on-scroll', label: 'Repeat on Scroll' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host element',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The directive adds and removes CSS classes only. It does not modify <code>role</code>, <code>aria-*</code>, or tab order.',
+    },
+    {
+      element: 'Host element (prefers-reduced-motion)',
+      attribute: '(animation skipped)',
+      value: '—',
+      notes:
+        'When the user has enabled <code>prefers-reduced-motion: reduce</code>, the directive skips animations and applies the enter class immediately so content is never hidden.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '(none)',
+      action:
+        'The directive is purely visual. It does not add any keyboard interaction — focus and navigation behaviour are determined by the host element.',
+    },
+  ];
 }

@@ -13,12 +13,13 @@ export const basicHtml = `<ui-lib-order-list [value]="products" [(selection)]="s
 
 export const basicTs = `import { Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-} from 'ui-lib-custom/order-list';
+import { OrderListComponent, OrderListItemDirective } from 'ui-lib-custom/order-list';
 
-interface Product { id: number; name: string; price: number; }
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
 
 @Component({
   standalone: true,
@@ -49,13 +50,13 @@ export const dragDropHtml = `<ui-lib-order-list
 
 export const dragDropTs = `import { Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-} from 'ui-lib-custom/order-list';
+import { OrderListComponent, OrderListItemDirective } from 'ui-lib-custom/order-list';
 import type { OrderListReorderEvent } from 'ui-lib-custom/order-list';
 
-interface Product { id: number; name: string; }
+interface Product {
+  id: number;
+  name: string;
+}
 
 @Component({
   standalone: true,
@@ -85,12 +86,12 @@ export const filterHtml = `<ui-lib-order-list
 
 export const filterTs = `import { Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import {
-  OrderListComponent,
-  OrderListItemDirective,
-} from 'ui-lib-custom/order-list';
+import { OrderListComponent, OrderListItemDirective } from 'ui-lib-custom/order-list';
 
-interface Product { id: number; name: string; }
+interface Product {
+  id: number;
+  name: string;
+}
 
 @Component({
   standalone: true,

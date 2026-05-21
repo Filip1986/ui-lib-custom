@@ -15,6 +15,10 @@ import { thresholdHtml, thresholdTs, parentTargetHtml, parentTargetTs } from './
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the ScrollTop component.
  */
@@ -32,6 +36,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './scroll-top-demo.component.html',
   styleUrl: './scroll-top-demo.component.scss',
@@ -73,8 +79,9 @@ export class ScrollTopDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'custom-icon', label: 'Custom Icon' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -139,6 +146,54 @@ export class ScrollTopDemoComponent {
       description: 'Programmatically triggers the scroll-to-top action.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action: 'Skips the button while it is hidden; moves focus to the button when it is visible.',
+    },
+    { key: 'Enter', action: 'Activates the button and scrolls to the top.' },
+    { key: 'Space', action: 'Activates the button and scrolls to the top.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Removes the control from the accessibility tree when hidden.',
+    },
+    {
+      element: 'button',
+      attribute: 'type="button"',
+      value: '—',
+      notes: 'Prevents accidental form submission.',
+    },
+    {
+      element: 'button',
+      attribute: 'aria-label',
+      value: 'buttonAriaLabel input (default: "Scroll to top")',
+      notes: 'Provides the accessible name for the icon-only button.',
+    },
+    {
+      element: 'button',
+      attribute: 'tabindex',
+      value: '"-1" when hidden',
+      notes: 'Removes the button from the tab order while the control is not visible.',
+    },
+    {
+      element: 'button',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Applied when hidden, keeping assistive technology aligned with the visual state.',
+    },
+    {
+      element: 'Icon span',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Marks the icon as decorative.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-scroll-top-size', description: 'Size.' },
     { variable: '--uilib-scroll-top-bg', description: 'Background colour.' },

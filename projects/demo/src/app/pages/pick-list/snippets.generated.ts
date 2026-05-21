@@ -14,7 +14,10 @@ export const basicTs = `import { Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { PickListComponent } from 'ui-lib-custom/pick-list';
 
-interface Country { code: string; name: string; }
+interface Country {
+  code: string;
+  name: string;
+}
 
 @Component({
   standalone: true,
@@ -43,12 +46,12 @@ export const dragDropHtml = `<ui-lib-pick-list
 export const dragDropTs = `import { Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { PickListComponent } from 'ui-lib-custom/pick-list';
-import type {
-  PickListMoveToTargetEvent,
-  PickListMoveToSourceEvent,
-} from 'ui-lib-custom/pick-list';
+import type { PickListMoveToTargetEvent, PickListMoveToSourceEvent } from 'ui-lib-custom/pick-list';
 
-interface Country { code: string; name: string; }
+interface Country {
+  code: string;
+  name: string;
+}
 
 @Component({
   standalone: true,
@@ -84,7 +87,10 @@ export const filterTs = `import { Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { PickListComponent } from 'ui-lib-custom/pick-list';
 
-interface Country { code: string; name: string; }
+interface Country {
+  code: string;
+  name: string;
+}
 
 @Component({
   standalone: true,
@@ -128,7 +134,11 @@ import {
   PickListEmptyDirective,
 } from 'ui-lib-custom/pick-list';
 
-interface Country { code: string; name: string; region: string; }
+interface Country {
+  code: string;
+  name: string;
+  region: string;
+}
 
 @Component({
   standalone: true,

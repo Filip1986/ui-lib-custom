@@ -15,6 +15,10 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 interface DemoItem {
   id: number;
@@ -83,6 +87,8 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
@@ -121,6 +127,7 @@ export class ScrollerDemoComponent {
     { id: 'disabled-mode', label: 'Disabled Mode' },
     { id: 'large-items', label: 'Large Items (5 000 items)' },
     { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
@@ -271,5 +278,36 @@ export class MyComponent {
       default: 'false',
       description: 'Shows a loading overlay during lazy loads.',
     },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Scroll viewport',
+      attribute: 'role="list" / role="listbox"',
+      value: '—',
+      notes:
+        'The rendered items list should be wrapped in an appropriate landmark role by the consuming template (e.g. <code>role="list"</code>). The scroller itself is a neutral container.',
+    },
+    {
+      element: 'List items',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes:
+        'Apply <code>role="listitem"</code> to individual item templates when using a list-style scroller.',
+    },
+    {
+      element: 'Loading overlay',
+      attribute: 'aria-busy="true"',
+      value: '—',
+      notes:
+        'Set <code>[showLoader]="true"</code> during lazy loads to indicate that content is loading.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Arrow keys', action: 'Scroll the virtual list when the viewport has focus.' },
+    { key: 'Page Up / Page Down', action: 'Scroll the viewport by one visible page.' },
+    { key: 'Home / End', action: 'Scroll to the first or last item in the list.' },
+    { key: 'Tab', action: 'Moves focus to interactive elements inside the visible items.' },
   ];
 }

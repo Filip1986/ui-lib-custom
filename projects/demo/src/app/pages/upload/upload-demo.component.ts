@@ -26,6 +26,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface UploadLogEntry {
   timestamp: string;
   message: string;
@@ -50,6 +54,8 @@ interface UploadLogEntry {
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './upload-demo.component.html',
   styleUrl: './upload-demo.component.scss',
@@ -71,8 +77,9 @@ export class UploadDemoComponent {
     { id: 'custom-file-template', label: 'Custom File Template' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'event-log', label: 'Event Log' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -229,6 +236,104 @@ export class UploadDemoComponent {
     },
     competitiveParity: 'pending',
   };
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus through Choose, Upload, Cancel, and per-file Remove buttons in DOM order.',
+    },
+    { key: 'Enter / Space', suffix: 'on Choose button', action: 'Opens the OS file picker.' },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Upload button',
+      action: 'Emits <code>uploadHandler</code> (requires <code>[customUpload]="true"</code>).',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Cancel button',
+      action: 'Clears the file queue and emits <code>uploadClear</code>.',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Remove button',
+      action: 'Removes that file from the queue and emits <code>fileRemove</code>.',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Dismiss button',
+      action: 'Dismisses the validation message panel.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Toolbar div',
+      attribute: 'role="toolbar"',
+      value: '—',
+      notes: 'Groups the action buttons.',
+    },
+    {
+      element: 'Toolbar div',
+      attribute: 'aria-label',
+      value: '"Upload actions"',
+      notes: 'Labels the toolbar for screen readers.',
+    },
+    {
+      element: 'Choose button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'When file limit is reached or <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Upload button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'When queue is empty or <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Cancel button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'When queue is empty or <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Drop zone div',
+      attribute: 'role="region"',
+      value: '—',
+      notes: 'Landmark for the file drop and content area.',
+    },
+    {
+      element: 'Drop zone div',
+      attribute: 'aria-label',
+      value: '"File upload area"',
+      notes: 'Labels the region for screen readers.',
+    },
+    {
+      element: 'Drag-status div',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Announces drag-enter/leave to screen readers.',
+    },
+    {
+      element: 'File list ul',
+      attribute: 'aria-label',
+      value: '"Files to upload"',
+      notes: 'Labels the file queue.',
+    },
+    {
+      element: 'Remove button',
+      attribute: 'aria-label',
+      value: '"Remove &lt;filename&gt;"',
+      notes: 'e.g. <code>"Remove report.pdf"</code> — conveys which file is being removed.',
+    },
+    {
+      element: 'Validation div',
+      attribute: 'role="alert"',
+      value: '—',
+      notes: 'Immediately announces validation errors to assistive technology.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-upload-border-color', description: 'Border colour.' },
     { variable: '--uilib-upload-border', description: 'Border shorthand.' },

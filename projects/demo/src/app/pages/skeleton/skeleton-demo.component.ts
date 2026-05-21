@@ -14,6 +14,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Skeleton component.
  */
@@ -30,6 +34,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './skeleton-demo.component.html',
   styleUrl: './skeleton-demo.component.scss',
@@ -67,8 +73,9 @@ export class SkeletonDemoComponent {
     { id: 'animation', label: 'Animation' },
     { id: 'custom-sizes', label: 'Custom Sizes' },
     { id: 'custom-border-radius', label: 'Custom Border Radius' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public readonly apiRows: readonly ApiPropRow[] = [
@@ -132,6 +139,72 @@ export class SkeletonDemoComponent {
   public toggleLoaded(): void {
     this.isLoaded.set(!this.isLoaded());
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      suffix: 'while loading',
+      action: 'Skeleton host is not focusable; projected content is inert while loading.',
+    },
+    {
+      key: 'Tab',
+      suffix: 'after loading',
+      action:
+        'Focus moves to the first interactive element inside the projected content, if one exists.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host (loading)',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Announces an active loading region.',
+    },
+    {
+      element: 'Host (loading)',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Politely announces loading state to screen readers.',
+    },
+    {
+      element: 'Host (loading)',
+      attribute: 'aria-busy="true"',
+      value: '—',
+      notes: 'Signals to assistive technology that the region is loading.',
+    },
+    {
+      element: 'Host (loading)',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Loading content")',
+      notes: 'Provides a descriptive loading announcement.',
+    },
+    {
+      element: 'Host (loaded)',
+      attribute: 'aria-busy="false"',
+      value: '—',
+      notes: 'Clears loading semantics once content is ready.',
+    },
+    {
+      element: 'Placeholder block',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative placeholder is hidden from the accessibility tree.',
+    },
+    {
+      element: 'Shimmer animation',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative shimmer is hidden from the accessibility tree.',
+    },
+    {
+      element: 'Projected content (loading)',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Prevents content from being announced before it is ready. Also set <code>inert</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-skeleton-bg', description: 'Background colour.' },
     { variable: '--uilib-skeleton-shimmer-color', description: 'Shimmer text colour.' },

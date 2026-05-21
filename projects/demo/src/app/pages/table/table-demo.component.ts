@@ -23,6 +23,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface Product {
   id: number;
   name: string;
@@ -54,6 +58,8 @@ interface Product {
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -88,6 +94,7 @@ export class TableDemoComponent {
     { id: 'interactive-demo', label: 'Interactive Demo' },
     { id: 'all-variants', label: 'All Variants' },
     { id: 'scrollable-table', label: 'Scrollable Table' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
@@ -341,6 +348,59 @@ export class TableDemoComponent {
   public stars(rating: number): string {
     return '*'.repeat(rating) + '-'.repeat(5 - rating);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Move focus between interactive elements (sort headers, checkboxes, expand buttons).',
+    },
+    {
+      key: 'Enter / Space',
+      target: 'sortable column header',
+      action: 'Toggle sort order (ascending → descending → none).',
+    },
+    { key: 'Enter / Space', target: 'checkbox cell', action: 'Toggle row selection.' },
+    { key: 'Enter / Space', target: 'expand button', action: 'Toggle row expansion.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Table',
+      attribute: 'role="grid"',
+      value: '—',
+      notes: 'Announced as an interactive grid to assistive technologies.',
+    },
+    {
+      element: 'Column header',
+      attribute: 'aria-sort',
+      value: '"ascending" | "descending" | "none"',
+      notes: 'Reflects the current sort direction on sortable columns.',
+    },
+    {
+      element: 'Row',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Set when selectionMode is active.',
+    },
+    {
+      element: 'Checkbox cell',
+      attribute: 'role="checkbox"',
+      value: '—',
+      notes: 'Checkbox selection cells announce checked state.',
+    },
+    {
+      element: 'Expand button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the expansion row is open.',
+    },
+    {
+      element: 'Empty state',
+      attribute: 'role="row"',
+      value: '—',
+      notes: 'Empty state row is still a valid grid row for screen readers.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-table-border-radius', description: 'Border radius.' },
     { variable: '--uilib-table-border-width', description: 'Border width.' },

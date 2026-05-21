@@ -23,7 +23,9 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 })
 export class MyComponent {
   public cityCode: string | null = null;
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 }`;
 
 export const clearHtml = `<ui-lib-cascade-select
@@ -47,7 +49,9 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 })
 export class MyComponent {
   public clearableCode: string | null = 'SYD';
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 }`;
 
 export const clippingHtml = `<div class="clipping-card">
@@ -73,7 +77,9 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 })
 export class MyComponent {
   public clippingCode: string | null = null;
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 }`;
 
 export const filledHtml = `<ui-lib-cascade-select [filled]="true" />`;
@@ -126,7 +132,9 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 })
 export class MyComponent {
   public templateDrivenCode: string | null = null;
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 }`;
 
 export const loadingHtml = `<ui-lib-cascade-select
@@ -151,7 +159,9 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 export class MyComponent {
   public loadingCode: string | null = null;
   public loading: boolean = true;
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 }`;
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm">
@@ -184,7 +194,9 @@ export class MyComponent {
     return this.reactiveForm.controls['city'] as FormControl<string | null>;
   }
 
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 }`;
 
 export const sizesHtml = `<ui-lib-cascade-select size="sm" />
@@ -239,7 +251,9 @@ import { UiLibCascadeSelect, CascadeSelectOptionDirective } from 'ui-lib-custom/
 })
 export class MyComponent {
   public templatedCode: string | null = null;
-  public countries = [/* your country data */];
+  public countries = [
+    /* your country data */
+  ];
 
   public resolveNodeLabel(option: unknown): string {
     const node = option as { cname?: string; name?: string };

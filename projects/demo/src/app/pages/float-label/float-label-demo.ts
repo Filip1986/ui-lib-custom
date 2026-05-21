@@ -38,6 +38,10 @@ import {
   reactiveTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 interface DemoOption {
   label: string;
   value: string;
@@ -64,8 +68,9 @@ interface DemoOption {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
-
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',
@@ -116,6 +121,7 @@ export class FloatLabelDemoComponent {
     { id: 'with-textarea', label: 'With Textarea' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
@@ -200,5 +206,33 @@ export class FloatLabelDemoComponent {
       default: "'over'",
       description: 'Controls the label animation style.',
     },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Label element',
+      attribute: 'for',
+      value: '—',
+      notes:
+        'The <code>&lt;label&gt;</code> is always present in the DOM (only its CSS position changes), and it is associated with the input via <code>for</code>/<code>id</code>. Screen readers read it correctly at all times.',
+    },
+    {
+      element: 'Label element',
+      attribute: '(no aria-hidden)',
+      value: '—',
+      notes:
+        'The label is never hidden from assistive technologies — the float animation is purely CSS.',
+    },
+    {
+      element: 'Input (invalid)',
+      attribute: 'aria-invalid="true"',
+      value: '—',
+      notes: 'Applied by the wrapped input component when the field is in an invalid state.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus into the wrapped input.' },
+    { key: 'Shift + Tab', action: 'Moves focus away from the wrapped input.' },
   ];
 }

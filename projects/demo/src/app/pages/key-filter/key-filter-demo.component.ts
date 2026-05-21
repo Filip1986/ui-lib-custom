@@ -38,6 +38,10 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for the KeyFilter directive, showing all built-in presets,
  * custom RegExp usage, and the bypass toggle.
@@ -57,6 +61,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './key-filter-demo.component.html',
   styleUrl: './key-filter-demo.component.scss',
@@ -105,6 +111,7 @@ export class KeyFilterDemoComponent {
     { id: 'email', label: 'Email' },
     { id: 'custom', label: 'Custom RegExp' },
     { id: 'bypass', label: 'Bypass' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   /** Custom vowel-only filter for the RegExp demo. */
@@ -149,6 +156,40 @@ export class KeyFilterDemoComponent {
       type: 'string | null',
       default: 'null',
       description: 'Screen-reader hint text.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host input',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The directive intercepts <code>keydown</code> events and calls <code>preventDefault()</code> on disallowed keys. It does not modify <code>role</code>, <code>aria-*</code>, or other attributes.',
+    },
+    {
+      element: 'Host input',
+      attribute: 'aria-describedby',
+      value: '—',
+      notes:
+        'When <code>[hintText]</code> is provided, a visually-hidden hint element is rendered and linked via <code>aria-describedby</code> so screen readers announce the allowed character set.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Allowed key', action: 'The character is inserted into the input normally.' },
+    {
+      key: 'Disallowed key',
+      action: 'The <code>keydown</code> event is prevented; nothing is inserted.',
+    },
+    {
+      key: 'Ctrl / Meta + key',
+      action:
+        'Modifier combinations (copy, paste, undo, etc.) are always allowed regardless of the filter pattern.',
+    },
+    {
+      key: 'Backspace / Delete / Arrow keys / Tab',
+      action: 'Navigation and editing keys are always allowed so users are never trapped.',
     },
   ];
 }

@@ -23,6 +23,10 @@ import { ConfirmPopup } from 'ui-lib-custom/confirm-popup';
 export class MyComponent {
   readonly visible = signal(false);
 
-  onAccepted(): void { /* handle accept */ }
-  onRejected(): void { /* handle reject */ }
+  onAccepted(): void {
+    /* handle accept */
+  }
+  onRejected(): void {
+    /* handle reject */
+  }
 }`;

@@ -67,6 +67,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 /**
@@ -101,6 +105,8 @@ type DataViewSortField = 'name' | 'price' | 'rating';
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './data-view-demo.component.html',
   styleUrl: './data-view-demo.component.scss',
@@ -181,6 +187,9 @@ export class DataViewDemoComponent {
     { id: 'grid-columns', label: 'Grid Columns' },
     { id: 'custom-paginator-slots', label: 'Custom Paginator Slots' },
     { id: 'theme-integration', label: 'Theme Integration' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -325,6 +334,74 @@ export class DataViewDemoComponent {
       description: 'Accessible label for the data list region.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus through the filter input, sort dropdown, layout toggle buttons, and paginator controls.',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on List/Grid toggle',
+      action: 'Switches the active layout and announces the change.',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on paginator button',
+      action: 'Navigates between pages when the paginator is enabled.',
+    },
+    {
+      key: 'Standard text keys',
+      suffix: 'in filter input',
+      action: 'Filters the rendered records by text.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Data list")',
+      notes: 'Provides the accessible name for the data view region.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-busy',
+      value: '"true" while loading',
+      notes: 'Applied when <code>[loading]="true"</code>.',
+    },
+    {
+      element: 'Controls wrapper',
+      attribute: 'role="group"',
+      value: '—',
+      notes: 'Groups filter, sort, and layout toggle controls.',
+    },
+    {
+      element: 'Filter input',
+      attribute: 'type="search"',
+      value: '—',
+      notes: 'Accessible name from <code>filterAriaLabel</code> input.',
+    },
+    {
+      element: 'Layout toggle buttons',
+      attribute: 'aria-pressed',
+      value: '"true" | "false"',
+      notes: 'Reflects the currently active layout.',
+    },
+    {
+      element: 'Layout announcement region',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Announces list/grid layout changes to screen readers.',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'role="list"',
+      value: '—',
+      notes: 'Contains <code>role="listitem"</code> children.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-data-view-border', description: 'Border shorthand.' },
     { variable: '--uilib-data-view-border-radius', description: 'Border radius.' },

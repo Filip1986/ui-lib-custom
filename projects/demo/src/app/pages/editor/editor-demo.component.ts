@@ -48,6 +48,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for Editor component usage, forms integration, and event behavior.
  */
@@ -69,8 +73,9 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
-
     DocCssVarsTableComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',
@@ -114,6 +119,14 @@ export class EditorDemoComponent {
     { id: 'filled', label: 'Filled' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'events', label: 'Events' },
+    {
+      id: 'accessibility',
+      label: 'Accessibility',
+      children: [
+        { id: 'a11y-aria', label: 'ARIA Attributes' },
+        { id: 'a11y-keyboard', label: 'Keyboard' },
+      ],
+    },
   ];
 
   public scrollTo(id: string): void {
@@ -272,5 +285,70 @@ export class EditorDemoComponent {
     { variable: '--uilib-editor-content-color', description: 'Content text colour.' },
     { variable: '--uilib-editor-placeholder-color', description: 'Placeholder text colour.' },
     { variable: '--uilib-editor-focus-ring-color', description: 'Focus ring colour.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Editing area',
+      attribute: 'role="textbox"',
+      value: '—',
+      notes:
+        'Quill renders a <code>contenteditable</code> <code>&lt;div&gt;</code> with implicit <code>role="textbox"</code> and <code>aria-multiline="true"</code>.',
+    },
+    {
+      element: 'Editing area',
+      attribute: 'aria-label',
+      value: '—',
+      notes:
+        'Set via the <code>[ariaLabel]</code> input. Provide a visible label or this attribute for screen readers.',
+    },
+    {
+      element: 'Editing area (readonly)',
+      attribute: 'aria-readonly="true"',
+      value: '—',
+      notes: 'Applied automatically when <code>[readonly]="true"</code>.',
+    },
+    {
+      element: 'Editing area (disabled)',
+      attribute: 'aria-disabled="true"',
+      value: '—',
+      notes: 'Applied automatically when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Toolbar',
+      attribute: 'role="toolbar"',
+      value: '—',
+      notes:
+        'The default toolbar container is marked with <code>role="toolbar"</code> and an <code>aria-label</code> of "Text formatting".',
+    },
+    {
+      element: 'Toolbar buttons',
+      attribute: 'aria-label',
+      value: '—',
+      notes:
+        'Each toolbar button exposes its action via <code>aria-label</code> (e.g. "Bold", "Italic").',
+    },
+    {
+      element: 'Toolbar buttons (active)',
+      attribute: 'aria-pressed="true"',
+      value: '—',
+      notes:
+        'Toggle-style buttons (Bold, Italic, …) reflect their active state via <code>aria-pressed</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus into the editor area.' },
+    { key: 'Ctrl + B', action: 'Toggles <strong>Bold</strong> formatting on the selected text.' },
+    { key: 'Ctrl + I', action: 'Toggles <em>Italic</em> formatting on the selected text.' },
+    { key: 'Ctrl + U', action: 'Toggles <u>Underline</u> formatting on the selected text.' },
+    { key: 'Ctrl + Z', action: 'Undo the last change.' },
+    { key: 'Ctrl + Y / Ctrl + Shift + Z', action: 'Redo the last undone change.' },
+    { key: 'Ctrl + A', action: 'Select all content in the editor.' },
+    { key: 'Enter', action: 'Inserts a new paragraph.' },
+    {
+      key: 'Shift + Enter',
+      action: 'Inserts a line break (<code>&lt;br&gt;</code>) within the same paragraph.',
+    },
   ];
 }

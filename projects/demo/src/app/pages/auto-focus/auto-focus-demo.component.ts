@@ -22,6 +22,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for the AutoFocus directive.
  * Demonstrates basic usage, conditional focus, and the full input API.
@@ -40,6 +44,8 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocCodeExampleComponent,
     DocSectionComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './auto-focus-demo.component.html',
   styleUrl: './auto-focus-demo.component.scss',
@@ -84,6 +90,7 @@ export class AutoFocusDemoComponent {
     { id: 'conditional-focus', label: 'Conditional Focus' },
     { id: 'disable-autofocus', label: 'Disable Autofocus' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public readonly showConditional: WritableSignal<boolean> = signal<boolean>(false);
@@ -113,6 +120,24 @@ export class AutoFocusDemoComponent {
       type: 'string | null',
       default: 'null',
       description: 'Optional child selector used as the focus target instead of the host.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host / focused element',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The directive is purely behavioural — it does not modify <code>role</code>, <code>tabindex</code>, or any <code>aria-*</code> attribute. Focus is set programmatically on mount via <code>element.focus()</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'The focused element is already active on render, so users can immediately interact with it or Tab to the next element in the page order.',
     },
   ];
 }

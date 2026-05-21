@@ -16,6 +16,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the ProgressBar component.
  */
@@ -34,6 +38,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './progress-bar-demo.component.html',
   styleUrl: './progress-bar-demo.component.scss',
@@ -79,6 +85,7 @@ export class ProgressBarDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'custom-colour', label: 'Custom colour' },
     { id: 'dynamic-value', label: 'Dynamic value' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
@@ -152,6 +159,43 @@ export class ProgressBarDemoComponent {
   public reset(): void {
     this.dynamicValue.set(0);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the progress bar (read-only; no interaction).' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Progress bar',
+      attribute: 'role="progressbar"',
+      value: '—',
+      notes: 'Identifies the element as a progress indicator to assistive technologies.',
+    },
+    {
+      element: 'Progress bar',
+      attribute: 'aria-valuenow',
+      value: 'current value (0–100)',
+      notes: 'Updated live as the value changes. Omitted in indeterminate mode.',
+    },
+    {
+      element: 'Progress bar',
+      attribute: 'aria-valuemin',
+      value: '"0"',
+      notes: 'Minimum value of the progress range.',
+    },
+    {
+      element: 'Progress bar',
+      attribute: 'aria-valuemax',
+      value: '"100"',
+      notes: 'Maximum value of the progress range.',
+    },
+    {
+      element: 'Progress bar',
+      attribute: 'aria-label',
+      value: '"Progress"',
+      notes: 'Provides an accessible name when no visible label is present.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-progress-bar-height', description: 'Height.' },
     { variable: '--uilib-progress-bar-height-sm', description: 'Height — sm.' },

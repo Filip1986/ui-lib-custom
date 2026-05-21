@@ -16,6 +16,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the ProgressSpinner component.
  */
@@ -34,6 +38,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',
@@ -78,6 +84,7 @@ export class ProgressSpinnerDemoComponent {
     { id: 'stroke-width-fill', label: 'Stroke Width & Fill' },
     { id: 'loading-overlay', label: 'Loading Overlay Pattern' },
     { id: 'playground', label: 'Playground' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
@@ -158,6 +165,31 @@ export class ProgressSpinnerDemoComponent {
   public setStrokeWidth(width: string): void {
     this.interactiveStrokeWidth.set(width);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the spinner (read-only; no interaction).' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'SVG spinner',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Announces the loading state to assistive technologies.',
+    },
+    {
+      element: 'SVG spinner',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Defaults to "Loading..."; override with <code>[ariaLabel]</code>.',
+    },
+    {
+      element: 'SVG spinner',
+      attribute: 'aria-live',
+      value: '"polite"',
+      notes: 'Allows screen readers to announce the spinner without interrupting the user.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-progress-spinner-size-sm', description: 'Size — sm.' },
     { variable: '--uilib-progress-spinner-size-md', description: 'Size — md.' },

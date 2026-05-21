@@ -24,6 +24,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface ProjectEvent {
   status: string;
   date: string;
@@ -54,6 +58,8 @@ interface OrderStep {
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './timeline-demo.component.html',
   styleUrl: './timeline-demo.component.scss',
@@ -91,8 +97,9 @@ export class TimelineDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'right-alignment', label: 'Right Alignment' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -188,6 +195,47 @@ export class TimelineDemoComponent {
     };
     return `timeline-demo__badge ${map[severity]}`;
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Component is not interactive. Any interactive controls projected inside event templates receive focus in normal tab order.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'role="list"',
+      value: '—',
+      notes: 'Exposes the timeline as a semantic list of events.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Timeline")',
+      notes: 'Provides the accessible name of the list.',
+    },
+    {
+      element: 'Event row',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes: 'Identifies each event as a list item.',
+    },
+    {
+      element: 'Event row',
+      attribute: 'aria-labelledby',
+      value: 'content id + optional opposite id',
+      notes: 'Builds the item accessible name from visible event text.',
+    },
+    {
+      element: 'Connector / marker dot',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative separator graphics are hidden from the accessibility tree.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-timeline-connector-color', description: 'Connector text colour.' },
     { variable: '--uilib-timeline-connector-width', description: 'Connector width.' },

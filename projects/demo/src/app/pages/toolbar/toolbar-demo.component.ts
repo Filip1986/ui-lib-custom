@@ -15,6 +15,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Toolbar component.
  */
@@ -32,6 +36,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './toolbar-demo.component.html',
   styleUrl: './toolbar-demo.component.scss',
@@ -68,6 +74,7 @@ export class ToolbarDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
@@ -166,6 +173,37 @@ export class ToolbarDemoComponent {
       description: 'Content projected into the trailing (right) group.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action: 'Moves focus through each interactive control projected into the toolbar.',
+    },
+    { key: 'Shift+Tab', action: 'Moves focus backwards through the toolbar controls.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Toolbar host',
+      attribute: 'role="toolbar"',
+      value: '—',
+      notes: 'Identifies the container as a toolbar landmark.',
+    },
+    {
+      element: 'Toolbar host',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes:
+        'Defaults to "Toolbar"; override with <code>[ariaLabel]</code> to distinguish multiple toolbars on one page.',
+    },
+    {
+      element: 'Projected controls',
+      attribute: '(native semantics)',
+      value: '—',
+      notes:
+        'Buttons, inputs, and other controls retain their own ARIA semantics when projected into the toolbar slots.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-toolbar-background', description: 'Background.' },
     { variable: '--uilib-toolbar-border-color', description: 'Border colour.' },

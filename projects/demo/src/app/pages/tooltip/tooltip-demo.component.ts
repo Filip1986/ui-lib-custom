@@ -29,6 +29,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Tooltip directive.
  */
@@ -47,6 +51,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',
@@ -95,6 +101,7 @@ export class TooltipDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'long-text', label: 'Long Text' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
@@ -134,6 +141,37 @@ export class TooltipDemoComponent {
       description: 'Design variant.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus to the host element; shows the tooltip when tooltipEvent is "focus" or "both".',
+    },
+    { key: 'Shift+Tab', action: 'Moves focus away; hides the tooltip.' },
+    { key: 'Escape', action: 'Dismisses the tooltip immediately.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Tooltip popup',
+      attribute: 'role="tooltip"',
+      value: '—',
+      notes: 'Identifies the floating content as a tooltip to assistive technologies.',
+    },
+    {
+      element: 'Host element',
+      attribute: 'aria-describedby',
+      value: 'tooltip element ID',
+      notes: 'Automatically set on the host element to link it to the tooltip popup when visible.',
+    },
+    {
+      element: 'Tooltip popup',
+      attribute: 'id',
+      value: 'generated unique ID',
+      notes: "Matches the host's <code>aria-describedby</code> value.",
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-tooltip-bg', description: 'Background colour.' },
     { variable: '--uilib-tooltip-color', description: 'Text colour.' },

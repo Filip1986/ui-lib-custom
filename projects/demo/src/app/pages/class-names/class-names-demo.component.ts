@@ -13,6 +13,10 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for the classNames utility and ClassNamesPipe.
  */
@@ -29,6 +33,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
@@ -101,6 +107,7 @@ classNames('btn', null, undefined, false, 'icon')
     { id: 'pipe-usage', label: 'Pipe Usage' },
     { id: 'interactive-playground', label: 'Interactive Playground' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   /** Controls the active state for the playground element. */
@@ -174,4 +181,21 @@ classNames('btn', null, undefined, false, 'icon')
   public toggleHighlighted(): void {
     this.isHighlighted.update((value: boolean): boolean => !value);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host element',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The <code>classNames</code> function and <code>ClassNamesPipe</code> produce a class string only. They do not add or remove ARIA attributes. Use <code>[uilibBind]</code> alongside them if ARIA state also needs to change.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '(none)',
+      action: 'The utility is a pure function / pipe — it has no keyboard behaviour of its own.',
+    },
+  ];
 }

@@ -45,6 +45,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for InputOtp — OTP entry with mask, integer-only, sizes, and form integration.
  */
@@ -67,6 +71,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
   styleUrl: './input-otp-demo.component.scss',
@@ -108,6 +114,9 @@ export class InputOtpDemoComponent {
     { id: 'invalid', label: 'Invalid' },
     { id: 'readonly', label: 'Read Only' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -190,6 +199,54 @@ export class InputOtpDemoComponent {
     },
     { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Cell size.' },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the first empty OTP cell.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the OTP group.' },
+    { key: 'Type', action: 'Fills the focused cell and advances focus to the next cell.' },
+    { key: 'Backspace', action: 'Clears the focused cell and moves focus to the previous cell.' },
+    { key: '←', action: 'Moves focus to the previous cell.' },
+    { key: '→', action: 'Moves focus to the next cell.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Group container',
+      attribute: 'role="group"',
+      value: '—',
+      notes: 'Groups the individual OTP cells into a single logical control.',
+    },
+    {
+      element: 'Group container',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Defaults to "One-time passcode"; override with <code>[ariaLabel]</code>.',
+    },
+    {
+      element: 'Individual cell',
+      attribute: 'aria-label',
+      value: '"Digit N of M"',
+      notes: 'Each cell announces its position within the group.',
+    },
+    {
+      element: 'Individual cell',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied to all cells when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Individual cell',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied to all cells when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Individual cell',
+      attribute: 'aria-readonly',
+      value: '"true"',
+      notes: 'Applied to all cells when <code>[readonly]="true"</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-input-otp-cell-width', description: 'Cell width.' },
     { variable: '--uilib-input-otp-cell-height', description: 'Cell height.' },

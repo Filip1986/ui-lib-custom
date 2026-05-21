@@ -35,6 +35,10 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Image component.
  */
@@ -54,6 +58,8 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 
     DocSectionComponent,
     DocApiReferenceComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
@@ -112,6 +118,8 @@ export class ImageDemoComponent {
     { id: 'custom-error', label: 'Custom Error' },
     { id: 'dimensions', label: 'Dimensions' },
     { id: 'two-way-binding', label: 'Two-Way Binding' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
@@ -209,6 +217,112 @@ export class ImageDemoComponent {
       name: '#imageError',
       type: 'ng-content',
       description: 'Custom content shown when the image fails to load.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Enter / Space',
+      suffix: 'on preview trigger button',
+      action: 'Opens the preview overlay.',
+    },
+    {
+      key: 'Escape',
+      suffix: 'in preview overlay',
+      action: 'Closes the overlay and restores focus to the trigger.',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      suffix: 'in preview overlay',
+      action: 'Cycles focus among toolbar buttons (focus is trapped inside the overlay).',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Zoom In/Out buttons',
+      action: 'Increases or decreases the zoom scale by one step.',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Rotate buttons',
+      action: 'Rotates the image 90° in the corresponding direction.',
+    },
+    {
+      key: 'Enter / Space',
+      suffix: 'on Close button',
+      action: 'Closes the overlay and restores focus.',
+    },
+    { key: '+ / =', suffix: 'in preview overlay', action: 'Zooms in without moving focus.' },
+    { key: '-', suffix: 'in preview overlay', action: 'Zooms out without moving focus.' },
+    { key: '← / →', suffix: 'in preview overlay', action: 'Rotates the image 90° left or right.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Preview trigger button',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Preview image")',
+      notes: 'Always present when <code>[preview]="true"</code>.',
+    },
+    {
+      element: 'Preview trigger button',
+      attribute: 'aria-haspopup',
+      value: '"dialog"',
+      notes: 'Signals that activating the button opens a dialog.',
+    },
+    {
+      element: 'Preview trigger button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the overlay is open.',
+    },
+    {
+      element: 'Preview overlay',
+      attribute: 'role="dialog"',
+      value: '—',
+      notes: 'Announces the overlay as a modal dialog.',
+    },
+    {
+      element: 'Preview overlay',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Prevents interaction with background content.',
+    },
+    {
+      element: 'Preview overlay',
+      attribute: 'aria-label',
+      value: 'ariaLabel input',
+      notes: 'Provides the accessible name of the dialog.',
+    },
+    {
+      element: 'Toolbar',
+      attribute: 'role="toolbar"',
+      value: '—',
+      notes: 'Groups zoom, rotate, and close controls. Labeled <code>"Image controls"</code>.',
+    },
+    {
+      element: 'Zoom buttons',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when the zoom limit is reached.',
+    },
+    {
+      element: 'Preview status region',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Announces zoom percentage and rotation changes to screen readers.',
+    },
+    {
+      element: 'Error placeholder',
+      attribute: 'role="img"',
+      value: '—',
+      notes:
+        'Used when the image fails to load; <code>aria-label</code> equals the <code>alt</code> input.',
+    },
+    {
+      element: 'All SVG icons',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative icons are hidden from the accessibility tree.',
     },
   ];
 

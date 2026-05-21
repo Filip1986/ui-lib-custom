@@ -13,6 +13,10 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Bind directive.
@@ -32,6 +36,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
@@ -90,6 +96,7 @@ export class MyComponent {}
     { id: 'interactive-playground', label: 'Interactive Playground' },
     { id: 'boolean-numeric', label: 'Boolean & Numeric Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   /** Controls which dynamic id preset is active. */
@@ -152,6 +159,24 @@ export class MyComponent {}
       default: '{}',
       description:
         'An object whose keys are HTML attribute/property names and values are the values to apply.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host element',
+      attribute: '(driven by bindings)',
+      value: '—',
+      notes:
+        'The directive sets whatever attributes are passed via <code>[uilibBind]</code>. Passing <code>{ "aria-label": "…" }</code> or <code>{ "aria-disabled": "true" }</code> lets you drive ARIA attributes reactively from a signal.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '(none)',
+      action:
+        'The <code>Bind</code> directive is purely declarative — it sets attributes/properties on the host element and does not add keyboard behaviour.',
     },
   ];
 }

@@ -349,7 +349,7 @@ export class MyComponent {
 
   onComplete(event: AutoCompleteCompleteEvent): void {
     const q = event.query.toLowerCase();
-    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
+    this.suggestions = ['Angular', 'React', 'Vue'].filter((s) => s.toLowerCase().includes(q));
   }
 }`;
 
@@ -384,7 +384,10 @@ import { FormsModule } from '@angular/forms';
 import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
 import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
 
-interface Country { name: string; code: string; }
+interface Country {
+  name: string;
+  code: string;
+}
 
 @Component({
   standalone: true,
@@ -398,7 +401,7 @@ export class MyComponent {
 
   onCountryComplete(event: AutoCompleteCompleteEvent): void {
     const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+    this.countrySuggestions = this.allCountries.filter((c) => c.name.toLowerCase().includes(q));
   }
 }`;
 
@@ -432,14 +435,20 @@ import {
 } from 'ui-lib-custom/autocomplete';
 import type { AutoCompleteCompleteEvent } from 'ui-lib-custom/autocomplete';
 
-interface Country { name: string; code: string; }
+interface Country {
+  name: string;
+  code: string;
+}
 
 @Component({
   standalone: true,
   imports: [
-    FormsModule, UiLibAutoComplete,
-    AutoCompleteHeaderDirective, AutoCompleteItemDirective,
-    AutoCompleteSelectedItemDirective, AutoCompleteFooterDirective,
+    FormsModule,
+    UiLibAutoComplete,
+    AutoCompleteHeaderDirective,
+    AutoCompleteItemDirective,
+    AutoCompleteSelectedItemDirective,
+    AutoCompleteFooterDirective,
     AutoCompleteEmptyDirective,
   ],
   templateUrl: './templates.example.html',
@@ -451,7 +460,7 @@ export class MyComponent {
 
   onCountryComplete(event: AutoCompleteCompleteEvent): void {
     const q = event.query.toLowerCase();
-    this.countrySuggestions = this.allCountries.filter(c => c.name.toLowerCase().includes(q));
+    this.countrySuggestions = this.allCountries.filter((c) => c.name.toLowerCase().includes(q));
   }
 }`;
 
@@ -477,7 +486,7 @@ export class MyComponent {
 
   onComplete(event: AutoCompleteCompleteEvent): void {
     const q = event.query.toLowerCase();
-    this.suggestions = ['Angular', 'React', 'Vue'].filter(s => s.toLowerCase().includes(q));
+    this.suggestions = ['Angular', 'React', 'Vue'].filter((s) => s.toLowerCase().includes(q));
   }
 }`;
 
@@ -507,7 +516,9 @@ export class MyComponent {
 
   onVirtualComplete(event: AutoCompleteCompleteEvent): void {
     const q = event.query.toLowerCase();
-    this.virtualSuggestions = Array.from({ length: 100 }, (_, i) => ({ label: \`Item \${i}\`, value: \`item-\${i}\` }))
-      .filter(item => item.label.toLowerCase().includes(q));
+    this.virtualSuggestions = Array.from({ length: 100 }, (_, i) => ({
+      label: \`Item \${i}\`,
+      value: \`item-\${i}\`,
+    })).filter((item) => item.label.toLowerCase().includes(q));
   }
 }`;

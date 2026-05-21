@@ -45,6 +45,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for ColorPicker component usage and forms integration.
  */
@@ -68,6 +72,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',
@@ -105,6 +111,9 @@ export class ColorPickerDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -223,6 +232,66 @@ export class ColorPickerDemoComponent {
     { name: 'inputId', type: 'string', default: "''", description: 'Id of the trigger element.' },
     { name: 'tabindex', type: 'number', default: '0', description: 'Tab order index.' },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the color swatch trigger button.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the color picker.' },
+    { key: 'Enter / Space', action: 'Opens or closes the color panel.' },
+    { key: '↑ / ↓', action: 'Adjusts the saturation/brightness in the color canvas.' },
+    { key: '← / →', action: 'Adjusts the hue on the hue slider.' },
+    { key: 'Escape', action: 'Closes the color panel.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Trigger button',
+      attribute: 'aria-label',
+      value: '"Choose color"',
+      notes: 'Announces the purpose of the swatch trigger to screen readers.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the color panel is open.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Color canvas',
+      attribute: 'role="slider"',
+      value: '—',
+      notes: 'The 2-D canvas is exposed as a slider for saturation/brightness control.',
+    },
+    {
+      element: 'Color canvas',
+      attribute: 'aria-label',
+      value: '"Saturation and Brightness"',
+      notes: 'Describes the purpose of the canvas interaction.',
+    },
+    {
+      element: 'Hue slider',
+      attribute: 'role="slider"',
+      value: '—',
+      notes: 'The hue bar is exposed as a slider.',
+    },
+    {
+      element: 'Hue slider',
+      attribute: 'aria-label',
+      value: '"Hue"',
+      notes: 'Identifies the hue slider to screen readers.',
+    },
+    {
+      element: 'Hue slider',
+      attribute: 'aria-valuenow',
+      value: 'current hue (0–360)',
+      notes: 'Updated live as the hue changes.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     {
       variable: '--uilib-colorpicker-trigger-width',
