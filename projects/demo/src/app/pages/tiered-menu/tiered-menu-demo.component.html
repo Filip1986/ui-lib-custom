@@ -404,28 +404,7 @@
   <app-doc-section id="accessibility" title="Accessibility">
 
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-    <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Element" field="element" width="180px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.element"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Attribute" field="attribute" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.attribute"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Value" field="value" width="180px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.value"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Notes" field="notes">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.notes"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-aria-table [rows]="ariaRows" />
 
     <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
     <app-doc-keyboard-nav [rows]="keyboardRows" />

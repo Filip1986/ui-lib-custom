@@ -6,11 +6,8 @@ import type {
   PanelMenuItem,
   PanelMenuPanelToggleEvent,
 } from 'ui-lib-custom/panel-menu';
-import {
-  TableComponent,
-  TableColumnComponent,
-  TableColumnBodyDirective,
-} from 'ui-lib-custom/table';
+import { DocAriaTableComponent } from '../../shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '../../shared/doc-page/doc-aria-table.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -36,12 +33,6 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
-interface AriaRow {
-  readonly element: string;
-  readonly attribute: string;
-  readonly value: string;
-  readonly notes: string;
-}
 
 /**
  * Demo page for the PanelMenu component.
@@ -52,9 +43,7 @@ interface AriaRow {
   imports: [
     CodeSnippet,
     PanelMenu,
-    TableComponent,
-    TableColumnComponent,
-    TableColumnBodyDirective,
+    DocAriaTableComponent,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,

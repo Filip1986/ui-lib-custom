@@ -15,7 +15,9 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import {
   PickListComponent,
@@ -102,7 +104,8 @@ const SELECTED_COUNTRIES: DemoCountry[] = [
     DocQualityBadgeComponent,
 
     DocSectionComponent,
-
+    DocKeyboardNavComponent,
+    DocApiReferenceComponent,
     DocCssVarsTableComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
@@ -144,82 +147,6 @@ export class PickListDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'source',
-      type: 'unknown[]',
-      default: '[]',
-      description: 'Source list items (two-way via [(source)]).',
-    },
-    {
-      name: 'target',
-      type: 'unknown[]',
-      default: '[]',
-      description: 'Target list items (two-way via [(target)]).',
-    },
-    {
-      name: 'sourceHeader',
-      type: 'string',
-      default: "'Source'",
-      description: 'Header text for the source list.',
-    },
-    {
-      name: 'targetHeader',
-      type: 'string',
-      default: "'Target'",
-      description: 'Header text for the target list.',
-    },
-    {
-      name: 'filter',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shows filter inputs above both lists.',
-    },
-    { name: 'filterBy', type: 'string', default: "'label'", description: 'Property to filter on.' },
-    {
-      name: 'sourceFilterPlaceholder',
-      type: 'string',
-      default: "'Search'",
-      description: 'Source filter placeholder.',
-    },
-    {
-      name: 'targetFilterPlaceholder',
-      type: 'string',
-      default: "'Search'",
-      description: 'Target filter placeholder.',
-    },
-    {
-      name: 'dataKey',
-      type: 'string | null',
-      default: 'null',
-      description: 'Property for unique item identity.',
-    },
-    {
-      name: 'metaKeySelection',
-      type: 'boolean',
-      default: 'false',
-      description: 'Requires Meta/Ctrl for multi-selection.',
-    },
-    {
-      name: 'dragdrop',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables drag-and-drop between lists.',
-    },
-    {
-      name: 'breakpoint',
-      type: 'string',
-      default: "'960px'",
-      description: 'Breakpoint at which the layout switches to vertical stacking.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Pick list'",
-      description: 'Accessible label for the pick list.',
-    },
-  ];
-
   public readonly importCode: string =
     "import { PickListComponent } from 'ui-lib-custom/pick-list'";
 
@@ -233,7 +160,6 @@ export class PickListDemoComponent {
     { id: 'templates', label: 'Custom Templates' },
     { id: 'drag-drop', label: 'Drag & Drop' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
