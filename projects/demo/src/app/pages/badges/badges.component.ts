@@ -6,22 +6,22 @@ import type { BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
 import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { badgeExampleHtml, badgeExampleTs, usageHtml, usageTs } from './snippets.generated';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 type TabKey =
   | 'playground'
   | 'variants'

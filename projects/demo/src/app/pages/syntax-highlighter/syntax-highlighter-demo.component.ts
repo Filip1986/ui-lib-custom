@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
  * Demo page for the SyntaxHighlighter utility.
  */

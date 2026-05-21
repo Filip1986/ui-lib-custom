@@ -38,7 +38,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
 import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
@@ -65,9 +65,9 @@ import {
   perTabLazyHtml,
   perTabLazyTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 interface DemoTab {
   value: TabsValue;
   label: string;

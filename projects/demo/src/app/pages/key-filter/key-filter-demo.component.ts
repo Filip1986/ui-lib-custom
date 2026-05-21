@@ -37,7 +37,7 @@ import {
   emailTs,
 } from './snippets.generated';
 
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
  * Demo page for the KeyFilter directive, showing all built-in presets,
  * custom RegExp usage, and the bypass toggle.

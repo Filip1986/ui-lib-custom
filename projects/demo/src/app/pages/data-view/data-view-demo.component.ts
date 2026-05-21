@@ -64,9 +64,9 @@ import {
   themeIntegrationHtml,
   themeIntegrationTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 /**

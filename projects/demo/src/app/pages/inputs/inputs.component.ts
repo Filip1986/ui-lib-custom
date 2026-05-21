@@ -27,16 +27,16 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { VariantComparisonComponent } from '@demo/shared/components/variant-comparison/variant-comparison.component';
 import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets.generated';
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 type TabKey =
   | 'playground'
   | 'variants'

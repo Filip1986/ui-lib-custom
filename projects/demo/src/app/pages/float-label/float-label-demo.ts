@@ -37,7 +37,7 @@ import {
   reactiveHtml,
   reactiveTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 interface DemoOption {
   label: string;
   value: string;

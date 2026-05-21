@@ -27,8 +27,8 @@ import type {
 } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 import { Panel } from 'ui-lib-custom/panel';
 /**

@@ -3,15 +3,17 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Fieldset } from 'ui-lib-custom/fieldset';
 import type { FieldsetVariant } from 'ui-lib-custom/fieldset';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
   basicHtml,
   basicTs,
@@ -25,9 +27,9 @@ import {
   variantsTs,
 } from './snippets.generated';
 
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Fieldset component.
  */
@@ -43,8 +45,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
     DocSectionComponent,
-
     DocCssVarsTableComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
@@ -120,6 +122,57 @@ export class FieldsetDemoComponent {
   public setPlaygroundVariant(variant: FieldsetVariant): void {
     this.playgroundVariant.set(variant);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'legend',
+      type: 'string',
+      default: "''",
+      description: 'Text label rendered in the legend header.',
+    },
+    {
+      name: 'toggleable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables collapse/expand on legend click.',
+    },
+    {
+      name: 'collapsed',
+      type: 'boolean',
+      default: 'false',
+      description: 'Current collapsed state. Supports <code>[(collapsed)]</code> two-way binding.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Falls back to global theme when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes on the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(toggled)',
+      type: 'FieldsetToggleEvent',
+      description:
+        'Emitted when the panel collapses or expands. Carries <code>{ collapsed: boolean }</code>.',
+    },
+  ];
+
+  public readonly apiProjectionRows: readonly ApiPropRow[] = [
+    {
+      name: '[fieldsetLegend]',
+      type: 'ng-content',
+      description: 'Custom HTML for the legend / header area.',
+    },
+    { name: 'default', type: 'ng-content', description: 'Body content rendered inside the panel.' },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

@@ -8,20 +8,22 @@ import type {
   MenubarSize,
   MenubarVariant,
 } from 'ui-lib-custom/menubar';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { basicHtml, basicTs, startEndHtml, startEndTs } from './snippets.generated';
 
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Menubar component.
  */
@@ -37,8 +39,8 @@ import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.compone
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocApiReferenceComponent,
     DocSectionComponent,
-
     DocCssVarsTableComponent,
   ],
   templateUrl: './menubar-demo.component.html',
@@ -287,6 +289,81 @@ export class MenubarDemoComponent {
   public setSize(value: MenubarSize): void {
     this.playgroundSize.set(value);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MenubarItem[]',
+      default: '[]',
+      description: 'Array of top-level navigation items.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling font-size and padding.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Navigation'",
+      description: 'Accessible label for the nav landmark.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(itemClick)',
+      type: 'MenubarCommandEvent',
+      description: 'Emitted when a non-disabled leaf item is activated.',
+    },
+  ];
+
+  public readonly apiItemRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string', description: 'Display text.' },
+    { name: 'icon', type: 'string', description: 'Icon class or ui-lib-icon name.' },
+    { name: 'disabled', type: 'boolean', description: 'Prevents interaction.' },
+    { name: 'visible', type: 'boolean', description: 'When false, hides the item.' },
+    { name: 'separator', type: 'boolean', description: 'Renders a visual separator instead.' },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
+    {
+      name: 'url',
+      type: 'string',
+      description: 'Renders item as <code>&lt;a href&gt;</code> when set (leaf items).',
+    },
+    { name: 'target', type: 'string', description: 'Anchor target for url-based items.' },
+    { name: 'items', type: 'MenubarItem[]', description: 'Nested children — opens a sub-panel.' },
+    {
+      name: 'command',
+      type: '(event) => void',
+      description: 'Callback when the item is activated.',
+    },
+  ];
+
+  public readonly apiProjectionRows: readonly ApiPropRow[] = [
+    {
+      name: '[menubarStart]',
+      type: 'ng-content',
+      description: 'Content rendered in the leading area (e.g. logo).',
+    },
+    {
+      name: '[menubarEnd]',
+      type: 'ng-content',
+      description: 'Content rendered in the trailing area (e.g. action buttons).',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '← / →', action: 'Move focus between top-level menu items.' },

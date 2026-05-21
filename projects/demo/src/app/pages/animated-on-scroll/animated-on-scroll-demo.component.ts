@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
-import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { staggerHtml, staggerTs } from './snippets.generated';
 
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
  * Demo page for the AnimateOnScroll directive.
  * Shows all built-in SCSS preset classes and demonstrates repeat mode,

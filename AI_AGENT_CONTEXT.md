@@ -82,6 +82,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [Demo consistency audit — import paths standardized + final raw tables eliminated]
+Changed:
+  - All ~110 *.ts files under projects/demo/src/app/pages/: replaced all `../../shared/doc-page/` and `../../shared/components/` relative imports with `@demo/shared/doc-page/` and `@demo/shared/components/` alias paths
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.ts: added DocApiReferenceComponent; added apiInputRows (5), apiOutputRows (1), apiProjectionRows (2)
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.html: replaced 3 raw <table class="demo-api-table"> with <app-doc-api-reference>; fixed h3 class demo-api__subtitle → demo-section__subtitle
+  - projects/demo/src/app/pages/menubar/menubar-demo.component.ts: added DocApiReferenceComponent; added apiInputRows (5), apiOutputRows (1), apiItemRows (10), apiProjectionRows (2)
+  - projects/demo/src/app/pages/menubar/menubar-demo.component.html: replaced 4 raw <table class="demo-api-table"> with <app-doc-api-reference>
+State: Build zero errors. Zero raw demo-api-table HTML elements remain anywhere in pages/. All demo page imports now use @demo/shared alias paths exclusively.
+Verification:
+  eslint projects/demo/src/app/pages/fieldset/ menubar/ --max-warnings 0 → clean
+  ng build demo → PASS (zero errors; only pre-existing budget warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+
 Date: 2026-05-21 [API table migration — panel-menu and tiered-menu final raw tables eliminated]
 Changed:
   - projects/demo/src/app/pages/panel-menu/panel-menu-demo.component.ts: added DocApiReferenceComponent + ApiPropRow; added apiInputRows (6), apiOutputRows (2), apiItemRows (11)
@@ -93,15 +106,5 @@ Verification:
   eslint projects/demo/src/app/pages/panel-menu/ tiered-menu/ --max-warnings 0 → clean
   ng build demo → PASS (zero errors; only pre-existing budget warnings)
 Next step: No remaining raw-table pages. Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
-
-Date: 2026-05-21 [CSS vars: 20 more pages fixed — compound SCSS naming miss]
-Changed:
-  - scripts/generate-css-var-sections.mjs: try <comp>.component.scss fallback when <comp>.scss not found
-  - 20 demo pages: carousel, chart, data-view, dialog, input-mask, input-number, input-otp, knob, listbox, order-list, paginator, password, pick-list, speed-dial, split-button, table, timeline, tree-select, tree-table, upload — now all have id="css-vars" sections
-State: Build zero errors. All 74 component demo pages now have CSS Custom Properties sections (54 from PR #204 + 20 from this fix). Total coverage: ~74 component pages.
-Verification:
-  node scripts/generate-css-var-sections.mjs --dry-run → Processed: 20
-  ng build demo → PASS (zero errors)
-Next step: Migrate 4 pages with raw <table> elements: panel-menu (has ariaRows/keyboardRows TS data), order-list and pick-list (have keyboardRows + apiRows TS data), tiered-menu (raw hardcoded HTML table — investigate first).
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
