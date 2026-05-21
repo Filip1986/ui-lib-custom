@@ -33,7 +33,7 @@ import {
   sizesHtml,
   sizesTsTs,
 } from './snippets.generated';
-import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 interface InputGroupSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';

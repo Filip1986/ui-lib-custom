@@ -9,12 +9,12 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Router } from '@angular/router';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 import { Panel } from 'ui-lib-custom/panel';
