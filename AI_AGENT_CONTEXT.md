@@ -82,6 +82,16 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [CSS vars: 20 more pages fixed — compound SCSS naming miss]
+Changed:
+  - scripts/generate-css-var-sections.mjs: try <comp>.component.scss fallback when <comp>.scss not found
+  - 20 demo pages: carousel, chart, data-view, dialog, input-mask, input-number, input-otp, knob, listbox, order-list, paginator, password, pick-list, speed-dial, split-button, table, timeline, tree-select, tree-table, upload — now all have id="css-vars" sections
+State: Build zero errors. All 74 component demo pages now have CSS Custom Properties sections (54 from PR #204 + 20 from this fix). Total coverage: ~74 component pages.
+Verification:
+  node scripts/generate-css-var-sections.mjs --dry-run → Processed: 20
+  ng build demo → PASS (zero errors)
+Next step: Migrate 4 pages with raw <table> elements: panel-menu (has ariaRows/keyboardRows TS data), order-list and pick-list (have keyboardRows + apiRows TS data), tiered-menu (raw hardcoded HTML table — investigate first).
+
 Date: 2026-05-21 [example-section layout migration complete — 8 pages converted to app-doc-section]
 Changed:
   - scripts/migrate-example-sections.mjs (NEW — converts autocomplete/float-label/image/image-compare/order-list/organization-chart/pick-list/split-button from old example-section layout to app-doc-section; CRLF normalisation fix required for Windows files)
@@ -93,17 +103,5 @@ Verification:
   node scripts/migrate-example-sections.mjs → Processed: 8
   ng build demo → PASS (zero new errors; only pre-existing budget warnings)
 Next step: Migrate 7 pages with raw ARIA HTML tables to DocAriaTableComponent, then 17 pages with raw HTML API tables to DocApiReferenceComponent.
-
-Date: 2026-05-21 [CSS Custom Properties sections auto-generated across 54 demo pages]
-Changed:
-  - scripts/generate-css-var-sections.mjs (NEW — extracts --uilib-* vars from component SCSS, injects cssVarRows + DocCssVarsTableComponent import + HTML section into each demo page)
-  - 54 demo pages updated with cssVarRows property, import, sections entry { id: 'css-vars', label: 'CSS Custom Properties' }, and HTML <app-doc-section id="css-vars"> block
-  - organization-chart, select-buttons: added missing DocSectionComponent import (were missed by earlier migration)
-  - autocomplete, badges, cards, checkboxes, icons, image, image-compare: added DocSectionComponent import (pages that already used app-doc-section in HTML but lacked the import)
-State: Build zero errors. 54/54 target demo pages now have CSS Custom Properties sections. 4 components skipped (alert, button-group, icon-button have no demo page; code-snippet is not on standard doc-page-layout).
-Verification:
-  node scripts/generate-css-var-sections.mjs → Processed: 54, Skipped: 35
-  ng build demo → PASS (zero errors; only pre-existing roadmap SCSS budget warning)
-Next step: Add Accessibility sections (ARIA table + keyboard nav) to pages that have ariaRows/keyboardRows data but no section in HTML. Then convert the 8 pages still on example-section layout to full doc-page-layout pattern.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
