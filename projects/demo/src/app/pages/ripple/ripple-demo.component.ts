@@ -15,6 +15,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 
 /**
@@ -34,6 +36,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './ripple-demo.component.html',
@@ -242,6 +245,23 @@ export class MyComponent {}`,
     {
       key: 'Space',
       action: 'Same as <kbd>Enter</kbd> for <code>&lt;button&gt;</code> elements.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host element',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The directive is purely decorative — it does not alter <code>role</code>, <code>aria-*</code>, or tab-stop behaviour.',
+    },
+    {
+      element: 'Wave span',
+      attribute: '(none)',
+      value: '—',
+      notes:
+        '<code>pointer-events: none</code> and contains no text — transparent to assistive technologies.',
     },
   ];
 

@@ -238,48 +238,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-            <td><code>'material'</code></td>
-            <td>Visual style</td>
-          </tr>
-          <tr>
-            <td><code>options</code></td>
-            <td><code>SelectOption[]</code></td>
-            <td><code>[]</code></td>
-            <td>List of options (label/value)</td>
-          </tr>
-          <tr>
-            <td><code>multiple</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Enable multi-select</td>
-          </tr>
-          <tr>
-            <td><code>searchable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Toggle search input</td>
-          </tr>
-          <tr>
-            <td><code>placeholder</code></td>
-            <td><code>string</code></td>
-            <td><code>'Choose an option'</code></td>
-            <td>Placeholder text</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 

@@ -15,6 +15,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
@@ -34,6 +36,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './block-ui-demo.component.html',
@@ -255,6 +258,51 @@ export class BlockUiDemoComponent {
       type: 'number',
       default: '0',
       description: 'Base z-index for the mask layer. Uses the CSS variable default when 0.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'aria-busy="true"',
+      value: '—',
+      notes: 'When <code>blocked = true</code>.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-busy="false"',
+      value: '—',
+      notes: 'When <code>blocked = false</code>.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-disabled="true"',
+      value: '—',
+      notes: '<code>blocked = true</code> (removed when false).',
+    },
+    {
+      element: 'Mask element',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Always present.',
+    },
+    {
+      element: 'Mask element',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Always present — announces projected mask content to screen readers.',
+    },
+    {
+      element: 'Mask element',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: '<code>blocked = false</code> (removed when blocked).',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'inert=""',
+      value: '—',
+      notes: '<code>blocked = true</code> — makes all descendants non-focusable.',
     },
   ];
 

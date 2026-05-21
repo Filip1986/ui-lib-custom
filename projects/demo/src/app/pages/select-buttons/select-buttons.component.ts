@@ -32,6 +32,8 @@ import { Panel } from 'ui-lib-custom/panel';
 import { selectButtonExampleHtml, selectButtonExampleTs } from './snippets.generated';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 /**
  * Demo page for select button variants.
  */
@@ -58,6 +60,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocCodeExampleComponent,
     DocSectionComponent,
     DocCssVarsTableComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -193,6 +196,40 @@ export class SelectButtonsComponent {
   public markInvalidTouched(): void {
     this.invalidTouched = true;
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'SelectButtonOption[]',
+      default: '[]',
+      description: 'Options to render.',
+    },
+    {
+      name: 'value',
+      type: 'any | any[] | null',
+      default: 'null',
+      description: 'Selected value(s).',
+    },
+    { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multi-select.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Visual variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size preset.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable interaction.' },
+    { name: 'invalid', type: 'boolean', default: 'false', description: 'Invalid state.' },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'onChange',
+      type: 'SelectButtonChangeEvent',
+      description: 'Emits when selection changes.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-select-button-gap-resolved', description: 'Gap Resolved.' },
     {

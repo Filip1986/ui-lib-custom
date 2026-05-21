@@ -167,108 +167,12 @@
 
     <!-- 9. API Reference -->
     <app-doc-section id="api" title="API Reference">
-      <ui-lib-panel variant="minimal">
-        <div class="doc-stack">
-          <div>
-            <h4>Inputs</h4>
-            <table class="doc-table">
-              <thead>
-                <tr>
-                  <th>Input</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>value</code></td>
-                  <td><code>OrganizationChartNode[]</code></td>
-                  <td><code>[]</code></td>
-                  <td>Root nodes of the chart.</td>
-                </tr>
-                <tr>
-                  <td><code>selection</code></td>
-                  <td><code>OrganizationChartNode | OrganizationChartNode[] | null</code></td>
-                  <td><code>null</code></td>
-                  <td>Selected node(s).</td>
-                </tr>
-                <tr>
-                  <td><code>selectionMode</code></td>
-                  <td><code>'single' | 'multiple' | null</code></td>
-                  <td><code>null</code></td>
-                  <td>Selection mode.</td>
-                </tr>
-                <tr>
-                  <td><code>collapsible</code></td>
-                  <td><code>boolean</code></td>
-                  <td><code>false</code></td>
-                  <td>Enables expand/collapse on nodes with children.</td>
-                </tr>
-                <tr>
-                  <td><code>variant</code></td>
-                  <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-                  <td><code>null</code></td>
-                  <td>Theme variant override.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Outputs</h4>
-            <table class="doc-table">
-              <thead>
-                <tr>
-                  <th>Output</th>
-                  <th>Payload</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>nodeSelect</code></td>
-                  <td><code>OrganizationChartNodeSelectEvent</code></td>
-                  <td>When a node is selected.</td>
-                </tr>
-                <tr>
-                  <td><code>nodeUnselect</code></td>
-                  <td><code>OrganizationChartNodeUnselectEvent</code></td>
-                  <td>When a node is deselected.</td>
-                </tr>
-                <tr>
-                  <td><code>nodeExpand</code></td>
-                  <td><code>OrganizationChartNodeExpandEvent</code></td>
-                  <td>When a node is expanded.</td>
-                </tr>
-                <tr>
-                  <td><code>nodeCollapse</code></td>
-                  <td><code>OrganizationChartNodeCollapseEvent</code></td>
-                  <td>When a node is collapsed.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>Template Slots</h4>
-            <table class="doc-table">
-              <thead>
-                <tr>
-                  <th>Directive</th>
-                  <th>Context</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>uiOrgChartNode</code></td>
-                  <td><code>$implicit: OrganizationChartNode</code></td>
-                  <td>Custom node content.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </ui-lib-panel>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <app-doc-api-reference [rows]="apiInputRows" />
+      <h3 class="demo-section__subtitle">Outputs</h3>
+      <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+      <h3 class="demo-section__subtitle">Template Slots</h3>
+      <app-doc-api-reference [rows]="apiSlotRows" kind="name" [showDefault]="false" />
     </app-doc-section>
 
 

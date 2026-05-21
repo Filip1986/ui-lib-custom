@@ -125,54 +125,7 @@
   <app-doc-section id="accessibility" title="Accessibility">
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Panel</td>
-            <td><code>role="dialog"</code></td>
-            <td>Marks the sheet as a dialog region.</td>
-          </tr>
-          <tr>
-            <td>Panel</td>
-            <td><code>aria-modal="true"</code></td>
-            <td>
-              Signals to screen readers that content behind the sheet is inert (only when open).
-            </td>
-          </tr>
-          <tr>
-            <td>Panel</td>
-            <td><code>aria-labelledby</code></td>
-            <td>References the header title element when <code>header</code> is provided.</td>
-          </tr>
-          <tr>
-            <td>Panel</td>
-            <td><code>tabindex="-1"</code></td>
-            <td>Enables programmatic focus on the panel element itself on open.</td>
-          </tr>
-          <tr>
-            <td>Host / Backdrop</td>
-            <td><code>aria-hidden="true"</code></td>
-            <td>Hides the component and backdrop from screen readers when closed.</td>
-          </tr>
-          <tr>
-            <td>Close button</td>
-            <td><code>aria-label="Close"</code></td>
-            <td>Accessible name for the icon-only close button.</td>
-          </tr>
-          <tr>
-            <td>Close icon SVG</td>
-            <td><code>aria-hidden="true"</code></td>
-            <td>Decorative — the button's <code>aria-label</code> provides the accessible name.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
     </div>
 
     <div id="a11y-keyboard" data-doc-anchor>

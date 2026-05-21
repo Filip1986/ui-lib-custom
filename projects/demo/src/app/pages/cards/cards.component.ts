@@ -32,6 +32,8 @@ import { cardExampleHtml, cardExampleTs, usageTs } from './snippets.generated';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -71,6 +73,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocCssVarsTableComponent,
 
     DocSectionComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -274,6 +277,23 @@ export class CardsComponent {
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Visual style of the card',
+    },
+    {
+      name: 'elevation',
+      type: "'none' | 'low' | 'medium' | 'high'",
+      default: "'medium'",
+      description: 'Shadow depth',
+    },
+    { name: 'bordered', type: 'boolean', default: 'false', description: 'Enable border' },
+    { name: 'hoverable', type: 'boolean', default: 'false', description: 'Enable hover effect' },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-card-header-padding-y-base', description: 'Header Padding Y Base.' },
     { variable: '--uilib-card-header-padding-x-base', description: 'Header Padding X Base.' },

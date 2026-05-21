@@ -312,50 +312,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-            <td><code>'material'</code></td>
-            <td>Visual style</td>
-          </tr>
-          <tr>
-            <td><code>type</code></td>
-            <td>
-              <code>'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'</code>
-            </td>
-            <td><code>'text'</code></td>
-            <td>HTML input type</td>
-          </tr>
-          <tr>
-            <td><code>labelFloat</code></td>
-            <td><code>'over' | 'in' | 'on'</code></td>
-            <td><code>'over'</code></td>
-            <td>Label positioning</td>
-          </tr>
-          <tr>
-            <td><code>placeholder</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Placeholder text</td>
-          </tr>
-          <tr>
-            <td><code>required</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Mark input as required</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 

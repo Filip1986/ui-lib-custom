@@ -49,6 +49,8 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.
@@ -71,6 +73,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
@@ -192,6 +195,24 @@ export class SplitButtonDemoComponent {
     const label: string = event.item.label ?? 'Unknown action';
     this.lastAction.set(`Menu action: ${label}`);
   }
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Main button label text.' },
+    { name: 'model', type: 'SplitButtonItem[]', default: '[]', description: 'Menu item list.' },
+    {
+      name: 'severity',
+      type: 'SplitButtonSeverity',
+      default: "'primary'",
+      description: 'Visual severity token.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size scale for button pair.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables both buttons.' },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-split-button-bg', description: 'Background colour.' },
     { variable: '--uilib-split-button-fg', description: 'Fg.' },

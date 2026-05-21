@@ -16,6 +16,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 
 /**
@@ -35,6 +37,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './bottom-sheet-demo.component.html',
@@ -405,6 +408,51 @@ export class MyComponent {
       name: '(hidden)',
       type: 'OutputEmitterRef<void>',
       description: 'Emits after the sheet transitions to closed.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Panel',
+      attribute: 'role="dialog"',
+      value: '—',
+      notes: 'Marks the sheet as a dialog region.',
+    },
+    {
+      element: 'Panel',
+      attribute: 'aria-modal="true"',
+      value: '—',
+      notes: 'Signals to screen readers that content behind the sheet is inert (only when open).',
+    },
+    {
+      element: 'Panel',
+      attribute: 'aria-labelledby',
+      value: '—',
+      notes: 'References the header title element when <code>header</code> is provided.',
+    },
+    {
+      element: 'Panel',
+      attribute: 'tabindex="-1"',
+      value: '—',
+      notes: 'Enables programmatic focus on the panel element itself on open.',
+    },
+    {
+      element: 'Host / Backdrop',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Hides the component and backdrop from screen readers when closed.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label="Close"',
+      value: '—',
+      notes: 'Accessible name for the icon-only close button.',
+    },
+    {
+      element: 'Close icon SVG',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: "Decorative — the button's <code>aria-label</code> provides the accessible name.",
     },
   ];
 

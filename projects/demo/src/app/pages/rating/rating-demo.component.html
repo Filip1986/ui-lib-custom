@@ -287,72 +287,7 @@
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>Value</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Host (interactive)</td>
-            <td><code>role="radiogroup"</code></td>
-            <td>—</td>
-            <td>Groups stars as a radio group in interactive mode.</td>
-          </tr>
-          <tr>
-            <td>Host (interactive)</td>
-            <td><code>aria-label</code></td>
-            <td>Value of <code>ariaLabel</code> input</td>
-            <td>Defaults to <code>"Rating"</code>. Overridden by <code>ariaLabelledby</code> when set.</td>
-          </tr>
-          <tr>
-            <td>Host (readonly)</td>
-            <td><code>role="img"</code></td>
-            <td>—</td>
-            <td>Switches to image role in readonly mode — no interactive semantics.</td>
-          </tr>
-          <tr>
-            <td>Host (readonly)</td>
-            <td><code>aria-label</code></td>
-            <td><code>"Rating: 4 out of 5 stars"</code></td>
-            <td>Auto-generated descriptive label for the readonly display.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>role="radio"</code></td>
-            <td>—</td>
-            <td>Each star is a radio option within the radiogroup.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>aria-checked</code></td>
-            <td><code>"true"</code> / <code>"false"</code></td>
-            <td>Whether this star's value matches the current rating.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>aria-label</code></td>
-            <td><code>"1 star"</code>, <code>"2 stars"</code>, …</td>
-            <td>Human-readable label announced by screen readers.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>tabindex</code></td>
-            <td><code>"0"</code> / <code>"-1"</code></td>
-            <td>Roving tabindex — active star gets <code>0</code>, all others get <code>-1</code>.</td>
-          </tr>
-          <tr>
-            <td>Star (readonly)</td>
-            <td><code>aria-hidden="true"</code></td>
-            <td>—</td>
-            <td>Decorative stars hidden from screen readers in readonly mode.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
     </div>
 
     <div id="a11y-keyboard" data-doc-anchor>

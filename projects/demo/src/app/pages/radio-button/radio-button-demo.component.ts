@@ -17,6 +17,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 interface CityOption {
@@ -43,6 +45,7 @@ interface CityOption {
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './radio-button-demo.component.html',
@@ -403,6 +406,52 @@ export class RadioButtonDemoComponent {
       type: "'outlined' | 'filled'",
       default: "'outlined'",
       description: 'Visual style — <code>filled</code> uses a solid checked background.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input[type="radio"]',
+      attribute: 'role="radio"',
+      value: '—',
+      notes: 'Implicit via input type — native browser semantics.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-checked',
+      value: '—',
+      notes: 'Managed natively by the browser based on <code>checked</code> property.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-required',
+      value: '—',
+      notes: 'Set when <code>[required]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-disabled',
+      value: '—',
+      notes: 'Set when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'id',
+      value: '—',
+      notes: 'From <code>inputId</code> input; auto-generated when not provided.',
+    },
+    {
+      element: 'label',
+      attribute: 'for',
+      value: '—',
+      notes: 'Points to the native input id — links label and control.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'tabindex',
+      value: '—',
+      notes:
+        'Checked radio gets <code>tabindex="0"</code>; unchecked radios get <code>tabindex="-1"</code> (roving tabindex).',
     },
   ];
 

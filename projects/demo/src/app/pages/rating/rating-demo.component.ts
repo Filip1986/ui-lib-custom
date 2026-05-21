@@ -17,6 +17,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
@@ -38,6 +40,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './rating-demo.component.html',
@@ -408,6 +411,64 @@ export class RatingDemoComponent {
       type: "'sm' | 'md' | 'lg'",
       default: "'md'",
       description: 'Component density.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host (interactive)',
+      attribute: 'role="radiogroup"',
+      value: '—',
+      notes: 'Groups stars as a radio group in interactive mode.',
+    },
+    {
+      element: 'Host (interactive)',
+      attribute: 'aria-label',
+      value: 'Value of ariaLabel input',
+      notes:
+        'Defaults to <code>"Rating"</code>. Overridden by <code>ariaLabelledby</code> when set.',
+    },
+    {
+      element: 'Host (readonly)',
+      attribute: 'role="img"',
+      value: '—',
+      notes: 'Switches to image role in readonly mode — no interactive semantics.',
+    },
+    {
+      element: 'Host (readonly)',
+      attribute: 'aria-label',
+      value: '"Rating: 4 out of 5 stars"',
+      notes: 'Auto-generated descriptive label for the readonly display.',
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'role="radio"',
+      value: '—',
+      notes: 'Each star is a radio option within the radiogroup.',
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'aria-checked',
+      value: '"true" / "false"',
+      notes: "Whether this star's value matches the current rating.",
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'aria-label',
+      value: '"1 star", "2 stars", …',
+      notes: 'Human-readable label announced by screen readers.',
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'tabindex',
+      value: '"0" / "-1"',
+      notes: 'Roving tabindex — active star gets <code>0</code>, all others get <code>-1</code>.',
+    },
+    {
+      element: 'Star (readonly)',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative stars hidden from screen readers in readonly mode.',
     },
   ];
 

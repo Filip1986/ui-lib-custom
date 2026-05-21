@@ -33,6 +33,8 @@ import {
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 /**
  * Demo page for the Image component.
  */
@@ -51,6 +53,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocCssVarsTableComponent,
 
     DocSectionComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
@@ -121,6 +124,94 @@ export class ImageDemoComponent {
   public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
 
   // ─── Code snippets ────────────────────────────────────────────────────────────
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'src', type: 'string', default: "''", description: 'URL of the image.' },
+    { name: 'alt', type: 'string', default: "''", description: 'Alt text for the image.' },
+    {
+      name: 'width',
+      type: 'string | null',
+      default: 'null',
+      description: 'HTML width attribute for the img element.',
+    },
+    {
+      name: 'height',
+      type: 'string | null',
+      default: 'null',
+      description: 'HTML height attribute for the img element.',
+    },
+    {
+      name: 'preview',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables the click-to-preview lightbox.',
+    },
+    {
+      name: 'imageStyle',
+      type: 'Record<string, string> | null',
+      default: 'null',
+      description: 'Inline styles applied to the img element.',
+    },
+    {
+      name: 'imageClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the img element.',
+    },
+    {
+      name: 'errorSrc',
+      type: 'string | null',
+      default: 'null',
+      description: 'Fallback src when the primary src fails.',
+    },
+    {
+      name: 'variant',
+      type: 'ImageVariant | null',
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    { name: 'size', type: 'ImageSize', default: "'md'", description: 'Component size token.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Preview image'",
+      description: 'Accessible label for the preview indicator button.',
+    },
+    {
+      name: 'previewVisible (model)',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way binding for overlay open state.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'loadEvent',
+      type: 'Event',
+      description: 'Emitted when the image loads successfully.',
+    },
+    { name: 'errorEvent', type: 'Event', description: 'Emitted when the image fails to load.' },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: '#imageIndicator',
+      type: 'ng-content',
+      description: 'Custom content for the hover preview indicator.',
+    },
+    {
+      name: '#imageError',
+      type: 'ng-content',
+      description: 'Custom content shown when the image fails to load.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-image-radius', description: 'Border radius.' },
     { variable: '--uilib-image-indicator-bg', description: 'Indicator background colour.' },

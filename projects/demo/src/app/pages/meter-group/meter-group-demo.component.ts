@@ -34,6 +34,10 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the MeterGroup component.
  */
@@ -52,6 +56,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocApiReferenceComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
@@ -227,11 +233,152 @@ export class MeterGroupDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: '.ui-lib-meter-group__meters',
+      attribute: 'role="group"',
+      value: '—',
+      notes: 'Groups all meter segments as one semantic meter group.',
+    },
+    {
+      element: '.ui-lib-meter-group__meters',
+      attribute: 'aria-label',
+      value: 'Value of ariaLabel input',
+      notes: 'Defaults to <code>"Meter group"</code>. Provide a meaningful label for the dataset.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'role="meter"',
+      value: '—',
+      notes: 'Announces each segment as a meter to assistive technology.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-valuenow',
+      value: 'Segment value (clamped to range)',
+      notes: 'Current value of the segment.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-valuemin',
+      value: 'Value of min input',
+      notes: 'Lower bound of the range.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-valuemax',
+      value: 'Value of max input',
+      notes: 'Upper bound of the range.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-label',
+      value: '"<label>: <value> of <max>"',
+      notes: 'Human-readable segment description announced by screen readers.',
+    },
+    {
+      element: '.ui-lib-meter-group__sr-total',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Hidden live region that announces computed total changes for dynamic data.',
+    },
+    {
+      element: '.ui-lib-meter-group__sr-total',
+      attribute: 'aria-atomic="true"',
+      value: '—',
+      notes: 'Reads the total announcement as a complete phrase.',
+    },
+  ];
+
   public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab / Shift+Tab',
       action:
         'Skips meter segments and legend items — MeterGroup is informational and non-interactive, nothing is focusable.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'values',
+      type: 'MeterItem[]',
+      default: '[]',
+      description: 'Array of meter segments to render.',
+    },
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value of the range.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value of the range.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Bar direction.',
+    },
+    {
+      name: 'showLabels',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show or hide the legend.',
+    },
+    {
+      name: 'labelPosition',
+      type: "'start' | 'end'",
+      default: "'end'",
+      description:
+        'Legend placement — <code>start</code> is above / left, <code>end</code> is below / right.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Bar thickness size token.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description:
+        'Visual design variant; falls back to <code>ThemeConfigService</code> when <code>null</code>.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Meter group'",
+      description:
+        'Accessible label for the meter container group (<code>aria-label</code> on the group element).',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes appended to the host element.',
+    },
+  ];
+
+  public readonly apiMeterItemRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      required: true,
+      description:
+        'Display label shown in the legend and used as the segment <code>aria-label</code>.',
+    },
+    {
+      name: 'value',
+      type: 'number',
+      required: true,
+      description: 'Numeric value measured against <code>min</code> / <code>max</code>.',
+    },
+    {
+      name: 'color',
+      type: 'string',
+      required: true,
+      description: 'CSS colour string for the segment fill (hex, rgb, hsl, named colour).',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      required: false,
+      description: 'Optional PrimeIcons class shown inside the legend colour swatch.',
     },
   ];
 }

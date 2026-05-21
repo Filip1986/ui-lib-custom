@@ -13,6 +13,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
@@ -31,6 +33,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
@@ -344,6 +347,52 @@ export class PasswordDemoComponent {
       type: 'string',
       default: "'Strong'",
       description: 'Strength panel text for a strong password.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input',
+      attribute: 'aria-describedby',
+      value: '—',
+      notes:
+        'Points to the strength live region (<code>strengthId</code>) when <code>[feedback]="true"</code>.',
+    },
+    {
+      element: 'Strength live region',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Announces strength changes: "Password strength: Weak / Medium / Strong / None".',
+    },
+    {
+      element: 'Strength live region',
+      attribute: 'aria-atomic="true"',
+      value: '—',
+      notes: 'Ensures the full announcement is read on each update.',
+    },
+    {
+      element: 'Visual strength meter',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative — screen readers use the live region only.',
+    },
+    {
+      element: 'Toggle mask button',
+      attribute: 'aria-label',
+      value: '—',
+      notes: '"Show password" / "Hide password" — reflects current state.',
+    },
+    {
+      element: 'Toggle mask button',
+      attribute: 'aria-pressed',
+      value: '—',
+      notes: '<code>true</code> when password is visible, <code>false</code> when hidden.',
+    },
+    {
+      element: 'Toggle mask / clear icons',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative SVG icons hidden from assistive technologies.',
     },
   ];
 

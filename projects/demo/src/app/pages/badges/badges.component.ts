@@ -22,6 +22,8 @@ import { badgeExampleHtml, badgeExampleTs, usageHtml, usageTs } from './snippets
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -57,6 +59,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocCssVarsTableComponent,
 
     DocSectionComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -171,6 +174,34 @@ export class BadgesComponent {
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'solid' | 'outline' | 'subtle'",
+      default: "'solid'",
+      description: 'Visual style',
+    },
+    {
+      name: 'color',
+      type: "'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral'",
+      default: "'primary'",
+      description: 'Theme color',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Badge size' },
+    {
+      name: 'pill',
+      type: 'boolean',
+      default: 'false',
+      description: 'Rounded pill shape',
+    },
+    {
+      name: 'dot',
+      type: 'boolean',
+      default: 'false',
+      description: 'Dot indicator (no label)',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-badge-bg-resolved', description: 'Bg Resolved.' },
     { variable: '--uilib-badge-bg-subtle-resolved', description: 'Bg Subtle Resolved.' },

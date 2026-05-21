@@ -20,6 +20,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 /**
  * Demo page for the AutoFocus directive.
  * Demonstrates basic usage, conditional focus, and the full input API.
@@ -37,6 +39,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './auto-focus-demo.component.html',
   styleUrl: './auto-focus-demo.component.scss',
@@ -97,4 +100,19 @@ export class AutoFocusDemoComponent {
   public toggleFocus(): void {
     this.enableFocus.set(!this.enableFocus());
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'When <code>true</code>, focus is skipped on mount.',
+    },
+    {
+      name: 'selector',
+      type: 'string | null',
+      default: 'null',
+      description: 'Optional child selector used as the focus target instead of the host.',
+    },
+  ];
 }

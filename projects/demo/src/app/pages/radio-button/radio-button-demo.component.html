@@ -230,52 +230,7 @@
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>Value / Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Native <code>&lt;input type="radio"&gt;</code></td>
-            <td><code>role="radio"</code></td>
-            <td>Implicit via input type — native browser semantics.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>aria-checked</code></td>
-            <td>Managed natively by the browser based on <code>checked</code> property.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>aria-required</code></td>
-            <td>Set when <code>[required]="true"</code>.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>aria-disabled</code></td>
-            <td>Set when <code>[disabled]="true"</code>.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>id</code></td>
-            <td>From <code>inputId</code> input; auto-generated when not provided.</td>
-          </tr>
-          <tr>
-            <td><code>&lt;label&gt;</code></td>
-            <td><code>for</code></td>
-            <td>Points to the native input id — links label and control.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>tabindex</code></td>
-            <td>Checked radio gets <code>tabindex="0"</code>; unchecked radios get <code>tabindex="-1"</code> (roving tabindex).</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
       <p class="demo-section__description" style="margin-top: 1rem">
         <strong>Group labeling is consumer responsibility.</strong> Wrap radio buttons in
         a <code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code> (recommended) or a

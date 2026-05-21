@@ -148,52 +148,7 @@
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>When</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Host (<code>ui-lib-block-ui</code>)</td>
-            <td><code>aria-busy="true"</code></td>
-            <td><code>blocked = true</code></td>
-          </tr>
-          <tr>
-            <td>Host</td>
-            <td><code>aria-busy="false"</code></td>
-            <td><code>blocked = false</code></td>
-          </tr>
-          <tr>
-            <td>Host</td>
-            <td><code>aria-disabled="true"</code></td>
-            <td><code>blocked = true</code> (removed when false)</td>
-          </tr>
-          <tr>
-            <td>Mask element</td>
-            <td><code>role="status"</code></td>
-            <td>Always present</td>
-          </tr>
-          <tr>
-            <td>Mask element</td>
-            <td><code>aria-live="polite"</code></td>
-            <td>Always present — announces projected mask content to screen readers</td>
-          </tr>
-          <tr>
-            <td>Mask element</td>
-            <td><code>aria-hidden="true"</code></td>
-            <td><code>blocked = false</code> (removed when blocked)</td>
-          </tr>
-          <tr>
-            <td>Content wrapper</td>
-            <td><code>inert=""</code></td>
-            <td><code>blocked = true</code> — makes all descendants non-focusable</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
     </div>
 
     <div id="a11y-keyboard" data-doc-anchor>

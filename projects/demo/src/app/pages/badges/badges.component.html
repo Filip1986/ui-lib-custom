@@ -217,53 +217,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'solid' | 'outline' | 'subtle'</code></td>
-            <td><code>'solid'</code></td>
-            <td>Visual style</td>
-          </tr>
-          <tr>
-            <td><code>color</code></td>
-            <td>
-              <code
-                >'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' |
-                'neutral'</code
-              >
-            </td>
-            <td><code>'primary'</code></td>
-            <td>Theme color</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Badge size</td>
-          </tr>
-          <tr>
-            <td><code>pill</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Rounded pill shape</td>
-          </tr>
-          <tr>
-            <td><code>dot</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Dot indicator (no label)</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </ui-lib-panel>
   }
 

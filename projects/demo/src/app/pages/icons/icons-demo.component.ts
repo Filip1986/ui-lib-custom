@@ -24,6 +24,8 @@ import { iconExampleHtml, iconExampleTs, usageHtml, usageTs } from './snippets.g
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 /**
@@ -54,6 +56,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     DocCssVarsTableComponent,
 
     DocSectionComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './icons-demo.component.html',
   styleUrl: './icons-demo.component.scss',
@@ -170,6 +173,17 @@ export class IconsDemoComponent {
       // Ignore clipboard failures in non-secure contexts.
     }
   }
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'name', type: 'string', description: 'Icon name from the set' },
+    { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'", description: 'Icon size' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      description: 'Icon style variant',
+    },
+    { name: 'color', type: 'string', description: 'Optional color token' },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-icon-color', description: 'Text colour.' },
   ];

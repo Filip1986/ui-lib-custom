@@ -350,43 +350,7 @@
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
       <div card-header>API Reference</div>
       <div id="properties" data-doc-anchor>
-        <h2>Properties</h2>
-        <table class="doc-properties">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>variant</code></td>
-              <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-              <td><code>'material'</code></td>
-              <td>Visual style of the card</td>
-            </tr>
-            <tr>
-              <td><code>elevation</code></td>
-              <td><code>'none' | 'low' | 'medium' | 'high'</code></td>
-              <td><code>'medium'</code></td>
-              <td>Shadow depth</td>
-            </tr>
-            <tr>
-              <td><code>bordered</code></td>
-              <td><code>boolean</code></td>
-              <td><code>false</code></td>
-              <td>Enable border</td>
-            </tr>
-            <tr>
-              <td><code>hoverable</code></td>
-              <td><code>boolean</code></td>
-              <td><code>false</code></td>
-              <td>Enable hover effect</td>
-            </tr>
-          </tbody>
-        </table>
+        <app-doc-api-reference [rows]="apiInputRows" />
       </div>
     </ui-lib-card>
   }

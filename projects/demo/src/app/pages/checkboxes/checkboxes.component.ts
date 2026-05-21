@@ -37,6 +37,8 @@ import { checkboxExampleHtml, checkboxExampleTs, usageTs } from './snippets.gene
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };
@@ -67,6 +69,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     DocCssVarsTableComponent,
 
     DocSectionComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -313,6 +316,81 @@ export class CheckboxesComponent {
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Optional text label (use projection for custom markup).',
+    },
+    {
+      name: 'description',
+      type: 'string | null',
+      default: 'null',
+      description: 'Supporting text rendered under the label.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Controls visual treatment of the control box.',
+    },
+    {
+      name: 'appearance',
+      type: "'outlined' | 'filled'",
+      default: "'outlined'",
+      description: 'Toggles outlined and filled visual surfaces.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Adjusts checkbox dimensions and typography.',
+    },
+    {
+      name: 'binary',
+      type: 'boolean',
+      default: 'false',
+      description: 'When false with <code>value</code>, uses array/group mode.',
+    },
+    {
+      name: 'value',
+      type: 'unknown',
+      default: 'null',
+      description: 'Group-mode value represented by a single checkbox.',
+    },
+    {
+      name: 'trueValue / falseValue',
+      type: 'unknown',
+      default: 'true / false',
+      description: 'Binary-mode model values emitted for checked and unchecked states.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables click and keyboard interaction.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents value changes while keeping focus and semantics.',
+    },
+    {
+      name: 'indeterminate',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows the mixed state (aria-checked="mixed").',
+    },
+    {
+      name: 'checked',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way bound value via <code>[(checked)]</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-checkbox-gap', description: 'Gap.' },
     { variable: '--uilib-checkbox-border', description: 'Border shorthand.' },

@@ -134,37 +134,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>name</code></td>
-            <td><code>string</code></td>
-            <td>Icon name from the set</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'</code></td>
-            <td>Icon size</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-            <td>Icon style variant</td>
-          </tr>
-          <tr>
-            <td><code>color</code></td>
-            <td><code>string</code></td>
-            <td>Optional color token</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" [showDefault]="false" />
     </ui-lib-panel>
   }
 

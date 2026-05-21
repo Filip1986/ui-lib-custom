@@ -82,6 +82,40 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [ARIA table migration — 7 demo pages migrated to DocAriaTableComponent]
+Changed:
+  - block-ui: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties"> in accessibility section
+  - bottom-sheet: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - password: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - radio-button: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - rating: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
+  - ripple: added DocAriaTableComponent + ariaRows (2); replaced raw <table class="doc-properties">
+  - meter-group: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
+State: Build zero errors. Zero raw ARIA doc-properties tables remain in component demo pages. Remaining doc-properties in themes/shadows/project-starter are utility pages (different context).
+Verification: ng build demo → PASS (zero errors; only pre-existing budget warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+
+Date: 2026-05-21 [API table migration — 15 remaining demo pages migrated to DocApiReferenceComponent]
+Changed:
+  - auto-focus-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (2); replaced af-table
+  - badges.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5); replaced tab panel table
+  - cards.component.ts/.html: added DocApiReferenceComponent + apiInputRows (4); replaced tab panel table
+  - checkboxes.component.ts/.html: added DocApiReferenceComponent + apiInputRows (12); replaced tab panel table
+  - confirm-popup-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (11) + apiOutputRows (2) + apiServiceRows (3); replaced 3 raw tables; fixed h3 class demo-table__heading → demo-section__subtitle
+  - icons-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (4) [showDefault=false]; replaced tab panel table
+  - image-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (13) + apiOutputRows (2) + apiSlotRows (2); replaced 3 api-table elements
+  - image-compare-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (10) + apiOutputRows (2); replaced 2 api-table elements; kept keyboard navigation table
+  - meter-group-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (10) + apiMeterItemRows (4) kind=property; replaced 2 doc-properties tables
+  - organization-chart-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5) + apiOutputRows (4) + apiSlotRows (1); replaced 3 doc-table elements; changed h4 to h3.demo-section__subtitle
+  - select-buttons.component.ts/.html: added DocApiReferenceComponent + apiInputRows (7) + apiOutputRows (1); replaced api-table
+  - split-button-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5); replaced doc-table
+  - inputs.component.html: replaced 5-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
+  - select.component.html: replaced 5-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
+  - tabs.component.html: replaced 14-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
+State: Build zero errors. Zero raw API doc tables remain across all 21 targeted pages.
+Verification: ng build demo → PASS (zero errors; only pre-existing bundle budget + roadmap SCSS warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+
 Date: 2026-05-21 [Demo consistency audit — import paths standardized + final raw tables eliminated]
 Changed:
   - All ~110 *.ts files under projects/demo/src/app/pages/: replaced all `../../shared/doc-page/` and `../../shared/components/` relative imports with `@demo/shared/doc-page/` and `@demo/shared/components/` alias paths
@@ -94,17 +128,5 @@ Verification:
   eslint projects/demo/src/app/pages/fieldset/ menubar/ --max-warnings 0 → clean
   ng build demo → PASS (zero errors; only pre-existing budget warnings)
 Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
-
-Date: 2026-05-21 [API table migration — panel-menu and tiered-menu final raw tables eliminated]
-Changed:
-  - projects/demo/src/app/pages/panel-menu/panel-menu-demo.component.ts: added DocApiReferenceComponent + ApiPropRow; added apiInputRows (6), apiOutputRows (2), apiItemRows (11)
-  - projects/demo/src/app/pages/panel-menu/panel-menu-demo.component.html: replaced 3 raw <table class="demo-api-table"> with <app-doc-api-reference> instances
-  - projects/demo/src/app/pages/tiered-menu/tiered-menu-demo.component.ts: added DocApiReferenceComponent + ApiPropRow; added apiInputRows (6), apiOutputRows (3), apiMethodRows (3), apiItemRows (10)
-  - projects/demo/src/app/pages/tiered-menu/tiered-menu-demo.component.html: replaced 4 raw <table class="demo-api-table"> with <app-doc-api-reference> instances
-State: PR #209 open. Build zero errors. Zero raw demo-api-table elements remain in panel-menu and tiered-menu.
-Verification:
-  eslint projects/demo/src/app/pages/panel-menu/ tiered-menu/ --max-warnings 0 → clean
-  ng build demo → PASS (zero errors; only pre-existing budget warnings)
-Next step: No remaining raw-table pages. Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
