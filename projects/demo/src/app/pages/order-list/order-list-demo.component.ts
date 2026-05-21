@@ -15,7 +15,9 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
   OrderListComponent,
@@ -93,7 +95,8 @@ const DEMO_PRODUCTS: DemoProduct[] = [
     DocQualityBadgeComponent,
 
     DocSectionComponent,
-
+    DocKeyboardNavComponent,
+    DocApiReferenceComponent,
     DocCssVarsTableComponent,
   ],
   templateUrl: './order-list-demo.component.html',
@@ -135,77 +138,6 @@ export class OrderListDemoComponent {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'value',
-      type: 'unknown[]',
-      default: '[]',
-      description: 'Two-way bound list of items (use [(value)]).',
-    },
-    { name: 'header', type: 'string', default: "''", description: 'List header text.' },
-    { name: 'filter', type: 'boolean', default: 'false', description: 'Shows a filter input.' },
-    {
-      name: 'filterPlaceholder',
-      type: 'string',
-      default: "'Search'",
-      description: 'Filter input placeholder.',
-    },
-    {
-      name: 'filterField',
-      type: 'string',
-      default: "'label'",
-      description: 'Object property to filter on.',
-    },
-    {
-      name: 'dataKey',
-      type: 'string | null',
-      default: 'null',
-      description: 'Property for unique item identity.',
-    },
-    {
-      name: 'selection',
-      type: 'unknown[]',
-      default: '[]',
-      description: 'Selected items array (two-way via [(selection)]).',
-    },
-    {
-      name: 'scrollHeight',
-      type: 'string',
-      default: "'250px'",
-      description: 'CSS height of the item list.',
-    },
-    {
-      name: 'dragdrop',
-      type: 'boolean',
-      default: 'false',
-      description: 'Enables drag-and-drop reordering.',
-    },
-    {
-      name: 'metaKeySelection',
-      type: 'boolean',
-      default: 'false',
-      description: 'Requires Meta/Ctrl for multi-selection.',
-    },
-    {
-      name: 'controls',
-      type: 'boolean',
-      default: 'true',
-      description: 'Shows up/down/top/bottom control buttons.',
-    },
-    {
-      name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal' | null",
-      default: 'null',
-      description: 'Design variant.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Order list'",
-      description: 'Accessible label for the list.',
-    },
-  ];
-
   public readonly importCode: string =
     "import { OrderListComponent } from 'ui-lib-custom/order-list'";
 
@@ -219,7 +151,6 @@ export class OrderListDemoComponent {
     { id: 'templates', label: 'Custom Templates' },
     { id: 'drag-drop', label: 'Drag & Drop' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
