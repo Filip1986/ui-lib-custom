@@ -82,6 +82,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [API table migration — panel-menu and tiered-menu final raw tables eliminated]
+Changed:
+  - projects/demo/src/app/pages/panel-menu/panel-menu-demo.component.ts: added DocApiReferenceComponent + ApiPropRow; added apiInputRows (6), apiOutputRows (2), apiItemRows (11)
+  - projects/demo/src/app/pages/panel-menu/panel-menu-demo.component.html: replaced 3 raw <table class="demo-api-table"> with <app-doc-api-reference> instances
+  - projects/demo/src/app/pages/tiered-menu/tiered-menu-demo.component.ts: added DocApiReferenceComponent + ApiPropRow; added apiInputRows (6), apiOutputRows (3), apiMethodRows (3), apiItemRows (10)
+  - projects/demo/src/app/pages/tiered-menu/tiered-menu-demo.component.html: replaced 4 raw <table class="demo-api-table"> with <app-doc-api-reference> instances
+State: PR #209 open. Build zero errors. Zero raw demo-api-table elements remain in panel-menu and tiered-menu.
+Verification:
+  eslint projects/demo/src/app/pages/panel-menu/ tiered-menu/ --max-warnings 0 → clean
+  ng build demo → PASS (zero errors; only pre-existing budget warnings)
+Next step: No remaining raw-table pages. Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+
 Date: 2026-05-21 [CSS vars: 20 more pages fixed — compound SCSS naming miss]
 Changed:
   - scripts/generate-css-var-sections.mjs: try <comp>.component.scss fallback when <comp>.scss not found
@@ -91,17 +103,5 @@ Verification:
   node scripts/generate-css-var-sections.mjs --dry-run → Processed: 20
   ng build demo → PASS (zero errors)
 Next step: Migrate 4 pages with raw <table> elements: panel-menu (has ariaRows/keyboardRows TS data), order-list and pick-list (have keyboardRows + apiRows TS data), tiered-menu (raw hardcoded HTML table — investigate first).
-
-Date: 2026-05-21 [example-section layout migration complete — 8 pages converted to app-doc-section]
-Changed:
-  - scripts/migrate-example-sections.mjs (NEW — converts autocomplete/float-label/image/image-compare/order-list/organization-chart/pick-list/split-button from old example-section layout to app-doc-section; CRLF normalisation fix required for Windows files)
-  - 8 demo pages HTML: <div class="examples"> + <section class="example-section"> → <app-doc-section id="X" title="LABEL">, <h3> headings removed, </section> → </app-doc-section>, description class normalised
-  - 7 of 8 demo pages TS: DocSectionComponent added to imports if missing; css-vars/accessibility sections added to sections[] if present in HTML but absent
-  - float-label, image, image-compare TS: removed now-unused DocDemoViewportComponent import and @Component.imports entry
-State: Build zero errors. All 8 pages now use standard app-doc-section layout identical to the rest of the app. Only pre-existing budget warnings remain.
-Verification:
-  node scripts/migrate-example-sections.mjs → Processed: 8
-  ng build demo → PASS (zero new errors; only pre-existing budget warnings)
-Next step: Migrate 7 pages with raw ARIA HTML tables to DocAriaTableComponent, then 17 pages with raw HTML API tables to DocApiReferenceComponent.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
