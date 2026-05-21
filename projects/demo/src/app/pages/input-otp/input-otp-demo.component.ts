@@ -43,6 +43,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for InputOtp — OTP entry with mask, integer-only, sizes, and form integration.
  */
@@ -63,6 +65,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
   styleUrl: './input-otp-demo.component.scss',
@@ -185,5 +189,25 @@ export class InputOtpDemoComponent {
       description: 'Marks the group as invalid.',
     },
     { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Cell size.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-input-otp-cell-width', description: 'Cell width.' },
+    { variable: '--uilib-input-otp-cell-height', description: 'Cell height.' },
+    { variable: '--uilib-input-otp-gap', description: 'Gap.' },
+    { variable: '--uilib-input-otp-font-size', description: 'Font size.' },
+    { variable: '--uilib-input-otp-font-weight', description: 'Font weight.' },
+    { variable: '--uilib-input-otp-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-input-otp-border-color', description: 'Border colour.' },
+    { variable: '--uilib-input-otp-bg', description: 'Background colour.' },
+    { variable: '--uilib-input-otp-text-color', description: 'Text text colour.' },
+    { variable: '--uilib-input-otp-placeholder-color', description: 'Placeholder text colour.' },
+    { variable: '--uilib-input-otp-focus-border-color', description: 'Focus Border text colour.' },
+    { variable: '--uilib-input-otp-focus-ring', description: 'Focus ring.' },
+    {
+      variable: '--uilib-input-otp-invalid-border-color',
+      description: 'Invalid Border text colour.',
+    },
+    { variable: '--uilib-input-otp-filled-bg', description: 'Filled background colour.' },
+    { variable: '--uilib-input-otp-disabled-opacity', description: 'Disabled opacity.' },
   ];
 }

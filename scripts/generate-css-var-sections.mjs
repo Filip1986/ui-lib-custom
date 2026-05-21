@@ -467,8 +467,13 @@ const libFolders = readdirSync(LIB_DIR).filter((name) => {
 });
 
 for (const libFolder of libFolders) {
-  const scssPath = join(LIB_DIR, libFolder, `${libFolder}.scss`);
-  if (!existsSync(scssPath)) {
+  const scssPath =
+    existsSync(join(LIB_DIR, libFolder, `${libFolder}.scss`))
+      ? join(LIB_DIR, libFolder, `${libFolder}.scss`)
+      : existsSync(join(LIB_DIR, libFolder, `${libFolder}.component.scss`))
+        ? join(LIB_DIR, libFolder, `${libFolder}.component.scss`)
+        : null;
+  if (!scssPath) {
     skipped++;
     continue;
   }

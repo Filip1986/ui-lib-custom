@@ -21,6 +21,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface Product {
   id: number;
   name: string;
@@ -50,6 +52,8 @@ interface Product {
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
@@ -84,6 +88,7 @@ export class TableDemoComponent {
     { id: 'interactive-demo', label: 'Interactive Demo' },
     { id: 'all-variants', label: 'All Variants' },
     { id: 'scrollable-table', label: 'Scrollable Table' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -336,4 +341,52 @@ export class TableDemoComponent {
   public stars(rating: number): string {
     return '*'.repeat(rating) + '-'.repeat(5 - rating);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-table-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-table-border-width', description: 'Border width.' },
+    { variable: '--uilib-table-border-color', description: 'Border colour.' },
+    { variable: '--uilib-table-bg', description: 'Background colour.' },
+    { variable: '--uilib-table-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-table-footer-bg', description: 'Footer background colour.' },
+    { variable: '--uilib-table-row-bg', description: 'Row background colour.' },
+    { variable: '--uilib-table-row-bg-alt', description: 'Row Bg Alt.' },
+    { variable: '--uilib-table-row-bg-hover', description: 'Row background colour (hover).' },
+    { variable: '--uilib-table-row-bg-selected', description: 'Row background colour (selected).' },
+    { variable: '--uilib-table-header-color', description: 'Header text colour.' },
+    { variable: '--uilib-table-body-color', description: 'Body text colour.' },
+    { variable: '--uilib-table-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-table-header-font-size', description: 'Header font size.' },
+    { variable: '--uilib-table-body-font-size', description: 'Body Font size.' },
+    { variable: '--uilib-table-cell-padding-y', description: 'Cell vertical padding.' },
+    { variable: '--uilib-table-cell-padding-x', description: 'Cell horizontal padding.' },
+    { variable: '--uilib-table-header-padding-y', description: 'Header vertical padding.' },
+    { variable: '--uilib-table-header-padding-x', description: 'Header horizontal padding.' },
+    { variable: '--uilib-table-filter-padding', description: 'Filter padding.' },
+    { variable: '--uilib-table-filter-font-size', description: 'Filter Font size.' },
+    { variable: '--uilib-table-sort-icon-size', description: 'Sort Icon size.' },
+    { variable: '--uilib-table-sort-icon-color', description: 'Sort Icon text colour.' },
+    {
+      variable: '--uilib-table-sort-icon-color-active',
+      description: 'Sort Icon text colour (active).',
+    },
+    {
+      variable: '--uilib-table-selection-border-color',
+      description: 'Selection Border text colour.',
+    },
+    { variable: '--uilib-table-checkbox-size', description: 'Checkbox size.' },
+    { variable: '--uilib-table-expander-size', description: 'Expander size.' },
+    { variable: '--uilib-table-expander-bg', description: 'Expander background colour.' },
+    { variable: '--uilib-table-expander-color', description: 'Expander text colour.' },
+    {
+      variable: '--uilib-table-expander-bg-hover',
+      description: 'Expander background colour (hover).',
+    },
+    { variable: '--uilib-table-expansion-bg', description: 'Expansion background colour.' },
+    { variable: '--uilib-table-paginator-margin-top', description: 'Paginator Margin Top.' },
+    { variable: '--uilib-table-caption-padding', description: 'Caption padding.' },
+    { variable: '--uilib-table-caption-bg', description: 'Caption background colour.' },
+    { variable: '--uilib-table-caption-color', description: 'Caption text colour.' },
+    { variable: '--uilib-table-caption-font-size', description: 'Caption Font size.' },
+    { variable: '--uilib-table-caption-font-weight', description: 'Caption font weight.' },
+  ];
 }

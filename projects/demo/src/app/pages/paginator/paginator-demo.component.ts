@@ -12,6 +12,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Paginator component.
  * Showcases all three variants, sizes, optional controls, and event handling.
@@ -27,6 +29,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',
@@ -65,6 +69,7 @@ export class PaginatorDemoComponent {
     { id: 'jump-to-page', label: 'Jump To Page' },
     { id: 'without-first-last', label: 'Without First / Last Icons' },
     { id: 'arrows-only', label: 'Page Links Off' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -173,4 +178,56 @@ export class PaginatorDemoComponent {
     this.largeFirst.set(event.first);
     this.largeRows.set(event.rows);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-paginator-gap', description: 'Gap.' },
+    { variable: '--uilib-paginator-padding', description: 'Padding.' },
+    { variable: '--uilib-paginator-button-size', description: 'Button size.' },
+    { variable: '--uilib-paginator-button-font-size', description: 'Button Font size.' },
+    { variable: '--uilib-paginator-button-radius', description: 'Button border radius.' },
+    { variable: '--uilib-paginator-button-bg', description: 'Button background colour.' },
+    { variable: '--uilib-paginator-button-color', description: 'Button text colour.' },
+    { variable: '--uilib-paginator-button-border', description: 'Button border shorthand.' },
+    {
+      variable: '--uilib-paginator-button-bg-hover',
+      description: 'Button background colour (hover).',
+    },
+    {
+      variable: '--uilib-paginator-button-color-hover',
+      description: 'Button text colour (hover).',
+    },
+    {
+      variable: '--uilib-paginator-button-bg-selected',
+      description: 'Button background colour (selected).',
+    },
+    {
+      variable: '--uilib-paginator-button-color-selected',
+      description: 'Button text colour (selected).',
+    },
+    {
+      variable: '--uilib-paginator-button-bg-disabled',
+      description: 'Button background colour (disabled).',
+    },
+    {
+      variable: '--uilib-paginator-button-color-disabled',
+      description: 'Button text colour (disabled).',
+    },
+    { variable: '--uilib-paginator-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-paginator-current-color', description: 'Current text colour.' },
+    { variable: '--uilib-paginator-current-font-size', description: 'Current Font size.' },
+    { variable: '--uilib-paginator-jtp-width', description: 'Jtp width.' },
+    { variable: '--uilib-paginator-jtp-height', description: 'Jtp height.' },
+    { variable: '--uilib-paginator-jtp-border', description: 'Jtp border shorthand.' },
+    { variable: '--uilib-paginator-jtp-radius', description: 'Jtp border radius.' },
+    { variable: '--uilib-paginator-jtp-font-size', description: 'Jtp Font size.' },
+    { variable: '--uilib-paginator-jtp-bg', description: 'Jtp background colour.' },
+    { variable: '--uilib-paginator-jtp-color', description: 'Jtp text colour.' },
+    { variable: '--uilib-paginator-rpp-height', description: 'Rpp height.' },
+    { variable: '--uilib-paginator-rpp-border', description: 'Rpp border shorthand.' },
+    { variable: '--uilib-paginator-rpp-radius', description: 'Rpp border radius.' },
+    { variable: '--uilib-paginator-rpp-font-size', description: 'Rpp Font size.' },
+    { variable: '--uilib-paginator-rpp-bg', description: 'Rpp background colour.' },
+    { variable: '--uilib-paginator-rpp-color', description: 'Rpp text colour.' },
+    { variable: '--uilib-paginator-rpp-padding', description: 'Rpp padding.' },
+    { variable: '--uilib-paginator-transition', description: 'Transition.' },
+  ];
 }

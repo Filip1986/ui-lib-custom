@@ -38,6 +38,8 @@ import {
   dragDropTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 
 // ---------------------------------------------------------------------------
 // Demo data model
@@ -91,6 +93,8 @@ const DEMO_PRODUCTS: DemoProduct[] = [
     DocQualityBadgeComponent,
 
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './order-list-demo.component.html',
   styleUrl: './order-list-demo.component.scss',
@@ -216,6 +220,7 @@ export class OrderListDemoComponent {
     { id: 'drag-drop', label: 'Drag & Drop' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -416,5 +421,58 @@ export class OrderListDemoComponent {
       description: 'Empty / no-filter-match state.',
     },
     { name: 'uiOrderListFilter', type: '—', description: 'Replaces default filter input.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-order-list-gap', description: 'Gap.' },
+    { variable: '--uilib-order-list-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-order-list-max-height', description: 'Maximum height.' },
+    { variable: '--uilib-order-list-bg', description: 'Background colour.' },
+    { variable: '--uilib-order-list-border', description: 'Border shorthand.' },
+    { variable: '--uilib-order-list-radius', description: 'Border radius.' },
+    { variable: '--uilib-order-list-item-padding', description: 'Item padding.' },
+    { variable: '--uilib-order-list-item-bg', description: 'Item background colour.' },
+    {
+      variable: '--uilib-order-list-item-bg-hover',
+      description: 'Item background colour (hover).',
+    },
+    {
+      variable: '--uilib-order-list-item-bg-selected',
+      description: 'Item background colour (selected).',
+    },
+    { variable: '--uilib-order-list-item-color', description: 'Item text colour.' },
+    {
+      variable: '--uilib-order-list-item-color-selected',
+      description: 'Item text colour (selected).',
+    },
+    { variable: '--uilib-order-list-item-border-bottom', description: 'Item Border Bottom.' },
+    { variable: '--uilib-order-list-item-drag-opacity', description: 'Item Drag opacity.' },
+    {
+      variable: '--uilib-order-list-drop-indicator-color',
+      description: 'Drop Indicator text colour.',
+    },
+    { variable: '--uilib-order-list-drop-indicator-height', description: 'Drop Indicator height.' },
+    { variable: '--uilib-order-list-item-bg-striped', description: 'Item Bg Striped.' },
+    { variable: '--uilib-order-list-filter-padding', description: 'Filter padding.' },
+    { variable: '--uilib-order-list-filter-border', description: 'Filter border shorthand.' },
+    { variable: '--uilib-order-list-filter-bg', description: 'Filter background colour.' },
+    { variable: '--uilib-order-list-filter-radius', description: 'Filter border radius.' },
+    { variable: '--uilib-order-list-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-order-list-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-order-list-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-order-list-header-border', description: 'Header border shorthand.' },
+    { variable: '--uilib-order-list-control-size', description: 'Control size.' },
+    { variable: '--uilib-order-list-control-bg', description: 'Control background colour.' },
+    { variable: '--uilib-order-list-control-color', description: 'Control text colour.' },
+    {
+      variable: '--uilib-order-list-control-bg-hover',
+      description: 'Control background colour (hover).',
+    },
+    { variable: '--uilib-order-list-control-radius', description: 'Control border radius.' },
+    { variable: '--uilib-order-list-control-gap', description: 'Control gap.' },
+    { variable: '--uilib-order-list-control-border', description: 'Control border shorthand.' },
+    { variable: '--uilib-order-list-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-order-list-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-order-list-transition', description: 'Transition.' },
+    { variable: '--uilib-order-list-font-size', description: 'Font size.' },
   ];
 }

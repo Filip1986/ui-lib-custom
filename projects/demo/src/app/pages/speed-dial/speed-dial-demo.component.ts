@@ -28,6 +28,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface SpeedDialLogEntry {
   timestamp: string;
   message: string;
@@ -51,6 +53,8 @@ interface SpeedDialLogEntry {
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './speed-dial-demo.component.html',
   styleUrl: './speed-dial-demo.component.scss',
@@ -92,6 +96,7 @@ export class SpeedDialDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'event-log', label: 'Event Log' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -247,4 +252,23 @@ export class SpeedDialDemoComponent {
       ...entries.slice(0, 9),
     ]);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-speed-dial-button-size', description: 'Button size.' },
+    { variable: '--uilib-speed-dial-button-bg', description: 'Button background colour.' },
+    { variable: '--uilib-speed-dial-button-color', description: 'Button text colour.' },
+    { variable: '--uilib-speed-dial-button-shadow', description: 'Button box shadow.' },
+    { variable: '--uilib-speed-dial-item-size', description: 'Item size.' },
+    { variable: '--uilib-speed-dial-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-speed-dial-item-color', description: 'Item text colour.' },
+    { variable: '--uilib-speed-dial-item-shadow', description: 'Item box shadow.' },
+    { variable: '--uilib-speed-dial-gap', description: 'Gap.' },
+    { variable: '--uilib-speed-dial-radius', description: 'Border radius.' },
+    { variable: '--uilib-speed-dial-mask-bg', description: 'Mask background colour.' },
+    { variable: '--uilib-speed-dial-mask-z', description: 'Mask Z.' },
+    { variable: '--uilib-speed-dial-list-z', description: 'List Z.' },
+    { variable: '--uilib-speed-dial-transition-duration', description: 'Transition Duration.' },
+    { variable: '--uilib-speed-dial-transition-easing', description: 'Transition Easing.' },
+    { variable: '--uilib-speed-dial-rotate-open', description: 'Rotate (open).' },
+    { variable: '--uilib-speed-dial-focus-ring', description: 'Focus ring.' },
+  ];
 }

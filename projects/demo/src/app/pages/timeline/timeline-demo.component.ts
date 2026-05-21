@@ -22,6 +22,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface ProjectEvent {
   status: string;
   date: string;
@@ -50,6 +52,8 @@ interface OrderStep {
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './timeline-demo.component.html',
   styleUrl: './timeline-demo.component.scss',
@@ -87,6 +91,7 @@ export class TimelineDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'right-alignment', label: 'Right Alignment' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -183,4 +188,19 @@ export class TimelineDemoComponent {
     };
     return `timeline-demo__badge ${map[severity]}`;
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-timeline-connector-color', description: 'Connector text colour.' },
+    { variable: '--uilib-timeline-connector-width', description: 'Connector width.' },
+    { variable: '--uilib-timeline-marker-size', description: 'Marker size.' },
+    { variable: '--uilib-timeline-marker-bg', description: 'Marker background colour.' },
+    { variable: '--uilib-timeline-marker-border-color', description: 'Marker Border text colour.' },
+    { variable: '--uilib-timeline-marker-border-width', description: 'Marker Border width.' },
+    { variable: '--uilib-timeline-event-gap', description: 'Event gap.' },
+    { variable: '--uilib-timeline-content-gap', description: 'Content gap.' },
+    { variable: '--uilib-timeline-opposite-gap', description: 'Opposite gap.' },
+    { variable: '--uilib-timeline-opposite-min-width', description: 'Opposite Min width.' },
+    { variable: '--uilib-timeline-font-size', description: 'Font size.' },
+    { variable: '--uilib-timeline-color', description: 'Text colour.' },
+    { variable: '--uilib-timeline-focus-ring-color', description: 'Focus ring colour.' },
+  ];
 }

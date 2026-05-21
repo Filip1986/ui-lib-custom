@@ -47,6 +47,8 @@ import {
   templateTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.
@@ -67,6 +69,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
 
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
@@ -188,4 +192,35 @@ export class SplitButtonDemoComponent {
     const label: string = event.item.label ?? 'Unknown action';
     this.lastAction.set(`Menu action: ${label}`);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-split-button-bg', description: 'Background colour.' },
+    { variable: '--uilib-split-button-fg', description: 'Fg.' },
+    { variable: '--uilib-split-button-border', description: 'Border shorthand.' },
+    { variable: '--uilib-split-button-bg-hover', description: 'Background colour (hover).' },
+    { variable: '--uilib-split-button-fg-hover', description: 'Fg (hover).' },
+    { variable: '--uilib-split-button-emphasis', description: 'Emphasis.' },
+    { variable: '--uilib-split-button-radius', description: 'Border radius.' },
+    { variable: '--uilib-split-button-padding', description: 'Padding.' },
+    { variable: '--uilib-split-button-font-size', description: 'Font size.' },
+    { variable: '--uilib-split-button-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-split-button-transition', description: 'Transition.' },
+    { variable: '--uilib-split-button-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-split-button-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-split-button-divider-color', description: 'Divider text colour.' },
+    { variable: '--uilib-split-button-menu-bg', description: 'Menu background colour.' },
+    { variable: '--uilib-split-button-menu-shadow', description: 'Menu box shadow.' },
+    { variable: '--uilib-split-button-menu-radius', description: 'Menu border radius.' },
+    { variable: '--uilib-split-button-menu-z', description: 'Menu Z.' },
+    { variable: '--uilib-split-button-menu-item-padding', description: 'Menu Item padding.' },
+    {
+      variable: '--uilib-split-button-menu-item-hover-bg',
+      description: 'Menu Item Hover background colour.',
+    },
+    {
+      variable: '--uilib-split-button-menu-item-disabled-opacity',
+      description: 'Menu Item Disabled opacity.',
+    },
+    { variable: '--uilib-split-button-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-split-button-icon-size', description: 'Icon size.' },
+  ];
 }

@@ -60,6 +60,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for InputNumber modes, formatting, controls, and forms.
  */
@@ -81,6 +83,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
@@ -283,5 +287,70 @@ export class InputNumberDemoComponent {
       default: 'false',
       description: 'Marks the field as invalid.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-input-number-gap', description: 'Gap.' },
+    { variable: '--uilib-input-number-border-width', description: 'Border width.' },
+    { variable: '--uilib-input-number-border-style', description: 'Border style.' },
+    { variable: '--uilib-input-number-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-input-number-height-sm', description: 'Height — sm.' },
+    { variable: '--uilib-input-number-height-md', description: 'Height — md.' },
+    { variable: '--uilib-input-number-height-lg', description: 'Height — lg.' },
+    { variable: '--uilib-input-number-input-height', description: 'Input height.' },
+    { variable: '--uilib-input-number-padding-y-sm', description: 'Vertical padding — sm.' },
+    { variable: '--uilib-input-number-padding-y-md', description: 'Vertical padding — md.' },
+    { variable: '--uilib-input-number-padding-y-lg', description: 'Vertical padding — lg.' },
+    { variable: '--uilib-input-number-padding-x-sm', description: 'Horizontal padding — sm.' },
+    { variable: '--uilib-input-number-padding-x-md', description: 'Horizontal padding — md.' },
+    { variable: '--uilib-input-number-padding-x-lg', description: 'Horizontal padding — lg.' },
+    { variable: '--uilib-input-number-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-input-number-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-input-number-font-family', description: 'Font family.' },
+    { variable: '--uilib-input-number-font-weight', description: 'Font weight.' },
+    { variable: '--uilib-input-number-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-input-number-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-input-number-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-input-number-font-size', description: 'Font size.' },
+    { variable: '--uilib-input-number-bg', description: 'Background colour.' },
+    { variable: '--uilib-input-number-text', description: 'Text.' },
+    { variable: '--uilib-input-number-border-color', description: 'Border colour.' },
+    { variable: '--uilib-input-number-border-color-hover', description: 'Border colour (hover).' },
+    { variable: '--uilib-input-number-border-color-focus', description: 'Border colour (focus).' },
+    { variable: '--uilib-input-number-placeholder-color', description: 'Placeholder text colour.' },
+    { variable: '--uilib-input-number-prefix-color', description: 'Prefix text colour.' },
+    { variable: '--uilib-input-number-suffix-color', description: 'Suffix text colour.' },
+    { variable: '--uilib-input-number-button-bg', description: 'Button background colour.' },
+    { variable: '--uilib-input-number-button-text', description: 'Button Text.' },
+    {
+      variable: '--uilib-input-number-button-border-color',
+      description: 'Button Border text colour.',
+    },
+    {
+      variable: '--uilib-input-number-button-hover-background',
+      description: 'Button Hover Background.',
+    },
+    {
+      variable: '--uilib-input-number-button-active-background',
+      description: 'Button Active Background.',
+    },
+    {
+      variable: '--uilib-input-number-button-disabled-opacity',
+      description: 'Button Disabled opacity.',
+    },
+    { variable: '--uilib-input-number-button-width-sm', description: 'Button width — sm.' },
+    { variable: '--uilib-input-number-button-width-md', description: 'Button width — md.' },
+    { variable: '--uilib-input-number-button-width-lg', description: 'Button width — lg.' },
+    { variable: '--uilib-input-number-button-width', description: 'Button width.' },
+    { variable: '--uilib-input-number-clear-size', description: 'Clear size.' },
+    { variable: '--uilib-input-number-clear-color', description: 'Clear text colour.' },
+    { variable: '--uilib-input-number-clear-offset', description: 'Clear offset.' },
+    { variable: '--uilib-input-number-focus-ring', description: 'Focus ring.' },
+    {
+      variable: '--uilib-input-number-invalid-border-color',
+      description: 'Invalid Border text colour.',
+    },
+    { variable: '--uilib-input-number-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-input-number-filled-bg', description: 'Filled background colour.' },
+    { variable: '--uilib-input-number-transition', description: 'Transition.' },
   ];
 }

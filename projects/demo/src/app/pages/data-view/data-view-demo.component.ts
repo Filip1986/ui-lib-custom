@@ -65,6 +65,8 @@ import {
   themeIntegrationTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 type DataViewSortField = 'name' | 'price' | 'rating';
 
 /**
@@ -97,6 +99,8 @@ type DataViewSortField = 'name' | 'price' | 'rating';
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './data-view-demo.component.html',
   styleUrl: './data-view-demo.component.scss',
@@ -320,5 +324,47 @@ export class DataViewDemoComponent {
       default: "'Data list'",
       description: 'Accessible label for the data list region.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-data-view-border', description: 'Border shorthand.' },
+    { variable: '--uilib-data-view-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-data-view-bg', description: 'Background colour.' },
+    { variable: '--uilib-data-view-fg', description: 'Fg.' },
+    { variable: '--uilib-data-view-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-data-view-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-data-view-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-data-view-footer-bg', description: 'Footer background colour.' },
+    { variable: '--uilib-data-view-footer-padding', description: 'Footer padding.' },
+    { variable: '--uilib-data-view-item-padding', description: 'Item padding.' },
+    { variable: '--uilib-data-view-item-border', description: 'Item border shorthand.' },
+    { variable: '--uilib-data-view-item-hover-bg', description: 'Item Hover background colour.' },
+    { variable: '--uilib-data-view-grid-columns', description: 'Grid Columns.' },
+    { variable: '--uilib-data-view-grid-gap', description: 'Grid gap.' },
+    { variable: '--uilib-data-view-paginator-padding', description: 'Paginator padding.' },
+    { variable: '--uilib-data-view-paginator-gap', description: 'Paginator gap.' },
+    { variable: '--uilib-data-view-paginator-button-size', description: 'Paginator Button size.' },
+    {
+      variable: '--uilib-data-view-paginator-active-bg',
+      description: 'Paginator Active background colour.',
+    },
+    { variable: '--uilib-data-view-paginator-active-fg', description: 'Paginator Active Fg.' },
+    {
+      variable: '--uilib-data-view-paginator-hover-bg',
+      description: 'Paginator Hover background colour.',
+    },
+    {
+      variable: '--uilib-data-view-paginator-disabled-opacity',
+      description: 'Paginator Disabled opacity.',
+    },
+    { variable: '--uilib-data-view-paginator-border', description: 'Paginator border shorthand.' },
+    {
+      variable: '--uilib-data-view-paginator-button-radius',
+      description: 'Paginator Button border radius.',
+    },
+    { variable: '--uilib-data-view-empty-padding', description: 'Empty padding.' },
+    { variable: '--uilib-data-view-empty-color', description: 'Empty text colour.' },
+    { variable: '--uilib-data-view-loading-min-height', description: 'Loading Min height.' },
+    { variable: '--uilib-data-view-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-data-view-font-size', description: 'Font size.' },
   ];
 }

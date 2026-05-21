@@ -21,6 +21,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the TreeTable component.
  * Showcases: basic table, expand/collapse, sorting, global filter,
@@ -41,6 +43,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
@@ -79,6 +83,7 @@ export class TreeTableDemoComponent {
     { id: 'organisation-data', label: 'Organisation Data' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -347,5 +352,72 @@ export class TreeTableDemoComponent {
     { key: '←', action: 'Collapse an expanded row group.' },
     { key: 'Enter / Space', action: 'Select the focused row (respects selection mode).' },
     { key: 'Home / End', action: 'Move focus to the first or last row.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-tree-table-font-size', description: 'Font size.' },
+    { variable: '--uilib-tree-table-line-height', description: 'Line height.' },
+    { variable: '--uilib-tree-table-border', description: 'Border shorthand.' },
+    { variable: '--uilib-tree-table-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-tree-table-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-tree-table-header-color', description: 'Header text colour.' },
+    { variable: '--uilib-tree-table-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-tree-table-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-tree-table-header-border', description: 'Header border shorthand.' },
+    { variable: '--uilib-tree-table-header-bg-sorted', description: 'Header Bg Sorted.' },
+    { variable: '--uilib-tree-table-header-color-sorted', description: 'Header Color Sorted.' },
+    { variable: '--uilib-tree-table-row-bg', description: 'Row background colour.' },
+    { variable: '--uilib-tree-table-row-bg-alt', description: 'Row Bg Alt.' },
+    { variable: '--uilib-tree-table-row-bg-hover', description: 'Row background colour (hover).' },
+    {
+      variable: '--uilib-tree-table-row-bg-selected',
+      description: 'Row background colour (selected).',
+    },
+    { variable: '--uilib-tree-table-row-color', description: 'Row text colour.' },
+    {
+      variable: '--uilib-tree-table-row-color-selected',
+      description: 'Row text colour (selected).',
+    },
+    { variable: '--uilib-tree-table-row-border', description: 'Row border shorthand.' },
+    { variable: '--uilib-tree-table-cell-padding', description: 'Cell padding.' },
+    { variable: '--uilib-tree-table-toggle-size', description: 'Toggle button size.' },
+    { variable: '--uilib-tree-table-toggle-color', description: 'Toggle icon colour.' },
+    {
+      variable: '--uilib-tree-table-toggle-bg-hover',
+      description: 'Toggle background colour (hover).',
+    },
+    { variable: '--uilib-tree-table-indent-size', description: 'Indent size.' },
+    { variable: '--uilib-tree-table-checkbox-size', description: 'Checkbox size.' },
+    { variable: '--uilib-tree-table-checkbox-border', description: 'Checkbox border shorthand.' },
+    { variable: '--uilib-tree-table-checkbox-bg', description: 'Checkbox background colour.' },
+    {
+      variable: '--uilib-tree-table-checkbox-bg-checked',
+      description: 'Checkbox background colour (checked).',
+    },
+    {
+      variable: '--uilib-tree-table-checkbox-border-checked',
+      description: 'Checkbox border shorthand (checked).',
+    },
+    {
+      variable: '--uilib-tree-table-checkbox-color-checked',
+      description: 'Checkbox text colour (checked).',
+    },
+    { variable: '--uilib-tree-table-filter-border', description: 'Filter border shorthand.' },
+    {
+      variable: '--uilib-tree-table-filter-border-radius',
+      description: 'Filter Border border radius.',
+    },
+    { variable: '--uilib-tree-table-filter-bg', description: 'Filter background colour.' },
+    { variable: '--uilib-tree-table-filter-color', description: 'Filter text colour.' },
+    { variable: '--uilib-tree-table-filter-padding', description: 'Filter padding.' },
+    {
+      variable: '--uilib-tree-table-filter-border-focus',
+      description: 'Filter border shorthand (focus).',
+    },
+    { variable: '--uilib-tree-table-sort-icon-color', description: 'Sort Icon text colour.' },
+    {
+      variable: '--uilib-tree-table-sort-icon-color-active',
+      description: 'Sort Icon text colour (active).',
+    },
+    { variable: '--uilib-tree-table-leaf-spacer-width', description: 'Leaf Spacer width.' },
   ];
 }

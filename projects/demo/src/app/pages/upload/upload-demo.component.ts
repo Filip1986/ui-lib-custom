@@ -24,6 +24,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface UploadLogEntry {
   timestamp: string;
   message: string;
@@ -46,6 +48,8 @@ interface UploadLogEntry {
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './upload-demo.component.html',
   styleUrl: './upload-demo.component.scss',
@@ -67,6 +71,7 @@ export class UploadDemoComponent {
     { id: 'custom-file-template', label: 'Custom File Template' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'event-log', label: 'Event Log' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -224,4 +229,79 @@ export class UploadDemoComponent {
     },
     competitiveParity: 'pending',
   };
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-upload-border-color', description: 'Border colour.' },
+    { variable: '--uilib-upload-border', description: 'Border shorthand.' },
+    { variable: '--uilib-upload-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-upload-bg', description: 'Background colour.' },
+    { variable: '--uilib-upload-fg', description: 'Fg.' },
+    { variable: '--uilib-upload-secondary-fg', description: 'Secondary Fg.' },
+    { variable: '--uilib-upload-transition', description: 'Transition.' },
+    { variable: '--uilib-upload-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-upload-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-upload-toolbar-gap', description: 'Toolbar gap.' },
+    { variable: '--uilib-upload-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-upload-drop-zone-min-height', description: 'Drop Zone Min height.' },
+    { variable: '--uilib-upload-drop-zone-border', description: 'Drop Zone border shorthand.' },
+    { variable: '--uilib-upload-drop-zone-bg', description: 'Drop Zone background colour.' },
+    {
+      variable: '--uilib-upload-drop-zone-drag-border-color',
+      description: 'Drop Zone Drag Border text colour.',
+    },
+    {
+      variable: '--uilib-upload-drop-zone-drag-bg',
+      description: 'Drop Zone Drag background colour.',
+    },
+    { variable: '--uilib-upload-empty-gap', description: 'Empty gap.' },
+    { variable: '--uilib-upload-empty-icon-color', description: 'Empty Icon text colour.' },
+    { variable: '--uilib-upload-empty-text-color', description: 'Empty Text text colour.' },
+    { variable: '--uilib-upload-empty-hint-color', description: 'Empty Hint text colour.' },
+    { variable: '--uilib-upload-empty-link-color', description: 'Empty Link text colour.' },
+    { variable: '--uilib-upload-file-list-gap', description: 'File List gap.' },
+    { variable: '--uilib-upload-file-item-padding', description: 'File Item padding.' },
+    { variable: '--uilib-upload-file-item-bg', description: 'File Item background colour.' },
+    { variable: '--uilib-upload-file-item-border', description: 'File Item border shorthand.' },
+    { variable: '--uilib-upload-file-item-radius', description: 'File Item border radius.' },
+    { variable: '--uilib-upload-file-item-gap', description: 'File Item gap.' },
+    { variable: '--uilib-upload-file-icon-color', description: 'File Icon text colour.' },
+    { variable: '--uilib-upload-file-name-color', description: 'File Name text colour.' },
+    { variable: '--uilib-upload-file-size-color', description: 'File Size text colour.' },
+    { variable: '--uilib-upload-file-remove-color', description: 'File Remove text colour.' },
+    {
+      variable: '--uilib-upload-file-remove-hover-color',
+      description: 'File Remove Hover text colour.',
+    },
+    { variable: '--uilib-upload-file-preview-radius', description: 'File Preview border radius.' },
+    { variable: '--uilib-upload-file-preview-size', description: 'File Preview size.' },
+    { variable: '--uilib-upload-btn-padding', description: 'Btn padding.' },
+    { variable: '--uilib-upload-btn-font-size', description: 'Btn Font size.' },
+    { variable: '--uilib-upload-btn-font-weight', description: 'Btn font weight.' },
+    { variable: '--uilib-upload-btn-radius', description: 'Btn border radius.' },
+    { variable: '--uilib-upload-btn-gap', description: 'Btn gap.' },
+    { variable: '--uilib-upload-btn-disabled-opacity', description: 'Btn Disabled opacity.' },
+    { variable: '--uilib-upload-btn-choose-bg', description: 'Btn Choose background colour.' },
+    { variable: '--uilib-upload-btn-choose-fg', description: 'Btn Choose Fg.' },
+    {
+      variable: '--uilib-upload-btn-choose-hover-bg',
+      description: 'Btn Choose Hover background colour.',
+    },
+    { variable: '--uilib-upload-btn-upload-bg', description: 'Btn Upload background colour.' },
+    { variable: '--uilib-upload-btn-upload-fg', description: 'Btn Upload Fg.' },
+    {
+      variable: '--uilib-upload-btn-upload-hover-bg',
+      description: 'Btn Upload Hover background colour.',
+    },
+    { variable: '--uilib-upload-btn-cancel-bg', description: 'Btn Cancel background colour.' },
+    { variable: '--uilib-upload-btn-cancel-fg', description: 'Btn Cancel Fg.' },
+    {
+      variable: '--uilib-upload-btn-cancel-hover-bg',
+      description: 'Btn Cancel Hover background colour.',
+    },
+    { variable: '--uilib-upload-messages-bg', description: 'Messages background colour.' },
+    { variable: '--uilib-upload-messages-border', description: 'Messages border shorthand.' },
+    { variable: '--uilib-upload-messages-fg', description: 'Messages Fg.' },
+    { variable: '--uilib-upload-messages-padding', description: 'Messages padding.' },
+    { variable: '--uilib-upload-messages-radius', description: 'Messages border radius.' },
+    { variable: '--uilib-upload-messages-close-color', description: 'Messages Close text colour.' },
+  ];
 }

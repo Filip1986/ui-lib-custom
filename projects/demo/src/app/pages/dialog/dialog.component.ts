@@ -19,6 +19,8 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for Dialog component capabilities.
  */
@@ -40,6 +42,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
@@ -63,6 +67,7 @@ export class DialogDemoComponent {
     { id: 'headless', label: 'Headless' },
     { id: 'variant-switcher', label: 'Variant Switcher' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -260,6 +265,51 @@ export class DialogDemoComponent {
       key: 'Enter / Space',
       target: 'Close button',
       action: 'Closes the dialog.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-dialog-bg', description: 'Background colour.' },
+    { variable: '--uilib-dialog-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-dialog-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-dialog-border', description: 'Border shorthand.' },
+    { variable: '--uilib-dialog-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-dialog-header-color', description: 'Header text colour.' },
+    { variable: '--uilib-dialog-header-font-size', description: 'Header font size.' },
+    { variable: '--uilib-dialog-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-dialog-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-dialog-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-dialog-footer-padding', description: 'Footer padding.' },
+    { variable: '--uilib-dialog-footer-border-top', description: 'Footer Border Top.' },
+    { variable: '--uilib-dialog-close-btn-size', description: 'Close Btn size.' },
+    { variable: '--uilib-dialog-close-btn-color', description: 'Close Btn text colour.' },
+    {
+      variable: '--uilib-dialog-close-btn-hover-bg',
+      description: 'Close Btn Hover background colour.',
+    },
+    { variable: '--uilib-dialog-z-index', description: 'Z-index.' },
+    { variable: '--uilib-dialog-enter-duration', description: 'Enter animation duration.' },
+    { variable: '--uilib-dialog-enter-easing', description: 'Enter animation easing.' },
+    { variable: '--uilib-dialog-enter-start-scale', description: 'Enter Start Scale.' },
+    { variable: '--uilib-dialog-enter-start-translate-y', description: 'Enter Start Translate Y.' },
+    {
+      variable: '--uilib-dialog-backdrop-enter-duration',
+      description: 'Backdrop enter animation duration.',
+    },
+    {
+      variable: '--uilib-dialog-backdrop-enter-easing',
+      description: 'Backdrop enter animation easing.',
+    },
+    {
+      variable: '--uilib-dialog-border-bootstrap',
+      description: 'Border shorthand — bootstrap variant.',
+    },
+    {
+      variable: '--uilib-dialog-border-minimal',
+      description: 'Border shorthand — minimal variant.',
+    },
+    {
+      variable: '--uilib-dialog-action-hover-material',
+      description: 'Action Hover — material variant.',
     },
   ];
 }

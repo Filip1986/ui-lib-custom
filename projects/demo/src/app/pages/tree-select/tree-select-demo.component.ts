@@ -45,6 +45,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 const SAMPLE_TREE_NODES: TreeNode[] = [
   {
     key: 'documents',
@@ -111,6 +113,8 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tree-select-demo.component.html',
   styleUrl: './tree-select-demo.component.scss',
@@ -220,6 +224,7 @@ export class TreeSelectDemoComponent {
     { id: 'ngModel', label: 'ngModel' },
     { id: 'reactive', label: 'Reactive Forms' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -284,5 +289,28 @@ export class TreeSelectDemoComponent {
     { key: '←', suffix: 'in panel', action: 'Collapse an expanded node or move to parent.' },
     { key: 'Enter / Space', suffix: 'on node', action: 'Select the focused node.' },
     { key: 'Escape', action: 'Closes the panel and returns focus to the trigger.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-tree-select-trigger-min-height-sm',
+      description: 'Trigger Min height — sm.',
+    },
+    {
+      variable: '--uilib-tree-select-trigger-min-height-md',
+      description: 'Trigger Min height — md.',
+    },
+    {
+      variable: '--uilib-tree-select-trigger-min-height-lg',
+      description: 'Trigger Min height — lg.',
+    },
+    { variable: '--uilib-tree-select-panel-max-height', description: 'Panel Max height.' },
+    { variable: '--uilib-tree-select-panel-z-index', description: 'Panel z-index.' },
+    { variable: '--uilib-tree-select-trigger-padding-y', description: 'Trigger vertical padding.' },
+    {
+      variable: '--uilib-tree-select-trigger-padding-x',
+      description: 'Trigger horizontal padding.',
+    },
+    { variable: '--uilib-tree-select-trigger-radius', description: 'Trigger border radius.' },
+    { variable: '--uilib-tree-select-panel-radius', description: 'Panel border radius.' },
   ];
 }

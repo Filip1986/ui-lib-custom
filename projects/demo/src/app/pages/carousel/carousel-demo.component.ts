@@ -14,6 +14,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface DemoProduct {
   name: string;
   category: string;
@@ -38,6 +40,8 @@ interface DemoProduct {
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
@@ -80,6 +84,7 @@ export class CarouselDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'hidden-controls', label: 'Hidden Navigators & Indicators' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -209,5 +214,36 @@ export class CarouselDemoComponent {
     },
     { key: 'Enter / Space', target: 'Indicator dot', action: 'Jump directly to that page.' },
     { key: 'Tab / Shift+Tab', action: 'Move focus between navigator buttons and indicator dots.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-carousel-gap', description: 'Gap.' },
+    { variable: '--uilib-carousel-content-gap', description: 'Content gap.' },
+    { variable: '--uilib-carousel-nav-button-size', description: 'Nav Button size.' },
+    { variable: '--uilib-carousel-nav-button-bg', description: 'Nav Button background colour.' },
+    {
+      variable: '--uilib-carousel-nav-button-bg-hover',
+      description: 'Nav Button background colour (hover).',
+    },
+    { variable: '--uilib-carousel-nav-button-color', description: 'Nav Button text colour.' },
+    { variable: '--uilib-carousel-nav-button-border', description: 'Nav Button border shorthand.' },
+    { variable: '--uilib-carousel-nav-button-radius', description: 'Nav Button border radius.' },
+    { variable: '--uilib-carousel-nav-button-shadow', description: 'Nav Button box shadow.' },
+    { variable: '--uilib-carousel-nav-icon-size', description: 'Nav Icon size.' },
+    { variable: '--uilib-carousel-indicator-width', description: 'Indicator width.' },
+    { variable: '--uilib-carousel-indicator-height', description: 'Indicator height.' },
+    { variable: '--uilib-carousel-indicator-radius', description: 'Indicator border radius.' },
+    { variable: '--uilib-carousel-indicator-bg', description: 'Indicator background colour.' },
+    {
+      variable: '--uilib-carousel-indicator-bg-hover',
+      description: 'Indicator background colour (hover).',
+    },
+    {
+      variable: '--uilib-carousel-indicator-bg-active',
+      description: 'Indicator background colour (active).',
+    },
+    { variable: '--uilib-carousel-indicator-gap', description: 'Indicator gap.' },
+    { variable: '--uilib-carousel-indicator-padding', description: 'Indicator padding.' },
+    { variable: '--uilib-carousel-indicator-focus-ring', description: 'Indicator focus ring.' },
+    { variable: '--uilib-carousel-transition', description: 'Transition.' },
   ];
 }
