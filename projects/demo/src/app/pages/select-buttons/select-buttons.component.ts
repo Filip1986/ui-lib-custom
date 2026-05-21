@@ -20,6 +20,7 @@ import { Icon } from 'ui-lib-custom/icon';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
@@ -29,6 +30,8 @@ import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.
 
 import { Panel } from 'ui-lib-custom/panel';
 import { selectButtonExampleHtml, selectButtonExampleTs } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for select button variants.
  */
@@ -53,6 +56,8 @@ import { selectButtonExampleHtml, selectButtonExampleTs } from './snippets.gener
     SelectButtonBasicExampleComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -99,6 +104,7 @@ export class SelectButtonsComponent {
     { id: 'invalid', label: 'Invalid' },
     { id: 'variants', label: 'Variants' },
     { id: 'forms', label: 'Forms' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
@@ -187,4 +193,89 @@ export class SelectButtonsComponent {
   public markInvalidTouched(): void {
     this.invalidTouched = true;
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-select-button-gap-resolved', description: 'Gap Resolved.' },
+    {
+      variable: '--uilib-select-button-border-radius-resolved',
+      description: 'Border Radius Resolved.',
+    },
+    { variable: '--uilib-select-button-bg-resolved', description: 'Bg Resolved.' },
+    { variable: '--uilib-select-button-border-resolved', description: 'Border Resolved.' },
+    {
+      variable: '--uilib-select-button-selected-bg-resolved',
+      description: 'Selected Bg Resolved.',
+    },
+    {
+      variable: '--uilib-select-button-selected-fg-resolved',
+      description: 'Selected Fg Resolved.',
+    },
+    { variable: '--uilib-select-button-hover-bg-resolved', description: 'Hover Bg Resolved.' },
+    { variable: '--uilib-select-button-shadow-resolved', description: 'Shadow Resolved.' },
+    {
+      variable: '--uilib-select-button-disabled-opacity-resolved',
+      description: 'Disabled Opacity Resolved.',
+    },
+    {
+      variable: '--uilib-select-button-invalid-border-resolved',
+      description: 'Invalid Border Resolved.',
+    },
+    { variable: '--uilib-select-button-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-select-button-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-select-button-padding-resolved', description: 'Padding Resolved.' },
+    { variable: '--uilib-select-button-font-size-resolved', description: 'Font Size Resolved.' },
+    { variable: '--uilib-select-button-min-height-resolved', description: 'Min Height Resolved.' },
+    { variable: '--uilib-button-padding', description: 'Uilib Button padding.' },
+    { variable: '--uilib-button-font-size', description: 'Uilib Button Font size.' },
+    { variable: '--uilib-button-bg', description: 'Uilib Button background colour.' },
+    { variable: '--uilib-button-border', description: 'Uilib Button border shorthand.' },
+    { variable: '--uilib-button-fg', description: 'Uilib Button Fg.' },
+    { variable: '--uilib-button-bg-hover', description: 'Uilib Button background colour (hover).' },
+    { variable: '--uilib-select-button-material-bg', description: 'Material background colour.' },
+    {
+      variable: '--uilib-select-button-material-hover-bg',
+      description: 'Material Hover background colour.',
+    },
+    {
+      variable: '--uilib-select-button-material-border',
+      description: 'Material border shorthand.',
+    },
+    {
+      variable: '--uilib-select-button-material-selected-bg',
+      description: 'Material Selected background colour.',
+    },
+    {
+      variable: '--uilib-select-button-material-selected-fg',
+      description: 'Material Selected Fg.',
+    },
+    { variable: '--uilib-select-button-bootstrap-bg', description: 'Bootstrap background colour.' },
+    {
+      variable: '--uilib-select-button-bootstrap-hover-bg',
+      description: 'Bootstrap Hover background colour.',
+    },
+    {
+      variable: '--uilib-select-button-bootstrap-border',
+      description: 'Bootstrap border shorthand.',
+    },
+    {
+      variable: '--uilib-select-button-bootstrap-selected-bg',
+      description: 'Bootstrap Selected background colour.',
+    },
+    {
+      variable: '--uilib-select-button-bootstrap-selected-fg',
+      description: 'Bootstrap Selected Fg.',
+    },
+    { variable: '--uilib-select-button-minimal-bg', description: 'Minimal background colour.' },
+    {
+      variable: '--uilib-select-button-minimal-hover-bg',
+      description: 'Minimal Hover background colour.',
+    },
+    { variable: '--uilib-select-button-minimal-border', description: 'Minimal border shorthand.' },
+    {
+      variable: '--uilib-select-button-minimal-selected-bg',
+      description: 'Minimal Selected background colour.',
+    },
+    { variable: '--uilib-select-button-minimal-selected-fg', description: 'Minimal Selected Fg.' },
+    { variable: '--uilib-select-button-fg', description: 'Fg.' },
+    { variable: '--uilib-select-button-invalid-border', description: 'Invalid border shorthand.' },
+  ];
 }

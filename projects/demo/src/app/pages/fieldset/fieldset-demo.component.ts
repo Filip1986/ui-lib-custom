@@ -26,6 +26,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Fieldset component.
  */
@@ -42,6 +44,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',
@@ -91,6 +95,7 @@ export class FieldsetDemoComponent {
     { id: 'custom-legend', label: 'Custom Legend' },
     { id: 'variants', label: 'Variants' },
     { id: 'toggle-event', label: 'Toggle Event' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -126,5 +131,21 @@ export class FieldsetDemoComponent {
       key: 'Tab / Shift+Tab',
       action: 'Moves focus to or from the legend toggle button in the standard tab order.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-fieldset-border-color', description: 'Border colour.' },
+    { variable: '--uilib-fieldset-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-fieldset-legend-bg', description: 'Legend background colour.' },
+    { variable: '--uilib-fieldset-legend-color', description: 'Legend text colour.' },
+    { variable: '--uilib-fieldset-legend-font-size', description: 'Legend Font size.' },
+    { variable: '--uilib-fieldset-legend-font-weight', description: 'Legend font weight.' },
+    { variable: '--uilib-fieldset-legend-padding', description: 'Legend padding.' },
+    { variable: '--uilib-fieldset-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-fieldset-toggle-color', description: 'Toggle icon colour.' },
+    {
+      variable: '--uilib-fieldset-toggle-hover-bg',
+      description: 'Toggle hover background colour.',
+    },
+    { variable: '--uilib-fieldset-transition', description: 'Transition.' },
   ];
 }

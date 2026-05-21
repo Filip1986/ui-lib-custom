@@ -82,6 +82,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [CSS Custom Properties sections auto-generated across 54 demo pages]
+Changed:
+  - scripts/generate-css-var-sections.mjs (NEW — extracts --uilib-* vars from component SCSS, injects cssVarRows + DocCssVarsTableComponent import + HTML section into each demo page)
+  - 54 demo pages updated with cssVarRows property, import, sections entry { id: 'css-vars', label: 'CSS Custom Properties' }, and HTML <app-doc-section id="css-vars"> block
+  - organization-chart, select-buttons: added missing DocSectionComponent import (were missed by earlier migration)
+  - autocomplete, badges, cards, checkboxes, icons, image, image-compare: added DocSectionComponent import (pages that already used app-doc-section in HTML but lacked the import)
+State: Build zero errors. 54/54 target demo pages now have CSS Custom Properties sections. 4 components skipped (alert, button-group, icon-button have no demo page; code-snippet is not on standard doc-page-layout).
+Verification:
+  node scripts/generate-css-var-sections.mjs → Processed: 54, Skipped: 35
+  ng build demo → PASS (zero errors; only pre-existing roadmap SCSS budget warning)
+Next step: Add Accessibility sections (ARIA table + keyboard nav) to pages that have ariaRows/keyboardRows data but no section in HTML. Then convert the 8 pages still on example-section layout to full doc-page-layout pattern.
+
 Date: 2026-05-21 [Demo page standardization — app-doc-section migration complete, build clean]
 Changed:
   - projects/demo/src/app/shared/doc-page/doc-section.component.ts (NEW)
@@ -105,22 +117,4 @@ Verification:
   tsc -p projects/demo/tsconfig.app.json --noEmit → PASS
 Next step: (1) Add DocAriaTableComponent usage to remaining pages that still use raw ui-lib-table for ARIA attributes. (2) Add missing CSS Custom Properties / Accessibility sections to pages that lack them. (3) Consider migrating autocomplete/toggle-button/cascade-select pages from example-section → full doc-page-layout pattern for visual consistency.
 
-Date: 2026-05-20 [Batch-2 snippet migration — remaining 32 demo pages to example-file pattern]
-Changed:
-  - scripts/migrate-snippets-batch.mjs (improved: hyphenated keys, concat expressions, array-of-strings, module-level const records, --no-warn-ignored in lint-staged-eslint.sh)
-  - .prettierignore (added **/examples/*.example.ts — partial TS files Prettier can't parse)
-  - eslint.config.mjs (added **/examples/*.example.ts to global ignores)
-  - scripts/lint-staged-eslint.sh (added --no-warn-ignored flag)
-  - projects/demo/tsconfig.app.json (added **/examples/*.example.ts to exclude)
-  - 32 pages migrated: accordion, autocomplete, cascade-select, chart, color-picker, confirm-popup, data-view, date-picker, editor, float-label, icons, image, input-group, input-mask, input-number, input-otp, inputs, layouts, listbox, mega-menu, menu, menubar, order-list, organization-chart, panel, panel-menu, pick-list, tabs, textarea, tiered-menu, tree-select (scroller intentionally skipped — uses computed signals)
-  - EditorDemoComponent mutable state props renamed *Html→*Content to avoid conflicts with generated snippet properties
-  - Removed unused *SnippetKey type aliases from 14 component files
-State: PR #202 open at https://github.com/Filip1986/ui-lib-custom/pull/202. All 52 demo pages now on example-file pattern (excluding scroller).
-Verification:
-  ng build demo → PASS (zero errors; only pre-existing budget warnings)
-  tsc -p projects/demo/tsconfig.app.json --noEmit → PASS
-  git commit pre-commit hook (prettier + eslint) → PASS
-Next step: Merge PR #202. Then next milestone: runtime variant switcher, theme preset management, or broader axe-core audit.
-
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
-Changed:

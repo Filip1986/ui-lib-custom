@@ -31,6 +31,9 @@ import {
   twoWayBindingHtml,
   twoWayBindingTs,
 } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Image component.
  */
@@ -46,6 +49,10 @@ import {
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './image-demo.component.html',
   styleUrl: './image-demo.component.scss',
@@ -115,4 +122,36 @@ export class ImageDemoComponent {
   public readonly previewVisible: WritableSignal<boolean> = signal<boolean>(false);
 
   // ─── Code snippets ────────────────────────────────────────────────────────────
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-image-radius', description: 'Border radius.' },
+    { variable: '--uilib-image-indicator-bg', description: 'Indicator background colour.' },
+    {
+      variable: '--uilib-image-indicator-bg-hover',
+      description: 'Indicator background colour (hover).',
+    },
+    { variable: '--uilib-image-indicator-color', description: 'Active indicator colour.' },
+    { variable: '--uilib-image-indicator-icon-size-sm', description: 'Indicator Icon size — sm.' },
+    { variable: '--uilib-image-indicator-icon-size-md', description: 'Indicator Icon size — md.' },
+    { variable: '--uilib-image-indicator-icon-size-lg', description: 'Indicator Icon size — lg.' },
+    { variable: '--uilib-image-mask-bg', description: 'Mask background colour.' },
+    { variable: '--uilib-image-toolbar-bg', description: 'Toolbar background colour.' },
+    { variable: '--uilib-image-toolbar-btn-bg', description: 'Toolbar Btn background colour.' },
+    {
+      variable: '--uilib-image-toolbar-btn-bg-hover',
+      description: 'Toolbar Btn background colour (hover).',
+    },
+    { variable: '--uilib-image-toolbar-btn-color', description: 'Toolbar Btn text colour.' },
+    {
+      variable: '--uilib-image-toolbar-btn-color-disabled',
+      description: 'Toolbar Btn text colour (disabled).',
+    },
+    { variable: '--uilib-image-toolbar-btn-size', description: 'Toolbar Btn size.' },
+    { variable: '--uilib-image-toolbar-btn-icon-size', description: 'Toolbar Btn Icon size.' },
+    { variable: '--uilib-image-toolbar-gap', description: 'Toolbar gap.' },
+    { variable: '--uilib-image-toolbar-padding', description: 'Toolbar padding.' },
+    { variable: '--uilib-image-error-bg', description: 'Error background colour.' },
+    { variable: '--uilib-image-error-color', description: 'Error text colour.' },
+    { variable: '--uilib-image-error-icon-size', description: 'Error Icon size.' },
+    { variable: '--uilib-image-preview-transition', description: 'Preview transition.' },
+  ];
 }

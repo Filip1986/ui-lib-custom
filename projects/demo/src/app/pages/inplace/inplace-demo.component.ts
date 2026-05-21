@@ -15,6 +15,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Inplace component.
  */
@@ -31,6 +33,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
@@ -67,6 +71,7 @@ export class InplaceDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'events', label: 'Events' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -229,5 +234,36 @@ export class InplaceDemoComponent {
       description:
         'Shown when the component is active. Any element or component can be projected here.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-inplace-display-cursor', description: 'Display cursor.' },
+    { variable: '--uilib-inplace-display-padding', description: 'Display padding.' },
+    {
+      variable: '--uilib-inplace-display-border-radius',
+      description: 'Display Border border radius.',
+    },
+    {
+      variable: '--uilib-inplace-display-bg-hover',
+      description: 'Display background colour (hover).',
+    },
+    { variable: '--uilib-inplace-display-transition', description: 'Display transition.' },
+    { variable: '--uilib-inplace-display-border', description: 'Display border shorthand.' },
+    {
+      variable: '--uilib-inplace-display-border-hover',
+      description: 'Display border shorthand (hover).',
+    },
+    { variable: '--uilib-inplace-content-gap', description: 'Content gap.' },
+    { variable: '--uilib-inplace-close-button-size', description: 'Close Button size.' },
+    { variable: '--uilib-inplace-close-button-bg', description: 'Close Button background colour.' },
+    { variable: '--uilib-inplace-close-button-color', description: 'Close Button text colour.' },
+    {
+      variable: '--uilib-inplace-close-button-bg-hover',
+      description: 'Close Button background colour (hover).',
+    },
+    {
+      variable: '--uilib-inplace-close-button-border-radius',
+      description: 'Close Button Border border radius.',
+    },
+    { variable: '--uilib-inplace-disabled-opacity', description: 'Disabled opacity.' },
   ];
 }

@@ -112,6 +112,7 @@ export class PanelMenuDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'events', label: 'Events' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'accessibility', label: 'Accessibility' },
   ];

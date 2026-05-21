@@ -32,6 +32,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for IconField and InputIcon composition patterns.
  */
@@ -55,6 +57,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './icon-field-demo.component.html',
   styleUrl: './icon-field-demo.component.scss',
@@ -102,6 +106,7 @@ export class IconFieldDemoComponent {
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'variants', label: 'Variants' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -135,4 +140,12 @@ export class IconFieldDemoComponent {
   public variantMaterialValue: string = '';
   public variantBootstrapValue: string = '';
   public variantMinimalValue: string = '';
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-icon-field-icon-size', description: 'Icon size.' },
+    {
+      variable: '--uilib-icon-field-input-padding-with-icon',
+      description: 'Input Padding With Icon.',
+    },
+    { variable: '--uilib-float-label-position-x', description: 'Uilib Float Label Position X.' },
+  ];
 }

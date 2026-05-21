@@ -24,6 +24,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface GalleriaImage {
   src: string;
   thumbnailSrc: string;
@@ -94,6 +96,8 @@ const DEMO_IMAGES: GalleriaImage[] = [
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
@@ -134,6 +138,7 @@ export class GalleryComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -413,5 +418,76 @@ export class GalleryComponent {
       type: 'let-index, let-active="active"',
       description: 'Custom indicator button content.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-galleria-gap', description: 'Gap.' },
+    { variable: '--uilib-galleria-item-bg', description: 'Item background colour.' },
+    {
+      variable: '--uilib-galleria-thumbnail-item-border',
+      description: 'Thumbnail Item border shorthand.',
+    },
+    {
+      variable: '--uilib-galleria-thumbnail-item-border-active',
+      description: 'Thumbnail Item border shorthand (active).',
+    },
+    {
+      variable: '--uilib-galleria-thumbnail-item-opacity-inactive',
+      description: 'Thumbnail Item Opacity Inactive.',
+    },
+    { variable: '--uilib-galleria-thumbnail-gap', description: 'Thumbnail gap.' },
+    { variable: '--uilib-galleria-thumbnail-size-sm', description: 'Thumbnail size — sm.' },
+    { variable: '--uilib-galleria-thumbnail-size-md', description: 'Thumbnail size — md.' },
+    { variable: '--uilib-galleria-thumbnail-size-lg', description: 'Thumbnail size — lg.' },
+    { variable: '--uilib-galleria-nav-bg', description: 'Nav background colour.' },
+    { variable: '--uilib-galleria-nav-bg-hover', description: 'Nav background colour (hover).' },
+    { variable: '--uilib-galleria-nav-color', description: 'Nav text colour.' },
+    { variable: '--uilib-galleria-nav-size', description: 'Nav size.' },
+    { variable: '--uilib-galleria-nav-radius', description: 'Nav border radius.' },
+    { variable: '--uilib-galleria-nav-offset', description: 'Nav offset.' },
+    {
+      variable: '--uilib-galleria-thumbnail-nav-bg',
+      description: 'Thumbnail Nav background colour.',
+    },
+    {
+      variable: '--uilib-galleria-thumbnail-nav-bg-hover',
+      description: 'Thumbnail Nav background colour (hover).',
+    },
+    { variable: '--uilib-galleria-thumbnail-nav-color', description: 'Thumbnail Nav text colour.' },
+    { variable: '--uilib-galleria-thumbnail-nav-size', description: 'Thumbnail Nav size.' },
+    { variable: '--uilib-galleria-caption-bg', description: 'Caption background colour.' },
+    { variable: '--uilib-galleria-caption-color', description: 'Caption text colour.' },
+    { variable: '--uilib-galleria-caption-padding', description: 'Caption padding.' },
+    { variable: '--uilib-galleria-indicator-dot-size', description: 'Indicator Dot size.' },
+    {
+      variable: '--uilib-galleria-indicator-dot-bg',
+      description: 'Indicator Dot background colour.',
+    },
+    {
+      variable: '--uilib-galleria-indicator-dot-bg-active',
+      description: 'Indicator Dot background colour (active).',
+    },
+    { variable: '--uilib-galleria-indicator-gap', description: 'Indicator gap.' },
+    { variable: '--uilib-galleria-indicator-padding', description: 'Indicator padding.' },
+    { variable: '--uilib-galleria-mask-bg', description: 'Mask background colour.' },
+    { variable: '--uilib-galleria-close-btn-bg', description: 'Close Btn background colour.' },
+    {
+      variable: '--uilib-galleria-close-btn-bg-hover',
+      description: 'Close Btn background colour (hover).',
+    },
+    { variable: '--uilib-galleria-close-btn-color', description: 'Close Btn text colour.' },
+    { variable: '--uilib-galleria-close-btn-size', description: 'Close Btn size.' },
+    {
+      variable: '--uilib-galleria-fullscreen-btn-bg',
+      description: 'Fullscreen Btn background colour.',
+    },
+    {
+      variable: '--uilib-galleria-fullscreen-btn-bg-hover',
+      description: 'Fullscreen Btn background colour (hover).',
+    },
+    {
+      variable: '--uilib-galleria-fullscreen-btn-color',
+      description: 'Fullscreen Btn text colour.',
+    },
+    { variable: '--uilib-galleria-fullscreen-btn-size', description: 'Fullscreen Btn size.' },
   ];
 }

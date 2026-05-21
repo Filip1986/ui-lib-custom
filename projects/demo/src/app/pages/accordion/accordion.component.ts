@@ -49,6 +49,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface FaqItem {
   value: string;
   header: string;
@@ -98,6 +100,8 @@ type AccordionTab =
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -302,5 +306,22 @@ export class AccordionComponent {
       action:
         'Moves focus into or out of the accordion in the standard tab order. Open panel content is included.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-accordion-gap', description: 'Gap.' },
+    { variable: '--uilib-accordion-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-accordion-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-accordion-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-accordion-panel-radius', description: 'Panel border radius.' },
+    { variable: '--uilib-accordion-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-accordion-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-accordion-header-font-size', description: 'Header font size.' },
+    { variable: '--uilib-accordion-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-accordion-header-bg', description: 'Header background colour.' },
+    {
+      variable: '--uilib-accordion-header-bg-hover',
+      description: 'Header background colour (hover).',
+    },
+    { variable: '--uilib-accordion-content-bg', description: 'Content background colour.' },
   ];
 }

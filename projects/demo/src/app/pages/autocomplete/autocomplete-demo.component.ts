@@ -69,6 +69,9 @@ import {
   clippingHtml,
   clippingTs,
 } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 /**
  * Demo page for AutoComplete component features and patterns.
@@ -94,6 +97,10 @@ import {
     AutoCompleteEmptyDirective,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
   styleUrl: './autocomplete-demo.component.scss',
@@ -286,4 +293,89 @@ export class AutoCompleteDemoComponent {
         country.code.toLowerCase().includes(normalized)
     );
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-autocomplete-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-autocomplete-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-autocomplete-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-autocomplete-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-autocomplete-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-autocomplete-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-autocomplete-bg', description: 'Background colour.' },
+    { variable: '--uilib-autocomplete-border', description: 'Border shorthand.' },
+    { variable: '--uilib-autocomplete-border-focus', description: 'Border shorthand (focus).' },
+    { variable: '--uilib-autocomplete-text', description: 'Text.' },
+    { variable: '--uilib-autocomplete-placeholder', description: 'Placeholder.' },
+    { variable: '--uilib-autocomplete-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-autocomplete-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-autocomplete-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-autocomplete-panel-max-height', description: 'Panel Max height.' },
+    { variable: '--uilib-autocomplete-panel-z-index', description: 'Panel z-index.' },
+    {
+      variable: '--uilib-autocomplete-option-padding-y-base',
+      description: 'Option Padding Y Base.',
+    },
+    {
+      variable: '--uilib-autocomplete-option-padding-x-base',
+      description: 'Option Padding X Base.',
+    },
+    { variable: '--uilib-autocomplete-option-padding-y', description: 'Option vertical padding.' },
+    {
+      variable: '--uilib-autocomplete-option-padding-x',
+      description: 'Option horizontal padding.',
+    },
+    { variable: '--uilib-autocomplete-option-padding', description: 'Option padding.' },
+    {
+      variable: '--uilib-autocomplete-option-hover-bg',
+      description: 'Option Hover background colour.',
+    },
+    {
+      variable: '--uilib-autocomplete-option-selected-bg',
+      description: 'Option Selected background colour.',
+    },
+    { variable: '--uilib-autocomplete-option-selected-text', description: 'Option Selected Text.' },
+    {
+      variable: '--uilib-autocomplete-option-disabled-opacity',
+      description: 'Option Disabled opacity.',
+    },
+    { variable: '--uilib-autocomplete-chip-bg', description: 'Chip background colour.' },
+    { variable: '--uilib-autocomplete-chip-text', description: 'Chip Text.' },
+    {
+      variable: '--uilib-autocomplete-chip-border-radius',
+      description: 'Chip Border border radius.',
+    },
+    { variable: '--uilib-autocomplete-chip-padding', description: 'Chip padding.' },
+    { variable: '--uilib-autocomplete-chip-gap', description: 'Chip gap.' },
+    {
+      variable: '--uilib-autocomplete-chip-remove-hover-bg',
+      description: 'Chip Remove Hover background colour.',
+    },
+    { variable: '--uilib-autocomplete-dropdown-bg', description: 'Dropdown background colour.' },
+    {
+      variable: '--uilib-autocomplete-dropdown-hover-bg',
+      description: 'Dropdown Hover background colour.',
+    },
+    { variable: '--uilib-autocomplete-dropdown-border', description: 'Dropdown border shorthand.' },
+    {
+      variable: '--uilib-autocomplete-dropdown-icon-color',
+      description: 'Dropdown Icon text colour.',
+    },
+    { variable: '--uilib-autocomplete-clear-icon-color', description: 'Clear Icon text colour.' },
+    {
+      variable: '--uilib-autocomplete-clear-icon-hover-color',
+      description: 'Clear Icon Hover text colour.',
+    },
+    {
+      variable: '--uilib-autocomplete-group-label-bg',
+      description: 'Group Label background colour.',
+    },
+    { variable: '--uilib-autocomplete-group-label-text', description: 'Group Label Text.' },
+    {
+      variable: '--uilib-autocomplete-group-label-font-weight',
+      description: 'Group Label font weight.',
+    },
+    { variable: '--uilib-autocomplete-sm-padding', description: 'Sm padding.' },
+    { variable: '--uilib-autocomplete-sm-font-size', description: 'Sm Font size.' },
+    { variable: '--uilib-autocomplete-lg-padding', description: 'Lg padding.' },
+    { variable: '--uilib-autocomplete-lg-font-size', description: 'Lg Font size.' },
+  ];
 }

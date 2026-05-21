@@ -19,6 +19,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ConfirmDialog component.
  */
@@ -36,6 +38,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
@@ -81,6 +85,7 @@ export class ConfirmDialogDemoComponent {
     { id: 'position', label: 'Top Position' },
     { id: 'programmatic', label: 'Programmatic' },
     { id: 'design-variants', label: 'Design Variants' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -342,6 +347,45 @@ export class ConfirmDialogDemoComponent {
       name: 'rejected',
       type: 'void',
       description: 'Emitted when the user clicks Reject or closes.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-confirm-dialog-bg', description: 'Background colour.' },
+    { variable: '--uilib-confirm-dialog-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-confirm-dialog-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-confirm-dialog-border', description: 'Border shorthand.' },
+    { variable: '--uilib-confirm-dialog-z-index', description: 'Z-index.' },
+    { variable: '--uilib-confirm-dialog-width', description: 'Width.' },
+    { variable: '--uilib-confirm-dialog-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-confirm-dialog-header-color', description: 'Header text colour.' },
+    { variable: '--uilib-confirm-dialog-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-confirm-dialog-header-font-size', description: 'Header font size.' },
+    { variable: '--uilib-confirm-dialog-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-confirm-dialog-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-confirm-dialog-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-confirm-dialog-icon-color', description: 'Icon colour.' },
+    { variable: '--uilib-confirm-dialog-footer-padding', description: 'Footer padding.' },
+    { variable: '--uilib-confirm-dialog-footer-border-top', description: 'Footer Border Top.' },
+    { variable: '--uilib-confirm-dialog-footer-gap', description: 'Footer gap.' },
+    { variable: '--uilib-confirm-dialog-close-btn-size', description: 'Close Btn size.' },
+    { variable: '--uilib-confirm-dialog-close-btn-color', description: 'Close Btn text colour.' },
+    {
+      variable: '--uilib-confirm-dialog-close-btn-hover-bg',
+      description: 'Close Btn Hover background colour.',
+    },
+    { variable: '--uilib-confirm-dialog-btn-padding', description: 'Btn padding.' },
+    { variable: '--uilib-confirm-dialog-btn-font-size', description: 'Btn Font size.' },
+    { variable: '--uilib-confirm-dialog-btn-font-weight', description: 'Btn font weight.' },
+    { variable: '--uilib-confirm-dialog-btn-radius', description: 'Btn border radius.' },
+    { variable: '--uilib-confirm-dialog-enter-duration', description: 'Enter animation duration.' },
+    { variable: '--uilib-confirm-dialog-enter-easing', description: 'Enter animation easing.' },
+    {
+      variable: '--uilib-confirm-dialog-backdrop-enter-duration',
+      description: 'Backdrop enter animation duration.',
+    },
+    {
+      variable: '--uilib-confirm-dialog-backdrop-enter-easing',
+      description: 'Backdrop enter animation easing.',
     },
   ];
 }

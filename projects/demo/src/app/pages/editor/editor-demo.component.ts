@@ -46,6 +46,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for Editor component usage, forms integration, and event behavior.
  */
@@ -67,6 +69,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',
@@ -238,5 +242,35 @@ export class EditorDemoComponent {
       default: 'null',
       description: 'ARIA label for the editor region.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-editor-toolbar-bg', description: 'Toolbar background colour.' },
+    { variable: '--uilib-editor-toolbar-border-color', description: 'Toolbar Border text colour.' },
+    { variable: '--uilib-editor-toolbar-item-color', description: 'Toolbar Item text colour.' },
+    {
+      variable: '--uilib-editor-toolbar-item-hover-color',
+      description: 'Toolbar Item Hover text colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-item-hover-bg',
+      description: 'Toolbar Item Hover background colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-item-active-color',
+      description: 'Toolbar Item Active text colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-item-active-bg',
+      description: 'Toolbar Item Active background colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-separator-color',
+      description: 'Toolbar Separator text colour.',
+    },
+    { variable: '--uilib-editor-content-bg', description: 'Content background colour.' },
+    { variable: '--uilib-editor-content-border-color', description: 'Content Border text colour.' },
+    { variable: '--uilib-editor-content-color', description: 'Content text colour.' },
+    { variable: '--uilib-editor-placeholder-color', description: 'Placeholder text colour.' },
+    { variable: '--uilib-editor-focus-ring-color', description: 'Focus ring colour.' },
   ];
 }

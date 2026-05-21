@@ -29,6 +29,9 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { cardExampleHtml, cardExampleTs, usageTs } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -64,6 +67,10 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     ThemeScopeDirective,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -267,4 +274,23 @@ export class CardsComponent {
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-card-header-padding-y-base', description: 'Header Padding Y Base.' },
+    { variable: '--uilib-card-header-padding-x-base', description: 'Header Padding X Base.' },
+    { variable: '--uilib-card-body-padding-base', description: 'Body Padding Base.' },
+    { variable: '--uilib-card-footer-padding-y-base', description: 'Footer Padding Y Base.' },
+    { variable: '--uilib-card-footer-padding-x-base', description: 'Footer Padding X Base.' },
+    { variable: '--uilib-card-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-card-body-padding', description: 'Body padding.' },
+    { variable: '--uilib-card-footer-padding', description: 'Footer padding.' },
+    { variable: '--uilib-card-border-width', description: 'Border width.' },
+    { variable: '--uilib-card-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-card-shadow-hover', description: 'Box shadow (hover).' },
+    { variable: '--uilib-card-radius', description: 'Border radius.' },
+    { variable: '--uilib-card-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-card-footer-bg', description: 'Footer background colour.' },
+    { variable: '--uilib-card-border', description: 'Border shorthand.' },
+    { variable: '--uilib-card-bg', description: 'Background colour.' },
+    { variable: '--uilib-card-text-color', description: 'Text text colour.' },
+  ];
 }

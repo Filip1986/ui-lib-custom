@@ -27,6 +27,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Tooltip directive.
  */
@@ -43,6 +45,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',
@@ -91,6 +95,7 @@ export class TooltipDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'long-text', label: 'Long Text' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -128,5 +133,19 @@ export class TooltipDemoComponent {
       default: 'null',
       description: 'Design variant.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-tooltip-bg', description: 'Background colour.' },
+    { variable: '--uilib-tooltip-color', description: 'Text colour.' },
+    { variable: '--uilib-tooltip-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-tooltip-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-tooltip-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-tooltip-font-size', description: 'Font size.' },
+    { variable: '--uilib-tooltip-max-width', description: 'Maximum width.' },
+    { variable: '--uilib-tooltip-arrow-size', description: 'Arrow size.' },
+    { variable: '--uilib-tooltip-z-index', description: 'Z-index.' },
+    { variable: '--uilib-tooltip-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-tooltip-enter-duration', description: 'Enter animation duration.' },
+    { variable: '--uilib-tooltip-enter-easing', description: 'Enter animation easing.' },
   ];
 }

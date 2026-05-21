@@ -40,6 +40,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Slider component — linear track control for numeric values.
  */
@@ -60,6 +62,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
@@ -203,5 +207,26 @@ export class SliderDemoComponent {
       description: 'Design variant.',
     },
     { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Slider size.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-slider-track-color', description: 'Track colour.' },
+    { variable: '--uilib-slider-track-border-radius', description: 'Track border radius.' },
+    { variable: '--uilib-slider-fill-color', description: 'Fill colour.' },
+    { variable: '--uilib-slider-fill-transition', description: 'Fill transition.' },
+    { variable: '--uilib-slider-handle-bg', description: 'Handle background colour.' },
+    { variable: '--uilib-slider-handle-border', description: 'Handle border.' },
+    { variable: '--uilib-slider-handle-border-radius', description: 'Handle border radius.' },
+    { variable: '--uilib-slider-handle-shadow', description: 'Handle shadow.' },
+    { variable: '--uilib-slider-handle-hover-scale', description: 'Handle hover scale factor.' },
+    { variable: '--uilib-slider-focus-ring-color', description: 'Focus ring colour.' },
+    { variable: '--uilib-slider-focus-ring-width', description: 'Focus ring width.' },
+    { variable: '--uilib-slider-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-slider-vertical-height', description: 'Vertical height.' },
+    { variable: '--uilib-slider-track-height-sm', description: 'Track height — sm.' },
+    { variable: '--uilib-slider-track-height-md', description: 'Track height — md.' },
+    { variable: '--uilib-slider-track-height-lg', description: 'Track height — lg.' },
+    { variable: '--uilib-slider-handle-size-sm', description: 'Handle size — sm.' },
+    { variable: '--uilib-slider-handle-size-md', description: 'Handle size — md.' },
+    { variable: '--uilib-slider-handle-size-lg', description: 'Handle size — lg.' },
   ];
 }

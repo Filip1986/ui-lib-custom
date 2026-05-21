@@ -18,6 +18,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Divider component.
  */
@@ -33,6 +35,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
@@ -105,6 +109,7 @@ export class DividerDemoComponent {
     { id: 'vertical-alignment', label: 'Vertical Alignment' },
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -146,4 +151,17 @@ export class DividerDemoComponent {
   public toggleContent(): void {
     this.playgroundHasContent.set(!this.playgroundHasContent());
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-divider-color', description: 'Text colour.' },
+    { variable: '--uilib-divider-thickness', description: 'Thickness.' },
+    { variable: '--uilib-divider-border-style', description: 'Border style.' },
+    { variable: '--uilib-divider-margin-h', description: 'Margin H.' },
+    { variable: '--uilib-divider-margin-v', description: 'Margin V.' },
+    { variable: '--uilib-divider-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-divider-content-font-size', description: 'Content Font size.' },
+    { variable: '--uilib-divider-content-font-weight', description: 'Content font weight.' },
+    { variable: '--uilib-divider-content-color', description: 'Content text colour.' },
+    { variable: '--uilib-divider-content-font-family', description: 'Content font family.' },
+    { variable: '--uilib-divider-vertical-min-height', description: 'Vertical Min height.' },
+  ];
 }

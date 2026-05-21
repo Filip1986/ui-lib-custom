@@ -17,6 +17,8 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
 import { declarativeUsageHtml, declarativeUsageTs } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ConfirmPopup component.
  */
@@ -35,6 +37,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
@@ -173,5 +177,26 @@ export class ConfirmPopupDemoComponent {
       action:
         'Closes the popup (treated as rejection) and returns focus to the triggering element.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-confirm-popup-bg', description: 'Background colour.' },
+    { variable: '--uilib-confirm-popup-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-confirm-popup-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-confirm-popup-border', description: 'Border shorthand.' },
+    { variable: '--uilib-confirm-popup-z-index', description: 'Z-index.' },
+    { variable: '--uilib-confirm-popup-width', description: 'Width.' },
+    { variable: '--uilib-confirm-popup-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-confirm-popup-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-confirm-popup-icon-color', description: 'Icon colour.' },
+    { variable: '--uilib-confirm-popup-footer-padding', description: 'Footer padding.' },
+    { variable: '--uilib-confirm-popup-footer-border-top', description: 'Footer Border Top.' },
+    { variable: '--uilib-confirm-popup-footer-gap', description: 'Footer gap.' },
+    { variable: '--uilib-confirm-popup-btn-padding', description: 'Btn padding.' },
+    { variable: '--uilib-confirm-popup-btn-font-size', description: 'Btn Font size.' },
+    { variable: '--uilib-confirm-popup-btn-font-weight', description: 'Btn font weight.' },
+    { variable: '--uilib-confirm-popup-btn-radius', description: 'Btn border radius.' },
+    { variable: '--uilib-confirm-popup-enter-duration', description: 'Enter animation duration.' },
+    { variable: '--uilib-confirm-popup-enter-easing', description: 'Enter animation easing.' },
+    { variable: '--uilib-confirm-popup-arrow-size', description: 'Arrow size.' },
   ];
 }

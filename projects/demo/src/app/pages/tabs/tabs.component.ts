@@ -66,6 +66,8 @@ import {
   perTabLazyTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 interface DemoTab {
   value: TabsValue;
   label: string;
@@ -114,6 +116,8 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -461,5 +465,91 @@ export class TabsComponent {
       description: 'Shows a close button on each tab.',
     },
     { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all tabs.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-tabs-bg-resolved', description: 'Bg Resolved.' },
+    { variable: '--uilib-tabs-border-resolved', description: 'Border Resolved.' },
+    { variable: '--uilib-tabs-border-width-resolved', description: 'Border Width Resolved.' },
+    { variable: '--uilib-tabs-border-style-resolved', description: 'Border Style Resolved.' },
+    { variable: '--uilib-tabs-radius-resolved', description: 'Radius Resolved.' },
+    { variable: '--uilib-tabs-gap-resolved', description: 'Gap Resolved.' },
+    { variable: '--uilib-tabs-padding-base', description: 'Padding Base.' },
+    { variable: '--uilib-tabs-padding-resolved', description: 'Padding Resolved.' },
+    { variable: '--uilib-tab-padding-x-base', description: 'Uilib Tab Padding X Base.' },
+    { variable: '--uilib-tab-padding-x-resolved', description: 'Uilib Tab Padding X Resolved.' },
+    { variable: '--uilib-tab-padding-y-base', description: 'Uilib Tab Padding Y Base.' },
+    { variable: '--uilib-tab-padding-y-resolved', description: 'Uilib Tab Padding Y Resolved.' },
+    { variable: '--uilib-tab-gap-resolved', description: 'Uilib Tab Gap Resolved.' },
+    { variable: '--uilib-tab-font-size-resolved', description: 'Uilib Tab Font Size Resolved.' },
+    {
+      variable: '--uilib-tab-font-weight-resolved',
+      description: 'Uilib Tab Font Weight Resolved.',
+    },
+    { variable: '--uilib-tabs-color-resolved', description: 'Color Resolved.' },
+    { variable: '--uilib-tabs-color-active-resolved', description: 'Color Active Resolved.' },
+    { variable: '--uilib-tabs-color-disabled-resolved', description: 'Color Disabled Resolved.' },
+    { variable: '--uilib-tab-bg-resolved', description: 'Uilib Tab Bg Resolved.' },
+    { variable: '--uilib-tab-bg-hover-resolved', description: 'Uilib Tab Bg Hover Resolved.' },
+    { variable: '--uilib-tab-bg-active-resolved', description: 'Uilib Tab Bg Active Resolved.' },
+    { variable: '--uilib-tab-border-resolved', description: 'Uilib Tab Border Resolved.' },
+    {
+      variable: '--uilib-tab-border-active-resolved',
+      description: 'Uilib Tab Border Active Resolved.',
+    },
+    { variable: '--uilib-tab-radius-resolved', description: 'Uilib Tab Radius Resolved.' },
+    { variable: '--uilib-tabs-indicator-color-resolved', description: 'Indicator Color Resolved.' },
+    {
+      variable: '--uilib-tabs-indicator-height-resolved',
+      description: 'Indicator Height Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-indicator-radius-resolved',
+      description: 'Indicator Radius Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-indicator-offset-resolved',
+      description: 'Indicator Offset Resolved.',
+    },
+    { variable: '--uilib-tabs-transition-resolved', description: 'Transition Resolved.' },
+    { variable: '--uilib-tabs-nav-button-size-resolved', description: 'Nav Button Size Resolved.' },
+    { variable: '--uilib-tabs-nav-button-bg-resolved', description: 'Nav Button Bg Resolved.' },
+    {
+      variable: '--uilib-tabs-nav-button-color-resolved',
+      description: 'Nav Button Color Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-nav-button-border-resolved',
+      description: 'Nav Button Border Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-nav-button-radius-resolved',
+      description: 'Nav Button Radius Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-nav-button-shadow-resolved',
+      description: 'Nav Button Shadow Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-nav-button-hover-bg-resolved',
+      description: 'Nav Button Hover Bg Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-nav-button-active-bg-resolved',
+      description: 'Nav Button Active Bg Resolved.',
+    },
+    {
+      variable: '--uilib-tabs-nav-button-disabled-opacity-resolved',
+      description: 'Nav Button Disabled Opacity Resolved.',
+    },
+    { variable: '--uilib-tabs-nav-button-gap-resolved', description: 'Nav Button Gap Resolved.' },
+    { variable: '--uilib-tabs-bg', description: 'Background colour.' },
+    { variable: '--uilib-tabs-border', description: 'Border shorthand.' },
+    { variable: '--uilib-tabs-indicator-color', description: 'Active indicator colour.' },
+    { variable: '--uilib-tabs-color', description: 'Text colour.' },
+    { variable: '--uilib-tabs-color-active', description: 'Text colour (active).' },
+    { variable: '--uilib-tabs-color-disabled', description: 'Text colour (disabled).' },
+    { variable: '--uilib-tab-bg-hover', description: 'Uilib Tab background colour (hover).' },
+    { variable: '--uilib-tab-bg-active', description: 'Uilib Tab background colour (active).' },
+    { variable: '--uilib-tabs-transition', description: 'Transition.' },
   ];
 }

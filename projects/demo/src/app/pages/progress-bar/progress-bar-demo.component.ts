@@ -14,6 +14,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ProgressBar component.
  */
@@ -30,6 +32,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './progress-bar-demo.component.html',
   styleUrl: './progress-bar-demo.component.scss',
@@ -75,6 +79,7 @@ export class ProgressBarDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'custom-colour', label: 'Custom colour' },
     { id: 'dynamic-value', label: 'Dynamic value' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -147,4 +152,15 @@ export class ProgressBarDemoComponent {
   public reset(): void {
     this.dynamicValue.set(0);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-progress-bar-height', description: 'Height.' },
+    { variable: '--uilib-progress-bar-height-sm', description: 'Height — sm.' },
+    { variable: '--uilib-progress-bar-height-lg', description: 'Height — lg.' },
+    { variable: '--uilib-progress-bar-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-progress-bar-track-bg', description: 'Track background colour.' },
+    { variable: '--uilib-progress-bar-fill-bg', description: 'Fill background colour.' },
+    { variable: '--uilib-progress-bar-label-color', description: 'Label colour.' },
+    { variable: '--uilib-progress-bar-label-font-size', description: 'Label font size.' },
+    { variable: '--uilib-progress-bar-transition', description: 'Transition.' },
+  ];
 }

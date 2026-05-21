@@ -14,6 +14,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ProgressSpinner component.
  */
@@ -30,6 +32,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',
@@ -74,6 +78,7 @@ export class ProgressSpinnerDemoComponent {
     { id: 'stroke-width-fill', label: 'Stroke Width & Fill' },
     { id: 'loading-overlay', label: 'Loading Overlay Pattern' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -153,4 +158,9 @@ export class ProgressSpinnerDemoComponent {
   public setStrokeWidth(width: string): void {
     this.interactiveStrokeWidth.set(width);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-progress-spinner-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-progress-spinner-size-md', description: 'Size — md.' },
+    { variable: '--uilib-progress-spinner-size-lg', description: 'Size — lg.' },
+  ];
 }

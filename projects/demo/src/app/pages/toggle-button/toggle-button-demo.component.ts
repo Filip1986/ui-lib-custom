@@ -46,6 +46,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ToggleButton component.
  */
@@ -68,6 +70,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './toggle-button-demo.component.html',
   styleUrl: './toggle-button-demo.component.scss',
@@ -224,5 +228,41 @@ export class ToggleButtonDemoComponent {
       default: 'null',
       description: 'Design variant.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-toggle-button-height-sm', description: 'Height — sm.' },
+    { variable: '--uilib-toggle-button-height-md', description: 'Height — md.' },
+    { variable: '--uilib-toggle-button-height-lg', description: 'Height — lg.' },
+    { variable: '--uilib-toggle-button-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-toggle-button-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-toggle-button-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-toggle-button-padding-x-sm', description: 'Horizontal padding — sm.' },
+    { variable: '--uilib-toggle-button-padding-x-md', description: 'Horizontal padding — md.' },
+    { variable: '--uilib-toggle-button-padding-x-lg', description: 'Horizontal padding — lg.' },
+    { variable: '--uilib-toggle-button-gap', description: 'Gap.' },
+    { variable: '--uilib-toggle-button-radius', description: 'Border radius.' },
+    { variable: '--uilib-toggle-button-transition', description: 'Transition.' },
+    { variable: '--uilib-toggle-button-font', description: 'Font.' },
+    { variable: '--uilib-toggle-button-bg', description: 'Background colour.' },
+    { variable: '--uilib-toggle-button-border', description: 'Border shorthand.' },
+    { variable: '--uilib-toggle-button-color', description: 'Text colour.' },
+    { variable: '--uilib-toggle-button-bg-hover', description: 'Background colour (hover).' },
+    { variable: '--uilib-toggle-button-border-hover', description: 'Border shorthand (hover).' },
+    { variable: '--uilib-toggle-button-bg-active', description: 'Background colour (active).' },
+    { variable: '--uilib-toggle-button-checked-bg', description: 'Checked background colour.' },
+    { variable: '--uilib-toggle-button-checked-border', description: 'Checked border shorthand.' },
+    { variable: '--uilib-toggle-button-checked-color', description: 'Checked text colour.' },
+    {
+      variable: '--uilib-toggle-button-checked-bg-hover',
+      description: 'Checked background colour (hover).',
+    },
+    {
+      variable: '--uilib-toggle-button-checked-bg-active',
+      description: 'Checked background colour (active).',
+    },
+    { variable: '--uilib-toggle-button-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-toggle-button-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-toggle-button-height', description: 'Height.' },
+    { variable: '--uilib-toggle-button-font-size', description: 'Font size.' },
   ];
 }

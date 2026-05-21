@@ -31,6 +31,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the MegaMenu component.
  */
@@ -49,6 +51,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
@@ -100,6 +104,7 @@ export class MegaMenuDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -491,5 +496,106 @@ export class MegaMenuDemoComponent {
     { name: 'label', type: 'string | undefined', description: 'Item label text.' },
     { name: 'icon', type: 'string | undefined', description: 'CSS icon class.' },
     { name: 'disabled', type: 'boolean | undefined', description: 'Disables the item.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-mega-menu-bar-bg', description: 'Bar background colour.' },
+    { variable: '--uilib-mega-menu-bar-border', description: 'Bar border shorthand.' },
+    { variable: '--uilib-mega-menu-bar-border-radius', description: 'Bar Border border radius.' },
+    { variable: '--uilib-mega-menu-root-item-padding', description: 'Root Item padding.' },
+    { variable: '--uilib-mega-menu-root-item-gap', description: 'Root Item gap.' },
+    { variable: '--uilib-mega-menu-root-link-color', description: 'Root Link text colour.' },
+    {
+      variable: '--uilib-mega-menu-root-link-color-hover',
+      description: 'Root Link text colour (hover).',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-color-active',
+      description: 'Root Link text colour (active).',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-bg-hover',
+      description: 'Root Link background colour (hover).',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-bg-active',
+      description: 'Root Link background colour (active).',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-border-radius',
+      description: 'Root Link Border border radius.',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-font-size-sm',
+      description: 'Root Link Font size — sm.',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-font-size-md',
+      description: 'Root Link Font size — md.',
+    },
+    {
+      variable: '--uilib-mega-menu-root-link-font-size-lg',
+      description: 'Root Link Font size — lg.',
+    },
+    { variable: '--uilib-mega-menu-root-link-font-weight', description: 'Root Link font weight.' },
+    { variable: '--uilib-mega-menu-caret-size', description: 'Caret size.' },
+    { variable: '--uilib-mega-menu-caret-color', description: 'Caret text colour.' },
+    { variable: '--uilib-mega-menu-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-mega-menu-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-mega-menu-panel-border-radius', description: 'Panel border radius.' },
+    { variable: '--uilib-mega-menu-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-mega-menu-panel-padding', description: 'Panel padding.' },
+    { variable: '--uilib-mega-menu-panel-gap', description: 'Panel gap.' },
+    { variable: '--uilib-mega-menu-panel-min-width', description: 'Panel Min width.' },
+    {
+      variable: '--uilib-mega-menu-column-header-color',
+      description: 'Column Header text colour.',
+    },
+    {
+      variable: '--uilib-mega-menu-column-header-font-size',
+      description: 'Column Header Font size.',
+    },
+    {
+      variable: '--uilib-mega-menu-column-header-font-weight',
+      description: 'Column Header font weight.',
+    },
+    {
+      variable: '--uilib-mega-menu-column-header-letter-spacing',
+      description: 'Column Header letter spacing.',
+    },
+    {
+      variable: '--uilib-mega-menu-column-header-padding-bottom',
+      description: 'Column Header bottom padding.',
+    },
+    {
+      variable: '--uilib-mega-menu-column-header-margin-bottom',
+      description: 'Column Header Margin Bottom.',
+    },
+    {
+      variable: '--uilib-mega-menu-column-header-border-bottom',
+      description: 'Column Header Border Bottom.',
+    },
+    { variable: '--uilib-mega-menu-sub-item-padding', description: 'Sub Item padding.' },
+    { variable: '--uilib-mega-menu-sub-item-gap', description: 'Sub Item gap.' },
+    { variable: '--uilib-mega-menu-sub-link-color', description: 'Sub Link text colour.' },
+    {
+      variable: '--uilib-mega-menu-sub-link-color-hover',
+      description: 'Sub Link text colour (hover).',
+    },
+    {
+      variable: '--uilib-mega-menu-sub-link-bg-hover',
+      description: 'Sub Link background colour (hover).',
+    },
+    {
+      variable: '--uilib-mega-menu-sub-link-border-radius',
+      description: 'Sub Link Border border radius.',
+    },
+    { variable: '--uilib-mega-menu-sub-link-font-size', description: 'Sub Link Font size.' },
+    {
+      variable: '--uilib-mega-menu-sub-link-disabled-opacity',
+      description: 'Sub Link Disabled opacity.',
+    },
+    { variable: '--uilib-mega-menu-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-mega-menu-separator-margin', description: 'Separator margin.' },
+    { variable: '--uilib-mega-menu-transition', description: 'Transition.' },
   ];
 }

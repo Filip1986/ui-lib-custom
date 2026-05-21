@@ -65,6 +65,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
 /**
@@ -95,6 +97,8 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',
@@ -281,5 +285,49 @@ export class CascadeSelectDemoComponent {
       description: 'Makes the component full-width.',
     },
     { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'ARIA label.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-cascade-select-bg', description: 'Background colour.' },
+    { variable: '--uilib-cascade-select-border', description: 'Border shorthand.' },
+    { variable: '--uilib-cascade-select-border-focus', description: 'Border shorthand (focus).' },
+    { variable: '--uilib-cascade-select-radius', description: 'Border radius.' },
+    { variable: '--uilib-cascade-select-text', description: 'Text.' },
+    { variable: '--uilib-cascade-select-placeholder', description: 'Placeholder.' },
+    { variable: '--uilib-cascade-select-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-cascade-select-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-cascade-select-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-cascade-select-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-cascade-select-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-cascade-select-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-cascade-select-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-cascade-select-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-cascade-select-panel-min-width', description: 'Panel Min width.' },
+    { variable: '--uilib-cascade-select-panel-max-height', description: 'Panel Max height.' },
+    { variable: '--uilib-cascade-select-panel-z-index', description: 'Panel z-index.' },
+    { variable: '--uilib-cascade-select-option-padding', description: 'Option padding.' },
+    {
+      variable: '--uilib-cascade-select-option-hover-bg',
+      description: 'Option Hover background colour.',
+    },
+    {
+      variable: '--uilib-cascade-select-option-selected-bg',
+      description: 'Option Selected background colour.',
+    },
+    {
+      variable: '--uilib-cascade-select-option-disabled-opacity',
+      description: 'Option Disabled opacity.',
+    },
+    { variable: '--uilib-cascade-select-submenu-icon-size', description: 'Submenu Icon size.' },
+    { variable: '--uilib-cascade-select-submenu-gap', description: 'Submenu gap.' },
+    { variable: '--uilib-cascade-select-transition', description: 'Transition.' },
+    {
+      variable: '--uilib-cascade-select-panel-animation-duration',
+      description: 'Panel Animation Duration.',
+    },
+    {
+      variable: '--uilib-cascade-select-level-animation-duration',
+      description: 'Level Animation Duration.',
+    },
+    { variable: '--uilib-cascade-select-loading-size', description: 'Loading size.' },
   ];
 }

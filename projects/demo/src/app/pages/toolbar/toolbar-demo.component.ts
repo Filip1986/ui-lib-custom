@@ -13,6 +13,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Toolbar component.
  */
@@ -28,6 +30,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './toolbar-demo.component.html',
   styleUrl: './toolbar-demo.component.scss',
@@ -64,6 +68,7 @@ export class ToolbarDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -160,5 +165,18 @@ export class ToolbarDemoComponent {
       type: '—',
       description: 'Content projected into the trailing (right) group.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-toolbar-background', description: 'Background.' },
+    { variable: '--uilib-toolbar-border-color', description: 'Border colour.' },
+    { variable: '--uilib-toolbar-border-width', description: 'Border width.' },
+    { variable: '--uilib-toolbar-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-toolbar-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-toolbar-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-toolbar-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-toolbar-gap', description: 'Gap.' },
+    { variable: '--uilib-toolbar-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-toolbar-font-family', description: 'Font family.' },
+    { variable: '--uilib-toolbar-color', description: 'Text colour.' },
   ];
 }

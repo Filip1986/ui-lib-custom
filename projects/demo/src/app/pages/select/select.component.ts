@@ -36,6 +36,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { selectExampleHtml, selectExampleTs, usageHtml, usageTs } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -72,6 +74,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -299,5 +303,30 @@ export class SelectComponent {
       default: 'false',
       description: 'Marks the field as invalid.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-select-option-hover', description: 'Option (hover).' },
+    { variable: '--uilib-select-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-select-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-select-search-padding-y-base', description: 'Search Padding Y Base.' },
+    { variable: '--uilib-select-search-padding-x-base', description: 'Search Padding X Base.' },
+    { variable: '--uilib-select-option-padding-y-base', description: 'Option Padding Y Base.' },
+    { variable: '--uilib-select-option-padding-x-base', description: 'Option Padding X Base.' },
+    { variable: '--uilib-select-group-padding-y-base', description: 'Group Padding Y Base.' },
+    { variable: '--uilib-select-group-padding-x-base', description: 'Group Padding X Base.' },
+    { variable: '--uilib-select-empty-padding-base', description: 'Empty Padding Base.' },
+    { variable: '--uilib-select-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-select-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-select-search-padding-y', description: 'Search vertical padding.' },
+    { variable: '--uilib-select-search-padding-x', description: 'Search horizontal padding.' },
+    { variable: '--uilib-select-option-padding-y', description: 'Option vertical padding.' },
+    { variable: '--uilib-select-option-padding-x', description: 'Option horizontal padding.' },
+    { variable: '--uilib-select-group-padding-y', description: 'Group vertical padding.' },
+    { variable: '--uilib-select-group-padding-x', description: 'Group horizontal padding.' },
+    { variable: '--uilib-select-empty-padding', description: 'Empty padding.' },
+    { variable: '--uilib-select-bg', description: 'Background colour.' },
+    { variable: '--uilib-select-border', description: 'Border shorthand.' },
+    { variable: '--uilib-select-dropdown-bg', description: 'Dropdown background colour.' },
+    { variable: '--uilib-select-option-selected', description: 'Option (selected).' },
   ];
 }

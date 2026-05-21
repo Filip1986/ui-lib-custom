@@ -65,6 +65,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for DatePicker component scenarios and form integrations.
  */
@@ -86,6 +88,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
   styleUrl: './date-picker-demo.component.scss',
@@ -328,5 +332,279 @@ export class DatePickerDemoComponent {
       description: 'Adds time picker below the calendar.',
     },
     { name: 'hourFormat', type: "'12' | '24'", default: "'24'", description: 'Time format.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-datepicker-input-bg',
+      description: 'Uilib Datepicker Input background colour.',
+    },
+    {
+      variable: '--uilib-datepicker-input-color',
+      description: 'Uilib Datepicker Input text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-input-border-color',
+      description: 'Uilib Datepicker Input Border text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-input-border-color-hover',
+      description: 'Uilib Datepicker Input Border text colour (hover).',
+    },
+    {
+      variable: '--uilib-datepicker-input-border-color-focus',
+      description: 'Uilib Datepicker Input Border text colour (focus).',
+    },
+    {
+      variable: '--uilib-datepicker-input-border-radius',
+      description: 'Uilib Datepicker Input Border border radius.',
+    },
+    {
+      variable: '--uilib-datepicker-input-padding-y',
+      description: 'Uilib Datepicker Input vertical padding.',
+    },
+    {
+      variable: '--uilib-datepicker-input-padding-x',
+      description: 'Uilib Datepicker Input horizontal padding.',
+    },
+    {
+      variable: '--uilib-datepicker-input-min-height',
+      description: 'Uilib Datepicker Input Min height.',
+    },
+    {
+      variable: '--uilib-datepicker-filled-bg',
+      description: 'Uilib Datepicker Filled background colour.',
+    },
+    {
+      variable: '--uilib-datepicker-invalid-border-color',
+      description: 'Uilib Datepicker Invalid Border text colour.',
+    },
+    { variable: '--uilib-datepicker-focus-ring', description: 'Uilib Datepicker focus ring.' },
+    {
+      variable: '--uilib-datepicker-panel-bg',
+      description: 'Uilib Datepicker Panel background colour.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-color',
+      description: 'Uilib Datepicker Panel text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-border-color',
+      description: 'Uilib Datepicker Panel Border text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-border-radius',
+      description: 'Uilib Datepicker Panel Border border radius.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-shadow',
+      description: 'Uilib Datepicker Panel box shadow.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-padding',
+      description: 'Uilib Datepicker Panel padding.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-max-height',
+      description: 'Uilib Datepicker Panel Max height.',
+    },
+    { variable: '--uilib-datepicker-z-index', description: 'Uilib Datepicker z-index.' },
+    { variable: '--uilib-datepicker-header-gap', description: 'Uilib Datepicker Header gap.' },
+    { variable: '--uilib-datepicker-title-gap', description: 'Uilib Datepicker Title gap.' },
+    {
+      variable: '--uilib-datepicker-title-font-size',
+      description: 'Uilib Datepicker Title Font size.',
+    },
+    {
+      variable: '--uilib-datepicker-title-font-weight',
+      description: 'Uilib Datepicker Title font weight.',
+    },
+    {
+      variable: '--uilib-datepicker-nav-button-size',
+      description: 'Uilib Datepicker Nav Button size.',
+    },
+    {
+      variable: '--uilib-datepicker-nav-button-radius',
+      description: 'Uilib Datepicker Nav Button border radius.',
+    },
+    {
+      variable: '--uilib-datepicker-nav-button-bg',
+      description: 'Uilib Datepicker Nav Button background colour.',
+    },
+    {
+      variable: '--uilib-datepicker-nav-button-bg-hover',
+      description: 'Uilib Datepicker Nav Button background colour (hover).',
+    },
+    {
+      variable: '--uilib-datepicker-nav-button-border-color',
+      description: 'Uilib Datepicker Nav Button Border text colour.',
+    },
+    { variable: '--uilib-datepicker-calendar-gap', description: 'Uilib Datepicker Calendar gap.' },
+    {
+      variable: '--uilib-datepicker-day-cell-size',
+      description: 'Uilib Datepicker Day Cell size.',
+    },
+    {
+      variable: '--uilib-datepicker-day-cell-padding',
+      description: 'Uilib Datepicker Day Cell padding.',
+    },
+    {
+      variable: '--uilib-datepicker-day-font-size',
+      description: 'Uilib Datepicker Day Font size.',
+    },
+    {
+      variable: '--uilib-datepicker-day-font-weight',
+      description: 'Uilib Datepicker Day font weight.',
+    },
+    {
+      variable: '--uilib-datepicker-day-border-radius',
+      description: 'Uilib Datepicker Day Border border radius.',
+    },
+    { variable: '--uilib-datepicker-day-color', description: 'Uilib Datepicker Day text colour.' },
+    {
+      variable: '--uilib-datepicker-day-bg-hover',
+      description: 'Uilib Datepicker Day background colour (hover).',
+    },
+    { variable: '--uilib-datepicker-day-bg-today', description: 'Uilib Datepicker Day Bg Today.' },
+    {
+      variable: '--uilib-datepicker-day-color-today',
+      description: 'Uilib Datepicker Day Color Today.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-selected',
+      description: 'Uilib Datepicker Day background colour (selected).',
+    },
+    {
+      variable: '--uilib-datepicker-day-color-selected',
+      description: 'Uilib Datepicker Day text colour (selected).',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-range-between',
+      description: 'Uilib Datepicker Day Bg Range Between.',
+    },
+    {
+      variable: '--uilib-datepicker-day-color-disabled',
+      description: 'Uilib Datepicker Day text colour (disabled).',
+    },
+    {
+      variable: '--uilib-datepicker-day-color-other-month',
+      description: 'Uilib Datepicker Day Color Other Month.',
+    },
+    {
+      variable: '--uilib-datepicker-month-year-cell-min-height',
+      description: 'Uilib Datepicker Month Year Cell Min height.',
+    },
+    {
+      variable: '--uilib-datepicker-month-year-cell-radius',
+      description: 'Uilib Datepicker Month Year Cell border radius.',
+    },
+    {
+      variable: '--uilib-datepicker-month-year-cell-font-size',
+      description: 'Uilib Datepicker Month Year Cell Font size.',
+    },
+    { variable: '--uilib-datepicker-time-gap', description: 'Uilib Datepicker Time gap.' },
+    {
+      variable: '--uilib-datepicker-time-input-width',
+      description: 'Uilib Datepicker Time Input width.',
+    },
+    {
+      variable: '--uilib-datepicker-time-input-height',
+      description: 'Uilib Datepicker Time Input height.',
+    },
+    {
+      variable: '--uilib-datepicker-time-input-bg',
+      description: 'Uilib Datepicker Time Input background colour.',
+    },
+    {
+      variable: '--uilib-datepicker-time-input-color',
+      description: 'Uilib Datepicker Time Input text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-time-input-border-color',
+      description: 'Uilib Datepicker Time Input Border text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-time-input-border-radius',
+      description: 'Uilib Datepicker Time Input Border border radius.',
+    },
+    {
+      variable: '--uilib-datepicker-time-button-size',
+      description: 'Uilib Datepicker Time Button size.',
+    },
+    {
+      variable: '--uilib-datepicker-time-button-bg',
+      description: 'Uilib Datepicker Time Button background colour.',
+    },
+    {
+      variable: '--uilib-datepicker-time-button-bg-hover',
+      description: 'Uilib Datepicker Time Button background colour (hover).',
+    },
+    {
+      variable: '--uilib-datepicker-time-button-border-color',
+      description: 'Uilib Datepicker Time Button Border text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-time-separator-color',
+      description: 'Uilib Datepicker Time Separator text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-time-ampm-min-width',
+      description: 'Uilib Datepicker Time Ampm Min width.',
+    },
+    {
+      variable: '--uilib-datepicker-buttonbar-padding-top',
+      description: 'Uilib Datepicker Buttonbar top padding.',
+    },
+    {
+      variable: '--uilib-datepicker-buttonbar-gap',
+      description: 'Uilib Datepicker Buttonbar gap.',
+    },
+    {
+      variable: '--uilib-datepicker-buttonbar-border-color',
+      description: 'Uilib Datepicker Buttonbar Border text colour.',
+    },
+    {
+      variable: '--uilib-datepicker-transition-fast',
+      description: 'Uilib Datepicker Transition Fast.',
+    },
+    {
+      variable: '--uilib-datepicker-transition-normal',
+      description: 'Uilib Datepicker Transition Normal.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-shadow-material',
+      description: 'Uilib Datepicker Panel box shadow — material variant.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-shadow-bootstrap',
+      description: 'Uilib Datepicker Panel box shadow — bootstrap variant.',
+    },
+    {
+      variable: '--uilib-datepicker-panel-shadow-minimal',
+      description: 'Uilib Datepicker Panel box shadow — minimal variant.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-selected-material',
+      description: 'Uilib Datepicker Day Bg Selected — material variant.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-selected-bootstrap',
+      description: 'Uilib Datepicker Day Bg Selected — bootstrap variant.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-selected-minimal',
+      description: 'Uilib Datepicker Day Bg Selected — minimal variant.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-hover-material',
+      description: 'Uilib Datepicker Day Bg Hover — material variant.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-hover-bootstrap',
+      description: 'Uilib Datepicker Day Bg Hover — bootstrap variant.',
+    },
+    {
+      variable: '--uilib-datepicker-day-bg-hover-minimal',
+      description: 'Uilib Datepicker Day Bg Hover — minimal variant.',
+    },
   ];
 }

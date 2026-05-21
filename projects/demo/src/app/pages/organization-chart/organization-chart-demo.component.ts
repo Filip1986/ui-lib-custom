@@ -13,6 +13,7 @@ import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
 import { Panel } from 'ui-lib-custom/panel';
 import type {
@@ -36,6 +37,8 @@ import {
   minimalHtml,
   minimalTs,
 } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 
 // ─── Shared tree data ────────────────────────────────────────────────────────
 
@@ -89,6 +92,8 @@ function makeCompanyTree(expanded: boolean = true): OrganizationChartNode[] {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './organization-chart-demo.component.html',
   styleUrl: './organization-chart-demo.component.scss',
@@ -256,4 +261,74 @@ export class OrganizationChartDemoComponent {
   private appendLog(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 10));
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-org-chart-connector-color',
+      description: 'Uilib Org Chart Connector text colour.',
+    },
+    {
+      variable: '--uilib-org-chart-connector-width',
+      description: 'Uilib Org Chart Connector width.',
+    },
+    {
+      variable: '--uilib-org-chart-connector-height',
+      description: 'Uilib Org Chart Connector height.',
+    },
+    {
+      variable: '--uilib-org-chart-connector-radius',
+      description: 'Uilib Org Chart Connector border radius.',
+    },
+    { variable: '--uilib-org-chart-gap', description: 'Uilib Org Chart gap.' },
+    {
+      variable: '--uilib-org-chart-node-bg',
+      description: 'Uilib Org Chart Node background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-node-border',
+      description: 'Uilib Org Chart Node border shorthand.',
+    },
+    {
+      variable: '--uilib-org-chart-node-border-radius',
+      description: 'Uilib Org Chart Node Border border radius.',
+    },
+    { variable: '--uilib-org-chart-node-padding', description: 'Uilib Org Chart Node padding.' },
+    {
+      variable: '--uilib-org-chart-node-min-width',
+      description: 'Uilib Org Chart Node Min width.',
+    },
+    { variable: '--uilib-org-chart-node-color', description: 'Uilib Org Chart Node text colour.' },
+    {
+      variable: '--uilib-org-chart-node-hover-bg',
+      description: 'Uilib Org Chart Node Hover background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-node-selected-bg',
+      description: 'Uilib Org Chart Node Selected background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-node-selected-border',
+      description: 'Uilib Org Chart Node Selected border shorthand.',
+    },
+    {
+      variable: '--uilib-org-chart-node-selected-color',
+      description: 'Uilib Org Chart Node Selected text colour.',
+    },
+    { variable: '--uilib-org-chart-toggle-size', description: 'Uilib Org Chart Toggle size.' },
+    {
+      variable: '--uilib-org-chart-toggle-bg',
+      description: 'Uilib Org Chart Toggle background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-toggle-border',
+      description: 'Uilib Org Chart Toggle border shorthand.',
+    },
+    {
+      variable: '--uilib-org-chart-toggle-color',
+      description: 'Uilib Org Chart Toggle text colour.',
+    },
+    {
+      variable: '--uilib-org-chart-toggle-radius',
+      description: 'Uilib Org Chart Toggle border radius.',
+    },
+  ];
 }

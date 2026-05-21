@@ -46,6 +46,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Textarea component — all features, states, and form integration.
  */
@@ -66,6 +68,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
@@ -224,5 +228,24 @@ export class TextareaDemoComponent {
       default: 'false',
       description: 'Marks the field as invalid.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-textarea-bg', description: 'Background colour.' },
+    { variable: '--uilib-textarea-border', description: 'Border shorthand.' },
+    { variable: '--uilib-textarea-border-focus', description: 'Border shorthand (focus).' },
+    { variable: '--uilib-textarea-border-error', description: 'Border shorthand (error).' },
+    { variable: '--uilib-textarea-text', description: 'Text.' },
+    { variable: '--uilib-textarea-placeholder', description: 'Placeholder.' },
+    { variable: '--uilib-textarea-label-color', description: 'Label colour.' },
+    { variable: '--uilib-textarea-required-color', description: 'Required text colour.' },
+    { variable: '--uilib-textarea-error-color', description: 'Error text colour.' },
+    { variable: '--uilib-textarea-hint-color', description: 'Hint text colour.' },
+    { variable: '--uilib-textarea-counter-color', description: 'Counter text colour.' },
+    { variable: '--uilib-textarea-resize-color', description: 'Resize text colour.' },
+    { variable: '--uilib-textarea-radius', description: 'Border radius.' },
+    { variable: '--uilib-textarea-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-textarea-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-textarea-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-textarea-font-size', description: 'Font size.' },
   ];
 }

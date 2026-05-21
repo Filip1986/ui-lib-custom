@@ -13,6 +13,8 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { thresholdHtml, thresholdTs, parentTargetHtml, parentTargetTs } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ScrollTop component.
  */
@@ -28,6 +30,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './scroll-top-demo.component.html',
   styleUrl: './scroll-top-demo.component.scss',
@@ -69,6 +73,7 @@ export class ScrollTopDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'custom-icon', label: 'Custom Icon' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -133,5 +138,24 @@ export class ScrollTopDemoComponent {
       type: 'void',
       description: 'Programmatically triggers the scroll-to-top action.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-scroll-top-size', description: 'Size.' },
+    { variable: '--uilib-scroll-top-bg', description: 'Background colour.' },
+    { variable: '--uilib-scroll-top-color', description: 'Text colour.' },
+    { variable: '--uilib-scroll-top-border', description: 'Border shorthand.' },
+    { variable: '--uilib-scroll-top-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-scroll-top-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-scroll-top-shadow-hover', description: 'Box shadow (hover).' },
+    { variable: '--uilib-scroll-top-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-scroll-top-bottom', description: 'Bottom.' },
+    { variable: '--uilib-scroll-top-right', description: 'Right.' },
+    { variable: '--uilib-scroll-top-z-index', description: 'Z-index.' },
+    { variable: '--uilib-scroll-top-transition', description: 'Transition.' },
+    { variable: '--uilib-scroll-top-bg-hover', description: 'Background colour (hover).' },
+    { variable: '--uilib-scroll-top-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-scroll-top-icon-size-sm', description: 'Icon size — sm.' },
+    { variable: '--uilib-scroll-top-size-lg', description: 'Size — lg.' },
+    { variable: '--uilib-scroll-top-icon-size-lg', description: 'Icon size — lg.' },
   ];
 }

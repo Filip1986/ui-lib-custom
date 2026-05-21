@@ -19,6 +19,9 @@ import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.c
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { badgeExampleHtml, badgeExampleTs, usageHtml, usageTs } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -50,6 +53,10 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     BadgeBasicExampleComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -164,4 +171,24 @@ export class BadgesComponent {
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-badge-bg-resolved', description: 'Bg Resolved.' },
+    { variable: '--uilib-badge-bg-subtle-resolved', description: 'Bg Subtle Resolved.' },
+    { variable: '--uilib-badge-bg-outline-resolved', description: 'Bg Outline Resolved.' },
+    { variable: '--uilib-badge-fg-resolved', description: 'Fg Resolved.' },
+    { variable: '--uilib-badge-border-color-resolved', description: 'Border Color Resolved.' },
+    { variable: '--uilib-badge-border-width-resolved', description: 'Border Width Resolved.' },
+    { variable: '--uilib-badge-radius-resolved', description: 'Radius Resolved.' },
+    { variable: '--uilib-badge-gap-resolved', description: 'Gap Resolved.' },
+    { variable: '--uilib-badge-font-size-resolved', description: 'Font Size Resolved.' },
+    { variable: '--uilib-badge-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-badge-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-badge-padding-y-resolved', description: 'Padding Y Resolved.' },
+    { variable: '--uilib-badge-padding-x-resolved', description: 'Padding X Resolved.' },
+    { variable: '--uilib-badge-dot-size', description: 'Dot size.' },
+    { variable: '--uilib-badge-bg', description: 'Background colour.' },
+    { variable: '--uilib-badge-bg-subtle', description: 'Bg Subtle.' },
+    { variable: '--uilib-badge-fg', description: 'Fg.' },
+    { variable: '--uilib-badge-border', description: 'Border shorthand.' },
+  ];
 }

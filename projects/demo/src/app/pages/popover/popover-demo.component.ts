@@ -24,6 +24,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Popover component.
  */
@@ -41,6 +43,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',
@@ -85,6 +89,7 @@ export class PopoverDemoComponent {
     { id: 'non-dismissable', label: 'Non-dismissable' },
     { id: 'events', label: 'Events' },
     { id: 'declarative', label: 'Declarative' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -180,5 +185,28 @@ export class PopoverDemoComponent {
       description: 'Shows the popover anchored to the event target element.',
     },
     { name: 'hide()', type: 'void', description: 'Hides the popover.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-popover-bg', description: 'Background colour.' },
+    { variable: '--uilib-popover-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-popover-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-popover-border', description: 'Border shorthand.' },
+    { variable: '--uilib-popover-z-index', description: 'Z-index.' },
+    { variable: '--uilib-popover-min-width', description: 'Minimum width.' },
+    { variable: '--uilib-popover-max-width', description: 'Maximum width.' },
+    { variable: '--uilib-popover-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-popover-header-border-bottom', description: 'Header Border Bottom.' },
+    { variable: '--uilib-popover-header-font-size', description: 'Header font size.' },
+    { variable: '--uilib-popover-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-popover-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-popover-close-btn-size', description: 'Close Btn size.' },
+    { variable: '--uilib-popover-close-btn-color', description: 'Close Btn text colour.' },
+    {
+      variable: '--uilib-popover-close-btn-hover-bg',
+      description: 'Close Btn Hover background colour.',
+    },
+    { variable: '--uilib-popover-enter-duration', description: 'Enter animation duration.' },
+    { variable: '--uilib-popover-enter-easing', description: 'Enter animation easing.' },
+    { variable: '--uilib-popover-arrow-size', description: 'Arrow size.' },
   ];
 }

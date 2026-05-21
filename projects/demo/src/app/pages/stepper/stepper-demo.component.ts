@@ -16,6 +16,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Stepper component.
  */
@@ -33,6 +35,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './stepper-demo.component.html',
   styleUrl: './stepper-demo.component.scss',
@@ -70,6 +74,7 @@ export class StepperDemoComponent {
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -254,5 +259,73 @@ export class StepperDemoComponent {
       type: '',
       description: 'Custom HTML for the step header label (overrides <code>header</code> input).',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-stepper-indicator-size', description: 'Active indicator size.' },
+    { variable: '--uilib-stepper-indicator-font-size', description: 'Indicator Font size.' },
+    {
+      variable: '--uilib-stepper-indicator-border-radius',
+      description: 'Indicator Border border radius.',
+    },
+    { variable: '--uilib-stepper-indicator-bg', description: 'Indicator background colour.' },
+    { variable: '--uilib-stepper-indicator-color', description: 'Active indicator colour.' },
+    { variable: '--uilib-stepper-indicator-border', description: 'Indicator border shorthand.' },
+    {
+      variable: '--uilib-stepper-indicator-bg-active',
+      description: 'Indicator background colour (active).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-color-active',
+      description: 'Active indicator colour (active).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-border-active',
+      description: 'Indicator border shorthand (active).',
+    },
+    { variable: '--uilib-stepper-indicator-bg-completed', description: 'Indicator Bg Completed.' },
+    {
+      variable: '--uilib-stepper-indicator-color-completed',
+      description: 'Indicator Color Completed.',
+    },
+    {
+      variable: '--uilib-stepper-indicator-border-completed',
+      description: 'Indicator Border Completed.',
+    },
+    {
+      variable: '--uilib-stepper-indicator-bg-error',
+      description: 'Indicator background colour (error).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-color-error',
+      description: 'Active indicator colour (error).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-border-error',
+      description: 'Indicator border shorthand (error).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-bg-disabled',
+      description: 'Indicator background colour (disabled).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-color-disabled',
+      description: 'Active indicator colour (disabled).',
+    },
+    {
+      variable: '--uilib-stepper-indicator-border-disabled',
+      description: 'Indicator border shorthand (disabled).',
+    },
+    { variable: '--uilib-stepper-label-color', description: 'Label colour.' },
+    { variable: '--uilib-stepper-label-color-active', description: 'Label colour (active).' },
+    { variable: '--uilib-stepper-label-color-completed', description: 'Label Color Completed.' },
+    { variable: '--uilib-stepper-label-color-error', description: 'Label colour (error).' },
+    { variable: '--uilib-stepper-label-color-disabled', description: 'Label colour (disabled).' },
+    { variable: '--uilib-stepper-label-font-size', description: 'Label font size.' },
+    { variable: '--uilib-stepper-label-font-weight', description: 'Label font weight.' },
+    { variable: '--uilib-stepper-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-stepper-separator-thickness', description: 'Separator Thickness.' },
+    { variable: '--uilib-stepper-content-padding', description: 'Content area padding.' },
+    { variable: '--uilib-stepper-panel-footer-gap', description: 'Panel Footer gap.' },
+    { variable: '--uilib-stepper-transition', description: 'Transition.' },
   ];
 }

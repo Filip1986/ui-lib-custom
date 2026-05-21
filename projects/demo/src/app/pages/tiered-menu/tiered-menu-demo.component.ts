@@ -122,6 +122,7 @@ export class TieredMenuDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'item-states', label: 'Item States' },
     { id: 'url-items', label: 'URL Items' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
