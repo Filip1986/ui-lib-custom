@@ -181,6 +181,7 @@ export class AutoCompleteDemoComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {

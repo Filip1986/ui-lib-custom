@@ -6,9 +6,7 @@
     description="Interactive demonstrations for single and multiple modes, grouping, virtual scroll, templates, states, sizes, forms, and variants."
   />
 
-  <div class="examples">
-    <section id="basic" data-doc-anchor class="example-section">
-      <h3>1. Basic</h3>
+    <app-doc-section id="basic" title="Basic">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="basicValue"
@@ -23,10 +21,9 @@
         [typescript]="basicTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="objects" data-doc-anchor class="example-section">
-      <h3>2. Objects</h3>
+    <app-doc-section id="objects" title="Objects">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="objectValue"
@@ -42,10 +39,9 @@
         [typescript]="objectsTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="dropdown" data-doc-anchor class="example-section">
-      <h3>3. Dropdown</h3>
+    <app-doc-section id="dropdown" title="Dropdown">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="dropdownValue"
@@ -62,10 +58,9 @@
         [typescript]="dropdownTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="force-selection" data-doc-anchor class="example-section">
-      <h3>4. Force Selection</h3>
+    <app-doc-section id="force-selection" title="Force Selection">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="forceSelectionValue"
@@ -83,10 +78,9 @@
         [typescript]="forceSelectionTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="multiple" data-doc-anchor class="example-section">
-      <h3>5. Multiple</h3>
+    <app-doc-section id="multiple" title="Multiple">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="multipleValue"
@@ -103,10 +97,9 @@
         [typescript]="multipleTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="multiple-advanced" data-doc-anchor class="example-section">
-      <h3>6. Multiple Advanced</h3>
+    <app-doc-section id="multiple-advanced" title="Multiple Advanced">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="multipleAdvancedValue"
@@ -132,10 +125,9 @@
         [typescript]="multipleAdvancedTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="grouped" data-doc-anchor class="example-section">
-      <h3>7. Grouped</h3>
+    <app-doc-section id="grouped" title="Grouped">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="groupedValue"
@@ -158,10 +150,9 @@
         [typescript]="groupedTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="virtual-scroll" data-doc-anchor class="example-section">
-      <h3>8. Virtual Scroll</h3>
+    <app-doc-section id="virtual-scroll" title="Virtual Scroll">
       <ui-lib-panel variant="minimal">
         <p class="example-note">Dataset size: 10,000 items</p>
         <ui-lib-autocomplete
@@ -181,10 +172,9 @@
         [typescript]="virtualTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="templates" data-doc-anchor class="example-section">
-      <h3>9. Templates</h3>
+    <app-doc-section id="templates" title="Templates">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="templateValue"
@@ -221,10 +211,9 @@
         [typescript]="templatesTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="sizes" data-doc-anchor class="example-section">
-      <h3>10. Sizes</h3>
+    <app-doc-section id="sizes" title="Sizes">
       <ui-lib-panel variant="minimal">
         <div class="row-3">
           <ui-lib-autocomplete
@@ -255,10 +244,9 @@
         [typescript]="sizesTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="filled" data-doc-anchor class="example-section">
-      <h3>11. Filled</h3>
+    <app-doc-section id="filled" title="Filled">
       <ui-lib-panel variant="minimal">
         <ui-lib-autocomplete
           [(ngModel)]="filledValue"
@@ -274,10 +262,9 @@
         [typescript]="filledTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="disabled-invalid" data-doc-anchor class="example-section">
-      <h3>12. Disabled & Invalid</h3>
+    <app-doc-section id="disabled-invalid" title="Disabled & Invalid">
       <ui-lib-panel variant="minimal">
         <div class="row-2">
           <ui-lib-autocomplete
@@ -300,10 +287,9 @@
         [typescript]="statesTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="forms" data-doc-anchor class="example-section">
-      <h3>13. Forms</h3>
+    <app-doc-section id="forms" title="Forms">
       <ui-lib-panel variant="minimal">
         <h4>Reactive Form</h4>
         <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
@@ -342,10 +328,9 @@
           [showLineNumbers]="true"
         />
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
-    <section id="variants" data-doc-anchor class="example-section">
-      <h3>14. Variants</h3>
+    <app-doc-section id="variants" title="Variants">
       <ui-lib-panel variant="minimal">
         <div class="row-3">
           <ui-lib-autocomplete
@@ -376,10 +361,9 @@
         [typescript]="variantsTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="clipping" data-doc-anchor class="example-section">
-      <h3>15. Clipping Container (Overflow Hidden)</h3>
+    <app-doc-section id="clipping" title="Clipping Container">
       <ui-lib-panel variant="minimal">
         <div class="clipping-card">
           <ui-lib-autocomplete
@@ -401,8 +385,8 @@
         [typescript]="clippingTs"
         [showLineNumbers]="true"
       />
-    </section>
-  </div>
+    </app-doc-section>
+
 
   
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->

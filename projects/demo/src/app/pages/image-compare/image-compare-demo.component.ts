@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/
 import type { Signal, WritableSignal } from '@angular/core';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
@@ -39,7 +38,6 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     Panel,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocDemoViewportComponent,
     ImageCompare,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,

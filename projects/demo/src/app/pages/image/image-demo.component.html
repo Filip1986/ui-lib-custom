@@ -6,12 +6,9 @@
     description="Displays an image with optional preview overlay, zoom controls, and rotation. Supports fallback images, custom error templates, and a customisable hover indicator."
   />
 
-  <app-doc-demo-viewport [autoHeight]="true">
-    <div class="examples">
       <!-- ── a. Basic ─────────────────────────────────────────────────────────── -->
-      <section id="basic" data-doc-anchor class="example-section">
-        <h3>a. Basic</h3>
-        <p class="section-text">
+      <app-doc-section id="basic" title="Basic">
+        <p class="demo-section__description">
           Provide <code>src</code> and <code>alt</code> to render a simple image.
         </p>
         <ui-lib-panel variant="minimal">
@@ -20,12 +17,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── b. Preview ───────────────────────────────────────────────────────── -->
-      <section id="preview" data-doc-anchor class="example-section">
-        <h3>b. Preview</h3>
-        <p class="section-text">
+      <app-doc-section id="preview" title="Preview">
+        <p class="demo-section__description">
           Set <code>[preview]="true"</code> to enable the lightbox overlay. Hover over the image to
           see the indicator, then click to open the overlay. Inside the overlay you can
           <strong>zoom in/out</strong> and <strong>rotate</strong> the image, or press
@@ -46,12 +42,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="previewHtml" [typescript]="previewTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── c. Custom Indicator ──────────────────────────────────────────────── -->
-      <section id="custom-indicator" data-doc-anchor class="example-section">
-        <h3>c. Custom Indicator</h3>
-        <p class="section-text">
+      <app-doc-section id="custom-indicator" title="Custom Indicator">
+        <p class="demo-section__description">
           Replace the default eye-icon indicator with your own content using the
           <code>#imageIndicator</code> template slot.
         </p>
@@ -72,12 +67,11 @@
           [html]="customIndicatorHtml"
           [typescript]="customIndicatorTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── d. Error Fallback ─────────────────────────────────────────────────── -->
-      <section id="error-fallback" data-doc-anchor class="example-section">
-        <h3>d. Error Fallback</h3>
-        <p class="section-text">
+      <app-doc-section id="error-fallback" title="Error Fallback">
+        <p class="demo-section__description">
           Pass <code>errorSrc</code> to display an alternative image when the primary source fails
           to load.
         </p>
@@ -94,12 +88,11 @@
           [html]="errorFallbackHtml"
           [typescript]="errorFallbackTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── e. Sizes ──────────────────────────────────────────────────────────── -->
-      <section id="sizes" data-doc-anchor class="example-section">
-        <h3>e. Sizes</h3>
-        <p class="section-text">
+      <app-doc-section id="sizes" title="Sizes">
+        <p class="demo-section__description">
           Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>) to
           control border-radius scaling and indicator icon sizing.
         </p>
@@ -135,12 +128,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── f. Variants ───────────────────────────────────────────────────────── -->
-      <section id="variants" data-doc-anchor class="example-section">
-        <h3>f. Variants</h3>
-        <p class="section-text">
+      <app-doc-section id="variants" title="Variants">
+        <p class="demo-section__description">
           Three design variants are available: <code>material</code> (subtle shadow),
           <code>bootstrap</code> (visible border, tighter radius), and <code>minimal</code>
           (no rounding).
@@ -177,12 +169,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── g. Custom Error Template ─────────────────────────────────────────── -->
-      <section id="custom-error" data-doc-anchor class="example-section">
-        <h3>g. Custom Error Template</h3>
-        <p class="section-text">
+      <app-doc-section id="custom-error" title="Custom Error">
+        <p class="demo-section__description">
           Use the <code>#imageError</code> template slot to render your own placeholder when the
           image fails to load and no <code>errorSrc</code> is set.
         </p>
@@ -202,12 +193,11 @@
           [html]="customErrorHtml"
           [typescript]="customErrorTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── h. Dimensions ─────────────────────────────────────────────────────── -->
-      <section id="dimensions" data-doc-anchor class="example-section">
-        <h3>h. Dimensions</h3>
-        <p class="section-text">
+      <app-doc-section id="dimensions" title="Dimensions">
+        <p class="demo-section__description">
           Pass <code>width</code> and <code>height</code> to constrain the image element size. These
           are forwarded directly to the underlying <code>&lt;img&gt;</code> element.
         </p>
@@ -225,12 +215,11 @@
           [html]="dimensionsHtml"
           [typescript]="dimensionsTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── i. Two-Way Binding ──────────────────────────────────────────────── -->
-      <section id="two-way-binding" data-doc-anchor class="example-section">
-        <h3>i. Two-Way Binding</h3>
-        <p class="section-text">
+      <app-doc-section id="two-way-binding" title="Two-Way Binding">
+        <p class="demo-section__description">
           Use <code>[(previewVisible)]</code> to control and react to the overlay open state
           programmatically.
         </p>
@@ -253,11 +242,10 @@
           [html]="twoWayBindingHtml"
           [typescript]="twoWayBindingTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── API Table ─────────────────────────────────────────────────────────── -->
-      <section id="api" data-doc-anchor class="example-section">
-        <h3>API</h3>
+      <app-doc-section id="api" title="API Reference">
         <div class="api-table-wrapper">
           <table class="api-table">
             <thead>
@@ -389,10 +377,9 @@
             </tbody>
           </table>
         </div>
-      </section>
-    </div>
-  </app-doc-demo-viewport>
+      </app-doc-section>
 
+  
   
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section

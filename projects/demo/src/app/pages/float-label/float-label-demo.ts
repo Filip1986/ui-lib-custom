@@ -11,7 +11,6 @@ import {
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
-import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
@@ -38,6 +37,7 @@ import {
   reactiveHtml,
   reactiveTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface DemoOption {
   label: string;
   value: string;
@@ -56,7 +56,6 @@ interface DemoOption {
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocDemoViewportComponent,
     UiLibInput,
     UiLibSelect,
     FloatLabelComponent,
@@ -65,6 +64,8 @@ interface DemoOption {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',

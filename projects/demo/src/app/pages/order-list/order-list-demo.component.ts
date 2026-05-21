@@ -37,6 +37,7 @@ import {
   dragDropHtml,
   dragDropTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 // ---------------------------------------------------------------------------
 // Demo data model
@@ -88,6 +89,8 @@ const DEMO_PRODUCTS: DemoProduct[] = [
     OrderListEmptyDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './order-list-demo.component.html',
   styleUrl: './order-list-demo.component.scss',

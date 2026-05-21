@@ -82,6 +82,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-21 [example-section layout migration complete — 8 pages converted to app-doc-section]
+Changed:
+  - scripts/migrate-example-sections.mjs (NEW — converts autocomplete/float-label/image/image-compare/order-list/organization-chart/pick-list/split-button from old example-section layout to app-doc-section; CRLF normalisation fix required for Windows files)
+  - 8 demo pages HTML: <div class="examples"> + <section class="example-section"> → <app-doc-section id="X" title="LABEL">, <h3> headings removed, </section> → </app-doc-section>, description class normalised
+  - 7 of 8 demo pages TS: DocSectionComponent added to imports if missing; css-vars/accessibility sections added to sections[] if present in HTML but absent
+  - float-label, image, image-compare TS: removed now-unused DocDemoViewportComponent import and @Component.imports entry
+State: Build zero errors. All 8 pages now use standard app-doc-section layout identical to the rest of the app. Only pre-existing budget warnings remain.
+Verification:
+  node scripts/migrate-example-sections.mjs → Processed: 8
+  ng build demo → PASS (zero new errors; only pre-existing budget warnings)
+Next step: Migrate 7 pages with raw ARIA HTML tables to DocAriaTableComponent, then 17 pages with raw HTML API tables to DocApiReferenceComponent.
+
 Date: 2026-05-21 [CSS Custom Properties sections auto-generated across 54 demo pages]
 Changed:
   - scripts/generate-css-var-sections.mjs (NEW — extracts --uilib-* vars from component SCSS, injects cssVarRows + DocCssVarsTableComponent import + HTML section into each demo page)
@@ -93,28 +105,5 @@ Verification:
   node scripts/generate-css-var-sections.mjs → Processed: 54, Skipped: 35
   ng build demo → PASS (zero errors; only pre-existing roadmap SCSS budget warning)
 Next step: Add Accessibility sections (ARIA table + keyboard nav) to pages that have ariaRows/keyboardRows data but no section in HTML. Then convert the 8 pages still on example-section layout to full doc-page-layout pattern.
-
-Date: 2026-05-21 [Demo page standardization — app-doc-section migration complete, build clean]
-Changed:
-  - projects/demo/src/app/shared/doc-page/doc-section.component.ts (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-section.component.html (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-aria-table.component.ts (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-aria-table.component.html (NEW)
-  - projects/demo/src/app/shared/index.ts (exports added for both new components)
-  - scripts/migrate-doc-sections.mjs (NEW — bulk migration: 80 pages' demo-section patterns → app-doc-section)
-  - scripts/fix-section-imports.mjs (NEW — fixed 7 files where DocSectionComponent import landed at EOF)
-  - scripts/fix-section-tags.mjs (NEW — token+stack fixer: converts remaining plain <section id="X"> to app-doc-section and reverts no-id section closings)
-  - 80+ demo pages: <section class="demo-section"> → <app-doc-section id="X" title="TITLE">
-  - 22 pages fixed for mismatched closing tags (plain sections whose </section> was wrongly converted)
-  - dynamic-dialog: DocSectionComponent moved from inner component to main DynamicDialogDemoComponent
-  - projects/demo/src/app/pages/chip/chip-demo.component.html (golden template, DocAriaTableComponent)
-State: Build zero errors. All demo pages now use app-doc-section. Shared DocSectionComponent wraps every doc section with correct data-doc-anchor, class, id host bindings. DocAriaTableComponent created as chip golden template.
-Verification:
-  node scripts/migrate-doc-sections.mjs → 80 pages migrated
-  node scripts/fix-section-imports.mjs → 7 import placements fixed
-  node scripts/fix-section-tags.mjs → 22 tag mismatches fixed
-  ng build demo → PASS (zero errors; only pre-existing budget warnings)
-  tsc -p projects/demo/tsconfig.app.json --noEmit → PASS
-Next step: (1) Add DocAriaTableComponent usage to remaining pages that still use raw ui-lib-table for ARIA attributes. (2) Add missing CSS Custom Properties / Accessibility sections to pages that lack them. (3) Consider migrating autocomplete/toggle-button/cascade-select pages from example-section → full doc-page-layout pattern for visual consistency.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

@@ -46,6 +46,7 @@ import {
   templateHtml,
   templateTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.
@@ -64,6 +65,8 @@ import {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',

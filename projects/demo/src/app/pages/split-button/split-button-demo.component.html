@@ -7,18 +7,15 @@
     <p class="action-log" aria-live="polite">{{ lastAction() }}</p>
   </app-doc-page-header>
 
-  <div class="examples">
-    <section id="basic" data-doc-anchor class="example-section">
-      <h3>Basic</h3>
+    <app-doc-section id="basic" title="Basic">
       <p>Default SplitButton with label and action menu model.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />
       </ui-lib-panel>
       <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="icons" data-doc-anchor class="example-section">
-      <h3>Icons</h3>
+    <app-doc-section id="icons" title="Icons">
       <p>Leading icon on the primary action with icon-capable menu actions.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-split-button
@@ -29,10 +26,9 @@
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="severity" data-doc-anchor class="example-section">
-      <h3>Severity</h3>
+    <app-doc-section id="severity" title="Severity">
       <p>All severity tokens in one row.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--severity">
@@ -47,10 +43,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="severityHtml" [typescript]="severityTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="disabled" data-doc-anchor class="example-section">
-      <h3>Disabled</h3>
+    <app-doc-section id="disabled" title="Disabled">
       <p>Disable all controls, only the main action, or only the menu trigger.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--three">
@@ -65,10 +60,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="raised" data-doc-anchor class="example-section">
-      <h3>Raised</h3>
+    <app-doc-section id="raised" title="Raised">
       <p>Raised style across all severities.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--severity">
@@ -83,10 +77,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="raisedHtml" [typescript]="raisedTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="rounded" data-doc-anchor class="example-section">
-      <h3>Rounded</h3>
+    <app-doc-section id="rounded" title="Rounded">
       <p>Rounded style across all severities.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--severity">
@@ -101,10 +94,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="roundedHtml" [typescript]="roundedTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="text" data-doc-anchor class="example-section">
-      <h3>Text</h3>
+    <app-doc-section id="text" title="Text">
       <p>Text style across all severities.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--severity">
@@ -119,10 +111,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="textHtml" [typescript]="textTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="raised-text" data-doc-anchor class="example-section">
-      <h3>Raised Text</h3>
+    <app-doc-section id="raised-text" title="Raised Text">
       <p>Raised + text modifiers combined.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--severity">
@@ -138,10 +129,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="raisedTextHtml" [typescript]="raisedTextTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="outlined" data-doc-anchor class="example-section">
-      <h3>Outlined</h3>
+    <app-doc-section id="outlined" title="Outlined">
       <p>Outlined style across all severities.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--severity">
@@ -156,10 +146,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="outlinedHtml" [typescript]="outlinedTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="sizes" data-doc-anchor class="example-section">
-      <h3>Sizes</h3>
+    <app-doc-section id="sizes" title="Sizes">
       <p>Small, medium, and large size tokens.</p>
       <ui-lib-panel variant="minimal">
         <div class="split-grid split-grid--three">
@@ -169,10 +158,9 @@
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="template" data-doc-anchor class="example-section">
-      <h3>Template</h3>
+    <app-doc-section id="template" title="Template">
       <p>Custom primary-content projection via <code>[splitButtonContent]</code>.</p>
       <ui-lib-panel variant="minimal">
         <ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
@@ -185,10 +173,9 @@
         </ui-lib-split-button>
       </ui-lib-panel>
       <app-doc-code-example [html]="templateHtml" [typescript]="templateTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="accessibility" data-doc-anchor class="example-section">
-      <h3>Accessibility</h3>
+    <app-doc-section id="accessibility" title="Accessibility">
       <p>
         SplitButton follows a menu-button pattern. The main action remains a standard button, while
         the trigger exposes menu semantics and the panel uses <code>role="menu"</code>.
@@ -204,10 +191,9 @@
         </li>
         <li>This demo reports command results in a polite live region at the top of the page.</li>
       </ul>
-    </section>
+    </app-doc-section>
 
-    <section id="api-reference" data-doc-anchor class="example-section">
-      <h3>API Reference</h3>
+    <app-doc-section id="api-reference" title="API Reference">
       <ui-lib-panel variant="minimal">
         <table class="doc-table">
           <thead>
@@ -252,8 +238,8 @@
           </tbody>
         </table>
       </ui-lib-panel>
-    </section>
-  </div>
+    </app-doc-section>
+
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

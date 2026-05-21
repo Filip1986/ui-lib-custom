@@ -40,6 +40,7 @@ import {
   dragDropHtml,
   dragDropTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 // ---------------------------------------------------------------------------
 // Demo data model
@@ -97,6 +98,8 @@ const SELECTED_COUNTRIES: DemoCountry[] = [
     PickListEmptyDirective,
     DocTocComponent,
     DocQualityBadgeComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './pick-list-demo.component.html',
   styleUrl: './pick-list-demo.component.scss',

@@ -6,12 +6,9 @@
     description='Displays two images overlaid with a draggable divider, allowing the user to compare a "before" and "after" image by sliding the handle horizontally. Supports keyboard navigation, two-way value binding, three design variants, and three size tokens.'
   />
 
-  <app-doc-demo-viewport [autoHeight]="true">
-    <div class="examples">
       <!-- ── a. Basic ────────────────────────────────────────────────────────── -->
-      <section id="basic" data-doc-anchor class="example-section">
-        <h3>a. Basic</h3>
-        <p class="section-text">
+      <app-doc-section id="basic" title="Basic">
+        <p class="demo-section__description">
           Provide <code>leftImage</code>, <code>leftAlt</code>, <code>rightImage</code>, and
           <code>rightAlt</code>. Drag the handle to reveal more of either image. Use
           <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> keys for keyboard navigation.
@@ -27,12 +24,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── b. Two-Way Binding ───────────────────────────────────────────── -->
-      <section id="two-way-binding" data-doc-anchor class="example-section">
-        <h3>b. Two-Way Binding</h3>
-        <p class="section-text">
+      <app-doc-section id="two-way-binding" title="Two-Way Binding">
+        <p class="demo-section__description">
           Use <code>[(value)]</code> to read and control the slider position (0–100)
           programmatically.
         </p>
@@ -54,12 +50,11 @@
           [html]="twoWayBindingHtml"
           [typescript]="twoWayBindingTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── c. Sizes ─────────────────────────────────────────────────────── -->
-      <section id="sizes" data-doc-anchor class="example-section">
-        <h3>c. Sizes</h3>
-        <p class="section-text">
+      <app-doc-section id="sizes" title="Sizes">
+        <p class="demo-section__description">
           Use the <code>size</code> input (<code>sm</code>, <code>md</code>, <code>lg</code>) to
           scale the handle button.
         </p>
@@ -104,12 +99,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── d. Variants ──────────────────────────────────────────────────── -->
-      <section id="variants" data-doc-anchor class="example-section">
-        <h3>d. Variants</h3>
-        <p class="section-text">
+      <app-doc-section id="variants" title="Variants">
+        <p class="demo-section__description">
           Three design variants: <code>material</code> (elevated shadow),
           <code>bootstrap</code> (border, tighter radius), and <code>minimal</code>
           (no rounding).
@@ -155,12 +149,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── e. Disabled ──────────────────────────────────────────────────── -->
-      <section id="disabled" data-doc-anchor class="example-section">
-        <h3>e. Disabled</h3>
-        <p class="section-text">
+      <app-doc-section id="disabled" title="Disabled">
+        <p class="demo-section__description">
           Set <code>[disabled]="true"</code> to prevent the user from moving the slider.
         </p>
         <ui-lib-panel variant="minimal">
@@ -175,12 +168,11 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </section>
+      </app-doc-section>
 
       <!-- ── f. Custom Label ──────────────────────────────────────────────── -->
-      <section id="custom-label" data-doc-anchor class="example-section">
-        <h3>f. Custom ARIA Label</h3>
-        <p class="section-text">
+      <app-doc-section id="custom-label" title="Custom Label">
+        <p class="demo-section__description">
           Use the <code>ariaLabel</code> input to provide a descriptive accessible label for the
           slider handle.
         </p>
@@ -199,11 +191,10 @@
           [html]="customLabelHtml"
           [typescript]="customLabelTs"
         />
-      </section>
+      </app-doc-section>
 
       <!-- ── API Table ─────────────────────────────────────────────────────── -->
-      <section id="api" data-doc-anchor class="example-section">
-        <h3>API</h3>
+      <app-doc-section id="api" title="API">
         <div class="api-table-wrapper">
           <table class="api-table">
             <thead>
@@ -333,10 +324,9 @@
             </tbody>
           </table>
         </div>
-      </section>
-    </div>
-  </app-doc-demo-viewport>
+      </app-doc-section>
 
+  
   
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
