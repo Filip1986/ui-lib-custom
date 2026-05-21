@@ -12,7 +12,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './basic-bar-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly monthlyRevenueData: ChartData<'bar'> = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [{ label: 'Monthly Revenue (k$)', data: [82, 96, 104, 118, 126, 139] }],
@@ -31,7 +33,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './basic-line-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly userGrowthData: ChartData<'line'> = {
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
     datasets: [{ label: 'Active Users (k)', data: [12, 14, 17, 19, 24, 28], tension: 0.35 }],
@@ -50,11 +54,25 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './bubble-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly bubbleSegmentData: ChartData<'bubble'> = {
     datasets: [
-      { label: 'Enterprise', data: [{ x: 18, y: 42, r: 14 }, { x: 25, y: 57, r: 18 }] },
-      { label: 'SMB', data: [{ x: 12, y: 34, r: 10 }, { x: 20, y: 39, r: 11 }] },
+      {
+        label: 'Enterprise',
+        data: [
+          { x: 18, y: 42, r: 14 },
+          { x: 25, y: 57, r: 18 },
+        ],
+      },
+      {
+        label: 'SMB',
+        data: [
+          { x: 12, y: 34, r: 10 },
+          { x: 20, y: 39, r: 11 },
+        ],
+      },
     ],
   };
 }`;
@@ -71,7 +89,9 @@ import type { ChartData, ChartClickEvent } from 'ui-lib-custom/chart';
   templateUrl: './click-events-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly clickableRevenueData: ChartData<'bar'> = {
     labels: ['API', 'Web', 'Partner', 'Mobile'],
     datasets: [{ label: 'Revenue by Channel (k$)', data: [58, 79, 43, 64] }],
@@ -96,7 +116,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './custom-dimensions-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly customDimensionData: ChartData<'line'> = {
     labels: ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4'],
     datasets: [{ label: 'Completed Stories', data: [21, 24, 27, 30], tension: 0.25 }],
@@ -120,7 +142,9 @@ import type { TooltipItem } from 'chart.js';
   templateUrl: './custom-options-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly customOptionsData: ChartData<'doughnut'> = {
     labels: ['Onboarding', 'Expansion', 'Renewal'],
     datasets: [{ label: 'Pipeline Mix', data: [29, 46, 25] }],
@@ -153,7 +177,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './doughnut-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly channelMixData: ChartData<'doughnut'> = {
     labels: ['Direct', 'Partners', 'Marketplace', 'Inside Sales'],
     datasets: [{ label: 'Acquisition Channel Mix', data: [31, 27, 22, 20] }],
@@ -174,7 +200,9 @@ import { Inline } from 'ui-lib-custom/layout';
   templateUrl: './dynamic-update-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public dynamicRevenueData: ChartData<'bar'> = {
     labels: ['Product A', 'Product B', 'Product C'],
     datasets: [{ label: 'Live Revenue (k$)', data: [44, 57, 39] }],
@@ -182,7 +210,12 @@ export class MyComponent {
   public randomizeRevenueData(): void {
     this.dynamicRevenueData = {
       labels: this.dynamicRevenueData.labels,
-      datasets: [{ label: 'Live Revenue (k$)', data: [Math.random() * 100, Math.random() * 100, Math.random() * 100] }],
+      datasets: [
+        {
+          label: 'Live Revenue (k$)',
+          data: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
+        },
+      ],
     };
   }
 }`;
@@ -202,10 +235,14 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './line-area-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly trafficAreaData: ChartData<'line'> = {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    datasets: [{ label: 'Site Sessions (k)', data: [8, 9, 11, 10, 13, 15, 14], fill: true, tension: 0.3 }],
+    datasets: [
+      { label: 'Site Sessions (k)', data: [8, 9, 11, 10, 13, 15, 14], fill: true, tension: 0.3 },
+    ],
   };
 }`;
 
@@ -221,12 +258,20 @@ import type { ChartData, ChartOptions } from 'ui-lib-custom/chart';
   templateUrl: './mixed-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly mixedKpiData: ChartData<'bar'> = {
     labels: ['Jan', 'Feb', 'Mar'],
     datasets: [
       { label: 'Revenue (k$)', data: [90, 99, 109] },
-      { type: 'line', label: 'Conversion Rate (%)', data: [2.8, 3.0, 3.2], yAxisID: 'y1', tension: 0.3 },
+      {
+        type: 'line',
+        label: 'Conversion Rate (%)',
+        data: [2.8, 3.0, 3.2],
+        yAxisID: 'y1',
+        tension: 0.3,
+      },
     ],
   } as ChartData<'bar'>;
   public readonly mixedChartOptions: ChartOptions<'bar'> = {
@@ -246,7 +291,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './multi-dataset-bar-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly regionalRevenueData: ChartData<'bar'> = {
     labels: ['Q1', 'Q2', 'Q3', 'Q4'],
     datasets: [
@@ -269,7 +316,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './pie-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly marketShareData: ChartData<'pie'> = {
     labels: ['North America', 'Europe', 'APAC', 'LATAM'],
     datasets: [{ label: 'Market Share', data: [37, 28, 24, 11] }],
@@ -288,7 +337,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './polar-area-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly polarPriorityData: ChartData<'polarArea'> = {
     labels: ['Performance', 'Localization', 'A11y', 'Analytics', 'Automation'],
     datasets: [{ label: 'Roadmap Priority', data: [14, 10, 12, 8, 9] }],
@@ -307,7 +358,9 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './radar-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly radarCapabilityData: ChartData<'radar'> = {
     labels: ['Reliability', 'Security', 'Scalability', 'Usability', 'Support', 'Speed'],
     datasets: [{ label: 'Platform Capability', data: [85, 88, 90, 79, 84, 87] }],
@@ -326,10 +379,18 @@ import type { ChartData } from 'ui-lib-custom/chart';
   templateUrl: './scatter-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly scatterConversionData: ChartData<'scatter'> = {
     datasets: [
-      { label: 'Paid Campaigns', data: [{ x: 1.2, y: 2.1 }, { x: 1.8, y: 2.7 }] },
+      {
+        label: 'Paid Campaigns',
+        data: [
+          { x: 1.2, y: 2.1 },
+          { x: 1.8, y: 2.7 },
+        ],
+      },
     ],
   };
 }`;
@@ -347,7 +408,9 @@ import { Grid } from 'ui-lib-custom/layout';
   templateUrl: './sizes-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly sizePreviewData: ChartData<'bar'> = {
     labels: ['Jan', 'Feb', 'Mar'],
     datasets: [{ label: 'Preview', data: [5, 7, 9] }],
@@ -370,7 +433,9 @@ import type { ChartData, ChartOptions } from 'ui-lib-custom/chart';
   templateUrl: './stacked-bar-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public readonly stackedCostData: ChartData<'bar'> = {
     labels: ['Q1', 'Q2', 'Q3', 'Q4'],
     datasets: [
@@ -398,17 +463,24 @@ import { Inline } from 'ui-lib-custom/layout';
   templateUrl: './theme-integration-ts.example.html',
 })
 export class MyComponent {
-  constructor() { provideChartDefaults(); }
+  constructor() {
+    provideChartDefaults();
+  }
   public selectedProfile: 'material' | 'bootstrap' | 'minimal' = 'material';
   public readonly themeBridgeData: ChartData<'line'> = {
     labels: ['Q1', 'Q2', 'Q3', 'Q4'],
     datasets: [{ label: 'Satisfaction Score', data: [72, 76, 81, 85], tension: 0.35 }],
   };
-  public setThemeProfile(profile: 'material' | 'bootstrap' | 'minimal', chart: { refresh(): void }): void {
+  public setThemeProfile(
+    profile: 'material' | 'bootstrap' | 'minimal',
+    chart: { refresh(): void }
+  ): void {
     this.selectedProfile = profile;
     chart.refresh();
   }
-  public themeCssVariables(): Record<string, string> { return {}; }
+  public themeCssVariables(): Record<string, string> {
+    return {};
+  }
 }`;
 
 export const themeIntegrationHtml = `<ui-lib-inline [gap]="2">

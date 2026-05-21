@@ -16,6 +16,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for the Avatar and AvatarGroup components.
@@ -36,6 +40,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
@@ -133,8 +139,9 @@ export class MyComponent {}`;
     { id: 'variants', label: 'Variants' },
     { id: 'avatar-group', label: 'Avatar Group' },
     { id: 'playground', label: 'Playground' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public readonly sizes: AvatarSize[] = ['sm', 'md', 'lg'];
@@ -284,6 +291,59 @@ export class MyComponent {}`;
   public setVariant(variant: AvatarVariant): void {
     this.playgroundVariant.set(variant);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Avatar and AvatarGroup are non-interactive display components and do not appear in the tab order.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host (standalone)',
+      attribute: 'role="img"',
+      value: '—',
+      notes: 'Exposes the avatar as an image to assistive technology.',
+    },
+    {
+      element: 'Host (standalone)',
+      attribute: 'aria-label',
+      value: 'Resolved from imageAlt → name → label → "Avatar"',
+      notes: 'Always has a non-empty accessible name.',
+    },
+    {
+      element: 'AvatarGroup host',
+      attribute: 'role="list"',
+      value: '—',
+      notes: 'Exposes the group as a semantic list.',
+    },
+    {
+      element: 'AvatarGroup host',
+      attribute: 'aria-label',
+      value: 'ariaLabel input',
+      notes: 'Provides the accessible name for the avatar list.',
+    },
+    {
+      element: 'Avatar inside group',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes: 'Each avatar in a group becomes a list item.',
+    },
+    {
+      element: 'Internal icon/image/initial spans',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative internals are hidden from the accessibility tree.',
+    },
+    {
+      element: 'Overflow indicator (+N)',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes: 'Exposed with a configurable accessible label via <code>overflowAriaLabel</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-avatar-size-sm', description: 'Size — sm.' },
     { variable: '--uilib-avatar-size-md', description: 'Size — md.' },

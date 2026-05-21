@@ -38,6 +38,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Knob component — circular dial for numeric input.
  */
@@ -59,6 +63,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',
@@ -103,6 +109,9 @@ export class KnobDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'readonly', label: 'Read-only' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public basicValue: number = 40;
@@ -181,6 +190,62 @@ export class KnobDemoComponent {
       description: 'ARIA label for the knob.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the knob.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the knob.' },
+    { key: '↑ / →', action: 'Increments the value by one step.' },
+    { key: '↓ / ←', action: 'Decrements the value by one step.' },
+    { key: 'PageUp', action: 'Increments the value by ten steps.' },
+    { key: 'PageDown', action: 'Decrements the value by ten steps.' },
+    { key: 'Home', action: 'Sets the value to the minimum.' },
+    { key: 'End', action: 'Sets the value to the maximum.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'SVG knob',
+      attribute: 'role="slider"',
+      value: '—',
+      notes: 'Identifies the knob as a slider widget to assistive technologies.',
+    },
+    {
+      element: 'SVG knob',
+      attribute: 'aria-valuenow',
+      value: 'current value',
+      notes: 'Updated live as the value changes.',
+    },
+    {
+      element: 'SVG knob',
+      attribute: 'aria-valuemin',
+      value: 'min value',
+      notes: 'Set from the <code>[min]</code> input.',
+    },
+    {
+      element: 'SVG knob',
+      attribute: 'aria-valuemax',
+      value: 'max value',
+      notes: 'Set from the <code>[max]</code> input.',
+    },
+    {
+      element: 'SVG knob',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Set via <code>[ariaLabel]</code> input for screen reader identification.',
+    },
+    {
+      element: 'SVG knob',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'SVG knob',
+      attribute: 'aria-readonly',
+      value: '"true"',
+      notes: 'Applied when <code>[readonly]="true"</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-knob-track-color', description: 'Track colour.' },
     { variable: '--uilib-knob-range-color', description: 'Range text colour.' },

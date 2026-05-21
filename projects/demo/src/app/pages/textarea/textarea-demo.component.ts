@@ -48,6 +48,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Textarea component — all features, states, and form integration.
  */
@@ -70,6 +74,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './textarea-demo.component.html',
   styleUrl: './textarea-demo.component.scss',
@@ -134,6 +140,9 @@ export class TextareaDemoComponent {
     { id: 'readonly', label: 'Read-only' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   // Basic
@@ -229,6 +238,52 @@ export class TextareaDemoComponent {
       description: 'Marks the field as invalid.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the textarea.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the textarea.' },
+    { key: 'Type', action: 'Updates the textarea value.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native textarea',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes:
+        'Applied when <code>[invalid]="true"</code> or an <code>[error]</code> message is provided.',
+    },
+    {
+      element: 'Native textarea',
+      attribute: 'aria-required',
+      value: '"true"',
+      notes: 'Applied when <code>[required]="true"</code>.',
+    },
+    {
+      element: 'Native textarea',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Native textarea',
+      attribute: 'aria-readonly',
+      value: '"true"',
+      notes: 'Applied when <code>[readonly]="true"</code>.',
+    },
+    {
+      element: 'Native textarea',
+      attribute: 'aria-describedby',
+      value: 'hint/error element IDs',
+      notes: 'Links the textarea to <code>hint</code> and/or <code>error</code> message elements.',
+    },
+    {
+      element: 'Error message',
+      attribute: 'role="alert"',
+      value: '—',
+      notes: 'Error messages are immediately announced to screen readers.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-textarea-bg', description: 'Background colour.' },
     { variable: '--uilib-textarea-border', description: 'Border shorthand.' },

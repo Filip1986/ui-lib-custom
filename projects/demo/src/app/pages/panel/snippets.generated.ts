@@ -81,8 +81,12 @@ import { Panel } from 'ui-lib-custom/panel';
   templateUrl: './header-icons.example.html',
 })
 export class MyComponent {
-  public refresh(): void { /* reload data */ }
-  public download(): void { /* export data */ }
+  public refresh(): void {
+    /* reload data */
+  }
+  public download(): void {
+    /* export data */
+  }
 }`;
 
 export const noHeaderHtml = `<!-- No header input — header area is automatically hidden -->

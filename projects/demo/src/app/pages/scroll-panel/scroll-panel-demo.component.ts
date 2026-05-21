@@ -27,6 +27,10 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the ScrollPanel component.
  */
@@ -45,6 +49,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
@@ -83,6 +89,35 @@ export class ScrollPanelDemoComponent {
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the scrollable region.' },
+    { key: '↑ / ↓', action: 'Scrolls the region vertically (browser native).' },
+    { key: '← / →', action: 'Scrolls the region horizontally (browser native).' },
+    { key: 'Page Up / Page Down', action: 'Scrolls the region by a page (browser native).' },
+    { key: 'Home / End', action: 'Scrolls to the top or bottom of the region (browser native).' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Content wrapper',
+      attribute: 'role="region"',
+      value: '—',
+      notes: 'Landmark for the scrollable area; keyboard-focusable with <code>tabindex="0"</code>.',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'tabindex',
+      value: '"0"',
+      notes: 'Makes the region reachable by keyboard so scroll keys work.',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'aria-label',
+      value: 'ariaLabel input',
+      notes: 'Applied when the <code>ariaLabel</code> input is provided. Always recommended.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-scroll-panel-bg', description: 'Background colour of the container.' },
     { variable: '--uilib-scroll-panel-border-color', description: 'Border colour.' },
@@ -120,6 +155,8 @@ export class ScrollPanelDemoComponent {
     { id: 'interactive-variant-switcher', label: 'Interactive Variant Switcher' },
     { id: 'custom-css-properties', label: 'Custom CSS Properties' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {

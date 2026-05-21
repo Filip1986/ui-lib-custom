@@ -24,6 +24,10 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -60,6 +64,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
 
     DocSectionComponent,
     DocApiReferenceComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -199,6 +205,40 @@ export class BadgesComponent {
       type: 'boolean',
       default: 'false',
       description: 'Dot indicator (no label)',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Component is not interactive and does not appear in the tab order.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host (text badge)',
+      attribute: 'aria-label',
+      value: 'label input',
+      notes: 'Applied only when the <code>label</code> input is provided.',
+    },
+    {
+      element: 'Host (dot badge)',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Applied when <code>[dot]="true"</code> and not decorative.',
+    },
+    {
+      element: 'Host (dot badge)',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Announces status changes to screen readers.',
+    },
+    {
+      element: 'Host (decorative)',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Applied when <code>[decorative]="true"</code>.',
     },
   ];
 

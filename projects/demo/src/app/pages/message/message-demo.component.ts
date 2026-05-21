@@ -15,6 +15,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Message component.
  */
@@ -32,6 +36,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
@@ -68,6 +74,7 @@ export class MessageDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'closable', label: 'Closable' },
     { id: 'content-projection', label: 'Content Projection' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
@@ -227,6 +234,45 @@ export class MessageDemoComponent {
       description: 'Emitted when the close button is clicked.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', suffix: 'when closable', action: 'Moves focus to the close button.' },
+    { key: 'Enter / Space', suffix: 'on close button', action: 'Dismisses the message.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Message host',
+      attribute: 'role="alert"',
+      value: '—',
+      notes:
+        'Applied to warn and error severity messages so screen readers announce them immediately.',
+    },
+    {
+      element: 'Message host',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Applied to info and success severity messages for polite announcements.',
+    },
+    {
+      element: 'Message host',
+      attribute: 'aria-live',
+      value: '"assertive" | "polite"',
+      notes: '"assertive" for error/warn; "polite" for info/success/secondary/contrast.',
+    },
+    {
+      element: 'Severity icon',
+      attribute: 'aria-hidden',
+      value: '"true"',
+      notes: 'Decorative icon is hidden from the accessibility tree.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label',
+      value: '"Close"',
+      notes: 'Announces the close button purpose to screen readers.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-message-padding-sm', description: 'Padding — sm.' },
     { variable: '--uilib-message-padding-md', description: 'Padding — md.' },

@@ -37,6 +37,10 @@ import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -74,6 +78,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -304,6 +310,54 @@ export class InputsComponent {
       description: 'Shows a clear icon button.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the input.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the input.' },
+    { key: 'Type', action: 'Updates the input value.' },
+    { key: 'Enter', suffix: 'on toggle password button', action: 'Toggles password visibility.' },
+    { key: 'Enter', suffix: 'on clear button', action: 'Clears the input value.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes:
+        'Applied when <code>[invalid]="true"</code> or an <code>[error]</code> message is provided.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-required',
+      value: '"true"',
+      notes: 'Applied when <code>[required]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-readonly',
+      value: '"true"',
+      notes: 'Applied when <code>[readonly]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-describedby',
+      value: 'hint/error element IDs',
+      notes: 'Links the input to the <code>hint</code> and/or <code>error</code> message elements.',
+    },
+    {
+      element: 'Error message',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Error messages are announced to screen readers as they appear.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-input-padding-y-base', description: 'Padding Y Base.' },
     { variable: '--uilib-input-padding-x-base', description: 'Padding X Base.' },

@@ -33,6 +33,10 @@ import {
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for IconField and InputIcon composition patterns.
@@ -57,8 +61,9 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
-
     DocCssVarsTableComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './icon-field-demo.component.html',
   styleUrl: './icon-field-demo.component.scss',
@@ -108,6 +113,7 @@ export class IconFieldDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
@@ -147,5 +153,27 @@ export class IconFieldDemoComponent {
       description: 'Input Padding With Icon.',
     },
     { variable: '--uilib-float-label-position-x', description: 'Uilib Float Label Position X.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Icon (<ui-lib-input-icon>)',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Icons inside the field are purely decorative and are hidden from assistive technologies.',
+    },
+    {
+      element: 'Host input',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The wrapper does not add ARIA attributes to the input. Associate the input with a visible <code>&lt;label&gt;</code> or provide <code>aria-label</code> / <code>aria-labelledby</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the wrapped input.' },
+    { key: 'Shift + Tab', action: 'Moves focus away from the wrapped input.' },
   ];
 }

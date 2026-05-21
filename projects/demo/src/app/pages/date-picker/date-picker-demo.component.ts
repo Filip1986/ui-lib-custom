@@ -67,6 +67,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for DatePicker component scenarios and form integrations.
  */
@@ -90,6 +94,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
   styleUrl: './date-picker-demo.component.scss',
@@ -183,6 +189,9 @@ export class DatePickerDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -333,6 +342,88 @@ export class DatePickerDemoComponent {
     },
     { name: 'hourFormat', type: "'12' | '24'", default: "'24'", description: 'Time format.' },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the date input or trigger icon.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the date picker.' },
+    { key: 'Enter / Space', action: 'Opens the calendar panel or selects the focused date.' },
+    { key: '↑ / ↓', action: 'Moves focus to the same day in the previous or next week.' },
+    { key: '← / →', action: 'Moves focus to the previous or next day.' },
+    { key: 'PageUp', action: 'Navigates to the previous month.' },
+    { key: 'PageDown', action: 'Navigates to the next month.' },
+    { key: 'Home', action: 'Moves focus to the first day of the current month.' },
+    { key: 'End', action: 'Moves focus to the last day of the current month.' },
+    { key: 'Escape', action: 'Closes the calendar panel.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Text input',
+      attribute: 'aria-label',
+      value: '"Date"',
+      notes: 'Identifies the input field to screen readers.',
+    },
+    {
+      element: 'Text input',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Text input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Calendar panel',
+      attribute: 'role="dialog"',
+      value: '—',
+      notes: 'The popup panel is exposed as a dialog.',
+    },
+    {
+      element: 'Calendar panel',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Restricts screen reader browsing to the calendar while open.',
+    },
+    {
+      element: 'Calendar panel',
+      attribute: 'aria-label',
+      value: '"Calendar"',
+      notes: 'Identifies the dialog to screen readers.',
+    },
+    {
+      element: 'Calendar grid',
+      attribute: 'role="grid"',
+      value: '—',
+      notes: 'The day grid is exposed as a table for navigation.',
+    },
+    {
+      element: 'Day cell',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Indicates whether the day is selected.',
+    },
+    {
+      element: 'Day cell',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied to dates outside <code>[minDate]</code>/<code>[maxDate]</code>.',
+    },
+    {
+      element: 'Day cell',
+      attribute: 'aria-current',
+      value: '"date"',
+      notes: "Applied to today's date.",
+    },
+    {
+      element: 'Nav buttons',
+      attribute: 'aria-label',
+      value: '"Previous Month" / "Next Month"',
+      notes: 'Announces the navigation button purpose.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     {
       variable: '--uilib-datepicker-input-bg',

@@ -54,6 +54,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -84,6 +88,8 @@ interface InputMaskSizeItem {
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './input-mask-demo.component.html',
   styleUrl: './input-mask-demo.component.scss',
@@ -155,6 +161,9 @@ export class InputMaskDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -286,6 +295,53 @@ export class InputMaskDemoComponent {
       description: 'Error message in an aria-live region.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the input.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the input.' },
+    { key: 'Type', action: 'Fills the next available mask slot.' },
+    { key: 'Backspace', action: 'Clears the previous mask slot.' },
+    { key: 'Delete', action: 'Clears the current mask slot.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-readonly',
+      value: '"true"',
+      notes: 'Applied when <code>[readonly]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Set via <code>[ariaLabel]</code> input for screen reader identification.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-describedby',
+      value: 'hint/error element IDs',
+      notes: 'Links to <code>[maskHint]</code> and/or <code>[errorMessage]</code> elements.',
+    },
+    {
+      element: 'Error region',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Error messages are announced to screen readers as they appear.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-input-mask-padding-y', description: 'Vertical padding.' },
     { variable: '--uilib-input-mask-padding-x', description: 'Horizontal padding.' },

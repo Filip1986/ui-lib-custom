@@ -39,6 +39,10 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };
@@ -70,6 +74,8 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
 
     DocSectionComponent,
     DocApiReferenceComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -388,6 +394,44 @@ export class CheckboxesComponent {
       type: 'boolean',
       default: 'false',
       description: 'Two-way bound value via <code>[(checked)]</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the checkbox.' },
+    { key: 'Space', action: 'Toggles the checked state.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input',
+      attribute: 'type="checkbox"',
+      value: '—',
+      notes: 'Uses a native checkbox for full browser and AT compatibility.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-checked',
+      value: '"false" | "true" | "mixed"',
+      notes: '<code>"mixed"</code> is used when <code>[indeterminate]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-required',
+      value: '"true"',
+      notes: 'Applied when <code>[required]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Checkmark icon',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative visual checkmark/dash icons are hidden from the accessibility tree.',
     },
   ];
 

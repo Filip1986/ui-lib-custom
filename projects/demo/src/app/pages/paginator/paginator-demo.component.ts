@@ -14,6 +14,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Paginator component.
  * Showcases all three variants, sizes, optional controls, and event handling.
@@ -31,6 +35,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',
@@ -69,6 +75,7 @@ export class PaginatorDemoComponent {
     { id: 'jump-to-page', label: 'Jump To Page' },
     { id: 'without-first-last', label: 'Without First / Last Icons' },
     { id: 'arrows-only', label: 'Page Links Off' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
@@ -178,6 +185,72 @@ export class PaginatorDemoComponent {
     this.largeFirst.set(event.first);
     this.largeRows.set(event.rows);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action: 'Moves focus through each page button, first/last buttons, and controls.',
+    },
+    { key: 'Shift+Tab', action: 'Moves focus backwards through the paginator controls.' },
+    { key: 'Enter / Space', action: 'Activates the focused page button or control.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Nav element',
+      attribute: 'role="navigation"',
+      value: '—',
+      notes: 'Wraps the paginator in a navigation landmark.',
+    },
+    {
+      element: 'Nav element',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Defaults to "Pagination"; override with <code>[ariaLabel]</code>.',
+    },
+    {
+      element: 'Page buttons',
+      attribute: 'aria-label',
+      value: '"Page N"',
+      notes: 'Each page number button announces its page number.',
+    },
+    {
+      element: 'Current page button',
+      attribute: 'aria-current',
+      value: '"page"',
+      notes: 'Marks the currently active page button.',
+    },
+    {
+      element: 'First page button',
+      attribute: 'aria-label',
+      value: '"First Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Previous button',
+      attribute: 'aria-label',
+      value: '"Previous Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Next button',
+      attribute: 'aria-label',
+      value: '"Next Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Last page button',
+      attribute: 'aria-label',
+      value: '"Last Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Disabled buttons',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when the button action is unavailable (e.g. already on first/last page).',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-paginator-gap', description: 'Gap.' },
     { variable: '--uilib-paginator-padding', description: 'Padding.' },

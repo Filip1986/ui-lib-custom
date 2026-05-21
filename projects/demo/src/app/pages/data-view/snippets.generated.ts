@@ -56,7 +56,9 @@ import { DataViewComponent, DataViewListItemDirective } from 'ui-lib-custom/data
   templateUrl: './custom-page-report.example.html',
 })
 export class MyComponent {
-  public readonly products = [/* array of products */];
+  public readonly products = [
+    /* array of products */
+  ];
 }`;
 
 export const customPaginatorSlotsHtml = `<ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
@@ -83,7 +85,9 @@ import {
   templateUrl: './custom-paginator-slots.example.html',
 })
 export class MyComponent {
-  public readonly products = [/* array of products */];
+  public readonly products = [
+    /* array of products */
+  ];
 }`;
 
 export const customTemplatesHtml = `<ui-lib-data-view [value]="customTemplateProducts" [paginator]="true" [rows]="6">
@@ -114,7 +118,9 @@ import {
   templateUrl: './custom-templates.example.html',
 })
 export class MyComponent {
-  public readonly products = [/* array of products */];
+  public readonly products = [
+    /* array of products */
+  ];
 }`;
 
 export const emptyStateHtml = `<ui-lib-data-view [value]="[]" emptyMessage="No inventory records found." />

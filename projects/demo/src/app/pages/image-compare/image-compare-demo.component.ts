@@ -29,6 +29,10 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for the ImageCompare component.
@@ -49,6 +53,8 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 
     DocSectionComponent,
     DocApiReferenceComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
@@ -98,8 +104,9 @@ export class ImageCompareDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'custom-label', label: 'Custom Label' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   // ─── State ────────────────────────────────────────────────────────────────────
@@ -179,6 +186,67 @@ export class ImageCompareDemoComponent {
       name: 'slideEnd',
       type: 'number',
       description: 'Emitted with the final position when the user releases the handle.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the slider handle.' },
+    { key: '→ / ↑', action: 'Moves the divider right by 1%.' },
+    { key: '← / ↓', action: 'Moves the divider left by 1%.' },
+    { key: 'Page Up', action: 'Moves the divider right by 10%.' },
+    { key: 'Page Down', action: 'Moves the divider left by 10%.' },
+    { key: 'Home', action: 'Moves the divider to 0% (fully left).' },
+    { key: 'End', action: 'Moves the divider to 100% (fully right).' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Slider handle',
+      attribute: 'role="slider"',
+      value: '—',
+      notes: 'Meets the ARIA slider design pattern.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Image comparison slider")',
+      notes: 'Provides the accessible name for the handle.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuenow',
+      value: 'Current position (0–100)',
+      notes: 'Updated as the slider moves.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuemin',
+      value: '0',
+      notes: 'Minimum slider position.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuemax',
+      value: '100',
+      notes: 'Maximum slider position.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuetext',
+      value: 'e.g. "45 percent"',
+      notes: 'Human-readable position description for screen readers.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Divider line',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative element hidden from the accessibility tree.',
     },
   ];
 

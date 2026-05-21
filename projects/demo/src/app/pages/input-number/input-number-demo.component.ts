@@ -62,6 +62,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for InputNumber modes, formatting, controls, and forms.
  */
@@ -85,6 +89,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
@@ -169,6 +175,9 @@ export class InputNumberDemoComponent {
     { id: 'filled', label: 'Filled' },
     { id: 'fluid', label: 'Fluid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -288,6 +297,70 @@ export class InputNumberDemoComponent {
       description: 'Marks the field as invalid.',
     },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the input.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the input.' },
+    { key: 'Type', action: 'Updates the numeric value.' },
+    { key: '↑', action: 'Increments the value by one step.' },
+    { key: '↓', action: 'Decrements the value by one step.' },
+    {
+      key: 'Enter',
+      suffix: 'on increment/decrement button',
+      action: 'Applies the spinner button action.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input',
+      attribute: 'role="spinbutton"',
+      value: '—',
+      notes: 'Identifies the field as a numeric spinner to assistive technologies.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-valuenow',
+      value: 'current numeric value',
+      notes: 'Updated live as the value changes.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-valuemin',
+      value: 'min value',
+      notes: 'Present when <code>[min]</code> is set.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-valuemax',
+      value: 'max value',
+      notes: 'Present when <code>[max]</code> is set.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Increment button',
+      attribute: 'aria-label',
+      value: '"Increment"',
+      notes: 'Announces the purpose of the spinner button.',
+    },
+    {
+      element: 'Decrement button',
+      attribute: 'aria-label',
+      value: '"Decrement"',
+      notes: 'Announces the purpose of the spinner button.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-input-number-gap', description: 'Gap.' },
     { variable: '--uilib-input-number-border-width', description: 'Border width.' },

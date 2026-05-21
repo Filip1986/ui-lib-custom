@@ -22,6 +22,10 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 // ---- Guest components rendered inside the dialog ----
 
 /**
@@ -140,6 +144,8 @@ export class LongDialogContentComponent {
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
@@ -192,6 +198,14 @@ export class DynamicDialogDemoComponent {
     { id: 'dynamic-dialog-ref', label: 'DynamicDialogRef' },
     { id: 'injection-tokens', label: 'Injection Tokens' },
     { id: 'api', label: 'API Reference' },
+    {
+      id: 'accessibility',
+      label: 'Accessibility',
+      children: [
+        { id: 'a11y-aria', label: 'ARIA Attributes' },
+        { id: 'a11y-keyboard', label: 'Keyboard' },
+      ],
+    },
   ];
 
   public scrollTo(id: string): void {
@@ -381,6 +395,69 @@ export class DynamicDialogDemoComponent {
       name: 'DynamicDialogRef',
       type: 'DynamicDialogRef',
       description: 'Dialog handle available to guest components via <code>inject()</code>.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Dialog panel',
+      attribute: 'role="dialog"',
+      value: '—',
+      notes: 'Applied to the modal surface so assistive technologies announce it as a dialog.',
+    },
+    {
+      element: 'Dialog panel',
+      attribute: 'aria-modal="true"',
+      value: '—',
+      notes: 'Tells screen readers the rest of the page is inert while the dialog is open.',
+    },
+    {
+      element: 'Dialog panel',
+      attribute: 'aria-labelledby',
+      value: '—',
+      notes: 'Points to the dialog header element when a <code>header</code> string is provided.',
+    },
+    {
+      element: 'Dialog panel',
+      attribute: 'tabindex="-1"',
+      value: '—',
+      notes: 'Receives programmatic focus on open so keyboard users are placed inside the dialog.',
+    },
+    {
+      element: 'Host / backdrop',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Applied to the page root while the dialog is open, hiding background content from screen readers.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label="Close"',
+      value: '—',
+      notes: 'The built-in close button has an accessible label since it contains only an icon.',
+    },
+    {
+      element: 'Close icon',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Decorative — hidden from assistive technologies since the button already has an <code>aria-label</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Cycles focus through all interactive elements inside the dialog (focus is trapped within the panel).',
+    },
+    {
+      key: 'Shift + Tab',
+      action: 'Cycles focus backwards through interactive elements inside the dialog.',
+    },
+    {
+      key: 'Escape',
+      action: 'Closes the dialog (unless <code>closeOnEscape: false</code> is set in config).',
     },
   ];
 }

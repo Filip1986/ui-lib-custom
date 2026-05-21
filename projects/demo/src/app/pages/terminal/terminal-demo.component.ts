@@ -17,6 +17,10 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 const HELP_TEXT: string = [
   'Available commands:',
@@ -41,6 +45,8 @@ const HELP_TEXT: string = [
     DocTocComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './terminal-demo.component.html',
   styleUrl: './terminal-demo.component.scss',
@@ -77,6 +83,7 @@ export class TerminalDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'interactive', label: 'Interactive' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
@@ -159,4 +166,45 @@ export class TerminalDemoComponent {
       this.terminalService.sendResponse(`Command not found: ${text}. Type "help" for usage.`);
     });
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Terminal host',
+      attribute: 'role="log"',
+      value: '—',
+      notes:
+        '<code>role="log"</code> tells screen readers the content is an ongoing log of output. New responses are announced via the implicit live region.',
+    },
+    {
+      element: 'Terminal host',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Screen readers announce new command output without interrupting current speech.',
+    },
+    {
+      element: 'Command input',
+      attribute: 'aria-label="Command input"',
+      value: '—',
+      notes: 'The prompt input field carries a descriptive label for screen reader users.',
+    },
+    {
+      element: 'Command history entries',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Past command entries are hidden from the accessibility tree — screen readers use the live region for output.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Enter', action: 'Submits the current command.' },
+    { key: 'Arrow Up', action: 'Navigates to the previous command in history.' },
+    {
+      key: 'Arrow Down',
+      action:
+        'Navigates to the next command in history (or clears the input at the end of history).',
+    },
+    { key: 'Tab', action: 'Moves focus to the command input when the terminal receives focus.' },
+    { key: 'Ctrl + C', action: 'Clears the current input line (browser-native behaviour).' },
+  ];
 }

@@ -72,6 +72,10 @@ import {
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for AutoComplete component features and patterns.
@@ -99,7 +103,8 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocCodeExampleComponent,
 
     DocCssVarsTableComponent,
-
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './autocomplete-demo.component.html',
@@ -181,6 +186,7 @@ export class AutoCompleteDemoComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
@@ -294,6 +300,80 @@ export class AutoCompleteDemoComponent {
         country.code.toLowerCase().includes(normalized)
     );
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the autocomplete input.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the autocomplete.' },
+    { key: 'Type', action: 'Triggers the complete event and opens the suggestion panel.' },
+    { key: '↓', action: 'Opens the panel (if closed) or moves focus to the next suggestion.' },
+    { key: '↑', action: 'Moves focus to the previous suggestion.' },
+    { key: 'Enter', action: 'Selects the focused suggestion.' },
+    { key: 'Escape', action: 'Closes the suggestion panel.' },
+    { key: 'Backspace', suffix: 'in multiple mode', action: 'Removes the last selected chip.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Input',
+      attribute: 'role="combobox"',
+      value: '—',
+      notes: 'Identifies the input as a combobox to assistive technologies.',
+    },
+    {
+      element: 'Input',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the suggestion panel is open.',
+    },
+    {
+      element: 'Input',
+      attribute: 'aria-autocomplete',
+      value: '"list"',
+      notes: 'Indicates that a list of suggestions is provided.',
+    },
+    {
+      element: 'Input',
+      attribute: 'aria-controls',
+      value: 'panel element ID',
+      notes: 'Links the input to its suggestion panel.',
+    },
+    {
+      element: 'Input',
+      attribute: 'aria-activedescendant',
+      value: 'focused option ID',
+      notes: 'Tracks the focused suggestion for screen readers.',
+    },
+    {
+      element: 'Input',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Suggestion panel',
+      attribute: 'role="listbox"',
+      value: '—',
+      notes: 'Identifies the dropdown panel as a listbox.',
+    },
+    {
+      element: 'Suggestion item',
+      attribute: 'role="option"',
+      value: '—',
+      notes: 'Each suggestion is announced as a selectable option.',
+    },
+    {
+      element: 'Suggestion item',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Indicates whether the option is currently selected.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-autocomplete-border-radius', description: 'Border radius.' },
     { variable: '--uilib-autocomplete-padding-y-base', description: 'Padding Y Base.' },

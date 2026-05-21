@@ -14,6 +14,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Breadcrumb component.
  */
@@ -30,6 +34,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './breadcrumb-demo.component.html',
   styleUrl: './breadcrumb-demo.component.scss',
@@ -69,6 +75,7 @@ export class BreadcrumbDemoComponent {
     { id: 'command-callback', label: 'Command Callback' },
     { id: 'disabled-item', label: 'Disabled Item' },
     { id: 'long-breadcrumb', label: 'Long Breadcrumb' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
@@ -270,6 +277,51 @@ export class BreadcrumbDemoComponent {
   private logEvent(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 5));
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus through each interactive breadcrumb link.' },
+    { key: 'Shift+Tab', action: 'Moves focus backwards through the breadcrumb links.' },
+    { key: 'Enter', action: 'Follows the link or invokes the command callback.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Nav element',
+      attribute: 'role="navigation"',
+      value: '—',
+      notes: 'Implicit from the native <code>nav</code> element; creates a navigation landmark.',
+    },
+    {
+      element: 'Nav element',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Defaults to "Breadcrumb"; override with <code>[ariaLabel]</code>.',
+    },
+    {
+      element: 'Ordered list',
+      attribute: 'role="list"',
+      value: '—',
+      notes: 'Semantically groups the breadcrumb items.',
+    },
+    {
+      element: 'Current page item',
+      attribute: 'aria-current',
+      value: '"page"',
+      notes: 'Applied to the last (current) breadcrumb item to indicate the active page.',
+    },
+    {
+      element: 'Disabled item',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>disabled: true</code> is set on a <code>BreadcrumbItem</code>.',
+    },
+    {
+      element: 'Separator',
+      attribute: 'aria-hidden',
+      value: '"true"',
+      notes: 'Separator characters/icons are hidden from the accessibility tree.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-breadcrumb-font-size', description: 'Font size.' },
     { variable: '--uilib-breadcrumb-font-size-sm', description: 'Font size — sm.' },

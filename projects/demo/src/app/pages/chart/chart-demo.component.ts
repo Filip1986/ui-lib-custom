@@ -66,6 +66,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type ChartThemeProfileKey = 'material' | 'bootstrap' | 'minimal';
 
 type RefreshableChart = {
@@ -112,6 +116,8 @@ type ThemeCssVariables = {
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './chart-demo.component.html',
   styleUrl: './chart-demo.component.scss',
@@ -200,6 +206,9 @@ export class ChartDemoComponent {
     { id: 'theme-integration', label: 'Theme Integration' },
     { id: 'click-events', label: 'Click Events' },
     { id: 'custom-options', label: 'Custom Options' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -516,6 +525,42 @@ export class ChartDemoComponent {
     { name: 'height', type: 'string | null', default: 'null', description: 'Explicit height.' },
     { name: 'width', type: 'string | null', default: 'null', description: 'Explicit width.' },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus into and out of the chart host in natural document order. The canvas itself is not keyboard-interactive.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'canvas',
+      attribute: 'role="img"',
+      value: '—',
+      notes: 'Exposes the canvas as an image to assistive technology.',
+    },
+    {
+      element: 'canvas',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Chart")',
+      notes: 'Describes the chart content to screen readers. Always provide a meaningful label.',
+    },
+    {
+      element: 'canvas',
+      attribute: 'aria-describedby',
+      value: 'data table element ID',
+      notes:
+        'Present when <code>[showDataTable]="true"</code>. Points to the visually-hidden data table.',
+    },
+    {
+      element: 'Data table',
+      attribute: 'id',
+      value: 'ui-lib-chart-table-{n}',
+      notes: 'Auto-generated unique ID per instance, referenced by <code>aria-describedby</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-chart-min-height-sm', description: 'Minimum height — sm.' },
     { variable: '--uilib-chart-min-height-md', description: 'Minimum height — md.' },

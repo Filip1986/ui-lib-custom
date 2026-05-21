@@ -67,6 +67,10 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
 /**
@@ -99,6 +103,8 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',
@@ -167,6 +173,9 @@ export class CascadeSelectDemoComponent {
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -286,6 +295,74 @@ export class CascadeSelectDemoComponent {
     },
     { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'ARIA label.' },
   ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the trigger button.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the component.' },
+    { key: 'Enter / Space', action: 'Opens the panel or selects the focused option.' },
+    { key: '↓', action: 'Moves focus to the next option in the current level.' },
+    { key: '↑', action: 'Moves focus to the previous option in the current level.' },
+    { key: '→', action: 'Opens the sub-panel for the focused group option.' },
+    { key: '←', action: 'Closes the current sub-panel and returns focus to the parent.' },
+    { key: 'Escape', action: 'Closes all panels.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Trigger button',
+      attribute: 'role="combobox"',
+      value: '—',
+      notes: 'Identifies the trigger as a combobox to assistive technologies.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the panel is open.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-haspopup',
+      value: '"tree"',
+      notes: 'Signals that the button controls a hierarchical popup.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Set via <code>[ariaLabel]</code> for screen reader identification.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Option panel',
+      attribute: 'role="tree"',
+      value: '—',
+      notes: 'The panel is exposed as a tree widget reflecting hierarchical structure.',
+    },
+    {
+      element: 'Option item',
+      attribute: 'role="treeitem"',
+      value: '—',
+      notes: 'Each option is announced as a tree item.',
+    },
+    {
+      element: 'Option item',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Applied to group options that have sub-panels.',
+    },
+    {
+      element: 'Option item',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Indicates the currently selected leaf option.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-cascade-select-bg', description: 'Background colour.' },
     { variable: '--uilib-cascade-select-border', description: 'Border shorthand.' },

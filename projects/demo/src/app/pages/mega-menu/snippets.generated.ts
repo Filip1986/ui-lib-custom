@@ -46,9 +46,7 @@ export class MyComponent {
   readonly items: MegaMenuItem[] = [
     {
       label: 'Navigate',
-      items: [
-        { header: 'Pages', items: [{ label: 'Home' }, { label: 'About' }] },
-      ],
+      items: [{ header: 'Pages', items: [{ label: 'Home' }, { label: 'About' }] }],
     },
   ];
 

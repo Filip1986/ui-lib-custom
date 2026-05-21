@@ -30,6 +30,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface SpeedDialLogEntry {
   timestamp: string;
   message: string;
@@ -55,6 +59,8 @@ interface SpeedDialLogEntry {
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './speed-dial-demo.component.html',
   styleUrl: './speed-dial-demo.component.scss',
@@ -96,6 +102,7 @@ export class SpeedDialDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'event-log', label: 'Event Log' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
@@ -252,6 +259,70 @@ export class SpeedDialDemoComponent {
       ...entries.slice(0, 9),
     ]);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the toggle button.' },
+    { key: 'Enter / Space', action: 'Toggles the speed dial open or closed.' },
+    { key: 'Tab', suffix: 'when open', action: 'Moves focus through the action item buttons.' },
+    {
+      key: 'Enter / Space',
+      suffix: 'on action item',
+      action: 'Activates the action and closes the dial.',
+    },
+    { key: 'Escape', action: 'Closes the speed dial.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Toggle button',
+      attribute: 'aria-label',
+      value: 'buttonAriaLabel value',
+      notes:
+        'Set via <code>[buttonAriaLabel]</code>; should describe the purpose (e.g. "Open actions").',
+    },
+    {
+      element: 'Toggle button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the action list is open.',
+    },
+    {
+      element: 'Toggle button',
+      attribute: 'aria-haspopup',
+      value: '"menu"',
+      notes: 'Signals that the button controls a popup menu.',
+    },
+    {
+      element: 'Action list',
+      attribute: 'role="menu"',
+      value: '—',
+      notes: 'The action item container is exposed as a menu.',
+    },
+    {
+      element: 'Action list',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Set via <code>[ariaLabel]</code> to describe the group of actions.',
+    },
+    {
+      element: 'Action item button',
+      attribute: 'role="menuitem"',
+      value: '—',
+      notes: 'Each action button is a menu item.',
+    },
+    {
+      element: 'Action item button',
+      attribute: 'aria-label',
+      value: 'item label or tooltip',
+      notes: "Uses the item's <code>label</code> or <code>tooltip</code> value.",
+    },
+    {
+      element: 'Action item button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>disabled</code> is set on a <code>SpeedDialItem</code>.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-speed-dial-button-size', description: 'Button size.' },
     { variable: '--uilib-speed-dial-button-bg', description: 'Button background colour.' },

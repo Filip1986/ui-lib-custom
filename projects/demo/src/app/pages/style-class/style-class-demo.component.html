@@ -202,6 +202,18 @@
     <app-doc-api-reference [rows]="apiInputRows" />
   </app-doc-section>
 
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      <code>StyleClass</code> manages CSS class transitions only. Add <code>aria-expanded</code>
+      to the trigger and <code>aria-hidden</code> to the panel so assistive technologies
+      reflect the show/hide state that <code>StyleClass</code> drives visually.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

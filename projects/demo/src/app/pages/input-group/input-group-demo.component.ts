@@ -34,6 +34,10 @@ import {
   sizesTsTs,
 } from './snippets.generated';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 interface InputGroupSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -64,6 +68,8 @@ interface InputGroupSizeItem {
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './input-group-demo.component.html',
   styleUrl: './input-group-demo.component.scss',
@@ -114,6 +120,7 @@ export class InputGroupDemoComponent {
     { id: 'checkbox-radio', label: 'Checkbox & Radio' },
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
@@ -147,5 +154,32 @@ export class InputGroupDemoComponent {
       description:
         'InputGroup is a structural wrapper. Place uilib-input-group-addon and form controls as children.',
     },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Addon text (<uilib-input-group-addon>)',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        "Static addon text is decorative — its content is conveyed by the input's label. Screen readers do not need to read it separately.",
+    },
+    {
+      element: 'Wrapped input',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The group wrapper is purely structural. Associate the inner input with a visible <code>&lt;label&gt;</code> or provide <code>aria-label</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus through the input and any interactive addons (buttons, checkboxes) in DOM order.',
+    },
+    { key: 'Shift + Tab', action: 'Moves focus backwards through the group.' },
+    { key: 'Enter / Space', action: 'Activates an addon button when it has focus.' },
   ];
 }

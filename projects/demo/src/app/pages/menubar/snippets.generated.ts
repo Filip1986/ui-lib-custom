@@ -44,8 +44,5 @@ import type { MenubarItem } from 'ui-lib-custom/menubar';
   templateUrl: './start-end.example.html',
 })
 export class MyComponent {
-  readonly items: MenubarItem[] = [
-    { label: 'Home' },
-    { label: 'About' },
-  ];
+  readonly items: MenubarItem[] = [{ label: 'Home' }, { label: 'About' }];
 }`;

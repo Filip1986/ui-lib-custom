@@ -20,6 +20,10 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Divider component.
  */
@@ -37,6 +41,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
@@ -109,8 +115,9 @@ export class DividerDemoComponent {
     { id: 'vertical-alignment', label: 'Vertical Alignment' },
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
-    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -151,6 +158,40 @@ export class DividerDemoComponent {
   public toggleContent(): void {
     this.playgroundHasContent.set(!this.playgroundHasContent());
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Component is not interactive and does not appear in the tab order.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'role="separator"',
+      value: '—',
+      notes: 'Applied on all dividers, decorative or labeled.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-orientation',
+      value: '"horizontal" | "vertical"',
+      notes: 'Reflects the <code>orientation</code> input.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Applied when <code>[decorative]="true"</code> and no <code>ariaLabel</code> is set.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-label',
+      value: 'ariaLabel input',
+      notes: 'Present when the <code>ariaLabel</code> input is a non-empty string.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-divider-color', description: 'Text colour.' },
     { variable: '--uilib-divider-thickness', description: 'Thickness.' },
