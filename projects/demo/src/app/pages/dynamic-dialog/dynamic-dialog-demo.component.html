@@ -149,6 +149,11 @@
     <app-doc-api-reference kind="name" [rows]="apiTokenRows" [showDefault]="false" />
   </app-doc-section>
 
+  <!-- ── API Overview ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiRows" kind="property" />
+  </app-doc-section>
+
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>

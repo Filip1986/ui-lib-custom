@@ -40,6 +40,8 @@ import {
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 /** Demo page for the Listbox component. */
 @Component({
   selector: 'app-listbox-demo',
@@ -60,6 +62,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocSectionComponent,
 
     DocCssVarsTableComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './listbox-demo.component.html',
   styleUrl: './listbox-demo.component.scss',
@@ -123,6 +126,7 @@ export class ListboxDemoComponent {
     { id: 'toggle-all', label: 'Toggle All' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
@@ -217,6 +221,100 @@ export class ListboxDemoComponent {
     { key: 'Shift+↓ / Shift+↑', action: 'Extend the selection range (multiple mode).' },
     { key: 'Ctrl+A', action: 'Select all options (multiple mode).' },
   ];
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'options', type: 'unknown[]', default: '[]', description: 'Array of option objects.' },
+    {
+      name: 'optionLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Field name for display label.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string',
+      default: "'value'",
+      description: 'Field name for emitted value.',
+    },
+    {
+      name: 'optionDisabled',
+      type: 'string',
+      default: "'disabled'",
+      description: 'Field name marking an option as disabled.',
+    },
+    { name: 'multiple', type: 'boolean', default: 'false', description: 'Enables multi-select.' },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Shows a filter input.' },
+    {
+      name: 'filterMatchMode',
+      type: "'contains' | 'startsWith' | 'endsWith' | 'equals'",
+      default: "'contains'",
+      description: 'Filter match strategy.',
+    },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Filter input placeholder.',
+    },
+    {
+      name: 'group',
+      type: 'boolean',
+      default: 'false',
+      description: 'Treats options as grouped data.',
+    },
+    {
+      name: 'checkbox',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a checkbox marker per row in multi mode.',
+    },
+    {
+      name: 'showToggleAll',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a select-all checkbox header in multi mode.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual style variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Density preset.' },
+    {
+      name: 'scrollHeight',
+      type: 'string',
+      default: "'200px'",
+      description: 'Max height of the scroll container.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables all interaction.',
+    },
+    { name: 'readonly', type: 'boolean', default: 'false', description: 'Prevents value changes.' },
+    { name: 'striped', type: 'boolean', default: 'false', description: 'Alternate row styling.' },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'No items found.'",
+      description: 'Empty-state message.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'selectionChange',
+      type: 'ListboxChangeEvent',
+      description: 'Emits on select / deselect.',
+    },
+    {
+      name: 'filterChange',
+      type: 'ListboxFilterEvent',
+      description: 'Emits on filter input change.',
+    },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-listbox-width', description: 'Width.' },
     { variable: '--uilib-listbox-bg', description: 'Background colour.' },

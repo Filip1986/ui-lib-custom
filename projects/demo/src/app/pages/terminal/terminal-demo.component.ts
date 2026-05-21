@@ -21,6 +21,8 @@ import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.comp
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 
 const HELP_TEXT: string = [
   'Available commands:',
@@ -47,6 +49,7 @@ const HELP_TEXT: string = [
     DocApiReferenceComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './terminal-demo.component.html',
   styleUrl: './terminal-demo.component.scss',
@@ -84,6 +87,7 @@ export class TerminalDemoComponent {
     { id: 'interactive', label: 'Interactive' },
     { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -206,5 +210,93 @@ export class TerminalDemoComponent {
     },
     { key: 'Tab', action: 'Moves focus to the command input when the terminal receives focus.' },
     { key: 'Ctrl + C', action: 'Clears the current input line (browser-native behaviour).' },
+  ];
+
+  public readonly cssVarRows: readonly CssVarRow[] = [
+    {
+      variable: '--uilib-terminal-bg',
+      default: '#1e1e1e',
+      description: 'Background colour of the terminal.',
+    },
+    {
+      variable: '--uilib-terminal-color',
+      default: '#f0f0f0',
+      description: 'Default text colour inside the terminal.',
+    },
+    {
+      variable: '--uilib-terminal-prompt-color',
+      default: '#4caf50',
+      description: 'Colour of the prompt symbol and prefix.',
+    },
+    {
+      variable: '--uilib-terminal-response-color',
+      default: '#e0e0e0',
+      description: 'Colour of command response output text.',
+    },
+    {
+      variable: '--uilib-terminal-welcome-color',
+      default: '#aaaaaa',
+      description: 'Colour of the welcome message.',
+    },
+    {
+      variable: '--uilib-terminal-border',
+      default: '1px solid var(--uilib-surface-300)',
+      description: 'Border shorthand applied to the terminal host.',
+    },
+    {
+      variable: '--uilib-terminal-border-radius',
+      default: 'var(--uilib-radius-md)',
+      description: 'Corner radius of the terminal.',
+    },
+    {
+      variable: '--uilib-terminal-padding',
+      default: '1rem',
+      description: 'Inner padding of the terminal content area.',
+    },
+    {
+      variable: '--uilib-terminal-font-family',
+      default: "'Courier New', Courier, monospace",
+      description: 'Font family used throughout the terminal.',
+    },
+    {
+      variable: '--uilib-terminal-font-size',
+      default: '0.875rem',
+      description: 'Base font size of the terminal text.',
+    },
+    {
+      variable: '--uilib-terminal-line-height',
+      default: '1.5',
+      description: 'Line height of terminal text.',
+    },
+    {
+      variable: '--uilib-terminal-min-height',
+      default: '18rem',
+      description: 'Minimum height of the terminal content area.',
+    },
+    {
+      variable: '--uilib-terminal-max-height',
+      default: '30rem',
+      description: 'Maximum height before the content area starts scrolling.',
+    },
+    {
+      variable: '--uilib-terminal-input-caret-color',
+      default: '#4caf50',
+      description: 'Colour of the text cursor in the command input.',
+    },
+    {
+      variable: '--uilib-terminal-scrollbar-bg',
+      default: '#333333',
+      description: 'Track background colour of the terminal scrollbar.',
+    },
+    {
+      variable: '--uilib-terminal-scrollbar-thumb',
+      default: '#555555',
+      description: 'Thumb colour of the terminal scrollbar.',
+    },
+    {
+      variable: '--uilib-terminal-response-indent',
+      default: '1.5rem',
+      description: 'Left indentation of response output lines.',
+    },
   ];
 }

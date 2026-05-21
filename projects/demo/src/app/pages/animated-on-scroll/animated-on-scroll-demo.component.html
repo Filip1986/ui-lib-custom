@@ -554,6 +554,15 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to control animation timing and motion without touching the directive internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" />
+  </app-doc-section>
+
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

@@ -65,6 +65,16 @@
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </section>
 
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <section class="demo-section" id="css-vars" data-doc-anchor>
+    <h2 class="demo-section__title">CSS Custom Properties</h2>
+    <p class="demo-section__description">
+      Override any of these on the host element or an ancestor to theme the component without
+      touching its internals.
+    </p>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </section>
+
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

@@ -71,6 +71,8 @@ import {
 } from './snippets.generated';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
@@ -103,6 +105,7 @@ import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
     DocCodeExampleComponent,
 
     DocCssVarsTableComponent,
+    DocApiReferenceComponent,
     DocKeyboardNavComponent,
     DocAriaTableComponent,
     DocSectionComponent,
@@ -186,6 +189,7 @@ export class AutoCompleteDemoComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
@@ -193,6 +197,140 @@ export class AutoCompleteDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'suggestions',
+      type: 'unknown[]',
+      default: '[]',
+      description:
+        'Options to show in the dropdown; always managed externally — filter inside completeMethod.',
+    },
+    {
+      name: 'optionLabel',
+      type: 'string | undefined',
+      description: 'Field name used as the display label.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string | undefined',
+      description: 'Field name used as the emitted value.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables chip (multi-value) mode.',
+    },
+    {
+      name: 'dropdown',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a dropdown toggle button.',
+    },
+    {
+      name: 'forceSelection',
+      type: 'boolean',
+      default: 'false',
+      description: 'Restricts value to items from suggestions on blur.',
+    },
+    {
+      name: 'minLength',
+      type: 'number',
+      default: '1',
+      description: 'Minimum query length before completeMethod fires.',
+    },
+    {
+      name: 'delay',
+      type: 'number',
+      default: '300',
+      description: 'Debounce delay in ms before completeMethod fires.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Visual style variant.',
+    },
+    {
+      name: 'size',
+      type: "'small' | 'medium' | 'large'",
+      default: "'medium'",
+      description: 'Size token.',
+    },
+    { name: 'placeholder', type: 'string', default: "''", description: 'Input placeholder text.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    { name: 'invalid', type: 'boolean', default: 'false', description: 'Applies error styling.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the input read-only.',
+    },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Stretches to fill container width.',
+    },
+    {
+      name: 'showClear',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a clear button when the field has a value.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string',
+      default: "'200px'",
+      description: 'Max height of the dropdown panel.',
+    },
+    {
+      name: 'appendTo',
+      type: 'string | HTMLElement | undefined',
+      default: "'body'",
+      description: 'Where to mount the dropdown panel.',
+    },
+    {
+      name: 'virtualScroll',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables virtual scrolling for large suggestion lists.',
+    },
+    {
+      name: 'group',
+      type: 'boolean',
+      default: 'false',
+      description: 'Treats suggestions as grouped data.',
+    },
+    { name: 'loading', type: 'boolean', default: 'false', description: 'Shows loading state.' },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'completeMethod',
+      type: 'AutoCompleteCompleteEvent',
+      description: 'Fires (debounced) when user types; update [suggestions] in response.',
+    },
+    {
+      name: 'select',
+      type: 'AutoCompleteSelectEvent',
+      description: 'Emits when an option is selected.',
+    },
+    {
+      name: 'unselect',
+      type: 'AutoCompleteUnselectEvent',
+      description: 'Emits when a chip is removed (multiple mode).',
+    },
+    { name: 'clearEvent', type: 'void', description: 'Emits when the clear button is clicked.' },
+    { name: 'focus', type: 'FocusEvent', description: 'Input focused.' },
+    { name: 'blur', type: 'FocusEvent', description: 'Input blurred.' },
+    {
+      name: 'dropdownClick',
+      type: 'AutoCompleteDropdownClickEvent',
+      description: 'Dropdown toggle button clicked.',
+    },
+  ];
 
   public basicSuggestions: string[] = [...AUTOCOMPLETE_BASIC_STRINGS];
   public countrySuggestions: DemoCountry[] = [...AUTOCOMPLETE_COUNTRIES];

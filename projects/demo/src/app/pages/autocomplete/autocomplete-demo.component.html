@@ -388,7 +388,12 @@
     </app-doc-section>
 
 
-  
+  <!-- ── API Reference ────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <app-doc-api-reference [rows]="apiOutputRows" kind="output" [showDefault]="false" />
+  </app-doc-section>
+
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>

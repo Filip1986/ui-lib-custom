@@ -19,6 +19,8 @@ import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.comp
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 
 interface DemoItem {
   id: number;
@@ -89,6 +91,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
@@ -128,6 +131,7 @@ export class ScrollerDemoComponent {
     { id: 'large-items', label: 'Large Items (5 000 items)' },
     { id: 'basic-usage', label: 'Basic Usage' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -309,5 +313,28 @@ export class MyComponent {
     { key: 'Page Up / Page Down', action: 'Scroll the viewport by one visible page.' },
     { key: 'Home / End', action: 'Scroll to the first or last item in the list.' },
     { key: 'Tab', action: 'Moves focus to interactive elements inside the visible items.' },
+  ];
+
+  public readonly cssVarRows: readonly CssVarRow[] = [
+    {
+      variable: '--uilib-scroller-loader-bg',
+      default: 'rgba(255,255,255,0.7)',
+      description: 'Background of the loading overlay shown during lazy loads.',
+    },
+    {
+      variable: '--uilib-scroller-loading-icon-size',
+      default: '2rem',
+      description: 'Size of the spinner icon inside the loading overlay.',
+    },
+    {
+      variable: '--uilib-scroller-loading-icon-color',
+      default: 'var(--uilib-color-primary)',
+      description: 'Color of the spinner icon.',
+    },
+    {
+      variable: '--uilib-scroller-item-border-color',
+      default: 'var(--uilib-color-border)',
+      description: 'Border color applied between items when using the bordered item template.',
+    },
   ];
 }

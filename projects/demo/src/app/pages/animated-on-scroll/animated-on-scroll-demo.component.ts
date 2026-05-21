@@ -15,6 +15,8 @@ import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.comp
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the AnimateOnScroll directive.
  * Shows all built-in SCSS preset classes and demonstrates repeat mode,
@@ -33,6 +35,7 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './animated-on-scroll-demo.component.html',
   styleUrl: './animated-on-scroll-demo.component.scss',
@@ -77,6 +80,7 @@ export class AnimatedOnScrollDemoComponent {
     { id: 'repeat-on-scroll', label: 'Repeat on Scroll' },
     { id: 'api', label: 'API' },
     { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -105,6 +109,29 @@ export class AnimatedOnScrollDemoComponent {
       key: '(none)',
       action:
         'The directive is purely visual. It does not add any keyboard interaction — focus and navigation behaviour are determined by the host element.',
+    },
+  ];
+
+  public readonly cssVarRows: readonly CssVarRow[] = [
+    {
+      variable: '--uilib-animate-on-scroll-duration',
+      default: '600ms',
+      description: 'Animation duration. Inherits --uilib-transition-duration when set.',
+    },
+    {
+      variable: '--uilib-animate-on-scroll-easing',
+      default: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Animation easing function.',
+    },
+    {
+      variable: '--uilib-animate-on-scroll-distance',
+      default: '30px',
+      description: 'Translate distance for slide animations.',
+    },
+    {
+      variable: '--uilib-animate-on-scroll-delay',
+      default: '0ms',
+      description: 'Delay before the animation starts (useful for stagger effects).',
     },
   ];
 }
