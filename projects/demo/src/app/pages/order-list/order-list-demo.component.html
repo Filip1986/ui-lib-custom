@@ -6,11 +6,9 @@
     description="A reorderable list component with button controls, optional inline filtering, drag-and-drop, custom item templates, and full keyboard accessibility."
   />
 
-  <div class="examples">
     <!-- 1. Basic -->
-    <section id="basic" data-doc-anchor class="example-section">
-      <h3>1. Basic</h3>
-      <p class="example-description">
+    <app-doc-section id="basic" title="Basic">
+      <p class="demo-section__description">
         Click items to select them, then use the control buttons (or keyboard shortcuts) to reorder.
       </p>
       <ui-lib-panel variant="minimal">
@@ -34,12 +32,11 @@
         [typescript]="basicTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- 2. Filter -->
-    <section id="filter" data-doc-anchor class="example-section">
-      <h3>2. Filter</h3>
-      <p class="example-description">
+    <app-doc-section id="filter" title="Filter">
+      <p class="demo-section__description">
         Set <code>filterBy="name"</code> to render an inline search field. The visible list updates
         as you type; the underlying array is never mutated.
       </p>
@@ -63,12 +60,11 @@
         [typescript]="filterTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- 3. Custom Templates -->
-    <section id="templates" data-doc-anchor class="example-section">
-      <h3>3. Custom Templates</h3>
-      <p class="example-description">
+    <app-doc-section id="templates" title="Custom Templates">
+      <p class="demo-section__description">
         Use <code>uiOrderListHeader</code>, <code>uiOrderListItem</code>, and
         <code>uiOrderListEmpty</code> directives for fully custom rendering.
       </p>
@@ -102,12 +98,11 @@
         [typescript]="templateTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- 4. Drag & Drop -->
-    <section id="drag-drop" data-doc-anchor class="example-section">
-      <h3>4. Drag &amp; Drop</h3>
-      <p class="example-description">
+    <app-doc-section id="drag-drop" title="Drag & Drop">
+      <p class="demo-section__description">
         Enable <code>[dragDrop]="true"</code> to let users reorder by dragging. A drop indicator
         line shows the insertion point.
       </p>
@@ -136,11 +131,10 @@
         [typescript]="dragDropTs"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- 5. Accessibility -->
-    <section id="accessibility" data-doc-anchor class="example-section">
-      <h3>5. Accessibility</h3>
+    <app-doc-section id="accessibility" title="Accessibility">
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>
@@ -211,11 +205,10 @@
           </div>
         </ui-lib-stack>
       </ui-lib-panel>
-    </section>
+    </app-doc-section>
 
     <!-- 6. API Reference -->
-    <section id="api" data-doc-anchor class="example-section">
-      <h3>6. API Reference</h3>
+    <app-doc-section id="api" title="API Reference">
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="4">
           <div>
@@ -405,8 +398,8 @@
           </div>
         </ui-lib-stack>
       </ui-lib-panel>
-    </section>
-  </div>
+    </app-doc-section>
+
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

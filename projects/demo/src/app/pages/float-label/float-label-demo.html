@@ -5,11 +5,8 @@
     [importCode]="importCode"
     description="CSS-driven floating labels for native controls and ui-lib wrapper inputs with `over`, `in`, and `on` variants."
   />
-  <app-doc-demo-viewport [autoHeight]="true">
-    <div class="examples">
-      <section id="basic" data-doc-anchor class="example-section">
-        <h3>a. Basic</h3>
-        <p class="section-text">Label floats on focus and stays floated while value is present.</p>
+      <app-doc-section id="basic" title="Basic">
+        <p class="demo-section__description">Label floats on focus and stays floated while value is present.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
             <uilib-float-label>
@@ -25,10 +22,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
-      <section id="variants" data-doc-anchor class="example-section">
-        <h3>b. Variants</h3>
-        <p class="section-text">Over, In, and On label positioning variants.</p>
+      </app-doc-section>
+      <app-doc-section id="variants" title="Variants">
+        <p class="demo-section__description">Over, In, and On label positioning variants.</p>
         <ui-lib-panel variant="minimal">
           <div class="row-3">
             <div class="variant-column">
@@ -67,10 +63,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
-      <section id="with-select" data-doc-anchor class="example-section">
-        <h3>c. With Select</h3>
-        <p class="section-text">Uses wrapper state classes from `ui-lib-select` host.</p>
+      </app-doc-section>
+      <app-doc-section id="with-select" title="With Select">
+        <p class="demo-section__description">Uses wrapper state classes from `ui-lib-select` host.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
             <uilib-float-label>
@@ -85,10 +80,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="selectHtml" [typescript]="selectTs" />
-      </section>
-      <section id="with-textarea" data-doc-anchor class="example-section">
-        <h3>d. With Textarea</h3>
-        <p class="section-text">Label stays top-aligned for textarea controls.</p>
+      </app-doc-section>
+      <app-doc-section id="with-textarea" title="With Textarea">
+        <p class="demo-section__description">Label stays top-aligned for textarea controls.</p>
         <ui-lib-panel variant="minimal">
           <uilib-float-label>
             <textarea
@@ -101,10 +95,9 @@
           </uilib-float-label>
         </ui-lib-panel>
         <app-doc-code-example [html]="textareaHtml" [typescript]="textareaTs" />
-      </section>
-      <section id="invalid" data-doc-anchor class="example-section">
-        <h3>e. Invalid</h3>
-        <p class="section-text">Required validation with dirty state across all variants.</p>
+      </app-doc-section>
+      <app-doc-section id="invalid" title="Invalid">
+        <p class="demo-section__description">Required validation with dirty state across all variants.</p>
         <ui-lib-panel variant="minimal">
           <form [formGroup]="invalidForm" class="stack-md" novalidate>
             <div class="row-3">
@@ -127,10 +120,9 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTs" />
-      </section>
-      <section id="reactive" data-doc-anchor class="example-section">
-        <h3>f. Reactive Forms</h3>
-        <p class="section-text">FloatLabel inside a FormGroup with native and wrapper controls.</p>
+      </app-doc-section>
+      <app-doc-section id="reactive" title="Reactive Forms">
+        <p class="demo-section__description">FloatLabel inside a FormGroup with native and wrapper controls.</p>
         <ui-lib-panel variant="minimal">
           <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
             <uilib-float-label>
@@ -150,20 +142,18 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
-      </section>
-    </div>
-  </app-doc-demo-viewport>
+      </app-doc-section>
 
+  
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>uilib-float-label</code>. Import from
       <code>ui-lib-custom/float-label</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

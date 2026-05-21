@@ -152,6 +152,8 @@ export class OrganizationChartDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'bootstrap', label: 'Bootstrap Variant' },
     { id: 'minimal', label: 'Minimal Variant' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   // ─── Tree data (each demo section gets its own independent copy) ───────────
