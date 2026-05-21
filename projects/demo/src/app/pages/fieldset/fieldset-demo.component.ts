@@ -97,7 +97,7 @@ export class FieldsetDemoComponent {
     { id: 'toggle-event', label: 'Toggle Event' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {

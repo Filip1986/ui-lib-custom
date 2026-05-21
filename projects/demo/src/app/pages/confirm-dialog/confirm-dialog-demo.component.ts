@@ -87,7 +87,7 @@ export class ConfirmDialogDemoComponent {
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public readonly variants: ConfirmDialogVariant[] = ['material', 'bootstrap', 'minimal'];

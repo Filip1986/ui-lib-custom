@@ -77,7 +77,7 @@ export class ContextMenuDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {

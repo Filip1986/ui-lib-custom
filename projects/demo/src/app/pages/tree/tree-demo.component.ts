@@ -74,7 +74,7 @@ export class TreeDemoComponent {
     { id: 'custom-node-template', label: 'Custom Node Template' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'variants', label: 'Variants' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];

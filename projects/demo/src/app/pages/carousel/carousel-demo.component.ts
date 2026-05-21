@@ -79,7 +79,7 @@ export class CarouselDemoComponent {
     { id: 'minimal-variant', label: 'Minimal Variant' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'hidden-controls', label: 'Hidden Navigators & Indicators' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'api', label: 'API Reference' },
   ];
 

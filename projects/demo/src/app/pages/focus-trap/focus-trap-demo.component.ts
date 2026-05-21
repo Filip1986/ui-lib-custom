@@ -76,7 +76,7 @@ export class FocusTrapDemoComponent {
     { id: 'toggle-trap', label: 'Toggle Trap' },
     { id: 'modal-overlay-pattern', label: 'Modal Overlay Pattern' },
     { id: 'api', label: 'API' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {

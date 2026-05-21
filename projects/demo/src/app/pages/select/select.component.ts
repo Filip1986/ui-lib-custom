@@ -122,7 +122,6 @@ export class SelectComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');

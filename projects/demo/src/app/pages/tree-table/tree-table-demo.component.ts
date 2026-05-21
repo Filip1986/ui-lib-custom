@@ -78,7 +78,7 @@ export class TreeTableDemoComponent {
     { id: 'custom-cell-templates', label: 'Custom Cell Templates' },
     { id: 'organisation-data', label: 'Organisation Data' },
     { id: 'sizes', label: 'Sizes' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'api', label: 'API Reference' },
   ];
 

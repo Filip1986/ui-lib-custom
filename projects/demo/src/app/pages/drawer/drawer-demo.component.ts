@@ -78,7 +78,7 @@ export class DrawerDemoComponent {
     { id: 'with-footer', label: 'With Footer' },
     { id: 'full-screen', label: 'Full Screen' },
     { id: 'api-reference', label: 'API Reference' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];

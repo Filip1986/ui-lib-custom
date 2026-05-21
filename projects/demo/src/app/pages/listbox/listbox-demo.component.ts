@@ -119,7 +119,7 @@ export class ListboxDemoComponent {
     { id: 'toggle-all', label: 'Toggle All' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'reactive', label: 'Reactive Forms' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   // ── Options ────────────────────────────────────────────────────────────────

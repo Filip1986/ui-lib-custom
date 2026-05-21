@@ -62,7 +62,7 @@ export class DialogDemoComponent {
     { id: 'draggable', label: 'Draggable' },
     { id: 'headless', label: 'Headless' },
     { id: 'variant-switcher', label: 'Variant Switcher' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'api', label: 'API Reference' },
   ];
 

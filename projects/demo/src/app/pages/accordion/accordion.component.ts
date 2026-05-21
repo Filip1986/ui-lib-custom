@@ -140,7 +140,6 @@ export class AccordionComponent {
     { id: 'animations', label: 'Animations' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
 
   public scrollTo(id: string): void {

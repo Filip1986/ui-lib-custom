@@ -73,7 +73,7 @@ export class StepperDemoComponent {
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
