@@ -14,6 +14,8 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 
 /**
  * Demo page for the Avatar and AvatarGroup components.
@@ -32,6 +34,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
@@ -129,6 +133,7 @@ export class MyComponent {}`;
     { id: 'variants', label: 'Variants' },
     { id: 'avatar-group', label: 'Avatar Group' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -279,4 +284,23 @@ export class MyComponent {}`;
   public setVariant(variant: AvatarVariant): void {
     this.playgroundVariant.set(variant);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-avatar-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-avatar-size-md', description: 'Size — md.' },
+    { variable: '--uilib-avatar-size-lg', description: 'Size — lg.' },
+    { variable: '--uilib-avatar-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-avatar-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-avatar-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-avatar-icon-size-sm', description: 'Icon size — sm.' },
+    { variable: '--uilib-avatar-icon-size-md', description: 'Icon size — md.' },
+    { variable: '--uilib-avatar-icon-size-lg', description: 'Icon size — lg.' },
+    { variable: '--uilib-avatar-bg', description: 'Background colour.' },
+    { variable: '--uilib-avatar-fg', description: 'Fg.' },
+    { variable: '--uilib-avatar-border-color', description: 'Border colour.' },
+    { variable: '--uilib-avatar-border-width', description: 'Border width.' },
+    { variable: '--uilib-avatar-radius', description: 'Border radius.' },
+    { variable: '--uilib-avatar-size', description: 'Size.' },
+    { variable: '--uilib-avatar-font-size', description: 'Font size.' },
+    { variable: '--uilib-avatar-icon-size', description: 'Icon size.' },
+  ];
 }

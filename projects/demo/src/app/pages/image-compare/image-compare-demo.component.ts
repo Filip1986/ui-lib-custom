@@ -25,6 +25,9 @@ import {
   customLabelHtml,
   customLabelTs,
 } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 /**
  * Demo page for the ImageCompare component.
@@ -41,6 +44,10 @@ import {
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './image-compare-demo.component.html',
   styleUrl: './image-compare-demo.component.scss',
@@ -90,6 +97,7 @@ export class ImageCompareDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'custom-label', label: 'Custom Label' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -102,4 +110,28 @@ export class ImageCompareDemoComponent {
   public readonly position: WritableSignal<number> = signal<number>(50);
 
   // ─── Code snippets ────────────────────────────────────────────────────────────
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-image-compare-radius', description: 'Border radius.' },
+    { variable: '--uilib-image-compare-divider-width', description: 'Divider width.' },
+    { variable: '--uilib-image-compare-divider-color', description: 'Divider text colour.' },
+    { variable: '--uilib-image-compare-handle-size-sm', description: 'Handle size — sm.' },
+    { variable: '--uilib-image-compare-handle-size-md', description: 'Handle size — md.' },
+    { variable: '--uilib-image-compare-handle-size-lg', description: 'Handle size — lg.' },
+    { variable: '--uilib-image-compare-handle-bg', description: 'Handle background colour.' },
+    { variable: '--uilib-image-compare-handle-color', description: 'Handle text colour.' },
+    { variable: '--uilib-image-compare-handle-shadow', description: 'Handle shadow.' },
+    {
+      variable: '--uilib-image-compare-handle-icon-size-sm',
+      description: 'Handle Icon size — sm.',
+    },
+    {
+      variable: '--uilib-image-compare-handle-icon-size-md',
+      description: 'Handle Icon size — md.',
+    },
+    {
+      variable: '--uilib-image-compare-handle-icon-size-lg',
+      description: 'Handle Icon size — lg.',
+    },
+    { variable: '--uilib-image-compare-focus-ring', description: 'Focus ring.' },
+  ];
 }

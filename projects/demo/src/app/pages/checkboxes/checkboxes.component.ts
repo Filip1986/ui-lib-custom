@@ -34,6 +34,9 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.component';
 import { checkboxExampleHtml, checkboxExampleTs, usageTs } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 type CheckboxOption = { label: string; value: string; disabled?: boolean };
@@ -60,6 +63,10 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     CheckboxBasicExampleComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -306,4 +313,25 @@ export class CheckboxesComponent {
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-checkbox-gap', description: 'Gap.' },
+    { variable: '--uilib-checkbox-border', description: 'Border shorthand.' },
+    { variable: '--uilib-checkbox-border-hover', description: 'Border shorthand (hover).' },
+    { variable: '--uilib-checkbox-border-active', description: 'Border shorthand (active).' },
+    { variable: '--uilib-checkbox-bg', description: 'Background colour.' },
+    { variable: '--uilib-checkbox-filled-bg', description: 'Filled background colour.' },
+    { variable: '--uilib-checkbox-filled-border-color', description: 'Filled Border text colour.' },
+    { variable: '--uilib-checkbox-bg-checked', description: 'Background colour (checked).' },
+    { variable: '--uilib-checkbox-check-color', description: 'Checkmark colour.' },
+    { variable: '--uilib-checkbox-description-color', description: 'Description text colour.' },
+    { variable: '--uilib-checkbox-radius', description: 'Border radius.' },
+    { variable: '--uilib-checkbox-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-checkbox-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-checkbox-size-md', description: 'Size — md.' },
+    { variable: '--uilib-checkbox-size-lg', description: 'Size — lg.' },
+    { variable: '--uilib-checkbox-font', description: 'Font.' },
+    { variable: '--uilib-checkbox-padding-base', description: 'Padding Base.' },
+    { variable: '--uilib-checkbox-transition-duration', description: 'Transition Duration.' },
+    { variable: '--uilib-checkbox-size', description: 'Size.' },
+  ];
 }

@@ -12,6 +12,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Skeleton component.
  */
@@ -26,6 +28,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './skeleton-demo.component.html',
   styleUrl: './skeleton-demo.component.scss',
@@ -63,6 +67,7 @@ export class SkeletonDemoComponent {
     { id: 'animation', label: 'Animation' },
     { id: 'custom-sizes', label: 'Custom Sizes' },
     { id: 'custom-border-radius', label: 'Custom Border Radius' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -127,4 +132,10 @@ export class SkeletonDemoComponent {
   public toggleLoaded(): void {
     this.isLoaded.set(!this.isLoaded());
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-skeleton-bg', description: 'Background colour.' },
+    { variable: '--uilib-skeleton-shimmer-color', description: 'Shimmer text colour.' },
+    { variable: '--uilib-skeleton-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-skeleton-animation-duration', description: 'Animation Duration.' },
+  ];
 }

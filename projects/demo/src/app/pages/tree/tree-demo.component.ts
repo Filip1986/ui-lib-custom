@@ -15,6 +15,8 @@ import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Tree component.
  * Showcases: basic tree, single/multiple/checkbox selection, filter,
@@ -33,6 +35,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tree-demo.component.html',
   styleUrl: './tree-demo.component.scss',
@@ -71,6 +75,7 @@ export class TreeDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'variants', label: 'Variants' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -328,5 +333,50 @@ export class TreeDemoComponent {
     },
     { key: 'Enter / Space', action: 'Select the focused node (respects selection mode).' },
     { key: 'Home / End', action: 'Move focus to the first or last visible node.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-tree-font-size', description: 'Font size.' },
+    { variable: '--uilib-tree-line-height', description: 'Line height.' },
+    { variable: '--uilib-tree-row-gap', description: 'Row gap.' },
+    { variable: '--uilib-tree-node-padding-y', description: 'Node vertical padding.' },
+    { variable: '--uilib-tree-node-padding-x', description: 'Node horizontal padding.' },
+    { variable: '--uilib-tree-node-border-radius', description: 'Node Border border radius.' },
+    { variable: '--uilib-tree-node-bg', description: 'Node background colour.' },
+    { variable: '--uilib-tree-node-bg-hover', description: 'Node background colour (hover).' },
+    { variable: '--uilib-tree-node-color', description: 'Node text colour.' },
+    {
+      variable: '--uilib-tree-node-bg-selected',
+      description: 'Node background colour (selected).',
+    },
+    { variable: '--uilib-tree-node-color-selected', description: 'Node text colour (selected).' },
+    { variable: '--uilib-tree-toggle-size', description: 'Toggle button size.' },
+    { variable: '--uilib-tree-toggle-color', description: 'Toggle icon colour.' },
+    { variable: '--uilib-tree-toggle-bg-hover', description: 'Toggle background colour (hover).' },
+    { variable: '--uilib-tree-checkbox-size', description: 'Checkbox size.' },
+    { variable: '--uilib-tree-checkbox-border', description: 'Checkbox border shorthand.' },
+    { variable: '--uilib-tree-checkbox-bg', description: 'Checkbox background colour.' },
+    {
+      variable: '--uilib-tree-checkbox-bg-checked',
+      description: 'Checkbox background colour (checked).',
+    },
+    {
+      variable: '--uilib-tree-checkbox-border-checked',
+      description: 'Checkbox border shorthand (checked).',
+    },
+    {
+      variable: '--uilib-tree-checkbox-color-checked',
+      description: 'Checkbox text colour (checked).',
+    },
+    { variable: '--uilib-tree-filter-border', description: 'Filter border shorthand.' },
+    { variable: '--uilib-tree-filter-border-radius', description: 'Filter Border border radius.' },
+    { variable: '--uilib-tree-filter-bg', description: 'Filter background colour.' },
+    { variable: '--uilib-tree-filter-color', description: 'Filter text colour.' },
+    { variable: '--uilib-tree-filter-padding', description: 'Filter padding.' },
+    {
+      variable: '--uilib-tree-filter-border-focus',
+      description: 'Filter border shorthand (focus).',
+    },
+    { variable: '--uilib-tree-connector-color', description: 'Connector text colour.' },
+    { variable: '--uilib-tree-connector-width', description: 'Connector width.' },
   ];
 }

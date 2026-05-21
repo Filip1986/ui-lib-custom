@@ -12,6 +12,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Breadcrumb component.
  */
@@ -26,6 +28,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './breadcrumb-demo.component.html',
   styleUrl: './breadcrumb-demo.component.scss',
@@ -65,6 +69,7 @@ export class BreadcrumbDemoComponent {
     { id: 'command-callback', label: 'Command Callback' },
     { id: 'disabled-item', label: 'Disabled Item' },
     { id: 'long-breadcrumb', label: 'Long Breadcrumb' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
@@ -265,4 +270,18 @@ export class BreadcrumbDemoComponent {
   private logEvent(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 5));
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-breadcrumb-font-size', description: 'Font size.' },
+    { variable: '--uilib-breadcrumb-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-breadcrumb-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-breadcrumb-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-breadcrumb-gap', description: 'Gap.' },
+    { variable: '--uilib-breadcrumb-link-color', description: 'Link text colour.' },
+    { variable: '--uilib-breadcrumb-link-color-hover', description: 'Link text colour (hover).' },
+    { variable: '--uilib-breadcrumb-current-color', description: 'Current text colour.' },
+    { variable: '--uilib-breadcrumb-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-breadcrumb-disabled-color', description: 'Disabled text colour.' },
+    { variable: '--uilib-breadcrumb-focus-shadow', description: 'Focus shadow.' },
+    { variable: '--uilib-breadcrumb-separator-content', description: 'Separator Content.' },
+  ];
 }

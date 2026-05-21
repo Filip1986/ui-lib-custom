@@ -148,6 +148,7 @@ export class MenuDemoComponent {
     { id: 'url-items', label: 'URL Items' },
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'accessibility', label: 'Accessibility' },
   ];

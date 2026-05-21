@@ -23,6 +23,8 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ToggleSwitch component.
  */
@@ -42,6 +44,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './toggle-switch-demo.component.html',
   styleUrl: './toggle-switch-demo.component.scss',
@@ -80,6 +84,7 @@ export class ToggleSwitchDemoComponent {
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'playground', label: 'Playground' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -179,5 +184,39 @@ export class ToggleSwitchDemoComponent {
       key: 'Tab / Shift+Tab',
       action: 'Moves focus to or from the toggle switch in the standard tab order.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-toggle-switch-track-width', description: 'Track width.' },
+    { variable: '--uilib-toggle-switch-track-height', description: 'Track height.' },
+    { variable: '--uilib-toggle-switch-thumb-size', description: 'Thumb size.' },
+    { variable: '--uilib-toggle-switch-thumb-offset', description: 'Thumb offset.' },
+    { variable: '--uilib-toggle-switch-track-bg', description: 'Track background colour.' },
+    {
+      variable: '--uilib-toggle-switch-track-bg-checked',
+      description: 'Track background colour (checked).',
+    },
+    {
+      variable: '--uilib-toggle-switch-track-bg-hover',
+      description: 'Track background colour (hover).',
+    },
+    {
+      variable: '--uilib-toggle-switch-track-bg-checked-hover',
+      description: 'Track Bg Checked (hover).',
+    },
+    {
+      variable: '--uilib-toggle-switch-track-border-color',
+      description: 'Track Border text colour.',
+    },
+    { variable: '--uilib-toggle-switch-track-border-radius', description: 'Track border radius.' },
+    { variable: '--uilib-toggle-switch-thumb-bg', description: 'Thumb background colour.' },
+    {
+      variable: '--uilib-toggle-switch-thumb-bg-checked',
+      description: 'Thumb background colour (checked).',
+    },
+    { variable: '--uilib-toggle-switch-thumb-shadow', description: 'Thumb box shadow.' },
+    { variable: '--uilib-toggle-switch-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-toggle-switch-gap', description: 'Gap.' },
+    { variable: '--uilib-toggle-switch-font', description: 'Font.' },
+    { variable: '--uilib-toggle-switch-transition-duration', description: 'Transition Duration.' },
   ];
 }

@@ -20,6 +20,8 @@ import { DocCodeExampleComponent } from '../../shared/doc-page/doc-code-example.
 import { basicHtml, basicTs, startEndHtml, startEndTs } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Menubar component.
  */
@@ -36,6 +38,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
@@ -81,6 +85,7 @@ export class MenubarDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -292,5 +297,83 @@ export class MenubarDemoComponent {
       key: 'Home / End',
       action: 'Move focus to the first or last item in the current menu level.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-menubar-bar-bg', description: 'Bar background colour.' },
+    { variable: '--uilib-menubar-bar-border', description: 'Bar border shorthand.' },
+    { variable: '--uilib-menubar-bar-border-radius', description: 'Bar Border border radius.' },
+    { variable: '--uilib-menubar-bar-padding', description: 'Bar padding.' },
+    { variable: '--uilib-menubar-root-link-padding', description: 'Root Link padding.' },
+    { variable: '--uilib-menubar-root-link-gap', description: 'Root Link gap.' },
+    { variable: '--uilib-menubar-root-link-color', description: 'Root Link text colour.' },
+    {
+      variable: '--uilib-menubar-root-link-color-hover',
+      description: 'Root Link text colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-color-active',
+      description: 'Root Link text colour (active).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-bg-hover',
+      description: 'Root Link background colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-bg-active',
+      description: 'Root Link background colour (active).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-border-radius',
+      description: 'Root Link Border border radius.',
+    },
+    {
+      variable: '--uilib-menubar-root-link-font-size-sm',
+      description: 'Root Link Font size — sm.',
+    },
+    {
+      variable: '--uilib-menubar-root-link-font-size-md',
+      description: 'Root Link Font size — md.',
+    },
+    {
+      variable: '--uilib-menubar-root-link-font-size-lg',
+      description: 'Root Link Font size — lg.',
+    },
+    { variable: '--uilib-menubar-root-link-font-weight', description: 'Root Link font weight.' },
+    { variable: '--uilib-menubar-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-menubar-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-menubar-panel-border-radius', description: 'Panel border radius.' },
+    { variable: '--uilib-menubar-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-menubar-panel-min-width', description: 'Panel Min width.' },
+    { variable: '--uilib-menubar-panel-padding', description: 'Panel padding.' },
+    { variable: '--uilib-menubar-sub-link-padding', description: 'Sub Link padding.' },
+    { variable: '--uilib-menubar-sub-link-gap', description: 'Sub Link gap.' },
+    { variable: '--uilib-menubar-sub-link-color', description: 'Sub Link text colour.' },
+    {
+      variable: '--uilib-menubar-sub-link-color-hover',
+      description: 'Sub Link text colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-sub-link-bg-hover',
+      description: 'Sub Link background colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-sub-link-border-radius',
+      description: 'Sub Link Border border radius.',
+    },
+    { variable: '--uilib-menubar-sub-link-font-size', description: 'Sub Link Font size.' },
+    {
+      variable: '--uilib-menubar-sub-link-disabled-opacity',
+      description: 'Sub Link Disabled opacity.',
+    },
+    { variable: '--uilib-menubar-caret-size', description: 'Caret size.' },
+    { variable: '--uilib-menubar-caret-color', description: 'Caret text colour.' },
+    { variable: '--uilib-menubar-sub-caret-color', description: 'Sub Caret text colour.' },
+    { variable: '--uilib-menubar-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-menubar-separator-margin', description: 'Separator margin.' },
+    { variable: '--uilib-menubar-toggle-color', description: 'Toggle icon colour.' },
+    { variable: '--uilib-menubar-toggle-bar-width', description: 'Toggle Bar width.' },
+    { variable: '--uilib-menubar-toggle-bar-height', description: 'Toggle Bar height.' },
+    { variable: '--uilib-menubar-toggle-bar-gap', description: 'Toggle Bar gap.' },
+    { variable: '--uilib-menubar-transition', description: 'Transition.' },
   ];
 }

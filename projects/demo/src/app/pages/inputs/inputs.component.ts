@@ -35,6 +35,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets.generated';
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -70,6 +72,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -299,5 +303,20 @@ export class InputsComponent {
       default: 'false',
       description: 'Shows a clear icon button.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-input-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-input-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-input-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-input-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-input-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-input-bg', description: 'Background colour.' },
+    { variable: '--uilib-input-border', description: 'Border shorthand.' },
+    { variable: '--uilib-input-border-hover', description: 'Border shorthand (hover).' },
+    { variable: '--uilib-input-border-focus', description: 'Border shorthand (focus).' },
+    { variable: '--uilib-input-placeholder', description: 'Placeholder.' },
+    { variable: '--uilib-input-label-bg', description: 'Label background colour.' },
+    { variable: '--uilib-input-text', description: 'Text.' },
+    { variable: '--uilib-input-transition-duration', description: 'Transition Duration.' },
   ];
 }

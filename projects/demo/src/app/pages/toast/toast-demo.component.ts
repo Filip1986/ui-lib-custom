@@ -15,6 +15,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Toast component.
  */
@@ -31,6 +33,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './toast-demo.component.html',
   styleUrl: './toast-demo.component.scss',
@@ -69,6 +73,7 @@ export class ToastDemoComponent {
     { id: 'auto-dismiss-duration', label: 'Auto-dismiss Duration' },
     { id: 'position-variant', label: 'Position & Variant' },
     { id: 'keyed-containers', label: 'Keyed Containers' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -356,5 +361,25 @@ export class ToastDemoComponent {
       type: '(key?: string) => void',
       description: 'Clear all messages, or only those matching a key.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-toast-width', description: 'Width.' },
+    { variable: '--uilib-toast-gap', description: 'Gap.' },
+    { variable: '--uilib-toast-z-index', description: 'Z-index.' },
+    { variable: '--uilib-toast-offset', description: 'Offset.' },
+    { variable: '--uilib-toast-animation-duration', description: 'Animation Duration.' },
+    { variable: '--uilib-toast-slide-x', description: 'Slide X.' },
+    { variable: '--uilib-toast-slide-y', description: 'Slide Y.' },
+    { variable: '--uilib-toast-item-padding', description: 'Item padding.' },
+    { variable: '--uilib-toast-item-radius', description: 'Item border radius.' },
+    { variable: '--uilib-toast-item-gap', description: 'Item gap.' },
+    { variable: '--uilib-toast-item-border-width', description: 'Item Border width.' },
+    { variable: '--uilib-toast-item-font-size', description: 'Item font size.' },
+    { variable: '--uilib-toast-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-toast-item-fg', description: 'Item Fg.' },
+    { variable: '--uilib-toast-item-border-color', description: 'Item Border text colour.' },
+    { variable: '--uilib-toast-item-icon-color', description: 'Item Icon text colour.' },
+    { variable: '--uilib-toast-item-close-color', description: 'Item Close text colour.' },
+    { variable: '--uilib-toast-item-shadow', description: 'Item box shadow.' },
   ];
 }

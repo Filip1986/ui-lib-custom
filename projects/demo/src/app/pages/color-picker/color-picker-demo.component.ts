@@ -43,6 +43,8 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for ColorPicker component usage and forms integration.
  */
@@ -64,6 +66,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',
@@ -218,5 +222,64 @@ export class ColorPickerDemoComponent {
     },
     { name: 'inputId', type: 'string', default: "''", description: 'Id of the trigger element.' },
     { name: 'tabindex', type: 'number', default: '0', description: 'Tab order index.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-colorpicker-trigger-width',
+      description: 'Uilib Colorpicker Trigger width.',
+    },
+    {
+      variable: '--uilib-colorpicker-trigger-height',
+      description: 'Uilib Colorpicker Trigger height.',
+    },
+    {
+      variable: '--uilib-colorpicker-trigger-border-radius',
+      description: 'Uilib Colorpicker Trigger Border border radius.',
+    },
+    {
+      variable: '--uilib-colorpicker-trigger-border-color',
+      description: 'Uilib Colorpicker Trigger Border text colour.',
+    },
+    { variable: '--uilib-colorpicker-panel-width', description: 'Uilib Colorpicker Panel width.' },
+    {
+      variable: '--uilib-colorpicker-panel-padding',
+      description: 'Uilib Colorpicker Panel padding.',
+    },
+    {
+      variable: '--uilib-colorpicker-panel-bg',
+      description: 'Uilib Colorpicker Panel background colour.',
+    },
+    {
+      variable: '--uilib-colorpicker-panel-border-color',
+      description: 'Uilib Colorpicker Panel Border text colour.',
+    },
+    {
+      variable: '--uilib-colorpicker-panel-border-radius',
+      description: 'Uilib Colorpicker Panel Border border radius.',
+    },
+    {
+      variable: '--uilib-colorpicker-panel-shadow',
+      description: 'Uilib Colorpicker Panel box shadow.',
+    },
+    {
+      variable: '--uilib-colorpicker-panel-z-index',
+      description: 'Uilib Colorpicker Panel z-index.',
+    },
+    {
+      variable: '--uilib-colorpicker-hue-slider-width',
+      description: 'Uilib Colorpicker Hue Slider width.',
+    },
+    {
+      variable: '--uilib-colorpicker-hue-slider-height',
+      description: 'Uilib Colorpicker Hue Slider height.',
+    },
+    {
+      variable: '--uilib-colorpicker-selector-size',
+      description: 'Uilib Colorpicker Selector size.',
+    },
+    {
+      variable: '--uilib-colorpicker-transition-duration',
+      description: 'Uilib Colorpicker Transition Duration.',
+    },
   ];
 }

@@ -21,6 +21,9 @@ import { FormsModule } from '@angular/forms';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { iconExampleHtml, iconExampleTs, usageHtml, usageTs } from './snippets.generated';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 /**
@@ -47,6 +50,10 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     FormsModule,
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
+
+    DocCssVarsTableComponent,
+
+    DocSectionComponent,
   ],
   templateUrl: './icons-demo.component.html',
   styleUrl: './icons-demo.component.scss',
@@ -163,4 +170,7 @@ export class IconsDemoComponent {
       // Ignore clipboard failures in non-secure contexts.
     }
   }
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-icon-color', description: 'Text colour.' },
+  ];
 }

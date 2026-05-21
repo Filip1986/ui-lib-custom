@@ -16,6 +16,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Drawer component.
  */
@@ -33,6 +35,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',
@@ -75,6 +79,7 @@ export class DrawerDemoComponent {
     { id: 'full-screen', label: 'Full Screen' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -247,5 +252,24 @@ export class DrawerDemoComponent {
       type: 'slot',
       description: 'Sticky footer at the bottom of the panel.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-drawer-size', description: 'Size.' },
+    { variable: '--uilib-drawer-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-drawer-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-drawer-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-drawer-backdrop-bg', description: 'Backdrop background colour.' },
+    { variable: '--uilib-drawer-z-index', description: 'Z-index.' },
+    { variable: '--uilib-drawer-transition-duration', description: 'Transition Duration.' },
+    { variable: '--uilib-drawer-transition-easing', description: 'Transition Easing.' },
+    { variable: '--uilib-drawer-padding', description: 'Padding.' },
+    { variable: '--uilib-drawer-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-drawer-header-border', description: 'Header border shorthand.' },
+    { variable: '--uilib-drawer-title-color', description: 'Title text colour.' },
+    { variable: '--uilib-drawer-title-font-size', description: 'Title font size.' },
+    { variable: '--uilib-drawer-title-font-weight', description: 'Title font weight.' },
+    { variable: '--uilib-drawer-close-color', description: 'Close button colour.' },
+    { variable: '--uilib-drawer-close-hover-bg', description: 'Close Hover background colour.' },
+    { variable: '--uilib-drawer-close-size', description: 'Close button size.' },
   ];
 }

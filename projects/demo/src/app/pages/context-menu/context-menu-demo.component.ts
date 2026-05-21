@@ -14,6 +14,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the ContextMenu component.
  */
@@ -29,6 +31,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './context-menu-demo.component.html',
   styleUrl: './context-menu-demo.component.scss',
@@ -71,6 +75,7 @@ export class ContextMenuDemoComponent {
     { id: 'command-callback', label: 'Command Callback & itemClick Output' },
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -350,5 +355,52 @@ export class ContextMenuDemoComponent {
       type: '(event: ContextMenuItemCommandEvent) => void',
       description: 'Callback invoked when the item is activated.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-context-menu-bg', description: 'Background colour.' },
+    { variable: '--uilib-context-menu-border', description: 'Border shorthand.' },
+    { variable: '--uilib-context-menu-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-context-menu-radius', description: 'Border radius.' },
+    { variable: '--uilib-context-menu-z-index', description: 'Z-index.' },
+    { variable: '--uilib-context-menu-min-width', description: 'Minimum width.' },
+    { variable: '--uilib-context-menu-padding', description: 'Padding.' },
+    { variable: '--uilib-context-menu-font-size', description: 'Font size.' },
+    { variable: '--uilib-context-menu-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-context-menu-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-context-menu-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-context-menu-item-padding-y', description: 'Item vertical padding.' },
+    { variable: '--uilib-context-menu-item-padding-x', description: 'Item horizontal padding.' },
+    {
+      variable: '--uilib-context-menu-item-padding-y-sm',
+      description: 'Item vertical padding — sm.',
+    },
+    {
+      variable: '--uilib-context-menu-item-padding-y-lg',
+      description: 'Item vertical padding — lg.',
+    },
+    { variable: '--uilib-context-menu-item-color', description: 'Item text colour.' },
+    {
+      variable: '--uilib-context-menu-item-bg-hover',
+      description: 'Item background colour (hover).',
+    },
+    { variable: '--uilib-context-menu-item-color-hover', description: 'Item text colour (hover).' },
+    {
+      variable: '--uilib-context-menu-item-color-disabled',
+      description: 'Item text colour (disabled).',
+    },
+    {
+      variable: '--uilib-context-menu-item-bg-active',
+      description: 'Item background colour (active).',
+    },
+    {
+      variable: '--uilib-context-menu-item-color-active',
+      description: 'Item text colour (active).',
+    },
+    { variable: '--uilib-context-menu-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-context-menu-icon-gap', description: 'Icon gap.' },
+    { variable: '--uilib-context-menu-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-context-menu-separator-my', description: 'Separator My.' },
+    { variable: '--uilib-context-menu-submenu-offset', description: 'Submenu offset.' },
+    { variable: '--uilib-context-menu-focus-shadow', description: 'Focus shadow.' },
   ];
 }

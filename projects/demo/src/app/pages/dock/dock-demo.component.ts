@@ -22,6 +22,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Dock component.
  */
@@ -39,6 +41,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
@@ -84,6 +88,7 @@ export class DockDemoComponent {
     { id: 'disabled-items', label: 'Disabled Items' },
     { id: 'link-items', label: 'Link Items' },
     { id: 'playground', label: 'Interactive Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
   ];
@@ -386,5 +391,34 @@ export class DockDemoComponent {
       type: 'string',
       description: 'Extra CSS class added to the item list element.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-dock-item-size-sm', description: 'Item size — sm.' },
+    { variable: '--uilib-dock-item-size-md', description: 'Item size — md.' },
+    { variable: '--uilib-dock-item-size-lg', description: 'Item size — lg.' },
+    { variable: '--uilib-dock-icon-size-sm', description: 'Icon size — sm.' },
+    { variable: '--uilib-dock-icon-size-md', description: 'Icon size — md.' },
+    { variable: '--uilib-dock-icon-size-lg', description: 'Icon size — lg.' },
+    { variable: '--uilib-dock-gap', description: 'Gap.' },
+    { variable: '--uilib-dock-padding', description: 'Padding.' },
+    { variable: '--uilib-dock-radius', description: 'Border radius.' },
+    { variable: '--uilib-dock-bg', description: 'Background colour.' },
+    { variable: '--uilib-dock-border-color', description: 'Border colour.' },
+    { variable: '--uilib-dock-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-dock-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-dock-item-bg-hover', description: 'Item background colour (hover).' },
+    { variable: '--uilib-dock-item-radius', description: 'Item border radius.' },
+    { variable: '--uilib-dock-item-color', description: 'Item text colour.' },
+    { variable: '--uilib-dock-item-color-hover', description: 'Item text colour (hover).' },
+    { variable: '--uilib-dock-item-color-disabled', description: 'Item text colour (disabled).' },
+    { variable: '--uilib-dock-item-transition', description: 'Item transition.' },
+    { variable: '--uilib-dock-tooltip-bg', description: 'Tooltip background colour.' },
+    { variable: '--uilib-dock-tooltip-color', description: 'Tooltip text colour.' },
+    { variable: '--uilib-dock-tooltip-font-size', description: 'Tooltip Font size.' },
+    { variable: '--uilib-dock-tooltip-padding', description: 'Tooltip padding.' },
+    { variable: '--uilib-dock-tooltip-radius', description: 'Tooltip border radius.' },
+    { variable: '--uilib-dock-tooltip-shadow', description: 'Tooltip box shadow.' },
+    { variable: '--uilib-dock-item-size', description: 'Item size.' },
+    { variable: '--uilib-dock-icon-size', description: 'Icon size.' },
   ];
 }

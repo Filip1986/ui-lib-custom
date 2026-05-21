@@ -13,6 +13,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Message component.
  */
@@ -28,6 +30,8 @@ import { DocSectionComponent } from '../../shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
@@ -64,6 +68,7 @@ export class MessageDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'closable', label: 'Closable' },
     { id: 'content-projection', label: 'Content Projection' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
 
@@ -221,5 +226,23 @@ export class MessageDemoComponent {
       type: 'OutputEmitterRef<void>',
       description: 'Emitted when the close button is clicked.',
     },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-message-padding-sm', description: 'Padding — sm.' },
+    { variable: '--uilib-message-padding-md', description: 'Padding — md.' },
+    { variable: '--uilib-message-padding-lg', description: 'Padding — lg.' },
+    { variable: '--uilib-message-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-message-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-message-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-message-gap-sm', description: 'Gap — sm.' },
+    { variable: '--uilib-message-gap-md', description: 'Gap — md.' },
+    { variable: '--uilib-message-gap-lg', description: 'Gap — lg.' },
+    { variable: '--uilib-message-radius', description: 'Border radius.' },
+    { variable: '--uilib-message-border-width', description: 'Border width.' },
+    { variable: '--uilib-message-bg', description: 'Background colour.' },
+    { variable: '--uilib-message-fg', description: 'Fg.' },
+    { variable: '--uilib-message-border-color', description: 'Border colour.' },
+    { variable: '--uilib-message-icon-color', description: 'Icon colour.' },
+    { variable: '--uilib-message-close-color', description: 'Close button colour.' },
   ];
 }
