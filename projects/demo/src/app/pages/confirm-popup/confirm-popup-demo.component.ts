@@ -85,7 +85,7 @@ export class ConfirmPopupDemoComponent {
     { id: 'declarative-usage', label: 'Declarative Usage' },
     { id: 'result-log', label: 'Result Log' },
     { id: 'api-reference', label: 'API Reference' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public readonly variants: ConfirmPopupVariant[] = ['material', 'bootstrap', 'minimal'];

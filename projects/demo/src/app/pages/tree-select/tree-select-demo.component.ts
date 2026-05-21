@@ -219,7 +219,7 @@ export class TreeSelectDemoComponent {
     { id: 'loading', label: 'Loading' },
     { id: 'ngModel', label: 'ngModel' },
     { id: 'reactive', label: 'Reactive Forms' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'api', label: 'API Reference' },
   ];
 

@@ -91,7 +91,7 @@ export class PopoverDemoComponent {
     { id: 'declarative', label: 'Declarative' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public readonly variants: PopoverVariant[] = ['material', 'bootstrap', 'minimal'];

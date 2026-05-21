@@ -133,7 +133,7 @@ export class ToggleButtonDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'forms', label: 'Forms' },
     { id: 'events', label: 'Events' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public readonly variantOptions: ToggleButtonVariant[] = ['material', 'bootstrap', 'minimal'];

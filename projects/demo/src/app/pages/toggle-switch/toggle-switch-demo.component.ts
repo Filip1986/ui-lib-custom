@@ -83,7 +83,7 @@ export class ToggleSwitchDemoComponent {
     { id: 'ngmodel', label: 'ngModel' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'playground', label: 'Playground' },
-    { id: 'keyboard-navigation', label: 'Keyboard Navigation' },
+    { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
   ];
