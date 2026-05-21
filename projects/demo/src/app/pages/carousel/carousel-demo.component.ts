@@ -13,6 +13,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface DemoProduct {
   name: string;
   category: string;
@@ -36,6 +37,7 @@ interface DemoProduct {
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',

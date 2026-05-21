@@ -8,8 +8,7 @@
   />
 
   <!-- ─── Playground ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <div class="message-demo__controls">
       <label class="message-demo__control-label">
         Severity
@@ -75,11 +74,10 @@
         />
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Severities ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="severities" data-doc-anchor>
-    <h2 class="demo-section__title">Severities</h2>
+  <app-doc-section id="severities" title="Severities">
     <p class="demo-section__description">
       Six severity levels, each with a colour palette and a default icon.
     </p>
@@ -109,11 +107,10 @@
         text="Maintenance window scheduled for Sunday at 02:00 UTC."
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Variants ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants — material (elevated), bootstrap (filled), and minimal (accent border).
     </p>
@@ -144,11 +141,10 @@
         </div>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- ─── Sizes ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">Three size tokens: sm, md (default), lg.</p>
     <div class="message-demo__stack">
       <ui-lib-message
@@ -167,11 +163,10 @@
         text="Large — prominent for top-of-page notices."
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Closable ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="closable" data-doc-anchor>
-    <h2 class="demo-section__title">Closable</h2>
+  <app-doc-section id="closable" title="Closable">
     <p class="demo-section__description">
       Set <code>closable</code> to show a close button and listen to the <code>close</code> output.
     </p>
@@ -192,11 +187,10 @@
         </ui-lib-button>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Content projection ─────────────────────────────────────── -->
-  <section class="demo-section" id="content-projection" data-doc-anchor>
-    <h2 class="demo-section__title">Content Projection</h2>
+  <app-doc-section id="content-projection" title="Content Projection">
     <p class="demo-section__description">
       Rich content can be projected as children instead of using the <code>text</code> input.
     </p>
@@ -209,18 +203,17 @@
         <strong>Tip:</strong> Use keyboard shortcut <kbd>Ctrl + S</kbd> to save your work.
       </ui-lib-message>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── API Reference ──────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="message-demo__api-subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="message-demo__api-subtitle">Outputs</h3>
     <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

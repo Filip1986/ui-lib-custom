@@ -34,6 +34,7 @@ import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { inputExampleHtml, inputExampleTs, usageHtml, usageTs } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type TabKey =
   | 'playground'
   | 'variants'
@@ -68,6 +69,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',

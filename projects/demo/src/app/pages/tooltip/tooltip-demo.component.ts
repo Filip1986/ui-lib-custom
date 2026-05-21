@@ -26,6 +26,7 @@ import {
   variantsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Tooltip directive.
  */
@@ -41,6 +42,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './tooltip-demo.component.html',
   styleUrl: './tooltip-demo.component.scss',

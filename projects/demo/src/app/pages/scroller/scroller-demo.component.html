@@ -7,8 +7,7 @@
   />
 
   <!-- Scenario 1 – Vertical list  (10 000 items) -->
-  <section class="demo-section" id="vertical" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical (10 000 items)</h2>
+  <app-doc-section id="vertical" title="Vertical (10 000 items)">
     <p class="demo-section__description">
       Default orientation — list scrolls downward. Each item is 64 px tall.
     </p>
@@ -23,11 +22,10 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </section>
+  </app-doc-section>
 
   <!-- Scenario 2 – Horizontal list  (1 000 items) -->
-  <section class="demo-section" id="horizontal" data-doc-anchor>
-    <h2 class="demo-section__title">Horizontal (1 000 items)</h2>
+  <app-doc-section id="horizontal" title="Horizontal (1 000 items)">
     <p class="demo-section__description">
       Orientation set to <code>horizontal</code>. Each item is 120 px wide.
     </p>
@@ -47,11 +45,10 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </section>
+  </app-doc-section>
 
   <!-- Scenario 3 – Lazy loading -->
-  <section class="demo-section" id="lazy-loading" data-doc-anchor>
-    <h2 class="demo-section__title">Lazy Loading</h2>
+  <app-doc-section id="lazy-loading" title="Lazy Loading">
     <p class="demo-section__description">
       Items are fetched in pages as the user scrolls.
       <code>(lazyLoad)</code> fires with the required <code>first</code> / <code>last</code> index
@@ -81,11 +78,10 @@
         }
       </ng-template>
     </ui-lib-virtual-scroller>
-  </section>
+  </app-doc-section>
 
   <!-- Scenario 4 – Custom skeleton loader -->
-  <section class="demo-section" id="custom-loader" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Loader Template</h2>
+  <app-doc-section id="custom-loader" title="Custom Loader Template">
     <p class="demo-section__description">
       Pass a <code>uiScrollerLoader</code> template to replace the default spinner with any content
       — here a card skeleton.
@@ -123,11 +119,10 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </section>
+  </app-doc-section>
 
   <!-- Scenario 5 – Disabled (bypass virtualization) -->
-  <section class="demo-section" id="disabled-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Mode</h2>
+  <app-doc-section id="disabled-mode" title="Disabled Mode">
     <p class="demo-section__description">
       When <code>[disabled]="true"</code> all items are rendered without virtualization — useful for
       small lists or print/export paths.
@@ -155,11 +150,10 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </section>
+  </app-doc-section>
 
   <!-- Scenario 6 – Large uniform items  (5 000 items) -->
-  <section class="demo-section" id="large-items" data-doc-anchor>
-    <h2 class="demo-section__title">Large Items (5 000 items)</h2>
+  <app-doc-section id="large-items" title="Large Items (5 000 items)">
     <p class="demo-section__description">
       Each item is 96 px — demonstrates the buffer tolerance with taller rows.
     </p>
@@ -175,28 +169,26 @@
         </div>
       </ng-template>
     </ui-lib-virtual-scroller>
-  </section>
+  </app-doc-section>
 
   <!-- Usage example -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <app-doc-code-example
       [html]="demoCode()"
       [typescript]="demoCodeTs()"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-virtual-scroller</code>. Import from
       <code>ui-lib-custom/virtual-scroller</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

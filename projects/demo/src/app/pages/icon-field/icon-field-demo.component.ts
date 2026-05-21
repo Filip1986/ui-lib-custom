@@ -31,6 +31,7 @@ import {
   variantsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for IconField and InputIcon composition patterns.
  */
@@ -53,6 +54,7 @@ import {
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './icon-field-demo.component.html',
   styleUrl: './icon-field-demo.component.scss',

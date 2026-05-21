@@ -15,8 +15,7 @@
   </app-doc-page-header>
 
   <!-- ── Section 1: Basic usage ── -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
       Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied automatically after
       the view initializes.
@@ -36,11 +35,10 @@
       [typescript]="basicUsageTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 2: Conditional focus ── -->
-  <section class="demo-section" id="conditional-focus" data-doc-anchor>
-    <h2 class="demo-section__title">Conditional Focus</h2>
+  <app-doc-section id="conditional-focus" title="Conditional Focus">
     <p class="demo-section__description">
       Bind the <code>autofocus</code> input to control whether focus is applied. Useful when
       rendering inputs inside dialogs, drawers, or dynamic forms.
@@ -72,11 +70,10 @@
       [typescript]="conditionalTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 3: Disable autofocus ── -->
-  <section class="demo-section" id="disable-autofocus" data-doc-anchor>
-    <h2 class="demo-section__title">Disable Autofocus</h2>
+  <app-doc-section id="disable-autofocus" title="Disable Autofocus">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent focus from being applied — for example when the
       feature is toggled off by the user.
@@ -100,11 +97,10 @@
       [typescript]="disabledTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 4: API ── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="af-sub-title">Directive selector</h3>
     <ui-lib-code-snippet
@@ -145,7 +141,7 @@
         </tr>
       </tbody>
     </table>
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

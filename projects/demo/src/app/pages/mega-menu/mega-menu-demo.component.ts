@@ -30,6 +30,7 @@ import {
   itemClickTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the MegaMenu component.
  */
@@ -47,6 +48,7 @@ import {
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',

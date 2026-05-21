@@ -9,7 +9,7 @@
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
       <!-- a. Basic -->
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">
           Default knob with ngModel binding. Drag up/down or use arrow keys to change the value.
@@ -27,10 +27,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
       <!-- b. Sizes -->
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>b. Sizes</h3>
         <p class="section-text">
           Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
@@ -67,10 +67,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </section>
+      </app-doc-section>
 
       <!-- c. Step -->
-      <section id="step" data-doc-anchor class="example-section">
+      <app-doc-section id="step" title="Step">
         <h3>c. Step</h3>
         <p class="section-text">
           Use <code>[step]</code> to control the increment. This knob snaps to 0, 25, 50, 75, 100.
@@ -89,10 +89,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="stepHtml" [typescript]="stepTs" />
-      </section>
+      </app-doc-section>
 
       <!-- d. Min / Max -->
-      <section id="minmax" data-doc-anchor class="example-section">
+      <app-doc-section id="minmax" title="Min / Max">
         <h3>d. Min / Max</h3>
         <p class="section-text">
           Constrain the value range. This knob spans &minus;50 to +50 in steps of 10.
@@ -113,10 +113,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="minmaxHtml" [typescript]="minmaxTs" />
-      </section>
+      </app-doc-section>
 
       <!-- e. Value Template -->
-      <section id="template" data-doc-anchor class="example-section">
+      <app-doc-section id="template" title="Value Template">
         <h3>e. Value Template</h3>
         <p class="section-text">
           Pass a <code>valueTemplate</code> string to format the centre label. Use
@@ -145,10 +145,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="templateHtml" [typescript]="templateTs" />
-      </section>
+      </app-doc-section>
 
       <!-- f. Custom Colors -->
-      <section id="colors" data-doc-anchor class="example-section">
+      <app-doc-section id="colors" title="Custom Colors">
         <h3>f. Custom Colors</h3>
         <p class="section-text">
           Override arc and text colours per-instance via <code>valueColor</code> and
@@ -189,10 +189,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="colorsHtml" [typescript]="colorsTs" />
-      </section>
+      </app-doc-section>
 
       <!-- g. Disabled -->
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>g. Disabled</h3>
         <p class="section-text">A disabled knob is visually muted and ignores all interaction.</p>
         <ui-lib-panel variant="minimal">
@@ -209,10 +209,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </section>
+      </app-doc-section>
 
       <!-- h. Read-only -->
-      <section id="readonly" data-doc-anchor class="example-section">
+      <app-doc-section id="readonly" title="Read-only">
         <h3>h. Read-only</h3>
         <p class="section-text">
           A read-only knob is focusable but does not respond to drag or keyboard input.
@@ -231,10 +231,10 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="readonlyHtml" [typescript]="readonlyTs" />
-      </section>
+      </app-doc-section>
 
       <!-- i. Reactive Forms -->
-      <section id="reactive" data-doc-anchor class="example-section">
+      <app-doc-section id="reactive" title="Reactive Forms">
         <h3>i. Reactive Forms</h3>
         <p class="section-text">Knobs work with Angular reactive forms out of the box via CVA.</p>
         <ui-lib-panel variant="minimal">
@@ -252,20 +252,19 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>uilib-knob</code>. Import from
       <code>ui-lib-custom/knob</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

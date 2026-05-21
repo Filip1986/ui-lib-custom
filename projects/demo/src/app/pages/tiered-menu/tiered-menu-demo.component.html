@@ -15,8 +15,7 @@
   </app-doc-page-header>
 
   <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="overview-detail" data-doc-anchor>
-    <h2 class="demo-section__title">Overview</h2>
+  <app-doc-section id="overview-detail" title="Overview">
     <p class="demo-section__description">
       <code>TieredMenu</code> renders an accessible, keyboard-navigable menu panel that supports
       arbitrarily deep nesting. Items with an <code>items</code> array open a flyout sub-panel on
@@ -33,11 +32,10 @@
         <code>show()</code>, or <code>hide()</code>.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic (Inline)</h2>
+  <app-doc-section id="basic" title="Basic (Inline)">
     <p class="demo-section__description">
       The default inline mode renders the menu panel directly in the document flow. Pass a
       <code>TieredMenuItem[]</code> via <code>[model]</code> and listen for activations with
@@ -54,11 +52,10 @@
       </div>
     }
     <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Nested ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="nested-submenus" data-doc-anchor>
-    <h2 class="demo-section__title">Nested Submenus</h2>
+  <app-doc-section id="nested-submenus" title="Nested Submenus">
     <p class="demo-section__description">
       Items with an <code>items</code> array open a right-arrow flyout sub-panel on hover or
       <kbd>ArrowRight</kbd>. Nesting is recursive with no depth limit.
@@ -74,11 +71,10 @@
       </div>
     }
     <ui-lib-code-snippet [code]="nestedTs" language="typescript" [showLineNumbers]="true" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="popup-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Popup Mode</h2>
+  <app-doc-section id="popup-mode" title="Popup Mode">
     <p class="demo-section__description">
       Set <code>[popup]="true"</code> and control visibility via <code>toggle(event)</code>,
       <code>show(event)</code>, or <code>hide()</code>. Wire the trigger button with
@@ -111,11 +107,10 @@
       </div>
     }
     <app-doc-code-example [html]="popupHtml" [typescript]="popupTs" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Choose from <code>material</code>, <code>bootstrap</code>, or <code>minimal</code>. When
       <code>variant</code> is <code>null</code> (the default), the value falls back to
@@ -142,11 +137,10 @@
       <ui-lib-tiered-menu [model]="nestedItems" [variant]="variant()" />
     </div>
     <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
       The size token affects font size, padding, and minimum panel width.
@@ -172,11 +166,10 @@
       <ui-lib-tiered-menu [model]="basicItems" [size]="size()" />
     </div>
     <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Item States ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="item-states" data-doc-anchor>
-    <h2 class="demo-section__title">Item States</h2>
+  <app-doc-section id="item-states" title="Item States">
     <p class="demo-section__description">
       Items support <code>disabled</code>, <code>visible: false</code> (excluded from render),
       separators, and <code>command</code> callbacks. Disabled items receive
@@ -197,11 +190,10 @@
       language="typescript"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="url-items" data-doc-anchor>
-    <h2 class="demo-section__title">URL Items</h2>
+  <app-doc-section id="url-items" title="URL Items">
     <p class="demo-section__description">
       Set <code>url</code> on an item to render it as an <code>&lt;a href&gt;</code> element.
       Combine with <code>target</code> (e.g. <code>'_blank'</code>) to open in a new tab.
@@ -214,11 +206,10 @@
       language="typescript"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <table class="demo-api-table">
@@ -407,11 +398,10 @@
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-    <h2 class="demo-section__title">Accessibility</h2>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
     <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
@@ -456,7 +446,7 @@
         disable flyout transition animations.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

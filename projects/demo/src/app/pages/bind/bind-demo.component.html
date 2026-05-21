@@ -15,8 +15,7 @@
   </div>
 
   <!-- Section 1: Basic usage -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
       Pass any object literal to <code>[uiLibBind]</code>. Each key is set as
       a DOM property on the host element. Using <code>id</code>,
@@ -37,11 +36,10 @@
       size="sm"
       [code]="snippetBasicUsage"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Interactive playground -->
-  <section class="demo-section" id="interactive-playground" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Playground</h2>
+  <app-doc-section id="interactive-playground" title="Interactive Playground">
     <p class="demo-section__description">
       The binding object reacts to signals. Change the id preset, cycle the
       tooltip, or toggle <code>tabIndex</code> to see the DOM update live.
@@ -94,11 +92,10 @@
         <code class="bd-live-code">{{ liveBindings() | json }}</code>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Boolean and numeric properties -->
-  <section class="demo-section" id="boolean-numeric" data-doc-anchor>
-    <h2 class="demo-section__title">Boolean &amp; Numeric Properties</h2>
+  <app-doc-section id="boolean-numeric" title="Boolean &amp; Numeric Properties">
     <p class="demo-section__description">
       <code>uiLibBind</code> uses <code>Renderer2.setProperty</code> under the
       hood, so boolean and numeric DOM properties work exactly as expected.
@@ -125,11 +122,10 @@
       size="sm"
       [code]="snippetBooleanNumeric"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: API table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <h3 class="bd-sub-title">Selector</h3>
     <ui-lib-code-snippet
       language="html"
@@ -146,7 +142,7 @@
       size="sm"
       [code]="snippetHostClass"
     />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

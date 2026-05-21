@@ -9,8 +9,7 @@
   </app-doc-page-header>
 
   <!-- Section 1: Toggle Mode -->
-  <section class="demo-section" id="toggle-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Toggle Mode</h2>
+  <app-doc-section id="toggle-mode" title="Toggle Mode">
     <p class="demo-section__description">
       Set <code>toggleClass</code> to add and remove a single CSS class on each click.
       This is the simplest usage — no transitions, just a class toggle.
@@ -40,11 +39,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Fade Animation -->
-  <section class="demo-section" id="fade-animation" data-doc-anchor>
-    <h2 class="demo-section__title">Fade Animation</h2>
+  <app-doc-section id="fade-animation" title="Fade Animation">
     <p class="demo-section__description">
       Use <code>enterActiveClass</code> / <code>leaveActiveClass</code> with CSS keyframe
       animations for smooth enter and leave transitions.
@@ -78,11 +76,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Slide Animation -->
-  <section class="demo-section" id="slide-animation" data-doc-anchor>
-    <h2 class="demo-section__title">Slide Animation</h2>
+  <app-doc-section id="slide-animation" title="Slide Animation">
     <p class="demo-section__description">
       Use the full <code>enterDoneClass</code> / <code>leaveDoneClass</code> lifecycle
       to control the final state independently from the active animation class.
@@ -116,11 +113,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Special Selectors -->
-  <section class="demo-section" id="special-selectors" data-doc-anchor>
-    <h2 class="demo-section__title">Special Selectors</h2>
+  <app-doc-section id="special-selectors" title="Special Selectors">
     <p class="demo-section__description">
       Use <code>@parent</code>, <code>@prev</code>, and <code>@grandparent</code>
       to target elements relative to the trigger without needing CSS IDs.
@@ -166,11 +162,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: CSS Selector -->
-  <section class="demo-section" id="css-selector" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Selector</h2>
+  <app-doc-section id="css-selector" title="CSS Selector">
     <p class="demo-section__description">
       Pass any CSS selector to target a specific element elsewhere in the page.
     </p>
@@ -198,15 +193,14 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

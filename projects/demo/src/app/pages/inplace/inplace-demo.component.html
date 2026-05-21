@@ -8,8 +8,7 @@
   />
 
   <!-- ---- Basic -------------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Click the display slot to switch to edit mode. The <code>[(active)]</code> model binding
       exposes the current state for two-way control.
@@ -31,11 +30,10 @@
         <p class="demo-field__note">Active: <code>{{ basicActive() }}</code></p>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Closable ----------------------------------------------------- -->
-  <section class="demo-section" id="closable" data-doc-anchor>
-    <h2 class="demo-section__title">Closable</h2>
+  <app-doc-section id="closable" title="Closable">
     <p class="demo-section__description">
       Set <code>[closable]="true"</code> to render a close button inside the content slot that
       deactivates the editor without requiring a custom blur handler.
@@ -55,11 +53,10 @@
         </ui-lib-inplace>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Rich content ------------------------------------------------- -->
-  <section class="demo-section" id="rich-content" data-doc-anchor>
-    <h2 class="demo-section__title">Rich Content</h2>
+  <app-doc-section id="rich-content" title="Rich Content">
     <p class="demo-section__description">
       Any content can be projected into the <code>inplaceDisplay</code> and
       <code>inplaceContent</code> slots — icons, badges, images, or entire form groups.
@@ -76,11 +73,10 @@
         </div>
       </ui-lib-inplace>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Disabled ----------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent the display slot from activating.
     </p>
@@ -92,11 +88,10 @@
         <input inplaceContent class="inplace-demo__input" type="text" />
       </ui-lib-inplace>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Variants ----------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three built-in variants — <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code> — adjust hover states, borders, and close-button styling.
@@ -125,11 +120,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- Event log ---------------------------------------------------- -->
-  <section class="demo-section" id="events" data-doc-anchor>
-    <h2 class="demo-section__title">Events</h2>
+  <app-doc-section id="events" title="Events">
     <p class="demo-section__description">
       Toggle the variant examples above to see <code>(activated)</code> and
       <code>(deactivated)</code> events captured here.
@@ -149,11 +143,10 @@
         </ui-lib-button>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ---------------------------------------------------------- -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-table__heading">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -163,13 +156,12 @@
 
     <h3 class="demo-table__heading">Content Projection</h3>
     <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

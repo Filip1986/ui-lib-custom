@@ -5,8 +5,7 @@
   </app-doc-page-header>
 
   <!-- Section 1: Linear -->
-  <section class="demo-section" id="linear" data-doc-anchor>
-    <h2 class="demo-section__title">Linear</h2>
+  <app-doc-section id="linear" title="Linear">
     <p class="demo-section__description">
       Default linear layout. Use <code>direction</code> to expand up, down, left, or right.
     </p>
@@ -26,11 +25,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Circle -->
-  <section class="demo-section" id="circle" data-doc-anchor>
-    <h2 class="demo-section__title">Circle</h2>
+  <app-doc-section id="circle" title="Circle">
     <p class="demo-section__description">
       Set <code>type="circle"</code> and <code>[radius]</code> to place items radially around the trigger.
     </p>
@@ -46,11 +44,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Semi-Circle -->
-  <section class="demo-section" id="semi-circle" data-doc-anchor>
-    <h2 class="demo-section__title">Semi-Circle</h2>
+  <app-doc-section id="semi-circle" title="Semi-Circle">
     <p class="demo-section__description">
       <code>type="semi-circle"</code> fans items out in a half-circle in the specified direction.
     </p>
@@ -72,11 +69,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Quarter-Circle -->
-  <section class="demo-section" id="quarter-circle" data-doc-anchor>
-    <h2 class="demo-section__title">Quarter-Circle</h2>
+  <app-doc-section id="quarter-circle" title="Quarter-Circle">
     <p class="demo-section__description">
       <code>type="quarter-circle"</code> places items in a 90° arc using compound directions.
     </p>
@@ -98,11 +94,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Tooltip -->
-  <section class="demo-section" id="tooltip" data-doc-anchor>
-    <h2 class="demo-section__title">Tooltip</h2>
+  <app-doc-section id="tooltip" title="Tooltip">
     <p class="demo-section__description">
       Set a <code>tooltip</code> on each <code>SpeedDialItem</code> to show labels on hover.
     </p>
@@ -116,11 +111,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: Mask -->
-  <section class="demo-section" id="mask" data-doc-anchor>
-    <h2 class="demo-section__title">Mask</h2>
+  <app-doc-section id="mask" title="Mask">
     <p class="demo-section__description">
       Set <code>[mask]="true"</code> to render a backdrop overlay while the dial is open.
     </p>
@@ -135,11 +129,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 7: Custom Template -->
-  <section class="demo-section" id="custom-template" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Template</h2>
+  <app-doc-section id="custom-template" title="Custom Template">
     <p class="demo-section__description">
       Use <code>speedDialIcon</code> to customise the trigger icon and <code>speedDialItem</code>
       to render each action with a fully custom template.
@@ -166,11 +159,10 @@
         </ui-lib-speed-dial>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: Disabled -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent the dial from opening.
     </p>
@@ -184,11 +176,10 @@
         />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Event log -->
-  <section class="demo-section" id="event-log" data-doc-anchor>
-    <h2 class="demo-section__title">Event Log</h2>
+  <app-doc-section id="event-log" title="Event Log">
     <div class="speed-dial-demo__log-panel">
       @if (eventLog().length === 0) {
         <p class="speed-dial-demo__log-empty">Interact with the dials above to see events.</p>
@@ -203,18 +194,17 @@
         </ul>
       }
     </div>
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-speed-dial</code>. Import from
       <code>ui-lib-custom/speed-dial</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -9,8 +9,7 @@
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 1: Basic usage (window target)                              -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
       Scroll down this page to see the button appear in the bottom-right corner. The default
       threshold is <code>400px</code> and the default target is the window.
@@ -21,13 +20,12 @@
     </div>
     <!-- Live instance — fixed to the viewport -->
     <ui-lib-scroll-top />
-  </section>
+  </app-doc-section>
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 2: Custom threshold                                          -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="custom-threshold" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Threshold</h2>
+  <app-doc-section id="custom-threshold" title="Custom Threshold">
     <p class="demo-section__description">
       Control how far the user must scroll before the button appears using the
       <code>threshold</code> input (pixels, default: 400).
@@ -39,13 +37,12 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 3: Parent container target                                  -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="parent-container-target" data-doc-anchor>
-    <h2 class="demo-section__title">Parent Container Target</h2>
+  <app-doc-section id="parent-container-target" title="Parent Container Target">
     <p class="demo-section__description">
       Set <code>target="parent"</code> to watch a scrollable parent element instead of the window.
       The button is positioned <code>absolute</code> inside the container. The parent must have
@@ -66,13 +63,12 @@
         [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 4: Variants                                                  -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code> (default — pill, primary colour + shadow),
       <code>bootstrap</code> (square corners, Bootstrap blue), and <code>minimal</code> (muted
@@ -98,13 +94,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 5: Sizes                                                     -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -128,13 +123,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 6: Custom icon                                               -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="custom-icon" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Icon</h2>
+  <app-doc-section id="custom-icon" title="Custom Icon">
     <p class="demo-section__description">
       Use the <code>icon</code> input to supply any PrimeIcons class string. The default is
       <code>pi pi-arrow-up</code>.
@@ -150,18 +144,17 @@
         <ui-lib-scroll-top icon="pi pi-angle-double-up" styleClass="demo-static" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ------------------------------------------------------------------ -->
   <!-- Section 7: API table                                                 -->
   <!-- ------------------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="inputRows" />
     <h3 class="demo-section__subtitle">Public properties</h3>
     <app-doc-api-reference kind="property" [rows]="propertyRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- Filler content so there is something to scroll past -->
   <div class="demo-scroll-filler" aria-hidden="true">

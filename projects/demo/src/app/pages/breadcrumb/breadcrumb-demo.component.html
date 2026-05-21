@@ -12,35 +12,31 @@
   </div>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">A simple breadcrumb with external URL links.</p>
     <div class="demo-row">
       <ui-lib-breadcrumb [items]="basicItems" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── With Home ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="with-home" data-doc-anchor>
-    <h2 class="demo-section__title">With Home</h2>
+  <app-doc-section id="with-home" title="With Home">
     <p class="demo-section__description">Use the <code>home</code> input to pin a home item at the start.</p>
     <div class="demo-row">
       <ui-lib-breadcrumb [home]="homeItem" [items]="homeItems" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── RouterLink ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="router-link" data-doc-anchor>
-    <h2 class="demo-section__title">RouterLink</h2>
+  <app-doc-section id="router-link" title="RouterLink">
     <p class="demo-section__description">Use <code>routerLink</code> to navigate within the Angular application.</p>
     <div class="demo-row">
       <ui-lib-breadcrumb [items]="routerItems" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Custom Separator ──────────────────────────────────────────────── -->
-  <section class="demo-section" id="custom-separator" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Separator</h2>
+  <app-doc-section id="custom-separator" title="Custom Separator">
     <p class="demo-section__description">
       Project a <code>#separator</code> template to override the default separator glyph.
     </p>
@@ -49,11 +45,10 @@
         <ng-template #separator>›</ng-template>
       </ui-lib-breadcrumb>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <div class="demo-column">
       <div class="demo-label-row">
         <span class="demo-label">Material</span>
@@ -68,11 +63,10 @@
         <ui-lib-breadcrumb variant="minimal" [items]="variantItems" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <div class="demo-column">
       <div class="demo-label-row">
         <span class="demo-label">sm</span>
@@ -87,11 +81,10 @@
         <ui-lib-breadcrumb size="lg" [items]="sizeItems" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Command ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="command-callback" data-doc-anchor>
-    <h2 class="demo-section__title">Command Callback</h2>
+  <app-doc-section id="command-callback" title="Command Callback">
     <p class="demo-section__description">
       Items with a <code>command</code> callback render as buttons and emit both the
       <code>itemClick</code> output and call the callback.
@@ -106,31 +99,28 @@
         }
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- ── Disabled Item ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-item" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Item</h2>
+  <app-doc-section id="disabled-item" title="Disabled Item">
     <p class="demo-section__description">
       Set <code>disabled: true</code> on any item to make it non-interactive and visually muted.
     </p>
     <div class="demo-row">
       <ui-lib-breadcrumb [items]="disabledItems" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Long Path ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="long-breadcrumb" data-doc-anchor>
-    <h2 class="demo-section__title">Long Breadcrumb (wrapping)</h2>
+  <app-doc-section id="long-breadcrumb" title="Long Breadcrumb (wrapping)">
     <p class="demo-section__description">Breadcrumbs wrap naturally on narrow viewports.</p>
     <div class="demo-row">
       <ui-lib-breadcrumb [items]="longItems" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API Table ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -140,7 +130,7 @@
 
     <h3 class="demo-section__subtitle">BreadcrumbItem interface</h3>
     <app-doc-api-reference kind="property" [rows]="apiBreadcrumbItemRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

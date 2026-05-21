@@ -25,6 +25,7 @@ import {
   variantsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Fieldset component.
  */
@@ -40,6 +41,7 @@ import {
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',

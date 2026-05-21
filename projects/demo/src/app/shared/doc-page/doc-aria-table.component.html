@@ -1,0 +1,25 @@
+<ui-lib-table [value]="tableRows()" styleClass="demo-a11y-table">
+  <ui-lib-table-column header="Attribute" field="attribute" width="160px">
+    <ng-template uiTableColumnBody let-row>
+      <code>{{ row.attribute }}</code>
+    </ng-template>
+  </ui-lib-table-column>
+
+  <ui-lib-table-column header="Element" field="element" width="150px">
+    <ng-template uiTableColumnBody let-row>
+      <span>{{ row.element }}</span>
+    </ng-template>
+  </ui-lib-table-column>
+
+  <ui-lib-table-column header="Value" field="value" width="160px">
+    <ng-template uiTableColumnBody let-row>
+      <code>{{ row.value }}</code>
+    </ng-template>
+  </ui-lib-table-column>
+
+  <ui-lib-table-column header="Notes" field="notes">
+    <ng-template uiTableColumnBody let-row>
+      <span [innerHTML]="row.notes"></span>
+    </ng-template>
+  </ui-lib-table-column>
+</ui-lib-table>

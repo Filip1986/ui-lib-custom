@@ -19,6 +19,7 @@ import {
   disabledTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the AutoFocus directive.
  * Demonstrates basic usage, conditional focus, and the full input API.
@@ -35,6 +36,7 @@ import {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './auto-focus-demo.component.html',
   styleUrl: './auto-focus-demo.component.scss',

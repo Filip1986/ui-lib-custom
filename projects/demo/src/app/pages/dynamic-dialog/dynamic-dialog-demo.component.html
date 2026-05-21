@@ -8,8 +8,7 @@
   />
 
   <!-- Basic Usage -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__desc">
       Call <code>dialogService.open(Component, config)</code> from any class that injects
       <code>DialogService</code>.
@@ -27,11 +26,10 @@
         [code]="snippetBasicOpen"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Passing Data -->
-  <section class="demo-section" id="passing-data" data-doc-anchor>
-    <h2 class="demo-section__title">Passing Data to the Guest Component</h2>
+  <app-doc-section id="passing-data" title="Passing Data to the Guest Component">
     <p class="demo-section__desc">
       Pass arbitrary data through <code>config.data</code>. The guest component reads it by
       injecting <code>DYNAMIC_DIALOG_CONFIG</code>.
@@ -52,11 +50,10 @@
         [code]="snippetPassingData"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Scrollable Content -->
-  <section class="demo-section" id="scrollable-content" data-doc-anchor>
-    <h2 class="demo-section__title">Fixed Height &amp; Scrollable Content</h2>
+  <app-doc-section id="scrollable-content" title="Fixed Height &amp; Scrollable Content">
     <p class="demo-section__desc">
       Set <code>height</code> on the config to give the dialog a fixed viewport height. The
       content area scrolls automatically.
@@ -74,11 +71,10 @@
         [code]="snippetScrollable"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       Pass <code>variant</code> to override the inherited theme setting for a single dialog.
     </p>
@@ -101,11 +97,10 @@
         [code]="snippetVariant"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Positions -->
-  <section class="demo-section" id="viewport-positions" data-doc-anchor>
-    <h2 class="demo-section__title">Viewport Positions</h2>
+  <app-doc-section id="viewport-positions" title="Viewport Positions">
     <p class="demo-section__desc">
       Use <code>position</code> to anchor the dialog to the center or any edge of the
       viewport.
@@ -125,11 +120,10 @@
         [code]="snippetPosition"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Configuration options -->
-  <section class="demo-section" id="configuration-options" data-doc-anchor>
-    <h2 class="demo-section__title">Configuration Options</h2>
+  <app-doc-section id="configuration-options" title="Configuration Options">
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
         <ui-lib-button type="button" severity="secondary" (click)="openDismissable()">
@@ -140,23 +134,20 @@
         </ui-lib-button>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="dynamic-dialog-config" data-doc-anchor>
-    <h2 class="demo-section__title">DynamicDialogConfig</h2>
+  <app-doc-section id="dynamic-dialog-config" title="DynamicDialogConfig">
     <app-doc-api-reference kind="property" [rows]="apiConfigRows" />
-  </section>
+  </app-doc-section>
 
-  <section class="demo-section" id="dynamic-dialog-ref" data-doc-anchor>
-    <h2 class="demo-section__title">DynamicDialogRef</h2>
+  <app-doc-section id="dynamic-dialog-ref" title="DynamicDialogRef">
     <app-doc-api-reference kind="property" [rows]="apiRefRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
-  <section class="demo-section" id="injection-tokens" data-doc-anchor>
-    <h2 class="demo-section__title">Injection Tokens</h2>
+  <app-doc-section id="injection-tokens" title="Injection Tokens">
     <app-doc-api-reference kind="name" [rows]="apiTokenRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

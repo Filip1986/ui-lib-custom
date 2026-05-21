@@ -63,6 +63,7 @@ import {
   customOptionsTsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type ChartThemeProfileKey = 'material' | 'bootstrap' | 'minimal';
 
 type RefreshableChart = {
@@ -106,6 +107,7 @@ type ThemeCssVariables = {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './chart-demo.component.html',
   styleUrl: './chart-demo.component.scss',

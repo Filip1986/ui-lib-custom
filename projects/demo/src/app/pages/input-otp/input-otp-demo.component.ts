@@ -42,6 +42,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for InputOtp — OTP entry with mask, integer-only, sizes, and form integration.
  */
@@ -61,6 +62,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './input-otp-demo.component.html',
   styleUrl: './input-otp-demo.component.scss',

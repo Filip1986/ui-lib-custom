@@ -5,8 +5,7 @@
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       All buttons in a group share the same <code>name</code>. Bind the shared group value
       with <code>[(ngModel)]</code>. Wrap the group in a <code>&lt;fieldset&gt;</code> /
@@ -39,11 +38,10 @@
       filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
       When <code>variant</code> is <code>null</code> (default), it inherits from
@@ -80,11 +78,10 @@
       filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -100,11 +97,10 @@
       filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Filled Appearance ---------------------------------------- -->
-  <section class="demo-section" id="filled" data-doc-anchor>
-    <h2 class="demo-section__title">Filled Appearance</h2>
+  <app-doc-section id="filled" title="Filled Appearance">
     <p class="demo-section__description">
       Set <code>appearance="filled"</code> to use a solid checked background instead of
       the default outlined ring style.
@@ -127,11 +123,10 @@
       filename="Filled" [code]="snippets.filled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> on individual buttons. Disabled radios are
       automatically skipped during arrow-key navigation.
@@ -147,11 +142,10 @@
       filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- With ngModel --------------------------------------------- -->
-  <section class="demo-section" id="ngmodel" data-doc-anchor>
-    <h2 class="demo-section__title">With ngModel</h2>
+  <app-doc-section id="ngmodel" title="With ngModel">
     <p class="demo-section__description">
       All buttons in the group share the same <code>[(ngModel)]</code> binding.
       The button whose <code>[value]</code> matches the bound value becomes checked.
@@ -177,11 +171,10 @@
       filename="With ngModel" [code]="snippets.ngmodel"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
-  <section class="demo-section" id="reactive-forms" data-doc-anchor>
-    <h2 class="demo-section__title">Reactive Forms</h2>
+  <app-doc-section id="reactive-forms" title="Reactive Forms">
     <p class="demo-section__description">
       Use <code>formControlName</code> or <code>[formControl]</code> for reactive form
       integration. <code>FormControl.disable()</code> propagates through
@@ -210,10 +203,10 @@
       filename="Reactive forms" [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
@@ -225,16 +218,15 @@
       <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -314,7 +306,7 @@
       <li>All transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
   <app-doc-quality-badge [audit]="qualityAudit" />

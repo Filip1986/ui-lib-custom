@@ -9,8 +9,7 @@
   <!-- ══════════════════════════════════════════════════════════════════
        BASIC
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__desc">
       Use a template reference on the trigger and call <code>toggle()</code> with the trigger
       element. The popover positions itself automatically.
@@ -33,13 +32,12 @@
       [typescript]="basicTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        HEADER & CLOSE BUTTON
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="header-close-button" data-doc-anchor>
-    <h2 class="demo-section__title">Header &amp; Close Button</h2>
+  <app-doc-section id="header-close-button" title="Header &amp; Close Button">
     <p class="demo-section__desc">
       Provide a <code>header</code> string to render a title bar. Enable
       <code>showCloseButton</code> to add an × button inside the header.
@@ -66,13 +64,12 @@
       [typescript]="headerCloseTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        RICH CONTENT
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="rich-content" data-doc-anchor>
-    <h2 class="demo-section__title">Rich Content</h2>
+  <app-doc-section id="rich-content" title="Rich Content">
     <p class="demo-section__desc">
       The popover body accepts any projected content — text, lists, actions, or nested components.
     </p>
@@ -96,13 +93,12 @@
         </ul>
       </ui-lib-popover>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        VARIANTS
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__desc">Three design variants follow the library's visual system.</p>
 
     <div class="demo-row demo-row--gap">
@@ -121,13 +117,12 @@
         </ui-lib-popover>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        NON-DISMISSABLE
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="non-dismissable" data-doc-anchor>
-    <h2 class="demo-section__title">Non-dismissable</h2>
+  <app-doc-section id="non-dismissable" title="Non-dismissable">
     <p class="demo-section__desc">
       Set <code>[dismissable]="false"</code> to prevent click-away from closing the popover. The
       user must use the close button or press Escape.
@@ -150,13 +145,12 @@
         </p>
       </ui-lib-popover>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        EVENTS
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="events" data-doc-anchor>
-    <h2 class="demo-section__title">Events</h2>
+  <app-doc-section id="events" title="Events">
     <p class="demo-section__desc">
       Subscribe to <code>(shown)</code> and <code>(hidden)</code> to react to open/close
       transitions.
@@ -175,13 +169,12 @@
     <p class="demo-event-log">
       Last event: <strong>{{ lastEvent() }}</strong>
     </p>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        DECLARATIVE
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="declarative" data-doc-anchor>
-    <h2 class="demo-section__title">Declarative <code>[(visible)]</code></h2>
+  <app-doc-section id="declarative" title="Declarative <code>[(visible)]</code>">
     <p class="demo-section__desc">
       Control visibility with a two-way model binding instead of template refs. The popover will
       position itself relative to the viewport center when no target is set.
@@ -209,13 +202,12 @@
       [typescript]="declarativeTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        API
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-subsection__title">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -225,13 +217,12 @@
 
     <h3 class="demo-subsection__title">Public Methods</h3>
     <app-doc-api-reference kind="property" [rows]="apiMethodRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        TOC RAIL

@@ -7,7 +7,7 @@
   />
 
   <div class="examples">
-    <section id="basic-list" data-doc-anchor class="example-section">
+    <app-doc-section id="basic-list" title="Basic List">
       <h3>1. Basic List</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view [value]="shortProducts" [trackBy]="trackByProduct">
@@ -35,9 +35,9 @@
         </ui-lib-data-view>
       </ui-lib-panel>
       <app-doc-code-example [html]="basicListHtml" [typescript]="basicListTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="basic-grid" data-doc-anchor class="example-section">
+    <app-doc-section id="basic-grid" title="Basic Grid">
       <h3>2. Basic Grid</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
@@ -61,9 +61,9 @@
         </ui-lib-data-view>
       </ui-lib-panel>
       <app-doc-code-example [html]="basicGridHtml" [typescript]="basicGridTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="layout-switching" data-doc-anchor class="example-section">
+    <app-doc-section id="layout-switching" title="Layout Switching">
       <h3>3. Layout Switching</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
@@ -96,9 +96,9 @@
         [html]="layoutSwitchingHtml"
         [typescript]="layoutSwitchingTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="pagination-client" data-doc-anchor class="example-section">
+    <app-doc-section id="pagination-client" title="Pagination (Client-Side)">
       <h3>4. Pagination (Client-Side)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
@@ -114,9 +114,9 @@
         [html]="paginationClientHtml"
         [typescript]="paginationClientTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="rows-per-page" data-doc-anchor class="example-section">
+    <app-doc-section id="rows-per-page" title="Rows Per Page">
       <h3>5. Rows Per Page</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
@@ -137,9 +137,9 @@
         [html]="rowsPerPageHtml"
         [typescript]="rowsPerPageTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="pagination-position" data-doc-anchor class="example-section">
+    <app-doc-section id="pagination-position" title="Pagination Position">
       <h3>6. Pagination Position</h3>
       <ui-lib-grid minColumnWidth="320px" [spacing]="4">
         <ui-lib-panel variant="minimal">
@@ -188,9 +188,9 @@
         [html]="paginationPositionHtml"
         [typescript]="paginationPositionTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="custom-page-report" data-doc-anchor class="example-section">
+    <app-doc-section id="custom-page-report" title="Custom Page Report">
       <h3>7. Custom Page Report</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
@@ -212,9 +212,9 @@
         [html]="customPageReportHtml"
         [typescript]="customPageReportTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="server-side-pagination" data-doc-anchor class="example-section">
+    <app-doc-section id="server-side-pagination" title="Server-Side Pagination">
       <h3>8. Server-Side Pagination</h3>
       <p class="helper-text">
         This mock keeps <code>totalRecords</code> fixed and swaps in a sliced page on
@@ -246,9 +246,9 @@
         [html]="serverSidePaginationHtml"
         [typescript]="serverSidePaginationTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="sorting" data-doc-anchor class="example-section">
+    <app-doc-section id="sorting" title="Sorting (External Controls)">
       <h3>9. Sorting (External Controls)</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-stack [gap]="3">
@@ -277,9 +277,9 @@
         </ui-lib-stack>
       </ui-lib-panel>
       <app-doc-code-example [html]="sortingHtml" [typescript]="sortingTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="custom-templates" data-doc-anchor class="example-section">
+    <app-doc-section id="custom-templates" title="Custom Templates">
       <h3>10. Custom Templates</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
@@ -350,9 +350,9 @@
         [html]="customTemplatesHtml"
         [typescript]="customTemplatesTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="empty-state" data-doc-anchor class="example-section">
+    <app-doc-section id="empty-state" title="Empty State">
       <h3>11. Empty State</h3>
       <ui-lib-grid minColumnWidth="340px" [spacing]="4">
         <ui-lib-panel variant="minimal">
@@ -373,9 +373,9 @@
         </ui-lib-panel>
       </ui-lib-grid>
       <app-doc-code-example [html]="emptyStateHtml" [typescript]="emptyStateTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="loading-state" data-doc-anchor class="example-section">
+    <app-doc-section id="loading-state" title="Loading State">
       <h3>12. Loading State</h3>
       <ui-lib-grid minColumnWidth="340px" [spacing]="4">
         <ui-lib-panel variant="minimal">
@@ -396,9 +396,9 @@
         [html]="loadingStateHtml"
         [typescript]="loadingStateTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="sizes" data-doc-anchor class="example-section">
+    <app-doc-section id="sizes" title="Sizes">
       <h3>13. Sizes</h3>
       <ui-lib-grid minColumnWidth="280px" [spacing]="4" class="size-grid">
         <ui-lib-panel variant="minimal">
@@ -429,9 +429,9 @@
         </ui-lib-panel>
       </ui-lib-grid>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-    </section>
+    </app-doc-section>
 
-    <section id="grid-columns" data-doc-anchor class="example-section">
+    <app-doc-section id="grid-columns" title="Grid Column Count">
       <h3>14. Grid Column Count</h3>
       <ui-lib-grid minColumnWidth="340px" [spacing]="4">
         <ui-lib-panel variant="minimal">
@@ -483,9 +483,9 @@
         [html]="gridColumnsHtml"
         [typescript]="gridColumnsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="custom-paginator-slots" data-doc-anchor class="example-section">
+    <app-doc-section id="custom-paginator-slots" title="Custom Paginator Slots">
       <h3>15. Custom Paginator Slots</h3>
       <ui-lib-panel variant="minimal">
         <ui-lib-data-view
@@ -514,9 +514,9 @@
         [html]="customPaginatorSlotsHtml"
         [typescript]="customPaginatorSlotsTs"
       />
-    </section>
+    </app-doc-section>
 
-    <section id="theme-integration" data-doc-anchor class="example-section">
+    <app-doc-section id="theme-integration" title="Theme Integration">
       <h3>16. Theme Integration</h3>
       <ui-lib-grid minColumnWidth="320px" [spacing]="4" class="theme-grid">
         <ui-lib-panel variant="minimal">
@@ -550,19 +550,18 @@
         [html]="themeIntegrationHtml"
         [typescript]="themeIntegrationTs"
       />
-    </section>
+    </app-doc-section>
   </div>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-data-view</code>. Import from
       <code>ui-lib-custom/data-view</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -12,8 +12,7 @@
   />
 
   <!-- ─── Section: Severities ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="severities" data-doc-anchor>
-    <h2 class="demo-section__title">Severities</h2>
+  <app-doc-section id="severities" title="Severities">
     <p class="demo-section__description">
       Four severity levels map to distinct colour palettes and icons.
     </p>
@@ -23,11 +22,10 @@
       <ui-lib-button label="Warning" severity="warn" (click)="showWarn()" />
       <ui-lib-button label="Error" severity="danger" (click)="showError()" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Section: Multiple ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="multiple-toasts" data-doc-anchor>
-    <h2 class="demo-section__title">Multiple Toasts</h2>
+  <app-doc-section id="multiple-toasts" title="Multiple Toasts">
     <p class="demo-section__description">
       Multiple toasts can be displayed simultaneously and stack in the container.
     </p>
@@ -35,11 +33,10 @@
       <ui-lib-button label="Show multiple" (click)="showMultiple()" />
       <ui-lib-button label="Clear all" (click)="clearAll()" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Section: Sticky & Closable ───────────────────────────────────────── -->
-  <section class="demo-section" id="sticky-non-closable" data-doc-anchor>
-    <h2 class="demo-section__title">Sticky &amp; Non-Closable</h2>
+  <app-doc-section id="sticky-non-closable" title="Sticky &amp; Non-Closable">
     <p class="demo-section__description">
       Set <code>sticky: true</code> to prevent auto-dismissal. Set
       <code>closable: false</code> to hide the close button.
@@ -48,11 +45,10 @@
       <ui-lib-button label="Sticky" severity="warn" (click)="showSticky()" />
       <ui-lib-button label="No close button" (click)="showNonClosable()" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Section: Life duration ───────────────────────────────────────────── -->
-  <section class="demo-section" id="auto-dismiss-duration" data-doc-anchor>
-    <h2 class="demo-section__title">Auto-dismiss Duration</h2>
+  <app-doc-section id="auto-dismiss-duration" title="Auto-dismiss Duration">
     <p class="demo-section__description">
       Control how long a toast stays visible with the <code>life</code> property
       (milliseconds). Per-message <code>life</code> overrides the container default.
@@ -61,11 +57,10 @@
       <ui-lib-button label="1.5 s (quick)" (click)="showShortLife()" />
       <ui-lib-button label="8 s (long)" (click)="showLongLife()" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Section: Position & Variant picker ───────────────────────────────── -->
-  <section class="demo-section" id="position-variant" data-doc-anchor>
-    <h2 class="demo-section__title">Position &amp; Variant</h2>
+  <app-doc-section id="position-variant" title="Position &amp; Variant">
     <p class="demo-section__description">
       Choose a position and design variant, then trigger a toast to see it in action.
     </p>
@@ -108,11 +103,10 @@
       <ui-lib-button label="Warning" severity="warn" (click)="showPositioned('warn')" />
       <ui-lib-button label="Error" severity="danger" (click)="showPositioned('error')" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Section: Keyed containers ────────────────────────────────────────── -->
-  <section class="demo-section" id="keyed-containers" data-doc-anchor>
-    <h2 class="demo-section__title">Keyed Containers</h2>
+  <app-doc-section id="keyed-containers" title="Keyed Containers">
     <p class="demo-section__description">
       Use the <code>key</code> input on both the container and the message to route
       toasts to a specific container. Useful for displaying toasts in different
@@ -124,11 +118,10 @@
         (click)="showKeyed()"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Section: API ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">Toast API</h2>
+  <app-doc-section id="api" title="Toast API">
 
     <h3 class="demo-section__subtitle">Toast container inputs</h3>
     <app-doc-api-reference [rows]="apiContainerInputRows" />
@@ -138,13 +131,12 @@
 
     <h3 class="demo-section__subtitle">ToastService methods</h3>
     <app-doc-api-reference kind="property" [rows]="apiServiceRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

@@ -15,8 +15,7 @@
   </div>
 
   <!-- Section: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Declarative usage — bind <code>[(visible)]</code> and listen to <code>(accepted)</code> /
       <code>(rejected)</code> outputs.
@@ -32,11 +31,10 @@
       (accepted)="onAccepted('Basic')"
       (rejected)="onRejected('Basic')"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section: Dismissable mask -->
-  <section class="demo-section" id="dismissable-backdrop" data-doc-anchor>
-    <h2 class="demo-section__title">Dismissable Backdrop</h2>
+  <app-doc-section id="dismissable-backdrop" title="Dismissable Backdrop">
     <p class="demo-section__description">
       Set <code>dismissableMask</code> to close the dialog by clicking the backdrop.
     </p>
@@ -52,11 +50,10 @@
       (accepted)="onAccepted('Dismissable')"
       (rejected)="onRejected('Dismissable')"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section: No close button -->
-  <section class="demo-section" id="non-closable" data-doc-anchor>
-    <h2 class="demo-section__title">Non-Closable</h2>
+  <app-doc-section id="non-closable" title="Non-Closable">
     <p class="demo-section__description">
       Set <code>closable="false"</code> to require the user to choose an action.
     </p>
@@ -72,11 +69,10 @@
       (accepted)="onAccepted('No-close')"
       (rejected)="onRejected('No-close')"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section: With icon -->
-  <section class="demo-section" id="with-icon" data-doc-anchor>
-    <h2 class="demo-section__title">With Icon</h2>
+  <app-doc-section id="with-icon" title="With Icon">
     <p class="demo-section__description">
       Pass an icon CSS class via the <code>icon</code> input to render a visual cue beside the
       message.
@@ -93,11 +89,10 @@
       (accepted)="onAccepted('Icon')"
       (rejected)="onRejected('Icon')"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section: Danger severity -->
-  <section class="demo-section" id="danger-severity" data-doc-anchor>
-    <h2 class="demo-section__title">Danger Severity</h2>
+  <app-doc-section id="danger-severity" title="Danger Severity">
     <p class="demo-section__description">
       Use <code>acceptSeverity="danger"</code> to signal a destructive action.
     </p>
@@ -117,11 +112,10 @@
       (accepted)="onAccepted('Delete')"
       (rejected)="onRejected('Delete')"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section: Position -->
-  <section class="demo-section" id="position" data-doc-anchor>
-    <h2 class="demo-section__title">Top Position</h2>
+  <app-doc-section id="position" title="Top Position">
     <p class="demo-section__description">
       Use <code>position="top"</code> to anchor the dialog to the top of the viewport.
     </p>
@@ -137,11 +131,10 @@
       (accepted)="onAccepted('Top')"
       (rejected)="onRejected('Top')"
     />
-  </section>
+  </app-doc-section>
 
   <!-- Section: Service-driven -->
-  <section class="demo-section" id="programmatic" data-doc-anchor>
-    <h2 class="demo-section__title">Programmatic — ConfirmationService</h2>
+  <app-doc-section id="programmatic" title="Programmatic — ConfirmationService">
     <p class="demo-section__description">
       Use <code>ConfirmationService.confirm(&#123; ... &#125;)</code> to trigger the dialog from any
       component. Place a single <code>&lt;ui-lib-confirm-dialog /&gt;</code> in your layout shell.
@@ -155,11 +148,10 @@
 
     <!-- Shared service dialog — no key means it catches all keyless service calls -->
     <ui-lib-confirm-dialog />
-  </section>
+  </app-doc-section>
 
   <!-- Section: Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__description">
       Three variants adapt the visual style to your project theme. Use the <code>variant</code> input
       or rely on <code>ThemeConfigService</code> for the global default.
@@ -176,24 +168,22 @@
     @for (variant of variants; track variant) {
       <ui-lib-confirm-dialog [key]="'variant-' + variant" [variant]="variant" />
     }
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-api__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-api__subtitle">Outputs</h3>
     <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

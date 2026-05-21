@@ -51,6 +51,7 @@ import {
   reactiveHtml,
   reactiveTsTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface InputMaskSizeItem {
   readonly label: string;
   readonly size: 'sm' | 'md' | 'lg';
@@ -78,6 +79,7 @@ interface InputMaskSizeItem {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './input-mask-demo.component.html',
   styleUrl: './input-mask-demo.component.scss',

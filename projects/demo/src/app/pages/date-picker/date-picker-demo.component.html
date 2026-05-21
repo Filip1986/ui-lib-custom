@@ -8,7 +8,7 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <ui-lib-panel variant="minimal">
           <div class="row-inline">
@@ -17,9 +17,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="format" data-doc-anchor class="example-section">
+      <app-doc-section id="format" title="Format">
         <h3>b. Format</h3>
         <ui-lib-panel variant="minimal">
           <div class="row-inline">
@@ -28,17 +28,17 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="formatHtml" [typescript]="formatTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="icon" data-doc-anchor class="example-section">
+      <app-doc-section id="icon" title="Icon">
         <h3>c. Icon</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />
         </ui-lib-panel>
         <app-doc-code-example [html]="iconHtml" [typescript]="iconTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="min-max" data-doc-anchor class="example-section">
+      <app-doc-section id="min-max" title="Min/Max">
         <h3>d. Min/Max</h3>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
@@ -53,9 +53,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="multiple" data-doc-anchor class="example-section">
+      <app-doc-section id="multiple" title="Multiple">
         <h3>e. Multiple</h3>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
@@ -64,9 +64,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="range" data-doc-anchor class="example-section">
+      <app-doc-section id="range" title="Range">
         <h3>f. Range</h3>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
@@ -75,17 +75,17 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="rangeHtml" [typescript]="rangeTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="button-bar" data-doc-anchor class="example-section">
+      <app-doc-section id="button-bar" title="Button Bar">
         <h3>g. Button Bar</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />
         </ui-lib-panel>
         <app-doc-code-example [html]="buttonBarHtml" [typescript]="buttonBarTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="time" data-doc-anchor class="example-section">
+      <app-doc-section id="time" title="Time">
         <h3>h. Time</h3>
         <ui-lib-panel variant="minimal">
           <div class="row-2">
@@ -108,17 +108,17 @@
           [html]="time24Html"
           [typescript]="time24Ts"
         />
-      </section>
+      </app-doc-section>
 
-      <section id="time-only" data-doc-anchor class="example-section">
+      <app-doc-section id="time-only" title="Time Only">
         <h3>i. Time Only</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />
         </ui-lib-panel>
         <app-doc-code-example [html]="timeOnlyHtml" [typescript]="timeOnlyTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="month-picker" data-doc-anchor class="example-section">
+      <app-doc-section id="month-picker" title="Month Picker">
         <h3>j. Month Picker</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />
@@ -127,9 +127,9 @@
           [html]="monthPickerHtml"
           [typescript]="monthPickerTs"
         />
-      </section>
+      </app-doc-section>
 
-      <section id="year-picker" data-doc-anchor class="example-section">
+      <app-doc-section id="year-picker" title="Year Picker">
         <h3>k. Year Picker</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />
@@ -138,9 +138,9 @@
           [html]="yearPickerHtml"
           [typescript]="yearPickerTs"
         />
-      </section>
+      </app-doc-section>
 
-      <section id="multiple-months" data-doc-anchor class="example-section">
+      <app-doc-section id="multiple-months" title="Multiple Months">
         <h3>l. Multiple Months</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />
@@ -149,17 +149,17 @@
           [html]="multipleMonthsHtml"
           [typescript]="multipleMonthsTs"
         />
-      </section>
+      </app-doc-section>
 
-      <section id="inline" data-doc-anchor class="example-section">
+      <app-doc-section id="inline" title="Inline">
         <h3>m. Inline</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />
         </ui-lib-panel>
         <app-doc-code-example [html]="inlineHtml" [typescript]="inlineTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>n. Sizes</h3>
         <ui-lib-panel variant="minimal">
           <div class="row-3">
@@ -169,9 +169,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="variants" data-doc-anchor class="example-section">
+      <app-doc-section id="variants" title="Variants">
         <h3>o. Variants</h3>
         <ui-lib-panel variant="minimal">
           <div class="row-3">
@@ -190,25 +190,25 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="filled" data-doc-anchor class="example-section">
+      <app-doc-section id="filled" title="Filled">
         <h3>p. Filled</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />
         </ui-lib-panel>
         <app-doc-code-example [html]="filledHtml" [typescript]="filledTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>q. Disabled</h3>
         <ui-lib-panel variant="minimal">
           <ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="invalid" data-doc-anchor class="example-section">
+      <app-doc-section id="invalid" title="Invalid">
         <h3>r. Invalid</h3>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
@@ -217,9 +217,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="reactive-forms" data-doc-anchor class="example-section">
+      <app-doc-section id="reactive-forms" title="Reactive Forms">
         <h3>s. Reactive Forms</h3>
         <ui-lib-panel variant="minimal">
           <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
@@ -237,20 +237,19 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-date-picker</code>. Import from
       <code>ui-lib-custom/date-picker</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

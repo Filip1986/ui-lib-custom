@@ -8,8 +8,7 @@
   />
 
   <!-- Interactive demo -->
-  <section class="demo-section" id="interactive-demo" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Demo</h2>
+  <app-doc-section id="interactive-demo" title="Interactive Demo">
 
     <!-- Controls -->
     <div class="demo-controls">
@@ -188,11 +187,10 @@
         }
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- All Variants -->
-  <section class="demo-section" id="all-variants" data-doc-anchor>
-    <h2 class="demo-section__title">All Variants</h2>
+  <app-doc-section id="all-variants" title="All Variants">
     @for (v of variants; track v) {
       <div class="variant-block">
         <h3 class="variant-label">{{ v }}</h3>
@@ -208,11 +206,10 @@
         </ui-lib-table>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Scrollable Table -->
-  <section class="demo-section" id="scrollable-table" data-doc-anchor>
-    <h2 class="demo-section__title">Scrollable Table</h2>
+  <app-doc-section id="scrollable-table" title="Scrollable Table">
     <ui-lib-table
       [value]="products()"
       dataKey="id"
@@ -227,18 +224,17 @@
       <ui-lib-table-column field="price"    header="Price"    [sortable]="true" />
       <ui-lib-table-column field="quantity" header="Qty" />
     </ui-lib-table>
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-table</code>. Import from
       <code>ui-lib-custom/table</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

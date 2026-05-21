@@ -35,6 +35,7 @@ import {
   reactiveTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for the Knob component — circular dial for numeric input.
  */
@@ -53,6 +54,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './knob-demo.component.html',
   styleUrl: './knob-demo.component.scss',

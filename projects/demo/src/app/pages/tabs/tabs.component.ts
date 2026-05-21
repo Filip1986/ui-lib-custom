@@ -65,6 +65,7 @@ import {
   perTabLazyHtml,
   perTabLazyTs,
 } from './snippets.generated';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface DemoTab {
   value: TabsValue;
   label: string;
@@ -112,6 +113,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     DocKeyboardNavComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',

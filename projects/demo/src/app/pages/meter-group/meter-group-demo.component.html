@@ -10,8 +10,7 @@
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Pass an array of <code>MeterItem</code> objects via <code>[values]</code>. Each item requires
       a <code>label</code>, a numeric <code>value</code>, and a CSS <code>color</code>. The legend
@@ -25,11 +24,10 @@
       [typescript]="basicTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Label Position ------------------------------------------- -->
-  <section class="demo-section" id="label-position" data-doc-anchor>
-    <h2 class="demo-section__title">Label Position</h2>
+  <app-doc-section id="label-position" title="Label Position">
     <p class="demo-section__description">
       Use <code>labelPosition="start"</code> to move the legend above the bar. Items can include an
       optional <code>icon</code> (a PrimeIcons class) shown inside the legend swatch.
@@ -49,11 +47,10 @@
       [typescript]="labelPositionTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three bar thicknesses: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -70,11 +67,10 @@
       [typescript]="sizesTs"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Design Variants ------------------------------------------ -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code> (pill-shaped, soft shadow),
       <code>bootstrap</code> (squared corners, no gap), and <code>minimal</code> (flat, almost
@@ -95,11 +91,10 @@
       [code]="variantsHtml"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Vertical Orientation -------------------------------------- -->
-  <section class="demo-section" id="vertical" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Orientation</h2>
+  <app-doc-section id="vertical" title="Vertical Orientation">
     <p class="demo-section__description">
       Set <code>orientation="vertical"</code> to stack segments vertically. The legend is placed to
       the right by default (<code>labelPosition="end"</code>).
@@ -120,11 +115,10 @@
       [code]="verticalHtml"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- No Legend ------------------------------------------------ -->
-  <section class="demo-section" id="no-legend" data-doc-anchor>
-    <h2 class="demo-section__title">No Legend</h2>
+  <app-doc-section id="no-legend" title="No Legend">
     <p class="demo-section__description">
       Set <code>[showLabels]="false"</code> to render the bar without a legend — useful as a compact
       inline indicator.
@@ -138,11 +132,10 @@
       [code]="noLegendHtml"
       [showLineNumbers]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Playground ----------------------------------------------- -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <div class="demo-playground demo-playground--column">
       <div class="demo-playground__preview demo-playground__preview--full">
         <ui-lib-meter-group
@@ -216,10 +209,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <table class="doc-properties">
@@ -346,16 +339,15 @@
         </tbody>
       </table>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
       <table class="doc-properties">
@@ -452,7 +444,7 @@
       </li>
       <li>All segment transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
     </ul>
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
   <app-doc-quality-badge [audit]="qualityAudit" />

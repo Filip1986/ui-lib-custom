@@ -42,6 +42,7 @@ import {
   clippingTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 /**
  * Demo page for ColorPicker component usage and forms integration.
  */
@@ -62,6 +63,7 @@ import {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './color-picker-demo.component.html',
   styleUrl: './color-picker-demo.component.scss',

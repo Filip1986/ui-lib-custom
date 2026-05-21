@@ -36,6 +36,7 @@ import {
   urlItemsTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 interface AriaRow {
   readonly element: string;
   readonly attribute: string;
@@ -88,6 +89,7 @@ interface MenuItemRow {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
+    DocSectionComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',

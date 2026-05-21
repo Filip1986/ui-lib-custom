@@ -14,30 +14,27 @@
   </div>
 
   <!-- Section 1: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__desc">
       A plain horizontal divider with no content.
     </p>
     <p>Content above</p>
     <ui-lib-divider />
     <p>Content below</p>
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: With Label -->
-  <section class="demo-section" id="with-label" data-doc-anchor>
-    <h2 class="demo-section__title">With Label</h2>
+  <app-doc-section id="with-label" title="With Label">
     <p class="demo-section__desc">
       Project text or other elements into the divider using content projection.
     </p>
     <p>Sign in with email</p>
     <ui-lib-divider>OR</ui-lib-divider>
     <p>Sign in with SSO</p>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Alignment -->
-  <section class="demo-section" id="alignment" data-doc-anchor>
-    <h2 class="demo-section__title">Alignment</h2>
+  <app-doc-section id="alignment" title="Alignment">
     <p class="demo-section__desc">
       Use the <code>align</code> input to position the label at
       <code>left</code>, <code>center</code> (default), or <code>right</code>.
@@ -47,11 +44,10 @@
         <ui-lib-divider [align]="align">{{ align }}</ui-lib-divider>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Line Types -->
-  <section class="demo-section" id="line-types" data-doc-anchor>
-    <h2 class="demo-section__title">Line Types</h2>
+  <app-doc-section id="line-types" title="Line Types">
     <p class="demo-section__desc">
       Three line styles are available via the <code>type</code> input:
       <code>solid</code> (default), <code>dashed</code>, and <code>dotted</code>.
@@ -61,11 +57,10 @@
         <ui-lib-divider [type]="type">{{ type }}</ui-lib-divider>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Vertical -->
-  <section class="demo-section" id="vertical" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical</h2>
+  <app-doc-section id="vertical" title="Vertical">
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> to render a vertical separator.
       Use inside a flex container; the divider stretches to fill the available height.
@@ -86,11 +81,10 @@
       <ui-lib-divider orientation="vertical">OR</ui-lib-divider>
       <div class="demo-vertical-panel">Panel B</div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: Vertical Alignment -->
-  <section class="demo-section" id="vertical-alignment" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Alignment</h2>
+  <app-doc-section id="vertical-alignment" title="Vertical Alignment">
     <p class="demo-section__desc">
       For vertical dividers, use <code>align="top"</code>, <code>align="center"</code>,
       or <code>align="bottom"</code>.
@@ -102,11 +96,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 7: Design Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
     </p>
@@ -117,11 +110,10 @@
         <ui-lib-divider [variant]="variant" type="dashed" />
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: Interactive Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__desc">Customise the divider using the controls below.</p>
 
     <div class="demo-playground">
@@ -264,13 +256,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

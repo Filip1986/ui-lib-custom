@@ -8,8 +8,7 @@
   />
 
   <!-- ── Basic ──────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Default dock positioned at the bottom with the material variant and magnification enabled.
       Hover over items to see the magnification effect; click to trigger the command.
@@ -30,11 +29,10 @@
         [code]="snippetBasic"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants are available: <code>material</code> (frosted glass),
       <code>bootstrap</code> (solid background), and <code>minimal</code> (no background or border).
@@ -60,11 +58,10 @@
         [code]="snippetVariants"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ──────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       The <code>size</code> input controls icon and item dimensions via design tokens.
     </p>
@@ -89,11 +86,10 @@
         [code]="snippetSizes"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Positions ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="positions" data-doc-anchor>
-    <h2 class="demo-section__title">Positions</h2>
+  <app-doc-section id="positions" title="Positions">
     <p class="demo-section__description">
       The dock can be anchored to any edge of its container. For vertical positions
       (<code>left</code>, <code>right</code>), the list is rendered as a column.
@@ -121,11 +117,10 @@
         [code]="snippetPositions"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── No magnification ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="no-magnification" data-doc-anchor>
-    <h2 class="demo-section__title">No Magnification</h2>
+  <app-doc-section id="no-magnification" title="No Magnification">
     <p class="demo-section__description">
       Set <code>[magnification]="false"</code> to render a static dock without the scale
       animation — useful in compact layouts or for users who prefer reduced motion.
@@ -146,11 +141,10 @@
         [code]="snippetNoMagnification"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Disabled items ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-items" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Items</h2>
+  <app-doc-section id="disabled-items" title="Disabled Items">
     <p class="demo-section__description">
       Individual items can be disabled by setting <code>disabled: true</code>. Disabled items
       are styled with reduced opacity, are not interactive, and are announced to screen readers
@@ -171,11 +165,10 @@
         [code]="snippetDisabledItems"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Link items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="link-items" data-doc-anchor>
-    <h2 class="demo-section__title">Link Items</h2>
+  <app-doc-section id="link-items" title="Link Items">
     <p class="demo-section__description">
       Items with a <code>url</code> render as <code>&lt;a href&gt;</code> anchors.
       Items with <code>routerLink</code> use Angular's router. Items with only a
@@ -196,11 +189,10 @@
         [code]="snippetLinkItems"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Interactive playground ────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Playground</h2>
+  <app-doc-section id="playground" title="Interactive Playground">
     <p class="demo-section__description">
       Adjust variant, size, position, and magnification settings below to explore combinations.
     </p>
@@ -294,11 +286,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API ────────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-section__subtitle">Dock Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -308,13 +299,12 @@
 
     <h3 class="demo-section__subtitle">DockItem Interface</h3>
     <app-doc-api-reference kind="property" [rows]="apiDockItemRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>

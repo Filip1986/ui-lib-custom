@@ -9,8 +9,7 @@
   </app-doc-page-header>
 
   <!-- Section 1: Start Only -->
-  <section class="demo-section" id="start-only" data-doc-anchor>
-    <h2 class="demo-section__title">Start Only</h2>
+  <app-doc-section id="start-only" title="Start Only">
     <p class="demo-section__description">
       Project content using the <code>uiToolbarStart</code> attribute selector.
     </p>
@@ -21,11 +20,10 @@
         <ui-lib-button type="button">Save</ui-lib-button>
       </div>
     </ui-lib-toolbar>
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Start and End -->
-  <section class="demo-section" id="start-and-end" data-doc-anchor>
-    <h2 class="demo-section__title">Start and End</h2>
+  <app-doc-section id="start-and-end" title="Start and End">
     <p class="demo-section__description">
       Use both <code>uiToolbarStart</code> and <code>uiToolbarEnd</code> to place content on opposite sides.
     </p>
@@ -40,11 +38,10 @@
         <ui-lib-button type="button">Redo</ui-lib-button>
       </div>
     </ui-lib-toolbar>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: All Three Slots -->
-  <section class="demo-section" id="all-three-slots" data-doc-anchor>
-    <h2 class="demo-section__title">All Three Slots</h2>
+  <app-doc-section id="all-three-slots" title="All Three Slots">
     <p class="demo-section__description">
       Combine all three slots — start, center, and end — for a full toolbar layout.
     </p>
@@ -61,11 +58,10 @@
         <ui-lib-button type="button">Print</ui-lib-button>
       </div>
     </ui-lib-toolbar>
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Sizes -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Use the <code>size</code> input to control toolbar height and spacing:
       <code>sm</code>, <code>md</code> (default), or <code>lg</code>.
@@ -84,11 +80,10 @@
         </ui-lib-toolbar>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Design Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__description">
       Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
     </p>
@@ -108,11 +103,10 @@
         </ui-lib-toolbar>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: Interactive Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Customise the toolbar using the controls below.</p>
 
     <div class="demo-playground">
@@ -166,18 +160,17 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="inputRows" />
 
     <h3 class="demo-section__subtitle">Content Projection Slots</h3>
     <app-doc-api-reference kind="property" [rows]="slotRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

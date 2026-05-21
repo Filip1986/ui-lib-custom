@@ -8,8 +8,7 @@
   />
 
   <!-- ── Basic ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-toggle-switch label="Off by default" [(checked)]="basicChecked" />
@@ -24,11 +23,10 @@
         <span class="demo-hint">(no visible label — uses aria-label)</span>
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <ui-lib-panel variant="minimal">
       <div class="demo-variants-grid">
         @for (variant of variants; track variant) {
@@ -48,11 +46,10 @@
         }
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <ui-lib-panel variant="minimal">
       <div class="demo-sizes-row">
         @for (size of sizes; track size) {
@@ -62,11 +59,10 @@
         }
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── Disabled &amp; Readonly ─────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-readonly" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled &amp; Readonly</h2>
+  <app-doc-section id="disabled-readonly" title="Disabled &amp; Readonly">
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-toggle-switch label="Disabled (off)" [disabled]="true" />
@@ -77,22 +73,20 @@
         <ui-lib-toggle-switch label="Readonly (on)" [readonly]="true" [checked]="true" />
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── ngModel ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="ngmodel" data-doc-anchor>
-    <h2 class="demo-section__title">Two-way binding (ngModel)</h2>
+  <app-doc-section id="ngmodel" title="Two-way binding (ngModel)">
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-toggle-switch label="Sync with ngModel" [(ngModel)]="ngModelValue" />
         <span class="demo-state">ngModel value: {{ ngModelValue }}</span>
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── Reactive forms ────────────────────────────────────────────────── -->
-  <section class="demo-section" id="reactive-forms" data-doc-anchor>
-    <h2 class="demo-section__title">Reactive Forms</h2>
+  <app-doc-section id="reactive-forms" title="Reactive Forms">
     <ui-lib-panel variant="minimal">
       <div class="demo-row">
         <ui-lib-toggle-switch label="Notifications" [formControl]="notificationsControl" />
@@ -102,11 +96,10 @@
         <ui-lib-toggle-switch label="Disabled via FormControl" [formControl]="disabledControl" />
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── Playground ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <ui-lib-panel variant="minimal">
       <div class="demo-playground">
         <div class="demo-playground__controls">
@@ -162,24 +155,22 @@
         </div>
       </div>
     </ui-lib-panel>
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>ui-lib-toggle-switch</code>. Import from
       <code>ui-lib-custom/toggle-switch</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

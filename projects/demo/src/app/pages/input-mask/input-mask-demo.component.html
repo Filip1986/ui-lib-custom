@@ -8,7 +8,7 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">Phone mask with ngModel and a live model preview.</p>
         <ui-lib-panel variant="minimal">
@@ -22,9 +22,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="mask-formats" data-doc-anchor class="example-section">
+      <app-doc-section id="mask-formats" title="Mask Formats">
         <h3>b. Mask Formats</h3>
         <p class="section-text">Phone, date, SSN, and mixed alphanumeric serial examples.</p>
         <ui-lib-panel variant="minimal">
@@ -64,9 +64,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="formatsHtml" [typescript]="formatsTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="optional" data-doc-anchor class="example-section">
+      <app-doc-section id="optional" title="Optional">
         <h3>c. Optional</h3>
         <p class="section-text">Optional extension segment (`?`) with autoClear toggle.</p>
         <ui-lib-panel variant="minimal">
@@ -89,9 +89,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="optionalHtml" [typescript]="optionalTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="slot-character" data-doc-anchor class="example-section">
+      <app-doc-section id="slot-character" title="Slot Character">
         <h3>d. Slot Character</h3>
         <p class="section-text">Compare `_`, `#`, and `*` placeholder slot characters.</p>
         <ui-lib-panel variant="minimal">
@@ -129,9 +129,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="slotCharsHtml" [typescript]="slotCharsTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="unmask" data-doc-anchor class="example-section">
+      <app-doc-section id="unmask" title="Unmask">
         <h3>e. Unmask</h3>
         <p class="section-text">Side-by-side formatted model output and raw unmasked output.</p>
         <ui-lib-panel variant="minimal">
@@ -158,9 +158,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="unmaskHtml" [typescript]="unmaskTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="filled" data-doc-anchor class="example-section">
+      <app-doc-section id="filled" title="Filled">
         <h3>f. Filled</h3>
         <p class="section-text">Filled state styling using the `filled` input.</p>
         <ui-lib-panel variant="minimal">
@@ -172,9 +172,9 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="filledHtml" [typescript]="filledTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="float-label" data-doc-anchor class="example-section">
+      <app-doc-section id="float-label" title="Float Label">
         <h3>g. Float Label</h3>
         <p class="section-text">`uilib-input-mask` composed inside `uilib-float-label`.</p>
         <ui-lib-panel variant="minimal">
@@ -191,9 +191,9 @@
           [html]="floatLabelHtml"
           [typescript]="floatLabelTsTs"
         />
-      </section>
+      </app-doc-section>
 
-      <section id="ifta-label" data-doc-anchor class="example-section">
+      <app-doc-section id="ifta-label" title="Ifta Label">
         <h3>h. Ifta Label</h3>
         <p class="section-text">Inline label style via `uilib-float-label` with `variant="in"`.</p>
         <ui-lib-panel variant="minimal">
@@ -207,9 +207,9 @@
           </uilib-float-label>
         </ui-lib-panel>
         <app-doc-code-example [html]="iftaLabelHtml" [typescript]="iftaLabelTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>i. Sizes</h3>
         <p class="section-text">Small, medium, and large InputMask size variants.</p>
         <ui-lib-panel variant="minimal">
@@ -228,9 +228,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="fluid" data-doc-anchor class="example-section">
+      <app-doc-section id="fluid" title="Fluid">
         <h3>j. Fluid</h3>
         <p class="section-text">Full-width mask input using the `fluid` input.</p>
         <ui-lib-panel variant="minimal">
@@ -245,9 +245,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="fluidHtml" [typescript]="fluidTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>k. Disabled</h3>
         <p class="section-text">Disabled input with a pre-filled value.</p>
         <ui-lib-panel variant="minimal">
@@ -259,9 +259,9 @@
           />
         </ui-lib-panel>
         <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="invalid" data-doc-anchor class="example-section">
+      <app-doc-section id="invalid" title="Invalid">
         <h3>l. Invalid</h3>
         <p class="section-text">Invalid state styling for validation feedback scenarios.</p>
         <ui-lib-panel variant="minimal">
@@ -276,9 +276,9 @@
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTsTs" />
-      </section>
+      </app-doc-section>
 
-      <section id="reactive-forms" data-doc-anchor class="example-section">
+      <app-doc-section id="reactive-forms" title="Reactive Forms">
         <h3>m. Reactive Forms</h3>
         <p class="section-text">ControlValueAccessor integration in a typed FormGroup.</p>
         <ui-lib-panel variant="minimal">
@@ -298,20 +298,19 @@
           </form>
         </ui-lib-panel>
         <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTsTs" />
-      </section>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
       All inputs accepted by <code>uilib-input-mask</code>. Import from
       <code>ui-lib-custom/input-mask</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -21,6 +21,7 @@ import type { ComponentQualityAudit } from '../../shared/doc-page/doc-quality-ba
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 
 interface AriaRow {
   readonly attribute: string;
@@ -49,6 +50,7 @@ interface AriaRow {
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',

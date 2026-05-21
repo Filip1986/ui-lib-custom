@@ -64,6 +64,7 @@ import {
   clippingTs,
 } from './snippets.generated';
 
+import { DocSectionComponent } from '../../shared/doc-page/doc-section.component';
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
 /**
@@ -93,6 +94,7 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',

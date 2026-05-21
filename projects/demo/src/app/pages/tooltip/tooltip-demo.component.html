@@ -8,8 +8,7 @@
   </app-doc-page-header>
 
   <!-- Section 1: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Add <code>[uiLibTooltip]</code> with the label text to any element. The tooltip appears above
       the host by default.
@@ -20,11 +19,10 @@
       <ui-lib-button uiLibTooltip="Share with others">Share</ui-lib-button>
     </div>
     <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: Positions -->
-  <section class="demo-section" id="positions" data-doc-anchor>
-    <h2 class="demo-section__title">Positions</h2>
+  <app-doc-section id="positions" title="Positions">
     <p class="demo-section__description">
       Use <code>tooltipPosition</code> to control placement: <code>top</code>, <code>bottom</code>,
       <code>left</code>, or <code>right</code>. The tooltip flips automatically if there is
@@ -37,11 +35,10 @@
       <ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>
     </div>
     <app-doc-code-example [html]="positionsHtml" [typescript]="positionsTs" />
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Focus event -->
-  <section class="demo-section" id="focus-event" data-doc-anchor>
-    <h2 class="demo-section__title">Focus event</h2>
+  <app-doc-section id="focus-event" title="Focus event">
     <p class="demo-section__description">
       Set <code>tooltipEvent="focus"</code> to show the tooltip on keyboard focus instead of hover.
       Useful for form inputs to provide contextual guidance. Use <code>"both"</code> to support both
@@ -62,11 +59,10 @@
       />
     </div>
     <app-doc-code-example [html]="focusEventHtml" [typescript]="focusEventTs" />
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Show and hide delays -->
-  <section class="demo-section" id="show-hide-delays" data-doc-anchor>
-    <h2 class="demo-section__title">Show &amp; hide delays</h2>
+  <app-doc-section id="show-hide-delays" title="Show &amp; hide delays">
     <p class="demo-section__description">
       Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to debounce rapid mouse
       movements. Useful in dense UIs to avoid tooltip flicker.
@@ -83,11 +79,10 @@
       </ui-lib-button>
     </div>
     <app-doc-code-example [html]="showHideDelaysHtml" [typescript]="showHideDelaysTs" />
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Disabled -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely. Bind to a signal
       for runtime toggling.
@@ -101,11 +96,10 @@
       </ui-lib-button>
     </div>
     <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant is inherited
@@ -135,11 +129,10 @@
       </ui-lib-button>
     </div>
     <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
-  </section>
+  </app-doc-section>
 
   <!-- Section 7: Long text -->
-  <section class="demo-section" id="long-text" data-doc-anchor>
-    <h2 class="demo-section__title">Long text</h2>
+  <app-doc-section id="long-text" title="Long text">
     <p class="demo-section__description">
       The tooltip wraps text at <code>14rem</code> max width and breaks long words automatically.
     </p>
@@ -151,14 +144,13 @@
         Hover for long text
       </ui-lib-button>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <h3 class="demo-section__subtitle">Selector: <code>[uiLibTooltip]</code></h3>
     <app-doc-api-reference [rows]="apiRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
 

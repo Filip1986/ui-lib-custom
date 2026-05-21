@@ -8,8 +8,7 @@
   />
 
   <!-- Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">Click to open a right-side drawer with a header and content.</p>
     <div class="demo-section__content">
       <ui-lib-button type="button" (click)="basicOpen.set(true)">Open Drawer</ui-lib-button>
@@ -19,11 +18,10 @@
       <p>This is the default drawer sliding in from the right. Use <code>[(visible)]</code> to control open state.</p>
       <p>You can project any content inside the drawer body.</p>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Positions -->
-  <section class="demo-section" id="positions" data-doc-anchor>
-    <h2 class="demo-section__title">Positions</h2>
+  <app-doc-section id="positions" title="Positions">
     <p class="demo-section__description">
       Use the <code>position</code> input to slide the drawer in from any edge.
     </p>
@@ -41,11 +39,10 @@
     >
       <p>Drawer is sliding in from the <strong>{{ currentPosition() }}</strong>.</p>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants match the library's global theme: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
     </p>
@@ -62,11 +59,10 @@
     >
       <p>This drawer uses the <strong>{{ currentVariant() }}</strong> design variant.</p>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- No modal -->
-  <section class="demo-section" id="without-backdrop" data-doc-anchor>
-    <h2 class="demo-section__title">Without Backdrop</h2>
+  <app-doc-section id="without-backdrop" title="Without Backdrop">
     <p class="demo-section__description">
       Set <code>[modal]="false"</code> to remove the backdrop — the rest of the page stays interactive.
     </p>
@@ -78,11 +74,10 @@
       <p>The page behind this drawer remains scrollable and interactive.</p>
       <ui-lib-button size="sm" type="button" (click)="noBackdropOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Footer slot -->
-  <section class="demo-section" id="with-footer" data-doc-anchor>
-    <h2 class="demo-section__title">With Footer</h2>
+  <app-doc-section id="with-footer" title="With Footer">
     <p class="demo-section__description">
       Project an element with <code>drawerFooter</code> attribute to render a sticky footer.
     </p>
@@ -110,11 +105,10 @@
         <ui-lib-button type="button" (click)="footerOpen.set(false)">Save changes</ui-lib-button>
       </div>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Full-screen -->
-  <section class="demo-section" id="full-screen" data-doc-anchor>
-    <h2 class="demo-section__title">Full Screen</h2>
+  <app-doc-section id="full-screen" title="Full Screen">
     <p class="demo-section__description">
       Set <code>size="100vw"</code> (or <code>100vh</code> for top/bottom) for a full-screen drawer.
     </p>
@@ -126,11 +120,10 @@
       <p>This drawer spans the full viewport width.</p>
       <ui-lib-button type="button" (click)="fullScreenOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api-reference" title="API Reference">
 
     <h3 class="demo-subsection__title">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -140,13 +133,12 @@
 
     <h3 class="demo-subsection__title">Content Projection</h3>
     <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
-  <section class="demo-section" id="keyboard-navigation" data-doc-anchor>
-    <h2 class="demo-section__title">Keyboard Navigation</h2>
+  <app-doc-section id="keyboard-navigation" title="Keyboard Navigation">
     <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </section>
+  </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
