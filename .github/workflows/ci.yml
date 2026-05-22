@@ -71,6 +71,9 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
       - name: Install Storybook Angular build deps
-        run: npm install --legacy-peer-deps --no-save @compodoc/compodoc @angular-devkit/build-angular@$(node -p "require('./node_modules/@angular/build/package.json').version")
+        run: |
+          # Storybook Angular expects @angular-devkit/build-angular and it must match @angular/build.
+          ANGULAR_BUILD_VERSION=$(node -p "require('./node_modules/@angular/build/package.json').version")
+          npm install --legacy-peer-deps --no-save @compodoc/compodoc @angular-devkit/build-angular@$ANGULAR_BUILD_VERSION
       - name: Build Storybook
         run: npm run build-storybook
