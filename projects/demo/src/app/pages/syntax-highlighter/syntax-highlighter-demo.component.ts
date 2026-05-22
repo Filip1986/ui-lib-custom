@@ -5,9 +5,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
-import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
-import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
-
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
@@ -26,7 +24,7 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
     CodeSnippet,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocApiReferenceComponent,
+    DocPageHeaderComponent,
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
@@ -261,26 +259,6 @@ export class SyntaxHighlighterDemoComponent {
     if (language === 'html') return this.htmlCode;
     return this.scssCode;
   }
-
-  public readonly apiRows: ApiPropRow[] = [
-    {
-      name: 'highlight(code, language)',
-      type: 'string → string',
-      description:
-        'Returns an HTML string with token spans. The output is HTML-escaped and safe to set as innerHTML.',
-    },
-    {
-      name: 'tokenize(code, language)',
-      type: 'string → SyntaxToken[]',
-      description: 'Returns an array of typed token objects ({type, value}) for custom rendering.',
-    },
-    {
-      name: 'escapeForCode(code)',
-      type: 'string → string',
-      description:
-        'HTML-escapes a raw string without tokenising — useful for languages without a built-in tokeniser (JSON, Bash, Text).',
-    },
-  ];
 
   public readonly ariaRows: readonly AriaRow[] = [
     {

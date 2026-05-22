@@ -10,6 +10,8 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
@@ -37,12 +39,6 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-interface AriaRow {
-  readonly element: string;
-  readonly attribute: string;
-  readonly value: string;
-  readonly notes: string;
-}
 
 interface InputRow {
   readonly name: string;
@@ -90,6 +86,7 @@ interface MenuItemRow {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
@@ -489,7 +486,7 @@ export class MenuDemoComponent {
 
   // ── Accessibility data ────────────────────────────────────────────────────
 
-  public readonly ariaRows: AriaRow[] = [
+  public readonly ariaRows: readonly AriaRow[] = [
     {
       element: 'Panel <code>&lt;div&gt;</code>',
       attribute: '<code>role</code>',

@@ -273,33 +273,10 @@
   ══════════════════════════════════════════════════════════════════ -->
   <app-doc-section id="accessibility" title="Accessibility">
 
-    <div id="a11y-aria" data-doc-anchor>
-      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Attribute" field="attribute" width="140px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.attribute }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Element" field="element" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span>{{ row.element }}</span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Value" field="value" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.value }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Notes" field="notes">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.notes"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
-    </div>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
 
-    <div id="a11y-keyboard" data-doc-anchor>
+    <div data-doc-anchor>
       <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
       <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
