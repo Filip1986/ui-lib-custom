@@ -1,19 +1,13 @@
 <app-doc-page-layout #layout [sections]="sections">
-  <div class="demo-page">
+  <app-doc-page-header
+    docHeader
+    title="SyntaxHighlighter"
+    [importCode]="importCode"
+    description="A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates, and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired colours. Fully integrated with ui-lib-code-snippet."
+    [tags]="['Utility']"
+  />
 
-    <!-- ── Header ──────────────────────────────────────────────────────────── -->
-    <div class="demo-header">
-      <div class="demo-header__badge">Utility</div>
-      <h1 class="demo-header__title">SyntaxHighlighter</h1>
-      <p class="demo-header__description">
-        A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates,
-        and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired
-        colours. Fully integrated with <code>ui-lib-code-snippet</code>.
-      </p>
-      <ui-lib-code-snippet [code]="importCode" language="typescript"
-        [showLineNumbers]="false"
-        />
-    </div>
+  <div class="demo-page">
 
     <!-- ── Overview ────────────────────────────────────────────────────────── -->
     <app-doc-section id="overview" title="Overview">
@@ -265,14 +259,6 @@
   </div>
 
 
-  <!-- ── API Reference ──────────────────────────────────────────────────── -->
-  <app-doc-section id="api" title="API Reference">
-    <p class="demo-section__description">
-      All inputs accepted by <code>syntax-highlighter</code>. Import from
-      <code>ui-lib-custom/syntax-highlighter</code>.
-    </p>
-    <app-doc-api-reference [rows]="apiRows" />
-  </app-doc-section>
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <p class="demo-section__description">
