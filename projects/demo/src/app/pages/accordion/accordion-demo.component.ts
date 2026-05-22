@@ -30,6 +30,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
@@ -100,17 +102,18 @@ type AccordionTab =
     AccordionBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
   ],
-  templateUrl: './accordion.component.html',
-  styleUrl: './accordion.component.scss',
+  templateUrl: './accordion-demo.component.html',
+  styleUrl: './accordion-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AccordionComponent {
+export class AccordionDemoComponent {
   public readonly accordionExampleHtml: string = accordionExampleHtml;
   public readonly accordionExampleTs: string = accordionExampleTs;
   public readonly customHeaderHtml: string = customHeaderHtml;
@@ -334,6 +337,33 @@ export class AccordionComponent {
       name: 'panelToggle',
       type: 'OutputEmitterRef<AccordionChangeEvent>',
       description: 'Emits every toggle interaction.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Accordion header button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Indicates whether the associated panel is expanded or collapsed.',
+    },
+    {
+      element: 'Accordion header button',
+      attribute: 'aria-controls',
+      value: 'panel-id',
+      notes: 'Points to the <code>id</code> of the content panel it controls.',
+    },
+    {
+      element: 'Accordion panel',
+      attribute: 'role',
+      value: '"region"',
+      notes: 'Marks each content panel as a landmark region.',
+    },
+    {
+      element: 'Accordion panel',
+      attribute: 'aria-labelledby',
+      value: 'header-button-id',
+      notes: 'Associates the panel with its header button for screen readers.',
     },
   ];
 

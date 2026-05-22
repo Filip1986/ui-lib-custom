@@ -176,6 +176,8 @@
     </app-doc-section>
 
     <app-doc-section id="accessibility" title="Accessibility">
+      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+      <app-doc-aria-table [rows]="ariaRows" />
       <p>
         SplitButton follows a menu-button pattern. The main action remains a standard button, while
         the trigger exposes menu semantics and the panel uses <code>role="menu"</code>.
@@ -193,7 +195,7 @@
       </ul>
     </app-doc-section>
 
-    <app-doc-section id="api-reference" title="API Reference">
+    <app-doc-section id="api" title="API Reference">
       <app-doc-api-reference [rows]="apiInputRows" />
     </app-doc-section>
 

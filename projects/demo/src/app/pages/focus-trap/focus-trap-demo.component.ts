@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -31,6 +33,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
   ],
@@ -76,6 +79,7 @@ export class FocusTrapDemoComponent {
     { id: 'toggle-trap', label: 'Toggle Trap' },
     { id: 'modal-overlay-pattern', label: 'Modal Overlay Pattern' },
     { id: 'api', label: 'API' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
@@ -107,6 +111,23 @@ export class FocusTrapDemoComponent {
   public onFormEmailChange(event: Event): void {
     this.formEmail.set((event.target as HTMLInputElement).value);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Trap container',
+      attribute: 'tabindex',
+      value: '"-1"',
+      notes:
+        'The container receives <code>tabindex="-1"</code> so it can be programmatically focused when activated.',
+    },
+    {
+      element: 'Trapped element',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes:
+        'When used in a modal context, apply <code>aria-modal="true"</code> to tell assistive technologies that content outside is inert.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

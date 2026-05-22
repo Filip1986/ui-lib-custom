@@ -42,7 +42,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
  * Demo page for badge variants and usage.
  */
 @Component({
-  selector: 'app-badges',
+  selector: 'app-badges-demo',
   standalone: true,
   imports: [
     Panel,
@@ -67,11 +67,11 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocKeyboardNavComponent,
     DocAriaTableComponent,
   ],
-  templateUrl: './badges.component.html',
-  styleUrl: './badges.component.scss',
+  templateUrl: './badges-demo.component.html',
+  styleUrl: './badges-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BadgesComponent {
+export class BadgesDemoComponent {
   public readonly badgeExampleHtml: string = badgeExampleHtml;
   public readonly badgeExampleTs: string = badgeExampleTs;
   public readonly usageHtml: string = usageHtml;

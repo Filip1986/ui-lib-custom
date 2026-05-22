@@ -1,13 +1,13 @@
-﻿<app-doc-page-layout [sections]="sections">
+<app-doc-page-layout [sections]="sections">
   <app-doc-page-header
     docHeader
-    title="Badge"
+    title="Input"
     [importCode]="importCode"
-    description="Performance-first badge component for labels and status indicators. Use the controls to see the live badge update in the viewport."
+    description="Configure variant, type, and helpers to see the live input preview."
   />
 
-  <app-badge-basic-example />
-  <app-doc-code-example [html]="badgeExampleHtml" [typescript]="badgeExampleTs" />
+  <app-input-basic-example />
+  <app-doc-code-example [html]="inputExampleHtml" [typescript]="inputExampleTs" />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -26,9 +26,9 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <div class="doc-controls" docRail>
+    <div class="doc-controls">
       <ui-lib-panel variant="minimal">
-        <p class="card-description">Adjust variant, color, and size.</p>
+        <p class="card-description">Variant, input type, and label float behavior.</p>
 
         <div class="control-grid">
           <div class="control">
@@ -41,42 +41,50 @@
                   [variant]="'minimal'"
                   [appearance]="variant() === v ? 'solid' : 'ghost'"
                   color="primary"
-                  (click)="variant.set(v)"
+                  (click)="setVariant(v)"
                   >{{ v }}</ui-lib-button
                 >
               }
             </div>
+            <label class="inline-toggle"
+              ><input
+                type="checkbox"
+                [checked]="useGlobalVariant()"
+                (change)="setFollowThemeVariant($any($event.target).checked)"
+              />
+              Follow theme variant</label
+            >
           </div>
 
           <div class="control">
-            <label>Color</label>
+            <label>Type</label>
             <div class="chips">
-              @for (c of colors; track c) {
+              @for (t of types; track t) {
                 <ui-lib-button
                   class="control-chip"
                   size="sm"
                   [variant]="'minimal'"
-                  [appearance]="color() === c ? 'solid' : 'ghost'"
+                  [appearance]="inputType() === t ? 'solid' : 'ghost'"
                   color="primary"
-                  (click)="color.set(c)"
-                  >{{ c }}</ui-lib-button
+                  (click)="setType(t)"
+                  >{{ t }}</ui-lib-button
                 >
               }
             </div>
           </div>
 
           <div class="control">
-            <label>Size</label>
+            <label>Label float</label>
             <div class="chips">
-              @for (s of sizes; track s) {
+              @for (lf of labelFloats; track lf) {
                 <ui-lib-button
                   class="control-chip"
                   size="sm"
                   [variant]="'minimal'"
-                  [appearance]="size() === s ? 'solid' : 'ghost'"
+                  [appearance]="labelFloat() === lf ? 'solid' : 'ghost'"
                   color="primary"
-                  (click)="size.set(s)"
-                  >{{ s }}</ui-lib-button
+                  (click)="setLabelFloat(lf)"
+                  >{{ lf }}</ui-lib-button
                 >
               }
             </div>
@@ -85,38 +93,69 @@
       </ui-lib-panel>
 
       <ui-lib-panel variant="minimal">
-        <p class="card-description">Toggle shape and set badge text.</p>
+        <p class="card-description">Toggle helpers and validation.</p>
 
-        <div class="control-grid">
-          <div class="toggles">
-            <label
-              ><input
-                type="checkbox"
-                [checked]="pill()"
-                (change)="pill.set($any($event.target).checked)"
-              />
-              Pill shape</label
-            >
-            <label
-              ><input
-                type="checkbox"
-                [checked]="dot()"
-                (change)="dot.set($any($event.target).checked)"
-              />
-              Dot only</label
-            >
-          </div>
+        <div class="toggles">
+          <label
+            ><input
+              type="checkbox"
+              [checked]="showCounter()"
+              (change)="showCounter.set($any($event.target).checked)"
+            />
+            Show counter</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="showClear()"
+              (change)="showClear.set($any($event.target).checked)"
+            />
+            Show clear</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="showToggle()"
+              (change)="showToggle.set($any($event.target).checked)"
+            />
+            Password toggle</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="required()"
+              (change)="required.set($any($event.target).checked)"
+            />
+            Required</label
+          >
+        </div>
+      </ui-lib-panel>
 
-          <div class="control">
-            <label>Label</label>
-            <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
-          </div>
+      <ui-lib-panel variant="minimal">
+        <p class="card-description">Update labels and placeholder copy.</p>
+
+        <div class="control">
+          <label>Label</label>
+          <input
+            type="text"
+            aria-label="Input label"
+            [value]="label()"
+            (input)="label.set($any($event.target).value)"
+          />
+        </div>
+
+        <div class="control">
+          <label>Placeholder</label>
+          <input
+            type="text"
+            aria-label="Input placeholder"
+            [value]="placeholder()"
+            (input)="placeholder.set($any($event.target).value)"
+          />
         </div>
       </ui-lib-panel>
     </div>
-  }
 
-  @if (activeTab() === 'playground') {
     <div class="viewport-control-stack">
       <ui-lib-panel variant="minimal">
         <div class="viewport-controls">
@@ -130,6 +169,7 @@
               <label>Custom</label>
               <input
                 type="number"
+                aria-label="Custom viewport width"
                 min="200"
                 max="2000"
                 [ngModel]="viewportCustomWidth()"
@@ -177,21 +217,56 @@
     </div>
 
     <ui-lib-panel variant="minimal">
-      <p>Toggle variant, color, size, pill, and dot options.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
+          <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
+            <ui-lib-input
+              [variant]="variant()"
+              [type]="inputType()"
+              [label]="label()"
+              [labelFloat]="labelFloat()"
+              [placeholder]="placeholder()"
+              [required]="required()"
+              [showCounter]="showCounter()"
+              [maxLength]="80"
+              [showClear]="showClear()"
+              [error]="error()"
+              [ngModel]="value()"
+              (ngModelChange)="value.set($event)"
+              name="demoInput"
+            >
+              <span prefix class="pi pi-envelope"></span>
+              <span suffix class="pi pi-check"></span>
+            </ui-lib-input>
 
-      <app-doc-demo-viewport [autoHeight]="true">
-        <div class="doc-demo centered">
-          <ui-lib-badge
-            [variant]="variant()"
-            [color]="color()"
-            [size]="size()"
-            [pill]="pill()"
-            [dot]="dot()"
-          >
-            @if (!dot()) {
-              {{ text() || 'New' }}
+            @if (inputType() === 'password') {
+              <ui-lib-input
+                [variant]="variant()"
+                type="password"
+                label="Password"
+                [labelFloat]="labelFloat()"
+                placeholder="Enter password"
+                [showTogglePassword]="showToggle()"
+                [showClear]="showClear()"
+                [required]="required()"
+                name="demoPassword"
+                [ngModel]="password()"
+                (ngModelChange)="password.set($event)"
+              >
+                <span prefix class="pi pi-lock"></span>
+              </ui-lib-input>
             }
-          </ui-lib-badge>
+
+            <div class="actions">
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <ui-lib-button
+                type="button"
+                appearance="ghost"
+                (click)="demoForm.resetForm(); value.set(''); password.set(''); error.set('')"
+                >Reset</ui-lib-button
+              >
+            </div>
+          </form>
         </div>
       </app-doc-demo-viewport>
     </ui-lib-panel>
@@ -199,17 +274,37 @@
 
   @if (activeTab() === 'variants') {
     <ui-lib-panel variant="minimal">
-      <p>Compare the three badge variants with the same color and size.</p>
+      <p>Compare input variants using the same label, placeholder, and type.</p>
 
       <app-variant-comparison>
         <div material>
-          <ui-lib-badge variant="solid" color="primary">Solid</ui-lib-badge>
+          <ui-lib-input
+            variant="material"
+            [type]="inputType()"
+            [labelFloat]="labelFloat()"
+            [label]="label()"
+            [placeholder]="placeholder()"
+          />
         </div>
+
         <div bootstrap>
-          <ui-lib-badge variant="outline" color="primary">Outline</ui-lib-badge>
+          <ui-lib-input
+            variant="bootstrap"
+            [type]="inputType()"
+            [labelFloat]="labelFloat()"
+            [label]="label()"
+            [placeholder]="placeholder()"
+          />
         </div>
+
         <div minimal>
-          <ui-lib-badge variant="subtle" color="primary">Subtle</ui-lib-badge>
+          <ui-lib-input
+            variant="minimal"
+            [type]="inputType()"
+            [labelFloat]="labelFloat()"
+            [label]="label()"
+            [placeholder]="placeholder()"
+          />
         </div>
       </app-variant-comparison>
     </ui-lib-panel>
@@ -217,7 +312,7 @@
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-panel variant="minimal">
-      <app-doc-api-reference [rows]="apiInputRows" />
+      <app-doc-api-reference [rows]="apiRows" />
     </ui-lib-panel>
   }
 
@@ -243,19 +338,28 @@
   @if (activeTab() === 'accessibility') {
     <ui-lib-panel variant="minimal">
       <ul class="doc-list">
-        <li>Keep badge text concise so it is announced clearly by screen readers.</li>
-        <li>Do not rely on color alone to convey meaning.</li>
-        <li>Use <code>aria-label</code> on wrapped controls when badges are purely decorative.</li>
+        <li>Associate labels with inputs via the <code>label</code> input.</li>
+        <li>Provide error text and link with <code>aria-describedby</code> when invalid.</li>
+        <li>Ensure required fields are announced and visually indicated.</li>
       </ul>
     </ui-lib-panel>
   }
 
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-input</code>. Import from
+      <code>ui-lib-custom/input</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
   
   <!-- ── Accessibility ─────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
     <app-doc-aria-table [rows]="ariaRows" />
-    <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 
@@ -268,7 +372,6 @@
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
 <app-doc-quality-badge [audit]="qualityAudit" />
-
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

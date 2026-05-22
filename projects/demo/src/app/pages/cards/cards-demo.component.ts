@@ -34,6 +34,8 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -52,7 +54,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
  * Demo page for card variants and theming.
  */
 @Component({
-  selector: 'app-cards',
+  selector: 'app-cards-demo',
   standalone: true,
   imports: [
     Card,
@@ -73,13 +75,14 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocCssVarsTableComponent,
 
     DocSectionComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
   ],
-  templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss',
+  templateUrl: './cards-demo.component.html',
+  styleUrl: './cards-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardsComponent {
+export class CardsDemoComponent {
   public readonly cardExampleHtml: string = cardExampleHtml;
   public readonly cardExampleTs: string = cardExampleTs;
   public readonly usageTs: string = usageTs;
@@ -114,6 +117,28 @@ export class CardsComponent {
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
     { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Card host',
+      attribute: 'role',
+      value: '"article" (when semantic)',
+      notes:
+        'Add <code>role="article"</code> when each card represents a self-contained content unit.',
+    },
+    {
+      element: 'Card header',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Describe the card purpose when the header text alone is insufficient.',
+    },
+    {
+      element: 'Interactive card',
+      attribute: 'tabindex',
+      value: '"0"',
+      notes: 'Make the entire card focusable when it acts as a single interactive element.',
+    },
   ];
 
   public scrollTo(id: string): void {

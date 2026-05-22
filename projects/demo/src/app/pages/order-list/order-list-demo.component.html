@@ -135,17 +135,10 @@
 
     <!-- 5. Accessibility -->
     <app-doc-section id="accessibility" title="Accessibility">
+      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+      <app-doc-aria-table [rows]="ariaRows" />
       <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
       <app-doc-keyboard-nav [rows]="keyboardRows" />
-
-      <h3 class="demo-section__subtitle">ARIA</h3>
-      <ul class="demo-list">
-        <li>List container: <code>role="listbox"</code>, <code>aria-multiselectable="true"</code>.</li>
-        <li>Each item: <code>role="option"</code>, <code>aria-selected</code>.</li>
-        <li>Control buttons carry configurable <code>aria-label</code> inputs.</li>
-        <li>All reorder and drag moves are announced via <code>LiveAnnouncerService</code>.</li>
-        <li>Provide a label with <code>[ariaLabel]</code> or <code>[ariaLabelledBy]</code>.</li>
-      </ul>
     </app-doc-section>
 
     <!-- 6. API Reference -->

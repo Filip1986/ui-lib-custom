@@ -35,6 +35,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
@@ -113,17 +115,18 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     TabsBasicExampleComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
   ],
-  templateUrl: './tabs.component.html',
-  styleUrl: './tabs.component.scss',
+  templateUrl: './tabs-demo.component.html',
+  styleUrl: './tabs-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsComponent {
+export class TabsDemoComponent {
   public readonly tabsExampleHtml: string = tabsExampleHtml;
   public readonly tabsExampleTs: string = tabsExampleTs;
   public readonly basicHtml: string = basicHtml;
@@ -408,6 +411,51 @@ export class TabsComponent {
   public selectControlled(index: number): void {
     this.controlledIndex.set(index);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Tab list',
+      attribute: 'role',
+      value: '"tablist"',
+      notes: 'The container holding all tab buttons uses the tablist role.',
+    },
+    {
+      element: 'Tab button',
+      attribute: 'role',
+      value: '"tab"',
+      notes: 'Each navigation tab is a tab.',
+    },
+    {
+      element: 'Tab button',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Marks the active tab.',
+    },
+    {
+      element: 'Tab button',
+      attribute: 'aria-controls',
+      value: 'panel-id',
+      notes: 'References the tab panel it shows.',
+    },
+    {
+      element: 'Tab panel',
+      attribute: 'role',
+      value: '"tabpanel"',
+      notes: 'Each content area is a tabpanel.',
+    },
+    {
+      element: 'Tab panel',
+      attribute: 'aria-labelledby',
+      value: 'tab-id',
+      notes: 'References the tab button that labels it.',
+    },
+    {
+      element: 'Tab button (disabled)',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive tabs.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

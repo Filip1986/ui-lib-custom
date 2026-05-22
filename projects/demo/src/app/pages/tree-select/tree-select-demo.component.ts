@@ -12,6 +12,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import type {
@@ -111,6 +113,7 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -281,6 +284,51 @@ export class TreeSelectDemoComponent {
   }
 
   /** Returns the snippet string for a given key (guaranteed non-undefined for templates). */
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Select trigger',
+      attribute: 'role',
+      value: '"combobox"',
+      notes: 'The trigger uses the combobox role to indicate it opens a tree panel.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the tree panel is open.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-haspopup',
+      value: '"tree"',
+      notes: 'Signals that the combobox opens a tree.',
+    },
+    {
+      element: 'Tree panel',
+      attribute: 'role',
+      value: '"tree"',
+      notes: 'The dropdown panel is a tree widget.',
+    },
+    {
+      element: 'Tree node',
+      attribute: 'role',
+      value: '"treeitem"',
+      notes: 'Each option is a tree item.',
+    },
+    {
+      element: 'Tree node (expandable)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects expanded/collapsed state of parent nodes.',
+    },
+    {
+      element: 'Tree node (selected)',
+      attribute: 'aria-selected',
+      value: '"true"',
+      notes: 'Reflects selection state.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: 'Enter / Space', suffix: 'on trigger', action: 'Opens or closes the tree panel.' },

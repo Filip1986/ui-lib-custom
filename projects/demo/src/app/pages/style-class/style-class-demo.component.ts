@@ -93,6 +93,7 @@ export class MyComponent {}
     { id: 'special-selectors', label: 'Special Selectors' },
     { id: 'css-selector', label: 'CSS Selector' },
     { id: 'api', label: 'API' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

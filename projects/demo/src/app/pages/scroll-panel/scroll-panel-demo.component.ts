@@ -154,7 +154,7 @@ export class ScrollPanelDemoComponent {
     { id: 'horizontal', label: 'Horizontal & Both Axes' },
     { id: 'interactive-variant-switcher', label: 'Interactive Variant Switcher' },
     { id: 'custom-css-properties', label: 'Custom CSS Properties' },
-    { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
   ];

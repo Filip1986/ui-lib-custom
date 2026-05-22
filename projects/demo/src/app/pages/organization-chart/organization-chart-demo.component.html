@@ -154,15 +154,8 @@
 
     <!-- 8. Accessibility -->
     <app-doc-section id="accessibility" title="Accessibility">
-      <ui-lib-panel variant="minimal">
-        <ul>
-          <li>Each node is a <code>button</code> fully keyboard-focusable and activatable.</li>
-          <li>Collapsed subtrees are hidden with <code>aria-hidden="true"</code>.</li>
-          <li>Expand/collapse state is announced via <code>LiveAnnouncerService</code>.</li>
-          <li>Selection uses <code>aria-selected</code> on node buttons.</li>
-          <li>Provide a label with <code>[ariaLabel]</code> on the component.</li>
-        </ul>
-      </ui-lib-panel>
+      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+      <app-doc-aria-table [rows]="ariaRows" />
     </app-doc-section>
 
     <!-- 9. API Reference -->

@@ -34,11 +34,13 @@ import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-tab
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for select button variants.
  */
 @Component({
-  selector: 'app-select-buttons',
+  selector: 'app-select-buttons-demo',
   standalone: true,
   imports: [
     Panel,
@@ -59,14 +61,15 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
     DocCssVarsTableComponent,
     DocApiReferenceComponent,
   ],
-  templateUrl: './select-buttons.component.html',
-  styleUrl: './select-buttons.component.scss',
+  templateUrl: './select-buttons-demo.component.html',
+  styleUrl: './select-buttons-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectButtonsComponent {
+export class SelectButtonsDemoComponent {
   public readonly selectButtonExampleHtml: string = selectButtonExampleHtml;
   public readonly selectButtonExampleTs: string = selectButtonExampleTs;
 
@@ -196,6 +199,33 @@ export class SelectButtonsComponent {
   public markInvalidTouched(): void {
     this.invalidTouched = true;
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Button group',
+      attribute: 'role',
+      value: '"group"',
+      notes: 'The container is announced as a group of related buttons.',
+    },
+    {
+      element: 'Button group',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Set via <code>[ariaLabel]</code> to name the group for screen readers.',
+    },
+    {
+      element: 'Option button',
+      attribute: 'aria-pressed',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the option is currently selected.',
+    },
+    {
+      element: 'Disabled button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive options.',
+    },
+  ];
 
   public readonly apiInputRows: readonly ApiPropRow[] = [
     {

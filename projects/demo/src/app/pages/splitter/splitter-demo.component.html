@@ -16,12 +16,19 @@
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">CSS custom properties will be documented here once the Splitter component is released.</p>
+  </app-doc-section>
+
   <!-- ── Accessibility ──────────────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
     <app-doc-aria-table [rows]="ariaRows" />
     <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

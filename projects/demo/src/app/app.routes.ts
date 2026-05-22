@@ -1,16 +1,16 @@
 import type { Routes } from '@angular/router';
 import type { Type } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
-import { ButtonsComponent } from './pages/buttons/buttons.component';
-import { CardsComponent } from './pages/cards/cards.component';
-import { BadgesComponent } from './pages/badges/badges.component';
+import { ButtonsDemoComponent } from './pages/buttons/buttons-demo.component';
+import { CardsDemoComponent } from './pages/cards/cards-demo.component';
+import { BadgesDemoComponent } from './pages/badges/badges-demo.component';
 import { ThemesComponent } from './pages/themes/themes.component';
-import { InputsComponent } from './pages/inputs/inputs.component';
-import { SelectComponent } from './pages/select/select.component';
+import { InputsDemoComponent } from './pages/inputs/inputs-demo.component';
+import { SelectDemoComponent } from './pages/select/select-demo.component';
 import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 import { ShadowsComponent } from './pages/shadows/shadows.component';
-import { CheckboxesComponent } from './pages/checkboxes/checkboxes.component';
-import { TabsComponent } from './pages/tabs/tabs.component';
+import { CheckboxesDemoComponent } from './pages/checkboxes/checkboxes-demo.component';
+import { TabsDemoComponent } from './pages/tabs/tabs-demo.component';
 import { SemanticSpacingSectionComponent } from './pages/layouts/semantic-spacing-section.component';
 import { StackSectionComponent } from './pages/layouts/stack-section.component';
 import { InlineSectionComponent } from './pages/layouts/inline-section.component';
@@ -20,15 +20,15 @@ import { LayoutCompositionSectionComponent } from './pages/layouts/composition-s
 import { DesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
 import { ThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
-import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.component';
+import { SelectButtonsDemoComponent } from './pages/select-buttons/select-buttons-demo.component';
 import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
 import { ScopedThemingComponent } from './pages/scoped-theming/scoped-theming.component';
 import { AccessibilityComponent } from './pages/accessibility/accessibility.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
-  { path: 'buttons', component: ButtonsComponent, title: 'Buttons - UI Components Library' },
-  { path: 'cards', component: CardsComponent, title: 'Cards - UI Components Library' },
+  { path: 'buttons', component: ButtonsDemoComponent, title: 'Buttons - UI Components Library' },
+  { path: 'cards', component: CardsDemoComponent, title: 'Cards - UI Components Library' },
   {
     path: 'chart',
     loadComponent: (): Promise<Type<unknown>> =>
@@ -37,7 +37,7 @@ export const routes: Routes = [
       ),
     title: 'Chart - UI Components Library',
   },
-  { path: 'badges', component: BadgesComponent, title: 'Badges - UI Components Library' },
+  { path: 'badges', component: BadgesDemoComponent, title: 'Badges - UI Components Library' },
   { path: 'layouts', redirectTo: 'layouts/semantic-spacing', pathMatch: 'full' },
   {
     path: 'layouts/semantic-spacing',
@@ -85,10 +85,18 @@ export const routes: Routes = [
     title: 'Examples - UI Components Library',
   },
   { path: 'themes', component: ThemesComponent, title: 'Themes - UI Components Library' },
-  { path: 'input-text', component: InputsComponent, title: 'Input Text - UI Components Library' },
+  {
+    path: 'input-text',
+    component: InputsDemoComponent,
+    title: 'Input Text - UI Components Library',
+  },
   { path: 'inputs', redirectTo: 'input-text', pathMatch: 'full' },
-  { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
-  { path: 'checkbox', component: CheckboxesComponent, title: 'Checkbox - UI Components Library' },
+  { path: 'select', component: SelectDemoComponent, title: 'Select - UI Components Library' },
+  {
+    path: 'checkbox',
+    component: CheckboxesDemoComponent,
+    title: 'Checkbox - UI Components Library',
+  },
   {
     path: 'project-starter',
     component: ProjectStarterComponent,
@@ -387,7 +395,7 @@ export const routes: Routes = [
     },
   },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
-  { path: 'tabs', component: TabsComponent, title: 'Tabs - UI Components Library' },
+  { path: 'tabs', component: TabsDemoComponent, title: 'Tabs - UI Components Library' },
   {
     path: 'icons',
     loadComponent: (): Promise<Type<unknown>> =>
@@ -399,14 +407,14 @@ export const routes: Routes = [
   {
     path: 'accordion',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/accordion/accordion.component').then(
-        (m: { AccordionComponent: Type<unknown> }): Type<unknown> => m.AccordionComponent
+      import('./pages/accordion/accordion-demo.component').then(
+        (m: { AccordionDemoComponent: Type<unknown> }): Type<unknown> => m.AccordionDemoComponent
       ),
     title: 'Accordion - UI Components Library',
   },
   {
     path: 'select-buttons',
-    component: SelectButtonsComponent,
+    component: SelectButtonsDemoComponent,
     title: 'Select Buttons - UI Components Library',
   },
   { path: 'dark-mode', component: DarkModeComponent, title: 'Dark Mode - UI Library' },
@@ -419,15 +427,15 @@ export const routes: Routes = [
   {
     path: 'gallery',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/gallery/gallery.component').then(
-        (m: { GalleryComponent: Type<unknown> }): Type<unknown> => m.GalleryComponent
+      import('./pages/gallery/gallery-demo.component').then(
+        (m: { GalleryDemoComponent: Type<unknown> }): Type<unknown> => m.GalleryDemoComponent
       ),
     title: 'Galleria - UI Components Library',
   },
   {
     path: 'dialog',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/dialog/dialog.component').then(
+      import('./pages/dialog/dialog-demo.component').then(
         (m: { DialogDemoComponent: Type<unknown> }): Type<unknown> => m.DialogDemoComponent
       ),
     title: 'Dialog - UI Components Library',
@@ -655,7 +663,7 @@ export const routes: Routes = [
   {
     path: 'float-label',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/float-label/float-label-demo').then(
+      import('./pages/float-label/float-label-demo.component').then(
         (m: { FloatLabelDemoComponent: Type<unknown> }): Type<unknown> => m.FloatLabelDemoComponent
       ),
     title: 'FloatLabel - UI Components Library',

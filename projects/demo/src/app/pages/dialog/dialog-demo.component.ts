@@ -16,6 +16,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
@@ -40,13 +42,14 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
   ],
-  templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.scss',
+  templateUrl: './dialog-demo.component.html',
+  styleUrl: './dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogDemoComponent {
@@ -245,6 +248,39 @@ export class DialogDemoComponent {
       url: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
     },
   };
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Dialog container',
+      attribute: 'role',
+      value: '"dialog"',
+      notes: 'Identifies the overlay as a dialog to assistive technologies.',
+    },
+    {
+      element: 'Dialog container',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Marks content behind the dialog as inert while it is open.',
+    },
+    {
+      element: 'Dialog container',
+      attribute: 'aria-labelledby',
+      value: 'dialog-header-id',
+      notes: 'References the dialog header for an accessible name.',
+    },
+    {
+      element: 'Dialog container',
+      attribute: 'aria-describedby',
+      value: 'dialog-content-id',
+      notes: 'References the content area for an accessible description.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label',
+      value: '"Close"',
+      notes: 'Provides a text alternative for the icon-only close button.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

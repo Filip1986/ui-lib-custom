@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
 import type { ListboxChangeEvent, ListboxOption } from 'ui-lib-custom/listbox';
@@ -58,6 +60,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
 
@@ -210,6 +213,46 @@ export class ListboxDemoComponent {
   }
 
   // ── Snippets ───────────────────────────────────────────────────────────────
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Listbox container',
+      attribute: 'role',
+      value: '"listbox"',
+      notes: 'The options container is announced as a listbox widget.',
+    },
+    {
+      element: 'Listbox container',
+      attribute: 'aria-multiselectable',
+      value: '"true" | "false"',
+      notes: 'Set when <code>[multiple]</code> is enabled.',
+    },
+    {
+      element: 'Listbox container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes:
+        'Provide via <code>[ariaLabel]</code> or associate with a <code>&lt;label&gt;</code> using <code>[ariaLabelledBy]</code>.',
+    },
+    {
+      element: 'Option',
+      attribute: 'role',
+      value: '"option"',
+      notes: 'Each item in the list is announced as an option.',
+    },
+    {
+      element: 'Option',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Reflects the selected state of each option.',
+    },
+    {
+      element: 'Option (disabled)',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive options.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '↓ / ↑', action: 'Move focus to the next or previous option.' },

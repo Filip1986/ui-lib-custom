@@ -19,6 +19,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import {
   PickListComponent,
   PickListItemDirective,
@@ -105,6 +107,7 @@ const SELECTED_COUNTRIES: DemoCountry[] = [
 
     DocSectionComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocCssVarsTableComponent,
   ],
@@ -167,6 +170,39 @@ export class PickListDemoComponent {
   // -------------------------------------------------------------------------
   // Keyboard navigation rows
   // -------------------------------------------------------------------------
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Source/Target list',
+      attribute: 'role',
+      value: '"listbox"',
+      notes: 'Both the source and target lists use the listbox role.',
+    },
+    {
+      element: 'Source/Target list',
+      attribute: 'aria-label',
+      value: '"Source" | "Target"',
+      notes: 'Each list is labelled so screen readers distinguish them.',
+    },
+    {
+      element: 'List item',
+      attribute: 'role',
+      value: '"option"',
+      notes: 'Each item is an option inside its listbox.',
+    },
+    {
+      element: 'List item',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Reflects the selected state of each item.',
+    },
+    {
+      element: 'Transfer buttons',
+      attribute: 'aria-label',
+      value: '"Move to target" | "Move all to target" | "Move to source" | "Move all to source"',
+      notes: 'Descriptive labels on transfer action buttons.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '↓ / ↑', action: 'Navigate items in the focused list.' },

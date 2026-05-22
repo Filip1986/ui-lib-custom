@@ -154,7 +154,7 @@
   </app-doc-section>
 
   <!-- ── Section 5: API reference ── -->
-  <app-doc-section id="api-reference" title="API Reference">
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1rem;">
       &lt;ui-lib-fluid&gt; — Component
@@ -167,6 +167,22 @@
     </h3>
     <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
     <app-doc-api-reference [rows]="fluidDirectiveRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">The fluid directive and component apply no CSS custom properties. Width behaviour is achieved purely via structural CSS rules targeting host elements.</p>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      The fluid layout wrapper applies no ARIA attributes. All accessibility semantics come from the
+      wrapped form controls. Ensure every child input and button has an associated
+      <code>&lt;label&gt;</code> and a descriptive name.
+    </p>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
   </app-doc-section>
 
   <app-doc-quality-badge [audit]="qualityAudit" />

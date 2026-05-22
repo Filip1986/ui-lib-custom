@@ -19,6 +19,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
@@ -67,6 +69,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -182,6 +185,28 @@ export class ToggleButtonDemoComponent {
   public clearEventLog(): void {
     this.eventLog.set([]);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Toggle button',
+      attribute: 'aria-pressed',
+      value: '"true" | "false"',
+      notes: 'Reflects the current on/off state of the toggle button.',
+    },
+    {
+      element: 'Toggle button',
+      attribute: 'aria-label',
+      value: 'string',
+      notes:
+        'Provide a descriptive label via <code>[ariaLabel]</code> when the button uses only an icon.',
+    },
+    {
+      element: 'Toggle button (disabled)',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks the button as non-interactive when <code>[disabled]</code> is true.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

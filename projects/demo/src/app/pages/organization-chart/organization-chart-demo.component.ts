@@ -41,6 +41,8 @@ import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-tab
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 // ─── Shared tree data ────────────────────────────────────────────────────────
 
@@ -95,6 +97,7 @@ function makeCompanyTree(expanded: boolean = true): OrganizationChartNode[] {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
     DocCssVarsTableComponent,
     DocApiReferenceComponent,
   ],
@@ -266,6 +269,40 @@ export class OrganizationChartDemoComponent {
   private appendLog(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 10));
   }
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Chart container',
+      attribute: 'role',
+      value: '"tree"',
+      notes: 'The component root is announced as a tree widget.',
+    },
+    {
+      element: 'Chart container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Set via <code>[ariaLabel]</code> to name the tree for assistive technologies.',
+    },
+    { element: 'Node', attribute: 'role', value: '"treeitem"', notes: 'Each node is a tree item.' },
+    {
+      element: 'Node (with children)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: "Reflects whether the node's subtree is expanded.",
+    },
+    {
+      element: 'Collapsed subtree',
+      attribute: 'aria-hidden',
+      value: '"true"',
+      notes: 'Hidden subtree nodes are marked inert for screen readers.',
+    },
+    {
+      element: 'Selected node',
+      attribute: 'aria-selected',
+      value: '"true"',
+      notes: 'Reflects selection state on the node button.',
+    },
+  ];
+
   public readonly apiInputRows: readonly ApiPropRow[] = [
     {
       name: 'value',

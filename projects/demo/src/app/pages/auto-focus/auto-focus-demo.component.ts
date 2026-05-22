@@ -90,6 +90,7 @@ export class AutoFocusDemoComponent {
     { id: 'conditional-focus', label: 'Conditional Focus' },
     { id: 'disable-autofocus', label: 'Disable Autofocus' },
     { id: 'api', label: 'API' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

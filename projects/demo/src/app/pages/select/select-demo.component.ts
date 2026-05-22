@@ -29,6 +29,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
 import { Panel } from 'ui-lib-custom/panel';
@@ -52,7 +54,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
  * Demo page for select component usage.
  */
 @Component({
-  selector: 'app-select',
+  selector: 'app-select-demo',
   standalone: true,
   imports: [
     Panel,
@@ -71,17 +73,18 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
   ],
-  templateUrl: './select.component.html',
-  styleUrl: './select.component.scss',
+  templateUrl: './select-demo.component.html',
+  styleUrl: './select-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectComponent {
+export class SelectDemoComponent {
   public readonly selectExampleHtml: string = selectExampleHtml;
   public readonly selectExampleTs: string = selectExampleTs;
   public readonly usageHtml: string = usageHtml;
@@ -249,6 +252,46 @@ export class SelectComponent {
   public onClear(): void {
     this.value.set(this.multiple() ? [] : null);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Select trigger',
+      attribute: 'role',
+      value: '"combobox"',
+      notes: 'The trigger button uses the combobox role to indicate it opens a list.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the dropdown list is open.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-haspopup',
+      value: '"listbox"',
+      notes: 'Signals that the trigger opens a listbox.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-activedescendant',
+      value: 'option-id',
+      notes: 'Points to the currently focused option in the list.',
+    },
+    {
+      element: 'Dropdown list',
+      attribute: 'role',
+      value: '"listbox"',
+      notes: 'The options panel uses the listbox role.',
+    },
+    { element: 'Option', attribute: 'role', value: '"option"', notes: 'Each item is an option.' },
+    {
+      element: 'Option',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Reflects the selected state of each option.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: 'Enter / Space / ↓', suffix: 'on trigger', action: 'Opens the dropdown panel.' },

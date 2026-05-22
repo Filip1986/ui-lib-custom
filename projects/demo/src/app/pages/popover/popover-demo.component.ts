@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
@@ -40,6 +42,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -112,6 +115,45 @@ export class PopoverDemoComponent {
   public onHidden(): void {
     this.lastEvent.set('hidden');
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Popover container',
+      attribute: 'role',
+      value: '"dialog"',
+      notes: 'The popover panel uses the dialog role.',
+    },
+    {
+      element: 'Popover container',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Marks content behind the popover as inert when open.',
+    },
+    {
+      element: 'Popover container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Set via <code>[ariaLabel]</code> to name the popover for screen readers.',
+    },
+    {
+      element: 'Trigger element',
+      attribute: 'aria-haspopup',
+      value: '"dialog"',
+      notes: 'Signals that the trigger opens a dialog.',
+    },
+    {
+      element: 'Trigger element',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the popover is visible.',
+    },
+    {
+      element: 'Trigger element',
+      attribute: 'aria-controls',
+      value: 'popover-id',
+      notes: 'References the popover panel element.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

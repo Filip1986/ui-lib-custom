@@ -118,7 +118,7 @@
   </app-doc-section>
 
   <!-- ---- API reference ---- -->
-  <app-doc-section id="api-reference" title="API Reference">
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
@@ -132,7 +132,9 @@
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 

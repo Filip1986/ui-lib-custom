@@ -179,21 +179,14 @@
       </ui-lib-panel>
     </section>
 
-    <section id="accessibility">
-      <h3>Accessibility</h3>
-      <ui-lib-panel variant="minimal">
-        <ul class="doc-list">
-          <li>Use clear labels for each option and avoid icon-only buttons without text.</li>
-          <li>
-            Ensure selected state is conveyed both visually and via <code>aria-pressed</code>.
-          </li>
-          <li>For multi-select, announce changes in selection count where possible.</li>
-        </ul>
-      </ui-lib-panel>
-    </section>
   </div>
 
-  
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+  </app-doc-section>
+
+
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"

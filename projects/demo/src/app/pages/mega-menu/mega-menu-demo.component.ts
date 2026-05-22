@@ -18,6 +18,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
@@ -48,6 +50,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -433,6 +436,45 @@ export class MegaMenuDemoComponent {
     const newEntry: string = `Clicked: "${event.item.label ?? 'unknown'}"`;
     this.itemClickLog.set([newEntry, ...log].slice(0, 6));
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Menu bar',
+      attribute: 'role',
+      value: '"menubar"',
+      notes: 'The top-level navigation container uses the menubar role.',
+    },
+    {
+      element: 'Top-level item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each top-level entry is a menu item.',
+    },
+    {
+      element: 'Top-level item (with panel)',
+      attribute: 'aria-haspopup',
+      value: '"true"',
+      notes: 'Signals that activating the item opens a mega panel.',
+    },
+    {
+      element: 'Top-level item (with panel)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the mega panel is visible.',
+    },
+    {
+      element: 'Mega panel',
+      attribute: 'role',
+      value: '"menu"',
+      notes: 'The expanded panel container uses the menu role.',
+    },
+    {
+      element: 'Panel item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each item inside the mega panel is a menu item.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

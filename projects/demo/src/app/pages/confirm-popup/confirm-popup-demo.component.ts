@@ -13,6 +13,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { declarativeUsageHtml, declarativeUsageTs } from './snippets.generated';
 
@@ -37,6 +39,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
 
@@ -87,7 +90,7 @@ export class ConfirmPopupDemoComponent {
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'declarative-usage', label: 'Declarative Usage' },
     { id: 'result-log', label: 'Result Log' },
-    { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
@@ -165,6 +168,34 @@ export class ConfirmPopupDemoComponent {
       },
     });
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Popup container',
+      attribute: 'role',
+      value: '"dialog"',
+      notes: 'Identifies the popup as a dialog for assistive technologies.',
+    },
+    {
+      element: 'Popup container',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Signals that content outside is inert while the popup is open.',
+    },
+    {
+      element: 'Popup container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Describes the purpose of the confirmation popup.',
+    },
+    {
+      element: 'Accept/Reject buttons',
+      attribute: 'aria-label',
+      value: 'string',
+      notes:
+        'Accept and reject labels are passed via <code>[acceptLabel]</code> / <code>[rejectLabel]</code>.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

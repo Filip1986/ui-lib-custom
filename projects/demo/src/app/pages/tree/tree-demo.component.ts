@@ -13,6 +13,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
@@ -33,6 +35,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -323,6 +326,45 @@ export class TreeDemoComponent {
     }
     return nodes.map((n: TreeNode): string => n.label ?? '—').join(', ');
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Tree container',
+      attribute: 'role',
+      value: '"tree"',
+      notes: 'The root element uses the tree role.',
+    },
+    {
+      element: 'Tree container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Set via <code>[ariaLabel]</code> to name the tree for assistive technologies.',
+    },
+    {
+      element: 'Tree node',
+      attribute: 'role',
+      value: '"treeitem"',
+      notes: 'Each node in the tree is a treeitem.',
+    },
+    {
+      element: 'Tree node (expandable)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects the expanded/collapsed state of a parent node.',
+    },
+    {
+      element: 'Tree node (selectable)',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Reflects the selection state of a node.',
+    },
+    {
+      element: 'Tree node group',
+      attribute: 'role',
+      value: '"group"',
+      notes: 'Child node containers use the group role.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '↓ / ↑', action: 'Move focus between visible tree nodes.' },
