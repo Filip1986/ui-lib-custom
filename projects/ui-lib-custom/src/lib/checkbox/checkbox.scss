@@ -108,7 +108,7 @@ ui-lib-checkbox:not(.ui-lib-checkbox--disabled):hover .ui-lib-checkbox__box {
   border-color: var(--uilib-checkbox-border-hover);
 }
 
-ui-lib-checkbox.checkbox--filled .ui-lib-checkbox__box {
+ui-lib-checkbox.ui-lib-checkbox--filled .ui-lib-checkbox__box {
   background: var(--uilib-checkbox-filled-bg);
   border-color: var(--uilib-checkbox-filled-border-color);
 }
@@ -202,7 +202,7 @@ ui-lib-checkbox.ui-lib-checkbox--variant-bootstrap .ui-lib-checkbox__box {
   border-radius: calc(var(--uilib-shape-base, 6px) * 0.5);
 }
 
-ui-lib-checkbox.ui-lib-checkbox--variant-material.checkbox--filled {
+ui-lib-checkbox.ui-lib-checkbox--variant-material.ui-lib-checkbox--filled {
   --uilib-checkbox-filled-bg: color-mix(
     in srgb,
     var(--uilib-color-primary-500) 12%,
@@ -215,7 +215,7 @@ ui-lib-checkbox.ui-lib-checkbox--variant-material.checkbox--filled {
   );
 }
 
-ui-lib-checkbox.ui-lib-checkbox--variant-bootstrap.checkbox--filled {
+ui-lib-checkbox.ui-lib-checkbox--variant-bootstrap.ui-lib-checkbox--filled {
   --uilib-checkbox-filled-bg: color-mix(
     in srgb,
     var(--uilib-color-primary-500) 16%,
@@ -239,7 +239,7 @@ ui-lib-checkbox.ui-lib-checkbox--variant-minimal .ui-lib-checkbox__box {
   border-width: 1.5px;
 }
 
-ui-lib-checkbox.ui-lib-checkbox--variant-minimal.checkbox--filled {
+ui-lib-checkbox.ui-lib-checkbox--variant-minimal.ui-lib-checkbox--filled {
   --uilib-checkbox-filled-bg: color-mix(in srgb, currentColor 10%, transparent);
   --uilib-checkbox-filled-border-color: color-mix(in srgb, currentColor 55%, transparent);
 }

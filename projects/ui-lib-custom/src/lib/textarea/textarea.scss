@@ -258,14 +258,14 @@ ui-lib-textarea.ui-lib-textarea--variant-material .ui-lib-textarea__field {
 // ---------------------------------------------------------------------------
 
 [data-theme='dark'] ui-lib-textarea {
-  --uilib-textarea-bg: var(--uilib-surface-dark-1, #1e1e2e);
-  --uilib-textarea-border: var(--uilib-border-dark, #3a3a5c);
-  --uilib-textarea-text: var(--uilib-text-dark-primary, #e0e0ff);
-  --uilib-textarea-placeholder: var(--uilib-text-dark-secondary, #8888aa);
-  --uilib-textarea-label-color: var(--uilib-text-dark-primary, #e0e0ff);
-  --uilib-textarea-hint-color: var(--uilib-text-dark-secondary, #8888aa);
-  --uilib-textarea-counter-color: var(--uilib-text-dark-secondary, #8888aa);
-  --uilib-textarea-resize-color: var(--uilib-border-dark, #3a3a5c);
+  --uilib-textarea-bg: var(--uilib-surface-dark-1);
+  --uilib-textarea-border: var(--uilib-border-dark);
+  --uilib-textarea-text: var(--uilib-text-dark-primary);
+  --uilib-textarea-placeholder: var(--uilib-text-dark-secondary);
+  --uilib-textarea-label-color: var(--uilib-text-dark-primary);
+  --uilib-textarea-hint-color: var(--uilib-text-dark-secondary);
+  --uilib-textarea-counter-color: var(--uilib-text-dark-secondary);
+  --uilib-textarea-resize-color: var(--uilib-border-dark);
 }
 
 @media (prefers-reduced-motion: reduce) {

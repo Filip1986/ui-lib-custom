@@ -82,6 +82,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-22 [Library-wide audit fixes — 10 files corrected]
+Changed:
+  - cascade-select/cascade-select.ts: renamed 5 outputs (onChange→change, onGroupChange→groupChange, onShow→show, onHide→hide, onClear→clear, onFocus→focus, onBlur→blur); replaced @HostListener('focus'/'blur') with imperative addEventListener in constructor to avoid Angular output/HostListener naming conflict circular-dispatch bug; removed all 7 eslint-disable-next-line @angular-eslint/no-output-on-prefix comments
+  - cascade-select/cascade-select.spec.ts: updated 3 test descriptions and spy property refs to match renamed outputs (onChange→change, onGroupChange→groupChange, onClear→clear)
+  - checkbox/checkbox.ts: fixed CSS class naming — `checkbox--filled` → `ui-lib-checkbox--filled` (was missing uilib namespace prefix)
+  - checkbox/checkbox.scss: fixed same 4 selectors — `.checkbox--filled` → `.ui-lib-checkbox--filled`
+  - checkbox/checkbox.spec.ts: updated 3 class assertions from `checkbox--filled` → `ui-lib-checkbox--filled`
+  - card/card.ts: simplified readTheme() — removed misleading type cast `this.theme as () => ThemeScopeInput | null`; now simply `return this.theme()`
+  - select/select.scss: tokenized `max-height: 260px` → `var(--uilib-select-panel-max-height)` and `z-index: 10` → `var(--uilib-select-panel-z-index)`; both tokens declared in CSS var block
+  - stepper/stepper.scss: replaced 3 raw `#ffffff` values with `var(--uilib-color-neutral-50, #ffffff)` for indicator active/completed/error colors
+  - menu/menu.scss: replaced all raw hex/rgba fallbacks in CSS custom property definitions with semantic token fallbacks; removed hex literals from color-mix() calls
+  - textarea/textarea.scss: removed hex fallbacks from [data-theme='dark'] block — dark mode tokens are required; tokens without fallbacks signal clearly when a host app hasn't defined them
+State: All fixes complete. 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
+Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
+Next step: Continue with next audit items: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit.
+
 Date: 2026-05-21 [ARIA table migration — 7 demo pages migrated to DocAriaTableComponent]
 Changed:
   - block-ui: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties"> in accessibility section
@@ -114,19 +131,6 @@ Changed:
   - tabs.component.html: replaced 14-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
 State: Build zero errors. Zero raw API doc tables remain across all 21 targeted pages.
 Verification: ng build demo → PASS (zero errors; only pre-existing bundle budget + roadmap SCSS warnings)
-Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
-
-Date: 2026-05-21 [Demo consistency audit — import paths standardized + final raw tables eliminated]
-Changed:
-  - All ~110 *.ts files under projects/demo/src/app/pages/: replaced all `../../shared/doc-page/` and `../../shared/components/` relative imports with `@demo/shared/doc-page/` and `@demo/shared/components/` alias paths
-  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.ts: added DocApiReferenceComponent; added apiInputRows (5), apiOutputRows (1), apiProjectionRows (2)
-  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.html: replaced 3 raw <table class="demo-api-table"> with <app-doc-api-reference>; fixed h3 class demo-api__subtitle → demo-section__subtitle
-  - projects/demo/src/app/pages/menubar/menubar-demo.component.ts: added DocApiReferenceComponent; added apiInputRows (5), apiOutputRows (1), apiItemRows (10), apiProjectionRows (2)
-  - projects/demo/src/app/pages/menubar/menubar-demo.component.html: replaced 4 raw <table class="demo-api-table"> with <app-doc-api-reference>
-State: Build zero errors. Zero raw demo-api-table HTML elements remain anywhere in pages/. All demo page imports now use @demo/shared alias paths exclusively.
-Verification:
-  eslint projects/demo/src/app/pages/fieldset/ menubar/ --max-warnings 0 → clean
-  ng build demo → PASS (zero errors; only pre-existing budget warnings)
 Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

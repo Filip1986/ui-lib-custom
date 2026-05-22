@@ -10,13 +10,13 @@
   --uilib-stepper-indicator-color: var(--uilib-page-fg, #374151);
   --uilib-stepper-indicator-border: 2px solid var(--uilib-surface-d, #d1d5db);
   --uilib-stepper-indicator-bg-active: var(--uilib-color-primary-500, #6366f1);
-  --uilib-stepper-indicator-color-active: #ffffff;
+  --uilib-stepper-indicator-color-active: var(--uilib-color-neutral-50, #ffffff);
   --uilib-stepper-indicator-border-active: 2px solid var(--uilib-color-primary-500, #6366f1);
   --uilib-stepper-indicator-bg-completed: var(--uilib-color-primary-500, #6366f1);
-  --uilib-stepper-indicator-color-completed: #ffffff;
+  --uilib-stepper-indicator-color-completed: var(--uilib-color-neutral-50, #ffffff);
   --uilib-stepper-indicator-border-completed: 2px solid var(--uilib-color-primary-500, #6366f1);
   --uilib-stepper-indicator-bg-error: var(--uilib-color-danger-500, #dc2626);
-  --uilib-stepper-indicator-color-error: #ffffff;
+  --uilib-stepper-indicator-color-error: var(--uilib-color-neutral-50, #ffffff);
   --uilib-stepper-indicator-border-error: 2px solid var(--uilib-color-danger-500, #dc2626);
   --uilib-stepper-indicator-bg-disabled: var(--uilib-surface-b, #f3f4f6);
   --uilib-stepper-indicator-color-disabled: var(--uilib-color-surface-400, #9ca3af);
