@@ -1,0 +1,318 @@
+/* ── Profile layout ─────────────────────────────────────────────────────────── */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Profile card */
+.profile-card {
+  text-align: center;
+}
+
+.profile-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.875rem;
+}
+
+.profile-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 2px solid var(--uilib-surface);
+
+  &--online {
+    background: #16a34a;
+  }
+
+  &--away {
+    background: #d97706;
+  }
+
+  &--offline {
+    background: var(--uilib-muted);
+  }
+}
+
+.profile-name {
+  margin: 0 0 0.25rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--uilib-page-fg);
+}
+
+.profile-role {
+  margin: 0 0 0.375rem;
+  font-size: 0.875rem;
+  color: var(--uilib-muted);
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--uilib-muted);
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+/* Stats */
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.25rem 0;
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.profile-stat-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--uilib-page-fg);
+}
+
+.profile-stat-label {
+  font-size: 0.7rem;
+  color: var(--uilib-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Actions */
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Skills */
+.profile-section-label {
+  margin: 0 0 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--uilib-muted);
+}
+
+.profile-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  justify-content: center;
+}
+
+/* Feed */
+.profile-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.feed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.feed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.feed-content {
+  flex: 1;
+  min-width: 0;
+
+  p {
+    margin: 0 0 0.2rem;
+    font-size: 0.8125rem;
+    color: var(--uilib-page-fg);
+    line-height: 1.4;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}
+
+.feed-time {
+  font-size: 0.75rem;
+  color: var(--uilib-muted);
+}
+
+/* Projects */
+.project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+  strong {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--uilib-page-fg);
+    margin-bottom: 0.125rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--uilib-muted);
+    line-height: 1.4;
+  }
+}
+
+.project-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Team directory ─────────────────────────────────────────────────────────── */
+.team-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.team-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  background: var(--uilib-surface-alt);
+  border: 1px solid var(--uilib-border);
+  border-radius: var(--uilib-radius-md);
+  flex: 1;
+  max-width: 360px;
+
+  i {
+    font-size: 0.875rem;
+    color: var(--uilib-muted);
+  }
+}
+
+.team-search-placeholder {
+  font-size: 0.875rem;
+  color: var(--uilib-muted);
+}
+
+/* Member grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.member-card {
+  text-align: center;
+}
+
+.member-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.member-status-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  border: 2px solid var(--uilib-surface);
+
+  &--online {
+    background: #16a34a;
+  }
+
+  &--away {
+    background: #d97706;
+  }
+
+  &--offline {
+    background: var(--uilib-border);
+  }
+}
+
+.member-name {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--uilib-page-fg);
+}
+
+.member-role {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  color: var(--uilib-muted);
+}
+
+.member-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Team footer */
+.team-footer {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.team-avatar-group-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.team-count {
+  font-size: 0.8125rem;
+  color: var(--uilib-muted);
+}
+
+/* ── Download CTA ───────────────────────────────────────────────────────────── */
+.team-download-cta {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}

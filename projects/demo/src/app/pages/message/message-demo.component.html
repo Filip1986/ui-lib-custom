@@ -8,8 +8,7 @@
   />
 
   <!-- ─── Playground ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <div class="message-demo__controls">
       <label class="message-demo__control-label">
         Severity
@@ -75,11 +74,10 @@
         />
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Severities ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="severities" data-doc-anchor>
-    <h2 class="demo-section__title">Severities</h2>
+  <app-doc-section id="severities" title="Severities">
     <p class="demo-section__description">
       Six severity levels, each with a colour palette and a default icon.
     </p>
@@ -109,11 +107,10 @@
         text="Maintenance window scheduled for Sunday at 02:00 UTC."
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Variants ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants — material (elevated), bootstrap (filled), and minimal (accent border).
     </p>
@@ -144,11 +141,10 @@
         </div>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- ─── Sizes ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">Three size tokens: sm, md (default), lg.</p>
     <div class="message-demo__stack">
       <ui-lib-message
@@ -167,11 +163,10 @@
         text="Large — prominent for top-of-page notices."
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Closable ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="closable" data-doc-anchor>
-    <h2 class="demo-section__title">Closable</h2>
+  <app-doc-section id="closable" title="Closable">
     <p class="demo-section__description">
       Set <code>closable</code> to show a close button and listen to the <code>close</code> output.
     </p>
@@ -192,11 +187,10 @@
         </ui-lib-button>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Content projection ─────────────────────────────────────── -->
-  <section class="demo-section" id="content-projection" data-doc-anchor>
-    <h2 class="demo-section__title">Content Projection</h2>
+  <app-doc-section id="content-projection" title="Content Projection">
     <p class="demo-section__description">
       Rich content can be projected as children instead of using the <code>text</code> input.
     </p>
@@ -209,86 +203,36 @@
         <strong>Tip:</strong> Use keyboard shortcut <kbd>Ctrl + S</kbd> to save your work.
       </ui-lib-message>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── API Reference ──────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="message-demo__api-subtitle">Inputs</h3>
-    <table class="message-demo__table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>severity</code></td>
-          <td><code>'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast'</code></td>
-          <td><code>'info'</code></td>
-          <td>Controls the colour palette and default icon.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code> (falls back to global theme)</td>
-          <td>Design variant. When null, inherits the ThemeConfigService variant.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size of the message.</td>
-        </tr>
-        <tr>
-          <td><code>text</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Optional text content. Can be combined with content projection.</td>
-        </tr>
-        <tr>
-          <td><code>icon</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code> (uses severity default)</td>
-          <td>Custom icon name to override the severity-driven icon.</td>
-        </tr>
-        <tr>
-          <td><code>closable</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Shows a close button when true.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS class(es) appended to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="message-demo__api-subtitle">Outputs</h3>
-    <table class="message-demo__table">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Payload</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>close</code></td>
-          <td><code>void</code></td>
-          <td>Emitted when the close button is clicked.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -4,12 +4,21 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Chip } from 'ui-lib-custom/chip';
 import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
 import { Button } from 'ui-lib-custom/button';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for the Chip component.
@@ -23,14 +32,37 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     Button,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
+    DocSectionComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocApiReferenceComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Chip } from 'ui-lib-custom/chip'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
@@ -91,27 +123,79 @@ export class ChipDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
+    readonly basicTs: string;
     readonly icon: string;
+    readonly iconTs: string;
     readonly image: string;
+    readonly imageTs: string;
     readonly removable: string;
+    readonly removableTs: string;
     readonly selectable: string;
+    readonly selectableTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { Chip } from 'ui-lib-custom/chip';`,
     basic: `<ui-lib-chip label="Action" />
 <ui-lib-chip label="Comedy" />
 <ui-lib-chip label="Mystery" />`,
+    basicTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     icon: `<ui-lib-chip label="Angular"  icon="pi pi-bolt" />
 <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
 <ui-lib-chip label="Starred"  icon="pi pi-star" />`,
+    iconTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     image: `<ui-lib-chip label="Amy"   image="/assets/amy.png"   imageAlt="Amy Elsner" />
 <ui-lib-chip label="Asiya" image="/assets/asiya.png" imageAlt="Asiya Javayant" />`,
+    imageTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     removable: `<ui-lib-chip
   label="Angular"
   [removable]="true"
   (removed)="removeChip('Angular')"
 />`,
+    removableTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly activeChips: WritableSignal<string[]> = signal<string[]>(['Angular']);
+
+  public removeChip(label: string): void {
+    this.activeChips.update((chips: string[]): string[] =>
+      chips.filter((chip: string): boolean => chip !== label)
+    );
+  }
+}`,
     selectable: `<div role="listbox" aria-label="Frameworks" aria-multiselectable="true">
   <ui-lib-chip
     label="Angular"
@@ -120,12 +204,42 @@ export class ChipDemoComponent {
     (selectedChange)="isSelected = $event"
   />
 </div>`,
+    selectableTs: `import { Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly isSelected: WritableSignal<boolean> = signal<boolean>(false);
+}`,
     sizes: `<ui-lib-chip label="Small"  size="sm" icon="pi pi-tag" />
 <ui-lib-chip label="Medium" size="md" icon="pi pi-tag" />
 <ui-lib-chip label="Large"  size="lg" icon="pi pi-tag" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     variants: `<ui-lib-chip label="Label only" variant="material" />
 <ui-lib-chip label="Label only" variant="bootstrap" />
 <ui-lib-chip label="Label only" variant="minimal" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Chip } from 'ui-lib-custom/chip';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   // ---- Removable demo -----------------------------------------------------
@@ -199,4 +313,208 @@ export class ChipDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Chip label text.' },
+    { name: 'icon', type: 'string | null', default: 'null', description: 'Leading icon name.' },
+    { name: 'removable', type: 'boolean', default: 'false', description: 'Shows a remove button.' },
+    {
+      name: 'removeIcon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Custom remove icon name.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL for an avatar image inside the chip.',
+    },
+    { name: 'imageAlt', type: 'string', default: "''", description: 'Alt text for the image.' },
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warning' | 'danger' | 'secondary' | null",
+      default: 'null',
+      description: 'Severity colour.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a fully rounded pill shape.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Chip size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Space / Enter',
+      target: 'Selectable chip',
+      action: 'Toggles the selected state and emits <code>(selectedChange)</code>.',
+    },
+    {
+      key: 'Tab',
+      target: 'Selectable chip',
+      action: 'Moves focus to / from the chip in the standard tab order.',
+    },
+    {
+      key: 'Space / Enter',
+      target: 'Remove button',
+      action: 'Activates the remove button (native button behaviour).',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      attribute: 'role',
+      element: 'Host',
+      value: 'option | group',
+      notes:
+        '<code>option</code> for non-removable chips; <code>group</code> for removable chips to allow a nested interactive button.',
+    },
+    {
+      attribute: 'aria-label',
+      element: 'Host',
+      value: 'label value',
+      notes:
+        'Set to the <code>label</code> input value. Omitted when <code>label</code> is <code>null</code>.',
+    },
+    {
+      attribute: 'aria-selected',
+      element: 'Host',
+      value: '"true" / "false"',
+      notes: 'Only present when <code>[selectable]="true"</code>.',
+    },
+    {
+      attribute: 'tabindex',
+      element: 'Host',
+      value: '"0"',
+      notes: 'Only present when <code>[selectable]="true"</code>.',
+    },
+    {
+      attribute: 'id',
+      element: 'Host',
+      value: 'ui-lib-chip-{n}',
+      notes: 'Auto-generated. Unique per instance; stable for the component lifetime.',
+    },
+    {
+      attribute: 'aria-label',
+      element: 'Remove button',
+      value: '"Remove {label}"',
+      notes:
+        'Auto-generated from the <code>label</code> input; provides an accessible name for the close action.',
+    },
+    {
+      attribute: 'aria-hidden',
+      element: 'Leading icon',
+      value: '"true"',
+      notes: 'Decorative icon hidden from screen readers.',
+    },
+    {
+      attribute: 'aria-hidden',
+      element: 'Remove icon',
+      value: '"true"',
+      notes: 'Decorative icon hidden from screen readers.',
+    },
+    {
+      attribute: 'alt',
+      element: 'Image',
+      value: 'imageAlt value',
+      notes:
+        'Defaults to <code>"Chip"</code>. Provide a meaningful description for real user images.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text displayed inside the chip.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description:
+        'CSS class for a leading icon (e.g. "pi pi-user"). Ignored when image is also set.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL of a circular thumbnail image rendered at the start of the chip.',
+    },
+    {
+      name: 'imageAlt',
+      type: 'string',
+      default: "'Chip'",
+      description:
+        'Alt text for the chip image. Provide a meaningful description for real user images.',
+    },
+    {
+      name: 'removable',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, a close button is rendered. Emits (removed) on click.',
+    },
+    {
+      name: 'removeIcon',
+      type: 'string',
+      default: "'pi pi-times'",
+      description: 'CSS class for the remove button icon.',
+    },
+    {
+      name: 'selectable',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'When true, the chip is keyboard-focusable and toggleable. Pair with [selected] and (selectedChange).',
+    },
+    {
+      name: 'selected',
+      type: 'boolean',
+      default: 'false',
+      description: 'Selected state for selectable chips.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the chip.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes applied to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(removed)',
+      type: 'OutputEmitterRef<MouseEvent>',
+      description:
+        'Emitted when the remove button is clicked. The chip does not auto-hide — manage visibility in the parent.',
+    },
+    {
+      name: '(selectedChange)',
+      type: 'OutputEmitterRef<boolean>',
+      description: 'Emitted when a selectable chip is toggled; provides the new selected value.',
+    },
+  ];
 }

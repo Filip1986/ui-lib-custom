@@ -19,8 +19,7 @@
   </div>
 
   @if (activeTab() === 'demo') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="composition" data-doc-anchor>
-      <div card-header>Composition Playground</div>
+    <ui-lib-panel variant="minimal">
       <p>Tweak container, stack, and grid props to see a dashboard layout adapt in real time.</p>
       <div class="doc-demo-group spacing-playground">
         <ui-lib-stack spacing="lg" class="spacing-stack">
@@ -158,23 +157,21 @@
           </app-doc-demo-viewport>
         </ui-lib-stack>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Usage</div>
-      <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="usageSnippet"
+    <ui-lib-panel variant="minimal">
+      <app-doc-code-example
+        [html]="usageSnippetHtml"
+        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
-    </ui-lib-card>
+      />
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>API Reference</div>
+    <ui-lib-panel variant="minimal">
       <div class="doc-demo-group">
         <p>Composition combines Stack, Inline, Grid, and Container props. Key props include:</p>
         <ul>
@@ -183,6 +180,6 @@
           <li><code>inset</code> and <code>size</code> on Container for padding and max-width.</li>
         </ul>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 </app-doc-page-layout>

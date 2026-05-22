@@ -13,9 +13,7 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   UiLibCascadeSelect,
   CascadeSelectOptionDirective,
@@ -32,21 +30,47 @@ import {
   type CascadeCity,
   type CascadeState,
 } from './cascade-select-demo.data';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
-type CascadeSelectDemoSnippetKey =
-  | 'basic'
-  | 'template'
-  | 'loading'
-  | 'clear'
-  | 'sizes'
-  | 'filled'
-  | 'fluid'
-  | 'states'
-  | 'forms'
-  | 'reactive'
-  | 'variants'
-  | 'clipping';
+import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicHtml,
+  basicTs,
+  templateHtml,
+  templateTs,
+  loadingHtml,
+  loadingTs,
+  clearHtml,
+  clearTs,
+  sizesHtml,
+  sizesTs,
+  filledHtml,
+  filledTs,
+  fluidHtml,
+  fluidTs,
+  statesHtml,
+  statesTs,
+  formsHtml,
+  formsTs,
+  reactiveHtml,
+  reactiveTs,
+  variantsHtml,
+  variantsTs,
+  clippingHtml,
+  clippingTs,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
 /**
@@ -56,6 +80,7 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
   selector: 'app-cascade-select-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -63,9 +88,7 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     DocPageLayoutComponent,
     DocTocComponent,
     DocDemoViewportComponent,
-    Card,
     Button,
-    CodeSnippet,
     UiLibCascadeSelect,
     CascadeSelectOptionDirective,
     CascadeSelectValueDirective,
@@ -74,12 +97,63 @@ type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
     CascadeSelectLoadingDirective,
     CascadeSelectDropdownIconDirective,
     CascadeSelectOptionGroupIconDirective,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './cascade-select-demo.component.html',
   styleUrl: './cascade-select-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CascadeSelectDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly templateHtml: string = templateHtml;
+  public readonly templateTs: string = templateTs;
+  public readonly loadingHtml: string = loadingHtml;
+  public readonly loadingTs: string = loadingTs;
+  public readonly clearHtml: string = clearHtml;
+  public readonly clearTs: string = clearTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTs: string = filledTs;
+  public readonly fluidHtml: string = fluidHtml;
+  public readonly fluidTs: string = fluidTs;
+  public readonly statesHtml: string = statesHtml;
+  public readonly statesTs: string = statesTs;
+  public readonly formsHtml: string = formsHtml;
+  public readonly formsTs: string = formsTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly clippingHtml: string = clippingHtml;
+  public readonly clippingTs: string = clippingTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select'";
 
@@ -99,100 +173,14 @@ export class CascadeSelectDemoComponent {
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'variants', label: 'Variants' },
     { id: 'clipping', label: 'Clipping Container' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: Record<CascadeSelectDemoSnippetKey, string> = {
-    basic: `<ui-lib-cascade-select
-  [(ngModel)]="cityCode"
-  [options]="countries"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
-  placeholder="Select city"
-/>`,
-    template: `<ui-lib-cascade-select
-  [(ngModel)]="templatedCode"
-  [options]="countries"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
->
-  <ng-template uiCascadeSelectOption let-option>
-    <i [class]="resolveNodeIcon(option)"></i>
-    <span>{{ resolveNodeLabel(option) }}</span>
-  </ng-template>
-</ui-lib-cascade-select>`,
-    loading: `<ui-lib-cascade-select
-  [(ngModel)]="loadingCode"
-  [options]="countries"
-  [loading]="loading"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
-/>`,
-    clear: `<ui-lib-cascade-select
-  [(ngModel)]="clearableCode"
-  [options]="countries"
-  [showClear]="true"
-  optionGroupLabel="name"
-  [optionGroupChildren]="['states', 'cities']"
-  optionLabel="cname"
-  optionValue="code"
-/>`,
-    sizes: `<ui-lib-cascade-select size="sm" />
-<ui-lib-cascade-select size="md" />
-<ui-lib-cascade-select size="lg" />`,
-    filled: `<ui-lib-cascade-select [filled]="true" />`,
-    fluid: `<ui-lib-cascade-select [fluid]="true" />`,
-    states: `<ui-lib-cascade-select [disabled]="true" />
-<ui-lib-cascade-select [invalid]="true" />`,
-    forms: `<form #f="ngForm">
-  <ui-lib-cascade-select
-    name="city"
-    required
-    [(ngModel)]="templateDrivenCode"
-    #cityModel="ngModel"
-    [invalid]="cityModel.invalid && cityModel.touched"
-    [options]="countries"
-    optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
-    optionLabel="cname"
-    optionValue="code"
-  />
-</form>`,
-    reactive: `<form [formGroup]="reactiveForm">
-  <ui-lib-cascade-select
-    formControlName="city"
-    [invalid]="cityControl().invalid && cityControl().touched"
-    [options]="countries"
-    optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
-    optionLabel="cname"
-    optionValue="code"
-  />
-</form>`,
-    variants: `<ui-lib-cascade-select variant="material" />
-<ui-lib-cascade-select variant="bootstrap" />
-<ui-lib-cascade-select variant="minimal" />`,
-    clipping: `<div class="clipping-card">
-  <ui-lib-cascade-select
-    [(ngModel)]="clippingCode"
-    [options]="countries"
-    optionGroupLabel="name"
-    [optionGroupChildren]="['states', 'cities']"
-    optionLabel="cname"
-    optionValue="code"
-    placeholder="Open inside clipped card"
-  />
-</div>`,
-  };
 
   public readonly countries: CascadeCountry[] = CASCADE_SELECT_COUNTRIES;
 
@@ -226,10 +214,6 @@ export class CascadeSelectDemoComponent {
 
   public loading: boolean = true;
 
-  public snippet(key: CascadeSelectDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
   public cityControl(): FormControl<string | null> {
     return this.reactiveForm.controls['city'] as FormControl<string | null>;
   }
@@ -261,4 +245,166 @@ export class CascadeSelectDemoComponent {
     const node: Partial<CascadeNode> = option as Partial<CascadeNode>;
     return node.icon ?? 'pi pi-circle';
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'options',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'The hierarchical option array.',
+    },
+    {
+      name: 'optionLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name for the display label.',
+    },
+    {
+      name: 'optionValue',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'Property name for the value.',
+    },
+    { name: 'placeholder', type: 'string', default: "'Select'", description: 'Placeholder text.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | undefined",
+      default: 'undefined',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading indicator.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    {
+      name: 'fluid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the component full-width.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'ARIA label.' },
+  ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the trigger button.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the component.' },
+    { key: 'Enter / Space', action: 'Opens the panel or selects the focused option.' },
+    { key: '↓', action: 'Moves focus to the next option in the current level.' },
+    { key: '↑', action: 'Moves focus to the previous option in the current level.' },
+    { key: '→', action: 'Opens the sub-panel for the focused group option.' },
+    { key: '←', action: 'Closes the current sub-panel and returns focus to the parent.' },
+    { key: 'Escape', action: 'Closes all panels.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Trigger button',
+      attribute: 'role="combobox"',
+      value: '—',
+      notes: 'Identifies the trigger as a combobox to assistive technologies.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the panel is open.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-haspopup',
+      value: '"tree"',
+      notes: 'Signals that the button controls a hierarchical popup.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Set via <code>[ariaLabel]</code> for screen reader identification.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Option panel',
+      attribute: 'role="tree"',
+      value: '—',
+      notes: 'The panel is exposed as a tree widget reflecting hierarchical structure.',
+    },
+    {
+      element: 'Option item',
+      attribute: 'role="treeitem"',
+      value: '—',
+      notes: 'Each option is announced as a tree item.',
+    },
+    {
+      element: 'Option item',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Applied to group options that have sub-panels.',
+    },
+    {
+      element: 'Option item',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Indicates the currently selected leaf option.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-cascade-select-bg', description: 'Background colour.' },
+    { variable: '--uilib-cascade-select-border', description: 'Border shorthand.' },
+    { variable: '--uilib-cascade-select-border-focus', description: 'Border shorthand (focus).' },
+    { variable: '--uilib-cascade-select-radius', description: 'Border radius.' },
+    { variable: '--uilib-cascade-select-text', description: 'Text.' },
+    { variable: '--uilib-cascade-select-placeholder', description: 'Placeholder.' },
+    { variable: '--uilib-cascade-select-padding-y-base', description: 'Padding Y Base.' },
+    { variable: '--uilib-cascade-select-padding-x-base', description: 'Padding X Base.' },
+    { variable: '--uilib-cascade-select-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-cascade-select-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-cascade-select-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-cascade-select-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-cascade-select-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-cascade-select-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-cascade-select-panel-min-width', description: 'Panel Min width.' },
+    { variable: '--uilib-cascade-select-panel-max-height', description: 'Panel Max height.' },
+    { variable: '--uilib-cascade-select-panel-z-index', description: 'Panel z-index.' },
+    { variable: '--uilib-cascade-select-option-padding', description: 'Option padding.' },
+    {
+      variable: '--uilib-cascade-select-option-hover-bg',
+      description: 'Option Hover background colour.',
+    },
+    {
+      variable: '--uilib-cascade-select-option-selected-bg',
+      description: 'Option Selected background colour.',
+    },
+    {
+      variable: '--uilib-cascade-select-option-disabled-opacity',
+      description: 'Option Disabled opacity.',
+    },
+    { variable: '--uilib-cascade-select-submenu-icon-size', description: 'Submenu Icon size.' },
+    { variable: '--uilib-cascade-select-submenu-gap', description: 'Submenu gap.' },
+    { variable: '--uilib-cascade-select-transition', description: 'Transition.' },
+    {
+      variable: '--uilib-cascade-select-panel-animation-duration',
+      description: 'Panel Animation Duration.',
+    },
+    {
+      variable: '--uilib-cascade-select-level-animation-duration',
+      description: 'Level Animation Duration.',
+    },
+    { variable: '--uilib-cascade-select-loading-size', description: 'Loading size.' },
+  ];
 }

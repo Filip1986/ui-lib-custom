@@ -15,30 +15,54 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { EditorComponent, EditorToolbarDirective } from 'ui-lib-custom/editor';
 import type { EditorSelectionChangeEvent, EditorTextChangeEvent } from 'ui-lib-custom/editor';
 
-type EditorDemoSnippetKey =
-  | 'basic'
-  | 'readonly'
-  | 'customToolbar'
-  | 'templateDriven'
-  | 'reactive'
-  | 'variants'
-  | 'sizes'
-  | 'filled'
-  | 'disabled'
-  | 'events';
+import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicHtml,
+  basicTs,
+  readonlyHtml,
+  readonlyTs,
+  customToolbarHtml,
+  customToolbarTs,
+  templateDrivenHtml,
+  templateDrivenTs,
+  reactiveHtml,
+  reactiveTs,
+  variantsHtml,
+  variantsTs,
+  sizesHtml,
+  sizesTs,
+  filledHtml,
+  filledTs,
+  disabledHtml,
+  disabledTs,
+  eventsHtml,
+  eventsTs,
+} from './snippets.generated';
+
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
- * Demo page for Editor component usage, forms integration, and event behavior.
+ *
  */
 @Component({
   selector: 'app-editor-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -47,16 +71,60 @@ type EditorDemoSnippetKey =
     DocTocComponent,
     DocDemoViewportComponent,
     Button,
-    Card,
-    CodeSnippet,
     EditorComponent,
     EditorToolbarDirective,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+    DocCssVarsTableComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './editor-demo.component.html',
   styleUrl: './editor-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-22',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 8,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 8,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly readonlyHtml: string = readonlyHtml;
+  public readonly readonlyTs: string = readonlyTs;
+  public readonly customToolbarHtml: string = customToolbarHtml;
+  public readonly customToolbarTs: string = customToolbarTs;
+  public readonly templateDrivenHtml: string = templateDrivenHtml;
+  public readonly templateDrivenTs: string = templateDrivenTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTs: string = filledTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly eventsHtml: string = eventsHtml;
+  public readonly eventsTs: string = eventsTs;
+
   public readonly importCode: string = "import { EditorComponent } from 'ui-lib-custom/editor'";
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -73,71 +141,26 @@ export class EditorDemoComponent {
     { id: 'filled', label: 'Filled' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'events', label: 'Events' },
+    {
+      id: 'accessibility',
+      label: 'Accessibility',
+      children: [
+        { id: 'a11y-aria', label: 'ARIA Attributes' },
+        { id: 'a11y-keyboard', label: 'Keyboard' },
+      ],
+    },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
 
-  public readonly snippets: Record<EditorDemoSnippetKey, string> = {
-    basic: `<ui-lib-editor [(ngModel)]="basicHtml" placeholder="Write something..."></ui-lib-editor>
-<pre>{{ basicHtml }}</pre>`,
-    readonly: `<ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>`,
-    customToolbar: `<ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
-  <div editorToolbar>
-    <select
-      [value]="editor.toolbarState().blockFormat"
-      (mousedown)="$event.preventDefault()"
-      (change)="onCustomHeadingChange(editor, $event)"
-    >
-      <option value="p">Normal</option>
-      <option value="h1">Heading 1</option>
-      <option value="h2">Heading 2</option>
-    </select>
-
-    <button
-      type="button"
-      [attr.aria-pressed]="editor.toolbarState().bold"
-      (mousedown)="$event.preventDefault()"
-      (click)="editor.executeCommand('bold')"
-    >
-      B
-    </button>
-  </div>
-</ui-lib-editor>`,
-    templateDriven: `<form #f="ngForm" (ngSubmit)="submitTemplateDriven(f)">
-  <ui-lib-editor
-    name="templateContent"
-    required
-    [(ngModel)]="templateDrivenHtml"
-  ></ui-lib-editor>
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-</form>`,
-    reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <ui-lib-editor formControlName="content"></ui-lib-editor>
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-</form>`,
-    variants: `<ui-lib-editor variant="material" [(ngModel)]="variantValues.material"></ui-lib-editor>
-<ui-lib-editor variant="bootstrap" [(ngModel)]="variantValues.bootstrap"></ui-lib-editor>
-<ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal"></ui-lib-editor>`,
-    sizes: `<ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm"></ui-lib-editor>
-<ui-lib-editor size="md" [(ngModel)]="sizeValues.md"></ui-lib-editor>
-<ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg"></ui-lib-editor>`,
-    filled: `<ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>`,
-    disabled: `<ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>`,
-    events: `<ui-lib-editor
-  [(ngModel)]="eventsHtml"
-  (textChange)="onTextChange($event)"
-  (selectionChange)="onSelectionChange($event)"
-></ui-lib-editor>`,
-  };
-
-  public basicHtml: string = '<p>Welcome to the <strong>Editor</strong>.</p>';
-  public readonly readonlyHtml: string =
+  public basicContent: string = '<p>Welcome to the <strong>Editor</strong>.</p>';
+  public readonly readonlyContent: string =
     '<h2>Readonly Example</h2><p><strong>Important</strong> details:</p><ul><li>Item one</li><li>Item two</li></ul>';
-  public customToolbarHtml: string = '<p>Use the projected toolbar controls.</p>';
+  public customToolbarContent: string = '<p>Use the projected toolbar controls.</p>';
 
-  public templateDrivenHtml: string = '';
+  public templateDrivenContent: string = '';
   public templateDrivenSubmittedHtml: string | null = null;
 
   public readonly reactiveForm: FormGroup<{ content: FormControl<string | null> }> = new FormGroup<{
@@ -159,15 +182,11 @@ export class EditorDemoComponent {
     lg: '<p>Large editor.</p>',
   };
 
-  public filledHtml: string = '<p>Filled mode editor.</p>';
-  public readonly disabledHtml: string = '<p>This editor is disabled.</p>';
+  public filledContent: string = '<p>Filled mode editor.</p>';
+  public readonly disabledContent: string = '<p>This editor is disabled.</p>';
 
-  public eventsHtml: string = '<p>Select text and type to emit events.</p>';
+  public eventsContent: string = '<p>Select text and type to emit events.</p>';
   public readonly eventLog: string[] = [];
-
-  public snippet(key: EditorDemoSnippetKey): string {
-    return this.snippets[key];
-  }
 
   public submitTemplateDriven(form: NgForm): void {
     form.control.markAllAsTouched();
@@ -176,7 +195,7 @@ export class EditorDemoComponent {
       return;
     }
 
-    this.templateDrivenSubmittedHtml = this.templateDrivenHtml;
+    this.templateDrivenSubmittedHtml = this.templateDrivenContent;
   }
 
   public submitReactive(): void {
@@ -224,4 +243,134 @@ export class EditorDemoComponent {
       this.eventLog.length = 12;
     }
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Editor size.' },
+    {
+      name: 'placeholder',
+      type: 'string',
+      default: "''",
+      description: 'Placeholder text in the empty editor.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the editor read-only.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the editor.' },
+    {
+      name: 'filled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a filled background style.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the editor region.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-editor-toolbar-bg', description: 'Toolbar background colour.' },
+    { variable: '--uilib-editor-toolbar-border-color', description: 'Toolbar Border text colour.' },
+    { variable: '--uilib-editor-toolbar-item-color', description: 'Toolbar Item text colour.' },
+    {
+      variable: '--uilib-editor-toolbar-item-hover-color',
+      description: 'Toolbar Item Hover text colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-item-hover-bg',
+      description: 'Toolbar Item Hover background colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-item-active-color',
+      description: 'Toolbar Item Active text colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-item-active-bg',
+      description: 'Toolbar Item Active background colour.',
+    },
+    {
+      variable: '--uilib-editor-toolbar-separator-color',
+      description: 'Toolbar Separator text colour.',
+    },
+    { variable: '--uilib-editor-content-bg', description: 'Content background colour.' },
+    { variable: '--uilib-editor-content-border-color', description: 'Content Border text colour.' },
+    { variable: '--uilib-editor-content-color', description: 'Content text colour.' },
+    { variable: '--uilib-editor-placeholder-color', description: 'Placeholder text colour.' },
+    { variable: '--uilib-editor-focus-ring-color', description: 'Focus ring colour.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Editing area',
+      attribute: 'role="textbox"',
+      value: '—',
+      notes:
+        'Quill renders a <code>contenteditable</code> <code>&lt;div&gt;</code> with implicit <code>role="textbox"</code> and <code>aria-multiline="true"</code>.',
+    },
+    {
+      element: 'Editing area',
+      attribute: 'aria-label',
+      value: '—',
+      notes:
+        'Set via the <code>[ariaLabel]</code> input. Provide a visible label or this attribute for screen readers.',
+    },
+    {
+      element: 'Editing area (readonly)',
+      attribute: 'aria-readonly="true"',
+      value: '—',
+      notes: 'Applied automatically when <code>[readonly]="true"</code>.',
+    },
+    {
+      element: 'Editing area (disabled)',
+      attribute: 'aria-disabled="true"',
+      value: '—',
+      notes: 'Applied automatically when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Toolbar',
+      attribute: 'role="toolbar"',
+      value: '—',
+      notes:
+        'The default toolbar container is marked with <code>role="toolbar"</code> and an <code>aria-label</code> of "Text formatting".',
+    },
+    {
+      element: 'Toolbar buttons',
+      attribute: 'aria-label',
+      value: '—',
+      notes:
+        'Each toolbar button exposes its action via <code>aria-label</code> (e.g. "Bold", "Italic").',
+    },
+    {
+      element: 'Toolbar buttons (active)',
+      attribute: 'aria-pressed="true"',
+      value: '—',
+      notes:
+        'Toggle-style buttons (Bold, Italic, …) reflect their active state via <code>aria-pressed</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus into the editor area.' },
+    { key: 'Ctrl + B', action: 'Toggles <strong>Bold</strong> formatting on the selected text.' },
+    { key: 'Ctrl + I', action: 'Toggles <em>Italic</em> formatting on the selected text.' },
+    { key: 'Ctrl + U', action: 'Toggles <u>Underline</u> formatting on the selected text.' },
+    { key: 'Ctrl + Z', action: 'Undo the last change.' },
+    { key: 'Ctrl + Y / Ctrl + Shift + Z', action: 'Redo the last undone change.' },
+    { key: 'Ctrl + A', action: 'Select all content in the editor.' },
+    { key: 'Enter', action: 'Inserts a new paragraph.' },
+    {
+      key: 'Shift + Enter',
+      action: 'Inserts a line break (<code>&lt;br&gt;</code>) within the same paragraph.',
+    },
+  ];
 }

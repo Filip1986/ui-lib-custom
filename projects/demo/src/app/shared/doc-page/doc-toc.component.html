@@ -1,14 +1,14 @@
 <nav class="doc-toc" aria-label="On-page navigation">
-  @if (sections.length === 0) {
+  @if (sections().length === 0) {
     <p class="doc-toc__empty">Sections will appear here.</p>
   } @else {
     <ul class="doc-toc__list">
-      @for (section of sections; track section.id) {
+      @for (section of sections(); track section.id) {
         <li class="doc-toc__item">
           <button
             type="button"
             class="doc-toc__link"
-            [class.active]="activeId === section.id"
+            [class.active]="activeId() === section.id"
             (click)="onSelect(section.id)"
           >
             <span>{{ section.label }}</span>
@@ -21,7 +21,7 @@
                   <button
                     type="button"
                     class="doc-toc__link"
-                    [class.active]="activeId === child.id"
+                    [class.active]="activeId() === child.id"
                     (click)="onSelect(child.id)"
                   >
                     <span>{{ child.label }}</span>

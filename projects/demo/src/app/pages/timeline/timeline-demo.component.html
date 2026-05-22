@@ -10,8 +10,7 @@
   <!-- =========================================================== -->
   <!-- 1. Basic Vertical (left-align, default dot markers)          -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="basic-vertical" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Vertical</h2>
+  <app-doc-section id="basic-vertical" title="Basic Vertical">
     <p class="demo-section__description">
       Default orientation with left alignment. Event body is shown via
       <code>[uiTimelineContent]</code>.
@@ -24,13 +23,12 @@
         </div>
       </ng-template>
     </ui-lib-timeline>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 2. Opposite Content (date on one side, body on the other)   -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="opposite-content" data-doc-anchor>
-    <h2 class="demo-section__title">Opposite Content</h2>
+  <app-doc-section id="opposite-content" title="Opposite Content">
     <p class="demo-section__description">
       Use <code>[uiTimelineOpposite]</code> to show a timestamp on the left and the event
       body on the right.
@@ -46,13 +44,12 @@
         </div>
       </ng-template>
     </ui-lib-timeline>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 3. Alternate Alignment                                       -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="alternate-alignment" data-doc-anchor>
-    <h2 class="demo-section__title">Alternate Alignment</h2>
+  <app-doc-section id="alternate-alignment" title="Alternate Alignment">
     <p class="demo-section__description">
       Even and odd events alternate sides via <code>align="alternate"</code>.
     </p>
@@ -67,13 +64,12 @@
         </div>
       </ng-template>
     </ui-lib-timeline>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 4. Custom Markers                                            -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="custom-markers" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Markers</h2>
+  <app-doc-section id="custom-markers" title="Custom Markers">
     <p class="demo-section__description">
       Replace the default dot with a severity badge via <code>[uiTimelineMarker]</code>.
     </p>
@@ -91,13 +87,12 @@
         </div>
       </ng-template>
     </ui-lib-timeline>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 5. Horizontal Layout                                         -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="horizontal-layout" data-doc-anchor>
-    <h2 class="demo-section__title">Horizontal Layout</h2>
+  <app-doc-section id="horizontal-layout" title="Horizontal Layout">
     <p class="demo-section__description">
       Use <code>layout="horizontal"</code> with <code>align="top"</code>.
     </p>
@@ -115,13 +110,12 @@
         <span class="timeline-demo__step-label">{{ step.label }}</span>
       </ng-template>
     </ui-lib-timeline>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 6. Three Variants Side-by-Side                              -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Material, Bootstrap, and Minimal variants rendered side by side.
     </p>
@@ -137,13 +131,12 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 7. Sizes                                                     -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       <code>sm</code>, <code>md</code>, and <code>lg</code> density sizes.
     </p>
@@ -159,13 +152,12 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- =========================================================== -->
   <!-- 8. Right Alignment                                           -->
   <!-- =========================================================== -->
-  <section class="demo-section" id="right-alignment" data-doc-anchor>
-    <h2 class="demo-section__title">Right Alignment</h2>
+  <app-doc-section id="right-alignment" title="Right Alignment">
     <p class="demo-section__description">
       Use <code>align="right"</code> to render event content on the left.
     </p>
@@ -179,7 +171,35 @@
         </div>
       </ng-template>
     </ui-lib-timeline>
-  </section>
+  </app-doc-section>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-timeline</code>. Import from
+      <code>ui-lib-custom/timeline</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

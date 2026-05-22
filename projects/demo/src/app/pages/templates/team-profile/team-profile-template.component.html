@@ -1,0 +1,209 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Team &amp; Profile Template"
+    description="A user profile card with skills, stats, and activity feed — paired with a team directory grid. Uses Avatar, AvatarGroup, Badge, and Tag from ui-lib-custom."
+    [tags]="['Free', 'People', 'Template']"
+  />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+  <!-- Overview ─────────────────────────────────────────────────────────────── -->
+  <section id="overview" data-doc-anchor>
+    <h2>Overview</h2>
+    <p>
+      The Team &amp; Profile template covers two closely related patterns: the personal profile
+      page (suitable for account settings, public profiles, or employee cards) and the team
+      directory grid (used in admin portals, intranets, and HR tools).
+    </p>
+  </section>
+
+  <!-- User Profile ─────────────────────────────────────────────────────────── -->
+  <section id="profile" data-doc-anchor>
+    <h2>User Profile</h2>
+
+    <div class="profile-layout">
+
+      <!-- Profile card (left) -->
+      <ui-lib-panel class="profile-card">
+        <div class="profile-avatar-wrap">
+           <ui-lib-avatar label="JD" shape="circle" size="lg" />
+          <span class="profile-status-dot profile-status-dot--online" aria-label="Online"></span>
+        </div>
+        <h3 class="profile-name">Jane Doe</h3>
+        <p class="profile-role">Product Designer</p>
+        <p class="profile-location"><i class="pi pi-map-marker"></i> London, UK</p>
+
+        <ui-lib-divider />
+
+        <div class="profile-stats">
+          <div class="profile-stat">
+            <span class="profile-stat-value">48</span>
+            <span class="profile-stat-label">Projects</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-value">3.2k</span>
+            <span class="profile-stat-label">Commits</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-value">142</span>
+            <span class="profile-stat-label">Reviews</span>
+          </div>
+        </div>
+
+        <ui-lib-divider />
+
+        <div class="profile-actions">
+          <ui-lib-button variant="material" label="Message" leftIcon="pi pi-envelope" />
+          <ui-lib-button variant="minimal" label="Follow" leftIcon="pi pi-user-plus" />
+        </div>
+
+        <ui-lib-divider />
+
+        <div class="profile-skills">
+          <p class="profile-section-label">Skills</p>
+          <div class="profile-tag-list">
+            @for (skill of skills; track skill) {
+              <ui-lib-tag [value]="skill" />
+            }
+          </div>
+        </div>
+      </ui-lib-panel>
+
+      <!-- Activity feed (right) -->
+      <div class="profile-feed">
+        <ui-lib-panel>
+          <h4 class="profile-section-label">Recent Activity</h4>
+          <ul class="feed-list" role="list">
+            <li class="feed-item">
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
+              <div class="feed-content">
+                <p>Completed design review for <strong>Dashboard v3</strong></p>
+                <span class="feed-time">Today at 10:32 AM</span>
+              </div>
+            </li>
+            <li class="feed-item">
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
+              <div class="feed-content">
+                <p>Commented on <strong>Button component accessibility</strong></p>
+                <span class="feed-time">Yesterday at 3:15 PM</span>
+              </div>
+            </li>
+            <li class="feed-item">
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
+              <div class="feed-content">
+                <p>Merged PR <strong>#214 — Token system update</strong></p>
+                <span class="feed-time">May 18 at 9:00 AM</span>
+              </div>
+            </li>
+            <li class="feed-item">
+              <ui-lib-avatar label="JD" shape="circle" size="md" />
+              <div class="feed-content">
+                <p>Created new project <strong>AI UI Kit wireframes</strong></p>
+                <span class="feed-time">May 15 at 2:45 PM</span>
+              </div>
+            </li>
+          </ul>
+        </ui-lib-panel>
+
+        <ui-lib-panel>
+          <h4 class="profile-section-label">Current Projects</h4>
+          <ul class="project-list" role="list">
+            <li class="project-item">
+              <div class="project-info">
+                <strong>Dashboard Redesign</strong>
+                <p>UI/UX overhaul of the main analytics dashboard.</p>
+              </div>
+              <ui-lib-badge value="Active" severity="success" />
+            </li>
+            <li class="project-item">
+              <div class="project-info">
+                <strong>Design System 2.0</strong>
+                <p>Token migration and component accessibility audit.</p>
+              </div>
+              <ui-lib-badge value="Review" severity="warning" />
+            </li>
+            <li class="project-item">
+              <div class="project-info">
+                <strong>AI UI Kit</strong>
+                <p>Wireframes and spec for the upcoming AI component kit.</p>
+              </div>
+              <ui-lib-badge value="Planning" />
+            </li>
+          </ul>
+        </ui-lib-panel>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Team Directory ───────────────────────────────────────────────────────── -->
+  <section id="team" data-doc-anchor>
+    <h2>Team Directory</h2>
+
+    <div class="team-toolbar">
+      <div class="team-search">
+        <i class="pi pi-search"></i>
+        <span class="team-search-placeholder">Search team members…</span>
+      </div>
+      <ui-lib-button variant="minimal" size="sm" label="Invite member" leftIcon="pi pi-user-plus" />
+    </div>
+
+    <div class="team-grid">
+      @for (member of teamMembers; track member.name) {
+        <ui-lib-panel class="member-card">
+          <div class="member-avatar-wrap">
+            <ui-lib-avatar [label]="member.initials" shape="circle" size="lg" />
+            <span
+              class="member-status-dot"
+              [class.member-status-dot--online]="member.status === 'online'"
+              [class.member-status-dot--away]="member.status === 'away'"
+              [class.member-status-dot--offline]="member.status === 'offline'"
+              [attr.aria-label]="member.status"
+            ></span>
+          </div>
+          <h4 class="member-name">{{ member.name }}</h4>
+          <p class="member-role">{{ member.role }}</p>
+          <ui-lib-tag [value]="member.department" />
+          <div class="member-actions">
+            <ui-lib-button variant="minimal" size="sm" label="Message" leftIcon="pi pi-envelope" />
+          </div>
+        </ui-lib-panel>
+      }
+    </div>
+
+    <div class="team-footer">
+      <div class="team-avatar-group-wrap">
+        <ui-lib-avatar-group>
+          @for (member of teamMembers; track member.name) {
+            <ui-lib-avatar [label]="member.initials" shape="circle" size="md" />
+          }
+        </ui-lib-avatar-group>
+        <span class="team-count">{{ teamMembers.length }} members</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage ────────────────────────────────────────────────────────────────── -->
+  <section id="usage" data-doc-anchor>
+    <h2>Usage</h2>
+    <p>
+      The snippet below shows the key components used in this template. Replace the static data
+      with your team service and bind the profile card to the current user's data.
+    </p>
+    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <div class="team-download-cta">
+      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
+      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+    </div>
+  </section>
+
+</app-doc-page-layout>

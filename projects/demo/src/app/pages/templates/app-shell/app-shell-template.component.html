@@ -1,0 +1,230 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="App Shell Template"
+    description="A ready-to-use application shell layout: sticky topbar, collapsible sidebar, and a main content area — all wired up with ui-lib-custom components."
+    [tags]="['Free', 'Layout', 'Template']"
+  />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+  <!-- Overview ─────────────────────────────────────────────────────────────── -->
+  <section id="overview" data-doc-anchor>
+    <h2>Overview</h2>
+    <p>
+      The App Shell template provides the structural bones every application needs: a sticky top
+      navigation bar, a collapsible sidebar with grouped navigation, and a scrollable main content
+      area. Copy the pattern into your project and start customising immediately.
+    </p>
+
+    <div class="template-feature-grid">
+      <div class="template-feature-card">
+        <i class="pi pi-window-maximize"></i>
+        <h4>Sticky Topbar</h4>
+        <p>Fixed top navigation with logo, search, notifications, and user avatar.</p>
+      </div>
+      <div class="template-feature-card">
+        <i class="pi pi-bars"></i>
+        <h4>Collapsible Sidebar</h4>
+        <p>Grouped navigation links with active-state highlighting and badge support.</p>
+      </div>
+      <div class="template-feature-card">
+        <i class="pi pi-th-large"></i>
+        <h4>Dashboard-ready</h4>
+        <p>Pre-wired stat cards, a data panel, and a recent-activity feed section.</p>
+      </div>
+      <div class="template-feature-card">
+        <i class="pi pi-palette"></i>
+        <h4>Fully Themed</h4>
+        <p>Every colour and spacing value comes from <code>--uilib-*</code> CSS variables.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Preview ─────────────────────────────────────────────────────────── -->
+  <section id="preview" data-doc-anchor>
+    <h2>Live Preview</h2>
+    <p>An interactive mockup of the App Shell rendered entirely with library components.</p>
+
+    <div class="shell-demo">
+
+      <!-- ── Topbar ─────────────────────────────────────────────── -->
+      <header class="shell-topbar">
+        <div class="shell-topbar-left">
+          <i class="pi pi-th-large shell-logo-icon"></i>
+          <span class="shell-logo-text">MyApp</span>
+        </div>
+        <div class="shell-topbar-center">
+          <div class="shell-search">
+            <i class="pi pi-search"></i>
+            <span class="shell-search-placeholder">Search…</span>
+          </div>
+        </div>
+        <div class="shell-topbar-right">
+          <div class="shell-notif-btn" role="button" aria-label="Notifications">
+            <i class="pi pi-bell"></i>
+            <span class="shell-notif-dot" aria-hidden="true"></span>
+          </div>
+          <ui-lib-avatar label="JD" shape="circle" size="md" />
+        </div>
+      </header>
+
+      <!-- ── Body ───────────────────────────────────────────────── -->
+      <div class="shell-body">
+
+        <!-- Sidebar -->
+        <nav class="shell-sidebar" aria-label="Main navigation">
+          <ul class="shell-nav" role="list">
+            <li class="shell-nav-group-label">Main</li>
+            <li class="shell-nav-item shell-nav-item--active">
+              <i class="pi pi-home"></i><span>Dashboard</span>
+            </li>
+            <li class="shell-nav-item">
+              <i class="pi pi-chart-bar"></i><span>Analytics</span>
+            </li>
+            <li class="shell-nav-item">
+              <i class="pi pi-users"></i><span>Team</span>
+              <span class="shell-nav-badge">3</span>
+            </li>
+            <li class="shell-nav-group-label">Settings</li>
+            <li class="shell-nav-item">
+              <i class="pi pi-cog"></i><span>Preferences</span>
+            </li>
+            <li class="shell-nav-item">
+              <i class="pi pi-shield"></i><span>Security</span>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main class="shell-main">
+
+          <!-- Stat cards -->
+          <div class="shell-stats">
+            <ui-lib-panel class="shell-stat-card">
+              <div class="shell-stat-inner">
+                <div class="shell-stat-label">Total Users</div>
+                <div class="shell-stat-value">12,480</div>
+                <span class="shell-stat-trend shell-stat-trend--up">
+                  <i class="pi pi-arrow-up"></i> 8.2%
+                </span>
+              </div>
+            </ui-lib-panel>
+            <ui-lib-panel class="shell-stat-card">
+              <div class="shell-stat-inner">
+                <div class="shell-stat-label">Revenue</div>
+                <div class="shell-stat-value">$84,320</div>
+                <span class="shell-stat-trend shell-stat-trend--up">
+                  <i class="pi pi-arrow-up"></i> 12.5%
+                </span>
+              </div>
+            </ui-lib-panel>
+            <ui-lib-panel class="shell-stat-card">
+              <div class="shell-stat-inner">
+                <div class="shell-stat-label">Open Tickets</div>
+                <div class="shell-stat-value">47</div>
+                <span class="shell-stat-trend shell-stat-trend--down">
+                  <i class="pi pi-arrow-down"></i> 3.1%
+                </span>
+              </div>
+            </ui-lib-panel>
+            <ui-lib-panel class="shell-stat-card">
+              <div class="shell-stat-inner">
+                <div class="shell-stat-label">Uptime</div>
+                <div class="shell-stat-value">99.98%</div>
+                <span class="shell-stat-trend shell-stat-trend--neutral">
+                  <i class="pi pi-minus"></i> stable
+                </span>
+              </div>
+            </ui-lib-panel>
+          </div>
+
+          <!-- Content panels -->
+          <div class="shell-content-row">
+            <ui-lib-panel class="shell-panel shell-panel--main">
+              <div class="shell-panel-header">
+                <h3>Recent Activity</h3>
+                <ui-lib-button variant="minimal" size="sm" label="View all" />
+              </div>
+              <ul class="shell-activity-list" role="list">
+                <li class="shell-activity-item">
+                  <ui-lib-avatar label="AL" shape="circle" size="md" />
+                  <div class="shell-activity-text">
+                    <strong>Alice Lee</strong> submitted a new report
+                    <span class="shell-activity-time">2 min ago</span>
+                  </div>
+                </li>
+                <li class="shell-activity-item">
+                  <ui-lib-avatar label="BM" shape="circle" size="md" />
+                  <div class="shell-activity-text">
+                    <strong>Bob Martin</strong> updated the billing plan
+                    <span class="shell-activity-time">14 min ago</span>
+                  </div>
+                </li>
+                <li class="shell-activity-item">
+                  <ui-lib-avatar label="CK" shape="circle" size="md" />
+                  <div class="shell-activity-text">
+                    <strong>Carol Kim</strong> invited 3 new team members
+                    <span class="shell-activity-time">1 hr ago</span>
+                  </div>
+                </li>
+              </ul>
+            </ui-lib-panel>
+
+            <ui-lib-panel class="shell-panel shell-panel--side">
+              <div class="shell-panel-header">
+                <h3>Status</h3>
+              </div>
+              <ul class="shell-status-list" role="list">
+                <li class="shell-status-item">
+                  <i class="pi pi-circle-fill shell-status-dot shell-status-dot--green"></i>
+                  <span>API Gateway</span>
+                  <span class="shell-status-label">Operational</span>
+                </li>
+                <li class="shell-status-item">
+                  <i class="pi pi-circle-fill shell-status-dot shell-status-dot--green"></i>
+                  <span>Database</span>
+                  <span class="shell-status-label">Operational</span>
+                </li>
+                <li class="shell-status-item">
+                  <i class="pi pi-circle-fill shell-status-dot shell-status-dot--yellow"></i>
+                  <span>CDN</span>
+                  <span class="shell-status-label">Degraded</span>
+                </li>
+                <li class="shell-status-item">
+                  <i class="pi pi-circle-fill shell-status-dot shell-status-dot--green"></i>
+                  <span>Auth Service</span>
+                  <span class="shell-status-label">Operational</span>
+                </li>
+              </ul>
+            </ui-lib-panel>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage ────────────────────────────────────────────────────────────────── -->
+  <section id="usage" data-doc-anchor>
+    <h2>Usage</h2>
+    <p>
+      Copy the snippet below into your project. Replace the mock nav items with your real routes
+      and swap the stat values for data from your services.
+    </p>
+    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <div class="template-download-cta">
+      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
+      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+    </div>
+  </section>
+
+</app-doc-page-layout>

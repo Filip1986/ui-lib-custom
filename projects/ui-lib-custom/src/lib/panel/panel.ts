@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -6,11 +7,15 @@ import {
   input,
   model,
   output,
+  signal,
+  viewChild,
   ViewEncapsulation,
+  type ElementRef,
   type InputSignal,
   type ModelSignal,
   type OutputEmitterRef,
   type Signal,
+  type WritableSignal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { PanelToggleEvent, PanelVariant } from './panel.types';
@@ -52,7 +57,7 @@ let panelIdCounter: number = 0;
   host: {
     '[class]': 'hostClasses()',
     role: 'region',
-    '[attr.aria-labelledby]': 'headerId',
+    '[attr.aria-labelledby]': 'showHeader() ? headerId : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -84,6 +89,33 @@ export class Panel {
 
   /** Emitted after the collapsed state changes when toggleable is true. */
   public readonly toggled: OutputEmitterRef<PanelToggleEvent> = output<PanelToggleEvent>();
+
+  /** @internal Template ref wrapping projected [panelHeader] content. */
+  private readonly projectedHeaderSlot: Signal<ElementRef<HTMLElement> | undefined> =
+    viewChild<ElementRef<HTMLElement>>('projectedHeaderSlot');
+
+  /** @internal Template ref wrapping projected [panelIcons] content. */
+  private readonly projectedIconsSlot: Signal<ElementRef<HTMLElement> | undefined> =
+    viewChild<ElementRef<HTMLElement>>('projectedIconsSlot');
+
+  /** @internal Whether any projected header or icon content was detected after render. */
+  private readonly hasProjectedContent: WritableSignal<boolean> = signal<boolean>(false);
+
+  constructor() {
+    afterNextRender((): void => {
+      const headerEl: HTMLElement | undefined = this.projectedHeaderSlot()?.nativeElement;
+      const iconsEl: HTMLElement | undefined = this.projectedIconsSlot()?.nativeElement;
+      const hasContent: boolean =
+        (headerEl !== undefined && headerEl.childNodes.length > 0) ||
+        (iconsEl !== undefined && iconsEl.childNodes.length > 0);
+      this.hasProjectedContent.set(hasContent);
+    });
+  }
+
+  /** Whether the header section should be rendered at all. */
+  public readonly showHeader: Signal<boolean> = computed<boolean>(
+    (): boolean => Boolean(this.header()) || this.toggleable() || this.hasProjectedContent()
+  );
 
   private readonly effectiveVariant: Signal<PanelVariant> = computed<PanelVariant>(
     (): PanelVariant => this.variant() ?? this.themeConfig.variant()

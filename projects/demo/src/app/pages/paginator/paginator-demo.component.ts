@@ -2,12 +2,22 @@ import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/
 import type { Signal, WritableSignal } from '@angular/core';
 import { PaginatorComponent } from 'ui-lib-custom/paginator';
 import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Paginator component.
  * Showcases all three variants, sizes, optional controls, and event handling.
@@ -16,17 +26,41 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-paginator-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     PaginatorComponent,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { PaginatorComponent } from 'ui-lib-custom/paginator'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -41,11 +75,95 @@ export class PaginatorDemoComponent {
     { id: 'jump-to-page', label: 'Jump To Page' },
     { id: 'without-first-last', label: 'Without First / Last Icons' },
     { id: 'arrows-only', label: 'Page Links Off' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'totalRecords',
+      type: 'number',
+      default: '0',
+      description: 'Total number of records to paginate.',
+    },
+    {
+      name: 'rows',
+      type: 'number',
+      description: 'Number of records per page (two-way bindable via [(rows)]).',
+    },
+    {
+      name: 'first',
+      type: 'number',
+      description:
+        'Zero-based index of the first record on the current page (two-way bindable via [(first)]).',
+    },
+    {
+      name: 'pageLinkSize',
+      type: 'number',
+      default: '5',
+      description: 'Number of page links displayed.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Paginator size.' },
+    {
+      name: 'alwaysShow',
+      type: 'boolean',
+      default: 'true',
+      description: 'Always renders the paginator even when there is only one page.',
+    },
+    {
+      name: 'showFirstLastIcon',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows first/last page buttons.',
+    },
+    {
+      name: 'showPageLinks',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows numbered page links.',
+    },
+    {
+      name: 'showCurrentPageReport',
+      type: 'boolean',
+      default: 'false',
+      description: "Shows a 'Showing X to Y of Z' report.",
+    },
+    {
+      name: 'currentPageReportTemplate',
+      type: 'string',
+      default: "'{first} - {last} of {totalRecords}'",
+      description: 'Template for the page report text.',
+    },
+    {
+      name: 'rowsPerPageOptions',
+      type: 'number[] | null',
+      default: 'null',
+      description: 'Options for the rows-per-page dropdown.',
+    },
+    {
+      name: 'showJumpToPageInput',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a page-number jump input.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Pagination'",
+      description: 'Accessible label for the pagination nav.',
+    },
+  ];
 
   // ── Shared state ────────────────────────────────────────────────────────────
   public readonly totalRecords: WritableSignal<number> = signal(120);
@@ -67,4 +185,122 @@ export class PaginatorDemoComponent {
     this.largeFirst.set(event.first);
     this.largeRows.set(event.rows);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action: 'Moves focus through each page button, first/last buttons, and controls.',
+    },
+    { key: 'Shift+Tab', action: 'Moves focus backwards through the paginator controls.' },
+    { key: 'Enter / Space', action: 'Activates the focused page button or control.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Nav element',
+      attribute: 'role="navigation"',
+      value: '—',
+      notes: 'Wraps the paginator in a navigation landmark.',
+    },
+    {
+      element: 'Nav element',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Defaults to "Pagination"; override with <code>[ariaLabel]</code>.',
+    },
+    {
+      element: 'Page buttons',
+      attribute: 'aria-label',
+      value: '"Page N"',
+      notes: 'Each page number button announces its page number.',
+    },
+    {
+      element: 'Current page button',
+      attribute: 'aria-current',
+      value: '"page"',
+      notes: 'Marks the currently active page button.',
+    },
+    {
+      element: 'First page button',
+      attribute: 'aria-label',
+      value: '"First Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Previous button',
+      attribute: 'aria-label',
+      value: '"Previous Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Next button',
+      attribute: 'aria-label',
+      value: '"Next Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Last page button',
+      attribute: 'aria-label',
+      value: '"Last Page"',
+      notes: 'Announces the navigation purpose.',
+    },
+    {
+      element: 'Disabled buttons',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when the button action is unavailable (e.g. already on first/last page).',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-paginator-gap', description: 'Gap.' },
+    { variable: '--uilib-paginator-padding', description: 'Padding.' },
+    { variable: '--uilib-paginator-button-size', description: 'Button size.' },
+    { variable: '--uilib-paginator-button-font-size', description: 'Button Font size.' },
+    { variable: '--uilib-paginator-button-radius', description: 'Button border radius.' },
+    { variable: '--uilib-paginator-button-bg', description: 'Button background colour.' },
+    { variable: '--uilib-paginator-button-color', description: 'Button text colour.' },
+    { variable: '--uilib-paginator-button-border', description: 'Button border shorthand.' },
+    {
+      variable: '--uilib-paginator-button-bg-hover',
+      description: 'Button background colour (hover).',
+    },
+    {
+      variable: '--uilib-paginator-button-color-hover',
+      description: 'Button text colour (hover).',
+    },
+    {
+      variable: '--uilib-paginator-button-bg-selected',
+      description: 'Button background colour (selected).',
+    },
+    {
+      variable: '--uilib-paginator-button-color-selected',
+      description: 'Button text colour (selected).',
+    },
+    {
+      variable: '--uilib-paginator-button-bg-disabled',
+      description: 'Button background colour (disabled).',
+    },
+    {
+      variable: '--uilib-paginator-button-color-disabled',
+      description: 'Button text colour (disabled).',
+    },
+    { variable: '--uilib-paginator-icon-size', description: 'Icon size.' },
+    { variable: '--uilib-paginator-current-color', description: 'Current text colour.' },
+    { variable: '--uilib-paginator-current-font-size', description: 'Current Font size.' },
+    { variable: '--uilib-paginator-jtp-width', description: 'Jtp width.' },
+    { variable: '--uilib-paginator-jtp-height', description: 'Jtp height.' },
+    { variable: '--uilib-paginator-jtp-border', description: 'Jtp border shorthand.' },
+    { variable: '--uilib-paginator-jtp-radius', description: 'Jtp border radius.' },
+    { variable: '--uilib-paginator-jtp-font-size', description: 'Jtp Font size.' },
+    { variable: '--uilib-paginator-jtp-bg', description: 'Jtp background colour.' },
+    { variable: '--uilib-paginator-jtp-color', description: 'Jtp text colour.' },
+    { variable: '--uilib-paginator-rpp-height', description: 'Rpp height.' },
+    { variable: '--uilib-paginator-rpp-border', description: 'Rpp border shorthand.' },
+    { variable: '--uilib-paginator-rpp-radius', description: 'Rpp border radius.' },
+    { variable: '--uilib-paginator-rpp-font-size', description: 'Rpp Font size.' },
+    { variable: '--uilib-paginator-rpp-bg', description: 'Rpp background colour.' },
+    { variable: '--uilib-paginator-rpp-color', description: 'Rpp text colour.' },
+    { variable: '--uilib-paginator-rpp-padding', description: 'Rpp padding.' },
+    { variable: '--uilib-paginator-transition', description: 'Transition.' },
+  ];
 }

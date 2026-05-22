@@ -5,8 +5,7 @@
     description="Guidance and demos for accessibility features, including high contrast mode."
   />
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="high-contrast" data-doc-anchor>
-    <div card-header>High Contrast Mode Testing</div>
+  <ui-lib-panel variant="minimal">
     <p>To test high contrast mode on Windows: Left Alt + Left Shift + Print Screen.</p>
     <p>Or enable in Windows Settings -> Ease of Access -> High contrast.</p>
 
@@ -18,7 +17,7 @@
       <ui-lib-select [options]="options" placeholder="Select" />
       <ui-lib-badge>Badge</ui-lib-badge>
     </div>
-  </ui-lib-card>
+  </ui-lib-panel>
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

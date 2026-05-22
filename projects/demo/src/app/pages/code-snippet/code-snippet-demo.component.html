@@ -79,7 +79,32 @@
     </div>
   </main>
 
+  <!-- ── Multi-tab demo ─────────────────────────────────────────────── -->
+  <section class="csd-multitab-section" aria-labelledby="multitab-heading">
+    <h2 id="multitab-heading" class="csd-section-title">Multi-File Tabs</h2>
+    <p class="csd-section-desc">
+      Pass a <code>[files]</code> array to get IDE-style tabs — click a tab to switch code, or use
+      <kbd>←</kbd> / <kbd>→</kbd> arrow keys.
+    </p>
+    <ui-lib-code-snippet
+      class="csd-card csd-card--full"
+      variant="material"
+      [files]="componentFiles"
+      [showLineNumbers]="true"
+    />
+  </section>
+
   <!-- ── Footer ──────────────────────────────────────────────────────── -->
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <section class="csd-api-section">
+    <h2 class="csd-api-section__title">API Reference</h2>
+    <p class="csd-api-section__description">
+      All inputs accepted by <code>ui-lib-code-snippet</code>. Import from
+      <code>ui-lib-custom/code-snippet</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </section>
+
   <footer class="csd-footer">
     <div class="csd-footer__brand">
       <div class="csd-footer__logo">

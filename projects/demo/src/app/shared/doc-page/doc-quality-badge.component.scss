@@ -1,0 +1,485 @@
+// ─── Local tokens ─────────────────────────────────────────────────────────────
+$zinc-50: #fafafa;
+$zinc-100: #f4f4f5;
+$zinc-200: #e4e4e7;
+$zinc-300: #d4d4d8;
+$zinc-400: #a1a1aa;
+$zinc-500: #71717a;
+$zinc-600: #52525b;
+$zinc-700: #3f3f46;
+$zinc-900: #18181b;
+
+$score-excellent-bg: #dcfce7;
+$score-excellent-text: #15803d;
+$score-excellent-border: #bbf7d0;
+$score-excellent-dot: #22c55e;
+
+$score-pass-bg: #dbeafe;
+$score-pass-text: #1d4ed8;
+$score-pass-border: #bfdbfe;
+$score-pass-dot: #3b82f6;
+
+$score-warn-bg: #fef3c7;
+$score-warn-text: #b45309;
+$score-warn-border: #fde68a;
+$score-warn-dot: #f59e0b;
+
+$score-fail-bg: #fee2e2;
+$score-fail-text: #b91c1c;
+$score-fail-border: #fecaca;
+$score-fail-dot: #ef4444;
+
+// Tier 1 estimate — neutral zinc
+$score-estimate-bg: $zinc-100;
+$score-estimate-text: $zinc-600;
+$score-estimate-border: $zinc-300;
+$score-estimate-dot: $zinc-400;
+
+// ─── Shell ────────────────────────────────────────────────────────────────────
+.doc-quality-badge {
+  border: 1px solid $zinc-200;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  background: var(--uilib-surface-card, #fff);
+}
+
+// ─── Toggle button (always-visible header row) ────────────────────────────────
+.doc-quality-badge__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--uilib-surface-ground, #f9fafb);
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  color: $zinc-700;
+  transition: background 120ms ease;
+
+  &:hover {
+    background: $zinc-100;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary-500, #6366f1);
+    outline-offset: -2px;
+  }
+
+  .doc-quality-badge--expanded & {
+    border-bottom-color: $zinc-200;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.doc-quality-badge__shield {
+  color: $zinc-400;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.doc-quality-badge__title {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $zinc-500;
+  flex-shrink: 0;
+}
+
+// ─── Tier badge ───────────────────────────────────────────────────────────────
+.doc-quality-badge__tier {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+
+  &--t1 {
+    background: $zinc-200;
+    color: $zinc-600;
+    border: 1px solid $zinc-300;
+  }
+
+  &--t2 {
+    background: #ede9fe;
+    color: #5b21b6;
+    border: 1px solid #ddd6fe;
+  }
+}
+
+// ─── Average score badge ───────────────────────────────────────────────────────
+.doc-quality-badge__avg {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  flex-shrink: 0;
+
+  &--excellent {
+    background: $score-excellent-bg;
+    color: $score-excellent-text;
+    border: 1px solid $score-excellent-border;
+  }
+
+  &--pass {
+    background: $score-pass-bg;
+    color: $score-pass-text;
+    border: 1px solid $score-pass-border;
+  }
+
+  &--warn {
+    background: $score-warn-bg;
+    color: $score-warn-text;
+    border: 1px solid $score-warn-border;
+  }
+
+  &--fail {
+    background: $score-fail-bg;
+    color: $score-fail-text;
+    border: 1px solid $score-fail-border;
+  }
+
+  &--estimate {
+    background: $score-estimate-bg;
+    color: $score-estimate-text;
+    border: 1px solid $score-estimate-border;
+    font-style: italic;
+  }
+}
+
+// ─── Gate badge ───────────────────────────────────────────────────────────────
+.doc-quality-badge__gate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  flex-shrink: 0;
+
+  &--pass {
+    background: $score-excellent-bg;
+    color: $score-excellent-text;
+    border: 1px solid $score-excellent-border;
+  }
+
+  &--fail {
+    background: $score-fail-bg;
+    color: $score-fail-text;
+    border: 1px solid $score-fail-border;
+  }
+
+  // Tier 1 estimated gate states
+  &--est-pass {
+    background: $zinc-100;
+    color: $zinc-500;
+    border: 1px solid $zinc-300;
+    font-style: italic;
+  }
+
+  &--est-fail {
+    background: $zinc-100;
+    color: $zinc-500;
+    border: 1px solid $zinc-300;
+    font-style: italic;
+  }
+}
+
+.doc-quality-badge__date {
+  font-size: 0.6875rem;
+  color: $zinc-400;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.doc-quality-badge__chevron {
+  color: $zinc-400;
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+
+  .doc-quality-badge--expanded & {
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// ─── Expandable detail panel ──────────────────────────────────────────────────
+.doc-quality-badge__detail {
+  padding: 1rem 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+// ─── Tier 1 estimate notice ───────────────────────────────────────────────────
+.doc-quality-badge__estimate-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  background: $zinc-50;
+  border: 1px solid $zinc-200;
+  font-size: 0.75rem;
+  color: $zinc-600;
+  line-height: 1.5;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    color: $zinc-400;
+  }
+}
+
+// ─── Score chips row ──────────────────────────────────────────────────────────
+.doc-quality-badge__scores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3125rem;
+}
+
+.doc-quality-badge__score-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  font-size: 0.75rem;
+
+  &--excellent {
+    background: $score-excellent-bg;
+    color: $score-excellent-text;
+    border-color: $score-excellent-border;
+  }
+
+  &--pass {
+    background: $score-pass-bg;
+    color: $score-pass-text;
+    border-color: $score-pass-border;
+  }
+
+  &--warn {
+    background: $score-warn-bg;
+    color: $score-warn-text;
+    border-color: $score-warn-border;
+  }
+
+  &--fail {
+    background: $score-fail-bg;
+    color: $score-fail-text;
+    border-color: $score-fail-border;
+  }
+
+  &--estimate {
+    background: $score-estimate-bg;
+    color: $score-estimate-text;
+    border-color: $score-estimate-border;
+  }
+}
+
+.doc-quality-badge__score-abbr {
+  font-weight: 600;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.doc-quality-badge__score-value {
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.doc-quality-badge__score-tilde {
+  font-weight: 400;
+  opacity: 0.7;
+  font-size: 0.75rem;
+}
+
+.doc-quality-badge__score-checkpoints {
+  font-size: 0.625rem;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-left: 0.125rem;
+}
+
+// ─── Categories legend ────────────────────────────────────────────────────────
+.doc-quality-badge__categories-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  padding: 0.625rem 0.75rem;
+  background: $zinc-50;
+  border: 1px solid $zinc-200;
+  border-radius: 0.375rem;
+}
+
+.doc-quality-badge__cat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.doc-quality-badge__cat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  align-self: center;
+
+  &--excellent {
+    background: $score-excellent-dot;
+  }
+  &--pass {
+    background: $score-pass-dot;
+  }
+  &--warn {
+    background: $score-warn-dot;
+  }
+  &--fail {
+    background: $score-fail-dot;
+  }
+  &--estimate {
+    background: $score-estimate-dot;
+  }
+}
+
+.doc-quality-badge__cat-name {
+  font-weight: 600;
+  color: $zinc-700;
+  flex-shrink: 0;
+  min-width: 140px;
+}
+
+.doc-quality-badge__cat-desc {
+  color: $zinc-500;
+  font-size: 0.6875rem;
+}
+
+.doc-quality-badge__cat-check-count {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: $score-pass-text;
+  flex-shrink: 0;
+}
+
+// ─── Meta rows ────────────────────────────────────────────────────────────────
+.doc-quality-badge__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid $zinc-100;
+}
+
+.doc-quality-badge__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+}
+
+.doc-quality-badge__meta-label {
+  color: $zinc-500;
+  font-weight: 500;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.doc-quality-badge__meta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--uilib-color-primary-600, #4f46e5);
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary-500, #6366f1);
+    outline-offset: 2px;
+    border-radius: 0.125rem;
+  }
+}
+
+.doc-quality-badge__parity {
+  font-weight: 600;
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+
+  &--pass {
+    background: $score-excellent-bg;
+    color: $score-excellent-text;
+  }
+
+  &--fail {
+    background: $score-fail-bg;
+    color: $score-fail-text;
+  }
+
+  &--pending {
+    background: $zinc-100;
+    color: $zinc-500;
+  }
+}
+
+// ─── Backlog / human-pending section ─────────────────────────────────────────
+.doc-quality-badge__backlog {
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.375rem;
+  background: $zinc-100;
+  border: 1px solid $zinc-200;
+
+  &--human {
+    background: $score-warn-bg;
+    border-color: $score-warn-border;
+
+    .doc-quality-badge__backlog-title {
+      color: $score-warn-text;
+    }
+  }
+}
+
+.doc-quality-badge__backlog-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $zinc-500;
+  margin-bottom: 0.375rem;
+}
+
+.doc-quality-badge__backlog-list {
+  margin: 0;
+  padding-left: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem;
+}
+
+.doc-quality-badge__backlog-item {
+  font-size: 0.75rem;
+  color: $zinc-600;
+  line-height: 1.5;
+}

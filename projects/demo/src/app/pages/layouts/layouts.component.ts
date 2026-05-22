@@ -1,14 +1,12 @@
 import { Component, ChangeDetectionStrategy, signal, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
-import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { FormsModule } from '@angular/forms';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import type { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { SemanticSpacingSectionComponent } from './semantic-spacing-section.component';
 import { StackSectionComponent } from './stack-section.component';
 import { InlineSectionComponent } from './inline-section.component';
@@ -20,6 +18,8 @@ import { ThemedLayoutsSectionComponent } from './themed-layouts-section.componen
 import { LayoutExamplesSectionComponent } from './examples-section.component';
 import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
 
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page aggregating layout primitives and sections.
  */
@@ -27,9 +27,8 @@ import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example
   selector: 'app-layouts',
   standalone: true,
   imports: [
-    Card,
+    Panel,
     Button,
-    CodeSnippet,
     FormsModule,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
@@ -44,6 +43,7 @@ import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example
     LayoutExamplesSectionComponent,
     LayoutBasicExampleComponent,
     DocTocComponent,
+    DocCodeExampleComponent,
   ],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
@@ -148,4 +148,15 @@ export class LayoutsComponent {
   <ui-lib-card>Card A</ui-lib-card>
   <ui-lib-card>Card B</ui-lib-card>
 </ui-lib-stack>`;
+
+  public readonly layoutExampleTs: string = `import { Component } from '@angular/core';
+import { Stack } from 'ui-lib-custom/stack';
+import { Card } from 'ui-lib-custom/card';
+
+@Component({
+  standalone: true,
+  imports: [Stack, Card],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 }

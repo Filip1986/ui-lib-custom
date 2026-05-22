@@ -4,10 +4,19 @@ import { JsonPipe } from '@angular/common';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Bind } from 'ui-lib-custom/bind';
 import { Button } from 'ui-lib-custom/button';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 
 /**
  * Demo page for the Bind directive.
@@ -24,15 +33,58 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BindDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Bind } from 'ui-lib-custom/bind'";
   public readonly snippetBasicUsage: string = `<div [uiLibBind]="{ id: 'my-box', title: 'Tooltip text', tabIndex: 0 }">\n  Content\n</div>`;
+  public readonly snippetBasicUsageTs: string = `import { Component } from '@angular/core';
+import { Bind } from 'ui-lib-custom/bind';
+
+@Component({
+  standalone: true,
+  imports: [Bind],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
   public readonly snippetBooleanNumeric: string = `<!-- numeric property -->\n<div [uiLibBind]="{ tabIndex: 2 }">Focusable</div>\n<!-- boolean property -->\n<div [uiLibBind]="{ hidden: true }">Hidden</div>`;
+  public readonly snippetBooleanNumericTs: string = `import { Component } from '@angular/core';
+import { Bind } from 'ui-lib-custom/bind';
+
+@Component({
+  standalone: true,
+  imports: [Bind],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}
+`;
   public readonly snippetSelector: string = `[uiLibBind]`;
   public readonly snippetHostClass: string = `ui-lib-bind`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -44,6 +96,8 @@ export class BindDemoComponent {
     { id: 'interactive-playground', label: 'Interactive Playground' },
     { id: 'boolean-numeric', label: 'Boolean & Numeric Properties' },
     { id: 'api', label: 'API' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   /** Controls which dynamic id preset is active. */
@@ -98,4 +152,32 @@ export class BindDemoComponent {
   public toggleTabIndex(): void {
     this.includeTabIndex.update((value: boolean): boolean => !value);
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiLibBind',
+      type: 'Record<string, unknown>',
+      default: '{}',
+      description:
+        'An object whose keys are HTML attribute/property names and values are the values to apply.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host element',
+      attribute: '(driven by bindings)',
+      value: '—',
+      notes:
+        'The directive sets whatever attributes are passed via <code>[uilibBind]</code>. Passing <code>{ "aria-label": "…" }</code> or <code>{ "aria-disabled": "true" }</code> lets you drive ARIA attributes reactively from a signal.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '(none)',
+      action:
+        'The <code>Bind</code> directive is purely declarative — it sets attributes/properties on the host element and does not add keyboard behaviour.',
+    },
+  ];
 }

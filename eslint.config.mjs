@@ -23,6 +23,9 @@ export default [
       '**/node_modules/**',
       '**/.angular/**',
       '.claude/**',
+      // Demo example files contain intentionally partial TypeScript snippets
+      // (class members, fragments, HTML strings) that cannot be parsed as modules.
+      '**/examples/*.example.ts',
     ],
   },
   // TypeScript + Angular rules for source files.
@@ -123,6 +126,18 @@ export default [
     files: ['projects/ui-lib-custom/src/lib/theming/theme-config.service.ts'],
     rules: {
       '@typescript-eslint/typedef': 'off',
+    },
+  },
+  // Demo example files — user-facing code that intentionally uses relaxed conventions.
+  {
+    files: ['**/examples/*.example.ts'],
+    rules: {
+      '@angular-eslint/prefer-on-push-component-change-detection': 'off',
+      '@typescript-eslint/typedef': 'off',
+      '@typescript-eslint/explicit-member-accessibility': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/require-description': 'off',
     },
   },
   // Angular HTML template parsing (add template rules here when needed).

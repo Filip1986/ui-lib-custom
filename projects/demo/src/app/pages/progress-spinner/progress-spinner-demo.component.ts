@@ -4,11 +4,22 @@ import { ProgressSpinner } from 'ui-lib-custom/progress-spinner';
 import { Button } from 'ui-lib-custom/button';
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from 'ui-lib-custom/progress-spinner';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the ProgressSpinner component.
  */
@@ -22,12 +33,37 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressSpinnerDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { ProgressSpinner } from 'ui-lib-custom/progress-spinner'";
   public readonly snippetBasic: string = `<ui-lib-progress-spinner />`;
@@ -48,12 +84,59 @@ export class ProgressSpinnerDemoComponent {
     { id: 'stroke-width-fill', label: 'Stroke Width & Fill' },
     { id: 'loading-overlay', label: 'Loading Overlay Pattern' },
     { id: 'playground', label: 'Playground' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'strokeWidth',
+      type: 'string',
+      default: "'2'",
+      description: 'SVG stroke-width of the circle arc.',
+    },
+    {
+      name: 'fill',
+      type: 'string',
+      default: "'none'",
+      description: 'SVG fill colour of the circle interior.',
+    },
+    {
+      name: 'animationDuration',
+      type: 'string',
+      default: "'2s'",
+      description: 'Duration of one rotation/dash cycle. Accepts any CSS <time>.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling the overall diameter.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Falls back to global theme when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class(es) applied to the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Loading...'",
+      description: 'Screen-reader accessible label.',
+    },
+  ];
 
   // ---- Interactive controls -----------------------------------------------
   public readonly interactiveSize: WritableSignal<ProgressSpinnerSize> =
@@ -82,4 +165,34 @@ export class ProgressSpinnerDemoComponent {
   public setStrokeWidth(width: string): void {
     this.interactiveStrokeWidth.set(width);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the spinner (read-only; no interaction).' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'SVG spinner',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Announces the loading state to assistive technologies.',
+    },
+    {
+      element: 'SVG spinner',
+      attribute: 'aria-label',
+      value: 'ariaLabel value',
+      notes: 'Defaults to "Loading..."; override with <code>[ariaLabel]</code>.',
+    },
+    {
+      element: 'SVG spinner',
+      attribute: 'aria-live',
+      value: '"polite"',
+      notes: 'Allows screen readers to announce the spinner without interrupting the user.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-progress-spinner-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-progress-spinner-size-md', description: 'Size — md.' },
+    { variable: '--uilib-progress-spinner-size-lg', description: 'Size — lg.' },
+  ];
 }

@@ -1,0 +1,47 @@
+.doc-api-reference__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--uilib-color-text-primary, #111827);
+}
+
+.doc-api-reference__table {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  // Code cells
+  code {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.8125rem;
+    background: var(--uilib-surface-muted, rgba(0, 0, 0, 0.04));
+    border-radius: 3px;
+    padding: 1px 5px;
+    word-break: break-all;
+  }
+}
+
+.doc-api-reference__name-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.doc-api-reference__required {
+  color: var(--uilib-color-danger, #ef4444);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1;
+}
+
+.doc-api-reference__no-default {
+  color: var(--uilib-color-text-muted, #9ca3af);
+}
+
+// Override table cell padding for a compact reference layout
+.doc-api-reference__table {
+  .uilib-table td,
+  .uilib-table th {
+    padding: 0.5rem 0.75rem;
+    vertical-align: top;
+  }
+}

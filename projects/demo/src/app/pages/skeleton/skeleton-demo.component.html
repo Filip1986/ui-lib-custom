@@ -1,17 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Skeleton" [importCode]="importCode">
-    <p class="doc-description">
-      Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-skeleton width="100%" height="2rem" />
-    </div>
+  <app-doc-page-header docHeader title="Skeleton" [importCode]="importCode"
+    description="Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.">
   </app-doc-page-header>
 
   <!-- Basic shapes -->
-  <section class="demo-section" id="shapes" data-doc-anchor>
-    <h2 class="demo-section__title">Shapes</h2>
+  <app-doc-section id="shapes" title="Shapes">
     <p class="demo-section__description">Use <code>shape="rectangle"</code> (default) or <code>shape="circle"</code>.</p>
     <div class="demo-card">
       <div class="shapes-row">
@@ -25,11 +19,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Card placeholder layout -->
-  <section class="demo-section" id="card-placeholder" data-doc-anchor>
-    <h2 class="demo-section__title">Card Placeholder</h2>
+  <app-doc-section id="card-placeholder" title="Card Placeholder">
     <p class="demo-section__description">Combine rectangle and circle skeletons to simulate a card layout.</p>
     <div class="demo-card">
       <div class="card-placeholder">
@@ -48,11 +41,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- List placeholder -->
-  <section class="demo-section" id="list-placeholder" data-doc-anchor>
-    <h2 class="demo-section__title">List Placeholder</h2>
+  <app-doc-section id="list-placeholder" title="List Placeholder">
     <p class="demo-section__description">Repeat a row pattern to mock a list of items.</p>
     <div class="demo-card">
       <div class="list-placeholder">
@@ -67,11 +59,10 @@
         }
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- All three variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">Three design variants: <code>material</code>, <code>bootstrap</code>, <code>minimal</code>.</p>
     <div class="variants-grid">
       @for (variant of variants; track variant) {
@@ -88,11 +79,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Animation control -->
-  <section class="demo-section" id="animation" data-doc-anchor>
-    <h2 class="demo-section__title">Animation</h2>
+  <app-doc-section id="animation" title="Animation">
     <p class="demo-section__description">Use <code>animation="wave"</code> (default) or <code>animation="none"</code> to disable the shimmer.</p>
     <div class="demo-card demo-card--row">
       <div class="animation-col">
@@ -106,11 +96,10 @@
         <ui-lib-skeleton width="80%" height="1rem" animation="none" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Custom sizes -->
-  <section class="demo-section" id="custom-sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Sizes</h2>
+  <app-doc-section id="custom-sizes" title="Custom Sizes">
     <p class="demo-section__description">Width, height, and size accept any CSS dimension. The <code>size</code> shorthand sets both dimensions at once.</p>
     <div class="demo-card">
       <div class="sizes-row">
@@ -122,11 +111,10 @@
         <ui-lib-skeleton shape="circle" size="6rem" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Custom border radius -->
-  <section class="demo-section" id="custom-border-radius" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Border Radius</h2>
+  <app-doc-section id="custom-border-radius" title="Custom Border Radius">
     <p class="demo-section__description">Override the default radius with the <code>borderRadius</code> input.</p>
     <div class="demo-card">
       <div class="shapes-row">
@@ -135,74 +123,31 @@
         <ui-lib-skeleton width="100%" height="2rem" borderRadius="9999px" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
-    <div class="api-table-wrapper">
-      <table class="api-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>shape</code></td>
-            <td><code>'rectangle' | 'circle'</code></td>
-            <td><code>'rectangle'</code></td>
-            <td>Shape of the placeholder.</td>
-          </tr>
-          <tr>
-            <td><code>width</code></td>
-            <td><code>string</code></td>
-            <td><code>'100%'</code></td>
-            <td>CSS width value. Overridden by <code>size</code>.</td>
-          </tr>
-          <tr>
-            <td><code>height</code></td>
-            <td><code>string</code></td>
-            <td><code>'1rem'</code></td>
-            <td>CSS height value. Overridden by <code>size</code>.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Sets both width and height. Useful for circles.</td>
-          </tr>
-          <tr>
-            <td><code>borderRadius</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Custom border-radius, overrides shape default.</td>
-          </tr>
-          <tr>
-            <td><code>animation</code></td>
-            <td><code>'wave' | 'none'</code></td>
-            <td><code>'wave'</code></td>
-            <td>Shimmer animation type.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Falls back to ThemeConfigService.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes on the host element.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <app-doc-section id="api" title="API">
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

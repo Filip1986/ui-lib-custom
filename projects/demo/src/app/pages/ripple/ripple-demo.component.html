@@ -1,21 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Ripple" [importCode]="importCode">
-    <p class="doc-description">
-      A directive that adds a Material-style circular wave effect to any element on click.
-      Apply <code>[uiLibRipple]</code> to any host — button, card, list item, or custom element.
-      Purely decorative: it does not alter ARIA semantics or keyboard behaviour.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-button severity="primary" uiLibRipple>Primary</ui-lib-button>
-      <ui-lib-button severity="secondary" uiLibRipple>Secondary</ui-lib-button>
-      <ui-lib-button severity="danger" uiLibRipple>Danger</ui-lib-button>
-    </div>
+  <app-doc-page-header docHeader title="Ripple" [importCode]="importCode"
+    description="A directive that adds a Material-style circular wave effect to any element on click. Apply &lt;code&gt;[uiLibRipple]&lt;/code&gt; to any host — button, card, list item, or custom element. Purely decorative: it does not alter ARIA semantics or keyboard behaviour.">
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Add <code>uiLibRipple</code> to any element. The default ripple colour is a semi-transparent
       white, suitable for dark or coloured surfaces.
@@ -27,14 +17,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Dark ripple ---------------------------------------------- -->
-  <section class="demo-section" id="dark-ripple" data-doc-anchor>
-    <h2 class="demo-section__title">Dark Ripple</h2>
+  <app-doc-section id="dark-ripple" title="Dark Ripple">
     <p class="demo-section__description">
       Use <code>[rippleColor]="'rgba(0,0,0,0.12)'"</code> for light-coloured or white surfaces
       where the default white ripple would be invisible.
@@ -57,14 +46,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Dark ripple" [code]="snippets.darkRipple" 
+      filename="Dark ripple" [code]="snippets.darkRipple"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Custom duration ------------------------------------------ -->
-  <section class="demo-section" id="custom-duration" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Duration</h2>
+  <app-doc-section id="custom-duration" title="Custom Duration">
     <p class="demo-section__description">
       Control the animation speed with <code>[rippleDuration]</code>. Accepts any CSS time value
       such as <code>'200ms'</code> or <code>'1.2s'</code>.
@@ -76,14 +64,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Custom duration" [code]="snippets.customDuration" 
+      filename="Custom duration" [code]="snippets.customDuration"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to suppress the wave while keeping the host element
       fully interactive. Toggle the button below to compare the two states.
@@ -102,14 +89,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled" 
+      filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Any element ---------------------------------------------- -->
-  <section class="demo-section" id="any-element" data-doc-anchor>
-    <h2 class="demo-section__title">Any Element</h2>
+  <app-doc-section id="any-element" title="Any Element">
     <p class="demo-section__description">
       The directive works on any HTML element — <code>&lt;div&gt;</code>,
       <code>&lt;li&gt;</code>, images, or custom components. The host automatically
@@ -130,55 +116,20 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Any element" [code]="snippets.anyElement" 
+      filename="Any element" [code]="snippets.anyElement"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
       <p class="demo-section__description">
         Selector: <code>[uiLibRipple]</code>
       </p>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>When <code>true</code>, no ripple wave is produced on click.</td>
-          </tr>
-          <tr>
-            <td><code>rippleColor</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>
-              Inline override for <code>--uilib-ripple-color</code>.
-              Any valid CSS colour (e.g. <code>rgba(0,0,0,0.12)</code>).
-            </td>
-          </tr>
-          <tr>
-            <td><code>rippleDuration</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>
-              Inline override for <code>--uilib-ripple-duration</code>
-              (e.g. <code>'400ms'</code>).
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-css" data-doc-anchor>
@@ -186,65 +137,19 @@
       <app-doc-css-vars-table [rows]="cssVarRows" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Host element</td>
-            <td><em>none added</em></td>
-            <td>
-              The directive is purely decorative — it does not alter <code>role</code>,
-              <code>aria-*</code>, or tab-stop behaviour.
-            </td>
-          </tr>
-          <tr>
-            <td>Wave <code>&lt;span&gt;</code></td>
-            <td><em>none</em></td>
-            <td>
-              <code>pointer-events: none</code> and contains no text — transparent to
-              assistive technologies.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
     </div>
 
-    <div id="a11y-keyboard" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Enter</code></td>
-            <td>
-              Fires the native <code>click</code> event on <code>&lt;button&gt;</code> /
-              <code>&lt;a&gt;</code> elements — ripple responds automatically.
-            </td>
-          </tr>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Same as above for <code>&lt;button&gt;</code> elements.</td>
-          </tr>
-        </tbody>
-      </table>
+    <div data-doc-anchor>
+      <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>
@@ -265,9 +170,20 @@
       </li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
+
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

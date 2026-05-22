@@ -1,25 +1,23 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Fluid" [importCode]="importCode">
-    <p class="doc-description">
-      A layout wrapper that stretches all descendant form controls — inputs, textareas,
-      selects, and buttons — to 100&nbsp;% of the available width.
-      Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an
-      attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="fd-hero__tags">
-        <span class="fd-tag">Component</span>
-        <span class="fd-tag">Directive</span>
-        <span class="fd-tag">Layout</span>
-        <span class="fd-tag">Misc</span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="Fluid"
+    [importCode]="importCode"
+    description="A layout wrapper that stretches all descendant form controls — inputs, textareas, selects, and buttons — to 100&nbsp;% of the available width. Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="fd-hero__tags">
+      <span class="fd-tag">Component</span>
+      <span class="fd-tag">Directive</span>
+      <span class="fd-tag">Layout</span>
+      <span class="fd-tag">Misc</span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Component usage ── -->
-  <section class="demo-section" id="using-the-component" data-doc-anchor>
-    <h2 class="demo-section__title">Using the Component</h2>
+  <app-doc-section id="using-the-component" title="Using the Component">
     <p class="demo-section__desc">
       Wrap any form or container with <code>&lt;ui-lib-fluid&gt;</code>.
       All child inputs, textareas, and buttons grow to fill the full width.
@@ -60,11 +58,10 @@
         <ui-lib-button severity="primary" type="button">Submit</ui-lib-button>
       </ui-lib-fluid>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 2: Directive usage ── -->
-  <section class="demo-section" id="using-the-directive" data-doc-anchor>
-    <h2 class="demo-section__title">Using the Directive</h2>
+  <app-doc-section id="using-the-directive" title="Using the Directive">
     <p class="demo-section__desc">
       Apply <code>uiLibFluid</code> as an attribute on any existing element to avoid
       adding an extra wrapper to the DOM. The directive adds the same
@@ -96,11 +93,10 @@
         </div>
       </form>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 3: Conditional fluid via binding ── -->
-  <section class="demo-section" id="conditional-fluid" data-doc-anchor>
-    <h2 class="demo-section__title">Conditional Fluid</h2>
+  <app-doc-section id="conditional-fluid" title="Conditional Fluid">
     <p class="demo-section__desc">
       Bind <code>[uiLibFluid]="expression"</code> to toggle the fluid layout
       at runtime. When <code>false</code>, inputs and buttons revert to their natural
@@ -132,11 +128,10 @@
         </ui-lib-button>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 4: Attribute-only shorthand ── -->
-  <section class="demo-section" id="attribute-shorthand" data-doc-anchor>
-    <h2 class="demo-section__title">Attribute Shorthand</h2>
+  <app-doc-section id="attribute-shorthand" title="Attribute Shorthand">
     <p class="demo-section__desc">
       The directive supports attribute-only usage — just add <code>uiLibFluid</code>
       without a binding. It defaults to <code>true</code> through Angular's
@@ -156,65 +151,41 @@
         <ui-lib-button severity="primary" type="button">Go</ui-lib-button>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 5: API reference ── -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1rem;">
       &lt;ui-lib-fluid&gt; — Component
     </h3>
     <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
-    <div class="fd-table-wrap">
-      <table class="fd-api-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes appended to the host element.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference [rows]="fluidComponentRows" />
 
     <h3 class="demo-section__title" style="font-size: 1rem; margin-top: 1.5rem;">
       [uiLibFluid] — Directive
     </h3>
     <p class="demo-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
-    <div class="fd-table-wrap">
-      <table class="fd-api-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>uiLibFluid</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>
-              When <code>true</code> the <code>ui-lib-fluid</code> class is applied to the
-              host. Supports attribute-only usage (<code>&lt;div uiLibFluid&gt;</code>).
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <app-doc-api-reference [rows]="fluidDirectiveRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">The fluid directive and component apply no CSS custom properties. Width behaviour is achieved purely via structural CSS rules targeting host elements.</p>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      The fluid layout wrapper applies no ARIA attributes. All accessibility semantics come from the
+      wrapped form controls. Ensure every child input and button has an associated
+      <code>&lt;label&gt;</code> and a descriptive name.
+    </p>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

@@ -1,14 +1,24 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Inplace } from 'ui-lib-custom/inplace';
 import type { InplaceVariant } from 'ui-lib-custom/inplace';
 import { Button } from 'ui-lib-custom/button';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Inplace component.
  */
@@ -16,18 +26,42 @@ import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.co
   selector: 'app-inplace-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Inplace,
     Button,
     DocPageLayoutComponent,
     DocTocComponent,
     DocPageHeaderComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InplaceDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Inplace } from 'ui-lib-custom/inplace'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
@@ -40,12 +74,42 @@ export class InplaceDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
     { id: 'events', label: 'Events' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'active',
+      type: 'boolean',
+      default: 'false',
+      description: 'Controls whether the edit content is shown (two-way via [(active)]).',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a close button to revert to display mode.',
+    },
+    {
+      name: 'preventClick',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables toggling on click.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+  ];
 
   public readonly variants: InplaceVariant[] = ['material', 'bootstrap', 'minimal'];
 
@@ -95,4 +159,136 @@ export class InplaceDemoComponent {
   public clearLog(): void {
     this.eventLog.set([]);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Display element',
+      attribute: 'role',
+      value: '"button"',
+      notes: 'The display state acts as a button so keyboard users can activate it.',
+    },
+    {
+      element: 'Display element',
+      attribute: 'tabindex',
+      value: '"0"',
+      notes: 'Makes the display state reachable via Tab.',
+    },
+    {
+      element: 'Display element',
+      attribute: 'aria-label',
+      value: 'string',
+      notes:
+        'Provide a descriptive label via <code>[ariaLabel]</code> when display content is not self-describing.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Enter / Space',
+      suffix: 'on display content',
+      action: 'Activates the inplace component, replacing display content with editing content.',
+    },
+    {
+      key: 'Escape',
+      suffix: 'when active',
+      action: 'Deactivates the component and restores the display content (closable mode).',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'active',
+      type: 'boolean',
+      default: 'false',
+      description: 'Two-way bindable; controls whether the editor is shown.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents activation when set to true.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders a close button inside the content slot.',
+    },
+    {
+      name: 'closeIcon',
+      type: 'string',
+      default: "'pi pi-times'",
+      description: 'CSS class for the close button icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant; falls back to global ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes added to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(activated)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted when the component transitions to the active (editing) state.',
+    },
+    {
+      name: '(deactivated)',
+      type: 'OutputEmitterRef<void>',
+      description: 'Emitted when the component transitions back to the display (inactive) state.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: '[inplaceDisplay]',
+      type: 'slot',
+      description: 'Shown when the component is inactive. Click activates the editor.',
+    },
+    {
+      name: '[inplaceContent]',
+      type: 'slot',
+      description:
+        'Shown when the component is active. Any element or component can be projected here.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-inplace-display-cursor', description: 'Display cursor.' },
+    { variable: '--uilib-inplace-display-padding', description: 'Display padding.' },
+    {
+      variable: '--uilib-inplace-display-border-radius',
+      description: 'Display Border border radius.',
+    },
+    {
+      variable: '--uilib-inplace-display-bg-hover',
+      description: 'Display background colour (hover).',
+    },
+    { variable: '--uilib-inplace-display-transition', description: 'Display transition.' },
+    { variable: '--uilib-inplace-display-border', description: 'Display border shorthand.' },
+    {
+      variable: '--uilib-inplace-display-border-hover',
+      description: 'Display border shorthand (hover).',
+    },
+    { variable: '--uilib-inplace-content-gap', description: 'Content gap.' },
+    { variable: '--uilib-inplace-close-button-size', description: 'Close Button size.' },
+    { variable: '--uilib-inplace-close-button-bg', description: 'Close Button background colour.' },
+    { variable: '--uilib-inplace-close-button-color', description: 'Close Button text colour.' },
+    {
+      variable: '--uilib-inplace-close-button-bg-hover',
+      description: 'Close Button background colour (hover).',
+    },
+    {
+      variable: '--uilib-inplace-close-button-border-radius',
+      description: 'Close Button Border border radius.',
+    },
+    { variable: '--uilib-inplace-disabled-opacity', description: 'Disabled opacity.' },
+  ];
 }

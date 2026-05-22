@@ -1,22 +1,16 @@
 <app-doc-page-layout #layout [sections]="sections">
+  <app-doc-page-header
+    docHeader
+    title="SyntaxHighlighter"
+    [importCode]="importCode"
+    description="A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates, and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired colours. Fully integrated with ui-lib-code-snippet."
+    [tags]="['Utility']"
+  />
+
   <div class="demo-page">
 
-    <!-- ── Header ──────────────────────────────────────────────────────────── -->
-    <div class="demo-header">
-      <div class="demo-header__badge">Utility</div>
-      <h1 class="demo-header__title">SyntaxHighlighter</h1>
-      <p class="demo-header__description">
-        A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates,
-        and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired
-        colours. Fully integrated with <code>ui-lib-code-snippet</code>.
-      </p>
-      <ui-lib-code-snippet [code]="importCode" language="typescript"
-        [showLineNumbers]="false"
-        />
-    </div>
-
     <!-- ── Overview ────────────────────────────────────────────────────────── -->
-    <section id="overview" class="demo-section">
+    <app-doc-section id="overview" title="Overview">
       <h2 class="demo-section__title">Overview</h2>
       <p class="demo-section__description">
         The built-in highlighter powers the <code>ui-lib-code-snippet</code> component for
@@ -49,10 +43,10 @@
           </p>
         </div>
       </div>
-    </section>
+    </app-doc-section>
 
     <!-- ── TypeScript ───────────────────────────────────────────────────────── -->
-    <section id="typescript" class="demo-section">
+    <app-doc-section id="typescript" title="TypeScript">
       <h2 class="demo-section__title">TypeScript</h2>
       <p class="demo-section__description">
         Keywords are bold blue, strings are warm orange, comments are muted green, decorators
@@ -65,10 +59,10 @@
         [code]="tsCode"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- ── HTML / Angular ───────────────────────────────────────────────────── -->
-    <section id="html" class="demo-section">
+    <app-doc-section id="html" title="HTML / Angular templates">
       <h2 class="demo-section__title">HTML / Angular templates</h2>
       <p class="demo-section__description">
         Tag names are teal, attribute names light blue, attribute values orange. Angular
@@ -82,10 +76,10 @@
         [code]="htmlCode"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- ── SCSS ─────────────────────────────────────────────────────────────── -->
-    <section id="scss" class="demo-section">
+    <app-doc-section id="scss" title="SCSS">
       <h2 class="demo-section__title">SCSS</h2>
       <p class="demo-section__description">
         SCSS variables are purple, CSS custom properties orange, at-rules pink, property
@@ -97,10 +91,10 @@
         [code]="scssCode"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- ── Direct Usage ──────────────────────────────────────────────────────── -->
-    <section id="usage" class="demo-section">
+    <app-doc-section id="usage" title="Direct Usage">
       <h2 class="demo-section__title">Direct Usage</h2>
       <p class="demo-section__description">
         Import the functions directly from <code>ui-lib-custom/syntax-highlighter</code>.
@@ -121,10 +115,10 @@
       <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript"
         [showLineNumbers]="true"
         />
-    </section>
+    </app-doc-section>
 
     <!-- ── API ──────────────────────────────────────────────────────────────── -->
-    <section id="api" class="demo-section">
+    <app-doc-section id="api" title="API">
       <h2 class="demo-section__title">API</h2>
 
       <div id="api-highlight" class="api-block">
@@ -170,10 +164,10 @@
         language="typescript"
         [showLineNumbers]="true"
       />
-    </section>
+    </app-doc-section>
 
     <!-- ── Token Classes ─────────────────────────────────────────────────────── -->
-    <section id="tokens" class="demo-section">
+    <app-doc-section id="tokens" title="Token Classes">
       <h2 class="demo-section__title">Token Classes</h2>
       <p class="demo-section__description">
         Each <code>&lt;span&gt;</code> carries a <code>uilib-token-&#123;type&#125;</code> CSS class.
@@ -248,10 +242,10 @@
           <span>Angular {{ '{{ expression }}' }}</span>
         </div>
       </div>
-    </section>
+    </app-doc-section>
 
     <!-- ── Theming ───────────────────────────────────────────────────────────── -->
-    <section id="theming" class="demo-section">
+    <app-doc-section id="css-vars" title="CSS Custom Properties">
       <h2 class="demo-section__title">Theming</h2>
       <p class="demo-section__description">
         Override any token colour via CSS custom properties on the host element or a parent
@@ -260,9 +254,24 @@
       <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss"
         [showLineNumbers]="true"
         />
-    </section>
+    </app-doc-section>
 
   </div>
+
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      Wrap highlighted output in <code>&lt;pre&gt;&lt;code&gt;</code> to give it proper
+      semantics. Add <code>tabindex="0"</code> on the <code>&lt;pre&gt;</code> when the block
+      may overflow so keyboard users can scroll it.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

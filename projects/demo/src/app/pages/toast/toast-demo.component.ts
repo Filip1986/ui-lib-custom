@@ -3,12 +3,22 @@ import type { WritableSignal, Signal } from '@angular/core';
 import { Toast, ToastService } from 'ui-lib-custom/toast';
 import type { ToastPosition, ToastSeverity, ToastVariant } from 'ui-lib-custom/toast';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Toast component.
  */
@@ -18,16 +28,40 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   imports: [
     Toast,
     Button,
-    CodeSnippet,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './toast-demo.component.html',
   styleUrl: './toast-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 10,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   private readonly toastService: ToastService = inject(ToastService);
 
   public readonly importCode: string = "import { Toast, ToastService } from 'ui-lib-custom/toast'";
@@ -42,12 +76,54 @@ export class ToastDemoComponent {
     { id: 'auto-dismiss-duration', label: 'Auto-dismiss Duration' },
     { id: 'position-variant', label: 'Position & Variant' },
     { id: 'keyed-containers', label: 'Keyed Containers' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'group',
+      type: 'string',
+      default: "'default'",
+      description: 'Message group linking this component to MessageService.add() calls.',
+    },
+    {
+      name: 'position',
+      type: "'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right' | 'center'",
+      default: "'top-right'",
+      description: 'Screen position where toasts appear.',
+    },
+    {
+      name: 'preventOpenDuplicates',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents showings toasts with the same id while one is already visible.',
+    },
+    {
+      name: 'preventDuplicates',
+      type: 'boolean',
+      default: 'false',
+      description: 'Prevents duplicates including ones that have already been removed.',
+    },
+    {
+      name: 'breakpoints',
+      type: 'Record<string, Record<string, string>>',
+      default: '{}',
+      description: 'Responsive overrides keyed by min-width.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'baseZIndex', type: 'number', default: '0', description: 'Base CSS z-index.' },
+  ];
 
   /** Currently selected position for interactive demos. */
   public readonly selectedPosition: WritableSignal<ToastPosition> =
@@ -178,4 +254,163 @@ export class ToastDemoComponent {
       life: 5000,
     });
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Toast container',
+      attribute: 'role',
+      value: '"alert" | "status"',
+      notes:
+        'Error/warn severity uses <code>role="alert"</code> (assertive); info/success uses <code>role="status"</code> (polite).',
+    },
+    {
+      element: 'Toast container',
+      attribute: 'aria-live',
+      value: '"assertive" | "polite"',
+      notes: 'Controls how urgently screen readers interrupt to announce the message.',
+    },
+    {
+      element: 'Toast container',
+      attribute: 'aria-atomic',
+      value: '"true"',
+      notes: 'The full message is read as a single unit, not piecemeal.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label',
+      value: '"Close"',
+      notes: 'Text alternative for the icon-only close button.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Escape',
+      action:
+        'Dismisses the focused toast notification (when <code>[closable]="true"</code>) and returns focus to the previously focused element.',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Moves focus between the notification and its close button.',
+    },
+    {
+      key: 'Enter / Space',
+      target: 'Close button',
+      action: 'Dismisses the toast.',
+    },
+  ];
+
+  public readonly apiContainerInputRows: ApiPropRow[] = [
+    {
+      name: 'position',
+      type: 'ToastPosition',
+      default: "'top-right'",
+      description: 'Screen position of the toast container.',
+    },
+    {
+      name: 'life',
+      type: 'number',
+      default: '3000',
+      description: 'Default auto-dismiss duration (ms) for all messages.',
+    },
+    {
+      name: 'variant',
+      type: 'ToastVariant | null',
+      default: 'null',
+      description: 'Design variant. Falls back to ThemeConfigService global variant.',
+    },
+    {
+      name: 'key',
+      type: 'string | null',
+      default: 'null',
+      description: 'Only renders messages whose key matches this value.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class(es) applied to the host element.',
+    },
+  ];
+
+  public readonly apiMessageRows: ApiPropRow[] = [
+    {
+      name: 'id',
+      type: 'string',
+      default: 'auto',
+      description: 'Unique identifier — auto-generated if omitted.',
+    },
+    {
+      name: 'key',
+      type: 'string',
+      description: 'Routes the message to the matching container key.',
+    },
+    {
+      name: 'severity',
+      type: 'ToastSeverity',
+      default: "'info'",
+      description: 'Controls colour palette and default icon.',
+    },
+    { name: 'summary', type: 'string', description: 'Bold headline of the notification.' },
+    { name: 'detail', type: 'string', description: 'Body text of the notification.' },
+    {
+      name: 'life',
+      type: 'number',
+      default: 'container life',
+      description: 'Per-message auto-dismiss duration (ms).',
+    },
+    {
+      name: 'sticky',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, the toast never auto-dismisses.',
+    },
+    {
+      name: 'closable',
+      type: 'boolean',
+      default: 'true',
+      description: 'When false, the close button is hidden.',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      default: 'severity default',
+      description: 'Custom icon name overriding the severity default.',
+    },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class(es) on the item element.' },
+  ];
+
+  public readonly apiServiceRows: ApiPropRow[] = [
+    {
+      name: 'add',
+      type: '(message: ToastMessage) => void',
+      description: 'Enqueue a new toast notification.',
+    },
+    { name: 'remove', type: '(id: string) => void', description: 'Remove a toast by its ID.' },
+    {
+      name: 'clear',
+      type: '(key?: string) => void',
+      description: 'Clear all messages, or only those matching a key.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-toast-width', description: 'Width.' },
+    { variable: '--uilib-toast-gap', description: 'Gap.' },
+    { variable: '--uilib-toast-z-index', description: 'Z-index.' },
+    { variable: '--uilib-toast-offset', description: 'Offset.' },
+    { variable: '--uilib-toast-animation-duration', description: 'Animation Duration.' },
+    { variable: '--uilib-toast-slide-x', description: 'Slide X.' },
+    { variable: '--uilib-toast-slide-y', description: 'Slide Y.' },
+    { variable: '--uilib-toast-item-padding', description: 'Item padding.' },
+    { variable: '--uilib-toast-item-radius', description: 'Item border radius.' },
+    { variable: '--uilib-toast-item-gap', description: 'Item gap.' },
+    { variable: '--uilib-toast-item-border-width', description: 'Item Border width.' },
+    { variable: '--uilib-toast-item-font-size', description: 'Item font size.' },
+    { variable: '--uilib-toast-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-toast-item-fg', description: 'Item Fg.' },
+    { variable: '--uilib-toast-item-border-color', description: 'Item Border text colour.' },
+    { variable: '--uilib-toast-item-icon-color', description: 'Item Icon text colour.' },
+    { variable: '--uilib-toast-item-close-color', description: 'Item Close text colour.' },
+    { variable: '--uilib-toast-item-shadow', description: 'Item box shadow.' },
+  ];
 }

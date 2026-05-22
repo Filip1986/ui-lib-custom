@@ -8,151 +8,172 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-
-      <section id="alphanum" data-doc-anchor class="example-section">
+      <app-doc-section id="alphanum" title="Alphanumeric">
         <h3>a. Alphanumeric</h3>
         <p class="section-text">
           The default preset — allows letters and digits, blocks everything else.
         </p>
-          <ui-lib-card>
-            <input
-              class="demo-input"
-              [uilibKeyFilter]="'alphanum'"
-              hintText="Letters and numbers only"
-              placeholder="Enter account ID"
-            />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('alphanum')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <input
+            class="demo-input"
+            [uilibKeyFilter]="'alphanum'"
+            hintText="Letters and numbers only"
+            placeholder="Enter account ID"
           />
-      </section>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="alphanumHtml" [typescript]="alphanumTs" />
+      </app-doc-section>
 
-      <section id="alpha" data-doc-anchor class="example-section">
+      <app-doc-section id="alpha" title="Alpha">
         <h3>b. Alpha</h3>
         <p class="section-text">Letters only — digits and symbols are blocked.</p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'alpha'" placeholder="Letters only" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('alpha')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <input class="demo-input" [uilibKeyFilter]="'alpha'" placeholder="Letters only" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="alphaHtml" [typescript]="alphaTs" />
+      </app-doc-section>
 
-      <section id="pint" data-doc-anchor class="example-section">
+      <app-doc-section id="pint" title="Positive Integer">
         <h3>c. Positive Integer</h3>
         <p class="section-text">Digits only, no minus sign — use for unsigned whole numbers.</p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'pint'" placeholder="Positive integers only" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('pint')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <input
+            class="demo-input"
+            [uilibKeyFilter]="'pint'"
+            placeholder="Positive integers only"
           />
-      </section>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="pintHtml" [typescript]="pintTs" />
+      </app-doc-section>
 
-      <section id="int" data-doc-anchor class="example-section">
+      <app-doc-section id="int" title="Integer">
         <h3>d. Integer</h3>
         <p class="section-text">Digits and minus sign — use for signed whole numbers.</p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'int'" placeholder="Integers (with minus)" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('int')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <input class="demo-input" [uilibKeyFilter]="'int'" placeholder="Integers (with minus)" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="intHtml" [typescript]="intTs" />
+      </app-doc-section>
 
-      <section id="num" data-doc-anchor class="example-section">
+      <app-doc-section id="num" title="Number">
         <h3>e. Number</h3>
-        <p class="section-text">Digits, minus, and decimal point — use for floating-point values.</p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'num'" placeholder="Numbers (decimal, minus)" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('num')" 
-          [showLineNumbers]="true"
+        <p class="section-text">
+          Digits, minus, and decimal point — use for floating-point values.
+        </p>
+        <ui-lib-panel variant="minimal">
+          <input
+            class="demo-input"
+            [uilibKeyFilter]="'num'"
+            placeholder="Numbers (decimal, minus)"
           />
-      </section>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="numHtml" [typescript]="numTs" />
+      </app-doc-section>
 
-      <section id="hex" data-doc-anchor class="example-section">
+      <app-doc-section id="hex" title="Hexadecimal">
         <h3>f. Hexadecimal</h3>
         <p class="section-text">Digits 0–9 and letters a–f (case-insensitive).</p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('hex')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <input class="demo-input" [uilibKeyFilter]="'hex'" placeholder="Hex digits (0-9, a-f)" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="hexHtml" [typescript]="hexTs" />
+      </app-doc-section>
 
-      <section id="money" data-doc-anchor class="example-section">
+      <app-doc-section id="money" title="Money">
         <h3>g. Money</h3>
-        <p class="section-text">
-          Digits, minus, decimal point, and thousands separator comma.
-        </p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'money'" placeholder="Money (digits, - . ,)" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('money')" 
-          [showLineNumbers]="true"
+        <p class="section-text">Digits, minus, decimal point, and thousands separator comma.</p>
+        <ui-lib-panel variant="minimal">
+          <input
+            class="demo-input"
+            [uilibKeyFilter]="'money'"
+            placeholder="Money (digits, - . ,)"
           />
-      </section>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="moneyHtml" [typescript]="moneyTs" />
+      </app-doc-section>
 
-      <section id="email" data-doc-anchor class="example-section">
+      <app-doc-section id="email" title="Email">
         <h3>h. Email</h3>
         <p class="section-text">
           Characters valid in email addresses per RFC 5321 local-part and domain rules.
         </p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'email'" placeholder="Email characters" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('email')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <input class="demo-input" [uilibKeyFilter]="'email'" placeholder="Email characters" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="emailHtml" [typescript]="emailTs" />
+      </app-doc-section>
 
-      <section id="custom" data-doc-anchor class="example-section">
+      <app-doc-section id="custom" title="Custom RegExp">
         <h3>i. Custom RegExp</h3>
         <p class="section-text">
-          Pass any <code>RegExp</code> to filter per character. This example restricts input
-          to vowels only.
+          Pass any <code>RegExp</code> to filter per character. This example restricts input to
+          vowels only.
         </p>
-          <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="vowelPattern" placeholder="Vowels only (a e i o u)" />
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('custom')" 
-          [showLineNumbers]="true"
+        <ui-lib-panel variant="minimal">
+          <input
+            class="demo-input"
+            [uilibKeyFilter]="vowelPattern"
+            placeholder="Vowels only (a e i o u)"
           />
-      </section>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="customHtml" [typescript]="customTs" />
+      </app-doc-section>
 
-      <section id="bypass" data-doc-anchor class="example-section">
+      <app-doc-section id="bypass" title="Bypass">
         <h3>j. Bypass</h3>
         <p class="section-text">
           Set <code>keyFilterBypass</code> to <code>true</code> to suspend all filtering at runtime.
           Toggle below to see the effect on a <code>pint</code>-filtered input.
         </p>
-          <ui-lib-card>
-            <div class="stack-sm">
-              <label class="inline-checkbox">
-                <input
-                  type="checkbox"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="bypassEnabled"
-                />
-                Enable bypass
-              </label>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <label class="inline-checkbox">
               <input
-                class="demo-input"
-                [uilibKeyFilter]="'pint'"
-                [keyFilterBypass]="bypassEnabled"
-                placeholder="Positive integers (bypass toggleable)"
+                type="checkbox"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="bypassEnabled"
               />
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('bypass')" 
-          [showLineNumbers]="true"
-          />
-      </section>
-
+              Enable bypass
+            </label>
+            <input
+              class="demo-input"
+              [uilibKeyFilter]="'pint'"
+              [keyFilterBypass]="bypassEnabled"
+              placeholder="Positive integers (bypass toggleable)"
+            />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="bypassHtml" [typescript]="bypassTs" />
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>[uilibKeyFilter]</code>. Import from
+      <code>ui-lib-custom/key-filter</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      <code>KeyFilter</code> restricts keyboard input to a set of allowed characters. Pair it
+      with a <code>[hintText]</code> to announce the allowed character set to screen reader users.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -162,5 +183,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

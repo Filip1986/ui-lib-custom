@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Menubar } from 'ui-lib-custom/menubar';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -9,11 +8,24 @@ import type {
   MenubarSize,
   MenubarVariant,
 } from 'ui-lib-custom/menubar';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { basicHtml, basicTs, startEndHtml, startEndTs } from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Menubar component.
  */
@@ -21,21 +33,49 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-menubar-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     Menubar,
     Button,
     DocPageLayoutComponent,
     DocPageHeaderComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly startEndHtml: string = startEndHtml;
+  public readonly startEndTs: string = startEndTs;
+
   public readonly importCode: string = "import { Menubar } from 'ui-lib-custom/menubar'";
-  public readonly snippetBasic: string = `{{ basicModel }}\n<ui-lib-menubar [model]="basicModel" />`;
-  public readonly snippetStartEnd: string = `<ui-lib-menubar [model]="items">\n  <span menubarStart>MyApp</span>\n  <button menubarEnd>Sign In</button>\n</ui-lib-menubar>`;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    apgPattern: { name: 'Menubar', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/' },
+    competitiveParity: 'pending',
+  };
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -50,7 +90,9 @@ export class MenubarDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'playground', label: 'Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
@@ -250,4 +292,207 @@ export class MenubarDemoComponent {
   public setSize(value: MenubarSize): void {
     this.playgroundSize.set(value);
   }
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'MenubarItem[]',
+      default: '[]',
+      description: 'Array of top-level navigation items.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant; inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling font-size and padding.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Navigation'",
+      description: 'Accessible label for the nav landmark.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: '(itemClick)',
+      type: 'MenubarCommandEvent',
+      description: 'Emitted when a non-disabled leaf item is activated.',
+    },
+  ];
+
+  public readonly apiItemRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string', description: 'Display text.' },
+    { name: 'icon', type: 'string', description: 'Icon class or ui-lib-icon name.' },
+    { name: 'disabled', type: 'boolean', description: 'Prevents interaction.' },
+    { name: 'visible', type: 'boolean', description: 'When false, hides the item.' },
+    { name: 'separator', type: 'boolean', description: 'Renders a visual separator instead.' },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
+    {
+      name: 'url',
+      type: 'string',
+      description: 'Renders item as <code>&lt;a href&gt;</code> when set (leaf items).',
+    },
+    { name: 'target', type: 'string', description: 'Anchor target for url-based items.' },
+    { name: 'items', type: 'MenubarItem[]', description: 'Nested children — opens a sub-panel.' },
+    {
+      name: 'command',
+      type: '(event) => void',
+      description: 'Callback when the item is activated.',
+    },
+  ];
+
+  public readonly apiProjectionRows: readonly ApiPropRow[] = [
+    {
+      name: '[menubarStart]',
+      type: 'ng-content',
+      description: 'Content rendered in the leading area (e.g. logo).',
+    },
+    {
+      name: '[menubarEnd]',
+      type: 'ng-content',
+      description: 'Content rendered in the trailing area (e.g. action buttons).',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Menubar container',
+      attribute: 'role',
+      value: '"menubar"',
+      notes: 'The top navigation strip uses the menubar ARIA role.',
+    },
+    {
+      element: 'Menu item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each navigable entry is a menu item.',
+    },
+    {
+      element: 'Item with submenu',
+      attribute: 'aria-haspopup',
+      value: '"true"',
+      notes: 'Signals that the item opens a submenu.',
+    },
+    {
+      element: 'Item with submenu',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the submenu is currently open.',
+    },
+    {
+      element: 'Submenu',
+      attribute: 'role',
+      value: '"menu"',
+      notes: 'Each submenu panel is a menu container.',
+    },
+    {
+      element: 'Disabled item',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive items.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', action: 'Move focus between top-level menu items.' },
+    { key: '↓ / ↑', action: 'Open a submenu or navigate within an open submenu.' },
+    { key: 'Enter / Space', action: 'Activate the focused item or open/close its submenu.' },
+    { key: 'Escape', action: 'Close the open submenu and return focus to the parent item.' },
+    {
+      key: 'Home / End',
+      action: 'Move focus to the first or last item in the current menu level.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-menubar-bar-bg', description: 'Bar background colour.' },
+    { variable: '--uilib-menubar-bar-border', description: 'Bar border shorthand.' },
+    { variable: '--uilib-menubar-bar-border-radius', description: 'Bar Border border radius.' },
+    { variable: '--uilib-menubar-bar-padding', description: 'Bar padding.' },
+    { variable: '--uilib-menubar-root-link-padding', description: 'Root Link padding.' },
+    { variable: '--uilib-menubar-root-link-gap', description: 'Root Link gap.' },
+    { variable: '--uilib-menubar-root-link-color', description: 'Root Link text colour.' },
+    {
+      variable: '--uilib-menubar-root-link-color-hover',
+      description: 'Root Link text colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-color-active',
+      description: 'Root Link text colour (active).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-bg-hover',
+      description: 'Root Link background colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-bg-active',
+      description: 'Root Link background colour (active).',
+    },
+    {
+      variable: '--uilib-menubar-root-link-border-radius',
+      description: 'Root Link Border border radius.',
+    },
+    {
+      variable: '--uilib-menubar-root-link-font-size-sm',
+      description: 'Root Link Font size — sm.',
+    },
+    {
+      variable: '--uilib-menubar-root-link-font-size-md',
+      description: 'Root Link Font size — md.',
+    },
+    {
+      variable: '--uilib-menubar-root-link-font-size-lg',
+      description: 'Root Link Font size — lg.',
+    },
+    { variable: '--uilib-menubar-root-link-font-weight', description: 'Root Link font weight.' },
+    { variable: '--uilib-menubar-panel-bg', description: 'Panel background colour.' },
+    { variable: '--uilib-menubar-panel-border', description: 'Panel border shorthand.' },
+    { variable: '--uilib-menubar-panel-border-radius', description: 'Panel border radius.' },
+    { variable: '--uilib-menubar-panel-shadow', description: 'Panel box shadow.' },
+    { variable: '--uilib-menubar-panel-min-width', description: 'Panel Min width.' },
+    { variable: '--uilib-menubar-panel-padding', description: 'Panel padding.' },
+    { variable: '--uilib-menubar-sub-link-padding', description: 'Sub Link padding.' },
+    { variable: '--uilib-menubar-sub-link-gap', description: 'Sub Link gap.' },
+    { variable: '--uilib-menubar-sub-link-color', description: 'Sub Link text colour.' },
+    {
+      variable: '--uilib-menubar-sub-link-color-hover',
+      description: 'Sub Link text colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-sub-link-bg-hover',
+      description: 'Sub Link background colour (hover).',
+    },
+    {
+      variable: '--uilib-menubar-sub-link-border-radius',
+      description: 'Sub Link Border border radius.',
+    },
+    { variable: '--uilib-menubar-sub-link-font-size', description: 'Sub Link Font size.' },
+    {
+      variable: '--uilib-menubar-sub-link-disabled-opacity',
+      description: 'Sub Link Disabled opacity.',
+    },
+    { variable: '--uilib-menubar-caret-size', description: 'Caret size.' },
+    { variable: '--uilib-menubar-caret-color', description: 'Caret text colour.' },
+    { variable: '--uilib-menubar-sub-caret-color', description: 'Sub Caret text colour.' },
+    { variable: '--uilib-menubar-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-menubar-separator-margin', description: 'Separator margin.' },
+    { variable: '--uilib-menubar-toggle-color', description: 'Toggle icon colour.' },
+    { variable: '--uilib-menubar-toggle-bar-width', description: 'Toggle Bar width.' },
+    { variable: '--uilib-menubar-toggle-bar-height', description: 'Toggle Bar height.' },
+    { variable: '--uilib-menubar-toggle-bar-gap', description: 'Toggle Bar gap.' },
+    { variable: '--uilib-menubar-transition', description: 'Transition.' },
+  ];
 }

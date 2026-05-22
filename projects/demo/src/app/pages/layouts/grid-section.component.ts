@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -11,12 +10,14 @@ import { GRID_COLUMNS, STACK_TOKENS } from 'ui-lib-custom/tokens';
 import type { GridColumns, StackToken } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for grid layout usage.
  */
@@ -24,10 +25,10 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-layout-grid-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Grid,
     Stack,
     Tabs,
@@ -36,7 +37,8 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     DocDemoViewportComponent,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
-    CodeSnippet,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './grid-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -45,6 +47,16 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 export class GridSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'grid', label: 'Grid' }];
 
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'columns', type: 'number', description: 'Total columns for fixed grid.' },
+    {
+      name: 'minColumnWidth',
+      type: 'string',
+      description: 'Auto-fit minimum width (e.g. 200px).',
+    },
+    { name: 'spacing', type: 'SpacingToken', description: 'Semantic gap between cells.' },
+  ];
+
   public readonly usageSnippet: string = `
 <ui-lib-grid [columns]="12" spacing="sm">
   <div class="cell">1</div>
@@ -52,6 +64,16 @@ export class GridSectionComponent {
   <div class="cell">3</div>
 </ui-lib-grid>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Grid } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Grid],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

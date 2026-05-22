@@ -4,20 +4,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Inline } from 'ui-lib-custom/layout';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Router } from '@angular/router';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { Panel } from 'ui-lib-custom/panel';
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
 /**
@@ -27,11 +28,11 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   selector: 'app-themes',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Tabs,
     Tab,
-    Card,
     Button,
     Badge,
     Inline,
@@ -41,6 +42,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     DocDemoViewportComponent,
     DocTocComponent,
     CodeSnippet,
+    DocApiReferenceComponent,
   ],
   templateUrl: './themes.component.html',
   styleUrl: './themes.component.scss',
@@ -53,6 +55,24 @@ export class ThemesComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'saveToLocalStorage(name)',
+      type: 'void',
+      description: 'Persist current theme preset under the provided name.',
+    },
+    {
+      name: 'loadFromLocalStorage(name)',
+      type: 'void',
+      description: 'Load a saved preset and apply it.',
+    },
+    {
+      name: 'preset()',
+      type: 'ThemePreset',
+      description: 'Returns the active theme preset.',
+    },
+  ];
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   private readonly router: Router = inject(Router);

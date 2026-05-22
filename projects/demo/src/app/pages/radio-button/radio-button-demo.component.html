@@ -1,21 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="RadioButton" [importCode]="importCode">
-    <p class="doc-description">
-      Accessible radio button that implements <code>ControlValueAccessor</code> — works with
-      <code>ngModel</code> and reactive forms. Supports arrow-key group navigation,
-      three design variants, three sizes, and a filled appearance.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-radio-button name="hero" value="a" label="Option A" />
-      <ui-lib-radio-button name="hero" value="b" label="Option B" />
-      <ui-lib-radio-button name="hero" value="c" label="Option C" />
-    </div>
+  <app-doc-page-header docHeader title="RadioButton" [importCode]="importCode"
+    description="Accessible radio button that implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports arrow-key group navigation, three design variants, three sizes, and a filled appearance.">
   </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       All buttons in a group share the same <code>name</code>. Bind the shared group value
       with <code>[(ngModel)]</code>. Wrap the group in a <code>&lt;fieldset&gt;</code> /
@@ -45,14 +35,13 @@
     </p>
     <ui-lib-code-snippet
       language="html"
-      filename="Basic" [code]="snippets.basic" 
+      filename="Basic" [code]="snippets.basic"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
       When <code>variant</code> is <code>null</code> (default), it inherits from
@@ -86,14 +75,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -106,14 +94,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes" 
+      filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Filled Appearance ---------------------------------------- -->
-  <section class="demo-section" id="filled" data-doc-anchor>
-    <h2 class="demo-section__title">Filled Appearance</h2>
+  <app-doc-section id="filled" title="Filled Appearance">
     <p class="demo-section__description">
       Set <code>appearance="filled"</code> to use a solid checked background instead of
       the default outlined ring style.
@@ -133,14 +120,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Filled" [code]="snippets.filled" 
+      filename="Filled" [code]="snippets.filled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> on individual buttons. Disabled radios are
       automatically skipped during arrow-key navigation.
@@ -153,14 +139,13 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Disabled" [code]="snippets.disabled" 
+      filename="Disabled" [code]="snippets.disabled"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- With ngModel --------------------------------------------- -->
-  <section class="demo-section" id="ngmodel" data-doc-anchor>
-    <h2 class="demo-section__title">With ngModel</h2>
+  <app-doc-section id="ngmodel" title="With ngModel">
     <p class="demo-section__description">
       All buttons in the group share the same <code>[(ngModel)]</code> binding.
       The button whose <code>[value]</code> matches the bound value becomes checked.
@@ -183,14 +168,13 @@
     <p class="demo-radio-hint">Selected fruit: <strong>{{ selectedFruit }}</strong></p>
     <ui-lib-code-snippet
       language="html"
-      filename="With ngModel" [code]="snippets.ngmodel" 
+      filename="With ngModel" [code]="snippets.ngmodel"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
-  <section class="demo-section" id="reactive-forms" data-doc-anchor>
-    <h2 class="demo-section__title">Reactive Forms</h2>
+  <app-doc-section id="reactive-forms" title="Reactive Forms">
     <p class="demo-section__description">
       Use <code>formControlName</code> or <code>[formControl]</code> for reactive form
       integration. <code>FormControl.disable()</code> propagates through
@@ -216,203 +200,37 @@
     <p class="demo-radio-hint">Form value: <strong>{{ planForm.value | json }}</strong></p>
     <ui-lib-code-snippet
       language="html"
-      filename="Reactive forms" [code]="snippets.reactiveForms" 
+      filename="Reactive forms" [code]="snippets.reactiveForms"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Visible label text. Content projection is an alternative.</td>
-          </tr>
-          <tr>
-            <td><code>inputId</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Forwarded to the native <code>&lt;input&gt;</code> id.</td>
-          </tr>
-          <tr>
-            <td><code>name</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Must be identical across all buttons in a group.</td>
-          </tr>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>unknown</code></td>
-            <td><code>null</code></td>
-            <td>The value this radio button represents in the group.</td>
-          </tr>
-          <tr>
-            <td><code>required</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Sets <code>aria-required</code> on the native input.</td>
-          </tr>
-          <tr>
-            <td><code>readonly</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Prevents value changes while remaining visible.</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Sets <code>aria-disabled</code> on the native input. Skipped during arrow-key navigation.</td>
-          </tr>
-          <tr>
-            <td><code>tabindex</code></td>
-            <td><code>number</code></td>
-            <td><code>0</code></td>
-            <td>Applied when the radio is checked (roving tabindex pattern).</td>
-          </tr>
-          <tr>
-            <td><code>autofocus</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Focuses this radio after first render.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabel</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Used when no visible label is provided.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabelledby</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Explicit override; takes precedence over the auto-generated label id.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Component density.</td>
-          </tr>
-          <tr>
-            <td><code>appearance</code></td>
-            <td><code>'outlined' | 'filled'</code></td>
-            <td><code>'outlined'</code></td>
-            <td>Visual style — <code>filled</code> uses a solid checked background.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Payload</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>(change)</code></td>
-            <td><code>RadioButtonChangeEvent</code></td>
-            <td>Fires when this button is selected. Payload: <code>&#123; value, originalEvent &#125;</code>.</td>
-          </tr>
-          <tr>
-            <td><code>(focus)</code></td>
-            <td><code>FocusEvent</code></td>
-            <td>Emitted when the radio receives focus.</td>
-          </tr>
-          <tr>
-            <td><code>(blur)</code></td>
-            <td><code>FocusEvent</code></td>
-            <td>Emitted when the radio loses focus.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>Value / Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Native <code>&lt;input type="radio"&gt;</code></td>
-            <td><code>role="radio"</code></td>
-            <td>Implicit via input type — native browser semantics.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>aria-checked</code></td>
-            <td>Managed natively by the browser based on <code>checked</code> property.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>aria-required</code></td>
-            <td>Set when <code>[required]="true"</code>.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>aria-disabled</code></td>
-            <td>Set when <code>[disabled]="true"</code>.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>id</code></td>
-            <td>From <code>inputId</code> input; auto-generated when not provided.</td>
-          </tr>
-          <tr>
-            <td><code>&lt;label&gt;</code></td>
-            <td><code>for</code></td>
-            <td>Points to the native input id — links label and control.</td>
-          </tr>
-          <tr>
-            <td>Native input</td>
-            <td><code>tabindex</code></td>
-            <td>Checked radio gets <code>tabindex="0"</code>; unchecked radios get <code>tabindex="-1"</code> (roving tabindex).</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
       <p class="demo-section__description" style="margin-top: 1rem">
         <strong>Group labeling is consumer responsibility.</strong> Wrap radio buttons in
         a <code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code> (recommended) or a
@@ -420,38 +238,9 @@
       </p>
     </div>
 
-    <div id="a11y-keyboard" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Enters the group; browser focuses the checked radio (or the first if none checked).</td>
-          </tr>
-          <tr>
-            <td><code>Shift+Tab</code></td>
-            <td>Leaves the group.</td>
-          </tr>
-          <tr>
-            <td><code>ArrowDown</code> / <code>ArrowRight</code></td>
-            <td>Moves focus to the next non-disabled radio, wrapping around; selects it.</td>
-          </tr>
-          <tr>
-            <td><code>ArrowUp</code> / <code>ArrowLeft</code></td>
-            <td>Moves focus to the previous non-disabled radio, wrapping around; selects it.</td>
-          </tr>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Selects the focused radio (native browser behaviour).</td>
-          </tr>
-        </tbody>
-      </table>
+    <div data-doc-anchor>
+      <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>
@@ -472,9 +261,10 @@
       <li>All transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx.cmd tsc *)",
+      "Bash(npx.cmd eslint *)",
+      "Bash(npm run *)",
+      "Bash(node scripts/generate-snippets.mjs)",
+      "Bash(git add *)",
+      "Bash(git commit -m *)",
+      "Bash(git push *)",
+      "Bash(git checkout *)",
+      "Bash(git cherry-pick *)",
+      "Bash(gh pr *)"
+    ]
+  }
+}
+

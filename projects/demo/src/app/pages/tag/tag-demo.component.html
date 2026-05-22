@@ -6,20 +6,12 @@
       Supports seven severity colours, three sizes, three design variants, optional icons,
       and an accessible dismiss button.
     </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-tag value="New"     severity="primary" />
-      <ui-lib-tag value="Success" severity="success" />
-      <ui-lib-tag value="Warning" severity="warn" />
-      <ui-lib-tag value="Danger"  severity="danger" />
-      <ui-lib-tag value="Info"    severity="info" icon="pi pi-info-circle" />
-    </div>
   </app-doc-page-header>
 
   <!-- ══════════════════════════════════════════════════════════════════
        SEVERITY
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="severity" data-doc-anchor>
-    <h2 class="demo-section__title">Severity</h2>
+  <app-doc-section id="severity" title="Severity">
     <p class="demo-section__description">
       Use the <code>severity</code> input to communicate meaning through colour.
       Seven values are available: <code>primary</code>, <code>secondary</code>,
@@ -33,16 +25,15 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Severity" [code]="snippets.severity" 
+      filename="Severity" [code]="snippets.severity"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        SIZES
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -53,16 +44,15 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Sizes" [code]="snippets.sizes" 
+      filename="Sizes" [code]="snippets.sizes"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        ROUNDED
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="rounded" data-doc-anchor>
-    <h2 class="demo-section__title">Rounded</h2>
+  <app-doc-section id="rounded" title="Rounded">
     <p class="demo-section__description">
       Set <code>[rounded]="true"</code> to apply fully rounded (pill) corners.
     </p>
@@ -73,16 +63,15 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Rounded" [code]="snippets.rounded" 
+      filename="Rounded" [code]="snippets.rounded"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        WITH ICONS
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="icons" data-doc-anchor>
-    <h2 class="demo-section__title">With Icons</h2>
+  <app-doc-section id="icons" title="With Icons">
     <p class="demo-section__description">
       Provide a PrimeIcons class via the <code>icon</code> input to render a leading icon.
       Icons are always marked <code>aria-hidden="true"</code> — they are decorative.
@@ -96,16 +85,15 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Icons" [code]="snippets.icons" 
+      filename="Icons" [code]="snippets.icons"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        DISMISSIBLE
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="dismissible" data-doc-anchor>
-    <h2 class="demo-section__title">Dismissible</h2>
+  <app-doc-section id="dismissible" title="Dismissible">
     <p class="demo-section__description">
       Set <code>[dismissible]="true"</code> to render a remove button.
       The button receives an auto-generated <code>aria-label</code> such as
@@ -119,16 +107,15 @@
     </div>
     <ui-lib-code-snippet
       language="html"
-      filename="Dismissible" [code]="snippets.dismissible" 
+      filename="Dismissible" [code]="snippets.dismissible"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        DESIGN VARIANTS
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code>. When <code>variant</code> is <code>null</code> (the default),
@@ -150,16 +137,15 @@
     }
     <ui-lib-code-snippet
       language="html"
-      filename="Variants" [code]="snippets.variants" 
+      filename="Variants" [code]="snippets.variants"
       [showLineNumbers]="true"
       />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        PLAYGROUND
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Customise the tag using the controls below.</p>
 
     <div class="demo-playground">
@@ -253,125 +239,46 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        API
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Input" field="name" width="120px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.name }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Type" field="type" width="260px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.type }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Default" field="default" width="90px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.default }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.description"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Output" field="name" width="120px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.name }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Type" field="type" width="220px">
-          <ng-template uiTableColumnBody let-row>
-            <code [innerHTML]="row.type"></code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Description" field="description">
-          <ng-template uiTableColumnBody let-row>
-            <span>{{ row.description }}</span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        CSS CUSTOM PROPERTIES
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
     <p class="demo-section__description">
       Override any of these on the host element or an ancestor to theme the tag without
       touching component internals.
     </p>
     <app-doc-css-vars-table [rows]="cssVarRows" />
-  </section>
+  </app-doc-section>
 
   <!-- ══════════════════════════════════════════════════════════════════
        ACCESSIBILITY
   ══════════════════════════════════════════════════════════════════ -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-    <h2 class="demo-section__title">Accessibility</h2>
+  <app-doc-section id="accessibility" title="Accessibility">
 
-    <div id="a11y-aria" data-doc-anchor>
-      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Attribute" field="attribute" width="140px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.attribute }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Element" field="element" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span>{{ row.element }}</span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Value" field="value" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <code>{{ row.value }}</code>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Notes" field="notes">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.notes"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
-    </div>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
 
-    <div id="a11y-keyboard" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
-        <ui-lib-table-column header="Key" field="key" width="200px">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.key"></span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Target" field="target" width="160px">
-          <ng-template uiTableColumnBody let-row>
-            <span>{{ row.target }}</span>
-          </ng-template>
-        </ui-lib-table-column>
-        <ui-lib-table-column header="Action" field="action">
-          <ng-template uiTableColumnBody let-row>
-            <span [innerHTML]="row.action"></span>
-          </ng-template>
-        </ui-lib-table-column>
-      </ui-lib-table>
+    <div data-doc-anchor>
+      <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>
@@ -390,7 +297,9 @@
         or icon.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <!-- ══════════════════════════════════════════════════════════════════
        TOC RAIL

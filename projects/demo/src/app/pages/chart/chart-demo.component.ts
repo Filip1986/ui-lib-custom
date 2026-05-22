@@ -5,9 +5,9 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   BarChartComponent,
   ChartComponent,
@@ -20,26 +20,56 @@ import type { ChartClickEvent, ChartData, ChartOptions } from 'ui-lib-custom/cha
 import type { TooltipItem } from 'chart.js';
 import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 
-type ChartDemoSnippetKey =
-  | 'basicBar'
-  | 'basicLine'
-  | 'pie'
-  | 'doughnut'
-  | 'radar'
-  | 'polarArea'
-  | 'bubble'
-  | 'scatter'
-  | 'multiDatasetBar'
-  | 'stackedBar'
-  | 'lineArea'
-  | 'mixed'
-  | 'sizes'
-  | 'customDimensions'
-  | 'dynamicUpdate'
-  | 'themeIntegration'
-  | 'clickEvents'
-  | 'customOptions';
+import { Panel } from 'ui-lib-custom/panel';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicBarHtml,
+  basicBarTsTs,
+  basicLineHtml,
+  basicLineTsTs,
+  pieHtml,
+  pieTsTs,
+  doughnutHtml,
+  doughnutTsTs,
+  radarHtml,
+  radarTsTs,
+  polarAreaHtml,
+  polarAreaTsTs,
+  bubbleHtml,
+  bubbleTsTs,
+  scatterHtml,
+  scatterTsTs,
+  multiDatasetBarHtml,
+  multiDatasetBarTsTs,
+  stackedBarHtml,
+  stackedBarTsTs,
+  lineAreaHtml,
+  lineAreaTsTs,
+  mixedHtml,
+  mixedTsTs,
+  sizesHtml,
+  sizesTsTs,
+  customDimensionsHtml,
+  customDimensionsTsTs,
+  dynamicUpdateHtml,
+  dynamicUpdateTsTs,
+  themeIntegrationHtml,
+  themeIntegrationTsTs,
+  clickEventsHtml,
+  clickEventsTsTs,
+  customOptionsHtml,
+  customOptionsTsTs,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 type ChartThemeProfileKey = 'material' | 'bootstrap' | 'minimal';
 
 type RefreshableChart = {
@@ -66,13 +96,12 @@ type ThemeCssVariables = {
   selector: 'app-chart-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    Card,
     Button,
-    CodeSnippet,
     Stack,
     Inline,
     Grid,
@@ -81,12 +110,75 @@ type ThemeCssVariables = {
     LineChartComponent,
     PieChartComponent,
     DoughnutChartComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './chart-demo.component.html',
   styleUrl: './chart-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartDemoComponent {
+  public readonly basicBarHtml: string = basicBarHtml;
+  public readonly basicBarTsTs: string = basicBarTsTs;
+  public readonly basicLineHtml: string = basicLineHtml;
+  public readonly basicLineTsTs: string = basicLineTsTs;
+  public readonly pieHtml: string = pieHtml;
+  public readonly pieTsTs: string = pieTsTs;
+  public readonly doughnutHtml: string = doughnutHtml;
+  public readonly doughnutTsTs: string = doughnutTsTs;
+  public readonly radarHtml: string = radarHtml;
+  public readonly radarTsTs: string = radarTsTs;
+  public readonly polarAreaHtml: string = polarAreaHtml;
+  public readonly polarAreaTsTs: string = polarAreaTsTs;
+  public readonly bubbleHtml: string = bubbleHtml;
+  public readonly bubbleTsTs: string = bubbleTsTs;
+  public readonly scatterHtml: string = scatterHtml;
+  public readonly scatterTsTs: string = scatterTsTs;
+  public readonly multiDatasetBarHtml: string = multiDatasetBarHtml;
+  public readonly multiDatasetBarTsTs: string = multiDatasetBarTsTs;
+  public readonly stackedBarHtml: string = stackedBarHtml;
+  public readonly stackedBarTsTs: string = stackedBarTsTs;
+  public readonly lineAreaHtml: string = lineAreaHtml;
+  public readonly lineAreaTsTs: string = lineAreaTsTs;
+  public readonly mixedHtml: string = mixedHtml;
+  public readonly mixedTsTs: string = mixedTsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTsTs: string = sizesTsTs;
+  public readonly customDimensionsHtml: string = customDimensionsHtml;
+  public readonly customDimensionsTsTs: string = customDimensionsTsTs;
+  public readonly dynamicUpdateHtml: string = dynamicUpdateHtml;
+  public readonly dynamicUpdateTsTs: string = dynamicUpdateTsTs;
+  public readonly themeIntegrationHtml: string = themeIntegrationHtml;
+  public readonly themeIntegrationTsTs: string = themeIntegrationTsTs;
+  public readonly clickEventsHtml: string = clickEventsHtml;
+  public readonly clickEventsTsTs: string = clickEventsTsTs;
+  public readonly customOptionsHtml: string = customOptionsHtml;
+  public readonly customOptionsTsTs: string = customOptionsTsTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { ChartComponent, BarChartComponent, LineChartComponent } from 'ui-lib-custom/chart'";
 
@@ -114,56 +206,14 @@ export class ChartDemoComponent {
     { id: 'theme-integration', label: 'Theme Integration' },
     { id: 'click-events', label: 'Click Events' },
     { id: 'custom-options', label: 'Custom Options' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: Record<ChartDemoSnippetKey, string> = {
-    basicBar: `<ui-lib-bar-chart [data]="monthlyRevenueData" />`,
-    basicLine: `<ui-lib-line-chart [data]="userGrowthData" />`,
-    pie: `<ui-lib-pie-chart [data]="marketShareData" />`,
-    doughnut: `<ui-lib-doughnut-chart [data]="channelMixData" />`,
-    radar: `<ui-lib-chart type="radar" [data]="radarCapabilityData" />`,
-    polarArea: `<ui-lib-chart type="polarArea" [data]="polarPriorityData" />`,
-    bubble: `<ui-lib-chart type="bubble" [data]="bubbleSegmentData" />`,
-    scatter: `<ui-lib-chart type="scatter" [data]="scatterConversionData" />`,
-    multiDatasetBar: `<ui-lib-bar-chart [data]="regionalRevenueData" />`,
-    stackedBar: `<ui-lib-bar-chart [data]="stackedCostData" [options]="stackedBarOptions" />`,
-    lineArea: `<ui-lib-line-chart [data]="trafficAreaData" />`,
-    mixed: `<ui-lib-chart type="bar" [data]="mixedKpiData" [options]="mixedChartOptions" />`,
-    sizes: `<ui-lib-grid [columns]="3" spacing="md">
-  <ui-lib-bar-chart [data]="sizePreviewData" size="sm" />
-  <ui-lib-bar-chart [data]="sizePreviewData" size="md" />
-  <ui-lib-bar-chart [data]="sizePreviewData" size="lg" />
-</ui-lib-grid>`,
-    customDimensions: `<ui-lib-line-chart
-  [data]="customDimensionData"
-  height="320px"
-  width="640px"
-/>`,
-    dynamicUpdate: `<ui-lib-inline [gap]="2" align="center">
-  <ui-lib-button (click)="randomizeRevenueData()">Randomize</ui-lib-button>
-</ui-lib-inline>
-<ui-lib-bar-chart [data]="dynamicRevenueData" />`,
-    themeIntegration: `<ui-lib-inline [gap]="2">
-  <ui-lib-button (click)="setThemeProfile('material', themeChart)">Material</ui-lib-button>
-  <ui-lib-button (click)="setThemeProfile('bootstrap', themeChart)">Bootstrap</ui-lib-button>
-  <ui-lib-button (click)="setThemeProfile('minimal', themeChart)">Minimal</ui-lib-button>
-</ui-lib-inline>
-<div [ngStyle]="themeCssVariables()">
-  <ui-lib-line-chart #themeChart [data]="themeBridgeData" />
-</div>`,
-    clickEvents: `<ui-lib-bar-chart
-  [data]="clickableRevenueData"
-  (chartClick)="onChartClick($event)"
-/>`,
-    customOptions: `<ui-lib-doughnut-chart
-  [data]="customOptionsData"
-  [options]="customLegendOptions"
-/>`,
-  };
 
   public readonly monthlyRevenueData: ChartData<'bar'> = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -347,10 +397,6 @@ export class ChartDemoComponent {
     }
   }
 
-  public snippet(key: ChartDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
   public randomizeRevenueData(): void {
     const labels: string[] = (this.dynamicRevenueData.labels as string[] | undefined) ?? [
       'Product A',
@@ -432,4 +478,110 @@ export class ChartDemoComponent {
   private randomBetween(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'data',
+      type: "ChartData<'bar'> | null",
+      default: 'null',
+      description: 'Chart.js data configuration.',
+    },
+    {
+      name: 'options',
+      type: "ChartOptions<'bar'> | null",
+      default: 'null',
+      description: 'Chart.js options object.',
+    },
+    {
+      name: 'plugins',
+      type: 'Plugin[]',
+      default: '[]',
+      description: 'Additional Chart.js plugins.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Predefined size preset.',
+    },
+    {
+      name: 'responsive',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables responsive resizing.',
+    },
+    {
+      name: 'maintainAspectRatio',
+      type: 'boolean',
+      default: 'true',
+      description: 'Keeps the configured aspect ratio.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Chart'",
+      description: 'Accessible label for the canvas element.',
+    },
+    { name: 'height', type: 'string | null', default: 'null', description: 'Explicit height.' },
+    { name: 'width', type: 'string | null', default: 'null', description: 'Explicit width.' },
+  ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus into and out of the chart host in natural document order. The canvas itself is not keyboard-interactive.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'canvas',
+      attribute: 'role="img"',
+      value: '—',
+      notes: 'Exposes the canvas as an image to assistive technology.',
+    },
+    {
+      element: 'canvas',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Chart")',
+      notes: 'Describes the chart content to screen readers. Always provide a meaningful label.',
+    },
+    {
+      element: 'canvas',
+      attribute: 'aria-describedby',
+      value: 'data table element ID',
+      notes:
+        'Present when <code>[showDataTable]="true"</code>. Points to the visually-hidden data table.',
+    },
+    {
+      element: 'Data table',
+      attribute: 'id',
+      value: 'ui-lib-chart-table-{n}',
+      notes: 'Auto-generated unique ID per instance, referenced by <code>aria-describedby</code>.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-chart-min-height-sm', description: 'Minimum height — sm.' },
+    { variable: '--uilib-chart-min-height-md', description: 'Minimum height — md.' },
+    { variable: '--uilib-chart-min-height-lg', description: 'Minimum height — lg.' },
+    { variable: '--uilib-chart-min-height', description: 'Minimum height.' },
+    { variable: '--uilib-chart-font-family', description: 'Font family.' },
+    { variable: '--uilib-chart-font-size', description: 'Font size.' },
+    { variable: '--uilib-chart-font-color', description: 'Font text colour.' },
+    { variable: '--uilib-chart-grid-color', description: 'Grid text colour.' },
+    { variable: '--uilib-chart-border-color', description: 'Border colour.' },
+    { variable: '--uilib-chart-background-color', description: 'Background text colour.' },
+    { variable: '--uilib-chart-tooltip-background', description: 'Tooltip Background.' },
+    { variable: '--uilib-chart-tooltip-font-color', description: 'Tooltip Font text colour.' },
+    { variable: '--uilib-chart-legend-font-color', description: 'Legend Font text colour.' },
+    { variable: '--uilib-chart-color-1', description: 'Color 1.' },
+    { variable: '--uilib-chart-color-2', description: 'Color 2.' },
+    { variable: '--uilib-chart-color-3', description: 'Color 3.' },
+    { variable: '--uilib-chart-color-4', description: 'Color 4.' },
+    { variable: '--uilib-chart-color-5', description: 'Color 5.' },
+    { variable: '--uilib-chart-color-6', description: 'Color 6.' },
+    { variable: '--uilib-chart-color-7', description: 'Color 7.' },
+    { variable: '--uilib-chart-color-8', description: 'Color 8.' },
+  ];
 }

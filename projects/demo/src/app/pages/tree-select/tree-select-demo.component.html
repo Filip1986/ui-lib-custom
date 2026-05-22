@@ -3,9 +3,8 @@
   description="TreeSelect renders a hierarchical tree structure inside a dropdown overlay, supporting single, multiple, and checkbox node selection."
   [sections]="sections"
 >
-
   <!-- ─── Basic ─────────────────────────────────────────────────────────── -->
-  <section id="basic">
+  <app-doc-section id="basic" title="Basic">
     <app-doc-demo-viewport label="Basic — Single Selection">
       <div demo>
         <ui-lib-tree-select
@@ -21,14 +20,12 @@
           </p>
         }
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Multiple ──────────────────────────────────────────────────────── -->
-  <section id="multiple">
+  <app-doc-section id="multiple" title="Multiple">
     <app-doc-demo-viewport label="Multiple Selection">
       <div demo>
         <ui-lib-tree-select
@@ -44,14 +41,12 @@
           </p>
         }
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('multiple')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Checkbox ──────────────────────────────────────────────────────── -->
-  <section id="checkbox">
+  <app-doc-section id="checkbox" title="Checkbox">
     <app-doc-demo-viewport label="Checkbox Selection">
       <div demo>
         <ui-lib-tree-select
@@ -67,14 +62,12 @@
           </p>
         }
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('checkbox')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="checkboxHtml" [typescript]="checkboxTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Filter ────────────────────────────────────────────────────────── -->
-  <section id="filter">
+  <app-doc-section id="filter" title="Filter">
     <app-doc-demo-viewport label="With Filter">
       <div demo>
         <ui-lib-tree-select
@@ -87,14 +80,12 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('filter')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="filterHtml" [typescript]="filterTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Sizes ─────────────────────────────────────────────────────────── -->
-  <section id="sizes">
+  <app-doc-section id="sizes" title="Sizes">
     <app-doc-demo-viewport label="Sizes">
       <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
         <ui-lib-tree-select
@@ -116,14 +107,12 @@
           [(selection)]="sizeLgSelection"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Variants ──────────────────────────────────────────────────────── -->
-  <section id="variants">
+  <app-doc-section id="variants" title="Variants">
     <app-doc-demo-viewport label="Variants">
       <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
         <label style="font-size: 0.75rem; color: var(--uilib-muted)">Material</label>
@@ -148,14 +137,12 @@
           [(selection)]="variantSelections['minimal']"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Show Clear ────────────────────────────────────────────────────── -->
-  <section id="show-clear">
+  <app-doc-section id="show-clear" title="Show Clear">
     <app-doc-demo-viewport label="Show Clear Button">
       <div demo>
         <ui-lib-tree-select
@@ -167,14 +154,12 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('showClear')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="showClearHtml" [typescript]="showClearTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Disabled ──────────────────────────────────────────────────────── -->
-  <section id="disabled">
+  <app-doc-section id="disabled" title="Disabled">
     <app-doc-demo-viewport label="Disabled">
       <div demo>
         <ui-lib-tree-select
@@ -184,14 +169,12 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Loading ───────────────────────────────────────────────────────── -->
-  <section id="loading">
+  <app-doc-section id="loading" title="Loading">
     <app-doc-demo-viewport label="Loading State">
       <div demo>
         <ui-lib-tree-select
@@ -201,14 +184,12 @@
           style="max-width: 320px"
         />
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('loading')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="loadingHtml" [typescript]="loadingTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── ngModel ───────────────────────────────────────────────────────── -->
-  <section id="ngModel">
+  <app-doc-section id="ngModel" title="NgModel">
     <app-doc-demo-viewport label="ngModel Binding">
       <div demo>
         <ui-lib-tree-select
@@ -221,14 +202,12 @@
         />
         <pre style="margin-top: 0.5rem; font-size: 0.75rem">{{ ngModelValue | json }}</pre>
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('ngModel')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="ngModelHtml" [typescript]="ngModelTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Reactive Forms ────────────────────────────────────────────────── -->
-  <section id="reactive">
+  <app-doc-section id="reactive" title="Reactive">
     <app-doc-demo-viewport label="Reactive Forms">
       <div demo>
         <form [formGroup]="reactiveForm" style="display: flex; flex-direction: column; gap: 1rem">
@@ -248,11 +227,37 @@
           <pre style="font-size: 0.75rem">{{ reactiveForm.value | json }}</pre>
         </form>
       </div>
-      <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-        [showLineNumbers]="true"
-        />
+      <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
     </app-doc-demo-viewport>
-  </section>
+  </app-doc-section>
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-tree-select</code>. Import from
+      <code>ui-lib-custom/tree-select</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -262,6 +267,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

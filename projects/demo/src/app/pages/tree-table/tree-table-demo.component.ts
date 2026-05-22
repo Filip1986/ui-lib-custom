@@ -9,12 +9,22 @@ import type {
   TreeTableVariant,
 } from 'ui-lib-custom/tree-table';
 import { Button } from 'ui-lib-custom/button';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the TreeTable component.
  * Showcases: basic table, expand/collapse, sorting, global filter,
@@ -24,7 +34,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-tree-table-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
     TreeTableComponent,
     TreeTableColumnComponent,
     TreeTableColumnBodyDirective,
@@ -32,12 +41,37 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeTableDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { TreeTableComponent } from 'ui-lib-custom/tree-table'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -51,11 +85,66 @@ export class TreeTableDemoComponent {
     { id: 'custom-cell-templates', label: 'Custom Cell Templates' },
     { id: 'organisation-data', label: 'Organisation Data' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'TreeTableNode[]',
+      default: '[]',
+      description: 'Root rows of the tree table.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Table size.' },
+    {
+      name: 'globalFilter',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables a global filter input.',
+    },
+    {
+      name: 'globalFilterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Global filter placeholder.',
+    },
+    {
+      name: 'scrollable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables vertical scrolling.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS height of the scroll viewport.',
+    },
+    {
+      name: 'caption',
+      type: 'string',
+      default: "''",
+      description: 'Table caption for accessibility.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "''",
+      description: 'Accessible label for the tree table.',
+    },
+  ];
 
   // ─── Active variant + size ────────────────────────────────────────────────
 
@@ -259,4 +348,113 @@ export class TreeTableDemoComponent {
     };
     return iconMap[type] ?? 'pi pi-file';
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Table container',
+      attribute: 'role',
+      value: '"treegrid"',
+      notes: 'The component uses the treegrid role — a combination of grid and tree.',
+    },
+    { element: 'Table row', attribute: 'role', value: '"row"', notes: 'Each data row is a row.' },
+    {
+      element: 'Table cell',
+      attribute: 'role',
+      value: '"gridcell"',
+      notes: 'Each data cell is a gridcell.',
+    },
+    {
+      element: 'Expandable row',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects the expanded/collapsed state of rows with children.',
+    },
+    {
+      element: 'Row (selected)',
+      attribute: 'aria-selected',
+      value: '"true"',
+      notes: 'Reflects selection state when row selection is enabled.',
+    },
+    {
+      element: 'Column header',
+      attribute: 'role',
+      value: '"columnheader"',
+      notes: 'Column header cells use the columnheader role.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '↓ / ↑', action: 'Move focus between rows.' },
+    { key: '→', action: 'Expand a collapsed row group.' },
+    { key: '←', action: 'Collapse an expanded row group.' },
+    { key: 'Enter / Space', action: 'Select the focused row (respects selection mode).' },
+    { key: 'Home / End', action: 'Move focus to the first or last row.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-tree-table-font-size', description: 'Font size.' },
+    { variable: '--uilib-tree-table-line-height', description: 'Line height.' },
+    { variable: '--uilib-tree-table-border', description: 'Border shorthand.' },
+    { variable: '--uilib-tree-table-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-tree-table-header-bg', description: 'Header background colour.' },
+    { variable: '--uilib-tree-table-header-color', description: 'Header text colour.' },
+    { variable: '--uilib-tree-table-header-font-weight', description: 'Header font weight.' },
+    { variable: '--uilib-tree-table-header-padding', description: 'Header padding.' },
+    { variable: '--uilib-tree-table-header-border', description: 'Header border shorthand.' },
+    { variable: '--uilib-tree-table-header-bg-sorted', description: 'Header Bg Sorted.' },
+    { variable: '--uilib-tree-table-header-color-sorted', description: 'Header Color Sorted.' },
+    { variable: '--uilib-tree-table-row-bg', description: 'Row background colour.' },
+    { variable: '--uilib-tree-table-row-bg-alt', description: 'Row Bg Alt.' },
+    { variable: '--uilib-tree-table-row-bg-hover', description: 'Row background colour (hover).' },
+    {
+      variable: '--uilib-tree-table-row-bg-selected',
+      description: 'Row background colour (selected).',
+    },
+    { variable: '--uilib-tree-table-row-color', description: 'Row text colour.' },
+    {
+      variable: '--uilib-tree-table-row-color-selected',
+      description: 'Row text colour (selected).',
+    },
+    { variable: '--uilib-tree-table-row-border', description: 'Row border shorthand.' },
+    { variable: '--uilib-tree-table-cell-padding', description: 'Cell padding.' },
+    { variable: '--uilib-tree-table-toggle-size', description: 'Toggle button size.' },
+    { variable: '--uilib-tree-table-toggle-color', description: 'Toggle icon colour.' },
+    {
+      variable: '--uilib-tree-table-toggle-bg-hover',
+      description: 'Toggle background colour (hover).',
+    },
+    { variable: '--uilib-tree-table-indent-size', description: 'Indent size.' },
+    { variable: '--uilib-tree-table-checkbox-size', description: 'Checkbox size.' },
+    { variable: '--uilib-tree-table-checkbox-border', description: 'Checkbox border shorthand.' },
+    { variable: '--uilib-tree-table-checkbox-bg', description: 'Checkbox background colour.' },
+    {
+      variable: '--uilib-tree-table-checkbox-bg-checked',
+      description: 'Checkbox background colour (checked).',
+    },
+    {
+      variable: '--uilib-tree-table-checkbox-border-checked',
+      description: 'Checkbox border shorthand (checked).',
+    },
+    {
+      variable: '--uilib-tree-table-checkbox-color-checked',
+      description: 'Checkbox text colour (checked).',
+    },
+    { variable: '--uilib-tree-table-filter-border', description: 'Filter border shorthand.' },
+    {
+      variable: '--uilib-tree-table-filter-border-radius',
+      description: 'Filter Border border radius.',
+    },
+    { variable: '--uilib-tree-table-filter-bg', description: 'Filter background colour.' },
+    { variable: '--uilib-tree-table-filter-color', description: 'Filter text colour.' },
+    { variable: '--uilib-tree-table-filter-padding', description: 'Filter padding.' },
+    {
+      variable: '--uilib-tree-table-filter-border-focus',
+      description: 'Filter border shorthand (focus).',
+    },
+    { variable: '--uilib-tree-table-sort-icon-color', description: 'Sort Icon text colour.' },
+    {
+      variable: '--uilib-tree-table-sort-icon-color-active',
+      description: 'Sort Icon text colour (active).',
+    },
+    { variable: '--uilib-tree-table-leaf-spacer-width', description: 'Leaf Spacer width.' },
+  ];
 }

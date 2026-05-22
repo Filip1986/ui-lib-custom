@@ -1,24 +1,22 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="FocusTrap" [importCode]="importCode">
-    <p class="doc-description">
-      A directive that constrains keyboard focus within a container element.
-      Tab and Shift+Tab cycle only among the focusable descendants of the host,
-      preventing focus from escaping — essential for accessible modals, dialogs,
-      and side panels.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="ft-hero__tags">
-        <span class="ft-tag">Directive</span>
-        <span class="ft-tag">Misc</span>
-        <span class="ft-tag">A11y</span>
-      </div>
+  <app-doc-page-header
+    docHeader
+    title="FocusTrap"
+    [importCode]="importCode"
+    description="A directive that constrains keyboard focus within a container element. Tab and Shift+Tab cycle only among the focusable descendants of the host, preventing focus from escaping — essential for accessible modals, dialogs, and side panels."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="ft-hero__tags">
+      <span class="ft-tag">Directive</span>
+      <span class="ft-tag">Misc</span>
+      <span class="ft-tag">A11y</span>
     </div>
-  </app-doc-page-header>
+  </div>
 
   <!-- ── Section 1: Basic usage ── -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__desc">
       Add <code>uiLibFocusTrap</code> to any container. Tab navigation is
       constrained to focusable descendants of that element. Focus moves to the
@@ -47,11 +45,10 @@
       size="sm"
       [code]="snippetBasicUsage"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 2: Toggle on/off ── -->
-  <section class="demo-section" id="toggle-trap" data-doc-anchor>
-    <h2 class="demo-section__title">Toggle Trap</h2>
+  <app-doc-section id="toggle-trap" title="Toggle Trap">
     <p class="demo-section__desc">
       Bind <code>[uiLibFocusTrap]</code> to a boolean signal to enable or disable
       the trap at runtime. When disabled, Tab behaves normally and focus is restored
@@ -89,11 +86,10 @@
       size="sm"
       [code]="snippetToggleTrap"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 3: Modal overlay pattern ── -->
-  <section class="demo-section" id="modal-overlay-pattern" data-doc-anchor>
-    <h2 class="demo-section__title">Modal Overlay Pattern</h2>
+  <app-doc-section id="modal-overlay-pattern" title="Modal Overlay Pattern">
     <p class="demo-section__desc">
       The most common use case: wrapping a modal dialog so that keyboard users
       cannot interact with background content. When the modal closes, focus
@@ -115,11 +111,10 @@
       size="sm"
       [code]="snippetModalPattern"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 4: API ── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="ft-sub-title">Import</h3>
     <ui-lib-code-snippet
@@ -138,47 +133,10 @@
     />
 
     <h3 class="ft-sub-title">Inputs</h3>
-    <table class="ft-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>uiLibFocusTrap</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>
-            When <code>true</code>, keyboard focus is trapped within the host
-            element. Set to <code>false</code> to release the trap at runtime.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
 
     <h3 class="ft-sub-title">Keyboard behavior</h3>
-    <table class="ft-table">
-      <thead>
-        <tr>
-          <th>Key</th>
-          <th>Behavior</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>Tab</code></td>
-          <td>Move focus to the next focusable descendant; wraps to first from last.</td>
-        </tr>
-        <tr>
-          <td><code>Shift + Tab</code></td>
-          <td>Move focus to the previous focusable descendant; wraps to last from first.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
 
     <h3 class="ft-sub-title">Accessible elements included</h3>
     <p class="ft-section__desc">
@@ -188,7 +146,22 @@
       <code>[contenteditable="true"]</code>. Disabled and
       <code>aria-hidden</code> elements are excluded.
     </p>
-  </section>
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+  </app-doc-section>
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

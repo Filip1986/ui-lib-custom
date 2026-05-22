@@ -1,43 +1,40 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Divider" [importCode]="importCode">
-    <p class="doc-description">
-      A visual separator that divides content horizontally or vertically.
-      Supports solid, dashed, and dotted lines, optional projected label content,
-      flexible alignment, and three design variants.
-    </p>
-    <div class="demo-page-header__preview">
-      <p>Above the divider</p>
-      <ui-lib-divider />
-      <p>Below the divider</p>
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Divider"
+    [importCode]="importCode"
+    description="A visual separator that divides content horizontally or vertically. Supports solid, dashed, and dotted lines, optional projected label content, flexible alignment, and three design variants."
+  />
+
+  <div class="demo-page-header__preview">
+    <p>Above the divider</p>
+    <ui-lib-divider />
+    <p>Below the divider</p>
+  </div>
 
   <!-- Section 1: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__desc">
       A plain horizontal divider with no content.
     </p>
     <p>Content above</p>
     <ui-lib-divider />
     <p>Content below</p>
-  </section>
+  </app-doc-section>
 
   <!-- Section 2: With Label -->
-  <section class="demo-section" id="with-label" data-doc-anchor>
-    <h2 class="demo-section__title">With Label</h2>
+  <app-doc-section id="with-label" title="With Label">
     <p class="demo-section__desc">
       Project text or other elements into the divider using content projection.
     </p>
     <p>Sign in with email</p>
     <ui-lib-divider>OR</ui-lib-divider>
     <p>Sign in with SSO</p>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Alignment -->
-  <section class="demo-section" id="alignment" data-doc-anchor>
-    <h2 class="demo-section__title">Alignment</h2>
+  <app-doc-section id="alignment" title="Alignment">
     <p class="demo-section__desc">
       Use the <code>align</code> input to position the label at
       <code>left</code>, <code>center</code> (default), or <code>right</code>.
@@ -47,11 +44,10 @@
         <ui-lib-divider [align]="align">{{ align }}</ui-lib-divider>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 4: Line Types -->
-  <section class="demo-section" id="line-types" data-doc-anchor>
-    <h2 class="demo-section__title">Line Types</h2>
+  <app-doc-section id="line-types" title="Line Types">
     <p class="demo-section__desc">
       Three line styles are available via the <code>type</code> input:
       <code>solid</code> (default), <code>dashed</code>, and <code>dotted</code>.
@@ -61,11 +57,10 @@
         <ui-lib-divider [type]="type">{{ type }}</ui-lib-divider>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 5: Vertical -->
-  <section class="demo-section" id="vertical" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical</h2>
+  <app-doc-section id="vertical" title="Vertical">
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> to render a vertical separator.
       Use inside a flex container; the divider stretches to fill the available height.
@@ -86,11 +81,10 @@
       <ui-lib-divider orientation="vertical">OR</ui-lib-divider>
       <div class="demo-vertical-panel">Panel B</div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 6: Vertical Alignment -->
-  <section class="demo-section" id="vertical-alignment" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Alignment</h2>
+  <app-doc-section id="vertical-alignment" title="Vertical Alignment">
     <p class="demo-section__desc">
       For vertical dividers, use <code>align="top"</code>, <code>align="center"</code>,
       or <code>align="bottom"</code>.
@@ -102,11 +96,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 7: Design Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
     </p>
@@ -117,11 +110,10 @@
         <ui-lib-divider [variant]="variant" type="dashed" />
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: Interactive Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__desc">Customise the divider using the controls below.</p>
 
     <div class="demo-playground">
@@ -264,58 +256,31 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>orientation</code></td>
-          <td><code>'horizontal' | 'vertical'</code></td>
-          <td><code>'horizontal'</code></td>
-          <td>Direction of the divider line.</td>
-        </tr>
-        <tr>
-          <td><code>type</code></td>
-          <td><code>'solid' | 'dashed' | 'dotted'</code></td>
-          <td><code>'solid'</code></td>
-          <td>Visual style of the divider line.</td>
-        </tr>
-        <tr>
-          <td><code>align</code></td>
-          <td><code>'left' | 'center' | 'right' | 'top' | 'bottom' | null</code></td>
-          <td><code>null</code> (resolves to <code>'center'</code>)</td>
-          <td>
-            Position of the projected content along the divider.
-            Horizontal dividers support <code>left</code> / <code>center</code> / <code>right</code>;
-            vertical dividers support <code>top</code> / <code>center</code> / <code>bottom</code>.
-          </td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes added to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <app-doc-section id="api" title="API">
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

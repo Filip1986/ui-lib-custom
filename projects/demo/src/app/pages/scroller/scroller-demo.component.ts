@@ -5,11 +5,22 @@ import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller';
 import { Button } from 'ui-lib-custom/button';
 import { ScrollerItemDirective, ScrollerLoaderDirective } from 'ui-lib-custom/virtual-scroller';
 import type { VirtualScrollerLazyLoadEvent } from 'ui-lib-custom/virtual-scroller';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 
 interface DemoItem {
   id: number;
@@ -66,7 +77,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
   selector: 'app-scroller-demo',
   standalone: true,
   imports: [
-    CodeSnippet,
+    DocCodeExampleComponent,
     CommonModule,
     VirtualScrollerComponent,
     ScrollerItemDirective,
@@ -75,12 +86,36 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollerDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 8,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -95,6 +130,8 @@ export class ScrollerDemoComponent {
     { id: 'disabled-mode', label: 'Disabled Mode' },
     { id: 'large-items', label: 'Large Items (5 000 items)' },
     { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
@@ -183,4 +220,121 @@ export class ScrollerDemoComponent {
   </ng-template>
 </ui-lib-virtual-scroller>`
   );
+
+  protected readonly demoCodeTs: Signal<string> = computed(
+    (): string =>
+      `import { Component } from '@angular/core';
+import {
+  VirtualScrollerComponent,
+  ScrollerItemDirective,
+} from 'ui-lib-custom/virtual-scroller';
+
+interface Item { id: number; label: string; }
+
+@Component({
+  standalone: true,
+  imports: [VirtualScrollerComponent, ScrollerItemDirective],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public readonly items: Item[] = Array.from({ length: 10_000 }, (_, index) => ({
+    id: index,
+    label: \`Item \${index + 1}\`,
+  }));
+}`
+  );
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'items',
+      type: 'unknown[] | null | undefined',
+      default: 'null',
+      description: 'Array of items to virtualise.',
+    },
+    {
+      name: 'itemSize',
+      type: 'number | [number, number]',
+      default: '0',
+      description: 'Height or width of each item in pixels.',
+    },
+    {
+      name: 'scrollHeight',
+      type: 'string | undefined',
+      default: 'undefined',
+      description: 'CSS height of the scroll viewport.',
+    },
+    {
+      name: 'orientation',
+      type: "'vertical' | 'horizontal' | 'both'",
+      default: "'vertical'",
+      description: 'Scroll axis.',
+    },
+    { name: 'lazy', type: 'boolean', default: 'false', description: 'Enables lazy loading.' },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables virtual scrolling.',
+    },
+    {
+      name: 'showLoader',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a loading overlay during lazy loads.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Scroll viewport',
+      attribute: 'role="list" / role="listbox"',
+      value: '—',
+      notes:
+        'The rendered items list should be wrapped in an appropriate landmark role by the consuming template (e.g. <code>role="list"</code>). The scroller itself is a neutral container.',
+    },
+    {
+      element: 'List items',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes:
+        'Apply <code>role="listitem"</code> to individual item templates when using a list-style scroller.',
+    },
+    {
+      element: 'Loading overlay',
+      attribute: 'aria-busy="true"',
+      value: '—',
+      notes:
+        'Set <code>[showLoader]="true"</code> during lazy loads to indicate that content is loading.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Arrow keys', action: 'Scroll the virtual list when the viewport has focus.' },
+    { key: 'Page Up / Page Down', action: 'Scroll the viewport by one visible page.' },
+    { key: 'Home / End', action: 'Scroll to the first or last item in the list.' },
+    { key: 'Tab', action: 'Moves focus to interactive elements inside the visible items.' },
+  ];
+
+  public readonly cssVarRows: readonly CssVarRow[] = [
+    {
+      variable: '--uilib-scroller-loader-bg',
+      default: 'rgba(255,255,255,0.7)',
+      description: 'Background of the loading overlay shown during lazy loads.',
+    },
+    {
+      variable: '--uilib-scroller-loading-icon-size',
+      default: '2rem',
+      description: 'Size of the spinner icon inside the loading overlay.',
+    },
+    {
+      variable: '--uilib-scroller-loading-icon-color',
+      default: 'var(--uilib-color-primary)',
+      description: 'Color of the spinner icon.',
+    },
+    {
+      variable: '--uilib-scroller-item-border-color',
+      default: 'var(--uilib-color-border)',
+      description: 'Border color applied between items when using the bordered item template.',
+    },
+  ];
 }

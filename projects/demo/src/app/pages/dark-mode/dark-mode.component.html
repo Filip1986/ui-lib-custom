@@ -5,8 +5,7 @@
     description="Complete dark mode support with system preference detection."
   />
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="mode" data-doc-anchor>
-    <div card-header>Theme Mode</div>
+  <ui-lib-panel variant="minimal">
 
     <div class="mode-selector">
       <div class="mode-info">
@@ -48,10 +47,9 @@
         <strong>Auto</strong> follows your system preference (prefers-color-scheme media query).
       </p>
     </div>
-  </ui-lib-card>
+  </ui-lib-panel>
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="showcase" data-doc-anchor>
-    <div card-header>Component Showcase</div>
+  <ui-lib-panel variant="minimal">
 
     <div class="component-showcase">
       <section class="showcase-section">
@@ -110,21 +108,18 @@
       <section class="showcase-section">
         <h3>Cards</h3>
         <div class="showcase-cards">
-          <ui-lib-card>
-            <div card-header>Card Title</div>
+          <ui-lib-panel variant="minimal">
             <p>Card content demonstrating dark mode styling.</p>
-          </ui-lib-card>
-          <ui-lib-card variant="bootstrap">
-            <div card-header>Bootstrap Variant</div>
+          </ui-lib-panel>
+          <ui-lib-panel variant="minimal">
             <p>Bootstrap-styled card in dark mode.</p>
-          </ui-lib-card>
+          </ui-lib-panel>
         </div>
       </section>
     </div>
-  </ui-lib-card>
+  </ui-lib-panel>
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="implementation" data-doc-anchor>
-    <div card-header>Implementation</div>
+  <ui-lib-panel variant="minimal">
 
     <h4>Using Theme Mode</h4>
     <ui-lib-code-snippet [code]="usageCode" language="typescript" 
@@ -139,7 +134,7 @@
 
     <h4>System Preference</h4>
     <p>Set mode to 'auto' to follow the user's system preference.</p>
-  </ui-lib-card>
+  </ui-lib-panel>
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

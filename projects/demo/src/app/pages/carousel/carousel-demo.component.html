@@ -1,24 +1,24 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="Carousel" [importCode]="importCode">
-    <p class="doc-description">
-      A content slider with support for multiple visible items, responsive breakpoints,
-      autoplay, circular mode, touch/swipe navigation, and three design variants.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-carousel [value]="slides">
-        <ng-template #carouselItem let-slide>
-          <div class="demo-slide demo-slide--basic">
-            <span>{{ slide }}</span>
-          </div>
-        </ng-template>
-      </ui-lib-carousel>
-    </div>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="Carousel"
+    [importCode]="importCode"
+    description="A content slider with support for multiple visible items, responsive breakpoints, autoplay, circular mode, touch/swipe navigation, and three design variants."
+  />
+
+  <div class="demo-page-header__preview">
+    <ui-lib-carousel [value]="slides">
+      <ng-template #carouselItem let-slide>
+        <div class="demo-slide demo-slide--basic">
+          <span>{{ slide }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
 
   <!-- ─── Basic (1 visible) ──────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">Default configuration — one slide visible at a time, Material variant.</p>
     <ui-lib-carousel [value]="slides">
       <ng-template #carouselItem let-slide>
@@ -27,11 +27,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Multiple visible items ─────────────────────────────────────────── -->
-  <section class="demo-section" id="multiple-items" data-doc-anchor>
-    <h2 class="demo-section__title">Multiple Items Visible</h2>
+  <app-doc-section id="multiple-items" title="Multiple Items Visible">
     <p class="demo-section__description">3 products visible, scroll 1 at a time.</p>
     <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
       <ng-template #carouselItem let-product>
@@ -45,11 +44,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Circular + Autoplay ────────────────────────────────────────────── -->
-  <section class="demo-section" id="circular-autoplay" data-doc-anchor>
-    <h2 class="demo-section__title">Circular &amp; Autoplay</h2>
+  <app-doc-section id="circular-autoplay" title="Circular &amp; Autoplay">
     <p class="demo-section__description">Wraps from last item back to first; auto-advances every 3 seconds.</p>
     <ui-lib-carousel
       [value]="products"
@@ -69,11 +67,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Responsive ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="responsive" data-doc-anchor>
-    <h2 class="demo-section__title">Responsive</h2>
+  <app-doc-section id="responsive" title="Responsive">
     <p class="demo-section__description">Resize the window: 3 items above 1400 px, 2 from 1024 px, 1 below 640 px.</p>
     <ui-lib-carousel
       [value]="products"
@@ -91,11 +88,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Vertical ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="vertical" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical</h2>
+  <app-doc-section id="vertical" title="Vertical">
     <p class="demo-section__description">Slides vertically with 3 items visible.</p>
     <ui-lib-carousel
       [value]="slides"
@@ -110,11 +106,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Header / Footer templates ─────────────────────────────────────── -->
-  <section class="demo-section" id="header-footer" data-doc-anchor>
-    <h2 class="demo-section__title">Header &amp; Footer Templates</h2>
+  <app-doc-section id="header-footer" title="Header &amp; Footer Templates">
     <p class="demo-section__description">Custom header and footer slots via <code>#carouselHeader</code> and <code>#carouselFooter</code>.</p>
     <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
       <ng-template #carouselHeader>
@@ -136,11 +131,10 @@
         <p class="demo-footer">{{ products.length }} products available</p>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Page change event ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="page-change" data-doc-anchor>
-    <h2 class="demo-section__title">Page Change Event</h2>
+  <app-doc-section id="page-change" title="Page Change Event">
     <p class="demo-section__description">Navigate to see the emitted page index update below.</p>
     <p class="demo-event-display">Current page: <strong>{{ lastPage }}</strong></p>
     <ui-lib-carousel [value]="slides" (pageChange)="onPageChange($event)">
@@ -150,11 +144,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Bootstrap variant ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="bootstrap-variant" data-doc-anchor>
-    <h2 class="demo-section__title">Bootstrap Variant</h2>
+  <app-doc-section id="bootstrap-variant" title="Bootstrap Variant">
     <ui-lib-carousel [value]="products" variant="bootstrap" [numVisible]="3" [numScroll]="1">
       <ng-template #carouselItem let-product>
         <div class="demo-product-card demo-product-card--bootstrap">
@@ -166,11 +159,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Minimal variant ───────────────────────────────────────────────── -->
-  <section class="demo-section" id="minimal-variant" data-doc-anchor>
-    <h2 class="demo-section__title">Minimal Variant</h2>
+  <app-doc-section id="minimal-variant" title="Minimal Variant">
     <ui-lib-carousel [value]="products" variant="minimal" [numVisible]="3" [numScroll]="1">
       <ng-template #carouselItem let-product>
         <div class="demo-product-card demo-product-card--minimal">
@@ -182,11 +174,10 @@
         </div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
 
   <!-- ─── Sizes ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <div class="demo-size-row">
       <div>
         <p><code>sm</code></p>
@@ -213,11 +204,10 @@
         </ui-lib-carousel>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ─── No navigators / no indicators ─────────────────────────────────── -->
-  <section class="demo-section" id="hidden-controls" data-doc-anchor>
-    <h2 class="demo-section__title">Hidden Navigators &amp; Indicators</h2>
+  <app-doc-section id="hidden-controls" title="Hidden Navigators &amp; Indicators">
     <p class="demo-section__description">Navigation buttons and indicator dots are both hidden. Swipe on touch devices.</p>
     <ui-lib-carousel
       [value]="slides"
@@ -228,7 +218,35 @@
         <div class="demo-slide"><span>{{ slide }}</span></div>
       </ng-template>
     </ui-lib-carousel>
-  </section>
+  </app-doc-section>
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-carousel</code>. Import from
+      <code>ui-lib-custom/carousel</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

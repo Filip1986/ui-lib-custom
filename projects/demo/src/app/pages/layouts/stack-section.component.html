@@ -19,8 +19,7 @@
   </div>
 
   @if (activeTab() === 'demo') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="stack" data-doc-anchor>
-      <div card-header>Stack Playground</div>
+    <ui-lib-panel variant="minimal">
       <p>Adjust direction, spacing, alignment, and distribution to see changes live.</p>
       <div class="doc-demo-group spacing-playground">
         <ui-lib-stack spacing="lg" class="spacing-stack">
@@ -99,56 +98,22 @@
           </app-doc-demo-viewport>
         </ui-lib-stack>
       </div>
-    </ui-lib-card>
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>Usage</div>
-      <ui-lib-code-snippet
-        language="html"
-        filename="Usage" [code]="usageSnippet"
+    <ui-lib-panel variant="minimal">
+      <app-doc-code-example
+        [html]="usageSnippet"
+        [typescript]="usageSnippetTs"
         [showLineNumbers]="true"
-        ></ui-lib-code-snippet>
-    </ui-lib-card>
+      />
+    </ui-lib-panel>
   }
 
   @if (activeTab() === 'api') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false">
-      <div card-header>API Reference</div>
-      <div class="doc-demo-group">
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>spacing</code></td>
-              <td><code>SpacingToken</code></td>
-              <td>Semantic gap between children.</td>
-            </tr>
-            <tr>
-              <td><code>direction</code></td>
-              <td><code>'vertical' | 'horizontal'</code></td>
-              <td>Flow direction of children.</td>
-            </tr>
-            <tr>
-              <td><code>align</code></td>
-              <td><code>'start' | 'center' | 'end' | 'stretch'</code></td>
-              <td>Cross-axis alignment.</td>
-            </tr>
-            <tr>
-              <td><code>justify</code></td>
-              <td><code>'start' | 'center' | 'end' | 'space-between'</code></td>
-              <td>Main-axis distribution.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </ui-lib-card>
+    <ui-lib-panel variant="minimal">
+      <app-doc-api-reference [rows]="apiRows" />
+    </ui-lib-panel>
   }
 </app-doc-page-layout>

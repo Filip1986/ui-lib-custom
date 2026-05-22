@@ -1,16 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <app-doc-page-header docHeader title="DynamicDialog" [importCode]="importCode">
-    <p class="doc-description">
-      Programmatically open <strong>any Angular component</strong> inside a configurable modal
-      shell. No template tag required — just inject <code>DialogService</code> and call
-      <code>open()</code>.
-    </p>
-  </app-doc-page-header>
+  <app-doc-page-header
+    docHeader
+    title="DynamicDialog"
+    [importCode]="importCode"
+    description="Programmatically open <strong>any Angular component</strong> inside a configurable modal shell. No template tag required — just inject <code>DialogService</code> and call <code>open()</code>."
+  />
 
   <!-- Basic Usage -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__desc">
       Call <code>dialogService.open(Component, config)</code> from any class that injects
       <code>DialogService</code>.
@@ -28,11 +26,10 @@
         [code]="snippetBasicOpen"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Passing Data -->
-  <section class="demo-section" id="passing-data" data-doc-anchor>
-    <h2 class="demo-section__title">Passing Data to the Guest Component</h2>
+  <app-doc-section id="passing-data" title="Passing Data to the Guest Component">
     <p class="demo-section__desc">
       Pass arbitrary data through <code>config.data</code>. The guest component reads it by
       injecting <code>DYNAMIC_DIALOG_CONFIG</code>.
@@ -53,11 +50,10 @@
         [code]="snippetPassingData"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Scrollable Content -->
-  <section class="demo-section" id="scrollable-content" data-doc-anchor>
-    <h2 class="demo-section__title">Fixed Height &amp; Scrollable Content</h2>
+  <app-doc-section id="scrollable-content" title="Fixed Height &amp; Scrollable Content">
     <p class="demo-section__desc">
       Set <code>height</code> on the config to give the dialog a fixed viewport height. The
       content area scrolls automatically.
@@ -75,11 +71,10 @@
         [code]="snippetScrollable"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       Pass <code>variant</code> to override the inherited theme setting for a single dialog.
     </p>
@@ -102,11 +97,10 @@
         [code]="snippetVariant"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Positions -->
-  <section class="demo-section" id="viewport-positions" data-doc-anchor>
-    <h2 class="demo-section__title">Viewport Positions</h2>
+  <app-doc-section id="viewport-positions" title="Viewport Positions">
     <p class="demo-section__desc">
       Use <code>position</code> to anchor the dialog to the center or any edge of the
       viewport.
@@ -126,11 +120,10 @@
         [code]="snippetPosition"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Configuration options -->
-  <section class="demo-section" id="configuration-options" data-doc-anchor>
-    <h2 class="demo-section__title">Configuration Options</h2>
+  <app-doc-section id="configuration-options" title="Configuration Options">
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
         <ui-lib-button type="button" severity="secondary" (click)="openDismissable()">
@@ -141,76 +134,41 @@
         </ui-lib-button>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="dynamic-dialog-config" data-doc-anchor>
-    <h2 class="demo-section__title">DynamicDialogConfig</h2>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><code>header</code></td><td><code>string</code></td><td><code>''</code></td><td>Dialog title text</td></tr>
-          <tr><td><code>width</code></td><td><code>string</code></td><td>—</td><td>CSS width of the panel</td></tr>
-          <tr><td><code>height</code></td><td><code>string</code></td><td>—</td><td>CSS height of the panel</td></tr>
-          <tr><td><code>modal</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show semi-transparent backdrop</td></tr>
-          <tr><td><code>closable</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show × close button in header</td></tr>
-          <tr><td><code>dismissableMask</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Click backdrop to close</td></tr>
-          <tr><td><code>blockScroll</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Lock body scroll while open</td></tr>
-          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS class on host</td></tr>
-          <tr><td><code>data</code></td><td><code>unknown</code></td><td>—</td><td>Passed to guest via <code>DYNAMIC_DIALOG_CONFIG</code></td></tr>
-          <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td>inherited</td><td>Design variant override</td></tr>
-          <tr><td><code>position</code></td><td><code>'center' | 'top' | 'bottom' | 'left' | 'right'</code></td><td><code>'center'</code></td><td>Viewport anchor position</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <app-doc-section id="dynamic-dialog-config" title="DynamicDialogConfig">
+    <app-doc-api-reference kind="property" [rows]="apiConfigRows" />
+  </app-doc-section>
 
-  <section class="demo-section" id="dynamic-dialog-ref" data-doc-anchor>
-    <h2 class="demo-section__title">DynamicDialogRef</h2>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr>
-            <th>Member</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><code>onClose</code></td><td><code>Observable&lt;unknown&gt;</code></td><td>Emits once when dialog closes (with optional data)</td></tr>
-          <tr><td><code>close(data?)</code></td><td><code>void</code></td><td>Close the dialog and pass optional return data</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <app-doc-section id="dynamic-dialog-ref" title="DynamicDialogRef">
+    <app-doc-api-reference kind="property" [rows]="apiRefRows" [showDefault]="false" />
+  </app-doc-section>
 
-  <section class="demo-section" id="injection-tokens" data-doc-anchor>
-    <h2 class="demo-section__title">Injection Tokens</h2>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr>
-            <th>Token</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><code>DYNAMIC_DIALOG_CONFIG</code></td><td><code>DynamicDialogConfig</code></td><td>Full config available to guest components via <code>inject()</code></td></tr>
-          <tr><td><code>DynamicDialogRef</code></td><td><code>DynamicDialogRef</code></td><td>Dialog handle available to guest components via <code>inject()</code></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <app-doc-section id="injection-tokens" title="Injection Tokens">
+    <app-doc-api-reference kind="name" [rows]="apiTokenRows" [showDefault]="false" />
+  </app-doc-section>
 
+  <!-- ── API Overview ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiRows" kind="property" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <app-doc-css-vars-table [rows]="cssVarRows" />
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

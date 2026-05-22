@@ -4,10 +4,19 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 /**
  * Demo page for the classNames utility and ClassNamesPipe.
  */
@@ -21,12 +30,35 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
   ],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassNamesDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 10,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names'";
   public readonly snippetFunctionUsage: string = `import { classNames } from 'ui-lib-custom/class-names';
@@ -75,6 +107,8 @@ classNames('btn', null, undefined, false, 'icon')
     { id: 'pipe-usage', label: 'Pipe Usage' },
     { id: 'interactive-playground', label: 'Interactive Playground' },
     { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   /** Controls the active state for the playground element. */
@@ -106,6 +140,37 @@ classNames('btn', null, undefined, false, 'icon')
     this.layout()?.scrollToSection(id);
   }
 
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'classNames',
+      type: 'ClassNamesInput',
+      description:
+        'Object whose keys are class names and values are boolean conditions, or an array/string of class names.',
+    },
+  ];
+
+  public readonly classnamesFnRows: readonly ApiPropRow[] = [
+    {
+      name: '...values',
+      type: 'ClassNameValue[]',
+      description:
+        'One or more values. Strings are included as-is. Object keys with truthy values are included. Arrays are recursively processed. Falsy primitives are ignored.',
+    },
+  ];
+
+  public readonly classnamesPipeRows: readonly ApiPropRow[] = [
+    {
+      name: 'value (primary)',
+      type: 'ClassNameValue',
+      description: 'The primary value passed before the pipe symbol.',
+    },
+    {
+      name: '...additional',
+      type: 'ClassNameValue[]',
+      description: 'Optional extra values passed as pipe arguments after :.',
+    },
+  ];
+
   public toggleActive(): void {
     this.isActive.update((value: boolean): boolean => !value);
   }
@@ -117,4 +182,21 @@ classNames('btn', null, undefined, false, 'icon')
   public toggleHighlighted(): void {
     this.isHighlighted.update((value: boolean): boolean => !value);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host element',
+      attribute: '(none added)',
+      value: '—',
+      notes:
+        'The <code>classNames</code> function and <code>ClassNamesPipe</code> produce a class string only. They do not add or remove ARIA attributes. Use <code>[uilibBind]</code> alongside them if ARIA state also needs to change.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '(none)',
+      action: 'The utility is a pure function / pipe — it has no keyboard behaviour of its own.',
+    },
+  ];
 }

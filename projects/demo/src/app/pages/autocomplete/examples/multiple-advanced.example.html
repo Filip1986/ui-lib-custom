@@ -1,0 +1,16 @@
+<ui-lib-autocomplete
+  [suggestions]="countrySuggestions"
+  optionLabel="name"
+  optionValue="code"
+  [multiple]="true"
+  [dropdown]="true"
+  [addOnBlur]="true"
+  [addOnTab]="true"
+  separator=","
+  [unique]="true"
+  (completeMethod)="onCountryComplete($event)"
+>
+  <ng-template uiAutoCompleteSelectedItem let-code="code">
+    <span class="chip-template">{{ code }}</span>
+  </ng-template>
+</ui-lib-autocomplete>

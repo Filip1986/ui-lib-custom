@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="MegaMenu"
@@ -8,51 +7,40 @@
   />
 
   <!-- ── Basic Horizontal ──────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic-horizontal" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Horizontal</h2>
+  <app-doc-section id="basic-horizontal" title="Basic Horizontal">
     <p class="demo-section__desc">
-      Default horizontal orientation. Click a top-level item with sub-items to open its
-      mega panel. Simple items (like "Documentation") act as direct links.
+      Default horizontal orientation. Click a top-level item with sub-items to open its mega panel.
+      Simple items (like "Documentation") act as direct links.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="basicModel" />
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
-        [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetBasicHorizontal"
+      <app-doc-code-example
+        [html]="basicHorizontalHtml"
+        [typescript]="basicHorizontalTs"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Vertical Orientation ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="vertical-orientation" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Orientation</h2>
+  <app-doc-section id="vertical-orientation" title="Vertical Orientation">
     <p class="demo-section__desc">
-      Set <code>orientation="vertical"</code> for a stacked list. Mega panels
-      open to the right.
+      Set <code>orientation="vertical"</code> for a stacked list. Mega panels open to the right.
     </p>
     <div class="demo-section__content demo-section__content--vertical">
       <ui-lib-mega-menu [model]="verticalModel" orientation="vertical" />
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
-        [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetVertical"
-      />
+      <app-doc-code-example [html]="verticalHtml" [typescript]="verticalTs" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Disabled Items ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-items" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Items &amp; Separators</h2>
+  <app-doc-section id="disabled-items" title="Disabled Items &amp; Separators">
     <p class="demo-section__desc">
-      Top-level items and sub-items can be disabled. Sub-items support separator lines
-      to visually group related entries.
+      Top-level items and sub-items can be disabled. Sub-items support separator lines to visually
+      group related entries.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="disabledModel" />
@@ -65,14 +53,13 @@
         [code]="snippetDisabledSeparator"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Command Callbacks ────────────────────────────────────────────────── -->
-  <section class="demo-section" id="command-callbacks" data-doc-anchor>
-    <h2 class="demo-section__title">Command Callbacks</h2>
+  <app-doc-section id="command-callbacks" title="Command Callbacks">
     <p class="demo-section__desc">
-      Sub-items can invoke a <code>command</code> function when activated.
-      The last activated item is shown below.
+      Sub-items can invoke a <code>command</code> function when activated. The last activated item
+      is shown below.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="commandModel" />
@@ -88,14 +75,13 @@
         [code]="snippetCommand"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── itemClick Output ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="item-click-output" data-doc-anchor>
-    <h2 class="demo-section__title">itemClick Output</h2>
+  <app-doc-section id="item-click-output" title="itemClick Output">
     <p class="demo-section__desc">
-      The <code>(itemClick)</code> output fires a <code>MegaMenuCommandEvent</code>
-      containing the activated <code>item</code> and the originating DOM event.
+      The <code>(itemClick)</code> output fires a <code>MegaMenuCommandEvent</code> containing the
+      activated <code>item</code> and the originating DOM event.
     </p>
     <div class="demo-section__content">
       <ui-lib-mega-menu [model]="eventModel" (itemClick)="handleItemClick($event)" />
@@ -113,18 +99,12 @@
       </div>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
-        [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetItemClick"
-      />
+      <app-doc-code-example [html]="itemClickHtml" [typescript]="itemClickTs" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__desc">
       Three design variants: <strong>material</strong>, <strong>bootstrap</strong>, and
       <strong>minimal</strong>. Each adapts colours, borders, and shadows to its design system.
@@ -137,11 +117,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Sizes ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__desc">
       Three size tokens: <strong>sm</strong>, <strong>md</strong>, and <strong>lg</strong>.
     </p>
@@ -153,14 +132,11 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Playground ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
-    <p class="demo-section__desc">
-      Combine variant, size, and orientation interactively.
-    </p>
+  <app-doc-section id="playground" title="Playground">
+    <p class="demo-section__desc">Combine variant, size, and orientation interactively.</p>
     <div class="demo-controls">
       <div class="demo-control-group">
         <span class="demo-control-label">Variant</span>
@@ -170,7 +146,8 @@
               [variant]="playgroundVariant() === v ? 'material' : 'minimal'"
               size="sm"
               (click)="setPlaygroundVariant(v)"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -182,7 +159,8 @@
               [variant]="playgroundSize() === s ? 'material' : 'minimal'"
               size="sm"
               (click)="setPlaygroundSize(s)"
-            >{{ s }}</ui-lib-button>
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -194,12 +172,16 @@
               [variant]="playgroundOrientation() === o ? 'material' : 'minimal'"
               size="sm"
               (click)="setPlaygroundOrientation(o)"
-            >{{ o }}</ui-lib-button>
+              >{{ o }}</ui-lib-button
+            >
           }
         </div>
       </div>
     </div>
-    <div class="demo-section__content" [class.demo-section__content--vertical]="playgroundOrientation() === 'vertical'">
+    <div
+      class="demo-section__content"
+      [class.demo-section__content--vertical]="playgroundOrientation() === 'vertical'"
+    >
       <ui-lib-mega-menu
         [model]="basicModel"
         [variant]="playgroundVariant()"
@@ -207,230 +189,45 @@
         [orientation]="playgroundOrientation()"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API Reference ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-section__subtitle">MegaMenu Inputs</h3>
-    <div class="demo-table-wrapper">
-      <table class="demo-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>model</code></td>
-            <td><code>MegaMenuItem[]</code></td>
-            <td><code>[]</code></td>
-            <td>Array of top-level navigation items.</td>
-          </tr>
-          <tr>
-            <td><code>orientation</code></td>
-            <td><code>'horizontal' | 'vertical'</code></td>
-            <td><code>'horizontal'</code></td>
-            <td>Layout direction of the navigation bar.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Falls back to ThemeConfigService when null.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Size token applied to link padding and font size.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Extra CSS class appended to the host element.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabel</code></td>
-            <td><code>string</code></td>
-            <td><code>'Navigation'</code></td>
-            <td>Accessible label for the nav landmark.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-section__subtitle">MegaMenu Outputs</h3>
-    <div class="demo-table-wrapper">
-      <table class="demo-table">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Payload</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>itemClick</code></td>
-            <td><code>MegaMenuCommandEvent</code></td>
-            <td>Emitted when a non-disabled sub-item is activated (click or keyboard).</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">MegaMenuItem Interface</h3>
-    <div class="demo-table-wrapper">
-      <table class="demo-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string</code></td>
-            <td>Display label for the top-level item.</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string</code></td>
-            <td>Icon CSS class rendered before the label.</td>
-          </tr>
-          <tr>
-            <td><code>items</code></td>
-            <td><code>MegaMenuSubColumn[]</code></td>
-            <td>When present, opens a mega panel with these columns.</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td>Prevents interaction with the top-level item.</td>
-          </tr>
-          <tr>
-            <td><code>visible</code></td>
-            <td><code>boolean</code></td>
-            <td>When false, hides the item entirely.</td>
-          </tr>
-          <tr>
-            <td><code>url</code></td>
-            <td><code>string</code></td>
-            <td>Renders the item as an anchor tag when no sub-items are present.</td>
-          </tr>
-          <tr>
-            <td><code>target</code></td>
-            <td><code>string</code></td>
-            <td>Target attribute for url-based items (e.g. <code>'_blank'</code>).</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string</code></td>
-            <td>Extra CSS class on the root item element.</td>
-          </tr>
-          <tr>
-            <td><code>command</code></td>
-            <td><code>(event) =&gt; void</code></td>
-            <td>Callback for simple items without sub-items.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference kind="property" [rows]="apiMenuItemRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">MegaMenuSubColumn Interface</h3>
-    <div class="demo-table-wrapper">
-      <table class="demo-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>header</code></td>
-            <td><code>string</code></td>
-            <td>Optional column header label rendered above the item list.</td>
-          </tr>
-          <tr>
-            <td><code>items</code></td>
-            <td><code>MegaMenuSubItem[]</code></td>
-            <td>Sub-items displayed in this column.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference kind="property" [rows]="apiSubColumnRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">MegaMenuSubItem Interface</h3>
-    <div class="demo-table-wrapper">
-      <table class="demo-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string</code></td>
-            <td>Display label.</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string</code></td>
-            <td>Icon CSS class.</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td>Prevents interaction.</td>
-          </tr>
-          <tr>
-            <td><code>visible</code></td>
-            <td><code>boolean</code></td>
-            <td>When false, hides the item.</td>
-          </tr>
-          <tr>
-            <td><code>separator</code></td>
-            <td><code>boolean</code></td>
-            <td>Renders a visual divider line.</td>
-          </tr>
-          <tr>
-            <td><code>url</code></td>
-            <td><code>string</code></td>
-            <td>Renders as an anchor tag.</td>
-          </tr>
-          <tr>
-            <td><code>target</code></td>
-            <td><code>string</code></td>
-            <td>Target for url-based items.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string</code></td>
-            <td>Extra CSS class on the item element.</td>
-          </tr>
-          <tr>
-            <td><code>command</code></td>
-            <td><code>(event) =&gt; void</code></td>
-            <td>Callback invoked on activation.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <app-doc-api-reference kind="property" [rows]="apiSubItemRows" [showDefault]="false" />
+  </app-doc-section>
 
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -439,5 +236,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

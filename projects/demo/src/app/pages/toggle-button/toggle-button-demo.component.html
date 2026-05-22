@@ -8,294 +8,263 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-
       <!-- ── a. Basic ─────────────────────────────────────────────────────── -->
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">
           A minimal toggle bound with <code>[(checked)]</code>. The default labels are
           <em>Yes</em> (on) and <em>No</em> (off).
         </p>
-          <ui-lib-card>
-            <div class="demo-row">
-              <ui-lib-toggle-button
-                [(checked)]="basicChecked"
-              />
-              <span class="value-text">Value: {{ basicChecked() }}</span>
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-row">
+            <ui-lib-toggle-button [(checked)]="basicChecked" />
+            <span class="value-text">Value: {{ basicChecked() }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+      </app-doc-section>
 
       <!-- ── b. Custom Labels ──────────────────────────────────────────────── -->
-      <section id="labels" data-doc-anchor class="example-section">
+      <app-doc-section id="labels" title="Custom Labels">
         <h3>b. Custom Labels</h3>
         <p class="section-text">
           Use <code>onLabel</code> and <code>offLabel</code> to display context-specific text for
           each state.
         </p>
-          <ui-lib-card>
-            <div class="demo-row">
-              <ui-lib-toggle-button
-                onLabel="Active"
-                offLabel="Inactive"
-                [(checked)]="labelsChecked"
-              />
-              <ui-lib-toggle-button
-                onLabel="Enabled"
-                offLabel="Disabled"
-                variant="bootstrap"
-                [(checked)]="labelsChecked"
-              />
-              <ui-lib-toggle-button
-                onLabel="On"
-                offLabel="Off"
-                variant="minimal"
-                [(checked)]="labelsChecked"
-              />
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('labels')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-row">
+            <ui-lib-toggle-button
+              onLabel="Active"
+              offLabel="Inactive"
+              [(checked)]="labelsChecked"
+            />
+            <ui-lib-toggle-button
+              onLabel="Enabled"
+              offLabel="Disabled"
+              variant="bootstrap"
+              [(checked)]="labelsChecked"
+            />
+            <ui-lib-toggle-button
+              onLabel="On"
+              offLabel="Off"
+              variant="minimal"
+              [(checked)]="labelsChecked"
+            />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="labelsHtml" [typescript]="labelsTs" />
+      </app-doc-section>
 
       <!-- ── c. Icons ──────────────────────────────────────────────────────── -->
-      <section id="icons" data-doc-anchor class="example-section">
+      <app-doc-section id="icons" title="Icons">
         <h3>c. Icons</h3>
         <p class="section-text">
           Provide <code>onIcon</code> and <code>offIcon</code> to show a different icon for each
           state. Use <code>iconPos="right"</code> to place the icon after the label.
         </p>
-          <ui-lib-card>
-            <div class="demo-row">
-              <ui-lib-toggle-button
-                onLabel="Muted"
-                offLabel="Sound"
-                onIcon="volumeOff"
-                offIcon="volumeHigh"
-                iconPos="left"
-                [(checked)]="iconLeftChecked"
-              />
-              <ui-lib-toggle-button
-                onLabel="Muted"
-                offLabel="Sound"
-                onIcon="volumeOff"
-                offIcon="volumeHigh"
-                iconPos="right"
-                [(checked)]="iconRightChecked"
-              />
-              <ui-lib-toggle-button
-                onLabel="Bookmarked"
-                offLabel="Bookmark"
-                onIcon="bookmarkFill"
-                offIcon="bookmark"
-                [(checked)]="iconLeftChecked"
-              />
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('icons')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-row">
+            <ui-lib-toggle-button
+              onLabel="Muted"
+              offLabel="Sound"
+              onIcon="volumeOff"
+              offIcon="volumeHigh"
+              iconPos="left"
+              [(checked)]="iconLeftChecked"
+            />
+            <ui-lib-toggle-button
+              onLabel="Muted"
+              offLabel="Sound"
+              onIcon="volumeOff"
+              offIcon="volumeHigh"
+              iconPos="right"
+              [(checked)]="iconRightChecked"
+            />
+            <ui-lib-toggle-button
+              onLabel="Bookmarked"
+              offLabel="Bookmark"
+              onIcon="bookmarkFill"
+              offIcon="bookmark"
+              [(checked)]="iconLeftChecked"
+            />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
+      </app-doc-section>
 
       <!-- ── d. Sizes ──────────────────────────────────────────────────────── -->
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>d. Sizes</h3>
         <p class="section-text">
           Three size tokens are available: <code>sm</code>, <code>md</code> (default), and
           <code>lg</code>.
         </p>
-          <ui-lib-card>
-            <div class="demo-row demo-row--align-center">
-              <ui-lib-toggle-button
-                size="sm"
-                onLabel="On"
-                offLabel="Off"
-                [(checked)]="sizeSmChecked"
-              />
-              <ui-lib-toggle-button
-                size="md"
-                onLabel="On"
-                offLabel="Off"
-                [(checked)]="sizeMdChecked"
-              />
-              <ui-lib-toggle-button
-                size="lg"
-                onLabel="On"
-                offLabel="Off"
-                [(checked)]="sizeLgChecked"
-              />
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-row demo-row--align-center">
+            <ui-lib-toggle-button
+              size="sm"
+              onLabel="On"
+              offLabel="Off"
+              [(checked)]="sizeSmChecked"
+            />
+            <ui-lib-toggle-button
+              size="md"
+              onLabel="On"
+              offLabel="Off"
+              [(checked)]="sizeMdChecked"
+            />
+            <ui-lib-toggle-button
+              size="lg"
+              onLabel="On"
+              offLabel="Off"
+              [(checked)]="sizeLgChecked"
+            />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+      </app-doc-section>
 
       <!-- ── e. Variants ───────────────────────────────────────────────────── -->
-      <section id="variants" data-doc-anchor class="example-section">
+      <app-doc-section id="variants" title="Variants">
         <h3>e. Variants</h3>
         <p class="section-text">
           All three design variants are supported: <code>material</code> (default rounded, subtle
           elevation when checked), <code>bootstrap</code> (tighter corners), and
           <code>minimal</code> (pill-shaped, translucent fills).
         </p>
-          <ui-lib-card>
-            <div class="demo-grid">
-              @for (variant of variantOptions; track variant) {
-                <div class="demo-grid-row">
-                  <span class="variant-label">{{ variant }}</span>
-                  <ui-lib-toggle-button
-                    [variant]="variant"
-                    onLabel="On"
-                    offLabel="Off"
-                    [(checked)]="materialChecked"
-                  />
-                  <ui-lib-toggle-button
-                    [variant]="variant"
-                    onLabel="On"
-                    offLabel="Off"
-                    [checked]="true"
-                  />
-                  <ui-lib-toggle-button
-                    [variant]="variant"
-                    onLabel="On"
-                    offLabel="Off"
-                    [disabled]="true"
-                  />
-                  <ui-lib-toggle-button
-                    [variant]="variant"
-                    onLabel="On"
-                    offLabel="Off"
-                    [checked]="true"
-                    [disabled]="true"
-                  />
-                </div>
-              }
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('variants')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-grid">
+            @for (variant of variantOptions; track variant) {
+              <div class="demo-grid-row">
+                <span class="variant-label">{{ variant }}</span>
+                <ui-lib-toggle-button
+                  [variant]="variant"
+                  onLabel="On"
+                  offLabel="Off"
+                  [(checked)]="materialChecked"
+                />
+                <ui-lib-toggle-button
+                  [variant]="variant"
+                  onLabel="On"
+                  offLabel="Off"
+                  [checked]="true"
+                />
+                <ui-lib-toggle-button
+                  [variant]="variant"
+                  onLabel="On"
+                  offLabel="Off"
+                  [disabled]="true"
+                />
+                <ui-lib-toggle-button
+                  [variant]="variant"
+                  onLabel="On"
+                  offLabel="Off"
+                  [checked]="true"
+                  [disabled]="true"
+                />
+              </div>
+            }
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+      </app-doc-section>
 
       <!-- ── f. Allow Empty ────────────────────────────────────────────────── -->
-      <section id="allow-empty" data-doc-anchor class="example-section">
+      <app-doc-section id="allow-empty" title="Allow Empty">
         <h3>f. Allow Empty</h3>
         <p class="section-text">
           When <code>[allowEmpty]="false"</code> the button cannot be unchecked once activated.
           Useful for confirm-type toggles.
         </p>
-          <ui-lib-card>
-            <div class="demo-row">
-              <ui-lib-toggle-button
-                [allowEmpty]="false"
-                onLabel="Confirmed"
-                offLabel="Confirm"
-                [(checked)]="allowEmptyChecked"
-              />
-              <span class="value-text">State: {{ allowEmptyChecked() ? 'confirmed' : 'pending' }}</span>
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('allowEmpty')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-row">
+            <ui-lib-toggle-button
+              [allowEmpty]="false"
+              onLabel="Confirmed"
+              offLabel="Confirm"
+              [(checked)]="allowEmptyChecked"
+            />
+            <span class="value-text"
+              >State: {{ allowEmptyChecked() ? 'confirmed' : 'pending' }}</span
+            >
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="allowEmptyHtml"
+          [typescript]="allowEmptyTs"
+        />
+      </app-doc-section>
 
       <!-- ── g. Disabled ───────────────────────────────────────────────────── -->
-      <section id="disabled" data-doc-anchor class="example-section">
+      <app-doc-section id="disabled" title="Disabled">
         <h3>g. Disabled</h3>
         <p class="section-text">
           Set <code>[disabled]="true"</code> to prevent interaction. Both off and on states are
           shown at reduced opacity.
         </p>
-          <ui-lib-card>
-            <div class="demo-row">
-              <ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />
-              <ui-lib-toggle-button
-                [disabled]="true"
-                [checked]="true"
-                onLabel="On"
-                offLabel="Off"
-              />
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('disabled')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="demo-row">
+            <ui-lib-toggle-button [disabled]="true" onLabel="On" offLabel="Off" />
+            <ui-lib-toggle-button [disabled]="true" [checked]="true" onLabel="On" offLabel="Off" />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
+      </app-doc-section>
 
       <!-- ── h. Forms ──────────────────────────────────────────────────────── -->
-      <section id="forms" data-doc-anchor class="example-section">
+      <app-doc-section id="forms" title="Forms Integration">
         <h3>h. Forms Integration</h3>
         <p class="section-text">
           ToggleButton implements <code>ControlValueAccessor</code> and works with both
           <code>[(ngModel)]</code> and reactive forms.
         </p>
-          <ui-lib-card>
-            <h4 class="subsection-label">ngModel</h4>
-            <div class="demo-row">
-              <ui-lib-toggle-button
-                onLabel="Subscribed"
-                offLabel="Subscribe"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="ngModelValue"
-              />
-              <span class="value-text">ngModel: {{ ngModelValue }}</span>
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('ngModel')" 
-          [showLineNumbers]="true"
-          />
+        <ui-lib-panel variant="minimal">
+          <h4 class="subsection-label">ngModel</h4>
+          <div class="demo-row">
+            <ui-lib-toggle-button
+              onLabel="Subscribed"
+              offLabel="Subscribe"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="ngModelValue"
+            />
+            <span class="value-text">ngModel: {{ ngModelValue }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="ngModelHtml" [typescript]="ngModelTs" />
 
-          <ui-lib-card>
-            <h4 class="subsection-label">Reactive Forms</h4>
-            <form [formGroup]="reactiveForm" class="demo-form">
-              <label class="form-row">
-                <span>Notifications</span>
-                <ui-lib-toggle-button
-                  formControlName="notifications"
-                  onLabel="On"
-                  offLabel="Off"
-                />
-              </label>
-              <label class="form-row">
-                <span>Dark Mode</span>
-                <ui-lib-toggle-button
-                  formControlName="darkMode"
-                  onLabel="Dark"
-                  offLabel="Light"
-                  onIcon="moon"
-                  offIcon="sun"
-                />
-              </label>
-              <div class="form-value">
-                Form value: {{ reactiveForm.value | json }}
-              </div>
-            </form>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('reactive')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <h4 class="subsection-label">Reactive Forms</h4>
+          <form [formGroup]="reactiveForm" class="demo-form">
+            <label class="form-row">
+              <span>Notifications</span>
+              <ui-lib-toggle-button formControlName="notifications" onLabel="On" offLabel="Off" />
+            </label>
+            <label class="form-row">
+              <span>Dark Mode</span>
+              <ui-lib-toggle-button
+                formControlName="darkMode"
+                onLabel="Dark"
+                offLabel="Light"
+                onIcon="moon"
+                offIcon="sun"
+              />
+            </label>
+            <div class="form-value">Form value: {{ reactiveForm.value | json }}</div>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
+      </app-doc-section>
 
       <!-- ── i. Events ─────────────────────────────────────────────────────── -->
-      <section id="events" data-doc-anchor class="example-section">
+      <app-doc-section id="events" title="Events">
         <h3>i. Events</h3>
         <p class="section-text">
           The <code>(change)</code>, <code>(focus)</code>, and <code>(blur)</code> outputs expose
           interaction events.
         </p>
-        <ui-lib-card>
+        <ui-lib-panel variant="minimal">
           <div class="demo-row">
-            <ui-lib-toggle-button
-              onLabel="On"
-              offLabel="Off"
-              (change)="onEventChange($event)"
-            />
+            <ui-lib-toggle-button onLabel="On" offLabel="Off" (change)="onEventChange($event)" />
             <ui-lib-button size="sm" appearance="ghost" (click)="clearEventLog()">
               Clear
             </ui-lib-button>
@@ -307,12 +276,38 @@
               <div class="event-log__empty">Interact with the button above to see events.</div>
             }
           </div>
-        </ui-lib-card>
-      </section>
-
+        </ui-lib-panel>
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
 
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-toggle-button</code>. Import from
+      <code>ui-lib-custom/toggle-button</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -321,5 +316,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

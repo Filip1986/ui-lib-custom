@@ -1,0 +1,8 @@
+<ui-lib-autocomplete
+  [suggestions]="countrySuggestions"
+  optionLabel="name"
+  optionValue="code"
+  [dropdown]="true"
+  dropdownMode="current"
+  (completeMethod)="onCountryComplete($event)"
+/>

@@ -15,7 +15,7 @@
 
 Work top to bottom. Priority is driven by the current committed wow factor — **Elite Accessibility** — so components with the most complex ARIA patterns and keyboard interactions lead. Within each tier, higher-usage components come first.
 
-> **Status key for this queue:** ✅ Done = all 10 scores ≥ 8 recorded in tables below · ⏳ Needs hardening = prompt exists in `docs/prompts/needs-hardening/` · 🔄 In progress
+> **Status key for this queue:** ✅ Done = all 10 scores ≥ 8 recorded in tables below · 🔄 In progress
 
 ### Tier 1 — Overlays & Dialogs
 *Focus: Focus trap correctness, scroll lock, Escape handling, `aria-modal`, `role=dialog/alertdialog`, animation reduced-motion.*
@@ -368,7 +368,7 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 
 | Document                                                                    | Relevance                                                                                                |
 |-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)                 | **Reconciled 2026-05-13** — index of all session prompts, split into `completed/` and `needs-hardening/` |
+| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)                 | Tier 1 score reference + Tier 2 audit queue with priority order                                          |
 | [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)       | The 6-phase AI workflow + accumulated lessons from all hardenings                                        |
 | [Vision — Component Philosophy](VISION.md#component-philosophy)             | The 10-layer quality model and ≥8 gate                                                                   |
 | [Accessibility Guide](reference/systems/ACCESSIBILITY.md)                   | Detail behind the A11y score category                                                                    |

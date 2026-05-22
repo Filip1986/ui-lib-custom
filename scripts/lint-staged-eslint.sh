@@ -19,4 +19,4 @@ find_eslint() {
 }
 
 ESLINT_BIN="$(find_eslint)" || { echo "eslint not found in any parent node_modules" >&2; exit 1; }
-"$ESLINT_BIN" --fix "$@"
+"$ESLINT_BIN" --fix --no-warn-ignored "$@"

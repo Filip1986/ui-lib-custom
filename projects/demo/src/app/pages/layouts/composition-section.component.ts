@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import type { GridAlign, GridJustify } from 'ui-lib-custom/layout';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
@@ -23,12 +22,14 @@ import type {
 } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
+import { usageSnippetHtml, usageSnippetTs } from './snippets.generated';
 /**
  * Demo section for layout composition patterns.
  */
@@ -36,10 +37,10 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-layout-composition-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Container,
     Stack,
     Grid,
@@ -50,26 +51,17 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     DocDemoViewportComponent,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
-    CodeSnippet,
+    DocCodeExampleComponent,
   ],
   templateUrl: './composition-section.component.html',
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutCompositionSectionComponent {
-  public readonly sections: DocSection[] = [{ id: 'composition', label: 'Composition' }];
+  public readonly usageSnippetHtml: string = usageSnippetHtml;
+  public readonly usageSnippetTs: string = usageSnippetTs;
 
-  public readonly usageSnippet: string = `
-<ui-lib-container size="lg" inset="lg">
-  <ui-lib-stack spacing="lg">
-    <ui-lib-grid [columns]="3" spacing="md">
-      <div class="card">Card 1</div>
-      <div class="card">Card 2</div>
-      <div class="card">Card 3</div>
-    </ui-lib-grid>
-  </ui-lib-stack>
-</ui-lib-container>
-`;
+  public readonly sections: DocSection[] = [{ id: 'composition', label: 'Composition' }];
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

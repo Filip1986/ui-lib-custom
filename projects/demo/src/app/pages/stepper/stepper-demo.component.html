@@ -8,8 +8,7 @@
   />
 
   <!-- Basic Usage -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__desc">
       A simple three-step horizontal stepper. Users can click any step header to navigate freely.
     </p>
@@ -71,11 +70,10 @@
         </ui-lib-stepper-panel>
       </ui-lib-stepper>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Linear Mode -->
-  <section class="demo-section" id="linear-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Linear Mode</h2>
+  <app-doc-section id="linear-mode" title="Linear Mode">
     <p class="demo-section__desc">
       With <code>linear</code> enabled, users must complete steps in order. Clicking ahead is blocked.
     </p>
@@ -137,11 +135,10 @@
         </ui-lib-stepper-panel>
       </ui-lib-stepper>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Vertical Orientation -->
-  <section class="demo-section" id="vertical-orientation" data-doc-anchor>
-    <h2 class="demo-section__title">Vertical Orientation</h2>
+  <app-doc-section id="vertical-orientation" title="Vertical Orientation">
     <p class="demo-section__desc">
       Set <code>orientation="vertical"</code> to stack steps vertically with inline content.
     </p>
@@ -203,11 +200,10 @@
         </ui-lib-stepper-panel>
       </ui-lib-stepper>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__desc">
       Three variants to match your design system: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
     </p>
@@ -333,11 +329,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__desc">Experiment with all configuration options live.</p>
 
     <div class="demo-card demo-card--playground">
@@ -473,158 +468,41 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-api-subtitle">Stepper — <code>ui-lib-stepper</code></h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>activeStep</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Active step index (0-based). Supports two-way binding with <code>[(activeStep)]</code>.</td>
-        </tr>
-        <tr>
-          <td><code>linear</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, users must progress through steps sequentially.</td>
-        </tr>
-        <tr>
-          <td><code>orientation</code></td>
-          <td><code>'horizontal' | 'vertical'</code></td>
-          <td><code>'horizontal'</code></td>
-          <td>Layout orientation of the stepper.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes to apply to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiStepperInputRows" />
 
-    <table class="demo-api-table demo-api-table--mt">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Payload</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>stepChange</code></td>
-          <td><code>StepChangeEvent</code></td>
-          <td>Emitted after the active step changes. Contains <code>activeStep</code> and <code>previousStep</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="output" [rows]="apiStepperOutputRows" [showDefault]="false" />
 
-    <table class="demo-api-table demo-api-table--mt">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>nextStep()</code></td>
-          <td>Advances to the next step if one exists.</td>
-        </tr>
-        <tr>
-          <td><code>prevStep()</code></td>
-          <td>Returns to the previous step if one exists.</td>
-        </tr>
-        <tr>
-          <td><code>goToStep(index)</code></td>
-          <td>Navigates directly to the given step index.</td>
-        </tr>
-        <tr>
-          <td><code>isFirstStep()</code></td>
-          <td>Returns true when on the first step.</td>
-        </tr>
-        <tr>
-          <td><code>isLastStep()</code></td>
-          <td>Returns true when on the last step.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="property" [rows]="apiStepperMethodRows" [showDefault]="false" />
 
     <h3 class="demo-api-subtitle demo-api-subtitle--mt">StepperPanel — <code>ui-lib-stepper-panel</code></h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>header</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>Text label shown in the step header.</td>
-        </tr>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Prevents navigation to this step.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiStepperPanelInputRows" />
 
-    <table class="demo-api-table demo-api-table--mt">
-      <thead>
-        <tr>
-          <th>Content Slot</th>
-          <th>Template Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Step content</td>
-          <td><code>#stepperContent</code></td>
-          <td>Main body rendered in the active step's content area.</td>
-        </tr>
-        <tr>
-          <td>Step footer</td>
-          <td><code>#stepperFooter</code></td>
-          <td>Footer area — typically holds navigation buttons.</td>
-        </tr>
-        <tr>
-          <td>Custom header</td>
-          <td><code>#stepperHeader</code></td>
-          <td>Custom HTML for the step header label (overrides <code>header</code> input).</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <app-doc-api-reference kind="name" [rows]="apiStepperPanelSlotRows" [showDefault]="false" />
+  </app-doc-section>
 
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

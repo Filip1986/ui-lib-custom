@@ -11,8 +11,12 @@ ui-lib-code-snippet {
   --uilib-code-snippet-text: #cdd6f4;
   --uilib-code-snippet-line-nr-text: #45475a;
   --uilib-code-snippet-border: #313244;
-  --uilib-code-snippet-tab-bg: #1e1e2e;
+  --uilib-code-snippet-tab-bg: #181825;
+  --uilib-code-snippet-tab-bg-hover: #252535;
+  --uilib-code-snippet-tab-bg-active: #1e1e2e;
   --uilib-code-snippet-tab-border: #313244;
+  --uilib-code-snippet-tab-text-inactive: #6c7086;
+  --uilib-code-snippet-tab-indicator: #7c7cfa;
   --uilib-code-snippet-copy-btn-text: #7f849c;
   --uilib-code-snippet-copy-btn-text-hover: #cdd6f4;
   --uilib-code-snippet-copy-btn-bg-hover: #313244;
@@ -127,31 +131,81 @@ ui-lib-code-snippet .ui-lib-code-snippet__dot {
 ui-lib-code-snippet .ui-lib-code-snippet__tabs {
   flex: 1;
   display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  align-items: stretch;
+  gap: 0;
   min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Single-file mode: non-interactive display tab
+  &:not(.ui-lib-code-snippet__tabs--multi) .ui-lib-code-snippet__tab {
+    border: 1px solid var(--uilib-code-snippet-tab-border);
+    border-radius: var(--uilib-radius-sm, 0.25rem);
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 ui-lib-code-snippet .ui-lib-code-snippet__tab {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  padding: 0.25rem 0.625rem;
+  padding: 0.5rem 1rem;
   background: var(--uilib-code-snippet-tab-bg);
-  border: 1px solid var(--uilib-code-snippet-tab-border);
-  border-radius: var(--uilib-radius-sm, 0.25rem);
+  border: none;
+  border-right: 1px solid var(--uilib-code-snippet-tab-border);
+  border-bottom: 2px solid transparent;
   max-width: 200px;
   overflow: hidden;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-bottom-color 0.15s ease,
+    color 0.15s ease;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-focus-ring, var(--uilib-color-primary-500, #6366f1));
+    outline-offset: -2px;
+  }
+
+  // Inactive tab
+  .ui-lib-code-snippet__tab-label {
+    color: var(--uilib-code-snippet-tab-text-inactive);
+  }
+
+  &:hover:not(.ui-lib-code-snippet__tab--active) {
+    background: var(--uilib-code-snippet-tab-bg-hover);
+
+    .ui-lib-code-snippet__tab-label {
+      color: var(--uilib-code-snippet-text);
+    }
+  }
+
+  // Active tab
+  &--active {
+    background: var(--uilib-code-snippet-tab-bg-active);
+    border-bottom-color: var(--uilib-code-snippet-tab-indicator);
+
+    .ui-lib-code-snippet__tab-label {
+      color: var(--uilib-code-snippet-text);
+      font-weight: 600;
+    }
+  }
 }
 
 ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--uilib-code-snippet-text);
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: var(--uilib-font-ui, inherit), sans-serif;
+  transition: color 0.15s ease;
 }
 
 ui-lib-code-snippet .ui-lib-code-snippet__tab-icon {
@@ -375,7 +429,9 @@ ui-lib-code-snippet .uilib-token-punctuation {
 // ─── Reduced motion ───────────────────────────────────────────────────────────
 
 @media (prefers-reduced-motion: reduce) {
-  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
+  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn,
+  ui-lib-code-snippet .ui-lib-code-snippet__tab,
+  ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
     transition: none;
   }
 }

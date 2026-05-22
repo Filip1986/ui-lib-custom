@@ -1,0 +1,5 @@
+<h2 class="demo-section__title">{{ title() }}</h2>
+@if (description()) {
+  <p class="demo-section__description" [innerHTML]="description()"></p>
+}
+<ng-content />

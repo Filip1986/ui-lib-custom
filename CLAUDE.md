@@ -18,6 +18,37 @@
 
 > Full strategic context: [`docs/VISION.md`](docs/VISION.md)
 
+### Commercial Strategy
+
+The library targets two tiers: a free/open-source foundation and a premium pro layer. The Angular ecosystem's smaller size is a competitive advantage — much premium React tooling never reaches Angular, or arrives as a mediocre wrapper. "Angular-native and deeply polished" is itself a differentiator.
+
+**What drives willingness to pay:** reliability, performance, accessibility compliance, TypeScript quality, Angular integration depth, documentation, and saved engineering time. Visual polish alone does not.
+
+**Highest-value premium component categories (prioritised):**
+
+| Category | Flagship examples |
+|---|---|
+| Advanced Data | Signals-first data grid with virtual scroll, column pinning, Excel-like editing, tree table, server-side ops |
+| Workflow / Visual Builder | Drag-drop pipeline builder, query builder (nested conditions → SQL/Mongo/Elastic), BPMN editor, form/survey builder |
+| Enterprise Forms | JSON-schema-driven dynamic forms, complex conditional wizards, large reactive-form performance tooling |
+| Charts & Analytics | Gantt / resource scheduler, org chart, network graph, TradingView-like chart, realtime dashboard widgets |
+| AI-Integrated UI | Streaming chat widget, prompt playground, AI diff/review panels, token-usage viewer, AI workflow builder |
+| Rich Text / Document | Notion-like editor, collaborative editor, PDF annotation viewer, diff viewer, document approval flow |
+| Developer Experience | Query/log viewers, feature-flag dashboards, permission/role editors, API explorer, audit viewers |
+| Industry-Specific | Patient timeline (healthcare), order-book / candlestick (finance), route planner (logistics), org chart (HR) |
+
+**Top 8 recommendations for 2026 Angular market:**
+1. Angular Signals-first data grid
+2. Query builder
+3. Workflow / pipeline builder
+4. AI chat / agent UI kit
+5. Gantt / scheduler
+6. Dynamic form engine
+7. Realtime monitoring dashboard components
+8. Collaborative document components
+
+**Preferred business model:** freemium open-source core + team/org licence for pro features (advanced grid capabilities, hosted schema storage, enterprise support). Industry-specific components justify higher per-component pricing due to encoded domain knowledge.
+
 ---
 
 ## Session Start Protocol

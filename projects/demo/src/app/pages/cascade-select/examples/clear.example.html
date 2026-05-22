@@ -1,0 +1,9 @@
+<ui-lib-cascade-select
+  [(ngModel)]="clearableCode"
+  [options]="countries"
+  [showClear]="true"
+  optionGroupLabel="name"
+  [optionGroupChildren]="['states', 'cities']"
+  optionLabel="cname"
+  optionValue="code"
+/>

@@ -6,30 +6,35 @@ import type {
   PanelMenuItem,
   PanelMenuPanelToggleEvent,
 } from 'ui-lib-custom/panel-menu';
-import {
-  TableComponent,
-  TableColumnComponent,
-  TableColumnBodyDirective,
-} from 'ui-lib-custom/table';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCssVarsTableComponent } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { CssVarRow } from '../../shared/doc-page/doc-css-vars-table.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import {
+  basicHtml,
+  basicTs,
+  multipleHtml,
+  multipleTs,
+  eventsHtml,
+  eventsTs,
+  importTs,
+  expandedTs,
+  urlItemsTs,
+} from './snippets.generated';
 
-interface AriaRow {
-  readonly element: string;
-  readonly attribute: string;
-  readonly value: string;
-  readonly notes: string;
-}
-
-interface KeyboardRow {
-  readonly key: string;
-  readonly action: string;
-}
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 /**
  * Demo page for the PanelMenu component.
@@ -40,20 +45,51 @@ interface KeyboardRow {
   imports: [
     CodeSnippet,
     PanelMenu,
-    TableComponent,
-    TableColumnComponent,
-    TableColumnBodyDirective,
+    DocAriaTableComponent,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
     DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelMenuDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly multipleHtml: string = multipleHtml;
+  public readonly multipleTs: string = multipleTs;
+  public readonly eventsHtml: string = eventsHtml;
+  public readonly eventsTs: string = eventsTs;
+  public readonly importTs: string = importTs;
+  public readonly expandedTs: string = expandedTs;
+  public readonly urlItemsTs: string = urlItemsTs;
+
   public readonly importCode: string = "import { PanelMenu } from 'ui-lib-custom/panel-menu'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -68,6 +104,7 @@ export class PanelMenuDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'events', label: 'Events' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
@@ -75,30 +112,6 @@ export class PanelMenuDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
-
-  public readonly snippets: {
-    readonly import: string;
-    readonly basic: string;
-    readonly expanded: string;
-    readonly multiple: string;
-    readonly urlItems: string;
-    readonly events: string;
-  } = {
-    import: `import { PanelMenu } from 'ui-lib-custom/panel-menu';
-import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
-    basic: `<ui-lib-panel-menu [model]="items" />`,
-    expanded: `items: PanelMenuItem[] = [
-  { label: 'File', expanded: true, items: [...] },
-  { label: 'Edit', items: [...] },
-];`,
-    multiple: `<ui-lib-panel-menu [model]="items" [multiple]="true" />`,
-    urlItems: `{ label: 'Angular Docs', url: 'https://angular.dev', target: '_blank' }`,
-    events: `<ui-lib-panel-menu
-  [model]="items"
-  (itemClick)="onItemClick($event)"
-  (panelToggle)="onPanelToggle($event)"
-/>`,
-  } as const;
 
   // ── Basic ───────────────────────────────────────────────────────────────
 
@@ -365,6 +378,96 @@ import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
     this.logEvent(`panelToggle: "${event.item.label ?? ''}" ${state}`);
   }
 
+  // ── API reference data ───────────────────────────────────────────────
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'model',
+      type: 'PanelMenuItem[]',
+      default: '[]',
+      description: 'Array of root-level menu items.',
+    },
+    {
+      name: 'multiple',
+      type: 'boolean',
+      default: 'false',
+      description: 'Allow multiple root panels open at once.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description:
+        'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size token controlling font size and padding.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the host element.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Panel Menu'",
+      description: 'Accessible label for the root navigation landmark.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'PanelMenuCommandEvent',
+      description: 'Emitted when a non-disabled leaf item is activated.',
+    },
+    {
+      name: 'panelToggle',
+      type: 'PanelMenuPanelToggleEvent',
+      description:
+        'Emitted when a root panel expands or collapses; payload includes <code>item</code>, <code>expanded</code>, and <code>key</code>.',
+    },
+  ];
+
+  public readonly apiItemRows: ApiPropRow[] = [
+    { name: 'label', type: 'string', description: 'Display text.' },
+    { name: 'icon', type: 'string', description: 'Icon CSS class rendered before the label.' },
+    {
+      name: 'expanded',
+      type: 'boolean',
+      description: 'Initial expansion state (root items only).',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'Prevents interaction; adds <code>aria-disabled="true"</code>.',
+    },
+    { name: 'separator', type: 'boolean', description: 'Renders a visual divider.' },
+    { name: 'visible', type: 'boolean', description: 'Hides the item when <code>false</code>.' },
+    {
+      name: 'items',
+      type: 'PanelMenuItem[]',
+      description: 'Child items — makes this item a collapsible panel or group.',
+    },
+    {
+      name: 'command',
+      type: '(event) => void',
+      description: 'Callback invoked when a leaf item is activated.',
+    },
+    { name: 'url', type: 'string', description: 'Renders the item as an anchor link.' },
+    {
+      name: 'target',
+      type: 'string',
+      description: "Link target attribute (e.g. <code>'_blank'</code>).",
+    },
+    { name: 'styleClass', type: 'string', description: 'Extra CSS class on the item element.' },
+  ];
+
   public readonly cssVarRows: CssVarRow[] = [
     { variable: '--uilib-panel-menu-bg', description: 'Panel background.' },
     { variable: '--uilib-panel-menu-border', description: 'Root panel border.' },
@@ -466,29 +569,34 @@ import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
-      key: '<kbd>Enter</kbd> / <kbd>Space</kbd> on header',
+      key: 'Enter / Space',
+      suffix: 'on header',
       action: 'Toggle the root panel open or closed.',
     },
     {
-      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on header',
+      key: '↓ / ↑',
+      suffix: 'on header',
       action: 'Move focus to the next or previous enabled root panel header (wraps).',
     },
     {
-      key: '<kbd>Home</kbd> / <kbd>End</kbd> on header',
+      key: 'Home / End',
+      suffix: 'on header',
       action: 'Jump to the first or last enabled root panel header.',
     },
     {
-      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on sub-item',
+      key: '↓ / ↑',
+      suffix: 'on sub-item',
       action: 'Move focus between items within the current sub-menu.',
     },
     {
-      key: '<kbd>Escape</kbd> on sub-item',
+      key: 'Escape',
+      suffix: 'on sub-item',
       action: 'Return focus to the owning root panel header.',
     },
     {
-      key: '<kbd>Tab</kbd> / <kbd>Shift+Tab</kbd>',
+      key: 'Tab / Shift+Tab',
       action: 'Move focus naturally through the page via browser tab order.',
     },
   ];

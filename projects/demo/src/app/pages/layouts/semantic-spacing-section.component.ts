@@ -7,7 +7,6 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { INSET_TOKENS, INLINE_TOKENS, STACK_TOKENS } from 'ui-lib-custom/tokens';
 import type { InsetToken, InlineToken, StackToken } from 'ui-lib-custom/tokens';
@@ -16,12 +15,13 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocPageHeaderComponent } from '../../shared/doc-page/doc-page-header.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for semantic spacing tokens.
  */
@@ -29,10 +29,10 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
   selector: 'app-layout-semantic-spacing-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Grid,
     Stack,
     Inline,
@@ -43,7 +43,7 @@ import { CodeSnippet } from 'ui-lib-custom/code-snippet';
     DocDemoViewportComponent,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
-    CodeSnippet,
+    DocCodeExampleComponent,
   ],
   templateUrl: './semantic-spacing-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -63,6 +63,16 @@ export class SemanticSpacingSectionComponent {
   </ui-lib-container>
 </ui-lib-stack>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Container, Inline, Stack } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Container, Inline, Stack],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

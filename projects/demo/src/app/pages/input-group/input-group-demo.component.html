@@ -8,178 +8,198 @@
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
         <p class="section-text">Leading and trailing addon cells around a single input.</p>
-          <ui-lib-card>
-            <uilib-input-group>
-              <uilib-input-group-addon>$</uilib-input-group-addon>
-              <ui-lib-input
-                placeholder="Amount"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="basicAmount"
-              />
-              <uilib-input-group-addon>.00</uilib-input-group-addon>
-            </uilib-input-group>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('basic')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <uilib-input-group>
+            <uilib-input-group-addon>$</uilib-input-group-addon>
+            <ui-lib-input
+              placeholder="Amount"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="basicAmount"
+            />
+            <uilib-input-group-addon>.00</uilib-input-group-addon>
+          </uilib-input-group>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTsTs" />
+      </app-doc-section>
 
-      <section id="multiple" data-doc-anchor class="example-section">
+      <app-doc-section id="multiple" title="Multiple">
         <h3>b. Multiple</h3>
         <p class="section-text">One leading addon with two trailing addon cells.</p>
-          <ui-lib-card>
-            <uilib-input-group>
-              <uilib-input-group-addon>$</uilib-input-group-addon>
-              <ui-lib-input
-                placeholder="Invoice amount"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="multipleAmount"
-              />
-              <uilib-input-group-addon>.00</uilib-input-group-addon>
-              <uilib-input-group-addon>USD</uilib-input-group-addon>
-            </uilib-input-group>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('multiple')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <uilib-input-group>
+            <uilib-input-group-addon>$</uilib-input-group-addon>
+            <ui-lib-input
+              placeholder="Invoice amount"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="multipleAmount"
+            />
+            <uilib-input-group-addon>.00</uilib-input-group-addon>
+            <uilib-input-group-addon>USD</uilib-input-group-addon>
+          </uilib-input-group>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTsTs" />
+      </app-doc-section>
 
-      <section id="button" data-doc-anchor class="example-section">
+      <app-doc-section id="button" title="Button">
         <h3>c. Button</h3>
         <p class="section-text">Addon can host a `ui-lib-button` with seamless border stitching.</p>
-          <ui-lib-card>
-            <uilib-input-group>
-              <ui-lib-input
-                placeholder="Search products"
-                [ngModelOptions]="{ standalone: true }"
-                [(ngModel)]="searchQuery"
-              />
-              <uilib-input-group-addon>
-                <ui-lib-button appearance="solid" size="sm">Search</ui-lib-button>
-              </uilib-input-group-addon>
-            </uilib-input-group>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('button')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <uilib-input-group>
+            <ui-lib-input
+              placeholder="Search products"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="searchQuery"
+            />
+            <uilib-input-group-addon>
+              <ui-lib-button appearance="solid" size="sm">Search</ui-lib-button>
+            </uilib-input-group-addon>
+          </uilib-input-group>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="buttonHtml" [typescript]="buttonTsTs" />
+      </app-doc-section>
 
-      <section id="checkbox-radio" data-doc-anchor class="example-section">
+      <app-doc-section id="checkbox-radio" title="Checkbox &amp; Radio">
         <h3>d. Checkbox &amp; Radio</h3>
-        <p class="section-text">Grouped controls can include `ui-lib-checkbox` as an inline action cell.</p>
-          <ui-lib-card>
-            <div class="stack-md">
-              <uilib-input-group>
-                <uilib-input-group-addon>
-                  <ui-lib-checkbox
-                    [binary]="true"
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="acceptTerms"
-                  />
-                </uilib-input-group-addon>
-                <ui-lib-input
-                  placeholder="Accepted by"
+        <p class="section-text">
+          Grouped controls can include `ui-lib-checkbox` as an inline action cell.
+        </p>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <uilib-input-group>
+              <uilib-input-group-addon>
+                <ui-lib-checkbox
+                  [binary]="true"
                   [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="acceptedBy"
+                  [(ngModel)]="acceptTerms"
                 />
-              </uilib-input-group>
+              </uilib-input-group-addon>
+              <ui-lib-input
+                placeholder="Accepted by"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="acceptedBy"
+              />
+            </uilib-input-group>
 
-              <uilib-input-group>
-                <uilib-input-group-addon>
-                  <ui-lib-checkbox
-                    [binary]="true"
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="priorityOnly"
-                  />
-                </uilib-input-group-addon>
-                <ui-lib-input
-                  placeholder="Priority tag"
+            <uilib-input-group>
+              <uilib-input-group-addon>
+                <ui-lib-checkbox
+                  [binary]="true"
                   [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="priorityTag"
+                  [(ngModel)]="priorityOnly"
                 />
-                <uilib-input-group-addon>Only</uilib-input-group-addon>
-              </uilib-input-group>
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('checkboxRadio')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+              </uilib-input-group-addon>
+              <ui-lib-input
+                placeholder="Priority tag"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="priorityTag"
+              />
+              <uilib-input-group-addon>Only</uilib-input-group-addon>
+            </uilib-input-group>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="checkboxRadioHtml"
+          [typescript]="checkboxRadioTsTs"
+        />
+      </app-doc-section>
 
-      <section id="float-label" data-doc-anchor class="example-section">
+      <app-doc-section id="float-label" title="Float Label">
         <h3>e. Float Label</h3>
         <p class="section-text">All FloatLabel variants compose directly inside InputGroup.</p>
-          <ui-lib-card>
-            <div class="stack-md">
-              <uilib-input-group>
-                <uilib-input-group-addon>&#64;</uilib-input-group-addon>
-                <uilib-float-label variant="over">
-                  <ui-lib-input
-                    placeholder=" "
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="floatValues.over"
-                  />
-                  <label>Over label</label>
-                </uilib-float-label>
-              </uilib-input-group>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            <uilib-input-group>
+              <uilib-input-group-addon>&#64;</uilib-input-group-addon>
+              <uilib-float-label variant="over">
+                <ui-lib-input
+                  placeholder=" "
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="floatValues.over"
+                />
+                <label>Over label</label>
+              </uilib-float-label>
+            </uilib-input-group>
 
-              <uilib-input-group>
-                <uilib-input-group-addon>&#64;</uilib-input-group-addon>
-                <uilib-float-label variant="in">
-                  <ui-lib-input
-                    placeholder=" "
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="floatValues.in"
-                  />
-                  <label>In label</label>
-                </uilib-float-label>
-              </uilib-input-group>
+            <uilib-input-group>
+              <uilib-input-group-addon>&#64;</uilib-input-group-addon>
+              <uilib-float-label variant="in">
+                <ui-lib-input
+                  placeholder=" "
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="floatValues.in"
+                />
+                <label>In label</label>
+              </uilib-float-label>
+            </uilib-input-group>
 
-              <uilib-input-group>
-                <uilib-input-group-addon>&#64;</uilib-input-group-addon>
-                <uilib-float-label variant="on">
-                  <ui-lib-input
-                    placeholder=" "
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="floatValues.on"
-                  />
-                  <label>On label</label>
-                </uilib-float-label>
-              </uilib-input-group>
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('floatLabel')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+            <uilib-input-group>
+              <uilib-input-group-addon>&#64;</uilib-input-group-addon>
+              <uilib-float-label variant="on">
+                <ui-lib-input
+                  placeholder=" "
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="floatValues.on"
+                />
+                <label>On label</label>
+              </uilib-float-label>
+            </uilib-input-group>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="floatLabelHtml"
+          [typescript]="floatLabelTsTs"
+        />
+      </app-doc-section>
 
-      <section id="sizes" data-doc-anchor class="example-section">
+      <app-doc-section id="sizes" title="Sizes">
         <h3>f. Sizes</h3>
         <p class="section-text">Input size variants inside InputGroup with matching addon edges.</p>
-          <ui-lib-card>
-            <div class="stack-md">
-              @for (item of sizeItems; track item.size) {
-                <uilib-input-group>
-                  <uilib-input-group-addon>$</uilib-input-group-addon>
-                  <ui-lib-input
-                    [size]="item.size"
-                    [placeholder]="item.label"
-                    [ngModelOptions]="{ standalone: true }"
-                    [(ngModel)]="item.value"
-                  />
-                </uilib-input-group>
-              }
-            </div>
-          </ui-lib-card>
-        <ui-lib-code-snippet language="html" [code]="snippet('sizes')" 
-          [showLineNumbers]="true"
-          />
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-md">
+            @for (item of sizeItems; track item.size) {
+              <uilib-input-group>
+                <uilib-input-group-addon>$</uilib-input-group-addon>
+                <ui-lib-input
+                  [size]="item.size"
+                  [placeholder]="item.label"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="item.value"
+                />
+              </uilib-input-group>
+            }
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>uilib-input-group</code>. Import from
+      <code>ui-lib-custom/input-group</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <app-doc-css-vars-table [rows]="cssVarRows" />
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -189,6 +209,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>
-

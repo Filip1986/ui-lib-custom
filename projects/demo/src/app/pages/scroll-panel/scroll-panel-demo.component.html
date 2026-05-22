@@ -1,5 +1,4 @@
 <app-doc-page-layout [sections]="sections">
-
   <app-doc-page-header
     docHeader
     title="ScrollPanel"
@@ -8,12 +7,11 @@
   />
 
   <!-- ── Basic Usage ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
-      Wrap any content in <code>&lt;ui-lib-scroll-panel&gt;</code> and constrain its
-      height. The inner content scrolls vertically while the custom scrollbar is styled
-      to match the active variant.
+      Wrap any content in <code>&lt;ui-lib-scroll-panel&gt;</code> and constrain its height. The
+      inner content scrolls vertically while the custom scrollbar is styled to match the active
+      variant.
     </p>
     <div class="demo-section__preview">
       <ui-lib-scroll-panel class="demo-panel--fixed-height">
@@ -23,22 +21,19 @@
       </ui-lib-scroll-panel>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="basicUsageHtml"
+        [typescript]="basicUsageTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetBasicUsage"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
-      Three design variants are available: <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code>. Each variant applies a distinct scrollbar style and border
-      treatment.
+      Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. Each variant applies a distinct scrollbar style and border treatment.
     </p>
     <div class="demo-section__preview demo-variants-grid">
       @for (variant of variants; track variant) {
@@ -53,21 +48,19 @@
       }
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="variantsHtml"
+        [typescript]="variantsTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetVariants"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Horizontal Scroll ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="horizontal" data-doc-anchor>
-    <h2 class="demo-section__title">Horizontal &amp; Both Axes</h2>
+  <app-doc-section id="horizontal" title="Horizontal &amp; Both Axes">
     <p class="demo-section__description">
-      When the content is wider than the container, a horizontal scrollbar appears.
-      Both axes are supported simultaneously.
+      When the content is wider than the container, a horizontal scrollbar appears. Both axes are
+      supported simultaneously.
     </p>
     <div class="demo-section__preview">
       <ui-lib-scroll-panel class="demo-panel--horizontal">
@@ -81,21 +74,19 @@
       </ui-lib-scroll-panel>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="horizontalHtml"
+        [typescript]="horizontalTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetHorizontal"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Interactive Variant Switcher ─────────────────────────────────── -->
-  <section class="demo-section" id="interactive-variant-switcher" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Variant Switcher</h2>
+  <app-doc-section id="interactive-variant-switcher" title="Interactive Variant Switcher">
     <p class="demo-section__description">
-      Switch between variants at runtime. The scrollbar styling updates immediately
-      via CSS custom properties.
+      Switch between variants at runtime. The scrollbar styling updates immediately via CSS custom
+      properties.
     </p>
     <div class="demo-section__preview">
       <div class="demo-controls">
@@ -118,26 +109,22 @@
       </ui-lib-scroll-panel>
     </div>
     <div class="demo-section__code">
-      <ui-lib-code-snippet
-        language="html"
+      <app-doc-code-example
+        [html]="interactiveHtml"
+        [typescript]="interactiveTs"
         [showLineNumbers]="true"
-        size="sm"
-        [code]="snippetInteractive"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
-  <section class="demo-section" id="custom-css-properties" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Scrollbar via CSS Properties</h2>
+  <app-doc-section id="custom-css-properties" title="Custom Scrollbar via CSS Properties">
     <p class="demo-section__description">
-      All scrollbar visuals are driven by CSS custom properties. Override them
-      on the component or a parent to create a bespoke style without changing the variant.
+      All scrollbar visuals are driven by CSS custom properties. Override them on the component or a
+      parent to create a bespoke style without changing the variant.
     </p>
     <div class="demo-section__preview">
-      <ui-lib-scroll-panel
-        class="demo-panel--fixed-height demo-panel--custom-theme"
-      >
+      <ui-lib-scroll-panel class="demo-panel--fixed-height demo-panel--custom-theme">
         @for (paragraph of longParagraphs; track paragraph) {
           <p class="demo-text">{{ paragraph }}</p>
         }
@@ -151,41 +138,36 @@
         [code]="snippetCssProperties"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── API Reference ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Visual variant. Falls back to <code>ThemeConfigService</code> when null.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes applied to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" [showDefault]="true" />
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
-  </section>
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -195,5 +177,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

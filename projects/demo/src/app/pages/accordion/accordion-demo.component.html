@@ -1,0 +1,554 @@
+﻿<app-doc-page-layout [sections]="sections">
+  <app-doc-page-header
+    docHeader
+    title="Accordion"
+    [importCode]="importCode"
+    description="Expand and collapse content panels with accessible keyboard navigation, variants, and signal inputs."
+  />
+
+  <app-accordion-basic-example />
+  <app-doc-code-example
+    [html]="accordionExampleHtml"
+    [typescript]="accordionExampleTs"
+    [showLineNumbers]="true"
+  />
+
+  <div class="doc-tabs">
+    <ui-lib-tabs
+      variant="minimal"
+      size="sm"
+      [selectedValue]="activeTab()"
+      (selectedChange)="onTabChange($event.value)"
+    >
+      <ui-lib-tab value="playground" label="Playground" />
+      <ui-lib-tab value="variants" label="Variants" />
+      <ui-lib-tab value="sizes" label="Sizes" />
+      <ui-lib-tab value="controlled" label="Controlled" />
+      <ui-lib-tab value="custom-headers" label="Custom Headers" />
+      <ui-lib-tab value="disabled" label="Disabled" />
+      <ui-lib-tab value="icons" label="Icons" />
+      <ui-lib-tab value="toggle-icons" label="Toggle Icons" />
+      <ui-lib-tab value="animations" label="Animations" />
+      <ui-lib-tab value="api-reference" label="API Reference" />
+      <ui-lib-tab value="accessibility" label="Accessibility" />
+    </ui-lib-tabs>
+  </div>
+
+  @if (activeTab() === 'playground') {
+    <div class="doc-controls">
+      <ui-lib-panel variant="minimal">
+        <p class="card-description">Variant and size</p>
+
+        <div class="control-grid">
+          <div class="control">
+            <label>Variant</label>
+            <div class="chips">
+              @for (v of variants; track v) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="sm"
+                  variant="minimal"
+                  [appearance]="variant() === v ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="setVariant(v)"
+                  >{{ v }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Size</label>
+            <div class="chips">
+              @for (s of sizes; track s) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="sm"
+                  variant="minimal"
+                  [appearance]="size() === s ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="setSize(s)"
+                  >{{ s }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Expand mode</label>
+            <div class="chips">
+              @for (mode of expandModes; track mode) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="sm"
+                  variant="minimal"
+                  [appearance]="expandMode() === mode ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="setExpandMode(mode)"
+                  >{{ mode }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+        </div>
+      </ui-lib-panel>
+    </div>
+
+    <ui-lib-panel variant="minimal">
+      <p>Adjust the controls above to see the accordion update live.</p>
+
+      <app-doc-demo-viewport>
+        <div class="doc-demo" [appThemeScope]="appliedTheme()">
+          <ui-lib-accordion [variant]="variant()" [size]="size()" [expandMode]="expandMode()">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'variants') {
+    <ui-lib-panel variant="minimal">
+      <p>Compare accordion variants with the same FAQ content.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-accordion variant="material">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-accordion variant="bootstrap">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+
+        <div minimal>
+          <ui-lib-accordion variant="minimal">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-variant-comparison>
+    </ui-lib-panel>
+
+    <div class="demo-grid" id="variants" data-doc-anchor>
+      @for (variant of variantExamples; track variant) {
+        <ui-lib-panel variant="minimal">
+          <app-doc-demo-viewport>
+            <div class="doc-demo">
+              <ui-lib-accordion [variant]="variant">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-panel>
+      }
+    </div>
+  }
+
+  @if (activeTab() === 'sizes') {
+    <div class="demo-grid" id="sizes" data-doc-anchor>
+      @for (size of sizeExamples; track size) {
+        <ui-lib-panel variant="minimal">
+          <app-doc-demo-viewport>
+            <div class="doc-demo">
+              <ui-lib-accordion [size]="size">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-panel>
+      }
+
+      <ui-lib-panel variant="minimal">
+        <app-doc-demo-viewport>
+          <div class="size-comparison">
+            <div class="size-column">
+              <div class="size-label">Small</div>
+              <ui-lib-accordion size="sm">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+            <div class="size-column">
+              <div class="size-label">Medium</div>
+              <ui-lib-accordion size="md">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+            <div class="size-column">
+              <div class="size-label">Large</div>
+              <ui-lib-accordion size="lg">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-panel>
+    </div>
+  }
+
+  @if (activeTab() === 'controlled') {
+    <ui-lib-panel variant="minimal">
+      <p>
+        Manage expanded panels externally via <code>expandedPanels</code> and respond to
+        <code>expandedChange</code>.
+      </p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-button size="sm" variant="minimal" appearance="ghost" (click)="resetControlled()"
+            >Reset</ui-lib-button
+          >
+          <ui-lib-accordion
+            expandMode="multiple"
+            [expandedPanels]="controlledExpanded()"
+            (expandedChange)="toggleControlled($event.panelId)"
+          >
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+          <div class="controlled-state">
+            Expanded: {{ controlledExpanded().join(', ') || 'none' }}
+          </div>
+        </div>
+      </app-doc-demo-viewport>
+      <ui-lib-code-snippet
+        [code]="controlledTs"
+        language="typescript"
+        [showLineNumbers]="true"
+      />
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'custom-headers') {
+    <ui-lib-panel variant="minimal">
+      <p>Use the <code>accordionHeader</code> directive for custom header content.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-accordion>
+            @for (item of customHeaderItems; track item.value) {
+              <ui-lib-accordion-panel [value]="item.value">
+                <div accordionHeader class="custom-header-row">
+                  <ui-lib-icon name="chevron-right" />
+                  <span>{{ item.header }}</span>
+                </div>
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+      <app-doc-code-example
+        [html]="customHeaderHtml"
+        [typescript]="customHeaderTs"
+        [showLineNumbers]="true"
+      />
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'disabled') {
+    <ui-lib-panel variant="minimal">
+      <p>Disabled panels cannot be toggled and are skipped by keyboard navigation.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-accordion>
+            @for (item of disabledItems; track item.value) {
+              <ui-lib-accordion-panel
+                [header]="item.header"
+                [value]="item.value"
+                [disabled]="!!item.disabled"
+              >
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'icons') {
+    <ui-lib-panel variant="minimal">
+      <p>Swap icon names, move icon placement, or hide the icon entirely.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel
+              header="Using Plus/Minus"
+              expandIcon="minus"
+              collapseIcon="plus"
+            >
+              Shows plus when collapsed and minus when expanded.
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel
+              header="Arrow Icons"
+              expandIcon="arrow-up"
+              collapseIcon="arrow-down"
+            >
+              Swap arrow icon names per state.
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel header="Default Chevrons">
+              Defaults to chevron-down/up.
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel header="Icon at Start" iconPosition="start">
+              Icon appears at the start of the header.
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel header="Icon at End" iconPosition="end">
+              Icon appears at the end of the header.
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel header="Hidden Icon" [showIcon]="false">
+              Hide the toggle icon for a clean header.
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+      <app-doc-code-example
+        [html]="customIconsHtml"
+        [typescript]="customIconsTs"
+        [showLineNumbers]="true"
+      />
+      <app-doc-code-example
+        [html]="iconPositionHtml"
+        [typescript]="iconPositionTs"
+        [showLineNumbers]="true"
+      />
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'toggle-icons') {
+    <div class="demo-grid" id="toggle-icons" data-doc-anchor>
+      <ui-lib-panel variant="minimal">
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              <ui-lib-accordion-panel header="Status Indicator">
+                <ng-template accordionToggleIcon let-expanded>
+                  <span class="custom-indicator" [class.active]="expanded">
+                    {{ expanded ? '−' : '+' }}
+                  </span>
+                </ng-template>
+                Template switches indicator color per state.
+              </ui-lib-accordion-panel>
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+        <app-doc-code-example
+          [html]="toggleTemplateHtml"
+          [typescript]="toggleTemplateTs"
+          [showLineNumbers]="true"
+        />
+      </ui-lib-panel>
+
+      <ui-lib-panel variant="minimal">
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              <ui-lib-accordion-panel header="Rotating Indicator">
+                <ng-template accordionToggleIcon let-expanded>
+                  <ui-lib-icon [name]="expanded ? 'loader' : 'loader-2'" class="indicator-rotate" />
+                </ng-template>
+                Uses a rotating icon animation.
+              </ui-lib-accordion-panel>
+              <ui-lib-accordion-panel header="Pulsing Indicator">
+                <ng-template accordionToggleIcon let-expanded>
+                  <ui-lib-icon
+                    [name]="expanded ? 'circle-dot' : 'circle'"
+                    class="indicator-pulse"
+                  />
+                </ng-template>
+                Pulses the icon when expanded.
+              </ui-lib-accordion-panel>
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-panel>
+
+      <ui-lib-panel variant="minimal">
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              <ui-lib-accordion-panel header="Notifications">
+                <ng-template accordionToggleIcon let-expanded>
+                  <span class="icon-with-badge" [class.is-active]="expanded">
+                    <ui-lib-icon [name]="expanded ? 'bell-off' : 'bell'" />
+                    <ui-lib-badge class="icon-badge" color="danger" size="sm">3</ui-lib-badge>
+                  </span>
+                </ng-template>
+                Badge stays visible regardless of state.
+              </ui-lib-accordion-panel>
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-panel>
+    </div>
+  }
+
+  @if (activeTab() === 'animations') {
+    <div class="demo-grid" id="animations" data-doc-anchor>
+      <ui-lib-panel variant="minimal">
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              @for (item of faqItems; track item.value) {
+                <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                  {{ item.content }}
+                </ui-lib-accordion-panel>
+              }
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-panel>
+
+      <ui-lib-panel variant="minimal">
+        <ui-lib-button
+          size="sm"
+          variant="minimal"
+          appearance="ghost"
+          (click)="toggleReducedMotion()"
+        >
+          {{ reduceMotionDemo() ? 'Disable' : 'Enable' }} reduced motion
+        </ui-lib-button>
+        <app-doc-demo-viewport>
+          <div class="doc-demo" [class.demo-reduced-motion]="reduceMotionDemo()">
+            <ui-lib-accordion>
+              @for (item of faqItems; track item.value) {
+                <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                  {{ item.content }}
+                </ui-lib-accordion-panel>
+              }
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-panel>
+
+      <ui-lib-panel variant="minimal">
+        <app-doc-demo-viewport>
+          <div class="animation-speed-grid">
+            <div class="doc-demo demo-fast-motion">
+              <div class="speed-label">Fast</div>
+              <ui-lib-accordion>
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+            <div class="doc-demo demo-slow-motion">
+              <div class="speed-label">Slow</div>
+              <ui-lib-accordion>
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-panel>
+    </div>
+  }
+
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-panel variant="minimal">
+      <app-doc-api-reference [rows]="apiRows" />
+      <app-doc-code-example
+        [html]="basicHtml"
+        [typescript]="basicTs"
+        [showLineNumbers]="true"
+      />
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-panel variant="minimal">
+      <ul class="a11y-list">
+        <li>Header buttons use <code>role="button"</code> with <code>aria-expanded</code>.</li>
+        <li>
+          Panels use <code>role="region"</code> and link to headers via
+          <code>aria-labelledby</code>.
+        </li>
+        <li>Keyboard: Arrow Up/Down/Home/End for focus movement; Enter/Space toggles.</li>
+        <li>Disabled panels expose <code>aria-disabled="true"</code> and skip navigation.</li>
+        <li>
+          Focus ring visible on headers; content is hidden with <code>hidden</code> attribute when
+          collapsed.
+        </li>
+      </ul>
+    </ui-lib-panel>
+  }
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+</app-doc-page-layout>

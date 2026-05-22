@@ -1,23 +1,58 @@
 import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 
 /**
- * Demo page for the SyntaxHighlighter utility.
+ *
  */
 @Component({
   selector: 'app-syntax-highlighter-demo',
   standalone: true,
-  imports: [CodeSnippet, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocPageHeaderComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
+  ],
   templateUrl: './syntax-highlighter-demo.component.html',
   styleUrl: './syntax-highlighter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SyntaxHighlighterDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-22',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 8,
+      perf: 9,
+      comp: 7,
+      theme: 7,
+      dx: 9,
+      docs: 8,
+      polish: 8,
+      angular: 8,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { highlight, tokenize, escapeForCode } from 'ui-lib-custom/syntax-highlighter';";
 
@@ -51,7 +86,8 @@ export class SyntaxHighlighterDemoComponent {
       ],
     },
     { id: 'tokens', label: 'Token Classes' },
-    { id: 'theming', label: 'Theming' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public readonly activeLanguage: WritableSignal<CodeSnippetLanguage> =
@@ -223,4 +259,37 @@ export class SyntaxHighlighterDemoComponent {
     if (language === 'html') return this.htmlCode;
     return this.scssCode;
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Highlighted output',
+      attribute: 'role="code" / role="region"',
+      value: '—',
+      notes:
+        'Wrap the highlighted HTML in a <code>&lt;pre&gt;&lt;code&gt;</code> block. Screen readers announce <code>&lt;code&gt;</code> as a code region.',
+    },
+    {
+      element: 'Token spans',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Individual token <code>&lt;span&gt;</code> elements are decorative — their class-based colours have no semantic meaning for assistive technologies.',
+    },
+    {
+      element: 'Code block',
+      attribute: 'tabindex="0"',
+      value: '—',
+      notes:
+        'Add <code>tabindex="0"</code> to the containing <code>&lt;pre&gt;</code> when keyboard users may need to scroll long code blocks.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus to the code block (when <code>tabindex="0"</code> is set on the container).',
+    },
+    { key: 'Arrow keys', action: 'Scrolls the code block if it overflows its container.' },
+  ];
 }

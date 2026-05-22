@@ -23,7 +23,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - **Active focus:** ALL components hardened — 76 original queue items + all new components COMPLETE. Library hardening milestone achieved 2026-05-15.
 - **Next queue:** No remaining hardening items. Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
-- **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
+- **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
 ### Component/Docs Delta (Active Only)
 
@@ -82,93 +82,51 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-18 [New shared component: DocCssVarsTableComponent — all demo pages migrated]
+Date: 2026-05-21 [ARIA table migration — 7 demo pages migrated to DocAriaTableComponent]
 Changed:
-  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.ts (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.html (NEW)
-  - projects/demo/src/app/shared/doc-page/doc-css-vars-table.component.scss (NEW)
-  - projects/demo/src/app/shared/index.ts (added DocCssVarsTableComponent export)
-  - 13 demo pages migrated (TS + HTML): tag, panel, menu, tiered-menu, panel-menu, ripple, block-ui, bottom-sheet, chip, meter-group, radio-button, rating, scroll-panel
-State: All demo pages now use <app-doc-css-vars-table> for CSS Custom Properties sections. Component renders a token-grid-style bordered table (design taken from SyntaxHighlighter demo). [showDefault]="false" produces a 2-column layout; default is 3-column (Variable / Default / Description). CssVarRow interface exported from shared/index.ts. Build and lint NOT yet re-verified after migration — run from main repo root.
-Verification:
-  (not yet run — run from D:/Work/ArtificialSense/ui-lib-custom):
-  npx eslint projects/demo/src/app/shared/doc-page/ --max-warnings 0
-  ng build demo
-Terminal notes: node_modules not present in worktree — run all tools from main repo root.
-Next step: Run ESLint on shared/doc-page/ and ng build demo to verify all 13 pages compile cleanly.
+  - block-ui: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties"> in accessibility section
+  - bottom-sheet: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - password: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - radio-button: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - rating: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
+  - ripple: added DocAriaTableComponent + ariaRows (2); replaced raw <table class="doc-properties">
+  - meter-group: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
+State: Build zero errors. Zero raw ARIA doc-properties tables remain in component demo pages. Remaining doc-properties in themes/shadows/project-starter are utility pages (different context).
+Verification: ng build demo → PASS (zero errors; only pre-existing budget warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 
-Date: 2026-05-17 [Demo refactor: replaced app-code-preview with ui-lib-code-snippet app-wide]
+Date: 2026-05-21 [API table migration — 15 remaining demo pages migrated to DocApiReferenceComponent]
 Changed:
-  - projects/demo/src/app/pages/**/*.html (36 files — app-code-preview → ui-lib-code-snippet)
-  - projects/demo/src/app/pages/**/*.ts (36 files — CodePreviewComponent import/declaration removed)
-  - projects/demo/src/app/pages/tree-select/tree-select-demo.component.ts (added CodeSnippet import; it was missing)
-  - projects/demo/src/app/pages/layouts/layouts.component.ts (added CodeSnippet import; it was missing)
-  - projects/demo/src/app/shared/index.ts (removed re-export of deleted CodePreviewComponent)
-  - projects/demo/src/app/shared/components/code-preview/ (DELETED — CodePreviewComponent fully removed)
-State: All 36 demo pages now use ui-lib-code-snippet directly. CodePreviewComponent is gone. No remaining app-code-preview references anywhere in the codebase. Demo build compiles cleanly — no template errors. Pre-existing SCSS budget warnings in roadmap/vision/button/date-picker remain (pre-existing, not new).
-Verification:
-  grep CodePreviewComponent|app-code-preview projects/demo/src → 0 matches
-  ng build demo (worktree) → zero template errors; only pre-existing SCSS budget warnings
-Next step: Run ESLint + full test suite, then serve demo to visually verify code snippets render correctly on several demo pages.
+  - auto-focus-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (2); replaced af-table
+  - badges.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5); replaced tab panel table
+  - cards.component.ts/.html: added DocApiReferenceComponent + apiInputRows (4); replaced tab panel table
+  - checkboxes.component.ts/.html: added DocApiReferenceComponent + apiInputRows (12); replaced tab panel table
+  - confirm-popup-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (11) + apiOutputRows (2) + apiServiceRows (3); replaced 3 raw tables; fixed h3 class demo-table__heading → demo-section__subtitle
+  - icons-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (4) [showDefault=false]; replaced tab panel table
+  - image-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (13) + apiOutputRows (2) + apiSlotRows (2); replaced 3 api-table elements
+  - image-compare-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (10) + apiOutputRows (2); replaced 2 api-table elements; kept keyboard navigation table
+  - meter-group-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (10) + apiMeterItemRows (4) kind=property; replaced 2 doc-properties tables
+  - organization-chart-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5) + apiOutputRows (4) + apiSlotRows (1); replaced 3 doc-table elements; changed h4 to h3.demo-section__subtitle
+  - select-buttons.component.ts/.html: added DocApiReferenceComponent + apiInputRows (7) + apiOutputRows (1); replaced api-table
+  - split-button-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5); replaced doc-table
+  - inputs.component.html: replaced 5-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
+  - select.component.html: replaced 5-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
+  - tabs.component.html: replaced 14-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
+State: Build zero errors. Zero raw API doc tables remain across all 21 targeted pages.
+Verification: ng build demo → PASS (zero errors; only pre-existing bundle budget + roadmap SCSS warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 
-Date: 2026-05-16 [New component: CodeSnippet — full scaffold complete]
+Date: 2026-05-21 [Demo consistency audit — import paths standardized + final raw tables eliminated]
 Changed:
-  - projects/ui-lib-custom/src/lib/code-snippet/ (new: code-snippet.ts, .html, .scss, .spec.ts, .types.ts, index.ts, README.md)
-  - projects/ui-lib-custom/code-snippet/ (new secondary entry point: ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (added code-snippet to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added code-snippet import test)
-  - projects/demo/src/app/pages/code-snippet/ (new: code-snippet-demo.component.ts/.html/.scss)
-  - projects/demo/src/app/app.routes.ts (added /code-snippet lazy route)
-State: CodeSnippet component fully scaffolded. Selector: ui-lib-code-snippet. Package: ui-lib-custom/code-snippet. Data-display category. Features: macOS window chrome (traffic-light dots), language-labelled tab bar, optional line numbers, copy-to-clipboard button with 2 s visual feedback, three design variants (material/bootstrap/minimal), three sizes (sm/md/lg), maxHeight scroll, full a11y (role=region, aria-label, aria-hidden line numbers, aria-pressed copy button, prefers-reduced-motion, forced-colors). Build and lint NOT yet verified — must run from main repo root.
+  - All ~110 *.ts files under projects/demo/src/app/pages/: replaced all `../../shared/doc-page/` and `../../shared/components/` relative imports with `@demo/shared/doc-page/` and `@demo/shared/components/` alias paths
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.ts: added DocApiReferenceComponent; added apiInputRows (5), apiOutputRows (1), apiProjectionRows (2)
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.html: replaced 3 raw <table class="demo-api-table"> with <app-doc-api-reference>; fixed h3 class demo-api__subtitle → demo-section__subtitle
+  - projects/demo/src/app/pages/menubar/menubar-demo.component.ts: added DocApiReferenceComponent; added apiInputRows (5), apiOutputRows (1), apiItemRows (10), apiProjectionRows (2)
+  - projects/demo/src/app/pages/menubar/menubar-demo.component.html: replaced 4 raw <table class="demo-api-table"> with <app-doc-api-reference>
+State: Build zero errors. Zero raw demo-api-table HTML elements remain anywhere in pages/. All demo page imports now use @demo/shared alias paths exclusively.
 Verification:
-  (not yet run — run from D:/Work/Personal/Github/ui-lib-custom):
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/code-snippet/ --max-warnings 0
-  node_modules/.bin/ng build ui-lib-custom
-  node_modules/.bin/jest --testPathPatterns="src/lib/code-snippet/" --no-coverage
-Terminal notes: node_modules not present in worktree — run all tools from main repo root with paths pointing to worktree files.
-Next step: Run ESLint + build + tests from main repo root. Then serve demo to visually verify /code-snippet route.
+  eslint projects/demo/src/app/pages/fieldset/ menubar/ --max-warnings 0 → clean
+  ng build demo → PASS (zero errors; only pre-existing budget warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 
-Date: 2026-05-15 [Phase 0 infrastructure gaps closed — z-index manager wired into Dialog and Drawer]
-Changed:
-  - projects/ui-lib-custom/src/lib/dialog/dialog.component.ts (import + call claimOverlayZIndex on open, releaseOverlayZIndex on close)
-  - projects/ui-lib-custom/src/lib/drawer/drawer.ts (same pattern)
-  - docs/ROADMAP.md (Phase 0 all items checked off; Phases 1–3 marked complete; Phase 4 marked active; progress summary updated to reflect 76+ / 76 components green)
-State: Phase 0 COMPLETE. All five infrastructure items confirmed done (icon-button entry point, alert entry point, overlay z-index manager, knip, reference docs). Dialog and Drawer now participate in the shared claimOverlayZIndex stacking system — nested dropdowns (AutoComplete, CascadeSelect, ColorPicker, DatePicker) opened inside a dialog will always stack above it. ROADMAP now accurately reflects current state: Phase 4 (Public Beta) is the active phase.
-Verification:
-  eslint projects/ui-lib-custom/src/lib/dialog/ projects/ui-lib-custom/src/lib/drawer/ --max-warnings 0 (PASS)
-  ng build ui-lib-custom (PASS, zero errors, zero warnings)
-Terminal notes: node_modules not present in worktree — run all tools from main repo root (D:/Work/Personal/Github/ui-lib-custom) with paths pointing to worktree files.
-Next step: Begin Phase 4 — start with the full axe-core audit (npm run test:a11y:all) then Storybook integration, then npm publish prep.
-
-Date: 2026-05-15 [Full hardening audit — ToggleSwitch, Icon, IconButton confirmed complete]
-Changed:
-  - docs/COMPONENT_SCORES.md (scored ToggleSwitch 8.8, Icon 8.7, IconButton 8.6; fixed ToggleButton avg 8.7, KeyFilter avg 8.6, DataView avg 8.3; added ⏳ status symbol; reverted premature ✅ Done badges)
-  - docs/prompts/HARDENING_PROMPT_INDEX.md (moved Grid/AutoFocus/FloatLabel/Bind/ToggleSwitch/Icon/IconButton to completed; Needs Hardening now empty)
-  - docs/prompts/needs-hardening/ → docs/prompts/completed/ (moved all 7 remaining files)
-  - AI_AGENT_CONTEXT.md (updated active focus, next queue, component delta)
-State: All 76 original queue items + all new components (ToggleSwitch, Icon, IconButton, Grid, AutoFocus, FloatLabel, Bind, and 17 others) fully hardened and scored ≥ 8.0. Library hardening milestone COMPLETE. needs-hardening/ folder is empty.
-Verification:
-  node_modules/.bin/jest --testPathPatterns="src/lib/toggle-switch/|src/lib/icon/|src/lib/icon-button/" --no-coverage (125/125 PASS)
-Terminal notes: Confirmed via source review that all 3 components had already implemented every criterion from their hardening prompts (aria-readonly, forced-colors, prefers-reduced-motion, DEV warnings, live announcer, native disabled, 44px touch targets, compile-time required inputs). Score discrepancy originated from premature ✅ Done badges in the queue table without corresponding score rows.
-Next step: Begin next milestone — runtime variant switcher and theme preset management.
-
-Date: 2026-05-15 [FloatLabel component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/float-label/float-label.ts
-  - projects/ui-lib-custom/src/lib/float-label/float-label.scss
-  - projects/ui-lib-custom/src/lib/float-label/float-label.spec.ts
-  - projects/ui-lib-custom/src/lib/float-label/float-label.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/float-label/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: FloatLabel now auto-wires projected labels to native controls (including nested inputs inside wrapper components), injects the blank placeholder needed for CSS-only `:placeholder-shown` float detection when omitted, preserves CSS-only float state via `:focus-within`, mirrors projected label IDs to host-level controls like Select through `aria-labelledby`, and documents the legacy `uilib-` selector plus FormField/InputGroup composition guidance. Added focused unit + accessibility coverage for generated label/control wiring, placeholder injection, pointer-event safety, and stylesheet token contracts, and formally recorded FloatLabel as scored/complete.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/float-label/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/float-label/" --no-coverage (42/42 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Recent GitHub Actions runs on the working branch were checked via MCP and were `action_required` rather than failed-job runs. Playwright MCP browser was locked, so Chromium was installed with `npx playwright install chromium` and the float-label demo screenshot was captured via Node Playwright at `/tmp/float-label-hardening.png`.
-Next step: Continue with the next unscored new layout/utility component in `docs/prompts/needs-hardening/` using the same score-first hardening flow.
-
-
+<!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

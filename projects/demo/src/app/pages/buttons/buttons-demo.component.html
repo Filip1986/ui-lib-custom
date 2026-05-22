@@ -1,0 +1,806 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Button"
+    [importCode]="importCode"
+    description="Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised modifiers — all from a single <code>ui-lib-button</code> element."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
+      @for (v of variants; track v) {
+        <button
+          type="button"
+          class="buttons-demo__variant-btn"
+          [class.buttons-demo__variant-btn--active]="activeVariant() === v"
+          (click)="setVariant(v)"
+        >
+          {{ v }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- ── Section 1: Basic ──────────────────────────────────────────────────── -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">Default solid button with primary severity.</p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row">
+        <ui-lib-button [variant]="activeVariant()" (click)="logEvent('Default clicked')">
+          Default
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          severity="primary"
+          (click)="logEvent('Primary clicked')"
+        >
+          Primary
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          severity="secondary"
+          (click)="logEvent('Secondary clicked')"
+        >
+          Secondary
+        </ui-lib-button>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 2: All Appearances ──────────────────────────────────────── -->
+  <app-doc-section id="all-appearances" title="All Appearances">
+    <p class="demo-section__description">
+      Use <code>appearance</code> to pick any of the 12 visual styles. Every appearance composes
+      with any <code>severity</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row buttons-demo__row--wrap">
+        @for (a of appearances; track a) {
+          <ui-lib-button
+            [variant]="activeVariant()"
+            [appearance]="a"
+            severity="primary"
+            (click)="logEvent(a + ' clicked')"
+          >
+            {{ a }}
+          </ui-lib-button>
+        }
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section: Glass Shadow ──────────────────────────────────────────────── -->
+  <app-doc-section id="glass-shadow" title="Glass Shadow">
+    <h2 class="demo-section__title">Glass Shadow</h2>
+    <p class="demo-section__description">
+      A two-layer effect: a vivid gradient shadow offset behind a glassmorphic foreground button.
+      Hover shifts the shadow outward; active press snaps the button toward it.
+      Customize colors via <code>--uilib-button-glass-shadow-from</code> and
+      <code>--uilib-button-glass-shadow-to</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__glass-shadow-showcase">
+        <!-- Default warm gradient -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Default (warm)</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="glass-shadow"
+            size="lg"
+            (click)="logEvent('Glass Shadow clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Cool blue-purple gradient -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Cool gradient</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="glass-shadow"
+            size="lg"
+            style="
+              --uilib-button-glass-shadow-from: #667eea;
+              --uilib-button-glass-shadow-to: #764ba2;
+            "
+            (click)="logEvent('Glass Shadow cool clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Mint green gradient -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Mint gradient</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="glass-shadow"
+            size="lg"
+            style="
+              --uilib-button-glass-shadow-from: #11998e;
+              --uilib-button-glass-shadow-to: #38ef7d;
+            "
+            (click)="logEvent('Glass Shadow mint clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Pill variant -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Pill modifier</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="glass-shadow"
+            size="lg"
+            [pill]="true"
+            (click)="logEvent('Glass Shadow pill clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Disabled state -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Disabled</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="glass-shadow"
+            size="lg"
+            [disabled]="true"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section: Framed ──────────────────────────────────────────────────────── -->
+  <app-doc-section id="framed" title="Framed">
+    <h2 class="demo-section__title">Framed</h2>
+    <p class="demo-section__description">
+      A premium geometric design: solid button body framed by a thick outer border, with an
+      L-shaped offset frame that shifts on hover and snaps on press. Customize colors via
+      <code>--uilib-button-framed-bg</code>, <code>--uilib-button-framed-border-color</code>, and
+      <code>--uilib-button-framed-frame-color</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__framed-showcase">
+        <!-- Default (yellow + white border + yellow frame) -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Default</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            (click)="logEvent('Framed clicked')"
+          >
+            Button
+          </ui-lib-button>
+        </div>
+
+        <!-- Custom: electric blue -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Electric</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            style="
+              --uilib-button-framed-bg: #00d4ff;
+              --uilib-button-framed-fg: #000000;
+              --uilib-button-framed-border-color: #ffffff;
+              --uilib-button-framed-frame-color: #00d4ff;
+            "
+            (click)="logEvent('Framed electric clicked')"
+          >
+            Electric
+          </ui-lib-button>
+        </div>
+
+        <!-- Custom: hot pink -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Hot Pink</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            style="
+              --uilib-button-framed-bg: #ff2d78;
+              --uilib-button-framed-fg: #ffffff;
+              --uilib-button-framed-border-color: #ffffff;
+              --uilib-button-framed-frame-color: #ff2d78;
+            "
+            (click)="logEvent('Framed pink clicked')"
+          >
+            Hot Pink
+          </ui-lib-button>
+        </div>
+
+        <!-- Small size -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Small</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="sm"
+            (click)="logEvent('Framed small clicked')"
+          >
+            Small
+          </ui-lib-button>
+        </div>
+
+        <!-- Disabled state -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Disabled</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            [disabled]="true"
+          >
+            Button
+          </ui-lib-button>
+        </div>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 3: Appearance × Severity matrix ─────────────────────────── -->
+  <app-doc-section id="appearance-severity" title="Appearance × Severity">
+    <p class="demo-section__description">
+      Key appearances paired with every severity — demonstrating the two-axis model.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__matrix">
+        @for (a of matrixAppearances; track a) {
+          <div class="buttons-demo__matrix-row">
+            <span class="buttons-demo__matrix-label">{{ a }}</span>
+            <div class="buttons-demo__row buttons-demo__row--wrap">
+              @for (s of severities; track s) {
+                <ui-lib-button
+                  [variant]="activeVariant()"
+                  [appearance]="a"
+                  [severity]="s"
+                  size="sm"
+                >
+                  {{ s }}
+                </ui-lib-button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 4: Sizes ──────────────────────────────────────────────────── -->
+  <app-doc-section id="sizes" title="Sizes">
+    <p class="demo-section__description">
+      Three sizes: <code>sm</code>, <code>md</code>, and <code>lg</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__size-grid">
+        @for (s of sizes; track s) {
+          <div>
+            <p class="buttons-demo__size-label">{{ s }}</p>
+            <ui-lib-button [variant]="activeVariant()" [size]="s" severity="primary">
+              {{ s }}
+            </ui-lib-button>
+          </div>
+        }
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 5: Icons ──────────────────────────────────────────────────── -->
+  <app-doc-section id="icons" title="Icons">
+    <p class="demo-section__description">
+      Add icons on any side with <code>icon</code> and <code>iconPosition</code>. Set
+      <code>iconOnly</code> for square icon-only buttons.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row buttons-demo__row--wrap">
+        <ui-lib-button [variant]="activeVariant()" icon="arrow-left">Back</ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" icon="arrow-right" iconPosition="right">
+          Next
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="top">
+          Profile
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="bottom">
+          Profile
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="more-horizontal"
+          [iconOnly]="true"
+          ariaLabel="More options"
+        />
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 6: Pill & Raised modifiers ──────────────────────────────── -->
+  <app-doc-section id="pill-raised" title="Pill &amp; Raised">
+    <p class="demo-section__description">
+      <code>pill</code> applies a full 999 px border-radius; <code>raised</code> adds a drop
+      shadow. Both are orthogonal modifiers that compose with any appearance or severity.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row buttons-demo__row--wrap">
+        <ui-lib-button [variant]="activeVariant()" [raised]="true" severity="primary">
+          Raised
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [pill]="true" severity="primary">
+          Pill
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [raised]="true" [pill]="true" severity="primary">
+          Raised + Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          [pill]="true"
+          severity="success"
+          appearance="outline"
+        >
+          Outline Pill
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [pill]="true" appearance="ghost">
+          Ghost Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          [pill]="true"
+          appearance="soft"
+          severity="danger"
+        >
+          Soft Pill
+        </ui-lib-button>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 7: States ────────────────────────────────────────────────── -->
+  <app-doc-section id="states" title="States">
+    <p class="demo-section__description">
+      <code>disabled</code> prevents interaction; <code>loading</code> shows a spinner and blocks
+      clicks.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row">
+        <ui-lib-button [variant]="activeVariant()" [disabled]="true" severity="primary">
+          Disabled
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="primary">
+          Loading
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          [loading]="true"
+          severity="secondary"
+          appearance="outline"
+        >
+          Loading outline
+        </ui-lib-button>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 8: Badges ────────────────────────────────────────────────── -->
+  <app-doc-section id="badges" title="Badges">
+    <p class="demo-section__description">
+      Use the <code>badge</code> input to overlay a small counter. Control colour with
+      <code>badgeSeverity</code>.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row">
+        <ui-lib-button [variant]="activeVariant()" badge="5" severity="primary">
+          Notifications
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          badge="99+"
+          badgeSeverity="danger"
+          severity="secondary"
+        >
+          Messages
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          badge="1"
+          [iconOnly]="true"
+          icon="mail"
+          ariaLabel="Mail"
+        />
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 9: Tactile ───────────────────────────────────────────────── -->
+  <app-doc-section id="tactile" title="Tactile">
+    <p class="demo-section__description">
+      <code>appearance="tactile"</code> renders a glossy 3D button with gradient fill, inset
+      highlight, and a press-down active state. Severity controls the colour palette.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__tactile-grid">
+        <ui-lib-button
+          appearance="tactile"
+          severity="primary"
+          icon="search"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile primary clicked')"
+        >
+          Primary
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="success"
+          icon="check"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile success clicked')"
+        >
+          Success
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="danger"
+          icon="trash"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile danger clicked')"
+        >
+          Danger
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="warning"
+          icon="alert-triangle"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile warning clicked')"
+        >
+          Warning
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="info"
+          icon="info"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile info clicked')"
+        >
+          Info
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="help"
+          icon="help-circle"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile help clicked')"
+        >
+          Help
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="secondary"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile secondary clicked')"
+        >
+          Secondary
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="contrast"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile contrast clicked')"
+        >
+          Contrast
+        </ui-lib-button>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 10: Expressive appearances ──────────────────────────────── -->
+  <app-doc-section id="expressive" title="Expressive Appearances">
+    <p class="demo-section__description">
+      <code>elevated</code>, <code>gradient</code>, <code>glass</code>, and <code>neon</code>
+      showcase advanced CSS effects — each driven by the same severity tokens.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__row buttons-demo__row--wrap">
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="elevated"
+          severity="primary"
+          icon="layers"
+          (click)="logEvent('Elevated clicked')"
+        >
+          Elevated
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="elevated"
+          severity="success"
+          icon="check"
+          (click)="logEvent('Elevated success clicked')"
+        >
+          Elevated Success
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="gradient"
+          severity="primary"
+          icon="sparkles"
+          (click)="logEvent('Gradient primary clicked')"
+        >
+          Gradient
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="gradient"
+          severity="danger"
+          icon="flame"
+          (click)="logEvent('Gradient danger clicked')"
+        >
+          Gradient Danger
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="glass"
+          severity="primary"
+          icon="droplets"
+          (click)="logEvent('Glass primary clicked')"
+        >
+          Glass
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="glass"
+          severity="info"
+          [pill]="true"
+          (click)="logEvent('Glass pill clicked')"
+        >
+          Glass Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="neon"
+          severity="primary"
+          (click)="logEvent('Neon primary clicked')"
+        >
+          Neon
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="neon"
+          severity="success"
+          [pill]="true"
+          (click)="logEvent('Neon success clicked')"
+        >
+          Neon Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="flat"
+          severity="primary"
+          (click)="logEvent('Flat primary clicked')"
+        >
+          Flat
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="flat"
+          severity="secondary"
+          (click)="logEvent('Flat secondary clicked')"
+        >
+          Flat Secondary
+        </ui-lib-button>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 11: Button Groups ────────────────────────────────────────── -->
+  <app-doc-section id="button-groups" title="Button Groups">
+    <p class="demo-section__description">
+      Wrap buttons in <code>ui-lib-button-group</code> to join them visually.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__group-grid">
+        <div>
+          <p class="buttons-demo__size-label">Horizontal</p>
+          <ui-lib-button-group>
+            <ui-lib-button
+              [variant]="activeVariant()"
+              severity="primary"
+              (click)="logEvent('Save clicked')"
+            >
+              Save
+            </ui-lib-button>
+            <ui-lib-button
+              [variant]="activeVariant()"
+              severity="secondary"
+              (click)="logEvent('Edit clicked')"
+            >
+              Edit
+            </ui-lib-button>
+            <ui-lib-button
+              [variant]="activeVariant()"
+              severity="danger"
+              (click)="logEvent('Delete clicked')"
+            >
+              Delete
+            </ui-lib-button>
+          </ui-lib-button-group>
+        </div>
+        <div>
+          <p class="buttons-demo__size-label">Vertical</p>
+          <ui-lib-button-group [vertical]="true">
+            <ui-lib-button [variant]="activeVariant()">Top</ui-lib-button>
+            <ui-lib-button [variant]="activeVariant()">Middle</ui-lib-button>
+            <ui-lib-button [variant]="activeVariant()">Bottom</ui-lib-button>
+          </ui-lib-button-group>
+        </div>
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 12: Full Width ────────────────────────────────────────────── -->
+  <app-doc-section id="full-width" title="Full Width">
+    <p class="demo-section__description">
+      Set <code>[fullWidth]="true"</code> for a button that fills its container.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <ui-lib-button
+        [variant]="activeVariant()"
+        [fullWidth]="true"
+        severity="primary"
+        (click)="logEvent('Full width clicked')"
+      >
+        Full Width Button
+      </ui-lib-button>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  <!-- ── Section 13: Accessibility ──────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="buttons-demo__a11y-desc">
+      <code>ui-lib-button</code> renders a native <code>&lt;button&gt;</code> element and inherits
+      full keyboard and screen-reader support by default.
+    </p>
+
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <div class="buttons-demo__a11y-grid">
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
+
+      <ui-lib-panel header="ARIA attributes" variant="minimal">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            <strong>Icon-only buttons</strong> must provide <code>ariaLabel</code> — without visible
+            text there is no accessible name for screen readers.
+          </li>
+          <li>
+            <code>ariaPressed</code> — set on toggle buttons to communicate pressed state.
+          </li>
+          <li>
+            <code>ariaChecked</code> — use with <code>role="checkbox"</code> or
+            <code>role="radio"</code>.
+          </li>
+        </ul>
+      </ui-lib-panel>
+
+      <ui-lib-panel header="Colour &amp; contrast" variant="minimal">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            All built-in severity colours are tested to meet <strong>WCAG 2.1 AA</strong> contrast
+            requirements (4.5 : 1 for text).
+          </li>
+          <li>
+            The <code>ghost</code>, <code>neon</code>, and <code>glass</code> appearances may render
+            below 3 : 1 on some custom backgrounds — test with your palette before shipping.
+          </li>
+          <li>Never rely on colour alone to convey meaning.</li>
+        </ul>
+      </ui-lib-panel>
+
+      <ui-lib-panel header="Loading state" variant="minimal">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            When <code>[loading]="true"</code>, the button is automatically disabled and
+            <code>aria-busy="true"</code> is applied.
+          </li>
+          <li>
+            Pair the loading button with a live region (<code>aria-live="polite"</code>) to announce
+            progress to assistive technology.
+          </li>
+        </ul>
+      </ui-lib-panel>
+    </div>
+
+    <div class="buttons-demo__a11y-demo">
+      <p class="buttons-demo__a11y-demo-label">
+        Icon-only with <code>ariaLabel</code> — inspect the DOM or use a screen reader to verify:
+      </p>
+      <div class="buttons-demo__row">
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="trash"
+          [iconOnly]="true"
+          severity="danger"
+          ariaLabel="Delete item"
+          (click)="logEvent('Delete item (icon-only) clicked')"
+        />
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="edit"
+          [iconOnly]="true"
+          severity="info"
+          ariaLabel="Edit item"
+          (click)="logEvent('Edit item (icon-only) clicked')"
+        />
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="save"
+          [iconOnly]="true"
+          severity="success"
+          ariaLabel="Save item"
+          (click)="logEvent('Save item (icon-only) clicked')"
+        />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- ── Section 14: API Reference ────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-button</code>. Import from
+      <code>ui-lib-custom/button</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  <!-- ── Event log ─────────────────────────────────────────────────────────── -->
+  <app-doc-section id="event-log" title="Event Log">
+    <p class="demo-section__description">
+      Interact with the buttons above to see events.
+    </p>
+    <ui-lib-panel variant="minimal">
+      <div class="buttons-demo__log-panel">
+        @if (eventLog().length === 0) {
+          <p class="buttons-demo__log-empty">No events yet.</p>
+        } @else {
+          <ul class="buttons-demo__log-list">
+            @for (entry of eventLog(); track entry.timestamp + entry.message) {
+              <li class="buttons-demo__log-entry">
+                <span class="buttons-demo__log-time">{{ entry.timestamp }}</span>
+                <span class="buttons-demo__log-msg">{{ entry.message }}</span>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </ui-lib-panel>
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>
