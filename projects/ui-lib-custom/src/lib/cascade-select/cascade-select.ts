@@ -129,24 +129,15 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onChange: OutputEmitterRef<CascadeSelectChangeEvent> =
+  public readonly change: OutputEmitterRef<CascadeSelectChangeEvent> =
     output<CascadeSelectChangeEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onGroupChange: OutputEmitterRef<CascadeSelectGroupChangeEvent> =
+  public readonly groupChange: OutputEmitterRef<CascadeSelectGroupChangeEvent> =
     output<CascadeSelectGroupChangeEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onShow: OutputEmitterRef<CascadeSelectShowEvent> =
-    output<CascadeSelectShowEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onHide: OutputEmitterRef<CascadeSelectHideEvent> =
-    output<CascadeSelectHideEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onClear: OutputEmitterRef<void> = output<void>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly show: OutputEmitterRef<CascadeSelectShowEvent> = output<CascadeSelectShowEvent>();
+  public readonly hide: OutputEmitterRef<CascadeSelectHideEvent> = output<CascadeSelectHideEvent>();
+  public readonly clear: OutputEmitterRef<void> = output<void>();
+  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   public readonly optionTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     CascadeSelectOptionDirective,
@@ -205,6 +196,19 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
   private onModelChange: (value: unknown) => void = (): void => {};
   private onModelTouched: () => void = (): void => {};
+
+  constructor() {
+    // Wire focus/blur as imperative listeners to prevent Angular from conflating
+    // the output names ('focus'/'blur') with the native host events, which would
+    // create a circular dispatch via the compiler-generated host-event bindings.
+    const hostEl: HTMLElement = this.hostElement.nativeElement;
+    hostEl.addEventListener('focus', (event: FocusEvent): void => {
+      this.onHostFocus(event);
+    });
+    hostEl.addEventListener('blur', (event: FocusEvent): void => {
+      this.onHostBlur(event);
+    });
+  }
 
   public readonly controlId: Signal<string> = computed<string>((): string => {
     const id: string = this.inputId().trim();
@@ -317,7 +321,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     this.panelVisible.set(true);
     this.initializeNavigationFromValue();
-    this.onShow.emit({ originalEvent: event });
+    this.show.emit({ originalEvent: event });
   }
 
   public closePanel(event: Event): void {
@@ -331,7 +335,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.focusedItemId.set('');
     this.focusedLevel.set(0);
     this.onModelTouched();
-    this.onHide.emit({ originalEvent: event });
+    this.hide.emit({ originalEvent: event });
   }
 
   public clearSelection(event: Event): void {
@@ -341,8 +345,8 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     this.internalValue.set(null);
     this.onModelChange(null);
-    this.onClear.emit();
-    this.onChange.emit({ originalEvent: event, value: null });
+    this.clear.emit();
+    this.change.emit({ originalEvent: event, value: null });
   }
 
   public onOptionInteraction(event: Event, level: number, option: unknown): void {
@@ -359,7 +363,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     const value: unknown = this.resolveOptionValue(option);
     this.internalValue.set(value);
     this.onModelChange(value);
-    this.onChange.emit({ originalEvent: event, value });
+    this.change.emit({ originalEvent: event, value });
     this.closePanel(event);
   }
 
@@ -585,15 +589,17 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.positionMountedPanel();
   }
 
-  @HostListener('focus', ['$event'])
+  // focus/blur are wired imperatively to avoid the Angular HostListener + output
+  // naming conflict: when both @HostListener('blur') and output<FocusEvent>() named
+  // 'blur' exist on the same element, Angular creates a circular dispatch loop.
+  // Imperative addEventListener bypasses the Angular event-binding system entirely.
   public onHostFocus(event: FocusEvent): void {
-    this.onFocus.emit(event);
+    this.focus.emit(event);
   }
 
-  @HostListener('blur', ['$event'])
   public onHostBlur(event: FocusEvent): void {
-    this.onBlur.emit(event);
     this.onModelTouched();
+    this.blur.emit(event);
   }
 
   public onKeydown(event: KeyboardEvent): void {
@@ -726,7 +732,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.activePath.set(nextPath);
 
     if (this.isOptionGroup(option, level)) {
-      this.onGroupChange.emit({ originalEvent: event, level, value: option });
+      this.groupChange.emit({ originalEvent: event, level, value: option });
     }
   }
 
@@ -818,7 +824,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     }
 
     if (parentOption) {
-      this.onGroupChange.emit({ originalEvent: event, level: parentLevel, value: parentOption });
+      this.groupChange.emit({ originalEvent: event, level: parentLevel, value: parentOption });
     }
   }
 

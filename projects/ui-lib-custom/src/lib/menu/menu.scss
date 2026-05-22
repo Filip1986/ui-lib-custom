@@ -7,13 +7,9 @@
 ui-lib-menu {
   // ── Component tokens ─────────────────────────────────────────────────────
 
-  --uilib-menu-bg: var(--uilib-surface-overlay, #ffffff);
-  --uilib-menu-border: 1px solid var(--uilib-color-neutral-200, #e5e7eb);
-  --uilib-menu-shadow: var(
-    --uilib-shadow-md,
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -2px rgba(0, 0, 0, 0.1)
-  );
+  --uilib-menu-bg: var(--uilib-surface-overlay, var(--uilib-surface));
+  --uilib-menu-border: 1px solid var(--uilib-color-neutral-200, var(--uilib-border));
+  --uilib-menu-shadow: var(--uilib-shadow-md, none);
   --uilib-menu-radius: var(--uilib-radius-md, 0.375rem);
   --uilib-menu-z-index: var(--uilib-z-overlay, 1000);
   --uilib-menu-min-width: 12rem;
@@ -29,18 +25,18 @@ ui-lib-menu {
   --uilib-menu-item-padding-y-sm: var(--uilib-spacing-1, 0.25rem);
   --uilib-menu-item-padding-y-lg: var(--uilib-spacing-3, 0.75rem);
 
-  --uilib-menu-item-color: var(--uilib-color-neutral-800, #1f2937);
-  --uilib-menu-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
-  --uilib-menu-item-color-hover: var(--uilib-color-neutral-900, #111827);
-  --uilib-menu-item-color-disabled: var(--uilib-color-neutral-400, #9ca3af);
+  --uilib-menu-item-color: var(--uilib-color-neutral-800, var(--uilib-page-fg));
+  --uilib-menu-item-bg-hover: var(--uilib-color-neutral-100, var(--uilib-surface-b));
+  --uilib-menu-item-color-hover: var(--uilib-color-neutral-900, var(--uilib-page-fg));
+  --uilib-menu-item-color-disabled: var(--uilib-color-neutral-400, var(--uilib-muted));
 
   --uilib-menu-icon-size: 1em;
   --uilib-menu-icon-gap: var(--uilib-spacing-2, 0.5rem);
 
-  --uilib-menu-separator-color: var(--uilib-color-neutral-200, #e5e7eb);
+  --uilib-menu-separator-color: var(--uilib-color-neutral-200, var(--uilib-border));
   --uilib-menu-separator-my: var(--uilib-spacing-1, 0.25rem);
 
-  --uilib-menu-group-label-color: var(--uilib-color-neutral-500, #6b7280);
+  --uilib-menu-group-label-color: var(--uilib-color-neutral-500, var(--uilib-muted));
   --uilib-menu-group-label-font-size: 0.75em;
   --uilib-menu-group-label-padding-x: var(--uilib-spacing-3, 0.75rem);
   --uilib-menu-group-label-padding-y: var(--uilib-spacing-2, 0.5rem);
@@ -49,7 +45,7 @@ ui-lib-menu {
   --uilib-menu-group-label-letter-spacing: 0.05em;
 
   --uilib-menu-focus-shadow: 0 0 0 2px
-    color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 35%, transparent);
+    color-mix(in srgb, var(--uilib-color-primary-500) 35%, transparent);
 
   // ── Static-mode host ──────────────────────────────────────────────────────
   // In static mode the host is a normal block element; the panel flows inline.
@@ -222,7 +218,7 @@ ui-lib-menu.ui-lib-menu--variant-material {
   --uilib-menu-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
   --uilib-menu-item-color-hover: var(--uilib-color-primary-700, #1d4ed8);
   --uilib-menu-focus-shadow: 0 0 0 2px
-    color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 35%, transparent);
+    color-mix(in srgb, var(--uilib-color-primary-500) 35%, transparent);
 }
 
 ui-lib-menu.ui-lib-menu--variant-material .ui-lib-menu__panel {

@@ -120,7 +120,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
     ];
 
     if (this.appearance() === 'filled') {
-      classes.push('checkbox--filled');
+      classes.push('ui-lib-checkbox--filled');
     }
 
     if (this.checked()) {

@@ -117,8 +117,7 @@ export class Card {
   }
 
   private readTheme(): ThemeScopeInput | null {
-    const read: () => ThemeScopeInput | null = this.theme as () => ThemeScopeInput | null;
-    return read();
+    return this.theme();
   }
 
   private applyThemeScope(): void {

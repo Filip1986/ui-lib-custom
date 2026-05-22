@@ -371,9 +371,9 @@ describe('UiLibCascadeSelect unit', (): void => {
     expect(cmpEl().classList.contains('uilib-inputwrapper-focus')).toBeTruthy();
   });
 
-  it('selects leaf option, emits onChange, and closes panel', (): void => {
-    const changeSpy: jest.SpiedFunction<typeof component.onChange.emit> = jest.spyOn(
-      component.onChange,
+  it('selects leaf option, emits change, and closes panel', (): void => {
+    const changeSpy: jest.SpiedFunction<typeof component.change.emit> = jest.spyOn(
+      component.change,
       'emit'
     );
 
@@ -402,9 +402,9 @@ describe('UiLibCascadeSelect unit', (): void => {
     expect(component.internalValue()).toBeNull();
   });
 
-  it('emits onGroupChange when entering a group', (): void => {
-    const groupSpy: jest.SpiedFunction<typeof component.onGroupChange.emit> = jest.spyOn(
-      component.onGroupChange,
+  it('emits groupChange when entering a group', (): void => {
+    const groupSpy: jest.SpiedFunction<typeof component.groupChange.emit> = jest.spyOn(
+      component.groupChange,
       'emit'
     );
 
@@ -601,9 +601,9 @@ describe('UiLibCascadeSelect unit', (): void => {
     expect(panelEl()).toBeFalsy();
   });
 
-  it('showClear clears value and emits onClear', (): void => {
-    const clearSpy: jest.SpiedFunction<typeof component.onClear.emit> = jest.spyOn(
-      component.onClear,
+  it('showClear clears value and emits clear', (): void => {
+    const clearSpy: jest.SpiedFunction<typeof component.clear.emit> = jest.spyOn(
+      component.clear,
       'emit'
     );
     component.writeValue('TOR');

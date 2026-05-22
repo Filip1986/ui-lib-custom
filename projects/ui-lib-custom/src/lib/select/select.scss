@@ -36,6 +36,8 @@ ui-lib-select .ui-lib-select {
   --uilib-select-empty-padding: calc(
     var(--uilib-select-empty-padding-base) * var(--uilib-density, 1)
   );
+  --uilib-select-panel-max-height: 260px;
+  --uilib-select-panel-z-index: var(--uilib-z-dropdown, 10);
 
   display: flex;
   flex-direction: column;
@@ -103,9 +105,9 @@ ui-lib-select .ui-lib-select__panel {
   border: 1px solid var(--uilib-select-border, var(--uilib-border));
   border-radius: var(--uilib-select-radius, var(--uilib-shape-base, 6px));
   box-shadow: var(--uilib-select-dropdown-shadow, var(--uilib-shadow-md, none));
-  max-height: 260px;
+  max-height: var(--uilib-select-panel-max-height);
   overflow: auto;
-  z-index: 10;
+  z-index: var(--uilib-select-panel-z-index);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

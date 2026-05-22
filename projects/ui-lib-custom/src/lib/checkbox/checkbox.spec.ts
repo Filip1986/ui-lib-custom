@@ -123,14 +123,14 @@ describe('Checkbox', (): void => {
     const el: HTMLElement = checkboxEl();
     expect(el.className).toContain('ui-lib-checkbox--variant-bootstrap');
     expect(el.className).toContain('ui-lib-checkbox--size-lg');
-    expect(el.className).toContain('checkbox--filled');
+    expect(el.className).toContain('ui-lib-checkbox--filled');
     expect(el.className).toContain('ui-lib-checkbox--checked');
   });
 
   it('uses outlined appearance by default', (): void => {
     fixture.detectChanges();
 
-    expect(checkboxEl().className).not.toContain('checkbox--filled');
+    expect(checkboxEl().className).not.toContain('ui-lib-checkbox--filled');
   });
 
   it('toggles checked state on click when enabled', (): void => {
@@ -196,7 +196,7 @@ describe('Checkbox', (): void => {
 
       const element: HTMLElement = checkboxEl();
       expect(element.classList.contains(`ui-lib-checkbox--variant-${variant}`)).toBeTruthy();
-      expect(element.classList.contains('checkbox--filled')).toBeTruthy();
+      expect(element.classList.contains('ui-lib-checkbox--filled')).toBeTruthy();
     });
   });
 
