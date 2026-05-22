@@ -1,0 +1,53 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/London
+    open-pull-requests-limit: 5
+    groups:
+      angular:
+        patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+          - "@schematics/*"
+          - "@angular-eslint/*"
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/*"
+      testing:
+        patterns:
+          - "jest*"
+          - "@jest/*"
+          - "jest-axe"
+          - "@playwright/*"
+          - "jest-preset-angular"
+      storybook:
+        patterns:
+          - "@storybook/*"
+          - "storybook"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/London
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "ci(deps)"
+
