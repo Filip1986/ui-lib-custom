@@ -8,6 +8,8 @@ import {
   TableColumnComponent,
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
@@ -39,6 +41,7 @@ import {
 } from './snippets.generated';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+
 interface InputRow {
   readonly input: string;
   readonly type: string;
@@ -56,13 +59,6 @@ interface ProjectionRow {
   readonly slot: string;
   readonly selector: string;
   readonly description: string;
-}
-
-interface AriaRow {
-  readonly element: string;
-  readonly attribute: string;
-  readonly value: string;
-  readonly notes: string;
 }
 
 /**
@@ -85,6 +81,7 @@ interface AriaRow {
     DocQualityBadgeComponent,
     DocCodeExampleComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
@@ -312,7 +309,7 @@ export class PanelDemoComponent {
     },
   ];
 
-  public readonly ariaRows: AriaRow[] = [
+  public readonly ariaRows: readonly AriaRow[] = [
     {
       element: 'Host',
       attribute: '<code>role</code>',

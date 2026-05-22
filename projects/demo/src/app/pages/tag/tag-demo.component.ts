@@ -3,11 +3,6 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Tag } from 'ui-lib-custom/tag';
 import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
 import { Button } from 'ui-lib-custom/button';
-import {
-  TableComponent,
-  TableColumnComponent,
-  TableColumnBodyDirective,
-} from 'ui-lib-custom/table';
 import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -21,14 +16,9 @@ import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-ba
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
-
-interface AriaRow {
-  readonly attribute: string;
-  readonly element: string;
-  readonly value: string;
-  readonly notes: string;
-}
 
 /**
  * Demo page for the Tag component.
@@ -40,9 +30,6 @@ interface AriaRow {
     CodeSnippet,
     Tag,
     Button,
-    TableComponent,
-    TableColumnComponent,
-    TableColumnBodyDirective,
     DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
@@ -50,6 +37,7 @@ interface AriaRow {
     DocKeyboardNavComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
+    DocAriaTableComponent,
     DocSectionComponent,
   ],
   templateUrl: './tag-demo.component.html',
@@ -242,7 +230,7 @@ export class TagDemoComponent {
     },
   ];
 
-  public readonly ariaRows: AriaRow[] = [
+  public readonly ariaRows: readonly AriaRow[] = [
     {
       attribute: 'id',
       element: 'Host',
