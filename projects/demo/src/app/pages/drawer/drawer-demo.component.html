@@ -1,19 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Drawer</h1>
-      <code class="demo-page-header__import">import &#123; Drawer &#125; from 'ui-lib-custom/drawer'</code>
-    </div>
-    <p class="demo-page-header__description">
-      A panel that slides in from the edge of the viewport. Supports four positions,
-      three design variants, and flexible content projection.
-    </p>
-  </header>
+  <app-doc-page-header
+    docHeader
+    title="Drawer"
+    [importCode]="importCode"
+    description="A panel that slides in from the edge of the viewport. Supports four positions, three design variants, and flexible content projection."
+  />
 
   <!-- Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">Click to open a right-side drawer with a header and content.</p>
     <div class="demo-section__content">
       <ui-lib-button type="button" (click)="basicOpen.set(true)">Open Drawer</ui-lib-button>
@@ -23,11 +18,10 @@
       <p>This is the default drawer sliding in from the right. Use <code>[(visible)]</code> to control open state.</p>
       <p>You can project any content inside the drawer body.</p>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Positions -->
-  <section class="demo-section" id="positions" data-doc-anchor>
-    <h2 class="demo-section__title">Positions</h2>
+  <app-doc-section id="positions" title="Positions">
     <p class="demo-section__description">
       Use the <code>position</code> input to slide the drawer in from any edge.
     </p>
@@ -45,11 +39,10 @@
     >
       <p>Drawer is sliding in from the <strong>{{ currentPosition() }}</strong>.</p>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="design-variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <app-doc-section id="design-variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants match the library's global theme: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
     </p>
@@ -66,11 +59,10 @@
     >
       <p>This drawer uses the <strong>{{ currentVariant() }}</strong> design variant.</p>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- No modal -->
-  <section class="demo-section" id="without-backdrop" data-doc-anchor>
-    <h2 class="demo-section__title">Without Backdrop</h2>
+  <app-doc-section id="without-backdrop" title="Without Backdrop">
     <p class="demo-section__description">
       Set <code>[modal]="false"</code> to remove the backdrop — the rest of the page stays interactive.
     </p>
@@ -82,11 +74,10 @@
       <p>The page behind this drawer remains scrollable and interactive.</p>
       <ui-lib-button size="sm" type="button" (click)="noBackdropOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Footer slot -->
-  <section class="demo-section" id="with-footer" data-doc-anchor>
-    <h2 class="demo-section__title">With Footer</h2>
+  <app-doc-section id="with-footer" title="With Footer">
     <p class="demo-section__description">
       Project an element with <code>drawerFooter</code> attribute to render a sticky footer.
     </p>
@@ -114,11 +105,10 @@
         <ui-lib-button type="button" (click)="footerOpen.set(false)">Save changes</ui-lib-button>
       </div>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- Full-screen -->
-  <section class="demo-section" id="full-screen" data-doc-anchor>
-    <h2 class="demo-section__title">Full Screen</h2>
+  <app-doc-section id="full-screen" title="Full Screen">
     <p class="demo-section__description">
       Set <code>size="100vw"</code> (or <code>100vh</code> for top/bottom) for a full-screen drawer.
     </p>
@@ -130,62 +120,39 @@
       <p>This drawer spans the full viewport width.</p>
       <ui-lib-button type="button" (click)="fullScreenOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
-  </section>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="demo-section" id="api-reference" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-subsection__title">Inputs</h3>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>visible</code></td><td><code>model&lt;boolean&gt;</code></td><td><code>false</code></td><td>Two-way binding to control open/close.</td></tr>
-          <tr><td><code>header</code></td><td><code>string</code></td><td><code>''</code></td><td>Header title text.</td></tr>
-          <tr><td><code>position</code></td><td><code>'left'|'right'|'top'|'bottom'</code></td><td><code>'right'</code></td><td>Which edge the drawer slides from.</td></tr>
-          <tr><td><code>size</code></td><td><code>string</code></td><td><code>'300px'</code></td><td>Panel width (left/right) or height (top/bottom).</td></tr>
-          <tr><td><code>modal</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the semi-transparent backdrop.</td></tr>
-          <tr><td><code>closeOnBackdrop</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Close on backdrop click.</td></tr>
-          <tr><td><code>closeOnEscape</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Close on Escape key.</td></tr>
-          <tr><td><code>blockScroll</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Lock body scroll while open.</td></tr>
-          <tr><td><code>showCloseButton</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the built-in X close button.</td></tr>
-          <tr><td><code>variant</code></td><td><code>DrawerVariant | null</code></td><td><code>null</code></td><td>Visual variant (inherits from theme service).</td></tr>
-          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS classes on the host.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference [rows]="apiInputRows" />
 
     <h3 class="demo-subsection__title">Outputs</h3>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>shown</code></td><td><code>void</code></td><td>Emits after the drawer opens.</td></tr>
-          <tr><td><code>hidden</code></td><td><code>void</code></td><td>Emits after the drawer closes.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
     <h3 class="demo-subsection__title">Content Projection</h3>
-    <div class="demo-api-table-wrapper">
-      <table class="demo-api-table">
-        <thead>
-          <tr><th>Slot</th><th>Selector</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Body</td><td><em>(default)</em></td><td>Scrollable main content.</td></tr>
-          <tr><td>Custom header</td><td><code>[drawerHeader]</code></td><td>Replaces the header title area.</td></tr>
-          <tr><td>Footer</td><td><code>[drawerFooter]</code></td><td>Sticky footer at the bottom of the panel.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
+  </app-doc-section>
 
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

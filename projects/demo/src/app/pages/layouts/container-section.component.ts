@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { UiLibSelect } from 'ui-lib-custom/select';
@@ -10,11 +9,14 @@ import { CONTAINER_MAX_WIDTHS, INSET_TOKENS } from 'ui-lib-custom/tokens';
 import type { ContainerSize, InsetToken } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for container layout usage.
  */
@@ -22,10 +24,10 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   selector: 'app-layout-container-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Container,
     Grid,
     Stack,
@@ -33,8 +35,10 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     Tab,
     UiLibSelect,
     DocDemoViewportComponent,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './container-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -43,12 +47,32 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 export class ContainerSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'container', label: 'Container' }];
 
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Max-width preset.' },
+    { name: 'inset', type: 'SpacingToken', description: 'Semantic padding inside the container.' },
+    {
+      name: 'fullWidth',
+      type: 'boolean',
+      description: 'Stretch container to parent width.',
+    },
+  ];
+
   public readonly usageSnippet: string = `
 <ui-lib-container size="md" inset="lg">
   <h3>Content title</h3>
   <p class="no-margin">Keep content aligned with page max-width.</p>
 </ui-lib-container>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Container } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Container],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

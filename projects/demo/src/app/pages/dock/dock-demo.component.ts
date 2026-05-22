@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Dock } from 'ui-lib-custom/dock';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -9,22 +10,74 @@ import type {
   DockSize,
   DockVariant,
 } from 'ui-lib-custom/dock';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Dock component.
  */
 @Component({
   selector: 'app-dock-demo',
   standalone: true,
-  imports: [Dock, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Dock,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+  ],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DockDemoComponent {
+  public readonly importCode: string = "import { Dock } from 'ui-lib-custom/dock'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+  public readonly snippetBasic: string = `{} osItems: DockItem[] = [\n  { label: 'Finder', icon: 'pi pi-folder', command: handler },\n  { label: 'Terminal', icon: 'pi pi-code', command: handler },\n  // ...\n];\n\n<ui-lib-dock [items]="osItems" position="bottom" variant="material" />`;
+  public readonly snippetVariants: string = `<ui-lib-dock [items]="items" variant="material" />\n<ui-lib-dock [items]="items" variant="bootstrap" />\n<ui-lib-dock [items]="items" variant="minimal" />`;
+  public readonly snippetSizes: string = `<ui-lib-dock [items]="items" size="sm" />\n<ui-lib-dock [items]="items" size="md" />\n<ui-lib-dock [items]="items" size="lg" />`;
+  public readonly snippetPositions: string = `<ui-lib-dock [items]="items" position="bottom" />\n<ui-lib-dock [items]="items" position="top" />\n<ui-lib-dock [items]="items" position="left" />\n<ui-lib-dock [items]="items" position="right" />`;
+  public readonly snippetNoMagnification: string = `<ui-lib-dock [items]="items" [magnification]="false" />`;
+  public readonly snippetDisabledItems: string = `const items: DockItem[] = [\n  { label: 'Home', icon: 'pi pi-home', command: handler },\n  { label: 'Search', icon: 'pi pi-search', disabled: true },\n  // ...\n];`;
+  public readonly snippetLinkItems: string = `// Anchor with external URL\n{ label: 'Anthropic', icon: 'pi pi-external-link', url: 'https://anthropic.com', target: '_blank' }\n\n// Angular RouterLink\n{ label: 'Home', icon: 'pi pi-home', routerLink: '/' }\n\n// Button with command\n{ label: 'Settings', icon: 'pi pi-cog', command: handler }`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -38,12 +91,48 @@ export class DockDemoComponent {
     { id: 'disabled-items', label: 'Disabled Items' },
     { id: 'link-items', label: 'Link Items' },
     { id: 'playground', label: 'Interactive Playground' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'model', type: 'DockItem[]', default: '[]', description: 'Array of dock items.' },
+    {
+      name: 'position',
+      type: "'bottom' | 'top' | 'left' | 'right'",
+      default: "'bottom'",
+      description: 'Position of the dock on screen.',
+    },
+    {
+      name: 'magnification',
+      type: 'boolean',
+      default: 'true',
+      description: 'Enables zoom magnification on hover.',
+    },
+    {
+      name: 'magnificationScale',
+      type: 'number',
+      default: '1.5',
+      description: 'Scale multiplier applied to hovered items.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Dock'",
+      description: 'Accessible label for the dock navigation.',
+    },
+  ];
 
   // ── Controls ──────────────────────────────────────────────────────────────
 
@@ -199,4 +288,167 @@ export class DockDemoComponent {
   public setPosition(position: DockPosition): void {
     this.position.set(position);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Dock container',
+      attribute: 'role',
+      value: '"navigation"',
+      notes: 'The dock is announced as a navigation landmark.',
+    },
+    {
+      element: 'Dock container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Passed via <code>[ariaLabel]</code> to name the navigation region.',
+    },
+    {
+      element: 'Dock item',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Each item uses its <code>label</code> property as the accessible name.',
+    },
+    {
+      element: 'Dock item (link)',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Items rendered as links get <code>menuitem</code> semantics inside the nav.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', suffix: 'horizontal dock', action: 'Move focus between dock items.' },
+    { key: '↑ / ↓', suffix: 'vertical dock', action: 'Move focus between dock items.' },
+    {
+      key: 'Enter / Space',
+      action: 'Activate the focused dock item (runs command or follows link).',
+    },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Move focus into or out of the dock in the standard tab order.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'items',
+      type: 'DockItem[]',
+      default: '[]',
+      description: 'Array of items to display in the dock.',
+    },
+    {
+      name: 'position',
+      type: "'bottom' | 'top' | 'left' | 'right'",
+      default: "'bottom'",
+      description: 'Edge of the container where the dock is anchored.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design-system variant. Falls back to ThemeConfigService when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Controls item and icon dimensions via design tokens.',
+    },
+    {
+      name: 'magnification',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether the hover magnification effect is enabled.',
+    },
+    {
+      name: 'magnificationLevel',
+      type: 'number',
+      default: '1.5',
+      description:
+        'Maximum scale factor applied to the directly hovered item. Values 1.2–2.5 work well.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class appended to the host element.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'itemClick',
+      type: 'DockItemCommandEvent',
+      description: 'Emitted when any enabled item is clicked or activated via keyboard.',
+    },
+  ];
+
+  public readonly apiDockItemRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      description: 'Accessible label and tooltip text shown on hover.',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      description: "Icon class(es) applied to the icon element (e.g. 'pi pi-home').",
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      description: 'When true, the item is non-interactive and styled as disabled.',
+    },
+    {
+      name: 'visible',
+      type: 'boolean',
+      description: 'When explicitly false, the item is excluded from the rendered list.',
+    },
+    {
+      name: 'command',
+      type: '(event: DockItemCommandEvent) => void',
+      description: 'Callback invoked when the item is activated. Renders as a button.',
+    },
+    { name: 'url', type: 'string', description: 'External URL. Renders as an <a href> element.' },
+    {
+      name: 'routerLink',
+      type: 'string | string[]',
+      description: 'Angular Router link. Renders as a [routerLink] anchor.',
+    },
+    { name: 'target', type: 'string', description: "Anchor target attribute (e.g. '_blank')." },
+    {
+      name: 'styleClass',
+      type: 'string',
+      description: 'Extra CSS class added to the item list element.',
+    },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-dock-item-size-sm', description: 'Item size — sm.' },
+    { variable: '--uilib-dock-item-size-md', description: 'Item size — md.' },
+    { variable: '--uilib-dock-item-size-lg', description: 'Item size — lg.' },
+    { variable: '--uilib-dock-icon-size-sm', description: 'Icon size — sm.' },
+    { variable: '--uilib-dock-icon-size-md', description: 'Icon size — md.' },
+    { variable: '--uilib-dock-icon-size-lg', description: 'Icon size — lg.' },
+    { variable: '--uilib-dock-gap', description: 'Gap.' },
+    { variable: '--uilib-dock-padding', description: 'Padding.' },
+    { variable: '--uilib-dock-radius', description: 'Border radius.' },
+    { variable: '--uilib-dock-bg', description: 'Background colour.' },
+    { variable: '--uilib-dock-border-color', description: 'Border colour.' },
+    { variable: '--uilib-dock-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-dock-item-bg', description: 'Item background colour.' },
+    { variable: '--uilib-dock-item-bg-hover', description: 'Item background colour (hover).' },
+    { variable: '--uilib-dock-item-radius', description: 'Item border radius.' },
+    { variable: '--uilib-dock-item-color', description: 'Item text colour.' },
+    { variable: '--uilib-dock-item-color-hover', description: 'Item text colour (hover).' },
+    { variable: '--uilib-dock-item-color-disabled', description: 'Item text colour (disabled).' },
+    { variable: '--uilib-dock-item-transition', description: 'Item transition.' },
+    { variable: '--uilib-dock-tooltip-bg', description: 'Tooltip background colour.' },
+    { variable: '--uilib-dock-tooltip-color', description: 'Tooltip text colour.' },
+    { variable: '--uilib-dock-tooltip-font-size', description: 'Tooltip Font size.' },
+    { variable: '--uilib-dock-tooltip-padding', description: 'Tooltip padding.' },
+    { variable: '--uilib-dock-tooltip-radius', description: 'Tooltip border radius.' },
+    { variable: '--uilib-dock-tooltip-shadow', description: 'Tooltip box shadow.' },
+    { variable: '--uilib-dock-item-size', description: 'Item size.' },
+    { variable: '--uilib-dock-icon-size', description: 'Icon size.' },
+  ];
 }

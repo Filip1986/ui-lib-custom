@@ -1,20 +1,13 @@
 <app-doc-page-layout [sections]="sections">
-
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Menubar</h1>
-      <code class="demo-page-header__import">import &#123; Menubar &#125; from 'ui-lib-custom/menubar'</code>
-    </div>
-    <p class="demo-page-header__description">
-      A horizontal navigation bar with dropdown submenus. Items can have nested sub-panels for
-      hierarchical navigation. Supports start/end content projection, three visual variants,
-      three sizes, and a responsive mobile toggle.
-    </p>
-  </header>
+  <app-doc-page-header
+    docHeader
+    title="Menubar"
+    [importCode]="importCode"
+    description="A horizontal navigation bar with dropdown submenus. Items can have nested sub-panels for hierarchical navigation. Supports start/end content projection, three visual variants, three sizes, and a responsive mobile toggle."
+  />
 
   <!-- Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Top-level items with dropdown menus. Items with an
       <code>items</code> array open a single-column panel below the bar.
@@ -22,48 +15,45 @@
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="basicModel" />
     </div>
-    <pre class="demo-section__code"><code>&#123;&#123; basicModel &#125;&#125;
-&lt;ui-lib-menubar [model]="basicModel" /&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
   <!-- Nested submenus -->
-  <section class="demo-section" id="nested-submenus" data-doc-anchor>
-    <h2 class="demo-section__title">Nested Submenus</h2>
+  <app-doc-section id="nested-submenus" title="Nested Submenus">
     <p class="demo-section__description">
-      Sub-items with an <code>items</code> array open a nested panel to the right.
-      Hover over an item with the &#8250; caret to see the nested panel.
+      Sub-items with an <code>items</code> array open a nested panel to the right. Hover over an
+      item with the &#8250; caret to see the nested panel.
     </p>
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="nestedModel" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Disabled items -->
-  <section class="demo-section" id="disabled-items" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Items</h2>
+  <app-doc-section id="disabled-items" title="Disabled Items">
     <p class="demo-section__description">
       Use <code>disabled: true</code> on root or sub items to prevent interaction.
     </p>
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="disabledModel" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Command callbacks -->
-  <section class="demo-section" id="command-callbacks" data-doc-anchor>
-    <h2 class="demo-section__title">Command Callbacks</h2>
+  <app-doc-section id="command-callbacks" title="Command Callbacks">
     <p class="demo-section__description">
       Attach a <code>command</code> function to any leaf item to react to activations.
     </p>
     <div class="demo-section__preview">
       <ui-lib-menubar [model]="commandModel" />
-      <p class="demo-hint">Last action: <strong>{{ lastClickedLabel() }}</strong></p>
+      <p class="demo-hint">
+        Last action: <strong>{{ lastClickedLabel() }}</strong>
+      </p>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- itemClick output / event log -->
-  <section class="demo-section" id="item-click-output" data-doc-anchor>
-    <h2 class="demo-section__title">itemClick Output</h2>
+  <app-doc-section id="item-click-output" title="itemClick Output">
     <p class="demo-section__description">
       The <code>(itemClick)</code> output fires whenever a leaf item is activated.
     </p>
@@ -81,11 +71,10 @@
         }
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Start / End slots -->
-  <section class="demo-section" id="start-end-slots" data-doc-anchor>
-    <h2 class="demo-section__title">Start / End Slots</h2>
+  <app-doc-section id="start-end-slots" title="Start / End Slots">
     <p class="demo-section__description">
       Project content into the bar using the <code>menubarStart</code> and
       <code>menubarEnd</code> attribute selectors.
@@ -96,18 +85,14 @@
         <span menubarEnd class="demo-user">&#128100; Account</span>
       </ui-lib-menubar>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-menubar [model]="items"&gt;
-  &lt;span menubarStart&gt;MyApp&lt;/span&gt;
-  &lt;button menubarEnd&gt;Sign In&lt;/button&gt;
-&lt;/ui-lib-menubar&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="startEndHtml" [typescript]="startEndTs" />
+  </app-doc-section>
 
   <!-- Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
-      Three built-in design variants: <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code>.
+      Three built-in design variants: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>.
     </p>
     <div class="demo-section__variants">
       <div class="demo-section__variant-row">
@@ -123,11 +108,10 @@
         <ui-lib-menubar [model]="basicModel" variant="minimal" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Sizes -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -145,11 +129,10 @@
         <ui-lib-menubar [model]="basicModel" size="lg" />
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Switch variant and size interactively.</p>
     <div class="demo-section__controls">
       <div class="demo-control-group">
@@ -162,7 +145,8 @@
               size="sm"
               type="button"
               (click)="setVariant(v)"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -176,7 +160,8 @@
               size="sm"
               type="button"
               (click)="setSize(s)"
-            >{{ s }}</ui-lib-button>
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -188,72 +173,38 @@
         [size]="playgroundSize()"
       />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API Table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
-
+  <app-doc-section id="api" title="API">
     <h3 class="demo-section__subtitle">Menubar Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><code>model</code></td><td><code>MenubarItem[]</code></td><td><code>[]</code></td><td>Array of top-level navigation items.</td></tr>
-        <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Design variant; inherits from ThemeConfigService when null.</td></tr>
-        <tr><td><code>size</code></td><td><code>'sm' | 'md' | 'lg'</code></td><td><code>'md'</code></td><td>Size token controlling font-size and padding.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS class appended to the host element.</td></tr>
-        <tr><td><code>ariaLabel</code></td><td><code>string</code></td><td><code>'Navigation'</code></td><td>Accessible label for the nav landmark.</td></tr>
-      </tbody>
-    </table>
-
+    <app-doc-api-reference [rows]="apiInputRows" />
     <h3 class="demo-section__subtitle">Menubar Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Output</th><th>Type</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>(itemClick)</code></td><td><code>MenubarCommandEvent</code></td><td>Emitted when a non-disabled leaf item is activated.</td></tr>
-      </tbody>
-    </table>
-
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     <h3 class="demo-section__subtitle">MenubarItem</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>label</code></td><td><code>string</code></td><td>Display text.</td></tr>
-        <tr><td><code>icon</code></td><td><code>string</code></td><td>Icon class or ui-lib-icon name.</td></tr>
-        <tr><td><code>disabled</code></td><td><code>boolean</code></td><td>Prevents interaction.</td></tr>
-        <tr><td><code>visible</code></td><td><code>boolean</code></td><td>When false, hides the item.</td></tr>
-        <tr><td><code>separator</code></td><td><code>boolean</code></td><td>Renders a visual separator instead.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string</code></td><td>Extra CSS class on the item element.</td></tr>
-        <tr><td><code>url</code></td><td><code>string</code></td><td>Renders item as &lt;a href&gt; when set (leaf items).</td></tr>
-        <tr><td><code>target</code></td><td><code>string</code></td><td>anchor target for url-based items.</td></tr>
-        <tr><td><code>items</code></td><td><code>MenubarItem[]</code></td><td>Nested children — opens a sub-panel.</td></tr>
-        <tr><td><code>command</code></td><td><code>(event) =&gt; void</code></td><td>Callback when the item is activated.</td></tr>
-      </tbody>
-    </table>
-
+    <app-doc-api-reference kind="property" [rows]="apiItemRows" [showDefault]="false" />
     <h3 class="demo-section__subtitle">Content Projection</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Selector</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>[menubarStart]</code></td><td>Content rendered in the leading area (e.g. logo).</td></tr>
-        <tr><td><code>[menubarEnd]</code></td><td>Content rendered in the trailing area (e.g. action buttons).</td></tr>
-      </tbody>
-    </table>
-  </section>
+    <app-doc-api-reference kind="name" [rows]="apiProjectionRows" [showDefault]="false" />
+  </app-doc-section>
 
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -262,5 +213,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

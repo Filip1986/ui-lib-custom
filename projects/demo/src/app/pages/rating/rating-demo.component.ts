@@ -4,11 +4,23 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { JsonPipe } from '@angular/common';
 import { Rating } from 'ui-lib-custom/rating';
 import type { RatingChangeEvent, RatingRateEvent } from 'ui-lib-custom/rating';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
  * Demo page for the Rating component.
  */
@@ -16,21 +28,62 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-rating-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Rating,
     FormsModule,
     ReactiveFormsModule,
     JsonPipe,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocCodeSnippetComponent,
+    DocCssVarsTableComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocApiReferenceComponent,
+    DocAriaTableComponent,
+    DocSectionComponent,
   ],
   templateUrl: './rating-demo.component.html',
   styleUrl: './rating-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingDemoComponent {
+  public readonly importCode: string = "import { Rating } from 'ui-lib-custom/rating'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-rating-star-on-color', description: 'Filled star colour.' },
+    { variable: '--uilib-rating-star-off-color', description: 'Empty star colour.' },
+    { variable: '--uilib-rating-star-hover-color', description: 'Hovered star colour.' },
+    { variable: '--uilib-rating-cancel-color', description: 'Cancel button icon colour.' },
+    {
+      variable: '--uilib-rating-cancel-hover-color',
+      description: 'Cancel button icon hover colour.',
+    },
+    { variable: '--uilib-rating-gap', description: 'Gap between stars.' },
+    {
+      variable: '--uilib-rating-star-size-sm',
+      description: 'Star size for <code>size="sm"</code>.',
+    },
+    {
+      variable: '--uilib-rating-star-size-md',
+      description: 'Star size for <code>size="md"</code> (default).',
+    },
+    {
+      variable: '--uilib-rating-star-size-lg',
+      description: 'Star size for <code>size="lg"</code>.',
+    },
+    {
+      variable: '--uilib-rating-focus-shadow',
+      description: 'Focus ring box-shadow applied to the active star.',
+    },
+    {
+      variable: '--uilib-rating-transition-duration',
+      description:
+        'Transition duration. Set to <code>0ms</code> for <code>prefers-reduced-motion: reduce</code>.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },
@@ -195,4 +248,249 @@ export class RatingDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'stars', type: 'number', default: '5', description: 'Total number of stars.' },
+    {
+      name: 'cancel',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a cancel button to clear the rating.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables interaction.' },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Makes the rating read-only.',
+    },
+    {
+      name: 'onIcon',
+      type: 'string',
+      default: "'star-fill'",
+      description: 'Icon name for a selected star.',
+    },
+    {
+      name: 'offIcon',
+      type: 'string',
+      default: "'star'",
+      description: 'Icon name for an unselected star.',
+    },
+    {
+      name: 'cancelIcon',
+      type: 'string',
+      default: "'x'",
+      description: 'Icon name for the cancel button.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Star size.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
+  };
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '→ / ↑', action: 'Increase rating by one (wraps at <code>stars</code> maximum).' },
+    { key: '← / ↓', action: 'Decrease rating by one (minimum is 1).' },
+    {
+      key: 'Delete / Backspace',
+      action: 'Clear the rating — only available when <code>[cancel]="true"</code>.',
+    },
+    {
+      key: '1–9',
+      action: 'Jump directly to that star value (if within the <code>stars</code> range).',
+    },
+  ];
+
+  public readonly apiInputRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'number | null',
+      default: 'null',
+      description:
+        'Current rating. Two-way bindable via <code>[(value)]</code> or <code>ngModel</code>.',
+    },
+    { name: 'stars', type: 'number', default: '5', description: 'Number of star icons to render.' },
+    {
+      name: 'cancel',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shows a clear button and enables Delete / Backspace keyboard clearing.',
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Disables the component. Also controlled via CVA <code>setDisabledState</code>.',
+    },
+    {
+      name: 'readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'Visible but not interactive. Changes host role to <code>"img"</code>.',
+    },
+    {
+      name: 'autofocus',
+      type: 'boolean',
+      default: 'false',
+      description: 'Focuses the first star after first render.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Rating'",
+      description:
+        'Accessible label for the radiogroup. Overridden with descriptive text in readonly mode.',
+    },
+    {
+      name: 'ariaLabelledby',
+      type: 'string | null',
+      default: 'null',
+      description: 'Overrides <code>ariaLabel</code> when set. Ignored in readonly mode.',
+    },
+    {
+      name: 'iconOnClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on filled star icons.',
+    },
+    {
+      name: 'iconOnStyle',
+      type: 'Record<string, string> | null',
+      default: 'null',
+      description: 'Inline styles on filled star icons.',
+    },
+    {
+      name: 'iconOffClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on empty star icons.',
+    },
+    {
+      name: 'iconOffStyle',
+      type: 'Record<string, string> | null',
+      default: 'null',
+      description: 'Inline styles on empty star icons.',
+    },
+    {
+      name: 'iconCancelClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS class on the cancel icon.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant. Inherits from <code>ThemeConfigService</code> when null.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Component density.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host (interactive)',
+      attribute: 'role="radiogroup"',
+      value: '—',
+      notes: 'Groups stars as a radio group in interactive mode.',
+    },
+    {
+      element: 'Host (interactive)',
+      attribute: 'aria-label',
+      value: 'Value of ariaLabel input',
+      notes:
+        'Defaults to <code>"Rating"</code>. Overridden by <code>ariaLabelledby</code> when set.',
+    },
+    {
+      element: 'Host (readonly)',
+      attribute: 'role="img"',
+      value: '—',
+      notes: 'Switches to image role in readonly mode — no interactive semantics.',
+    },
+    {
+      element: 'Host (readonly)',
+      attribute: 'aria-label',
+      value: '"Rating: 4 out of 5 stars"',
+      notes: 'Auto-generated descriptive label for the readonly display.',
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'role="radio"',
+      value: '—',
+      notes: 'Each star is a radio option within the radiogroup.',
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'aria-checked',
+      value: '"true" / "false"',
+      notes: "Whether this star's value matches the current rating.",
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'aria-label',
+      value: '"1 star", "2 stars", …',
+      notes: 'Human-readable label announced by screen readers.',
+    },
+    {
+      element: 'Star (interactive)',
+      attribute: 'tabindex',
+      value: '"0" / "-1"',
+      notes: 'Roving tabindex — active star gets <code>0</code>, all others get <code>-1</code>.',
+    },
+    {
+      element: 'Star (readonly)',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative stars hidden from screen readers in readonly mode.',
+    },
+  ];
+
+  public readonly apiOutputRows: ApiPropRow[] = [
+    {
+      name: 'change',
+      type: 'RatingChangeEvent',
+      description:
+        'Emitted on every value change, including clears. Value is <code>number | null</code>.',
+    },
+    {
+      name: 'rate',
+      type: 'RatingRateEvent',
+      description: 'Emitted only when a star is selected (value is always a positive integer).',
+    },
+    {
+      name: 'cleared',
+      type: 'Event',
+      description:
+        'Emitted when the rating is cleared via cancel button, toggle-deselect, or Delete key.',
+    },
+    { name: 'focus', type: 'FocusEvent', description: 'Emitted when any star receives focus.' },
+    { name: 'blur', type: 'FocusEvent', description: 'Emitted when any star loses focus.' },
+  ];
 }

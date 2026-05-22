@@ -1,12 +1,25 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Avatar } from 'ui-lib-custom/avatar';
 import { AvatarGroup } from 'ui-lib-custom/avatar';
 import type { AvatarSize, AvatarShape, AvatarVariant } from 'ui-lib-custom/avatar';
 import { Button } from 'ui-lib-custom/button';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for the Avatar and AvatarGroup components.
@@ -14,12 +27,106 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-avatar-demo',
   standalone: true,
-  imports: [Avatar, AvatarGroup, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    Avatar,
+    AvatarGroup,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+  ],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 8,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string = "import { Avatar, AvatarGroup } from 'ui-lib-custom/avatar'";
+  public readonly snippetImage: string = `<ui-lib-avatar image="/photo.jpg" imageAlt="Jane Doe" size="md" />`;
+  public readonly snippetImageTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+  public readonly snippetLabel: string = `<ui-lib-avatar label="JD" size="md" />`;
+  public readonly snippetLabelTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+  public readonly snippetIcon: string = `<ui-lib-avatar icon="pi pi-user" size="md" />`;
+  public readonly snippetIconTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+  public readonly snippetShape: string = `<ui-lib-avatar label="JD" shape="square" />`;
+  public readonly snippetShapeTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+  public readonly snippetVariant: string = `<ui-lib-avatar label="VT" variant="material" />`;
+  public readonly snippetVariantTs: string = `import { Component } from '@angular/core';
+import { Avatar } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
+  public readonly snippetAvatarGroup: string = `<ui-lib-avatar-group ariaLabel="Project team">\n  <ui-lib-avatar image="/amy.jpg" imageAlt="Amy" />\n  <ui-lib-avatar image="/bob.jpg" imageAlt="Bob" />\n  <ui-lib-avatar label="+3" />\n</ui-lib-avatar-group>`;
+  public readonly snippetAvatarGroupTs: string = `import { Component } from '@angular/core';
+import { Avatar, AvatarGroup } from 'ui-lib-custom/avatar';
+
+@Component({
+  standalone: true,
+  imports: [Avatar, AvatarGroup],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -33,6 +140,8 @@ export class AvatarDemoComponent {
     { id: 'avatar-group', label: 'Avatar Group' },
     { id: 'playground', label: 'Playground' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public readonly sizes: AvatarSize[] = ['sm', 'md', 'lg'];
@@ -43,9 +152,133 @@ export class AvatarDemoComponent {
   public readonly playgroundVariant: WritableSignal<AvatarVariant> =
     signal<AvatarVariant>('material');
 
+  public readonly avatarInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL of the image to display.',
+    },
+    {
+      name: 'imageAlt',
+      type: 'string',
+      default: "'Avatar'",
+      description: 'Alt text for the image (used as aria-label).',
+    },
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Initials or short text shown when no image is set.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'CSS class string for an icon (e.g. <code>pi pi-user</code>).',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size of the avatar.',
+    },
+    {
+      name: 'shape',
+      type: "'circle' | 'square'",
+      default: "'circle'",
+      description: 'Shape of the avatar.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Inherits global theme when null.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Overrides the auto-resolved accessible label.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes to append to the host element.',
+    },
+  ];
+
+  public readonly avatarGroupInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the group (role="group").',
+    },
+  ];
+
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text (usually initials) shown inside the avatar.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'Icon name used as the avatar graphic.',
+    },
+    {
+      name: 'image',
+      type: 'string | null',
+      default: 'null',
+      description: 'URL or data URL of the avatar image.',
+    },
+    {
+      name: 'imageAlt',
+      type: 'string',
+      default: "'avatar'",
+      description: 'Alt text for the image.',
+    },
+    {
+      name: 'shape',
+      type: "'circle' | 'square'",
+      default: "'circle'",
+      description: 'Avatar shape.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      default: "'md'",
+      description: 'Avatar size preset.',
+    },
+    {
+      name: 'status',
+      type: "'online' | 'offline' | 'away' | 'busy' | null",
+      default: 'null',
+      description: 'Presence status indicator dot.',
+    },
+    {
+      name: 'badge',
+      type: 'string | null',
+      default: 'null',
+      description: 'Badge text shown on the avatar corner.',
+    },
+    {
+      name: 'badgeSeverity',
+      type: "'info' | 'success' | 'warning' | 'danger'",
+      default: "'info'",
+      description: 'Badge colour severity.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+  ];
 
   public setSize(size: AvatarSize): void {
     this.playgroundSize.set(size);
@@ -58,4 +291,76 @@ export class AvatarDemoComponent {
   public setVariant(variant: AvatarVariant): void {
     this.playgroundVariant.set(variant);
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Avatar and AvatarGroup are non-interactive display components and do not appear in the tab order.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host (standalone)',
+      attribute: 'role="img"',
+      value: '—',
+      notes: 'Exposes the avatar as an image to assistive technology.',
+    },
+    {
+      element: 'Host (standalone)',
+      attribute: 'aria-label',
+      value: 'Resolved from imageAlt → name → label → "Avatar"',
+      notes: 'Always has a non-empty accessible name.',
+    },
+    {
+      element: 'AvatarGroup host',
+      attribute: 'role="list"',
+      value: '—',
+      notes: 'Exposes the group as a semantic list.',
+    },
+    {
+      element: 'AvatarGroup host',
+      attribute: 'aria-label',
+      value: 'ariaLabel input',
+      notes: 'Provides the accessible name for the avatar list.',
+    },
+    {
+      element: 'Avatar inside group',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes: 'Each avatar in a group becomes a list item.',
+    },
+    {
+      element: 'Internal icon/image/initial spans',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative internals are hidden from the accessibility tree.',
+    },
+    {
+      element: 'Overflow indicator (+N)',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes: 'Exposed with a configurable accessible label via <code>overflowAriaLabel</code>.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-avatar-size-sm', description: 'Size — sm.' },
+    { variable: '--uilib-avatar-size-md', description: 'Size — md.' },
+    { variable: '--uilib-avatar-size-lg', description: 'Size — lg.' },
+    { variable: '--uilib-avatar-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-avatar-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-avatar-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-avatar-icon-size-sm', description: 'Icon size — sm.' },
+    { variable: '--uilib-avatar-icon-size-md', description: 'Icon size — md.' },
+    { variable: '--uilib-avatar-icon-size-lg', description: 'Icon size — lg.' },
+    { variable: '--uilib-avatar-bg', description: 'Background colour.' },
+    { variable: '--uilib-avatar-fg', description: 'Fg.' },
+    { variable: '--uilib-avatar-border-color', description: 'Border colour.' },
+    { variable: '--uilib-avatar-border-width', description: 'Border width.' },
+    { variable: '--uilib-avatar-radius', description: 'Border radius.' },
+    { variable: '--uilib-avatar-size', description: 'Size.' },
+    { variable: '--uilib-avatar-font-size', description: 'Font size.' },
+    { variable: '--uilib-avatar-icon-size', description: 'Icon size.' },
+  ];
 }

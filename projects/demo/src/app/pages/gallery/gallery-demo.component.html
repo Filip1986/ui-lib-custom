@@ -1,0 +1,441 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Galleria"
+    [importCode]="importCode"
+    description="A media gallery component with thumbnail navigation, dot indicators, multiple layout positions, fullscreen mode, and autoplay support."
+  />
+
+  <!-- ─── Basic ──────────────────────────────────────────────────────────── -->
+  <app-doc-section id="basic" title="Basic">
+    <p class="demo-section__description">
+      A gallery with item and thumbnail templates. Navigation arrows and a
+      scrollable thumbnail strip are shown by default.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="basicActiveIndex"
+        [numVisible]="5"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img
+            class="demo-gallery-img"
+            [src]="image.src"
+            [alt]="image.alt"
+          />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img
+            class="demo-gallery-thumb"
+            [src]="image.thumbnailSrc"
+            [alt]="image.alt"
+          />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── With caption ────────────────────────────────────────────────────── -->
+  <app-doc-section id="with-caption" title="With Caption">
+    <p class="demo-section__description">
+      Use the <code>#galleriaCaption</code> template slot to overlay a caption
+      on the active item.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [numVisible]="5"
+        variant="material"
+        [showThumbnails]="true"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaCaption let-image>
+          <div class="demo-caption">
+            <h4 class="demo-caption__title">{{ image.title }}</h4>
+            <p class="demo-caption__desc">{{ image.description }}</p>
+          </div>
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Indicators ──────────────────────────────────────────────────────── -->
+  <app-doc-section id="indicators" title="Indicators">
+    <p class="demo-section__description">
+      Replace the thumbnail strip with dot indicators by enabling
+      <code>showIndicators</code> and setting <code>showThumbnails</code> to
+      false.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="indicatorsActiveIndex"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+        [circular]="true"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Thumbnail position ──────────────────────────────────────────────── -->
+  <app-doc-section id="thumbnail-position" title="Thumbnail Position">
+    <p class="demo-section__description">
+      The thumbnail strip can be positioned on any side using
+      <code>thumbnailsPosition</code>: bottom (default), top, left, or right.
+    </p>
+
+    <div class="demo-controls demo-controls--row">
+      @for (pos of positionOptions; track pos) {
+        <ui-lib-button
+          [appearance]="thumbnailsPosition() === pos ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
+          type="button"
+          (click)="onPositionChange(pos)"
+        >
+          {{ pos }}
+        </ui-lib-button>
+      }
+    </div>
+
+    <div
+      class="demo-block demo-block--gallery"
+      [class.demo-block--gallery-tall]="thumbnailsPosition() === 'left' || thumbnailsPosition() === 'right'"
+    >
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="positionActiveIndex"
+        [numVisible]="4"
+        [thumbnailsPosition]="thumbnailsPosition()"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── No thumbnails + indicators on item ──────────────────────────────── -->
+  <app-doc-section id="indicators-on-item" title="Indicators on Item">
+    <p class="demo-section__description">
+      Set <code>showThumbnails="false"</code>, <code>showIndicators="true"</code>,
+      and <code>showIndicatorsOnItem="true"</code> to overlay dots directly on
+      the image.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="noThumbActiveIndex"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+        [showIndicatorsOnItem]="true"
+        [circular]="true"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Fullscreen ──────────────────────────────────────────────────────── -->
+  <app-doc-section id="fullscreen" title="Fullscreen">
+    <p class="demo-section__description">
+      Enable <code>fullScreen</code> to show a maximize button. Clicking it opens
+      the gallery in a full-screen overlay. The <code>visible</code> two-way
+      binding controls open/close state.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="fullscreenActiveIndex"
+        [(visible)]="fullscreenVisible"
+        [fullScreen]="true"
+        [numVisible]="5"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaCaption let-image>
+          <div class="demo-caption">
+            <h4 class="demo-caption__title">{{ image.title }}</h4>
+          </div>
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Circular + Autoplay ─────────────────────────────────────────────── -->
+  <app-doc-section id="circular-autoplay" title="Circular &amp; Autoplay">
+    <p class="demo-section__description">
+      With <code>circular="true"</code> navigation wraps around. Adding
+      <code>autoPlay="true"</code> advances the gallery automatically every
+      3 seconds.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="autoplayActiveIndex"
+        [circular]="true"
+        [autoPlay]="true"
+        [transitionInterval]="3000"
+        [numVisible]="5"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Variants ────────────────────────────────────────────────────────── -->
+  <app-doc-section id="variants" title="Variants">
+    <p class="demo-section__description">
+      Three design variants are available: <code>material</code>,
+      <code>bootstrap</code>, and <code>minimal</code>.
+    </p>
+
+    <div class="demo-controls demo-controls--row">
+      @for (v of variantOptions; track v) {
+        <ui-lib-button
+          [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
+          type="button"
+          (click)="selectedVariant.set(v)"
+        >
+          {{ v }}
+        </ui-lib-button>
+      }
+    </div>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="variantActiveIndex"
+        [numVisible]="5"
+        [variant]="selectedVariant()"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Sizes ───────────────────────────────────────────────────────────── -->
+  <app-doc-section id="sizes" title="Sizes">
+    <p class="demo-section__description">
+      The <code>size</code> input (<code>sm</code> / <code>md</code> /
+      <code>lg</code>) controls the thumbnail strip sizing.
+    </p>
+
+    <div class="demo-controls demo-controls--row">
+      @for (s of sizeOptions; track s) {
+        <ui-lib-button
+          [appearance]="selectedSize() === s ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
+          type="button"
+          (click)="selectedSize.set(s)"
+        >
+          {{ s }}
+        </ui-lib-button>
+      }
+    </div>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="sizeActiveIndex"
+        [numVisible]="5"
+        [size]="selectedSize()"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── Playground ──────────────────────────────────────────────────────── -->
+  <app-doc-section id="playground" title="Playground">
+    <p class="demo-section__description">
+      Combine all options to explore the Galleria API interactively.
+    </p>
+
+    <div class="demo-controls demo-controls--grid">
+      <label class="demo-control-label">
+        Variant
+        <select class="demo-select" [ngModel]="playgroundVariant()" (ngModelChange)="playgroundVariant.set($event)">
+          @for (v of variantOptions; track v) {
+            <option [value]="v">{{ v }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="demo-control-label">
+        Size
+        <select class="demo-select" [ngModel]="playgroundSize()" (ngModelChange)="playgroundSize.set($event)">
+          @for (s of sizeOptions; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="demo-control-label">
+        Thumbnail position
+        <select class="demo-select" [ngModel]="playgroundPosition()" (ngModelChange)="playgroundPosition.set($event)">
+          @for (pos of positionOptions; track pos) {
+            <option [value]="pos">{{ pos }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundShowThumbnails()" (ngModelChange)="playgroundShowThumbnails.set($event)" />
+        Show Thumbnails
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundShowIndicators()" (ngModelChange)="playgroundShowIndicators.set($event)" />
+        Show Indicators
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundShowNavigators()" (ngModelChange)="playgroundShowNavigators.set($event)" />
+        Show Navigators
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundCircular()" (ngModelChange)="playgroundCircular.set($event)" />
+        Circular
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundAutoPlay()" (ngModelChange)="playgroundAutoPlay.set($event)" />
+        AutoPlay
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundFullScreen()" (ngModelChange)="playgroundFullScreen.set($event)" />
+        Full Screen
+      </label>
+    </div>
+
+    <div
+      class="demo-block demo-block--gallery"
+      [class.demo-block--gallery-tall]="playgroundPosition() === 'left' || playgroundPosition() === 'right'"
+    >
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="playgroundActiveIndex"
+        [(visible)]="playgroundVisible"
+        [numVisible]="5"
+        [variant]="playgroundVariant()"
+        [size]="playgroundSize()"
+        [thumbnailsPosition]="playgroundPosition()"
+        [showThumbnails]="playgroundShowThumbnails()"
+        [showIndicators]="playgroundShowIndicators()"
+        [showItemNavigators]="playgroundShowNavigators()"
+        [circular]="playgroundCircular()"
+        [autoPlay]="playgroundAutoPlay()"
+        [fullScreen]="playgroundFullScreen()"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaCaption let-image>
+          <div class="demo-caption">
+            <h4 class="demo-caption__title">{{ image.title }}</h4>
+          </div>
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </app-doc-section>
+
+  <!-- ─── API table ────────────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API">
+
+    <h3 class="demo-sub-title">Inputs</h3>
+    <app-doc-api-reference [rows]="apiInputRows" />
+
+    <h3 class="demo-sub-title">Outputs</h3>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+
+    <h3 class="demo-sub-title">Template Slots (ng-template)</h3>
+    <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
+  </app-doc-section>
+
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      The gallery widget is a landmark region. Navigation controls have descriptive labels, and
+      indicator dots announce the current slide position to assistive technologies.
+    </p>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

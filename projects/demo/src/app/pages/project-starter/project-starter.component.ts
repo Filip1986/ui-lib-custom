@@ -1,18 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { Panel } from 'ui-lib-custom/panel';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
 
@@ -23,23 +27,61 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
   selector: 'app-project-starter',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Tabs,
     Tab,
-    Card,
     Button,
     UiLibInput,
     UiLibSelect,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    DocCodeSnippetComponent,
+    DocTocComponent,
+    CodeSnippet,
+    DocApiReferenceComponent,
   ],
   templateUrl: './project-starter.component.html',
   styleUrl: './project-starter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectStarterComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'saveToLocalStorage(name)',
+      type: 'void',
+      description: 'Persists current theme preset under the provided name.',
+    },
+    {
+      name: 'loadFromLocalStorage(name)',
+      type: 'void',
+      description: 'Loads a saved preset and applies it.',
+    },
+    {
+      name: 'exportAsJSON(preset)',
+      type: 'string',
+      description: 'Exports the preset to JSON for reuse.',
+    },
+    {
+      name: 'exportAsCSS(preset)',
+      type: 'string',
+      description: 'Exports CSS variables for runtime theming.',
+    },
+    {
+      name: 'exportAsScss(preset)',
+      type: 'string',
+      description: 'Exports SCSS variables for build-time theming.',
+    },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
   public readonly themeName: WritableSignal<string> = signal<string>('my-theme');
@@ -187,6 +229,7 @@ import { Component } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
 import { Tooltip } from 'ui-lib-custom/tooltip';
 
+import { Panel } from 'ui-lib-custom/panel';
 @Component({
   selector: 'app-example',
   standalone: true,

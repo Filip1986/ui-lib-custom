@@ -1,16 +1,58 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  viewChild,
+  type WritableSignal,
+} from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
-import { Card } from 'ui-lib-custom/card';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Icon } from 'ui-lib-custom/icon';
 import { SplitButtonComponent, SplitButtonContentDirective } from 'ui-lib-custom/split-button';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { Panel } from 'ui-lib-custom/panel';
 import type {
   SplitButtonItem,
   SplitButtonItemCommandEvent,
   SplitButtonSeverity,
 } from 'ui-lib-custom/split-button';
+import {
+  basicHtml,
+  basicTs,
+  iconsHtml,
+  iconsTs,
+  severityHtml,
+  severityTs,
+  disabledHtml,
+  disabledTs,
+  raisedHtml,
+  raisedTs,
+  roundedHtml,
+  roundedTs,
+  textHtml,
+  textTs,
+  raisedTextHtml,
+  raisedTextTs,
+  outlinedHtml,
+  outlinedTs,
+  sizesHtml,
+  sizesTs,
+  templateHtml,
+  templateTs,
+} from './snippets.generated';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.
@@ -19,19 +61,79 @@ import type {
   selector: 'app-split-button-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
-    CodePreviewComponent,
-    Card,
     Icon,
     SplitButtonComponent,
     SplitButtonContentDirective,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+
+    DocSectionComponent,
+    DocAriaTableComponent,
+
+    DocCssVarsTableComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './split-button-demo.component.html',
   styleUrl: './split-button-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitButtonDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly iconsHtml: string = iconsHtml;
+  public readonly iconsTs: string = iconsTs;
+  public readonly severityHtml: string = severityHtml;
+  public readonly severityTs: string = severityTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly raisedHtml: string = raisedHtml;
+  public readonly raisedTs: string = raisedTs;
+  public readonly roundedHtml: string = roundedHtml;
+  public readonly roundedTs: string = roundedTs;
+  public readonly textHtml: string = textHtml;
+  public readonly textTs: string = textTs;
+  public readonly raisedTextHtml: string = raisedTextHtml;
+  public readonly raisedTextTs: string = raisedTextTs;
+  public readonly outlinedHtml: string = outlinedHtml;
+  public readonly outlinedTs: string = outlinedTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly templateHtml: string = templateHtml;
+  public readonly templateTs: string = templateTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
+  public readonly importCode: string =
+    "import { SplitButtonComponent } from 'ui-lib-custom/split-button'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'icons', label: 'Icons' },
@@ -45,7 +147,7 @@ export class SplitButtonDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'template', label: 'Template' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly severities: readonly SplitButtonSeverity[] = [
@@ -58,33 +160,6 @@ export class SplitButtonDemoComponent {
     'danger',
     'contrast',
   ];
-
-  public readonly snippets: Record<string, string> = {
-    basic: `<ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />`,
-    icons: `<ui-lib-split-button label="Add" icon="plus" [model]="items" />`,
-    severity: `<ui-lib-split-button
-  [label]="severity"
-  [severity]="severity"
-  [model]="items"
-/>`,
-    disabled: `<ui-lib-split-button label="Disabled" [model]="items" [disabled]="true" />
-<ui-lib-split-button label="Main disabled" [model]="items" [buttonDisabled]="true" />
-<ui-lib-split-button label="Menu disabled" [model]="items" [menuButtonDisabled]="true" />`,
-    raised: `<ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [model]="items" />`,
-    rounded: `<ui-lib-split-button [label]="severity" [severity]="severity" [rounded]="true" [model]="items" />`,
-    text: `<ui-lib-split-button [label]="severity" [severity]="severity" [text]="true" [model]="items" />`,
-    raisedText: `<ui-lib-split-button [label]="severity" [severity]="severity" [raised]="true" [text]="true" [model]="items" />`,
-    outlined: `<ui-lib-split-button [label]="severity" [severity]="severity" [outlined]="true" [model]="items" />`,
-    sizes: `<ui-lib-split-button label="Small" size="sm" [model]="items" />
-<ui-lib-split-button label="Medium" size="md" [model]="items" />
-<ui-lib-split-button label="Large" size="lg" [model]="items" />`,
-    template: `<ui-lib-split-button [model]="items" menuButtonAriaLabel="Template actions">
-  <ng-template splitButtonContent>
-    <ui-lib-icon name="save" />
-    <span>Save Template</span>
-  </ng-template>
-</ui-lib-split-button>`,
-  };
 
   public readonly lastAction: WritableSignal<string> = signal<string>('No action yet.');
 
@@ -115,10 +190,6 @@ export class SplitButtonDemoComponent {
 
   public readonly iconItems: SplitButtonItem[] = [...this.items];
 
-  public snippet(key: string): string {
-    return this.snippets[key] ?? '';
-  }
-
   public onPrimaryAction(): void {
     this.lastAction.set('Primary action: Save');
   }
@@ -127,4 +198,92 @@ export class SplitButtonDemoComponent {
     const label: string = event.item.label ?? 'Unknown action';
     this.lastAction.set(`Menu action: ${label}`);
   }
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Button group',
+      attribute: 'role',
+      value: '"group"',
+      notes: 'The main action + dropdown trigger are wrapped in a group.',
+    },
+    {
+      element: 'Dropdown trigger',
+      attribute: 'aria-haspopup',
+      value: '"true"',
+      notes: 'Signals that the trigger opens a menu.',
+    },
+    {
+      element: 'Dropdown trigger',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the dropdown menu is open.',
+    },
+    {
+      element: 'Menu container',
+      attribute: 'role',
+      value: '"menu"',
+      notes: 'The dropdown panel uses the menu role.',
+    },
+    {
+      element: 'Menu item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each option in the dropdown is a menu item.',
+    },
+    {
+      element: 'Disabled menu item',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive menu items.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    { name: 'label', type: 'string', default: "''", description: 'Main button label text.' },
+    { name: 'model', type: 'SplitButtonItem[]', default: '[]', description: 'Menu item list.' },
+    {
+      name: 'severity',
+      type: 'SplitButtonSeverity',
+      default: "'primary'",
+      description: 'Visual severity token.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Size scale for button pair.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables both buttons.' },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-split-button-bg', description: 'Background colour.' },
+    { variable: '--uilib-split-button-fg', description: 'Fg.' },
+    { variable: '--uilib-split-button-border', description: 'Border shorthand.' },
+    { variable: '--uilib-split-button-bg-hover', description: 'Background colour (hover).' },
+    { variable: '--uilib-split-button-fg-hover', description: 'Fg (hover).' },
+    { variable: '--uilib-split-button-emphasis', description: 'Emphasis.' },
+    { variable: '--uilib-split-button-radius', description: 'Border radius.' },
+    { variable: '--uilib-split-button-padding', description: 'Padding.' },
+    { variable: '--uilib-split-button-font-size', description: 'Font size.' },
+    { variable: '--uilib-split-button-shadow', description: 'Box shadow.' },
+    { variable: '--uilib-split-button-transition', description: 'Transition.' },
+    { variable: '--uilib-split-button-focus-ring', description: 'Focus ring.' },
+    { variable: '--uilib-split-button-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-split-button-divider-color', description: 'Divider text colour.' },
+    { variable: '--uilib-split-button-menu-bg', description: 'Menu background colour.' },
+    { variable: '--uilib-split-button-menu-shadow', description: 'Menu box shadow.' },
+    { variable: '--uilib-split-button-menu-radius', description: 'Menu border radius.' },
+    { variable: '--uilib-split-button-menu-z', description: 'Menu Z.' },
+    { variable: '--uilib-split-button-menu-item-padding', description: 'Menu Item padding.' },
+    {
+      variable: '--uilib-split-button-menu-item-hover-bg',
+      description: 'Menu Item Hover background colour.',
+    },
+    {
+      variable: '--uilib-split-button-menu-item-disabled-opacity',
+      description: 'Menu Item Disabled opacity.',
+    },
+    { variable: '--uilib-split-button-separator-color', description: 'Separator text colour.' },
+    { variable: '--uilib-split-button-icon-size', description: 'Icon size.' },
+  ];
 }

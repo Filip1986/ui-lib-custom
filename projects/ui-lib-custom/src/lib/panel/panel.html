@@ -1,13 +1,14 @@
 <div
   class="ui-lib-panel__header"
+  [class.ui-lib-panel__header--hidden]="!showHeader()"
   [id]="headerId"
 >
-  <ng-content select="[panelHeader]" />
+  <span #projectedHeaderSlot style="display:contents"><ng-content select="[panelHeader]" /></span>
   @if (header()) {
     <span class="ui-lib-panel__title">{{ header() }}</span>
   }
   <div class="ui-lib-panel__header-actions">
-    <ng-content select="[panelIcons]" />
+    <span #projectedIconsSlot style="display:contents"><ng-content select="[panelIcons]" /></span>
     @if (toggleable()) {
       <button
         type="button"

@@ -42,6 +42,10 @@ ui-lib-panel {
     border-bottom: 1px solid var(--uilib-panel-border-color);
     line-height: 1.5;
     user-select: none;
+
+    &--hidden {
+      display: none;
+    }
   }
 
   &__title {

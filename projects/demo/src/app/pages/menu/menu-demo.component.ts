@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Menu } from 'ui-lib-custom/menu';
 import { Button } from 'ui-lib-custom/button';
 import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
@@ -8,22 +9,36 @@ import {
   TableColumnComponent,
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import {
+  basicHtml,
+  basicTs,
+  popupHtml,
+  popupTs,
+  variantsHtml,
+  variantsTs,
+  sizesHtml,
+  sizesTs,
+  importTs,
+  separatorTs,
+  groupedTs,
+  commandsTs,
+  urlItemsTs,
+} from './snippets.generated';
 
-interface AriaRow {
-  readonly element: string;
-  readonly attribute: string;
-  readonly value: string;
-  readonly notes: string;
-}
-
-interface KeyboardRow {
-  readonly key: string;
-  readonly action: string;
-}
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 
 interface InputRow {
   readonly name: string;
@@ -50,12 +65,6 @@ interface MenuItemRow {
   readonly description: string;
 }
 
-interface CssTokenRow {
-  readonly token: string;
-  readonly default: string;
-  readonly description: string;
-}
-
 /**
  * Demo page for the Menu component.
  */
@@ -63,20 +72,64 @@ interface CssTokenRow {
   selector: 'app-menu-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Menu,
     Button,
     TableComponent,
     TableColumnComponent,
     TableColumnBodyDirective,
-    DocCodeSnippetComponent,
     DocPageLayoutComponent,
+    DocPageHeaderComponent,
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly popupHtml: string = popupHtml;
+  public readonly popupTs: string = popupTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly importTs: string = importTs;
+  public readonly separatorTs: string = separatorTs;
+  public readonly groupedTs: string = groupedTs;
+  public readonly commandsTs: string = commandsTs;
+  public readonly urlItemsTs: string = urlItemsTs;
+
+  public readonly importCode: string = "import { Menu } from 'ui-lib-custom/menu'";
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    apgPattern: {
+      name: 'Menu Button',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/',
+    },
+    competitiveParity: 'pending',
+  };
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -92,6 +145,7 @@ export class MenuDemoComponent {
     { id: 'url-items', label: 'URL Items' },
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
@@ -101,80 +155,6 @@ export class MenuDemoComponent {
   }
 
   public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
-
-  public readonly snippets: {
-    readonly import: string;
-    readonly basic: string;
-    readonly separator: string;
-    readonly grouped: string;
-    readonly popup: string;
-    readonly commands: string;
-    readonly urlItems: string;
-    readonly variants: string;
-    readonly sizes: string;
-  } = {
-    import: `import { Menu } from 'ui-lib-custom/menu';
-import type { MenuItem } from 'ui-lib-custom/menu';`,
-    basic: `<ui-lib-menu [model]="items" (itemClick)="onItemClick($event)" />`,
-    separator: `items: MenuItem[] = [
-  { label: 'New File', icon: 'pi pi-file' },
-  { label: 'Open',     icon: 'pi pi-folder-open' },
-  { separator: true },
-  { label: 'Save',     icon: 'pi pi-save' },
-  { label: 'Exit',     icon: 'pi pi-times' },
-];`,
-    grouped: `items: MenuItem[] = [
-  {
-    label: 'Account',
-    items: [
-      { label: 'Profile',       icon: 'pi pi-user' },
-      { label: 'Security',      icon: 'pi pi-lock' },
-      { label: 'Notifications', icon: 'pi pi-bell' },
-    ],
-  },
-  {
-    label: 'Workspace',
-    items: [
-      { label: 'Projects',  icon: 'pi pi-briefcase' },
-      { label: 'Billing',   icon: 'pi pi-credit-card' },
-    ],
-  },
-];`,
-    popup: `<!-- trigger button wires aria-haspopup, aria-expanded, aria-controls -->
-<ui-lib-button
-  [attr.aria-haspopup]="'menu'"
-  [attr.aria-expanded]="popupMenu.isVisible()"
-  [attr.aria-controls]="popupMenu.menuId"
-  (click)="popupMenu.toggle($event)"
->
-  Options
-</ui-lib-button>
-<ui-lib-menu #popupMenu [model]="items" [popup]="true" />`,
-    commands: `items: MenuItem[] = [
-  {
-    label: 'Download',
-    icon: 'pi pi-download',
-    command: (event) => console.log('clicked', event.item.label),
-  },
-];
-
-// Or via the itemClick output:
-onItemClick(event: MenuItemCommandEvent): void {
-  console.log(event.item.label);
-}`,
-    urlItems: `items: MenuItem[] = [
-  { label: 'Documentation', url: 'https://angular.dev', target: '_blank' },
-  { label: 'GitHub',        url: 'https://github.com', target: '_blank' },
-  { separator: true },
-  { label: 'Command item',  icon: 'pi pi-star' },
-];`,
-    variants: `<ui-lib-menu [model]="items" variant="material"  />
-<ui-lib-menu [model]="items" variant="bootstrap" />
-<ui-lib-menu [model]="items" variant="minimal"   />`,
-    sizes: `<ui-lib-menu [model]="items" size="sm" />
-<ui-lib-menu [model]="items" size="md" />
-<ui-lib-menu [model]="items" size="lg" />`,
-  } as const;
 
   public readonly basicItems: MenuItem[] = [
     { label: 'Profile', icon: 'pi pi-user' },
@@ -445,72 +425,68 @@ onItemClick(event: MenuItemCommandEvent): void {
     },
   ];
 
-  public readonly cssTokenRows: CssTokenRow[] = [
+  public readonly cssVarRows: CssVarRow[] = [
     {
-      token: '<code>--uilib-menu-bg</code>',
-      default: '<code>var(--uilib-surface-overlay, #fff)</code>',
+      variable: '--uilib-menu-bg',
+      default: 'var(--uilib-surface-overlay, #fff)',
       description: 'Panel background colour.',
     },
     {
-      token: '<code>--uilib-menu-border</code>',
-      default: '<code>1px solid var(--uilib-color-neutral-200)</code>',
+      variable: '--uilib-menu-border',
+      default: '1px solid var(--uilib-color-neutral-200)',
       description: 'Panel border.',
     },
     {
-      token: '<code>--uilib-menu-shadow</code>',
-      default: '<code>var(--uilib-shadow-md)</code>',
+      variable: '--uilib-menu-shadow',
+      default: 'var(--uilib-shadow-md)',
       description: 'Panel box-shadow.',
     },
     {
-      token: '<code>--uilib-menu-radius</code>',
-      default: '<code>var(--uilib-radius-md, 0.375rem)</code>',
+      variable: '--uilib-menu-radius',
+      default: 'var(--uilib-radius-md, 0.375rem)',
       description: 'Panel border-radius.',
     },
+    { variable: '--uilib-menu-min-width', default: '12rem', description: 'Minimum panel width.' },
     {
-      token: '<code>--uilib-menu-min-width</code>',
-      default: '<code>12rem</code>',
-      description: 'Minimum panel width.',
-    },
-    {
-      token: '<code>--uilib-menu-padding</code>',
-      default: '<code>var(--uilib-spacing-1, 0.25rem)</code>',
+      variable: '--uilib-menu-padding',
+      default: 'var(--uilib-spacing-1, 0.25rem)',
       description: 'Vertical panel padding.',
     },
     {
-      token: '<code>--uilib-menu-item-padding-y</code>',
-      default: '<code>var(--uilib-spacing-2, 0.5rem)</code>',
+      variable: '--uilib-menu-item-padding-y',
+      default: 'var(--uilib-spacing-2, 0.5rem)',
       description: 'Item vertical padding.',
     },
     {
-      token: '<code>--uilib-menu-item-padding-x</code>',
-      default: '<code>var(--uilib-spacing-3, 0.75rem)</code>',
+      variable: '--uilib-menu-item-padding-x',
+      default: 'var(--uilib-spacing-3, 0.75rem)',
       description: 'Item horizontal padding.',
     },
     {
-      token: '<code>--uilib-menu-item-bg-hover</code>',
-      default: '<code>var(--uilib-color-neutral-100, #f3f4f6)</code>',
+      variable: '--uilib-menu-item-bg-hover',
+      default: 'var(--uilib-color-neutral-100, #f3f4f6)',
       description: 'Hover/focus background.',
     },
     {
-      token: '<code>--uilib-menu-item-color-disabled</code>',
-      default: '<code>var(--uilib-color-neutral-400, #9ca3af)</code>',
+      variable: '--uilib-menu-item-color-disabled',
+      default: 'var(--uilib-color-neutral-400, #9ca3af)',
       description: 'Disabled item text colour.',
     },
     {
-      token: '<code>--uilib-menu-separator-color</code>',
-      default: '<code>var(--uilib-color-neutral-200, #e5e7eb)</code>',
+      variable: '--uilib-menu-separator-color',
+      default: 'var(--uilib-color-neutral-200, #e5e7eb)',
       description: 'Separator line colour.',
     },
     {
-      token: '<code>--uilib-menu-focus-shadow</code>',
-      default: '<code>0 0 0 2px color-mix(...)</code>',
+      variable: '--uilib-menu-focus-shadow',
+      default: '0 0 0 2px color-mix(...)',
       description: 'Focus-visible ring.',
     },
   ];
 
   // ── Accessibility data ────────────────────────────────────────────────────
 
-  public readonly ariaRows: AriaRow[] = [
+  public readonly ariaRows: readonly AriaRow[] = [
     {
       element: 'Panel <code>&lt;div&gt;</code>',
       attribute: '<code>role</code>',
@@ -580,26 +556,26 @@ onItemClick(event: MenuItemCommandEvent): void {
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
-      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd>',
+      key: '↓ / ↑',
       action: 'Move focus to the next or previous enabled item (wraps, skips disabled).',
     },
     {
-      key: '<kbd>Home</kbd> / <kbd>End</kbd>',
+      key: 'Home / End',
       action: 'Jump to the first or last enabled item.',
     },
     {
-      key: '<kbd>Enter</kbd> / <kbd>Space</kbd>',
+      key: 'Enter / Space',
       action: 'Activate the focused item.',
     },
     {
-      key: '<kbd>Escape</kbd>',
+      key: 'Escape',
       action:
         'Close the popup panel and restore focus to the trigger element. No-op in inline mode.',
     },
     {
-      key: '<kbd>Tab</kbd>',
+      key: 'Tab',
       action: 'Close the popup and move focus naturally to the next focusable element.',
     },
   ];

@@ -1,0 +1,373 @@
+.template-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.template-feature-card {
+  background: var(--uilib-surface-alt);
+  border: 1px solid var(--uilib-border);
+  border-radius: var(--uilib-radius-md);
+  padding: 1.25rem;
+
+  i {
+    font-size: 1.5rem;
+    color: var(--uilib-color-primary-600);
+    margin-bottom: 0.75rem;
+  }
+
+  h4 {
+    margin: 0 0 0.375rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--uilib-page-fg);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--uilib-muted);
+    line-height: 1.5;
+  }
+}
+
+/* ── Shell demo ────────────────────────────────────────────────────────────── */
+.shell-demo {
+  border: 1px solid var(--uilib-border);
+  border-radius: var(--uilib-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--uilib-shadow-md);
+  margin-top: 1.5rem;
+  background: var(--uilib-surface);
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topbar */
+.shell-topbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  height: 52px;
+  background: var(--uilib-surface);
+  border-bottom: 1px solid var(--uilib-border);
+  flex-shrink: 0;
+}
+
+.shell-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 160px;
+}
+
+.shell-logo-icon {
+  color: var(--uilib-color-primary-600);
+  font-size: 1.25rem;
+}
+
+.shell-logo-text {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--uilib-page-fg);
+}
+
+.shell-topbar-center {
+  flex: 1;
+}
+
+.shell-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--uilib-surface-alt);
+  border: 1px solid var(--uilib-border);
+  border-radius: var(--uilib-radius-md);
+  padding: 0.375rem 0.75rem;
+  max-width: 340px;
+
+  i {
+    color: var(--uilib-muted);
+    font-size: 0.875rem;
+  }
+}
+
+.shell-search-placeholder {
+  font-size: 0.8rem;
+  color: var(--uilib-muted);
+}
+
+.shell-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.shell-notif-btn {
+  position: relative;
+  cursor: pointer;
+  padding: 0.375rem;
+  border-radius: var(--uilib-radius-md);
+
+  i {
+    font-size: 1.1rem;
+    color: var(--uilib-muted);
+  }
+}
+
+.shell-notif-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #ef4444;
+  border: 1.5px solid var(--uilib-surface);
+}
+
+/* Body */
+.shell-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.shell-sidebar {
+  width: 180px;
+  flex-shrink: 0;
+  background: var(--uilib-surface);
+  border-right: 1px solid var(--uilib-border);
+  padding: 0.75rem 0;
+}
+
+.shell-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shell-nav-group-label {
+  padding: 0.5rem 1rem 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--uilib-muted);
+}
+
+.shell-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--uilib-page-fg);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.15s;
+
+  i {
+    font-size: 0.9rem;
+    color: var(--uilib-muted);
+  }
+
+  &:hover {
+    background: var(--uilib-surface-alt);
+  }
+
+  &--active {
+    background: var(--uilib-surface-alt);
+    color: var(--uilib-color-primary-600);
+    border-left-color: var(--uilib-color-primary-600);
+    font-weight: 600;
+
+    i {
+      color: var(--uilib-color-primary-600);
+    }
+  }
+}
+
+.shell-nav-badge {
+  margin-left: auto;
+  background: var(--uilib-color-primary-600);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+/* Main */
+.shell-main {
+  flex: 1;
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--uilib-surface-alt);
+}
+
+/* Stat cards */
+.shell-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.shell-stat-card {
+  min-width: 0;
+}
+
+.shell-stat-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.shell-stat-label {
+  font-size: 0.7rem;
+  color: var(--uilib-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.shell-stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--uilib-page-fg);
+}
+
+.shell-stat-trend {
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  &--up {
+    color: #16a34a;
+  }
+
+  &--down {
+    color: #dc2626;
+  }
+
+  &--neutral {
+    color: var(--uilib-muted);
+  }
+}
+
+/* Content row */
+.shell-content-row {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0.75rem;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shell-panel {
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+
+    h3 {
+      margin: 0;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+}
+
+/* Activity list */
+.shell-activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.shell-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.shell-activity-text {
+  font-size: 0.78rem;
+  color: var(--uilib-page-fg);
+  line-height: 1.4;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.shell-activity-time {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--uilib-muted);
+  margin-top: 0.1rem;
+}
+
+/* Status list */
+.shell-status-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.shell-status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--uilib-page-fg);
+}
+
+.shell-status-dot {
+  font-size: 0.5rem;
+
+  &--green {
+    color: #16a34a;
+  }
+
+  &--yellow {
+    color: #d97706;
+  }
+
+  &--red {
+    color: #dc2626;
+  }
+}
+
+.shell-status-label {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--uilib-muted);
+}
+
+/* Usage CTA */
+.template-download-cta {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}

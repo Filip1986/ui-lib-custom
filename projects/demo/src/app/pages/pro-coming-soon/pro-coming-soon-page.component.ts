@@ -1,0 +1,44 @@
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { Icon } from 'ui-lib-custom/icon';
+
+export interface ProComingSoonData {
+  componentName: string;
+  tagline: string;
+  description: string;
+  icon: string;
+  tier: 'pro' | 'enterprise';
+  features: string[];
+  useCases: string[];
+  githubUrl: string;
+}
+
+/** Pro & Enterprise coming-soon page, driven by route data. */
+@Component({
+  selector: 'app-pro-coming-soon-page',
+  standalone: true,
+  imports: [DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent, Icon, RouterModule],
+  templateUrl: './pro-coming-soon-page.component.html',
+  styleUrl: './pro-coming-soon-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ProComingSoonPageComponent {
+  public readonly data: ProComingSoonData = inject(ActivatedRoute).snapshot
+    .data as ProComingSoonData;
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'use-cases', label: 'Use Cases' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+}

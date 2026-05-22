@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
 import { INLINE_TOKENS } from 'ui-lib-custom/tokens';
 import type { InlineToken } from 'ui-lib-custom/tokens';
@@ -11,11 +10,14 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for inline layout usage.
  */
@@ -23,10 +25,10 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   selector: 'app-layout-inline-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Grid,
     Inline,
     Stack,
@@ -34,8 +36,10 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     Tab,
     UiLibSelect,
     DocDemoViewportComponent,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './inline-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -44,6 +48,25 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 export class InlineSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'inline', label: 'Inline' }];
 
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'spacing', type: 'SpacingToken', description: 'Semantic gap between children.' },
+    {
+      name: 'justify',
+      type: "'start' | 'center' | 'end' | 'space-between'",
+      description: 'Main-axis distribution.',
+    },
+    {
+      name: 'align',
+      type: "'start' | 'center' | 'end' | 'stretch'",
+      description: 'Cross-axis alignment for wrapped rows.',
+    },
+    {
+      name: 'wrap',
+      type: 'boolean',
+      description: 'Allow items to wrap to the next line.',
+    },
+  ];
+
   public readonly usageSnippet: string = `
 <ui-lib-inline spacing="sm" justify="center">
   <span class="chip">Tag 1</span>
@@ -51,6 +74,16 @@ export class InlineSectionComponent {
   <span class="chip">Tag 3</span>
 </ui-lib-inline>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Inline } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Inline],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

@@ -1,23 +1,21 @@
 <app-doc-page-layout [sections]="sections">
-
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Menu</h1>
-      <code class="demo-page-header__import">import &#123; Menu &#125; from 'ui-lib-custom/menu'</code>
-    </div>
-    <p class="demo-page-header__description">
-      A flexible navigation panel supporting both inline and popup modes. Items can be organised into
-      labelled groups, separated by dividers, and decorated with icons. Implements the
+  <app-doc-page-header docHeader title="Menu" [importCode]="importCode">
+    <p class="doc-description">
+      A flexible navigation panel supporting both inline and popup modes. Items can be organised
+      into labelled groups, separated by dividers, and decorated with icons. Implements the
       <strong>roving tabindex</strong> pattern for accessible keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+      <ui-lib-code-snippet
+        [code]="importTs"
+        language="typescript"
+        [showLineNumbers]="true"
+      />
     </div>
-  </header>
+  </app-doc-page-header>
 
   <!-- ── Overview ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Overview</h2>
+  <app-doc-section id="basic" title="Overview">
     <p class="demo-section__description">
       <code>Menu</code> renders an accessible, keyboard-navigable menu panel that supports flat and
       grouped item lists. Two modes are available:
@@ -37,11 +35,10 @@
       <strong>labelled groups</strong> via top-level items with an <code>items</code> array. These
       render as section headers within a flat panel rather than flyout sub-menus.
     </p>
-  </section>
+  </app-doc-section>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic-inline" data-doc-anchor>
-    <h2 class="demo-section__title">Basic (Inline)</h2>
+  <app-doc-section id="basic-inline" title="Basic (Inline)">
     <p class="demo-section__description">
       The default inline mode renders the menu panel directly in the document flow. Pass a
       <code>MenuItem[]</code> via <code>[model]</code>.
@@ -58,12 +55,11 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.basic" language="html" />
-  </section>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
   <!-- ── With Separator ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="with-separator" data-doc-anchor>
-    <h2 class="demo-section__title">With Separator</h2>
+  <app-doc-section id="with-separator" title="With Separator">
     <p class="demo-section__description">
       Add <code>&#123; separator: true &#125;</code> to insert a horizontal divider between groups
       of related items. Separators use <code>role="separator"</code> for screen reader support.
@@ -71,12 +67,15 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="separatorItems" />
     </div>
-    <app-doc-code-snippet [code]="snippets.separator" language="typescript" />
-  </section>
+    <ui-lib-code-snippet
+      [code]="separatorTs"
+      language="typescript"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── Disabled Items ────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled-items" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled Items</h2>
+  <app-doc-section id="disabled-items" title="Disabled Items">
     <p class="demo-section__description">
       Set <code>disabled: true</code> on any item to make it non-interactive and visually muted.
       Disabled items receive <code>aria-disabled="true"</code> and are excluded from the roving
@@ -85,11 +84,10 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="disabledItems" />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Grouped ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="grouped-items" data-doc-anchor>
-    <h2 class="demo-section__title">Grouped Items</h2>
+  <app-doc-section id="grouped-items" title="Grouped Items">
     <p class="demo-section__description">
       Provide an <code>items</code> array on a top-level entry to create a labelled section. The
       parent's <code>label</code> becomes a visual group header; the group receives
@@ -98,12 +96,11 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="groupedItems" />
     </div>
-    <app-doc-code-snippet [code]="snippets.grouped" language="typescript" />
-  </section>
+    <ui-lib-code-snippet [code]="groupedTs" language="typescript" [showLineNumbers]="true" />
+  </app-doc-section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="popup-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Popup Mode</h2>
+  <app-doc-section id="popup-mode" title="Popup Mode">
     <p class="demo-section__description">
       Set <code>[popup]="true"</code> and control visibility via <code>toggle(event)</code>,
       <code>show(event)</code>, or <code>hide()</code>. Wire the trigger button with
@@ -137,12 +134,11 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.popup" language="html" />
-  </section>
+    <app-doc-code-example [html]="popupHtml" [typescript]="popupTs" />
+  </app-doc-section>
 
   <!-- ── Popup Grouped ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="popup-with-groups" data-doc-anchor>
-    <h2 class="demo-section__title">Popup with Groups</h2>
+  <app-doc-section id="popup-with-groups" title="Popup with Groups">
     <p class="demo-section__description">
       Grouped items work in popup mode too — the labelled sections are rendered inline within the
       floating panel.
@@ -174,11 +170,10 @@
         </ul>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- ── Commands & Events ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="commands-events" data-doc-anchor>
-    <h2 class="demo-section__title">Commands &amp; Events</h2>
+  <app-doc-section id="commands-events" title="Commands &amp; Events">
     <p class="demo-section__description">
       Use the <code>command</code> callback on individual items for item-local behaviour, or listen
       to the <code>(itemClick)</code> output for a central event handler. Both fire on click and
@@ -196,12 +191,15 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.commands" language="typescript" />
-  </section>
+    <ui-lib-code-snippet
+      [code]="commandsTs"
+      language="typescript"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="url-items" data-doc-anchor>
-    <h2 class="demo-section__title">URL Items</h2>
+  <app-doc-section id="url-items" title="URL Items">
     <p class="demo-section__description">
       Set <code>url</code> on an item to render it as a native <code>&lt;a href&gt;</code> element.
       Combine with <code>target="_blank"</code> to open in a new tab.
@@ -209,12 +207,15 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-menu [model]="urlItems" />
     </div>
-    <app-doc-code-snippet [code]="snippets.urlItems" language="typescript" />
-  </section>
+    <ui-lib-code-snippet
+      [code]="urlItemsTs"
+      language="typescript"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
       <code>minimal</code>. When <code>variant</code> is <code>null</code> (the default), the value
@@ -234,12 +235,11 @@
         <ui-lib-menu [model]="variantItems" variant="minimal" />
       </div>
     </div>
-    <app-doc-code-snippet [code]="snippets.variants" language="html" />
-  </section>
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>. The size
       affects item padding and font size.
@@ -258,12 +258,11 @@
         <ui-lib-menu [model]="sizeItems" size="lg" />
       </div>
     </div>
-    <app-doc-code-snippet [code]="snippets.sizes" language="html" />
-  </section>
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+  </app-doc-section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="demo-section__subtitle">Inputs</h3>
     <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
@@ -347,66 +346,17 @@
     </ui-lib-table>
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-    <ui-lib-table [value]="cssTokenRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Token" field="token" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.token"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Default" field="default" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.default"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Description" field="description">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.description"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
-  </section>
+    <app-doc-css-vars-table [rows]="cssVarRows" />
+  </app-doc-section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-    <h2 class="demo-section__title">Accessibility</h2>
+  <app-doc-section id="accessibility" title="Accessibility">
 
-    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-    <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Element" field="element" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.element"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Attribute" field="attribute" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.attribute"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Value" field="value" width="180px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.value"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Notes" field="notes">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.notes"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
 
     <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
-    <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Key" field="key" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.key"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Action" field="action">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.action"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
 
     <h3 class="demo-section__subtitle">Notes</h3>
     <ul class="demo-list">
@@ -429,8 +379,18 @@
         <code>prefers-reduced-motion: reduce</code> is active.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -439,5 +399,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

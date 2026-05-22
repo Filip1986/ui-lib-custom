@@ -2,10 +2,22 @@ import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
 import { CarouselComponent } from 'ui-lib-custom/carousel';
 import type { CarouselResponsiveOption } from 'ui-lib-custom/carousel';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 interface DemoProduct {
   name: string;
   category: string;
@@ -21,12 +33,43 @@ interface DemoProduct {
 @Component({
   selector: 'app-carousel-demo',
   standalone: true,
-  imports: [CarouselComponent, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CarouselComponent,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+  ],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string = "import { CarouselComponent } from 'ui-lib-custom/carousel'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -43,6 +86,9 @@ export class CarouselDemoComponent {
     { id: 'minimal-variant', label: 'Minimal Variant' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'hidden-controls', label: 'Hidden Navigators & Indicators' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   /** Sample products used across all demo scenarios. */
@@ -77,12 +123,163 @@ export class CarouselDemoComponent {
   /** Track the last emitted page index for the event demo. */
   public lastPage: number = 0;
 
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Carousel container',
+      attribute: 'aria-roledescription',
+      value: '"carousel"',
+      notes: 'Announces the widget type to assistive technologies that render it as a region.',
+    },
+    {
+      element: 'Carousel container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Passed via <code>[ariaLabel]</code>; identifies the carousel for screen readers.',
+    },
+    {
+      element: 'Slide',
+      attribute: 'aria-roledescription',
+      value: '"slide"',
+      notes: 'Each individual item is announced as a slide.',
+    },
+    {
+      element: 'Live region',
+      attribute: 'aria-live',
+      value: '"polite"',
+      notes: 'Announces slide changes without interrupting the user.',
+    },
+    {
+      element: 'Navigation button',
+      attribute: 'aria-label',
+      value: '"Previous" | "Next"',
+      notes: 'Descriptive labels for prev/next navigation controls.',
+    },
+  ];
+
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'unknown[]',
+      default: '[]',
+      description: 'Array of items to display in the carousel.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal'",
+      default: "'material'",
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Carousel size.' },
+    {
+      name: 'numVisible',
+      type: 'number',
+      default: '1',
+      description: 'Number of visible items at once.',
+    },
+    {
+      name: 'numScroll',
+      type: 'number',
+      default: '1',
+      description: 'Number of items to scroll per click.',
+    },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Scroll axis.',
+    },
+    {
+      name: 'circular',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables infinite looping.',
+    },
+    {
+      name: 'showNavigators',
+      type: 'boolean',
+      default: 'true',
+      description: 'Toggles prev/next navigation buttons.',
+    },
+    {
+      name: 'showIndicators',
+      type: 'boolean',
+      default: 'true',
+      description: 'Toggles page indicator dots.',
+    },
+    {
+      name: 'autoplayInterval',
+      type: 'number',
+      default: '0',
+      description: 'Autoplay interval in milliseconds. 0 disables autoplay.',
+    },
+    {
+      name: 'responsiveOptions',
+      type: 'CarouselResponsiveOption[]',
+      default: '[]',
+      description: 'Breakpoint-specific numVisible/numScroll overrides.',
+    },
+    {
+      name: 'verticalViewportHeight',
+      type: 'string',
+      default: "'300px'",
+      description: 'Viewport height when orientation is vertical.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Carousel'",
+      description: 'Accessible label for the carousel region.',
+    },
+  ];
 
   /** Update the displayed page index when the carousel emits a page change. */
   public onPageChange(event: { page: number }): void {
     this.lastPage = event.page;
   }
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: '← / →', action: 'Navigate to the previous or next page of items.' },
+    {
+      key: 'Enter / Space',
+      target: 'Navigator button',
+      action: 'Activate the previous/next button.',
+    },
+    { key: 'Enter / Space', target: 'Indicator dot', action: 'Jump directly to that page.' },
+    { key: 'Tab / Shift+Tab', action: 'Move focus between navigator buttons and indicator dots.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-carousel-gap', description: 'Gap.' },
+    { variable: '--uilib-carousel-content-gap', description: 'Content gap.' },
+    { variable: '--uilib-carousel-nav-button-size', description: 'Nav Button size.' },
+    { variable: '--uilib-carousel-nav-button-bg', description: 'Nav Button background colour.' },
+    {
+      variable: '--uilib-carousel-nav-button-bg-hover',
+      description: 'Nav Button background colour (hover).',
+    },
+    { variable: '--uilib-carousel-nav-button-color', description: 'Nav Button text colour.' },
+    { variable: '--uilib-carousel-nav-button-border', description: 'Nav Button border shorthand.' },
+    { variable: '--uilib-carousel-nav-button-radius', description: 'Nav Button border radius.' },
+    { variable: '--uilib-carousel-nav-button-shadow', description: 'Nav Button box shadow.' },
+    { variable: '--uilib-carousel-nav-icon-size', description: 'Nav Icon size.' },
+    { variable: '--uilib-carousel-indicator-width', description: 'Indicator width.' },
+    { variable: '--uilib-carousel-indicator-height', description: 'Indicator height.' },
+    { variable: '--uilib-carousel-indicator-radius', description: 'Indicator border radius.' },
+    { variable: '--uilib-carousel-indicator-bg', description: 'Indicator background colour.' },
+    {
+      variable: '--uilib-carousel-indicator-bg-hover',
+      description: 'Indicator background colour (hover).',
+    },
+    {
+      variable: '--uilib-carousel-indicator-bg-active',
+      description: 'Indicator background colour (active).',
+    },
+    { variable: '--uilib-carousel-indicator-gap', description: 'Indicator gap.' },
+    { variable: '--uilib-carousel-indicator-padding', description: 'Indicator padding.' },
+    { variable: '--uilib-carousel-indicator-focus-ring', description: 'Indicator focus ring.' },
+    { variable: '--uilib-carousel-transition', description: 'Transition.' },
+  ];
 }

@@ -3,47 +3,22 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Tag } from 'ui-lib-custom/tag';
 import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
 import { Button } from 'ui-lib-custom/button';
-import {
-  TableComponent,
-  TableColumnComponent,
-  TableColumnBodyDirective,
-} from 'ui-lib-custom/table';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-
-interface TagInputRow {
-  readonly name: string;
-  readonly type: string;
-  readonly default: string;
-  readonly description: string;
-}
-
-interface TagOutputRow {
-  readonly name: string;
-  readonly type: string;
-  readonly description: string;
-}
-
-interface CssVarRow {
-  readonly variable: string;
-  readonly default: string;
-  readonly description: string;
-}
-
-interface AriaRow {
-  readonly attribute: string;
-  readonly element: string;
-  readonly value: string;
-  readonly notes: string;
-}
-
-interface KeyboardRow {
-  readonly key: string;
-  readonly target: string;
-  readonly action: string;
-}
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 
 /**
  * Demo page for the Tag component.
@@ -52,20 +27,48 @@ interface KeyboardRow {
   selector: 'app-tag-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Tag,
     Button,
-    TableComponent,
-    TableColumnComponent,
-    TableColumnBodyDirective,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
-    DocCodeSnippetComponent,
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocAriaTableComponent,
+    DocSectionComponent,
   ],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-15',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+    humanPending: [
+      'NVDA + Chrome — dismissible tag removal announcement',
+      'VoiceOver + Safari — aria-label on dismiss button',
+      'Visual contrast — tag color variants against white background',
+    ],
+  };
+
+  public readonly importCode: string = "import { Tag } from 'ui-lib-custom/tag'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 
@@ -99,7 +102,7 @@ export class TagDemoComponent {
 
   // ---- API table data -------------------------------------------------------
 
-  public readonly inputRows: TagInputRow[] = [
+  public readonly apiInputRows: ApiPropRow[] = [
     {
       name: 'value',
       type: 'string | null',
@@ -152,10 +155,10 @@ export class TagDemoComponent {
     },
   ];
 
-  public readonly outputRows: TagOutputRow[] = [
+  public readonly apiOutputRows: ApiPropRow[] = [
     {
       name: 'removed',
-      type: 'OutputEmitterRef&lt;MouseEvent&gt;',
+      type: 'OutputEmitterRef<MouseEvent>',
       description:
         'Emitted when the dismiss button is clicked. The tag is not auto-removed — control visibility from the parent.',
     },
@@ -227,7 +230,7 @@ export class TagDemoComponent {
     },
   ];
 
-  public readonly ariaRows: AriaRow[] = [
+  public readonly ariaRows: readonly AriaRow[] = [
     {
       attribute: 'id',
       element: 'Host',
@@ -267,7 +270,7 @@ export class TagDemoComponent {
     },
   ];
 
-  public readonly keyboardRows: KeyboardRow[] = [
+  public readonly keyboardRows: KeyboardNavRow[] = [
     {
       key: 'Tab',
       target: 'Dismiss button',
@@ -308,11 +311,17 @@ export class TagDemoComponent {
   public readonly snippets: {
     readonly import: string;
     readonly severity: string;
+    readonly severityTs: string;
     readonly sizes: string;
+    readonly sizesTs: string;
     readonly rounded: string;
+    readonly roundedTs: string;
     readonly icons: string;
+    readonly iconsTs: string;
     readonly dismissible: string;
+    readonly dismissibleTs: string;
     readonly variants: string;
+    readonly variantsTs: string;
   } = {
     import: `import { Tag } from 'ui-lib-custom/tag';`,
     severity: `<ui-lib-tag value="Primary"   severity="primary" />
@@ -322,23 +331,81 @@ export class TagDemoComponent {
 <ui-lib-tag value="Warning"   severity="warn" />
 <ui-lib-tag value="Danger"    severity="danger" />
 <ui-lib-tag value="Contrast"  severity="contrast" />`,
+    severityTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     sizes: `<ui-lib-tag value="Small"  size="sm" severity="primary" />
 <ui-lib-tag value="Medium" size="md" severity="primary" />
 <ui-lib-tag value="Large"  size="lg" severity="primary" />`,
+    sizesTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     rounded: `<ui-lib-tag value="Primary" severity="primary" [rounded]="true" />
 <ui-lib-tag value="Success" severity="success" [rounded]="true" />`,
+    roundedTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     icons: `<ui-lib-tag value="Primary" icon="pi pi-tag"                  severity="primary" />
 <ui-lib-tag value="Success" icon="pi pi-check-circle"          severity="success" />
 <ui-lib-tag value="Warning" icon="pi pi-exclamation-triangle"  severity="warn" />`,
+    iconsTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
     dismissible: `<ui-lib-tag
   value="Python"
   severity="info"
   [dismissible]="true"
   (removed)="removeTag()"
 />`,
+    dismissibleTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {
+  public removeTag(): void {
+    // hide or remove tag from your data model
+  }
+}`,
     variants: `<ui-lib-tag value="Tag" severity="primary" variant="material" />
 <ui-lib-tag value="Tag" severity="primary" variant="bootstrap" />
 <ui-lib-tag value="Tag" severity="primary" variant="minimal" />`,
+    variantsTs: `import { Component } from '@angular/core';
+import { Tag } from 'ui-lib-custom/tag';
+
+@Component({
+  standalone: true,
+  imports: [Tag],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`,
   } as const;
 
   // ---- Playground ---------------------------------------------------------
@@ -378,4 +445,34 @@ export class TagDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'string', default: "''", description: 'Tag label text.' },
+    {
+      name: 'severity',
+      type: "'info' | 'success' | 'warning' | 'danger' | 'secondary' | 'contrast' | null",
+      default: 'null',
+      description: 'Severity level controlling the colour preset.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies a fully rounded pill shape.',
+    },
+    { name: 'icon', type: 'string | null', default: 'null', description: 'Leading icon name.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Tag size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+  ];
 }

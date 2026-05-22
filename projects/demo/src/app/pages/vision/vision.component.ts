@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 export interface CorePrinciple {
@@ -39,12 +42,25 @@ export interface RevenueStream {
 @Component({
   selector: 'app-vision',
   standalone: true,
-  imports: [CommonModule, RouterModule, DocPageLayoutComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './vision.component.html',
   styleUrl: './vision.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VisionComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly sections: DocSection[] = [
     { id: 'vision-statement', label: 'Vision Statement' },
     { id: 'core-philosophy', label: 'Core Philosophy' },

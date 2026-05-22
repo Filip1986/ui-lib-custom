@@ -1,0 +1,285 @@
+<app-doc-page-layout #layout [sections]="sections">
+  <app-doc-page-header
+    docHeader
+    title="SyntaxHighlighter"
+    [importCode]="importCode"
+    description="A lightweight, zero-dependency syntax tokenizer for TypeScript, HTML/Angular templates, and SCSS/CSS. No external libraries — pure regex tokenization with VS Code–inspired colours. Fully integrated with ui-lib-code-snippet."
+    [tags]="['Utility']"
+  />
+
+  <div class="demo-page">
+
+    <!-- ── Overview ────────────────────────────────────────────────────────── -->
+    <app-doc-section id="overview" title="Overview">
+      <h2 class="demo-section__title">Overview</h2>
+      <p class="demo-section__description">
+        The built-in highlighter powers the <code>ui-lib-code-snippet</code> component for
+        TypeScript, HTML, SCSS, and CSS. You can also call it directly to highlight code in
+        your own components or utilities — no Angular dependency, just a pure function.
+      </p>
+
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="overview-card__icon">TS</div>
+          <h3 class="overview-card__title">TypeScript</h3>
+          <p class="overview-card__body">
+            Keywords, strings, comments, decorators, built-in types, numbers, and function names.
+          </p>
+        </div>
+        <div class="overview-card">
+          <div class="overview-card__icon">&lt;/&gt;</div>
+          <h3 class="overview-card__title">HTML / Angular</h3>
+          <p class="overview-card__body">
+            Tags, attributes, Angular bindings <code>[prop]</code> <code>(event)</code>,
+            control-flow blocks <code>&#64;if</code> <code>&#64;for</code>, and <code>{{ '{{ interpolation }}' }}</code>.
+          </p>
+        </div>
+        <div class="overview-card">
+          <div class="overview-card__icon">CSS</div>
+          <h3 class="overview-card__title">SCSS / CSS</h3>
+          <p class="overview-card__body">
+            Properties, <code>$variables</code>, <code>--custom-props</code>, at-rules,
+            selectors, numbers with units, and hex colours.
+          </p>
+        </div>
+      </div>
+    </app-doc-section>
+
+    <!-- ── TypeScript ───────────────────────────────────────────────────────── -->
+    <app-doc-section id="typescript" title="TypeScript">
+      <h2 class="demo-section__title">TypeScript</h2>
+      <p class="demo-section__description">
+        Keywords are bold blue, strings are warm orange, comments are muted green, decorators
+        and function names are yellow, and built-in types like <code>Signal</code> or
+        <code>Promise</code> are teal.
+      </p>
+      <ui-lib-code-snippet
+        language="typescript"
+        filename="user-card.component.ts"
+        [code]="tsCode"
+        [showLineNumbers]="true"
+      />
+    </app-doc-section>
+
+    <!-- ── HTML / Angular ───────────────────────────────────────────────────── -->
+    <app-doc-section id="html" title="HTML / Angular templates">
+      <h2 class="demo-section__title">HTML / Angular templates</h2>
+      <p class="demo-section__description">
+        Tag names are teal, attribute names light blue, attribute values orange. Angular
+        property bindings <code>[src]</code> and event bindings <code>(clicked)</code> glow
+        bright blue. Control-flow keywords <code>&#64;if</code> / <code>&#64;for</code> are
+        highlighted like language keywords.
+      </p>
+      <ui-lib-code-snippet
+        language="html"
+        filename="user-card.component.html"
+        [code]="htmlCode"
+        [showLineNumbers]="true"
+      />
+    </app-doc-section>
+
+    <!-- ── SCSS ─────────────────────────────────────────────────────────────── -->
+    <app-doc-section id="scss" title="SCSS">
+      <h2 class="demo-section__title">SCSS</h2>
+      <p class="demo-section__description">
+        SCSS variables are purple, CSS custom properties orange, at-rules pink, property
+        names light blue, selectors gold, and numbers with units are teal-green.
+      </p>
+      <ui-lib-code-snippet
+        language="scss"
+        filename="user-card.component.scss"
+        [code]="scssCode"
+        [showLineNumbers]="true"
+      />
+    </app-doc-section>
+
+    <!-- ── Direct Usage ──────────────────────────────────────────────────────── -->
+    <app-doc-section id="usage" title="Direct Usage">
+      <h2 class="demo-section__title">Direct Usage</h2>
+      <p class="demo-section__description">
+        Import the functions directly from <code>ui-lib-custom/syntax-highlighter</code>.
+        No Angular injection required — they are plain TypeScript functions.
+      </p>
+
+      <h3 class="demo-section__subtitle">highlight()</h3>
+      <ui-lib-code-snippet [code]="snippets.highlightUsage" language="typescript"
+        [showLineNumbers]="true"
+        />
+
+      <h3 class="demo-section__subtitle">tokenize()</h3>
+      <ui-lib-code-snippet [code]="snippets.tokenizeUsage" language="typescript"
+        [showLineNumbers]="true"
+        />
+
+      <h3 class="demo-section__subtitle">escapeForCode()</h3>
+      <ui-lib-code-snippet [code]="snippets.escapeUsage" language="typescript"
+        [showLineNumbers]="true"
+        />
+    </app-doc-section>
+
+    <!-- ── API ──────────────────────────────────────────────────────────────── -->
+    <app-doc-section id="api" title="API">
+      <h2 class="demo-section__title">API</h2>
+
+      <div id="api-highlight" class="api-block">
+        <h3 class="api-block__signature">
+          <code>highlight(code: string, language: SyntaxLanguage): string</code>
+        </h3>
+        <p>
+          Returns an HTML string with <code>&lt;span class="uilib-token-&#123;type&#125;"&gt;</code>
+          wrappers. All code content is HTML-escaped before wrapping — the result is safe to
+          set as <code>innerHTML</code>.
+        </p>
+      </div>
+
+      <div id="api-tokenize" class="api-block">
+        <h3 class="api-block__signature">
+          <code>tokenize(code: string, language: SyntaxLanguage): readonly SyntaxToken[]</code>
+        </h3>
+        <p>
+          Returns the raw token array without converting to HTML. Each token has a
+          <code>type</code> (e.g. <code>'keyword'</code>, <code>'string'</code>) and a
+          <code>value</code> string. Useful when you need custom rendering.
+        </p>
+      </div>
+
+      <div id="api-escape" class="api-block">
+        <h3 class="api-block__signature">
+          <code>escapeForCode(code: string): string</code>
+        </h3>
+        <p>
+          HTML-escapes a plain code string without any token spans. Use this for languages
+          the built-in tokenizer does not support (JSON, Bash, shell, etc.).
+        </p>
+      </div>
+
+      <h3 class="demo-section__subtitle" style="margin-top: 1.5rem;">SyntaxLanguage</h3>
+      <div class="type-block">
+        <code>type SyntaxLanguage = 'typescript' | 'scss' | 'css' | 'html'</code>
+      </div>
+
+      <h3 class="demo-section__subtitle" style="margin-top: 1.5rem;">SyntaxToken</h3>
+      <ui-lib-code-snippet
+        [code]="syntaxTokenInterfaceCode"
+        language="typescript"
+        [showLineNumbers]="true"
+      />
+    </app-doc-section>
+
+    <!-- ── Token Classes ─────────────────────────────────────────────────────── -->
+    <app-doc-section id="tokens" title="Token Classes">
+      <h2 class="demo-section__title">Token Classes</h2>
+      <p class="demo-section__description">
+        Each <code>&lt;span&gt;</code> carries a <code>uilib-token-&#123;type&#125;</code> CSS class.
+        Default colours are defined via CSS custom properties on the
+        <code>ui-lib-code-snippet</code> host.
+      </p>
+
+      <div class="token-grid">
+        <div class="token-row token-row--header">
+          <span>Class</span>
+          <span>Default colour</span>
+          <span>Meaning</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-keyword token-sample">uilib-token-keyword</code>
+          <span class="token-swatch" style="--swatch: #569cd6;">#569cd6</span>
+          <span>TS keywords, Angular &#64;control-flow</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-string token-sample">uilib-token-string</code>
+          <span class="token-swatch" style="--swatch: #ce9178;">#ce9178</span>
+          <span>String literals</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-comment token-sample">uilib-token-comment</code>
+          <span class="token-swatch" style="--swatch: #6a9955;">#6a9955</span>
+          <span>Comments</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-number token-sample">uilib-token-number</code>
+          <span class="token-swatch" style="--swatch: #b5cea8;">#b5cea8</span>
+          <span>Numbers, hex colours</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-decorator token-sample">uilib-token-decorator</code>
+          <span class="token-swatch" style="--swatch: #dcdcaa;">#dcdcaa</span>
+          <span>TypeScript decorators</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-type token-sample">uilib-token-type</code>
+          <span class="token-swatch" style="--swatch: #4ec9b0;">#4ec9b0</span>
+          <span>Built-in TS types, HTML tags</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-function token-sample">uilib-token-function</code>
+          <span class="token-swatch" style="--swatch: #dcdcaa;">#dcdcaa</span>
+          <span>Function / method names</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-variable token-sample">uilib-token-variable</code>
+          <span class="token-swatch" style="--swatch: #bd63c5;">#bd63c5</span>
+          <span>SCSS $vars, --custom-props</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-at-rule token-sample">uilib-token-at-rule</code>
+          <span class="token-swatch" style="--swatch: #c586c0;">#c586c0</span>
+          <span>SCSS @mixin, @include…</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-property token-sample">uilib-token-property</code>
+          <span class="token-swatch" style="--swatch: #9cdcfe;">#9cdcfe</span>
+          <span>CSS property names, HTML attr names</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-binding token-sample">uilib-token-binding</code>
+          <span class="token-swatch" style="--swatch: #4fc1ff;">#4fc1ff</span>
+          <span>Angular [prop], (event), *dir, #ref</span>
+        </div>
+        <div class="token-row">
+          <code class="uilib-token-interpolation token-sample">uilib-token-interpolation</code>
+          <span class="token-swatch" style="--swatch: #dcdcaa;">#dcdcaa</span>
+          <span>Angular {{ '{{ expression }}' }}</span>
+        </div>
+      </div>
+    </app-doc-section>
+
+    <!-- ── Theming ───────────────────────────────────────────────────────────── -->
+    <app-doc-section id="css-vars" title="CSS Custom Properties">
+      <h2 class="demo-section__title">Theming</h2>
+      <p class="demo-section__description">
+        Override any token colour via CSS custom properties on the host element or a parent
+        container. All token colours are exposed as <code>--uilib-syntax-*</code> variables.
+      </p>
+      <ui-lib-code-snippet [code]="snippets.themeOverride" language="scss"
+        [showLineNumbers]="true"
+        />
+    </app-doc-section>
+
+  </div>
+
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      Wrap highlighted output in <code>&lt;pre&gt;&lt;code&gt;</code> to give it proper
+      semantics. Add <code>tabindex="0"</code> on the <code>&lt;pre&gt;</code> when the block
+      may overflow so keyboard users can scroll it.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="activeSectionId()"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

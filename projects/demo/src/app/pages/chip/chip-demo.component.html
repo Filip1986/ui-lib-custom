@@ -1,31 +1,15 @@
 <app-doc-page-layout [sections]="sections">
 
-  <!-- ---- Overview / Hero -------------------------------------------- -->
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Chip</h1>
-      <code class="demo-page-header__import">import &#123; Chip &#125; from 'ui-lib-custom/chip'</code>
-    </div>
-    <p class="demo-page-header__description">
-      Compact inline element representing an attribute, tag, or dismissible item.
-      Supports an optional leading icon or image, a removable close button,
-      three sizes, and three design variants.
+  <app-doc-page-header docHeader title="Chip" [importCode]="importCode">
+    <p class="doc-description">
+      Compact inline element representing an attribute, tag, or dismissible item. Supports an
+      optional leading icon or image, a removable close button, three sizes, and three design
+      variants.
     </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-chip label="Angular" icon="pi pi-bolt" />
-      <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
-      <ui-lib-chip
-        label="Amy"
-        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-        imageAlt="Amy Elsner"
-      />
-      <ui-lib-chip label="Removable" [removable]="true" />
-    </div>
-  </header>
+  </app-doc-page-header>
 
-  <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <!-- ---- Basic -------------------------------------------------------- -->
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Set the <code>label</code> input to display a simple text chip.
     </p>
@@ -35,31 +19,39 @@
       <ui-lib-chip label="Mystery" />
       <ui-lib-chip label="Thriller" />
     </div>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Basic"
+      [code]="snippets.basic"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- With Icon ------------------------------------------------ -->
-  <section class="demo-section" id="icon" data-doc-anchor>
-    <h2 class="demo-section__title">With Icon</h2>
+  <!-- ---- With Icon ---------------------------------------------------- -->
+  <app-doc-section id="icon" title="With Icon">
     <p class="demo-section__description">
-      Add an <code>icon</code> input (a PrimeIcons CSS class) to decorate the chip with a
-      leading icon. The icon is decorative and hidden from assistive technology.
+      Add an <code>icon</code> input (a PrimeIcons CSS class) to decorate the chip with a leading
+      icon. The icon is decorative and hidden from assistive technology.
     </p>
     <div class="demo-section__preview">
       <ui-lib-chip label="Angular" icon="pi pi-bolt" />
       <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
       <ui-lib-chip label="Starred" icon="pi pi-star" />
     </div>
-    <app-doc-code-snippet title="Icon" [code]="snippets.icon" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Icon"
+      [code]="snippets.icon"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- With Image ----------------------------------------------- -->
-  <section class="demo-section" id="image" data-doc-anchor>
-    <h2 class="demo-section__title">With Image</h2>
+  <!-- ---- With Image --------------------------------------------------- -->
+  <app-doc-section id="image" title="With Image">
     <p class="demo-section__description">
-      Provide an <code>image</code> URL to render a circular avatar thumbnail.
-      Always supply a meaningful <code>imageAlt</code> description — the default
-      <code>"Chip"</code> is not appropriate for real user images.
+      Provide an <code>image</code> URL to render a circular avatar thumbnail. Always supply a
+      meaningful <code>imageAlt</code> description — the default <code>"Chip"</code> is not
+      appropriate for real user images.
     </p>
     <div class="demo-section__preview">
       <ui-lib-chip
@@ -78,24 +70,24 @@
         imageAlt="Onyama Limba"
       />
     </div>
-    <app-doc-code-snippet title="Image" [code]="snippets.image" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Image"
+      [code]="snippets.image"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- Removable ------------------------------------------------ -->
-  <section class="demo-section" id="removable" data-doc-anchor>
-    <h2 class="demo-section__title">Removable</h2>
+  <!-- ---- Removable ---------------------------------------------------- -->
+  <app-doc-section id="removable" title="Removable">
     <p class="demo-section__description">
-      Set <code>[removable]="true"</code> to display a close button. Clicking it emits
-      the <code>(removed)</code> event — the chip does not disappear automatically.
-      Manage visibility in the parent component.
+      Set <code>[removable]="true"</code> to display a close button. Clicking it emits the
+      <code>(removed)</code> event — the chip does not disappear automatically. Manage visibility
+      in the parent component.
     </p>
     <div class="demo-section__preview">
       @for (chip of activeChips(); track chip) {
-        <ui-lib-chip
-          [label]="chip"
-          [removable]="true"
-          (removed)="removeChip(chip)"
-        />
+        <ui-lib-chip [label]="chip" [removable]="true" (removed)="removeChip(chip)" />
       }
       @if (activeChips().length === 0) {
         <span class="demo-chip-empty">All chips removed.</span>
@@ -109,17 +101,21 @@
         </ui-lib-button>
       </div>
     }
-    <app-doc-code-snippet title="Removable" [code]="snippets.removable" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Removable"
+      [code]="snippets.removable"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- Selectable ----------------------------------------------- -->
-  <section class="demo-section" id="selectable" data-doc-anchor>
-    <h2 class="demo-section__title">Selectable</h2>
+  <!-- ---- Selectable --------------------------------------------------- -->
+  <app-doc-section id="selectable" title="Selectable">
     <p class="demo-section__description">
       Set <code>[selectable]="true"</code> to make the chip keyboard-focusable and toggleable.
-      Bind <code>[selected]</code> and <code>(selectedChange)</code> to track state.
-      Wrap selectable chips in a <code>role="listbox"</code> container so screen readers
-      announce the collection correctly.
+      Bind <code>[selected]</code> and <code>(selectedChange)</code> to track state. Wrap
+      selectable chips in a <code>role="listbox"</code> container so screen readers announce the
+      collection correctly.
     </p>
     <div
       class="demo-section__preview"
@@ -136,32 +132,36 @@
         />
       }
     </div>
-    <app-doc-code-snippet title="Selectable" [code]="snippets.selectable" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Selectable"
+      [code]="snippets.selectable"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- Sizes ---------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
-    <p class="demo-section__description">
-      Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
-    </p>
+  <!-- ---- Sizes -------------------------------------------------------- -->
+  <app-doc-section id="sizes" title="Sizes" description="Three sizes: sm, md (default), and lg.">
     <div class="demo-section__preview demo-section__preview--center">
       @for (size of sizes; track size) {
         <ui-lib-chip [label]="size" [size]="size" icon="pi pi-tag" />
       }
     </div>
-    <app-doc-code-snippet title="Sizes" [code]="snippets.sizes" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Sizes"
+      [code]="snippets.sizes"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- Design Variants ------------------------------------------ -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
+  <!-- ---- Design Variants ---------------------------------------------- -->
+  <app-doc-section id="variants" title="Design Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code> (elevated, pill-shaped),
-      <code>bootstrap</code> (badge-like, square corners), and
-      <code>minimal</code> (muted surface with border).
-      When <code>variant</code> is <code>null</code> (the default), it inherits
-      from <code>ThemeConfigService</code>.
+      <code>bootstrap</code> (badge-like, square corners), and <code>minimal</code> (muted surface
+      with border). When <code>variant</code> is <code>null</code> (the default), it inherits from
+      <code>ThemeConfigService</code>.
     </p>
     @for (variant of variants; track variant) {
       <div class="demo-variant-group">
@@ -173,12 +173,16 @@
         </div>
       </div>
     }
-    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Variants"
+      [code]="snippets.variants"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
-  <!-- ---- Playground ----------------------------------------------- -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <!-- ---- Playground --------------------------------------------------- -->
+  <app-doc-section id="playground" title="Playground" description="Adjust the controls to see the chip update live.">
     <div class="demo-playground">
       <div class="demo-playground__preview">
         <ui-lib-chip
@@ -249,290 +253,32 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
-  <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <!-- ---- API Reference ------------------------------------------------ -->
+  <app-doc-section id="api" title="API Reference">
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiInputRows" />
+    <h3 class="demo-section__subtitle">Outputs</h3>
+    <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
+  </app-doc-section>
 
-    <div id="api-inputs" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>label</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Text displayed inside the chip.</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>CSS class for a leading icon (e.g. <code>"pi pi-user"</code>). Ignored when <code>image</code> is also set.</td>
-          </tr>
-          <tr>
-            <td><code>image</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>URL of a circular thumbnail image rendered at the start of the chip.</td>
-          </tr>
-          <tr>
-            <td><code>imageAlt</code></td>
-            <td><code>string</code></td>
-            <td><code>"Chip"</code></td>
-            <td>Alt text for the chip image. Provide a meaningful description for real user images.</td>
-          </tr>
-          <tr>
-            <td><code>removable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>When true, a close button is rendered. Emits <code>(removed)</code> on click.</td>
-          </tr>
-          <tr>
-            <td><code>removeIcon</code></td>
-            <td><code>string</code></td>
-            <td><code>"pi pi-times"</code></td>
-            <td>CSS class for the remove button icon.</td>
-          </tr>
-          <tr>
-            <td><code>selectable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>When true, the chip is keyboard-focusable and toggleable. Pair with <code>[selected]</code> and <code>(selectedChange)</code>.</td>
-          </tr>
-          <tr>
-            <td><code>selected</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Selected state for selectable chips.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>"sm" | "md" | "lg"</code></td>
-            <td><code>"md"</code></td>
-            <td>Size of the chip.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>"material" | "bootstrap" | "minimal" | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes applied to the host element.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- ---- CSS Custom Properties ---------------------------------------- -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the chip without touching component internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
 
-    <div id="api-outputs" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>(removed)</code></td>
-            <td><code>OutputEmitterRef&lt;MouseEvent&gt;</code></td>
-            <td>Emitted when the remove button is clicked. The chip does not auto-hide — manage visibility in the parent.</td>
-          </tr>
-          <tr>
-            <td><code>(selectedChange)</code></td>
-            <td><code>OutputEmitterRef&lt;boolean&gt;</code></td>
-            <td>Emitted when a selectable chip is toggled; provides the new selected value.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- ---- Accessibility ------------------------------------------------ -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
 
-  </section>
-
-  <!-- ---- CSS Custom Properties ------------------------------------ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-chip-bg</code></td>
-          <td>Chip background colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-color</code></td>
-          <td>Chip text colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-border</code></td>
-          <td>Chip border shorthand.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-border-radius</code></td>
-          <td>Chip border radius.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-padding-y</code></td>
-          <td>Vertical padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-padding-x</code></td>
-          <td>Horizontal padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-gap</code></td>
-          <td>Gap between icon, image, label, and remove button.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-font-size</code></td>
-          <td>Font size.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-font-weight</code></td>
-          <td>Font weight.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-image-size</code></td>
-          <td>Circular image diameter.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-remove-bg-hover</code></td>
-          <td>Remove button hover background.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-chip-transition</code></td>
-          <td>Transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-
-    <div id="a11y-aria" data-doc-anchor>
-      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Attribute</th>
-            <th>Element</th>
-            <th>Value</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>role</code></td>
-            <td>Host</td>
-            <td><code>option</code> or <code>group</code></td>
-            <td><code>option</code> for non-removable chips; <code>group</code> for removable chips to allow a nested interactive button.</td>
-          </tr>
-          <tr>
-            <td><code>aria-label</code></td>
-            <td>Host</td>
-            <td>Value of <code>label</code> input</td>
-            <td>Omitted when <code>label</code> is <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>aria-selected</code></td>
-            <td>Host</td>
-            <td><code>"true"</code> / <code>"false"</code></td>
-            <td>Only present when <code>[selectable]="true"</code>.</td>
-          </tr>
-          <tr>
-            <td><code>tabindex</code></td>
-            <td>Host</td>
-            <td><code>"0"</code></td>
-            <td>Only present when <code>[selectable]="true"</code>.</td>
-          </tr>
-          <tr>
-            <td><code>id</code></td>
-            <td>Host</td>
-            <td>Auto-generated (<code>ui-lib-chip-&#123;n&#125;</code>)</td>
-            <td>Unique per instance; stable for the component lifetime.</td>
-          </tr>
-          <tr>
-            <td><code>aria-label</code></td>
-            <td>Remove button</td>
-            <td><code>"Remove &#123;label&#125;"</code> or <code>"Remove"</code></td>
-            <td>Auto-generated from the <code>label</code> input; provides an accessible name for the close action.</td>
-          </tr>
-          <tr>
-            <td><code>aria-hidden</code></td>
-            <td>Leading icon</td>
-            <td><code>"true"</code></td>
-            <td>Decorative icon hidden from screen readers.</td>
-          </tr>
-          <tr>
-            <td><code>aria-hidden</code></td>
-            <td>Remove button icon</td>
-            <td><code>"true"</code></td>
-            <td>Decorative icon hidden from screen readers.</td>
-          </tr>
-          <tr>
-            <td><code>alt</code></td>
-            <td>Image</td>
-            <td>Value of <code>imageAlt</code></td>
-            <td>Defaults to <code>"Chip"</code>. Provide a meaningful description for real user images.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div id="a11y-keyboard" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Target</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Selectable chip</td>
-            <td>Toggles the selected state and emits <code>(selectedChange)</code>.</td>
-          </tr>
-          <tr>
-            <td><code>Enter</code></td>
-            <td>Selectable chip</td>
-            <td>Toggles the selected state and emits <code>(selectedChange)</code>.</td>
-          </tr>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Selectable chip</td>
-            <td>Moves focus to / from the chip in the standard tab order.</td>
-          </tr>
-          <tr>
-            <td><code>Space</code> / <code>Enter</code></td>
-            <td>Remove button</td>
-            <td>Activates the remove button (browser default button behaviour).</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
 
     <h3 class="demo-section__subtitle">Notes</h3>
     <ul class="doc-list">
@@ -541,20 +287,20 @@
         <code>aria-label</code> so screen readers announce the collection correctly.
       </li>
       <li>
-        The <code>label</code> input provides the accessible name via <code>aria-label</code>
-        on the host element. When using the default content projection slot instead,
-        set <code>aria-label</code> manually on the chip or its parent container.
+        The <code>label</code> input provides the accessible name via <code>aria-label</code> on
+        the host element. When using the default content projection slot instead, set
+        <code>aria-label</code> manually on the chip or its parent container.
       </li>
       <li>
-        Always provide a meaningful <code>imageAlt</code> for avatar images.
-        The default <code>"Chip"</code> is not appropriate for real user photographs.
+        Always provide a meaningful <code>imageAlt</code> for avatar images. The default
+        <code>"Chip"</code> is not appropriate for real user photographs.
       </li>
       <li>All transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
     </ul>
+  </app-doc-section>
 
-  </section>
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
-  <!-- ---- TOC Rail ------------------------------------------------- -->
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

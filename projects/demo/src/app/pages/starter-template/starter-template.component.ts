@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import type { Signal } from '@angular/core';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 /**
  * Placeholder demo page for the upcoming Starter Template.
@@ -10,7 +11,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-starter-template',
   standalone: true,
-  imports: [DocPageLayoutComponent, DocTocComponent],
+  imports: [DocPageHeaderComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './starter-template.component.html',
   styleUrl: './starter-template.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

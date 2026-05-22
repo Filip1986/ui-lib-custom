@@ -1,14 +1,48 @@
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  viewChild,
+  type WritableSignal,
+} from '@angular/core';
+import type { Signal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
-import { Card } from 'ui-lib-custom/card';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { OrganizationChart, OrgChartNodeTemplateDirective } from 'ui-lib-custom/organization-chart';
+import { Panel } from 'ui-lib-custom/panel';
 import type {
   OrganizationChartNode,
   OrganizationChartNodeSelectEvent,
   OrganizationChartNodeExpandEvent,
 } from 'ui-lib-custom/organization-chart';
+import {
+  basicHtml,
+  basicTs,
+  collapsibleHtml,
+  collapsibleTs,
+  singleSelectionHtml,
+  singleSelectionTs,
+  multipleSelectionHtml,
+  multipleSelectionTs,
+  customTemplateHtml,
+  customTemplateTs,
+  bootstrapHtml,
+  bootstrapTs,
+  minimalHtml,
+  minimalTs,
+} from './snippets.generated';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 // ─── Shared tree data ────────────────────────────────────────────────────────
 
@@ -47,49 +81,6 @@ function makeCompanyTree(expanded: boolean = true): OrganizationChartNode[] {
 
 // ─── Code snippets ────────────────────────────────────────────────────────────
 
-const SNIPPETS: Record<string, string> = {
-  basic: `<ui-lib-organization-chart [value]="nodes" />`,
-
-  collapsible: `<ui-lib-organization-chart
-  [value]="nodes"
-  [collapsible]="true"
-/>`,
-
-  singleSelection: `<ui-lib-organization-chart
-  [value]="nodes"
-  selectionMode="single"
-  [(selection)]="selection"
-/>`,
-
-  multipleSelection: `<ui-lib-organization-chart
-  [value]="nodes"
-  selectionMode="multiple"
-  [(selection)]="selection"
-/>`,
-
-  customTemplate: `<ui-lib-organization-chart [value]="nodes">
-  <ng-template uiOrgChartNode let-node>
-    <div class="custom-node">
-      <span class="custom-node__avatar">{{ initials(node.label) }}</span>
-      <strong class="custom-node__name">{{ node.label }}</strong>
-      <span class="custom-node__role">{{ node.data?.role }}</span>
-    </div>
-  </ng-template>
-</ui-lib-organization-chart>`,
-
-  bootstrap: `<ui-lib-organization-chart
-  [value]="nodes"
-  variant="bootstrap"
-  [collapsible]="true"
-/>`,
-
-  minimal: `<ui-lib-organization-chart
-  [value]="nodes"
-  variant="minimal"
-  [collapsible]="true"
-/>`,
-};
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 /** Demo page for the OrganizationChart component, showcasing all variants and features. */
@@ -97,17 +88,67 @@ const SNIPPETS: Record<string, string> = {
   selector: 'app-organization-chart-demo',
   standalone: true,
   imports: [
+    Panel,
     DocPageLayoutComponent,
-    CodePreviewComponent,
-    Card,
+    DocPageHeaderComponent,
     OrganizationChart,
     OrgChartNodeTemplateDirective,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
+    DocCssVarsTableComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './organization-chart-demo.component.html',
   styleUrl: './organization-chart-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrganizationChartDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly collapsibleHtml: string = collapsibleHtml;
+  public readonly collapsibleTs: string = collapsibleTs;
+  public readonly singleSelectionHtml: string = singleSelectionHtml;
+  public readonly singleSelectionTs: string = singleSelectionTs;
+  public readonly multipleSelectionHtml: string = multipleSelectionHtml;
+  public readonly multipleSelectionTs: string = multipleSelectionTs;
+  public readonly customTemplateHtml: string = customTemplateHtml;
+  public readonly customTemplateTs: string = customTemplateTs;
+  public readonly bootstrapHtml: string = bootstrapHtml;
+  public readonly bootstrapTs: string = bootstrapTs;
+  public readonly minimalHtml: string = minimalHtml;
+  public readonly minimalTs: string = minimalTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
+  public readonly importCode: string =
+    "import { OrganizationChart } from 'ui-lib-custom/organization-chart'";
+
   // ─── Navigation sections ───────────────────────────────────────────────────
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
@@ -117,6 +158,8 @@ export class OrganizationChartDemoComponent {
     { id: 'custom-template', label: 'Custom Template' },
     { id: 'bootstrap', label: 'Bootstrap Variant' },
     { id: 'minimal', label: 'Minimal Variant' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   // ─── Tree data (each demo section gets its own independent copy) ───────────
@@ -186,9 +229,6 @@ export class OrganizationChartDemoComponent {
   public readonly eventLog: WritableSignal<string[]> = signal([]);
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
-  public snippet(key: string): string {
-    return SNIPPETS[key] ?? '';
-  }
 
   public initials(label: string | undefined): string {
     if (!label) return '?';
@@ -229,4 +269,172 @@ export class OrganizationChartDemoComponent {
   private appendLog(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 10));
   }
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Chart container',
+      attribute: 'role',
+      value: '"tree"',
+      notes: 'The component root is announced as a tree widget.',
+    },
+    {
+      element: 'Chart container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Set via <code>[ariaLabel]</code> to name the tree for assistive technologies.',
+    },
+    { element: 'Node', attribute: 'role', value: '"treeitem"', notes: 'Each node is a tree item.' },
+    {
+      element: 'Node (with children)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: "Reflects whether the node's subtree is expanded.",
+    },
+    {
+      element: 'Collapsed subtree',
+      attribute: 'aria-hidden',
+      value: '"true"',
+      notes: 'Hidden subtree nodes are marked inert for screen readers.',
+    },
+    {
+      element: 'Selected node',
+      attribute: 'aria-selected',
+      value: '"true"',
+      notes: 'Reflects selection state on the node button.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'value',
+      type: 'OrganizationChartNode[]',
+      default: '[]',
+      description: 'Root nodes of the chart.',
+    },
+    {
+      name: 'selection',
+      type: 'OrganizationChartNode | OrganizationChartNode[] | null',
+      default: 'null',
+      description: 'Selected node(s).',
+    },
+    {
+      name: 'selectionMode',
+      type: "'single' | 'multiple' | null",
+      default: 'null',
+      description: 'Selection mode.',
+    },
+    {
+      name: 'collapsible',
+      type: 'boolean',
+      default: 'false',
+      description: 'Enables expand/collapse on nodes with children.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Theme variant override.',
+    },
+  ];
+
+  public readonly apiOutputRows: readonly ApiPropRow[] = [
+    {
+      name: 'nodeSelect',
+      type: 'OrganizationChartNodeSelectEvent',
+      description: 'When a node is selected.',
+    },
+    {
+      name: 'nodeUnselect',
+      type: 'OrganizationChartNodeUnselectEvent',
+      description: 'When a node is deselected.',
+    },
+    {
+      name: 'nodeExpand',
+      type: 'OrganizationChartNodeExpandEvent',
+      description: 'When a node is expanded.',
+    },
+    {
+      name: 'nodeCollapse',
+      type: 'OrganizationChartNodeCollapseEvent',
+      description: 'When a node is collapsed.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: 'uiOrgChartNode',
+      type: '$implicit: OrganizationChartNode',
+      description: 'Custom node content.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-org-chart-connector-color',
+      description: 'Uilib Org Chart Connector text colour.',
+    },
+    {
+      variable: '--uilib-org-chart-connector-width',
+      description: 'Uilib Org Chart Connector width.',
+    },
+    {
+      variable: '--uilib-org-chart-connector-height',
+      description: 'Uilib Org Chart Connector height.',
+    },
+    {
+      variable: '--uilib-org-chart-connector-radius',
+      description: 'Uilib Org Chart Connector border radius.',
+    },
+    { variable: '--uilib-org-chart-gap', description: 'Uilib Org Chart gap.' },
+    {
+      variable: '--uilib-org-chart-node-bg',
+      description: 'Uilib Org Chart Node background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-node-border',
+      description: 'Uilib Org Chart Node border shorthand.',
+    },
+    {
+      variable: '--uilib-org-chart-node-border-radius',
+      description: 'Uilib Org Chart Node Border border radius.',
+    },
+    { variable: '--uilib-org-chart-node-padding', description: 'Uilib Org Chart Node padding.' },
+    {
+      variable: '--uilib-org-chart-node-min-width',
+      description: 'Uilib Org Chart Node Min width.',
+    },
+    { variable: '--uilib-org-chart-node-color', description: 'Uilib Org Chart Node text colour.' },
+    {
+      variable: '--uilib-org-chart-node-hover-bg',
+      description: 'Uilib Org Chart Node Hover background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-node-selected-bg',
+      description: 'Uilib Org Chart Node Selected background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-node-selected-border',
+      description: 'Uilib Org Chart Node Selected border shorthand.',
+    },
+    {
+      variable: '--uilib-org-chart-node-selected-color',
+      description: 'Uilib Org Chart Node Selected text colour.',
+    },
+    { variable: '--uilib-org-chart-toggle-size', description: 'Uilib Org Chart Toggle size.' },
+    {
+      variable: '--uilib-org-chart-toggle-bg',
+      description: 'Uilib Org Chart Toggle background colour.',
+    },
+    {
+      variable: '--uilib-org-chart-toggle-border',
+      description: 'Uilib Org Chart Toggle border shorthand.',
+    },
+    {
+      variable: '--uilib-org-chart-toggle-color',
+      description: 'Uilib Org Chart Toggle text colour.',
+    },
+    {
+      variable: '--uilib-org-chart-toggle-radius',
+      description: 'Uilib Org Chart Toggle border radius.',
+    },
+  ];
 }

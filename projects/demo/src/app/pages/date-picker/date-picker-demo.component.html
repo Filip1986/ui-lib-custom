@@ -1,247 +1,279 @@
 <app-doc-page-layout [sections]="sections">
-  <div class="doc-header" docHeader>
-    <h1>DatePicker</h1>
-    <p class="doc-description">
-      Date and time selection with single, multiple, and range modes, month/year pickers,
-      constraints, and forms integration.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="DatePicker"
+    [importCode]="importCode"
+    description="Date and time selection with single, multiple, and range modes, month/year pickers, constraints, and forms integration."
+  />
 
   <app-doc-demo-viewport [autoHeight]="true">
     <div class="examples">
-      <section id="basic" data-doc-anchor class="example-section">
+      <app-doc-section id="basic" title="Basic">
         <h3>a. Basic</h3>
-        <app-code-preview [code]="snippet('basic')">
-          <ui-lib-card>
-            <div class="row-inline">
-              <ui-lib-date-picker [(ngModel)]="basicDate" />
-              <span class="value-text">Value: {{ formatValue(basicDate) }}</span>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="row-inline">
+            <ui-lib-date-picker [(ngModel)]="basicDate" />
+            <span class="value-text">Value: {{ formatValue(basicDate) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+      </app-doc-section>
 
-      <section id="format" data-doc-anchor class="example-section">
+      <app-doc-section id="format" title="Format">
         <h3>b. Format</h3>
-        <app-code-preview [code]="snippet('format')">
-          <ui-lib-card>
-            <div class="row-inline">
-              <ui-lib-date-picker [(ngModel)]="formattedDate" dateFormat="yy-mm-dd" />
-              <span class="value-text">Value: {{ formatValue(formattedDate) }}</span>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="row-inline">
+            <ui-lib-date-picker [(ngModel)]="formattedDate" dateFormat="yy-mm-dd" />
+            <span class="value-text">Value: {{ formatValue(formattedDate) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="formatHtml" [typescript]="formatTs" />
+      </app-doc-section>
 
-      <section id="icon" data-doc-anchor class="example-section">
+      <app-doc-section id="icon" title="Icon">
         <h3>c. Icon</h3>
-        <app-code-preview [code]="snippet('icon')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="iconDate" [showIcon]="true" iconDisplay="button" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="iconHtml" [typescript]="iconTs" />
+      </app-doc-section>
 
-      <section id="min-max" data-doc-anchor class="example-section">
+      <app-doc-section id="min-max" title="Min/Max">
         <h3>d. Min/Max</h3>
-        <app-code-preview [code]="snippet('minMax')">
-          <ui-lib-card>
-            <div class="stack-sm">
-              <ui-lib-date-picker
-                [(ngModel)]="constrainedDate"
-                [minDate]="minDate"
-                [maxDate]="maxDate"
-              />
-              <span class="value-text">Allowed window: {{ formatValue(minDate) }} - {{ formatValue(maxDate) }}</span>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <ui-lib-date-picker
+              [(ngModel)]="constrainedDate"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+            />
+            <span class="value-text"
+              >Allowed window: {{ formatValue(minDate) }} - {{ formatValue(maxDate) }}</span
+            >
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTs" />
+      </app-doc-section>
 
-      <section id="multiple" data-doc-anchor class="example-section">
+      <app-doc-section id="multiple" title="Multiple">
         <h3>e. Multiple</h3>
-        <app-code-preview [code]="snippet('multiple')">
-          <ui-lib-card>
-            <div class="stack-sm">
-              <ui-lib-date-picker [(ngModel)]="multipleDates" selectionMode="multiple" />
-              <span class="value-text">Selected: {{ formatValue(multipleDates) }}</span>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <ui-lib-date-picker [(ngModel)]="multipleDates" selectionMode="multiple" />
+            <span class="value-text">Selected: {{ formatValue(multipleDates) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="multipleHtml" [typescript]="multipleTs" />
+      </app-doc-section>
 
-      <section id="range" data-doc-anchor class="example-section">
+      <app-doc-section id="range" title="Range">
         <h3>f. Range</h3>
-        <app-code-preview [code]="snippet('range')">
-          <ui-lib-card>
-            <div class="stack-sm">
-              <ui-lib-date-picker [(ngModel)]="rangeDates" selectionMode="range" />
-              <span class="value-text">Selected: {{ formatValue(rangeDates) }}</span>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <ui-lib-date-picker [(ngModel)]="rangeDates" selectionMode="range" />
+            <span class="value-text">Selected: {{ formatValue(rangeDates) }}</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="rangeHtml" [typescript]="rangeTs" />
+      </app-doc-section>
 
-      <section id="button-bar" data-doc-anchor class="example-section">
+      <app-doc-section id="button-bar" title="Button Bar">
         <h3>g. Button Bar</h3>
-        <app-code-preview [code]="snippet('buttonBar')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="buttonBarDate" [showButtonBar]="true" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="buttonBarHtml" [typescript]="buttonBarTs" />
+      </app-doc-section>
 
-      <section id="time" data-doc-anchor class="example-section">
+      <app-doc-section id="time" title="Time">
         <h3>h. Time</h3>
-        <app-code-preview [code]="snippet('time24') + '\n' + snippet('time12')">
-          <ui-lib-card>
-            <div class="row-2">
-              <div class="stack-sm">
-                <p class="variant-title">24h</p>
-                <ui-lib-date-picker [(ngModel)]="timeDate24" [showTime]="true" hourFormat="24" />
-              </div>
-              <div class="stack-sm">
-                <p class="variant-title">12h + seconds</p>
-                <ui-lib-date-picker
-                  [(ngModel)]="timeDate12"
-                  [showTime]="true"
-                  hourFormat="12"
-                  [showSeconds]="true"
-                />
-              </div>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="time-only" data-doc-anchor class="example-section">
-        <h3>i. Time Only</h3>
-        <app-code-preview [code]="snippet('timeOnly')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="month-picker" data-doc-anchor class="example-section">
-        <h3>j. Month Picker</h3>
-        <app-code-preview [code]="snippet('monthPicker')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="year-picker" data-doc-anchor class="example-section">
-        <h3>k. Year Picker</h3>
-        <app-code-preview [code]="snippet('yearPicker')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="multiple-months" data-doc-anchor class="example-section">
-        <h3>l. Multiple Months</h3>
-        <app-code-preview [code]="snippet('multipleMonths')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="inline" data-doc-anchor class="example-section">
-        <h3>m. Inline</h3>
-        <app-code-preview [code]="snippet('inline')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="sizes" data-doc-anchor class="example-section">
-        <h3>n. Sizes</h3>
-        <app-code-preview [code]="snippet('sizes')">
-          <ui-lib-card>
-            <div class="row-3">
-              <ui-lib-date-picker [(ngModel)]="sizeValues.sm" size="sm" />
-              <ui-lib-date-picker [(ngModel)]="sizeValues.md" size="md" />
-              <ui-lib-date-picker [(ngModel)]="sizeValues.lg" size="lg" />
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="variants" data-doc-anchor class="example-section">
-        <h3>o. Variants</h3>
-        <app-code-preview [code]="snippet('variants')">
-          <ui-lib-card>
-            <div class="row-3">
-              <div class="stack-sm">
-                <p class="variant-title">Material</p>
-                <ui-lib-date-picker [(ngModel)]="variantValues.material" variant="material" />
-              </div>
-              <div class="stack-sm">
-                <p class="variant-title">Bootstrap</p>
-                <ui-lib-date-picker [(ngModel)]="variantValues.bootstrap" variant="bootstrap" />
-              </div>
-              <div class="stack-sm">
-                <p class="variant-title">Minimal</p>
-                <ui-lib-date-picker [(ngModel)]="variantValues.minimal" variant="minimal" />
-              </div>
-            </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="filled" data-doc-anchor class="example-section">
-        <h3>p. Filled</h3>
-        <app-code-preview [code]="snippet('filled')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="disabled" data-doc-anchor class="example-section">
-        <h3>q. Disabled</h3>
-        <app-code-preview [code]="snippet('disabled')">
-          <ui-lib-card>
-            <ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="invalid" data-doc-anchor class="example-section">
-        <h3>r. Invalid</h3>
-        <app-code-preview [code]="snippet('invalid')">
-          <ui-lib-card>
+        <ui-lib-panel variant="minimal">
+          <div class="row-2">
             <div class="stack-sm">
-              <ui-lib-date-picker [(ngModel)]="invalidDate" [invalid]="true" />
-              <span class="error-text">Please select a valid date.</span>
+              <p class="variant-title">24h</p>
+              <ui-lib-date-picker [(ngModel)]="timeDate24" [showTime]="true" hourFormat="24" />
             </div>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
-
-      <section id="reactive-forms" data-doc-anchor class="example-section">
-        <h3>s. Reactive Forms</h3>
-        <app-code-preview [code]="snippet('reactive')">
-          <ui-lib-card>
-            <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
+            <div class="stack-sm">
+              <p class="variant-title">12h + seconds</p>
               <ui-lib-date-picker
-                formControlName="appointment"
-                [invalid]="reactiveForm.controls.appointment.invalid && reactiveForm.controls.appointment.touched"
+                [(ngModel)]="timeDate12"
+                [showTime]="true"
+                hourFormat="12"
+                [showSeconds]="true"
               />
-              <div class="row-inline">
-                <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-                <span class="value-text">Submitted: {{ formatValue(reactiveSubmittedValue) }}</span>
-              </div>
-            </form>
-          </ui-lib-card>
-        </app-code-preview>
-      </section>
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="time24Html"
+          [typescript]="time24Ts"
+        />
+      </app-doc-section>
+
+      <app-doc-section id="time-only" title="Time Only">
+        <h3>i. Time Only</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="timeOnlyValue" [timeOnly]="true" hourFormat="24" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="timeOnlyHtml" [typescript]="timeOnlyTs" />
+      </app-doc-section>
+
+      <app-doc-section id="month-picker" title="Month Picker">
+        <h3>j. Month Picker</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="monthValue" view="month" dateFormat="MM yy" />
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="monthPickerHtml"
+          [typescript]="monthPickerTs"
+        />
+      </app-doc-section>
+
+      <app-doc-section id="year-picker" title="Year Picker">
+        <h3>k. Year Picker</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="yearValue" view="year" dateFormat="yy" />
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="yearPickerHtml"
+          [typescript]="yearPickerTs"
+        />
+      </app-doc-section>
+
+      <app-doc-section id="multiple-months" title="Multiple Months">
+        <h3>l. Multiple Months</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="multipleMonthDate" [numberOfMonths]="2" />
+        </ui-lib-panel>
+        <app-doc-code-example
+          [html]="multipleMonthsHtml"
+          [typescript]="multipleMonthsTs"
+        />
+      </app-doc-section>
+
+      <app-doc-section id="inline" title="Inline">
+        <h3>m. Inline</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="inlineDate" [inline]="true" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="inlineHtml" [typescript]="inlineTs" />
+      </app-doc-section>
+
+      <app-doc-section id="sizes" title="Sizes">
+        <h3>n. Sizes</h3>
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            <ui-lib-date-picker [(ngModel)]="sizeValues.sm" size="sm" />
+            <ui-lib-date-picker [(ngModel)]="sizeValues.md" size="md" />
+            <ui-lib-date-picker [(ngModel)]="sizeValues.lg" size="lg" />
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+      </app-doc-section>
+
+      <app-doc-section id="variants" title="Variants">
+        <h3>o. Variants</h3>
+        <ui-lib-panel variant="minimal">
+          <div class="row-3">
+            <div class="stack-sm">
+              <p class="variant-title">Material</p>
+              <ui-lib-date-picker [(ngModel)]="variantValues.material" variant="material" />
+            </div>
+            <div class="stack-sm">
+              <p class="variant-title">Bootstrap</p>
+              <ui-lib-date-picker [(ngModel)]="variantValues.bootstrap" variant="bootstrap" />
+            </div>
+            <div class="stack-sm">
+              <p class="variant-title">Minimal</p>
+              <ui-lib-date-picker [(ngModel)]="variantValues.minimal" variant="minimal" />
+            </div>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+      </app-doc-section>
+
+      <app-doc-section id="filled" title="Filled">
+        <h3>p. Filled</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="filledDate" [filled]="true" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="filledHtml" [typescript]="filledTs" />
+      </app-doc-section>
+
+      <app-doc-section id="disabled" title="Disabled">
+        <h3>q. Disabled</h3>
+        <ui-lib-panel variant="minimal">
+          <ui-lib-date-picker [(ngModel)]="disabledDate" [disabled]="true" />
+        </ui-lib-panel>
+        <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
+      </app-doc-section>
+
+      <app-doc-section id="invalid" title="Invalid">
+        <h3>r. Invalid</h3>
+        <ui-lib-panel variant="minimal">
+          <div class="stack-sm">
+            <ui-lib-date-picker [(ngModel)]="invalidDate" [invalid]="true" />
+            <span class="error-text">Please select a valid date.</span>
+          </div>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="invalidHtml" [typescript]="invalidTs" />
+      </app-doc-section>
+
+      <app-doc-section id="reactive-forms" title="Reactive Forms">
+        <h3>s. Reactive Forms</h3>
+        <ui-lib-panel variant="minimal">
+          <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
+            <ui-lib-date-picker
+              formControlName="appointment"
+              [invalid]="
+                reactiveForm.controls.appointment.invalid &&
+                reactiveForm.controls.appointment.touched
+              "
+            />
+            <div class="row-inline">
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              <span class="value-text">Submitted: {{ formatValue(reactiveSubmittedValue) }}</span>
+            </div>
+          </form>
+        </ui-lib-panel>
+        <app-doc-code-example [html]="reactiveHtml" [typescript]="reactiveTs" />
+      </app-doc-section>
     </div>
   </app-doc-demo-viewport>
-</app-doc-page-layout>
 
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-date-picker</code>. Import from
+      <code>ui-lib-custom/date-picker</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+</app-doc-page-layout>

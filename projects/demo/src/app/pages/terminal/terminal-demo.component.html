@@ -1,38 +1,42 @@
-<section class="terminal-demo" data-testid="terminal-demo">
-  <h1>Terminal</h1>
-  <p>
-    An interactive command-line interface component. Type <code>help</code> to see available
-    commands. Use <strong>↑ / ↓</strong> arrow keys to navigate command history.
-  </p>
+<app-doc-page-layout [sections]="sections">
 
-  <div class="terminal-demo__variants">
-    <h2>Variants</h2>
+  <app-doc-page-header
+    docHeader
+    title="Terminal"
+    [importCode]="importCode"
+    description="An interactive command-line interface component. Type <code>help</code> to see available commands. Use <strong>↑ / ↓</strong> arrow keys to navigate command history."
+  />
 
-    <h3>Material (default)</h3>
+  <!-- ── Variants ────────────────────────────────────────────────────── -->
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+
+    <h3 class="demo-subsection-title">Material (default)</h3>
     <ui-lib-terminal
       welcomeMessage="Welcome to the ui-lib-custom terminal. Type 'help' to get started."
       prompt="$"
       variant="material"
     />
 
-    <h3>Bootstrap</h3>
+    <h3 class="demo-subsection-title">Bootstrap</h3>
     <ui-lib-terminal
       welcomeMessage="Bootstrap terminal. Type 'help' for commands."
       prompt=">"
       variant="bootstrap"
     />
 
-    <h3>Minimal</h3>
+    <h3 class="demo-subsection-title">Minimal</h3>
     <ui-lib-terminal
       welcomeMessage="Minimal terminal. Type 'help' for commands."
       prompt="~"
       variant="minimal"
     />
-  </div>
+  </section>
 
-  <div class="terminal-demo__interactive">
-    <h2>Interactive (variant switcher)</h2>
-    <p>
+  <!-- ── Interactive ─────────────────────────────────────────────────── -->
+  <section class="demo-section" id="interactive" data-doc-anchor>
+    <h2 class="demo-section__title">Interactive (variant switcher)</h2>
+    <p class="demo-section__description">
       Type <code>variant material</code>, <code>variant bootstrap</code>, or
       <code>variant minimal</code> to switch the design variant at runtime.
     </p>
@@ -41,5 +45,45 @@
       prompt="❯"
       [variant]="activeVariant()"
     />
+  </section>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API Reference</h2>
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-terminal</code>. Import from
+      <code>ui-lib-custom/terminal</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </section>
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+    <h2 class="demo-section__title">Accessibility</h2>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <section class="demo-section" id="css-vars" data-doc-anchor>
+    <h2 class="demo-section__title">CSS Custom Properties</h2>
+    <p class="demo-section__description">
+      Override any of these on the host element or an ancestor to theme the component without
+      touching its internals.
+    </p>
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
-</section>
+
+</app-doc-page-layout>

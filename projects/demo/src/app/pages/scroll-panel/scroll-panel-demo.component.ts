@@ -1,21 +1,170 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { WritableSignal, Signal } from '@angular/core';
 import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 import type { ScrollPanelVariant } from 'ui-lib-custom/scroll-panel';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicUsageHtml,
+  basicUsageTs,
+  variantsHtml,
+  variantsTs,
+  horizontalHtml,
+  horizontalTs,
+  interactiveHtml,
+  interactiveTs,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the ScrollPanel component.
  */
 @Component({
   selector: 'app-scroll-panel-demo',
   standalone: true,
-  imports: [ScrollPanel, Button],
+  imports: [
+    CodeSnippet,
+    ScrollPanel,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCssVarsTableComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+  ],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollPanelDemoComponent {
+  public readonly basicUsageHtml: string = basicUsageHtml;
+  public readonly basicUsageTs: string = basicUsageTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly horizontalHtml: string = horizontalHtml;
+  public readonly horizontalTs: string = horizontalTs;
+  public readonly interactiveHtml: string = interactiveHtml;
+  public readonly interactiveTs: string = interactiveTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string = "import { ScrollPanel } from 'ui-lib-custom/scroll-panel'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the scrollable region.' },
+    { key: '↑ / ↓', action: 'Scrolls the region vertically (browser native).' },
+    { key: '← / →', action: 'Scrolls the region horizontally (browser native).' },
+    { key: 'Page Up / Page Down', action: 'Scrolls the region by a page (browser native).' },
+    { key: 'Home / End', action: 'Scrolls to the top or bottom of the region (browser native).' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Content wrapper',
+      attribute: 'role="region"',
+      value: '—',
+      notes: 'Landmark for the scrollable area; keyboard-focusable with <code>tabindex="0"</code>.',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'tabindex',
+      value: '"0"',
+      notes: 'Makes the region reachable by keyboard so scroll keys work.',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'aria-label',
+      value: 'ariaLabel input',
+      notes: 'Applied when the <code>ariaLabel</code> input is provided. Always recommended.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-scroll-panel-bg', description: 'Background colour of the container.' },
+    { variable: '--uilib-scroll-panel-border-color', description: 'Border colour.' },
+    { variable: '--uilib-scroll-panel-border-radius', description: 'Border radius.' },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-width',
+      description: 'Width (and height) of the scrollbar.',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-track-bg',
+      description: 'Track background colour.',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-thumb-bg',
+      description: 'Thumb colour (default state).',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-thumb-bg-hover',
+      description: 'Thumb colour on hover.',
+    },
+    {
+      variable: '--uilib-scroll-panel-scrollbar-radius',
+      description: 'Thumb and track border radius.',
+    },
+    {
+      variable: '--uilib-scroll-panel-transition',
+      description: 'Transition duration for colour changes.',
+    },
+  ];
+
+  public readonly sections: DocSection[] = [
+    { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'horizontal', label: 'Horizontal & Both Axes' },
+    { id: 'interactive-variant-switcher', label: 'Interactive Variant Switcher' },
+    { id: 'custom-css-properties', label: 'Custom CSS Properties' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
+  public readonly snippetCssProperties: string = `.my-panel {\n  --uilib-scroll-panel-scrollbar-width: 10px;\n  --uilib-scroll-panel-scrollbar-thumb-bg: #f97316;\n  --uilib-scroll-panel-scrollbar-thumb-bg-hover: #ea580c;\n  --uilib-scroll-panel-scrollbar-track-bg: #fff7ed;\n  --uilib-scroll-panel-border-color: #fed7aa;\n}`;
+
   public readonly activeVariant: WritableSignal<ScrollPanelVariant> =
     signal<ScrollPanelVariant>('material');
 
@@ -44,4 +193,25 @@ export class ScrollPanelDemoComponent {
   public setVariant(variant: ScrollPanelVariant): void {
     this.activeVariant.set(variant);
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class applied to the host.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'Accessible label for the scrollable region.',
+    },
+  ];
 }

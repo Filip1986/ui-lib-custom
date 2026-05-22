@@ -1,46 +1,32 @@
 <app-doc-page-layout [sections]="sections">
-
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Tooltip</h1>
-      <code class="demo-page-header__import">import &#123; Tooltip &#125; from 'ui-lib-custom/tooltip'</code>
-    </div>
-    <p class="demo-page-header__description">
-      An attribute directive that attaches a floating label to any host element.
-      Triggered by hover or focus, supports four positions, show/hide delays,
-      three design variants, and auto-flip when space is limited.
+  <app-doc-page-header docHeader title="Tooltip" [importCode]="importCode">
+    <p class="doc-description">
+      An attribute directive that attaches a floating label to any host element. Triggered by hover
+      or focus, supports four positions, show/hide delays, three design variants, and auto-flip when
+      space is limited.
     </p>
-    <div class="demo-page-header__preview">
-      <div class="tooltip-hero__tags">
-        <span class="tooltip-tag">Directive</span>
-        <span class="tooltip-tag">Overlay</span>
-        <span class="tooltip-tag">A11y</span>
-      </div>
-    </div>
-  </header>
+  </app-doc-page-header>
 
   <!-- Section 1: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
-      Add <code>[uiLibTooltip]</code> with the label text to any element.
-      The tooltip appears above the host by default.
+      Add <code>[uiLibTooltip]</code> with the label text to any element. The tooltip appears above
+      the host by default.
     </p>
     <div class="tooltip-row">
       <ui-lib-button uiLibTooltip="Save the document">Save</ui-lib-button>
       <ui-lib-button uiLibTooltip="Delete this item">Delete</ui-lib-button>
       <ui-lib-button uiLibTooltip="Share with others">Share</ui-lib-button>
     </div>
-    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Save the document"&gt;Save&lt;/button&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
   <!-- Section 2: Positions -->
-  <section class="demo-section" id="positions" data-doc-anchor>
-    <h2 class="demo-section__title">Positions</h2>
+  <app-doc-section id="positions" title="Positions">
     <p class="demo-section__description">
-      Use <code>tooltipPosition</code> to control placement:
-      <code>top</code>, <code>bottom</code>, <code>left</code>, or <code>right</code>.
-      The tooltip flips automatically if there is insufficient space in the requested direction.
+      Use <code>tooltipPosition</code> to control placement: <code>top</code>, <code>bottom</code>,
+      <code>left</code>, or <code>right</code>. The tooltip flips automatically if there is
+      insufficient space in the requested direction.
     </p>
     <div class="tooltip-row tooltip-row--positions">
       <ui-lib-button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</ui-lib-button>
@@ -48,19 +34,15 @@
       <ui-lib-button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</ui-lib-button>
       <ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>
     </div>
-    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Top tooltip" tooltipPosition="top"&gt;Top&lt;/button&gt;
-&lt;button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom"&gt;Bottom&lt;/button&gt;
-&lt;button uiLibTooltip="Left tooltip" tooltipPosition="left"&gt;Left&lt;/button&gt;
-&lt;button uiLibTooltip="Right tooltip" tooltipPosition="right"&gt;Right&lt;/button&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="positionsHtml" [typescript]="positionsTs" />
+  </app-doc-section>
 
   <!-- Section 3: Focus event -->
-  <section class="demo-section" id="focus-event" data-doc-anchor>
-    <h2 class="demo-section__title">Focus event</h2>
+  <app-doc-section id="focus-event" title="Focus event">
     <p class="demo-section__description">
       Set <code>tooltipEvent="focus"</code> to show the tooltip on keyboard focus instead of hover.
-      Useful for form inputs to provide contextual guidance.
-      Use <code>"both"</code> to support both hover and focus.
+      Useful for form inputs to provide contextual guidance. Use <code>"both"</code> to support both
+      hover and focus.
     </p>
     <div class="tooltip-row">
       <input
@@ -76,69 +58,52 @@
         tooltipEvent="both"
       />
     </div>
-    <pre class="tooltip-code"><code>&lt;input uiLibTooltip="Enter your full name" tooltipEvent="focus" /&gt;
-&lt;input uiLibTooltip="Accepts hover and focus" tooltipEvent="both" /&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="focusEventHtml" [typescript]="focusEventTs" />
+  </app-doc-section>
 
   <!-- Section 4: Show and hide delays -->
-  <section class="demo-section" id="show-hide-delays" data-doc-anchor>
-    <h2 class="demo-section__title">Show &amp; hide delays</h2>
+  <app-doc-section id="show-hide-delays" title="Show &amp; hide delays">
     <p class="demo-section__description">
-      Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to
-      debounce rapid mouse movements. Useful in dense UIs to avoid tooltip flicker.
+      Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to debounce rapid mouse
+      movements. Useful in dense UIs to avoid tooltip flicker.
     </p>
     <div class="tooltip-row">
-      <ui-lib-button
-        uiLibTooltip="Appears after 400 ms"
-        [showDelay]="400"
-      >
+      <ui-lib-button uiLibTooltip="Appears after 400 ms" [showDelay]="400">
         400 ms show delay
       </ui-lib-button>
-      <ui-lib-button
-        uiLibTooltip="Stays 600 ms after leaving"
-        [hideDelay]="600"
-      >
+      <ui-lib-button uiLibTooltip="Stays 600 ms after leaving" [hideDelay]="600">
         600 ms hide delay
       </ui-lib-button>
-      <ui-lib-button
-        uiLibTooltip="Both delays combined"
-        [showDelay]="300"
-        [hideDelay]="400"
-      >
+      <ui-lib-button uiLibTooltip="Both delays combined" [showDelay]="300" [hideDelay]="400">
         Show 300 ms / Hide 400 ms
       </ui-lib-button>
     </div>
-    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Appears after 400 ms" [showDelay]="400"&gt;Hover&lt;/button&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="showHideDelaysHtml" [typescript]="showHideDelaysTs" />
+  </app-doc-section>
 
   <!-- Section 5: Disabled -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
-      Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely.
-      Bind to a signal for runtime toggling.
+      Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely. Bind to a signal
+      for runtime toggling.
     </p>
     <div class="tooltip-row">
-      <ui-lib-button
-        uiLibTooltip="You will never see this"
-        [tooltipDisabled]="tooltipDisabled()"
-      >
+      <ui-lib-button uiLibTooltip="You will never see this" [tooltipDisabled]="tooltipDisabled()">
         {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
       </ui-lib-button>
       <ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
         Toggle disabled
       </ui-lib-button>
     </div>
-    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Hidden" [tooltipDisabled]="isDisabled"&gt;Hover&lt;/button&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="disabledHtml" [typescript]="disabledTs" />
+  </app-doc-section>
 
   <!-- Section 6: Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
-      Three design variants are available: <code>material</code>, <code>bootstrap</code>,
-      and <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant
-      is inherited from <code>ThemeConfigService</code>.
+      Three design variants are available: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant is inherited
+      from <code>ThemeConfigService</code>.
     </p>
     <div class="tooltip-row">
       <ui-lib-button
@@ -163,12 +128,11 @@
         Minimal
       </ui-lib-button>
     </div>
-    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Material tooltip" tooltipVariant="material"&gt;Material&lt;/button&gt;</code></pre>
-  </section>
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+  </app-doc-section>
 
   <!-- Section 7: Long text -->
-  <section class="demo-section" id="long-text" data-doc-anchor>
-    <h2 class="demo-section__title">Long text</h2>
+  <app-doc-section id="long-text" title="Long text">
     <p class="demo-section__description">
       The tooltip wraps text at <code>14rem</code> max width and breaks long words automatically.
     </p>
@@ -180,67 +144,32 @@
         Hover for long text
       </ui-lib-button>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- API table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <h3 class="demo-section__subtitle">Selector: <code>[uiLibTooltip]</code></h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>uiLibTooltip</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>The tooltip label text.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipPosition</code></td>
-          <td><code>'top' | 'bottom' | 'left' | 'right'</code></td>
-          <td><code>'top'</code></td>
-          <td>Preferred position. Flips automatically when space is lacking.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipEvent</code></td>
-          <td><code>'hover' | 'focus' | 'both'</code></td>
-          <td><code>'hover'</code></td>
-          <td>Which host events trigger the tooltip.</td>
-        </tr>
-        <tr>
-          <td><code>showDelay</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Milliseconds to wait before showing.</td>
-        </tr>
-        <tr>
-          <td><code>hideDelay</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Milliseconds to wait before hiding.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipDisabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Prevent the tooltip from showing.</td>
-        </tr>
-        <tr>
-          <td><code>tooltipVariant</code></td>
-          <td><code>TooltipVariant | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to <code>ThemeConfigService</code>.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -250,5 +179,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

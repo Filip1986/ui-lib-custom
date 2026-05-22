@@ -5,11 +5,22 @@
         @for (item of menuItems(); track item.label) {
           <li class="nav-item" [class.has-children]="item.items">
             @if (item.items) {
-              <div class="nav-link nav-header" (click)="toggleSection(item)">
+              <div
+                class="nav-link nav-header"
+                [class.nav-header--pro]="item.badge === 'PRO'"
+                (click)="toggleSection(item)"
+              >
                 @if (item.icon) {
                   <i [class]="item.icon"></i>
                 }
                 <span>{{ item.label }}</span>
+                @if (item.badge) {
+                  <span
+                    class="nav-item-badge"
+                    [class.nav-item-badge--soon]="item.badge === 'SOON'"
+                    [class.nav-item-badge--pro]="item.badge === 'PRO'"
+                  >{{ item.badge }}</span>
+                }
                 <ui-lib-icon
                   class="toggle-icon"
                   [name]="item.expanded ? 'chevron-down' : 'chevron-right'"
@@ -39,7 +50,11 @@
                         }
                         <span>{{ subItem.label }}</span>
                         @if (subItem.badge) {
-                          <span class="nav-item-badge">{{ subItem.badge }}</span>
+                          <span
+                            class="nav-item-badge"
+                            [class.nav-item-badge--soon]="subItem.badge === 'SOON'"
+                            [class.nav-item-badge--pro]="subItem.badge === 'PRO'"
+                          >{{ subItem.badge }}</span>
                         }
                       </a>
                     }

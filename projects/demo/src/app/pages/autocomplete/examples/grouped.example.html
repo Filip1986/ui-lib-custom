@@ -1,0 +1,9 @@
+<ui-lib-autocomplete
+  [suggestions]="groupedCitySuggestions"
+  [group]="true"
+  optionLabel="label"
+  optionValue="value"
+  [optionGroupLabel]="'label'"
+  [optionGroupChildren]="'items'"
+  (completeMethod)="onGroupedCitiesComplete($event)"
+/>

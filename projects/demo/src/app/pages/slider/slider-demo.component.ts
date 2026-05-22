@@ -1,24 +1,49 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { Card } from 'ui-lib-custom/card';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Slider } from 'ui-lib-custom/slider';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
-type SliderDemoSnippetKey =
-  | 'basic'
-  | 'range'
-  | 'step'
-  | 'minmax'
-  | 'vertical'
-  | 'sizes'
-  | 'animate'
-  | 'disabled'
-  | 'readonly'
-  | 'reactive';
+import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  basicHtml,
+  basicTs,
+  rangeHtml,
+  rangeTs,
+  stepHtml,
+  stepTs,
+  minmaxHtml,
+  minmaxTs,
+  verticalHtml,
+  verticalTs,
+  sizesHtml,
+  sizesTs,
+  animateHtml,
+  animateTs,
+  disabledHtml,
+  disabledTs,
+  readonlyHtml,
+  readonlyTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 /**
  * Demo page for the Slider component — linear track control for numeric values.
  */
@@ -26,19 +51,57 @@ type SliderDemoSnippetKey =
   selector: 'app-slider-demo',
   standalone: true,
   imports: [
+    Panel,
     FormsModule,
     ReactiveFormsModule,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
-    Card,
     Slider,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './slider-demo.component.html',
   styleUrl: './slider-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly rangeHtml: string = rangeHtml;
+  public readonly rangeTs: string = rangeTs;
+  public readonly stepHtml: string = stepHtml;
+  public readonly stepTs: string = stepTs;
+  public readonly minmaxHtml: string = minmaxHtml;
+  public readonly minmaxTs: string = minmaxTs;
+  public readonly verticalHtml: string = verticalHtml;
+  public readonly verticalTs: string = verticalTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly animateHtml: string = animateHtml;
+  public readonly animateTs: string = animateTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly readonlyHtml: string = readonlyHtml;
+  public readonly readonlyTs: string = readonlyTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
+  public readonly importCode: string = "import { Slider } from 'ui-lib-custom/slider'";
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'range', label: 'Range' },
@@ -50,6 +113,7 @@ export class SliderDemoComponent {
     { id: 'disabled', label: 'Disabled' },
     { id: 'readonly', label: 'Read-only' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   public basicValue: number = 40;
@@ -67,34 +131,6 @@ export class SliderDemoComponent {
     brightness: new FormControl<number>(40),
   });
 
-  private readonly snippets: Record<SliderDemoSnippetKey, string> = {
-    basic: '<ui-lib-slider [(ngModel)]="value" />',
-
-    range: '<ui-lib-slider [range]="true" [(ngModel)]="rangeValue" />',
-
-    step: '<!-- Snaps to 0, 25, 50, 75, 100 -->\n<ui-lib-slider [step]="25" [(ngModel)]="value" />',
-
-    minmax: '<ui-lib-slider [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />',
-
-    vertical: '<ui-lib-slider orientation="vertical" [(ngModel)]="value" />',
-
-    sizes:
-      '<ui-lib-slider size="sm" [(ngModel)]="value" />\n<ui-lib-slider size="md" [(ngModel)]="value" />\n<ui-lib-slider size="lg" [(ngModel)]="value" />',
-
-    animate: '<ui-lib-slider [animate]="true" [(ngModel)]="value" />',
-
-    disabled: '<ui-lib-slider [disabled]="true" [(ngModel)]="value" />',
-
-    readonly: '<ui-lib-slider [readonly]="true" [(ngModel)]="value" />',
-
-    reactive:
-      '<form [formGroup]="form">\n  <ui-lib-slider formControlName="volume" />\n  <ui-lib-slider formControlName="brightness" />\n</form>',
-  };
-
-  public snippet(key: SliderDemoSnippetKey): string {
-    return this.snippets[key];
-  }
-
   public get volumeControl(): FormControl<number> {
     return this.reactiveForm.get('volume') as FormControl<number>;
   }
@@ -102,4 +138,137 @@ export class SliderDemoComponent {
   public get brightnessControl(): FormControl<number> {
     return this.reactiveForm.get('brightness') as FormControl<number>;
   }
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
+  };
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Slider handle',
+      attribute: 'role',
+      value: '"slider"',
+      notes: 'The draggable handle uses the slider role.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuenow',
+      value: 'number',
+      notes: 'The current numeric value of the slider.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuemin',
+      value: 'number',
+      notes: 'The minimum allowed value, set by <code>[min]</code>.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuemax',
+      value: 'number',
+      notes: 'The maximum allowed value, set by <code>[max]</code>.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Provide via <code>[ariaLabel]</code> to name the slider for screen readers.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-orientation',
+      value: '"horizontal" | "vertical"',
+      notes: 'Set when <code>[orientation]</code> is <code>"vertical"</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: '← / ↓',
+      action: 'Decrease the value by one step.',
+    },
+    {
+      key: '→ / ↑',
+      action: 'Increase the value by one step.',
+    },
+    {
+      key: 'Home',
+      action: 'Set the value to the minimum.',
+    },
+    {
+      key: 'End',
+      action: 'Set the value to the maximum.',
+    },
+    {
+      key: 'Page Down',
+      action: 'Decrease the value by a larger step (10× step or 10% of range).',
+    },
+    {
+      key: 'Page Up',
+      action: 'Increase the value by a larger step (10× step or 10% of range).',
+    },
+  ];
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Value increment.' },
+    { name: 'range', type: 'boolean', default: 'false', description: 'Enables range selection.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Slider orientation.',
+    },
+    { name: 'animate', type: 'boolean', default: 'false', description: 'Animates thumb movement.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the slider.' },
+    {
+      name: 'ariaLabel',
+      type: 'string | null',
+      default: 'null',
+      description: 'ARIA label for the slider thumb.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Slider size.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-slider-track-color', description: 'Track colour.' },
+    { variable: '--uilib-slider-track-border-radius', description: 'Track border radius.' },
+    { variable: '--uilib-slider-fill-color', description: 'Fill colour.' },
+    { variable: '--uilib-slider-fill-transition', description: 'Fill transition.' },
+    { variable: '--uilib-slider-handle-bg', description: 'Handle background colour.' },
+    { variable: '--uilib-slider-handle-border', description: 'Handle border.' },
+    { variable: '--uilib-slider-handle-border-radius', description: 'Handle border radius.' },
+    { variable: '--uilib-slider-handle-shadow', description: 'Handle shadow.' },
+    { variable: '--uilib-slider-handle-hover-scale', description: 'Handle hover scale factor.' },
+    { variable: '--uilib-slider-focus-ring-color', description: 'Focus ring colour.' },
+    { variable: '--uilib-slider-focus-ring-width', description: 'Focus ring width.' },
+    { variable: '--uilib-slider-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-slider-vertical-height', description: 'Vertical height.' },
+    { variable: '--uilib-slider-track-height-sm', description: 'Track height — sm.' },
+    { variable: '--uilib-slider-track-height-md', description: 'Track height — md.' },
+    { variable: '--uilib-slider-track-height-lg', description: 'Track height — lg.' },
+    { variable: '--uilib-slider-handle-size-sm', description: 'Handle size — sm.' },
+    { variable: '--uilib-slider-handle-size-md', description: 'Handle size — md.' },
+    { variable: '--uilib-slider-handle-size-lg', description: 'Handle size — lg.' },
+  ];
 }

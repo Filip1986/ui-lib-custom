@@ -1,33 +1,13 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Upload</h1>
-      <code class="demo-page-header__import">import &#123; UploadComponent &#125; from 'ui-lib-custom/upload'</code>
-    </div>
-    <p class="demo-page-header__description">
+  <app-doc-page-header docHeader title="Upload" [importCode]="importCode">
+    <p class="doc-description">
       Advanced file uploader with drag-and-drop, image previews, validation, and custom upload mode.
     </p>
-    <div class="demo-page-header__preview">
-      <div class="upload-demo__variant-switcher" role="group" aria-label="Select variant">
-        @for (variant of variants; track variant) {
-          <ui-lib-button
-            type="button"
-            [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
-            severity="primary"
-            size="sm"
-            (click)="setVariant(variant)"
-          >
-            {{ variant }}
-          </ui-lib-button>
-        }
-      </div>
-    </div>
-  </header>
+  </app-doc-page-header>
 
   <!-- ── Section 1: Basic single-file upload ─────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">Single-file upload with default settings.</p>
 
     <ui-lib-upload
@@ -36,11 +16,10 @@
       (fileRemove)="onFileRemove($event)"
       (uploadClear)="onUploadClear()"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 2: Multi-file upload ────────────────────────────────────── -->
-  <section class="demo-section" id="multiple-files" data-doc-anchor>
-    <h2 class="demo-section__title">Multiple Files</h2>
+  <app-doc-section id="multiple-files" title="Multiple Files">
     <p class="demo-section__description">Accepts up to 5 files, max 5 MB each.</p>
 
     <ui-lib-upload
@@ -52,11 +31,10 @@
       (fileRemove)="onFileRemove($event)"
       (uploadClear)="onUploadClear()"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 3: Image-only upload ────────────────────────────────────── -->
-  <section class="demo-section" id="image-only" data-doc-anchor>
-    <h2 class="demo-section__title">Image Only</h2>
+  <app-doc-section id="image-only" title="Image Only">
     <p class="demo-section__description">
       Restricts selection to image files. Thumbnails are shown for previews.
     </p>
@@ -77,11 +55,10 @@
         </div>
       </ng-template>
     </ui-lib-upload>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 4: Custom upload handler ────────────────────────────────── -->
-  <section class="demo-section" id="custom-upload-handler" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Upload Handler</h2>
+  <app-doc-section id="custom-upload-handler" title="Custom Upload Handler">
     <p class="demo-section__description">
       Set <code>customUpload="true"</code> and listen to <code>(uploadHandler)</code>
       to control the HTTP transport yourself.
@@ -113,11 +90,10 @@
         }
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 5: Auto upload ───────────────────────────────────────────── -->
-  <section class="demo-section" id="auto-upload" data-doc-anchor>
-    <h2 class="demo-section__title">Auto Upload</h2>
+  <app-doc-section id="auto-upload" title="Auto Upload">
     <p class="demo-section__description">
       Set <code>auto="true"</code> together with <code>customUpload="true"</code>
       to trigger the upload immediately after file selection.
@@ -134,11 +110,10 @@
       (uploadHandler)="onCustomUpload($event)"
       (fileSelect)="onFileSelect($event)"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 6: Sizes ─────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <div class="upload-demo__size-grid">
       @for (size of ['sm', 'md', 'lg']; track size) {
         <div>
@@ -147,11 +122,10 @@
         </div>
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 7: Custom file template ─────────────────────────────────── -->
-  <section class="demo-section" id="custom-file-template" data-doc-anchor>
-    <h2 class="demo-section__title">Custom File Template</h2>
+  <app-doc-section id="custom-file-template" title="Custom File Template">
     <p class="demo-section__description">
       Use the <code>uiUploadFile</code> directive to render each queued file
       with a completely custom template.
@@ -169,21 +143,19 @@
         </div>
       </ng-template>
     </ui-lib-upload>
-  </section>
+  </app-doc-section>
 
   <!-- ── Section 8: Disabled ─────────────────────────────────────────────── -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
 
     <ui-lib-upload
       [variant]="activeVariant()"
       [disabled]="true"
     />
-  </section>
+  </app-doc-section>
 
   <!-- ── Event log ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="event-log" data-doc-anchor>
-    <h2 class="demo-section__title">Event Log</h2>
+  <app-doc-section id="event-log" title="Event Log">
     <div class="upload-demo__log-panel upload-demo__log-panel--full">
       @if (eventLog().length === 0) {
         <p class="upload-demo__log-empty">Interact with the components above to see events.</p>
@@ -198,7 +170,35 @@
         </ul>
       }
     </div>
-  </section>
+  </app-doc-section>
+
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-upload</code>. Import from
+      <code>ui-lib-custom/upload</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

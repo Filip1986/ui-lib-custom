@@ -1,25 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <!-- ---- Overview / Hero -------------------------------------------- -->
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Rating</h1>
-      <code class="demo-page-header__import">import &#123; Rating &#125; from 'ui-lib-custom/rating'</code>
-    </div>
-    <p class="demo-page-header__description">
-      Star rating component that lets users select a value via click or keyboard.
-      Implements <code>ControlValueAccessor</code> — works with <code>ngModel</code>
-      and reactive forms. Supports custom icon templates, inline styles, read-only
-      display, and three design variants.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-rating [ngModel]="4" [cancel]="false" [readonly]="true" />
-    </div>
-  </header>
+  <app-doc-page-header docHeader title="Rating" [importCode]="importCode"
+    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants.">
+  </app-doc-page-header>
 
   <!-- ---- Basic ---------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Bind the selected value with <code>[(ngModel)]</code>. Clicking the currently
       selected star deselects it (clears to <code>null</code>).
@@ -33,12 +19,15 @@
         &nbsp;— last change: {{ lastEvent.value }}
       }
     </p>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Basic" [code]="snippets.basic"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Pre-selected --------------------------------------------- -->
-  <section class="demo-section" id="pre-selected" data-doc-anchor>
-    <h2 class="demo-section__title">Pre-selected</h2>
+  <app-doc-section id="pre-selected" title="Pre-selected">
     <p class="demo-section__description">
       Initialise the bound value to a number to show a pre-selected rating.
     </p>
@@ -46,12 +35,15 @@
       <ui-lib-rating [(ngModel)]="preselectedRating" />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ preselectedRating }}</strong></p>
-    <app-doc-code-snippet title="Pre-selected" [code]="snippets.preSelected" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Pre-selected" [code]="snippets.preSelected"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- No Cancel ------------------------------------------------ -->
-  <section class="demo-section" id="no-cancel" data-doc-anchor>
-    <h2 class="demo-section__title">No Cancel</h2>
+  <app-doc-section id="no-cancel" title="No Cancel">
     <p class="demo-section__description">
       Set <code>[cancel]="false"</code> to hide the clear button and disable
       keyboard clearing (Delete / Backspace).
@@ -59,12 +51,15 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [(ngModel)]="noCancelRating" [cancel]="false" />
     </div>
-    <app-doc-code-snippet title="No cancel" [code]="snippets.noCancel" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="No cancel" [code]="snippets.noCancel"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Variants ------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
       When <code>variant</code> is <code>null</code> (default) it inherits from
@@ -84,12 +79,15 @@
         <ui-lib-rating variant="minimal" [ngModel]="4" [cancel]="false" [readonly]="true" />
       </div>
     </div>
-    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Variants" [code]="snippets.variants"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Sizes ---------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -107,12 +105,15 @@
         <ui-lib-rating size="lg" [ngModel]="3" [cancel]="false" [readonly]="true" />
       </div>
     </div>
-    <app-doc-code-snippet title="Sizes" [code]="snippets.sizes" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Sizes" [code]="snippets.sizes"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Custom Star Count ---------------------------------------- -->
-  <section class="demo-section" id="star-count" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Star Count</h2>
+  <app-doc-section id="star-count" title="Custom Star Count">
     <p class="demo-section__description">
       Use <code>[stars]</code> to render any number of stars (default is 5).
     </p>
@@ -120,12 +121,15 @@
       <ui-lib-rating [stars]="10" [(ngModel)]="tenStarRating" />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ tenStarRating }}</strong></p>
-    <app-doc-code-snippet title="Custom star count" [code]="snippets.starCount" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Custom star count" [code]="snippets.starCount"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Readonly ------------------------------------------------- -->
-  <section class="demo-section" id="readonly" data-doc-anchor>
-    <h2 class="demo-section__title">Readonly</h2>
+  <app-doc-section id="readonly" title="Readonly">
     <p class="demo-section__description">
       Set <code>[readonly]="true"</code> for a non-interactive display.
       The component switches to <code>role="img"</code> with a descriptive
@@ -134,12 +138,15 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [readonly]="true" [(ngModel)]="readonlyRating" />
     </div>
-    <app-doc-code-snippet title="Readonly" [code]="snippets.readonly" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Readonly" [code]="snippets.readonly"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Disabled ------------------------------------------------- -->
-  <section class="demo-section" id="disabled" data-doc-anchor>
-    <h2 class="demo-section__title">Disabled</h2>
+  <app-doc-section id="disabled" title="Disabled">
     <p class="demo-section__description">
       Set <code>[disabled]="true"</code> to prevent interaction.
       Can also be controlled programmatically via <code>FormControl.disable()</code>.
@@ -147,12 +154,15 @@
     <div class="demo-section__preview demo-section__preview--center">
       <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
     </div>
-    <app-doc-code-snippet title="Disabled" [code]="snippets.disabled" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Disabled" [code]="snippets.disabled"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Events --------------------------------------------------- -->
-  <section class="demo-section" id="events" data-doc-anchor>
-    <h2 class="demo-section__title">Events</h2>
+  <app-doc-section id="events" title="Events">
     <p class="demo-section__description">
       Four output events: <code>(change)</code> fires on every value change,
       <code>(rate)</code> fires only on star selection, <code>(cleared)</code>
@@ -175,12 +185,15 @@
         <li class="demo-rating-event-log__empty">No events yet — click a star or use Tab / keyboard.</li>
       }
     </ul>
-    <app-doc-code-snippet title="Events" [code]="snippets.events" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Events" [code]="snippets.events"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Custom Templates ----------------------------------------- -->
-  <section class="demo-section" id="custom-templates" data-doc-anchor>
-    <h2 class="demo-section__title">Custom Templates</h2>
+  <app-doc-section id="custom-templates" title="Custom Templates">
     <p class="demo-section__description">
       Project named <code>&lt;ng-template&gt;</code> references to replace the
       default star glyph: <code>#onicon</code> (filled), <code>#officon</code> (empty),
@@ -193,12 +206,15 @@
       </ui-lib-rating>
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ customTemplateRating ?? 'none' }}</strong></p>
-    <app-doc-code-snippet title="Custom templates" [code]="snippets.customTemplates" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Custom templates" [code]="snippets.customTemplates"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Inline Styles -------------------------------------------- -->
-  <section class="demo-section" id="inline-styles" data-doc-anchor>
-    <h2 class="demo-section__title">Inline Styles</h2>
+  <app-doc-section id="inline-styles" title="Inline Styles">
     <p class="demo-section__description">
       Use <code>[iconOnStyle]</code> and <code>[iconOffStyle]</code> to apply arbitrary
       CSS to each icon element. Accepts a <code>Record&lt;string, string&gt;</code>.
@@ -212,12 +228,15 @@
       />
     </div>
     <p class="demo-rating-hint">Value: <strong>{{ styledRating ?? 'none' }}</strong></p>
-    <app-doc-code-snippet title="Inline styles" [code]="snippets.inlineStyles" />
-  </section>
+    <ui-lib-code-snippet
+      language="css"
+      filename="Inline styles" [code]="snippets.inlineStyles"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- Reactive Forms ------------------------------------------- -->
-  <section class="demo-section" id="reactive-forms" data-doc-anchor>
-    <h2 class="demo-section__title">Reactive Forms</h2>
+  <app-doc-section id="reactive-forms" title="Reactive Forms">
     <p class="demo-section__description">
       Use <code>formControlName</code> or <code>[formControl]</code> for reactive form
       integration. <code>FormControl.disable()</code> propagates through
@@ -236,320 +255,44 @@
       </form>
     </div>
     <p class="demo-rating-hint">Form value: <strong>{{ reviewForm.value | json }}</strong></p>
-    <app-doc-code-snippet title="Reactive forms" [code]="snippets.reactiveForms" />
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      filename="Reactive forms" [code]="snippets.reactiveForms"
+      [showLineNumbers]="true"
+      />
+  </app-doc-section>
 
   <!-- ---- API ------------------------------------------------------ -->
-  <section class="demo-section" id="api" data-doc-anchor>
+  <app-doc-section id="api" title="API Reference">
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>number | null</code></td>
-            <td><code>null</code></td>
-            <td>Current rating. Two-way bindable via <code>[(value)]</code> or <code>ngModel</code>.</td>
-          </tr>
-          <tr>
-            <td><code>stars</code></td>
-            <td><code>number</code></td>
-            <td><code>5</code></td>
-            <td>Number of star icons to render.</td>
-          </tr>
-          <tr>
-            <td><code>cancel</code></td>
-            <td><code>boolean</code></td>
-            <td><code>true</code></td>
-            <td>Shows a clear button and enables Delete / Backspace keyboard clearing.</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Disables the component. Also controlled via CVA <code>setDisabledState</code>.</td>
-          </tr>
-          <tr>
-            <td><code>readonly</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Visible but not interactive. Changes host role to <code>"img"</code>.</td>
-          </tr>
-          <tr>
-            <td><code>autofocus</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Focuses the first star after first render.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabel</code></td>
-            <td><code>string</code></td>
-            <td><code>'Rating'</code></td>
-            <td>Accessible label for the radiogroup. Overridden with descriptive text in readonly mode.</td>
-          </tr>
-          <tr>
-            <td><code>ariaLabelledby</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Overrides <code>ariaLabel</code> when set. Ignored in readonly mode.</td>
-          </tr>
-          <tr>
-            <td><code>iconOnClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Extra CSS class on filled star icons.</td>
-          </tr>
-          <tr>
-            <td><code>iconOnStyle</code></td>
-            <td><code>Record&lt;string, string&gt; | null</code></td>
-            <td><code>null</code></td>
-            <td>Inline styles on filled star icons.</td>
-          </tr>
-          <tr>
-            <td><code>iconOffClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Extra CSS class on empty star icons.</td>
-          </tr>
-          <tr>
-            <td><code>iconOffStyle</code></td>
-            <td><code>Record&lt;string, string&gt; | null</code></td>
-            <td><code>null</code></td>
-            <td>Inline styles on empty star icons.</td>
-          </tr>
-          <tr>
-            <td><code>iconCancelClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Extra CSS class on the cancel icon.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Component density.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference [rows]="apiInputRows" />
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Output</th>
-            <th>Payload</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>(change)</code></td>
-            <td><code>RatingChangeEvent</code></td>
-            <td>Emitted on every value change, including clears. Value is <code>number | null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>(rate)</code></td>
-            <td><code>RatingRateEvent</code></td>
-            <td>Emitted only when a star is selected (value is always a positive integer).</td>
-          </tr>
-          <tr>
-            <td><code>(cleared)</code></td>
-            <td><code>Event</code></td>
-            <td>Emitted when the rating is cleared via cancel button, toggle-deselect, or Delete key.</td>
-          </tr>
-          <tr>
-            <td><code>(focus)</code></td>
-            <td><code>FocusEvent</code></td>
-            <td>Emitted when any star receives focus.</td>
-          </tr>
-          <tr>
-            <td><code>(blur)</code></td>
-            <td><code>FocusEvent</code></td>
-            <td>Emitted when any star loses focus.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
     </div>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- CSS Custom Properties ------------------------------------ -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-rating-star-on-color</code></td>
-          <td>Filled star colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-off-color</code></td>
-          <td>Empty star colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-hover-color</code></td>
-          <td>Hovered star colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-cancel-color</code></td>
-          <td>Cancel button icon colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-cancel-hover-color</code></td>
-          <td>Cancel button icon hover colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-gap</code></td>
-          <td>Gap between stars.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-size-sm</code></td>
-          <td>Star size for <code>size="sm"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-size-md</code></td>
-          <td>Star size for <code>size="md"</code> (default).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-star-size-lg</code></td>
-          <td>Star size for <code>size="lg"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-focus-shadow</code></td>
-          <td>Focus ring box-shadow applied to the active star.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-rating-transition-duration</code></td>
-          <td>Transition duration. Set to <code>0ms</code> for <code>prefers-reduced-motion: reduce</code>.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
 
   <!-- ---- Accessibility -------------------------------------------- -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Attribute</th>
-            <th>Value</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Host (interactive)</td>
-            <td><code>role="radiogroup"</code></td>
-            <td>—</td>
-            <td>Groups stars as a radio group in interactive mode.</td>
-          </tr>
-          <tr>
-            <td>Host (interactive)</td>
-            <td><code>aria-label</code></td>
-            <td>Value of <code>ariaLabel</code> input</td>
-            <td>Defaults to <code>"Rating"</code>. Overridden by <code>ariaLabelledby</code> when set.</td>
-          </tr>
-          <tr>
-            <td>Host (readonly)</td>
-            <td><code>role="img"</code></td>
-            <td>—</td>
-            <td>Switches to image role in readonly mode — no interactive semantics.</td>
-          </tr>
-          <tr>
-            <td>Host (readonly)</td>
-            <td><code>aria-label</code></td>
-            <td><code>"Rating: 4 out of 5 stars"</code></td>
-            <td>Auto-generated descriptive label for the readonly display.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>role="radio"</code></td>
-            <td>—</td>
-            <td>Each star is a radio option within the radiogroup.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>aria-checked</code></td>
-            <td><code>"true"</code> / <code>"false"</code></td>
-            <td>Whether this star's value matches the current rating.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>aria-label</code></td>
-            <td><code>"1 star"</code>, <code>"2 stars"</code>, …</td>
-            <td>Human-readable label announced by screen readers.</td>
-          </tr>
-          <tr>
-            <td>Star (interactive)</td>
-            <td><code>tabindex</code></td>
-            <td><code>"0"</code> / <code>"-1"</code></td>
-            <td>Roving tabindex — active star gets <code>0</code>, all others get <code>-1</code>.</td>
-          </tr>
-          <tr>
-            <td>Star (readonly)</td>
-            <td><code>aria-hidden="true"</code></td>
-            <td>—</td>
-            <td>Decorative stars hidden from screen readers in readonly mode.</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-doc-aria-table [rows]="ariaRows" />
     </div>
 
-    <div id="a11y-keyboard" data-doc-anchor>
-      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>ArrowRight</code> / <code>ArrowUp</code></td>
-            <td>Increase rating by one (max = <code>stars</code>).</td>
-          </tr>
-          <tr>
-            <td><code>ArrowLeft</code> / <code>ArrowDown</code></td>
-            <td>Decrease rating by one (min = 1).</td>
-          </tr>
-          <tr>
-            <td><code>Delete</code> / <code>Backspace</code></td>
-            <td>Clear the rating (only when <code>[cancel]="true"</code>).</td>
-          </tr>
-          <tr>
-            <td><code>1</code>–<code>9</code></td>
-            <td>Set rating directly to that digit (if within the <code>stars</code> range).</td>
-          </tr>
-        </tbody>
-      </table>
+    <div data-doc-anchor>
+      <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+      <app-doc-keyboard-nav [rows]="keyboardRows" />
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>
@@ -572,9 +315,11 @@
       </li>
     </ul>
 
-  </section>
+  </app-doc-section>
 
   <!-- ---- TOC Rail ------------------------------------------------- -->
+  <app-doc-quality-badge [audit]="qualityAudit" />
+
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

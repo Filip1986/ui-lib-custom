@@ -1,16 +1,26 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeScopeDirective, DarkThemeDirective, LightThemeDirective } from 'ui-lib-custom/theme';
 import type { ThemeScopeConfig } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Badge } from 'ui-lib-custom/badge';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { Checkbox } from 'ui-lib-custom/checkbox';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
+import { Panel } from 'ui-lib-custom/panel';
+import {
+  componentThemeCodeHtml,
+  componentThemeCodeTs,
+  directiveCodeHtml,
+  directiveCodeTs,
+} from './snippets.generated';
 /**
  * Demo page for scoped theming examples.
  */
@@ -18,23 +28,38 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
   selector: 'app-scoped-theming-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     ThemeScopeDirective,
     DarkThemeDirective,
     LightThemeDirective,
     Button,
-    Card,
     Badge,
     UiLibInput,
     Checkbox,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    DocTocComponent,
+    CodeSnippet,
+    DocCodeExampleComponent,
   ],
   templateUrl: './scoped-theming.component.html',
   styleUrl: './scoped-theming.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScopedThemingComponent {
+  public readonly componentThemeCodeHtml: string = componentThemeCodeHtml;
+  public readonly componentThemeCodeTs: string = componentThemeCodeTs;
+  public readonly directiveCodeHtml: string = directiveCodeHtml;
+  public readonly directiveCodeTs: string = directiveCodeTs;
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic Scoped Themes' },
     { id: 'directive', label: 'Directive Usage' },
@@ -60,26 +85,6 @@ export class ScopedThemingComponent {
       '--uilib-surface': '#fffde7',
     },
   };
-
-  public readonly componentThemeCode: string = `<!-- String shorthand -->
-<ui-lib-card theme="dark">
-  Dark themed card
-</ui-lib-card>
-
-<!-- Full config -->
-<ui-lib-card [theme]="{ colorScheme: 'dark' }">
-  Dark themed card
-</ui-lib-card>`;
-
-  public readonly directiveCode: string = `<!-- Using directive -->
-<div [uiLibTheme]="'dark'">
-  <ui-lib-button>Dark button</ui-lib-button>
-</div>
-
-<!-- Shorthand directives -->
-<section uiLibDarkTheme>
-  <ui-lib-button>Dark button</ui-lib-button>
-</section>`;
 
   public readonly customColorsCode: string = `// In component
 customTheme: ThemeScopeConfig = {

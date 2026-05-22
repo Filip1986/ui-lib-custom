@@ -1,41 +1,36 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Avatar</h1>
-      <code class="demo-page-header__import">import &#123; Avatar, AvatarGroup &#125; from 'ui-lib-custom/avatar'</code>
+  <app-doc-page-header
+    docHeader
+    title="Avatar"
+    [importCode]="importCode"
+    description="Represents a person or entity with an image, initials, or icon. Supports three shapes, three sizes, and three theme variants. Group multiple avatars with <code>AvatarGroup</code> for a stacked appearance."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="av-row">
+      <ui-lib-avatar
+        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+        imageAlt="Amy Elsner"
+        size="sm"
+      />
+      <ui-lib-avatar
+        image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
+        imageAlt="Asiya Javayant"
+        size="md"
+      />
+      <ui-lib-avatar
+        image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
+        imageAlt="Onyama Limba"
+        size="lg"
+      />
+      <ui-lib-avatar label="JD" size="md" />
+      <ui-lib-avatar icon="pi pi-user" size="md" />
     </div>
-    <p class="demo-page-header__description">
-      Represents a person or entity with an image, initials, or icon.
-      Supports three shapes, three sizes, and three theme variants.
-      Group multiple avatars with <code>AvatarGroup</code> for a stacked appearance.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="av-row">
-        <ui-lib-avatar
-          image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-          imageAlt="Amy Elsner"
-          size="sm"
-        />
-        <ui-lib-avatar
-          image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
-          imageAlt="Asiya Javayant"
-          size="md"
-        />
-        <ui-lib-avatar
-          image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
-          imageAlt="Onyama Limba"
-          size="lg"
-        />
-        <ui-lib-avatar label="JD" size="md" />
-        <ui-lib-avatar icon="pi pi-user" size="md" />
-      </div>
-    </div>
-  </header>
+  </div>
 
   <!-- Section 1: Image avatars -->
-  <section class="demo-section" id="image" data-doc-anchor>
-    <h2 class="demo-section__title">Image</h2>
+  <app-doc-section id="image" title="Image">
     <p class="demo-section__description">
       Provide an <code>image</code> URL to display a photo. Use <code>imageAlt</code>
       to set the accessible description.
@@ -57,12 +52,16 @@
         size="lg"
       />
     </div>
-    <pre class="av-code"><code>&lt;ui-lib-avatar image="/photo.jpg" imageAlt="Jane Doe" size="md" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetImage"
+    />
+  </app-doc-section>
 
   <!-- Section 2: Label avatars -->
-  <section class="demo-section" id="label" data-doc-anchor>
-    <h2 class="demo-section__title">Label (Initials)</h2>
+  <app-doc-section id="label" title="Label (Initials)">
     <p class="demo-section__description">
       When no image is available, set <code>label</code> to display initials or a short text.
     </p>
@@ -71,12 +70,16 @@
       <ui-lib-avatar label="AB" size="md" />
       <ui-lib-avatar label="XY" size="lg" />
     </div>
-    <pre class="av-code"><code>&lt;ui-lib-avatar label="JD" size="md" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetLabel"
+    />
+  </app-doc-section>
 
   <!-- Section 3: Icon avatars -->
-  <section class="demo-section" id="icon" data-doc-anchor>
-    <h2 class="demo-section__title">Icon</h2>
+  <app-doc-section id="icon" title="Icon">
     <p class="demo-section__description">
       Set <code>icon</code> to a PrimeIcons class string to render an icon inside the avatar.
     </p>
@@ -85,12 +88,16 @@
       <ui-lib-avatar icon="pi pi-user" size="md" />
       <ui-lib-avatar icon="pi pi-user" size="lg" />
     </div>
-    <pre class="av-code"><code>&lt;ui-lib-avatar icon="pi pi-user" size="md" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetIcon"
+    />
+  </app-doc-section>
 
   <!-- Section 4: Shapes -->
-  <section class="demo-section" id="shapes" data-doc-anchor>
-    <h2 class="demo-section__title">Shapes</h2>
+  <app-doc-section id="shapes" title="Shapes">
     <p class="demo-section__description">
       Use <code>shape="circle"</code> (default) or <code>shape="square"</code>.
     </p>
@@ -120,12 +127,16 @@
         <span class="av-shape-label">square</span>
       </div>
     </div>
-    <pre class="av-code"><code>&lt;ui-lib-avatar label="JD" shape="square" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetShape"
+    />
+  </app-doc-section>
 
   <!-- Section 5: Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three visual variants match the global theme: <code>material</code>, <code>bootstrap</code>,
       and <code>minimal</code>.
@@ -138,12 +149,16 @@
         </div>
       }
     </div>
-    <pre class="av-code"><code>&lt;ui-lib-avatar label="VT" variant="material" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetVariant"
+    />
+  </app-doc-section>
 
   <!-- Section 6: AvatarGroup -->
-  <section class="demo-section" id="avatar-group" data-doc-anchor>
-    <h2 class="demo-section__title">Avatar Group</h2>
+  <app-doc-section id="avatar-group" title="Avatar Group">
     <p class="demo-section__description">
       Wrap multiple avatars in <code>ui-lib-avatar-group</code> to stack them with overlap.
       Set <code>ariaLabel</code> on the group for accessibility.
@@ -165,16 +180,16 @@
         <ui-lib-avatar label="+5" variant="minimal" />
       </ui-lib-avatar-group>
     </div>
-    <pre class="av-code"><code>&lt;ui-lib-avatar-group ariaLabel="Project team"&gt;
-  &lt;ui-lib-avatar image="/amy.jpg" imageAlt="Amy" /&gt;
-  &lt;ui-lib-avatar image="/bob.jpg" imageAlt="Bob" /&gt;
-  &lt;ui-lib-avatar label="+3" /&gt;
-&lt;/ui-lib-avatar-group&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetAvatarGroup"
+    />
+  </app-doc-section>
 
   <!-- Section 7: Playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Combine options to preview the result live.</p>
     <div class="av-playground">
       <div class="av-playground__preview">
@@ -230,98 +245,34 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: API Reference -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
     <h3 class="av-subsection">Avatar Inputs</h3>
-    <table class="av-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>image</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>URL of the image to display.</td>
-        </tr>
-        <tr>
-          <td><code>imageAlt</code></td>
-          <td><code>string</code></td>
-          <td><code>'Avatar'</code></td>
-          <td>Alt text for the image (used as aria-label).</td>
-        </tr>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Initials or short text shown when no image is set.</td>
-        </tr>
-        <tr>
-          <td><code>icon</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>CSS class string for an icon (e.g. <code>pi pi-user</code>).</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size of the avatar.</td>
-        </tr>
-        <tr>
-          <td><code>shape</code></td>
-          <td><code>'circle' | 'square'</code></td>
-          <td><code>'circle'</code></td>
-          <td>Shape of the avatar.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Visual variant. Inherits global theme when null.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Overrides the auto-resolved accessible label.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes to append to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="avatarInputRows" />
     <h3 class="av-subsection">AvatarGroup Inputs</h3>
-    <table class="av-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Accessible label for the group (role="group").</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <app-doc-api-reference [rows]="avatarGroupInputRows" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

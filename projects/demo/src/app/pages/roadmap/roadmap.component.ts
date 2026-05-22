@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 export interface ComponentScore {
@@ -104,12 +106,25 @@ export interface LaunchStep {
 @Component({
   selector: 'app-roadmap',
   standalone: true,
-  imports: [CommonModule, RouterModule, DocPageLayoutComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './roadmap.component.html',
   styleUrl: './roadmap.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoadmapComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly sections: DocSection[] = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'milestone-progress', label: 'Milestones' },
@@ -117,6 +132,7 @@ export class RoadmapComponent {
     { id: 'build-queue', label: 'Build Queue' },
     { id: 'documentation-status', label: 'Docs Status' },
     { id: 'competitive-strategy', label: 'Competitive' },
+    { id: 'pro-strategy', label: 'Pro Strategy' },
     { id: 'launch-sequence', label: 'Launch Path' },
     { id: 'next-steps', label: 'Next Steps' },
     { id: 'wow-factors', label: 'Wow Factors' },
@@ -2588,6 +2604,91 @@ export class RoadmapComponent {
     },
   ];
 
+  // ── Pro & Enterprise Strategy ─────────────────────────────────────────────
+  public readonly proCategories: {
+    rank: number;
+    name: string;
+    icon: string;
+    description: string;
+    priority: 'top' | 'high' | 'medium';
+  }[] = [
+    {
+      rank: 1,
+      name: 'Advanced Data Grid',
+      icon: 'pi-table',
+      description:
+        'Virtual scroll, column pinning, Excel-like editing, tree tables, server-side ops, and realtime streaming.',
+      priority: 'top',
+    },
+    {
+      rank: 2,
+      name: 'Workflow & Visual Builder',
+      icon: 'pi-sitemap',
+      description:
+        'Drag-drop pipeline designer, nested query builder (→ SQL / Mongo / Elastic), BPMN editor, form/survey builder.',
+      priority: 'top',
+    },
+    {
+      rank: 3,
+      name: 'Dynamic Form Engine',
+      icon: 'pi-file-edit',
+      description:
+        'JSON-schema-driven forms, conditional wizards, complex validation, and large reactive-form performance tooling.',
+      priority: 'top',
+    },
+    {
+      rank: 4,
+      name: 'Gantt & Scheduler',
+      icon: 'pi-calendar',
+      description:
+        'Resource scheduling, drag scheduling, dependency management, timeline planner, and calendar integration.',
+      priority: 'high',
+    },
+    {
+      rank: 5,
+      name: 'AI-Integrated UI Kit',
+      icon: 'pi-comments',
+      description:
+        'Streaming chat widget, prompt playground, AI diff/review panels, token-usage viewer, AI workflow builder.',
+      priority: 'high',
+    },
+    {
+      rank: 6,
+      name: 'Analytics & Charts',
+      icon: 'pi-chart-bar',
+      description:
+        'TradingView-like charts, org charts, network graphs, heatmaps, and realtime monitoring dashboard widgets.',
+      priority: 'high',
+    },
+    {
+      rank: 7,
+      name: 'Rich Text & Document',
+      icon: 'pi-pen-to-square',
+      description:
+        'Notion-like editor, collaborative editing, PDF annotation viewer, diff viewer, and document approval flow.',
+      priority: 'medium',
+    },
+    {
+      rank: 8,
+      name: 'Developer Experience Tools',
+      icon: 'pi-wrench',
+      description:
+        'Log viewers, feature-flag dashboards, permission/role editors, API explorer, audit trail viewers.',
+      priority: 'medium',
+    },
+  ];
+
+  public readonly valueDrivers: string[] = [
+    'Reliability — components that work correctly in every edge case',
+    'Performance — no unnecessary renders, virtual scroll, tree-shakable',
+    'Accessibility compliance — WCAG 2.1 AA is a procurement requirement in many enterprises',
+    'TypeScript quality — strict types, excellent autocomplete, no any',
+    'Angular integration depth — signals, zoneless, SSR-safe, OnPush',
+    'Documentation — API docs, examples, a11y notes per component',
+    'Support & maintenance — response time, changelog, upgrade path',
+    'Saved engineering time — the more "business-critical" the component, the more monetisable',
+  ];
+
   // ── Helpers ───────────────────────────────────────────────────────────────
   public getScoreClass(score: number): string {
     if (score >= 9.5) return 'score-gold';
@@ -2670,5 +2771,8 @@ export class RoadmapComponent {
   }
   public trackByDimension(_index: number, item: ScoringDimension): string {
     return item.column;
+  }
+  public trackByProCategory(_index: number, item: { rank: number }): number {
+    return item.rank;
   }
 }

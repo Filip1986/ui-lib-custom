@@ -1,19 +1,14 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Table</h1>
-      <code class="demo-page-header__import">import &#123; TableComponent &#125; from 'ui-lib-custom/table'</code>
-    </div>
-    <p class="demo-page-header__description">
-      The Table component displays tabular data with support for sorting, filtering,
-      selection, pagination, row expansion, and three visual variants.
-    </p>
-  </header>
+  <app-doc-page-header
+    docHeader
+    title="Table"
+    [importCode]="importCode"
+    description="The Table component displays tabular data with support for sorting, filtering, selection, pagination, row expansion, and three visual variants."
+  />
 
   <!-- Interactive demo -->
-  <section class="demo-section" id="interactive-demo" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Demo</h2>
+  <app-doc-section id="interactive-demo" title="Interactive Demo">
 
     <!-- Controls -->
     <div class="demo-controls">
@@ -192,11 +187,10 @@
         }
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- All Variants -->
-  <section class="demo-section" id="all-variants" data-doc-anchor>
-    <h2 class="demo-section__title">All Variants</h2>
+  <app-doc-section id="all-variants" title="All Variants">
     @for (v of variants; track v) {
       <div class="variant-block">
         <h3 class="variant-label">{{ v }}</h3>
@@ -212,11 +206,10 @@
         </ui-lib-table>
       </div>
     }
-  </section>
+  </app-doc-section>
 
   <!-- Scrollable Table -->
-  <section class="demo-section" id="scrollable-table" data-doc-anchor>
-    <h2 class="demo-section__title">Scrollable Table</h2>
+  <app-doc-section id="scrollable-table" title="Scrollable Table">
     <ui-lib-table
       [value]="products()"
       dataKey="id"
@@ -231,8 +224,35 @@
       <ui-lib-table-column field="price"    header="Price"    [sortable]="true" />
       <ui-lib-table-column field="quantity" header="Qty" />
     </ui-lib-table>
-  </section>
+  </app-doc-section>
 
+
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <p class="demo-section__description">
+      All inputs accepted by <code>ui-lib-table</code>. Import from
+      <code>ui-lib-custom/table</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc

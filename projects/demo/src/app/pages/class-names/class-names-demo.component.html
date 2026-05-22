@@ -1,80 +1,48 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>ClassNames</h1>
-      <code class="demo-page-header__import">import &#123; classNames, ClassNamesPipe &#125; from 'ui-lib-custom/class-names'</code>
-    </div>
-    <p class="demo-page-header__description">
-      A utility function and Angular pipe for composing CSS class strings from strings, conditional
-      objects, and arrays — similar to the popular
-      <code>classnames</code> npm package and PrimeNG's <code>classNames</code> utility.
-    </p>
-  </header>
+  <app-doc-page-header
+    docHeader
+    title="ClassNames"
+    [importCode]="importCode"
+    description="A utility function and Angular pipe for composing CSS class strings from strings, conditional objects, and arrays — similar to the popular <code>classnames</code> npm package and PrimeNG's <code>classNames</code> utility."
+  />
 
   <!-- Section: Function usage -->
-  <section class="demo-section" id="function-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Function Usage</h2>
+  <app-doc-section id="function-usage" title="Function Usage">
     <p class="demo-section__description">
       Import <code>classNames</code> and call it from TypeScript. Strings, objects
       (keys with truthy values included), arrays, and falsy values (ignored) are all accepted.
     </p>
 
     <div class="demo-card">
-      <pre class="demo-code"><code>import &#123; classNames &#125; from 'ui-lib-custom/class-names';
-
-// Strings
-classNames('foo', 'bar')
-// → 'foo bar'
-
-// Conditional via boolean expression
-classNames('btn', isActive &amp;&amp; 'btn--active')
-// → 'btn btn--active'  (when isActive = true)
-
-// Object: keys with truthy values included
-classNames(&#123; active: true, disabled: false &#125;)
-// → 'active'
-
-// Array: recursively flattened
-classNames(['base', &#123; highlight: true &#125;])
-// → 'base highlight'
-
-// Falsy values are silently ignored
-classNames('btn', null, undefined, false, 'icon')
-// → 'btn icon'</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showLineNumbers]="true"
+        size="sm"
+        [code]="snippetFunctionUsage"
+      />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section: Pipe usage -->
-  <section class="demo-section" id="pipe-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Pipe Usage</h2>
+  <app-doc-section id="pipe-usage" title="Pipe Usage">
     <p class="demo-section__description">
       Import <code>ClassNamesPipe</code> into your standalone component and use
       <code>classNames</code> as a template pipe. Pass additional arguments after the colon.
     </p>
 
     <div class="demo-card">
-      <pre class="demo-code"><code>import &#123; ClassNamesPipe &#125; from 'ui-lib-custom/class-names';
-
-@Component(&#123;
-  imports: [ClassNamesPipe],
-  template: `
-    &lt;!-- Object syntax --&gt;
-    &lt;div [class]="&#123; active: isActive, hidden: isHidden &#125; | classNames"&gt;&lt;/div&gt;
-
-    &lt;!-- String with extra object arg --&gt;
-    &lt;div [class]="'btn' | classNames:&#123; 'btn--lg': isLarge &#125;"&gt;&lt;/div&gt;
-
-    &lt;!-- Array flattening --&gt;
-    &lt;div [class]="['base', isActive &amp;&amp; 'active'] | classNames"&gt;&lt;/div&gt;
-  `,
-&#125;)</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showLineNumbers]="true"
+        size="sm"
+        [code]="snippetPipeUsage"
+      />
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section: Interactive playground -->
-  <section class="demo-section" id="interactive-playground" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Playground</h2>
+  <app-doc-section id="interactive-playground" title="Interactive Playground">
     <p class="demo-section__description">
       Toggle the flags below and watch the resolved class string update in real time.
     </p>
@@ -122,67 +90,47 @@ classNames('btn', null, undefined, false, 'icon')
         }}</code>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section: API reference -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API Reference</h2>
+  <app-doc-section id="api" title="API Reference">
 
     <h3 class="demo-subsection-title">classNames(...values)</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Parameter</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>...values</code></td>
-          <td><code>ClassNameValue[]</code></td>
-          <td>
-            One or more values. Strings are included as-is. Object keys with truthy values are
-            included. Arrays are recursively processed. Falsy primitives are ignored.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="name" [rows]="classnamesFnRows" [showDefault]="false" />
 
     <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNamesPipe</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Argument</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>value</code> (primary)</td>
-          <td><code>ClassNameValue</code></td>
-          <td>The primary value passed before the pipe symbol.</td>
-        </tr>
-        <tr>
-          <td><code>...additional</code></td>
-          <td><code>ClassNameValue[]</code></td>
-          <td>Optional extra values passed as pipe arguments after <code>:</code>.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference kind="name" [rows]="classnamesPipeRows" [showDefault]="false" />
 
     <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNameValue type</h3>
     <div class="demo-card">
-      <pre class="demo-code"><code>type ClassNameValue =
-  | string
-  | null
-  | undefined
-  | false
-  | Record&lt;string, boolean | null | undefined | false&gt;
-  | ClassNameValue[];</code></pre>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showLineNumbers]="true"
+        size="sm"
+        [code]="snippetClassNameValueType"
+      />
     </div>
-  </section>
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      <code>classNames</code> computes a CSS class string. It has no direct accessibility
+      impact, but the classes it produces may control <code>aria-*</code>-relevant visual
+      states (e.g. <code>.is-disabled</code>). Pair with <code>[uilibBind]</code> to keep
+      ARIA attributes in sync with CSS state.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

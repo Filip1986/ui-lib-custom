@@ -1,409 +1,139 @@
-<app-doc-page-layout [sections]="sections">
+<div class="csd-page">
 
-  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Code Snippet</h1>
-      <code class="demo-page-header__import">import &#123; CodeSnippet &#125; from 'ui-lib-custom/code-snippet'</code>
+  <!-- ── Decorative background blobs ─────────────────────────────────── -->
+  <div class="csd-bg-decor" aria-hidden="true">
+    <div class="csd-bg-decor__blob csd-bg-decor__blob--tl"></div>
+    <div class="csd-bg-decor__blob csd-bg-decor__blob--br"></div>
+  </div>
+
+  <!-- ── Header ──────────────────────────────────────────────────────── -->
+  <header class="csd-header">
+    <div class="csd-header__left">
+      <div class="csd-badge">
+        <iconify-icon icon="lucide:zap"></iconify-icon>
+        <span>Beautiful Syntax Highlighting</span>
+      </div>
+      <h1 class="csd-title">
+        Code Snippet
+        <br class="csd-title__break" />
+        <span class="csd-title__gradient">Builder</span>
+      </h1>
+      <p class="csd-description">
+        Create stunning, high-resolution code snippets for your technical documentation
+        and social media with premium macOS window chrome.
+      </p>
     </div>
-    <p class="demo-page-header__description">
-      A styled code display card with macOS-style window chrome, a language-labelled tab bar,
-      optional line numbers, and a one-click copy-to-clipboard button. Supports three design
-      variants (material, bootstrap, minimal), three sizes, and every token is overridable
-      via CSS custom properties.
-    </p>
-    <div class="demo-page-header__preview code-snippet-demo__hero">
-      <ui-lib-code-snippet
-        language="typescript"
-        filename="hello.ts"
-        variant="material"
-        [code]="tsCode"
-      />
+
+    <div class="csd-header__actions">
+      <button class="csd-btn csd-btn--dark" type="button" (click)="toggleTheme()">
+        <iconify-icon [attr.icon]="isDarkMode() ? 'lucide:moon' : 'lucide:sun'"></iconify-icon>
+        <span>{{ isDarkMode() ? 'Dark Mode' : 'Light Mode' }}</span>
+      </button>
+      <a class="csd-btn csd-btn--outline" href="#" aria-label="View Repository">
+        <iconify-icon icon="lucide:github"></iconify-icon>
+        <span>Repository</span>
+      </a>
     </div>
   </header>
 
-  <!-- ── Basic Usage ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
-    <p class="demo-section__description">
-      Provide the <code>code</code> string and set a <code>language</code> to label the tab.
-      The component renders line numbers and a copy button by default.
-    </p>
-    <div class="demo-section__preview">
+  <!-- ── Snippet grid ─────────────────────────────────────────────────── -->
+  <main class="csd-main" aria-label="Code snippet examples">
+    <!-- Column 1 -->
+    <div class="csd-col">
       <ui-lib-code-snippet
+        class="csd-card"
         language="javascript"
         filename="hello.js"
+        variant="material"
         [code]="jsCode"
+        [showLineNumbers]="true"
+      />
+      <ui-lib-code-snippet
+        class="csd-card"
+        language="html"
+        filename="truncate.html"
+        variant="material"
+        [code]="htmlCode"
+        [showLineNumbers]="true"
       />
     </div>
-    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
 
-    <h3 class="demo-section__subtitle" style="margin-top: 1.5rem">With a filename</h3>
-    <p class="demo-section__description">
-      Setting <code>filename</code> overrides the tab label with the actual file name.
-    </p>
-    <div class="demo-section__preview">
+    <!-- Column 2 -->
+    <div class="csd-col">
       <ui-lib-code-snippet
-        language="typescript"
-        filename="app.component.ts"
-        [code]="tsCode"
-      />
-    </div>
-    <app-doc-code-snippet title="With Filename" [code]="snippets.withFilename" />
-  </section>
-
-  <!-- ── Languages ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="languages" data-doc-anchor>
-    <h2 class="demo-section__title">Languages</h2>
-    <p class="demo-section__description">
-      The <code>language</code> input accepts
-      <code>'javascript'</code>, <code>'typescript'</code>, <code>'html'</code>,
-      <code>'css'</code>, <code>'scss'</code>, <code>'json'</code>,
-      <code>'bash'</code>, <code>'shell'</code>, and <code>'text'</code>.
-      It controls the tab label and the <code>data-language</code> attribute on the
-      <code>&lt;pre&gt;</code> element, which external highlighters can target.
-    </p>
-    <div class="demo-section__preview code-snippet-demo__grid">
-      <ui-lib-code-snippet language="html" filename="index.html" [code]="htmlCode" />
-      <ui-lib-code-snippet language="css" filename="styles.css" [code]="cssCode" />
-      <ui-lib-code-snippet language="scss" filename="component.scss" [code]="scssCode" />
-      <ui-lib-code-snippet language="json" filename="package.json" [code]="jsonCode" />
-      <ui-lib-code-snippet language="bash" filename="setup.sh" [code]="bashCode" />
-    </div>
-  </section>
-
-  <!-- ── Design Variants ───────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Design Variants</h2>
-    <p class="demo-section__description">
-      Three visual variants mirror the global library theme: <strong>material</strong>
-      (rounded corners, hover lift), <strong>bootstrap</strong> (sharp corners, prominent border),
-      and <strong>minimal</strong> (no shadow, transparent border until hovered).
-      When not set, the active ThemeConfigService variant is used automatically.
-    </p>
-    <div class="demo-section__preview code-snippet-demo__variants">
-      @for (variant of variants; track variant) {
-        <div class="code-snippet-demo__variant-block">
-          <p class="code-snippet-demo__variant-label">{{ variant }}</p>
-          <ui-lib-code-snippet
-            language="typescript"
-            filename="example.ts"
-            [variant]="variant"
-            [code]="jsCode"
-          />
-        </div>
-      }
-    </div>
-  </section>
-
-  <!-- ── Options ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="options" data-doc-anchor>
-    <h2 class="demo-section__title">Options</h2>
-
-    <h3 class="demo-section__subtitle">Without line numbers</h3>
-    <p class="demo-section__description">
-      Set <code>[showLineNumbers]="false"</code> for a more compact presentation.
-    </p>
-    <div class="demo-section__preview">
-      <ui-lib-code-snippet
+        class="csd-card"
         language="css"
         filename="truncate.css"
-        [showLineNumbers]="false"
+        variant="material"
         [code]="cssCode"
+        [showLineNumbers]="true"
       />
-    </div>
-
-    <h3 class="demo-section__subtitle" style="margin-top: 1.5rem">Without window chrome</h3>
-    <p class="demo-section__description">
-      Set <code>[showWindowChrome]="false"</code> to hide the macOS traffic-light dots.
-    </p>
-    <div class="demo-section__preview">
       <ui-lib-code-snippet
-        language="bash"
-        filename="install.sh"
-        [showWindowChrome]="false"
-        [code]="bashCode"
-      />
-    </div>
-
-    <h3 class="demo-section__subtitle" style="margin-top: 1.5rem">Minimal chrome</h3>
-    <p class="demo-section__description">
-      Combine <code>[showWindowChrome]="false"</code> and <code>[showLineNumbers]="false"</code>
-      for the cleanest inline presentation.
-    </p>
-    <div class="demo-section__preview">
-      <ui-lib-code-snippet
-        language="javascript"
-        [showWindowChrome]="false"
-        [showLineNumbers]="false"
-        [code]="jsCode"
-      />
-    </div>
-    <app-doc-code-snippet title="No chrome" [code]="snippets.noChrome" />
-
-    <h3 class="demo-section__subtitle" style="margin-top: 1.5rem">Sizes</h3>
-    <p class="demo-section__description">
-      The <code>size</code> input scales the font and padding: <code>'sm'</code>,
-      <code>'md'</code> (default), <code>'lg'</code>.
-    </p>
-    <div class="demo-section__preview code-snippet-demo__sizes">
-      @for (size of sizes; track size) {
-        <ui-lib-code-snippet
-          language="javascript"
-          [size]="size"
-          [filename]="size + ' size'"
-          [code]="'const size = ' + '&quot;' + size + '&quot;;'"
-        />
-      }
-    </div>
-
-    <h3 class="demo-section__subtitle" style="margin-top: 1.5rem">Max height (scrollable)</h3>
-    <p class="demo-section__description">
-      Set <code>maxHeight</code> to cap the code body height. The body becomes scrollable when
-      content overflows.
-    </p>
-    <div class="demo-section__preview">
-      <ui-lib-code-snippet
+        class="csd-card"
         language="typescript"
-        filename="long-file.ts"
-        maxHeight="160px"
+        filename="types.ts"
+        variant="material"
         [code]="tsCode"
+        [showLineNumbers]="true"
       />
     </div>
-  </section>
+  </main>
 
-  <!-- ── Playground ────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
-    <p class="demo-section__description">Toggle inputs to explore the component live.</p>
-
-    <div class="code-snippet-demo__playground">
-      <!-- Controls -->
-      <div class="code-snippet-demo__controls">
-        <fieldset class="demo-fieldset">
-          <legend>Variant</legend>
-          <div class="demo-toggle-group">
-            @for (variant of variants; track variant) {
-              <button
-                type="button"
-                class="demo-toggle-btn"
-                [class.demo-toggle-btn--active]="playgroundVariant() === variant"
-                (click)="setPlaygroundVariant(variant)"
-              >{{ variant }}</button>
-            }
-          </div>
-        </fieldset>
-
-        <fieldset class="demo-fieldset">
-          <legend>Size</legend>
-          <div class="demo-toggle-group">
-            @for (size of sizes; track size) {
-              <button
-                type="button"
-                class="demo-toggle-btn"
-                [class.demo-toggle-btn--active]="playgroundSize() === size"
-                (click)="setPlaygroundSize(size)"
-              >{{ size }}</button>
-            }
-          </div>
-        </fieldset>
-
-        <fieldset class="demo-fieldset">
-          <legend>Language</legend>
-          <div class="demo-toggle-group">
-            @for (lang of languages; track lang) {
-              <button
-                type="button"
-                class="demo-toggle-btn"
-                [class.demo-toggle-btn--active]="playgroundLanguage() === lang"
-                (click)="setPlaygroundLanguage(lang)"
-              >{{ lang }}</button>
-            }
-          </div>
-        </fieldset>
-
-        <fieldset class="demo-fieldset">
-          <legend>Toggles</legend>
-          <div class="demo-toggle-group">
-            <button
-              type="button"
-              class="demo-toggle-btn"
-              [class.demo-toggle-btn--active]="playgroundShowChrome()"
-              (click)="toggleChrome()"
-            >Window Chrome</button>
-            <button
-              type="button"
-              class="demo-toggle-btn"
-              [class.demo-toggle-btn--active]="playgroundShowLineNumbers()"
-              (click)="toggleLineNumbers()"
-            >Line Numbers</button>
-            <button
-              type="button"
-              class="demo-toggle-btn"
-              [class.demo-toggle-btn--active]="playgroundShowCopyButton()"
-              (click)="toggleCopyButton()"
-            >Copy Button</button>
-          </div>
-        </fieldset>
-      </div>
-
-      <!-- Live preview -->
-      <ui-lib-code-snippet
-        filename="component.ts"
-        [variant]="playgroundVariant()"
-        [size]="playgroundSize()"
-        [language]="playgroundLanguage()"
-        [showWindowChrome]="playgroundShowChrome()"
-        [showLineNumbers]="playgroundShowLineNumbers()"
-        [showCopyButton]="playgroundShowCopyButton()"
-        [code]="playgroundCode"
-      />
-    </div>
-  </section>
-
-  <!-- ── API ───────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
-
-    <h3 class="demo-section__subtitle" id="api-inputs" data-doc-anchor>Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>code</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>Raw code string to display.</td>
-        </tr>
-        <tr>
-          <td><code>language</code></td>
-          <td><code>CodeSnippetLanguage</code></td>
-          <td><code>'text'</code></td>
-          <td>Programming language; drives the tab label and <code>data-language</code> attribute.</td>
-        </tr>
-        <tr>
-          <td><code>filename</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Filename shown in the tab bar. Falls back to the language label when null.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>CodeSnippetVariant | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Inherits ThemeConfigService variant when null.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Controls font size and padding.</td>
-        </tr>
-        <tr>
-          <td><code>showWindowChrome</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Show or hide the macOS traffic-light dots.</td>
-        </tr>
-        <tr>
-          <td><code>showLineNumbers</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Show or hide the line number gutter.</td>
-        </tr>
-        <tr>
-          <td><code>showCopyButton</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Show or hide the copy-to-clipboard button.</td>
-        </tr>
-        <tr>
-          <td><code>maxHeight</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>CSS max-height on the code body (e.g. <code>'300px'</code>). Body scrolls on overflow.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes appended to the root element.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 class="demo-section__subtitle" id="api-outputs" data-doc-anchor>Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>codeCopied</code></td>
-          <td><code>void</code></td>
-          <td>Emitted after the code is copied to the clipboard.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- ── CSS Custom Properties ──────────────────────────────────────────────── -->
-  <section class="demo-section" id="css-vars" data-doc-anchor>
-    <h2 class="demo-section__title">CSS Custom Properties</h2>
-    <p class="demo-section__description">
-      All visual tokens are overridable. Set them on the component host or a parent element.
+  <!-- ── Multi-tab demo ─────────────────────────────────────────────── -->
+  <section class="csd-multitab-section" aria-labelledby="multitab-heading">
+    <h2 id="multitab-heading" class="csd-section-title">Multi-File Tabs</h2>
+    <p class="csd-section-desc">
+      Pass a <code>[files]</code> array to get IDE-style tabs — click a tab to switch code, or use
+      <kbd>←</kbd> / <kbd>→</kbd> arrow keys.
     </p>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><code>--uilib-code-snippet-bg</code></td><td><code>#1e1e2e</code></td><td>Editor background colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-header-bg</code></td><td><code>#181825</code></td><td>Header/titlebar background.</td></tr>
-        <tr><td><code>--uilib-code-snippet-text</code></td><td><code>#cdd6f4</code></td><td>Code text colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-border</code></td><td><code>#313244</code></td><td>Border and separator colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-line-nr-bg</code></td><td><code>#181825</code></td><td>Line number gutter background.</td></tr>
-        <tr><td><code>--uilib-code-snippet-line-nr-text</code></td><td><code>#45475a</code></td><td>Line number text colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-copy-btn-text</code></td><td><code>#7f849c</code></td><td>Copy button icon colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-copied-text</code></td><td><code>#a6e3a1</code></td><td>Copy button colour when copied.</td></tr>
-        <tr><td><code>--uilib-code-snippet-font</code></td><td><code>JetBrains Mono, …</code></td><td>Monospace font stack.</td></tr>
-        <tr><td><code>--uilib-code-snippet-dot-close</code></td><td><code>#ff5f56</code></td><td>Close dot colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-dot-minimize</code></td><td><code>#ffbd2e</code></td><td>Minimize dot colour.</td></tr>
-        <tr><td><code>--uilib-code-snippet-dot-maximize</code></td><td><code>#27c93f</code></td><td>Maximize dot colour.</td></tr>
-      </tbody>
-    </table>
+    <ui-lib-code-snippet
+      class="csd-card csd-card--full"
+      variant="material"
+      [files]="componentFiles"
+      [showLineNumbers]="true"
+    />
   </section>
 
-  <!-- ── Accessibility ──────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-    <h2 class="demo-section__title">Accessibility</h2>
-    <ul class="demo-list">
-      <li>The card root has <code>role="region"</code> with an auto-generated <code>aria-label</code>
-        derived from the filename or language.</li>
-      <li>Line numbers and window chrome are <code>aria-hidden="true"</code> — they are purely
-        decorative and do not interfere with screen reader output.</li>
-      <li>The copy button has a descriptive <code>aria-label</code> (<em>"Copy code to clipboard"</em>)
-        and toggles to <em>"Copied!"</em> with <code>aria-pressed="true"</code> after success.</li>
-      <li>The copy button is keyboard-focusable with a visible <code>:focus-visible</code> ring.</li>
-      <li><code>prefers-reduced-motion</code> disables all transitions and hover transforms.</li>
-      <li>High-contrast mode (<code>forced-colors: active</code>) draws a solid border and preserves
-        dot colours with <code>forced-color-adjust: none</code>.</li>
-    </ul>
+  <!-- ── Footer ──────────────────────────────────────────────────────── -->
+  <!-- ── API Reference ──────────────────────────────────────────────────── -->
+  <section class="csd-api-section">
+    <h2 class="csd-api-section__title">API Reference</h2>
+    <p class="csd-api-section__description">
+      All inputs accepted by <code>ui-lib-code-snippet</code>. Import from
+      <code>ui-lib-custom/code-snippet</code>.
+    </p>
+    <app-doc-api-reference [rows]="apiRows" />
   </section>
 
-</app-doc-page-layout>
+  <footer class="csd-footer">
+    <div class="csd-footer__brand">
+      <div class="csd-footer__logo">
+        <div class="csd-footer__logo-icon" aria-hidden="true">
+          <iconify-icon icon="lucide:code-2"></iconify-icon>
+        </div>
+        <span>SnippetBuilder</span>
+      </div>
+      <p class="csd-footer__copy">
+        &copy; 2024 SnippetBuilder. Created with precision by
+        <a href="#" class="csd-footer__link">&#64;sachindotcom</a>
+      </p>
+    </div>
+
+    <div class="csd-footer__right">
+      <nav class="csd-footer__nav" aria-label="Footer navigation">
+        <a href="#" class="csd-footer__nav-link">Terms</a>
+        <a href="#" class="csd-footer__nav-link">Privacy</a>
+        <a href="#" class="csd-footer__nav-link">Docs</a>
+      </nav>
+      <div class="csd-footer__social">
+        <a href="#" class="csd-footer__social-link" aria-label="Twitter">
+          <iconify-icon icon="lucide:twitter"></iconify-icon>
+        </a>
+        <a href="#" class="csd-footer__social-link" aria-label="GitHub">
+          <iconify-icon icon="lucide:github"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div>

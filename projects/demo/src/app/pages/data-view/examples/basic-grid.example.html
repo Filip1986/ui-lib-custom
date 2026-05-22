@@ -1,0 +1,5 @@
+<ui-lib-data-view [value]="products" layout="grid" [gridColumns]="4">
+  <ng-template uiDataViewGridItem let-item>
+    <article class="demo-grid-card">{{ item.name }}</article>
+  </ng-template>
+</ui-lib-data-view>

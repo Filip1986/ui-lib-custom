@@ -6,3 +6,6 @@ dist
 .angular
 **/*.min.*
 package-lock.json
+# Demo example snippet files — intentionally partial TypeScript (class members, fragments)
+# that Prettier cannot parse as standalone modules.
+**/examples/*.example.ts

@@ -1,0 +1,41 @@
+<table class="doc-keyboard-nav" role="table" aria-label="Keyboard navigation shortcuts">
+  <thead>
+    <tr>
+      <th class="doc-keyboard-nav__th doc-keyboard-nav__th--key" scope="col">Key</th>
+      @if (hasTarget()) {
+        <th class="doc-keyboard-nav__th doc-keyboard-nav__th--target" scope="col">Target</th>
+      }
+      <th class="doc-keyboard-nav__th doc-keyboard-nav__th--action" scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of parsedRows(); track $index) {
+      <tr class="doc-keyboard-nav__row">
+        <td class="doc-keyboard-nav__td doc-keyboard-nav__td--key">
+          <span class="doc-keyboard-nav__keys">
+            @for (alt of row.alternatives; track $index) {
+              @if ($index > 0) {
+                <span class="doc-keyboard-nav__alt-sep" aria-hidden="true">/</span>
+              }
+              <span class="doc-keyboard-nav__combo">
+                @for (part of alt.parts; track $index) {
+                  @if ($index > 0) {
+                    <span class="doc-keyboard-nav__combo-plus" aria-hidden="true">+</span>
+                  }
+                  <kbd class="doc-keyboard-nav__key">{{ part }}</kbd>
+                }
+              </span>
+            }
+            @if (row.suffix) {
+              <span class="doc-keyboard-nav__suffix">{{ row.suffix }}</span>
+            }
+          </span>
+        </td>
+        @if (hasTarget()) {
+          <td class="doc-keyboard-nav__td doc-keyboard-nav__td--target">{{ row.target ?? '' }}</td>
+        }
+        <td class="doc-keyboard-nav__td doc-keyboard-nav__td--action" [innerHTML]="row.action"></td>
+      </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+<uilib-input-group>
+  <uilib-input-group-addon>
+    <ui-lib-checkbox [binary]="true" [(ngModel)]="acceptTerms" />
+  </uilib-input-group-addon>
+  <ui-lib-input placeholder="Accepted by" />
+</uilib-input-group>
+
+<uilib-input-group>
+  <uilib-input-group-addon>
+    <ui-lib-checkbox [binary]="true" [(ngModel)]="priorityOnly" />
+  </uilib-input-group-addon>
+  <ui-lib-input placeholder="Priority tag" />
+  <uilib-input-group-addon>Only</uilib-input-group-addon>
+</uilib-input-group>

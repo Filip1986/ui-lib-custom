@@ -1,26 +1,109 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { BlockUI } from 'ui-lib-custom/block-ui';
 import { Button } from 'ui-lib-custom/button';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 /**
  * Demo page for the BlockUI component.
  */
 @Component({
   selector: 'app-block-ui-demo',
   standalone: true,
-  imports: [BlockUI, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    CodeSnippet,
+    BlockUI,
+    Button,
+    DocPageHeaderComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCssVarsTableComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocApiReferenceComponent,
+    DocAriaTableComponent,
+    DocSectionComponent,
+  ],
   templateUrl: './block-ui-demo.component.html',
   styleUrl: './block-ui-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlockUiDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string = "import { BlockUI } from 'ui-lib-custom/block-ui'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-block-ui-mask-bg',
+      default: 'rgba(0,0,0,0.4)',
+      description: 'Mask background colour (overridden per variant).',
+    },
+    {
+      variable: '--uilib-block-ui-mask-bg-material',
+      default: 'rgba(0,0,0,0.3)',
+      description: 'Mask colour for the <code>material</code> variant.',
+    },
+    {
+      variable: '--uilib-block-ui-mask-bg-bootstrap',
+      default: 'rgba(0,0,0,0.5)',
+      description: 'Mask colour for the <code>bootstrap</code> variant.',
+    },
+    {
+      variable: '--uilib-block-ui-mask-bg-minimal',
+      default: 'rgba(0,0,0,0.15)',
+      description: 'Mask colour for the <code>minimal</code> variant.',
+    },
+    {
+      variable: '--uilib-block-ui-transition-duration',
+      default: '0.2s',
+      description:
+        'Fade duration; overridden to <code>0</code> under <code>prefers-reduced-motion</code>.',
+    },
+    {
+      variable: '--uilib-block-ui-transition',
+      default: 'opacity var(…) ease',
+      description: 'Full transition shorthand.',
+    },
+    {
+      variable: '--uilib-block-ui-z-index',
+      default: 'var(--uilib-z-overlay, 100)',
+      description: 'Z-index of the mask layer.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },
@@ -97,4 +180,143 @@ export class BlockUiDemoComponent {
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'blocked',
+      type: 'boolean',
+      default: 'false',
+      description: 'When true, overlays the content with a blocking mask and spinner.',
+    },
+    {
+      name: 'fullPage',
+      type: 'boolean',
+      default: 'false',
+      description: 'Blocks the entire page instead of the host element.',
+    },
+    {
+      name: 'zIndex',
+      type: 'number',
+      default: '998',
+      description: 'CSS z-index of the blocking overlay.',
+    },
+    {
+      name: 'autoZIndex',
+      type: 'boolean',
+      default: 'true',
+      description: 'Automatically manages z-index layering.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index when autoZIndex is enabled.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Loading'",
+      description: 'Accessible label for the loading spinner.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Keyboard focus cannot enter the blocked content while <code>blocked = true</code> — the content wrapper receives <code>inert</code>, making all descendants non-focusable.',
+    },
+    {
+      key: 'Any key',
+      action:
+        'No special handling on the mask overlay. All standard interactions remain available outside the blocked area.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'blocked',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Whether the content is blocked. Two-way bindable via [(blocked)]. A model() signal internally.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual variant. Inherits from ThemeConfigService when null.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class(es) applied to the host element.',
+    },
+    {
+      name: 'baseZIndex',
+      type: 'number',
+      default: '0',
+      description: 'Base z-index for the mask layer. Uses the CSS variable default when 0.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'aria-busy="true"',
+      value: '—',
+      notes: 'When <code>blocked = true</code>.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-busy="false"',
+      value: '—',
+      notes: 'When <code>blocked = false</code>.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-disabled="true"',
+      value: '—',
+      notes: '<code>blocked = true</code> (removed when false).',
+    },
+    {
+      element: 'Mask element',
+      attribute: 'role="status"',
+      value: '—',
+      notes: 'Always present.',
+    },
+    {
+      element: 'Mask element',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Always present — announces projected mask content to screen readers.',
+    },
+    {
+      element: 'Mask element',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: '<code>blocked = false</code> (removed when blocked).',
+    },
+    {
+      element: 'Content wrapper',
+      attribute: 'inert=""',
+      value: '—',
+      notes: '<code>blocked = true</code> — makes all descendants non-focusable.',
+    },
+  ];
+
+  public readonly apiSlotRows: readonly ApiPropRow[] = [
+    {
+      name: 'default',
+      type: 'slot',
+      description: 'The content to be protected by the block mask.',
+    },
+    {
+      name: '[blockTemplate]',
+      type: 'slot',
+      description:
+        "Content projected into the mask overlay (e.g. a spinner or status message). Announced by screen readers via the mask's live region.",
+    },
+  ];
 }

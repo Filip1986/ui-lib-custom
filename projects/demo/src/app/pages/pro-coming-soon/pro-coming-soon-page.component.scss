@@ -1,0 +1,210 @@
+@use '../../shared/styles/doc-page.scss' as *;
+
+// ── Gold/amber pro palette (CSS custom props so dark-mode inherits) ──────────
+.pro-section {
+  --pro-gold: #d97706;
+  --pro-gold-light: #fbbf24;
+  --pro-gold-bg: color-mix(in srgb, #d97706 8%, transparent);
+  --pro-gold-border: color-mix(in srgb, #d97706 28%, transparent);
+  --pro-gold-hover-bg: color-mix(in srgb, #d97706 14%, transparent);
+
+  margin-bottom: 2.5rem;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+    color: var(--uilib-page-fg);
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: var(--uilib-muted);
+    margin: 0 0 1.25rem;
+    line-height: 1.6;
+  }
+}
+
+// ── Tier banner ───────────────────────────────────────────────────────────────
+.pro-tier-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--uilib-radius-lg, 0.75rem);
+  background: var(--pro-gold-bg);
+  border: 1px solid var(--pro-gold-border);
+  margin-bottom: 1.5rem;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  &__status {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--uilib-page-fg);
+    font-weight: 500;
+  }
+}
+
+.pro-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  i {
+    font-size: 0.6rem;
+  }
+}
+
+.pro-github-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--uilib-radius-md, 0.5rem);
+  border: 1px solid var(--pro-gold-border);
+  background: var(--pro-gold-bg);
+  color: var(--pro-gold);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--pro-gold-hover-bg);
+    border-color: var(--pro-gold-light);
+  }
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+// ── Description card ──────────────────────────────────────────────────────────
+.pro-description-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--uilib-radius-md, 0.5rem);
+  background: var(--uilib-surface-alt);
+  border: 1px solid var(--uilib-border);
+  border-left: 3px solid var(--pro-gold);
+  margin-bottom: 1.25rem;
+
+  &__icon {
+    font-size: 1.5rem;
+    color: var(--pro-gold);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  &__body {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--uilib-page-fg);
+    line-height: 1.65;
+  }
+}
+
+// ── Roadmap CTA ───────────────────────────────────────────────────────────────
+.pro-roadmap-cta {
+  margin-bottom: 0.5rem;
+}
+
+.pro-roadmap-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--uilib-color-primary-600);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--uilib-radius-md, 0.5rem);
+  border: 1px solid color-mix(in srgb, var(--uilib-color-primary-600) 30%, transparent);
+  background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: color-mix(in srgb, var(--uilib-color-primary-600) 12%, transparent);
+    border-color: color-mix(in srgb, var(--uilib-color-primary-600) 50%, transparent);
+  }
+}
+
+// ── Features list ─────────────────────────────────────────────────────────────
+.pro-features-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.5rem;
+}
+
+.pro-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--uilib-radius-sm, 0.375rem);
+  background: var(--uilib-surface);
+  border: 1px solid var(--uilib-border);
+  font-size: 0.875rem;
+  color: var(--uilib-page-fg);
+  line-height: 1.45;
+}
+
+.pro-feature-check {
+  color: var(--pro-gold);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+// ── Use cases grid ────────────────────────────────────────────────────────────
+.pro-use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.pro-use-case-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--uilib-radius-md, 0.5rem);
+  background: var(--pro-gold-bg);
+  border: 1px solid var(--pro-gold-border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--uilib-page-fg);
+
+  i {
+    color: var(--pro-gold);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+}

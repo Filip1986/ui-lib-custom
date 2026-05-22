@@ -1,0 +1,295 @@
+import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { CodeSnippetLanguage } from 'ui-lib-custom/code-snippet';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+
+/**
+ *
+ */
+@Component({
+  selector: 'app-syntax-highlighter-demo',
+  standalone: true,
+  imports: [
+    CodeSnippet,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocPageHeaderComponent,
+    DocSectionComponent,
+    DocAriaTableComponent,
+    DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
+  ],
+  templateUrl: './syntax-highlighter-demo.component.html',
+  styleUrl: './syntax-highlighter-demo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SyntaxHighlighterDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-22',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 8,
+      perf: 9,
+      comp: 7,
+      theme: 7,
+      dx: 9,
+      docs: 8,
+      polish: 8,
+      angular: 8,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string =
+    "import { highlight, tokenize, escapeForCode } from 'ui-lib-custom/syntax-highlighter';";
+
+  public readonly syntaxTokenInterfaceCode: string =
+    'interface SyntaxToken {\n  readonly type: TokenType;\n  readonly value: string;\n}';
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly activeSectionId: Signal<string | null> = computed<string | null>(
+    (): string | null => this.layout()?.activeSectionId() ?? null
+  );
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'typescript', label: 'TypeScript' },
+    { id: 'html', label: 'HTML / Angular' },
+    { id: 'scss', label: 'SCSS' },
+    { id: 'usage', label: 'Direct Usage' },
+    {
+      id: 'api',
+      label: 'API',
+      children: [
+        { id: 'api-highlight', label: 'highlight()' },
+        { id: 'api-tokenize', label: 'tokenize()' },
+        { id: 'api-escape', label: 'escapeForCode()' },
+      ],
+    },
+    { id: 'tokens', label: 'Token Classes' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public readonly activeLanguage: WritableSignal<CodeSnippetLanguage> =
+    signal<CodeSnippetLanguage>('typescript');
+
+  // ── Sample code blocks ────────────────────────────────────────────────────
+
+  public readonly tsCode: string = [
+    "import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';",
+    "import type { Signal, InputSignal } from '@angular/core';",
+    '',
+    'interface User {',
+    '  id: number;',
+    '  name: string;',
+    '  email: string;',
+    '}',
+    '',
+    '@Component({',
+    "  selector: 'app-user-card',",
+    '  standalone: true,',
+    '  changeDetection: ChangeDetectionStrategy.OnPush,',
+    '})',
+    'export class UserCardComponent {',
+    '  public readonly user: InputSignal<User | null> = input<User | null>(null);',
+    '',
+    '  // Derived greeting — recalculated only when user() changes',
+    '  public readonly greeting: Signal<string> = computed<string>((): string => {',
+    '    const currentUser: User | null = this.user();',
+    "    if (currentUser === null) return 'Hello, Guest!';",
+    '    return `Hello, ${currentUser.name}!`;',
+    '  });',
+    '}',
+  ].join('\n');
+
+  public readonly htmlCode: string = [
+    '<div class="user-card" [class.is-loading]="isLoading()">',
+    '  @if (user()) {',
+    '    <header class="user-card__header">',
+    '      <img',
+    '        [src]="user()!.avatarUrl"',
+    '        [alt]="user()!.name + \' avatar\'"',
+    '        class="user-card__avatar"',
+    '      />',
+    '      <h2 class="user-card__name">{{ user()!.name }}</h2>',
+    '    </header>',
+    '',
+    '    <ul class="user-card__tags" role="list">',
+    '      @for (tag of user()!.tags; track tag.id) {',
+    '        <li>',
+    '          <ui-lib-tag [value]="tag.label" severity="info" />',
+    '        </li>',
+    '      }',
+    '    </ul>',
+    '',
+    '    <ui-lib-button',
+    '      label="View Profile"',
+    '      variant="material"',
+    '      (clicked)="onViewProfile()"',
+    '    />',
+    '  } @else {',
+    '    <p class="user-card__empty">No user selected.</p>',
+    '  }',
+    '</div>',
+  ].join('\n');
+
+  public readonly scssCode: string = [
+    '$surface: #1e1e2e;',
+    '$primary: #6366f1;',
+    '$radius: 1rem;',
+    '',
+    '.user-card {',
+    '  --card-padding: 1.5rem;',
+    '  --card-gap: 1rem;',
+    '',
+    '  display: flex;',
+    '  flex-direction: column;',
+    '  gap: var(--card-gap);',
+    '  padding: var(--card-padding);',
+    '  background: $surface;',
+    '  border-radius: $radius;',
+    '  border: 1px solid rgba(255, 255, 255, 0.08);',
+    '  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);',
+    '',
+    '  &__header {',
+    '    display: flex;',
+    '    align-items: center;',
+    '    gap: 0.75rem;',
+    '  }',
+    '',
+    '  &__avatar {',
+    '    width: 3rem;',
+    '    height: 3rem;',
+    '    border-radius: 50%;',
+    '    object-fit: cover;',
+    '  }',
+    '',
+    '  &__name {',
+    '    font-size: 1.125rem;',
+    '    font-weight: 600;',
+    '    color: #cdd6f4;',
+    '    margin: 0;',
+    '  }',
+    '',
+    '  @media (prefers-reduced-motion: no-preference) {',
+    '    transition: box-shadow 0.2s ease;',
+    '',
+    '    &:hover {',
+    '      box-shadow: 0 8px 32px rgba($primary, 0.2);',
+    '    }',
+    '  }',
+    '}',
+  ].join('\n');
+
+  // ── Usage snippets shown in DocCodeSnippet ────────────────────────────────
+
+  public readonly snippets: {
+    readonly import: string;
+    readonly highlightUsage: string;
+    readonly tokenizeUsage: string;
+    readonly escapeUsage: string;
+    readonly themeOverride: string;
+  } = {
+    import: `import { highlight, tokenize, escapeForCode } from 'ui-lib-custom/syntax-highlighter';`,
+    highlightUsage: [
+      `import { highlight } from 'ui-lib-custom/syntax-highlighter';`,
+      `import { DomSanitizer } from '@angular/platform-browser';`,
+      ``,
+      `// Returns HTML string with <span class="uilib-token-*"> wrappers.`,
+      `// Content is HTML-escaped — safe to set as innerHTML.`,
+      `const html = highlight(myCode, 'typescript');`,
+      `element.innerHTML = html;`,
+    ].join('\n'),
+    tokenizeUsage: [
+      `import { tokenize } from 'ui-lib-custom/syntax-highlighter';`,
+      ``,
+      `const tokens = tokenize(myCode, 'html');`,
+      ``,
+      `tokens.forEach(token => {`,
+      `  console.log(token.type, JSON.stringify(token.value));`,
+      `});`,
+      `// → 'tag'       '<div'`,
+      `// → 'attr-name' 'class'`,
+      `// → 'punctuation' '='`,
+      `// → 'attr-value' '"container"'`,
+    ].join('\n'),
+    escapeUsage: [
+      `import { escapeForCode } from 'ui-lib-custom/syntax-highlighter';`,
+      ``,
+      `// Use for languages without a built-in tokenizer (JSON, Bash, etc.)`,
+      `const safeHtml = escapeForCode(myJsonCode);`,
+      `element.innerHTML = safeHtml; // no spans, just escaped text`,
+    ].join('\n'),
+    themeOverride: [
+      `/* Override token colours on a specific code snippet */`,
+      `ui-lib-code-snippet.my-custom-theme {`,
+      `  --uilib-syntax-keyword: hotpink;`,
+      `  --uilib-syntax-string: #a8ff78;`,
+      `  --uilib-syntax-comment: #555;`,
+      `}`,
+    ].join('\n'),
+  } as const;
+
+  public setActiveLanguage(language: CodeSnippetLanguage): void {
+    this.activeLanguage.set(language);
+  }
+
+  public activeCode(language: CodeSnippetLanguage): string {
+    if (language === 'typescript') return this.tsCode;
+    if (language === 'html') return this.htmlCode;
+    return this.scssCode;
+  }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Highlighted output',
+      attribute: 'role="code" / role="region"',
+      value: '—',
+      notes:
+        'Wrap the highlighted HTML in a <code>&lt;pre&gt;&lt;code&gt;</code> block. Screen readers announce <code>&lt;code&gt;</code> as a code region.',
+    },
+    {
+      element: 'Token spans',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes:
+        'Individual token <code>&lt;span&gt;</code> elements are decorative — their class-based colours have no semantic meaning for assistive technologies.',
+    },
+    {
+      element: 'Code block',
+      attribute: 'tabindex="0"',
+      value: '—',
+      notes:
+        'Add <code>tabindex="0"</code> to the containing <code>&lt;pre&gt;</code> when keyboard users may need to scroll long code blocks.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab',
+      action:
+        'Moves focus to the code block (when <code>tabindex="0"</code> is set on the container).',
+    },
+    { key: 'Arrow keys', action: 'Scrolls the code block if it overflows its container.' },
+  ];
+}

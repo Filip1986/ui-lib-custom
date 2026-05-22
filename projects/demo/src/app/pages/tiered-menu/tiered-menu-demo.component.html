@@ -1,23 +1,21 @@
 <app-doc-page-layout [sections]="sections">
-
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>TieredMenu</h1>
-      <code class="demo-page-header__import">import &#123; TieredMenu &#125; from 'ui-lib-custom/tiered-menu'</code>
-    </div>
-    <p class="demo-page-header__description">
+  <app-doc-page-header docHeader title="TieredMenu" [importCode]="importCode">
+    <p class="doc-description">
       A hierarchical flyout menu supporting arbitrarily deep nesting. Works in both
       <strong>inline</strong> and <strong>popup</strong> modes. Fully accessible with roving focus,
       ARIA roles, and keyboard navigation.
     </p>
     <div class="demo-page-header__preview">
-      <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+      <ui-lib-code-snippet
+        [code]="importTs"
+        language="typescript"
+        [showLineNumbers]="true"
+      />
     </div>
-  </header>
+  </app-doc-page-header>
 
   <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="overview-detail" data-doc-anchor>
-    <h2 class="demo-section__title">Overview</h2>
+  <app-doc-section id="overview-detail" title="Overview">
     <p class="demo-section__description">
       <code>TieredMenu</code> renders an accessible, keyboard-navigable menu panel that supports
       arbitrarily deep nesting. Items with an <code>items</code> array open a flyout sub-panel on
@@ -34,11 +32,10 @@
         <code>show()</code>, or <code>hide()</code>.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic (Inline)</h2>
+  <app-doc-section id="basic" title="Basic (Inline)">
     <p class="demo-section__description">
       The default inline mode renders the menu panel directly in the document flow. Pass a
       <code>TieredMenuItem[]</code> via <code>[model]</code> and listen for activations with
@@ -54,12 +51,11 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.basic" language="html" />
-  </section>
+    <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
+  </app-doc-section>
 
   <!-- ── Nested ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="nested-submenus" data-doc-anchor>
-    <h2 class="demo-section__title">Nested Submenus</h2>
+  <app-doc-section id="nested-submenus" title="Nested Submenus">
     <p class="demo-section__description">
       Items with an <code>items</code> array open a right-arrow flyout sub-panel on hover or
       <kbd>ArrowRight</kbd>. Nesting is recursive with no depth limit.
@@ -74,12 +70,11 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.nested" language="typescript" />
-  </section>
+    <ui-lib-code-snippet [code]="nestedTs" language="typescript" [showLineNumbers]="true" />
+  </app-doc-section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="popup-mode" data-doc-anchor>
-    <h2 class="demo-section__title">Popup Mode</h2>
+  <app-doc-section id="popup-mode" title="Popup Mode">
     <p class="demo-section__description">
       Set <code>[popup]="true"</code> and control visibility via <code>toggle(event)</code>,
       <code>show(event)</code>, or <code>hide()</code>. Wire the trigger button with
@@ -111,12 +106,11 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.popup" language="html" />
-  </section>
+    <app-doc-code-example [html]="popupHtml" [typescript]="popupTs" />
+  </app-doc-section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Choose from <code>material</code>, <code>bootstrap</code>, or <code>minimal</code>. When
       <code>variant</code> is <code>null</code> (the default), the value falls back to
@@ -133,7 +127,8 @@
               size="sm"
               type="button"
               (click)="setVariant($any(v))"
-            >{{ v }}</ui-lib-button>
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -141,12 +136,11 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="nestedItems" [variant]="variant()" />
     </div>
-    <app-doc-code-snippet [code]="snippets.variants" language="html" />
-  </section>
+    <app-doc-code-example [html]="variantsHtml" [typescript]="variantsTs" />
+  </app-doc-section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
       The size token affects font size, padding, and minimum panel width.
@@ -162,7 +156,8 @@
               size="sm"
               type="button"
               (click)="setSize($any(s))"
-            >{{ s }}</ui-lib-button>
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -170,12 +165,11 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="basicItems" [size]="size()" />
     </div>
-    <app-doc-code-snippet [code]="snippets.sizes" language="html" />
-  </section>
+    <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
+  </app-doc-section>
 
   <!-- ── Item States ───────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="item-states" data-doc-anchor>
-    <h2 class="demo-section__title">Item States</h2>
+  <app-doc-section id="item-states" title="Item States">
     <p class="demo-section__description">
       Items support <code>disabled</code>, <code>visible: false</code> (excluded from render),
       separators, and <code>command</code> callbacks. Disabled items receive
@@ -191,12 +185,15 @@
         </ul>
       </div>
     }
-    <app-doc-code-snippet [code]="snippets.itemStates" language="typescript" />
-  </section>
+    <ui-lib-code-snippet
+      [code]="itemStatesTs"
+      language="typescript"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="url-items" data-doc-anchor>
-    <h2 class="demo-section__title">URL Items</h2>
+  <app-doc-section id="url-items" title="URL Items">
     <p class="demo-section__description">
       Set <code>url</code> on an item to render it as an <code>&lt;a href&gt;</code> element.
       Combine with <code>target</code> (e.g. <code>'_blank'</code>) to open in a new tab.
@@ -204,189 +201,36 @@
     <div class="demo-section__preview demo-section__preview--narrow">
       <ui-lib-tiered-menu [model]="urlItems" />
     </div>
-    <app-doc-code-snippet [code]="snippets.urlItems" language="typescript" />
-  </section>
+    <ui-lib-code-snippet
+      [code]="urlItemsTs"
+      language="typescript"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
-    <h3 class="demo-section__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>model</code></td>
-          <td><code>TieredMenuItem[]</code></td>
-          <td><code>[]</code></td>
-          <td>Array of items to display. Items with an <code>items</code> array open nested flyout panels.</td>
-        </tr>
-        <tr>
-          <td><code>popup</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size token affecting font size, padding, and minimum panel width.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS class applied to the host element.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string</code></td>
-          <td><code>'Menu'</code></td>
-          <td>Accessible name for the root <code>&lt;ul role="menu"&gt;</code> panel.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference title="Inputs" kind="input" [rows]="apiInputRows" />
 
-    <h3 class="demo-section__subtitle">Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Payload</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>itemClick</code></td>
-          <td><code>TieredMenuItemCommandEvent</code></td>
-          <td>Emitted when a non-disabled leaf item is activated (click or keyboard).</td>
-        </tr>
-        <tr>
-          <td><code>menuShow</code></td>
-          <td><code>MouseEvent | KeyboardEvent</code></td>
-          <td>Emitted when the popup panel becomes visible. Popup mode only.</td>
-        </tr>
-        <tr>
-          <td><code>menuHide</code></td>
-          <td><code>void</code></td>
-          <td>Emitted when the popup panel is hidden. Popup mode only.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference title="Outputs" kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
-    <h3 class="demo-section__subtitle">Methods</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Parameters</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>show(event)</code></td>
-          <td><code>MouseEvent | KeyboardEvent</code></td>
-          <td>Opens the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.</td>
-        </tr>
-        <tr>
-          <td><code>hide()</code></td>
-          <td>—</td>
-          <td>Closes the popup and restores focus to the trigger element. No-op in inline mode.</td>
-        </tr>
-        <tr>
-          <td><code>toggle(event)</code></td>
-          <td><code>MouseEvent | KeyboardEvent</code></td>
-          <td>Calls <code>show()</code> or <code>hide()</code> based on current visibility.</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference title="Methods" kind="name" [rows]="apiMethodRows" [showDefault]="false" />
 
-    <h3 class="demo-section__subtitle">TieredMenuItem</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>label</code></td><td><code>string?</code></td><td>Display text for the item.</td></tr>
-        <tr><td><code>icon</code></td><td><code>string?</code></td><td>Icon class applied to a <code>&lt;span aria-hidden="true"&gt;</code>.</td></tr>
-        <tr><td><code>items</code></td><td><code>TieredMenuItem[]?</code></td><td>Child items — renders a right-arrow caret and opens a flyout sub-panel on hover or <kbd>ArrowRight</kbd>.</td></tr>
-        <tr><td><code>disabled</code></td><td><code>boolean?</code></td><td>When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and <code>tabindex="-1"</code>.</td></tr>
-        <tr><td><code>separator</code></td><td><code>boolean?</code></td><td>Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.</td></tr>
-        <tr><td><code>visible</code></td><td><code>boolean?</code></td><td>When explicitly <code>false</code>, excludes the item from the rendered list.</td></tr>
-        <tr><td><code>url</code></td><td><code>string?</code></td><td>Renders the item as <code>&lt;a href="..."&gt;</code>.</td></tr>
-        <tr><td><code>target</code></td><td><code>string?</code></td><td><code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).</td></tr>
-        <tr><td><code>command</code></td><td><code>function?</code></td><td>Callback invoked when the item is activated.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string?</code></td><td>Extra CSS class added to the <code>&lt;li&gt;</code> element.</td></tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference title="TieredMenuItem" kind="property" [rows]="apiItemRows" [showDefault]="false" />
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Token</th><th>Default</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>--uilib-tiered-menu-panel-bg</code></td><td><code>var(--uilib-surface, #fff)</code></td><td>Panel background colour.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-panel-border</code></td><td><code>var(--uilib-color-border, #e5e7eb)</code></td><td>Panel border colour.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-panel-radius</code></td><td><code>0.375rem</code></td><td>Panel border-radius.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-panel-shadow</code></td><td><code>var(--uilib-shadow-md)</code></td><td>Panel box-shadow.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-min-width</code></td><td><code>12rem</code></td><td>Minimum panel width.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-font-size</code></td><td><code>0.875rem</code></td><td>Item font size.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-item-padding</code></td><td><code>0.5rem 0.875rem</code></td><td>Item padding.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-item-color</code></td><td><code>var(--uilib-color-text, #1f2937)</code></td><td>Item text colour.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-item-color-hover</code></td><td><code>var(--uilib-color-primary, #6366f1)</code></td><td>Hover text colour.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-item-bg-hover</code></td><td><code>var(--uilib-surface-hover, #f3f4f6)</code></td><td>Hover background.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-separator-color</code></td><td><code>var(--uilib-color-border, #e5e7eb)</code></td><td>Separator line colour.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-focus-ring</code></td><td><code>var(--uilib-color-primary, #6366f1)</code></td><td>Focus ring colour.</td></tr>
-        <tr><td><code>--uilib-tiered-menu-disabled-opacity</code></td><td><code>0.45</code></td><td>Disabled item opacity.</td></tr>
-      </tbody>
-    </table>
-  </section>
+    <app-doc-css-vars-table [rows]="cssVarRows" />
+  </app-doc-section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
-  <section class="demo-section" id="accessibility" data-doc-anchor>
-    <h2 class="demo-section__title">Accessibility</h2>
+  <app-doc-section id="accessibility" title="Accessibility">
 
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-    <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Element" field="element" width="180px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.element"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Attribute" field="attribute" width="160px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.attribute"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Value" field="value" width="180px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.value"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Notes" field="notes">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.notes"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-aria-table [rows]="ariaRows" />
 
     <h3 class="demo-section__subtitle">Keyboard Navigation</h3>
-    <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
-      <ui-lib-table-column header="Key" field="key" width="260px">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.key"></span>
-        </ng-template>
-      </ui-lib-table-column>
-      <ui-lib-table-column header="Action" field="action">
-        <ng-template uiTableColumnBody let-row>
-          <span [innerHTML]="row.action"></span>
-        </ng-template>
-      </ui-lib-table-column>
-    </ui-lib-table>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
 
     <h3 class="demo-section__subtitle">Notes</h3>
     <ul class="demo-list">
@@ -396,16 +240,26 @@
       </li>
       <li>
         Popup trigger ARIA wiring is the consumer's responsibility — the component exposes
-        <code>menuId</code> and <code>isVisible()</code> for binding <code>aria-controls</code>
-        and <code>aria-expanded</code>.
+        <code>menuId</code> and <code>isVisible()</code> for binding <code>aria-controls</code> and
+        <code>aria-expanded</code>.
       </li>
       <li>
         Both SCSS files include <code>@media (prefers-reduced-motion: reduce)</code> blocks that
         disable flyout transition animations.
       </li>
     </ul>
-  </section>
+  </app-doc-section>
 
+  
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
     <app-doc-toc
@@ -414,5 +268,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

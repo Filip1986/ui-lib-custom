@@ -1,0 +1,259 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Settings Page Template"
+    description="A full account-settings page with tabbed navigation, profile editing, notification preferences, security options, and billing overview — built with ui-lib-custom."
+    [tags]="['Free', 'Forms', 'Template']"
+  />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+  <!-- Overview ─────────────────────────────────────────────────────────────── -->
+  <section id="overview" data-doc-anchor>
+    <h2>Overview</h2>
+    <p>
+      The Settings Page template organises user preferences into four logical tabs — Profile,
+      Notifications, Security, and Billing. Each tab is an isolated panel, making it easy to
+      replace mock content with your real services.
+    </p>
+  </section>
+
+  <!-- Live Preview ─────────────────────────────────────────────────────────── -->
+  <section id="preview" data-doc-anchor>
+    <h2>Live Preview</h2>
+
+    <div class="settings-demo">
+
+      <!-- Left nav -->
+      <nav class="settings-nav" aria-label="Settings sections">
+        <p class="settings-nav-title">Account</p>
+        <button
+          class="settings-nav-item"
+          [class.active]="activeTab() === 'profile'"
+          (click)="setTab('profile')"
+        >
+          <i class="pi pi-user"></i> Profile
+        </button>
+        <button
+          class="settings-nav-item"
+          [class.active]="activeTab() === 'notifications'"
+          (click)="setTab('notifications')"
+        >
+          <i class="pi pi-bell"></i> Notifications
+        </button>
+        <button
+          class="settings-nav-item"
+          [class.active]="activeTab() === 'security'"
+          (click)="setTab('security')"
+        >
+          <i class="pi pi-shield"></i> Security
+        </button>
+        <button
+          class="settings-nav-item"
+          [class.active]="activeTab() === 'billing'"
+          (click)="setTab('billing')"
+        >
+          <i class="pi pi-credit-card"></i> Billing
+        </button>
+      </nav>
+
+      <!-- Content -->
+      <div class="settings-content">
+
+        <!-- Profile tab -->
+        @if (activeTab() === 'profile') {
+          <ui-lib-panel class="settings-panel">
+            <h3 class="settings-panel-heading">Profile</h3>
+            <p class="settings-panel-desc">Update your personal information and public profile.</p>
+            <ui-lib-divider />
+
+            <div class="settings-avatar-row">
+              <ui-lib-avatar label="JD" shape="circle" size="lg" />
+              <div>
+                <p class="settings-avatar-hint">JPG, GIF or PNG. Max 2 MB.</p>
+                <div class="settings-avatar-btns">
+                  <ui-lib-button variant="minimal" size="sm" label="Change photo" leftIcon="pi pi-upload" />
+                  <ui-lib-button variant="minimal" size="sm" label="Remove" leftIcon="pi pi-trash" />
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-fields">
+              <div class="settings-field-row">
+                <div class="settings-field">
+                  <label class="settings-label" for="s-fname">First name</label>
+                  <input id="s-fname" class="settings-input" type="text" value="Jane" />
+                </div>
+                <div class="settings-field">
+                  <label class="settings-label" for="s-lname">Last name</label>
+                  <input id="s-lname" class="settings-input" type="text" value="Doe" />
+                </div>
+              </div>
+              <div class="settings-field">
+                <label class="settings-label" for="s-email">Email address</label>
+                <input id="s-email" class="settings-input" type="email" value="jane.doe@example.com" />
+              </div>
+              <div class="settings-field">
+                <label class="settings-label" for="s-bio">Bio</label>
+                <textarea id="s-bio" class="settings-input settings-textarea" rows="3">Product designer & developer</textarea>
+              </div>
+            </div>
+
+            <div class="settings-actions">
+              <ui-lib-button variant="material" label="Save changes" leftIcon="pi pi-check" />
+              <ui-lib-button variant="minimal" label="Cancel" />
+            </div>
+          </ui-lib-panel>
+        }
+
+        <!-- Notifications tab -->
+        @if (activeTab() === 'notifications') {
+          <ui-lib-panel class="settings-panel">
+            <h3 class="settings-panel-heading">Notifications</h3>
+            <p class="settings-panel-desc">Manage how and when you receive alerts.</p>
+            <ui-lib-divider />
+
+            <div class="settings-toggle-list">
+              <div class="settings-toggle-item">
+                <div class="settings-toggle-info">
+                  <strong>Email notifications</strong>
+                  <p>Receive account updates and important alerts via email.</p>
+                </div>
+                <ui-lib-toggle-switch [(checked)]="emailNotifications" />
+              </div>
+              <ui-lib-divider />
+              <div class="settings-toggle-item">
+                <div class="settings-toggle-info">
+                  <strong>Push notifications</strong>
+                  <p>Get real-time browser push notifications when you're online.</p>
+                </div>
+                <ui-lib-toggle-switch [(checked)]="pushNotifications" />
+              </div>
+              <ui-lib-divider />
+              <div class="settings-toggle-item">
+                <div class="settings-toggle-info">
+                  <strong>Weekly digest</strong>
+                  <p>A summary of your activity sent every Monday morning.</p>
+                </div>
+                <ui-lib-toggle-switch [(checked)]="weeklyDigest" />
+              </div>
+            </div>
+
+            <div class="settings-actions">
+              <ui-lib-button variant="material" label="Save preferences" leftIcon="pi pi-check" />
+            </div>
+          </ui-lib-panel>
+        }
+
+        <!-- Security tab -->
+        @if (activeTab() === 'security') {
+          <ui-lib-panel class="settings-panel">
+            <h3 class="settings-panel-heading">Security</h3>
+            <p class="settings-panel-desc">Protect your account with extra security layers.</p>
+            <ui-lib-divider />
+
+            <div class="settings-toggle-list">
+              <div class="settings-toggle-item">
+                <div class="settings-toggle-info">
+                  <strong>Two-factor authentication</strong>
+                  <p>Require a one-time code when signing in from a new device.</p>
+                </div>
+                <ui-lib-toggle-switch [(checked)]="twoFactor" />
+              </div>
+              <ui-lib-divider />
+              <div class="settings-toggle-item">
+                <div class="settings-toggle-info">
+                  <strong>Session alerts</strong>
+                  <p>Email me when a new session is started from an unrecognised location.</p>
+                </div>
+                <ui-lib-toggle-switch [(checked)]="sessionAlerts" />
+              </div>
+            </div>
+
+            <div class="settings-security-section">
+              <p class="settings-label">Change password</p>
+              <div class="settings-fields">
+                <div class="settings-field">
+                  <label class="settings-label" for="s-current-pw">Current password</label>
+                  <input id="s-current-pw" class="settings-input" type="password" placeholder="••••••••" />
+                </div>
+                <div class="settings-field">
+                  <label class="settings-label" for="s-new-pw">New password</label>
+                  <input id="s-new-pw" class="settings-input" type="password" placeholder="Min 8 characters" />
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-actions">
+              <ui-lib-button variant="material" label="Update password" leftIcon="pi pi-lock" />
+            </div>
+          </ui-lib-panel>
+        }
+
+        <!-- Billing tab -->
+        @if (activeTab() === 'billing') {
+          <ui-lib-panel class="settings-panel">
+            <h3 class="settings-panel-heading">Billing</h3>
+            <p class="settings-panel-desc">Manage your subscription and payment method.</p>
+            <ui-lib-divider />
+
+            <div class="settings-plan-card">
+              <div class="settings-plan-info">
+                <span class="settings-plan-badge">Pro Plan</span>
+                <p class="settings-plan-price">$29 <span>/ month</span></p>
+                <ul class="settings-plan-features">
+                  <li><i class="pi pi-check"></i> Up to 10 team members</li>
+                  <li><i class="pi pi-check"></i> 100 GB storage</li>
+                  <li><i class="pi pi-check"></i> Priority support</li>
+                </ul>
+              </div>
+              <ui-lib-button variant="minimal" size="sm" label="Change plan" />
+            </div>
+
+            <ui-lib-divider />
+
+            <div class="settings-payment-method">
+              <p class="settings-label">Payment method</p>
+              <div class="settings-card-row">
+                <div class="settings-card-info">
+                  <i class="pi pi-credit-card"></i>
+                  <span>Visa ending in 4242</span>
+                  <span class="settings-card-expiry">Expires 04/27</span>
+                </div>
+                <ui-lib-button variant="minimal" size="sm" label="Update" />
+              </div>
+            </div>
+
+            <div class="settings-actions">
+              <ui-lib-button variant="minimal" label="Download invoice" leftIcon="pi pi-download" />
+            </div>
+          </ui-lib-panel>
+        }
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage ────────────────────────────────────────────────────────────────── -->
+  <section id="usage" data-doc-anchor>
+    <h2>Usage</h2>
+    <p>
+      Copy the snippet below as a starting point. Each tab section is self-contained — remove
+      tabs you don't need or add your own.
+    </p>
+    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <div class="settings-download-cta">
+      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
+      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+    </div>
+  </section>
+
+</app-doc-page-layout>

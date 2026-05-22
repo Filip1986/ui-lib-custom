@@ -1,26 +1,21 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>Bind</h1>
-      <code class="demo-page-header__import">import &#123; Bind &#125; from 'ui-lib-custom/bind'</code>
+  <app-doc-page-header
+    docHeader
+    title="Bind"
+    [importCode]="importCode"
+    description="A utility directive that applies a dynamic record of key-value pairs as DOM properties on the host element — the Angular-first equivalent of PrimeNG&#39;s <code>pBind</code>."
+  />
+
+  <div class="demo-page-header__preview">
+    <div class="bd-hero__tags">
+      <span class="bd-tag">Directive</span>
+      <span class="bd-tag">Misc</span>
     </div>
-    <p class="demo-page-header__description">
-      A utility directive that applies a dynamic record of key-value pairs as
-      DOM properties on the host element — the Angular-first equivalent of
-      PrimeNG&#39;s <code>pBind</code>.
-    </p>
-    <div class="demo-page-header__preview">
-      <div class="bd-hero__tags">
-        <span class="bd-tag">Directive</span>
-        <span class="bd-tag">Misc</span>
-      </div>
-    </div>
-  </header>
+  </div>
 
   <!-- Section 1: Basic usage -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
       Pass any object literal to <code>[uiLibBind]</code>. Each key is set as
       a DOM property on the host element. Using <code>id</code>,
@@ -35,14 +30,16 @@
         Hover me — tooltip set via <code>uiLibBind</code>
       </div>
     </div>
-    <pre class="bd-code"><code>&lt;div [uiLibBind]="&#123; id: 'my-box', title: 'Tooltip text', tabIndex: 0 &#125;"&gt;
-  Content
-&lt;/div&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetBasicUsage"
+    />
+  </app-doc-section>
 
   <!-- Section 2: Interactive playground -->
-  <section class="demo-section" id="interactive-playground" data-doc-anchor>
-    <h2 class="demo-section__title">Interactive Playground</h2>
+  <app-doc-section id="interactive-playground" title="Interactive Playground">
     <p class="demo-section__description">
       The binding object reacts to signals. Change the id preset, cycle the
       tooltip, or toggle <code>tabIndex</code> to see the DOM update live.
@@ -95,11 +92,10 @@
         <code class="bd-live-code">{{ liveBindings() | json }}</code>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 3: Boolean and numeric properties -->
-  <section class="demo-section" id="boolean-numeric" data-doc-anchor>
-    <h2 class="demo-section__title">Boolean &amp; Numeric Properties</h2>
+  <app-doc-section id="boolean-numeric" title="Boolean &amp; Numeric Properties">
     <p class="demo-section__description">
       <code>uiLibBind</code> uses <code>Renderer2.setProperty</code> under the
       hood, so boolean and numeric DOM properties work exactly as expected.
@@ -120,43 +116,51 @@
         </div>
       </div>
     </div>
-    <pre class="bd-code"><code>&lt;!-- numeric property --&gt;
-&lt;div [uiLibBind]="&#123; tabIndex: 2 &#125;"&gt;Focusable&lt;/div&gt;
-&lt;!-- boolean property --&gt;
-&lt;div [uiLibBind]="&#123; hidden: true &#125;"&gt;Hidden&lt;/div&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetBooleanNumeric"
+    />
+  </app-doc-section>
 
   <!-- Section 4: API table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
     <h3 class="bd-sub-title">Selector</h3>
-    <pre class="bd-code"><code>[uiLibBind]</code></pre>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetSelector"
+    />
     <h3 class="bd-sub-title">Inputs</h3>
-    <table class="bd-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>uiLibBind</code></td>
-          <td><code>Record&lt;string, unknown&gt;</code></td>
-          <td><code>&#123;&#125;</code></td>
-          <td>
-            An object whose enumerable own properties are set as DOM properties
-            on the host element. Properties removed between updates are reset to
-            <code>null</code>.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-doc-api-reference [rows]="apiRows" />
     <h3 class="bd-sub-title">Host class</h3>
-    <pre class="bd-code"><code>ui-lib-bind</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="text"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetHostClass"
+    />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      <code>Bind</code> is a declarative attribute-binding directive. Use it to reactively drive
+      ARIA attributes from signals — e.g. <code>[uilibBind]="&#123; 'aria-expanded': isOpen() &#125;"</code>.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

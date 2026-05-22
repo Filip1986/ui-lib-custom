@@ -1,24 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>ProgressSpinner</h1>
-      <code class="demo-page-header__import">import &#123; ProgressSpinner &#125; from 'ui-lib-custom/progress-spinner'</code>
-    </div>
-    <p class="demo-page-header__description">
-      An animated circular spinner that signals an indeterminate loading state.
-      Uses a CSS <code>stroke-dashoffset</code> animation on an SVG circle combined with a
-      continuous rotation to produce the characteristic "arc chase" effect.
-      Three design variants, three sizes, and full CSS-variable theming.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-progress-spinner />
-    </div>
-  </header>
+  <app-doc-page-header docHeader title="ProgressSpinner" [importCode]="importCode"
+    description="An animated circular spinner that signals an indeterminate loading state. Uses a CSS &lt;code&gt;stroke-dashoffset&lt;/code&gt; animation on an SVG circle combined with a continuous rotation to produce the characteristic &quot;arc chase&quot; effect. Three design variants, three sizes, and full CSS-variable theming.">
+  </app-doc-page-header>
 
   <!-- Section 1: Basic -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Drop in <code>&lt;ui-lib-progress-spinner /&gt;</code> with no inputs for a default
       medium-sized, theme-variant spinner.
@@ -26,12 +13,16 @@
     <div class="ps-row">
       <ui-lib-progress-spinner />
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetBasic"
+    />
+  </app-doc-section>
 
   <!-- Section 2: Sizes -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       The <code>size</code> input accepts <code>'sm'</code>, <code>'md'</code>, or
       <code>'lg'</code>.
@@ -41,14 +32,16 @@
       <ui-lib-progress-spinner size="md" />
       <ui-lib-progress-spinner size="lg" />
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner size="sm" /&gt;
-&lt;ui-lib-progress-spinner size="md" /&gt;
-&lt;ui-lib-progress-spinner size="lg" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetSizes"
+    />
+  </app-doc-section>
 
   <!-- Section 3: Variants -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Override the global theme variant with the <code>variant</code> input.
       <code>'material'</code> cycles through multiple colours,
@@ -69,14 +62,16 @@
         <span class="ps-variant-card__label">minimal</span>
       </div>
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner variant="material" /&gt;
-&lt;ui-lib-progress-spinner variant="bootstrap" /&gt;
-&lt;ui-lib-progress-spinner variant="minimal" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetVariants"
+    />
+  </app-doc-section>
 
   <!-- Section 4: Custom animation speed -->
-  <section class="demo-section" id="animation-duration" data-doc-anchor>
-    <h2 class="demo-section__title">Animation Duration</h2>
+  <app-doc-section id="animation-duration" title="Animation Duration">
     <p class="demo-section__description">
       Control the rotation speed with <code>animationDuration</code>.
       Accepts any CSS <code>&lt;time&gt;</code> value.
@@ -95,14 +90,16 @@
         <span>Fast (750ms)</span>
       </div>
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner animationDuration="4s" /&gt;
-&lt;ui-lib-progress-spinner animationDuration="2s" /&gt;
-&lt;ui-lib-progress-spinner animationDuration="750ms" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetAnimationDuration"
+    />
+  </app-doc-section>
 
   <!-- Section 5: Custom stroke width and fill -->
-  <section class="demo-section" id="stroke-width-fill" data-doc-anchor>
-    <h2 class="demo-section__title">Stroke Width &amp; Fill</h2>
+  <app-doc-section id="stroke-width-fill" title="Stroke Width &amp; Fill">
     <p class="demo-section__description">
       <code>strokeWidth</code> controls the arc thickness (SVG units).
       <code>fill</code> sets the interior fill colour of the circle.
@@ -112,14 +109,16 @@
       <ui-lib-progress-spinner strokeWidth="4" variant="bootstrap" size="lg" ariaLabel="Thick spinner" />
       <ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" variant="bootstrap" size="lg" ariaLabel="Filled spinner" />
     </div>
-    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner strokeWidth="1" /&gt;
-&lt;ui-lib-progress-spinner strokeWidth="4" /&gt;
-&lt;ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetStrokeWidth"
+    />
+  </app-doc-section>
 
   <!-- Section 6: Loading overlay pattern -->
-  <section class="demo-section" id="loading-overlay" data-doc-anchor>
-    <h2 class="demo-section__title">Loading Overlay Pattern</h2>
+  <app-doc-section id="loading-overlay" title="Loading Overlay Pattern">
     <p class="demo-section__description">
       Combine <code>ProgressSpinner</code> with a semi-transparent overlay to block content
       during async operations.
@@ -133,17 +132,16 @@
         <ui-lib-progress-spinner size="lg" variant="material" />
       </div>
     </div>
-    <pre class="ps-code"><code>&lt;div class="loading-wrapper"&gt;
-  &lt;div class="content"&gt;…&lt;/div&gt;
-  &lt;div class="overlay"&gt;
-    &lt;ui-lib-progress-spinner size="lg" /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetLoadingOverlay"
+    />
+  </app-doc-section>
 
   <!-- Section 7: Interactive playground -->
-  <section class="demo-section" id="playground" data-doc-anchor>
-    <h2 class="demo-section__title">Playground</h2>
+  <app-doc-section id="playground" title="Playground">
     <p class="demo-section__description">Adjust the controls to explore available combinations.</p>
 
     <div class="ps-playground">
@@ -199,67 +197,32 @@
         </div>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Section 8: API table -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
-    <h3 class="ps-section__subtitle">Inputs</h3>
-    <table class="ps-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>strokeWidth</code></td>
-          <td><code>string</code></td>
-          <td><code>'2'</code></td>
-          <td>SVG stroke-width of the circle arc.</td>
-        </tr>
-        <tr>
-          <td><code>fill</code></td>
-          <td><code>string</code></td>
-          <td><code>'none'</code></td>
-          <td>SVG fill colour of the circle interior.</td>
-        </tr>
-        <tr>
-          <td><code>animationDuration</code></td>
-          <td><code>string</code></td>
-          <td><code>'2s'</code></td>
-          <td>Duration of one rotation/dash cycle. Accepts any CSS &lt;time&gt;.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size token controlling the overall diameter.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to global theme when <code>null</code>.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS class(es) applied to the host element.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string</code></td>
-          <td><code>'Loading...'</code></td>
-          <td>Screen-reader accessible label.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <app-doc-section id="api" title="API">
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

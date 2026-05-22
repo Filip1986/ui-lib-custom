@@ -12,10 +12,22 @@ import type {
   TimelineSize,
   TimelineVariant,
 } from 'ui-lib-custom/timeline';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface ProjectEvent {
   status: string;
   date: string;
@@ -38,14 +50,41 @@ interface OrderStep {
     TimelineContentDirective,
     TimelineMarkerDirective,
     TimelineOppositeDirective,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
     DocTocComponent,
+    DocQualityBadgeComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './timeline-demo.component.html',
   styleUrl: './timeline-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimelineDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string = "import { TimelineComponent } from 'ui-lib-custom/timeline'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [
@@ -58,11 +97,49 @@ export class TimelineDemoComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
     { id: 'right-alignment', label: 'Right Alignment' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly apiRows: ApiPropRow[] = [
+    { name: 'value', type: 'T[]', description: 'Array of timeline items (required).' },
+    {
+      name: 'layout',
+      type: "'vertical' | 'horizontal'",
+      default: "'vertical'",
+      description: 'Timeline axis direction.',
+    },
+    {
+      name: 'align',
+      type: "'left' | 'right' | 'alternate'",
+      default: "'left'",
+      description: 'Content alignment relative to the spine.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Timeline size.' },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS class.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Timeline'",
+      description: 'Accessible label for the timeline list.',
+    },
+  ];
 
   /** Events used in basic vertical demo. */
   public readonly basicEvents: ProjectEvent[] = [
@@ -118,4 +195,60 @@ export class TimelineDemoComponent {
     };
     return `timeline-demo__badge ${map[severity]}`;
   }
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Component is not interactive. Any interactive controls projected inside event templates receive focus in normal tab order.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Host',
+      attribute: 'role="list"',
+      value: '—',
+      notes: 'Exposes the timeline as a semantic list of events.',
+    },
+    {
+      element: 'Host',
+      attribute: 'aria-label',
+      value: 'ariaLabel input (default: "Timeline")',
+      notes: 'Provides the accessible name of the list.',
+    },
+    {
+      element: 'Event row',
+      attribute: 'role="listitem"',
+      value: '—',
+      notes: 'Identifies each event as a list item.',
+    },
+    {
+      element: 'Event row',
+      attribute: 'aria-labelledby',
+      value: 'content id + optional opposite id',
+      notes: 'Builds the item accessible name from visible event text.',
+    },
+    {
+      element: 'Connector / marker dot',
+      attribute: 'aria-hidden="true"',
+      value: '—',
+      notes: 'Decorative separator graphics are hidden from the accessibility tree.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-timeline-connector-color', description: 'Connector text colour.' },
+    { variable: '--uilib-timeline-connector-width', description: 'Connector width.' },
+    { variable: '--uilib-timeline-marker-size', description: 'Marker size.' },
+    { variable: '--uilib-timeline-marker-bg', description: 'Marker background colour.' },
+    { variable: '--uilib-timeline-marker-border-color', description: 'Marker Border text colour.' },
+    { variable: '--uilib-timeline-marker-border-width', description: 'Marker Border width.' },
+    { variable: '--uilib-timeline-event-gap', description: 'Event gap.' },
+    { variable: '--uilib-timeline-content-gap', description: 'Content gap.' },
+    { variable: '--uilib-timeline-opposite-gap', description: 'Opposite gap.' },
+    { variable: '--uilib-timeline-opposite-min-width', description: 'Opposite Min width.' },
+    { variable: '--uilib-timeline-font-size', description: 'Font size.' },
+    { variable: '--uilib-timeline-color', description: 'Text colour.' },
+    { variable: '--uilib-timeline-focus-ring-color', description: 'Focus ring colour.' },
+  ];
 }

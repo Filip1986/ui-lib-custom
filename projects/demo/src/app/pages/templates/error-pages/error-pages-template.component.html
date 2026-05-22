@@ -1,0 +1,139 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Error Pages Template"
+    description="Polished 404, 500, and 403 error pages with clear messaging and recovery actions — ready to drop into any Angular routing configuration."
+    [tags]="['Free', 'UX', 'Template']"
+  />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+  <!-- Overview ─────────────────────────────────────────────────────────────── -->
+  <section id="overview" data-doc-anchor>
+    <h2>Overview</h2>
+    <p>
+      Three error screen variants cover the most common user-facing failure states. Each page is
+      fully accessible — correct ARIA landmark structure, clear status messaging, and keyboard-
+      reachable recovery actions.
+    </p>
+    <div class="error-overview-chips">
+      <span class="error-chip">404 — Not Found</span>
+      <span class="error-chip">500 — Server Error</span>
+      <span class="error-chip">403 — Forbidden</span>
+    </div>
+  </section>
+
+  <!-- Live Preview ─────────────────────────────────────────────────────────── -->
+  <section id="preview" data-doc-anchor>
+    <h2>Live Preview</h2>
+
+    <div class="error-tab-bar" role="tablist" aria-label="Error page variants">
+      <button role="tab" [attr.aria-selected]="activeError() === '404'"
+        [class.active]="activeError() === '404'" (click)="setError('404')">
+        404 Not Found
+      </button>
+      <button role="tab" [attr.aria-selected]="activeError() === '500'"
+        [class.active]="activeError() === '500'" (click)="setError('500')">
+        500 Server Error
+      </button>
+      <button role="tab" [attr.aria-selected]="activeError() === '403'"
+        [class.active]="activeError() === '403'" (click)="setError('403')">
+        403 Forbidden
+      </button>
+    </div>
+
+    <div class="error-preview-area">
+
+      <!-- 404 ─── -->
+      @if (activeError() === '404') {
+        <div class="error-page" role="main" aria-labelledby="err-404-title">
+          <div class="error-illustration error-illustration--404">
+            <span class="error-code" aria-hidden="true">404</span>
+            <div class="error-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <h1 id="err-404-title" class="error-title">Page not found</h1>
+          <p class="error-message">
+            The page you're looking for doesn't exist or has been moved.
+            Double-check the URL or head back to the home page.
+          </p>
+          <div class="error-actions">
+            <ui-lib-button variant="material" label="Go home" leftIcon="pi pi-home" />
+            <ui-lib-button variant="minimal" label="Go back" leftIcon="pi pi-arrow-left" />
+          </div>
+        </div>
+      }
+
+      <!-- 500 ─── -->
+      @if (activeError() === '500') {
+        <div class="error-page" role="main" aria-labelledby="err-500-title">
+          <div class="error-illustration error-illustration--500">
+            <span class="error-code" aria-hidden="true">500</span>
+            <div class="error-icon-wrap" aria-hidden="true">
+              <i class="pi pi-exclamation-triangle"></i>
+            </div>
+          </div>
+          <h1 id="err-500-title" class="error-title">Something went wrong</h1>
+          <p class="error-message">
+            An unexpected error occurred on our end. Our team has been notified
+            automatically. Please try again in a few moments.
+          </p>
+          <div class="error-actions">
+            <ui-lib-button variant="material" label="Try again" leftIcon="pi pi-refresh" />
+            <ui-lib-button variant="minimal" label="Go home" leftIcon="pi pi-home" />
+          </div>
+          <p class="error-incident">
+            Incident ID: <code>INC-20260520-8341</code>
+          </p>
+        </div>
+      }
+
+      <!-- 403 ─── -->
+      @if (activeError() === '403') {
+        <div class="error-page" role="main" aria-labelledby="err-403-title">
+          <div class="error-illustration error-illustration--403">
+            <span class="error-code" aria-hidden="true">403</span>
+            <div class="error-icon-wrap" aria-hidden="true">
+              <i class="pi pi-lock"></i>
+            </div>
+          </div>
+          <h1 id="err-403-title" class="error-title">Access denied</h1>
+          <p class="error-message">
+            You don't have permission to view this page. If you believe this is
+            a mistake, please contact your administrator or sign in with a
+            different account.
+          </p>
+          <div class="error-actions">
+            <ui-lib-button variant="material" label="Sign in" leftIcon="pi pi-sign-in" />
+            <ui-lib-button variant="minimal" label="Go home" leftIcon="pi pi-home" />
+          </div>
+        </div>
+      }
+
+    </div>
+  </section>
+
+  <!-- Usage ────────────────────────────────────────────────────────────────── -->
+  <section id="usage" data-doc-anchor>
+    <h2>Usage</h2>
+    <p>
+      Register these as wildcard or specific error routes in your Angular router. Pass the error
+      code as a route parameter or use separate component classes per error type.
+    </p>
+    <ui-lib-code-snippet [code]="codeSnippet" language="typescript" />
+    <div class="error-download-cta">
+      <ui-lib-button variant="material" label="Copy Template" leftIcon="pi pi-copy" />
+      <ui-lib-button variant="minimal" label="View on GitHub" leftIcon="pi pi-github" />
+    </div>
+  </section>
+
+</app-doc-page-layout>

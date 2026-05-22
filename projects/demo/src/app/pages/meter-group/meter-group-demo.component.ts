@@ -9,25 +9,131 @@ import type {
   MeterItem,
 } from 'ui-lib-custom/meter-group';
 import { Button } from 'ui-lib-custom/button';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import {
+  basicHtml,
+  basicTs,
+  labelPositionHtml,
+  labelPositionTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  verticalHtml,
+  noLegendHtml,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the MeterGroup component.
  */
 @Component({
   selector: 'app-meter-group-demo',
   standalone: true,
-  imports: [MeterGroup, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    CodeSnippet,
+    MeterGroup,
+    Button,
+    DocPageLayoutComponent,
+    DocPageHeaderComponent,
+    DocTocComponent,
+    DocCssVarsTableComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocCodeExampleComponent,
+    DocSectionComponent,
+    DocApiReferenceComponent,
+    DocAriaTableComponent,
+  ],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeterGroupDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly labelPositionHtml: string = labelPositionHtml;
+  public readonly labelPositionTs: string = labelPositionTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly verticalHtml: string = verticalHtml;
+  public readonly noLegendHtml: string = noLegendHtml;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly importCode: string = "import { MeterGroup } from 'ui-lib-custom/meter-group'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-meter-group-height', description: 'Bar height (horizontal orientation).' },
+    {
+      variable: '--uilib-meter-group-height-sm',
+      description: 'Bar height for <code>size="sm"</code>.',
+    },
+    {
+      variable: '--uilib-meter-group-height-lg',
+      description: 'Bar height for <code>size="lg"</code>.',
+    },
+    {
+      variable: '--uilib-meter-group-width-vertical',
+      description: 'Bar width (vertical orientation).',
+    },
+    {
+      variable: '--uilib-meter-group-height-vertical',
+      description: 'Bar height (vertical orientation).',
+    },
+    {
+      variable: '--uilib-meter-group-border-radius',
+      description: 'Bar and segment corner radius.',
+    },
+    { variable: '--uilib-meter-group-bg', description: 'Background track colour.' },
+    { variable: '--uilib-meter-group-segment-gap', description: 'Gap between segments.' },
+    { variable: '--uilib-meter-group-label-font-size', description: 'Legend font size.' },
+    { variable: '--uilib-meter-group-label-color', description: 'Legend label text colour.' },
+    { variable: '--uilib-meter-group-label-value-color', description: 'Legend value text colour.' },
+    { variable: '--uilib-meter-group-swatch-size', description: 'Legend colour swatch size.' },
+    {
+      variable: '--uilib-meter-group-swatch-border-radius',
+      description: 'Legend swatch border radius.',
+    },
+    {
+      variable: '--uilib-meter-group-transition',
+      description:
+        'Segment transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.',
+    },
+  ];
 
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },
@@ -61,44 +167,6 @@ export class MeterGroupDemoComponent {
   public readonly labelPositions: MeterGroupLabelPosition[] = ['start', 'end'];
   public readonly sizes: MeterGroupSize[] = ['sm', 'md', 'lg'];
   public readonly variants: MeterGroupVariant[] = ['material', 'bootstrap', 'minimal'];
-
-  public readonly snippets: {
-    readonly import: string;
-    readonly basic: string;
-    readonly labelPosition: string;
-    readonly sizes: string;
-    readonly variants: string;
-    readonly vertical: string;
-    readonly noLegend: string;
-  } = {
-    import: `import { MeterGroup } from 'ui-lib-custom/meter-group';
-import type { MeterItem } from 'ui-lib-custom/meter-group';`,
-    basic: `storageItems: MeterItem[] = [
-  { label: 'Apps',     value: 16, color: '#34d399' },
-  { label: 'Messages', value: 8,  color: '#818cf8' },
-  { label: 'Media',    value: 24, color: '#fb923c' },
-  { label: 'System',   value: 10, color: '#f87171' },
-];
-
-<ui-lib-meter-group [values]="storageItems" />`,
-    labelPosition: `<!-- legend above the bar -->
-<ui-lib-meter-group [values]="items" labelPosition="start" />
-
-<!-- legend below the bar (default) -->
-<ui-lib-meter-group [values]="items" labelPosition="end" />`,
-    sizes: `<ui-lib-meter-group [values]="items" size="sm" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" size="md" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" size="lg" [showLabels]="false" />`,
-    variants: `<ui-lib-meter-group [values]="items" variant="material"  [showLabels]="false" />
-<ui-lib-meter-group [values]="items" variant="bootstrap" [showLabels]="false" />
-<ui-lib-meter-group [values]="items" variant="minimal"   [showLabels]="false" />`,
-    vertical: `<ui-lib-meter-group
-  [values]="cpuItems"
-  orientation="vertical"
-  labelPosition="end"
-/>`,
-    noLegend: `<ui-lib-meter-group [values]="items" [showLabels]="false" />`,
-  } as const;
 
   // ---- Static demo data ---------------------------------------------------
 
@@ -164,4 +232,153 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';`,
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: '.ui-lib-meter-group__meters',
+      attribute: 'role="group"',
+      value: '—',
+      notes: 'Groups all meter segments as one semantic meter group.',
+    },
+    {
+      element: '.ui-lib-meter-group__meters',
+      attribute: 'aria-label',
+      value: 'Value of ariaLabel input',
+      notes: 'Defaults to <code>"Meter group"</code>. Provide a meaningful label for the dataset.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'role="meter"',
+      value: '—',
+      notes: 'Announces each segment as a meter to assistive technology.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-valuenow',
+      value: 'Segment value (clamped to range)',
+      notes: 'Current value of the segment.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-valuemin',
+      value: 'Value of min input',
+      notes: 'Lower bound of the range.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-valuemax',
+      value: 'Value of max input',
+      notes: 'Upper bound of the range.',
+    },
+    {
+      element: '.ui-lib-meter-group__meter',
+      attribute: 'aria-label',
+      value: '"<label>: <value> of <max>"',
+      notes: 'Human-readable segment description announced by screen readers.',
+    },
+    {
+      element: '.ui-lib-meter-group__sr-total',
+      attribute: 'aria-live="polite"',
+      value: '—',
+      notes: 'Hidden live region that announces computed total changes for dynamic data.',
+    },
+    {
+      element: '.ui-lib-meter-group__sr-total',
+      attribute: 'aria-atomic="true"',
+      value: '—',
+      notes: 'Reads the total announcement as a complete phrase.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    {
+      key: 'Tab / Shift+Tab',
+      action:
+        'Skips meter segments and legend items — MeterGroup is informational and non-interactive, nothing is focusable.',
+    },
+  ];
+
+  public readonly apiInputRows: readonly ApiPropRow[] = [
+    {
+      name: 'values',
+      type: 'MeterItem[]',
+      default: '[]',
+      description: 'Array of meter segments to render.',
+    },
+    { name: 'min', type: 'number', default: '0', description: 'Minimum value of the range.' },
+    { name: 'max', type: 'number', default: '100', description: 'Maximum value of the range.' },
+    {
+      name: 'orientation',
+      type: "'horizontal' | 'vertical'",
+      default: "'horizontal'",
+      description: 'Bar direction.',
+    },
+    {
+      name: 'showLabels',
+      type: 'boolean',
+      default: 'true',
+      description: 'Show or hide the legend.',
+    },
+    {
+      name: 'labelPosition',
+      type: "'start' | 'end'",
+      default: "'end'",
+      description:
+        'Legend placement — <code>start</code> is above / left, <code>end</code> is below / right.',
+    },
+    {
+      name: 'size',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: 'Bar thickness size token.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description:
+        'Visual design variant; falls back to <code>ThemeConfigService</code> when <code>null</code>.',
+    },
+    {
+      name: 'ariaLabel',
+      type: 'string',
+      default: "'Meter group'",
+      description:
+        'Accessible label for the meter container group (<code>aria-label</code> on the group element).',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Extra CSS classes appended to the host element.',
+    },
+  ];
+
+  public readonly apiMeterItemRows: readonly ApiPropRow[] = [
+    {
+      name: 'label',
+      type: 'string',
+      required: true,
+      description:
+        'Display label shown in the legend and used as the segment <code>aria-label</code>.',
+    },
+    {
+      name: 'value',
+      type: 'number',
+      required: true,
+      description: 'Numeric value measured against <code>min</code> / <code>max</code>.',
+    },
+    {
+      name: 'color',
+      type: 'string',
+      required: true,
+      description: 'CSS colour string for the segment fill (hex, rgb, hsl, named colour).',
+    },
+    {
+      name: 'icon',
+      type: 'string',
+      required: false,
+      description: 'Optional PrimeIcons class shown inside the legend colour swatch.',
+    },
+  ];
 }

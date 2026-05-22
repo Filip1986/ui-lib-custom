@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import type { InputSignal, OutputEmitterRef } from '@angular/core';
 import type { DocSection } from './doc-section.model';
 
 /**
@@ -8,15 +8,15 @@ import type { DocSection } from './doc-section.model';
 @Component({
   selector: 'app-doc-toc',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './doc-toc.component.html',
   styleUrl: './doc-toc.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocTocComponent {
-  @Input({ required: true }) public sections: DocSection[] = [];
-  @Input() public activeId: string | null = null;
-  @Output() public sectionSelected: EventEmitter<string> = new EventEmitter<string>();
+  public readonly sections: InputSignal<DocSection[]> = input.required<DocSection[]>();
+  public readonly activeId: InputSignal<string | null> = input<string | null>(null);
+  public readonly sectionSelected: OutputEmitterRef<string> = output<string>();
 
   public onSelect(id: string): void {
     this.sectionSelected.emit(id);

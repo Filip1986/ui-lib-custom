@@ -1,18 +1,54 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { WritableSignal, Signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { TreeSelect } from 'ui-lib-custom/tree-select';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import type {
   TreeNode,
   TreeSelectSelectionMode,
   TreeSelectVariant,
 } from 'ui-lib-custom/tree-select';
+import {
+  basicHtml,
+  basicTs,
+  multipleHtml,
+  multipleTs,
+  checkboxHtml,
+  checkboxTs,
+  filterHtml,
+  filterTs,
+  sizesHtml,
+  sizesTs,
+  variantsHtml,
+  variantsTs,
+  showClearHtml,
+  showClearTs,
+  disabledHtml,
+  disabledTs,
+  loadingHtml,
+  loadingTs,
+  ngModelHtml,
+  ngModelTs,
+  reactiveHtml,
+  reactiveTs,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 const SAMPLE_TREE_NODES: TreeNode[] = [
   {
     key: 'documents',
@@ -72,14 +108,112 @@ const SAMPLE_TREE_NODES: TreeNode[] = [
     ReactiveFormsModule,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
-    CodePreviewComponent,
     TreeSelect,
+    DocCodeExampleComponent,
+    DocTocComponent,
+    DocQualityBadgeComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
   ],
   templateUrl: './tree-select-demo.component.html',
   styleUrl: './tree-select-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeSelectDemoComponent {
+  public readonly basicHtml: string = basicHtml;
+  public readonly basicTs: string = basicTs;
+  public readonly multipleHtml: string = multipleHtml;
+  public readonly multipleTs: string = multipleTs;
+  public readonly checkboxHtml: string = checkboxHtml;
+  public readonly checkboxTs: string = checkboxTs;
+  public readonly filterHtml: string = filterHtml;
+  public readonly filterTs: string = filterTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTs: string = sizesTs;
+  public readonly variantsHtml: string = variantsHtml;
+  public readonly variantsTs: string = variantsTs;
+  public readonly showClearHtml: string = showClearHtml;
+  public readonly showClearTs: string = showClearTs;
+  public readonly disabledHtml: string = disabledHtml;
+  public readonly disabledTs: string = disabledTs;
+  public readonly loadingHtml: string = loadingHtml;
+  public readonly loadingTs: string = loadingTs;
+  public readonly ngModelHtml: string = ngModelHtml;
+  public readonly ngModelTs: string = ngModelTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTs: string = reactiveTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
+  public readonly apiRows: ApiPropRow[] = [
+    {
+      name: 'nodes',
+      type: 'TreeNode[]',
+      default: '[]',
+      description: 'Root nodes of the selection tree.',
+    },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Design variant.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size.' },
+    { name: 'placeholder', type: 'string', default: "'Select'", description: 'Placeholder text.' },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
+    { name: 'loading', type: 'boolean', default: 'false', description: 'Shows a loading state.' },
+    { name: 'filter', type: 'boolean', default: 'false', description: 'Enables an inline filter.' },
+    {
+      name: 'filterPlaceholder',
+      type: 'string',
+      default: "'Search...'",
+      description: 'Filter input placeholder.',
+    },
+    { name: 'showClear', type: 'boolean', default: 'false', description: 'Shows a clear button.' },
+    { name: 'invalid', type: 'boolean', default: 'false', description: 'Marks as invalid.' },
+    { name: 'required', type: 'boolean', default: 'false', description: 'Marks as required.' },
+    {
+      name: 'emptyMessage',
+      type: 'string',
+      default: "'No results'",
+      description: 'Message shown when there are no nodes.',
+    },
+    { name: 'ariaLabel', type: 'string | null', default: 'null', description: 'Accessible label.' },
+    {
+      name: 'ariaLabelledBy',
+      type: 'string | null',
+      default: 'null',
+      description: 'Id of an external label.',
+    },
+  ];
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple Selection' },
@@ -92,6 +226,9 @@ export class TreeSelectDemoComponent {
     { id: 'loading', label: 'Loading' },
     { id: 'ngModel', label: 'ngModel' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly nodes: TreeNode[] = SAMPLE_TREE_NODES;
@@ -141,77 +278,87 @@ export class TreeSelectDemoComponent {
     TreeNode | TreeNode[] | null
   >(null);
 
-  public readonly snippets: Readonly<Record<string, string>> = {
-    basic: `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="single"
-  placeholder="Select a file..."
-  [(selection)]="selectedNode"
-/>`,
-    multiple: `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="multiple"
-  placeholder="Select files..."
-  [(selection)]="selectedNodes"
-/>`,
-    checkbox: `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="checkbox"
-  placeholder="Select items..."
-  [(selection)]="checkedNodes"
-/>`,
-    filter: `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="single"
-  [filter]="true"
-  filterPlaceholder="Search files..."
-  placeholder="Select a file..."
-  [(selection)]="selectedNode"
-/>`,
-    sizes: `<ui-lib-tree-select [nodes]="nodes" size="sm" placeholder="Small" />
-<ui-lib-tree-select [nodes]="nodes" size="md" placeholder="Medium" />
-<ui-lib-tree-select [nodes]="nodes" size="lg" placeholder="Large" />`,
-    variants: `<ui-lib-tree-select [nodes]="nodes" variant="material" placeholder="Material" />
-<ui-lib-tree-select [nodes]="nodes" variant="bootstrap" placeholder="Bootstrap" />
-<ui-lib-tree-select [nodes]="nodes" variant="minimal" placeholder="Minimal" />`,
-    showClear: `<ui-lib-tree-select
-  [nodes]="nodes"
-  selectionMode="single"
-  [showClear]="true"
-  placeholder="Select a file..."
-  [(selection)]="selectedNode"
-/>`,
-    disabled: `<ui-lib-tree-select
-  [nodes]="nodes"
-  [disabled]="true"
-  placeholder="Disabled"
-/>`,
-    loading: `<ui-lib-tree-select
-  [nodes]="nodes"
-  [loading]="true"
-  placeholder="Loading..."
-/>`,
-    ngModel: `<ui-lib-tree-select
-  [nodes]="nodes"
-  [(ngModel)]="selectedNode"
-  placeholder="Select a file..."
-/>`,
-    reactive: `<form [formGroup]="form">
-  <ui-lib-tree-select
-    [nodes]="nodes"
-    formControlName="selectedNode"
-    placeholder="Select a file..."
-  />
-</form>`,
-  };
-
   public onSelectionChange(value: unknown): void {
     // Selection change logged via event binding in template
     void value;
   }
 
   /** Returns the snippet string for a given key (guaranteed non-undefined for templates). */
-  public snippet(key: string): string {
-    return this.snippets[key] ?? '';
-  }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Select trigger',
+      attribute: 'role',
+      value: '"combobox"',
+      notes: 'The trigger uses the combobox role to indicate it opens a tree panel.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the tree panel is open.',
+    },
+    {
+      element: 'Select trigger',
+      attribute: 'aria-haspopup',
+      value: '"tree"',
+      notes: 'Signals that the combobox opens a tree.',
+    },
+    {
+      element: 'Tree panel',
+      attribute: 'role',
+      value: '"tree"',
+      notes: 'The dropdown panel is a tree widget.',
+    },
+    {
+      element: 'Tree node',
+      attribute: 'role',
+      value: '"treeitem"',
+      notes: 'Each option is a tree item.',
+    },
+    {
+      element: 'Tree node (expandable)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects expanded/collapsed state of parent nodes.',
+    },
+    {
+      element: 'Tree node (selected)',
+      attribute: 'aria-selected',
+      value: '"true"',
+      notes: 'Reflects selection state.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Enter / Space', suffix: 'on trigger', action: 'Opens or closes the tree panel.' },
+    { key: '↓ / ↑', suffix: 'in panel', action: 'Move focus between visible tree nodes.' },
+    { key: '→', suffix: 'in panel', action: 'Expand a collapsed node.' },
+    { key: '←', suffix: 'in panel', action: 'Collapse an expanded node or move to parent.' },
+    { key: 'Enter / Space', suffix: 'on node', action: 'Select the focused node.' },
+    { key: 'Escape', action: 'Closes the panel and returns focus to the trigger.' },
+  ];
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-tree-select-trigger-min-height-sm',
+      description: 'Trigger Min height — sm.',
+    },
+    {
+      variable: '--uilib-tree-select-trigger-min-height-md',
+      description: 'Trigger Min height — md.',
+    },
+    {
+      variable: '--uilib-tree-select-trigger-min-height-lg',
+      description: 'Trigger Min height — lg.',
+    },
+    { variable: '--uilib-tree-select-panel-max-height', description: 'Panel Max height.' },
+    { variable: '--uilib-tree-select-panel-z-index', description: 'Panel z-index.' },
+    { variable: '--uilib-tree-select-trigger-padding-y', description: 'Trigger vertical padding.' },
+    {
+      variable: '--uilib-tree-select-trigger-padding-x',
+      description: 'Trigger horizontal padding.',
+    },
+    { variable: '--uilib-tree-select-trigger-radius', description: 'Trigger border radius.' },
+    { variable: '--uilib-tree-select-panel-radius', description: 'Panel border radius.' },
+  ];
 }

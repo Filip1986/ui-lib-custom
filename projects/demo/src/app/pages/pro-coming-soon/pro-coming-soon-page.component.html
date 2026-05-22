@@ -1,0 +1,86 @@
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    [title]="data.componentName"
+    [description]="data.tagline"
+  />
+
+  <!-- ── Overview ─────────────────────────────────────────────────────── -->
+  <section class="pro-section" id="overview" data-doc-anchor>
+
+    <div class="pro-tier-banner" role="status" [attr.aria-label]="data.tier + ' tier component'">
+      <div class="pro-tier-banner__left">
+        <span class="pro-tier-badge">
+          <i class="pi pi-star-fill"></i>
+          {{ data.tier === 'enterprise' ? 'Enterprise' : 'Pro' }}
+        </span>
+        <p class="pro-tier-banner__status">In Design — Coming to the Pro tier</p>
+      </div>
+      <a
+        [href]="data.githubUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pro-github-cta"
+        aria-label="Star the repository on GitHub to follow progress"
+      >
+        <i class="pi pi-github"></i>
+        Star on GitHub to follow progress
+      </a>
+    </div>
+
+    <div class="pro-description-card">
+      <i [class]="'pi ' + data.icon + ' pro-description-card__icon'"></i>
+      <p class="pro-description-card__body">{{ data.description }}</p>
+    </div>
+
+    <div class="pro-roadmap-cta">
+      <a routerLink="/roadmap" fragment="pro-strategy" class="pro-roadmap-link">
+        <ui-lib-icon name="map" size="sm" aria-hidden="true" />
+        View the full Pro &amp; Enterprise Strategy on the Roadmap
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Features ─────────────────────────────────────────────────────── -->
+  <section class="pro-section" id="features" data-doc-anchor>
+    <h2 class="pro-section__title">What's Included</h2>
+    <p class="pro-section__subtitle">
+      Planned feature set for the initial Pro release. Scope may evolve based on community input.
+    </p>
+    <ul class="pro-features-list" role="list">
+      @for (feature of data.features; track feature) {
+        <li class="pro-feature-item" role="listitem">
+          <span class="pro-feature-check" aria-hidden="true">✦</span>
+          <span>{{ feature }}</span>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <!-- ── Use Cases ─────────────────────────────────────────────────────── -->
+  <section class="pro-section" id="use-cases" data-doc-anchor>
+    <h2 class="pro-section__title">Built For</h2>
+    <p class="pro-section__subtitle">
+      The teams and products that benefit most from this component.
+    </p>
+    <div class="pro-use-cases-grid">
+      @for (useCase of data.useCases; track useCase) {
+        <div class="pro-use-case-card">
+          <i class="pi pi-check-circle"></i>
+          <span>{{ useCase }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

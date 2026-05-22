@@ -7,7 +7,6 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Grid, Stack } from 'ui-lib-custom/layout';
 import type { StackDirection, StackAlign, StackJustify } from 'ui-lib-custom/layout';
 import { STACK_TOKENS } from 'ui-lib-custom/tokens';
@@ -17,11 +16,14 @@ import type { TabsValue } from 'ui-lib-custom/tabs';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo section for stack layout usage.
  */
@@ -29,18 +31,20 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   selector: 'app-layout-stack-section',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     Button,
-    Card,
     Grid,
     Stack,
     Tabs,
     Tab,
     UiLibSelect,
     DocDemoViewportComponent,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
   ],
   templateUrl: './stack-section.component.html',
   styleUrl: './layouts.component.scss',
@@ -49,6 +53,25 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 export class StackSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'stack', label: 'Stack' }];
 
+  public readonly apiRows: readonly ApiPropRow[] = [
+    { name: 'spacing', type: 'SpacingToken', description: 'Semantic gap between children.' },
+    {
+      name: 'direction',
+      type: "'vertical' | 'horizontal'",
+      description: 'Flow direction of children.',
+    },
+    {
+      name: 'align',
+      type: "'start' | 'center' | 'end' | 'stretch'",
+      description: 'Cross-axis alignment.',
+    },
+    {
+      name: 'justify',
+      type: "'start' | 'center' | 'end' | 'space-between'",
+      description: 'Main-axis distribution.',
+    },
+  ];
+
   public readonly usageSnippet: string = `
 <ui-lib-stack spacing="md" direction="horizontal" justify="space-between">
   <div class="card">Left</div>
@@ -56,6 +79,16 @@ export class StackSectionComponent {
   <div class="card">Right</div>
 </ui-lib-stack>
 `;
+
+  public readonly usageSnippetTs: string = `import { Component } from '@angular/core';
+import { Stack } from 'ui-lib-custom/layout';
+
+@Component({
+  standalone: true,
+  imports: [Stack],
+  templateUrl: './my.component.html',
+})
+export class MyComponent {}`;
 
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

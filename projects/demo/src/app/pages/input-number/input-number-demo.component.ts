@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,31 +10,62 @@ import {
 } from '@angular/forms';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
-import { Card } from 'ui-lib-custom/card';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputNumberComponent } from 'ui-lib-custom/input-number';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 
-type InputNumberSnippetKey =
-  | 'numerals'
-  | 'decimal'
-  | 'locale'
-  | 'currency'
-  | 'prefixSuffix'
-  | 'buttonsStacked'
-  | 'buttonsHorizontal'
-  | 'buttonsVertical'
-  | 'step'
-  | 'minMax'
-  | 'floatLabel'
-  | 'clearIcon'
-  | 'sizes'
-  | 'disabledInvalid'
-  | 'filled'
-  | 'fluid'
-  | 'reactive';
+import { Panel } from 'ui-lib-custom/panel';
+import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
+import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import {
+  numeralsHtml,
+  numeralsTsTs,
+  decimalHtml,
+  decimalTsTs,
+  localeHtml,
+  localeTsTs,
+  currencyHtml,
+  currencyTsTs,
+  prefixSuffixHtml,
+  prefixSuffixTsTs,
+  buttonsStackedHtml,
+  buttonsStackedTsTs,
+  buttonsHorizontalHtml,
+  buttonsHorizontalTsTs,
+  buttonsVerticalHtml,
+  buttonsVerticalTsTs,
+  stepHtml,
+  stepTsTs,
+  minMaxHtml,
+  minMaxTsTs,
+  floatLabelHtml,
+  floatLabelTsTs,
+  clearIconHtml,
+  clearIconTsTs,
+  sizesHtml,
+  sizesTsTs,
+  disabledInvalidHtml,
+  disabledInvalidTsTs,
+  filledHtml,
+  filledTsTs,
+  fluidHtml,
+  fluidTsTs,
+  reactiveHtml,
+  reactiveTsTs,
+} from './snippets.generated';
 
+import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for InputNumber modes, formatting, controls, and forms.
  */
@@ -41,21 +73,90 @@ type InputNumberSnippetKey =
   selector: 'app-input-number-demo',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
-    CodePreviewComponent,
-    Card,
+    DocTocComponent,
     Button,
     FloatLabelComponent,
     InputNumberComponent,
+    DocPageHeaderComponent,
+    DocQualityBadgeComponent,
+    DocCodeExampleComponent,
+    DocApiReferenceComponent,
+    DocSectionComponent,
+
+    DocCssVarsTableComponent,
+    DocKeyboardNavComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './input-number-demo.component.html',
   styleUrl: './input-number-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNumberDemoComponent {
+  public readonly numeralsHtml: string = numeralsHtml;
+  public readonly numeralsTsTs: string = numeralsTsTs;
+  public readonly decimalHtml: string = decimalHtml;
+  public readonly decimalTsTs: string = decimalTsTs;
+  public readonly localeHtml: string = localeHtml;
+  public readonly localeTsTs: string = localeTsTs;
+  public readonly currencyHtml: string = currencyHtml;
+  public readonly currencyTsTs: string = currencyTsTs;
+  public readonly prefixSuffixHtml: string = prefixSuffixHtml;
+  public readonly prefixSuffixTsTs: string = prefixSuffixTsTs;
+  public readonly buttonsStackedHtml: string = buttonsStackedHtml;
+  public readonly buttonsStackedTsTs: string = buttonsStackedTsTs;
+  public readonly buttonsHorizontalHtml: string = buttonsHorizontalHtml;
+  public readonly buttonsHorizontalTsTs: string = buttonsHorizontalTsTs;
+  public readonly buttonsVerticalHtml: string = buttonsVerticalHtml;
+  public readonly buttonsVerticalTsTs: string = buttonsVerticalTsTs;
+  public readonly stepHtml: string = stepHtml;
+  public readonly stepTsTs: string = stepTsTs;
+  public readonly minMaxHtml: string = minMaxHtml;
+  public readonly minMaxTsTs: string = minMaxTsTs;
+  public readonly floatLabelHtml: string = floatLabelHtml;
+  public readonly floatLabelTsTs: string = floatLabelTsTs;
+  public readonly clearIconHtml: string = clearIconHtml;
+  public readonly clearIconTsTs: string = clearIconTsTs;
+  public readonly sizesHtml: string = sizesHtml;
+  public readonly sizesTsTs: string = sizesTsTs;
+  public readonly disabledInvalidHtml: string = disabledInvalidHtml;
+  public readonly disabledInvalidTsTs: string = disabledInvalidTsTs;
+  public readonly filledHtml: string = filledHtml;
+  public readonly filledTsTs: string = filledTsTs;
+  public readonly fluidHtml: string = fluidHtml;
+  public readonly fluidTsTs: string = fluidTsTs;
+  public readonly reactiveHtml: string = reactiveHtml;
+  public readonly reactiveTsTs: string = reactiveTsTs;
+
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-18',
+    tier: 1,
+    scores: {
+      api: 9,
+      a11y: 9,
+      perf: 9,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
+      angular: 9,
+      feel: 9,
+    },
+    competitiveParity: 'pending',
+    apgPattern: { name: 'Spinbutton', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/' },
+  };
+
+  public readonly importCode: string =
+    "import { InputNumberComponent } from 'ui-lib-custom/input-number'";
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
   public readonly sections: DocSection[] = [
     { id: 'numerals', label: 'Numerals' },
     { id: 'decimal', label: 'Decimal' },
@@ -74,88 +175,14 @@ export class InputNumberDemoComponent {
     { id: 'filled', label: 'Filled' },
     { id: 'fluid', label: 'Fluid' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
   ];
 
-  public readonly snippets: Record<InputNumberSnippetKey, string> = {
-    numerals: `<uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />`,
-    decimal: `<uilib-input-number
-  [(ngModel)]="decimalValue"
-  [minFractionDigits]="2"
-  [maxFractionDigits]="4"
-  placeholder="0.00"
-/>`,
-    locale: `<uilib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
-<uilib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
-<uilib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
-<uilib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />`,
-    currency: `<uilib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
-<uilib-input-number [(ngModel)]="currencyValues.eur" mode="currency" currency="EUR" locale="de-DE" />
-<uilib-input-number [(ngModel)]="currencyValues.inr" mode="currency" currency="INR" currencyDisplay="code" locale="en-IN" />
-<uilib-input-number [(ngModel)]="currencyValues.jpy" mode="currency" currency="JPY" locale="ja-JP" />`,
-    prefixSuffix: `<uilib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
-<uilib-input-number [(ngModel)]="completionPercent" suffix=" %" />
-<uilib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
-<uilib-input-number [(ngModel)]="temperature" suffix=" °C" />`,
-    buttonsStacked: `<uilib-input-number
-  [(ngModel)]="stackedAmount"
-  mode="currency"
-  currency="USD"
-  [showButtons]="true"
-/>`,
-    buttonsHorizontal: `<uilib-input-number
-  [(ngModel)]="horizontalAmount"
-  mode="currency"
-  currency="EUR"
-  locale="de-DE"
-  [showButtons]="true"
-  buttonLayout="horizontal"
-/>`,
-    buttonsVertical: `<uilib-input-number
-  [(ngModel)]="verticalAmount"
-  [showButtons]="true"
-  buttonLayout="vertical"
-/>`,
-    step: `<uilib-input-number [(ngModel)]="stepValue" [step]="0.25" />`,
-    minMax: `<uilib-input-number
-  [(ngModel)]="boundedValue"
-  [min]="0"
-  [max]="100"
-  [showButtons]="true"
-/>`,
-    floatLabel: `<uilib-float-label variant="over">
-  <uilib-input-number [(ngModel)]="floatValues.over" inputId="float-over" />
-  <label for="float-over">Over</label>
-</uilib-float-label>
-<uilib-float-label variant="in">
-  <uilib-input-number [(ngModel)]="floatValues.in" inputId="float-in" />
-  <label for="float-in">In</label>
-</uilib-float-label>
-<uilib-float-label variant="on">
-  <uilib-input-number [(ngModel)]="floatValues.on" inputId="float-on" />
-  <label for="float-on">On</label>
-</uilib-float-label>`,
-    clearIcon: `<uilib-input-number
-  [(ngModel)]="clearableValue"
-  [showClear]="true"
-  [showButtons]="true"
-/>`,
-    sizes: `<uilib-input-number [(ngModel)]="sizeValues.sm" size="sm" />
-<uilib-input-number [(ngModel)]="sizeValues.md" size="md" />
-<uilib-input-number [(ngModel)]="sizeValues.lg" size="lg" />`,
-    disabledInvalid: `<uilib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
-<uilib-input-number [(ngModel)]="invalidValue" [invalid]="true" />`,
-    filled: `<uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />`,
-    fluid: `<uilib-input-number
-  [(ngModel)]="fluidValue"
-  [fluid]="true"
-  [showButtons]="true"
-  buttonLayout="horizontal"
-/>`,
-    reactive: `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <uilib-input-number formControlName="amount" [min]="0" [max]="1000" [showButtons]="true" />
-  <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-</form>`,
-  };
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public quantity: number | null = 1234;
   public decimalValue: number | null = 42.5;
@@ -224,10 +251,6 @@ export class InputNumberDemoComponent {
 
   public submittedAmount: number | null = null;
 
-  public snippet(key: InputNumberSnippetKey): string {
-    return this.snippets[key];
-  }
-
   public amountControl(): FormControl<number | null> {
     return this.reactiveForm.controls.amount;
   }
@@ -241,4 +264,166 @@ export class InputNumberDemoComponent {
 
     this.submittedAmount = this.amountControl().value;
   }
+
+  public readonly apiRows: readonly ApiPropRow[] = [
+    {
+      name: 'mode',
+      type: "'decimal' | 'currency'",
+      default: "'decimal'",
+      description: 'Formatting mode.',
+    },
+    { name: 'prefix', type: 'string', default: "''", description: 'Text prefix.' },
+    { name: 'suffix', type: 'string', default: "''", description: 'Text suffix.' },
+    { name: 'min', type: 'number | null', default: 'null', description: 'Minimum allowed value.' },
+    { name: 'max', type: 'number | null', default: 'null', description: 'Maximum allowed value.' },
+    { name: 'step', type: 'number', default: '1', description: 'Increment/decrement step.' },
+    {
+      name: 'showButtons',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders +/- spinner buttons.',
+    },
+    {
+      name: 'buttonLayout',
+      type: "'stacked' | 'horizontal' | 'vertical'",
+      default: "'stacked'",
+      description: 'Button placement.',
+    },
+    { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input.' },
+    {
+      name: 'invalid',
+      type: 'boolean',
+      default: 'false',
+      description: 'Marks the field as invalid.',
+    },
+  ];
+  public readonly keyboardRows: KeyboardNavRow[] = [
+    { key: 'Tab', action: 'Moves focus to the input.' },
+    { key: 'Shift+Tab', action: 'Moves focus away from the input.' },
+    { key: 'Type', action: 'Updates the numeric value.' },
+    { key: '↑', action: 'Increments the value by one step.' },
+    { key: '↓', action: 'Decrements the value by one step.' },
+    {
+      key: 'Enter',
+      suffix: 'on increment/decrement button',
+      action: 'Applies the spinner button action.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Native input',
+      attribute: 'role="spinbutton"',
+      value: '—',
+      notes: 'Identifies the field as a numeric spinner to assistive technologies.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-valuenow',
+      value: 'current numeric value',
+      notes: 'Updated live as the value changes.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-valuemin',
+      value: 'min value',
+      notes: 'Present when <code>[min]</code> is set.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-valuemax',
+      value: 'max value',
+      notes: 'Present when <code>[max]</code> is set.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Native input',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Applied when <code>[disabled]="true"</code>.',
+    },
+    {
+      element: 'Increment button',
+      attribute: 'aria-label',
+      value: '"Increment"',
+      notes: 'Announces the purpose of the spinner button.',
+    },
+    {
+      element: 'Decrement button',
+      attribute: 'aria-label',
+      value: '"Decrement"',
+      notes: 'Announces the purpose of the spinner button.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-input-number-gap', description: 'Gap.' },
+    { variable: '--uilib-input-number-border-width', description: 'Border width.' },
+    { variable: '--uilib-input-number-border-style', description: 'Border style.' },
+    { variable: '--uilib-input-number-border-radius', description: 'Border radius.' },
+    { variable: '--uilib-input-number-height-sm', description: 'Height — sm.' },
+    { variable: '--uilib-input-number-height-md', description: 'Height — md.' },
+    { variable: '--uilib-input-number-height-lg', description: 'Height — lg.' },
+    { variable: '--uilib-input-number-input-height', description: 'Input height.' },
+    { variable: '--uilib-input-number-padding-y-sm', description: 'Vertical padding — sm.' },
+    { variable: '--uilib-input-number-padding-y-md', description: 'Vertical padding — md.' },
+    { variable: '--uilib-input-number-padding-y-lg', description: 'Vertical padding — lg.' },
+    { variable: '--uilib-input-number-padding-x-sm', description: 'Horizontal padding — sm.' },
+    { variable: '--uilib-input-number-padding-x-md', description: 'Horizontal padding — md.' },
+    { variable: '--uilib-input-number-padding-x-lg', description: 'Horizontal padding — lg.' },
+    { variable: '--uilib-input-number-padding-y', description: 'Vertical padding.' },
+    { variable: '--uilib-input-number-padding-x', description: 'Horizontal padding.' },
+    { variable: '--uilib-input-number-font-family', description: 'Font family.' },
+    { variable: '--uilib-input-number-font-weight', description: 'Font weight.' },
+    { variable: '--uilib-input-number-font-size-sm', description: 'Font size — sm.' },
+    { variable: '--uilib-input-number-font-size-md', description: 'Font size — md.' },
+    { variable: '--uilib-input-number-font-size-lg', description: 'Font size — lg.' },
+    { variable: '--uilib-input-number-font-size', description: 'Font size.' },
+    { variable: '--uilib-input-number-bg', description: 'Background colour.' },
+    { variable: '--uilib-input-number-text', description: 'Text.' },
+    { variable: '--uilib-input-number-border-color', description: 'Border colour.' },
+    { variable: '--uilib-input-number-border-color-hover', description: 'Border colour (hover).' },
+    { variable: '--uilib-input-number-border-color-focus', description: 'Border colour (focus).' },
+    { variable: '--uilib-input-number-placeholder-color', description: 'Placeholder text colour.' },
+    { variable: '--uilib-input-number-prefix-color', description: 'Prefix text colour.' },
+    { variable: '--uilib-input-number-suffix-color', description: 'Suffix text colour.' },
+    { variable: '--uilib-input-number-button-bg', description: 'Button background colour.' },
+    { variable: '--uilib-input-number-button-text', description: 'Button Text.' },
+    {
+      variable: '--uilib-input-number-button-border-color',
+      description: 'Button Border text colour.',
+    },
+    {
+      variable: '--uilib-input-number-button-hover-background',
+      description: 'Button Hover Background.',
+    },
+    {
+      variable: '--uilib-input-number-button-active-background',
+      description: 'Button Active Background.',
+    },
+    {
+      variable: '--uilib-input-number-button-disabled-opacity',
+      description: 'Button Disabled opacity.',
+    },
+    { variable: '--uilib-input-number-button-width-sm', description: 'Button width — sm.' },
+    { variable: '--uilib-input-number-button-width-md', description: 'Button width — md.' },
+    { variable: '--uilib-input-number-button-width-lg', description: 'Button width — lg.' },
+    { variable: '--uilib-input-number-button-width', description: 'Button width.' },
+    { variable: '--uilib-input-number-clear-size', description: 'Clear size.' },
+    { variable: '--uilib-input-number-clear-color', description: 'Clear text colour.' },
+    { variable: '--uilib-input-number-clear-offset', description: 'Clear offset.' },
+    { variable: '--uilib-input-number-focus-ring', description: 'Focus ring.' },
+    {
+      variable: '--uilib-input-number-invalid-border-color',
+      description: 'Invalid Border text colour.',
+    },
+    { variable: '--uilib-input-number-disabled-opacity', description: 'Disabled opacity.' },
+    { variable: '--uilib-input-number-filled-bg', description: 'Filled background colour.' },
+    { variable: '--uilib-input-number-transition', description: 'Transition.' },
+  ];
 }

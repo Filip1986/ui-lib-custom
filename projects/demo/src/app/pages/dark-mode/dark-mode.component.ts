@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 import { Badge } from 'ui-lib-custom/badge';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
 import { Checkbox } from 'ui-lib-custom/checkbox';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -12,10 +18,13 @@ import type { ThemeMode } from 'ui-lib-custom/theme';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import type { SelectOption } from 'ui-lib-custom/select';
+import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
+import { Panel } from 'ui-lib-custom/panel';
 /**
  * Demo page for dark mode theming.
  */
@@ -23,19 +32,21 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
   selector: 'app-dark-mode',
   standalone: true,
   imports: [
+    Panel,
     CommonModule,
     Accordion,
     AccordionPanel,
     Badge,
     Button,
-    Card,
     Checkbox,
     Tabs,
     Tab,
     UiLibInput,
     UiLibSelect,
+    DocPageHeaderComponent,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
+    DocTocComponent,
+    CodeSnippet,
   ],
   templateUrl: './dark-mode.component.html',
   styleUrl: './dark-mode.component.scss',
@@ -43,6 +54,9 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 })
 export class DarkModeComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
 
   public readonly mode: Signal<ThemeMode> = computed<ThemeMode>(
     (): ThemeMode => this.themeService.mode()
@@ -59,6 +73,10 @@ export class DarkModeComponent {
     { id: 'showcase', label: 'Component Showcase' },
     { id: 'implementation', label: 'Implementation' },
   ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public readonly selectOptions: SelectOption[] = [
     { label: 'Option One', value: 'one' },

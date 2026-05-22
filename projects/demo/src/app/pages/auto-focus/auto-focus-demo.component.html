@@ -1,13 +1,8 @@
 <app-doc-page-layout [sections]="sections">
-
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>AutoFocus</h1>
-      <code class="demo-page-header__import">import &#123; AutoFocus &#125; from 'ui-lib-custom/auto-focus'</code>
-    </div>
-    <p class="demo-page-header__description">
-      A lightweight directive that programmatically focuses the host element after
-      view initialization — a reliable, Angular-first alternative to the native
+  <app-doc-page-header docHeader title="AutoFocus" [importCode]="importCode">
+    <p class="doc-description">
+      A lightweight directive that programmatically focuses the host element after view
+      initialization — a reliable, Angular-first alternative to the native
       <code>autofocus</code> attribute.
     </p>
     <div class="demo-page-header__preview">
@@ -17,14 +12,13 @@
         <span class="af-tag">A11y</span>
       </div>
     </div>
-  </header>
+  </app-doc-page-header>
 
   <!-- ── Section 1: Basic usage ── -->
-  <section class="demo-section" id="basic-usage" data-doc-anchor>
-    <h2 class="demo-section__title">Basic Usage</h2>
+  <app-doc-section id="basic-usage" title="Basic Usage">
     <p class="demo-section__description">
-      Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied
-      automatically after the view initializes.
+      Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied automatically after
+      the view initializes.
     </p>
     <div class="af-demo-card">
       <label class="af-label" for="basic-input">Name</label>
@@ -36,19 +30,26 @@
         uiLibAutoFocus
       />
     </div>
-    <pre class="af-code"><code>&lt;input uiLibAutoFocus /&gt;</code></pre>
-  </section>
+    <app-doc-code-example
+      [html]="basicUsageHtml"
+      [typescript]="basicUsageTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── Section 2: Conditional focus ── -->
-  <section class="demo-section" id="conditional-focus" data-doc-anchor>
-    <h2 class="demo-section__title">Conditional Focus</h2>
+  <app-doc-section id="conditional-focus" title="Conditional Focus">
     <p class="demo-section__description">
-      Bind the <code>autofocus</code> input to control whether focus is applied.
-      Useful when rendering inputs inside dialogs, drawers, or dynamic forms.
+      Bind the <code>autofocus</code> input to control whether focus is applied. Useful when
+      rendering inputs inside dialogs, drawers, or dynamic forms.
     </p>
     <div class="af-demo-card">
       <ui-lib-button type="button" (click)="toggleConditional()">
-        @if (showConditional()) { Hide input } @else { Show input }
+        @if (showConditional()) {
+          Hide input
+        } @else {
+          Show input
+        }
       </ui-lib-button>
 
       @if (showConditional()) {
@@ -64,17 +65,18 @@
         </div>
       }
     </div>
-    <pre class="af-code"><code>&#64;if (show) &#123;
-  &lt;input uiLibAutoFocus /&gt;
-&#125;</code></pre>
-  </section>
+    <app-doc-code-example
+      [html]="conditionalHtml"
+      [typescript]="conditionalTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── Section 3: Disable autofocus ── -->
-  <section class="demo-section" id="disable-autofocus" data-doc-anchor>
-    <h2 class="demo-section__title">Disable Autofocus</h2>
+  <app-doc-section id="disable-autofocus" title="Disable Autofocus">
     <p class="demo-section__description">
-      Set <code>[disabled]="true"</code> to prevent focus from being applied —
-      for example when the feature is toggled off by the user.
+      Set <code>[disabled]="true"</code> to prevent focus from being applied — for example when the
+      feature is toggled off by the user.
     </p>
     <div class="af-demo-card">
       <ui-lib-button type="button" (click)="toggleFocus()">
@@ -90,47 +92,52 @@
         [disabled]="!enableFocus()"
       />
     </div>
-    <pre class="af-code"><code>&lt;input uiLibAutoFocus [disabled]="!isEnabled" /&gt;</code></pre>
-  </section>
+    <app-doc-code-example
+      [html]="disabledHtml"
+      [typescript]="disabledTs"
+      [showLineNumbers]="true"
+    />
+  </app-doc-section>
 
   <!-- ── Section 4: API ── -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
+  <app-doc-section id="api" title="API">
 
     <h3 class="af-sub-title">Directive selector</h3>
-    <pre class="af-code"><code>import {{ '{' }} AutoFocus {{ '}' }} from 'ui-lib-custom/auto-focus';</code></pre>
-    <pre class="af-code"><code>[uiLibAutoFocus]</code></pre>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetImport"
+    />
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetSelector"
+    />
 
-    <h3 class="af-sub-title">Inputs</h3>
-    <table class="af-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>
-            When <code>true</code>, focus is skipped on mount.
-          </td>
-        </tr>
-        <tr>
-          <td><code>selector</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>
-            Optional child selector used as the focus target instead of the host.
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <app-doc-api-reference [rows]="apiInputRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <p class="demo-section__description">This is a behavioral directive with no CSS custom properties. All visual styling is controlled by the wrapped component.</p>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      <code>AutoFocus</code> is a pure focus-management directive. It improves accessibility
+      by placing keyboard focus on the most relevant element without requiring the user to Tab
+      through the page — but it does not add or modify any ARIA attributes.
+    </p>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>
@@ -140,5 +147,4 @@
       (sectionSelected)="scrollTo($event)"
     />
   </div>
-
 </app-doc-page-layout>

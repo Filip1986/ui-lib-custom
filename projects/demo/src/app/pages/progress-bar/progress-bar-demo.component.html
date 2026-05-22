@@ -1,22 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
-  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
-    <div class="demo-page-header__meta">
-      <h1>ProgressBar</h1>
-      <code class="demo-page-header__import">import &#123; ProgressBar &#125; from 'ui-lib-custom/progress-bar'</code>
-    </div>
-    <p class="demo-page-header__description">
-      A horizontal bar that visualises a completion percentage or signals an ongoing
-      operation with a smooth animation.
-    </p>
-    <div class="demo-page-header__preview">
-      <ui-lib-progress-bar [value]="basicValue()" />
-    </div>
-  </header>
+  <app-doc-page-header docHeader title="ProgressBar" [importCode]="importCode"
+    description="A horizontal bar that visualises a completion percentage or signals an ongoing operation with a smooth animation.">
+  </app-doc-page-header>
 
   <!-- ---- Basic -------------------------------------------------------- -->
-  <section class="demo-section" id="basic" data-doc-anchor>
-    <h2 class="demo-section__title">Basic</h2>
+  <app-doc-section id="basic" title="Basic">
     <p class="demo-section__description">
       Pass a number from <code>0</code> to <code>100</code> via <code>[value]</code>.
       The percentage label is shown inside the fill by default.
@@ -24,12 +13,16 @@
     <div class="demo-section__preview">
       <ui-lib-progress-bar [value]="basicValue()" />
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetBasic"
+    />
+  </app-doc-section>
 
   <!-- ---- No label ----------------------------------------------------- -->
-  <section class="demo-section" id="no-label" data-doc-anchor>
-    <h2 class="demo-section__title">No label</h2>
+  <app-doc-section id="no-label" title="No label">
     <p class="demo-section__description">
       Set <code>[showValue]="false"</code> to hide the percentage text — useful for
       thin bars where the label would not fit.
@@ -42,24 +35,32 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" size="sm" [showValue]="false" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetNoLabel"
+    />
+  </app-doc-section>
 
   <!-- ---- Custom label ------------------------------------------------- -->
-  <section class="demo-section" id="custom-label" data-doc-anchor>
-    <h2 class="demo-section__title">Custom label</h2>
+  <app-doc-section id="custom-label" title="Custom label">
     <p class="demo-section__description">
       Override the default percentage text with any string via <code>[label]</code>.
     </p>
     <div class="demo-section__preview">
       <ui-lib-progress-bar [value]="60" label="Uploading…" />
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="60" label="Uploading…" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetCustomLabel"
+    />
+  </app-doc-section>
 
   <!-- ---- Indeterminate ------------------------------------------------ -->
-  <section class="demo-section" id="indeterminate" data-doc-anchor>
-    <h2 class="demo-section__title">Indeterminate</h2>
+  <app-doc-section id="indeterminate" title="Indeterminate">
     <p class="demo-section__description">
       Use <code>mode="indeterminate"</code> when the duration is unknown. The fill bar
       oscillates continuously. <code>aria-busy="true"</code> and <code>aria-label="Loading"</code>
@@ -73,12 +74,16 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar mode="indeterminate" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetIndeterminate"
+    />
+  </app-doc-section>
 
   <!-- ---- Variants ----------------------------------------------------- -->
-  <section class="demo-section" id="variants" data-doc-anchor>
-    <h2 class="demo-section__title">Variants</h2>
+  <app-doc-section id="variants" title="Variants">
     <p class="demo-section__description">
       Three design variants — <code>material</code> (pill-shaped, subtle inset shadow),
       <code>bootstrap</code> (rounded corners, square fill), and <code>minimal</code> (flat, 2 px radius).
@@ -91,12 +96,16 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" variant="bootstrap" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetVariants"
+    />
+  </app-doc-section>
 
   <!-- ---- Sizes -------------------------------------------------------- -->
-  <section class="demo-section" id="sizes" data-doc-anchor>
-    <h2 class="demo-section__title">Sizes</h2>
+  <app-doc-section id="sizes" title="Sizes">
     <p class="demo-section__description">
       Three size tokens control bar height: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
@@ -108,12 +117,16 @@
         </div>
       }
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="75" size="lg" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetSizes"
+    />
+  </app-doc-section>
 
   <!-- ---- Custom colour ------------------------------------------------ -->
-  <section class="demo-section" id="custom-colour" data-doc-anchor>
-    <h2 class="demo-section__title">Custom colour</h2>
+  <app-doc-section id="custom-colour" title="Custom colour">
     <p class="demo-section__description">
       Supply any valid CSS colour string via <code>[color]</code> to override
       <code>--uilib-progress-bar-fill-bg</code> for one-off uses.
@@ -123,12 +136,16 @@
       <ui-lib-progress-bar [value]="65" color="#f59e0b" label="65%" />
       <ui-lib-progress-bar [value]="90" color="#ef4444" label="90%" />
     </div>
-    <pre class="demo-code"><code>&lt;ui-lib-progress-bar [value]="40" color="#10b981" label="40%" /&gt;</code></pre>
-  </section>
+    <ui-lib-code-snippet
+      language="html"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetCustomColour"
+    />
+  </app-doc-section>
 
   <!-- ---- Dynamic ------------------------------------------------------ -->
-  <section class="demo-section" id="dynamic-value" data-doc-anchor>
-    <h2 class="demo-section__title">Dynamic value</h2>
+  <app-doc-section id="dynamic-value" title="Dynamic value">
     <p class="demo-section__description">
       The fill transitions smoothly when the value changes reactively.
     </p>
@@ -140,72 +157,31 @@
         <span class="demo-value-display">{{ dynamicValue() }}%</span>
       </div>
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- ---- API table ---------------------------------------------------- -->
-  <section class="demo-section" id="api" data-doc-anchor>
-    <h2 class="demo-section__title">API</h2>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>value</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Progress value from 0 to 100 (clamped automatically).</td>
-        </tr>
-        <tr>
-          <td><code>mode</code></td>
-          <td><code>'determinate' | 'indeterminate'</code></td>
-          <td><code>'determinate'</code></td>
-          <td>Display mode.</td>
-        </tr>
-        <tr>
-          <td><code>showValue</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Whether to show the percentage label inside the fill.</td>
-        </tr>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Custom label; overrides the computed percentage string.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Bar height size token.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from ThemeConfigService when null.</td>
-        </tr>
-        <tr>
-          <td><code>color</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Custom fill colour; overrides the CSS variable.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes added to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <app-doc-section id="api" title="API">
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  
+  <!-- ── Accessibility ─────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
+
+  <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
+  <app-doc-section
+    id="css-vars"
+    title="CSS Custom Properties"
+    description="Override any of these on the host element or an ancestor to theme the component without touching its internals."
+  >
+    <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
+  </app-doc-section>
+<app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

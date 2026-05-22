@@ -1,11 +1,9 @@
 <app-doc-page-layout [sections]="sections">
-  <div class="doc-header" docHeader>
-    <h1>UI Components Library</h1>
-    <p class="doc-description">
-      A comprehensive collection of beautifully designed, reusable UI components for Angular
-      applications. Explore our components below to see live examples and implementation details.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="UI Components Library"
+    description="A comprehensive collection of beautifully designed, reusable UI components for Angular applications. Explore our components below to see live examples and implementation details."
+  />
 
   <div class="quick-links-section" id="quick-links" data-doc-anchor>
     <a routerLink="/buttons" class="quick-link-card">
@@ -56,6 +54,54 @@
     </div>
   </div>
 
+  <div id="pro-teaser" data-doc-anchor>
+    <div class="pro-teaser-banner">
+      <div class="pro-teaser-banner__header">
+        <span class="pro-teaser-badge">
+          <i class="pi pi-star-fill"></i>
+          Pro &amp; Enterprise
+        </span>
+        <span class="pro-teaser-banner__coming">Coming Soon</span>
+      </div>
+      <h2 class="pro-teaser-banner__title">High-Value Components for Enterprise Angular Teams</h2>
+      <p class="pro-teaser-banner__description">
+        Beyond commodity UI — a Pro tier of complex, business-critical components that save weeks of
+        engineering time. Angular-native, signals-first, and built to the same accessibility standard
+        as every component in this library.
+      </p>
+      <div class="pro-teaser-items">
+        <a routerLink="/pro-data-grid" class="pro-teaser-item">
+          <i class="pi pi-table"></i>
+          <span>Advanced Data Grid</span>
+        </a>
+        <a routerLink="/pro-workflow-builder" class="pro-teaser-item">
+          <i class="pi pi-sitemap"></i>
+          <span>Workflow Builder</span>
+        </a>
+        <a routerLink="/pro-gantt" class="pro-teaser-item">
+          <i class="pi pi-calendar"></i>
+          <span>Gantt &amp; Scheduler</span>
+        </a>
+        <a routerLink="/pro-ai-kit" class="pro-teaser-item">
+          <i class="pi pi-comments"></i>
+          <span>AI UI Kit</span>
+        </a>
+        <a routerLink="/pro-form-engine" class="pro-teaser-item">
+          <i class="pi pi-file-edit"></i>
+          <span>Dynamic Form Engine</span>
+        </a>
+        <a routerLink="/pro-analytics" class="pro-teaser-item">
+          <i class="pi pi-chart-bar"></i>
+          <span>Analytics Pro</span>
+        </a>
+      </div>
+      <a routerLink="/roadmap" fragment="pro-strategy" class="pro-teaser-cta">
+        View full Pro strategy on the Roadmap
+        <i class="pi pi-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
   <div id="quick-preview" data-doc-anchor>
     <h2>Quick Preview</h2>
 
@@ -68,18 +114,15 @@
 
     <h3 style="margin-top: 2rem">Cards</h3>
     <div class="cards-preview">
-      <ui-lib-card variant="material" elevation="medium">
-        <div card-header>Material Card</div>
+      <ui-lib-panel variant="minimal">
         <p>Clean design with shadows</p>
-      </ui-lib-card>
-      <ui-lib-card variant="bootstrap" elevation="low">
-        <div card-header>Bootstrap Card</div>
+      </ui-lib-panel>
+      <ui-lib-panel variant="minimal">
         <p>Classic Bootstrap styling</p>
-      </ui-lib-card>
-      <ui-lib-card variant="minimal" elevation="none" [bordered]="true">
-        <div card-header>Minimal Card</div>
+      </ui-lib-panel>
+      <ui-lib-panel variant="minimal">
         <p>Simple and clean</p>
-      </ui-lib-card>
+      </ui-lib-panel>
     </div>
   </div>
 
@@ -103,19 +146,19 @@
   <div id="getting-started" data-doc-anchor>
     <h2>Getting Started</h2>
     <p>Install the library via npm:</p>
-    <div class="doc-code">
-      <pre><code>npm install &#64;filip86/ui-components</code></pre>
-    </div>
+    <ui-lib-code-snippet
+      language="text"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetInstall"
+    />
     <p>Import components in your Angular module or component:</p>
-    <div class="doc-code">
-      <pre><code>import {{ '{' }} Button, Card {{ '}' }} from '&#64;filip86/ui-components';
-
-&#64;Component({{'{' }}
-  standalone: true,
-  imports: [Button, Card],
-  // ...
-{{'}'}})</code></pre>
-    </div>
+    <ui-lib-code-snippet
+      language="typescript"
+      [showLineNumbers]="true"
+      size="sm"
+      [code]="snippetImport"
+    />
   </div>
 
   <div id="profiling-notes" data-doc-anchor>
@@ -140,4 +183,14 @@
       </li>
     </ul>
   </div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
 </app-doc-page-layout>

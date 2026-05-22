@@ -1,0 +1,14 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
+  <uilib-float-label>
+    <input placeholder=" " formControlName="firstName" />
+    <label>First name</label>
+  </uilib-float-label>
+  <uilib-float-label>
+    <ui-lib-select [options]="cityOptions" formControlName="city" />
+    <label>City</label>
+  </uilib-float-label>
+  <uilib-float-label variant="in">
+    <textarea placeholder=" " formControlName="bio"></textarea>
+    <label>Bio</label>
+  </uilib-float-label>
+</form>

@@ -1,13 +1,11 @@
 <app-doc-page-layout [sections]="sections">
 
   <!-- ── Header ──────────────────────────────────────────────────────────── -->
-  <div class="doc-header" docHeader>
-    <h1>Vision</h1>
-    <p class="doc-description">
-      The strategic north star for ui-lib-custom — why it exists, what it stands for,
-      and where it is going. Every decision in this library traces back to this document.
-    </p>
-  </div>
+  <app-doc-page-header
+    docHeader
+    title="Vision"
+    description="The strategic north star for ui-lib-custom — why it exists, what it stands for, and where it is going. Every decision in this library traces back to this document."
+  />
 
   <!-- ── Vision Statement ──────────────────────────────────────────────── -->
   <section id="vision-statement" data-doc-anchor class="vision-section">
@@ -359,6 +357,15 @@
       </p>
     </div>
   </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
 
 </app-doc-page-layout>
 

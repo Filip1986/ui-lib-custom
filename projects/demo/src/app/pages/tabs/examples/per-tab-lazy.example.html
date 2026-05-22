@@ -1,0 +1,8 @@
+<ui-lib-tabs>
+  <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
+  <ui-lib-tab label="Lazy" lazy="unmount">
+    <ng-template uiLibTabContent>
+      <heavy-component />
+    </ng-template>
+  </ui-lib-tab>
+</ui-lib-tabs>
