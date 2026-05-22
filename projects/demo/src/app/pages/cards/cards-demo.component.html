@@ -377,14 +377,10 @@
   }
 
   @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
-      <ul class="doc-list">
-        <li>Use semantic headings inside <code>card-header</code> for structure.</li>
-        <li>Ensure any interactive elements in headers/footers are keyboard reachable.</li>
-        <li>Provide sufficient contrast between card background and text.</li>
-      </ul>
-    </ui-lib-card>
+    <app-doc-section id="accessibility" title="Accessibility">
+      <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+      <app-doc-aria-table [rows]="ariaRows" />
+    </app-doc-section>
   }
 
   

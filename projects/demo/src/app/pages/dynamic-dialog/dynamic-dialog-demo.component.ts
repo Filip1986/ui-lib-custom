@@ -26,6 +26,8 @@ import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.comp
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 // ---- Guest components rendered inside the dialog ----
 
 /**
@@ -146,6 +148,7 @@ export class LongDialogContentComponent {
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
@@ -198,6 +201,7 @@ export class DynamicDialogDemoComponent {
     { id: 'dynamic-dialog-ref', label: 'DynamicDialogRef' },
     { id: 'injection-tokens', label: 'Injection Tokens' },
     { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     {
       id: 'accessibility',
       label: 'Accessibility',
@@ -205,6 +209,78 @@ export class DynamicDialogDemoComponent {
         { id: 'a11y-aria', label: 'ARIA Attributes' },
         { id: 'a11y-keyboard', label: 'Keyboard' },
       ],
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-dynamic-dialog-min-width',
+      description: 'Minimum width of the dialog panel.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-max-width',
+      description: 'Maximum width of the dialog panel.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-max-height',
+      description: 'Maximum height of the dialog panel.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-offset',
+      description: 'Viewport edge offset used when positioning the dialog.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-bg',
+      description: 'Dialog panel background colour (light mode).',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-bg-dark',
+      description: 'Dialog panel background colour (dark mode).',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-radius',
+      description: 'Border radius of the dialog panel.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-radius-material',
+      description: 'Border radius override for the material variant.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-radius-bootstrap',
+      description: 'Border radius override for the bootstrap variant.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-radius-minimal',
+      description: 'Border radius override for the minimal variant.',
+    },
+    { variable: '--uilib-dynamic-dialog-shadow', description: 'Box shadow of the dialog panel.' },
+    {
+      variable: '--uilib-dynamic-dialog-header-padding',
+      description: 'Padding inside the dialog header.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-header-border',
+      description: 'Border between the header and content.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-content-padding',
+      description: 'Padding inside the dialog content area.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-title-color',
+      description: 'Colour of the dialog title text.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-close-color',
+      description: 'Icon colour of the close button.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-close-hover-bg',
+      description: 'Background of the close button on hover.',
+    },
+    {
+      variable: '--uilib-dynamic-dialog-backdrop-bg',
+      description: 'Background colour of the backdrop overlay.',
     },
   ];
 

@@ -16,6 +16,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
@@ -38,6 +40,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -362,6 +365,45 @@ export class MenubarDemoComponent {
       name: '[menubarEnd]',
       type: 'ng-content',
       description: 'Content rendered in the trailing area (e.g. action buttons).',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Menubar container',
+      attribute: 'role',
+      value: '"menubar"',
+      notes: 'The top navigation strip uses the menubar ARIA role.',
+    },
+    {
+      element: 'Menu item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each navigable entry is a menu item.',
+    },
+    {
+      element: 'Item with submenu',
+      attribute: 'aria-haspopup',
+      value: '"true"',
+      notes: 'Signals that the item opens a submenu.',
+    },
+    {
+      element: 'Item with submenu',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the submenu is currently open.',
+    },
+    {
+      element: 'Submenu',
+      attribute: 'role',
+      value: '"menu"',
+      notes: 'Each submenu panel is a menu container.',
+    },
+    {
+      element: 'Disabled item',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive items.',
     },
   ];
 

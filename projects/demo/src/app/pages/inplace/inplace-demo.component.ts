@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -31,6 +33,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -156,6 +159,28 @@ export class InplaceDemoComponent {
   public clearLog(): void {
     this.eventLog.set([]);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Display element',
+      attribute: 'role',
+      value: '"button"',
+      notes: 'The display state acts as a button so keyboard users can activate it.',
+    },
+    {
+      element: 'Display element',
+      attribute: 'tabindex',
+      value: '"0"',
+      notes: 'Makes the display state reachable via Tab.',
+    },
+    {
+      element: 'Display element',
+      attribute: 'aria-label',
+      value: 'string',
+      notes:
+        'Provide a descriptive label via <code>[ariaLabel]</code> when display content is not self-describing.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

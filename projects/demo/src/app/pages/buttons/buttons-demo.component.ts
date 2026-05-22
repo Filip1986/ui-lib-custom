@@ -23,6 +23,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -39,7 +41,7 @@ interface ButtonLogEntry {
  * Shows all appearances, severities, sizes, icons, modifiers, and states.
  */
 @Component({
-  selector: 'app-buttons',
+  selector: 'app-buttons-demo',
   standalone: true,
   imports: [
     Button,
@@ -50,17 +52,18 @@ interface ButtonLogEntry {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
     DocCssVarsTableComponent,
   ],
-  templateUrl: './buttons.component.html',
-  styleUrl: './buttons.component.scss',
+  templateUrl: './buttons-demo.component.html',
+  styleUrl: './buttons-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class ButtonsComponent {
+export class ButtonsDemoComponent {
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -281,6 +284,29 @@ export class ButtonsComponent {
       type: 'boolean | null',
       default: 'null',
       description: 'Maps to aria-checked for checkable button roles.',
+    },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Button',
+      attribute: 'aria-disabled',
+      value: '"true" | "false"',
+      notes:
+        'Set when <code>[disabled]</code> is true; keeps the element focusable for screen readers.',
+    },
+    {
+      element: 'Button',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Provide when the button contains only an icon and has no visible text label.',
+    },
+    {
+      element: 'Loading button',
+      attribute: 'aria-busy',
+      value: '"true"',
+      notes:
+        'Set while the button is in a loading state so assistive tech announces the pending action.',
     },
   ];
 

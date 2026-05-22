@@ -55,7 +55,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
  * Demo page for input variants and states.
  */
 @Component({
-  selector: 'app-inputs',
+  selector: 'app-inputs-demo',
   standalone: true,
   imports: [
     Panel,
@@ -81,11 +81,11 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     DocKeyboardNavComponent,
     DocAriaTableComponent,
   ],
-  templateUrl: './inputs.component.html',
-  styleUrl: './inputs.component.scss',
+  templateUrl: './inputs-demo.component.html',
+  styleUrl: './inputs-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputsComponent {
+export class InputsDemoComponent {
   public readonly inputExampleHtml: string = inputExampleHtml;
   public readonly inputExampleTs: string = inputExampleTs;
   public readonly usageHtml: string = usageHtml;

@@ -12,6 +12,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
@@ -38,6 +40,7 @@ interface DemoProduct {
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -119,6 +122,39 @@ export class CarouselDemoComponent {
 
   /** Track the last emitted page index for the event demo. */
   public lastPage: number = 0;
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Carousel container',
+      attribute: 'aria-roledescription',
+      value: '"carousel"',
+      notes: 'Announces the widget type to assistive technologies that render it as a region.',
+    },
+    {
+      element: 'Carousel container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Passed via <code>[ariaLabel]</code>; identifies the carousel for screen readers.',
+    },
+    {
+      element: 'Slide',
+      attribute: 'aria-roledescription',
+      value: '"slide"',
+      notes: 'Each individual item is announced as a slide.',
+    },
+    {
+      element: 'Live region',
+      attribute: 'aria-live',
+      value: '"polite"',
+      notes: 'Announces slide changes without interrupting the user.',
+    },
+    {
+      element: 'Navigation button',
+      attribute: 'aria-label',
+      value: '"Previous" | "Next"',
+      notes: 'Descriptive labels for prev/next navigation controls.',
+    },
+  ];
 
   public scrollTo(id: string): void {
     this.layout()?.scrollToSection(id);

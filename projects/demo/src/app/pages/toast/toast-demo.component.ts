@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -31,6 +33,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -251,6 +254,34 @@ export class ToastDemoComponent {
       life: 5000,
     });
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Toast container',
+      attribute: 'role',
+      value: '"alert" | "status"',
+      notes:
+        'Error/warn severity uses <code>role="alert"</code> (assertive); info/success uses <code>role="status"</code> (polite).',
+    },
+    {
+      element: 'Toast container',
+      attribute: 'aria-live',
+      value: '"assertive" | "polite"',
+      notes: 'Controls how urgently screen readers interrupt to announce the message.',
+    },
+    {
+      element: 'Toast container',
+      attribute: 'aria-atomic',
+      value: '"true"',
+      notes: 'The full message is read as a single unit, not piecemeal.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label',
+      value: '"Close"',
+      notes: 'Text alternative for the icon-only close button.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

@@ -17,6 +17,8 @@ import { Stack } from 'ui-lib-custom/layout';
 import { Panel } from 'ui-lib-custom/panel';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import {
@@ -96,6 +98,7 @@ const DEMO_PRODUCTS: DemoProduct[] = [
 
     DocSectionComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocCssVarsTableComponent,
   ],
@@ -158,6 +161,39 @@ export class OrderListDemoComponent {
   // -------------------------------------------------------------------------
   // Keyboard navigation rows
   // -------------------------------------------------------------------------
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'List container',
+      attribute: 'role',
+      value: '"listbox"',
+      notes: 'The reorderable list uses the listbox role.',
+    },
+    {
+      element: 'List container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Name the list with <code>[ariaLabel]</code> so screen readers announce its purpose.',
+    },
+    {
+      element: 'List item',
+      attribute: 'role',
+      value: '"option"',
+      notes: 'Each item in the list is an option.',
+    },
+    {
+      element: 'List item',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Reflects selection state.',
+    },
+    {
+      element: 'Move buttons',
+      attribute: 'aria-label',
+      value: '"Move Up" | "Move Down" | "Move to Top" | "Move to Bottom"',
+      notes: 'Descriptive labels on the order-control buttons.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '↓ / ↑', action: 'Navigate focus between items (wraps).' },

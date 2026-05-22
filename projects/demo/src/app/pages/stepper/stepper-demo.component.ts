@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -33,6 +35,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -72,7 +75,7 @@ export class StepperDemoComponent {
     { id: 'vertical-orientation', label: 'Vertical Orientation' },
     { id: 'design-variants', label: 'Design Variants' },
     { id: 'playground', label: 'Playground' },
-    { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
@@ -161,6 +164,51 @@ export class StepperDemoComponent {
   public handleStepChange(event: StepChangeEvent): void {
     this.lastStepChange.set(event);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Step list',
+      attribute: 'role',
+      value: '"tablist"',
+      notes: 'The step header row uses the tablist role.',
+    },
+    {
+      element: 'Step header',
+      attribute: 'role',
+      value: '"tab"',
+      notes: 'Each step header button is a tab.',
+    },
+    {
+      element: 'Step header',
+      attribute: 'aria-selected',
+      value: '"true" | "false"',
+      notes: 'Marks the currently active step as selected.',
+    },
+    {
+      element: 'Step header',
+      attribute: 'aria-controls',
+      value: 'panel-id',
+      notes: 'References the step panel it controls.',
+    },
+    {
+      element: 'Step panel',
+      attribute: 'role',
+      value: '"tabpanel"',
+      notes: 'Each step content area is a tabpanel.',
+    },
+    {
+      element: 'Step panel',
+      attribute: 'aria-labelledby',
+      value: 'tab-id',
+      notes: 'References the step header for labelling.',
+    },
+    {
+      element: 'Completed step',
+      attribute: 'aria-label',
+      value: '"Step N - Completed"',
+      notes: 'Announces step completion state to screen readers.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '← / →', suffix: 'on step header', action: 'Move focus between step headers.' },

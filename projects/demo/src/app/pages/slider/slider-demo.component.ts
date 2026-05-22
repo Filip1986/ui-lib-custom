@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
@@ -59,6 +61,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -153,6 +156,45 @@ export class SliderDemoComponent {
     competitiveParity: 'pending',
     apgPattern: { name: 'Slider', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/slider/' },
   };
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Slider handle',
+      attribute: 'role',
+      value: '"slider"',
+      notes: 'The draggable handle uses the slider role.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuenow',
+      value: 'number',
+      notes: 'The current numeric value of the slider.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuemin',
+      value: 'number',
+      notes: 'The minimum allowed value, set by <code>[min]</code>.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-valuemax',
+      value: 'number',
+      notes: 'The maximum allowed value, set by <code>[max]</code>.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Provide via <code>[ariaLabel]</code> to name the slider for screen readers.',
+    },
+    {
+      element: 'Slider handle',
+      attribute: 'aria-orientation',
+      value: '"horizontal" | "vertical"',
+      notes: 'Set when <code>[orientation]</code> is <code>"vertical"</code>.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

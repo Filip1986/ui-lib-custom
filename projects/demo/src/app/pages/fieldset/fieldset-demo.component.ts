@@ -11,6 +11,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocCodeExampleComponent } from '@demo/shared/doc-page/doc-code-example.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
@@ -44,6 +46,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocPageHeaderComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocCodeExampleComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -172,6 +175,33 @@ export class FieldsetDemoComponent {
       description: 'Custom HTML for the legend / header area.',
     },
     { name: 'default', type: 'ng-content', description: 'Body content rendered inside the panel.' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Fieldset',
+      attribute: 'role',
+      value: '"group"',
+      notes: 'The fieldset container acts as a landmark group of related controls.',
+    },
+    {
+      element: 'Fieldset',
+      attribute: 'aria-labelledby',
+      value: 'legend-id',
+      notes: 'References the legend element to provide an accessible group label.',
+    },
+    {
+      element: 'Toggle button (collapsible)',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Set on the legend button when the fieldset is collapsible.',
+    },
+    {
+      element: 'Toggle button (collapsible)',
+      attribute: 'aria-controls',
+      value: 'content-id',
+      notes: 'Points to the collapsible content panel.',
+    },
   ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [

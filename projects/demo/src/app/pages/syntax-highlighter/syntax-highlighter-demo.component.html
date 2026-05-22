@@ -251,7 +251,7 @@
     </app-doc-section>
 
     <!-- ── Theming ───────────────────────────────────────────────────────────── -->
-    <app-doc-section id="theming" title="Theming">
+    <app-doc-section id="css-vars" title="CSS Custom Properties">
       <h2 class="demo-section__title">Theming</h2>
       <p class="demo-section__description">
         Override any token colour via CSS custom properties on the host element or a parent
@@ -284,6 +284,8 @@
     <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>
     <p class="demo-page-rail__title">On this page</p>

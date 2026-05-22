@@ -51,7 +51,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
  * Demo page for checkbox variants and behavior.
  */
 @Component({
-  selector: 'app-checkboxes',
+  selector: 'app-checkboxes-demo',
   standalone: true,
   imports: [
     Panel,
@@ -77,12 +77,12 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
     DocKeyboardNavComponent,
     DocAriaTableComponent,
   ],
-  templateUrl: './checkboxes.component.html',
-  styleUrl: './checkboxes.component.scss',
+  templateUrl: './checkboxes-demo.component.html',
+  styleUrl: './checkboxes-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxesComponent {
+export class CheckboxesDemoComponent {
   public readonly checkboxExampleHtml: string = checkboxExampleHtml;
   public readonly checkboxExampleTs: string = checkboxExampleTs;
   public readonly usageTs: string = usageTs;

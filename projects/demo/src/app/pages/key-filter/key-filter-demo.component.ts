@@ -111,6 +111,7 @@ export class KeyFilterDemoComponent {
     { id: 'email', label: 'Email' },
     { id: 'custom', label: 'Custom RegExp' },
     { id: 'bypass', label: 'Bypass' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

@@ -26,6 +26,8 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 interface GalleriaImage {
   src: string;
   thumbnailSrc: string;
@@ -84,7 +86,7 @@ const DEMO_IMAGES: GalleriaImage[] = [
  * basic usage, thumbnails positions, indicators, fullscreen, autoplay, and variants.
  */
 @Component({
-  selector: 'app-gallery',
+  selector: 'app-gallery-demo',
   standalone: true,
   imports: [
     GalleriaComponent,
@@ -96,14 +98,14 @@ const DEMO_IMAGES: GalleriaImage[] = [
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
-
     DocCssVarsTableComponent,
+    DocAriaTableComponent,
   ],
-  templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.scss',
+  templateUrl: './gallery-demo.component.html',
+  styleUrl: './gallery-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryComponent {
+export class GalleryDemoComponent {
   public readonly qualityAudit: ComponentQualityAudit = {
     date: '2026-05-18',
     tier: 1,
@@ -140,6 +142,47 @@ export class GalleryComponent {
     { id: 'playground', label: 'Playground' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Galleria container',
+      attribute: 'role',
+      value: '"region"',
+      notes: 'The gallery is presented as a landmark region.',
+    },
+    {
+      element: 'Galleria container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes:
+        'Passed via <code>[ariaLabel]</code> (default <code>"Gallery"</code>); names the region for screen readers.',
+    },
+    {
+      element: 'Prev/Next navigator',
+      attribute: 'aria-label',
+      value: '"Previous" | "Next"',
+      notes: 'Descriptive labels on navigation arrow buttons.',
+    },
+    {
+      element: 'Indicator button',
+      attribute: 'aria-label',
+      value: '"Slide N"',
+      notes: 'Each indicator dot button is labelled with its slide number.',
+    },
+    {
+      element: 'Indicator button (active)',
+      attribute: 'aria-current',
+      value: '"true"',
+      notes: 'Marks the indicator for the currently visible slide.',
+    },
+    {
+      element: 'Fullscreen button',
+      attribute: 'aria-label',
+      value: '"Open fullscreen" | "Close fullscreen"',
+      notes: 'Describes the fullscreen toggle action.',
+    },
   ];
 
   public scrollTo(id: string): void {

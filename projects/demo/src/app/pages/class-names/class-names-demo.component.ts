@@ -107,6 +107,7 @@ classNames('btn', null, undefined, false, 'icon')
     { id: 'pipe-usage', label: 'Pipe Usage' },
     { id: 'interactive-playground', label: 'Interactive Playground' },
     { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

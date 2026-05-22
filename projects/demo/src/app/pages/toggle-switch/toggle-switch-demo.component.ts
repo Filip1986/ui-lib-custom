@@ -20,6 +20,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { Panel } from 'ui-lib-custom/panel';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
@@ -42,6 +44,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -174,6 +177,33 @@ export class ToggleSwitchDemoComponent {
   public reactiveFormText(): string {
     return this.notificationsControl.value ? 'Enabled' : 'Disabled';
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Switch',
+      attribute: 'role',
+      value: '"switch"',
+      notes: 'The toggle control uses the switch role to represent a binary on/off state.',
+    },
+    {
+      element: 'Switch',
+      attribute: 'aria-checked',
+      value: '"true" | "false"',
+      notes: 'Reflects the current checked (on) or unchecked (off) state.',
+    },
+    {
+      element: 'Switch',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Provide via <code>[ariaLabel]</code> when there is no adjacent visible label.',
+    },
+    {
+      element: 'Switch (disabled)',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks the switch as non-interactive.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

@@ -51,6 +51,8 @@ import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-tab
 import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 /**
  * Demo page for SplitButton variants, states, templating, and accessibility guidance.
@@ -71,6 +73,7 @@ import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.compone
     DocCodeExampleComponent,
 
     DocSectionComponent,
+    DocAriaTableComponent,
 
     DocCssVarsTableComponent,
     DocApiReferenceComponent,
@@ -144,7 +147,7 @@ export class SplitButtonDemoComponent {
     { id: 'sizes', label: 'Sizes' },
     { id: 'template', label: 'Template' },
     { id: 'accessibility', label: 'Accessibility' },
-    { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
   ];
 
   public readonly severities: readonly SplitButtonSeverity[] = [
@@ -195,6 +198,45 @@ export class SplitButtonDemoComponent {
     const label: string = event.item.label ?? 'Unknown action';
     this.lastAction.set(`Menu action: ${label}`);
   }
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Button group',
+      attribute: 'role',
+      value: '"group"',
+      notes: 'The main action + dropdown trigger are wrapped in a group.',
+    },
+    {
+      element: 'Dropdown trigger',
+      attribute: 'aria-haspopup',
+      value: '"true"',
+      notes: 'Signals that the trigger opens a menu.',
+    },
+    {
+      element: 'Dropdown trigger',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the dropdown menu is open.',
+    },
+    {
+      element: 'Menu container',
+      attribute: 'role',
+      value: '"menu"',
+      notes: 'The dropdown panel uses the menu role.',
+    },
+    {
+      element: 'Menu item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each option in the dropdown is a menu item.',
+    },
+    {
+      element: 'Disabled menu item',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks non-interactive menu items.',
+    },
+  ];
+
   public readonly apiInputRows: readonly ApiPropRow[] = [
     { name: 'label', type: 'string', default: "''", description: 'Main button label text.' },
     { name: 'model', type: 'SplitButtonItem[]', default: '[]', description: 'Menu item list.' },

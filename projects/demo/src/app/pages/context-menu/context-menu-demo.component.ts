@@ -7,6 +7,8 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocTocComponent } from '@demo/shared/doc-page/doc-toc.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
@@ -28,6 +30,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocPageLayoutComponent,
     DocTocComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
@@ -231,6 +234,39 @@ export class ContextMenuDemoComponent {
   ];
 
   // ── Keyboard navigation data ───────────────────────────────────────────────
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Menu container',
+      attribute: 'role',
+      value: '"menu"',
+      notes: 'The popup container is a menu widget.',
+    },
+    {
+      element: 'Menu item',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Each navigable item is announced as a menu item.',
+    },
+    {
+      element: 'Menu item with submenu',
+      attribute: 'aria-haspopup',
+      value: '"true"',
+      notes: 'Signals that activating the item opens a submenu.',
+    },
+    {
+      element: 'Menu item with submenu',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Tracks whether the submenu is open.',
+    },
+    {
+      element: 'Disabled menu item',
+      attribute: 'aria-disabled',
+      value: '"true"',
+      notes: 'Marks items that cannot be activated.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

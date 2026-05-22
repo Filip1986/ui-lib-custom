@@ -19,6 +19,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
@@ -41,6 +43,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -345,6 +348,40 @@ export class TreeTableDemoComponent {
     };
     return iconMap[type] ?? 'pi pi-file';
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Table container',
+      attribute: 'role',
+      value: '"treegrid"',
+      notes: 'The component uses the treegrid role — a combination of grid and tree.',
+    },
+    { element: 'Table row', attribute: 'role', value: '"row"', notes: 'Each data row is a row.' },
+    {
+      element: 'Table cell',
+      attribute: 'role',
+      value: '"gridcell"',
+      notes: 'Each data cell is a gridcell.',
+    },
+    {
+      element: 'Expandable row',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects the expanded/collapsed state of rows with children.',
+    },
+    {
+      element: 'Row (selected)',
+      attribute: 'aria-selected',
+      value: '"true"',
+      notes: 'Reflects selection state when row selection is enabled.',
+    },
+    {
+      element: 'Column header',
+      attribute: 'role',
+      value: '"columnheader"',
+      notes: 'Column header cells use the columnheader role.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '↓ / ↑', action: 'Move focus between rows.' },

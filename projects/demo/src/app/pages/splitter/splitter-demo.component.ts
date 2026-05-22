@@ -15,6 +15,9 @@ import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.comp
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+
 /**
  *
  */
@@ -29,12 +32,31 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './splitter-demo.component.html',
   styleUrl: './splitter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplitterDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-22',
+    tier: 1,
+    scores: {
+      api: 7,
+      a11y: 8,
+      perf: 8,
+      comp: 7,
+      theme: 7,
+      dx: 7,
+      docs: 8,
+      polish: 7,
+      angular: 8,
+      feel: 7,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string = "import { Splitter } from 'ui-lib-custom/splitter'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
@@ -42,6 +64,7 @@ export class SplitterDemoComponent {
   public readonly sections: DocSection[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

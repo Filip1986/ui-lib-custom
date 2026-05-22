@@ -418,6 +418,15 @@
   >
     <app-doc-css-vars-table [rows]="cssVarRows" [showDefault]="false" />
   </app-doc-section>
+  <!-- ── Accessibility ──────────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <p class="demo-section__description">
+      The gallery widget is a landmark region. Navigation controls have descriptive labels, and
+      indicator dots announce the current slide position to assistive technologies.
+    </p>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+  </app-doc-section>
 <app-doc-quality-badge [audit]="qualityAudit" />
 
   <div class="demo-page-rail" docRail>

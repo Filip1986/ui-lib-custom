@@ -18,6 +18,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -39,6 +41,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -285,6 +288,33 @@ export class DockDemoComponent {
   public setPosition(position: DockPosition): void {
     this.position.set(position);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Dock container',
+      attribute: 'role',
+      value: '"navigation"',
+      notes: 'The dock is announced as a navigation landmark.',
+    },
+    {
+      element: 'Dock container',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Passed via <code>[ariaLabel]</code> to name the navigation region.',
+    },
+    {
+      element: 'Dock item',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Each item uses its <code>label</code> property as the accessible name.',
+    },
+    {
+      element: 'Dock item (link)',
+      attribute: 'role',
+      value: '"menuitem"',
+      notes: 'Items rendered as links get <code>menuitem</code> semantics inside the nav.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     { key: '← / →', suffix: 'horizontal dock', action: 'Move focus between dock items.' },

@@ -13,8 +13,11 @@ import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.comp
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badge.component';
+import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
+
 /**
- * Demo page for the SyntaxHighlighter utility.
+ *
  */
 @Component({
   selector: 'app-syntax-highlighter-demo',
@@ -27,12 +30,31 @@ import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.comp
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocQualityBadgeComponent,
   ],
   templateUrl: './syntax-highlighter-demo.component.html',
   styleUrl: './syntax-highlighter-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SyntaxHighlighterDemoComponent {
+  public readonly qualityAudit: ComponentQualityAudit = {
+    date: '2026-05-22',
+    tier: 1,
+    scores: {
+      api: 8,
+      a11y: 8,
+      perf: 9,
+      comp: 7,
+      theme: 7,
+      dx: 9,
+      docs: 8,
+      polish: 8,
+      angular: 8,
+      feel: 8,
+    },
+    competitiveParity: 'pending',
+  };
+
   public readonly importCode: string =
     "import { highlight, tokenize, escapeForCode } from 'ui-lib-custom/syntax-highlighter';";
 
@@ -66,7 +88,7 @@ export class SyntaxHighlighterDemoComponent {
       ],
     },
     { id: 'tokens', label: 'Token Classes' },
-    { id: 'theming', label: 'Theming' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

@@ -15,6 +15,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -36,6 +38,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -240,6 +243,39 @@ export class ConfirmDialogDemoComponent {
       reject: (): void => this.lastResult.set(`✗ ${variant} rejected`),
     });
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Dialog container',
+      attribute: 'role',
+      value: '"dialog"',
+      notes: 'Marks the overlay as a dialog for assistive technologies.',
+    },
+    {
+      element: 'Dialog container',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Signals that content behind the dialog is inert while it is open.',
+    },
+    {
+      element: 'Dialog container',
+      attribute: 'aria-labelledby',
+      value: 'dialog-header-id',
+      notes: 'Points to the dialog header element for a descriptive name.',
+    },
+    {
+      element: 'Dialog container',
+      attribute: 'aria-describedby',
+      value: 'dialog-message-id',
+      notes: 'Points to the confirmation message for context.',
+    },
+    {
+      element: 'Confirm/Reject buttons',
+      attribute: 'aria-label',
+      value: 'string',
+      notes: 'Labels set via <code>[acceptLabel]</code> / <code>[rejectLabel]</code>.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

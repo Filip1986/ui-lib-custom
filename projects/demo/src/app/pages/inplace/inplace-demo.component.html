@@ -148,19 +148,21 @@
   <!-- ---- API ---------------------------------------------------------- -->
   <app-doc-section id="api" title="API">
 
-    <h3 class="demo-table__heading">Inputs</h3>
+    <h3 class="demo-section__subtitle">Inputs</h3>
     <app-doc-api-reference [rows]="apiInputRows" />
 
-    <h3 class="demo-table__heading">Outputs</h3>
+    <h3 class="demo-section__subtitle">Outputs</h3>
     <app-doc-api-reference kind="output" [rows]="apiOutputRows" [showDefault]="false" />
 
-    <h3 class="demo-table__heading">Content Projection</h3>
+    <h3 class="demo-section__subtitle">Content Projection</h3>
     <app-doc-api-reference kind="name" [rows]="apiSlotRows" [showDefault]="false" />
   </app-doc-section>
 
   <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
   <app-doc-section id="accessibility" title="Accessibility">
-    <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
     <app-doc-keyboard-nav [rows]="keyboardRows" />
   </app-doc-section>
 

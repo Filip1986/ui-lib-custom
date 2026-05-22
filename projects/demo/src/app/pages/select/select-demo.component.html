@@ -1,13 +1,17 @@
 <app-doc-page-layout [sections]="sections">
   <app-doc-page-header
     docHeader
-    title="Input"
+    title="Select"
     [importCode]="importCode"
-    description="Configure variant, type, and helpers to see the live input preview."
+    description="Dropdown component with search, multi-select, and templates. Use the controls to see live changes."
   />
 
-  <app-input-basic-example />
-  <app-doc-code-example [html]="inputExampleHtml" [typescript]="inputExampleTs" />
+  <app-select-basic-example />
+  <app-doc-code-example
+    [html]="selectExampleHtml"
+    [typescript]="selectExampleTs"
+    [showLineNumbers]="true"
+  />
 
   <div class="doc-tabs">
     <ui-lib-tabs
@@ -28,127 +32,80 @@
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
       <ui-lib-panel variant="minimal">
-        <p class="card-description">Variant, input type, and label float behavior.</p>
+        <p class="card-description">Choose variant and follow theme defaults.</p>
 
-        <div class="control-grid">
-          <div class="control">
-            <label>Variant</label>
-            <div class="chips">
-              @for (v of variants; track v) {
-                <ui-lib-button
-                  class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="variant() === v ? 'solid' : 'ghost'"
-                  color="primary"
-                  (click)="setVariant(v)"
-                  >{{ v }}</ui-lib-button
-                >
-              }
-            </div>
-            <label class="inline-toggle"
-              ><input
-                type="checkbox"
-                [checked]="useGlobalVariant()"
-                (change)="setFollowThemeVariant($any($event.target).checked)"
-              />
-              Follow theme variant</label
-            >
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="sm"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setVariant(v)"
+                >{{ v }}</ui-lib-button
+              >
+            }
           </div>
-
-          <div class="control">
-            <label>Type</label>
-            <div class="chips">
-              @for (t of types; track t) {
-                <ui-lib-button
-                  class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="inputType() === t ? 'solid' : 'ghost'"
-                  color="primary"
-                  (click)="setType(t)"
-                  >{{ t }}</ui-lib-button
-                >
-              }
-            </div>
-          </div>
-
-          <div class="control">
-            <label>Label float</label>
-            <div class="chips">
-              @for (lf of labelFloats; track lf) {
-                <ui-lib-button
-                  class="control-chip"
-                  size="sm"
-                  [variant]="'minimal'"
-                  [appearance]="labelFloat() === lf ? 'solid' : 'ghost'"
-                  color="primary"
-                  (click)="setLabelFloat(lf)"
-                  >{{ lf }}</ui-lib-button
-                >
-              }
-            </div>
-          </div>
+          <label class="inline-toggle"
+            ><input
+              type="checkbox"
+              [checked]="useGlobalVariant()"
+              (change)="setFollowThemeVariant($any($event.target).checked)"
+            />
+            Follow theme variant</label
+          >
         </div>
       </ui-lib-panel>
 
       <ui-lib-panel variant="minimal">
-        <p class="card-description">Toggle helpers and validation.</p>
+        <p class="card-description">Toggle selection, search, and states.</p>
 
         <div class="toggles">
           <label
             ><input
               type="checkbox"
-              [checked]="showCounter()"
-              (change)="showCounter.set($any($event.target).checked)"
+              [checked]="multiple()"
+              (change)="toggleMultiple($any($event.target).checked)"
             />
-            Show counter</label
+            Multiple</label
           >
           <label
             ><input
               type="checkbox"
-              [checked]="showClear()"
-              (change)="showClear.set($any($event.target).checked)"
+              [checked]="searchable()"
+              (change)="toggleSearchable($any($event.target).checked)"
             />
-            Show clear</label
+            Searchable</label
           >
           <label
             ><input
               type="checkbox"
-              [checked]="showToggle()"
-              (change)="showToggle.set($any($event.target).checked)"
+              [checked]="disabled()"
+              (change)="toggleDisabled($any($event.target).checked)"
             />
-            Password toggle</label
+            Disabled</label
           >
           <label
             ><input
               type="checkbox"
-              [checked]="required()"
-              (change)="required.set($any($event.target).checked)"
+              [checked]="loading()"
+              (change)="toggleLoading($any($event.target).checked)"
             />
-            Required</label
+            Loading</label
           >
         </div>
       </ui-lib-panel>
 
       <ui-lib-panel variant="minimal">
-        <p class="card-description">Update labels and placeholder copy.</p>
-
-        <div class="control">
-          <label>Label</label>
-          <input
-            type="text"
-            aria-label="Input label"
-            [value]="label()"
-            (input)="label.set($any($event.target).value)"
-          />
-        </div>
+        <p class="card-description">Set placeholder text.</p>
 
         <div class="control">
           <label>Placeholder</label>
           <input
             type="text"
-            aria-label="Input placeholder"
             [value]="placeholder()"
             (input)="placeholder.set($any($event.target).value)"
           />
@@ -169,7 +126,6 @@
               <label>Custom</label>
               <input
                 type="number"
-                aria-label="Custom viewport width"
                 min="200"
                 max="2000"
                 [ngModel]="viewportCustomWidth()"
@@ -219,54 +175,21 @@
     <ui-lib-panel variant="minimal">
       <app-doc-demo-viewport>
         <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
-          <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
-            <ui-lib-input
-              [variant]="variant()"
-              [type]="inputType()"
-              [label]="label()"
-              [labelFloat]="labelFloat()"
-              [placeholder]="placeholder()"
-              [required]="required()"
-              [showCounter]="showCounter()"
-              [maxLength]="80"
-              [showClear]="showClear()"
-              [error]="error()"
-              [ngModel]="value()"
-              (ngModelChange)="value.set($event)"
-              name="demoInput"
-            >
-              <span prefix class="pi pi-envelope"></span>
-              <span suffix class="pi pi-check"></span>
-            </ui-lib-input>
+          <ui-lib-select
+            label="Options"
+            [options]="options"
+            [variant]="variant()"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
+            [disabled]="disabled()"
+            [loading]="loading()"
+            [placeholder]="placeholder()"
+            [ngModel]="value()"
+            (ngModelChange)="value.set($event)"
+          >
+          </ui-lib-select>
 
-            @if (inputType() === 'password') {
-              <ui-lib-input
-                [variant]="variant()"
-                type="password"
-                label="Password"
-                [labelFloat]="labelFloat()"
-                placeholder="Enter password"
-                [showTogglePassword]="showToggle()"
-                [showClear]="showClear()"
-                [required]="required()"
-                name="demoPassword"
-                [ngModel]="password()"
-                (ngModelChange)="password.set($event)"
-              >
-                <span prefix class="pi pi-lock"></span>
-              </ui-lib-input>
-            }
-
-            <div class="actions">
-              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-              <ui-lib-button
-                type="button"
-                appearance="ghost"
-                (click)="demoForm.resetForm(); value.set(''); password.set(''); error.set('')"
-                >Reset</ui-lib-button
-              >
-            </div>
-          </form>
+          <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
         </div>
       </app-doc-demo-viewport>
     </ui-lib-panel>
@@ -274,37 +197,40 @@
 
   @if (activeTab() === 'variants') {
     <ui-lib-panel variant="minimal">
-      <p>Compare input variants using the same label, placeholder, and type.</p>
+      <p>Compare select variants using the same options and behavior.</p>
 
       <app-variant-comparison>
         <div material>
-          <ui-lib-input
+          <ui-lib-select
+            label="Options"
+            [options]="options"
             variant="material"
-            [type]="inputType()"
-            [labelFloat]="labelFloat()"
-            [label]="label()"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
             [placeholder]="placeholder()"
-          />
+          ></ui-lib-select>
         </div>
 
         <div bootstrap>
-          <ui-lib-input
+          <ui-lib-select
+            label="Options"
+            [options]="options"
             variant="bootstrap"
-            [type]="inputType()"
-            [labelFloat]="labelFloat()"
-            [label]="label()"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
             [placeholder]="placeholder()"
-          />
+          ></ui-lib-select>
         </div>
 
         <div minimal>
-          <ui-lib-input
+          <ui-lib-select
+            label="Options"
+            [options]="options"
             variant="minimal"
-            [type]="inputType()"
-            [labelFloat]="labelFloat()"
-            [label]="label()"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
             [placeholder]="placeholder()"
-          />
+          ></ui-lib-select>
         </div>
       </app-variant-comparison>
     </ui-lib-panel>
@@ -318,7 +244,11 @@
 
   @if (activeTab() === 'usage') {
     <ui-lib-panel variant="minimal">
-      <app-doc-code-example [html]="usageHtml" [typescript]="usageTs" />
+      <app-doc-code-example
+        [html]="usageHtml"
+        [typescript]="usageTs"
+        [showLineNumbers]="true"
+      />
     </ui-lib-panel>
   }
 
@@ -338,31 +268,31 @@
   @if (activeTab() === 'accessibility') {
     <ui-lib-panel variant="minimal">
       <ul class="doc-list">
-        <li>Associate labels with inputs via the <code>label</code> input.</li>
-        <li>Provide error text and link with <code>aria-describedby</code> when invalid.</li>
-        <li>Ensure required fields are announced and visually indicated.</li>
+        <li>Use a clear <code>label</code> for the trigger button.</li>
+        <li>Ensure listbox options are keyboard navigable.</li>
+        <li>Announce selection changes for screen readers.</li>
       </ul>
     </ui-lib-panel>
   }
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <h3 class="demo-section__subtitle" id="a11y-aria">ARIA Attributes</h3>
+    <app-doc-aria-table [rows]="ariaRows" />
+    <h3 class="demo-section__subtitle" id="a11y-keyboard">Keyboard Interaction</h3>
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+  </app-doc-section>
 
 
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>ui-lib-input</code>. Import from
-      <code>ui-lib-custom/input</code>.
+      All inputs accepted by <code>ui-lib-select</code>. Import from
+      <code>ui-lib-custom/select</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />
   </app-doc-section>
   
-  <!-- ── Accessibility ─────────────────────────────────────────── -->
-  <app-doc-section id="accessibility" title="Accessibility">
-    <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-    <app-doc-aria-table [rows]="ariaRows" />
-    <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-    <app-doc-keyboard-nav [rows]="keyboardRows" />
-  </app-doc-section>
-
   <!-- ── CSS Custom Properties ─────────────────────────────────────────── -->
   <app-doc-section
     id="css-vars"

@@ -39,6 +39,8 @@ import {
 } from './snippets.generated';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
@@ -71,6 +73,7 @@ interface DemoOption {
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',
@@ -121,7 +124,72 @@ export class FloatLabelDemoComponent {
     { id: 'with-textarea', label: 'With Textarea' },
     { id: 'invalid', label: 'Invalid' },
     { id: 'reactive', label: 'Reactive Forms' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-float-label-color', description: 'Label text colour in resting state.' },
+    { variable: '--uilib-float-label-font-size', description: 'Label font size in resting state.' },
+    { variable: '--uilib-float-label-font-weight', description: 'Label font weight.' },
+    {
+      variable: '--uilib-float-label-position-x',
+      description: 'Horizontal offset of the label from the input edge.',
+    },
+    {
+      variable: '--uilib-float-label-position-y',
+      description: 'Vertical offset of the label in resting state.',
+    },
+    {
+      variable: '--uilib-float-label-active-font-size',
+      description: 'Label font size when floating (active).',
+    },
+    {
+      variable: '--uilib-float-label-active-font-weight',
+      description: 'Label font weight when floating (active).',
+    },
+    { variable: '--uilib-float-label-active-color', description: 'Label colour when floating.' },
+    {
+      variable: '--uilib-float-label-focus-color',
+      description: 'Label colour when the wrapped input is focused.',
+    },
+    {
+      variable: '--uilib-float-label-invalid-color',
+      description: 'Label colour when the wrapped input is invalid.',
+    },
+    {
+      variable: '--uilib-float-label-over-active-top',
+      description: 'Top offset for the "over" variant when active.',
+    },
+    {
+      variable: '--uilib-float-label-in-active-top',
+      description: 'Top offset for the "in" variant when active.',
+    },
+    {
+      variable: '--uilib-float-label-in-input-padding-top',
+      description: 'Extra top padding added to the input in "in" variant.',
+    },
+    {
+      variable: '--uilib-float-label-in-input-padding-bottom',
+      description: 'Extra bottom padding added to the input in "in" variant.',
+    },
+    {
+      variable: '--uilib-float-label-on-border-radius',
+      description: 'Border radius used by the "on" variant label chip.',
+    },
+    {
+      variable: '--uilib-float-label-on-active-background',
+      description: 'Background of the "on" variant label chip.',
+    },
+    {
+      variable: '--uilib-float-label-on-active-padding',
+      description: 'Padding of the "on" variant label chip.',
+    },
+    {
+      variable: '--uilib-float-label-transition',
+      description: 'Transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.',
+    },
   ];
 
   public scrollTo(id: string): void {

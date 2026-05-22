@@ -96,6 +96,7 @@ export class MyComponent {}
     { id: 'interactive-playground', label: 'Interactive Playground' },
     { id: 'boolean-numeric', label: 'Boolean & Numeric Properties' },
     { id: 'api', label: 'API' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 

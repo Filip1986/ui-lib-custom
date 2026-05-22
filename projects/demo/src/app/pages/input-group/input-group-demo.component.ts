@@ -35,6 +35,8 @@ import {
 } from './snippets.generated';
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
 import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import { DocCssVarsTableComponent } from '@demo/shared/doc-page/doc-css-vars-table.component';
+import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.component';
 import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
@@ -70,6 +72,7 @@ interface InputGroupSizeItem {
     DocSectionComponent,
     DocAriaTableComponent,
     DocKeyboardNavComponent,
+    DocCssVarsTableComponent,
   ],
   templateUrl: './input-group-demo.component.html',
   styleUrl: './input-group-demo.component.scss',
@@ -120,7 +123,29 @@ export class InputGroupDemoComponent {
     { id: 'checkbox-radio', label: 'Checkbox & Radio' },
     { id: 'float-label', label: 'Float Label' },
     { id: 'sizes', label: 'Sizes' },
+    { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-input-group-addon-padding',
+      description: 'Padding inside the addon slot.',
+    },
+    {
+      variable: '--uilib-input-group-addon-background',
+      description: 'Background colour of the addon.',
+    },
+    { variable: '--uilib-input-group-addon-color', description: 'Text/icon colour of the addon.' },
+    {
+      variable: '--uilib-input-group-addon-border-color',
+      description: 'Border colour shared between the addon and the wrapped input.',
+    },
+    {
+      variable: '--uilib-input-group-addon-min-width',
+      description: 'Minimum width of the addon slot.',
+    },
   ];
 
   public scrollTo(id: string): void {

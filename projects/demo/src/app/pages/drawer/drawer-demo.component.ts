@@ -12,6 +12,8 @@ import { DocQualityBadgeComponent } from '@demo/shared/doc-page/doc-quality-badg
 import type { ComponentQualityAudit } from '@demo/shared/doc-page/doc-quality-badge.component';
 import { DocKeyboardNavComponent } from '@demo/shared/doc-page/doc-keyboard-nav.component';
 import type { KeyboardNavRow } from '@demo/shared/doc-page/doc-keyboard-nav.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-reference.component';
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
@@ -33,6 +35,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
     DocTocComponent,
     DocQualityBadgeComponent,
     DocKeyboardNavComponent,
+    DocAriaTableComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
 
@@ -77,7 +80,7 @@ export class DrawerDemoComponent {
     { id: 'without-backdrop', label: 'Without Backdrop' },
     { id: 'with-footer', label: 'With Footer' },
     { id: 'full-screen', label: 'Full Screen' },
-    { id: 'api-reference', label: 'API Reference' },
+    { id: 'api', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
     { id: 'css-vars', label: 'CSS Custom Properties' },
     { id: 'api', label: 'API Reference' },
@@ -154,6 +157,33 @@ export class DrawerDemoComponent {
     this.currentVariant.set(variant);
     this.variantOpen.set(true);
   }
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Drawer container',
+      attribute: 'role',
+      value: '"dialog"',
+      notes: 'The drawer is announced as a dialog when open.',
+    },
+    {
+      element: 'Drawer container',
+      attribute: 'aria-modal',
+      value: '"true"',
+      notes: 'Marks page content behind the drawer as inert.',
+    },
+    {
+      element: 'Drawer container',
+      attribute: 'aria-labelledby',
+      value: 'drawer-header-id',
+      notes: 'References the header element for an accessible name.',
+    },
+    {
+      element: 'Close button',
+      attribute: 'aria-label',
+      value: '"Close"',
+      notes: 'Text alternative for the icon-only close button.',
+    },
+  ];
 
   public readonly keyboardRows: KeyboardNavRow[] = [
     {

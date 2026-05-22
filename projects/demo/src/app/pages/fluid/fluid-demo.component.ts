@@ -12,6 +12,8 @@ import { DocApiReferenceComponent } from '@demo/shared/doc-page/doc-api-referenc
 import type { ApiPropRow } from '@demo/shared/doc-page/doc-api-reference.component';
 
 import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component';
+import { DocAriaTableComponent } from '@demo/shared/doc-page/doc-aria-table.component';
+import type { AriaRow } from '@demo/shared/doc-page/doc-aria-table.component';
 /**
  * Demo page for the Fluid component and FluidDirective.
  * Demonstrates how ui-lib-fluid stretches form controls to full width.
@@ -29,6 +31,7 @@ import { DocSectionComponent } from '@demo/shared/doc-page/doc-section.component
     DocQualityBadgeComponent,
     DocApiReferenceComponent,
     DocSectionComponent,
+    DocAriaTableComponent,
   ],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',
@@ -64,8 +67,19 @@ export class FluidDemoComponent {
     { id: 'using-the-directive', label: 'Using the Directive' },
     { id: 'conditional-fluid', label: 'Conditional Fluid' },
     { id: 'attribute-shorthand', label: 'Attribute Shorthand' },
-    { id: 'api-reference', label: 'API Reference' },
     { id: 'api', label: 'API Reference' },
+    { id: 'css-vars', label: 'CSS Custom Properties' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public readonly ariaRows: readonly AriaRow[] = [
+    {
+      element: 'Fluid host / wrapper',
+      attribute: '(none)',
+      value: '—',
+      notes:
+        'The <code>ui-lib-fluid</code> component and <code>[uiLibFluid]</code> directive add no ARIA attributes — they only apply a CSS class. Accessibility is the responsibility of the wrapped form controls.',
+    },
   ];
 
   public scrollTo(id: string): void {
