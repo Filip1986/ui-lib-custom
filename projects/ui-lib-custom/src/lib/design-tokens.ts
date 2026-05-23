@@ -368,6 +368,64 @@ export const SEMANTIC_COLORS: Readonly<Record<SemanticColor, string>> = {
 } as const;
 
 // ============================================================================
+// BUTTON APPEARANCE TOKENS
+// ============================================================================
+
+/** Shape of the {@link BUTTON_APPEARANCE_COLORS} constant. */
+export interface ButtonAppearanceColors {
+  /** Framed appearance: warm-yellow background and frame colour. */
+  framedAccent: string;
+  /** Framed appearance: black foreground text on the yellow background. */
+  framedFg: string;
+  /** Framed appearance: white outer border that separates body from the frame. */
+  framedBorder: string;
+  /** Glass-shadow appearance: gradient start (coral-red). */
+  glassShadowFrom: string;
+  /** Glass-shadow appearance: gradient end (warm-amber). */
+  glassShadowTo: string;
+  /** Glass-shadow appearance: dark foreground text on the frosted-glass body. */
+  glassFg: string;
+  /** Tactile appearance — primary severity: gradient start (sky-blue). */
+  tactilePrimaryFrom: string;
+  /** Tactile appearance — primary severity: gradient end (mid-blue). */
+  tactilePrimaryTo: string;
+  /** Tactile appearance — primary severity: bottom/side border (deep-blue). */
+  tactilePrimaryBorder: string;
+  /** Tactile appearance — default foreground on coloured backgrounds. */
+  tactileFg: string;
+}
+
+/**
+ * Default colour values for the premium button appearances: framed, glass-shadow, and tactile.
+ *
+ * These constants are the source of truth for the hardcoded hex defaults set on the
+ * corresponding `--uilib-button-*` CSS custom properties in `button.scss`.
+ * Because CSS custom-property definitions cannot import TypeScript, the values are
+ * duplicated between this file and the SCSS.  When changing a colour here, update the
+ * matching `--uilib-button-*` default in `button.scss` as well (and vice-versa).
+ *
+ * All of these CSS variables are fully overridable by consumers.
+ */
+export const BUTTON_APPEARANCE_COLORS: Readonly<ButtonAppearanceColors> = {
+  framedAccent: '#ffc82c',
+  framedFg: '#000000',
+  framedBorder: '#ffffff',
+  glassShadowFrom: '#ff5f6d',
+  glassShadowTo: '#ffc371',
+  glassFg: '#000000',
+  tactilePrimaryFrom: '#4aa6ff',
+  tactilePrimaryTo: '#278eff',
+  tactilePrimaryBorder: '#1a77d9',
+  tactileFg: '#ffffff',
+} as const;
+
+/**
+ * Dark foreground colour used on bright/light-coloured button surfaces in dark mode.
+ * Applied to `--uilib-button-{severity}-fg` overrides inside `[data-theme="dark"]`.
+ */
+export const BUTTON_DARK_MODE_FG: string = '#0b1220';
+
+// ============================================================================
 // DARK MODE TOKENS
 // ============================================================================
 

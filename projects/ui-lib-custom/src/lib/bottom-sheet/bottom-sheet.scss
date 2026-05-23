@@ -167,7 +167,7 @@ ui-lib-bottom-sheet {
   --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.5);
 
   .ui-lib-bottom-sheet__header {
-    --uilib-bottom-sheet-header-border: 1px solid #dee2e6;
+    --uilib-bottom-sheet-header-border: 1px solid var(--uilib-color-neutral-300, #dee2e6);
   }
 }
 

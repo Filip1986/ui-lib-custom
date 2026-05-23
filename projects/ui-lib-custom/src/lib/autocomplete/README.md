@@ -54,10 +54,10 @@
 | Name | Payload | Notes |
 |------|---------|-------|
 | `completeMethod` | `AutoCompleteCompleteEvent` | Fired (debounced) when user types; update `[suggestions]` in response |
-| `select` | `AutoCompleteSelectEvent` | Option selected |
+| `optionSelect` | `AutoCompleteSelectEvent` | Option selected from the suggestion list. Named `optionSelect` (not `select`) to avoid shadowing the native DOM `select` event. |
 | `unselect` | `AutoCompleteUnselectEvent` | Chip removed (multiple mode) |
-| `focus` | `FocusEvent` | Input focused |
-| `blur` | `FocusEvent` | Input blurred |
+| `autocompleteFocus` | `FocusEvent` | Input received focus. Named `autocompleteFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
+| `autocompleteBlur` | `FocusEvent` | Input lost focus. Named `autocompleteBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 | `dropdownClick` | `AutoCompleteDropdownClickEvent` | Dropdown toggle button clicked |
 | `clearEvent` | `void` | Clear button clicked |
 | `keyUp` | `KeyboardEvent` | Key-up on the input |

@@ -35,13 +35,13 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `change` | `CascadeSelectChangeEvent` | Leaf option selected |
+| `cascadeChange` | `CascadeSelectChangeEvent` | Leaf option selected. Named `cascadeChange` (not `change`) to avoid shadowing the native DOM `change` event. |
 | `groupChange` | `CascadeSelectGroupChangeEvent` | User navigated into a sub-group |
 | `show` | `CascadeSelectShowEvent` | Panel opened |
 | `hide` | `CascadeSelectHideEvent` | Panel closed |
 | `clear` | `void` | Clear button clicked |
-| `focus` | `FocusEvent` | Component focused |
-| `blur` | `FocusEvent` | Component blurred |
+| `cascadeSelectFocus` | `FocusEvent` | Component received focus. Named `cascadeSelectFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
+| `cascadeSelectBlur` | `FocusEvent` | Component lost focus. Named `cascadeSelectBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 
 ## Usage
 

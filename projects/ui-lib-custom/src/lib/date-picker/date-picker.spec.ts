@@ -659,7 +659,7 @@ describe('DatePickerComponent', (): void => {
       fixture.componentRef.setInput('view', 'month');
       fixture.detectChanges();
 
-      const selectSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.select, 'emit');
+      const selectSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.dateSelect, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
         "button[data-month-index='4']"

@@ -161,12 +161,12 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
   public readonly completeMethod: OutputEmitterRef<AutoCompleteCompleteEvent> =
     output<AutoCompleteCompleteEvent>();
-  public readonly select: OutputEmitterRef<AutoCompleteSelectEvent> =
+  public readonly optionSelect: OutputEmitterRef<AutoCompleteSelectEvent> =
     output<AutoCompleteSelectEvent>();
   public readonly unselect: OutputEmitterRef<AutoCompleteUnselectEvent> =
     output<AutoCompleteUnselectEvent>();
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly autocompleteFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly autocompleteBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   public readonly dropdownClick: OutputEmitterRef<AutoCompleteDropdownClickEvent> =
     output<AutoCompleteDropdownClickEvent>();
   public readonly clearEvent: OutputEmitterRef<void> = output<void>();
@@ -462,7 +462,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
   public onInputFocus(event: FocusEvent): void {
     this.focused.set(true);
-    this.focus.emit(event);
+    this.autocompleteFocus.emit(event);
 
     if (this.completeOnFocus()) {
       this.scheduleComplete(event, true);
@@ -472,7 +472,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   public onInputBlur(event: FocusEvent): void {
     this.focused.set(false);
     this.onTouched();
-    this.blur.emit(event);
+    this.autocompleteBlur.emit(event);
 
     window.setTimeout((): void => {
       if (this.addOnBlur()) {
@@ -677,7 +677,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
       this.hidePanel();
     }
 
-    this.select.emit({ originalEvent, value: resolvedValue });
+    this.optionSelect.emit({ originalEvent, value: resolvedValue });
   }
 
   public removeChip(index: number, originalEvent: Event): void {
@@ -1011,7 +1011,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     const nextValues: unknown[] = [...chips, value];
     this.modelValue.set(nextValues);
     this.onChange(nextValues);
-    this.select.emit({ originalEvent: event, value });
+    this.optionSelect.emit({ originalEvent: event, value });
     this.query.set('');
     this.focusedChipIndexState.set(-1);
   }
@@ -1053,7 +1053,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
         return;
       }
       nextValues.push(token);
-      this.select.emit({ originalEvent: event, value: token });
+      this.optionSelect.emit({ originalEvent: event, value: token });
     });
 
     this.modelValue.set(nextValues);

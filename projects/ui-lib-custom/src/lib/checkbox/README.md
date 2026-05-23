@@ -36,9 +36,9 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `change` | `CheckboxChangeEvent` | `{ checked: boolean \| unknown[], originalEvent: Event }` |
-| `focus` | `FocusEvent` | |
-| `blur` | `FocusEvent` | |
+| `checkboxChange` | `CheckboxChangeEvent` | `{ checked: boolean \| unknown[], originalEvent: Event }`. Named `checkboxChange` (not `change`) to avoid shadowing the native DOM `change` event. |
+| `checkboxFocus` | `FocusEvent` | Named `checkboxFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
+| `checkboxBlur` | `FocusEvent` | Named `checkboxBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 
 ## Usage
 

@@ -47,15 +47,16 @@ Run through this mentally before submitting any output.
 - [ ] **ESLint passes with zero errors and zero warnings** — run `npx eslint <changed-files> --max-warnings 0` before declaring any task complete. This is non-negotiable: a passing build with lint errors is not a passing build.
 - [ ] `ViewEncapsulation.None` present on every library component
 - [ ] All return types are explicit — no inference on class members, public APIs, or `computed()`
-- [ ] Cross-entry-point imports use package paths (`ui-lib-custom/theme`), not relative paths
+- [ ] **Cross-entry-point imports use package paths** — `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. See [Cross-Entry Import Rule](#cross-entry-import-rule).
 - [ ] Public component inputs use string union types — not constants objects
 - [ ] Self-closing tags used for all components without projected content
-- [ ] No raw hex/px — all new tokens added to `design-tokens.ts` first
+- [ ] **No raw hex/px in CSS rule bodies** — add tokens to `design-tokens.ts` first. Hex values that appear as the *default value* of a CSS custom property definition (`--uilib-foo: #hex`) are acceptable — they ARE the token; document them in `design-tokens.ts`. See [Design Token Rule](#design-token-rule).
 - [ ] If a new secondary entry point was added: `package.json` exports + `typesVersions` updated
 - [ ] Component inventory in `AI_AGENT_CONTEXT.md` updated if component status changed
-- [ ] No output uses the `on*` prefix
-- [ ] No output name matches a native DOM event — see the [Output Naming Rules](#output-naming-rules) section for the full blocked list
-- [ ] No output is named `{signalName}Change` where `{signalName}` is a `model()` signal
+- [ ] **No output uses the `on*` prefix**
+- [ ] **No output name matches a native DOM event** — see the [Output Naming Rules](#output-naming-rules) section for the full blocked list
+- [ ] **No output is named `{signalName}Change` where `{signalName}` is a `model()` signal** — check every `model<>()` signal name in the component against every explicit `output<>()` name
+- [ ] **No explicit `output()` that would cause double-fire** — if a component has a `@HostListener('focus')` or `@HostListener('blur')` AND an output with the same name, switch to imperative `addEventListener` in the constructor
 
 #### [Historical] Migration checks (lower priority; preserved for context)
 
@@ -70,17 +71,18 @@ These have caused real regressions. Active anti-patterns are still common traps;
 
 | Anti-pattern | Why it's wrong | Correct approach |
 |---|---|---|
-| Relative import across entry points | Causes circular package graphs and ng-packagr build errors | Use `ui-lib-custom/<entry>` package paths for cross-entry imports |
+| Relative import across entry points | Causes circular package graphs and ng-packagr build errors; breaks published package consumers | Use `ui-lib-custom/<entry>` package paths for cross-entry imports: `import type { ButtonVariant } from 'ui-lib-custom/button'` not `from '../button'` |
 | Missing `ViewEncapsulation.None` | CSS variables and animations do not cascade correctly | Always add it — no exceptions |
 | Type inference on `computed()` arrow functions | ESLint `allowTypedFunctionExpressions: false` will fail the build | Always annotate: `computed<MyType>((): MyType => ...)` |
 | Replacing public string union types with constants | Breaks the public API contract for consumers | Only extract *internal* repeated strings; leave public types as union literals |
 | Padding on the `overflow: hidden` collapse wrapper | Padding "leaks" visibly during `grid-row` animation | Use three layers: clip wrapper -> padding wrapper -> content |
 | Creating `public-api.ts` inside secondary entry folders | Not the established convention; ng-packagr handles it | `ng-package.json` points directly to `../src/lib/<n>/index.ts` |
-| Inlining raw hex or px values | Bypasses the design token system | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable |
+| Raw hex/px in CSS rule bodies (`.ui-lib-foo { color: #hex }`) | Bypasses the token system; cannot be themed or overridden | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable, use `var(--uilib-*)` |
+| Raw hex as a CSS variable value without a token reference (`--uilib-foo: #hex`) when a global token exists | The value is siloed; it won't update when the global token changes | Use `var(--uilib-color-neutral-300, #hex)` — global token first, hex as CSS fallback |
 | Adding PrimeNG/Material components to demo pages | Undermines dogfooding; surfaces library gaps incorrectly | Use `ui-lib-*` equivalents; document gap in component inventory if none exists |
-| `on*` prefix on outputs (`onClick`, `onFocus`, `onChange`) | Inconsistent with Angular's own event naming and the library standard | Name outputs without the prefix: `buttonClick`, `focus`, `change` |
-| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `submit`, `keydown`) | Angular registers both an output subscriber AND a native DOM listener on the host; native events bubbling from child elements trigger the handler twice — tests and real usage receive duplicate events | Prefix with a disambiguating context: `buttonClick`, `textareaFocus`, `panelChange` |
-| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Angular's `model<T>()` auto-generates an internal `{name}Change` event for `[(binding)]` two-way syntax; a second explicit output with the same name overwrites the binding — it receives the rich event object instead of `T`, corrupting host state and producing feedback loops | Give the explicit output a distinct name: `panelChange` instead of `visibleChange`; the `model()` internal event continues to work correctly |
+| `on*` prefix on outputs (`onClick`, `onFocus`, `onChange`) | Inconsistent with Angular's own event naming and the library standard | Name outputs without the prefix: `buttonClick`, `checkboxFocus`, `cascadeChange` |
+| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, `submit`, `keydown`, `scroll`, and ~40 others) | Angular registers both an output subscriber AND a native DOM listener on the host; native events bubbling from child elements trigger the handler twice — tests and real usage receive duplicate events | Prefix with a disambiguating component qualifier: `buttonClick`, `textareaFocus`, `dateSelect`, `checkboxChange`. See [Output Naming Rules](#output-naming-rules) for the full blocked list. |
+| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Angular's `model<T>()` auto-generates an internal `{name}Change` event for `[(binding)]` two-way syntax; a second explicit output with the same name overwrites the binding — it receives the rich event object instead of `T`, corrupting host state and producing feedback loops | Give the explicit output a distinct name: `panelChange` instead of `visibleChange`; `treeChange` instead of `selectionChange` (when `selection` is a model). The `model()` internal event continues to work correctly. |
 | Using `uilib-` as the element selector prefix (`uilib-accordion`) | `uilib-` is reserved for CSS custom properties (`--uilib-*`); element selectors use `ui-lib-` (with hyphen) to match every other component in the library | Element selectors: `ui-lib-accordion`; CSS variables: `--uilib-accordion-*` (two different intentional patterns — never mix them) |
 
 #### [Historical] Resolved Anti-Patterns (Migration Notes)
@@ -350,6 +352,12 @@ public readonly panelChange: OutputEmitterRef<VisibleChangeEvent> = output<Visib
 
 The rule is simple: **scan every `model()` signal name in the component; no explicit `output()` may be named `{thatName}Change`**.
 
+**Real example from this codebase:** `tree-select` has `selection: model<TreeNode | null>()` which auto-generates `selectionChange` for two-way binding. It also needed a rich change event (with `originalEvent`). The collision was fixed by naming the explicit output `treeChange` instead of `selectionChange`.
+
+**Naming strategy when the natural name is taken:** use a component-qualified verb or the component's primary noun — `panelChange`, `treeChange`, `listSelectionChange` — rather than the signal name + `Change`.
+
+**Naming for components where `selection` is a model:** the component's explicit "rich" selection output must NOT be named `selectionChange`. Alternatives: `selectionEvent`, `selectionUpdated`, or a component-qualified name like `treeChange`.
+
 ### Rule 4 — `@HostListener` vs imperative `addEventListener` for focus/blur
 
 If a component needs to listen to native `focus` or `blur` events on its own host element while also exposing outputs with similar semantics, **do not use `@HostListener('focus')` / `@HostListener('blur')`** — Angular's change detection interacts with `@HostListener` in ways that can cause circular dispatch when the output and the native listener fire in the same tick.
@@ -367,6 +375,83 @@ constructor() {
 ```
 
 This pattern is established in `cascade-select.ts` and should be followed whenever host focus/blur listeners are needed alongside outputs.
+
+---
+
+## Cross-Entry Import Rule
+
+Secondary entry points are separate npm packages in the published build. Importing across entry-point boundaries using relative paths works during development but breaks the published package because the relative path resolves to source rather than to the compiled entry point.
+
+**Rule:** Every cross-entry-point import in library source (`.ts` files under `src/lib/`) **must** use the package name, not a relative path.
+
+```typescript
+// ❌ Wrong — relative path crosses entry point boundary
+import type { ButtonVariant, ButtonSize } from '../button';
+
+// ✅ Correct — package path resolves to the correct entry point in all environments
+import type { ButtonVariant, ButtonSize } from 'ui-lib-custom/button';
+```
+
+**Exceptions:**
+- Imports within the *same* entry point (e.g., `cascade-select.ts` importing `./cascade-select.types`) — relative paths are fine and required here.
+- Story files (`.stories.ts`) — excluded from the library build; relative imports are acceptable.
+- Spec files (`.spec.ts`) — Jest resolves via the `moduleNameMapper` aliases; both work, but prefer package paths for consistency.
+
+**Audit command** — run this to detect violations before any PR:
+```bash
+grep -rn "from '\.\./[a-z-]*'" projects/ui-lib-custom/src/lib/ --include="*.ts" \
+  | grep -v ".spec.\|.stories.\|/[a-z-]*\.(types|constants|service|directive|pipe|spec)"
+```
+
+---
+
+## Design Token Rule
+
+### The three levels
+
+| Level | Where | Example |
+|---|---|---|
+| **TypeScript constant** | `design-tokens.ts` | `BUTTON_APPEARANCE_COLORS.framedAccent = '#ffc82c'` |
+| **CSS custom property** | SCSS file / ThemeConfigService | `--uilib-button-framed-bg: #ffc82c` |
+| **Usage** | Component SCSS rule body | `background: var(--uilib-button-framed-bg)` |
+
+### What is and isn't a violation
+
+| Usage | OK? | Reason |
+|---|---|---|
+| `color: #hex` in a CSS rule body | ❌ **Violation** | Raw hex cannot be themed or overridden |
+| `--uilib-foo: #hex` in a CSS variable *definition* block | ✅ **OK** (with caveat) | The CSS variable itself is the token; the hex is its default value |
+| `--uilib-foo: var(--uilib-color-neutral-300, #hex)` in a definition | ✅ **Best** | References global token first; hex is CSS fallback |
+
+### When a global token exists, always reference it
+
+If the hex value corresponds to a color in the global palette (`COLOR_NEUTRAL`, `COLOR_PRIMARY`, etc.), use the generated CSS variable with a hex fallback:
+
+```scss
+// ❌ Standalone hex that ignores the global colour system
+--uilib-bottom-sheet-header-border: 1px solid #dee2e6;
+
+// ✅ Global token reference with hex fallback — updates when neutral-300 is customised
+--uilib-bottom-sheet-header-border: 1px solid var(--uilib-color-neutral-300, #dee2e6);
+```
+
+### Appearance-specific colours
+
+When CSS variable default values are specific to a component appearance (e.g., the framed, glass, or tactile button appearances), they may not map to any global token. In this case:
+
+1. Add the colour as a constant to `design-tokens.ts` (see `BUTTON_APPEARANCE_COLORS` as the reference example)
+2. Add a comment in the SCSS file linking to the TypeScript constant
+3. Both files are the source of truth for that colour — keep them in sync
+
+```scss
+/* Framed appearance colour defaults
+ * SOURCE OF TRUTH: design-tokens.ts › BUTTON_APPEARANCE_COLORS
+ * Update both files when changing these values.
+ */
+--uilib-button-framed-bg: #ffc82c;
+```
+
+---
 
 ## Styling & Theming
 

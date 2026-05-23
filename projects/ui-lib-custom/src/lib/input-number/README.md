@@ -1,6 +1,6 @@
 # InputNumber
 
-**Selector:** `uilib-input-number`
+**Selector:** `ui-lib-input-number`
 **Package:** `ui-lib-custom/input-number`
 **Content projection:** no — renders its own `<input>` and spinner buttons inline (template is inline in the component decorator)
 
@@ -49,9 +49,9 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `input` | `{ originalEvent: InputEvent; value: number \| null }` | Fired on each input change |
-| `focus` | `FocusEvent` | Input focused |
-| `blur` | `FocusEvent` | Input blurred |
+| `valueChange` | `{ originalEvent: InputEvent; value: number \| null }` | Fired on each user-driven value change. Named `valueChange` (not `input`) to avoid shadowing the native DOM `input` event. |
+| `numberFocus` | `FocusEvent` | Input received focus. Named `numberFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
+| `numberBlur` | `FocusEvent` | Input lost focus. Named `numberBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 | `keyDown` | `KeyboardEvent` | Key pressed inside the input |
 | `clear` | `void` | Clear button clicked |
 
@@ -59,10 +59,10 @@
 
 ```html
 <!-- basic decimal input -->
-<uilib-input-number [(ngModel)]="price" [min]="0" [maxFractionDigits]="2" />
+<ui-lib-input-number [(ngModel)]="price" [min]="0" [maxFractionDigits]="2" />
 
 <!-- currency with spinner buttons -->
-<uilib-input-number
+<ui-lib-input-number
   mode="currency"
   currency="USD"
   label="Amount"
@@ -110,7 +110,7 @@ buttons, making them more informative to screen reader users:
 
 ```html
 <!-- produces: "Increment price" / "Decrement price" -->
-<uilib-input-number label="price" [showButtons]="true" [(value)]="amount" />
+<ui-lib-input-number label="price" [showButtons]="true" [(value)]="amount" />
 ```
 
 When `label` is not set, the buttons fall back to `"Increment value"` / `"Decrement value"`.

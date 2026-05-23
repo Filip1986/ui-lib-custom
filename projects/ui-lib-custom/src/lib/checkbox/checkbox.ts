@@ -90,9 +90,10 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   public readonly indeterminate: InputSignal<boolean> = input<boolean>(false);
 
   public readonly checked: ModelSignal<boolean> = model<boolean>(false);
-  public readonly change: OutputEmitterRef<CheckboxChangeEvent> = output<CheckboxChangeEvent>();
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly checkboxChange: OutputEmitterRef<CheckboxChangeEvent> =
+    output<CheckboxChangeEvent>();
+  public readonly checkboxFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly checkboxBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly groupValue: WritableSignal<unknown[]> = signal<unknown[]>([]);
@@ -254,7 +255,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
       nextValue = !this.checked();
       this.checked.set(nextValue);
       this.onCvaChange(this.getBinaryModelValue(nextValue));
-      this.change.emit({ checked: nextValue, originalEvent: event });
+      this.checkboxChange.emit({ checked: nextValue, originalEvent: event });
     } else {
       const selectedValue: unknown = this.value();
       const currentGroupValue: unknown[] = this.resolveGroupModelValue(this.groupValue());
@@ -266,7 +267,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
       nextValue = this.isValueSelected(nextGroupValue);
       this.checked.set(nextValue);
       this.onCvaChange(this.cloneGroupModelValue(nextGroupValue));
-      this.change.emit({ checked: nextGroupValue, originalEvent: event });
+      this.checkboxChange.emit({ checked: nextGroupValue, originalEvent: event });
     }
 
     this.onCvaTouched();
@@ -277,12 +278,12 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   }
 
   public onFocusIn(event: FocusEvent): void {
-    this.focus.emit(event);
+    this.checkboxFocus.emit(event);
   }
 
   public onNativeBlur(event: FocusEvent): void {
     this.onCvaTouched();
-    this.blur.emit(event);
+    this.checkboxBlur.emit(event);
   }
 
   public getNativeInputId(): string {

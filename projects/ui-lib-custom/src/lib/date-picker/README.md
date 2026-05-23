@@ -55,14 +55,14 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `select` | `DatePickerChangeEvent` | Fired when a date is selected |
+| `dateSelect` | `DatePickerChangeEvent` | Fired when a date is selected. Named `dateSelect` (not `select`) to avoid shadowing the native DOM `select` event. |
 | `monthChange` | `DatePickerMonthChangeEvent` | Fired when the visible month changes |
 | `yearChange` | `DatePickerYearChangeEvent` | Fired when the visible year changes |
 | `show` | `void` | Panel opened |
 | `hide` | `void` | Panel closed |
 | `clear` | `void` | Clear button clicked |
-| `focus` | `FocusEvent` | Input focused |
-| `blur` | `FocusEvent` | Input blurred |
+| `datePickerFocus` | `FocusEvent` | Input received focus. Named `datePickerFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
+| `datePickerBlur` | `FocusEvent` | Input lost focus. Named `datePickerBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 
 ## Usage
 

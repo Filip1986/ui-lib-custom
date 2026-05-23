@@ -33,7 +33,7 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `selectionChange` | `TreeSelectChangeEvent` | Fired whenever the selection value changes |
+| `treeChange` | `TreeSelectChangeEvent` | Fired whenever the selection changes (includes `originalEvent`). Note: `selectionChange` is reserved by the `[(selection)]` model binding — use `(treeChange)` for the rich event payload. |
 | `show` | `TreeSelectShowEvent` | Fired when the popup opens |
 | `hide` | `TreeSelectHideEvent` | Fired when the popup closes |
 | `nodeSelect` | `TreeNodeSelectEvent` | Proxied from the embedded tree |
