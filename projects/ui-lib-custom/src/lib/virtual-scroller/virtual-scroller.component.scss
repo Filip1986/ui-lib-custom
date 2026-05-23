@@ -141,7 +141,7 @@ ui-lib-virtual-scroller.uilib-scroller-inline {
 // Variant: material
 // -----------------------------------------------------------------------------
 
-ui-lib-virtual-scroller.uilib-variant-material {
+ui-lib-virtual-scroller.ui-lib-virtual-scroller--material {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.8);
   --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #6366f1);
 
@@ -155,7 +155,7 @@ ui-lib-virtual-scroller.uilib-variant-material {
 // Variant: bootstrap
 // -----------------------------------------------------------------------------
 
-ui-lib-virtual-scroller.uilib-variant-bootstrap {
+ui-lib-virtual-scroller.ui-lib-virtual-scroller--bootstrap {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.75);
   --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #0d6efd);
 
@@ -169,7 +169,7 @@ ui-lib-virtual-scroller.uilib-variant-bootstrap {
 // Variant: minimal
 // -----------------------------------------------------------------------------
 
-ui-lib-virtual-scroller.uilib-variant-minimal {
+ui-lib-virtual-scroller.ui-lib-virtual-scroller--minimal {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.6);
   --uilib-scroller-loading-icon-color: var(--uilib-color-text-muted, #6b7280);
 }

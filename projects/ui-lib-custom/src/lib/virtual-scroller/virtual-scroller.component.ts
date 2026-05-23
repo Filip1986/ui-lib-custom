@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type {
   AfterViewChecked,
   AfterViewInit,
@@ -102,6 +103,7 @@ export class VirtualScrollerComponent
   private readonly zone: NgZone = inject(NgZone);
   private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly platformId: object = inject(PLATFORM_ID);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   // ---------------------------------------------------------------------------
   // Inputs
@@ -109,7 +111,7 @@ export class VirtualScrollerComponent
 
   /** Unique HTML id applied to the viewport element. */
   public readonly id: InputSignal<string> = input<string>(
-    `uilib-scroller-${(++virtualScrollerIdCounter).toString()}`
+    `uilib-scroller-${(++virtualScrollerIdCounter).toString()}`,
   );
 
   /** Additional CSS class(es) applied to the host element. */
@@ -127,12 +129,12 @@ export class VirtualScrollerComponent
 
   /** CSS height of the scroll viewport (e.g. '400px', '100%'). */
   public readonly scrollHeight: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** CSS width of the scroll viewport. Only relevant for horizontal/both orientations. */
   public readonly scrollWidth: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Scroll direction. */
@@ -176,7 +178,7 @@ export class VirtualScrollerComponent
 
   /** Override the number of off-screen tolerated items rendered on each side. */
   public readonly numToleratedItems: InputSignal<number | undefined> = input<number | undefined>(
-    undefined
+    undefined,
   );
 
   /** External loading flag combined with lazy to control the loading overlay. */
@@ -220,8 +222,13 @@ export class VirtualScrollerComponent
    * When omitted, `items.length` is used instead.
    */
   public readonly totalRecords: InputSignal<number | undefined> = input<number | undefined>(
-    undefined
+    undefined,
   );
+
+  /** Design variant override. When null the active global theme variant is used. */
+  public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal' | null> = input<
+    'material' | 'bootstrap' | 'minimal' | null
+  >(null);
 
   // ---------------------------------------------------------------------------
   // Outputs
@@ -246,25 +253,25 @@ export class VirtualScrollerComponent
   /** @internal Item row template. Use `uiScrollerItem` directive. */
   protected readonly itemTpl: Signal<TemplateRef<unknown> | undefined> = contentChild(
     ScrollerItemDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** @internal Full content override template. Use `uiScrollerContent` directive. */
   protected readonly contentTpl: Signal<TemplateRef<unknown> | undefined> = contentChild(
     ScrollerContentDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** @internal Custom loader template. Use `uiScrollerLoader` directive. */
   protected readonly loaderTpl: Signal<TemplateRef<unknown> | undefined> = contentChild(
     ScrollerLoaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** @internal Custom loader icon template. Use `uiScrollerLoaderIcon` directive. */
   protected readonly loaderIconTpl: Signal<TemplateRef<unknown> | undefined> = contentChild(
     ScrollerLoaderIconDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   // ---------------------------------------------------------------------------
@@ -273,12 +280,12 @@ export class VirtualScrollerComponent
 
   private readonly scrollerElementRef: () => ElementRef<HTMLElement> | undefined = viewChild(
     'scrollerEl',
-    { read: ElementRef }
+    { read: ElementRef },
   ) as () => ElementRef<HTMLElement> | undefined;
 
   private readonly contentElementRef: () => ElementRef<HTMLElement> | undefined = viewChild(
     'contentEl',
-    { read: ElementRef }
+    { read: ElementRef },
   ) as () => ElementRef<HTMLElement> | undefined;
 
   // ---------------------------------------------------------------------------
@@ -331,18 +338,23 @@ export class VirtualScrollerComponent
 
   /** @internal */
   protected readonly isVertical: Signal<boolean> = computed(
-    (): boolean => this.orientation() === 'vertical'
+    (): boolean => this.orientation() === 'vertical',
   );
 
   /** @internal */
   protected readonly isHorizontal: Signal<boolean> = computed(
-    (): boolean => this.orientation() === 'horizontal'
+    (): boolean => this.orientation() === 'horizontal',
   );
 
   /** @internal */
   protected readonly isBoth: Signal<boolean> = computed(
-    (): boolean => this.orientation() === 'both'
+    (): boolean => this.orientation() === 'both',
   );
+
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  protected readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
+    'material' | 'bootstrap' | 'minimal'
+  >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
 
   /** @internal Host CSS classes. */
   protected readonly hostClasses: Signal<string> = computed((): string => {
@@ -350,6 +362,8 @@ export class VirtualScrollerComponent
     if (this.inline()) parts.push('uilib-scroller-inline');
     if (this.isHorizontal()) parts.push('uilib-scroller-horizontal');
     if (this.isBoth()) parts.push('uilib-scroller-both');
+    const variantValue: 'material' | 'bootstrap' | 'minimal' = this.effectiveVariant();
+    parts.push(`ui-lib-virtual-scroller--${variantValue}`);
     if (this.styleClass()) parts.push(this.styleClass());
     return parts.join(' ');
   });
@@ -376,12 +390,12 @@ export class VirtualScrollerComponent
 
   /** @internal ARIA row count exposed when the component is used as a grid. */
   protected readonly ariaRowCount: Signal<string | null> = computed((): string | null =>
-    this.contentRole() === 'grid' ? this.totalItemCount().toString() : null
+    this.contentRole() === 'grid' ? this.totalItemCount().toString() : null,
   );
 
   /** @internal ARIA role applied to each rendered item wrapper. */
   protected readonly itemRole: Signal<'listitem' | 'row'> = computed((): 'listitem' | 'row' =>
-    this.contentRole() === 'grid' ? 'row' : 'listitem'
+    this.contentRole() === 'grid' ? 'row' : 'listitem',
   );
 
   /** @internal Polite live region text for loading, empty, and total-count states. */
@@ -412,7 +426,7 @@ export class VirtualScrollerComponent
       return (items as unknown[][])
         .slice(appendOnly ? 0 : firstGrid.rows, lastGrid.rows)
         .map((row: unknown[]): unknown[] =>
-          this.columns() ? row : row.slice(appendOnly ? 0 : firstGrid.cols, lastGrid.cols)
+          this.columns() ? row : row.slice(appendOnly ? 0 : firstGrid.cols, lastGrid.cols),
         );
     } else if (this.isHorizontal() && this.columns()) {
       return items;
@@ -449,7 +463,7 @@ export class VirtualScrollerComponent
         return cols.slice(this.first as number, this.last as number);
       }
       return cols;
-    }
+    },
   );
 
   // ---------------------------------------------------------------------------
@@ -537,7 +551,7 @@ export class VirtualScrollerComponent
       element ??
       this.contentElementRef()?.nativeElement ??
       this.scrollerElementRef()?.nativeElement.querySelector<HTMLElement>(
-        '.uilib-scroller-content'
+        '.uilib-scroller-content',
       ) ??
       null;
   }
@@ -667,7 +681,7 @@ export class VirtualScrollerComponent
       last = this.calcLast(
         this.first as number,
         numItemsInViewport as number,
-        numToleratedItems as number
+        numToleratedItems as number,
       );
     }
 
@@ -680,7 +694,7 @@ export class VirtualScrollerComponent
         ? Array.from(
             { length: (numItemsInViewport as GridIndex).rows },
             (): unknown[] =>
-              Array.from({ length: (numItemsInViewport as GridIndex).cols }) as unknown[]
+              Array.from({ length: (numItemsInViewport as GridIndex).cols }) as unknown[],
           )
         : Array.from({ length: numItemsInViewport as number });
       this.loaderArr.set(loaderItems);
@@ -739,7 +753,7 @@ export class VirtualScrollerComponent
       const size: number = itemSize as number;
       numItemsInViewport = this.calcNumInViewport(
         this.isHorizontal() ? contentWidth : contentHeight,
-        size
+        size,
       );
       numToleratedItems =
         this.internalNumToleratedItems !== undefined
@@ -770,7 +784,7 @@ export class VirtualScrollerComponent
     first: number,
     numInView: number,
     numTol: number,
-    isCols: boolean = false
+    isCols: boolean = false,
   ): number {
     return this.getLast(first + numInView + (first < numTol ? 2 : 3) * numTol, isCols);
   }
@@ -839,7 +853,7 @@ export class VirtualScrollerComponent
           lastGrid.rows,
           numViewGrid.rows,
           numTolArr[0],
-          isScrollDown
+          isScrollDown,
         );
         const triggerColIndex: number = this.calcTriggerIndex(
           currentColIndex,
@@ -847,7 +861,7 @@ export class VirtualScrollerComponent
           lastGrid.cols,
           numViewGrid.cols,
           numTolArr[1],
-          isScrollRight
+          isScrollRight,
         );
         const newFirstRows: number = this.calcFirstFromScroll(
           currentRowIndex,
@@ -855,7 +869,7 @@ export class VirtualScrollerComponent
           firstGrid.rows,
           numViewGrid.rows,
           numTolArr[0],
-          isScrollDown
+          isScrollDown,
         );
         const newFirstCols: number = this.calcFirstFromScroll(
           currentColIndex,
@@ -863,21 +877,21 @@ export class VirtualScrollerComponent
           firstGrid.cols,
           numViewGrid.cols,
           numTolArr[1],
-          isScrollRight
+          isScrollRight,
         );
         newFirst = { rows: newFirstRows, cols: newFirstCols };
         const newLastRows: number = this.calcLastFromScroll(
           currentRowIndex,
           newFirstRows,
           numViewGrid.rows,
-          numTolArr[0]
+          numTolArr[0],
         );
         const newLastCols: number = this.calcLastFromScroll(
           currentColIndex,
           newFirstCols,
           numViewGrid.cols,
           numTolArr[1],
-          true
+          true,
         );
         newLast = { rows: newLastRows, cols: newLastCols };
         const newFirstGrid: GridIndex = newFirst as GridIndex;
@@ -907,7 +921,7 @@ export class VirtualScrollerComponent
           lastNum,
           numInView,
           numT,
-          isScrollDownOrRight
+          isScrollDownOrRight,
         );
         const newFirstNum: number = this.calcFirstFromScroll(
           currentIndex,
@@ -915,13 +929,13 @@ export class VirtualScrollerComponent
           firstNum,
           numInView,
           numT,
-          isScrollDownOrRight
+          isScrollDownOrRight,
         );
         const newLastNum: number = this.calcLastFromScroll(
           currentIndex,
           newFirstNum,
           numInView,
-          numT
+          numT,
         );
         newFirst = newFirstNum;
         newLast = newLastNum;
@@ -953,7 +967,7 @@ export class VirtualScrollerComponent
         : (first as number);
       const lazyLast: number = Math.min(
         step ? (this.getPageByFirst(first) + 1) * step : (last as number),
-        itemCount
+        itemCount,
       );
       const lazyEvent: VirtualScrollerLazyLoadEvent = { first: lazyFirst, last: lazyLast };
       if (
@@ -1043,14 +1057,14 @@ export class VirtualScrollerComponent
         event.preventDefault();
         this.scrollViewportBy(
           this.isHorizontal() ? 0 : Math.max(1, element.clientHeight),
-          this.isHorizontal() ? Math.max(1, element.clientWidth) : 0
+          this.isHorizontal() ? Math.max(1, element.clientWidth) : 0,
         );
         return;
       case VIRTUAL_SCROLLER_KEYBOARD_KEYS.PageUp:
         event.preventDefault();
         this.scrollViewportBy(
           this.isHorizontal() ? 0 : -Math.max(1, element.clientHeight),
-          this.isHorizontal() ? -Math.max(1, element.clientWidth) : 0
+          this.isHorizontal() ? -Math.max(1, element.clientWidth) : 0,
         );
         return;
       case KEYBOARD_KEYS.Home:
@@ -1090,7 +1104,7 @@ export class VirtualScrollerComponent
     last: number,
     numInView: number,
     numTol: number,
-    isForward: boolean
+    isForward: boolean,
   ): number {
     return currentIndex <= numTol
       ? numTol
@@ -1106,7 +1120,7 @@ export class VirtualScrollerComponent
     currentFirst: number,
     numInView: number,
     numTol: number,
-    isForward: boolean
+    isForward: boolean,
   ): number {
     if (currentIndex <= numTol) return 0;
     return Math.max(
@@ -1117,7 +1131,7 @@ export class VirtualScrollerComponent
           : currentIndex - numTol
         : currentIndex > triggerIndex
           ? currentFirst
-          : currentIndex - 2 * numTol
+          : currentIndex - 2 * numTol,
     );
   }
 
@@ -1127,7 +1141,7 @@ export class VirtualScrollerComponent
     newFirst: number,
     numInView: number,
     numTol: number,
-    isCols: boolean = false
+    isCols: boolean = false,
   ): number {
     let lastValue: number = newFirst + numInView + 2 * numTol;
     if (currentIndex >= numTol) lastValue += numTol + 1;
@@ -1294,7 +1308,7 @@ export class VirtualScrollerComponent
   public scrollInView(
     index: number | [number, number],
     to: VirtualScrollerToType,
-    behavior: ScrollBehavior = 'auto'
+    behavior: ScrollBehavior = 'auto',
   ): void {
     const { first, viewport } = this.getRenderedRange();
     const itemSize: number | [number, number] = this.itemSize();
@@ -1457,7 +1471,7 @@ export class VirtualScrollerComponent
   /** @internal Returns loader metadata for a locally-rendered loader index. */
   protected getLoaderOptions(
     loaderIndex: number,
-    extra?: { numCols?: number }
+    extra?: { numCols?: number },
   ): VirtualScrollerLoaderOptions {
     const count: number = this.loaderArr().length;
     return {
@@ -1493,7 +1507,7 @@ export class VirtualScrollerComponent
         this.getItemOptions(itemIndex),
       getLoaderOptions: (
         loaderIndex: number,
-        extra?: Record<string, unknown>
+        extra?: Record<string, unknown>,
       ): VirtualScrollerLoaderOptions => this.getLoaderOptions(loaderIndex, extra),
     };
   }

@@ -51,20 +51,20 @@ let inputNumberIdCounter: number = 0;
   ],
   host: {
     class: 'ui-lib-input-number',
-    '[class.ui-lib-input-number-stacked]': 'showButtons() && buttonLayout() === "stacked"',
-    '[class.ui-lib-input-number-horizontal]': 'showButtons() && buttonLayout() === "horizontal"',
-    '[class.ui-lib-input-number-vertical]': 'showButtons() && buttonLayout() === "vertical"',
-    '[class.ui-lib-input-number-sm]': 'size() === "sm"',
-    '[class.ui-lib-input-number-md]': 'size() === "md"',
-    '[class.ui-lib-input-number-lg]': 'size() === "lg"',
-    '[class.ui-lib-input-number-filled]':
+    '[class.ui-lib-input-number--stacked]': 'showButtons() && buttonLayout() === "stacked"',
+    '[class.ui-lib-input-number--horizontal]': 'showButtons() && buttonLayout() === "horizontal"',
+    '[class.ui-lib-input-number--vertical]': 'showButtons() && buttonLayout() === "vertical"',
+    '[class.ui-lib-input-number--sm]': 'size() === "sm"',
+    '[class.ui-lib-input-number--md]': 'size() === "md"',
+    '[class.ui-lib-input-number--lg]': 'size() === "lg"',
+    '[class.ui-lib-input-number--filled]':
       'filled() || value() !== null || displayValue().length > 0',
-    '[class.ui-lib-input-number-fluid]': 'fluid()',
-    '[class.ui-lib-input-number-invalid]': 'invalid()',
-    '[class.ui-lib-input-number-disabled]': 'isControlDisabled()',
-    '[class.uilib-variant-material]': 'effectiveVariant() === "material"',
-    '[class.uilib-variant-bootstrap]': 'effectiveVariant() === "bootstrap"',
-    '[class.uilib-variant-minimal]': 'effectiveVariant() === "minimal"',
+    '[class.ui-lib-input-number--fluid]': 'fluid()',
+    '[class.ui-lib-input-number--invalid]': 'invalid()',
+    '[class.ui-lib-input-number--disabled]': 'isControlDisabled()',
+    '[class.ui-lib-input-number--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-input-number--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-input-number--minimal]': 'effectiveVariant() === "minimal"',
     '[class.uilib-inputwrapper-filled]': 'value() !== null || displayValue().length > 0',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
   },
@@ -210,7 +210,7 @@ let inputNumberIdCounter: number = 0;
 export class InputNumberComponent implements ControlValueAccessor {
   public readonly value: ModelSignal<number | null> = model<number | null>(null);
   public readonly mode: InputSignal<InputNumberMode> = input<InputNumberMode>(
-    INPUT_NUMBER_DEFAULTS.mode
+    INPUT_NUMBER_DEFAULTS.mode,
   );
   public readonly format: InputSignal<boolean> = input<boolean>(INPUT_NUMBER_DEFAULTS.format);
   public readonly locale: InputSignal<string | undefined> = input<string | undefined>(undefined);
@@ -220,13 +220,13 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly localeMatcher: InputSignal<InputNumberLocaleMatcher> =
     input<InputNumberLocaleMatcher>(INPUT_NUMBER_DEFAULTS.localeMatcher);
   public readonly useGrouping: InputSignal<boolean> = input<boolean>(
-    INPUT_NUMBER_DEFAULTS.useGrouping
+    INPUT_NUMBER_DEFAULTS.useGrouping,
   );
   public readonly minFractionDigits: InputSignal<number | null> = input<number | null>(
-    INPUT_NUMBER_DEFAULTS.minFractionDigits
+    INPUT_NUMBER_DEFAULTS.minFractionDigits,
   );
   public readonly maxFractionDigits: InputSignal<number | null> = input<number | null>(
-    INPUT_NUMBER_DEFAULTS.maxFractionDigits
+    INPUT_NUMBER_DEFAULTS.maxFractionDigits,
   );
   public readonly prefix: InputSignal<string> = input<string>('');
   public readonly suffix: InputSignal<string> = input<string>('');
@@ -234,14 +234,14 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly max: InputSignal<number | null> = input<number | null>(INPUT_NUMBER_DEFAULTS.max);
   public readonly step: InputSignal<number> = input<number>(INPUT_NUMBER_DEFAULTS.step);
   public readonly showButtons: InputSignal<boolean> = input<boolean>(
-    INPUT_NUMBER_DEFAULTS.showButtons
+    INPUT_NUMBER_DEFAULTS.showButtons,
   );
   public readonly buttonLayout: InputSignal<InputNumberButtonLayout> =
     input<InputNumberButtonLayout>(INPUT_NUMBER_DEFAULTS.buttonLayout);
   public readonly showClear: InputSignal<boolean> = input<boolean>(INPUT_NUMBER_DEFAULTS.showClear);
   public readonly placeholder: InputSignal<string> = input<string>('');
   public readonly inputId: InputSignal<string> = input<string>(
-    `ui-lib-input-number-${++inputNumberIdCounter}`
+    `ui-lib-input-number-${++inputNumberIdCounter}`,
   );
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly readonly: InputSignal<boolean> = input<boolean>(false);
@@ -256,10 +256,10 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly required: InputSignal<boolean> = input<boolean>(false);
   public readonly ariaLabel: InputSignal<string | undefined> = input<string | undefined>(undefined);
   public readonly ariaLabelledBy: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly ariaDescribedBy: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly tabindex: InputSignal<number> = input<number>(0);
   public readonly autocomplete: InputSignal<string> = input<string>('off');
@@ -302,7 +302,7 @@ export class InputNumberComponent implements ControlValueAccessor {
       }
       const formatted: string = this.numberFormatService.formatValue(currentValue);
       return formatted.length > 0 ? formatted : null;
-    }
+    },
   );
 
   private readonly numberFormatConfig: Signal<NumberFormatConfig> = computed<NumberFormatConfig>(
@@ -337,7 +337,7 @@ export class InputNumberComponent implements ControlValueAccessor {
       }
 
       return config;
-    }
+    },
   );
 
   constructor() {
@@ -398,7 +398,7 @@ export class InputNumberComponent implements ControlValueAccessor {
     this.stopSpinRepeat();
 
     const currentValue: number | null = this.clampValue(
-      this.numberFormatService.parseValue(this.displayValue())
+      this.numberFormatService.parseValue(this.displayValue()),
     );
     this.value.set(currentValue);
     this.onModelChange(currentValue);

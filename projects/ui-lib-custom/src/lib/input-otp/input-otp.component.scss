@@ -83,14 +83,14 @@ ui-lib-input-otp .ui-lib-input-otp-cell {
 // Size variants
 // ---------------------------------------------------------------------------
 
-ui-lib-input-otp.ui-lib-input-otp-sm {
+ui-lib-input-otp.ui-lib-input-otp--sm {
   --uilib-input-otp-cell-width: 1.875rem;
   --uilib-input-otp-cell-height: 1.875rem;
   --uilib-input-otp-font-size: var(--uilib-font-size-sm, 0.875rem);
   --uilib-input-otp-gap: var(--uilib-space-1, 0.25rem);
 }
 
-ui-lib-input-otp.ui-lib-input-otp-lg {
+ui-lib-input-otp.ui-lib-input-otp--lg {
   --uilib-input-otp-cell-width: 3.25rem;
   --uilib-input-otp-cell-height: 3.25rem;
   --uilib-input-otp-font-size: var(--uilib-font-size-lg, 1.125rem);
@@ -101,7 +101,7 @@ ui-lib-input-otp.ui-lib-input-otp-lg {
 // Filled appearance
 // ---------------------------------------------------------------------------
 
-ui-lib-input-otp.ui-lib-input-otp-filled .ui-lib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp--filled .ui-lib-input-otp-cell {
   background: var(--uilib-input-otp-filled-bg);
   border-color: transparent;
 }
@@ -110,7 +110,7 @@ ui-lib-input-otp.ui-lib-input-otp-filled .ui-lib-input-otp-cell {
 // Invalid state
 // ---------------------------------------------------------------------------
 
-ui-lib-input-otp.ui-lib-input-otp-invalid .ui-lib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp--invalid .ui-lib-input-otp-cell {
   border-color: var(--uilib-input-otp-invalid-border-color);
 }
 
@@ -124,7 +124,7 @@ ui-lib-input-otp .ui-lib-input-otp-error {
 // Disabled state
 // ---------------------------------------------------------------------------
 
-ui-lib-input-otp.ui-lib-input-otp-disabled {
+ui-lib-input-otp.ui-lib-input-otp--disabled {
   opacity: var(--uilib-input-otp-disabled-opacity);
 
   .ui-lib-input-otp-cell {
@@ -145,7 +145,7 @@ ui-lib-input-otp.ui-lib-input-otp-readonly .ui-lib-input-otp-cell {
 // ---------------------------------------------------------------------------
 
 // — Material —
-.uilib-variant-material ui-lib-input-otp .ui-lib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp--material .ui-lib-input-otp-cell {
   border-width: 0 0 0.125rem;
   border-radius: 0;
   box-shadow: none;
@@ -157,13 +157,13 @@ ui-lib-input-otp.ui-lib-input-otp-readonly .ui-lib-input-otp-cell {
 }
 
 // — Bootstrap —
-.uilib-variant-bootstrap ui-lib-input-otp .ui-lib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp--bootstrap .ui-lib-input-otp-cell {
   border-width: 0.0625rem;
   border-radius: var(--uilib-input-otp-border-radius);
 }
 
 // — Minimal —
-.uilib-variant-minimal ui-lib-input-otp .ui-lib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp--minimal .ui-lib-input-otp-cell {
   border-color: transparent;
   background: color-mix(
     in srgb,

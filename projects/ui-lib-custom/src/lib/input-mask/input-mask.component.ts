@@ -5,6 +5,7 @@ import {
   computed,
   effect,
   forwardRef,
+  inject,
   input,
   output,
   signal,
@@ -20,6 +21,7 @@ import type {
 } from '@angular/core';
 import type { AfterViewInit, OnDestroy } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { INPUT_MASK_DEFAULTS } from './input-mask.types';
 import type { Caret, InputMaskCompleteEvent, InputMaskSize } from './input-mask.types';
 import { MaskEngine } from './mask-engine';
@@ -52,12 +54,15 @@ let nextInputMaskInstanceId: number = 0;
   ],
   host: {
     class: 'ui-lib-input-mask',
-    '[class.ui-lib-input-mask-sm]': 'size() === "sm"',
-    '[class.ui-lib-input-mask-lg]': 'size() === "lg"',
-    '[class.ui-lib-input-mask-filled]': 'filled()',
-    '[class.ui-lib-input-mask-fluid]': 'fluid()',
-    '[class.ui-lib-input-mask-invalid]': 'isInvalid()',
-    '[class.ui-lib-input-mask-disabled]': 'isControlDisabled()',
+    '[class.ui-lib-input-mask--sm]': 'size() === "sm"',
+    '[class.ui-lib-input-mask--lg]': 'size() === "lg"',
+    '[class.ui-lib-input-mask--filled]': 'filled()',
+    '[class.ui-lib-input-mask--fluid]': 'fluid()',
+    '[class.ui-lib-input-mask--invalid]': 'isInvalid()',
+    '[class.ui-lib-input-mask--disabled]': 'isControlDisabled()',
+    '[class.ui-lib-input-mask--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-input-mask--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-input-mask--minimal]': 'effectiveVariant() === "minimal"',
     '[class.uilib-inputwrapper-filled]': 'isFilled()',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
   },
@@ -114,21 +119,25 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   public readonly showClear: InputSignal<boolean> = input<boolean>(INPUT_MASK_DEFAULTS.showClear);
   public readonly type: InputSignal<string> = input<string>(INPUT_MASK_DEFAULTS.type);
   public readonly characterPattern: InputSignal<string> = input<string>(
-    INPUT_MASK_DEFAULTS.characterPattern
+    INPUT_MASK_DEFAULTS.characterPattern,
   );
   public readonly size: InputSignal<InputMaskSize> = input<InputMaskSize>('md');
   public readonly filled: InputSignal<boolean> = input<boolean>(false);
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly readonly: InputSignal<boolean> = input<boolean>(false);
   public readonly placeholder: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly autocomplete: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly name: InputSignal<string | undefined> = input<string | undefined>(undefined);
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  /** Design variant override. When null the active global theme variant is used. */
+  public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal' | null> = input<
+    'material' | 'bootstrap' | 'minimal' | null
+  >(null);
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
   public readonly maskHint: InputSignal<string | null> = input<string | null>(null);
@@ -149,10 +158,11 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   private caretTimeoutId: ReturnType<typeof setTimeout> | null = null;
   private androidChrome: boolean = false;
   private viewInitialized: boolean = false;
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly hasIncompleteMask: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly blockedCharacterMessage: WritableSignal<string | null> = signal<string | null>(
-    null
+    null,
   );
 
   protected readonly value: WritableSignal<string | null> = signal<string | null>(null);
@@ -160,29 +170,34 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   protected readonly isFocused: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly inputMaskId: string = `ui-lib-input-mask-${nextInputMaskInstanceId++}`;
   protected readonly controlId: Signal<string> = computed<string>(
-    (): string => this.id() ?? this.inputMaskId
+    (): string => this.id() ?? this.inputMaskId,
   );
   protected readonly hintId: Signal<string> = computed<string>(
-    (): string => `${this.controlId()}-hint`
+    (): string => `${this.controlId()}-hint`,
   );
   protected readonly errorId: Signal<string> = computed<string>(
-    (): string => `${this.controlId()}-error`
+    (): string => `${this.controlId()}-error`,
   );
   protected readonly maskFormatHint: Signal<string | null> = computed<string | null>(
-    (): string | null => this.maskHint() ?? (this.mask().length > 0 ? this.mask() : null)
+    (): string | null => this.maskHint() ?? (this.mask().length > 0 ? this.mask() : null),
   );
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  protected readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
+    'material' | 'bootstrap' | 'minimal'
+  >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
+
   protected readonly isInvalid: Signal<boolean> = computed<boolean>(
-    (): boolean => this.invalid() || this.hasIncompleteMask()
+    (): boolean => this.invalid() || this.hasIncompleteMask(),
   );
   protected readonly showError: Signal<boolean> = computed<boolean>((): boolean =>
-    this.isInvalid()
+    this.isInvalid(),
   );
   protected readonly resolvedErrorMessage: Signal<string> = computed<string>(
     (): string =>
       this.errorMessage() ??
       (this.hasIncompleteMask()
         ? INPUT_MASK_DEFAULT_ERROR_MESSAGES.incomplete
-        : INPUT_MASK_DEFAULT_ERROR_MESSAGES.invalid)
+        : INPUT_MASK_DEFAULT_ERROR_MESSAGES.invalid),
   );
   protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -194,7 +209,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
         ids.push(this.errorId());
       }
       return ids.length > 0 ? ids.join(' ') : null;
-    }
+    },
   );
   protected readonly ariaValueText: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -206,7 +221,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
 
       const unmaskedValue: string = this.maskEngine.getUnmaskedValue();
       return unmaskedValue.length > 0 ? unmaskedValue : null;
-    }
+    },
   );
 
   private onModelChange: (value: string | null) => void = (): void => {};
@@ -451,7 +466,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
         this.inputChanged.emit(event);
       } else {
         this.blockedCharacterMessage.set(
-          `Character "${character}" does not match the expected format.`
+          `Character "${character}" does not match the expected format.`,
         );
       }
     }

@@ -19,7 +19,7 @@ import type { KnobChangeEvent } from './knob.types';
 
 function queryEl<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
   if (!element) {
@@ -69,7 +69,7 @@ class KnobNgModelHostComponent {
   public readonly strokeWidth: WritableSignal<number> = signal<number>(14);
   public readonly valueTemplate: WritableSignal<string | null> = signal<string | null>(null);
   public readonly ariaLabel: WritableSignal<string | undefined> = signal<string | undefined>(
-    undefined
+    undefined,
   );
   public value: number = 0;
   public readonly changeEvents: KnobChangeEvent[] = [];
@@ -104,7 +104,7 @@ class KnobReactiveHostComponent {
 // ---------------------------------------------------------------------------
 
 async function createNgModelFixture(
-  initialValue: number = 0
+  initialValue: number = 0,
 ): Promise<ComponentFixture<KnobNgModelHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [KnobNgModelHostComponent],
@@ -191,7 +191,7 @@ describe('KnobComponent', (): void => {
     it('should apply ui-lib-knob-md by default', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
-      expect(host.classList).toContain('ui-lib-knob-md');
+      expect(host.classList).toContain('ui-lib-knob--md');
     });
 
     it('should apply ui-lib-knob-sm when size is sm', async (): Promise<void> => {
@@ -199,7 +199,7 @@ describe('KnobComponent', (): void => {
       fixture.componentInstance.size.set('sm');
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
-      expect(host.classList).toContain('ui-lib-knob-sm');
+      expect(host.classList).toContain('ui-lib-knob--sm');
     });
 
     it('should apply ui-lib-knob-lg when size is lg', async (): Promise<void> => {
@@ -207,7 +207,7 @@ describe('KnobComponent', (): void => {
       fixture.componentInstance.size.set('lg');
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
-      expect(host.classList).toContain('ui-lib-knob-lg');
+      expect(host.classList).toContain('ui-lib-knob--lg');
     });
   });
 
@@ -219,7 +219,7 @@ describe('KnobComponent', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
-      expect(host.classList).toContain('ui-lib-knob-disabled');
+      expect(host.classList).toContain('ui-lib-knob--disabled');
     });
 
     it('should set aria-disabled when disabled', async (): Promise<void> => {
@@ -415,7 +415,7 @@ describe('KnobComponent', (): void => {
       fixture.detectChanges();
 
       const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
-      expect(host.classList).toContain('ui-lib-knob-disabled');
+      expect(host.classList).toContain('ui-lib-knob--disabled');
     });
   });
 
