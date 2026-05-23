@@ -36,6 +36,7 @@ import {
   AUTOCOMPLETE_OPTION_ID_SEPARATOR,
   AUTOCOMPLETE_OPTION_ROLE,
 } from './autocomplete.constants';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type {
   AutoCompleteCompleteEvent,
   AutoCompleteDropdownClickEvent,
@@ -84,9 +85,9 @@ const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
   ],
   host: {
     class: 'ui-lib-autocomplete',
-    '[class.ui-lib-autocomplete--material]': 'variant() === "material"',
-    '[class.ui-lib-autocomplete--bootstrap]': 'variant() === "bootstrap"',
-    '[class.ui-lib-autocomplete--minimal]': 'variant() === "minimal"',
+    '[class.ui-lib-autocomplete--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-autocomplete--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-autocomplete--minimal]': 'effectiveVariant() === "minimal"',
     '[class.ui-lib-autocomplete--small]': 'normalizedSize() === "small"',
     '[class.ui-lib-autocomplete--medium]': 'normalizedSize() === "medium"',
     '[class.ui-lib-autocomplete--large]': 'normalizedSize() === "large"',
@@ -104,13 +105,13 @@ const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
 export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked, OnDestroy {
   public readonly suggestions: InputSignal<unknown[]> = input<unknown[]>([]);
   public readonly optionLabel: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly optionValue: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly optionDisabled: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   public readonly optionGroupLabel: InputSignal<string> = input<string>('label');
   public readonly optionGroupChildren: InputSignal<string> = input<string>('items');
@@ -136,8 +137,15 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     string | RegExp | undefined
   >(undefined);
 
-  public readonly variant: InputSignal<AutoCompleteVariant> =
-    input<AutoCompleteVariant>('material');
+  /** Design variant. Falls back to the global ThemeConfigService variant when null. */
+  public readonly variant: InputSignal<AutoCompleteVariant | null> =
+    input<AutoCompleteVariant | null>(null);
+
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  public readonly effectiveVariant: Signal<AutoCompleteVariant> = computed<AutoCompleteVariant>(
+    (): AutoCompleteVariant =>
+      this.variant() ?? (this.themeConfig.variant() as AutoCompleteVariant),
+  );
   public readonly size: InputSignal<AutoCompleteSize> = input<AutoCompleteSize>('md');
   public readonly placeholder: InputSignal<string> = input<string>('');
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
@@ -174,39 +182,39 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
   public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteItemDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly selectedItemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteSelectedItemDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly groupTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteGroupDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteFooterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteEmptyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly loadingTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteLoadingDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly dropdownIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteDropdownIconDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly removeTokenIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteRemoveTokenIconDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   protected readonly panelVisible: WritableSignal<boolean> = signal<boolean>(false);
@@ -220,16 +228,17 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   public readonly optionRole: string = AUTOCOMPLETE_OPTION_ROLE;
   public readonly emptyText: string = AUTOCOMPLETE_EMPTY_TEXT;
 
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly panelElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
     'panelElement',
-    { read: ElementRef }
+    { read: ElementRef },
   );
   private readonly containerElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
     'containerElement',
-    { read: ElementRef }
+    { read: ElementRef },
   );
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
@@ -267,7 +276,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
         return null;
       }
       return this.getOptionId(index);
-    }
+    },
   );
 
   /**
@@ -311,7 +320,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   });
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   protected readonly selectedChips: Signal<unknown[]> = computed<unknown[]>((): unknown[] => {
@@ -336,19 +345,19 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   });
 
   protected readonly focusedChipIndex: Signal<number> = computed<number>((): number =>
-    this.focusedChipIndexState()
+    this.focusedChipIndexState(),
   );
 
   protected readonly virtualScrollEnabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.virtualScroll() && !this.group() && this.virtualScrollItemSize() > 0
+    (): boolean => this.virtualScroll() && !this.group() && this.virtualScrollItemSize() > 0,
   );
 
   private readonly virtualItemSizePx: Signal<number> = computed<number>((): number =>
-    Math.max(1, this.virtualScrollItemSize() || 44)
+    Math.max(1, this.virtualScrollItemSize() || 44),
   );
 
   private readonly virtualViewportHeightPx: Signal<number> = computed<number>((): number =>
-    this.parsePixelValue(this.scrollHeight(), 200)
+    this.parsePixelValue(this.scrollHeight(), 200),
   );
 
   protected readonly virtualStartIndex: Signal<number> = computed<number>((): number => {
@@ -364,16 +373,16 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   protected readonly virtualEndIndex: Signal<number> = computed<number>((): number => {
     return Math.min(
       this.visibleOptions().length,
-      this.virtualStartIndex() + this.virtualVisibleCount()
+      this.virtualStartIndex() + this.virtualVisibleCount(),
     );
   });
 
   protected readonly virtualOffsetPx: Signal<number> = computed<number>(
-    (): number => this.virtualStartIndex() * this.virtualItemSizePx()
+    (): number => this.virtualStartIndex() * this.virtualItemSizePx(),
   );
 
   protected readonly virtualTotalHeightPx: Signal<number> = computed<number>(
-    (): number => this.visibleOptions().length * this.virtualItemSizePx()
+    (): number => this.visibleOptions().length * this.virtualItemSizePx(),
   );
 
   protected readonly virtualOptions: Signal<unknown[]> = computed<unknown[]>((): unknown[] => {
@@ -608,7 +617,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     this.focusedChipIndexState.set(index);
     requestAnimationFrame((): void => {
       const element: HTMLElement | null = this.hostElement.nativeElement.querySelector(
-        `[data-chip-index=\"${index}\"]`
+        `[data-chip-index=\"${index}\"]`,
       );
       element?.focus();
     });
@@ -652,7 +661,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     if (this.multiple()) {
       const currentValues: unknown[] = this.selectedChips();
       const alreadySelected: boolean = currentValues.some(
-        (current: unknown): boolean => current === resolvedValue
+        (current: unknown): boolean => current === resolvedValue,
       );
 
       if (alreadySelected && this.unique()) {
@@ -695,7 +704,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
     const removedValue: unknown = chips[index];
     const nextValues: unknown[] = chips.filter(
-      (_: unknown, chipIndex: number): boolean => chipIndex !== index
+      (_: unknown, chipIndex: number): boolean => chipIndex !== index,
     );
 
     this.modelValue.set(nextValues);
@@ -799,7 +808,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     }
 
     const matchedOption: unknown | undefined = this.visibleOptions().find(
-      (option: unknown): boolean => this.getOptionValue(option) === chip
+      (option: unknown): boolean => this.getOptionValue(option) === chip,
     );
 
     if (matchedOption !== undefined) {
@@ -970,7 +979,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
     const matched: unknown | undefined = this.visibleOptions().find(
       (option: unknown): boolean =>
-        this.getOptionLabel(option).toLowerCase() === currentQuery.toLowerCase()
+        this.getOptionLabel(option).toLowerCase() === currentQuery.toLowerCase(),
     );
 
     if (matched !== undefined) {
@@ -1092,7 +1101,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     }
 
     const matchedOption: unknown | undefined = this.visibleOptions().find(
-      (option: unknown): boolean => this.getOptionValue(option) === value
+      (option: unknown): boolean => this.getOptionValue(option) === value,
     );
 
     if (matchedOption !== undefined) {
@@ -1201,7 +1210,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     }
 
     const viewport: HTMLElement | null = this.hostElement.nativeElement.querySelector(
-      '.ui-autocomplete-virtual-viewport'
+      '.ui-autocomplete-virtual-viewport',
     );
     if (!viewport) {
       return;
@@ -1239,7 +1248,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
       mountTarget.appendChild(panel);
     }
 
-    this.syncPanelClasses(panel, this.variant());
+    this.syncPanelClasses(panel, this.effectiveVariant());
     this.syncPanelCssVariables(panel);
 
     panel.classList.add('ui-autocomplete-panel--overlay');
@@ -1296,7 +1305,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
       availableBelow < Math.min(maxHeight, 180) && availableAbove > availableBelow;
     const safeLeft: number = Math.min(
       Math.max(viewportPadding, rect.left),
-      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding),
     );
 
     panel.style.position = 'fixed';
@@ -1319,7 +1328,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     }
 
     const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
-      this.hostElement.nativeElement
+      this.hostElement.nativeElement,
     );
     for (let index: number = 0; index < hostStyles.length; index += 1) {
       const name: string = hostStyles.item(index);

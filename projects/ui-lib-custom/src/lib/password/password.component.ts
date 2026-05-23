@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   forwardRef,
+  inject,
   input,
   output,
   signal,
@@ -13,6 +14,7 @@ import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@ang
 import type { ControlValueAccessor } from '@angular/forms';
 import { PASSWORD_DEFAULTS } from './password.types';
 import type { PasswordSize, PasswordStrength, PasswordVariant } from './password.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 /** Module-level counter for generating unique IDs across all Password instances. */
 let nextPasswordId: number = 0;
@@ -42,14 +44,16 @@ let nextPasswordId: number = 0;
     '[class.ui-lib-password-disabled]': 'isControlDisabled()',
     '[class.uilib-inputwrapper-filled]': 'isFilled()',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
-    '[class.uilib-variant-material]': 'variant() === "material"',
-    '[class.uilib-variant-bootstrap]': 'variant() === "bootstrap"',
-    '[class.uilib-variant-minimal]': 'variant() === "minimal"',
+    '[class.uilib-variant-material]': 'effectiveVariant() === "material"',
+    '[class.uilib-variant-bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.uilib-variant-minimal]': 'effectiveVariant() === "minimal"',
   },
 })
 export class PasswordComponent implements ControlValueAccessor {
   /** Unique ID for the inner native input element. */
   public readonly passwordId: string = 'ui-lib-password-' + ++nextPasswordId;
+
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   /** ID for the strength live region — use as `aria-describedby` on an associated label. */
   public readonly strengthId: string = this.passwordId + '-strength';
@@ -57,15 +61,22 @@ export class PasswordComponent implements ControlValueAccessor {
   /** ID for the validation error message region when `invalid` is true. */
   public readonly errorId: string = this.passwordId + '-error';
 
-  /** Design variant: material, bootstrap, or minimal. */
-  public readonly variant: InputSignal<PasswordVariant> = input<PasswordVariant>('material');
+  /** Design variant: material, bootstrap, or minimal. Falls back to the global ThemeConfigService variant when null. */
+  public readonly variant: InputSignal<PasswordVariant | null> = input<PasswordVariant | null>(
+    null,
+  );
+
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  public readonly effectiveVariant: Signal<PasswordVariant> = computed<PasswordVariant>(
+    (): PasswordVariant => this.variant() ?? (this.themeConfig.variant() as PasswordVariant),
+  );
 
   /** Size token: sm, md, or lg. */
   public readonly size: InputSignal<PasswordSize> = input<PasswordSize>('md');
 
   /** Visual appearance: outlined (default) or filled background. */
   public readonly appearance: InputSignal<'outlined' | 'filled'> = input<'outlined' | 'filled'>(
-    'outlined'
+    'outlined',
   );
 
   /** Whether the control is disabled. */
@@ -91,12 +102,12 @@ export class PasswordComponent implements ControlValueAccessor {
 
   /** Placeholder text for the native input. */
   public readonly placeholder: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Autocomplete attribute value for the native input. */
   public readonly autocomplete: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Name attribute for the native input. */
@@ -110,7 +121,7 @@ export class PasswordComponent implements ControlValueAccessor {
 
   /** Space-separated IDs of elements that label this input. */
   public readonly ariaLabelledBy: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Maximum character length constraint on the input. */
@@ -139,12 +150,12 @@ export class PasswordComponent implements ControlValueAccessor {
 
   /** Additional CSS class applied to the inner input element. */
   public readonly inputStyleClass: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Optional validation error text announced when `invalid` is true. */
   public readonly errorMessage: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Emitted when the input receives focus. */
@@ -163,7 +174,7 @@ export class PasswordComponent implements ControlValueAccessor {
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
 
   protected readonly isFilled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.inputValue().length > 0
+    (): boolean => this.inputValue().length > 0,
   );
 
   /** Current password strength level, or null when the field is empty. */
@@ -180,7 +191,7 @@ export class PasswordComponent implements ControlValueAccessor {
         return 'medium';
       }
       return 'weak';
-    }
+    },
   );
 
   /** CSS width percentage for the strength meter fill bar. */
@@ -230,7 +241,7 @@ export class PasswordComponent implements ControlValueAccessor {
 
   /** Native input type — switches between "password" and "text" when the mask is toggled. */
   protected readonly inputType: Signal<'text' | 'password'> = computed<'text' | 'password'>(
-    (): 'text' | 'password' => (this.passwordVisible() ? 'text' : 'password')
+    (): 'text' | 'password' => (this.passwordVisible() ? 'text' : 'password'),
   );
 
   /** `aria-describedby` value combining strength and error references when available. */
@@ -244,7 +255,7 @@ export class PasswordComponent implements ControlValueAccessor {
         ids.push(this.errorId);
       }
       return ids.length > 0 ? ids.join(' ') : null;
-    }
+    },
   );
 
   private onModelChange: (value: string | null) => void = (): void => {};

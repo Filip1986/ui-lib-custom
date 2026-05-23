@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
   computed,
   contentChild,
+  inject,
   input,
   output,
   signal,
@@ -34,6 +35,7 @@ import {
   UploadFileDirective,
   UploadHeaderDirective,
 } from './upload.template-directives';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   UPLOAD_DEFAULT_CANCEL_LABEL,
   UPLOAD_DEFAULT_CHOOSE_LABEL,
@@ -75,9 +77,9 @@ let nextUploadId: number = 0;
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'ui-lib-upload',
-    '[class.ui-lib-upload--material]': 'variant() === "material"',
-    '[class.ui-lib-upload--bootstrap]': 'variant() === "bootstrap"',
-    '[class.ui-lib-upload--minimal]': 'variant() === "minimal"',
+    '[class.ui-lib-upload--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-upload--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-upload--minimal]': 'effectiveVariant() === "minimal"',
     '[class.ui-lib-upload--sm]': 'size() === "sm"',
     '[class.ui-lib-upload--md]': 'size() === "md"',
     '[class.ui-lib-upload--lg]': 'size() === "lg"',
@@ -87,10 +89,17 @@ let nextUploadId: number = 0;
   },
 })
 export class UploadComponent implements OnDestroy {
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
   // ─── Inputs ────────────────────────────────────────────────────────────────
 
-  /** Design variant. Defaults to `'material'`. */
-  public readonly variant: InputSignal<UploadVariant> = input<UploadVariant>('material');
+  /** Design variant. Falls back to the global ThemeConfigService variant when null. */
+  public readonly variant: InputSignal<UploadVariant | null> = input<UploadVariant | null>(null);
+
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  public readonly effectiveVariant: Signal<UploadVariant> = computed<UploadVariant>(
+    (): UploadVariant => this.variant() ?? (this.themeConfig.variant() as UploadVariant),
+  );
 
   /** Size token. Defaults to `'md'`. */
   public readonly size: InputSignal<UploadSize> = input<UploadSize>('md');
@@ -148,17 +157,17 @@ export class UploadComponent implements OnDestroy {
 
   /** Validation message template for oversized files. `{0}` = name, `{1}` = limit. */
   public readonly invalidFileSizeMessage: InputSignal<string> = input<string>(
-    UPLOAD_INVALID_FILE_SIZE_MESSAGE
+    UPLOAD_INVALID_FILE_SIZE_MESSAGE,
   );
 
   /** Validation message template for wrong file types. `{0}` = name, `{1}` = accepted types. */
   public readonly invalidFileTypeMessage: InputSignal<string> = input<string>(
-    UPLOAD_INVALID_FILE_TYPE_MESSAGE
+    UPLOAD_INVALID_FILE_TYPE_MESSAGE,
   );
 
   /** Validation message template when the file limit is exceeded. `{0}` = limit. */
   public readonly invalidFileLimitMessage: InputSignal<string> = input<string>(
-    UPLOAD_INVALID_FILE_LIMIT_MESSAGE
+    UPLOAD_INVALID_FILE_LIMIT_MESSAGE,
   );
 
   /** Text shown inside the drop zone when no files are queued. */
@@ -190,25 +199,25 @@ export class UploadComponent implements OnDestroy {
   /** Optional custom header template (replaces the default toolbar). */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     UploadHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional custom content template (replaces the drop zone + file list). */
   public readonly contentTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     UploadContentDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional custom empty-state template. */
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     UploadEmptyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional custom file-item template. Context: `{ $implicit: UploadFileItem, index: number }`. */
   public readonly fileTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     UploadFileDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   // ─── Instance identity ─────────────────────────────────────────────────────
@@ -247,12 +256,12 @@ export class UploadComponent implements OnDestroy {
 
   /** Read-only view of the queued file items. */
   public readonly files: Signal<UploadFileItem[]> = computed<UploadFileItem[]>(
-    (): UploadFileItem[] => this.internalFiles()
+    (): UploadFileItem[] => this.internalFiles(),
   );
 
   /** `true` when at least one file is in the queue. */
   public readonly hasFiles: Signal<boolean> = computed<boolean>(
-    (): boolean => this.internalFiles().length > 0
+    (): boolean => this.internalFiles().length > 0,
   );
 
   /** `true` when the Choose button should be disabled. */
@@ -266,12 +275,12 @@ export class UploadComponent implements OnDestroy {
 
   /** `true` when the Upload button should be disabled. */
   public readonly isUploadDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || !this.hasFiles()
+    (): boolean => this.disabled() || !this.hasFiles(),
   );
 
   /** `true` when the Cancel button should be disabled. */
   public readonly isCancelDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || !this.hasFiles()
+    (): boolean => this.disabled() || !this.hasFiles(),
   );
 
   // ─── Lifecycle ─────────────────────────────────────────────────────────────
@@ -378,7 +387,7 @@ export class UploadComponent implements OnDestroy {
       URL.revokeObjectURL(removedItem.objectUrl);
     }
     this.internalFiles.set(
-      items.filter((_item: UploadFileItem, itemIndex: number): boolean => itemIndex !== index)
+      items.filter((_item: UploadFileItem, itemIndex: number): boolean => itemIndex !== index),
     );
     this.fileRemove.emit({ originalEvent: event, file: removedItem.file });
   }
@@ -456,7 +465,7 @@ export class UploadComponent implements OnDestroy {
               summary: 'File limit exceeded',
               detail: this.invalidFileLimitMessage().replace('{0}', String(limit)),
             },
-          ]
+          ],
         );
         return;
       }
@@ -473,15 +482,15 @@ export class UploadComponent implements OnDestroy {
       (file: File): UploadFileItem => ({
         file,
         objectUrl: this.isImage(file) ? URL.createObjectURL(file) : null,
-      })
+      }),
     );
 
     this.internalFiles.update((existing: UploadFileItem[]): UploadFileItem[] =>
-      this.multiple() ? [...existing, ...newItems] : newItems
+      this.multiple() ? [...existing, ...newItems] : newItems,
     );
 
     const allCurrentFiles: File[] = this.internalFiles().map(
-      (item: UploadFileItem): File => item.file
+      (item: UploadFileItem): File => item.file,
     );
 
     this.fileSelect.emit({

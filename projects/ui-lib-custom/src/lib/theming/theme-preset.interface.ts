@@ -10,6 +10,8 @@ export type ThemeDensity = 'compact' | 'default' | 'comfortable';
 export interface ThemeConfig {
   mode: ThemeMode;
   preset: ThemePreset;
+  /** Persisted variant — written by ThemeConfigService.setVariant(). */
+  variant?: ThemeVariant;
 }
 
 export type ThemeShapeRadius = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | string;

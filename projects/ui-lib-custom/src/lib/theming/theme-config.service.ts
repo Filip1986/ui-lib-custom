@@ -64,17 +64,17 @@ export class ThemeConfigService {
   };
 
   private readonly hostRef: WritableSignal<HTMLElement | null> = signal<HTMLElement | null>(
-    this.doc.documentElement
+    this.doc.documentElement,
   );
   private readonly presetSignal: WritableSignal<ThemePreset> = signal<ThemePreset>(
-    this.defaultPreset
+    this.defaultPreset,
   );
   private readonly savedThemesSignal: WritableSignal<string[]> = signal<string[]>(
-    this.listSavedThemeNames()
+    this.listSavedThemeNames(),
   );
   private readonly modeSignal: WritableSignal<ThemeMode> = signal<ThemeMode>('auto');
   private readonly variantSignal: WritableSignal<ThemeVariant> = signal<ThemeVariant>(
-    SHARED_DEFAULTS.Variant
+    SHARED_DEFAULTS.Variant,
   );
   private readonly shapeSignal: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
   private readonly densitySignal: WritableSignal<DensityToken> = signal<DensityToken>('default');
@@ -93,11 +93,11 @@ export class ThemeConfigService {
   }
 
   public readonly preset: Signal<ThemePreset> = computed<ThemePreset>(
-    (): ThemePreset => this.presetSignal()
+    (): ThemePreset => this.presetSignal(),
   );
   public readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
   public readonly cssVars: Signal<Record<string, string>> = computed<Record<string, string>>(
-    (): Record<string, string> => this.mapPresetToCssVars(this.presetSignal())
+    (): Record<string, string> => this.mapPresetToCssVars(this.presetSignal()),
   );
   public readonly mode: Signal<ThemeMode> = this.modeSignal.asReadonly();
   public readonly variant: Signal<ThemeVariant> = this.variantSignal.asReadonly();
@@ -110,7 +110,7 @@ export class ThemeConfigService {
         return this.getSystemPreference();
       }
       return mode;
-    }
+    },
   );
 
   constructor() {
@@ -119,6 +119,13 @@ export class ThemeConfigService {
     const storedMode: ThemeMode | null = this.getStoredMode(stored);
     if (storedMode) {
       this.modeSignal.set(storedMode);
+    }
+    const storedVariant: ThemeVariant | null = this.getStoredVariant(stored);
+    if (storedVariant) {
+      this.variantSignal.set(storedVariant);
+      this.rootElement.setAttribute('data-variant', storedVariant);
+    } else {
+      this.rootElement.setAttribute('data-variant', this.variantSignal());
     }
     const storedPreset: ThemePreset | null = this.getStoredPreset(stored);
     const initial: ThemePreset = storedPreset
@@ -142,7 +149,7 @@ export class ThemeConfigService {
 
   public loadPreset(
     preset: ThemePreset | ThemePresetOverrides,
-    options?: LoadOptions
+    options?: LoadOptions,
   ): ThemePreset {
     const merge: boolean = options?.merge ?? true;
     const apply: boolean = options?.apply ?? true;
@@ -170,7 +177,7 @@ export class ThemeConfigService {
       | string
       | Promise<ThemePreset | ThemePresetOverrides>
       | (() => Promise<ThemePreset | ThemePresetOverrides>),
-    options?: LoadOptions
+    options?: LoadOptions,
   ): Promise<ThemePreset> {
     let presetLike: ThemePreset | ThemePresetOverrides;
 
@@ -248,7 +255,7 @@ export class ThemeConfigService {
   public exportAsScss(preset: ThemePreset, download?: boolean): string;
   public exportAsScss(
     presetOrOptions: ThemePreset | ScssExportOptions = this.presetSignal(),
-    download = false
+    download = false,
   ): string {
     if (this.isThemePreset(presetOrOptions)) {
       const vars: Record<string, string> = this.mapPresetToCssVars(presetOrOptions);
@@ -377,6 +384,8 @@ export class ThemeConfigService {
 
   public setVariant(variant: ThemeVariant): void {
     this.variantSignal.set(variant);
+    this.rootElement.setAttribute('data-variant', variant);
+    this.persistConfig(this.presetSignal(), this.modeSignal());
   }
 
   public setShape(shape: ShapeToken): void {
@@ -456,7 +465,7 @@ export class ThemeConfigService {
       '--uilib-button-primary-bg-hover',
       '--uilib-button-primary-bg-active',
       '--uilib-button-primary-border',
-      '--uilib-topbar-accent'
+      '--uilib-topbar-accent',
     );
     set('--uilib-button-primary-fg', '#fff');
 
@@ -469,7 +478,7 @@ export class ThemeConfigService {
       '--uilib-button-secondary-bg',
       '--uilib-button-secondary-bg-hover',
       '--uilib-button-secondary-bg-active',
-      '--uilib-button-secondary-border'
+      '--uilib-button-secondary-border',
     );
     set('--uilib-button-secondary-fg', '#fff');
 
@@ -481,7 +490,7 @@ export class ThemeConfigService {
       '--uilib-button-success-bg',
       '--uilib-button-success-bg-hover',
       '--uilib-button-success-bg-active',
-      '--uilib-button-success-border'
+      '--uilib-button-success-border',
     );
     set('--uilib-button-success-fg', '#fff');
 
@@ -493,7 +502,7 @@ export class ThemeConfigService {
       '--uilib-button-danger-bg',
       '--uilib-button-danger-bg-hover',
       '--uilib-button-danger-bg-active',
-      '--uilib-button-danger-border'
+      '--uilib-button-danger-border',
     );
     set('--uilib-button-danger-fg', '#fff');
 
@@ -505,7 +514,7 @@ export class ThemeConfigService {
       '--uilib-button-warning-bg',
       '--uilib-button-warning-bg-hover',
       '--uilib-button-warning-bg-active',
-      '--uilib-button-warning-border'
+      '--uilib-button-warning-border',
     );
     set('--uilib-button-warning-fg', '#000');
 
@@ -513,7 +522,7 @@ export class ThemeConfigService {
       colors.info,
       '--uilib-color-info-50',
       '--uilib-color-info-600',
-      '--uilib-color-info-700'
+      '--uilib-color-info-700',
     );
 
     applyColor(colors.background, '--uilib-page-bg');
@@ -533,7 +542,7 @@ export class ThemeConfigService {
     const shapeConfig: ThemePresetShape | null = this.resolveLegacyShape(shape);
     const buttonRadius: string = this.resolveRadius(
       shapeConfig?.buttonRadius,
-      resolvedBorderRadius
+      resolvedBorderRadius,
     );
     const cardRadius: string = this.resolveRadius(shapeConfig?.cardRadius, resolvedBorderRadius);
     const inputRadius: string = this.resolveRadius(shapeConfig?.inputRadius, resolvedBorderRadius);
@@ -583,7 +592,7 @@ export class ThemeConfigService {
     set('--uilib-select-button-material-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
     set(
       '--uilib-select-button-bootstrap-border-radius',
-      SELECTBUTTON_TOKENS.borderRadius.bootstrap
+      SELECTBUTTON_TOKENS.borderRadius.bootstrap,
     );
     set('--uilib-select-button-minimal-border-radius', SELECTBUTTON_TOKENS.borderRadius.minimal);
 
@@ -632,7 +641,7 @@ export class ThemeConfigService {
     set('--uilib-datepicker-invalid-border-color', colors.danger);
     set(
       '--uilib-datepicker-focus-ring',
-      `0 0 0 3px color-mix(in srgb, ${colors.primary} 24%, transparent)`
+      `0 0 0 3px color-mix(in srgb, ${colors.primary} 24%, transparent)`,
     );
 
     set('--uilib-datepicker-panel-bg', colors.surface);
@@ -653,7 +662,7 @@ export class ThemeConfigService {
     set('--uilib-datepicker-nav-button-bg', colors.surface);
     set(
       '--uilib-datepicker-nav-button-bg-hover',
-      `color-mix(in srgb, ${colors.primary} 10%, transparent)`
+      `color-mix(in srgb, ${colors.primary} 10%, transparent)`,
     );
     set('--uilib-datepicker-nav-button-border-color', borderColor);
 
@@ -664,28 +673,28 @@ export class ThemeConfigService {
     set('--uilib-datepicker-day-color', textColor);
     set(
       '--uilib-datepicker-day-bg-hover',
-      `color-mix(in srgb, ${colors.primary} 12%, transparent)`
+      `color-mix(in srgb, ${colors.primary} 12%, transparent)`,
     );
     set(
       '--uilib-datepicker-day-bg-today',
-      `color-mix(in srgb, ${colors.primary} 16%, transparent)`
+      `color-mix(in srgb, ${colors.primary} 16%, transparent)`,
     );
     set('--uilib-datepicker-day-color-today', colors.primary);
     set('--uilib-datepicker-day-bg-selected', colors.primary);
     set('--uilib-datepicker-day-color-selected', '#fff');
     set(
       '--uilib-datepicker-day-bg-range-between',
-      `color-mix(in srgb, ${colors.primary} 22%, transparent)`
+      `color-mix(in srgb, ${colors.primary} 22%, transparent)`,
     );
     set(
       '--uilib-datepicker-day-color-disabled',
-      `color-mix(in srgb, ${textColor} 38%, transparent)`
+      `color-mix(in srgb, ${textColor} 38%, transparent)`,
     );
     set('--uilib-datepicker-day-color-other-month', textSecondary);
 
     set(
       '--uilib-datepicker-month-year-cell-min-height',
-      DATEPICKER_TOKENS.cell.monthYearMinHeight.md
+      DATEPICKER_TOKENS.cell.monthYearMinHeight.md,
     );
     set('--uilib-datepicker-month-year-cell-font-size', DATEPICKER_TOKENS.cell.monthYearFontSize);
     set('--uilib-datepicker-month-year-cell-radius', DATEPICKER_TOKENS.cell.monthYearBorderRadius);
@@ -701,7 +710,7 @@ export class ThemeConfigService {
     set('--uilib-datepicker-time-button-bg', colors.surface);
     set(
       '--uilib-datepicker-time-button-bg-hover',
-      `color-mix(in srgb, ${colors.primary} 10%, transparent)`
+      `color-mix(in srgb, ${colors.primary} 10%, transparent)`,
     );
     set('--uilib-datepicker-time-button-border-color', borderColor);
     set('--uilib-datepicker-time-separator-color', textSecondary);
@@ -711,7 +720,7 @@ export class ThemeConfigService {
     set('--uilib-datepicker-buttonbar-gap', DATEPICKER_TOKENS.buttonBar.gap);
     set(
       '--uilib-datepicker-buttonbar-border-color',
-      `color-mix(in srgb, ${borderColor} 65%, transparent)`
+      `color-mix(in srgb, ${borderColor} 65%, transparent)`,
     );
 
     set('--uilib-datepicker-transition-fast', 'var(--uilib-transition-fast, 150ms ease)');
@@ -719,29 +728,29 @@ export class ThemeConfigService {
 
     set(
       '--uilib-datepicker-panel-shadow-material',
-      DATEPICKER_TOKENS.variants.material.panelShadow
+      DATEPICKER_TOKENS.variants.material.panelShadow,
     );
     set(
       '--uilib-datepicker-panel-shadow-bootstrap',
-      DATEPICKER_TOKENS.variants.bootstrap.panelShadow
+      DATEPICKER_TOKENS.variants.bootstrap.panelShadow,
     );
     set('--uilib-datepicker-panel-shadow-minimal', DATEPICKER_TOKENS.variants.minimal.panelShadow);
     set(
       '--uilib-datepicker-day-bg-selected-material',
-      DATEPICKER_TOKENS.variants.material.dayBgSelected
+      DATEPICKER_TOKENS.variants.material.dayBgSelected,
     );
     set(
       '--uilib-datepicker-day-bg-selected-bootstrap',
-      DATEPICKER_TOKENS.variants.bootstrap.dayBgSelected
+      DATEPICKER_TOKENS.variants.bootstrap.dayBgSelected,
     );
     set(
       '--uilib-datepicker-day-bg-selected-minimal',
-      DATEPICKER_TOKENS.variants.minimal.dayBgSelected
+      DATEPICKER_TOKENS.variants.minimal.dayBgSelected,
     );
     set('--uilib-datepicker-day-bg-hover-material', DATEPICKER_TOKENS.variants.material.dayBgHover);
     set(
       '--uilib-datepicker-day-bg-hover-bootstrap',
-      DATEPICKER_TOKENS.variants.bootstrap.dayBgHover
+      DATEPICKER_TOKENS.variants.bootstrap.dayBgHover,
     );
     set('--uilib-datepicker-day-bg-hover-minimal', DATEPICKER_TOKENS.variants.minimal.dayBgHover);
 
@@ -778,7 +787,7 @@ export class ThemeConfigService {
     set('--uilib-editor-toolbar-item-active-color', EDITOR_TOKENS.toolbarItemActiveColor);
     set(
       '--uilib-editor-toolbar-item-active-bg',
-      `color-mix(in srgb, ${textColor} 12%, transparent)`
+      `color-mix(in srgb, ${textColor} 12%, transparent)`,
     );
     set('--uilib-editor-toolbar-separator-color', borderColor);
     set('--uilib-editor-toolbar-padding', EDITOR_TOKENS.toolbarPadding);
@@ -796,19 +805,19 @@ export class ThemeConfigService {
 
     set(
       '--uilib-editor-placeholder-color',
-      `color-mix(in srgb, ${textSecondary} 85%, transparent)`
+      `color-mix(in srgb, ${textSecondary} 85%, transparent)`,
     );
     set('--uilib-editor-border-radius', resolvedBorderRadius);
     set(
       '--uilib-editor-focus-ring-color',
-      `color-mix(in srgb, ${colors.primary} 45%, transparent)`
+      `color-mix(in srgb, ${colors.primary} 45%, transparent)`,
     );
     set('--uilib-editor-focus-ring-width', EDITOR_TOKENS.focusRingWidth);
     set('--uilib-editor-disabled-opacity', EDITOR_TOKENS.disabledOpacity);
 
     const iconSizes: Record<string, string> = icons?.sizes ?? this.defaultIconConfig.sizes;
     Object.entries(iconSizes).forEach(([key, value]: [string, string]): void =>
-      set(`--uilib-icon-size-${key}`, value)
+      set(`--uilib-icon-size-${key}`, value),
     );
 
     return vars;
@@ -864,7 +873,7 @@ export class ThemeConfigService {
       if (value && typeof value === 'object' && !Array.isArray(value)) {
         (clone as Record<string, unknown>)[key] = this.deepMerge(
           (existing ?? {}) as Record<string, unknown>,
-          value as DeepPartial<Record<string, unknown>>
+          value as DeepPartial<Record<string, unknown>>,
         );
       } else {
         (clone as Record<string, unknown>)[key] = value as unknown;
@@ -880,7 +889,7 @@ export class ThemeConfigService {
       return;
     }
     try {
-      const payload: ThemeConfig = { mode, preset };
+      const payload: ThemeConfig = { mode, preset, variant: this.variantSignal() };
       storage.setItem(this.storageKey, JSON.stringify(payload));
     } catch {
       // ignore persistence errors (e.g., SSR or private mode)
@@ -906,6 +915,13 @@ export class ThemeConfigService {
   private getStoredMode(value: ThemeConfig | ThemePreset | null): ThemeMode | null {
     if (value && this.isThemeConfig(value)) {
       return value.mode;
+    }
+    return null;
+  }
+
+  private getStoredVariant(value: ThemeConfig | ThemePreset | null): ThemeVariant | null {
+    if (value && this.isThemeConfig(value) && value.variant) {
+      return value.variant;
     }
     return null;
   }
