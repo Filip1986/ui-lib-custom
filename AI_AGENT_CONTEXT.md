@@ -82,6 +82,31 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-23 [Full consistency audit — 10 issues fixed + conventions codified]
+Changed:
+  Critical — native DOM event shadow fixes (output renames):
+  - tree-select: `selectionChange` output → `treeChange` (model/output collision with `selection: model<>()`)
+  - input-number: `input` → `valueChange`, `focus` → `numberFocus`, `blur` → `numberBlur`
+  - autocomplete: `select` → `optionSelect`, `focus` → `autocompleteFocus`, `blur` → `autocompleteBlur`
+  - checkbox: `change` → `checkboxChange`, `focus` → `checkboxFocus`, `blur` → `checkboxBlur`
+  - date-picker: `select` → `dateSelect`, `focus` → `datePickerFocus`, `blur` → `datePickerBlur`
+  - cascade-select: `change` → `cascadeChange`, `focus` → `cascadeSelectFocus`, `blur` → `cascadeSelectBlur`
+  Moderate — technical debt:
+  - button.scss: added BUTTON_APPEARANCE_COLORS + BUTTON_DARK_MODE_FG constants to design-tokens.ts; added cross-reference comment block in button.scss
+  - button-group.ts: fixed cross-entry relative import `'../button'` → `'ui-lib-custom/button'`
+  - bottom-sheet.scss: `1px solid #dee2e6` → `1px solid var(--uilib-color-neutral-300, #dee2e6)`
+  Docs:
+  - LIBRARY_CONVENTIONS.md: added Cross-Entry Import Rule section, Design Token Rule section, expanded anti-patterns table, enhanced Rule 3 with selectionChange real example
+  - CLAUDE.md: updated 4-rule Output Naming section; updated anti-patterns table with new entries; clarified raw hex rule
+  - All 6 affected component READMEs updated (cascade-select, checkbox, date-picker, input-number, autocomplete, tree-select)
+  Specs fixed:
+  - cascade-select.spec.ts: `component.change` → `component.cascadeChange`
+  - checkbox.spec.ts: `component.change.subscribe` → `component.checkboxChange.subscribe`; test descriptions updated
+State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
+Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
+Next step: Continue with runtime variant switcher + theme preset management; or run broader axe-core audit. All known consistency issues resolved.
+
 Date: 2026-05-23 [Output naming consistency — native DOM event conflicts resolved]
 Changed:
   - speed-dial/speed-dial.component.ts: renamed `visibleChange` output → `panelChange` (was shadowing `model<boolean>()` for `visible`'s internal `visibleChange` event, causing two-way binding to receive SpeedDialVisibleChangeEvent instead of boolean); renamed `click` → `buttonClick`, `focus` → `buttonFocus`, `blur` → `buttonBlur` (avoid native DOM event name clashes)

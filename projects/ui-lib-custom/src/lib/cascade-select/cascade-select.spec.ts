@@ -372,8 +372,8 @@ describe('UiLibCascadeSelect unit', (): void => {
   });
 
   it('selects leaf option, emits change, and closes panel', (): void => {
-    const changeSpy: jest.SpiedFunction<typeof component.change.emit> = jest.spyOn(
-      component.change,
+    const changeSpy: jest.SpiedFunction<typeof component.cascadeChange.emit> = jest.spyOn(
+      component.cascadeChange,
       'emit'
     );
 

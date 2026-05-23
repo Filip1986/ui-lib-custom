@@ -58,6 +58,14 @@ ui-lib-button {
     var(--uilib-space-1) var(--uilib-space-2)
   );
 
+  /*
+   * Appearance colour defaults — SOURCE OF TRUTH: design-tokens.ts › BUTTON_APPEARANCE_COLORS
+   * The hex values below are the CSS custom-property defaults; they are intentionally
+   * duplicated from the TypeScript constants so that the CSS is self-contained.
+   * When changing a colour, update both this file and design-tokens.ts.
+   * All of these variables are fully overridable by consumers.
+   */
+
   /* Framed appearance token defaults
    * --uilib-button-framed-stroke is the single master size token.
    * It controls the white outer border, the offset frame border, and the gap

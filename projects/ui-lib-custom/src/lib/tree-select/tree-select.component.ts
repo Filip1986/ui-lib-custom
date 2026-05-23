@@ -192,7 +192,7 @@ export class TreeSelect implements ControlValueAccessor {
   // ─── Outputs ───────────────────────────────────────────────────────────────
 
   /** Emitted when the selection changes. */
-  public readonly selectionChange: OutputEmitterRef<TreeSelectChangeEvent> =
+  public readonly treeChange: OutputEmitterRef<TreeSelectChangeEvent> =
     output<TreeSelectChangeEvent>();
 
   /** Emitted when the dropdown panel is shown. */
@@ -367,14 +367,14 @@ export class TreeSelect implements ControlValueAccessor {
     }
 
     this.cvaOnChange(this.selection());
-    this.selectionChange.emit({ originalEvent: event.originalEvent, value: this.selection() });
+    this.treeChange.emit({ originalEvent: event.originalEvent, value: this.selection() });
   }
 
   /** Called when the embedded Tree emits `nodeUnselect`. */
   public handleNodeUnselect(event: TreeNodeSelectEvent): void {
     this.nodeUnselect.emit(event);
     this.cvaOnChange(this.selection());
-    this.selectionChange.emit({ originalEvent: event.originalEvent, value: this.selection() });
+    this.treeChange.emit({ originalEvent: event.originalEvent, value: this.selection() });
   }
 
   /** Called when the embedded Tree emits `nodeExpand`. */
@@ -395,7 +395,7 @@ export class TreeSelect implements ControlValueAccessor {
     if (this.isDisabled()) return;
     this.selection.set(null);
     this.cvaOnChange(null);
-    this.selectionChange.emit({ originalEvent: event, value: null });
+    this.treeChange.emit({ originalEvent: event, value: null });
     this.cleared.emit();
   }
 

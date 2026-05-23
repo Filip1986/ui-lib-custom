@@ -40,8 +40,8 @@ import type {
       [disabled]="disabled()"
       [indeterminate]="indeterminate()"
       [ariaLabel]="ariaLabel()"
-      (focus)="handleFocus($event)"
-      (blur)="handleBlur($event)"
+      (checkboxFocus)="handleFocus($event)"
+      (checkboxBlur)="handleBlur($event)"
       [(checked)]="checked"
     >
       {{ content() }}
@@ -763,9 +763,9 @@ describe('Checkbox CVA', (): void => {
     expect(onChange).toHaveBeenCalledWith('OFF');
   });
 
-  it('emits onChange output with boolean checked in binary mode', (): void => {
+  it('emits checkboxChange output with boolean checked in binary mode', (): void => {
     const events: CheckboxChangeEvent[] = [];
-    fixture.componentInstance.change.subscribe((event: CheckboxChangeEvent): void => {
+    fixture.componentInstance.checkboxChange.subscribe((event: CheckboxChangeEvent): void => {
       events.push(event);
     });
 
@@ -853,12 +853,12 @@ describe('Checkbox CVA', (): void => {
     expect(onChange).toHaveBeenCalledWith(['B']);
   });
 
-  it('emits onChange output with full array checked in group mode', (): void => {
+  it('emits checkboxChange output with full array checked in group mode', (): void => {
     const events: CheckboxChangeEvent[] = [];
     fixture.componentRef.setInput('value', 'A');
     fixture.componentRef.setInput('binary', false);
     fixture.componentInstance.writeValue(['B']);
-    fixture.componentInstance.change.subscribe((event: CheckboxChangeEvent): void => {
+    fixture.componentInstance.checkboxChange.subscribe((event: CheckboxChangeEvent): void => {
       events.push(event);
     });
     fixture.detectChanges();

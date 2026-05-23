@@ -264,10 +264,12 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly tabindex: InputSignal<number> = input<number>(0);
   public readonly autocomplete: InputSignal<string> = input<string>('off');
 
-  public readonly input: OutputEmitterRef<{ originalEvent: InputEvent; value: number | null }> =
-    output<{ originalEvent: InputEvent; value: number | null }>();
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly valueChange: OutputEmitterRef<{
+    originalEvent: InputEvent;
+    value: number | null;
+  }> = output<{ originalEvent: InputEvent; value: number | null }>();
+  public readonly numberFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly numberBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   public readonly keyDown: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
   public readonly clear: OutputEmitterRef<void> = output<void>();
 
@@ -376,7 +378,7 @@ export class InputNumberComponent implements ControlValueAccessor {
 
     this.value.set(validatedValue);
     this.onModelChange(validatedValue);
-    this.input.emit({ originalEvent: inputEvent, value: validatedValue });
+    this.valueChange.emit({ originalEvent: inputEvent, value: validatedValue });
   }
 
   public onNativeFocus(event: FocusEvent): void {
@@ -388,7 +390,7 @@ export class InputNumberComponent implements ControlValueAccessor {
       });
     }
 
-    this.focus.emit(event);
+    this.numberFocus.emit(event);
   }
 
   public onNativeBlur(event: FocusEvent): void {
@@ -403,7 +405,7 @@ export class InputNumberComponent implements ControlValueAccessor {
     this.onModelTouched();
     this.syncDisplayValue(currentValue);
 
-    this.blur.emit(event);
+    this.numberBlur.emit(event);
   }
 
   public onNativeKeyDown(event: KeyboardEvent): void {

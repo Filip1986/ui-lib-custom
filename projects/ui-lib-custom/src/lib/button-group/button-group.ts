@@ -11,7 +11,7 @@ import {
   type InputSignal,
   type Signal,
 } from '@angular/core';
-import type { ButtonVariant, ButtonSize } from '../button';
+import type { ButtonVariant, ButtonSize } from 'ui-lib-custom/button';
 
 /**
  * Groups buttons with shared sizing and variant styling.

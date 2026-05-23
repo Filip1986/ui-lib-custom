@@ -78,19 +78,20 @@ These rules apply to every task, no exceptions:
 - **Signal inputs/outputs** — use `input()`, `model()`, `output()` — never `@Input()` / `@Output()` decorators
 - **Explicit return types** on every method, getter, and function — no inference (`computed<Type>((): Type => ...)`)
 - **Angular block syntax** — `@if`, `@for (x of y; track z)`, `@switch` — never `*ngIf` / `*ngFor`
-- **No cross-entry-point relative imports** — use package paths: `import { X } from 'ui-lib-custom/core'`
+- **No cross-entry-point relative imports** — use package paths: `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. Relative paths are fine *within* the same entry point. Full rules: `LIBRARY_CONVENTIONS.md → Cross-Entry Import Rule`.
 - **Public input types are string unions** — `'material' | 'bootstrap' | 'minimal'` — not enum, not constants object
-- **No raw hex/px values** — add tokens to `design-tokens.ts` first, then expose as `--uilib-*` CSS vars
+- **No raw hex/px in CSS rule bodies** — always use a `var(--uilib-*)` CSS custom property. Exception: hex may appear as the *default value* in a CSS custom property definition (`--uilib-foo: #hex`) — that IS the token level. When a global palette token exists for that color, use `var(--uilib-color-neutral-300, #hex)` instead of bare hex. When the color is appearance-specific, add it as a constant to `design-tokens.ts` and link back from the SCSS comment. Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule`.
 - **`as const` objects** — never TypeScript `enum`
 - **Separate template files** — always `templateUrl` / `styleUrl`, never inline `template` or `styles`
 - **Self-closing tags** for components without projected content: `<ui-lib-button />`
 - **Meaningful names, no abbreviations** — `event` not `e`, `config` not `cfg`, `index` not `idx`
 - **Dogfood first** — always use `ui-lib-*` components in demos; never reach for PrimeNG or Angular Material as a substitute
 - **Element selectors: `ui-lib-{component}`** (hyphen after `ui`). **CSS variables: `--uilib-{component}-*`** (no hyphen in `uilib`). Two different intentional patterns — never mix them.
-- **Output naming — three hard rules** (violating any produces double-firing or corrupted two-way bindings):
-  1. **No `on*` prefix** — `onClick` → `buttonClick`, `onChange` → `change`
-  2. **Never shadow a native DOM event name** (`click`, `input`, `focus`, `blur`, `change`, `submit`, `select`, `keydown`, `keyup`, `scroll`, `load`, `error`, `mousedown`, `mouseup`, `drag`, `drop`, `paste`, `wheel`, and more). Prefix with a component qualifier: `buttonClick`, `textareaFocus`, `valueChange`. Full blocked list: `LIBRARY_CONVENTIONS.md → Output Naming Rules`.
-  3. **Never name an explicit `output()` `{signalName}Change` when `{signalName}` is a `model()` signal** — the `model()` already generates that name internally for two-way binding; a duplicate overwrites the binding with the event object.
+- **Output naming — four hard rules** (violating any produces double-firing or corrupted two-way bindings):
+  1. **No `on*` prefix** — `onClick` → `buttonClick`, `onChange` → `checkboxChange`
+  2. **Never shadow a native DOM event name** (`click`, `input`, `focus`, `blur`, `change`, `submit`, `select`, `keydown`, `keyup`, `scroll`, `load`, `error`, `mousedown`, `mouseup`, `drag`, `drop`, `paste`, `wheel`, and ~30 more). Always prefix with a component qualifier: `buttonClick`, `textareaFocus`, `dateSelect`, `checkboxChange`, `cascadeChange`, `numberFocus`. Full blocked list + naming strategy: `LIBRARY_CONVENTIONS.md → Output Naming Rules`.
+  3. **Never name an explicit `output()` `{signalName}Change` when `{signalName}` is a `model()` signal** — the `model()` already generates that name internally for two-way binding; a duplicate overwrites the binding with the event object. For a `selection: model<>()`, the rich-event output must be named something other than `selectionChange` (e.g. `treeChange`).
+  4. **`@HostListener` conflict with focus/blur** — if a component listens to its own host's `focus`/`blur` events via `@HostListener` AND exposes outputs with similar semantics, switch to imperative `addEventListener` in the constructor to avoid circular dispatch. See `cascade-select.ts` for the reference implementation.
 
 ---
 
@@ -98,16 +99,18 @@ These rules apply to every task, no exceptions:
 
 | Anti-pattern | Correct approach |
 |---|---|
-| Relative import across entry points | Use `ui-lib-custom/<entry>` package paths |
+| Relative import across entry points (`from '../button'`) | Use `ui-lib-custom/<entry>` package paths (`from 'ui-lib-custom/button'`) |
 | Missing `ViewEncapsulation.None` | Always add it |
 | Type inference on `computed()` | Annotate: `computed<T>((): T => ...)` |
 | Replacing public string unions with constants | Keep public types as union literals |
-| Inlining raw hex or px | Add to `design-tokens.ts`, use `--uilib-*` var |
+| Raw hex in CSS rule bodies (`.foo { color: #hex }`) | Add to `design-tokens.ts`, use `var(--uilib-*)` |
+| Hex as CSS variable default when global token exists | Use `var(--uilib-color-neutral-300, #hex)` — token first, hex as CSS fallback |
 | Adding PrimeNG/Material to demo pages | Use `ui-lib-*` equivalents |
 | `enum` instead of `as const` | `export const X = { ... } as const` |
-| `on*` prefix on outputs | Remove prefix; use verb/noun directly (`buttonClick`, `change`, `slideEnd`) |
-| Output named after a native DOM event | Add component qualifier: `buttonClick` not `click`, `textareaFocus` not `focus` |
-| Explicit `output()` named `{model}Change` | Give it a distinct name; `model()` owns `{name}Change` for `[(binding)]` |
+| `on*` prefix on outputs | Remove prefix: `buttonClick`, `checkboxChange`, `slideEnd` |
+| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, …) | Add component qualifier: `buttonClick` not `click`; `checkboxChange` not `change`; `dateSelect` not `select` |
+| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Give it a distinct name (`treeChange` not `selectionChange`); `model()` owns `{name}Change` for `[(binding)]` |
+| `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs | Use imperative `addEventListener` in the constructor — see `cascade-select.ts` |
 | `uilib-` as element selector prefix | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*` |
 
 ---

@@ -129,15 +129,15 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
-  public readonly change: OutputEmitterRef<CascadeSelectChangeEvent> =
+  public readonly cascadeChange: OutputEmitterRef<CascadeSelectChangeEvent> =
     output<CascadeSelectChangeEvent>();
   public readonly groupChange: OutputEmitterRef<CascadeSelectGroupChangeEvent> =
     output<CascadeSelectGroupChangeEvent>();
   public readonly show: OutputEmitterRef<CascadeSelectShowEvent> = output<CascadeSelectShowEvent>();
   public readonly hide: OutputEmitterRef<CascadeSelectHideEvent> = output<CascadeSelectHideEvent>();
   public readonly clear: OutputEmitterRef<void> = output<void>();
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly cascadeSelectFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly cascadeSelectBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   public readonly optionTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     CascadeSelectOptionDirective,
@@ -346,7 +346,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.internalValue.set(null);
     this.onModelChange(null);
     this.clear.emit();
-    this.change.emit({ originalEvent: event, value: null });
+    this.cascadeChange.emit({ originalEvent: event, value: null });
   }
 
   public onOptionInteraction(event: Event, level: number, option: unknown): void {
@@ -363,7 +363,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     const value: unknown = this.resolveOptionValue(option);
     this.internalValue.set(value);
     this.onModelChange(value);
-    this.change.emit({ originalEvent: event, value });
+    this.cascadeChange.emit({ originalEvent: event, value });
     this.closePanel(event);
   }
 
@@ -594,12 +594,12 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   // 'blur' exist on the same element, Angular creates a circular dispatch loop.
   // Imperative addEventListener bypasses the Angular event-binding system entirely.
   public onHostFocus(event: FocusEvent): void {
-    this.focus.emit(event);
+    this.cascadeSelectFocus.emit(event);
   }
 
   public onHostBlur(event: FocusEvent): void {
     this.onModelTouched();
-    this.blur.emit(event);
+    this.cascadeSelectBlur.emit(event);
   }
 
   public onKeydown(event: KeyboardEvent): void {

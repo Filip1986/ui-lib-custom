@@ -165,7 +165,8 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
   public readonly tabindex: InputSignal<number> = input<number>(DATE_PICKER_DEFAULTS.TabIndex);
 
-  public readonly select: OutputEmitterRef<DatePickerChangeEvent> = output<DatePickerChangeEvent>();
+  public readonly dateSelect: OutputEmitterRef<DatePickerChangeEvent> =
+    output<DatePickerChangeEvent>();
   public readonly monthChange: OutputEmitterRef<DatePickerMonthChangeEvent> =
     output<DatePickerMonthChangeEvent>();
   public readonly yearChange: OutputEmitterRef<DatePickerYearChangeEvent> =
@@ -173,8 +174,8 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   public readonly show: OutputEmitterRef<void> = output<void>();
   public readonly hide: OutputEmitterRef<void> = output<void>();
   public readonly clear: OutputEmitterRef<void> = output<void>();
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly datePickerFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly datePickerBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   @ViewChild('inputElement', { static: false })
   public inputElement?: ElementRef<HTMLInputElement>;
@@ -580,7 +581,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
   public onInputFocusEvent(event: FocusEvent): void {
     this.focused.set(true);
-    this.focus.emit(event);
+    this.datePickerFocus.emit(event);
 
     if (this.skipNextFocusOpen) {
       this.skipNextFocusOpen = false;
@@ -592,7 +593,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
   public onInputBlurEvent(event: FocusEvent): void {
     this.focused.set(false);
-    this.blur.emit(event);
+    this.datePickerBlur.emit(event);
     this.onModelTouched();
   }
 
@@ -973,7 +974,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.modelValue.set(nextValue);
     this.onModelChange(nextValue);
-    this.select.emit({
+    this.dateSelect.emit({
       originalEvent: event,
       value: nextValue,
     });
@@ -1313,7 +1314,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       this.focusedDate.set(selectedDate);
       this.hoveredDate.set(null);
       this.onModelChange(nextDates.length > 0 ? nextDates : null);
-      this.select.emit({
+      this.dateSelect.emit({
         originalEvent: event,
         value: nextDates.length > 0 ? nextDates : null,
       });
@@ -1327,7 +1328,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       this.focusedDate.set(selectedDate);
       this.hoveredDate.set(null);
       this.onModelChange([selectedDate]);
-      this.select.emit({
+      this.dateSelect.emit({
         originalEvent: event,
         value: [selectedDate],
       });
@@ -1346,7 +1347,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     this.focusedDate.set(selectedDate);
     this.hoveredDate.set(null);
     this.onModelChange(normalizedRange);
-    this.select.emit({
+    this.dateSelect.emit({
       originalEvent: event,
       value: normalizedRange,
     });
@@ -1759,7 +1760,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     this.hoveredDate.set(null);
     this.syncNavigationFromValue(selectedDate);
     this.onModelChange(selectedDate);
-    this.select.emit({
+    this.dateSelect.emit({
       originalEvent: event,
       value: selectedDate,
     });
