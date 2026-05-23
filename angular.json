@@ -74,8 +74,7 @@
             ],
             "styles": [
               "projects/demo/src/styles.scss",
-              "projects/ui-lib-custom/src/lib/themes/themes.scss",
-              "projects/ui-lib-custom/src/lib/styles/dark-theme.scss"
+              "projects/ui-lib-custom/src/lib/themes/themes.scss"
             ]
           },
           "configurations": {
