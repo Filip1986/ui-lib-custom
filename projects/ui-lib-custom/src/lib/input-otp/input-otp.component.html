@@ -12,7 +12,7 @@
     [attr.autocomplete]="index === 0 ? 'one-time-code' : 'off'"
     [attr.maxlength]="index === 0 ? length() : 1"
     [class]="styleClass()"
-    class="uilib-input-otp-cell"
+    class="ui-lib-input-otp-cell"
     (input)="onCellInput($event, index)"
     (keydown)="onCellKeydown($event, index)"
     (focus)="onCellFocus($event)"
@@ -22,11 +22,11 @@
 }
 
 @if (invalid()) {
-  <span [id]="errorId()" role="alert" class="uilib-input-otp-error">
+  <span [id]="errorId()" role="alert" class="ui-lib-input-otp-error">
     <ng-content select="[inputOtpError]" />
   </span>
 }
 
-<span aria-live="polite" aria-atomic="true" class="uilib-input-otp-sr-only">
+<span aria-live="polite" aria-atomic="true" class="ui-lib-input-otp-sr-only">
   {{ liveAnnouncement() }}
 </span>

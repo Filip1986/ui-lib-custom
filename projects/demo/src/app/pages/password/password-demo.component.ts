@@ -93,25 +93,25 @@ export class PasswordDemoComponent {
     readonly fluid: string;
   } = {
     import: `import { PasswordComponent } from 'ui-lib-custom/password';`,
-    basic: `<!-- selector is uilib-password (no hyphen after "ui") -->
+    basic: `<!-- selector is ui-lib-password (no hyphen after "ui") -->
 <label [for]="passRef.passwordId">Password</label>
-<uilib-password #passRef variant="material" placeholder="Enter password" />`,
-    variants: `<uilib-password variant="material"  placeholder="Material" />
-<uilib-password variant="bootstrap" placeholder="Bootstrap" />
-<uilib-password variant="minimal"   placeholder="Minimal" />`,
-    sizes: `<uilib-password size="sm" placeholder="Small" />
-<uilib-password size="md" placeholder="Medium (default)" />
-<uilib-password size="lg" placeholder="Large" />`,
-    toggleMask: `<uilib-password variant="material" [toggleMask]="true" placeholder="Toggle mask" />`,
+<ui-lib-password #passRef variant="material" placeholder="Enter password" />`,
+    variants: `<ui-lib-password variant="material"  placeholder="Material" />
+<ui-lib-password variant="bootstrap" placeholder="Bootstrap" />
+<ui-lib-password variant="minimal"   placeholder="Minimal" />`,
+    sizes: `<ui-lib-password size="sm" placeholder="Small" />
+<ui-lib-password size="md" placeholder="Medium (default)" />
+<ui-lib-password size="lg" placeholder="Large" />`,
+    toggleMask: `<ui-lib-password variant="material" [toggleMask]="true" placeholder="Toggle mask" />`,
     clearButton: `<!-- clear only -->
-<uilib-password variant="material" [showClear]="true" placeholder="Type to see clear" />
+<ui-lib-password variant="material" [showClear]="true" placeholder="Type to see clear" />
 
 <!-- toggle mask + clear -->
-<uilib-password variant="material" [toggleMask]="true" [showClear]="true" placeholder="Both icons" />`,
-    filled: `<uilib-password variant="material"  appearance="filled" placeholder="Material filled" />
-<uilib-password variant="bootstrap" appearance="filled" placeholder="Bootstrap filled" />`,
-    noFeedback: `<uilib-password variant="material" [feedback]="false" [toggleMask]="true" placeholder="No strength meter" />`,
-    customLabels: `<uilib-password
+<ui-lib-password variant="material" [toggleMask]="true" [showClear]="true" placeholder="Both icons" />`,
+    filled: `<ui-lib-password variant="material"  appearance="filled" placeholder="Material filled" />
+<ui-lib-password variant="bootstrap" appearance="filled" placeholder="Bootstrap filled" />`,
+    noFeedback: `<ui-lib-password variant="material" [feedback]="false" [toggleMask]="true" placeholder="No strength meter" />`,
+    customLabels: `<ui-lib-password
   variant="material"
   promptLabel="Start typing…"
   weakLabel="Too simple"
@@ -119,11 +119,11 @@ export class PasswordDemoComponent {
   strongLabel="Excellent!"
   placeholder="Custom labels"
 />`,
-    states: `<uilib-password variant="material" [disabled]="true" placeholder="Disabled" />
-<uilib-password variant="material" [readonly]="true" placeholder="Read-only" />
-<uilib-password variant="material" [invalid]="true"  placeholder="Invalid" />`,
+    states: `<ui-lib-password variant="material" [disabled]="true" placeholder="Disabled" />
+<ui-lib-password variant="material" [readonly]="true" placeholder="Read-only" />
+<ui-lib-password variant="material" [invalid]="true"  placeholder="Invalid" />`,
     reactiveForms: `<label [for]="passRef.passwordId">Password (min 8 chars)</label>
-<uilib-password
+<ui-lib-password
   #passRef
   variant="material"
   [toggleMask]="true"
@@ -132,7 +132,7 @@ export class PasswordDemoComponent {
   [formControl]="control"
   placeholder="At least 8 characters"
 />`,
-    fluid: `<uilib-password variant="material" [fluid]="true" [toggleMask]="true" placeholder="Full width" />`,
+    fluid: `<ui-lib-password variant="material" [fluid]="true" [toggleMask]="true" placeholder="Full width" />`,
   } as const;
 
   public readonly passwordControl: FormControl<string | null> = new FormControl<string | null>(

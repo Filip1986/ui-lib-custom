@@ -25,10 +25,10 @@ const ICON_FIELD_STYLES: string = readFileSync(join(__dirname, 'icon-field.scss'
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-search" />
       <input type="text" aria-label="Search" />
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,10 +38,10 @@ class DefaultIconFieldA11yHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field iconPosition="right">
+    <ui-lib-icon-field iconPosition="right">
       <input type="text" aria-label="Email" />
-      <uilib-input-icon styleClass="pi pi-envelope" />
-    </uilib-icon-field>
+      <ui-lib-input-icon styleClass="pi pi-envelope" />
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -51,15 +51,15 @@ class RightIconFieldA11yHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon
         [decorative]="false"
         ariaLabel="Warning status"
         styleClass="pi pi-exclamation-triangle"
       />
       <input type="text" aria-label="Amount" aria-describedby="amount-help" />
       <span id="amount-help">Warning state is described by helper text.</span>
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -69,10 +69,10 @@ class InformativeIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent, UiLibInput],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-user" />
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-user" />
       <ui-lib-input label="Username" />
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -82,10 +82,10 @@ class UiLibInputIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent, PasswordComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-lock" />
-      <uilib-password ariaLabel="Password" [feedback]="false" />
-    </uilib-icon-field>
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-lock" />
+      <ui-lib-password ariaLabel="Password" [feedback]="false" />
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -95,10 +95,10 @@ class PasswordIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent, InputMaskComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-phone" />
-      <uilib-input-mask aria-label="Phone number" mask="999-999-9999" />
-    </uilib-icon-field>
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-phone" />
+      <ui-lib-input-mask aria-label="Phone number" mask="999-999-9999" />
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -108,10 +108,10 @@ class InputMaskIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent, InputNumberComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-dollar" />
-      <uilib-input-number ariaLabel="Amount" />
-    </uilib-icon-field>
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-dollar" />
+      <ui-lib-input-number ariaLabel="Amount" />
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -134,7 +134,7 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
 }
 
 function getInputIcon(fixture: ComponentFixture<unknown>): HTMLElement {
-  return fixture.debugElement.query(By.css('uilib-input-icon')).nativeElement as HTMLElement;
+  return fixture.debugElement.query(By.css('ui-lib-input-icon')).nativeElement as HTMLElement;
 }
 
 function getInjectedStylesText(): string {
@@ -233,14 +233,14 @@ describe('IconField Accessibility', (): void => {
     it('applies icon-field padding to password internals', async (): Promise<void> => {
       await setup(PasswordIconFieldHostComponent);
 
-      expect(getInjectedStylesText()).toContain('.ui-lib-icon-field--left > uilib-password input');
+      expect(getInjectedStylesText()).toContain('.ui-lib-icon-field--left > ui-lib-password input');
     });
 
     it('applies icon-field padding to input mask internals', async (): Promise<void> => {
       await setup(InputMaskIconFieldHostComponent);
 
       expect(getInjectedStylesText()).toContain(
-        '.ui-lib-icon-field--left > uilib-input-mask input'
+        '.ui-lib-icon-field--left > ui-lib-input-mask input'
       );
     });
 
@@ -248,7 +248,7 @@ describe('IconField Accessibility', (): void => {
       await setup(InputNumberIconFieldHostComponent);
 
       expect(getInjectedStylesText()).toContain(
-        '.ui-lib-icon-field--left > uilib-input-number input'
+        '.ui-lib-icon-field--left > ui-lib-input-number input'
       );
     });
   });

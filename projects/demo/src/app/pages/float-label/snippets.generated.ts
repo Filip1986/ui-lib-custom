@@ -2,10 +2,10 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<uilib-float-label>
+export const basicHtml = `<ui-lib-float-label>
   <ui-lib-input placeholder=" " [(ngModel)]="basicValue" [label]="''" />
   <label>Username</label>
-</uilib-float-label>`;
+</ui-lib-float-label>`;
 
 export const basicTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,18 +22,18 @@ export class MyComponent {
 }`;
 
 export const invalidHtml = `<form [formGroup]="invalidForm">
-  <uilib-float-label variant="over">
+  <ui-lib-float-label variant="over">
     <input placeholder=" " formControlName="over" />
     <label>Required (over)</label>
-  </uilib-float-label>
-  <uilib-float-label variant="in">
+  </ui-lib-float-label>
+  <ui-lib-float-label variant="in">
     <input placeholder=" " formControlName="in" />
     <label>Required (in)</label>
-  </uilib-float-label>
-  <uilib-float-label variant="on">
+  </ui-lib-float-label>
+  <ui-lib-float-label variant="on">
     <input placeholder=" " formControlName="on" />
     <label>Required (on)</label>
-  </uilib-float-label>
+  </ui-lib-float-label>
 </form>`;
 
 export const invalidTs = `import { Component } from '@angular/core';
@@ -54,18 +54,18 @@ export class MyComponent {
 }`;
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()">
-  <uilib-float-label>
+  <ui-lib-float-label>
     <input placeholder=" " formControlName="firstName" />
     <label>First name</label>
-  </uilib-float-label>
-  <uilib-float-label>
+  </ui-lib-float-label>
+  <ui-lib-float-label>
     <ui-lib-select [options]="cityOptions" formControlName="city" />
     <label>City</label>
-  </uilib-float-label>
-  <uilib-float-label variant="in">
+  </ui-lib-float-label>
+  <ui-lib-float-label variant="in">
     <textarea placeholder=" " formControlName="bio"></textarea>
     <label>Bio</label>
-  </uilib-float-label>
+  </ui-lib-float-label>
 </form>`;
 
 export const reactiveTs = `import { Component } from '@angular/core';
@@ -86,10 +86,10 @@ export class MyComponent {
   });
 }`;
 
-export const selectHtml = `<uilib-float-label>
+export const selectHtml = `<ui-lib-float-label>
   <ui-lib-select [(ngModel)]="selectedCity" [options]="cityOptions" />
   <label>City</label>
-</uilib-float-label>`;
+</ui-lib-float-label>`;
 
 export const selectTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -110,10 +110,10 @@ export class MyComponent {
   ];
 }`;
 
-export const textareaHtml = `<uilib-float-label>
+export const textareaHtml = `<ui-lib-float-label>
   <textarea placeholder=" " [(ngModel)]="notes"></textarea>
   <label>Notes</label>
-</uilib-float-label>`;
+</ui-lib-float-label>`;
 
 export const textareaTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -128,18 +128,18 @@ export class MyComponent {
   public notes: string = '';
 }`;
 
-export const variantsHtml = `<uilib-float-label variant="over">
+export const variantsHtml = `<ui-lib-float-label variant="over">
   <input placeholder=" " [(ngModel)]="variantValues.over" />
   <label>Over</label>
-</uilib-float-label>
-<uilib-float-label variant="in">
+</ui-lib-float-label>
+<ui-lib-float-label variant="in">
   <input placeholder=" " [(ngModel)]="variantValues.in" />
   <label>In</label>
-</uilib-float-label>
-<uilib-float-label variant="on">
+</ui-lib-float-label>
+<ui-lib-float-label variant="on">
   <input placeholder=" " [(ngModel)]="variantValues.on" />
   <label>On</label>
-</uilib-float-label>`;
+</ui-lib-float-label>`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

@@ -44,9 +44,9 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onInput` | `TextareaChangeEvent` | Fires on every keystroke; `{ value: string, originalEvent: Event }` |
-| `onFocus` | `FocusEvent` | |
-| `onBlur` | `FocusEvent` | |
+| `valueChange` | `TextareaChangeEvent` | Fires on every keystroke; `{ value: string, originalEvent: Event }`. Named `valueChange` (not `input`) to avoid clashing with the native `input` DOM event that bubbles from the inner `<textarea>`. |
+| `textareaFocus` | `FocusEvent` | Named `textareaFocus` (not `focus`) to avoid clashing with the native `focus` DOM event. |
+| `textareaBlur` | `FocusEvent` | Named `textareaBlur` (not `blur`) to avoid clashing with the native `blur` DOM event. |
 
 ## Usage
 

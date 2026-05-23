@@ -33,7 +33,7 @@ function textOf(element: HTMLElement | null): string {
   standalone: true,
   imports: [PasswordComponent],
   template: `
-    <uilib-password
+    <ui-lib-password
       [variant]="variant()"
       [size]="size()"
       [disabled]="disabled()"
@@ -80,7 +80,7 @@ class TestHostComponent {
   selector: 'test-reactive-host',
   standalone: true,
   imports: [PasswordComponent, ReactiveFormsModule],
-  template: `<uilib-password [formControl]="control" />`,
+  template: `<ui-lib-password [formControl]="control" />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestReactiveHostComponent {
@@ -114,7 +114,7 @@ describe('PasswordComponent', (): void => {
   describe('rendering', (): void => {
     it('should create the component', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      const host: HTMLElement = queryEl(fixture, 'uilib-password');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-password');
       expect(host).toBeTruthy();
     });
 
@@ -122,7 +122,7 @@ describe('PasswordComponent', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       const input: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        'input.uilib-password-input'
+        'input.ui-lib-password-input'
       );
       expect(input).toBeTruthy();
     });
@@ -135,18 +135,18 @@ describe('PasswordComponent', (): void => {
 
     it('should not render the strength panel when not focused', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      const panel: HTMLElement = queryEl(fixture, '.uilib-password-panel');
+      const panel: HTMLElement = queryEl(fixture, '.ui-lib-password-panel');
       expect(panel).toBeNull();
     });
 
     it('should not render toggle button when toggleMask is false', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      expect(queryEl(fixture, '.uilib-password-toggle-btn')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-toggle-btn')).toBeNull();
     });
 
     it('should not render clear button when showClear is false', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      expect(queryEl(fixture, '.uilib-password-clear-btn')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-clear-btn')).toBeNull();
     });
   });
 
@@ -154,14 +154,14 @@ describe('PasswordComponent', (): void => {
   describe('variant classes', (): void => {
     it('should apply uilib-variant-material by default', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-variant-material');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('uilib-variant-material');
     });
 
     it('should apply uilib-variant-bootstrap', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.variant.set('bootstrap');
       fixture.detectChanges();
-      const host: HTMLElement = queryEl(fixture, 'uilib-password');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-password');
       expect(host.classList).toContain('uilib-variant-bootstrap');
       expect(host.classList).not.toContain('uilib-variant-material');
     });
@@ -170,7 +170,7 @@ describe('PasswordComponent', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.variant.set('minimal');
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-variant-minimal');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('uilib-variant-minimal');
     });
   });
 
@@ -178,23 +178,23 @@ describe('PasswordComponent', (): void => {
   describe('size classes', (): void => {
     it('should not apply sm or lg class for md (default)', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      const host: HTMLElement = queryEl(fixture, 'uilib-password');
-      expect(host.classList).not.toContain('uilib-password-sm');
-      expect(host.classList).not.toContain('uilib-password-lg');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-password');
+      expect(host.classList).not.toContain('ui-lib-password-sm');
+      expect(host.classList).not.toContain('ui-lib-password-lg');
     });
 
-    it('should apply uilib-password-sm for size sm', (): void => {
+    it('should apply ui-lib-password-sm for size sm', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.size.set('sm');
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-password-sm');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('ui-lib-password-sm');
     });
 
-    it('should apply uilib-password-lg for size lg', (): void => {
+    it('should apply ui-lib-password-lg for size lg', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.size.set('lg');
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-password-lg');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('ui-lib-password-lg');
     });
   });
 
@@ -204,9 +204,9 @@ describe('PasswordComponent', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
-      const host: HTMLElement = queryEl(fixture, 'uilib-password');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-password');
       const input: HTMLInputElement = queryEl<HTMLInputElement>(fixture, 'input');
-      expect(host.classList).toContain('uilib-password-disabled');
+      expect(host.classList).toContain('ui-lib-password-disabled');
       expect(input.disabled).toBe(true);
     });
 
@@ -220,26 +220,26 @@ describe('PasswordComponent', (): void => {
 
   // ── Invalid / fluid / appearance ──────────────────────────────────────────────
   describe('invalid, fluid, appearance', (): void => {
-    it('should apply uilib-password-invalid when invalid is true', (): void => {
+    it('should apply ui-lib-password-invalid when invalid is true', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.invalid.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-password-invalid');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('ui-lib-password-invalid');
     });
 
-    it('should apply uilib-password-fluid when fluid is true', (): void => {
+    it('should apply ui-lib-password-fluid when fluid is true', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.fluid.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-password-fluid');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('ui-lib-password-fluid');
     });
 
-    it('should apply uilib-password-appearance-filled when appearance is filled', (): void => {
+    it('should apply ui-lib-password-appearance-filled when appearance is filled', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.appearance.set('filled');
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain(
-        'uilib-password-appearance-filled'
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain(
+        'ui-lib-password-appearance-filled'
       );
     });
   });
@@ -250,7 +250,7 @@ describe('PasswordComponent', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       queryEl<HTMLInputElement>(fixture, 'input').dispatchEvent(new FocusEvent('focus'));
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-panel')).toBeTruthy();
+      expect(queryEl(fixture, '.ui-lib-password-panel')).toBeTruthy();
     });
 
     it('should hide the strength panel on blur', (): void => {
@@ -260,7 +260,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       input.dispatchEvent(new FocusEvent('blur'));
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-panel')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-panel')).toBeNull();
     });
 
     it('should not show panel when feedback is false', (): void => {
@@ -269,7 +269,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       queryEl<HTMLInputElement>(fixture, 'input').dispatchEvent(new FocusEvent('focus'));
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-panel')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-panel')).toBeNull();
     });
 
     it('should display prompt label when field is empty and focused', (): void => {
@@ -278,7 +278,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       queryEl<HTMLInputElement>(fixture, 'input').dispatchEvent(new FocusEvent('focus'));
       fixture.detectChanges();
-      expect(textOf(queryEl(fixture, '.uilib-password-meter-text'))).toBe('Type your secret');
+      expect(textOf(queryEl(fixture, '.ui-lib-password-meter-text'))).toBe('Type your secret');
     });
 
     it('should show Weak label and apply weak class for a short password', (): void => {
@@ -289,9 +289,9 @@ describe('PasswordComponent', (): void => {
       input.value = 'abc';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(textOf(queryEl(fixture, '.uilib-password-meter-text'))).toBe('Weak');
-      expect(queryEl(fixture, '.uilib-password-meter-fill').classList).toContain(
-        'uilib-password-meter-weak'
+      expect(textOf(queryEl(fixture, '.ui-lib-password-meter-text'))).toBe('Weak');
+      expect(queryEl(fixture, '.ui-lib-password-meter-fill').classList).toContain(
+        'ui-lib-password-meter-weak'
       );
     });
 
@@ -304,9 +304,9 @@ describe('PasswordComponent', (): void => {
       input.value = 'Abcdef';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(textOf(queryEl(fixture, '.uilib-password-meter-text'))).toBe('Medium');
-      expect(queryEl(fixture, '.uilib-password-meter-fill').classList).toContain(
-        'uilib-password-meter-medium'
+      expect(textOf(queryEl(fixture, '.ui-lib-password-meter-text'))).toBe('Medium');
+      expect(queryEl(fixture, '.ui-lib-password-meter-fill').classList).toContain(
+        'ui-lib-password-meter-medium'
       );
     });
 
@@ -319,9 +319,9 @@ describe('PasswordComponent', (): void => {
       input.value = 'Abcdef12';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(textOf(queryEl(fixture, '.uilib-password-meter-text'))).toBe('Strong');
-      expect(queryEl(fixture, '.uilib-password-meter-fill').classList).toContain(
-        'uilib-password-meter-strong'
+      expect(textOf(queryEl(fixture, '.ui-lib-password-meter-text'))).toBe('Strong');
+      expect(queryEl(fixture, '.ui-lib-password-meter-fill').classList).toContain(
+        'ui-lib-password-meter-strong'
       );
     });
 
@@ -335,7 +335,7 @@ describe('PasswordComponent', (): void => {
       input.value = 'abc';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(textOf(queryEl(fixture, '.uilib-password-meter-text'))).toBe('Too simple');
+      expect(textOf(queryEl(fixture, '.ui-lib-password-meter-text'))).toBe('Too simple');
     });
   });
 
@@ -345,7 +345,7 @@ describe('PasswordComponent', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.toggleMask.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-toggle-btn')).toBeTruthy();
+      expect(queryEl(fixture, '.ui-lib-password-toggle-btn')).toBeTruthy();
     });
 
     it('should switch input type to text when toggle is clicked', (): void => {
@@ -354,7 +354,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       const input: HTMLInputElement = queryEl<HTMLInputElement>(fixture, 'input');
       expect(input.type).toBe('password');
-      queryEl<HTMLButtonElement>(fixture, '.uilib-password-toggle-btn').click();
+      queryEl<HTMLButtonElement>(fixture, '.ui-lib-password-toggle-btn').click();
       fixture.detectChanges();
       expect(input.type).toBe('text');
     });
@@ -366,7 +366,7 @@ describe('PasswordComponent', (): void => {
       const input: HTMLInputElement = queryEl<HTMLInputElement>(fixture, 'input');
       const button: HTMLButtonElement = queryEl<HTMLButtonElement>(
         fixture,
-        '.uilib-password-toggle-btn'
+        '.ui-lib-password-toggle-btn'
       );
       button.click();
       fixture.detectChanges();
@@ -380,14 +380,14 @@ describe('PasswordComponent', (): void => {
   describe('clear button', (): void => {
     it('should not render clear button when showClear is false', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      expect(queryEl(fixture, '.uilib-password-clear-btn')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-clear-btn')).toBeNull();
     });
 
     it('should not render clear button when field is empty (showClear=true)', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.showClear.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-clear-btn')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-clear-btn')).toBeNull();
     });
 
     it('should render clear button when showClear is true and field has a value', (): void => {
@@ -398,7 +398,7 @@ describe('PasswordComponent', (): void => {
       input.value = 'secret';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-clear-btn')).toBeTruthy();
+      expect(queryEl(fixture, '.ui-lib-password-clear-btn')).toBeTruthy();
     });
 
     it('should clear the input value when clear button is clicked', (): void => {
@@ -409,9 +409,9 @@ describe('PasswordComponent', (): void => {
       input.value = 'secret';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      queryEl<HTMLButtonElement>(fixture, '.uilib-password-clear-btn').click();
+      queryEl<HTMLButtonElement>(fixture, '.ui-lib-password-clear-btn').click();
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-clear-btn')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-clear-btn')).toBeNull();
     });
 
     it('should not show clear button when disabled (even with showClear=true and value)', (): void => {
@@ -419,7 +419,7 @@ describe('PasswordComponent', (): void => {
       fixture.componentInstance.showClear.set(true);
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-clear-btn')).toBeNull();
+      expect(queryEl(fixture, '.ui-lib-password-clear-btn')).toBeNull();
     });
   });
 
@@ -494,7 +494,7 @@ describe('PasswordComponent', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       queryEl<HTMLInputElement>(fixture, 'input').dispatchEvent(new FocusEvent('focus'));
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-inputwrapper-focus');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('uilib-inputwrapper-focus');
     });
 
     it('should remove uilib-inputwrapper-focus on blur', (): void => {
@@ -504,7 +504,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       input.dispatchEvent(new FocusEvent('blur'));
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).not.toContain(
+      expect(queryEl(fixture, 'ui-lib-password').classList).not.toContain(
         'uilib-inputwrapper-focus'
       );
     });
@@ -515,22 +515,22 @@ describe('PasswordComponent', (): void => {
       input.value = 'secret';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(queryEl(fixture, 'uilib-password').classList).toContain('uilib-inputwrapper-filled');
+      expect(queryEl(fixture, 'ui-lib-password').classList).toContain('uilib-inputwrapper-filled');
     });
   });
 
   // ── Input wrapper modifier classes ────────────────────────────────────────────
   describe('input wrapper modifier classes', (): void => {
-    it('should add uilib-password-has-toggle when toggleMask is true', (): void => {
+    it('should add ui-lib-password-has-toggle when toggleMask is true', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.toggleMask.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-input-wrapper').classList).toContain(
-        'uilib-password-has-toggle'
+      expect(queryEl(fixture, '.ui-lib-password-input-wrapper').classList).toContain(
+        'ui-lib-password-has-toggle'
       );
     });
 
-    it('should add uilib-password-has-clear when showClear is true and field has value', (): void => {
+    it('should add ui-lib-password-has-clear when showClear is true and field has value', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
       fixture.componentInstance.showClear.set(true);
       fixture.detectChanges();
@@ -538,8 +538,8 @@ describe('PasswordComponent', (): void => {
       input.value = 'secret';
       input.dispatchEvent(new InputEvent('input', { bubbles: true }));
       fixture.detectChanges();
-      expect(queryEl(fixture, '.uilib-password-input-wrapper').classList).toContain(
-        'uilib-password-has-clear'
+      expect(queryEl(fixture, '.ui-lib-password-input-wrapper').classList).toContain(
+        'ui-lib-password-has-clear'
       );
     });
   });
@@ -560,7 +560,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       const button: HTMLButtonElement = queryEl<HTMLButtonElement>(
         fixture,
-        '.uilib-password-toggle-btn'
+        '.ui-lib-password-toggle-btn'
       );
       expect(button.getAttribute('aria-label')).toBe('Show password');
     });
@@ -571,7 +571,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       const button: HTMLButtonElement = queryEl<HTMLButtonElement>(
         fixture,
-        '.uilib-password-toggle-btn'
+        '.ui-lib-password-toggle-btn'
       );
       button.click();
       fixture.detectChanges();
@@ -588,7 +588,7 @@ describe('PasswordComponent', (): void => {
       fixture.detectChanges();
       const clearButton: HTMLButtonElement = queryEl<HTMLButtonElement>(
         fixture,
-        '.uilib-password-clear-btn'
+        '.ui-lib-password-clear-btn'
       );
       expect(clearButton.getAttribute('aria-label')).toBe('Clear password');
     });

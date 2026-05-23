@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />`;
+export const basicHtml = `<ui-lib-split-button label="Save" [model]="items" (buttonClick)="onPrimaryAction()" />`;
 
 export const basicTs = `import { Component } from '@angular/core';
 import { SplitButtonComponent } from 'ui-lib-custom/split-button';

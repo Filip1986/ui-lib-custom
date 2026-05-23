@@ -263,13 +263,13 @@ describe('DatePickerComponent', (): void => {
       expect(fixture.componentInstance.overlayVisible()).toBeFalsy();
     });
 
-    it('opens panel on trigger button click and emits onShow', (): void => {
+    it('opens panel on trigger button click and emits show', (): void => {
       const fixture: ComponentFixture<DatePickerComponent> = createFixture();
       fixture.componentRef.setInput('showIcon', true);
       fixture.componentRef.setInput('iconDisplay', 'button');
       fixture.detectChanges();
 
-      const showSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.onShow, 'emit');
+      const showSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.show, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
         '.ui-lib-datepicker__trigger'
@@ -280,9 +280,9 @@ describe('DatePickerComponent', (): void => {
       expect(showSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('closes panel on outside click and emits onHide', (): void => {
+    it('closes panel on outside click and emits hide', (): void => {
       const fixture: ComponentFixture<DatePickerComponent> = createFixture();
-      const hideSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.onHide, 'emit');
+      const hideSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.hide, 'emit');
       fixture.componentInstance.showOverlay();
       fixture.detectChanges();
 
@@ -536,10 +536,7 @@ describe('DatePickerComponent', (): void => {
       fixture.componentRef.setInput('inline', true);
       fixture.detectChanges();
 
-      const monthSpy: jest.SpyInstance = jest.spyOn(
-        fixture.componentInstance.onMonthChange,
-        'emit'
-      );
+      const monthSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.monthChange, 'emit');
       const initialMonth: number = fixture.componentInstance.currentMonth();
 
       requiredElement<HTMLButtonElement>(
@@ -662,7 +659,7 @@ describe('DatePickerComponent', (): void => {
       fixture.componentRef.setInput('view', 'month');
       fixture.detectChanges();
 
-      const selectSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.onSelect, 'emit');
+      const selectSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.select, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
         "button[data-month-index='4']"
@@ -687,11 +684,8 @@ describe('DatePickerComponent', (): void => {
         hostElement(fixture),
         '.ui-lib-datepicker__year-select'
       );
-      const monthSpy: jest.SpyInstance = jest.spyOn(
-        fixture.componentInstance.onMonthChange,
-        'emit'
-      );
-      const yearSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.onYearChange, 'emit');
+      const monthSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.monthChange, 'emit');
+      const yearSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.yearChange, 'emit');
 
       monthSelect.value = '6';
       monthSelect.dispatchEvent(new Event('change', { bubbles: true }));
@@ -753,7 +747,7 @@ describe('DatePickerComponent', (): void => {
       fixture.componentRef.setInput('showButtonBar', true);
       fixture.detectChanges();
 
-      const clearSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.onClear, 'emit');
+      const clearSpy: jest.SpyInstance = jest.spyOn(fixture.componentInstance.clear, 'emit');
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
         '.ui-lib-datepicker__today-button'

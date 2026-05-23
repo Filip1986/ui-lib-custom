@@ -38,7 +38,7 @@ class MockThemeConfigService {
   standalone: true,
   imports: [FormsModule, InputNumberComponent],
   template: `
-    <uilib-input-number
+    <ui-lib-input-number
       [(ngModel)]="value"
       [ngModelOptions]="{ standalone: true }"
       [showButtons]="showButtons"
@@ -56,7 +56,7 @@ class TemplateDrivenHostComponent {
   imports: [ReactiveFormsModule, InputNumberComponent],
   template: `
     <form [formGroup]="form">
-      <uilib-input-number formControlName="amount" [showClear]="showClear" />
+      <ui-lib-input-number formControlName="amount" [showClear]="showClear" />
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -126,13 +126,13 @@ describe('InputNumberComponent', (): void => {
   function nativeInput(fixture: ComponentFixture<InputNumberComponent>): HTMLInputElement {
     return requiredElement<HTMLInputElement>(
       hostElement(fixture),
-      'input.uilib-input-number-input'
+      'input.ui-lib-input-number-input'
     );
   }
 
   function clearButton(fixture: ComponentFixture<InputNumberComponent>): HTMLButtonElement | null {
     return hostElement(fixture).querySelector(
-      '.uilib-input-number-clear'
+      '.ui-lib-input-number-clear'
     ) as HTMLButtonElement | null;
   }
 
@@ -142,7 +142,7 @@ describe('InputNumberComponent', (): void => {
   ): HTMLButtonElement {
     return requiredElement<HTMLButtonElement>(
       hostElement(fixture),
-      direction === 'up' ? '.uilib-input-number-button-up' : '.uilib-input-number-button-down'
+      direction === 'up' ? '.ui-lib-input-number-button-up' : '.ui-lib-input-number-button-down'
     );
   }
 
@@ -182,9 +182,9 @@ describe('InputNumberComponent', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       const host: HTMLElement = hostElement(fixture);
 
-      expect(host.classList.contains('uilib-input-number')).toBeTruthy();
-      expect(host.classList.contains('uilib-input-number-md')).toBeTruthy();
-      expect(host.classList.contains('uilib-input-number-stacked')).toBeFalsy();
+      expect(host.classList.contains('ui-lib-input-number')).toBeTruthy();
+      expect(host.classList.contains('ui-lib-input-number-md')).toBeTruthy();
+      expect(host.classList.contains('ui-lib-input-number-stacked')).toBeFalsy();
       expect(clearButton(fixture)).toBeNull();
     });
 
@@ -192,24 +192,26 @@ describe('InputNumberComponent', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInputs(fixture, { showButtons: true, buttonLayout: 'stacked' });
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-stacked')).toBeTruthy();
-      expect(hostElement(fixture).querySelectorAll('.uilib-input-number-button').length).toBe(2);
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-stacked')).toBeTruthy();
+      expect(hostElement(fixture).querySelectorAll('.ui-lib-input-number-button').length).toBe(2);
     });
 
     it('renders with horizontal button layout', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInputs(fixture, { showButtons: true, buttonLayout: 'horizontal' });
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-horizontal')).toBeTruthy();
-      expect(hostElement(fixture).querySelectorAll('.uilib-input-number-button').length).toBe(2);
+      expect(
+        hostElement(fixture).classList.contains('ui-lib-input-number-horizontal')
+      ).toBeTruthy();
+      expect(hostElement(fixture).querySelectorAll('.ui-lib-input-number-button').length).toBe(2);
     });
 
     it('renders with vertical button layout', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInputs(fixture, { showButtons: true, buttonLayout: 'vertical' });
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-vertical')).toBeTruthy();
-      expect(hostElement(fixture).querySelectorAll('.uilib-input-number-button').length).toBe(2);
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-vertical')).toBeTruthy();
+      expect(hostElement(fixture).querySelectorAll('.ui-lib-input-number-button').length).toBe(2);
     });
 
     it('shows clear button when showClear is true and value is set', (): void => {
@@ -231,41 +233,41 @@ describe('InputNumberComponent', (): void => {
     it('applies size classes (sm, md, lg)', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInput(fixture, 'size', 'sm');
-      expect(hostElement(fixture).classList.contains('uilib-input-number-sm')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-sm')).toBeTruthy();
 
       setInput(fixture, 'size', 'md');
-      expect(hostElement(fixture).classList.contains('uilib-input-number-md')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-md')).toBeTruthy();
 
       setInput(fixture, 'size', 'lg');
-      expect(hostElement(fixture).classList.contains('uilib-input-number-lg')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-lg')).toBeTruthy();
     });
 
     it('applies fluid class', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInput(fixture, 'fluid', true);
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-fluid')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-fluid')).toBeTruthy();
     });
 
     it('applies filled class', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInput(fixture, 'filled', true);
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-filled')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-filled')).toBeTruthy();
     });
 
     it('applies invalid class', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInput(fixture, 'invalid', true);
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-invalid')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-invalid')).toBeTruthy();
     });
 
     it('applies disabled state', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInput(fixture, 'disabled', true);
 
-      expect(hostElement(fixture).classList.contains('uilib-input-number-disabled')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-disabled')).toBeTruthy();
       expect(nativeInput(fixture).disabled).toBeTruthy();
     });
   });
@@ -565,7 +567,7 @@ describe('InputNumberComponent', (): void => {
       const fixture: ComponentFixture<TemplateDrivenHostComponent> = createTemplateHostFixture();
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         fixture.nativeElement as HTMLElement,
-        'input.uilib-input-number-input'
+        'input.ui-lib-input-number-input'
       );
 
       input.value = '86';
@@ -582,7 +584,7 @@ describe('InputNumberComponent', (): void => {
 
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         fixture.nativeElement as HTMLElement,
-        'input.uilib-input-number-input'
+        'input.ui-lib-input-number-input'
       );
       expect(input.value).toBe('99');
     });
@@ -605,7 +607,7 @@ describe('InputNumberComponent', (): void => {
       refreshFixture(fixture);
 
       expect(nativeInput(fixture).disabled).toBeTruthy();
-      expect(hostElement(fixture).classList.contains('uilib-input-number-disabled')).toBeTruthy();
+      expect(hostElement(fixture).classList.contains('ui-lib-input-number-disabled')).toBeTruthy();
     });
 
     it('marks touched on blur in reactive form', (): void => {
@@ -613,7 +615,7 @@ describe('InputNumberComponent', (): void => {
       const control: FormControl<number | null> = fixture.componentInstance.form.controls.amount;
       const input: HTMLInputElement = requiredElement<HTMLInputElement>(
         fixture.nativeElement as HTMLElement,
-        'input.uilib-input-number-input'
+        'input.ui-lib-input-number-input'
       );
 
       input.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
@@ -632,7 +634,7 @@ describe('InputNumberComponent', (): void => {
 
       const clear: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.uilib-input-number-clear'
+        '.ui-lib-input-number-clear'
       );
       clear.click();
       refreshFixture(fixture);
@@ -641,17 +643,17 @@ describe('InputNumberComponent', (): void => {
       expect(nativeInput(fixture).value).toBe('');
     });
 
-    it('emits onClear event', (): void => {
+    it('emits clear event', (): void => {
       const fixture: ComponentFixture<InputNumberComponent> = createFixture();
       setInput(fixture, 'showClear', true);
       writeValue(fixture, 10);
 
       const clearSpy: jest.Mock<void, []> = jest.fn<void, []>();
-      fixture.componentInstance.onClear.subscribe(clearSpy);
+      fixture.componentInstance.clear.subscribe(clearSpy);
 
       const clear: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.uilib-input-number-clear'
+        '.ui-lib-input-number-clear'
       );
       clear.click();
       refreshFixture(fixture);

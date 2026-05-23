@@ -10,7 +10,7 @@
     <app-doc-section id="numerals" title="Numerals">
       <h3>1. Numerals</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
+        <ui-lib-input-number [(ngModel)]="quantity" placeholder="Enter quantity" />
       </ui-lib-panel>
       <app-doc-code-example [html]="numeralsHtml" [typescript]="numeralsTsTs" />
     </app-doc-section>
@@ -18,7 +18,7 @@
     <app-doc-section id="decimal" title="Decimal">
       <h3>2. Decimal</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number
+        <ui-lib-input-number
           [(ngModel)]="decimalValue"
           [minFractionDigits]="2"
           [maxFractionDigits]="4"
@@ -34,19 +34,19 @@
         <div class="row-4">
           <div>
             <label class="field-label">en-US</label>
-            <uilib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
+            <ui-lib-input-number [(ngModel)]="localeValues.enUS" locale="en-US" />
           </div>
           <div>
             <label class="field-label">de-DE</label>
-            <uilib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
+            <ui-lib-input-number [(ngModel)]="localeValues.deDE" locale="de-DE" />
           </div>
           <div>
             <label class="field-label">en-IN</label>
-            <uilib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
+            <ui-lib-input-number [(ngModel)]="localeValues.enIN" locale="en-IN" />
           </div>
           <div>
             <label class="field-label">jp-JP</label>
-            <uilib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />
+            <ui-lib-input-number [(ngModel)]="localeValues.jpJP" locale="jp-JP" />
           </div>
         </div>
       </ui-lib-panel>
@@ -57,21 +57,21 @@
       <h3>4. Currency</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
-          <uilib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
-          <uilib-input-number
+          <ui-lib-input-number [(ngModel)]="currencyValues.usd" mode="currency" currency="USD" />
+          <ui-lib-input-number
             [(ngModel)]="currencyValues.eur"
             mode="currency"
             currency="EUR"
             locale="de-DE"
           />
-          <uilib-input-number
+          <ui-lib-input-number
             [(ngModel)]="currencyValues.inr"
             mode="currency"
             currency="INR"
             currencyDisplay="code"
             locale="en-IN"
           />
-          <uilib-input-number
+          <ui-lib-input-number
             [(ngModel)]="currencyValues.jpy"
             mode="currency"
             currency="JPY"
@@ -86,10 +86,10 @@
       <h3>5. Prefix &amp; Suffix</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
-          <uilib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
-          <uilib-input-number [(ngModel)]="completionPercent" suffix=" %" />
-          <uilib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
-          <uilib-input-number [(ngModel)]="temperature" suffix=" °C" />
+          <ui-lib-input-number [(ngModel)]="distanceMiles" suffix=" mi" />
+          <ui-lib-input-number [(ngModel)]="completionPercent" suffix=" %" />
+          <ui-lib-input-number [(ngModel)]="expiresInDays" prefix="Expires in " suffix=" days" />
+          <ui-lib-input-number [(ngModel)]="temperature" suffix=" °C" />
         </div>
       </ui-lib-panel>
       <app-doc-code-example
@@ -101,7 +101,7 @@
     <app-doc-section id="buttons-stacked" title="Buttons Stacked">
       <h3>6. Buttons Stacked</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number
+        <ui-lib-input-number
           [(ngModel)]="stackedAmount"
           mode="currency"
           currency="USD"
@@ -117,7 +117,7 @@
     <app-doc-section id="buttons-horizontal" title="Buttons Horizontal">
       <h3>7. Buttons Horizontal</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number
+        <ui-lib-input-number
           [(ngModel)]="horizontalAmount"
           mode="currency"
           currency="EUR"
@@ -135,7 +135,7 @@
     <app-doc-section id="buttons-vertical" title="Buttons Vertical">
       <h3>8. Buttons Vertical</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number
+        <ui-lib-input-number
           [(ngModel)]="verticalAmount"
           [showButtons]="true"
           buttonLayout="vertical"
@@ -150,7 +150,7 @@
     <app-doc-section id="step" title="Step">
       <h3>9. Step</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
+        <ui-lib-input-number [(ngModel)]="stepValue" [step]="0.25" [showButtons]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="stepHtml" [typescript]="stepTsTs" />
     </app-doc-section>
@@ -158,7 +158,7 @@
     <app-doc-section id="min-max" title="Min &amp; Max">
       <h3>10. Min &amp; Max</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number [(ngModel)]="boundedValue" [min]="0" [max]="100" [showButtons]="true" />
+        <ui-lib-input-number [(ngModel)]="boundedValue" [min]="0" [max]="100" [showButtons]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="minMaxHtml" [typescript]="minMaxTsTs" />
     </app-doc-section>
@@ -167,18 +167,18 @@
       <h3>11. Float Label</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-3">
-          <uilib-float-label variant="over">
-            <uilib-input-number [(ngModel)]="floatValues.over" inputId="input-number-over" />
+          <ui-lib-float-label variant="over">
+            <ui-lib-input-number [(ngModel)]="floatValues.over" inputId="input-number-over" />
             <label for="input-number-over">Amount (over)</label>
-          </uilib-float-label>
-          <uilib-float-label variant="in">
-            <uilib-input-number [(ngModel)]="floatValues.in" inputId="input-number-in" />
+          </ui-lib-float-label>
+          <ui-lib-float-label variant="in">
+            <ui-lib-input-number [(ngModel)]="floatValues.in" inputId="input-number-in" />
             <label for="input-number-in">Amount (in)</label>
-          </uilib-float-label>
-          <uilib-float-label variant="on">
-            <uilib-input-number [(ngModel)]="floatValues.on" inputId="input-number-on" />
+          </ui-lib-float-label>
+          <ui-lib-float-label variant="on">
+            <ui-lib-input-number [(ngModel)]="floatValues.on" inputId="input-number-on" />
             <label for="input-number-on">Amount (on)</label>
-          </uilib-float-label>
+          </ui-lib-float-label>
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="floatLabelHtml" [typescript]="floatLabelTsTs" />
@@ -187,7 +187,7 @@
     <app-doc-section id="clear-icon" title="Clear Icon">
       <h3>12. Clear Icon</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number [(ngModel)]="clearableValue" [showClear]="true" [showButtons]="true" />
+        <ui-lib-input-number [(ngModel)]="clearableValue" [showClear]="true" [showButtons]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="clearIconHtml" [typescript]="clearIconTsTs" />
     </app-doc-section>
@@ -196,9 +196,9 @@
       <h3>13. Sizes</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-3">
-          <uilib-input-number [(ngModel)]="sizeValues.sm" size="sm" placeholder="Small" />
-          <uilib-input-number [(ngModel)]="sizeValues.md" size="md" placeholder="Medium" />
-          <uilib-input-number [(ngModel)]="sizeValues.lg" size="lg" placeholder="Large" />
+          <ui-lib-input-number [(ngModel)]="sizeValues.sm" size="sm" placeholder="Small" />
+          <ui-lib-input-number [(ngModel)]="sizeValues.md" size="md" placeholder="Medium" />
+          <ui-lib-input-number [(ngModel)]="sizeValues.lg" size="lg" placeholder="Large" />
         </div>
       </ui-lib-panel>
       <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTsTs" />
@@ -208,8 +208,8 @@
       <h3>14. Disabled &amp; Invalid</h3>
       <ui-lib-panel variant="minimal">
         <div class="row-2">
-          <uilib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
-          <uilib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
+          <ui-lib-input-number [(ngModel)]="disabledValue" [disabled]="true" />
+          <ui-lib-input-number [(ngModel)]="invalidValue" [invalid]="true" />
         </div>
       </ui-lib-panel>
       <app-doc-code-example
@@ -221,7 +221,7 @@
     <app-doc-section id="filled" title="Filled">
       <h3>15. Filled</h3>
       <ui-lib-panel variant="minimal">
-        <uilib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
+        <ui-lib-input-number [(ngModel)]="filledValue" [filled]="true" [showClear]="true" />
       </ui-lib-panel>
       <app-doc-code-example [html]="filledHtml" [typescript]="filledTsTs" />
     </app-doc-section>
@@ -230,7 +230,7 @@
       <h3>16. Fluid</h3>
       <ui-lib-panel variant="minimal">
         <div class="fluid-wrap">
-          <uilib-input-number
+          <ui-lib-input-number
             [(ngModel)]="fluidValue"
             [fluid]="true"
             [showButtons]="true"
@@ -245,7 +245,7 @@
       <h3>17. Reactive Forms</h3>
       <ui-lib-panel variant="minimal">
         <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
-          <uilib-input-number
+          <ui-lib-input-number
             formControlName="amount"
             [min]="0"
             [max]="1000"
@@ -268,7 +268,7 @@
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>uilib-input-number</code>. Import from
+      All inputs accepted by <code>ui-lib-input-number</code>. Import from
       <code>ui-lib-custom/input-number</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />

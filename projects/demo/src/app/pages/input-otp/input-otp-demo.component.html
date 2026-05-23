@@ -14,7 +14,7 @@
         <p class="section-text">Four-cell OTP with ngModel binding and live value preview.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
-            <uilib-input-otp
+            <ui-lib-input-otp
               [length]="4"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="basicValue"
@@ -30,7 +30,7 @@
         <h3>b. Mask</h3>
         <p class="section-text">Password-style dots for sensitive codes such as PINs.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-otp
+          <ui-lib-input-otp
             [length]="6"
             [mask]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -48,7 +48,7 @@
         </p>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
-            <uilib-input-otp
+            <ui-lib-input-otp
               [length]="4"
               [integerOnly]="true"
               [ngModelOptions]="{ standalone: true }"
@@ -73,7 +73,7 @@
           <div class="stack-md">
             <div class="stack-xs">
               <label>Small</label>
-              <uilib-input-otp
+              <ui-lib-input-otp
                 [length]="4"
                 size="sm"
                 [ngModelOptions]="{ standalone: true }"
@@ -82,7 +82,7 @@
             </div>
             <div class="stack-xs">
               <label>Medium</label>
-              <uilib-input-otp
+              <ui-lib-input-otp
                 [length]="4"
                 size="md"
                 [ngModelOptions]="{ standalone: true }"
@@ -91,7 +91,7 @@
             </div>
             <div class="stack-xs">
               <label>Large</label>
-              <uilib-input-otp
+              <ui-lib-input-otp
                 [length]="4"
                 size="lg"
                 [ngModelOptions]="{ standalone: true }"
@@ -110,7 +110,7 @@
           Filled background variant for surfaces that need stronger contrast.
         </p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-otp
+          <ui-lib-input-otp
             [length]="4"
             [filled]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -125,7 +125,7 @@
         <h3>f. Disabled</h3>
         <p class="section-text">All cells are non-interactive and rendered with reduced opacity.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-otp
+          <ui-lib-input-otp
             [length]="4"
             [disabled]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -140,7 +140,7 @@
         <h3>g. Invalid</h3>
         <p class="section-text">Error border applied to all cells when validation fails.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-otp
+          <ui-lib-input-otp
             [length]="4"
             [invalid]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -155,7 +155,7 @@
         <h3>h. Read Only</h3>
         <p class="section-text">Cells display a value but do not accept new input.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-otp
+          <ui-lib-input-otp
             [length]="4"
             [readonly]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -175,7 +175,7 @@
         <ui-lib-panel variant="minimal">
           <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
             <div class="stack-md">
-              <uilib-input-otp
+              <ui-lib-input-otp
                 [length]="6"
                 [integerOnly]="true"
                 formControlName="code"
@@ -200,7 +200,7 @@
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>uilib-input-otp</code>. Import from
+      All inputs accepted by <code>ui-lib-input-otp</code>. Import from
       <code>ui-lib-custom/input-otp</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />

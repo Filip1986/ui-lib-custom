@@ -28,7 +28,7 @@ let nextInputOtpId: number = 0;
  * Supports CVA (ngModel / reactive forms), keyboard navigation, paste, mask, and integer-only modes.
  */
 @Component({
-  selector: 'uilib-input-otp',
+  selector: 'ui-lib-input-otp',
   standalone: true,
   templateUrl: './input-otp.component.html',
   styleUrl: './input-otp.component.scss',
@@ -42,18 +42,18 @@ let nextInputOtpId: number = 0;
     },
   ],
   host: {
-    class: 'uilib-input-otp',
+    class: 'ui-lib-input-otp',
     '[attr.id]': 'otpId()',
     '[attr.role]': '"group"',
     '[attr.aria-label]': 'groupAriaLabel()',
     '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
     '[attr.aria-describedby]': 'errorDescribedBy()',
-    '[class.uilib-input-otp-sm]': 'size() === "sm"',
-    '[class.uilib-input-otp-lg]': 'size() === "lg"',
-    '[class.uilib-input-otp-filled]': 'filled()',
-    '[class.uilib-input-otp-invalid]': 'invalid()',
-    '[class.uilib-input-otp-disabled]': 'isControlDisabled()',
-    '[class.uilib-input-otp-readonly]': 'readonly()',
+    '[class.ui-lib-input-otp-sm]': 'size() === "sm"',
+    '[class.ui-lib-input-otp-lg]': 'size() === "lg"',
+    '[class.ui-lib-input-otp-filled]': 'filled()',
+    '[class.ui-lib-input-otp-invalid]': 'invalid()',
+    '[class.ui-lib-input-otp-disabled]': 'isControlDisabled()',
+    '[class.ui-lib-input-otp-readonly]': 'readonly()',
   },
 })
 export class InputOtpComponent implements ControlValueAccessor {

@@ -138,12 +138,10 @@ export class Slider implements ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   /** Emits on every user-driven value change. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onChange: OutputEmitterRef<SliderChangeEvent> = output<SliderChangeEvent>();
+  public readonly change: OutputEmitterRef<SliderChangeEvent> = output<SliderChangeEvent>();
 
   /** Emits when the user releases a drag interaction. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onSlideEnd: OutputEmitterRef<SliderSlideEndEvent> = output<SliderSlideEndEvent>();
+  public readonly slideEnd: OutputEmitterRef<SliderSlideEndEvent> = output<SliderSlideEndEvent>();
 
   // ---------------------------------------------------------------------------
   // ViewChild
@@ -512,7 +510,7 @@ export class Slider implements ControlValueAccessor {
 
     this.isDragging = false;
     this.onCvaTouched();
-    this.onSlideEnd.emit({ value: this.value(), originalEvent: event });
+    this.slideEnd.emit({ value: this.value(), originalEvent: event });
     this.removeGlobalPointerListeners();
   }
 
@@ -549,7 +547,7 @@ export class Slider implements ControlValueAccessor {
 
       this.value.set(clamped);
       this.onCvaChange(clamped);
-      this.onChange.emit({ value: clamped, originalEvent: event });
+      this.change.emit({ value: clamped, originalEvent: event });
     } else if (handle === 'start') {
       const endVal: number = this.rangeEndValue();
       const clamped: number = this.clamp(snapped, this.min(), endVal);
@@ -560,7 +558,7 @@ export class Slider implements ControlValueAccessor {
       const newValue: [number, number] = [clamped, endVal];
       this.value.set(newValue);
       this.onCvaChange(newValue);
-      this.onChange.emit({ value: newValue, originalEvent: event });
+      this.change.emit({ value: newValue, originalEvent: event });
     } else {
       const startVal: number = this.rangeStartValue();
       const clamped: number = this.clamp(snapped, startVal, this.max());
@@ -571,7 +569,7 @@ export class Slider implements ControlValueAccessor {
       const newValue: [number, number] = [startVal, clamped];
       this.value.set(newValue);
       this.onCvaChange(newValue);
-      this.onChange.emit({ value: newValue, originalEvent: event });
+      this.change.emit({ value: newValue, originalEvent: event });
     }
   }
 

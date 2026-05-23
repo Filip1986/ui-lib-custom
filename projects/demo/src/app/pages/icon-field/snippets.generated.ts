@@ -2,15 +2,15 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+export const basicHtml = `<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <input type="text" placeholder="Search" />
-</uilib-icon-field>
+</ui-lib-icon-field>
 
-<uilib-icon-field iconPosition="right">
-  <uilib-input-icon styleClass="pi pi-spinner pi-spin" />
+<ui-lib-icon-field iconPosition="right">
+  <ui-lib-input-icon styleClass="pi pi-spinner pi-spin" />
   <input type="text" placeholder="Loading" />
-</uilib-icon-field>`;
+</ui-lib-icon-field>`;
 
 export const basicTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -26,29 +26,29 @@ export class MyComponent {
   public loadingValue: string = '';
 }`;
 
-export const floatLabelHtml = `<uilib-float-label variant="over">
-  <uilib-icon-field iconPosition="left">
-    <uilib-input-icon styleClass="pi pi-envelope" />
+export const floatLabelHtml = `<ui-lib-float-label variant="over">
+  <ui-lib-icon-field iconPosition="left">
+    <ui-lib-input-icon styleClass="pi pi-envelope" />
     <input type="text" placeholder=" " />
-  </uilib-icon-field>
+  </ui-lib-icon-field>
   <label>Email (over)</label>
-</uilib-float-label>
+</ui-lib-float-label>
 
-<uilib-float-label variant="in">
-  <uilib-icon-field iconPosition="left">
-    <uilib-input-icon styleClass="pi pi-user" />
+<ui-lib-float-label variant="in">
+  <ui-lib-icon-field iconPosition="left">
+    <ui-lib-input-icon styleClass="pi pi-user" />
     <input type="text" placeholder=" " />
-  </uilib-icon-field>
+  </ui-lib-icon-field>
   <label>Username (in)</label>
-</uilib-float-label>
+</ui-lib-float-label>
 
-<uilib-float-label variant="on">
-  <uilib-icon-field iconPosition="left">
-    <uilib-input-icon styleClass="pi pi-lock" />
+<ui-lib-float-label variant="on">
+  <ui-lib-icon-field iconPosition="left">
+    <ui-lib-input-icon styleClass="pi pi-lock" />
     <input type="password" placeholder=" " />
-  </uilib-icon-field>
+  </ui-lib-icon-field>
   <label>Password (on)</label>
-</uilib-float-label>`;
+</ui-lib-float-label>`;
 
 export const floatLabelTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -66,20 +66,20 @@ export class MyComponent {
   public passwordValue: string = '';
 }`;
 
-export const sizesHtml = `<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+export const sizesHtml = `<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <ui-lib-input size="sm" placeholder="Small" />
-</uilib-icon-field>
+</ui-lib-icon-field>
 
-<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <ui-lib-input size="md" placeholder="Medium" />
-</uilib-icon-field>
+</ui-lib-icon-field>
 
-<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <ui-lib-input size="lg" placeholder="Large" />
-</uilib-icon-field>`;
+</ui-lib-icon-field>`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -97,22 +97,22 @@ export class MyComponent {
   public largeValue: string = '';
 }`;
 
-export const templateHtml = `<uilib-icon-field iconPosition="left">
-  <uilib-input-icon>
+export const templateHtml = `<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon>
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="11" cy="11" r="7" />
       <line x1="16.5" y1="16.5" x2="21" y2="21" />
     </svg>
-  </uilib-input-icon>
+  </ui-lib-input-icon>
   <input type="text" placeholder="SVG icon" />
-</uilib-icon-field>
+</ui-lib-icon-field>
 
-<uilib-icon-field iconPosition="right">
-  <uilib-input-icon>
+<ui-lib-icon-field iconPosition="right">
+  <ui-lib-input-icon>
     <ui-lib-icon name="search" />
-  </uilib-input-icon>
+  </ui-lib-input-icon>
   <ui-lib-input placeholder="ui-lib-icon child" />
-</uilib-icon-field>`;
+</ui-lib-icon-field>`;
 
 export const templateTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -130,20 +130,20 @@ export class MyComponent {
   public iconValue: string = '';
 }`;
 
-export const variantsHtml = `<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+export const variantsHtml = `<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <ui-lib-input variant="material" placeholder="Material" />
-</uilib-icon-field>
+</ui-lib-icon-field>
 
-<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <ui-lib-input variant="bootstrap" placeholder="Bootstrap" />
-</uilib-icon-field>
+</ui-lib-icon-field>
 
-<uilib-icon-field iconPosition="left">
-  <uilib-input-icon styleClass="pi pi-search" />
+<ui-lib-icon-field iconPosition="left">
+  <ui-lib-input-icon styleClass="pi pi-search" />
   <ui-lib-input variant="minimal" placeholder="Minimal" />
-</uilib-icon-field>`;
+</ui-lib-icon-field>`;
 
 export const variantsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

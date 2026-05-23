@@ -15,17 +15,17 @@ import { InputGroupComponent } from './input-group';
   imports: [InputGroupComponent, InputGroupAddonComponent],
   template: `
     <label for="amount-input" data-testid="amount-label">Amount</label>
-    <uilib-input-group id="amount-group" data-testid="amount-group">
-      <uilib-input-group-addon addonLeft>
+    <ui-lib-input-group id="amount-group" data-testid="amount-group">
+      <ui-lib-input-group-addon addonLeft>
         <span aria-hidden="true" data-testid="currency-addon">$</span>
-      </uilib-input-group-addon>
+      </ui-lib-input-group-addon>
       <input id="amount-input" type="text" data-testid="amount-input" />
-      <uilib-input-group-addon addonRight>
+      <ui-lib-input-group-addon addonRight>
         <button type="button" aria-label="Copy amount" data-testid="copy-button">
           <span aria-hidden="true">⧉</span>
         </button>
-      </uilib-input-group-addon>
-    </uilib-input-group>
+      </ui-lib-input-group-addon>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -35,13 +35,13 @@ class InputGroupA11yHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent],
   template: `
-    <uilib-input-group data-testid="slot-group">
-      <uilib-input-group-addon addonLeft data-testid="slot-left">
+    <ui-lib-input-group data-testid="slot-group">
+      <ui-lib-input-group-addon addonLeft data-testid="slot-left">
         <span aria-hidden="true">https://</span>
-      </uilib-input-group-addon>
+      </ui-lib-input-group-addon>
       <input id="url-input" type="url" data-testid="slot-input" />
-      <uilib-input-group-addon addonRight data-testid="slot-right">.com</uilib-input-group-addon>
-    </uilib-input-group>
+      <ui-lib-input-group-addon addonRight data-testid="slot-right">.com</ui-lib-input-group-addon>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -51,12 +51,12 @@ class InputGroupSlotHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent, UiLibInput],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon addonLeft>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon addonLeft>
         <span aria-hidden="true">@</span>
-      </uilib-input-group-addon>
+      </ui-lib-input-group-addon>
       <ui-lib-input label="Email" />
-    </uilib-input-group>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -67,12 +67,12 @@ class InputGroupInputComposableHostComponent {}
   imports: [InputGroupComponent, InputGroupAddonComponent, InputMaskComponent],
   template: `
     <label for="phone-input">Phone</label>
-    <uilib-input-group>
-      <uilib-input-group-addon addonLeft>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon addonLeft>
         <span aria-hidden="true" data-testid="phone-addon">+1</span>
-      </uilib-input-group-addon>
-      <uilib-input-mask id="phone-input" mask="(999) 999-9999" />
-    </uilib-input-group>
+      </ui-lib-input-group-addon>
+      <ui-lib-input-mask id="phone-input" mask="(999) 999-9999" />
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -82,12 +82,12 @@ class InputGroupInputMaskComposableHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent, InputNumberComponent],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon addonLeft>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon addonLeft>
         <span aria-hidden="true" data-testid="number-addon">$</span>
-      </uilib-input-group-addon>
-      <uilib-input-number label="Price" [value]="12" />
-    </uilib-input-group>
+      </ui-lib-input-group-addon>
+      <ui-lib-input-number label="Price" [value]="12" />
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -97,12 +97,12 @@ class InputGroupInputNumberComposableHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent, PasswordComponent],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon addonRight>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon addonRight>
         <span aria-hidden="true" data-testid="password-addon">🔒</span>
-      </uilib-input-group-addon>
-      <uilib-password label="Password" />
-    </uilib-input-group>
+      </ui-lib-input-group-addon>
+      <ui-lib-password label="Password" />
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -235,14 +235,14 @@ describe('InputGroup accessibility', (): void => {
       InputGroupInputComposableHostComponent
     );
     const decorativeAddon: HTMLElement = fixture.debugElement.query(
-      By.css('uilib-input-group-addon span')
+      By.css('ui-lib-input-group-addon span')
     ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('ui-lib-input'))).toBeTruthy();
     expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
   });
 
-  it('composes with uilib-input-mask', async (): Promise<void> => {
+  it('composes with ui-lib-input-mask', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputMaskComposableHostComponent> = await setup(
       InputGroupInputMaskComposableHostComponent
     );
@@ -253,13 +253,13 @@ describe('InputGroup accessibility', (): void => {
     const labelElement: HTMLLabelElement = rootElement.querySelector('label') as HTMLLabelElement;
     const controlElement: HTMLElement = rootElement.querySelector('#phone-input') as HTMLElement;
 
-    expect(fixture.debugElement.query(By.css('uilib-input-mask'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-input-mask'))).toBeTruthy();
     expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
     expect(labelElement.getAttribute('for')).toBe('phone-input');
     expect(controlElement).toBeTruthy();
   });
 
-  it('composes with uilib-input-number', async (): Promise<void> => {
+  it('composes with ui-lib-input-number', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputNumberComposableHostComponent> = await setup(
       InputGroupInputNumberComposableHostComponent
     );
@@ -267,11 +267,11 @@ describe('InputGroup accessibility', (): void => {
       By.css('[data-testid="number-addon"]')
     ).nativeElement as HTMLElement;
 
-    expect(fixture.debugElement.query(By.css('uilib-input-number'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-input-number'))).toBeTruthy();
     expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
   });
 
-  it('composes with uilib-password', async (): Promise<void> => {
+  it('composes with ui-lib-password', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupPasswordComposableHostComponent> = await setup(
       InputGroupPasswordComposableHostComponent
     );
@@ -279,7 +279,7 @@ describe('InputGroup accessibility', (): void => {
       By.css('[data-testid="password-addon"]')
     ).nativeElement as HTMLElement;
 
-    expect(fixture.debugElement.query(By.css('uilib-password'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-password'))).toBeTruthy();
     expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
   });
 });

@@ -62,9 +62,9 @@ function queryAll<T extends Element = HTMLElement>(
       [autoResize]="autoResize()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
-      (onInput)="onInputEvent($event)"
-      (onFocus)="onFocusEvent($event)"
-      (onBlur)="onBlurEvent($event)"
+      (valueChange)="onInputEvent($event)"
+      (textareaFocus)="onFocusEvent($event)"
+      (textareaBlur)="onBlurEvent($event)"
     />
   `,
 })
@@ -401,7 +401,7 @@ describe('UiLibTextarea - ngModel', (): void => {
     expect(control.value).toBe('hello world');
   });
 
-  it('should update model and emit onInput when user types', async (): Promise<void> => {
+  it('should update model and emit valueChange when user types', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
       '.ui-lib-textarea__control'
@@ -473,7 +473,7 @@ describe('UiLibTextarea - ngModel', (): void => {
     expect(counter.textContent.trim()).toContain('5 / 100');
   });
 
-  it('should emit onFocus event when textarea gains focus', async (): Promise<void> => {
+  it('should emit textareaFocus event when textarea gains focus', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
       '.ui-lib-textarea__control'
@@ -484,7 +484,7 @@ describe('UiLibTextarea - ngModel', (): void => {
     expect(host.focusCount).toBe(1);
   });
 
-  it('should emit onBlur event when textarea loses focus', async (): Promise<void> => {
+  it('should emit textareaBlur event when textarea loses focus', async (): Promise<void> => {
     const control: HTMLTextAreaElement = queryEl<HTMLTextAreaElement>(
       fixture,
       '.ui-lib-textarea__control'

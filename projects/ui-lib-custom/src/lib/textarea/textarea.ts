@@ -145,17 +145,25 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
   // Outputs
   // ---------------------------------------------------------------------------
 
-  /** Emits on every user-driven value change. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onInput: OutputEmitterRef<TextareaChangeEvent> = output<TextareaChangeEvent>();
+  /**
+   * Emits on every user-driven value change.
+   * Named `valueChange` (not `input`) to avoid shadowing the native DOM `input` event
+   * that bubbles from the inner `<textarea>` element.
+   */
+  public readonly valueChange: OutputEmitterRef<TextareaChangeEvent> =
+    output<TextareaChangeEvent>();
 
-  /** Emits when the textarea loses focus. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  /**
+   * Emits when the textarea loses focus.
+   * Named `textareaBlur` (not `blur`) to avoid shadowing the native DOM `blur` event.
+   */
+  public readonly textareaBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
-  /** Emits when the textarea gains focus. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  /**
+   * Emits when the textarea gains focus.
+   * Named `textareaFocus` (not `focus`) to avoid shadowing the native DOM `focus` event.
+   */
+  public readonly textareaFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   // ---------------------------------------------------------------------------
   // ViewChild
@@ -353,7 +361,7 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
     const newValue: string = target.value;
     this.value.set(newValue);
     this.onCvaChange(newValue);
-    this.onInput.emit({ value: newValue, originalEvent: event });
+    this.valueChange.emit({ value: newValue, originalEvent: event });
     if (this.autoResize()) {
       this.adjustHeight();
     }
@@ -361,13 +369,13 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
 
   public handleFocus(event: FocusEvent): void {
     this.isFocused.set(true);
-    this.onFocus.emit(event);
+    this.textareaFocus.emit(event);
   }
 
   public handleBlur(event: FocusEvent): void {
     this.isFocused.set(false);
     this.onCvaTouched();
-    this.onBlur.emit(event);
+    this.textareaBlur.emit(event);
   }
 
   // ---------------------------------------------------------------------------

@@ -31,9 +31,9 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onChange` | `KnobChangeEvent` | Emitted whenever the value changes due to user interaction. |
-| `onFocus` | `FocusEvent` | Emitted when the knob receives focus. |
-| `onBlur` | `FocusEvent` | Emitted when the knob loses focus. |
+| `change` | `KnobChangeEvent` | Emitted whenever the value changes due to user interaction. |
+| `focus` | `FocusEvent` | Emitted when the knob receives focus. |
+| `blur` | `FocusEvent` | Emitted when the knob loses focus. |
 
 ## Usage
 

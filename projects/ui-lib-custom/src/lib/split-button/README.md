@@ -24,8 +24,8 @@ import {
   label="Save"
   icon="save"
   [model]="items"
-  (onClick)="savePrimary()"
-  (onItemCommand)="handleMenuCommand($event)"
+  (buttonClick)="savePrimary()"
+  (itemCommand)="handleMenuCommand($event)"
 />
 ```
 
@@ -68,10 +68,10 @@ public readonly items: SplitButtonItem[] = [
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onClick` | `SplitButtonClickEvent` | Emitted when the primary button is activated |
-| `onMenuShow` | `SplitButtonMenuShowEvent` | Emitted when the menu opens |
-| `onMenuHide` | `SplitButtonMenuHideEvent` | Emitted when the menu closes |
-| `onItemCommand` | `SplitButtonItemCommandEvent` | Emitted when a menu item command runs |
+| `buttonClick` | `SplitButtonClickEvent` | Emitted when the primary button is activated. Named `buttonClick` (not `click`) to avoid clashing with the native `click` DOM event. |
+| `menuShow` | `SplitButtonMenuShowEvent` | Emitted when the menu opens |
+| `menuHide` | `SplitButtonMenuHideEvent` | Emitted when the menu closes |
+| `itemCommand` | `SplitButtonItemCommandEvent` | Emitted when a menu item command runs |
 
 ## Template slots
 

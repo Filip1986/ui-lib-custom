@@ -12,7 +12,7 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
   template: `
     <label>
       Phone
-      <uilib-input-mask mask="(999) 999-9999" />
+      <ui-lib-input-mask mask="(999) 999-9999" />
     </label>
   `,
 })
@@ -24,7 +24,7 @@ class InputMaskDefaultHostComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <span id="phone-label">Phone number</span>
-    <uilib-input-mask
+    <ui-lib-input-mask
       id="phone-id"
       mask="(999) 999-9999"
       ariaLabel="Phone"
@@ -42,7 +42,7 @@ class InputMaskLabelHostComponent {}
   template: `
     <label>
       Invalid
-      <uilib-input-mask mask="(999) 999-9999" [invalid]="true" errorMessage="Invalid phone" />
+      <ui-lib-input-mask mask="(999) 999-9999" [invalid]="true" errorMessage="Invalid phone" />
     </label>
   `,
 })
@@ -55,11 +55,11 @@ class InputMaskInvalidHostComponent {}
   template: `
     <label>
       Disabled
-      <uilib-input-mask mask="99/99/9999" [disabled]="true" />
+      <ui-lib-input-mask mask="99/99/9999" [disabled]="true" />
     </label>
     <label>
       Readonly
-      <uilib-input-mask mask="99/99/9999" [readonly]="true" />
+      <ui-lib-input-mask mask="99/99/9999" [readonly]="true" />
     </label>
   `,
 })
@@ -72,7 +72,7 @@ class InputMaskStateHostComponent {}
   template: `
     <label>
       Incomplete allowed
-      <uilib-input-mask mask="(999) 999-9999" [autoClear]="false" errorMessage="Complete phone" />
+      <ui-lib-input-mask mask="(999) 999-9999" [autoClear]="false" errorMessage="Complete phone" />
     </label>
   `,
 })
@@ -83,8 +83,8 @@ class InputMaskIncompleteHostComponent {}
   imports: [InputMaskComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <uilib-input-mask mask="99/99/9999" />
-    <uilib-input-mask mask="99/99/9999" />
+    <ui-lib-input-mask mask="99/99/9999" />
+    <ui-lib-input-mask mask="99/99/9999" />
   `,
 })
 class InputMaskMultipleInstanceHostComponent {}
@@ -172,7 +172,7 @@ describe('InputMask Accessibility', (): void => {
       InputMaskDefaultHostComponent
     );
     const hint: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.uilib-input-mask-sr-only'
+      '.ui-lib-input-mask-sr-only'
     );
     expect(hint).toBeTruthy();
     expect((hint as HTMLElement).textContent.trim()).toBe('Format: (999) 999-9999');
@@ -183,7 +183,7 @@ describe('InputMask Accessibility', (): void => {
       InputMaskLabelHostComponent
     );
     const hint: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.uilib-input-mask-sr-only'
+      '.ui-lib-input-mask-sr-only'
     );
     expect(hint).toBeTruthy();
     expect((hint as HTMLElement).textContent.trim()).toBe('Format: 3 digits, 3 digits, 4 digits');
@@ -208,7 +208,7 @@ describe('InputMask Accessibility', (): void => {
       InputMaskInvalidHostComponent
     );
     const error: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.uilib-input-mask-error'
+      '.ui-lib-input-mask-error'
     );
     expect(error).toBeTruthy();
     expect((error as HTMLElement).getAttribute('role')).toBe('alert');
@@ -264,7 +264,7 @@ describe('InputMask Accessibility', (): void => {
     fixture.detectChanges();
 
     const liveRegion: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '[aria-live="polite"].uilib-input-mask-sr-only'
+      '[aria-live="polite"].ui-lib-input-mask-sr-only'
     );
     expect(liveRegion).toBeTruthy();
     expect((liveRegion as HTMLElement).textContent.trim()).toContain(

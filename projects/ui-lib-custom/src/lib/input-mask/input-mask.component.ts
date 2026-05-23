@@ -38,7 +38,7 @@ let nextInputMaskInstanceId: number = 0;
  * InputMask component with CVA integration and mask-aware keyboard handling.
  */
 @Component({
-  selector: 'uilib-input-mask',
+  selector: 'ui-lib-input-mask',
   standalone: true,
   styleUrl: './input-mask.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,13 +51,13 @@ let nextInputMaskInstanceId: number = 0;
     },
   ],
   host: {
-    class: 'uilib-input-mask',
-    '[class.uilib-input-mask-sm]': 'size() === "sm"',
-    '[class.uilib-input-mask-lg]': 'size() === "lg"',
-    '[class.uilib-input-mask-filled]': 'filled()',
-    '[class.uilib-input-mask-fluid]': 'fluid()',
-    '[class.uilib-input-mask-invalid]': 'isInvalid()',
-    '[class.uilib-input-mask-disabled]': 'isControlDisabled()',
+    class: 'ui-lib-input-mask',
+    '[class.ui-lib-input-mask-sm]': 'size() === "sm"',
+    '[class.ui-lib-input-mask-lg]': 'size() === "lg"',
+    '[class.ui-lib-input-mask-filled]': 'filled()',
+    '[class.ui-lib-input-mask-fluid]': 'fluid()',
+    '[class.ui-lib-input-mask-invalid]': 'isInvalid()',
+    '[class.ui-lib-input-mask-disabled]': 'isControlDisabled()',
     '[class.uilib-inputwrapper-filled]': 'isFilled()',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
   },
@@ -87,18 +87,18 @@ let nextInputMaskInstanceId: number = 0;
       (paste)="onPaste($event)"
     />
     @if (showClear() && isFilled() && !isControlDisabled()) {
-      <span class="uilib-input-mask-clear-icon" (click)="clear()"> × </span>
+      <span class="ui-lib-input-mask-clear-icon" (click)="clear()"> × </span>
     }
     @if (maskFormatHint()) {
-      <span [id]="hintId()" class="uilib-input-mask-sr-only">Format: {{ maskFormatHint() }}</span>
+      <span [id]="hintId()" class="ui-lib-input-mask-sr-only">Format: {{ maskFormatHint() }}</span>
     }
     @if (showError()) {
-      <div [id]="errorId()" class="uilib-input-mask-error" role="alert" aria-live="assertive">
+      <div [id]="errorId()" class="ui-lib-input-mask-error" role="alert" aria-live="assertive">
         <ng-content select="[error]">{{ resolvedErrorMessage() }}</ng-content>
       </div>
     }
     @if (blockedCharacterMessage()) {
-      <span class="uilib-input-mask-sr-only" aria-live="polite" aria-atomic="true">
+      <span class="ui-lib-input-mask-sr-only" aria-live="polite" aria-atomic="true">
         {{ blockedCharacterMessage() }}
       </span>
     }

@@ -6,7 +6,7 @@ import { ICON_FIELD_CLASSES } from './icon-field.constants';
  * Absolute-positioned icon container for IconField layouts.
  */
 @Component({
-  selector: 'uilib-input-icon',
+  selector: 'ui-lib-input-icon',
   standalone: true,
   templateUrl: './input-icon.html',
   styleUrl: './input-icon.scss',

@@ -7,7 +7,7 @@ import type { IconPosition } from './icon-field.types';
  * Wrapper that positions a leading or trailing input icon around projected controls.
  */
 @Component({
-  selector: 'uilib-icon-field',
+  selector: 'ui-lib-icon-field',
   standalone: true,
   templateUrl: './icon-field.html',
   styleUrl: './icon-field.scss',

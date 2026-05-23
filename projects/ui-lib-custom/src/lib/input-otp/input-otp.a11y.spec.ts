@@ -16,7 +16,7 @@ import { InputOtpComponent } from './input-otp.component';
   imports: [InputOtpComponent],
   template: `
     <span id="otp-heading">Verification code</span>
-    <uilib-input-otp
+    <ui-lib-input-otp
       [length]="length()"
       [ariaLabel]="ariaLabel()"
       [ariaLabelledBy]="ariaLabelledBy()"
@@ -25,7 +25,7 @@ import { InputOtpComponent } from './input-otp.component';
       [pasteAnnouncement]="pasteAnnouncement()"
     >
       <span inputOtpError>Code is invalid</span>
-    </uilib-input-otp>
+    </ui-lib-input-otp>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -67,17 +67,17 @@ describe('InputOtp Accessibility', (): void => {
   }
 
   function otpElement(): HTMLElement {
-    return hostElement().querySelector('uilib-input-otp') as HTMLElement;
+    return hostElement().querySelector('ui-lib-input-otp') as HTMLElement;
   }
 
   function cells(): HTMLInputElement[] {
     return Array.from(
-      otpElement().querySelectorAll<HTMLInputElement>('input.uilib-input-otp-cell')
+      otpElement().querySelectorAll<HTMLInputElement>('input.ui-lib-input-otp-cell')
     );
   }
 
   function liveRegion(): HTMLElement {
-    return otpElement().querySelector('.uilib-input-otp-sr-only') as HTMLElement;
+    return otpElement().querySelector('.ui-lib-input-otp-sr-only') as HTMLElement;
   }
 
   function dispatchInput(index: number, value: string): void {
@@ -156,7 +156,7 @@ describe('InputOtp Accessibility', (): void => {
     fixture.componentInstance.invalid.set(true);
     fixture.detectChanges();
     const errorElement: HTMLElement = otpElement().querySelector(
-      '.uilib-input-otp-error'
+      '.ui-lib-input-otp-error'
     ) as HTMLElement;
     expect(errorElement.getAttribute('role')).toBe('alert');
     expect(otpElement().getAttribute('aria-describedby')).toBe(errorElement.id);

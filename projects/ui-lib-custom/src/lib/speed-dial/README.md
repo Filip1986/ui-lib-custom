@@ -4,7 +4,7 @@
 **Package:** `ui-lib-custom/speed-dial`
 **Content projection:** yes — three optional template slots via directives: `uiSpeedDialItem` (custom item rendering), `uiSpeedDialButton` (custom trigger button), `uiSpeedDialIcon` (custom trigger icon)
 
-> Outputs follow PrimeNG's `onShow` / `onHide` / `onClick` naming convention (prefixed with `on`), which is intentionally kept for API parity despite the lint suppression comments in the source.
+> Output names avoid native DOM event names (`click`, `focus`, `blur`, `change`) to prevent dual-binding issues when native events bubble from child elements to the host. Use `buttonClick` / `buttonFocus` / `buttonBlur` / `panelChange` as shown in the Outputs table.
 
 ## Inputs
 
@@ -33,13 +33,13 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onShow` | `SpeedDialShowEvent` | Fired when the dial opens |
-| `onHide` | `SpeedDialHideEvent` | Fired when the dial closes |
-| `onVisibleChange` | `SpeedDialVisibleChangeEvent` | Fired on every open/close toggle; includes `{ originalEvent, visible }` |
-| `onClick` | `SpeedDialClickEvent` | Fired when the trigger button is clicked |
-| `onFocus` | `FocusEvent` | Fired when the trigger button gains focus |
-| `onBlur` | `FocusEvent` | Fired when the trigger button loses focus |
-| `onItemCommand` | `SpeedDialItemCommandEvent` | Fired when an action item is activated |
+| `show` | `SpeedDialShowEvent` | Fired when the dial opens |
+| `hide` | `SpeedDialHideEvent` | Fired when the dial closes |
+| `panelChange` | `SpeedDialVisibleChangeEvent` | Fired on every open/close toggle; includes `{ originalEvent, visible }`. Named `panelChange` (not `visibleChange`) to avoid clashing with the `[(visible)]` model signal's internal event. |
+| `buttonClick` | `SpeedDialClickEvent` | Fired when the trigger button is activated. Named `buttonClick` (not `click`) to avoid native DOM event clash. |
+| `buttonFocus` | `FocusEvent` | Fired when the trigger button gains focus. Named `buttonFocus` (not `focus`) to avoid native DOM event clash. |
+| `buttonBlur` | `FocusEvent` | Fired when the trigger button loses focus. Named `buttonBlur` (not `blur`) to avoid native DOM event clash. |
+| `itemCommand` | `SpeedDialItemCommandEvent` | Fired when an action item is activated |
 
 ## SpeedDialItem Interface
 

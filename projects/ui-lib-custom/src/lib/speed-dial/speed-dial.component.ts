@@ -94,21 +94,23 @@ export class SpeedDialComponent {
 
   public readonly visible: ModelSignal<boolean> = model<boolean>(false);
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onShow: OutputEmitterRef<SpeedDialShowEvent> = output<SpeedDialShowEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onHide: OutputEmitterRef<SpeedDialHideEvent> = output<SpeedDialHideEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onVisibleChange: OutputEmitterRef<SpeedDialVisibleChangeEvent> =
+  public readonly show: OutputEmitterRef<SpeedDialShowEvent> = output<SpeedDialShowEvent>();
+  public readonly hide: OutputEmitterRef<SpeedDialHideEvent> = output<SpeedDialHideEvent>();
+  /**
+   * Emits whenever the panel opens or closes, carrying the native event and new visibility state.
+   * Named `panelChange` (not `visibleChange`) to avoid shadowing the two-way-binding event that
+   * `model<boolean>()` for `visible` generates internally under the same name.
+   */
+  public readonly panelChange: OutputEmitterRef<SpeedDialVisibleChangeEvent> =
     output<SpeedDialVisibleChangeEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onClick: OutputEmitterRef<SpeedDialClickEvent> = output<SpeedDialClickEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onItemCommand: OutputEmitterRef<SpeedDialItemCommandEvent> =
+  /** Emits when the trigger button is activated by click or keyboard. */
+  public readonly buttonClick: OutputEmitterRef<SpeedDialClickEvent> =
+    output<SpeedDialClickEvent>();
+  /** Emits when the trigger button gains focus. */
+  public readonly buttonFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  /** Emits when the trigger button loses focus. */
+  public readonly buttonBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly itemCommand: OutputEmitterRef<SpeedDialItemCommandEvent> =
     output<SpeedDialItemCommandEvent>();
 
   public readonly listId: string = `${this.hostId}-list`;
@@ -219,35 +221,35 @@ export class SpeedDialComponent {
       this.focusedItemIndex.set(-1);
     }
 
-    this.onClick.emit({ originalEvent: event, visible: nextVisible });
-    this.onVisibleChange.emit({ originalEvent: event, visible: nextVisible });
+    this.buttonClick.emit({ originalEvent: event, visible: nextVisible });
+    this.panelChange.emit({ originalEvent: event, visible: nextVisible });
     if (nextVisible) {
-      this.onShow.emit({ originalEvent: event });
+      this.show.emit({ originalEvent: event });
       return;
     }
-    this.onHide.emit({ originalEvent: event });
+    this.hide.emit({ originalEvent: event });
   }
 
-  public show(event: Event): void {
+  public openPanel(event: Event): void {
     if (this.disabled() || this.visible()) {
       return;
     }
 
     this.visible.set(true);
     this.focusedItemIndex.set(-1);
-    this.onVisibleChange.emit({ originalEvent: event, visible: true });
-    this.onShow.emit({ originalEvent: event });
+    this.panelChange.emit({ originalEvent: event, visible: true });
+    this.show.emit({ originalEvent: event });
   }
 
-  public hide(event: Event): void {
+  public closePanel(event: Event): void {
     if (!this.visible()) {
       return;
     }
 
     this.visible.set(false);
     this.focusedItemIndex.set(-1);
-    this.onVisibleChange.emit({ originalEvent: event, visible: false });
-    this.onHide.emit({ originalEvent: event });
+    this.panelChange.emit({ originalEvent: event, visible: false });
+    this.hide.emit({ originalEvent: event });
   }
 
   public onItemClick(event: MouseEvent, item: SpeedDialItem, index: number): void {
@@ -257,12 +259,12 @@ export class SpeedDialComponent {
     }
 
     item.command?.({ originalEvent: event, item, index });
-    this.onItemCommand.emit({ originalEvent: event, item, index });
-    this.hide(event);
+    this.itemCommand.emit({ originalEvent: event, item, index });
+    this.closePanel(event);
   }
 
   public onMaskClick(event: MouseEvent): void {
-    this.hide(event);
+    this.closePanel(event);
   }
 
   @HostListener('document:click', ['$event'])
@@ -280,7 +282,7 @@ export class SpeedDialComponent {
       return;
     }
 
-    this.hide(event);
+    this.closePanel(event);
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -295,7 +297,7 @@ export class SpeedDialComponent {
 
     event.preventDefault();
     event.stopPropagation();
-    this.hide(event);
+    this.closePanel(event);
   }
 
   public itemId(index: number): string {
@@ -312,7 +314,7 @@ export class SpeedDialComponent {
       case KEYBOARD_KEYS.Escape:
         if (this.visible()) {
           event.preventDefault();
-          this.hide(event);
+          this.closePanel(event);
         }
         return;
       case KEYBOARD_KEYS.ArrowDown:
@@ -324,7 +326,7 @@ export class SpeedDialComponent {
             return;
           }
           event.preventDefault();
-          this.show(event);
+          this.openPanel(event);
           this.focusFirstItem();
           return;
         }
@@ -332,7 +334,7 @@ export class SpeedDialComponent {
         this.moveFocusByArrow(event.key);
         return;
       case KEYBOARD_KEYS.Tab:
-        this.hide(event);
+        this.closePanel(event);
         return;
       default:
         return;
@@ -348,7 +350,7 @@ export class SpeedDialComponent {
         return;
       case KEYBOARD_KEYS.Escape:
         event.preventDefault();
-        this.hide(event);
+        this.closePanel(event);
         this.focusTrigger();
         return;
       case KEYBOARD_KEYS.ArrowDown:
@@ -370,7 +372,7 @@ export class SpeedDialComponent {
         this.focusLastItem();
         return;
       case KEYBOARD_KEYS.Tab:
-        this.hide(event);
+        this.closePanel(event);
         return;
       default:
         return;

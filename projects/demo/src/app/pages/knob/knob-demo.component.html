@@ -17,7 +17,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicValue"
                 ariaLabel="Basic value"
@@ -38,7 +38,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row knob-row--align-end">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 size="sm"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicValue"
@@ -47,7 +47,7 @@
               <span class="knob-caption">sm</span>
             </div>
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 size="md"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicValue"
@@ -56,7 +56,7 @@
               <span class="knob-caption">md</span>
             </div>
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 size="lg"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicValue"
@@ -78,7 +78,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 [step]="25"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="stepValue"
@@ -100,7 +100,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 [min]="-50"
                 [max]="50"
                 [step]="10"
@@ -125,7 +125,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 valueTemplate="{value}&#176;"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="templateValue"
@@ -134,7 +134,7 @@
               <span class="knob-caption">degrees</span>
             </div>
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 valueTemplate="{value}%"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="templateValue"
@@ -157,7 +157,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 valueColor="#f59e0b"
                 textColor="#b45309"
                 [ngModelOptions]="{ standalone: true }"
@@ -167,7 +167,7 @@
               <span class="knob-caption">amber</span>
             </div>
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 valueColor="#10b981"
                 textColor="#065f46"
                 [ngModelOptions]="{ standalone: true }"
@@ -177,7 +177,7 @@
               <span class="knob-caption">emerald</span>
             </div>
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 valueColor="#ef4444"
                 textColor="#991b1b"
                 [ngModelOptions]="{ standalone: true }"
@@ -198,7 +198,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 [disabled]="true"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="disabledValue"
@@ -220,7 +220,7 @@
         <ui-lib-panel variant="minimal">
           <div class="knob-row">
             <div class="knob-item">
-              <uilib-knob
+              <ui-lib-knob
                 [readonly]="true"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="readonlyValue"
@@ -241,11 +241,11 @@
           <form [formGroup]="reactiveForm">
             <div class="knob-row">
               <div class="knob-item">
-                <uilib-knob formControlName="brightness" ariaLabel="Brightness" />
+                <ui-lib-knob formControlName="brightness" ariaLabel="Brightness" />
                 <span class="knob-caption">brightness={{ brightnessControl.value }}</span>
               </div>
               <div class="knob-item">
-                <uilib-knob formControlName="contrast" ariaLabel="Contrast" />
+                <ui-lib-knob formControlName="contrast" ariaLabel="Contrast" />
                 <span class="knob-caption">contrast={{ contrastControl.value }}</span>
               </div>
             </div>
@@ -260,7 +260,7 @@
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>uilib-knob</code>. Import from
+      All inputs accepted by <code>ui-lib-knob</code>. Import from
       <code>ui-lib-custom/knob</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />

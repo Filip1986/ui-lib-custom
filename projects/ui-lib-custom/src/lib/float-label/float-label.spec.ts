@@ -21,7 +21,7 @@ declare const require: (moduleName: string) => unknown;
   standalone: true,
   imports: [FloatLabelComponent, FormsModule, ReactiveFormsModule],
   template: `
-    <uilib-float-label [variant]="variant">
+    <ui-lib-float-label [variant]="variant">
       <input
         type="text"
         [placeholder]="placeholder"
@@ -29,7 +29,7 @@ declare const require: (moduleName: string) => unknown;
         [(ngModel)]="value"
       />
       <label>Username</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -43,14 +43,14 @@ class TestHostComponent {
   standalone: true,
   imports: [FloatLabelComponent, FormsModule],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <textarea
         [placeholder]="placeholder"
         [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="value"
       ></textarea>
       <label>Bio</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -63,14 +63,14 @@ class TextareaHostComponent {
   standalone: true,
   imports: [FloatLabelComponent, FormsModule, UiLibSelect],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <ui-lib-select
         [options]="options"
         [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="value"
       />
       <label>City</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -86,7 +86,7 @@ class SelectHostComponent {
   standalone: true,
   imports: [FloatLabelComponent, FormsModule, UiLibInput],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <ui-lib-input
         [placeholder]="placeholder"
         [label]="''"
@@ -94,7 +94,7 @@ class SelectHostComponent {
         [(ngModel)]="value"
       />
       <label>First Name</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -107,10 +107,10 @@ class InputHostComponent {
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <input type="text" />
       <label>Generated association</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -121,10 +121,10 @@ class GeneratedAssociationHostComponent {}
   imports: [FloatLabelComponent, ReactiveFormsModule],
   template: `
     <form [formGroup]="form">
-      <uilib-float-label>
+      <ui-lib-float-label>
         <input type="text" placeholder=" " formControlName="username" />
         <label>Username</label>
-      </uilib-float-label>
+      </ui-lib-float-label>
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -142,9 +142,9 @@ class ReactiveInvalidHostComponent {
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <input type="text" placeholder=" " />
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -154,9 +154,9 @@ class NoLabelHostComponent {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <label>Only label</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -166,20 +166,20 @@ class NoInputHostComponent {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label variant="over">
-      <uilib-float-label variant="in">
+    <ui-lib-float-label variant="over">
+      <ui-lib-float-label variant="in">
         <input type="text" placeholder=" " />
         <label>Inner</label>
-      </uilib-float-label>
+      </ui-lib-float-label>
       <label>Outer</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class NestedHostComponent {}
 
 function getFloatLabelElement<T>(fixture: ComponentFixture<T>): HTMLElement {
-  return fixture.debugElement.query(By.css('uilib-float-label')).nativeElement as HTMLElement;
+  return fixture.debugElement.query(By.css('ui-lib-float-label')).nativeElement as HTMLElement;
 }
 
 describe('FloatLabelComponent host classes', (): void => {
@@ -198,10 +198,10 @@ describe('FloatLabelComponent host classes', (): void => {
   it('has base and default over classes', (): void => {
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
 
-    expect(host.classList.contains('uilib-float-label')).toBeTruthy();
-    expect(host.classList.contains('uilib-float-label--over')).toBeTruthy();
-    expect(host.classList.contains('uilib-float-label--in')).toBeFalsy();
-    expect(host.classList.contains('uilib-float-label--on')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label')).toBeTruthy();
+    expect(host.classList.contains('ui-lib-float-label--over')).toBeTruthy();
+    expect(host.classList.contains('ui-lib-float-label--in')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label--on')).toBeFalsy();
   });
 
   it('applies in variant class only', (): void => {
@@ -209,9 +209,9 @@ describe('FloatLabelComponent host classes', (): void => {
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.classList.contains('uilib-float-label--in')).toBeTruthy();
-    expect(host.classList.contains('uilib-float-label--over')).toBeFalsy();
-    expect(host.classList.contains('uilib-float-label--on')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label--in')).toBeTruthy();
+    expect(host.classList.contains('ui-lib-float-label--over')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label--on')).toBeFalsy();
   });
 
   it('applies on variant class', (): void => {
@@ -219,9 +219,9 @@ describe('FloatLabelComponent host classes', (): void => {
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.classList.contains('uilib-float-label--on')).toBeTruthy();
-    expect(host.classList.contains('uilib-float-label--over')).toBeFalsy();
-    expect(host.classList.contains('uilib-float-label--in')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label--on')).toBeTruthy();
+    expect(host.classList.contains('ui-lib-float-label--over')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label--in')).toBeFalsy();
   });
 
   it('updates class when variant changes', (): void => {
@@ -232,8 +232,8 @@ describe('FloatLabelComponent host classes', (): void => {
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.classList.contains('uilib-float-label--in')).toBeTruthy();
-    expect(host.classList.contains('uilib-float-label--over')).toBeFalsy();
+    expect(host.classList.contains('ui-lib-float-label--in')).toBeTruthy();
+    expect(host.classList.contains('ui-lib-float-label--over')).toBeFalsy();
   });
 });
 
@@ -252,10 +252,10 @@ describe('FloatLabelComponent projection and structure', (): void => {
 
   it('projects input and label content', (): void => {
     const inputDebugElement: DebugElement = fixture.debugElement.query(
-      By.css('uilib-float-label > input')
+      By.css('ui-lib-float-label > input')
     );
     const labelDebugElement: DebugElement = fixture.debugElement.query(
-      By.css('uilib-float-label > label')
+      By.css('ui-lib-float-label > label')
     );
 
     expect(inputDebugElement).toBeTruthy();
@@ -265,10 +265,10 @@ describe('FloatLabelComponent projection and structure', (): void => {
 
   it('auto-associates a projected label with the generated input id', (): void => {
     const labelElement: HTMLLabelElement = fixture.debugElement.query(
-      By.css('uilib-float-label > label')
+      By.css('ui-lib-float-label > label')
     ).nativeElement as HTMLLabelElement;
     const inputElement: HTMLInputElement = fixture.debugElement.query(
-      By.css('uilib-float-label > input')
+      By.css('ui-lib-float-label > input')
     ).nativeElement as HTMLInputElement;
 
     expect(inputElement.id).toBeTruthy();
@@ -296,8 +296,8 @@ describe('FloatLabelComponent integration contracts', (): void => {
       TestBed.createComponent(TextareaHostComponent);
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('uilib-float-label > textarea'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-float-label > label'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-float-label > textarea'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-float-label > label'))).toBeTruthy();
   });
 
   it('injects the blank placeholder required for CSS-only floating labels', async (): Promise<void> => {
@@ -312,7 +312,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement = fixture.debugElement.query(
-      By.css('uilib-float-label input')
+      By.css('ui-lib-float-label input')
     ).nativeElement as HTMLInputElement;
 
     expect(inputElement.getAttribute('placeholder')).toBe(' ');
@@ -356,10 +356,10 @@ describe('FloatLabelComponent integration contracts', (): void => {
     fixture.detectChanges();
 
     const selectElement: HTMLElement = fixture.debugElement.query(
-      By.css('uilib-float-label > ui-lib-select')
+      By.css('ui-lib-float-label > ui-lib-select')
     ).nativeElement as HTMLElement;
     const labelElement: HTMLLabelElement = fixture.debugElement.query(
-      By.css('uilib-float-label > label')
+      By.css('ui-lib-float-label > label')
     ).nativeElement as HTMLLabelElement;
 
     expect(labelElement.id).toBeTruthy();
@@ -393,7 +393,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
 
     const floatLabel: HTMLElement = getFloatLabelElement(fixture);
     const labelElement: HTMLLabelElement = fixture.debugElement.query(
-      By.css('uilib-float-label > label')
+      By.css('ui-lib-float-label > label')
     ).nativeElement as HTMLLabelElement;
     expect(floatLabel.contains(nativeInput)).toBeTruthy();
     expect(labelElement.htmlFor).toBe(nativeInput.id);
@@ -415,7 +415,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement = fixture.debugElement.query(
-      By.css('uilib-float-label input')
+      By.css('ui-lib-float-label input')
     ).nativeElement as HTMLInputElement;
 
     expect(inputElement.classList.contains('ng-invalid')).toBeTruthy();
@@ -458,7 +458,7 @@ describe('FloatLabelComponent edge cases', (): void => {
       TestBed.createComponent(NestedHostComponent);
     fixture.detectChanges();
 
-    const labels: DebugElement[] = fixture.debugElement.queryAll(By.css('uilib-float-label'));
+    const labels: DebugElement[] = fixture.debugElement.queryAll(By.css('ui-lib-float-label'));
     expect(labels.length).toBe(2);
   });
 });
@@ -483,10 +483,10 @@ describe('FloatLabelComponent stylesheet contract', (): void => {
     );
     const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
-    expect(stylesheetSource).toContain('.uilib-float-label {');
+    expect(stylesheetSource).toContain('.ui-lib-float-label {');
     expect(stylesheetSource).toContain('position: absolute;');
-    expect(stylesheetSource).toContain('.uilib-float-label--in {');
-    expect(stylesheetSource).toContain('.uilib-float-label--on {');
+    expect(stylesheetSource).toContain('.ui-lib-float-label--in {');
+    expect(stylesheetSource).toContain('.ui-lib-float-label--on {');
     expect(stylesheetSource).toContain(':has(.ng-invalid.ng-dirty) label');
     expect(stylesheetSource).toContain(':has(.uilib-inputwrapper-focus) label');
     expect(stylesheetSource).toContain('&:focus-within label');

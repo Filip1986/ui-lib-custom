@@ -4,7 +4,7 @@
 **Package:** `ui-lib-custom/input-number`
 **Content projection:** no — renders its own `<input>` and spinner buttons inline (template is inline in the component decorator)
 
-> `value` is a `model()` signal — use `[(value)]` for two-way binding in addition to standard `ngModel` / reactive forms. Output names follow the PrimeNG `on*` prefix convention (`onInput`, `onFocus`, etc.) — listen with `(onInput)="..."`.
+> `value` is a `model()` signal — use `[(value)]` for two-way binding in addition to standard `ngModel` / reactive forms.
 
 ## Inputs
 
@@ -49,11 +49,11 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onInput` | `{ originalEvent: InputEvent; value: number \| null }` | Fired on each input change |
-| `onFocus` | `FocusEvent` | Input focused |
-| `onBlur` | `FocusEvent` | Input blurred |
-| `onKeyDown` | `KeyboardEvent` | Key pressed inside the input |
-| `onClear` | `void` | Clear button clicked |
+| `input` | `{ originalEvent: InputEvent; value: number \| null }` | Fired on each input change |
+| `focus` | `FocusEvent` | Input focused |
+| `blur` | `FocusEvent` | Input blurred |
+| `keyDown` | `KeyboardEvent` | Key pressed inside the input |
+| `clear` | `void` | Clear button clicked |
 
 ## Usage
 

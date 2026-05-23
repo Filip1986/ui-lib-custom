@@ -5,7 +5,7 @@ import { INPUT_GROUP_CLASSES } from './input-group.constants';
  * Wrapper container that composes inputs with optional addon elements.
  */
 @Component({
-  selector: 'uilib-input-group',
+  selector: 'ui-lib-input-group',
   standalone: true,
   templateUrl: './input-group.html',
   styleUrl: './input-group.scss',

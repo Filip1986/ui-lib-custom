@@ -9,7 +9,7 @@
         <p class="demo-section__description">Label floats on focus and stays floated while value is present.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <uilib-float-label>
+            <ui-lib-float-label>
               <ui-lib-input
                 placeholder=" "
                 [label]="''"
@@ -17,7 +17,7 @@
                 [(ngModel)]="basicValue"
               />
               <label>Username</label>
-            </uilib-float-label>
+            </ui-lib-float-label>
             <span class="value-text">Value: {{ basicValue || '(empty)' }}</span>
           </div>
         </ui-lib-panel>
@@ -29,36 +29,36 @@
           <div class="row-3">
             <div class="variant-column">
               <p class="variant-title">over</p>
-              <uilib-float-label variant="over">
+              <ui-lib-float-label variant="over">
                 <input
                   placeholder=" "
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantValues.over"
                 />
                 <label>Over label</label>
-              </uilib-float-label>
+              </ui-lib-float-label>
             </div>
             <div class="variant-column">
               <p class="variant-title">in</p>
-              <uilib-float-label variant="in">
+              <ui-lib-float-label variant="in">
                 <input
                   placeholder=" "
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantValues.in"
                 />
                 <label>In label</label>
-              </uilib-float-label>
+              </ui-lib-float-label>
             </div>
             <div class="variant-column">
               <p class="variant-title">on</p>
-              <uilib-float-label variant="on">
+              <ui-lib-float-label variant="on">
                 <input
                   placeholder=" "
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantValues.on"
                 />
                 <label>On label</label>
-              </uilib-float-label>
+              </ui-lib-float-label>
             </div>
           </div>
         </ui-lib-panel>
@@ -68,14 +68,14 @@
         <p class="demo-section__description">Uses wrapper state classes from `ui-lib-select` host.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <uilib-float-label>
+            <ui-lib-float-label>
               <ui-lib-select
                 [options]="cityOptions"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="selectedCity"
               />
               <label>City</label>
-            </uilib-float-label>
+            </ui-lib-float-label>
             <span class="value-text">Selected: {{ selectedCity || '(none)' }}</span>
           </div>
         </ui-lib-panel>
@@ -84,7 +84,7 @@
       <app-doc-section id="with-textarea" title="With Textarea">
         <p class="demo-section__description">Label stays top-aligned for textarea controls.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-float-label>
+          <ui-lib-float-label>
             <textarea
               placeholder=" "
               rows="4"
@@ -92,7 +92,7 @@
               [(ngModel)]="notes"
             ></textarea>
             <label>Notes</label>
-          </uilib-float-label>
+          </ui-lib-float-label>
         </ui-lib-panel>
         <app-doc-code-example [html]="textareaHtml" [typescript]="textareaTs" />
       </app-doc-section>
@@ -101,18 +101,18 @@
         <ui-lib-panel variant="minimal">
           <form [formGroup]="invalidForm" class="stack-md" novalidate>
             <div class="row-3">
-              <uilib-float-label variant="over">
+              <ui-lib-float-label variant="over">
                 <input placeholder=" " formControlName="over" />
                 <label>Required over</label>
-              </uilib-float-label>
-              <uilib-float-label variant="in">
+              </ui-lib-float-label>
+              <ui-lib-float-label variant="in">
                 <input placeholder=" " formControlName="in" />
                 <label>Required in</label>
-              </uilib-float-label>
-              <uilib-float-label variant="on">
+              </ui-lib-float-label>
+              <ui-lib-float-label variant="on">
                 <input placeholder=" " formControlName="on" />
                 <label>Required on</label>
-              </uilib-float-label>
+              </ui-lib-float-label>
             </div>
             <ui-lib-button type="button" severity="primary" (click)="markInvalidAsDirty()">
               Mark invalid controls dirty
@@ -125,18 +125,18 @@
         <p class="demo-section__description">FloatLabel inside a FormGroup with native and wrapper controls.</p>
         <ui-lib-panel variant="minimal">
           <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
-            <uilib-float-label>
+            <ui-lib-float-label>
               <input placeholder=" " formControlName="firstName" />
               <label>First name</label>
-            </uilib-float-label>
-            <uilib-float-label>
+            </ui-lib-float-label>
+            <ui-lib-float-label>
               <ui-lib-select [options]="cityOptions" formControlName="city" />
               <label>City</label>
-            </uilib-float-label>
-            <uilib-float-label variant="in">
+            </ui-lib-float-label>
+            <ui-lib-float-label variant="in">
               <textarea placeholder=" " rows="3" formControlName="bio"></textarea>
               <label>Bio</label>
-            </uilib-float-label>
+            </ui-lib-float-label>
             <ui-lib-button type="submit" severity="primary">Submit reactive form</ui-lib-button>
             <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
           </form>
@@ -149,7 +149,7 @@
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>uilib-float-label</code>. Import from
+      All inputs accepted by <code>ui-lib-float-label</code>. Import from
       <code>ui-lib-custom/float-label</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />

@@ -177,13 +177,13 @@ export class InputGroupDemoComponent {
       name: '(no inputs)',
       type: '—',
       description:
-        'InputGroup is a structural wrapper. Place uilib-input-group-addon and form controls as children.',
+        'InputGroup is a structural wrapper. Place ui-lib-input-group-addon and form controls as children.',
     },
   ];
 
   public readonly ariaRows: readonly AriaRow[] = [
     {
-      element: 'Addon text (<uilib-input-group-addon>)',
+      element: 'Addon text (<ui-lib-input-group-addon>)',
       attribute: 'aria-hidden="true"',
       value: '—',
       notes:

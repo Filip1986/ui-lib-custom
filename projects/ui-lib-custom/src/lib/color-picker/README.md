@@ -4,7 +4,7 @@
 **Package:** `ui-lib-custom/color-picker`
 **Content projection:** no — none
 
-> The `onChange` output conflicts with Angular's CVA naming convention and is suppressed with an ESLint comment — listen to it as `(onChange)="..."`. The `value` input is a plain `input()` (not `model()`), so two-way binding requires CVA (`ngModel` / reactive forms) rather than `[(value)]`.
+> The `value` input is a plain `input()` (not `model()`), so two-way binding requires CVA (`ngModel` / reactive forms) rather than `[(value)]`.
 
 ## Inputs
 
@@ -23,9 +23,9 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onChange` | `ColorPickerChangeEvent` | Emitted on every color change (drag or keyboard) |
-| `onShow` | `void` | Popup panel opened |
-| `onHide` | `void` | Popup panel closed |
+| `change` | `ColorPickerChangeEvent` | Emitted on every color change (drag or keyboard) |
+| `show` | `void` | Popup panel opened |
+| `hide` | `void` | Popup panel closed |
 
 ## Keyboard Access
 
