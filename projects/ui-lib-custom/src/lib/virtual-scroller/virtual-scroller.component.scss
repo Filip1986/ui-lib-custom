@@ -7,7 +7,7 @@
 // Design tokens (CSS variable fallbacks)
 // -----------------------------------------------------------------------------
 
-:host {
+ui-lib-virtual-scroller {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.7);
   --uilib-scroller-loading-icon-size: 2rem;
   --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #6366f1);
@@ -117,21 +117,21 @@
 // -----------------------------------------------------------------------------
 
 // Horizontal: content is laid out as a flex row
-:host.uilib-scroller-horizontal {
+ui-lib-virtual-scroller.uilib-scroller-horizontal {
   .uilib-scroller-content {
     display: flex;
   }
 }
 
 // Both: 2-D scrolling — content remains block (rows handle columns internally)
-:host.uilib-scroller-both {
+ui-lib-virtual-scroller.uilib-scroller-both {
   .uilib-scroller-viewport {
     overflow: scroll;
   }
 }
 
 // Inline: content is in normal flow rather than absolutely positioned
-:host.uilib-scroller-inline {
+ui-lib-virtual-scroller.uilib-scroller-inline {
   .uilib-scroller-content {
     position: static;
   }
@@ -141,7 +141,7 @@
 // Variant: material
 // -----------------------------------------------------------------------------
 
-:host.uilib-variant-material {
+ui-lib-virtual-scroller.uilib-variant-material {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.8);
   --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #6366f1);
 
@@ -155,7 +155,7 @@
 // Variant: bootstrap
 // -----------------------------------------------------------------------------
 
-:host.uilib-variant-bootstrap {
+ui-lib-virtual-scroller.uilib-variant-bootstrap {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.75);
   --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #0d6efd);
 
@@ -169,7 +169,7 @@
 // Variant: minimal
 // -----------------------------------------------------------------------------
 
-:host.uilib-variant-minimal {
+ui-lib-virtual-scroller.uilib-variant-minimal {
   --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.6);
   --uilib-scroller-loading-icon-color: var(--uilib-color-text-muted, #6b7280);
 }

@@ -1,21 +1,4 @@
 ui-lib-badge {
-  /* Spacing tokens */
-  --uilib-space-1: 0.25rem;
-  --uilib-space-2: 0.5rem;
-  --uilib-space-3: 0.75rem;
-  --uilib-space-4: 1rem;
-
-  /* Typography tokens */
-  --uilib-font-size-xs: 0.75rem;
-  --uilib-font-size-sm: 0.875rem;
-  --uilib-font-size-md: 1rem;
-
-  /* Radius tokens */
-  --uilib-radius-sm: 0.125rem;
-  --uilib-radius-md: 0.25rem;
-  --uilib-radius-lg: 0.375rem;
-  --uilib-radius-full: 9999px;
-
   /* Component defaults */
   --uilib-badge-bg-resolved: var(--uilib-badge-bg, var(--uilib-color-neutral-50));
   --uilib-badge-bg-subtle-resolved: var(--uilib-badge-bg-subtle, var(--uilib-color-neutral-50));

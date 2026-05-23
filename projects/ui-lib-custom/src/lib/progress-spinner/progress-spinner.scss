@@ -51,20 +51,13 @@
 }
 
 // ---------------------------------------------------------------------------
-// Size tokens
-// ---------------------------------------------------------------------------
-
-:root {
-  --uilib-progress-spinner-size-sm: 32px;
-  --uilib-progress-spinner-size-md: 56px;
-  --uilib-progress-spinner-size-lg: 96px;
-}
-
-// ---------------------------------------------------------------------------
-// Host element
+// Host element — tokens scoped here so they don't pollute :root
 // ---------------------------------------------------------------------------
 
 .ui-lib-progress-spinner {
+  --uilib-progress-spinner-size-sm: 32px;
+  --uilib-progress-spinner-size-md: 56px;
+  --uilib-progress-spinner-size-lg: 96px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

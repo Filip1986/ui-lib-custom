@@ -82,6 +82,35 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-23 [CSS/SCSS architecture refactor — token scoping, dark-mode dedup, host-selector fixes]
+Changed:
+  themes.scss (complete structural rewrite):
+  - Section 1 (:root): added --uilib-space-1, --uilib-font-size-xs/sm/md/lg/xl, --uilib-radius-sm/md/lg/xl/full, --uilib-shadow-xs/sm/md/lg, --uilib-transition-duration as globally registered tokens
+  - Section 2/3: dark block is now overrides-only (~100 lines vs ~200 before); fixed bug: --uilib-card-bg was #fff in the dark block
+  badge.scss: deleted 13 lines that redefined --uilib-radius-*, --uilib-space-*, --uilib-font-size-* on the badge host element (cascade pollution)
+  Token block location (moved from :root to host element):
+  - slider/slider.scss: :root → ui-lib-slider; [data-theme='dark'] → [data-theme='dark'] ui-lib-slider
+  - knob/knob.component.scss: same pattern with ui-lib-knob
+  - ripple/ripple.scss: :root block merged into .ui-lib-ripple {}
+  - progress-spinner/progress-spinner.scss: :root size tokens moved into .ui-lib-progress-spinner {}
+  - table/table.component.scss: :root → ui-lib-table; [data-theme='dark'] scoped to ui-lib-table
+  :host selector fixes (ViewEncapsulation.None — :host has no effect):
+  - cascade-select.scss: removed redundant :host { display: block } (ui-lib-cascade-select already existed)
+  - date-picker.scss: :host.ui-lib-datepicker → ui-lib-date-picker.ui-lib-datepicker (15 occurrences)
+  - split-button/split-button.component.scss: all :host / :host. / :host (space) → ui-lib-split-button
+  - virtual-scroller/virtual-scroller.component.scss: :host → ui-lib-virtual-scroller (all occurrences)
+  - editor/editor.scss: :host → ui-lib-editor
+  styles/_theme-mixins.scss: added deprecation header comment — do not add tokens; migrate to themes.scss
+  Docs:
+  - docs/reference/systems/CSS_ARCHITECTURE.md: NEW — full architecture reference, token hierarchy, comparisons
+  - docs/CSS_THEMING_PROGRESS.md: NEW — competitive position, what was fixed, roadmap items
+  - docs/ROADMAP.md: added CSS_THEMING_PROGRESS link in header
+  - docs/reference/systems/README.md: added CSS_ARCHITECTURE entry
+State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
+Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
+Next step: Consolidate 4 parallel dark-mode systems (delete dark-theme.scss + _theme-mixins.scss); runtime variant switcher; CSS @layer adoption.
+
 Date: 2026-05-23 [Full consistency audit — 10 issues fixed + conventions codified]
 Changed:
   Critical — native DOM event shadow fixes (output renames):
@@ -122,29 +151,5 @@ Rule documented: Never name Angular signal outputs after native DOM event names 
 Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
 Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
 Next step: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit. Also consider: input-number `input`/`focus`/`blur` outputs may still cause double-events if any parent template binds them — monitor if tests are added.
-
-Date: 2026-05-23 [Design token audit — CSS hex violations eliminated, new token constants]
-Changed:
-  design-tokens.ts:
-  - Added BOOTSTRAP_APPEARANCE_COLORS (primary: '#0d6efd', borderColor: '#dee2e6', borderColorDark: '#495057') — Bootstrap palette is distinct from Material; must not be aliased to COLOR_NEUTRAL/COLOR_PRIMARY
-  - Added CONFIRM_BUTTON_COLORS (warningFg: '#1f2937') — Tailwind gray-800 dark text on warning-yellow, no Material equivalent
-  - Added CODE_SNIPPET_SYNTAX_COLORS (9 One Dark palette entries) — all syntax colours now tracked as named constants
-  - Extended COLORPICKER_TOKENS with selectorBorderColor: always white, must contrast any hue on the canvas
-  Rule-body hex violations fixed (color: #hex → color: var(--uilib-*)):
-  - confirm-dialog.scss, confirm-popup.scss: white text on btn variants → var(--uilib-color-neutral-50, #fff); warning fg → var(--uilib-confirm-*-btn-warning-fg)
-  - table.component.scss: sort badge white, Bootstrap border-color rule body, dark mode border-color corrected to #495057
-  - meter-group.scss: swatch white text → var(--uilib-meter-group-swatch-fg)
-  - color-picker.scss: selector crosshair border → var(--uilib-colorpicker-selector-border-color)
-  - mega-menu.scss, menubar.scss: focus ring outline-color → existing root-link-color-active variable
-  - code-snippet.scss: 9 syntax colors → var(--uilib-code-snippet-syntax-*) (consumers can now customise syntax theme at runtime)
-  CSS variable definition improvements (--uilib-foo: #hex → --uilib-foo: var(--uilib-color-neutral-NNN, #hex)):
-  - drawer, scroll-panel, fieldset, panel, stepper, listbox, table, password, order-list, pick-list
-  Docs:
-  - LIBRARY_CONVENTIONS.md: added Bootstrap variant colour guidance + new anti-pattern row
-  - CHANGELOG.md: full session entry under [Unreleased]
-State: All 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
-Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS (zero warnings)
-Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
-Next step: Broader axe-core audit; runtime variant switcher; theme preset management. All known token/output-naming violations resolved.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
