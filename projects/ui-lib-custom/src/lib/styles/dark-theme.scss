@@ -1,71 +1,13 @@
-@use './theme-mixins' as *;
-@use '../button/button' as button;
-@use '../card/card' as card;
-@use '../input/input' as input;
-@use '../select/select' as select;
-@use '../checkbox/checkbox' as checkbox;
-@use '../select-button/select-button' as selectButton;
-@use '../badge/badge' as badge;
-@use '../tabs/tabs' as tabs;
-@use '../accordion/accordion' as accordion;
-@use '../accordion/accordion-panel' as accordionPanel;
-@use '../layout/stack' as stack;
-@use '../layout/inline' as inline;
-@use '../layout/grid' as grid;
-@use '../layout/container' as container;
-@use '../icon/icon' as icon;
-@use '../alert/alert' as alert;
-@use '../dialog/dialog.component' as dialog;
-
-/**
- * Dark Theme CSS Variables
- * Apply via [data-theme="dark"] on html or body element
- */
-
-[data-theme='dark'] {
-  @include dark-theme-vars;
-  @include button.button-dark-theme;
-  @include card.card-dark-theme;
-  @include input.input-dark-theme;
-  @include select.select-dark-theme;
-  @include checkbox.checkbox-dark-theme;
-  @include selectButton.select-button-dark-theme;
-  @include badge.badge-dark-theme;
-  @include tabs.tabs-dark-theme;
-  @include accordion.accordion-dark-theme;
-  @include accordionPanel.accordion-panel-dark-theme;
-  @include stack.stack-dark-theme;
-  @include inline.inline-dark-theme;
-  @include grid.grid-dark-theme;
-  @include container.container-dark-theme;
-  @include icon.icon-dark-theme;
-  @include alert.alert-dark-theme;
-  @include dialog.dialog-dark-theme;
-}
-
-/**
- * Auto dark mode based on system preference
- * Only applies when no explicit data-theme is set
- */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme]) {
-    @include dark-theme-vars;
-    @include button.button-dark-theme;
-    @include card.card-dark-theme;
-    @include input.input-dark-theme;
-    @include select.select-dark-theme;
-    @include checkbox.checkbox-dark-theme;
-    @include selectButton.select-button-dark-theme;
-    @include badge.badge-dark-theme;
-    @include tabs.tabs-dark-theme;
-    @include accordion.accordion-dark-theme;
-    @include accordionPanel.accordion-panel-dark-theme;
-    @include stack.stack-dark-theme;
-    @include inline.inline-dark-theme;
-    @include grid.grid-dark-theme;
-    @include container.container-dark-theme;
-    @include icon.icon-dark-theme;
-    @include alert.alert-dark-theme;
-    @include dialog.dialog-dark-theme;
-  }
-}
+// =============================================================================
+// dark-theme.scss — DEPRECATED
+// =============================================================================
+//
+// Dark mode is now built directly into each component's SCSS file as scoped
+// [data-theme='dark'] ui-lib-<component> { } blocks, plus a matching
+// @media (prefers-color-scheme: dark) block for OS-level auto-switching.
+//
+// Global dark palette tokens live in themes/themes.scss, Section 3.
+//
+// This file is empty and safe to import, but has no effect. It will be
+// removed in a future version — do not add new rules here.
+// =============================================================================

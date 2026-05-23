@@ -1,9 +1,15 @@
-@mixin inline-dark-theme {
-  --uilib-inline-fg: var(--uilib-text-dark-primary);
-}
-
 .ui-lib-inline__content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+[data-theme='dark'] ui-lib-inline {
+  --uilib-inline-fg: var(--uilib-text-dark-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme]) ui-lib-inline {
+    --uilib-inline-fg: var(--uilib-text-dark-primary);
+  }
 }

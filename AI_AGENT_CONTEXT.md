@@ -82,6 +82,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-23 [Dark-mode consolidation — eliminated all 4 parallel dark-mode systems]
+Changed:
+  Component SCSS files — all 20 migrated to inline scoped dark-mode blocks:
+  - layout/stack.scss, inline.scss, grid.scss, container.scss
+  - icon/icon.scss, alert/alert.scss, badge/badge.scss
+  - input/input.scss, select/select.scss, checkbox/checkbox.scss
+  - select-button/select-button.scss, tabs/tabs.scss
+  - accordion/accordion.scss, accordion/accordion-panel.scss
+  - radio-button/radio-button.scss, rating/rating.scss
+  - toggle-switch/toggle-switch.scss (replaced @include with inline tokens)
+  - card/card.scss (replaced @include + standardized selector to ui-lib-card)
+  - dialog/dialog.component.scss (replaced @include + standardized media-query selector)
+  - button/button.scss (30-token mixin inlined; bare hex → var(--uilib-color-neutral-950, #0b1220))
+  Pattern: [data-theme='dark'] ui-lib-<component> { } + @media (prefers-color-scheme: dark) block
+  styles/dark-theme.scss → emptied (was opt-in mixin aggregator; now superseded)
+  styles/light-theme.scss → emptied (tokens in themes.scss Section 2)
+  styles/_theme-mixins.scss → zero consumers; safe to delete
+State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: npm test → 6040/6040; npm run build → PASS
+Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows
+Next step: Delete _theme-mixins.scss (confirmed zero consumers). Then: runtime variant switcher; CSS @layer adoption.
+
 Date: 2026-05-23 [CSS/SCSS architecture refactor — token scoping, dark-mode dedup, host-selector fixes]
 Changed:
   themes.scss (complete structural rewrite):
@@ -135,21 +157,5 @@ State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnin
 Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
 Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
 Next step: Continue with runtime variant switcher + theme preset management; or run broader axe-core audit. All known consistency issues resolved.
-
-Date: 2026-05-23 [Output naming consistency — native DOM event conflicts resolved]
-Changed:
-  - speed-dial/speed-dial.component.ts: renamed `visibleChange` output → `panelChange` (was shadowing `model<boolean>()` for `visible`'s internal `visibleChange` event, causing two-way binding to receive SpeedDialVisibleChangeEvent instead of boolean); renamed `click` → `buttonClick`, `focus` → `buttonFocus`, `blur` → `buttonBlur` (avoid native DOM event name clashes)
-  - speed-dial/speed-dial.component.spec.ts: updated template binding `(onVisibleChange)` → `(panelChange)`, `(click)` → `(buttonClick)`
-  - split-button/split-button.component.ts: renamed `click` output → `buttonClick` (was causing native DOM click to bubble and trigger host binding twice — Expected 1, Received 2)
-  - split-button/split-button.component.spec.ts: updated template binding `(click)` → `(buttonClick)`; updated test description
-  - textarea/textarea.ts: renamed `input` → `valueChange`, `focus` → `textareaFocus`, `blur` → `textareaBlur` (native events from inner <textarea> bubbled and double-fired when outputs shared same name)
-  - textarea/textarea.spec.ts: updated 3 template bindings and 3 test descriptions
-  - Demo pages updated: split-button (onClick→buttonClick in 4 locations + snippets.generated.ts + basic.example.html), speed-dial (onItemCommand→itemCommand in 7 locations — was already done in component, just demo lagged)
-  - READMEs updated: textarea, split-button, speed-dial, cascade-select, color-picker, date-picker, input-number, knob, slider — all now document the actual current output names (no more on* prefix)
-State: All 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
-Rule documented: Never name Angular signal outputs after native DOM event names (click, change, input, focus, blur, select, keydown, submit, etc.) — Angular may create both an output subscription AND a native DOM listener, causing double-firing when native events bubble from child elements. For model() signals, avoid naming explicit outputs `{signalName}Change` as that conflicts with the model's internal two-way binding event.
-Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
-Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
-Next step: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit. Also consider: input-number `input`/`focus`/`blur` outputs may still cause double-events if any parent template binds them — monitor if tests are added.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

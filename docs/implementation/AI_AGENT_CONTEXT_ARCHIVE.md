@@ -4,6 +4,15 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-23 [Output naming consistency — native DOM event conflicts resolved]
+Changed:
+  - speed-dial/speed-dial.component.ts: renamed `visibleChange` output → `panelChange` (was shadowing `model<boolean>()` for `visible`'s internal `visibleChange` event); renamed `click` → `buttonClick`, `focus` → `buttonFocus`, `blur` → `buttonBlur`
+  - split-button/split-button.component.ts: renamed `click` output → `buttonClick` (double-firing fix)
+  - textarea/textarea.ts: renamed `input` → `valueChange`, `focus` → `textareaFocus`, `blur` → `textareaBlur`
+  - Corresponding spec files + demo pages + READMEs updated
+State: 6040/6040 tests pass. ng build → zero warnings/errors.
+Next step: button.scss framed-appearance raw hex → CSS vars; broader axe-core audit.
+
 Date: 2026-05-22 [Library-wide audit fixes — 10 files corrected]
 Changed:
   - cascade-select/cascade-select.ts: renamed 5 outputs (onChange→change, onGroupChange→groupChange, onShow→show, onHide→hide, onClear→clear, onFocus→focus, onBlur→blur); replaced @HostListener('focus'/'blur') with imperative addEventListener in constructor to avoid Angular output/HostListener naming conflict circular-dispatch bug; removed all 7 eslint-disable-next-line @angular-eslint/no-output-on-prefix comments

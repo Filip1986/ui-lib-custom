@@ -447,6 +447,126 @@
 
   /* ---- Badge overrides ---- */
   --uilib-badge-subtle-bg: rgba(255, 255, 255, 0.08);
+
+  /* ---- Legacy dark surface scale (bridge for components using --uilib-surface-dark-*) ----
+   * Mapped to the canonical surfaces defined above so both token families resolve the same values.
+   * Components can be migrated to the canonical tokens over time; these stay until then.
+   */
+  --uilib-surface-dark-0: #101214;
+  --uilib-surface-dark-1: #1a1c1f;
+  --uilib-surface-dark-2: #22262b;
+  --uilib-surface-dark-3: #2a2f36;
+  --uilib-surface-dark-4: #2f353c;
+  --uilib-surface-dark-5: #343b44;
+  --uilib-text-dark-primary: rgba(255, 255, 255, 0.87);
+  --uilib-text-dark-secondary: rgba(255, 255, 255, 0.6);
+  --uilib-text-dark-disabled: rgba(255, 255, 255, 0.38);
+  --uilib-border-dark: rgba(255, 255, 255, 0.12);
+  --uilib-border-dark-light: rgba(255, 255, 255, 0.08);
+  --uilib-color-primary-dark: #90caf9;
+}
+
+/* ============================================================
+ * 3b. OS DARK MODE FALLBACK
+ *    Mirrors Section 3 for browsers/users who prefer dark mode
+ *    at the OS level but whose app hasn't set data-theme="dark".
+ *    Only fires when no explicit data-theme attribute is present.
+ * ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme]) {
+    /* Palette */
+    --uilib-color-primary-100: #1a3d5f;
+    --uilib-color-primary-500: #1e88e5;
+    --uilib-color-primary-600: #1565c0;
+    --uilib-color-primary-700: #0d47a1;
+    --uilib-color-neutral-50: #1c1c1c;
+    --uilib-color-neutral-75: #242424;
+    --uilib-color-neutral-100: #2a2a2a;
+    --uilib-color-neutral-200: #3a3a3a;
+    --uilib-color-neutral-300: #4a4a4a;
+    --uilib-color-neutral-400: #5a5a5a;
+    --uilib-color-neutral-900: #f5f5f5;
+
+    /* Surfaces & text */
+    --uilib-page-bg: #101214;
+    --uilib-page-bg-alt: #1a1c1f;
+    --uilib-page-fg: #e6e8eb;
+    --uilib-surface: #1a1c1f;
+    --uilib-surface-alt: #22262b;
+    --uilib-border: var(--uilib-color-neutral-300);
+    --uilib-border-light: var(--uilib-color-neutral-200);
+    --uilib-muted: #9aa4b5;
+
+    /* Focus ring */
+    --uilib-focus-ring: 0 0 0 3px rgba(144, 202, 249, 0.4);
+    --uilib-focus-ring-color: #90caf9;
+
+    /* Shadows */
+    --uilib-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --uilib-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+    /* Buttons */
+    --uilib-button-primary-bg: #1565c0;
+    --uilib-button-primary-bg-hover: #0d47a1;
+    --uilib-button-primary-border: #1565c0;
+    --uilib-button-ghost-hover-bg: rgba(255, 255, 255, 0.06);
+    --uilib-button-ghost-active-bg: rgba(255, 255, 255, 0.1);
+    --uilib-button-secondary-bg: #424242;
+    --uilib-button-secondary-bg-hover: #4a4a4a;
+    --uilib-button-secondary-border: rgba(255, 255, 255, 0.12);
+    --uilib-button-secondary-fg: rgba(255, 255, 255, 0.87);
+
+    /* Cards */
+    --uilib-card-bg: #22262b;
+    --uilib-card-bg-hover: #2a2f36;
+    --uilib-card-text-color: rgba(255, 255, 255, 0.87);
+    --uilib-card-border: rgba(255, 255, 255, 0.12);
+
+    /* Inputs */
+    --uilib-input-bg: #1a1c1f;
+    --uilib-input-border: rgba(255, 255, 255, 0.12);
+    --uilib-input-border-hover: rgba(255, 255, 255, 0.2);
+    --uilib-input-placeholder: rgba(255, 255, 255, 0.38);
+
+    /* Select */
+    --uilib-select-bg: #1a1c1f;
+    --uilib-select-border: rgba(255, 255, 255, 0.12);
+    --uilib-select-dropdown-bg: #22262b;
+    --uilib-select-option-hover: rgba(255, 255, 255, 0.06);
+
+    /* Checkbox */
+    --uilib-checkbox-border: rgba(255, 255, 255, 0.6);
+
+    /* Accordion */
+    --uilib-accordion-bg: #1a1c1f;
+    --uilib-accordion-header-bg: #22262b;
+    --uilib-accordion-header-bg-hover: #2a2f36;
+    --uilib-accordion-border: rgba(255, 255, 255, 0.12);
+
+    /* Tabs */
+    --uilib-tabs-border: rgba(255, 255, 255, 0.12);
+    --uilib-tab-hover-bg: rgba(255, 255, 255, 0.06);
+
+    /* Badge */
+    --uilib-badge-subtle-bg: rgba(255, 255, 255, 0.08);
+
+    /* Legacy surface scale */
+    --uilib-surface-dark-0: #101214;
+    --uilib-surface-dark-1: #1a1c1f;
+    --uilib-surface-dark-2: #22262b;
+    --uilib-surface-dark-3: #2a2f36;
+    --uilib-surface-dark-4: #2f353c;
+    --uilib-surface-dark-5: #343b44;
+    --uilib-text-dark-primary: rgba(255, 255, 255, 0.87);
+    --uilib-text-dark-secondary: rgba(255, 255, 255, 0.6);
+    --uilib-text-dark-disabled: rgba(255, 255, 255, 0.38);
+    --uilib-border-dark: rgba(255, 255, 255, 0.12);
+    --uilib-border-dark-light: rgba(255, 255, 255, 0.08);
+    --uilib-color-primary-dark: #90caf9;
+  }
 }
 
 /* ============================================================

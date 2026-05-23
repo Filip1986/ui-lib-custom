@@ -248,18 +248,18 @@ ui-lib-select-button.ng-disabled {
   }
 }
 
-@mixin select-button-dark-theme {
+[data-theme='dark'] ui-lib-select-button {
   --uilib-select-button-material-bg: var(--uilib-surface-dark-2);
   --uilib-select-button-material-hover-bg: var(--uilib-surface-dark-3);
   --uilib-select-button-material-border: var(--uilib-border-dark);
   --uilib-select-button-material-selected-bg: var(--uilib-color-primary-dark);
-  --uilib-select-button-material-selected-fg: #0b1220;
+  --uilib-select-button-material-selected-fg: var(--uilib-color-neutral-950, #0b1220);
 
   --uilib-select-button-bootstrap-bg: var(--uilib-surface-dark-2);
   --uilib-select-button-bootstrap-hover-bg: var(--uilib-surface-dark-3);
   --uilib-select-button-bootstrap-border: var(--uilib-border-dark);
   --uilib-select-button-bootstrap-selected-bg: var(--uilib-color-primary-dark);
-  --uilib-select-button-bootstrap-selected-fg: #0b1220;
+  --uilib-select-button-bootstrap-selected-fg: var(--uilib-color-neutral-950, #0b1220);
 
   --uilib-select-button-minimal-bg: transparent;
   --uilib-select-button-minimal-hover-bg: color-mix(
@@ -277,4 +277,37 @@ ui-lib-select-button.ng-disabled {
 
   --uilib-select-button-fg: var(--uilib-text-dark-primary);
   --uilib-select-button-invalid-border: var(--uilib-color-danger-600);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme]) ui-lib-select-button {
+    --uilib-select-button-material-bg: var(--uilib-surface-dark-2);
+    --uilib-select-button-material-hover-bg: var(--uilib-surface-dark-3);
+    --uilib-select-button-material-border: var(--uilib-border-dark);
+    --uilib-select-button-material-selected-bg: var(--uilib-color-primary-dark);
+    --uilib-select-button-material-selected-fg: var(--uilib-color-neutral-950, #0b1220);
+
+    --uilib-select-button-bootstrap-bg: var(--uilib-surface-dark-2);
+    --uilib-select-button-bootstrap-hover-bg: var(--uilib-surface-dark-3);
+    --uilib-select-button-bootstrap-border: var(--uilib-border-dark);
+    --uilib-select-button-bootstrap-selected-bg: var(--uilib-color-primary-dark);
+    --uilib-select-button-bootstrap-selected-fg: var(--uilib-color-neutral-950, #0b1220);
+
+    --uilib-select-button-minimal-bg: transparent;
+    --uilib-select-button-minimal-hover-bg: color-mix(
+      in srgb,
+      var(--uilib-text-dark-primary) 6%,
+      transparent
+    );
+    --uilib-select-button-minimal-border: transparent;
+    --uilib-select-button-minimal-selected-bg: color-mix(
+      in srgb,
+      var(--uilib-text-dark-primary) 10%,
+      transparent
+    );
+    --uilib-select-button-minimal-selected-fg: var(--uilib-text-dark-primary);
+
+    --uilib-select-button-fg: var(--uilib-text-dark-primary);
+    --uilib-select-button-invalid-border: var(--uilib-color-danger-600);
+  }
 }

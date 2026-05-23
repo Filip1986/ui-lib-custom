@@ -1,8 +1,34 @@
-# feat(scope): short description (max 72 chars)
+# <type>(<scope>): <short description — max 72 chars>
 #
-# Why is this change needed?
+# ─── ATOMIC COMMIT CHECKLIST ──────────────────────────────────────────────────
+# ✅ Does this commit do exactly ONE logical thing?
+# ✅ Does it build and pass lint on its own?  →  npm run check
+# ✅ Can it be reverted without breaking anything else?
+# ✅ Is the scope one of:
+#    lib | demo | minimal | theme | tokens | a11y | storybook | deps | ci | release | workspace
+# ─────────────────────────────────────────────────────────────────────────────
 #
-# What does it change?
+# TYPES:
+#   feat     → new component or feature
+#   fix      → bug fix
+#   docs     → documentation only
+#   style    → formatting, no logic change
+#   refactor → code change, not feat or fix
+#   perf     → performance improvement
+#   test     → adding or updating tests
+#   chore    → build, tooling, deps
+#   ci       → CI/CD changes
+#   revert   → reverts a previous commit
 #
-# BREAKING CHANGE: (if applicable)
-# Closes #(issue number)
+# EXAMPLES:
+#   feat(lib): add accessible tooltip component
+#   fix(a11y): correct focus trap in dialog
+#   chore(deps): update @angular/core to 21.x
+#   docs(lib): add CSS custom property API table to button docs
+#
+# BODY (optional — explain WHY, not what):
+#
+#
+# FOOTER (optional):
+#   BREAKING CHANGE: <what breaks and migration path>
+#   Closes #<issue-number>
