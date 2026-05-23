@@ -82,6 +82,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [Runtime variant switcher — all components now respect ThemeConfigService.setVariant()]
+Changed:
+  theming/theme-config.service.ts: setVariant() now writes data-variant to document.documentElement AND persists to localStorage via persistConfig(); constructor restores stored variant on boot
+  theming/theme-preset.interface.ts: ThemeConfig extended with optional variant?: ThemeVariant
+  6 outlier components updated from hardcoded input<Variant>('material') to input<Variant | null>(null) + effectiveVariant computed signal:
+  - button-group/button-group.ts (primary barrel — relative import OK)
+  - carousel/carousel.component.ts (secondary entry point — import { ThemeConfigService } from 'ui-lib-custom/theme')
+  - paginator/paginator.component.ts (secondary entry point — same pattern)
+  - password/password.component.ts (secondary entry point — same pattern)
+  - upload/upload.component.ts (secondary entry point — same pattern)
+  - autocomplete/autocomplete.ts (secondary entry point — same pattern; also updated syncPanelMount to use effectiveVariant())
+  Key lesson: Secondary entry points MUST use package-path imports for ThemeConfigService (not relative) or ng-packagr partial compilation throws "Cannot destructure property 'pos' of 'file.referencedFiles[index]'"
+State: 399/399 tests passing in affected suites. ng build → PASS. PR #232 open.
+Verification: npx eslint → 0 warnings; ng build → PASS; npm test → 399/399; npm run typecheck → PASS
+Terminal notes: npm test -- --testPathPatterns="pattern" (not --testPathPattern which is deprecated)
+Next step: Merge PR #232 → then CSS @layer adoption, or broader axe-core audit.
+
 Date: 2026-05-23 [Dark-mode consolidation — eliminated all 4 parallel dark-mode systems]
 Changed:
   Component SCSS files — all 20 migrated to inline scoped dark-mode blocks:
@@ -133,29 +150,5 @@ Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng bu
 Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
 Next step: Consolidate 4 parallel dark-mode systems (delete dark-theme.scss + _theme-mixins.scss); runtime variant switcher; CSS @layer adoption.
 
-Date: 2026-05-23 [Full consistency audit — 10 issues fixed + conventions codified]
-Changed:
-  Critical — native DOM event shadow fixes (output renames):
-  - tree-select: `selectionChange` output → `treeChange` (model/output collision with `selection: model<>()`)
-  - input-number: `input` → `valueChange`, `focus` → `numberFocus`, `blur` → `numberBlur`
-  - autocomplete: `select` → `optionSelect`, `focus` → `autocompleteFocus`, `blur` → `autocompleteBlur`
-  - checkbox: `change` → `checkboxChange`, `focus` → `checkboxFocus`, `blur` → `checkboxBlur`
-  - date-picker: `select` → `dateSelect`, `focus` → `datePickerFocus`, `blur` → `datePickerBlur`
-  - cascade-select: `change` → `cascadeChange`, `focus` → `cascadeSelectFocus`, `blur` → `cascadeSelectBlur`
-  Moderate — technical debt:
-  - button.scss: added BUTTON_APPEARANCE_COLORS + BUTTON_DARK_MODE_FG constants to design-tokens.ts; added cross-reference comment block in button.scss
-  - button-group.ts: fixed cross-entry relative import `'../button'` → `'ui-lib-custom/button'`
-  - bottom-sheet.scss: `1px solid #dee2e6` → `1px solid var(--uilib-color-neutral-300, #dee2e6)`
-  Docs:
-  - LIBRARY_CONVENTIONS.md: added Cross-Entry Import Rule section, Design Token Rule section, expanded anti-patterns table, enhanced Rule 3 with selectionChange real example
-  - CLAUDE.md: updated 4-rule Output Naming section; updated anti-patterns table with new entries; clarified raw hex rule
-  - All 6 affected component READMEs updated (cascade-select, checkbox, date-picker, input-number, autocomplete, tree-select)
-  Specs fixed:
-  - cascade-select.spec.ts: `component.change` → `component.cascadeChange`
-  - checkbox.spec.ts: `component.change.subscribe` → `component.checkboxChange.subscribe`; test descriptions updated
-State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
-Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
-Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
-Next step: Continue with runtime variant switcher + theme preset management; or run broader axe-core audit. All known consistency issues resolved.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
