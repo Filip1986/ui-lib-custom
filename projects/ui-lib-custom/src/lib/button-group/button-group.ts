@@ -12,6 +12,7 @@ import {
   type Signal,
 } from '@angular/core';
 import type { ButtonVariant, ButtonSize } from 'ui-lib-custom/button';
+import { ThemeConfigService } from '../theming/theme-config.service';
 
 /**
  * Groups buttons with shared sizing and variant styling.
@@ -28,16 +29,20 @@ import type { ButtonVariant, ButtonSize } from 'ui-lib-custom/button';
     '[class.ui-lib-button-group--vertical]': "resolvedOrientation() === 'vertical'",
     '[class.ui-lib-button-group--size-small]': "normalizedSize() === 'small'",
     '[class.ui-lib-button-group--size-large]': "normalizedSize() === 'large'",
-    '[class.ui-lib-button-group--material]': "variant() === 'material'",
-    '[class.ui-lib-button-group--bootstrap]': "variant() === 'bootstrap'",
-    '[class.ui-lib-button-group--minimal]': "variant() === 'minimal'",
+    '[class.ui-lib-button-group--material]': "effectiveVariant() === 'material'",
+    '[class.ui-lib-button-group--bootstrap]': "effectiveVariant() === 'bootstrap'",
+    '[class.ui-lib-button-group--minimal]': "effectiveVariant() === 'minimal'",
   },
 })
 export class ButtonGroup {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly variant: InputSignal<ButtonVariant> = input<ButtonVariant>('material');
+  public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
+  public readonly effectiveVariant: Signal<ButtonVariant> = computed<ButtonVariant>(
+    (): ButtonVariant => this.variant() ?? (this.themeConfig.variant() as ButtonVariant),
+  );
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly orientation: InputSignal<'horizontal' | 'vertical'> = input<
     'horizontal' | 'vertical'
@@ -48,7 +53,7 @@ export class ButtonGroup {
   public readonly resolvedOrientation: Signal<'horizontal' | 'vertical'> = computed<
     'horizontal' | 'vertical'
   >((): 'horizontal' | 'vertical' =>
-    this.orientation() === 'vertical' || this.vertical() ? 'vertical' : 'horizontal'
+    this.orientation() === 'vertical' || this.vertical() ? 'vertical' : 'horizontal',
   );
 
   public readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
@@ -73,12 +78,12 @@ export class ButtonGroup {
     }
 
     const groupElement: HTMLElement | null = this.elementRef.nativeElement.querySelector(
-      '.ui-lib-button-group__group'
+      '.ui-lib-button-group__group',
     );
     const hasProjectedContent: boolean = this.hasProjectedContent(groupElement);
     if (hasProjectedContent) {
       console.warn(
-        '[ui-lib-button-group] Missing ariaLabel. Provide ariaLabel when grouping related actions for assistive technologies.'
+        '[ui-lib-button-group] Missing ariaLabel. Provide ariaLabel when grouping related actions for assistive technologies.',
       );
     }
   }

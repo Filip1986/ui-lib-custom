@@ -47,6 +47,7 @@ import type {
   CarouselSize,
   CarouselVariant,
 } from './carousel.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 /**
  * Carousel is a content slider with support for multiple visible items,
@@ -76,9 +77,9 @@ import type {
     '[class.uilib-carousel]': 'true',
     '[class.uilib-carousel-horizontal]': '!isVertical()',
     '[class.uilib-carousel-vertical]': 'isVertical()',
-    '[class.uilib-carousel-variant-material]': 'variant() === "material"',
-    '[class.uilib-carousel-variant-bootstrap]': 'variant() === "bootstrap"',
-    '[class.uilib-carousel-variant-minimal]': 'variant() === "minimal"',
+    '[class.uilib-carousel-variant-material]': 'effectiveVariant() === "material"',
+    '[class.uilib-carousel-variant-bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.uilib-carousel-variant-minimal]': 'effectiveVariant() === "minimal"',
     '[class.uilib-carousel-sm]': 'size() === "sm"',
     '[class.uilib-carousel-md]': 'size() === "md"',
     '[class.uilib-carousel-lg]': 'size() === "lg"',
@@ -90,6 +91,7 @@ import type {
 export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDestroy {
   // ─── Injected Services ───────────────────────────────────────────────────────
 
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly zone: NgZone = inject(NgZone);
   private readonly renderer: Renderer2 = inject(Renderer2);
@@ -132,8 +134,13 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   /** Array of data items to display in the carousel. */
   public readonly value: InputSignal<unknown[]> = input<unknown[]>([]);
 
-  /** Design variant — controls visual style. */
-  public readonly variant: InputSignal<CarouselVariant> = input<CarouselVariant>('material');
+  /** Design variant — controls visual style. Defaults to the global ThemeConfigService variant. */
+  public readonly variant: InputSignal<CarouselVariant | null> = input<CarouselVariant | null>(
+    null,
+  );
+  public readonly effectiveVariant: Signal<CarouselVariant> = computed<CarouselVariant>(
+    (): CarouselVariant => this.variant() ?? (this.themeConfig.variant() as CarouselVariant),
+  );
 
   /** Size token — controls padding, font-size, and button dimensions. */
   public readonly size: InputSignal<CarouselSize> = input<CarouselSize>('md');
@@ -146,12 +153,12 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   /** Layout orientation. */
   public readonly orientation: InputSignal<CarouselOrientation> = input<CarouselOrientation>(
-    CAROUSEL_DEFAULT_ORIENTATION as CarouselOrientation
+    CAROUSEL_DEFAULT_ORIENTATION as CarouselOrientation,
   );
 
   /** Viewport height override — only applied in vertical orientation. */
   public readonly verticalViewportHeight: InputSignal<string> = input<string>(
-    CAROUSEL_DEFAULT_VERTICAL_VIEWPORT_HEIGHT
+    CAROUSEL_DEFAULT_VERTICAL_VIEWPORT_HEIGHT,
   );
 
   /** When true, navigation wraps from last item back to first. */
@@ -210,7 +217,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
    * Null means no responsive breakpoint is active.
    */
   private readonly responsiveNumVisible: WritableSignal<number | null> = signal<number | null>(
-    null
+    null,
   );
 
   /**
@@ -224,7 +231,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
    * Responsive breakpoints take precedence over the input value.
    */
   public readonly activeNumVisible: Signal<number> = computed(
-    (): number => this.responsiveNumVisible() ?? this.numVisible()
+    (): number => this.responsiveNumVisible() ?? this.numVisible(),
   );
 
   /**
@@ -232,7 +239,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
    * Responsive breakpoints take precedence over the input value.
    */
   public readonly activeNumScroll: Signal<number> = computed(
-    (): number => this.responsiveNumScroll() ?? this.numScroll()
+    (): number => this.responsiveNumScroll() ?? this.numScroll(),
   );
 
   /** Total offset (in item units, negative) applied via CSS transform to the item list. */
@@ -300,18 +307,18 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   /** Array of dot indices — used in @for to render indicator buttons. */
   public readonly dotsArray: Signal<number[]> = computed((): number[] =>
-    Array.from({ length: this.totalDots() }, (_: unknown, index: number): number => index)
+    Array.from({ length: this.totalDots() }, (_: unknown, index: number): number => index),
   );
 
   /** Whether the backward navigation button should be disabled. */
   public readonly isBackwardDisabled: Signal<boolean> = computed(
-    (): boolean => this.value().length === 0 || (this.currentPage() <= 0 && !this.circular())
+    (): boolean => this.value().length === 0 || (this.currentPage() <= 0 && !this.circular()),
   );
 
   /** Whether the forward navigation button should be disabled. */
   public readonly isForwardDisabled: Signal<boolean> = computed(
     (): boolean =>
-      this.value().length === 0 || (this.currentPage() >= this.totalDots() - 1 && !this.circular())
+      this.value().length === 0 || (this.currentPage() >= this.totalDots() - 1 && !this.circular()),
   );
 
   /** Viewport style — height override applied only in vertical orientation. */
@@ -321,12 +328,12 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
         return { height: this.verticalViewportHeight() };
       }
       return {};
-    }
+    },
   );
 
   /** ARIA label for the autoplay pause/resume button (reactive to `playing` state). */
   public readonly autoplayButtonLabel: Signal<string> = computed((): string =>
-    this.playing() ? this.pauseLabel() : this.playLabel()
+    this.playing() ? this.pauseLabel() : this.playLabel(),
   );
 
   /** Total number of real slides (excluding clones). */
@@ -356,7 +363,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   public ngAfterContentInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const prefersReducedMotion: boolean = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
+        '(prefers-reduced-motion: reduce)',
       ).matches;
 
       this.autoplayAllowed = this.autoplayInterval() > 0 && !prefersReducedMotion;
@@ -646,7 +653,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   private applyResponsiveOptions(): void {
     const options: CarouselResponsiveOption[] = [...this.responsiveOptions()].sort(
       (a: CarouselResponsiveOption, b: CarouselResponsiveOption): number =>
-        parseInt(b.breakpoint, 10) - parseInt(a.breakpoint, 10)
+        parseInt(b.breakpoint, 10) - parseInt(a.breakpoint, 10),
     );
 
     let matchedNumVisible: number = this.numVisible();
@@ -767,7 +774,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
     const buttons: NodeListOf<HTMLButtonElement> =
       container.nativeElement.querySelectorAll<HTMLButtonElement>('button');
     const currentIndex: number = Array.from(buttons).findIndex(
-      (button: HTMLButtonElement): boolean => button === document.activeElement
+      (button: HTMLButtonElement): boolean => button === document.activeElement,
     );
     if (currentIndex === -1) {
       return;

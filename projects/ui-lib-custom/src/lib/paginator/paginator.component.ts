@@ -3,12 +3,14 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   model,
   output,
 } from '@angular/core';
 import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
 import type { PaginatorPageEvent, PaginatorSize, PaginatorVariant } from './paginator.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 let nextPaginatorId: number = 0;
 
@@ -39,9 +41,9 @@ export const PAGINATOR_DEFAULTS: {
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'ui-lib-paginator',
-    '[class.ui-lib-paginator--material]': 'variant() === "material"',
-    '[class.ui-lib-paginator--bootstrap]': 'variant() === "bootstrap"',
-    '[class.ui-lib-paginator--minimal]': 'variant() === "minimal"',
+    '[class.ui-lib-paginator--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-paginator--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-paginator--minimal]': 'effectiveVariant() === "minimal"',
     '[class.ui-lib-paginator--sm]': 'size() === "sm"',
     '[class.ui-lib-paginator--md]': 'size() === "md"',
     '[class.ui-lib-paginator--lg]': 'size() === "lg"',
@@ -54,6 +56,8 @@ export const PAGINATOR_DEFAULTS: {
 export class PaginatorComponent {
   public readonly instanceId: string = `ui-lib-paginator-${nextPaginatorId++}`;
 
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
   /** Total number of records across all pages. */
   public readonly totalRecords: InputSignal<number> = input<number>(0);
 
@@ -65,11 +69,18 @@ export class PaginatorComponent {
 
   /** Maximum number of page-link buttons shown in the windowed range. */
   public readonly pageLinkSize: InputSignal<number> = input<number>(
-    PAGINATOR_DEFAULTS.PAGE_LINK_SIZE
+    PAGINATOR_DEFAULTS.PAGE_LINK_SIZE,
   );
 
-  /** Visual design variant. */
-  public readonly variant: InputSignal<PaginatorVariant> = input<PaginatorVariant>('material');
+  /** Visual design variant. Falls back to the global ThemeConfigService variant when null. */
+  public readonly variant: InputSignal<PaginatorVariant | null> = input<PaginatorVariant | null>(
+    null,
+  );
+
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  public readonly effectiveVariant: Signal<PaginatorVariant> = computed<PaginatorVariant>(
+    (): PaginatorVariant => this.variant() ?? (this.themeConfig.variant() as PaginatorVariant),
+  );
 
   /** Size token controlling padding and font size. */
   public readonly size: InputSignal<PaginatorSize> = input<PaginatorSize>('md');
@@ -91,7 +102,7 @@ export class PaginatorComponent {
    * Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}.
    */
   public readonly currentPageReportTemplate: InputSignal<string> = input<string>(
-    PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE
+    PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE,
   );
 
   /** Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown. */
