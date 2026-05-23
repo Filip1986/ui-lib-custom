@@ -28,6 +28,8 @@ ui-lib-confirm-dialog {
   --uilib-confirm-dialog-btn-padding: var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem);
   --uilib-confirm-dialog-btn-font-size: var(--uilib-font-size-sm, 0.875rem);
   --uilib-confirm-dialog-btn-font-weight: var(--uilib-font-weight-500, 500);
+  /* Dark text on warning-yellow buttons. SOURCE OF TRUTH: design-tokens.ts › CONFIRM_BUTTON_COLORS */
+  --uilib-confirm-dialog-btn-warning-fg: #1f2937;
   --uilib-confirm-dialog-btn-radius: var(--uilib-radius-md, 6px);
 
   --uilib-confirm-dialog-enter-duration: 200ms;
@@ -215,7 +217,7 @@ ui-lib-confirm-dialog .ui-lib-confirm-dialog__reject-btn {
 ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--primary {
   background: var(--uilib-color-primary-600, #4f46e5);
   border-color: var(--uilib-color-primary-600, #4f46e5);
-  color: #fff;
+  color: var(--uilib-color-neutral-50, #fff);
 
   &:hover {
     background: var(--uilib-color-primary-700, #4338ca);
@@ -236,7 +238,7 @@ ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--secondary {
 ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--success {
   background: var(--uilib-color-success-600, #16a34a);
   border-color: var(--uilib-color-success-600, #16a34a);
-  color: #fff;
+  color: var(--uilib-color-neutral-50, #fff);
 
   &:hover {
     background: var(--uilib-color-success-700, #15803d);
@@ -247,7 +249,7 @@ ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--success {
 ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--danger {
   background: var(--uilib-color-danger-600, #dc2626);
   border-color: var(--uilib-color-danger-600, #dc2626);
-  color: #fff;
+  color: var(--uilib-color-neutral-50, #fff);
 
   &:hover {
     background: var(--uilib-color-danger-700, #b91c1c);
@@ -258,7 +260,7 @@ ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--danger {
 ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--warning {
   background: var(--uilib-color-warning-500, #f59e0b);
   border-color: var(--uilib-color-warning-500, #f59e0b);
-  color: #1f2937;
+  color: var(--uilib-confirm-dialog-btn-warning-fg);
 
   &:hover {
     background: var(--uilib-color-warning-600, #d97706);
@@ -269,7 +271,7 @@ ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--warning {
 ui-lib-confirm-dialog .ui-lib-confirm-dialog__btn--info {
   background: var(--uilib-color-info-600, #2563eb);
   border-color: var(--uilib-color-info-600, #2563eb);
-  color: #fff;
+  color: var(--uilib-color-neutral-50, #fff);
 
   &:hover {
     background: var(--uilib-color-info-700, #1d4ed8);

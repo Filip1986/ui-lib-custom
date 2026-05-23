@@ -433,7 +433,7 @@
   --uilib-mega-menu-root-link-font-weight: 400;
 
   .ui-lib-mega-menu__root-link:focus-visible {
-    outline-color: #ffffff;
+    outline-color: var(--uilib-mega-menu-root-link-color-active, #ffffff);
   }
 }
 

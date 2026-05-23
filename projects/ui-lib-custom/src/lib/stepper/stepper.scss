@@ -341,7 +341,7 @@
     --uilib-stepper-indicator-color-completed: #ffffff;
     --uilib-stepper-indicator-border-completed: 2px solid #198754;
     --uilib-stepper-label-color-active: #0d6efd;
-    --uilib-stepper-separator-color: #dee2e6;
+    --uilib-stepper-separator-color: var(--uilib-color-neutral-300, #dee2e6);
 
     .ui-lib-stepper__step-header {
       border-radius: 0.25rem;

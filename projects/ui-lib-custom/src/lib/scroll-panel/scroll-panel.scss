@@ -88,7 +88,7 @@ ui-lib-scroll-panel {
   // Variant: bootstrap
   // =========================================================================
   &--variant-bootstrap {
-    --uilib-scroll-panel-border-color: #dee2e6;
+    --uilib-scroll-panel-border-color: var(--uilib-color-neutral-300, #dee2e6);
     --uilib-scroll-panel-border-radius: 4px;
     --uilib-scroll-panel-scrollbar-width: 8px;
     --uilib-scroll-panel-scrollbar-track-bg: #f8f9fa;

@@ -125,7 +125,7 @@ ui-lib-fieldset {
   // Variant: bootstrap
   // =========================================================================
   &--variant-bootstrap {
-    --uilib-fieldset-border-color: #dee2e6;
+    --uilib-fieldset-border-color: var(--uilib-color-neutral-300, #dee2e6);
     --uilib-fieldset-border-radius: 4px;
     --uilib-fieldset-toggle-color: #0d6efd;
     --uilib-fieldset-toggle-hover-bg: #f8f9fa;

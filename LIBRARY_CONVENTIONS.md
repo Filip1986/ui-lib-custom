@@ -79,6 +79,7 @@ These have caused real regressions. Active anti-patterns are still common traps;
 | Creating `public-api.ts` inside secondary entry folders | Not the established convention; ng-packagr handles it | `ng-package.json` points directly to `../src/lib/<n>/index.ts` |
 | Raw hex/px in CSS rule bodies (`.ui-lib-foo { color: #hex }`) | Bypasses the token system; cannot be themed or overridden | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable, use `var(--uilib-*)` |
 | Raw hex as a CSS variable value without a token reference (`--uilib-foo: #hex`) when a global token exists | The value is siloed; it won't update when the global token changes | Use `var(--uilib-color-neutral-300, #hex)` — global token first, hex as CSS fallback |
+| Bootstrap variant hex values (`#0d6efd`, `#dee2e6`, `#495057`) treated as equivalent to Material global tokens | Bootstrap's palette is distinct; aliasing silently uses wrong color when the global token is customised | Document in `design-tokens.ts → BOOTSTRAP_APPEARANCE_COLORS`; use `var(--uilib-color-neutral-300, #dee2e6)` pattern — hex fallback stays Bootstrap-correct even when global token is overridden |
 | Adding PrimeNG/Material components to demo pages | Undermines dogfooding; surfaces library gaps incorrectly | Use `ui-lib-*` equivalents; document gap in component inventory if none exists |
 | `on*` prefix on outputs (`onClick`, `onFocus`, `onChange`) | Inconsistent with Angular's own event naming and the library standard | Name outputs without the prefix: `buttonClick`, `checkboxFocus`, `cascadeChange` |
 | Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, `submit`, `keydown`, `scroll`, and ~40 others) | Angular registers both an output subscriber AND a native DOM listener on the host; native events bubbling from child elements trigger the handler twice — tests and real usage receive duplicate events | Prefix with a disambiguating component qualifier: `buttonClick`, `textareaFocus`, `dateSelect`, `checkboxChange`. See [Output Naming Rules](#output-naming-rules) for the full blocked list. |
@@ -450,6 +451,27 @@ When CSS variable default values are specific to a component appearance (e.g., t
  */
 --uilib-button-framed-bg: #ffc82c;
 ```
+
+### Bootstrap variant colours
+
+The library's global colour palette (`COLOR_NEUTRAL`, `COLOR_PRIMARY`, etc.) is Material-based. Bootstrap's palette is a **distinct colour system** — `#dee2e6` (Bootstrap's neutral border) is not the same as the library's `COLOR_NEUTRAL[300]` (`#e0e0e0`), and `#0d6efd` (Bootstrap's primary blue) is not the same as `COLOR_PRIMARY[600]` (`#1e88e5`).
+
+**Never alias Bootstrap hex values to the Material global tokens as if they are equivalent.**
+
+Bootstrap-specific hex values that have no global token equivalent are tracked in `design-tokens.ts → BOOTSTRAP_APPEARANCE_COLORS`. When referencing them in SCSS variable definitions, follow this pattern:
+
+```scss
+/* Bootstrap-specific colour defaults.
+ * SOURCE OF TRUTH: design-tokens.ts › BOOTSTRAP_APPEARANCE_COLORS
+ * These values are Bootstrap's palette and are NOT equivalent to the library's
+ * Material-based global tokens — do not alias to COLOR_NEUTRAL/COLOR_PRIMARY.
+ */
+&.uilib-variant-bootstrap {
+  --uilib-foo-border-color: var(--uilib-color-neutral-300, #dee2e6);
+}
+```
+
+Note: `var(--uilib-color-neutral-300, #dee2e6)` is still correct — the CSS variable is the live token (overridable by consumers), and the hex is a **CSS fallback** that ensures the Bootstrap-correct colour when no global token override is in place. The hex is not asserting semantic equivalence to Material's neutral-300; it is the Bootstrap default colour for that slot.
 
 ---
 
