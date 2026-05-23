@@ -4,6 +4,38 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-22 [Library-wide audit fixes — 10 files corrected]
+Changed:
+  - cascade-select/cascade-select.ts: renamed 5 outputs (onChange→change, onGroupChange→groupChange, onShow→show, onHide→hide, onClear→clear, onFocus→focus, onBlur→blur); replaced @HostListener('focus'/'blur') with imperative addEventListener in constructor to avoid Angular output/HostListener naming conflict circular-dispatch bug; removed all 7 eslint-disable-next-line @angular-eslint/no-output-on-prefix comments
+  - cascade-select/cascade-select.spec.ts: updated 3 test descriptions and spy property refs to match renamed outputs (onChange→change, onGroupChange→groupChange, onClear→clear)
+  - checkbox/checkbox.ts: fixed CSS class naming — `checkbox--filled` → `ui-lib-checkbox--filled` (was missing uilib namespace prefix)
+  - checkbox/checkbox.scss: fixed same 4 selectors — `.checkbox--filled` → `.ui-lib-checkbox--filled`
+  - checkbox/checkbox.spec.ts: updated 3 class assertions from `checkbox--filled` → `ui-lib-checkbox--filled`
+  - card/card.ts: simplified readTheme() — removed misleading type cast `this.theme as () => ThemeScopeInput | null`; now simply `return this.theme()`
+  - select/select.scss: tokenized `max-height: 260px` → `var(--uilib-select-panel-max-height)` and `z-index: 10` → `var(--uilib-select-panel-z-index)`; both tokens declared in CSS var block
+  - stepper/stepper.scss: replaced 3 raw `#ffffff` values with `var(--uilib-color-neutral-50, #ffffff)` for indicator active/completed/error colors
+  - menu/menu.scss: replaced all raw hex/rgba fallbacks in CSS custom property definitions with semantic token fallbacks; removed hex literals from color-mix() calls
+  - textarea/textarea.scss: removed hex fallbacks from [data-theme='dark'] block — dark mode tokens are required; tokens without fallbacks signal clearly when a host app hasn't defined them
+State: All fixes complete. 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
+Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
+Next step: Continue with next audit items: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit.
+
+Date: 2026-05-21 [ARIA table migration — 7 demo pages migrated to DocAriaTableComponent]
+Changed:
+  - block-ui: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties"> in accessibility section
+  - bottom-sheet: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - password: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - radio-button: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
+  - rating: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
+  - ripple: added DocAriaTableComponent + ariaRows (2); replaced raw <table class="doc-properties">
+  - meter-group: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
+State: Build zero errors. Zero raw ARIA doc-properties tables remain in component demo pages. Remaining doc-properties in themes/shadows/project-starter are utility pages (different context).
+Verification: ng build demo → PASS (zero errors; only pre-existing budget warnings)
+Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+
+---
+
 Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.ts

@@ -393,7 +393,7 @@
 
 .ui-lib-listbox--bootstrap {
   --uilib-listbox-border-radius: 0.375rem;
-  --uilib-listbox-border: 1px solid #ced4da;
+  --uilib-listbox-border: 1px solid var(--uilib-color-neutral-400, #ced4da);
   --uilib-listbox-item-padding-md: 0.5rem 1rem;
   --uilib-listbox-item-padding-sm: 0.25rem 0.75rem;
   --uilib-listbox-item-padding-lg: 0.75rem 1.25rem;

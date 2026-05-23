@@ -22,6 +22,7 @@ ui-lib-meter-group {
   --uilib-meter-group-label-value-color: var(--uilib-surface-500, #6b7280);
   --uilib-meter-group-swatch-size: 0.75rem;
   --uilib-meter-group-swatch-border-radius: var(--uilib-radius-sm, 0.25rem);
+  --uilib-meter-group-swatch-fg: var(--uilib-color-neutral-50, #fff);
   --uilib-meter-group-transition: width 0.4s ease, height 0.4s ease;
 }
 
@@ -95,7 +96,7 @@ ui-lib-meter-group {
     height: var(--uilib-meter-group-swatch-size);
     border-radius: var(--uilib-meter-group-swatch-border-radius);
     font-size: 0.55rem;
-    color: #fff;
+    color: var(--uilib-meter-group-swatch-fg);
   }
 
   &__label-text {

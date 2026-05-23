@@ -16,6 +16,8 @@ ui-lib-color-picker.ui-lib-colorpicker {
   --uilib-colorpicker-hue-slider-width: 18px;
   --uilib-colorpicker-hue-slider-height: 11rem;
   --uilib-colorpicker-selector-size: 12px;
+  /* Always white: must contrast against every hue/saturation on the colour canvas. SOURCE: design-tokens.ts › COLORPICKER_TOKENS.selectorBorderColor */
+  --uilib-colorpicker-selector-border-color: #fff;
   --uilib-colorpicker-transition-duration: 200ms;
 
   position: relative;
@@ -138,7 +140,7 @@ ui-lib-color-picker .ui-lib-colorpicker__selector,
   position: absolute;
   width: var(--uilib-colorpicker-selector-size, 12px);
   height: var(--uilib-colorpicker-selector-size, 12px);
-  border: 2px solid #fff;
+  border: 2px solid var(--uilib-colorpicker-selector-border-color, #fff);
   border-radius: 50%;
   box-shadow: 0 0 2px rgb(0 0 0 / 60%);
   transform: translate(-50%, -50%);
@@ -171,7 +173,7 @@ ui-lib-color-picker .ui-lib-colorpicker__hue-handle,
 .ui-lib-colorpicker__hue-handle {
   width: calc(100% + 4px);
   height: 6px;
-  border: 2px solid #fff;
+  border: 2px solid var(--uilib-colorpicker-selector-border-color, #fff);
   border-radius: 3px;
   box-shadow: 0 0 2px rgb(0 0 0 / 60%);
   position: absolute;

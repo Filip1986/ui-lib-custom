@@ -25,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New secondary entry point: `ui-lib-custom/editor`.
 - New `FloatLabel` component (`uilib-float-label`) with CSS-driven variants (`over`/`in`/`on`), native/wrapper state support, demo coverage, and API docs.
 - New secondary entry point: `ui-lib-custom/float-label`.
+- `CODE_SNIPPET_SYNTAX_COLORS` constant in `design-tokens.ts` — exposes all 9 One Dark syntax highlight colours as named constants, enabling consumer syntax theme customisation via `--uilib-code-snippet-syntax-*` CSS variables.
+- `BOOTSTRAP_APPEARANCE_COLORS` constant in `design-tokens.ts` — tracks Bootstrap-specific colour values (`#0d6efd`, `#dee2e6`, `#495057`) as named constants to document their provenance and prevent accidental aliasing to the library's Material-based global palette.
+- `CONFIRM_BUTTON_COLORS` constant in `design-tokens.ts` — tracks `warningFg: '#1f2937'` (Tailwind gray-800 dark text used on warning-yellow confirm buttons, not present in the Material palette).
+- `COLORPICKER_TOKENS.selectorBorderColor` field — documents the always-white selector border that must contrast against any hue on the colour canvas.
+- `--uilib-code-snippet-syntax-*` CSS variables (9 tokens) — all syntax highlight colours are now overridable at runtime, enabling full syntax theme customisation without a rebuild.
 
 ### Changed
 - All components now support dark mode.
@@ -32,6 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation index updates for new component references.
 - Main README now includes theming and theme editor guidance.
 - Documentation/reference indexes now include direct `Editor` API links.
+- **Design token audit — CSS rule-body hex violations eliminated:** all raw hex/rgba values in component SCSS rule bodies have been replaced with `var(--uilib-*)` references. Affected components: `confirm-dialog`, `confirm-popup`, `table`, `meter-group`, `color-picker`, `mega-menu`, `menubar`, `code-snippet`.
+- **Design token audit — CSS variable definition improvements:** component-scoped variable definitions that used standalone hex values now reference global tokens where one exists (`var(--uilib-color-neutral-300, #dee2e6)` pattern). Affected files: `drawer`, `scroll-panel`, `fieldset`, `panel`, `stepper`, `listbox`, `table`, `password`, `order-list`, `pick-list`.
+- `LIBRARY_CONVENTIONS.md`: added Bootstrap variant colour guidance under the Design Token Rule section; added anti-pattern row for Bootstrap/Material palette aliasing.
 
 ### Deprecated
 - 
@@ -44,6 +52,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Form errors now announce to screen readers
 - Focus management in Select dropdown
 - Keyboard navigation in all components
+- `table.component.scss`: Bootstrap variant dark-mode border was `#4a5568` (Tailwind gray-700); corrected to `#495057` (Bootstrap `borderColorDark`) with source-of-truth comment.
+- `mega-menu.scss` / `menubar.scss`: focus ring `outline-color: #ffffff` in dark variant now uses the already-defined `--uilib-*-root-link-color-active` variable, removing the raw hex rule-body violation and creating semantic alignment.
+- `color-picker.scss`: selector crosshair border `2px solid #fff` is now driven by `--uilib-colorpicker-selector-border-color` (always white — must contrast against any hue on the canvas). Consumers can now override this token.
 
 ### Security
 - 

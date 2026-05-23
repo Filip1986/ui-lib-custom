@@ -425,7 +425,7 @@
   --uilib-menubar-toggle-color: rgba(255, 255, 255, 0.75);
 
   .ui-lib-menubar__root-link:focus-visible {
-    outline-color: #ffffff;
+    outline-color: var(--uilib-menubar-root-link-color-active, #ffffff);
   }
 }
 

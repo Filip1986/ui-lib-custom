@@ -427,14 +427,15 @@
 // Variant: Bootstrap
 // =============================================================================
 
+// Bootstrap-specific colour defaults. SOURCE OF TRUTH: design-tokens.ts › BOOTSTRAP_APPEARANCE_COLORS
 .ui-lib-pick-list--bootstrap {
-  --uilib-pick-list-border: 1px solid #dee2e6;
+  --uilib-pick-list-border: 1px solid var(--uilib-color-neutral-300, #dee2e6);
   --uilib-pick-list-radius: 0.375rem;
   --uilib-pick-list-bg: #ffffff;
   --uilib-pick-list-item-bg-selected: #0d6efd;
   --uilib-pick-list-item-bg-hover: rgba(13, 110, 253, 0.1);
   --uilib-pick-list-control-bg: #ffffff;
-  --uilib-pick-list-control-border: 1px solid #dee2e6;
+  --uilib-pick-list-control-border: 1px solid var(--uilib-color-neutral-300, #dee2e6);
   --uilib-pick-list-control-bg-hover: #e9ecef;
   --uilib-pick-list-control-radius: 0.25rem;
   --uilib-pick-list-transfer-bg: #0d6efd;
@@ -443,8 +444,8 @@
   --uilib-pick-list-drop-indicator-color: #0d6efd;
   --uilib-pick-list-focus-ring: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   --uilib-pick-list-header-bg: #f8f9fa;
-  --uilib-pick-list-header-border: 1px solid #dee2e6;
-  --uilib-pick-list-item-border-bottom: 1px solid #dee2e6;
+  --uilib-pick-list-header-border: 1px solid var(--uilib-color-neutral-300, #dee2e6);
+  --uilib-pick-list-item-border-bottom: 1px solid var(--uilib-color-neutral-300, #dee2e6);
 }
 
 // =============================================================================

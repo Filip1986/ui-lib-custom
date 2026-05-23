@@ -211,7 +211,7 @@ ui-lib-drawer {
   --uilib-drawer-panel-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 
   .ui-lib-drawer__header {
-    --uilib-drawer-header-border: 1px solid #dee2e6;
+    --uilib-drawer-header-border: 1px solid var(--uilib-color-neutral-300, #dee2e6);
   }
 }
 

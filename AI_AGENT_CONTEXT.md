@@ -123,34 +123,69 @@ Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng bu
 Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
 Next step: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit. Also consider: input-number `input`/`focus`/`blur` outputs may still cause double-events if any parent template binds them — monitor if tests are added.
 
-Date: 2026-05-22 [Library-wide audit fixes — 10 files corrected]
+Date: 2026-05-23 [Design token audit — CSS hex violations eliminated, new token constants]
 Changed:
-  - cascade-select/cascade-select.ts: renamed 5 outputs (onChange→change, onGroupChange→groupChange, onShow→show, onHide→hide, onClear→clear, onFocus→focus, onBlur→blur); replaced @HostListener('focus'/'blur') with imperative addEventListener in constructor to avoid Angular output/HostListener naming conflict circular-dispatch bug; removed all 7 eslint-disable-next-line @angular-eslint/no-output-on-prefix comments
-  - cascade-select/cascade-select.spec.ts: updated 3 test descriptions and spy property refs to match renamed outputs (onChange→change, onGroupChange→groupChange, onClear→clear)
-  - checkbox/checkbox.ts: fixed CSS class naming — `checkbox--filled` → `ui-lib-checkbox--filled` (was missing uilib namespace prefix)
-  - checkbox/checkbox.scss: fixed same 4 selectors — `.checkbox--filled` → `.ui-lib-checkbox--filled`
-  - checkbox/checkbox.spec.ts: updated 3 class assertions from `checkbox--filled` → `ui-lib-checkbox--filled`
-  - card/card.ts: simplified readTheme() — removed misleading type cast `this.theme as () => ThemeScopeInput | null`; now simply `return this.theme()`
-  - select/select.scss: tokenized `max-height: 260px` → `var(--uilib-select-panel-max-height)` and `z-index: 10` → `var(--uilib-select-panel-z-index)`; both tokens declared in CSS var block
-  - stepper/stepper.scss: replaced 3 raw `#ffffff` values with `var(--uilib-color-neutral-50, #ffffff)` for indicator active/completed/error colors
-  - menu/menu.scss: replaced all raw hex/rgba fallbacks in CSS custom property definitions with semantic token fallbacks; removed hex literals from color-mix() calls
-  - textarea/textarea.scss: removed hex fallbacks from [data-theme='dark'] block — dark mode tokens are required; tokens without fallbacks signal clearly when a host app hasn't defined them
-State: All fixes complete. 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+  design-tokens.ts:
+  - Added BOOTSTRAP_APPEARANCE_COLORS (primary: '#0d6efd', borderColor: '#dee2e6', borderColorDark: '#495057') — Bootstrap palette is distinct from Material; must not be aliased to COLOR_NEUTRAL/COLOR_PRIMARY
+  - Added CONFIRM_BUTTON_COLORS (warningFg: '#1f2937') — Tailwind gray-800 dark text on warning-yellow, no Material equivalent
+  - Added CODE_SNIPPET_SYNTAX_COLORS (9 One Dark palette entries) — all syntax colours now tracked as named constants
+  - Extended COLORPICKER_TOKENS with selectorBorderColor: always white, must contrast any hue on the canvas
+  Rule-body hex violations fixed (color: #hex → color: var(--uilib-*)):
+  - confirm-dialog.scss, confirm-popup.scss: white text on btn variants → var(--uilib-color-neutral-50, #fff); warning fg → var(--uilib-confirm-*-btn-warning-fg)
+  - table.component.scss: sort badge white, Bootstrap border-color rule body, dark mode border-color corrected to #495057
+  - meter-group.scss: swatch white text → var(--uilib-meter-group-swatch-fg)
+  - color-picker.scss: selector crosshair border → var(--uilib-colorpicker-selector-border-color)
+  - mega-menu.scss, menubar.scss: focus ring outline-color → existing root-link-color-active variable
+  - code-snippet.scss: 9 syntax colors → var(--uilib-code-snippet-syntax-*) (consumers can now customise syntax theme at runtime)
+  CSS variable definition improvements (--uilib-foo: #hex → --uilib-foo: var(--uilib-color-neutral-NNN, #hex)):
+  - drawer, scroll-panel, fieldset, panel, stepper, listbox, table, password, order-list, pick-list
+  Docs:
+  - LIBRARY_CONVENTIONS.md: added Bootstrap variant colour guidance + new anti-pattern row
+  - CHANGELOG.md: full session entry under [Unreleased]
+State: All 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS (zero warnings)
+Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
+Next step: Broader axe-core audit; runtime variant switcher; theme preset management. All known token/output-naming violations resolved.
+
+Date: 2026-05-23 [Full consistency audit — 10 issues fixed + conventions codified]
+Changed:
+  Critical — native DOM event shadow fixes (output renames):
+  - tree-select: `selectionChange` output → `treeChange` (model/output collision with `selection: model<>()`)
+  - input-number: `input` → `valueChange`, `focus` → `numberFocus`, `blur` → `numberBlur`
+  - autocomplete: `select` → `optionSelect`, `focus` → `autocompleteFocus`, `blur` → `autocompleteBlur`
+  - checkbox: `change` → `checkboxChange`, `focus` → `checkboxFocus`, `blur` → `checkboxBlur`
+  - date-picker: `select` → `dateSelect`, `focus` → `datePickerFocus`, `blur` → `datePickerBlur`
+  - cascade-select: `change` → `cascadeChange`, `focus` → `cascadeSelectFocus`, `blur` → `cascadeSelectBlur`
+  Moderate — technical debt:
+  - button.scss: added BUTTON_APPEARANCE_COLORS + BUTTON_DARK_MODE_FG constants to design-tokens.ts; added cross-reference comment block in button.scss
+  - button-group.ts: fixed cross-entry relative import `'../button'` → `'ui-lib-custom/button'`
+  - bottom-sheet.scss: `1px solid #dee2e6` → `1px solid var(--uilib-color-neutral-300, #dee2e6)`
+  Docs:
+  - LIBRARY_CONVENTIONS.md: added Cross-Entry Import Rule section, Design Token Rule section, expanded anti-patterns table, enhanced Rule 3 with selectionChange real example
+  - CLAUDE.md: updated 4-rule Output Naming section; updated anti-patterns table with new entries; clarified raw hex rule
+  - All 6 affected component READMEs updated (cascade-select, checkbox, date-picker, input-number, autocomplete, tree-select)
+  Specs fixed:
+  - cascade-select.spec.ts: `component.change` → `component.cascadeChange`
+  - checkbox.spec.ts: `component.change.subscribe` → `component.checkboxChange.subscribe`; test descriptions updated
+State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
+Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
+Next step: Continue with runtime variant switcher + theme preset management; or run broader axe-core audit. All known consistency issues resolved.
+
+Date: 2026-05-23 [Output naming consistency — native DOM event conflicts resolved]
+Changed:
+  - speed-dial/speed-dial.component.ts: renamed `visibleChange` output → `panelChange` (was shadowing `model<boolean>()` for `visible`'s internal `visibleChange` event, causing two-way binding to receive SpeedDialVisibleChangeEvent instead of boolean); renamed `click` → `buttonClick`, `focus` → `buttonFocus`, `blur` → `buttonBlur` (avoid native DOM event name clashes)
+  - speed-dial/speed-dial.component.spec.ts: updated template binding `(onVisibleChange)` → `(panelChange)`, `(click)` → `(buttonClick)`
+  - split-button/split-button.component.ts: renamed `click` output → `buttonClick` (was causing native DOM click to bubble and trigger host binding twice — Expected 1, Received 2)
+  - split-button/split-button.component.spec.ts: updated template binding `(click)` → `(buttonClick)`; updated test description
+  - textarea/textarea.ts: renamed `input` → `valueChange`, `focus` → `textareaFocus`, `blur` → `textareaBlur` (native events from inner <textarea> bubbled and double-fired when outputs shared same name)
+  - textarea/textarea.spec.ts: updated 3 template bindings and 3 test descriptions
+  - Demo pages updated: split-button (onClick→buttonClick in 4 locations + snippets.generated.ts + basic.example.html), speed-dial (onItemCommand→itemCommand in 7 locations — was already done in component, just demo lagged)
+  - READMEs updated: textarea, split-button, speed-dial, cascade-select, color-picker, date-picker, input-number, knob, slider — all now document the actual current output names (no more on* prefix)
+State: All 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Rule documented: Never name Angular signal outputs after native DOM event names (click, change, input, focus, blur, select, keydown, submit, etc.) — Angular may create both an output subscription AND a native DOM listener, causing double-firing when native events bubble from child elements. For model() signals, avoid naming explicit outputs `{signalName}Change` as that conflicts with the model's internal two-way binding event.
 Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
 Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
-Next step: Continue with next audit items: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit.
-
-Date: 2026-05-21 [ARIA table migration — 7 demo pages migrated to DocAriaTableComponent]
-Changed:
-  - block-ui: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties"> in accessibility section
-  - bottom-sheet: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
-  - password: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
-  - radio-button: added DocAriaTableComponent + ariaRows (7); replaced raw <table class="doc-properties">
-  - rating: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
-  - ripple: added DocAriaTableComponent + ariaRows (2); replaced raw <table class="doc-properties">
-  - meter-group: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
-State: Build zero errors. Zero raw ARIA doc-properties tables remain in component demo pages. Remaining doc-properties in themes/shadows/project-starter are utility pages (different context).
-Verification: ng build demo → PASS (zero errors; only pre-existing budget warnings)
-Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+Next step: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit. Also consider: input-number `input`/`focus`/`blur` outputs may still cause double-events if any parent template binds them — monitor if tests are added.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

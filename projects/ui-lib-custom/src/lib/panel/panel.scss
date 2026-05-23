@@ -165,7 +165,7 @@ ui-lib-panel {
   // Variant: bootstrap
   // =========================================================================
   &--variant-bootstrap {
-    --uilib-panel-border-color: #dee2e6;
+    --uilib-panel-border-color: var(--uilib-color-neutral-300, #dee2e6);
     --uilib-panel-border-radius: 4px;
     --uilib-panel-toggle-color: #0d6efd;
     --uilib-panel-toggle-hover-bg: #f8f9fa;

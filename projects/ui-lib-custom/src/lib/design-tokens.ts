@@ -1957,6 +1957,11 @@ export type ColorPickerTokens = {
   hueSliderWidth: string;
   hueSliderHeight: string;
   selectorSize: string;
+  /**
+   * Border colour for the circular colour-canvas selector and the hue-slider handle.
+   * Must contrast against any hue/saturation, so white is the universal default.
+   */
+  selectorBorderColor: string;
   transitionDuration: string;
 };
 
@@ -1974,6 +1979,7 @@ export const COLORPICKER_TOKENS: Readonly<ColorPickerTokens> = {
   hueSliderWidth: '18px',
   hueSliderHeight: '11rem',
   selectorSize: '12px',
+  selectorBorderColor: COLOR_NEUTRAL.white,
   transitionDuration: TRANSITION_DURATION.base,
 };
 
@@ -2008,3 +2014,110 @@ export const ICON_FIELD_TOKENS: Readonly<IconFieldTokens> = {
 };
 
 export type IconFieldTokenKey = keyof typeof ICON_FIELD_TOKENS;
+
+// ============================================================================
+// BOOTSTRAP VARIANT APPEARANCE TOKENS
+// ============================================================================
+
+/**
+ * Bootstrap variant appearance colours.
+ *
+ * Bootstrap's colour palette differs from the library's Material-based global palette,
+ * so these values are appearance-specific and live here rather than in COLOR_PRIMARY /
+ * COLOR_NEUTRAL. Every CSS custom property that uses a Bootstrap-specific colour as its
+ * default value should reference this constant in a co-located SCSS comment.
+ *
+ * When changing a value here, update the matching hex fallback in every Bootstrap-variant
+ * CSS variable block that references it (and vice-versa). All CSS variables that rely on
+ * these defaults are fully overridable by consumers.
+ */
+export interface BootstrapAppearanceColors {
+  /** Bootstrap's $primary — the primary action blue used for buttons, focus rings, selections. */
+  primary: string;
+  /** Bootstrap's $border-color — the default light-mode border for inputs, cards, list groups. */
+  borderColor: string;
+  /** Bootstrap's dark-mode border colour (approx. gray-700). */
+  borderColorDark: string;
+}
+
+export const BOOTSTRAP_APPEARANCE_COLORS: Readonly<BootstrapAppearanceColors> = {
+  primary: '#0d6efd',
+  borderColor: '#dee2e6',
+  borderColorDark: '#495057',
+} as const;
+
+// ============================================================================
+// CONFIRM BUTTON SEVERITY TOKENS
+// ============================================================================
+
+/**
+ * Foreground colours for confirm-dialog and confirm-popup severity buttons.
+ *
+ * Most severity buttons use white (#fff) foreground which is covered by the global
+ * --uilib-color-neutral-50 token. This constant captures the one exception: the dark
+ * text used on warning-yellow backgrounds where white would fail WCAG contrast.
+ * The value does not exist in the library's Material-based COLOR_NEUTRAL palette,
+ * so it lives here as an appearance-specific constant.
+ *
+ * SOURCE OF TRUTH: design-tokens.ts › CONFIRM_BUTTON_COLORS
+ * When changing this value, also update:
+ *   - confirm-dialog.scss  (--uilib-confirm-dialog-btn-warning-fg)
+ *   - confirm-popup.scss   (--uilib-confirm-popup-btn-warning-fg)
+ */
+export interface ConfirmButtonColors {
+  /** Dark foreground (Tailwind gray-800) on warning-severity buttons. */
+  warningFg: string;
+}
+
+export const CONFIRM_BUTTON_COLORS: Readonly<ConfirmButtonColors> = {
+  warningFg: '#1f2937',
+} as const;
+
+// ============================================================================
+// CODE SNIPPET SYNTAX HIGHLIGHT TOKENS
+// ============================================================================
+
+/**
+ * One Dark syntax-highlight token colours for the CodeSnippet component.
+ *
+ * These are the default colours for the built-in One Dark code theme. Every colour is
+ * exposed as a CSS custom property (--uilib-code-snippet-syntax-*) so consumers can
+ * apply a different syntax theme by overriding those variables on ui-lib-code-snippet
+ * or any ancestor element.
+ *
+ * SOURCE OF TRUTH: design-tokens.ts › CODE_SNIPPET_SYNTAX_COLORS
+ * When changing any value here, update the matching CSS variable default in code-snippet.scss
+ * (and vice-versa).
+ */
+export interface CodeSnippetSyntaxColors {
+  /** Keywords: const, let, function, import, class … */
+  keyword: string;
+  /** Strings, template literals, regular expressions. */
+  string: string;
+  /** Function / class names, symbols, links, meta selectors. */
+  function: string;
+  /** Built-in identifiers, class names in definitions. */
+  builtin: string;
+  /** Variables, template variables, numbers, attribute selectors. */
+  variable: string;
+  /** HTML tags, deletion markers, subst. */
+  tag: string;
+  /** Literals: true, false, null. */
+  literal: string;
+  /** Operators and punctuation. */
+  operator: string;
+  /** Comments and block quotes. */
+  comment: string;
+}
+
+export const CODE_SNIPPET_SYNTAX_COLORS: Readonly<CodeSnippetSyntaxColors> = {
+  keyword: '#c678dd',
+  string: '#98c379',
+  function: '#61afef',
+  builtin: '#e6c07b',
+  variable: '#d19a66',
+  tag: '#e06c75',
+  literal: '#56b6c2',
+  operator: '#56b6c2',
+  comment: '#5c6370',
+} as const;
