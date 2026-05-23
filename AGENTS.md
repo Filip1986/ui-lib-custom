@@ -22,6 +22,12 @@
 - Public input types stay string unions (do not replace with exported constants objects).
 - Add new visual values through `projects/ui-lib-custom/src/lib/design-tokens.ts` first; then expose as `--uilib-*` CSS vars.
 - Secondary entry-point convention: keep each `<entry>/ng-package.json` pointing at `../src/lib/<entry>/index.ts` (or the specific source file for special cases like `tokens`), and keep thin `<entry>/public-api.ts` re-exports because path mappings include `projects/ui-lib-custom/*/public-api.ts`.
+- **Element selectors use `ui-lib-{component}` (with hyphen). CSS custom properties use `--uilib-{component}-*` (no hyphen in `uilib`). Host classes use `ui-lib-{component}--{modifier}`. These are two intentionally different patterns — never mix them.**
+- **Output naming — three hard rules (violating any causes double-firing or corrupted two-way bindings):**
+  1. No `on*` prefix on any output. (`onClick` → `buttonClick`, `onChange` → `change`).
+  2. No output name may match a native DOM event name (`click`, `input`, `focus`, `blur`, `change`, `submit`, `select`, `keydown`, `keyup`, `scroll`, `load`, `error`, `mousedown`, `mouseup`, `drag`, `drop`, `paste`, `wheel`, and others — see `LIBRARY_CONVENTIONS.md → Output Naming Rules` for the full list). Prefix with a component qualifier instead: `buttonClick`, `textareaFocus`, `valueChange`.
+  3. No explicit `output()` may be named `{signalName}Change` when `{signalName}` is a `model()` signal — Angular auto-generates that name for two-way binding and the collision corrupts host state.
+  - Full rationale and examples: `LIBRARY_CONVENTIONS.md → Output Naming Rules`.
 
 ## How Code Is Organized
 - Components: `projects/ui-lib-custom/src/lib/<component>/` with `<component>.ts/.html/.scss/.spec.ts` + `index.ts`.

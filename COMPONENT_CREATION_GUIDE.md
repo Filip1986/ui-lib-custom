@@ -92,6 +92,30 @@ For every input the component will expose:
 - `filled` is always a boolean input, never a variant string
 - Provide sensible defaults so the component renders well with zero configuration
 
+### Output naming — mandatory rules (read before writing any output)
+
+These rules exist because Angular's output mechanism has two non-obvious traps. Violating either produces bugs that are silent in unit tests with mocked events but fire double-handlers in integration tests and real apps.
+
+**Rule 1 — No `on*` prefix.** Never write `onClick`, `onFocus`, `onChange`. Use `buttonClick`, `focus`, `change`.
+
+**Rule 2 — Never shadow a native DOM event name.** When an `output()` shares a name with a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `submit`, `select`, `keydown`, `keyup`, `scroll`, `resize`, `load`, `error`, `mousedown`, `mouseup`, `mousemove`, `pointerdown`, `pointerup`, `touchstart`, `touchend`, `drag`, `drop`, `paste`, `copy`, `cut`, `wheel`...), Angular registers **both** an output subscriber and a native DOM listener on the host. Native events that bubble from child elements trigger the callback twice — once per path. Always disambiguate with a component qualifier:
+
+  ```
+  ❌ click, input, focus, blur, change
+  ✅ buttonClick, valueChange, textareaFocus, textareaBlur, panelChange
+  ```
+
+**Rule 3 — Never name an explicit `output()` `{signalName}Change` when `{signalName}` is a `model()` signal.** Angular's `model<T>()` auto-generates a `{name}Change` output for `[(binding)]` two-way syntax. A second explicit output with that name overwrites the binding with the rich event object instead of `T`. List every `model()` signal name in the component and make sure no explicit output matches `{name}Change`.
+
+  ```typescript
+  // model<boolean>() named 'visible' → blocked output name: 'visibleChange'
+  // model<string>()  named 'value'   → blocked output name: 'valueChange' (use 'inputChange' etc.)
+  ```
+
+**Rule 4 — `@HostListener` + focus/blur outputs.** If the component exposes a focus/blur-related output AND needs to track host `focus`/`blur` internally, use imperative `addEventListener` in the constructor — not `@HostListener`. See `cascade-select.ts` for the reference implementation.
+
+The full explanation of each rule and the complete list of blocked names lives in `LIBRARY_CONVENTIONS.md → Output Naming Rules`.
+
 ### Host bindings & classes
 
 - Apply variant/size/state classes on the host element via `host` metadata, not a wrapper `<div>`
@@ -296,7 +320,8 @@ Before marking a component as complete:
 - [ ] `ViewEncapsulation.None` and `ChangeDetectionStrategy.OnPush` on every component
 - [ ] `as const` objects, no TypeScript enums
 - [ ] String union types for public inputs, constants for internal strings
-- [ ] CSS variables prefixed `--uilib-<component>-*`
+- [ ] Element selector uses `ui-lib-{component}` (hyphenated) — not `uilib-{component}`
+- [ ] CSS variables prefixed `--uilib-{component}-*` (no hyphen in `uilib`) — not `--ui-lib-*`
 - [ ] Three variants (material, bootstrap, minimal) styled
 - [ ] Size tokens: `sm` / `md` / `lg`
 - [ ] All methods and functions have explicit return types
@@ -313,3 +338,10 @@ Before marking a component as complete:
 - [ ] **`npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0` passes** — zero errors, zero warnings
 - [ ] `ng build ui-lib-custom` succeeds with zero warnings
 - [ ] Active workspace shell used for all terminal commands
+
+### Output naming self-audit (run through before submitting)
+
+1. **No `on*` prefix** — grep for `on[A-Z]` in outputs; rename anything found.
+2. **No native DOM event name** — check each output name against: `abort blur change click close contextmenu copy cut dblclick drag dragend dragenter dragleave dragover dragstart drop error focus focusin focusout input keydown keypress keyup load mousedown mouseenter mouseleave mousemove mouseout mouseover mouseup paste pointercancel pointerdown pointermove pointerup reset resize scroll select submit touchcancel touchend touchmove touchstart transitionend wheel`. If any output matches, add a component qualifier.
+3. **No `model()` name collision** — list every `model()` signal. Block `{name}Change` as an explicit output name for each one.
+4. **Spec template bindings match** — every `(outputName)` binding in the spec host component template must exactly match the current output name. Run the tests; a binding mismatch causes silent non-firing, not a compile error.

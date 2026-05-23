@@ -53,6 +53,9 @@ Run through this mentally before submitting any output.
 - [ ] No raw hex/px — all new tokens added to `design-tokens.ts` first
 - [ ] If a new secondary entry point was added: `package.json` exports + `typesVersions` updated
 - [ ] Component inventory in `AI_AGENT_CONTEXT.md` updated if component status changed
+- [ ] No output uses the `on*` prefix
+- [ ] No output name matches a native DOM event — see the [Output Naming Rules](#output-naming-rules) section for the full blocked list
+- [ ] No output is named `{signalName}Change` where `{signalName}` is a `model()` signal
 
 #### [Historical] Migration checks (lower priority; preserved for context)
 
@@ -75,6 +78,10 @@ These have caused real regressions. Active anti-patterns are still common traps;
 | Creating `public-api.ts` inside secondary entry folders | Not the established convention; ng-packagr handles it | `ng-package.json` points directly to `../src/lib/<n>/index.ts` |
 | Inlining raw hex or px values | Bypasses the design token system | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable |
 | Adding PrimeNG/Material components to demo pages | Undermines dogfooding; surfaces library gaps incorrectly | Use `ui-lib-*` equivalents; document gap in component inventory if none exists |
+| `on*` prefix on outputs (`onClick`, `onFocus`, `onChange`) | Inconsistent with Angular's own event naming and the library standard | Name outputs without the prefix: `buttonClick`, `focus`, `change` |
+| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `submit`, `keydown`) | Angular registers both an output subscriber AND a native DOM listener on the host; native events bubbling from child elements trigger the handler twice — tests and real usage receive duplicate events | Prefix with a disambiguating context: `buttonClick`, `textareaFocus`, `panelChange` |
+| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Angular's `model<T>()` auto-generates an internal `{name}Change` event for `[(binding)]` two-way syntax; a second explicit output with the same name overwrites the binding — it receives the rich event object instead of `T`, corrupting host state and producing feedback loops | Give the explicit output a distinct name: `panelChange` instead of `visibleChange`; the `model()` internal event continues to work correctly |
+| Using `uilib-` as the element selector prefix (`uilib-accordion`) | `uilib-` is reserved for CSS custom properties (`--uilib-*`); element selectors use `ui-lib-` (with hyphen) to match every other component in the library | Element selectors: `ui-lib-accordion`; CSS variables: `--uilib-accordion-*` (two different intentional patterns — never mix them) |
 
 #### [Historical] Resolved Anti-Patterns (Migration Notes)
 
@@ -254,6 +261,112 @@ Applies to: class methods, getters, arrow functions assigned to class members, a
 - Keep inputs declarative; avoid imperative setters. Derived values must use `computed()`.
 - Favor composition via content projection over configuration explosion; expose lightweight structural parts (`header`, `footer`, `prefix`, `suffix` slots).
 - Template control flow follows the Angular 21 block syntax (`@if/@for/@switch`) and signal-friendly bindings; no imperative DOM tweaks.
+
+### Selector vs CSS Variable Prefix — Two Intentional Patterns
+
+These two prefixes look similar but serve different purposes and must **never** be swapped:
+
+| Context | Pattern | Example |
+|---|---|---|
+| Element selector | `ui-lib-{component}` (with hyphen after `ui`) | `ui-lib-button`, `ui-lib-accordion` |
+| CSS custom property | `--uilib-{component}-{property}` (no hyphen in `uilib`) | `--uilib-button-bg`, `--uilib-accordion-border` |
+| Host CSS class | `ui-lib-{component}--{modifier}` | `ui-lib-button--disabled`, `ui-lib-accordion--open` |
+
+The `uilib-` CSS prefix intentionally omits the hyphen to keep property names shorter and to match the established PrimeNG-style `p-` token convention. The `ui-lib-` selector prefix matches Angular's multi-word custom-element convention. Both patterns are correct and intentional — do not "normalize" them.
+
+---
+
+## Output Naming Rules
+
+These rules prevent two classes of Angular bugs that are invisible until runtime or integration tests.
+
+### Rule 1 — No `on*` prefix
+
+Outputs must not use an `on` prefix. The library standard is to name outputs as plain event verbs or nouns, consistent with Angular's own `(click)`, `(change)`, `(valueChange)` etc.
+
+```typescript
+// ❌ Wrong
+public readonly onClick: OutputEmitterRef<MouseEvent> = output<MouseEvent>();
+public readonly onFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+public readonly onChange: OutputEmitterRef<ValueEvent> = output<ValueEvent>();
+
+// ✅ Correct
+public readonly buttonClick: OutputEmitterRef<MouseEvent> = output<MouseEvent>();
+public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+public readonly change: OutputEmitterRef<ValueEvent> = output<ValueEvent>();
+```
+
+### Rule 2 — Never shadow a native DOM event name
+
+When an Angular component declares a signal `output()` with the **same name as a native DOM event**, Angular registers **both** an output subscriber and a native DOM event listener on the host element. Any native event bubbling up from a child element fires the handler twice — once through the output subscription, once through the host's native listener.
+
+**Blocked output names** (matches native DOM events):
+
+`abort` · `animationend` · `animationstart` · `blur` · `change` · `click` · `close` · `contextmenu` · `copy` · `cut` · `dblclick` · `drag` · `dragend` · `dragenter` · `dragleave` · `dragover` · `dragstart` · `drop` · `error` · `focus` · `focusin` · `focusout` · `input` · `keydown` · `keypress` · `keyup` · `load` · `mousedown` · `mouseenter` · `mouseleave` · `mousemove` · `mouseout` · `mouseover` · `mouseup` · `paste` · `pointercancel` · `pointerdown` · `pointermove` · `pointerup` · `reset` · `resize` · `scroll` · `select` · `submit` · `touchcancel` · `touchend` · `touchmove` · `touchstart` · `transitionend` · `wheel`
+
+**Naming strategy when the semantic name is blocked:** prefix with a component-specific qualifier that makes the intent clear.
+
+```typescript
+// ❌ Wrong — shadows native DOM event; double-fires in tests and real usage
+public readonly click: OutputEmitterRef<ClickEvent> = output<ClickEvent>();
+public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+public readonly input: OutputEmitterRef<InputEvent> = output<InputEvent>();
+public readonly change: OutputEmitterRef<ChangeEvent> = output<ChangeEvent>();
+
+// ✅ Correct — disambiguated with a component qualifier
+// Use the component's primary noun (button, textarea, panel, item...) as qualifier
+public readonly buttonClick: OutputEmitterRef<ClickEvent> = output<ClickEvent>();
+public readonly textareaFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+public readonly textareaBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+public readonly valueChange: OutputEmitterRef<InputEvent> = output<InputEvent>();
+public readonly panelChange: OutputEmitterRef<ChangeEvent> = output<ChangeEvent>();
+```
+
+**When no native DOM event conflict exists**, a plain semantic name is fine and preferred:
+
+```typescript
+// ✅ Fine — 'itemCommand', 'menuShow', 'slideEnd' are not native DOM event names
+public readonly itemCommand: OutputEmitterRef<MenuItemEvent> = output<MenuItemEvent>();
+public readonly menuShow: OutputEmitterRef<void> = output<void>();
+public readonly slideEnd: OutputEmitterRef<SliderEvent> = output<SliderEvent>();
+```
+
+### Rule 3 — Never collide with a `model()` internal change event
+
+Angular's `model<T>()` signal automatically generates an **internal** output named `{signalName}Change` to support two-way binding syntax (`[(signalName)]`). If a component also declares an explicit `output()` with the same name, the explicit output fires *after* the model's internal event and overwrites the consumer's bound variable with the rich event object instead of the plain `T` value — silently corrupting state.
+
+```typescript
+// ❌ Wrong — 'visibleChange' already exists as model<boolean>()'s internal binding event
+public readonly visible: ModelSignal<boolean> = model<boolean>(false);
+public readonly visibleChange: OutputEmitterRef<VisibleChangeEvent> = output<VisibleChangeEvent>();
+// Emitting this puts a VisibleChangeEvent object into [(visible)] instead of a boolean.
+
+// ✅ Correct — give the rich event output a distinct name
+public readonly visible: ModelSignal<boolean> = model<boolean>(false);
+public readonly panelChange: OutputEmitterRef<VisibleChangeEvent> = output<VisibleChangeEvent>();
+// [(visible)] continues to receive booleans; panelChange carries the rich payload.
+```
+
+The rule is simple: **scan every `model()` signal name in the component; no explicit `output()` may be named `{thatName}Change`**.
+
+### Rule 4 — `@HostListener` vs imperative `addEventListener` for focus/blur
+
+If a component needs to listen to native `focus` or `blur` events on its own host element while also exposing outputs with similar semantics, **do not use `@HostListener('focus')` / `@HostListener('blur')`** — Angular's change detection interacts with `@HostListener` in ways that can cause circular dispatch when the output and the native listener fire in the same tick.
+
+Use imperative `addEventListener` in the constructor instead:
+
+```typescript
+constructor() {
+  const host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  host.addEventListener('focus', (event: FocusEvent): void => {
+    this.isFocused.set(true);
+    this.textareaFocus.emit(event);
+  });
+}
+```
+
+This pattern is established in `cascade-select.ts` and should be followed whenever host focus/blur listeners are needed alongside outputs.
 
 ## Styling & Theming
 

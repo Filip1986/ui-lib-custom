@@ -86,6 +86,11 @@ These rules apply to every task, no exceptions:
 - **Self-closing tags** for components without projected content: `<ui-lib-button />`
 - **Meaningful names, no abbreviations** — `event` not `e`, `config` not `cfg`, `index` not `idx`
 - **Dogfood first** — always use `ui-lib-*` components in demos; never reach for PrimeNG or Angular Material as a substitute
+- **Element selectors: `ui-lib-{component}`** (hyphen after `ui`). **CSS variables: `--uilib-{component}-*`** (no hyphen in `uilib`). Two different intentional patterns — never mix them.
+- **Output naming — three hard rules** (violating any produces double-firing or corrupted two-way bindings):
+  1. **No `on*` prefix** — `onClick` → `buttonClick`, `onChange` → `change`
+  2. **Never shadow a native DOM event name** (`click`, `input`, `focus`, `blur`, `change`, `submit`, `select`, `keydown`, `keyup`, `scroll`, `load`, `error`, `mousedown`, `mouseup`, `drag`, `drop`, `paste`, `wheel`, and more). Prefix with a component qualifier: `buttonClick`, `textareaFocus`, `valueChange`. Full blocked list: `LIBRARY_CONVENTIONS.md → Output Naming Rules`.
+  3. **Never name an explicit `output()` `{signalName}Change` when `{signalName}` is a `model()` signal** — the `model()` already generates that name internally for two-way binding; a duplicate overwrites the binding with the event object.
 
 ---
 
@@ -100,6 +105,10 @@ These rules apply to every task, no exceptions:
 | Inlining raw hex or px | Add to `design-tokens.ts`, use `--uilib-*` var |
 | Adding PrimeNG/Material to demo pages | Use `ui-lib-*` equivalents |
 | `enum` instead of `as const` | `export const X = { ... } as const` |
+| `on*` prefix on outputs | Remove prefix; use verb/noun directly (`buttonClick`, `change`, `slideEnd`) |
+| Output named after a native DOM event | Add component qualifier: `buttonClick` not `click`, `textareaFocus` not `focus` |
+| Explicit `output()` named `{model}Change` | Give it a distinct name; `model()` owns `{name}Change` for `[(binding)]` |
+| `uilib-` as element selector prefix | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*` |
 
 ---
 
