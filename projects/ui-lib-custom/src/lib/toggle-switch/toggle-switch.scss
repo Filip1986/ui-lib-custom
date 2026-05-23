@@ -232,7 +232,7 @@ ui-lib-toggle-switch.ng-invalid.ng-dirty .ui-lib-toggle-switch__track {
 }
 
 // ── Dark mode ──────────────────────────────────────────────────────────
-@mixin toggle-switch-dark-theme {
+[data-theme='dark'] ui-lib-toggle-switch {
   --uilib-toggle-switch-track-bg: var(--uilib-color-neutral-600, #475569);
   --uilib-toggle-switch-track-bg-hover: var(--uilib-color-neutral-500, #64748b);
   --uilib-toggle-switch-track-bg-checked: var(--uilib-color-primary-dark, #818cf8);
@@ -247,6 +247,19 @@ ui-lib-toggle-switch.ng-invalid.ng-dirty .ui-lib-toggle-switch__track {
     color-mix(in srgb, var(--uilib-color-primary-dark, #818cf8) 35%, transparent);
 }
 
-[data-theme='dark'] ui-lib-toggle-switch {
-  @include toggle-switch-dark-theme;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme]) ui-lib-toggle-switch {
+    --uilib-toggle-switch-track-bg: var(--uilib-color-neutral-600, #475569);
+    --uilib-toggle-switch-track-bg-hover: var(--uilib-color-neutral-500, #64748b);
+    --uilib-toggle-switch-track-bg-checked: var(--uilib-color-primary-dark, #818cf8);
+    --uilib-toggle-switch-track-bg-checked-hover: color-mix(
+      in srgb,
+      var(--uilib-color-primary-dark, #818cf8) 80%,
+      white
+    );
+    --uilib-toggle-switch-thumb-bg: var(--uilib-color-neutral-100, #f1f5f9);
+    --uilib-toggle-switch-thumb-bg-checked: var(--uilib-color-neutral-50, #f8fafc);
+    --uilib-toggle-switch-focus-ring: 0 0 0 3px
+      color-mix(in srgb, var(--uilib-color-primary-dark, #818cf8) 35%, transparent);
+  }
 }

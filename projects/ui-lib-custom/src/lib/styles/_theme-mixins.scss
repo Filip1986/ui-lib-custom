@@ -1,11 +1,16 @@
 // Theme variable mixins for light and dark modes.
 //
-// DEPRECATED — do not add new tokens here.
-// Global light/dark tokens now live in themes/themes.scss (sections 2 & 3).
-// This file remains only because 17 component SCSS files still @use it for the
-// --uilib-surface-dark-* / --uilib-text-dark-* / --uilib-border-dark* tokens
-// that have not yet been migrated to the central themes.scss dark block.
-// Migration tracking: docs/reference/systems/CSS_ARCHITECTURE.md
+// DEPRECATED — no active consumers remain. Safe to delete.
+//
+// All component dark-mode styles have been migrated to scoped
+// [data-theme='dark'] ui-lib-<component> { } blocks inside each component's
+// own SCSS file, with matching @media (prefers-color-scheme: dark) blocks.
+//
+// Global palette/surface/shadow tokens live in themes/themes.scss sections 2-3.
+// dark-theme.scss and light-theme.scss are now empty stubs.
+//
+// This file is kept temporarily for reference. Remove it once verified no
+// external consumer imports it.
 
 @mixin dark-theme-vars {
   /* Dark palette tokens */

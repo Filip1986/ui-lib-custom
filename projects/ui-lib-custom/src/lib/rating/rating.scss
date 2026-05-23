@@ -172,11 +172,20 @@ ui-lib-rating.ui-lib-rating--variant-minimal {
   }
 }
 
-@mixin rating-dark-theme {
+[data-theme='dark'] ui-lib-rating {
   --uilib-rating-star-off-color: var(--uilib-color-neutral-600, #4b5563);
   --uilib-rating-star-on-color: var(--uilib-color-primary-dark, #fbbf24);
   --uilib-rating-star-hover-color: var(--uilib-color-primary-dark, #fbbf24);
   --uilib-rating-cancel-color: var(--uilib-color-neutral-500, #6b7280);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme]) ui-lib-rating {
+    --uilib-rating-star-off-color: var(--uilib-color-neutral-600, #4b5563);
+    --uilib-rating-star-on-color: var(--uilib-color-primary-dark, #fbbf24);
+    --uilib-rating-star-hover-color: var(--uilib-color-primary-dark, #fbbf24);
+    --uilib-rating-cancel-color: var(--uilib-color-neutral-500, #6b7280);
+  }
 }
 
 // ── Reduced motion ────────────────────────────────────────────────────────────
