@@ -6,9 +6,9 @@
 
   > input,
   > ui-lib-input,
-  > uilib-password,
-  > uilib-input-mask,
-  > uilib-input-number,
+  > ui-lib-password,
+  > ui-lib-input-mask,
+  > ui-lib-input-number,
   > .ui-lib-input,
   > .ui-lib-input--sm,
   > .ui-lib-input--lg {
@@ -16,9 +16,9 @@
   }
 
   > ui-lib-input,
-  > uilib-password,
-  > uilib-input-mask,
-  > uilib-input-number {
+  > ui-lib-password,
+  > ui-lib-input-mask,
+  > ui-lib-input-number {
     display: block;
   }
 }
@@ -45,9 +45,9 @@
 
 .ui-lib-icon-field--left > input,
 .ui-lib-icon-field--left > ui-lib-input input,
-.ui-lib-icon-field--left > uilib-password input,
-.ui-lib-icon-field--left > uilib-input-mask input,
-.ui-lib-icon-field--left > uilib-input-number input,
+.ui-lib-icon-field--left > ui-lib-password input,
+.ui-lib-icon-field--left > ui-lib-input-mask input,
+.ui-lib-icon-field--left > ui-lib-input-number input,
 .ui-lib-icon-field--left > ui-lib-input .ui-input-field,
 .ui-lib-icon-field--left > .ui-lib-input,
 .ui-lib-icon-field--left > .ui-lib-input--sm,
@@ -57,9 +57,9 @@
 
 .ui-lib-icon-field--right > input,
 .ui-lib-icon-field--right > ui-lib-input input,
-.ui-lib-icon-field--right > uilib-password input,
-.ui-lib-icon-field--right > uilib-input-mask input,
-.ui-lib-icon-field--right > uilib-input-number input,
+.ui-lib-icon-field--right > ui-lib-password input,
+.ui-lib-icon-field--right > ui-lib-input-mask input,
+.ui-lib-icon-field--right > ui-lib-input-number input,
 .ui-lib-icon-field--right > ui-lib-input .ui-input-field,
 .ui-lib-icon-field--right > .ui-lib-input,
 .ui-lib-icon-field--right > .ui-lib-input--sm,
@@ -107,10 +107,10 @@
   right: var(--uilib-icon-field-icon-margin-minimal, var(--uilib-icon-field-icon-margin, 0.75rem));
 }
 
-uilib-float-label .ui-lib-icon-field {
+ui-lib-float-label .ui-lib-icon-field {
   position: relative;
 }
 
-uilib-float-label:has(.ui-lib-icon-field--left) {
+ui-lib-float-label:has(.ui-lib-icon-field--left) {
   --uilib-float-label-position-x: var(--uilib-icon-field-input-padding-with-icon, 2.5rem);
 }

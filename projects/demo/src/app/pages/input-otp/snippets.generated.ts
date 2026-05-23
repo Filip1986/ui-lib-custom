@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<uilib-input-otp [length]="4" [(ngModel)]="basicValue" [ngModelOptions]="{ standalone: true }" />`;
+export const basicHtml = `<ui-lib-input-otp [length]="4" [(ngModel)]="basicValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const basicTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ export class MyComponent {
   basicValue: string = '';
 }`;
 
-export const disabledHtml = `<uilib-input-otp [length]="4" [disabled]="true" [(ngModel)]="disabledValue" [ngModelOptions]="{ standalone: true }" />`;
+export const disabledHtml = `<ui-lib-input-otp [length]="4" [disabled]="true" [(ngModel)]="disabledValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +32,7 @@ export class MyComponent {
   disabledValue: string = '1234';
 }`;
 
-export const filledHtml = `<uilib-input-otp [length]="4" [filled]="true" [(ngModel)]="filledValue" [ngModelOptions]="{ standalone: true }" />`;
+export const filledHtml = `<ui-lib-input-otp [length]="4" [filled]="true" [(ngModel)]="filledValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const filledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -47,7 +47,7 @@ export class MyComponent {
   filledValue: string = '1234';
 }`;
 
-export const integerOnlyHtml = `<uilib-input-otp [length]="4" [integerOnly]="true" [(ngModel)]="integerValue" [ngModelOptions]="{ standalone: true }" />`;
+export const integerOnlyHtml = `<ui-lib-input-otp [length]="4" [integerOnly]="true" [(ngModel)]="integerValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const integerOnlyTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -62,7 +62,7 @@ export class MyComponent {
   integerValue: string = '';
 }`;
 
-export const invalidHtml = `<uilib-input-otp [length]="4" [invalid]="true" [(ngModel)]="invalidValue" [ngModelOptions]="{ standalone: true }" />`;
+export const invalidHtml = `<ui-lib-input-otp [length]="4" [invalid]="true" [(ngModel)]="invalidValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const invalidTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -77,7 +77,7 @@ export class MyComponent {
   invalidValue: string = '12';
 }`;
 
-export const maskHtml = `<uilib-input-otp [length]="6" [mask]="true" [(ngModel)]="maskValue" [ngModelOptions]="{ standalone: true }" />`;
+export const maskHtml = `<ui-lib-input-otp [length]="6" [mask]="true" [(ngModel)]="maskValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const maskTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -93,7 +93,7 @@ export class MyComponent {
 }`;
 
 export const reactiveHtml = `<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
-  <uilib-input-otp
+  <ui-lib-input-otp
     [length]="6"
     [integerOnly]="true"
     formControlName="code"
@@ -124,7 +124,7 @@ export class MyComponent {
   }
 }`;
 
-export const readonlyHtml = `<uilib-input-otp [length]="4" [readonly]="true" [(ngModel)]="readonlyValue" [ngModelOptions]="{ standalone: true }" />`;
+export const readonlyHtml = `<ui-lib-input-otp [length]="4" [readonly]="true" [(ngModel)]="readonlyValue" [ngModelOptions]="{ standalone: true }" />`;
 
 export const readonlyTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -139,9 +139,9 @@ export class MyComponent {
   readonlyValue: string = '5678';
 }`;
 
-export const sizesHtml = `<uilib-input-otp [length]="4" size="sm" [(ngModel)]="sizeValues.sm" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-otp [length]="4" size="md" [(ngModel)]="sizeValues.md" [ngModelOptions]="{ standalone: true }" />
-<uilib-input-otp [length]="4" size="lg" [(ngModel)]="sizeValues.lg" [ngModelOptions]="{ standalone: true }" />`;
+export const sizesHtml = `<ui-lib-input-otp [length]="4" size="sm" [(ngModel)]="sizeValues.sm" [ngModelOptions]="{ standalone: true }" />
+<ui-lib-input-otp [length]="4" size="md" [(ngModel)]="sizeValues.md" [ngModelOptions]="{ standalone: true }" />
+<ui-lib-input-otp [length]="4" size="lg" [(ngModel)]="sizeValues.lg" [ngModelOptions]="{ standalone: true }" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

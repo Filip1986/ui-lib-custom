@@ -37,7 +37,7 @@ let inputNumberIdCounter: number = 0;
 
 /** Numeric input with locale-aware parsing/formatting, CVA support, and spinner controls. */
 @Component({
-  selector: 'uilib-input-number',
+  selector: 'ui-lib-input-number',
   standalone: true,
   styleUrl: './input-number.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,18 +50,18 @@ let inputNumberIdCounter: number = 0;
     },
   ],
   host: {
-    class: 'uilib-input-number',
-    '[class.uilib-input-number-stacked]': 'showButtons() && buttonLayout() === "stacked"',
-    '[class.uilib-input-number-horizontal]': 'showButtons() && buttonLayout() === "horizontal"',
-    '[class.uilib-input-number-vertical]': 'showButtons() && buttonLayout() === "vertical"',
-    '[class.uilib-input-number-sm]': 'size() === "sm"',
-    '[class.uilib-input-number-md]': 'size() === "md"',
-    '[class.uilib-input-number-lg]': 'size() === "lg"',
-    '[class.uilib-input-number-filled]':
+    class: 'ui-lib-input-number',
+    '[class.ui-lib-input-number-stacked]': 'showButtons() && buttonLayout() === "stacked"',
+    '[class.ui-lib-input-number-horizontal]': 'showButtons() && buttonLayout() === "horizontal"',
+    '[class.ui-lib-input-number-vertical]': 'showButtons() && buttonLayout() === "vertical"',
+    '[class.ui-lib-input-number-sm]': 'size() === "sm"',
+    '[class.ui-lib-input-number-md]': 'size() === "md"',
+    '[class.ui-lib-input-number-lg]': 'size() === "lg"',
+    '[class.ui-lib-input-number-filled]':
       'filled() || value() !== null || displayValue().length > 0',
-    '[class.uilib-input-number-fluid]': 'fluid()',
-    '[class.uilib-input-number-invalid]': 'invalid()',
-    '[class.uilib-input-number-disabled]': 'isControlDisabled()',
+    '[class.ui-lib-input-number-fluid]': 'fluid()',
+    '[class.ui-lib-input-number-invalid]': 'invalid()',
+    '[class.ui-lib-input-number-disabled]': 'isControlDisabled()',
     '[class.uilib-variant-material]': 'effectiveVariant() === "material"',
     '[class.uilib-variant-bootstrap]': 'effectiveVariant() === "bootstrap"',
     '[class.uilib-variant-minimal]': 'effectiveVariant() === "minimal"',
@@ -72,7 +72,7 @@ let inputNumberIdCounter: number = 0;
     @if (showButtons() && buttonLayout() === 'vertical') {
       <button
         type="button"
-        class="uilib-input-number-button uilib-input-number-button-up"
+        class="ui-lib-input-number-button ui-lib-input-number-button-up"
         [attr.aria-label]="'Increment ' + (label() || 'value')"
         [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, 1)"
@@ -88,7 +88,7 @@ let inputNumberIdCounter: number = 0;
     @if (showButtons() && buttonLayout() === 'horizontal') {
       <button
         type="button"
-        class="uilib-input-number-button uilib-input-number-button-down"
+        class="ui-lib-input-number-button ui-lib-input-number-button-down"
         [attr.aria-label]="'Decrement ' + (label() || 'value')"
         [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, -1)"
@@ -101,9 +101,9 @@ let inputNumberIdCounter: number = 0;
       </button>
     }
 
-    <span class="uilib-input-number-input-wrapper">
+    <span class="ui-lib-input-number-input-wrapper">
       @if (prefix()) {
-        <span class="uilib-input-number-prefix">{{ prefix() }}</span>
+        <span class="ui-lib-input-number-prefix">{{ prefix() }}</span>
       }
 
       <input
@@ -127,7 +127,7 @@ let inputNumberIdCounter: number = 0;
         [attr.aria-invalid]="invalid() ? 'true' : null"
         [attr.tabindex]="tabindex()"
         [attr.autocomplete]="autocomplete()"
-        [class.uilib-input-number-input]="true"
+        [class.ui-lib-input-number-input]="true"
         (input)="onNativeInput($event)"
         (focus)="onNativeFocus($event)"
         (blur)="onNativeBlur($event)"
@@ -135,19 +135,19 @@ let inputNumberIdCounter: number = 0;
       />
 
       @if (suffix()) {
-        <span class="uilib-input-number-suffix">{{ suffix() }}</span>
+        <span class="ui-lib-input-number-suffix">{{ suffix() }}</span>
       }
 
       @if (showClear() && value() !== null && !isControlDisabled()) {
-        <button type="button" class="uilib-input-number-clear" (click)="clearValue()">×</button>
+        <button type="button" class="ui-lib-input-number-clear" (click)="clearValue()">×</button>
       }
     </span>
 
     @if (showButtons() && buttonLayout() === 'stacked') {
-      <span class="uilib-input-number-button-group">
+      <span class="ui-lib-input-number-button-group">
         <button
           type="button"
-          class="uilib-input-number-button uilib-input-number-button-up"
+          class="ui-lib-input-number-button ui-lib-input-number-button-up"
           [attr.aria-label]="'Increment ' + (label() || 'value')"
           [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
           (mousedown)="onSpinMouseDown($event, 1)"
@@ -160,7 +160,7 @@ let inputNumberIdCounter: number = 0;
         </button>
         <button
           type="button"
-          class="uilib-input-number-button uilib-input-number-button-down"
+          class="ui-lib-input-number-button ui-lib-input-number-button-down"
           [attr.aria-label]="'Decrement ' + (label() || 'value')"
           [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
           (mousedown)="onSpinMouseDown($event, -1)"
@@ -177,7 +177,7 @@ let inputNumberIdCounter: number = 0;
     @if (showButtons() && buttonLayout() === 'horizontal') {
       <button
         type="button"
-        class="uilib-input-number-button uilib-input-number-button-up"
+        class="ui-lib-input-number-button ui-lib-input-number-button-up"
         [attr.aria-label]="'Increment ' + (label() || 'value')"
         [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, 1)"
@@ -193,7 +193,7 @@ let inputNumberIdCounter: number = 0;
     @if (showButtons() && buttonLayout() === 'vertical') {
       <button
         type="button"
-        class="uilib-input-number-button uilib-input-number-button-down"
+        class="ui-lib-input-number-button ui-lib-input-number-button-down"
         [attr.aria-label]="'Decrement ' + (label() || 'value')"
         [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, -1)"
@@ -241,7 +241,7 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly showClear: InputSignal<boolean> = input<boolean>(INPUT_NUMBER_DEFAULTS.showClear);
   public readonly placeholder: InputSignal<string> = input<string>('');
   public readonly inputId: InputSignal<string> = input<string>(
-    `uilib-input-number-${++inputNumberIdCounter}`
+    `ui-lib-input-number-${++inputNumberIdCounter}`
   );
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly readonly: InputSignal<boolean> = input<boolean>(false);
@@ -264,17 +264,12 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly tabindex: InputSignal<number> = input<number>(0);
   public readonly autocomplete: InputSignal<string> = input<string>('off');
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onInput: OutputEmitterRef<{ originalEvent: InputEvent; value: number | null }> =
+  public readonly input: OutputEmitterRef<{ originalEvent: InputEvent; value: number | null }> =
     output<{ originalEvent: InputEvent; value: number | null }>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onKeyDown: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onClear: OutputEmitterRef<void> = output<void>();
+  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly keyDown: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
+  public readonly clear: OutputEmitterRef<void> = output<void>();
 
   private readonly inputElement: Signal<ElementRef<HTMLInputElement> | undefined> =
     viewChild<ElementRef<HTMLInputElement>>('inputElement');
@@ -381,7 +376,7 @@ export class InputNumberComponent implements ControlValueAccessor {
 
     this.value.set(validatedValue);
     this.onModelChange(validatedValue);
-    this.onInput.emit({ originalEvent: inputEvent, value: validatedValue });
+    this.input.emit({ originalEvent: inputEvent, value: validatedValue });
   }
 
   public onNativeFocus(event: FocusEvent): void {
@@ -393,7 +388,7 @@ export class InputNumberComponent implements ControlValueAccessor {
       });
     }
 
-    this.onFocus.emit(event);
+    this.focus.emit(event);
   }
 
   public onNativeBlur(event: FocusEvent): void {
@@ -408,12 +403,12 @@ export class InputNumberComponent implements ControlValueAccessor {
     this.onModelTouched();
     this.syncDisplayValue(currentValue);
 
-    this.onBlur.emit(event);
+    this.blur.emit(event);
   }
 
   public onNativeKeyDown(event: KeyboardEvent): void {
     if (this.isControlDisabled() || this.readonly()) {
-      this.onKeyDown.emit(event);
+      this.keyDown.emit(event);
       return;
     }
 
@@ -453,7 +448,7 @@ export class InputNumberComponent implements ControlValueAccessor {
         break;
     }
 
-    this.onKeyDown.emit(event);
+    this.keyDown.emit(event);
   }
 
   public onSpinMouseDown(event: MouseEvent, direction: -1 | 1): void {
@@ -519,7 +514,7 @@ export class InputNumberComponent implements ControlValueAccessor {
     this.displayValue.set('');
     this.onModelChange(null);
     this.onModelTouched();
-    this.onClear.emit();
+    this.clear.emit();
   }
 
   protected canIncrement(): boolean {

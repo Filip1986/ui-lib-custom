@@ -51,10 +51,10 @@ import type {
       [menuButtonAriaLabel]="menuButtonAriaLabel()"
       [tabindex]="tabindex()"
       [styleClass]="styleClass()"
-      (onClick)="handleClick($event)"
-      (onMenuShow)="handleMenuShow($event)"
-      (onMenuHide)="handleMenuHide($event)"
-      (onItemCommand)="handleItemCommand($event)"
+      (buttonClick)="handleClick($event)"
+      (menuShow)="handleMenuShow($event)"
+      (menuHide)="handleMenuHide($event)"
+      (itemCommand)="handleItemCommand($event)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -280,7 +280,7 @@ describe('SplitButtonComponent', (): void => {
   });
 
   describe('Main button', (): void => {
-    it('click emits onClick', (): void => {
+    it('buttonClick emits on main button click', (): void => {
       mainButton().click();
       fixture.detectChanges();
       expect(host.clickEvents).toHaveLength(1);

@@ -19,7 +19,7 @@ let nextPasswordId: number = 0;
 
 /** Password field with strength meter, mask toggle, and ControlValueAccessor integration. */
 @Component({
-  selector: 'uilib-password',
+  selector: 'ui-lib-password',
   standalone: true,
   templateUrl: './password.component.html',
   styleUrl: './password.component.scss',
@@ -33,13 +33,13 @@ let nextPasswordId: number = 0;
     },
   ],
   host: {
-    class: 'uilib-password',
-    '[class.uilib-password-sm]': 'size() === "sm"',
-    '[class.uilib-password-lg]': 'size() === "lg"',
-    '[class.uilib-password-appearance-filled]': 'appearance() === "filled"',
-    '[class.uilib-password-fluid]': 'fluid()',
-    '[class.uilib-password-invalid]': 'invalid()',
-    '[class.uilib-password-disabled]': 'isControlDisabled()',
+    class: 'ui-lib-password',
+    '[class.ui-lib-password-sm]': 'size() === "sm"',
+    '[class.ui-lib-password-lg]': 'size() === "lg"',
+    '[class.ui-lib-password-appearance-filled]': 'appearance() === "filled"',
+    '[class.ui-lib-password-fluid]': 'fluid()',
+    '[class.ui-lib-password-invalid]': 'invalid()',
+    '[class.ui-lib-password-disabled]': 'isControlDisabled()',
     '[class.uilib-inputwrapper-filled]': 'isFilled()',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
     '[class.uilib-variant-material]': 'variant() === "material"',

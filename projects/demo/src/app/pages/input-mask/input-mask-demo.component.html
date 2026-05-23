@@ -13,7 +13,7 @@
         <p class="section-text">Phone mask with ngModel and a live model preview.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
-            <uilib-input-mask
+            <ui-lib-input-mask
               mask="(999) 999-9999"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="basicValue"
@@ -31,7 +31,7 @@
           <div class="stack-md">
             <div class="stack-xs">
               <label>Phone</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="(999) 999-9999"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.phone"
@@ -39,7 +39,7 @@
             </div>
             <div class="stack-xs">
               <label>Date</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="99/99/9999"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.date"
@@ -47,7 +47,7 @@
             </div>
             <div class="stack-xs">
               <label>SSN</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="999-99-9999"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.ssn"
@@ -55,7 +55,7 @@
             </div>
             <div class="stack-xs">
               <label>Serial</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="a*-999-a999"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="formatValues.serial"
@@ -79,7 +79,7 @@
               />
               autoClear
             </label>
-            <uilib-input-mask
+            <ui-lib-input-mask
               mask="(999) 999-9999? x99999"
               [autoClear]="optionalAutoClear"
               [ngModelOptions]="{ standalone: true }"
@@ -98,7 +98,7 @@
           <div class="row-3">
             <div class="stack-xs">
               <label>_</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="999-999"
                 slotChar="_"
                 [keepBuffer]="true"
@@ -108,7 +108,7 @@
             </div>
             <div class="stack-xs">
               <label>#</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="999-999"
                 slotChar="#"
                 [keepBuffer]="true"
@@ -118,7 +118,7 @@
             </div>
             <div class="stack-xs">
               <label>*</label>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="999-999"
                 slotChar="*"
                 [keepBuffer]="true"
@@ -138,7 +138,7 @@
           <div class="row-2">
             <div class="stack-xs">
               <p class="variant-title">Formatted model (`unmask=false`)</p>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="(999) 999-9999"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="maskedModel"
@@ -147,7 +147,7 @@
             </div>
             <div class="stack-xs">
               <p class="variant-title">Raw model (`unmask=true`)</p>
-              <uilib-input-mask
+              <ui-lib-input-mask
                 mask="(999) 999-9999"
                 [unmask]="true"
                 [ngModelOptions]="{ standalone: true }"
@@ -164,7 +164,7 @@
         <h3>f. Filled</h3>
         <p class="section-text">Filled state styling using the `filled` input.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-mask
+          <ui-lib-input-mask
             mask="(999) 999-9999"
             [filled]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -176,16 +176,16 @@
 
       <app-doc-section id="float-label" title="Float Label">
         <h3>g. Float Label</h3>
-        <p class="section-text">`uilib-input-mask` composed inside `uilib-float-label`.</p>
+        <p class="section-text">`ui-lib-input-mask` composed inside `ui-lib-float-label`.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-float-label>
-            <uilib-input-mask
+          <ui-lib-float-label>
+            <ui-lib-input-mask
               mask="(999) 999-9999"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="floatValue"
             />
             <label>Phone</label>
-          </uilib-float-label>
+          </ui-lib-float-label>
         </ui-lib-panel>
         <app-doc-code-example
           [html]="floatLabelHtml"
@@ -195,16 +195,16 @@
 
       <app-doc-section id="ifta-label" title="Ifta Label">
         <h3>h. Ifta Label</h3>
-        <p class="section-text">Inline label style via `uilib-float-label` with `variant="in"`.</p>
+        <p class="section-text">Inline label style via `ui-lib-float-label` with `variant="in"`.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-float-label variant="in">
-            <uilib-input-mask
+          <ui-lib-float-label variant="in">
+            <ui-lib-input-mask
               mask="(999) 999-9999"
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="iftaValue"
             />
             <label>Phone</label>
-          </uilib-float-label>
+          </ui-lib-float-label>
         </ui-lib-panel>
         <app-doc-code-example [html]="iftaLabelHtml" [typescript]="iftaLabelTsTs" />
       </app-doc-section>
@@ -217,7 +217,7 @@
             @for (item of sizeItems; track item.size) {
               <div class="stack-xs">
                 <label>{{ item.label }}</label>
-                <uilib-input-mask
+                <ui-lib-input-mask
                   mask="(999) 999-9999"
                   [size]="item.size"
                   [ngModelOptions]="{ standalone: true }"
@@ -235,7 +235,7 @@
         <p class="section-text">Full-width mask input using the `fluid` input.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm fluid-wrap">
-            <uilib-input-mask
+            <ui-lib-input-mask
               mask="(999) 999-9999"
               [fluid]="true"
               [ngModelOptions]="{ standalone: true }"
@@ -251,7 +251,7 @@
         <h3>k. Disabled</h3>
         <p class="section-text">Disabled input with a pre-filled value.</p>
         <ui-lib-panel variant="minimal">
-          <uilib-input-mask
+          <ui-lib-input-mask
             mask="(999) 999-9999"
             [disabled]="true"
             [ngModelOptions]="{ standalone: true }"
@@ -266,7 +266,7 @@
         <p class="section-text">Invalid state styling for validation feedback scenarios.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-sm">
-            <uilib-input-mask
+            <ui-lib-input-mask
               mask="(999) 999-9999"
               [invalid]="true"
               [ngModelOptions]="{ standalone: true }"
@@ -283,7 +283,7 @@
         <p class="section-text">ControlValueAccessor integration in a typed FormGroup.</p>
         <ui-lib-panel variant="minimal">
           <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-sm">
-            <uilib-input-mask
+            <ui-lib-input-mask
               mask="(999) 999-9999"
               formControlName="phone"
               [invalid]="reactiveForm.controls.phone.invalid && reactiveForm.controls.phone.touched"
@@ -306,7 +306,7 @@
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>uilib-input-mask</code>. Import from
+      All inputs accepted by <code>ui-lib-input-mask</code>. Import from
       <code>ui-lib-custom/input-mask</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />

@@ -41,7 +41,7 @@ function getDebugEl(fixture: ComponentFixture<unknown>, selector: string): Debug
   imports: [FormsModule, KnobComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <uilib-knob
+    <ui-lib-knob
       [min]="min()"
       [max]="max()"
       [step]="step()"
@@ -54,7 +54,7 @@ function getDebugEl(fixture: ComponentFixture<unknown>, selector: string): Debug
       [ariaLabel]="ariaLabel()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
-      (onChange)="onChangeEvent($event)"
+      (change)="onChangeEvent($event)"
     />
   `,
 })
@@ -89,7 +89,7 @@ class KnobNgModelHostComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <form [formGroup]="form">
-      <uilib-knob formControlName="value" [min]="0" [max]="100" />
+      <ui-lib-knob formControlName="value" [min]="0" [max]="100" />
     </form>
   `,
 })
@@ -130,25 +130,25 @@ describe('KnobComponent', (): void => {
   describe('Rendering', (): void => {
     it('should create the component', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
-      const debugElement: DebugElement = getDebugEl(fixture, 'uilib-knob');
+      const debugElement: DebugElement = getDebugEl(fixture, 'ui-lib-knob');
       expect(debugElement).toBeTruthy();
     });
 
     it('should render the SVG element', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       expect(svg).toBeTruthy();
     });
 
     it('should render the track path', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
-      const track: SVGPathElement = queryEl<SVGPathElement>(fixture, '.uilib-knob-track');
+      const track: SVGPathElement = queryEl<SVGPathElement>(fixture, '.ui-lib-knob-track');
       expect(track.getAttribute('d')).toBeTruthy();
     });
 
     it('should render the value label by default', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const label: SVGTextElement = queryEl<SVGTextElement>(fixture, '.uilib-knob-value-label');
+      const label: SVGTextElement = queryEl<SVGTextElement>(fixture, '.ui-lib-knob-value-label');
       expect(label.textContent!.trim()).toBe('50');
     });
 
@@ -158,7 +158,7 @@ describe('KnobComponent', (): void => {
       fixture.detectChanges();
       const label: SVGTextElement | null = (
         fixture.nativeElement as HTMLElement
-      ).querySelector<SVGTextElement>('.uilib-knob-value-label');
+      ).querySelector<SVGTextElement>('.ui-lib-knob-value-label');
       expect(label).toBeNull();
     });
 
@@ -166,13 +166,13 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(0);
       const range: SVGPathElement | null = (
         fixture.nativeElement as HTMLElement
-      ).querySelector<SVGPathElement>('.uilib-knob-range');
+      ).querySelector<SVGPathElement>('.ui-lib-knob-range');
       expect(range).toBeNull();
     });
 
     it('should render range path when value is above minimum', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const range: SVGPathElement = queryEl<SVGPathElement>(fixture, '.uilib-knob-range');
+      const range: SVGPathElement = queryEl<SVGPathElement>(fixture, '.ui-lib-knob-range');
       expect(range).toBeTruthy();
     });
 
@@ -180,7 +180,7 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(42);
       fixture.componentInstance.valueTemplate.set('{value}%');
       fixture.detectChanges();
-      const label: SVGTextElement = queryEl<SVGTextElement>(fixture, '.uilib-knob-value-label');
+      const label: SVGTextElement = queryEl<SVGTextElement>(fixture, '.ui-lib-knob-value-label');
       expect(label.textContent!.trim()).toBe('42%');
     });
   });
@@ -188,51 +188,51 @@ describe('KnobComponent', (): void => {
   // ---- Size classes -------------------------------------------------------
 
   describe('Size classes', (): void => {
-    it('should apply uilib-knob-md by default', async (): Promise<void> => {
+    it('should apply ui-lib-knob-md by default', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
-      const host: HTMLElement = queryEl(fixture, 'uilib-knob');
-      expect(host.classList).toContain('uilib-knob-md');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
+      expect(host.classList).toContain('ui-lib-knob-md');
     });
 
-    it('should apply uilib-knob-sm when size is sm', async (): Promise<void> => {
+    it('should apply ui-lib-knob-sm when size is sm', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       fixture.componentInstance.size.set('sm');
       fixture.detectChanges();
-      const host: HTMLElement = queryEl(fixture, 'uilib-knob');
-      expect(host.classList).toContain('uilib-knob-sm');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
+      expect(host.classList).toContain('ui-lib-knob-sm');
     });
 
-    it('should apply uilib-knob-lg when size is lg', async (): Promise<void> => {
+    it('should apply ui-lib-knob-lg when size is lg', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       fixture.componentInstance.size.set('lg');
       fixture.detectChanges();
-      const host: HTMLElement = queryEl(fixture, 'uilib-knob');
-      expect(host.classList).toContain('uilib-knob-lg');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
+      expect(host.classList).toContain('ui-lib-knob-lg');
     });
   });
 
   // ---- Disabled state -----------------------------------------------------
 
   describe('Disabled state', (): void => {
-    it('should apply uilib-knob-disabled class when disabled', async (): Promise<void> => {
+    it('should apply ui-lib-knob-disabled class when disabled', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
-      const host: HTMLElement = queryEl(fixture, 'uilib-knob');
-      expect(host.classList).toContain('uilib-knob-disabled');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
+      expect(host.classList).toContain('ui-lib-knob-disabled');
     });
 
     it('should set aria-disabled when disabled', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should remove aria-disabled when not disabled', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-disabled')).toBeNull();
     });
 
@@ -240,7 +240,7 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('tabindex')).toBe('-1');
     });
   });
@@ -250,7 +250,7 @@ describe('KnobComponent', (): void => {
   describe('ARIA attributes', (): void => {
     it('should set role="slider" on the host', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('role')).toBe('slider');
     });
 
@@ -259,14 +259,14 @@ describe('KnobComponent', (): void => {
       fixture.componentInstance.min.set(10);
       fixture.componentInstance.max.set(90);
       fixture.detectChanges();
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-valuemin')).toBe('10');
       expect(host.getAttribute('aria-valuemax')).toBe('90');
     });
 
     it('should set aria-valuenow to the current value', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(75);
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-valuenow')).toBe('75');
     });
 
@@ -274,7 +274,7 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture();
       fixture.componentInstance.ariaLabel.set('Volume');
       fixture.detectChanges();
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-label')).toBe('Volume');
     });
   });
@@ -284,7 +284,7 @@ describe('KnobComponent', (): void => {
   describe('Keyboard interaction', (): void => {
     it('should increase value on ArrowUp', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(51);
@@ -292,7 +292,7 @@ describe('KnobComponent', (): void => {
 
     it('should decrease value on ArrowDown', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(49);
@@ -300,7 +300,7 @@ describe('KnobComponent', (): void => {
 
     it('should increase value on ArrowRight', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(51);
@@ -308,7 +308,7 @@ describe('KnobComponent', (): void => {
 
     it('should decrease value on ArrowLeft', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(49);
@@ -316,7 +316,7 @@ describe('KnobComponent', (): void => {
 
     it('should set value to min on Home', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(0);
@@ -324,7 +324,7 @@ describe('KnobComponent', (): void => {
 
     it('should set value to max on End', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(100);
@@ -332,7 +332,7 @@ describe('KnobComponent', (): void => {
 
     it('should not exceed max on ArrowUp at max', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(100);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(100);
@@ -340,7 +340,7 @@ describe('KnobComponent', (): void => {
 
     it('should not go below min on ArrowDown at min', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(0);
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(0);
@@ -350,7 +350,7 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(50);
@@ -360,7 +360,7 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
       fixture.componentInstance.readonly.set(true);
       fixture.detectChanges();
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(50);
@@ -370,20 +370,20 @@ describe('KnobComponent', (): void => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
       fixture.componentInstance.step.set(5);
       fixture.detectChanges();
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe(100);
     });
   });
 
-  // ---- onChange output -----------------------------------------------------
+  // ---- change output -----------------------------------------------------
 
-  describe('onChange output', (): void => {
-    it('should emit onChange when value changes via keyboard', async (): Promise<void> => {
+  describe('change output', (): void => {
+    it('should emit change when value changes via keyboard', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(50);
       fixture.componentInstance.changeEvents.length = 0;
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();
       expect(fixture.componentInstance.changeEvents).toHaveLength(1);
@@ -396,7 +396,7 @@ describe('KnobComponent', (): void => {
   describe('CVA — ngModel', (): void => {
     it('should reflect written value from ngModel', async (): Promise<void> => {
       const fixture: ComponentFixture<KnobNgModelHostComponent> = await createNgModelFixture(60);
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-valuenow')).toBe('60');
     });
 
@@ -414,8 +414,8 @@ describe('KnobComponent', (): void => {
       fixture.componentInstance.form.get('value')?.disable();
       fixture.detectChanges();
 
-      const host: HTMLElement = queryEl(fixture, 'uilib-knob');
-      expect(host.classList).toContain('uilib-knob-disabled');
+      const host: HTMLElement = queryEl(fixture, 'ui-lib-knob');
+      expect(host.classList).toContain('ui-lib-knob-disabled');
     });
   });
 
@@ -434,7 +434,7 @@ describe('KnobComponent', (): void => {
       await fixture.whenStable();
       fixture.detectChanges();
 
-      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'uilib-knob');
+      const host: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-knob');
       expect(host.getAttribute('aria-valuenow')).toBe('25');
     });
   });
@@ -447,7 +447,7 @@ describe('KnobComponent', (): void => {
       fixture.componentInstance.step.set(5);
       fixture.detectChanges();
 
-      const svg: SVGElement = queryEl<SVGElement>(fixture, '.uilib-knob-svg');
+      const svg: SVGElement = queryEl<SVGElement>(fixture, '.ui-lib-knob-svg');
       // ArrowUp should step by 5
       svg.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       fixture.detectChanges();

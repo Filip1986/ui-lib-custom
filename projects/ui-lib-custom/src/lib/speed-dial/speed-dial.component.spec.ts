@@ -44,11 +44,11 @@ import type {
       [buttonAriaLabel]="buttonAriaLabel()"
       [ariaLabel]="ariaLabel()"
       [(visible)]="visible"
-      (onShow)="onShowEvent($event)"
-      (onHide)="onHideEvent($event)"
-      (onVisibleChange)="onVisibleChangeEvent($event)"
-      (onClick)="onClickEvent($event)"
-      (onItemCommand)="onItemCommandEvent($event)"
+      (show)="onShowEvent($event)"
+      (hide)="onHideEvent($event)"
+      (panelChange)="onVisibleChangeEvent($event)"
+      (buttonClick)="onClickEvent($event)"
+      (itemCommand)="onItemCommandEvent($event)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -339,7 +339,7 @@ describe('SpeedDialComponent', (): void => {
     expect(fixture.componentInstance.itemCommandEvents).toHaveLength(0);
   });
 
-  it('invokes item command, emits onItemCommand, and closes after click', async (): Promise<void> => {
+  it('invokes item command, emits itemCommand, and closes after click', async (): Promise<void> => {
     const commandSpy: jest.Mock = jest.fn();
     const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
     fixture.componentInstance.model.set(createTestItems(commandSpy));
@@ -725,7 +725,7 @@ describe('SpeedDialComponent', (): void => {
     const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
     const firstAction: HTMLButtonElement = getActionButton(fixture, 0);
     firstAction.focus();
-    instance.hide(new Event('hide-from-test'));
+    instance.closePanel(new Event('hide-from-test'));
     await detectAndFlush(fixture);
     await Promise.resolve();
 
@@ -739,20 +739,20 @@ describe('SpeedDialComponent', (): void => {
     fixture.componentInstance.disabled.set(true);
     await detectAndFlush(fixture);
     instance.toggle(new MouseEvent('click'));
-    instance.show(new Event('show-while-disabled'));
+    instance.openPanel(new Event('show-while-disabled'));
     await detectAndFlush(fixture);
     expect(fixture.componentInstance.visible).toBe(false);
 
     fixture.componentInstance.disabled.set(false);
     fixture.componentInstance.visible = true;
     await detectAndFlush(fixture);
-    instance.show(new Event('show-while-visible'));
+    instance.openPanel(new Event('show-while-visible'));
     await detectAndFlush(fixture);
     expect(fixture.componentInstance.visible).toBe(true);
 
     fixture.componentInstance.visible = false;
     await detectAndFlush(fixture);
-    instance.hide(new Event('hide-while-hidden'));
+    instance.closePanel(new Event('hide-while-hidden'));
     await detectAndFlush(fixture);
     expect(fixture.componentInstance.visible).toBe(false);
 

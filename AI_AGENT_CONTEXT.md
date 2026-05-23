@@ -82,6 +82,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-23 [Output naming consistency — native DOM event conflicts resolved]
+Changed:
+  - speed-dial/speed-dial.component.ts: renamed `visibleChange` output → `panelChange` (was shadowing `model<boolean>()` for `visible`'s internal `visibleChange` event, causing two-way binding to receive SpeedDialVisibleChangeEvent instead of boolean); renamed `click` → `buttonClick`, `focus` → `buttonFocus`, `blur` → `buttonBlur` (avoid native DOM event name clashes)
+  - speed-dial/speed-dial.component.spec.ts: updated template binding `(onVisibleChange)` → `(panelChange)`, `(click)` → `(buttonClick)`
+  - split-button/split-button.component.ts: renamed `click` output → `buttonClick` (was causing native DOM click to bubble and trigger host binding twice — Expected 1, Received 2)
+  - split-button/split-button.component.spec.ts: updated template binding `(click)` → `(buttonClick)`; updated test description
+  - textarea/textarea.ts: renamed `input` → `valueChange`, `focus` → `textareaFocus`, `blur` → `textareaBlur` (native events from inner <textarea> bubbled and double-fired when outputs shared same name)
+  - textarea/textarea.spec.ts: updated 3 template bindings and 3 test descriptions
+  - Demo pages updated: split-button (onClick→buttonClick in 4 locations + snippets.generated.ts + basic.example.html), speed-dial (onItemCommand→itemCommand in 7 locations — was already done in component, just demo lagged)
+  - READMEs updated: textarea, split-button, speed-dial, cascade-select, color-picker, date-picker, input-number, knob, slider — all now document the actual current output names (no more on* prefix)
+State: All 6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
+Rule documented: Never name Angular signal outputs after native DOM event names (click, change, input, focus, blur, select, keydown, submit, etc.) — Angular may create both an output subscription AND a native DOM listener, causing double-firing when native events bubble from child elements. For model() signals, avoid naming explicit outputs `{signalName}Change` as that conflicts with the model's internal two-way binding event.
+Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
+Terminal notes: `npm test` / `npx.cmd jest` fail with "jest not recognized" — use `node_modules/.bin/jest.cmd` directly; eslint via `npx.cmd eslint`
+Next step: button.scss framed-appearance raw hex values (#ffc82c, #000000, #ffffff, #ff5f6d, #ffc371, #000) → CSS vars; then broader axe-core audit. Also consider: input-number `input`/`focus`/`blur` outputs may still cause double-events if any parent template binds them — monitor if tests are added.
+
 Date: 2026-05-22 [Library-wide audit fixes — 10 files corrected]
 Changed:
   - cascade-select/cascade-select.ts: renamed 5 outputs (onChange→change, onGroupChange→groupChange, onShow→show, onHide→hide, onClear→clear, onFocus→focus, onBlur→blur); replaced @HostListener('focus'/'blur') with imperative addEventListener in constructor to avoid Angular output/HostListener naming conflict circular-dispatch bug; removed all 7 eslint-disable-next-line @angular-eslint/no-output-on-prefix comments
@@ -110,27 +126,6 @@ Changed:
   - meter-group: added DocAriaTableComponent + ariaRows (9); replaced raw <table class="doc-properties">
 State: Build zero errors. Zero raw ARIA doc-properties tables remain in component demo pages. Remaining doc-properties in themes/shadows/project-starter are utility pages (different context).
 Verification: ng build demo → PASS (zero errors; only pre-existing budget warnings)
-Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
-
-Date: 2026-05-21 [API table migration — 15 remaining demo pages migrated to DocApiReferenceComponent]
-Changed:
-  - auto-focus-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (2); replaced af-table
-  - badges.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5); replaced tab panel table
-  - cards.component.ts/.html: added DocApiReferenceComponent + apiInputRows (4); replaced tab panel table
-  - checkboxes.component.ts/.html: added DocApiReferenceComponent + apiInputRows (12); replaced tab panel table
-  - confirm-popup-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (11) + apiOutputRows (2) + apiServiceRows (3); replaced 3 raw tables; fixed h3 class demo-table__heading → demo-section__subtitle
-  - icons-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (4) [showDefault=false]; replaced tab panel table
-  - image-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (13) + apiOutputRows (2) + apiSlotRows (2); replaced 3 api-table elements
-  - image-compare-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (10) + apiOutputRows (2); replaced 2 api-table elements; kept keyboard navigation table
-  - meter-group-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (10) + apiMeterItemRows (4) kind=property; replaced 2 doc-properties tables
-  - organization-chart-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5) + apiOutputRows (4) + apiSlotRows (1); replaced 3 doc-table elements; changed h4 to h3.demo-section__subtitle
-  - select-buttons.component.ts/.html: added DocApiReferenceComponent + apiInputRows (7) + apiOutputRows (1); replaced api-table
-  - split-button-demo.component.ts/.html: added DocApiReferenceComponent + apiInputRows (5); replaced doc-table
-  - inputs.component.html: replaced 5-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
-  - select.component.html: replaced 5-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
-  - tabs.component.html: replaced 14-row tab panel doc-properties table with <app-doc-api-reference [rows]="apiRows" />
-State: Build zero errors. Zero raw API doc tables remain across all 21 targeted pages.
-Verification: ng build demo → PASS (zero errors; only pre-existing bundle budget + roadmap SCSS warnings)
 Next step: Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

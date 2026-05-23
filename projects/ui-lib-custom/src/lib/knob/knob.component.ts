@@ -33,7 +33,7 @@ let knobIdCounter: number = 0;
  * three design variants, three sizes, and full CSS-variable theming.
  */
 @Component({
-  selector: 'uilib-knob',
+  selector: 'ui-lib-knob',
   standalone: true,
   templateUrl: './knob.component.html',
   styleUrl: './knob.component.scss',
@@ -47,7 +47,7 @@ let knobIdCounter: number = 0;
     },
   ],
   host: {
-    class: 'uilib-knob',
+    class: 'ui-lib-knob',
     role: 'slider',
     '[attr.id]': 'inputId()',
     '[attr.tabindex]': 'effectiveTabindex()',
@@ -62,12 +62,12 @@ let knobIdCounter: number = 0;
     '(blur)': 'onBlurEvent($event)',
     '(keydown)': 'onKeyDown($event)',
     '(pointerdown)': 'onPointerDown($event)',
-    '[class.uilib-knob-sm]': 'size() === "sm"',
-    '[class.uilib-knob-md]': 'size() === "md"',
-    '[class.uilib-knob-lg]': 'size() === "lg"',
-    '[class.uilib-knob-disabled]': 'isControlDisabled()',
-    '[class.uilib-knob-readonly]': 'readonly()',
-    '[class.uilib-knob-focused]': 'isFocused()',
+    '[class.ui-lib-knob-sm]': 'size() === "sm"',
+    '[class.ui-lib-knob-md]': 'size() === "md"',
+    '[class.ui-lib-knob-lg]': 'size() === "lg"',
+    '[class.ui-lib-knob-disabled]': 'isControlDisabled()',
+    '[class.ui-lib-knob-readonly]': 'readonly()',
+    '[class.ui-lib-knob-focused]': 'isFocused()',
     '[class.uilib-variant-material]': 'effectiveVariant() === "material"',
     '[class.uilib-variant-bootstrap]': 'effectiveVariant() === "bootstrap"',
     '[class.uilib-variant-minimal]': 'effectiveVariant() === "minimal"',
@@ -132,23 +132,20 @@ export class KnobComponent implements ControlValueAccessor {
   public readonly tabindex: InputSignal<number> = input<number>(KNOB_DEFAULTS.tabindex);
 
   /** Unique HTML id forwarded to the SVG element. */
-  public readonly inputId: InputSignal<string> = input<string>(`uilib-knob-${++knobIdCounter}`);
+  public readonly inputId: InputSignal<string> = input<string>(`ui-lib-knob-${++knobIdCounter}`);
 
   // ---------------------------------------------------------------------------
   // Outputs
   // ---------------------------------------------------------------------------
 
   /** Emits whenever the value changes due to user interaction. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onChange: OutputEmitterRef<KnobChangeEvent> = output<KnobChangeEvent>();
+  public readonly change: OutputEmitterRef<KnobChangeEvent> = output<KnobChangeEvent>();
 
   /** Emits when the knob receives focus. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   /** Emits when the knob loses focus. */
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   // ---------------------------------------------------------------------------
   // Internal state
@@ -294,14 +291,14 @@ export class KnobComponent implements ControlValueAccessor {
   /** Handles focus on the SVG element. */
   public onFocusEvent(event: FocusEvent): void {
     this.isFocused.set(true);
-    this.onFocus.emit(event);
+    this.focus.emit(event);
   }
 
   /** Handles blur on the SVG element. */
   public onBlurEvent(event: FocusEvent): void {
     this.isFocused.set(false);
     this.onModelTouched();
-    this.onBlur.emit(event);
+    this.blur.emit(event);
   }
 
   /** Handles keydown on the SVG element for keyboard-driven value changes. */
@@ -423,7 +420,7 @@ export class KnobComponent implements ControlValueAccessor {
 
     this.value.set(clamped);
     this.onModelChange(clamped);
-    this.onChange.emit({ value: clamped });
+    this.change.emit({ value: clamped });
   }
 
   private clamp(value: number): number {

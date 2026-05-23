@@ -13,11 +13,11 @@ import { UiLibInput } from 'ui-lib-custom/input';
 })
 export class MyComponent {}`;
 
-export const basicHtml = `<uilib-input-group>
-  <uilib-input-group-addon>$</uilib-input-group-addon>
+export const basicHtml = `<ui-lib-input-group>
+  <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
   <ui-lib-input placeholder="Amount" />
-  <uilib-input-group-addon>.00</uilib-input-group-addon>
-</uilib-input-group>`;
+  <ui-lib-input-group-addon>.00</ui-lib-input-group-addon>
+</ui-lib-input-group>`;
 
 export const buttonTsTs = `import { Component } from '@angular/core';
 import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
@@ -31,12 +31,12 @@ import { Button } from 'ui-lib-custom/button';
 })
 export class MyComponent {}`;
 
-export const buttonHtml = `<uilib-input-group>
+export const buttonHtml = `<ui-lib-input-group>
   <ui-lib-input placeholder="Search products" />
-  <uilib-input-group-addon>
+  <ui-lib-input-group-addon>
     <ui-lib-button appearance="solid" size="sm">Search</ui-lib-button>
-  </uilib-input-group-addon>
-</uilib-input-group>`;
+  </ui-lib-input-group-addon>
+</ui-lib-input-group>`;
 
 export const checkboxRadioTsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -54,20 +54,20 @@ export class MyComponent {
   priorityOnly: boolean = true;
 }`;
 
-export const checkboxRadioHtml = `<uilib-input-group>
-  <uilib-input-group-addon>
+export const checkboxRadioHtml = `<ui-lib-input-group>
+  <ui-lib-input-group-addon>
     <ui-lib-checkbox [binary]="true" [(ngModel)]="acceptTerms" />
-  </uilib-input-group-addon>
+  </ui-lib-input-group-addon>
   <ui-lib-input placeholder="Accepted by" />
-</uilib-input-group>
+</ui-lib-input-group>
 
-<uilib-input-group>
-  <uilib-input-group-addon>
+<ui-lib-input-group>
+  <ui-lib-input-group-addon>
     <ui-lib-checkbox [binary]="true" [(ngModel)]="priorityOnly" />
-  </uilib-input-group-addon>
+  </ui-lib-input-group-addon>
   <ui-lib-input placeholder="Priority tag" />
-  <uilib-input-group-addon>Only</uilib-input-group-addon>
-</uilib-input-group>`;
+  <ui-lib-input-group-addon>Only</ui-lib-input-group-addon>
+</ui-lib-input-group>`;
 
 export const floatLabelTsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -84,29 +84,29 @@ export class MyComponent {
   floatValues = { over: '', in: '', on: '' };
 }`;
 
-export const floatLabelHtml = `<uilib-input-group>
-  <uilib-input-group-addon>@</uilib-input-group-addon>
-  <uilib-float-label variant="over">
+export const floatLabelHtml = `<ui-lib-input-group>
+  <ui-lib-input-group-addon>@</ui-lib-input-group-addon>
+  <ui-lib-float-label variant="over">
     <ui-lib-input placeholder=" " [(ngModel)]="floatValues.over" />
     <label>Over label</label>
-  </uilib-float-label>
-</uilib-input-group>
+  </ui-lib-float-label>
+</ui-lib-input-group>
 
-<uilib-input-group>
-  <uilib-input-group-addon>@</uilib-input-group-addon>
-  <uilib-float-label variant="in">
+<ui-lib-input-group>
+  <ui-lib-input-group-addon>@</ui-lib-input-group-addon>
+  <ui-lib-float-label variant="in">
     <ui-lib-input placeholder=" " [(ngModel)]="floatValues.in" />
     <label>In label</label>
-  </uilib-float-label>
-</uilib-input-group>
+  </ui-lib-float-label>
+</ui-lib-input-group>
 
-<uilib-input-group>
-  <uilib-input-group-addon>@</uilib-input-group-addon>
-  <uilib-float-label variant="on">
+<ui-lib-input-group>
+  <ui-lib-input-group-addon>@</ui-lib-input-group-addon>
+  <ui-lib-float-label variant="on">
     <ui-lib-input placeholder=" " [(ngModel)]="floatValues.on" />
     <label>On label</label>
-  </uilib-float-label>
-</uilib-input-group>`;
+  </ui-lib-float-label>
+</ui-lib-input-group>`;
 
 export const multipleTsTs = `import { Component } from '@angular/core';
 import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
@@ -119,12 +119,12 @@ import { UiLibInput } from 'ui-lib-custom/input';
 })
 export class MyComponent {}`;
 
-export const multipleHtml = `<uilib-input-group>
-  <uilib-input-group-addon>$</uilib-input-group-addon>
+export const multipleHtml = `<ui-lib-input-group>
+  <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
   <ui-lib-input placeholder="Invoice amount" />
-  <uilib-input-group-addon>.00</uilib-input-group-addon>
-  <uilib-input-group-addon>USD</uilib-input-group-addon>
-</uilib-input-group>`;
+  <ui-lib-input-group-addon>.00</ui-lib-input-group-addon>
+  <ui-lib-input-group-addon>USD</ui-lib-input-group-addon>
+</ui-lib-input-group>`;
 
 export const sizesTsTs = `import { Component } from '@angular/core';
 import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group';
@@ -137,17 +137,17 @@ import { UiLibInput } from 'ui-lib-custom/input';
 })
 export class MyComponent {}`;
 
-export const sizesHtml = `<uilib-input-group>
-  <uilib-input-group-addon>$</uilib-input-group-addon>
+export const sizesHtml = `<ui-lib-input-group>
+  <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
   <ui-lib-input size="sm" placeholder="Small" />
-</uilib-input-group>
+</ui-lib-input-group>
 
-<uilib-input-group>
-  <uilib-input-group-addon>$</uilib-input-group-addon>
+<ui-lib-input-group>
+  <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
   <ui-lib-input size="md" placeholder="Medium" />
-</uilib-input-group>
+</ui-lib-input-group>
 
-<uilib-input-group>
-  <uilib-input-group-addon>$</uilib-input-group-addon>
+<ui-lib-input-group>
+  <ui-lib-input-group-addon>$</ui-lib-input-group-addon>
   <ui-lib-input size="lg" placeholder="Large" />
-</uilib-input-group>`;
+</ui-lib-input-group>`;

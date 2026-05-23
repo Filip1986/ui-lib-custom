@@ -38,10 +38,10 @@ class StubUiLibIconComponent {
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field [iconPosition]="position">
-      <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-icon-field [iconPosition]="position">
+      <ui-lib-input-icon styleClass="pi pi-search" />
       <input type="text" placeholder="Search" />
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,10 +53,10 @@ class BasicIconFieldHostComponent {
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field [iconPosition]="position()">
-      <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-icon-field [iconPosition]="position()">
+      <ui-lib-input-icon styleClass="pi pi-search" />
       <input type="text" />
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -68,11 +68,11 @@ class SignalIconFieldHostComponent {
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent, StubUiLibInputComponent],
   template: `
-    <uilib-icon-field>
+    <ui-lib-icon-field>
       <input type="text" data-testid="native-input" />
       <ui-lib-input data-testid="custom-input" />
-      <uilib-input-icon styleClass="pi pi-search" />
-    </uilib-icon-field>
+      <ui-lib-input-icon styleClass="pi pi-search" />
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -82,9 +82,9 @@ class ProjectionHostComponent {}
   standalone: true,
   imports: [InputIconComponent],
   template: `
-    <uilib-input-icon [styleClass]="styleClass">
+    <ui-lib-input-icon [styleClass]="styleClass">
       <svg data-testid="projected-svg"></svg>
-    </uilib-input-icon>
+    </ui-lib-input-icon>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -95,7 +95,7 @@ class InputIconStyleHostComponent {
 @Component({
   standalone: true,
   imports: [InputIconComponent],
-  template: ` <uilib-input-icon /> `,
+  template: ` <ui-lib-input-icon /> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class InputIconBaseHostComponent {}
@@ -104,9 +104,9 @@ class InputIconBaseHostComponent {}
   standalone: true,
   imports: [InputIconComponent],
   template: `
-    <uilib-input-icon>
+    <ui-lib-input-icon>
       <svg data-testid="custom-svg"></svg>
-    </uilib-input-icon>
+    </ui-lib-input-icon>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -116,9 +116,9 @@ class InputIconSvgHostComponent {}
   standalone: true,
   imports: [InputIconComponent, StubUiLibIconComponent],
   template: `
-    <uilib-input-icon>
+    <ui-lib-input-icon>
       <ui-lib-icon name="search" />
-    </uilib-input-icon>
+    </ui-lib-input-icon>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -128,7 +128,7 @@ class InputIconUiLibIconHostComponent {}
   standalone: true,
   imports: [InputIconComponent],
   template: `
-    <uilib-input-icon
+    <ui-lib-input-icon
       [decorative]="false"
       ariaLabel="Warning icon"
       styleClass="pi pi-exclamation-triangle"
@@ -142,13 +142,13 @@ class InputIconInformativeHostComponent {}
   standalone: true,
   imports: [FloatLabelComponent, IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-float-label>
-      <uilib-icon-field>
-        <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-float-label>
+      <ui-lib-icon-field>
+        <ui-lib-input-icon styleClass="pi pi-search" />
         <input type="text" placeholder=" " />
-      </uilib-icon-field>
+      </ui-lib-icon-field>
       <label>Search</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -158,10 +158,10 @@ class FloatLabelIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-search" />
       <input type="text" placeholder="Search" />
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -171,10 +171,10 @@ class LeftIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field iconPosition="right">
-      <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-icon-field iconPosition="right">
+      <ui-lib-input-icon styleClass="pi pi-search" />
       <input type="text" placeholder="Search" />
-    </uilib-icon-field>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -184,24 +184,24 @@ class RightIconFieldHostComponent {}
   standalone: true,
   imports: [IconFieldComponent, InputIconComponent],
   template: `
-    <uilib-icon-field iconPosition="left">
-      <uilib-input-icon styleClass="pi pi-search" />
+    <ui-lib-icon-field iconPosition="left">
+      <ui-lib-input-icon styleClass="pi pi-search" />
       <input type="text" />
-      <uilib-input-icon>
+      <ui-lib-input-icon>
         <svg data-testid="secondary-icon"></svg>
-      </uilib-input-icon>
-    </uilib-icon-field>
+      </ui-lib-input-icon>
+    </ui-lib-icon-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class MultipleIconsHostComponent {}
 
 function getIconFieldElement<T>(fixture: ComponentFixture<T>): HTMLElement {
-  return fixture.debugElement.query(By.css('uilib-icon-field')).nativeElement as HTMLElement;
+  return fixture.debugElement.query(By.css('ui-lib-icon-field')).nativeElement as HTMLElement;
 }
 
 function getInputIconElement<T>(fixture: ComponentFixture<T>): HTMLElement {
-  return fixture.debugElement.query(By.css('uilib-input-icon')).nativeElement as HTMLElement;
+  return fixture.debugElement.query(By.css('ui-lib-input-icon')).nativeElement as HTMLElement;
 }
 
 describe('IconFieldComponent', (): void => {
@@ -286,7 +286,7 @@ describe('IconFieldComponent', (): void => {
     expect(iconFieldElement.classList.contains('ui-lib-icon-field--left')).toBeFalsy();
   });
 
-  it('projects input elements, ui-lib-input, and uilib-input-icon in original order', async (): Promise<void> => {
+  it('projects input elements, ui-lib-input, and ui-lib-input-icon in original order', async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ProjectionHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -301,10 +301,12 @@ describe('IconFieldComponent', (): void => {
       (element: Element): string => element.tagName.toLowerCase()
     );
 
-    expect(fixture.debugElement.query(By.css('uilib-icon-field > input'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-icon-field > ui-lib-input'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-icon-field > uilib-input-icon'))).toBeTruthy();
-    expect(childTagNames).toEqual(['input', 'ui-lib-input', 'uilib-input-icon']);
+    expect(fixture.debugElement.query(By.css('ui-lib-icon-field > input'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-icon-field > ui-lib-input'))).toBeTruthy();
+    expect(
+      fixture.debugElement.query(By.css('ui-lib-icon-field > ui-lib-input-icon'))
+    ).toBeTruthy();
+    expect(childTagNames).toEqual(['input', 'ui-lib-input', 'ui-lib-input-icon']);
   });
 
   it('renders inside FloatLabel without class conflicts', async (): Promise<void> => {
@@ -318,15 +320,15 @@ describe('IconFieldComponent', (): void => {
     );
     fixture.detectChanges();
 
-    const floatLabelElement: HTMLElement = fixture.debugElement.query(By.css('uilib-float-label'))
+    const floatLabelElement: HTMLElement = fixture.debugElement.query(By.css('ui-lib-float-label'))
       .nativeElement as HTMLElement;
     const iconFieldElement: HTMLElement = getIconFieldElement(fixture);
 
-    expect(floatLabelElement.classList.contains('uilib-float-label')).toBeTruthy();
+    expect(floatLabelElement.classList.contains('ui-lib-float-label')).toBeTruthy();
     expect(iconFieldElement.classList.contains('ui-lib-icon-field')).toBeTruthy();
     expect(iconFieldElement.classList.contains('ui-lib-icon-field--right')).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-float-label > label'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-float-label uilib-input-icon'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-float-label > label'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-float-label ui-lib-input-icon'))).toBeTruthy();
   });
 
   it('renders multiple input icons in the same icon field', async (): Promise<void> => {
@@ -341,7 +343,7 @@ describe('IconFieldComponent', (): void => {
     fixture.detectChanges();
 
     const inputIcons: HTMLElement[] = fixture.debugElement
-      .queryAll(By.css('uilib-icon-field > uilib-input-icon'))
+      .queryAll(By.css('ui-lib-icon-field > ui-lib-input-icon'))
       .map((debugElement: DebugElement): HTMLElement => debugElement.nativeElement as HTMLElement);
 
     const inputIconClassMatches: boolean[] = inputIcons.map(
@@ -418,7 +420,7 @@ describe('InputIconComponent', (): void => {
     fixture.detectChanges();
 
     expect(
-      fixture.debugElement.query(By.css('uilib-input-icon svg[data-testid="custom-svg"]'))
+      fixture.debugElement.query(By.css('ui-lib-input-icon svg[data-testid="custom-svg"]'))
     ).toBeTruthy();
   });
 
@@ -433,8 +435,8 @@ describe('InputIconComponent', (): void => {
     );
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('uilib-input-icon ui-lib-icon'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-input-icon .stub-ui-lib-icon'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-input-icon ui-lib-icon'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-input-icon .stub-ui-lib-icon'))).toBeTruthy();
   });
 
   it('defaults decorative icons to aria-hidden and tabindex -1', async (): Promise<void> => {

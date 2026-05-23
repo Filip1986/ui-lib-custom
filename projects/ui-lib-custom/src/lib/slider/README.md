@@ -31,8 +31,8 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onChange` | `SliderChangeEvent` | Emitted on every user-driven value change during drag or keyboard interaction. |
-| `onSlideEnd` | `SliderSlideEndEvent` | Emitted when the user releases a drag interaction. |
+| `change` | `SliderChangeEvent` | Emitted on every user-driven value change during drag or keyboard interaction. |
+| `slideEnd` | `SliderSlideEndEvent` | Emitted when the user releases a drag interaction. |
 
 ## Keyboard Navigation
 

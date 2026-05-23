@@ -12,10 +12,10 @@ declare const require: (moduleName: string) => unknown;
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <input id="fl-over-input" type="text" placeholder=" " />
       <label for="fl-over-input">Username</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,10 +25,10 @@ class OverVariantHost {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label variant="in">
+    <ui-lib-float-label variant="in">
       <input id="fl-in-input" type="text" placeholder=" " />
       <label for="fl-in-input">Email</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,10 +38,10 @@ class InVariantHost {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label variant="on">
+    <ui-lib-float-label variant="on">
       <input id="fl-on-input" type="text" placeholder=" " />
       <label for="fl-on-input">City</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -51,10 +51,10 @@ class OnVariantHost {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <input id="fl-filled-input" type="text" placeholder=" " value="Ada" />
       <label for="fl-filled-input">First Name</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -64,10 +64,10 @@ class FilledStateHost {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <textarea id="fl-textarea" placeholder=" "> </textarea>
       <label for="fl-textarea">Bio</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -77,10 +77,10 @@ class TextareaVariantHost {}
   standalone: true,
   imports: [FloatLabelComponent],
   template: `
-    <uilib-float-label>
+    <ui-lib-float-label>
       <input type="text" />
       <label>Generated label</label>
-    </uilib-float-label>
+    </ui-lib-float-label>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -104,7 +104,7 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
 }
 
 function getFloatLabel(fixture: ComponentFixture<unknown>): HTMLElement {
-  return (fixture.nativeElement as HTMLElement).querySelector('uilib-float-label') as HTMLElement;
+  return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-float-label') as HTMLElement;
 }
 
 function getLabelElement(fixture: ComponentFixture<unknown>): HTMLLabelElement {
@@ -332,7 +332,7 @@ describe('FloatLabel Accessibility', (): void => {
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
       // The reduced motion block must scope to the float-label's label, not globally
-      expect(stylesheetSource).toContain('.uilib-float-label label');
+      expect(stylesheetSource).toContain('.ui-lib-float-label label');
     });
   });
 
@@ -385,19 +385,19 @@ describe('FloatLabel Accessibility', (): void => {
     it('variant=over applies correct host modifier class', async (): Promise<void> => {
       const fixture: ComponentFixture<OverVariantHost> = await setup(OverVariantHost);
       const floatLabel: HTMLElement = getFloatLabel(fixture);
-      expect(floatLabel.classList.contains('uilib-float-label--over')).toBeTruthy();
+      expect(floatLabel.classList.contains('ui-lib-float-label--over')).toBeTruthy();
     });
 
     it('variant=in applies correct host modifier class', async (): Promise<void> => {
       const fixture: ComponentFixture<InVariantHost> = await setup(InVariantHost);
       const floatLabel: HTMLElement = getFloatLabel(fixture);
-      expect(floatLabel.classList.contains('uilib-float-label--in')).toBeTruthy();
+      expect(floatLabel.classList.contains('ui-lib-float-label--in')).toBeTruthy();
     });
 
     it('variant=on applies correct host modifier class', async (): Promise<void> => {
       const fixture: ComponentFixture<OnVariantHost> = await setup(OnVariantHost);
       const floatLabel: HTMLElement = getFloatLabel(fixture);
-      expect(floatLabel.classList.contains('uilib-float-label--on')).toBeTruthy();
+      expect(floatLabel.classList.contains('ui-lib-float-label--on')).toBeTruthy();
     });
 
     it('stylesheet uses :focus-within and :placeholder-shown-compatible selectors for float state', (): void => {

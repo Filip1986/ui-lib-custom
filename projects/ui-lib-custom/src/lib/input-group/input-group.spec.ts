@@ -11,9 +11,9 @@ import { InputGroupComponent } from './input-group';
   standalone: true,
   imports: [InputGroupComponent],
   template: `
-    <uilib-input-group>
+    <ui-lib-input-group>
       <input type="text" placeholder="Email" data-testid="projected-input" />
-    </uilib-input-group>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,10 +23,10 @@ class InputGroupNativeInputHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon data-testid="left-addon">$</uilib-input-group-addon>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon data-testid="left-addon">$</ui-lib-input-group-addon>
       <input type="text" placeholder="Amount" data-testid="amount-input" />
-    </uilib-input-group>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,11 +36,11 @@ class InputGroupWithAddonHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon data-testid="left-addon">$</uilib-input-group-addon>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon data-testid="left-addon">$</ui-lib-input-group-addon>
       <input type="text" placeholder="Amount" data-testid="amount-input" />
-      <uilib-input-group-addon data-testid="right-addon">.00</uilib-input-group-addon>
-    </uilib-input-group>
+      <ui-lib-input-group-addon data-testid="right-addon">.00</ui-lib-input-group-addon>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -50,12 +50,12 @@ class InputGroupWithTwoAddonsHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent, Button],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon data-testid="button-addon">
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon data-testid="button-addon">
         <ui-lib-button>Apply</ui-lib-button>
-      </uilib-input-group-addon>
+      </ui-lib-input-group-addon>
       <input type="text" placeholder="Coupon" data-testid="coupon-input" />
-    </uilib-input-group>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -64,7 +64,7 @@ class InputGroupWithButtonAddonHostComponent {}
 @Component({
   standalone: true,
   imports: [InputGroupAddonComponent],
-  template: ` <uilib-input-group-addon data-testid="addon-text">USD</uilib-input-group-addon> `,
+  template: ` <ui-lib-input-group-addon data-testid="addon-text">USD</ui-lib-input-group-addon> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class InputGroupAddonTextHostComponent {}
@@ -73,9 +73,9 @@ class InputGroupAddonTextHostComponent {}
   standalone: true,
   imports: [InputGroupAddonComponent],
   template: `
-    <uilib-input-group-addon>
+    <ui-lib-input-group-addon>
       <span class="addon-icon" data-testid="addon-icon">icon</span>
-    </uilib-input-group-addon>
+    </ui-lib-input-group-addon>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -85,24 +85,25 @@ class InputGroupAddonIconHostComponent {}
   standalone: true,
   imports: [InputGroupComponent, InputGroupAddonComponent, FloatLabelComponent],
   template: `
-    <uilib-input-group>
-      <uilib-input-group-addon data-testid="left-addon">@</uilib-input-group-addon>
-      <uilib-float-label>
+    <ui-lib-input-group>
+      <ui-lib-input-group-addon data-testid="left-addon">@</ui-lib-input-group-addon>
+      <ui-lib-float-label>
         <input type="text" placeholder=" " data-testid="float-input" />
         <label>Email</label>
-      </uilib-float-label>
-    </uilib-input-group>
+      </ui-lib-float-label>
+    </ui-lib-input-group>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class InputGroupFloatLabelHostComponent {}
 
 function getInputGroupElement<T>(fixture: ComponentFixture<T>): HTMLElement {
-  return fixture.debugElement.query(By.css('uilib-input-group')).nativeElement as HTMLElement;
+  return fixture.debugElement.query(By.css('ui-lib-input-group')).nativeElement as HTMLElement;
 }
 
 function getInputGroupAddonElement<T>(fixture: ComponentFixture<T>): HTMLElement {
-  return fixture.debugElement.query(By.css('uilib-input-group-addon')).nativeElement as HTMLElement;
+  return fixture.debugElement.query(By.css('ui-lib-input-group-addon'))
+    .nativeElement as HTMLElement;
 }
 
 describe('InputGroupComponent', (): void => {
@@ -247,7 +248,11 @@ describe('InputGroup integration', (): void => {
       (childElement: Element): string => childElement.tagName.toLowerCase()
     );
 
-    expect(childTagNames).toEqual(['uilib-input-group-addon', 'input', 'uilib-input-group-addon']);
+    expect(childTagNames).toEqual([
+      'ui-lib-input-group-addon',
+      'input',
+      'ui-lib-input-group-addon',
+    ]);
   });
 
   it('renders FloatLabel wrapping input inside InputGroup', async (): Promise<void> => {
@@ -262,10 +267,10 @@ describe('InputGroup integration', (): void => {
     fixture.detectChanges();
 
     expect(
-      fixture.debugElement.query(By.css('uilib-input-group > uilib-float-label'))
+      fixture.debugElement.query(By.css('ui-lib-input-group > ui-lib-float-label'))
     ).toBeTruthy();
     expect(fixture.debugElement.query(By.css('[data-testid="float-input"]'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('uilib-float-label > label'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('ui-lib-float-label > label'))).toBeTruthy();
   });
 
   it('renders button component inside addon', async (): Promise<void> => {
@@ -279,10 +284,10 @@ describe('InputGroup integration', (): void => {
     fixture.detectChanges();
 
     expect(
-      fixture.debugElement.query(By.css('uilib-input-group-addon ui-lib-button'))
+      fixture.debugElement.query(By.css('ui-lib-input-group-addon ui-lib-button'))
     ).toBeTruthy();
     expect(
-      fixture.debugElement.query(By.css('uilib-input-group-addon ui-lib-button button'))
+      fixture.debugElement.query(By.css('ui-lib-input-group-addon ui-lib-button button'))
     ).toBeTruthy();
   });
 });

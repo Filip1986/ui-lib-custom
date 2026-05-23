@@ -18,7 +18,7 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
   template: `
     <span id="password-label-source">Password label from aria-labelledby</span>
     <label [attr.for]="passwordRef.passwordId">Password</label>
-    <uilib-password
+    <ui-lib-password
       #passwordRef
       [ariaLabel]="ariaLabel()"
       [ariaLabelledBy]="ariaLabelledBy()"
@@ -29,7 +29,7 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
       [errorMessage]="errorMessage()"
     />
     <label [attr.for]="passwordRef2.passwordId">Confirm password</label>
-    <uilib-password #passwordRef2 ariaLabel="Confirm password" />
+    <ui-lib-password #passwordRef2 ariaLabel="Confirm password" />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -80,11 +80,11 @@ describe('Password Accessibility', (): void => {
   }
 
   function firstPasswordEl(): HTMLElement {
-    return hostEl().querySelector('uilib-password:first-of-type') as HTMLElement;
+    return hostEl().querySelector('ui-lib-password:first-of-type') as HTMLElement;
   }
 
   function secondPasswordEl(): HTMLElement {
-    return hostEl().querySelector('uilib-password:nth-of-type(2)') as HTMLElement;
+    return hostEl().querySelector('ui-lib-password:nth-of-type(2)') as HTMLElement;
   }
 
   function nativeInput(root: HTMLElement = firstPasswordEl()): HTMLInputElement {
@@ -92,7 +92,7 @@ describe('Password Accessibility', (): void => {
   }
 
   function toggleBtn(root: HTMLElement = firstPasswordEl()): HTMLButtonElement {
-    return queryEl<HTMLButtonElement>(root, '.uilib-password-toggle-btn');
+    return queryEl<HTMLButtonElement>(root, '.ui-lib-password-toggle-btn');
   }
 
   function strengthLiveRegion(root: HTMLElement = firstPasswordEl()): HTMLElement {
@@ -177,7 +177,7 @@ describe('Password Accessibility', (): void => {
   it('strength live region is present without the visual panel being open', (): void => {
     // Panel only shows when focused — live region must always exist with feedback enabled.
     expect(strengthLiveRegion()).toBeTruthy();
-    expect(hostEl().querySelector('.uilib-password-panel')).toBeNull();
+    expect(hostEl().querySelector('.ui-lib-password-panel')).toBeNull();
   });
 
   it('strength live region announces "Password strength: None" when field is empty', (): void => {
@@ -207,7 +207,7 @@ describe('Password Accessibility', (): void => {
     // Open the visual panel first
     nativeInput().dispatchEvent(new FocusEvent('focus'));
     fixture.detectChanges();
-    const meter: HTMLElement | null = firstPasswordEl().querySelector('.uilib-password-meter');
+    const meter: HTMLElement | null = firstPasswordEl().querySelector('.ui-lib-password-meter');
     expect(meter).toBeTruthy();
     expect(meter?.getAttribute('aria-hidden')).toBe('true');
   });

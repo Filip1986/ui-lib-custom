@@ -13,25 +13,25 @@
         <p class="section-text">Left search icon and right spinner icon with native inputs.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <uilib-icon-field iconPosition="left">
-              <uilib-input-icon styleClass="pi pi-search" />
+            <ui-lib-icon-field iconPosition="left">
+              <ui-lib-input-icon styleClass="pi pi-search" />
               <input
                 type="text"
                 placeholder="Search"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicSearchValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
 
-            <uilib-icon-field iconPosition="right">
-              <uilib-input-icon styleClass="pi pi-spinner pi-spin" />
+            <ui-lib-icon-field iconPosition="right">
+              <ui-lib-input-icon styleClass="pi pi-spinner pi-spin" />
               <input
                 type="text"
                 placeholder="Loading"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="basicLoadingValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
@@ -40,35 +40,35 @@
       <app-doc-section id="template" title="Template">
         <h3>b. Template</h3>
         <p class="section-text">
-          Custom SVG and custom `ui-lib-icon` projection via `uilib-input-icon`.
+          Custom SVG and custom `ui-lib-icon` projection via `ui-lib-input-icon`.
         </p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <uilib-icon-field iconPosition="left">
-              <uilib-input-icon>
+            <ui-lib-icon-field iconPosition="left">
+              <ui-lib-input-icon>
                 <svg class="demo-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
                   <circle cx="11" cy="11" r="7" />
                   <line x1="16.5" y1="16.5" x2="21" y2="21" />
                 </svg>
-              </uilib-input-icon>
+              </ui-lib-input-icon>
               <input
                 type="text"
                 placeholder="SVG icon"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="templateSvgValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
 
-            <uilib-icon-field iconPosition="right">
-              <uilib-input-icon>
+            <ui-lib-icon-field iconPosition="right">
+              <ui-lib-input-icon>
                 <ui-lib-icon name="search" />
-              </uilib-input-icon>
+              </ui-lib-input-icon>
               <ui-lib-input
                 placeholder="ui-lib-icon child"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="templateUiLibIconValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="templateHtml" [typescript]="templateTs" />
@@ -76,47 +76,47 @@
 
       <app-doc-section id="float-label" title="Float Label">
         <h3>c. Float Label</h3>
-        <p class="section-text">`uilib-icon-field` usage inside all FloatLabel variants.</p>
+        <p class="section-text">`ui-lib-icon-field` usage inside all FloatLabel variants.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <uilib-float-label variant="over">
-              <uilib-icon-field iconPosition="left">
-                <uilib-input-icon styleClass="pi pi-envelope" />
+            <ui-lib-float-label variant="over">
+              <ui-lib-icon-field iconPosition="left">
+                <ui-lib-input-icon styleClass="pi pi-envelope" />
                 <input
                   type="text"
                   placeholder=" "
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="floatOverValue"
                 />
-              </uilib-icon-field>
+              </ui-lib-icon-field>
               <label>Email (over)</label>
-            </uilib-float-label>
+            </ui-lib-float-label>
 
-            <uilib-float-label variant="in">
-              <uilib-icon-field iconPosition="left">
-                <uilib-input-icon styleClass="pi pi-user" />
+            <ui-lib-float-label variant="in">
+              <ui-lib-icon-field iconPosition="left">
+                <ui-lib-input-icon styleClass="pi pi-user" />
                 <input
                   type="text"
                   placeholder=" "
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="floatInValue"
                 />
-              </uilib-icon-field>
+              </ui-lib-icon-field>
               <label>Username (in)</label>
-            </uilib-float-label>
+            </ui-lib-float-label>
 
-            <uilib-float-label variant="on">
-              <uilib-icon-field iconPosition="left">
-                <uilib-input-icon styleClass="pi pi-lock" />
+            <ui-lib-float-label variant="on">
+              <ui-lib-icon-field iconPosition="left">
+                <ui-lib-input-icon styleClass="pi pi-lock" />
                 <input
                   type="password"
                   placeholder=" "
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="floatOnValue"
                 />
-              </uilib-icon-field>
+              </ui-lib-icon-field>
               <label>Password (on)</label>
-            </uilib-float-label>
+            </ui-lib-float-label>
           </div>
         </ui-lib-panel>
         <app-doc-code-example
@@ -130,35 +130,35 @@
         <p class="section-text">Small, medium, and large input sizes with icon scaling.</p>
         <ui-lib-panel variant="minimal">
           <div class="stack-md">
-            <uilib-icon-field iconPosition="left">
-              <uilib-input-icon styleClass="pi pi-search" />
+            <ui-lib-icon-field iconPosition="left">
+              <ui-lib-input-icon styleClass="pi pi-search" />
               <ui-lib-input
                 size="sm"
                 placeholder="Small"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeSmallValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
 
-            <uilib-icon-field iconPosition="left">
-              <uilib-input-icon styleClass="pi pi-search" />
+            <ui-lib-icon-field iconPosition="left">
+              <ui-lib-input-icon styleClass="pi pi-search" />
               <ui-lib-input
                 size="md"
                 placeholder="Medium"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeMediumValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
 
-            <uilib-icon-field iconPosition="left">
-              <uilib-input-icon styleClass="pi pi-search" />
+            <ui-lib-icon-field iconPosition="left">
+              <ui-lib-input-icon styleClass="pi pi-search" />
               <ui-lib-input
                 size="lg"
                 placeholder="Large"
                 [ngModelOptions]="{ standalone: true }"
                 [(ngModel)]="sizeLargeValue"
               />
-            </uilib-icon-field>
+            </ui-lib-icon-field>
           </div>
         </ui-lib-panel>
         <app-doc-code-example [html]="sizesHtml" [typescript]="sizesTs" />
@@ -171,41 +171,41 @@
           <div class="row-3">
             <div class="variant-column">
               <p class="variant-title">Material</p>
-              <uilib-icon-field iconPosition="left">
-                <uilib-input-icon styleClass="pi pi-search" />
+              <ui-lib-icon-field iconPosition="left">
+                <ui-lib-input-icon styleClass="pi pi-search" />
                 <ui-lib-input
                   variant="material"
                   placeholder="Material"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantMaterialValue"
                 />
-              </uilib-icon-field>
+              </ui-lib-icon-field>
             </div>
 
             <div class="variant-column">
               <p class="variant-title">Bootstrap</p>
-              <uilib-icon-field iconPosition="left">
-                <uilib-input-icon styleClass="pi pi-search" />
+              <ui-lib-icon-field iconPosition="left">
+                <ui-lib-input-icon styleClass="pi pi-search" />
                 <ui-lib-input
                   variant="bootstrap"
                   placeholder="Bootstrap"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantBootstrapValue"
                 />
-              </uilib-icon-field>
+              </ui-lib-icon-field>
             </div>
 
             <div class="variant-column">
               <p class="variant-title">Minimal</p>
-              <uilib-icon-field iconPosition="left">
-                <uilib-input-icon styleClass="pi pi-search" />
+              <ui-lib-icon-field iconPosition="left">
+                <ui-lib-input-icon styleClass="pi pi-search" />
                 <ui-lib-input
                   variant="minimal"
                   placeholder="Minimal"
                   [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="variantMinimalValue"
                 />
-              </uilib-icon-field>
+              </ui-lib-icon-field>
             </div>
           </div>
         </ui-lib-panel>
@@ -218,7 +218,7 @@
   <!-- ── API Reference ──────────────────────────────────────────────────── -->
   <app-doc-section id="api" title="API Reference">
     <p class="demo-section__description">
-      All inputs accepted by <code>uilib-icon-field</code>. Import from
+      All inputs accepted by <code>ui-lib-icon-field</code>. Import from
       <code>ui-lib-custom/icon-field</code>.
     </p>
     <app-doc-api-reference [rows]="apiRows" />

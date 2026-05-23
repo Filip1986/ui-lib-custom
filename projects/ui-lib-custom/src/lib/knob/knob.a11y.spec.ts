@@ -16,7 +16,7 @@ import { KnobComponent } from './knob.component';
   imports: [FormsModule, KnobComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <uilib-knob
+    <ui-lib-knob
       [min]="min()"
       [max]="max()"
       [step]="step()"
@@ -58,7 +58,7 @@ async function createFixture(
 
 function getHostElement(fixture: ComponentFixture<KnobA11yHostComponent>): HTMLElement {
   const hostElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    'uilib-knob'
+    'ui-lib-knob'
   );
   if (!hostElement) {
     throw new Error('Expected knob host element');
@@ -68,7 +68,7 @@ function getHostElement(fixture: ComponentFixture<KnobA11yHostComponent>): HTMLE
 
 function getSvgElement(fixture: ComponentFixture<KnobA11yHostComponent>): SVGElement {
   const svgElement: SVGElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.uilib-knob-svg'
+    '.ui-lib-knob-svg'
   );
   if (!svgElement) {
     throw new Error('Expected knob svg element');
@@ -204,7 +204,7 @@ describe('Knob Accessibility', (): void => {
     const fixture: ComponentFixture<KnobA11yHostComponent> = await createFixture();
     const valueLabelElement: SVGTextElement | null = (
       fixture.nativeElement as HTMLElement
-    ).querySelector('.uilib-knob-value-label');
+    ).querySelector('.ui-lib-knob-value-label');
     expect((valueLabelElement?.textContent ?? '').trim()).toBe('50');
     expect(valueLabelElement?.getAttribute('aria-live')).toBeNull();
   });

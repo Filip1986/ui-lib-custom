@@ -19,17 +19,17 @@ type FloatLabelNativeControl = HTMLInputElement | HTMLTextAreaElement | HTMLSele
  * FloatLabel wrapper component scaffold.
  */
 @Component({
-  selector: 'uilib-float-label',
+  selector: 'ui-lib-float-label',
   standalone: true,
   templateUrl: './float-label.html',
   styleUrl: './float-label.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'uilib-float-label',
-    '[class.uilib-float-label--over]': 'variant() === "over"',
-    '[class.uilib-float-label--in]': 'variant() === "in"',
-    '[class.uilib-float-label--on]': 'variant() === "on"',
+    class: 'ui-lib-float-label',
+    '[class.ui-lib-float-label--over]': 'variant() === "over"',
+    '[class.ui-lib-float-label--in]': 'variant() === "in"',
+    '[class.ui-lib-float-label--on]': 'variant() === "on"',
   },
 })
 export class FloatLabelComponent implements AfterViewChecked {
@@ -74,13 +74,13 @@ export class FloatLabelComponent implements AfterViewChecked {
   ): void {
     const labelId: string = this.ensureElementId(
       projectedLabel,
-      `uilib-float-label-label-${nextFloatLabelLabelId++}`
+      `ui-lib-float-label-label-${nextFloatLabelLabelId++}`
     );
 
     if (nativeControl !== null) {
       const controlId: string = this.ensureElementId(
         nativeControl,
-        `uilib-float-label-control-${nextFloatLabelControlId++}`
+        `ui-lib-float-label-control-${nextFloatLabelControlId++}`
       );
 
       if (projectedLabel.htmlFor !== controlId) {

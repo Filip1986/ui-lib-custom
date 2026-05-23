@@ -4,7 +4,6 @@
 **Package:** `ui-lib-custom/date-picker`
 **Content projection:** no — none
 
-> Output names follow the PrimeNG `on*` convention (`onSelect`, `onShow`, etc.) which triggers an ESLint `no-output-on-prefix` suppression; be aware these must be listened to with `(onSelect)="..."` not `(select)="..."`.
 
 ## Inputs
 
@@ -56,14 +55,14 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onSelect` | `DatePickerChangeEvent` | Fired when a date is selected |
-| `onMonthChange` | `DatePickerMonthChangeEvent` | Fired when the visible month changes |
-| `onYearChange` | `DatePickerYearChangeEvent` | Fired when the visible year changes |
-| `onShow` | `void` | Panel opened |
-| `onHide` | `void` | Panel closed |
-| `onClear` | `void` | Clear button clicked |
-| `onFocus` | `FocusEvent` | Input focused |
-| `onBlur` | `FocusEvent` | Input blurred |
+| `select` | `DatePickerChangeEvent` | Fired when a date is selected |
+| `monthChange` | `DatePickerMonthChangeEvent` | Fired when the visible month changes |
+| `yearChange` | `DatePickerYearChangeEvent` | Fired when the visible year changes |
+| `show` | `void` | Panel opened |
+| `hide` | `void` | Panel closed |
+| `clear` | `void` | Clear button clicked |
+| `focus` | `FocusEvent` | Input focused |
+| `blur` | `FocusEvent` | Input blurred |
 
 ## Usage
 
@@ -77,6 +76,6 @@
   [showTime]="true"
   [showButtonBar]="true"
   [(ngModel)]="dateRange"
-  (onSelect)="onRangeSelect($event)"
+  (select)="onRangeSelect($event)"
 />
 ```

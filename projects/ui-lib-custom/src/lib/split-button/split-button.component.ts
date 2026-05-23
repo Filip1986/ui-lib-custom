@@ -96,17 +96,15 @@ export class SplitButtonComponent {
   public readonly tabindex: InputSignal<number> = input<number>(0);
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onClick: OutputEmitterRef<SplitButtonClickEvent> =
+  /** Emits when the primary action button is clicked. Named `buttonClick` to avoid
+   *  shadowing the native DOM `click` event that bubbles from inner elements. */
+  public readonly buttonClick: OutputEmitterRef<SplitButtonClickEvent> =
     output<SplitButtonClickEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onMenuShow: OutputEmitterRef<SplitButtonMenuShowEvent> =
+  public readonly menuShow: OutputEmitterRef<SplitButtonMenuShowEvent> =
     output<SplitButtonMenuShowEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onMenuHide: OutputEmitterRef<SplitButtonMenuHideEvent> =
+  public readonly menuHide: OutputEmitterRef<SplitButtonMenuHideEvent> =
     output<SplitButtonMenuHideEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onItemCommand: OutputEmitterRef<SplitButtonItemCommandEvent> =
+  public readonly itemCommand: OutputEmitterRef<SplitButtonItemCommandEvent> =
     output<SplitButtonItemCommandEvent>();
 
   public readonly contentTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
@@ -225,7 +223,7 @@ export class SplitButtonComponent {
       return;
     }
 
-    this.onClick.emit({ originalEvent: event });
+    this.buttonClick.emit({ originalEvent: event });
   }
 
   public onMainButtonKeydown(event: KeyboardEvent): void {
@@ -297,7 +295,7 @@ export class SplitButtonComponent {
     }
 
     this.isMenuOpen.set(true);
-    this.onMenuShow.emit({ originalEvent: event });
+    this.menuShow.emit({ originalEvent: event });
 
     if (focusTarget === 'first') {
       queueMicrotask((): void => this.focusFirstMenuItem());
@@ -316,7 +314,7 @@ export class SplitButtonComponent {
 
     this.isMenuOpen.set(false);
     this.focusedItemIndex.set(-1);
-    this.onMenuHide.emit({ originalEvent: event });
+    this.menuHide.emit({ originalEvent: event });
 
     if (options?.focusMenuButton === true) {
       this.focusMenuButton();
@@ -340,7 +338,7 @@ export class SplitButtonComponent {
     };
 
     item.command?.(commandEvent);
-    this.onItemCommand.emit(commandEvent);
+    this.itemCommand.emit(commandEvent);
 
     if (item.url) {
       event.preventDefault();

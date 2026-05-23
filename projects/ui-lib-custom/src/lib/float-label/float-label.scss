@@ -1,4 +1,4 @@
-.uilib-float-label {
+.ui-lib-float-label {
   display: block;
   position: relative;
 
@@ -21,12 +21,12 @@
   }
 }
 
-.uilib-float-label:has(textarea) label {
+.ui-lib-float-label:has(textarea) label {
   top: var(--uilib-float-label-position-y, 0.75rem);
   transform: translateY(0);
 }
 
-.uilib-float-label--over {
+.ui-lib-float-label--over {
   &:focus-within label,
   &:has(input:not(:placeholder-shown)) label,
   &:has(input:-webkit-autofill) label,
@@ -41,7 +41,7 @@
   }
 }
 
-.uilib-float-label--in {
+.ui-lib-float-label--in {
   .uilib-input-element,
   input,
   textarea {
@@ -63,7 +63,7 @@
   }
 }
 
-.uilib-float-label--on {
+.ui-lib-float-label--on {
   &:focus-within label,
   &:has(input:not(:placeholder-shown)) label,
   &:has(input:-webkit-autofill) label,
@@ -85,29 +85,29 @@
 }
 
 /* For native controls, :not(:placeholder-shown) requires a placeholder attribute. */
-.uilib-float-label:has(input:not(:placeholder-shown):not(:focus)) label,
-.uilib-float-label:has(textarea:not(:placeholder-shown):not(:focus)) label,
-.uilib-float-label:has(.uilib-inputwrapper-filled:not(.uilib-inputwrapper-focus)) label,
-.uilib-float-label:has(.uilib-filled:not(:focus-within)) label {
+.ui-lib-float-label:has(input:not(:placeholder-shown):not(:focus)) label,
+.ui-lib-float-label:has(textarea:not(:placeholder-shown):not(:focus)) label,
+.ui-lib-float-label:has(.uilib-inputwrapper-filled:not(.uilib-inputwrapper-focus)) label,
+.ui-lib-float-label:has(.uilib-filled:not(:focus-within)) label {
   color: var(--uilib-float-label-active-color, var(--uilib-text-secondary-color, #6b7280));
 }
 
-.uilib-float-label:focus-within label,
-.uilib-float-label:has(input:-webkit-autofill) label,
-.uilib-float-label:has(.uilib-inputwrapper-focus) label {
+.ui-lib-float-label:focus-within label,
+.ui-lib-float-label:has(input:-webkit-autofill) label,
+.ui-lib-float-label:has(.uilib-inputwrapper-focus) label {
   color: var(--uilib-float-label-focus-color, var(--uilib-primary-color, #3b82f6));
 }
 
-.uilib-float-label:has(.ng-invalid.ng-dirty) label {
+.ui-lib-float-label:has(.ng-invalid.ng-dirty) label {
   color: var(--uilib-float-label-invalid-color, var(--uilib-error-color, #ef4444));
 }
 
-.uilib-float-label:has(.uilib-fluid) {
+.ui-lib-float-label:has(.uilib-fluid) {
   width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .uilib-float-label label {
+  .ui-lib-float-label label {
     transition: none;
   }
 }

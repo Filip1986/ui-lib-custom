@@ -32,7 +32,7 @@ class MockThemeConfigService {
   standalone: true,
   imports: [InputNumberComponent],
   template: `
-    <uilib-input-number
+    <ui-lib-input-number
       [value]="value()"
       [min]="min()"
       [max]="max()"
@@ -87,11 +87,11 @@ async function createFixture(): Promise<ComponentFixture<DefaultHostComponent>> 
 function getInput(fixture: ComponentFixture<DefaultHostComponent>): HTMLInputElement {
   const host: HTMLElement = fixture.nativeElement as HTMLElement;
   const input: HTMLInputElement | null = host.querySelector(
-    'input.uilib-input-number-input'
+    'input.ui-lib-input-number-input'
   ) as HTMLInputElement | null;
 
   if (input === null) {
-    throw new Error('Expected input.uilib-input-number-input to exist');
+    throw new Error('Expected input.ui-lib-input-number-input to exist');
   }
 
   return input;
@@ -269,7 +269,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture = await createFixture();
       fixture.componentInstance.showButtons.set(true);
       fixture.detectChanges();
-      expect(getButton(fixture, '.uilib-input-number-button-up').getAttribute('type')).toBe(
+      expect(getButton(fixture, '.ui-lib-input-number-button-up').getAttribute('type')).toBe(
         'button'
       );
     });
@@ -278,7 +278,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture = await createFixture();
       fixture.componentInstance.showButtons.set(true);
       fixture.detectChanges();
-      expect(getButton(fixture, '.uilib-input-number-button-down').getAttribute('type')).toBe(
+      expect(getButton(fixture, '.ui-lib-input-number-button-down').getAttribute('type')).toBe(
         'button'
       );
     });
@@ -287,9 +287,10 @@ describe('InputNumber Accessibility', (): void => {
       fixture = await createFixture();
       fixture.componentInstance.showButtons.set(true);
       fixture.detectChanges();
-      const label: string | null = getButton(fixture, '.uilib-input-number-button-up').getAttribute(
-        'aria-label'
-      );
+      const label: string | null = getButton(
+        fixture,
+        '.ui-lib-input-number-button-up'
+      ).getAttribute('aria-label');
       expect(label).not.toBeNull();
       expect(label!.toLowerCase()).toContain('increment');
     });
@@ -300,7 +301,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture.detectChanges();
       const label: string | null = getButton(
         fixture,
-        '.uilib-input-number-button-down'
+        '.ui-lib-input-number-button-down'
       ).getAttribute('aria-label');
       expect(label).not.toBeNull();
       expect(label!.toLowerCase()).toContain('decrement');
@@ -311,7 +312,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture.componentInstance.showButtons.set(true);
       fixture.componentInstance.label.set('price');
       fixture.detectChanges();
-      expect(getButton(fixture, '.uilib-input-number-button-up').getAttribute('aria-label')).toBe(
+      expect(getButton(fixture, '.ui-lib-input-number-button-up').getAttribute('aria-label')).toBe(
         'Increment price'
       );
     });
@@ -320,7 +321,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture = await createFixture();
       fixture.componentInstance.showButtons.set(true);
       fixture.detectChanges();
-      expect(getButton(fixture, '.uilib-input-number-button-up').getAttribute('aria-label')).toBe(
+      expect(getButton(fixture, '.ui-lib-input-number-button-up').getAttribute('aria-label')).toBe(
         'Increment value'
       );
     });
@@ -336,7 +337,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture.componentInstance.value.set(10);
       fixture.detectChanges();
       expect(
-        getButton(fixture, '.uilib-input-number-button-up').getAttribute('aria-disabled')
+        getButton(fixture, '.ui-lib-input-number-button-up').getAttribute('aria-disabled')
       ).toBe('true');
     });
 
@@ -347,7 +348,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture.componentInstance.value.set(0);
       fixture.detectChanges();
       expect(
-        getButton(fixture, '.uilib-input-number-button-down').getAttribute('aria-disabled')
+        getButton(fixture, '.ui-lib-input-number-button-down').getAttribute('aria-disabled')
       ).toBe('true');
     });
 
@@ -358,7 +359,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture.componentInstance.value.set(5);
       fixture.detectChanges();
       expect(
-        getButton(fixture, '.uilib-input-number-button-up').getAttribute('aria-disabled')
+        getButton(fixture, '.ui-lib-input-number-button-up').getAttribute('aria-disabled')
       ).toBeNull();
     });
 
@@ -369,7 +370,7 @@ describe('InputNumber Accessibility', (): void => {
       fixture.componentInstance.value.set(5);
       fixture.detectChanges();
       expect(
-        getButton(fixture, '.uilib-input-number-button-down').getAttribute('aria-disabled')
+        getButton(fixture, '.ui-lib-input-number-button-down').getAttribute('aria-disabled')
       ).toBeNull();
     });
 
@@ -379,10 +380,10 @@ describe('InputNumber Accessibility', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
       expect(
-        getButton(fixture, '.uilib-input-number-button-up').getAttribute('aria-disabled')
+        getButton(fixture, '.ui-lib-input-number-button-up').getAttribute('aria-disabled')
       ).toBe('true');
       expect(
-        getButton(fixture, '.uilib-input-number-button-down').getAttribute('aria-disabled')
+        getButton(fixture, '.ui-lib-input-number-button-down').getAttribute('aria-disabled')
       ).toBe('true');
     });
   });

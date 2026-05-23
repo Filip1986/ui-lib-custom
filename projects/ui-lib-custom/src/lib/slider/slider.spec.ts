@@ -55,8 +55,8 @@ function queryAll<T extends Element = HTMLElement>(
       [valueTextFn]="valueTextFn()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
-      (onChange)="onChangeEvent($event)"
-      (onSlideEnd)="onSlideEndEvent($event)"
+      (change)="onChangeEvent($event)"
+      (slideEnd)="onSlideEndEvent($event)"
     />
   `,
 })

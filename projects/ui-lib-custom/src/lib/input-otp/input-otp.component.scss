@@ -2,7 +2,7 @@
 // InputOtp — CSS custom properties (component tokens)
 // ---------------------------------------------------------------------------
 
-uilib-input-otp {
+ui-lib-input-otp {
   // Sizing
   --uilib-input-otp-cell-width: 2.5rem;
   --uilib-input-otp-cell-height: 2.5rem;
@@ -38,7 +38,7 @@ uilib-input-otp {
 // Cell (individual input)
 // ---------------------------------------------------------------------------
 
-uilib-input-otp .uilib-input-otp-cell {
+ui-lib-input-otp .ui-lib-input-otp-cell {
   appearance: none;
   width: var(--uilib-input-otp-cell-width);
   height: var(--uilib-input-otp-cell-height);
@@ -83,14 +83,14 @@ uilib-input-otp .uilib-input-otp-cell {
 // Size variants
 // ---------------------------------------------------------------------------
 
-uilib-input-otp.uilib-input-otp-sm {
+ui-lib-input-otp.ui-lib-input-otp-sm {
   --uilib-input-otp-cell-width: 1.875rem;
   --uilib-input-otp-cell-height: 1.875rem;
   --uilib-input-otp-font-size: var(--uilib-font-size-sm, 0.875rem);
   --uilib-input-otp-gap: var(--uilib-space-1, 0.25rem);
 }
 
-uilib-input-otp.uilib-input-otp-lg {
+ui-lib-input-otp.ui-lib-input-otp-lg {
   --uilib-input-otp-cell-width: 3.25rem;
   --uilib-input-otp-cell-height: 3.25rem;
   --uilib-input-otp-font-size: var(--uilib-font-size-lg, 1.125rem);
@@ -101,7 +101,7 @@ uilib-input-otp.uilib-input-otp-lg {
 // Filled appearance
 // ---------------------------------------------------------------------------
 
-uilib-input-otp.uilib-input-otp-filled .uilib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp-filled .ui-lib-input-otp-cell {
   background: var(--uilib-input-otp-filled-bg);
   border-color: transparent;
 }
@@ -110,11 +110,11 @@ uilib-input-otp.uilib-input-otp-filled .uilib-input-otp-cell {
 // Invalid state
 // ---------------------------------------------------------------------------
 
-uilib-input-otp.uilib-input-otp-invalid .uilib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp-invalid .ui-lib-input-otp-cell {
   border-color: var(--uilib-input-otp-invalid-border-color);
 }
 
-uilib-input-otp .uilib-input-otp-error {
+ui-lib-input-otp .ui-lib-input-otp-error {
   width: 100%;
   color: var(--uilib-color-danger-600, currentColor);
   font-size: var(--uilib-font-size-sm, 0.875rem);
@@ -124,10 +124,10 @@ uilib-input-otp .uilib-input-otp-error {
 // Disabled state
 // ---------------------------------------------------------------------------
 
-uilib-input-otp.uilib-input-otp-disabled {
+ui-lib-input-otp.ui-lib-input-otp-disabled {
   opacity: var(--uilib-input-otp-disabled-opacity);
 
-  .uilib-input-otp-cell {
+  .ui-lib-input-otp-cell {
     cursor: not-allowed;
   }
 }
@@ -136,7 +136,7 @@ uilib-input-otp.uilib-input-otp-disabled {
 // Read-only state
 // ---------------------------------------------------------------------------
 
-uilib-input-otp.uilib-input-otp-readonly .uilib-input-otp-cell {
+ui-lib-input-otp.ui-lib-input-otp-readonly .ui-lib-input-otp-cell {
   cursor: default;
 }
 
@@ -145,7 +145,7 @@ uilib-input-otp.uilib-input-otp-readonly .uilib-input-otp-cell {
 // ---------------------------------------------------------------------------
 
 // — Material —
-.uilib-variant-material uilib-input-otp .uilib-input-otp-cell {
+.uilib-variant-material ui-lib-input-otp .ui-lib-input-otp-cell {
   border-width: 0 0 0.125rem;
   border-radius: 0;
   box-shadow: none;
@@ -157,13 +157,13 @@ uilib-input-otp.uilib-input-otp-readonly .uilib-input-otp-cell {
 }
 
 // — Bootstrap —
-.uilib-variant-bootstrap uilib-input-otp .uilib-input-otp-cell {
+.uilib-variant-bootstrap ui-lib-input-otp .ui-lib-input-otp-cell {
   border-width: 0.0625rem;
   border-radius: var(--uilib-input-otp-border-radius);
 }
 
 // — Minimal —
-.uilib-variant-minimal uilib-input-otp .uilib-input-otp-cell {
+.uilib-variant-minimal ui-lib-input-otp .ui-lib-input-otp-cell {
   border-color: transparent;
   background: color-mix(
     in srgb,
@@ -178,7 +178,7 @@ uilib-input-otp.uilib-input-otp-readonly .uilib-input-otp-cell {
   }
 }
 
-uilib-input-otp .uilib-input-otp-sr-only {
+ui-lib-input-otp .ui-lib-input-otp-sr-only {
   position: absolute;
   width: 0.0625rem;
   height: 0.0625rem;
@@ -191,7 +191,7 @@ uilib-input-otp .uilib-input-otp-sr-only {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  uilib-input-otp .uilib-input-otp-cell {
+  ui-lib-input-otp .ui-lib-input-otp-cell {
     transition: none;
   }
 }

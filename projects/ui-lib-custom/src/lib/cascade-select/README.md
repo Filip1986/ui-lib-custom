@@ -4,7 +4,7 @@
 **Package:** `ui-lib-custom/cascade-select`
 **Content projection:** yes — template directives for option, value, dropdownIcon, optionGroupIcon, header, footer, loading slots
 
-> `optionGroupChildren` must be an array of field-name strings, one per nesting level (e.g. `['states', 'cities']`). This differs from PrimeNG where a single string is used for all levels. Output names follow the `on*` prefix convention.
+> `optionGroupChildren` must be an array of field-name strings, one per nesting level (e.g. `['states', 'cities']`). This differs from PrimeNG where a single string is used for all levels.
 
 ## Inputs
 
@@ -35,13 +35,13 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `onChange` | `CascadeSelectChangeEvent` | Leaf option selected |
-| `onGroupChange` | `CascadeSelectGroupChangeEvent` | User navigated into a sub-group |
-| `onShow` | `CascadeSelectShowEvent` | Panel opened |
-| `onHide` | `CascadeSelectHideEvent` | Panel closed |
-| `onClear` | `void` | Clear button clicked |
-| `onFocus` | `FocusEvent` | Component focused |
-| `onBlur` | `FocusEvent` | Component blurred |
+| `change` | `CascadeSelectChangeEvent` | Leaf option selected |
+| `groupChange` | `CascadeSelectGroupChangeEvent` | User navigated into a sub-group |
+| `show` | `CascadeSelectShowEvent` | Panel opened |
+| `hide` | `CascadeSelectHideEvent` | Panel closed |
+| `clear` | `void` | Clear button clicked |
+| `focus` | `FocusEvent` | Component focused |
+| `blur` | `FocusEvent` | Component blurred |
 
 ## Usage
 

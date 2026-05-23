@@ -104,13 +104,10 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     COLOR_PICKER_DEFAULTS.AppendTo
   );
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onChange: OutputEmitterRef<ColorPickerChangeEvent> =
+  public readonly change: OutputEmitterRef<ColorPickerChangeEvent> =
     output<ColorPickerChangeEvent>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onShow: OutputEmitterRef<void> = output<void>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  public readonly onHide: OutputEmitterRef<void> = output<void>();
+  public readonly show: OutputEmitterRef<void> = output<void>();
+  public readonly hide: OutputEmitterRef<void> = output<void>();
 
   @ViewChild('triggerButton', { static: false })
   public triggerButton?: ElementRef<HTMLButtonElement>;
@@ -262,7 +259,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     }
 
     this.panelVisible.set(true);
-    this.onShow.emit();
+    this.show.emit();
     requestAnimationFrame((): void => this.syncPanelMount());
   }
 
@@ -275,7 +272,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     this.dragTarget.set(null);
     this.detachDragListeners();
     this.markTouched();
-    this.onHide.emit();
+    this.hide.emit();
     this.triggerButton?.nativeElement.focus();
   }
 
@@ -620,7 +617,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   private emitColorChange(event: Event): void {
     const formattedValue: ColorPickerValue = formatColorValue(this.currentHsb(), this.format());
     this.onModelChange(formattedValue);
-    this.onChange.emit({
+    this.change.emit({
       originalEvent: event,
       value: formattedValue,
     });

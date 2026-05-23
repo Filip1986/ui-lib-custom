@@ -10,7 +10,7 @@
     <app-doc-section id="basic" title="Basic">
       <p>Default SplitButton with label and action menu model.</p>
       <ui-lib-panel variant="minimal">
-        <ui-lib-split-button label="Save" [model]="items" (onClick)="onPrimaryAction()" />
+        <ui-lib-split-button label="Save" [model]="items" (buttonClick)="onPrimaryAction()" />
       </ui-lib-panel>
       <app-doc-code-example [html]="basicHtml" [typescript]="basicTs" />
     </app-doc-section>
@@ -22,7 +22,7 @@
           label="Add"
           icon="plus"
           [model]="iconItems"
-          (onClick)="onPrimaryAction()"
+          (buttonClick)="onPrimaryAction()"
         />
       </ui-lib-panel>
       <app-doc-code-example [html]="iconsHtml" [typescript]="iconsTs" />
@@ -37,7 +37,7 @@
               [label]="severity"
               [severity]="severity"
               [model]="items"
-              (onClick)="onPrimaryAction()"
+              (buttonClick)="onPrimaryAction()"
             />
           }
         </div>
@@ -55,7 +55,7 @@
             label="Menu Disabled"
             [model]="items"
             [menuButtonDisabled]="true"
-            (onClick)="onPrimaryAction()"
+            (buttonClick)="onPrimaryAction()"
           />
         </div>
       </ui-lib-panel>

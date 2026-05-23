@@ -1,4 +1,4 @@
-uilib-input-mask {
+ui-lib-input-mask {
   --uilib-input-mask-padding-y: var(--uilib-space-2, 0.5rem);
   --uilib-input-mask-padding-x: var(--uilib-space-3, 0.75rem);
   --uilib-input-mask-font-size: var(--uilib-font-size-base, 1rem);
@@ -26,12 +26,12 @@ uilib-input-mask {
   align-items: center;
 }
 
-uilib-input-mask.uilib-input-mask-fluid {
+ui-lib-input-mask.ui-lib-input-mask-fluid {
   display: flex;
   width: 100%;
 }
 
-uilib-input-mask input {
+ui-lib-input-mask input {
   appearance: none;
   border: 0.0625rem solid var(--uilib-input-mask-border-color);
   border-radius: var(--uilib-input-mask-border-radius);
@@ -48,38 +48,38 @@ uilib-input-mask input {
     background-color var(--uilib-transition-fast, 150ms ease);
 }
 
-uilib-input-mask input::placeholder {
+ui-lib-input-mask input::placeholder {
   color: var(--uilib-input-mask-placeholder-color);
 }
 
-uilib-input-mask input:focus-visible {
+ui-lib-input-mask input:focus-visible {
   outline: none;
   border-color: var(--uilib-input-mask-focus-border-color);
   box-shadow: var(--uilib-input-mask-focus-ring);
 }
 
-uilib-input-mask.uilib-input-mask-sm {
+ui-lib-input-mask.ui-lib-input-mask-sm {
   --uilib-input-mask-padding-y: var(--uilib-space-1, 0.25rem);
   --uilib-input-mask-padding-x: var(--uilib-space-2, 0.5rem);
   --uilib-input-mask-font-size: var(--uilib-font-size-sm, 0.875rem);
 }
 
-uilib-input-mask.uilib-input-mask-lg {
+ui-lib-input-mask.ui-lib-input-mask-lg {
   --uilib-input-mask-padding-y: var(--uilib-space-3, 0.75rem);
   --uilib-input-mask-padding-x: var(--uilib-space-4, 1rem);
   --uilib-input-mask-font-size: var(--uilib-font-size-lg, 1.125rem);
 }
 
-uilib-input-mask.uilib-input-mask-filled input {
+ui-lib-input-mask.ui-lib-input-mask-filled input {
   background: var(--uilib-input-mask-filled-bg);
   border-color: transparent;
 }
 
-uilib-input-mask.uilib-input-mask-invalid input {
+ui-lib-input-mask.ui-lib-input-mask-invalid input {
   border-color: var(--uilib-input-mask-invalid-border-color);
 }
 
-uilib-input-mask .uilib-input-mask-clear-icon {
+ui-lib-input-mask .ui-lib-input-mask-clear-icon {
   position: absolute;
   top: 50%;
   inset-inline-end: var(--uilib-input-mask-padding-x);
@@ -93,27 +93,27 @@ uilib-input-mask .uilib-input-mask-clear-icon {
   justify-content: center;
 }
 
-uilib-input-mask:has(.uilib-input-mask-clear-icon) input {
+ui-lib-input-mask:has(.ui-lib-input-mask-clear-icon) input {
   padding-inline-end: calc(
     var(--uilib-input-mask-padding-x) * 2 + var(--uilib-input-mask-clear-icon-size)
   );
 }
 
-uilib-input-mask.uilib-input-mask-disabled {
+ui-lib-input-mask.ui-lib-input-mask-disabled {
   opacity: var(--uilib-input-mask-disabled-opacity);
 }
 
-uilib-input-mask.uilib-input-mask-disabled .uilib-input-mask-clear-icon {
+ui-lib-input-mask.ui-lib-input-mask-disabled .ui-lib-input-mask-clear-icon {
   pointer-events: none;
 }
 
-.uilib-variant-material uilib-input-mask input {
+.uilib-variant-material ui-lib-input-mask input {
   border-width: 0 0 0.125rem;
   border-radius: 0;
   box-shadow: none;
 }
 
-.uilib-variant-material uilib-input-mask.uilib-inputwrapper-focus::after {
+.uilib-variant-material ui-lib-input-mask.uilib-inputwrapper-focus::after {
   content: '';
   position: absolute;
   inset-inline: 0;
@@ -122,12 +122,12 @@ uilib-input-mask.uilib-input-mask-disabled .uilib-input-mask-clear-icon {
   background: var(--uilib-input-mask-focus-border-color);
 }
 
-.uilib-variant-bootstrap uilib-input-mask input {
+.uilib-variant-bootstrap ui-lib-input-mask input {
   border-width: 0.0625rem;
   border-radius: var(--uilib-input-mask-border-radius);
 }
 
-.uilib-variant-minimal uilib-input-mask input {
+.uilib-variant-minimal ui-lib-input-mask input {
   border-color: transparent;
   background: color-mix(
     in srgb,
@@ -137,13 +137,13 @@ uilib-input-mask.uilib-input-mask-disabled .uilib-input-mask-clear-icon {
   box-shadow: none;
 }
 
-uilib-input-mask .uilib-input-mask-error {
+ui-lib-input-mask .ui-lib-input-mask-error {
   color: var(--uilib-input-mask-error-color);
   font-size: var(--uilib-font-size-sm, 0.875rem);
   margin-top: var(--uilib-space-1, 0.25rem);
 }
 
-uilib-input-mask .uilib-input-mask-sr-only {
+ui-lib-input-mask .ui-lib-input-mask-sr-only {
   position: absolute;
   width: 0.0625rem;
   height: 0.0625rem;
@@ -156,8 +156,8 @@ uilib-input-mask .uilib-input-mask-sr-only {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  uilib-input-mask,
-  uilib-input-mask input {
+  ui-lib-input-mask,
+  ui-lib-input-mask input {
     transition: none;
   }
 }

@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const basicHtml = `<uilib-knob [(ngModel)]="value" />`;
+export const basicHtml = `<ui-lib-knob [(ngModel)]="value" />`;
 
 export const basicTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ export class MyComponent {
   value: number = 40;
 }`;
 
-export const colorsHtml = `<uilib-knob valueColor="#f59e0b" textColor="#b45309" [(ngModel)]="value" />`;
+export const colorsHtml = `<ui-lib-knob valueColor="#f59e0b" textColor="#b45309" [(ngModel)]="value" />`;
 
 export const colorsTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +32,7 @@ export class MyComponent {
   value: number = 75;
 }`;
 
-export const disabledHtml = `<uilib-knob [disabled]="true" [(ngModel)]="value" />`;
+export const disabledHtml = `<ui-lib-knob [disabled]="true" [(ngModel)]="value" />`;
 
 export const disabledTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +48,7 @@ export class MyComponent {
 }`;
 
 export const minmaxHtml = `<!-- -50 to +50, step 10 -->
-<uilib-knob [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />`;
+<ui-lib-knob [min]="-50" [max]="50" [step]="10" [(ngModel)]="value" />`;
 
 export const minmaxTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -64,8 +64,8 @@ export class MyComponent {
 }`;
 
 export const reactiveHtml = `<form [formGroup]="form">
-  <uilib-knob formControlName="brightness" />
-  <uilib-knob formControlName="contrast" />
+  <ui-lib-knob formControlName="brightness" />
+  <ui-lib-knob formControlName="contrast" />
 </form>`;
 
 export const reactiveTs = `import { Component } from '@angular/core';
@@ -84,7 +84,7 @@ export class MyComponent {
   });
 }`;
 
-export const readonlyHtml = `<uilib-knob [readonly]="true" [(ngModel)]="value" />`;
+export const readonlyHtml = `<ui-lib-knob [readonly]="true" [(ngModel)]="value" />`;
 
 export const readonlyTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -100,13 +100,13 @@ export class MyComponent {
 }`;
 
 export const sizesHtml = `<!-- Small -->
-<uilib-knob size="sm" [(ngModel)]="value" />
+<ui-lib-knob size="sm" [(ngModel)]="value" />
 
 <!-- Medium (default) -->
-<uilib-knob size="md" [(ngModel)]="value" />
+<ui-lib-knob size="md" [(ngModel)]="value" />
 
 <!-- Large -->
-<uilib-knob size="lg" [(ngModel)]="value" />`;
+<ui-lib-knob size="lg" [(ngModel)]="value" />`;
 
 export const sizesTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -122,7 +122,7 @@ export class MyComponent {
 }`;
 
 export const stepHtml = `<!-- Snaps to 0, 25, 50, 75, 100 -->
-<uilib-knob [step]="25" [(ngModel)]="value" />`;
+<ui-lib-knob [step]="25" [(ngModel)]="value" />`;
 
 export const stepTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -137,9 +137,9 @@ export class MyComponent {
   value: number = 0;
 }`;
 
-export const templateHtml = `<uilib-knob valueTemplate="{value}\\u00b0" [(ngModel)]="value" />
+export const templateHtml = `<ui-lib-knob valueTemplate="{value}\\u00b0" [(ngModel)]="value" />
 
-<uilib-knob valueTemplate="{value}%" [(ngModel)]="value" />`;
+<ui-lib-knob valueTemplate="{value}%" [(ngModel)]="value" />`;
 
 export const templateTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';

@@ -223,8 +223,8 @@ describe('ColorPicker component', (): void => {
       expect(component.panelVisible()).toBeFalsy();
     });
 
-    it('opens on trigger click and emits onShow', (): void => {
-      const showSpy: jest.SpyInstance = jest.spyOn(component.onShow, 'emit');
+    it('opens on trigger click and emits show', (): void => {
+      const showSpy: jest.SpyInstance = jest.spyOn(component.show, 'emit');
 
       openPanel();
 
@@ -232,8 +232,8 @@ describe('ColorPicker component', (): void => {
       expect(showSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('closes on second trigger click and emits onHide', (): void => {
-      const hideSpy: jest.SpyInstance = jest.spyOn(component.onHide, 'emit');
+    it('closes on second trigger click and emits hide', (): void => {
+      const hideSpy: jest.SpyInstance = jest.spyOn(component.hide, 'emit');
 
       openPanel();
       triggerEl().click();
@@ -244,7 +244,7 @@ describe('ColorPicker component', (): void => {
     });
 
     it('closes on outside click', (): void => {
-      const hideSpy: jest.SpyInstance = jest.spyOn(component.onHide, 'emit');
+      const hideSpy: jest.SpyInstance = jest.spyOn(component.hide, 'emit');
       openPanel();
 
       document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -313,7 +313,7 @@ describe('ColorPicker component', (): void => {
     it('emits hex formatted onChange payload', (): void => {
       fixture.componentRef.setInput('format', 'hex');
       fixture.detectChanges();
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.onChange, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
 
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 0 }));
       fixture.detectChanges();
@@ -326,7 +326,7 @@ describe('ColorPicker component', (): void => {
     it('emits rgb formatted onChange payload', (): void => {
       fixture.componentRef.setInput('format', 'rgb');
       fixture.detectChanges();
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.onChange, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
 
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 33 }));
       fixture.detectChanges();
@@ -344,7 +344,7 @@ describe('ColorPicker component', (): void => {
     it('emits hsb formatted onChange payload', (): void => {
       fixture.componentRef.setInput('format', 'hsb');
       fixture.detectChanges();
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.onChange, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
 
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 20 }));
       fixture.detectChanges();
@@ -543,7 +543,7 @@ describe('ColorPicker component', (): void => {
 
       mockRect(hueEl(), 0, 0, 20, 100);
 
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.onChange, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 10 }));
       fixture.detectChanges();
       const callsAfterRgb: ChangeEventPayload[][] = emitSpy.mock.calls as ChangeEventPayload[][];

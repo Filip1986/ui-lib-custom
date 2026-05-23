@@ -1,12 +1,12 @@
 <svg
-  class="uilib-knob-svg"
+  class="ui-lib-knob-svg"
   viewBox="0 0 100 100"
   aria-hidden="true"
   focusable="false"
 >
   <!-- Track: full 270° background arc -->
   <path
-    class="uilib-knob-track"
+    class="ui-lib-knob-track"
     [attr.d]="trackPath()"
     fill="none"
     [attr.stroke-width]="strokeWidth()"
@@ -16,7 +16,7 @@
   <!-- Range: partial arc representing the current value -->
   @if (normalizedValue() > 0) {
     <path
-      class="uilib-knob-range"
+      class="ui-lib-knob-range"
       [attr.d]="rangePath()"
       fill="none"
       [attr.stroke-width]="strokeWidth()"
@@ -27,7 +27,7 @@
   <!-- Value label rendered in the centre of the dial -->
   @if (showValue()) {
     <text
-      class="uilib-knob-value-label"
+      class="ui-lib-knob-value-label"
       x="50"
       y="50"
       text-anchor="middle"
