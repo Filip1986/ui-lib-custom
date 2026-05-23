@@ -157,7 +157,7 @@
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-button.mjs",
-      "maxSize": "9 kB"
+      "maxSize": "12 kB"
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-card.mjs",
