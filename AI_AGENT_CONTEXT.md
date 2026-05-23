@@ -82,6 +82,30 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [BEM class name standardisation — all uilib-variant-* and single-hyphen modifier classes eliminated]
+Changed:
+  input-number/input-number.component.ts: host bindings renamed (ui-lib-input-number-sm → ui-lib-input-number--sm etc.)
+  input-number/input-number.component.scss: 13 top-level selectors renamed to double-hyphen BEM
+  input-number/input-number.component.spec.ts: 10 assertion strings updated
+  knob/knob.component.ts: host bindings renamed (ui-lib-knob-sm → ui-lib-knob--sm etc.)
+  knob/knob.component.scss: 8 nested selectors + 2 top-level variant blocks restructured (.uilib-variant-bootstrap → ui-lib-knob.ui-lib-knob--bootstrap)
+  knob/knob.component.spec.ts: 4 assertion strings updated
+  password/password.component.ts: host bindings (completed previous session)
+  password/password.component.scss: selectors (completed previous session)
+  password/password.component.spec.ts: assertions (completed previous session)
+  input-mask/input-mask.component.ts: added inject, ThemeConfigService, variant input, effectiveVariant; renamed host bindings + added variant bindings
+  input-mask/input-mask.component.scss: renamed modifier selectors + converted parent-context .uilib-variant-* to component-level ui-lib-input-mask--* selectors
+  input-mask/input-mask.component.spec.ts: 6 assertion strings updated
+  input-otp/input-otp.component.ts: added inject, ThemeConfigService, variant input, effectiveVariant; renamed host bindings + added variant bindings
+  input-otp/input-otp.component.scss: renamed modifier selectors + converted parent-context .uilib-variant-* to component-level ui-lib-input-otp--* selectors
+  input-otp/input-otp.component.spec.ts: 6 assertion strings updated
+  virtual-scroller/virtual-scroller.component.ts: added ThemeConfigService inject, variant input, effectiveVariant computed, added variant class to hostClasses()
+  virtual-scroller/virtual-scroller.component.scss: 3 top-level variant selectors renamed (uilib-variant-* → ui-lib-virtual-scroller--*)
+State: 6040/6040 tests passing (226 suites). ng build ui-lib-custom → PASS. PR #233 open.
+Verification: npx eslint → 0 warnings; ng build → PASS; npm test → 6040/6040; pre-push typecheck → PASS
+Terminal notes: Use npm test -- --testPathPatterns="pattern" (not --testPathPattern which is deprecated); pipe | in regex must use PowerShell not bash
+Next step: Merge PR #233 → then CSS @layer adoption, or broader axe-core audit.
+
 Date: 2026-05-24 [Runtime variant switcher — all components now respect ThemeConfigService.setVariant()]
 Changed:
   theming/theme-config.service.ts: setVariant() now writes data-variant to document.documentElement AND persists to localStorage via persistConfig(); constructor restores stored variant on boot
@@ -120,35 +144,6 @@ State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnin
 Verification: npm test → 6040/6040; npm run build → PASS
 Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows
 Next step: Delete _theme-mixins.scss (confirmed zero consumers). Then: runtime variant switcher; CSS @layer adoption.
-
-Date: 2026-05-23 [CSS/SCSS architecture refactor — token scoping, dark-mode dedup, host-selector fixes]
-Changed:
-  themes.scss (complete structural rewrite):
-  - Section 1 (:root): added --uilib-space-1, --uilib-font-size-xs/sm/md/lg/xl, --uilib-radius-sm/md/lg/xl/full, --uilib-shadow-xs/sm/md/lg, --uilib-transition-duration as globally registered tokens
-  - Section 2/3: dark block is now overrides-only (~100 lines vs ~200 before); fixed bug: --uilib-card-bg was #fff in the dark block
-  badge.scss: deleted 13 lines that redefined --uilib-radius-*, --uilib-space-*, --uilib-font-size-* on the badge host element (cascade pollution)
-  Token block location (moved from :root to host element):
-  - slider/slider.scss: :root → ui-lib-slider; [data-theme='dark'] → [data-theme='dark'] ui-lib-slider
-  - knob/knob.component.scss: same pattern with ui-lib-knob
-  - ripple/ripple.scss: :root block merged into .ui-lib-ripple {}
-  - progress-spinner/progress-spinner.scss: :root size tokens moved into .ui-lib-progress-spinner {}
-  - table/table.component.scss: :root → ui-lib-table; [data-theme='dark'] scoped to ui-lib-table
-  :host selector fixes (ViewEncapsulation.None — :host has no effect):
-  - cascade-select.scss: removed redundant :host { display: block } (ui-lib-cascade-select already existed)
-  - date-picker.scss: :host.ui-lib-datepicker → ui-lib-date-picker.ui-lib-datepicker (15 occurrences)
-  - split-button/split-button.component.scss: all :host / :host. / :host (space) → ui-lib-split-button
-  - virtual-scroller/virtual-scroller.component.scss: :host → ui-lib-virtual-scroller (all occurrences)
-  - editor/editor.scss: :host → ui-lib-editor
-  styles/_theme-mixins.scss: added deprecation header comment — do not add tokens; migrate to themes.scss
-  Docs:
-  - docs/reference/systems/CSS_ARCHITECTURE.md: NEW — full architecture reference, token hierarchy, comparisons
-  - docs/CSS_THEMING_PROGRESS.md: NEW — competitive position, what was fixed, roadmap items
-  - docs/ROADMAP.md: added CSS_THEMING_PROGRESS link in header
-  - docs/reference/systems/README.md: added CSS_ARCHITECTURE entry
-State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
-Verification: node_modules/.bin/jest.cmd --no-coverage → 6040/6040 pass; ng build ui-lib-custom → PASS
-Terminal notes: Use `node_modules/.bin/jest.cmd` not `npx.cmd jest`; eslint via `npx.cmd eslint`
-Next step: Consolidate 4 parallel dark-mode systems (delete dark-theme.scss + _theme-mixins.scss); runtime variant switcher; CSS @layer adoption.
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
