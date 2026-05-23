@@ -4,9 +4,9 @@
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
-// Default (material) tokens
+// Default (material) tokens — scoped to the component host element
 // ---------------------------------------------------------------------------
-:root {
+ui-lib-knob {
   --uilib-knob-track-color: #e0e0e0;
   --uilib-knob-range-color: #6366f1;
   --uilib-knob-text-color: #1f2937;
@@ -32,7 +32,7 @@
 // ---------------------------------------------------------------------------
 // Dark mode overrides
 // ---------------------------------------------------------------------------
-[data-theme='dark'] {
+[data-theme='dark'] ui-lib-knob {
   --uilib-knob-track-color: #374151;
   --uilib-knob-range-color: #818cf8;
   --uilib-knob-text-color: #f9fafb;

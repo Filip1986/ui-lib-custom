@@ -1,4 +1,11 @@
 // Theme variable mixins for light and dark modes.
+//
+// DEPRECATED — do not add new tokens here.
+// Global light/dark tokens now live in themes/themes.scss (sections 2 & 3).
+// This file remains only because 17 component SCSS files still @use it for the
+// --uilib-surface-dark-* / --uilib-text-dark-* / --uilib-border-dark* tokens
+// that have not yet been migrated to the central themes.scss dark block.
+// Migration tracking: docs/reference/systems/CSS_ARCHITECTURE.md
 
 @mixin dark-theme-vars {
   /* Dark palette tokens */
@@ -10,7 +17,7 @@
   --uilib-surface-dark-5: #2c2c2c;
 
   --uilib-text-dark-primary: rgba(255, 255, 255, 0.87);
-  --uilib-text-dark-secondary: rgba(255, 255, 255, 0.60);
+  --uilib-text-dark-secondary: rgba(255, 255, 255, 0.6);
   --uilib-text-dark-disabled: rgba(255, 255, 255, 0.38);
 
   --uilib-border-dark: rgba(255, 255, 255, 0.12);

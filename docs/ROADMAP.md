@@ -3,6 +3,8 @@
 > **Current position:** Phase 3 complete → Phase 4 active
 > **Next milestone:** Public Beta (Phase 4)
 > **Ultimate milestone:** v1.0 General Availability (end of Phase 5)
+>
+> **CSS/Theming progress:** [CSS_THEMING_PROGRESS.md](CSS_THEMING_PROGRESS.md) — competitive position, what was fixed, what is next
 
 ---
 

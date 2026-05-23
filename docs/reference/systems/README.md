@@ -6,6 +6,25 @@ System-level documentation for design systems, architectural patterns, and cross
 
 ## 🎨 Available Systems
 
+### CSS Architecture & Theming
+**File:** [CSS_ARCHITECTURE.md](CSS_ARCHITECTURE.md)
+
+**Status:** ✅ Refactored 2026-05-23
+
+**Includes:**
+- Token hierarchy (universal → light/dark → component → variant)
+- Globally registered scale tokens (radius, spacing, font-size, shadows)
+- Density system (`data-density` attribute)
+- Dark mode architecture and known parallel systems
+- Competitive comparison vs PrimeNG and Angular Material
+- CSS variable naming convention and component SCSS pattern
+- Anti-patterns reference
+- Remaining debt and roadmap
+
+**Use for:** Understanding how the theming system works, how to override it, and where it is heading
+
+---
+
 ### Design Token System
 **File:** [DESIGN_TOKENS.md](DESIGN_TOKENS.md)
 

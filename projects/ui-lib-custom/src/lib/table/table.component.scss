@@ -7,7 +7,8 @@
 // so they can be overridden by consumers via ThemeConfigService or
 // a [data-theme] selector without a rebuild.
 
-:root {
+// Design tokens scoped to the host element — not :root — so they don't leak.
+ui-lib-table {
   // Structural
   --uilib-table-border-radius: var(--uilib-radius-md, 6px);
   --uilib-table-border-width: 1px;
@@ -64,8 +65,8 @@
   --uilib-table-caption-font-weight: 600;
 }
 
-// Dark-mode overrides
-[data-theme='dark'] {
+// Dark-mode overrides — scoped to table instances inside a dark theme
+[data-theme='dark'] ui-lib-table {
   --uilib-table-border-color: rgba(255, 255, 255, 0.12);
   --uilib-table-row-bg-alt: rgba(255, 255, 255, 0.03);
   --uilib-table-row-bg-hover: rgba(255, 255, 255, 0.06);

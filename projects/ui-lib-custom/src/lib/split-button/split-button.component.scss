@@ -1,4 +1,4 @@
-:host {
+ui-lib-split-button {
   display: inline-flex;
   position: relative;
 
@@ -63,14 +63,14 @@
   --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
 }
 
-:host .ui-lib-split-button__container {
+ui-lib-split-button .ui-lib-split-button__container {
   display: inline-flex;
   align-items: stretch;
   border-radius: var(--uilib-split-button-radius);
 }
 
-:host .ui-lib-split-button__default-button,
-:host .ui-lib-split-button__menu-button {
+ui-lib-split-button .ui-lib-split-button__default-button,
+ui-lib-split-button .ui-lib-split-button__menu-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -87,27 +87,27 @@
   outline: none;
 }
 
-:host .ui-lib-split-button__default-button {
+ui-lib-split-button .ui-lib-split-button__default-button {
   border-radius: var(--uilib-split-button-radius) 0 0 var(--uilib-split-button-radius);
   border-inline-end: var(--uilib-border-width-1, 0.0625rem) solid
     var(--uilib-split-button-divider-color);
   padding: var(--uilib-split-button-padding);
 }
 
-:host .ui-lib-split-button__menu-button {
+ui-lib-split-button .ui-lib-split-button__menu-button {
   border-radius: 0 var(--uilib-split-button-radius) var(--uilib-split-button-radius) 0;
   padding: var(--uilib-split-button-padding);
   min-inline-size: calc(var(--uilib-split-button-font-size) * 2.25);
 }
 
-:host .ui-lib-split-button__default-button:hover:not(:disabled),
-:host .ui-lib-split-button__menu-button:hover:not(:disabled) {
+ui-lib-split-button .ui-lib-split-button__default-button:hover:not(:disabled),
+ui-lib-split-button .ui-lib-split-button__menu-button:hover:not(:disabled) {
   background: var(--uilib-split-button-bg-hover);
   color: var(--uilib-split-button-fg-hover);
 }
 
-:host .ui-lib-split-button__default-button:active:not(:disabled),
-:host .ui-lib-split-button__menu-button:active:not(:disabled) {
+ui-lib-split-button .ui-lib-split-button__default-button:active:not(:disabled),
+ui-lib-split-button .ui-lib-split-button__menu-button:active:not(:disabled) {
   background: color-mix(
     in srgb,
     var(--uilib-split-button-bg-hover) 86%,
@@ -115,21 +115,21 @@
   );
 }
 
-:host .ui-lib-split-button__default-button:focus-visible,
-:host .ui-lib-split-button__menu-button:focus-visible,
-:host .ui-lib-split-button__menu-item:focus-visible {
+ui-lib-split-button .ui-lib-split-button__default-button:focus-visible,
+ui-lib-split-button .ui-lib-split-button__menu-button:focus-visible,
+ui-lib-split-button .ui-lib-split-button__menu-item:focus-visible {
   box-shadow: var(--uilib-split-button-focus-ring);
 }
 
-:host .ui-lib-split-button__icon,
-:host .ui-lib-split-button__loading-icon,
-:host .ui-lib-split-button__menu-item-icon {
+ui-lib-split-button .ui-lib-split-button__icon,
+ui-lib-split-button .ui-lib-split-button__loading-icon,
+ui-lib-split-button .ui-lib-split-button__menu-item-icon {
   inline-size: var(--uilib-split-button-icon-size);
   block-size: var(--uilib-split-button-icon-size);
   flex: 0 0 var(--uilib-split-button-icon-size);
 }
 
-:host .ui-lib-split-button__menu {
+ui-lib-split-button .ui-lib-split-button__menu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -145,7 +145,7 @@
   animation: uilib-split-button-menu-enter var(--uilib-transition-fast, 0.2s ease) ease-out;
 }
 
-:host .ui-lib-split-button__menu-item {
+ui-lib-split-button .ui-lib-split-button__menu-item {
   display: inline-flex;
   align-items: center;
   gap: var(--uilib-space-2, 0.5rem);
@@ -160,27 +160,27 @@
   cursor: pointer;
 }
 
-:host .ui-lib-split-button__menu-item:hover,
-:host .ui-lib-split-button__menu-item:active {
+ui-lib-split-button .ui-lib-split-button__menu-item:hover,
+ui-lib-split-button .ui-lib-split-button__menu-item:active {
   background: var(--uilib-split-button-menu-item-hover-bg);
 }
 
-:host .ui-lib-split-button__menu-item--disabled {
+ui-lib-split-button .ui-lib-split-button__menu-item--disabled {
   opacity: var(--uilib-split-button-menu-item-disabled-opacity);
   pointer-events: none;
 }
 
-:host .ui-lib-split-button__separator {
+ui-lib-split-button .ui-lib-split-button__separator {
   block-size: var(--uilib-border-width-1, 0.0625rem);
   margin: var(--uilib-space-1, 0.25rem) 0;
   background: var(--uilib-split-button-separator-color);
 }
 
-:host .ui-lib-split-button__loading-icon {
+ui-lib-split-button .ui-lib-split-button__loading-icon {
   animation: uilib-split-button-spin 0.8s linear infinite;
 }
 
-:host.ui-lib-split-button--primary {
+ui-lib-split-button.ui-lib-split-button--primary {
   --uilib-split-button-bg: var(--uilib-button-primary-bg);
   --uilib-split-button-fg: var(--uilib-button-primary-fg);
   --uilib-split-button-border: var(--uilib-button-primary-border);
@@ -189,7 +189,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-primary-border);
 }
 
-:host.ui-lib-split-button--secondary {
+ui-lib-split-button.ui-lib-split-button--secondary {
   --uilib-split-button-bg: var(--uilib-button-secondary-bg);
   --uilib-split-button-fg: var(--uilib-button-secondary-fg);
   --uilib-split-button-border: var(--uilib-button-secondary-border);
@@ -198,7 +198,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-secondary-border);
 }
 
-:host.ui-lib-split-button--success {
+ui-lib-split-button.ui-lib-split-button--success {
   --uilib-split-button-bg: var(--uilib-button-success-bg);
   --uilib-split-button-fg: var(--uilib-button-success-fg);
   --uilib-split-button-border: var(--uilib-button-success-border);
@@ -207,7 +207,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-success-border);
 }
 
-:host.ui-lib-split-button--info {
+ui-lib-split-button.ui-lib-split-button--info {
   --uilib-split-button-bg: var(--uilib-button-info-bg);
   --uilib-split-button-fg: var(--uilib-button-info-fg);
   --uilib-split-button-border: var(--uilib-button-info-border);
@@ -216,7 +216,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-info-border);
 }
 
-:host.ui-lib-split-button--warning {
+ui-lib-split-button.ui-lib-split-button--warning {
   --uilib-split-button-bg: var(--uilib-button-warning-bg);
   --uilib-split-button-fg: var(--uilib-button-warning-fg);
   --uilib-split-button-border: var(--uilib-button-warning-border);
@@ -225,7 +225,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-warning-border);
 }
 
-:host.ui-lib-split-button--help {
+ui-lib-split-button.ui-lib-split-button--help {
   --uilib-split-button-bg: var(--uilib-button-help-bg);
   --uilib-split-button-fg: var(--uilib-button-help-fg);
   --uilib-split-button-border: var(--uilib-button-help-border);
@@ -234,7 +234,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-help-border);
 }
 
-:host.ui-lib-split-button--danger {
+ui-lib-split-button.ui-lib-split-button--danger {
   --uilib-split-button-bg: var(--uilib-button-danger-bg);
   --uilib-split-button-fg: var(--uilib-button-danger-fg);
   --uilib-split-button-border: var(--uilib-button-danger-border);
@@ -243,7 +243,7 @@
   --uilib-split-button-emphasis: var(--uilib-button-danger-border);
 }
 
-:host.ui-lib-split-button--contrast {
+ui-lib-split-button.ui-lib-split-button--contrast {
   --uilib-split-button-bg: var(--uilib-button-contrast-bg);
   --uilib-split-button-fg: var(--uilib-button-contrast-fg);
   --uilib-split-button-border: var(--uilib-button-contrast-border);
@@ -252,15 +252,15 @@
   --uilib-split-button-emphasis: var(--uilib-button-contrast-border);
 }
 
-:host.ui-lib-split-button--raised {
+ui-lib-split-button.ui-lib-split-button--raised {
   --uilib-split-button-shadow: var(--uilib-button-shadow-raised, var(--uilib-button-shadow, none));
 }
 
-:host.ui-lib-split-button--rounded {
+ui-lib-split-button.ui-lib-split-button--rounded {
   --uilib-split-button-radius: var(--uilib-button-radius-pill, var(--uilib-shape-pill, 999rem));
 }
 
-:host.ui-lib-split-button--text {
+ui-lib-split-button.ui-lib-split-button--text {
   --uilib-split-button-bg: transparent;
   --uilib-split-button-border: transparent;
   --uilib-split-button-fg: var(--uilib-split-button-emphasis);
@@ -278,7 +278,7 @@
   --uilib-split-button-shadow: none;
 }
 
-:host.ui-lib-split-button--outlined {
+ui-lib-split-button.ui-lib-split-button--outlined {
   --uilib-split-button-bg: transparent;
   --uilib-split-button-border: var(--uilib-split-button-emphasis);
   --uilib-split-button-fg: var(--uilib-split-button-emphasis);
@@ -291,7 +291,7 @@
   --uilib-split-button-divider-color: var(--uilib-split-button-emphasis);
 }
 
-:host.ui-lib-split-button--sm {
+ui-lib-split-button.ui-lib-split-button--sm {
   --uilib-split-button-padding: var(
     --uilib-button-padding-small,
     var(--uilib-space-1, 0.25rem) var(--uilib-space-3, 0.75rem)
@@ -303,7 +303,7 @@
   --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
 }
 
-:host.ui-lib-split-button--md {
+ui-lib-split-button.ui-lib-split-button--md {
   --uilib-split-button-padding: var(
     --uilib-button-padding-medium,
     var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem)
@@ -315,7 +315,7 @@
   --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
 }
 
-:host.ui-lib-split-button--lg {
+ui-lib-split-button.ui-lib-split-button--lg {
   --uilib-split-button-padding: var(
     --uilib-button-padding-large,
     var(--uilib-space-3, 0.75rem) var(--uilib-space-5, 1.25rem)
@@ -327,33 +327,33 @@
   --uilib-split-button-icon-size: var(--uilib-icon-size-md, 1.25rem);
 }
 
-:host.ui-lib-split-button--material {
+ui-lib-split-button.ui-lib-split-button--material {
   --uilib-split-button-radius: var(--uilib-button-radius, var(--uilib-shape-base, 0.5rem));
 }
 
-:host.ui-lib-split-button--bootstrap {
+ui-lib-split-button.ui-lib-split-button--bootstrap {
   --uilib-split-button-radius: var(--uilib-shape-base, 0.375rem);
 }
 
-:host.ui-lib-split-button--bootstrap .ui-lib-split-button__default-button,
-:host.ui-lib-split-button--bootstrap .ui-lib-split-button__menu-button {
+ui-lib-split-button.ui-lib-split-button--bootstrap .ui-lib-split-button__default-button,
+ui-lib-split-button.ui-lib-split-button--bootstrap .ui-lib-split-button__menu-button {
   border-width: var(--uilib-border-width-1, 0.0625rem);
 }
 
-:host.ui-lib-split-button--minimal {
+ui-lib-split-button.ui-lib-split-button--minimal {
   --uilib-split-button-radius: var(--uilib-shape-sharp, 0);
   --uilib-split-button-shadow: none;
 }
 
-:host.ui-lib-split-button--minimal:not(.ui-lib-split-button--rounded) {
+ui-lib-split-button.ui-lib-split-button--minimal:not(.ui-lib-split-button--rounded) {
   --uilib-split-button-radius: var(--uilib-shape-sharp, 0);
 }
 
-:host.ui-lib-split-button--loading .ui-lib-split-button__default-button {
+ui-lib-split-button.ui-lib-split-button--loading .ui-lib-split-button__default-button {
   cursor: wait;
 }
 
-:host.ui-lib-split-button--disabled {
+ui-lib-split-button.ui-lib-split-button--disabled {
   opacity: var(--uilib-split-button-disabled-opacity);
 }
 
@@ -376,14 +376,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :host .ui-lib-split-button__default-button,
-  :host .ui-lib-split-button__menu-button,
-  :host .ui-lib-split-button__menu-item {
+  ui-lib-split-button .ui-lib-split-button__default-button,
+  ui-lib-split-button .ui-lib-split-button__menu-button,
+  ui-lib-split-button .ui-lib-split-button__menu-item {
     transition: none;
   }
 
-  :host .ui-lib-split-button__menu,
-  :host .ui-lib-split-button__loading-icon {
+  ui-lib-split-button .ui-lib-split-button__menu,
+  ui-lib-split-button .ui-lib-split-button__loading-icon {
     animation: none;
   }
 }

@@ -4,9 +4,9 @@
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
-// Default (material) tokens
+// Default (material) tokens — scoped to the component host element
 // ---------------------------------------------------------------------------
-:root {
+ui-lib-slider {
   // Track
   --uilib-slider-track-color: #e0e0e0;
   --uilib-slider-track-border-radius: 2px;
@@ -47,7 +47,7 @@
 // ---------------------------------------------------------------------------
 // Dark mode token overrides
 // ---------------------------------------------------------------------------
-[data-theme='dark'] {
+[data-theme='dark'] ui-lib-slider {
   --uilib-slider-track-color: #374151;
   --uilib-slider-fill-color: #818cf8;
   --uilib-slider-handle-bg: #1f2937;
