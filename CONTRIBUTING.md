@@ -206,6 +206,7 @@ Each component should support these variants:
 - Ensure keyboard navigation
 - Test with screen readers
 - Follow WCAG 2.1 guidelines
+- Full HTML/ARIA standards: [`docs/standards/HTML-STANDARDS.md`](./docs/standards/HTML-STANDARDS.md)
 
 ## Accessibility Requirements
 
@@ -219,10 +220,11 @@ All new components must:
    - Use semantic HTML where possible
    - Apply appropriate ARIA roles and attributes
    - Follow WAI-ARIA Authoring Practices
+   - Every ARIA role must include all required properties (enforced by ESLint)
 
 3. **Support keyboard navigation**
    - All interactive elements must be focusable
-   - Include appropriate keyboard shortcuts
+   - Include appropriate keyboard shortcuts per WAI-ARIA widget pattern
    - Document keyboard interaction
 
 4. **Announce dynamic changes**
@@ -233,6 +235,26 @@ All new components must:
    - Add accessibility section to component docs
    - Include keyboard interaction table
    - List ARIA attributes used
+
+6. **ESLint HTML template rules** (13 rules enforced — full list in [`docs/standards/HTML-STANDARDS.md`](./docs/standards/HTML-STANDARDS.md)):
+
+   | Rule | Severity |
+   | ---- | -------- |
+   | `alt-text` | error |
+   | `elements-content` | error |
+   | `label-has-associated-control` | error |
+   | `no-positive-tabindex` | error |
+   | `valid-aria` | error |
+   | `role-has-required-aria-props` | error |
+   | `prefer-control-flow` | error |
+   | `click-events-have-key-events` | warning |
+   | `mouse-events-have-key-events` | warning |
+   | `interactive-supports-focus` | warning |
+   | `no-autofocus` | warning |
+   | `use-track-by-function` | warning |
+   | `prefer-self-closing-tags` | warning |
+
+   Run: `npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0`
 
 ## 🚀 Pull Request Process
 

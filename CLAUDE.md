@@ -79,6 +79,13 @@ These rules apply to every task, no exceptions:
 - **Explicit return types** on every method, getter, and function — no inference (`computed<Type>((): Type => ...)`)
 - **Angular block syntax** — `@if`, `@for (x of y; track z)`, `@switch` — never `*ngIf` / `*ngFor`
 - **No cross-entry-point relative imports** — use package paths: `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. Relative paths are fine *within* the same entry point. Full rules: `LIBRARY_CONVENTIONS.md → Cross-Entry Import Rule`.
+- **HTML templates** — see [`docs/standards/HTML-STANDARDS.md`](./docs/standards/HTML-STANDARDS.md) for the full library-specific standard. Key rules unique to this library:
+  - **No hard-coded heading levels** (`<h1>`–`<h3>`) — heading level must be an input so consumers own the document outline
+  - **ARIA widget role completeness** — every ARIA role must include all required aria-* properties (enforced by ESLint `role-has-required-aria-props`)
+  - **WAI-ARIA keyboard patterns** — implement the exact keyboard contract for the widget type (listbox, combobox, tree, grid, etc.)
+  - **Content projection slots** follow `uilib-` prefix convention: `<ng-content select="[uilib-header]" />`
+  - **Host bindings** must set both `[attr.disabled]` and `[attr.aria-disabled]` in sync
+  - 13 `@angular-eslint/template/*` rules enforced — `errors` block PRs; `warnings` must be clean before marking a component complete
 - **Public input types are string unions** — `'material' | 'bootstrap' | 'minimal'` — not enum, not constants object
 - **No raw hex/px in CSS rule bodies** — always use a `var(--uilib-*)` CSS custom property. Exception: hex may appear as the *default value* in a CSS custom property definition (`--uilib-foo: #hex`) — that IS the token level. When a global palette token exists for that color, use `var(--uilib-color-neutral-300, #hex)` instead of bare hex. When the color is appearance-specific, add it as a constant to `design-tokens.ts` and link back from the SCSS comment. Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule`.
 - **Every new component SCSS file must be wrapped in `@layer uilib.components { }`** — all library SCSS lives inside named cascade layers so consumer CSS always wins without specificity battles. `themes.scss` uses `@layer uilib.tokens { }`. Exception: `high-contrast.scss` stays outside layers. Full rules + rationale: `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule` and `docs/architecture/ADR_CSS_LAYER_ADOPTION.md`.
@@ -99,22 +106,22 @@ These rules apply to every task, no exceptions:
 
 ## Active Anti-Patterns (will cause regressions)
 
-| Anti-pattern | Correct approach |
-|---|---|
-| Relative import across entry points (`from '../button'`) | Use `ui-lib-custom/<entry>` package paths (`from 'ui-lib-custom/button'`) |
-| Missing `ViewEncapsulation.None` | Always add it |
-| Type inference on `computed()` | Annotate: `computed<T>((): T => ...)` |
-| Replacing public string unions with constants | Keep public types as union literals |
-| Raw hex in CSS rule bodies (`.foo { color: #hex }`) | Add to `design-tokens.ts`, use `var(--uilib-*)` |
-| Hex as CSS variable default when global token exists | Use `var(--uilib-color-neutral-300, #hex)` — token first, hex as CSS fallback |
-| Adding PrimeNG/Material to demo pages | Use `ui-lib-*` equivalents |
-| `enum` instead of `as const` | `export const X = { ... } as const` |
-| `on*` prefix on outputs | Remove prefix: `buttonClick`, `checkboxChange`, `slideEnd` |
-| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, …) | Add component qualifier: `buttonClick` not `click`; `checkboxChange` not `change`; `dateSelect` not `select` |
-| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Give it a distinct name (`treeChange` not `selectionChange`); `model()` owns `{name}Change` for `[(binding)]` |
-| `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs | Use imperative `addEventListener` in the constructor — see `cascade-select.ts` |
-| `uilib-` as element selector prefix | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*` |
-| New component SCSS file without `@layer uilib.components { }` wrapper | Wrap entire file: `@layer uilib.components { ... }` — see `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule` |
+| Anti-pattern                                                                                     | Correct approach                                                                                              |
+|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Relative import across entry points (`from '../button'`)                                         | Use `ui-lib-custom/<entry>` package paths (`from 'ui-lib-custom/button'`)                                     |
+| Missing `ViewEncapsulation.None`                                                                 | Always add it                                                                                                 |
+| Type inference on `computed()`                                                                   | Annotate: `computed<T>((): T => ...)`                                                                         |
+| Replacing public string unions with constants                                                    | Keep public types as union literals                                                                           |
+| Raw hex in CSS rule bodies (`.foo { color: #hex }`)                                              | Add to `design-tokens.ts`, use `var(--uilib-*)`                                                               |
+| Hex as CSS variable default when global token exists                                             | Use `var(--uilib-color-neutral-300, #hex)` — token first, hex as CSS fallback                                 |
+| Adding PrimeNG/Material to demo pages                                                            | Use `ui-lib-*` equivalents                                                                                    |
+| `enum` instead of `as const`                                                                     | `export const X = { ... } as const`                                                                           |
+| `on*` prefix on outputs                                                                          | Remove prefix: `buttonClick`, `checkboxChange`, `slideEnd`                                                    |
+| Output named after a native DOM event (`click`, `input`, `focus`, `blur`, `change`, `select`, …) | Add component qualifier: `buttonClick` not `click`; `checkboxChange` not `change`; `dateSelect` not `select`  |
+| Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal         | Give it a distinct name (`treeChange` not `selectionChange`); `model()` owns `{name}Change` for `[(binding)]` |
+| `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs              | Use imperative `addEventListener` in the constructor — see `cascade-select.ts`                                |
+| `uilib-` as element selector prefix                                                              | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*`                                    |
+| New component SCSS file without `@layer uilib.components { }` wrapper                            | Wrap entire file: `@layer uilib.components { ... }` — see `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule`   |
 
 ---
 
@@ -166,13 +173,13 @@ npm run verify:tree-shaking        # Tree-shaking guard
 npm run storybook                  # Storybook (cross-env sets NODE_ENV)
 npm run typecheck                  # TypeScript type-check all projects (no emit)
 
-# Lint — run after every component creation or edit
+# Lint — run after every component creation or edit (covers .ts AND .html)
 npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0
 npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 ```
 
 **Git hooks (via Husky):**
-- **pre-commit** — runs `lint-staged` (ESLint + Prettier on staged `.ts`/`.scss` files)
+- **pre-commit** — runs `lint-staged` (ESLint on staged `.ts`/`.html` + Prettier on staged `.ts` + Stylelint on staged `.scss`)
 - **pre-push** — runs `npm run typecheck` (full TS type-check across all five tsconfigs)
 
 **Windows shell note:** If PowerShell blocks `.ps1` shims, run `.cmd` versions from `bash.exe` (`npx.cmd`, `npm.cmd`). Record any workarounds in the session handoff.
