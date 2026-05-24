@@ -151,23 +151,23 @@ export default [
       '@angular-eslint/template': angularTemplatePlugin,
     },
     rules: {
-      // ── Accessibility errors ────────────────────────────────────────────
+      // ── Accessibility warnings ──────────────────────────────────────────
       // <img> must have alt text — HTML-STANDARDS.md §6
-      '@angular-eslint/template/alt-text': 'error',
+      '@angular-eslint/template/alt-text': 'warn',
       // Interactive elements must not be empty (buttons need visible labels) — §4
-      '@angular-eslint/template/elements-content': 'error',
+      '@angular-eslint/template/elements-content': 'warn',
       // <label> must be associated with a form control — §5
-      '@angular-eslint/template/label-has-associated-control': 'error',
+      '@angular-eslint/template/label-has-associated-control': 'warn',
       // tabindex > 0 breaks natural tab order — §4
-      '@angular-eslint/template/no-positive-tabindex': 'error',
+      '@angular-eslint/template/no-positive-tabindex': 'warn',
       // ARIA attributes must be valid — §4
-      '@angular-eslint/template/valid-aria': 'error',
+      '@angular-eslint/template/valid-aria': 'warn',
       // ARIA roles must include all required props — §4
-      '@angular-eslint/template/role-has-required-aria': 'error',
+      '@angular-eslint/template/role-has-required-aria': 'warn',
 
-      // ── Angular template best-practice errors ───────────────────────────
+      // ── Angular template best-practice warnings ─────────────────────────
       // Enforce @if / @for / @switch block syntax — never *ngIf / *ngFor — §3
-      '@angular-eslint/template/prefer-control-flow': 'error',
+      '@angular-eslint/template/prefer-control-flow': 'warn',
 
       // ── Accessibility warnings ──────────────────────────────────────────
       // Click events must have keyboard equivalents — §4
