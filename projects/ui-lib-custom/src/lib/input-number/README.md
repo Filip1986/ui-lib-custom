@@ -2,7 +2,7 @@
 
 **Selector:** `ui-lib-input-number`
 **Package:** `ui-lib-custom/input-number`
-**Content projection:** no — renders its own `<input>` and spinner buttons inline (template is inline in the component decorator)
+**Content projection:** no — renders its own `<input>` and spinner buttons via `input-number.component.html`
 
 > `value` is a `model()` signal — use `[(value)]` for two-way binding in addition to standard `ngModel` / reactive forms.
 
@@ -52,7 +52,7 @@
 | `valueChange` | `{ originalEvent: InputEvent; value: number \| null }` | Fired on each user-driven value change. Named `valueChange` (not `input`) to avoid shadowing the native DOM `input` event. |
 | `numberFocus` | `FocusEvent` | Input received focus. Named `numberFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
 | `numberBlur` | `FocusEvent` | Input lost focus. Named `numberBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
-| `keyDown` | `KeyboardEvent` | Key pressed inside the input |
+| `numberKeyDown` | `KeyboardEvent` | Key pressed inside the input. Named `numberKeyDown` (not `keyDown`) to avoid shadowing the native DOM `keydown` event. |
 | `clear` | `void` | Clear button clicked |
 
 ## Usage

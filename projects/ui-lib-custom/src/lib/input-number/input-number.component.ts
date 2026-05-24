@@ -133,7 +133,7 @@ export class InputNumberComponent implements ControlValueAccessor {
   }> = output<{ originalEvent: InputEvent; value: number | null }>();
   public readonly numberFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   public readonly numberBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
-  public readonly keyDown: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
+  public readonly numberKeyDown: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
   public readonly clear: OutputEmitterRef<void> = output<void>();
 
   private readonly inputElement: Signal<ElementRef<HTMLInputElement> | undefined> =
@@ -273,7 +273,7 @@ export class InputNumberComponent implements ControlValueAccessor {
 
   public onNativeKeyDown(event: KeyboardEvent): void {
     if (this.isControlDisabled() || this.readonly()) {
-      this.keyDown.emit(event);
+      this.numberKeyDown.emit(event);
       return;
     }
 
@@ -313,7 +313,7 @@ export class InputNumberComponent implements ControlValueAccessor {
         break;
     }
 
-    this.keyDown.emit(event);
+    this.numberKeyDown.emit(event);
   }
 
   public onSpinMouseDown(event: MouseEvent, direction: -1 | 1): void {
