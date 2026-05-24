@@ -92,7 +92,7 @@ Provide either `ariaLabel` or `ariaLabelledby` whenever no visible label exists.
 <ui-lib-rating [(ngModel)]="rating" />
 
 <!-- ten stars, no cancel button, reactive form -->
-<ui-lib-rating [stars]="10" [cancel]="false" [formControl]="ratingControl" (change)="onRate($event)" />
+<ui-lib-rating [stars]="10" [cancel]="false" [formControl]="ratingControl" (ratingChange)="onRate($event)" />
 
 <!-- read-only display (role="img", aria-label describes the value) -->
 <ui-lib-rating [readonly]="true" [(ngModel)]="rating" />
