@@ -23,7 +23,7 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
 import { Tab } from './tab';
@@ -75,7 +75,7 @@ interface ScrollMetrics {
 @Component({
   selector: 'ui-lib-tabs',
   standalone: true,
-  imports: [CommonModule, TabPanel, Icon],
+  imports: [NgTemplateOutlet, TabPanel, Icon],
   templateUrl: './tabs.html',
   styleUrl: './tabs.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -91,7 +91,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   public readonly tabsId: string = `ui-lib-tabs-${++nextTabsInstanceId}`;
 
   private readonly elementRef: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
@@ -151,27 +151,27 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private readonly canScrollPrev: WritableSignal<boolean> = signal<boolean>(false);
   private readonly canScrollNext: WritableSignal<boolean> = signal<boolean>(false);
   private readonly scrollable: Signal<boolean> = computed<boolean>(
-    (): boolean => this.scrollBehavior() === 'arrows'
+    (): boolean => this.scrollBehavior() === 'arrows',
   );
   private readonly showScrollButtons: Signal<boolean> = computed<boolean>(
-    (): boolean => this.scrollable() && this.overflowDetected()
+    (): boolean => this.scrollable() && this.overflowDetected(),
   );
   private readonly scrollAxis: Signal<'horizontal' | 'vertical'> = computed<
     'horizontal' | 'vertical'
   >((): 'horizontal' | 'vertical' =>
-    this.orientation() === 'vertical' ? 'vertical' : 'horizontal'
+    this.orientation() === 'vertical' ? 'vertical' : 'horizontal',
   );
   private readonly isNavigationMode: Signal<boolean> = computed<boolean>(
-    (): boolean => this.mode() === 'navigation'
+    (): boolean => this.mode() === 'navigation',
   );
   private readonly tabListId: Signal<string> = computed<string>(
-    (): string => `${this.tabsId}-tablist`
+    (): string => `${this.tabsId}-tablist`,
   );
   protected readonly hostDir: Signal<'ltr' | 'rtl' | null> = computed<'ltr' | 'rtl' | null>(
     (): 'ltr' | 'rtl' | null => {
       const explicit: 'ltr' | 'rtl' | 'auto' = this.dir();
       return explicit === 'auto' ? null : explicit;
-    }
+    },
   );
   protected readonly themeVariants: typeof SHARED_THEME_VARIANTS = SHARED_THEME_VARIANTS;
 
@@ -231,11 +231,11 @@ export class Tabs implements OnDestroy, AfterViewInit {
           lazy: effectiveLazy,
         };
       });
-    }
+    },
   );
 
   private readonly controlled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.selectedValue() !== null || this.selectedIndex() !== null
+    (): boolean => this.selectedValue() !== null || this.selectedIndex() !== null,
   );
 
   private readonly resolvedSelection: Signal<TabsSelection> = computed<TabsSelection>(
@@ -268,14 +268,14 @@ export class Tabs implements OnDestroy, AfterViewInit {
       }
 
       const firstEnabled: TabsContextItem | undefined = tabs.find(
-        (t: TabsContextItem): boolean => !t.disabled
+        (t: TabsContextItem): boolean => !t.disabled,
       );
       return { value: firstEnabled?.value ?? null, index: firstEnabled?.index ?? -1 };
-    }
+    },
   );
 
   public readonly activeSelection: Signal<TabsSelection> = computed<TabsSelection>(
-    (): TabsSelection => (this.controlled() ? this.resolvedSelection() : this.internalSelection())
+    (): TabsSelection => (this.controlled() ? this.resolvedSelection() : this.internalSelection()),
   );
 
   private readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
@@ -294,7 +294,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   });
 
   public readonly effectiveVariant: Signal<TabsVariant> = computed<TabsVariant>(
-    (): TabsVariant => this.variant() ?? this.themeConfig.variant()
+    (): TabsVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly tabsClasses: Signal<string> = computed<string>((): string => {
@@ -444,7 +444,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   /** Emits close events for closable tabs. */
   public onClose(
     tab: { value: TabsValue | null; index: number; disabled: boolean },
-    event: MouseEvent
+    event: MouseEvent,
   ): void {
     event.stopPropagation();
     if (tab.disabled || this.disabled()) {
@@ -644,7 +644,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
         list,
         this.isRtl(),
         this.rtlScrollAxis,
-        max
+        max,
       );
       const offset: number = this.isRtl()
         ? listRect.right - btnRect.right + scrollPos
@@ -819,7 +819,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       list,
       this.scrollAxis(),
       this.scrollIsRtl,
-      this.rtlScrollAxis
+      this.rtlScrollAxis,
     );
 
     this.overflowDetected.set(metrics.max > 1);
@@ -831,7 +831,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     list: HTMLElement,
     axis: 'horizontal' | 'vertical',
     isRtl: boolean,
-    rtlAxis: RtlScrollAxis
+    rtlAxis: RtlScrollAxis,
   ): ScrollMetrics {
     if (axis === 'vertical') {
       const max: number = Math.max(0, list.scrollHeight - list.clientHeight);
@@ -848,7 +848,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     list: HTMLElement,
     isRtl: boolean,
     rtlAxis: RtlScrollAxis,
-    max: number
+    max: number,
   ): number {
     if (!isRtl) {
       return list.scrollLeft;
@@ -870,7 +870,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     axis: 'horizontal' | 'vertical',
     position: number,
     isRtl: boolean,
-    rtlAxis: RtlScrollAxis
+    rtlAxis: RtlScrollAxis,
   ): void {
     if (axis === 'vertical') {
       list.scrollTo({ top: position, behavior: this.scrollBehaviorMode() });
@@ -911,7 +911,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       list,
       axis,
       this.scrollIsRtl,
-      this.rtlScrollAxis
+      this.rtlScrollAxis,
     );
     const baseDelta: number = direction === 'prev' ? -step : step;
     const delta: number = this.isRtl() && axis === 'horizontal' ? -baseDelta : baseDelta;

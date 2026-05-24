@@ -26,7 +26,7 @@ import type { InputSignal, Signal, TemplateRef } from '@angular/core';
 @Component({
   selector: 'ui-lib-stepper-panel',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './stepper-panel.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

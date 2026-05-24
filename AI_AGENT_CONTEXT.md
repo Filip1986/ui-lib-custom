@@ -82,6 +82,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [convention audit completion — keyDown rename, CommonModule → specific imports, inline template extraction]
+Changed:
+  input-number.component.ts: keyDown → numberKeyDown (output declaration + 2 emit sites) — PR #239
+  input-number/README.md: output table updated with numberKeyDown name and shadowing note — PR #239
+  LIBRARY_CONVENTIONS.md: added "Keyboard key pressed" row (keydown/keyDown → {component}KeyDown) to canonical output names table — PR #239
+  18 library components: CommonModule → specific imports (NgClass, NgStyle, NgTemplateOutlet as needed; removed entirely where unused) — PR #240
+  10 library components: inline template: strings extracted to .html templateUrl files — PR #240
+  input-mask.component.html: bonus a11y fix — clear <span (click)> → <button type="button" aria-label="Clear"> — PR #240
+State: ng build → PASS; typecheck → PASS; eslint → 0 warnings; all affected tests pass
+Verification: npm run build (PASS), npx eslint.cmd 28 changed files --max-warnings 0 (PASS), jest input-number (146/146), input-mask (62/62), accordion (51/51), rating (81/81), carousel (70/70), stepper (61/61)
+Next step: No remaining audit items. Next milestone candidates: broader axe-core audit pass, new premium component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
+
 Date: 2026-05-24 [docs(standards): JS-STANDARDS.md + standards README created]
 Changed:
   docs/standards/JS-STANDARDS.md: Created — JavaScript runtime standard for this component library.
@@ -121,55 +133,10 @@ Next step: Fix medium issues from audit — add `readonly` to order-list and pic
 
 Date: 2026-05-24 [themes refactor — shape-pill token, dark mixin deduplication, themes.css full rewrite]
 Changed:
-  themes.scss: added --uilib-shape-pill: 9999px to universal tokens; wired --uilib-radius-full to it;
-    replaced duplicate sections 3 and 3b with @mixin dark-theme-tokens — single source of truth for
-    all dark overrides; OS prefers-color-scheme fallback was missing 26 tokens (fixed)
-  themes.css: full rewrite — universal tokens in :root only; [data-theme='dark'] trimmed to overrides
-    only (removed ~110 lines of duplicated spacing/layout tokens); added @media (prefers-color-scheme: dark)
-    block that was completely absent; added @layer declarations; added missing tokens (shape, radius, 
-    font-size, icon sizes, transitions, focus-ring, shadows, dialog, input, select, checkbox, accordion, badge)
-  AI_AGENT_CONTEXT.md: handoff updated
-State: 6040/6040 tests passing; ng build → PASS; typecheck → PASS; all 7 tasks marked completed
-Verification: npm test (6040/6040), npm run build (PASS), git push → pre-push typecheck PASS
-Terminal notes: none
-Next step: No open tasks. Next milestone candidates: broader component axe-core audit pass, new premium
-  component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
-
-Date: 2026-05-24 [SCSS token cleanup — component-scoped tokens, :root removal, :host fix, task list cleared]
-Changed:
-  badge.scss: added --uilib-badge-radius / --uilib-badge-radius-pill / --uilib-badge-radius-dot intermediate
-    tokens; pill now defaults to 9999px, dot to 50%, both still inherit from --uilib-shape-base
-  animate-on-scroll.scss: removed :root { --uilib-animate-on-scroll-* } block; moved token defaults
-    onto a grouped .uilib-aos-* selector so they're scoped to the elements that consume them
-  editor.scss: replaced all 25 :host(.ui-lib-editor--*) selectors with ui-lib-editor.ui-lib-editor--*
-    — :host() is a no-op under ViewEncapsulation.None; state/variant/size rules were previously inert
-  Task list: #2 #3 #4 #5 #6 #7 all marked completed (task #5 / _theme-mixins.scss was already deleted;
-    tasks #6 and #7 were shipped in prior sessions)
-State: 25/25 badge + 45/45 editor tests pass; ng build → PASS; typecheck → PASS; eslint → 0 warnings
-Verification: node_modules/.bin/jest.cmd --testPathPatterns="badge" (25/25); --testPathPatterns="editor" (45/45); ng build (PASS); git push → pre-push typecheck PASS
-Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows; pipe | in --testPathPatterns breaks on cmd, run patterns separately
-Next step: Task #1 (in_progress) — Refactor themes.scss: extract universal tokens, add radius/shadow globals, deduplicate dark block
-
-
-Date: 2026-05-23 [Dark-mode consolidation — eliminated all 4 parallel dark-mode systems]
-Changed:
-  Component SCSS files — all 20 migrated to inline scoped dark-mode blocks:
-  - layout/stack.scss, inline.scss, grid.scss, container.scss
-  - icon/icon.scss, alert/alert.scss, badge/badge.scss
-  - input/input.scss, select/select.scss, checkbox/checkbox.scss
-  - select-button/select-button.scss, tabs/tabs.scss
-  - accordion/accordion.scss, accordion/accordion-panel.scss
-  - radio-button/radio-button.scss, rating/rating.scss
-  - toggle-switch/toggle-switch.scss (replaced @include with inline tokens)
-  - card/card.scss (replaced @include + standardized selector to ui-lib-card)
-  - dialog/dialog.component.scss (replaced @include + standardized media-query selector)
-  - button/button.scss (30-token mixin inlined; bare hex → var(--uilib-color-neutral-950, #0b1220))
-  Pattern: [data-theme='dark'] ui-lib-<component> { } + @media (prefers-color-scheme: dark) block
-  styles/dark-theme.scss → emptied (was opt-in mixin aggregator; now superseded)
-  styles/light-theme.scss → emptied (tokens in themes.scss Section 2)
-  styles/_theme-mixins.scss → zero consumers; safe to delete
-State: 6040/6040 tests pass (226 suites). ng build ui-lib-custom → zero warnings/errors.
-Verification: npm test → 6040/6040; npm run build → PASS
+  themes.scss/themes.css: full rewrite — universal tokens, deduplicated dark block, prefers-color-scheme fallback added
+State: 6040/6040 tests passing; ng build → PASS; typecheck → PASS
+Verification: npm test (6040/6040), npm run build (PASS)
+Next step: No open tasks.
 Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows
 Next step: Delete _theme-mixins.scss (confirmed zero consumers). Then: runtime variant switcher; CSS @layer adoption.
 

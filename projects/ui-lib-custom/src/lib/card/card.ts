@@ -12,7 +12,7 @@ import {
   type OutputEmitterRef,
   type Signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -35,7 +35,7 @@ let nextCardId: number = 0;
 @Component({
   selector: 'ui-lib-card',
   standalone: true,
-  imports: [CommonModule, Icon],
+  imports: [NgClass, Icon],
   templateUrl: './card.html',
   styleUrl: './card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,13 +70,13 @@ export class Card {
   public readonly closed: OutputEmitterRef<void> = output<void>();
 
   public readonly effectiveVariant: Signal<CardVariant> = computed<CardVariant>(
-    (): CardVariant => this.variant() ?? this.themeService.variant()
+    (): CardVariant => this.variant() ?? this.themeService.variant(),
   );
   public readonly headerVisible: Signal<boolean> = computed<boolean>(
-    (): boolean => this.showHeader() !== false
+    (): boolean => this.showHeader() !== false,
   );
   public readonly footerVisible: Signal<boolean> = computed<boolean>(
-    (): boolean => this.showFooter() !== false
+    (): boolean => this.showFooter() !== false,
   );
 
   public readonly cardClasses: Signal<string> = computed<string>((): string => {
@@ -184,7 +184,7 @@ export class Card {
 
   private mergePreset(
     base: ThemePreset,
-    config: { colors?: Partial<ThemePresetColors>; variant?: ThemeVariant }
+    config: { colors?: Partial<ThemePresetColors>; variant?: ThemeVariant },
   ): ThemePreset {
     if (!config.colors && !config.variant) {
       return base;

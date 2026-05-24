@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -42,7 +41,7 @@ let nextRadioButtonId: number = 0;
 @Component({
   selector: 'ui-lib-radio-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './radio-button.html',
   styleUrl: './radio-button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

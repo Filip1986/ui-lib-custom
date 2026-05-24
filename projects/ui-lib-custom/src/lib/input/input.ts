@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -29,7 +28,7 @@ let nextInputId: number = 0;
 @Component({
   selector: 'ui-lib-input',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './input.html',
   styleUrl: './input.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -77,16 +76,16 @@ export class UiLibInput implements ControlValueAccessor {
 
   public readonly inputId: string = `ui-lib-input-${nextInputId++}`;
   public readonly controlId: Signal<string> = computed<string>(
-    (): string => this.id() ?? this.inputId
+    (): string => this.id() ?? this.inputId,
   );
   public readonly errorId: Signal<string> = computed<string>(
-    (): string => `${this.controlId()}-error`
+    (): string => `${this.controlId()}-error`,
   );
   public readonly hintId: Signal<string> = computed<string>(
-    (): string => `${this.controlId()}-hint`
+    (): string => `${this.controlId()}-hint`,
   );
   public readonly isInvalid: Signal<boolean> = computed<boolean>(
-    (): boolean => this.invalid() || Boolean(this.error())
+    (): boolean => this.invalid() || Boolean(this.error()),
   );
   public readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -94,10 +93,10 @@ export class UiLibInput implements ControlValueAccessor {
       if (this.error()) parts.push(this.errorId());
       if (this.hint()) parts.push(this.hintId());
       return parts.length > 0 ? parts.join(' ') : null;
-    }
+    },
   );
   public readonly displayPlaceholder: Signal<string> = computed<string>((): string =>
-    this.labelFloat() === 'over' ? this.placeholder() : ''
+    this.labelFloat() === 'over' ? this.placeholder() : '',
   );
   public readonly inputType: Signal<InputType> = computed<InputType>((): InputType => {
     if (this.type() === 'password' && this.showTogglePassword()) {
@@ -109,7 +108,7 @@ export class UiLibInput implements ControlValueAccessor {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   public readonly effectiveVariant: Signal<InputVariant> = computed<InputVariant>(
-    (): InputVariant => this.variant() ?? this.themeConfig.variant()
+    (): InputVariant => this.variant() ?? this.themeConfig.variant(),
   );
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -131,10 +130,10 @@ export class UiLibInput implements ControlValueAccessor {
     return this.focused() || Boolean(this.value());
   });
   public readonly isFilled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.value().length > 0
+    (): boolean => this.value().length > 0,
   );
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this._disabled()
+    (): boolean => this.disabled() || this._disabled(),
   );
   public readonly currentLength: Signal<number> = computed<number>((): number => {
     const value: string = this.value();

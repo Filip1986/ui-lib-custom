@@ -10,7 +10,7 @@ import {
   output,
 } from '@angular/core';
 import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { StepperPanel } from './stepper-panel';
 import type {
@@ -68,7 +68,7 @@ let nextStepperId: number = 0;
 @Component({
   selector: 'ui-lib-stepper',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   templateUrl: './stepper.html',
   styleUrl: './stepper.scss',
   encapsulation: ViewEncapsulation.None,
@@ -111,7 +111,7 @@ export class Stepper {
   public readonly panels: Signal<readonly StepperPanel[]> = contentChildren(StepperPanel);
 
   private readonly effectiveVariant: Signal<StepperVariant> = computed<StepperVariant>(
-    (): StepperVariant => this.variant() ?? this.themeConfig.variant()
+    (): StepperVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes for the host element. */
@@ -130,7 +130,7 @@ export class Stepper {
 
   /** Whether the component is in horizontal orientation. */
   public readonly isHorizontal: Signal<boolean> = computed<boolean>(
-    (): boolean => this.orientation() === 'horizontal'
+    (): boolean => this.orientation() === 'horizontal',
   );
 
   /** Computed step metadata used for rendering, styling, and accessibility. */
@@ -138,8 +138,8 @@ export class Stepper {
     readonly StepperRenderItem[]
   >((): readonly StepperRenderItem[] =>
     this.panels().map(
-      (panel: StepperPanel, index: number): StepperRenderItem => this.buildStepItem(panel, index)
-    )
+      (panel: StepperPanel, index: number): StepperRenderItem => this.buildStepItem(panel, index),
+    ),
   );
 
   /** Stable DOM id for a step header element. */
@@ -293,7 +293,7 @@ export class Stepper {
     if (event.key === 'Home') {
       event.preventDefault();
       const firstIndex: number = allPanels.findIndex(
-        (panel: StepperPanel, index: number): boolean => this.isStepAccessible(index, panel)
+        (panel: StepperPanel, index: number): boolean => this.isStepAccessible(index, panel),
       );
       if (firstIndex !== -1) {
         this.goToStep(firstIndex);

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -43,8 +42,8 @@ interface AccordionPanelContext {
 @Component({
   selector: 'ui-lib-accordion',
   standalone: true,
-  imports: [CommonModule],
-  template: '<ng-content />',
+  imports: [],
+  templateUrl: './accordion.html',
   styleUrl: './accordion.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -67,7 +66,7 @@ export class Accordion implements AccordionContext {
   public readonly accordionId: string = `ui-lib-accordion-${String(++nextAccordionId)}`;
 
   public readonly variant: InputSignal<AccordionVariant | null> = input<AccordionVariant | null>(
-    null
+    null,
   );
   public readonly size: InputSignal<AccordionSize> = input<AccordionSize>('md');
   public readonly expandMode: InputSignal<AccordionExpandMode> =
@@ -85,7 +84,7 @@ export class Accordion implements AccordionContext {
   private readonly initialExpandedRef: string[] = this.expandedPanels();
   private readonly controlled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly internalExpanded: WritableSignal<Set<string>> = signal<Set<string>>(
-    new Set(this.defaultExpandedPanels())
+    new Set(this.defaultExpandedPanels()),
   );
   private readonly registeredPanels: Set<AccordionPanel> = new Set<AccordionPanel>();
 
@@ -119,7 +118,7 @@ export class Accordion implements AccordionContext {
   }
 
   public readonly resolvedVariant: Signal<AccordionVariant> = computed<AccordionVariant>(
-    (): AccordionVariant => this.variant() ?? this.themeConfig.variant()
+    (): AccordionVariant => this.variant() ?? this.themeConfig.variant(),
   );
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -150,7 +149,7 @@ export class Accordion implements AccordionContext {
   public togglePanel(panelId: string): void {
     const contexts: AccordionPanelContext[] = this.panelContexts();
     const ctx: AccordionPanelContext | undefined = contexts.find(
-      (c: AccordionPanelContext): boolean => c.id === panelId
+      (c: AccordionPanelContext): boolean => c.id === panelId,
     );
     if (!ctx || ctx.disabled) {
       return;
@@ -312,7 +311,7 @@ export class Accordion implements AccordionContext {
     }
     const contexts: AccordionPanelContext[] = this.panelContexts();
     return contexts.findIndex(
-      (ctx: AccordionPanelContext): boolean => ctx.panel.headerButton?.nativeElement === target
+      (ctx: AccordionPanelContext): boolean => ctx.panel.headerButton?.nativeElement === target,
     );
   }
 

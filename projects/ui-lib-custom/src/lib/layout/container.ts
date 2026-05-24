@@ -34,7 +34,7 @@ const containerVar: (size: ContainerSize) => string = (size: ContainerSize): str
 @Component({
   selector: 'ui-lib-container',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './container.html',
   host: {
     '[style.width]': '"100%"',
     '[style.max-width]': '_maxWidth()',
@@ -70,7 +70,7 @@ export class Container {
 
   /** Computed max-width value */
   protected readonly _maxWidth: Signal<string> = computed<string>((): string =>
-    containerVar(this.size())
+    containerVar(this.size()),
   );
 
   /** Computed centered value (for host binding) */

@@ -29,7 +29,7 @@ let nextBadgeId: number = 0;
 @Component({
   selector: 'ui-lib-badge',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './badge.html',
   styleUrl: './badge.scss',
   host: {
     '[class]': 'badgeClasses()',
@@ -71,7 +71,7 @@ export class Badge {
 
   /** Auto-generated stable host id */
   public readonly id: Signal<string> = computed<string>(
-    (): string => `ui-lib-badge-${this.instanceId.toString()}`
+    (): string => `ui-lib-badge-${this.instanceId.toString()}`,
   );
 
   private readonly effectiveVariant: Signal<BadgeVariant> = computed<BadgeVariant>(
@@ -85,7 +85,7 @@ export class Badge {
         minimal: 'subtle',
       };
       return map[global];
-    }
+    },
   );
 
   /** Computed CSS classes for the badge element */
@@ -118,21 +118,21 @@ export class Badge {
 
   /** Computed role attribute for the badge, 'status' for dot badges */
   public readonly roleAttr: Signal<string | null> = computed<string | null>((): string | null =>
-    this.decorative() ? null : this.dot() ? 'status' : null
+    this.decorative() ? null : this.dot() ? 'status' : null,
   );
 
   /** Computed aria-hidden attribute for decorative badges */
   public readonly ariaHiddenAttr: Signal<'true' | null> = computed<'true' | null>(
-    (): 'true' | null => (this.decorative() ? 'true' : null)
+    (): 'true' | null => (this.decorative() ? 'true' : null),
   );
 
   /** Computed aria-live attribute for non-decorative status badges */
   public readonly ariaLiveAttr: Signal<'polite' | null> = computed<'polite' | null>(
-    (): 'polite' | null => (this.decorative() || !this.dot() ? null : 'polite')
+    (): 'polite' | null => (this.decorative() || !this.dot() ? null : 'polite'),
   );
 
   /** Computed aria-atomic attribute for non-decorative status badges */
   public readonly ariaAtomicAttr: Signal<'true' | null> = computed<'true' | null>(
-    (): 'true' | null => (this.decorative() || !this.dot() ? null : 'true')
+    (): 'true' | null => (this.decorative() || !this.dot() ? null : 'true'),
   );
 }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -50,7 +50,7 @@ export class AccordionToggleIcon {
 @Component({
   selector: 'ui-lib-accordion-panel',
   standalone: true,
-  imports: [CommonModule, Icon],
+  imports: [NgTemplateOutlet, Icon],
   templateUrl: './accordion-panel.html',
   styleUrl: './accordion-panel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -110,13 +110,13 @@ export class AccordionPanel implements OnDestroy {
   });
 
   public readonly hasCustomHeader: Signal<boolean> = computed<boolean>((): boolean =>
-    Boolean(this.headerTemplate())
+    Boolean(this.headerTemplate()),
   );
   public readonly resolvedId: Signal<string> = computed<string>(
-    (): string => this.value() ?? this.panelId()
+    (): string => this.value() ?? this.panelId(),
   );
   public readonly isExpanded: Signal<boolean> = computed<boolean>((): boolean =>
-    this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded()
+    this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded(),
   );
 
   public readonly headerId: Signal<string> = computed<string>((): string => {

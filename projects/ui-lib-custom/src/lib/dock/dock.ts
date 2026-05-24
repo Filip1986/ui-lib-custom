@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -57,7 +57,7 @@ export const DOCK_MAGNIFICATION_SPREAD: number = 2;
 @Component({
   selector: 'ui-lib-dock',
   standalone: true,
-  imports: [CommonModule, RouterModule, Icon],
+  imports: [NgTemplateOutlet, RouterModule, Icon],
   templateUrl: './dock.html',
   styleUrl: './dock.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -92,7 +92,7 @@ export class Dock {
    * Values between 1.2 and 2.5 work well visually.
    */
   public readonly magnificationLevel: InputSignal<number> = input<number>(
-    DOCK_DEFAULT_MAGNIFICATION_LEVEL
+    DOCK_DEFAULT_MAGNIFICATION_LEVEL,
   );
 
   /** Extra CSS class appended to the host element. */
@@ -144,12 +144,12 @@ export class Dock {
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<DockVariant> = computed<DockVariant>(
-    (): DockVariant => this.variant() ?? (this.themeConfig.variant() as DockVariant)
+    (): DockVariant => this.variant() ?? (this.themeConfig.variant() as DockVariant),
   );
 
   /** Filtered items — only those where `visible` is not explicitly false. */
   public readonly visibleItems: Signal<DockItem[]> = computed<DockItem[]>((): DockItem[] =>
-    this.items().filter((item: DockItem): boolean => item.visible !== false)
+    this.items().filter((item: DockItem): boolean => item.visible !== false),
   );
 
   /** Host CSS classes derived from current variant, size, position, and optional styleClass. */
