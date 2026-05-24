@@ -313,7 +313,7 @@ export class AutoCompleteDemoComponent {
       description: 'Fires (debounced) when user types; update [suggestions] in response.',
     },
     {
-      name: 'select',
+      name: 'optionSelect',
       type: 'AutoCompleteSelectEvent',
       description: 'Emits when an option is selected.',
     },
@@ -323,8 +323,9 @@ export class AutoCompleteDemoComponent {
       description: 'Emits when a chip is removed (multiple mode).',
     },
     { name: 'clearEvent', type: 'void', description: 'Emits when the clear button is clicked.' },
-    { name: 'focus', type: 'FocusEvent', description: 'Input focused.' },
-    { name: 'blur', type: 'FocusEvent', description: 'Input blurred.' },
+    { name: 'autocompleteFocus', type: 'FocusEvent', description: 'Input focused.' },
+    { name: 'autocompleteBlur', type: 'FocusEvent', description: 'Input blurred.' },
+    { name: 'autocompleteKeyUp', type: 'KeyboardEvent', description: 'Keyup on the input field.' },
     {
       name: 'dropdownClick',
       type: 'AutoCompleteDropdownClickEvent',
@@ -394,9 +395,9 @@ export class AutoCompleteDemoComponent {
       (group: DemoGroup): DemoGroup => ({
         ...group,
         items: group.items.filter((city: { label: string; value: string }): boolean =>
-          city.label.toLowerCase().includes(query)
+          city.label.toLowerCase().includes(query),
         ),
-      })
+      }),
     ).filter((group: DemoGroup): boolean => group.items.length > 0);
   }
 
@@ -409,7 +410,7 @@ export class AutoCompleteDemoComponent {
     }
 
     this.virtualSuggestions = AUTOCOMPLETE_LARGE_DATASET.filter(
-      (item: { label: string; value: string }): boolean => item.label.toLowerCase().includes(query)
+      (item: { label: string; value: string }): boolean => item.label.toLowerCase().includes(query),
     );
   }
 
@@ -435,7 +436,7 @@ export class AutoCompleteDemoComponent {
     return AUTOCOMPLETE_COUNTRIES.filter(
       (country: DemoCountry): boolean =>
         country.name.toLowerCase().includes(normalized) ||
-        country.code.toLowerCase().includes(normalized)
+        country.code.toLowerCase().includes(normalized),
     );
   }
   public readonly keyboardRows: KeyboardNavRow[] = [

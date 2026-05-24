@@ -140,7 +140,8 @@ export default [
       'jsdoc/require-description': 'off',
     },
   },
-  // Angular HTML template parsing (add template rules here when needed).
+  // Angular HTML template rules — accessibility and best practices.
+  // Full rationale: docs/standards/HTML-STANDARDS.md
   {
     files: ['**/*.html'],
     languageOptions: {
@@ -149,7 +150,41 @@ export default [
     plugins: {
       '@angular-eslint/template': angularTemplatePlugin,
     },
-    rules: {},
+    rules: {
+      // ── Accessibility warnings ──────────────────────────────────────────
+      // <img> must have alt text — HTML-STANDARDS.md §6
+      '@angular-eslint/template/alt-text': 'warn',
+      // Interactive elements must not be empty (buttons need visible labels) — §4
+      '@angular-eslint/template/elements-content': 'warn',
+      // <label> must be associated with a form control — §5
+      '@angular-eslint/template/label-has-associated-control': 'warn',
+      // tabindex > 0 breaks natural tab order — §4
+      '@angular-eslint/template/no-positive-tabindex': 'warn',
+      // ARIA attributes must be valid — §4
+      '@angular-eslint/template/valid-aria': 'warn',
+      // ARIA roles must include all required props — §4
+      '@angular-eslint/template/role-has-required-aria': 'warn',
+
+      // ── Angular template best-practice warnings ─────────────────────────
+      // Enforce @if / @for / @switch block syntax — never *ngIf / *ngFor — §3
+      '@angular-eslint/template/prefer-control-flow': 'warn',
+
+      // ── Accessibility warnings ──────────────────────────────────────────
+      // Click events must have keyboard equivalents — §4
+      '@angular-eslint/template/click-events-have-key-events': 'warn',
+      // Mouse events must have keyboard equivalents — §4
+      '@angular-eslint/template/mouse-events-have-key-events': 'warn',
+      // Interactive roles must be focusable — §4
+      '@angular-eslint/template/interactive-supports-focus': 'warn',
+      // autofocus is a11y-disruptive — §4
+      '@angular-eslint/template/no-autofocus': 'warn',
+
+      // ── Angular template best-practice warnings ─────────────────────────
+      // @for must have a track expression — §8
+      '@angular-eslint/template/use-track-by-function': 'warn',
+      // Prefer self-closing tags: <uilib-button /> not <uilib-button></uilib-button> — §3
+      '@angular-eslint/template/prefer-self-closing-tags': 'warn',
+    },
   },
   // NestJS controller heuristics: keep business logic out of controllers.
   {

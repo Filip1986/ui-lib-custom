@@ -92,7 +92,7 @@ type PanelPlacement = 'below' | 'above';
 export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDestroy {
   public readonly value: InputSignal<ColorPickerValue> = input<ColorPickerValue>(null);
   public readonly format: InputSignal<ColorFormat> = input<ColorFormat>(
-    COLOR_PICKER_DEFAULTS.Format
+    COLOR_PICKER_DEFAULTS.Format,
   );
   public readonly inline: InputSignal<boolean> = input<boolean>(COLOR_PICKER_DEFAULTS.Inline);
   public readonly variant: InputSignal<ColorPickerVariant | null> =
@@ -101,10 +101,10 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   public readonly inputId: InputSignal<string> = input<string>(COLOR_PICKER_DEFAULTS.InputId);
   public readonly tabindex: InputSignal<number> = input<number>(COLOR_PICKER_DEFAULTS.TabIndex);
   public readonly appendTo: InputSignal<ColorPickerAppendTo> = input<ColorPickerAppendTo>(
-    COLOR_PICKER_DEFAULTS.AppendTo
+    COLOR_PICKER_DEFAULTS.AppendTo,
   );
 
-  public readonly change: OutputEmitterRef<ColorPickerChangeEvent> =
+  public readonly colorChange: OutputEmitterRef<ColorPickerChangeEvent> =
     output<ColorPickerChangeEvent>();
   public readonly show: OutputEmitterRef<void> = output<void>();
   public readonly hide: OutputEmitterRef<void> = output<void>();
@@ -118,10 +118,10 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
 
   public readonly hue: WritableSignal<number> = signal<number>(COLOR_PICKER_DEFAULTS.InitialHue);
   public readonly saturation: WritableSignal<number> = signal<number>(
-    COLOR_PICKER_DEFAULTS.InitialSaturation
+    COLOR_PICKER_DEFAULTS.InitialSaturation,
   );
   public readonly brightness: WritableSignal<number> = signal<number>(
-    COLOR_PICKER_DEFAULTS.InitialBrightness
+    COLOR_PICKER_DEFAULTS.InitialBrightness,
   );
   public readonly panelVisible: WritableSignal<boolean> = signal<boolean>(false);
   public readonly panelPlacement: WritableSignal<PanelPlacement> = signal<PanelPlacement>('below');
@@ -143,11 +143,11 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   private onModelTouched: () => void = (): void => {};
 
   public readonly resolvedVariant: Signal<ColorPickerVariant> = computed<ColorPickerVariant>(
-    (): ColorPickerVariant => this.variant() ?? this.themeConfig.variant()
+    (): ColorPickerVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   public readonly resolvedInputId: Signal<string> = computed<string>((): string => {
@@ -159,27 +159,27 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   });
 
   public readonly triggerId: Signal<string> = computed<string>(
-    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.TriggerSuffix}`
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.TriggerSuffix}`,
   );
 
   public readonly panelId: Signal<string> = computed<string>(
-    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.PanelSuffix}`
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.PanelSuffix}`,
   );
 
   public readonly hexInputId: Signal<string> = computed<string>(
-    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.HexInputSuffix}`
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.HexInputSuffix}`,
   );
 
   public readonly hueInputId: Signal<string> = computed<string>(
-    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.HueInputSuffix}`
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.HueInputSuffix}`,
   );
 
   public readonly satInputId: Signal<string> = computed<string>(
-    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.SatInputSuffix}`
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.SatInputSuffix}`,
   );
 
   public readonly brightInputId: Signal<string> = computed<string>(
-    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.BrightInputSuffix}`
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.BrightInputSuffix}`,
   );
 
   public readonly displayColor: Signal<string> = computed<string>((): string => {
@@ -187,7 +187,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   });
 
   public readonly hexDisplayValue: Signal<string> = computed<string>((): string =>
-    hsbToHex(this.currentHsb())
+    hsbToHex(this.currentHsb()),
   );
 
   public readonly hueOnlyColor: Signal<string> = computed<string>((): string => {
@@ -197,7 +197,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   public readonly selectorLeft: Signal<number> = computed<number>((): number => this.saturation());
 
   public readonly selectorTop: Signal<number> = computed<number>(
-    (): number => 100 - this.brightness()
+    (): number => 100 - this.brightness(),
   );
 
   public readonly hueHandleTop: Signal<number> = computed<number>((): number => {
@@ -382,7 +382,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
         this.hue(),
         this.saturation() + acceleratedStep,
         this.brightness(),
-        event
+        event,
       );
       return;
     }
@@ -393,7 +393,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
         this.hue(),
         this.saturation() - acceleratedStep,
         this.brightness(),
-        event
+        event,
       );
       return;
     }
@@ -404,7 +404,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
         this.hue(),
         this.saturation(),
         this.brightness() + acceleratedStep,
-        event
+        event,
       );
       return;
     }
@@ -415,7 +415,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
         this.hue(),
         this.saturation(),
         this.brightness() - acceleratedStep,
-        event
+        event,
       );
     }
   }
@@ -578,10 +578,10 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
 
     this.hue.set(clamp(parsedValue.h, COLOR_PICKER_LIMITS.HueMin, COLOR_PICKER_LIMITS.HueMax));
     this.saturation.set(
-      clamp(parsedValue.s, COLOR_PICKER_LIMITS.SaturationMin, COLOR_PICKER_LIMITS.SaturationMax)
+      clamp(parsedValue.s, COLOR_PICKER_LIMITS.SaturationMin, COLOR_PICKER_LIMITS.SaturationMax),
     );
     this.brightness.set(
-      clamp(parsedValue.b, COLOR_PICKER_LIMITS.BrightnessMin, COLOR_PICKER_LIMITS.BrightnessMax)
+      clamp(parsedValue.b, COLOR_PICKER_LIMITS.BrightnessMin, COLOR_PICKER_LIMITS.BrightnessMax),
     );
   }
 
@@ -599,15 +599,15 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
       clamp(
         Math.round(saturation),
         COLOR_PICKER_LIMITS.SaturationMin,
-        COLOR_PICKER_LIMITS.SaturationMax
-      )
+        COLOR_PICKER_LIMITS.SaturationMax,
+      ),
     );
     this.brightness.set(
       clamp(
         Math.round(brightness),
         COLOR_PICKER_LIMITS.BrightnessMin,
-        COLOR_PICKER_LIMITS.BrightnessMax
-      )
+        COLOR_PICKER_LIMITS.BrightnessMax,
+      ),
     );
 
     this.markTouchedFromInlineInteractionIfNeeded();
@@ -617,7 +617,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   private emitColorChange(event: Event): void {
     const formattedValue: ColorPickerValue = formatColorValue(this.currentHsb(), this.format());
     this.onModelChange(formattedValue);
-    this.change.emit({
+    this.colorChange.emit({
       originalEvent: event,
       value: formattedValue,
     });
@@ -804,7 +804,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     const useAbove: boolean = availableBelow < panelRect.height && availableAbove > availableBelow;
     const safeLeft: number = Math.min(
       Math.max(viewportPadding, triggerRect.left),
-      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding),
     );
 
     panel.style.position = 'fixed';
@@ -829,7 +829,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     }
 
     const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
-      this.hostElement.nativeElement
+      this.hostElement.nativeElement,
     );
     for (let index: number = 0; index < hostStyles.length; index += 1) {
       const name: string = hostStyles.item(index);

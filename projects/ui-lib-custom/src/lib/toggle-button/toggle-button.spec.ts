@@ -20,7 +20,7 @@ import type {
 
 function getButton(fixture: ComponentFixture<unknown>): HTMLButtonElement {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
-    '.ui-lib-toggle-button__inner'
+    '.ui-lib-toggle-button__inner',
   )!;
 }
 
@@ -51,9 +51,9 @@ function getLabelText(fixture: ComponentFixture<unknown>): string {
       [variant]="variant"
       [iconPos]="iconPos"
       [allowEmpty]="allowEmpty"
-      (change)="onChangeEvent($event)"
-      (focus)="focusCalled = true"
-      (blur)="blurCalled = true"
+      (toggleButtonChange)="onChangeEvent($event)"
+      (toggleButtonFocus)="focusCalled = true"
+      (toggleButtonBlur)="blurCalled = true"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -236,7 +236,7 @@ describe('ToggleButton', (): void => {
         fixture.componentInstance.size = sizeValue;
         fixture.detectChanges();
         expect(getHost(fixture).classList.contains(`ui-lib-toggle-button--size-${sizeValue}`)).toBe(
-          true
+          true,
         );
       });
     }
@@ -253,7 +253,7 @@ describe('ToggleButton', (): void => {
         fixture.componentInstance.variant = variantValue;
         fixture.detectChanges();
         expect(
-          getHost(fixture).classList.contains(`ui-lib-toggle-button--variant-${variantValue}`)
+          getHost(fixture).classList.contains(`ui-lib-toggle-button--variant-${variantValue}`),
         ).toBe(true);
       });
     }
@@ -338,7 +338,7 @@ describe('ToggleButton', (): void => {
         TestBed.createComponent(TestHostComponent);
       fixture.detectChanges();
       getButton(fixture).dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
       );
       fixture.detectChanges();
       expect(getHost(fixture).classList.contains('ui-lib-toggle-button--checked')).toBe(true);
@@ -368,7 +368,7 @@ describe('ToggleButton', (): void => {
   describe('allowEmpty input', (): void => {
     it('should not uncheck when allowEmpty=false and button is already checked', (): void => {
       const fixture: ComponentFixture<AllowEmptyFalseHostComponent> = TestBed.createComponent(
-        AllowEmptyFalseHostComponent
+        AllowEmptyFalseHostComponent,
       );
       fixture.detectChanges();
       getButton(fixture).click();

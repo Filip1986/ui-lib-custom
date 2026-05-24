@@ -259,12 +259,12 @@
       <app-doc-section id="events" title="Events">
         <h3>i. Events</h3>
         <p class="section-text">
-          The <code>(change)</code>, <code>(focus)</code>, and <code>(blur)</code> outputs expose
+          The <code>(toggleButtonChange)</code>, <code>(toggleButtonFocus)</code>, and <code>(toggleButtonBlur)</code> outputs expose
           interaction events.
         </p>
         <ui-lib-panel variant="minimal">
           <div class="demo-row">
-            <ui-lib-toggle-button onLabel="On" offLabel="Off" (change)="onEventChange($event)" />
+            <ui-lib-toggle-button onLabel="On" offLabel="Off" (toggleButtonChange)="onEventChange($event)" />
             <ui-lib-button size="sm" appearance="ghost" (click)="clearEventLog()">
               Clear
             </ui-lib-button>

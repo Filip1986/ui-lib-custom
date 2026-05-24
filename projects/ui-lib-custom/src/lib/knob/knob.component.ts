@@ -139,13 +139,13 @@ export class KnobComponent implements ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   /** Emits whenever the value changes due to user interaction. */
-  public readonly change: OutputEmitterRef<KnobChangeEvent> = output<KnobChangeEvent>();
+  public readonly knobChange: OutputEmitterRef<KnobChangeEvent> = output<KnobChangeEvent>();
 
   /** Emits when the knob receives focus. */
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly knobFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   /** Emits when the knob loses focus. */
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly knobBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   // ---------------------------------------------------------------------------
   // Internal state
@@ -291,14 +291,14 @@ export class KnobComponent implements ControlValueAccessor {
   /** Handles focus on the SVG element. */
   public onFocusEvent(event: FocusEvent): void {
     this.isFocused.set(true);
-    this.focus.emit(event);
+    this.knobFocus.emit(event);
   }
 
   /** Handles blur on the SVG element. */
   public onBlurEvent(event: FocusEvent): void {
     this.isFocused.set(false);
     this.onModelTouched();
-    this.blur.emit(event);
+    this.knobBlur.emit(event);
   }
 
   /** Handles keydown on the SVG element for keyboard-driven value changes. */
@@ -420,7 +420,7 @@ export class KnobComponent implements ControlValueAccessor {
 
     this.value.set(clamped);
     this.onModelChange(clamped);
-    this.change.emit({ value: clamped });
+    this.knobChange.emit({ value: clamped });
   }
 
   private clamp(value: number): number {

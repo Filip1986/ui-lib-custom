@@ -21,19 +21,19 @@ function getHost(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getStars(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star'),
   );
 }
 
 function getCancelButton(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-    '.ui-lib-rating__cancel'
+    '.ui-lib-rating__cancel',
   );
 }
 
 function getRatingInstance(fixture: ComponentFixture<unknown>): Rating {
   return fixture.debugElement.query(
-    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Rating
+    (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof Rating,
   ).componentInstance as Rating;
 }
 
@@ -55,11 +55,11 @@ function getRatingInstance(fixture: ComponentFixture<unknown>): Rating {
       [(value)]="ratingValue"
       [iconOnStyle]="iconOnStyle()"
       [iconOffStyle]="iconOffStyle()"
-      (change)="handleChange($event)"
+      (ratingChange)="handleChange($event)"
       (rate)="handleRate($event)"
       (cleared)="handleCancel($event)"
-      (focus)="handleFocus($event)"
-      (blur)="handleBlur($event)"
+      (ratingFocus)="handleFocus($event)"
+      (ratingBlur)="handleBlur($event)"
     />
   `,
 })
@@ -85,14 +85,14 @@ class HostComponent {
   public readonly lastChange: WritableSignal<RatingChangeEvent | null> =
     signal<RatingChangeEvent | null>(null);
   public readonly lastRate: WritableSignal<RatingRateEvent | null> = signal<RatingRateEvent | null>(
-    null
+    null,
   );
   public readonly lastCancelEvent: WritableSignal<Event | null> = signal<Event | null>(null);
   public readonly lastFocusEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
   public readonly lastBlurEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
 
   public handleChange(event: RatingChangeEvent): void {
@@ -637,7 +637,7 @@ describe('Rating — ngModel', (): void => {
     fixture.detectChanges();
 
     const stars: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star'),
     );
 
     let filledCount: number = 0;
@@ -652,7 +652,7 @@ describe('Rating — ngModel', (): void => {
 
   it('updates model when a star is clicked', (): void => {
     const stars: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star'),
     );
 
     stars[1]?.click();
@@ -697,7 +697,7 @@ describe('Rating — reactive forms', (): void => {
 
   it('updates the form control value when a star is clicked', (): void => {
     const stars: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-rating__star'),
     );
 
     stars[4]?.click();
@@ -711,7 +711,7 @@ describe('Rating — reactive forms', (): void => {
     fixture.detectChanges();
 
     const ratingEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-      'ui-lib-rating'
+      'ui-lib-rating',
     ) as HTMLElement;
 
     expect(ratingEl.classList.contains('ui-lib-rating--disabled')).toBe(true);

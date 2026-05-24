@@ -82,7 +82,7 @@ export class Slider implements ControlValueAccessor {
 
   /** Track orientation - 'horizontal' or 'vertical'. */
   public readonly orientation: InputSignal<SliderOrientation> = input<SliderOrientation>(
-    SLIDER_DEFAULTS.orientation
+    SLIDER_DEFAULTS.orientation,
   );
 
   /** Whether the slider is disabled. */
@@ -130,7 +130,7 @@ export class Slider implements ControlValueAccessor {
 
   /** Current value. Single mode: a number. Range mode: a [start, end] tuple. */
   public readonly value: ModelSignal<number | [number, number]> = model<number | [number, number]>(
-    0
+    0,
   );
 
   // ---------------------------------------------------------------------------
@@ -138,7 +138,7 @@ export class Slider implements ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   /** Emits on every user-driven value change. */
-  public readonly change: OutputEmitterRef<SliderChangeEvent> = output<SliderChangeEvent>();
+  public readonly sliderChange: OutputEmitterRef<SliderChangeEvent> = output<SliderChangeEvent>();
 
   /** Emits when the user releases a drag interaction. */
   public readonly slideEnd: OutputEmitterRef<SliderSlideEndEvent> = output<SliderSlideEndEvent>();
@@ -163,7 +163,7 @@ export class Slider implements ControlValueAccessor {
   private dragStartPos: number = 0;
 
   private readonly boundPointerMove: (event: PointerEvent) => void = (
-    event: PointerEvent
+    event: PointerEvent,
   ): void => {
     this.onPointerMove(event);
   };
@@ -182,23 +182,23 @@ export class Slider implements ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   protected readonly effectiveVariant: Signal<SliderVariant> = computed<SliderVariant>(
-    (): SliderVariant => this.variant() ?? this.themeConfig.variant()
+    (): SliderVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   protected readonly isInteractive: Signal<boolean> = computed<boolean>(
-    (): boolean => !this.isDisabled() && !this.readonly()
+    (): boolean => !this.isDisabled() && !this.readonly(),
   );
 
   protected readonly effectiveTabindex: Signal<number> = computed<number>((): number =>
-    this.isDisabled() ? -1 : this.tabindex()
+    this.isDisabled() ? -1 : this.tabindex(),
   );
 
   protected readonly isHorizontal: Signal<boolean> = computed<boolean>(
-    (): boolean => this.orientation() === 'horizontal'
+    (): boolean => this.orientation() === 'horizontal',
   );
 
   protected readonly singleValue: Signal<number> = computed<number>((): number => {
@@ -217,15 +217,15 @@ export class Slider implements ControlValueAccessor {
   });
 
   protected readonly fillPercent: Signal<number> = computed<number>((): number =>
-    this.toPercent(this.singleValue())
+    this.toPercent(this.singleValue()),
   );
 
   protected readonly startPercent: Signal<number> = computed<number>((): number =>
-    this.toPercent(this.rangeStartValue())
+    this.toPercent(this.rangeStartValue()),
   );
 
   protected readonly endPercent: Signal<number> = computed<number>((): number =>
-    this.toPercent(this.rangeEndValue())
+    this.toPercent(this.rangeEndValue()),
   );
 
   protected readonly fillStyle: Signal<Record<string, string>> = computed<Record<string, string>>(
@@ -242,14 +242,14 @@ export class Slider implements ControlValueAccessor {
       return this.isHorizontal()
         ? { left: '0', width: fill + '%' }
         : { bottom: '0', height: fill + '%' };
-    }
+    },
   );
 
   protected readonly handleStyle: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => {
       const fill: number = this.fillPercent();
       return this.isHorizontal() ? { left: fill + '%' } : { bottom: fill + '%' };
-    }
+    },
   );
 
   protected readonly startHandleStyle: Signal<Record<string, string>> = computed<
@@ -268,17 +268,17 @@ export class Slider implements ControlValueAccessor {
 
   /** Human-readable text for the single handle (used as aria-valuetext). */
   protected readonly singleValueText: Signal<string> = computed<string>((): string =>
-    this.valueTextFn()(this.singleValue())
+    this.valueTextFn()(this.singleValue()),
   );
 
   /** Human-readable text for the range start handle (used as aria-valuetext). */
   protected readonly startValueText: Signal<string> = computed<string>((): string =>
-    this.valueTextFn()(this.rangeStartValue())
+    this.valueTextFn()(this.rangeStartValue()),
   );
 
   /** Human-readable text for the range end handle (used as aria-valuetext). */
   protected readonly endValueText: Signal<string> = computed<string>((): string =>
-    this.valueTextFn()(this.rangeEndValue())
+    this.valueTextFn()(this.rangeEndValue()),
   );
 
   protected readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -547,7 +547,7 @@ export class Slider implements ControlValueAccessor {
 
       this.value.set(clamped);
       this.onCvaChange(clamped);
-      this.change.emit({ value: clamped, originalEvent: event });
+      this.sliderChange.emit({ value: clamped, originalEvent: event });
     } else if (handle === 'start') {
       const endVal: number = this.rangeEndValue();
       const clamped: number = this.clamp(snapped, this.min(), endVal);
@@ -558,7 +558,7 @@ export class Slider implements ControlValueAccessor {
       const newValue: [number, number] = [clamped, endVal];
       this.value.set(newValue);
       this.onCvaChange(newValue);
-      this.change.emit({ value: newValue, originalEvent: event });
+      this.sliderChange.emit({ value: newValue, originalEvent: event });
     } else {
       const startVal: number = this.rangeStartValue();
       const clamped: number = this.clamp(snapped, startVal, this.max());
@@ -569,7 +569,7 @@ export class Slider implements ControlValueAccessor {
       const newValue: [number, number] = [startVal, clamped];
       this.value.set(newValue);
       this.onCvaChange(newValue);
-      this.change.emit({ value: newValue, originalEvent: event });
+      this.sliderChange.emit({ value: newValue, originalEvent: event });
     }
   }
 

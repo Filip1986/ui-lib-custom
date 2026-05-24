@@ -239,7 +239,7 @@ export class VirtualScrollerComponent
     output<VirtualScrollerLazyLoadEvent>();
 
   /** Fires on every scroll event. */
-  public readonly scroll: OutputEmitterRef<VirtualScrollerScrollEvent> =
+  public readonly virtualScroll: OutputEmitterRef<VirtualScrollerScrollEvent> =
     output<VirtualScrollerScrollEvent>();
 
   /** Fires when the first/last rendered index changes. */
@@ -985,7 +985,7 @@ export class VirtualScrollerComponent
 
   /** @internal Scroll event handler — runs inside Angular zone. */
   protected onContainerScroll(event: Event): void {
-    this.scroll.emit({ originalEvent: event });
+    this.virtualScroll.emit({ originalEvent: event });
 
     const delay: number = this.delay();
     if (delay && this.isPageChanged()) {

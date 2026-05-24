@@ -178,7 +178,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   public readonly dropdownClick: OutputEmitterRef<AutoCompleteDropdownClickEvent> =
     output<AutoCompleteDropdownClickEvent>();
   public readonly clearEvent: OutputEmitterRef<void> = output<void>();
-  public readonly keyUp: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
+  public readonly autocompleteKeyUp: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
 
   public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteItemDirective,
@@ -498,7 +498,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   }
 
   public onInputKeyUp(event: KeyboardEvent): void {
-    this.keyUp.emit(event);
+    this.autocompleteKeyUp.emit(event);
   }
 
   public onKeydown(event: KeyboardEvent): void {
