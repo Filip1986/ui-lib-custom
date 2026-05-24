@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -52,7 +52,7 @@ let nextDataViewId: number = 0;
 @Component({
   selector: 'ui-lib-data-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   templateUrl: './data-view.component.html',
   styleUrl: './data-view.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -98,7 +98,7 @@ export class DataViewComponent<T> {
     input<DataViewPaginatorPosition>('bottom');
   public readonly showCurrentPageReport: InputSignal<boolean> = input<boolean>(true);
   public readonly currentPageReportTemplate: InputSignal<string> = input<string>(
-    'Showing {first} to {last} of {totalRecords} entries'
+    'Showing {first} to {last} of {totalRecords} entries',
   );
   public readonly sortField: InputSignal<string | null> = input<string | null>(null);
   public readonly sortOrder: InputSignal<DataViewSortOrder> = input<DataViewSortOrder>(1);
@@ -112,31 +112,31 @@ export class DataViewComponent<T> {
     contentChild(DataViewGridItemDirective, { read: TemplateRef });
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     DataViewHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     DataViewFooterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     DataViewEmptyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly loadingTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     DataViewLoadingDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly paginatorLeftTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     DataViewPaginatorLeftDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly paginatorRightTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     DataViewPaginatorRightDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   private readonly internalRows: WritableSignal<number> = signal<number>(
-    DATA_VIEW_DEFAULT_ROWS_PER_PAGE
+    DATA_VIEW_DEFAULT_ROWS_PER_PAGE,
   );
   private readonly filterQuery: WritableSignal<string> = signal<string>('');
   private readonly layoutLiveMessage: WritableSignal<string> = signal<string>('List view selected');
@@ -160,13 +160,13 @@ export class DataViewComponent<T> {
 
     effect((): void => {
       this.layoutLiveMessage.set(
-        this.layout() === 'list' ? 'List view selected' : 'Grid view selected'
+        this.layout() === 'list' ? 'List view selected' : 'Grid view selected',
       );
     });
   }
 
   public readonly isEmpty: Signal<boolean> = computed<boolean>(
-    (): boolean => this.resolveFilteredItems().length === 0
+    (): boolean => this.resolveFilteredItems().length === 0,
   );
   public readonly activeTemplate: Signal<
     TemplateRef<DataViewListItemContext<T> | DataViewGridItemContext<T>> | undefined
@@ -174,10 +174,10 @@ export class DataViewComponent<T> {
     (): TemplateRef<DataViewListItemContext<T> | DataViewGridItemContext<T>> | undefined =>
       this.layout() === 'list'
         ? this.listItemTemplate()
-        : (this.gridItemTemplate() as TemplateRef<DataViewGridItemContext<T>> | undefined)
+        : (this.gridItemTemplate() as TemplateRef<DataViewGridItemContext<T>> | undefined),
   );
   public readonly effectiveRows: Signal<number> = computed<number>((): number =>
-    this.normalizeRows(this.internalRows())
+    this.normalizeRows(this.internalRows()),
   );
   public readonly effectiveTotalRecords: Signal<number> = computed<number>((): number => {
     const explicitTotalRecords: number | null = this.totalRecords();
@@ -198,7 +198,7 @@ export class DataViewComponent<T> {
     return Math.floor(this.first() / this.effectiveRows());
   });
   public readonly isFirstPage: Signal<boolean> = computed<boolean>(
-    (): boolean => this.currentPage() === 0
+    (): boolean => this.currentPage() === 0,
   );
   public readonly isLastPage: Signal<boolean> = computed<boolean>((): boolean => {
     const pages: number = this.pageCount();
@@ -260,7 +260,7 @@ export class DataViewComponent<T> {
         last: index === items.length - 1,
         even: index % 2 === 0,
         odd: index % 2 !== 0,
-      })
+      }),
     );
   });
 
@@ -415,7 +415,7 @@ export class DataViewComponent<T> {
       return Object.values(item as Record<string, unknown>).some((value: unknown): boolean =>
         String(value ?? '')
           .toLowerCase()
-          .includes(query)
+          .includes(query),
       );
     }
 

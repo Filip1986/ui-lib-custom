@@ -38,7 +38,7 @@ function isSpacingToken(value: number): value is SpacingToken {
 @Component({
   selector: 'ui-lib-grid',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './grid.html',
   host: {
     '[style.display]': '"grid"',
     '[style.--uilib-grid-columns]': '_gridTemplateColumns()',
@@ -58,7 +58,7 @@ function isSpacingToken(value: number): value is SpacingToken {
 export class Grid {
   /** Number of columns (using design tokens) */
   public readonly columns: InputSignal<GridColumns | string> = input<GridColumns | string>(
-    DEFAULT_GRID_COLUMNS
+    DEFAULT_GRID_COLUMNS,
   );
 
   /** Alignment of items along the block axis */
@@ -90,7 +90,7 @@ export class Grid {
 
   /** Optional minimum column width (enables auto-fit) */
   public readonly minColumnWidth: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Computed grid-template-columns value */

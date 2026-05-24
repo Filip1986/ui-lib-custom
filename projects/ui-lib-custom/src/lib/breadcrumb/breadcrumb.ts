@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -44,7 +44,7 @@ let nextBreadcrumbId: number = 0;
 @Component({
   selector: 'ui-lib-breadcrumb',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [NgTemplateOutlet, RouterModule],
   templateUrl: './breadcrumb.html',
   styleUrl: './breadcrumb.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,7 +71,7 @@ export class Breadcrumb {
 
   /** Design-system variant; falls back to ThemeConfigService when null. */
   public readonly variant: InputSignal<BreadcrumbVariant | null> = input<BreadcrumbVariant | null>(
-    null
+    null,
   );
 
   /** Size token: sm | md | lg. */
@@ -110,7 +110,7 @@ export class Breadcrumb {
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<BreadcrumbVariant> = computed<BreadcrumbVariant>(
-    (): BreadcrumbVariant => this.variant() ?? (this.themeConfig.variant() as BreadcrumbVariant)
+    (): BreadcrumbVariant => this.variant() ?? (this.themeConfig.variant() as BreadcrumbVariant),
   );
 
   /**
@@ -121,7 +121,7 @@ export class Breadcrumb {
     (): BreadcrumbItem[] => {
       const homeItem: BreadcrumbItem | null = this.home();
       return homeItem ? [homeItem, ...this.model()] : [...this.model()];
-    }
+    },
   );
 
   /** Host CSS classes derived from current variant, size, and optional styleClass. */

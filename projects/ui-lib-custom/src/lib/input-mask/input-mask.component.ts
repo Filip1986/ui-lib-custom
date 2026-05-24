@@ -66,48 +66,7 @@ let nextInputMaskInstanceId: number = 0;
     '[class.uilib-inputwrapper-filled]': 'isFilled()',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
   },
-  template: `
-    <input
-      #inputEl
-      [type]="type()"
-      [disabled]="isControlDisabled()"
-      [readonly]="readonly()"
-      [placeholder]="placeholder()"
-      [attr.name]="name()"
-      [id]="controlId()"
-      [attr.autocomplete]="autocomplete()"
-      [attr.aria-label]="ariaLabel() || null"
-      [attr.aria-labelledby]="ariaLabelledBy() || null"
-      [attr.aria-invalid]="isInvalid() ? 'true' : null"
-      [attr.aria-describedby]="ariaDescribedBy()"
-      [attr.aria-valuetext]="ariaValueText()"
-      [class.uilib-filled]="filled()"
-      [class.uilib-input-sm]="size() === 'sm'"
-      [class.uilib-input-lg]="size() === 'lg'"
-      (focus)="onFocus($event)"
-      (blur)="onBlur($event)"
-      (keydown)="onKeyDown($event)"
-      (keypress)="onKeyPress($event)"
-      (input)="onInputChange($event)"
-      (paste)="onPaste($event)"
-    />
-    @if (showClear() && isFilled() && !isControlDisabled()) {
-      <span class="ui-lib-input-mask-clear-icon" (click)="clear()"> × </span>
-    }
-    @if (maskFormatHint()) {
-      <span [id]="hintId()" class="ui-lib-input-mask-sr-only">Format: {{ maskFormatHint() }}</span>
-    }
-    @if (showError()) {
-      <div [id]="errorId()" class="ui-lib-input-mask-error" role="alert" aria-live="assertive">
-        <ng-content select="[error]">{{ resolvedErrorMessage() }}</ng-content>
-      </div>
-    }
-    @if (blockedCharacterMessage()) {
-      <span class="ui-lib-input-mask-sr-only" aria-live="polite" aria-atomic="true">
-        {{ blockedCharacterMessage() }}
-      </span>
-    }
-  `,
+  templateUrl: './input-mask.component.html',
 })
 export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   public readonly id: InputSignal<string | null> = input<string | null>(null);

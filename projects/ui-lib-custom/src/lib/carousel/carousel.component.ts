@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { NgStyle, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -68,7 +68,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 @Component({
   selector: 'ui-lib-carousel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgStyle, NgTemplateOutlet],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

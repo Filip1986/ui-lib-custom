@@ -34,7 +34,7 @@ import {
 @Component({
   selector: 'ui-lib-tree-table-column',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './tree-table-column.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
@@ -87,18 +87,18 @@ export class TreeTableColumnComponent {
   /** Custom header cell template. */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TreeTableColumnHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom body cell template. Context: `{ $implicit: TreeTableNode, rowData: Record<string, unknown> }`. */
   public readonly bodyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TreeTableColumnBodyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom footer cell template. */
   public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TreeTableColumnFooterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 }

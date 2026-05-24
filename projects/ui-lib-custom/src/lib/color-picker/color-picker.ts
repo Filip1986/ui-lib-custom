@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -62,7 +62,7 @@ type PanelPlacement = 'below' | 'above';
 @Component({
   selector: 'ui-lib-color-picker',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './color-picker.html',
   styleUrl: './color-picker.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

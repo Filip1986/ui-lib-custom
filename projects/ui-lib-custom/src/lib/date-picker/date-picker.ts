@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -74,7 +74,7 @@ let nextDatePickerId: number = 0;
 @Component({
   selector: 'ui-lib-date-picker',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './date-picker.html',
   styleUrl: './date-picker.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -105,31 +105,31 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   public readonly iconDisplay: InputSignal<'input' | 'button'> = input<'input' | 'button'>('input');
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
   public readonly placeholder: InputSignal<string> = input<string>(
-    DATE_PICKER_DEFAULTS.Placeholder
+    DATE_PICKER_DEFAULTS.Placeholder,
   );
   public readonly inputId: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.InputId);
   public readonly name: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.Name);
   public readonly appendTo: InputSignal<DatePickerAppendTo> = input<DatePickerAppendTo>(
-    DATE_PICKER_DEFAULTS.AppendTo
+    DATE_PICKER_DEFAULTS.AppendTo,
   );
 
   public readonly minDate: InputSignal<Date | null> = input<Date | null>(
-    DATE_PICKER_DEFAULTS.MinDate
+    DATE_PICKER_DEFAULTS.MinDate,
   );
   public readonly maxDate: InputSignal<Date | null> = input<Date | null>(
-    DATE_PICKER_DEFAULTS.MaxDate
+    DATE_PICKER_DEFAULTS.MaxDate,
   );
   public readonly disabledDates: InputSignal<Date[]> = input<Date[]>([]);
   public readonly disabledDays: InputSignal<number[]> = input<number[]>([]);
   public readonly selectOtherMonths: InputSignal<boolean> = input<boolean>(
-    DATE_PICKER_DEFAULTS.SelectOtherMonths
+    DATE_PICKER_DEFAULTS.SelectOtherMonths,
   );
   public readonly showOtherMonths: InputSignal<boolean> = input<boolean>(
-    DATE_PICKER_DEFAULTS.ShowOtherMonths
+    DATE_PICKER_DEFAULTS.ShowOtherMonths,
   );
 
   public readonly view: InputSignal<DatePickerView> = input<DatePickerView>(
-    DATE_PICKER_DEFAULTS.View
+    DATE_PICKER_DEFAULTS.View,
   );
   public readonly numberOfMonths: InputSignal<number> = input<number>(1);
   public readonly yearRange: InputSignal<string> = input<string>('1970:2030');
@@ -145,16 +145,16 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   public readonly stepSecond: InputSignal<number> = input<number>(1);
 
   public readonly showButtonBar: InputSignal<boolean> = input<boolean>(
-    DATE_PICKER_DEFAULTS.ShowButtonBar
+    DATE_PICKER_DEFAULTS.ShowButtonBar,
   );
   public readonly showWeek: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.ShowWeek);
   public readonly firstDayOfWeek: InputSignal<number> = input<number>(
-    DATE_PICKER_DEFAULTS.FirstDayOfWeek
+    DATE_PICKER_DEFAULTS.FirstDayOfWeek,
   );
 
   public readonly variant: InputSignal<ThemeVariant | null> = input<ThemeVariant | null>(null);
   public readonly size: InputSignal<DatePickerSize> = input<DatePickerSize>(
-    DATE_PICKER_DEFAULTS.Size
+    DATE_PICKER_DEFAULTS.Size,
   );
   public readonly filled: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.Filled);
   public readonly disabled: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.Disabled);
@@ -217,19 +217,19 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   public readonly focusedMonthIndex: WritableSignal<number> = signal<number>(0);
   public readonly focusedYearIndex: WritableSignal<number> = signal<number>(0);
   public readonly currentDecadeStart: WritableSignal<number> = signal<number>(
-    getDecadeBounds(new Date().getFullYear())[0]
+    getDecadeBounds(new Date().getFullYear())[0],
   );
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   public readonly resolvedVariant: Signal<ThemeVariant> = computed<ThemeVariant>(
-    (): ThemeVariant => this.variant() ?? this.themeConfig.variant()
+    (): ThemeVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly panelVisible: Signal<boolean> = computed<boolean>(
-    (): boolean => this.inline() || this.overlayVisible()
+    (): boolean => this.inline() || this.overlayVisible(),
   );
 
   public readonly resolvedInputId: Signal<string> = computed<string>((): string => {
@@ -240,7 +240,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   });
 
   public readonly liveRegionId: Signal<string> = computed<string>(
-    (): string => `${this.resolvedInputId()}-live`
+    (): string => `${this.resolvedInputId()}-live`,
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -302,7 +302,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   });
 
   public readonly currentMonthYearLabel: Signal<string> = computed<string>(
-    (): string => `${this.monthLabel()} ${this.yearLabel()}`
+    (): string => `${this.monthLabel()} ${this.yearLabel()}`,
   );
 
   public readonly prevMonthLabel: Signal<string> = computed<string>((): string => {
@@ -343,7 +343,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
           minDate,
           maxDate,
           disabledDates,
-          disabledDays
+          disabledDays,
         );
 
         return rawMonthGrid.map((dateMeta: DatePickerDateMeta): DatePickerDateMeta => {
@@ -356,7 +356,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
             minDate,
             maxDate,
             disabledDates,
-            disabledDays
+            disabledDays,
           );
           const disabled: boolean =
             dateMeta.disabled ||
@@ -372,7 +372,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
           };
         });
       });
-    }
+    },
   );
 
   public readonly monthLabel: Signal<string> = computed<string>((): string => {
@@ -395,7 +395,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       return this.locale().monthNamesShort.map(
         (
           monthLabel: string,
-          monthIndex: number
+          monthIndex: number,
         ): {
           month: number;
           label: string;
@@ -406,7 +406,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
           const lastMonthDate: Date = createDate(
             this.currentYear(),
             monthIndex,
-            getDaysInMonth(monthIndex, this.currentYear())
+            getDaysInMonth(monthIndex, this.currentYear()),
           );
           const isMonthDisabledByRange: boolean =
             !this.canDatePassMinMax(firstMonthDate) && !this.canDatePassMinMax(lastMonthDate);
@@ -417,9 +417,9 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
             disabled: isMonthDisabledByRange,
             selected: this.currentMonth() === monthIndex,
           };
-        }
+        },
       );
-    }
+    },
   );
 
   public readonly yearOptions: Signal<
@@ -448,7 +448,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
           selected: this.currentYear() === yearValue,
         };
       });
-    }
+    },
   );
 
   public readonly canNavigatePrev: Signal<boolean> = computed<boolean>((): boolean => {
@@ -483,7 +483,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     }
 
     const formattedDates: string[] = value.map((dateValue: Date): string =>
-      this.formatDisplayValue(dateValue, includeTime, timeOnly)
+      this.formatDisplayValue(dateValue, includeTime, timeOnly),
     );
 
     if (this.selectionMode() === 'range') {
@@ -826,7 +826,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.hourInputDraft.set(null);
     this.currentHour.set(
-      this.wrapValue(this.currentHour() + this.getPositiveStep(this.stepHour()), 24)
+      this.wrapValue(this.currentHour() + this.getPositiveStep(this.stepHour()), 24),
     );
     this.currentAmPm.set(this.currentHour() >= 12 ? 'PM' : 'AM');
     this.applyTimeToModelValue();
@@ -839,7 +839,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.hourInputDraft.set(null);
     this.currentHour.set(
-      this.wrapValue(this.currentHour() - this.getPositiveStep(this.stepHour()), 24)
+      this.wrapValue(this.currentHour() - this.getPositiveStep(this.stepHour()), 24),
     );
     this.currentAmPm.set(this.currentHour() >= 12 ? 'PM' : 'AM');
     this.applyTimeToModelValue();
@@ -852,7 +852,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.minuteInputDraft.set(null);
     this.currentMinute.set(
-      this.wrapValue(this.currentMinute() + this.getPositiveStep(this.stepMinute()), 60)
+      this.wrapValue(this.currentMinute() + this.getPositiveStep(this.stepMinute()), 60),
     );
     this.applyTimeToModelValue();
   }
@@ -864,7 +864,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.minuteInputDraft.set(null);
     this.currentMinute.set(
-      this.wrapValue(this.currentMinute() - this.getPositiveStep(this.stepMinute()), 60)
+      this.wrapValue(this.currentMinute() - this.getPositiveStep(this.stepMinute()), 60),
     );
     this.applyTimeToModelValue();
   }
@@ -876,7 +876,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.secondInputDraft.set(null);
     this.currentSecond.set(
-      this.wrapValue(this.currentSecond() + this.getPositiveStep(this.stepSecond()), 60)
+      this.wrapValue(this.currentSecond() + this.getPositiveStep(this.stepSecond()), 60),
     );
     this.applyTimeToModelValue();
   }
@@ -888,7 +888,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     this.secondInputDraft.set(null);
     this.currentSecond.set(
-      this.wrapValue(this.currentSecond() - this.getPositiveStep(this.stepSecond()), 60)
+      this.wrapValue(this.currentSecond() - this.getPositiveStep(this.stepSecond()), 60),
     );
     this.applyTimeToModelValue();
   }
@@ -1075,7 +1075,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const maxAllowedYear: number = Math.max(...allowedYears);
     const clampedDecadeStart: number = Math.max(
       Math.floor(minAllowedYear / 10) * 10,
-      Math.min(nextDecadeStart, Math.floor(maxAllowedYear / 10) * 10)
+      Math.min(nextDecadeStart, Math.floor(maxAllowedYear / 10) * 10),
     );
 
     this.currentDecadeStart.set(clampedDecadeStart);
@@ -1099,8 +1099,8 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     this.focusedYearIndex.set(
       this.yearOptions().findIndex(
         (yearOption: { year: number; disabled: boolean; selected: boolean }): boolean =>
-          yearOption.year === this.currentYear()
-      )
+          yearOption.year === this.currentYear(),
+      ),
     );
   }
 
@@ -1270,10 +1270,10 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const weekStartDate: Date = createDate(
       weekStartMeta.year,
       weekStartMeta.month,
-      weekStartMeta.day
+      weekStartMeta.day,
     );
     const utcDate: Date = new Date(
-      Date.UTC(weekStartDate.getFullYear(), weekStartDate.getMonth(), weekStartDate.getDate())
+      Date.UTC(weekStartDate.getFullYear(), weekStartDate.getMonth(), weekStartDate.getDate()),
     );
     const dayNumber: number = utcDate.getUTCDay() || 7;
     utcDate.setUTCDate(utcDate.getUTCDate() + 4 - dayNumber);
@@ -1303,7 +1303,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       const currentValue: DatePickerValue = this.modelValue();
       const currentDates: Date[] = this.toDateArray(currentValue);
       const selectedIndex: number = currentDates.findIndex((date: Date): boolean =>
-        isDateEqual(date, selectedDate)
+        isDateEqual(date, selectedDate),
       );
       const nextDates: Date[] =
         selectedIndex >= 0
@@ -1404,8 +1404,8 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
         createDate(
           normalizedValue.getFullYear(),
           normalizedValue.getMonth(),
-          normalizedValue.getDate()
-        )
+          normalizedValue.getDate(),
+        ),
       );
       this.currentDecadeStart.set(getDecadeBounds(normalizedValue.getFullYear())[0]);
       return;
@@ -1419,7 +1419,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       this.currentMonth.set(firstDate.getMonth());
       this.currentYear.set(firstDate.getFullYear());
       this.focusedDate.set(
-        createDate(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate())
+        createDate(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate()),
       );
       this.currentDecadeStart.set(getDecadeBounds(firstDate.getFullYear())[0]);
     }
@@ -1721,7 +1721,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     }
 
     return (value as unknown[]).filter(
-      (dateValue: unknown): dateValue is Date => dateValue instanceof Date
+      (dateValue: unknown): dateValue is Date => dateValue instanceof Date,
     );
   }
 
@@ -1733,7 +1733,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       const normalizedMinDate: Date = createDate(
         minDate.getFullYear(),
         minDate.getMonth(),
-        minDate.getDate()
+        minDate.getDate(),
       );
       if (date.getTime() < normalizedMinDate.getTime()) {
         return false;
@@ -1744,7 +1744,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       const normalizedMaxDate: Date = createDate(
         maxDate.getFullYear(),
         maxDate.getMonth(),
-        maxDate.getDate()
+        maxDate.getDate(),
       );
       if (date.getTime() > normalizedMaxDate.getTime()) {
         return false;
@@ -1777,7 +1777,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const rangeEnd: Date = createDate(
       rangeEndMonthStart.getFullYear(),
       rangeEndMonthStart.getMonth(),
-      getDaysInMonth(rangeEndMonthStart.getMonth(), rangeEndMonthStart.getFullYear())
+      getDaysInMonth(rangeEndMonthStart.getMonth(), rangeEndMonthStart.getFullYear()),
     );
 
     const minDate: Date | null = this.minDate();
@@ -1805,7 +1805,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const nextDate: Date = createDate(
       baseDate.getFullYear(),
       baseDate.getMonth(),
-      baseDate.getDate() + dayDelta
+      baseDate.getDate() + dayDelta,
     );
     this.focusDate(nextDate, true);
   }
@@ -1841,12 +1841,12 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       this.visibleMonthStarts()[0] ?? createDate(this.currentYear(), this.currentMonth(), 1);
     const lastVisibleMonthStart: Date = addMonths(
       firstVisibleMonthStart,
-      Math.max(1, this.numberOfMonths()) - 1
+      Math.max(1, this.numberOfMonths()) - 1,
     );
     const lastVisibleMonthEnd: Date = createDate(
       lastVisibleMonthStart.getFullYear(),
       lastVisibleMonthStart.getMonth(),
-      getDaysInMonth(lastVisibleMonthStart.getMonth(), lastVisibleMonthStart.getFullYear())
+      getDaysInMonth(lastVisibleMonthStart.getMonth(), lastVisibleMonthStart.getFullYear()),
     );
 
     if (normalizedDate.getTime() < firstVisibleMonthStart.getTime()) {
@@ -1858,7 +1858,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     if (normalizedDate.getTime() > lastVisibleMonthEnd.getTime()) {
       const adjustedStart: Date = addMonths(
         normalizedDate,
-        -(Math.max(1, this.numberOfMonths()) - 1)
+        -(Math.max(1, this.numberOfMonths()) - 1),
       );
       this.currentMonth.set(adjustedStart.getMonth());
       this.currentYear.set(adjustedStart.getFullYear());
@@ -1873,7 +1873,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
     const key: string = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     const dateElement: HTMLButtonElement | null = panel.querySelector<HTMLButtonElement>(
-      `button[data-date-key='${key}']`
+      `button[data-date-key='${key}']`,
     );
     dateElement?.focus();
   }
@@ -1964,7 +1964,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const start: Date = createDate(
       rangeStart.getFullYear(),
       rangeStart.getMonth(),
-      rangeStart.getDate()
+      rangeStart.getDate(),
     );
     const end: Date = createDate(rangeEnd.getFullYear(), rangeEnd.getMonth(), rangeEnd.getDate());
     const min: Date = start.getTime() <= end.getTime() ? start : end;
@@ -2042,7 +2042,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const useAbove: boolean = availableBelow < panelRect.height && availableAbove > availableBelow;
     const safeLeft: number = Math.min(
       Math.max(viewportPadding, anchorRect.left),
-      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding),
     );
 
     panel.style.position = 'fixed';
@@ -2071,7 +2071,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     }
 
     const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
-      this.hostElement.nativeElement
+      this.hostElement.nativeElement,
     );
     for (let index: number = 0; index < hostStyles.length; index += 1) {
       const name: string = hostStyles.item(index);

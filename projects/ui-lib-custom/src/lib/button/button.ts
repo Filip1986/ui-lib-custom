@@ -13,7 +13,7 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
 import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
@@ -56,7 +56,7 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
 @Component({
   selector: 'ui-lib-button',
   standalone: true,
-  imports: [CommonModule, Icon, Badge],
+  imports: [NgClass, Icon, Badge],
   templateUrl: './button.html',
   styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -87,7 +87,7 @@ export class Button implements AfterViewChecked {
   public readonly badgeSeverity: InputSignal<BadgeSeverity> = input<BadgeSeverity>('danger');
   public readonly badgeClass: InputSignal<string | null> = input<string | null>(null);
   public readonly loadingIcon: InputSignal<SemanticIcon | string> = input<SemanticIcon | string>(
-    'spinner'
+    'spinner',
   );
   public readonly role: InputSignal<string | null> = input<string | null>(null);
   public readonly tabIndex: InputSignal<number | null> = input<number | null>(null);
@@ -113,7 +113,7 @@ export class Button implements AfterViewChecked {
   });
 
   public readonly effectiveVariant: Signal<ButtonVariant> = computed<ButtonVariant>(
-    (): ButtonVariant => this.variant() ?? this.themeConfig.variant()
+    (): ButtonVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly iconSize: Signal<IconSize> = computed<IconSize>((): IconSize => {
@@ -129,7 +129,7 @@ export class Button implements AfterViewChecked {
     (): ButtonSeverity => {
       const severity: ButtonSeverity = this.severity() ?? 'primary';
       return severity === 'warn' ? 'warning' : severity;
-    }
+    },
   );
 
   public readonly hasBadge: Signal<boolean> = computed<boolean>((): boolean => {
@@ -188,7 +188,7 @@ export class Button implements AfterViewChecked {
   });
 
   public readonly ariaDisabled: Signal<boolean | null> = computed<boolean | null>(
-    (): boolean | null => (this.disabled() || this.loading() || this.softDisabled() ? true : null)
+    (): boolean | null => (this.disabled() || this.loading() || this.softDisabled() ? true : null),
   );
 
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
@@ -196,11 +196,11 @@ export class Button implements AfterViewChecked {
       if (this.loading()) return this.loadingLabel() ?? this.ariaLabel() ?? 'Loading';
       if (this.iconOnly()) return this.ariaLabel() ?? 'Button';
       return this.ariaLabel();
-    }
+    },
   );
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.loading()
+    (): boolean => this.disabled() || this.loading(),
   );
 
   public setFocused(isFocused: boolean): void {

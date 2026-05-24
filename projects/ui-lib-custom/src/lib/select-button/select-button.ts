@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -46,7 +46,7 @@ import type {
 @Component({
   selector: 'ui-lib-select-button',
   standalone: true,
-  imports: [CommonModule, FormsModule, Button],
+  imports: [NgTemplateOutlet, FormsModule, Button],
   templateUrl: './select-button.html',
   styleUrl: './select-button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -96,7 +96,7 @@ export class SelectButton implements ControlValueAccessor {
   public readonly allowEmpty: InputSignal<boolean> = input<boolean>(false);
 
   public readonly size: InputSignal<SelectButtonSize> = input<SelectButtonSize>(
-    SHARED_DEFAULTS.Size
+    SHARED_DEFAULTS.Size,
   );
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
@@ -115,7 +115,7 @@ export class SelectButton implements ControlValueAccessor {
 
   public readonly focusedIndex: WritableSignal<number> = signal<number>(-1);
   public readonly internalValue: WritableSignal<SelectButtonValue[]> = signal<SelectButtonValue[]>(
-    []
+    [],
   );
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
 
@@ -135,10 +135,10 @@ export class SelectButton implements ControlValueAccessor {
   });
 
   public readonly effectiveVariant: Signal<SelectButtonVariant> = computed<SelectButtonVariant>(
-    (): SelectButtonVariant => this.variant() ?? this.themeConfig.variant()
+    (): SelectButtonVariant => this.variant() ?? this.themeConfig.variant(),
   );
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   public readonly activeIndex: Signal<number> = computed<number>((): number => {
@@ -157,10 +157,10 @@ export class SelectButton implements ControlValueAccessor {
   });
 
   public readonly groupRole: Signal<string> = computed<string>((): string =>
-    this.multiple() ? 'group' : 'radiogroup'
+    this.multiple() ? 'group' : 'radiogroup',
   );
   public readonly itemRole: Signal<string> = computed<string>((): string =>
-    this.multiple() ? 'checkbox' : 'radio'
+    this.multiple() ? 'checkbox' : 'radio',
   );
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -168,7 +168,7 @@ export class SelectButton implements ControlValueAccessor {
         return null;
       }
       return this.ariaLabel() ?? 'Select options';
-    }
+    },
   );
 
   public optionAriaChecked(option: SelectButtonOption): string {
@@ -402,7 +402,7 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   private normalizeValues(
-    value: SelectButtonValue | SelectButtonValue[] | null
+    value: SelectButtonValue | SelectButtonValue[] | null,
   ): SelectButtonValue[] {
     if (Array.isArray(value)) {
       return value;
@@ -448,7 +448,7 @@ export class SelectButton implements ControlValueAccessor {
   private findNextEnabledIndex(
     options: SelectButtonOption[],
     currentIndex: number,
-    delta: number
+    delta: number,
   ): number {
     if (!options.length) return -1;
 

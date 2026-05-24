@@ -33,7 +33,7 @@ import type { InputSignal, Signal } from '@angular/core';
 @Component({
   selector: 'ui-lib-table-column',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './table-column.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
@@ -111,24 +111,24 @@ export class TableColumnComponent {
   /** Custom header cell template. Context: none. */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableColumnHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom body cell template. Context: `TableCellContext<T>`. */
   public readonly bodyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableColumnBodyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom footer cell template. Context: none. */
   public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableColumnFooterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom filter template. Context: none. */
   public readonly filterTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableColumnFilterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 }

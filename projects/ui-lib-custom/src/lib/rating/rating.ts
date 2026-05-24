@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,7 +39,7 @@ let ratingIdCounter: number = 0;
 @Component({
   selector: 'ui-lib-rating',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgStyle, NgTemplateOutlet],
   templateUrl: './rating.html',
   styleUrl: './rating.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

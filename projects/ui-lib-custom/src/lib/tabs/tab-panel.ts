@@ -15,7 +15,7 @@ import type { InputSignal, Signal } from '@angular/core';
 @Component({
   selector: 'ui-lib-tab-panel',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './tab-panel.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {

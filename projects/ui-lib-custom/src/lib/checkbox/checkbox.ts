@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   type AfterRenderRef,
   afterRenderEffect,
@@ -47,7 +46,7 @@ let nextCheckboxId: number = 0;
 @Component({
   selector: 'ui-lib-checkbox',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './checkbox.html',
   styleUrl: './checkbox.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -83,7 +82,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   public readonly appearance: InputSignal<CheckboxAppearance> =
     input<CheckboxAppearance>('outlined');
   public readonly variant: InputSignal<CheckboxVariant | null> = input<CheckboxVariant | null>(
-    null
+    null,
   );
   public readonly size: InputSignal<CheckboxSize> = input<CheckboxSize>('md');
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
@@ -111,7 +110,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
     viewChild<ElementRef<HTMLInputElement>>('nativeInput');
 
   public readonly effectiveVariant: Signal<CheckboxVariant> = computed<CheckboxVariant>(
-    (): CheckboxVariant => this.variant() ?? this.themeConfig.variant()
+    (): CheckboxVariant => this.variant() ?? this.themeConfig.variant(),
   );
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -140,22 +139,22 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   });
 
   public readonly ariaChecked: Signal<string> = computed<string>((): string =>
-    this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false'
+    this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false',
   );
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
   public readonly hostTabIndex: Signal<number> = computed<number>((): number =>
-    this.isDisabled() ? -1 : this.tabindex()
+    this.isDisabled() ? -1 : this.tabindex(),
   );
   public readonly ariaLabelledby: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.ariaLabel() ? null : this.labelElementId)
+    (): string | null => (this.ariaLabel() ? null : this.labelElementId),
   );
   public readonly ariaDescribedby: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.description() ? this.descriptionElementId : null)
+    (): string | null => (this.description() ? this.descriptionElementId : null),
   );
   public readonly showDescription: Signal<boolean> = computed<boolean>((): boolean =>
-    Boolean(this.description())
+    Boolean(this.description()),
   );
   public readonly nativeInputClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = ['ui-lib-checkbox__native-input'];
@@ -178,7 +177,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   });
 
   private readonly isBinaryMode: Signal<boolean> = computed<boolean>(
-    (): boolean => this.binary() || this.value() === null
+    (): boolean => this.binary() || this.value() === null,
   );
   public readonly nativeInputValue: Signal<string> = computed<string>((): string => {
     const rawValue: unknown = this.value() ?? this.trueValue();
