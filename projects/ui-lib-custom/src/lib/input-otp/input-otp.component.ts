@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   forwardRef,
+  inject,
   input,
   output,
   signal,
@@ -18,6 +19,7 @@ import type {
   WritableSignal,
 } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { INPUT_OTP_DEFAULTS } from './input-otp.types';
 import type { InputOtpChangeEvent, InputOtpSize } from './input-otp.types';
 
@@ -48,12 +50,15 @@ let nextInputOtpId: number = 0;
     '[attr.aria-label]': 'groupAriaLabel()',
     '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
     '[attr.aria-describedby]': 'errorDescribedBy()',
-    '[class.ui-lib-input-otp-sm]': 'size() === "sm"',
-    '[class.ui-lib-input-otp-lg]': 'size() === "lg"',
-    '[class.ui-lib-input-otp-filled]': 'filled()',
-    '[class.ui-lib-input-otp-invalid]': 'invalid()',
-    '[class.ui-lib-input-otp-disabled]': 'isControlDisabled()',
-    '[class.ui-lib-input-otp-readonly]': 'readonly()',
+    '[class.ui-lib-input-otp--sm]': 'size() === "sm"',
+    '[class.ui-lib-input-otp--lg]': 'size() === "lg"',
+    '[class.ui-lib-input-otp--filled]': 'filled()',
+    '[class.ui-lib-input-otp--invalid]': 'invalid()',
+    '[class.ui-lib-input-otp--disabled]': 'isControlDisabled()',
+    '[class.ui-lib-input-otp--readonly]': 'readonly()',
+    '[class.ui-lib-input-otp--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-input-otp--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-input-otp--minimal]': 'effectiveVariant() === "minimal"',
   },
 })
 export class InputOtpComponent implements ControlValueAccessor {
@@ -83,7 +88,7 @@ export class InputOtpComponent implements ControlValueAccessor {
 
   /** When true, only digit characters (0-9) are accepted. */
   public readonly integerOnly: InputSignal<boolean> = input<boolean>(
-    INPUT_OTP_DEFAULTS.integerOnly
+    INPUT_OTP_DEFAULTS.integerOnly,
   );
 
   /** Applies filled background appearance to each cell. */
@@ -98,6 +103,11 @@ export class InputOtpComponent implements ControlValueAccessor {
   /** Applies invalid (error) styling to all cells. */
   public readonly invalid: InputSignal<boolean> = input<boolean>(INPUT_OTP_DEFAULTS.invalid);
 
+  /** Design variant override. When null the active global theme variant is used. */
+  public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal' | null> = input<
+    'material' | 'bootstrap' | 'minimal' | null
+  >(null);
+
   /** Size variant: 'sm' | 'md' | 'lg'. */
   public readonly size: InputSignal<InputOtpSize> = input<InputOtpSize>(INPUT_OTP_DEFAULTS.size);
 
@@ -106,7 +116,7 @@ export class InputOtpComponent implements ControlValueAccessor {
 
   /** Extra CSS class applied to each cell input element. */
   public readonly styleClass: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Emitted whenever the OTP value changes. */
@@ -125,6 +135,7 @@ export class InputOtpComponent implements ControlValueAccessor {
   protected readonly tokens: WritableSignal<string[]> = signal<string[]>([]);
 
   // CVA disabled state set by forms API.
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly generatedOtpId: string = `ui-lib-input-otp-${nextInputOtpId++}`;
   private readonly pasteAnnouncementMessage: WritableSignal<string> = signal<string>('');
@@ -136,39 +147,44 @@ export class InputOtpComponent implements ControlValueAccessor {
   private readonly cellInputs: Signal<readonly ElementRef<HTMLInputElement>[]> =
     viewChildren<ElementRef<HTMLInputElement>>('cellInput');
 
+  /** Resolved variant — uses the explicit input when set, otherwise the global theme variant. */
+  protected readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
+    'material' | 'bootstrap' | 'minimal'
+  >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
+
   /** Derived array of indices [0, 1, length-1] for template iteration. */
   protected readonly cellIndices: Signal<number[]> = computed<number[]>((): number[] =>
-    Array.from({ length: this.length() }, (_value: unknown, index: number): number => index)
+    Array.from({ length: this.length() }, (_value: unknown, index: number): number => index),
   );
 
   /** Input type derived from mask flag. */
   protected readonly inputType: Signal<string> = computed<string>((): string =>
-    this.mask() ? 'password' : 'text'
+    this.mask() ? 'password' : 'text',
   );
 
   /** Input mode derived from integerOnly flag. */
   protected readonly inputMode: Signal<string> = computed<string>((): string =>
-    this.integerOnly() ? 'numeric' : 'text'
+    this.integerOnly() ? 'numeric' : 'text',
   );
 
   protected readonly otpId: Signal<string> = computed<string>(
-    (): string => this.id() ?? this.generatedOtpId
+    (): string => this.id() ?? this.generatedOtpId,
   );
 
   protected readonly errorDescribedBy: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.invalid() ? `${this.otpId()}-error` : null)
+    (): string | null => (this.invalid() ? `${this.otpId()}-error` : null),
   );
 
   protected readonly groupAriaLabel: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.ariaLabelledBy() ? null : (this.ariaLabel() ?? 'One-time passcode'))
+    (): string | null => (this.ariaLabelledBy() ? null : (this.ariaLabel() ?? 'One-time passcode')),
   );
 
   protected readonly errorId: Signal<string> = computed<string>(
-    (): string => `${this.otpId()}-error`
+    (): string => `${this.otpId()}-error`,
   );
 
   protected readonly liveAnnouncement: Signal<string> = computed<string>((): string =>
-    this.pasteAnnouncementMessage()
+    this.pasteAnnouncementMessage(),
   );
 
   /** Combined disabled state from input and CVA. */
@@ -195,7 +211,7 @@ export class InputOtpComponent implements ControlValueAccessor {
     const characters: string[] = normalized.split('').slice(0, this.length());
     const padded: string[] = Array.from(
       { length: this.length() },
-      (_value: unknown, index: number): string => characters[index] ?? ''
+      (_value: unknown, index: number): string => characters[index] ?? '',
     );
     this.tokens.set(padded);
   }
@@ -344,7 +360,7 @@ export class InputOtpComponent implements ControlValueAccessor {
     const characters: string[] = filtered.split('').slice(0, this.length());
     const updated: string[] = Array.from(
       { length: this.length() },
-      (_value: unknown, index: number): string => characters[index] ?? ''
+      (_value: unknown, index: number): string => characters[index] ?? '',
     );
     this.tokens.set(updated);
     this.emitChange(event);

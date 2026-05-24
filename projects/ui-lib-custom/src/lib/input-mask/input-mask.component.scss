@@ -26,7 +26,7 @@ ui-lib-input-mask {
   align-items: center;
 }
 
-ui-lib-input-mask.ui-lib-input-mask-fluid {
+ui-lib-input-mask.ui-lib-input-mask--fluid {
   display: flex;
   width: 100%;
 }
@@ -58,24 +58,24 @@ ui-lib-input-mask input:focus-visible {
   box-shadow: var(--uilib-input-mask-focus-ring);
 }
 
-ui-lib-input-mask.ui-lib-input-mask-sm {
+ui-lib-input-mask.ui-lib-input-mask--sm {
   --uilib-input-mask-padding-y: var(--uilib-space-1, 0.25rem);
   --uilib-input-mask-padding-x: var(--uilib-space-2, 0.5rem);
   --uilib-input-mask-font-size: var(--uilib-font-size-sm, 0.875rem);
 }
 
-ui-lib-input-mask.ui-lib-input-mask-lg {
+ui-lib-input-mask.ui-lib-input-mask--lg {
   --uilib-input-mask-padding-y: var(--uilib-space-3, 0.75rem);
   --uilib-input-mask-padding-x: var(--uilib-space-4, 1rem);
   --uilib-input-mask-font-size: var(--uilib-font-size-lg, 1.125rem);
 }
 
-ui-lib-input-mask.ui-lib-input-mask-filled input {
+ui-lib-input-mask.ui-lib-input-mask--filled input {
   background: var(--uilib-input-mask-filled-bg);
   border-color: transparent;
 }
 
-ui-lib-input-mask.ui-lib-input-mask-invalid input {
+ui-lib-input-mask.ui-lib-input-mask--invalid input {
   border-color: var(--uilib-input-mask-invalid-border-color);
 }
 
@@ -99,21 +99,21 @@ ui-lib-input-mask:has(.ui-lib-input-mask-clear-icon) input {
   );
 }
 
-ui-lib-input-mask.ui-lib-input-mask-disabled {
+ui-lib-input-mask.ui-lib-input-mask--disabled {
   opacity: var(--uilib-input-mask-disabled-opacity);
 }
 
-ui-lib-input-mask.ui-lib-input-mask-disabled .ui-lib-input-mask-clear-icon {
+ui-lib-input-mask.ui-lib-input-mask--disabled .ui-lib-input-mask-clear-icon {
   pointer-events: none;
 }
 
-.uilib-variant-material ui-lib-input-mask input {
+ui-lib-input-mask.ui-lib-input-mask--material input {
   border-width: 0 0 0.125rem;
   border-radius: 0;
   box-shadow: none;
 }
 
-.uilib-variant-material ui-lib-input-mask.uilib-inputwrapper-focus::after {
+ui-lib-input-mask.ui-lib-input-mask--material.uilib-inputwrapper-focus::after {
   content: '';
   position: absolute;
   inset-inline: 0;
@@ -122,12 +122,12 @@ ui-lib-input-mask.ui-lib-input-mask-disabled .ui-lib-input-mask-clear-icon {
   background: var(--uilib-input-mask-focus-border-color);
 }
 
-.uilib-variant-bootstrap ui-lib-input-mask input {
+ui-lib-input-mask.ui-lib-input-mask--bootstrap input {
   border-width: 0.0625rem;
   border-radius: var(--uilib-input-mask-border-radius);
 }
 
-.uilib-variant-minimal ui-lib-input-mask input {
+ui-lib-input-mask.ui-lib-input-mask--minimal input {
   border-color: transparent;
   background: color-mix(
     in srgb,

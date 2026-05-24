@@ -141,7 +141,7 @@ describe('InputMaskComponent', (): void => {
   function keyboardEvent(
     type: 'keydown' | 'keypress',
     key: string,
-    keyCode: number
+    keyCode: number,
   ): KeyboardEvent {
     const event: KeyboardEvent = new KeyboardEvent(type, {
       key,
@@ -187,12 +187,12 @@ describe('InputMaskComponent', (): void => {
   });
 
   it('applies size classes for sm, md, and lg', (): void => {
-    expect(componentElement().classList.contains('ui-lib-input-mask-sm')).toBeFalsy();
-    expect(componentElement().classList.contains('ui-lib-input-mask-lg')).toBeFalsy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--sm')).toBeFalsy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--lg')).toBeFalsy();
 
     hostComponent().size = 'sm';
     fixture.detectChanges();
-    expect(componentElement().classList.contains('ui-lib-input-mask-sm')).toBeTruthy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--sm')).toBeTruthy();
 
     const largeFixture: ComponentFixture<InputMaskHostComponent> =
       TestBed.createComponent(InputMaskHostComponent);
@@ -200,9 +200,9 @@ describe('InputMaskComponent', (): void => {
     largeFixture.detectChanges();
 
     const largeHostElement: HTMLElement = (largeFixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-input-mask'
+      'ui-lib-input-mask',
     ) as HTMLElement;
-    expect(largeHostElement.classList.contains('ui-lib-input-mask-lg')).toBeTruthy();
+    expect(largeHostElement.classList.contains('ui-lib-input-mask--lg')).toBeTruthy();
 
     largeFixture.destroy();
   });
@@ -214,10 +214,10 @@ describe('InputMaskComponent', (): void => {
     hostComponent().disabled = true;
     fixture.detectChanges();
 
-    expect(componentElement().classList.contains('ui-lib-input-mask-filled')).toBeTruthy();
-    expect(componentElement().classList.contains('ui-lib-input-mask-fluid')).toBeTruthy();
-    expect(componentElement().classList.contains('ui-lib-input-mask-invalid')).toBeTruthy();
-    expect(componentElement().classList.contains('ui-lib-input-mask-disabled')).toBeTruthy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--filled')).toBeTruthy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--fluid')).toBeTruthy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--invalid')).toBeTruthy();
+    expect(componentElement().classList.contains('ui-lib-input-mask--disabled')).toBeTruthy();
     expect(inputElement().disabled).toBeTruthy();
   });
 
@@ -237,7 +237,7 @@ describe('InputMaskComponent', (): void => {
     expect(describedBy).toMatch(/^ui-lib-input-mask-\d+-hint$/);
 
     const hintElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      `#${describedBy as string}`
+      `#${describedBy as string}`,
     );
     expect(hintElement).toBeTruthy();
     expect((hintElement as HTMLElement).textContent.trim()).toBe(`Format: ${hostComponent().mask}`);
@@ -248,11 +248,11 @@ describe('InputMaskComponent', (): void => {
     fixture.detectChanges();
 
     const hintElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-input-mask-sr-only'
+      '.ui-lib-input-mask-sr-only',
     );
     expect(hintElement).toBeTruthy();
     expect((hintElement as HTMLElement).textContent.trim()).toBe(
-      `Format: ${hostComponent().maskHint}`
+      `Format: ${hostComponent().maskHint}`,
     );
   });
 
@@ -278,7 +278,7 @@ describe('InputMaskComponent', (): void => {
     expect(inputElement().value).toBe('A12');
 
     const component: InputMaskComponent = fixture.debugElement.query(
-      By.directive(InputMaskComponent)
+      By.directive(InputMaskComponent),
     ).componentInstance as InputMaskComponent;
     component.clear();
     fixture.detectChanges();
@@ -383,7 +383,7 @@ describe('InputMaskComponent', (): void => {
     fixture.detectChanges();
 
     const liveRegion: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '[aria-live="polite"].ui-lib-input-mask-sr-only'
+      '[aria-live="polite"].ui-lib-input-mask-sr-only',
     );
     expect(liveRegion?.textContent).toContain('Character "A" does not match the expected format.');
   });
@@ -422,7 +422,7 @@ describe('InputMaskComponent', (): void => {
     expect(hostComponent().value).toBe('(123) 456-7890');
 
     const component: InputMaskComponent = fixture.debugElement.query(
-      By.directive(InputMaskComponent)
+      By.directive(InputMaskComponent),
     ).componentInstance as InputMaskComponent;
     component.clear();
 
@@ -438,7 +438,7 @@ describe('InputMaskComponent', (): void => {
     expect(hostComponent().value).toBe('(123) 456-7890');
 
     const component: InputMaskComponent = fixture.debugElement.query(
-      By.directive(InputMaskComponent)
+      By.directive(InputMaskComponent),
     ).componentInstance as InputMaskComponent;
     component.writeValue('1234567890');
     fixture.detectChanges();
@@ -479,7 +479,7 @@ describe('InputMaskComponent', (): void => {
     expect(clearIcon()).toBeTruthy();
 
     const component: InputMaskComponent = fixture.debugElement.query(
-      By.directive(InputMaskComponent)
+      By.directive(InputMaskComponent),
     ).componentInstance as InputMaskComponent;
     component.setDisabledState(true);
     fixture.detectChanges();
@@ -503,7 +503,7 @@ describe('InputMaskComponent', (): void => {
     fixture.detectChanges();
 
     const component: InputMaskComponent = fixture.debugElement.query(
-      By.directive(InputMaskComponent)
+      By.directive(InputMaskComponent),
     ).componentInstance as InputMaskComponent;
     component.clear();
     fixture.detectChanges();

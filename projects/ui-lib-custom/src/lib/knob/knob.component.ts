@@ -62,15 +62,15 @@ let knobIdCounter: number = 0;
     '(blur)': 'onBlurEvent($event)',
     '(keydown)': 'onKeyDown($event)',
     '(pointerdown)': 'onPointerDown($event)',
-    '[class.ui-lib-knob-sm]': 'size() === "sm"',
-    '[class.ui-lib-knob-md]': 'size() === "md"',
-    '[class.ui-lib-knob-lg]': 'size() === "lg"',
-    '[class.ui-lib-knob-disabled]': 'isControlDisabled()',
-    '[class.ui-lib-knob-readonly]': 'readonly()',
-    '[class.ui-lib-knob-focused]': 'isFocused()',
-    '[class.uilib-variant-material]': 'effectiveVariant() === "material"',
-    '[class.uilib-variant-bootstrap]': 'effectiveVariant() === "bootstrap"',
-    '[class.uilib-variant-minimal]': 'effectiveVariant() === "minimal"',
+    '[class.ui-lib-knob--sm]': 'size() === "sm"',
+    '[class.ui-lib-knob--md]': 'size() === "md"',
+    '[class.ui-lib-knob--lg]': 'size() === "lg"',
+    '[class.ui-lib-knob--disabled]': 'isControlDisabled()',
+    '[class.ui-lib-knob--readonly]': 'readonly()',
+    '[class.ui-lib-knob--focused]': 'isFocused()',
+    '[class.ui-lib-knob--material]': 'effectiveVariant() === "material"',
+    '[class.ui-lib-knob--bootstrap]': 'effectiveVariant() === "bootstrap"',
+    '[class.ui-lib-knob--minimal]': 'effectiveVariant() === "minimal"',
     '[style.--uilib-knob-range-color-override]': 'valueColor() || null',
     '[style.--uilib-knob-text-color-override]': 'textColor() || null',
   },
@@ -163,7 +163,7 @@ export class KnobComponent implements ControlValueAccessor {
 
   /** Bound listener references so they can be removed cleanly. */
   private readonly boundPointerMove: (event: PointerEvent) => void = (
-    event: PointerEvent
+    event: PointerEvent,
   ): void => {
     this.onPointerMove(event);
   };
@@ -180,12 +180,12 @@ export class KnobComponent implements ControlValueAccessor {
 
   /** Active variant, falling back to the global theme variant. */
   protected readonly effectiveVariant: Signal<KnobVariant> = computed<KnobVariant>(
-    (): KnobVariant => this.variant() ?? this.themeConfig.variant()
+    (): KnobVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Value clamped within [min, max]. */
   protected readonly clampedValue: Signal<number> = computed<number>((): number =>
-    this.clamp(this.value())
+    this.clamp(this.value()),
   );
 
   /** Normalised value in the 0..1 range. */
@@ -199,17 +199,17 @@ export class KnobComponent implements ControlValueAccessor {
 
   /** True when interaction should be suppressed. */
   protected readonly isControlDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   /** Whether the control can be interacted with. */
   protected readonly isInteractive: Signal<boolean> = computed<boolean>(
-    (): boolean => !this.isControlDisabled() && !this.readonly()
+    (): boolean => !this.isControlDisabled() && !this.readonly(),
   );
 
   /** Tabindex forwarded to the SVG — disabled controls are removed from tab order. */
   protected readonly effectiveTabindex: Signal<number> = computed<number>((): number =>
-    this.isControlDisabled() ? -1 : this.tabindex()
+    this.isControlDisabled() ? -1 : this.tabindex(),
   );
 
   /** Human-readable value used for aria-valuetext. */

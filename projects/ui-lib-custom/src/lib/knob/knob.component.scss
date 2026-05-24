@@ -51,35 +51,35 @@ ui-lib-knob {
   user-select: none;
 
   // Size variants applied via host classes
-  &.ui-lib-knob-sm {
+  &.ui-lib-knob--sm {
     width: var(--uilib-knob-size-sm);
     height: var(--uilib-knob-size-sm);
   }
 
-  &.ui-lib-knob-md {
+  &.ui-lib-knob--md {
     width: var(--uilib-knob-size-md);
     height: var(--uilib-knob-size-md);
   }
 
-  &.ui-lib-knob-lg {
+  &.ui-lib-knob--lg {
     width: var(--uilib-knob-size-lg);
     height: var(--uilib-knob-size-lg);
   }
 
   // Disabled state
-  &.ui-lib-knob-disabled {
+  &.ui-lib-knob--disabled {
     opacity: var(--uilib-knob-disabled-opacity);
     cursor: not-allowed;
     pointer-events: none;
   }
 
   // Readonly — still interactive (keyboard/focus) but visually muted cursor
-  &.ui-lib-knob-readonly {
+  &.ui-lib-knob--readonly {
     cursor: default;
   }
 
   // Focus ring via outline on the SVG child
-  &.ui-lib-knob-focused .ui-lib-knob-svg {
+  &.ui-lib-knob--focused .ui-lib-knob-svg {
     outline: var(--uilib-knob-focus-ring-width) solid var(--uilib-knob-focus-ring-color);
     outline-offset: 2px;
     border-radius: 50%;
@@ -129,13 +129,13 @@ ui-lib-knob {
 // ---------------------------------------------------------------------------
 // Variant: Bootstrap
 // ---------------------------------------------------------------------------
-.uilib-variant-bootstrap {
+ui-lib-knob.ui-lib-knob--bootstrap {
   --uilib-knob-range-color: #0d6efd;
   --uilib-knob-track-color: #dee2e6;
   --uilib-knob-text-color: #212529;
   --uilib-knob-focus-ring-color: rgba(13, 110, 253, 0.35);
 
-  &.ui-lib-knob-focused .ui-lib-knob-svg {
+  &.ui-lib-knob--focused .ui-lib-knob-svg {
     outline-color: var(--uilib-knob-focus-ring-color);
   }
 
@@ -149,14 +149,14 @@ ui-lib-knob {
 // ---------------------------------------------------------------------------
 // Variant: Minimal
 // ---------------------------------------------------------------------------
-.uilib-variant-minimal {
+ui-lib-knob.ui-lib-knob--minimal {
   --uilib-knob-range-color: #111827;
   --uilib-knob-track-color: #e5e7eb;
   --uilib-knob-text-color: #111827;
   --uilib-knob-focus-ring-color: rgba(17, 24, 39, 0.25);
   --uilib-knob-text-weight: 500;
 
-  &.ui-lib-knob-focused .ui-lib-knob-svg {
+  &.ui-lib-knob--focused .ui-lib-knob-svg {
     outline-color: var(--uilib-knob-focus-ring-color);
   }
 

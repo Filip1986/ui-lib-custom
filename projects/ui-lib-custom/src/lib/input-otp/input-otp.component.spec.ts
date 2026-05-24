@@ -18,7 +18,7 @@ import type { InputOtpChangeEvent } from './input-otp.types';
 
 function queryAll(fixture: ComponentFixture<unknown>, selector: string): HTMLInputElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>(selector)
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>(selector),
   );
 }
 
@@ -68,7 +68,7 @@ function queryEl(fixture: ComponentFixture<unknown>, selector: string): HTMLElem
 class InputOtpHostComponent {
   public readonly length: WritableSignal<number> = signal<number>(4);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
-    'One-time passcode'
+    'One-time passcode',
   );
   public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
   public readonly mask: WritableSignal<boolean> = signal<boolean>(false);
@@ -258,7 +258,7 @@ describe('InputOtpComponent', (): void => {
       fixture.componentInstance.size.set('sm');
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-input-otp');
-      expect(host.classList).toContain('ui-lib-input-otp-sm');
+      expect(host.classList).toContain('ui-lib-input-otp--sm');
     });
 
     it('should apply lg class for size="lg"', async (): Promise<void> => {
@@ -267,15 +267,15 @@ describe('InputOtpComponent', (): void => {
       fixture.componentInstance.size.set('lg');
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-input-otp');
-      expect(host.classList).toContain('ui-lib-input-otp-lg');
+      expect(host.classList).toContain('ui-lib-input-otp--lg');
     });
 
     it('should not apply size class for size="md" (default)', async (): Promise<void> => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const host: HTMLElement = queryEl(fixture, 'ui-lib-input-otp');
-      expect(host.classList).not.toContain('ui-lib-input-otp-sm');
-      expect(host.classList).not.toContain('ui-lib-input-otp-lg');
+      expect(host.classList).not.toContain('ui-lib-input-otp--sm');
+      expect(host.classList).not.toContain('ui-lib-input-otp--lg');
     });
   });
 
@@ -290,7 +290,7 @@ describe('InputOtpComponent', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-input-otp');
-      expect(host.classList).toContain('ui-lib-input-otp-disabled');
+      expect(host.classList).toContain('ui-lib-input-otp--disabled');
       queryAll(fixture, 'input.ui-lib-input-otp-cell').forEach((cell: HTMLInputElement): void => {
         expect(cell.disabled).toBe(true);
       });
@@ -302,7 +302,7 @@ describe('InputOtpComponent', (): void => {
       fixture.componentInstance.readonly.set(true);
       fixture.detectChanges();
       const host: HTMLElement = queryEl(fixture, 'ui-lib-input-otp');
-      expect(host.classList).toContain('ui-lib-input-otp-readonly');
+      expect(host.classList).toContain('ui-lib-input-otp--readonly');
       queryAll(fixture, 'input.ui-lib-input-otp-cell').forEach((cell: HTMLInputElement): void => {
         expect(cell.readOnly).toBe(true);
       });
@@ -313,7 +313,7 @@ describe('InputOtpComponent', (): void => {
         await createFixture(InputOtpHostComponent);
       fixture.componentInstance.invalid.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain('ui-lib-input-otp-invalid');
+      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain('ui-lib-input-otp--invalid');
     });
 
     it('should set aria-invalid on every cell when invalid=true', async (): Promise<void> => {
@@ -352,7 +352,7 @@ describe('InputOtpComponent', (): void => {
         await createFixture(InputOtpHostComponent);
       fixture.componentInstance.filled.set(true);
       fixture.detectChanges();
-      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain('ui-lib-input-otp-filled');
+      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain('ui-lib-input-otp--filled');
     });
   });
 
@@ -405,7 +405,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.writeValue('1234');
@@ -422,7 +422,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.writeValue('1234');
@@ -439,7 +439,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.writeValue('123456');
@@ -460,7 +460,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       // Simulate ngModel writing a value via the CVA channel.
@@ -500,7 +500,9 @@ describe('InputOtpComponent', (): void => {
       fixture.componentInstance.form.get('otp')?.disable();
       fixture.detectChanges();
 
-      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain('ui-lib-input-otp-disabled');
+      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain(
+        'ui-lib-input-otp--disabled',
+      );
     });
   });
 
@@ -513,7 +515,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       const upEvent: KeyboardEvent = createKeydownEvent('ArrowUp');
@@ -531,12 +533,12 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       const spy: jest.SpyInstance = jest.spyOn(
         component as unknown as { focusCell: (i: number) => void },
-        'focusCell'
+        'focusCell',
       );
       const event: KeyboardEvent = createKeydownEvent('ArrowLeft');
       jest.spyOn(event, 'preventDefault');
@@ -549,12 +551,12 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       const spy: jest.SpyInstance = jest.spyOn(
         component as unknown as { focusCell: (i: number) => void },
-        'focusCell'
+        'focusCell',
       );
       const event: KeyboardEvent = createKeydownEvent('ArrowRight');
       jest.spyOn(event, 'preventDefault');
@@ -567,7 +569,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.writeValue('1234');
@@ -585,11 +587,11 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
       const spy: jest.SpyInstance = jest.spyOn(
         component as unknown as { focusCell: (index: number) => void },
-        'focusCell'
+        'focusCell',
       );
       component['onCellKeydown'](createKeydownEvent('Backspace', ''), 2);
       expect(spy).toHaveBeenCalledWith(1);
@@ -599,7 +601,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.writeValue('1234');
@@ -620,7 +622,7 @@ describe('InputOtpComponent', (): void => {
       fixture.detectChanges();
 
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       const event: KeyboardEvent = createKeydownEvent('a');
@@ -636,7 +638,7 @@ describe('InputOtpComponent', (): void => {
       fixture.detectChanges();
 
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       const event: KeyboardEvent = createKeydownEvent('5');
@@ -649,11 +651,11 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
       const spy: jest.SpyInstance = jest.spyOn(
         component as unknown as { focusCell: (index: number) => void },
-        'focusCell'
+        'focusCell',
       );
       component['onCellInput'](createInputEvent('1'), 0);
       expect(spy).toHaveBeenCalledWith(1);
@@ -669,7 +671,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component['onCellPaste'](createPasteEvent('1234'));
@@ -688,7 +690,7 @@ describe('InputOtpComponent', (): void => {
       fixture.detectChanges();
 
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component['onCellPaste'](createPasteEvent('a1b2'));
@@ -707,7 +709,7 @@ describe('InputOtpComponent', (): void => {
       fixture.detectChanges();
 
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component['onCellPaste'](createPasteEvent('1234'));
@@ -720,11 +722,11 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
       const spy: jest.SpyInstance = jest.spyOn(
         component as unknown as { focusCell: (index: number) => void },
-        'focusCell'
+        'focusCell',
       );
       component['onCellPaste'](createPasteEvent('1234'));
       expect(spy).toHaveBeenCalledWith(3);
@@ -734,7 +736,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
       component['onCellPaste'](createPasteEvent('1234'));
       await Promise.resolve();
@@ -753,7 +755,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.writeValue('123');
@@ -768,7 +770,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       const focusEvent: FocusEvent = new FocusEvent('focus');
@@ -785,7 +787,7 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component['onCellBlur'](new FocusEvent('blur'));
@@ -802,20 +804,22 @@ describe('InputOtpComponent', (): void => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.setDisabledState(true);
       fixture.detectChanges();
 
-      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain('ui-lib-input-otp-disabled');
+      expect(queryEl(fixture, 'ui-lib-input-otp').classList).toContain(
+        'ui-lib-input-otp--disabled',
+      );
     });
 
     it('should remove disabled class when setDisabledState(false)', async (): Promise<void> => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const component: InputOtpComponent = fixture.debugElement.query(
-        By.directive(InputOtpComponent)
+        By.directive(InputOtpComponent),
       ).componentInstance as InputOtpComponent;
 
       component.setDisabledState(true);
@@ -824,7 +828,7 @@ describe('InputOtpComponent', (): void => {
       fixture.detectChanges();
 
       expect(queryEl(fixture, 'ui-lib-input-otp').classList).not.toContain(
-        'ui-lib-input-otp-disabled'
+        'ui-lib-input-otp--disabled',
       );
     });
   });
