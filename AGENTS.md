@@ -50,7 +50,7 @@
 - **TypeScript type-check all projects**: `npm run typecheck` (checks lib source, lib tests, demo app, demo tests, and stories — no emit)
 
 ## Git Hooks (Husky)
-- **pre-commit** — runs `lint-staged`: ESLint + Prettier on staged `.ts`/`.scss` files only (fast).
+- **pre-commit** — runs `lint-staged`: ESLint (`.ts` + `.html`) + Prettier (`.ts`) + Stylelint (`.scss`) on staged files only (fast).
 - **pre-push** — runs `npm run typecheck`: full TS type-check across all five tsconfigs before any push. Blocks push if there are TS errors.
 - To bypass hooks in an emergency: `git push --no-verify` (use sparingly; always fix errors before merging).
 
