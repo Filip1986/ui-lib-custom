@@ -96,12 +96,12 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
     input<RadioButtonAppearance>('outlined');
 
   /** Emitted when this radio button is selected. */
-  public readonly change: OutputEmitterRef<RadioButtonChangeEvent> =
+  public readonly radioChange: OutputEmitterRef<RadioButtonChangeEvent> =
     output<RadioButtonChangeEvent>();
   /** Emitted when the native input gains focus. */
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly radioFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   /** Emitted when the native input loses focus. */
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly radioBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   /** Tracks the disabled state applied by a parent form control. */
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
@@ -121,12 +121,12 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
 
   /** Resolved variant — falls back to global theme when not set explicitly. */
   public readonly effectiveVariant: Signal<RadioButtonVariant> = computed<RadioButtonVariant>(
-    (): RadioButtonVariant => this.variant() ?? this.themeConfig.variant()
+    (): RadioButtonVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** True when the component is disabled via input or a parent form control. */
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   /**
@@ -134,7 +134,7 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
    * radio button's own value input.
    */
   public readonly isChecked: Signal<boolean> = computed<boolean>(
-    (): boolean => this.modelValue() !== undefined && this.modelValue() === this.value()
+    (): boolean => this.modelValue() !== undefined && this.modelValue() === this.value(),
   );
 
   /** Host CSS classes derived from current state. */
@@ -175,7 +175,7 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
    * Our arrow-key handler provides the in-group keyboard navigation.
    */
   public readonly hostTabIndex: Signal<number> = computed<number>((): number =>
-    this.isDisabled() ? -1 : this.tabindex()
+    this.isDisabled() ? -1 : this.tabindex(),
   );
 
   /**
@@ -193,7 +193,7 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
       }
 
       return this.label() ? this.getLabelElementId() : null;
-    }
+    },
   );
 
   public ngAfterViewInit(): void {
@@ -235,18 +235,18 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
     this.modelValue.set(nextValue);
     this.onCvaChange(nextValue);
     this.onCvaTouched();
-    this.change.emit({ value: nextValue, originalEvent: event });
+    this.radioChange.emit({ value: nextValue, originalEvent: event });
   }
 
   /** Forwards focus events from the native input to the `focus` output. */
   public onFocusIn(event: FocusEvent): void {
-    this.focus.emit(event);
+    this.radioFocus.emit(event);
   }
 
   /** Marks the control as touched and forwards blur events to the `blur` output. */
   public onNativeBlur(event: FocusEvent): void {
     this.onCvaTouched();
-    this.blur.emit(event);
+    this.radioBlur.emit(event);
   }
 
   /**
@@ -272,10 +272,10 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
 
     const allInputs: HTMLInputElement[] = Array.from(
       document.querySelectorAll<HTMLInputElement>(
-        `.ui-lib-radio-button__native-input[name="${escapedName}"]`
-      )
+        `.ui-lib-radio-button__native-input[name="${escapedName}"]`,
+      ),
     ).filter(
-      (input: HTMLInputElement): boolean => !input.closest('.ui-lib-radio-button--disabled')
+      (input: HTMLInputElement): boolean => !input.closest('.ui-lib-radio-button--disabled'),
     );
 
     if (allInputs.length === 0) {
@@ -347,7 +347,7 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
   private warnWhenNameIsMissing(): void {
     if (isDevMode() && !this.name()) {
       console.warn(
-        '[RadioButton] Missing required "name" input. Radios must share the same name for native group keyboard behavior.'
+        '[RadioButton] Missing required "name" input. Radios must share the same name for native group keyboard behavior.',
       );
     }
   }

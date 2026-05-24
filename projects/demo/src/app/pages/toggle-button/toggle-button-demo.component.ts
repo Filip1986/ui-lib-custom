@@ -178,7 +178,7 @@ export class ToggleButtonDemoComponent {
   public readonly notificationsValue: Signal<boolean> = signal<boolean>(false);
 
   public onEventChange(event: ToggleButtonChangeEvent): void {
-    const entry: string = `change — checked: ${String(event.checked)}`;
+    const entry: string = `toggleButtonChange — checked: ${String(event.checked)}`;
     this.eventLog.update((log: string[]): string[] => [entry, ...log].slice(0, 6));
   }
 

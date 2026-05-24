@@ -109,12 +109,12 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
   public readonly checkedChange: OutputEmitterRef<boolean> = output<boolean>();
 
   /** Emitted when the toggle state changes. */
-  public readonly change: OutputEmitterRef<ToggleButtonChangeEvent> =
+  public readonly toggleButtonChange: OutputEmitterRef<ToggleButtonChangeEvent> =
     output<ToggleButtonChangeEvent>();
   /** Emitted when the inner button receives focus. */
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly toggleButtonFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   /** Emitted when the inner button loses focus. */
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly toggleButtonBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private isSyncingPressedFromCheckedAlias: boolean = false;
@@ -130,22 +130,22 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
   /** Resolved variant — falls back to the global theme variant when none is set on this input. */
   public readonly effectiveVariant: Signal<ToggleButtonVariant> = computed<ToggleButtonVariant>(
-    (): ToggleButtonVariant => this.variant() ?? this.themeConfig.variant()
+    (): ToggleButtonVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** True when the button is disabled via the input or via CVA setDisabledState. */
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   /** Effective tabindex — -1 when disabled so it is skipped by keyboard navigation. */
   public readonly effectiveTabindex: Signal<number> = computed<number>((): number =>
-    this.isDisabled() ? -1 : this.tabindex()
+    this.isDisabled() ? -1 : this.tabindex(),
   );
 
   /** Label resolved from onLabel / offLabel according to the current checked state. */
   public readonly activeLabel: Signal<string> = computed<string>((): string =>
-    this.pressed() ? this.onLabel() : this.offLabel()
+    this.pressed() ? this.onLabel() : this.offLabel(),
   );
 
   /** Icon resolved from onIcon / offIcon according to the current checked state. */
@@ -154,11 +154,11 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
   >((): SemanticIcon | string | null => (this.pressed() ? this.onIcon() : this.offIcon()));
 
   public readonly hasVisibleLabel: Signal<boolean> = computed<boolean>(
-    (): boolean => this.activeLabel().trim().length > 0
+    (): boolean => this.activeLabel().trim().length > 0,
   );
 
   public readonly ariaPressed: Signal<'true' | 'false'> = computed<'true' | 'false'>(
-    (): 'true' | 'false' => (this.pressed() ? 'true' : 'false')
+    (): 'true' | 'false' => (this.pressed() ? 'true' : 'false'),
   );
 
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
@@ -170,7 +170,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
       const trimmedLabel: string = ariaLabel.trim();
       return trimmedLabel.length > 0 ? trimmedLabel : null;
-    }
+    },
   );
 
   public readonly ariaLabelledByResolved: Signal<string | null> = computed<string | null>(
@@ -182,7 +182,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
       const trimmedLabelledBy: string = ariaLabelledBy.trim();
       return trimmedLabelledBy.length > 0 ? trimmedLabelledBy : null;
-    }
+    },
   );
 
   /** Active icon when iconPos is 'left'; null otherwise. */
@@ -221,7 +221,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
   /** ID applied to the inner button element. */
   public readonly buttonId: Signal<string> = computed<string>(
-    (): string => this.inputId() ?? `${this.controlId}-button`
+    (): string => this.inputId() ?? `${this.controlId}-button`,
   );
 
   constructor() {
@@ -279,7 +279,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     this.pressed.set(nextChecked);
     this.onCvaChange(nextChecked);
     this.onCvaTouched();
-    this.change.emit({ originalEvent: event, checked: nextChecked });
+    this.toggleButtonChange.emit({ originalEvent: event, checked: nextChecked });
 
     const label: string = this.activeLabel();
     const state: string = nextChecked ? 'on' : 'off';
@@ -295,15 +295,15 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     }
   }
 
-  /** Forwards focus events to the focus output. */
+  /** Forwards focus events to the toggleButtonFocus output. */
   public onFocus(event: FocusEvent): void {
-    this.focus.emit(event);
+    this.toggleButtonFocus.emit(event);
   }
 
-  /** Marks the control as touched and forwards blur events to the blur output. */
+  /** Marks the control as touched and forwards blur events to the toggleButtonBlur output. */
   public onBlurInternal(event: FocusEvent): void {
     this.onCvaTouched();
-    this.blur.emit(event);
+    this.toggleButtonBlur.emit(event);
   }
 
   // ControlValueAccessor implementation
@@ -339,7 +339,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
     if (this.iconOnlyModeNeedsAriaLabel() && this.ariaLabelResolved() === null) {
       console.error(
-        '[ui-lib-toggle-button] ariaLabel is required when the toggle button renders icon-only content.'
+        '[ui-lib-toggle-button] ariaLabel is required when the toggle button renders icon-only content.',
       );
     }
   }

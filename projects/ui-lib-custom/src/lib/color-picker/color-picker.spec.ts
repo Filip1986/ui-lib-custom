@@ -30,7 +30,7 @@ type ChangeEventPayload = { originalEvent: Event; value: ColorPickerValue };
 class NgModelHostComponent {
   public value: ColorPickerValue = 'ff0000';
   public readonly format: WritableSignal<'hex' | 'rgb' | 'hsb'> = signal<'hex' | 'rgb' | 'hsb'>(
-    'hex'
+    'hex',
   );
   public readonly inline: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<'material' | 'bootstrap' | 'minimal'> = signal<
@@ -75,7 +75,7 @@ function mockRect(
   left: number,
   top: number,
   width: number,
-  height: number
+  height: number,
 ): void {
   const rect: DOMRect = {
     x: left,
@@ -211,7 +211,7 @@ describe('ColorPicker component', (): void => {
 
       const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
         document.body,
-        '.ui-lib-colorpicker__panel'
+        '.ui-lib-colorpicker__panel',
       );
       panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
       fixture.detectChanges();
@@ -259,7 +259,7 @@ describe('ColorPicker component', (): void => {
 
       const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
         hostEl(),
-        '.ui-lib-colorpicker__panel'
+        '.ui-lib-colorpicker__panel',
       );
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       fixture.detectChanges();
@@ -273,7 +273,7 @@ describe('ColorPicker component', (): void => {
 
       const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
         hostEl(),
-        '.ui-lib-colorpicker__panel'
+        '.ui-lib-colorpicker__panel',
       );
       panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
       fixture.detectChanges();
@@ -293,7 +293,7 @@ describe('ColorPicker component', (): void => {
 
     it('updates saturation/brightness on color area mousedown', (): void => {
       colorAreaEl().dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true, clientX: 80, clientY: 25 })
+        new MouseEvent('mousedown', { bubbles: true, clientX: 80, clientY: 25 }),
       );
       fixture.detectChanges();
 
@@ -303,7 +303,7 @@ describe('ColorPicker component', (): void => {
 
     it('updates hue on hue slider mousedown', (): void => {
       hueEl().dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true, clientX: 10, clientY: 50 })
+        new MouseEvent('mousedown', { bubbles: true, clientX: 10, clientY: 50 }),
       );
       fixture.detectChanges();
 
@@ -313,7 +313,7 @@ describe('ColorPicker component', (): void => {
     it('emits hex formatted onChange payload', (): void => {
       fixture.componentRef.setInput('format', 'hex');
       fixture.detectChanges();
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.colorChange, 'emit');
 
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 0 }));
       fixture.detectChanges();
@@ -326,7 +326,7 @@ describe('ColorPicker component', (): void => {
     it('emits rgb formatted onChange payload', (): void => {
       fixture.componentRef.setInput('format', 'rgb');
       fixture.detectChanges();
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.colorChange, 'emit');
 
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 33 }));
       fixture.detectChanges();
@@ -344,7 +344,7 @@ describe('ColorPicker component', (): void => {
     it('emits hsb formatted onChange payload', (): void => {
       fixture.componentRef.setInput('format', 'hsb');
       fixture.detectChanges();
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.colorChange, 'emit');
 
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 20 }));
       fixture.detectChanges();
@@ -364,7 +364,7 @@ describe('ColorPicker component', (): void => {
       fixture.detectChanges();
 
       colorAreaEl().dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true, clientX: 0, clientY: 0 })
+        new MouseEvent('mousedown', { bubbles: true, clientX: 0, clientY: 0 }),
       );
       fixture.detectChanges();
 
@@ -376,7 +376,7 @@ describe('ColorPicker component', (): void => {
       fixture.detectChanges();
 
       colorAreaEl().dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true, clientX: 100, clientY: 100 })
+        new MouseEvent('mousedown', { bubbles: true, clientX: 100, clientY: 100 }),
       );
       fixture.detectChanges();
 
@@ -501,7 +501,7 @@ describe('ColorPicker component', (): void => {
       const removeSpy: jest.SpyInstance = jest.spyOn(document, 'removeEventListener');
 
       colorAreaEl().dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true, clientX: 30, clientY: 30 })
+        new MouseEvent('mousedown', { bubbles: true, clientX: 30, clientY: 30 }),
       );
       fixture.detectChanges();
       expect(addSpy).toHaveBeenCalled();
@@ -543,7 +543,7 @@ describe('ColorPicker component', (): void => {
 
       mockRect(hueEl(), 0, 0, 20, 100);
 
-      const emitSpy: jest.SpyInstance = jest.spyOn(component.change, 'emit');
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.colorChange, 'emit');
       hueEl().dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientY: 10 }));
       fixture.detectChanges();
       const callsAfterRgb: ChangeEventPayload[][] = emitSpy.mock.calls as ChangeEventPayload[][];
@@ -643,7 +643,7 @@ describe('ColorPicker forms integration', (): void => {
 
       mockRect(colorAreaEl(), 0, 0, 100, 100);
       colorAreaEl().dispatchEvent(
-        new MouseEvent('mousedown', { bubbles: true, clientX: 60, clientY: 40 })
+        new MouseEvent('mousedown', { bubbles: true, clientX: 60, clientY: 40 }),
       );
       fixture.detectChanges();
 

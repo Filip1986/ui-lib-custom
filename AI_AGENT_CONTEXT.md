@@ -82,6 +82,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [naming convention audit — critical output renames + conventions doc hardening]
+Changed:
+  color-picker.ts: change → colorChange (output + emit)
+  color-picker.spec.ts: component.change → component.colorChange (4 references)
+  slider.ts: change → sliderChange (output + 3 emits)
+  toggle-button.ts: change/focus/blur → toggleButtonChange/toggleButtonFocus/toggleButtonBlur (declarations + emits)
+  toggle-switch.ts: change/focus/blur → switchChange/switchFocus/switchBlur (declarations + emits + internal comment)
+  autocomplete.ts: keyUp → autocompleteKeyUp (output + emit)
+  virtual-scroller.component.ts: scroll → virtualScroll (output + emit)
+  galleria.ts: removed duplicate explicit activeIndexChange output (model() already emits it); removed output import + OutputEmitterRef type
+  toggle-button-demo.component.html: (change)→(toggleButtonChange) binding + description text
+  toggle-button-demo.component.ts: event log string updated
+  autocomplete-demo.component.ts: API table — select→optionSelect, focus→autocompleteFocus, blur→autocompleteBlur; added autocompleteKeyUp
+  LIBRARY_CONVENTIONS.md: Rule 1 example fixed (was accidentally showing focus/change as correct); Rule 2 camelCase note added; canonical output names reference table added
+State: ng build → PASS (40 924ms); eslint → 0 warnings on all changed files
+Verification: npm run build (PASS), npx eslint 12 changed files --max-warnings 0 (PASS)
+Next step: Fix medium issues from audit — add `readonly` to order-list and pick-list model() signals; replace CommonModule with specific directive imports in 18 components
+
 Date: 2026-05-24 [themes refactor — shape-pill token, dark mixin deduplication, themes.css full rewrite]
 Changed:
   themes.scss: added --uilib-shape-pill: 9999px to universal tokens; wired --uilib-radius-full to it;
@@ -113,62 +131,6 @@ Verification: node_modules/.bin/jest.cmd --testPathPatterns="badge" (25/25); --t
 Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows; pipe | in --testPathPatterns breaks on cmd, run patterns separately
 Next step: Task #1 (in_progress) — Refactor themes.scss: extract universal tokens, add radius/shadow globals, deduplicate dark block
 
-Date: 2026-05-24 [CSS @layer adoption — full library wrapped in named cascade layers + ADR + docs + competitive tracking page]
-Changed:
-  themes.scss: @layer uilib.tokens, uilib.components; declaration added; entire file wrapped in @layer uilib.tokens { }
-  103 component SCSS files: all wrapped in @layer uilib.components { } (no re-indentation)
-  styles/high-contrast.scss: intentionally NOT wrapped (stays outside layers so forced-colors overrides always win)
-  LIBRARY_CONVENTIONS.md: added CSS Cascade Layer Rule section (authoring rules, layer hierarchy, exception, @keyframes guidance, reference)
-  CLAUDE.md: added @layer to non-negotiable conventions + anti-patterns table
-  docs/architecture/ADR_CSS_LAYER_ADOPTION.md: new ADR with context, decision, layer hierarchy table, consequences, alternatives considered
-  roadmap.component.ts: CssArchRow interface; cssArchRows data (16 rows across 5 categories); cssArchCategories; getCssArchCategoryLabel(); getCssArchCategoryColor(); sections array updated with css-architecture entry
-  roadmap.component.html: new <section id="css-architecture"> with table, category legend, before/after code explainer
-  roadmap.component.scss: CSS architecture section styles (legend, dot, check cell, notes, explainer grid, code block)
-State: 6040/6040 tests passing; ng build → PASS; typecheck → PASS; eslint → 0 warnings
-Verification: npm test (6040/6040), npm run build (PASS), npm run typecheck (PASS), npx eslint roadmap/ --max-warnings 0 (PASS)
-Terminal notes: none
-Next step: Commit and push on feat/css-layer-adoption → PR → merge. Then: broader axe-core audit or next component.
-
-Date: 2026-05-24 [BEM class name standardisation — all uilib-variant-* and single-hyphen modifier classes eliminated]
-Changed:
-  input-number/input-number.component.ts: host bindings renamed (ui-lib-input-number-sm → ui-lib-input-number--sm etc.)
-  input-number/input-number.component.scss: 13 top-level selectors renamed to double-hyphen BEM
-  input-number/input-number.component.spec.ts: 10 assertion strings updated
-  knob/knob.component.ts: host bindings renamed (ui-lib-knob-sm → ui-lib-knob--sm etc.)
-  knob/knob.component.scss: 8 nested selectors + 2 top-level variant blocks restructured (.uilib-variant-bootstrap → ui-lib-knob.ui-lib-knob--bootstrap)
-  knob/knob.component.spec.ts: 4 assertion strings updated
-  password/password.component.ts: host bindings (completed previous session)
-  password/password.component.scss: selectors (completed previous session)
-  password/password.component.spec.ts: assertions (completed previous session)
-  input-mask/input-mask.component.ts: added inject, ThemeConfigService, variant input, effectiveVariant; renamed host bindings + added variant bindings
-  input-mask/input-mask.component.scss: renamed modifier selectors + converted parent-context .uilib-variant-* to component-level ui-lib-input-mask--* selectors
-  input-mask/input-mask.component.spec.ts: 6 assertion strings updated
-  input-otp/input-otp.component.ts: added inject, ThemeConfigService, variant input, effectiveVariant; renamed host bindings + added variant bindings
-  input-otp/input-otp.component.scss: renamed modifier selectors + converted parent-context .uilib-variant-* to component-level ui-lib-input-otp--* selectors
-  input-otp/input-otp.component.spec.ts: 6 assertion strings updated
-  virtual-scroller/virtual-scroller.component.ts: added ThemeConfigService inject, variant input, effectiveVariant computed, added variant class to hostClasses()
-  virtual-scroller/virtual-scroller.component.scss: 3 top-level variant selectors renamed (uilib-variant-* → ui-lib-virtual-scroller--*)
-State: 6040/6040 tests passing (226 suites). ng build ui-lib-custom → PASS. PR #233 open.
-Verification: npx eslint → 0 warnings; ng build → PASS; npm test → 6040/6040; pre-push typecheck → PASS
-Terminal notes: Use npm test -- --testPathPatterns="pattern" (not --testPathPattern which is deprecated); pipe | in regex must use PowerShell not bash
-Next step: Merge PR #233 → then CSS @layer adoption, or broader axe-core audit.
-
-Date: 2026-05-24 [Runtime variant switcher — all components now respect ThemeConfigService.setVariant()]
-Changed:
-  theming/theme-config.service.ts: setVariant() now writes data-variant to document.documentElement AND persists to localStorage via persistConfig(); constructor restores stored variant on boot
-  theming/theme-preset.interface.ts: ThemeConfig extended with optional variant?: ThemeVariant
-  6 outlier components updated from hardcoded input<Variant>('material') to input<Variant | null>(null) + effectiveVariant computed signal:
-  - button-group/button-group.ts (primary barrel — relative import OK)
-  - carousel/carousel.component.ts (secondary entry point — import { ThemeConfigService } from 'ui-lib-custom/theme')
-  - paginator/paginator.component.ts (secondary entry point — same pattern)
-  - password/password.component.ts (secondary entry point — same pattern)
-  - upload/upload.component.ts (secondary entry point — same pattern)
-  - autocomplete/autocomplete.ts (secondary entry point — same pattern; also updated syncPanelMount to use effectiveVariant())
-  Key lesson: Secondary entry points MUST use package-path imports for ThemeConfigService (not relative) or ng-packagr partial compilation throws "Cannot destructure property 'pos' of 'file.referencedFiles[index]'"
-State: 399/399 tests passing in affected suites. ng build → PASS. PR #232 open.
-Verification: npx eslint → 0 warnings; ng build → PASS; npm test → 399/399; npm run typecheck → PASS
-Terminal notes: npm test -- --testPathPatterns="pattern" (not --testPathPattern which is deprecated)
-Next step: Merge PR #232 → then CSS @layer adoption, or broader axe-core audit.
 
 Date: 2026-05-23 [Dark-mode consolidation — eliminated all 4 parallel dark-mode systems]
 Changed:

@@ -89,12 +89,12 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
   public readonly checked: ModelSignal<boolean> = model<boolean>(false);
 
   /** Emitted when the toggle state changes. */
-  public readonly change: OutputEmitterRef<ToggleSwitchChangeEvent> =
+  public readonly switchChange: OutputEmitterRef<ToggleSwitchChangeEvent> =
     output<ToggleSwitchChangeEvent>();
   /** Emitted when the native input receives focus. */
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly switchFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   /** Emitted when the native input loses focus. */
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly switchBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private onCvaChange: (value: boolean) => void = (): void => {};
@@ -109,17 +109,17 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
 
   /** Resolved variant — falls back to the global theme variant when none is set on this input. */
   public readonly effectiveVariant: Signal<ToggleSwitchVariant> = computed<ToggleSwitchVariant>(
-    (): ToggleSwitchVariant => this.variant() ?? this.themeConfig.variant()
+    (): ToggleSwitchVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** True when the switch is disabled via the input or via CVA setDisabledState. */
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   /** Effective tabindex — -1 when disabled so it is skipped by keyboard navigation. */
   public readonly effectiveTabindex: Signal<number> = computed<number>((): number =>
-    this.isDisabled() ? -1 : this.tabindex()
+    this.isDisabled() ? -1 : this.tabindex(),
   );
 
   /** Composite host class string applied via the host binding. */
@@ -152,17 +152,17 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
 
   /** aria-checked attribute value for the native input. */
   public readonly ariaChecked: Signal<string> = computed<string>((): string =>
-    this.checked() ? 'true' : 'false'
+    this.checked() ? 'true' : 'false',
   );
 
   /** aria-labelledby value — null when ariaLabel is provided directly. */
   public readonly ariaLabelledby: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.ariaLabel() || !this.label() ? null : this.labelElementId)
+    (): string | null => (this.ariaLabel() || !this.label() ? null : this.labelElementId),
   );
 
   /** ID applied to the native input element. */
   public readonly nativeInputId: Signal<string> = computed<string>(
-    (): string => this.inputId() ?? `${this.controlId}-input`
+    (): string => this.inputId() ?? `${this.controlId}-input`,
   );
 
   public ngAfterViewInit(): void {
@@ -176,7 +176,7 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
       if (!hasLabel) {
         console.warn(
           '[ui-lib-toggle-switch] No accessible name found. ' +
-            'Provide ariaLabel, label input, or a projected <label>.'
+            'Provide ariaLabel, label input, or a projected <label>.',
         );
       }
     }
@@ -213,7 +213,7 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
     this.checked.set(nextChecked);
     this.onCvaChange(nextChecked);
     this.onCvaTouched();
-    this.change.emit({ checked: nextChecked, originalEvent: event });
+    this.switchChange.emit({ checked: nextChecked, originalEvent: event });
 
     const label: string = this.label() ?? this.ariaLabel() ?? 'Toggle switch';
     const state: string = nextChecked ? 'on' : 'off';
@@ -231,21 +231,21 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
   /**
    * Intercepts the native change event from the inner input and stops it from bubbling
    * to prevent host-level (change) listeners from receiving the raw DOM Event instead of
-   * the typed ToggleSwitchChangeEvent emitted via the component's change output.
+   * the typed ToggleSwitchChangeEvent emitted via the component's switchChange output.
    */
   public onNativeChange(event: Event): void {
     event.stopPropagation();
   }
 
-  /** Forwards focus events to the focus output. */
+  /** Forwards focus events to the switchFocus output. */
   public onFocusIn(event: FocusEvent): void {
-    this.focus.emit(event);
+    this.switchFocus.emit(event);
   }
 
-  /** Marks the control as touched and forwards blur events to the blur output. */
+  /** Marks the control as touched and forwards blur events to the switchBlur output. */
   public onNativeBlur(event: FocusEvent): void {
     this.onCvaTouched();
-    this.blur.emit(event);
+    this.switchBlur.emit(event);
   }
 
   // ControlValueAccessor implementation

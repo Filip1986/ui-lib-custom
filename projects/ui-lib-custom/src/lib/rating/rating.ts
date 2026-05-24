@@ -106,7 +106,7 @@ export class Rating implements ControlValueAccessor {
   // ── Outputs ───────────────────────────────────────────────────────────────
 
   /** Emitted whenever the rating value changes (including clears). */
-  public readonly change: OutputEmitterRef<RatingChangeEvent> = output<RatingChangeEvent>();
+  public readonly ratingChange: OutputEmitterRef<RatingChangeEvent> = output<RatingChangeEvent>();
   /**
    * Emitted when a star is selected. The value is always a positive integer.
    * Use `cleared` to detect when the rating is cleared.
@@ -115,9 +115,9 @@ export class Rating implements ControlValueAccessor {
   /** Emitted when the rating is cleared (cancel button, toggle-deselect, or Delete key). */
   public readonly cleared: OutputEmitterRef<Event> = output<Event>();
   /** Emitted when any star receives focus. */
-  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly ratingFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
   /** Emitted when any star loses focus. */
-  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  public readonly ratingBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   // ── Content children (custom icon templates) ──────────────────────────────
 
@@ -163,14 +163,14 @@ export class Rating implements ControlValueAccessor {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly elementRef: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
 
   // ── Computed ──────────────────────────────────────────────────────────────
 
   /** ARIA role for the host element: "img" in read-only mode, "radiogroup" otherwise. */
   public readonly hostRole: Signal<string> = computed<string>((): string =>
-    this.readonly() ? 'img' : 'radiogroup'
+    this.readonly() ? 'img' : 'radiogroup',
   );
 
   /**
@@ -191,22 +191,22 @@ export class Rating implements ControlValueAccessor {
 
       const normalizedAriaLabel: string = this.ariaLabel()?.trim() ?? '';
       return normalizedAriaLabel.length > 0 ? normalizedAriaLabel : DEFAULT_RATING_ARIA_LABEL;
-    }
+    },
   );
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<RatingVariant> = computed<RatingVariant>(
-    (): RatingVariant => this.variant() ?? this.themeConfig.variant()
+    (): RatingVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** True when the component is disabled via input or a parent form control. */
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   /** Array of star positions [1 … stars]. */
   public readonly starsArray: Signal<number[]> = computed<number[]>((): number[] =>
-    Array.from({ length: this.stars() }, (_element: unknown, index: number): number => index + 1)
+    Array.from({ length: this.stars() }, (_element: unknown, index: number): number => index + 1),
   );
 
   /** True when at least one custom icon template has been projected. */
@@ -214,7 +214,7 @@ export class Rating implements ControlValueAccessor {
     (): boolean =>
       this.onIconTemplate() !== undefined ||
       this.offIconTemplate() !== undefined ||
-      this.cancelIconTemplate() !== undefined
+      this.cancelIconTemplate() !== undefined,
   );
 
   /** Host CSS classes derived from current variant, size, and state. */
@@ -385,13 +385,13 @@ export class Rating implements ControlValueAccessor {
       return;
     }
 
-    this.focus.emit(event);
+    this.ratingFocus.emit(event);
   }
 
   /** Emits the `blur` output when a star loses focus; marks the control as touched. */
   public onStarBlur(event: FocusEvent): void {
     this.onCvaTouched();
-    this.blur.emit(event);
+    this.ratingBlur.emit(event);
   }
 
   /**
@@ -476,7 +476,7 @@ export class Rating implements ControlValueAccessor {
     this.value.set(star);
     this.onCvaChange(star);
     this.onCvaTouched();
-    this.change.emit({ value: star, originalEvent: event });
+    this.ratingChange.emit({ value: star, originalEvent: event });
     this.rate.emit({ value: star, originalEvent: event });
   }
 
@@ -484,7 +484,7 @@ export class Rating implements ControlValueAccessor {
     this.value.set(null);
     this.onCvaChange(null);
     this.onCvaTouched();
-    this.change.emit({ value: null, originalEvent: event });
+    this.ratingChange.emit({ value: null, originalEvent: event });
     this.cleared.emit(event);
   }
 
@@ -501,7 +501,7 @@ export class Rating implements ControlValueAccessor {
 
     this.hasWarnedMissingAccessibleName = true;
     console.warn(
-      '[ui-lib-rating] Missing accessible name. Provide ariaLabel or ariaLabelledby when no visible label is present.'
+      '[ui-lib-rating] Missing accessible name. Provide ariaLabel or ariaLabelledby when no visible label is present.',
     );
   }
 }

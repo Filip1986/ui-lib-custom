@@ -12,13 +12,11 @@ import {
   inject,
   input,
   model,
-  output,
   signal,
   viewChild,
   type InputSignal,
   type ModelSignal,
   type OnDestroy,
-  type OutputEmitterRef,
   type Signal,
   type TemplateRef,
   type WritableSignal,
@@ -98,7 +96,7 @@ export class GalleriaComponent implements OnDestroy {
 
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly hostElement: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
   private readonly document: Document = inject(DOCUMENT);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
@@ -186,7 +184,7 @@ export class GalleriaComponent implements OnDestroy {
 
   /** Interval in milliseconds between automatic slide transitions. */
   public readonly transitionInterval: InputSignal<number> = input<number>(
-    GALLERIA_DEFAULT_TRANSITION_INTERVAL
+    GALLERIA_DEFAULT_TRANSITION_INTERVAL,
   );
 
   /** When true, a fullscreen toggle button is rendered; use `visible` to control open state. */
@@ -199,7 +197,7 @@ export class GalleriaComponent implements OnDestroy {
 
   /** Design variant; inherits from ThemeConfigService when null. */
   public readonly variant: InputSignal<GalleriaVariant | null> = input<GalleriaVariant | null>(
-    null
+    null,
   );
 
   /** Component size token. */
@@ -234,11 +232,6 @@ export class GalleriaComponent implements OnDestroy {
   /** Fullscreen overlay visibility — supports two-way binding. */
   public readonly visible: ModelSignal<boolean> = model<boolean>(false);
 
-  // ─── Outputs ─────────────────────────────────────────────────────────────────
-
-  /** Emitted whenever the active index changes. */
-  public readonly activeIndexChange: OutputEmitterRef<number> = output<number>();
-
   // ─── Internal state ───────────────────────────────────────────────────────────
 
   /** Index of the first thumbnail shown in the scrollable thumbnail strip. */
@@ -257,54 +250,57 @@ export class GalleriaComponent implements OnDestroy {
 
   /** Resolved design variant — falls back to the global theme variant when null. */
   public readonly effectiveVariant: Signal<GalleriaVariant> = computed<GalleriaVariant>(
-    (): GalleriaVariant => this.variant() ?? this.themeConfig.variant()
+    (): GalleriaVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Currently active item. */
   public readonly currentItem: Signal<GalleriaItem | null> = computed<GalleriaItem | null>(
-    (): GalleriaItem | null => this.value()[this.activeIndex()] ?? null
+    (): GalleriaItem | null => this.value()[this.activeIndex()] ?? null,
   );
 
   /** True when the thumbnail strip is positioned to the left or right of the item. */
   public readonly isVertical: Signal<boolean> = computed<boolean>(
-    (): boolean => this.thumbnailsPosition() === 'left' || this.thumbnailsPosition() === 'right'
+    (): boolean => this.thumbnailsPosition() === 'left' || this.thumbnailsPosition() === 'right',
   );
 
   /** True when the thumbnail strip should appear before (above/left of) the main item. */
   public readonly isThumbnailBefore: Signal<boolean> = computed<boolean>(
-    (): boolean => this.thumbnailsPosition() === 'top' || this.thumbnailsPosition() === 'left'
+    (): boolean => this.thumbnailsPosition() === 'top' || this.thumbnailsPosition() === 'left',
   );
 
   /** True when backward navigation is available. */
   public readonly canNavigatePrev: Signal<boolean> = computed<boolean>(
-    (): boolean => this.circular() || this.activeIndex() > 0
+    (): boolean => this.circular() || this.activeIndex() > 0,
   );
 
   /** True when forward navigation is available. */
   public readonly canNavigateNext: Signal<boolean> = computed<boolean>(
-    (): boolean => this.circular() || this.activeIndex() < this.value().length - 1
+    (): boolean => this.circular() || this.activeIndex() < this.value().length - 1,
   );
 
   /** True when the thumbnail strip can scroll back. */
   public readonly canScrollThumbnailsPrev: Signal<boolean> = computed<boolean>(
-    (): boolean => this.thumbnailFirstIndex() > 0
+    (): boolean => this.thumbnailFirstIndex() > 0,
   );
 
   /** True when the thumbnail strip can scroll forward. */
   public readonly canScrollThumbnailsNext: Signal<boolean> = computed<boolean>(
-    (): boolean => this.thumbnailFirstIndex() + this.numVisible() < this.value().length
+    (): boolean => this.thumbnailFirstIndex() + this.numVisible() < this.value().length,
   );
 
   /** Slice of value[] shown in the thumbnail strip. */
   public readonly visibleThumbnails: Signal<GalleriaItem[]> = computed<GalleriaItem[]>(
     (): GalleriaItem[] =>
-      this.value().slice(this.thumbnailFirstIndex(), this.thumbnailFirstIndex() + this.numVisible())
+      this.value().slice(
+        this.thumbnailFirstIndex(),
+        this.thumbnailFirstIndex() + this.numVisible(),
+      ),
   );
 
   /** Navigation arrows visibility considering both `showItemNavigators` and hover state. */
   public readonly itemNavigatorsVisible: Signal<boolean> = computed<boolean>(
     (): boolean =>
-      this.showItemNavigators() || (this.showItemNavigatorsOnHover() && this.isItemHovered())
+      this.showItemNavigators() || (this.showItemNavigatorsOnHover() && this.isItemHovered()),
   );
 
   /** Composite CSS class string applied via the host binding. */
@@ -330,27 +326,27 @@ export class GalleriaComponent implements OnDestroy {
 
   /** ID used for the inline gallery container. */
   public readonly containerId: Signal<string> = computed<string>(
-    (): string => `${this.componentId}-container`
+    (): string => `${this.componentId}-container`,
   );
 
   /** ID used for the fullscreen dialog container. */
   public readonly lightboxId: Signal<string> = computed<string>(
-    (): string => `${this.componentId}-lightbox`
+    (): string => `${this.componentId}-lightbox`,
   );
 
   /** Resolved previous-item aria-label. */
   public readonly previousItemAriaLabel: Signal<string> = computed<string>((): string =>
-    this.getLabelOrFallback(this.prevLabel(), 'Previous image')
+    this.getLabelOrFallback(this.prevLabel(), 'Previous image'),
   );
 
   /** Resolved next-item aria-label. */
   public readonly nextItemAriaLabel: Signal<string> = computed<string>((): string =>
-    this.getLabelOrFallback(this.nextLabel(), 'Next image')
+    this.getLabelOrFallback(this.nextLabel(), 'Next image'),
   );
 
   /** Resolved fullscreen dialog aria-label. */
   public readonly lightboxAriaLabel: Signal<string> = computed<string>((): string =>
-    this.getLabelOrFallback(this.lightboxLabel(), GALLERIA_ARIA_REGION_LABEL)
+    this.getLabelOrFallback(this.lightboxLabel(), GALLERIA_ARIA_REGION_LABEL),
   );
 
   // ARIA label constants exposed to the template.
@@ -420,7 +416,6 @@ export class GalleriaComponent implements OnDestroy {
   /** Navigate directly to a specific item index. */
   public navigateTo(index: number): void {
     this.activeIndex.set(index);
-    this.activeIndexChange.emit(index);
     this.syncThumbnailsToActiveIndex();
   }
 
@@ -654,7 +649,7 @@ export class GalleriaComponent implements OnDestroy {
 
       const root: ParentNode = this.hostElement.nativeElement;
       const target: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        `[data-thumbnail-index="${index}"]`
+        `[data-thumbnail-index="${index}"]`,
       );
       target?.focus();
     });
