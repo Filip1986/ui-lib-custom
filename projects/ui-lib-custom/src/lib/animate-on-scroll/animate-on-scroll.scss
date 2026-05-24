@@ -27,7 +27,16 @@
  * the transition to the visible final state.
  */
 
-  :root {
+  // Token defaults scoped to the AOS preset classes — not :root — so they don't
+  // pollute the global custom property namespace. Consumers can still override
+  // these on any ancestor element (including :root) and the cascade will apply.
+  .uilib-aos-fade-in,
+  .uilib-aos-slide-up,
+  .uilib-aos-slide-down,
+  .uilib-aos-slide-left,
+  .uilib-aos-slide-right,
+  .uilib-aos-zoom-in,
+  .uilib-aos-zoom-out {
     --uilib-animate-on-scroll-duration: var(--uilib-transition-duration, 600ms);
     --uilib-animate-on-scroll-easing: cubic-bezier(0.4, 0, 0.2, 1);
     --uilib-animate-on-scroll-distance: 30px;

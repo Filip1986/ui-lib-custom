@@ -7,7 +7,9 @@
     --uilib-badge-fg-resolved: var(--uilib-badge-fg, var(--uilib-color-neutral-900));
     --uilib-badge-border-color-resolved: transparent;
     --uilib-badge-border-width-resolved: 0;
-    --uilib-badge-radius-resolved: var(--uilib-shape-base, 6px);
+    /* Component-scoped radius override point — set --uilib-badge-radius to change
+       badge corners without touching the global --uilib-shape-base token */
+    --uilib-badge-radius-resolved: var(--uilib-badge-radius, var(--uilib-shape-base, 6px));
     --uilib-badge-gap-resolved: var(--uilib-space-1);
     --uilib-badge-font-size-resolved: var(--uilib-font-size-sm);
 
@@ -188,13 +190,15 @@
 
   /* Shape modifiers */
   ui-lib-badge.ui-lib-badge--pill {
-    --uilib-badge-radius-resolved: var(--uilib-shape-base, 6px);
+    /* Component-scoped pill radius — set --uilib-badge-radius-pill to customise */
+    --uilib-badge-radius-resolved: var(--uilib-badge-radius-pill, var(--uilib-shape-pill, 9999px));
   }
 
   ui-lib-badge.ui-lib-badge--dot {
     --uilib-badge-padding-y-resolved: 0;
     --uilib-badge-padding-x-resolved: 0;
-    --uilib-badge-radius-resolved: var(--uilib-shape-base, 6px);
+    /* Component-scoped dot radius — set --uilib-badge-radius-dot to customise */
+    --uilib-badge-radius-resolved: var(--uilib-badge-radius-dot, 50%);
     width: var(--uilib-badge-dot-size, 0.75rem);
     height: var(--uilib-badge-dot-size, 0.75rem);
     min-width: var(--uilib-badge-dot-size, 0.75rem);

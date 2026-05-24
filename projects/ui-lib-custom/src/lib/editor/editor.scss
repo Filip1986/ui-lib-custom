@@ -175,62 +175,67 @@
     height: auto;
   }
 
-  :host(.ui-lib-editor--empty) .ui-lib-editor-content::before {
+  // State modifiers — use element selector (ui-lib-editor.class) because
+  // ViewEncapsulation.None makes :host() a no-op in Angular; classes are
+  // applied directly to the <ui-lib-editor> host element.
+
+  ui-lib-editor.ui-lib-editor--empty .ui-lib-editor-content::before {
     content: attr(data-placeholder);
     color: var(--uilib-editor-placeholder-color, #94a3b8);
     pointer-events: none;
   }
 
-  :host(.ui-lib-editor--focused) {
+  ui-lib-editor.ui-lib-editor--focused {
     box-shadow: 0 0 0 var(--uilib-editor-focus-ring-width, 2px)
       var(--uilib-editor-focus-ring-color, color-mix(in srgb, #2563eb 45%, transparent));
   }
 
-  :host(.ui-lib-editor--filled) .ui-lib-editor-content {
+  ui-lib-editor.ui-lib-editor--filled .ui-lib-editor-content {
     background: color-mix(in srgb, var(--uilib-editor-content-bg, #ffffff) 92%, #000000 8%);
   }
 
-  :host(.ui-lib-editor--readonly) .ui-lib-editor-toolbar {
+  ui-lib-editor.ui-lib-editor--readonly .ui-lib-editor-toolbar {
     opacity: 0.72;
   }
 
-  :host(.ui-lib-editor--readonly) .ui-lib-editor-toolbar-button,
-  :host(.ui-lib-editor--readonly) .ui-lib-editor-toolbar-select {
+  ui-lib-editor.ui-lib-editor--readonly .ui-lib-editor-toolbar-button,
+  ui-lib-editor.ui-lib-editor--readonly .ui-lib-editor-toolbar-select {
     pointer-events: none;
   }
 
-  :host(.ui-lib-editor--readonly) .ui-lib-editor-content {
+  ui-lib-editor.ui-lib-editor--readonly .ui-lib-editor-content {
     cursor: default;
   }
 
-  :host(.ui-lib-editor--disabled) {
+  ui-lib-editor.ui-lib-editor--disabled {
     opacity: var(--uilib-editor-disabled-opacity, 0.6);
     pointer-events: none;
     cursor: not-allowed;
   }
 
-  :host(.ui-lib-editor--material) {
+  // Variant modifiers
+  ui-lib-editor.ui-lib-editor--material {
     border-radius: var(--uilib-editor-border-radius, 8px);
     box-shadow: var(--uilib-shadow-sm, 0 1px 2px rgb(0 0 0 / 10%));
   }
 
-  :host(.ui-lib-editor--material) .ui-lib-editor-toolbar {
+  ui-lib-editor.ui-lib-editor--material .ui-lib-editor-toolbar {
     box-shadow:
       inset 0 -1px 0 color-mix(in srgb, #000000 8%, transparent),
       0 1px 2px color-mix(in srgb, #000000 8%, transparent);
   }
 
-  :host(.ui-lib-editor--bootstrap) {
+  ui-lib-editor.ui-lib-editor--bootstrap {
     border-width: 1px;
     border-style: solid;
     border-radius: 4px;
   }
 
-  :host(.ui-lib-editor--bootstrap) .ui-lib-editor-toolbar {
+  ui-lib-editor.ui-lib-editor--bootstrap .ui-lib-editor-toolbar {
     border-bottom-width: 1px;
   }
 
-  :host(.ui-lib-editor--bootstrap) .ui-lib-editor-toolbar-button {
+  ui-lib-editor.ui-lib-editor--bootstrap .ui-lib-editor-toolbar-button {
     border-color: color-mix(
       in srgb,
       var(--uilib-editor-toolbar-border-color, #d1d5db) 40%,
@@ -238,11 +243,11 @@
     );
   }
 
-  :host(.ui-lib-editor--bootstrap) .ui-lib-editor-toolbar-button:hover {
+  ui-lib-editor.ui-lib-editor--bootstrap .ui-lib-editor-toolbar-button:hover {
     border-color: var(--uilib-editor-toolbar-border-color, #d1d5db);
   }
 
-  :host(.ui-lib-editor--minimal) {
+  ui-lib-editor.ui-lib-editor--minimal {
     border-radius: 4px;
     border-color: color-mix(
       in srgb,
@@ -251,7 +256,7 @@
     );
   }
 
-  :host(.ui-lib-editor--minimal) .ui-lib-editor-toolbar {
+  ui-lib-editor.ui-lib-editor--minimal .ui-lib-editor-toolbar {
     background: transparent;
     border-bottom-color: color-mix(
       in srgb,
@@ -260,53 +265,54 @@
     );
   }
 
-  :host(.ui-lib-editor--minimal) .ui-lib-editor-toolbar-button:hover {
+  ui-lib-editor.ui-lib-editor--minimal .ui-lib-editor-toolbar-button:hover {
     background: color-mix(in srgb, currentColor 7%, transparent);
   }
 
-  :host(.ui-lib-editor--size-sm) .ui-lib-editor-toolbar {
+  // Size modifiers
+  ui-lib-editor.ui-lib-editor--size-sm .ui-lib-editor-toolbar {
     padding: 4px 6px;
   }
 
-  :host(.ui-lib-editor--size-sm) .ui-lib-editor-toolbar-button,
-  :host(.ui-lib-editor--size-sm) .ui-lib-editor-toolbar-select {
+  ui-lib-editor.ui-lib-editor--size-sm .ui-lib-editor-toolbar-button,
+  ui-lib-editor.ui-lib-editor--size-sm .ui-lib-editor-toolbar-select {
     min-width: 24px;
     height: 24px;
   }
 
-  :host(.ui-lib-editor--size-sm) .ui-lib-editor-content {
+  ui-lib-editor.ui-lib-editor--size-sm .ui-lib-editor-content {
     min-height: 100px;
     padding: 8px 12px;
     font-size: 13px;
   }
 
-  :host(.ui-lib-editor--size-md) .ui-lib-editor-toolbar {
+  ui-lib-editor.ui-lib-editor--size-md .ui-lib-editor-toolbar {
     padding: var(--uilib-editor-toolbar-padding, 8px);
   }
 
-  :host(.ui-lib-editor--size-md) .ui-lib-editor-toolbar-button,
-  :host(.ui-lib-editor--size-md) .ui-lib-editor-toolbar-select {
+  ui-lib-editor.ui-lib-editor--size-md .ui-lib-editor-toolbar-button,
+  ui-lib-editor.ui-lib-editor--size-md .ui-lib-editor-toolbar-select {
     min-width: 28px;
     height: 28px;
   }
 
-  :host(.ui-lib-editor--size-md) .ui-lib-editor-content {
+  ui-lib-editor.ui-lib-editor--size-md .ui-lib-editor-content {
     min-height: var(--uilib-editor-content-min-height, 150px);
     padding: var(--uilib-editor-content-padding, 12px 16px);
     font-size: var(--uilib-editor-content-font-size, 14px);
   }
 
-  :host(.ui-lib-editor--size-lg) .ui-lib-editor-toolbar {
+  ui-lib-editor.ui-lib-editor--size-lg .ui-lib-editor-toolbar {
     padding: 10px 12px;
   }
 
-  :host(.ui-lib-editor--size-lg) .ui-lib-editor-toolbar-button,
-  :host(.ui-lib-editor--size-lg) .ui-lib-editor-toolbar-select {
+  ui-lib-editor.ui-lib-editor--size-lg .ui-lib-editor-toolbar-button,
+  ui-lib-editor.ui-lib-editor--size-lg .ui-lib-editor-toolbar-select {
     min-width: 32px;
     height: 32px;
   }
 
-  :host(.ui-lib-editor--size-lg) .ui-lib-editor-content {
+  ui-lib-editor.ui-lib-editor--size-lg .ui-lib-editor-content {
     min-height: 200px;
     padding: 16px 20px;
     font-size: 16px;
