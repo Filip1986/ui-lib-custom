@@ -93,16 +93,16 @@ export class PickListComponent {
   // ---------------------------------------------------------------------------
 
   /** The source list of items. Mutations emit a new array reference. */
-  public source: ModelSignal<unknown[]> = model<unknown[]>([]);
+  public readonly source: ModelSignal<unknown[]> = model<unknown[]>([]);
 
   /** The target list of items. Mutations emit a new array reference. */
-  public target: ModelSignal<unknown[]> = model<unknown[]>([]);
+  public readonly target: ModelSignal<unknown[]> = model<unknown[]>([]);
 
   /** The currently selected items in the source list. */
-  public sourceSelection: ModelSignal<unknown[]> = model<unknown[]>([]);
+  public readonly sourceSelection: ModelSignal<unknown[]> = model<unknown[]>([]);
 
   /** The currently selected items in the target list. */
-  public targetSelection: ModelSignal<unknown[]> = model<unknown[]>([]);
+  public readonly targetSelection: ModelSignal<unknown[]> = model<unknown[]>([]);
 
   // ---------------------------------------------------------------------------
   // Standard inputs
@@ -126,7 +126,7 @@ export class PickListComponent {
 
   /** BCP 47 locale tag used for locale-sensitive string comparisons during filtering. */
   public readonly filterLocale: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Placeholder text shown inside the source list filter input. */
@@ -157,7 +157,7 @@ export class PickListComponent {
    * Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.
    */
   public readonly variant: InputSignal<PickListVariant | null> = input<PickListVariant | null>(
-    null
+    null,
   );
 
   /** Component size token. */
@@ -265,25 +265,25 @@ export class PickListComponent {
   /** Custom item row template shared by both lists. Context: `PickListItemContext<T>`. */
   public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     PickListItemDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom header template for the source list. */
   public readonly sourceHeaderTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     PickListSourceHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom header template for the target list. */
   public readonly targetHeaderTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     PickListTargetHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom empty-state template shared by both lists. Context: `PickListEmptyContext`. */
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     PickListEmptyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   // ---------------------------------------------------------------------------
@@ -348,7 +348,7 @@ export class PickListComponent {
 
   /** Resolved theme variant (falls back to ThemeConfigService). */
   public readonly resolvedVariant: Signal<PickListVariant> = computed<PickListVariant>(
-    (): PickListVariant => this.variant() ?? this.themeConfig.variant()
+    (): PickListVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** CSS class string applied to the host element. */
@@ -374,7 +374,7 @@ export class PickListComponent {
       return this.source();
     }
     return this.source().filter((item: unknown): boolean =>
-      this.matchesFilter(item, this.sourceFilterQuery())
+      this.matchesFilter(item, this.sourceFilterQuery()),
     );
   });
 
@@ -386,38 +386,38 @@ export class PickListComponent {
       return this.target();
     }
     return this.target().filter((item: unknown): boolean =>
-      this.matchesFilter(item, this.targetFilterQuery())
+      this.matchesFilter(item, this.targetFilterQuery()),
     );
   });
 
   /** `true` when the source list is empty because the filter matched nothing. */
   public readonly isSourceEmptyDueToFilter: Signal<boolean> = computed<boolean>(
-    (): boolean => this.source().length > 0 && this.displaySourceItems().length === 0
+    (): boolean => this.source().length > 0 && this.displaySourceItems().length === 0,
   );
 
   /** `true` when the target list is empty because the filter matched nothing. */
   public readonly isTargetEmptyDueToFilter: Signal<boolean> = computed<boolean>(
-    (): boolean => this.target().length > 0 && this.displayTargetItems().length === 0
+    (): boolean => this.target().length > 0 && this.displayTargetItems().length === 0,
   );
 
   /** `true` when no source items are selected or the component is disabled. */
   public readonly isMoveToTargetDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.sourceSelection().length === 0
+    (): boolean => this.disabled() || this.sourceSelection().length === 0,
   );
 
   /** `true` when no target items are selected or the component is disabled. */
   public readonly isMoveToSourceDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.targetSelection().length === 0
+    (): boolean => this.disabled() || this.targetSelection().length === 0,
   );
 
   /** `true` when the source list is empty or the component is disabled. */
   public readonly isMoveAllToTargetDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.source().length === 0
+    (): boolean => this.disabled() || this.source().length === 0,
   );
 
   /** `true` when the target list is empty or the component is disabled. */
   public readonly isMoveAllToSourceDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.target().length === 0
+    (): boolean => this.disabled() || this.target().length === 0,
   );
 
   /** `true` when all selected source items are already at the top. */
@@ -425,7 +425,7 @@ export class PickListComponent {
     if (this.disabled() || this.sourceSelection().length === 0) return true;
     const items: unknown[] = this.source();
     return this.sourceSelection().every(
-      (item: unknown): boolean => this.indexOf(item, items) === 0
+      (item: unknown): boolean => this.indexOf(item, items) === 0,
     );
   });
 
@@ -435,7 +435,7 @@ export class PickListComponent {
     const items: unknown[] = this.source();
     const lastIndex: number = items.length - 1;
     return this.sourceSelection().every(
-      (item: unknown): boolean => this.indexOf(item, items) === lastIndex
+      (item: unknown): boolean => this.indexOf(item, items) === lastIndex,
     );
   });
 
@@ -444,7 +444,7 @@ export class PickListComponent {
     if (this.disabled() || this.targetSelection().length === 0) return true;
     const items: unknown[] = this.target();
     return this.targetSelection().every(
-      (item: unknown): boolean => this.indexOf(item, items) === 0
+      (item: unknown): boolean => this.indexOf(item, items) === 0,
     );
   });
 
@@ -454,18 +454,18 @@ export class PickListComponent {
     const items: unknown[] = this.target();
     const lastIndex: number = items.length - 1;
     return this.targetSelection().every(
-      (item: unknown): boolean => this.indexOf(item, items) === lastIndex
+      (item: unknown): boolean => this.indexOf(item, items) === lastIndex,
     );
   });
 
   /** Template context for the source empty-state template. */
   public readonly sourceEmptyContext: Signal<PickListEmptyContext> = computed<PickListEmptyContext>(
-    (): PickListEmptyContext => ({ filter: this.isSourceEmptyDueToFilter() })
+    (): PickListEmptyContext => ({ filter: this.isSourceEmptyDueToFilter() }),
   );
 
   /** Template context for the target empty-state template. */
   public readonly targetEmptyContext: Signal<PickListEmptyContext> = computed<PickListEmptyContext>(
-    (): PickListEmptyContext => ({ filter: this.isTargetEmptyDueToFilter() })
+    (): PickListEmptyContext => ({ filter: this.isTargetEmptyDueToFilter() }),
   );
 
   // ---------------------------------------------------------------------------
@@ -529,7 +529,7 @@ export class PickListComponent {
     if (this.isMoveToTargetDisabled()) return;
     const selected: unknown[] = this.sourceSelection();
     const newSource: unknown[] = this.source().filter(
-      (item: unknown): boolean => !this.isInSelection(item, selected)
+      (item: unknown): boolean => !this.isInSelection(item, selected),
     );
     const newTarget: unknown[] = [...this.target(), ...selected];
     this.source.set(newSource);
@@ -537,7 +537,7 @@ export class PickListComponent {
     this.sourceSelection.set([]);
     this.movedToTarget.emit({ items: selected });
     void this.liveAnnouncer.announce(
-      `${selected.length} item${selected.length !== 1 ? 's' : ''} moved to target.`
+      `${selected.length} item${selected.length !== 1 ? 's' : ''} moved to target.`,
     );
   }
 
@@ -552,7 +552,7 @@ export class PickListComponent {
     this.sourceSelection.set([]);
     this.movedAllToTarget.emit({ items: movedItems });
     void this.liveAnnouncer.announce(
-      `${movedItems.length} item${movedItems.length !== 1 ? 's' : ''} moved to target.`
+      `${movedItems.length} item${movedItems.length !== 1 ? 's' : ''} moved to target.`,
     );
   }
 
@@ -563,14 +563,14 @@ export class PickListComponent {
     if (this.isMoveToSourceDisabled()) return;
     const selected: unknown[] = this.targetSelection();
     const newTarget: unknown[] = this.target().filter(
-      (item: unknown): boolean => !this.isInSelection(item, selected)
+      (item: unknown): boolean => !this.isInSelection(item, selected),
     );
     this.target.set(newTarget);
     this.source.set([...this.source(), ...selected]);
     this.targetSelection.set([]);
     this.movedToSource.emit({ items: selected });
     void this.liveAnnouncer.announce(
-      `${selected.length} item${selected.length !== 1 ? 's' : ''} moved to source.`
+      `${selected.length} item${selected.length !== 1 ? 's' : ''} moved to source.`,
     );
   }
 
@@ -585,7 +585,7 @@ export class PickListComponent {
     this.targetSelection.set([]);
     this.movedAllToSource.emit({ items: movedItems });
     void this.liveAnnouncer.announce(
-      `${movedItems.length} item${movedItems.length !== 1 ? 's' : ''} moved to source.`
+      `${movedItems.length} item${movedItems.length !== 1 ? 's' : ''} moved to source.`,
     );
   }
 
@@ -598,7 +598,7 @@ export class PickListComponent {
     if (this.isSourceMoveUpDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.source(),
-      this.sourceSelection()
+      this.sourceSelection(),
     );
     const result: unknown[] = this.performMoveUp(this.source(), this.sourceSelection());
     this.source.set(result);
@@ -615,7 +615,7 @@ export class PickListComponent {
     if (this.isSourceMoveDownDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.source(),
-      this.sourceSelection()
+      this.sourceSelection(),
     );
     const result: unknown[] = this.performMoveDown(this.source(), this.sourceSelection());
     this.source.set(result);
@@ -632,7 +632,7 @@ export class PickListComponent {
     if (this.isSourceMoveUpDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.source(),
-      this.sourceSelection()
+      this.sourceSelection(),
     );
     const result: unknown[] = this.performMoveTop(this.source(), this.sourceSelection());
     this.source.set(result);
@@ -644,7 +644,7 @@ export class PickListComponent {
     if (this.isSourceMoveDownDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.source(),
-      this.sourceSelection()
+      this.sourceSelection(),
     );
     const result: unknown[] = this.performMoveBottom(this.source(), this.sourceSelection());
     this.source.set(result);
@@ -665,7 +665,7 @@ export class PickListComponent {
     if (this.isTargetMoveUpDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.target(),
-      this.targetSelection()
+      this.targetSelection(),
     );
     const result: unknown[] = this.performMoveUp(this.target(), this.targetSelection());
     this.target.set(result);
@@ -682,7 +682,7 @@ export class PickListComponent {
     if (this.isTargetMoveDownDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.target(),
-      this.targetSelection()
+      this.targetSelection(),
     );
     const result: unknown[] = this.performMoveDown(this.target(), this.targetSelection());
     this.target.set(result);
@@ -699,7 +699,7 @@ export class PickListComponent {
     if (this.isTargetMoveUpDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.target(),
-      this.targetSelection()
+      this.targetSelection(),
     );
     const result: unknown[] = this.performMoveTop(this.target(), this.targetSelection());
     this.target.set(result);
@@ -711,7 +711,7 @@ export class PickListComponent {
     if (this.isTargetMoveDownDisabled()) return;
     const previousIndex: number = this.findFirstSelectedIndex(
       this.target(),
-      this.targetSelection()
+      this.targetSelection(),
     );
     const result: unknown[] = this.performMoveBottom(this.target(), this.targetSelection());
     this.target.set(result);
@@ -749,7 +749,7 @@ export class PickListComponent {
       list === 'source' ? this.sourceListEl()?.nativeElement : this.targetListEl()?.nativeElement;
     if (!listEl) return;
     const element: HTMLElement | null = listEl.querySelector<HTMLElement>(
-      `#${this.itemId(list, clamped)}`
+      `#${this.itemId(list, clamped)}`,
     );
     element?.focus();
   }
@@ -787,7 +787,7 @@ export class PickListComponent {
       index,
       this.sourceSelection(),
       this.displaySourceItems(),
-      this.sourceLastClickedIndex
+      this.sourceLastClickedIndex,
     );
     this.sourceLastClickedIndex = index;
     this.sourceSelection.set(newSelection);
@@ -803,7 +803,7 @@ export class PickListComponent {
       index,
       this.targetSelection(),
       this.displayTargetItems(),
-      this.targetLastClickedIndex
+      this.targetLastClickedIndex,
     );
     this.targetLastClickedIndex = index;
     this.targetSelection.set(newSelection);
@@ -903,7 +903,7 @@ export class PickListComponent {
     const items: unknown[] = list === 'source' ? this.source() : this.target();
     const label: string = this.resolveItemLabel(items[valueIndex]);
     void this.liveAnnouncer.announce(
-      `Grabbed ${label}. Position ${valueIndex + 1} of ${items.length}.`
+      `Grabbed ${label}. Position ${valueIndex + 1} of ${items.length}.`,
     );
   }
 
@@ -1098,7 +1098,7 @@ export class PickListComponent {
     index: number,
     currentSelection: unknown[],
     displayItems: unknown[],
-    lastClickedIndex: number
+    lastClickedIndex: number,
   ): unknown[] {
     if (this.metaKeySelection()) {
       const isMetaHeld: boolean = event.ctrlKey || event.metaKey;
@@ -1118,7 +1118,7 @@ export class PickListComponent {
     fromIndex: number,
     toIndex: number,
     existingSelection: unknown[],
-    items: unknown[]
+    items: unknown[],
   ): unknown[] {
     const start: number = Math.min(fromIndex, toIndex);
     const end: number = Math.max(fromIndex, toIndex);
@@ -1137,14 +1137,14 @@ export class PickListComponent {
     const exists: boolean = key
       ? currentSelection.some(
           (selected: unknown): boolean =>
-            this.resolveKey(selected, key) === this.resolveKey(item, key)
+            this.resolveKey(selected, key) === this.resolveKey(item, key),
         )
       : currentSelection.includes(item);
     if (exists) {
       return key
         ? currentSelection.filter(
             (selected: unknown): boolean =>
-              this.resolveKey(selected, key) !== this.resolveKey(item, key)
+              this.resolveKey(selected, key) !== this.resolveKey(item, key),
           )
         : currentSelection.filter((selected: unknown): boolean => selected !== item);
     }
@@ -1156,7 +1156,7 @@ export class PickListComponent {
     return selection.some((selectedItem: unknown): boolean =>
       key
         ? this.resolveKey(selectedItem, key) === this.resolveKey(item, key)
-        : selectedItem === item
+        : selectedItem === item,
     );
   }
 
@@ -1193,10 +1193,10 @@ export class PickListComponent {
   private performMoveTop(items: unknown[], selection: unknown[]): unknown[] {
     const selectionSet: Set<number> = this.buildSelectionSet(selection, items);
     const selectedItems: unknown[] = items.filter((_item: unknown, index: number): boolean =>
-      selectionSet.has(index)
+      selectionSet.has(index),
     );
     const remaining: unknown[] = items.filter(
-      (_item: unknown, index: number): boolean => !selectionSet.has(index)
+      (_item: unknown, index: number): boolean => !selectionSet.has(index),
     );
     return [...selectedItems, ...remaining];
   }
@@ -1204,10 +1204,10 @@ export class PickListComponent {
   private performMoveBottom(items: unknown[], selection: unknown[]): unknown[] {
     const selectionSet: Set<number> = this.buildSelectionSet(selection, items);
     const selectedItems: unknown[] = items.filter((_item: unknown, index: number): boolean =>
-      selectionSet.has(index)
+      selectionSet.has(index),
     );
     const remaining: unknown[] = items.filter(
-      (_item: unknown, index: number): boolean => !selectionSet.has(index)
+      (_item: unknown, index: number): boolean => !selectionSet.has(index),
     );
     return [...remaining, ...selectedItems];
   }
@@ -1236,7 +1236,7 @@ export class PickListComponent {
   private performIntraListDrop(
     list: 'source' | 'target',
     sourceValueIndex: number,
-    dropDisplayIndex: number
+    dropDisplayIndex: number,
   ): void {
     const listModel: ModelSignal<unknown[]> = list === 'source' ? this.source : this.target;
     const targetValueIndex: number = this.getValueIndex(list, dropDisplayIndex);
@@ -1262,7 +1262,7 @@ export class PickListComponent {
 
     const label: string = this.resolveItemLabel(moved);
     void this.liveAnnouncer.announce(
-      `Moved ${label} to position ${effectiveTargetIndex + 1} of ${items.length}.`
+      `Moved ${label} to position ${effectiveTargetIndex + 1} of ${items.length}.`,
     );
   }
 
@@ -1270,7 +1270,7 @@ export class PickListComponent {
     originList: 'source' | 'target',
     originValueIndex: number,
     dropList: 'source' | 'target',
-    dropDisplayIndex: number
+    dropDisplayIndex: number,
   ): void {
     const originModel: ModelSignal<unknown[]> = originList === 'source' ? this.source : this.target;
     const dropModel: ModelSignal<unknown[]> = dropList === 'source' ? this.source : this.target;
@@ -1335,7 +1335,7 @@ export class PickListComponent {
     if (key) {
       const itemKey: unknown = this.resolveKey(item, key);
       return items.findIndex(
-        (candidate: unknown): boolean => this.resolveKey(candidate, key) === itemKey
+        (candidate: unknown): boolean => this.resolveKey(candidate, key) === itemKey,
       );
     }
     return items.indexOf(item);

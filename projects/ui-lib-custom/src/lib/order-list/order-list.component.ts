@@ -87,10 +87,10 @@ export class OrderListComponent {
   // ---------------------------------------------------------------------------
 
   /** The ordered list of items. Mutations are emitted as a new array reference. */
-  public value: ModelSignal<unknown[]> = model<unknown[]>([]);
+  public readonly value: ModelSignal<unknown[]> = model<unknown[]>([]);
 
   /** The currently selected items. */
-  public selection: ModelSignal<unknown[]> = model<unknown[]>([]);
+  public readonly selection: ModelSignal<unknown[]> = model<unknown[]>([]);
 
   // ---------------------------------------------------------------------------
   // Standard inputs
@@ -114,7 +114,7 @@ export class OrderListComponent {
 
   /** BCP 47 locale tag used for locale-sensitive string comparisons during filtering. */
   public readonly filterLocale: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** When `true`, items can be reordered by dragging and dropping. */
@@ -138,7 +138,7 @@ export class OrderListComponent {
    * `ThemeConfigService`.
    */
   public readonly variant: InputSignal<OrderListVariant | null> = input<OrderListVariant | null>(
-    null
+    null,
   );
 
   /** Component size token. */
@@ -197,25 +197,25 @@ export class OrderListComponent {
   /** Custom item row template. Context: `OrderListItemContext<T>`. */
   public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     OrderListItemDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom header template. */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     OrderListHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom empty-state template. Context: `OrderListEmptyContext`. */
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     OrderListEmptyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Custom filter area template. */
   public readonly filterTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     OrderListFilterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   // ---------------------------------------------------------------------------
@@ -267,7 +267,7 @@ export class OrderListComponent {
 
   /** Resolved theme variant (falls back to ThemeConfigService). */
   public readonly resolvedVariant: Signal<OrderListVariant> = computed<OrderListVariant>(
-    (): OrderListVariant => this.variant() ?? this.themeConfig.variant()
+    (): OrderListVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** CSS class string applied to the host element. */
@@ -305,12 +305,12 @@ export class OrderListComponent {
    * (i.e. `value()` has items but `displayItems()` is empty).
    */
   public readonly isEmptyDueToFilter: Signal<boolean> = computed<boolean>(
-    (): boolean => this.value().length > 0 && this.displayItems().length === 0
+    (): boolean => this.value().length > 0 && this.displayItems().length === 0,
   );
 
   /** `true` when no reorder operation is possible (nothing selected, or disabled). */
   public readonly isMoveDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.selection().length === 0
+    (): boolean => this.disabled() || this.selection().length === 0,
   );
 
   /** `true` when all selected items are already at the top — moveUp/moveTop are no-ops. */
@@ -328,13 +328,13 @@ export class OrderListComponent {
     const sel: unknown[] = this.selection();
     const lastIndex: number = items.length - 1;
     return sel.every(
-      (selectedItem: unknown): boolean => this.indexOf(selectedItem, items) === lastIndex
+      (selectedItem: unknown): boolean => this.indexOf(selectedItem, items) === lastIndex,
     );
   });
 
   /** Template context for the empty-state template. */
   public readonly emptyContext: Signal<OrderListEmptyContext> = computed<OrderListEmptyContext>(
-    (): OrderListEmptyContext => ({ filter: this.isEmptyDueToFilter() })
+    (): OrderListEmptyContext => ({ filter: this.isEmptyDueToFilter() }),
   );
 
   // ---------------------------------------------------------------------------
@@ -350,7 +350,7 @@ export class OrderListComponent {
     return this.selection().some((selectedItem: unknown): boolean =>
       key
         ? this.resolveKey(selectedItem, key) === this.resolveKey(item, key)
-        : selectedItem === item
+        : selectedItem === item,
     );
   }
 
@@ -539,7 +539,7 @@ export class OrderListComponent {
     if (sel.length === 0) return;
     const firstSelected: unknown = sel[0];
     const newDisplayIndex: number = this.displayItems().findIndex(
-      (item: unknown): boolean => item === firstSelected
+      (item: unknown): boolean => item === firstSelected,
     );
     if (newDisplayIndex !== -1) {
       this.focusItem(newDisplayIndex);
@@ -675,7 +675,7 @@ export class OrderListComponent {
     });
 
     void this.liveAnnouncer.announce(
-      `Moved ${label} from position ${oldPosition} to position ${newPosition}.`
+      `Moved ${label} from position ${oldPosition} to position ${newPosition}.`,
     );
     this.clearDragState();
   }
@@ -869,14 +869,14 @@ export class OrderListComponent {
     const selSet: Set<number> = this.buildSelectionSet(sel, items);
 
     const selectedItems: unknown[] = items.filter((_item: unknown, index: number): boolean =>
-      selSet.has(index)
+      selSet.has(index),
     );
     const remaining: unknown[] = items.filter(
-      (_item: unknown, index: number): boolean => !selSet.has(index)
+      (_item: unknown, index: number): boolean => !selSet.has(index),
     );
     const newItems: unknown[] = [...selectedItems, ...remaining];
     const firstPreviousIndex: number = items.findIndex((_item: unknown, index: number): boolean =>
-      selSet.has(index)
+      selSet.has(index),
     );
 
     this.value.set(newItems);
@@ -891,14 +891,14 @@ export class OrderListComponent {
     const selSet: Set<number> = this.buildSelectionSet(sel, items);
 
     const selectedItems: unknown[] = items.filter((_item: unknown, index: number): boolean =>
-      selSet.has(index)
+      selSet.has(index),
     );
     const remaining: unknown[] = items.filter(
-      (_item: unknown, index: number): boolean => !selSet.has(index)
+      (_item: unknown, index: number): boolean => !selSet.has(index),
     );
     const newItems: unknown[] = [...remaining, ...selectedItems];
     const firstPreviousIndex: number = items.findIndex((_item: unknown, index: number): boolean =>
-      selSet.has(index)
+      selSet.has(index),
     );
 
     this.value.set(newItems);
@@ -933,7 +933,7 @@ export class OrderListComponent {
     if (key) {
       const itemKey: unknown = this.resolveKey(item, key);
       return items.findIndex(
-        (candidate: unknown): boolean => this.resolveKey(candidate, key) === itemKey
+        (candidate: unknown): boolean => this.resolveKey(candidate, key) === itemKey,
       );
     }
     return items.indexOf(item);
@@ -946,14 +946,14 @@ export class OrderListComponent {
     const key: string | null = this.trackBy();
     const exists: boolean = key
       ? currentSelection.some(
-          (s: unknown): boolean => this.resolveKey(s, key) === this.resolveKey(item, key)
+          (s: unknown): boolean => this.resolveKey(s, key) === this.resolveKey(item, key),
         )
       : currentSelection.includes(item);
 
     if (exists) {
       return key
         ? currentSelection.filter(
-            (s: unknown): boolean => this.resolveKey(s, key) !== this.resolveKey(item, key)
+            (s: unknown): boolean => this.resolveKey(s, key) !== this.resolveKey(item, key),
           )
         : currentSelection.filter((s: unknown): boolean => s !== item);
     }
@@ -966,7 +966,7 @@ export class OrderListComponent {
   private buildRangeSelection(
     fromIndex: number,
     toIndex: number,
-    existingSelection: unknown[]
+    existingSelection: unknown[],
   ): unknown[] {
     const items: unknown[] = this.value();
     const start: number = Math.min(fromIndex, toIndex);
