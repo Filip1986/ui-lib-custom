@@ -170,8 +170,8 @@ export * from './lib/new-component/new-component';
 
 6. **Build and verify**
    ```bash
-   ng build ui-components
-   ng serve demo
+   npm run build          # Build library (ng build ui-lib-custom)
+   npm run serve:demo     # Serve demo at localhost:4200
    ```
 
 ## 🎯 Component Development Guidelines
@@ -186,10 +186,13 @@ Each component should support these variants:
 
 ### Styling
 
-- Use `:host` selector for component wrapper
-- Use CSS custom properties for themeable values
-- Keep variant styles isolated using classes
-- Ensure responsive design
+- **`ViewEncapsulation.None`** is mandatory on every library component — required for CSS variable cascading
+- **CSS variable naming:** `--uilib-{component}-{property}[-{state}]` (e.g. `--uilib-button-bg-hover`) — no raw hex or px in rule bodies
+- **Cascade layers:** every component SCSS file must be wrapped in `@layer uilib.components { }` so consumer CSS always wins
+- **Three-layer order enforced:** `uilib.base < uilib.tokens < uilib.components`
+- Keep variant styles isolated using host-class selectors (e.g. `ui-lib-button--material`)
+- Ensure responsive design; animations must respect `prefers-reduced-motion`
+- Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule` and `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule`
 
 ### TypeScript
 
