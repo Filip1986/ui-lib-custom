@@ -1,179 +1,181 @@
-// -------------------------------------------------------------------------
-// Toolbar component
-// Pattern: --uilib-toolbar-{property}[-{variant}][-{state}]
-// -------------------------------------------------------------------------
+@layer uilib.components {
+  // -------------------------------------------------------------------------
+  // Toolbar component
+  // Pattern: --uilib-toolbar-{property}[-{variant}][-{state}]
+  // -------------------------------------------------------------------------
 
-// ---- Design tokens ------------------------------------------------------
-ui-lib-toolbar {
-  // Background and border
-  --uilib-toolbar-background: var(--uilib-surface-0, #ffffff);
-  --uilib-toolbar-border-color: var(--uilib-surface-200, #e5e7eb);
-  --uilib-toolbar-border-width: 1px;
-  --uilib-toolbar-border-radius: var(--uilib-radius-md, 0.375rem);
+  // ---- Design tokens ------------------------------------------------------
+  ui-lib-toolbar {
+    // Background and border
+    --uilib-toolbar-background: var(--uilib-surface-0, #ffffff);
+    --uilib-toolbar-border-color: var(--uilib-surface-200, #e5e7eb);
+    --uilib-toolbar-border-width: 1px;
+    --uilib-toolbar-border-radius: var(--uilib-radius-md, 0.375rem);
 
-  // Spacing — driven by size modifier
-  --uilib-toolbar-padding-x: 1rem;
-  --uilib-toolbar-padding-y: 0.5rem;
-  --uilib-toolbar-min-height: 3rem;
+    // Spacing — driven by size modifier
+    --uilib-toolbar-padding-x: 1rem;
+    --uilib-toolbar-padding-y: 0.5rem;
+    --uilib-toolbar-min-height: 3rem;
 
-  // Gap between items within a group
-  --uilib-toolbar-gap: 0.5rem;
+    // Gap between items within a group
+    --uilib-toolbar-gap: 0.5rem;
 
-  // Elevation
-  --uilib-toolbar-shadow: none;
+    // Elevation
+    --uilib-toolbar-shadow: none;
 
-  // Typography
-  --uilib-toolbar-font-family: var(--uilib-font-ui, inherit);
-  --uilib-toolbar-color: var(--uilib-color-text, #374151);
-}
+    // Typography
+    --uilib-toolbar-font-family: var(--uilib-font-ui, inherit);
+    --uilib-toolbar-color: var(--uilib-color-text, #374151);
+  }
 
-// ---- Base host ----------------------------------------------------------
-.ui-lib-toolbar {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: var(--uilib-toolbar-min-height);
-  padding: var(--uilib-toolbar-padding-y) var(--uilib-toolbar-padding-x);
-  background: var(--uilib-toolbar-background);
-  border: var(--uilib-toolbar-border-width) solid var(--uilib-toolbar-border-color);
-  border-radius: var(--uilib-toolbar-border-radius);
-  box-shadow: var(--uilib-toolbar-shadow);
-  font-family: var(--uilib-toolbar-font-family);
-  color: var(--uilib-toolbar-color);
-  gap: var(--uilib-toolbar-gap);
-
-  // ---- Slot groups --------------------------------------------------------
-  &__group {
+  // ---- Base host ----------------------------------------------------------
+  .ui-lib-toolbar {
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: var(--uilib-toolbar-min-height);
+    padding: var(--uilib-toolbar-padding-y) var(--uilib-toolbar-padding-x);
+    background: var(--uilib-toolbar-background);
+    border: var(--uilib-toolbar-border-width) solid var(--uilib-toolbar-border-color);
+    border-radius: var(--uilib-toolbar-border-radius);
+    box-shadow: var(--uilib-toolbar-shadow);
+    font-family: var(--uilib-toolbar-font-family);
+    color: var(--uilib-toolbar-color);
     gap: var(--uilib-toolbar-gap);
-    flex-shrink: 0;
 
-    // Start and end groups stretch to fill remaining space
-    &--start {
-      flex: 1;
-      justify-content: flex-start;
+    // ---- Slot groups --------------------------------------------------------
+    &__group {
+      display: flex;
+      align-items: center;
+      gap: var(--uilib-toolbar-gap);
+      flex-shrink: 0;
+
+      // Start and end groups stretch to fill remaining space
+      &--start {
+        flex: 1;
+        justify-content: flex-start;
+      }
+
+      &--center {
+        flex: 0 1 auto;
+        justify-content: center;
+      }
+
+      &--end {
+        flex: 1;
+        justify-content: flex-end;
+      }
     }
 
-    &--center {
-      flex: 0 1 auto;
-      justify-content: center;
+    // =========================================================================
+    // Size modifiers
+    // =========================================================================
+    &--sm {
+      --uilib-toolbar-padding-y: 0.25rem;
+      --uilib-toolbar-padding-x: 0.75rem;
+      --uilib-toolbar-min-height: 2.25rem;
+      --uilib-toolbar-gap: 0.375rem;
     }
 
-    &--end {
-      flex: 1;
-      justify-content: flex-end;
+    &--md {
+      --uilib-toolbar-padding-y: 0.5rem;
+      --uilib-toolbar-padding-x: 1rem;
+      --uilib-toolbar-min-height: 3rem;
+      --uilib-toolbar-gap: 0.5rem;
     }
-  }
 
-  // =========================================================================
-  // Size modifiers
-  // =========================================================================
-  &--sm {
-    --uilib-toolbar-padding-y: 0.25rem;
-    --uilib-toolbar-padding-x: 0.75rem;
-    --uilib-toolbar-min-height: 2.25rem;
-    --uilib-toolbar-gap: 0.375rem;
-  }
+    &--lg {
+      --uilib-toolbar-padding-y: 0.75rem;
+      --uilib-toolbar-padding-x: 1.25rem;
+      --uilib-toolbar-min-height: 3.75rem;
+      --uilib-toolbar-gap: 0.75rem;
+    }
 
-  &--md {
-    --uilib-toolbar-padding-y: 0.5rem;
-    --uilib-toolbar-padding-x: 1rem;
-    --uilib-toolbar-min-height: 3rem;
-    --uilib-toolbar-gap: 0.5rem;
-  }
-
-  &--lg {
-    --uilib-toolbar-padding-y: 0.75rem;
-    --uilib-toolbar-padding-x: 1.25rem;
-    --uilib-toolbar-min-height: 3.75rem;
-    --uilib-toolbar-gap: 0.75rem;
-  }
-
-  // =========================================================================
-  // Variant: material
-  // =========================================================================
-  &--variant-material {
-    --uilib-toolbar-background: var(--uilib-surface-0, #ffffff);
-    --uilib-toolbar-border-color: transparent;
-    --uilib-toolbar-shadow: var(
-      --uilib-shadow-sm,
-      0 1px 3px 0 rgba(0, 0, 0, 0.1),
-      0 1px 2px -1px rgba(0, 0, 0, 0.1)
-    );
-    --uilib-toolbar-border-radius: 0;
-  }
-
-  // =========================================================================
-  // Variant: bootstrap
-  // =========================================================================
-  &--variant-bootstrap {
-    --uilib-toolbar-background: var(--uilib-surface-50, #f9fafb);
-    --uilib-toolbar-border-color: rgba(0, 0, 0, 0.175);
-    --uilib-toolbar-shadow: none;
-    --uilib-toolbar-border-radius: var(--uilib-radius-md, 0.375rem);
-  }
-
-  // =========================================================================
-  // Variant: minimal
-  // =========================================================================
-  &--variant-minimal {
-    --uilib-toolbar-background: transparent;
-    --uilib-toolbar-border-color: var(--uilib-surface-200, #e5e7eb);
-    --uilib-toolbar-shadow: none;
-    --uilib-toolbar-border-radius: 0;
-    --uilib-toolbar-border-width: 0 0 1px 0;
-  }
-
-  // =========================================================================
-  // Focus-visible rings for interactive elements inside the toolbar
-  // =========================================================================
-  button:focus-visible,
-  a:focus-visible,
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible,
-  [tabindex]:focus-visible {
-    outline: 2px solid var(--uilib-color-primary, #3b82f6);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  // =========================================================================
-  // Dark-mode adjustments
-  // =========================================================================
-  [data-theme='dark'] &,
-  &[data-theme='dark'] {
-    --uilib-toolbar-background: var(--uilib-surface-800, #1f2937);
-    --uilib-toolbar-border-color: var(--uilib-surface-600, #4b5563);
-    --uilib-toolbar-color: var(--uilib-surface-100, #f3f4f6);
-
-    &.ui-lib-toolbar--variant-material {
-      --uilib-toolbar-background: var(--uilib-surface-900, #111827);
+    // =========================================================================
+    // Variant: material
+    // =========================================================================
+    &--variant-material {
+      --uilib-toolbar-background: var(--uilib-surface-0, #ffffff);
       --uilib-toolbar-border-color: transparent;
+      --uilib-toolbar-shadow: var(
+        --uilib-shadow-sm,
+        0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px -1px rgba(0, 0, 0, 0.1)
+      );
+      --uilib-toolbar-border-radius: 0;
     }
 
-    &.ui-lib-toolbar--variant-bootstrap {
-      --uilib-toolbar-background: var(--uilib-surface-800, #1f2937);
-      --uilib-toolbar-border-color: rgba(255, 255, 255, 0.175);
+    // =========================================================================
+    // Variant: bootstrap
+    // =========================================================================
+    &--variant-bootstrap {
+      --uilib-toolbar-background: var(--uilib-surface-50, #f9fafb);
+      --uilib-toolbar-border-color: rgba(0, 0, 0, 0.175);
+      --uilib-toolbar-shadow: none;
+      --uilib-toolbar-border-radius: var(--uilib-radius-md, 0.375rem);
     }
 
-    &.ui-lib-toolbar--variant-minimal {
+    // =========================================================================
+    // Variant: minimal
+    // =========================================================================
+    &--variant-minimal {
       --uilib-toolbar-background: transparent;
-      --uilib-toolbar-border-color: var(--uilib-surface-700, #374151);
+      --uilib-toolbar-border-color: var(--uilib-surface-200, #e5e7eb);
+      --uilib-toolbar-shadow: none;
+      --uilib-toolbar-border-radius: 0;
+      --uilib-toolbar-border-width: 0 0 1px 0;
+    }
+
+    // =========================================================================
+    // Focus-visible rings for interactive elements inside the toolbar
+    // =========================================================================
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--uilib-color-primary, #3b82f6);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    // =========================================================================
+    // Dark-mode adjustments
+    // =========================================================================
+    [data-theme='dark'] &,
+    &[data-theme='dark'] {
+      --uilib-toolbar-background: var(--uilib-surface-800, #1f2937);
+      --uilib-toolbar-border-color: var(--uilib-surface-600, #4b5563);
+      --uilib-toolbar-color: var(--uilib-surface-100, #f3f4f6);
+
+      &.ui-lib-toolbar--variant-material {
+        --uilib-toolbar-background: var(--uilib-surface-900, #111827);
+        --uilib-toolbar-border-color: transparent;
+      }
+
+      &.ui-lib-toolbar--variant-bootstrap {
+        --uilib-toolbar-background: var(--uilib-surface-800, #1f2937);
+        --uilib-toolbar-border-color: rgba(255, 255, 255, 0.175);
+      }
+
+      &.ui-lib-toolbar--variant-minimal {
+        --uilib-toolbar-background: transparent;
+        --uilib-toolbar-border-color: var(--uilib-surface-700, #374151);
+      }
     }
   }
-}
 
-// =============================================================================
-// Reduced-motion: disable transitions on the toolbar host and its direct groups
-// =============================================================================
-@media (prefers-reduced-motion: reduce) {
-  .ui-lib-toolbar,
-  .ui-lib-toolbar__group {
-    transition: none;
-    animation: none;
+  // =============================================================================
+  // Reduced-motion: disable transitions on the toolbar host and its direct groups
+  // =============================================================================
+  @media (prefers-reduced-motion: reduce) {
+    .ui-lib-toolbar,
+    .ui-lib-toolbar__group {
+      transition: none;
+      animation: none;
+    }
   }
-}
+} // end @layer uilib.components

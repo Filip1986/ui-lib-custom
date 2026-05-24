@@ -1,69 +1,71 @@
-ui-lib-icon-button {
-  display: inline-flex;
-}
-
-ui-lib-icon-button .ui-lib-icon-button {
-  --uilib-icon-button-min-target-size: 2.75rem;
-  --uilib-icon-button-size: var(--uilib-icon-button-min-target-size);
-  --uilib-icon-button-disabled-opacity: 0.5;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--uilib-icon-button-size);
-  block-size: var(--uilib-icon-button-size);
-  min-inline-size: var(--uilib-icon-button-min-target-size);
-  min-block-size: var(--uilib-icon-button-min-target-size);
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  border-radius: var(--uilib-radius-sm, 0.375rem);
-  color: inherit;
-  transition:
-    color 150ms ease,
-    background-color 150ms ease,
-    transform 120ms ease;
-}
-
-ui-lib-icon-button .ui-lib-icon-button--size-lg {
-  --uilib-icon-button-size: 3rem;
-}
-
-ui-lib-icon-button .ui-lib-icon-button:focus-visible {
-  outline: 2px solid var(--uilib-color-primary-500, currentColor);
-  outline-offset: 2px;
-}
-
-ui-lib-icon-button .ui-lib-icon-button--disabled {
-  opacity: var(--uilib-icon-button-disabled-opacity);
-}
-
-ui-lib-icon-button .ui-lib-icon-button__icon {
-  pointer-events: none;
-}
-
-ui-lib-icon-button .ui-lib-icon-button--loading .ui-lib-icon-button__icon {
-  animation: ui-lib-icon-button-spin 1s linear infinite;
-}
-
-@keyframes ui-lib-icon-button-spin {
-  from {
-    transform: rotate(0deg);
+@layer uilib.components {
+  ui-lib-icon-button {
+    display: inline-flex;
   }
 
-  to {
-    transform: rotate(360deg);
+  ui-lib-icon-button .ui-lib-icon-button {
+    --uilib-icon-button-min-target-size: 2.75rem;
+    --uilib-icon-button-size: var(--uilib-icon-button-min-target-size);
+    --uilib-icon-button-disabled-opacity: 0.5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--uilib-icon-button-size);
+    block-size: var(--uilib-icon-button-size);
+    min-inline-size: var(--uilib-icon-button-min-target-size);
+    min-block-size: var(--uilib-icon-button-min-target-size);
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: var(--uilib-radius-sm, 0.375rem);
+    color: inherit;
+    transition:
+      color 150ms ease,
+      background-color 150ms ease,
+      transform 120ms ease;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  ui-lib-icon-button .ui-lib-icon-button,
+  ui-lib-icon-button .ui-lib-icon-button--size-lg {
+    --uilib-icon-button-size: 3rem;
+  }
+
+  ui-lib-icon-button .ui-lib-icon-button:focus-visible {
+    outline: 2px solid var(--uilib-color-primary-500, currentColor);
+    outline-offset: 2px;
+  }
+
+  ui-lib-icon-button .ui-lib-icon-button--disabled {
+    opacity: var(--uilib-icon-button-disabled-opacity);
+  }
+
   ui-lib-icon-button .ui-lib-icon-button__icon {
-    transition: none;
-    animation: none;
+    pointer-events: none;
   }
 
   ui-lib-icon-button .ui-lib-icon-button--loading .ui-lib-icon-button__icon {
-    animation: none;
+    animation: ui-lib-icon-button-spin 1s linear infinite;
   }
-}
+
+  @keyframes ui-lib-icon-button-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-icon-button .ui-lib-icon-button,
+    ui-lib-icon-button .ui-lib-icon-button__icon {
+      transition: none;
+      animation: none;
+    }
+
+    ui-lib-icon-button .ui-lib-icon-button--loading .ui-lib-icon-button__icon {
+      animation: none;
+    }
+  }
+} // end @layer uilib.components

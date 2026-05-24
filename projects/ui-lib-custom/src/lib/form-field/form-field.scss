@@ -1,24 +1,26 @@
-.ui-form-field-error {
-  animation: ui-lib-form-field-error-slide-in 180ms ease-out;
-}
-
-.ui-form-field-required-indicator {
-  margin-inline-start: 0.25rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
+@layer uilib.components {
   .ui-form-field-error {
-    animation: none;
+    animation: ui-lib-form-field-error-slide-in 180ms ease-out;
   }
-}
 
-@keyframes ui-lib-form-field-error-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-2px);
+  .ui-form-field-required-indicator {
+    margin-inline-start: 0.25rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  @media (prefers-reduced-motion: reduce) {
+    .ui-form-field-error {
+      animation: none;
+    }
   }
-}
+
+  @keyframes ui-lib-form-field-error-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+} // end @layer uilib.components

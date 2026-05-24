@@ -1,198 +1,200 @@
-// Popover — host is a fixed full-screen container; panel is the anchored floating card.
-ui-lib-popover {
-  --uilib-popover-bg: var(--uilib-surface);
-  --uilib-popover-border-radius: var(--uilib-radius-md, 6px);
-  --uilib-popover-shadow: var(--uilib-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.15));
-  --uilib-popover-border: 0 solid transparent;
-  --uilib-popover-z-index: var(--uilib-z-modal, 1050);
-  --uilib-popover-min-width: 14rem;
-  --uilib-popover-max-width: 28rem;
-
-  --uilib-popover-header-padding: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
-  --uilib-popover-header-border-bottom: 1px solid var(--uilib-border);
-  --uilib-popover-header-font-size: var(--uilib-font-size-sm, 0.875rem);
-  --uilib-popover-header-font-weight: var(--uilib-font-weight-600, 600);
-
-  --uilib-popover-content-padding: var(--uilib-space-4, 1rem);
-
-  --uilib-popover-close-btn-size: 1.5rem;
-  --uilib-popover-close-btn-color: var(--uilib-page-fg-muted, #6b7280);
-  --uilib-popover-close-btn-hover-bg: var(--uilib-surface-alt);
-
-  --uilib-popover-enter-duration: 180ms;
-  --uilib-popover-enter-easing: cubic-bezier(0.16, 1, 0.3, 1);
-
-  --uilib-popover-arrow-size: 8px;
-
-  position: fixed;
-  inset: 0;
-  display: none;
-  z-index: var(--uilib-popover-z-index);
-  pointer-events: none;
-}
-
-ui-lib-popover.ui-lib-popover--open {
-  display: block;
-}
-
-// Transparent overlay — only captures clicks when dismissable
-ui-lib-popover .ui-lib-popover__overlay {
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  z-index: calc(var(--uilib-popover-z-index) - 1);
-  pointer-events: none;
-  cursor: default;
-}
-
-ui-lib-popover .ui-lib-popover__overlay--active {
-  pointer-events: auto;
-}
-
-// Floating panel
-ui-lib-popover .ui-lib-popover__panel {
-  position: fixed;
-  z-index: var(--uilib-popover-z-index);
-  display: flex;
-  flex-direction: column;
-  min-inline-size: var(--uilib-popover-min-width);
-  max-inline-size: var(--uilib-popover-max-width);
-  background: var(--uilib-popover-bg);
-  border-radius: var(--uilib-popover-border-radius);
-  border: var(--uilib-popover-border);
-  box-shadow: var(--uilib-popover-shadow);
-  pointer-events: auto;
-  opacity: 0;
-  transform: scale(0.96) translateY(4px);
-  transition:
-    opacity var(--uilib-popover-enter-duration) var(--uilib-popover-enter-easing),
-    transform var(--uilib-popover-enter-duration) var(--uilib-popover-enter-easing);
-}
-
-ui-lib-popover .ui-lib-popover__panel--visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-// Arrow
-ui-lib-popover .ui-lib-popover__arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-// Arrow at bottom pointing down (panel is above target)
-ui-lib-popover .ui-lib-popover__panel--placement-above .ui-lib-popover__arrow {
-  bottom: calc(-1 * var(--uilib-popover-arrow-size));
-  margin-left: calc(-1 * var(--uilib-popover-arrow-size));
-  border-left: var(--uilib-popover-arrow-size) solid transparent;
-  border-right: var(--uilib-popover-arrow-size) solid transparent;
-  border-top: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
-}
-
-// Arrow at top pointing up (panel is below target)
-ui-lib-popover .ui-lib-popover__panel--placement-below .ui-lib-popover__arrow {
-  top: calc(-1 * var(--uilib-popover-arrow-size));
-  margin-left: calc(-1 * var(--uilib-popover-arrow-size));
-  border-left: var(--uilib-popover-arrow-size) solid transparent;
-  border-right: var(--uilib-popover-arrow-size) solid transparent;
-  border-bottom: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
-}
-
-// Header row
-ui-lib-popover .ui-lib-popover__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--uilib-space-2, 0.5rem);
-  padding: var(--uilib-popover-header-padding);
-  border-block-end: var(--uilib-popover-header-border-bottom);
-}
-
-ui-lib-popover .ui-lib-popover__title {
-  font-size: var(--uilib-popover-header-font-size);
-  font-weight: var(--uilib-popover-header-font-weight);
-  color: var(--uilib-page-fg);
-  flex: 1;
-  min-width: 0;
-}
-
-// Close button
-ui-lib-popover .ui-lib-popover__close-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--uilib-popover-close-btn-size);
-  height: var(--uilib-popover-close-btn-size);
-  padding: 0;
-  border: none;
-  border-radius: var(--uilib-radius-sm, 4px);
-  background: transparent;
-  color: var(--uilib-popover-close-btn-color);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition:
-    background-color 120ms ease,
-    color 120ms ease;
-
-  &:hover {
-    background: var(--uilib-popover-close-btn-hover-bg);
-    color: var(--uilib-page-fg);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--uilib-color-primary-400, #818cf8);
-    outline-offset: 2px;
-  }
-}
-
-// Content area
-ui-lib-popover .ui-lib-popover__content {
-  padding: var(--uilib-popover-content-padding);
-  color: var(--uilib-page-fg);
-  font-size: var(--uilib-font-size-sm, 0.875rem);
-  line-height: 1.6;
-}
-
-// ---- Variant: material ----
-ui-lib-popover .ui-lib-popover--variant-material {
-  --uilib-popover-border-radius: var(--uilib-radius-lg, 12px);
-  --uilib-popover-shadow: var(--uilib-shadow-xl, 0 20px 25px -5px rgb(0 0 0 / 0.15));
-  --uilib-popover-border: 0 solid transparent;
-  --uilib-popover-close-btn-size: 1.75rem;
-}
-
-// ---- Variant: bootstrap ----
-ui-lib-popover .ui-lib-popover--variant-bootstrap {
-  --uilib-popover-border-radius: var(--uilib-radius-sm, 4px);
-  --uilib-popover-shadow: var(--uilib-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1));
-  --uilib-popover-border: 1px solid var(--uilib-border);
-  --uilib-popover-enter-duration: 120ms;
-
-  .ui-lib-popover__header {
-    border-block-end-color: var(--uilib-border);
-  }
-
-  &.ui-lib-popover__panel--placement-above .ui-lib-popover__arrow {
-    border-top-color: var(--uilib-border);
-  }
-
-  &.ui-lib-popover__panel--placement-below .ui-lib-popover__arrow {
-    border-bottom-color: var(--uilib-border);
-  }
-}
-
-// ---- Variant: minimal ----
-ui-lib-popover .ui-lib-popover--variant-minimal {
-  --uilib-popover-border-radius: var(--uilib-radius-sm, 4px);
-  --uilib-popover-shadow: var(--uilib-shadow-sm, 0 1px 3px rgb(0 0 0 / 0.08));
-  --uilib-popover-border: 1px solid var(--uilib-border);
-  --uilib-popover-enter-duration: 80ms;
-}
-
-// Reduced motion
-@media (prefers-reduced-motion: reduce) {
+@layer uilib.components {
+  // Popover — host is a fixed full-screen container; panel is the anchored floating card.
   ui-lib-popover {
-    --uilib-popover-enter-duration: 0ms;
+    --uilib-popover-bg: var(--uilib-surface);
+    --uilib-popover-border-radius: var(--uilib-radius-md, 6px);
+    --uilib-popover-shadow: var(--uilib-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.15));
+    --uilib-popover-border: 0 solid transparent;
+    --uilib-popover-z-index: var(--uilib-z-modal, 1050);
+    --uilib-popover-min-width: 14rem;
+    --uilib-popover-max-width: 28rem;
+
+    --uilib-popover-header-padding: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
+    --uilib-popover-header-border-bottom: 1px solid var(--uilib-border);
+    --uilib-popover-header-font-size: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-popover-header-font-weight: var(--uilib-font-weight-600, 600);
+
+    --uilib-popover-content-padding: var(--uilib-space-4, 1rem);
+
+    --uilib-popover-close-btn-size: 1.5rem;
+    --uilib-popover-close-btn-color: var(--uilib-page-fg-muted, #6b7280);
+    --uilib-popover-close-btn-hover-bg: var(--uilib-surface-alt);
+
+    --uilib-popover-enter-duration: 180ms;
+    --uilib-popover-enter-easing: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --uilib-popover-arrow-size: 8px;
+
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: var(--uilib-popover-z-index);
+    pointer-events: none;
   }
-}
+
+  ui-lib-popover.ui-lib-popover--open {
+    display: block;
+  }
+
+  // Transparent overlay — only captures clicks when dismissable
+  ui-lib-popover .ui-lib-popover__overlay {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: calc(var(--uilib-popover-z-index) - 1);
+    pointer-events: none;
+    cursor: default;
+  }
+
+  ui-lib-popover .ui-lib-popover__overlay--active {
+    pointer-events: auto;
+  }
+
+  // Floating panel
+  ui-lib-popover .ui-lib-popover__panel {
+    position: fixed;
+    z-index: var(--uilib-popover-z-index);
+    display: flex;
+    flex-direction: column;
+    min-inline-size: var(--uilib-popover-min-width);
+    max-inline-size: var(--uilib-popover-max-width);
+    background: var(--uilib-popover-bg);
+    border-radius: var(--uilib-popover-border-radius);
+    border: var(--uilib-popover-border);
+    box-shadow: var(--uilib-popover-shadow);
+    pointer-events: auto;
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+    transition:
+      opacity var(--uilib-popover-enter-duration) var(--uilib-popover-enter-easing),
+      transform var(--uilib-popover-enter-duration) var(--uilib-popover-enter-easing);
+  }
+
+  ui-lib-popover .ui-lib-popover__panel--visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  // Arrow
+  ui-lib-popover .ui-lib-popover__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  // Arrow at bottom pointing down (panel is above target)
+  ui-lib-popover .ui-lib-popover__panel--placement-above .ui-lib-popover__arrow {
+    bottom: calc(-1 * var(--uilib-popover-arrow-size));
+    margin-left: calc(-1 * var(--uilib-popover-arrow-size));
+    border-left: var(--uilib-popover-arrow-size) solid transparent;
+    border-right: var(--uilib-popover-arrow-size) solid transparent;
+    border-top: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
+  }
+
+  // Arrow at top pointing up (panel is below target)
+  ui-lib-popover .ui-lib-popover__panel--placement-below .ui-lib-popover__arrow {
+    top: calc(-1 * var(--uilib-popover-arrow-size));
+    margin-left: calc(-1 * var(--uilib-popover-arrow-size));
+    border-left: var(--uilib-popover-arrow-size) solid transparent;
+    border-right: var(--uilib-popover-arrow-size) solid transparent;
+    border-bottom: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
+  }
+
+  // Header row
+  ui-lib-popover .ui-lib-popover__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--uilib-space-2, 0.5rem);
+    padding: var(--uilib-popover-header-padding);
+    border-block-end: var(--uilib-popover-header-border-bottom);
+  }
+
+  ui-lib-popover .ui-lib-popover__title {
+    font-size: var(--uilib-popover-header-font-size);
+    font-weight: var(--uilib-popover-header-font-weight);
+    color: var(--uilib-page-fg);
+    flex: 1;
+    min-width: 0;
+  }
+
+  // Close button
+  ui-lib-popover .ui-lib-popover__close-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--uilib-popover-close-btn-size);
+    height: var(--uilib-popover-close-btn-size);
+    padding: 0;
+    border: none;
+    border-radius: var(--uilib-radius-sm, 4px);
+    background: transparent;
+    color: var(--uilib-popover-close-btn-color);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      background-color 120ms ease,
+      color 120ms ease;
+
+    &:hover {
+      background: var(--uilib-popover-close-btn-hover-bg);
+      color: var(--uilib-page-fg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-color-primary-400, #818cf8);
+      outline-offset: 2px;
+    }
+  }
+
+  // Content area
+  ui-lib-popover .ui-lib-popover__content {
+    padding: var(--uilib-popover-content-padding);
+    color: var(--uilib-page-fg);
+    font-size: var(--uilib-font-size-sm, 0.875rem);
+    line-height: 1.6;
+  }
+
+  // ---- Variant: material ----
+  ui-lib-popover .ui-lib-popover--variant-material {
+    --uilib-popover-border-radius: var(--uilib-radius-lg, 12px);
+    --uilib-popover-shadow: var(--uilib-shadow-xl, 0 20px 25px -5px rgb(0 0 0 / 0.15));
+    --uilib-popover-border: 0 solid transparent;
+    --uilib-popover-close-btn-size: 1.75rem;
+  }
+
+  // ---- Variant: bootstrap ----
+  ui-lib-popover .ui-lib-popover--variant-bootstrap {
+    --uilib-popover-border-radius: var(--uilib-radius-sm, 4px);
+    --uilib-popover-shadow: var(--uilib-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1));
+    --uilib-popover-border: 1px solid var(--uilib-border);
+    --uilib-popover-enter-duration: 120ms;
+
+    .ui-lib-popover__header {
+      border-block-end-color: var(--uilib-border);
+    }
+
+    &.ui-lib-popover__panel--placement-above .ui-lib-popover__arrow {
+      border-top-color: var(--uilib-border);
+    }
+
+    &.ui-lib-popover__panel--placement-below .ui-lib-popover__arrow {
+      border-bottom-color: var(--uilib-border);
+    }
+  }
+
+  // ---- Variant: minimal ----
+  ui-lib-popover .ui-lib-popover--variant-minimal {
+    --uilib-popover-border-radius: var(--uilib-radius-sm, 4px);
+    --uilib-popover-shadow: var(--uilib-shadow-sm, 0 1px 3px rgb(0 0 0 / 0.08));
+    --uilib-popover-border: 1px solid var(--uilib-border);
+    --uilib-popover-enter-duration: 80ms;
+  }
+
+  // Reduced motion
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-popover {
+      --uilib-popover-enter-duration: 0ms;
+    }
+  }
+} // end @layer uilib.components

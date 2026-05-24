@@ -1,174 +1,176 @@
-// -------------------------------------------------------------------------
-// Fieldset component
-// Pattern: --uilib-fieldset-{property}[-{variant}][-{state}]
-// -------------------------------------------------------------------------
+@layer uilib.components {
+  // -------------------------------------------------------------------------
+  // Fieldset component
+  // Pattern: --uilib-fieldset-{property}[-{variant}][-{state}]
+  // -------------------------------------------------------------------------
 
-// ---- Design tokens -------------------------------------------------------
-ui-lib-fieldset {
-  --uilib-fieldset-border-color: var(--uilib-surface-300, #d1d5db);
-  --uilib-fieldset-border-radius: var(--uilib-radius-md, 6px);
-  --uilib-fieldset-legend-bg: var(--uilib-surface, #ffffff);
-  --uilib-fieldset-legend-color: var(--uilib-color-text, #374151);
-  --uilib-fieldset-legend-font-size: 0.9375rem;
-  --uilib-fieldset-legend-font-weight: 600;
-  --uilib-fieldset-legend-padding: 0.75rem 1rem;
-  --uilib-fieldset-content-padding: 1rem;
-  --uilib-fieldset-toggle-color: var(--uilib-color-primary, #6366f1);
-  --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-100, #f3f4f6);
-  --uilib-fieldset-transition: 200ms ease;
-}
-
-// ---- Base host -----------------------------------------------------------
-.ui-lib-fieldset {
-  display: block;
-  border: 1px solid var(--uilib-fieldset-border-color);
-  border-radius: var(--uilib-fieldset-border-radius);
-  overflow: hidden;
-
-  // ---- Legend (header) ---------------------------------------------------
-  &__legend {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: var(--uilib-fieldset-legend-padding);
-    color: var(--uilib-fieldset-legend-color);
-    font-size: var(--uilib-fieldset-legend-font-size);
-    font-weight: var(--uilib-fieldset-legend-font-weight);
-    font-family: var(--uilib-font-ui, inherit);
-    background: var(--uilib-fieldset-legend-bg);
-    border-bottom: 1px solid var(--uilib-fieldset-border-color);
-    user-select: none;
-    line-height: 1.5;
-
-    &--toggleable {
-      cursor: pointer;
-      transition:
-        background-color var(--uilib-fieldset-transition),
-        color var(--uilib-fieldset-transition);
-
-      &:hover {
-        background-color: var(--uilib-fieldset-toggle-hover-bg);
-      }
-
-      &:focus-visible {
-        outline: 2px solid var(--uilib-fieldset-toggle-color);
-        outline-offset: -2px;
-      }
-    }
-  }
-
-  &__legend-text {
-    flex: 1;
-    min-width: 0;
-  }
-
-  // ---- Toggle icon (chevron) ---------------------------------------------
-  &__toggle-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-    color: var(--uilib-fieldset-toggle-color);
-    transition: transform var(--uilib-fieldset-transition);
-
-    &::before {
-      content: '';
-      display: block;
-      width: 0.45rem;
-      height: 0.45rem;
-      border-right: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(45deg) translateY(-2px);
-      transition: transform var(--uilib-fieldset-transition);
-    }
-
-    &--collapsed::before {
-      transform: rotate(-45deg) translateY(2px);
-    }
-  }
-
-  // ---- Content area (three-layer grid-row collapse animation) ------------
-  // Layer 1: clip wrapper — overflow:hidden + grid-row drives the height
-  &__content-wrapper {
-    display: grid;
-    grid-template-rows: 1fr;
-    transition: grid-template-rows var(--uilib-fieldset-transition);
-
-    &--collapsed {
-      grid-template-rows: 0fr;
-    }
-  }
-
-  // Layer 2: overflow clip (min-height:0 lets grid shrink past content)
-  &__content-inner {
-    overflow: hidden;
-    min-height: 0;
-    padding: var(--uilib-fieldset-content-padding);
-  }
-
-  // =========================================================================
-  // Variant: material
-  // =========================================================================
-  &--variant-material {
-    --uilib-fieldset-border-color: var(--uilib-surface-200, #e5e7eb);
-    --uilib-fieldset-border-radius: 12px;
+  // ---- Design tokens -------------------------------------------------------
+  ui-lib-fieldset {
+    --uilib-fieldset-border-color: var(--uilib-surface-300, #d1d5db);
+    --uilib-fieldset-border-radius: var(--uilib-radius-md, 6px);
+    --uilib-fieldset-legend-bg: var(--uilib-surface, #ffffff);
+    --uilib-fieldset-legend-color: var(--uilib-color-text, #374151);
+    --uilib-fieldset-legend-font-size: 0.9375rem;
+    --uilib-fieldset-legend-font-weight: 600;
+    --uilib-fieldset-legend-padding: 0.75rem 1rem;
+    --uilib-fieldset-content-padding: 1rem;
     --uilib-fieldset-toggle-color: var(--uilib-color-primary, #6366f1);
-    --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-50, #f9fafb);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      0 1px 2px rgba(0, 0, 0, 0.04);
-  }
-
-  // =========================================================================
-  // Variant: bootstrap
-  // =========================================================================
-  &--variant-bootstrap {
-    --uilib-fieldset-border-color: var(--uilib-color-neutral-300, #dee2e6);
-    --uilib-fieldset-border-radius: 4px;
-    --uilib-fieldset-toggle-color: #0d6efd;
-    --uilib-fieldset-toggle-hover-bg: #f8f9fa;
-    --uilib-fieldset-legend-font-weight: 500;
-  }
-
-  // =========================================================================
-  // Variant: minimal
-  // =========================================================================
-  &--variant-minimal {
-    --uilib-fieldset-border-color: var(--uilib-surface-200, #e5e7eb);
-    --uilib-fieldset-border-radius: 4px;
-    --uilib-fieldset-toggle-color: var(--uilib-color-text, #374151);
     --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-100, #f3f4f6);
-    --uilib-fieldset-transition: 0ms;
+    --uilib-fieldset-transition: 200ms ease;
   }
 
-  // =========================================================================
-  // Dark-mode adjustments
-  // =========================================================================
-  [data-theme='dark'] &,
-  &[data-theme='dark'] {
-    --uilib-fieldset-border-color: var(--uilib-surface-600, #4b5563);
-    --uilib-fieldset-legend-color: var(--uilib-surface-100, #f3f4f6);
-    --uilib-fieldset-legend-bg: var(--uilib-surface-800, #1f2937);
-    --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-700, #374151);
+  // ---- Base host -----------------------------------------------------------
+  .ui-lib-fieldset {
+    display: block;
+    border: 1px solid var(--uilib-fieldset-border-color);
+    border-radius: var(--uilib-fieldset-border-radius);
+    overflow: hidden;
 
-    &.ui-lib-fieldset--variant-bootstrap {
-      --uilib-fieldset-border-color: rgba(255, 255, 255, 0.15);
-      --uilib-fieldset-legend-bg: #212529;
-      --uilib-fieldset-toggle-hover-bg: #343a40;
+    // ---- Legend (header) ---------------------------------------------------
+    &__legend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: var(--uilib-fieldset-legend-padding);
+      color: var(--uilib-fieldset-legend-color);
+      font-size: var(--uilib-fieldset-legend-font-size);
+      font-weight: var(--uilib-fieldset-legend-font-weight);
+      font-family: var(--uilib-font-ui, inherit);
+      background: var(--uilib-fieldset-legend-bg);
+      border-bottom: 1px solid var(--uilib-fieldset-border-color);
+      user-select: none;
+      line-height: 1.5;
+
+      &--toggleable {
+        cursor: pointer;
+        transition:
+          background-color var(--uilib-fieldset-transition),
+          color var(--uilib-fieldset-transition);
+
+        &:hover {
+          background-color: var(--uilib-fieldset-toggle-hover-bg);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--uilib-fieldset-toggle-color);
+          outline-offset: -2px;
+        }
+      }
     }
 
-    &.ui-lib-fieldset--variant-minimal {
-      --uilib-fieldset-border-color: var(--uilib-surface-700, #374151);
-      --uilib-fieldset-legend-color: var(--uilib-surface-200, #e5e7eb);
+    &__legend-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    // ---- Toggle icon (chevron) ---------------------------------------------
+    &__toggle-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      color: var(--uilib-fieldset-toggle-color);
+      transition: transform var(--uilib-fieldset-transition);
+
+      &::before {
+        content: '';
+        display: block;
+        width: 0.45rem;
+        height: 0.45rem;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg) translateY(-2px);
+        transition: transform var(--uilib-fieldset-transition);
+      }
+
+      &--collapsed::before {
+        transform: rotate(-45deg) translateY(2px);
+      }
+    }
+
+    // ---- Content area (three-layer grid-row collapse animation) ------------
+    // Layer 1: clip wrapper — overflow:hidden + grid-row drives the height
+    &__content-wrapper {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows var(--uilib-fieldset-transition);
+
+      &--collapsed {
+        grid-template-rows: 0fr;
+      }
+    }
+
+    // Layer 2: overflow clip (min-height:0 lets grid shrink past content)
+    &__content-inner {
+      overflow: hidden;
+      min-height: 0;
+      padding: var(--uilib-fieldset-content-padding);
+    }
+
+    // =========================================================================
+    // Variant: material
+    // =========================================================================
+    &--variant-material {
+      --uilib-fieldset-border-color: var(--uilib-surface-200, #e5e7eb);
+      --uilib-fieldset-border-radius: 12px;
+      --uilib-fieldset-toggle-color: var(--uilib-color-primary, #6366f1);
+      --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-50, #f9fafb);
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    // =========================================================================
+    // Variant: bootstrap
+    // =========================================================================
+    &--variant-bootstrap {
+      --uilib-fieldset-border-color: var(--uilib-color-neutral-300, #dee2e6);
+      --uilib-fieldset-border-radius: 4px;
+      --uilib-fieldset-toggle-color: #0d6efd;
+      --uilib-fieldset-toggle-hover-bg: #f8f9fa;
+      --uilib-fieldset-legend-font-weight: 500;
+    }
+
+    // =========================================================================
+    // Variant: minimal
+    // =========================================================================
+    &--variant-minimal {
+      --uilib-fieldset-border-color: var(--uilib-surface-200, #e5e7eb);
+      --uilib-fieldset-border-radius: 4px;
+      --uilib-fieldset-toggle-color: var(--uilib-color-text, #374151);
+      --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-100, #f3f4f6);
+      --uilib-fieldset-transition: 0ms;
+    }
+
+    // =========================================================================
+    // Dark-mode adjustments
+    // =========================================================================
+    [data-theme='dark'] &,
+    &[data-theme='dark'] {
+      --uilib-fieldset-border-color: var(--uilib-surface-600, #4b5563);
+      --uilib-fieldset-legend-color: var(--uilib-surface-100, #f3f4f6);
+      --uilib-fieldset-legend-bg: var(--uilib-surface-800, #1f2937);
+      --uilib-fieldset-toggle-hover-bg: var(--uilib-surface-700, #374151);
+
+      &.ui-lib-fieldset--variant-bootstrap {
+        --uilib-fieldset-border-color: rgba(255, 255, 255, 0.15);
+        --uilib-fieldset-legend-bg: #212529;
+        --uilib-fieldset-toggle-hover-bg: #343a40;
+      }
+
+      &.ui-lib-fieldset--variant-minimal {
+        --uilib-fieldset-border-color: var(--uilib-surface-700, #374151);
+        --uilib-fieldset-legend-color: var(--uilib-surface-200, #e5e7eb);
+      }
+    }
+
+    // =========================================================================
+    // Reduced motion
+    // =========================================================================
+    @media (prefers-reduced-motion: reduce) {
+      --uilib-fieldset-transition: 0ms;
     }
   }
-
-  // =========================================================================
-  // Reduced motion
-  // =========================================================================
-  @media (prefers-reduced-motion: reduce) {
-    --uilib-fieldset-transition: 0ms;
-  }
-}
+} // end @layer uilib.components

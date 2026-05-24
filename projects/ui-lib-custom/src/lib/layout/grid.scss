@@ -1,9 +1,11 @@
-[data-theme='dark'] ui-lib-grid {
-  --uilib-grid-fg: var(--uilib-text-dark-primary);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme]) ui-lib-grid {
+@layer uilib.components {
+  [data-theme='dark'] ui-lib-grid {
     --uilib-grid-fg: var(--uilib-text-dark-primary);
   }
-}
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']):not([data-theme]) ui-lib-grid {
+      --uilib-grid-fg: var(--uilib-text-dark-primary);
+    }
+  }
+} // end @layer uilib.components

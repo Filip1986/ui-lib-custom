@@ -1,558 +1,561 @@
-// CodeSnippet component styles
-// Selector: ui-lib-code-snippet
-// Variants: material | bootstrap | minimal
-// Sizes: sm | md | lg
+@layer uilib.components {
+  // CodeSnippet component styles
+  // Selector: ui-lib-code-snippet
+  // Variants: material | bootstrap | minimal
+  // Sizes: sm | md | lg
 
-ui-lib-code-snippet {
-  // --- Design tokens: dark editor palette (overridable via CSS vars) ---
-  --uilib-code-snippet-bg: #1e1e2e;
-  --uilib-code-snippet-header-bg: #181825;
-  --uilib-code-snippet-line-nr-bg: #181825;
-  --uilib-code-snippet-text: #cdd6f4;
-  --uilib-code-snippet-line-nr-text: #45475a;
-  --uilib-code-snippet-border: #313244;
-  --uilib-code-snippet-tab-bg: #181825;
-  --uilib-code-snippet-tab-bg-hover: #252535;
-  --uilib-code-snippet-tab-bg-active: #1e1e2e;
-  --uilib-code-snippet-tab-border: #313244;
-  --uilib-code-snippet-tab-text-inactive: #6c7086;
-  --uilib-code-snippet-tab-indicator: #7c7cfa;
-  --uilib-code-snippet-copy-btn-text: #7f849c;
-  --uilib-code-snippet-copy-btn-text-hover: #cdd6f4;
-  --uilib-code-snippet-copy-btn-bg-hover: #313244;
-  --uilib-code-snippet-copied-text: #a6e3a1;
-  --uilib-code-snippet-dot-close: #ff5f56;
-  --uilib-code-snippet-dot-minimize: #ffbd2e;
-  --uilib-code-snippet-dot-maximize: #27c93f;
-  --uilib-code-snippet-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  ui-lib-code-snippet {
+    // --- Design tokens: dark editor palette (overridable via CSS vars) ---
+    --uilib-code-snippet-bg: #1e1e2e;
+    --uilib-code-snippet-header-bg: #181825;
+    --uilib-code-snippet-line-nr-bg: #181825;
+    --uilib-code-snippet-text: #cdd6f4;
+    --uilib-code-snippet-line-nr-text: #45475a;
+    --uilib-code-snippet-border: #313244;
+    --uilib-code-snippet-tab-bg: #181825;
+    --uilib-code-snippet-tab-bg-hover: #252535;
+    --uilib-code-snippet-tab-bg-active: #1e1e2e;
+    --uilib-code-snippet-tab-border: #313244;
+    --uilib-code-snippet-tab-text-inactive: #6c7086;
+    --uilib-code-snippet-tab-indicator: #7c7cfa;
+    --uilib-code-snippet-copy-btn-text: #7f849c;
+    --uilib-code-snippet-copy-btn-text-hover: #cdd6f4;
+    --uilib-code-snippet-copy-btn-bg-hover: #313244;
+    --uilib-code-snippet-copied-text: #a6e3a1;
+    --uilib-code-snippet-dot-close: #ff5f56;
+    --uilib-code-snippet-dot-minimize: #ffbd2e;
+    --uilib-code-snippet-dot-maximize: #27c93f;
+    --uilib-code-snippet-font:
+      'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
 
-  // --- Syntax highlight token colours (One Dark defaults — fully overridable) ---
-  // SOURCE OF TRUTH: design-tokens.ts › CODE_SNIPPET_SYNTAX_COLORS
-  // Override any or all on ui-lib-code-snippet (or an ancestor) to apply a custom syntax theme.
-  --uilib-code-snippet-syntax-keyword: #c678dd;
-  --uilib-code-snippet-syntax-string: #98c379;
-  --uilib-code-snippet-syntax-function: #61afef;
-  --uilib-code-snippet-syntax-builtin: #e6c07b;
-  --uilib-code-snippet-syntax-variable: #d19a66;
-  --uilib-code-snippet-syntax-tag: #e06c75;
-  --uilib-code-snippet-syntax-literal: #56b6c2;
-  --uilib-code-snippet-syntax-operator: #56b6c2;
-  --uilib-code-snippet-syntax-comment: #5c6370;
+    // --- Syntax highlight token colours (One Dark defaults — fully overridable) ---
+    // SOURCE OF TRUTH: design-tokens.ts › CODE_SNIPPET_SYNTAX_COLORS
+    // Override any or all on ui-lib-code-snippet (or an ancestor) to apply a custom syntax theme.
+    --uilib-code-snippet-syntax-keyword: #c678dd;
+    --uilib-code-snippet-syntax-string: #98c379;
+    --uilib-code-snippet-syntax-function: #61afef;
+    --uilib-code-snippet-syntax-builtin: #e6c07b;
+    --uilib-code-snippet-syntax-variable: #d19a66;
+    --uilib-code-snippet-syntax-tag: #e06c75;
+    --uilib-code-snippet-syntax-literal: #56b6c2;
+    --uilib-code-snippet-syntax-operator: #56b6c2;
+    --uilib-code-snippet-syntax-comment: #5c6370;
 
-  // --- Size scale ---
-  --uilib-code-snippet-font-size-sm: 0.75rem;
-  --uilib-code-snippet-font-size-md: 0.8125rem;
-  --uilib-code-snippet-font-size-lg: 0.9375rem;
-  --uilib-code-snippet-padding-sm: 0.5rem 0.75rem;
-  --uilib-code-snippet-padding-md: 0.75rem 1.25rem;
-  --uilib-code-snippet-padding-lg: 1rem 1.5rem;
-  --uilib-code-snippet-line-height: 1.65;
+    // --- Size scale ---
+    --uilib-code-snippet-font-size-sm: 0.75rem;
+    --uilib-code-snippet-font-size-md: 0.8125rem;
+    --uilib-code-snippet-font-size-lg: 0.9375rem;
+    --uilib-code-snippet-padding-sm: 0.5rem 0.75rem;
+    --uilib-code-snippet-padding-md: 0.75rem 1.25rem;
+    --uilib-code-snippet-padding-lg: 1rem 1.5rem;
+    --uilib-code-snippet-line-height: 1.65;
 
-  display: block;
-}
-
-// ─── Card container (shared across all variants) ──────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--uilib-code-snippet-border);
-  background: var(--uilib-code-snippet-bg);
-  color: var(--uilib-code-snippet-text);
-  font-family: var(--uilib-code-snippet-font);
-
-  // ── Size variants ──────────────────────────────────────────────────────────
-
-  &.ui-lib-code-snippet--sm {
-    font-size: var(--uilib-code-snippet-font-size-sm);
+    display: block;
   }
 
-  &.ui-lib-code-snippet--md {
-    font-size: var(--uilib-code-snippet-font-size-md);
-  }
+  // ─── Card container (shared across all variants) ──────────────────────────────
 
-  &.ui-lib-code-snippet--lg {
-    font-size: var(--uilib-code-snippet-font-size-lg);
-  }
-
-  // ── Material variant ───────────────────────────────────────────────────────
-
-  &.ui-lib-code-snippet--material {
-    border-radius: var(--uilib-radius-lg, 1rem);
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  }
-
-  // ── Bootstrap variant ──────────────────────────────────────────────────────
-
-  &.ui-lib-code-snippet--bootstrap {
-    border-radius: var(--uilib-radius-sm, 0.375rem);
-    border-width: 2px;
-    box-shadow: none;
-  }
-
-  // ── Minimal variant ────────────────────────────────────────────────────────
-
-  &.ui-lib-code-snippet--minimal {
-    border-radius: var(--uilib-radius-md, 0.5rem);
-    border-color: transparent;
-    box-shadow: none;
-  }
-}
-
-// ─── Header ───────────────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background: var(--uilib-code-snippet-header-bg);
-  border-bottom: 1px solid var(--uilib-code-snippet-border);
-}
-
-// ─── Window chrome ─────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__window-chrome {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  flex-shrink: 0;
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
-
-  &--close {
-    background: var(--uilib-code-snippet-dot-close);
-  }
-  &--minimize {
-    background: var(--uilib-code-snippet-dot-minimize);
-  }
-  &--maximize {
-    background: var(--uilib-code-snippet-dot-maximize);
-  }
-}
-
-// ─── Tab bar ──────────────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__tabs {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  // Single-file mode: non-interactive display tab
-  &:not(.ui-lib-code-snippet__tabs--multi) .ui-lib-code-snippet__tab {
-    border: 1px solid var(--uilib-code-snippet-tab-border);
-    border-radius: var(--uilib-radius-sm, 0.25rem);
-    cursor: default;
-    pointer-events: none;
-  }
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1rem;
-  background: var(--uilib-code-snippet-tab-bg);
-  border: none;
-  border-right: 1px solid var(--uilib-code-snippet-tab-border);
-  border-bottom: 2px solid transparent;
-  max-width: 200px;
-  overflow: hidden;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    border-bottom-color 0.15s ease,
-    color 0.15s ease;
-  flex-shrink: 0;
-
-  &:focus-visible {
-    outline: 2px solid var(--uilib-focus-ring, var(--uilib-color-primary-500, #6366f1));
-    outline-offset: -2px;
-  }
-
-  // Inactive tab
-  .ui-lib-code-snippet__tab-label {
-    color: var(--uilib-code-snippet-tab-text-inactive);
-  }
-
-  &:hover:not(.ui-lib-code-snippet__tab--active) {
-    background: var(--uilib-code-snippet-tab-bg-hover);
-
-    .ui-lib-code-snippet__tab-label {
-      color: var(--uilib-code-snippet-text);
-    }
-  }
-
-  // Active tab
-  &--active {
-    background: var(--uilib-code-snippet-tab-bg-active);
-    border-bottom-color: var(--uilib-code-snippet-tab-indicator);
-
-    .ui-lib-code-snippet__tab-label {
-      color: var(--uilib-code-snippet-text);
-      font-weight: 600;
-    }
-  }
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
-  font-size: 0.75rem;
-  font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-family: var(--uilib-font-ui, inherit), sans-serif;
-  transition: color 0.15s ease;
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__tab-icon {
-  display: inline-flex;
-  flex-shrink: 0;
-  font-size: 0.875rem;
-  line-height: 1;
-}
-
-// ─── Copy button ──────────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  padding: 0.375rem;
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  border-radius: var(--uilib-radius-sm, 0.25rem);
-  background: transparent;
-  color: var(--uilib-code-snippet-copy-btn-text);
-  cursor: pointer;
-  transition:
-    color 0.15s ease,
-    background-color 0.15s ease;
-  margin-left: auto;
-  flex-shrink: 0;
-
-  &:hover {
-    color: var(--uilib-code-snippet-copy-btn-text-hover);
-    background: var(--uilib-code-snippet-copy-btn-bg-hover);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--uilib-focus-ring, var(--uilib-color-primary-500, #6366f1));
-    outline-offset: 2px;
-  }
-
-  &[aria-pressed='true'] {
-    color: var(--uilib-code-snippet-copied-text);
-  }
-
-  // Minimum 44×44 touch target (visually smaller, touch area larger)
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -0.5rem;
-  }
-
-  position: relative;
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__copy-icon {
-  width: 1rem;
-  height: 1rem;
-  display: block;
-  pointer-events: none;
-}
-
-// ─── Body ─────────────────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__body {
-  display: flex;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--uilib-code-snippet-bg);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--uilib-code-snippet-border);
-    border-radius: 0.25rem;
-
-    &:hover {
-      background: var(--uilib-code-snippet-copy-btn-bg-hover);
-    }
-  }
-}
-
-// ─── Line numbers ─────────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__line-numbers {
-  flex-shrink: 0;
-  padding: 1.25rem 0.75rem 1.25rem 0;
-  background: var(--uilib-code-snippet-line-nr-bg);
-  border-right: 1px solid var(--uilib-code-snippet-border);
-  text-align: right;
-  user-select: none;
-  min-width: 2.5rem;
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__line-number {
-  color: var(--uilib-code-snippet-line-nr-text);
-  font-size: inherit;
-  line-height: var(--uilib-code-snippet-line-height);
-  padding-left: 0.5rem;
-}
-
-// ─── Code area ────────────────────────────────────────────────────────────────
-
-ui-lib-code-snippet .ui-lib-code-snippet__code-wrap {
-  flex: 1;
-  min-width: 0;
-  overflow: visible;
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__pre {
-  margin: 0;
-  padding: 1.25rem;
-  background: transparent;
-  overflow: visible;
-  white-space: pre;
-  tab-size: 2;
-  font-family: var(--uilib-code-snippet-font);
-  font-size: inherit;
-  line-height: var(--uilib-code-snippet-line-height);
-}
-
-ui-lib-code-snippet .ui-lib-code-snippet__code {
-  display: block;
-  color: var(--uilib-code-snippet-text);
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  background: transparent;
-}
-
-// ─── Syntax token colours (VS Code–inspired dark palette) ────────────────────
-
-ui-lib-code-snippet {
-  --uilib-syntax-keyword: #569cd6;
-  --uilib-syntax-string: #ce9178;
-  --uilib-syntax-comment: #6a9955;
-  --uilib-syntax-number: #b5cea8;
-  --uilib-syntax-decorator: #dcdcaa;
-  --uilib-syntax-type: #4ec9b0;
-  --uilib-syntax-function: #dcdcaa;
-  --uilib-syntax-variable: #bd63c5;
-  --uilib-syntax-at-rule: #c586c0;
-  --uilib-syntax-property: #9cdcfe;
-  --uilib-syntax-selector: #d7ba7d;
-  --uilib-syntax-unit: #b5cea8;
-  --uilib-syntax-tag: #4ec9b0;
-  --uilib-syntax-attr-name: #9cdcfe;
-  --uilib-syntax-attr-value: #ce9178;
-  --uilib-syntax-binding: #4fc1ff;
-  --uilib-syntax-interpolation: #dcdcaa;
-  --uilib-syntax-operator: #d4d4d4;
-  --uilib-syntax-punctuation: #808080;
-}
-
-ui-lib-code-snippet .uilib-token-keyword {
-  color: var(--uilib-syntax-keyword);
-  font-weight: 600;
-}
-
-ui-lib-code-snippet .uilib-token-string {
-  color: var(--uilib-syntax-string);
-}
-ui-lib-code-snippet .uilib-token-comment {
-  color: var(--uilib-syntax-comment);
-  font-style: italic;
-}
-ui-lib-code-snippet .uilib-token-number {
-  color: var(--uilib-syntax-number);
-}
-ui-lib-code-snippet .uilib-token-decorator {
-  color: var(--uilib-syntax-decorator);
-}
-ui-lib-code-snippet .uilib-token-type {
-  color: var(--uilib-syntax-type);
-}
-ui-lib-code-snippet .uilib-token-function {
-  color: var(--uilib-syntax-function);
-}
-ui-lib-code-snippet .uilib-token-variable {
-  color: var(--uilib-syntax-variable);
-}
-ui-lib-code-snippet .uilib-token-at-rule {
-  color: var(--uilib-syntax-at-rule);
-}
-ui-lib-code-snippet .uilib-token-property {
-  color: var(--uilib-syntax-property);
-}
-ui-lib-code-snippet .uilib-token-selector {
-  color: var(--uilib-syntax-selector);
-}
-ui-lib-code-snippet .uilib-token-unit {
-  color: var(--uilib-syntax-unit);
-}
-ui-lib-code-snippet .uilib-token-tag {
-  color: var(--uilib-syntax-tag);
-}
-ui-lib-code-snippet .uilib-token-attr-name {
-  color: var(--uilib-syntax-attr-name);
-}
-ui-lib-code-snippet .uilib-token-attr-value {
-  color: var(--uilib-syntax-attr-value);
-}
-ui-lib-code-snippet .uilib-token-binding {
-  color: var(--uilib-syntax-binding);
-  font-weight: 500;
-}
-ui-lib-code-snippet .uilib-token-interpolation {
-  color: var(--uilib-syntax-interpolation);
-}
-ui-lib-code-snippet .uilib-token-operator {
-  color: var(--uilib-syntax-operator);
-}
-ui-lib-code-snippet .uilib-token-punctuation {
-  color: var(--uilib-syntax-punctuation);
-}
-
-// ─── Reduced motion ───────────────────────────────────────────────────────────
-
-@media (prefers-reduced-motion: reduce) {
-  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn,
-  ui-lib-code-snippet .ui-lib-code-snippet__tab,
-  ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
-    transition: none;
-  }
-}
-
-// ─── Forced colors (high contrast) ───────────────────────────────────────────
-
-@media (forced-colors: active) {
   ui-lib-code-snippet .ui-lib-code-snippet__card {
-    border: 2px solid ButtonText;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--uilib-code-snippet-border);
+    background: var(--uilib-code-snippet-bg);
+    color: var(--uilib-code-snippet-text);
+    font-family: var(--uilib-code-snippet-font);
+
+    // ── Size variants ──────────────────────────────────────────────────────────
+
+    &.ui-lib-code-snippet--sm {
+      font-size: var(--uilib-code-snippet-font-size-sm);
+    }
+
+    &.ui-lib-code-snippet--md {
+      font-size: var(--uilib-code-snippet-font-size-md);
+    }
+
+    &.ui-lib-code-snippet--lg {
+      font-size: var(--uilib-code-snippet-font-size-lg);
+    }
+
+    // ── Material variant ───────────────────────────────────────────────────────
+
+    &.ui-lib-code-snippet--material {
+      border-radius: var(--uilib-radius-lg, 1rem);
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    // ── Bootstrap variant ──────────────────────────────────────────────────────
+
+    &.ui-lib-code-snippet--bootstrap {
+      border-radius: var(--uilib-radius-sm, 0.375rem);
+      border-width: 2px;
+      box-shadow: none;
+    }
+
+    // ── Minimal variant ────────────────────────────────────────────────────────
+
+    &.ui-lib-code-snippet--minimal {
+      border-radius: var(--uilib-radius-md, 0.5rem);
+      border-color: transparent;
+      box-shadow: none;
+    }
   }
 
-  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
-    border: 1px solid ButtonText;
-    forced-color-adjust: none;
+  // ─── Header ───────────────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    background: var(--uilib-code-snippet-header-bg);
+    border-bottom: 1px solid var(--uilib-code-snippet-border);
+  }
+
+  // ─── Window chrome ─────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__window-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-shrink: 0;
   }
 
   ui-lib-code-snippet .ui-lib-code-snippet__dot {
-    forced-color-adjust: none;
-  }
-}
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 
-// ─── Syntax highlighting — One Dark palette ───────────────────────────────────
-// All colours are drawn from --uilib-code-snippet-syntax-* CSS variables (defined in the
-// token block above) so consumers can supply a custom syntax theme by overriding those
-// variables on ui-lib-code-snippet or any ancestor element.
-
-ui-lib-code-snippet .ui-lib-code-snippet__code {
-  // Keywords: const, let, var, function, return, if, class, import, export …
-  .hljs-keyword,
-  .hljs-selector-tag,
-  .hljs-doctag,
-  .hljs-formula,
-  .hljs-strong {
-    color: var(--uilib-code-snippet-syntax-keyword);
+    &--close {
+      background: var(--uilib-code-snippet-dot-close);
+    }
+    &--minimize {
+      background: var(--uilib-code-snippet-dot-minimize);
+    }
+    &--maximize {
+      background: var(--uilib-code-snippet-dot-maximize);
+    }
   }
 
-  // Strings, template literals, regular expressions
-  .hljs-string,
-  .hljs-regexp,
-  .hljs-addition,
-  .hljs-meta .hljs-string {
-    color: var(--uilib-code-snippet-syntax-string);
+  // ─── Tab bar ──────────────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__tabs {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // Single-file mode: non-interactive display tab
+    &:not(.ui-lib-code-snippet__tabs--multi) .ui-lib-code-snippet__tab {
+      border: 1px solid var(--uilib-code-snippet-tab-border);
+      border-radius: var(--uilib-radius-sm, 0.25rem);
+      cursor: default;
+      pointer-events: none;
+    }
   }
 
-  // Function / class names
-  .hljs-title,
-  .hljs-title.function_,
-  .hljs-symbol,
-  .hljs-bullet,
-  .hljs-link,
-  .hljs-meta,
-  .hljs-selector-id {
-    color: var(--uilib-code-snippet-syntax-function);
+  ui-lib-code-snippet .ui-lib-code-snippet__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    background: var(--uilib-code-snippet-tab-bg);
+    border: none;
+    border-right: 1px solid var(--uilib-code-snippet-tab-border);
+    border-bottom: 2px solid transparent;
+    max-width: 200px;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-bottom-color 0.15s ease,
+      color 0.15s ease;
+    flex-shrink: 0;
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-focus-ring, var(--uilib-color-primary-500, #6366f1));
+      outline-offset: -2px;
+    }
+
+    // Inactive tab
+    .ui-lib-code-snippet__tab-label {
+      color: var(--uilib-code-snippet-tab-text-inactive);
+    }
+
+    &:hover:not(.ui-lib-code-snippet__tab--active) {
+      background: var(--uilib-code-snippet-tab-bg-hover);
+
+      .ui-lib-code-snippet__tab-label {
+        color: var(--uilib-code-snippet-text);
+      }
+    }
+
+    // Active tab
+    &--active {
+      background: var(--uilib-code-snippet-tab-bg-active);
+      border-bottom-color: var(--uilib-code-snippet-tab-indicator);
+
+      .ui-lib-code-snippet__tab-label {
+        color: var(--uilib-code-snippet-text);
+        font-weight: 600;
+      }
+    }
   }
 
-  // Built-ins, class names in definitions
-  .hljs-built_in,
-  .hljs-title.class_,
-  .hljs-class .hljs-title {
-    color: var(--uilib-code-snippet-syntax-builtin);
+  ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--uilib-font-ui, inherit), sans-serif;
+    transition: color 0.15s ease;
   }
 
-  // Numbers, boolean / null literals, CSS attribute selectors, variables
-  .hljs-attr,
-  .hljs-variable,
-  .hljs-template-variable,
-  .hljs-type,
-  .hljs-selector-class,
-  .hljs-selector-attr,
-  .hljs-selector-pseudo,
-  .hljs-number {
-    color: var(--uilib-code-snippet-syntax-variable);
+  ui-lib-code-snippet .ui-lib-code-snippet__tab-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    line-height: 1;
   }
 
-  // HTML tags, deletion markers
-  .hljs-section,
-  .hljs-name,
-  .hljs-selector-tag,
-  .hljs-deletion,
-  .hljs-subst,
-  .hljs-tag {
-    color: var(--uilib-code-snippet-syntax-tag);
+  // ─── Copy button ──────────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0.375rem;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: var(--uilib-radius-sm, 0.25rem);
+    background: transparent;
+    color: var(--uilib-code-snippet-copy-btn-text);
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+    margin-left: auto;
+    flex-shrink: 0;
+
+    &:hover {
+      color: var(--uilib-code-snippet-copy-btn-text-hover);
+      background: var(--uilib-code-snippet-copy-btn-bg-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-focus-ring, var(--uilib-color-primary-500, #6366f1));
+      outline-offset: 2px;
+    }
+
+    &[aria-pressed='true'] {
+      color: var(--uilib-code-snippet-copied-text);
+    }
+
+    // Minimum 44×44 touch target (visually smaller, touch area larger)
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -0.5rem;
+    }
+
+    position: relative;
   }
 
-  // Literals: true, false, null
-  .hljs-literal {
-    color: var(--uilib-code-snippet-syntax-literal);
+  ui-lib-code-snippet .ui-lib-code-snippet__copy-icon {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+    pointer-events: none;
   }
 
-  // Operators, punctuation
-  .hljs-operator,
-  .hljs-punctuation {
-    color: var(--uilib-code-snippet-syntax-operator);
+  // ─── Body ─────────────────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__body {
+    display: flex;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--uilib-code-snippet-bg);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--uilib-code-snippet-border);
+      border-radius: 0.25rem;
+
+      &:hover {
+        background: var(--uilib-code-snippet-copy-btn-bg-hover);
+      }
+    }
   }
 
-  // Comments
-  .hljs-comment,
-  .hljs-quote {
-    color: var(--uilib-code-snippet-syntax-comment);
+  // ─── Line numbers ─────────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__line-numbers {
+    flex-shrink: 0;
+    padding: 1.25rem 0.75rem 1.25rem 0;
+    background: var(--uilib-code-snippet-line-nr-bg);
+    border-right: 1px solid var(--uilib-code-snippet-border);
+    text-align: right;
+    user-select: none;
+    min-width: 2.5rem;
+  }
+
+  ui-lib-code-snippet .ui-lib-code-snippet__line-number {
+    color: var(--uilib-code-snippet-line-nr-text);
+    font-size: inherit;
+    line-height: var(--uilib-code-snippet-line-height);
+    padding-left: 0.5rem;
+  }
+
+  // ─── Code area ────────────────────────────────────────────────────────────────
+
+  ui-lib-code-snippet .ui-lib-code-snippet__code-wrap {
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
+  }
+
+  ui-lib-code-snippet .ui-lib-code-snippet__pre {
+    margin: 0;
+    padding: 1.25rem;
+    background: transparent;
+    overflow: visible;
+    white-space: pre;
+    tab-size: 2;
+    font-family: var(--uilib-code-snippet-font);
+    font-size: inherit;
+    line-height: var(--uilib-code-snippet-line-height);
+  }
+
+  ui-lib-code-snippet .ui-lib-code-snippet__code {
+    display: block;
+    color: var(--uilib-code-snippet-text);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: transparent;
+  }
+
+  // ─── Syntax token colours (VS Code–inspired dark palette) ────────────────────
+
+  ui-lib-code-snippet {
+    --uilib-syntax-keyword: #569cd6;
+    --uilib-syntax-string: #ce9178;
+    --uilib-syntax-comment: #6a9955;
+    --uilib-syntax-number: #b5cea8;
+    --uilib-syntax-decorator: #dcdcaa;
+    --uilib-syntax-type: #4ec9b0;
+    --uilib-syntax-function: #dcdcaa;
+    --uilib-syntax-variable: #bd63c5;
+    --uilib-syntax-at-rule: #c586c0;
+    --uilib-syntax-property: #9cdcfe;
+    --uilib-syntax-selector: #d7ba7d;
+    --uilib-syntax-unit: #b5cea8;
+    --uilib-syntax-tag: #4ec9b0;
+    --uilib-syntax-attr-name: #9cdcfe;
+    --uilib-syntax-attr-value: #ce9178;
+    --uilib-syntax-binding: #4fc1ff;
+    --uilib-syntax-interpolation: #dcdcaa;
+    --uilib-syntax-operator: #d4d4d4;
+    --uilib-syntax-punctuation: #808080;
+  }
+
+  ui-lib-code-snippet .uilib-token-keyword {
+    color: var(--uilib-syntax-keyword);
+    font-weight: 600;
+  }
+
+  ui-lib-code-snippet .uilib-token-string {
+    color: var(--uilib-syntax-string);
+  }
+  ui-lib-code-snippet .uilib-token-comment {
+    color: var(--uilib-syntax-comment);
     font-style: italic;
   }
-
-  // Markup: emphasis / underline
-  .hljs-emphasis {
-    font-style: italic;
+  ui-lib-code-snippet .uilib-token-number {
+    color: var(--uilib-syntax-number);
+  }
+  ui-lib-code-snippet .uilib-token-decorator {
+    color: var(--uilib-syntax-decorator);
+  }
+  ui-lib-code-snippet .uilib-token-type {
+    color: var(--uilib-syntax-type);
+  }
+  ui-lib-code-snippet .uilib-token-function {
+    color: var(--uilib-syntax-function);
+  }
+  ui-lib-code-snippet .uilib-token-variable {
+    color: var(--uilib-syntax-variable);
+  }
+  ui-lib-code-snippet .uilib-token-at-rule {
+    color: var(--uilib-syntax-at-rule);
+  }
+  ui-lib-code-snippet .uilib-token-property {
+    color: var(--uilib-syntax-property);
+  }
+  ui-lib-code-snippet .uilib-token-selector {
+    color: var(--uilib-syntax-selector);
+  }
+  ui-lib-code-snippet .uilib-token-unit {
+    color: var(--uilib-syntax-unit);
+  }
+  ui-lib-code-snippet .uilib-token-tag {
+    color: var(--uilib-syntax-tag);
+  }
+  ui-lib-code-snippet .uilib-token-attr-name {
+    color: var(--uilib-syntax-attr-name);
+  }
+  ui-lib-code-snippet .uilib-token-attr-value {
+    color: var(--uilib-syntax-attr-value);
+  }
+  ui-lib-code-snippet .uilib-token-binding {
+    color: var(--uilib-syntax-binding);
+    font-weight: 500;
+  }
+  ui-lib-code-snippet .uilib-token-interpolation {
+    color: var(--uilib-syntax-interpolation);
+  }
+  ui-lib-code-snippet .uilib-token-operator {
+    color: var(--uilib-syntax-operator);
+  }
+  ui-lib-code-snippet .uilib-token-punctuation {
+    color: var(--uilib-syntax-punctuation);
   }
 
-  .hljs-link {
-    text-decoration: underline;
+  // ─── Reduced motion ───────────────────────────────────────────────────────────
+
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-code-snippet .ui-lib-code-snippet__copy-btn,
+    ui-lib-code-snippet .ui-lib-code-snippet__tab,
+    ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
+      transition: none;
+    }
   }
-}
+
+  // ─── Forced colors (high contrast) ───────────────────────────────────────────
+
+  @media (forced-colors: active) {
+    ui-lib-code-snippet .ui-lib-code-snippet__card {
+      border: 2px solid ButtonText;
+    }
+
+    ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
+      border: 1px solid ButtonText;
+      forced-color-adjust: none;
+    }
+
+    ui-lib-code-snippet .ui-lib-code-snippet__dot {
+      forced-color-adjust: none;
+    }
+  }
+
+  // ─── Syntax highlighting — One Dark palette ───────────────────────────────────
+  // All colours are drawn from --uilib-code-snippet-syntax-* CSS variables (defined in the
+  // token block above) so consumers can supply a custom syntax theme by overriding those
+  // variables on ui-lib-code-snippet or any ancestor element.
+
+  ui-lib-code-snippet .ui-lib-code-snippet__code {
+    // Keywords: const, let, var, function, return, if, class, import, export …
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-doctag,
+    .hljs-formula,
+    .hljs-strong {
+      color: var(--uilib-code-snippet-syntax-keyword);
+    }
+
+    // Strings, template literals, regular expressions
+    .hljs-string,
+    .hljs-regexp,
+    .hljs-addition,
+    .hljs-meta .hljs-string {
+      color: var(--uilib-code-snippet-syntax-string);
+    }
+
+    // Function / class names
+    .hljs-title,
+    .hljs-title.function_,
+    .hljs-symbol,
+    .hljs-bullet,
+    .hljs-link,
+    .hljs-meta,
+    .hljs-selector-id {
+      color: var(--uilib-code-snippet-syntax-function);
+    }
+
+    // Built-ins, class names in definitions
+    .hljs-built_in,
+    .hljs-title.class_,
+    .hljs-class .hljs-title {
+      color: var(--uilib-code-snippet-syntax-builtin);
+    }
+
+    // Numbers, boolean / null literals, CSS attribute selectors, variables
+    .hljs-attr,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-type,
+    .hljs-selector-class,
+    .hljs-selector-attr,
+    .hljs-selector-pseudo,
+    .hljs-number {
+      color: var(--uilib-code-snippet-syntax-variable);
+    }
+
+    // HTML tags, deletion markers
+    .hljs-section,
+    .hljs-name,
+    .hljs-selector-tag,
+    .hljs-deletion,
+    .hljs-subst,
+    .hljs-tag {
+      color: var(--uilib-code-snippet-syntax-tag);
+    }
+
+    // Literals: true, false, null
+    .hljs-literal {
+      color: var(--uilib-code-snippet-syntax-literal);
+    }
+
+    // Operators, punctuation
+    .hljs-operator,
+    .hljs-punctuation {
+      color: var(--uilib-code-snippet-syntax-operator);
+    }
+
+    // Comments
+    .hljs-comment,
+    .hljs-quote {
+      color: var(--uilib-code-snippet-syntax-comment);
+      font-style: italic;
+    }
+
+    // Markup: emphasis / underline
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-link {
+      text-decoration: underline;
+    }
+  }
+} // end @layer uilib.components

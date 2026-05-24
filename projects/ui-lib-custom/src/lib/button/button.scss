@@ -1,64 +1,65 @@
-ui-lib-button {
-  /* Spacing tokens */
-  --uilib-space-1: 0.25rem;
-  --uilib-space-2: 0.5rem;
-  --uilib-space-3: 0.75rem;
-  --uilib-space-4: 1rem;
-  --uilib-space-5: 1.25rem;
+@layer uilib.components {
+  ui-lib-button {
+    /* Spacing tokens */
+    --uilib-space-1: 0.25rem;
+    --uilib-space-2: 0.5rem;
+    --uilib-space-3: 0.75rem;
+    --uilib-space-4: 1rem;
+    --uilib-space-5: 1.25rem;
 
-  /* Typography tokens */
-  --uilib-font-size-sm: 0.875rem;
-  --uilib-font-size-md: 1rem;
-  --uilib-font-size-lg: 1.125rem;
-  --uilib-font-weight-semibold: 600;
+    /* Typography tokens */
+    --uilib-font-size-sm: 0.875rem;
+    --uilib-font-size-md: 1rem;
+    --uilib-font-size-lg: 1.125rem;
+    --uilib-font-weight-semibold: 600;
 
-  /* Component-level variables */
-  --uilib-button-radius: var(--uilib-shape-base, 6px);
-  --uilib-button-gap: var(--uilib-space-2, 0.5rem);
-  --uilib-button-transition: all 0.2s ease;
-  --uilib-button-focus-color: var(--uilib-color-primary-500);
-  --uilib-button-focus-ring-color: var(--uilib-color-primary-100);
-  --uilib-button-focus-ring: 0 0 0 3px var(--uilib-button-focus-ring-color);
-  --uilib-button-disabled-opacity: 0.5;
-  --uilib-button-border-width: 1px;
-  --uilib-button-border-style: solid;
-  --uilib-button-shadow: var(--uilib-shadow-sm, none);
-  --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-shadow-sm, none));
-  --uilib-button-text-transform: none;
-  --uilib-button-letter-spacing: normal;
+    /* Component-level variables */
+    --uilib-button-radius: var(--uilib-shape-base, 6px);
+    --uilib-button-gap: var(--uilib-space-2, 0.5rem);
+    --uilib-button-transition: all 0.2s ease;
+    --uilib-button-focus-color: var(--uilib-color-primary-500);
+    --uilib-button-focus-ring-color: var(--uilib-color-primary-100);
+    --uilib-button-focus-ring: 0 0 0 3px var(--uilib-button-focus-ring-color);
+    --uilib-button-disabled-opacity: 0.5;
+    --uilib-button-border-width: 1px;
+    --uilib-button-border-style: solid;
+    --uilib-button-shadow: var(--uilib-shadow-sm, none);
+    --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-shadow-sm, none));
+    --uilib-button-text-transform: none;
+    --uilib-button-letter-spacing: normal;
 
-  /* Size variables */
-  --uilib-button-padding-small: var(--uilib-button-padding-y-small, var(--uilib-space-1))
-    var(--uilib-button-padding-x-small, var(--uilib-space-3));
-  --uilib-button-padding-medium: var(--uilib-button-padding-y-medium, var(--uilib-space-2))
-    var(--uilib-button-padding-x-medium, var(--uilib-space-4));
-  --uilib-button-padding-large: var(--uilib-button-padding-y-large, var(--uilib-space-3))
-    var(--uilib-button-padding-x-large, var(--uilib-space-5));
-  --uilib-button-font-size-small: var(--uilib-font-size-sm);
-  --uilib-button-font-size-medium: var(--uilib-font-size-md);
-  --uilib-button-font-size-large: var(--uilib-font-size-lg);
+    /* Size variables */
+    --uilib-button-padding-small: var(--uilib-button-padding-y-small, var(--uilib-space-1))
+      var(--uilib-button-padding-x-small, var(--uilib-space-3));
+    --uilib-button-padding-medium: var(--uilib-button-padding-y-medium, var(--uilib-space-2))
+      var(--uilib-button-padding-x-medium, var(--uilib-space-4));
+    --uilib-button-padding-large: var(--uilib-button-padding-y-large, var(--uilib-space-3))
+      var(--uilib-button-padding-x-large, var(--uilib-space-5));
+    --uilib-button-font-size-small: var(--uilib-font-size-sm);
+    --uilib-button-font-size-medium: var(--uilib-font-size-md);
+    --uilib-button-font-size-large: var(--uilib-font-size-lg);
 
-  display: inline-flex;
+    display: inline-flex;
 
-  --uilib-button-shadow-raised: var(
-    --uilib-button-shadow-raised,
-    var(--uilib-button-shadow, var(--uilib-shadow-md, none))
-  );
-  --uilib-button-shadow-raised-hover: var(
-    --uilib-button-shadow-raised-hover,
-    var(--uilib-button-shadow-hover, var(--uilib-shadow-lg, none))
-  );
-  --uilib-button-badge-offset-x: var(--uilib-button-badge-offset-x, var(--uilib-space-2));
-  --uilib-button-badge-offset-y: var(--uilib-button-badge-offset-y, var(--uilib-space-2));
-  --uilib-button-badge-radius: var(--uilib-button-badge-radius, var(--uilib-shape-base, 6px));
-  --uilib-button-badge-shadow: var(--uilib-button-badge-shadow, var(--uilib-shadow-sm));
-  --uilib-button-badge-font-size: var(--uilib-button-badge-font-size, var(--uilib-font-size-sm));
-  --uilib-button-badge-padding: var(
-    --uilib-button-badge-padding,
-    var(--uilib-space-1) var(--uilib-space-2)
-  );
+    --uilib-button-shadow-raised: var(
+      --uilib-button-shadow-raised,
+      var(--uilib-button-shadow, var(--uilib-shadow-md, none))
+    );
+    --uilib-button-shadow-raised-hover: var(
+      --uilib-button-shadow-raised-hover,
+      var(--uilib-button-shadow-hover, var(--uilib-shadow-lg, none))
+    );
+    --uilib-button-badge-offset-x: var(--uilib-button-badge-offset-x, var(--uilib-space-2));
+    --uilib-button-badge-offset-y: var(--uilib-button-badge-offset-y, var(--uilib-space-2));
+    --uilib-button-badge-radius: var(--uilib-button-badge-radius, var(--uilib-shape-base, 6px));
+    --uilib-button-badge-shadow: var(--uilib-button-badge-shadow, var(--uilib-shadow-sm));
+    --uilib-button-badge-font-size: var(--uilib-button-badge-font-size, var(--uilib-font-size-sm));
+    --uilib-button-badge-padding: var(
+      --uilib-button-badge-padding,
+      var(--uilib-space-1) var(--uilib-space-2)
+    );
 
-  /*
+    /*
    * Appearance colour defaults — SOURCE OF TRUTH: design-tokens.ts › BUTTON_APPEARANCE_COLORS
    * The hex values below are the CSS custom-property defaults; they are intentionally
    * duplicated from the TypeScript constants so that the CSS is self-contained.
@@ -66,915 +67,874 @@ ui-lib-button {
    * All of these variables are fully overridable by consumers.
    */
 
-  /* Framed appearance token defaults
+    /* Framed appearance token defaults
    * --uilib-button-framed-stroke is the single master size token.
    * It controls the white outer border, the offset frame border, and the gap
    * between them simultaneously (gap = offset − frame-border = stroke).
    * Change only this one value to rescale all three uniformly.
    */
-  --uilib-button-framed-stroke: 4px;
-  --uilib-button-framed-bg: #ffc82c;
-  --uilib-button-framed-fg: #000000;
-  --uilib-button-framed-border-color: #ffffff;
-  /* outer border width = stroke */
-  --uilib-button-framed-border-width: var(--uilib-button-framed-stroke);
-  --uilib-button-framed-frame-color: #ffc82c;
-  /* frame line width = stroke */
-  --uilib-button-framed-frame-border-width: var(--uilib-button-framed-stroke);
-  /* resting offset = 2×stroke  →  gap = offset − frame-border = stroke ✓ */
-  --uilib-button-framed-frame-offset-x: calc(2 * var(--uilib-button-framed-stroke));
-  --uilib-button-framed-frame-offset-y: calc(2 * var(--uilib-button-framed-stroke));
-  /* hover: frame moves 1 extra stroke further out */
-  --uilib-button-framed-frame-hover-offset-x: calc(3 * var(--uilib-button-framed-stroke));
-  --uilib-button-framed-frame-hover-offset-y: calc(3 * var(--uilib-button-framed-stroke));
-  /* active: frame stays at resting position while button translates toward it */
-  --uilib-button-framed-frame-active-offset-x: calc(2 * var(--uilib-button-framed-stroke));
-  --uilib-button-framed-frame-active-offset-y: calc(2 * var(--uilib-button-framed-stroke));
-  /* button body snaps 1 stroke toward the frame on press */
-  --uilib-button-framed-active-translate-x: var(--uilib-button-framed-stroke);
-  --uilib-button-framed-active-translate-y: var(--uilib-button-framed-stroke);
-  --uilib-button-framed-font-weight: 500;
-  --uilib-button-framed-letter-spacing: -0.025em;
+    --uilib-button-framed-stroke: 4px;
+    --uilib-button-framed-bg: #ffc82c;
+    --uilib-button-framed-fg: #000000;
+    --uilib-button-framed-border-color: #ffffff;
+    /* outer border width = stroke */
+    --uilib-button-framed-border-width: var(--uilib-button-framed-stroke);
+    --uilib-button-framed-frame-color: #ffc82c;
+    /* frame line width = stroke */
+    --uilib-button-framed-frame-border-width: var(--uilib-button-framed-stroke);
+    /* resting offset = 2×stroke  →  gap = offset − frame-border = stroke ✓ */
+    --uilib-button-framed-frame-offset-x: calc(2 * var(--uilib-button-framed-stroke));
+    --uilib-button-framed-frame-offset-y: calc(2 * var(--uilib-button-framed-stroke));
+    /* hover: frame moves 1 extra stroke further out */
+    --uilib-button-framed-frame-hover-offset-x: calc(3 * var(--uilib-button-framed-stroke));
+    --uilib-button-framed-frame-hover-offset-y: calc(3 * var(--uilib-button-framed-stroke));
+    /* active: frame stays at resting position while button translates toward it */
+    --uilib-button-framed-frame-active-offset-x: calc(2 * var(--uilib-button-framed-stroke));
+    --uilib-button-framed-frame-active-offset-y: calc(2 * var(--uilib-button-framed-stroke));
+    /* button body snaps 1 stroke toward the frame on press */
+    --uilib-button-framed-active-translate-x: var(--uilib-button-framed-stroke);
+    --uilib-button-framed-active-translate-y: var(--uilib-button-framed-stroke);
+    --uilib-button-framed-font-weight: 500;
+    --uilib-button-framed-letter-spacing: -0.025em;
 
-  /* Glass-shadow appearance token defaults */
-  --uilib-button-glass-shadow-from: #ff5f6d;
-  --uilib-button-glass-shadow-to: #ffc371;
-  --uilib-button-glass-shadow-x: 8px; /* Tailwind translate-2 = 0.5rem = 8px */
-  --uilib-button-glass-shadow-y: 8px;
-  --uilib-button-glass-shadow-hover-x: 12px; /* Tailwind translate-3 = 0.75rem = 12px */
-  --uilib-button-glass-shadow-hover-y: 12px;
-  --uilib-button-glass-shadow-active-x: 4px; /* Tailwind translate-1 = 0.25rem = 4px */
-  --uilib-button-glass-shadow-active-y: 4px;
-  --uilib-button-glass-shadow-glow-blur: 0.2px;
-  --uilib-button-glass-shadow-blur-amount: 8px;
-  --uilib-button-glass-shadow-bg: rgba(255, 255, 255, 0.2);
-  --uilib-button-glass-shadow-bg-hover: rgba(255, 255, 255, 0.28);
-  --uilib-button-glass-shadow-border-color: rgba(255, 255, 255, 0.2);
-  --uilib-button-glass-shadow-border-hover: rgba(255, 255, 255, 0.35);
-  --uilib-button-glass-shadow-fg: #000;
-  --uilib-button-glass-shadow-font-weight: 500;
-  --uilib-button-glass-shadow-letter-spacing: -0.025em;
-  --uilib-button-glass-shadow-gradient-angle: 90deg;
-  --uilib-button-glass-shadow-opacity: 0.9;
+    /* Glass-shadow appearance token defaults */
+    --uilib-button-glass-shadow-from: #ff5f6d;
+    --uilib-button-glass-shadow-to: #ffc371;
+    --uilib-button-glass-shadow-x: 8px; /* Tailwind translate-2 = 0.5rem = 8px */
+    --uilib-button-glass-shadow-y: 8px;
+    --uilib-button-glass-shadow-hover-x: 12px; /* Tailwind translate-3 = 0.75rem = 12px */
+    --uilib-button-glass-shadow-hover-y: 12px;
+    --uilib-button-glass-shadow-active-x: 4px; /* Tailwind translate-1 = 0.25rem = 4px */
+    --uilib-button-glass-shadow-active-y: 4px;
+    --uilib-button-glass-shadow-glow-blur: 0.2px;
+    --uilib-button-glass-shadow-blur-amount: 8px;
+    --uilib-button-glass-shadow-bg: rgba(255, 255, 255, 0.2);
+    --uilib-button-glass-shadow-bg-hover: rgba(255, 255, 255, 0.28);
+    --uilib-button-glass-shadow-border-color: rgba(255, 255, 255, 0.2);
+    --uilib-button-glass-shadow-border-hover: rgba(255, 255, 255, 0.35);
+    --uilib-button-glass-shadow-fg: #000;
+    --uilib-button-glass-shadow-font-weight: 500;
+    --uilib-button-glass-shadow-letter-spacing: -0.025em;
+    --uilib-button-glass-shadow-gradient-angle: 90deg;
+    --uilib-button-glass-shadow-opacity: 0.9;
 
-  /* Tactile appearance token defaults */
-  --uilib-button-tactile-from: #4aa6ff;
-  --uilib-button-tactile-to: #278eff;
-  --uilib-button-tactile-border: #1a77d9;
-  --uilib-button-tactile-fg: #fff;
-  --uilib-button-tactile-radius: 1.25rem;
-  --uilib-button-tactile-border-width: 2.5px;
+    /* Tactile appearance token defaults */
+    --uilib-button-tactile-from: #4aa6ff;
+    --uilib-button-tactile-to: #278eff;
+    --uilib-button-tactile-border: #1a77d9;
+    --uilib-button-tactile-fg: #fff;
+    --uilib-button-tactile-radius: 1.25rem;
+    --uilib-button-tactile-border-width: 2.5px;
 
-  --uilib-button-padding-x-small: calc(
-    var(--uilib-button-padding-x-small-base, 1rem) * var(--uilib-density, 1)
-  );
-  --uilib-button-padding-y-small: calc(
-    var(--uilib-button-padding-y-small-base, 0.5rem) * var(--uilib-density, 1)
-  );
-  --uilib-button-padding-x-medium: calc(
-    var(--uilib-button-padding-x-medium-base, 2rem) * var(--uilib-density, 1)
-  );
-  --uilib-button-padding-y-medium: calc(
-    var(--uilib-button-padding-y-medium-base, 1rem) * var(--uilib-density, 1)
-  );
-  --uilib-button-padding-x-large: calc(
-    var(--uilib-button-padding-x-large-base, 3rem) * var(--uilib-density, 1)
-  );
-  --uilib-button-padding-y-large: calc(
-    var(--uilib-button-padding-y-large-base, 1.5rem) * var(--uilib-density, 1)
-  );
-}
+    --uilib-button-padding-x-small: calc(
+      var(--uilib-button-padding-x-small-base, 1rem) * var(--uilib-density, 1)
+    );
+    --uilib-button-padding-y-small: calc(
+      var(--uilib-button-padding-y-small-base, 0.5rem) * var(--uilib-density, 1)
+    );
+    --uilib-button-padding-x-medium: calc(
+      var(--uilib-button-padding-x-medium-base, 2rem) * var(--uilib-density, 1)
+    );
+    --uilib-button-padding-y-medium: calc(
+      var(--uilib-button-padding-y-medium-base, 1rem) * var(--uilib-density, 1)
+    );
+    --uilib-button-padding-x-large: calc(
+      var(--uilib-button-padding-x-large-base, 3rem) * var(--uilib-density, 1)
+    );
+    --uilib-button-padding-y-large: calc(
+      var(--uilib-button-padding-y-large-base, 1.5rem) * var(--uilib-density, 1)
+    );
+  }
 
-ui-lib-button button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--uilib-button-gap);
-  border-radius: var(--uilib-button-radius, var(--uilib-radius-md));
-  border: var(--uilib-button-border-width) var(--uilib-button-border-style)
-    var(--uilib-button-border, currentColor);
-  font-weight: var(--uilib-font-weight-semibold);
-  font-family: var(--uilib-font-ui, inherit), sans-serif;
-  text-transform: var(--uilib-button-text-transform);
-  letter-spacing: var(--uilib-button-letter-spacing);
-  padding: var(--uilib-button-padding, var(--uilib-button-padding-medium));
-  background-color: var(
-    --uilib-button-bg,
-    var(--uilib-button-secondary-bg, var(--uilib-color-secondary-100))
-  );
-  color: var(--uilib-button-fg, var(--uilib-button-secondary-fg, inherit));
-  transition: var(--uilib-button-transition);
-  cursor: pointer;
-  position: relative;
-  outline: none;
-  font-size: var(--uilib-button-font-size, var(--uilib-button-font-size-medium));
-  box-shadow: var(--uilib-button-shadow, none);
-  align-self: stretch;
-}
+  ui-lib-button button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--uilib-button-gap);
+    border-radius: var(--uilib-button-radius, var(--uilib-radius-md));
+    border: var(--uilib-button-border-width) var(--uilib-button-border-style)
+      var(--uilib-button-border, currentColor);
+    font-weight: var(--uilib-font-weight-semibold);
+    font-family: var(--uilib-font-ui, inherit), sans-serif;
+    text-transform: var(--uilib-button-text-transform);
+    letter-spacing: var(--uilib-button-letter-spacing);
+    padding: var(--uilib-button-padding, var(--uilib-button-padding-medium));
+    background-color: var(
+      --uilib-button-bg,
+      var(--uilib-button-secondary-bg, var(--uilib-color-secondary-100))
+    );
+    color: var(--uilib-button-fg, var(--uilib-button-secondary-fg, inherit));
+    transition: var(--uilib-button-transition);
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    font-size: var(--uilib-button-font-size, var(--uilib-button-font-size-medium));
+    box-shadow: var(--uilib-button-shadow, none);
+    align-self: stretch;
+  }
 
-ui-lib-button button:focus-visible,
-ui-lib-button button:focus,
-ui-lib-button button.ui-lib-button--focused {
-  outline: 2px solid var(--uilib-button-focus-color);
-  outline-offset: 2px;
-  box-shadow: var(--uilib-button-focus-ring);
-}
+  ui-lib-button button:focus-visible,
+  ui-lib-button button:focus,
+  ui-lib-button button.ui-lib-button--focused {
+    outline: 2px solid var(--uilib-button-focus-color);
+    outline-offset: 2px;
+    box-shadow: var(--uilib-button-focus-ring);
+  }
 
-ui-lib-button button.ui-lib-button--disabled {
-  pointer-events: none;
-}
-
-ui-lib-button button:hover:not(.ui-lib-button--disabled) {
-  background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
-  color: var(--uilib-button-fg-hover, var(--uilib-button-fg));
-  box-shadow: var(--uilib-button-shadow-hover, var(--uilib-button-shadow));
-}
-
-ui-lib-button button:active:not(.ui-lib-button--disabled) {
-  background-color: var(
-    --uilib-button-bg-active,
-    var(--uilib-button-bg-hover, var(--uilib-button-bg))
-  );
-}
-
-ui-lib-button .ui-lib-button {
-  --uilib-button-icon-gap: var(--uilib-space-2);
-
-  display: inline-flex;
-  align-items: center;
-  gap: var(--uilib-button-icon-gap);
-
-  &--disabled {
-    opacity: var(--uilib-button-disabled-opacity);
-    cursor: not-allowed;
+  ui-lib-button button.ui-lib-button--disabled {
     pointer-events: none;
   }
 
-  &--soft-disabled {
-    opacity: var(--uilib-button-disabled-opacity);
-    cursor: not-allowed;
+  ui-lib-button button:hover:not(.ui-lib-button--disabled) {
+    background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
+    color: var(--uilib-button-fg-hover, var(--uilib-button-fg));
+    box-shadow: var(--uilib-button-shadow-hover, var(--uilib-button-shadow));
   }
 
-  &--loading {
-    cursor: wait;
+  ui-lib-button button:active:not(.ui-lib-button--disabled) {
+    background-color: var(
+      --uilib-button-bg-active,
+      var(--uilib-button-bg-hover, var(--uilib-button-bg))
+    );
   }
 
-  &--full-width {
-    width: 100%;
-  }
+  ui-lib-button .ui-lib-button {
+    --uilib-button-icon-gap: var(--uilib-space-2);
 
-  &--size-small {
-    --uilib-button-padding: var(--uilib-button-padding-small);
-    --uilib-button-font-size: var(--uilib-button-font-size-small);
-  }
+    display: inline-flex;
+    align-items: center;
+    gap: var(--uilib-button-icon-gap);
 
-  &--size-medium {
-    --uilib-button-padding: var(--uilib-button-padding-medium);
-    --uilib-button-font-size: var(--uilib-button-font-size-medium);
-  }
-
-  &--size-large {
-    --uilib-button-padding: var(--uilib-button-padding-large);
-    --uilib-button-font-size: var(--uilib-button-font-size-large);
-  }
-
-  /* ── Appearance modifiers ──────────────────────────────────────────────── */
-
-  &--appearance-outline {
-    background-color: transparent;
-    color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
-    border-color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
-  }
-
-  &--appearance-ghost {
-    background-color: transparent;
-    color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
-    border-color: transparent;
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: color-mix(
-        in srgb,
-        var(--uilib-button-border, var(--uilib-button-bg, currentColor)) 8%,
-        transparent
-      );
+    &--disabled {
+      opacity: var(--uilib-button-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
     }
-  }
 
-  &--appearance-link {
-    background-color: transparent;
-    border-color: transparent;
-    color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
-    text-decoration: underline;
-    padding: 0;
-    border: none;
-    box-shadow: none;
+    &--soft-disabled {
+      opacity: var(--uilib-button-disabled-opacity);
+      cursor: not-allowed;
+    }
 
-    &:hover:not(.ui-lib-button--disabled) {
+    &--loading {
+      cursor: wait;
+    }
+
+    &--full-width {
+      width: 100%;
+    }
+
+    &--size-small {
+      --uilib-button-padding: var(--uilib-button-padding-small);
+      --uilib-button-font-size: var(--uilib-button-font-size-small);
+    }
+
+    &--size-medium {
+      --uilib-button-padding: var(--uilib-button-padding-medium);
+      --uilib-button-font-size: var(--uilib-button-font-size-medium);
+    }
+
+    &--size-large {
+      --uilib-button-padding: var(--uilib-button-padding-large);
+      --uilib-button-font-size: var(--uilib-button-font-size-large);
+    }
+
+    /* ── Appearance modifiers ──────────────────────────────────────────────── */
+
+    &--appearance-outline {
       background-color: transparent;
-      box-shadow: none;
-      text-decoration: underline;
-      opacity: 0.8;
+      color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
+      border-color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
     }
 
-    &:active:not(.ui-lib-button--disabled) {
-      opacity: 0.65;
-    }
-  }
-
-  &--appearance-soft {
-    background-color: color-mix(in srgb, var(--uilib-button-bg) 15%, transparent);
-    color: var(--uilib-button-border, var(--uilib-button-bg));
-    border-color: transparent;
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: color-mix(in srgb, var(--uilib-button-bg) 25%, transparent);
-      color: var(--uilib-button-border, var(--uilib-button-bg));
-      box-shadow: none;
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      background-color: color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
-    }
-  }
-
-  &--appearance-glass {
-    background-color: color-mix(in srgb, var(--uilib-button-bg) 18%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-color: color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
-    color: var(--uilib-button-fg);
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: color-mix(in srgb, var(--uilib-button-bg) 28%, transparent);
-      border-color: color-mix(in srgb, var(--uilib-button-bg) 50%, transparent);
-      color: var(--uilib-button-fg);
-    }
-  }
-
-  &--appearance-glass-shadow {
-    background: var(--uilib-button-glass-shadow-bg);
-    backdrop-filter: blur(var(--uilib-button-glass-shadow-blur-amount));
-    -webkit-backdrop-filter: blur(var(--uilib-button-glass-shadow-blur-amount));
-    border: 1px solid var(--uilib-button-glass-shadow-border-color);
-    color: var(--uilib-button-glass-shadow-fg);
-    box-shadow: none;
-    position: relative;
-    z-index: 1;
-    font-weight: var(--uilib-button-glass-shadow-font-weight); /* Tailwind font-medium */
-    letter-spacing: var(--uilib-button-glass-shadow-letter-spacing); /* Tailwind tracking-tight */
-    transition:
-      background 0.3s ease,
-      transform 0.3s ease,
-      border-color 0.3s ease;
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background: var(--uilib-button-glass-shadow-bg-hover);
-      border-color: var(--uilib-button-glass-shadow-border-hover);
-      color: var(--uilib-button-glass-shadow-fg);
-      box-shadow: none;
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      /* Button snaps 4px toward shadow (Tailwind translate-1 = 0.25rem = 4px) */
-      transform: translate(
-        var(--uilib-button-glass-shadow-active-x),
-        var(--uilib-button-glass-shadow-active-y)
-      );
-      background: var(--uilib-button-glass-shadow-bg);
-    }
-  }
-
-  &--appearance-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--uilib-button-bg),
-      color-mix(in srgb, var(--uilib-button-bg) 72%, #000)
-    );
-    border-color: transparent;
-    color: var(--uilib-button-fg);
-
-    &:hover:not(.ui-lib-button--disabled) {
-      filter: brightness(1.08);
-      transform: translateY(-1px);
-      background: linear-gradient(
-        135deg,
-        var(--uilib-button-bg),
-        color-mix(in srgb, var(--uilib-button-bg) 72%, #000)
-      );
-      color: var(--uilib-button-fg);
-      box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--uilib-button-bg) 45%, transparent);
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      filter: brightness(0.95);
-      transform: translateY(0);
-    }
-  }
-
-  &--appearance-elevated {
-    background-color: var(--uilib-button-bg);
-    color: var(--uilib-button-fg);
-    border-color: transparent;
-    box-shadow:
-      0 4px 12px -2px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent),
-      0 2px 4px -1px color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
-      color: var(--uilib-button-fg);
-      transform: translateY(-2px);
-      box-shadow:
-        0 8px 20px -4px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent),
-        0 4px 8px -2px color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      transform: translateY(0);
-      box-shadow: 0 2px 6px -1px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent);
-    }
-  }
-
-  &--appearance-neon {
-    background-color: transparent;
-    color: var(--uilib-button-border, var(--uilib-button-bg));
-    border-color: var(--uilib-button-border, var(--uilib-button-bg));
-    border-width: 2px;
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: color-mix(
-        in srgb,
-        var(--uilib-button-border, var(--uilib-button-bg)) 10%,
-        transparent
-      );
-      color: var(--uilib-button-border, var(--uilib-button-bg));
-      box-shadow:
-        0 0 10px 2px
-          color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 70%, transparent),
-        0 0 22px 4px
-          color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 35%, transparent);
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      box-shadow: 0 0 6px 1px
-        color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 70%, transparent);
-    }
-  }
-
-  &--appearance-flat {
-    background-color: var(--uilib-button-bg);
-    color: var(--uilib-button-fg);
-    border-color: transparent;
-    box-shadow: none;
-
-    &:hover:not(.ui-lib-button--disabled) {
-      filter: brightness(0.9);
-      background-color: var(--uilib-button-bg);
-      box-shadow: none;
-      color: var(--uilib-button-fg);
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      filter: brightness(0.8);
-    }
-  }
-
-  &--appearance-framed {
-    background-color: var(--uilib-button-framed-bg);
-    color: var(--uilib-button-framed-fg);
-    border: var(--uilib-button-framed-border-width) solid var(--uilib-button-framed-border-color);
-    border-radius: 0;
-    font-weight: var(--uilib-button-framed-font-weight);
-    letter-spacing: var(--uilib-button-framed-letter-spacing);
-    position: relative;
-    z-index: 1;
-    box-shadow: none;
-    transition:
-      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-      background-color 0.2s ease,
-      color 0.2s ease;
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: var(--uilib-button-framed-bg);
-      color: var(--uilib-button-framed-fg);
-      box-shadow: none;
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      transform: translate(
-        var(--uilib-button-framed-active-translate-x),
-        var(--uilib-button-framed-active-translate-y)
-      );
-      background-color: var(--uilib-button-framed-bg);
-      box-shadow: none;
-    }
-
-    /* Increase outline-offset to keep the focus ring clear of the thick white border */
-    &:focus-visible,
-    &:focus,
-    &.ui-lib-button--focused {
-      outline-offset: 4px;
-    }
-  }
-
-  &--appearance-tactile {
-    background: linear-gradient(
-      to bottom,
-      var(--uilib-button-tactile-from),
-      var(--uilib-button-tactile-to)
-    );
-    border-color: var(--uilib-button-tactile-border);
-    border-width: var(--uilib-button-tactile-border-width);
-    color: var(--uilib-button-tactile-fg);
-    border-radius: var(--uilib-button-tactile-radius);
-    letter-spacing: -0.01em;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:
-      inset 0 3px 1px rgba(255, 255, 255, 0.35),
-      inset 0 -3px 2px rgba(0, 0, 0, 0.08),
-      0 10px 25px -5px rgba(0, 0, 0, 0.1);
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background: linear-gradient(
-        to bottom,
-        var(--uilib-button-tactile-from),
-        var(--uilib-button-tactile-to)
-      );
-      color: var(--uilib-button-tactile-fg);
-      transform: translateY(-2px);
-      filter: brightness(1.03);
-      box-shadow:
-        inset 0 3px 1px rgba(255, 255, 255, 0.4),
-        inset 0 -3px 2px rgba(0, 0, 0, 0.08),
-        0 15px 30px -8px rgba(0, 0, 0, 0.15);
-    }
-
-    &:active:not(.ui-lib-button--disabled) {
-      background: linear-gradient(
-        to bottom,
-        var(--uilib-button-tactile-from),
-        var(--uilib-button-tactile-to)
-      );
-      transform: translateY(1px);
-      filter: brightness(0.95);
-      box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.2),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Per-severity gradient colour tokens */
-    &.ui-lib-button--primary {
-      --uilib-button-tactile-from: #4aa6ff;
-      --uilib-button-tactile-to: #278eff;
-      --uilib-button-tactile-border: #1a77d9;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--secondary {
-      --uilib-button-tactile-from: #525969;
-      --uilib-button-tactile-to: #3e434f;
-      --uilib-button-tactile-border: #2d313a;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--success {
-      --uilib-button-tactile-from: #66d68c;
-      --uilib-button-tactile-to: #45c671;
-      --uilib-button-tactile-border: #2da861;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--danger {
-      --uilib-button-tactile-from: #f57d74;
-      --uilib-button-tactile-to: #f05e53;
-      --uilib-button-tactile-border: #d14940;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--warning {
-      --uilib-button-tactile-from: #ffa05e;
-      --uilib-button-tactile-to: #ff853d;
-      --uilib-button-tactile-border: #e87428;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--info {
-      --uilib-button-tactile-from: #42c9e5;
-      --uilib-button-tactile-to: #17b5d4;
-      --uilib-button-tactile-border: #159bb7;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--help {
-      --uilib-button-tactile-from: #bd88ff;
-      --uilib-button-tactile-to: #a665fe;
-      --uilib-button-tactile-border: #8c4ee6;
-      --uilib-button-tactile-fg: #fff;
-    }
-
-    &.ui-lib-button--contrast {
-      --uilib-button-tactile-from: #ffe079;
-      --uilib-button-tactile-to: #ffcf49;
-      --uilib-button-tactile-border: #e0b840;
-      --uilib-button-tactile-fg: #3c414d;
-    }
-  }
-
-  /* ── Design variant overrides ─────────────────────────────────────────── */
-
-  &--bootstrap {
-    --uilib-button-radius: var(--uilib-shape-base, 6px);
-    --uilib-button-border-width: 1px;
-    --uilib-button-shadow: var(--uilib-button-shadow, var(--uilib-shadow-sm));
-    --uilib-button-shadow-hover: var(--uilib-button-shadow-hover, var(--uilib-shadow-md));
-
-    &.ui-lib-button--raised {
-      background-image: linear-gradient(
-        to bottom,
-        color-mix(in srgb, var(--uilib-button-bg) 85%, var(--uilib-color-neutral-50) 15%),
-        var(--uilib-button-bg)
-      );
-    }
-
-    &.ui-lib-button--appearance-link {
-      color: var(--uilib-button-fg, var(--uilib-button-primary-fg, currentColor));
-      text-decoration: underline;
-      padding: 0;
-    }
-  }
-
-  &--minimal {
-    --uilib-button-radius: var(--uilib-shape-base, 6px);
-    --uilib-button-shadow: none;
-    --uilib-button-shadow-hover: none;
-    --uilib-button-border-style: solid;
-    background-color: transparent;
-    border-color: var(--uilib-button-border, currentColor);
-    box-shadow: none;
-
-    &.ui-lib-button--raised {
-      --uilib-button-shadow: var(--uilib-shadow-xs, var(--uilib-shadow-sm, none));
-      --uilib-button-shadow-hover: var(--uilib-shadow-sm, var(--uilib-shadow-xs, none));
-    }
-
-    &.ui-lib-button--appearance-ghost {
-      --uilib-button-bg: transparent;
-      --uilib-button-fg: var(--uilib-button-border, currentColor);
+    &--appearance-ghost {
+      background-color: transparent;
+      color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
+      border-color: transparent;
 
       &:hover:not(.ui-lib-button--disabled) {
         background-color: color-mix(
           in srgb,
-          var(--uilib-button-border, currentColor) 8%,
+          var(--uilib-button-border, var(--uilib-button-bg, currentColor)) 8%,
           transparent
         );
       }
     }
 
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: var(--uilib-button-bg-hover, var(--uilib-button-border, currentColor));
-      color: var(--uilib-button-fg-hover, var(--uilib-button-fg, inherit));
-    }
-  }
+    &--appearance-link {
+      background-color: transparent;
+      border-color: transparent;
+      color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
+      text-decoration: underline;
+      padding: 0;
+      border: none;
+      box-shadow: none;
 
-  /* ── Severity palettes via CSS vars ───────────────────────────────────── */
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: transparent;
+        box-shadow: none;
+        text-decoration: underline;
+        opacity: 0.8;
+      }
 
-  &--primary {
-    --uilib-button-bg: var(--uilib-button-primary-bg);
-    --uilib-button-bg-hover: var(--uilib-button-primary-bg-hover);
-    --uilib-button-bg-active: var(
-      --uilib-button-primary-bg-active,
-      var(--uilib-button-primary-bg-hover)
-    );
-    --uilib-button-border: var(--uilib-button-primary-border);
-    --uilib-button-fg: var(--uilib-button-primary-fg);
-  }
-
-  &--secondary {
-    --uilib-button-bg: var(--uilib-button-secondary-bg);
-    --uilib-button-bg-hover: var(--uilib-button-secondary-bg-hover);
-    --uilib-button-bg-active: var(
-      --uilib-button-secondary-bg-active,
-      var(--uilib-button-secondary-bg-hover)
-    );
-    --uilib-button-border: var(--uilib-button-secondary-border);
-    --uilib-button-fg: var(--uilib-button-secondary-fg);
-  }
-
-  &--success {
-    --uilib-button-bg: var(--uilib-button-success-bg);
-    --uilib-button-bg-hover: var(--uilib-button-success-bg-hover);
-    --uilib-button-bg-active: var(
-      --uilib-button-success-bg-active,
-      var(--uilib-button-success-bg-hover)
-    );
-    --uilib-button-border: var(--uilib-button-success-border);
-    --uilib-button-fg: var(--uilib-button-success-fg);
-  }
-
-  &--danger {
-    --uilib-button-bg: var(--uilib-button-danger-bg);
-    --uilib-button-bg-hover: var(--uilib-button-danger-bg-hover);
-    --uilib-button-bg-active: var(
-      --uilib-button-danger-bg-active,
-      var(--uilib-button-danger-bg-hover)
-    );
-    --uilib-button-border: var(--uilib-button-danger-border);
-    --uilib-button-fg: var(--uilib-button-danger-fg);
-  }
-
-  &--warning {
-    --uilib-button-bg: var(--uilib-button-warning-bg);
-    --uilib-button-bg-hover: var(--uilib-button-warning-bg-hover);
-    --uilib-button-bg-active: var(
-      --uilib-button-warning-bg-active,
-      var(--uilib-button-warning-bg-hover)
-    );
-    --uilib-button-border: var(--uilib-button-warning-border);
-    --uilib-button-fg: var(--uilib-button-warning-fg);
-  }
-
-  &--info {
-    --uilib-button-bg: var(--uilib-button-info-bg);
-    --uilib-button-bg-hover: var(--uilib-button-info-bg-hover, var(--uilib-button-bg));
-    --uilib-button-bg-active: var(--uilib-button-info-bg-active, var(--uilib-button-bg-hover));
-    --uilib-button-border: var(--uilib-button-info-border, var(--uilib-button-bg));
-    --uilib-button-fg: var(--uilib-button-info-fg, var(--uilib-button-secondary-fg, inherit));
-  }
-
-  &--help {
-    --uilib-button-bg: var(--uilib-button-help-bg);
-    --uilib-button-bg-hover: var(--uilib-button-help-bg-hover, var(--uilib-button-bg));
-    --uilib-button-bg-active: var(--uilib-button-help-bg-active, var(--uilib-button-bg-hover));
-    --uilib-button-border: var(--uilib-button-help-border, var(--uilib-button-bg));
-    --uilib-button-fg: var(--uilib-button-help-fg, var(--uilib-button-secondary-fg, inherit));
-  }
-
-  &--contrast {
-    --uilib-button-bg: var(--uilib-button-contrast-bg, var(--uilib-color-neutral-900));
-    --uilib-button-bg-hover: var(--uilib-button-contrast-bg-hover, var(--uilib-button-bg));
-    --uilib-button-bg-active: var(--uilib-button-contrast-bg-active, var(--uilib-button-bg-hover));
-    --uilib-button-border: var(--uilib-button-contrast-border, var(--uilib-button-bg));
-    --uilib-button-fg: var(--uilib-button-contrast-fg, var(--uilib-color-neutral-50));
-  }
-
-  /* ── Icon layout ──────────────────────────────────────────────────────── */
-
-  .ui-lib-button__icon {
-    flex-shrink: 0;
-
-    &--loading {
-      animation: uilib-button-spin 1s linear infinite;
+      &:active:not(.ui-lib-button--disabled) {
+        opacity: 0.65;
+      }
     }
 
-    &--start {
-      order: 0;
+    &--appearance-soft {
+      background-color: color-mix(in srgb, var(--uilib-button-bg) 15%, transparent);
+      color: var(--uilib-button-border, var(--uilib-button-bg));
+      border-color: transparent;
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: color-mix(in srgb, var(--uilib-button-bg) 25%, transparent);
+        color: var(--uilib-button-border, var(--uilib-button-bg));
+        box-shadow: none;
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        background-color: color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+      }
     }
 
-    &--end {
-      order: 2;
-    }
-  }
+    &--appearance-glass {
+      background-color: color-mix(in srgb, var(--uilib-button-bg) 18%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+      color: var(--uilib-button-fg);
 
-  &.ui-lib-button--icon-only {
-    padding: var(--uilib-button-padding-y, var(--uilib-space-2));
-    aspect-ratio: 1;
-    justify-content: center;
-  }
-
-  &.ui-lib-button--vertical {
-    flex-direction: column;
-
-    .ui-lib-button__content {
-      order: 1;
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: color-mix(in srgb, var(--uilib-button-bg) 28%, transparent);
+        border-color: color-mix(in srgb, var(--uilib-button-bg) 50%, transparent);
+        color: var(--uilib-button-fg);
+      }
     }
 
-    .ui-lib-button__icon--start {
-      order: 0;
+    &--appearance-glass-shadow {
+      background: var(--uilib-button-glass-shadow-bg);
+      backdrop-filter: blur(var(--uilib-button-glass-shadow-blur-amount));
+      -webkit-backdrop-filter: blur(var(--uilib-button-glass-shadow-blur-amount));
+      border: 1px solid var(--uilib-button-glass-shadow-border-color);
+      color: var(--uilib-button-glass-shadow-fg);
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+      font-weight: var(--uilib-button-glass-shadow-font-weight); /* Tailwind font-medium */
+      letter-spacing: var(--uilib-button-glass-shadow-letter-spacing); /* Tailwind tracking-tight */
+      transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        border-color 0.3s ease;
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background: var(--uilib-button-glass-shadow-bg-hover);
+        border-color: var(--uilib-button-glass-shadow-border-hover);
+        color: var(--uilib-button-glass-shadow-fg);
+        box-shadow: none;
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        /* Button snaps 4px toward shadow (Tailwind translate-1 = 0.25rem = 4px) */
+        transform: translate(
+          var(--uilib-button-glass-shadow-active-x),
+          var(--uilib-button-glass-shadow-active-y)
+        );
+        background: var(--uilib-button-glass-shadow-bg);
+      }
     }
 
-    .ui-lib-button__icon--end {
-      order: 2;
-    }
-  }
-
-  /* ── Orthogonal modifiers ─────────────────────────────────────────────── */
-
-  &--raised {
-    --uilib-button-shadow: var(--uilib-button-shadow-raised);
-    --uilib-button-shadow-hover: var(--uilib-button-shadow-raised-hover);
-    box-shadow: var(--uilib-button-shadow-raised, var(--uilib-button-shadow));
-
-    &:hover:not(.ui-lib-button--disabled) {
-      box-shadow: var(
-        --uilib-button-shadow-raised-hover,
-        var(--uilib-button-shadow-hover, var(--uilib-button-shadow-raised))
+    &--appearance-gradient {
+      background: linear-gradient(
+        135deg,
+        var(--uilib-button-bg),
+        color-mix(in srgb, var(--uilib-button-bg) 72%, #000)
       );
+      border-color: transparent;
+      color: var(--uilib-button-fg);
+
+      &:hover:not(.ui-lib-button--disabled) {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+        background: linear-gradient(
+          135deg,
+          var(--uilib-button-bg),
+          color-mix(in srgb, var(--uilib-button-bg) 72%, #000)
+        );
+        color: var(--uilib-button-fg);
+        box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--uilib-button-bg) 45%, transparent);
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        filter: brightness(0.95);
+        transform: translateY(0);
+      }
+    }
+
+    &--appearance-elevated {
+      background-color: var(--uilib-button-bg);
+      color: var(--uilib-button-fg);
+      border-color: transparent;
+      box-shadow:
+        0 4px 12px -2px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent),
+        0 2px 4px -1px color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
+        color: var(--uilib-button-fg);
+        transform: translateY(-2px);
+        box-shadow:
+          0 8px 20px -4px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent),
+          0 4px 8px -2px color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        transform: translateY(0);
+        box-shadow: 0 2px 6px -1px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent);
+      }
+    }
+
+    &--appearance-neon {
+      background-color: transparent;
+      color: var(--uilib-button-border, var(--uilib-button-bg));
+      border-color: var(--uilib-button-border, var(--uilib-button-bg));
+      border-width: 2px;
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: color-mix(
+          in srgb,
+          var(--uilib-button-border, var(--uilib-button-bg)) 10%,
+          transparent
+        );
+        color: var(--uilib-button-border, var(--uilib-button-bg));
+        box-shadow:
+          0 0 10px 2px
+            color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 70%, transparent),
+          0 0 22px 4px
+            color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 35%, transparent);
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        box-shadow: 0 0 6px 1px
+          color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 70%, transparent);
+      }
+    }
+
+    &--appearance-flat {
+      background-color: var(--uilib-button-bg);
+      color: var(--uilib-button-fg);
+      border-color: transparent;
+      box-shadow: none;
+
+      &:hover:not(.ui-lib-button--disabled) {
+        filter: brightness(0.9);
+        background-color: var(--uilib-button-bg);
+        box-shadow: none;
+        color: var(--uilib-button-fg);
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        filter: brightness(0.8);
+      }
+    }
+
+    &--appearance-framed {
+      background-color: var(--uilib-button-framed-bg);
+      color: var(--uilib-button-framed-fg);
+      border: var(--uilib-button-framed-border-width) solid var(--uilib-button-framed-border-color);
+      border-radius: 0;
+      font-weight: var(--uilib-button-framed-font-weight);
+      letter-spacing: var(--uilib-button-framed-letter-spacing);
+      position: relative;
+      z-index: 1;
+      box-shadow: none;
+      transition:
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.2s ease,
+        color 0.2s ease;
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: var(--uilib-button-framed-bg);
+        color: var(--uilib-button-framed-fg);
+        box-shadow: none;
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        transform: translate(
+          var(--uilib-button-framed-active-translate-x),
+          var(--uilib-button-framed-active-translate-y)
+        );
+        background-color: var(--uilib-button-framed-bg);
+        box-shadow: none;
+      }
+
+      /* Increase outline-offset to keep the focus ring clear of the thick white border */
+      &:focus-visible,
+      &:focus,
+      &.ui-lib-button--focused {
+        outline-offset: 4px;
+      }
+    }
+
+    &--appearance-tactile {
+      background: linear-gradient(
+        to bottom,
+        var(--uilib-button-tactile-from),
+        var(--uilib-button-tactile-to)
+      );
+      border-color: var(--uilib-button-tactile-border);
+      border-width: var(--uilib-button-tactile-border-width);
+      color: var(--uilib-button-tactile-fg);
+      border-radius: var(--uilib-button-tactile-radius);
+      letter-spacing: -0.01em;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow:
+        inset 0 3px 1px rgba(255, 255, 255, 0.35),
+        inset 0 -3px 2px rgba(0, 0, 0, 0.08),
+        0 10px 25px -5px rgba(0, 0, 0, 0.1);
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background: linear-gradient(
+          to bottom,
+          var(--uilib-button-tactile-from),
+          var(--uilib-button-tactile-to)
+        );
+        color: var(--uilib-button-tactile-fg);
+        transform: translateY(-2px);
+        filter: brightness(1.03);
+        box-shadow:
+          inset 0 3px 1px rgba(255, 255, 255, 0.4),
+          inset 0 -3px 2px rgba(0, 0, 0, 0.08),
+          0 15px 30px -8px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active:not(.ui-lib-button--disabled) {
+        background: linear-gradient(
+          to bottom,
+          var(--uilib-button-tactile-from),
+          var(--uilib-button-tactile-to)
+        );
+        transform: translateY(1px);
+        filter: brightness(0.95);
+        box-shadow:
+          inset 0 1px 1px rgba(255, 255, 255, 0.2),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Per-severity gradient colour tokens */
+      &.ui-lib-button--primary {
+        --uilib-button-tactile-from: #4aa6ff;
+        --uilib-button-tactile-to: #278eff;
+        --uilib-button-tactile-border: #1a77d9;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--secondary {
+        --uilib-button-tactile-from: #525969;
+        --uilib-button-tactile-to: #3e434f;
+        --uilib-button-tactile-border: #2d313a;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--success {
+        --uilib-button-tactile-from: #66d68c;
+        --uilib-button-tactile-to: #45c671;
+        --uilib-button-tactile-border: #2da861;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--danger {
+        --uilib-button-tactile-from: #f57d74;
+        --uilib-button-tactile-to: #f05e53;
+        --uilib-button-tactile-border: #d14940;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--warning {
+        --uilib-button-tactile-from: #ffa05e;
+        --uilib-button-tactile-to: #ff853d;
+        --uilib-button-tactile-border: #e87428;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--info {
+        --uilib-button-tactile-from: #42c9e5;
+        --uilib-button-tactile-to: #17b5d4;
+        --uilib-button-tactile-border: #159bb7;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--help {
+        --uilib-button-tactile-from: #bd88ff;
+        --uilib-button-tactile-to: #a665fe;
+        --uilib-button-tactile-border: #8c4ee6;
+        --uilib-button-tactile-fg: #fff;
+      }
+
+      &.ui-lib-button--contrast {
+        --uilib-button-tactile-from: #ffe079;
+        --uilib-button-tactile-to: #ffcf49;
+        --uilib-button-tactile-border: #e0b840;
+        --uilib-button-tactile-fg: #3c414d;
+      }
+    }
+
+    /* ── Design variant overrides ─────────────────────────────────────────── */
+
+    &--bootstrap {
+      --uilib-button-radius: var(--uilib-shape-base, 6px);
+      --uilib-button-border-width: 1px;
+      --uilib-button-shadow: var(--uilib-button-shadow, var(--uilib-shadow-sm));
+      --uilib-button-shadow-hover: var(--uilib-button-shadow-hover, var(--uilib-shadow-md));
+
+      &.ui-lib-button--raised {
+        background-image: linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--uilib-button-bg) 85%, var(--uilib-color-neutral-50) 15%),
+          var(--uilib-button-bg)
+        );
+      }
+
+      &.ui-lib-button--appearance-link {
+        color: var(--uilib-button-fg, var(--uilib-button-primary-fg, currentColor));
+        text-decoration: underline;
+        padding: 0;
+      }
+    }
+
+    &--minimal {
+      --uilib-button-radius: var(--uilib-shape-base, 6px);
+      --uilib-button-shadow: none;
+      --uilib-button-shadow-hover: none;
+      --uilib-button-border-style: solid;
+      background-color: transparent;
+      border-color: var(--uilib-button-border, currentColor);
+      box-shadow: none;
+
+      &.ui-lib-button--raised {
+        --uilib-button-shadow: var(--uilib-shadow-xs, var(--uilib-shadow-sm, none));
+        --uilib-button-shadow-hover: var(--uilib-shadow-sm, var(--uilib-shadow-xs, none));
+      }
+
+      &.ui-lib-button--appearance-ghost {
+        --uilib-button-bg: transparent;
+        --uilib-button-fg: var(--uilib-button-border, currentColor);
+
+        &:hover:not(.ui-lib-button--disabled) {
+          background-color: color-mix(
+            in srgb,
+            var(--uilib-button-border, currentColor) 8%,
+            transparent
+          );
+        }
+      }
+
+      &:hover:not(.ui-lib-button--disabled) {
+        background-color: var(--uilib-button-bg-hover, var(--uilib-button-border, currentColor));
+        color: var(--uilib-button-fg-hover, var(--uilib-button-fg, inherit));
+      }
+    }
+
+    /* ── Severity palettes via CSS vars ───────────────────────────────────── */
+
+    &--primary {
+      --uilib-button-bg: var(--uilib-button-primary-bg);
+      --uilib-button-bg-hover: var(--uilib-button-primary-bg-hover);
+      --uilib-button-bg-active: var(
+        --uilib-button-primary-bg-active,
+        var(--uilib-button-primary-bg-hover)
+      );
+      --uilib-button-border: var(--uilib-button-primary-border);
+      --uilib-button-fg: var(--uilib-button-primary-fg);
+    }
+
+    &--secondary {
+      --uilib-button-bg: var(--uilib-button-secondary-bg);
+      --uilib-button-bg-hover: var(--uilib-button-secondary-bg-hover);
+      --uilib-button-bg-active: var(
+        --uilib-button-secondary-bg-active,
+        var(--uilib-button-secondary-bg-hover)
+      );
+      --uilib-button-border: var(--uilib-button-secondary-border);
+      --uilib-button-fg: var(--uilib-button-secondary-fg);
+    }
+
+    &--success {
+      --uilib-button-bg: var(--uilib-button-success-bg);
+      --uilib-button-bg-hover: var(--uilib-button-success-bg-hover);
+      --uilib-button-bg-active: var(
+        --uilib-button-success-bg-active,
+        var(--uilib-button-success-bg-hover)
+      );
+      --uilib-button-border: var(--uilib-button-success-border);
+      --uilib-button-fg: var(--uilib-button-success-fg);
+    }
+
+    &--danger {
+      --uilib-button-bg: var(--uilib-button-danger-bg);
+      --uilib-button-bg-hover: var(--uilib-button-danger-bg-hover);
+      --uilib-button-bg-active: var(
+        --uilib-button-danger-bg-active,
+        var(--uilib-button-danger-bg-hover)
+      );
+      --uilib-button-border: var(--uilib-button-danger-border);
+      --uilib-button-fg: var(--uilib-button-danger-fg);
+    }
+
+    &--warning {
+      --uilib-button-bg: var(--uilib-button-warning-bg);
+      --uilib-button-bg-hover: var(--uilib-button-warning-bg-hover);
+      --uilib-button-bg-active: var(
+        --uilib-button-warning-bg-active,
+        var(--uilib-button-warning-bg-hover)
+      );
+      --uilib-button-border: var(--uilib-button-warning-border);
+      --uilib-button-fg: var(--uilib-button-warning-fg);
+    }
+
+    &--info {
+      --uilib-button-bg: var(--uilib-button-info-bg);
+      --uilib-button-bg-hover: var(--uilib-button-info-bg-hover, var(--uilib-button-bg));
+      --uilib-button-bg-active: var(--uilib-button-info-bg-active, var(--uilib-button-bg-hover));
+      --uilib-button-border: var(--uilib-button-info-border, var(--uilib-button-bg));
+      --uilib-button-fg: var(--uilib-button-info-fg, var(--uilib-button-secondary-fg, inherit));
+    }
+
+    &--help {
+      --uilib-button-bg: var(--uilib-button-help-bg);
+      --uilib-button-bg-hover: var(--uilib-button-help-bg-hover, var(--uilib-button-bg));
+      --uilib-button-bg-active: var(--uilib-button-help-bg-active, var(--uilib-button-bg-hover));
+      --uilib-button-border: var(--uilib-button-help-border, var(--uilib-button-bg));
+      --uilib-button-fg: var(--uilib-button-help-fg, var(--uilib-button-secondary-fg, inherit));
+    }
+
+    &--contrast {
+      --uilib-button-bg: var(--uilib-button-contrast-bg, var(--uilib-color-neutral-900));
+      --uilib-button-bg-hover: var(--uilib-button-contrast-bg-hover, var(--uilib-button-bg));
+      --uilib-button-bg-active: var(
+        --uilib-button-contrast-bg-active,
+        var(--uilib-button-bg-hover)
+      );
+      --uilib-button-border: var(--uilib-button-contrast-border, var(--uilib-button-bg));
+      --uilib-button-fg: var(--uilib-button-contrast-fg, var(--uilib-color-neutral-50));
+    }
+
+    /* ── Icon layout ──────────────────────────────────────────────────────── */
+
+    .ui-lib-button__icon {
+      flex-shrink: 0;
+
+      &--loading {
+        animation: uilib-button-spin 1s linear infinite;
+      }
+
+      &--start {
+        order: 0;
+      }
+
+      &--end {
+        order: 2;
+      }
+    }
+
+    &.ui-lib-button--icon-only {
+      padding: var(--uilib-button-padding-y, var(--uilib-space-2));
+      aspect-ratio: 1;
+      justify-content: center;
+    }
+
+    &.ui-lib-button--vertical {
+      flex-direction: column;
+
+      .ui-lib-button__content {
+        order: 1;
+      }
+
+      .ui-lib-button__icon--start {
+        order: 0;
+      }
+
+      .ui-lib-button__icon--end {
+        order: 2;
+      }
+    }
+
+    /* ── Orthogonal modifiers ─────────────────────────────────────────────── */
+
+    &--raised {
+      --uilib-button-shadow: var(--uilib-button-shadow-raised);
+      --uilib-button-shadow-hover: var(--uilib-button-shadow-raised-hover);
+      box-shadow: var(--uilib-button-shadow-raised, var(--uilib-button-shadow));
+
+      &:hover:not(.ui-lib-button--disabled) {
+        box-shadow: var(
+          --uilib-button-shadow-raised-hover,
+          var(--uilib-button-shadow-hover, var(--uilib-button-shadow-raised))
+        );
+      }
+    }
+
+    &--pill {
+      --uilib-button-radius: 999px;
+      border-radius: 999px;
+    }
+
+    /* ── Badge ────────────────────────────────────────────────────────────── */
+
+    &--has-badge {
+      position: relative;
+    }
+
+    .ui-lib-button__badge-wrapper {
+      position: absolute;
+      inset-inline-end: calc(-1 * var(--uilib-button-badge-offset-x, 0.5rem));
+      inset-block-start: calc(-1 * var(--uilib-button-badge-offset-y, 0.5rem));
+      pointer-events: none;
+      display: inline-flex;
+    }
+
+    .ui-lib-button__badge {
+      box-shadow: var(--uilib-button-badge-shadow);
+      font-size: var(--uilib-button-badge-font-size);
     }
   }
 
-  &--pill {
-    --uilib-button-radius: 999px;
+  ui-lib-button .ui-lib-button__spinner {
+    width: 1em;
+    height: 1em;
+    border-radius: var(--uilib-shape-base, 6px);
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    animation: uilib-button-spin 0.8s linear infinite;
+  }
+
+  @keyframes uilib-button-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* ── Glass-shadow: offset gradient shadow layer via host ::after ──────────── */
+
+  ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow) {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--uilib-button-radius, 6px);
+      background: linear-gradient(
+        var(--uilib-button-glass-shadow-gradient-angle),
+        var(--uilib-button-glass-shadow-from, #ff5f6d) 0%,
+        var(--uilib-button-glass-shadow-to, #ffc371) 100%
+      );
+      filter: blur(var(--uilib-button-glass-shadow-glow-blur, 0.2px));
+      transform: translate(
+        var(--uilib-button-glass-shadow-x, 8px),
+        var(--uilib-button-glass-shadow-y, 8px)
+      );
+      opacity: var(--uilib-button-glass-shadow-opacity);
+      transition: transform 0.3s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+  }
+
+  ui-lib-button:has(
+      button.ui-lib-button--appearance-glass-shadow:hover:not(.ui-lib-button--disabled)
+    )::after {
+    /* Shadow shifts further out on hover (Tailwind translate-3 = 0.75rem = 12px) */
+    transform: translate(
+      var(--uilib-button-glass-shadow-hover-x, 12px),
+      var(--uilib-button-glass-shadow-hover-y, 12px)
+    );
+  }
+
+  /* On :active, the shadow stays at its hover position — only the button moves forward.
+   (Mirrors the original: shadow has no group-active class, button does.) */
+
+  /* Pill modifier: match the shadow shape to the pill button */
+  ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow.ui-lib-button--pill)::after {
     border-radius: 999px;
   }
 
-  /* ── Badge ────────────────────────────────────────────────────────────── */
+  /* ── Framed: offset L-frame via host ::after ──────────────────────────────── */
 
-  &--has-badge {
+  ui-lib-button:has(button.ui-lib-button--appearance-framed) {
     position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-right: var(--uilib-button-framed-frame-border-width) solid
+        var(--uilib-button-framed-frame-color);
+      border-bottom: var(--uilib-button-framed-frame-border-width) solid
+        var(--uilib-button-framed-frame-color);
+      transform: translate(
+        var(--uilib-button-framed-frame-offset-x),
+        var(--uilib-button-framed-frame-offset-y)
+      );
+      transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      z-index: 0;
+    }
   }
 
-  .ui-lib-button__badge-wrapper {
-    position: absolute;
-    inset-inline-end: calc(-1 * var(--uilib-button-badge-offset-x, 0.5rem));
-    inset-block-start: calc(-1 * var(--uilib-button-badge-offset-y, 0.5rem));
-    pointer-events: none;
-    display: inline-flex;
-  }
-
-  .ui-lib-button__badge {
-    box-shadow: var(--uilib-button-badge-shadow);
-    font-size: var(--uilib-button-badge-font-size);
-  }
-}
-
-ui-lib-button .ui-lib-button__spinner {
-  width: 1em;
-  height: 1em;
-  border-radius: var(--uilib-shape-base, 6px);
-  border: 2px solid currentColor;
-  border-right-color: transparent;
-  animation: uilib-button-spin 0.8s linear infinite;
-}
-
-@keyframes uilib-button-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ── Glass-shadow: offset gradient shadow layer via host ::after ──────────── */
-
-ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow) {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--uilib-button-radius, 6px);
-    background: linear-gradient(
-      var(--uilib-button-glass-shadow-gradient-angle),
-      var(--uilib-button-glass-shadow-from, #ff5f6d) 0%,
-      var(--uilib-button-glass-shadow-to, #ffc371) 100%
-    );
-    filter: blur(var(--uilib-button-glass-shadow-glow-blur, 0.2px));
+  ui-lib-button:has(
+      button.ui-lib-button--appearance-framed:hover:not(.ui-lib-button--disabled)
+    )::after {
     transform: translate(
-      var(--uilib-button-glass-shadow-x, 8px),
-      var(--uilib-button-glass-shadow-y, 8px)
+      var(--uilib-button-framed-frame-hover-offset-x),
+      var(--uilib-button-framed-frame-hover-offset-y)
     );
-    opacity: var(--uilib-button-glass-shadow-opacity);
-    transition: transform 0.3s ease;
-    pointer-events: none;
-    z-index: 0;
   }
-}
 
-ui-lib-button:has(
-    button.ui-lib-button--appearance-glass-shadow:hover:not(.ui-lib-button--disabled)
-  )::after {
-  /* Shadow shifts further out on hover (Tailwind translate-3 = 0.75rem = 12px) */
-  transform: translate(
-    var(--uilib-button-glass-shadow-hover-x, 12px),
-    var(--uilib-button-glass-shadow-hover-y, 12px)
-  );
-}
-
-/* On :active, the shadow stays at its hover position — only the button moves forward.
-   (Mirrors the original: shadow has no group-active class, button does.) */
-
-/* Pill modifier: match the shadow shape to the pill button */
-ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow.ui-lib-button--pill)::after {
-  border-radius: 999px;
-}
-
-/* ── Framed: offset L-frame via host ::after ──────────────────────────────── */
-
-ui-lib-button:has(button.ui-lib-button--appearance-framed) {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-right: var(--uilib-button-framed-frame-border-width) solid
-      var(--uilib-button-framed-frame-color);
-    border-bottom: var(--uilib-button-framed-frame-border-width) solid
-      var(--uilib-button-framed-frame-color);
+  ui-lib-button:has(
+      button.ui-lib-button--appearance-framed:active:not(.ui-lib-button--disabled)
+    )::after {
     transform: translate(
-      var(--uilib-button-framed-frame-offset-x),
-      var(--uilib-button-framed-frame-offset-y)
+      var(--uilib-button-framed-frame-active-offset-x),
+      var(--uilib-button-framed-frame-active-offset-y)
     );
-    transition:
-      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    z-index: 0;
-  }
-}
-
-ui-lib-button:has(
-    button.ui-lib-button--appearance-framed:hover:not(.ui-lib-button--disabled)
-  )::after {
-  transform: translate(
-    var(--uilib-button-framed-frame-hover-offset-x),
-    var(--uilib-button-framed-frame-hover-offset-y)
-  );
-}
-
-ui-lib-button:has(
-    button.ui-lib-button--appearance-framed:active:not(.ui-lib-button--disabled)
-  )::after {
-  transform: translate(
-    var(--uilib-button-framed-frame-active-offset-x),
-    var(--uilib-button-framed-frame-active-offset-y)
-  );
-  opacity: 0.5;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ui-lib-button .ui-lib-button {
-    transition: none;
+    opacity: 0.5;
   }
 
-  ui-lib-button .ui-lib-button__icon--loading {
-    animation: none;
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-button .ui-lib-button {
+      transition: none;
+    }
+
+    ui-lib-button .ui-lib-button__icon--loading {
+      animation: none;
+    }
+
+    ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow)::after {
+      transition: none;
+    }
+
+    ui-lib-button button.ui-lib-button--appearance-glass-shadow {
+      transition: none;
+    }
+
+    ui-lib-button:has(button.ui-lib-button--appearance-framed)::after {
+      transition: none;
+    }
+
+    ui-lib-button button.ui-lib-button--appearance-framed {
+      transition: none;
+    }
   }
 
-  ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow)::after {
-    transition: none;
-  }
-
-  ui-lib-button button.ui-lib-button--appearance-glass-shadow {
-    transition: none;
-  }
-
-  ui-lib-button:has(button.ui-lib-button--appearance-framed)::after {
-    transition: none;
-  }
-
-  ui-lib-button button.ui-lib-button--appearance-framed {
-    transition: none;
-  }
-}
-
-[data-theme='dark'] ui-lib-button {
-  --uilib-button-primary-bg: var(--uilib-color-primary-dark);
-  --uilib-button-primary-bg-hover: color-mix(in srgb, var(--uilib-color-primary-dark) 85%, #000000);
-  --uilib-button-primary-border: var(--uilib-color-primary-dark);
-  --uilib-button-primary-fg: var(--uilib-color-neutral-950, #0b1220);
-
-  --uilib-button-secondary-bg: var(--uilib-surface-dark-4);
-  --uilib-button-secondary-bg-hover: var(--uilib-surface-dark-5);
-  --uilib-button-secondary-border: var(--uilib-border-dark);
-  --uilib-button-secondary-fg: var(--uilib-text-dark-primary);
-
-  --uilib-button-success-bg: var(--uilib-color-success-600);
-  --uilib-button-success-bg-hover: var(--uilib-color-success-700);
-  --uilib-button-success-border: var(--uilib-color-success-600);
-  --uilib-button-success-fg: var(--uilib-color-neutral-950, #0b1220);
-
-  --uilib-button-danger-bg: var(--uilib-color-danger-600);
-  --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
-  --uilib-button-danger-border: var(--uilib-color-danger-600);
-  --uilib-button-danger-fg: var(--uilib-color-neutral-950, #0b1220);
-
-  --uilib-button-warning-bg: var(--uilib-color-warning-600);
-  --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
-  --uilib-button-warning-border: var(--uilib-color-warning-600);
-  --uilib-button-warning-fg: var(--uilib-color-neutral-950, #0b1220);
-
-  --uilib-button-info-bg: var(--uilib-color-info-600);
-  --uilib-button-info-bg-hover: var(--uilib-color-info-700);
-  --uilib-button-info-border: var(--uilib-color-info-600);
-  --uilib-button-info-fg: var(--uilib-color-neutral-950, #0b1220);
-
-  --uilib-button-contrast-bg: var(--uilib-text-dark-primary);
-  --uilib-button-contrast-bg-hover: var(--uilib-text-dark-secondary);
-  --uilib-button-contrast-border: var(--uilib-text-dark-primary);
-  --uilib-button-contrast-fg: var(--uilib-color-neutral-950, #0b1220);
-  --uilib-button-focus-color: var(--uilib-color-primary-200);
-  --uilib-button-focus-ring-color: color-mix(
-    in srgb,
-    var(--uilib-color-primary-200) 35%,
-    transparent
-  );
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme]) ui-lib-button {
+  [data-theme='dark'] ui-lib-button {
     --uilib-button-primary-bg: var(--uilib-color-primary-dark);
     --uilib-button-primary-bg-hover: color-mix(
       in srgb,
@@ -1020,4 +980,53 @@ ui-lib-button:has(
       transparent
     );
   }
-}
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']):not([data-theme]) ui-lib-button {
+      --uilib-button-primary-bg: var(--uilib-color-primary-dark);
+      --uilib-button-primary-bg-hover: color-mix(
+        in srgb,
+        var(--uilib-color-primary-dark) 85%,
+        #000000
+      );
+      --uilib-button-primary-border: var(--uilib-color-primary-dark);
+      --uilib-button-primary-fg: var(--uilib-color-neutral-950, #0b1220);
+
+      --uilib-button-secondary-bg: var(--uilib-surface-dark-4);
+      --uilib-button-secondary-bg-hover: var(--uilib-surface-dark-5);
+      --uilib-button-secondary-border: var(--uilib-border-dark);
+      --uilib-button-secondary-fg: var(--uilib-text-dark-primary);
+
+      --uilib-button-success-bg: var(--uilib-color-success-600);
+      --uilib-button-success-bg-hover: var(--uilib-color-success-700);
+      --uilib-button-success-border: var(--uilib-color-success-600);
+      --uilib-button-success-fg: var(--uilib-color-neutral-950, #0b1220);
+
+      --uilib-button-danger-bg: var(--uilib-color-danger-600);
+      --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
+      --uilib-button-danger-border: var(--uilib-color-danger-600);
+      --uilib-button-danger-fg: var(--uilib-color-neutral-950, #0b1220);
+
+      --uilib-button-warning-bg: var(--uilib-color-warning-600);
+      --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
+      --uilib-button-warning-border: var(--uilib-color-warning-600);
+      --uilib-button-warning-fg: var(--uilib-color-neutral-950, #0b1220);
+
+      --uilib-button-info-bg: var(--uilib-color-info-600);
+      --uilib-button-info-bg-hover: var(--uilib-color-info-700);
+      --uilib-button-info-border: var(--uilib-color-info-600);
+      --uilib-button-info-fg: var(--uilib-color-neutral-950, #0b1220);
+
+      --uilib-button-contrast-bg: var(--uilib-text-dark-primary);
+      --uilib-button-contrast-bg-hover: var(--uilib-text-dark-secondary);
+      --uilib-button-contrast-border: var(--uilib-text-dark-primary);
+      --uilib-button-contrast-fg: var(--uilib-color-neutral-950, #0b1220);
+      --uilib-button-focus-color: var(--uilib-color-primary-200);
+      --uilib-button-focus-ring-color: color-mix(
+        in srgb,
+        var(--uilib-color-primary-200) 35%,
+        transparent
+      );
+    }
+  }
+} // end @layer uilib.components

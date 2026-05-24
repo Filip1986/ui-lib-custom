@@ -1,72 +1,75 @@
-/**
+@layer uilib.components {
+  /**
  * Ripple directive styles.
  *
  * These styles are automatically injected via ViewEncapsulation.None —
  * no extra import is needed beyond importing the directive itself.
  */
 
-// ---------------------------------------------------------------------------
-// Host — tokens scoped here so they don't pollute :root
-// ---------------------------------------------------------------------------
-
-.ui-lib-ripple {
-  /** Ripple wave background colour — override per-element via inline style or a CSS selector. */
-  --uilib-ripple-color: rgba(255, 255, 255, 0.35);
-
-  /** Total duration of the expand + fade animation. */
-  --uilib-ripple-duration: 600ms;
-
-  /** Timing function for the expand phase. */
-  --uilib-ripple-easing: cubic-bezier(0.4, 0, 0.2, 1);
-
-  position: relative;
-  overflow: hidden;
-  // Prevent text / child elements from blocking the pointer event
-  user-select: none;
-
   // ---------------------------------------------------------------------------
-  // Wave element
+  // Host — tokens scoped here so they don't pollute :root
   // ---------------------------------------------------------------------------
 
-  .ui-lib-ripple-wave {
-    position: absolute;
-    border-radius: 50%;
-    background-color: var(--uilib-ripple-color);
-    pointer-events: none;
-    transform: scale(0);
-    opacity: 1;
-    animation: ui-lib-ripple-expand var(--uilib-ripple-duration) var(--uilib-ripple-easing) forwards;
+  .ui-lib-ripple {
+    /** Ripple wave background colour — override per-element via inline style or a CSS selector. */
+    --uilib-ripple-color: rgba(255, 255, 255, 0.35);
+
+    /** Total duration of the expand + fade animation. */
+    --uilib-ripple-duration: 600ms;
+
+    /** Timing function for the expand phase. */
+    --uilib-ripple-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+    position: relative;
+    overflow: hidden;
+    // Prevent text / child elements from blocking the pointer event
+    user-select: none;
+
+    // ---------------------------------------------------------------------------
+    // Wave element
+    // ---------------------------------------------------------------------------
+
+    .ui-lib-ripple-wave {
+      position: absolute;
+      border-radius: 50%;
+      background-color: var(--uilib-ripple-color);
+      pointer-events: none;
+      transform: scale(0);
+      opacity: 1;
+      animation: ui-lib-ripple-expand var(--uilib-ripple-duration) var(--uilib-ripple-easing)
+        forwards;
+    }
   }
-}
 
-// ---------------------------------------------------------------------------
-// Keyframes
-// ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Keyframes
+  // ---------------------------------------------------------------------------
 
-@keyframes ui-lib-ripple-expand {
-  0% {
-    transform: scale(0);
-    opacity: 0.7;
+  @keyframes ui-lib-ripple-expand {
+    0% {
+      transform: scale(0);
+      opacity: 0.7;
+    }
+
+    80% {
+      transform: scale(2.5);
+      opacity: 0.2;
+    }
+
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
   }
 
-  80% {
-    transform: scale(2.5);
-    opacity: 0.2;
-  }
+  // ---------------------------------------------------------------------------
+  // Reduced-motion override (defence-in-depth — the directive also guards this)
+  // ---------------------------------------------------------------------------
 
-  100% {
-    transform: scale(3);
-    opacity: 0;
+  @media (prefers-reduced-motion: reduce) {
+    .ui-lib-ripple-wave {
+      animation: none;
+      display: none;
+    }
   }
-}
-
-// ---------------------------------------------------------------------------
-// Reduced-motion override (defence-in-depth — the directive also guards this)
-// ---------------------------------------------------------------------------
-
-@media (prefers-reduced-motion: reduce) {
-  .ui-lib-ripple-wave {
-    animation: none;
-    display: none;
-  }
-}
+} // end @layer uilib.components

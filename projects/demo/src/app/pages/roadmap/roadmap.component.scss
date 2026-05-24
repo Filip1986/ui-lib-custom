@@ -1660,3 +1660,123 @@
   padding-left: 0.1rem;
   line-height: 1.4;
 }
+
+// =============================================================================
+// CSS Architecture Tracking section
+// =============================================================================
+
+.css-arch-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.css-arch-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--uilib-page-text-secondary, #475569);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.css-arch-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.css-arch-table {
+  .css-arch-check-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+  }
+}
+
+.css-arch-check-cell {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.1rem 0.5rem;
+  align-items: start;
+  text-align: left;
+}
+
+.css-arch-category-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+  margin-top: 3px;
+  grid-row: 1;
+}
+
+.css-arch-check-text {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--uilib-page-text-secondary, #475569);
+  line-height: 1.4;
+}
+
+.css-arch-notes {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.72rem;
+  color: var(--uilib-page-text-muted, #94a3b8);
+  line-height: 1.35;
+  font-style: italic;
+}
+
+.css-arch-summary {
+  margin-top: 2rem;
+}
+
+.css-arch-explainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.css-arch-explainer-card {
+  border: 1px solid var(--uilib-surface-border, #e2e8f0);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  background: var(--uilib-surface-card, #fff);
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+    color: var(--uilib-page-text, #1e293b);
+  }
+
+  &--after {
+    border-color: #22c55e;
+    background: linear-gradient(to right, rgba(34, 197, 94, 0.04), var(--uilib-surface-card, #fff));
+  }
+}
+
+.css-arch-code {
+  font-family: var(--uilib-font-mono, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--uilib-page-text-secondary, #334155);
+  background: var(--uilib-surface-section, #f8fafc);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--uilib-surface-border, #e2e8f0);
+}
