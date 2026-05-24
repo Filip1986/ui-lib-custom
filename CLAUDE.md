@@ -81,6 +81,7 @@ These rules apply to every task, no exceptions:
 - **No cross-entry-point relative imports** — use package paths: `import { X } from 'ui-lib-custom/button'`, never `from '../button'`. Relative paths are fine *within* the same entry point. Full rules: `LIBRARY_CONVENTIONS.md → Cross-Entry Import Rule`.
 - **Public input types are string unions** — `'material' | 'bootstrap' | 'minimal'` — not enum, not constants object
 - **No raw hex/px in CSS rule bodies** — always use a `var(--uilib-*)` CSS custom property. Exception: hex may appear as the *default value* in a CSS custom property definition (`--uilib-foo: #hex`) — that IS the token level. When a global palette token exists for that color, use `var(--uilib-color-neutral-300, #hex)` instead of bare hex. When the color is appearance-specific, add it as a constant to `design-tokens.ts` and link back from the SCSS comment. Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule`.
+- **Every new component SCSS file must be wrapped in `@layer uilib.components { }`** — all library SCSS lives inside named cascade layers so consumer CSS always wins without specificity battles. `themes.scss` uses `@layer uilib.tokens { }`. Exception: `high-contrast.scss` stays outside layers. Full rules + rationale: `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule` and `docs/architecture/ADR_CSS_LAYER_ADOPTION.md`.
 - **`as const` objects** — never TypeScript `enum`
 - **Separate template files** — always `templateUrl` / `styleUrl`, never inline `template` or `styles`
 - **Self-closing tags** for components without projected content: `<ui-lib-button />`
@@ -112,6 +113,7 @@ These rules apply to every task, no exceptions:
 | Explicit `output()` named `{signalName}Change` when `{signalName}` is a `model()` signal | Give it a distinct name (`treeChange` not `selectionChange`); `model()` owns `{name}Change` for `[(binding)]` |
 | `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs | Use imperative `addEventListener` in the constructor — see `cascade-select.ts` |
 | `uilib-` as element selector prefix | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*` |
+| New component SCSS file without `@layer uilib.components { }` wrapper | Wrap entire file: `@layer uilib.components { ... }` — see `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule` |
 
 ---
 

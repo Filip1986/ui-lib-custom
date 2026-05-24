@@ -1,22 +1,24 @@
-ui-lib-icon.ui-lib-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  color: var(--uilib-icon-color, currentColor);
-  transition: var(--uilib-icon-transition, 150ms ease);
-}
+@layer uilib.components {
+  ui-lib-icon.ui-lib-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: var(--uilib-icon-color, currentColor);
+    transition: var(--uilib-icon-transition, 150ms ease);
+  }
 
-ui-lib-icon .ui-lib-icon__glyph {
-  display: inline-flex;
-}
+  ui-lib-icon .ui-lib-icon__glyph {
+    display: inline-flex;
+  }
 
-[data-theme='dark'] ui-lib-icon {
-  --uilib-icon-color: var(--uilib-text-dark-primary);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme]) ui-lib-icon {
+  [data-theme='dark'] ui-lib-icon {
     --uilib-icon-color: var(--uilib-text-dark-primary);
   }
-}
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']):not([data-theme]) ui-lib-icon {
+      --uilib-icon-color: var(--uilib-text-dark-primary);
+    }
+  }
+} // end @layer uilib.components

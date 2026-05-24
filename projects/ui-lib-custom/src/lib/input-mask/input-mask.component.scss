@@ -1,163 +1,165 @@
-ui-lib-input-mask {
-  --uilib-input-mask-padding-y: var(--uilib-space-2, 0.5rem);
-  --uilib-input-mask-padding-x: var(--uilib-space-3, 0.75rem);
-  --uilib-input-mask-font-size: var(--uilib-font-size-base, 1rem);
-  --uilib-input-mask-border-radius: var(--uilib-radius-md, 0.5rem);
-  --uilib-input-mask-border-color: var(--uilib-border, currentColor);
-  --uilib-input-mask-bg: var(--uilib-surface, transparent);
-  --uilib-input-mask-text-color: var(--uilib-page-fg, currentColor);
-  --uilib-input-mask-placeholder-color: var(--uilib-muted, currentColor);
-  --uilib-input-mask-focus-border-color: var(--uilib-color-primary-600, currentColor);
-  --uilib-input-mask-focus-ring: 0 0 0 0.1875rem
-    color-mix(in srgb, var(--uilib-input-mask-focus-border-color) 28%, transparent);
-  --uilib-input-mask-invalid-border-color: var(--uilib-color-danger-600, currentColor);
-  --uilib-input-mask-icon-color: var(--uilib-muted, currentColor);
-  --uilib-input-mask-filled-bg: color-mix(
-    in srgb,
-    var(--uilib-input-mask-bg) 84%,
-    var(--uilib-color-neutral-900, currentColor) 4%
-  );
-  --uilib-input-mask-disabled-opacity: 0.6;
-  --uilib-input-mask-clear-icon-size: 1rem;
-  --uilib-input-mask-error-color: var(--uilib-color-danger-600, currentColor);
+@layer uilib.components {
+  ui-lib-input-mask {
+    --uilib-input-mask-padding-y: var(--uilib-space-2, 0.5rem);
+    --uilib-input-mask-padding-x: var(--uilib-space-3, 0.75rem);
+    --uilib-input-mask-font-size: var(--uilib-font-size-base, 1rem);
+    --uilib-input-mask-border-radius: var(--uilib-radius-md, 0.5rem);
+    --uilib-input-mask-border-color: var(--uilib-border, currentColor);
+    --uilib-input-mask-bg: var(--uilib-surface, transparent);
+    --uilib-input-mask-text-color: var(--uilib-page-fg, currentColor);
+    --uilib-input-mask-placeholder-color: var(--uilib-muted, currentColor);
+    --uilib-input-mask-focus-border-color: var(--uilib-color-primary-600, currentColor);
+    --uilib-input-mask-focus-ring: 0 0 0 0.1875rem
+      color-mix(in srgb, var(--uilib-input-mask-focus-border-color) 28%, transparent);
+    --uilib-input-mask-invalid-border-color: var(--uilib-color-danger-600, currentColor);
+    --uilib-input-mask-icon-color: var(--uilib-muted, currentColor);
+    --uilib-input-mask-filled-bg: color-mix(
+      in srgb,
+      var(--uilib-input-mask-bg) 84%,
+      var(--uilib-color-neutral-900, currentColor) 4%
+    );
+    --uilib-input-mask-disabled-opacity: 0.6;
+    --uilib-input-mask-clear-icon-size: 1rem;
+    --uilib-input-mask-error-color: var(--uilib-color-danger-600, currentColor);
 
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-ui-lib-input-mask.ui-lib-input-mask--fluid {
-  display: flex;
-  width: 100%;
-}
-
-ui-lib-input-mask input {
-  appearance: none;
-  border: 0.0625rem solid var(--uilib-input-mask-border-color);
-  border-radius: var(--uilib-input-mask-border-radius);
-  background: var(--uilib-input-mask-bg);
-  color: var(--uilib-input-mask-text-color);
-  font-size: var(--uilib-input-mask-font-size);
-  line-height: var(--uilib-line-height-normal, 1.5);
-  width: 100%;
-  min-inline-size: 0;
-  padding: var(--uilib-input-mask-padding-y) var(--uilib-input-mask-padding-x);
-  transition:
-    border-color var(--uilib-transition-fast, 150ms ease),
-    box-shadow var(--uilib-transition-fast, 150ms ease),
-    background-color var(--uilib-transition-fast, 150ms ease);
-}
-
-ui-lib-input-mask input::placeholder {
-  color: var(--uilib-input-mask-placeholder-color);
-}
-
-ui-lib-input-mask input:focus-visible {
-  outline: none;
-  border-color: var(--uilib-input-mask-focus-border-color);
-  box-shadow: var(--uilib-input-mask-focus-ring);
-}
-
-ui-lib-input-mask.ui-lib-input-mask--sm {
-  --uilib-input-mask-padding-y: var(--uilib-space-1, 0.25rem);
-  --uilib-input-mask-padding-x: var(--uilib-space-2, 0.5rem);
-  --uilib-input-mask-font-size: var(--uilib-font-size-sm, 0.875rem);
-}
-
-ui-lib-input-mask.ui-lib-input-mask--lg {
-  --uilib-input-mask-padding-y: var(--uilib-space-3, 0.75rem);
-  --uilib-input-mask-padding-x: var(--uilib-space-4, 1rem);
-  --uilib-input-mask-font-size: var(--uilib-font-size-lg, 1.125rem);
-}
-
-ui-lib-input-mask.ui-lib-input-mask--filled input {
-  background: var(--uilib-input-mask-filled-bg);
-  border-color: transparent;
-}
-
-ui-lib-input-mask.ui-lib-input-mask--invalid input {
-  border-color: var(--uilib-input-mask-invalid-border-color);
-}
-
-ui-lib-input-mask .ui-lib-input-mask-clear-icon {
-  position: absolute;
-  top: 50%;
-  inset-inline-end: var(--uilib-input-mask-padding-x);
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: var(--uilib-input-mask-icon-color);
-  line-height: 1;
-  font-size: var(--uilib-input-mask-clear-icon-size);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-ui-lib-input-mask:has(.ui-lib-input-mask-clear-icon) input {
-  padding-inline-end: calc(
-    var(--uilib-input-mask-padding-x) * 2 + var(--uilib-input-mask-clear-icon-size)
-  );
-}
-
-ui-lib-input-mask.ui-lib-input-mask--disabled {
-  opacity: var(--uilib-input-mask-disabled-opacity);
-}
-
-ui-lib-input-mask.ui-lib-input-mask--disabled .ui-lib-input-mask-clear-icon {
-  pointer-events: none;
-}
-
-ui-lib-input-mask.ui-lib-input-mask--material input {
-  border-width: 0 0 0.125rem;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-ui-lib-input-mask.ui-lib-input-mask--material.uilib-inputwrapper-focus::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  block-size: 0.125rem;
-  background: var(--uilib-input-mask-focus-border-color);
-}
-
-ui-lib-input-mask.ui-lib-input-mask--bootstrap input {
-  border-width: 0.0625rem;
-  border-radius: var(--uilib-input-mask-border-radius);
-}
-
-ui-lib-input-mask.ui-lib-input-mask--minimal input {
-  border-color: transparent;
-  background: color-mix(
-    in srgb,
-    var(--uilib-input-mask-bg) 88%,
-    var(--uilib-color-neutral-900, currentColor) 3%
-  );
-  box-shadow: none;
-}
-
-ui-lib-input-mask .ui-lib-input-mask-error {
-  color: var(--uilib-input-mask-error-color);
-  font-size: var(--uilib-font-size-sm, 0.875rem);
-  margin-top: var(--uilib-space-1, 0.25rem);
-}
-
-ui-lib-input-mask .ui-lib-input-mask-sr-only {
-  position: absolute;
-  width: 0.0625rem;
-  height: 0.0625rem;
-  padding: 0;
-  margin: -0.0625rem;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ui-lib-input-mask,
-  ui-lib-input-mask input {
-    transition: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
   }
-}
+
+  ui-lib-input-mask.ui-lib-input-mask--fluid {
+    display: flex;
+    width: 100%;
+  }
+
+  ui-lib-input-mask input {
+    appearance: none;
+    border: 0.0625rem solid var(--uilib-input-mask-border-color);
+    border-radius: var(--uilib-input-mask-border-radius);
+    background: var(--uilib-input-mask-bg);
+    color: var(--uilib-input-mask-text-color);
+    font-size: var(--uilib-input-mask-font-size);
+    line-height: var(--uilib-line-height-normal, 1.5);
+    width: 100%;
+    min-inline-size: 0;
+    padding: var(--uilib-input-mask-padding-y) var(--uilib-input-mask-padding-x);
+    transition:
+      border-color var(--uilib-transition-fast, 150ms ease),
+      box-shadow var(--uilib-transition-fast, 150ms ease),
+      background-color var(--uilib-transition-fast, 150ms ease);
+  }
+
+  ui-lib-input-mask input::placeholder {
+    color: var(--uilib-input-mask-placeholder-color);
+  }
+
+  ui-lib-input-mask input:focus-visible {
+    outline: none;
+    border-color: var(--uilib-input-mask-focus-border-color);
+    box-shadow: var(--uilib-input-mask-focus-ring);
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--sm {
+    --uilib-input-mask-padding-y: var(--uilib-space-1, 0.25rem);
+    --uilib-input-mask-padding-x: var(--uilib-space-2, 0.5rem);
+    --uilib-input-mask-font-size: var(--uilib-font-size-sm, 0.875rem);
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--lg {
+    --uilib-input-mask-padding-y: var(--uilib-space-3, 0.75rem);
+    --uilib-input-mask-padding-x: var(--uilib-space-4, 1rem);
+    --uilib-input-mask-font-size: var(--uilib-font-size-lg, 1.125rem);
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--filled input {
+    background: var(--uilib-input-mask-filled-bg);
+    border-color: transparent;
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--invalid input {
+    border-color: var(--uilib-input-mask-invalid-border-color);
+  }
+
+  ui-lib-input-mask .ui-lib-input-mask-clear-icon {
+    position: absolute;
+    top: 50%;
+    inset-inline-end: var(--uilib-input-mask-padding-x);
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--uilib-input-mask-icon-color);
+    line-height: 1;
+    font-size: var(--uilib-input-mask-clear-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ui-lib-input-mask:has(.ui-lib-input-mask-clear-icon) input {
+    padding-inline-end: calc(
+      var(--uilib-input-mask-padding-x) * 2 + var(--uilib-input-mask-clear-icon-size)
+    );
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--disabled {
+    opacity: var(--uilib-input-mask-disabled-opacity);
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--disabled .ui-lib-input-mask-clear-icon {
+    pointer-events: none;
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--material input {
+    border-width: 0 0 0.125rem;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--material.uilib-inputwrapper-focus::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    block-size: 0.125rem;
+    background: var(--uilib-input-mask-focus-border-color);
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--bootstrap input {
+    border-width: 0.0625rem;
+    border-radius: var(--uilib-input-mask-border-radius);
+  }
+
+  ui-lib-input-mask.ui-lib-input-mask--minimal input {
+    border-color: transparent;
+    background: color-mix(
+      in srgb,
+      var(--uilib-input-mask-bg) 88%,
+      var(--uilib-color-neutral-900, currentColor) 3%
+    );
+    box-shadow: none;
+  }
+
+  ui-lib-input-mask .ui-lib-input-mask-error {
+    color: var(--uilib-input-mask-error-color);
+    font-size: var(--uilib-font-size-sm, 0.875rem);
+    margin-top: var(--uilib-space-1, 0.25rem);
+  }
+
+  ui-lib-input-mask .ui-lib-input-mask-sr-only {
+    position: absolute;
+    width: 0.0625rem;
+    height: 0.0625rem;
+    padding: 0;
+    margin: -0.0625rem;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-input-mask,
+    ui-lib-input-mask input {
+      transition: none;
+    }
+  }
+} // end @layer uilib.components

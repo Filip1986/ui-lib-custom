@@ -457,6 +457,87 @@
     </div>
   </section>
 
+  <!-- ── CSS Architecture Tracking ───────────────────────────────────────── -->
+  <section id="css-architecture" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">CSS Architecture Tracking</h2>
+    <p class="section-subtitle">
+      Detailed comparison of CSS architecture, theming, and cascade strategies vs. Angular Material,
+      PrimeNG, and Ng-Zorro. This is the internal tracking view — use it to keep score on where
+      ui-lib-custom leads and what remains to push further.
+    </p>
+
+    <div class="css-arch-legend" role="list" aria-label="Category legend">
+      @for (cat of cssArchCategories; track cat.value) {
+        <span class="css-arch-legend-item" role="listitem">
+          <span class="css-arch-legend-dot" [style.background]="cat.color"></span>
+          {{ cat.label }}
+        </span>
+      }
+    </div>
+
+    <div class="modernity-table-wrapper" role="region" aria-label="CSS architecture comparison">
+      <table class="modernity-table css-arch-table" aria-label="CSS architecture feature comparison">
+        <thead>
+          <tr>
+            <th scope="col" class="mod-col-check">Feature</th>
+            <th scope="col" class="mod-col-lib">Angular Material</th>
+            <th scope="col" class="mod-col-lib">PrimeNG</th>
+            <th scope="col" class="mod-col-lib">Ng-Zorro</th>
+            <th scope="col" class="mod-col-lib mod-col-lib--this">This Library</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of cssArchRows; track row.check) {
+            <tr class="mod-row css-arch-row" [attr.data-category]="row.category">
+              <td class="mod-col-check css-arch-check-cell">
+                <span class="css-arch-category-dot"
+                  [style.background]="getCssArchCategoryColor(row.category)"
+                  [attr.title]="getCssArchCategoryLabel(row.category)">
+                </span>
+                <span class="css-arch-check-text">{{ row.check }}</span>
+                @if (row.notes) {
+                  <span class="css-arch-notes">{{ row.notes }}</span>
+                }
+              </td>
+              <td class="mod-col-lib" [class]="getModernityClass(row.angularMaterial)">
+                {{ getModernityLabel(row.angularMaterial) }}
+              </td>
+              <td class="mod-col-lib" [class]="getModernityClass(row.primeNG)">
+                {{ getModernityLabel(row.primeNG) }}
+              </td>
+              <td class="mod-col-lib" [class]="getModernityClass(row.ngZorro)">
+                {{ getModernityLabel(row.ngZorro) }}
+              </td>
+              <td class="mod-col-lib mod-col-lib--this" [class]="getModernityClass(row.thisLibrary)">
+                {{ getModernityLabel(row.thisLibrary) }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="css-arch-summary">
+      <h3 class="competitive-group-title">What CSS @layer Means for Consumers</h3>
+      <div class="css-arch-explainer-grid">
+        <div class="css-arch-explainer-card">
+          <h4>Before @layer</h4>
+          <pre class="css-arch-code">/* Consumer must match or beat library specificity */
+.my-app .some-context .ui-lib-button.ui-lib-button--primary &#123;
+  background: #0052cc !important; /* 😩 */
+&#125;</pre>
+        </div>
+        <div class="css-arch-explainer-card css-arch-explainer-card--after">
+          <h4>After @layer (now)</h4>
+          <pre class="css-arch-code">/* Any unlayered consumer CSS wins automatically */
+.my-cta &#123;
+  --uilib-button-bg: #0052cc; /* ✅ no !important needed */
+&#125;</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Pro & Enterprise Strategy ────────────────────────────────────────── -->
   <section id="pro-strategy" data-doc-anchor class="roadmap-section">
     <h2 class="section-title">Pro &amp; Enterprise Strategy</h2>

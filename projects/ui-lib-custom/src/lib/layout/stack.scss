@@ -1,13 +1,15 @@
-.ui-lib-stack__content {
-  display: flex;
-}
+@layer uilib.components {
+  .ui-lib-stack__content {
+    display: flex;
+  }
 
-[data-theme='dark'] ui-lib-stack {
-  --uilib-stack-fg: var(--uilib-text-dark-primary);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme]) ui-lib-stack {
+  [data-theme='dark'] ui-lib-stack {
     --uilib-stack-fg: var(--uilib-text-dark-primary);
   }
-}
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']):not([data-theme]) ui-lib-stack {
+      --uilib-stack-fg: var(--uilib-text-dark-primary);
+    }
+  }
+} // end @layer uilib.components

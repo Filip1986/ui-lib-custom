@@ -475,6 +475,83 @@ Note: `var(--uilib-color-neutral-300, #dee2e6)` is still correct — the CSS var
 
 ---
 
+## CSS Cascade Layer Rule
+
+All library SCSS **must** be wrapped in a named `@layer` block. This is enforced globally and is
+not optional for any component.
+
+### Layer hierarchy
+
+```
+@layer uilib.tokens, uilib.components;
+```
+
+| Layer | Contents | Why |
+|---|---|---|
+| `uilib.tokens` | `themes.scss` — all `:root` / `[data-theme]` CSS custom properties | Lowest priority; consumer token overrides always win |
+| `uilib.components` | Every component `.scss` file | Component styles; consumer class overrides always win |
+
+The declaration `@layer uilib.tokens, uilib.components;` lives **only** in `themes.scss`.
+Consumers who load `themes.scss` get the declaration automatically; they do not need to declare it themselves.
+
+### Why this matters
+
+Any CSS written **outside** a `@layer` automatically outranks all layered styles, regardless of
+specificity. This means:
+
+- Consumers can override any library style with a single class selector — no specificity fighting.
+- No `!important` is needed for consumer overrides.
+- Bootstrap/Material/any unlayered third-party CSS loaded alongside the library will override
+  library styles (which is usually fine; consumers can wrap third-party libraries in their own
+  layers if they need priority control).
+
+### Authoring rule for contributors
+
+**Every new component SCSS file must start with `@layer uilib.components {` and end with `}`.**
+
+```scss
+// ✅ Correct — new component file
+@layer uilib.components {
+
+ui-lib-my-component {
+  --uilib-my-component-bg: var(--uilib-surface, #ffffff);
+  display: block;
+}
+
+.ui-lib-my-component-inner {
+  padding: var(--uilib-space-4, 1rem);
+}
+
+} // end @layer uilib.components
+```
+
+```scss
+// ❌ Wrong — no layer wrapper (styles will fight consumers at specificity level)
+ui-lib-my-component {
+  --uilib-my-component-bg: var(--uilib-surface, #ffffff);
+  display: block;
+}
+```
+
+### Exception: high-contrast.scss
+
+`projects/ui-lib-custom/src/lib/styles/high-contrast.scss` is intentionally kept **outside** any
+`@layer`. It contains `@media (forced-colors: active)` overrides that must unconditionally beat all
+layered styles. Do not wrap this file.
+
+### `@keyframes` inside `@layer`
+
+Animations declared with `@keyframes` inside `@layer uilib.components { }` are scoped to that layer.
+This is fine — library keyframe names all carry the `uilib-*` prefix (e.g. `uilib-scroller-spin`),
+so name collisions with consumer keyframes are prevented. Do not reference library `@keyframes` names
+from outside the library.
+
+### Reference
+
+Full rationale: `docs/architecture/ADR_CSS_LAYER_ADOPTION.md`
+
+---
+
 ## Styling & Theming
 
 - SCSS for authoring; output uses CSS custom properties for runtime theming. No `::ng-deep` or global resets.

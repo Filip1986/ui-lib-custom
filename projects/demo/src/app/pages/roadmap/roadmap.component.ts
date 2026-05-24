@@ -83,6 +83,16 @@ export interface ModernityRow {
   thisLibrary: 'yes' | 'no' | 'partial';
 }
 
+export interface CssArchRow {
+  check: string;
+  category: 'cascade' | 'tokens' | 'theming' | 'a11y' | 'dx';
+  angularMaterial: 'yes' | 'no' | 'partial';
+  primeNG: 'yes' | 'no' | 'partial';
+  ngZorro: 'yes' | 'no' | 'partial';
+  thisLibrary: 'yes' | 'no' | 'partial';
+  notes?: string;
+}
+
 export interface Differentiator {
   feature: string;
   notes: string;
@@ -132,6 +142,7 @@ export class RoadmapComponent {
     { id: 'build-queue', label: 'Build Queue' },
     { id: 'documentation-status', label: 'Docs Status' },
     { id: 'competitive-strategy', label: 'Competitive' },
+    { id: 'css-architecture', label: 'CSS Architecture' },
     { id: 'pro-strategy', label: 'Pro Strategy' },
     { id: 'launch-sequence', label: 'Launch Path' },
     { id: 'next-steps', label: 'Next Steps' },
@@ -1666,23 +1677,23 @@ export class RoadmapComponent {
         const matchesQuery: boolean = query === '' || component.name.toLowerCase().includes(query);
         return matchesCategory && matchesQuery;
       });
-    }
+    },
   );
 
   public readonly totalComponents: Signal<number> = computed<number>(
-    (): number => this.allComponents.length
+    (): number => this.allComponents.length,
   );
 
   public readonly averageScore: Signal<string> = computed<string>((): string => {
     const total: number = this.allComponents.reduce(
       (sum: number, c: ComponentScore): number => sum + c.avg,
-      0
+      0,
     );
     return (total / this.allComponents.length).toFixed(2);
   });
 
   public readonly perfectScoreCount: Signal<number> = computed<number>(
-    (): number => this.allComponents.filter((c: ComponentScore): boolean => c.avg >= 9.0).length
+    (): number => this.allComponents.filter((c: ComponentScore): boolean => c.avg >= 9.0).length,
   );
 
   public readonly categoryBreakdown: Signal<{ name: string; count: number }[]> = computed<
@@ -1693,7 +1704,7 @@ export class RoadmapComponent {
       map.set(component.category, (map.get(component.category) ?? 0) + 1);
     });
     return Array.from(map.entries()).map(
-      ([name, count]: [string, number]): { name: string; count: number } => ({ name, count })
+      ([name, count]: [string, number]): { name: string; count: number } => ({ name, count }),
     );
   });
 
@@ -2143,7 +2154,7 @@ export class RoadmapComponent {
   public readonly docCompleteCount: Signal<number> = computed<number>(
     (): number =>
       this.docStatusItems.filter((item: DocStatusItem): boolean => item.status === 'complete')
-        .length
+        .length,
   );
 
   // ── Angular modernity scorecard ───────────────────────────────────────────
@@ -2219,6 +2230,203 @@ export class RoadmapComponent {
       thisLibrary: 'yes',
     },
   ];
+
+  // ── CSS Architecture competitive tracking ─────────────────────────────────
+  public readonly cssArchRows: CssArchRow[] = [
+    // --- Cascade & Specificity ---
+    {
+      check: 'CSS Cascade Layers (@layer) — library styles in named layer',
+      category: 'cascade',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'uilib.tokens + uilib.components layers declared in themes.scss. Consumer CSS always wins without !important.',
+    },
+    {
+      check: 'Consumer overrides require zero specificity tricks / !important',
+      category: 'cascade',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Direct result of @layer: any unlayered consumer CSS beats all layered library styles.',
+    },
+    {
+      check: 'BEM double-hyphen modifier convention (--modifier, not -modifier)',
+      category: 'dx',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Consistent ui-lib-{component}--{modifier} pattern on all host classes. Prevents class collision with element parts.',
+    },
+    // --- Design Tokens ---
+    {
+      check: 'CSS custom property token system (--uilib-* namespace)',
+      category: 'tokens',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'All spacing, color, radius, shadow, typography, and transition values exposed as CSS vars.',
+    },
+    {
+      check: 'Global palette tokens shared across all components',
+      category: 'tokens',
+      angularMaterial: 'yes',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        '--uilib-color-primary-*, --uilib-color-neutral-*, etc. updated once, all components respond.',
+    },
+    {
+      check: 'Component-scoped token isolation (--uilib-{component}-*)',
+      category: 'tokens',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Every component declares its own token namespace. Changing --uilib-button-bg does not affect any other component.',
+    },
+    {
+      check: 'Density scale system (--uilib-density-scale-y via data-density)',
+      category: 'tokens',
+      angularMaterial: 'partial',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'data-density="compact|comfortable" on any ancestor scales all child component heights.',
+    },
+    // --- Theming ---
+    {
+      check: 'Dark mode via data-theme attribute (no CSS class or rebuild)',
+      category: 'theming',
+      angularMaterial: 'partial',
+      primeNG: 'yes',
+      ngZorro: 'partial',
+      thisLibrary: 'yes',
+      notes: 'Toggle data-theme="dark" on html/body; overrides-only dark block in themes.scss.',
+    },
+    {
+      check: 'OS dark mode fallback (@media prefers-color-scheme)',
+      category: 'theming',
+      angularMaterial: 'yes',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'themes.scss section 3b mirrors the dark token block for users without an explicit data-theme.',
+    },
+    {
+      check: 'Three runtime visual variants (material / bootstrap / minimal)',
+      category: 'theming',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Switchable at runtime via ThemeConfigService or per-component variant input. No rebuild needed.',
+    },
+    {
+      check: 'ViewEncapsulation.None — zero ::ng-deep needed',
+      category: 'theming',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Global CSS variable cascade works correctly because there is no emulated encapsulation barrier.',
+    },
+    {
+      check: 'Consumer @layer interop (uilib.* slots into consumer layer stack)',
+      category: 'cascade',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Consumers can declare: @layer my-base, uilib.tokens, uilib.components, my-overrides — library slots in naturally.',
+    },
+    // --- Accessibility ---
+    {
+      check: 'prefers-reduced-motion — every animation has media query override',
+      category: 'a11y',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'Systematic: every component SCSS file includes a @media (prefers-reduced-motion) block.',
+    },
+    {
+      check: 'forced-colors (high contrast) support',
+      category: 'a11y',
+      angularMaterial: 'partial',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'high-contrast.scss covers all components. Intentionally kept outside @layer so it always wins.',
+    },
+    // --- DX ---
+    {
+      check: 'TypeScript design-tokens.ts as single source of truth for hex values',
+      category: 'dx',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes:
+        'design-tokens.ts holds all canonical color values; SCSS uses CSS var with hex fallback from the TS constant.',
+    },
+    {
+      check: 'ADR documenting CSS cascade layer architecture decision',
+      category: 'dx',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+      notes: 'docs/architecture/ADR_CSS_LAYER_ADOPTION.md — rationale, alternatives, consequences.',
+    },
+  ];
+
+  public readonly cssArchCategories: {
+    value: CssArchRow['category'];
+    label: string;
+    color: string;
+  }[] = [
+    { value: 'cascade', label: 'Cascade & Specificity', color: '#6366f1' },
+    { value: 'tokens', label: 'Design Tokens', color: '#0ea5e9' },
+    { value: 'theming', label: 'Theming & Variants', color: '#10b981' },
+    { value: 'a11y', label: 'Accessibility', color: '#f59e0b' },
+    { value: 'dx', label: 'Developer Experience', color: '#8b5cf6' },
+  ];
+
+  public getCssArchCategoryLabel(category: CssArchRow['category']): string {
+    return (
+      this.cssArchCategories.find(
+        (item: { value: CssArchRow['category']; label: string; color: string }): boolean =>
+          item.value === category,
+      )?.label ?? category
+    );
+  }
+
+  public getCssArchCategoryColor(category: CssArchRow['category']): string {
+    return (
+      this.cssArchCategories.find(
+        (item: { value: CssArchRow['category']; label: string; color: string }): boolean =>
+          item.value === category,
+      )?.color ?? '#94a3b8'
+    );
+  }
 
   // ── Differentiators ───────────────────────────────────────────────────────
   public readonly differentiators: Differentiator[] = [

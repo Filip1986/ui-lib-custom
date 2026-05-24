@@ -82,6 +82,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [CSS @layer adoption — full library wrapped in named cascade layers + ADR + docs + competitive tracking page]
+Changed:
+  themes.scss: @layer uilib.tokens, uilib.components; declaration added; entire file wrapped in @layer uilib.tokens { }
+  103 component SCSS files: all wrapped in @layer uilib.components { } (no re-indentation)
+  styles/high-contrast.scss: intentionally NOT wrapped (stays outside layers so forced-colors overrides always win)
+  LIBRARY_CONVENTIONS.md: added CSS Cascade Layer Rule section (authoring rules, layer hierarchy, exception, @keyframes guidance, reference)
+  CLAUDE.md: added @layer to non-negotiable conventions + anti-patterns table
+  docs/architecture/ADR_CSS_LAYER_ADOPTION.md: new ADR with context, decision, layer hierarchy table, consequences, alternatives considered
+  roadmap.component.ts: CssArchRow interface; cssArchRows data (16 rows across 5 categories); cssArchCategories; getCssArchCategoryLabel(); getCssArchCategoryColor(); sections array updated with css-architecture entry
+  roadmap.component.html: new <section id="css-architecture"> with table, category legend, before/after code explainer
+  roadmap.component.scss: CSS architecture section styles (legend, dot, check cell, notes, explainer grid, code block)
+State: 6040/6040 tests passing; ng build → PASS; typecheck → PASS; eslint → 0 warnings
+Verification: npm test (6040/6040), npm run build (PASS), npm run typecheck (PASS), npx eslint roadmap/ --max-warnings 0 (PASS)
+Terminal notes: none
+Next step: Commit and push on feat/css-layer-adoption → PR → merge. Then: broader axe-core audit or next component.
+
 Date: 2026-05-24 [BEM class name standardisation — all uilib-variant-* and single-hyphen modifier classes eliminated]
 Changed:
   input-number/input-number.component.ts: host bindings renamed (ui-lib-input-number-sm → ui-lib-input-number--sm etc.)
