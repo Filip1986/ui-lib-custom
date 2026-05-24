@@ -17,7 +17,7 @@ import type { SliderChangeEvent, SliderSlideEndEvent } from './slider.types';
 
 function queryEl<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
   if (!element) {
@@ -28,7 +28,7 @@ function queryEl<T extends Element = HTMLElement>(
 
 function queryAll<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -55,7 +55,7 @@ function queryAll<T extends Element = HTMLElement>(
       [valueTextFn]="valueTextFn()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
-      (change)="onChangeEvent($event)"
+      (sliderChange)="onChangeEvent($event)"
       (slideEnd)="onSlideEndEvent($event)"
     />
   `,
@@ -143,14 +143,14 @@ describe('Slider - rendering', (): void => {
 
   it('should have ui-lib-slider host class', (): void => {
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider')).toBe(true);
   });
 
   it('should apply horizontal class by default', (): void => {
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--horizontal')).toBe(true);
   });
@@ -160,7 +160,7 @@ describe('Slider - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--vertical')).toBe(true);
   });
@@ -184,7 +184,7 @@ describe('Slider - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--disabled')).toBe(true);
   });
@@ -194,7 +194,7 @@ describe('Slider - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--readonly')).toBe(true);
   });
@@ -204,7 +204,7 @@ describe('Slider - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--animate')).toBe(true);
   });
@@ -214,7 +214,7 @@ describe('Slider - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--size-sm')).toBe(true);
   });
@@ -224,7 +224,7 @@ describe('Slider - rendering', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--size-lg')).toBe(true);
   });
@@ -652,7 +652,7 @@ describe('Slider - reactive forms', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const sliderEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-slider'
+      'ui-lib-slider',
     ) as HTMLElement;
     expect(sliderEl.classList.contains('ui-lib-slider--disabled')).toBe(true);
   });

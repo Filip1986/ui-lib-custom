@@ -54,7 +54,7 @@ function getDebugEl(fixture: ComponentFixture<unknown>, selector: string): Debug
       [ariaLabel]="ariaLabel()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
-      (change)="onChangeEvent($event)"
+      (knobChange)="onChangeEvent($event)"
     />
   `,
 })

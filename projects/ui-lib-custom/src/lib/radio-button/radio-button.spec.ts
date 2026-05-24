@@ -26,7 +26,7 @@ function getHostElement(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getNativeInput(fixture: ComponentFixture<unknown>): HTMLInputElement {
   return getHostElement(fixture).querySelector(
-    '.ui-lib-radio-button__native-input'
+    '.ui-lib-radio-button__native-input',
   ) as HTMLInputElement;
 }
 
@@ -62,9 +62,9 @@ function getLabel(fixture: ComponentFixture<unknown>): HTMLElement | null {
       [variant]="variant()"
       [size]="size()"
       [appearance]="appearance()"
-      (change)="handleChange($event)"
-      (focus)="handleFocus($event)"
-      (blur)="handleBlur($event)"
+      (radioChange)="handleChange($event)"
+      (radioFocus)="handleFocus($event)"
+      (radioBlur)="handleBlur($event)"
     />
   `,
 })
@@ -91,10 +91,10 @@ class HostComponent {
   public readonly lastChange: WritableSignal<RadioButtonChangeEvent | null> =
     signal<RadioButtonChangeEvent | null>(null);
   public readonly lastFocusEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
   public readonly lastBlurEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
 
   public handleChange(event: RadioButtonChangeEvent): void {
@@ -179,7 +179,7 @@ describe('RadioButton', (): void => {
       host.variant.set(variant);
       fixture.detectChanges();
       expect(
-        getHostElement(fixture).classList.contains(`ui-lib-radio-button--variant-${variant}`)
+        getHostElement(fixture).classList.contains(`ui-lib-radio-button--variant-${variant}`),
       ).toBe(true);
     }
   });
@@ -192,7 +192,7 @@ describe('RadioButton', (): void => {
       host.size.set(size);
       fixture.detectChanges();
       expect(getHostElement(fixture).classList.contains(`ui-lib-radio-button--size-${size}`)).toBe(
-        true
+        true,
       );
     }
   });
@@ -218,7 +218,7 @@ describe('RadioButton', (): void => {
 
   it('becomes checked when writeValue receives the matching value', (): void => {
     const radioButton: RadioButton = fixture.debugElement.query(
-      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton
+      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton,
     ).componentInstance as RadioButton;
 
     radioButton.writeValue('option-a');
@@ -231,7 +231,7 @@ describe('RadioButton', (): void => {
 
   it('is not checked when writeValue receives a different value', (): void => {
     const radioButton: RadioButton = fixture.debugElement.query(
-      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton
+      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton,
     ).componentInstance as RadioButton;
 
     radioButton.writeValue('option-b');
@@ -292,7 +292,7 @@ describe('RadioButton', (): void => {
 
   it('accepts setDisabledState from parent form control', (): void => {
     const radioButton: RadioButton = fixture.debugElement.query(
-      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton
+      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton,
     ).componentInstance as RadioButton;
 
     radioButton.setDisabledState(true);
@@ -315,7 +315,7 @@ describe('RadioButton', (): void => {
 
   it('state is unchanged after click when readonly', (): void => {
     const radioButton: RadioButton = fixture.debugElement.query(
-      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton
+      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton,
     ).componentInstance as RadioButton;
 
     // Start unchecked
@@ -472,7 +472,7 @@ describe('RadioButton — ngModel', (): void => {
     fixture.detectChanges();
 
     const radioElements: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-radio-button')
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-radio-button'),
     );
 
     expect(radioElements[0]?.classList.contains('ui-lib-radio-button--checked')).toBe(true);
@@ -516,7 +516,7 @@ describe('RadioButton — reactive forms', (): void => {
 
   it('renders two radio buttons', (): void => {
     const radios: NodeListOf<HTMLElement> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      'ui-lib-radio-button'
+      'ui-lib-radio-button',
     );
 
     expect(radios.length).toBe(2);
@@ -525,8 +525,8 @@ describe('RadioButton — reactive forms', (): void => {
   it('updates the form control when a radio is clicked', (): void => {
     const inputs: HTMLInputElement[] = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>(
-        '.ui-lib-radio-button__native-input'
-      )
+        '.ui-lib-radio-button__native-input',
+      ),
     );
 
     inputs[1]?.click();

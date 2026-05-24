@@ -32,9 +32,9 @@ import type {
       [variant]="variant()"
       [autofocus]="autofocus()"
       [styleClass]="styleClass()"
-      (change)="handleChange($event)"
-      (focus)="handleFocus($event)"
-      (blur)="handleBlur($event)"
+      (switchChange)="handleChange($event)"
+      (switchFocus)="handleFocus($event)"
+      (switchBlur)="handleBlur($event)"
       [(checked)]="checked"
     />
   `,
@@ -57,10 +57,10 @@ class HostComponent {
   public readonly lastChangeEvent: WritableSignal<ToggleSwitchChangeEvent | null> =
     signal<ToggleSwitchChangeEvent | null>(null);
   public readonly lastFocusEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
   public readonly lastBlurEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
-    null
+    null,
   );
 
   public handleChange(event: ToggleSwitchChangeEvent): void {
@@ -339,7 +339,7 @@ describe('ToggleSwitch', (): void => {
       await ngModelFixture.whenStable();
 
       const input: HTMLInputElement = (ngModelFixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-toggle-switch__native-input'
+        '.ui-lib-toggle-switch__native-input',
       ) as HTMLInputElement;
 
       input.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -367,7 +367,7 @@ describe('ToggleSwitch', (): void => {
       await reactiveFixture.whenStable();
 
       const input: HTMLInputElement = (reactiveFixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-toggle-switch__native-input'
+        '.ui-lib-toggle-switch__native-input',
       ) as HTMLInputElement;
 
       input.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -387,7 +387,7 @@ describe('ToggleSwitch', (): void => {
       class DisabledHost {
         public readonly control: FormControl<boolean> = new FormControl<boolean>(
           { value: false, disabled: true },
-          { nonNullable: true }
+          { nonNullable: true },
         );
       }
 
@@ -396,7 +396,7 @@ describe('ToggleSwitch', (): void => {
       await disabledFixture.whenStable();
 
       const hostEl: HTMLElement = (disabledFixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-toggle-switch'
+        'ui-lib-toggle-switch',
       ) as HTMLElement;
 
       expect(hostEl.classList.contains('ui-lib-toggle-switch--disabled')).toBe(true);

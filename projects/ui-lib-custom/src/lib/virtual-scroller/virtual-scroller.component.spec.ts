@@ -42,7 +42,7 @@ function mockViewportMetrics(
     scrollHeight?: number;
     clientWidth?: number;
     scrollWidth?: number;
-  }
+  },
 ): void {
   Object.entries(metrics).forEach(([propertyName, value]: [string, number | undefined]): void => {
     if (value === undefined) {
@@ -79,7 +79,7 @@ function mockViewportMetrics(
       [contentRole]="contentRole()"
       [totalRecords]="totalRecords()"
       (lazyLoad)="onLazyLoad($event)"
-      (scroll)="onScroll($event)"
+      (virtualScroll)="onScroll($event)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -92,7 +92,7 @@ class TestHostComponent {
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly showLoader: WritableSignal<boolean> = signal<boolean>(false);
   public readonly loading: WritableSignal<boolean | undefined> = signal<boolean | undefined>(
-    undefined
+    undefined,
   );
   public readonly showSpacer: WritableSignal<boolean> = signal<boolean>(true);
   public readonly lazy: WritableSignal<boolean> = signal<boolean>(false);
@@ -100,7 +100,7 @@ class TestHostComponent {
   public readonly ariaLabel: WritableSignal<string> = signal<string>('');
   public readonly contentRole: WritableSignal<'list' | 'grid'> = signal<'list' | 'grid'>('list');
   public readonly totalRecords: WritableSignal<number | undefined> = signal<number | undefined>(
-    undefined
+    undefined,
   );
 
   public lazyLoadEvents: VirtualScrollerLazyLoadEvent[] = [];
@@ -416,7 +416,7 @@ describe('VirtualScrollerComponent', (): void => {
       fixt.detectChanges();
 
       const component: VirtualScrollerComponent = fixt.debugElement.query(
-        By.directive(VirtualScrollerComponent)
+        By.directive(VirtualScrollerComponent),
       ).componentInstance as VirtualScrollerComponent;
 
       // Access protected method via cast for testing.
