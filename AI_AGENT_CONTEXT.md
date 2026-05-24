@@ -82,6 +82,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [themes refactor — shape-pill token, dark mixin deduplication, themes.css full rewrite]
+Changed:
+  themes.scss: added --uilib-shape-pill: 9999px to universal tokens; wired --uilib-radius-full to it;
+    replaced duplicate sections 3 and 3b with @mixin dark-theme-tokens — single source of truth for
+    all dark overrides; OS prefers-color-scheme fallback was missing 26 tokens (fixed)
+  themes.css: full rewrite — universal tokens in :root only; [data-theme='dark'] trimmed to overrides
+    only (removed ~110 lines of duplicated spacing/layout tokens); added @media (prefers-color-scheme: dark)
+    block that was completely absent; added @layer declarations; added missing tokens (shape, radius, 
+    font-size, icon sizes, transitions, focus-ring, shadows, dialog, input, select, checkbox, accordion, badge)
+  AI_AGENT_CONTEXT.md: handoff updated
+State: 6040/6040 tests passing; ng build → PASS; typecheck → PASS; all 7 tasks marked completed
+Verification: npm test (6040/6040), npm run build (PASS), git push → pre-push typecheck PASS
+Terminal notes: none
+Next step: No open tasks. Next milestone candidates: broader component axe-core audit pass, new premium
+  component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
+
 Date: 2026-05-24 [SCSS token cleanup — component-scoped tokens, :root removal, :host fix, task list cleared]
 Changed:
   badge.scss: added --uilib-badge-radius / --uilib-badge-radius-pill / --uilib-badge-radius-dot intermediate
