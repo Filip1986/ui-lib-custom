@@ -82,6 +82,20 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [docs(standards): JS-STANDARDS.md + standards README created]
+Changed:
+  docs/standards/JS-STANDARDS.md: Created — JavaScript runtime standard for this component library.
+    Key library-specific rules: DestroyRef cleanup (components destroyed frequently), layout thrashing
+    under ViewEncapsulation.None, no Worker instantiation in library code.
+    References platform/docs/standards/JS-STANDARDS.md for full rationale and examples.
+  docs/standards/README.md: Created — index of CSS, HTML, and JS standards with platform reference.
+  docs/standards/CSS-STANDARDS.md: Added See also footer linking to JS and HTML standards.
+  CLAUDE.md: Added standards reference table to Session Start Protocol.
+State: Documentation only — no build required.
+Verification: Files created and cross-linked correctly.
+Next step: No open tasks. Next milestone candidates: broader component axe-core audit pass, new premium
+  component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
+
 Date: 2026-05-24 [naming convention audit — critical output renames + conventions doc hardening]
 Changed:
   color-picker.ts: change → colorChange (output + emit)

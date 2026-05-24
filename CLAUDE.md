@@ -61,6 +61,14 @@ At the start of every session, read these files in order:
 4. Component doc at `docs/reference/components/<name>.md` — if working on a specific component
 5. `docs/architecture/` — if touching cross-cutting concerns (entry points, theming, tokens)
 
+**Standards reference** (apply to all generated code):
+
+| Standard       | File                               | Key library rules                                                    |
+|----------------|------------------------------------|----------------------------------------------------------------------|
+| CSS / SCSS     | `docs/standards/CSS-STANDARDS.md`  | `--uilib-*` tokens, `ViewEncapsulation.None` BEM, cascade layers     |
+| HTML templates | `docs/standards/HTML-STANDARDS.md` | ARIA completeness, keyboard patterns, content projection             |
+| JS runtime     | `docs/standards/JS-STANDARDS.md`   | `DestroyRef` cleanup, layout thrashing, no Workers in library code   |
+
 Do not skip step 1. It tells you exactly what is in-flight and what is next.
 
 **Before using any `ui-lib-*` component in a demo or other component, read its `README.md` at `projects/ui-lib-custom/src/lib/<component>/README.md`.** This is the authoritative, co-located API contract — check it for the exact inputs, outputs, and content projection pattern before writing any template code. Never assume PrimeNG conventions apply.

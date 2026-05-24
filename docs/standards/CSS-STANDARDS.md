@@ -165,3 +165,12 @@ Pre-commit: `lint-staged` runs stylelint on every staged `.scss`/`.css` file aut
 
 *Last reviewed: 2026-05-24*
 
+---
+
+## See also
+
+| Document | Why it relates |
+|----------|----------------|
+| [`JS-STANDARDS.md`](JS-STANDARDS.md) | Runtime animation rules + layout thrashing under `ViewEncapsulation.None` |
+| [`HTML-STANDARDS.md`](HTML-STANDARDS.md) | Template rules that interact with global CSS under `ViewEncapsulation.None` |
+| [`platform/docs/standards/CSS-STANDARDS.md`](../../../platform/docs/standards/CSS-STANDARDS.md) | Full reference with complete rationale and examples |
