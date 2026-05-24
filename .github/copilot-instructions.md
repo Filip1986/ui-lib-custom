@@ -76,6 +76,53 @@ From `LIBRARY_CONVENTIONS.md`:
 
 ---
 
+## §3b Styling Standards
+
+> Violations are caught automatically by **stylelint** (`npm run lint:css`).
+> Token prefix: `--uilib-*`. Source of truth: `projects/ui-lib-custom/src/lib/themes/`.
+
+### Non-negotiable rules
+
+- All styles in `.scss` files — never inline
+- **`ViewEncapsulation.None`** everywhere — styles are global; BEM + `uilib-` prefix are the ONLY collision guard
+- Every colour and font-size must use `var(--uilib-*)` — no raw hex, rgb(), or named colours
+- New colour tokens defined in `oklch()` — not raw hex
+- BEM naming strictly: `.uilib-button__icon--disabled`
+- No `!important` unless overriding consumer themes (comment and document why)
+- Specificity low: classes only — no ID selectors, no element-qualified selectors
+- Nesting depth ≤ 2 levels
+- No `transition: all` — name specific properties
+- Use logical properties (`margin-inline-start`, `padding-block`) for RTL-safe spacing
+
+### Native CSS first
+
+| Feature                       | Use for                                                             |
+|-------------------------------|---------------------------------------------------------------------|
+| `@layer`                      | Explicit override hierarchy for theme layers                        |
+| Container queries             | Component adapts to its container — critical for a library          |
+| `clamp()` / `min()` / `max()` | Fluid sizing without consumer breakpoint coupling                   |
+| `:has()`                      | Relational selectors — reduces JS state management                  |
+| Logical properties            | RTL/i18n support in every spacing value                             |
+| `oklch()` / `color-mix()`     | Perceptually-uniform colours; generate palette variants dynamically |
+| Subgrid                       | Nested grid alignment in compound components                        |
+| `animation-timeline`          | Scroll/viewport animations — no JS observers                        |
+
+### Performance
+
+- Animate only `transform` and `opacity` — never layout-triggering properties
+- `content-visibility: auto` for any component with a long list (virtualised scrollers, tables)
+- No `will-change` in component CSS — it wastes memory for every instance
+
+### Linting
+
+```bash
+npm run lint:css        # check
+npm run lint:css:fix    # auto-fix what's possible
+npm run lint:css:ci     # CI mode — zero warnings
+```
+
+---
+
 ## §4 Pre-Generation Checklist
 
 Before generating code, answer:
@@ -84,6 +131,14 @@ Before generating code, answer:
 - [ ] What are the ARIA roles and keyboard interactions required? (a11y first)
 - [ ] Which design tokens will it consume (`--uilib-*`)?
 - [ ] Is `ViewEncapsulation.None` used? (never `Emulated`)
+- [ ] BEM class names all prefixed with `uilib-`? (collision guard)
+- [ ] All colours/font-sizes use `var(--uilib-*)` — no raw hex?
+- [ ] New colour tokens defined in `oklch()`?
+- [ ] Logical properties used for spacing (not margin-left/padding-right)?
+- [ ] Nesting depth ≤ 2 levels; no ID selectors?
+- [ ] Animations use only `transform`/`opacity`; `transition: all` not used?
+- [ ] `@media (prefers-reduced-motion: reduce)` present for every animation?
+- [ ] `npm run lint:css` passes — no new stylelint errors?
 - [ ] Will this be added to `public-api.ts`?
 - [ ] Is a Storybook story planned?
 - [ ] Is `jest-axe` covered in the spec?
@@ -166,18 +221,24 @@ chore(deps): update @angular/core to 21.x
 
 ## §8 What NOT To Do
 
-| ❌ Never | ✅ Instead |
-|----------|-----------|
-| `ViewEncapsulation.Emulated` | `ViewEncapsulation.None` |
-| Hardcoded colours in SCSS | `var(--uilib-color-primary)` design tokens |
-| `@Input() value: string` | `value = input<string>()` |
-| `@Output() changed` | `changed = output<void>()` |
-| Styles in component TypeScript | External `.scss` file |
-| NgModules | Standalone components with `imports: [...]` |
-| Relative cross-entry-point imports | Use `ui-lib-custom/theme` package path |
-| Export internal types in barrel | Keep internal types internal |
-| Skip jest-axe in spec | Always add a11y assertion |
-| Skip Storybook story | Every component needs a story |
+| ❌ Never                                         | ✅ Instead                                                  |
+|-------------------------------------------------|------------------------------------------------------------|
+| `ViewEncapsulation.Emulated`                    | `ViewEncapsulation.None`                                   |
+| Hardcoded colours in SCSS (`#2563eb`)           | `var(--uilib-color-primary)` design tokens                 |
+| Raw hex in new token definitions                | `oklch(57% 0.24 264)`                                      |
+| `margin-left` / `padding-right`                 | Logical: `margin-inline-start` / `padding-inline-end`      |
+| `transition: all`                               | Name specific properties: `transition: opacity 150ms ease` |
+| Animating `width`, `height`, `background-color` | `transform` + `opacity` only                               |
+| Nesting deeper than 2 levels                    | Flat BEM classes                                           |
+| ID selectors in component CSS                   | Classes only                                               |
+| `@Input() value: string`                        | `value = input<string>()`                                  |
+| `@Output() changed`                             | `changed = output<void>()`                                 |
+| Styles in component TypeScript                  | External `.scss` file                                      |
+| NgModules                                       | Standalone components with `imports: [...]`                |
+| Relative cross-entry-point imports              | Use `ui-lib-custom/theme` package path                     |
+| Export internal types in barrel                 | Keep internal types internal                               |
+| Skip jest-axe in spec                           | Always add a11y assertion                                  |
+| Skip Storybook story                            | Every component needs a story                              |
 
 ---
 
