@@ -457,12 +457,16 @@ export class RadioButtonDemoComponent {
 
   public readonly apiOutputRows: ApiPropRow[] = [
     {
-      name: 'change',
+      name: 'radioChange',
       type: 'RadioButtonChangeEvent',
       description:
         'Fires when this button is selected. Payload: <code>{ value, originalEvent }</code>.',
     },
-    { name: 'focus', type: 'FocusEvent', description: 'Emitted when the radio receives focus.' },
-    { name: 'blur', type: 'FocusEvent', description: 'Emitted when the radio loses focus.' },
+    {
+      name: 'radioFocus',
+      type: 'FocusEvent',
+      description: 'Emitted when the radio receives focus.',
+    },
+    { name: 'radioBlur', type: 'FocusEvent', description: 'Emitted when the radio loses focus.' },
   ];
 }

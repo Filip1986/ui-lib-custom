@@ -87,17 +87,22 @@ Changed:
   color-picker.ts: change → colorChange (output + emit)
   color-picker.spec.ts: component.change → component.colorChange (4 references)
   slider.ts: change → sliderChange (output + 3 emits)
-  toggle-button.ts: change/focus/blur → toggleButtonChange/toggleButtonFocus/toggleButtonBlur (declarations + emits)
-  toggle-switch.ts: change/focus/blur → switchChange/switchFocus/switchBlur (declarations + emits + internal comment)
+  toggle-button.ts: change/focus/blur → toggleButtonChange/toggleButtonFocus/toggleButtonBlur
+  toggle-switch.ts: change/focus/blur → switchChange/switchFocus/switchBlur
   autocomplete.ts: keyUp → autocompleteKeyUp (output + emit)
   virtual-scroller.component.ts: scroll → virtualScroll (output + emit)
-  galleria.ts: removed duplicate explicit activeIndexChange output (model() already emits it); removed output import + OutputEmitterRef type
-  toggle-button-demo.component.html: (change)→(toggleButtonChange) binding + description text
-  toggle-button-demo.component.ts: event log string updated
-  autocomplete-demo.component.ts: API table — select→optionSelect, focus→autocompleteFocus, blur→autocompleteBlur; added autocompleteKeyUp
-  LIBRARY_CONVENTIONS.md: Rule 1 example fixed (was accidentally showing focus/change as correct); Rule 2 camelCase note added; canonical output names reference table added
-State: ng build → PASS (40 924ms); eslint → 0 warnings on all changed files
-Verification: npm run build (PASS), npx eslint 12 changed files --max-warnings 0 (PASS)
+  galleria.ts: removed duplicate explicit activeIndexChange output (model() already emits it)
+  knob.component.ts: change/focus/blur → knobChange/knobFocus/knobBlur
+  radio-button.ts: change/focus/blur → radioChange/radioFocus/radioBlur
+  rating.ts: change/focus/blur → ratingChange/ratingFocus/ratingBlur
+  toggle-button-demo.component.html/ts: bindings + log string updated
+  autocomplete-demo.component.ts: API table fixed (select→optionSelect, focus/blur names, keyUp added)
+  rating-demo.component.html/ts: bindings + code snippets + API table updated
+  radio-button-demo.component.ts: API table updated
+  rating/README.md, docs/reference/components/RATING.md: (change)→(ratingChange)
+  LIBRARY_CONVENTIONS.md: Rule 1 example fixed; Rule 2 camelCase variant note added; canonical output names table added with all 13 components
+State: ng build → PASS (30 368ms); eslint → 0 warnings on all changed files (16 files checked)
+Verification: npm run build (PASS), npx eslint 16 changed files --max-warnings 0 (PASS)
 Next step: Fix medium issues from audit — add `readonly` to order-list and pick-list model() signals; replace CommonModule with specific directive imports in 18 components
 
 Date: 2026-05-24 [themes refactor — shape-pill token, dark mixin deduplication, themes.css full rewrite]

@@ -1,8 +1,7 @@
 <app-doc-page-layout [sections]="sections">
 
   <app-doc-page-header docHeader title="Rating" [importCode]="importCode"
-    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants.">
-  </app-doc-page-header>
+    description="Star rating component that lets users select a value via click or keyboard. Implements &lt;code&gt;ControlValueAccessor&lt;/code&gt; — works with &lt;code&gt;ngModel&lt;/code&gt; and reactive forms. Supports custom icon templates, inline styles, read-only display, and three design variants." />
 
   <!-- ---- Basic ---------------------------------------------------- -->
   <app-doc-section id="basic" title="Basic">
@@ -11,7 +10,7 @@
       selected star deselects it (clears to <code>null</code>).
     </p>
     <div class="demo-section__preview demo-section__preview--center">
-      <ui-lib-rating [(ngModel)]="basicRating" (change)="onRatingChange($event)" />
+      <ui-lib-rating [(ngModel)]="basicRating" (ratingChange)="onRatingChange($event)" />
     </div>
     <p class="demo-rating-hint">
       Value: <strong>{{ basicRating ?? 'none' }}</strong>
@@ -164,9 +163,9 @@
   <!-- ---- Events --------------------------------------------------- -->
   <app-doc-section id="events" title="Events">
     <p class="demo-section__description">
-      Four output events: <code>(change)</code> fires on every value change,
+      Four output events: <code>(ratingChange)</code> fires on every value change,
       <code>(rate)</code> fires only on star selection, <code>(cleared)</code>
-      fires when the rating is cleared, and <code>(focus)</code> / <code>(blur)</code>
+      fires when the rating is cleared, and <code>(ratingFocus)</code> / <code>(ratingBlur)</code>
       fire on star focus changes.
     </p>
     <div class="demo-section__preview demo-section__preview--center">
@@ -174,8 +173,8 @@
         [(ngModel)]="eventsRating"
         (rate)="onRateEvent($event)"
         (cleared)="onCancelEvent()"
-        (focus)="onFocusEvent()"
-        (blur)="onBlurEvent()"
+        (ratingFocus)="onFocusEvent()"
+        (ratingBlur)="onBlurEvent()"
       />
     </div>
     <ul class="demo-rating-event-log">

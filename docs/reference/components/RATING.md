@@ -156,7 +156,7 @@ The host element carries `role="radiogroup"`. Individual stars carry `role="radi
 ## Handling the change event
 
 ```html
-<ui-lib-rating [(ngModel)]="score" (change)="onRatingChange($event)" />
+<ui-lib-rating [(ngModel)]="score" (ratingChange)="onRatingChange($event)" />
 ```
 
 ```ts

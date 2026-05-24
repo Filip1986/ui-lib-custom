@@ -17,9 +17,12 @@ This document governs every `.html` template file in this **Angular 21 component
 7. [Native Interactive Primitives](#7-native-interactive-primitives)
 8. [Content Projection](#8-content-projection)
 9. [Template Performance](#9-template-performance)
-10. [What NOT To Do](#10-what-not-to-do)
-11. [Review Checklist](#11-review-checklist)
-12. [ESLint Template Rules Reference](#12-eslint-template-rules-reference)
+10. [Responsive Images](#10-responsive-images)
+11. [HTML5 Form Input Types](#11-html5-form-input-types)
+12. [What NOT To Do](#12-what-not-to-do)
+13. [Review Checklist](#13-review-checklist)
+14. [ESLint Template Rules Reference](#14-eslint-template-rules-reference)
+15. [AI-Assisted Review Workflow](#15-ai-assisted-review-workflow)
 
 ---
 
@@ -323,23 +326,136 @@ Projected nodes are always instantiated by the parent regardless of `@if` on the
 
 ---
 
-## 10. What NOT To Do
+## 10. Responsive Images
 
-| Anti-pattern | Why | Alternative |
-|---|---|---|
-| `<div>`/`<span>` for interactive elements | No keyboard behaviour, no semantics | `<button>` or `<a href>` |
-| `*ngIf` / `*ngFor` | Legacy, banned by ESLint | `@if` / `@for` |
-| Hard-coding `<h1>`–`<h3>` in a library component | Breaks the consumer's page outline | Configurable heading level or `aria-labelledby` |
-| Decorative icons without `aria-hidden="true"` | Screen reader reads SVG paths as content | Add `aria-hidden="true"` |
-| Interactive icon without `aria-label` | No accessible name | Expose `label` input |
-| Incomplete ARIA widget pattern | Keyboard users cannot operate the widget | Follow WAI-ARIA design patterns |
-| `ng-content` inside `@if` | Does not gate projection | CSS visibility pattern |
-| Positional slot names (`[top-left]`) | Breaks when layout changes | Semantic slot names (`[uilib-card-actions]`) |
-| Missing `disabled` in host binding | Consumer's form state not reflected | `[attr.aria-disabled]` + `[attr.disabled]` in host |
+Library components that render `<img>` elements must support `srcset` and `sizes` to serve appropriately sized images to consumers.
+
+### Expose `srcset` and `sizes` as inputs
+
+```typescript
+readonly src     = input.required<string>();
+readonly srcset  = input<string>();
+readonly sizes   = input<string>();
+readonly alt     = input.required<string>();
+readonly width   = input<number>();
+readonly height  = input<number>();
+```
+
+```html
+<!-- ✅ Library component — passes all responsive attributes through -->
+<img
+  [src]="src()"
+  [attr.srcset]="srcset() || null"
+  [attr.sizes]="sizes() || null"
+  [alt]="alt()"
+  [attr.width]="width() || null"
+  [attr.height]="height() || null"
+  loading="lazy"
+/>
+```
+
+### LCP / hero image variant
+
+Expose a `priority` input to allow consumers to signal that this image is the LCP candidate:
+
+```typescript
+readonly priority = input<boolean>(false);
+```
+
+```html
+<img
+  [src]="src()"
+  [attr.srcset]="srcset() || null"
+  [attr.sizes]="sizes() || null"
+  [alt]="alt()"
+  [attr.loading]="priority() ? 'eager' : 'lazy'"
+  [attr.fetchpriority]="priority() ? 'high' : null"
+/>
+```
+
+Consumer usage:
+
+```html
+<!-- ✅ Consumer marks hero image as priority -->
+<uilib-image
+  src="hero-1200.jpg"
+  srcset="hero-600.jpg 600w, hero-1200.jpg 1200w"
+  sizes="100vw"
+  alt="Platform dashboard overview"
+  [priority]="true"
+/>
+```
 
 ---
 
-## 11. Review Checklist
+## 11. HTML5 Form Input Types
+
+Library form input components must pass through all standard HTML5 `type` values via a `type` input. Do not hard-code `type="text"`.
+
+```typescript
+readonly type = input<string>('text');
+```
+
+```html
+<!-- ✅ Forwarded to the native input -->
+<input
+  [id]="id()"
+  [type]="type()"
+  [attr.aria-invalid]="invalid() || null"
+  [attr.aria-describedby]="errorId() || null"
+/>
+```
+
+Supported types the library input should handle gracefully:
+
+| Type | Browser provides | Consumers use for |
+|---|---|---|
+| `type="email"` | Email validation, `@` keyboard on mobile | Email fields |
+| `type="url"` | URL validation | URL fields |
+| `type="tel"` | Phone keyboard on mobile | Phone number inputs |
+| `type="number"` | Numeric keyboard, min/max, step | Quantity, age, price |
+| `type="date"` | Date picker, ISO date value | Date fields |
+| `type="search"` | Clear button, search semantics | Search inputs |
+| `type="password"` | Masked input, reveal toggle | Password fields |
+
+### Forwarding number-specific attributes
+
+When `type="number"`, also forward `min`, `max`, and `step`:
+
+```typescript
+readonly min  = input<number | null>(null);
+readonly max  = input<number | null>(null);
+readonly step = input<number | null>(null);
+```
+
+```html
+<input
+  [type]="type()"
+  [attr.min]="min()"
+  [attr.max]="max()"
+  [attr.step]="step()"
+/>
+```
+
+---
+
+## 12. What NOT To Do
+
+| Anti-pattern                                     | Why                                      | Alternative                                        |
+|--------------------------------------------------|------------------------------------------|----------------------------------------------------|
+| `<div>`/`<span>` for interactive elements        | No keyboard behaviour, no semantics      | `<button>` or `<a href>`                           |
+| `*ngIf` / `*ngFor`                               | Legacy, banned by ESLint                 | `@if` / `@for`                                     |
+| Hard-coding `<h1>`–`<h3>` in a library component | Breaks the consumer's page outline       | Configurable heading level or `aria-labelledby`    |
+| Decorative icons without `aria-hidden="true"`    | Screen reader reads SVG paths as content | Add `aria-hidden="true"`                           |
+| Interactive icon without `aria-label`            | No accessible name                       | Expose `label` input                               |
+| Incomplete ARIA widget pattern                   | Keyboard users cannot operate the widget | Follow WAI-ARIA design patterns                    |
+| `ng-content` inside `@if`                        | Does not gate projection                 | CSS visibility pattern                             |
+| Positional slot names (`[top-left]`)             | Breaks when layout changes               | Semantic slot names (`[uilib-card-actions]`)       |
+| Missing `disabled` in host binding               | Consumer's form state not reflected      | `[attr.aria-disabled]` + `[attr.disabled]` in host |
+
+---
+
+## 13. Review Checklist
 
 ### Semantic structure
 - [ ] Correct element used: `<button>` for actions, `<a href>` for navigation, `<ul>`/`<li>` for lists
@@ -366,34 +482,69 @@ Projected nodes are always instantiated by the parent regardless of `@if` on the
 ### Images
 - [ ] `alt` text populated (decorative icons: `aria-hidden="true"`)
 - [ ] `width` and `height` present on `<img>` elements
+- [ ] `srcset` and `sizes` forwarded as inputs; `priority` input controls `loading`/`fetchpriority`
 
 ---
 
-## 12. ESLint Template Rules Reference
+## 14. ESLint Template Rules Reference
 
 Rules enforced automatically via `eslint.config.mjs`:
 
-| Rule | Enforces | Severity |
-|---|---|---|
-| `@angular-eslint/template/alt-text` | Alt text on images | error |
-| `@angular-eslint/template/elements-content` | Non-empty interactive elements | error |
-| `@angular-eslint/template/label-has-associated-control` | Label/input association | error |
-| `@angular-eslint/template/no-positive-tabindex` | No `tabindex > 0` | error |
-| `@angular-eslint/template/valid-aria` | Valid ARIA attributes | error |
-| `@angular-eslint/template/role-has-required-aria` | ARIA roles have required props | error |
-| `@angular-eslint/template/prefer-control-flow` | `@if`/`@for` over `*ngIf`/`*ngFor` | error |
-| `@angular-eslint/template/click-events-have-key-events` | Click → keyboard equivalent | warn |
-| `@angular-eslint/template/mouse-events-have-key-events` | Mouse → keyboard equivalent | warn |
-| `@angular-eslint/template/interactive-supports-focus` | Interactive elements are focusable | warn |
-| `@angular-eslint/template/no-autofocus` | No autofocus attribute | warn |
-| `@angular-eslint/template/use-track-by-function` | `@for` has `track` | warn |
-| `@angular-eslint/template/prefer-self-closing-tags` | Self-closing tag syntax | warn |
+| Rule                                                    | Enforces                           | Severity |
+|---------------------------------------------------------|------------------------------------|----------|
+| `@angular-eslint/template/alt-text`                     | Alt text on images                 | error    |
+| `@angular-eslint/template/elements-content`             | Non-empty interactive elements     | error    |
+| `@angular-eslint/template/label-has-associated-control` | Label/input association            | error    |
+| `@angular-eslint/template/no-positive-tabindex`         | No `tabindex > 0`                  | error    |
+| `@angular-eslint/template/valid-aria`                   | Valid ARIA attributes              | error    |
+| `@angular-eslint/template/role-has-required-aria`       | ARIA roles have required props     | error    |
+| `@angular-eslint/template/prefer-control-flow`          | `@if`/`@for` over `*ngIf`/`*ngFor` | error    |
+| `@angular-eslint/template/click-events-have-key-events` | Click → keyboard equivalent        | warn     |
+| `@angular-eslint/template/mouse-events-have-key-events` | Mouse → keyboard equivalent        | warn     |
+| `@angular-eslint/template/interactive-supports-focus`   | Interactive elements are focusable | warn     |
+| `@angular-eslint/template/no-autofocus`                 | No autofocus attribute             | warn     |
+| `@angular-eslint/template/use-track-by-function`        | `@for` has `track`                 | warn     |
+| `@angular-eslint/template/prefer-self-closing-tags`     | Self-closing tag syntax            | warn     |
 
 Run: `npm run lint` to check all templates.
 
 ---
 
-*Last reviewed: 2026-05-24 — Initial document.*
+## 15. AI-Assisted Review Workflow
+
+### Library component audit prompt
+
+```
+Audit this Angular component library template for:
+1. Semantic HTML correctness — is the right element used? No hard-coded h1–h3?
+2. Accessibility — ARIA role declared with all required properties? Every interactive element labelled?
+3. Keyboard interaction — does it follow the WAI-ARIA design pattern for this widget type?
+4. Angular template best practices — @if/@for/track, no method calls, self-closing tags
+5. Content projection — is ng-content ever inside @if (it shouldn't be)?
+6. Image handling — srcset/sizes/priority inputs exposed correctly?
+7. Form inputs — type forwarded? min/max/step available where applicable?
+
+For each issue: [SEVERITY] Category — what's wrong, why it matters, concrete fix.
+```
+
+### ARIA correctness check prompt
+
+```
+Review the ARIA usage in this library component template.
+
+Check:
+- Is ARIA redundant (native element already provides the role/state)?
+- Is ARIA incorrect (wrong role, missing required child roles)?
+- Is ARIA incomplete (expanded without controls, labelledby pointing to missing id)?
+- Is keyboard interaction complete for the implied ARIA role?
+- Are consumers required to add ARIA context — and is that documented in the component API?
+
+Suggest removals where native HTML does the job better.
+```
+
+---
+
+*Last reviewed: 2026-05-24 — Added §10 Responsive Images, §11 HTML5 Form Input Types, §15 AI-Assisted Review Workflow.*
 
 ## See also
 

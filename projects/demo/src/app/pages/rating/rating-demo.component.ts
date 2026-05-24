@@ -134,7 +134,7 @@ export class RatingDemoComponent {
     readonly reactiveForms: string;
   } = {
     import: `import { Rating } from 'ui-lib-custom/rating';`,
-    basic: `<ui-lib-rating [(ngModel)]="rating" (change)="onRatingChange($event)" />`,
+    basic: `<ui-lib-rating [(ngModel)]="rating" (ratingChange)="onRatingChange($event)" />`,
     preSelected: `<ui-lib-rating [(ngModel)]="rating" />
 <!-- initialise rating to 3: public rating: number | null = 3; -->`,
     noCancel: `<ui-lib-rating [(ngModel)]="rating" [cancel]="false" />`,
@@ -151,8 +151,8 @@ export class RatingDemoComponent {
   [(ngModel)]="rating"
   (rate)="onRate($event)"
   (cleared)="onCleared()"
-  (focus)="onFocus()"
-  (blur)="onBlur()"
+  (ratingFocus)="onFocus()"
+  (ratingBlur)="onBlur()"
 />`,
     customTemplates: `<ui-lib-rating [(ngModel)]="rating" [cancel]="false">
   <ng-template #onicon>❤️</ng-template>
@@ -474,7 +474,7 @@ export class RatingDemoComponent {
 
   public readonly apiOutputRows: ApiPropRow[] = [
     {
-      name: 'change',
+      name: 'ratingChange',
       type: 'RatingChangeEvent',
       description:
         'Emitted on every value change, including clears. Value is <code>number | null</code>.',
@@ -490,7 +490,11 @@ export class RatingDemoComponent {
       description:
         'Emitted when the rating is cleared via cancel button, toggle-deselect, or Delete key.',
     },
-    { name: 'focus', type: 'FocusEvent', description: 'Emitted when any star receives focus.' },
-    { name: 'blur', type: 'FocusEvent', description: 'Emitted when any star loses focus.' },
+    {
+      name: 'ratingFocus',
+      type: 'FocusEvent',
+      description: 'Emitted when any star receives focus.',
+    },
+    { name: 'ratingBlur', type: 'FocusEvent', description: 'Emitted when any star loses focus.' },
   ];
 }
