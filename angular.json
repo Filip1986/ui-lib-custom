@@ -73,8 +73,7 @@
               }
             ],
             "styles": [
-              "projects/demo/src/styles.scss",
-              "projects/ui-lib-custom/src/lib/themes/themes.scss"
+              "projects/demo/src/styles.scss"
             ]
           },
           "configurations": {

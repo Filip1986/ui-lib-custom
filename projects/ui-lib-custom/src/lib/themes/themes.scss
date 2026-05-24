@@ -7,13 +7,26 @@
  * wins — zero-specificity-cost theming without !important.
  *
  * Layer order (lowest → highest priority):
+ *   uilib.base       — consumer CSS resets / normalizations
  *   uilib.tokens     — design tokens / CSS custom properties
  *   uilib.components — component structural & variant styles
+ *
+ * CONSUMER RESET RULE: wrap * { margin:0; padding:0 } in @layer uilib.base
+ * so it does NOT override component padding/margin in uilib.components.
+ * Unlayered html/body app styles always win over all layers (correct behaviour).
  *
  * high-contrast.scss (forced-colors overrides) is intentionally
  * kept OUTSIDE any layer so it always overrides layered styles.
  * ============================================================ */
-@layer uilib.tokens, uilib.components;
+// Layer order (lowest → highest priority within the uilib namespace):
+//   uilib.base       — consumer CSS resets / normalizations (lowest)
+//   uilib.tokens     — global design tokens (CSS custom properties on :root)
+//   uilib.components — component structural & variant styles
+//
+// Rule: add @layer uilib.base { } to any CSS reset in your app so that
+// the reset does NOT accidentally override component padding/margin values.
+// Unlayered consumer CSS (e.g. html/body overrides) always wins over all layers.
+@layer uilib.base, uilib.tokens, uilib.components;
 
 @layer uilib.tokens {
   /* ============================================================

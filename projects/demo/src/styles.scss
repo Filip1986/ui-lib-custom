@@ -1,6 +1,14 @@
 /* Global SCSS Styles */
 
+// themes.scss is loaded first via angular.json — it establishes:
+//   @layer uilib.base, uilib.tokens, uilib.components;
+// We @use it here too so its Sass module is available and its CSS inlines
+// BEFORE the component @use blocks below (maintaining correct layer priority).
 @use '../../ui-lib-custom/src/lib/themes/themes.scss' as *;
+
+// These component SCSS files are wrapped in @layer uilib.components { }.
+// Because themes.scss is @use'd above first, uilib.components is already
+// established at the correct priority BEFORE these blocks append to it.
 @use '../../ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss';
 @use '../../ui-lib-custom/src/lib/ripple/ripple.scss';
 @use '../../ui-lib-custom/src/lib/tooltip/tooltip.scss';
@@ -19,13 +27,27 @@ $font-family-base:
   'Segoe UI Emoji',
   'Segoe UI Symbol';
 
-// Global Reset
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+// ─────────────────────────────────────────────────────────────────────────────
+// CSS Reset — wrapped in uilib.base so it does NOT override library component
+// padding/margin values (uilib.base < uilib.tokens < uilib.components in priority).
+//
+// WHY: after @layer adoption, any *unlayered* CSS beats all layered styles.
+// Before @layer: * { padding:0 } had specificity (0,0,0) and lost to class selectors
+// (0,1,0). After @layer: unlayered * would beat all @layer uilib.components rules.
+// Wrapping in uilib.base (lowest layer) restores the original intent.
+// ─────────────────────────────────────────────────────────────────────────────
+@layer uilib.base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
+// App-level defaults — intentionally UNLAYERED so they override library tokens
+// (e.g. the app's font-family takes global precedence over any layered default).
 html,
 body {
   height: 100%;

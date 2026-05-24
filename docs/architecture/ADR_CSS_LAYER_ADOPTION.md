@@ -28,17 +28,39 @@ Adopt **CSS Cascade Layers** (`@layer`) across the entire library.
 
 ### Layer namespace
 
-All library styles are placed inside a two-level `uilib` namespace:
+All library styles are placed inside a three-level `uilib` namespace:
 
 ```css
 /* Declared once in themes.scss — the authoritative source of truth */
-@layer uilib.tokens, uilib.components;
+@layer uilib.base, uilib.tokens, uilib.components;
 ```
 
-| Sub-layer | Contents | File(s) |
-|---|---|---|
-| `uilib.tokens` | Global design tokens (CSS custom properties on `:root`, `[data-theme]`, `[data-density]`, typography mapping) | `themes.scss` |
-| `uilib.components` | Every component SCSS file (host tokens, structural styles, variant overrides) | All `*.scss` under `src/lib/**` except `high-contrast.scss` |
+| Sub-layer | Priority | Contents | File(s) |
+|---|---|---|---|
+| `uilib.base` | Lowest | Reserved for consumer CSS resets / normalizations | Consumer `styles.scss` |
+| `uilib.tokens` | Middle | Global design tokens (CSS custom properties on `:root`, `[data-theme]`, `[data-density]`, typography mapping) | `themes.scss` |
+| `uilib.components` | Highest (among layers) | Every component SCSS file (host tokens, structural styles, variant overrides) | All `*.scss` under `src/lib/**` except `high-contrast.scss` |
+
+### The consumer reset pattern
+
+Any app-level CSS reset (`* { margin: 0; padding: 0 }`) **must** be placed in `@layer uilib.base`:
+
+```css
+/* Consumer styles.scss — correct pattern */
+@layer uilib.base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+```
+
+**Why this matters:** Before `@layer` adoption, a universal selector `*` with specificity `(0,0,0)` naturally lost to component class selectors `(0,1,0)`. After `@layer` adoption, any **unlayered** CSS beats all layered styles regardless of specificity — so `* { padding: 0 }` would zero out every component's padding. Wrapping the reset in `uilib.base` (the lowest-priority layer) restores the original behavior.
+
+App-level `html` / `body` overrides that are **intentional** consumer overrides (global font-family, background colour) should remain **unlayered** so they beat all library defaults.
 
 ### Exception: high-contrast.scss
 

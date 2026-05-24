@@ -483,13 +483,14 @@ not optional for any component.
 ### Layer hierarchy
 
 ```
-@layer uilib.tokens, uilib.components;
+@layer uilib.base, uilib.tokens, uilib.components;
 ```
 
-| Layer | Contents | Why |
-|---|---|---|
-| `uilib.tokens` | `themes.scss` — all `:root` / `[data-theme]` CSS custom properties | Lowest priority; consumer token overrides always win |
-| `uilib.components` | Every component `.scss` file | Component styles; consumer class overrides always win |
+| Layer | Priority | Contents | Why |
+|---|---|---|---|
+| `uilib.base` | Lowest | Consumer CSS resets / normalizations | Resets should not override component padding/margin |
+| `uilib.tokens` | Middle | `themes.scss` — all `:root` / `[data-theme]` CSS custom properties | Tokens below component styles; component-level tokens win |
+| `uilib.components` | Highest (layered) | Every component `.scss` file | Component styles; unlayered consumer overrides always win |
 
 The declaration `@layer uilib.tokens, uilib.components;` lives **only** in `themes.scss`.
 Consumers who load `themes.scss` get the declaration automatically; they do not need to declare it themselves.
@@ -532,6 +533,30 @@ ui-lib-my-component {
   display: block;
 }
 ```
+
+### Consumer reset rule (CRITICAL)
+
+Any app-level CSS reset (`* { margin: 0; padding: 0 }`) **must** be placed in `@layer uilib.base`:
+
+```scss
+/* Consumer app styles.scss */
+@use 'ui-lib-custom/themes/themes.scss' as *;  // establishes layer order first
+
+@layer uilib.base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+/* html/body app-level defaults stay unlayered — intentionally beat all library layers */
+html, body { font-family: var(--uilib-font-ui, sans-serif); }
+```
+
+**Why this is necessary:** Before `@layer`, a `*` reset had specificity `(0,0,0)` and naturally lost to component class selectors `(0,1,0)`. After `@layer`, any *unlayered* author CSS beats every layered rule regardless of specificity. An unlayered `* { padding: 0 }` would zero out every component's padding. Wrapping in `uilib.base` (lowest priority) restores the pre-`@layer` behaviour.
 
 ### Exception: high-contrast.scss
 
