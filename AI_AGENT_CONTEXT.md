@@ -82,6 +82,21 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-24 [SCSS token cleanup — component-scoped tokens, :root removal, :host fix, task list cleared]
+Changed:
+  badge.scss: added --uilib-badge-radius / --uilib-badge-radius-pill / --uilib-badge-radius-dot intermediate
+    tokens; pill now defaults to 9999px, dot to 50%, both still inherit from --uilib-shape-base
+  animate-on-scroll.scss: removed :root { --uilib-animate-on-scroll-* } block; moved token defaults
+    onto a grouped .uilib-aos-* selector so they're scoped to the elements that consume them
+  editor.scss: replaced all 25 :host(.ui-lib-editor--*) selectors with ui-lib-editor.ui-lib-editor--*
+    — :host() is a no-op under ViewEncapsulation.None; state/variant/size rules were previously inert
+  Task list: #2 #3 #4 #5 #6 #7 all marked completed (task #5 / _theme-mixins.scss was already deleted;
+    tasks #6 and #7 were shipped in prior sessions)
+State: 25/25 badge + 45/45 editor tests pass; ng build → PASS; typecheck → PASS; eslint → 0 warnings
+Verification: node_modules/.bin/jest.cmd --testPathPatterns="badge" (25/25); --testPathPatterns="editor" (45/45); ng build (PASS); git push → pre-push typecheck PASS
+Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows; pipe | in --testPathPatterns breaks on cmd, run patterns separately
+Next step: Task #1 (in_progress) — Refactor themes.scss: extract universal tokens, add radius/shadow globals, deduplicate dark block
+
 Date: 2026-05-24 [CSS @layer adoption — full library wrapped in named cascade layers + ADR + docs + competitive tracking page]
 Changed:
   themes.scss: @layer uilib.tokens, uilib.components; declaration added; entire file wrapped in @layer uilib.tokens { }

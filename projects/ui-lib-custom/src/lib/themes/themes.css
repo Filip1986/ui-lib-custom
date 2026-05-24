@@ -1,448 +1,717 @@
-:root,
-[data-theme='light'] {
-  /* Core palette */
-  --uilib-color-primary-100: #bbdefb;
-  --uilib-color-primary-500: #2196f3;
-  --uilib-color-primary-600: #1e88e5;
-  --uilib-color-primary-700: #1976d2;
-
-  --uilib-color-secondary-50: #f5f5f5;
-  --uilib-color-secondary-100: #eeeeee;
-  --uilib-color-secondary-600: #757575;
-  --uilib-color-secondary-700: #616161;
-
-  --uilib-color-success-50: #e8f5e9;
-  --uilib-color-success-600: #43a047;
-  --uilib-color-success-700: #388e3c;
-
-  --uilib-color-danger-50: #ffebee;
-  --uilib-color-danger-600: #e53935;
-  --uilib-color-danger-700: #d32f2f;
-
-  --uilib-color-warning-50: #fff3e0;
-  --uilib-color-warning-600: #fb8c00;
-  --uilib-color-warning-700: #f57c00;
-
-  --uilib-color-info-50: #e1f5fe;
-  --uilib-color-info-600: #039be5;
-  --uilib-color-info-700: #0288d1;
-
-  --uilib-color-neutral-50: #fafafa;
-  --uilib-color-neutral-75: #f5f5f5;
-  --uilib-color-neutral-100: #f0f0f0;
-  --uilib-color-neutral-200: #e0e0e0;
-  --uilib-color-neutral-300: #d6d6d6;
-  --uilib-color-neutral-400: #bdbdbd;
-  --uilib-color-neutral-900: #212121;
-
-  --uilib-touch-size-min: 44px;
-  --uilib-density-scale-y: 1;
-
-  --uilib-button-padding-x-small-base: 1rem;
-  --uilib-button-padding-y-small-base: 0.5rem;
-  --uilib-button-padding-x-medium-base: 2rem;
-  --uilib-button-padding-y-medium-base: 1rem;
-  --uilib-button-padding-x-large-base: 3rem;
-  --uilib-button-padding-y-large-base: 1.5rem;
-  --uilib-button-gap-base: 0.5rem;
-  --uilib-button-min-height: var(--uilib-touch-size-min);
-
-  --uilib-card-padding-base: 1rem;
-  --uilib-card-header-padding-base: 0.5rem;
-  --uilib-card-body-padding-base: 1rem;
-  --uilib-card-footer-padding-base: 0.5rem;
-
-  --uilib-input-padding-x-base: 0.5rem;
-  --uilib-input-padding-y-base: 1rem;
-  --uilib-input-min-height: var(--uilib-touch-size-min);
-
-  --uilib-badge-padding-y-base: 0.25rem;
-  --uilib-badge-padding-x-base: 0.5rem;
-
-  --uilib-toolbar-height-base: 3rem;
-  --uilib-toolbar-padding-y-base: 0.5rem;
-  --uilib-toolbar-padding-x-base: 0.75rem;
-  --uilib-toolbar-height: max(
-    var(--uilib-touch-size-min),
-    calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
-  );
-  --uilib-toolbar-padding-y: calc(
-    var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
-
-  --uilib-table-row-height-base: 3rem;
-  --uilib-table-row-height: max(
-    var(--uilib-touch-size-min),
-    calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
-  );
-
-  --uilib-list-item-padding-y-base: 0.75rem;
-  --uilib-list-item-padding-x-base: 0.75rem;
-  --uilib-list-item-padding-y: calc(
-    var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
-  --uilib-list-item-min-height: var(--uilib-touch-size-min);
-
-  /* Spacing scale aliases */
-  --uilib-space-xs: 0.25rem;
-  --uilib-space-sm: 0.5rem;
-  --uilib-space-md: 1rem;
-  --uilib-space-lg: 1.5rem;
-  --uilib-space-xl: 2rem;
-  --uilib-space-2xl: 3rem;
-
-  /* Spacing (EightShapes) */
-  --uilib-inset-xs: 0.25rem;
-  --uilib-inset-sm: 0.5rem;
-  --uilib-inset-md: 1rem;
-  --uilib-inset-lg: 1.5rem;
-  --uilib-inset-xl: 2rem;
-
-  --uilib-squish-xs: 0.25rem 0.5rem;
-  --uilib-squish-sm: 0.5rem 1rem;
-  --uilib-squish-md: 1rem 2rem;
-  --uilib-squish-lg: 1.5rem 3rem;
-  --uilib-squish-xl: 2rem 4rem;
-
-  --uilib-stretch-xs: 0.5rem 0.25rem;
-  --uilib-stretch-sm: 1rem 0.5rem;
-  --uilib-stretch-md: 2rem 1rem;
-  --uilib-stretch-lg: 3rem 1.5rem;
-  --uilib-stretch-xl: 4rem 2rem;
-
-  --uilib-stack-xs: 0.25rem;
-  --uilib-stack-sm: 0.5rem;
-  --uilib-stack-md: 1rem;
-  --uilib-stack-lg: 1.5rem;
-  --uilib-stack-xl: 2rem;
-
-  /* Component spacing */
-  --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
-  --uilib-button-padding-y-small: calc(
-    var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
-  --uilib-button-padding-y-medium: calc(
-    var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
-  --uilib-button-padding-y-large: calc(
-    var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-button-gap: var(--uilib-button-gap-base);
-  --uilib-button-padding-small: 0.25rem 0.75rem;
-  --uilib-button-padding-medium: 0.5rem 1rem;
-  --uilib-button-padding-large: 0.75rem 1.25rem;
-  --uilib-button-font-size-small: 0.875rem;
-  --uilib-button-font-size-medium: 1rem;
-  --uilib-button-font-size-large: 1.125rem;
-  --uilib-button-radius: var(--uilib-radius-md);
-
-  --uilib-card-padding: var(--uilib-card-padding-base);
-  --uilib-card-header-padding: var(--uilib-card-header-padding-base);
-  --uilib-card-body-padding: var(--uilib-card-body-padding-base);
-  --uilib-card-footer-padding: var(--uilib-card-footer-padding-base);
-
-  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y));
-  --uilib-input-padding-x: var(--uilib-input-padding-x-base);
-
-  --uilib-badge-padding-y: var(--uilib-badge-padding-y-base);
-  --uilib-badge-padding-x: var(--uilib-badge-padding-x-base);
-
-  /* Surfaces & text */
-  --uilib-page-bg: #f7f7f9;
-  --uilib-page-fg: #1f2933;
-  --uilib-surface: #ffffff;
-  --uilib-surface-alt: #f1f3f5;
-  --uilib-border: var(--uilib-color-neutral-200);
-  --uilib-muted: #5f6c80;
-
-  /* Topbar */
-  --uilib-topbar-bg: #ffffff;
-  --uilib-topbar-border: var(--uilib-color-neutral-200);
-  --uilib-topbar-fg: #495057;
-  --uilib-topbar-hover: #f8f9fa;
-  --uilib-topbar-accent: var(--uilib-color-primary-600);
-
-  /* Buttons */
-  --uilib-button-primary-bg: var(--uilib-color-primary-600);
-  --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
-  --uilib-button-primary-bg-active: var(--uilib-color-primary-700);
-  --uilib-button-primary-border: var(--uilib-color-primary-600);
-  --uilib-button-primary-fg: #fff;
-
-  --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
-  --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
-  --uilib-button-secondary-bg-active: var(--uilib-color-secondary-700);
-  --uilib-button-secondary-border: var(--uilib-color-secondary-600);
-  --uilib-button-secondary-fg: #fff;
-
-  --uilib-button-success-bg: var(--uilib-color-success-600);
-  --uilib-button-success-bg-hover: var(--uilib-color-success-700);
-  --uilib-button-success-bg-active: var(--uilib-color-success-700);
-  --uilib-button-success-border: var(--uilib-color-success-600);
-  --uilib-button-success-fg: #fff;
-
-  --uilib-button-danger-bg: var(--uilib-color-danger-600);
-  --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
-  --uilib-button-danger-bg-active: var(--uilib-color-danger-700);
-  --uilib-button-danger-border: var(--uilib-color-danger-600);
-  --uilib-button-danger-fg: #fff;
-
-  --uilib-button-warning-bg: var(--uilib-color-warning-600);
-  --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
-  --uilib-button-warning-bg-active: var(--uilib-color-warning-700);
-  --uilib-button-warning-border: var(--uilib-color-warning-600);
-  --uilib-button-warning-fg: #000;
-
-  /* Cards */
-  --uilib-card-bg: #fff;
-  --uilib-card-text-color: var(--uilib-color-neutral-900);
-  --uilib-card-border: var(--uilib-color-neutral-200);
-  --uilib-card-header-bg: var(--uilib-surface-alt);
-  --uilib-card-footer-bg: var(--uilib-surface-alt);
-  --uilib-card-radius: var(--uilib-radius-lg);
-  --uilib-card-border-width: 0;
-  --uilib-card-shadow-none: none;
-  --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.12);
-  --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.2);
-  --uilib-card-shadow: var(--uilib-card-shadow-medium);
-  --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
-
-  /* Tabs */
-  --uilib-tabs-bg: var(--uilib-surface);
-  --uilib-tabs-border: var(--uilib-border);
-  --uilib-tabs-indicator-color: var(--uilib-color-primary-600);
-  --uilib-tabs-indicator-height: 2px;
-  --uilib-tabs-color: var(--uilib-page-fg);
-  --uilib-tabs-color-active: var(--uilib-color-primary-700);
-  --uilib-tabs-color-disabled: var(--uilib-muted);
-  --uilib-tabs-padding-x: var(--uilib-space-md);
-  --uilib-tabs-padding-y: var(--uilib-space-sm);
-}
-
-[data-theme='dark'] {
-  --uilib-color-primary-100: #1a3d5f;
-  --uilib-color-primary-500: #1e88e5;
-  --uilib-color-primary-600: #1565c0;
-  --uilib-color-primary-700: #0d47a1;
-
-  --uilib-color-secondary-50: #2c2c2c;
-  --uilib-color-secondary-100: #3a3a3a;
-  --uilib-color-secondary-600: #9e9e9e;
-  --uilib-color-secondary-700: #bdbdbd;
-
-  --uilib-color-success-50: #1b5e20;
-  --uilib-color-success-600: #2e7d32;
-  --uilib-color-success-700: #43a047;
-
-  --uilib-color-danger-50: #3b0f0f;
-  --uilib-color-danger-600: #c62828;
-  --uilib-color-danger-700: #e53935;
-
-  --uilib-color-warning-50: #4a2a00;
-  --uilib-color-warning-600: #ef6c00;
-  --uilib-color-warning-700: #fb8c00;
-
-  --uilib-color-info-50: #0a2a3a;
-  --uilib-color-info-600: #0277bd;
-  --uilib-color-info-700: #039be5;
-
-  --uilib-color-neutral-50: #1c1c1c;
-  --uilib-color-neutral-75: #242424;
-  --uilib-color-neutral-100: #2a2a2a;
-  --uilib-color-neutral-200: #3a3a3a;
-  --uilib-color-neutral-300: #4a4a4a;
-  --uilib-color-neutral-400: #5a5a5a;
-  --uilib-color-neutral-900: #f5f5f5;
-
-  --uilib-touch-size-min: 44px;
-  --uilib-density-scale-y: 1;
-
-  --uilib-button-padding-x-small-base: 1rem;
-  --uilib-button-padding-y-small-base: 0.5rem;
-  --uilib-button-padding-x-medium-base: 2rem;
-  --uilib-button-padding-y-medium-base: 1rem;
-  --uilib-button-padding-x-large-base: 3rem;
-  --uilib-button-padding-y-large-base: 1.5rem;
-  --uilib-button-gap-base: 0.5rem;
-  --uilib-button-min-height: var(--uilib-touch-size-min);
-
-  --uilib-card-padding-base: 1rem;
-  --uilib-card-header-padding-base: 0.5rem;
-  --uilib-card-body-padding-base: 1rem;
-  --uilib-card-footer-padding-base: 0.5rem;
-
-  --uilib-input-padding-x-base: 0.5rem;
-  --uilib-input-padding-y-base: 1rem;
-  --uilib-input-min-height: var(--uilib-touch-size-min);
-
-  --uilib-badge-padding-y-base: 0.25rem;
-  --uilib-badge-padding-x-base: 0.5rem;
-
-  --uilib-toolbar-height-base: 3rem;
-  --uilib-toolbar-padding-y-base: 0.5rem;
-  --uilib-toolbar-padding-x-base: 0.75rem;
-  --uilib-toolbar-height: max(
-    var(--uilib-touch-size-min),
-    calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
-  );
-  --uilib-toolbar-padding-y: calc(
-    var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
-
-  --uilib-table-row-height-base: 3rem;
-  --uilib-table-row-height: max(
-    var(--uilib-touch-size-min),
-    calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
-  );
-
-  --uilib-list-item-padding-y-base: 0.75rem;
-  --uilib-list-item-padding-x-base: 0.75rem;
-  --uilib-list-item-padding-y: calc(
-    var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
-  --uilib-list-item-min-height: var(--uilib-touch-size-min);
-
-  /* Spacing scale aliases */
-  --uilib-space-xs: 0.25rem;
-  --uilib-space-sm: 0.5rem;
-  --uilib-space-md: 1rem;
-  --uilib-space-lg: 1.5rem;
-  --uilib-space-xl: 2rem;
-  --uilib-space-2xl: 3rem;
-
-  /* Spacing (EightShapes) */
-  --uilib-inset-xs: 0.25rem;
-  --uilib-inset-sm: 0.5rem;
-  --uilib-inset-md: 1rem;
-  --uilib-inset-lg: 1.5rem;
-  --uilib-inset-xl: 2rem;
-
-  --uilib-squish-xs: 0.25rem 0.5rem;
-  --uilib-squish-sm: 0.5rem 1rem;
-  --uilib-squish-md: 1rem 2rem;
-  --uilib-squish-lg: 1.5rem 3rem;
-  --uilib-squish-xl: 2rem 4rem;
-
-  --uilib-stretch-xs: 0.5rem 0.25rem;
-  --uilib-stretch-sm: 1rem 0.5rem;
-  --uilib-stretch-md: 2rem 1rem;
-  --uilib-stretch-lg: 3rem 1.5rem;
-  --uilib-stretch-xl: 4rem 2rem;
-
-  --uilib-stack-xs: 0.25rem;
-  --uilib-stack-sm: 0.5rem;
-  --uilib-stack-md: 1rem;
-  --uilib-stack-lg: 1.5rem;
-  --uilib-stack-xl: 2rem;
-
-  /* Component spacing */
-  --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
-  --uilib-button-padding-y-small: calc(
-    var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
-  --uilib-button-padding-y-medium: calc(
-    var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
-  --uilib-button-padding-y-large: calc(
-    var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
-  );
-  --uilib-button-gap: var(--uilib-button-gap-base);
-  --uilib-button-padding-small: 0.25rem 0.75rem;
-  --uilib-button-padding-medium: 0.5rem 1rem;
-  --uilib-button-padding-large: 0.75rem 1.25rem;
-  --uilib-button-font-size-small: 0.875rem;
-  --uilib-button-font-size-medium: 1rem;
-  --uilib-button-font-size-large: 1.125rem;
-  --uilib-button-radius: var(--uilib-radius-md);
-
-  --uilib-card-padding: var(--uilib-card-padding-base);
-  --uilib-card-header-padding: var(--uilib-card-header-padding-base);
-  --uilib-card-body-padding: var(--uilib-card-body-padding-base);
-  --uilib-card-footer-padding: var(--uilib-card-footer-padding-base);
-
-  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y));
-  --uilib-input-padding-x: var(--uilib-input-padding-x-base);
-
-  --uilib-badge-padding-y: var(--uilib-badge-padding-y-base);
-  --uilib-badge-padding-x: var(--uilib-badge-padding-x-base);
-
-  /* Surfaces & text */
-  --uilib-page-bg: #101214;
-  --uilib-page-fg: #e6e8eb;
-  --uilib-surface: #1a1c1f;
-  --uilib-surface-alt: #22262b;
-  --uilib-border: var(--uilib-color-neutral-300);
-  --uilib-muted: #9aa4b5;
-
-  /* Topbar */
-  --uilib-topbar-bg: #1f2226;
-  --uilib-topbar-border: var(--uilib-color-neutral-300);
-  --uilib-topbar-fg: #e6e8eb;
-  --uilib-topbar-hover: #262a30;
-  --uilib-topbar-accent: var(--uilib-color-primary-500);
-
-  /* Buttons */
-  --uilib-button-primary-bg: var(--uilib-color-primary-600);
-  --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
-  --uilib-button-primary-bg-active: var(--uilib-color-primary-700);
-  --uilib-button-primary-border: var(--uilib-color-primary-600);
-  --uilib-button-primary-fg: #fff;
-
-  --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
-  --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
-  --uilib-button-secondary-bg-active: var(--uilib-color-secondary-700);
-  --uilib-button-secondary-border: var(--uilib-color-secondary-600);
-  --uilib-button-secondary-fg: #fff;
-
-  --uilib-button-success-bg: var(--uilib-color-success-600);
-  --uilib-button-success-bg-hover: var(--uilib-color-success-700);
-  --uilib-button-success-bg-active: var(--uilib-color-success-700);
-  --uilib-button-success-border: var(--uilib-color-success-600);
-  --uilib-button-success-fg: #fff;
-
-  --uilib-button-danger-bg: var(--uilib-color-danger-600);
-  --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
-  --uilib-button-danger-bg-active: var(--uilib-color-danger-700);
-  --uilib-button-danger-border: var(--uilib-color-danger-600);
-  --uilib-button-danger-fg: #fff;
-
-  --uilib-button-warning-bg: var(--uilib-color-warning-600);
-  --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
-  --uilib-button-warning-bg-active: var(--uilib-color-warning-700);
-  --uilib-button-warning-border: var(--uilib-color-warning-600);
-  --uilib-button-warning-fg: #000;
-
-  --uilib-card-bg: #1f1f1f;
-  --uilib-card-text-color: var(--uilib-color-neutral-900);
-  --uilib-card-border: var(--uilib-color-neutral-300);
-  --uilib-card-header-bg: var(--uilib-surface-alt);
-  --uilib-card-footer-bg: var(--uilib-surface-alt);
-  --uilib-card-radius: var(--uilib-radius-lg);
-  --uilib-card-border-width: 0;
-  --uilib-card-shadow-none: none;
-  --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.25);
-  --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.35);
-  --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.45);
-  --uilib-card-shadow: var(--uilib-card-shadow-medium);
-  --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
-
-  /* Tabs */
-  --uilib-tabs-bg: var(--uilib-surface);
-  --uilib-tabs-border: var(--uilib-color-neutral-400);
-  --uilib-tabs-indicator-color: var(--uilib-color-primary-500);
-  --uilib-tabs-indicator-height: 2px;
-  --uilib-tabs-color: var(--uilib-page-fg);
-  --uilib-tabs-color-active: var(--uilib-color-primary-500);
-  --uilib-tabs-color-disabled: var(--uilib-muted);
-  --uilib-tabs-padding-x: var(--uilib-space-md);
-  --uilib-tabs-padding-y: var(--uilib-space-sm);
-}
+/* ============================================================
+ * CASCADE LAYER REGISTRATION
+ * Layer order (lowest → highest priority):
+ *   uilib.base       — consumer CSS resets / normalizations
+ *   uilib.tokens     — design tokens / CSS custom properties
+ *   uilib.components — component structural & variant styles
+ *
+ * CONSUMER RESET RULE: wrap * { margin:0; padding:0 } in @layer uilib.base
+ * so it does NOT override component padding/margin in uilib.components.
+ * Unlayered html/body app styles always win over all layers.
+ * ============================================================ */
+@layer uilib.base, uilib.tokens, uilib.components;
+
+@layer uilib.tokens {
+  /* ============================================================
+   * 1. UNIVERSAL TOKENS — colour-scheme independent
+   *    Edit here once; both light and dark inherit automatically.
+   * ============================================================ */
+  :root {
+    /* ---- Shape ---- */
+    --uilib-shape-base: 6px;
+    --uilib-shape-pill: 9999px;
+
+    /* ---- Border-radius scale ---- */
+    --uilib-radius-sm: 4px;
+    --uilib-radius-md: var(--uilib-shape-base, 6px);
+    --uilib-radius-lg: 8px;
+    --uilib-radius-xl: 12px;
+    --uilib-radius-full: var(--uilib-shape-pill, 9999px);
+
+    /* ---- Density ---- */
+    --uilib-density: 1;
+    --uilib-touch-size-min: 44px;
+    --uilib-density-scale-y: 1;
+
+    /* ---- Spacing scale ---- */
+    --uilib-space-1: 0.25rem;
+    --uilib-space-2: 0.5rem;
+    --uilib-space-3: 0.75rem;
+    --uilib-space-4: 1rem;
+    --uilib-space-5: 1.25rem;
+
+    /* Semantic aliases */
+    --uilib-space-xs: 0.25rem;
+    --uilib-space-sm: 0.5rem;
+    --uilib-space-md: 1rem;
+    --uilib-space-lg: 1.5rem;
+    --uilib-space-xl: 2rem;
+    --uilib-space-2xl: 3rem;
+
+    --uilib-inline-xs: 0.25rem;
+    --uilib-inline-sm: 0.5rem;
+    --uilib-inline-md: 1rem;
+    --uilib-inline-lg: 1.5rem;
+    --uilib-inline-xl: 2rem;
+
+    --uilib-inset-xs: 0.25rem;
+    --uilib-inset-sm: 0.5rem;
+    --uilib-inset-md: 1rem;
+    --uilib-inset-lg: 1.5rem;
+    --uilib-inset-xl: 2rem;
+
+    --uilib-squish-xs: 0.25rem 0.5rem;
+    --uilib-squish-sm: 0.5rem 1rem;
+    --uilib-squish-md: 1rem 2rem;
+    --uilib-squish-lg: 1.5rem 3rem;
+    --uilib-squish-xl: 2rem 4rem;
+
+    --uilib-stretch-xs: 0.5rem 0.25rem;
+    --uilib-stretch-sm: 1rem 0.5rem;
+    --uilib-stretch-md: 2rem 1rem;
+    --uilib-stretch-lg: 3rem 1.5rem;
+    --uilib-stretch-xl: 4rem 2rem;
+
+    --uilib-stack-xs: 0.25rem;
+    --uilib-stack-sm: 0.5rem;
+    --uilib-stack-md: 1rem;
+    --uilib-stack-lg: 1.5rem;
+    --uilib-stack-xl: 2rem;
+
+    /* ---- Font-size scale ---- */
+    --uilib-font-size-xs: 0.75rem;
+    --uilib-font-size-sm: 0.875rem;
+    --uilib-font-size-md: 1rem;
+    --uilib-font-size-lg: 1.25rem;
+    --uilib-font-size-xl: 1.5rem;
+
+    /* ---- Typography (stacks and weights — no colours) ---- */
+    --uilib-font-heading: 'Inter', 'Segoe UI', sans-serif;
+    --uilib-font-body: 'Inter', 'Segoe UI', sans-serif;
+    --uilib-font-ui: 'Inter', 'Segoe UI', sans-serif;
+    --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+      monospace;
+    --uilib-font-heading-weight: 600;
+    --uilib-font-body-weight: 400;
+
+    /* ---- Icon sizes ---- */
+    --uilib-icon-size-xs: 0.75rem;
+    --uilib-icon-size-sm: 1rem;
+    --uilib-icon-size-md: 1.25rem;
+    --uilib-icon-size-lg: 1.5rem;
+    --uilib-icon-size-xl: 2rem;
+    --uilib-icon-size-2xl: 2.5rem;
+    --uilib-icon-color: currentColor;
+
+    /* ---- Transitions ---- */
+    --uilib-transition-fast: 150ms ease;
+    --uilib-transition-duration: 250ms;
+    --uilib-icon-transition: var(--uilib-transition-fast);
+
+    /* ---- Component dimension bases (density-independent) ---- */
+    --uilib-button-padding-x-small-base: 1rem;
+    --uilib-button-padding-y-small-base: 0.5rem;
+    --uilib-button-padding-x-medium-base: 2rem;
+    --uilib-button-padding-y-medium-base: 1rem;
+    --uilib-button-padding-x-large-base: 3rem;
+    --uilib-button-padding-y-large-base: 1.5rem;
+    --uilib-button-gap-base: 0.5rem;
+    --uilib-button-min-height: var(--uilib-touch-size-min);
+
+    --uilib-card-padding-base: 1rem;
+    --uilib-card-header-padding-base: 0.75rem 1rem;
+    --uilib-card-body-padding-base: 1rem;
+    --uilib-card-footer-padding-base: 0.5rem;
+
+    --uilib-input-padding-x-base: 0.5rem;
+    --uilib-input-padding-y-base: 1rem;
+    --uilib-input-min-height: var(--uilib-touch-size-min);
+
+    --uilib-badge-padding-y-base: 0.25rem;
+    --uilib-badge-padding-x-base: 0.5rem;
+
+    --uilib-toolbar-height-base: 3rem;
+    --uilib-toolbar-padding-y-base: 0.5rem;
+    --uilib-toolbar-padding-x-base: 0.75rem;
+    --uilib-toolbar-height: max(
+      var(--uilib-touch-size-min),
+      calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
+    );
+    --uilib-toolbar-padding-y: calc(
+      var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
+    );
+    --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
+
+    --uilib-table-row-height-base: 3rem;
+    --uilib-table-row-height: max(
+      var(--uilib-touch-size-min),
+      calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
+    );
+
+    --uilib-list-item-padding-y-base: 0.75rem;
+    --uilib-list-item-padding-x-base: 0.75rem;
+    --uilib-list-item-padding-y: calc(
+      var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
+    );
+    --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
+    --uilib-list-item-min-height: var(--uilib-touch-size-min);
+
+    /* ---- Component spacing computed (density-driven) ---- */
+    --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
+    --uilib-button-padding-y-small: calc(
+      var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
+    );
+    --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
+    --uilib-button-padding-y-medium: calc(
+      var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
+    );
+    --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
+    --uilib-button-padding-y-large: calc(
+      var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
+    );
+    --uilib-button-gap: var(--uilib-button-gap-base);
+    --uilib-button-padding-small: 0.25rem 0.75rem;
+    --uilib-button-padding-medium: 0.5rem 1rem;
+    --uilib-button-padding-large: 0.75rem 1.25rem;
+    --uilib-button-font-size-small: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-button-font-size-medium: var(--uilib-font-size-md, 1rem);
+    --uilib-button-font-size-large: var(--uilib-font-size-lg, 1.25rem);
+    --uilib-button-radius: var(--uilib-radius-md);
+
+    --uilib-card-padding: var(--uilib-card-padding-base);
+    --uilib-card-header-padding: var(--uilib-card-header-padding-base);
+    --uilib-card-body-padding: var(--uilib-card-body-padding-base);
+    --uilib-card-footer-padding: var(--uilib-card-footer-padding-base);
+    --uilib-card-radius: var(--uilib-radius-lg);
+    --uilib-card-border-width: 0;
+
+    --uilib-input-padding-y: calc(
+      var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y)
+    );
+    --uilib-input-padding-x: var(--uilib-input-padding-x-base);
+
+    --uilib-badge-padding-y: var(--uilib-badge-padding-y-base);
+    --uilib-badge-padding-x: var(--uilib-badge-padding-x-base);
+
+    --uilib-tabs-indicator-height: 2px;
+    --uilib-tabs-padding-x: var(--uilib-space-md);
+    --uilib-tabs-padding-y: var(--uilib-space-sm);
+  }
+
+  /* ============================================================
+   * 2. LIGHT THEME TOKENS
+   *    Applied to :root (default) and explicitly to
+   *    [data-theme='light'] for forced light mode.
+   * ============================================================ */
+  :root,
+  [data-theme='light'] {
+    /* ---- Core palette ---- */
+    --uilib-color-primary-100: #bbdefb;
+    --uilib-color-primary-500: #2196f3;
+    --uilib-color-primary-600: #1e88e5;
+    --uilib-color-primary-700: #1976d2;
+
+    --uilib-color-secondary-50: #f5f5f5;
+    --uilib-color-secondary-100: #eeeeee;
+    --uilib-color-secondary-600: #757575;
+    --uilib-color-secondary-700: #616161;
+
+    --uilib-color-success-50: #e8f5e9;
+    --uilib-color-success-600: #43a047;
+    --uilib-color-success-700: #388e3c;
+
+    --uilib-color-danger-50: #ffebee;
+    --uilib-color-danger-600: #e53935;
+    --uilib-color-danger-700: #d32f2f;
+
+    --uilib-color-warning-50: #fff3e0;
+    --uilib-color-warning-600: #fb8c00;
+    --uilib-color-warning-700: #f57c00;
+
+    --uilib-color-info-50: #e1f5fe;
+    --uilib-color-info-600: #039be5;
+    --uilib-color-info-700: #0288d1;
+
+    --uilib-color-neutral-50: #fafafa;
+    --uilib-color-neutral-75: #f5f5f5;
+    --uilib-color-neutral-100: #f0f0f0;
+    --uilib-color-neutral-200: #e0e0e0;
+    --uilib-color-neutral-300: #d6d6d6;
+    --uilib-color-neutral-400: #bdbdbd;
+    --uilib-color-neutral-900: #212121;
+
+    /* ---- Surfaces & text ---- */
+    --uilib-page-bg: #f7f7f9;
+    --uilib-page-bg-alt: #ffffff;
+    --uilib-page-fg: #1f2933;
+    --uilib-surface: #ffffff;
+    --uilib-surface-alt: #f1f3f5;
+    --uilib-border: var(--uilib-color-neutral-200);
+    --uilib-border-light: var(--uilib-color-neutral-100);
+    --uilib-muted: #5f6c80;
+    --uilib-text-secondary: #5f6c80;
+    --uilib-text-disabled: #9aa4b5;
+
+    /* ---- Focus ring ---- */
+    --uilib-focus-ring: 0 0 0 3px rgba(25, 118, 210, 0.3);
+    --uilib-focus-ring-color: var(--uilib-color-primary-600);
+
+    /* ---- Shadows ---- */
+    --uilib-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16);
+    --uilib-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    /* ---- Topbar ---- */
+    --uilib-topbar-bg: #ffffff;
+    --uilib-topbar-border: var(--uilib-color-neutral-200);
+    --uilib-topbar-fg: #495057;
+    --uilib-topbar-hover: #f8f9fa;
+    --uilib-topbar-accent: var(--uilib-color-primary-600);
+
+    /* ---- Buttons ---- */
+    --uilib-button-primary-bg: var(--uilib-color-primary-600);
+    --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
+    --uilib-button-primary-bg-active: var(--uilib-color-primary-700);
+    --uilib-button-primary-border: var(--uilib-color-primary-600);
+    --uilib-button-primary-fg: #fff;
+
+    --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
+    --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
+    --uilib-button-secondary-bg-active: var(--uilib-color-secondary-700);
+    --uilib-button-secondary-border: var(--uilib-color-secondary-600);
+    --uilib-button-secondary-fg: #fff;
+
+    --uilib-button-success-bg: var(--uilib-color-success-600);
+    --uilib-button-success-bg-hover: var(--uilib-color-success-700);
+    --uilib-button-success-bg-active: var(--uilib-color-success-700);
+    --uilib-button-success-border: var(--uilib-color-success-600);
+    --uilib-button-success-fg: #fff;
+
+    --uilib-button-danger-bg: var(--uilib-color-danger-600);
+    --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
+    --uilib-button-danger-bg-active: var(--uilib-color-danger-700);
+    --uilib-button-danger-border: var(--uilib-color-danger-600);
+    --uilib-button-danger-fg: #fff;
+
+    --uilib-button-warning-bg: var(--uilib-color-warning-600);
+    --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
+    --uilib-button-warning-bg-active: var(--uilib-color-warning-700);
+    --uilib-button-warning-border: var(--uilib-color-warning-600);
+    --uilib-button-warning-fg: #000;
+
+    --uilib-button-ghost-hover-bg: rgba(0, 0, 0, 0.04);
+    --uilib-button-ghost-active-bg: rgba(0, 0, 0, 0.08);
+
+    /* ---- Cards ---- */
+    --uilib-card-bg: #ffffff;
+    --uilib-card-bg-hover: #f1f3f5;
+    --uilib-card-text-color: var(--uilib-color-neutral-900);
+    --uilib-card-border: var(--uilib-color-neutral-200);
+    --uilib-card-header-bg: var(--uilib-surface-alt);
+    --uilib-card-footer-bg: var(--uilib-surface-alt);
+    --uilib-card-shadow-none: none;
+    --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --uilib-card-shadow: var(--uilib-card-shadow-medium);
+    --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
+
+    /* ---- Dialog ---- */
+    --uilib-dialog-shadow-material: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
+      0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --uilib-dialog-border-bootstrap: rgba(0, 0, 0, 0.175);
+    --uilib-dialog-border-minimal: var(--uilib-border);
+    --uilib-dialog-action-hover-material: rgba(0, 0, 0, 0.08);
+    --uilib-overlay-backdrop-bg: var(--uilib-color-neutral-900);
+    --uilib-overlay-backdrop-opacity: 0.5;
+
+    /* ---- Inputs ---- */
+    --uilib-input-bg: #ffffff;
+    --uilib-input-border: rgba(0, 0, 0, 0.12);
+    --uilib-input-border-hover: rgba(0, 0, 0, 0.2);
+    --uilib-input-border-focus: var(--uilib-color-primary-600);
+    --uilib-input-placeholder: rgba(0, 0, 0, 0.38);
+
+    /* ---- Select ---- */
+    --uilib-select-bg: #ffffff;
+    --uilib-select-border: rgba(0, 0, 0, 0.12);
+    --uilib-select-dropdown-bg: #ffffff;
+    --uilib-select-option-hover: rgba(0, 0, 0, 0.04);
+    --uilib-select-option-selected: rgba(25, 118, 210, 0.12);
+
+    /* ---- Checkbox ---- */
+    --uilib-checkbox-bg: transparent;
+    --uilib-checkbox-border: rgba(0, 0, 0, 0.6);
+    --uilib-checkbox-bg-checked: var(--uilib-color-primary-600);
+
+    /* ---- Accordion ---- */
+    --uilib-accordion-bg: #ffffff;
+    --uilib-accordion-header-bg: #f1f3f5;
+    --uilib-accordion-header-bg-hover: #e9ecef;
+    --uilib-accordion-border: rgba(0, 0, 0, 0.12);
+
+    /* ---- Tabs ---- */
+    --uilib-tabs-bg: var(--uilib-surface);
+    --uilib-tabs-border: rgba(0, 0, 0, 0.12);
+    --uilib-tabs-indicator: var(--uilib-color-primary-600);
+    --uilib-tabs-indicator-color: var(--uilib-color-primary-600);
+    --uilib-tab-hover-bg: rgba(0, 0, 0, 0.04);
+    --uilib-tabs-color: var(--uilib-page-fg);
+    --uilib-tabs-color-active: var(--uilib-color-primary-700);
+    --uilib-tabs-color-disabled: var(--uilib-muted);
+
+    /* ---- Badge ---- */
+    --uilib-badge-subtle-bg: rgba(0, 0, 0, 0.06);
+  }
+
+  /* ============================================================
+   * 3. DARK THEME TOKENS — OVERRIDES ONLY
+   *    Only values that differ from light. Universal tokens
+   *    (spacing, typography, transitions) are NOT repeated here.
+   *
+   *    AUTHORING NOTE: keep [data-theme='dark'] and the
+   *    @media block below in sync — edit both when adding tokens.
+   * ============================================================ */
+  [data-theme='dark'] {
+    /* ---- Core palette overrides ---- */
+    --uilib-color-primary-100: #1a3d5f;
+    --uilib-color-primary-500: #1e88e5;
+    --uilib-color-primary-600: #1565c0;
+    --uilib-color-primary-700: #0d47a1;
+
+    --uilib-color-secondary-50: #2c2c2c;
+    --uilib-color-secondary-100: #3a3a3a;
+    --uilib-color-secondary-600: #9e9e9e;
+    --uilib-color-secondary-700: #bdbdbd;
+
+    --uilib-color-success-50: #1b5e20;
+    --uilib-color-success-600: #2e7d32;
+    --uilib-color-success-700: #43a047;
+
+    --uilib-color-danger-50: #3b0f0f;
+    --uilib-color-danger-600: #c62828;
+    --uilib-color-danger-700: #e53935;
+
+    --uilib-color-warning-50: #4a2a00;
+    --uilib-color-warning-600: #ef6c00;
+    --uilib-color-warning-700: #fb8c00;
+
+    --uilib-color-info-50: #0a2a3a;
+    --uilib-color-info-600: #0277bd;
+    --uilib-color-info-700: #039be5;
+
+    --uilib-color-neutral-50: #1c1c1c;
+    --uilib-color-neutral-75: #242424;
+    --uilib-color-neutral-100: #2a2a2a;
+    --uilib-color-neutral-200: #3a3a3a;
+    --uilib-color-neutral-300: #4a4a4a;
+    --uilib-color-neutral-400: #5a5a5a;
+    --uilib-color-neutral-900: #f5f5f5;
+
+    /* ---- Surfaces & text overrides ---- */
+    --uilib-page-bg: #101214;
+    --uilib-page-bg-alt: #1a1c1f;
+    --uilib-page-fg: #e6e8eb;
+    --uilib-surface: #1a1c1f;
+    --uilib-surface-alt: #22262b;
+    --uilib-border: var(--uilib-color-neutral-300);
+    --uilib-border-light: var(--uilib-color-neutral-200);
+    --uilib-muted: #9aa4b5;
+    --uilib-text-secondary: #9aa4b5;
+    --uilib-text-disabled: #5a6474;
+
+    /* ---- Focus ring overrides ---- */
+    --uilib-focus-ring: 0 0 0 3px rgba(144, 202, 249, 0.4);
+    --uilib-focus-ring-color: #90caf9;
+
+    /* ---- Shadow overrides (more opaque in dark) ---- */
+    --uilib-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --uilib-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+    /* ---- Topbar overrides ---- */
+    --uilib-topbar-bg: #1f2226;
+    --uilib-topbar-border: var(--uilib-color-neutral-300);
+    --uilib-topbar-fg: #e6e8eb;
+    --uilib-topbar-hover: #262a30;
+    --uilib-topbar-accent: var(--uilib-color-primary-500);
+
+    /* ---- Button overrides ---- */
+    --uilib-button-primary-bg: #1565c0;
+    --uilib-button-primary-bg-hover: #0d47a1;
+    --uilib-button-primary-bg-active: #0d47a1;
+    --uilib-button-primary-border: #1565c0;
+    --uilib-button-primary-fg: #fff;
+
+    --uilib-button-secondary-bg: #424242;
+    --uilib-button-secondary-bg-hover: #4a4a4a;
+    --uilib-button-secondary-bg-active: #4a4a4a;
+    --uilib-button-secondary-border: rgba(255, 255, 255, 0.12);
+    --uilib-button-secondary-fg: rgba(255, 255, 255, 0.87);
+
+    --uilib-button-ghost-hover-bg: rgba(255, 255, 255, 0.06);
+    --uilib-button-ghost-active-bg: rgba(255, 255, 255, 0.1);
+
+    /* ---- Card overrides ---- */
+    --uilib-card-bg: #22262b;
+    --uilib-card-bg-hover: #2a2f36;
+    --uilib-card-text-color: rgba(255, 255, 255, 0.87);
+    --uilib-card-border: rgba(255, 255, 255, 0.12);
+    --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.25);
+    --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+    /* ---- Dialog overrides ---- */
+    --uilib-dialog-shadow-material: 0 11px 15px -7px rgba(0, 0, 0, 0.55),
+      0 24px 38px 3px rgba(0, 0, 0, 0.4), 0 9px 46px 8px rgba(0, 0, 0, 0.35);
+    --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
+    --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --uilib-dialog-border-bootstrap: rgba(255, 255, 255, 0.12);
+    --uilib-dialog-border-minimal: rgba(255, 255, 255, 0.12);
+    --uilib-dialog-action-hover-material: rgba(255, 255, 255, 0.08);
+    --uilib-overlay-backdrop-opacity: 0.56;
+
+    /* ---- Input overrides ---- */
+    --uilib-input-bg: #1a1c1f;
+    --uilib-input-border: rgba(255, 255, 255, 0.12);
+    --uilib-input-border-hover: rgba(255, 255, 255, 0.2);
+    --uilib-input-placeholder: rgba(255, 255, 255, 0.38);
+
+    /* ---- Select overrides ---- */
+    --uilib-select-bg: #1a1c1f;
+    --uilib-select-border: rgba(255, 255, 255, 0.12);
+    --uilib-select-dropdown-bg: #22262b;
+    --uilib-select-option-hover: rgba(255, 255, 255, 0.06);
+
+    /* ---- Checkbox overrides ---- */
+    --uilib-checkbox-border: rgba(255, 255, 255, 0.6);
+
+    /* ---- Accordion overrides ---- */
+    --uilib-accordion-bg: #1a1c1f;
+    --uilib-accordion-header-bg: #22262b;
+    --uilib-accordion-header-bg-hover: #2a2f36;
+    --uilib-accordion-border: rgba(255, 255, 255, 0.12);
+
+    /* ---- Tabs overrides ---- */
+    --uilib-tabs-border: rgba(255, 255, 255, 0.12);
+    --uilib-tabs-indicator: var(--uilib-color-primary-500);
+    --uilib-tabs-indicator-color: var(--uilib-color-primary-500);
+    --uilib-tab-hover-bg: rgba(255, 255, 255, 0.06);
+    --uilib-tabs-color-active: var(--uilib-color-primary-500);
+
+    /* ---- Badge overrides ---- */
+    --uilib-badge-subtle-bg: rgba(255, 255, 255, 0.08);
+
+    /* ---- Legacy dark surface scale ---- */
+    --uilib-surface-dark-0: #101214;
+    --uilib-surface-dark-1: #1a1c1f;
+    --uilib-surface-dark-2: #22262b;
+    --uilib-surface-dark-3: #2a2f36;
+    --uilib-surface-dark-4: #2f353c;
+    --uilib-surface-dark-5: #343b44;
+    --uilib-text-dark-primary: rgba(255, 255, 255, 0.87);
+    --uilib-text-dark-secondary: rgba(255, 255, 255, 0.6);
+    --uilib-text-dark-disabled: rgba(255, 255, 255, 0.38);
+    --uilib-border-dark: rgba(255, 255, 255, 0.12);
+    --uilib-border-dark-light: rgba(255, 255, 255, 0.08);
+    --uilib-color-primary-dark: #90caf9;
+  }
+
+  /* ============================================================
+   * 3b. OS DARK MODE FALLBACK
+   *    Identical to section 3 — fires when the user's OS is set
+   *    to dark mode but no explicit data-theme attribute is set.
+   *    Keep in sync with [data-theme='dark'] above.
+   * ============================================================ */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']):not([data-theme]) {
+      --uilib-color-primary-100: #1a3d5f;
+      --uilib-color-primary-500: #1e88e5;
+      --uilib-color-primary-600: #1565c0;
+      --uilib-color-primary-700: #0d47a1;
+
+      --uilib-color-secondary-50: #2c2c2c;
+      --uilib-color-secondary-100: #3a3a3a;
+      --uilib-color-secondary-600: #9e9e9e;
+      --uilib-color-secondary-700: #bdbdbd;
+
+      --uilib-color-success-50: #1b5e20;
+      --uilib-color-success-600: #2e7d32;
+      --uilib-color-success-700: #43a047;
+
+      --uilib-color-danger-50: #3b0f0f;
+      --uilib-color-danger-600: #c62828;
+      --uilib-color-danger-700: #e53935;
+
+      --uilib-color-warning-50: #4a2a00;
+      --uilib-color-warning-600: #ef6c00;
+      --uilib-color-warning-700: #fb8c00;
+
+      --uilib-color-info-50: #0a2a3a;
+      --uilib-color-info-600: #0277bd;
+      --uilib-color-info-700: #039be5;
+
+      --uilib-color-neutral-50: #1c1c1c;
+      --uilib-color-neutral-75: #242424;
+      --uilib-color-neutral-100: #2a2a2a;
+      --uilib-color-neutral-200: #3a3a3a;
+      --uilib-color-neutral-300: #4a4a4a;
+      --uilib-color-neutral-400: #5a5a5a;
+      --uilib-color-neutral-900: #f5f5f5;
+
+      --uilib-page-bg: #101214;
+      --uilib-page-bg-alt: #1a1c1f;
+      --uilib-page-fg: #e6e8eb;
+      --uilib-surface: #1a1c1f;
+      --uilib-surface-alt: #22262b;
+      --uilib-border: var(--uilib-color-neutral-300);
+      --uilib-border-light: var(--uilib-color-neutral-200);
+      --uilib-muted: #9aa4b5;
+      --uilib-text-secondary: #9aa4b5;
+      --uilib-text-disabled: #5a6474;
+
+      --uilib-focus-ring: 0 0 0 3px rgba(144, 202, 249, 0.4);
+      --uilib-focus-ring-color: #90caf9;
+
+      --uilib-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+      --uilib-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+      --uilib-topbar-bg: #1f2226;
+      --uilib-topbar-border: var(--uilib-color-neutral-300);
+      --uilib-topbar-fg: #e6e8eb;
+      --uilib-topbar-hover: #262a30;
+      --uilib-topbar-accent: var(--uilib-color-primary-500);
+
+      --uilib-button-primary-bg: #1565c0;
+      --uilib-button-primary-bg-hover: #0d47a1;
+      --uilib-button-primary-bg-active: #0d47a1;
+      --uilib-button-primary-border: #1565c0;
+      --uilib-button-primary-fg: #fff;
+      --uilib-button-secondary-bg: #424242;
+      --uilib-button-secondary-bg-hover: #4a4a4a;
+      --uilib-button-secondary-bg-active: #4a4a4a;
+      --uilib-button-secondary-border: rgba(255, 255, 255, 0.12);
+      --uilib-button-secondary-fg: rgba(255, 255, 255, 0.87);
+      --uilib-button-ghost-hover-bg: rgba(255, 255, 255, 0.06);
+      --uilib-button-ghost-active-bg: rgba(255, 255, 255, 0.1);
+
+      --uilib-card-bg: #22262b;
+      --uilib-card-bg-hover: #2a2f36;
+      --uilib-card-text-color: rgba(255, 255, 255, 0.87);
+      --uilib-card-border: rgba(255, 255, 255, 0.12);
+      --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.25);
+      --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.35);
+      --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+      --uilib-dialog-shadow-material: 0 11px 15px -7px rgba(0, 0, 0, 0.55),
+        0 24px 38px 3px rgba(0, 0, 0, 0.4), 0 9px 46px 8px rgba(0, 0, 0, 0.35);
+      --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
+      --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.35);
+      --uilib-dialog-border-bootstrap: rgba(255, 255, 255, 0.12);
+      --uilib-dialog-border-minimal: rgba(255, 255, 255, 0.12);
+      --uilib-dialog-action-hover-material: rgba(255, 255, 255, 0.08);
+      --uilib-overlay-backdrop-opacity: 0.56;
+
+      --uilib-input-bg: #1a1c1f;
+      --uilib-input-border: rgba(255, 255, 255, 0.12);
+      --uilib-input-border-hover: rgba(255, 255, 255, 0.2);
+      --uilib-input-placeholder: rgba(255, 255, 255, 0.38);
+
+      --uilib-select-bg: #1a1c1f;
+      --uilib-select-border: rgba(255, 255, 255, 0.12);
+      --uilib-select-dropdown-bg: #22262b;
+      --uilib-select-option-hover: rgba(255, 255, 255, 0.06);
+
+      --uilib-checkbox-border: rgba(255, 255, 255, 0.6);
+
+      --uilib-accordion-bg: #1a1c1f;
+      --uilib-accordion-header-bg: #22262b;
+      --uilib-accordion-header-bg-hover: #2a2f36;
+      --uilib-accordion-border: rgba(255, 255, 255, 0.12);
+
+      --uilib-tabs-border: rgba(255, 255, 255, 0.12);
+      --uilib-tabs-indicator: var(--uilib-color-primary-500);
+      --uilib-tabs-indicator-color: var(--uilib-color-primary-500);
+      --uilib-tab-hover-bg: rgba(255, 255, 255, 0.06);
+      --uilib-tabs-color-active: var(--uilib-color-primary-500);
+
+      --uilib-badge-subtle-bg: rgba(255, 255, 255, 0.08);
+
+      --uilib-surface-dark-0: #101214;
+      --uilib-surface-dark-1: #1a1c1f;
+      --uilib-surface-dark-2: #22262b;
+      --uilib-surface-dark-3: #2a2f36;
+      --uilib-surface-dark-4: #2f353c;
+      --uilib-surface-dark-5: #343b44;
+      --uilib-text-dark-primary: rgba(255, 255, 255, 0.87);
+      --uilib-text-dark-secondary: rgba(255, 255, 255, 0.6);
+      --uilib-text-dark-disabled: rgba(255, 255, 255, 0.38);
+      --uilib-border-dark: rgba(255, 255, 255, 0.12);
+      --uilib-border-dark-light: rgba(255, 255, 255, 0.08);
+      --uilib-color-primary-dark: #90caf9;
+    }
+  }
+
+  /* ============================================================
+   * 4. DENSITY SELECTORS
+   * ============================================================ */
+  [data-density='comfortable'] {
+    --uilib-density-scale-y: 0.75;
+  }
+
+  [data-density='compact'] {
+    --uilib-density-scale-y: 0.5;
+  }
+
+  /* ============================================================
+   * 5. BASE TYPOGRAPHY MAPPING
+   * ============================================================ */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .heading {
+    font-family: var(--uilib-font-heading, 'Inter', 'Segoe UI', sans-serif), sans-serif;
+    font-weight: var(--uilib-font-heading-weight, 600);
+  }
+
+  p,
+  .body-text {
+    font-family: var(--uilib-font-body, 'Inter', 'Segoe UI', sans-serif), sans-serif;
+    font-weight: var(--uilib-font-body-weight, 400);
+  }
+
+  button,
+  .ui-lib-button,
+  nav,
+  label,
+  input,
+  select,
+  textarea {
+    font-family: var(--uilib-font-ui, 'Inter', 'Segoe UI', sans-serif), sans-serif;
+  }
+
+  code,
+  pre,
+  .monospace {
+    font-family: var(
+        --uilib-font-mono,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        'Liberation Mono',
+        'Courier New',
+        monospace
+      ),
+      monospace;
+  }
+} /* end @layer uilib.tokens */
