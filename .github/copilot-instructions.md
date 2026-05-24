@@ -123,13 +123,91 @@ npm run lint:css:ci     # CI mode — zero warnings
 
 ---
 
+## §3c HTML / Template Standards
+
+> Full reference, examples, and review checklist: [`docs/standards/HTML-STANDARDS.md`](../docs/standards/HTML-STANDARDS.md)
+
+### Semantic HTML in components
+
+- `<button type="button">` for actions — never `<div>` or `<span>`
+- `<a href>` for navigation — never `<button>` for links
+- Data grids: `<table>`, `<th scope="col/row">`, `<td>` — never `<div>` nests
+- Lists of options: `<ul>` + `<li>` or ARIA `role="listbox"` / `role="option"` as appropriate
+- **No `<h1>`–`<h3>` hard-coded** in library components — heading level must be configurable or use `aria-labelledby`
+
+### Angular template rules
+
+- Block syntax only: `@if` / `@for` / `@switch` — banned by ESLint (`prefer-control-flow: error`)
+- `@for` must have `track` on a stable identity property (`track item.id`)
+- Self-closing tags for all components without projected content: `<uilib-spinner />` not `<uilib-spinner></uilib-spinner>`
+- No method calls in template expressions — `computed()` signals only
+
+### Accessibility (critical for a library)
+
+- Every interactive element must have an accessible label — expose `label` / `ariaLabel` as `input()` when context-dependent
+- ARIA widget roles need **all required properties**: `role="listbox"` needs `aria-label`, `aria-activedescendant`; `role="option"` needs `aria-selected`
+- Keyboard interactions must follow the WAI-ARIA design pattern for the widget type
+- Disabled state: wire **both** `[attr.disabled]` and `[attr.aria-disabled]` in host bindings
+- Decorative icons: `aria-hidden="true"`; standalone icon buttons: `[attr.aria-label]` bound to input
+
+### Native interactive primitives
+
+- **`<details>`/`<summary>`** for simple disclosure/accordion — native, accessible, no JS
+- **`<dialog>`** for modal patterns — provides focus trap, `Escape`, backdrop, `aria-modal` natively
+- **Popover API** (`[attr.popover]`) for non-modal overlays where CDK Overlay is overkill
+
+### Content projection
+
+- `ng-content` inside `@if` does **NOT** gate projection — use CSS visibility pattern instead
+- Slot names must use `uilib-` prefix and describe semantic purpose (not position): `uilib-card-actions` not `bottom-right`
+
+### Images
+
+- `alt` text on all `<img>` elements (informative) or `alt=""` + no `role` (decorative)
+- Always set `width` and `height` on `<img>` to prevent consumer-side CLS
+- Bind dimensions: `[attr.width]="width()" [attr.height]="height()"`
+
+### Linting (template)
+
+```bash
+npm run lint        # ESLint — covers all .ts and .html files
+```
+
+Key template rules active (`error`): `alt-text`, `elements-content`, `label-has-associated-control`, `no-positive-tabindex`, `valid-aria`, `role-has-required-aria`, `prefer-control-flow`
+
+Key template rules active (`warn`): `click-events-have-key-events`, `interactive-supports-focus`, `use-track-by-function`, `prefer-self-closing-tags`
+
+---
+
 ## §4 Pre-Generation Checklist
 
 Before generating code, answer:
+
+**Architecture**
 - [ ] Does this component already exist in `projects/ui-lib-custom/src/lib/`?
 - [ ] Which entry point will it belong to (primary barrel or a secondary entry)?
-- [ ] What are the ARIA roles and keyboard interactions required? (a11y first)
-- [ ] Which design tokens will it consume (`--uilib-*`)?
+- [ ] Will this be added to `public-api.ts`?
+- [ ] Is a Storybook story planned?
+
+**Accessibility (answer before writing HTML)**
+- [ ] What ARIA role does this widget have? What are all required ARIA properties?
+- [ ] What is the complete keyboard interaction pattern (WAI-ARIA design patterns)?
+- [ ] Is label/name exposed as a configurable `input()` for contextual cases?
+- [ ] Is `jest-axe` covered in the spec?
+
+**HTML / Template**
+- [ ] Correct semantic element used — no `<div>`/`<span>` for interactive roles
+- [ ] No `<h1>`–`<h3>` hard-coded — heading level configurable or `aria-labelledby` used
+- [ ] `@if` / `@for` / `@switch` syntax — no `*ngIf` / `*ngFor`
+- [ ] `@for` has `track` on stable identity
+- [ ] Self-closing tags for elements without projected content
+- [ ] No method calls in template expressions — `computed()` used
+- [ ] `ng-content` NOT inside `@if` — CSS visibility pattern used instead
+- [ ] Slot names use `uilib-` prefix and are semantic (not positional)
+- [ ] `<img>` has `alt`, `width`, `height`; icons have `aria-hidden="true"` or `aria-label`
+- [ ] `npm run lint` passes — no new ESLint template errors
+
+**CSS / Styling**
 - [ ] Is `ViewEncapsulation.None` used? (never `Emulated`)
 - [ ] BEM class names all prefixed with `uilib-`? (collision guard)
 - [ ] All colours/font-sizes use `var(--uilib-*)` — no raw hex?
@@ -139,9 +217,6 @@ Before generating code, answer:
 - [ ] Animations use only `transform`/`opacity`; `transition: all` not used?
 - [ ] `@media (prefers-reduced-motion: reduce)` present for every animation?
 - [ ] `npm run lint:css` passes — no new stylelint errors?
-- [ ] Will this be added to `public-api.ts`?
-- [ ] Is a Storybook story planned?
-- [ ] Is `jest-axe` covered in the spec?
 
 ---
 
@@ -239,6 +314,12 @@ chore(deps): update @angular/core to 21.x
 | Export internal types in barrel                 | Keep internal types internal                               |
 | Skip jest-axe in spec                           | Always add a11y assertion                                  |
 | Skip Storybook story                            | Every component needs a story                              |
+| `<div>` or `<span>` for interactive elements    | `<button type="button">` or `<a href>`                     |
+| Hard-coded `<h1>`–`<h3>` in library components  | Configurable heading level input or `aria-labelledby`      |
+| Icon-only button without `aria-label`           | `[attr.aria-label]="label()"` bound from input             |
+| `*ngIf` / `*ngFor` structural directives        | `@if` / `@for` block syntax                                |
+| `ng-content` inside `@if`                       | CSS visibility pattern (`[class.hidden]`)                  |
+| Positional slot names (`[top-left]`)            | Semantic slot names (`uilib-card-actions`)                 |
 
 ---
 
