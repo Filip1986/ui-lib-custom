@@ -372,6 +372,10 @@
     "./syntax-highlighter": {
       "esm2022": "./esm2022/syntax-highlighter/index.mjs",
       "esm": "./esm2022/syntax-highlighter/index.mjs"
+    },
+    "./i18n": {
+      "esm2022": "./esm2022/i18n/index.mjs",
+      "esm": "./esm2022/i18n/index.mjs"
     }
   },
   "typesVersions": {
@@ -621,6 +625,9 @@
       ],
       "syntax-highlighter": [
         "./syntax-highlighter/index.d.ts"
+      ],
+      "i18n": [
+        "./i18n/index.d.ts"
       ]
     }
   }

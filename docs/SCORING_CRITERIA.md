@@ -13,7 +13,7 @@ a competitive benchmark, or a measurable engineering constraint.
 
 ```
 Score = (checked items / total items) × 10   →   rounded to one decimal place
-Gate  = every category must reach ≥ 8.0 before a component is considered production-quality
+Gate  = every category must reach ≥ 8.0 before a component is considered production-quality (12 categories total)
 ```
 
 A score of **8.0** means at least 80 % of the criteria in that category are confirmed true.
@@ -428,6 +428,31 @@ Before scoring any category, know where the standards come from:
 
 ---
 
+## Category 12 — Internationalisation
+
+> **External standards:** Unicode CLDR, W3C Internationalization Activity, WCAG SC 3.1.1 (Language of Page)
+> **Reference:** WAI-ARIA 1.2 §6.6 (translatable strings), Angular i18n Guide
+>
+> This category ensures every component can be used in a multilingual, bidirectional,
+> and culturally diverse product without requiring consumers to patch library internals.
+
+**Score = checked / 12 × 10. Gate: ≥ 10 of 12 checked → score 10.**
+
+- [ ] **LTR/RTL verified** — component renders correctly and without visual breakage under `dir="rtl"` on the host element or an ancestor
+- [ ] **`dir="rtl"` integration test exists** — a Jest or Playwright test explicitly wraps the component in a `dir="rtl"` context and asserts layout correctness
+- [ ] **Pluralisation via `Intl.PluralRules`** — any string the component emits that includes a count (e.g. "3 items selected", "2 errors") uses `Intl.PluralRules` or a token that consumers can override; no hardcoded English plural forms in the source
+- [ ] **Locale-aware date/number/currency** — for components that display dates, numbers, or currency values, formatting uses `Intl.DateTimeFormat` / `Intl.NumberFormat` or accepts a consumer-provided formatter; no `toLocaleDateString()` with no locale argument
+- [ ] **Translation contract documented** — no raw English string literals inside `.ts` or `.html` files that appear in the rendered UI (all user-visible strings are either CSS-only, behind an input, or provided via the i18n service)
+- [ ] **Keyboard shortcuts adapt for non-Latin keyboards** — any component using character shortcuts (type-ahead, single-key triggers) handles non-ASCII inputs gracefully and documents fallback behavior
+- [ ] **`aria-label` is a translatable input** — every icon-only button, landmark, and live region that has a hardcoded `aria-label` in the template exposes it as a component input so consumers can provide a translated string
+- [ ] **ICU message format examples** — if the component emits structured messages (counts, genders, plurals), the README includes an ICU message format example showing how to override it
+- [ ] **Per-component translation key contract documented** — the component README includes a "Internationalisation" section listing every user-visible string with its default English value and the input/token used to override it
+- [ ] **BiDi-safe in mixed-direction text** — the component works correctly inside a page that mixes LTR and RTL content (e.g. an Arabic page with embedded English product codes); no `unicode-bidi: plaintext` issues
+- [ ] **All logical CSS properties confirmed via RTL e2e test** — no physical `left`/`right` properties remain in component SCSS that cause mirroring issues; confirmed by a Playwright screenshot test with `dir="rtl"`
+- [ ] **Screen-reader pronunciation hints propagate** — if the component renders text or labels whose language may differ from the page language, it either accepts a `lang` attribute input or documents how consumers should set it
+
+---
+
 ## Scoring Summary Template
 
 Copy this block into `docs/COMPONENT_SCORES.md` when recording a component result.
@@ -448,6 +473,7 @@ Copy this block into `docs/COMPONENT_SCORES.md` when recording a component resul
 | Angular Integration                 |  /10  |       |
 | Emotional Quality                   |  /10  |       |
 | Competitive Parity & Differentiation|  /10  |       |
+| Internationalisation                |  /10  |       |
 | **Production gate**                 | **all ≥ 8.0** | ✅ Pass / ❌ Fail |
 
 Unchecked items (explicit backlog):

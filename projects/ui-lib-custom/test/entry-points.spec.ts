@@ -98,6 +98,7 @@ import type * as UiLibToolbar from 'ui-lib-custom/toolbar';
 import type * as UiLibAlert from 'ui-lib-custom/alert';
 import type * as UiLibIconButton from 'ui-lib-custom/icon-button';
 import type * as UiLibSyntaxHighlighter from 'ui-lib-custom/syntax-highlighter';
+import type * as UiLibI18n from 'ui-lib-custom/i18n';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -681,5 +682,11 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.highlight).toBeDefined();
     expect(mod.tokenize).toBeDefined();
     expect(mod.escapeForCode).toBeDefined();
+  });
+
+  it('should import from i18n', async (): Promise<void> => {
+    const mod: typeof UiLibI18n = await import('ui-lib-custom/i18n');
+    expect(mod.UiLibI18nService).toBeDefined();
+    expect(mod.UI_LIB_EN).toBeDefined();
   });
 });
