@@ -25,7 +25,18 @@ jobs:
         if: |
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
           steps.metadata.outputs.update-type == 'version-update:semver-minor'
-        run: gh pr merge --auto --squash "$PR_URL"
+        run: |
+          set +e
+          merge_output=$(gh pr merge --auto --squash "$PR_URL" 2>&1)
+          merge_status=$?
+          echo "$merge_output"
+
+          if [ $merge_status -ne 0 ] && [[ "$merge_output" == *"Auto merge is not allowed for this repository"* ]]; then
+            echo "Auto-merge is disabled for this repository. Skipping without failing the workflow."
+            exit 0
+          fi
+
+          exit $merge_status
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
