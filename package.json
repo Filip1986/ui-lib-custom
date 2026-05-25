@@ -32,6 +32,7 @@
     "lint:css": "stylelint \"**/*.{scss,css}\" --allow-empty-input",
     "lint:css:fix": "stylelint \"**/*.{scss,css}\" --allow-empty-input --fix",
     "lint:css:ci": "stylelint \"**/*.{scss,css}\" --allow-empty-input --max-warnings 0",
+    "lint:css:motion": "stylelint \"projects/ui-lib-custom/**/*.scss\" --custom-formatter scripts/motion-formatter.mjs",
     "bundlesize": "bundlesize",
     "postinstall": "husky install",
     "coverage:summary": "node scripts/coverage-summary.js --threshold 90",

@@ -18,6 +18,7 @@ export default {
     'stylelint-scss',
     'stylelint-declaration-strict-value',
     'stylelint-high-performance-animation',
+    './stylelint-plugin/no-unprefixed-motion.mjs',
   ],
 
   rules: {
@@ -103,6 +104,11 @@ export default {
       true,
       { severity: 'warning' },
     ],
+
+    // ── Accessibility: reduced-motion completeness ────────────────────────────
+    // Every SCSS file that applies a non-none transition or animation must also
+    // contain a @media (prefers-reduced-motion: reduce) companion block.
+    'uilib/no-unprefixed-motion': [true, { severity: 'error' }],
 
     // ── Logical properties ────────────────────────────────────────────────────
     'property-disallowed-list': [

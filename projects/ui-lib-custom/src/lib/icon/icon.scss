@@ -21,4 +21,9 @@
       --uilib-icon-color: var(--uilib-text-dark-primary);
     }
   }
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-icon.ui-lib-icon {
+      transition: none;
+    }
+  }
 } // end @layer uilib.components
