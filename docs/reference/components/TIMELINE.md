@@ -1,186 +1,95 @@
 # Timeline
-A data-display component that renders a series of events along a vertical or horizontal axis. Supports custom marker, content, and opposite-side templates via named structural directives, three visual variants, three density sizes, and flexible alignment modes.
+
+**Selector:** `ui-lib-timeline`
+**Entry point:** `import { Timeline } from 'ui-lib-custom/timeline'`
+
 ---
-## Import
-```typescript
-import { TimelineComponent } from 'ui-lib-custom/timeline';
-import {
-  TimelineContentDirective,
-  TimelineMarkerDirective,
-  TimelineOppositeDirective,
-} from 'ui-lib-custom/timeline';
-```
----
-## Basic Usage
+
+## Overview
+
+Monotonic counter for unique Timeline element IDs. */
+let nextTimelineId: number = 0;
+/**Timeline component — renders a series of events along a vertical or horizontal axis.Supports three named template slots via structural directives:- `[uiTimelineMarker]`   — custom dot/icon in the separator track- `[uiTimelineContent]`  — main event body (right/bottom by default)- `[uiTimelineOpposite]` — opposite-side label (left/top by default)@example```html<ui-lib-timeline [value]="events">  <ng-template uiTimelineContent let-event>{{ event.title }}</ng-template></ui-lib-timeline>```
+
+## API
+
+### Inputs
+
+| Name         | Type                     | Default                       | Description                                                                                                                        |
+| ------------ | ------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `align`      | `TimelineAlign`          | `TIMELINE_DEFAULTS.align`     | /**Event alignment within the layout.Vertical: `'left'` | `'right'` | `'alternate'`Horizontal: `'top'` | `'bottom'`/           |
+| `ariaLabel`  | `string`                 | `TIMELINE_DEFAULTS.ariaLabel` | /** Accessible label for the timeline list. */                                                                                     |
+| `layout`     | `TimelineLayout`         | `TIMELINE_DEFAULTS.layout`    | /**Layout orientation.- `'vertical'` (default) — events stacked top-to-bottom- `'horizontal'` — events arranged left-to-right/ |
+| `size`       | `TimelineSize`           | `TIMELINE_DEFAULTS.size`      | /** Component density size. */                                                                                                     |
+| `styleClass` | `string | null`          | `null`                        | /** Additional CSS class(es) to append to the host element. */                                                                     |
+| `variant`    | `TimelineVariant | null` | `null`                        | /**Visual variant override. When `null`, the variant is inherited from `ThemeConfigService`./                                    |
+
+### Outputs
+
+_none_
+
+## Content Projection
+
+_none_
+
+## Theming
+
+| CSS Variable                           | Default                               |
+| -------------------------------------- | ------------------------------------- |
+| `--uilib-timeline-color`               | `var(--uilib-text-color, #1f2937)`    |
+| `--uilib-timeline-connector-color`     | `var(--uilib-border-color, #dee2e6)`  |
+| `--uilib-timeline-connector-width`     | `2px`                                 |
+| `--uilib-timeline-content-gap`         | `1rem`                                |
+| `--uilib-timeline-event-gap`           | `0`                                   |
+| `--uilib-timeline-focus-ring-color`    | `var(--uilib-primary-color, #3b82f6)` |
+| `--uilib-timeline-font-size`           | `1rem`                                |
+| `--uilib-timeline-marker-bg`           | `var(--uilib-primary-color, #3b82f6)` |
+| `--uilib-timeline-marker-border-color` | `var(--uilib-primary-color, #3b82f6)` |
+| `--uilib-timeline-marker-border-width` | `2px`                                 |
+| `--uilib-timeline-marker-size`         | `1.25rem`                             |
+| `--uilib-timeline-opposite-gap`        | `1rem`                                |
+| `--uilib-timeline-opposite-min-width`  | `6rem`                                |
+
+## Accessibility
+
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+
+### Keyboard Interactions
+
+| Test description                                                                        |
+| --------------------------------------------------------------------------------------- |
+| should apply ${variant} variant class                                                   |
+| should expose role=                                                                     |
+| should have role=                                                                       |
+| should include opposite content in aria-labelledby when an opposite template is present |
+| should keep the host and event rows out of the tab order by default                     |
+| should pass axe after reactive layout changes                                           |
+| should pass axe in the default state                                                    |
+| should pass axe with templated horizontal content                                       |
+| should preserve native keyboard access for projected interactive content                |
+| should set aria-label on the host element                                               |
+
+## Usage Examples
+
 ```html
+<!-- vertical timeline with content template -->
 <ui-lib-timeline [value]="events">
   <ng-template uiTimelineContent let-event>
-    <div>
-      <h3>{{ event.status }}</h3>
-      <p>{{ event.description }}</p>
-    </div>
+    <strong>{{ event.title }}</strong>
   </ng-template>
 </ui-lib-timeline>
-```
----
-## API
-### `TimelineComponent<T>`
-#### Inputs
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `value` | `T[]` | **required** | Array of data items to render as timeline events. |
-| `layout` | `TimelineLayout` | `'vertical'` | Orientation: `'vertical'` or `'horizontal'`. |
-| `align` | `TimelineAlign` | `'left'` | Alignment of events relative to the separator track. |
-| `variant` | `TimelineVariant \| null` | `null` | Visual variant override. Falls back to `ThemeConfigService` when `null`. |
-| `size` | `TimelineSize` | `'md'` | Density size: `'sm'`, `'md'`, or `'lg'`. |
-| `styleClass` | `string \| null` | `null` | Additional CSS class(es) appended to the host element. |
-| `ariaLabel` | `string` | `'Timeline'` | Accessible label for the list. |
-#### Template Directive Slots
-| Directive | Selector | Description |
-|---|---|---|
-| `TimelineMarkerDirective` | `[uiTimelineMarker]` | Custom marker/dot rendered in the separator track. Receives the full `TimelineItemContext<T>`. |
-| `TimelineContentDirective` | `[uiTimelineContent]` | Main event body on the content side. Receives the full `TimelineItemContext<T>`. |
-| `TimelineOppositeDirective` | `[uiTimelineOpposite]` | Label rendered on the opposite side of the separator. Receives the full `TimelineItemContext<T>`. |
-#### Template Context (`TimelineItemContext<T>`)
-| Variable | Type | Description |
-|---|---|---|
-| `$implicit` | `T` | The data item for this event. |
-| `index` | `number` | Zero-based index in the `value` array. |
-| `first` | `boolean` | `true` for the first event. |
-| `last` | `boolean` | `true` for the last event. |
-| `even` | `boolean` | `true` when `index` is even. |
-| `odd` | `boolean` | `true` when `index` is odd. |
----
-## Layout Options
-### Vertical (default)
-```html
-<ui-lib-timeline [value]="events" layout="vertical" align="left">
-  ...
-</ui-lib-timeline>
-```
-Valid `align` values for vertical: `'left'` | `'right'` | `'alternate'`
-### Horizontal
-```html
-<ui-lib-timeline [value]="events" layout="horizontal" align="top">
-  ...
-</ui-lib-timeline>
-```
-Valid `align` values for horizontal: `'top'` | `'bottom'`
----
-## Template Slots
-### Content + Opposite
-```html
-<ui-lib-timeline [value]="events" layout="vertical" align="left">
-  <ng-template uiTimelineOpposite let-event>
-    <span>{{ event.date }}</span>
-  </ng-template>
-  <ng-template uiTimelineContent let-event>
-    <strong>{{ event.status }}</strong>
-  </ng-template>
-</ui-lib-timeline>
-```
-### Custom Marker
-```html
-<ui-lib-timeline [value]="events" layout="vertical" align="left">
-  <ng-template uiTimelineMarker let-event>
-    <span class="my-icon">{{ event.icon }}</span>
-  </ng-template>
-  <ng-template uiTimelineContent let-event>
-    <p>{{ event.title }}</p>
-  </ng-template>
-</ui-lib-timeline>
-```
-### Alternate Alignment
-```html
-<ui-lib-timeline [value]="events" layout="vertical" align="alternate">
-  <ng-template uiTimelineOpposite let-event>
-    <small>{{ event.date }}</small>
-  </ng-template>
-  <ng-template uiTimelineContent let-event>
-    <p>{{ event.status }}</p>
-  </ng-template>
-</ui-lib-timeline>
-```
----
-## Variants
-| Value | Description |
-|---|---|
-| `material` | Filled primary-coloured dot, coloured connector, elevation on hover. |
-| `bootstrap` | Hollow dot with primary border, thin solid connector. |
-| `minimal` | Subtle border dot, hairline connector, transparent backgrounds. |
-```html
-<ui-lib-timeline [value]="events" variant="material">...</ui-lib-timeline>
-<ui-lib-timeline [value]="events" variant="bootstrap">...</ui-lib-timeline>
-<ui-lib-timeline [value]="events" variant="minimal">...</ui-lib-timeline>
-```
----
-## Sizes
-| Value | Marker size | Gap | Font size |
-|---|---|---|---|
-| `sm` | `0.875rem` | `0.625rem` | `0.875rem` |
-| `md` (default) | `1.25rem` | `1rem` | `1rem` |
-| `lg` | `1.625rem` | `1.25rem` | `1.125rem` |
-```html
-<ui-lib-timeline [value]="events" size="sm">...</ui-lib-timeline>
-<ui-lib-timeline [value]="events" size="lg">...</ui-lib-timeline>
-```
----
-## CSS Variables
-All tokens are set on `.ui-lib-timeline` and can be overridden per-instance or globally.
-| Variable | Default | Description |
-|---|---|---|
-| `--uilib-timeline-connector-color` | `var(--uilib-border-color, #dee2e6)` | Line colour between events. |
-| `--uilib-timeline-connector-width` | `2px` | Line thickness. |
-| `--uilib-timeline-marker-size` | `1.25rem` | Dot/marker width and height. |
-| `--uilib-timeline-marker-bg` | `var(--uilib-primary-color, #3b82f6)` | Dot fill colour. |
-| `--uilib-timeline-marker-border-color` | `var(--uilib-primary-color, #3b82f6)` | Dot border colour. |
-| `--uilib-timeline-marker-border-width` | `2px` | Dot border width. |
-| `--uilib-timeline-content-gap` | `1rem` | Space between separator and content. |
-| `--uilib-timeline-opposite-gap` | `1rem` | Space between separator and opposite-side. |
-| `--uilib-timeline-opposite-min-width` | `6rem` | Minimum width of the opposite column. |
-| `--uilib-timeline-font-size` | `1rem` | Base font size for the component. |
-| `--uilib-timeline-color` | `var(--uilib-text-color, #1f2937)` | Text colour. |
-| `--uilib-timeline-focus-ring-color` | `var(--uilib-primary-color, #3b82f6)` | Focus-within ring colour when projected controls receive focus. |
----
-## Accessibility
-### ARIA attributes
 
-| Element | Attribute | Value | Description |
-|---|---|---|---|
-| Host (`ui-lib-timeline`) | `role` | `list` | Exposes the timeline as a semantic list |
-| Host | `id` | `ui-lib-timeline-{n}` | Auto-generated unique instance id |
-| Host | `aria-label` | `ariaLabel` input | Accessible name for the full list |
-| Event row | `role` | `listitem` | Announces each event as a list item |
-| Event row | `aria-labelledby` | Content id + optional opposite id | Uses visible text to label each event |
-| Connectors / marker dot | `aria-hidden` | `true` | Hides decorative timeline chrome from assistive tech |
-
-### Keyboard interaction
-
-The timeline itself is non-interactive, so the host and event rows stay out of the tab order.
-Projected buttons, links, and other controls keep their native keyboard behaviour, and the event
-row shows a visible focus-within ring when projected content receives focus.
-
-### Additional notes
-
-- When no `uiTimelineContent` template is supplied, the component renders fallback text from common
-  item fields such as `title`, `label`, `name`, `status`, `date`, or `description`.
-- The marker wrapper is decorative by design, so both the wrapper and the default dot are hidden
-  from assistive technologies.
-- `@media (prefers-reduced-motion: reduce)` disables marker hover transitions.
----
-## TypeScript Types
-```typescript
-import type {
-  TimelineLayout,   // 'vertical' | 'horizontal'
-  TimelineAlign,    // 'left' | 'right' | 'alternate' | 'top' | 'bottom'
-  TimelineVariant,  // 'material' | 'bootstrap' | 'minimal'
-  TimelineSize,     // 'sm' | 'md' | 'lg'
-  TimelineItemContext,
-} from 'ui-lib-custom/timeline';
+<!-- alternating with custom marker and opposite label -->
+<ui-lib-timeline [value]="events" align="alternate">
+  <ng-template uiTimelineMarker let-event><span class="dot"></span></ng-template>
+  <ng-template uiTimelineOpposite let-event>{{ event.date }}</ng-template>
+  <ng-template uiTimelineContent let-event>{{ event.description }}</ng-template>
+</ui-lib-timeline>
 ```
----
-## Constants
-```typescript
-import { TIMELINE_DEFAULTS } from 'ui-lib-custom/timeline';
-// { layout: 'vertical', align: 'left', size: 'md', ariaLabel: 'Timeline' }
-```
+
+## Related
+
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#timeline)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/timeline/README.md)
+

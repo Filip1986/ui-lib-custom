@@ -1,210 +1,161 @@
 # Paginator
 
-A page-navigation component that controls which slice of a data set is visible.
-Inspired by PrimeNG's `p-paginator`, adapted to the `ui-lib-custom` conventions (signal inputs, three variants, design-token CSS variables).
+**Selector:** `ui-lib-paginator`
+**Entry point:** `import { Paginator } from 'ui-lib-custom/paginator'`
 
 ---
 
-## Import
+## Overview
 
-```ts
-import { PaginatorComponent } from 'ui-lib-custom/paginator';
-import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
-```
+Default values for the Paginator component. */
+export const PAGINATOR_DEFAULTS: {
+  readonly ROWS: number;
+  readonly PAGE_LINK_SIZE: number;
+  readonly CURRENT_PAGE_REPORT_TEMPLATE: string;
+} = {
+  ROWS: 10,
+  PAGE_LINK_SIZE: 5,
+  CURRENT_PAGE_REPORT_TEMPLATE: '{currentPage} of {totalPages}',
+} as const;
 
----
+/**
+Paginator provides page-based navigation controls for any list or data set.
 
-## Basic usage
+Supports three visual variants (material, bootstrap, minimal), three sizes,
+optional first/last buttons, page-link windowing, rows-per-page select,
+and a jump-to-page input.
 
-```html
-<ui-lib-paginator
-  [totalRecords]="totalRecords"
-  [rows]="rows"
-  [(first)]="first"
-  (pageChange)="onPageChange($event)"
-/>
-```
+## API
 
-```ts
-totalRecords = 250;
-rows         = 10;
-first        = 0;
+### Inputs
 
-onPageChange(event: PaginatorPageEvent): void {
-  this.first = event.first;
-  this.rows  = event.rows;
-}
-```
+| Name                        | Type                      | Default                                           | Description                                                                                                                                    |
+| --------------------------- | ------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alwaysShow`                | `boolean`                 | `true`                                            | /** When false, the paginator hides itself if there is only one page.                                                                          |
+| `ariaLabel`                 | `string`                  | `'Pagination'`                                    | /** Accessible label for the navigation landmark (used on the host element).                                                                   |
+| `currentPageReportTemplate` | `string`                  | `PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE` | /**
+Template string for the current-page report.
+Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}. |
+| `pageLinkSize`              | `number`                  | `PAGINATOR_DEFAULTS.PAGE_LINK_SIZE`               | /** Maximum number of page-link buttons shown in the windowed range.                                                                           |
+| `rowsPerPageOptions`        | `number[] | null`         | `null`                                            | /** Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown.                                                 |
+| `showCurrentPageReport`     | `boolean`                 | `false`                                           | /** Show a summary of the current page position (e.g. "1 of 10").                                                                              |
+| `showFirstLastIcon`         | `boolean`                 | `true`                                            | /** Show buttons to jump to the first and last page.                                                                                           |
+| `showJumpToPageInput`       | `boolean`                 | `false`                                           | /** Show a numeric input that lets the user type a page number and press Enter.                                                                |
+| `showPageLinks`             | `boolean`                 | `true`                                            | /** Show the windowed list of numbered page-link buttons.                                                                                      |
+| `size`                      | `PaginatorSize`           | `'md'`                                            | /** Size token controlling padding and font size.                                                                                              |
+| `styleClass`                | `string`                  | `''`                                              | /** Additional CSS class(es) applied to the inner content wrapper.                                                                             |
+| `totalRecords`              | `number`                  | `0`                                               | /** Total number of records across all pages.                                                                                                  |
+| `variant`                   | `PaginatorVariant | null` | `null`                                            | /** Visual design variant. Falls back to the global ThemeConfigService variant when null.                                                      |
 
----
+### Models (two-way bindable)
 
-## Inputs
+| Name    | Type     | Default                   | Description                                                                     |
+| ------- | -------- | ------------------------- | ------------------------------------------------------------------------------- |
+| `first` | `number` | `0`                       | /** Zero-based index of the first record on the current page. Two-way bindable. |
+| `rows`  | `number` | `PAGINATOR_DEFAULTS.ROWS` | /** Number of records displayed per page. Two-way bindable.                     |
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `totalRecords` | `number` | `0` | Total number of records across all pages. |
-| `rows` | `number` | `10` | Records per page. Two-way (`[(rows)]`). |
-| `first` | `number` | `0` | Zero-based index of the first visible record. Two-way (`[(first)]`). |
-| `pageLinkSize` | `number` | `5` | Maximum number of page-link buttons in the windowed range. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Visual design variant. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls button dimensions. |
-| `alwaysShow` | `boolean` | `true` | When `false`, hides the paginator when there is only one page. |
-| `showFirstLastIcon` | `boolean` | `true` | Show buttons to jump to the first and last page. |
-| `showPageLinks` | `boolean` | `true` | Show the windowed list of numbered page buttons. |
-| `showCurrentPageReport` | `boolean` | `false` | Show the formatted page report string. |
-| `currentPageReportTemplate` | `string` | `'{currentPage} of {totalPages}'` | Template with placeholders (see below). |
-| `rowsPerPageOptions` | `number[] \| null` | `null` | Options for the rows-per-page dropdown; `null` hides it. |
-| `showJumpToPageInput` | `boolean` | `false` | Show a numeric input; press **Enter** to navigate. |
-| `styleClass` | `string` | `''` | Extra CSS class(es) on the inner content wrapper. |
-| `ariaLabel` | `string` | `'Pagination'` | Accessible label for the navigation landmark. |
+### Outputs
 
-### currentPageReportTemplate placeholders
+| Name         | Type                 | Description                                                    |
+| ------------ | -------------------- | -------------------------------------------------------------- |
+| `pageChange` | `PaginatorPageEvent` | /** Emitted whenever the active page or rows-per-page changes. |
 
-| Placeholder | Value |
-|---|---|
-| `{currentPage}` | 1-based current page number |
-| `{totalPages}` | total page count |
-| `{first}` | 1-based index of first visible record |
-| `{last}` | 1-based index of last visible record |
-| `{rows}` | current rows per page |
-| `{totalRecords}` | total record count |
+## Content Projection
 
----
+| Selector          | Notes |
+| ----------------- | ----- |
+| `[paginatorLeft]` | —     |
 
-## Outputs
+## Theming
 
-| Output | Type | Description |
-|---|---|---|
-| `pageChange` | `PaginatorPageEvent` | Emitted when the active page or rows-per-page changes. |
-
-### PaginatorPageEvent
-
-```ts
-interface PaginatorPageEvent {
-  page: number;       // zero-based page index
-  first: number;      // zero-based index of the first record on this page
-  rows: number;       // records per page
-  pageCount: number;  // total number of pages
-}
-```
-
----
-
-## Content projection
-
-| Selector | Description |
-|---|---|
-| `[paginatorLeft]` | Content injected before the navigation buttons. |
-| `[paginatorRight]` | Content injected after the navigation buttons. |
-
-```html
-<ui-lib-paginator [totalRecords]="100" [rows]="10">
-  <span paginatorLeft>Custom left</span>
-  <span paginatorRight>Custom right</span>
-</ui-lib-paginator>
-```
-
----
-
-## Variants
-
-```html
-<ui-lib-paginator variant="material" ... />   <!-- pill-shaped, indigo primary -->
-<ui-lib-paginator variant="bootstrap" ... />  <!-- rounded, flat row, border-grouped -->
-<ui-lib-paginator variant="minimal" ... />    <!-- flat, underlined selected page -->
-```
-
----
-
-## Sizes
-
-```html
-<ui-lib-paginator size="sm" ... />   <!-- compact — 1.75 rem buttons -->
-<ui-lib-paginator size="md" ... />   <!-- default — 2.25 rem buttons -->
-<ui-lib-paginator size="lg" ... />   <!-- spacious — 2.75 rem buttons -->
-```
-
----
-
-## CSS custom properties
-
-All tokens follow `--uilib-paginator-{property}[-{state}]`.
-
-| Token | Default | Description |
-|---|---|---|
-| `--uilib-paginator-gap` | `0.25rem` | Gap between paginator elements. |
-| `--uilib-paginator-padding` | `0.5rem` | Padding around the content wrapper. |
-| `--uilib-paginator-button-size` | `2.25rem` | Square size of each button (`sm` 1.75 rem, `lg` 2.75 rem). |
-| `--uilib-paginator-button-font-size` | `0.875rem` | Font size inside buttons. |
-| `--uilib-paginator-button-radius` | `50%` | Border radius of buttons (`50%` = circle for `material`). |
-| `--uilib-paginator-button-bg` | `transparent` | Default button background. |
-| `--uilib-paginator-button-color` | `var(--uilib-color-text-primary)` | Default button text/icon colour. |
-| `--uilib-paginator-button-bg-hover` | `rgba(99,102,241,0.08)` | Button hover background. |
-| `--uilib-paginator-button-bg-selected` | `var(--uilib-color-primary)` | Selected page button background. |
-| `--uilib-paginator-button-color-selected` | `#ffffff` | Selected page button text colour. |
-| `--uilib-paginator-button-color-disabled` | `var(--uilib-color-text-muted)` | Disabled button colour. |
-| `--uilib-paginator-current-color` | `var(--uilib-color-text-secondary)` | Colour of the page-report text. |
-| `--uilib-paginator-jtp-width` | `4rem` | Width of the jump-to-page input. |
-| `--uilib-paginator-rpp-padding` | `0 0.625rem` | Padding of the rows-per-page select. |
-
-Override any token on the host or a parent to retheme:
-
-```css
-ui-lib-paginator {
-  --uilib-paginator-button-bg-selected: #ef4444;
-  --uilib-paginator-button-radius: 4px;
-}
-```
-
----
+| CSS Variable                              | Default                                                                                         |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--uilib-paginator-button-bg`             | `transparent`                                                                                   |
+| `--uilib-paginator-button-bg-disabled`    | `transparent`                                                                                   |
+| `--uilib-paginator-button-bg-hover`       | `var(--uilib-color-surface-hover, #f3f4f6)`                                                     |
+| `--uilib-paginator-button-bg-selected`    | `var(--uilib-color-primary, #6366f1)`                                                           |
+| `--uilib-paginator-button-border`         | `1px solid transparent`                                                                         |
+| `--uilib-paginator-button-color`          | `var(--uilib-color-text-primary, #374151)`                                                      |
+| `--uilib-paginator-button-color-disabled` | `var(--uilib-color-text-muted, #9ca3af)`                                                        |
+| `--uilib-paginator-button-color-hover`    | `var(--uilib-color-text-primary, #374151)`                                                      |
+| `--uilib-paginator-button-color-selected` | `#ffffff`                                                                                       |
+| `--uilib-paginator-button-font-size`      | `0.875rem`                                                                                      |
+| `--uilib-paginator-button-radius`         | `50%`                                                                                           |
+| `--uilib-paginator-button-size`           | `2.25rem`                                                                                       |
+| `--uilib-paginator-current-color`         | `var(--uilib-color-text-secondary, #6b7280)`                                                    |
+| `--uilib-paginator-current-font-size`     | `0.875rem`                                                                                      |
+| `--uilib-paginator-gap`                   | `0.25rem`                                                                                       |
+| `--uilib-paginator-icon-size`             | `1rem`                                                                                          |
+| `--uilib-paginator-jtp-bg`                | `var(--uilib-color-surface, #ffffff)`                                                           |
+| `--uilib-paginator-jtp-border`            | `1px solid var(--uilib-color-border, #d1d5db)`                                                  |
+| `--uilib-paginator-jtp-color`             | `var(--uilib-color-text-primary, #374151)`                                                      |
+| `--uilib-paginator-jtp-font-size`         | `0.875rem`                                                                                      |
+| `--uilib-paginator-jtp-height`            | `var(--uilib-paginator-button-size)`                                                            |
+| `--uilib-paginator-jtp-radius`            | `0.375rem`                                                                                      |
+| `--uilib-paginator-jtp-width`             | `4rem`                                                                                          |
+| `--uilib-paginator-padding`               | `0.5rem`                                                                                        |
+| `--uilib-paginator-rpp-bg`                | `var(--uilib-color-surface, #ffffff)`                                                           |
+| `--uilib-paginator-rpp-border`            | `1px solid var(--uilib-color-border, #d1d5db)`                                                  |
+| `--uilib-paginator-rpp-color`             | `var(--uilib-color-text-primary, #374151)`                                                      |
+| `--uilib-paginator-rpp-font-size`         | `0.875rem`                                                                                      |
+| `--uilib-paginator-rpp-height`            | `var(--uilib-paginator-button-size)`                                                            |
+| `--uilib-paginator-rpp-padding`           | `0 0.625rem`                                                                                    |
+| `--uilib-paginator-rpp-radius`            | `0.375rem`                                                                                      |
+| `--uilib-paginator-transition`            | `background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease` |
 
 ## Accessibility
 
-- The host element carries `role="navigation"` (implicit via `<nav>`) and `aria-label="Pagination"` (configurable via `ariaLabel` input).
-- The active page button has `aria-current="page"`.
-- All navigation buttons have descriptive `aria-label` attributes (e.g. "Previous page", "Page 3").
-- Navigation buttons are disabled via the native `disabled` attribute **and** `aria-disabled`, preventing both click and keyboard activation.
-- The page-link list uses `role="list"` / `role="listitem"`.
-- SVG icons use `aria-hidden="true"` and `focusable="false"`.
-- The current-page report span uses `aria-live="polite"` so screen readers announce changes.
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
-### Keyboard navigation
+### Keyboard Interactions
 
-| Key | Action |
-|---|---|
-| **Tab** | Move focus between buttons and controls in DOM order. |
-| **Space / Enter** | Activate the focused button. |
-| **Enter** (in jump-to-page input) | Navigate to the entered page. |
+| Test description                                                               |
+| ------------------------------------------------------------------------------ |
+| announces empty-state pagination in the live region                            |
+| announces page changes through a polite live region                            |
+| changes page when Enter is pressed in the jump-to-page input                   |
+| does not change page from keyboard activation when previous button is disabled |
+| does not change page when non-Enter key is pressed in jump-to-page input       |
+| exposes a navigation landmark with the configured aria-label                   |
+| marks decorative SVG icons as aria-hidden and non-focusable                    |
+| marks only the active page button with aria-current=                           |
+| passes axe in default state                                                    |
+| passes axe when paginator is empty                                             |
+| passes axe with report, jump input, and rows-per-page controls visible         |
+| should announce                                                                |
+| should apply bootstrap variant host class                                      |
+| should apply material variant host class by default                            |
+| should apply minimal variant host class                                        |
+| should have a navigation aria-label on the host element                        |
+| should have aria-label on nav buttons                                          |
+| should have numbered aria-label on page-link buttons                           |
+| should mark the selected page with aria-current=                               |
+| should navigate to the entered page when Enter is pressed                      |
+| should not navigate when a non-Enter key is pressed on jump-to-page input      |
+| should render a polite live region that announces current page                 |
+| supports Enter activation on the next-page button                              |
+| supports Space activation on a page-link button                                |
+| updates the navigation aria-label when ariaLabel input changes                 |
 
----
-
-## Examples
-
-### Full-featured paginator
+## Usage Examples
 
 ```html
+<!-- basic paginator -->
+<ui-lib-paginator [totalRecords]="total" [(first)]="first" [(rows)]="rows" />
+
+<!-- with rows-per-page dropdown and page report -->
 <ui-lib-paginator
-  [totalRecords]="500"
+  [totalRecords]="total"
   [(first)]="first"
-  [(rows)]="rows"
   [rowsPerPageOptions]="[10, 25, 50]"
   [showCurrentPageReport]="true"
-  currentPageReportTemplate="Showing {first}–{last} of {totalRecords}"
-  [showJumpToPageInput]="true"
-  variant="material"
-  size="md"
   (pageChange)="onPageChange($event)"
 />
 ```
 
-### Minimal arrows-only
+## Related
 
-```html
-<ui-lib-paginator
-  [totalRecords]="50"
-  [rows]="10"
-  [showPageLinks]="false"
-  [showFirstLastIcon]="false"
-  variant="minimal"
-/>
-```
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#paginator)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/paginator/README.md)
+

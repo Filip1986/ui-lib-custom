@@ -1,208 +1,147 @@
 # Tabs
 
+**Selector:** `ui-lib-tabs`
+**Entry point:** `import { Tabs } from 'ui-lib-custom/tabs'`
+
+---
+
 ## Overview
-Accessible, theme-aware tabs for switching between content sections. Supports Material, Bootstrap, and Minimal visual variants with horizontal/vertical layouts, closable tabs, and lazy panel rendering.
 
-## Features
-- Multiple variants: material (underline), bootstrap (boxed), minimal (ghost/underline)
-- Controlled/uncontrolled selection via index or value
-- Lazy rendering modes (`false`, `unmount`, `keep-alive`)
-- Orientation, alignment, icon+text labels, closable/disabled tabs
-- Animated indicator (material), roving tabindex + keyboard navigation
-- CSS variable theming hooked to design tokens
-- Scrollable tablist with optional arrows (`scrollBehavior='arrows'`)
+Tabs container that manages selection, focus, and scroll behavior.
 
-## Usage
-```html
-<ui-lib-tabs variant="material" [selectedIndex]="0">
-  <ui-lib-tab label="Home">Home content</ui-lib-tab>
-  <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
-</ui-lib-tabs>
-```
+## API
 
-Icon + template label:
-```html
-<ui-lib-tabs variant="material">
-  <ui-lib-tab value="settings">
-    <ng-template uiLibTabLabel>
-      <ui-lib-icon name="settings" /> Settings
-    </ng-template>
-    Settings content
-  </ui-lib-tab>
-</ui-lib-tabs>
-```
+### Inputs
 
-Vertical + controlled:
-```html
-<ui-lib-tabs orientation="vertical" [selectedIndex]="active" (selectedIndexChange)="active = $event">
-  <ui-lib-tab label="Overview">Overview</ui-lib-tab>
-  <ui-lib-tab label="Billing">Billing</ui-lib-tab>
-</ui-lib-tabs>
-```
+| Name                 | Type                       | Default                | Description                                                |
+| -------------------- | -------------------------- | ---------------------- | ---------------------------------------------------------- |
+| `activation`         | `TabsActivation`           | `'auto'`               | —                                                          |
+| `align`              | `TabsAlignment`            | `'start'`              | —                                                          |
+| `ariaLabel`          | `string | null`            | `null`                 | —                                                          |
+| `closable`           | `boolean`                  | `false`                | —                                                          |
+| `defaultIndex`       | `number | null`            | `null`                 | —                                                          |
+| `defaultValue`       | `TabsValue | null`         | `null`                 | —                                                          |
+| `dir`                | `'ltr' | 'rtl' | 'auto'`   | `'auto'`               | —                                                          |
+| `disabled`           | `boolean`                  | `false`                | —                                                          |
+| `focusPanelOnSelect` | `boolean`                  | `false`                | /** Moves focus into the active panel on selection.        |
+| `iconPosition`       | `'left' | 'top' | 'right'` | `'left'`               | —                                                          |
+| `lazy`               | `TabsLazyMode`             | `false`                | /** Global lazy rendering mode; can be overridden per tab. |
+| `mode`               | `TabsMode`                 | `'default'`            | /** Controls panel rendering vs navigation-only mode.      |
+| `orientation`        | `TabsOrientation`          | `'horizontal'`         | —                                                          |
+| `scrollBehavior`     | `TabsScrollBehavior`       | `'auto'`               | /** Scroll handling for overflowing tab lists.             |
+| `selectedIndex`      | `number | null`            | `null`                 | —                                                          |
+| `selectedValue`      | `TabsValue | null`         | `null`                 | —                                                          |
+| `size`               | `TabsSize`                 | `SHARED_DEFAULTS.Size` | —                                                          |
+| `variant`            | `TabsVariant | null`       | `null`                 | —                                                          |
 
-Closable with lazy keep-alive:
-```html
-<ui-lib-tabs [closable]="true" lazy="keep-alive" (tabClose)="onClose($event)">
-  <ui-lib-tab value="alpha" label="Alpha">Alpha content</ui-lib-tab>
-  <ui-lib-tab value="beta" label="Beta">Beta content</ui-lib-tab>
-</ui-lib-tabs>
-```
+### Outputs
 
-## Scrollable Tabs
-Use arrows to navigate overflowing tab lists when `scrollBehavior="arrows"`.
-```html
-<ui-lib-tabs scrollBehavior="arrows">
-  <ui-lib-tab label="Overview">Overview content</ui-lib-tab>
-  <ui-lib-tab label="Billing">Billing content</ui-lib-tab>
-  <ui-lib-tab label="Usage">Usage content</ui-lib-tab>
-  <ui-lib-tab label="Security">Security content</ui-lib-tab>
-  <ui-lib-tab label="Audit">Audit content</ui-lib-tab>
-  <ui-lib-tab label="Exports">Exports content</ui-lib-tab>
-</ui-lib-tabs>
-```
+| Name                  | Type                                         | Description                                           |
+| --------------------- | -------------------------------------------- | ----------------------------------------------------- |
+| `navigate`            | `{ value: TabsValue | null; index: number }` | /** Emitted when selection occurs in navigation mode. |
+| `selectedIndexChange` | `number`                                     | —                                                     |
+| `tabClose`            | `{ value: TabsValue | null; index: number }` | —                                                     |
+| `tabFocus`            | `{ value: TabsValue | null; index: number }` | —                                                     |
 
-## Tab Menu Mode
-Use navigation mode for router-driven layouts with no panels.
-```html
-<ui-lib-tabs
-  mode="navigation"
-  [selectedValue]="activeRoute()"
-  (navigate)="onNavigate($event.value)"
->
-  <ui-lib-tab value="/dashboard" label="Dashboard" />
-  <ui-lib-tab value="/reports" label="Reports" />
-  <ui-lib-tab value="/settings" label="Settings" />
-</ui-lib-tabs>
-```
+## Content Projection
 
-## Per-Panel Lazy
-Override the parent `lazy` mode per tab and defer heavy content templates.
-```html
-<ui-lib-tabs>
-  <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
-  <ui-lib-tab label="Lazy" lazy="unmount">
-    <ng-template uiLibTabContent>
-      <heavy-component />
-    </ng-template>
-  </ui-lib-tab>
-</ui-lib-tabs>
-```
+_none_
 
-## API Reference
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `TabsVariant` | `'material'` | Visual style: material (underline), bootstrap (boxed), minimal (ghost) |
-| `size` | `TabsSize` | `'medium'` | Padding/typography density |
-| `orientation` | `TabsOrientation` | `'horizontal'` | Layout direction; sets `aria-orientation` and keyboard map |
-| `align` | `TabsAlignment` | `'start'` | Alignment of triggers in the tab list |
-| `selectedIndex` | `number \| null` | `null` | Controlled selection by index |
-| `selectedValue` | `TabsValue \| null` | `null` | Controlled selection by value |
-| `defaultIndex` | `number \| null` | `null` | Uncontrolled initial index |
-| `defaultValue` | `TabsValue \| null` | `null` | Uncontrolled initial value |
-| `lazy` | `TabsLazyMode` | `false` | Panel rendering: eager (`false`), unmount on blur (`'unmount'`), cache (`'keep-alive'`) |
-| `scrollBehavior` | `TabsScrollBehavior` | `'auto'` | Overflow handling: native scroll (`'auto'`), arrows when overflow (`'arrows'`), menu (future) |
-| `closable` | `boolean` | `false` | Makes tabs closable unless overridden per tab |
-| `disabled` | `boolean` | `false` | Disable entire tablist |
-| `focusPanelOnSelect` | `boolean` | `false` | Move focus into panel after selection |
-| `iconPosition` | `'left' \| 'top' \| 'right'` | `'left'` | Icon/text layout for triggers |
-| `mode` | `TabsMode` | `'default'` | `'default'` renders panels; `'navigation'` renders tablist only (menu mode) |
+## Theming
 
-Outputs:
-| Name | Payload | Description |
-|------|---------|-------------|
-| `selectedChange` | `{ value: TabsValue \| null; index: number }` | Fired on selection change |
-| `selectedIndexChange` | `number` | Index-only change (PrimeNG parity) |
-| `navigate` | `{ value: TabsValue \| null; index: number }` | Fired on selection in `navigation` mode |
-| `tabClose` | `{ value: TabsValue \| null; index: number }` | Fired when a closable tab is closed |
-| `tabFocus` | `{ value: TabsValue \| null; index: number }` | Fired when a tab trigger receives focus |
-
-Per-tab inputs (`ui-lib-tab`): `value`, `label`, `disabled`, `closable`, `lazy`; label template slot via `uiLibTabLabel`; deferred content via `uiLibTabContent`.
-
-## Types
-```typescript
-export type TabsVariant = 'material' | 'bootstrap' | 'minimal';
-export type TabsSize = 'small' | 'medium' | 'large';
-export type TabsOrientation = 'horizontal' | 'vertical';
-export type TabsAlignment = 'start' | 'center' | 'end' | 'stretch';
-export type TabsLazyMode = false | 'unmount' | 'keep-alive';
-export type TabsScrollBehavior = 'auto' | 'arrows' | 'overflow-menu';
-export type TabsValue = string | number;
-export type TabsMode = 'default' | 'navigation';
-```
+| CSS Variable                                        | Default                                                                                                                    |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-tabs-bg`                                   | `transparent`                                                                                                              |
+| `--uilib-tabs-bg-resolved`                          | `var(--uilib-tabs-bg, var(--uilib-surface))`                                                                               |
+| `--uilib-tabs-border`                               | `var(--uilib-border-dark)`                                                                                                 |
+| `--uilib-tabs-border-resolved`                      | `var(--uilib-tabs-border, var(--uilib-border))`                                                                            |
+| `--uilib-tabs-border-style-resolved`                | `var(--uilib-tabs-border-style, solid)`                                                                                    |
+| `--uilib-tabs-border-width-resolved`                | `var(--uilib-tabs-border-width, 1px)`                                                                                      |
+| `--uilib-tabs-color`                                | `var(--uilib-text-dark-primary)`                                                                                           |
+| `--uilib-tabs-color-active`                         | `var(--uilib-color-primary-dark)`                                                                                          |
+| `--uilib-tabs-color-active-resolved`                | `var( --uilib-tabs-color-active, var(--uilib-color-primary-600) )`                                                         |
+| `--uilib-tabs-color-disabled`                       | `var(--uilib-text-dark-disabled)`                                                                                          |
+| `--uilib-tabs-color-disabled-resolved`              | `var(--uilib-tabs-color-disabled, var(--uilib-muted))`                                                                     |
+| `--uilib-tabs-color-resolved`                       | `var(--uilib-tabs-color, var(--uilib-page-fg, currentColor))`                                                              |
+| `--uilib-tabs-gap-resolved`                         | `var(--uilib-tabs-gap, var(--uilib-space-3, 0.5rem))`                                                                      |
+| `--uilib-tabs-indicator-color`                      | `var(--uilib-color-primary-dark)`                                                                                          |
+| `--uilib-tabs-indicator-color-resolved`             | `var( --uilib-tabs-indicator-color, var(--uilib-color-primary-600) )`                                                      |
+| `--uilib-tabs-indicator-height-resolved`            | `var(--uilib-tabs-indicator-height, 2px)`                                                                                  |
+| `--uilib-tabs-indicator-offset-resolved`            | `var(--uilib-tabs-indicator-offset, 0px)`                                                                                  |
+| `--uilib-tabs-indicator-radius-resolved`            | `var( --uilib-tabs-indicator-radius, var(--uilib-shape-base, 6px) )`                                                       |
+| `--uilib-tabs-nav-button-active-bg-resolved`        | `var( --uilib-tabs-nav-button-active-bg, color-mix(in srgb, currentColor 10%, transparent) )`                              |
+| `--uilib-tabs-nav-button-bg-resolved`               | `var( --uilib-tabs-nav-button-bg, var(--uilib-surface-secondary, transparent) )`                                           |
+| `--uilib-tabs-nav-button-border-resolved`           | `var(--uilib-tabs-nav-button-border, transparent)`                                                                         |
+| `--uilib-tabs-nav-button-color-resolved`            | `var( --uilib-tabs-nav-button-color, var(--uilib-tabs-color-resolved) )`                                                   |
+| `--uilib-tabs-nav-button-disabled-opacity-resolved` | `var( --uilib-tabs-nav-button-disabled-opacity, 0.4 )`                                                                     |
+| `--uilib-tabs-nav-button-gap-resolved`              | `var( --uilib-tabs-nav-button-gap, var(--uilib-space-2, 0.25rem) )`                                                        |
+| `--uilib-tabs-nav-button-hover-bg-resolved`         | `var( --uilib-tabs-nav-button-hover-bg, var(--uilib-surface-tertiary, color-mix(in srgb, currentColor 6%, transparent)) )` |
+| `--uilib-tabs-nav-button-radius-resolved`           | `var( --uilib-tabs-nav-button-radius, var(--uilib-shape-base, 6px) )`                                                      |
+| `--uilib-tabs-nav-button-shadow-resolved`           | `var(--uilib-tabs-nav-button-shadow, none)`                                                                                |
+| `--uilib-tabs-nav-button-size-resolved`             | `var(--uilib-tabs-nav-button-size, 2rem)`                                                                                  |
+| `--uilib-tabs-padding-base`                         | `0.5rem`                                                                                                                   |
+| `--uilib-tabs-padding-resolved`                     | `calc(var(--uilib-tabs-padding-base) * var(--uilib-density, 1))`                                                           |
+| `--uilib-tabs-radius-resolved`                      | `var(--uilib-tabs-radius, var(--uilib-shape-base, 6px))`                                                                   |
+| `--uilib-tabs-transition`                           | `0ms linear`                                                                                                               |
+| `--uilib-tabs-transition-resolved`                  | `var( --uilib-tabs-transition, var(--uilib-transition-fast, 150ms ease) )`                                                 |
 
 ## Accessibility
 
-### Keyboard Interaction
-| Key | Action |
-| --- | --- |
-| Tab | Focus active tab |
-| Arrow Left/Right | Move focus (horizontal) |
-| Arrow Up/Down | Move focus (vertical) |
-| Home/End | Jump to first/last tab |
-| Enter | Activate focused tab |
-| Space | Activate focused tab |
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
-### ARIA Attributes
-| Attribute | Usage |
-| --- | --- |
-| `role="tablist"` | Set on tab list |
-| `role="tab"` | Set on each trigger |
-| `role="tabpanel"` | Set on each panel |
-| `aria-selected` | Active tab state |
-| `aria-controls` | Points to panel id |
-| `aria-labelledby` | Panel references tab id |
-| `aria-disabled` | Disabled tabs |
+### Keyboard Interactions
 
-### Focus Management
-- Roving tabindex keeps only the active tab focusable.
-- Optional `focusPanelOnSelect` moves focus into the panel.
+| Test description                                                             |
+| ---------------------------------------------------------------------------- |
+| applies dark theme variables                                                 |
+| applies variant classes on the tab list                                      |
+| does not select disabled tab                                                 |
+| exposes tablist, tab, and tabpanel roles with proper aria linkage            |
+| generates unique tab and panel ids for separate tabs instances               |
+| handles Enter and Space activation branches from keyboard                    |
+| handles Home, End, and ArrowLeft keyboard branches                           |
+| moves focus into the active panel when Tab leaves the tablist                |
+| moves selection with horizontal arrow keys in automatic activation mode      |
+| moves selection with vertical arrow keys in automatic activation mode        |
+| renders the tablist, tabs, and tabpanels with correct ARIA relationships     |
+| selects the first tab by default                                             |
+| should auto-scroll focused tab into view                                     |
+| should emit value on tab click                                               |
+| should hide arrows when all tabs are visible                                 |
+| should highlight the active tab                                              |
+| should keep cached content for keep-alive tabs                               |
+| should render tablist with two tabs                                          |
+| should respect per-tab lazy override                                         |
+| should scroll on arrow click                                                 |
+| should show arrows when tabs overflow                                        |
+| should unmount lazy content when tab deactivates                             |
+| shows and hides tab panels correctly                                         |
+| skips disabled tabs during arrow-key navigation and marks them aria-disabled |
+| supports Home and End navigation across enabled tabs                         |
+| supports manual activation until Enter or Space is pressed                   |
+| switches tabs on click                                                       |
+| switches tabs with ArrowRight key                                            |
+| uses aria-selected and roving tabindex on active and inactive tabs           |
 
-### Screen Reader Behavior
-- Tab labels are announced with selected state.
-- Panels announce their content when activated.
+## Usage Examples
 
-### Known Issues & Solutions
-- Avoid icon-only labels; use `aria-label` when needed.
+```html
+<!-- Basic tabs -->
+<ui-lib-tabs>
+  <ui-lib-tab label="Overview">Overview content</ui-lib-tab>
+  <ui-lib-tab label="Settings">Settings content</ui-lib-tab>
+</ui-lib-tabs>
 
-## Variants
-- **material**: underline indicator with animation; hover background subtle; transparent base
-- **bootstrap**: boxed/bordered triggers; active tab merges with panel surface
-- **minimal**: text-first, low chrome; subtle underline/hover
-
-## Notes
-- Lazy `keep-alive` caches rendered panels; `unmount` removes inactive panels
-- Controlled mode prefers `selectedValue` for dynamic tab lists; `selectedIndex` kept for PrimeNG parity
-- Use CSS vars (`--uilib-tabs-*`, `--uilib-tab-*`) to theme without rebuild
-- Scroll arrows appear only when the tablist overflows
-- Scroll buttons are styled via CSS vars (see below)
-- Per-tab `lazy` overrides the parent `lazy` input
-- Use `uiLibTabContent` to defer template initialization until the tab is activated
-
-## Theming (Scroll Arrows)
-Set these CSS variables to customize the arrow buttons:
-- `--uilib-tabs-nav-button-size`
-- `--uilib-tabs-nav-button-bg`
-- `--uilib-tabs-nav-button-hover-bg`
-- `--uilib-tabs-nav-button-disabled-opacity`
-- `--uilib-tabs-nav-button-color`
-- `--uilib-tabs-nav-button-border`
-- `--uilib-tabs-nav-button-radius`
-- `--uilib-tabs-nav-button-shadow`
-- `--uilib-tabs-nav-button-active-bg`
-- `--uilib-tabs-nav-button-gap`
-
-**Defaults:**
-```css
-:root {
-  --uilib-tabs-nav-button-size: 2rem;
-  --uilib-tabs-nav-button-bg: var(--uilib-surface-secondary);
-  --uilib-tabs-nav-button-hover-bg: var(--uilib-surface-tertiary);
-  --uilib-tabs-nav-button-disabled-opacity: 0.4;
-  --uilib-tabs-nav-button-color: var(--uilib-tabs-color);
-  --uilib-tabs-nav-button-border: transparent;
-  --uilib-tabs-nav-button-radius: var(--uilib-radius-md);
-  --uilib-tabs-nav-button-shadow: none;
-  --uilib-tabs-nav-button-active-bg: color-mix(in srgb, currentColor 10%, transparent);
-  --uilib-tabs-nav-button-gap: var(--uilib-space-2);
-}
+<!-- Controlled selection with close support -->
+<ui-lib-tabs [selectedValue]="activeTab" [closable]="true" (selectedChange)="activeTab = $event.value" (tabClose)="removeTab($event)">
+  <ui-lib-tab value="a" label="Tab A">Content A</ui-lib-tab>
+  <ui-lib-tab value="b" label="Tab B">Content B</ui-lib-tab>
+</ui-lib-tabs>
 ```
+
+## Related
+
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#tabs)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/tabs/README.md)
+

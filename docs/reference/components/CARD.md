@@ -1,115 +1,121 @@
-# Card Component
+# Card
+
+**Selector:** `ui-lib-card`
+**Entry point:** `import { Card } from 'ui-lib-custom/card'`
+
+---
 
 ## Overview
 
-A flexible card container with optional header, subtitle, and footer slots, elevation levels, and variant styling. Supports per-card scoped theming via the `theme` input without any provider setup.
+Card container component with optional header, footer, and theme scope.
 
-**Selector:** `ui-lib-card`
-**Package:** `ui-lib-custom/card`
-
-```typescript
-import { Card } from 'ui-lib-custom/card';
-```
-
----
-
-## Features
-
-- Signal-powered inputs for reactive updates
-- CSS-variable theming with design-token fallbacks
-- Three visual variants: `material`, `bootstrap`, `minimal`
-- Elevation tokens: `none`, `low`, `medium`, `high`
-- Four content projection slots: header, rich subtitle, body, footer
-- Optional closable header with `closed` output
-- Per-card scoped theme via `theme` input (no provider required)
-
----
-
-## API Reference
+## API
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|---|---|---|---|
-| `variant` | `CardVariant \| null` | `null` | Visual style; inherits from `ThemeConfigService` when null |
-| `elevation` | `CardElevation` | `'medium'` | Shadow depth token |
-| `bordered` | `boolean` | `false` | Adds a visible border |
-| `hoverable` | `boolean` | `false` | Adds hover highlight; makes the card keyboard-activatable as a button |
-| `showHeader` | `boolean \| null` | `null` | Hides the header section when explicitly set to `false` |
-| `showFooter` | `boolean \| null` | `null` | Hides the footer section when explicitly set to `false` |
-| `shadow` | `string \| null` | `null` | Inline override for `--uilib-card-shadow` |
-| `headerBg` | `string \| null` | `null` | Inline override for `--uilib-card-header-bg` |
-| `footerBg` | `string \| null` | `null` | Inline override for `--uilib-card-footer-bg` |
-| `headerIcon` | `SemanticIcon \| string \| null` | `null` | Icon shown at the start of the header row |
-| `closable` | `boolean` | `false` | Shows a close button in the header; emits `closed` on click |
-| `subtitle` | `string \| null` | `null` | Plain-text subtitle rendered below the header slot; use `[card-subtitle]` when rich HTML markup is needed |
-| `ariaLabel` | `string \| null` | `null` | Accessible label; meaningful only when `hoverable` is true |
-| `theme` | `ThemeScopeInput \| null` | `null` | Scoped theme override: pass `'light'` / `'dark'` as a shorthand, or a `ThemeScopeConfig` object for full control |
+| Name         | Type                           | Default    | Description                        |
+| ------------ | ------------------------------ | ---------- | ---------------------------------- |
+| `ariaLabel`  | `string | null`                | `null`     | —                                  |
+| `bordered`   | `boolean`                      | `false`    | —                                  |
+| `closable`   | `boolean`                      | `false`    | —                                  |
+| `elevation`  | `CardElevation`                | `'medium'` | —                                  |
+| `footerBg`   | `string | null`                | `null`     | —                                  |
+| `headerBg`   | `string | null`                | `null`     | —                                  |
+| `headerIcon` | `SemanticIcon | string | null` | `null`     | —                                  |
+| `hoverable`  | `boolean`                      | `false`    | —                                  |
+| `shadow`     | `string | null`                | `null`     | —                                  |
+| `showFooter` | `boolean | null`               | `null`     | —                                  |
+| `showHeader` | `boolean | null`               | `null`     | —                                  |
+| `subtitle`   | `string | null`                | `null`     | —                                  |
+| `theme`      | `ThemeScopeInput | null`       | `null`     | /** Optional scoped theme override |
+| `variant`    | `CardVariant | null`           | `null`     | —                                  |
 
 ### Outputs
 
-| Output | Payload | Description |
-|---|---|---|
-| `closed` | `void` | Emitted when the close button is clicked; only present when `[closable]="true"` |
+| Name     | Type   | Description |
+| -------- | ------ | ----------- |
+| `closed` | `void` | —           |
 
-### Types
+## Content Projection
 
-```typescript
-type CardVariant   = 'material' | 'bootstrap' | 'minimal';
-type CardElevation = 'none' | 'low' | 'medium' | 'high';
+| Selector          | Notes |
+| ----------------- | ----- |
+| _(default)_       | —     |
+| `[card-footer]`   | —     |
+| `[card-header]`   | —     |
+| `[card-subtitle]` | —     |
 
-// ThemeScopeInput accepts a string shorthand or a config object:
-type ThemeScopeInput = 'light' | 'dark' | ThemeScopeConfig | null;
+## Theming
 
-interface ThemeScopeConfig {
-  colorScheme?: 'light' | 'dark';    // sets data-theme attribute
-  preset?: ThemePreset;               // full preset to apply
-  colors?: Partial<ThemePresetColors>; // partial color overrides
-  variant?: ThemeVariant;             // variant override
-  variables?: Record<string, string>; // raw CSS variable overrides
-}
-```
+| CSS Variable                         | Default                                                                                                                                             |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-card-bg`                    | `var(--uilib-surface-dark-2)`                                                                                                                       |
+| `--uilib-card-body-padding`          | `calc(var(--uilib-card-body-padding-base) * var(--uilib-density, 1))`                                                                               |
+| `--uilib-card-body-padding-base`     | `1rem`                                                                                                                                              |
+| `--uilib-card-border`                | `var(--uilib-card-border, var(--uilib-border))`                                                                                                     |
+| `--uilib-card-border-width`          | `0`                                                                                                                                                 |
+| `--uilib-card-footer-bg`             | `var(--uilib-card-footer-bg, var(--uilib-surface-alt))`                                                                                             |
+| `--uilib-card-footer-padding`        | `calc( var(--uilib-card-footer-padding-y-base) * var(--uilib-density, 1) ) calc(var(--uilib-card-footer-padding-x-base) * var(--uilib-density, 1))` |
+| `--uilib-card-footer-padding-x-base` | `1rem`                                                                                                                                              |
+| `--uilib-card-footer-padding-y-base` | `0.5rem`                                                                                                                                            |
+| `--uilib-card-header-bg`             | `var(--uilib-card-header-bg, var(--uilib-surface-alt))`                                                                                             |
+| `--uilib-card-header-padding`        | `calc( var(--uilib-card-header-padding-y-base) * var(--uilib-density, 1) ) calc(var(--uilib-card-header-padding-x-base) * var(--uilib-density, 1))` |
+| `--uilib-card-header-padding-x-base` | `1rem`                                                                                                                                              |
+| `--uilib-card-header-padding-y-base` | `0.75rem`                                                                                                                                           |
+| `--uilib-card-radius`                | `var(--uilib-radius-md)`                                                                                                                            |
+| `--uilib-card-shadow`                | `var(--uilib-card-shadow-none, none)`                                                                                                               |
+| `--uilib-card-shadow-hover`          | `var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none))`                                                                                 |
+| `--uilib-card-text-color`            | `var(--uilib-text-dark-primary)`                                                                                                                    |
 
----
+## Accessibility
 
-## Content Projection Slots
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
-Cards project content using attribute selectors:
+### Keyboard Interactions
 
-| Slot | Selector | Notes |
-|---|---|---|
-| Title | `[card-header]` | Projected into the header title area |
-| Rich subtitle | `[card-subtitle]` | Projected below the title; use when the `subtitle` input is insufficient (e.g. inline `<code>` tags) |
-| Body | _(default)_ | Projected into the card body |
-| Footer | `[card-footer]` | Projected into the footer bar; hidden when `[showFooter]="false"` |
+| Test description                                                      |
+| --------------------------------------------------------------------- |
+| adds role and tabindex for hoverable cards                            |
+| applies dark theme variables                                          |
+| applies each variant class                                            |
+| applies variant and variables for scoped theme object                 |
+| applies variant, elevation, and bordered classes                      |
+| basic card: no axe violations                                         |
+| closable card: no axe violations                                      |
+| fires click on Enter key                                              |
+| fires click on Space key                                              |
+| hoverable card: Enter key triggers click                              |
+| hoverable card: Space key triggers click                              |
+| hoverable card: aria-label updates when signal changes                |
+| hoverable card: does not have aria-labelledby                         |
+| hoverable card: has aria-label from ariaLabel input                   |
+| hoverable card: has role=                                             |
+| hoverable card: has tabindex=                                         |
+| hoverable card: no axe violations                                     |
+| multi-variant cards: no axe violations                                |
+| non-hoverable card with header: has aria-labelledby pointing to title |
+| non-hoverable card with header: title div has a stable non-empty id   |
+| non-hoverable card: Enter key does not trigger click                  |
+| non-hoverable card: no role attribute                                 |
+| non-hoverable card: no tabindex attribute                             |
+| sets role, tabindex, and aria-label when hoverable                    |
 
-> `subtitle` input and `[card-subtitle]` slot are mutually exclusive — if both are provided, the slot takes precedence.
-
----
-
-## Usage
-
-### Basic card with header and body
+## Usage Examples
 
 ```html
+<!-- Basic card with header and body -->
 <ui-lib-card variant="material" [bordered]="true">
   <span card-header>Card Title</span>
   <p>Body content goes here.</p>
 </ui-lib-card>
-```
 
-### Plain-text subtitle via input
-
-```html
+<!-- Plain-text subtitle via input -->
 <ui-lib-card subtitle="Secondary description">
   <span card-header>Card Title</span>
   <p>Body content.</p>
 </ui-lib-card>
-```
 
-### Rich subtitle with inline markup via slot
-
-```html
+<!-- Rich subtitle with inline markup via projection slot -->
 <ui-lib-card>
   <span card-header>Appearances</span>
   <span card-subtitle>
@@ -117,146 +123,24 @@ Cards project content using attribute selectors:
   </span>
   <p>Body content.</p>
 </ui-lib-card>
-```
 
-### Closable card with footer
-
-```html
+<!-- Closable card with footer -->
 <ui-lib-card [closable]="true" (closed)="onClose()">
   <span card-header>Dismissible</span>
   Main content.
   <span card-footer>Footer text</span>
 </ui-lib-card>
-```
 
-### Variant and elevation
-
-```html
-<ui-lib-card variant="bootstrap" elevation="high" [bordered]="true">
-  <span card-header>Bootstrap Card</span>
-  Content
+<!-- Clickable/hoverable card — provide ariaLabel for screen readers -->
+<ui-lib-card [hoverable]="true" ariaLabel="Open user profile" (click)="openProfile()">
+  <span card-header>Jane Smith</span>
+  <p>Click to view full profile</p>
 </ui-lib-card>
 ```
-
-### Hoverable minimal
-
-```html
-<ui-lib-card variant="minimal" [hoverable]="true" ariaLabel="Open profile">
-  <span card-header>Minimal</span>
-  Click me
-</ui-lib-card>
-```
-
----
-
-## Scoped Theming
-
-The `theme` input applies CSS variables and data attributes directly on the card's host element, enabling per-card theme overrides without a provider. Two forms are supported:
-
-**String shorthand** — switches color scheme only:
-
-```html
-<!-- Dark card on a light page -->
-<ui-lib-card theme="dark">
-  <span card-header>Dark Card</span>
-  <p>This card renders in dark mode regardless of the page theme.</p>
-</ui-lib-card>
-```
-
-**Config object** — full per-card control:
-
-```typescript
-import type { ThemeScopeInput } from 'ui-lib-custom/theme';
-
-brandCardTheme: ThemeScopeInput = {
-  colors: { primary: '#ff5722' }
-};
-
-darkCardTheme: ThemeScopeInput = {
-  colorScheme: 'dark'
-};
-```
-
-```html
-<!-- Custom brand colors scoped to this card -->
-<ui-lib-card [theme]="brandCardTheme">
-  <ui-lib-button>Orange button</ui-lib-button>
-</ui-lib-card>
-
-<!-- Raw CSS variable overrides -->
-<ui-lib-card [theme]="{ variables: { '--uilib-card-bg': '#1a1a2e' } }">
-  <span card-header>Custom</span>
-</ui-lib-card>
-```
-
----
-
-## Theming & CSS Variables
-
-| Variable | Purpose |
-|---|---|
-| `--uilib-card-bg` | Card background |
-| `--uilib-card-text-color` | Card text color |
-| `--uilib-card-border` | Card border color |
-| `--uilib-card-border-width` | Border width |
-| `--uilib-card-radius` | Card border radius |
-| `--uilib-card-header-padding` | Header area padding |
-| `--uilib-card-body-padding` | Body area padding |
-| `--uilib-card-footer-padding` | Footer area padding |
-| `--uilib-card-header-bg` | Header background |
-| `--uilib-card-footer-bg` | Footer background |
-| `--uilib-card-shadow` | Base shadow |
-| `--uilib-card-shadow-hover` | Shadow on hover |
-| `--uilib-card-shadow-none` | Shadow for `elevation="none"` |
-| `--uilib-card-shadow-low` | Shadow for `elevation="low"` |
-| `--uilib-card-shadow-medium` | Shadow for `elevation="medium"` |
-| `--uilib-card-shadow-high` | Shadow for `elevation="high"` |
-
----
-
-## Accessibility
-
-The card is a container — ARIA semantics belong to child elements.
-
-| Key | Action |
-|---|---|
-| Tab | Moves focus through interactive elements inside the card |
-| Enter / Space | Activates the card (only when `hoverable` is true) |
-
-**Guidelines:**
-- Use heading elements inside `[card-header]` for clear document structure.
-- When `hoverable` is true, set `ariaLabel` to describe the card's action.
-- The close button carries an accessible label automatically — do not suppress it.
-- Avoid using a bare icon as the only close affordance; the library renders a labelled button.
-
----
-
-## Edge Cases
-
-- **`subtitle` vs `[card-subtitle]`**: if both are provided, the `[card-subtitle]` slot takes visual precedence — the projected rich content replaces the plain-text subtitle. Avoid providing both simultaneously.
-- **`hoverable` without `ariaLabel`**: the card renders with `role="button"` semantics but no accessible name, which will fail axe-core audits. Always set `ariaLabel` on hoverable cards.
-- **`closable` without a header slot**: the close button still renders in the header row. Provide a `[card-header]` slot or use `subtitle` so the header area has visible content alongside the button.
-- **`theme` string shorthand vs config object**: passing `theme="dark"` is equivalent to `[theme]="{ colorScheme: 'dark' }"`. Removing `theme` (setting it to `null`) restores the page-level theme immediately.
-- **`showHeader="false"`**: hides the entire header section including the icon, subtitle, and close button — not just the projected `[card-header]` slot.
-
----
-
-## Best Practices
-
-**Do:**
-- Keep header content concise; use `subtitle` / `[card-subtitle]` for secondary text.
-- Use `elevation` and `bordered` consistently across lists of cards.
-- Use `hoverable` only when the entire card is interactive.
-
-**Don't:**
-- Pass a raw CSS value or arbitrary object to `theme` — it must be `'light'`, `'dark'`, a `ThemeScopeConfig` object, or `null`.
-- Mix multiple variants in the same card list without a clear design reason.
-- Omit `ariaLabel` on hoverable cards — they render as buttons and need a description.
-
----
 
 ## Related
 
-- [`BUTTON.md`](BUTTON.md)
-- [`ICON.md`](ICON.md)
-- [`ACCORDION.md`](ACCORDION.md)
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#card)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/card/README.md)
+

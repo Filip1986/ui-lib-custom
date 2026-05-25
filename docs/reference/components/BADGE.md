@@ -1,508 +1,108 @@
-# Badge Component
+# Badge
 
-A performance-first badge component for labels, status indicators, counts, and tags.
+**Selector:** `ui-lib-badge`
+**Entry point:** `import { Badge } from 'ui-lib-custom/badge'`
+
+---
 
 ## Overview
 
-The Badge component is designed for displaying short pieces of information such as status labels, notification counts, tags, or any other small piece of metadata. It follows all established design principles with OnPush change detection, signal-based inputs, and design token integration.
+Badge - A performant badge/tag component for labels, status, and counts
 
-**Location:** `projects/ui-lib-custom/src/lib/badge/badge.ts`
+Single element rendering with OnPush strategy and signal-based inputs.
+Uses design tokens for consistent styling.
 
----
+@example
+<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>
+<ui-lib-badge color="danger" variant="outline" size="sm">3</ui-lib-badge>
+<ui-lib-badge color="info" variant="subtle">New</ui-lib-badge>
 
-## Features
-
-### ✅ Performance First
-- **OnPush Change Detection** - Only re-renders when inputs change
-- **Signal-Based Inputs** - Uses Angular signals for optimal reactivity
-- **Single Element Rendering** - No wrapper divs, just the host element
-- **Memoized Computations** - All styles computed once and cached
-- **Host Bindings** - Direct style application (no ngClass overhead)
-- **Zero Runtime Logic** - All values precomputed via signals
-
-### ✅ Design Token Integration
-- Uses `SEMANTIC_COLORS` for consistent colors
-- Uses `FONT_SIZES` for typography
-- Uses `SPACING_TOKENS` for padding
-- Uses `BORDER_RADIUS` for shape
-- Fully type-safe with TypeScript
-
-### ✅ Flexibility
-- 3 visual variants (solid, outline, subtle)
-- 7 semantic colors (primary, secondary, success, danger, warning, info, neutral)
-- 3 sizes (sm, md, lg)
-- Pill shape option (fully rounded)
-- Dot indicator mode (status dots)
-
----
-
-## Usage
-
-### Basic Import
-
-```typescript
-import { Badge } from 'ui-lib-custom';
-
-@Component({
-  standalone: true,
-  imports: [Badge],
-  template: `
-    <ui-lib-badge color="success">Active</ui-lib-badge>
-  `
-})
-export class MyComponent {}
-```
-
----
-
-## API Reference
+## API
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `variant` | `'solid' \| 'outline' \| 'subtle'` | `'solid'` | Visual style of the badge |
-| `color` | `'primary' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'neutral'` | `'primary'` | Color theme from design tokens |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the badge |
-| `pill` | `boolean` | `false` | Fully rounded pill shape |
-| `dot` | `boolean` | `false` | Small circular indicator (no content needed) |
+| Name         | Type                  | Default     | Description                                                                          |
+| ------------ | --------------------- | ----------- | ------------------------------------------------------------------------------------ |
+| `color`      | `BadgeColor`          | `'primary'` | /** Color theme of the badge                                                         |
+| `decorative` | `boolean`             | `false`     | /** Whether the badge is decorative and should be hidden from assistive technologies |
+| `dot`        | `boolean`             | `false`     | /** Whether the badge is a dot (small circular indicator)                            |
+| `label`      | `string | null`       | `null`      | /** Accessible label for the badge, used when screen reader support is needed        |
+| `pill`       | `boolean`             | `false`     | /** Whether the badge is a pill shape (fully rounded)                                |
+| `size`       | `BadgeSize`           | `'md'`      | /** Size of the badge                                                                |
+| `variant`    | `BadgeVariant | null` | `null`      | /** Visual variant of the badge                                                      |
 
-### Types
+### Outputs
 
-```typescript
-import { type BadgeVariant, type BadgeColor, type BadgeSize } from 'ui-lib-custom';
+_none_
 
-// Use in your code
-const variant: BadgeVariant = 'solid';
-const color: BadgeColor = 'success';
-const size: BadgeSize = 'md';
-```
+## Content Projection
 
----
+| Selector    | Notes |
+| ----------- | ----- |
+| _(default)_ | —     |
 
-## Theming & CSS Variables
+## Theming
 
-| Variable | Purpose |
-| --- | --- |
-| `--uilib-badge-bg` | Base background (solid variant). |
-| `--uilib-badge-bg-subtle` | Subtle background. |
-| `--uilib-badge-fg` | Text color. |
-| `--uilib-badge-border` | Border color (outline variant). |
-| `--uilib-badge-radius-resolved` | Badge corner radius. |
-| `--uilib-badge-padding-y-base` | Base vertical padding (density scaled). |
-| `--uilib-badge-padding-x-base` | Base horizontal padding (density scaled). |
-| `--uilib-badge-font-size-resolved` | Resolved font size. |
-| `--uilib-badge-dot-size` | Size for dot badges. |
-| `--uilib-badge-primary-*` | Per-color overrides for primary (bg/fg/border). |
-| `--uilib-badge-secondary-*` | Per-color overrides for secondary (bg/fg/border). |
-| `--uilib-badge-success-*` | Per-color overrides for success (bg/fg/border). |
-| `--uilib-badge-danger-*` | Per-color overrides for danger (bg/fg/border). |
-| `--uilib-badge-warning-*` | Per-color overrides for warning (bg/fg/border). |
-| `--uilib-badge-info-*` | Per-color overrides for info (bg/fg/border). |
-| `--uilib-badge-neutral-*` | Per-color overrides for neutral (bg/fg/border). |
-
-### Theme Override Example
-
-```scss
-[data-theme='brand-x'] {
-  --uilib-badge-bg: #0f172a;
-  --uilib-badge-fg: #e2e8f0;
-  --uilib-badge-border: #334155;
-}
-```
-
----
+| CSS Variable                          | Default                                                               |
+| ------------------------------------- | --------------------------------------------------------------------- |
+| `--uilib-badge-bg`                    | `var(--uilib-surface-dark-3)`                                         |
+| `--uilib-badge-bg-outline-resolved`   | `transparent`                                                         |
+| `--uilib-badge-bg-resolved`           | `var(--uilib-badge-bg, var(--uilib-color-neutral-50))`                |
+| `--uilib-badge-bg-subtle`             | `var(--uilib-surface-dark-2)`                                         |
+| `--uilib-badge-bg-subtle-resolved`    | `var(--uilib-badge-bg-subtle, var(--uilib-color-neutral-50))`         |
+| `--uilib-badge-border`                | `var(--uilib-border-dark)`                                            |
+| `--uilib-badge-border-color-resolved` | `transparent`                                                         |
+| `--uilib-badge-border-width-resolved` | `0`                                                                   |
+| `--uilib-badge-dot-size`              | `0.5rem`                                                              |
+| `--uilib-badge-fg`                    | `var(--uilib-text-dark-primary)`                                      |
+| `--uilib-badge-fg-resolved`           | `var(--uilib-badge-fg, var(--uilib-color-neutral-900))`               |
+| `--uilib-badge-font-size-resolved`    | `var(--uilib-font-size-sm)`                                           |
+| `--uilib-badge-gap-resolved`          | `var(--uilib-space-1)`                                                |
+| `--uilib-badge-padding-x-base`        | `0.5rem`                                                              |
+| `--uilib-badge-padding-x-resolved`    | `calc( var(--uilib-badge-padding-x-base) * var(--uilib-density, 1) )` |
+| `--uilib-badge-padding-y-base`        | `0.25rem`                                                             |
+| `--uilib-badge-padding-y-resolved`    | `calc( var(--uilib-badge-padding-y-base) * var(--uilib-density, 1) )` |
+| `--uilib-badge-radius-resolved`       | `var(--uilib-badge-radius, var(--uilib-shape-base, 6px))`             |
 
 ## Accessibility
 
-- Dot badges use `role="status"` with an accessible label.
-- Provide `label` input when the badge has no visible text.
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
----
+### Keyboard Interactions
 
-## Examples
+| Test description                                                        |
+| ----------------------------------------------------------------------- |
+| applies dark theme variables                                            |
+| does not set a live role for non-dot badges                             |
+| falls back to color as aria-label for dot badges without explicit label |
+| has no axe violations in decorative state                               |
+| has no axe violations in default state                                  |
+| has no axe violations in informative dot status state                   |
+| is not keyboard-focusable by default                                    |
+| marks decorative badges as aria-hidden                                  |
+| passes through explicit aria-label for informational badges             |
+| sets aria attributes for dot badges                                     |
+| sets aria-hidden for decorative badges                                  |
+| uses outline variant styles                                             |
+| uses solid variant styles by default                                    |
+| uses subtle variant styles                                              |
 
-### Variants
-
-#### Solid (Default)
-Filled background with white text for maximum visibility.
-
-```html
-<ui-lib-badge color="primary" variant="solid">Primary</ui-lib-badge>
-<ui-lib-badge color="success" variant="solid">Success</ui-lib-badge>
-<ui-lib-badge color="danger" variant="solid">Danger</ui-lib-badge>
-```
-
-#### Outline
-Transparent background with colored border and text.
-
-```html
-<ui-lib-badge color="primary" variant="outline">Primary</ui-lib-badge>
-<ui-lib-badge color="success" variant="outline">Success</ui-lib-badge>
-<ui-lib-badge color="danger" variant="outline">Danger</ui-lib-badge>
-```
-
-#### Subtle
-Light background with colored text for a softer appearance.
+## Usage Examples
 
 ```html
-<ui-lib-badge color="primary" variant="subtle">Primary</ui-lib-badge>
-<ui-lib-badge color="success" variant="subtle">Success</ui-lib-badge>
-<ui-lib-badge color="danger" variant="subtle">Danger</ui-lib-badge>
+<!-- Inline text badge -->
+<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>
+
+<!-- Dot status indicator -->
+<ui-lib-badge color="danger" [dot]="true" label="Error status" />
+
+<!-- Decorative badge (ignored by assistive technology) -->
+<ui-lib-badge [dot]="true" [decorative]="true" />
 ```
 
----
+## Related
 
-### Sizes
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#badge)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/badge/README.md)
 
-```html
-<!-- Small -->
-<ui-lib-badge color="primary" size="sm">Small</ui-lib-badge>
-
-<!-- Medium (default) -->
-<ui-lib-badge color="primary" size="md">Medium</ui-lib-badge>
-
-<!-- Large -->
-<ui-lib-badge color="primary" size="lg">Large</ui-lib-badge>
-```
-
----
-
-### Pill Shape
-
-```html
-<ui-lib-badge color="success" [pill]="true">Active</ui-lib-badge>
-<ui-lib-badge color="warning" [pill]="true">Pending</ui-lib-badge>
-<ui-lib-badge color="danger" [pill]="true">Inactive</ui-lib-badge>
-```
-
----
-
-### Dot Indicators
-
-Perfect for status indicators.
-
-```html
-<!-- Inline with text -->
-<ui-lib-inline [gap]="2" align="center">
-  <ui-lib-badge color="success" [dot]="true"></ui-lib-badge>
-  <span>Online</span>
-</ui-lib-inline>
-
-<ui-lib-inline [gap]="2" align="center">
-  <ui-lib-badge color="danger" [dot]="true"></ui-lib-badge>
-  <span>Offline</span>
-</ui-lib-inline>
-
-<!-- Different sizes -->
-<ui-lib-badge color="success" [dot]="true" size="sm"></ui-lib-badge>
-<ui-lib-badge color="success" [dot]="true" size="md"></ui-lib-badge>
-<ui-lib-badge color="success" [dot]="true" size="lg"></ui-lib-badge>
-```
-
----
-
-## Real-World Use Cases
-
-### Status Tags
-
-```html
-<ui-lib-badge color="success" [pill]="true">Published</ui-lib-badge>
-<ui-lib-badge color="warning" [pill]="true">Draft</ui-lib-badge>
-<ui-lib-badge color="info" [pill]="true">In Review</ui-lib-badge>
-<ui-lib-badge color="danger" [pill]="true">Archived</ui-lib-badge>
-```
-
-### Notification Counts
-
-```html
-<ui-lib-inline [gap]="3" align="center">
-  <span>Messages</span>
-  <ui-lib-badge color="danger" size="sm" [pill]="true">5</ui-lib-badge>
-</ui-lib-inline>
-
-<ui-lib-inline [gap]="3" align="center">
-  <span>Notifications</span>
-  <ui-lib-badge color="primary" size="sm" [pill]="true">12</ui-lib-badge>
-</ui-lib-inline>
-```
-
-### Technology Tags
-
-```html
-<ui-lib-inline [gap]="2">
-  <ui-lib-badge color="info" variant="subtle">TypeScript</ui-lib-badge>
-  <ui-lib-badge color="primary" variant="subtle">Angular</ui-lib-badge>
-  <ui-lib-badge color="success" variant="subtle">Node.js</ui-lib-badge>
-  <ui-lib-badge color="warning" variant="subtle">JavaScript</ui-lib-badge>
-</ui-lib-inline>
-```
-
-### User Roles
-
-```html
-<ui-lib-inline [gap]="2">
-  <ui-lib-badge color="danger" variant="outline" size="sm">Admin</ui-lib-badge>
-  <ui-lib-badge color="primary" variant="outline" size="sm">Moderator</ui-lib-badge>
-  <ui-lib-badge color="success" variant="outline" size="sm">Member</ui-lib-badge>
-  <ui-lib-badge color="neutral" variant="outline" size="sm">Guest</ui-lib-badge>
-</ui-lib-inline>
-```
-
-### Version Labels
-
-```html
-<ui-lib-inline [gap]="2">
-  <ui-lib-badge color="success" [pill]="true">v2.0.0</ui-lib-badge>
-  <ui-lib-badge color="info" variant="outline" [pill]="true">Beta</ui-lib-badge>
-  <ui-lib-badge color="warning" variant="outline" [pill]="true">Deprecated</ui-lib-badge>
-</ui-lib-inline>
-```
-
----
-
-## Composition
-
-Badge works great with layout primitives:
-
-```html
-<!-- With Stack -->
-<ui-lib-stack [gap]="3">
-  <ui-lib-inline [gap]="2" align="center">
-    <ui-lib-badge color="success" [dot]="true"></ui-lib-badge>
-    <span>Server Online</span>
-  </ui-lib-inline>
-  <ui-lib-inline [gap]="2" align="center">
-    <ui-lib-badge color="warning" [dot]="true"></ui-lib-badge>
-    <span>Database Slow</span>
-  </ui-lib-inline>
-</ui-lib-stack>
-
-<!-- With Grid -->
-<ui-lib-grid [columns]="3" [gap]="4">
-  <div class="card">
-    <ui-lib-stack [gap]="2">
-      <h3>Task 1</h3>
-      <ui-lib-badge color="success" variant="solid">Complete</ui-lib-badge>
-    </ui-lib-stack>
-  </div>
-  <!-- More cards -->
-</ui-lib-grid>
-```
-
----
-
-## Performance Characteristics
-
-### Bundle Size
-- **Minified:** ~2 KB
-- **Gzipped:** ~800 bytes
-- **Impact:** Negligible (uses existing design tokens)
-
-### Runtime Performance
-- **Change Detection:** OnPush only (runs only when inputs change)
-- **Computations:** Memoized via `computed()` signals
-- **DOM Operations:** Zero (styles applied declaratively)
-- **Re-renders:** Only when signal inputs change
-
-### DOM Structure
-```html
-<!-- Input -->
-<ui-lib-badge color="success">Active</ui-lib-badge>
-
-<!-- Output (single element) -->
-<ui-lib-badge style="...">Active</ui-lib-badge>
-```
-
-No wrapper divs or unnecessary elements.
-
----
-
-## Design Principles Followed
-
-### ✅ Performance First
-- OnPush change detection
-- Signal-based inputs
-- No runtime getters
-- Memoized computed values
-- Single element rendering
-
-### ✅ Design Token Integration
-- All colors from `SEMANTIC_COLORS`
-- All spacing from `SPACING_TOKENS`
-- All typography from `FONT_SIZES`
-- All borders from `BORDER_RADIUS`
-
-### ✅ Component Design
-- Thin and purpose-built
-- Explicit typed inputs (no config objects)
-- No two-way bindings
-- Immutable signal inputs
-- No side effects
-
-### ✅ Accessibility
-- Semantic HTML (uses host element)
-- Proper color contrast (WCAG AA compliant)
-- No custom focus management needed
-- Works with screen readers
-
----
-
-## Comparison with Other Libraries
-
-### Material Design Badge
-```html
-<!-- Material -->
-<mat-chip>Active</mat-chip>
-
-<!-- Our Badge -->
-<ui-lib-badge color="success">Active</ui-lib-badge>
-```
-
-**Advantages:**
-- Lighter weight (~800 bytes vs ~20 KB)
-- Signals instead of zones
-- OnPush by default
-- Design token integration
-
-### Bootstrap Badge
-```html
-<!-- Bootstrap -->
-<span class="badge bg-success">Active</span>
-
-<!-- Our Badge -->
-<ui-lib-badge color="success">Active</ui-lib-badge>
-```
-
-**Advantages:**
-- Type-safe inputs
-- No utility classes needed
-- Angular component integration
-- Better performance (OnPush)
-
----
-
-## Best Practices
-
-### ✅ DO: Use Semantic Colors
-
-```html
-<!-- Good -->
-<ui-lib-badge color="success">Active</ui-lib-badge>
-<ui-lib-badge color="danger">Error</ui-lib-badge>
-```
-
-### ❌ DON'T: Override Colors with Inline Styles
-
-```html
-<!-- Avoid -->
-<ui-lib-badge color="success" style="background: red;">Active</ui-lib-badge>
-```
-
-### ✅ DO: Use with Layout Primitives
-
-```html
-<!-- Good -->
-<ui-lib-inline [gap]="2">
-  <ui-lib-badge color="info" variant="subtle">Tag 1</ui-lib-badge>
-  <ui-lib-badge color="info" variant="subtle">Tag 2</ui-lib-badge>
-</ui-lib-inline>
-```
-
-### ✅ DO: Use Appropriate Sizes
-
-```html
-<!-- Good - Small for counts -->
-<ui-lib-badge color="danger" size="sm" [pill]="true">5</ui-lib-badge>
-
-<!-- Good - Medium for labels -->
-<ui-lib-badge color="success" size="md">Active</ui-lib-badge>
-```
-
----
-
-## Testing
-
-Run tests:
-```bash
-npm test -- --include='**/badge.spec.ts'
-```
-
-The component has comprehensive test coverage:
-- Component creation
-- All variants (solid, outline, subtle)
-- All colors
-- All sizes
-- Pill shape
-- Dot indicators
-- Content projection
-- Style bindings
-
----
-
-## Browser Support
-
-Works in all modern browsers:
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-No polyfills required.
-
----
-
-## Migration
-
-### From Custom Badges
-
-```html
-<!-- Before -->
-<span class="custom-badge custom-badge-success">Active</span>
-
-<!-- After -->
-<ui-lib-badge color="success">Active</ui-lib-badge>
-```
-
-### From Material Chips
-
-```html
-<!-- Before -->
-<mat-chip-listbox>
-  <mat-chip>TypeScript</mat-chip>
-  <mat-chip>Angular</mat-chip>
-</mat-chip-listbox>
-
-<!-- After -->
-<ui-lib-inline [gap]="2">
-  <ui-lib-badge color="info" variant="subtle">TypeScript</ui-lib-badge>
-  <ui-lib-badge color="primary" variant="subtle">Angular</ui-lib-badge>
-</ui-lib-inline>
-```
-
----
-
-## Demo
-
-View live examples at `/badges` route in the demo application.
-
-```bash
-npm run ng serve demo
-```
-
-Then navigate to `http://localhost:4200/badges`
-
----
-
-## Future Enhancements (Optional)
-
-Possible additions:
-- **Removable** - Add close button (with `@Output` event)
-- **Icons** - Support for leading/trailing icons
-- **Animations** - Entry/exit animations
-- **Maximum count** - Handle 99+ badge counts
-- **Custom colors** - Support for custom color values
-
----
-
-**Next:** See [Layout Primitives](./LAYOUT.md) for components that work well with Badge.

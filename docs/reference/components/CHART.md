@@ -1,252 +1,124 @@
 # Chart
 
-Canvas-based data visualization powered by Chart.js with strongly typed Angular wrappers, theme-token bridging, and signal-driven reactive updates.
+**Selector:** `ui-lib-chart`
+**Entry point:** `import { Chart } from 'ui-lib-custom/chart'`
 
 ---
 
 ## Overview
 
-`Chart` in `ui-lib-custom` provides a generic `<ui-lib-chart>` plus typed convenience wrappers:
-- `<ui-lib-bar-chart>`
-- `<ui-lib-line-chart>`
-- `<ui-lib-pie-chart>`
-- `<ui-lib-doughnut-chart>`
+Generic Chart.js wrapper component with theme-aware reactive updates.
 
-The implementation integrates Chart.js v4 while keeping the Angular API strongly typed (`ChartType`, `ChartData<TType>`, `ChartOptions<TType>`) and aligned with library conventions (standalone + OnPush + signal inputs/outputs).
+## API
 
----
+### Inputs
 
-## Features
+| Name                  | Type                  | Default   | Description                                                                                        |
+| --------------------- | --------------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `ariaLabel`           | `string`              | `'Chart'` | /** ARIA label applied to the rendered canvas. */                                                  |
+| `height`              | `string | null`       | `null`    | /** Optional host height override. */                                                              |
+| `maintainAspectRatio` | `boolean`             | `true`    | /** Keeps chart aspect ratio when responsive sizing is enabled. */                                 |
+| `plugins`             | `Plugin<ChartType>[]` | `[]`      | /** Inline Chart.js plugins for this chart instance. */                                            |
+| `responsive`          | `boolean`             | `true`    | /** Enables responsive chart layout behavior. */                                                   |
+| `showDataTable`       | `boolean`             | `true`    | /** When true, renders a visually-hidden data table as an accessible alternative to the canvas. */ |
+| `size`                | `ChartSize`           | `'md'`    | /** Wrapper size token. */                                                                         |
+| `width`               | `string | null`       | `null`    | /** Optional host width override. */                                                               |
 
-- CSS variable theming bridge (`ChartThemeService`) maps `--uilib-chart-*` tokens into Chart.js options
-- Typed convenience components for common chart types
-- Generic chart wrapper for advanced types (`radar`, `polarArea`, `bubble`, `scatter`, mixed datasets)
-- Reactive signal-based updates with incremental `chart.update()` when type is unchanged
-- Tree-shakable Chart.js registration via `provideChartDefaults()` or custom registration
-- Responsive by default (`responsive=true`, `maintainAspectRatio=true`)
+### Outputs
 
----
+| Name         | Type               | Description                                                     |
+| ------------ | ------------------ | --------------------------------------------------------------- |
+| `chartClick` | `ChartClickEvent`  | /** Emits when a chart data element is clicked. */              |
+| `chartHover` | `ChartClickEvent`  | /** Emits when a chart data element is hovered. */              |
+| `chartReady` | `Chart<ChartType>` | /** Emits after the underlying Chart.js instance is created. */ |
 
-## Installation
+## Content Projection
 
-Chart.js is a peer dependency of the library.
-
-```bash
-npm install chart.js
-```
-
----
-
-## Usage
-
-### Import from secondary entry point
-
-```ts
-import {
-  ChartComponent,
-  BarChartComponent,
-  LineChartComponent,
-  PieChartComponent,
-  DoughnutChartComponent,
-  provideChartDefaults,
-} from 'ui-lib-custom/chart';
-```
-
-### Register Chart.js defaults
-
-Use `provideChartDefaults()` during app setup (or one-time initialization path).
-
-```ts
-import { provideChartDefaults } from 'ui-lib-custom/chart';
-
-provideChartDefaults();
-```
-
-### Basic wrapper example
-
-```html
-<ui-lib-bar-chart [data]="revenueData" [ariaLabel]="'Monthly revenue'" />
-```
-
-### Generic component example
-
-```html
-<ui-lib-chart
-  type="radar"
-  [data]="capabilityData"
-  [ariaLabel]="'Platform capability radar chart'"
-/>
-```
-
----
-
-## API Reference
-
-### `ChartComponent` Inputs
-
-| Input | Type | Default | Description |
-|---|---|---:|---|
-| `type` | `ChartType` | required | Chart.js chart type for current instance. |
-| `data` | `ChartData<ChartType> \| null` | `null` | Dataset payload forwarded to Chart.js. |
-| `options` | `ChartOptions<ChartType> \| null` | `null` | Consumer options merged over theme/base defaults. |
-| `plugins` | `Plugin<ChartType>[]` | `[]` | Per-instance Chart.js plugins. |
-| `size` | `ChartSize` (`'sm' \| 'md' \| 'lg'`) | `'md'` | Wrapper size token. |
-| `responsive` | `boolean` | `true` | Enables responsive canvas behavior. |
-| `maintainAspectRatio` | `boolean` | `true` | Preserves chart aspect ratio under responsive layout. |
-| `ariaLabel` | `string` | `'Chart'` | Accessible label applied to canvas (`role="img"`). |
-| `height` | `string \| null` | `null` | Optional host height override. |
-| `width` | `string \| null` | `null` | Optional host width override. |
-
-### `ChartComponent` Outputs
-
-| Output | Payload | Description |
-|---|---|---|
-| `chartReady` | `Chart<ChartType>` | Emits once the Chart.js instance is created. |
-| `chartClick` | `ChartClickEvent` | Emits when Chart.js click interaction resolves active elements. |
-| `chartHover` | `ChartClickEvent` | Emits when Chart.js hover interaction resolves active elements. |
-
-### `ChartComponent` Public Methods
-
-| Method | Return Type | Description |
-|---|---|---|
-| `getChartInstance()` | `Chart<ChartType> \| null` | Returns the underlying Chart.js instance. |
-| `refresh()` | `void` | Recreates the chart instance using latest inputs. |
-
-### Convenience Components
-
-`BarChartComponent`, `LineChartComponent`, `PieChartComponent`, and `DoughnutChartComponent`:
-- forward the same wrapper inputs (`data`, `options`, `plugins`, `size`, `responsive`, `maintainAspectRatio`, `ariaLabel`, `height`, `width`)
-- expose the same interaction outputs (`chartReady`, `chartClick`, `chartHover`)
-- provide `getChartInstance()` and `refresh()` helper methods
-
-### `ChartThemeService`
-
-| Method | Signature | Description |
-|---|---|---|
-| `readThemeTokens` | `(element: Element) => ChartThemeTokens` | Reads and normalizes `--uilib-chart-*` CSS variables from computed styles. |
-| `buildChartOptions` | `(tokens: ChartThemeTokens) => Partial<ChartOptions<ChartType>>` | Builds theme-derived Chart.js options for scales, legend, tooltip, and element defaults. |
-| `buildColorPalette` | `(tokens: ChartThemeTokens, datasetCount: number) => string[]` | Produces dataset colors from theme palette with safe cycling/fallback. |
-
-### `provideChartDefaults()`
-
-| Function | Return Type | Description |
-|---|---|---|
-| `provideChartDefaults()` | `void` | Registers common Chart.js controllers/elements/scales/plugins for convenience setups. |
-
-### Types
-
-| Type | Description |
-|---|---|
-| `ChartType` | Supported chart union: `'bar' \| 'line' \| 'pie' \| 'doughnut' \| 'radar' \| 'polarArea' \| 'bubble' \| 'scatter'`. |
-| `ChartSize` | Wrapper size union: `'sm' \| 'md' \| 'lg'`. |
-| `ChartClickEvent` | Interaction payload with native `MouseEvent`, active elements, and chart instance. |
-| `ChartThemeTokens` | Normalized theme token object consumed by `ChartThemeService`. |
-
----
+_none_
 
 ## Theming
 
-### CSS Variables
-
-| Variable | Purpose |
-|---|---|
-| `--uilib-chart-min-height-sm` | Small wrapper minimum height |
-| `--uilib-chart-min-height-md` | Medium wrapper minimum height |
-| `--uilib-chart-min-height-lg` | Large wrapper minimum height |
-| `--uilib-chart-min-height` | Active wrapper minimum height |
-| `--uilib-chart-font-family` | Base chart font family |
-| `--uilib-chart-font-size` | Base chart font size |
-| `--uilib-chart-font-color` | Base text/tick color |
-| `--uilib-chart-grid-color` | Grid line color |
-| `--uilib-chart-border-color` | Axis/element border color |
-| `--uilib-chart-background-color` | Element fill background default |
-| `--uilib-chart-tooltip-background` | Tooltip background color |
-| `--uilib-chart-tooltip-font-color` | Tooltip text color |
-| `--uilib-chart-legend-font-color` | Legend text color |
-| `--uilib-chart-color-1` | Palette color 1 |
-| `--uilib-chart-color-2` | Palette color 2 |
-| `--uilib-chart-color-3` | Palette color 3 |
-| `--uilib-chart-color-4` | Palette color 4 |
-| `--uilib-chart-color-5` | Palette color 5 |
-| `--uilib-chart-color-6` | Palette color 6 |
-| `--uilib-chart-color-7` | Palette color 7 |
-| `--uilib-chart-color-8` | Palette color 8 |
-
-### Theme override example
-
-```scss
-.custom-report-surface {
-  --uilib-chart-font-color: #0f172a;
-  --uilib-chart-grid-color: rgba(15, 23, 42, 0.14);
-  --uilib-chart-border-color: rgba(15, 23, 42, 0.22);
-  --uilib-chart-color-1: #2563eb;
-  --uilib-chart-color-2: #10b981;
-  --uilib-chart-color-3: #f59e0b;
-}
-```
-
-### Variant notes
-
-- **Material**: maps to Material-like neutral + semantic palette tokens
-- **Bootstrap**: maps to Bootstrap body/border/semantic tokens
-- **Minimal**: uses subdued monochrome palette derived from page foreground
-
----
-
-## Advanced Usage
-
-### Custom tree-shakable registration
-
-For tighter bundle control, register only the Chart.js pieces you use.
-
-```ts
-import {
-  BarController,
-  BarElement,
-  CategoryScale,
-  Chart,
-  Legend,
-  LinearScale,
-  Tooltip,
-} from 'chart.js';
-
-Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-```
-
-### Access the Chart.js instance
-
-```ts
-const instance = chartComponent.getChartInstance();
-instance?.update();
-```
-
-### Mixed chart types
-
-Use generic `<ui-lib-chart type="bar">` and set per-dataset `type` values in data.
-
-### Dynamic data updates
-
-When chart type stays the same, updates flow through `chart.update()` (no full reinit).
-
-### Plugin integration
-
-Pass plugin instances with `[plugins]="[...]"` and plugin-specific options in `options.plugins`.
-
----
+| CSS Variable                       | Default                                               |
+| ---------------------------------- | ----------------------------------------------------- |
+| `--uilib-chart-background-color`   | `transparent`                                         |
+| `--uilib-chart-border-color`       | `var(--uilib-border-color, rgba(0, 0, 0, 0.1))`       |
+| `--uilib-chart-color-1`            | `var(--uilib-color-primary-500, #4285f4)`             |
+| `--uilib-chart-color-2`            | `var(--uilib-color-danger-500, #ea4335)`              |
+| `--uilib-chart-color-3`            | `var(--uilib-color-warning-500, #fbbc04)`             |
+| `--uilib-chart-color-4`            | `var(--uilib-color-success-500, #34a853)`             |
+| `--uilib-chart-color-5`            | `var(--uilib-chart-accent-1, #ff6d01)`                |
+| `--uilib-chart-color-6`            | `var(--uilib-chart-accent-2, #46bdc6)`                |
+| `--uilib-chart-color-7`            | `var(--uilib-chart-accent-3, #7baaf7)`                |
+| `--uilib-chart-color-8`            | `var(--uilib-chart-accent-4, #f07b72)`                |
+| `--uilib-chart-font-color`         | `var(--uilib-text-color, #333333)`                    |
+| `--uilib-chart-font-family`        | `var(--uilib-font-family, inherit)`                   |
+| `--uilib-chart-font-size`          | `12`                                                  |
+| `--uilib-chart-grid-color`         | `var(--uilib-border-color, rgba(0, 0, 0, 0.1))`       |
+| `--uilib-chart-legend-font-color`  | `var(--uilib-text-color-secondary, #666666)`          |
+| `--uilib-chart-min-height`         | `var(--uilib-chart-min-height-md)`                    |
+| `--uilib-chart-min-height-lg`      | `400px`                                               |
+| `--uilib-chart-min-height-md`      | `300px`                                               |
+| `--uilib-chart-min-height-sm`      | `200px`                                               |
+| `--uilib-chart-tooltip-background` | `var(--uilib-overlay-tooltip-bg, rgba(0, 0, 0, 0.8))` |
+| `--uilib-chart-tooltip-font-color` | `var(--uilib-overlay-tooltip-fg, #ffffff)`            |
 
 ## Accessibility
 
-- Canvas is rendered with `role="img"`
-- Use `ariaLabel` to provide meaningful context for non-visual users
-- Canvas charts have inherent accessibility limitations
-- For critical data, provide a synchronized tabular/text alternative alongside charts
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
----
+### Keyboard Interactions
 
-## Performance
+| Test description                                                           |
+| -------------------------------------------------------------------------- |
+| aria-describedby on canvas points to the table id                          |
+| canvas aria-label updates when ariaLabel input changes                     |
+| canvas has aria-describedby when showDataTable is true and data is present |
+| canvas has default aria-label                                              |
+| canvas has no aria-describedby when showDataTable is false                 |
+| canvas has role=                                                           |
+| data table caption matches ariaLabel                                       |
+| data table cells contain correct values                                    |
+| data table has column headers derived from labels                          |
+| data table renders multiple datasets as separate rows                      |
+| data table row header contains dataset label                               |
+| does not render a data table when data is null                             |
+| does not render a data table when showDataTable is false                   |
+| each chart instance gets a unique table id                                 |
+| passes axe with chart data and visible table                               |
+| passes axe with multi-dataset data                                         |
+| passes axe with no chart data                                              |
+| passes axe with showDataTable disabled                                     |
+| renders a data table when data is provided                                 |
+| sets aria-label on the canvas                                              |
 
-- Chart.js uses canvas rendering, which is efficient for larger datasets
-- Signal-driven updates avoid unnecessary Angular/template churn
-- Data/options updates on same type use `chart.update()` instead of full recreation where possible
+## Usage Examples
 
+```html
+<!-- minimal bar chart -->
+<ui-lib-chart type="bar" [data]="chartData" ariaLabel="Revenue by month" />
+
+<!-- line chart with custom height and click handler -->
+<ui-lib-chart
+  type="line"
+  [data]="lineData"
+  [options]="lineOptions"
+  height="300px"
+  ariaLabel="User growth over the past year"
+  (chartClick)="onDataPointClick($event)"
+/>
+
+<!-- chart without the built-in data table (when you supply your own accessible alternative) -->
+<ui-lib-chart
+  type="doughnut"
+  [data]="pieData"
+  [showDataTable]="false"
+  ariaLabel="Market share breakdown"
+/>
+```
+
+## Related
+
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#chart)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/chart/README.md)
 

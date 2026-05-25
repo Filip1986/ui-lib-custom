@@ -1,374 +1,163 @@
 # Dialog
 
+**Selector:** `ui-lib-dialog`
+**Entry point:** `import { Dialog } from 'ui-lib-custom/dialog'`
+
+---
+
 ## Overview
-`ui-lib-dialog` is an overlay container for focused tasks that need temporary interruption, such as confirm flows, short forms, and detail previews. It supports modal and non-modal modes, responsive sizing, draggable/maximizable behavior, variant styling, and accessible keyboard/focus patterns.
 
-## Import
+CSS selector matching all focusable elements in the dialog panel. */
+const DIALOG_FOCUSABLE_SELECTOR: string = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled]):not([type="hidden"])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+  '[contenteditable="true"]',
+].join(', ');
 
-```typescript
-import { DialogComponent } from 'ui-lib-custom/dialog';
-```
+/**Dialog component with modal/backdrop and responsive behavior.
 
-## Basic Usage
+## API
 
-```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DialogComponent } from 'ui-lib-custom/dialog';
+### Inputs
 
-@Component({
-  standalone: true,
-  imports: [DialogComponent],
-  templateUrl: './dialog-basic-example.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class DialogBasicExampleComponent {
-  public visible: boolean = false;
-}
-```
+| Name              | Type                        | Default                            | Description                                                                                |
+| ----------------- | --------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| `ariaDescribedBy` | `string | undefined`        | `undefined`                        | /** Optional aria-describedby pointing to an element that describes the dialog purpose. */ |
+| `ariaLabelledBy`  | `string | undefined`        | `undefined`                        | /** Optional aria-labelledby override. */                                                  |
+| `blockScroll`     | `boolean`                   | `DIALOG_DEFAULTS.BlockScroll`      | /** Enables body scroll lock while a modal dialog is visible. */                           |
+| `breakpoints`     | `Record<string, string>`    | `{ ...DIALOG_DEFAULTS.Breakpoints` | /** Responsive max-width -> width map, e.g. { '960px': '75vw', '640px': '90vw' }. */       |
+| `closable`        | `boolean`                   | `DIALOG_DEFAULTS.Closable`         | /** Controls whether the close button is shown. */                                         |
+| `closeOnEscape`   | `boolean`                   | `DIALOG_DEFAULTS.CloseOnEscape`    | /** Enables closing the dialog with Escape key. */                                         |
+| `dismissableMask` | `boolean`                   | `DIALOG_DEFAULTS.DismissableMask`  | /** Enables closing the dialog by clicking the modal backdrop. */                          |
+| `draggable`       | `boolean`                   | `DIALOG_DEFAULTS.Draggable`        | /** Enables dialog dragging (placeholder for v1 core behavior). */                         |
+| `header`          | `string`                    | `DIALOG_DEFAULTS.Header`           | /** Optional header text fallback when no projected header is supplied. */                 |
+| `headless`        | `boolean`                   | `DIALOG_DEFAULTS.Headless`         | /** Enables headless rendering mode. */                                                    |
+| `maximizable`     | `boolean`                   | `DIALOG_DEFAULTS.Maximizable`      | /** Enables maximize/minimize controls. */                                                 |
+| `modal`           | `boolean`                   | `DIALOG_DEFAULTS.Modal`            | /** Enables modal mode and backdrop rendering. */                                          |
+| `position`        | `DialogPosition`            | `DIALOG_DEFAULTS.Position`         | /** Dialog viewport placement. */                                                          |
+| `styleClass`      | `string | null`             | `null`                             | /** Optional additional CSS class(es) applied to the dialog panel element. */              |
+| `variant`         | `DialogVariant | undefined` | `undefined`                        | /** Optional component variant override. */                                                |
 
-```html
-<!-- dialog-basic-example.html -->
-<button
-  type="button"
-  (click)="visible = true"
-  [attr.aria-expanded]="visible"
-  aria-controls="profile-dialog"
->
-  Open
-</button>
+### Models (two-way bindable)
 
-<ui-lib-dialog
-  [(visible)]="visible"
-  header="Edit Profile"
-  [modal]="true"
->
-  <p id="profile-dialog">Dialog content here.</p>
-</ui-lib-dialog>
-```
+| Name      | Type      | Default                   | Description                                                                   |
+| --------- | --------- | ------------------------- | ----------------------------------------------------------------------------- |
+| `visible` | `boolean` | `DIALOG_DEFAULTS.Visible` | /** Controls dialog visibility. Supports two-way binding with [(visible)]. */ |
 
-## Properties
+### Outputs
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| `visible` | `boolean` | `false` | Controls visibility. Supports two-way binding through `[(visible)]`. |
-| `header` | `string` | `''` | Header fallback text when no projected header slot is provided. |
-| `modal` | `boolean` | `false` | Enables modal behavior and backdrop rendering. |
-| `closable` | `boolean` | `true` | Shows the close button in the header actions area. |
-| `closeOnEscape` | `boolean` | `true` | Closes the dialog when `Escape` is pressed on the panel. |
-| `dismissableMask` | `boolean` | `false` | Closes the dialog when clicking the backdrop. |
-| `draggable` | `boolean` | `false` | Enables drag by pointer on the dialog header. |
-| `maximizable` | `boolean` | `false` | Shows maximize/minimize action and allows full-screen toggle. |
-| `blockScroll` | `boolean` | `true` | Locks `document.body` scroll while a modal dialog is visible. |
-| `position` | `DialogPosition` | `'center'` | Viewport placement of the dialog container. |
-| `breakpoints` | `Record<string, string>` | `{}` | Max-width map for responsive dialog width, for example `{ '960px': '75vw' }`. |
-| `variant` | `DialogVariant \| undefined` | `undefined` | Optional explicit variant override (`material`, `bootstrap`, `minimal`). |
-| `ariaLabelledBy` | `string \| undefined` | `undefined` | Explicit `aria-labelledby` target id override. |
-| `headless` | `boolean` | `false` | Renders custom projected headless content instead of built-in chrome. |
-
-## Events
-
-| Name | Payload | Description |
-| --- | --- | --- |
-| `visibleChange` | `boolean` | Emitted by Angular model binding for `[(visible)]` updates. |
-| `show` | `void` | Fired after dialog show lifecycle completes. |
-| `hide` | `void` | Fired after dialog hide lifecycle completes. |
-| `maximize` | `{ maximized: boolean }` | Fired whenever maximize state toggles. |
+| Name       | Type                     | Description                                 |
+| ---------- | ------------------------ | ------------------------------------------- |
+| `hide`     | `void`                   | /** Emitted after the dialog is hidden. */  |
+| `maximize` | `{ maximized: boolean }` | /** Emitted when maximize state changes. */ |
+| `show`     | `void`                   | /** Emitted after the dialog is shown. */   |
 
 ## Content Projection
 
-### Slots
+| Selector                | Notes |
+| ----------------------- | ----- |
+| _(default)_             | —     |
+| `[uiLibDialogFooter]`   | —     |
+| `[uiLibDialogHeader]`   | —     |
+| `[uiLibDialogHeadless]` | —     |
 
-- Default slot: main body content.
-- `[uiLibDialogHeader]`: custom header content.
-- `[uiLibDialogFooter]`: footer actions/content.
-- `[uiLibDialogHeadless]`: full custom content when `headless` is `true`.
+## Theming
 
-### Default/Header/Footer Example
-
-```html
-<ui-lib-dialog [(visible)]="visible" header="Fallback Title" [modal]="true">
-  <span uiLibDialogHeader>
-    <strong>Custom Title</strong>
-  </span>
-
-  <p>Body content</p>
-
-  <div uiLibDialogFooter>
-    <button type="button" (click)="visible = false">Cancel</button>
-    <button type="button">Save</button>
-  </div>
-</ui-lib-dialog>
-```
-
-### Headless Slot Example
-
-```html
-<ui-lib-dialog [(visible)]="visible" [headless]="true" [modal]="true">
-  <div
-    uiLibDialogHeadless
-    class="headless-shell"
-    aria-labelledby="headless-title"
-  >
-    <header class="headless-shell__header">
-      <h2 id="headless-title">Custom Headless Dialog</h2>
-      <button type="button" (click)="visible = false" aria-label="Close">x</button>
-    </header>
-
-    <main class="headless-shell__content">
-      <p>Bring your own structure and styles.</p>
-    </main>
-
-    <footer class="headless-shell__footer">
-      <button type="button" (click)="visible = false">Done</button>
-    </footer>
-  </div>
-</ui-lib-dialog>
-```
-
-## Positioning
-
-`position` supports 9 values:
-
-- `center`
-- `top`
-- `bottom`
-- `left`
-- `right`
-- `top-left`
-- `top-right`
-- `bottom-left`
-- `bottom-right`
-
-```typescript
-import type { DialogPosition } from 'ui-lib-custom/dialog';
-
-const positions: DialogPosition[] = [
-  'center',
-  'top',
-  'bottom',
-  'left',
-  'right',
-  'top-left',
-  'top-right',
-  'bottom-left',
-  'bottom-right',
-];
-```
-
-```html
-@for (position of positions; track position) {
-  <ui-lib-dialog
-    [(visible)]="visibleMap[position]"
-    [position]="position"
-    [header]="'Position: ' + position"
-  >
-    <p>Content for {{ position }}</p>
-  </ui-lib-dialog>
-}
-```
-
-## Responsive
-
-```typescript
-const responsiveBreakpoints: Record<string, string> = {
-  '1200px': '50vw',
-  '960px': '75vw',
-  '640px': '92vw',
-};
-```
-
-```html
-<ui-lib-dialog
-  [(visible)]="visible"
-  header="Responsive Dialog"
-  [modal]="true"
-  [breakpoints]="responsiveBreakpoints"
->
-  <p>Resize viewport to see width updates.</p>
-</ui-lib-dialog>
-```
-
-## Maximizable
-
-```html
-<ui-lib-dialog
-  [(visible)]="visible"
-  header="Maximizable"
-  [modal]="true"
-  [maximizable]="true"
-  (maximize)="onMaximize($event)"
->
-  <p>Use the maximize action in the header.</p>
-</ui-lib-dialog>
-```
-
-```typescript
-const onMaximize = (event: { maximized: boolean }): void => {
-  console.log('Dialog maximized state:', event.maximized);
-};
-```
-
-## Draggable
-
-```html
-<ui-lib-dialog
-  [(visible)]="visible"
-  header="Draggable"
-  [modal]="false"
-  [draggable]="true"
->
-  <p>Drag from the header area.</p>
-</ui-lib-dialog>
-```
-
-Notes:
-
-- Drag starts from the header area only.
-- Header action buttons (close/maximize) do not initiate drag.
-- Drag is disabled while maximized.
-
-## Without Modal
-
-```html
-<ui-lib-dialog
-  [(visible)]="visible"
-  header="Non-Modal Dialog"
-  [modal]="false"
-  [dismissableMask]="false"
->
-  <p>This dialog does not render a backdrop.</p>
-</ui-lib-dialog>
-```
-
-## Headless Mode (Full Custom Chrome)
-
-```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DialogComponent } from 'ui-lib-custom/dialog';
-
-@Component({
-  standalone: true,
-  imports: [DialogComponent],
-  templateUrl: './dialog-headless-example.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class DialogHeadlessExampleComponent {
-  public visible: boolean = false;
-}
-```
-
-```html
-<!-- dialog-headless-example.html -->
-<button type="button" (click)="visible = true">Open Headless</button>
-
-<ui-lib-dialog [(visible)]="visible" [headless]="true" [modal]="true">
-  <div
-    uiLibDialogHeadless
-    class="headless-shell"
-    aria-labelledby="headless-title"
-  >
-    <header class="headless-shell__header">
-      <h2 id="headless-title">Custom Confirmation</h2>
-      <button type="button" (click)="visible = false" aria-label="Close">x</button>
-    </header>
-
-    <section class="headless-shell__body">
-      <p>Delete this resource permanently?</p>
-    </section>
-
-    <footer class="headless-shell__footer">
-      <button type="button" (click)="visible = false">Cancel</button>
-      <button type="button" (click)="visible = false">Confirm</button>
-    </footer>
-  </div>
-</ui-lib-dialog>
-```
+| CSS Variable                             | Default                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------- |
+| `--uilib-dialog-action-hover-material`   | `var(--uilib-surface-dark-3)`                                       |
+| `--uilib-dialog-backdrop-enter-duration` | `150ms`                                                             |
+| `--uilib-dialog-backdrop-enter-easing`   | `ease-out`                                                          |
+| `--uilib-dialog-bg`                      | `var(--uilib-surface)`                                              |
+| `--uilib-dialog-border`                  | `0 solid transparent`                                               |
+| `--uilib-dialog-border-bootstrap`        | `var(--uilib-border-dark)`                                          |
+| `--uilib-dialog-border-minimal`          | `var(--uilib-border-dark)`                                          |
+| `--uilib-dialog-border-radius`           | `var(--uilib-radius-lg, var(--uilib-shape-base))`                   |
+| `--uilib-dialog-close-btn-color`         | `var(--uilib-muted)`                                                |
+| `--uilib-dialog-close-btn-hover-bg`      | `var(--uilib-surface-alt)`                                          |
+| `--uilib-dialog-close-btn-size`          | `2rem`                                                              |
+| `--uilib-dialog-content-padding`         | `var(--uilib-space-5, 1.25rem)`                                     |
+| `--uilib-dialog-enter-duration`          | `200ms`                                                             |
+| `--uilib-dialog-enter-easing`            | `ease-out`                                                          |
+| `--uilib-dialog-enter-start-scale`       | `0.9`                                                               |
+| `--uilib-dialog-enter-start-translate-y` | `-8px`                                                              |
+| `--uilib-dialog-footer-border-top`       | `1px solid var(--uilib-border)`                                     |
+| `--uilib-dialog-footer-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`          |
+| `--uilib-dialog-header-bg`               | `var(--uilib-surface-alt)`                                          |
+| `--uilib-dialog-header-color`            | `var(--uilib-page-fg)`                                              |
+| `--uilib-dialog-header-font-size`        | `var(--uilib-font-size-lg)`                                         |
+| `--uilib-dialog-header-font-weight`      | `var(--uilib-font-weight-500, 500)`                                 |
+| `--uilib-dialog-header-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`          |
+| `--uilib-dialog-shadow`                  | `var(--uilib-dialog-shadow-material, var(--uilib-shadow-lg, none))` |
+| `--uilib-dialog-z-index`                 | `var(--uilib-z-modal, 1050)`                                        |
 
 ## Accessibility
 
-### Trigger Requirements
-
-Use a trigger element that communicates dialog state:
-
-- `aria-expanded` reflects open/closed state.
-- `aria-controls` points to a meaningful target in dialog content.
-- Use clear trigger text for intent, for example "Edit Profile".
-
-### Dialog ARIA
-
-- Built-in panel uses `role="dialog"`.
-- `aria-labelledby` is auto-generated from projected/header title unless overridden with `ariaLabelledBy`.
-- `aria-modal="true"` is set when `modal` is `true`.
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
-- `Escape` closes when `closeOnEscape` is `true`.
-- Close and maximize actions are keyboard-focusable buttons.
-- In modal usage, focus is trapped within the dialog while open.
+| Test description                                                                      |
+| ------------------------------------------------------------------------------------- |
+| close button should have aria-label                                                   |
+| dialog has aria-labelledby pointing to a valid element                                |
+| dialog has role=                                                                      |
+| documents intentional axe rule skips                                                  |
+| enter and space on maximize button toggle maximize                                    |
+| enter on close button closes the dialog                                               |
+| escape closes the dialog when closeOnEscape is true                                   |
+| maximize button should have correct aria-label (toggles)                              |
+| modal dialog has aria-modal=                                                          |
+| non-modal dialog does not have aria-modal                                             |
+| non-modal dialog moves focus into the panel when opened via visible transition        |
+| non-modal dialog restores focus to the trigger when closed                            |
+| panel has aria-describedby when ariaDescribedBy input is provided                     |
+| runs axe on the dialog in visible + modal state with no violations                    |
+| runs axe on the dialog in visible + non-modal state with no violations                |
+| runs axe on the dialog with custom header content with no violations                  |
+| shift+tab at first focusable element wraps to last                                    |
+| should apply center positioning by default                                            |
+| should close on Escape key when closeOnEscape is true                                 |
+| should have aria-labelledby pointing to the title element                             |
+| should have aria-modal when modal is true                                             |
+| should have role=                                                                     |
+| should not add aria-describedby when ariaDescribedBy is not set                       |
+| should not close on Escape when closeOnEscape is false                                |
+| should set aria-describedby on the panel when ariaDescribedBy is provided             |
+| should set aria-modal=                                                                |
+| space on close button closes the dialog                                               |
+| tab at last focusable element wraps to first                                          |
+| tab does not escape modal dialog                                                      |
+| when dialog closes, focus returns to the trigger element                              |
+| when dialog has no focusable elements, focus is on the dialog panel itself            |
+| when modal dialog opens, focus moves to the first focusable element inside the dialog |
 
-### Focus Management
+## Usage Examples
 
-- In modal usage, focus moves inside the dialog on activation.
-- Tab/Shift+Tab wrap within dialog focusable elements.
-- Focus returns to the previously focused element when the dialog closes.
-- If no focusable child exists, focus is set to the dialog container.
+```html
+<!-- basic modal dialog -->
+<ui-lib-dialog [(visible)]="isOpen" [modal]="true" header="Confirm action">
+  <p>Are you sure you want to continue?</p>
+  <div uiLibDialogFooter>
+    <ui-lib-button label="Cancel" (click)="isOpen = false" />
+    <ui-lib-button label="Confirm" severity="primary" (click)="confirm()" />
+  </div>
+</ui-lib-dialog>
 
-## Design Tokens (CSS Custom Properties)
-
-| Token | Description |
-| --- | --- |
-| `--uilib-dialog-bg` | Dialog panel background color. |
-| `--uilib-dialog-border-radius` | Base panel border radius. |
-| `--uilib-dialog-shadow` | Base panel shadow. |
-| `--uilib-dialog-border` | Base panel border shorthand. |
-| `--uilib-dialog-header-bg` | Header background. |
-| `--uilib-dialog-header-color` | Header text color. |
-| `--uilib-dialog-header-font-size` | Header title font size. |
-| `--uilib-dialog-header-font-weight` | Header title font weight. |
-| `--uilib-dialog-header-padding` | Header padding. |
-| `--uilib-dialog-content-padding` | Content area padding. |
-| `--uilib-dialog-footer-padding` | Footer padding. |
-| `--uilib-dialog-footer-border-top` | Footer top border. |
-| `--uilib-dialog-close-btn-size` | Size for close/maximize icon buttons. |
-| `--uilib-dialog-close-btn-color` | Icon action foreground color. |
-| `--uilib-dialog-close-btn-hover-bg` | Icon action hover background. |
-| `--uilib-dialog-z-index` | Dialog host z-index. |
-| `--uilib-dialog-maximized-margin` | Margin override in maximized state. |
-| `--uilib-dialog-shadow-material` | Material variant shadow token. |
-| `--uilib-dialog-shadow-bootstrap` | Bootstrap variant shadow token. |
-| `--uilib-dialog-shadow-minimal` | Minimal variant shadow token. |
-| `--uilib-dialog-border-bootstrap` | Bootstrap border color token. |
-| `--uilib-dialog-border-minimal` | Minimal border color token. |
-| `--uilib-dialog-action-hover-material` | Material action hover token. |
-| `--uilib-overlay-backdrop-bg` | Backdrop color source. |
-| `--uilib-overlay-backdrop-opacity` | Backdrop opacity multiplier. |
-| `--uilib-z-backdrop` | Backdrop layer z-index. |
-
-## Variant Comparison
-
-| Variant | Visual Character | Typical Use |
-| --- | --- | --- |
-| `material` | Softer radius, elevated shadow, rounded action buttons. | Modern app surfaces and rich overlays. |
-| `bootstrap` | Defined border, medium radius, stronger structural separators. | Traditional enterprise/admin UI style. |
-| `minimal` | Subtle shadow, thin border, compact visual chrome. | Low-noise layouts and utility dialogs. |
-
-## Exported Types
-
-```typescript
-import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
+<!-- draggable, maximizable dialog with custom header -->
+<ui-lib-dialog [(visible)]="isOpen" [modal]="true" [draggable]="true" [maximizable]="true">
+  <span uiLibDialogHeader>My custom header</span>
+  <p>Dialog body content.</p>
+</ui-lib-dialog>
 ```
 
-```typescript
-type DialogPosition =
-  | 'center'
-  | 'top'
-  | 'bottom'
-  | 'left'
-  | 'right'
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right';
+## Related
 
-type DialogVariant = 'material' | 'bootstrap' | 'minimal';
-```
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#dialog)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/dialog/README.md)
+

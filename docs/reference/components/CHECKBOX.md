@@ -1,190 +1,132 @@
-# Checkbox Component
+# Checkbox
 
-Accessible checkbox with binary and group-array modes, signal inputs, CSS-variable theming, and form integration.
+**Selector:** `ui-lib-checkbox`
+**Entry point:** `import { Checkbox } from 'ui-lib-custom/checkbox'`
 
-**Location:** `projects/ui-lib-custom/src/lib/checkbox/checkbox.ts`
+---
 
 ## Overview
 
-`ui-lib-checkbox` supports two model modes:
+Checkbox component with accessible labeling and indeterminate support.
 
-- **Binary mode**: checkbox maps to a single value (`trueValue` / `falseValue`)
-- **Group mode**: checkbox maps to membership in an array (`value` inside a shared model array)
-
-Mode is auto-detected to match Prime-style behavior:
-
-- Binary when `binary === true` **or** `value === null`
-- Group when `binary === false` and `value` is non-null
-
-## Features
-
-- Signal inputs + `model()` two-way `[(checked)]`
-- CVA support for `[(ngModel)]` and `formControlName`
-- `material` / `bootstrap` / `minimal` variants
-- `outlined` / `filled` appearance
-- `sm` / `md` / `lg` sizes
-- Indeterminate visual and ARIA mixed state
-- Hidden native `<input type="checkbox">` for screen reader semantics
-
-## API Reference
+## API
 
 ### Inputs
 
-| Input | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `label` | `string \| null` | `null` | Optional visual label |
-| `description` | `string \| null` | `null` | Optional helper text |
-| `ariaLabel` | `string \| null` | `null` | Direct aria label override |
-| `inputId` | `string \| null` | `null` | Native input id; enables external `label[for]` |
-| `name` | `string \| null` | `null` | Native input name |
-| `required` | `boolean` | `false` | Native required attribute |
-| `readonly` | `boolean` | `false` | Prevents value changes; keeps focusable behavior |
-| `tabindex` | `number` | `0` | Native input tab order (`-1` when disabled) |
-| `disabled` | `boolean` | `false` | Disables interaction |
-| `indeterminate` | `boolean` | `false` | Shows mixed indicator and `aria-checked="mixed"` |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant |
-| `appearance` | `'outlined' \| 'filled'` | `'outlined'` | Visual style layer orthogonal to `variant` |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Control scale |
-| `binary` | `boolean` | `false` | Forces binary mode when true |
-| `value` | `unknown \| null` | `null` | Group-item value in array mode |
-| `trueValue` | `unknown` | `true` | Emitted/stored when checked in binary mode |
-| `falseValue` | `unknown` | `false` | Emitted/stored when unchecked in binary mode |
-| `checkboxIcon` | `string \| null` | `null` | Extra class for custom check icon |
-| `inputClass` | `string \| null` | `null` | Extra class for hidden native input |
-| `autofocus` | `boolean` | `false` | Focuses input after init if enabled |
+| Name            | Type                     | Default      | Description |
+| --------------- | ------------------------ | ------------ | ----------- |
+| `appearance`    | `CheckboxAppearance`     | `'outlined'` | —           |
+| `ariaLabel`     | `string | null`          | `null`       | —           |
+| `autofocus`     | `boolean`                | `false`      | —           |
+| `binary`        | `boolean`                | `false`      | —           |
+| `checkboxIcon`  | `string | null`          | `null`       | —           |
+| `description`   | `string | null`          | `null`       | —           |
+| `disabled`      | `boolean`                | `false`      | —           |
+| `falseValue`    | `unknown`                | `false`      | —           |
+| `indeterminate` | `boolean`                | `false`      | —           |
+| `inputClass`    | `string | null`          | `null`       | —           |
+| `inputId`       | `string | null`          | `null`       | —           |
+| `label`         | `string | null`          | `null`       | —           |
+| `name`          | `string | null`          | `null`       | —           |
+| `readonly`      | `boolean`                | `false`      | —           |
+| `required`      | `boolean`                | `false`      | —           |
+| `size`          | `CheckboxSize`           | `'md'`       | —           |
+| `tabindex`      | `number`                 | `0`          | —           |
+| `trueValue`     | `unknown`                | `true`       | —           |
+| `value`         | `unknown | null`         | `null`       | —           |
+| `variant`       | `CheckboxVariant | null` | `null`       | —           |
 
-### Model
+### Models (two-way bindable)
 
-| Model | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `checked` | `boolean` | `false` | Visual checked state (`[(checked)]`) |
+| Name      | Type      | Default | Description |
+| --------- | --------- | ------- | ----------- |
+| `checked` | `boolean` | `false` | —           |
 
 ### Outputs
 
-| Output | Payload | Description |
-| --- | --- | --- |
-| `checkedChange` | `boolean` | Emitted by `[(checked)]` model updates |
-| `onChange` | `CheckboxChangeEvent` | `{ checked: boolean \| unknown[], originalEvent: Event }` |
-| `onFocus` | `FocusEvent` | Native input receives focus |
-| `onBlur` | `FocusEvent` | Native input loses focus |
+| Name             | Type                  | Description |
+| ---------------- | --------------------- | ----------- |
+| `checkboxBlur`   | `FocusEvent`          | —           |
+| `checkboxChange` | `CheckboxChangeEvent` | —           |
+| `checkboxFocus`  | `FocusEvent`          | —           |
 
-## Mode Examples
+## Content Projection
 
-### Binary with custom values
+| Selector    | Notes |
+| ----------- | ----- |
+| _(default)_ | —     |
+
+## Theming
+
+| CSS Variable                           | Default                                                                                                                                  |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-checkbox-bg`                  | `var(--uilib-checkbox-bg-color, var(--uilib-surface))`                                                                                   |
+| `--uilib-checkbox-bg-checked`          | `var( --uilib-checkbox-bg-checked-color, var(--uilib-color-primary-500) )`                                                               |
+| `--uilib-checkbox-border`              | `var(--uilib-checkbox-border-color, var(--uilib-color-neutral-400))`                                                                     |
+| `--uilib-checkbox-border-active`       | `var( --uilib-checkbox-border-active-color, var(--uilib-color-primary-600) )`                                                            |
+| `--uilib-checkbox-border-hover`        | `var( --uilib-checkbox-border-hover-color, var(--uilib-color-primary-500) )`                                                             |
+| `--uilib-checkbox-check-color`         | `var(--uilib-color-neutral-50)`                                                                                                          |
+| `--uilib-checkbox-description-color`   | `var( --uilib-checkbox-description-color, var(--uilib-color-neutral-600) )`                                                              |
+| `--uilib-checkbox-filled-bg`           | `var( --uilib-checkbox-filled-bg-color, color-mix(in srgb, var(--uilib-color-neutral-500) 10%, var(--uilib-surface)) )`                  |
+| `--uilib-checkbox-filled-border-color` | `var( --uilib-checkbox-filled-border-color, color-mix(in srgb, var(--uilib-checkbox-border-active) 35%, var(--uilib-checkbox-border)) )` |
+| `--uilib-checkbox-focus-ring`          | `0 0 0 3px color-mix(in srgb, var(--uilib-checkbox-border-hover) 30%, transparent)`                                                      |
+| `--uilib-checkbox-font`                | `var(--uilib-font-ui, inherit)`                                                                                                          |
+| `--uilib-checkbox-gap`                 | `var(--uilib-space-3, 0.75rem)`                                                                                                          |
+| `--uilib-checkbox-padding-base`        | `0rem`                                                                                                                                   |
+| `--uilib-checkbox-radius`              | `var(--uilib-shape-base, 6px)`                                                                                                           |
+| `--uilib-checkbox-size`                | `var(--uilib-checkbox-size-sm)`                                                                                                          |
+| `--uilib-checkbox-size-lg`             | `1.5rem`                                                                                                                                 |
+| `--uilib-checkbox-size-md`             | `1.25rem`                                                                                                                                |
+| `--uilib-checkbox-size-sm`             | `1rem`                                                                                                                                   |
+| `--uilib-checkbox-transition-duration` | `150ms`                                                                                                                                  |
+
+## Accessibility
+
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+
+### Keyboard Interactions
+
+| Test description                                                             |
+| ---------------------------------------------------------------------------- |
+| applies dark theme variables                                                 |
+| applies each variant class                                                   |
+| applies filled appearance class for all variants                             |
+| applies variant, size, and checked classes                                   |
+| associates label via aria-labelledby                                         |
+| autofocuses the host when autofocus is true                                  |
+| emits onBlur when host loses focus                                           |
+| emits onFocus when host receives focus                                       |
+| keeps aria-labelledby linked to the internal label id                        |
+| keeps checkmark and indeterminate icons aria-hidden                          |
+| keeps native input screen-reader accessible and visual box presentation-only |
+| marks control as touched on focusout                                         |
+| omits aria-disabled when enabled                                             |
+| omits aria-required when not required                                        |
+| reflects disabled input as aria-disabled=true                                |
+| reflects required input as aria-required=true                                |
+| registerOnTouched fires on focusout                                          |
+| sets aria-checked=false initially                                            |
+| sets aria-checked=mixed when indeterminate is true                           |
+| sets aria-checked=true after checking                                        |
+| sets aria-describedby when description exists                                |
+| uses aria-label when no visible label is provided                            |
+| uses aria-label when provided                                                |
+| uses custom tabindex when enabled and -1 when disabled                       |
+
+## Usage Examples
 
 ```html
-<ui-lib-checkbox
-  [binary]="true"
-  [trueValue]="'YES'"
-  [falseValue]="'NO'"
-  [(ngModel)]="status"
-  label="Enable feature"
-/>
+<!-- simple boolean checkbox -->
+<ui-lib-checkbox label="Accept terms" [(checked)]="accepted" />
+
+<!-- group mode — ngModel holds a string[] -->
+<ui-lib-checkbox label="Angular" [value]="'angular'" [(ngModel)]="selected" />
+<ui-lib-checkbox label="React" [value]="'react'" [(ngModel)]="selected" />
 ```
 
-### Group mode (shared array)
+## Related
 
-```html
-<ui-lib-checkbox [binary]="false" [value]="'email'" [(ngModel)]="channels" label="Email" />
-<ui-lib-checkbox [binary]="false" [value]="'sms'" [(ngModel)]="channels" label="SMS" />
-<ui-lib-checkbox [binary]="false" [value]="'push'" [(ngModel)]="channels" label="Push" />
-```
-
-## Forms Integration
-
-### Reactive forms
-
-```html
-<form [formGroup]="form">
-  <ui-lib-checkbox formControlName="accepted" [required]="true" label="Accept terms" />
-
-  <ui-lib-checkbox formControlName="channels" [binary]="false" [value]="'email'" label="Email" />
-  <ui-lib-checkbox formControlName="channels" [binary]="false" [value]="'sms'" label="SMS" />
-</form>
-```
-
-### Template-driven required
-
-```html
-<form #f="ngForm">
-  <ui-lib-checkbox name="accepted" [required]="true" [(ngModel)]="accepted" label="Accept" />
-</form>
-```
-
-## Migration from Boolean-Only Usage
-
-If your previous usage treated every checkbox as a simple boolean, use this quick mapping.
-
-### Before (boolean-only)
-
-```html
-<ui-lib-checkbox [(ngModel)]="accepted" label="Accept" />
-```
-
-### After (recommended explicit binary mode)
-
-```html
-<ui-lib-checkbox [binary]="true" [(ngModel)]="accepted" label="Accept" />
-```
-
-### After (group array mode)
-
-```html
-<ui-lib-checkbox [binary]="false" [value]="'email'" [(ngModel)]="channels" label="Email" />
-<ui-lib-checkbox [binary]="false" [value]="'sms'" [(ngModel)]="channels" label="SMS" />
-```
-
-Migration notes:
-
-- **Binary model shape:** scalar value (`boolean` by default, or custom `trueValue` / `falseValue`).
-- **Group model shape:** array value (`unknown[]`), where each checkbox toggles membership of `value`.
-- **Null safety:** in group mode, `null` / `undefined` model values are handled as empty arrays.
-- **Compatibility behavior:** if `value` is `null`, checkbox auto-falls back to binary mode.
-
-## Theming and CSS Variables
-
-Primary variables include:
-
-- `--uilib-checkbox-bg`
-- `--uilib-checkbox-bg-checked`
-- `--uilib-checkbox-border`
-- `--uilib-checkbox-border-hover`
-- `--uilib-checkbox-border-active`
-- `--uilib-checkbox-filled-bg`
-- `--uilib-checkbox-filled-border-color`
-- `--uilib-checkbox-check-color`
-- `--uilib-checkbox-focus-ring`
-- `--uilib-checkbox-description-color`
-
-Form-state styling hooks:
-
-- `--uilib-checkbox-border-touched`
-- `--uilib-checkbox-border-dirty`
-- `--uilib-checkbox-border-invalid`
-
-## Accessibility Notes
-
-- A visually hidden native input carries checkbox semantics.
-- Visual checkbox box is presentation-only (`aria-hidden` + presentation role).
-- Supports `aria-label`, `aria-labelledby`, and `aria-describedby`.
-- Indeterminate state announces as mixed.
-- `readonly` blocks mutation but still allows focus.
-
-## Best Practices
-
-- Use `[(ngModel)]` / reactive forms for persisted value; use `[(checked)]` for local visual control.
-- Use group mode for multi-select arrays and binary mode for scalar values.
-- In group mode, initialize with `[]` (null/undefined are handled safely, but explicit arrays are clearer).
-- Prefer `inputId` when integrating with external labels.
-
-## Verification
-
-```bash
-npm.cmd test -- --testPathPatterns='checkbox.spec.ts'
-```
-
-## Related Docs
-
-- [Components Index](README.md)
-- [Design Tokens](../systems/DESIGN_TOKENS.md)
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#checkbox)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/checkbox/README.md)
 

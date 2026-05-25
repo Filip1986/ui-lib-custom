@@ -1,102 +1,76 @@
-# Alert Component
+# Alert
+
+**Selector:** `ui-lib-alert`
+**Entry point:** `import { Alert } from 'ui-lib-custom/alert'`
+
+---
 
 ## Overview
 
-A status alert banner with optional dismiss action, designed for concise system messages. Uses standalone + OnPush + signals and inherits the global variant theme.
+Alert component for status messaging with optional dismiss action.
 
-**Import**
-```typescript
-import { Alert } from 'ui-lib-custom';
-```
-
-**Location:** `projects/ui-lib-custom/src/lib/alert/alert.ts`
-
----
-
-## Features
-
-- ✅ Variant-aware styling (material, bootstrap, minimal).
-- 🎨 CSS variable theming with design-token fallbacks.
-- ♿ Severity-aware live region semantics (`role="alert"` for error/warning, `role="status"` for success/info).
-- 🧩 Optional dismiss action with a native button.
-
----
-
-## Basic Usage
-
-```html
-<ui-lib-alert severity="success">Profile saved successfully.</ui-lib-alert>
-```
-
-Dismissible:
-```html
-<ui-lib-alert severity="warning" [dismissible]="true" (dismissed)="onDismiss()">
-  Your session will expire soon.
-</ui-lib-alert>
-```
-
----
-
-## API Reference
+## API
 
 ### Inputs
 
-| Input | Type | Default | Description |
-| --- | --- | --- | --- |
-| `severity` | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'` | Status tone used for icon and emphasis. |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant (falls back to global variant). |
-| `dismissible` | `boolean` | `false` | Shows a dismiss icon and enables the output. |
-| `dismissLabel` | `string \| null` | `null` | Optional i18n label for the dismiss button (`Dismiss alert` fallback). |
+| Name           | Type                  | Default  | Description |
+| -------------- | --------------------- | -------- | ----------- |
+| `dismissible`  | `boolean`             | `false`  | —           |
+| `dismissLabel` | `string | null`       | `null`   | —           |
+| `severity`     | `AlertSeverity`       | `'info'` | —           |
+| `variant`      | `AlertVariant | null` | `null`   | —           |
 
 ### Outputs
 
-| Output | Type | Description |
-| --- | --- | --- |
-| `dismissed` | `void` | Emitted when the dismiss button is clicked. |
+| Name        | Type   | Description |
+| ----------- | ------ | ----------- |
+| `dismissed` | `void` | —           |
 
----
+## Content Projection
 
-## Theming & CSS Variables
+| Selector    | Notes |
+| ----------- | ----- |
+| _(default)_ | —     |
 
-| Variable | Purpose |
-| --- | --- |
-| `--uilib-alert-bg` | Alert background override (internal). |
-| `--uilib-alert-fg` | Alert foreground override (internal). |
-| `--uilib-inline-sm` | Icon/content gap (fallback for inline spacing). |
-| `--uilib-inline-md` | Alert padding (fallback for inline spacing). |
-| `--uilib-radius-md` | Border radius. |
-| `--uilib-surface` | Base surface color. |
-| `--uilib-color-primary-50` | Bootstrap variant background tone. |
-| `--uilib-border` | Minimal border color. |
-| `--uilib-surface-dark-2` | Dark mode background. |
-| `--uilib-text-dark-primary` | Dark mode text color. |
+## Theming
 
-### Theme Override Example
-
-```scss
-[data-theme='brand-x'] {
-  --uilib-alert-bg: #0f172a;
-  --uilib-alert-fg: #e2e8f0;
-}
-```
-
----
+| CSS Variable       | Default                |
+| ------------------ | ---------------------- |
+| `--uilib-alert-bg` | `var(--uilib-surface)` |
+| `--uilib-alert-fg` | `currentColor`         |
 
 ## Accessibility
 
-- Uses severity-based live region roles:
-  - `error`/`warning` → `role="alert"` + `aria-live="assertive"`
-  - `success`/`info` → `role="status"` + `aria-live="polite"`
-- Host sets `aria-atomic="true"` so updates are announced as complete messages.
-- Dismiss button always has an accessible name (`dismissLabel` or `Dismiss alert` fallback).
-- Severity and close icons are decorative (`aria-hidden="true"`).
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
----
+### Keyboard Interactions
 
-## Real-World Example
+| Test description                                                |
+| --------------------------------------------------------------- |
+| applies dark theme variables                                    |
+| close button has native button semantics and default aria-label |
+| includes variant class for                                      |
+| passes axe for error severity                                   |
+| passes axe for info severity                                    |
+| passes axe for success severity                                 |
+| passes axe for warning severity                                 |
+| sets aria-atomic=                                               |
+| uses explicit variant input when provided                       |
+| uses global theme variant when no variant input provided        |
+| uses global variant when no variant input provided              |
+| uses role=                                                      |
+
+## Usage Examples
 
 ```html
-<ui-lib-alert severity="error" [dismissible]="true" (dismissed)="retry()">
-  We could not save your changes. Please try again.
+<ui-lib-alert severity="warning" [dismissible]="true" (dismissed)="onClose()">
+  Your session will expire in 5 minutes.
 </ui-lib-alert>
 ```
+
+## Related
+
+- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#alert)
+- [Design tokens](../systems/DESIGN_TOKENS.md)
+- [Co-located README](../../../projects/ui-lib-custom/src/lib/alert/README.md)
+
