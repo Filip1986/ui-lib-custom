@@ -34,6 +34,8 @@
     "lint:css:ci": "stylelint \"**/*.{scss,css}\" --allow-empty-input --max-warnings 0",
     "lint:css:motion": "stylelint \"projects/ui-lib-custom/**/*.scss\" --custom-formatter scripts/motion-formatter.mjs",
     "bundlesize": "bundlesize",
+    "bundlesize:snapshot": "node scripts/snapshot-bundle-sizes.mjs",
+    "bundlesize:check": "node scripts/check-bundle-budget.mjs",
     "postinstall": "husky install",
     "coverage:summary": "node scripts/coverage-summary.js --threshold 90",
     "verify:tree-shaking": "node scripts/verify-tree-shaking.js",

@@ -20,6 +20,8 @@ jobs:
         run: npm run build
       - name: Bundle size check
         run: npm run bundlesize
+      - name: Per-entry-point gzip budget check
+        run: npm run bundlesize:check
 
   test:
     runs-on: ubuntu-latest

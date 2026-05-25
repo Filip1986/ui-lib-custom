@@ -1,0 +1,517 @@
+{
+  "a11y": {
+    "raw": 6995,
+    "gzip": 1715,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "accordion": {
+    "raw": 58775,
+    "gzip": 7272,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "alert": {
+    "raw": 8606,
+    "gzip": 2060,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "animate-on-scroll": {
+    "raw": 8047,
+    "gzip": 2200,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "auto-focus": {
+    "raw": 5232,
+    "gzip": 1755,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "autocomplete": {
+    "raw": 120355,
+    "gzip": 15660,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "avatar": {
+    "raw": 23809,
+    "gzip": 3904,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "badge": {
+    "raw": 22370,
+    "gzip": 3140,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "bind": {
+    "raw": 4389,
+    "gzip": 1737,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "block-ui": {
+    "raw": 9601,
+    "gzip": 2253,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "bottom-sheet": {
+    "raw": 22513,
+    "gzip": 4232,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "breadcrumb": {
+    "raw": 30883,
+    "gzip": 4596,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "button": {
+    "raw": 82486,
+    "gzip": 11518,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "card": {
+    "raw": 28041,
+    "gzip": 4126,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "carousel": {
+    "raw": 72369,
+    "gzip": 11287,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "cascade-select": {
+    "raw": 87954,
+    "gzip": 12247,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "chart": {
+    "raw": 64991,
+    "gzip": 7854,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "checkbox": {
+    "raw": 36506,
+    "gzip": 5334,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "chip": {
+    "raw": 20206,
+    "gzip": 4100,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "class-names": {
+    "raw": 2681,
+    "gzip": 1056,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "code-snippet": {
+    "raw": 51896,
+    "gzip": 7651,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "color-picker": {
+    "raw": 69473,
+    "gzip": 10339,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "confirm-dialog": {
+    "raw": 49482,
+    "gzip": 7630,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "confirm-popup": {
+    "raw": 44213,
+    "gzip": 7271,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "context-menu": {
+    "raw": 48322,
+    "gzip": 7733,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "core": {
+    "raw": 8930,
+    "gzip": 2361,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "data-view": {
+    "raw": 69429,
+    "gzip": 8800,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "date-picker": {
+    "raw": 187191,
+    "gzip": 28496,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "dialog": {
+    "raw": 56051,
+    "gzip": 9140,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "divider": {
+    "raw": 15198,
+    "gzip": 2992,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "dock": {
+    "raw": 39513,
+    "gzip": 5926,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "drawer": {
+    "raw": 27357,
+    "gzip": 5119,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "dynamic-dialog": {
+    "raw": 27496,
+    "gzip": 6007,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "editor": {
+    "raw": 61630,
+    "gzip": 8068,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "fieldset": {
+    "raw": 17523,
+    "gzip": 3265,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "float-label": {
+    "raw": 18542,
+    "gzip": 3170,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "fluid": {
+    "raw": 9098,
+    "gzip": 2015,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "focus-trap": {
+    "raw": 3159,
+    "gzip": 1272,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "galleria": {
+    "raw": 84523,
+    "gzip": 10961,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "icon-button": {
+    "raw": 9725,
+    "gzip": 2158,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "icon-field": {
+    "raw": 13528,
+    "gzip": 2157,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "icon": {
+    "raw": 22688,
+    "gzip": 5443,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "image-compare": {
+    "raw": 32493,
+    "gzip": 5411,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "image": {
+    "raw": 49690,
+    "gzip": 8027,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "inplace": {
+    "raw": 20028,
+    "gzip": 3874,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "input-group": {
+    "raw": 21867,
+    "gzip": 2136,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "input-mask": {
+    "raw": 52251,
+    "gzip": 9183,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "input-number": {
+    "raw": 69885,
+    "gzip": 9487,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "input-otp": {
+    "raw": 33221,
+    "gzip": 6337,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "input": {
+    "raw": 34435,
+    "gzip": 4968,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "key-filter": {
+    "raw": 14609,
+    "gzip": 3786,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "knob": {
+    "raw": 31947,
+    "gzip": 6536,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "layout": {
+    "raw": 34947,
+    "gzip": 4531,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "listbox": {
+    "raw": 70208,
+    "gzip": 10630,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "mega-menu": {
+    "raw": 59115,
+    "gzip": 8155,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "menu": {
+    "raw": 48553,
+    "gzip": 7626,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "menubar": {
+    "raw": 64699,
+    "gzip": 8705,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "message": {
+    "raw": 25496,
+    "gzip": 4448,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "meter-group": {
+    "raw": 25192,
+    "gzip": 4060,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "order-list": {
+    "raw": 77896,
+    "gzip": 12625,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "organization-chart": {
+    "raw": 46469,
+    "gzip": 7775,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "paginator": {
+    "raw": 43505,
+    "gzip": 6552,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "panel-menu": {
+    "raw": 64661,
+    "gzip": 8177,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "panel": {
+    "raw": 21975,
+    "gzip": 4030,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "password": {
+    "raw": 50797,
+    "gzip": 7475,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "pick-list": {
+    "raw": 116612,
+    "gzip": 14244,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "popover": {
+    "raw": 28802,
+    "gzip": 5467,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "progress-bar": {
+    "raw": 17956,
+    "gzip": 3619,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "progress-spinner": {
+    "raw": 13684,
+    "gzip": 2963,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "radio-button": {
+    "raw": 32020,
+    "gzip": 5742,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "rating": {
+    "raw": 39463,
+    "gzip": 7085,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "ripple": {
+    "raw": 5660,
+    "gzip": 1869,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "scroll-panel": {
+    "raw": 14298,
+    "gzip": 2615,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "scroll-top": {
+    "raw": 20508,
+    "gzip": 3846,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "select-button": {
+    "raw": 45627,
+    "gzip": 6034,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "select": {
+    "raw": 53958,
+    "gzip": 8355,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "skeleton": {
+    "raw": 14382,
+    "gzip": 3002,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "slider": {
+    "raw": 42287,
+    "gzip": 6732,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "speed-dial": {
+    "raw": 55193,
+    "gzip": 7734,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "split-button": {
+    "raw": 60066,
+    "gzip": 7628,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "stepper": {
+    "raw": 54626,
+    "gzip": 6961,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "style-class": {
+    "raw": 19836,
+    "gzip": 4005,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "syntax-highlighter": {
+    "raw": 7531,
+    "gzip": 2594,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "table": {
+    "raw": 140851,
+    "gzip": 22049,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tabs": {
+    "raw": 76601,
+    "gzip": 10797,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tag": {
+    "raw": 25043,
+    "gzip": 4047,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "terminal": {
+    "raw": 22976,
+    "gzip": 4738,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "testing": {
+    "raw": 2071,
+    "gzip": 856,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "textarea": {
+    "raw": 39108,
+    "gzip": 6435,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "theme": {
+    "raw": 77262,
+    "gzip": 13904,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tiered-menu": {
+    "raw": 47869,
+    "gzip": 8027,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "timeline": {
+    "raw": 34456,
+    "gzip": 5381,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "toast": {
+    "raw": 34117,
+    "gzip": 6049,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "toggle-button": {
+    "raw": 33890,
+    "gzip": 5584,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "toggle-switch": {
+    "raw": 31293,
+    "gzip": 5171,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tokens": {
+    "raw": 44932,
+    "gzip": 9090,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "toolbar": {
+    "raw": 17385,
+    "gzip": 3697,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tooltip": {
+    "raw": 16317,
+    "gzip": 3839,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tree-select": {
+    "raw": 41640,
+    "gzip": 7023,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tree-table": {
+    "raw": 89904,
+    "gzip": 12811,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "tree": {
+    "raw": 66244,
+    "gzip": 11651,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "upload": {
+    "raw": 81758,
+    "gzip": 11773,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  },
+  "virtual-scroller": {
+    "raw": 81885,
+    "gzip": 14250,
+    "measuredAt": "2026-05-25T16:56:30.926Z"
+  }
+}
