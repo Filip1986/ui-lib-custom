@@ -2,7 +2,7 @@
 
 **Selector:** `ui-lib-select`
 **Package:** `ui-lib-custom/select`
-**Content projection:** `optionTemplate` input (`TemplateRef`) for custom option rendering
+**Content projection:** `#optionTemplate` slot — place `<ng-template #optionTemplate let-opt>` inside `<ui-lib-select>` for custom option rendering.
 
 > Implements `ControlValueAccessor`. Options are passed as a typed `SelectOption[]` array via the `options` input — not as projected `<option>` elements. In single mode, `ngModel` receives a scalar value; in multiple mode, it receives an array.
 
@@ -18,7 +18,7 @@
 | `placeholder` | `string` | `'Select...'` | |
 | `disabled` | `boolean` | `false` | |
 | `loading` | `boolean` | `false` | Shows a spinner and blocks interaction |
-| `optionTemplate` | `TemplateRef<unknown> \| null` | `null` | Custom template for each option row; receives `$implicit` as `SelectOption` |
+| ~~`optionTemplate`~~ | _removed_ | — | Replaced by `#optionTemplate` content-child slot (see below). |
 | `label` | `string` | `''` | Visible label element rendered above the control |
 | `ariaLabel` | `string \| null` | `null` | Sets `aria-label` on the host combobox element |
 | `ariaLabelledBy` | `string \| null` | `null` | Sets `aria-labelledby` on the host combobox element |
@@ -60,11 +60,11 @@ _none_
   { label: 'One',   value: 1,   group: 'Numbers' },
 ] -->
 
-<!-- custom option template -->
+<!-- custom option template — rich context: $implicit, index, selected, disabled, active -->
 <ui-lib-select label="User" [options]="users" [(ngModel)]="selectedUser">
-  <ng-template #optionTemplate let-opt>
+  <ng-template #optionTemplate let-opt let-selected="selected" let-active="active">
     <img [src]="opt.value.avatar" alt="" aria-hidden="true" />
-    <span>{{ opt.label }}</span>
+    <span [class.fw-bold]="selected">{{ opt.label }}</span>
   </ng-template>
 </ui-lib-select>
 ```

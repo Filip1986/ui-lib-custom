@@ -1,11 +1,12 @@
 <div [class]="hostClasses()" [style.pointer-events]="isDisabled() || loading() ? 'none' : 'auto'">
   @if (label()) {
-    <label class="ui-lib-select__label" [attr.id]="labelId()">
-      <span>{{ label() }}</span>
-    </label>
+    <!-- span + aria-labelledby is used instead of <label for> because the combobox role
+         is on the host element (not a native input); ARIA association via aria-labelledby
+         is the correct pattern here (APG Combobox §3.1). -->
+    <span class="ui-lib-select__label" [id]="labelId()">{{ label() }}</span>
   }
 
-  <div class="ui-lib-select__control" #controlEl (click)="togglePanel()">
+  <div class="ui-lib-select__control" #controlEl>
     <div class="ui-lib-select__value" [class.ui-lib-select__placeholder]="!displayValue()">
       @if (displayValue()) {
         {{ displayValue() }}
@@ -22,7 +23,7 @@
         <button
           type="button"
           class="ui-lib-select__clear"
-          (click)="$event.stopPropagation(); clear()"
+          (click)="clear()"
           aria-label="Clear selection"
         >
           <!-- Inline SVG X — same path as Dialog/Drawer close buttons; no raw Unicode characters -->
@@ -42,7 +43,7 @@
         </button>
       }
       <!-- aria-hidden: ▾ is decorative; expanded state communicated via aria-expanded on host -->
-      <span class="ui-lib-select__arrow" aria-hidden="true">▾</span>
+      <span class="ui-lib-select__arrow" aria-hidden="true">&#9662;</span>
     </div>
   </div>
 
@@ -64,42 +65,77 @@
       role="listbox" may only own role="option" and role="group" elements;
       placing any other element inside it violates aria-required-children.
     -->
-    @if (searchable()) {
-      <div class="ui-lib-select__search">
-        <input
-          #inputEl
-          type="text"
-          [value]="filter()"
-          (input)="onFilter($any($event.target).value)"
-          placeholder="Search..."
-          aria-label="Search options"
-          aria-autocomplete="list"
-          [attr.aria-controls]="listboxId()"
-        />
-      </div>
-    }
+      @if (searchable()) {
+        <div class="ui-lib-select__search">
+          <input
+            #inputEl
+            type="text"
+            [value]="filter()"
+            (input)="onFilter($any($event.target).value)"
+            placeholder="Search..."
+            aria-label="Search options"
+            aria-autocomplete="list"
+            [attr.aria-controls]="listboxId()"
+          />
+        </div>
+      }
 
-    <div
-      class="ui-lib-select__panel"
-      #panel
-      [id]="listboxId()"
-      [attr.role]="listboxRole"
-      [attr.aria-label]="placeholder()"
-      [attr.aria-multiselectable]="multiple() ? 'true' : null"
-    >
-      @for (groupKey of groupKeys(); track groupKey) {
-        @if (groupKey !== ungroupedKey) {
-          <!--
-            Named group uses role="group" + aria-label for AT.
-            The visual group label is rendered via CSS content: attr(aria-label) on ::before,
-            keeping the DOM clean (no extra divs inside the listbox or group).
-          -->
-          <div
-            role="group"
-            [attr.aria-label]="groupKey"
-            class="ui-lib-select__group-container"
-          >
+      <div
+        class="ui-lib-select__panel"
+        #panel
+        [id]="listboxId()"
+        [attr.role]="listboxRole"
+        [attr.aria-label]="placeholder()"
+        [attr.aria-multiselectable]="multiple() ? 'true' : null"
+      >
+        @for (groupKey of groupKeys(); track groupKey) {
+          @if (groupKey !== ungroupedKey) {
+            <!--
+              Named group uses role="group" + aria-label for AT.
+              The visual group label is rendered via CSS content: attr(aria-label) on ::before,
+              keeping the DOM clean (no extra divs inside the listbox or group).
+            -->
+            <div
+              role="group"
+              [attr.aria-label]="groupKey"
+              class="ui-lib-select__group-container"
+            >
+              @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
+                  <!-- Keyboard handled via aria-activedescendant on the host combobox (APG Combobox §3.1).
+                     Options are not independently focusable — focus stays on the host. -->
+                <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+                <div
+                  class="ui-lib-select__option"
+                  [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
+                  [class.ui-lib-select__option--active]="
+                    (optionIndexMap().get(opt) ?? -1) === focusedIndex()
+                  "
+                  [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
+                  [class.ui-lib-select__option--disabled]="opt.disabled"
+                  (click)="selectOption(opt)"
+                  (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
+                  role="option"
+                  [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
+                  [attr.aria-disabled]="opt.disabled ? 'true' : null"
+                  [attr.aria-setsize]="filteredOptions().length"
+                  [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
+                >
+                  @if (optionTemplate(); as tpl) {
+                    <ng-container
+                      *ngTemplateOutlet="tpl; context: contextFor(opt, optionIndexMap().get(opt) ?? -1)"
+                    />
+                  } @else {
+                    <span>{{ opt.label }}</span>
+                  }
+                </div>
+              }
+            </div>
+          } @else {
+            <!-- Ungrouped options render directly as children of the listbox -->
             @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
+              <!-- Keyboard handled via aria-activedescendant on the host combobox (APG Combobox §3.1).
+                   Options are not independently focusable — focus stays on the host. -->
+              <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
               <div
                 class="ui-lib-select__option"
                 [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
@@ -116,50 +152,21 @@
                 [attr.aria-setsize]="filteredOptions().length"
                 [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
               >
-                @if (optionTemplate()) {
+                @if (optionTemplate(); as tpl) {
                   <ng-container
-                    *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"
-                  ></ng-container>
+                    *ngTemplateOutlet="tpl; context: contextFor(opt, optionIndexMap().get(opt) ?? -1)"
+                  />
                 } @else {
                   <span>{{ opt.label }}</span>
                 }
               </div>
             }
-          </div>
-        } @else {
-          <!-- Ungrouped options render directly as children of the listbox -->
-          @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
-            <div
-              class="ui-lib-select__option"
-              [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
-              [class.ui-lib-select__option--active]="
-                (optionIndexMap().get(opt) ?? -1) === focusedIndex()
-              "
-              [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
-              [class.ui-lib-select__option--disabled]="opt.disabled"
-              (click)="selectOption(opt)"
-              (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
-              role="option"
-              [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
-              [attr.aria-disabled]="opt.disabled ? 'true' : null"
-              [attr.aria-setsize]="filteredOptions().length"
-              [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
-            >
-              @if (optionTemplate()) {
-                <ng-container
-                  *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"
-                ></ng-container>
-              } @else {
-                <span>{{ opt.label }}</span>
-              }
-            </div>
           }
         }
-      }
 
-      @if (filteredOptions().length === 0) {
-        <div class="ui-lib-select__empty">No results</div>
-      }
-    </div>
+        @if (filteredOptions().length === 0) {
+          <div class="ui-lib-select__empty">No results</div>
+        }
+      </div>
   }
 </div>

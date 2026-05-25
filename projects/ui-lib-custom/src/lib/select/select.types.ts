@@ -10,3 +10,17 @@ export interface SelectOption {
   group?: string;
   disabled?: boolean;
 }
+
+/** Template context passed to `#optionTemplate` content children. */
+export interface SelectOptionTemplateContext {
+  /** The option object itself. */
+  $implicit: SelectOption;
+  /** Zero-based index of the option in the filtered list. */
+  index: number;
+  /** Whether the option is currently selected. */
+  selected: boolean;
+  /** Whether the option is disabled. */
+  disabled: boolean;
+  /** Whether the option has keyboard focus (active descendant). */
+  active: boolean;
+}

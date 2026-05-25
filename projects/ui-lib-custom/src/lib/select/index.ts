@@ -6,4 +6,5 @@ export type {
   SelectValue,
   SelectCvaValue,
   SelectOption,
+  SelectOptionTemplateContext,
 } from './select.types';
