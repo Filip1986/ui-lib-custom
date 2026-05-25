@@ -39,6 +39,8 @@
     );
     --uilib-select-panel-max-height: 260px;
     --uilib-select-panel-z-index: var(--uilib-z-dropdown, 10);
+    --uilib-select-arrow-font-size: 0.8rem;
+    --uilib-select-font-size-lg: 1.125rem;
 
     display: flex;
     flex-direction: column;
@@ -94,7 +96,7 @@
   }
 
   ui-lib-select .ui-lib-select__arrow {
-    font-size: 0.8rem;
+    font-size: var(--uilib-select-arrow-font-size);
     color: var(--uilib-input-placeholder, var(--uilib-muted));
   }
 
@@ -239,7 +241,7 @@
     --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
     padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
     min-height: 32px;
-    font-size: 0.875rem;
+    font-size: var(--uilib-font-size-sm, 0.875rem);
   }
 
   ui-lib-select .ui-lib-select.ui-lib-select--size-md .ui-lib-select__control {
@@ -249,7 +251,7 @@
     --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
     padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
     min-height: 40px;
-    font-size: 1rem;
+    font-size: var(--uilib-font-size-md, 1rem);
   }
 
   ui-lib-select .ui-lib-select.ui-lib-select--size-lg .ui-lib-select__control {
@@ -259,7 +261,7 @@
     --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
     padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
     min-height: 48px;
-    font-size: 1.125rem;
+    font-size: var(--uilib-select-font-size-lg);
   }
 
   /* ── Screen-reader-only live region for filter result count announcements ── */
@@ -289,7 +291,7 @@
     content: attr(aria-label);
     display: block;
     padding: var(--uilib-select-group-padding-y) var(--uilib-select-group-padding-x);
-    font-size: 0.75rem;
+    font-size: var(--uilib-font-size-xs, 0.75rem);
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -297,5 +299,14 @@
     opacity: 0.5;
     pointer-events: none;
     user-select: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-select .ui-lib-select__control {
+      transition: none;
+    }
+
+    ui-lib-select .ui-lib-select__spinner {
+      animation: none;
+    }
   }
 } // end @layer uilib.components

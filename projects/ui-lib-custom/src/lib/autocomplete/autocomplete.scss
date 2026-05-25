@@ -85,6 +85,7 @@
     --uilib-autocomplete-group-label-bg: transparent;
     --uilib-autocomplete-group-label-text: var(--uilib-muted);
     --uilib-autocomplete-group-label-font-weight: 600;
+    --uilib-autocomplete-group-label-font-size: var(--uilib-font-size-xs, 0.75rem);
 
     --uilib-autocomplete-sm-padding: 0.35rem 0.5rem;
     --uilib-autocomplete-sm-font-size: 0.875rem;
@@ -220,7 +221,7 @@
     padding: 0.35rem 0.75rem;
     background: var(--uilib-autocomplete-group-label-bg);
     color: var(--uilib-autocomplete-group-label-text);
-    font-size: 0.75rem;
+    font-size: var(--uilib-autocomplete-group-label-font-size);
     font-weight: var(--uilib-autocomplete-group-label-font-weight);
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -535,6 +536,25 @@
     ui-lib-autocomplete .ui-autocomplete-chip-remove {
       min-height: 44px;
       min-width: 44px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-autocomplete .ui-autocomplete-inner {
+      transition: none;
+    }
+
+    ui-lib-autocomplete .ui-autocomplete-panel,
+    .ui-autocomplete-panel {
+      animation: none;
+    }
+
+    ui-lib-autocomplete .ui-autocomplete-chip {
+      animation: none;
+    }
+
+    ui-lib-autocomplete .ui-autocomplete-chip-remove-btn {
+      transition: none;
+      transform: none;
     }
   }
 } // end @layer uilib.components

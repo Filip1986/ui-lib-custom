@@ -1,5 +1,11 @@
 @layer uilib.components {
   ui-lib-editor {
+    --uilib-editor-content-h1-font-size: 1.75em;
+    --uilib-editor-content-h2-font-size: 1.5em;
+    --uilib-editor-content-h3-font-size: 1.25em;
+    --uilib-editor-font-size-sm: 13px;
+    --uilib-editor-font-size-lg: 16px;
+
     display: block;
     border: 1px solid var(--uilib-editor-content-border-color, var(--uilib-border, #d1d5db));
     border-radius: var(--uilib-editor-border-radius, 8px);
@@ -126,15 +132,15 @@
   }
 
   .ui-lib-editor-content h1 {
-    font-size: 1.75em;
+    font-size: var(--uilib-editor-content-h1-font-size);
   }
 
   .ui-lib-editor-content h2 {
-    font-size: 1.5em;
+    font-size: var(--uilib-editor-content-h2-font-size);
   }
 
   .ui-lib-editor-content h3 {
-    font-size: 1.25em;
+    font-size: var(--uilib-editor-content-h3-font-size);
   }
 
   .ui-lib-editor-content ul,
@@ -283,7 +289,7 @@
   ui-lib-editor.ui-lib-editor--size-sm .ui-lib-editor-content {
     min-height: 100px;
     padding: 8px 12px;
-    font-size: 13px;
+    font-size: var(--uilib-editor-font-size-sm);
   }
 
   ui-lib-editor.ui-lib-editor--size-md .ui-lib-editor-toolbar {
@@ -315,7 +321,7 @@
   ui-lib-editor.ui-lib-editor--size-lg .ui-lib-editor-content {
     min-height: 200px;
     padding: 16px 20px;
-    font-size: 16px;
+    font-size: var(--uilib-editor-font-size-lg);
   }
 
   [data-theme='dark'] .ui-lib-editor {
@@ -332,5 +338,11 @@
     --uilib-editor-content-color: color-mix(in srgb, #ffffff 88%, #000000);
     --uilib-editor-placeholder-color: color-mix(in srgb, #ffffff 46%, transparent);
     --uilib-editor-focus-ring-color: color-mix(in srgb, #60a5fa 55%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ui-lib-editor,
+    .ui-lib-editor-toolbar__item {
+      transition: none;
+    }
   }
 } // end @layer uilib.components
