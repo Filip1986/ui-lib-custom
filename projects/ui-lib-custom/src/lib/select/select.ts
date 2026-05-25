@@ -86,21 +86,34 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   public readonly ungroupedKey: string = SELECT_UNGROUPED_KEY;
   public readonly optionIdSeparator: string = SELECT_OPTION_ID_SEPARATOR;
 
+  /** Option array. Each item: `{ label, value, disabled?, group? }`. Default: `[]`. */
   public readonly options: InputSignal<SelectOption[]> = input<SelectOption[]>([]);
+  /** Visual variant. Falls back to global theme when `null`. Default: `null`. */
   public readonly variant: InputSignal<SelectVariant | null> = input<SelectVariant | null>(null);
+  /** Control height: `'sm'` (32px) · `'md'` (40px) · `'lg'` (48px). Default: `'md'`. */
   public readonly size: InputSignal<SelectSize> = input<SelectSize>(SHARED_DEFAULTS.Size);
+  /** Enable multi-selection; `ngModel` receives `unknown[]`. Default: `false`. */
   public readonly multiple: InputSignal<boolean> = input<boolean>(false);
+  /** Show filter input inside panel; announces result count via live region. Default: `false`. */
   public readonly searchable: InputSignal<boolean> = input<boolean>(false);
+  /** Text shown when no value is selected. Default: `'Select...'`. */
   public readonly placeholder: InputSignal<string> = input<string>('Select...');
+  /** Disables the control and sets `aria-disabled`. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  /** Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`. */
   public readonly loading: InputSignal<boolean> = input<boolean>(false);
   /** Custom option row template. Place `<ng-template #optionTemplate let-opt>` inside `<ui-lib-select>`. */
   public readonly optionTemplate: Signal<TemplateRef<SelectOptionTemplateContext> | undefined> =
     contentChild<TemplateRef<SelectOptionTemplateContext>>('optionTemplate');
+  /** Visible label rendered above the control; linked via `aria-labelledby`. Default: `''`. */
   public readonly label: InputSignal<string> = input<string>('');
+  /** Sets `aria-label` on the host combobox. Use when no visible label is rendered. Default: `null`. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** Sets `aria-labelledby` to an external element id; overrides the auto-generated link. Default: `null`. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+  /** Sets `aria-invalid="true"` and applies error border colour. Default: `false`. */
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  /** Sets `aria-required="true"` on the host element. Default: `false`. */
   public readonly required: InputSignal<boolean> = input<boolean>(false);
 
   /** Signal query for the panel element — undefined when panel is closed. */

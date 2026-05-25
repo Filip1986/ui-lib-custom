@@ -41,16 +41,23 @@
     --uilib-select-panel-z-index: var(--uilib-z-dropdown, 10);
     --uilib-select-arrow-font-size: 0.8rem;
     --uilib-select-font-size-lg: 1.125rem;
+    --uilib-select-focus-ring-color: var(--uilib-color-primary-500);
+    --uilib-select-focus-ring-width: 2px;
+    --uilib-select-label-font-weight: 600;
+    --uilib-select-label-gap: 0.35rem;
+    --uilib-select-control-gap: 0.5rem;
+    --uilib-select-option-gap: 0.5rem;
+    --uilib-select-option-selected-font-weight: 600;
 
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: var(--uilib-select-label-gap);
     position: relative;
     color: var(--uilib-page-fg);
   }
 
   ui-lib-select .ui-lib-select__label {
-    font-weight: 600;
+    font-weight: var(--uilib-select-label-font-weight);
     color: inherit;
   }
 
@@ -58,7 +65,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--uilib-select-control-gap);
     background: var(--uilib-select-bg, var(--uilib-surface));
     border: 1px solid var(--uilib-select-border, var(--uilib-border));
     border-radius: var(--uilib-select-radius, var(--uilib-shape-base, 6px));
@@ -70,7 +77,7 @@
   }
 
   ui-lib-select .ui-lib-select__control:focus-visible {
-    outline: 2px solid var(--uilib-color-primary-500);
+    outline: var(--uilib-select-focus-ring-width) solid var(--uilib-select-focus-ring-color);
     outline-offset: 2px;
   }
 
@@ -100,7 +107,21 @@
     color: var(--uilib-input-placeholder, var(--uilib-muted));
   }
 
+  @keyframes uilib-select-panel-enter {
+    from {
+      opacity: 0;
+      transform: scaleY(0.96) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+    }
+  }
+
   ui-lib-select .ui-lib-select__panel {
+    transform-origin: top center;
+    animation: uilib-select-panel-enter var(--uilib-transition-duration-fast, 150ms)
+      var(--uilib-transition-easing-enter, ease-out) both;
     position: absolute;
     inset-inline: 0;
     margin-top: 0.35rem;
@@ -135,7 +156,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--uilib-select-option-gap);
   }
 
   ui-lib-select .ui-lib-select__option:hover {
@@ -143,7 +164,7 @@
   }
 
   ui-lib-select .ui-lib-select__option.ui-lib-select__option--selected {
-    font-weight: 600;
+    font-weight: var(--uilib-select-option-selected-font-weight);
   }
 
   ui-lib-select .ui-lib-select__option.ui-lib-select__option--disabled {
@@ -307,6 +328,11 @@
 
     ui-lib-select .ui-lib-select__spinner {
       animation: none;
+    }
+
+    ui-lib-select .ui-lib-select__panel {
+      animation: none;
+      transform: none;
     }
   }
 } // end @layer uilib.components
