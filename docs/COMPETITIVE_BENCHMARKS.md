@@ -395,6 +395,114 @@ _None — Angular Material has no Rating component; all PrimeNG features are mat
 
 ---
 
+### Password
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Password strength meter                                      | ❌ (no Password) | ✅ visual only | N/A | N/A | ✅ |
+| Strength meter as `role=status` with `aria-live=polite`      | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| "Show / Hide password" toggle button                         | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Toggle button `aria-label` updates to reflect current state  | ❌                | ⚠️      | N/A      | N/A    | 🚀                |
+| Toggle button `aria-pressed` communicates pressed state      | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-describedby` on input wired to strength feedback       | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `input[type=password]` / `type=text` toggle on reveal        | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `autocomplete=current-password` / `new-password` support     | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-invalid` on invalid state                              | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` two-way binding)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no Password component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **Strength meter as `role=status` live region**: The password strength meter container has `role=status` and `aria-live=polite`. When the strength level changes (e.g., from "weak" to "medium"), the updated label is announced automatically by screen readers. PrimeNG's strength meter is purely visual — no ARIA role or live region — so screen reader users receive zero feedback about their password strength as they type.
+- **Toggle button state with `aria-pressed` + dynamic `aria-label`**: The "Show/Hide password" button uses `aria-pressed` (true/false) and its `aria-label` updates between "Show password" and "Hide password" to match the current state. PrimeNG's toggle button has an inconsistent accessible label that does not accurately communicate which action will occur next.
+- **`aria-describedby` wired to strength feedback**: The password input's `aria-describedby` points to the strength meter container, creating a formal programmatic relationship. Screen readers can read the current strength feedback on demand when the input has focus, without waiting for the live region to announce it.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Password component
+- PrimeNG: https://primeng.org/password
+- Radix UI: N/A — no Password primitive
+- Ark UI: N/A — no Password primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (toggle button pattern for the show/hide control)
+
+---
+
+### Slider
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=slider`                                                | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-valuenow` / `aria-valuemin` / `aria-valuemax`          | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-valuetext` from a value-format function                | ⚠️ partial       | ⚠️      | ✅        | ✅      | 🚀                |
+| Arrow key step (← / → / ↑ / ↓)                              | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| PageUp / PageDown for larger step                            | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Home / End for min / max                                     | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Range slider (two thumbs)                                    | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Range slider — independent `aria-label` per thumb            | ⚠️               | ⚠️      | ✅        | ✅      | 🚀                |
+| Tick marks / stops                                           | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Vertical orientation                                         | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Disabled state with `aria-disabled`                          | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` for value)                      | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-valuetext` from format function**: A `valueText` input accepts a `(value: number) => string` function that generates a human-readable label (e.g., `v => v + ' decibels'`). The result is set as `aria-valuetext` automatically. Angular Material supports a `displayWith` function but does not consistently propagate it to `aria-valuetext`; PrimeNG does not compute `aria-valuetext` from any formatting configuration.
+- **Range slider per-thumb `aria-label`**: In range mode, each thumb gets an independently configurable `aria-label` (e.g., "Minimum price", "Maximum price") so screen readers distinguish between the two handles. Angular Material and PrimeNG provide only a single label that applies to both thumbs or the container.
+- **Signal-native API**: `model<number>()` for single value, `model<[number, number]>()` for range — both fully two-way bindable as signals composing with `computed()` without zone triggers.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/slider/overview
+- PrimeNG: https://primeng.org/slider
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/slider
+- Ark UI: https://ark-ui.com/react/docs/components/slider
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
+
+---
+
+### CascadeSelect
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Multi-level cascading dropdown panels                        | ❌ (no CascadeSelect) | ✅ | N/A | N/A | ✅ |
+| `role=combobox` on the trigger input                         | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-haspopup=listbox` on trigger                           | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-expanded` on trigger                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-activedescendant` tracked through all levels           | ❌                | ⚠️ loses track at sub-levels | N/A | N/A | 🚀 |
+| Arrow key navigation within each level                       | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Right-arrow opens the next nested level                      | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Left-arrow / Escape returns to the parent level              | ❌                | ⚠️      | N/A      | N/A    | 🚀                |
+| Escape from the top level closes entirely                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom option `ng-template`                                  | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` two-way binding)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no CascadeSelect equivalent; PrimeNG is the only real reference and all features are matched._
+
+#### Differentiators
+- **`aria-activedescendant` tracked through all levels**: As the user navigates into cascading sub-panels, `aria-activedescendant` on the trigger input is continuously updated to point to the currently focused option — even across panel boundaries. PrimeNG partially implements `aria-activedescendant` but loses tracking when the user descends into sub-levels, causing screen readers to fall silent on the highlighted option.
+- **Left-arrow / Escape returns to parent level**: Pressing ← or Escape from within a sub-panel collapses that panel and restores focus to the parent option, following the multi-level combobox hybrid keyboard contract. PrimeNG handles this inconsistently — in some configurations, Escape closes the entire dropdown rather than just the current sub-panel.
+- **Signal-native API**: `model<T>()` for `[(value)]` — the selected item composes with `computed()` signals for dependent field derivation without RxJS subscription management.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no CascadeSelect equivalent
+- PrimeNG: https://primeng.org/cascadeselect
+- Radix UI: N/A — no CascadeSelect primitive
+- Ark UI: N/A — no CascadeSelect primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/ (CascadeSelect is a multi-level combobox variant)
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -622,6 +730,79 @@ _None — Angular Material has no anchored confirm dialog; PrimeNG is the only r
 
 ---
 
+### DynamicDialog
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Programmatic creation via a service                          | ✅ MatDialog     | ✅ DialogService | N/A | N/A | ✅ |
+| Dynamically loaded component as dialog content               | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `role=dialog` on the container                               | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-modal=true`                                            | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Focus trap within the dialog                                 | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Focus returns to the exact trigger on close                  | ✅                | ⚠️      | N/A      | N/A    | 🚀                |
+| `aria-labelledby` wired to dynamic title                     | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Escape closes dialog                                         | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Data injection into the dynamic component                    | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Typed result / close event generics                          | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Close callback injectable inside the dynamic component       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Typed signal-based data injection                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Focus returns to the exact trigger on close**: When a dynamically created dialog is dismissed, focus returns to the element that called `DialogService.open()`. PrimeNG's `DialogService` does not reliably restore focus to the trigger — focus can land on the document body or the element focused at service construction time, depending on how the call site is structured.
+- **Typed signal-based data injection**: Data passed to the dynamic component is typed via generics and exposed inside the hosted component as a signal — `dialogData = inject(DIALOG_DATA) as Signal<T>`. Angular Material uses `MAT_DIALOG_DATA` with a non-signal injection token; PrimeNG uses `DynamicDialogConfig.data` typed as `any`.
+- **Signal-native API**: The `DialogService` ref exposes `onClose` as an `OutputRef<R>` signal emitter — no Observable subscription needed to react to dialog results.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/dialog/overview
+- PrimeNG: https://primeng.org/dynamicdialog
+- Radix UI: N/A — no programmatic dialog service
+- Ark UI: N/A — no programmatic dialog service
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+
+---
+
+### BottomSheet
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Slides in from the bottom of the viewport                    | ✅                | ❌ (no BottomSheet) | N/A | ✅ | ✅ |
+| `role=dialog`                                                | ⚠️ uses `role=region` | ❌ | N/A | ✅ | 🚀 |
+| `aria-modal=true`                                            | ❌                | ❌       | N/A      | ✅      | ✅                 |
+| Focus trap                                                   | ⚠️               | ❌       | N/A      | ✅      | ✅                 |
+| Focus returns to trigger on close                            | ⚠️               | ❌       | N/A      | ✅      | 🚀                |
+| Escape closes the sheet                                      | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| Drag-to-dismiss gesture                                      | ❌                | ❌       | N/A      | ✅      | ✅                 |
+| Snap points (partial open states)                            | ❌                | ❌       | N/A      | ✅      | ✅                 |
+| `aria-labelledby` wired to sheet header                      | ❌                | ❌       | N/A      | ✅      | ✅                 |
+| `prefers-reduced-motion` — slide animation disabled          | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| `model()` for `[(visible)]` two-way binding                  | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — PrimeNG has no BottomSheet; Angular Material is the primary reference and all its features are matched._
+
+#### Differentiators
+- **`role=dialog` + `aria-modal=true`**: Angular Material's `MatBottomSheet` uses `role=region` — a landmark section, not a modal dialog. Screen readers treat a `region` as a non-modal page section, allowing Tab focus to escape to the rest of the page. This library uses `role=dialog` + `aria-modal=true`, which prevents AT from perceiving the page behind the sheet as navigable while it is open, matching the intended modal interaction model.
+- **Focus return to trigger on close**: When the sheet is dismissed, focus returns precisely to the element that opened it. Angular Material's BottomSheet handles this inconsistently when opened from dynamically positioned buttons.
+- **`model()` for `[(visible)]`**: The open/closed state is a `model<boolean>()` signal — consumers bind via `[(visible)]` with no `@Output()` event handler boilerplate.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/bottom-sheet/overview
+- PrimeNG: https://primeng.org — no BottomSheet component
+- Radix UI: N/A — Radix recommends composing Dialog for sheet UX
+- Ark UI: https://ark-ui.com/react/docs/components/drawer (Ark's Drawer covers the bottom-sheet pattern)
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ (BottomSheet is a viewport-anchored dialog variant)
+
+---
+
 ## Navigation & Menus
 
 ---
@@ -803,6 +984,114 @@ _None — Angular Material's CDK Stepper is the main reference; all features are
 - Radix UI: N/A — no Stepper primitive
 - Ark UI: https://ark-ui.com/react/docs/components/steps
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/ (Stepper follows tablist/tabpanel with `aria-current=step`)
+
+---
+
+### Menubar
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=menubar` on the root element                           | ❌ (no Menubar)  | ✅       | ✅ NavigationMenu | ✅ | ✅ |
+| `role=menuitem` on top-level items                           | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-haspopup=true` on items with submenus                  | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-expanded` on items with open submenus                  | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Left / Right arrow navigates top-level items                 | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Down-arrow opens submenu from a top-level item               | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Up / Down arrow navigates within an open submenu             | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Home / End within an open submenu                            | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Typeahead character search within a submenu                  | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Left-arrow closes submenu + returns focus to parent item     | ❌                | ⚠️      | ✅        | ✅      | 🚀                |
+| Escape closes submenu + returns focus to top-level           | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Custom item `ng-template`                                    | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — Angular Material has no Menubar component; all ❌ reference rows are matched._
+
+#### Differentiators
+- **Home / End in open submenus**: PrimeNG's Menubar does not implement Home/End keys within open dropdown submenus. This library follows the full APG Menubar keyboard contract, allowing users to jump immediately to the first or last item in any open submenu.
+- **Typeahead character search in submenus**: Pressing a letter key within an open submenu moves focus to the first matching item — the APG Menu pattern requires this; PrimeNG's Menubar does not implement it.
+- **Left-arrow submenu close**: Pressing ← inside an open submenu reliably closes it and returns focus to the parent menubar item. PrimeNG handles this inconsistently across its menu family.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Menubar component
+- PrimeNG: https://primeng.org/menubar
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/navigation-menu
+- Ark UI: https://ark-ui.com/react/docs/components/menu
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+
+---
+
+### ContextMenu
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Triggered by right-click / long-press                        | ❌ (no ContextMenu) | ✅   | ✅        | ✅      | ✅                 |
+| Keyboard trigger (Menu key / Shift+F10)                      | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| `aria-haspopup=menu` on the target element                   | ❌                | ⚠️      | ✅        | ✅      | 🚀                |
+| `aria-expanded` on the target element                        | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| `role=menu` on the popup                                     | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| `role=menuitem` on items                                     | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Arrow key navigation (↑ / ↓)                                | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Home / End jump to first / last item                         | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Typeahead character search                                   | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Nested submenu with `role=menu` + keyboard nav               | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Escape closes menu + returns focus to target                 | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Custom item `ng-template`                                    | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — Angular Material has no ContextMenu component; all ❌ reference rows are matched._
+
+#### Differentiators
+- **Keyboard trigger (Menu key / Shift+F10)**: Pressing the Menu key or Shift+F10 while the target element is focused opens the context menu — the correct keyboard-accessible alternative to right-clicking. PrimeNG does not implement this keyboard trigger, making its context menus keyboard-inaccessible. This library follows the APG "context menu button" activation pattern.
+- **`aria-haspopup=menu` + `aria-expanded` on the target**: The context menu target element receives `aria-haspopup=menu` and `aria-expanded` (false/true), giving screen reader users advance notice that the element can open a menu and communicating its current open state. PrimeNG does not add these attributes to the target element.
+- **Home / End + typeahead**: The same full keyboard contract as the Menu component — PrimeNG's ContextMenu omits both Home/End and typeahead, leaving keyboard users with no way to jump in long menus.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no ContextMenu component
+- PrimeNG: https://primeng.org/contextmenu
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/context-menu
+- Ark UI: https://ark-ui.com/react/docs/components/menu
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu/ (ContextMenu uses the Menu pattern triggered by context action)
+
+---
+
+### MegaMenu
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Multi-column dropdown layout                                 | ❌ (no MegaMenu) | ✅       | N/A      | N/A    | ✅                 |
+| `role=menubar` on the root                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Column group labeled with `aria-label` (group semantics)     | ❌                | ⚠️ visual heading only | N/A | N/A | 🚀 |
+| Column heading with configurable semantic role               | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Left / Right arrow navigates top-level items                 | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Down / Up arrow navigates within column items                | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Escape closes panel + returns focus to trigger               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom item `ng-template`                                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Horizontal + vertical orientation                            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no MegaMenu component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **Column groups with `aria-label`**: Each column group in the mega-menu panel receives an `aria-label` derived from the column header text (e.g., "Products group", "Services group"), so screen readers announce the group when focus enters a column. PrimeNG renders column headers as decorative visual text with no ARIA labeling of the enclosing group element.
+- **Column heading with configurable semantic role**: Column heading elements can be rendered as decorative (`aria-hidden=true`) or semantic (`role=heading` with a configurable level), preventing unintentional document heading outline pollution. PrimeNG renders all column headers with an identical structure and no role control.
+- **Signal-native API**: Menu model bound via `input<MegaMenuModel[]>()` — the structure can be derived from a `computed()` signal reflecting server-side permissions without NgRx or BehaviorSubjects.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no MegaMenu component
+- PrimeNG: https://primeng.org/megamenu
+- Radix UI: N/A — no MegaMenu primitive (NavigationMenu can be composed into a mega-menu layout)
+- Ark UI: N/A — no MegaMenu primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/ (MegaMenu extends the Menubar pattern with multi-column submenu layouts)
 
 ---
 

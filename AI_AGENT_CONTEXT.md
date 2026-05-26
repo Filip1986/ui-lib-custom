@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 4 adds Rating, Popover, ConfirmPopup, Stepper, Tree, TreeTable, Chart, ProgressSpinner → **30 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (70 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 5 adds Password, Slider, CascadeSelect, DynamicDialog, BottomSheet, Menubar, ContextMenu, MegaMenu → **38 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (62 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 5 — Password, Slider, CascadeSelect, DynamicDialog, BottomSheet, Menubar, ContextMenu, MegaMenu]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Password + Slider + CascadeSelect (Core Inputs), DynamicDialog + BottomSheet (Overlay), Menubar + ContextMenu + MegaMenu (Navigation); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for Password (8.7→8.8), DynamicDialog (8.3→8.4), BottomSheet (8.5→8.6)
+  AI_AGENT_CONTEXT.md: active focus updated (38/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 6 — candidates: InputNumber, InputMask, Knob, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator, Alert, Badge, Tag, Chip, Skeleton, MeterGroup
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 4 — Rating, Popover, ConfirmPopup, Stepper, Tree, TreeTable, Chart, ProgressSpinner]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Rating (Core Inputs), Popover + ConfirmPopup (Overlay), Stepper (Navigation), Tree + TreeTable + Chart (Data Display), ProgressSpinner (Feedback); zero unresolved gaps; 3+ differentiators each
@@ -90,7 +99,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (30/100 benchmark sections complete)
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 5 — candidates: Select, Input, Dialog, DynamicDialog, Tabs, Table, Listbox continuations; remaining 70 components
+Next step: Sprint A batch 5
 
 Date: 2026-05-26 [docs(workspace): sprint-a benchmarks batch 3 — Breadcrumb, ConfirmDialog, Drawer, Listbox, Menu, ProgressBar]
 Changed:
@@ -98,15 +107,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (22/100 benchmark sections complete)
 State: Docs-only; typecheck passed on push
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 4 — candidates: Popover, ConfirmPopup, Stepper, Tree, TreeTable, Rating, ProgressSpinner, Chart
-
-Date: 2026-05-26 [docs(workspace): sprint-a benchmarks batch 2 — Accordion, AutoComplete, Checkbox, DatePicker, Toast, Tooltip]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 6 new sections — AutoComplete (Core Inputs), Checkbox (Core Inputs), DatePicker (Core Inputs), Tooltip (Overlay & Modal), Accordion (Navigation & Menus), Toast (new Feedback & Status category); zero unresolved gaps across all 6; 3 differentiators each
-  AI_AGENT_CONTEXT.md: active focus updated (16/100 benchmark sections now complete)
-State: Docs-only change, no build needed; typecheck passed on push
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 3 — next 6–8 components
+Next step: Sprint A batch 4
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
