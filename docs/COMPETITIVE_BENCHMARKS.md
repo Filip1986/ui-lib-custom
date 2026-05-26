@@ -609,6 +609,260 @@ _None — Angular Material has no ColorPicker component; all ❌ reference rows 
 
 ---
 
+### RadioButton
+
+RadioButton renders a group of mutually exclusive options implementing the WAI-ARIA `radiogroup` / `radio` pattern.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=radiogroup` / `role=radio` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Arrow-key navigation within group | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-required` on group | ✅ | ⚠️ manual only | ✅ | ✅ | ✅ |
+| `aria-disabled` per item | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-describedby` for hint / error text | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<T>()` for group value | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Zoneless / standalone / `OnPush` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — all WCAG-required attributes implemented.
+
+#### Differentiators
+
+- **`aria-describedby` wired to hint + error text**: Each radio item automatically links to both the shared hint element and any inline validation error, fulfilling WCAG SC 1.3.1 and 3.3.2 without consumer boilerplate — absent from PrimeNG.
+- **Group-level `aria-required` propagation**: The `required` input on the group sets `aria-required` on the `role=radiogroup` element and is mirrored to each `role=radio` item, so assistive technology announces the requirement consistently across all nodes.
+- **Signal-native group model**: `model<T>()` on the group component means Angular `[(value)]` two-way binding, `computed()` derivation, and `effect`-based side-effects all work without explicit event subscriptions — eliminating the `FormControl.valueChanges` subscription pattern that leaks in many PrimeNG form integrations.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/radio
+- PrimeNG: https://primeng.org/radiobutton
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/radio-group
+- Ark UI: https://ark-ui.com/react/docs/components/radio-group
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/radio/
+
+---
+
+### Textarea
+
+Textarea is a multi-line text input with auto-resize, character counting, and full reactive-form integration.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-label` / `aria-labelledby` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-invalid` + `aria-describedby` for errors | ✅ | ⚠️ manual only | ✅ | ✅ | ✅ |
+| `aria-readonly` | ✅ | ⚠️ manual only | ✅ | ✅ | ✅ |
+| Auto-resize (no JS scroll jump) | ⚠️ | ✅ | ❌ | ❌ | ✅ |
+| Live character count with `aria-live` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `aria-describedby` linked to char-count region | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<string>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — all WCAG-required attributes implemented.
+
+#### Differentiators
+
+- **Live character count as `aria-live` region**: When a character limit is set, the remaining-characters counter uses `aria-live=polite` so screen reader users hear "42 characters remaining" on each pause without losing editing position — a detail absent from every reference library.
+- **`aria-describedby` linked to counter element**: The textarea is programmatically linked to the character-count element via `aria-describedby`, so assistive technology can query the constraint on demand without relying on the live announcement — satisfying WCAG SC 1.3.1.
+- **Auto-resize without layout thrashing**: Resize is driven by setting `height: auto` then reading `scrollHeight` in a single rAF, avoiding the double-read layout thrash present in PrimeNG's `autoResize` directive implementation.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/input (textarea variant)
+- PrimeNG: https://primeng.org/textarea
+- Radix UI: N/A — no dedicated Textarea primitive (HTML `<textarea>` used directly)
+- Ark UI: N/A — no dedicated Textarea primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (multi-line textbox)
+
+---
+
+### SelectButton
+
+SelectButton renders a segmented group of toggle buttons for single or multi-select scenarios, following the toolbar keyboard model.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=group` on container | ✅ | ❌ (plain `<div>`) | ✅ | ✅ | ✅ |
+| `role=button` + `aria-pressed` per option | ✅ | ❌ (no `aria-pressed`) | ✅ | ✅ | ✅ |
+| `aria-label` on container | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Multi-select with `aria-multiselectable` | ⚠️ | ❌ | ✅ | ✅ | ✅ |
+| Arrow keys to move, Space to select | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Typed `ng-template` option slot | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<T \| T[]>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `role=group`, `aria-pressed`, `aria-label`, and `aria-multiselectable` all implemented.
+
+#### Differentiators
+
+- **`aria-pressed` state on every option button**: PrimeNG SelectButton renders styled `<div>` elements with no ARIA — selected state is visually implied but invisible to screen readers. Every option carries `role=button` + `aria-pressed` so VoiceOver / NVDA announce "pressed" / "not pressed" correctly.
+- **Arrow-key navigation within group**: Follows the APG toolbar keyboard pattern — Left / Right arrow moves focus between options, Space toggles selection. PrimeNG requires Tab to reach each option, which is incorrect for a widget group.
+- **`aria-multiselectable` on container**: When `multiple=true`, the `role=group` gains `aria-multiselectable=true` so assistive technology users know they can select more than one item before beginning interaction.
+
+#### Reference URLs
+- Angular Material: N/A — closest is Button Toggle Group (https://material.angular.io/components/button-toggle)
+- PrimeNG: https://primeng.org/selectbutton
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/toggle-group
+- Ark UI: https://ark-ui.com/react/docs/components/toggle-group
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/ (toolbar keyboard model applies to button groups)
+
+---
+
+### ToggleSwitch
+
+ToggleSwitch is a boolean on / off control implementing the WAI-ARIA `switch` role.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=switch` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-checked` (true / false) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Space key toggles | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-label` / `aria-labelledby` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-disabled` sync with `disabled` input | ✅ | ⚠️ `attr.disabled` only | ✅ | ✅ | ✅ |
+| `aria-describedby` for hint / error | ✅ | ❌ | ✅ | ✅ | ✅ |
+| `prefers-reduced-motion` on thumb animation | ⚠️ | ❌ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<boolean>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — all WCAG-required attributes implemented.
+
+#### Differentiators
+
+- **`aria-disabled` and `disabled` always in sync via host binding**: PrimeNG sets only the native `disabled` attribute, leaving `aria-disabled` absent. Screen readers that check `aria-disabled` for non-form elements will miss the disabled state; both attributes are managed by a single host binding that reads the `disabled` signal.
+- **`aria-describedby` wired to hint and error text**: The toggle links to both a persistent hint element (e.g., "Enables email notifications") and any validation message via `aria-describedby`, giving users context before they commit to a change — fulfilling WCAG SC 3.3.2.
+- **`prefers-reduced-motion` respected on thumb animation**: The sliding thumb uses a CSS transition gated behind `@media (prefers-reduced-motion: no-preference)`, so users with vestibular disorders see an instant state change rather than motion.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/slide-toggle
+- PrimeNG: https://primeng.org/toggleswitch
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/switch
+- Ark UI: https://ark-ui.com/react/docs/components/switch
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
+
+---
+
+### InputOtp
+
+InputOtp is a one-time password / PIN entry widget with sequential cell focus management and paste-distribution support.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Individual `<input type=text>` per slot | ❌ | ✅ | ❌ | ✅ | ✅ |
+| Auto-advance focus on character entry | ❌ | ✅ | ❌ | ✅ | ✅ |
+| Backspace moves to previous cell | ❌ | ✅ | ❌ | ✅ | ✅ |
+| Paste distributes across cells | ❌ | ✅ | ❌ | ✅ | ✅ |
+| Positional `aria-label` per cell ("Digit N of M") | ❌ | ❌ | ❌ | ⚠️ | 🚀 |
+| `aria-live` paste-completion announcement | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `role=group` + `aria-label` on container | ❌ | ❌ | ❌ | ⚠️ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<string>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — sequential focus, paste, and ARIA all implemented.
+
+#### Differentiators
+
+- **Positional `aria-label` per cell**: Each input carries `aria-label="Digit N of M"` (e.g., "Digit 3 of 6"), so screen reader users understand how many fields exist and which position has focus — absent from PrimeNG and only partial in Ark UI.
+- **Paste-completion `aria-live` announcement**: When a valid OTP is pasted and all cells fill, an `aria-live=polite` region announces "Code entered" so keyboard-only and screen reader users get confirmation without needing to inspect each cell individually.
+- **Angular Material has no OTP component**: The entire category is unserved by Material; ui-lib-custom covers it natively with signals, zoneless support, and full a11y — a concrete feature gap over the most-used Angular library.
+
+#### Reference URLs
+- Angular Material: N/A — no InputOtp component
+- PrimeNG: https://primeng.org/inputotp
+- Radix UI: N/A — no OTP primitive (community: shadcn/ui uses input-otp)
+- Ark UI: https://ark-ui.com/react/docs/components/pin-input
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (each cell is a single-character textbox)
+
+---
+
+### KeyFilter
+
+KeyFilter is a directive that restricts which keyboard characters are accepted by a text input, with built-in presets (numeric, alpha, alphanumeric, hex) and a custom regex option.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Built-in presets (numeric, alpha, alphanumeric) | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Custom regex filter | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Paste filtering (strips disallowed chars) | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Visually-hidden format hint via `aria-describedby` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `aria-live` announcement on blocked key | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `aria-live` confirmation on filtered paste | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `filter` / `regex` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — format hint, block announcement, and paste confirmation all implemented.
+
+#### Differentiators
+
+- **Visually-hidden format hint via `aria-describedby`**: The directive injects a `<span class="sr-only">` describing the accepted format (e.g., "Digits only") and links it to the host input via `aria-describedby`, satisfying WCAG SC 3.3.2. PrimeNG's `pKeyFilter` provides no such hint.
+- **`aria-live` announcement on blocked keystroke**: When a character is silently rejected, an `aria-live=assertive` region briefly announces "Character not allowed" — giving screen reader users the same feedback that sighted users infer from nothing happening. This is absent from every reference library.
+- **Paste-filtered `aria-live` confirmation**: Pasted content is filtered and the cleaned value is written back; an `aria-live=polite` region announces "Input filtered to accepted characters only", so non-visual users are not silently surprised by truncated paste output.
+
+#### Reference URLs
+- Angular Material: N/A — no KeyFilter directive
+- PrimeNG: https://primeng.org/keyfilter
+- Radix UI: N/A — no KeyFilter primitive
+- Ark UI: N/A — no KeyFilter primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (textbox input constraints)
+
+---
+
+### TreeSelect
+
+TreeSelect is a dropdown-style selector that renders a hierarchical tree structure for option selection, combining the combobox and tree widget patterns.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Trigger: `role=combobox` + `aria-haspopup=tree` | ❌ | ⚠️ (`aria-haspopup=listbox` — wrong) | ❌ | ❌ | ✅ |
+| Panel: `role=tree` / `role=treeitem` | ❌ | ✅ | ❌ | ❌ | ✅ |
+| `aria-expanded` on nodes | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Arrow-key nav: Down / Up move, Right / Left expand / collapse | ❌ | ✅ | ❌ | ❌ | ✅ |
+| `aria-multiselectable` for multi-select trees | ❌ | ⚠️ partial | ❌ | ❌ | ✅ |
+| `aria-activedescendant` on trigger | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Typeahead within tree panel | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<TreeNode \| TreeNode[]>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-haspopup=tree`, `aria-activedescendant`, and typeahead all implemented.
+
+#### Differentiators
+
+- **Correct `aria-haspopup=tree` on trigger**: PrimeNG TreeSelect uses `aria-haspopup=listbox` even though the popup contains `role=tree` — a semantic mismatch that misleads screen readers. ui-lib-custom sets `aria-haspopup=tree` to accurately describe the popup widget type.
+- **`aria-activedescendant` maintained through expansion**: As nodes expand and contract, the trigger's `aria-activedescendant` always points to the currently focused tree item, so VoiceOver / NVDA users hear the correct node name and level without focus leaving the trigger element.
+- **Typeahead within the tree panel**: Typing a character jumps focus to the next matching node within the expanded tree — following the APG treeview typeahead pattern. Neither PrimeNG nor any Material-equivalent implements this for a dropdown tree.
+
+#### Reference URLs
+- Angular Material: N/A — no TreeSelect component
+- PrimeNG: https://primeng.org/treeselect
+- Radix UI: N/A — no TreeSelect primitive
+- Ark UI: N/A — no TreeSelect primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/ (tree inside combobox popup)
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -2124,6 +2378,41 @@ _None — Angular Material has no MeterGroup component; PrimeNG is the only refe
 - Radix UI: N/A — no MeterGroup primitive
 - Ark UI: N/A — no MeterGroup primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/meter/ (each segment follows the ARIA meter pattern)
+
+---
+
+### Message
+
+Message is an inline status widget for contextual feedback (success, info, warn, error) with optional dismissal — displayed inline with content rather than as a floating toast.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Severity-mapped live-region role (`alert` vs `status`) | ⚠️ (always `role=alert`) | ⚠️ (always `role=alert`) | ⚠️ (always `role=alert`) | ⚠️ (always `role=alert`) | ✅ |
+| `aria-atomic=true` on live region | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Icon marked `aria-hidden` | ❌ | ⚠️ partial | ✅ | ✅ | ✅ |
+| Dismiss button `aria-label` includes message title | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Conditional rendering with `@if` (no hidden DOM) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `severity` + `closable` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — severity-mapped live region roles and dismiss ARIA all implemented.
+
+#### Differentiators
+
+- **Severity-mapped live region role**: `error` severity uses `role=alert` (assertive), while `info`, `success`, and `warning` use `role=status` (polite). Every reference library applies `role=alert` to all severities, interrupting screen reader users on benign informational messages — the APG distinguishes these roles explicitly.
+- **Dismiss button label includes message summary**: The close button carries `aria-label="Dismiss: {title}"` (e.g., "Dismiss: File saved successfully"), so screen reader users in virtual cursor mode know exactly which message they are about to close without navigating back to read the content.
+- **`aria-atomic=true` on the live region**: The message container sets `aria-atomic=true` so assistive technology reads the full title + description as a single announcement on appearance, rather than announcing partial text updates as the DOM renders, preventing fragmented announcements on slow connections.
+
+#### Reference URLs
+- Angular Material: N/A — no standalone Message component (Snackbar used for similar needs)
+- PrimeNG: https://primeng.org/message
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/callout (closest equivalent)
+- Ark UI: N/A — no Message primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alert/ (alert + status live region roles)
 
 ---
 
