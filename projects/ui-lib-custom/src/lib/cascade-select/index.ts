@@ -10,6 +10,9 @@ export type {
   CascadeSelectShowEvent,
   CascadeSelectHideEvent,
   CascadeSelectGroupChangeEvent,
+  CascadeSelectOptionContext,
+  CascadeSelectValueContext,
+  CascadeSelectOptionGroupIconContext,
 } from './cascade-select.types';
 
 export * from './cascade-select.constants';
