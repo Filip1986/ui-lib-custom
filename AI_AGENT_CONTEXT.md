@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 5 adds Password, Slider, CascadeSelect, DynamicDialog, BottomSheet, Menubar, ContextMenu, MegaMenu → **38 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (62 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 6 adds InputNumber, InputMask, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator → **46 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (54 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 6 — InputNumber, InputMask, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — InputNumber + InputMask + ColorPicker (Core Inputs), VirtualScroller + DataView + OrderList + PickList + Paginator (Data Display); zero unresolved gaps; 3 differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for InputMask (8.7→8.8), ColorPicker (8.9→9.0), VirtualScroller (8.5→8.6), DataView (8.3→8.4), OrderList (8.7→8.8), PickList (8.7→8.8), Paginator (8.5→8.6)
+  AI_AGENT_CONTEXT.md: active focus updated (46/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 7 — candidates: Alert, Badge, Tag, Chip, Message, Skeleton, MeterGroup, Timeline, OrganizationChart, TreeSelect, SelectButton, InputOtp, KeyFilter
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 5 — Password, Slider, CascadeSelect, DynamicDialog, BottomSheet, Menubar, ContextMenu, MegaMenu]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Password + Slider + CascadeSelect (Core Inputs), DynamicDialog + BottomSheet (Overlay), Menubar + ContextMenu + MegaMenu (Navigation); zero unresolved gaps; 3+ differentiators each
@@ -90,7 +99,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (38/100 benchmark sections complete)
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 6 — candidates: InputNumber, InputMask, Knob, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator, Alert, Badge, Tag, Chip, Skeleton, MeterGroup
+Next step: Sprint A batch 6
 
 Date: 2026-05-26 [docs(workspace): sprint-a batch 4 — Rating, Popover, ConfirmPopup, Stepper, Tree, TreeTable, Chart, ProgressSpinner]
 Changed:
@@ -100,14 +109,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 5
-
-Date: 2026-05-26 [docs(workspace): sprint-a benchmarks batch 3 — Breadcrumb, ConfirmDialog, Drawer, Listbox, Menu, ProgressBar]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 6 sections — ConfirmDialog + Drawer (Overlay), Breadcrumb + Menu (Navigation), Listbox (Data Display), ProgressBar (Feedback); zero unresolved gaps; 3 differentiators each
-  AI_AGENT_CONTEXT.md: active focus updated (22/100 benchmark sections complete)
-State: Docs-only; typecheck passed on push
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 4
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->

@@ -503,6 +503,112 @@ _None — Angular Material has no CascadeSelect equivalent; PrimeNG is the only 
 
 ---
 
+### InputNumber
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=spinbutton`                                            | ⚠️ not exposed   | ✅       | ✅        | ✅      | ✅                 |
+| `aria-valuenow` / `aria-valuemin` / `aria-valuemax`          | ⚠️               | ✅       | ✅        | ✅      | ✅                 |
+| `aria-valuetext` derived from locale-formatted value         | ❌                | ⚠️      | ✅        | ✅      | 🚀                |
+| Up / Down arrow increments / decrements                      | ⚠️               | ✅       | ✅        | ✅      | ✅                 |
+| PageUp / PageDown for a larger step                          | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Home / End for min / max                                     | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Increment / Decrement buttons with descriptive `aria-label`  | ⚠️               | ⚠️      | ✅        | ✅      | 🚀                |
+| Locale-aware number formatting                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Currency mode with locale formatting                         | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Prefix / Suffix display text                                 | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` two-way binding)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — Angular Material has no InputNumber component; all ❌ reference rows are matched._
+
+#### Differentiators
+- **`aria-valuetext` from locale-formatted value**: When a number is displayed with locale formatting (e.g., currency "€1,234.50" or a percentage "75%"), `aria-valuetext` is set to the formatted string so screen readers announce "1234 euros 50 cents" or "75 percent" rather than the raw integer from `aria-valuenow`. PrimeNG does not compute `aria-valuetext` from its locale formatter; screen readers announce the raw numeric value.
+- **Increment/Decrement buttons with descriptive `aria-label`**: The ± buttons carry specific `aria-label` values that include the step size and, where the field has a label, the field name (e.g., "Increase quantity by 1", "Decrease quantity by 1"). PrimeNG's increment/decrement buttons have generic or absent accessible names.
+- **Signal-native API**: `model<number | null>()` for `[(value)]` — composes with `computed()` for derived totals and dependent field validation without zone triggers.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no InputNumber component (native `<input type="number">` used directly)
+- PrimeNG: https://primeng.org/inputnumber
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/number-field
+- Ark UI: https://ark-ui.com/react/docs/components/number-input
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
+
+---
+
+### InputMask
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Masked input with character-position enforcement             | ❌ (no InputMask) | ✅      | N/A      | N/A    | ✅                 |
+| `aria-describedby` on input wired to format hint             | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Visually-hidden format hint text associated programmatically | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-invalid` on invalid / incomplete input                 | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-label` / `aria-labelledby` passthrough                 | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| Placeholder character configurable                           | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `unmask` mode (emits raw value without mask characters)      | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Optional segment support within a mask                       | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` two-way binding)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no InputMask component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **`aria-describedby` wired to format hint**: The input has `aria-describedby` pointing to a visually-hidden element that describes the expected format (e.g., "Format: DD/MM/YYYY"). Screen readers announce this description when the field receives focus, so users know what pattern to enter before making an error. PrimeNG does not programmatically associate any format hint with the input element.
+- **Visually-hidden format hint**: A `<span class="sr-only">` with the mask pattern is rendered adjacent to the input and linked via `aria-describedby`. This satisfies WCAG SC 1.3.1 (Info and Relationships) and SC 3.3.2 (Labels or Instructions) for format-constrained inputs.
+- **Signal-native API**: `model<string>()` for `[(value)]` — the masked or unmasked value composes with signal-based form validation without zone triggers or RxJS subscription management.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no InputMask component
+- PrimeNG: https://primeng.org/inputmask
+- Radix UI: N/A — no InputMask primitive
+- Ark UI: N/A — no InputMask primitive (Ark's Pin Input covers OTP; general mask is not provided)
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (ARIA authoring guidance for format-constrained text inputs)
+
+---
+
+### ColorPicker
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Hue-saturation gradient canvas                               | ❌ (no ColorPicker) | ✅    | N/A      | ✅      | ✅                 |
+| Hue slider                                                   | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Opacity / alpha slider                                       | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Hex input field                                              | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| RGB / HSB / HSL channel input fields                         | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Hue/saturation area as `role=slider` with keyboard nav       | ❌                | ❌       | N/A      | ✅      | 🚀                |
+| `aria-valuetext` with colour name / hex string               | ❌                | ❌       | N/A      | ✅      | 🚀                |
+| Arrow key navigation of the gradient canvas                  | ❌                | ❌       | N/A      | ✅      | ✅                 |
+| Inline + popup (overlay) modes                               | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Preset colour swatches                                       | ❌                | ❌       | N/A      | ✅      | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` two-way binding)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no ColorPicker component; all ❌ reference rows are matched._
+
+#### Differentiators
+- **Hue/saturation canvas as `role=slider`**: The 2D gradient canvas is exposed as `role=slider` — the correct ARIA pattern for a bidirectional interactive widget. Arrow keys move the selection point on two axes; `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` communicate the current saturation level. PrimeNG's canvas area has no ARIA role and no keyboard navigation, making it completely inaccessible to keyboard-only and screen reader users.
+- **`aria-valuetext` with colour description**: The hue slider and saturation area carry `aria-valuetext` containing the resulting hex value or colour name (e.g., "Sky blue, #87CEEB"), giving screen reader users a human-readable description of the selected colour rather than a raw number.
+- **Signal-native API**: `model<string>()` for `[(value)]` — the hex/RGB string composes with `computed()` signals for live contrast checking, dependent input validation, and preview updates.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no ColorPicker component
+- PrimeNG: https://primeng.org/colorpicker
+- Radix UI: N/A — no ColorPicker primitive
+- Ark UI: https://ark-ui.com/react/docs/components/color-picker
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/ (each colour axis follows the slider pattern)
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -1469,6 +1575,179 @@ _None — Angular Material has no Chart component; PrimeNG is the only reference
 - Radix UI: N/A — no Chart primitive
 - Ark UI: N/A — no Chart primitive
 - APG Pattern: N/A — WCAG SC 1.1.1 requires text alternatives for non-text content; no dedicated APG chart pattern
+
+---
+
+### VirtualScroller
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Windowed / virtual rendering for large lists                 | ✅ CDK Virtual Scroll | ✅ | N/A | N/A | ✅ |
+| Accessible scroll container label (`aria-label`)             | ⚠️               | ⚠️      | N/A      | N/A    | 🚀                |
+| `aria-rowcount` on the virtual list container                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-rowindex` on each visible row                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Keyboard scrolling (arrow keys on the viewport)              | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `prefers-reduced-motion` — smooth-scroll disabled            | ⚠️               | ⚠️      | N/A      | N/A    | ✅                 |
+| Fixed item-size mode (performant)                            | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Variable item-size mode                                      | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Scroll to index API                                          | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-rowcount` + `aria-rowindex`**: The virtual list container carries `aria-rowcount` with the total item count, and each visible row carries `aria-rowindex` with its logical position in the full dataset. This allows screen readers to announce "row 47 of 10,000" when a user navigates into a rendered row — critical for understanding position within a large virtualised list. Neither Angular Material's CDK Virtual Scroll nor PrimeNG's VirtualScroller sets these attributes.
+- **Accessible scroll container label**: The scroll viewport receives a consumer-configurable `aria-label` (e.g., "Product list", "Search results") so screen readers announce a meaningful name when focus enters the virtual scroll region. PrimeNG and Angular Material CDK do not expose this label.
+- **Signal-native API**: Items bound via `input<T[]>()` — the list can be a `computed()` signal derived from reactive server state without the Observable adapter that Angular CDK's `DataSource` requires.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/cdk/scrolling/overview
+- PrimeNG: https://primeng.org/virtualscroller
+- Radix UI: N/A — no VirtualScroller primitive
+- Ark UI: N/A — no VirtualScroller primitive
+- APG Pattern: N/A — `aria-rowcount`/`aria-rowindex` from the grid/listbox specs apply; no dedicated APG virtual-scroll pattern
+
+---
+
+### DataView
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| List / grid layout toggle                                    | ❌ (no DataView)  | ✅       | N/A      | N/A    | ✅                 |
+| Layout toggle buttons with `aria-pressed`                    | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-live` region announcing layout change                  | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Sort control with descriptive `aria-label`                   | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-live` region announcing sort / filter result count     | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Pagination integration                                       | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom list-mode item template                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom grid-mode item template                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom header / footer templates                             | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no DataView equivalent; PrimeNG is the only reference and all features are matched._
+
+#### Differentiators
+- **Layout toggle with `aria-pressed`**: The List/Grid toggle buttons use `aria-pressed` (true/false) to communicate the active layout state to screen readers. PrimeNG's layout buttons indicate the active view with a CSS class only — keyboard users cannot determine the current layout without visual feedback.
+- **`aria-live` for layout and sort changes**: A polite live region announces both layout switches ("Switched to grid view") and sort/filter result counts ("Showing 24 of 100 items"). PrimeNG does not announce either state change, leaving screen reader users unaware that the content has reorganised after interacting with the controls.
+- **Signal-native API**: Layout mode, sort field, and paginator page are all `model<>()` signals — composable with route parameter signals for URL-driven DataView state without RxJS subscription chains.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no DataView component
+- PrimeNG: https://primeng.org/dataview
+- Radix UI: N/A — no DataView primitive
+- Ark UI: N/A — no DataView primitive
+- APG Pattern: N/A — DataView is a layout container; constituent controls follow their own APG patterns
+
+---
+
+### OrderList
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Selectable list of items                                     | ❌ (no OrderList) | ✅      | N/A      | N/A    | ✅                 |
+| Drag-and-drop reordering                                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Keyboard reorder buttons (Move Up / Down / Top / Bottom)     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Reorder buttons with item-specific `aria-label`              | ❌                | ⚠️ icon-only, no label | N/A | N/A | 🚀 |
+| `role=listbox` on the list container                         | ❌                | ⚠️ uses `<ul>` with no role | N/A | N/A | 🚀 |
+| `role=option` per item with `aria-selected`                  | ❌                | ⚠️      | N/A      | N/A    | 🚀                |
+| `aria-live` region announcing new position after reorder     | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Filter / search input                                        | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom item `ng-template`                                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no OrderList component; PrimeNG is the only reference and all features are matched._
+
+#### Differentiators
+- **`role=listbox` / `role=option` semantics**: The list container uses `role=listbox` with `aria-multiselectable`, and each item uses `role=option` with `aria-selected`. PrimeNG renders OrderList as a plain `<ul>`/`<li>` structure with no ARIA list selection role — screen readers cannot communicate selection state or convey that the list is interactive.
+- **Reorder buttons with item-specific `aria-label`**: Each Move Up/Down/Top/Bottom button carries an `aria-label` that includes the item's display label (e.g., "Move 'Product A' up", "Move 'Product A' to top"). PrimeNG renders icon-only buttons with no accessible name — keyboard users have no way to identify what each reorder action will affect.
+- **`aria-live` after reorder**: After an item is moved, a polite live region announces its new position (e.g., "Product A moved to position 3 of 10"), confirming the action to screen reader users.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no OrderList component
+- PrimeNG: https://primeng.org/orderlist
+- Radix UI: N/A — no OrderList primitive
+- Ark UI: N/A — no OrderList primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/ (OrderList is a reorderable listbox)
+
+---
+
+### PickList
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Dual-list (source + target) layout                           | ❌ (no PickList)  | ✅       | N/A      | N/A    | ✅                 |
+| Transfer buttons (→ / ← / All → / ← All)                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Transfer buttons with descriptive `aria-label`               | ❌                | ⚠️ icon-only | N/A | N/A | 🚀 |
+| `role=listbox` on each list panel                            | ❌                | ⚠️ uses `<ul>` | N/A | N/A | 🚀 |
+| `role=option` per item with `aria-selected`                  | ❌                | ⚠️      | N/A      | N/A    | 🚀                |
+| `aria-label` on each panel (source / target)                 | ❌                | ⚠️      | N/A      | N/A    | 🚀                |
+| `aria-live` region announcing transfer result                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Drag-and-drop between the two lists                          | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Reorder within each list                                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Filter / search input in each list                           | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom item `ng-template`                                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no PickList component; PrimeNG is the only reference and all features are matched._
+
+#### Differentiators
+- **`role=listbox` + `aria-label` on each panel**: Both the source and target panels use `role=listbox` with a consumer-configurable `aria-label` (e.g., "Available items", "Selected items"). PrimeNG uses plain `<ul>` elements with no ARIA selection role and no panel label — screen readers cannot distinguish the two lists or communicate that they are interactive selection containers.
+- **Transfer buttons with descriptive `aria-label`**: Each transfer button carries a specific `aria-label` that includes item counts (e.g., "Move 3 selected items to target", "Move all items to source"). PrimeNG's transfer buttons are icon-only with no accessible name.
+- **`aria-live` after transfer**: After items are moved between lists, a polite live region announces the result (e.g., "3 items moved to selected. Selected list now has 7 items"), confirming the action and current state for screen reader users.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no PickList component
+- PrimeNG: https://primeng.org/picklist
+- Radix UI: N/A — no PickList primitive
+- Ark UI: N/A — no PickList primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/ (dual listbox transfer pattern)
+
+---
+
+### Paginator
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Previous / Next page buttons                                 | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| First / Last page buttons                                    | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Numbered page buttons                                        | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-current=page` on the active page button                | ✅                | ⚠️      | N/A      | N/A    | 🚀                |
+| `aria-label` per page button (e.g. "Page 3 of 10")          | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-label` on Prev / Next / First / Last buttons           | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Wrapping `<nav>` with `aria-label="Pagination"`              | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-live` region announcing page change                    | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Rows-per-page dropdown                                       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Jump-to-page input                                           | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-live` region announcing page change**: After a page navigation, a polite live region announces "Page 3 of 10, showing items 21 to 30" — giving screen reader users immediate confirmation that the content has updated and their current position in the dataset. Neither Angular Material nor PrimeNG announces page changes via a live region.
+- **`aria-current=page` on the active page button**: The button representing the current page carries `aria-current=page` — the correct ARIA attribute for communicating the current item in a navigation sequence. PrimeNG applies a CSS class for visual indication but does not set `aria-current`, so screen readers cannot identify the current page programmatically.
+- **Signal-native API**: Current page and rows-per-page are `model<number>()` signals — composable with table or data-source signals for URL-driven pagination without Observable subscription chains.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/paginator/overview
+- PrimeNG: https://primeng.org/paginator
+- Radix UI: N/A — no Paginator primitive
+- Ark UI: N/A — no Paginator primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/link/ (Pagination uses navigation landmark + `aria-current` for current-page indicator)
 
 ---
 
