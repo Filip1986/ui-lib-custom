@@ -199,7 +199,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.7 | 🟢     |
 | InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.7 | 🟢     |
 | Password      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.7 | 🟢     |
-| Rating        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.7 | 🟢     |
+| Rating        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.8 | 🟢     |
 | Knob          | 8   | 9    | 8    | 9    | 8     | 8   | 8    | 8      | 9       | 8    | —   | 8.3 | 🟢     |
 | Slider        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.8 | 🟢     |
 | ColorPicker   | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 8.9 | 🟢     |
@@ -260,7 +260,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component         | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |-------------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
 | Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
-| TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | —   | 8.5 | 🟢     |
+| TreeTable         | 9   | 9    | 8    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
 | Tree              | 9   | 8    | 9    | 9    | 9     | 9   | 8    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
 | TreeSelect        | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
@@ -273,7 +273,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | —   | 8.5 | 🟢     |
 | Carousel          | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | —   | 8.4 | 🟢     |
 | Galleria          | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | —   | 8.4 | 🟢     |
-| Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 8.9 | 🟢     |
+| Chart             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 9.0 | 🟢     |
 
 ## Feedback & Status
 
@@ -287,7 +287,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Message         | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
 | Skeleton        | 9   | 9    | 9    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
 | ProgressBar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
-| ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 8.9 | 🟢     |
+| ProgressSpinner | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 9.0 | 🟢     |
 | MeterGroup      | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | —   | 8.3 | 🟢     |
 
 ## Utilities & Directives

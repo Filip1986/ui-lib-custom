@@ -358,6 +358,43 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ---
 
+### Rating
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=radiogroup` on the container                           | ❌ (no Rating)   | ⚠️ div with no group role | N/A | ✅ | 🚀 |
+| `role=radio` per star item                                   | ❌                | ⚠️ span with no role | N/A | ✅ | 🚀 |
+| `aria-checked` on the selected star                          | ❌                | ⚠️      | N/A      | ✅      | 🚀                |
+| `aria-label` per star item (e.g. "1 star", "2 stars")        | ❌                | ❌       | N/A      | ✅      | 🚀                |
+| Arrow key navigation between stars (← / →)                  | ❌                | ❌       | N/A      | ✅      | 🚀                |
+| Clearable — allow deselecting the current rating             | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Read-only / display-only mode                                | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Disabled state with `aria-disabled`                          | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Number of stars configurable                                 | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Custom star icon template                                    | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| `ControlValueAccessor` (ngModel / reactive forms)            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` two-way binding)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — Angular Material has no Rating component; all PrimeNG features are matched and several a11y gaps are resolved._
+
+#### Differentiators
+- **`role=radiogroup` / `role=radio` pattern**: The WAI-ARIA APG's closest pattern for a rating widget is a group of radio buttons. PrimeNG implements Rating as interactive `<span>` elements with click handlers but no ARIA group role or `role=radio` — leaving screen reader users without any semantic context for the widget. This library follows the radiogroup pattern so screen readers announce "1 star, radio button, 1 of 5" for each item.
+- **Arrow key navigation**: Moving focus between stars with ← / → matches the radiogroup keyboard contract. PrimeNG requires individual Tab stops on each star (no arrow key navigation), breaking the expected radio group interaction model.
+- **`aria-label` per star item**: Each star receives a computed accessible label (e.g., "1 star", "2 stars") so screen readers can announce the star's value when it receives keyboard focus, even before selection.
+- **Signal-native API**: `model<number>()` for `[(value)]` two-way binding — no `@Input()`/`@Output()` adapter needed.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Rating component
+- PrimeNG: https://primeng.org/rating
+- Radix UI: N/A — no Rating primitive
+- Ark UI: https://ark-ui.com/react/docs/components/rating-group
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/radio/ (Rating follows the radiogroup keyboard model)
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -510,6 +547,81 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ---
 
+### Popover
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `aria-haspopup=dialog` on trigger                            | ❌                | ⚠️ no `aria-haspopup` set | ✅ | ✅ | 🚀 |
+| `aria-expanded` on trigger                                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-controls` pointing to the panel                        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `role=dialog` on the popup panel                             | ⚠️ OverlayPanel variant | ⚠️ no role | ✅ | ✅ | 🚀 |
+| `aria-labelledby` on the dialog                              | ❌                | ❌       | ✅        | ✅      | ✅                 |
+| Focus moves into the popup on open                           | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| Escape closes popup + returns focus to trigger               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Click outside closes popup                                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Focus trap (modal popover mode)                              | ❌                | ❌       | ✅        | ✅      | ✅                 |
+| Positioning (top / bottom / left / right + alignment)        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Custom content via content projection                        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `model()` for `[(visible)]` two-way binding                  | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `prefers-reduced-motion` — enter/exit animation disabled     | ⚠️               | ⚠️      | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-haspopup=dialog` on trigger**: When the popover contains rich, arbitrary content (not a menu), `aria-haspopup=dialog` is the correct value to communicate to screen readers that the trigger opens a dialog-like panel. PrimeNG's OverlayPanel sets no `aria-haspopup` value, leaving screen readers without any hint of what will appear on activation.
+- **`role=dialog` on the panel**: PrimeNG renders a plain `<div>` with no ARIA role on its OverlayPanel; Radix UI and Ark UI both use `role=dialog`. This library uses `role=dialog` with `aria-labelledby` wired to any heading inside, giving screen readers a proper entry announcement on focus movement into the popover.
+- **`model()` for `[(visible)]`**: The open/closed state is a `model<boolean>()` signal — consumers get two-way binding via `[(visible)]` with no `@Output() visibleChange` event handler boilerplate.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/cdk/overlay/overview (no dedicated Popover component)
+- PrimeNG: https://primeng.org/popover
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/popover
+- Ark UI: https://ark-ui.com/react/docs/components/popover
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ (Popover follows the non-modal dialog pattern)
+
+---
+
+### ConfirmPopup
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=alertdialog` (not just `dialog`)                       | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-labelledby` wired to the header / message heading      | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-describedby` wired to the message text                 | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| Default focus on the accept / confirm button                 | ❌                | ⚠️ inconsistent | N/A | N/A | 🚀 |
+| Escape closes + returns focus to trigger                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Click outside closes + returns focus                         | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Focus returns to the exact trigger element on close          | ❌                | ⚠️      | N/A      | N/A    | 🚀                |
+| Anchored positioning to a trigger element                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Severity variants (warn / danger / info)                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom icon input                                            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Service-based API (`ConfirmationService`)                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `model()` for `[(visible)]` two-way binding                  | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no anchored confirm dialog; PrimeNG is the only real reference and all its features are matched._
+
+#### Differentiators
+- **Default focus on the accept button**: When ConfirmPopup opens, focus moves directly to the accept/confirm action rather than the cancel button or the container. This is the correct behavior per WAI-ARIA `alertdialog` guidance — the purpose of the widget is to prompt for a decision, so the affirmative action is focus-ready immediately. PrimeNG manages initial focus inconsistently across its confirm components.
+- **Focus return to the exact trigger element**: When the popup is dismissed (by confirming, cancelling, pressing Escape, or clicking outside), focus returns precisely to the element that triggered it. PrimeNG handles this inconsistently — focus can drop to the document body when a trigger is conditionally rendered.
+- **Signal-native API**: `model<boolean>()` for `[(visible)]`; confirmation and rejection callbacks wired as `output<void>()` signals — no `@Input()`/`@Output()` adapter layer needed.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no ConfirmPopup equivalent (dialog used for confirmations)
+- PrimeNG: https://primeng.org/confirmpopup
+- Radix UI: N/A — no anchored alert dialog primitive
+- Ark UI: N/A — no ConfirmPopup primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
+
+---
+
 ## Navigation & Menus
 
 ---
@@ -653,6 +765,44 @@ _None — all ❌ reference rows are matched or consciously excluded._
 - Radix UI: https://www.radix-ui.com/primitives/docs/components/dropdown-menu
 - Ark UI: https://ark-ui.com/react/docs/components/menu
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu/
+
+---
+
+### Stepper
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=tablist` on the step list                              | ✅ (CDK Stepper) | ⚠️ `<ul>` with no ARIA | N/A | ✅ | ✅ |
+| `role=tab` per step indicator                                | ✅                | ⚠️      | N/A      | ✅      | ✅                 |
+| `aria-selected` on the active step                           | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| `aria-current=step` on the active step                       | ❌                | ❌       | N/A      | ✅      | 🚀                |
+| `aria-controls` wiring (step tab → step panel)               | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| `role=tabpanel` on step content                              | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| Linear mode (enforces sequential completion)                 | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| Non-linear / free navigation mode                            | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Horizontal + vertical orientation                            | ✅                | ❌       | N/A      | ✅      | ✅                 |
+| Step icon / custom icon slot                                 | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Step header `ng-template`                                    | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Step content `ng-template`                                   | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| `@defer` on inactive step content                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Signal-native API (`model()` for active step)                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — Angular Material's CDK Stepper is the main reference; all features are matched. PrimeNG's "Steps" component is purely visual navigation with no content panel management or ARIA step contract._
+
+#### Differentiators
+- **`aria-current=step`**: The active step indicator receives `aria-current=step` — the value screen readers specifically recognise for communicating current position in a wizard or multi-step flow. Angular Material uses `aria-selected` from the tablist pattern alone; PrimeNG sets neither attribute. The `aria-current=step` value is what assistive technology announces as "current step".
+- **`@defer` on inactive step content**: Step content panels not currently visible are deferred with Angular's `@defer` block, preventing unnecessary component initialisation for steps the user has not yet reached. Neither Angular Material's CDK Stepper nor PrimeNG's Steps defer inactive panel rendering.
+- **Signal-native API**: `model<number>()` for `[(activeStep)]` — the current step index is two-way bindable as a signal, composable with `computed()` signals that derive step validation state from form controls.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/stepper/overview
+- PrimeNG: https://primeng.org/steps
+- Radix UI: N/A — no Stepper primitive
+- Ark UI: https://ark-ui.com/react/docs/components/steps
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel/ (Stepper follows tablist/tabpanel with `aria-current=step`)
 
 ---
 
@@ -917,6 +1067,122 @@ _None. Angular Material has no Knob component. PrimeNG Knob is the only referenc
 
 ---
 
+### Tree
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=tree` on the container                                 | ✅ (CDK experimental) | ✅ | N/A | ✅ | ✅ |
+| `role=treeitem` per node                                     | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| `aria-expanded` on expandable nodes                          | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| `aria-level` per depth level                                 | ✅                | ⚠️ partial | N/A   | ✅      | ✅                 |
+| `aria-setsize` / `aria-posinset` per node                    | ✅                | ⚠️ partial | N/A   | ✅      | ✅                 |
+| Arrow key navigation (↑ / ↓ / → / ←)                       | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Right-arrow expands a collapsed node                         | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Left-arrow collapses node or moves to parent                 | ✅                | ⚠️      | N/A      | ✅      | ✅                 |
+| Home / End — jump to first / last visible node               | ✅                | ❌       | N/A      | ✅      | 🚀                |
+| Typeahead character search                                   | ❌                | ❌       | N/A      | ✅      | 🚀                |
+| Single selection (`aria-selected`)                           | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Multiple selection (`aria-multiselectable`)                  | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Checkbox selection style                                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Lazy loading (load children on expand)                       | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom node `ng-template`                                    | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Drag-and-drop node reorder                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Virtual scroll for large trees                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Typeahead character search**: Pressing a letter key jumps focus to the next visible node whose label begins with that character — exactly as the WAI-ARIA APG Tree View pattern specifies. PrimeNG does not implement typeahead; Angular Material's CDK experimental tree also lacks it. This is a significant keyboard usability gap in both incumbent libraries for large tree structures.
+- **Home / End navigation**: PrimeNG's Tree does not implement Home (jump to first visible node) or End (jump to last visible node). This library follows the full APG Tree View keyboard contract, matching Ark UI and the a11y reference standard.
+- **Signal-native API**: Selection state uses `model<TreeNode[]>()` — composable with `computed()` signals that derive tree structure from server data without RxJS operator chains.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/cdk/tree/overview
+- PrimeNG: https://primeng.org/tree
+- Radix UI: N/A — no Tree primitive
+- Ark UI: https://ark-ui.com/react/docs/components/tree-view
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
+
+---
+
+### TreeTable
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=treegrid` on the container                             | ❌ (no TreeTable) | ⚠️ uses `role=table` | N/A | N/A | 🚀 |
+| `role=row` per row                                           | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `role=gridcell` per cell                                     | ❌                | ⚠️ uses `role=cell` | N/A | N/A | 🚀 |
+| `aria-expanded` on expandable rows                           | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-level` per depth                                       | ❌                | ⚠️ partial | N/A   | N/A    | ✅                 |
+| `aria-setsize` / `aria-posinset` per row                     | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Arrow key row / cell navigation                              | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| Sortable columns (`aria-sort`)                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Column resizing                                              | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Frozen / sticky columns                                      | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Paginator integration                                        | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom cell `ng-template`                                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Row selection (`aria-selected`)                              | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Lazy loading for child rows                                  | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no TreeTable equivalent; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **`role=treegrid`**: The correct ARIA role for an interactive expandable table is `role=treegrid` — not `role=table`. PrimeNG uses `role=table` for its TreeTable, stripping the tree navigation semantics that assistive technology needs to understand the hierarchical structure. This library uses `role=treegrid` so screen readers can announce "level 2, expanded, row 3 of 5" as users navigate.
+- **`aria-setsize` / `aria-posinset` per row**: Each visible row carries `aria-setsize` (sibling count at that level) and `aria-posinset` (position within siblings), enabling screen readers to announce "item 2 of 4" within each depth level. PrimeNG does not set these attributes.
+- **`role=gridcell`**: PrimeNG uses `role=cell` (which belongs to `role=table` context); this library correctly uses `role=gridcell` (the `treegrid` child role), consistent with the ARIA specification for interactive grid cells.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no TreeTable component
+- PrimeNG: https://primeng.org/treetable
+- Radix UI: N/A — no TreeTable primitive
+- Ark UI: N/A — no TreeTable primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/
+
+---
+
+### Chart
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Multiple chart types (bar, line, pie, doughnut, etc.)        | ❌ (no Chart)    | ✅ via Chart.js | N/A | N/A | ✅ |
+| `aria-label` on the `<canvas>` element                       | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `role=img` on `<canvas>` for AT compatibility                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Built-in accessible data table alternative                   | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Live region for data updates                                 | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `prefers-reduced-motion` — entrance animation disabled       | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Responsive resize (ResizeObserver-based)                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Plugin passthrough for Chart.js extensions                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Typed options input (`ChartOptions<T>`)                      | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no Chart component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **Built-in accessible data table**: Every chart automatically renders a visually hidden `<table>` containing the chart's underlying data. Screen reader users can navigate the raw data without relying on interpreting the graphic. Neither PrimeNG's Chart.js wrapper nor Angular Material provides this — consumers must hand-roll the fallback table.
+- **`role=img` on canvas**: The `<canvas>` element receives `role=img` and `aria-label` so it is announced as a labelled image in browser/AT combinations where canvas accessibility is limited (particularly NVDA + Firefox).
+- **Live region for data updates**: When the `data` input changes (e.g., a real-time dashboard refresh), a polite live region announces "Chart updated" so screen reader users are notified without being interrupted mid-sentence.
+- **`prefers-reduced-motion` disables entrance animations**: Chart.js bar-grow and line-draw entrance animations are suppressed when `prefers-reduced-motion: reduce` is active. PrimeNG does not apply this guard to Chart.js options automatically.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Chart component
+- PrimeNG: https://primeng.org/chart
+- Radix UI: N/A — no Chart primitive
+- Ark UI: N/A — no Chart primitive
+- APG Pattern: N/A — WCAG SC 1.1.1 requires text alternatives for non-text content; no dedicated APG chart pattern
+
+---
+
 ## Feedback & Status
 
 ---
@@ -992,6 +1258,40 @@ _None — all ❌ reference rows are matched or consciously excluded._
 - Radix UI: N/A — no ProgressBar primitive
 - Ark UI: N/A — no ProgressBar primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/meter/ (Meter pattern — closest to bounded progress)
+
+---
+
+### ProgressSpinner
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=status` (correct for indeterminate loading)            | ⚠️ uses `role=progressbar` | ⚠️ uses `role=progressbar` | N/A | N/A | 🚀 |
+| `aria-label` to describe what is loading                     | ⚠️ partial       | ❌       | N/A      | N/A    | ✅                 |
+| `aria-live=polite` on the container                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Animated SVG hidden from AT (`aria-hidden="true"`)           | ⚠️               | ⚠️      | N/A      | N/A    | ✅                 |
+| `prefers-reduced-motion` — spin animation disabled           | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Size configurable (sm / md / lg + custom)                    | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Stroke width configurable                                    | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Colour override via CSS custom property                      | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Full-page overlay (block UI) variant                         | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`role=status`**: An indeterminate spinner communicates an application state update — not a measurable progress value. `role=progressbar` requires `aria-valuenow` which is meaningless for an unknown-duration operation. This library uses `role=status` with `aria-live=polite` — the correct pattern for "something is loading" that does not interrupt the user. Angular Material and PrimeNG both apply `role=progressbar` to their spinners.
+- **`aria-live=polite` on the container**: The `role=status` container is an implicit live region, so when the spinner appears (e.g., on a lazy-loaded section) screen readers automatically announce the `aria-label`. Neither Angular Material nor PrimeNG declares the live region explicitly on their spinner hosts.
+- **Animated SVG fully hidden from AT**: The SVG circle path animation is `aria-hidden="true"` so screen readers do not traverse the SVG elements. All accessible information comes from the host's `role=status` and `aria-label` alone, avoiding duplicate or nonsensical SVG announcements.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/progress-spinner/overview
+- PrimeNG: https://primeng.org/progressspinner
+- Radix UI: N/A — no ProgressSpinner primitive
+- Ark UI: N/A — no ProgressSpinner primitive
+- APG Pattern: N/A — `role=status` covers loading spinners; no dedicated APG spinner pattern
 
 ---
 

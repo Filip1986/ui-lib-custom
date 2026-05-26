@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 3 adds Breadcrumb, ConfirmDialog, Drawer, Listbox, Menu, ProgressBar → **22 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (78 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 4 adds Rating, Popover, ConfirmPopup, Stepper, Tree, TreeTable, Chart, ProgressSpinner → **30 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (70 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 4 — Rating, Popover, ConfirmPopup, Stepper, Tree, TreeTable, Chart, ProgressSpinner]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Rating (Core Inputs), Popover + ConfirmPopup (Overlay), Stepper (Navigation), Tree + TreeTable + Chart (Data Display), ProgressSpinner (Feedback); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for Rating (8.7→8.8), TreeTable (8.5→8.6), ProgressSpinner (8.9→9.0), Chart (8.9→9.0)
+  AI_AGENT_CONTEXT.md: active focus updated (30/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 5 — candidates: Select, Input, Dialog, DynamicDialog, Tabs, Table, Listbox continuations; remaining 70 components
+
 Date: 2026-05-26 [docs(workspace): sprint-a benchmarks batch 3 — Breadcrumb, ConfirmDialog, Drawer, Listbox, Menu, ProgressBar]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 6 sections — ConfirmDialog + Drawer (Overlay), Breadcrumb + Menu (Navigation), Listbox (Data Display), ProgressBar (Feedback); zero unresolved gaps; 3 differentiators each
@@ -97,16 +106,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (16/100 benchmark sections now complete)
 State: Docs-only change, no build needed; typecheck passed on push
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 3 — next 6–8 components (candidates: Drawer, ConfirmDialog, Tree, TreeTable, Listbox, Menu, Breadcrumb, ProgressBar)
-
-
-Date: 2026-05-26 [docs(workspace): sprint-a competitive benchmarks — Avatar, Carousel, Galleria, Knob, PR #254]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 4 new sections — Avatar, Carousel, Galleria, Knob — each with Feature/Behaviour parity table, Gaps (all zero), Differentiators, Reference URLs
-  docs/COMPONENT_SCORES.md: Comp column 8→9 for all 4; averages: Avatar 8.2→8.3, Knob 8.2→8.3, Carousel 8.3→8.4, Galleria 8.3→8.4
-State: Docs-only change, no build needed; typecheck passed on push, PR #254 open
-Verification: git push (typecheck PASS)
-Next step: Prompt 14 — Friday wrap (this entry above)
+Next step: Sprint A batch 3 — next 6–8 components
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
