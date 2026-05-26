@@ -187,66 +187,123 @@ export class ColorPickerDemoComponent {
     return `HSB h:${value.h} s:${value.s} b:${value.b}`;
   }
   public readonly qualityAudit: ComponentQualityAudit = {
-    date: '2026-05-18',
+    date: '2026-05-26',
     tier: 1,
     scores: {
-      api: 8,
+      api: 9,
       a11y: 9,
       perf: 8,
       comp: 8,
-      theme: 8,
-      dx: 8,
-      docs: 8,
-      polish: 8,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
       angular: 9,
-      feel: 8,
+      feel: 9,
     },
     competitiveParity: 'pending',
+    apgPattern: {
+      name: 'Dialog (Modal)',
+      url: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+    },
   };
 
   public readonly apiRows: readonly ApiPropRow[] = [
     {
+      name: 'value',
+      type: 'string | RgbColor | HsbColor | null',
+      default: 'null',
+      description:
+        'Bound color value. Accepts a hex string, RgbColor, or HsbColor depending on format. Bind via [(ngModel)] or reactive forms.',
+    },
+    {
       name: 'format',
       type: "'hex' | 'rgb' | 'hsb'",
       default: "'hex'",
-      description: 'Color output format.',
+      description:
+        "Output format for emitted values. 'hex' → 6-char string; 'rgb' → RgbColor; 'hsb' → HsbColor.",
     },
     {
       name: 'inline',
       type: 'boolean',
       default: 'false',
-      description: 'Renders the picker inline instead of as a dropdown.',
+      description: 'Renders the picker inline at its DOM position instead of as a floating popup.',
     },
     {
       name: 'variant',
       type: "'material' | 'bootstrap' | 'minimal' | null",
       default: 'null',
-      description: 'Design variant.',
+      description: 'Design variant override. Falls back to ThemeConfigService.variant() when null.',
     },
     {
       name: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'Disables the color picker.',
+      description: 'Disables all interaction and drag handling.',
     },
-    { name: 'inputId', type: 'string', default: "''", description: 'Id of the trigger element.' },
-    { name: 'tabindex', type: 'number', default: '0', description: 'Tab order index.' },
+    {
+      name: 'inputId',
+      type: 'string',
+      default: "''",
+      description: 'Custom id for the hidden input element. Auto-generated when empty.',
+    },
+    {
+      name: 'tabindex',
+      type: 'number',
+      default: '0',
+      description: 'tabindex of the trigger swatch button.',
+    },
+    {
+      name: 'appendTo',
+      type: "'body' | string | HTMLElement | undefined",
+      default: "'body'",
+      description:
+        "Where to mount the floating popup panel. Accepts 'body', a CSS selector, or an HTMLElement.",
+    },
   ];
   public readonly keyboardRows: KeyboardNavRow[] = [
-    { key: 'Tab', action: 'Moves focus to the color swatch trigger button.' },
-    { key: 'Shift+Tab', action: 'Moves focus away from the color picker.' },
-    { key: 'Enter / Space', action: 'Opens or closes the color panel.' },
-    { key: '↑ / ↓', action: 'Adjusts the saturation/brightness in the color canvas.' },
-    { key: '← / →', action: 'Adjusts the hue on the hue slider.' },
-    { key: 'Escape', action: 'Closes the color panel.' },
+    {
+      key: 'Tab / Shift+Tab',
+      action: 'Cycles focus: trigger swatch → panel → hue slider → Hex / H / S / B text inputs.',
+    },
+    {
+      key: 'Enter / Space',
+      action: '(Trigger) Opens the popup panel. (Panel) Confirms current color and closes.',
+    },
+    {
+      key: 'Escape',
+      action: 'Closes the popup panel and returns focus to the trigger button.',
+    },
+    {
+      key: '↑ / ↓ (hue slider)',
+      action: 'Increases / decreases hue by 1° (+Shift for 10° jumps).',
+    },
+    {
+      key: '← / → (hue slider)',
+      action: 'Same as ↑ / ↓ on the hue slider.',
+    },
+    {
+      key: '← / → (color canvas)',
+      action: 'Increases / decreases saturation (+Shift for 10 steps).',
+    },
+    {
+      key: '↑ / ↓ (color canvas)',
+      action: 'Increases / decreases brightness (+Shift for 10 steps).',
+    },
   ];
 
   public readonly ariaRows: readonly AriaRow[] = [
     {
       element: 'Trigger button',
       attribute: 'aria-label',
-      value: '"Choose color"',
-      notes: 'Announces the purpose of the swatch trigger to screen readers.',
+      value: '"Color: #RRGGBB, click to open picker"',
+      notes: 'Announces current color value and purpose. Updated live as the color changes.',
+    },
+    {
+      element: 'Trigger button',
+      attribute: 'aria-haspopup',
+      value: '"dialog"',
+      notes: 'Signals that activation opens a dialog panel.',
     },
     {
       element: 'Trigger button',
@@ -256,99 +313,143 @@ export class ColorPickerDemoComponent {
     },
     {
       element: 'Trigger button',
-      attribute: 'aria-disabled',
-      value: '"true"',
-      notes: 'Applied when <code>[disabled]="true"</code>.',
+      attribute: 'aria-controls',
+      value: 'panel id',
+      notes: 'Links the trigger to the panel element when the panel is open.',
     },
     {
-      element: 'Color canvas',
-      attribute: 'role="slider"',
-      value: '—',
-      notes: 'The 2-D canvas is exposed as a slider for saturation/brightness control.',
+      element: 'Panel',
+      attribute: 'role',
+      value: '"dialog"',
+      notes: 'Popup panel is announced as a dialog.',
     },
     {
-      element: 'Color canvas',
+      element: 'Panel',
       attribute: 'aria-label',
-      value: '"Saturation and Brightness"',
-      notes: 'Describes the purpose of the canvas interaction.',
+      value: '"Color picker"',
+      notes: 'Names the dialog for screen readers.',
+    },
+    {
+      element: 'Panel',
+      attribute: 'aria-modal',
+      value: '"false"',
+      notes: 'Panel does not trap focus.',
     },
     {
       element: 'Hue slider',
-      attribute: 'role="slider"',
-      value: '—',
-      notes: 'The hue bar is exposed as a slider.',
+      attribute: 'role',
+      value: '"slider"',
+      notes: 'The hue strip is an accessible range slider.',
     },
     {
       element: 'Hue slider',
       attribute: 'aria-label',
       value: '"Hue"',
-      notes: 'Identifies the hue slider to screen readers.',
+      notes: 'Names the slider for screen readers.',
     },
     {
       element: 'Hue slider',
       attribute: 'aria-valuenow',
-      value: 'current hue (0–360)',
-      notes: 'Updated live as the hue changes.',
+      value: '0 – 359',
+      notes: 'Live-updated as the hue changes.',
+    },
+    {
+      element: 'Hue slider',
+      attribute: 'aria-valuetext',
+      value: '"N degrees"',
+      notes: 'Human-readable hue value description.',
+    },
+    {
+      element: 'Color canvas',
+      attribute: 'aria-hidden',
+      value: '"true"',
+      notes:
+        'Canvas is hidden from assistive technology. Screen-reader users navigate color via the Hex / H / S / B text inputs.',
+    },
+    {
+      element: 'Hex / H / S / B inputs',
+      attribute: '<label for>',
+      value: 'linked id',
+      notes:
+        'Each text input has a visible, properly associated <code>&lt;label&gt;</code> element.',
     },
   ];
 
   public readonly cssVarRows: CssVarRow[] = [
     {
       variable: '--uilib-colorpicker-trigger-width',
-      description: 'Uilib Colorpicker Trigger width.',
+      description: 'Width of the color swatch trigger button. Default: 2rem.',
     },
     {
       variable: '--uilib-colorpicker-trigger-height',
-      description: 'Uilib Colorpicker Trigger height.',
+      description: 'Height of the color swatch trigger button. Default: 2rem.',
     },
     {
       variable: '--uilib-colorpicker-trigger-border-radius',
-      description: 'Uilib Colorpicker Trigger Border border radius.',
+      description: 'Border radius of the trigger swatch.',
     },
     {
       variable: '--uilib-colorpicker-trigger-border-color',
-      description: 'Uilib Colorpicker Trigger Border text colour.',
+      description: 'Border color of the trigger swatch.',
     },
-    { variable: '--uilib-colorpicker-panel-width', description: 'Uilib Colorpicker Panel width.' },
+    {
+      variable: '--uilib-colorpicker-panel-width',
+      description: 'Width of the color picker panel. Default: 196px.',
+    },
     {
       variable: '--uilib-colorpicker-panel-padding',
-      description: 'Uilib Colorpicker Panel padding.',
+      description: 'Inner padding of the color picker panel.',
     },
     {
       variable: '--uilib-colorpicker-panel-bg',
-      description: 'Uilib Colorpicker Panel background colour.',
+      description: 'Background color of the panel.',
     },
     {
       variable: '--uilib-colorpicker-panel-border-color',
-      description: 'Uilib Colorpicker Panel Border text colour.',
+      description: 'Border color of the panel.',
     },
     {
       variable: '--uilib-colorpicker-panel-border-radius',
-      description: 'Uilib Colorpicker Panel Border border radius.',
+      description: 'Corner radius of the panel.',
     },
     {
       variable: '--uilib-colorpicker-panel-shadow',
-      description: 'Uilib Colorpicker Panel box shadow.',
+      description: 'Box shadow of the panel.',
     },
     {
       variable: '--uilib-colorpicker-panel-z-index',
-      description: 'Uilib Colorpicker Panel z-index.',
+      description: 'z-index of the floating panel.',
     },
     {
       variable: '--uilib-colorpicker-hue-slider-width',
-      description: 'Uilib Colorpicker Hue Slider width.',
+      description: 'Width of the hue strip.',
     },
     {
       variable: '--uilib-colorpicker-hue-slider-height',
-      description: 'Uilib Colorpicker Hue Slider height.',
+      description: 'Height of the hue strip.',
     },
     {
       variable: '--uilib-colorpicker-selector-size',
-      description: 'Uilib Colorpicker Selector size.',
+      description: 'Diameter of the crosshair selector dot on the color canvas.',
     },
     {
       variable: '--uilib-colorpicker-transition-duration',
-      description: 'Uilib Colorpicker Transition Duration.',
+      description:
+        'Duration of trigger and panel transitions. Defaults to --uilib-transition-duration-fast.',
+    },
+    {
+      variable: '--uilib-colorpicker-focus-ring-color',
+      description:
+        'Color of the keyboard focus ring on the trigger, panel, hue slider, and text inputs.',
+    },
+    {
+      variable: '--uilib-colorpicker-focus-ring-width',
+      description:
+        'Width of the keyboard focus ring. Defaults to 3px; Bootstrap variant overrides to 4px.',
+    },
+    {
+      variable: '--uilib-colorpicker-label-font-size',
+      description: 'Font size for the Hex / H / S / B input labels and inputs.',
     },
   ];
 }
