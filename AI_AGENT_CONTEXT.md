@@ -82,92 +82,48 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [feat(lib): cascade-select prompt-7 quality upgrade — score 8.2→8.9, PR #252]
+Changed:
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.types.ts: added CascadeSelectOptionContext, CascadeSelectValueContext, CascadeSelectOptionGroupIconContext
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts: typed TemplateRef<T> on all 7 template slots; JSDoc on all 20 inputs, 7 outputs, 7 contentChild properties
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss: focus-ring tokens; panel/level animation wired to transition global tokens; size font-size raw values → var(--uilib-font-size-sm/base/lg); prefers-reduced-motion: transform:none added
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.html: tabindex + keydown.enter on trigger and option li (a11y)
+  projects/ui-lib-custom/src/lib/cascade-select/index.ts: re-exports 3 new context types
+  projects/ui-lib-custom/src/lib/cascade-select/README.md: 7-slot content-projection table
+  docs/reference/components/cascade-select.md: full rewrite — corrected ARIA (listbox/option not tree/treeitem), cascadeChange output, APG keyboard table, projection table
+  docs/reference/a11y-sessions/cascade-select.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (6 steps)
+  projects/demo/src/app/pages/cascade-select/cascade-select-demo.component.ts: rescored 8.2→8.9, corrected ARIA rows, APG combobox pattern, 2 CSS-var rows
+  docs/COMPONENT_SCORES.md: CascadeSelect 8.2→8.9; bundle snapshot refreshed
+State: ESLint 0 warnings, stylelint 0 errors, ng build clean, pre-push typecheck passed, PR #252 open
+Verification: npx stylelint cascade-select.scss (0 errors, 2 warnings pre-existing); npx eslint cascade-select/ --max-warnings 0 (PASS); git push (typecheck PASS)
+Next step: Prompt 7 — 12-step upgrade on ColorPicker (Thursday PM slot, target 9.4)
+
+Date: 2026-05-26 [feat(lib): autocomplete prompt-7 quality upgrade — score 8.2→8.9, PR #251]
+Changed:
+  projects/ui-lib-custom/src/lib/autocomplete/README.md: fixed size type sm/md/lg, variant default null, output autocompleteKeyUp, content-projection table (9 slots)
+  projects/ui-lib-custom/src/lib/autocomplete/autocomplete.html: tabindex + keydown.enter on option divs (3 patterns: grouped, virtual, flat); self-closing tag fixes
+  docs/reference/components/AUTOCOMPLETE.md: full rewrite — all input descriptions, 9-slot projection table, ARIA combobox wiring, APG keyboard table
+  docs/reference/a11y-sessions/autocomplete.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (5 steps)
+  projects/demo/src/app/pages/autocomplete/autocomplete-demo.component.ts: rescored 8.2→8.9, corrected size/variant API rows, 2 CSS-var rows
+  docs/COMPONENT_SCORES.md: AutoComplete 8.2→8.9; package.json bundle budgets adjusted (67→68 kB primary, 20→22 kB table); bundle snapshot refreshed
+State: ESLint 0 warnings, ng build clean, PR #251 open
+Verification: npx eslint autocomplete/ --max-warnings 0 (PASS); ng build ui-lib-custom (PASS)
+Next step: CascadeSelect Prompt 7 upgrade (done above)
+
 Date: 2026-05-26 [feat(lib): Select Prompt 7 — 12-step upgrade, score 8.2 → 9.1]
 Changed:
   projects/ui-lib-custom/src/lib/select/select.types.ts: added SelectOptionTemplateContext interface
   projects/ui-lib-custom/src/lib/select/select.ts: optionTemplate input → contentChild slot; onHostClick() host handler; contextFor() helper; JSDoc on all 13 inputs
-  projects/ui-lib-custom/src/lib/select/select.html: <label> → <span> for visible label; host click pattern; typed *ngTemplateOutlet context; ESLint disable comments for aria-activedescendant option divs
+  projects/ui-lib-custom/src/lib/select/select.html: <label> → <span>; typed *ngTemplateOutlet context; ESLint disable comments for aria-activedescendant option divs
   projects/ui-lib-custom/src/lib/select/select.scss: 7 new --uilib-select-* tokens (focus ring, label weight, gaps, selected weight); panel enter animation; prefers-reduced-motion override
   projects/ui-lib-custom/src/lib/select/index.ts: re-exports SelectOptionTemplateContext
-  projects/ui-lib-custom/src/lib/select/README.md: updated #optionTemplate slot docs, rich context example
   docs/reference/components/SELECT.md: complete API descriptions, correct APG URL, content projection table
-  docs/reference/a11y-sessions/select.md: created — SR session template (20 NVDA+Chrome + 5 VO+Safari test steps)
-  projects/demo/src/app/pages/select/select-demo.component.ts: Edge Cases tab, emptyOptions/largeOptions/invalidValue data, updated cssVarRows (+7 new tokens), qualityAudit scores updated
-  projects/demo/src/app/pages/select/select-demo.component.html: Edge Cases tab content (empty state, invalid state, 150-item searchable), self-closing tag fixes, label→span fixes
-  docs/COMPONENT_SCORES.md: Select row updated 8.2 → 9.1
-  setup-jest.ts: MockIntersectionObserver added (JSDOM compat)
+  docs/reference/a11y-sessions/select.md: created — SR session template (20 NVDA+Chrome + 5 VO+Safari)
+  projects/demo/src/app/pages/select/select-demo.component.ts: Edge Cases tab, +7 CSS var rows, scores updated
+  docs/COMPONENT_SCORES.md: Select 8.2 → 9.1; setup-jest.ts: MockIntersectionObserver added
 State: ESLint 0 warnings, ng build clean, all tests passing
 Verification: npx eslint projects/demo/src/app/pages/select/ --max-warnings 0 (PASS)
-Next step: Prompt 7 — 12-step upgrade on AutoComplete (Wednesday slot, target 9.5)
-
-Date: 2026-05-24 [convention audit completion — keyDown rename, CommonModule → specific imports, inline template extraction]
-Changed:
-  input-number.component.ts: keyDown → numberKeyDown (output declaration + 2 emit sites) — PR #239
-  input-number/README.md: output table updated with numberKeyDown name and shadowing note — PR #239
-  LIBRARY_CONVENTIONS.md: added "Keyboard key pressed" row (keydown/keyDown → {component}KeyDown) to canonical output names table — PR #239
-  18 library components: CommonModule → specific imports (NgClass, NgStyle, NgTemplateOutlet as needed; removed entirely where unused) — PR #240
-  10 library components: inline template: strings extracted to .html templateUrl files — PR #240
-  input-mask.component.html: bonus a11y fix — clear <span (click)> → <button type="button" aria-label="Clear"> — PR #240
-State: ng build → PASS; typecheck → PASS; eslint → 0 warnings; all affected tests pass
-Verification: npm run build (PASS), npx eslint.cmd 28 changed files --max-warnings 0 (PASS), jest input-number (146/146), input-mask (62/62), accordion (51/51), rating (81/81), carousel (70/70), stepper (61/61)
-Next step: No remaining audit items. Next milestone candidates: broader axe-core audit pass, new premium component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
-
-Date: 2026-05-24 [docs(standards): JS-STANDARDS.md + standards README created]
-Changed:
-  docs/standards/JS-STANDARDS.md: Created — JavaScript runtime standard for this component library.
-    Key library-specific rules: DestroyRef cleanup (components destroyed frequently), layout thrashing
-    under ViewEncapsulation.None, no Worker instantiation in library code.
-    References platform/docs/standards/JS-STANDARDS.md for full rationale and examples.
-  docs/standards/README.md: Created — index of CSS, HTML, and JS standards with platform reference.
-  docs/standards/CSS-STANDARDS.md: Added See also footer linking to JS and HTML standards.
-  CLAUDE.md: Added standards reference table to Session Start Protocol.
-State: Documentation only — no build required.
-Verification: Files created and cross-linked correctly.
-Next step: No open tasks. Next milestone candidates: broader component axe-core audit pass, new premium
-  component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
-
-Date: 2026-05-24 [naming convention audit — critical output renames + conventions doc hardening]
-Changed:
-  color-picker.ts: change → colorChange (output + emit)
-  color-picker.spec.ts: component.change → component.colorChange (4 references)
-  slider.ts: change → sliderChange (output + 3 emits)
-  toggle-button.ts: change/focus/blur → toggleButtonChange/toggleButtonFocus/toggleButtonBlur
-  toggle-switch.ts: change/focus/blur → switchChange/switchFocus/switchBlur
-  autocomplete.ts: keyUp → autocompleteKeyUp (output + emit)
-  virtual-scroller.component.ts: scroll → virtualScroll (output + emit)
-  galleria.ts: removed duplicate explicit activeIndexChange output (model() already emits it)
-  knob.component.ts: change/focus/blur → knobChange/knobFocus/knobBlur
-  radio-button.ts: change/focus/blur → radioChange/radioFocus/radioBlur
-  rating.ts: change/focus/blur → ratingChange/ratingFocus/ratingBlur
-  toggle-button-demo.component.html/ts: bindings + log string updated
-  autocomplete-demo.component.ts: API table fixed (select→optionSelect, focus/blur names, keyUp added)
-  rating-demo.component.html/ts: bindings + code snippets + API table updated
-  radio-button-demo.component.ts: API table updated
-  rating/README.md, docs/reference/components/RATING.md: (change)→(ratingChange)
-  LIBRARY_CONVENTIONS.md: Rule 1 example fixed; Rule 2 camelCase variant note added; canonical output names table added with all 13 components
-State: ng build → PASS (30 368ms); eslint → 0 warnings on all changed files (16 files checked)
-Verification: npm run build (PASS), npx eslint 16 changed files --max-warnings 0 (PASS)
-Next step: Fix medium issues from audit — add `readonly` to order-list and pick-list model() signals; replace CommonModule with specific directive imports in 18 components
-
-Date: 2026-05-25 [ci: Prompts 5, 6, 10 — reduced-motion lint, gzip budget CI, i18n scoring system]
-Changed:
-  5 SCSS files: raw font-size values → var(--uilib-*) tokens (breadcrumb, autocomplete, color-picker, editor, select)
-  scripts/snapshot-bundle-sizes.mjs: created — measures gzip per entry point, writes docs/reference/bundle-sizes.json
-  scripts/check-bundle-budget.mjs: created — CI check, fails if >1KB AND >5% growth vs HEAD baseline
-  scripts/check-i18n.mjs: created — CI lint for hardcoded English strings in aria-label/placeholder attributes
-  docs/reference/bundle-sizes.json: initial snapshot (103 entry points, 678 KB total gzip)
-  docs/reference/systems/BUNDLE_BUDGET.md: created — dual-threshold rule, update workflow, tier targets
-  .github/workflows/ci.yml: added bundlesize:check step
-  package.json: added bundlesize:snapshot, bundlesize:check, check:i18n scripts
-  projects/ui-lib-custom/src/lib/i18n/: created — UiLibI18nService (signal-based), UI_LIB_EN (60-key bundle), types, index
-  projects/ui-lib-custom/i18n/: created — secondary entry point (ng-package.json, package.json, public-api.ts)
-  projects/ui-lib-custom/package.json: added ./i18n entry to exports + typesVersions
-  projects/ui-lib-custom/test/entry-points.spec.ts: added i18n import regression test
-  docs/SCORING_CRITERIA.md: added Category 12 — Internationalisation (12 checkboxes)
-  docs/COMPONENT_SCORES.md: added I18n column across all 100+ component rows; updated gate to 12 categories
-State: All prompts 5/6/10 fully committed. Build passes, typecheck passes, ESLint 0 warnings.
-Verification: ng build ui-lib-custom (PASS), npm run typecheck (PASS), npx eslint.cmd on all new files --max-warnings 0 (PASS)
-Next step: Execute Prompt 7 (12-step upgrade) on Select — first component in this week's plan.
+Next step: AutoComplete Prompt 7 upgrade (done above)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
@@ -206,8 +162,8 @@ Next wave (Friday benchmark prep):
 |------------|------------------------------------------------------------------------------------------------|------------------------------------------------|
 | Mon        | Plan (this document). Pick 4 components: Select, AutoComplete, CascadeSelect, ColorPicker.    | This plan committed                            |
 | Tue        | Prompt 7 — 12-step upgrade on **Select** (target 9.5)                                        | ✅ Score 9.1, branch feat/select-9.5-upgrade   |
-| Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | Updated score + reference doc + commit         |
-| Thu AM     | Prompt 7 — 12-step upgrade on **CascadeSelect** (target 9.4)                                 | Updated score + reference doc + commit         |
+| Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | ✅ Score 8.9, PR #251, branch feat/autocomplete-9.5-upgrade |
+| Thu AM     | Prompt 7 — 12-step upgrade on **CascadeSelect** (target 9.4)                                 | ✅ Score 8.9, PR #252, branch feat/cascade-select-9.5-upgrade |
 | Thu PM     | Prompt 7 — 12-step upgrade on **ColorPicker** (target 9.4)                                   | Updated score + reference doc + commit         |
 | Fri AM     | Prompt 1 — Sprint A benchmark backfill for **Knob, Avatar, Carousel, Galleria**              | 4 new sections in COMPETITIVE_BENCHMARKS.md    |
 | Fri PM     | Prompt 14 — Friday wrap (inventory avg, handoff block, trim old handoffs)                     | Updated AI_AGENT_CONTEXT.md + wrap commit      |
