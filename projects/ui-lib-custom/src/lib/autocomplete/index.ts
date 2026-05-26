@@ -12,5 +12,8 @@ export type {
   AutoCompleteUnselectEvent,
   AutoCompleteDropdownClickEvent,
   AutoCompleteOptionGroup,
+  AutoCompleteItemContext,
+  AutoCompleteSelectedItemContext,
+  AutoCompleteGroupContext,
 } from './autocomplete.types';
 export * from './autocomplete.template-directives';

@@ -4,6 +4,8 @@
   }
 
   ui-lib-autocomplete.ui-lib-autocomplete {
+    --uilib-autocomplete-focus-ring-color: var(--uilib-color-primary-500);
+    --uilib-autocomplete-focus-ring-width: 3px;
     --uilib-autocomplete-border-radius: var(--uilib-input-radius, var(--uilib-shape-base, 6px));
     --uilib-autocomplete-padding-y-base: 0.5rem;
     --uilib-autocomplete-padding-x-base: 0.75rem;
@@ -147,8 +149,9 @@
     border-radius: var(--uilib-autocomplete-border-radius);
     background: var(--uilib-autocomplete-panel-bg);
     box-shadow: var(--uilib-autocomplete-panel-shadow);
-    transform-origin: top;
-    animation: uilib-autocomplete-panel-enter 0.14s ease;
+    transform-origin: top center;
+    animation: uilib-autocomplete-panel-enter var(--uilib-transition-duration-fast, 150ms)
+      var(--uilib-transition-easing-enter, ease-out) both;
   }
 
   ui-lib-autocomplete .ui-autocomplete-panel.ui-autocomplete-panel--overlay,
@@ -190,7 +193,8 @@
   ui-lib-autocomplete .ui-autocomplete-option--active,
   .ui-autocomplete-option--active {
     background: var(--uilib-autocomplete-option-hover-bg);
-    outline: 2px solid color-mix(in srgb, var(--uilib-autocomplete-border-focus) 35%, transparent);
+    outline: 2px solid
+      color-mix(in srgb, var(--uilib-autocomplete-focus-ring-color) 35%, transparent);
     outline-offset: -2px;
   }
 
@@ -279,7 +283,8 @@
   }
 
   ui-lib-autocomplete .ui-autocomplete-chip--focused {
-    outline: 2px solid color-mix(in srgb, var(--uilib-autocomplete-border-focus) 40%, transparent);
+    outline: 2px solid
+      color-mix(in srgb, var(--uilib-autocomplete-focus-ring-color) 40%, transparent);
     outline-offset: 1px;
   }
 
@@ -347,8 +352,8 @@
 
   ui-lib-autocomplete .ui-autocomplete-container:focus-within {
     border-color: var(--uilib-autocomplete-border-focus);
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--uilib-autocomplete-border-focus) 22%, transparent);
+    box-shadow: 0 0 0 var(--uilib-autocomplete-focus-ring-width)
+      color-mix(in srgb, var(--uilib-autocomplete-focus-ring-color) 22%, transparent);
   }
 
   ui-lib-autocomplete.ui-lib-autocomplete--open .ui-autocomplete-container {
@@ -510,11 +515,11 @@
   @keyframes uilib-autocomplete-panel-enter {
     from {
       opacity: 0;
-      transform: scaleY(0.96);
+      transform: scaleY(0.96) translateY(-4px);
     }
     to {
       opacity: 1;
-      transform: scaleY(1);
+      transform: scaleY(1) translateY(0);
     }
   }
 
@@ -546,6 +551,7 @@
     ui-lib-autocomplete .ui-autocomplete-panel,
     .ui-autocomplete-panel {
       animation: none;
+      transform: none;
     }
 
     ui-lib-autocomplete .ui-autocomplete-chip {
