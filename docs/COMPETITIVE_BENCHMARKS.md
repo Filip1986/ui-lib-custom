@@ -242,6 +242,122 @@ _None._
 
 ---
 
+### AutoComplete
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI   | Ark UI     | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|------------|------------|-------------------|
+| Single-value combobox                                        | ✅                | ✅       | ✅          | ✅          | ✅                 |
+| Multiple selection (chip list)                               | ✅                | ✅       | ⚠️         | ✅          | ✅                 |
+| `role=combobox` + `aria-expanded`                            | ✅                | ✅       | ✅          | ✅          | ✅                 |
+| `aria-activedescendant` pointing to focused option           | ✅                | ⚠️      | ✅          | ✅          | ✅                 |
+| `aria-live` announcement when result count changes           | ❌                | ⚠️      | ❌          | ⚠️         | 🚀                |
+| Grouped options with group label                             | ✅                | ✅       | N/A        | ✅          | ✅                 |
+| Typed `ng-template` slot for custom option rendering         | ❌                | ✅       | N/A        | N/A        | 🚀                |
+| Dropdown button to show all options                          | ❌                | ✅       | N/A        | ✅          | ✅                 |
+| `forceSelection` mode (freetext blocked)                     | ❌                | ✅       | N/A        | N/A        | ✅                 |
+| Clear button with accessible label                           | ❌                | ✅       | ✅          | ✅          | ✅                 |
+| Minimum query length before suggestions appear               | ❌                | ✅       | N/A        | N/A        | ✅                 |
+| Virtual scroll for large option lists                        | ❌                | ✅       | N/A        | N/A        | ✅                 |
+| `ControlValueAccessor`                                       | ✅                | ✅       | N/A        | N/A        | ✅                 |
+| Loading state while suggestions are fetched                  | ❌                | ✅       | N/A        | N/A        | ✅                 |
+| Signal-native API (`input()`, `model()`, `output()`)         | ❌                | ❌       | N/A        | N/A        | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A        | N/A        | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌          | ❌          | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-live` result count announcement**: When suggestions load or filter, the count is announced in a visually-hidden live region. Angular Material omits this entirely; PrimeNG and Ark UI announce inconsistently. Screen-reader users always know how many options are available.
+- **Typed `ng-template` option slot**: The option template slot is `TemplateRef<AutoCompleteOptionContext>` — consumers get full IDE autocomplete on the implicit context object. Angular Material's autocomplete has no equivalent typed-template mechanism.
+- **Signal-native API**: `model()` binding for value, `output()` for events — composes natively with Angular signals without zone-based change detection.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/autocomplete/overview
+- PrimeNG: https://primeng.org/autocomplete
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/combobox (no dedicated AutoComplete — uses Combobox)
+- Ark UI: https://ark-ui.com/react/docs/components/combobox
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+
+---
+
+### Checkbox
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Checked / unchecked states                                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Indeterminate state                                          | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-checked=mixed` on indeterminate                        | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| Label association via `<label>` + `for`                      | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Disabled state with `aria-disabled`                          | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Checkbox group with `role=group` + `aria-labelledby`         | ✅                | ✅       | N/A      | N/A    | 🚀                |
+| `aria-required` propagation                                  | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| Ripple / focus-visible ring                                  | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `ControlValueAccessor`                                       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Custom check icon slot                                       | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API (`model()` for two-way binding)            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-checked=mixed` correctness**: PrimeNG renders the indeterminate visual state but does not reliably set `aria-checked=mixed` on the underlying `<input type=checkbox>`. This library sets it correctly so screen readers announce "mixed" rather than "unchecked".
+- **`role=group` on checkbox group**: The group wrapper correctly uses `role=group` with `aria-labelledby` pointing to the group heading, giving screen readers the grouping context. Angular Material's checkbox group is a visual convention only.
+- **Signal-native `model()` binding**: Two-way binding uses `model<boolean>()` — composes directly with `signal` and `computed` without any zone or `ngModel` adapter.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/checkbox/overview
+- PrimeNG: https://primeng.org/checkbox
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/checkbox
+- Ark UI: https://ark-ui.com/react/docs/components/checkbox
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
+
+---
+
+### DatePicker
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Calendar popup triggered from input                          | ✅                | ✅       | ❌        | ✅      | ✅                 |
+| Inline calendar mode (no popup)                              | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Month / year header navigation                               | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Calendar grid keyboard nav (arrow keys, Enter, Escape)       | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| `role=grid` on calendar with `aria-label` on each cell       | ✅                | ⚠️      | N/A      | ✅      | ✅                 |
+| Today indicator                                              | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Min / max date constraints                                   | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Disabled individual dates                                    | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Date range selection (start + end)                           | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Multiple non-contiguous date selection                       | ❌                | ✅       | N/A      | ❌      | — Excluded: niche use case, adds significant ARIA complexity; prioritised for backlog |
+| Time picker integration                                      | ❌                | ✅       | N/A      | ✅      | — Excluded: separate `TimePicker` component planned; mixing date+time in one popup degrades keyboard UX |
+| Month-view and year-view picker                              | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Manual text input with format mask                           | ✅                | ✅       | N/A      | ✅      | ✅                 |
+| Live region announcing selected date                         | ⚠️               | ⚠️      | N/A      | ✅      | 🚀                |
+| `aria-describedby` linking input to format hint              | ⚠️               | ❌       | N/A      | ✅      | ✅                 |
+| `ControlValueAccessor`                                       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+- **Multiple non-contiguous date selection**: — Excluded: niche enterprise use case that adds significant ARIA complexity (`aria-multiselectable=true` + `aria-selected` on every cell). Prioritised for the backlog; not blocking Category 11 passage.
+- **Time picker integration**: — Excluded: a dedicated `TimePicker` component is planned. Mixing date and time in a single popup degrades keyboard UX and bloats the date-picker API; the two components compose together instead.
+
+#### Differentiators
+- **Live region for selected date**: When a date is selected via keyboard or pointer, the formatted date is announced in a visually-hidden `aria-live=polite` region. Angular Material and PrimeNG rely on focus movement alone — screen readers must navigate to the input to hear what was selected.
+- **`aria-describedby` format hint**: The text input is linked via `aria-describedby` to a visually-hidden format hint (e.g. "DD/MM/YYYY"). Angular Material omits this; PrimeNG does not wire it accessibly.
+- **Signal-native API**: `model<Date | null>()` binding, range as `model<DateRange>()` — composes natively with signal graphs.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/datepicker/overview
+- PrimeNG: https://primeng.org/datepicker
+- Radix UI: N/A — no DatePicker primitive (team recommends third-party)
+- Ark UI: https://ark-ui.com/react/docs/components/date-picker
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -285,6 +401,42 @@ _None._
 
 ---
 
+### Tooltip
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `aria-describedby` wiring (not `title` attribute)            | ⚠️               | ⚠️      | ✅        | ✅      | 🚀                |
+| Reference cleaned up on hide (no stale `aria-describedby`)   | ⚠️               | ⚠️      | ✅        | ✅      | 🚀                |
+| Trigger on hover                                             | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Trigger on focus (keyboard accessible)                       | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Show / hide delay                                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Positioning (top / bottom / left / right + auto-flip)        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Rich content via `ng-template`                               | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Escape key dismisses open tooltip                            | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| Does not intercept pointer events on trigger                 | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `prefers-reduced-motion` — animation disabled                | ⚠️               | ⚠️      | ✅        | ✅      | ✅                 |
+| Tooltip on disabled elements (wrapper span strategy)         | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-describedby` lifecycle correctness**: Angular Material uses the `title` attribute for some tooltip implementations, which is read inconsistently by screen readers. PrimeNG wires `aria-describedby` but does not reliably remove the reference when the tooltip hides. This library adds the reference on show and removes it on hide, exactly as Radix UI does.
+- **Stale reference cleanup**: The tooltip content element uses a stable `id`; the trigger element's `aria-describedby` is added and removed on each show/hide cycle — no stale references linger if the tooltip is destroyed mid-cycle.
+- **Signal-native API**: Tooltip text/content bound via `input()` — supports computed signal values without `async` pipe.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/tooltip/overview
+- PrimeNG: https://primeng.org/tooltip
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/tooltip
+- Ark UI: https://ark-ui.com/react/docs/components/tooltip
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+
+---
+
 ## Navigation & Menus
 
 ---
@@ -318,6 +470,45 @@ _None._
 - Radix UI: https://www.radix-ui.com/primitives/docs/components/tabs
 - Ark UI: https://ark-ui.com/react/docs/components/tabs
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+
+---
+
+### Accordion
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Single-expand mode (only one panel open at a time)           | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Multi-expand mode (any number of panels open)                | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `role=button` on panel headers                               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-expanded` on trigger                                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-controls` linking trigger to panel                     | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| `aria-labelledby` on panel (region role)                     | ❌                | ⚠️      | ✅        | ✅      | 🚀                |
+| Arrow-key navigation between headers (↑ / ↓)                | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Home / End jump to first / last header                       | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Disabled panel                                               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Custom header `ng-template`                                  | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Custom content `ng-template`                                 | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Expand / collapse animation                                  | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `prefers-reduced-motion` — animation disabled                | ⚠️               | ⚠️      | ✅        | ✅      | ✅                 |
+| `ControlValueAccessor` / programmatic open control           | ⚠️               | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Full APG keyboard pattern**: Angular Material and PrimeNG do not implement the arrow-key and Home/End navigation between accordion headers specified by the WAI-ARIA Accordion pattern. This library follows Radix and Ark in implementing the full keyboard contract.
+- **`aria-labelledby` on panel region**: Each expanded panel has `role=region` with `aria-labelledby` pointing to its header button. Angular Material omits this; PrimeNG wires it inconsistently. Screen readers can navigate directly to open sections using landmark navigation.
+- **Signal-native API**: `model<string[]>()` for the active panel list — composes with `computed()` and `effect()` without glue code.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/expansion/overview
+- PrimeNG: https://primeng.org/accordion
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/accordion
+- Ark UI: https://ark-ui.com/react/docs/components/accordion
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
 
 ---
 
@@ -539,6 +730,48 @@ _None. Angular Material has no Knob component. PrimeNG Knob is the only referenc
 - Radix UI: N/A — no Knob primitive (closest is Slider)
 - Ark UI: N/A — no Knob primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/ (APG Slider — the Knob follows the same `role=slider` model)
+
+---
+
+## Feedback & Status
+
+---
+
+### Toast
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI    | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|-------------|--------|-------------------|
+| `aria-live` region for announcements                         | ✅                | ✅       | N/A         | ✅      | ✅                 |
+| `aria-live=assertive` for error severity                     | ❌                | ⚠️      | N/A         | ✅      | 🚀                |
+| `aria-live=polite` for info / success / warn                 | ✅                | ⚠️      | N/A         | ✅      | 🚀                |
+| Multiple severity variants (success / info / warn / error)   | ❌                | ✅       | N/A         | ✅      | ✅                 |
+| Manual dismiss button with accessible label                  | ✅                | ✅       | N/A         | ✅      | ✅                 |
+| Auto-dismiss timeout                                         | ✅                | ✅       | N/A         | ✅      | ✅                 |
+| Pause auto-dismiss on hover / focus                          | ❌                | ✅       | N/A         | ✅      | ✅                 |
+| Stacking of multiple simultaneous toasts                     | ❌                | ✅       | N/A         | ✅      | ✅                 |
+| Position variants (top-right / bottom-left / etc.)           | ❌                | ✅       | N/A         | ✅      | ✅                 |
+| Custom content via `ng-template`                             | ❌                | ✅       | N/A         | ✅      | ✅                 |
+| Enter / exit animation                                       | ✅                | ✅       | N/A         | ✅      | ✅                 |
+| `prefers-reduced-motion` — animation disabled                | ⚠️               | ⚠️      | N/A         | ✅      | ✅                 |
+| Service-based API for programmatic dispatch                  | ✅                | ✅       | N/A         | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A         | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A         | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌           | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Urgency-correct `aria-live` roles**: Error toasts use `aria-live=assertive` (interrupts the screen reader immediately) while info/success/warn toasts use `aria-live=polite` (waits for the current utterance to finish). Angular Material always uses `polite`; PrimeNG does not consistently distinguish urgency. This matches what the WCAG advisory and APG patterns recommend.
+- **Pause on hover/focus**: Auto-dismiss countdown is suspended while the pointer is over the toast or a focusable element inside it has focus. Angular Material's snackbar has no pause behaviour, meaning keyboard users may not have time to read or interact with the content.
+- **Signal-native service API**: The `ToastService.add()` method accepts an `InputSignal`-compatible options object. Severity, lifetime, and content can be derived from signals without subscribing to observables.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/snack-bar/overview
+- PrimeNG: https://primeng.org/toast
+- Radix UI: N/A — no Toast primitive (team recommends Sonner or custom implementation via WAI-ARIA Live Regions)
+- Ark UI: https://ark-ui.com/react/docs/components/toast
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alert/ (Alert pattern — live-region basis for toast)
 
 ---
 
