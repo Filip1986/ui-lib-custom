@@ -362,6 +362,186 @@ _None._
 
 ---
 
+### Avatar
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|---|---|---|---|---|---|
+| Image display | ❌ (no Avatar component) | ✅ | ✅ | ✅ | ✅ |
+| Text / initials display | ❌ | ✅ | ✅ (Fallback) | ✅ | ✅ |
+| Icon display | ❌ | ✅ | ❌ | ⚠️ custom slot only | ✅ |
+| Circle shape | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Square shape | ❌ | ✅ | N/A | ✅ | ✅ |
+| Size variants (sm / md / lg) | ❌ | ✅ (normal/large/xlarge names) | N/A | N/A | ✅ |
+| AvatarGroup — stacked/overlapping display | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Overflow count badge (`+N`) in group | ❌ | ✅ | ❌ | ❌ | ✅ |
+| `role="img"` + `aria-label` on initials / icon avatars | ❌ | ⚠️ `<span>` with no role | ⚠️ headless — consumer must add | ✅ | ✅ |
+| Multi-level alt fallback (`imageAlt` → `name` → `label` → `'Avatar'`) | ❌ | ❌ | ⚠️ image/fallback only, no name chain | ⚠️ | 🚀 |
+| AvatarGroup `role="list"` / each avatar `role="listitem"` | ❌ | ⚠️ no explicit list role | ❌ | ❌ | 🚀 |
+| Overflow badge with dedicated accessible label input | ❌ | ⚠️ no explicit SR label on +N | ❌ | ❌ | 🚀 |
+| `ariaLabel` hard-override input | ❌ | ❌ | N/A | ✅ | ✅ |
+| Signal-native API (`input()`) | ❌ | ❌ | N/A | N/A | 🚀 |
+| Three runtime visual variants | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
+
+#### Gaps
+_None — all ❌ reference rows are matched. Angular Material has no Avatar component; we exceed PrimeNG on a11y and Radix UI on grouping semantics._
+
+#### Differentiators
+- **Multi-level alt fallback chain**: When only initials or an icon is shown, the accessible label resolves automatically as `imageAlt` → `name` → `label` → `'Avatar'`. PrimeNG renders a `<span>` with no `role` or label at all for initials; Radix only chains between image and fallback text with no `name` concept.
+- **AvatarGroup list semantics**: `ui-lib-avatar-group` uses `role="list"` and upgrades each avatar inside it to `role="listitem"`, so screen readers announce "Group, N items" and allow list navigation. Neither PrimeNG nor Angular Material applies these semantics.
+- **Overflow badge with `overflowAriaLabel`**: The `+N` overflow indicator is exposed as a `listitem` with a programmable accessible label (`overflowAriaLabel` input). PrimeNG renders `+N` as plain text with no SR label.
+- **Signal-native API**: `input()` / `model()` throughout — no `@Input()` decorator adapter layer needed.
+- **Three runtime variants**: Switch between Material, Bootstrap, and Minimal at runtime via a CSS variable — no other Angular library offers this.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no dedicated Avatar component
+- PrimeNG: https://primeng.org/avatar
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/avatar
+- Ark UI: https://ark-ui.com/docs/components/avatar
+- APG Pattern: N/A (display-only component — no APG widget pattern)
+
+---
+
+### Carousel
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|---|---|---|---|---|---|
+| Data-driven item rendering | ❌ (no Carousel) | ✅ | N/A | N/A | ✅ |
+| `numVisible` / `numScroll` | ❌ | ✅ | N/A | N/A | ✅ |
+| Circular navigation | ❌ | ✅ | N/A | N/A | ✅ |
+| Autoplay with configurable interval | ❌ | ✅ | N/A | N/A | ✅ |
+| Responsive breakpoint options | ❌ | ✅ | N/A | N/A | ✅ |
+| Horizontal + vertical orientation | ❌ | ✅ | N/A | N/A | ✅ |
+| Prev / Next navigation buttons | ❌ | ✅ | N/A | N/A | ✅ |
+| Dot indicator buttons | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom item template | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom prev / next icon templates | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom header / footer templates | ❌ | ✅ | N/A | N/A | ✅ |
+| `role="region"` + `aria-label` landmark | ❌ | ✅ | N/A | N/A | ✅ |
+| `aria-roledescription="carousel"` on host | ❌ | ⚠️ partial | N/A | N/A | ✅ |
+| `role="group"` + `aria-roledescription="slide"` per visible item | ❌ | ⚠️ partial | N/A | N/A | ✅ |
+| `aria-label="Slide N of M"` on each slide | ❌ | ⚠️ | N/A | N/A | ✅ |
+| `aria-current="true"` on active indicator dot | ❌ | ⚠️ | N/A | N/A | ✅ |
+| `aria-hidden="true"` on inactive slides | ❌ | ⚠️ | N/A | N/A | ✅ |
+| WCAG 2.1 SC 2.2.2 pause/resume button for autoplay | ❌ | ❌ | N/A | N/A | 🚀 |
+| `aria-live="polite"` during autoplay announcements | ❌ | ❌ | N/A | N/A | 🚀 |
+| `prefers-reduced-motion` disables autoplay in JavaScript | ❌ | ❌ | N/A | N/A | 🚀 |
+| i18n inputs for all button labels | ❌ | ⚠️ partial | N/A | N/A | 🚀 |
+| Signal-native API (`input()`) | ❌ | ❌ | N/A | N/A | 🚀 |
+| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
+| Three runtime visual variants | ❌ | ❌ | N/A | N/A | 🚀 |
+
+#### Gaps
+_None. Angular Material has no Carousel component. PrimeNG's Carousel is the only real reference; all its features are matched and several WCAG requirements are exceeded._
+
+#### Differentiators
+- **WCAG 2.1 SC 2.2.2 pause/resume button**: PrimeNG's Carousel has autoplay but no built-in pause control — WCAG requires animated content that auto-starts to have a pause mechanism. This library renders a dedicated pause/resume toggle button that appears only when `autoplayInterval > 0`.
+- **`aria-live="polite"` during autoplay**: While autoplay is running the slide viewport gets `aria-live="polite"` so screen readers announce slide transitions without interrupting the user. PrimeNG does not add this attribute.
+- **`prefers-reduced-motion` disables autoplay in JavaScript**: PrimeNG suppresses CSS transitions via the media query but does not stop the JavaScript interval. This library detects `prefers-reduced-motion: reduce` in JavaScript and prevents auto-advancement entirely, satisfying WCAG 2.3.3 (AAA) and respecting the user's OS setting at the interaction level.
+- **Full i18n label inputs**: `prevAriaLabel`, `nextAriaLabel`, `pauseLabel`, `playLabel` — every button label is consumer-controllable for localisation. PrimeNG exposes partial labels.
+- **Signal-native API + three runtime variants** (see library-wide differentiators).
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Carousel component
+- PrimeNG: https://primeng.org/carousel
+- Radix UI: N/A — no Carousel primitive
+- Ark UI: N/A — no Carousel primitive
+- APG Pattern: N/A — no dedicated APG carousel pattern; closest is https://www.w3.org/WAI/ARIA/apg/patterns/carousel/ (W3C WAI, not APG widget library)
+
+---
+
+### Galleria
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|---|---|---|---|---|---|
+| Main image display | ❌ (no Galleria) | ✅ | N/A | N/A | ✅ |
+| Thumbnail strip | ❌ | ✅ | N/A | N/A | ✅ |
+| Thumbnail strip position (bottom / top / left / right) | ❌ | ✅ | N/A | N/A | ✅ |
+| Dot indicators | ❌ | ✅ | N/A | N/A | ✅ |
+| Indicators overlaid on the active item | ❌ | ✅ | N/A | N/A | ✅ |
+| Fullscreen / lightbox overlay | ❌ | ✅ | N/A | N/A | ✅ |
+| Autoplay with configurable transition interval | ❌ | ✅ | N/A | N/A | ✅ |
+| Responsive thumbnail breakpoints | ❌ | ✅ | N/A | N/A | ✅ |
+| Circular navigation | ❌ | ✅ | N/A | N/A | ✅ |
+| `showItemNavigatorsOnHover` | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom item template | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom thumbnail template | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom caption template | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom header / footer templates | ❌ | ✅ | N/A | N/A | ✅ |
+| Custom indicator template | ❌ | ✅ | N/A | N/A | ✅ |
+| `role="region"` + `aria-label` on gallery | ❌ | ✅ | N/A | N/A | ✅ |
+| Thumbnail `role="tab"` + `aria-selected` | ❌ | ⚠️ partial | N/A | N/A | ✅ |
+| Keyboard: `ArrowLeft/Right/Home/End` on thumbnails | ❌ | ⚠️ partial | N/A | N/A | ✅ |
+| Fullscreen overlay as `role="dialog"` + `aria-modal="true"` | ❌ | ⚠️ partial | N/A | N/A | 🚀 |
+| Focus trap in fullscreen dialog | ❌ | ⚠️ partial | N/A | N/A | 🚀 |
+| `activeIndex` as `model()` signal (two-way bindable) | ❌ | ❌ | N/A | N/A | 🚀 |
+| `visible` (fullscreen state) as `model()` signal | ❌ | ❌ | N/A | N/A | 🚀 |
+| i18n inputs for all navigation labels | ❌ | ⚠️ partial | N/A | N/A | 🚀 |
+| Signal-native API (`input()`) | ❌ | ❌ | N/A | N/A | 🚀 |
+| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
+| Three runtime visual variants | ❌ | ❌ | N/A | N/A | 🚀 |
+
+#### Gaps
+_None. Angular Material has no image gallery component. PrimeNG Galleria is the sole reference; all features are matched and several accessibility requirements are exceeded._
+
+#### Differentiators
+- **Fullscreen `role="dialog"` + `aria-modal="true"` + focus trap**: When fullscreen mode activates, the overlay is a proper `role="dialog"` with `aria-modal="true"` and a full focus trap. PrimeNG's fullscreen overlay lacks `aria-modal` and does not implement a focus trap — keyboard users can Tab into page content behind the overlay.
+- **`activeIndex` and `visible` as `model()` signals**: Both the active item index and fullscreen state are two-way bindable via `[(activeIndex)]` and `[(visible)]` using Angular's signal-based `model()` — no event listener boilerplate needed. PrimeNG uses `@Output() activeIndexChange` and `@Output() visibleChange` with `@Input()` decoration, requiring the bracket-parens `[( )]` pattern via separate inputs/outputs rather than a single signal binding.
+- **i18n label inputs**: `ariaLabel`, `lightboxLabel`, `prevLabel`, `nextLabel` — every accessible button and region label is overridable for localisation.
+- **Signal-native API + three runtime variants** (see library-wide differentiators).
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no image gallery component
+- PrimeNG: https://primeng.org/galleria
+- Radix UI: N/A — no Galleria primitive
+- Ark UI: N/A — no Galleria primitive
+- APG Pattern: N/A — no APG pattern for image galleries
+
+---
+
+### Knob
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|---|---|---|---|---|---|
+| SVG-based dial visualization | ❌ (no Knob) | ✅ | N/A | N/A | ✅ |
+| Configurable `min` / `max` / `step` | ❌ | ✅ | N/A | N/A | ✅ |
+| Value label inside the dial | ❌ | ✅ | N/A | N/A | ✅ |
+| Value format string (e.g. `'{value}%'`) | ❌ | ✅ | N/A | N/A | ✅ |
+| Stroke width configuration | ❌ | ✅ | N/A | N/A | ✅ |
+| Value arc color override | ❌ | ✅ | N/A | N/A | ✅ |
+| Center text color override | ❌ | ✅ | N/A | N/A | ✅ |
+| Readonly state | ❌ | ✅ | N/A | N/A | ✅ |
+| Disabled state | ❌ | ✅ | N/A | N/A | ✅ |
+| `ControlValueAccessor` (ngModel / reactive forms) | ❌ | ✅ | N/A | N/A | ✅ |
+| `role="slider"` with `aria-valuemin/max/now` | ❌ | ✅ | N/A | N/A | ✅ |
+| `aria-valuetext` derived from value format string | ❌ | ⚠️ partial | N/A | N/A | 🚀 |
+| `ariaLabel` input for custom SR name | ❌ | ⚠️ partial | N/A | N/A | ✅ |
+| Keyboard: `ArrowUp/Right` increase, `ArrowDown/Left` decrease | ❌ | ✅ | N/A | N/A | ✅ |
+| Keyboard: `PageUp` / `PageDown` (10× step) | ❌ | ✅ | N/A | N/A | ✅ |
+| Keyboard: `Home` / `End` (jump to min / max) | ❌ | ✅ | N/A | N/A | ✅ |
+| Decorative SVG hidden from AT (`aria-hidden="true"`) | ❌ | ⚠️ | N/A | N/A | ✅ |
+| Signal-native API (`input()`, `model()`) | ❌ | ❌ | N/A | N/A | 🚀 |
+| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
+| Three runtime visual variants | ❌ | ❌ | N/A | N/A | 🚀 |
+
+#### Gaps
+_None. Angular Material has no Knob component. PrimeNG Knob is the only reference; all features are matched or exceeded._
+
+#### Differentiators
+- **`aria-valuetext` from value format string**: When `valueTemplate="{value}%"` is set, the component automatically sets `aria-valuetext="75%"` so screen readers announce the formatted value (e.g. "75 percent") rather than a raw number. PrimeNG's Knob sets `aria-valuenow` but does not compute `aria-valuetext` from the `valueTemplate` — screen readers announce the raw integer unless the consumer wires additional ARIA manually.
+- **Decorative SVG fully hidden**: The SVG arc and label are `aria-hidden="true"` with `focusable="false"`. PrimeNG's Knob SVG is not consistently marked decorative across all themes, risking duplicate announcements in some screen reader / browser combinations.
+- **Signal-native API**: `input()` / `model()` signals with `[(value)]` two-way binding — no decorator adapter required.
+- **Three runtime visual variants**: Switch between Material, Bootstrap, and Minimal aesthetics at runtime via a single CSS variable.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Knob component
+- PrimeNG: https://primeng.org/knob
+- Radix UI: N/A — no Knob primitive (closest is Slider)
+- Ark UI: N/A — no Knob primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/ (APG Slider — the Knob follows the same `role=slider` model)
+
+---
+
 ## Adding New Entries
 
 When a component completes Phase 2 (DX & API) of the hardening workflow:
