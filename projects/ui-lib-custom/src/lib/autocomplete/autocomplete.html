@@ -48,7 +48,7 @@
           @if (selectedItemTemplate()) {
             <ng-container
               *ngTemplateOutlet="selectedItemTemplate(); context: { $implicit: chip }"
-            ></ng-container>
+            />
           } @else {
             <span class="ui-autocomplete-chip-label">{{ getChipLabel(chip) }}</span>
           }
@@ -61,7 +61,7 @@
               [attr.aria-label]="'Remove ' + getChipLabel(chip)"
             >
               @if (removeTokenIconTemplate()) {
-                <ng-container *ngTemplateOutlet="removeTokenIconTemplate()"></ng-container>
+                <ng-container *ngTemplateOutlet="removeTokenIconTemplate()" />
               } @else {
                 <svg
                   class="ui-autocomplete-icon"
@@ -84,11 +84,11 @@
       }
 
       <div class="ui-autocomplete-input-chip">
-        <ng-container [ngTemplateOutlet]="autocompleteInputTemplate"></ng-container>
+        <ng-container [ngTemplateOutlet]="autocompleteInputTemplate" />
       </div>
     </div>
   } @else {
-    <ng-container [ngTemplateOutlet]="autocompleteInputTemplate"></ng-container>
+    <ng-container [ngTemplateOutlet]="autocompleteInputTemplate" />
   }
 
   @if (showClear() && hasValue() && !isDisabled()) {
@@ -119,7 +119,7 @@
       (click)="onDropdownButtonClick($event)"
     >
       @if (dropdownIconTemplate()) {
-        <ng-container *ngTemplateOutlet="dropdownIconTemplate()"></ng-container>
+        <ng-container *ngTemplateOutlet="dropdownIconTemplate()" />
       } @else {
         <svg
           class="ui-autocomplete-icon"
@@ -155,14 +155,14 @@
   >
     @if (headerTemplate()) {
       <div class="ui-autocomplete-panel-header">
-        <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>
+        <ng-container *ngTemplateOutlet="headerTemplate()" />
       </div>
     }
 
     @if (loading()) {
       <div class="ui-autocomplete-loading" aria-busy="true">
         @if (loadingTemplate()) {
-          <ng-container *ngTemplateOutlet="loadingTemplate()"></ng-container>
+          <ng-container *ngTemplateOutlet="loadingTemplate()" />
         } @else {
           Loading...
         }
@@ -170,7 +170,7 @@
     } @else if (visibleOptions().length === 0) {
       <div class="ui-autocomplete-empty">
         @if (emptyTemplate()) {
-          <ng-container *ngTemplateOutlet="emptyTemplate()"></ng-container>
+          <ng-container *ngTemplateOutlet="emptyTemplate()" />
         } @else {
           {{ emptyText }}
         }
@@ -182,7 +182,7 @@
           <div class="ui-autocomplete-option-group-header" aria-hidden="true">
             <ng-container
               *ngTemplateOutlet="groupTemplate(); context: { $implicit: groupOption }"
-            ></ng-container>
+            />
           </div>
         }
         <!-- role="group" container: only option children inside to satisfy aria-required-children -->
@@ -197,6 +197,7 @@
             <div
               [id]="getOptionId(optionIndex)"
               [attr.role]="optionRole"
+              tabindex="-1"
               class="ui-autocomplete-option"
               [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
               [class.ui-autocomplete-option--selected]="isSelected(option)"
@@ -207,12 +208,13 @@
               [attr.aria-posinset]="optionIndex + 1"
               (mousedown)="$event.preventDefault()"
               (click)="selectOption(option, $event)"
+              (keydown.enter)="selectOption(option, $event)"
               (mouseenter)="setActiveIndex(optionIndex)"
             >
               @if (itemTemplate()) {
                 <ng-container
                   *ngTemplateOutlet="itemTemplate(); context: { $implicit: option }"
-                ></ng-container>
+                />
               } @else {
                 {{ getOptionLabel(option) }}
               }
@@ -241,6 +243,7 @@
                 <div
                   [id]="getOptionId(optionIndex)"
                   [attr.role]="optionRole"
+                  tabindex="-1"
                   class="ui-autocomplete-option"
                   [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
                   [class.ui-autocomplete-option--selected]="isSelected(option)"
@@ -251,12 +254,13 @@
                   [attr.aria-posinset]="optionIndex + 1"
                   (mousedown)="$event.preventDefault()"
                   (click)="selectOption(option, $event)"
+                  (keydown.enter)="selectOption(option, $event)"
                   (mouseenter)="setActiveIndex(optionIndex)"
                 >
                   @if (itemTemplate()) {
                     <ng-container
                       *ngTemplateOutlet="itemTemplate(); context: { $implicit: option }"
-                    ></ng-container>
+                    />
                   } @else {
                     {{ getOptionLabel(option) }}
                   }
@@ -274,6 +278,7 @@
           <div
             [id]="getOptionId(optionIndex)"
             [attr.role]="optionRole"
+            tabindex="-1"
             class="ui-autocomplete-option"
             [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
             [class.ui-autocomplete-option--selected]="isSelected(option)"
@@ -284,12 +289,13 @@
             [attr.aria-posinset]="optionIndex + 1"
             (mousedown)="$event.preventDefault()"
             (click)="selectOption(option, $event)"
+            (keydown.enter)="selectOption(option, $event)"
             (mouseenter)="setActiveIndex(optionIndex)"
           >
             @if (itemTemplate()) {
               <ng-container
                 *ngTemplateOutlet="itemTemplate(); context: { $implicit: option }"
-              ></ng-container>
+              />
             } @else {
               {{ getOptionLabel(option) }}
             }
@@ -300,7 +306,7 @@
 
     @if (footerTemplate()) {
       <div class="ui-autocomplete-panel-footer">
-        <ng-container *ngTemplateOutlet="footerTemplate()"></ng-container>
+        <ng-container *ngTemplateOutlet="footerTemplate()" />
       </div>
     }
   </div>

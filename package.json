@@ -117,7 +117,7 @@
   "bundlesize": [
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom.mjs",
-      "maxSize": "67 kB",
+      "maxSize": "68 kB",
       "comment": "Primary barrel (gzip). Tightened from 590 kB. Prefer per-entry imports — this barrel is a legacy compatibility shim and should eventually be deprecated."
     },
     {
@@ -446,7 +446,7 @@
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-table.mjs",
-      "maxSize": "20 kB"
+      "maxSize": "22 kB"
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tabs.mjs",

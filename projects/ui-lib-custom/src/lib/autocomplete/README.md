@@ -31,8 +31,8 @@
 | `addOnBlur` | `boolean` | `false` | Commit free-text as a chip on blur (multiple mode) |
 | `addOnTab` | `boolean` | `false` | Commit free-text as a chip on Tab (multiple mode) |
 | `separator` | `string \| RegExp \| undefined` | `undefined` | Character(s) that auto-tokenize free text into chips |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Visual style variant |
-| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size token |
+| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual style variant; falls back to the global theme variant when `null` |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Control height: `'sm'` (36 px) · `'md'` (44 px) · `'lg'` (52 px) |
 | `placeholder` | `string` | `''` | Input placeholder text |
 | `showClear` | `boolean` | `false` | Show a clear button when the field has a value |
 | `fluid` | `boolean` | `false` | Stretch to fill container width |
@@ -60,7 +60,23 @@
 | `autocompleteBlur` | `FocusEvent` | Input lost focus. Named `autocompleteBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 | `dropdownClick` | `AutoCompleteDropdownClickEvent` | Dropdown toggle button clicked |
 | `clearEvent` | `void` | Clear button clicked |
-| `keyUp` | `KeyboardEvent` | Key-up on the input |
+| `autocompleteKeyUp` | `KeyboardEvent` | Key-up on the inner input. Named `autocompleteKeyUp` (not `keyUp`) to avoid shadowing the native DOM `keyup` event. |
+
+## Content Projection
+
+All slots use structural directive markers inside `<ui-lib-autocomplete>`.
+
+| Directive | Selector | Context | Purpose |
+|-----------|----------|---------|---------|
+| `AutoCompleteItemDirective` | `*uilib-autocompleteItem` | `$implicit: unknown` | Custom option row template |
+| `AutoCompleteSelectedItemDirective` | `*uilib-autocompleteSelectedItem` | `$implicit: unknown` | Custom chip template (multiple mode) |
+| `AutoCompleteGroupDirective` | `*uilib-autocompleteGroup` | `$implicit: unknown` | Custom group-header template |
+| `AutoCompleteHeaderDirective` | `*uilib-autocompleteHeader` | — | Slot above the option list |
+| `AutoCompleteFooterDirective` | `*uilib-autocompleteFooter` | — | Slot below the option list |
+| `AutoCompleteEmptyDirective` | `*uilib-autocompleteEmpty` | — | Custom empty-state message |
+| `AutoCompleteLoadingDirective` | `*uilib-autocompleteLoading` | — | Custom loading indicator |
+| `AutoCompleteDropdownIconDirective` | `*uilib-autocompleteDropdownIcon` | — | Custom dropdown-button icon |
+| `AutoCompleteRemoveTokenIconDirective` | `*uilib-autocompleteRemoveTokenIcon` | — | Custom chip remove-button icon |
 
 ## Usage
 
@@ -81,4 +97,15 @@
   (completeMethod)="search($event)"
   [(ngModel)]="selectedItems"
 />
+
+<!-- custom item template -->
+<ui-lib-autocomplete
+  [suggestions]="results"
+  (completeMethod)="search($event)"
+  [(ngModel)]="selectedItem"
+>
+  <ng-template *uilib-autocompleteItem="let opt">
+    <span [innerHTML]="highlight(opt.name, query)"></span>
+  </ng-template>
+</ui-lib-autocomplete>
 ```
