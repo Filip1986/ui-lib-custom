@@ -1163,6 +1163,43 @@ _None — PrimeNG has no BottomSheet; Angular Material is the primary reference 
 
 ---
 
+### Inplace
+
+Inplace is an inline-edit widget that toggles between a read (display) mode and an edit (input) mode within the flow of content.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Toggle between display and edit modes | ❌ | ✅ | ❌ | ❌ | ✅ |
+| `aria-expanded` on the display trigger | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `aria-label` on display / edit toggle | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Enter key activates edit mode | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Escape key cancels and returns to display mode | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Focus returns to display trigger on cancel / confirm | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Typed `ng-template` display and input slots | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<boolean>()` for edit-mode state | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — display / edit toggle, `aria-expanded`, keyboard navigation, and focus return all implemented.
+
+#### Differentiators
+
+- **`aria-expanded` on the display trigger**: PrimeNG Inplace renders a `<span>` click target with no ARIA — screen reader users have no indication the element is interactive or that activating it reveals an edit form. The display trigger carries `role=button` + `aria-expanded` so assistive technology announces the collapsed / expanded state accurately.
+- **Focus returns to the display trigger on cancel / confirm**: When the user presses Escape (cancel) or submits the edit form, focus returns precisely to the display trigger — matching the disclosure widget pattern. PrimeNG does not manage focus on close, leaving keyboard users disoriented after editing.
+- **`aria-label` describes the action with content context**: The display trigger carries a dynamic `aria-label` such as "Edit: Product name" — including the field label so screen reader users in virtual cursor mode can identify the Inplace widget without needing to read surrounding content.
+
+#### Reference URLs
+- Angular Material: N/A — no Inplace component
+- PrimeNG: https://primeng.org/inplace
+- Radix UI: N/A — no Inplace primitive
+- Ark UI: N/A — no Inplace primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/ (display / edit toggle follows the disclosure button pattern)
+
+---
+
 ## Navigation & Menus
 
 ---
@@ -1452,6 +1489,152 @@ _None — Angular Material has no MegaMenu component; PrimeNG is the only refere
 - Radix UI: N/A — no MegaMenu primitive (NavigationMenu can be composed into a mega-menu layout)
 - Ark UI: N/A — no MegaMenu primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/ (MegaMenu extends the Menubar pattern with multi-column submenu layouts)
+
+---
+
+### PanelMenu
+
+PanelMenu is an accordion-style vertical navigation component — top-level items act as collapsible panel headers, each containing a nested `role=menu`.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=menu` / `role=menuitem` in panels | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Panel toggle `aria-expanded` + `aria-controls` | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Arrow-key navigation within open panel | ❌ | ⚠️ partial | ✅ | ✅ | ✅ |
+| Character typeahead within panel | ❌ | ❌ | ✅ | ✅ | ✅ |
+| `aria-current=page` on active route item | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Multiple / single-open mode | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<string[]>()` for expanded keys | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — panel toggle, menu keyboard model, typeahead, and active-item indication all implemented.
+
+#### Differentiators
+
+- **`aria-current=page` on active route item**: PrimeNG PanelMenu visually styles the active item but carries no ARIA — screen reader users have no programmatic indication of their current location. The library sets `aria-current=page` on the item matching the current route, which assistive technology announces as "current page" when the user reaches it.
+- **Full APG menu keyboard contract inside open panels**: Down / Up moves between items, Home / End jumps to first / last, and character typeahead advances to the next matching item. PrimeNG's panel menu only partially implements arrow-key navigation and skips typeahead entirely.
+- **Signal-native `model<string[]>()` for expanded panels**: Consumer code can bind `[(expandedKeys)]` and derive state with `computed()` or respond with `effect()` — eliminating the common pattern of shadowing PrimeNG's panel state in a separate `boolean[]`.
+
+#### Reference URLs
+- Angular Material: N/A — no PanelMenu component
+- PrimeNG: https://primeng.org/panelmenu
+- Radix UI: N/A — no PanelMenu primitive (Accordion + menu composition required)
+- Ark UI: https://ark-ui.com/react/docs/components/accordion (closest primitive)
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ (panels) + https://www.w3.org/WAI/ARIA/apg/patterns/menu/ (items within panels)
+
+---
+
+### TieredMenu
+
+TieredMenu is a hierarchical menu where submenus open to the side on hover / focus, supporting arbitrary nesting depth following the APG menu / submenu keyboard contract.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=menu` + `role=menuitem` at every level | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-haspopup=menu` + `aria-expanded` on parent | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Right arrow opens submenu, Left closes it | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Escape closes one level, returns focus to parent | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Home / End within each menu level | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Character typeahead within each level | ✅ | ❌ | ✅ | ✅ | ✅ |
+| `@defer` on submenu panel until first open | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native menu item model | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — full APG submenu keyboard contract implemented at every nesting level.
+
+#### Differentiators
+
+- **Home / End within every menu level**: PrimeNG TieredMenu lacks Home / End support — pressing either key has no effect. The library implements these at every level so power users can jump to the first / last item without repeated arrow key presses.
+- **Character typeahead within nested levels**: PrimeNG does not implement typeahead inside submenus. The library registers keydown listeners at every open menu level and advances focus to the next item whose label starts with the typed character — following the APG menu typeahead specification.
+- **`@defer` on submenu panels**: Each submenu panel uses Angular `@defer` with a hover trigger so the submenu DOM is not created until the first open interaction — eliminating upfront rendering cost for menus with many nested items that users may never reach.
+
+#### Reference URLs
+- Angular Material: N/A — Material Menu supports one level of submenu only
+- PrimeNG: https://primeng.org/tieredmenu
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/dropdown-menu (supports nested submenus)
+- Ark UI: https://ark-ui.com/react/docs/components/menu
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu/ (menu + submenu keyboard contract)
+
+---
+
+### SpeedDial
+
+SpeedDial is a Floating Action Button that expands into a set of labelled action items, supporting linear, radial, and semicircle layout modes.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-expanded` on FAB trigger | ✅ | ✅ | ❌ | ❌ | ✅ |
+| `aria-haspopup` on trigger | ✅ | ❌ | ❌ | ❌ | ✅ |
+| `aria-label` on each action button | ✅ | ✅ | ❌ | ❌ | ✅ |
+| Arrow-key navigation between actions | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Escape closes and returns focus to trigger | ✅ | ✅ | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on open / fan animation | ⚠️ | ❌ | ❌ | ❌ | ✅ |
+| Radial / semicircle / quarter-circle layout modes | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<boolean>()` open state | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-expanded`, `aria-haspopup`, action labels, keyboard navigation, and reduced-motion all implemented.
+
+#### Differentiators
+
+- **Arrow-key navigation between action items**: PrimeNG SpeedDial renders action buttons as a flat list but does not implement arrow-key navigation — Tab is required to reach each action. The library implements Up / Down / Left / Right navigation (direction-aware based on layout orientation) matching the toolbar keyboard model, keeping the Tab stop count to one.
+- **`aria-haspopup` on FAB trigger**: PrimeNG omits `aria-haspopup`, so screen readers do not announce that the button opens a menu before users activate it. The trigger carries `aria-haspopup=true` alongside `aria-expanded` so assistive technology announces both the expandable nature and the current state.
+- **`prefers-reduced-motion` on the fan animation**: Action items fan out with a CSS animation gated on `@media (prefers-reduced-motion: no-preference)`, suppressing the animation entirely — not merely slowing it — for users with vestibular sensitivity preferences.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/button (FAB variant; no SpeedDial expansion)
+- PrimeNG: https://primeng.org/speeddial
+- Radix UI: N/A — no SpeedDial primitive
+- Ark UI: N/A — no SpeedDial primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/ (FAB trigger as a disclosure button opening an action set)
+
+---
+
+### Dock
+
+Dock renders a macOS-style application dock bar with magnification-on-hover effects, supporting horizontal and vertical orientations.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `<nav>` with `aria-label` landmark | ❌ | ❌ (unstyled list, no landmark) | ❌ | ❌ | ✅ |
+| `aria-label` on each dock item | ❌ | ⚠️ tooltip only | ❌ | ❌ | ✅ |
+| Decorative icon `aria-hidden` | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Active item `aria-current=page` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Arrow keys navigate between items | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on magnify animation | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native item model | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `<nav>` landmark, item labels, icon `aria-hidden`, active state, keyboard navigation, and reduced-motion all implemented.
+
+#### Differentiators
+
+- **`<nav aria-label>` landmark**: PrimeNG Dock renders an unstyled list with no landmark role — screen reader users navigating by landmarks cannot locate the dock. The library wraps items in `<nav aria-label="Application dock">` (label configurable via input), making it discoverable in VoiceOver / NVDA landmark menus.
+- **`aria-current=page` on the active item**: PrimeNG provides no active-item ARIA. The library sets `aria-current=page` on the item matching the current route, so assistive technology announces "current" when focus reaches that item — giving non-visual users location awareness within the navigation.
+- **`prefers-reduced-motion` on the magnification animation**: The iconic icon-scale magnification is gated on `@media (prefers-reduced-motion: no-preference)` — users with vestibular sensitivities get a completely static dock with no constant-motion hover effect.
+
+#### Reference URLs
+- Angular Material: N/A — no Dock component
+- PrimeNG: https://primeng.org/dock
+- Radix UI: N/A — no Dock primitive
+- Ark UI: N/A — no Dock primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/ (toolbar keyboard model applies to dock items)
 
 ---
 
@@ -2413,6 +2596,117 @@ None — severity-mapped live region roles and dismiss ARIA all implemented.
 - Radix UI: https://www.radix-ui.com/primitives/docs/components/callout (closest equivalent)
 - Ark UI: N/A — no Message primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alert/ (alert + status live region roles)
+
+---
+
+### BlockUI
+
+BlockUI overlays a loading mask over a target container or the full page, communicating the blocked state to assistive technology via `aria-busy`.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-busy=true` on target container during block | ❌ | ✅ | ❌ | ❌ | ✅ |
+| `aria-label` on the overlay element | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Focus trapped inside overlay in full-page mode | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `aria-live` announcement when block starts / clears | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `prefers-reduced-motion` on spinner overlay | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Scoped block (target element) + full-page mode | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `blocked` input | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-busy`, `aria-label`, focus trap, live announcement, and reduced-motion all implemented.
+
+#### Differentiators
+
+- **`aria-live` announcement when block starts and clears**: When blocking begins, an `aria-live=polite` region announces "Loading" (or a consumer-supplied message); when it clears, it announces "Ready" — giving screen reader users explicit state transitions rather than relying on them to notice `aria-busy` changes. PrimeNG provides no such announcement.
+- **`aria-label` on the overlay element**: The mask layer carries `aria-label="Loading, please wait"` (configurable) so that if focus lands on or near the overlay, assistive technology has a readable label rather than encountering a silent fullscreen element.
+- **Focus trap in full-page mode**: When BlockUI covers the entire viewport, a `FocusTrap` directive constrains Tab navigation within the overlay, preventing users from interacting with blocked content below — matching the focus-containment behaviour of a modal dialog for full-page blocking scenarios.
+
+#### Reference URLs
+- Angular Material: N/A — no BlockUI component (CDK overlay used manually)
+- PrimeNG: https://primeng.org/blockui
+- Radix UI: N/A — no BlockUI primitive
+- Ark UI: N/A — no BlockUI primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ (full-page BlockUI follows focus-trap rules of a modal dialog)
+
+---
+
+## Layout & Containers
+
+---
+
+### Divider
+
+Divider renders a horizontal or vertical separator line between content sections, implementing the WAI-ARIA `separator` role with correct orientation.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=separator` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-orientation` (horizontal / vertical) | ✅ | ⚠️ missing on vertical | ✅ | ✅ | ✅ |
+| Content label via `aria-label` (labelled divider) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Decorative mode (`role=presentation`) | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Dashed / dotted / solid style input | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `layout` + `type` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `role=separator`, `aria-orientation`, labelled mode, and decorative mode all implemented.
+
+#### Differentiators
+
+- **`aria-orientation` always present on vertical dividers**: PrimeNG omits `aria-orientation` when the divider is rendered vertically — screen readers default to "horizontal" when the attribute is absent, misreporting the separator's orientation. The library writes `aria-orientation` to match the `layout` input in all cases.
+- **Content-labelled divider via `aria-label`**: When a divider carries text content (e.g., "or" between form actions), the `role=separator` element receives `aria-label` with that text, so assistive technology reads "separator, or" rather than just "separator" — providing the visual context in the accessible name.
+- **Decorative mode via `role=presentation`**: When a divider is purely decorative, passing `decorative=true` sets `role=presentation` and removes the element from the accessibility tree entirely — preventing "separator" announcements that add noise without conveying meaning.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/divider
+- PrimeNG: https://primeng.org/divider
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/separator
+- Ark UI: N/A — no Separator primitive (HTML `<hr>` recommended)
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/separator/ (separator role + orientation)
+
+---
+
+### Panel
+
+Panel is a collapsible content container with a header, optional toolbar actions, and animated expand / collapse transitions.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=region` + `aria-labelledby` on content | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Toggle button `aria-expanded` + `aria-controls` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Configurable heading level (no hard-coded `<h3>`) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `@defer` on panel body until first expand | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Enter / exit animation using `--uilib-*` tokens | ❌ | ⚠️ CSS only, no token | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on expand animation | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<boolean>()` collapsed state | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — region landmark, toggle ARIA, heading level input, `@defer`, and motion all implemented.
+
+#### Differentiators
+
+- **Configurable heading level with no hard-coded `<h3>`**: PrimeNG Panel hard-codes an `<h5>` header element regardless of context, breaking the document outline when panels appear under lower headings. The `headingLevel` input defaults to `3` but accepts any value, so consumer applications own the heading hierarchy.
+- **`@defer` on panel body until first expand**: The panel body template is wrapped in `@defer (on interaction)` so its DOM — including any child components — is not created until the panel is first opened, eliminating the hidden-but-rendered cost of collapsed panels in dense dashboards.
+- **`prefers-reduced-motion` on expand / collapse**: The height animation uses a CSS transition gated on `@media (prefers-reduced-motion: no-preference)`, providing an instant expand / collapse for users with vestibular sensitivities while keeping the polished animation for all others.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/expansion (Expansion Panel)
+- PrimeNG: https://primeng.org/panel
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/collapsible
+- Ark UI: https://ark-ui.com/react/docs/components/collapsible
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/ (collapsible section pattern)
 
 ---
 
