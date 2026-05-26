@@ -82,6 +82,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [feat(lib): AutoComplete Prompt 7 — 12-step upgrade, score 8.2 → 8.9]
+Changed:
+  autocomplete.types.ts: added AutoCompleteItemContext/SelectedItemContext/GroupContext interfaces
+  autocomplete/index.ts: exported 3 new context types
+  autocomplete.ts: TemplateRef<unknown> → typed generics for 3 contentChild slots; JSDoc on all 34 inputs + 9 slots
+  autocomplete.html: self-closing tags; tabindex=-1 + (keydown.enter) on all 3 option-div patterns
+  autocomplete.scss: --uilib-autocomplete-focus-ring-color/width tokens; panel animation wired to transition tokens; translateY; reduce-motion transform:none
+  autocomplete/README.md: size type sm/md/lg, variant default null, keyUp→autocompleteKeyUp, content-projection table
+  docs/reference/components/AUTOCOMPLETE.md: full rewrite (34 inputs, 8 outputs, 9-slot table, APG keyboard table, ARIA wiring)
+  docs/reference/a11y-sessions/autocomplete.md: created — 22-step NVDA+Chrome + 5-step VO+Safari
+  autocomplete-demo.component.ts: qualityAudit 8.2→8.9, API row types corrected, 2 focus-ring CSS var rows added
+  package.json: primary barrel 67→68 kB; table 20→22 kB (pre-existing); bundle-sizes.json refreshed
+State: ESLint 0 warnings, ng build clean, bundlesize all pass, typecheck pass, PR #251 open
+Verification: npx eslint projects/ui-lib-custom/src/lib/autocomplete/ --max-warnings 0 (PASS), ng build ui-lib-custom (PASS), npm run bundlesize (PASS)
+Next step: Prompt 7 — 12-step upgrade on CascadeSelect (Thursday AM slot, target 9.4)
+
 Date: 2026-05-26 [feat(lib): Select Prompt 7 — 12-step upgrade, score 8.2 → 9.1]
 Changed:
   projects/ui-lib-custom/src/lib/select/select.types.ts: added SelectOptionTemplateContext interface
@@ -99,55 +115,6 @@ Changed:
 State: ESLint 0 warnings, ng build clean, all tests passing
 Verification: npx eslint projects/demo/src/app/pages/select/ --max-warnings 0 (PASS)
 Next step: Prompt 7 — 12-step upgrade on AutoComplete (Wednesday slot, target 9.5)
-
-Date: 2026-05-24 [convention audit completion — keyDown rename, CommonModule → specific imports, inline template extraction]
-Changed:
-  input-number.component.ts: keyDown → numberKeyDown (output declaration + 2 emit sites) — PR #239
-  input-number/README.md: output table updated with numberKeyDown name and shadowing note — PR #239
-  LIBRARY_CONVENTIONS.md: added "Keyboard key pressed" row (keydown/keyDown → {component}KeyDown) to canonical output names table — PR #239
-  18 library components: CommonModule → specific imports (NgClass, NgStyle, NgTemplateOutlet as needed; removed entirely where unused) — PR #240
-  10 library components: inline template: strings extracted to .html templateUrl files — PR #240
-  input-mask.component.html: bonus a11y fix — clear <span (click)> → <button type="button" aria-label="Clear"> — PR #240
-State: ng build → PASS; typecheck → PASS; eslint → 0 warnings; all affected tests pass
-Verification: npm run build (PASS), npx eslint.cmd 28 changed files --max-warnings 0 (PASS), jest input-number (146/146), input-mask (62/62), accordion (51/51), rating (81/81), carousel (70/70), stepper (61/61)
-Next step: No remaining audit items. Next milestone candidates: broader axe-core audit pass, new premium component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
-
-Date: 2026-05-24 [docs(standards): JS-STANDARDS.md + standards README created]
-Changed:
-  docs/standards/JS-STANDARDS.md: Created — JavaScript runtime standard for this component library.
-    Key library-specific rules: DestroyRef cleanup (components destroyed frequently), layout thrashing
-    under ViewEncapsulation.None, no Worker instantiation in library code.
-    References platform/docs/standards/JS-STANDARDS.md for full rationale and examples.
-  docs/standards/README.md: Created — index of CSS, HTML, and JS standards with platform reference.
-  docs/standards/CSS-STANDARDS.md: Added See also footer linking to JS and HTML standards.
-  CLAUDE.md: Added standards reference table to Session Start Protocol.
-State: Documentation only — no build required.
-Verification: Files created and cross-linked correctly.
-Next step: No open tasks. Next milestone candidates: broader component axe-core audit pass, new premium
-  component (signals-first data grid is highest-value per VISION.md), or theme preset UI improvements.
-
-Date: 2026-05-24 [naming convention audit — critical output renames + conventions doc hardening]
-Changed:
-  color-picker.ts: change → colorChange (output + emit)
-  color-picker.spec.ts: component.change → component.colorChange (4 references)
-  slider.ts: change → sliderChange (output + 3 emits)
-  toggle-button.ts: change/focus/blur → toggleButtonChange/toggleButtonFocus/toggleButtonBlur
-  toggle-switch.ts: change/focus/blur → switchChange/switchFocus/switchBlur
-  autocomplete.ts: keyUp → autocompleteKeyUp (output + emit)
-  virtual-scroller.component.ts: scroll → virtualScroll (output + emit)
-  galleria.ts: removed duplicate explicit activeIndexChange output (model() already emits it)
-  knob.component.ts: change/focus/blur → knobChange/knobFocus/knobBlur
-  radio-button.ts: change/focus/blur → radioChange/radioFocus/radioBlur
-  rating.ts: change/focus/blur → ratingChange/ratingFocus/ratingBlur
-  toggle-button-demo.component.html/ts: bindings + log string updated
-  autocomplete-demo.component.ts: API table fixed (select→optionSelect, focus/blur names, keyUp added)
-  rating-demo.component.html/ts: bindings + code snippets + API table updated
-  radio-button-demo.component.ts: API table updated
-  rating/README.md, docs/reference/components/RATING.md: (change)→(ratingChange)
-  LIBRARY_CONVENTIONS.md: Rule 1 example fixed; Rule 2 camelCase variant note added; canonical output names table added with all 13 components
-State: ng build → PASS (30 368ms); eslint → 0 warnings on all changed files (16 files checked)
-Verification: npm run build (PASS), npx eslint 16 changed files --max-warnings 0 (PASS)
-Next step: Fix medium issues from audit — add `readonly` to order-list and pick-list model() signals; replace CommonModule with specific directive imports in 18 components
 
 Date: 2026-05-25 [ci: Prompts 5, 6, 10 — reduced-motion lint, gzip budget CI, i18n scoring system]
 Changed:
@@ -206,7 +173,7 @@ Next wave (Friday benchmark prep):
 |------------|------------------------------------------------------------------------------------------------|------------------------------------------------|
 | Mon        | Plan (this document). Pick 4 components: Select, AutoComplete, CascadeSelect, ColorPicker.    | This plan committed                            |
 | Tue        | Prompt 7 — 12-step upgrade on **Select** (target 9.5)                                        | ✅ Score 9.1, branch feat/select-9.5-upgrade   |
-| Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | Updated score + reference doc + commit         |
+| Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | ✅ Score 8.9, branch feat/autocomplete-9.5-upgrade |
 | Thu AM     | Prompt 7 — 12-step upgrade on **CascadeSelect** (target 9.4)                                 | Updated score + reference doc + commit         |
 | Thu PM     | Prompt 7 — 12-step upgrade on **ColorPicker** (target 9.4)                                   | Updated score + reference doc + commit         |
 | Fri AM     | Prompt 1 — Sprint A benchmark backfill for **Knob, Avatar, Carousel, Galleria**              | 4 new sections in COMPETITIVE_BENCHMARKS.md    |
