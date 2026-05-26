@@ -82,6 +82,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [feat(lib): color-picker prompt-7 quality upgrade — score 8.2→8.9, PR #253]
+Changed:
+  projects/ui-lib-custom/src/lib/color-picker/color-picker.scss: focus-ring tokens (--uilib-colorpicker-focus-ring-color/width); transition-duration now defaults to --uilib-transition-duration-fast; panel enter animation wired to global transition tokens; prefers-reduced-motion: animation:none added
+  projects/ui-lib-custom/src/lib/color-picker/color-picker.ts: JSDoc on all 8 inputs and 3 outputs
+  projects/ui-lib-custom/src/lib/color-picker/README.md: fixed output name change→colorChange; rewrote keyboard table with per-context accuracy (canvas vs hue-slider)
+  docs/reference/components/color-picker.md: full rewrite — APG dialog pattern, ARIA wiring (13 rows, corrects aria-hidden on canvas), CSS var list, keyboard table
+  docs/reference/a11y-sessions/color-picker.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (6 steps)
+  projects/demo/src/app/pages/color-picker/color-picker-demo.component.ts: rescored 8.2→8.9, date 2026-05-26, value + appendTo API rows, corrected keyboard table (7 rows) + ARIA table (13 rows), 3 CSS-var rows, APG pattern linked
+  docs/COMPONENT_SCORES.md: ColorPicker 8.2→8.9; bundle snapshot refreshed
+State: ESLint 0 warnings, stylelint 0 errors (3 pre-existing warnings), ng build clean, typecheck passed, PR #253 open
+Verification: npx stylelint color-picker.scss (0 errors); npx eslint color-picker/ --max-warnings 0 (PASS); git push (typecheck PASS)
+Next step: Prompt 1 — Sprint A benchmark backfill for Knob, Avatar, Carousel, Galleria (Friday AM slot)
+
 Date: 2026-05-26 [feat(lib): cascade-select prompt-7 quality upgrade — score 8.2→8.9, PR #252]
 Changed:
   projects/ui-lib-custom/src/lib/cascade-select/cascade-select.types.ts: added CascadeSelectOptionContext, CascadeSelectValueContext, CascadeSelectOptionGroupIconContext
@@ -98,32 +111,10 @@ State: ESLint 0 warnings, stylelint 0 errors, ng build clean, pre-push typecheck
 Verification: npx stylelint cascade-select.scss (0 errors, 2 warnings pre-existing); npx eslint cascade-select/ --max-warnings 0 (PASS); git push (typecheck PASS)
 Next step: Prompt 7 — 12-step upgrade on ColorPicker (Thursday PM slot, target 9.4)
 
-Date: 2026-05-26 [feat(lib): autocomplete prompt-7 quality upgrade — score 8.2→8.9, PR #251]
-Changed:
-  projects/ui-lib-custom/src/lib/autocomplete/README.md: fixed size type sm/md/lg, variant default null, output autocompleteKeyUp, content-projection table (9 slots)
-  projects/ui-lib-custom/src/lib/autocomplete/autocomplete.html: tabindex + keydown.enter on option divs (3 patterns: grouped, virtual, flat); self-closing tag fixes
-  docs/reference/components/AUTOCOMPLETE.md: full rewrite — all input descriptions, 9-slot projection table, ARIA combobox wiring, APG keyboard table
-  docs/reference/a11y-sessions/autocomplete.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (5 steps)
-  projects/demo/src/app/pages/autocomplete/autocomplete-demo.component.ts: rescored 8.2→8.9, corrected size/variant API rows, 2 CSS-var rows
-  docs/COMPONENT_SCORES.md: AutoComplete 8.2→8.9; package.json bundle budgets adjusted (67→68 kB primary, 20→22 kB table); bundle snapshot refreshed
-State: ESLint 0 warnings, ng build clean, PR #251 open
-Verification: npx eslint autocomplete/ --max-warnings 0 (PASS); ng build ui-lib-custom (PASS)
-Next step: CascadeSelect Prompt 7 upgrade (done above)
-
-Date: 2026-05-26 [feat(lib): Select Prompt 7 — 12-step upgrade, score 8.2 → 9.1]
-Changed:
-  projects/ui-lib-custom/src/lib/select/select.types.ts: added SelectOptionTemplateContext interface
-  projects/ui-lib-custom/src/lib/select/select.ts: optionTemplate input → contentChild slot; onHostClick() host handler; contextFor() helper; JSDoc on all 13 inputs
-  projects/ui-lib-custom/src/lib/select/select.html: <label> → <span>; typed *ngTemplateOutlet context; ESLint disable comments for aria-activedescendant option divs
-  projects/ui-lib-custom/src/lib/select/select.scss: 7 new --uilib-select-* tokens (focus ring, label weight, gaps, selected weight); panel enter animation; prefers-reduced-motion override
-  projects/ui-lib-custom/src/lib/select/index.ts: re-exports SelectOptionTemplateContext
-  docs/reference/components/SELECT.md: complete API descriptions, correct APG URL, content projection table
-  docs/reference/a11y-sessions/select.md: created — SR session template (20 NVDA+Chrome + 5 VO+Safari)
-  projects/demo/src/app/pages/select/select-demo.component.ts: Edge Cases tab, +7 CSS var rows, scores updated
-  docs/COMPONENT_SCORES.md: Select 8.2 → 9.1; setup-jest.ts: MockIntersectionObserver added
-State: ESLint 0 warnings, ng build clean, all tests passing
-Verification: npx eslint projects/demo/src/app/pages/select/ --max-warnings 0 (PASS)
-Next step: AutoComplete Prompt 7 upgrade (done above)
+Date: 2026-05-26 [feat(lib): cascade-select + autocomplete + select prompt-7 upgrades — PRs #251, #252]
+Changed: See archive for details on autocomplete (PR #251) and select (score 9.1) upgrades
+State: All three committed and pushed; PRs open
+Next step: ColorPicker (done above)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
@@ -164,7 +155,7 @@ Next wave (Friday benchmark prep):
 | Tue        | Prompt 7 — 12-step upgrade on **Select** (target 9.5)                                        | ✅ Score 9.1, branch feat/select-9.5-upgrade   |
 | Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | ✅ Score 8.9, PR #251, branch feat/autocomplete-9.5-upgrade |
 | Thu AM     | Prompt 7 — 12-step upgrade on **CascadeSelect** (target 9.4)                                 | ✅ Score 8.9, PR #252, branch feat/cascade-select-9.5-upgrade |
-| Thu PM     | Prompt 7 — 12-step upgrade on **ColorPicker** (target 9.4)                                   | Updated score + reference doc + commit         |
+| Thu PM     | Prompt 7 — 12-step upgrade on **ColorPicker** (target 9.4)                                   | ✅ Score 8.9, PR #253, branch feat/color-picker-9.4-upgrade |
 | Fri AM     | Prompt 1 — Sprint A benchmark backfill for **Knob, Avatar, Carousel, Galleria**              | 4 new sections in COMPETITIVE_BENCHMARKS.md    |
 | Fri PM     | Prompt 14 — Friday wrap (inventory avg, handoff block, trim old handoffs)                     | Updated AI_AGENT_CONTEXT.md + wrap commit      |
 
