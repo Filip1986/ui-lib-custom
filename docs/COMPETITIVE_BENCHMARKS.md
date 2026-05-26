@@ -935,6 +935,183 @@ None — `aria-haspopup`, `aria-expanded`, labelled dropdown trigger, and full m
 
 ---
 
+### ToggleButton
+
+ToggleButton is a single button that maintains a pressed / unpressed state, implementing `role=button` + `aria-pressed` — the single-item counterpart to SelectButton's group model.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=button` + `aria-pressed` (true / false) | ✅ | ⚠️ (no `aria-pressed`) | ✅ | ✅ | ✅ |
+| `aria-label` / `aria-labelledby` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-disabled` in sync with `disabled` input | ✅ | ⚠️ (`attr.disabled` only) | ✅ | ✅ | ✅ |
+| Icon-only mode with required `aria-label` | ✅ | ⚠️ (no enforcement) | ✅ | ✅ | ✅ |
+| `prefers-reduced-motion` on press animation | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<boolean>()` pressed state | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-pressed`, `aria-disabled` sync, and icon-only label enforcement all implemented.
+
+#### Differentiators
+
+- **`aria-pressed` always present**: PrimeNG ToggleButton renders a styled `<button>` but omits `aria-pressed` — screen readers announce the button label but cannot communicate whether it is currently active. `aria-pressed` is always written and kept in sync with the `model<boolean>()` value.
+- **`aria-disabled` in sync via host binding**: PrimeNG sets only the native `disabled` attribute; `aria-disabled` is absent. When a ToggleButton is disabled but must remain focusable (e.g., to show a tooltip on focus), only `aria-disabled=true` is set — the library handles both attributes via a unified host binding that reads the `disabled` signal.
+- **Icon-only label enforcement**: When the `label` input is absent and only an icon is rendered, the component emits an `ng-dev-mode` warning if `ariaLabel` is also not provided — preventing the common mistake of shipping an unlabelled interactive control that is invisible to screen readers.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/button-toggle
+- PrimeNG: https://primeng.org/togglebutton
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/toggle
+- Ark UI: https://ark-ui.com/react/docs/components/toggle
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (`aria-pressed` toggle button pattern)
+
+---
+
+### FloatLabel
+
+FloatLabel is a directive that animates an input label from placeholder position into a floating label above the field when the input receives focus or contains a value.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Real `<label>` element (not `<span>` placeholder) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Label `for` / `htmlFor` links to input `id` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Contrast ≥ 3:1 in floated position | ✅ | ⚠️ (theme-dependent) | ✅ | ✅ | ✅ |
+| `prefers-reduced-motion` on float animation | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Static (always-float) variant for reduced-motion | ✅ | ❌ | ❌ | ❌ | ✅ |
+| `aria-placeholder` not used as a label substitute | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `variant` input | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — real `<label>` element, contrast, reduced-motion static variant all implemented.
+
+#### Differentiators
+
+- **`prefers-reduced-motion` provides a static-float variant**: PrimeNG FloatLabel animates the label on every focus / blur regardless of the user's motion preference. When `prefers-reduced-motion: reduce` is detected, the library defaults to the `always` variant — the label is positioned above the field from the start, providing the same information hierarchy without any animation.
+- **Contrast ≥ 3:1 in floated position guaranteed by design tokens**: The floated label colour uses `var(--uilib-input-label-float-color)`, which is set to a value meeting WCAG SC 1.4.3 against the input background in all three visual variants — removing the common pitfall of a label that passes contrast when large and unfloated but fails when small and floated.
+- **No `aria-placeholder` as label substitute**: PrimeNG and some community implementations use `placeholder` attribute styling to simulate a floating label, which means the label is read as a placeholder (not announced in VoiceOver's Forms mode) and disappears on input. The library always uses a real `<label>` element.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/form-field (MatFormField with floating label)
+- PrimeNG: https://primeng.org/floatlabel
+- Radix UI: N/A — no FloatLabel primitive
+- Ark UI: N/A — no FloatLabel primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (label association for text inputs)
+
+---
+
+### InputGroup
+
+InputGroup is a container that combines a text input with prefix and/or suffix addons — icons, text strings, or action buttons — in a visually unified group.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Decorative addons `aria-hidden` | ❌ | ⚠️ (partial) | ❌ | ❌ | ✅ |
+| Interactive addon buttons with `aria-label` | ❌ | ⚠️ (no enforcement) | ❌ | ❌ | ✅ |
+| Input `aria-describedby` linked to text addon | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Single focusable unit — addons don't interrupt Tab | ✅ | ⚠️ (varies) | ❌ | ❌ | ✅ |
+| `aria-label` on addon button includes input context | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — decorative `aria-hidden`, interactive addon labels, and input `aria-describedby` all implemented.
+
+#### Differentiators
+
+- **Input `aria-describedby` linked to text addons**: When an InputGroup has a text suffix (e.g., ".com" or "kg"), that suffix is wired to the input via `aria-describedby` — so screen readers announce "username .com" when the field receives focus, giving users the same contextual constraint that sighted users infer visually. No reference library implements this.
+- **Addon button `aria-label` includes input context**: An addon clear button carries `aria-label="Clear username"` rather than just "Clear" — so screen reader users in virtual cursor mode navigating a form with multiple InputGroups can identify which field the button belongs to without backtracking to read the label.
+- **Decorative vs interactive addon classification**: The `addon` slot accepts both decorative icons (automatically `aria-hidden`) and interactive buttons (which require an explicit `aria-label` — enforced by a dev-mode warning). This classification prevents the common mistake of shipping an unlabelled interactive addon in a production build.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/form-field (prefix / suffix)
+- PrimeNG: https://primeng.org/inputgroup
+- Radix UI: N/A — no InputGroup primitive
+- Ark UI: N/A — no InputGroup primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (input with associated controls)
+
+---
+
+### IconField
+
+IconField is a lightweight wrapper that positions an icon inside a text input — visually overlapping the input — without intercepting focus or altering keyboard behaviour.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Decorative icon `aria-hidden` | ✅ | ⚠️ (partial) | ✅ | ✅ | ✅ |
+| No focus intercept — icon is not focusable | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Input padding compensates for icon width | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Informative icon mode with `aria-describedby` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Icon position (left / right) as signal input | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `position` input | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — decorative `aria-hidden`, no focus intercept, and informative mode all implemented.
+
+#### Differentiators
+
+- **Informative icon mode with `aria-describedby`**: When the icon carries semantic meaning (e.g., a search magnifier indicating that the field drives a live search), passing `informative=true` renders the icon with a visually-hidden `<span>` and links it to the input via `aria-describedby` — so screen readers announce the context. No reference library exposes this pattern.
+- **`aria-hidden` enforced by default**: The icon slot defaults to `aria-hidden=true`. If the icon is changed to an alert or warning symbol by the consumer without setting `informative=true`, the dev-mode warning guides them to the correct accessibility pattern rather than silently shipping an ambiguous, hidden icon.
+- **No focus intercept — icon is absolutely positioned outside the tab order**: The icon `<span>` is positioned with `pointer-events: none` and `tabindex` is never set, ensuring the input remains the sole interactive element in the field regardless of icon placement.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/form-field (matPrefix / matSuffix icons)
+- PrimeNG: https://primeng.org/iconfield
+- Radix UI: N/A — no IconField primitive
+- Ark UI: N/A — no IconField primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (input with decorative icon)
+
+---
+
+### FormField
+
+FormField is a layout orchestrator that wires a label, input, optional hint, and optional error message into a single accessible unit via `aria-labelledby` and `aria-describedby`.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Label → input association via `for` / `id` | ✅ | ⚠️ (manual) | ✅ | ✅ | ✅ |
+| `aria-describedby` links input → hint + error | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Error visible only when invalid (`aria-live`) | ✅ | ⚠️ (manual) | ✅ | ✅ | ✅ |
+| `aria-required` propagated to inner input | ✅ | ❌ | ✅ | ✅ | ✅ |
+| `aria-invalid` propagated to inner input | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Works with any custom `ControlValueAccessor` | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native validation state | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — label association, `aria-describedby` chain, `aria-required` / `aria-invalid` propagation, and `ControlValueAccessor` compatibility all implemented.
+
+#### Differentiators
+
+- **Full `aria-describedby` chain to hint + error**: The inner input is linked to both the hint element and the error message element via `aria-describedby`. When the control becomes invalid, the error element appears and the screen reader reads "Email — Enter a valid email address — Invalid email format" in a single focus event — satisfying WCAG SC 1.3.1 without any consumer boilerplate. PrimeNG has no equivalent orchestrator.
+- **`aria-required` and `aria-invalid` propagated to any CVA**: FormField queries the projected `ControlValueAccessor` and writes `aria-required` / `aria-invalid` directly to the host element's ARIA attributes via the `AriaControlBridge` service — so third-party or custom input components automatically get correct ARIA without needing to implement it themselves.
+- **Error `aria-live=polite` region**: When a validation error first appears, the error container acts as an `aria-live=polite` region so screen reader users are notified of the new error message on the next pause without being interrupted mid-sentence — meeting WCAG SC 3.3.1 (Error Identification) accessibly.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/form-field
+- PrimeNG: N/A — no unified FormField orchestrator (label, hint, and error managed separately)
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/form
+- Ark UI: https://ark-ui.com/react/docs/components/field
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/textbox/ (label + error association for form inputs)
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -3000,6 +3177,111 @@ None — `aria-label`, `aria-hidden` when off-screen, reduced-motion, and focus 
 - Radix UI: N/A — no ScrollTop primitive
 - Ark UI: N/A — no ScrollTop primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (scroll-to-top follows the standard button pattern)
+
+---
+
+### Icon
+
+Icon renders an SVG or icon-font glyph with a strict decorative-vs-informative ARIA contract — `aria-hidden` by default, informative mode with `aria-label`.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-hidden=true` by default (decorative) | ✅ | ⚠️ (inconsistent) | ✅ | ✅ | ✅ |
+| Informative mode via `aria-label` | ✅ | ⚠️ (no input; must be hand-set) | ✅ | ✅ | ✅ |
+| `role=img` in informative mode | ✅ | ❌ | ✅ | ✅ | ✅ |
+| `focusable=false` on inline SVG | ✅ | ⚠️ (partial) | ✅ | ✅ | ✅ |
+| Dev-mode warning when informative without `aria-label` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `name` + `ariaLabel` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — decorative default, informative `role=img` + `aria-label`, and SVG `focusable=false` all implemented.
+
+#### Differentiators
+
+- **Dev-mode warning when informative without `aria-label`**: When `decorative=false` is set but no `ariaLabel` is provided, the component emits a `console.warn` in development builds — catching the single most common icon accessibility mistake (an icon that is marked as meaningful but has no accessible name) before it reaches production.
+- **`role=img` in informative mode**: PrimeNG icons carry no role attribute in any mode — setting an `aria-label` on a `<span>` without `role=img` produces unreliable announcement behaviour across screen readers. The library sets `role=img` when `decorative=false` so the icon is announced with a consistent "image" semantic across VoiceOver, NVDA, and JAWS.
+- **`focusable=false` on inline SVG**: Internet Explorer and some older browsers make inline SVGs focusable by default. The library sets `focusable="false"` on every rendered SVG element, preventing phantom Tab stops in hybrid / legacy environments.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/icon
+- PrimeNG: https://primeng.org/icons
+- Radix UI: N/A — no Icon primitive (community: Radix Icons package)
+- Ark UI: N/A — no Icon primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/img/ (informative image with `role=img`)
+
+---
+
+### IconButton
+
+IconButton is a button that renders with an icon as its sole visible content — `aria-label` is mandatory and enforced to prevent unlabelled interactive controls.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-label` required — enforced at build / dev time | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Icon `aria-hidden` inside button | ✅ | ⚠️ (inconsistent) | ✅ | ✅ | ✅ |
+| `aria-disabled` in sync with `disabled` input | ✅ | ⚠️ (`attr.disabled` only) | ✅ | ✅ | ✅ |
+| Tooltip auto-wired as `aria-describedby` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `prefers-reduced-motion` on press ripple | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `ariaLabel` input | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — mandatory `aria-label`, icon `aria-hidden`, `aria-disabled` sync, and tooltip wiring all implemented.
+
+#### Differentiators
+
+- **`aria-label` enforced as required**: The `ariaLabel` input has no default value and a dev-mode `console.error` fires if it is omitted — making it impossible to accidentally ship an unlabelled icon button. No reference library enforces this at the component level; they rely on consumer discipline or lint rules.
+- **Tooltip auto-wired as `aria-describedby`**: When a `ui-lib-tooltip` is projected alongside an IconButton, the component auto-generates matching `id` / `aria-describedby` pairs — so screen readers announce both the button label (from `aria-label`) and the supplementary tooltip description without any consumer wiring code.
+- **`aria-disabled` handling for focusable disabled state**: When `disabled=true` and `keepFocusable=true` are set simultaneously (e.g., for a disabled button that should still show a tooltip on focus), only `aria-disabled=true` is written — the native `disabled` attribute is not set, preserving keyboard reachability while communicating the disabled state to assistive technology.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/button (icon button variant)
+- PrimeNG: N/A — no standalone IconButton component (icon prop on Button used instead)
+- Radix UI: N/A — no IconButton primitive
+- Ark UI: N/A — no IconButton primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (button with accessible name from `aria-label`)
+
+---
+
+### ButtonGroup
+
+ButtonGroup is a container that visually and semantically groups related buttons, applying `role=group` + `aria-label` and managing shared variant / size styling.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=group` on container | ✅ | ❌ (plain `<span>`) | ✅ | ✅ | ✅ |
+| `aria-label` on group | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Shared `variant` / `size` cascade to children | ❌ | ✅ | ❌ | ❌ | ✅ |
+| First / last child border-radius rounding | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Keyboard: Tab moves into group, arrows move within | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `variant` + `size` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `role=group`, `aria-label`, toolbar-model keyboard navigation, and variant cascade all implemented.
+
+#### Differentiators
+
+- **`role=group` + `aria-label` — absent from PrimeNG**: PrimeNG ButtonGroup renders a plain `<span>` wrapper with no ARIA — screen readers have no indication that the enclosed buttons form a related group. The library wraps projected buttons in `role=group` + `aria-label` (e.g., "Text formatting actions") so assistive technology announces the group name when focus enters, aiding orientation in complex toolbars.
+- **Toolbar-model keyboard navigation**: Following the APG toolbar pattern, ButtonGroup exposes a single Tab stop — arrow keys move focus between member buttons. This prevents the Tab-key fatigue of navigating past 4–8 buttons in a dense editor toolbar while meeting WCAG SC 2.1.1.
+- **Shared `variant` / `size` via Angular DI context**: The `ButtonGroup` component provides a token consumed by each child `ui-lib-button` — setting `variant="outlined"` on the group applies it to all children without per-button repetition. Changing the group variant at runtime updates all children reactively through signals.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/button-toggle (ButtonToggleGroup)
+- PrimeNG: https://primeng.org/buttongroup
+- Radix UI: N/A — no ButtonGroup primitive (Toolbar used instead)
+- Ark UI: N/A — no ButtonGroup primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/ (button group follows toolbar keyboard model)
 
 ---
 

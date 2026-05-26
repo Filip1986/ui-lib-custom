@@ -4,6 +4,17 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 8 — RadioButton, Textarea, SelectButton, ToggleSwitch, InputOtp, KeyFilter, TreeSelect, Message]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — RadioButton + Textarea + SelectButton + ToggleSwitch + InputOtp + KeyFilter + TreeSelect (Core Inputs), Message (Feedback); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for RadioButton (8.8→8.9), Textarea (8.7→8.8), SelectButton (8.7→8.8), ToggleSwitch (8.8→8.9), InputOtp (8.7→8.8), KeyFilter (8.6→8.7), TreeSelect (8.6→8.7), Message (8.6→8.7)
+  AI_AGENT_CONTEXT.md: active focus updated (62/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 9
+
+---
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 7 — Alert, Badge, Tag, Chip, Skeleton, MeterGroup, Timeline, OrganizationChart]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Timeline + OrganizationChart (Data Display), Alert + Badge + Tag + Chip + Skeleton + MeterGroup (Feedback); zero unresolved gaps; 3+ differentiators each

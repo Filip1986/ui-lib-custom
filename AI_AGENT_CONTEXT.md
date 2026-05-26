@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 10 adds Upload + SplitButton (Core Inputs), Image + ImageCompare (Data Display), ScrollPanel + Fieldset + Toolbar (Layout & Containers), ScrollTop (new Utilities & Directives category) → **78 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (22 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 11 adds ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives) → **86 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (14 components remaining: Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Bind, Card, Stack, Grid, Fluid, ClassNames, ToggleButton done); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-27 [docs(workspace): sprint-a batch 11 — ToggleButton, FloatLabel, InputGroup, IconField, FormField, Icon, IconButton, ButtonGroup]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for ToggleButton/FloatLabel/InputGroup/IconField/FormField/Icon/ButtonGroup (all 8.7→8.8), IconButton (8.6→8.7)
+  AI_AGENT_CONTEXT.md: active focus updated (86/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 12 — final 14: Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Bind, Card, Stack, Grid, Fluid, ClassNames
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 10 — Upload, SplitButton, Image, ImageCompare, ScrollPanel, Fieldset, Toolbar, ScrollTop]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Upload + SplitButton (Core Inputs), Image + ImageCompare (Data Display), ScrollPanel + Fieldset + Toolbar (Layout & Containers), ScrollTop (new Utilities & Directives category); zero unresolved gaps; 3+ differentiators each
@@ -90,7 +99,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (78/100 benchmark sections complete)
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 11 — candidates: Icon, IconButton, ButtonGroup, Terminal, Knob (already in BENCHMARKS?), Avatar, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Ripple, Bind
+Next step: Sprint A batch 11
 
 Date: 2026-05-26 [docs(workspace): sprint-a batch 9 — Inplace, PanelMenu, TieredMenu, SpeedDial, Dock, BlockUI, Divider, Panel]
 Changed:
@@ -100,15 +109,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 10
-
-Date: 2026-05-26 [docs(workspace): sprint-a batch 8 — RadioButton, Textarea, SelectButton, ToggleSwitch, InputOtp, KeyFilter, TreeSelect, Message]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — RadioButton + Textarea + SelectButton + ToggleSwitch + InputOtp + KeyFilter + TreeSelect (Core Inputs), Message (Feedback); zero unresolved gaps; 3+ differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for RadioButton (8.8→8.9), Textarea (8.7→8.8), SelectButton (8.7→8.8), ToggleSwitch (8.8→8.9), InputOtp (8.7→8.8), KeyFilter (8.6→8.7), TreeSelect (8.6→8.7), Message (8.6→8.7)
-  AI_AGENT_CONTEXT.md: active focus updated (62/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 9
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
