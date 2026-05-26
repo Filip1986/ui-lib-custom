@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 6 adds InputNumber, InputMask, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator → **46 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (54 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 7 adds Timeline, OrganizationChart (Data Display), Alert, Badge, Tag, Chip, Skeleton, MeterGroup (Feedback) → **54 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (46 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 7 — Alert, Badge, Tag, Chip, Skeleton, MeterGroup, Timeline, OrganizationChart]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Timeline + OrganizationChart (Data Display), Alert + Badge + Tag + Chip + Skeleton + MeterGroup (Feedback); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for Alert (8.5→8.6), Badge (8.4→8.5), Tag (8.9→9.0), Chip (8.5→8.6), Skeleton (8.6→8.7), MeterGroup (8.3→8.4), Timeline (8.3→8.4), OrganizationChart (8.3→8.4)
+  AI_AGENT_CONTEXT.md: active focus updated (54/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 8 — candidates: Message, TreeSelect, SelectButton, InputOtp, KeyFilter, RadioButton, Textarea, ToggleSwitch, PanelMenu, TieredMenu
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 6 — InputNumber, InputMask, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — InputNumber + InputMask + ColorPicker (Core Inputs), VirtualScroller + DataView + OrderList + PickList + Paginator (Data Display); zero unresolved gaps; 3 differentiators each
@@ -90,7 +99,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (46/100 benchmark sections complete)
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 7 — candidates: Alert, Badge, Tag, Chip, Message, Skeleton, MeterGroup, Timeline, OrganizationChart, TreeSelect, SelectButton, InputOtp, KeyFilter
+Next step: Sprint A batch 7
 
 Date: 2026-05-26 [docs(workspace): sprint-a batch 5 — Password, Slider, CascadeSelect, DynamicDialog, BottomSheet, Menubar, ContextMenu, MegaMenu]
 Changed:
@@ -100,15 +109,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 6
-
-Date: 2026-05-26 [docs(workspace): sprint-a batch 4 — Rating, Popover, ConfirmPopup, Stepper, Tree, TreeTable, Chart, ProgressSpinner]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Rating (Core Inputs), Popover + ConfirmPopup (Overlay), Stepper (Navigation), Tree + TreeTable + Chart (Data Display), ProgressSpinner (Feedback); zero unresolved gaps; 3+ differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for Rating (8.7→8.8), TreeTable (8.5→8.6), ProgressSpinner (8.9→9.0), Chart (8.9→9.0)
-  AI_AGENT_CONTEXT.md: active focus updated (30/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 5
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
