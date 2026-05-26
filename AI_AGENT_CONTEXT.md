@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — **COMPLETE ✅** — 99 / 100 benchmark sections added (final batch 12: Card + Stack + Grid + Container + Fluid, Terminal + Ripple + AnimateOnScroll + AutoFocus + FocusTrap + StyleClass + Bind + ClassNames).
-- **Next queue:** I18n audit (Category 12 — all 100 components show `—`); Prompt 2: `scripts/generate-reference-doc.mjs` (never built); Prompt 5: `stylelint-plugin/no-unprefixed-motion.mjs` (never built).
+- **Active focus:** I18n audit (Category 12) — **COMPLETE ✅** — all 100 components scored (scores 5–8; library infra exists but components not yet wired to `UiLibI18nService`; main gaps: RTL tests, README i18n sections, hardcoded English aria-labels in ~32 components).
+- **Next queue:** Wire components to `UiLibI18nService` (replace hardcoded English aria-labels with `inject(UiLibI18nService).translate()` calls); Prompt 2: `scripts/generate-reference-doc.mjs` (never built); Prompt 5: `stylelint-plugin/no-unprefixed-motion.mjs` (never built).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,14 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-27 [docs(workspace): i18n-audit — Category 12 scored for all 100 components]
+Changed:
+  docs/COMPONENT_SCORES.md: I18n column filled for all 100 components (was all `—`); scores 5–8 based on 12-criterion rubric; all averages recomputed over 11 categories; legend updated to "all 11 categories ≥ 8"; no component drops below 🟢
+  AI_AGENT_CONTEXT.md: active focus → i18n audit complete; next queue updated
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Wire components to UiLibI18nService — replace hardcoded English aria-labels in ~32 components (Dialog, Drawer, Paginator, Select, AutoComplete, etc.) with `inject(UiLibI18nService).translate()` calls; add README i18n sections
+
 Date: 2026-05-27 [docs(workspace): sprint-a batch 12 — Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap + Card/Stack/Grid/Container/Fluid/StyleClass/Bind/ClassNames]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 13 sections — Card + Stack + Grid + Container + Fluid (Layout & Containers), Terminal + Ripple + AnimateOnScroll + AutoFocus + FocusTrap + StyleClass + Bind + ClassNames (Utilities & Directives); Sprint A complete — 99/100 sections
@@ -100,15 +108,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 12 — final 14: Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Bind, Card, Stack, Grid, Fluid, ClassNames
-
-Date: 2026-05-26 [docs(workspace): sprint-a batch 10 — Upload, SplitButton, Image, ImageCompare, ScrollPanel, Fieldset, Toolbar, ScrollTop]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Upload + SplitButton (Core Inputs), Image + ImageCompare (Data Display), ScrollPanel + Fieldset + Toolbar (Layout & Containers), ScrollTop (new Utilities & Directives category); zero unresolved gaps; 3+ differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for ScrollPanel (8.9→9.0), Toolbar (8.9→9.0), ImageCompare (8.9→9.0), Upload (8.9→9.0), Image (8.7→8.8), SplitButton (8.6→8.7), ScrollTop (8.4→8.5); Fieldset already at Comp 9
-  AI_AGENT_CONTEXT.md: active focus updated (78/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 11
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

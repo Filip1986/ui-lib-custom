@@ -4,6 +4,28 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-27 [docs(workspace): sprint-a batch 11 — ToggleButton, FloatLabel, InputGroup, IconField, FormField, Icon, IconButton, ButtonGroup]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for ToggleButton/FloatLabel/InputGroup/IconField/FormField/Icon/ButtonGroup (all 8.7→8.8), IconButton (8.6→8.7)
+  AI_AGENT_CONTEXT.md: active focus updated (86/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 12 — final 14: Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Bind, Card, Stack, Grid, Fluid, ClassNames
+
+---
+
+Date: 2026-05-26 [docs(workspace): sprint-a batch 10 — Upload, SplitButton, Image, ImageCompare, ScrollPanel, Fieldset, Toolbar, ScrollTop]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Upload + SplitButton (Core Inputs), Image + ImageCompare (Data Display), ScrollPanel + Fieldset + Toolbar (Layout & Containers), ScrollTop (new Utilities & Directives category); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for ScrollPanel (8.9→9.0), Toolbar (8.9→9.0), ImageCompare (8.9→9.0), Upload (8.9→9.0), Image (8.7→8.8), SplitButton (8.6→8.7), ScrollTop (8.4→8.5); Fieldset already at Comp 9
+  AI_AGENT_CONTEXT.md: active focus updated (78/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 11
+
+---
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 9 — Inplace, PanelMenu, TieredMenu, SpeedDial, Dock, BlockUI, Divider, Panel]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category); zero unresolved gaps; 3+ differentiators each
