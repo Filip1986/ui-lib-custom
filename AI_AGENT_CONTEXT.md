@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint week closed — 4 Prompt 7 upgrades shipped (Select 9.1, AutoComplete 8.9, CascadeSelect 8.9, ColorPicker 8.9); Sprint A benchmark backfill started (4/100: Avatar, Carousel, Galleria, Knob — PR #254 open).
-- **Next queue:** Merge open PRs (#250–254); continue Sprint A competitive benchmark backfill (96 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — 10/100 components done in batch 1 (Avatar, Carousel, Galleria, Knob); batch 2 adds Accordion, AutoComplete, Checkbox, DatePicker, Toast, Tooltip → 16/100 total.
+- **Next queue:** Continue Sprint A benchmark backfill (84 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,14 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a benchmarks batch 2 — Accordion, AutoComplete, Checkbox, DatePicker, Toast, Tooltip]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 6 new sections — AutoComplete (Core Inputs), Checkbox (Core Inputs), DatePicker (Core Inputs), Tooltip (Overlay & Modal), Accordion (Navigation & Menus), Toast (new Feedback & Status category); zero unresolved gaps across all 6; 3 differentiators each
+  AI_AGENT_CONTEXT.md: active focus updated (16/100 benchmark sections now complete)
+State: Docs-only change, no build needed; typecheck passed on push
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 3 — next 6–8 components (candidates: Drawer, ConfirmDialog, Tree, TreeTable, Listbox, Menu, Breadcrumb, ProgressBar)
+
 Date: 2026-05-26 [docs(workspace): friday wrap — inventory avg 8.73, sprint closed, old handoffs archived]
 Changed:
   AI_AGENT_CONTEXT.md: active session state updated (library-wide avg 8.73/10, sprint week COMPLETE, next queue: merge PRs + Sprint A backfill + I18n audit); week schedule ticked Fri AM + Fri PM; handoffs trimmed to 3
@@ -99,18 +107,6 @@ State: Docs-only change, no build needed; typecheck passed on push, PR #254 open
 Verification: git push (typecheck PASS)
 Next step: Prompt 14 — Friday wrap (this entry above)
 
-Date: 2026-05-26 [feat(lib): color-picker prompt-7 quality upgrade — score 8.2→8.9, PR #253]
-Changed:
-  projects/ui-lib-custom/src/lib/color-picker/color-picker.scss: focus-ring tokens (--uilib-colorpicker-focus-ring-color/width); transition-duration now defaults to --uilib-transition-duration-fast; panel enter animation wired to global transition tokens; prefers-reduced-motion: animation:none added
-  projects/ui-lib-custom/src/lib/color-picker/color-picker.ts: JSDoc on all 8 inputs and 3 outputs
-  projects/ui-lib-custom/src/lib/color-picker/README.md: fixed output name change→colorChange; rewrote keyboard table with per-context accuracy (canvas vs hue-slider)
-  docs/reference/components/color-picker.md: full rewrite — APG dialog pattern, ARIA wiring (13 rows, corrects aria-hidden on canvas), CSS var list, keyboard table
-  docs/reference/a11y-sessions/color-picker.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (6 steps)
-  projects/demo/src/app/pages/color-picker/color-picker-demo.component.ts: rescored 8.2→8.9, date 2026-05-26, value + appendTo API rows, corrected keyboard table (7 rows) + ARIA table (13 rows), 3 CSS-var rows, APG pattern linked
-  docs/COMPONENT_SCORES.md: ColorPicker 8.2→8.9; bundle snapshot refreshed
-State: ESLint 0 warnings, stylelint 0 errors (3 pre-existing warnings), ng build clean, typecheck passed, PR #253 open
-Verification: npx stylelint color-picker.scss (0 errors); npx eslint color-picker/ --max-warnings 0 (PASS); git push (typecheck PASS)
-Next step: Sprint A benchmark backfill for Knob, Avatar, Carousel, Galleria (done above)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
