@@ -1751,6 +1751,73 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ---
 
+### Timeline
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Vertical layout                                              | ❌ (no Timeline) | ✅       | N/A      | N/A    | ✅                 |
+| Horizontal layout                                            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `role=list` on the timeline container                        | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `role=listitem` per timeline entry                           | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Connector / marker elements `aria-hidden`                    | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Custom marker template                                       | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom content template per item                             | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Alternate left/right content layout                          | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no Timeline component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **`role=list` / `role=listitem` semantics**: The timeline container renders as a `<ol role="list">` and each event as a `<li role="listitem">`, so screen readers announce the list count and navigate item by item using list keyboard shortcuts. PrimeNG renders Timeline as a series of absolutely-positioned `<div>` elements with no semantic list structure — screen readers cannot perceive the number of events or navigate the timeline as a list.
+- **Connector and marker elements `aria-hidden`**: The visual connector lines and step-indicator dots are marked `aria-hidden="true"` so screen readers do not attempt to describe purely decorative graphics alongside the event content. PrimeNG does not consistently apply `aria-hidden` to its timeline decorations.
+- **Signal-native API**: Events bound via `input<TimelineItem[]>()` — the array can be a `computed()` signal derived from server-fetched activity data without zone triggers.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Timeline component
+- PrimeNG: https://primeng.org/timeline
+- Radix UI: N/A — no Timeline primitive
+- Ark UI: N/A — no Timeline primitive
+- APG Pattern: N/A — Timeline is a display-only list; `role=list` pattern applies
+
+---
+
+### OrganizationChart
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Hierarchical node tree rendering                             | ❌ (no OrgChart) | ✅       | N/A      | N/A    | ✅                 |
+| `role=tree` on the container                                 | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `role=treeitem` per node                                     | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-expanded` on nodes with children                       | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-level` / `aria-setsize` / `aria-posinset` per node     | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Arrow key navigation through the chart                       | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Node selection (`aria-selected`)                             | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Collapse / expand subtrees                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom node content template                                 | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no OrganizationChart component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **`role=tree` / `role=treeitem` semantics**: The chart container uses `role=tree` and each node uses `role=treeitem`, enabling screen readers to navigate the organisational hierarchy using tree keyboard shortcuts. PrimeNG renders OrganizationChart as nested `<div>` and `<table>` elements with no ARIA tree semantics — the hierarchy is entirely visual and opaque to assistive technology.
+- **Full tree keyboard pattern**: Arrow keys expand/collapse subtrees and move focus between nodes; `aria-expanded` communicates whether a node's children are visible; `aria-level`, `aria-setsize`, and `aria-posinset` communicate each node's depth and sibling position. PrimeNG does not implement any keyboard navigation on its OrganizationChart.
+- **`aria-level` / `aria-setsize` / `aria-posinset`**: Screen readers can announce "Level 2, item 3 of 5, Marketing Manager" as the user navigates between peers at the same level — context that is unavailable in PrimeNG's implementation.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no OrganizationChart component
+- PrimeNG: https://primeng.org/organizationchart
+- Radix UI: N/A — no OrgChart primitive
+- Ark UI: N/A — no OrgChart primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/ (OrgChart follows the tree view pattern)
+
+---
+
 ## Feedback & Status
 
 ---
@@ -1860,6 +1927,203 @@ _None — all ❌ reference rows are matched or consciously excluded._
 - Radix UI: N/A — no ProgressSpinner primitive
 - Ark UI: N/A — no ProgressSpinner primitive
 - APG Pattern: N/A — `role=status` covers loading spinners; no dedicated APG spinner pattern
+
+---
+
+### Alert
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=alert` for error / danger severity                     | ⚠️ no Alert component | ⚠️ Messages uses `role=alert` for all | N/A | ✅ | 🚀 |
+| `role=status` for info / success / warning                   | ⚠️               | ❌ uses `role=alert` for all severities | N/A | ✅ | 🚀 |
+| Severity variants (success / info / warning / error)         | ❌                | ✅ as Messages   | N/A      | ✅      | ✅                 |
+| Dismissible variant with accessible close button             | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Close button `aria-label` includes alert content summary     | ❌                | ⚠️      | N/A      | ✅      | 🚀                |
+| Icon `aria-hidden` when severity icon is decorative          | ❌                | ⚠️      | N/A      | ✅      | ✅                 |
+| Custom content via content projection                        | ❌                | ✅       | N/A      | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — Angular Material has no inline Alert component; PrimeNG's Messages is the reference and all its features are matched._
+
+#### Differentiators
+- **Urgency-correct live region role**: Error/danger alerts use `role=alert` (assertive — interrupts the screen reader immediately) while info/success/warning alerts use `role=status` (polite — waits for the current utterance to finish). PrimeNG's Messages component applies `role=alert` to all severity levels regardless of urgency, unnecessarily interrupting users with low-priority notifications.
+- **Close button `aria-label` with content context**: The dismiss button's `aria-label` includes a summary of the alert it closes (e.g., "Dismiss: File saved successfully"), allowing screen reader users to identify which notification they are dismissing without reading the full content first. PrimeNG's close button has a generic label.
+- **Signal-native API**: Severity and visibility bound via `input()` signals — composable with form validation state `computed()` signals for reactive inline feedback patterns.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no inline Alert component (uses Snackbar for notifications)
+- PrimeNG: https://primeng.org/messages (PrimeNG calls this component "Messages")
+- Radix UI: N/A — no Alert primitive
+- Ark UI: N/A — no dedicated Alert component
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alert/ (Alert pattern — `role=alert` for assertive, `role=status` for polite)
+
+---
+
+### Badge
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Numeric count overlay on host element                        | ✅ MatBadge      | ✅       | N/A      | N/A    | ✅                 |
+| Dot indicator variant (no count)                             | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Positioning variants (top-right / top-left / etc.)           | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Host element `aria-label` supplemented with badge value      | ⚠️               | ❌       | N/A      | N/A    | 🚀                |
+| Badge element `aria-hidden` (value surfaced via host label)  | ⚠️               | ❌       | N/A      | N/A    | 🚀                |
+| `ariaLabel` input for custom screen-reader text              | ✅                | ❌       | N/A      | N/A    | ✅                 |
+| Severity / colour variants                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Hidden when value is zero or null                            | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Host element `aria-label` supplemented with badge value**: The badge directive updates the host element's accessible name to include the badge count (e.g., a button labelled "Notifications" becomes "Notifications, 5 unread"). Screen readers announce the count as part of the element they are already reading, without requiring the user to navigate to a separate badge element. PrimeNG's Badge does not modify the host's `aria-label`.
+- **Badge `aria-hidden`**: The visible badge number element is `aria-hidden="true"` — the count is conveyed through the host label rather than as a separate announced number, avoiding duplicate announcements (e.g., "Notifications button, 5 — Notifications, 5 unread"). PrimeNG does not hide the badge element from AT.
+- **Signal-native API**: Badge value bound via `input<number | string>()` — composes directly with signal-based notification count selectors.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/badge/overview
+- PrimeNG: https://primeng.org/badge
+- Radix UI: N/A — no Badge primitive
+- Ark UI: N/A — no Badge primitive
+- APG Pattern: N/A — Badge is a display overlay; host-element `aria-label` pattern applies
+
+---
+
+### Tag
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Inline label chip / tag display                              | ✅ mat-chip      | ✅       | N/A      | N/A    | ✅                 |
+| Severity / colour variants                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Rounded / square shape variants                              | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Icon support                                                 | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Dismissible variant with remove button                       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Remove button `aria-label` includes the tag text             | ⚠️               | ❌       | N/A      | N/A    | 🚀                |
+| Icon `aria-hidden` when decorative                           | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| `value` input for `aria-label` override                      | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Remove button `aria-label` includes the tag text**: The dismiss button's label is automatically computed as "Remove [tag label]" (e.g., "Remove Angular"). Screen reader users can identify which tag they are about to delete without first reading the tag label separately. PrimeNG's Tag remove button has no accessible name; Angular Material's chip close button uses a generic "Remove chip" label without the chip's text.
+- **`ariaLabel` override input**: An `ariaLabel` input allows the consumer to replace the default accessible name entirely for cases where the visual text is abbreviated or needs supplementary context.
+- **Signal-native API**: Tag value bound via `input<string>()` — the label composes with `computed()` signals that derive tag text from data models without zone triggers.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/chips/overview
+- PrimeNG: https://primeng.org/tag
+- Radix UI: N/A — no Tag primitive
+- Ark UI: N/A — no Tag primitive (Ark's TagsInput is an input control, not a display component)
+- APG Pattern: N/A — display-only tag; remove button follows the button pattern
+
+---
+
+### Chip
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Inline label + optional image / icon                         | ✅ mat-chip      | ✅       | N/A      | N/A    | ✅                 |
+| Selectable / toggle mode (`aria-pressed` or `aria-selected`) | ✅                | ⚠️      | N/A      | N/A    | 🚀                |
+| Chip group with `role=group` + `aria-label`                  | ✅                | ❌       | N/A      | N/A    | 🚀                |
+| Removable variant — remove button `aria-label` with chip name | ✅ partial       | ⚠️      | N/A      | N/A    | 🚀                |
+| Image `alt` text propagated to chip accessible name          | ⚠️               | ⚠️      | N/A      | N/A    | ✅                 |
+| Disabled state with `aria-disabled`                          | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Icon `aria-hidden` when decorative                           | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Signal-native API (`model()` for selected state)             | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Selectable chip with correct ARIA**: In selectable mode each chip uses `aria-pressed` (toggle button semantics) or `aria-selected` (within a listbox group), depending on whether the selection is independent or mutually exclusive. PrimeNG's Chip component does not implement a selection role — it has no toggle or selected state semantics at all.
+- **Chip group with `role=group` + `aria-label`**: When chips are placed inside a `ui-lib-chip-group`, the container receives `role=group` and the consumer-supplied `ariaLabel`, giving screen readers a named context (e.g., "Selected filters, group"). PrimeNG has no chip group component.
+- **Remove button `aria-label` with chip name**: The remove button's label is computed as "Remove [chip label]" (e.g., "Remove JavaScript"), allowing screen readers to identify what will be deleted without first reading the chip's content.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/chips/overview
+- PrimeNG: https://primeng.org/chip
+- Radix UI: N/A — no Chip primitive
+- Ark UI: N/A — no Chip primitive (Ark's TagsInput manages editable tags)
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (toggle button for selectable chips)
+
+---
+
+### Skeleton
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Loading placeholder animation                                | ❌ (no Skeleton) | ✅       | N/A      | N/A    | ✅                 |
+| Container `aria-busy=true` while skeleton is shown           | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Container `aria-label="Loading..."` during skeleton state    | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Skeleton elements `aria-hidden="true"`                       | ❌                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-live=polite` announces when real content loads         | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `prefers-reduced-motion` — pulse animation disabled          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Shape variants (rectangle / circle / text line)              | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Configurable width / height                                  | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no Skeleton component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **Container `aria-busy=true` + `aria-label="Loading..."`**: The wrapping container receives `aria-busy="true"` while skeleton content is shown and `aria-label="Loading"`, following the ARIA pattern for communicating to screen readers that the region is loading. PrimeNG renders skeleton shapes with no loading state semantics — the page appears fully loaded to assistive technology while skeletons are visible.
+- **Skeleton elements `aria-hidden`**: Individual skeleton shape elements are `aria-hidden="true"` so screen readers do not attempt to describe the placeholder rectangles or circles. The accessible state is communicated entirely through the container's `aria-busy` and `aria-label`.
+- **`aria-live=polite` on content reveal**: When the skeleton is replaced by real content, the container transitions `aria-busy` to false, triggering screen reader re-announcement. An optional `loadedLabel` input provides a polite announcement (e.g., "Content loaded") when the skeleton disappears.
+- **`prefers-reduced-motion`**: The pulsing shimmer animation is disabled entirely when `prefers-reduced-motion: reduce` is active. PrimeNG does not apply this guard to its skeleton animation.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no Skeleton component
+- PrimeNG: https://primeng.org/skeleton
+- Radix UI: N/A — no Skeleton primitive
+- Ark UI: N/A — no Skeleton primitive
+- APG Pattern: N/A — `aria-busy` on the container follows ARIA loading state conventions; no dedicated APG pattern
+
+---
+
+### MeterGroup
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Multiple named segments in one visual bar                    | ❌ (no MeterGroup) | ✅     | N/A      | N/A    | ✅                 |
+| `role=meter` per named segment                               | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-label` per segment (segment name)                      | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| `aria-valuenow` / `aria-valuemin` / `aria-valuemax` per segment | ❌             | ❌       | N/A      | N/A    | 🚀                |
+| `aria-valuetext` with human-readable segment description     | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Total / overflow segment with its own `aria-label`           | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Custom label template per segment                            | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Stacked + separate display modes                             | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — Angular Material has no MeterGroup component; PrimeNG is the only reference and all its features are matched._
+
+#### Differentiators
+- **`role=meter` per segment**: Each named segment renders as a `role=meter` element with its own `aria-label`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`, allowing screen readers to navigate and announce each segment independently (e.g., "Downloads: 45 of 100"). PrimeNG renders all segments as plain `<div>` elements with no ARIA meter semantics — the multi-segment breakdown is completely invisible to assistive technology.
+- **`aria-valuetext` per segment**: Each meter's `aria-valuetext` is computed from the segment's label and value (e.g., "Downloads, 45%"), giving a human-readable description rather than a raw number.
+- **Total segment with `aria-label`**: When segments collectively exceed 100%, or when a total summary row is displayed, it receives its own `aria-label` (e.g., "Total used: 87 of 100") — a context that PrimeNG does not expose to AT.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io — no MeterGroup component
+- PrimeNG: https://primeng.org/metergroup
+- Radix UI: N/A — no MeterGroup primitive
+- Ark UI: N/A — no MeterGroup primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/meter/ (each segment follows the ARIA meter pattern)
 
 ---
 
