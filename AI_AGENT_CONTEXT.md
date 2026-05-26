@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 11 adds ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives) → **86 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (14 components remaining: Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Bind, Card, Stack, Grid, Fluid, ClassNames, ToggleButton done); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — **COMPLETE ✅** — 99 / 100 benchmark sections added (final batch 12: Card + Stack + Grid + Container + Fluid, Terminal + Ripple + AnimateOnScroll + AutoFocus + FocusTrap + StyleClass + Bind + ClassNames).
+- **Next queue:** I18n audit (Category 12 — all 100 components show `—`); Prompt 2: `scripts/generate-reference-doc.mjs` (never built); Prompt 5: `stylelint-plugin/no-unprefixed-motion.mjs` (never built).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-27 [docs(workspace): sprint-a batch 12 — Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap + Card/Stack/Grid/Container/Fluid/StyleClass/Bind/ClassNames]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 13 sections — Card + Stack + Grid + Container + Fluid (Layout & Containers), Terminal + Ripple + AnimateOnScroll + AutoFocus + FocusTrap + StyleClass + Bind + ClassNames (Utilities & Directives); Sprint A complete — 99/100 sections
+  docs/COMPONENT_SCORES.md: Comp 8→9 for Terminal (8.9→9.0), Ripple (8.7→8.8), AnimateOnScroll (8.6→8.7), AutoFocus (8.7→8.8), FocusTrap (8.4→8.5); 8 already at Comp 9 (Card, Stack, Grid, Container, Fluid, StyleClass, Bind, ClassNames)
+  AI_AGENT_CONTEXT.md: active focus → Sprint A complete; handoffs rotated
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: I18n audit (Category 12 — all 100 components show `—`)
+
 Date: 2026-05-27 [docs(workspace): sprint-a batch 11 — ToggleButton, FloatLabel, InputGroup, IconField, FormField, Icon, IconButton, ButtonGroup]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives); zero unresolved gaps; 3+ differentiators each
@@ -100,16 +109,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 11
-
-Date: 2026-05-26 [docs(workspace): sprint-a batch 9 — Inplace, PanelMenu, TieredMenu, SpeedDial, Dock, BlockUI, Divider, Panel]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category); zero unresolved gaps; 3+ differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for Inplace (8.9→9.0), Divider (8.7→8.8); PanelMenu/TieredMenu/SpeedDial/Dock/BlockUI/Panel already at Comp 9
-  AI_AGENT_CONTEXT.md: active focus updated (70/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 10
-
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
