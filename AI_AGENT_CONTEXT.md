@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 8 adds RadioButton, Textarea, SelectButton, ToggleSwitch, InputOtp, KeyFilter, TreeSelect (Core Inputs), Message (Feedback) → **62 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (38 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 9 adds Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category) → **70 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (30 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 9 — Inplace, PanelMenu, TieredMenu, SpeedDial, Dock, BlockUI, Divider, Panel]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for Inplace (8.9→9.0), Divider (8.7→8.8); PanelMenu/TieredMenu/SpeedDial/Dock/BlockUI/Panel already at Comp 9
+  AI_AGENT_CONTEXT.md: active focus updated (70/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 10 — candidates: ScrollPanel, ScrollTop, Fieldset, Toolbar, Image, ImageCompare, Upload, Icon, IconButton, ButtonGroup, SplitButton, Terminal
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 8 — RadioButton, Textarea, SelectButton, ToggleSwitch, InputOtp, KeyFilter, TreeSelect, Message]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — RadioButton + Textarea + SelectButton + ToggleSwitch + InputOtp + KeyFilter + TreeSelect (Core Inputs), Message (Feedback); zero unresolved gaps; 3+ differentiators each
@@ -90,7 +99,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (62/100 benchmark sections complete)
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 9 — candidates: PanelMenu, TieredMenu, SpeedDial, Dock, Inplace, Terminal, BlockUI, ScrollTop, ScrollPanel, Divider, Fieldset, Panel
+Next step: Sprint A batch 9
 
 Date: 2026-05-26 [docs(workspace): sprint-a batch 7 — Alert, Badge, Tag, Chip, Skeleton, MeterGroup, Timeline, OrganizationChart]
 Changed:
@@ -100,15 +109,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 8
-
-Date: 2026-05-26 [docs(workspace): sprint-a batch 6 — InputNumber, InputMask, ColorPicker, VirtualScroller, DataView, OrderList, PickList, Paginator]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — InputNumber + InputMask + ColorPicker (Core Inputs), VirtualScroller + DataView + OrderList + PickList + Paginator (Data Display); zero unresolved gaps; 3 differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for InputMask (8.7→8.8), ColorPicker (8.9→9.0), VirtualScroller (8.5→8.6), DataView (8.3→8.4), OrderList (8.7→8.8), PickList (8.7→8.8), Paginator (8.5→8.6)
-  AI_AGENT_CONTEXT.md: active focus updated (46/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 7
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
