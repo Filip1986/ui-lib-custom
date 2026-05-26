@@ -19,9 +19,10 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Active Session State
 
-- **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ALL components hardened — 76 original queue items + all new components COMPLETE. Library hardening milestone achieved 2026-05-15.
-- **Next queue:** No remaining hardening items. Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
+- **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
+- **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
+- **Active focus:** Sprint week closed — 4 Prompt 7 upgrades shipped (Select 9.1, AutoComplete 8.9, CascadeSelect 8.9, ColorPicker 8.9); Sprint A benchmark backfill started (4/100: Avatar, Carousel, Galleria, Knob — PR #254 open).
+- **Next queue:** Merge open PRs (#250–254); continue Sprint A competitive benchmark backfill (96 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -82,6 +83,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): friday wrap — inventory avg 8.73, sprint closed, old handoffs archived]
+Changed:
+  AI_AGENT_CONTEXT.md: active session state updated (library-wide avg 8.73/10, sprint week COMPLETE, next queue: merge PRs + Sprint A backfill + I18n audit); week schedule ticked Fri AM + Fri PM; handoffs trimmed to 3
+  docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md: archived Select, AutoComplete, CascadeSelect handoff blocks
+State: Docs-only; typecheck passed on push
+Verification: git push (typecheck PASS)
+Next step: Merge open PRs (#250–254), then start Sprint A competitive benchmark backfill for next 4–8 components
+
+Date: 2026-05-26 [docs(workspace): sprint-a competitive benchmarks — Avatar, Carousel, Galleria, Knob, PR #254]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 4 new sections — Avatar, Carousel, Galleria, Knob — each with Feature/Behaviour parity table, Gaps (all zero), Differentiators, Reference URLs
+  docs/COMPONENT_SCORES.md: Comp column 8→9 for all 4; averages: Avatar 8.2→8.3, Knob 8.2→8.3, Carousel 8.3→8.4, Galleria 8.3→8.4
+State: Docs-only change, no build needed; typecheck passed on push, PR #254 open
+Verification: git push (typecheck PASS)
+Next step: Prompt 14 — Friday wrap (this entry above)
+
 Date: 2026-05-26 [feat(lib): color-picker prompt-7 quality upgrade — score 8.2→8.9, PR #253]
 Changed:
   projects/ui-lib-custom/src/lib/color-picker/color-picker.scss: focus-ring tokens (--uilib-colorpicker-focus-ring-color/width); transition-duration now defaults to --uilib-transition-duration-fast; panel enter animation wired to global transition tokens; prefers-reduced-motion: animation:none added
@@ -93,28 +110,7 @@ Changed:
   docs/COMPONENT_SCORES.md: ColorPicker 8.2→8.9; bundle snapshot refreshed
 State: ESLint 0 warnings, stylelint 0 errors (3 pre-existing warnings), ng build clean, typecheck passed, PR #253 open
 Verification: npx stylelint color-picker.scss (0 errors); npx eslint color-picker/ --max-warnings 0 (PASS); git push (typecheck PASS)
-Next step: Prompt 1 — Sprint A benchmark backfill for Knob, Avatar, Carousel, Galleria (Friday AM slot)
-
-Date: 2026-05-26 [feat(lib): cascade-select prompt-7 quality upgrade — score 8.2→8.9, PR #252]
-Changed:
-  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.types.ts: added CascadeSelectOptionContext, CascadeSelectValueContext, CascadeSelectOptionGroupIconContext
-  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts: typed TemplateRef<T> on all 7 template slots; JSDoc on all 20 inputs, 7 outputs, 7 contentChild properties
-  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss: focus-ring tokens; panel/level animation wired to transition global tokens; size font-size raw values → var(--uilib-font-size-sm/base/lg); prefers-reduced-motion: transform:none added
-  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.html: tabindex + keydown.enter on trigger and option li (a11y)
-  projects/ui-lib-custom/src/lib/cascade-select/index.ts: re-exports 3 new context types
-  projects/ui-lib-custom/src/lib/cascade-select/README.md: 7-slot content-projection table
-  docs/reference/components/cascade-select.md: full rewrite — corrected ARIA (listbox/option not tree/treeitem), cascadeChange output, APG keyboard table, projection table
-  docs/reference/a11y-sessions/cascade-select.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (6 steps)
-  projects/demo/src/app/pages/cascade-select/cascade-select-demo.component.ts: rescored 8.2→8.9, corrected ARIA rows, APG combobox pattern, 2 CSS-var rows
-  docs/COMPONENT_SCORES.md: CascadeSelect 8.2→8.9; bundle snapshot refreshed
-State: ESLint 0 warnings, stylelint 0 errors, ng build clean, pre-push typecheck passed, PR #252 open
-Verification: npx stylelint cascade-select.scss (0 errors, 2 warnings pre-existing); npx eslint cascade-select/ --max-warnings 0 (PASS); git push (typecheck PASS)
-Next step: Prompt 7 — 12-step upgrade on ColorPicker (Thursday PM slot, target 9.4)
-
-Date: 2026-05-26 [feat(lib): cascade-select + autocomplete + select prompt-7 upgrades — PRs #251, #252]
-Changed: See archive for details on autocomplete (PR #251) and select (score 9.1) upgrades
-State: All three committed and pushed; PRs open
-Next step: ColorPicker (done above)
+Next step: Sprint A benchmark backfill for Knob, Avatar, Carousel, Galleria (done above)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
@@ -156,8 +152,8 @@ Next wave (Friday benchmark prep):
 | Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | ✅ Score 8.9, PR #251, branch feat/autocomplete-9.5-upgrade |
 | Thu AM     | Prompt 7 — 12-step upgrade on **CascadeSelect** (target 9.4)                                 | ✅ Score 8.9, PR #252, branch feat/cascade-select-9.5-upgrade |
 | Thu PM     | Prompt 7 — 12-step upgrade on **ColorPicker** (target 9.4)                                   | ✅ Score 8.9, PR #253, branch feat/color-picker-9.4-upgrade |
-| Fri AM     | Prompt 1 — Sprint A benchmark backfill for **Knob, Avatar, Carousel, Galleria**              | 4 new sections in COMPETITIVE_BENCHMARKS.md    |
-| Fri PM     | Prompt 14 — Friday wrap (inventory avg, handoff block, trim old handoffs)                     | Updated AI_AGENT_CONTEXT.md + wrap commit      |
+| Fri AM     | Prompt 1 — Sprint A benchmark backfill for **Knob, Avatar, Carousel, Galleria**              | ✅ 4 sections in COMPETITIVE_BENCHMARKS.md, PR #254, Comp 8→9 for all 4 |
+| Fri PM     | Prompt 14 — Friday wrap (inventory avg, handoff block, trim old handoffs)                     | ✅ Library avg 8.73/10 recorded, handoffs trimmed, archive updated       |
 
 ### Upgrade criteria (Prompt 7 definition of done per component)
 
