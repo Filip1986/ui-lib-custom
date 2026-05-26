@@ -20,12 +20,13 @@
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
+      <ui-lib-tab value="playground" label="Playground" />
+      <ui-lib-tab value="variants" label="Variants" />
+      <ui-lib-tab value="edge-cases" label="Edge Cases" />
+      <ui-lib-tab value="api-reference" label="API Reference" />
+      <ui-lib-tab value="usage" label="Usage" />
+      <ui-lib-tab value="performance" label="Performance" />
+      <ui-lib-tab value="accessibility" label="Accessibility" />
     </ui-lib-tabs>
   </div>
 
@@ -35,7 +36,7 @@
         <p class="card-description">Choose variant and follow theme defaults.</p>
 
         <div class="control">
-          <label>Variant</label>
+          <span class="control-label">Variant</span>
           <div class="chips">
             @for (v of variants; track v) {
               <ui-lib-button
@@ -103,7 +104,7 @@
         <p class="card-description">Set placeholder text.</p>
 
         <div class="control">
-          <label>Placeholder</label>
+          <span class="control-label">Placeholder</span>
           <input
             type="text"
             [value]="placeholder()"
@@ -123,7 +124,7 @@
               }}</ui-lib-button>
             }
             <div class="custom">
-              <label>Custom</label>
+              <span class="control-label">Custom</span>
               <input
                 type="number"
                 min="200"
@@ -186,8 +187,7 @@
             [placeholder]="placeholder()"
             [ngModel]="value()"
             (ngModelChange)="value.set($event)"
-          >
-          </ui-lib-select>
+          />
 
           <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
         </div>
@@ -208,7 +208,7 @@
             [searchable]="searchable()"
             [multiple]="multiple()"
             [placeholder]="placeholder()"
-          ></ui-lib-select>
+          />
         </div>
 
         <div bootstrap>
@@ -219,7 +219,7 @@
             [searchable]="searchable()"
             [multiple]="multiple()"
             [placeholder]="placeholder()"
-          ></ui-lib-select>
+          />
         </div>
 
         <div minimal>
@@ -230,9 +230,53 @@
             [searchable]="searchable()"
             [multiple]="multiple()"
             [placeholder]="placeholder()"
-          ></ui-lib-select>
+          />
         </div>
       </app-variant-comparison>
+    </ui-lib-panel>
+  }
+
+  @if (activeTab() === 'edge-cases') {
+    <ui-lib-panel variant="minimal">
+      <p class="doc-list__intro">Three scenarios that stress-test edge cases: empty option list, invalid/error state, and a large dataset with search.</p>
+
+      <div class="demo-edge-cases">
+        <div class="demo-edge-case">
+          <h3 class="demo-edge-case__title">Empty options</h3>
+          <p class="demo-edge-case__desc">When <code>options</code> is an empty array the panel shows a "No results" message.</p>
+          <ui-lib-select
+            label="Country"
+            [options]="emptyOptions"
+            placeholder="Choose a country"
+          />
+        </div>
+
+        <div class="demo-edge-case">
+          <h3 class="demo-edge-case__title">Invalid / error state</h3>
+          <p class="demo-edge-case__desc"><code>[invalid]="true"</code> sets <code>aria-invalid</code> on the host and applies the danger border colour.</p>
+          <ui-lib-select
+            label="Required field"
+            [options]="options"
+            [invalid]="true"
+            [required]="true"
+            placeholder="Must be selected"
+            [ngModel]="invalidValue()"
+            (ngModelChange)="invalidValue.set($event)"
+          />
+          <p class="demo-edge-case__hint">Host receives <code>aria-invalid="true"</code> and <code>aria-required="true"</code>.</p>
+        </div>
+
+        <div class="demo-edge-case">
+          <h3 class="demo-edge-case__title">Large dataset — 150 options, 5 groups</h3>
+          <p class="demo-edge-case__desc">Searchable select with 150 grouped options. Type to filter; live region announces result count.</p>
+          <ui-lib-select
+            label="Large list"
+            [options]="largeOptions"
+            [searchable]="true"
+            placeholder="Search 150 options…"
+          />
+        </div>
+      </div>
     </ui-lib-panel>
   }
 

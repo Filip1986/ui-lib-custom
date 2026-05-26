@@ -1,7 +1,7 @@
 # Select
 
 **Selector:** `ui-lib-select`
-**Entry point:** `import { Select } from 'ui-lib-custom/select'`
+**Entry point:** `import { UiLibSelect } from 'ui-lib-custom/select'`
 
 ---
 
@@ -13,22 +13,21 @@ Select component with single or multiple selection and optional search.
 
 ### Inputs
 
-| Name             | Type                          | Default                | Description |
-| ---------------- | ----------------------------- | ---------------------- | ----------- |
-| `ariaLabel`      | `string | null`               | `null`                 | —           |
-| `ariaLabelledBy` | `string | null`               | `null`                 | —           |
-| `disabled`       | `boolean`                     | `false`                | —           |
-| `invalid`        | `boolean`                     | `false`                | —           |
-| `label`          | `string`                      | `''`                   | —           |
-| `loading`        | `boolean`                     | `false`                | —           |
-| `multiple`       | `boolean`                     | `false`                | —           |
-| `options`        | `SelectOption[]`              | `[]`                   | —           |
-| `optionTemplate` | `TemplateRef<unknown> | null` | `null`                 | —           |
-| `placeholder`    | `string`                      | `'Select...'`          | —           |
-| `required`       | `boolean`                     | `false`                | —           |
-| `searchable`     | `boolean`                     | `false`                | —           |
-| `size`           | `SelectSize`                  | `SHARED_DEFAULTS.Size` | —           |
-| `variant`        | `SelectVariant | null`        | `null`                 | —           |
+| Name             | Type                   | Default | Description |
+| ---------------- | ---------------------- | ------- | ----------- |
+| `options`        | `SelectOption[]`       | `[]`    | Option array. Each item: `{ label, value, disabled?, group? }`. |
+| `variant`        | `SelectVariant \| null` | `null`  | Visual style: `'material' \| 'bootstrap' \| 'minimal'`. Falls back to global theme when `null`. |
+| `size`           | `SelectSize`           | `'md'`  | Control height: `'sm'` (32 px) · `'md'` (40 px) · `'lg'` (48 px). |
+| `multiple`       | `boolean`              | `false` | Enable multi-selection. `ngModel` receives `unknown[]`. |
+| `searchable`     | `boolean`              | `false` | Shows a filter input inside the panel; announces result count via live region. |
+| `placeholder`    | `string`               | `'Select...'` | Text shown when no value is selected. |
+| `disabled`       | `boolean`              | `false` | Disables the control and sets `aria-disabled`. |
+| `loading`        | `boolean`              | `false` | Shows a spinner and blocks interaction; communicates loading state via `aria-disabled`. |
+| `label`          | `string`               | `''`    | Visible label rendered above the control. Automatically linked via `aria-labelledby`. |
+| `ariaLabel`      | `string \| null`       | `null`  | Sets `aria-label` on the host combobox element. Use when no visible label is rendered. |
+| `ariaLabelledBy` | `string \| null`       | `null`  | Sets `aria-labelledby` to an external element id. Overrides the auto-generated label link. |
+| `invalid`        | `boolean`              | `false` | Sets `aria-invalid="true"` and applies the error border colour. |
+| `required`       | `boolean`              | `false` | Sets `aria-required="true"` on the host element. |
 
 ### Outputs
 
@@ -36,7 +35,9 @@ _none_
 
 ## Content Projection
 
-_none_
+| Slot | Template variable | Context type | Description |
+|------|-------------------|--------------|-------------|
+| Option template | `#optionTemplate` | `SelectOptionTemplateContext` | Custom render for each option row. Context: `$implicit` (SelectOption), `index`, `selected`, `disabled`, `active`. |
 
 ## Theming
 
@@ -70,7 +71,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** [Combobox Pattern (ARIA 1.2)](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
 
 ### Keyboard Interactions
 

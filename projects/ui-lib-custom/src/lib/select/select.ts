@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
+  contentChild,
   forwardRef,
   input,
   signal,
@@ -24,6 +25,7 @@ import {
 import type {
   SelectCvaValue,
   SelectOption,
+  SelectOptionTemplateContext,
   SelectSize,
   SelectValue,
   SelectVariant,
@@ -36,6 +38,7 @@ export type {
   SelectValue,
   SelectCvaValue,
   SelectOption,
+  SelectOptionTemplateContext,
 } from './select.types';
 
 let selectIdCounter: number = 0;
@@ -74,6 +77,7 @@ let selectIdCounter: number = 0;
     '[attr.aria-disabled]': 'isDisabled() || loading() ? "true" : null',
     '[attr.aria-required]': 'required() ? "true" : null',
     '[attr.tabindex]': 'isDisabled() || loading() ? -1 : 0',
+    '(click)': 'onHostClick($event)',
     '(keydown)': 'onKeydown($event)',
   },
 })
@@ -82,20 +86,34 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   public readonly ungroupedKey: string = SELECT_UNGROUPED_KEY;
   public readonly optionIdSeparator: string = SELECT_OPTION_ID_SEPARATOR;
 
+  /** Option array. Each item: `{ label, value, disabled?, group? }`. Default: `[]`. */
   public readonly options: InputSignal<SelectOption[]> = input<SelectOption[]>([]);
+  /** Visual variant. Falls back to global theme when `null`. Default: `null`. */
   public readonly variant: InputSignal<SelectVariant | null> = input<SelectVariant | null>(null);
+  /** Control height: `'sm'` (32px) · `'md'` (40px) · `'lg'` (48px). Default: `'md'`. */
   public readonly size: InputSignal<SelectSize> = input<SelectSize>(SHARED_DEFAULTS.Size);
+  /** Enable multi-selection; `ngModel` receives `unknown[]`. Default: `false`. */
   public readonly multiple: InputSignal<boolean> = input<boolean>(false);
+  /** Show filter input inside panel; announces result count via live region. Default: `false`. */
   public readonly searchable: InputSignal<boolean> = input<boolean>(false);
+  /** Text shown when no value is selected. Default: `'Select...'`. */
   public readonly placeholder: InputSignal<string> = input<string>('Select...');
+  /** Disables the control and sets `aria-disabled`. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  /** Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`. */
   public readonly loading: InputSignal<boolean> = input<boolean>(false);
-  public readonly optionTemplate: InputSignal<TemplateRef<unknown> | null> =
-    input<TemplateRef<unknown> | null>(null);
+  /** Custom option row template. Place `<ng-template #optionTemplate let-opt>` inside `<ui-lib-select>`. */
+  public readonly optionTemplate: Signal<TemplateRef<SelectOptionTemplateContext> | undefined> =
+    contentChild<TemplateRef<SelectOptionTemplateContext>>('optionTemplate');
+  /** Visible label rendered above the control; linked via `aria-labelledby`. Default: `''`. */
   public readonly label: InputSignal<string> = input<string>('');
+  /** Sets `aria-label` on the host combobox. Use when no visible label is rendered. Default: `null`. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** Sets `aria-labelledby` to an external element id; overrides the auto-generated link. Default: `null`. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+  /** Sets `aria-invalid="true"` and applies error border colour. Default: `false`. */
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  /** Sets `aria-required="true"` on the host element. Default: `false`. */
   public readonly required: InputSignal<boolean> = input<boolean>(false);
 
   /** Signal query for the panel element — undefined when panel is closed. */
@@ -147,10 +165,10 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   private readonly controlIdValue: string = `ui-lib-select-${++selectIdCounter}`;
   public readonly controlId: Signal<string> = computed<string>((): string => this.controlIdValue);
   public readonly labelId: Signal<string> = computed<string>(
-    (): string => `${this.controlIdValue}-label`
+    (): string => `${this.controlIdValue}-label`,
   );
   public readonly listboxId: Signal<string> = computed<string>(
-    (): string => `${this.controlIdValue}-listbox`
+    (): string => `${this.controlIdValue}-listbox`,
   );
 
   private readonly normalizedSize: Signal<'sm' | 'md' | 'lg'> = computed<'sm' | 'md' | 'lg'>(
@@ -162,18 +180,18 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
         [SHARED_SIZES.Lg]: SHARED_SIZES.Lg,
       };
       return map[size];
-    }
+    },
   );
 
   public readonly resolvedLabelledBy: Signal<string | null> = computed<string | null>(
     (): string | null => {
       if (this.ariaLabelledBy()) return this.ariaLabelledBy();
       return this.label() ? this.labelId() : null;
-    }
+    },
   );
 
   public readonly effectiveVariant: Signal<SelectVariant> = computed<SelectVariant>(
-    (): SelectVariant => this.variant() ?? this.themeConfig.variant()
+    (): SelectVariant => this.variant() ?? this.themeConfig.variant(),
   );
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -187,7 +205,7 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   });
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
   public readonly hasValue: Signal<boolean> = computed<boolean>((): boolean => {
     const values: SelectValue[] | null = this.internalValue();
@@ -200,8 +218,8 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
     if (!values || values.length === 0) return '';
     const labels: string[] = values.map((value: SelectValue): string =>
       this.getOptionLabel(
-        options.find((option: SelectOption): boolean => option.value === value) ?? value
-      )
+        options.find((option: SelectOption): boolean => option.value === value) ?? value,
+      ),
     );
     return labels.join(', ');
   });
@@ -212,9 +230,9 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
       const options: SelectOption[] = this.options();
       if (!term) return options;
       return options.filter((option: SelectOption): boolean =>
-        option.label.toLowerCase().includes(term)
+        option.label.toLowerCase().includes(term),
       );
-    }
+    },
   );
 
   public readonly activeDescendantId: Signal<string | null> = computed<string | null>(
@@ -222,7 +240,7 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
       const index: number = this.focusedIndex();
       if (index < 0 || !this.open()) return null;
       return `${this.controlIdValue}${this.optionIdSeparator}${index}`;
-    }
+    },
   );
 
   public readonly groupedOptions: Signal<Record<string, SelectOption[]>> = computed<
@@ -238,13 +256,13 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   });
 
   public readonly groupKeys: Signal<string[]> = computed<string[]>((): string[] =>
-    Object.keys(this.groupedOptions())
+    Object.keys(this.groupedOptions()),
   );
   public readonly selectedValues: Signal<Set<SelectValue>> = computed<Set<SelectValue>>(
     (): Set<SelectValue> => {
       const values: SelectValue[] = this.internalValue() ?? [];
       return new Set<SelectValue>(values);
-    }
+    },
   );
   public readonly optionIndexMap: Signal<Map<SelectOption, number>> = computed<
     Map<SelectOption, number>
@@ -254,8 +272,8 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
         this.filteredOptions().map((opt: SelectOption, index: number): [SelectOption, number] => [
           opt,
           index,
-        ])
-      )
+        ]),
+      ),
   );
 
   /**
@@ -279,6 +297,21 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
       }
       this.internalValue.set(obj === null ? [] : [obj]);
     }
+  }
+
+  /**
+   * Host click handler — toggles panel unless the click originated inside
+   * the panel or the clear button (which have their own handlers).
+   */
+  public onHostClick(event: MouseEvent): void {
+    const target: HTMLElement = event.target as HTMLElement;
+    if (
+      target.closest('.ui-lib-select__panel') !== null ||
+      target.closest('.ui-lib-select__clear') !== null
+    ) {
+      return;
+    }
+    this.togglePanel();
   }
 
   public togglePanel(): void {
@@ -444,6 +477,16 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
         }
         break;
     }
+  }
+
+  public contextFor(option: SelectOption, index: number): SelectOptionTemplateContext {
+    return {
+      $implicit: option,
+      index,
+      selected: this.selectedValues().has(option.value),
+      disabled: option.disabled === true,
+      active: this.focusedIndex() === index,
+    };
   }
 
   public getOptionLabel(opt: SelectOption | SelectValue): string {

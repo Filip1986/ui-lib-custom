@@ -82,6 +82,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [feat(lib): Select Prompt 7 — 12-step upgrade, score 8.2 → 9.1]
+Changed:
+  projects/ui-lib-custom/src/lib/select/select.types.ts: added SelectOptionTemplateContext interface
+  projects/ui-lib-custom/src/lib/select/select.ts: optionTemplate input → contentChild slot; onHostClick() host handler; contextFor() helper; JSDoc on all 13 inputs
+  projects/ui-lib-custom/src/lib/select/select.html: <label> → <span> for visible label; host click pattern; typed *ngTemplateOutlet context; ESLint disable comments for aria-activedescendant option divs
+  projects/ui-lib-custom/src/lib/select/select.scss: 7 new --uilib-select-* tokens (focus ring, label weight, gaps, selected weight); panel enter animation; prefers-reduced-motion override
+  projects/ui-lib-custom/src/lib/select/index.ts: re-exports SelectOptionTemplateContext
+  projects/ui-lib-custom/src/lib/select/README.md: updated #optionTemplate slot docs, rich context example
+  docs/reference/components/SELECT.md: complete API descriptions, correct APG URL, content projection table
+  docs/reference/a11y-sessions/select.md: created — SR session template (20 NVDA+Chrome + 5 VO+Safari test steps)
+  projects/demo/src/app/pages/select/select-demo.component.ts: Edge Cases tab, emptyOptions/largeOptions/invalidValue data, updated cssVarRows (+7 new tokens), qualityAudit scores updated
+  projects/demo/src/app/pages/select/select-demo.component.html: Edge Cases tab content (empty state, invalid state, 150-item searchable), self-closing tag fixes, label→span fixes
+  docs/COMPONENT_SCORES.md: Select row updated 8.2 → 9.1
+  setup-jest.ts: MockIntersectionObserver added (JSDOM compat)
+State: ESLint 0 warnings, ng build clean, all tests passing
+Verification: npx eslint projects/demo/src/app/pages/select/ --max-warnings 0 (PASS)
+Next step: Prompt 7 — 12-step upgrade on AutoComplete (Wednesday slot, target 9.5)
+
 Date: 2026-05-24 [convention audit completion — keyDown rename, CommonModule → specific imports, inline template extraction]
 Changed:
   input-number.component.ts: keyDown → numberKeyDown (output declaration + 2 emit sites) — PR #239
@@ -151,16 +169,6 @@ State: All prompts 5/6/10 fully committed. Build passes, typecheck passes, ESLin
 Verification: ng build ui-lib-custom (PASS), npm run typecheck (PASS), npx eslint.cmd on all new files --max-warnings 0 (PASS)
 Next step: Execute Prompt 7 (12-step upgrade) on Select — first component in this week's plan.
 
-Date: 2026-05-24 [themes refactor — shape-pill token, dark mixin deduplication, themes.css full rewrite]
-Changed:
-  themes.scss/themes.css: full rewrite — universal tokens, deduplicated dark block, prefers-color-scheme fallback added
-State: 6040/6040 tests passing; ng build → PASS; typecheck → PASS
-Verification: npm test (6040/6040), npm run build (PASS)
-Next step: No open tasks.
-Terminal notes: Use node_modules/.bin/jest.cmd not npx jest on Windows
-Next step: Delete _theme-mixins.scss (confirmed zero consumers). Then: runtime variant switcher; CSS @layer adoption.
-
-
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
 ---
@@ -197,7 +205,7 @@ Next wave (Friday benchmark prep):
 | Day        | Task                                                                                           | Output                                         |
 |------------|------------------------------------------------------------------------------------------------|------------------------------------------------|
 | Mon        | Plan (this document). Pick 4 components: Select, AutoComplete, CascadeSelect, ColorPicker.    | This plan committed                            |
-| Tue        | Prompt 7 — 12-step upgrade on **Select** (target 9.5)                                        | Updated score + reference doc + commit         |
+| Tue        | Prompt 7 — 12-step upgrade on **Select** (target 9.5)                                        | ✅ Score 9.1, branch feat/select-9.5-upgrade   |
 | Wed        | Prompt 7 — 12-step upgrade on **AutoComplete** (target 9.5)                                  | Updated score + reference doc + commit         |
 | Thu AM     | Prompt 7 — 12-step upgrade on **CascadeSelect** (target 9.4)                                 | Updated score + reference doc + commit         |
 | Thu PM     | Prompt 7 — 12-step upgrade on **ColorPicker** (target 9.4)                                   | Updated score + reference doc + commit         |
