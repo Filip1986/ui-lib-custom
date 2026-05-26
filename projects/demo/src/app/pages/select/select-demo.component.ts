@@ -43,6 +43,7 @@ import type { CssVarRow } from '@demo/shared/doc-page/doc-css-vars-table.compone
 type TabKey =
   | 'playground'
   | 'variants'
+  | 'edge-cases'
   | 'api-reference'
   | 'usage'
   | 'performance'
@@ -91,19 +92,19 @@ export class SelectDemoComponent {
   public readonly usageTs: string = usageTs;
 
   public readonly qualityAudit: ComponentQualityAudit = {
-    date: '2026-05-18',
+    date: '2026-05-25',
     tier: 1,
     scores: {
-      api: 8,
+      api: 9,
       a11y: 9,
-      perf: 8,
-      comp: 8,
-      theme: 8,
-      dx: 8,
-      docs: 8,
-      polish: 8,
+      perf: 9,
+      comp: 10,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
       angular: 9,
-      feel: 8,
+      feel: 9,
     },
     competitiveParity: 'pending',
     apgPattern: { name: 'Combobox', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/' },
@@ -121,6 +122,7 @@ export class SelectDemoComponent {
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
+    { id: 'edge-cases', label: 'Edge Cases' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
@@ -162,15 +164,29 @@ export class SelectDemoComponent {
     { label: 'Unassigned', value: 'ungrouped' },
   ];
 
+  public readonly emptyOptions: SelectOption[] = [];
+
+  public readonly invalidValue: WritableSignal<string | null> = signal<string | null>(null);
+
+  public readonly largeOptions: SelectOption[] = Array.from(
+    { length: 150 },
+    (_: unknown, index: number): SelectOption => ({
+      label: `Option ${index + 1}`,
+      value: `opt-${index + 1}`,
+      group: `Group ${Math.floor(index / 30) + 1}`,
+      disabled: index % 17 === 0,
+    }),
+  );
+
   private readonly globalVars: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => {
       const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
       return this.themeService.getCssVars(preset);
-    }
+    },
   );
 
   public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
-    (): Record<string, string> => this.globalVars()
+    (): Record<string, string> => this.globalVars(),
   );
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
@@ -347,28 +363,86 @@ export class SelectDemoComponent {
     },
   ];
   public readonly cssVarRows: CssVarRow[] = [
-    { variable: '--uilib-select-option-hover', description: 'Option (hover).' },
-    { variable: '--uilib-select-padding-y-base', description: 'Padding Y Base.' },
-    { variable: '--uilib-select-padding-x-base', description: 'Padding X Base.' },
-    { variable: '--uilib-select-search-padding-y-base', description: 'Search Padding Y Base.' },
-    { variable: '--uilib-select-search-padding-x-base', description: 'Search Padding X Base.' },
-    { variable: '--uilib-select-option-padding-y-base', description: 'Option Padding Y Base.' },
-    { variable: '--uilib-select-option-padding-x-base', description: 'Option Padding X Base.' },
-    { variable: '--uilib-select-group-padding-y-base', description: 'Group Padding Y Base.' },
-    { variable: '--uilib-select-group-padding-x-base', description: 'Group Padding X Base.' },
-    { variable: '--uilib-select-empty-padding-base', description: 'Empty Padding Base.' },
-    { variable: '--uilib-select-padding-y', description: 'Vertical padding.' },
-    { variable: '--uilib-select-padding-x', description: 'Horizontal padding.' },
-    { variable: '--uilib-select-search-padding-y', description: 'Search vertical padding.' },
-    { variable: '--uilib-select-search-padding-x', description: 'Search horizontal padding.' },
-    { variable: '--uilib-select-option-padding-y', description: 'Option vertical padding.' },
-    { variable: '--uilib-select-option-padding-x', description: 'Option horizontal padding.' },
-    { variable: '--uilib-select-group-padding-y', description: 'Group vertical padding.' },
-    { variable: '--uilib-select-group-padding-x', description: 'Group horizontal padding.' },
-    { variable: '--uilib-select-empty-padding', description: 'Empty padding.' },
-    { variable: '--uilib-select-bg', description: 'Background colour.' },
-    { variable: '--uilib-select-border', description: 'Border shorthand.' },
-    { variable: '--uilib-select-dropdown-bg', description: 'Dropdown background colour.' },
-    { variable: '--uilib-select-option-selected', description: 'Option (selected).' },
+    {
+      variable: '--uilib-select-focus-ring-color',
+      description: 'Focus ring colour (default: primary-500).',
+    },
+    {
+      variable: '--uilib-select-focus-ring-width',
+      description: 'Focus ring outline width (default: 2px).',
+    },
+    {
+      variable: '--uilib-select-label-font-weight',
+      description: 'Label font weight (default: 600).',
+    },
+    {
+      variable: '--uilib-select-label-gap',
+      description: 'Gap between label and control (default: 0.35rem).',
+    },
+    {
+      variable: '--uilib-select-control-gap',
+      description: 'Gap between value and actions area (default: 0.5rem).',
+    },
+    {
+      variable: '--uilib-select-option-gap',
+      description: 'Gap between option icon/check and label (default: 0.5rem).',
+    },
+    {
+      variable: '--uilib-select-option-selected-font-weight',
+      description: 'Font weight of selected option rows (default: 600).',
+    },
+    {
+      variable: '--uilib-select-option-hover',
+      description: 'Option row background on hover / keyboard focus.',
+    },
+    {
+      variable: '--uilib-select-panel-max-height',
+      description: 'Max height of the dropdown panel (default: 260px).',
+    },
+    { variable: '--uilib-select-panel-z-index', description: 'Z-index of the dropdown panel.' },
+    {
+      variable: '--uilib-select-padding-y-base',
+      description: 'Base vertical padding (scaled by density).',
+    },
+    {
+      variable: '--uilib-select-padding-x-base',
+      description: 'Base horizontal padding (scaled by density).',
+    },
+    {
+      variable: '--uilib-select-search-padding-y-base',
+      description: 'Base vertical padding for search wrapper.',
+    },
+    {
+      variable: '--uilib-select-search-padding-x-base',
+      description: 'Base horizontal padding for search wrapper.',
+    },
+    {
+      variable: '--uilib-select-option-padding-y-base',
+      description: 'Base vertical padding for option rows.',
+    },
+    {
+      variable: '--uilib-select-option-padding-x-base',
+      description: 'Base horizontal padding for option rows.',
+    },
+    {
+      variable: '--uilib-select-group-padding-y-base',
+      description: 'Base vertical padding for group header.',
+    },
+    {
+      variable: '--uilib-select-group-padding-x-base',
+      description: 'Base horizontal padding for group header.',
+    },
+    {
+      variable: '--uilib-select-empty-padding-base',
+      description: 'Base padding for the empty-state message.',
+    },
+    { variable: '--uilib-select-bg', description: 'Control and search input background colour.' },
+    { variable: '--uilib-select-border', description: 'Control border colour.' },
+    { variable: '--uilib-select-dropdown-bg', description: 'Dropdown panel background colour.' },
+    { variable: '--uilib-select-dropdown-shadow', description: 'Dropdown panel box shadow.' },
+    {
+      variable: '--uilib-select-option-selected',
+      description: 'Background of a selected option row.',
+    },
   ];
 }
