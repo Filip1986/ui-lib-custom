@@ -863,6 +863,78 @@ None — `aria-haspopup=tree`, `aria-activedescendant`, and typeahead all implem
 
 ---
 
+### Upload
+
+Upload is a file-input component with drag-and-drop zone, file queue management, progress feedback, and remove-file controls.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Drop-zone `aria-label` + drag-state announcement | ❌ | ⚠️ no announcement | ❌ | ❌ | ✅ |
+| File-added `aria-live` announcement | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Per-file remove button with file name in `aria-label` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Upload progress `role=progressbar` + `aria-valuenow` | ❌ | ⚠️ visual only | ❌ | ❌ | ✅ |
+| Invalid file `aria-live=assertive` error announcement | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Keyboard-activatable drop zone (Enter / Space) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<File[]>()` file queue | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — drop-zone ARIA, file-queue announcements, progress semantics, and keyboard activation all implemented.
+
+#### Differentiators
+
+- **File-added `aria-live` announcement**: When files are added (via drag-and-drop or the file picker), an `aria-live=polite` region announces "3 files added: report.pdf, photo.jpg, data.csv" — giving screen reader users confirmation of the queue state without needing to navigate to the file list.
+- **Per-file remove button carries the file name**: Each "Remove" button in the file queue has `aria-label="Remove report.pdf"` — so screen reader users in virtual cursor mode know exactly which file they are about to remove instead of encountering a sequence of identical "Remove" buttons.
+- **Invalid file type / size `aria-live=assertive` error**: When a dropped file is rejected (wrong type or exceeds size limit), an `aria-live=assertive` region immediately announces the reason (e.g., "report.exe rejected: file type not allowed"), ensuring non-visual users are not silently surprised by a file failing to appear in the queue.
+
+#### Reference URLs
+- Angular Material: N/A — no Upload component
+- PrimeNG: https://primeng.org/fileupload
+- Radix UI: N/A — no Upload primitive
+- Ark UI: N/A — no Upload primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (drop zone as an interactive button region)
+
+---
+
+### SplitButton
+
+SplitButton combines a primary action button with a dropdown trigger that opens a secondary-actions menu.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Primary button + separate dropdown trigger | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Dropdown trigger `aria-haspopup=menu` + `aria-expanded` | ❌ | ⚠️ missing `aria-expanded` | ❌ | ❌ | ✅ |
+| `aria-label` on dropdown trigger (not "▾") | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `role=menu` + `role=menuitem` in panel | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Arrow-key + Home / End navigation in menu | ❌ | ⚠️ partial | ❌ | ❌ | ✅ |
+| Escape closes menu and returns focus to trigger | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native item model | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-haspopup`, `aria-expanded`, labelled dropdown trigger, and full menu keyboard contract all implemented.
+
+#### Differentiators
+
+- **`aria-expanded` on the dropdown trigger**: PrimeNG SplitButton sets `aria-haspopup` but omits `aria-expanded`, so screen readers announce the button is a menu trigger but never announce whether the menu is currently open or closed. Both attributes are always in sync with the open state.
+- **Descriptive `aria-label` on the dropdown trigger**: The chevron-only dropdown button carries `aria-label="More actions"` (configurable) rather than inheriting the primary button label — preventing duplicate announcements and clearly communicating the trigger's purpose to screen reader users.
+- **Full APG menu keyboard contract**: Home / End jump to first / last item; character typeahead advances to matching items. PrimeNG's SplitButton menu only partially implements arrow-key navigation and skips Home / End entirely.
+
+#### Reference URLs
+- Angular Material: N/A — no SplitButton component
+- PrimeNG: https://primeng.org/splitbutton
+- Radix UI: N/A — no SplitButton primitive
+- Ark UI: N/A — no SplitButton primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/ (menu button pattern)
+
+---
+
 ## Overlay & Modal
 
 ---
@@ -2255,6 +2327,79 @@ _None — Angular Material has no OrganizationChart component; PrimeNG is the on
 
 ---
 
+### Image
+
+Image is a media component with lazy loading, preview lightbox (zoom / pan), error fallback, and responsive `srcset` support.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `alt` text pass-through | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Decorative mode (`alt=""` + `role=presentation`) | ✅ | ⚠️ manual only | ✅ | ✅ | ✅ |
+| Preview lightbox with `role=dialog` + `aria-label` | ❌ | ⚠️ no `role=dialog` | ❌ | ❌ | ✅ |
+| Lightbox focus trap + Escape to close | ❌ | ⚠️ no focus trap | ❌ | ❌ | ✅ |
+| Zoom controls with `aria-label` | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Error fallback `aria-label` for broken images | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `loading=lazy` with `IntersectionObserver` fallback | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — alt text, decorative mode, lightbox dialog semantics, focus trap, zoom labels, and error fallback all implemented.
+
+#### Differentiators
+
+- **Preview lightbox as `role=dialog` with focus trap**: PrimeNG Image opens a preview overlay with no `role=dialog` and no focus containment — keyboard users can Tab through the entire page behind the preview. The lightbox sets `role=dialog` + `aria-modal=true` and constrains Tab focus, matching the modal dialog interaction model.
+- **Error fallback `aria-label` for broken images**: When the image fails to load and a fallback slot is rendered, the fallback container receives `aria-label="Image unavailable: {alt}"` — so screen reader users who would have received the alt text still get equivalent information from the error state.
+- **Zoom controls with descriptive `aria-label`**: Zoom-in, zoom-out, and reset buttons carry `aria-label="Zoom in"` / `"Zoom out"` / `"Reset zoom"` rather than icon-only content, ensuring users navigating the lightbox by Tab have readable button labels for all controls.
+
+#### Reference URLs
+- Angular Material: N/A — no Image component
+- PrimeNG: https://primeng.org/image
+- Radix UI: N/A — no Image primitive (Next.js `<Image>` is a separate concern)
+- Ark UI: N/A — no Image primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ (preview lightbox follows the modal dialog pattern)
+
+---
+
+### ImageCompare
+
+ImageCompare renders a before/after image slider that lets users drag a divider to reveal each image, implementing the `slider` ARIA role on the drag handle.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=slider` on drag handle | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `aria-valuemin` / `aria-valuemax` / `aria-valuenow` | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `aria-valuetext` with percentage description | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `aria-label` on drag handle | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Left / Right arrow key moves handle | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Home / End jumps to 0% / 100% | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Before / after images `alt` text wired | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<number>()` for position | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — slider role with full keyboard contract, `aria-valuetext`, and image alt text all implemented. No reference library has a native ImageCompare component.
+
+#### Differentiators
+
+- **`role=slider` on the drag handle — uniquely complete**: No reference library (Angular Material, PrimeNG, Radix UI, Ark UI) ships an ImageCompare component. ui-lib-custom implements the drag handle as a proper ARIA slider: `role=slider`, `aria-valuemin=0`, `aria-valuemax=100`, `aria-valuenow` updated on drag, and Left / Right / Home / End keyboard support — giving screen reader and keyboard-only users a fully operable control.
+- **`aria-valuetext` with human-readable percentage**: `aria-valuetext="42% revealed"` supplements the raw numeric `aria-valuenow`, so VoiceOver / NVDA reads "42% revealed" rather than just "42" — giving users a meaningful description of the visible state without needing to interpret a unitless number.
+- **Both image `alt` attributes are wired as inputs**: The `beforeAlt` and `afterAlt` inputs flow directly to the respective `<img alt>` attributes, so screen readers announce both images as the user interacts with the slider — ensuring the comparison context is accessible even when drag interaction is not possible.
+
+#### Reference URLs
+- Angular Material: N/A — no ImageCompare component
+- PrimeNG: N/A — no ImageCompare component
+- Radix UI: N/A — no ImageCompare primitive
+- Ark UI: N/A — no ImageCompare primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/ (drag handle follows the slider pattern)
+
+---
+
 ## Feedback & Status
 
 ---
@@ -2707,6 +2852,154 @@ None — region landmark, toggle ARIA, heading level input, `@defer`, and motion
 - Radix UI: https://www.radix-ui.com/primitives/docs/components/collapsible
 - Ark UI: https://ark-ui.com/react/docs/components/collapsible
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/ (collapsible section pattern)
+
+---
+
+### ScrollPanel
+
+ScrollPanel is a custom scrollable container that replaces native browser scrollbars with styled, accessible scroll controls.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Custom scrollbar styling | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Keyboard scrolling (Arrow / Page / Home / End) | ✅ | ⚠️ partial | ❌ | ❌ | ✅ |
+| `aria-label` on scrollable region | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `role=scrollbar` + `aria-valuenow` on track | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Scrollbar `aria-controls` → content region | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on scroll-snap animations | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native scroll position `model<number>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — scrollable region label, `role=scrollbar` semantics, `aria-controls`, and keyboard scrolling all implemented.
+
+#### Differentiators
+
+- **`role=scrollbar` + `aria-valuenow` / `aria-valuemin` / `aria-valuemax` + `aria-controls`**: PrimeNG ScrollPanel renders custom scrollbar thumbs as plain `<div>` elements with no ARIA. The library promotes each thumb to `role=scrollbar` and keeps `aria-valuenow` updated as the user scrolls, with `aria-controls` pointing to the scrollable content region — matching the APG scrollbar pattern.
+- **`aria-label` on the scrollable region**: The scroll container itself carries a configurable `aria-label` (e.g., "Product list") so screen reader users navigating by landmark / regions can identify and jump to the scrollable area without needing to read surrounding headings.
+- **Full keyboard scrolling**: Arrow keys scroll line by line, Page Up / Down scroll by viewport height, and Home / End jump to the start / end of the content — implemented via `keydown` listeners on the focusable container rather than relying on native browser scroll behaviour, which custom scrollbar CSS often disrupts.
+
+#### Reference URLs
+- Angular Material: N/A — no ScrollPanel component (CDK ScrollingModule used instead)
+- PrimeNG: https://primeng.org/scrollpanel
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/scroll-area
+- Ark UI: N/A — no ScrollPanel primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/ (scrollbar thumb follows slider semantics)
+
+---
+
+### Fieldset
+
+Fieldset is a collapsible container that groups related form fields using native `<fieldset>` / `<legend>` semantics.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Native `<fieldset>` + `<legend>` elements | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Toggle button `aria-expanded` + `aria-controls` | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Configurable heading level for legend label | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `@defer` on collapsed content | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| `prefers-reduced-motion` on toggle animation | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `disabled` propagates to all child form controls | ✅ | ✅ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `model<boolean>()` collapsed state | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — native fieldset semantics, toggle ARIA, deferred content, and disabled propagation all implemented.
+
+#### Differentiators
+
+- **Native `<fieldset>` + `<legend>` semantics**: Radix UI and Ark UI compose Fieldset from generic `<div>` elements — meaning assistive technology does not receive the native grouping semantics that `<fieldset>` provides. Screen readers using Forms mode announce "group" when entering a `<fieldset>`, and radio / checkbox groups inside are announced as belonging to the legend label.
+- **Configurable heading level for the legend**: When a Fieldset title also needs to act as a document heading, the `legendHeadingLevel` input wraps the legend text in the appropriate `<h2>`–`<h6>` element — preventing the hard-coded heading hierarchy that PrimeNG imposes and maintaining a correct document outline.
+- **`disabled` propagates to all child form controls**: Setting `disabled=true` on the Fieldset calls `setDisabledState` on every child `ControlValueAccessor`, `aria-disabled` on every focusable child, and the native `disabled` attribute on the `<fieldset>` element — satisfying WCAG SC 4.1.2 without requiring consumers to manage disabled state on every field individually.
+
+#### Reference URLs
+- Angular Material: N/A — no Fieldset component
+- PrimeNG: https://primeng.org/fieldset
+- Radix UI: N/A — no Fieldset primitive
+- Ark UI: N/A — no Fieldset primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/ (collapsible fieldset follows the disclosure / accordion pattern)
+
+---
+
+### Toolbar
+
+Toolbar is a horizontal or vertical container for action controls (buttons, dropdowns, separators) following the WAI-ARIA `toolbar` role and keyboard navigation model.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=toolbar` on container | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `aria-label` on toolbar | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Arrow-key navigation between controls | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Single Tab stop for the entire toolbar | ✅ | ❌ | ✅ | ✅ | ✅ |
+| `role=separator` between groups | ✅ | ⚠️ visual only | ✅ | ✅ | ✅ |
+| `aria-orientation` (horizontal / vertical) | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native projected content model | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `role=toolbar`, arrow-key roving `tabindex`, `aria-label`, `aria-orientation`, and separator semantics all implemented.
+
+#### Differentiators
+
+- **Roving `tabindex` arrow-key navigation — one Tab stop**: PrimeNG Toolbar places each child control in the natural Tab order, meaning a toolbar with 10 buttons requires 10 Tab presses to traverse. The library implements the APG roving `tabindex` model — the toolbar is a single Tab stop and arrow keys move focus within it — matching screen reader and power-user expectations.
+- **`aria-orientation` always set**: PrimeNG omits `aria-orientation`, which defaults to "horizontal" in most screen readers — incorrect for vertical toolbars. The library always writes `aria-orientation` matching the `orientation` input so assistive technology knows which arrow-key axis to use.
+- **`role=separator` on dividers between groups**: PrimeNG uses visual `<span>` dividers with no role. Group separators carry `role=separator` so screen readers announce "separator" when focus moves past a group boundary — aiding orientation within complex toolbars.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/toolbar
+- PrimeNG: https://primeng.org/toolbar
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/toolbar
+- Ark UI: N/A — no Toolbar primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/ (toolbar role + roving tabindex)
+
+---
+
+## Utilities & Directives
+
+---
+
+### ScrollTop
+
+ScrollTop is a button that appears when the user scrolls past a threshold and, when activated, smoothly scrolls the page or a target container back to the top.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-label` on scroll-to-top button | ❌ | ⚠️ icon-only, no label | ❌ | ❌ | ✅ |
+| `aria-hidden` when not visible | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on scroll animation | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Visibility threshold as signal input | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Target container scroll (not only window) | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Focus returns to page top landmark on activation | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native visibility threshold input | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-label`, `aria-hidden` when off-screen, reduced-motion, and focus management on activation all implemented.
+
+#### Differentiators
+
+- **`aria-hidden` when not visible**: PrimeNG ScrollTop uses CSS to hide the button when below the scroll threshold but leaves it in the DOM without `aria-hidden`, so screen readers in non-visual browse mode can still Tab to an invisible button. The library toggles `aria-hidden=true` in sync with the visibility state, removing it from the accessibility tree when it is not actionable.
+- **Focus moves to the page `<main>` landmark on activation**: After scrolling to the top, focus is placed on the nearest `role=main` landmark (or `<main>` element) — giving keyboard users a useful starting position at the top of the content without requiring them to Tab back up through the header and navigation.
+- **`prefers-reduced-motion` replaces scroll animation with instant jump**: Users who have requested reduced motion receive an instant `scrollTop = 0` rather than a smooth animation, preventing vestibular discomfort from rapid viewport motion while preserving the functional outcome.
+
+#### Reference URLs
+- Angular Material: N/A — no ScrollTop component
+- PrimeNG: https://primeng.org/scrolltop
+- Radix UI: N/A — no ScrollTop primitive
+- Ark UI: N/A — no ScrollTop primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/ (scroll-to-top follows the standard button pattern)
 
 ---
 

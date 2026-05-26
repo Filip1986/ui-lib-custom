@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Sprint A competitive benchmark backfill — batch 9 adds Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category) → **70 / 100 total** benchmark sections complete.
-- **Next queue:** Continue Sprint A benchmark backfill (30 components remaining); I18n audit (Category 12 — all 100 components show `—`).
+- **Active focus:** Sprint A competitive benchmark backfill — batch 10 adds Upload + SplitButton (Core Inputs), Image + ImageCompare (Data Display), ScrollPanel + Fieldset + Toolbar (Layout & Containers), ScrollTop (new Utilities & Directives category) → **78 / 100 total** benchmark sections complete.
+- **Next queue:** Continue Sprint A benchmark backfill (22 components remaining); I18n audit (Category 12 — all 100 components show `—`).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 10 — Upload, SplitButton, Image, ImageCompare, ScrollPanel, Fieldset, Toolbar, ScrollTop]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Upload + SplitButton (Core Inputs), Image + ImageCompare (Data Display), ScrollPanel + Fieldset + Toolbar (Layout & Containers), ScrollTop (new Utilities & Directives category); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for ScrollPanel (8.9→9.0), Toolbar (8.9→9.0), ImageCompare (8.9→9.0), Upload (8.9→9.0), Image (8.7→8.8), SplitButton (8.6→8.7), ScrollTop (8.4→8.5); Fieldset already at Comp 9
+  AI_AGENT_CONTEXT.md: active focus updated (78/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 11 — candidates: Icon, IconButton, ButtonGroup, Terminal, Knob (already in BENCHMARKS?), Avatar, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Ripple, Bind
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 9 — Inplace, PanelMenu, TieredMenu, SpeedDial, Dock, BlockUI, Divider, Panel]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category); zero unresolved gaps; 3+ differentiators each
@@ -90,7 +99,7 @@ Changed:
   AI_AGENT_CONTEXT.md: active focus updated (70/100 benchmark sections complete)
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Sprint A batch 10 — candidates: ScrollPanel, ScrollTop, Fieldset, Toolbar, Image, ImageCompare, Upload, Icon, IconButton, ButtonGroup, SplitButton, Terminal
+Next step: Sprint A batch 10
 
 Date: 2026-05-26 [docs(workspace): sprint-a batch 8 — RadioButton, Textarea, SelectButton, ToggleSwitch, InputOtp, KeyFilter, TreeSelect, Message]
 Changed:
@@ -100,15 +109,6 @@ Changed:
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
 Next step: Sprint A batch 9
-
-Date: 2026-05-26 [docs(workspace): sprint-a batch 7 — Alert, Badge, Tag, Chip, Skeleton, MeterGroup, Timeline, OrganizationChart]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Timeline + OrganizationChart (Data Display), Alert + Badge + Tag + Chip + Skeleton + MeterGroup (Feedback); zero unresolved gaps; 3+ differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for Alert (8.5→8.6), Badge (8.4→8.5), Tag (8.9→9.0), Chip (8.5→8.6), Skeleton (8.6→8.7), MeterGroup (8.3→8.4), Timeline (8.3→8.4), OrganizationChart (8.3→8.4)
-  AI_AGENT_CONTEXT.md: active focus updated (54/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 8
 
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
