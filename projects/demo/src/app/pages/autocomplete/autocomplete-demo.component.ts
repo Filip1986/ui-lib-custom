@@ -149,19 +149,19 @@ export class AutoCompleteDemoComponent {
   public readonly clippingTs: string = clippingTs;
 
   public readonly qualityAudit: ComponentQualityAudit = {
-    date: '2026-05-18',
+    date: '2026-05-26',
     tier: 1,
     scores: {
-      api: 8,
+      api: 9,
       a11y: 9,
       perf: 8,
-      comp: 8,
-      theme: 8,
-      dx: 8,
-      docs: 8,
-      polish: 8,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
       angular: 9,
-      feel: 8,
+      feel: 9,
     },
     competitiveParity: 'pending',
     apgPattern: { name: 'Combobox', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/' },
@@ -248,15 +248,15 @@ export class AutoCompleteDemoComponent {
     },
     {
       name: 'variant',
-      type: "'material' | 'bootstrap' | 'minimal'",
-      default: "'material'",
-      description: 'Visual style variant.',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description: 'Visual style variant; falls back to the global theme variant when null.',
     },
     {
       name: 'size',
-      type: "'small' | 'medium' | 'large'",
-      default: "'medium'",
-      description: 'Size token.',
+      type: "'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: "Control height: 'sm' (36 px) · 'md' (44 px) · 'lg' (52 px).",
     },
     { name: 'placeholder', type: 'string', default: "''", description: 'Input placeholder text.' },
     { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the component.' },
@@ -514,6 +514,8 @@ export class AutoCompleteDemoComponent {
   ];
 
   public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-autocomplete-focus-ring-color', description: 'Focus ring colour.' },
+    { variable: '--uilib-autocomplete-focus-ring-width', description: 'Focus ring width.' },
     { variable: '--uilib-autocomplete-border-radius', description: 'Border radius.' },
     { variable: '--uilib-autocomplete-padding-y-base', description: 'Padding Y Base.' },
     { variable: '--uilib-autocomplete-padding-x-base', description: 'Padding X Base.' },

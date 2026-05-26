@@ -41,7 +41,10 @@ import type {
   AutoCompleteCompleteEvent,
   AutoCompleteDropdownClickEvent,
   AutoCompleteDropdownMode,
+  AutoCompleteGroupContext,
+  AutoCompleteItemContext,
   AutoCompleteSelectEvent,
+  AutoCompleteSelectedItemContext,
   AutoCompleteSize,
   AutoCompleteUnselectEvent,
   AutoCompleteVariant,
@@ -103,41 +106,62 @@ const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
   },
 })
 export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked, OnDestroy {
+  /** Options shown in the dropdown panel. Never filtered internally — update on every `completeMethod` event. Default: `[]`. */
   public readonly suggestions: InputSignal<unknown[]> = input<unknown[]>([]);
+  /** Field name used as the display label for object options. Default: `undefined` (uses `String(option)`). */
   public readonly optionLabel: InputSignal<string | undefined> = input<string | undefined>(
     undefined,
   );
+  /** Field name whose value is emitted when an option is selected. Default: `undefined` (emits whole object). */
   public readonly optionValue: InputSignal<string | undefined> = input<string | undefined>(
     undefined,
   );
+  /** Field name that, when truthy, marks the option as non-selectable. Default: `undefined`. */
   public readonly optionDisabled: InputSignal<string | undefined> = input<string | undefined>(
     undefined,
   );
+  /** Field name for group header labels when `group=true`. Default: `'label'`. */
   public readonly optionGroupLabel: InputSignal<string> = input<string>('label');
+  /** Field name for the children array inside each group object. Default: `'items'`. */
   public readonly optionGroupChildren: InputSignal<string> = input<string>('items');
 
+  /** Show a dropdown toggle button alongside the input. Default: `false`. */
   public readonly dropdown: InputSignal<boolean> = input<boolean>(false);
+  /** `'blank'` clears the query when the dropdown opens; `'current'` keeps existing text. Default: `'blank'`. */
   public readonly dropdownMode: InputSignal<AutoCompleteDropdownMode> =
     input<AutoCompleteDropdownMode>('blank');
+  /** Enable chip (multi-value) mode; `ngModel` receives an array. Default: `false`. */
   public readonly multiple: InputSignal<boolean> = input<boolean>(false);
+  /** Restrict value to items from `suggestions` only; rejects free-text on blur. Default: `false`. */
   public readonly forceSelection: InputSignal<boolean> = input<boolean>(false);
+  /** Fire `completeMethod` when the input receives focus. Default: `false`. */
   public readonly completeOnFocus: InputSignal<boolean> = input<boolean>(false);
+  /** When `forceSelection` finds no match on blur, clear the input instead of restoring the previous value. Default: `true`. */
   public readonly autoClear: InputSignal<boolean> = input<boolean>(true);
+  /** Prevent duplicate chips in multiple mode. Default: `false`. */
   public readonly unique: InputSignal<boolean> = input<boolean>(false);
+  /** Minimum query length before `completeMethod` fires. Default: `1`. */
   public readonly minLength: InputSignal<number> = input<number>(1);
+  /** Debounce delay in ms before `completeMethod` fires. Default: `300`. */
   public readonly delay: InputSignal<number> = input<number>(300);
+  /** Native `maxlength` attribute on the inner `<input>`. Default: `null`. */
   public readonly maxlength: InputSignal<number | null> = input<number | null>(null);
 
+  /** Enable virtual scrolling for large suggestion lists. Requires `virtualScrollItemSize`. Default: `false`. */
   public readonly virtualScroll: InputSignal<boolean> = input<boolean>(false);
+  /** Item height in px; required when `virtualScroll=true`. Default: `0`. */
   public readonly virtualScrollItemSize: InputSignal<number> = input<number>(0);
 
+  /** Commit free-text as a chip on blur (multiple mode). Default: `false`. */
   public readonly addOnBlur: InputSignal<boolean> = input<boolean>(false);
+  /** Commit free-text as a chip on Tab key (multiple mode). Default: `false`. */
   public readonly addOnTab: InputSignal<boolean> = input<boolean>(false);
+  /** Character(s) that auto-tokenize free text into chips (multiple mode). Default: `undefined`. */
   public readonly separator: InputSignal<string | RegExp | undefined> = input<
     string | RegExp | undefined
   >(undefined);
 
-  /** Design variant. Falls back to the global ThemeConfigService variant when null. */
+  /** Visual style variant. Falls back to the global ThemeConfigService variant when `null`. Default: `null`. */
   public readonly variant: InputSignal<AutoCompleteVariant | null> =
     input<AutoCompleteVariant | null>(null);
 
@@ -146,25 +170,41 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     (): AutoCompleteVariant =>
       this.variant() ?? (this.themeConfig.variant() as AutoCompleteVariant),
   );
+  /** Control height: `'sm'` (36px) · `'md'` (44px) · `'lg'` (52px). Default: `'md'`. */
   public readonly size: InputSignal<AutoCompleteSize> = input<AutoCompleteSize>('md');
+  /** Placeholder text shown in the input when empty. Default: `''`. */
   public readonly placeholder: InputSignal<string> = input<string>('');
+  /** Show a clear (×) button when the field has a value. Default: `false`. */
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
+  /** Stretch the component to fill its container width. Default: `false`. */
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
+  /** Apply a filled background appearance. Default: `false`. */
   public readonly filled: InputSignal<boolean> = input<boolean>(false);
+  /** Treat `suggestions` as an array of grouped data objects. Default: `false`. */
   public readonly group: InputSignal<boolean> = input<boolean>(false);
+  /** Max-height of the dropdown panel. Default: `'200px'`. */
   public readonly scrollHeight: InputSignal<string> = input<string>('200px');
+  /** Tab index of the inner `<input>`. Default: `0`. */
   public readonly tabindex: InputSignal<number> = input<number>(0);
+  /** Custom `id` for the inner `<input>` (for external `<label for="">` association). Default: `''`. */
   public readonly inputId: InputSignal<string> = input<string>('');
+  /** Where to mount the detached dropdown panel; `'body'` appends to `document.body`. Default: `'body'`. */
   public readonly appendTo: InputSignal<string | HTMLElement | undefined> = input<
     string | HTMLElement | undefined
   >('body');
 
+  /** Disables the control; sets `aria-disabled` on the input. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  /** Applies error border styling and sets `aria-invalid="true"` on the input. Default: `false`. */
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  /** Makes the input read-only (query text not editable). Default: `false`. */
   public readonly readonly: InputSignal<boolean> = input<boolean>(false);
+  /** Shows a loading state in the panel while suggestions are being fetched. Default: `false`. */
   public readonly loading: InputSignal<boolean> = input<boolean>(false);
 
+  /** Sets `aria-label` on the inner `<input>`. Default: `null`. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** Sets `aria-labelledby` on the inner `<input>` to reference an external label element. Default: `null`. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
   public readonly completeMethod: OutputEmitterRef<AutoCompleteCompleteEvent> =
@@ -180,38 +220,42 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   public readonly clearEvent: OutputEmitterRef<void> = output<void>();
   public readonly autocompleteKeyUp: OutputEmitterRef<KeyboardEvent> = output<KeyboardEvent>();
 
-  public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
-    AutoCompleteItemDirective,
-    { read: TemplateRef },
-  );
-  public readonly selectedItemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
-    AutoCompleteSelectedItemDirective,
-    { read: TemplateRef },
-  );
-  public readonly groupTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
-    AutoCompleteGroupDirective,
-    { read: TemplateRef },
-  );
+  /** Custom option row template. Use `*uilib-autocompleteItem="let opt"` — `opt` is the suggestion object. */
+  public readonly itemTemplate: Signal<TemplateRef<AutoCompleteItemContext> | undefined> =
+    contentChild(AutoCompleteItemDirective, { read: TemplateRef });
+  /** Custom chip template (multiple mode). Use `*uilib-autocompleteSelectedItem="let chip"`. */
+  public readonly selectedItemTemplate: Signal<
+    TemplateRef<AutoCompleteSelectedItemContext> | undefined
+  > = contentChild(AutoCompleteSelectedItemDirective, { read: TemplateRef });
+  /** Custom group-header template. Use `*uilib-autocompleteGroup="let group"` — `group` is the group data object. */
+  public readonly groupTemplate: Signal<TemplateRef<AutoCompleteGroupContext> | undefined> =
+    contentChild(AutoCompleteGroupDirective, { read: TemplateRef });
+  /** Custom header slot rendered above the option list. Use `*uilib-autocompleteHeader`. */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteHeaderDirective,
     { read: TemplateRef },
   );
+  /** Custom footer slot rendered below the option list. Use `*uilib-autocompleteFooter`. */
   public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteFooterDirective,
     { read: TemplateRef },
   );
+  /** Custom empty-state template shown when `suggestions` is empty. Use `*uilib-autocompleteEmpty`. */
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteEmptyDirective,
     { read: TemplateRef },
   );
+  /** Custom loading template shown when `loading=true`. Use `*uilib-autocompleteLoading`. */
   public readonly loadingTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteLoadingDirective,
     { read: TemplateRef },
   );
+  /** Custom dropdown-button icon template. Use `*uilib-autocompleteDropdownIcon`. */
   public readonly dropdownIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteDropdownIconDirective,
     { read: TemplateRef },
   );
+  /** Custom chip remove-button icon template. Use `*uilib-autocompleteRemoveTokenIcon`. */
   public readonly removeTokenIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     AutoCompleteRemoveTokenIconDirective,
     { read: TemplateRef },
