@@ -4,6 +4,34 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-26 [feat(lib): cascade-select prompt-7 quality upgrade — score 8.2→8.9, PR #252]
+Changed:
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.types.ts: added CascadeSelectOptionContext, CascadeSelectValueContext, CascadeSelectOptionGroupIconContext
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts: typed TemplateRef<T> on all 7 template slots; JSDoc on all 20 inputs, 7 outputs, 7 contentChild properties
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss: focus-ring tokens; panel/level animation wired to transition global tokens; size font-size raw values → var(--uilib-font-size-sm/base/lg); prefers-reduced-motion: transform:none added
+  projects/ui-lib-custom/src/lib/cascade-select/cascade-select.html: tabindex + keydown.enter on trigger and option li (a11y)
+  projects/ui-lib-custom/src/lib/cascade-select/index.ts: re-exports 3 new context types
+  projects/ui-lib-custom/src/lib/cascade-select/README.md: 7-slot content-projection table
+  docs/reference/components/cascade-select.md: full rewrite — corrected ARIA (listbox/option not tree/treeitem), cascadeChange output, APG keyboard table, projection table
+  docs/reference/a11y-sessions/cascade-select.md: created — NVDA+Chrome (22 steps) + VoiceOver+Safari (6 steps)
+  projects/demo/src/app/pages/cascade-select/cascade-select-demo.component.ts: rescored 8.2→8.9, corrected ARIA rows, APG combobox pattern, 2 CSS-var rows
+  docs/COMPONENT_SCORES.md: CascadeSelect 8.2→8.9; bundle snapshot refreshed
+State: ESLint 0 warnings, stylelint 0 errors, ng build clean, pre-push typecheck passed, PR #252 open
+Verification: npx stylelint cascade-select.scss (0 errors, 2 warnings pre-existing); npx eslint cascade-select/ --max-warnings 0 (PASS); git push (typecheck PASS)
+Next step: Prompt 7 — 12-step upgrade on ColorPicker (Thursday PM slot, target 9.4)
+
+Date: 2026-05-26 [feat(lib): autocomplete prompt-7 quality upgrade — score 8.2→8.9, PR #251]
+Changed: See sprint summary in main handoff — focus: typed ng-template slots, JSDoc on all inputs/outputs, focus-ring tokens, panel enter animation, a11y-sessions doc
+State: Committed and pushed; PR #251 open
+Next step: CascadeSelect (done above)
+
+Date: 2026-05-26 [feat(lib): select prompt-7 quality upgrade — score 8.2→9.1, PR #250]
+Changed: See sprint summary in main handoff — focus: typed ng-template slots (9 total), JSDoc, focus-ring tokens, composability improvements (Comp 8→10), a11y-sessions doc
+State: Committed and pushed; PR #250 open
+Next step: AutoComplete (done above)
+
+---
+
 Date: 2026-05-23 [CSS/SCSS architecture refactor — token scoping, dark-mode dedup, host-selector fixes]
 Changed:
   themes.scss (complete structural rewrite):
