@@ -437,6 +437,79 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ---
 
+### ConfirmDialog
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=alertdialog`                                           | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-modal=true`                                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Focus lands on primary action on open                        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Focus restored to trigger on close                           | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Focus trapped inside while open                              | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Escape key closes without confirming                         | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Custom confirm / reject labels                               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Severity / icon variants (warn / danger / info)              | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Service-based API for programmatic trigger                   | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Custom content via `ng-template`                             | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| `prefers-reduced-motion` — animation disabled                | ⚠️               | ⚠️      | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`role=alertdialog` correctness**: Angular Material's dialog uses `role=dialog` even for confirmation prompts. `role=alertdialog` signals to screen readers that the dialog is blocking and requires immediate response — this is the semantically correct role for a confirm action.
+- **Severity variants**: Warn, danger, and info icon variants give users a visual and semantic cue about the weight of the action. Angular Material has no built-in variant system for confirmation dialogs.
+- **Signal-native service API**: The `ConfirmationService.confirm()` call accepts signal-derived options. Accept/reject outcomes are handled via observables or signal subscriptions without zone-based change detection.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/dialog/overview (general Dialog — no dedicated ConfirmDialog)
+- PrimeNG: https://primeng.org/confirmdialog
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/alert-dialog
+- Ark UI: https://ark-ui.com/react/docs/components/dialog (no dedicated confirm — use Dialog)
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
+
+---
+
+### Drawer
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=dialog` + `aria-modal=true`                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Position variants (left / right / top / bottom)              | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Focus trapped while open                                     | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Focus restored to trigger on close                           | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Escape key closes                                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Backdrop click closes                                        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Scroll lock on body while open                               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Dismissible close button with accessible label               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Size variants (sm / md / lg / full-screen)                   | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Header / footer / content projection slots                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Slide-in / out animation                                     | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `prefers-reduced-motion` — animation disabled                | ⚠️               | ⚠️      | ✅        | ✅      | ✅                 |
+| Signal-native API (`model()` for open state)                 | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`model()` open state**: The `open` binding is a `model<boolean>()` — two-way binding with `[(open)]` composes natively with signals without needing `EventEmitter` or `(visibleChange)` adapter patterns.
+- **`prefers-reduced-motion` correctness**: Angular Material and PrimeNG both omit the reduced-motion handling for the slide animation. This library disables the transform/opacity transition entirely when the user prefers reduced motion, matching Radix and Ark behaviour.
+- **Three runtime visual variants**: Material, Bootstrap, and Minimal appearances are switchable at runtime — no rebuild required.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/sidenav/overview
+- PrimeNG: https://primeng.org/drawer
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/dialog (Sheet/Drawer built on Dialog primitive)
+- Ark UI: https://ark-ui.com/react/docs/components/drawer
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+
+---
+
 ## Navigation & Menus
 
 ---
@@ -512,6 +585,77 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ---
 
+### Breadcrumb
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `<nav>` landmark with `aria-label`                           | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `<ol>` ordered list structure                                | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-current=page` on the last (active) item               | ✅                | ⚠️      | N/A      | N/A    | 🚀                |
+| Separator between items (configurable)                       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Custom separator `ng-template`                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Router link integration                                      | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Icon support per item                                        | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Home item slot                                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | N/A      | N/A    | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **`aria-current=page` correctness**: PrimeNG renders the last breadcrumb item as a non-link span but does not set `aria-current=page` on it. This library sets `aria-current=page` on the final item, which is the canonical way screen readers identify the current location in a breadcrumb trail.
+- **Custom separator template**: Developers can supply an `ng-template` for the separator — icons, slash characters, or SVG chevrons — with full type-safe template context.
+- **Signal-native API**: Items bound via `input<MenuItem[]>()` — the array can be a `computed()` signal derived from router state, with no zone triggers.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/breadcrumb/overview (no dedicated component — breadcrumb is built manually)
+- PrimeNG: https://primeng.org/breadcrumb
+- Radix UI: N/A — no Breadcrumb primitive
+- Ark UI: N/A — no Breadcrumb primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/
+
+---
+
+### Menu
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=menu` on the popup                                     | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `role=menuitem` on items                                     | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `role=menuitemcheckbox` / `role=menuitemradio`               | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| `role=separator` between groups                              | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Arrow key navigation (↑ / ↓)                                | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Home / End jump to first / last item                         | ✅                | ❌       | ✅        | ✅      | 🚀                |
+| Typeahead character search                                   | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| `aria-haspopup=menu` on trigger                              | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-expanded` on trigger                                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Submenu with `role=menu` + `aria-haspopup`                   | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Left-arrow closes submenu + returns focus to parent          | ✅                | ⚠️      | ✅        | ✅      | 🚀                |
+| Disabled item with `aria-disabled` (not HTML `disabled`)     | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| Custom item `ng-template`                                    | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Typeahead character search**: Pressing a letter key jumps focus to the first menu item beginning with that character — exactly as the WAI-ARIA APG Menu pattern specifies. Angular Material and PrimeNG do not implement this, leaving keyboard users unable to navigate long menus efficiently.
+- **Home / End navigation**: PrimeNG does not implement Home/End keys in menus. This library follows the APG contract in full.
+- **Left-arrow submenu close**: Pressing ← inside an open submenu closes it and returns focus to the parent item. PrimeNG handles this inconsistently across its menu family.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/menu/overview
+- PrimeNG: https://primeng.org/menu
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/dropdown-menu
+- Ark UI: https://ark-ui.com/react/docs/components/menu
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu/
+
+---
+
 ## Data Display
 
 ---
@@ -550,6 +694,46 @@ _None._
 - Radix UI: N/A — no table primitive
 - Ark UI: N/A — no table primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
+
+---
+
+### Listbox
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=listbox` on the container                              | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `role=option` on items                                       | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-selected` on selected items                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Single selection                                             | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Multiple selection (`aria-multiselectable=true`)             | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Arrow key navigation (↑ / ↓)                                | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Home / End jump to first / last option                       | ✅                | ❌       | ✅        | ✅      | 🚀                |
+| Typeahead character search                                   | ❌                | ❌       | ✅        | ✅      | 🚀                |
+| Grouped options with group label                             | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Filter / search input                                        | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Custom option `ng-template`                                  | ❌                | ✅       | ✅        | ✅      | ✅                 |
+| Disabled option with `aria-disabled`                         | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Checkbox selection style                                     | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Virtual scroll for large lists                               | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `ControlValueAccessor`                                       | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Typeahead character search**: Pressing a letter key jumps focus to the first option beginning with that character — the WAI-ARIA Listbox pattern requires this; PrimeNG omits it entirely. Angular Material's listbox does not implement it either.
+- **Home / End navigation**: PrimeNG does not implement Home/End for listbox keyboard navigation. This library follows the full APG Listbox keyboard contract.
+- **Signal-native `model()` for selection**: Single selection uses `model<T>()`, multiple selection uses `model<T[]>()` — both compose directly with signals without `ngModel` boilerplate.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/list/overview
+- PrimeNG: https://primeng.org/listbox
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/select (Listbox-like primitive)
+- Ark UI: https://ark-ui.com/react/docs/components/listbox
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
 
 ---
 
@@ -772,6 +956,42 @@ _None — all ❌ reference rows are matched or consciously excluded._
 - Radix UI: N/A — no Toast primitive (team recommends Sonner or custom implementation via WAI-ARIA Live Regions)
 - Ark UI: https://ark-ui.com/react/docs/components/toast
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alert/ (Alert pattern — live-region basis for toast)
+
+---
+
+### ProgressBar
+
+| Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=progressbar`                                           | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-valuenow` updated as progress changes                  | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-valuemin` / `aria-valuemax`                            | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| `aria-valuetext` for human-readable label                    | ⚠️               | ⚠️      | N/A      | N/A    | 🚀                |
+| Indeterminate / loading mode                                 | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Indeterminate omits `aria-valuenow` (correct per spec)       | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Label inside bar (value display)                             | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Custom label `ng-template`                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Severity / colour variants                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Striped / animated stripe variant                            | ❌                | ❌       | N/A      | N/A    | ✅                 |
+| `prefers-reduced-motion` — stripe animation disabled         | N/A              | N/A     | N/A      | N/A    | 🚀                |
+| Signal-native API                                            | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                | ❌                | ❌       | ❌        | ❌      | 🚀                |
+
+#### Gaps
+_None — all ❌ reference rows are matched or consciously excluded._
+
+#### Differentiators
+- **Indeterminate omits `aria-valuenow`**: The ARIA spec states that `aria-valuenow` must not be present when a progressbar is indeterminate. Angular Material and PrimeNG both leave `aria-valuenow=0` on indeterminate progress bars, which some screen readers (NVDA) announce as "0 percent" rather than "in progress". This library removes the attribute in indeterminate mode.
+- **`aria-valuetext` support**: A custom format string (e.g. `"{value} of {max} files uploaded"`) is rendered as `aria-valuetext`, giving screen readers a human-readable progress description. Angular Material and PrimeNG only expose the numeric `aria-valuenow`.
+- **Striped variant with reduced-motion guard**: The animated stripe variant is automatically disabled when `prefers-reduced-motion: reduce` is in effect — no equivalent exists in Angular Material or PrimeNG.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/progress-bar/overview
+- PrimeNG: https://primeng.org/progressbar
+- Radix UI: N/A — no ProgressBar primitive
+- Ark UI: N/A — no ProgressBar primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/meter/ (Meter pattern — closest to bounded progress)
 
 ---
 
