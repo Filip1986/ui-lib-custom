@@ -4,6 +4,17 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-26 [docs(workspace): sprint-a batch 9 — Inplace, PanelMenu, TieredMenu, SpeedDial, Dock, BlockUI, Divider, Panel]
+Changed:
+  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — Inplace (Overlay), PanelMenu + TieredMenu + SpeedDial + Dock (Navigation), BlockUI (Feedback), Divider + Panel (new Layout & Containers category); zero unresolved gaps; 3+ differentiators each
+  docs/COMPONENT_SCORES.md: Comp 8→9 for Inplace (8.9→9.0), Divider (8.7→8.8); PanelMenu/TieredMenu/SpeedDial/Dock/BlockUI/Panel already at Comp 9
+  AI_AGENT_CONTEXT.md: active focus updated (70/100 benchmark sections complete)
+State: Docs-only; no build needed
+Verification: git push (typecheck PASS)
+Next step: Sprint A batch 10
+
+---
+
 Date: 2026-05-26 [docs(workspace): sprint-a batch 8 — RadioButton, Textarea, SelectButton, ToggleSwitch, InputOtp, KeyFilter, TreeSelect, Message]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — RadioButton + Textarea + SelectButton + ToggleSwitch + InputOtp + KeyFilter + TreeSelect (Core Inputs), Message (Feedback); zero unresolved gaps; 3+ differentiators each

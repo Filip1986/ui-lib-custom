@@ -3140,6 +3140,180 @@ None — `role=toolbar`, arrow-key roving `tabindex`, `aria-label`, `aria-orient
 
 ---
 
+### Card
+
+Card is a surface container for grouped content — header, body, and footer — that can act as a landmark region or a list item depending on context.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=region` + `aria-labelledby` when titled | ✅ | ⚠️ (no `aria-labelledby`) | ✅ | ✅ | ✅ |
+| `role=article` in list / feed context | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Configurable heading level for card title | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Actionable card — single Tab stop with `role=link` / `role=button` | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on hover elevation transition | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native `headingLevel` + `actionable` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — region / article semantics, heading level input, actionable card pattern, and hover motion all implemented.
+
+#### Differentiators
+
+- **`role=article` in list context**: When multiple cards are rendered inside a `role=feed` or `role=list`, each card switches to `role=article` so screen readers announce "article N of M" — giving users orientation within a card collection. PrimeNG Card is always a `<div>` with no semantic role.
+- **Configurable heading level**: The `headingLevel` input (default `3`) controls the heading element that wraps the card title, ensuring the document heading hierarchy is never broken by card insertion depth — a detail absent from every reference library.
+- **Actionable card — single Tab stop**: When `actionable=true`, the entire card surface becomes a single focusable element with `role=button` or `role=link`, preventing the anti-pattern of keyboard users having to Tab through an entire card's content to reach the "View details" button at the bottom.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/card
+- PrimeNG: https://primeng.org/card
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/card
+- Ark UI: N/A — no Card primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/feed/ (card collections follow the feed pattern)
+
+---
+
+### Stack
+
+Stack is a one-dimensional layout component that applies uniform spacing between children, configurable as row or column, with no landmark pollution.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| No landmark or ARIA role added by default | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `as` input controls rendered HTML element | ❌ | ❌ | ✅ | ✅ | ✅ |
+| `as=nav` + `aria-label` for nav stacks | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Renders `<ul>` + `<li>` when `as=list` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Spacing from `--uilib-spacing-*` tokens only | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | N/A | N/A | N/A | N/A | 🚀 |
+| Signals-native `direction`, `gap`, `as` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — semantic `as` input, list rendering, and token-only spacing all implemented.
+
+#### Differentiators
+
+- **Semantic `as` input with automatic ARIA**: Setting `as="nav"` renders `<nav>` and requires an `ariaLabel` input (dev-mode warning if absent). Setting `as="list"` renders `<ul>` with each child projected into `<li>` — ensuring the DOM structure is correct for screen reader list navigation without any consumer boilerplate.
+- **No landmark pollution by default**: The default `as="div"` emits no role — preventing the accidental landmark accumulation that occurs when layout components introduce spurious `role=region` or `role=group` wrappers around every spacing container.
+- **All spacing uses `--uilib-spacing-*` tokens**: The `gap` input is mapped to a CSS custom property from the spacing scale (`--uilib-spacing-2`, `--uilib-spacing-4`, etc.) — ensuring spacing is coherent with the rest of the design system and overridable at the theme level without raw pixel values in templates.
+
+#### Reference URLs
+- Angular Material: N/A — no Stack component (Flex Layout deprecated)
+- PrimeNG: N/A — no Stack component
+- Radix UI: N/A — no Stack primitive
+- Ark UI: N/A — no Stack primitive
+- APG Pattern: N/A — Stack is a layout utility; no ARIA pattern applies when used as a plain `<div>`
+
+---
+
+### Grid
+
+Grid is a CSS Grid layout component with configurable columns, responsive breakpoints, and DOM-order / visual-order alignment constraints.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| No landmark or ARIA role added by default | ✅ | ✅ | ✅ | ✅ | ✅ |
+| DOM order matches visual order (no CSS reordering) | ✅ | ⚠️ (offset classes can reorder) | ✅ | ✅ | ✅ |
+| `as` input controls rendered HTML element | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Responsive columns without overflow clipping | ✅ | ✅ | ✅ | ✅ | ✅ |
+| WCAG 1.3.2 advisory — no visual-only sequence | ✅ | ⚠️ | ✅ | ✅ | ✅ |
+| Spacing from `--uilib-spacing-*` tokens only | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Signals-native `columns`, `gap`, `as` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — DOM/visual order alignment, token-only gap, and semantic `as` input all implemented.
+
+#### Differentiators
+
+- **DOM order always matches visual order**: The library's responsive column system uses `grid-template-columns` with `auto-fill` and media-query breakpoints — never CSS `order` property or absolute positioning. This ensures WCAG SC 1.3.2 (Meaningful Sequence) compliance by default, whereas PrimeNG's offset columns can create a visual sequence that diverges from the DOM order.
+- **Token-only gap**: Column and row gaps are mapped from the `--uilib-spacing-*` scale, aligning grid whitespace with the rest of the design system and preventing ad-hoc pixel values from accumulating in consumer templates.
+- **`as` input with semantic promotion**: Like Stack, `as="main"` or `as="section"` promotes the grid wrapper to the appropriate HTML landmark — allowing page-level layout grids to serve dual duty as the `<main>` or `<section>` element without wrapping duplication.
+
+#### Reference URLs
+- Angular Material: N/A — no Grid component (deprecated Flex Layout)
+- PrimeNG: https://primeng.org/grid (utility CSS classes only)
+- Radix UI: N/A — no Grid primitive
+- Ark UI: N/A — no Grid primitive
+- APG Pattern: N/A — Grid is a layout utility; WCAG SC 1.3.2 governs meaningful sequence
+
+---
+
+### Container
+
+Container is a max-width centering wrapper that constrains content width for readability and integrates with skip-link target semantics.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| No role added by default | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Skip-link `id` target compatibility | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `as` input for semantic element | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Max-width from `--uilib-*` token (not hard-coded px) | ❌ | ❌ | ❌ | ❌ | ✅ |
+| No overflow clipping that traps focus indicators | ✅ | ⚠️ (overflow-x: hidden sometimes applied) | ✅ | ✅ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | N/A | N/A | N/A | N/A | 🚀 |
+| Signals-native `maxWidth`, `as` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — skip-link compatibility, token-based max-width, and no-clip guarantee all implemented.
+
+#### Differentiators
+
+- **Skip-link `id` target compatibility**: When `skipTarget=true`, the Container registers its `id` with the page's `SkipLinkService` so the standard "Skip to main content" link can jump directly to it — without requiring consumers to manually add `id="main-content"` or `tabindex="-1"` to a wrapper element.
+- **No overflow clipping that traps focus indicators**: `overflow: hidden` or `overflow: clip` on a container can cause keyboard focus rings on child elements to be clipped at the edge. The library never sets `overflow: hidden` on the Container itself — focus indicators always remain fully visible.
+- **Max-width from `--uilib-container-max-width` token**: The `maxWidth` input maps to a predefined token scale (`sm / md / lg / xl / full`) rather than accepting arbitrary pixels, ensuring container widths are semantically named and consistent across the application.
+
+#### Reference URLs
+- Angular Material: N/A — no Container component
+- PrimeNG: N/A — no Container component
+- Radix UI: https://www.radix-ui.com/primitives/docs/components/container
+- Ark UI: N/A — no Container primitive
+- APG Pattern: N/A — Container is a layout utility; WCAG SC 1.4.10 (Reflow) governs max-width behaviour
+
+---
+
+### Fluid
+
+Fluid is a directive that forces its host element to reflow correctly at 400% browser zoom, satisfying WCAG SC 1.4.10 without horizontal scrolling.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| No horizontal scrollbar at 400% zoom (1280px → 320px) | ✅ | ⚠️ (component-dependent) | ✅ | ✅ | ✅ |
+| `min-width: 0` on flex/grid children to prevent overflow | ✅ | ⚠️ | ✅ | ✅ | ✅ |
+| Fixed-size exceptions declared explicitly | ❌ | ❌ | ❌ | ❌ | ✅ |
+| All widths expressed as `%` or `min()` — no raw `px` widths | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Works with all library components at 400% | ❌ | ⚠️ (known exceptions) | N/A | N/A | ✅ |
+| Signals-native `exceptions` input | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — 400% reflow guarantee, explicit fixed-size exceptions, and no raw pixel widths all implemented.
+
+#### Differentiators
+
+- **All widths expressed as `%`, `min()`, or `clamp()` — never raw `px`**: The directive audits its host element's child components at dev-time and warns if any child uses a raw pixel width that would cause horizontal overflow at 400% zoom — providing an actionable warning rather than a silent WCAG failure.
+- **Explicit fixed-size exceptions declared**: Components that legitimately cannot reflow (e.g., a fixed-width code block or a map embed) are passed via the `exceptions` input — generating a `data-fluid-exception` attribute and a comment in the accessibility report so reviewers know these elements are intentional exclusions rather than overlooked failures.
+- **All library components tested at 400% zoom**: The library's CI pipeline runs Playwright viewport tests at `320px` width (equivalent to 1280px at 400%) against every component demo page, ensuring regressions are caught automatically — rather than relying on manual testing of individual components.
+
+#### Reference URLs
+- Angular Material: N/A — no Fluid directive (reflow handled per-component)
+- PrimeNG: N/A — no Fluid directive
+- Radix UI: N/A — no Fluid primitive
+- Ark UI: N/A — no Fluid primitive
+- APG Pattern: N/A — Fluid addresses WCAG SC 1.4.10 (Reflow) directly
+
+---
+
 ## Utilities & Directives
 
 ---
@@ -3282,6 +3456,276 @@ None — `role=group`, `aria-label`, toolbar-model keyboard navigation, and vari
 - Radix UI: N/A — no ButtonGroup primitive (Toolbar used instead)
 - Ark UI: N/A — no ButtonGroup primitive
 - APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/ (button group follows toolbar keyboard model)
+
+---
+
+### Terminal
+
+Terminal renders a read-only command-line output area with a scrollable history, live-region announcements for new output, and an optional interactive prompt.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `role=log` on output region | ❌ | ⚠️ (no role) | ❌ | ❌ | ✅ |
+| `aria-live=polite` for new output lines | ❌ | ❌ | ❌ | ❌ | ✅ |
+| `aria-label` on terminal region | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Interactive prompt with `role=textbox` + `aria-label` | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Command history navigation (Up / Down arrows) | ❌ | ✅ | ❌ | ❌ | ✅ |
+| `prefers-reduced-motion` on cursor blink | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Three visual variants (material / bootstrap / minimal) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-native output `model<string[]>()` | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `role=log`, `aria-live`, prompt semantics, history navigation, and cursor motion all implemented.
+
+#### Differentiators
+
+- **`role=log` with `aria-live=polite`**: PrimeNG Terminal renders output as a plain styled `<div>` with no role — new lines are not announced to screen reader users. The output region carries `role=log` (the correct ARIA role for sequential output such as chat or command history) with `aria-live=polite` and `aria-atomic=false`, so each new line is announced individually without interrupting the user.
+- **`aria-label` on the terminal region**: The terminal container carries a configurable `aria-label` (e.g., "Application terminal output"), making it findable by landmark navigation and giving screen reader users a clear identity for the region.
+- **`prefers-reduced-motion` suppresses cursor blink**: The blinking cursor animation is gated on `@media (prefers-reduced-motion: no-preference)` — users with photosensitivity or vestibular conditions see a static cursor rather than a continuously blinking element.
+
+#### Reference URLs
+- Angular Material: N/A — no Terminal component
+- PrimeNG: https://primeng.org/terminal
+- Radix UI: N/A — no Terminal primitive
+- Ark UI: N/A — no Terminal primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/log/ (`role=log` for sequential terminal output)
+
+---
+
+### Ripple
+
+Ripple is a directive that adds an ink-ripple press-feedback animation to any host element, with full `prefers-reduced-motion` suppression and zero layout side-effects.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `prefers-reduced-motion` suppresses animation entirely | ✅ | ❌ | N/A | N/A | ✅ |
+| No `overflow: hidden` forced on host | ❌ | ❌ | N/A | N/A | ✅ |
+| Ripple element `aria-hidden` | ✅ | ⚠️ (not set) | N/A | N/A | ✅ |
+| No focus indicator clipping from ripple overflow | ❌ | ❌ | N/A | N/A | ✅ |
+| Configurable colour via `--uilib-ripple-color` token | ❌ | ❌ | N/A | N/A | ✅ |
+| Signals-native `disabled` input | ❌ | ❌ | N/A | N/A | 🚀 |
+
+#### Gaps
+
+None — motion suppression, `aria-hidden` on ripple element, no overflow clipping, and token colour all implemented.
+
+#### Differentiators
+
+- **No `overflow: hidden` forced on host**: Angular Material Ripple and PrimeNG both set `overflow: hidden` on the host element to contain the ripple circle — a side-effect that clips keyboard focus indicators on the host and its children. The library uses `clip-path: inset(0)` on the ripple element itself instead, containing the visual without affecting layout.
+- **Ripple element explicitly `aria-hidden`**: The injected ripple `<span>` carries `aria-hidden=true` — preventing screen readers from encountering or announcing the cosmetic element when navigating the DOM.
+- **`prefers-reduced-motion` is a complete suppression**: PrimeNG Ripple has no reduced-motion handling — the full animation plays regardless of OS accessibility settings. The directive checks `matchMedia('(prefers-reduced-motion: reduce)')` and skips the animation injection entirely when the preference is active.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/components/ripple
+- PrimeNG: https://primeng.org/ripple
+- Radix UI: N/A — no Ripple primitive
+- Ark UI: N/A — no Ripple primitive
+- APG Pattern: N/A — Ripple is a cosmetic directive; `prefers-reduced-motion` (WCAG SC 2.3.3) governs its behaviour
+
+---
+
+### AnimateOnScroll
+
+AnimateOnScroll is a directive that adds entrance animations to elements as they scroll into the viewport, driven by `IntersectionObserver` with complete `prefers-reduced-motion` suppression.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `prefers-reduced-motion` suppresses all animation | ❌ | ❌ | N/A | N/A | ✅ |
+| Elements visible without JS / animation | ❌ | ⚠️ (hidden until observed) | N/A | N/A | ✅ |
+| No animation replayed on Back navigation | ❌ | ❌ | N/A | N/A | ✅ |
+| `IntersectionObserver` threshold configurable | ❌ | ✅ | N/A | N/A | ✅ |
+| Signals-native `animation`, `threshold` inputs | ❌ | ❌ | N/A | N/A | 🚀 |
+
+#### Gaps
+
+None — motion suppression, SSR-safe fallback, and back-navigation guard all implemented.
+
+#### Differentiators
+
+- **`prefers-reduced-motion` is a complete suppression**: When the user has requested reduced motion, the directive applies no animation class, no transition, and no delay — elements are simply visible in their final position from the start. PrimeNG AnimateOnScroll has no reduced-motion handling; animations play regardless of the OS accessibility setting.
+- **Elements are visible without JS and before animation**: The host element is never pre-hidden with `opacity: 0` or `transform: translateY(40px)` in the initial CSS — the animation is added only when the `IntersectionObserver` fires. This ensures content is accessible in SSR / no-JS contexts and that users with reduced motion never see an invisible element that fails to animate.
+- **Animation not replayed on Back navigation**: The directive stores a `WeakSet` of already-animated elements and skips re-animation when the user navigates back to a page using the browser Back button — preventing the disorienting experience of content re-animating on a page the user has already seen.
+
+#### Reference URLs
+- Angular Material: N/A — no AnimateOnScroll directive
+- PrimeNG: https://primeng.org/animateonscroll
+- Radix UI: N/A — no AnimateOnScroll primitive
+- Ark UI: N/A — no AnimateOnScroll primitive
+- APG Pattern: N/A — WCAG SC 2.3.3 (Animation from Interactions) and SC 2.2.2 (Pause, Stop, Hide) govern scroll-triggered animation
+
+---
+
+### AutoFocus
+
+AutoFocus is a directive that focuses its host element once on mount, with guards that prevent focus theft from dialogs, overlays, or components that manage their own initial focus.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Focuses element once on mount | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Skips focus if a dialog / modal is already open | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Skips focus if element is inside a closed panel | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Focus delayed to next microtask (avoids layout flash) | ✅ | ⚠️ (immediate) | ✅ | ✅ | ✅ |
+| Configurable `delay` input for async content | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Signals-native `enabled` + `delay` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — modal-guard, closed-panel guard, microtask delay, and configurable delay all implemented.
+
+#### Differentiators
+
+- **Skips focus if a dialog is already open**: The directive checks the `FocusTrapStack` service before focusing — if any modal dialog or overlay currently owns the focus trap, AutoFocus defers and does not steal focus away. PrimeNG AutoFocus fires unconditionally, which can pull focus out of an open dialog on route navigation.
+- **Skips focus if element is inside a collapsed panel**: AutoFocus also checks if the host element is inside a closed Accordion panel, Fieldset, or any element with `aria-hidden=true` — preventing focus from landing on a hidden element that is not perceivable to the user.
+- **Microtask-delayed focus prevents layout flash**: Focus is deferred to a `Promise.resolve()` microtask, ensuring Angular's change detection and animation frames have completed before focus is applied — preventing the brief scroll-jump that occurs when PrimeNG's immediate `focus()` fires before the element reaches its final rendered position.
+
+#### Reference URLs
+- Angular Material: N/A — no AutoFocus directive (CDK `cdkFocusInitial` used instead)
+- PrimeNG: https://primeng.org/autofocus
+- Radix UI: N/A — focus managed within each primitive directly
+- Ark UI: N/A — focus managed within each primitive directly
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/practices/focus-management/ (initial focus management on page / dialog load)
+
+---
+
+### FocusTrap
+
+FocusTrap is a directive that constrains Tab and Shift+Tab focus cycling within a container, used by overlays and dialogs to prevent focus from escaping to background content.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Tab wraps at last focusable element | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Shift+Tab wraps at first focusable element | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Handles dynamically added focusable children | ✅ | ⚠️ (static scan only) | ✅ | ✅ | ✅ |
+| `aria-hidden` on background content while trapped | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Stack-based — multiple traps nest correctly | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Signals-native `enabled` input (enable / disable reactively) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — Tab wrap, dynamic children, `aria-hidden` on background, and nested trap stack all implemented.
+
+#### Differentiators
+
+- **`aria-hidden` applied to background content while trapped**: When a FocusTrap activates, sibling elements outside the trap receive `aria-hidden=true` — preventing screen readers in virtual-browse mode from navigating to background content even if Tab focus is contained. PrimeNG FocusTrap contains keyboard Tab but does not hide background content from browse mode.
+- **Stack-based nesting — multiple traps compose correctly**: The `FocusTrapStack` service tracks all active traps; when a second modal opens over a first, only the innermost trap is active. Closing the inner modal reactivates the outer trap. PrimeNG has no trap-stack concept, leading to focus escaping to the page when the inner dialog closes.
+- **`enabled` signal input — reactive enable / disable**: `[enabled]="isOpen()"` binds directly to a signal, activating or releasing the trap in sync with Angular's reactivity model — no imperative `enable()` / `disable()` calls needed.
+
+#### Reference URLs
+- Angular Material: https://material.angular.io/cdk/a11y/overview (FocusTrap CDK)
+- PrimeNG: https://primeng.org/focustrap
+- Radix UI: N/A — focus trap built into each overlay primitive
+- Ark UI: N/A — focus trap built into each overlay primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_focus_activedescendant (focus containment for modal dialogs)
+
+---
+
+### StyleClass
+
+StyleClass is a directive that adds, removes, or toggles CSS classes on a target element in response to a trigger event, with `aria-expanded` and `aria-hidden` automatically managed.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| `aria-expanded` on trigger element | ❌ | ⚠️ (manual only) | ❌ | ❌ | ✅ |
+| `aria-hidden` on target when collapsed | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Escape key closes and returns focus to trigger | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Click-outside closes and returns focus | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Signals-native `enterClass`, `leaveClass` inputs | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — `aria-expanded`, `aria-hidden`, Escape key, and click-outside all implemented.
+
+#### Differentiators
+
+- **`aria-expanded` automatically managed on the trigger**: When StyleClass adds the `enterClass` to the target, `aria-expanded=true` is written to the trigger element; on removal, `aria-expanded=false` is written — giving screen reader users announcement of the open/closed state without any consumer ARIA code.
+- **`aria-hidden` on the target when collapsed**: The target element receives `aria-hidden=true` when the leave class is applied and the element is no longer visible — removing it from the AT virtual tree so browse-mode users cannot navigate to hidden content.
+- **Escape key closes and returns focus to trigger**: Pressing Escape while focus is anywhere inside the target closes it and returns focus to the trigger element — matching the disclosure widget keyboard contract that consumers would otherwise need to implement manually.
+
+#### Reference URLs
+- Angular Material: N/A — no StyleClass directive
+- PrimeNG: https://primeng.org/styleclass
+- Radix UI: N/A — no StyleClass primitive
+- Ark UI: N/A — no StyleClass primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/ (trigger + target disclosure pattern)
+
+---
+
+### Bind
+
+Bind is a structural directive that sets arbitrary HTML attributes and properties on its host element, with guards preventing accidental overwrite of accessibility attributes managed by sibling directives.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Batch-set attributes from an object map | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Guard against overwriting `aria-*` managed elsewhere | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Guard against setting `tabindex` to conflicting value | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Signals-reactive — re-applies when input signal changes | ❌ | ❌ | ❌ | ❌ | ✅ |
+| No ARIA interference when binding non-ARIA attributes | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+#### Gaps
+
+None — ARIA guard, tabindex conflict detection, and signal reactivity all implemented.
+
+#### Differentiators
+
+- **Guard against overwriting component-managed `aria-*` attributes**: If a consumer binds `aria-expanded` via Bind on an element where a sibling directive (e.g., StyleClass or FocusTrap) already manages that attribute, a dev-mode warning fires identifying the conflict — preventing silent ARIA state divergence that causes inconsistent screen reader announcements.
+- **Guard against conflicting `tabindex` values**: Setting `tabindex="-1"` via Bind on an element that is a toolbar's current roving-tabindex target produces a warning, as this would break keyboard navigation. The directive checks against the `RovingTabindexService` before applying `tabindex` changes.
+- **Signals-reactive application**: The attribute map input is a signal — when it changes, only the delta (added / removed / changed keys) is applied, avoiding a full attribute reset on every change detection cycle.
+
+#### Reference URLs
+- Angular Material: N/A — no Bind directive
+- PrimeNG: https://primeng.org/bind
+- Radix UI: N/A — no Bind primitive
+- Ark UI: N/A — no Bind primitive
+- APG Pattern: N/A — Bind is a utility directive; guards prevent ARIA violations per WCAG SC 4.1.2
+
+---
+
+### ClassNames
+
+ClassNames is a utility function / directive that computes a final CSS class string from a conditional object map — a zero-runtime-overhead alternative to `ngClass` with no ARIA side-effects.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|---|---|---|---|---|---|
+| Conditional class map → class string | ✅ (`ngClass`) | ✅ | ✅ | ✅ | ✅ |
+| Zero ARIA interference | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Signals-reactive — recomputes on signal change | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Usable as pure function in `computed()` expressions | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| TypeScript-typed class keys (no string maps) | ❌ | ❌ | ❌ | ❌ | 🚀 |
+
+#### Gaps
+
+None — conditional map, signal reactivity, functional use in `computed()`, and typed keys all implemented.
+
+#### Differentiators
+
+- **Usable as a pure function inside `computed()`**: `classNames({ active: isActive(), disabled: isDisabled() })` can be called directly inside a `computed()` signal expression — making host-class derivation reactive and colocated with other signal logic, without needing a template directive.
+- **TypeScript-typed class keys**: The class-map type is `Record<KnownClassKey, boolean>` where `KnownClassKey` is an exported union of the component's valid class names — catching typos at compile time rather than at runtime when a class silently has no effect.
+- **Zero ARIA interference**: ClassNames only touches the host `class` attribute — it never reads or writes `aria-*`, `role`, or `tabindex`, making it safe to compose with any other ARIA-managing directive without risk of conflict.
+
+#### Reference URLs
+- Angular Material: N/A — `ngClass` used directly
+- PrimeNG: https://primeng.org/classnames
+- Radix UI: N/A — `clsx` / `cn` utilities used by convention
+- Ark UI: N/A — utility functions used by convention
+- APG Pattern: N/A — ClassNames is a utility with no direct ARIA implications
 
 ---
 
