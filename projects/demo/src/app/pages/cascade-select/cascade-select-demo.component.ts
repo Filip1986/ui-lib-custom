@@ -137,21 +137,22 @@ export class CascadeSelectDemoComponent {
   public readonly clippingTs: string = clippingTs;
 
   public readonly qualityAudit: ComponentQualityAudit = {
-    date: '2026-05-18',
+    date: '2026-05-26',
     tier: 1,
     scores: {
-      api: 8,
+      api: 9,
       a11y: 9,
       perf: 8,
-      comp: 8,
-      theme: 8,
-      dx: 8,
-      docs: 8,
-      polish: 8,
+      comp: 9,
+      theme: 9,
+      dx: 9,
+      docs: 9,
+      polish: 9,
       angular: 9,
-      feel: 8,
+      feel: 9,
     },
     competitiveParity: 'pending',
+    apgPattern: { name: 'Combobox', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/' },
   };
 
   public readonly importCode: string =
@@ -308,52 +309,65 @@ export class CascadeSelectDemoComponent {
 
   public readonly ariaRows: readonly AriaRow[] = [
     {
-      element: 'Trigger button',
+      element: 'Host (combobox)',
       attribute: 'role="combobox"',
       value: '—',
-      notes: 'Identifies the trigger as a combobox to assistive technologies.',
+      notes: 'Identifies the host element as a combobox to assistive technologies.',
     },
     {
-      element: 'Trigger button',
+      element: 'Host (combobox)',
       attribute: 'aria-expanded',
       value: '"true" | "false"',
-      notes: 'Reflects whether the panel is open.',
+      notes: 'Reflects whether the dropdown panel is open.',
     },
     {
-      element: 'Trigger button',
+      element: 'Host (combobox)',
       attribute: 'aria-haspopup',
-      value: '"tree"',
-      notes: 'Signals that the button controls a hierarchical popup.',
+      value: '"listbox"',
+      notes: 'Signals that the combobox controls a listbox popup.',
     },
     {
-      element: 'Trigger button',
-      attribute: 'aria-label',
-      value: 'ariaLabel value',
-      notes: 'Set via <code>[ariaLabel]</code> for screen reader identification.',
+      element: 'Host (combobox)',
+      attribute: 'aria-controls',
+      value: 'listbox element ID',
+      notes: 'Links the combobox to its primary listbox column.',
     },
     {
-      element: 'Trigger button',
+      element: 'Host (combobox)',
+      attribute: 'aria-activedescendant',
+      value: 'focused option ID',
+      notes: 'Tracks the keyboard-focused option across all visible levels.',
+    },
+    {
+      element: 'Host (combobox)',
+      attribute: 'aria-invalid',
+      value: '"true"',
+      notes: 'Applied when <code>[invalid]="true"</code>.',
+    },
+    {
+      element: 'Host (combobox)',
       attribute: 'aria-disabled',
       value: '"true"',
-      notes: 'Applied when <code>[disabled]="true"</code>.',
+      notes: 'Applied when <code>[disabled]="true"</code> or <code>[loading]="true"</code>.',
     },
     {
-      element: 'Option panel',
-      attribute: 'role="tree"',
+      element: 'Level column',
+      attribute: 'role="listbox"',
       value: '—',
-      notes: 'The panel is exposed as a tree widget reflecting hierarchical structure.',
+      notes: 'Each visible level column is a listbox. The first level is the primary one.',
+    },
+    {
+      element: 'Level column',
+      attribute: 'aria-label',
+      value: 'parent label or placeholder',
+      notes:
+        'Identifies the level by the parent option label; falls back to placeholder for level 0.',
     },
     {
       element: 'Option item',
-      attribute: 'role="treeitem"',
+      attribute: 'role="option"',
       value: '—',
-      notes: 'Each option is announced as a tree item.',
-    },
-    {
-      element: 'Option item',
-      attribute: 'aria-expanded',
-      value: '"true" | "false"',
-      notes: 'Applied to group options that have sub-panels.',
+      notes: 'Each row in a level column is an option.',
     },
     {
       element: 'Option item',
@@ -361,9 +375,23 @@ export class CascadeSelectDemoComponent {
       value: '"true" | "false"',
       notes: 'Indicates the currently selected leaf option.',
     },
+    {
+      element: 'Group option',
+      attribute: 'aria-haspopup',
+      value: '"listbox"',
+      notes: 'Applied to options that have a child level column.',
+    },
+    {
+      element: 'Group option',
+      attribute: 'aria-expanded',
+      value: '"true" | "false"',
+      notes: 'Reflects whether the child level column is currently visible.',
+    },
   ];
 
   public readonly cssVarRows: CssVarRow[] = [
+    { variable: '--uilib-cascade-select-focus-ring-color', description: 'Focus ring colour.' },
+    { variable: '--uilib-cascade-select-focus-ring-width', description: 'Focus ring width.' },
     { variable: '--uilib-cascade-select-bg', description: 'Background colour.' },
     { variable: '--uilib-cascade-select-border', description: 'Border shorthand.' },
     { variable: '--uilib-cascade-select-border-focus', description: 'Border shorthand (focus).' },

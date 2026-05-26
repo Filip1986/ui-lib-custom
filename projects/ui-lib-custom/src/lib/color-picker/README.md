@@ -2,45 +2,45 @@
 
 **Selector:** `ui-lib-color-picker`
 **Package:** `ui-lib-custom/color-picker`
-**Content projection:** no — none
+**Content projection:** none
 
-> The `value` input is a plain `input()` (not `model()`), so two-way binding requires CVA (`ngModel` / reactive forms) rather than `[(value)]`.
+> The `value` input is a plain `input()` (not `model()`), so two-way binding requires CVA (`[(ngModel)]` / reactive forms) rather than `[(value)]`.
 
 ## Inputs
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
-| `value` | `string \| null` | `null` | Initial color value (hex, rgb, or hsb string depending on `format`) |
+| `value` | `ColorPickerValue` | `null` | Bound color value — hex string, `RgbColor`, or `HsbColor` depending on `format` |
 | `format` | `'hex' \| 'rgb' \| 'hsb'` | `'hex'` | Output format for emitted values |
-| `inline` | `boolean` | `false` | Render the picker inline instead of as a popup |
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant; falls back to ThemeConfigService |
-| `disabled` | `boolean` | `false` | Disable the component |
-| `inputId` | `string` | auto-generated | Custom `id` for the hidden input element |
-| `tabindex` | `number` | `0` | Tab index of the trigger button |
-| `appendTo` | `string \| HTMLElement \| null` | `'body'` | Where to mount the popup panel |
+| `inline` | `boolean` | `false` | Renders the picker inline at its DOM position instead of as a popup |
+| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant; falls back to `ThemeConfigService.variant()` |
+| `disabled` | `boolean` | `false` | Disables all interaction |
+| `inputId` | `string` | auto-generated | Custom `id` for the hidden `<input>` element |
+| `tabindex` | `number` | `0` | `tabindex` of the trigger swatch button |
+| `appendTo` | `string \| HTMLElement \| undefined` | `'body'` | Where to mount the popup panel — CSS selector, `HTMLElement`, or `'body'` |
 
 ## Outputs
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `change` | `ColorPickerChangeEvent` | Emitted on every color change (drag or keyboard) |
-| `show` | `void` | Popup panel opened |
-| `hide` | `void` | Popup panel closed |
+| `colorChange` | `ColorPickerChangeEvent` | Emitted on every color change (drag, keyboard, or text-input) |
+| `show` | `void` | Popup panel opened (not emitted in inline mode) |
+| `hide` | `void` | Popup panel closed (not emitted in inline mode) |
 
 ## Keyboard Access
 
-The 2D saturation/brightness canvas area is marked `aria-hidden="true"` and is not in the keyboard tab order. Full keyboard access is provided through the numeric and text inputs at the bottom of the panel:
+| Key | Context | Action |
+|-----|---------|--------|
+| `Tab` / `Shift+Tab` | Any | Moves focus through trigger → panel → hue slider → Hex / H / S / B inputs |
+| `Enter` / `Space` | Trigger | Opens the popup panel |
+| `Enter` / `Space` | Panel | Confirms current color and closes the popup |
+| `Escape` | Panel open | Closes the popup and returns focus to the trigger |
+| `↑` / `↓` | Hue slider focused | Increases / decreases hue by 1° (+`Shift` for 10°) |
+| `←` / `→` | Hue slider focused | Same as `↑` / `↓` |
+| `←` / `→` | Color canvas focused | Increases / decreases saturation (+`Shift` for 10 steps) |
+| `↑` / `↓` | Color canvas focused | Increases / decreases brightness (+`Shift` for 10 steps) |
 
-| Input | Label | Range | Action |
-|-------|-------|-------|--------|
-| Hex | `Hex` | 6-char hex | Type a hex value (e.g. `ff0000`) and press Enter or blur |
-| Hue | `H` | 0 – 359 | Type or use arrow keys on the number input |
-| Saturation | `S` | 0 – 100 | Type or use arrow keys on the number input |
-| Brightness | `B` | 0 – 100 | Type or use arrow keys on the number input |
-
-The hue slider div also supports arrow keys when focused directly (keyboard accelerator: +Shift for 10-step jumps).
-
-**Escape** closes the popup panel and returns focus to the trigger button.
+> The color canvas is marked `aria-hidden="true"`. Screen-reader users navigate via the Hex and H/S/B number inputs in the panel.
 
 ## Supported Formats
 

@@ -43,6 +43,20 @@
 | `cascadeSelectFocus` | `FocusEvent` | Component received focus. Named `cascadeSelectFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
 | `cascadeSelectBlur` | `FocusEvent` | Component lost focus. Named `cascadeSelectBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. |
 
+## Content Projection
+
+Templates are projected using attribute directives placed on `<ng-template>` elements.
+
+| Directive | Selector | Context | Purpose |
+|-----------|----------|---------|---------|
+| `CascadeSelectOptionDirective` | `[uiCascadeSelectOption]` | `$implicit: unknown` | Custom option row template |
+| `CascadeSelectValueDirective` | `[uiCascadeSelectValue]` | `$implicit: unknown` | Custom selected-value display |
+| `CascadeSelectOptionGroupIconDirective` | `[uiCascadeSelectOptionGroupIcon]` | `$implicit: unknown` | Custom sub-menu chevron icon |
+| `CascadeSelectDropdownIconDirective` | `[uiCascadeSelectDropdownIcon]` | — | Custom dropdown-button icon |
+| `CascadeSelectHeaderDirective` | `[uiCascadeSelectHeader]` | — | Slot above the option columns |
+| `CascadeSelectFooterDirective` | `[uiCascadeSelectFooter]` | — | Slot below the option columns |
+| `CascadeSelectLoadingDirective` | `[uiCascadeSelectLoading]` | — | Custom loading indicator |
+
 ## Usage
 
 ```html

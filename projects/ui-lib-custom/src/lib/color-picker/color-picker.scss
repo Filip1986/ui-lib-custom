@@ -25,8 +25,10 @@
     --uilib-colorpicker-selector-size: 12px;
     /* Always white: must contrast against every hue/saturation on the colour canvas. SOURCE: design-tokens.ts › COLORPICKER_TOKENS.selectorBorderColor */
     --uilib-colorpicker-selector-border-color: #fff;
-    --uilib-colorpicker-transition-duration: 200ms;
+    --uilib-colorpicker-transition-duration: var(--uilib-transition-duration-fast, 200ms);
     --uilib-colorpicker-label-font-size: 0.6875rem;
+    --uilib-colorpicker-focus-ring-color: var(--uilib-color-primary-600, #1e88e5);
+    --uilib-colorpicker-focus-ring-width: 3px;
 
     position: relative;
     display: inline-flex;
@@ -74,8 +76,8 @@
   ui-lib-color-picker .ui-lib-colorpicker__hue:focus-visible,
   .ui-lib-colorpicker__hue:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 30%, transparent);
+    box-shadow: 0 0 0 var(--uilib-colorpicker-focus-ring-width)
+      color-mix(in srgb, var(--uilib-colorpicker-focus-ring-color) 25%, transparent);
   }
 
   ui-lib-color-picker .ui-lib-colorpicker__panel,
@@ -230,8 +232,8 @@
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--material .ui-lib-colorpicker__trigger:focus-visible {
-    box-shadow: 0 0 0 3px
-      color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 38%, transparent);
+    box-shadow: 0 0 0 var(--uilib-colorpicker-focus-ring-width)
+      color-mix(in srgb, var(--uilib-colorpicker-focus-ring-color) 38%, transparent);
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--bootstrap .ui-lib-colorpicker__trigger {
@@ -240,8 +242,10 @@
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--bootstrap .ui-lib-colorpicker__trigger:focus-visible {
-    box-shadow: 0 0 0 4px
-      color-mix(in srgb, var(--uilib-color-primary-600, #0d6efd) 24%, transparent);
+    --uilib-colorpicker-focus-ring-width: 4px;
+
+    box-shadow: 0 0 0 var(--uilib-colorpicker-focus-ring-width)
+      color-mix(in srgb, var(--uilib-colorpicker-focus-ring-color) 24%, transparent);
   }
 
   ui-lib-color-picker.ui-lib-colorpicker--bootstrap .ui-lib-colorpicker__panel {
@@ -356,13 +360,35 @@
   .ui-lib-colorpicker__number-input:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px
-      color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 30%, transparent);
-    border-color: var(--uilib-color-primary-600, #1e88e5);
+      color-mix(in srgb, var(--uilib-colorpicker-focus-ring-color) 30%, transparent);
+    border-color: var(--uilib-colorpicker-focus-ring-color);
   }
+  /* ── Panel enter animation (popup mode only) ──────────────────────────────── */
+
+  @keyframes uilib-colorpicker-panel-in {
+    from {
+      opacity: 0;
+      transform: scaleY(0.95) translateY(-4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+    }
+  }
+
+  ui-lib-color-picker:not(.ui-lib-colorpicker--inline) .ui-lib-colorpicker__panel {
+    transform-origin: top center;
+    animation: uilib-colorpicker-panel-in
+      var(--uilib-transition-duration-fast, var(--uilib-colorpicker-transition-duration, 200ms))
+      var(--uilib-transition-easing-enter, ease-out) both;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     ui-lib-color-picker .ui-lib-colorpicker__trigger,
     ui-lib-color-picker .ui-lib-colorpicker__trigger::after,
     ui-lib-color-picker .ui-lib-colorpicker__panel {
+      animation: none;
       transition: none;
       transform: none;
     }

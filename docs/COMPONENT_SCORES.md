@@ -188,7 +188,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Textarea      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.7 | 🟢     |
 | Select        | 9   | 9    | 9    | 10   | 9     | 9   | 9    | 9      | 9       | 9    | —   | 9.1 | 🟢     |
 | AutoComplete  | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 8.9 | 🟢     |
-| CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | —   | 8.2 | 🟢     |
+| CascadeSelect | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 8.9 | 🟢     |
 | DatePicker    | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | —   | 8.3 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 9.0 | 🟢     |
 | RadioButton   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 8    | —   | 8.8 | 🟢     |
@@ -202,7 +202,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Rating        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.7 | 🟢     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | —   | 8.2 | 🟢     |
 | Slider        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | —   | 8.8 | 🟢     |
-| ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | —   | 8.2 | 🟢     |
+| ColorPicker   | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | —   | 8.9 | 🟢     |
 | KeyFilter     | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | —   | 8.6 | 🟢     |
 
 ## Layout

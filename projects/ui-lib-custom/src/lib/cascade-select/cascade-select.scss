@@ -4,6 +4,8 @@
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select {
+    --uilib-cascade-select-focus-ring-color: var(--uilib-color-primary-500);
+    --uilib-cascade-select-focus-ring-width: 3px;
     --uilib-cascade-select-bg: var(--uilib-input-bg, var(--uilib-surface));
     --uilib-cascade-select-border: var(--uilib-input-border, var(--uilib-border));
     --uilib-cascade-select-border-focus: var(
@@ -77,8 +79,8 @@
   ui-lib-cascade-select .ui-lib-cascade-select__trigger:focus-visible {
     outline: none;
     border-color: var(--uilib-cascade-select-border-focus);
-    box-shadow: 0 0 0 0.1875rem
-      color-mix(in srgb, var(--uilib-cascade-select-border-focus) 22%, transparent);
+    box-shadow: 0 0 0 var(--uilib-cascade-select-focus-ring-width)
+      color-mix(in srgb, var(--uilib-cascade-select-focus-ring-color) 25%, transparent);
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--open .ui-lib-cascade-select__trigger {
@@ -137,8 +139,10 @@
     background: var(--uilib-cascade-select-panel-bg);
     box-shadow: var(--uilib-cascade-select-panel-shadow);
     overflow: hidden;
-    animation: uilib-cascade-select-panel-in var(--uilib-cascade-select-panel-animation-duration)
-      ease-out;
+    transform-origin: top center;
+    animation: uilib-cascade-select-panel-in
+      var(--uilib-transition-duration-fast, var(--uilib-cascade-select-panel-animation-duration))
+      var(--uilib-transition-easing-enter, ease-out) both;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__panel.ui-lib-cascade-select__panel--overlay,
@@ -197,8 +201,9 @@
     overflow: auto;
     border-inline-end: 1px solid
       color-mix(in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent);
-    animation: uilib-cascade-select-level-in var(--uilib-cascade-select-level-animation-duration)
-      ease-out;
+    animation: uilib-cascade-select-level-in
+      var(--uilib-transition-duration-fast, var(--uilib-cascade-select-level-animation-duration))
+      var(--uilib-transition-easing-enter, ease-out) both;
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__level:last-child,
@@ -227,7 +232,7 @@
   .ui-lib-cascade-select__option--active {
     background: var(--uilib-cascade-select-option-hover-bg);
     outline: 0.125rem solid
-      color-mix(in srgb, var(--uilib-cascade-select-border-focus) 35%, transparent);
+      color-mix(in srgb, var(--uilib-cascade-select-focus-ring-color) 35%, transparent);
     outline-offset: -0.125rem;
   }
 
@@ -289,7 +294,7 @@
     --uilib-cascade-select-padding-x-base: 0.5rem;
     --uilib-cascade-select-min-height: 2.25rem;
     --uilib-cascade-select-option-padding: 0.4rem 0.6rem;
-    font-size: 0.875rem;
+    font-size: var(--uilib-font-size-sm, 0.875rem);
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--size-md {
@@ -297,7 +302,7 @@
     --uilib-cascade-select-padding-x-base: 0.75rem;
     --uilib-cascade-select-min-height: 2.75rem;
     --uilib-cascade-select-option-padding: 0.55rem 0.75rem;
-    font-size: 1rem;
+    font-size: var(--uilib-font-size-base, 1rem);
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--size-lg {
@@ -305,7 +310,7 @@
     --uilib-cascade-select-padding-x-base: 0.9rem;
     --uilib-cascade-select-min-height: 3.25rem;
     --uilib-cascade-select-option-padding: 0.65rem 0.9rem;
-    font-size: 1.125rem;
+    font-size: var(--uilib-font-size-lg, 1.125rem);
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--material {
@@ -422,6 +427,7 @@
     ui-lib-cascade-select .ui-lib-cascade-select__level,
     .ui-lib-cascade-select__level {
       animation: none;
+      transform: none;
       transition: none;
     }
   }

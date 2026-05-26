@@ -41,8 +41,11 @@ import type {
   CascadeSelectChangeEvent,
   CascadeSelectGroupChangeEvent,
   CascadeSelectHideEvent,
+  CascadeSelectOptionContext,
+  CascadeSelectOptionGroupIconContext,
   CascadeSelectShowEvent,
   CascadeSelectSize,
+  CascadeSelectValueContext,
   CascadeSelectVariant,
 } from './cascade-select.types';
 import {
@@ -96,76 +99,105 @@ const CASCADE_SELECT_PANEL_MODE_CLASSES: readonly string[] = [
   },
 })
 export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecked, OnDestroy {
+  /** Root-level option objects for the first column. Default: `[]`. */
   public readonly options: InputSignal<unknown[]> = input<unknown[]>([]);
+  /** Field name used as the display label for leaf options. Default: `'label'`. */
   public readonly optionLabel: InputSignal<string> = input<string>('label');
+  /** Field name whose value is emitted on selection. `undefined` emits the whole option object. Default: `undefined`. */
   public readonly optionValue: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
+  /** Field name used as the display label for group-level options. Default: `'label'`. */
   public readonly optionGroupLabel: InputSignal<string> = input<string>('label');
+  /** Array of field names for children at each nesting level (e.g. `['states', 'cities']`). Default: `[]`. */
   public readonly optionGroupChildren: InputSignal<string[]> = input<string[]>([]);
+  /** Field name that, when truthy on an option, marks it as non-selectable. Default: `undefined`. */
   public readonly optionDisabled: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
+  /** Placeholder text shown when no value is selected. Default: `'Select'`. */
   public readonly placeholder: InputSignal<string> = input<string>(
-    CASCADE_SELECT_DEFAULTS.Placeholder
+    CASCADE_SELECT_DEFAULTS.Placeholder,
   );
+  /** Visual style variant. Falls back to the global `ThemeConfigService` variant when `undefined`. Default: `undefined`. */
   public readonly variant: InputSignal<CascadeSelectVariant | undefined> = input<
     CascadeSelectVariant | undefined
   >(undefined);
+  /** Control height: `'sm'` (36 px) · `'md'` (44 px) · `'lg'` (52 px). Default: `'md'`. */
   public readonly size: InputSignal<CascadeSelectSize> = input<CascadeSelectSize>(
-    CASCADE_SELECT_DEFAULTS.Size
+    CASCADE_SELECT_DEFAULTS.Size,
   );
+  /** Disables the control; sets `aria-disabled` on the host. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  /** Applies error border styling and sets `aria-invalid="true"` on the host. Default: `false`. */
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  /** Shows a loading spinner and disables all interaction. Default: `false`. */
   public readonly loading: InputSignal<boolean> = input<boolean>(false);
+  /** Show a clear (×) button when the field has a value. Default: `false`. */
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
+  /** Stretch the component to fill its container width. Default: `false`. */
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
+  /** Apply a filled background appearance. Default: `false`. */
   public readonly filled: InputSignal<boolean> = input<boolean>(false);
+  /** Tab index of the host element. Default: `0`. */
   public readonly tabindex: InputSignal<number> = input<number>(0);
+  /** Custom `id` for the trigger control (for external `<label for="">` association). Default: `''`. */
   public readonly inputId: InputSignal<string> = input<string>('');
+  /** Where to mount the detached dropdown panel; `'body'` appends to `document.body`. Default: `'body'`. */
   public readonly appendTo: InputSignal<string | HTMLElement | undefined> = input<
     string | HTMLElement | undefined
   >('body');
+  /** Sets `aria-label` on the host combobox. Default: `null`. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** Sets `aria-labelledby` on the host combobox to reference an external label. Default: `null`. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
+  /** Emitted when a leaf option is selected. Named `cascadeChange` (not `change`) to avoid shadowing the native DOM `change` event. */
   public readonly cascadeChange: OutputEmitterRef<CascadeSelectChangeEvent> =
     output<CascadeSelectChangeEvent>();
+  /** Emitted when the user navigates into a sub-group at any level. */
   public readonly groupChange: OutputEmitterRef<CascadeSelectGroupChangeEvent> =
     output<CascadeSelectGroupChangeEvent>();
+  /** Emitted when the dropdown panel is opened. */
   public readonly show: OutputEmitterRef<CascadeSelectShowEvent> = output<CascadeSelectShowEvent>();
+  /** Emitted when the dropdown panel is closed. */
   public readonly hide: OutputEmitterRef<CascadeSelectHideEvent> = output<CascadeSelectHideEvent>();
+  /** Emitted when the clear (×) button is clicked. */
   public readonly clear: OutputEmitterRef<void> = output<void>();
+  /** Host received focus. Named `cascadeSelectFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. */
   public readonly cascadeSelectFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  /** Host lost focus. Named `cascadeSelectBlur` (not `blur`) to avoid shadowing the native DOM `blur` event. */
   public readonly cascadeSelectBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
-  public readonly optionTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
-    CascadeSelectOptionDirective,
-    { read: TemplateRef }
-  );
-  public readonly valueTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
-    CascadeSelectValueDirective,
-    { read: TemplateRef }
-  );
-  public readonly dropdownIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
+  /** Custom option row template. Context: `{ $implicit: option }`. Selector: `[uiCascadeSelectOption]`. */
+  public readonly optionTemplate: Signal<TemplateRef<CascadeSelectOptionContext> | undefined> =
+    contentChild(CascadeSelectOptionDirective, { read: TemplateRef });
+  /** Custom selected-value display template. Context: `{ $implicit: selectedOption }`. Selector: `[uiCascadeSelectValue]`. */
+  public readonly valueTemplate: Signal<TemplateRef<CascadeSelectValueContext> | undefined> =
+    contentChild(CascadeSelectValueDirective, { read: TemplateRef });
+  /** Custom dropdown-button icon. No context. Selector: `[uiCascadeSelectDropdownIcon]`. */
+  public readonly dropdownIconTemplate: Signal<TemplateRef<void> | undefined> = contentChild(
     CascadeSelectDropdownIconDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
-  public readonly optionGroupIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
-    CascadeSelectOptionGroupIconDirective,
-    { read: TemplateRef }
-  );
-  public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
+  /** Custom sub-menu chevron icon. Context: `{ $implicit: groupOption }`. Selector: `[uiCascadeSelectOptionGroupIcon]`. */
+  public readonly optionGroupIconTemplate: Signal<
+    TemplateRef<CascadeSelectOptionGroupIconContext> | undefined
+  > = contentChild(CascadeSelectOptionGroupIconDirective, { read: TemplateRef });
+  /** Slot rendered above the option columns. No context. Selector: `[uiCascadeSelectHeader]`. */
+  public readonly headerTemplate: Signal<TemplateRef<void> | undefined> = contentChild(
     CascadeSelectHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
-  public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
+  /** Slot rendered below the option columns. No context. Selector: `[uiCascadeSelectFooter]`. */
+  public readonly footerTemplate: Signal<TemplateRef<void> | undefined> = contentChild(
     CascadeSelectFooterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
-  public readonly loadingTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
+  /** Custom loading indicator. No context. Selector: `[uiCascadeSelectLoading]`. */
+  public readonly loadingTemplate: Signal<TemplateRef<void> | undefined> = contentChild(
     CascadeSelectLoadingDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   public readonly panelVisible: WritableSignal<boolean> = signal<boolean>(false);
@@ -184,11 +216,11 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly triggerElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
     'triggerElement',
-    { read: ElementRef }
+    { read: ElementRef },
   );
   private readonly panelElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
     'panelElement',
-    { read: ElementRef }
+    { read: ElementRef },
   );
 
   public readonly cascadeSelectId: string = `${CASCADE_SELECT_IDS.Prefix}-${++cascadeSelectIdCounter}`;
@@ -218,15 +250,15 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   public readonly panelId: Signal<string> = computed<string>((): string => this.listboxId);
 
   public readonly effectiveVariant: Signal<CascadeSelectVariant> = computed<CascadeSelectVariant>(
-    (): CascadeSelectVariant => this.variant() ?? this.themeConfig.variant()
+    (): CascadeSelectVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   public readonly selectedOption: Signal<unknown | null> = computed<unknown | null>(
-    (): unknown | null => this.findOptionByValue(this.internalValue())
+    (): unknown | null => this.findOptionByValue(this.internalValue()),
   );
 
   public readonly displayValue: Signal<string> = computed<string>((): string => {
@@ -238,7 +270,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   });
 
   public readonly hasValue: Signal<boolean> = computed<boolean>(
-    (): boolean => this.selectedOption() !== null
+    (): boolean => this.selectedOption() !== null,
   );
 
   public readonly visibleLevels: Signal<unknown[][]> = computed<unknown[][]>((): unknown[][] => {
@@ -257,7 +289,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   });
 
   public readonly activeDescendantId: Signal<string | null> = computed<string | null>(
-    (): string | null => this.focusedItemId() || null
+    (): string | null => this.focusedItemId() || null,
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -278,7 +310,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     if (this.hasValue()) {
       classes.push(
         CASCADE_SELECT_CLASSNAMES.HasValue,
-        CASCADE_SELECT_CLASSNAMES.InputWrapperFilled
+        CASCADE_SELECT_CLASSNAMES.InputWrapperFilled,
       );
     }
 
@@ -431,7 +463,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     const isGroupOption: boolean = this.optionGroupChildren().some(
       (childrenKey: string, level: number): boolean =>
-        Boolean(childrenKey) && this.isOptionGroup(option, level)
+        Boolean(childrenKey) && this.isOptionGroup(option, level),
     );
     if (isGroupOption) {
       return false;
@@ -456,7 +488,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     const optionRecord: Record<string, unknown> = option as Record<string, unknown>;
     const usesGroupLabel: boolean = this.optionGroupChildren().some(
       (childrenKey: string, level: number): boolean =>
-        Boolean(childrenKey) && this.isOptionGroup(option, level)
+        Boolean(childrenKey) && this.isOptionGroup(option, level),
     );
     const preferredKey: string = usesGroupLabel ? this.optionGroupLabel() : this.optionLabel();
     const preferredValue: unknown = optionRecord[preferredKey];
@@ -694,7 +726,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     });
 
     const groupPath: unknown[] = pathToSelectedOption.filter(
-      (option: unknown, level: number): boolean => this.isOptionGroup(option, level)
+      (option: unknown, level: number): boolean => this.isOptionGroup(option, level),
     );
 
     this.activeOptionPerLevel.set(activeMap);
@@ -719,7 +751,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
   private setActiveOption(level: number, option: unknown, event: Event): void {
     const nextActiveMap: Map<number, unknown> = new Map<number, unknown>(
-      this.activeOptionPerLevel()
+      this.activeOptionPerLevel(),
     );
     nextActiveMap.set(level, option);
     this.removeLevelsAfter(nextActiveMap, level);
@@ -808,7 +840,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     const parentLevel: number = currentLevel - 1;
     const nextActiveMap: Map<number, unknown> = new Map<number, unknown>(
-      this.activeOptionPerLevel()
+      this.activeOptionPerLevel(),
     );
     this.removeLevelsAfter(nextActiveMap, parentLevel);
 
@@ -856,7 +888,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
   private resolveItemIdAtLevel(item: unknown, level: number): string {
     const itemIndex: number = this.getOptionsForLevel(level).findIndex(
-      (candidate: unknown): boolean => candidate === item
+      (candidate: unknown): boolean => candidate === item,
     );
     return this.getItemId(item, level, itemIndex >= 0 ? itemIndex : undefined);
   }
@@ -928,7 +960,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   private findOptionByValueInLevel(
     options: unknown[],
     value: unknown,
-    level: number
+    level: number,
   ): unknown | null {
     for (let index: number = 0; index < options.length; index += 1) {
       const option: unknown = options[index];
@@ -944,7 +976,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
       const matchedChildOption: unknown | null = this.findOptionByValueInLevel(
         this.getOptionChildren(option, level),
         value,
-        level + 1
+        level + 1,
       );
 
       if (matchedChildOption !== null) {
@@ -959,7 +991,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     options: unknown[],
     targetOption: unknown,
     level: number,
-    path: unknown[]
+    path: unknown[],
   ): unknown[] {
     for (let index: number = 0; index < options.length; index += 1) {
       const option: unknown = options[index];
@@ -977,7 +1009,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
         this.getOptionChildren(option, level),
         targetOption,
         level + 1,
-        nextPath
+        nextPath,
       );
 
       if (childPath.length > 0) {
@@ -1083,14 +1115,14 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
       rect.width,
       this.parsePixelValue(
         this.resolveCssVariableValue('--uilib-cascade-select-panel-min-width', '200'),
-        200
-      )
+        200,
+      ),
     );
     const maxWidth: number = Math.max(0, viewportWidth - viewportPadding * 2);
     const panelWidth: number = Math.min(preferredWidth, maxWidth);
     const maxHeight: number = this.parsePixelValue(
       this.resolveCssVariableValue('--uilib-cascade-select-panel-max-height', '260'),
-      260
+      260,
     );
     const availableBelow: number = viewportHeight - rect.bottom - offset - viewportPadding;
     const availableAbove: number = rect.top - offset - viewportPadding;
@@ -1098,7 +1130,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
       availableBelow < Math.min(maxHeight, 180) && availableAbove > availableBelow;
     const safeLeft: number = Math.min(
       Math.max(viewportPadding, rect.left),
-      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding),
     );
 
     panel.style.position = 'fixed';
@@ -1121,7 +1153,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     }
 
     const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
-      this.hostElement.nativeElement
+      this.hostElement.nativeElement,
     );
     for (let index: number = 0; index < hostStyles.length; index += 1) {
       const name: string = hostStyles.item(index);

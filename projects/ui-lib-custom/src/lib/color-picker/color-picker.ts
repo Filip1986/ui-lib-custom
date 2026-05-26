@@ -90,23 +90,49 @@ type PanelPlacement = 'below' | 'above';
  */
 // eslint-disable-next-line jsdoc/require-jsdoc
 export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDestroy {
+  /** Bound color value. Accepts a hex string, `RgbColor`, or `HsbColor` object depending on
+   *  `format`. Does not use `model()` — bind via `[(ngModel)]` or reactive forms. */
   public readonly value: InputSignal<ColorPickerValue> = input<ColorPickerValue>(null);
+
+  /** Output format for emitted color values. `'hex'` → 6-char string; `'rgb'` → `RgbColor`;
+   *  `'hsb'` → `HsbColor`. Default: `'hex'`. */
   public readonly format: InputSignal<ColorFormat> = input<ColorFormat>(
     COLOR_PICKER_DEFAULTS.Format,
   );
+
+  /** When `true`, renders the picker panel inline at its natural DOM position instead of as a
+   *  floating popup. Default: `false`. */
   public readonly inline: InputSignal<boolean> = input<boolean>(COLOR_PICKER_DEFAULTS.Inline);
+
+  /** Design variant override. Falls back to `ThemeConfigService.variant()` when `null`. */
   public readonly variant: InputSignal<ColorPickerVariant | null> =
     input<ColorPickerVariant | null>(null);
+
+  /** Disables all interaction and drag handling. Synced with CVA `setDisabledState`. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(COLOR_PICKER_DEFAULTS.Disabled);
+
+  /** Custom `id` for the hidden `<input>` element used by form frameworks. An auto-generated id
+   *  is used when this is empty. */
   public readonly inputId: InputSignal<string> = input<string>(COLOR_PICKER_DEFAULTS.InputId);
+
+  /** `tabindex` of the trigger swatch button. Default: `0`. */
   public readonly tabindex: InputSignal<number> = input<number>(COLOR_PICKER_DEFAULTS.TabIndex);
+
+  /** Where to mount the floating popup panel. `'body'`, a CSS selector string, or an
+   *  `HTMLElement`. Default: `'body'`. */
   public readonly appendTo: InputSignal<ColorPickerAppendTo> = input<ColorPickerAppendTo>(
     COLOR_PICKER_DEFAULTS.AppendTo,
   );
 
+  /** Emitted on every color change — pointer drag, keyboard, or text-input blur. Payload carries
+   *  `originalEvent` and the formatted `value` according to `format`. */
   public readonly colorChange: OutputEmitterRef<ColorPickerChangeEvent> =
     output<ColorPickerChangeEvent>();
+
+  /** Emitted when the popup panel opens. Not emitted in inline mode. */
   public readonly show: OutputEmitterRef<void> = output<void>();
+
+  /** Emitted when the popup panel closes. Not emitted in inline mode. */
   public readonly hide: OutputEmitterRef<void> = output<void>();
 
   @ViewChild('triggerButton', { static: false })
