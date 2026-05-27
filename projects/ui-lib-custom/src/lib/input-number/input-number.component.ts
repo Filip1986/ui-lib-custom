@@ -24,6 +24,7 @@ import type {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   INPUT_NUMBER_DEFAULTS,
   type InputNumberButtonLayout,
@@ -143,6 +144,7 @@ export class InputNumberComponent implements ControlValueAccessor {
   protected readonly displayValue: WritableSignal<string> = signal<string>('');
   private readonly numberFormatService: NumberFormatService = new NumberFormatService();
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private spinDelayTimer: ReturnType<typeof setTimeout> | null = null;
   private spinIntervalTimer: ReturnType<typeof setInterval> | null = null;
@@ -153,6 +155,18 @@ export class InputNumberComponent implements ControlValueAccessor {
   protected readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
     'material' | 'bootstrap' | 'minimal'
   >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
+
+  /** Aria-label for the increment button, including the field label for context. */
+  protected readonly incrementAriaLabel: Signal<string> = computed<string>((): string => {
+    const labelText: string = this.label() ?? this.i18n.translate('input-number.value');
+    return this.i18n.translate('input-number.increment', { label: labelText });
+  });
+
+  /** Aria-label for the decrement button, including the field label for context. */
+  protected readonly decrementAriaLabel: Signal<string> = computed<string>((): string => {
+    const labelText: string = this.label() ?? this.i18n.translate('input-number.value');
+    return this.i18n.translate('input-number.decrement', { label: labelText });
+  });
 
   /** Human-readable formatted value for aria-valuetext. Null when no value is set. */
   protected readonly formattedValue: Signal<string | null> = computed<string | null>(

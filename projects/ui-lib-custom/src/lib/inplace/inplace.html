@@ -7,7 +7,7 @@
   [disabled]="disabled()"
   [attr.aria-expanded]="active()"
   [attr.aria-controls]="contentId"
-  [attr.aria-label]="displayLabel()"
+  [attr.aria-label]="effectiveDisplayLabel()"
   (click)="onDisplayClick()"
   (keydown)="onDisplayKeydown($event)"
 >
@@ -27,7 +27,7 @@
     <button
       type="button"
       class="ui-lib-inplace__close-button"
-      [attr.aria-label]="closeLabel()"
+      [attr.aria-label]="effectiveCloseLabel()"
       (click)="deactivate()"
     >
       <span [class]="closeIcon()" aria-hidden="true"></span>

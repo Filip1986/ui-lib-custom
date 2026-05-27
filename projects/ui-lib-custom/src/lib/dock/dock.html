@@ -1,4 +1,4 @@
-<nav class="ui-lib-dock__container" [attr.aria-label]="ariaLabel()">
+<nav class="ui-lib-dock__container" [attr.aria-label]="effectiveAriaLabel()">
   <ul class="ui-lib-dock__list" role="list">
     @for (item of visibleItems(); track $index) {
       <li

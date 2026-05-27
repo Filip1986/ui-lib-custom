@@ -9,6 +9,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './progress-bar.types';
 
 export type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './progress-bar.types';
@@ -45,6 +46,7 @@ export type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './pro
 })
 export class ProgressBar {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Progress value from 0 to 100. Clamped automatically. */
   public readonly value: InputSignal<number> = input<number>(0);
@@ -95,12 +97,12 @@ export class ProgressBar {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ProgressBarVariant> = computed<ProgressBarVariant>(
-    (): ProgressBarVariant => this.variant() ?? this.themeConfig.variant()
+    (): ProgressBarVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** True when the bar is in indeterminate mode. */
   protected readonly indeterminate: Signal<boolean> = computed<boolean>(
-    (): boolean => this.mode() === 'indeterminate'
+    (): boolean => this.mode() === 'indeterminate',
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -122,7 +124,7 @@ export class ProgressBar {
 
   /** Value clamped to [0, 100]. */
   public readonly clampedValue: Signal<number> = computed<number>((): number =>
-    Math.min(Math.max(this.value(), 0), 100)
+    Math.min(Math.max(this.value(), 0), 100),
   );
 
   /** Label rendered inside the fill bar. */
@@ -140,7 +142,7 @@ export class ProgressBar {
    * interpret the absence as "unknown progress".
    */
   protected readonly ariaValueNow: Signal<number | null> = computed<number | null>(
-    (): number | null => (this.indeterminate() ? null : this.clampedValue())
+    (): number | null => (this.indeterminate() ? null : this.clampedValue()),
   );
 
   /** Human-readable value text for screen readers (`aria-valuetext`). */
@@ -164,6 +166,6 @@ export class ProgressBar {
         return labelInput;
       }
       return this.indeterminate() ? 'Loading' : null;
-    }
+    },
   );
 }

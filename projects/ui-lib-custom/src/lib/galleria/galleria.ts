@@ -23,6 +23,7 @@ import {
 } from '@angular/core';
 import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   GALLERIA_ARIA_CLOSE_LABEL,
   GALLERIA_ARIA_FULLSCREEN_LABEL,
@@ -102,6 +103,7 @@ export class GalleriaComponent implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly zone: NgZone = inject(NgZone);
   private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ─── Content queries ─────────────────────────────────────────────────────────
 
@@ -354,6 +356,24 @@ export class GalleriaComponent implements OnDestroy {
   public readonly fullscreenAriaLabel: string = GALLERIA_ARIA_FULLSCREEN_LABEL;
   public readonly thumbnailPrevAriaLabel: string = GALLERIA_ARIA_THUMBNAIL_PREV_LABEL;
   public readonly thumbnailNextAriaLabel: string = GALLERIA_ARIA_THUMBNAIL_NEXT_LABEL;
+
+  /** Aria-label for the active item slide group. */
+  public readonly currentItemAriaLabel: Signal<string> = computed<string>((): string =>
+    this.i18n.translate('galleria.item', {
+      current: this.activeIndex() + 1,
+      total: this.value().length,
+    }),
+  );
+
+  /** Aria-label for the indicator tablist / navigation region. */
+  public readonly imageNavAriaLabel: Signal<string> = computed<string>((): string =>
+    this.i18n.translate('galleria.nav'),
+  );
+
+  /** Returns the aria-label for a given indicator button (0-based index). */
+  public goToItemAriaLabel(index: number): string {
+    return this.i18n.translate('galleria.go-to', { n: index + 1 });
+  }
 
   // ─── Lifecycle ────────────────────────────────────────────────────────────────
 

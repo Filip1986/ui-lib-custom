@@ -219,4 +219,62 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'stepper.step.unavailable-linear': 'Paso {current} de {total}: {label} — aún no accesible',
   'stepper.step.unavailable': 'Paso {current} de {total}: {label} — no disponible',
   'stepper.step.fallback-label': 'Paso {n}',
+
+  // ── Alert ─────────────────────────────────────────────────────────────────
+  'alert.dismiss': 'Cerrar alerta',
+
+  // ── Galleria ──────────────────────────────────────────────────────────────
+  'galleria.item': 'Imagen {current} de {total}',
+  'galleria.go-to': 'Ir a la imagen {n}',
+  'galleria.nav': 'Navegación de imágenes',
+
+  // ── OrganizationChart ─────────────────────────────────────────────────────
+  'organization-chart.expand': 'Expandir',
+  'organization-chart.collapse': 'Contraer',
+
+  // ── PickList ──────────────────────────────────────────────────────────────
+  'picklist.source': 'Lista de origen',
+  'picklist.target': 'Lista de destino',
+
+  // ── ProgressBar ───────────────────────────────────────────────────────────
+  'progressbar.complete': 'Completado',
+
+  // ── Rating ────────────────────────────────────────────────────────────────
+  'rating.clear': 'Limpiar valoración',
+
+  // ── Slider ────────────────────────────────────────────────────────────────
+  'slider.min': 'Valor mínimo',
+  'slider.max': 'Valor máximo',
+
+  // ── SplitButton ───────────────────────────────────────────────────────────
+  'split-button.more': 'Más opciones',
+  'split-button.menu': 'Menú',
+
+  // ── InputNumber ───────────────────────────────────────────────────────────
+  'input-number.increment': 'Incrementar {label}',
+  'input-number.decrement': 'Decrementar {label}',
+  'input-number.value': 'valor',
+
+  // ── ScrollTop ─────────────────────────────────────────────────────────────
+  'scroll-top.label': 'Volver arriba',
+
+  // ── Dock ──────────────────────────────────────────────────────────────────
+  'dock.label': 'Dock',
+
+  // ── Inplace ───────────────────────────────────────────────────────────────
+  'inplace.display': 'Clic para editar',
+  'inplace.close': 'Cerrar editor',
+
+  // ── ToggleButton ──────────────────────────────────────────────────────────
+  'toggle-button.on': 'Sí',
+  'toggle-button.off': 'No',
+
+  // ── Chart ─────────────────────────────────────────────────────────────────
+  'chart.label': 'Gráfico',
+
+  // ── InputOtp ──────────────────────────────────────────────────────────────
+  'input-otp.label': 'Contraseña de un solo uso',
+  'input-otp.digit': 'Dígito',
+  'input-otp.of': 'de',
+  'input-otp.paste': 'Código introducido.',
 };

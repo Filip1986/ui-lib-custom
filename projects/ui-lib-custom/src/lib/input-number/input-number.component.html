@@ -2,7 +2,7 @@
   <button
     type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-up"
-    [attr.aria-label]="'Increment ' + (label() || 'value')"
+    [attr.aria-label]="incrementAriaLabel()"
     [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
     (mousedown)="onSpinMouseDown($event, 1)"
     (mouseup)="stopSpinRepeat()"
@@ -18,7 +18,7 @@
   <button
     type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-down"
-    [attr.aria-label]="'Decrement ' + (label() || 'value')"
+    [attr.aria-label]="decrementAriaLabel()"
     [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
     (mousedown)="onSpinMouseDown($event, -1)"
     (mouseup)="stopSpinRepeat()"
@@ -77,7 +77,7 @@
     <button
       type="button"
       class="ui-lib-input-number-button ui-lib-input-number-button-up"
-      [attr.aria-label]="'Increment ' + (label() || 'value')"
+      [attr.aria-label]="incrementAriaLabel()"
       [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
       (mousedown)="onSpinMouseDown($event, 1)"
       (mouseup)="stopSpinRepeat()"
@@ -90,7 +90,7 @@
     <button
       type="button"
       class="ui-lib-input-number-button ui-lib-input-number-button-down"
-      [attr.aria-label]="'Decrement ' + (label() || 'value')"
+      [attr.aria-label]="decrementAriaLabel()"
       [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
       (mousedown)="onSpinMouseDown($event, -1)"
       (mouseup)="stopSpinRepeat()"
@@ -107,7 +107,7 @@
   <button
     type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-up"
-    [attr.aria-label]="'Increment ' + (label() || 'value')"
+    [attr.aria-label]="incrementAriaLabel()"
     [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
     (mousedown)="onSpinMouseDown($event, 1)"
     (mouseup)="stopSpinRepeat()"
@@ -123,7 +123,7 @@
   <button
     type="button"
     class="ui-lib-input-number-button ui-lib-input-number-button-down"
-    [attr.aria-label]="'Decrement ' + (label() || 'value')"
+    [attr.aria-label]="decrementAriaLabel()"
     [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
     (mousedown)="onSpinMouseDown($event, -1)"
     (mouseup)="stopSpinRepeat()"

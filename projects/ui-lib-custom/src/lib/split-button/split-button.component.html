@@ -51,7 +51,7 @@
     aria-haspopup="menu"
     [attr.aria-expanded]="isMenuOpen()"
     [attr.aria-controls]="isMenuOpen() ? menuId() : null"
-    [attr.aria-label]="menuButtonAriaLabel() || 'More options'"
+    [attr.aria-label]="menuButtonAriaLabel() || i18n.translate('split-button.more')"
     (click)="onMenuButtonClick($event)"
     (keydown)="onMenuButtonKeydown($event)"
   >
@@ -68,7 +68,7 @@
     [id]="menuId()"
     role="menu"
     class="ui-lib-split-button__menu"
-    [attr.aria-label]="menuButtonAriaLabel() || 'Menu'"
+    [attr.aria-label]="menuButtonAriaLabel() || i18n.translate('split-button.menu')"
   >
     @for (item of visibleItems(); track trackVisibleItem($index, item); let i = $index) {
       @if (item.separator) {

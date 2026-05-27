@@ -12,7 +12,7 @@
   <button
     type="button"
     class="ui-lib-alert__close"
-    [attr.aria-label]="dismissLabel() ?? 'Dismiss alert'"
+    [attr.aria-label]="dismissLabel() ?? i18n.translate('alert.dismiss')"
     (click)="onDismiss()"
   >
     <ui-lib-icon name="close" [variant]="effectiveVariant()" size="sm" aria-hidden="true" />

@@ -17,6 +17,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   ScrollTopBehavior,
   ScrollTopSize,
@@ -66,9 +67,8 @@ let nextScrollTopId: number = 0;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollTop implements OnInit {
-  private static readonly defaultAriaLabel: string = 'Scroll to top';
-
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);
@@ -90,15 +90,15 @@ export class ScrollTop implements OnInit {
   /** Native scroll-behavior applied when scrolling back to top. */
   public readonly behavior: InputSignal<ScrollTopBehavior> = input<ScrollTopBehavior>('smooth');
 
-  /** Accessible label for the button. */
-  public readonly buttonAriaLabel: InputSignal<string> = input<string>(ScrollTop.defaultAriaLabel);
+  /** Accessible label for the button. Falls back to the active locale's 'scroll-top.label' when empty. */
+  public readonly buttonAriaLabel: InputSignal<string> = input<string>('');
 
   /** Size of the button. */
   public readonly size: InputSignal<ScrollTopSize> = input<ScrollTopSize>('md');
 
   /** Visual variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<ScrollTopVariant | null> = input<ScrollTopVariant | null>(
-    null
+    null,
   );
 
   /** Additional CSS classes to attach to the host element. */
@@ -107,15 +107,15 @@ export class ScrollTop implements OnInit {
   /** Whether the button is currently visible (scroll position exceeds threshold). */
   public readonly isVisible: WritableSignal<boolean> = signal<boolean>(false);
 
-  /** Resolved button aria-label with a non-empty fallback for icon-only usage. */
+  /** Resolved button aria-label — uses the input when non-empty, otherwise falls back to i18n. */
   public readonly resolvedButtonAriaLabel: Signal<string> = computed<string>((): string => {
     const ariaLabel: string = this.buttonAriaLabel().trim();
-    return ariaLabel.length > 0 ? ariaLabel : ScrollTop.defaultAriaLabel;
+    return ariaLabel.length > 0 ? ariaLabel : this.i18n.translate('scroll-top.label');
   });
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ScrollTopVariant> = computed<ScrollTopVariant>(
-    (): ScrollTopVariant => this.variant() ?? (this.themeConfig.variant() as ScrollTopVariant)
+    (): ScrollTopVariant => this.variant() ?? (this.themeConfig.variant() as ScrollTopVariant),
   );
 
   /** Computed CSS classes applied to the host element. */

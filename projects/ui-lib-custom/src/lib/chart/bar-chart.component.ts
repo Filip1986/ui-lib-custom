@@ -43,8 +43,8 @@ export class BarChartComponent {
   /** Keeps chart aspect ratio when responsive sizing is enabled. */
   public readonly maintainAspectRatio: InputSignal<boolean> = input<boolean>(true);
 
-  /** ARIA label applied to the rendered canvas. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Chart');
+  /** ARIA label applied to the rendered canvas. Falls back to locale 'chart.label' when empty. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   /** Optional host height override. */
   public readonly height: InputSignal<string | null> = input<string | null>(null);

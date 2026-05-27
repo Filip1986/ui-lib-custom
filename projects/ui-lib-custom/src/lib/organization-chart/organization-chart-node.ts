@@ -10,6 +10,7 @@ import type { InputSignal, Signal, TemplateRef } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ORGANIZATION_CHART_CONTEXT } from './organization-chart-context';
 import type { OrganizationChartContext } from './organization-chart-context';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { OrganizationChartNode } from './organization-chart.types';
 
 /**
@@ -32,6 +33,8 @@ import type { OrganizationChartNode } from './organization-chart.types';
   },
 })
 export class OrganizationChartNodeComponent {
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
+
   /** The node data to render. */
   public readonly node: InputSignal<OrganizationChartNode> =
     input.required<OrganizationChartNode>();
@@ -50,27 +53,27 @@ export class OrganizationChartNodeComponent {
 
   /** Whether this node has at least one child. */
   protected readonly hasChildren: Signal<boolean> = computed<boolean>(
-    (): boolean => (this.node().children?.length ?? 0) > 0
+    (): boolean => (this.node().children?.length ?? 0) > 0,
   );
 
   /** Whether this node's subtree is currently visible. */
   protected readonly isExpanded: Signal<boolean> = computed<boolean>((): boolean =>
-    this.ctx.isNodeExpanded(this.node())
+    this.ctx.isNodeExpanded(this.node()),
   );
 
   /** Whether this node is currently selected. */
   protected readonly isSelected: Signal<boolean> = computed<boolean>((): boolean =>
-    this.ctx.isNodeSelected(this.node())
+    this.ctx.isNodeSelected(this.node()),
   );
 
   /** Whether this node participates in selection interactions. */
   protected readonly isSelectable: Signal<boolean> = computed<boolean>(
-    (): boolean => Boolean(this.ctx.selectionMode()) && this.node().selectable !== false
+    (): boolean => Boolean(this.ctx.selectionMode()) && this.node().selectable !== false,
   );
 
   /** tabindex: 0 for first root node, -1 for all others. */
   protected readonly tabIndex: Signal<number> = computed<number>((): number =>
-    this.depth() === 0 && this.posinset() === 1 ? 0 : -1
+    this.depth() === 0 && this.posinset() === 1 ? 0 : -1,
   );
 
   /** The TemplateRef registered for this node's type, or null. */
@@ -78,7 +81,7 @@ export class OrganizationChartNodeComponent {
     $implicit: OrganizationChartNode;
   }> | null> = computed<TemplateRef<{ $implicit: OrganizationChartNode }> | null>(
     (): TemplateRef<{ $implicit: OrganizationChartNode }> | null =>
-      this.ctx.getTemplateForNode(this.node())
+      this.ctx.getTemplateForNode(this.node()),
   );
 
   /** Template context passed to NgTemplateOutlet. */

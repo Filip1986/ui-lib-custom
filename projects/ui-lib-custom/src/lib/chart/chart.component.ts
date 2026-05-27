@@ -14,6 +14,7 @@ import {
 import type { EffectRef, InputSignal, OutputEmitterRef, Signal } from '@angular/core';
 import { Chart, type ActiveElement, type ChartEvent, type Plugin } from 'chart.js';
 import { ChartThemeService } from './chart-theme.service';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   ChartClickEvent,
   ChartData,
@@ -70,8 +71,8 @@ export class ChartComponent {
   /** Keeps chart aspect ratio when responsive sizing is enabled. */
   public readonly maintainAspectRatio: InputSignal<boolean> = input<boolean>(true);
 
-  /** ARIA label applied to the rendered canvas. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Chart');
+  /** ARIA label applied to the rendered canvas. Falls back to locale 'chart.label' when empty. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   /** When true, renders a visually-hidden data table as an accessible alternative to the canvas. */
   public readonly showDataTable: InputSignal<boolean> = input<boolean>(true);
@@ -95,6 +96,7 @@ export class ChartComponent {
     inject<ElementRef<HTMLElement>>(ElementRef);
 
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private readonly chartCanvas: Signal<ElementRef<HTMLCanvasElement> | undefined> =
     viewChild<ElementRef<HTMLCanvasElement>>('chartCanvas');
@@ -110,6 +112,11 @@ export class ChartComponent {
   /** Unique numeric ID for this chart instance. */
   protected readonly chartId: number = nextChartId++;
 
+  /** Resolved aria-label — uses input when non-empty, otherwise falls back to i18n. */
+  protected readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('chart.label'),
+  );
+
   /** ID of the visually-hidden data table element. */
   protected readonly tableId: string = `ui-lib-chart-table-${this.chartId}`;
 
@@ -123,7 +130,7 @@ export class ChartComponent {
       (dataset: ChartAccessibleDataset): ChartDatasetRow => ({
         label: typeof dataset.label === 'string' ? dataset.label : '',
         values: [...dataset.data].map((point: unknown): string => this.formatDataValue(point)),
-      })
+      }),
     );
   });
 
@@ -134,7 +141,7 @@ export class ChartComponent {
       return [];
     }
     return (chartData.labels as unknown[]).map((label: unknown): string =>
-      label !== null && label !== undefined ? String(label) : ''
+      label !== null && label !== undefined ? String(label) : '',
     );
   });
 
@@ -178,7 +185,7 @@ export class ChartComponent {
     }
 
     const themeTokens: ChartThemeTokens = this.chartThemeService.readThemeTokens(
-      this.hostElementRef.nativeElement
+      this.hostElementRef.nativeElement,
     );
     const resolvedData: ChartData<ChartType> = this.resolveChartData(chartData, themeTokens);
     const mergedOptions: ChartOptions<ChartType> = this.resolveMergedOptions(themeTokens);
@@ -205,7 +212,7 @@ export class ChartComponent {
     canvasElement: HTMLCanvasElement,
     chartType: ChartType,
     chartData: ChartData<ChartType>,
-    chartOptions: ChartOptions<ChartType>
+    chartOptions: ChartOptions<ChartType>,
   ): void {
     this.chartInstance = new Chart<ChartType>(canvasElement, {
       type: chartType,
@@ -234,14 +241,14 @@ export class ChartComponent {
       onClick: (
         event: ChartEvent,
         activeElements: ActiveElement[],
-        chart: Chart<ChartType>
+        chart: Chart<ChartType>,
       ): void => {
         this.emitChartInteraction(this.chartClick, event, activeElements, chart);
       },
       onHover: (
         event: ChartEvent,
         activeElements: ActiveElement[],
-        chart: Chart<ChartType>
+        chart: Chart<ChartType>,
       ): void => {
         this.emitChartInteraction(this.chartHover, event, activeElements, chart);
       },
@@ -254,7 +261,7 @@ export class ChartComponent {
 
   private resolveChartData(
     chartData: ChartData<ChartType>,
-    themeTokens: ChartThemeTokens
+    themeTokens: ChartThemeTokens,
   ): ChartData<ChartType> {
     const datasetEntries: readonly unknown[] = chartData.datasets as readonly unknown[];
     if (datasetEntries.length === 0) {
@@ -263,7 +270,7 @@ export class ChartComponent {
 
     const palette: string[] = this.chartThemeService.buildColorPalette(
       themeTokens,
-      datasetEntries.length
+      datasetEntries.length,
     );
     const firstPaletteColor: string = palette[0] ?? themeTokens.borderColor;
 
@@ -278,7 +285,7 @@ export class ChartComponent {
           ...datasetRecord,
           backgroundColor: palette[index] ?? firstPaletteColor,
         };
-      }
+      },
     );
 
     return {
@@ -302,7 +309,7 @@ export class ChartComponent {
     emitter: OutputEmitterRef<ChartClickEvent>,
     chartEvent: ChartEvent,
     activeElements: ActiveElement[],
-    chart: Chart<ChartType>
+    chart: Chart<ChartType>,
   ): void {
     if (activeElements.length === 0) {
       return;
@@ -322,7 +329,7 @@ export class ChartComponent {
 
   private mergeOptions(
     baseOptions: Partial<ChartOptions<ChartType>>,
-    overrideOptions: Partial<ChartOptions<ChartType>>
+    overrideOptions: Partial<ChartOptions<ChartType>>,
   ): ChartOptions<ChartType> {
     const baseScales: Record<string, unknown> =
       (baseOptions.scales as Record<string, unknown> | undefined) ?? {};

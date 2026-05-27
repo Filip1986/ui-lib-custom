@@ -42,6 +42,7 @@ import {
   PickListTargetHeaderDirective,
 } from './pick-list-templates.directive';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { Icon } from 'ui-lib-custom/icon';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -79,6 +80,7 @@ export class PickListComponent {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
   private readonly platformId: object = inject(PLATFORM_ID);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Reference to the source listbox `<ul>` for roving-tabindex focus management. */
   private readonly sourceListEl: Signal<ElementRef<HTMLElement> | undefined> =

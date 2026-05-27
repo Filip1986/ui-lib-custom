@@ -23,7 +23,7 @@
     <button
       class="uilib-org-chart-toggle-btn"
       type="button"
-      [attr.aria-label]="isExpanded() ? 'Collapse' : 'Expand'"
+      [attr.aria-label]="isExpanded() ? i18n.translate('organization-chart.collapse') : i18n.translate('organization-chart.expand')"
       (click)="onToggleClick($event)"
       (keydown.enter)="onToggleKeydown($event)"
       (keydown.space)="onToggleKeydown($event)"

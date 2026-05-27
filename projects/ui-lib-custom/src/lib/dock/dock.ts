@@ -18,6 +18,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   DockItem,
   DockItemCommandEvent,
@@ -101,9 +102,9 @@ export class Dock {
   /**
    * Accessible label for the dock's `<nav>` landmark.
    * Displayed to screen-reader users and shown in accessibility trees.
-   * Defaults to `'Dock'`.
+   * Falls back to the active locale's `'dock.label'` when empty.
    */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Dock');
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   // ── Content templates ──────────────────────────────────────────────────────
 
@@ -131,6 +132,7 @@ export class Dock {
   // ── Dependencies ─────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ── State ─────────────────────────────────────────────────────────────────
 
@@ -145,6 +147,11 @@ export class Dock {
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<DockVariant> = computed<DockVariant>(
     (): DockVariant => this.variant() ?? (this.themeConfig.variant() as DockVariant),
+  );
+
+  /** Resolved aria-label for the nav landmark — uses input when non-empty, otherwise i18n. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('dock.label'),
   );
 
   /** Filtered items — only those where `visible` is not explicitly false. */

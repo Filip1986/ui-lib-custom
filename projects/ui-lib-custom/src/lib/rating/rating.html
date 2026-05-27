@@ -5,7 +5,7 @@
       class="ui-lib-rating__cancel"
       role="button"
       [attr.tabindex]="getCancelTabIndex()"
-      [attr.aria-label]="'Clear rating'"
+      [attr.aria-label]="i18n.translate('rating.clear')"
       [attr.aria-disabled]="isDisabled() ? 'true' : null"
       (click)="onCancelClick($event)"
       (keydown.enter)="onCancelClick($event)"

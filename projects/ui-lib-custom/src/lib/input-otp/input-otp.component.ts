@@ -20,6 +20,7 @@ import type {
 } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { INPUT_OTP_DEFAULTS } from './input-otp.types';
 import type { InputOtpChangeEvent, InputOtpSize } from './input-otp.types';
 
@@ -69,19 +70,19 @@ export class InputOtpComponent implements ControlValueAccessor {
   public readonly id: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible name for the OTP group container. */
-  public readonly ariaLabel: InputSignal<string | null> = input<string | null>('One-time passcode');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Optional external label element id for the OTP group container. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
   /** Prefix for cell position labels, used for i18n customization. */
-  public readonly digitAriaLabelPrefix: InputSignal<string> = input<string>('Digit');
+  public readonly digitAriaLabelPrefix: InputSignal<string> = input<string>('');
 
   /** Connector text for cell position labels, used for i18n customization. */
-  public readonly digitAriaLabelConnector: InputSignal<string> = input<string>('of');
+  public readonly digitAriaLabelConnector: InputSignal<string> = input<string>('');
 
   /** Text announced in live region after a successful paste. */
-  public readonly pasteAnnouncement: InputSignal<string> = input<string>('Code entered.');
+  public readonly pasteAnnouncement: InputSignal<string> = input<string>('');
 
   /** When true, each cell renders as a password field (dots). */
   public readonly mask: InputSignal<boolean> = input<boolean>(INPUT_OTP_DEFAULTS.mask);
@@ -136,6 +137,7 @@ export class InputOtpComponent implements ControlValueAccessor {
 
   // CVA disabled state set by forms API.
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly generatedOtpId: string = `ui-lib-input-otp-${nextInputOtpId++}`;
   private readonly pasteAnnouncementMessage: WritableSignal<string> = signal<string>('');
@@ -176,7 +178,8 @@ export class InputOtpComponent implements ControlValueAccessor {
   );
 
   protected readonly groupAriaLabel: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.ariaLabelledBy() ? null : (this.ariaLabel() ?? 'One-time passcode')),
+    (): string | null =>
+      this.ariaLabelledBy() ? null : (this.ariaLabel() ?? this.i18n.translate('input-otp.label')),
   );
 
   protected readonly errorId: Signal<string> = computed<string>(
@@ -193,7 +196,9 @@ export class InputOtpComponent implements ControlValueAccessor {
   }
 
   protected getCellAriaLabel(index: number): string {
-    return `${this.digitAriaLabelPrefix()} ${index + 1} ${this.digitAriaLabelConnector()} ${this.length()}`;
+    const prefix: string = this.digitAriaLabelPrefix() || this.i18n.translate('input-otp.digit');
+    const connector: string = this.digitAriaLabelConnector() || this.i18n.translate('input-otp.of');
+    return `${prefix} ${index + 1} ${connector} ${this.length()}`;
   }
 
   /** Return the current token at a given cell index. */
@@ -415,7 +420,9 @@ export class InputOtpComponent implements ControlValueAccessor {
   private announcePasteCompletion(): void {
     this.pasteAnnouncementMessage.set('');
     void Promise.resolve().then((): void => {
-      this.pasteAnnouncementMessage.set(this.pasteAnnouncement());
+      this.pasteAnnouncementMessage.set(
+        this.pasteAnnouncement() || this.i18n.translate('input-otp.paste'),
+      );
     });
   }
 }

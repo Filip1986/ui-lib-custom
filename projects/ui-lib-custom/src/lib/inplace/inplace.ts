@@ -16,6 +16,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { InplaceVariant } from './inplace.types';
 
 export type { InplaceVariant } from './inplace.types';
@@ -58,8 +59,9 @@ const FOCUSABLE_SELECTOR: string =
 })
 export class Inplace {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly elementRef: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
   private readonly injector: Injector = inject(Injector);
 
@@ -84,11 +86,11 @@ export class Inplace {
   /** Icon class for the close button (e.g. "pi pi-times"). */
   public readonly closeIcon: InputSignal<string> = input<string>('pi pi-times');
 
-  /** Accessible label for the display button. Override for i18n. */
-  public readonly displayLabel: InputSignal<string> = input<string>('Click to edit');
+  /** Accessible label for the display button. Falls back to locale 'inplace.display' when empty. */
+  public readonly displayLabel: InputSignal<string> = input<string>('');
 
-  /** Accessible label for the close button. Override for i18n. */
-  public readonly closeLabel: InputSignal<string> = input<string>('Close editor');
+  /** Accessible label for the close button. Falls back to locale 'inplace.close' when empty. */
+  public readonly closeLabel: InputSignal<string> = input<string>('');
 
   /** Visual variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<InplaceVariant | null> = input<InplaceVariant | null>(null);
@@ -104,7 +106,17 @@ export class Inplace {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<InplaceVariant> = computed<InplaceVariant>(
-    (): InplaceVariant => this.variant() ?? this.themeConfig.variant()
+    (): InplaceVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved display button aria-label — uses input when non-empty, otherwise i18n. */
+  public readonly effectiveDisplayLabel: Signal<string> = computed<string>(
+    (): string => this.displayLabel() || this.i18n.translate('inplace.display'),
+  );
+
+  /** Resolved close button aria-label — uses input when non-empty, otherwise i18n. */
+  public readonly effectiveCloseLabel: Signal<string> = computed<string>(
+    (): string => this.closeLabel() || this.i18n.translate('inplace.close'),
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -164,7 +176,7 @@ export class Inplace {
           contentEl?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
         focusable?.focus();
       },
-      { injector: this.injector }
+      { injector: this.injector },
     );
   }
 
@@ -181,7 +193,7 @@ export class Inplace {
           this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-inplace__display');
         displayBtn?.focus();
       },
-      { injector: this.injector }
+      { injector: this.injector },
     );
   }
 }

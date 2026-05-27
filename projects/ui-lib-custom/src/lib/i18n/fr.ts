@@ -220,4 +220,62 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
     'Étape {current} sur {total} : {label} — pas encore accessible',
   'stepper.step.unavailable': 'Étape {current} sur {total} : {label} — indisponible',
   'stepper.step.fallback-label': 'Étape {n}',
+
+  // ── Alert ─────────────────────────────────────────────────────────────────
+  'alert.dismiss': "Fermer l'alerte",
+
+  // ── Galleria ──────────────────────────────────────────────────────────────
+  'galleria.item': 'Image {current} sur {total}',
+  'galleria.go-to': "Aller à l'image {n}",
+  'galleria.nav': 'Navigation des images',
+
+  // ── OrganizationChart ─────────────────────────────────────────────────────
+  'organization-chart.expand': 'Développer',
+  'organization-chart.collapse': 'Réduire',
+
+  // ── PickList ──────────────────────────────────────────────────────────────
+  'picklist.source': 'Liste source',
+  'picklist.target': 'Liste cible',
+
+  // ── ProgressBar ───────────────────────────────────────────────────────────
+  'progressbar.complete': 'Terminé',
+
+  // ── Rating ────────────────────────────────────────────────────────────────
+  'rating.clear': 'Effacer la note',
+
+  // ── Slider ────────────────────────────────────────────────────────────────
+  'slider.min': 'Valeur minimale',
+  'slider.max': 'Valeur maximale',
+
+  // ── SplitButton ───────────────────────────────────────────────────────────
+  'split-button.more': "Plus d'options",
+  'split-button.menu': 'Menu',
+
+  // ── InputNumber ───────────────────────────────────────────────────────────
+  'input-number.increment': 'Augmenter {label}',
+  'input-number.decrement': 'Diminuer {label}',
+  'input-number.value': 'valeur',
+
+  // ── ScrollTop ─────────────────────────────────────────────────────────────
+  'scroll-top.label': 'Remonter en haut',
+
+  // ── Dock ──────────────────────────────────────────────────────────────────
+  'dock.label': 'Dock',
+
+  // ── Inplace ───────────────────────────────────────────────────────────────
+  'inplace.display': 'Cliquer pour modifier',
+  'inplace.close': "Fermer l'éditeur",
+
+  // ── ToggleButton ──────────────────────────────────────────────────────────
+  'toggle-button.on': 'Oui',
+  'toggle-button.off': 'Non',
+
+  // ── Chart ─────────────────────────────────────────────────────────────────
+  'chart.label': 'Graphique',
+
+  // ── InputOtp ──────────────────────────────────────────────────────────────
+  'input-otp.label': 'Mot de passe à usage unique',
+  'input-otp.digit': 'Chiffre',
+  'input-otp.of': 'sur',
+  'input-otp.paste': 'Code saisi.',
 };

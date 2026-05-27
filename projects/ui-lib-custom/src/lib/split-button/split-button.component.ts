@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { splitButtonId } from './split-button.constants';
 import {
   SplitButtonContentDirective,
@@ -58,6 +59,7 @@ let nextSplitButtonId: number = 0;
 })
 export class SplitButtonComponent {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);
@@ -109,11 +111,11 @@ export class SplitButtonComponent {
 
   public readonly contentTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     SplitButtonContentDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly dropdownIconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     SplitButtonDropdownIconDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   private readonly menuButtonRef: Signal<ElementRef<HTMLButtonElement> | undefined> =
     viewChild<ElementRef<HTMLButtonElement>>('menuBtn');
@@ -124,11 +126,11 @@ export class SplitButtonComponent {
   public readonly visibleItems: Signal<readonly SplitButtonItem[]> = computed<
     readonly SplitButtonItem[]
   >((): readonly SplitButtonItem[] =>
-    this.model().filter((item: SplitButtonItem): boolean => item.visible !== false)
+    this.model().filter((item: SplitButtonItem): boolean => item.visible !== false),
   );
 
   public readonly resolvedVariant: Signal<SplitButtonVariant> = computed<SplitButtonVariant>(
-    (): SplitButtonVariant => this.variant() ?? this.themeConfig.variant()
+    (): SplitButtonVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -167,11 +169,11 @@ export class SplitButtonComponent {
   });
 
   public readonly isMainButtonDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.buttonDisabled() || this.loading()
+    (): boolean => this.disabled() || this.buttonDisabled() || this.loading(),
   );
 
   public readonly isMenuButtonDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.menuButtonDisabled()
+    (): boolean => this.disabled() || this.menuButtonDisabled(),
   );
 
   public readonly resolvedButtonAriaLabel: Signal<string | null> = computed<string | null>(
@@ -195,11 +197,11 @@ export class SplitButtonComponent {
       }
 
       return null;
-    }
+    },
   );
 
   public readonly menuId: Signal<string> = computed<string>(
-    (): string => `${this.instanceId}-menu`
+    (): string => `${this.instanceId}-menu`,
   );
 
   public itemId(index: number, item: SplitButtonItem): string {
@@ -415,7 +417,7 @@ export class SplitButtonComponent {
 
     const menuItemElement: HTMLAnchorElement | null =
       this.hostElement.nativeElement.querySelector<HTMLAnchorElement>(
-        `a[data-menu-item-index="${index}"]`
+        `a[data-menu-item-index="${index}"]`,
       );
     if (!menuItemElement) {
       return;
@@ -481,7 +483,7 @@ export class SplitButtonComponent {
 
   public getFirstFocusableIndex(): number {
     return this.visibleItems().findIndex(
-      (item: SplitButtonItem): boolean => !item.separator && !item.disabled
+      (item: SplitButtonItem): boolean => !item.separator && !item.disabled,
     );
   }
 

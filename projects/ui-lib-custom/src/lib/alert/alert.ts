@@ -13,6 +13,7 @@ import {
 import { Icon } from 'ui-lib-custom/icon';
 import type { StatusIcon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { AlertSeverity, AlertVariant } from './alert.types';
 
 export type { AlertSeverity, AlertVariant } from './alert.types';
@@ -38,6 +39,7 @@ export type { AlertSeverity, AlertVariant } from './alert.types';
 })
 export class Alert {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly severity: InputSignal<AlertSeverity> = input<AlertSeverity>('info');
   public readonly variant: InputSignal<AlertVariant | null> = input<AlertVariant | null>(null);
@@ -57,16 +59,16 @@ export class Alert {
   });
 
   public readonly effectiveVariant: Signal<AlertVariant> = computed<AlertVariant>(
-    (): AlertVariant => this.variant() ?? this.themeConfig.variant()
+    (): AlertVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly liveRole: Signal<'alert' | 'status'> = computed<'alert' | 'status'>(
     (): 'alert' | 'status' =>
-      this.severity() === 'error' || this.severity() === 'warning' ? 'alert' : 'status'
+      this.severity() === 'error' || this.severity() === 'warning' ? 'alert' : 'status',
   );
 
   public readonly ariaLive: Signal<'assertive' | 'polite'> = computed<'assertive' | 'polite'>(
-    (): 'assertive' | 'polite' => (this.liveRole() === 'alert' ? 'assertive' : 'polite')
+    (): 'assertive' | 'polite' => (this.liveRole() === 'alert' ? 'assertive' : 'polite'),
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {

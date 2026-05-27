@@ -25,6 +25,7 @@ import { Icon } from 'ui-lib-custom/icon';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   ToggleButtonVariant,
   ToggleButtonSize,
@@ -65,10 +66,10 @@ let toggleButtonIdCounter: number = 0;
   },
 })
 export class ToggleButton implements ControlValueAccessor, AfterViewInit {
-  /** Label displayed when the button is in the on (checked) state. */
-  public readonly onLabel: InputSignal<string> = input<string>('Yes');
-  /** Label displayed when the button is in the off (unchecked) state. */
-  public readonly offLabel: InputSignal<string> = input<string>('No');
+  /** Label displayed when the button is in the on (checked) state. Falls back to locale 'toggle-button.on'. */
+  public readonly onLabel: InputSignal<string> = input<string>('');
+  /** Label displayed when the button is in the off (unchecked) state. Falls back to locale 'toggle-button.off'. */
+  public readonly offLabel: InputSignal<string> = input<string>('');
   /** Icon name or CSS class displayed in the on (checked) state. */
   public readonly onIcon: InputSignal<SemanticIcon | string | null> = input<
     SemanticIcon | string | null
@@ -127,6 +128,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
   private readonly hostElement: ElementRef = inject(ElementRef);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Resolved variant — falls back to the global theme variant when none is set on this input. */
   public readonly effectiveVariant: Signal<ToggleButtonVariant> = computed<ToggleButtonVariant>(
@@ -143,19 +145,30 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     this.isDisabled() ? -1 : this.tabindex(),
   );
 
-  /** Label resolved from onLabel / offLabel according to the current checked state. */
-  public readonly activeLabel: Signal<string> = computed<string>((): string =>
-    this.pressed() ? this.onLabel() : this.offLabel(),
-  );
+  /** Label resolved from onLabel / offLabel according to the current checked state. Falls back to i18n. */
+  public readonly activeLabel: Signal<string> = computed<string>((): string => {
+    const rawLabel: string = this.pressed() ? this.onLabel() : this.offLabel();
+    if (rawLabel.length > 0) return rawLabel;
+    return this.pressed()
+      ? this.i18n.translate('toggle-button.on')
+      : this.i18n.translate('toggle-button.off');
+  });
 
   /** Icon resolved from onIcon / offIcon according to the current checked state. */
   public readonly activeIcon: Signal<SemanticIcon | string | null> = computed<
     SemanticIcon | string | null
   >((): SemanticIcon | string | null => (this.pressed() ? this.onIcon() : this.offIcon()));
 
-  public readonly hasVisibleLabel: Signal<boolean> = computed<boolean>(
-    (): boolean => this.activeLabel().trim().length > 0,
-  );
+  /**
+   * True when a consumer-supplied label should be rendered visually.
+   * Checks the raw input values, not the i18n fallback — i18n labels are used
+   * for accessibility (aria-label, live announcements) but must not render a
+   * visible span in icon-only mode.
+   */
+  public readonly hasVisibleLabel: Signal<boolean> = computed<boolean>((): boolean => {
+    const rawLabel: string = this.pressed() ? this.onLabel() : this.offLabel();
+    return rawLabel.trim().length > 0;
+  });
 
   public readonly ariaPressed: Signal<'true' | 'false'> = computed<'true' | 'false'>(
     (): 'true' | 'false' => (this.pressed() ? 'true' : 'false'),

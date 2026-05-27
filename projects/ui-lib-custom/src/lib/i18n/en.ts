@@ -220,4 +220,62 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
     'Step {current} of {total}: {label} — unavailable until previous steps are complete',
   'stepper.step.unavailable': 'Step {current} of {total}: {label} — unavailable',
   'stepper.step.fallback-label': 'Step {n}',
+
+  // ── Alert ─────────────────────────────────────────────────────────────────
+  'alert.dismiss': 'Dismiss alert',
+
+  // ── Galleria ──────────────────────────────────────────────────────────────
+  'galleria.item': 'Image {current} of {total}',
+  'galleria.go-to': 'Go to image {n}',
+  'galleria.nav': 'Image navigation',
+
+  // ── OrganizationChart ─────────────────────────────────────────────────────
+  'organization-chart.expand': 'Expand',
+  'organization-chart.collapse': 'Collapse',
+
+  // ── PickList ──────────────────────────────────────────────────────────────
+  'picklist.source': 'Source list',
+  'picklist.target': 'Target list',
+
+  // ── ProgressBar ───────────────────────────────────────────────────────────
+  'progressbar.complete': 'Complete',
+
+  // ── Rating ────────────────────────────────────────────────────────────────
+  'rating.clear': 'Clear rating',
+
+  // ── Slider ────────────────────────────────────────────────────────────────
+  'slider.min': 'Minimum value',
+  'slider.max': 'Maximum value',
+
+  // ── SplitButton ───────────────────────────────────────────────────────────
+  'split-button.more': 'More options',
+  'split-button.menu': 'Menu',
+
+  // ── InputNumber ───────────────────────────────────────────────────────────
+  'input-number.increment': 'Increment {label}',
+  'input-number.decrement': 'Decrement {label}',
+  'input-number.value': 'value',
+
+  // ── ScrollTop ─────────────────────────────────────────────────────────────
+  'scroll-top.label': 'Scroll to top',
+
+  // ── Dock ──────────────────────────────────────────────────────────────────
+  'dock.label': 'Dock',
+
+  // ── Inplace ───────────────────────────────────────────────────────────────
+  'inplace.display': 'Click to edit',
+  'inplace.close': 'Close editor',
+
+  // ── ToggleButton ──────────────────────────────────────────────────────────
+  'toggle-button.on': 'Yes',
+  'toggle-button.off': 'No',
+
+  // ── Chart ─────────────────────────────────────────────────────────────────
+  'chart.label': 'Chart',
+
+  // ── InputOtp ──────────────────────────────────────────────────────────────
+  'input-otp.label': 'One-time passcode',
+  'input-otp.digit': 'Digit',
+  'input-otp.of': 'of',
+  'input-otp.paste': 'Code entered.',
 };

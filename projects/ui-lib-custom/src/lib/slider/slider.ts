@@ -23,6 +23,7 @@ import type {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { SLIDER_DEFAULTS } from './slider.types';
 import type {
   SliderChangeEvent,
@@ -173,6 +174,7 @@ export class Slider implements ControlValueAccessor {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private onCvaChange: (value: number | [number, number]) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};

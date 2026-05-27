@@ -83,6 +83,30 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
+Changed:
+  input-otp.component.ts: inject UiLibI18nService; ariaLabel default null; digitAriaLabelPrefix/Connector/pasteAnnouncement defaults ''; groupAriaLabel/getCellAriaLabel/announcePasteCompletion use i18n fallback
+  toggle-button.ts: hasVisibleLabel checks raw onLabel/offLabel (not activeLabel) to preserve icon-only mode; activeLabel uses i18n fallback for 'Yes'/'No'
+  alert.ts + alert.html: inject i18n; dismiss button 'Dismiss alert' → i18n.translate('alert.dismiss')
+  progress-bar.ts + progress-bar.html: inject i18n; 'Complete' → i18n.translate('progressbar.complete')
+  organization-chart-node.ts + html: inject i18n; expand/collapse labels → i18n.translate('organization-chart.expand/collapse')
+  slider.ts + slider.html: inject i18n; 'Minimum/Maximum value' → i18n.translate('slider.min/max')
+  split-button.component.ts + html: inject i18n; 'More options'/'Menu' → i18n.translate('split-button.more/menu')
+  pick-list.component.ts + html: inject i18n; 'Source/Target list' → i18n.translate('picklist.source/target')
+  galleria.ts + galleria.html: inject i18n; image position/navigation labels → i18n computed signals + goToItemAriaLabel()
+  input-number.component.ts + html: inject i18n; increment/decrement labels → computed signals using i18n.translate
+  scroll-top.ts: inject i18n; buttonAriaLabel default '' → resolvedButtonAriaLabel falls back to i18n.translate('scroll-top.label')
+  dock.ts + dock.html: inject i18n; ariaLabel default '' → effectiveAriaLabel computed using i18n.translate('dock.label')
+  inplace.ts + inplace.html: inject i18n; displayLabel/closeLabel defaults '' → effectiveDisplayLabel/CloseLabel computed
+  chart.component.ts + html: inject i18n; ariaLabel default '' → effectiveAriaLabel computed using i18n.translate('chart.label')
+  bar-chart/line-chart/pie-chart/doughnut-chart.component.ts: ariaLabel default '' (was 'Chart')
+  rating.html: 'Clear rating' → i18n.translate('rating.clear')
+  i18n/en.ts,de.ts,fr.ts,es.ts: 28 new keys (alert.dismiss, galleria.*, organization-chart.*, picklist.*, progressbar.complete, rating.clear, slider.min/max, split-button.*, input-number.*, scroll-top.label, dock.label, inplace.*, toggle-button.on/off, chart.label, input-otp.*)
+  docs/COMPONENT_SCORES.md: I18n 7→9 on 13 components + Rating 6→9; all avgs recalculated
+State: COMPLETE — 6041/6041 tests green (all 226 suites)
+Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ESLint 0 warnings on all changed components
+Next step: Commit and push i18n=7→9 sweep; update bundle-size snapshot if needed; then Step 5 — Angular Signals-first Data Grid
+
 Date: 2026-05-28 [feat: I18n=6→9 sweep — Dialog, DynamicDialog, Drawer, BottomSheet, ConfirmDialog, Toast, Stepper, Popover]
 Changed:
   dialog.component.html: maximize/minimize button labels wired to i18n.translate('dialog.minimize/maximize')
@@ -114,18 +138,6 @@ Changed:
 State: COMPLETE — 6041/6041 tests green; ng build ui-lib-custom zero warnings
 Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
 Next step: Step 5 — Angular Signals-first Data Grid
-
-Date: 2026-05-27 [fix(lib): RTL fixes complete + RTL enforcement upgraded — commits 65ba40c1 + db096fa2]
-Changed:
-  52 SCSS files (65ba40c1): all directional CSS replaced with logical equivalents
-  10 SCSS files (db096fa2): badge, chip, data-view, inplace, meter-group, radio-button, tag, toggle-switch, tree-select, upload — raw font-size values wrapped in --uilib-* tokens
-  stylelint.config.mjs: property-disallowed-list severity warning → error; added border-left/right-color/width/style longhands to banned list
-  LIBRARY_CONVENTIONS.md: new "Logical CSS / RTL Rule" section with full mapping table + exceptions
-  CSS-STANDARDS.md: new "Logical CSS / RTL layout" section; rule severity table updated
-  CLAUDE.md: new convention bullet + 3 new anti-pattern rows
-State: COMPLETE — 0 property-disallowed-list violations library-wide; physical directional properties now block commits; all SCSS token errors in scope resolved
-Verification: npx stylelint "projects/ui-lib-custom/src/lib/**/*.scss" → 0 property-disallowed-list violations; lint-staged + commitlint passed on both commits
-Next step: Step 4 — component score ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 each)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

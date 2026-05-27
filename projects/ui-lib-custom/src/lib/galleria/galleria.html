@@ -104,7 +104,7 @@
       <div
         class="uilib-galleria__item uilib-galleria__slide"
         role="group"
-        [attr.aria-label]="'Image ' + (activeIndex() + 1) + ' of ' + value().length"
+        [attr.aria-label]="currentItemAriaLabel()"
       >
         @if (itemTemplate()) {
           <ng-container
@@ -153,7 +153,7 @@
               type="button"
               class="uilib-galleria__indicator-btn"
               [class.uilib-galleria__indicator-btn--active]="$index === activeIndex()"
-              [attr.aria-label]="'Go to image ' + ($index + 1)"
+              [attr.aria-label]="goToItemAriaLabel($index)"
               [attr.aria-current]="$index === activeIndex() ? 'true' : null"
               (click)="navigateTo($index)"
             >
@@ -184,7 +184,7 @@
       class="uilib-galleria__indicators"
       [class.uilib-galleria__indicators--top]="indicatorsPosition() === 'top'"
       role="tablist"
-      [attr.aria-label]="'Image navigation'"
+      [attr.aria-label]="imageNavAriaLabel()"
     >
       @for (item of value(); track $index) {
         <button

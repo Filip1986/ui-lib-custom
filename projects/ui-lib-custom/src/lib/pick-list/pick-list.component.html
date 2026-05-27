@@ -77,7 +77,7 @@
       #sourceListEl
       role="listbox"
       class="ui-lib-pick-list__list"
-      [attr.aria-label]="sourceAriaLabel() ?? 'Source list'"
+      [attr.aria-label]="sourceAriaLabel() ?? i18n.translate('picklist.source')"
       aria-multiselectable="true"
       [attr.id]="componentId + '-source-list'"
       tabindex="0"
@@ -259,7 +259,7 @@
       #targetListEl
       role="listbox"
       class="ui-lib-pick-list__list"
-      [attr.aria-label]="targetAriaLabel() ?? 'Target list'"
+      [attr.aria-label]="targetAriaLabel() ?? i18n.translate('picklist.target')"
       aria-multiselectable="true"
       [attr.id]="componentId + '-target-list'"
       tabindex="0"
