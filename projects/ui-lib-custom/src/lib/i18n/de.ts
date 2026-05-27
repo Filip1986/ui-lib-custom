@@ -1,0 +1,201 @@
+import type { UiLibTranslationBundle } from './i18n.types';
+
+/** German (Deutsch) translation bundle. */
+export const UI_LIB_DE: UiLibTranslationBundle = {
+  // ── Global ────────────────────────────────────────────────────────────────
+  'global.close': 'Schließen',
+  'global.clear': 'Löschen',
+  'global.search': 'Suchen',
+  'global.loading': 'Wird geladen',
+  'global.empty': 'Keine Ergebnisse gefunden',
+  'global.error': 'Ein Fehler ist aufgetreten',
+  'global.required': 'Erforderlich',
+  'global.optional': 'Optional',
+
+  // ── Select / Autocomplete / Listbox ───────────────────────────────────────
+  'select.placeholder': 'Option wählen',
+  'select.clear': 'Auswahl löschen',
+  'select.toggle': 'Dropdown umschalten',
+  'select.empty': 'Keine Optionen verfügbar',
+  'select.search.placeholder': 'Optionen suchen',
+  'select.search.aria': 'Optionen suchen',
+  'select.selected.count': '{count} Elemente ausgewählt',
+
+  // ── AutoComplete ──────────────────────────────────────────────────────────
+  'autocomplete.chips-label': 'Ausgewählte Elemente',
+  'autocomplete.clear': 'Löschen',
+
+  // ── CascadeSelect ─────────────────────────────────────────────────────────
+  'cascade-select.clear': 'Auswahl löschen',
+
+  // ── Listbox ───────────────────────────────────────────────────────────────
+  'listbox.select-all': 'Alle Optionen auswählen',
+
+  // ── DatePicker ────────────────────────────────────────────────────────────
+  'datepicker.toggle': 'Kalender öffnen',
+  'datepicker.prev.month': 'Vorheriger Monat',
+  'datepicker.next.month': 'Nächster Monat',
+  'datepicker.prev.year': 'Vorheriges Jahr',
+  'datepicker.next.year': 'Nächstes Jahr',
+  'datepicker.prev.decade': 'Vorheriges Jahrzehnt',
+  'datepicker.next.decade': 'Nächstes Jahrzehnt',
+  'datepicker.today': 'Heute',
+  'datepicker.clear': 'Datum löschen',
+  'datepicker.month-picker': 'Monat auswählen',
+  'datepicker.year-picker': 'Jahr auswählen',
+  'datepicker.time-panel': 'Zeitauswahl',
+  'datepicker.time.hour': 'Stunde',
+  'datepicker.time.minute': 'Minute',
+  'datepicker.time.second': 'Sekunde',
+  'datepicker.time.inc.hour': 'Stunde erhöhen',
+  'datepicker.time.dec.hour': 'Stunde verringern',
+  'datepicker.time.inc.minute': 'Minute erhöhen',
+  'datepicker.time.dec.minute': 'Minute verringern',
+  'datepicker.time.inc.second': 'Sekunde erhöhen',
+  'datepicker.time.dec.second': 'Sekunde verringern',
+
+  // ── Dialog / Drawer / BottomSheet / Popover / ConfirmDialog / DynamicDialog
+  'dialog.close': 'Dialog schließen',
+  'drawer.close': 'Schließen',
+  'bottom-sheet.close': 'Schließen',
+  'popover.close': 'Schließen',
+  'confirm-dialog.close': 'Schließen',
+  'dynamic-dialog.close': 'Schließen',
+  'message.close': 'Nachricht schließen',
+  'panel.toggle': 'Panel umschalten',
+
+  // ── Paginator ─────────────────────────────────────────────────────────────
+  'paginator.first': 'Erste Seite',
+  'paginator.prev': 'Vorherige Seite',
+  'paginator.next': 'Nächste Seite',
+  'paginator.last': 'Letzte Seite',
+  'paginator.rows.label': 'Zeilen pro Seite',
+  'paginator.page.report': 'Seite {currentPage} von {totalPages}',
+  'paginator.jump': 'Zur Seite springen, Enter zum Navigieren drücken',
+  'paginator.nav': 'Seitennavigation',
+
+  // ── Upload ────────────────────────────────────────────────────────────────
+  'upload.drop.hint': 'Dateien hierher ziehen oder klicken zum Durchsuchen',
+  'upload.remove': 'Datei entfernen',
+  'upload.browse': 'Dateien durchsuchen',
+
+  // ── Rating ────────────────────────────────────────────────────────────────
+  'rating.label': 'Bewertung: {value} von {max}',
+  'rating.star': 'Stern {n}',
+
+  // ── Table ─────────────────────────────────────────────────────────────────
+  'table.sort.asc': 'Aufsteigend sortieren',
+  'table.sort.desc': 'Absteigend sortieren',
+  'table.sort.none': 'Keine Sortierung',
+
+  // ── Tree ──────────────────────────────────────────────────────────────────
+  'tree.expand': 'Knoten erweitern',
+  'tree.collapse': 'Knoten reduzieren',
+
+  // ── ColorPicker ───────────────────────────────────────────────────────────
+  'colorpicker.toggle': 'Farbauswahl öffnen',
+  'colorpicker.panel': 'Farbauswahl',
+  'colorpicker.hue': 'Farbton-Schieberegler',
+  'colorpicker.hex.input': 'Hex-Farbwert',
+  'colorpicker.red.input': 'Roter Kanal',
+  'colorpicker.green.input': 'Grüner Kanal',
+  'colorpicker.blue.input': 'Blauer Kanal',
+  'colorpicker.alpha.input': 'Alphakanal',
+
+  // ── ProgressBar ───────────────────────────────────────────────────────────
+  'progressbar.label': '{value}% abgeschlossen',
+
+  // ── Carousel / Galleria ───────────────────────────────────────────────────
+  'carousel.prev': 'Vorherige Folie',
+  'carousel.next': 'Nächste Folie',
+  'carousel.indicator': 'Zur Folie {n} gehen',
+  'carousel.slide.status': 'Folie {current} von {total}',
+  'carousel.region': 'Karussell',
+  'carousel.indicators-label': 'Folienindikatoren',
+
+  // ── OrderList / PickList ──────────────────────────────────────────────────
+  'orderlist.move.up': 'Nach oben',
+  'orderlist.move.down': 'Nach unten',
+  'orderlist.move.top': 'An den Anfang',
+  'orderlist.move.bottom': 'Ans Ende',
+  'picklist.add': 'Zur Liste hinzufügen',
+  'picklist.remove': 'Aus Liste entfernen',
+  'picklist.add.all': 'Alle hinzufügen',
+  'picklist.remove.all': 'Alle entfernen',
+
+  // ── Toast ─────────────────────────────────────────────────────────────────
+  'toast.close': 'Benachrichtigung schließen',
+
+  // ── Chip / AutoComplete ───────────────────────────────────────────────────
+  'chip.remove': '{label} entfernen',
+  'autocomplete.dropdown': 'Vorschläge anzeigen',
+
+  // ── Paginator (dynamic) ───────────────────────────────────────────────────
+  'paginator.empty': 'Keine Seiten verfügbar',
+  'paginator.page.current': 'Seite {page}, aktuelle Seite',
+  'paginator.page.go': 'Zur Seite {page} gehen',
+
+  // ── DataView (dynamic) ────────────────────────────────────────────────────
+  'data-view.go.page': 'Zur Seite {page} gehen',
+
+  // ── Meter Group (dynamic) ─────────────────────────────────────────────────
+  'meter-group.segment.default': 'Segment {index}',
+  'meter-group.segment': '{label}: {value} von {max}',
+
+  // ── Rating (dynamic) ─────────────────────────────────────────────────────
+  'rating.value': 'Bewertung: {current} von {total} Sternen',
+  'rating.star.singular': '{star} Stern von {total}',
+  'rating.star.plural': '{star} Sterne von {total}',
+
+  // ── Tree Select (dynamic) ─────────────────────────────────────────────────
+  'tree-select.options': 'Optionen auswählen',
+  'tree-select.none-selected': 'Kein Element ausgewählt',
+  'tree-select.selected.one': '{label} ausgewählt',
+  'tree-select.selected.count': '{count} Elemente ausgewählt',
+
+  // ── Table / TreeTable ─────────────────────────────────────────────────────
+  'table.expand-row': 'Zeilenerweiterung',
+  'table.select-all': 'Alle Zeilen auswählen',
+  'tree-table.filter': 'Tabelle filtern',
+  'tree-table.select-row': 'Zeile auswählen',
+  'tree-table.select-all': 'Alle Zeilen auswählen',
+
+  // ── Tabs ──────────────────────────────────────────────────────────────────
+  'tabs.close': 'Tab schließen',
+
+  // ── Menubar ───────────────────────────────────────────────────────────────
+  'menubar.toggle': 'Navigationsmenü umschalten',
+
+  // ── Input ─────────────────────────────────────────────────────────────────
+  'input.clear': 'Eingabe löschen',
+  'input.password-toggle': 'Passwortsichtbarkeit umschalten',
+  'input-mask.clear': 'Löschen',
+  'password.clear': 'Passwort löschen',
+
+  // ── Meter Group ───────────────────────────────────────────────────────────
+  'meter-group.legend': 'Legende',
+
+  // ── Terminal ──────────────────────────────────────────────────────────────
+  'terminal.input': 'Terminal-Befehlseingabe',
+  'terminal.output': 'Terminal-Ausgabe',
+
+  // ── Tree ──────────────────────────────────────────────────────────────────
+  'tree.filter-placeholder': 'Baumknoten filtern',
+  'tree-select.clear': 'Auswahl löschen',
+
+  // ── Upload ────────────────────────────────────────────────────────────────
+  'upload.area': 'Datei-Upload-Bereich',
+  'upload.toolbar': 'Upload-Aktionen',
+  'upload.files-list': 'Hochzuladende Dateien',
+  'upload.dismiss': 'Validierungsmeldungen schließen',
+
+  // ── Image ─────────────────────────────────────────────────────────────────
+  'image.controls': 'Bildsteuerung',
+
+  // ── DataView ─────────────────────────────────────────────────────────────
+  'data-view.pagination': 'Seitennavigation',
+  'data-view.view-mode': 'Anzeigemodus',
+
+  // ── Editor ────────────────────────────────────────────────────────────────
+  'editor.toolbar': 'Formatierungsoptionen',
+};

@@ -688,5 +688,8 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibI18n = await import('ui-lib-custom/i18n');
     expect(mod.UiLibI18nService).toBeDefined();
     expect(mod.UI_LIB_EN).toBeDefined();
+    expect(mod.UI_LIB_DE).toBeDefined();
+    expect(mod.UI_LIB_FR).toBeDefined();
+    expect(mod.UI_LIB_ES).toBeDefined();
   });
 });
