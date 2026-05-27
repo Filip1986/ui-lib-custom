@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** RTL layout pass — **COMPLETE ✅** — 52 SCSS files migrated to logical CSS properties; 20 files had pre-existing Stylelint errors (duplicate selectors, declaration-strict-value, shorthand-no-redundant-values, selector-no-redundant-nesting) resolved; commit `65ba40c1` landed on `feat/i18n-params-locales`.
-- **Next queue:** Step 4: component score ceiling push (6-phase on Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 on each). Then: Angular Signals-first Data Grid (Step 5). Also queue: fix remaining 11 SCSS files with non-blocking Stylelint font-size warnings (badge, chip, data-view, dialog, inplace, meter-group, radio-button, tag, toggle-switch, tree-select, upload).
+- **Active focus:** RTL layout pass — **COMPLETE ✅** — 52 SCSS files migrated to logical CSS properties; all `declaration-strict-value` font-size/color errors across 21 files resolved; `property-disallowed-list` severity upgraded to **error** so physical directional properties now block commits; new `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule` section added. Commits: `65ba40c1` + `db096fa2` on `feat/i18n-params-locales`.
+- **Next queue:** Step 4: component score ceiling push (6-phase on Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 on each). Then: Angular Signals-first Data Grid (Step 5).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,15 +83,17 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-27 [feat(lib): rtl layout pass — commit 65ba40c1, branch feat/i18n-params-locales]
+Date: 2026-05-27 [fix(lib): RTL fixes complete + RTL enforcement upgraded — commits 65ba40c1 + db096fa2]
 Changed:
-  52 SCSS files: all directional CSS (margin-left/right, padding-left/right, border-left/right, left/right inset, border-*-left/right-radius, text-align: left/right) replaced with logical equivalents
-  20 SCSS files: pre-existing Stylelint errors fixed (no-duplicate-selectors in 7 files; declaration-strict-value font-size/color in 13 files; shorthand-property-no-redundant-values in textarea; selector-no-redundant-nesting-selector in menu)
-  scripts/rtl-logical-css-migrate.mjs: NEW — migration script for logical CSS
-  scripts/rtl-positional-migrate.mjs: NEW — migration script for positional CSS
-State: COMPLETE — commit 65ba40c1 landed; 0 Stylelint errors on all staged files; lint-staged + commitlint both passed
-Verification: npx stylelint all staged .scss (0 errors, 159 warnings); git commit passed all hooks
-Next step: Step 4 — component score ceiling push; resolve remaining 11 unstaged SCSS font-size Stylelint warnings (badge, chip, data-view, dialog, inplace, meter-group, radio-button, tag, toggle-switch, tree-select, upload)
+  52 SCSS files (65ba40c1): all directional CSS replaced with logical equivalents
+  10 SCSS files (db096fa2): badge, chip, data-view, inplace, meter-group, radio-button, tag, toggle-switch, tree-select, upload — raw font-size values wrapped in --uilib-* tokens
+  stylelint.config.mjs: property-disallowed-list severity warning → error; added border-left/right-color/width/style longhands to banned list
+  LIBRARY_CONVENTIONS.md: new "Logical CSS / RTL Rule" section with full mapping table + exceptions
+  CSS-STANDARDS.md: new "Logical CSS / RTL layout" section; rule severity table updated
+  CLAUDE.md: new convention bullet + 3 new anti-pattern rows
+State: COMPLETE — 0 property-disallowed-list violations library-wide; physical directional properties now block commits; all SCSS token errors in scope resolved
+Verification: npx stylelint "projects/ui-lib-custom/src/lib/**/*.scss" → 0 property-disallowed-list violations; lint-staged + commitlint passed on both commits
+Next step: Step 4 — component score ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 each)
 
 Date: 2026-05-27 [feat/i18n-params-locales — PR #271 open]
 Changed:
