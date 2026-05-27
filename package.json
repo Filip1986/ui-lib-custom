@@ -32,7 +32,7 @@
     "lint:css": "stylelint \"**/*.{scss,css}\" --allow-empty-input",
     "lint:css:fix": "stylelint \"**/*.{scss,css}\" --allow-empty-input --fix",
     "lint:css:ci": "stylelint \"**/*.{scss,css}\" --allow-empty-input --max-warnings 0",
-    "lint:css:motion": "stylelint \"projects/ui-lib-custom/**/*.scss\" --custom-formatter scripts/motion-formatter.mjs",
+    "lint:css:motion": "stylelint \"projects/ui-lib-custom/**/*.scss\" --config stylelint.motion.config.mjs --custom-formatter scripts/motion-formatter.mjs",
     "bundlesize": "bundlesize",
     "bundlesize:snapshot": "node scripts/snapshot-bundle-sizes.mjs",
     "bundlesize:check": "node scripts/check-bundle-budget.mjs",
