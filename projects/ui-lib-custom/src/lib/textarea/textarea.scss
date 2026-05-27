@@ -158,7 +158,7 @@
   ui-lib-textarea .ui-lib-textarea__counter {
     color: var(--uilib-textarea-counter-color);
     white-space: nowrap;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   // ---------------------------------------------------------------------------
@@ -234,7 +234,7 @@
     background: transparent;
     border-color: var(--uilib-textarea-border);
     border-radius: 0;
-    border-width: 0 0 1px 0;
+    border-width: 0 0 1px;
     box-shadow: none;
 
     &:focus-within {

@@ -76,6 +76,14 @@
     --uilib-upload-messages-radius: var(--uilib-border-radius, 6px);
     --uilib-upload-messages-close-color: #b91c1c;
 
+    // Typography — each zone gets a named token so consumers can override independently
+    --uilib-upload-empty-message-font-size: 0.9375rem;
+    --uilib-upload-empty-hint-font-size: var(--uilib-font-size-sm, 0.8125rem);
+    --uilib-upload-empty-link-font-size: var(--uilib-font-size-sm, 0.8125rem);
+    --uilib-upload-file-name-font-size: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-upload-file-size-font-size: var(--uilib-font-size-xs, 0.75rem);
+    --uilib-upload-message-font-size: var(--uilib-font-size-sm, 0.8125rem);
+
     // Size — sm
     &.ui-lib-upload--sm {
       --uilib-upload-btn-font-size: 0.75rem;
@@ -241,13 +249,13 @@
 
   .ui-lib-upload__empty-message {
     margin: 0;
-    font-size: 0.9375rem;
+    font-size: var(--uilib-upload-empty-message-font-size);
     color: var(--uilib-upload-empty-text-color);
   }
 
   .ui-lib-upload__empty-hint {
     margin: 0;
-    font-size: 0.8125rem;
+    font-size: var(--uilib-upload-empty-hint-font-size);
     color: var(--uilib-upload-empty-hint-color);
     display: flex;
     gap: 0.25rem;
@@ -259,7 +267,7 @@
     border: none;
     padding: 0;
     font: inherit;
-    font-size: 0.8125rem;
+    font-size: var(--uilib-upload-empty-link-font-size);
     color: var(--uilib-upload-empty-link-color);
     cursor: pointer;
     text-decoration: underline;
@@ -334,7 +342,7 @@
   }
 
   .ui-lib-upload__file-name {
-    font-size: 0.875rem;
+    font-size: var(--uilib-upload-file-name-font-size);
     font-weight: 500;
     color: var(--uilib-upload-file-name-color);
     white-space: nowrap;
@@ -343,7 +351,7 @@
   }
 
   .ui-lib-upload__file-size {
-    font-size: 0.75rem;
+    font-size: var(--uilib-upload-file-size-font-size);
     color: var(--uilib-upload-file-size-color);
   }
 
@@ -399,7 +407,7 @@
   }
 
   .ui-lib-upload__message {
-    font-size: 0.8125rem;
+    font-size: var(--uilib-upload-message-font-size);
     line-height: 1.5;
   }
 

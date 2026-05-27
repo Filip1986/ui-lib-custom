@@ -142,14 +142,14 @@
     .ui-lib-accordion-panel__header
     .ui-lib-accordion-panel__icon.ui-lib-accordion-panel__icon--start {
     order: 0;
-    margin-right: var(--uilib-accordion-icon-gap);
+    margin-inline-end: var(--uilib-accordion-icon-gap);
   }
 
   ui-lib-accordion-panel
     .ui-lib-accordion-panel__header
     .ui-lib-accordion-panel__icon.ui-lib-accordion-panel__icon--end {
     order: 2;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   ui-lib-accordion-panel
@@ -246,22 +246,19 @@
 
   ui-lib-accordion.ui-lib-accordion--variant-bootstrap ui-lib-accordion-panel {
     border-radius: calc(var(--uilib-shape-base, 6px) * 0);
-    border-left: var(--uilib-accordion-panel-border);
-    border-right: var(--uilib-accordion-panel-border);
+    border-inline-start: var(--uilib-accordion-panel-border);
+    border-inline-end: var(--uilib-accordion-panel-border);
 
     &:first-child {
       border-top: var(--uilib-accordion-panel-border);
-      border-top-left-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
-      border-top-right-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
+      border-start-start-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
+      border-start-end-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
     }
 
     &:last-child {
       border-bottom: var(--uilib-accordion-panel-border);
-      border-bottom-left-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
-      border-bottom-right-radius: var(
-        --uilib-accordion-border-radius,
-        var(--uilib-shape-base, 6px)
-      );
+      border-end-start-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
+      border-end-end-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
     }
   }
 

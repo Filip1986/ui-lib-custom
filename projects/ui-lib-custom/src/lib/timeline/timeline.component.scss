@@ -54,8 +54,8 @@
     }
     .ui-lib-timeline__opposite {
       grid-area: opposite;
-      padding-right: var(--uilib-timeline-opposite-gap);
-      text-align: right;
+      padding-inline-end: var(--uilib-timeline-opposite-gap);
+      text-align: end;
       align-self: flex-start;
       padding-top: calc((var(--uilib-timeline-marker-size) - 1em) / 2);
     }
@@ -67,7 +67,7 @@
     }
     .ui-lib-timeline__content {
       grid-area: content;
-      padding-left: var(--uilib-timeline-content-gap);
+      padding-inline-start: var(--uilib-timeline-content-gap);
       padding-bottom: 1.5rem;
       align-self: flex-start;
       padding-top: calc((var(--uilib-timeline-marker-size) - 1em) / 2);
@@ -94,14 +94,14 @@
       grid-template-areas: 'content separator opposite';
     }
     .ui-lib-timeline__opposite {
-      text-align: left;
-      padding-right: 0;
-      padding-left: var(--uilib-timeline-opposite-gap);
+      text-align: start;
+      padding-inline-end: 0;
+      padding-inline-start: var(--uilib-timeline-opposite-gap);
     }
     .ui-lib-timeline__content {
-      padding-left: 0;
-      padding-right: var(--uilib-timeline-content-gap);
-      text-align: right;
+      padding-inline-start: 0;
+      padding-inline-end: var(--uilib-timeline-content-gap);
+      text-align: end;
     }
   }
   // ---------------------------------------------------------------------------
@@ -112,14 +112,14 @@
       grid-template-columns: 1fr auto var(--uilib-timeline-opposite-min-width);
       grid-template-areas: 'content separator opposite';
       .ui-lib-timeline__opposite {
-        text-align: left;
-        padding-right: 0;
-        padding-left: var(--uilib-timeline-opposite-gap);
+        text-align: start;
+        padding-inline-end: 0;
+        padding-inline-start: var(--uilib-timeline-opposite-gap);
       }
       .ui-lib-timeline__content {
-        padding-left: 0;
-        padding-right: var(--uilib-timeline-content-gap);
-        text-align: right;
+        padding-inline-start: 0;
+        padding-inline-end: var(--uilib-timeline-content-gap);
+        text-align: end;
       }
     }
   }

@@ -61,7 +61,7 @@ font-size:  16px;
 3. **No ID selectors** → enforced by stylelint (error)
 4. **No `transition: all`** → enforced by stylelint (error)
 5. **`@media (prefers-reduced-motion: reduce)`** on every animated component
-6. **Logical properties** for all new spacing (`margin-inline-*`, `padding-block-*`) → enforced by stylelint (warning)
+6. **Logical properties** — all directional spacing and border properties → enforced by stylelint (**error**)
 7. **Animate only `transform` and `opacity`** → enforced by stylelint (warning)
 
 ---
@@ -144,7 +144,7 @@ Pre-commit: `lint-staged` runs stylelint on every staged `.scss`/`.css` file aut
 | `scale-unlimited/declaration-strict-value`       | Token-only colours/sizes                  | error    |
 | `declaration-property-value-disallowed-list`     | No `transition:all`, no `text-align:left` | error    |
 | `plugin/no-low-performance-animation-properties` | GPU-only animations                       | warning  |
-| `property-disallowed-list`                       | Logical properties                        | warning  |
+| `property-disallowed-list`                       | Logical properties (physical props banned) | **error** |
 | `scss/no-global-function-names`                  | No `darken()`/`lighten()`                 | error    |
 
 ---
@@ -158,12 +158,84 @@ Pre-commit: `lint-staged` runs stylelint on every staged `.scss`/`.css` file aut
 - [ ] Nesting depth ≤ 2
 - [ ] No ID selectors
 - [ ] Container queries used (not `@media (min-width)`) for component layout
-- [ ] Logical properties for all new spacing
+- [ ] Logical properties used for all directional spacing, borders, and radius (no `margin-left`, `padding-right`, `border-left`, `border-top-left-radius`, etc.)
 - [ ] Animations use only `transform`/`opacity`
 - [ ] `prefers-reduced-motion` present for every animation
 - [ ] `npm run lint:css` passes
 
-*Last reviewed: 2026-05-24*
+*Last reviewed: 2026-05-27*
+
+---
+
+## Logical CSS / RTL layout
+
+All library SCSS uses **CSS logical properties** instead of physical directional properties.
+This enables full RTL layout support without any extra override CSS.
+
+### Banned → logical replacements
+
+| ❌ Physical (banned, severity: error)    | ✅ Logical (use this)                         |
+|------------------------------------------|-----------------------------------------------|
+| `margin-left` / `margin-right`           | `margin-inline-start` / `margin-inline-end`   |
+| `padding-left` / `padding-right`         | `padding-inline-start` / `padding-inline-end` |
+| `border-left` / `border-right`           | `border-inline-start` / `border-inline-end`   |
+| `border-left-color` / `border-right-color` | `border-inline-start-color` / `border-inline-end-color` |
+| `border-left-width` / `border-right-width` | `border-inline-start-width` / `border-inline-end-width` |
+| `border-left-style` / `border-right-style` | `border-inline-start-style` / `border-inline-end-style` |
+| `border-top-left-radius`                 | `border-start-start-radius`                   |
+| `border-top-right-radius`               | `border-start-end-radius`                     |
+| `border-bottom-left-radius`             | `border-end-start-radius`                     |
+| `border-bottom-right-radius`            | `border-end-end-radius`                       |
+| `text-align: left` / `text-align: right` | `text-align: start` / `text-align: end`       |
+
+### Positioning (`left` / `right`)
+
+These properties are **not in the banned list** because they have direction-agnostic uses
+(e.g. `left: 50%` for centering). Apply judgment:
+
+```scss
+// ✅ Direction-agnostic centering — keep left: 50%
+.uilib-tooltip {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// ❌ Directional positioning — use inset-inline-*
+.uilib-sidebar-toggle {
+  left: 0;   // ← this means "start side"
+}
+
+// ✅ Correct
+.uilib-sidebar-toggle {
+  inset-inline-start: 0;
+}
+```
+
+### Block-axis properties
+
+`top`, `bottom`, `margin-top`, `margin-bottom`, `padding-top`, `padding-bottom` are
+block-axis and are **not banned** — they behave consistently regardless of writing direction.
+
+### `inset` shorthand
+
+Use `inset: 0` freely for "fill parent" overlays:
+
+```scss
+// ✅ Equivalent to top:0; right:0; bottom:0; left:0 and works in all writing modes
+.uilib-overlay { position: absolute; inset: 0; }
+```
+
+### Testing RTL
+
+Add `dir="rtl"` to `<html>` in the demo app to smoke-test RTL layout:
+
+```html
+<html lang="ar" dir="rtl">
+```
+
+All components should mirror correctly without any additional CSS.
+
+Full conventions and examples: [`LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`](../../LIBRARY_CONVENTIONS.md).
 
 ---
 

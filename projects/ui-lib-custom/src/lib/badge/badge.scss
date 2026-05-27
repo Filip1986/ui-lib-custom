@@ -21,6 +21,8 @@
     --uilib-badge-padding-x-resolved: calc(
       var(--uilib-badge-padding-x-base) * var(--uilib-density, 1)
     );
+    // Dot badge hides text content — token allows override (e.g. sr-only pattern)
+    --uilib-badge-dot-font-size: 0;
 
     display: inline-flex;
   }
@@ -203,7 +205,7 @@
     height: var(--uilib-badge-dot-size, 0.75rem);
     min-width: var(--uilib-badge-dot-size, 0.75rem);
     min-height: var(--uilib-badge-dot-size, 0.75rem);
-    font-size: 0;
+    font-size: var(--uilib-badge-dot-font-size);
   }
 
   ui-lib-badge.ui-lib-badge--dot.ui-lib-badge--size-sm {

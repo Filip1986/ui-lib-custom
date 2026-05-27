@@ -34,7 +34,7 @@
     // Default: fixed to the viewport (window target)
     position: fixed;
     bottom: var(--uilib-scroll-top-bottom);
-    right: var(--uilib-scroll-top-right);
+    inset-inline-end: var(--uilib-scroll-top-right);
     z-index: var(--uilib-scroll-top-z-index);
 
     // Hidden by default — opacity + transform for smooth reveal
@@ -59,7 +59,7 @@
     &--target-parent {
       position: absolute;
       bottom: 1rem;
-      right: 1rem;
+      inset-inline-end: 1rem;
     }
 
     // ---- Button (the visual, clickable element) ----------------------

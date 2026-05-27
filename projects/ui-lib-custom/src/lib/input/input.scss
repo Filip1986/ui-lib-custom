@@ -7,6 +7,10 @@
     --uilib-input-padding-x-base: 0.75rem;
     --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
     --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
+    --uilib-input-meta-font-size: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-input-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-input-font-size-md: var(--uilib-font-size-md, 1rem);
+    --uilib-input-font-size-lg: var(--uilib-font-size-lg, 1.125rem);
   }
 
   ui-lib-input .ui-input-label {
@@ -84,7 +88,7 @@
 
   ui-lib-input .ui-input-has-floating .ui-input-label {
     position: absolute;
-    left: 0;
+    inset-inline-start: 0;
     top: 50%;
     transform: translate(var(--uilib-input-label-offset-x, 0), -50%);
     transform-origin: left top;
@@ -125,7 +129,7 @@
   ui-lib-input .ui-input-clear,
   ui-lib-input .ui-input-toggle {
     position: absolute;
-    right: 0.35rem;
+    inset-inline-end: 0.35rem;
     border: none;
     background: transparent;
     color: var(--uilib-input-placeholder, var(--uilib-muted));
@@ -135,14 +139,14 @@
   }
 
   ui-lib-input .ui-input-toggle {
-    right: 2rem;
+    inset-inline-end: 2rem;
   }
 
   ui-lib-input .ui-input-meta {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
-    font-size: 0.875rem;
+    font-size: var(--uilib-input-meta-font-size);
     color: var(--uilib-input-placeholder, var(--uilib-muted));
   }
 
@@ -211,7 +215,7 @@
     --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
     --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
     --uilib-input-min-height: 36px;
-    font-size: 0.875rem;
+    font-size: var(--uilib-input-font-size-sm);
   }
 
   ui-lib-input .ui-input.ui-input-size-md {
@@ -220,7 +224,7 @@
     --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
     --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
     --uilib-input-min-height: 44px;
-    font-size: 1rem;
+    font-size: var(--uilib-input-font-size-md);
   }
 
   ui-lib-input .ui-input.ui-input-size-lg {
@@ -229,7 +233,7 @@
     --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
     --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
     --uilib-input-min-height: 52px;
-    font-size: 1.125rem;
+    font-size: var(--uilib-input-font-size-lg);
   }
 
   [data-theme='dark'] ui-lib-input {

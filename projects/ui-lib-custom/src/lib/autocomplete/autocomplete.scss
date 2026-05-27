@@ -420,8 +420,8 @@
     border: none;
     border-bottom: 2px solid var(--uilib-input-border, var(--uilib-border));
     border-radius: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
   }
 
   ui-lib-autocomplete.ui-lib-autocomplete--material .ui-autocomplete-container:focus-within,
@@ -468,8 +468,8 @@
     border: none;
     border-bottom: 1px solid var(--uilib-input-border, var(--uilib-border));
     border-radius: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
   }
 
   ui-lib-autocomplete.ui-lib-autocomplete--minimal .ui-autocomplete-container:focus-within,

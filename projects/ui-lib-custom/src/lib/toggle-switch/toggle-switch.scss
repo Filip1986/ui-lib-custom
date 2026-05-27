@@ -28,6 +28,8 @@
     --uilib-toggle-switch-gap: var(--uilib-space-3, 0.75rem);
     --uilib-toggle-switch-font: var(--uilib-font-ui, inherit);
     --uilib-toggle-switch-transition-duration: var(--uilib-transition-base, 0.2s);
+    --uilib-toggle-switch-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-toggle-switch-font-size-lg: 1.0625rem;
 
     // ── Host layout ───────────────────────────────────────────────────
     display: inline-flex;
@@ -148,7 +150,7 @@
     --uilib-toggle-switch-thumb-size: 0.875rem;
     --uilib-toggle-switch-thumb-offset: 0.1875rem;
 
-    font-size: 0.875rem;
+    font-size: var(--uilib-toggle-switch-font-size-sm);
   }
 
   ui-lib-toggle-switch.ui-lib-toggle-switch--size-lg {
@@ -157,7 +159,7 @@
     --uilib-toggle-switch-thumb-size: 1.375rem;
     --uilib-toggle-switch-thumb-offset: 0.25rem;
 
-    font-size: 1.0625rem;
+    font-size: var(--uilib-toggle-switch-font-size-lg);
   }
 
   // ── Variant: material ──────────────────────────────────────────────────

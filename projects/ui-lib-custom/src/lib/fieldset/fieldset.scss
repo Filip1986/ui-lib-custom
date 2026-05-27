@@ -79,7 +79,7 @@
         display: block;
         width: 0.45rem;
         height: 0.45rem;
-        border-right: 2px solid currentColor;
+        border-inline-end: 2px solid currentColor;
         border-bottom: 2px solid currentColor;
         transform: rotate(45deg) translateY(-2px);
         transition: transform var(--uilib-fieldset-transition);

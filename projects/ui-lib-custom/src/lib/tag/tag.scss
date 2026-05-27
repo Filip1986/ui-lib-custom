@@ -53,6 +53,9 @@
     --uilib-tag-remove-button-bg-hover: rgba(255, 255, 255, 0.2);
     --uilib-tag-remove-button-color: currentColor;
     --uilib-tag-remove-button-transition: background-color 0.15s ease;
+    // Icon sizes — em so they scale with the tag's own font-size
+    --uilib-tag-icon-font-size: 0.9em;
+    --uilib-tag-remove-icon-font-size: 0.7em;
 
     // sm tokens
     --uilib-tag-padding-y-sm: 0.125rem;
@@ -84,7 +87,7 @@
 
     // ---- Parts -------------------------------------------------------
     &__icon {
-      font-size: 0.9em;
+      font-size: var(--uilib-tag-icon-font-size);
       flex-shrink: 0;
       line-height: 1;
     }
@@ -119,7 +122,7 @@
       }
 
       span {
-        font-size: 0.7em;
+        font-size: var(--uilib-tag-remove-icon-font-size);
         pointer-events: none;
       }
     }

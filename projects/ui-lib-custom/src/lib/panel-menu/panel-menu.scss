@@ -100,7 +100,7 @@
     font-weight: var(--uilib-panel-menu-header-font-weight);
     border: none;
     cursor: pointer;
-    text-align: left;
+    text-align: start;
     outline: none;
     transition:
       background-color var(--uilib-panel-menu-transition-duration) ease,
@@ -168,7 +168,7 @@
     flex-shrink: 0;
     width: 0.875em;
     height: 0.875em;
-    margin-left: auto;
+    margin-inline-start: auto;
     transition: transform var(--uilib-panel-menu-transition-duration) ease;
   }
 
@@ -177,7 +177,7 @@
     display: block;
     width: 0.45em;
     height: 0.45em;
-    border-right: 0.125em solid currentColor;
+    border-inline-end: 0.125em solid currentColor;
     border-bottom: 0.125em solid currentColor;
     transform: rotate(45deg) translate(-15%, -15%);
   }
@@ -242,7 +242,7 @@
     font-weight: 500;
     border: none;
     cursor: pointer;
-    text-align: left;
+    text-align: start;
     outline: none;
     transition:
       background-color var(--uilib-panel-menu-transition-duration) ease,
@@ -334,7 +334,7 @@
     flex-shrink: 0;
     width: 0.75em;
     height: 0.75em;
-    margin-left: auto;
+    margin-inline-start: auto;
     transition: transform var(--uilib-panel-menu-transition-duration) ease;
   }
 
@@ -343,7 +343,7 @@
     display: block;
     width: 0.4em;
     height: 0.4em;
-    border-right: 0.125em solid currentColor;
+    border-inline-end: 0.125em solid currentColor;
     border-bottom: 0.125em solid currentColor;
     transform: rotate(45deg) translate(-15%, -15%);
   }

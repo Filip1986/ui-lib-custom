@@ -145,13 +145,13 @@
 
   .ui-lib-editor-content ul,
   .ui-lib-editor-content ol {
-    padding-left: 1.5em;
+    padding-inline-start: 1.5em;
   }
 
   .ui-lib-editor-content blockquote {
-    border-left: 3px solid var(--uilib-editor-toolbar-separator-color, #cbd5e1);
-    margin-left: 0;
-    padding-left: 12px;
+    border-inline-start: 3px solid var(--uilib-editor-toolbar-separator-color, #cbd5e1);
+    margin-inline-start: 0;
+    padding-inline-start: 12px;
   }
 
   .ui-lib-editor-content pre,

@@ -58,7 +58,7 @@
   ui-lib-menu.ui-lib-menu--popup {
     position: fixed;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 0;
     height: 0;
     overflow: visible;
@@ -116,9 +116,9 @@
   // ── Group ────────────────────────────────────────────────────────────────────
 
   ui-lib-menu .ui-lib-menu__item-group {
-    & + .ui-lib-menu__item-group,
-    & + .ui-lib-menu__item,
-    & + .ui-lib-menu__separator {
+    + .ui-lib-menu__item-group,
+    + .ui-lib-menu__item,
+    + .ui-lib-menu__separator {
       // Groups naturally separate themselves via the group-label padding
     }
   }

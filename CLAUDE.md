@@ -97,6 +97,7 @@ These rules apply to every task, no exceptions:
 - **Public input types are string unions** — `'material' | 'bootstrap' | 'minimal'` — not enum, not constants object
 - **No raw hex/px in CSS rule bodies** — always use a `var(--uilib-*)` CSS custom property. Exception: hex may appear as the *default value* in a CSS custom property definition (`--uilib-foo: #hex`) — that IS the token level. When a global palette token exists for that color, use `var(--uilib-color-neutral-300, #hex)` instead of bare hex. When the color is appearance-specific, add it as a constant to `design-tokens.ts` and link back from the SCSS comment. Full rules: `LIBRARY_CONVENTIONS.md → Design Token Rule`.
 - **Every new component SCSS file must be wrapped in `@layer uilib.components { }`** — all library SCSS lives inside named cascade layers so consumer CSS always wins without specificity battles. `themes.scss` uses `@layer uilib.tokens { }`. Exception: `high-contrast.scss` stays outside layers. Full rules + rationale: `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule` and `docs/architecture/ADR_CSS_LAYER_ADOPTION.md`.
+- **Logical CSS properties everywhere** — never use physical directional properties (`margin-left/right`, `padding-left/right`, `border-left/right`, `border-top/bottom-left/right-radius`, `border-*-left/right-color/width/style`, `text-align: left/right`). Use logical equivalents (`margin-inline-*`, `padding-inline-*`, `border-inline-*`, `border-*-start/end-radius`, `text-align: start/end`). Severity: **error** (blocks commits). Exception: `left: 50%` for centering is still valid. Full rules + mapping table: `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`.
 - **Three-layer order: `uilib.base < uilib.tokens < uilib.components`**. Consumer app CSS resets (`* { margin:0; padding:0 }`) MUST go in `@layer uilib.base { }` — without this, unlayered resets override all component padding/margin. App-level `html/body` overrides stay unlayered.
 - **`as const` objects** — never TypeScript `enum`
 - **Separate template files** — always `templateUrl` / `styleUrl`, never inline `template` or `styles`
@@ -130,6 +131,9 @@ These rules apply to every task, no exceptions:
 | `@HostListener('focus'/'blur')` on a component that also exposes focus/blur outputs              | Use imperative `addEventListener` in the constructor — see `cascade-select.ts`                                |
 | `uilib-` as element selector prefix                                                              | Element selectors: `ui-lib-{component}`; CSS vars: `--uilib-{component}-*`                                    |
 | New component SCSS file without `@layer uilib.components { }` wrapper                            | Wrap entire file: `@layer uilib.components { ... }` — see `LIBRARY_CONVENTIONS.md → CSS Cascade Layer Rule`   |
+| Physical directional CSS properties (`margin-left/right`, `padding-left/right`, `border-left/right`, `border-top/bottom-left/right-radius`, `border-left/right-color/width/style`) | Use logical equivalents — see `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`. Severity: **error** (blocks commits). |
+| `text-align: left` or `text-align: right`                                                        | Use `text-align: start` / `text-align: end` — physical values break RTL layout                               |
+| `left: 0` or `right: 0` when the value IS directional (flush to start/end edge)                 | Use `inset-inline-start: 0` / `inset-inline-end: 0`; `left: 50%` for centering is still valid               |
 
 ---
 

@@ -35,6 +35,7 @@
       color-mix(in srgb, var(--uilib-primary-color, #3b82f6) 40%, transparent);
 
     --uilib-data-view-font-size: 1rem;
+    --uilib-data-view-control-label-font-size: var(--uilib-font-size-sm, 0.8125rem);
 
     display: block;
     border: var(--uilib-data-view-border);
@@ -115,7 +116,7 @@
 
   .ui-lib-data-view__control-label {
     color: var(--uilib-data-view-empty-color);
-    font-size: 0.8125rem;
+    font-size: var(--uilib-data-view-control-label-font-size);
   }
 
   .ui-lib-data-view__filter-input,

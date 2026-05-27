@@ -76,6 +76,16 @@
         align-items: center;
         padding: 0 var(--uilib-divider-content-padding);
       }
+
+      // Alignment: left — hide the before line so content sits at the start
+      &.ui-lib-divider--align-left::before {
+        display: none;
+      }
+      // Alignment: right — hide the after line so content sits at the end
+      &.ui-lib-divider--align-right::after {
+        display: none;
+      }
+      // center is the default (both lines shown)
     }
 
     // =========================================================================
@@ -93,7 +103,7 @@
       &::after {
         display: block;
         width: 0;
-        border-left: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
+        border-inline-start: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
           var(--uilib-divider-color);
       }
 
@@ -103,6 +113,16 @@
         align-items: center;
         padding: var(--uilib-divider-content-padding) 0;
       }
+
+      // Alignment: top — hide the before segment so content sits at the top
+      &.ui-lib-divider--align-top::before {
+        display: none;
+      }
+      // Alignment: bottom — hide the after segment so content sits at the bottom
+      &.ui-lib-divider--align-bottom::after {
+        display: none;
+      }
+      // center is the default (both segments shown)
     }
 
     // =========================================================================
@@ -116,36 +136,6 @@
     }
     &--type-dotted {
       --uilib-divider-border-style: dotted;
-    }
-
-    // =========================================================================
-    // Alignment — horizontal
-    // =========================================================================
-    &--horizontal {
-      // left: hide the before line so content sits at the start
-      &.ui-lib-divider--align-left::before {
-        display: none;
-      }
-      // right: hide the after line so content sits at the end
-      &.ui-lib-divider--align-right::after {
-        display: none;
-      }
-      // center is the default (both lines shown)
-    }
-
-    // =========================================================================
-    // Alignment — vertical
-    // =========================================================================
-    &--vertical {
-      // top: hide the before segment so content sits at the top
-      &.ui-lib-divider--align-top::before {
-        display: none;
-      }
-      // bottom: hide the after segment so content sits at the bottom
-      &.ui-lib-divider--align-bottom::after {
-        display: none;
-      }
-      // center is the default (both segments shown)
     }
 
     // =========================================================================

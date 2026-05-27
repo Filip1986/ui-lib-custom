@@ -209,7 +209,7 @@
       bottom: calc(100% + 0.5rem);
       top: auto;
       left: 50%;
-      right: auto;
+      inset-inline-end: auto;
       transform: translateX(-50%);
     }
   }
@@ -233,7 +233,7 @@
       top: calc(100% + 0.5rem);
       bottom: auto;
       left: 50%;
-      right: auto;
+      inset-inline-end: auto;
       transform: translateX(-50%);
     }
   }
@@ -255,10 +255,10 @@
     }
 
     .ui-lib-dock__tooltip {
-      left: calc(100% + 0.5rem);
+      inset-inline-start: calc(100% + 0.5rem);
       top: 50%;
       bottom: auto;
-      right: auto;
+      inset-inline-end: auto;
       transform: translateY(-50%);
     }
   }
@@ -280,10 +280,10 @@
     }
 
     .ui-lib-dock__tooltip {
-      right: calc(100% + 0.5rem);
+      inset-inline-end: calc(100% + 0.5rem);
       top: 50%;
       bottom: auto;
-      left: auto;
+      inset-inline-start: auto;
       transform: translateY(-50%);
     }
   }

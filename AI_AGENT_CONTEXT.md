@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** i18n component wiring — **COMPLETE ✅** — all 25+ components wired to `UiLibI18nService`; every hardcoded English aria-label replaced with `i18n.translate()` calls; all 6041 tests green; build zero warnings; 24 component I18n scores lifted 5→8 or 6→8.
-- **Next queue:** Prompt 6: `scripts/snapshot-bundle-sizes.mjs` per-entry-point gzip budget (may already be built — verify); Prompt 11: Angular Signals-first Data Grid flagship component.
+- **Active focus:** RTL layout pass — **COMPLETE ✅** — 52 SCSS files migrated to logical CSS properties; all `declaration-strict-value` font-size/color errors across 21 files resolved; `property-disallowed-list` severity upgraded to **error** so physical directional properties now block commits; new `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule` section added. Commits: `65ba40c1` + `db096fa2` on `feat/i18n-params-locales`.
+- **Next queue:** Step 4: component score ceiling push (6-phase on Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 on each). Then: Angular Signals-first Data Grid (Step 5).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,32 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-27 [fix(lib): RTL fixes complete + RTL enforcement upgraded — commits 65ba40c1 + db096fa2]
+Changed:
+  52 SCSS files (65ba40c1): all directional CSS replaced with logical equivalents
+  10 SCSS files (db096fa2): badge, chip, data-view, inplace, meter-group, radio-button, tag, toggle-switch, tree-select, upload — raw font-size values wrapped in --uilib-* tokens
+  stylelint.config.mjs: property-disallowed-list severity warning → error; added border-left/right-color/width/style longhands to banned list
+  LIBRARY_CONVENTIONS.md: new "Logical CSS / RTL Rule" section with full mapping table + exceptions
+  CSS-STANDARDS.md: new "Logical CSS / RTL layout" section; rule severity table updated
+  CLAUDE.md: new convention bullet + 3 new anti-pattern rows
+State: COMPLETE — 0 property-disallowed-list violations library-wide; physical directional properties now block commits; all SCSS token errors in scope resolved
+Verification: npx stylelint "projects/ui-lib-custom/src/lib/**/*.scss" → 0 property-disallowed-list violations; lint-staged + commitlint passed on both commits
+Next step: Step 4 — component score ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 each)
+
+Date: 2026-05-27 [feat/i18n-params-locales — PR #271 open]
+Changed:
+  projects/ui-lib-custom/src/lib/i18n/en.ts: 14 new parametrised keys (carousel.slide.status, paginator.empty/page.current/page.go, data-view.go.page, meter-group.segment.*, rating.value/star.singular/star.plural, tree-select.*)
+  projects/ui-lib-custom/src/lib/i18n/de.ts: NEW — UI_LIB_DE, full 76-key German bundle
+  projects/ui-lib-custom/src/lib/i18n/fr.ts: NEW — UI_LIB_FR, full 76-key French bundle
+  projects/ui-lib-custom/src/lib/i18n/es.ts: NEW — UI_LIB_ES, full 76-key Spanish bundle
+  projects/ui-lib-custom/src/lib/i18n/index.ts: exports UI_LIB_DE, UI_LIB_FR, UI_LIB_ES
+  carousel, data-view, meter-group, paginator, rating, table, tree-select: all dynamic aria-labels wired to translate() with params
+  test/entry-points.spec.ts: DE/FR/ES assertions added
+  docs/reference/bundle-sizes.json: baseline updated (i18n +40 KB, intentional)
+State: COMPLETE — 6041/6041 tests green; ng build zero warnings; pre-push hook passed (typecheck ✅ + budget ✅)
+Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
+Next step: Step 3 — RTL layout pass (replace margin/padding-left/right with inline-* logical CSS properties across SCSS files)
+
 Date: 2026-05-27 [feat(lib): wire all components to UiLibI18nService — replace hardcoded aria-labels]
 Changed:
   25+ component *.ts files: added inject(UiLibI18nService); placed protected readonly i18n field
@@ -94,25 +120,6 @@ Changed:
 State: COMPLETE — 6041/6041 tests green; ng build zero warnings; branch feat/i18n-component-wiring
 Verification: npx jest --no-coverage (PASS ✅, 6041 tests); ng build ui-lib-custom (PASS ✅, 0 warnings)
 Next step: Prompt 6 — per-entry-point gzip budget snapshot script (scripts/snapshot-bundle-sizes.mjs)
-
-Date: 2026-05-27 [chore(a11y): Prompt 5 — enforce prefers-reduced-motion completeness library-wide]
-Changed:
-  stylelint-plugin/no-unprefixed-motion.mjs: plugin fully implemented (flags transition/animation without reduced-motion companion; auto-fix scaffolds stub)
-  stylelint.motion.config.mjs: new focused audit config (only uilib/no-unprefixed-motion rule)
-  package.json: lint:css:motion uses --config stylelint.motion.config.mjs so audit exits 0 cleanly
-  scripts/motion-formatter.mjs: custom formatter for motion audit output
-State: All 90 SCSS files with transitions already have prefers-reduced-motion coverage; 0 violations; ng build zero warnings
-Verification: npm run lint:css:motion (PASS ✅); ng build ui-lib-custom (PASS ✅)
-Next step: Wire ~32 components to UiLibI18nService
-
-Date: 2026-05-27 [feat(workspace): Prompt 2 — reference doc generator for component archetypes]
-Changed:
-  scripts/generate-reference-doc.mjs: pure ESM generator; parses TS signals/models/outputs + SCSS vars + HTML ng-content + spec a11y titles; CRLF-safe
-  docs/reference/components/*.md: 95 reference docs regenerated (clean descriptions, no JSDoc leakage, idempotent)
-  package.json: docs:reference script wired to --all
-State: Complete; idempotent (re-run produces zero diff)
-Verification: node scripts/generate-reference-doc.mjs button select tree (PASS); --all (95/95 PASS); typecheck PASS
-Next step: Prompt 5 stylelint motion plugin
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

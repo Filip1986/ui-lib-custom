@@ -43,6 +43,8 @@
     --uilib-table-sort-icon-size: 14px;
     --uilib-table-sort-icon-color: var(--uilib-color-text-secondary, #6c757d);
     --uilib-table-sort-icon-color-active: var(--uilib-color-primary, #6366f1);
+    --uilib-table-sort-badge-font-size: 0.65em;
+    --uilib-table-empty-message-font-size: 0.9em;
 
     // Selection
     --uilib-table-selection-border-color: var(--uilib-color-primary, #6366f1);
@@ -170,7 +172,7 @@
     font-weight: var(--uilib-table-header-font-weight);
     font-size: var(--uilib-table-header-font-size);
     color: var(--uilib-table-header-color);
-    text-align: left;
+    text-align: start;
     vertical-align: middle;
     white-space: nowrap;
     user-select: none;
@@ -205,7 +207,7 @@
 
     &--frozen {
       position: sticky;
-      left: 0;
+      inset-inline-start: 0;
       z-index: 1;
       background: var(--uilib-table-header-bg);
     }
@@ -221,7 +223,7 @@
   .ui-lib-table__sort-icon {
     display: inline-flex;
     align-items: center;
-    margin-left: 0.375rem;
+    margin-inline-start: 0.375rem;
     vertical-align: middle;
     color: var(--uilib-table-sort-icon-color);
     transition:
@@ -254,9 +256,9 @@
     border-radius: 50%;
     background: var(--uilib-color-primary, #6366f1);
     color: var(--uilib-color-neutral-50, #fff);
-    font-size: 0.65em;
+    font-size: var(--uilib-table-sort-badge-font-size);
     font-weight: 700;
-    margin-left: 0.2em;
+    margin-inline-start: 0.2em;
   }
 
   // Filter input
@@ -358,7 +360,7 @@
 
     &--frozen {
       position: sticky;
-      left: 0;
+      inset-inline-start: 0;
       background: inherit;
       z-index: 1;
     }
@@ -460,7 +462,7 @@
 
   .ui-lib-table__empty-message {
     color: var(--uilib-table-sort-icon-color);
-    font-size: 0.9em;
+    font-size: var(--uilib-table-empty-message-font-size);
   }
 
   // ============================================================

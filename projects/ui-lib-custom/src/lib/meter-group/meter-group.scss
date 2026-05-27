@@ -25,6 +25,8 @@
     --uilib-meter-group-swatch-border-radius: var(--uilib-radius-sm, 0.25rem);
     --uilib-meter-group-swatch-fg: var(--uilib-color-neutral-50, #fff);
     --uilib-meter-group-transition: width 0.4s ease, height 0.4s ease;
+    // Swatch letter/number size — smaller than surrounding label text
+    --uilib-meter-group-swatch-font-size: 0.55rem;
   }
 
   // ---- Host element ------------------------------------------------
@@ -96,7 +98,7 @@
       width: var(--uilib-meter-group-swatch-size);
       height: var(--uilib-meter-group-swatch-size);
       border-radius: var(--uilib-meter-group-swatch-border-radius);
-      font-size: 0.55rem;
+      font-size: var(--uilib-meter-group-swatch-font-size);
       color: var(--uilib-meter-group-swatch-fg);
     }
 

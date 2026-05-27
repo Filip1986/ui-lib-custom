@@ -150,14 +150,14 @@ describe('IconField Accessibility', (): void => {
   describe('axe-core', (): void => {
     it('default icon field has no accessibility violations', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultIconFieldA11yHostComponent> = await setup(
-        DefaultIconFieldA11yHostComponent
+        DefaultIconFieldA11yHostComponent,
       );
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
 
     it('informative icon field has no accessibility violations', async (): Promise<void> => {
       const fixture: ComponentFixture<InformativeIconFieldHostComponent> = await setup(
-        InformativeIconFieldHostComponent
+        InformativeIconFieldHostComponent,
       );
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
@@ -166,7 +166,7 @@ describe('IconField Accessibility', (): void => {
   describe('decorative icon defaults', (): void => {
     it('marks input icons as aria-hidden by default', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultIconFieldA11yHostComponent> = await setup(
-        DefaultIconFieldA11yHostComponent
+        DefaultIconFieldA11yHostComponent,
       );
 
       expect(getInputIcon(fixture).getAttribute('aria-hidden')).toBe('true');
@@ -174,7 +174,7 @@ describe('IconField Accessibility', (): void => {
 
     it('keeps decorative input icons out of the tab order', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultIconFieldA11yHostComponent> = await setup(
-        DefaultIconFieldA11yHostComponent
+        DefaultIconFieldA11yHostComponent,
       );
 
       expect(getInputIcon(fixture).getAttribute('tabindex')).toBe('-1');
@@ -191,7 +191,7 @@ describe('IconField Accessibility', (): void => {
   describe('informative icon opt-in', (): void => {
     it('allows informative icons to opt out of aria-hidden', async (): Promise<void> => {
       const fixture: ComponentFixture<InformativeIconFieldHostComponent> = await setup(
-        InformativeIconFieldHostComponent
+        InformativeIconFieldHostComponent,
       );
 
       expect(getInputIcon(fixture).getAttribute('aria-hidden')).toBeNull();
@@ -199,7 +199,7 @@ describe('IconField Accessibility', (): void => {
 
     it('uses role img when an informative icon label is provided', async (): Promise<void> => {
       const fixture: ComponentFixture<InformativeIconFieldHostComponent> = await setup(
-        InformativeIconFieldHostComponent
+        InformativeIconFieldHostComponent,
       );
 
       expect(getInputIcon(fixture).getAttribute('role')).toBe('img');
@@ -212,7 +212,7 @@ describe('IconField Accessibility', (): void => {
       await setup(DefaultIconFieldA11yHostComponent);
 
       expect(getInjectedStylesText()).toMatch(
-        /\.ui-lib-icon-field--left[\s\S]*padding-left:\s*var\(--uilib-icon-field-input-padding-with-icon,\s*2\.5rem\)/
+        /\.ui-lib-icon-field--left[\s\S]*padding-inline-start:\s*var\(--uilib-icon-field-input-padding-with-icon,\s*2\.5rem\)/,
       );
     });
 
@@ -220,7 +220,7 @@ describe('IconField Accessibility', (): void => {
       await setup(RightIconFieldA11yHostComponent);
 
       expect(getInjectedStylesText()).toMatch(
-        /\.ui-lib-icon-field--right[\s\S]*padding-right:\s*var\(--uilib-icon-field-input-padding-with-icon,\s*2\.5rem\)/
+        /\.ui-lib-icon-field--right[\s\S]*padding-inline-end:\s*var\(--uilib-icon-field-input-padding-with-icon,\s*2\.5rem\)/,
       );
     });
 
@@ -240,7 +240,7 @@ describe('IconField Accessibility', (): void => {
       await setup(InputMaskIconFieldHostComponent);
 
       expect(getInjectedStylesText()).toContain(
-        '.ui-lib-icon-field--left > ui-lib-input-mask input'
+        '.ui-lib-icon-field--left > ui-lib-input-mask input',
       );
     });
 
@@ -248,7 +248,7 @@ describe('IconField Accessibility', (): void => {
       await setup(InputNumberIconFieldHostComponent);
 
       expect(getInjectedStylesText()).toContain(
-        '.ui-lib-icon-field--left > ui-lib-input-number input'
+        '.ui-lib-icon-field--left > ui-lib-input-number input',
       );
     });
   });

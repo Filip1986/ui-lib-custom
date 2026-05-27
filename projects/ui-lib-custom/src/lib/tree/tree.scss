@@ -48,6 +48,22 @@
     // Connector lines
     --uilib-tree-connector-color: var(--uilib-color-border, #e0e0e0);
     --uilib-tree-connector-width: 1px;
+    --uilib-tree-node-icon-font-size: 0.875em;
+    --uilib-tree-filter-icon-font-size: var(--uilib-font-size-sm, 0.875rem);
+
+    // Base layout
+    display: block;
+    font-size: var(--uilib-tree-font-size);
+    line-height: var(--uilib-tree-line-height);
+    color: var(--uilib-tree-node-color);
+
+    // Reset list styles
+    ul,
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 
   // ─── Size modifiers ───────────────────────────────────────────────────────────
@@ -68,22 +84,7 @@
     --uilib-tree-checkbox-size: 1.125rem;
   }
 
-  // ─── Base layout ─────────────────────────────────────────────────────────────
-
-  .ui-lib-tree {
-    display: block;
-    font-size: var(--uilib-tree-font-size);
-    line-height: var(--uilib-tree-line-height);
-    color: var(--uilib-tree-node-color);
-
-    // Reset list styles
-    ul,
-    li {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-  }
+  // ─── Base layout is defined in the token block above ─────────────────────────
 
   .uilib-tree-root {
     display: flex;
@@ -163,7 +164,7 @@
     display: inline-block;
     width: 0.5rem;
     height: 0.5rem;
-    border-right: 2px solid currentcolor;
+    border-inline-end: 2px solid currentcolor;
     border-bottom: 2px solid currentcolor;
     transform: rotate(-45deg);
     transition: transform var(--uilib-transition-duration, 150ms) ease;
@@ -210,7 +211,7 @@
         display: block;
         width: 0.3em;
         height: 0.55em;
-        border-right: 2px solid var(--uilib-tree-checkbox-color-checked);
+        border-inline-end: 2px solid var(--uilib-tree-checkbox-color-checked);
         border-bottom: 2px solid var(--uilib-tree-checkbox-color-checked);
         transform: rotate(45deg) translate(-1px, -1px);
       }
@@ -234,7 +235,7 @@
 
   .uilib-tree-node-icon {
     flex-shrink: 0;
-    font-size: 0.875em;
+    font-size: var(--uilib-tree-node-icon-font-size);
     color: var(--uilib-tree-toggle-color);
   }
 
@@ -300,7 +301,7 @@
     transform: translateY(-50%);
     color: var(--uilib-color-text-secondary, #757575);
     pointer-events: none;
-    font-size: 0.875rem;
+    font-size: var(--uilib-tree-filter-icon-font-size);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════════
@@ -373,7 +374,7 @@
 
       &.uilib-tree-node-row--selected {
         font-weight: 500;
-        border-bottom-color: currentcolor;
+        border-bottom-color: currentColor;
       }
     }
 

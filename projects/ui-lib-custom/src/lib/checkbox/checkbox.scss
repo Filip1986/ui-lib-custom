@@ -35,6 +35,9 @@
     --uilib-checkbox-size-md: 1.25rem;
     --uilib-checkbox-size-lg: 1.5rem;
     --uilib-checkbox-font: var(--uilib-font-ui, inherit);
+    --uilib-checkbox-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-checkbox-font-size-md: var(--uilib-font-size-md, 1rem);
+    --uilib-checkbox-description-font-size: var(--uilib-font-size-sm, 0.875rem);
     --uilib-checkbox-padding-base: 0rem;
     --uilib-checkbox-transition-duration: 150ms;
 
@@ -148,7 +151,7 @@
     height: 100%;
     border: 2px solid currentColor;
     border-top: none;
-    border-right: none;
+    border-inline-end: none;
     transform: rotate(-45deg);
     transform-origin: center;
   }
@@ -185,18 +188,18 @@
   }
 
   ui-lib-checkbox .ui-lib-checkbox__description {
-    font-size: 0.875rem;
+    font-size: var(--uilib-checkbox-description-font-size);
     color: var(--uilib-checkbox-description-color);
   }
 
   ui-lib-checkbox.ui-lib-checkbox--size-sm {
     --uilib-checkbox-size: var(--uilib-checkbox-size-sm);
-    font-size: 0.875rem;
+    font-size: var(--uilib-checkbox-font-size-sm);
   }
 
   ui-lib-checkbox.ui-lib-checkbox--size-lg {
     --uilib-checkbox-size: var(--uilib-checkbox-size-lg);
-    font-size: 1rem;
+    font-size: var(--uilib-checkbox-font-size-md);
   }
 
   ui-lib-checkbox.ui-lib-checkbox--variant-bootstrap .ui-lib-checkbox__box {

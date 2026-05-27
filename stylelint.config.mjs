@@ -111,23 +111,51 @@ export default {
     'uilib/no-unprefixed-motion': [true, { severity: 'error' }],
 
     // ── Logical properties ────────────────────────────────────────────────────
+    // Severity: error — the RTL layout pass (2026-05-27) cleaned every violation
+    // in the library. Any new usage of physical properties is a regression.
+    //
+    // Physical → logical mapping quick-reference:
+    //   margin-left/right        → margin-inline-start/end
+    //   padding-left/right       → padding-inline-start/end
+    //   border-left/right        → border-inline-start/end
+    //   border-left/right-color  → border-inline-start/end-color
+    //   border-left/right-width  → border-inline-start/end-width
+    //   border-left/right-style  → border-inline-start/end-style
+    //   border-*-left/right-radius → border-*-start/end-radius (start-start, start-end, …)
+    //   text-align: left/right   → text-align: start/end (also enforced by declaration-property-value-disallowed-list)
+    //
+    // Exceptions NOT covered here (intentional, with justification):
+    //   left / right (positioning) — "left: 50%" centering is direction-agnostic;
+    //     use inset-inline-start/end when the value IS directional (see CSS-STANDARDS.md).
+    //   top / bottom — block-axis; always use physical values or inset-block-*.
     'property-disallowed-list': [
       [
+        // ── Spacing ───────────────────────────────────────────────────────────
         'margin-left',
         'margin-right',
         'padding-left',
         'padding-right',
+        // ── Border shorthands ─────────────────────────────────────────────────
         'border-left',
         'border-right',
+        // ── Border longhands (color / width / style) ──────────────────────────
+        'border-left-color',
+        'border-right-color',
+        'border-left-width',
+        'border-right-width',
+        'border-left-style',
+        'border-right-style',
+        // ── Border radius ─────────────────────────────────────────────────────
         'border-top-left-radius',
         'border-top-right-radius',
         'border-bottom-left-radius',
         'border-bottom-right-radius',
       ],
       {
-        severity: 'warning',
+        severity: 'error',
         message:
-          'Use logical properties for RTL/i18n: margin-inline-*, padding-inline-*, border-inline-*.',
+          'Use logical CSS properties for RTL/i18n support. ' +
+          'See LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule for the full mapping table.',
       },
     ],
 

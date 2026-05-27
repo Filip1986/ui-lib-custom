@@ -162,34 +162,34 @@
   ui-lib-message.ui-lib-message--minimal {
     --uilib-message-bg: transparent;
     border-color: transparent;
-    border-left-width: 3px;
-    border-left-style: solid;
+    border-inline-start-width: 3px;
+    border-inline-start-style: solid;
     border-radius: 0;
-    padding-left: calc(var(--uilib-message-gap-md) + 0.5rem);
+    padding-inline-start: calc(var(--uilib-message-gap-md) + 0.5rem);
   }
 
   ui-lib-message.ui-lib-message--minimal.ui-lib-message--success {
-    border-left-color: var(--uilib-color-success-500, #22c55e);
+    border-inline-start-color: var(--uilib-color-success-500, #22c55e);
   }
 
   ui-lib-message.ui-lib-message--minimal.ui-lib-message--info {
-    border-left-color: var(--uilib-color-info-500, #3b82f6);
+    border-inline-start-color: var(--uilib-color-info-500, #3b82f6);
   }
 
   ui-lib-message.ui-lib-message--minimal.ui-lib-message--warn {
-    border-left-color: var(--uilib-color-warning-500, #f59e0b);
+    border-inline-start-color: var(--uilib-color-warning-500, #f59e0b);
   }
 
   ui-lib-message.ui-lib-message--minimal.ui-lib-message--error {
-    border-left-color: var(--uilib-color-error-500, #ef4444);
+    border-inline-start-color: var(--uilib-color-error-500, #ef4444);
   }
 
   ui-lib-message.ui-lib-message--minimal.ui-lib-message--secondary {
-    border-left-color: var(--uilib-color-neutral-400, #a3a3a3);
+    border-inline-start-color: var(--uilib-color-neutral-400, #a3a3a3);
   }
 
   ui-lib-message.ui-lib-message--minimal.ui-lib-message--contrast {
-    border-left-color: var(--uilib-color-neutral-800, #262626);
+    border-inline-start-color: var(--uilib-color-neutral-800, #262626);
   }
 
   // ─── Reduced motion ───────────────────────────────────────────────────────────

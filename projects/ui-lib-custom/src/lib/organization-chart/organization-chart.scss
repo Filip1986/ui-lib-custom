@@ -26,6 +26,8 @@
     --uilib-org-chart-toggle-border: 1px solid var(--uilib-border, #d1d5db);
     --uilib-org-chart-toggle-color: var(--uilib-text-secondary, #6b7280);
     --uilib-org-chart-toggle-radius: 50%;
+    --uilib-org-chart-node-label-font-size: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-org-chart-toggle-font-size: 0.65rem;
 
     display: flex;
     flex-direction: column;
@@ -90,7 +92,7 @@
     }
 
     .uilib-org-chart-node-label {
-      font-size: 0.875rem;
+      font-size: var(--uilib-org-chart-node-label-font-size);
       font-weight: 500;
     }
 
@@ -111,7 +113,7 @@
       border-radius: var(--uilib-org-chart-toggle-radius);
       color: var(--uilib-org-chart-toggle-color);
       cursor: pointer;
-      font-size: 0.65rem;
+      font-size: var(--uilib-org-chart-toggle-font-size);
       line-height: 1;
       z-index: 1;
       outline: none;
@@ -168,16 +170,16 @@
 
       // First child: no left border (bar starts at center)
       &--first {
-        border-left: none;
-        padding-left: calc(
+        border-inline-start: none;
+        padding-inline-start: calc(
           var(--uilib-org-chart-gap) / 2 + var(--uilib-org-chart-node-min-width) / 2
         );
       }
 
       // Last child: no right border (bar ends at center)
       &--last {
-        border-right: none;
-        padding-right: calc(
+        border-inline-end: none;
+        padding-inline-end: calc(
           var(--uilib-org-chart-gap) / 2 + var(--uilib-org-chart-node-min-width) / 2
         );
       }

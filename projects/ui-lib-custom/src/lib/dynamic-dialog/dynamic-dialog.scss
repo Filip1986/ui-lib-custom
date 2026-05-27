@@ -29,12 +29,12 @@
 
     &--left {
       justify-content: flex-start;
-      padding-left: var(--uilib-dynamic-dialog-offset, 2rem);
+      padding-inline-start: var(--uilib-dynamic-dialog-offset, 2rem);
     }
 
     &--right {
       justify-content: flex-end;
-      padding-right: var(--uilib-dynamic-dialog-offset, 2rem);
+      padding-inline-end: var(--uilib-dynamic-dialog-offset, 2rem);
     }
 
     // ---- Backdrop ----

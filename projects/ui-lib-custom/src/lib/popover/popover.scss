@@ -85,18 +85,18 @@
   // Arrow at bottom pointing down (panel is above target)
   ui-lib-popover .ui-lib-popover__panel--placement-above .ui-lib-popover__arrow {
     bottom: calc(-1 * var(--uilib-popover-arrow-size));
-    margin-left: calc(-1 * var(--uilib-popover-arrow-size));
-    border-left: var(--uilib-popover-arrow-size) solid transparent;
-    border-right: var(--uilib-popover-arrow-size) solid transparent;
+    margin-inline-start: calc(-1 * var(--uilib-popover-arrow-size));
+    border-inline-start: var(--uilib-popover-arrow-size) solid transparent;
+    border-inline-end: var(--uilib-popover-arrow-size) solid transparent;
     border-top: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
   }
 
   // Arrow at top pointing up (panel is below target)
   ui-lib-popover .ui-lib-popover__panel--placement-below .ui-lib-popover__arrow {
     top: calc(-1 * var(--uilib-popover-arrow-size));
-    margin-left: calc(-1 * var(--uilib-popover-arrow-size));
-    border-left: var(--uilib-popover-arrow-size) solid transparent;
-    border-right: var(--uilib-popover-arrow-size) solid transparent;
+    margin-inline-start: calc(-1 * var(--uilib-popover-arrow-size));
+    border-inline-start: var(--uilib-popover-arrow-size) solid transparent;
+    border-inline-end: var(--uilib-popover-arrow-size) solid transparent;
     border-bottom: var(--uilib-popover-arrow-size) solid var(--uilib-popover-bg);
   }
 

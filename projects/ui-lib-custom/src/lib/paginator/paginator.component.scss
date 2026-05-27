@@ -56,6 +56,11 @@
     // Transition
     --uilib-paginator-transition:
       background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+
+    // Base layout
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   // ── Size: sm ──────────────────────────────────────────────────────────────────
@@ -111,10 +116,10 @@
     .uilib-paginator-button {
       border-radius: 0;
       border: none;
-      border-right: 1px solid var(--uilib-color-border, #dee2e6);
+      border-inline-end: 1px solid var(--uilib-color-border, #dee2e6);
 
       &:last-of-type {
-        border-right: none;
+        border-inline-end: none;
       }
     }
 
@@ -138,11 +143,6 @@
   }
 
   // ── Layout ────────────────────────────────────────────────────────────────────
-  .ui-lib-paginator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   .uilib-paginator-content {
     display: flex;
