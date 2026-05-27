@@ -446,7 +446,9 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     if (!parent) {
       return this.placeholder();
     }
-    return this.resolveOptionLabel(parent);
+    return this.i18n.translate('cascade-select.sublevel-label', {
+      label: this.resolveOptionLabel(parent),
+    });
   }
 
   public optionTrackBy(index: number, option: unknown): string {

@@ -6,7 +6,7 @@
     [attr.id]="triggerId()"
     [style.background-color]="displayColor()"
     [disabled]="isDisabled()"
-    [attr.aria-label]="'Color: ' + displayColor() + ', click to open picker'"
+    [attr.aria-label]="i18n.translate('colorpicker.trigger', { color: displayColor() })"
     aria-haspopup="dialog"
     [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
     [attr.aria-controls]="panelVisible() ? panelId() : null"
@@ -18,7 +18,8 @@
 
 <input type="hidden" [id]="resolvedInputId()" [value]="displayColor()" [disabled]="isDisabled()" />
 
-@if (inline() || panelVisible()) {
+@defer (on immediate) {
+  @if (inline() || panelVisible()) {
   <div
     #panelElement
     role="dialog"
@@ -123,4 +124,5 @@
       </div>
     </div>
   </div>
+  }
 }

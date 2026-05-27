@@ -42,7 +42,8 @@
   </div>
 </div>
 
-@if (panelVisible()) {
+@defer (on immediate) {
+  @if (panelVisible()) {
   <div #panelElement class="ui-lib-cascade-select__panel">
     @if (headerTemplate()) {
       <div class="ui-lib-cascade-select__header">
@@ -129,4 +130,5 @@
       </div>
     }
   </div>
+  }
 }

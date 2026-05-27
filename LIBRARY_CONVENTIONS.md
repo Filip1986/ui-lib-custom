@@ -825,6 +825,86 @@ All CSS custom properties MUST follow this pattern:
 - Run `npm test` in CI; add visual/diff tests later for theme regressions.
 - **`jest.config.ts` `modulePathIgnorePatterns` must use separator-agnostic regexes on Windows.** Patterns prefixed with `<rootDir>/...` (forward slashes) fail to match on Windows because `<rootDir>` is replaced with a backslash path, producing mixed-separator strings that no regex matches. Always write path patterns using `[/\\\\]` to match either separator. The current `jest.config.ts` already does this; maintain the same style when adding new patterns.
 
+---
+
+### Testing Overlay / Deferred Panels — Required Patterns
+
+Any component that uses **`@defer (on immediate)`** AND/OR mounts its panel to **`document.body`** (via `appendTo='body'`) must follow these four rules in its spec file. Violating any one of them produces either test-order failures (tests pass alone, fail in a suite run) or stale DOM nodes polluting later tests.
+
+#### Rule 1 — Pre-load the defer block in `beforeEach`
+
+```typescript
+beforeEach(async (): Promise<void> => {
+  // ... TestBed setup and createComponent ...
+  fixture.detectChanges();
+  await fixture.whenStable(); // flushes @defer (on immediate) microtask
+});
+```
+
+`@defer (on immediate)` resolves on a microtask. Without `whenStable()` the deferred view has not yet been created when the first test runs, so any query into the panel returns `null`.
+
+#### Rule 2 — Close the panel before destroying body-mounted fixtures
+
+When a component teleports its panel to `document.body`, Angular's `@defer` view-teardown path does **not** call `removeChild` on the teleported node during fixture destruction. Close the panel first so the `@if` block removes it from `document.body` synchronously:
+
+```typescript
+it('defaults appendTo to body', async (): Promise<void> => {
+  const localFixture = TestBed.createComponent(MyComponent);
+  localFixture.detectChanges();
+  await localFixture.whenStable();
+
+  localFixture.componentInstance.openPanel();
+  localFixture.detectChanges();
+
+  // assertions ...
+
+  // ✅ Close panel BEFORE destroy — lets @if remove the node from body
+  localFixture.componentInstance.closePanel();
+  localFixture.detectChanges();
+  localFixture.destroy();
+});
+```
+
+#### Rule 3 — Add a body cleanup `afterEach`
+
+Even with Rule 2, add an `afterEach` as a safety net for tests that throw or are added in the future:
+
+```typescript
+afterEach((): void => {
+  // Replace selector with the actual panel class for the component
+  document.body.querySelectorAll('.ui-lib-<component>__panel').forEach((el: Element): void => {
+    el.remove();
+  });
+});
+```
+
+#### Rule 4 — Use `WritableSignal` for host-component properties that change after `beforeEach`
+
+After `whenStable()` settles Angular's change-detection scheduler, subsequent mutations to **plain class properties** on an `OnPush` host component are not picked up by `fixture.detectChanges()` — no dirty-marking has been scheduled. Use `WritableSignal` instead; signal mutations automatically schedule a CD tick.
+
+```typescript
+// ❌ Wrong — detectChanges() after whenStable() won't see the new value
+class HostComponent {
+  public ariaLabel: string | null = 'Initial';
+}
+// test: fixture.componentInstance.ariaLabel = 'New'; fixture.detectChanges(); // fails
+
+// ✅ Correct — signal mutation triggers CD even after whenStable()
+class HostComponent {
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>('Initial');
+}
+// template: [ariaLabel]="ariaLabel()"
+// test: fixture.componentInstance.ariaLabel.set('New'); fixture.detectChanges(); // works
+```
+
+#### Rule 5 — Do NOT add `whenStable()` to inner `beforeEach` sections that rely on `ngModel` / `writeValue`
+
+When `whenStable()` runs inside a nested `describe` `beforeEach` (e.g., a "template-driven forms" block), the extra microtask queue flush can interfere with `NgModel.writeValue()` propagation. Let the **test body itself** call `await fixture.whenStable()` when needed; keep the inner `beforeEach` to `createComponent` + one `detectChanges()` only.
+
+---
+
+**Reference implementations:** `autocomplete.spec.ts`, `cascade-select.spec.ts`, `color-picker.spec.ts`, `select.spec.ts` — all four follow this pattern.
+
 ## Packaging & Releases
 
 - Built with `ng-packagr`; public surface defined in `projects/ui-lib-custom/src/public-api.ts` only.

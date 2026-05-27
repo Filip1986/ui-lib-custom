@@ -109,6 +109,14 @@ describe('ColorPicker component', (): void => {
     component = fixture.componentInstance;
     fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
+  });
+
+  afterEach((): void => {
+    // Remove any panels teleported to document.body by tests that do not explicitly close them
+    document.body.querySelectorAll('.ui-lib-colorpicker__panel').forEach((el: Element): void => {
+      el.remove();
+    });
   });
 
   function hostEl(): HTMLElement {
@@ -191,10 +199,11 @@ describe('ColorPicker component', (): void => {
   });
 
   describe('popup behavior', (): void => {
-    it('defaults appendTo to body', (): void => {
+    it('defaults appendTo to body', async (): Promise<void> => {
       const defaultFixture: ComponentFixture<ColorPicker> = TestBed.createComponent(ColorPicker);
       const defaultComponent: ColorPicker = defaultFixture.componentInstance;
       defaultFixture.detectChanges();
+      await defaultFixture.whenStable(); // Pre-load @defer (on immediate) block
 
       defaultComponent.openPanel();
       defaultFixture.detectChanges();
@@ -202,6 +211,11 @@ describe('ColorPicker component', (): void => {
       const panel: HTMLDivElement | null = bodyPanelEl();
       expect(panel).toBeTruthy();
       expect(panel?.parentElement).toBe(document.body);
+
+      // Close panel before destroying fixture so the @if block removes the DOM node from body
+      defaultComponent.closePanel();
+      defaultFixture.detectChanges();
+      defaultFixture.destroy();
     });
 
     it('keeps detached panel open for inside click and closes on outside click', (): void => {
@@ -584,6 +598,7 @@ describe('ColorPicker forms integration', (): void => {
 
       fixture = TestBed.createComponent(ReactiveHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     function pickerComponent(): ColorPicker {

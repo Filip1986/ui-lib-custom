@@ -241,7 +241,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
     let input: HTMLInputElement;
     let acComponent: UiLibAutoComplete;
 
-    beforeEach((): void => {
+    beforeEach(async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [DefaultHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -250,6 +250,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
       component = fixture.componentInstance;
       component.suggestions.set([...FLAT_OPTIONS]);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
       hostEl = fixture.nativeElement as HTMLElement;
       acComponent = getAcInstance(fixture);
       acComponent.showPanel();
@@ -315,7 +316,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
     let input: HTMLInputElement;
     let acComponent: UiLibAutoComplete;
 
-    beforeEach((): void => {
+    beforeEach(async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [DefaultHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -324,6 +325,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
       component = fixture.componentInstance;
       component.suggestions.set([...FLAT_OPTIONS]);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
       hostEl = fixture.nativeElement as HTMLElement;
       acComponent = getAcInstance(fixture);
       input = getInput(hostEl);
@@ -546,7 +548,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
     let hostEl: HTMLElement;
     let acComponent: UiLibAutoComplete;
 
-    beforeEach((): void => {
+    beforeEach(async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [GroupedHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -555,6 +557,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
       component = fixture.componentInstance;
       component.suggestions.set([...GROUPED_OPTIONS]);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
       hostEl = fixture.nativeElement as HTMLElement;
       acComponent = getAcInstance(fixture);
       acComponent.showPanel();

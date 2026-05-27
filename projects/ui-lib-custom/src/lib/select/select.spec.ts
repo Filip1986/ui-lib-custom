@@ -50,6 +50,7 @@ describe('UiLibSelect accessibility', (): void => {
 
     fixture = TestBed.createComponent(HostComponent);
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
   });
 
   function selectEl(): HTMLElement {
@@ -58,7 +59,7 @@ describe('UiLibSelect accessibility', (): void => {
 
   function controlEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__control'
+      '.ui-lib-select__control',
     ) as HTMLElement;
   }
 
@@ -92,7 +93,7 @@ describe('UiLibSelect accessibility', (): void => {
     openSelect();
 
     const listbox: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="listbox"]'
+      '[role="listbox"]',
     );
     expect(listbox).toBeTruthy();
   });
@@ -176,18 +177,19 @@ describe('UiLibSelect Reactive Forms', (): void => {
 
   function controlEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__control'
+      '.ui-lib-select__control',
     ) as HTMLElement;
   }
 
   function openSelect(): void {
     controlEl().dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
+    fixture.detectChanges(); // Allow @defer block to render
   }
 
   function optionEls(): HTMLElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-select__option')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-select__option'),
     );
   }
 
@@ -239,7 +241,7 @@ describe('UiLibSelect basics', (): void => {
 
   function controlEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__control'
+      '.ui-lib-select__control',
     ) as HTMLElement;
   }
 
@@ -285,7 +287,7 @@ describe('UiLibSelect basics', (): void => {
 
   it('renders placeholder by default', (): void => {
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__value'
+      '.ui-lib-select__value',
     ) as HTMLElement;
     expect(valueEl.classList.contains('ui-lib-select__placeholder')).toBeTruthy();
     const valueText: string | null = valueEl.textContent;
@@ -298,7 +300,7 @@ describe('UiLibSelect basics', (): void => {
     fixture.detectChanges();
 
     const labelEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__label'
+      '.ui-lib-select__label',
     ) as HTMLElement | null;
     expect(labelEl).toBeTruthy();
     const labelText: string | null = (labelEl as HTMLElement).textContent;
@@ -342,7 +344,7 @@ describe('UiLibSelect basics', (): void => {
     fixture.detectChanges();
 
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__value'
+      '.ui-lib-select__value',
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -396,7 +398,7 @@ describe('UiLibSelect ngModel', (): void => {
     freshFixture.detectChanges(false);
 
     const valueEl: HTMLElement = (freshFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__value'
+      '.ui-lib-select__value',
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -415,6 +417,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
 
     fixture = TestBed.createComponent(ReactiveHostComponent);
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
   });
 
   it('writeValue updates the displayed value', (): void => {
@@ -424,14 +427,14 @@ describe('UiLibSelect Reactive Forms', (): void => {
     fixture.detectChanges();
 
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__value'
+      '.ui-lib-select__value',
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect(valueText.trim()).toBe('Beta');
   });
 
-  it('registerOnChange fires on option selection', (): void => {
+  it('registerOnChange fires on option selection', async (): Promise<void> => {
     const selectFixture: ComponentFixture<UiLibSelect> = TestBed.createComponent(UiLibSelect);
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha' },
@@ -439,18 +442,19 @@ describe('UiLibSelect Reactive Forms', (): void => {
     ];
     selectFixture.componentRef.setInput('options', options);
     selectFixture.detectChanges();
+    await selectFixture.whenStable(); // Pre-load @defer (on immediate) block
 
     const onChangeSpy: jest.Mock = jest.fn();
     selectFixture.componentInstance.registerOnChange(onChangeSpy);
 
     const control: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__control'
+      '.ui-lib-select__control',
     ) as HTMLElement;
     control.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     selectFixture.detectChanges();
 
     const option: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__option'
+      '.ui-lib-select__option',
     ) as HTMLElement;
     option.click();
     selectFixture.detectChanges();
@@ -508,7 +512,7 @@ describe('UiLibSelect behavior', (): void => {
     fixture.detectChanges();
 
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__value'
+      '.ui-lib-select__value',
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -526,7 +530,7 @@ describe('UiLibSelect behavior', (): void => {
     fixture.detectChanges();
 
     const valueElement: HTMLElement = hostElement().querySelector(
-      '.ui-lib-select__value'
+      '.ui-lib-select__value',
     ) as HTMLElement;
     expect(valueElement.textContent.trim()).toBe('Beta');
   });
@@ -587,7 +591,7 @@ describe('UiLibSelect behavior', (): void => {
     const alphaOption: SelectOption = getRequiredItem(
       fixture.componentInstance.filteredOptions(),
       0,
-      'alpha option'
+      'alpha option',
     );
     fixture.componentInstance.selectOption(alphaOption);
 
