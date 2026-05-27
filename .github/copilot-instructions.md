@@ -2,6 +2,9 @@
 
 This is an **Angular component library** with secondary-entry-point architecture, signals-first, accessibility-native, and design-token-driven. Follow every rule below before generating or modifying any code.
 
+> **Legacy — migrating to `platform/libs/ui`.** For workspace context read `operator-hq:WORKSPACE.md`
+> (SenseAtlas) and `operator-hq:AI_AGENT_CONTEXT.md` before cross-repo work.
+
 ---
 
 ## §1 Project Overview
