@@ -597,6 +597,121 @@ Full rationale: `docs/architecture/ADR_CSS_LAYER_ADOPTION.md`
 
 ---
 
+## Logical CSS / RTL Rule
+
+All library SCSS **must** use CSS logical properties instead of physical directional properties.
+This enables full RTL (right-to-left) layout support without any additional CSS overrides.
+
+**Enforcement:** `property-disallowed-list` in `stylelint.config.mjs` — severity **error**.
+Any physical directional property in a component SCSS file will block the commit.
+
+### Physical → logical mapping
+
+| Physical (banned)                              | Logical (use this)                            |
+|------------------------------------------------|-----------------------------------------------|
+| `margin-left`                                  | `margin-inline-start`                         |
+| `margin-right`                                 | `margin-inline-end`                           |
+| `padding-left`                                 | `padding-inline-start`                        |
+| `padding-right`                                | `padding-inline-end`                          |
+| `border-left`                                  | `border-inline-start`                         |
+| `border-right`                                 | `border-inline-end`                           |
+| `border-left-color`                            | `border-inline-start-color`                   |
+| `border-right-color`                           | `border-inline-end-color`                     |
+| `border-left-width`                            | `border-inline-start-width`                   |
+| `border-right-width`                           | `border-inline-end-width`                     |
+| `border-left-style`                            | `border-inline-start-style`                   |
+| `border-right-style`                           | `border-inline-end-style`                     |
+| `border-top-left-radius`                       | `border-start-start-radius`                   |
+| `border-top-right-radius`                      | `border-start-end-radius`                     |
+| `border-bottom-left-radius`                    | `border-end-start-radius`                     |
+| `border-bottom-right-radius`                   | `border-end-end-radius`                       |
+| `text-align: left`                             | `text-align: start`                           |
+| `text-align: right`                            | `text-align: end`                             |
+| `left: <directional value>`                    | `inset-inline-start: <value>`                 |
+| `right: <directional value>`                   | `inset-inline-end: <value>`                   |
+
+> **Note on `text-align: left/right`**: enforced separately at error severity via
+> `declaration-property-value-disallowed-list`. Both rules cover it.
+
+### Code examples
+
+```scss
+// ❌ Physical — wrong
+.uilib-foo {
+  padding-left: 1rem;
+  margin-right: 0.5rem;
+  border-left: 2px solid var(--uilib-color-primary);
+  border-top-left-radius: var(--uilib-radius-sm);
+  text-align: left;
+}
+
+// ✅ Logical — correct
+.uilib-foo {
+  padding-inline-start: 1rem;
+  margin-inline-end: 0.5rem;
+  border-inline-start: 2px solid var(--uilib-color-primary);
+  border-start-start-radius: var(--uilib-radius-sm);
+  text-align: start;
+}
+```
+
+### Positioning exception (`left` / `right` properties)
+
+The `left` and `right` CSS properties are **not banned** in the Stylelint rule because they have
+direction-agnostic uses. Apply judgment:
+
+| Usage pattern | Is it directional? | Correct approach |
+|---|---|---|
+| `left: 50%; transform: translateX(-50%)` | No — centering | Keep `left: 50%` |
+| `left: 0; right: 0` (full-width stretch) | No — same as `inset-inline: 0` | Prefer `inset-inline: 0` |
+| `left: 0` (flush-to-start edge) | **Yes** | Use `inset-inline-start: 0` |
+| `right: 0` (flush-to-end edge) | **Yes** | Use `inset-inline-end: 0` |
+| `right: -1px` (overlap trick on end side) | **Yes** | Use `inset-inline-end: -1px` |
+
+### Block-axis properties (`top` / `bottom`)
+
+`top`, `bottom`, `margin-top`, `margin-bottom`, `padding-top`, `padding-bottom` are
+**block-axis** properties. They are direction-independent in horizontal writing modes and
+are **not banned**. The logical equivalents (`margin-block-start`, `inset-block-start`, etc.)
+may be used for consistency, but are not required.
+
+### `inset` shorthand
+
+The `inset` shorthand sets all four sides logically when writing modes are `horizontal-tb`
+(the default). Use it freely for "fill the parent" patterns:
+
+```scss
+// ✅ Inset shorthand — equivalent to top: 0; right: 0; bottom: 0; left: 0 in LTR
+.uilib-overlay {
+  position: absolute;
+  inset: 0;
+}
+```
+
+### Token definitions are exempt
+
+Raw directional values inside CSS custom property **definitions** are allowed — they are
+token values, not layout declarations:
+
+```scss
+// ✅ OK — raw value in token definition
+ui-lib-button {
+  --uilib-button-padding: 0.375rem 0.75rem;   // shorthand: block inline
+}
+
+// ❌ Wrong — physical direction in a rule body
+.uilib-button__label {
+  padding-left: 0.75rem;    // banned
+}
+
+// ✅ Correct
+.uilib-button__label {
+  padding-inline-start: var(--uilib-button-padding-inline-start);
+}
+```
+
+---
+
 ## Styling & Theming
 
 - SCSS for authoring; output uses CSS custom properties for runtime theming. No `::ng-deep` or global resets.

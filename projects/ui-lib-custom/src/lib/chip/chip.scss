@@ -36,6 +36,10 @@
     --uilib-chip-padding-x-lg: 1rem;
     --uilib-chip-font-size-lg: 1rem;
     --uilib-chip-image-size-lg: 1.75rem;
+
+    // Icon / remove-icon relative sizes — em keeps them proportional to chip size
+    --uilib-chip-icon-font-size: 0.875em;
+    --uilib-chip-remove-icon-font-size: 0.65em;
   }
 
   // ---- Host element ------------------------------------------------
@@ -66,7 +70,7 @@
     }
 
     &__icon {
-      font-size: 0.875em;
+      font-size: var(--uilib-chip-icon-font-size);
       flex-shrink: 0;
     }
 
@@ -100,7 +104,7 @@
       }
 
       span {
-        font-size: 0.65em;
+        font-size: var(--uilib-chip-remove-icon-font-size);
         pointer-events: none;
       }
     }

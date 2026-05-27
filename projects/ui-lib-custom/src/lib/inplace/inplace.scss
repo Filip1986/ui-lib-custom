@@ -20,6 +20,8 @@
     --uilib-inplace-close-button-bg-hover: rgba(0, 0, 0, 0.08);
     --uilib-inplace-close-button-border-radius: var(--uilib-radius-full, 9999px);
     --uilib-inplace-disabled-opacity: 0.5;
+    // Close-button icon is sized relative to the button itself
+    --uilib-inplace-close-icon-font-size: 0.7em;
   }
 
   // ---- Host element ------------------------------------------------
@@ -93,7 +95,7 @@
       }
 
       span {
-        font-size: 0.7em;
+        font-size: var(--uilib-inplace-close-icon-font-size);
         pointer-events: none;
       }
     }

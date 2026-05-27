@@ -7,12 +7,17 @@
     --uilib-tree-select-trigger-min-height-lg: 48px;
     --uilib-tree-select-panel-max-height: 320px;
     --uilib-tree-select-panel-z-index: var(--uilib-z-overlay, 100);
+    --uilib-tree-select-font-size: var(--uilib-font-size-md, 1rem);
+    --uilib-tree-select-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-tree-select-font-size-lg: var(--uilib-font-size-lg, 1.125rem);
+    --uilib-tree-select-clear-font-size: 1.1em;
+    --uilib-tree-select-chevron-font-size: 0.8rem;
 
     display: inline-flex;
     flex-direction: column;
     position: relative;
     color: var(--uilib-page-fg);
-    font-size: 1rem;
+    font-size: var(--uilib-tree-select-font-size);
     width: 100%;
   }
 
@@ -70,7 +75,7 @@
     color: var(--uilib-tree-select-placeholder-color, var(--uilib-muted));
     line-height: 1;
     padding: 0 0.25rem;
-    font-size: 1.1em;
+    font-size: var(--uilib-tree-select-clear-font-size);
     display: inline-flex;
     align-items: center;
 
@@ -86,7 +91,7 @@
   }
 
   ui-lib-tree-select .ui-lib-tree-select__chevron {
-    font-size: 0.8rem;
+    font-size: var(--uilib-tree-select-chevron-font-size);
     color: var(--uilib-tree-select-placeholder-color, var(--uilib-muted));
     transition: transform 0.15s ease;
     display: inline-flex;
@@ -169,14 +174,14 @@
     --uilib-tree-select-trigger-padding-y: 0.35rem;
     --uilib-tree-select-trigger-padding-x: 0.5rem;
     min-height: var(--uilib-tree-select-trigger-min-height-sm);
-    font-size: 0.875rem;
+    font-size: var(--uilib-tree-select-font-size-sm);
   }
 
   ui-lib-tree-select.ui-lib-tree-select--size-lg .ui-lib-tree-select__trigger {
     --uilib-tree-select-trigger-padding-y: 0.65rem;
     --uilib-tree-select-trigger-padding-x: 0.9rem;
     min-height: var(--uilib-tree-select-trigger-min-height-lg);
-    font-size: 1.125rem;
+    font-size: var(--uilib-tree-select-font-size-lg);
   }
 
   // ─── State modifiers ────────────────────────────────────────────────────────
