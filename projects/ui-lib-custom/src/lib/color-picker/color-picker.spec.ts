@@ -213,7 +213,7 @@ describe('ColorPicker component', (): void => {
       expect(panel?.parentElement).toBe(document.body);
 
       // Close panel before destroying fixture so the @if block removes the DOM node from body
-      defaultComponent.closePanel(new MouseEvent('click'));
+      defaultComponent.closePanel();
       defaultFixture.detectChanges();
       defaultFixture.destroy();
     });
