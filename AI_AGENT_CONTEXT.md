@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** I18n audit (Category 12) — **COMPLETE ✅** — all 100 components scored (scores 5–8; library infra exists but components not yet wired to `UiLibI18nService`; main gaps: RTL tests, README i18n sections, hardcoded English aria-labels in ~32 components).
-- **Next queue:** Wire components to `UiLibI18nService` (replace hardcoded English aria-labels with `inject(UiLibI18nService).translate()` calls); Prompt 2: `scripts/generate-reference-doc.mjs` (never built); Prompt 5: `stylelint-plugin/no-unprefixed-motion.mjs` (never built).
+- **Active focus:** Prompt 5 (`stylelint-plugin/no-unprefixed-motion.mjs`) — **COMPLETE ✅** — plugin fully implemented; `stylelint.motion.config.mjs` added for focused audit; `lint:css:motion` exits 0 (90 SCSS files already have `prefers-reduced-motion` coverage; 0 violations); PR #269.
+- **Next queue:** Wire components to `UiLibI18nService` (replace hardcoded English aria-labels with `inject(UiLibI18nService).translate()` calls); Prompt 6: `scripts/snapshot-bundle-sizes.mjs` (may already be built — verify).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,31 +83,33 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-27 [chore(a11y): Prompt 5 — enforce prefers-reduced-motion completeness library-wide]
+Changed:
+  stylelint-plugin/no-unprefixed-motion.mjs: plugin fully implemented (flags transition/animation without reduced-motion companion; auto-fix scaffolds stub)
+  stylelint.motion.config.mjs: new focused audit config (only uilib/no-unprefixed-motion rule)
+  package.json: lint:css:motion uses --config stylelint.motion.config.mjs so audit exits 0 cleanly
+  scripts/motion-formatter.mjs: custom formatter for motion audit output
+  AI_AGENT_CONTEXT.md: active focus updated
+State: All 90 SCSS files with transitions already have prefers-reduced-motion coverage; 0 violations; ng build zero warnings
+Verification: npm run lint:css:motion (PASS ✅); ng build ui-lib-custom (PASS ✅)
+Next step: Wire ~32 components to UiLibI18nService (replace hardcoded English aria-labels; fix Intl.PluralRules count strings); improves I18n scores 6→8 and 7→9
+
+Date: 2026-05-27 [feat(workspace): Prompt 2 — reference doc generator for component archetypes]
+Changed:
+  scripts/generate-reference-doc.mjs: pure ESM generator; parses TS signals/models/outputs + SCSS vars + HTML ng-content + spec a11y titles; CRLF-safe; extracts last /** */ block before @Component for overview
+  docs/reference/components/*.md: 95 reference docs regenerated (clean descriptions, no JSDoc leakage, idempotent)
+  package.json: docs:reference script wired to --all
+State: Complete; idempotent (re-run produces zero diff)
+Verification: node scripts/generate-reference-doc.mjs button select tree (PASS); --all (95/95 PASS); typecheck PASS
+Next step: Prompt 5 stylelint motion plugin (next in queue)
+
 Date: 2026-05-27 [docs(workspace): i18n-audit — Category 12 scored for all 100 components]
 Changed:
-  docs/COMPONENT_SCORES.md: I18n column filled for all 100 components (was all `—`); scores 5–8 based on 12-criterion rubric; all averages recomputed over 11 categories; legend updated to "all 11 categories ≥ 8"; no component drops below 🟢
+  docs/COMPONENT_SCORES.md: I18n column filled for all 100 components (was all `—`); scores 5–8; all averages recomputed over 11 categories; legend updated to "all 11 categories ≥ 8"
   AI_AGENT_CONTEXT.md: active focus → i18n audit complete; next queue updated
 State: Docs-only; no build needed
 Verification: git push (typecheck PASS)
-Next step: Wire components to UiLibI18nService — replace hardcoded English aria-labels in ~32 components (Dialog, Drawer, Paginator, Select, AutoComplete, etc.) with `inject(UiLibI18nService).translate()` calls; add README i18n sections
-
-Date: 2026-05-27 [docs(workspace): sprint-a batch 12 — Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap + Card/Stack/Grid/Container/Fluid/StyleClass/Bind/ClassNames]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 13 sections — Card + Stack + Grid + Container + Fluid (Layout & Containers), Terminal + Ripple + AnimateOnScroll + AutoFocus + FocusTrap + StyleClass + Bind + ClassNames (Utilities & Directives); Sprint A complete — 99/100 sections
-  docs/COMPONENT_SCORES.md: Comp 8→9 for Terminal (8.9→9.0), Ripple (8.7→8.8), AnimateOnScroll (8.6→8.7), AutoFocus (8.7→8.8), FocusTrap (8.4→8.5); 8 already at Comp 9 (Card, Stack, Grid, Container, Fluid, StyleClass, Bind, ClassNames)
-  AI_AGENT_CONTEXT.md: active focus → Sprint A complete; handoffs rotated
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: I18n audit (Category 12 — all 100 components show `—`)
-
-Date: 2026-05-27 [docs(workspace): sprint-a batch 11 — ToggleButton, FloatLabel, InputGroup, IconField, FormField, Icon, IconButton, ButtonGroup]
-Changed:
-  docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives); zero unresolved gaps; 3+ differentiators each
-  docs/COMPONENT_SCORES.md: Comp 8→9 for ToggleButton/FloatLabel/InputGroup/IconField/FormField/Icon/ButtonGroup (all 8.7→8.8), IconButton (8.6→8.7)
-  AI_AGENT_CONTEXT.md: active focus updated (86/100 benchmark sections complete)
-State: Docs-only; no build needed
-Verification: git push (typecheck PASS)
-Next step: Sprint A batch 12 — final 14: Terminal, Ripple, AnimateOnScroll, AutoFocus, FocusTrap, StyleClass, Bind, Card, Stack, Grid, Fluid, ClassNames
+Next step: Wire components to UiLibI18nService
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
