@@ -301,7 +301,7 @@ export class DataViewComponent<T> {
   }
 
   public pageAriaLabel(pageIndex: number): string {
-    return `Go to page ${pageIndex + 1}`;
+    return this.i18n.translate('data-view.go.page', { page: pageIndex + 1 });
   }
 
   public onFilterInput(event: Event): void {

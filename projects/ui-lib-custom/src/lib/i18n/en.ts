@@ -109,6 +109,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'carousel.prev': 'Previous slide',
   'carousel.next': 'Next slide',
   'carousel.indicator': 'Go to slide {n}',
+  'carousel.slide.status': 'Slide {current} of {total}',
   'carousel.region': 'Carousel',
   'carousel.indicators-label': 'Slide indicators',
 
@@ -128,6 +129,29 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
   'chip.remove': 'Remove {label}',
   'autocomplete.dropdown': 'Show suggestions',
+
+  // ── Paginator (dynamic) ───────────────────────────────────────────────────
+  'paginator.empty': 'No pages available',
+  'paginator.page.current': 'Page {page}, current page',
+  'paginator.page.go': 'Go to page {page}',
+
+  // ── DataView (dynamic) ────────────────────────────────────────────────────
+  'data-view.go.page': 'Go to page {page}',
+
+  // ── Meter Group (dynamic) ─────────────────────────────────────────────────
+  'meter-group.segment.default': 'Segment {index}',
+  'meter-group.segment': '{label}: {value} of {max}',
+
+  // ── Rating ────────────────────────────────────────────────────────────────
+  'rating.value': 'Rating: {current} out of {total} stars',
+  'rating.star.singular': '{star} star out of {total}',
+  'rating.star.plural': '{star} stars out of {total}',
+
+  // ── Tree Select (dynamic) ─────────────────────────────────────────────────
+  'tree-select.options': 'Select options',
+  'tree-select.none-selected': 'No item selected',
+  'tree-select.selected.one': '{label} selected',
+  'tree-select.selected.count': '{count} items selected',
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Row expansion',

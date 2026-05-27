@@ -24,6 +24,7 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
 
 export type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
@@ -161,6 +162,7 @@ export class Rating implements ControlValueAccessor {
   /** Unique id prefix used for accessibility identifiers on this instance. */
   public readonly controlId: string = `ui-lib-rating-${++ratingIdCounter}`;
 
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly elementRef: ElementRef<HTMLElement> = inject(
     ElementRef,
@@ -182,7 +184,10 @@ export class Rating implements ControlValueAccessor {
     (): string | null => {
       if (this.readonly()) {
         const currentValue: number | null = this.value();
-        return `Rating: ${currentValue ?? 0} out of ${this.stars()} stars`;
+        return this.i18n.translate('rating.value', {
+          current: currentValue ?? 0,
+          total: this.stars(),
+        });
       }
 
       if (this.ariaLabelledby()) {
@@ -294,7 +299,8 @@ export class Rating implements ControlValueAccessor {
 
   /** Human-readable aria-label for a single star element. */
   public getStarAriaLabel(star: number): string {
-    return `${star} ${star === 1 ? 'star' : 'stars'} out of ${this.stars()}`;
+    const key: string = star === 1 ? 'rating.star.singular' : 'rating.star.plural';
+    return this.i18n.translate(key, { star, total: this.stars() });
   }
 
   /** CSS classes for the star icon element, merging the custom icon class when provided. */
