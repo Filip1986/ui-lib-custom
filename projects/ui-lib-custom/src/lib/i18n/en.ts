@@ -18,7 +18,18 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'select.toggle': 'Toggle dropdown',
   'select.empty': 'No options available',
   'select.search.placeholder': 'Search options',
+  'select.search.aria': 'Search options',
   'select.selected.count': '{count} items selected',
+
+  // ── AutoComplete ──────────────────────────────────────────────────────────
+  'autocomplete.chips-label': 'Selected items',
+  'autocomplete.clear': 'Clear',
+
+  // ── CascadeSelect ─────────────────────────────────────────────────────────
+  'cascade-select.clear': 'Clear selection',
+
+  // ── Listbox ───────────────────────────────────────────────────────────────
+  'listbox.select-all': 'Select all options',
 
   // ── DatePicker ────────────────────────────────────────────────────────────
   'datepicker.toggle': 'Open calendar',
@@ -26,11 +37,32 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'datepicker.next.month': 'Next month',
   'datepicker.prev.year': 'Previous year',
   'datepicker.next.year': 'Next year',
+  'datepicker.prev.decade': 'Previous decade',
+  'datepicker.next.decade': 'Next decade',
   'datepicker.today': 'Today',
   'datepicker.clear': 'Clear date',
+  'datepicker.month-picker': 'Month picker',
+  'datepicker.year-picker': 'Year picker',
+  'datepicker.time-panel': 'Time picker',
+  'datepicker.time.hour': 'Hour',
+  'datepicker.time.minute': 'Minute',
+  'datepicker.time.second': 'Second',
+  'datepicker.time.inc.hour': 'Increase hour',
+  'datepicker.time.dec.hour': 'Decrease hour',
+  'datepicker.time.inc.minute': 'Increase minute',
+  'datepicker.time.dec.minute': 'Decrease minute',
+  'datepicker.time.inc.second': 'Increase second',
+  'datepicker.time.dec.second': 'Decrease second',
 
-  // ── Dialog ────────────────────────────────────────────────────────────────
+  // ── Dialog / Drawer / BottomSheet / Popover / ConfirmDialog / DynamicDialog
   'dialog.close': 'Close dialog',
+  'drawer.close': 'Close',
+  'bottom-sheet.close': 'Close',
+  'popover.close': 'Close',
+  'confirm-dialog.close': 'Close',
+  'dynamic-dialog.close': 'Close',
+  'message.close': 'Close message',
+  'panel.toggle': 'Toggle panel',
 
   // ── Paginator ─────────────────────────────────────────────────────────────
   'paginator.first': 'First page',
@@ -39,6 +71,8 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'paginator.last': 'Last page',
   'paginator.rows.label': 'Rows per page',
   'paginator.page.report': 'Page {currentPage} of {totalPages}',
+  'paginator.jump': 'Jump to page, press Enter to navigate',
+  'paginator.nav': 'Pagination',
 
   // ── Upload ────────────────────────────────────────────────────────────────
   'upload.drop.hint': 'Drag and drop files here, or click to browse',
@@ -60,6 +94,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── ColorPicker ───────────────────────────────────────────────────────────
   'colorpicker.toggle': 'Open color picker',
+  'colorpicker.panel': 'Color picker',
   'colorpicker.hue': 'Hue slider',
   'colorpicker.hex.input': 'Hex color value',
   'colorpicker.red.input': 'Red channel',
@@ -75,6 +110,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'carousel.next': 'Next slide',
   'carousel.indicator': 'Go to slide {n}',
   'carousel.region': 'Carousel',
+  'carousel.indicators-label': 'Slide indicators',
 
   // ── OrderList / PickList ──────────────────────────────────────────────────
   'orderlist.move.up': 'Move up',
@@ -92,4 +128,50 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
   'chip.remove': 'Remove {label}',
   'autocomplete.dropdown': 'Show suggestions',
+
+  // ── Table / TreeTable ─────────────────────────────────────────────────────
+  'table.expand-row': 'Row expansion',
+  'table.select-all': 'Select all rows',
+  'tree-table.filter': 'Filter table',
+  'tree-table.select-row': 'Select row',
+  'tree-table.select-all': 'Select all rows',
+
+  // ── Tabs ──────────────────────────────────────────────────────────────────
+  'tabs.close': 'Close tab',
+
+  // ── Menubar ───────────────────────────────────────────────────────────────
+  'menubar.toggle': 'Toggle navigation menu',
+
+  // ── Input ─────────────────────────────────────────────────────────────────
+  'input.clear': 'Clear input',
+  'input.password-toggle': 'Toggle password visibility',
+  'input-mask.clear': 'Clear',
+  'password.clear': 'Clear password',
+
+  // ── Meter Group ───────────────────────────────────────────────────────────
+  'meter-group.legend': 'Legend',
+
+  // ── Terminal ──────────────────────────────────────────────────────────────
+  'terminal.input': 'Terminal command input',
+  'terminal.output': 'Terminal output',
+
+  // ── Tree ──────────────────────────────────────────────────────────────────
+  'tree.filter-placeholder': 'Filter tree nodes',
+  'tree-select.clear': 'Clear selection',
+
+  // ── Upload ────────────────────────────────────────────────────────────────
+  'upload.area': 'File upload area',
+  'upload.toolbar': 'Upload actions',
+  'upload.files-list': 'Files to upload',
+  'upload.dismiss': 'Dismiss validation messages',
+
+  // ── Image ─────────────────────────────────────────────────────────────────
+  'image.controls': 'Image controls',
+
+  // ── DataView ─────────────────────────────────────────────────────────────
+  'data-view.pagination': 'Pagination',
+  'data-view.view-mode': 'View mode',
+
+  // ── Editor ────────────────────────────────────────────────────────────────
+  'editor.toolbar': 'Formatting options',
 };

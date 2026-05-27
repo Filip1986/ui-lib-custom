@@ -12,7 +12,7 @@
     class="ui-lib-menubar__toggle"
     type="button"
     [attr.aria-expanded]="mobileMenuOpen() ? 'true' : 'false'"
-    aria-label="Toggle navigation menu"
+    [attr.aria-label]="i18n.translate('menubar.toggle')"
     [attr.aria-controls]="rootListId"
     (click)="toggleMobileMenu()"
   >

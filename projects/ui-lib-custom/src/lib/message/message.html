@@ -14,7 +14,7 @@
   <button
     type="button"
     class="ui-lib-message__close"
-    aria-label="Close message"
+    [attr.aria-label]="i18n.translate('message.close')"
     (click)="onClose()"
   >
     <ui-lib-icon

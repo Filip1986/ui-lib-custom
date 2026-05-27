@@ -37,6 +37,7 @@ import {
   AUTOCOMPLETE_OPTION_ROLE,
 } from './autocomplete.constants';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   AutoCompleteCompleteEvent,
   AutoCompleteDropdownClickEvent,
@@ -273,6 +274,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   public readonly emptyText: string = AUTOCOMPLETE_EMPTY_TEXT;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);

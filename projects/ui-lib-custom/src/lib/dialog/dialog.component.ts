@@ -29,6 +29,7 @@ import {
   releaseOverlayZIndex,
 } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { DIALOG_DEFAULTS, DIALOG_POSITION_CLASS_MAP } from './dialog.constants';
 import type { DialogPosition, DialogVariant } from './dialog.types';
 import type { BackdropAnimationParams, DialogAnimationParams } from './dialog-animations';
@@ -71,10 +72,11 @@ export class DialogComponent implements OnDestroy {
 
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly hostElement: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
   private readonly document: Document = inject(DOCUMENT);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
 
   private readonly projectedElements: Signal<readonly ElementRef<HTMLElement>[]> = contentChildren<
@@ -95,7 +97,7 @@ export class DialogComponent implements OnDestroy {
   private readonly draggingState: WritableSignal<boolean> = signal<boolean>(false);
   private readonly responsiveWidth: WritableSignal<string | null> = signal<string | null>(null);
   private readonly previousBodyOverflow: WritableSignal<string | null> = signal<string | null>(
-    null
+    null,
   );
 
   private mediaQueryCleanupFns: Array<() => void> = [];
@@ -130,12 +132,12 @@ export class DialogComponent implements OnDestroy {
 
   /** Enables closing the dialog with Escape key. */
   public readonly closeOnEscape: InputSignal<boolean> = input<boolean>(
-    DIALOG_DEFAULTS.CloseOnEscape
+    DIALOG_DEFAULTS.CloseOnEscape,
   );
 
   /** Enables closing the dialog by clicking the modal backdrop. */
   public readonly dismissableMask: InputSignal<boolean> = input<boolean>(
-    DIALOG_DEFAULTS.DismissableMask
+    DIALOG_DEFAULTS.DismissableMask,
   );
 
   /** Enables dialog dragging (placeholder for v1 core behavior). */
@@ -149,7 +151,7 @@ export class DialogComponent implements OnDestroy {
 
   /** Dialog viewport placement. */
   public readonly position: InputSignal<DialogPosition> = input<DialogPosition>(
-    DIALOG_DEFAULTS.Position
+    DIALOG_DEFAULTS.Position,
   );
 
   /** Responsive max-width -> width map, e.g. { '960px': '75vw', '640px': '90vw' }. */
@@ -164,12 +166,12 @@ export class DialogComponent implements OnDestroy {
 
   /** Optional aria-labelledby override. */
   public readonly ariaLabelledBy: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Optional aria-describedby pointing to an element that describes the dialog purpose. */
   public readonly ariaDescribedBy: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Optional additional CSS class(es) applied to the dialog panel element. */
@@ -192,8 +194,8 @@ export class DialogComponent implements OnDestroy {
   /** Whether projected header content exists. */
   public readonly hasHeaderContent: Signal<boolean> = computed<boolean>((): boolean =>
     this.projectedElements().some((elementRef: ElementRef<HTMLElement>): boolean =>
-      elementRef.nativeElement.hasAttribute('uiLibDialogHeader')
-    )
+      elementRef.nativeElement.hasAttribute('uiLibDialogHeader'),
+    ),
   );
 
   /** Stable title id used for aria-labelledby fallback. */
@@ -212,27 +214,27 @@ export class DialogComponent implements OnDestroy {
       }
 
       return null;
-    }
+    },
   );
 
   /** Whether the dialog is currently maximized. */
   public readonly maximized: Signal<boolean> = computed<boolean>((): boolean =>
-    this.maximizedState()
+    this.maximizedState(),
   );
 
   /** Whether the dialog header is currently being dragged. */
   public readonly isDragging: Signal<boolean> = computed<boolean>((): boolean =>
-    this.draggingState()
+    this.draggingState(),
   );
 
   /** Resolved variant value used for host/panel class computation. */
   public readonly resolvedVariant: Signal<DialogVariant> = computed<DialogVariant>(
-    (): DialogVariant => this.variant() ?? this.themeConfig.variant()
+    (): DialogVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Position class resolved from position input. */
   public readonly positionClass: Signal<string> = computed<string>(
-    (): string => DIALOG_POSITION_CLASS_MAP[this.position()]
+    (): string => DIALOG_POSITION_CLASS_MAP[this.position()],
   );
 
   /** Host class list for overlay container behavior. */
@@ -330,7 +332,7 @@ export class DialogComponent implements OnDestroy {
         startScale: '0.9',
         startTranslateY: '-8px',
       };
-    }
+    },
   );
 
   /** Backdrop motion variables resolved per variant for CSS-driven animations. */
@@ -594,7 +596,7 @@ export class DialogComponent implements OnDestroy {
       if (typeof mediaQueryList.addEventListener === 'function') {
         mediaQueryList.addEventListener('change', handler);
         this.mediaQueryCleanupFns.push((): void =>
-          mediaQueryList.removeEventListener('change', handler)
+          mediaQueryList.removeEventListener('change', handler),
         );
       } else {
         mediaQueryList.addListener(handler);
@@ -634,7 +636,7 @@ export class DialogComponent implements OnDestroy {
     // Descending max-width order, first match wins.
     const sortedBreakpoints: Array<[string, string]> = breakpointEntries.sort(
       (firstEntry: [string, string], secondEntry: [string, string]): number =>
-        this.parsePx(secondEntry[0]) - this.parsePx(firstEntry[0])
+        this.parsePx(secondEntry[0]) - this.parsePx(firstEntry[0]),
     );
 
     for (const [maxWidth, width] of sortedBreakpoints) {
@@ -654,7 +656,7 @@ export class DialogComponent implements OnDestroy {
 
     const sortedBreakpoints: Array<[string, string]> = breakpointEntries.sort(
       (firstEntry: [string, string], secondEntry: [string, string]): number =>
-        this.parsePx(secondEntry[0]) - this.parsePx(firstEntry[0])
+        this.parsePx(secondEntry[0]) - this.parsePx(firstEntry[0]),
     );
 
     return sortedBreakpoints[0]?.[1] ?? null;
@@ -704,11 +706,11 @@ export class DialogComponent implements OnDestroy {
 
     const clampedLeft: number = Math.min(
       Math.max(0, desiredLeft),
-      Math.max(0, viewportWidth - this.dragPanelWidth)
+      Math.max(0, viewportWidth - this.dragPanelWidth),
     );
     const clampedTop: number = Math.min(
       Math.max(0, desiredTop),
-      Math.max(0, viewportHeight - this.dragPanelHeight)
+      Math.max(0, viewportHeight - this.dragPanelHeight),
     );
 
     const nextOffsetX: number = this.dragStartOffsetX + (clampedLeft - this.dragStartLeft);

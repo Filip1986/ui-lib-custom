@@ -15,7 +15,7 @@
         class="ui-lib-panel__toggle-button"
         [attr.aria-expanded]="!collapsed()"
         [attr.aria-controls]="contentId"
-        aria-label="Toggle panel"
+        [attr.aria-label]="i18n.translate('panel.toggle')"
         (click)="handleToggleClick($event)"
         (keydown.enter)="handleToggleKeydown($event)"
         (keydown.space)="handleToggleKeydown($event)"

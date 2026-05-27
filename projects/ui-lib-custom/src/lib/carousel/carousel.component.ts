@@ -48,6 +48,7 @@ import type {
   CarouselVariant,
 } from './carousel.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 /**
  * Carousel is a content slider with support for multiple visible items,
@@ -92,6 +93,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   // ─── Injected Services ───────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly zone: NgZone = inject(NgZone);
   private readonly renderer: Renderer2 = inject(Renderer2);

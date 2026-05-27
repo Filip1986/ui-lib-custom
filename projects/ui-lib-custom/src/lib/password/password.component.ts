@@ -15,6 +15,7 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { PASSWORD_DEFAULTS } from './password.types';
 import type { PasswordSize, PasswordStrength, PasswordVariant } from './password.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 /** Module-level counter for generating unique IDs across all Password instances. */
 let nextPasswordId: number = 0;
@@ -54,6 +55,7 @@ export class PasswordComponent implements ControlValueAccessor {
   public readonly passwordId: string = 'ui-lib-password-' + ++nextPasswordId;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** ID for the strength live region — use as `aria-describedby` on an associated label. */
   public readonly strengthId: string = this.passwordId + '-strength';

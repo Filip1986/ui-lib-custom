@@ -6,7 +6,7 @@
       class="uilib-tree-filter-input"
       [placeholder]="filterPlaceholder()"
       [value]="filterText()"
-      aria-label="Filter tree nodes"
+      [attr.aria-label]="i18n.translate('tree.filter-placeholder')"
       (input)="onFilterInput($event)"
     />
     <span class="uilib-tree-filter-icon pi pi-search" aria-hidden="true"></span>

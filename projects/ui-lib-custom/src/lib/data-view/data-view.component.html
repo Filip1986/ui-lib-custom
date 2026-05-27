@@ -1,5 +1,5 @@
 <ng-template #paginatorTemplate>
-  <nav class="ui-lib-data-view__paginator" aria-label="Pagination">
+  <nav class="ui-lib-data-view__paginator" [attr.aria-label]="i18n.translate('data-view.pagination')">
     <div class="ui-lib-data-view__paginator-start">
       @if (paginatorLeftTemplate()) {
         <ng-container [ngTemplateOutlet]="paginatorLeftTemplate()!" />
@@ -10,7 +10,7 @@
       <button
         class="ui-lib-data-view__paginator-button"
         type="button"
-        aria-label="Go to first page"
+        [attr.aria-label]="i18n.translate('paginator.first')"
         [disabled]="isFirstPage()"
         (click)="onFirstPage()"
       >
@@ -19,7 +19,7 @@
       <button
         class="ui-lib-data-view__paginator-button"
         type="button"
-        aria-label="Go to previous page"
+        [attr.aria-label]="i18n.translate('paginator.prev')"
         [disabled]="isFirstPage()"
         (click)="onPreviousPage()"
       >
@@ -48,7 +48,7 @@
       <button
         class="ui-lib-data-view__paginator-button"
         type="button"
-        aria-label="Go to next page"
+        [attr.aria-label]="i18n.translate('paginator.next')"
         [disabled]="isLastPage()"
         (click)="onNextPage()"
       >
@@ -57,7 +57,7 @@
       <button
         class="ui-lib-data-view__paginator-button"
         type="button"
-        aria-label="Go to last page"
+        [attr.aria-label]="i18n.translate('paginator.last')"
         [disabled]="isLastPage()"
         (click)="onLastPage()"
       >
@@ -71,7 +71,7 @@
           Rows per page
           <select
             class="ui-lib-data-view__rows-select"
-            aria-label="Rows per page"
+            [attr.aria-label]="i18n.translate('paginator.rows.label')"
             [value]="effectiveRows()"
             (change)="onRowsPerPageSelectChange($event)"
           >
@@ -130,7 +130,7 @@
     </select>
   </label>
 
-  <div class="ui-lib-data-view__layout-toggle" role="group" aria-label="View mode">
+  <div class="ui-lib-data-view__layout-toggle" role="group" [attr.aria-label]="i18n.translate('data-view.view-mode')">
     <button
       class="ui-lib-data-view__layout-button"
       type="button"

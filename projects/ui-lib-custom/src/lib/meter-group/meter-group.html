@@ -1,6 +1,6 @@
 <!-- Legend at start (above for horizontal, left for vertical) -->
 @if (showLabels() && labelPosition() === 'start') {
-  <ul class="ui-lib-meter-group__labels" aria-label="Legend">
+  <ul class="ui-lib-meter-group__labels" [attr.aria-label]="i18n.translate('meter-group.legend')">
     @for (segment of meterSegments(); track trackSegment($index, segment)) {
       <li class="ui-lib-meter-group__label-item">
         <span
@@ -46,7 +46,7 @@
 
 <!-- Legend at end (below for horizontal, right for vertical) -->
 @if (showLabels() && labelPosition() === 'end') {
-  <ul class="ui-lib-meter-group__labels" aria-label="Legend">
+  <ul class="ui-lib-meter-group__labels" [attr.aria-label]="i18n.translate('meter-group.legend')">
     @for (segment of meterSegments(); track trackSegment($index, segment)) {
       <li class="ui-lib-meter-group__label-item">
         <span

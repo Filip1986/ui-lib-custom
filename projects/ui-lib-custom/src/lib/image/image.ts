@@ -24,6 +24,7 @@ import {
 import { DOCUMENT, NgStyle, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   IMAGE_ARIA_CLOSE_LABEL,
   IMAGE_ARIA_PREVIEW_LABEL,
@@ -74,6 +75,7 @@ export class ImageComponent implements OnDestroy {
   // ─── Injected services ───────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly document: Document = inject(DOCUMENT);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
@@ -194,22 +196,22 @@ export class ImageComponent implements OnDestroy {
 
   /** Resolved design variant — falls back to the global theme variant when null. */
   public readonly effectiveVariant: Signal<ImageVariant> = computed<ImageVariant>(
-    (): ImageVariant => this.variant() ?? this.themeConfig.variant()
+    (): ImageVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** True when the zoom scale has reached the maximum. */
   public readonly zoomInDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.zoomScale() >= IMAGE_ZOOM_MAX
+    (): boolean => this.zoomScale() >= IMAGE_ZOOM_MAX,
   );
 
   /** True when the zoom scale has reached the minimum. */
   public readonly zoomOutDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.zoomScale() <= IMAGE_ZOOM_MIN
+    (): boolean => this.zoomScale() <= IMAGE_ZOOM_MIN,
   );
 
   /** CSS transform string applied to the preview image. */
   public readonly previewTransform: Signal<string> = computed<string>(
-    (): string => `scale(${this.zoomScale()}) rotate(${this.rotateAngle()}deg)`
+    (): string => `scale(${this.zoomScale()}) rotate(${this.rotateAngle()}deg)`,
   );
 
   /** Live-region announcement for preview state changes while the overlay is open. */
@@ -250,7 +252,7 @@ export class ImageComponent implements OnDestroy {
 
   /** Zoom percentage used for screen-reader announcements. */
   public readonly zoomPercent: Signal<number> = computed<number>((): number =>
-    Math.round(this.zoomScale() * 100)
+    Math.round(this.zoomScale() * 100),
   );
 
   /** Rotation normalized to a positive degree value for announcements. */
@@ -385,7 +387,7 @@ export class ImageComponent implements OnDestroy {
   public zoomIn(): void {
     const next: number = Math.min(
       parseFloat((this.zoomScale() + IMAGE_ZOOM_STEP).toFixed(2)),
-      IMAGE_ZOOM_MAX
+      IMAGE_ZOOM_MAX,
     );
     this.zoomScale.set(next);
   }
@@ -394,7 +396,7 @@ export class ImageComponent implements OnDestroy {
   public zoomOut(): void {
     const next: number = Math.max(
       parseFloat((this.zoomScale() - IMAGE_ZOOM_STEP).toFixed(2)),
-      IMAGE_ZOOM_MIN
+      IMAGE_ZOOM_MIN,
     );
     this.zoomScale.set(next);
   }

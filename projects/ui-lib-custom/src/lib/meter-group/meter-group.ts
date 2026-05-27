@@ -9,6 +9,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   MeterGroupLabelPosition,
   MeterGroupOrientation,
@@ -59,6 +60,7 @@ let nextMeterGroupId: number = 0;
 })
 export class MeterGroup {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Unique instance identifier (auto-generated). */
   public readonly instanceId: string = `ui-lib-meter-group-${++nextMeterGroupId}`;
@@ -88,7 +90,7 @@ export class MeterGroup {
 
   /** Visual variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<MeterGroupVariant | null> = input<MeterGroupVariant | null>(
-    null
+    null,
   );
 
   /** Additional CSS classes to attach to the host element. */
@@ -99,7 +101,7 @@ export class MeterGroup {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<MeterGroupVariant> = computed<MeterGroupVariant>(
-    (): MeterGroupVariant => this.variant() ?? this.themeConfig.variant()
+    (): MeterGroupVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -120,7 +122,7 @@ export class MeterGroup {
 
   /** Total span of the range. */
   private readonly rangeSpan: Signal<number> = computed<number>((): number =>
-    Math.max(this.max() - this.min(), 0)
+    Math.max(this.max() - this.min(), 0),
   );
 
   /** Values clamped to [min, max] and enriched with resolved percentage. */
@@ -140,20 +142,20 @@ export class MeterGroup {
           percentage: ((clampedValue - min) / span) * 100,
         };
       });
-    }
+    },
   );
 
   /** Sum of all rendered segment values. */
   public readonly totalValue: Signal<number> = computed<number>((): number =>
     this.meterSegments().reduce(
       (sum: number, segment: MeterSegment): number => sum + segment.value,
-      0
-    )
+      0,
+    ),
   );
 
   /** Screen-reader announcement string for the current total. */
   public readonly totalAnnouncement: Signal<string> = computed<string>(
-    (): string => `Total: ${this.totalValue()}`
+    (): string => `Total: ${this.totalValue()}`,
   );
 
   /** Returns a stable key for segment rendering. */

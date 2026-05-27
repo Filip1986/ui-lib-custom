@@ -5,7 +5,7 @@
     <ng-container [ngTemplateOutlet]="headerTemplate()!" />
   } @else {
     <div class="ui-lib-upload__header">
-      <div class="ui-lib-upload__toolbar" role="toolbar" aria-label="Upload actions">
+      <div class="ui-lib-upload__toolbar" role="toolbar" [attr.aria-label]="i18n.translate('upload.toolbar')">
 
         <button
           type="button"
@@ -87,7 +87,7 @@
     <div
       class="ui-lib-upload__content"
       role="region"
-      aria-label="File upload area"
+      [attr.aria-label]="i18n.translate('upload.area')"
       [attr.aria-disabled]="disabled() || null"
       (dragenter)="onDragEnter($event)"
       (dragover)="onDragOver($event)"
@@ -124,7 +124,7 @@
       }
 
       @if (hasFiles()) {
-        <ul class="ui-lib-upload__file-list" role="list" aria-label="Files to upload">
+        <ul class="ui-lib-upload__file-list" role="list" [attr.aria-label]="i18n.translate('upload.files-list')">
           @for (item of files(); track item.file.name; let index = $index) {
             <li class="ui-lib-upload__file-item" role="listitem">
 
@@ -196,7 +196,7 @@
       <button
         type="button"
         class="ui-lib-upload__messages-close"
-        aria-label="Dismiss validation messages"
+        [attr.aria-label]="i18n.translate('upload.dismiss')"
         (click)="clearMessages()"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true">

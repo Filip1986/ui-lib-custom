@@ -1,7 +1,7 @@
 <div
   class="ui-lib-editor-toolbar"
   role="toolbar"
-  aria-label="Formatting options"
+  [attr.aria-label]="i18n.translate('editor.toolbar')"
   [attr.aria-disabled]="isDisabled() || readonly() || null"
 >
   <span editorToolbar hidden aria-hidden="true"></span>

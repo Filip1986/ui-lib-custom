@@ -18,6 +18,7 @@ import { isPlatformBrowser } from '@angular/common';
 import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
 import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { BottomSheetVariant } from './bottom-sheet.types';
 export type { BottomSheetVariant } from './bottom-sheet.types';
 
@@ -51,6 +52,7 @@ let nextBottomSheetId: number = 0;
 })
 export class BottomSheet implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly document: Document = inject(DOCUMENT);
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
@@ -87,7 +89,7 @@ export class BottomSheet implements OnDestroy {
   public readonly hidden: OutputEmitterRef<void> = output<void>();
 
   private readonly effectiveVariant: Signal<BottomSheetVariant> = computed<BottomSheetVariant>(
-    (): BottomSheetVariant => this.variant() ?? this.themeConfig.variant()
+    (): BottomSheetVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed host CSS classes. */
@@ -117,7 +119,7 @@ export class BottomSheet implements OnDestroy {
               (): void => {
                 this.activateFocusTrap();
               },
-              { injector: this.injector }
+              { injector: this.injector },
             );
           }
         }
@@ -160,7 +162,7 @@ export class BottomSheet implements OnDestroy {
   /** Activates the focus trap on the sheet panel, moving focus inside and trapping Tab. */
   private activateFocusTrap(): void {
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-bottom-sheet__panel'
+      '.ui-lib-bottom-sheet__panel',
     );
     if (!panel) {
       return;

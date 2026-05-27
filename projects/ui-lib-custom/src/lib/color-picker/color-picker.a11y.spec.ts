@@ -52,7 +52,7 @@ class InlineHostComponent {
 
 function openPicker(fixture: ComponentFixture<PopupHostComponent>): void {
   const trigger: HTMLButtonElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-colorpicker__trigger'
+    '.ui-lib-colorpicker__trigger',
   );
   trigger?.click();
   fixture.detectChanges();
@@ -178,7 +178,7 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('color area has aria-hidden="true" (keyboard access via inputs)', (): void => {
       const colorArea: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__color-area'
+        '.ui-lib-colorpicker__color-area',
       );
       expect(colorArea).not.toBeNull();
       expect(colorArea?.getAttribute('aria-hidden')).toBe('true');
@@ -186,7 +186,7 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('color area has tabindex="-1" (not in keyboard tab order)', (): void => {
       const colorArea: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__color-area'
+        '.ui-lib-colorpicker__color-area',
       );
       expect(colorArea?.getAttribute('tabindex')).toBe('-1');
     });
@@ -208,35 +208,35 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('hue slider has role="slider"', (): void => {
       const hue: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__hue'
+        '.ui-lib-colorpicker__hue',
       );
       expect(hue?.getAttribute('role')).toBe('slider');
     });
 
-    it('hue slider has aria-label="Hue"', (): void => {
+    it('hue slider has aria-label="Hue slider"', (): void => {
       const hue: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__hue'
+        '.ui-lib-colorpicker__hue',
       );
-      expect(hue?.getAttribute('aria-label')).toBe('Hue');
+      expect(hue?.getAttribute('aria-label')).toBe('Hue slider');
     });
 
     it('hue slider has aria-valuemin="0"', (): void => {
       const hue: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__hue'
+        '.ui-lib-colorpicker__hue',
       );
       expect(hue?.getAttribute('aria-valuemin')).toBe('0');
     });
 
     it('hue slider has aria-valuemax="359"', (): void => {
       const hue: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__hue'
+        '.ui-lib-colorpicker__hue',
       );
       expect(hue?.getAttribute('aria-valuemax')).toBe('359');
     });
 
     it('hue slider has aria-valuenow reflecting current hue', (): void => {
       const hue: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__hue'
+        '.ui-lib-colorpicker__hue',
       );
       // Initial hue for '#0077ff' is approximately 211 degrees.
       const valuenow: string | null = hue?.getAttribute('aria-valuenow') ?? null;
@@ -246,7 +246,7 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('hue slider has aria-valuetext in degrees', (): void => {
       const hue: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-colorpicker__hue'
+        '.ui-lib-colorpicker__hue',
       );
       const valuetext: string | null = hue?.getAttribute('aria-valuetext') ?? null;
       expect(valuetext).toBeTruthy();
@@ -271,13 +271,13 @@ describe('ColorPicker Accessibility', (): void => {
     it('hex input label is associated via for/id', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const hexInput: HTMLInputElement | null = host.querySelector<HTMLInputElement>(
-        '.ui-lib-colorpicker__text-input'
+        '.ui-lib-colorpicker__text-input',
       );
       if (!hexInput) throw new Error('Expected hex input to exist');
       const inputId: string = hexInput.id;
       expect(inputId).toBeTruthy();
       const label: HTMLLabelElement | null = host.querySelector<HTMLLabelElement>(
-        `label[for="${inputId}"]`
+        `label[for="${inputId}"]`,
       );
       expect(label).not.toBeNull();
     });
@@ -308,14 +308,14 @@ describe('ColorPicker Accessibility', (): void => {
     it('all number inputs have associated labels', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
       const numberInputs: NodeListOf<HTMLInputElement> = host.querySelectorAll<HTMLInputElement>(
-        '.ui-lib-colorpicker__number-input'
+        '.ui-lib-colorpicker__number-input',
       );
       expect(numberInputs.length).toBe(3);
       numberInputs.forEach((input: HTMLInputElement): void => {
         const inputId: string = input.id;
         expect(inputId).toBeTruthy();
         const label: HTMLLabelElement | null = host.querySelector<HTMLLabelElement>(
-          `label[for="${inputId}"]`
+          `label[for="${inputId}"]`,
         );
         expect(label).not.toBeNull();
       });
@@ -376,7 +376,7 @@ describe('ColorPicker Accessibility', (): void => {
     it('Escape key closes the picker panel', (): void => {
       openPicker(fixture);
       expect(
-        (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-colorpicker__panel')
+        (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-colorpicker__panel'),
       ).not.toBeNull();
 
       const panel: HTMLElement = getPanel(fixture.nativeElement as HTMLElement);
@@ -384,7 +384,7 @@ describe('ColorPicker Accessibility', (): void => {
       fixture.detectChanges();
 
       expect(
-        (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-colorpicker__panel')
+        (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-colorpicker__panel'),
       ).toBeNull();
     });
 
@@ -419,7 +419,7 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('inline panel is always visible', (): void => {
       expect(
-        (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-colorpicker__panel')
+        (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-colorpicker__panel'),
       ).not.toBeNull();
     });
 

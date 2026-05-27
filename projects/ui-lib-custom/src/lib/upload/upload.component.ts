@@ -36,6 +36,7 @@ import {
   UploadHeaderDirective,
 } from './upload.template-directives';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   UPLOAD_DEFAULT_CANCEL_LABEL,
   UPLOAD_DEFAULT_CHOOSE_LABEL,
@@ -90,6 +91,7 @@ let nextUploadId: number = 0;
 })
 export class UploadComponent implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ─── Inputs ────────────────────────────────────────────────────────────────
 

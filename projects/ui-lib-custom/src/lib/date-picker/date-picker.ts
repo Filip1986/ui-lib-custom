@@ -32,6 +32,7 @@ import {
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   DATE_PICKER_CSS_CLASSES,
   DATE_PICKER_DEFAULTS,
@@ -190,6 +191,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private readonly instanceId: string = `${++nextDatePickerId}`;
 

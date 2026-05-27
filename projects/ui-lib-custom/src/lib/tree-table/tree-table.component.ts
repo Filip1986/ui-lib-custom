@@ -22,6 +22,7 @@ import type {
 
 import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { TreeTableColumnComponent } from './tree-table-column.component';
 import { TREE_TABLE_DEFAULTS } from './tree-table.constants';
@@ -73,9 +74,10 @@ export class TreeTableComponent {
   // ─── DI ────────────────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly elementRef: ElementRef<HTMLElement> = inject(
-    ElementRef
+    ElementRef,
   ) as ElementRef<HTMLElement>;
 
   // ─── Instance identity ─────────────────────────────────────────────────────
@@ -95,12 +97,12 @@ export class TreeTableComponent {
 
   /** Design variant. Falls back to `ThemeConfigService.variant()` when `null`. */
   public readonly variant: InputSignal<TreeTableVariant | null> = input<TreeTableVariant | null>(
-    null
+    null,
   );
 
   /** Row height / density. */
   public readonly size: InputSignal<TreeTableSize> = input<TreeTableSize>(
-    TREE_TABLE_DEFAULTS.SIZE as TreeTableSize
+    TREE_TABLE_DEFAULTS.SIZE as TreeTableSize,
   );
 
   /** How rows respond to click interactions. */
@@ -118,7 +120,7 @@ export class TreeTableComponent {
    * Use `[(sortOrder)]` for two-way binding.
    */
   public readonly sortOrder: ModelSignal<TreeTableSortOrder> = model<TreeTableSortOrder>(
-    TREE_TABLE_DEFAULTS.SORT_ORDER as TreeTableSortOrder
+    TREE_TABLE_DEFAULTS.SORT_ORDER as TreeTableSortOrder,
   );
 
   /** When `true`, renders a global filter input above the table. */
@@ -192,7 +194,7 @@ export class TreeTableComponent {
   // ─── Derived signals ───────────────────────────────────────────────────────
 
   private readonly resolvedVariant: Signal<TreeTableVariant> = computed<TreeTableVariant>(
-    (): TreeTableVariant => (this.variant() ?? this.themeConfig.variant()) as TreeTableVariant
+    (): TreeTableVariant => (this.variant() ?? this.themeConfig.variant()) as TreeTableVariant,
   );
 
   /** Host class string applied via `[class]` binding. */
@@ -204,7 +206,7 @@ export class TreeTableComponent {
       this.styleClass(),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   /**
@@ -214,7 +216,7 @@ export class TreeTableComponent {
   public readonly expanderColumnIndex: Signal<number> = computed<number>((): number => {
     const columns: ReadonlyArray<TreeTableColumnComponent> = this.columns();
     const explicit: number = columns.findIndex((column: TreeTableColumnComponent): boolean =>
-      column.expander()
+      column.expander(),
     );
     return explicit >= 0 ? explicit : 0;
   });
@@ -223,8 +225,8 @@ export class TreeTableComponent {
   public readonly hasFooter: Signal<boolean> = computed<boolean>((): boolean =>
     this.columns().some(
       (column: TreeTableColumnComponent): boolean =>
-        Boolean(column.footer()) || column.footerTemplate() !== undefined
-    )
+        Boolean(column.footer()) || column.footerTemplate() !== undefined,
+    ),
   );
 
   /**
@@ -238,7 +240,7 @@ export class TreeTableComponent {
       const result: TreeTableFlatNode[] = [];
       this.buildFlatList(this.value(), 0, result);
       return result;
-    }
+    },
   );
 
   // ─── Public helpers used in template ──────────────────────────────────────
@@ -281,7 +283,7 @@ export class TreeTableComponent {
       return (currentSelection as TreeTableNode).key === node.key;
     }
     return (currentSelection as TreeTableNode[]).some(
-      (selected: TreeTableNode): boolean => selected.key === node.key
+      (selected: TreeTableNode): boolean => selected.key === node.key,
     );
   }
 
@@ -336,8 +338,8 @@ export class TreeTableComponent {
     event.stopPropagation();
     const currentKeys: Set<string> = new Set<string>(
       (Array.isArray(this.selection()) ? (this.selection() as TreeTableNode[]) : []).map(
-        (selected: TreeTableNode): string => selected.key
-      )
+        (selected: TreeTableNode): string => selected.key,
+      ),
     );
 
     const descendantKeys: string[] = this.getDescendantKeys(node);
@@ -357,12 +359,12 @@ export class TreeTableComponent {
 
     const allNodes: TreeTableNode[] = this.flattenNodes(this.value());
     const nodeMap: Map<string, TreeTableNode> = new Map<string, TreeTableNode>(
-      allNodes.map((flatNode: TreeTableNode): [string, TreeTableNode] => [flatNode.key, flatNode])
+      allNodes.map((flatNode: TreeTableNode): [string, TreeTableNode] => [flatNode.key, flatNode]),
     );
     const newSelection: TreeTableNode[] = Array.from(currentKeys)
       .map((key: string): TreeTableNode | undefined => nodeMap.get(key))
       .filter(
-        (treeNode: TreeTableNode | undefined): treeNode is TreeTableNode => treeNode !== undefined
+        (treeNode: TreeTableNode | undefined): treeNode is TreeTableNode => treeNode !== undefined,
       );
 
     this.selection.set(newSelection);
@@ -382,7 +384,7 @@ export class TreeTableComponent {
     event.stopPropagation();
     const allNodes: TreeTableNode[] = this.flattenNodes(this.value());
     const allSelected: boolean = allNodes.every((treeNode: TreeTableNode): boolean =>
-      this.isSelected(treeNode)
+      this.isSelected(treeNode),
     );
 
     if (allSelected) {
@@ -390,7 +392,7 @@ export class TreeTableComponent {
       this.updatePartialStates(this.value(), new Set<string>());
     } else {
       const allKeys: Set<string> = new Set<string>(
-        allNodes.map((treeNode: TreeTableNode): string => treeNode.key)
+        allNodes.map((treeNode: TreeTableNode): string => treeNode.key),
       );
       this.selection.set(allNodes);
       this.updatePartialStates(this.value(), allKeys);
@@ -411,7 +413,7 @@ export class TreeTableComponent {
   public isSomeSelected(): boolean {
     const all: TreeTableNode[] = this.flattenNodes(this.value());
     const selectedCount: number = all.filter((treeNode: TreeTableNode): boolean =>
-      this.isSelected(treeNode)
+      this.isSelected(treeNode),
     ).length;
     return selectedCount > 0 && selectedCount < all.length;
   }
@@ -444,10 +446,10 @@ export class TreeTableComponent {
     const key: string = event.key;
     const host: HTMLElement = this.elementRef.nativeElement;
     const rows: HTMLElement[] = Array.from(
-      host.querySelectorAll<HTMLElement>('tr[role="row"][tabindex="0"]')
+      host.querySelectorAll<HTMLElement>('tr[role="row"][tabindex="0"]'),
     );
     const focusedIndex: number = rows.findIndex(
-      (row: HTMLElement): boolean => row === document.activeElement
+      (row: HTMLElement): boolean => row === document.activeElement,
     );
 
     if (key === KEYBOARD_KEYS.ArrowDown) {
@@ -534,7 +536,7 @@ export class TreeTableComponent {
     // render loop both iterate the same set exactly once (no double-filter).
     const visibleSiblings: TreeTableNode[] = filterText
       ? sorted.filter((node: TreeTableNode): boolean =>
-          this.nodeOrDescendantMatchesFilter(node, filterText)
+          this.nodeOrDescendantMatchesFilter(node, filterText),
         )
       : sorted;
     const setsize: number = visibleSiblings.length;
@@ -573,7 +575,7 @@ export class TreeTableComponent {
       return true;
     }
     return (node.children ?? []).some((child: TreeTableNode): boolean =>
-      this.nodeOrDescendantMatchesFilter(child, filterText)
+      this.nodeOrDescendantMatchesFilter(child, filterText),
     );
   }
 
@@ -583,7 +585,7 @@ export class TreeTableComponent {
     return Object.values(data).some((value: unknown): boolean =>
       String(value ?? '')
         .toLowerCase()
-        .includes(filterText)
+        .includes(filterText),
     );
   }
 
@@ -606,12 +608,12 @@ export class TreeTableComponent {
       ? (this.selection() as TreeTableNode[])
       : [];
     const existingIndex: number = currentSelection.findIndex(
-      (selected: TreeTableNode): boolean => selected.key === node.key
+      (selected: TreeTableNode): boolean => selected.key === node.key,
     );
 
     if (existingIndex >= 0) {
       this.selection.set(
-        currentSelection.filter((selected: TreeTableNode): boolean => selected.key !== node.key)
+        currentSelection.filter((selected: TreeTableNode): boolean => selected.key !== node.key),
       );
       this.nodeUnselect.emit({ originalEvent: event, node });
     } else {
@@ -655,7 +657,7 @@ export class TreeTableComponent {
         this.updatePartialStates(node.children, selectedKeys);
         const descendantKeys: string[] = this.getDescendantKeys(node);
         const checkedCount: number = descendantKeys.filter((key: string): boolean =>
-          selectedKeys.has(key)
+          selectedKeys.has(key),
         ).length;
         node.partialSelected = checkedCount > 0 && checkedCount < descendantKeys.length;
       }

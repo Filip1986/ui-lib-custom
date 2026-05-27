@@ -32,6 +32,7 @@ import {
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   CASCADE_SELECT_CLASSNAMES,
   CASCADE_SELECT_DEFAULTS,
@@ -211,6 +212,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   private readonly focusedLevel: WritableSignal<number> = signal<number>(0);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);

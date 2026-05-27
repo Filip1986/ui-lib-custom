@@ -21,7 +21,7 @@
         <button
           type="button"
           class="ui-lib-confirm-dialog__close-btn"
-          aria-label="Close"
+          [attr.aria-label]="i18n.translate('confirm-dialog.close')"
           (click)="close()"
         >
           <svg

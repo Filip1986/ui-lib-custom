@@ -48,7 +48,7 @@
           [class.ui-lib-tabs__label--icon-top]="iconPosition() === 'top'"
         >
           @if (tab.labelTemplate) {
-            <ng-container [ngTemplateOutlet]="tab.labelTemplate"></ng-container>
+            <ng-container [ngTemplateOutlet]="tab.labelTemplate" />
           } @else {
             {{ tab.label ?? 'Tab ' + (tab.index + 1) }}
           }
@@ -59,7 +59,7 @@
           type="button"
           class="ui-lib-tabs__close"
           tabindex="-1"
-          aria-label="Close tab"
+          [attr.aria-label]="i18n.translate('tabs.close')"
           (click)="onClose(tab, $event)"
         >
           ×
@@ -103,9 +103,9 @@
           [active]="isActive(tab.index)"
         >
           @if (tab.contentTemplate) {
-            <ng-container [ngTemplateOutlet]="tab.contentTemplate"></ng-container>
+            <ng-container [ngTemplateOutlet]="tab.contentTemplate" />
           } @else if (tab.content) {
-            <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+            <ng-container [ngTemplateOutlet]="tab.content" />
           }
         </ui-lib-tab-panel>
       }

@@ -7,6 +7,7 @@ import {
   computed,
   contentChild,
   effect,
+  inject,
   input,
   model,
   output,
@@ -40,6 +41,7 @@ import {
   DataViewPaginatorRightDirective,
 } from './data-view.template-directives';
 import { DATA_VIEW_DEFAULT_ROWS_PER_PAGE } from './data-view.constants';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 type DataViewPaginatorPosition = 'top' | 'bottom' | 'both';
 type DataViewPageNavigationItem = number | 'ellipsis-left' | 'ellipsis-right';
@@ -72,6 +74,8 @@ let nextDataViewId: number = 0;
   },
 })
 export class DataViewComponent<T> {
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
+
   public readonly value: InputSignal<T[]> = input.required<T[]>();
   public readonly layout: ModelSignal<DataViewLayout> = model<DataViewLayout>('list');
   public readonly size: InputSignal<DataViewSize> = input<DataViewSize>('md');

@@ -23,6 +23,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { Tree } from 'ui-lib-custom/tree';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { TREE_SELECT_DEFAULTS, TREE_SELECT_ID_PREFIX } from './tree-select.constants';
 import type {
@@ -104,6 +105,7 @@ let nextTreeSelectId: number = 0;
 })
 export class TreeSelect implements ControlValueAccessor {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
 
@@ -131,7 +133,7 @@ export class TreeSelect implements ControlValueAccessor {
 
   /** Design variant. Falls back to ThemeConfigService when `null`. */
   public readonly variant: InputSignal<TreeSelectVariant | null> = input<TreeSelectVariant | null>(
-    null
+    null,
   );
 
   /** Size of the trigger element. */
@@ -139,7 +141,7 @@ export class TreeSelect implements ControlValueAccessor {
 
   /** Placeholder text shown when no node is selected. */
   public readonly placeholder: InputSignal<string> = input<string>(
-    TREE_SELECT_DEFAULTS.placeholder
+    TREE_SELECT_DEFAULTS.placeholder,
   );
 
   /** When `true`, the component is non-interactive. */
@@ -153,7 +155,7 @@ export class TreeSelect implements ControlValueAccessor {
 
   /** Placeholder for the filter input inside the panel. */
   public readonly filterPlaceholder: InputSignal<string> = input<string>(
-    TREE_SELECT_DEFAULTS.filterPlaceholder
+    TREE_SELECT_DEFAULTS.filterPlaceholder,
   );
 
   /** When `true`, shows a clear button when a value is selected. */
@@ -176,7 +178,7 @@ export class TreeSelect implements ControlValueAccessor {
 
   /** Message shown when the node list is empty. */
   public readonly emptyMessage: InputSignal<string> = input<string>(
-    TREE_SELECT_DEFAULTS.emptyMessage
+    TREE_SELECT_DEFAULTS.emptyMessage,
   );
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
@@ -221,7 +223,7 @@ export class TreeSelect implements ControlValueAccessor {
   // ─── Derived signals ───────────────────────────────────────────────────────
 
   private readonly resolvedVariant: Signal<TreeSelectVariant> = computed<TreeSelectVariant>(
-    (): TreeSelectVariant => (this.variant() ?? this.themeConfig.variant()) as TreeSelectVariant
+    (): TreeSelectVariant => (this.variant() ?? this.themeConfig.variant()) as TreeSelectVariant,
   );
 
   /** Host class string applied via `[class]` binding. */
@@ -241,7 +243,7 @@ export class TreeSelect implements ControlValueAccessor {
 
   /** `true` when the component should be non-interactive. */
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled() || this.loading()
+    (): boolean => this.disabled() || this.cvaDisabled() || this.loading(),
   );
 
   /** `true` when a node or nodes are currently selected. */
@@ -461,7 +463,7 @@ export class TreeSelect implements ControlValueAccessor {
 
     const activeTreeItem: HTMLElement | null =
       this.elementRef.nativeElement.querySelector<HTMLElement>(
-        '.ui-lib-tree [role="treeitem"][tabindex="0"]'
+        '.ui-lib-tree [role="treeitem"][tabindex="0"]',
       );
     activeTreeItem?.focus();
   }

@@ -1,4 +1,4 @@
 #!/bin/sh
 
 npm run typecheck
-
+node scripts/pre-push-budget.mjs

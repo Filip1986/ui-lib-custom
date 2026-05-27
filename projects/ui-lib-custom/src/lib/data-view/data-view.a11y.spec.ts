@@ -102,14 +102,14 @@ class MultiDataViewA11yHostComponent {
 
 function queryElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryRequiredElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = queryElement<T>(fixture, selector);
   if (element === null) {
@@ -120,7 +120,7 @@ function queryRequiredElement<T extends Element>(
 
 function queryElements<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -170,12 +170,12 @@ describe('DataView Accessibility', (): void => {
   describe('ARIA structure', (): void => {
     it('assigns unique host IDs for each instance', (): void => {
       const fixture: ComponentFixture<MultiDataViewA11yHostComponent> = TestBed.createComponent(
-        MultiDataViewA11yHostComponent
+        MultiDataViewA11yHostComponent,
       );
       fixture.detectChanges();
 
       const hosts: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-data-view')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-data-view'),
       );
       expect(hosts.length).toBe(2);
       expect(hosts[0]?.id).toMatch(/^ui-lib-data-view-\d+$/);
@@ -188,14 +188,14 @@ describe('DataView Accessibility', (): void => {
       expect(
         queryRequiredElement<HTMLInputElement>(
           fixture,
-          '.ui-lib-data-view__filter-input'
-        ).getAttribute('aria-label')
+          '.ui-lib-data-view__filter-input',
+        ).getAttribute('aria-label'),
       ).toBe('Filter catalog');
       expect(
         queryRequiredElement<HTMLSelectElement>(
           fixture,
-          '.ui-lib-data-view__sort-select'
-        ).getAttribute('aria-label')
+          '.ui-lib-data-view__sort-select',
+        ).getAttribute('aria-label'),
       ).toBe('Sort catalog');
     });
 
@@ -203,7 +203,7 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const controls: HTMLElement = queryRequiredElement<HTMLElement>(
         fixture,
-        '.ui-lib-data-view__controls'
+        '.ui-lib-data-view__controls',
       );
       expect(controls.getAttribute('role')).toBe('group');
       expect(controls.getAttribute('aria-label')).toBe('Catalog controls');
@@ -213,11 +213,11 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const listButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.ui-lib-data-view__layout-button:first-of-type'
+        '.ui-lib-data-view__layout-button:first-of-type',
       );
       const gridButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.ui-lib-data-view__layout-button:last-of-type'
+        '.ui-lib-data-view__layout-button:last-of-type',
       );
       expect(listButton.getAttribute('aria-pressed')).toBe('true');
       expect(gridButton.getAttribute('aria-pressed')).toBe('false');
@@ -227,7 +227,7 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const liveRegion: HTMLElement = queryRequiredElement<HTMLElement>(
         fixture,
-        '.ui-lib-data-view__sr-live'
+        '.ui-lib-data-view__sr-live',
       );
       expect(liveRegion.getAttribute('aria-live')).toBe('polite');
       expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
@@ -239,7 +239,7 @@ describe('DataView Accessibility', (): void => {
       fixture.componentInstance.layout.set('grid');
       fixture.detectChanges();
       expect(
-        queryRequiredElement<HTMLElement>(fixture, '.ui-lib-data-view__sr-live').textContent.trim()
+        queryRequiredElement<HTMLElement>(fixture, '.ui-lib-data-view__sr-live').textContent.trim(),
       ).toBe('Grid view selected');
     });
 
@@ -251,7 +251,7 @@ describe('DataView Accessibility', (): void => {
 
       const ellipsis: HTMLElement = queryRequiredElement<HTMLElement>(
         fixture,
-        '.ui-lib-data-view__paginator-ellipsis'
+        '.ui-lib-data-view__paginator-ellipsis',
       );
       expect(ellipsis.getAttribute('aria-hidden')).toBe('true');
     });
@@ -260,12 +260,12 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       expect(
         queryRequiredElement<HTMLElement>(fixture, '.ui-lib-data-view__content').getAttribute(
-          'role'
-        )
+          'role',
+        ),
       ).toBe('list');
       const itemRoles: (string | null)[] = queryElements<HTMLElement>(
         fixture,
-        '.ui-lib-data-view__item'
+        '.ui-lib-data-view__item',
       ).map((item: HTMLElement): string | null => item.getAttribute('role'));
       expect(itemRoles.every((role: string | null): boolean => role === 'listitem')).toBe(true);
     });
@@ -276,7 +276,7 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const gridButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.ui-lib-data-view__layout-button:last-of-type'
+        '.ui-lib-data-view__layout-button:last-of-type',
       );
       gridButton.click();
       fixture.detectChanges();
@@ -290,7 +290,7 @@ describe('DataView Accessibility', (): void => {
       fixture.detectChanges();
       const listButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.ui-lib-data-view__layout-button:first-of-type'
+        '.ui-lib-data-view__layout-button:first-of-type',
       );
       listButton.click();
       fixture.detectChanges();
@@ -302,7 +302,7 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const filterInput: HTMLInputElement = queryRequiredElement<HTMLInputElement>(
         fixture,
-        '.ui-lib-data-view__filter-input'
+        '.ui-lib-data-view__filter-input',
       );
       filterInput.value = 'keyboard';
       filterInput.dispatchEvent(new Event('input'));
@@ -310,7 +310,7 @@ describe('DataView Accessibility', (): void => {
 
       const renderedItems: HTMLElement[] = queryElements<HTMLElement>(
         fixture,
-        '.ui-lib-data-view__item'
+        '.ui-lib-data-view__item',
       );
       expect(renderedItems.length).toBe(1);
       const firstRenderedItem: HTMLElement | undefined = renderedItems[0];
@@ -324,13 +324,13 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const filterInput: HTMLInputElement = queryRequiredElement<HTMLInputElement>(
         fixture,
-        '.ui-lib-data-view__filter-input'
+        '.ui-lib-data-view__filter-input',
       );
       filterInput.value = '';
       filterInput.dispatchEvent(new Event('input'));
       fixture.detectChanges();
       expect(queryElements<HTMLElement>(fixture, '.ui-lib-data-view__item').length).toBe(
-        PRODUCTS.length
+        PRODUCTS.length,
       );
     });
 
@@ -338,7 +338,7 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const sortSelect: HTMLSelectElement = queryRequiredElement<HTMLSelectElement>(
         fixture,
-        '.ui-lib-data-view__sort-select'
+        '.ui-lib-data-view__sort-select',
       );
       sortSelect.value = '-1';
       sortSelect.dispatchEvent(new Event('change'));
@@ -352,7 +352,7 @@ describe('DataView Accessibility', (): void => {
       fixture.detectChanges();
       const sortSelect: HTMLSelectElement = queryRequiredElement<HTMLSelectElement>(
         fixture,
-        '.ui-lib-data-view__sort-select'
+        '.ui-lib-data-view__sort-select',
       );
       sortSelect.value = '-1';
       sortSelect.dispatchEvent(new Event('change'));
@@ -367,11 +367,11 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const filterInput: HTMLInputElement = queryRequiredElement<HTMLInputElement>(
         fixture,
-        '.ui-lib-data-view__filter-input'
+        '.ui-lib-data-view__filter-input',
       );
       const sortSelect: HTMLSelectElement = queryRequiredElement<HTMLSelectElement>(
         fixture,
-        '.ui-lib-data-view__sort-select'
+        '.ui-lib-data-view__sort-select',
       );
       filterInput.focus();
       expect(document.activeElement).toBe(filterInput);
@@ -383,7 +383,7 @@ describe('DataView Accessibility', (): void => {
       const fixture: ComponentFixture<DataViewA11yHostComponent> = createHostFixture();
       const buttons: HTMLButtonElement[] = queryElements<HTMLButtonElement>(
         fixture,
-        '.ui-lib-data-view__layout-button'
+        '.ui-lib-data-view__layout-button',
       );
       expect(buttons.length).toBe(2);
       buttons[0]?.focus();
@@ -400,14 +400,14 @@ describe('DataView Accessibility', (): void => {
 
       const nextPageButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        'button[aria-label="Go to next page"]'
+        'button[aria-label="Next page"]',
       );
       nextPageButton.click();
       fixture.detectChanges();
 
       const filterInput: HTMLInputElement = queryRequiredElement<HTMLInputElement>(
         fixture,
-        '.ui-lib-data-view__filter-input'
+        '.ui-lib-data-view__filter-input',
       );
       filterInput.value = 'alpha';
       filterInput.dispatchEvent(new Event('input'));
@@ -415,7 +415,7 @@ describe('DataView Accessibility', (): void => {
 
       const currentPageButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.ui-lib-data-view__paginator-page[aria-current="page"]'
+        '.ui-lib-data-view__paginator-page[aria-current="page"]',
       );
       expect(currentPageButton.textContent.trim()).toBe('1');
     });

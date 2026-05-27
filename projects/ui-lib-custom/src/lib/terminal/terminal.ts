@@ -14,6 +14,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { TerminalService } from './terminal.service';
 import type { TerminalHistoryItem, TerminalVariant } from './terminal.types';
 
@@ -62,6 +63,7 @@ export { TerminalService } from './terminal.service';
 export class Terminal implements AfterViewChecked {
   private readonly terminalService: TerminalService = inject(TerminalService);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Unique instance identifier — used to generate stable element IDs. */
   public readonly terminalId: string = `ui-lib-terminal-${++nextTerminalId}`;
@@ -80,7 +82,7 @@ export class Terminal implements AfterViewChecked {
 
   /** Design variant. Inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<TerminalVariant | null> = input<TerminalVariant | null>(
-    null
+    null,
   );
 
   /** Current text value in the command input field. */
@@ -97,12 +99,12 @@ export class Terminal implements AfterViewChecked {
 
   /** Resolved variant — input wins, then falls back to global ThemeConfigService. */
   public readonly effectiveVariant: Signal<TerminalVariant> = computed<TerminalVariant>(
-    (): TerminalVariant => this.variant() ?? this.themeConfig.variant()
+    (): TerminalVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** CSS classes applied to the host element. */
   public readonly hostClasses: Signal<string> = computed<string>((): string =>
-    ['ui-lib-terminal', `ui-lib-terminal--${this.effectiveVariant()}`].join(' ')
+    ['ui-lib-terminal', `ui-lib-terminal--${this.effectiveVariant()}`].join(' '),
   );
 
   public ngAfterViewChecked(): void {

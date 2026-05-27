@@ -32,6 +32,7 @@ import {
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   COLOR_PICKER_CLASSNAMES,
   COLOR_PICKER_DEFAULTS,
@@ -161,6 +162,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private removeDragListeners: (() => void) | null = null;
   private readonly generatedId: string = `${COLOR_PICKER_IDS.Prefix}-${++colorPickerIdCounter}`;

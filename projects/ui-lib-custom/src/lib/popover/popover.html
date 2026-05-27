@@ -36,7 +36,7 @@
           <button
             type="button"
             class="ui-lib-popover__close-btn"
-            aria-label="Close"
+            [attr.aria-label]="i18n.translate('popover.close')"
             (click)="hide()"
           >
             <svg

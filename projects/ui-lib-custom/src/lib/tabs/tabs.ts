@@ -41,6 +41,7 @@ import type {
   TabsVariant,
 } from './tabs.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   SHARED_DEFAULTS,
   SHARED_SIZES,
@@ -94,6 +95,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     ElementRef,
   ) as ElementRef<HTMLElement>;
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly dir: InputSignal<'ltr' | 'rtl' | 'auto'> = input<'ltr' | 'rtl' | 'auto'>('auto');
   public readonly variant: InputSignal<TabsVariant | null> = input<TabsVariant | null>(null);

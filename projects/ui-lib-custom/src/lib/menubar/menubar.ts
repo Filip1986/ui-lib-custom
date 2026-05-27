@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { MenubarSubComponent } from './menubar-submenu';
 import type {
@@ -120,6 +121,7 @@ export class Menubar implements OnDestroy {
   // ── Dependencies ─────────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
@@ -129,7 +131,7 @@ export class Menubar implements OnDestroy {
 
   /** Resolved variant — falls back to the global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<MenubarVariant> = computed<MenubarVariant>(
-    (): MenubarVariant => this.variant() ?? (this.themeConfig.variant() as MenubarVariant)
+    (): MenubarVariant => this.variant() ?? (this.themeConfig.variant() as MenubarVariant),
   );
 
   /** Combined CSS classes applied to the host element. */
@@ -148,7 +150,7 @@ export class Menubar implements OnDestroy {
 
   /** Root-level items filtered to `visible !== false`. */
   public readonly visibleItems: Signal<MenubarItem[]> = computed<MenubarItem[]>((): MenubarItem[] =>
-    this.model().filter((item: MenubarItem): boolean => item.visible !== false)
+    this.model().filter((item: MenubarItem): boolean => item.visible !== false),
   );
 
   // ── Event listener bound methods ─────────────────────────────────────────────
@@ -160,7 +162,7 @@ export class Menubar implements OnDestroy {
   };
 
   private readonly keydownGlobalHandler: (event: KeyboardEvent) => void = (
-    event: KeyboardEvent
+    event: KeyboardEvent,
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
       this.closePanel(true);
@@ -263,7 +265,7 @@ export class Menubar implements OnDestroy {
               (): void => {
                 this.focusFirstPanelItem();
               },
-              { injector: this.injector }
+              { injector: this.injector },
             );
           }
         } else if (item.command) {
@@ -281,7 +283,7 @@ export class Menubar implements OnDestroy {
             (): void => {
               this.focusFirstPanelItem();
             },
-            { injector: this.injector }
+            { injector: this.injector },
           );
         }
         break;
@@ -334,12 +336,12 @@ export class Menubar implements OnDestroy {
       (): void => {
         const links: NodeListOf<HTMLElement> =
           this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
-            '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link'
+            '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link',
           );
         const link: HTMLElement | undefined = Array.from(links)[index];
         link?.focus();
       },
-      { injector: this.injector }
+      { injector: this.injector },
     );
   }
 
@@ -366,7 +368,7 @@ export class Menubar implements OnDestroy {
     if (returnFocus && previousIndex !== -1) {
       const links: NodeListOf<HTMLElement> =
         this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
-          '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link'
+          '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link',
         );
       const link: HTMLElement | undefined = Array.from(links)[previousIndex];
       link?.focus();
@@ -387,7 +389,7 @@ export class Menubar implements OnDestroy {
     this.rovingIndex.set(wrappedIndex);
     const links: NodeListOf<HTMLElement> =
       this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
-        '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link'
+        '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link',
       );
     const link: HTMLElement | undefined = Array.from(links)[wrappedIndex];
     link?.focus();
@@ -396,7 +398,7 @@ export class Menubar implements OnDestroy {
   /** Focuses the first focusable link in the currently open dropdown panel. */
   private focusFirstPanelItem(): void {
     const firstLink: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-menubar__panel:not(.ui-lib-menubar__panel--nested) .ui-lib-menubar__sub-link:not([aria-disabled="true"])'
+      '.ui-lib-menubar__panel:not(.ui-lib-menubar__panel--nested) .ui-lib-menubar__sub-link:not([aria-disabled="true"])',
     );
     if (firstLink) {
       firstLink.focus();

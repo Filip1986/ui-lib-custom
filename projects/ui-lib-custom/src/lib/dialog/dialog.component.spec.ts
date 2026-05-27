@@ -13,11 +13,11 @@ interface MatchMediaStub {
   removeListener: (listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown) => void;
   addEventListener: (
     type: string,
-    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown
+    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown,
   ) => void;
   removeEventListener: (
     type: string,
-    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown
+    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown,
   ) => void;
   dispatchEvent: (event: Event) => boolean;
 }
@@ -134,7 +134,7 @@ describe('DialogComponent', (): void => {
   }
 
   function createHostDialog(
-    initial: Partial<DialogHostComponent> = {}
+    initial: Partial<DialogHostComponent> = {},
   ): ComponentFixture<DialogHostComponent> {
     const fixture: ComponentFixture<DialogHostComponent> =
       TestBed.createComponent(DialogHostComponent);
@@ -151,7 +151,7 @@ describe('DialogComponent', (): void => {
 
   function getHostElement(fixture: ComponentFixture<DialogHostComponent>): HTMLElement {
     const host: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-dialog'
+      'ui-lib-dialog',
     );
     if (!host) {
       throw new Error('Expected dialog host element to exist.');
@@ -250,7 +250,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-panel'
+        '.ui-lib-dialog-panel',
       );
       expect(panel).toBeTruthy();
     });
@@ -264,7 +264,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-panel'
+        '.ui-lib-dialog-panel',
       );
       expect(panel).toBeNull();
     });
@@ -335,7 +335,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const backdrop: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-backdrop'
+        '.ui-lib-dialog-backdrop',
       );
       expect(backdrop).toBeNull();
     });
@@ -407,7 +407,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const closeButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-close-btn'
+        '.ui-lib-dialog-close-btn',
       );
       expect(closeButton).toBeTruthy();
     });
@@ -420,7 +420,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const closeButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-close-btn'
+        '.ui-lib-dialog-close-btn',
       );
       expect(closeButton).toBeNull();
     });
@@ -461,7 +461,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const content: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.projected-content'
+        '.projected-content',
       );
       expect(content).toBeTruthy();
       expect((content as HTMLElement).textContent).toContain('Projected Body Content');
@@ -475,7 +475,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-title'
+        '.ui-lib-dialog-title',
       );
       expect((title as HTMLElement).textContent.trim()).toContain('Projected Header');
     });
@@ -488,7 +488,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.projected-footer'
+        '.projected-footer',
       );
       expect(footer).toBeTruthy();
       expect((footer as HTMLElement).textContent.trim()).toBe('Projected Footer');
@@ -503,7 +503,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-title'
+        '.ui-lib-dialog-title',
       );
       expect((title as HTMLElement).textContent.trim()).toBe('Header From Input');
     });
@@ -549,7 +549,7 @@ describe('DialogComponent', (): void => {
         fixture.componentRef.setInput('position', position);
         await detectAndFlush(fixture);
         expect(fixture.componentInstance.positionClass()).toBe(
-          `ui-lib-dialog--position-${position}`
+          `ui-lib-dialog--position-${position}`,
         );
       }
     });
@@ -586,13 +586,13 @@ describe('DialogComponent', (): void => {
       maximizeButton.click();
       await detectAndFlush(fixture);
       expect(getRequiredPanelElement(fixture).className).toContain(
-        'ui-lib-dialog-panel--maximized'
+        'ui-lib-dialog-panel--maximized',
       );
 
       maximizeButton.click();
       await detectAndFlush(fixture);
       expect(getRequiredPanelElement(fixture).className).not.toContain(
-        'ui-lib-dialog-panel--maximized'
+        'ui-lib-dialog-panel--maximized',
       );
     });
 
@@ -639,7 +639,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       expect(getRequiredPanelElement(fixture).className).toContain(
-        'ui-lib-dialog-panel--maximized'
+        'ui-lib-dialog-panel--maximized',
       );
     });
 
@@ -697,10 +697,10 @@ describe('DialogComponent', (): void => {
       } as DOMRect);
 
       header.dispatchEvent(
-        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 })
+        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 }),
       );
       window.dispatchEvent(
-        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 })
+        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 }),
       );
       window.dispatchEvent(createPointerEvent('pointerup', { pointerId: 1 }));
       await detectAndFlush(fixture);
@@ -722,10 +722,10 @@ describe('DialogComponent', (): void => {
       }
 
       header.dispatchEvent(
-        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 })
+        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 }),
       );
       window.dispatchEvent(
-        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 })
+        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 }),
       );
       await detectAndFlush(fixture);
 
@@ -739,7 +739,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-panel'
+        '.ui-lib-dialog-panel',
       );
       if (!panel) {
         throw new Error('Expected dialog panel to exist.');
@@ -762,10 +762,10 @@ describe('DialogComponent', (): void => {
       } as DOMRect);
 
       header.dispatchEvent(
-        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 })
+        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 }),
       );
       window.dispatchEvent(
-        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 })
+        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 }),
       );
       window.dispatchEvent(createPointerEvent('pointerup', { pointerId: 1 }));
       await detectAndFlush(fixture);
@@ -802,10 +802,10 @@ describe('DialogComponent', (): void => {
       }
 
       header.dispatchEvent(
-        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 })
+        createPointerEvent('pointerdown', { pointerId: 1, button: 0, clientX: 120, clientY: 130 }),
       );
       window.dispatchEvent(
-        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 })
+        createPointerEvent('pointermove', { pointerId: 1, clientX: 170, clientY: 180 }),
       );
       await detectAndFlush(fixture);
 
@@ -832,7 +832,7 @@ describe('DialogComponent', (): void => {
 
       const panel: HTMLElement = getRequiredPanelElement(fixture);
       const titleElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-title'
+        '.ui-lib-dialog-title',
       );
 
       expect(titleElement).toBeTruthy();
@@ -855,9 +855,9 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const closeButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-close-btn'
+        '.ui-lib-dialog-close-btn',
       );
-      expect(closeButton?.getAttribute('aria-label')).toBe('Close');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Close dialog');
     });
 
     it('maximize button should have correct aria-label (toggles)', async (): Promise<void> => {
@@ -893,7 +893,7 @@ describe('DialogComponent', (): void => {
             fixture.componentInstance.visible = false;
             await detectAndFlush(fixture);
           }
-        })()
+        })(),
       ).resolves.not.toThrow();
     });
 
@@ -931,7 +931,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-panel'
+        '.ui-lib-dialog-panel',
       );
       expect(panel?.classList.contains('my-custom-class')).toBe(true);
       expect(panel?.classList.contains('another-class')).toBe(true);
@@ -943,7 +943,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-panel'
+        '.ui-lib-dialog-panel',
       );
       expect(panel?.getAttribute('aria-describedby')).toBeNull();
     });
@@ -955,7 +955,7 @@ describe('DialogComponent', (): void => {
       await detectAndFlush(fixture);
 
       const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-panel'
+        '.ui-lib-dialog-panel',
       );
       expect(panel?.getAttribute('aria-describedby')).toBe('my-description-id');
     });

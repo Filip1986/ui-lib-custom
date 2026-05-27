@@ -26,6 +26,7 @@ import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { LISTBOX_DEFAULTS, LISTBOX_OPTION_ID_SEPARATOR } from './listbox.constants';
 import type {
@@ -112,17 +113,17 @@ export class ListboxComponent implements ControlValueAccessor {
 
   /** Field name used to determine whether an option is disabled. */
   public readonly optionDisabled: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.OptionDisabled
+    LISTBOX_DEFAULTS.OptionDisabled,
   );
 
   /** Field name used as the display label for each option group. */
   public readonly optionGroupLabel: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.OptionGroupLabel
+    LISTBOX_DEFAULTS.OptionGroupLabel,
   );
 
   /** Field name that contains the children array inside each option group. */
   public readonly optionGroupChildren: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.OptionGroupChildren
+    LISTBOX_DEFAULTS.OptionGroupChildren,
   );
 
   /** When true, the `options` array is treated as a list of groups. */
@@ -143,7 +144,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
   /** Placeholder text for the filter input. */
   public readonly filterPlaceholder: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.FilterPlaceholder
+    LISTBOX_DEFAULTS.FilterPlaceholder,
   );
 
   /** Two-way binding for the current filter query string. */
@@ -154,7 +155,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
   /** Message shown when the filter produces no matches. */
   public readonly emptyFilterMessage: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.EmptyFilterMessage
+    LISTBOX_DEFAULTS.EmptyFilterMessage,
   );
 
   /** CSS height for the scrollable options container. */
@@ -258,6 +259,7 @@ export class ListboxComponent implements ControlValueAccessor {
   private onTouched: () => void = (): void => {};
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ---------------------------------------------------------------------------
   // Derived / computed
@@ -265,12 +267,12 @@ export class ListboxComponent implements ControlValueAccessor {
 
   /** Whether the component should be non-interactive. */
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   /** Resolved variant, falling back to the global theme service setting. */
   public readonly effectiveVariant: Signal<ListboxVariant> = computed<ListboxVariant>(
-    (): ListboxVariant => this.variant() ?? this.themeConfig.variant()
+    (): ListboxVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** CSS classes applied to the host element. */
@@ -290,7 +292,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
   /** Unique ID for the internal listbox element. */
   public readonly listboxElementId: Signal<string> = computed<string>(
-    (): string => `${this.componentId}-list`
+    (): string => `${this.componentId}-list`,
   );
 
   /** ID for the focused option, used for `aria-activedescendant`. */
@@ -299,7 +301,7 @@ export class ListboxComponent implements ControlValueAccessor {
       const focusedRow: ListboxOptionRow | undefined = this.optionRows()[this.focusedOptionIndex()];
       if (!focusedRow) return null;
       return this.optionId(focusedRow.optionIndex);
-    }
+    },
   );
 
   /**
@@ -387,30 +389,30 @@ export class ListboxComponent implements ControlValueAccessor {
       }
 
       return items;
-    }
+    },
   );
 
   /** Only the option rows from `flatItems` — used for keyboard navigation. */
   public readonly optionRows: Signal<ListboxOptionRow[]> = computed<ListboxOptionRow[]>(
     (): ListboxOptionRow[] =>
       this.flatItems().filter(
-        (item: ListboxFlatItem): item is ListboxOptionRow => item.type === 'option'
-      )
+        (item: ListboxFlatItem): item is ListboxOptionRow => item.type === 'option',
+      ),
   );
 
   /** Whether the list has no renderable option rows (after filtering). */
   public readonly isEmpty: Signal<boolean> = computed<boolean>(
-    (): boolean => this.optionRows().length === 0
+    (): boolean => this.optionRows().length === 0,
   );
 
   /** Whether a filter query is currently active. */
   public readonly isFiltered: Signal<boolean> = computed<boolean>(
-    (): boolean => this.filterValue().trim().length > 0
+    (): boolean => this.filterValue().trim().length > 0,
   );
 
   /** The current value as a Set for O(1) lookup in templates. */
   public readonly selectedSet: Signal<Set<unknown>> = computed<Set<unknown>>(
-    (): Set<unknown> => new Set<unknown>(this.internalValue())
+    (): Set<unknown> => new Set<unknown>(this.internalValue()),
   );
 
   /**
@@ -419,7 +421,7 @@ export class ListboxComponent implements ControlValueAccessor {
    */
   public readonly allSelected: Signal<boolean> = computed<boolean>((): boolean => {
     const enabledRows: ListboxOptionRow[] = this.optionRows().filter(
-      (row: ListboxOptionRow): boolean => !row.disabled
+      (row: ListboxOptionRow): boolean => !row.disabled,
     );
     if (enabledRows.length === 0) return false;
     const selected: Set<unknown> = this.selectedSet();
@@ -434,7 +436,7 @@ export class ListboxComponent implements ControlValueAccessor {
   public writeValue(value: unknown): void {
     if (this.multiple()) {
       this.internalValue.set(
-        Array.isArray(value) ? value : value === null || value === undefined ? [] : [value]
+        Array.isArray(value) ? value : value === null || value === undefined ? [] : [value],
       );
     } else {
       this.internalValue.set(value === null || value === undefined ? [] : [value]);
@@ -511,8 +513,8 @@ export class ListboxComponent implements ControlValueAccessor {
     this.updateValue(newValue, event);
     this.focusedOptionIndex.set(
       this.optionRows().findIndex(
-        (optionRow: ListboxOptionRow): boolean => optionRow.optionIndex === row.optionIndex
-      )
+        (optionRow: ListboxOptionRow): boolean => optionRow.optionIndex === row.optionIndex,
+      ),
     );
   }
 
@@ -523,7 +525,7 @@ export class ListboxComponent implements ControlValueAccessor {
     if (this.isDisabled() || this.readonly() || !this.multiple()) return;
 
     const enabledRows: ListboxOptionRow[] = this.optionRows().filter(
-      (row: ListboxOptionRow): boolean => !row.disabled
+      (row: ListboxOptionRow): boolean => !row.disabled,
     );
 
     const newValue: unknown[] = this.allSelected()
@@ -611,7 +613,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
   private updateValue(value: unknown, event: Event): void {
     this.internalValue.set(
-      Array.isArray(value) ? value : value === null || value === undefined ? [] : [value]
+      Array.isArray(value) ? value : value === null || value === undefined ? [] : [value],
     );
     this.onChange(value);
     this.selectionChange.emit({ originalEvent: event, value });
@@ -671,7 +673,7 @@ export class ListboxComponent implements ControlValueAccessor {
     const listElement: ElementRef<HTMLElement> | undefined = this.listRef();
     if (!listElement) return;
     const optionElement: HTMLElement | null = listElement.nativeElement.querySelector<HTMLElement>(
-      `[id="${this.optionId(optionIndex)}"]`
+      `[id="${this.optionId(optionIndex)}"]`,
     );
     optionElement?.scrollIntoView({ block: 'nearest' });
   }
@@ -685,7 +687,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
     const resultCount: number = this.optionRows().length;
     this.liveRegionMessage.set(
-      `${resultCount} ${resultCount === 1 ? 'result' : 'results'} available.`
+      `${resultCount} ${resultCount === 1 ? 'result' : 'results'} available.`,
     );
   }
 
@@ -693,7 +695,7 @@ export class ListboxComponent implements ControlValueAccessor {
     if (this.multiple()) {
       const selectedCount: number = Array.isArray(value) ? value.length : 0;
       this.liveRegionMessage.set(
-        `${selectedCount} ${selectedCount === 1 ? 'option' : 'options'} selected.`
+        `${selectedCount} ${selectedCount === 1 ? 'option' : 'options'} selected.`,
       );
       return;
     }
@@ -709,7 +711,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
   private findLabelForValue(value: unknown): string | null {
     const matchedOption: ListboxOptionRow | undefined = this.optionRows().find(
-      (row: ListboxOptionRow): boolean => row.value === value
+      (row: ListboxOptionRow): boolean => row.value === value,
     );
     return matchedOption?.label ?? null;
   }

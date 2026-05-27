@@ -1,7 +1,10 @@
 <div
   class="ui-lib-tree-select__trigger"
   (click)="togglePanel($event)"
+  (keydown.enter)="togglePanel($event)"
+  (keydown.space)="$event.preventDefault(); togglePanel($event)"
   [attr.aria-controls]="panelVisible() ? treeId : null"
+  tabindex="0"
 >
   <!-- Value / placeholder display -->
   <span
@@ -26,7 +29,7 @@
         type="button"
         class="ui-lib-tree-select__clear"
         (click)="clearSelection($event)"
-        aria-label="Clear selection"
+        [attr.aria-label]="i18n.translate('tree-select.clear')"
         tabindex="-1"
       >
         <span aria-hidden="true">×</span>

@@ -46,10 +46,10 @@ class TestHostComponent {
   public readonly showPageLinks: WritableSignal<boolean> = signal<boolean>(true);
   public readonly showCurrentPageReport: WritableSignal<boolean> = signal<boolean>(false);
   public readonly currentPageReportTemplate: WritableSignal<string> = signal<string>(
-    PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE
+    PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE,
   );
   public readonly rowsPerPageOptions: WritableSignal<number[] | null> = signal<number[] | null>(
-    null
+    null,
   );
   public readonly showJumpToPageInput: WritableSignal<boolean> = signal<boolean>(false);
   public readonly lastEvent: WritableSignal<PaginatorPageEvent | null> =
@@ -64,14 +64,14 @@ function getTrimmedTextContent(element: Element): string {
 
 function queryRequired(
   fixture: ComponentFixture<TestHostComponent>,
-  selector: string
+  selector: string,
 ): DebugElement {
   return fixture.debugElement.query(By.css(selector));
 }
 
 function getPageButtonAtIndex(
   fixture: ComponentFixture<TestHostComponent>,
-  index: number
+  index: number,
 ): HTMLButtonElement {
   const buttons: HTMLButtonElement[] = getPageButtons(fixture);
   const button: HTMLButtonElement | undefined = buttons[index];
@@ -83,7 +83,7 @@ function getPageButtonAtIndex(
 
 function getPageButtons(fixture: ComponentFixture<TestHostComponent>): HTMLButtonElement[] {
   const pageButtonDebugElements: DebugElement[] = fixture.debugElement.queryAll(
-    By.css('.uilib-paginator-page')
+    By.css('.uilib-paginator-page'),
   );
   return pageButtonDebugElements.map((debugElement: DebugElement): HTMLButtonElement => {
     return debugElement.nativeElement as HTMLButtonElement;
@@ -91,7 +91,7 @@ function getPageButtons(fixture: ComponentFixture<TestHostComponent>): HTMLButto
 }
 function getNavButton(
   fixture: ComponentFixture<TestHostComponent>,
-  selector: string
+  selector: string,
 ): HTMLButtonElement {
   const navigationButtonDebugElement: DebugElement = queryRequired(fixture, selector);
   return navigationButtonDebugElement.nativeElement as HTMLButtonElement;
@@ -113,7 +113,7 @@ describe('PaginatorComponent', (): void => {
   });
   it('should render the paginator content wrapper', (): void => {
     const content: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-content')
+      By.css('.uilib-paginator-content'),
     );
     expect(content).toBeTruthy();
   });
@@ -265,7 +265,7 @@ describe('PaginatorComponent', (): void => {
     host.alwaysShow.set(false);
     fixture.detectChanges();
     const content: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-content')
+      By.css('.uilib-paginator-content'),
     );
     expect(content).toBeNull();
   });
@@ -273,13 +273,13 @@ describe('PaginatorComponent', (): void => {
     host.alwaysShow.set(false);
     fixture.detectChanges();
     const content: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-content')
+      By.css('.uilib-paginator-content'),
     );
     expect(content).toBeTruthy();
   });
   it('should not render current page report by default', (): void => {
     const report: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-current')
+      By.css('.uilib-paginator-current'),
     );
     expect(report).toBeNull();
   });
@@ -287,7 +287,7 @@ describe('PaginatorComponent', (): void => {
     host.showCurrentPageReport.set(true);
     fixture.detectChanges();
     const report: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-current')
+      By.css('.uilib-paginator-current'),
     );
     expect(report).toBeTruthy();
     const reportElement: HTMLElement = (report as DebugElement).nativeElement as HTMLElement;
@@ -296,7 +296,7 @@ describe('PaginatorComponent', (): void => {
   it('should update the report template placeholders correctly', (): void => {
     host.showCurrentPageReport.set(true);
     host.currentPageReportTemplate.set(
-      'Page {currentPage} of {totalPages} ({totalRecords} records)'
+      'Page {currentPage} of {totalPages} ({totalRecords} records)',
     );
     fixture.detectChanges();
     const report: DebugElement = queryRequired(fixture, '.uilib-paginator-current');
@@ -305,7 +305,7 @@ describe('PaginatorComponent', (): void => {
   });
   it('should not render rows-per-page select by default', (): void => {
     const select: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-rpp-select')
+      By.css('.uilib-paginator-rpp-select'),
     );
     expect(select).toBeNull();
   });
@@ -330,7 +330,7 @@ describe('PaginatorComponent', (): void => {
   });
   it('should not render jump-to-page input by default', (): void => {
     const input: DebugElement | null = fixture.debugElement.query(
-      By.css('.uilib-paginator-jtp-input')
+      By.css('.uilib-paginator-jtp-input'),
     );
     expect(input).toBeNull();
   });
@@ -393,10 +393,10 @@ describe('PaginatorComponent', (): void => {
     const previousButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-prev');
     const nextButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-next');
     const lastButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-last');
-    expect(firstButton.getAttribute('aria-label')).toBe('Go to first page');
-    expect(previousButton.getAttribute('aria-label')).toBe('Go to previous page');
-    expect(nextButton.getAttribute('aria-label')).toBe('Go to next page');
-    expect(lastButton.getAttribute('aria-label')).toBe('Go to last page');
+    expect(firstButton.getAttribute('aria-label')).toBe('First page');
+    expect(previousButton.getAttribute('aria-label')).toBe('Previous page');
+    expect(nextButton.getAttribute('aria-label')).toBe('Next page');
+    expect(lastButton.getAttribute('aria-label')).toBe('Last page');
   });
   it('should have numbered aria-label on page-link buttons', (): void => {
     const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);

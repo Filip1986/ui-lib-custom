@@ -16,6 +16,7 @@ import type { InputSignal, OnDestroy, Signal, TemplateRef, WritableSignal } from
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { SHARED_DEFAULTS, SHARED_SIZES, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import {
   SELECT_LISTBOX_ROLE,
@@ -134,6 +135,7 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   >(null);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly document: Document = inject(DOCUMENT);
 

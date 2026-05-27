@@ -11,14 +11,14 @@ import { PaginatorComponent } from './paginator.component';
 
 function queryElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryRequiredElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = queryElement<T>(fixture, selector);
   if (element === null) {
@@ -29,7 +29,7 @@ function queryRequiredElement<T extends Element>(
 
 function queryElements<T extends Element>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -41,7 +41,7 @@ function getPageButtons(fixture: ComponentFixture<unknown>): HTMLButtonElement[]
 function getNavigationButtons(fixture: ComponentFixture<unknown>): HTMLButtonElement[] {
   return queryElements<HTMLButtonElement>(
     fixture,
-    '.uilib-paginator-first, .uilib-paginator-prev, .uilib-paginator-next, .uilib-paginator-last'
+    '.uilib-paginator-first, .uilib-paginator-prev, .uilib-paginator-next, .uilib-paginator-last',
   );
 }
 
@@ -74,7 +74,7 @@ class PaginatorA11yHostComponent {
   public readonly first: WritableSignal<number> = signal<number>(0);
   public readonly showCurrentPageReport: WritableSignal<boolean> = signal<boolean>(false);
   public readonly rowsPerPageOptions: WritableSignal<number[] | null> = signal<number[] | null>(
-    null
+    null,
   );
   public readonly showJumpToPageInput: WritableSignal<boolean> = signal<boolean>(false);
   public readonly ariaLabel: WritableSignal<string> = signal<string>('Pagination');
@@ -107,7 +107,7 @@ describe('Paginator Accessibility', (): void => {
 
   function createHostFixture(): ComponentFixture<PaginatorA11yHostComponent> {
     const fixture: ComponentFixture<PaginatorA11yHostComponent> = TestBed.createComponent(
-      PaginatorA11yHostComponent
+      PaginatorA11yHostComponent,
     );
     document.body.appendChild(fixture.nativeElement);
     fixture.detectChanges();
@@ -159,11 +159,11 @@ describe('Paginator Accessibility', (): void => {
 
     it('assigns unique host IDs per component instance', (): void => {
       const fixture: ComponentFixture<MultiPaginatorA11yHostComponent> = TestBed.createComponent(
-        MultiPaginatorA11yHostComponent
+        MultiPaginatorA11yHostComponent,
       );
       fixture.detectChanges();
       const hosts: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-paginator')
+        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-paginator'),
       );
       expect(hosts.length).toBe(2);
       expect(hosts[0]?.id).toMatch(/^ui-lib-paginator-\d+$/);
@@ -175,7 +175,7 @@ describe('Paginator Accessibility', (): void => {
       const fixture: ComponentFixture<PaginatorA11yHostComponent> = createHostFixture();
       const liveRegion: HTMLElement = queryRequiredElement<HTMLElement>(
         fixture,
-        '.uilib-paginator-live'
+        '.uilib-paginator-live',
       );
       expect(liveRegion.getAttribute('aria-live')).toBe('polite');
       expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
@@ -188,7 +188,7 @@ describe('Paginator Accessibility', (): void => {
       fixture.detectChanges();
       const liveRegion: HTMLElement = queryRequiredElement<HTMLElement>(
         fixture,
-        '.uilib-paginator-live'
+        '.uilib-paginator-live',
       );
       expect(liveRegion.textContent.trim()).toBe('No pages available');
     });
@@ -196,14 +196,9 @@ describe('Paginator Accessibility', (): void => {
     it('provides labels for icon-only navigation buttons', (): void => {
       const fixture: ComponentFixture<PaginatorA11yHostComponent> = createHostFixture();
       const buttonLabels: (string | null)[] = getNavigationButtons(fixture).map(
-        (button: HTMLButtonElement): string | null => button.getAttribute('aria-label')
+        (button: HTMLButtonElement): string | null => button.getAttribute('aria-label'),
       );
-      expect(buttonLabels).toEqual([
-        'Go to first page',
-        'Go to previous page',
-        'Go to next page',
-        'Go to last page',
-      ]);
+      expect(buttonLabels).toEqual(['First page', 'Previous page', 'Next page', 'Last page']);
     });
 
     it('marks only the active page button with aria-current="page"', (): void => {
@@ -238,13 +233,13 @@ describe('Paginator Accessibility', (): void => {
       const fixture: ComponentFixture<PaginatorA11yHostComponent> = createHostFixture();
       const nextButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.uilib-paginator-next'
+        '.uilib-paginator-next',
       );
       dispatchKeyboardActivation(nextButton, 'Enter');
       fixture.detectChanges();
       expect(fixture.componentInstance.first()).toBe(10);
       expect(
-        queryRequiredElement<HTMLElement>(fixture, '.uilib-paginator-live').textContent.trim()
+        queryRequiredElement<HTMLElement>(fixture, '.uilib-paginator-live').textContent.trim(),
       ).toBe('Page 2 of 10');
     });
 
@@ -261,7 +256,7 @@ describe('Paginator Accessibility', (): void => {
       const fixture: ComponentFixture<PaginatorA11yHostComponent> = createHostFixture();
       const previousButton: HTMLButtonElement = queryRequiredElement<HTMLButtonElement>(
         fixture,
-        '.uilib-paginator-prev'
+        '.uilib-paginator-prev',
       );
       expect(previousButton.disabled).toBe(true);
       dispatchKeyboardActivation(previousButton, 'Enter');
@@ -275,7 +270,7 @@ describe('Paginator Accessibility', (): void => {
       fixture.detectChanges();
       const input: HTMLInputElement = queryRequiredElement<HTMLInputElement>(
         fixture,
-        '.uilib-paginator-jtp-input'
+        '.uilib-paginator-jtp-input',
       );
       input.value = '4';
       input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
@@ -289,7 +284,7 @@ describe('Paginator Accessibility', (): void => {
       fixture.detectChanges();
       const input: HTMLInputElement = queryRequiredElement<HTMLInputElement>(
         fixture,
-        '.uilib-paginator-jtp-input'
+        '.uilib-paginator-jtp-input',
       );
       input.value = '4';
       input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
@@ -303,14 +298,14 @@ describe('Paginator Accessibility', (): void => {
       fixture.detectChanges();
       const select: HTMLSelectElement = queryRequiredElement<HTMLSelectElement>(
         fixture,
-        '.uilib-paginator-rpp-select'
+        '.uilib-paginator-rpp-select',
       );
       select.value = '25';
       select.dispatchEvent(new Event('change'));
       fixture.detectChanges();
       expect(fixture.componentInstance.rows()).toBe(25);
       expect(
-        queryRequiredElement<HTMLElement>(fixture, '.uilib-paginator-live').textContent.trim()
+        queryRequiredElement<HTMLElement>(fixture, '.uilib-paginator-live').textContent.trim(),
       ).toBe('Page 1 of 4');
     });
   });
