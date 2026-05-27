@@ -1,5 +1,8 @@
 # AGENTS Guide
 
+> **SenseAtlas (multi-repo):** Read `operator-hq:WORKSPACE.md` for the workspace map and
+> `operator-hq:AI_AGENT_CONTEXT.md` for live handoff. **Legacy — migrating to `platform/libs/ui`.**
+
 ## Document Ownership
 - `AGENTS.md` is the stable source of truth for architecture, conventions, and workflows.
 - `AI_AGENT_CONTEXT.md` is the session-state document (active focus, inventory status, and recent handoffs).
