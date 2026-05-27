@@ -17,7 +17,7 @@
     aria-modal="false"
     tabindex="-1"
     [attr.aria-labelledby]="header() ? titleId : null"
-    [attr.aria-label]="header() ? null : 'Popover'"
+    [attr.aria-label]="header() ? null : i18n.translate('popover.label')"
     (keydown)="onPanelKeydown($event)"
   >
     <!-- Arrow pointing toward the trigger element -->

@@ -57,10 +57,16 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
 
   // ── Dialog / Drawer / BottomSheet / Popover / ConfirmDialog / DynamicDialog
   'dialog.close': 'Dialog schließen',
+  'dialog.minimize': 'Minimieren',
+  'dialog.maximize': 'Maximieren',
   'drawer.close': 'Schließen',
+  'drawer.label': 'Seitenleiste',
   'bottom-sheet.close': 'Schließen',
   'popover.close': 'Schließen',
+  'popover.label': 'Einblendung',
   'confirm-dialog.close': 'Schließen',
+  'confirm-dialog.accept': 'Ja',
+  'confirm-dialog.reject': 'Nein',
   'dynamic-dialog.close': 'Schließen',
   'message.close': 'Nachricht schließen',
   'panel.toggle': 'Panel umschalten',
@@ -126,7 +132,9 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'picklist.remove.all': 'Alle entfernen',
 
   // ── Toast ─────────────────────────────────────────────────────────────────
+  'toast.region': 'Benachrichtigungen',
   'toast.close': 'Benachrichtigung schließen',
+  'toast.dismiss': 'Schließen: {title}',
 
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
   'chip.remove': '{label} entfernen',
@@ -201,4 +209,15 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
 
   // ── Editor ────────────────────────────────────────────────────────────────
   'editor.toolbar': 'Formatierungsoptionen',
+
+  // ── Stepper ───────────────────────────────────────────────────────────────
+  'stepper.label': 'Fortschritt',
+  'stepper.step': 'Schritt {current} von {total}: {label}',
+  'stepper.step.error': 'Schritt {current} von {total}: {label} — Fehler, bitte beheben',
+  'stepper.step.completed': 'Schritt {current} von {total}: {label} — abgeschlossen',
+  'stepper.step.current': 'Schritt {current} von {total}: {label} — aktuell',
+  'stepper.step.unavailable-linear':
+    'Schritt {current} von {total}: {label} — noch nicht zugänglich',
+  'stepper.step.unavailable': 'Schritt {current} von {total}: {label} — nicht verfügbar',
+  'stepper.step.fallback-label': 'Schritt {n}',
 };

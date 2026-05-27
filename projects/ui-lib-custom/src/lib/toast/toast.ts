@@ -13,6 +13,7 @@ import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 import { Icon } from 'ui-lib-custom/icon';
 import type { StatusIcon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ToastService } from './toast.service';
 import type { ToastMessage, ToastPosition, ToastSeverity, ToastVariant } from './toast.types';
 
@@ -57,7 +58,7 @@ const ANIMATION_DURATION_MS: number = 300;
     class: 'ui-lib-toast',
     '[class]': 'hostClasses()',
     role: 'region',
-    '[attr.aria-label]': '"Notifications"',
+    '[attr.aria-label]': 'i18n.translate("toast.region")',
     // aria-live and aria-atomic are intentionally absent — role="region" is a structural
     // landmark, not a live region. Each child item manages its own announcement urgency
     // via role="alert" (error) or role="status" (success/info/warn).
@@ -67,6 +68,7 @@ export class Toast {
   private readonly toastService: ToastService = inject(ToastService);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Screen position of the toast container. */
   public readonly position: InputSignal<ToastPosition> = input<ToastPosition>('top-right');
@@ -102,7 +104,7 @@ export class Toast {
 
   /** Resolved design variant — falls back to ThemeConfigService global variant. */
   public readonly effectiveVariant: Signal<ToastVariant> = computed<ToastVariant>(
-    (): ToastVariant => this.variant() ?? this.themeConfig.variant()
+    (): ToastVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Toast messages to display — filtered by key when the key input is set. */
@@ -113,7 +115,7 @@ export class Toast {
       return filterKey !== null
         ? allMessages.filter((message: ToastMessage): boolean => message.key === filterKey)
         : allMessages;
-    }
+    },
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -134,7 +136,7 @@ export class Toast {
     effect((): void => {
       const messages: ToastMessage[] = this.visibleMessages();
       const activeIds: Set<string> = new Set<string>(
-        messages.map((message: ToastMessage): string => message.id ?? '')
+        messages.map((message: ToastMessage): string => message.id ?? ''),
       );
 
       // Cancel timers for messages that are no longer in the queue.
@@ -216,7 +218,7 @@ export class Toast {
 
     // Apply the exit animation class.
     this.closingIds.update(
-      (current: Set<string>): Set<string> => new Set<string>([...current, messageId])
+      (current: Set<string>): Set<string> => new Set<string>([...current, messageId]),
     );
 
     // After the animation finishes, remove the message from the service.

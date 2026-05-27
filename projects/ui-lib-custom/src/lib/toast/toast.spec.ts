@@ -19,14 +19,14 @@ import type { ToastMessage, ToastPosition, ToastVariant } from './toast.types';
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function requireElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = queryElement<T>(fixture, selector);
   if (!element) throw new Error('Element not found: ' + selector);
@@ -35,7 +35,7 @@ function requireElement<T extends HTMLElement>(
 
 function queryAllElements<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -80,7 +80,7 @@ async function setup(
     variant?: ToastVariant | null;
     toastKey?: string | null;
     styleClass?: string | null;
-  } = {}
+  } = {},
 ): Promise<TestSetup> {
   await TestBed.configureTestingModule({
     imports: [TestHostComponent],
@@ -222,7 +222,7 @@ describe('Toast', (): void => {
   it('should apply top-right position class by default', async (): Promise<void> => {
     const { fixture }: TestSetup = await setup();
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-toast'
+      'ui-lib-toast',
     ) as HTMLElement;
     expect(host.classList.contains('ui-lib-toast--top-right')).toBe(true);
   });
@@ -230,7 +230,7 @@ describe('Toast', (): void => {
   it('should apply the position class matching the input', async (): Promise<void> => {
     const { fixture, host }: TestSetup = await setup({ position: 'bottom-left' });
     const toastHost: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-toast'
+      'ui-lib-toast',
     ) as HTMLElement;
     expect(toastHost.classList.contains('ui-lib-toast--bottom-left')).toBe(true);
 
@@ -245,7 +245,7 @@ describe('Toast', (): void => {
   it('should apply the variant class when variant is set', async (): Promise<void> => {
     const { fixture }: TestSetup = await setup({ variant: 'bootstrap' });
     const toastHost: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-toast'
+      'ui-lib-toast',
     ) as HTMLElement;
     expect(toastHost.classList.contains('ui-lib-toast--bootstrap')).toBe(true);
   });
@@ -253,7 +253,7 @@ describe('Toast', (): void => {
   it('should apply a custom styleClass to the host', async (): Promise<void> => {
     const { fixture }: TestSetup = await setup({ styleClass: 'my-custom-toast' });
     const toastHost: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-toast'
+      'ui-lib-toast',
     ) as HTMLElement;
     expect(toastHost.classList.contains('my-custom-toast')).toBe(true);
   });
@@ -289,7 +289,7 @@ describe('Toast', (): void => {
 
     const closeButton: HTMLButtonElement = requireElement<HTMLButtonElement>(
       fixture,
-      '.ui-lib-toast__close'
+      '.ui-lib-toast__close',
     );
     closeButton.click();
     fixture.detectChanges();
@@ -413,7 +413,7 @@ describe('Toast', (): void => {
   it('should have role="region" on the host', async (): Promise<void> => {
     const { fixture }: TestSetup = await setup();
     const toastHost: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-toast'
+      'ui-lib-toast',
     ) as HTMLElement;
     expect(toastHost.getAttribute('role')).toBe('region');
     expect(toastHost.getAttribute('aria-label')).toBe('Notifications');
@@ -456,6 +456,6 @@ describe('Toast', (): void => {
     await fixture.whenStable();
 
     const closeButton: HTMLElement | null = queryElement(fixture, '.ui-lib-toast__close');
-    expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: Aria test');
+    expect(closeButton?.getAttribute('aria-label')).toBe('Close: Aria test');
   });
 });

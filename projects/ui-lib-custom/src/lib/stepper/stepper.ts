@@ -12,6 +12,7 @@ import {
 import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { StepperPanel } from './stepper-panel';
 import type {
   StepChangeEvent,
@@ -79,6 +80,7 @@ let nextStepperId: number = 0;
 })
 export class Stepper {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly stepperId: string = `ui-lib-stepper-${(nextStepperId += 1)}`;
 
@@ -91,8 +93,8 @@ export class Stepper {
    */
   public readonly linear: InputSignal<boolean> = input<boolean>(false);
 
-  /** Accessible label announced for the step navigation container. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(STEPPER_DEFAULT_ARIA_LABEL);
+  /** Accessible label announced for the step navigation container. When empty the active locale's 'stepper.label' translation is used. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   /** Layout orientation: 'horizontal' (default) or 'vertical'. */
   public readonly orientation: InputSignal<StepperOrientation> =
@@ -131,6 +133,11 @@ export class Stepper {
   /** Whether the component is in horizontal orientation. */
   public readonly isHorizontal: Signal<boolean> = computed<boolean>(
     (): boolean => this.orientation() === 'horizontal',
+  );
+
+  /** Resolved aria-label for the step navigation container — falls back to i18n default. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('stepper.label'),
   );
 
   /** Computed step metadata used for rendering, styling, and accessibility. */
@@ -177,24 +184,28 @@ export class Stepper {
 
   /** Builds a rich screen-reader label for a step header. */
   public getStepAriaLabel(step: StepperItem, index: number, total: number): string {
-    const baseLabel: string = `Step ${index + 1} of ${total}: ${step.label}`;
+    const params: { current: number; total: number; label: string } = {
+      current: index + 1,
+      total,
+      label: step.label ?? '',
+    };
 
     if (step.error) {
-      return `${baseLabel} — error, please fix`;
+      return this.i18n.translate('stepper.step.error', params);
     }
     if (step.completed) {
-      return `${baseLabel} — completed`;
+      return this.i18n.translate('stepper.step.completed', params);
     }
     if (this.isStepActive(index)) {
-      return `${baseLabel} — current`;
+      return this.i18n.translate('stepper.step.current', params);
     }
     if (step.disabled && this.linear()) {
-      return `${baseLabel} — unavailable until previous steps are complete`;
+      return this.i18n.translate('stepper.step.unavailable-linear', params);
     }
     if (step.disabled) {
-      return `${baseLabel} — unavailable`;
+      return this.i18n.translate('stepper.step.unavailable', params);
     }
-    return baseLabel;
+    return this.i18n.translate('stepper.step', params);
   }
 
   /** Computes the CSS classes for a step element. */
@@ -336,7 +347,7 @@ export class Stepper {
     if (trimmedHeader) {
       return trimmedHeader;
     }
-    return `Step ${index + 1}`;
+    return this.i18n.translate('stepper.step.fallback-label', { n: index + 1 });
   }
 
   private isPanelAccessible(index: number, panel: StepperPanel): boolean {

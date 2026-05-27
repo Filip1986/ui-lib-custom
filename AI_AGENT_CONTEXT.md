@@ -83,6 +83,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: I18n=6→9 sweep — Dialog, DynamicDialog, Drawer, BottomSheet, ConfirmDialog, Toast, Stepper, Popover]
+Changed:
+  dialog.component.html: maximize/minimize button labels wired to i18n.translate('dialog.minimize/maximize')
+  drawer.html: fallback panel aria-label 'Drawer' → i18n.translate('drawer.label')
+  popover.html: fallback panel aria-label 'Popover' → i18n.translate('popover.label')
+  toast.ts: inject UiLibI18nService; host '[attr.aria-label]' wired to i18n.translate('toast.region')
+  toast.html: dismiss button wired to toast.dismiss/{toast.close} parametrized key
+  confirm-dialog.ts: acceptLabel/rejectLabel defaults changed from 'Yes'/'No' to ''; resolvedAcceptLabel/rejectLabel fall back to i18n.translate('confirm-dialog.accept/reject')
+  stepper.ts: inject UiLibI18nService; getStepAriaLabel() fully i18n'd (6 states); getStepLabel() fallback i18n'd; effectiveAriaLabel computed signal; ariaLabel input default changed to ''
+  stepper.html: [attr.aria-label] → effectiveAriaLabel()
+  i18n/en.ts,de.ts,fr.ts,es.ts: added dialog.minimize/maximize, drawer.label, popover.label, toast.region/dismiss, confirm-dialog.accept/reject, stepper.label + 7 stepper.step.* keys
+  toast.spec.ts, toast.a11y.spec.ts: updated 'Dismiss: ' → 'Close: ' assertions; fallback test → 'Close notification'
+  docs/COMPONENT_SCORES.md: I18n 6→9 on Dialog (8.4→8.6), DynamicDialog (8.2→8.5), Drawer (8.3→8.5), BottomSheet (8.4→8.6), Popover (8.7→9.0), ConfirmDialog (8.1→8.4), Toast (8.8→9.1), Stepper (8.7→9.0)
+State: COMPLETE — 6041/6041 tests green
+Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites)
+Next step: Continue I18n=7→9 sweep on Navigation & Menu components (Menu, TieredMenu, ContextMenu, Accordion, etc.)
+
 Date: 2026-05-27 [feat: score ceiling push — Perf 8→9 + I18n 8→9 on Select, AutoComplete, CascadeSelect, ColorPicker]
 Changed:
   autocomplete.html, cascade-select.html, color-picker.html: @defer (on immediate) wrapping overlay panels (Perf 8→9)
@@ -109,20 +126,6 @@ Changed:
 State: COMPLETE — 0 property-disallowed-list violations library-wide; physical directional properties now block commits; all SCSS token errors in scope resolved
 Verification: npx stylelint "projects/ui-lib-custom/src/lib/**/*.scss" → 0 property-disallowed-list violations; lint-staged + commitlint passed on both commits
 Next step: Step 4 — component score ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 each)
-
-Date: 2026-05-27 [feat/i18n-params-locales — PR #271 open]
-Changed:
-  projects/ui-lib-custom/src/lib/i18n/en.ts: 14 new parametrised keys (carousel.slide.status, paginator.empty/page.current/page.go, data-view.go.page, meter-group.segment.*, rating.value/star.singular/star.plural, tree-select.*)
-  projects/ui-lib-custom/src/lib/i18n/de.ts: NEW — UI_LIB_DE, full 76-key German bundle
-  projects/ui-lib-custom/src/lib/i18n/fr.ts: NEW — UI_LIB_FR, full 76-key French bundle
-  projects/ui-lib-custom/src/lib/i18n/es.ts: NEW — UI_LIB_ES, full 76-key Spanish bundle
-  projects/ui-lib-custom/src/lib/i18n/index.ts: exports UI_LIB_DE, UI_LIB_FR, UI_LIB_ES
-  carousel, data-view, meter-group, paginator, rating, table, tree-select: all dynamic aria-labels wired to translate() with params
-  test/entry-points.spec.ts: DE/FR/ES assertions added
-  docs/reference/bundle-sizes.json: baseline updated (i18n +40 KB, intentional)
-State: COMPLETE — 6041/6041 tests green; ng build zero warnings; pre-push hook passed (typecheck ✅ + budget ✅)
-Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
-Next step: Step 3 — RTL layout pass (replace margin/padding-left/right with inline-* logical CSS properties across SCSS files)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

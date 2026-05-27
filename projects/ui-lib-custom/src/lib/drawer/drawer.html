@@ -14,7 +14,7 @@
   role="dialog"
   [attr.aria-modal]="visible() && modal() ? 'true' : null"
   [attr.aria-labelledby]="header() ? titleId() : null"
-  [attr.aria-label]="header() ? null : 'Drawer'"
+  [attr.aria-label]="header() ? null : i18n.translate('drawer.label')"
   [attr.aria-describedby]="ariaDescribedby() ?? null"
   tabindex="-1"
   (keydown.escape)="onEscapeKey()"

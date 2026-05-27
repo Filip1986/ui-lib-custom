@@ -22,7 +22,7 @@
       <button
         type="button"
         class="ui-lib-toast__close"
-        [attr.aria-label]="'Dismiss: ' + (message.summary || message.detail || 'notification')"
+        [attr.aria-label]="(message.summary || message.detail) ? i18n.translate('toast.dismiss', { title: message.summary || message.detail }) : i18n.translate('toast.close')"
         (click)="dismiss(message.id ?? '')"
       >
         <ui-lib-icon

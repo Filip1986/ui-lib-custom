@@ -20,14 +20,14 @@ import type { ToastMessage, ToastPosition } from './toast.types';
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -75,7 +75,7 @@ async function createFixture(): Promise<{
 async function addMessage(
   fixture: ComponentFixture<ToastA11yHostComponent>,
   toastService: ToastService,
-  message: ToastMessage
+  message: ToastMessage,
 ): Promise<void> {
   toastService.add(message);
   fixture.detectChanges();
@@ -206,7 +206,7 @@ describe('Toast Accessibility', (): void => {
       await addMessage(fixture, toastService, { summary: 'Test', sticky: true });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
       expect(closeButton?.getAttribute('type')).toBe('button');
     });
@@ -216,9 +216,9 @@ describe('Toast Accessibility', (): void => {
       await addMessage(fixture, toastService, { summary: 'Changes saved', sticky: true });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
-      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: Changes saved');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Close: Changes saved');
     });
 
     it('should use detail as fallback aria-label when summary is absent', async (): Promise<void> => {
@@ -226,19 +226,19 @@ describe('Toast Accessibility', (): void => {
       await addMessage(fixture, toastService, { detail: 'File upload failed', sticky: true });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
-      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: File upload failed');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Close: File upload failed');
     });
 
-    it('should fall back to "notification" when neither summary nor detail is set', async (): Promise<void> => {
+    it('should fall back to generic close label when neither summary nor detail is set', async (): Promise<void> => {
       const { fixture, toastService } = await createFixture();
       await addMessage(fixture, toastService, { severity: 'info', sticky: true });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
-      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: notification');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Close notification');
     });
 
     it('should not render the close button when closable=false', async (): Promise<void> => {
@@ -250,7 +250,7 @@ describe('Toast Accessibility', (): void => {
       });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
       expect(closeButton).toBeNull();
     });
@@ -260,7 +260,7 @@ describe('Toast Accessibility', (): void => {
       await addMessage(fixture, toastService, { summary: 'Focusable', sticky: true });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
       expect(closeButton?.getAttribute('tabindex')).not.toBe('-1');
       expect(closeButton?.hasAttribute('disabled')).toBe(false);
@@ -276,7 +276,7 @@ describe('Toast Accessibility', (): void => {
 
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
       closeButton?.click();
       fixture.detectChanges();
@@ -295,13 +295,13 @@ describe('Toast Accessibility', (): void => {
 
       const closeButtons: HTMLButtonElement[] = queryAllEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
       const labels: (string | null)[] = closeButtons.map((btn: HTMLButtonElement): string | null =>
-        btn.getAttribute('aria-label')
+        btn.getAttribute('aria-label'),
       );
-      expect(labels[0]).toBe('Dismiss: File saved');
-      expect(labels[1]).toBe('Dismiss: Upload failed');
+      expect(labels[0]).toBe('Close: File saved');
+      expect(labels[1]).toBe('Close: Upload failed');
       expect(new Set(labels).size).toBe(2);
     });
 
@@ -314,9 +314,9 @@ describe('Toast Accessibility', (): void => {
       });
       const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
         fixture,
-        '.ui-lib-toast__close'
+        '.ui-lib-toast__close',
       );
-      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: Action required');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Close: Action required');
     });
   });
 

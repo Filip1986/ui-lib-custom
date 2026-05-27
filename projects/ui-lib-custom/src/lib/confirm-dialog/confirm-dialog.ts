@@ -115,11 +115,11 @@ export class ConfirmDialog implements OnDestroy {
   /** CSS class for the icon rendered before the message. */
   public readonly icon: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accept button label. */
-  public readonly acceptLabel: InputSignal<string> = input<string>('Yes');
+  /** Accept button label. Defaults to the active locale's 'confirm-dialog.accept' translation. */
+  public readonly acceptLabel: InputSignal<string> = input<string>('');
 
-  /** Reject button label. */
-  public readonly rejectLabel: InputSignal<string> = input<string>('No');
+  /** Reject button label. Defaults to the active locale's 'confirm-dialog.reject' translation. */
+  public readonly rejectLabel: InputSignal<string> = input<string>('');
 
   /** CSS class for an icon inside the accept button. */
   public readonly acceptIcon: InputSignal<string | null> = input<string | null>(null);
@@ -184,14 +184,18 @@ export class ConfirmDialog implements OnDestroy {
     (): string | null => this.serviceConfig()?.icon ?? this.icon(),
   );
 
-  /** Resolved accept label. */
+  /** Resolved accept label — service config wins, then input, then i18n default. */
   public readonly resolvedAcceptLabel: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.acceptLabel ?? this.acceptLabel(),
+    (): string =>
+      this.serviceConfig()?.acceptLabel ??
+      (this.acceptLabel() || this.i18n.translate('confirm-dialog.accept')),
   );
 
-  /** Resolved reject label. */
+  /** Resolved reject label — service config wins, then input, then i18n default. */
   public readonly resolvedRejectLabel: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.rejectLabel ?? this.rejectLabel(),
+    (): string =>
+      this.serviceConfig()?.rejectLabel ??
+      (this.rejectLabel() || this.i18n.translate('confirm-dialog.reject')),
   );
 
   /** Resolved accept icon. */

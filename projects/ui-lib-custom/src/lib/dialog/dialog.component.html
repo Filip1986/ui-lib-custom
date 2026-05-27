@@ -32,7 +32,7 @@
               type="button"
               class="ui-lib-dialog-maximize-btn"
               (click)="toggleMaximize()"
-              [attr.aria-label]="maximized() ? 'Minimize' : 'Maximize'"
+              [attr.aria-label]="maximized() ? i18n.translate('dialog.minimize') : i18n.translate('dialog.maximize')"
             >
               @if (maximized()) {
                 <svg

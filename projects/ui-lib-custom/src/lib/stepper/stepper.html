@@ -2,7 +2,7 @@
   <nav
     class="ui-lib-stepper__nav"
     role="tablist"
-    [attr.aria-label]="ariaLabel()"
+    [attr.aria-label]="effectiveAriaLabel()"
     aria-orientation="horizontal"
   >
     @for (step of stepItems(); track step.id; let index = $index) {
@@ -72,7 +72,7 @@
   <div
     class="ui-lib-stepper__vertical-list"
     role="tablist"
-    [attr.aria-label]="ariaLabel()"
+    [attr.aria-label]="effectiveAriaLabel()"
     aria-orientation="vertical"
   >
     @for (step of stepItems(); track step.id; let index = $index) {
