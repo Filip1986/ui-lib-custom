@@ -159,7 +159,7 @@ function getSelectEl(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getControlEl(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    '.ui-lib-select__control'
+    '.ui-lib-select__control',
   ) as HTMLElement;
 }
 
@@ -178,6 +178,7 @@ async function configureTestBed<T>(component: new () => T): Promise<ComponentFix
   }).compileComponents();
   const fixture: ComponentFixture<T> = TestBed.createComponent(component);
   fixture.detectChanges();
+  await fixture.whenStable(); // Pre-load @defer (on immediate) block
   return fixture;
 }
 
@@ -248,7 +249,7 @@ describe('Select — Open state ARIA', (): void => {
   it('panel should have role="listbox"', (): void => {
     openPanel(fixture);
     const listbox: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="listbox"]'
+      '[role="listbox"]',
     );
     expect(listbox).toBeTruthy();
   });
@@ -264,7 +265,7 @@ describe('Select — Open state ARIA', (): void => {
   it('unselected options should have aria-selected="false"', (): void => {
     openPanel(fixture);
     const firstOption: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="option"]'
+      '[role="option"]',
     ) as HTMLElement;
     expect(firstOption.getAttribute('aria-selected')).toBe('false');
   });
@@ -291,7 +292,7 @@ describe('Select — Open state ARIA', (): void => {
 
   it('arrow icon should have aria-hidden="true"', (): void => {
     const arrow: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__arrow'
+      '.ui-lib-select__arrow',
     ) as HTMLElement;
     expect(arrow.getAttribute('aria-hidden')).toBe('true');
   });
@@ -300,13 +301,13 @@ describe('Select — Open state ARIA', (): void => {
     // Pre-select a value to make clear button visible by opening and selecting first option
     openPanel(fixture);
     const firstOption: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="option"]'
+      '[role="option"]',
     ) as HTMLElement;
     firstOption.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
 
     const clearIcon: SVGElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__clear-icon'
+      '.ui-lib-select__clear-icon',
     );
     if (clearIcon) {
       expect(clearIcon.getAttribute('aria-hidden')).toBe('true');
@@ -412,7 +413,7 @@ describe('Select — Multi-select ARIA', (): void => {
   it('listbox should have aria-multiselectable="true"', (): void => {
     openPanel(fixture);
     const listbox: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="listbox"]'
+      '[role="listbox"]',
     ) as HTMLElement;
     expect(listbox.getAttribute('aria-multiselectable')).toBe('true');
   });
@@ -420,7 +421,7 @@ describe('Select — Multi-select ARIA', (): void => {
   it('selected option should have aria-selected="true"', (): void => {
     openPanel(fixture);
     const firstOption: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="option"]'
+      '[role="option"]',
     ) as HTMLElement;
     firstOption.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
@@ -428,7 +429,7 @@ describe('Select — Multi-select ARIA', (): void => {
     // In multi-select mode, the panel stays open after selection.
     // The clicked option should now have aria-selected="true".
     const selectedOption: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__option--selected'
+      '.ui-lib-select__option--selected',
     );
     expect(selectedOption).toBeTruthy();
     expect(selectedOption!.getAttribute('aria-selected')).toBe('true');
@@ -447,7 +448,7 @@ describe('Select — Multi-select ARIA', (): void => {
   it('panel stays open after selecting an option in multi mode', (): void => {
     openPanel(fixture);
     const firstOption: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="option"]'
+      '[role="option"]',
     ) as HTMLElement;
     firstOption.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
@@ -497,7 +498,7 @@ describe('Select — Searchable mode', (): void => {
   it('search input should have aria-autocomplete="list"', (): void => {
     openPanel(fixture);
     const input: HTMLInputElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__search input'
+      '.ui-lib-select__search input',
     );
     expect(input).toBeTruthy();
     expect(input!.getAttribute('aria-autocomplete')).toBe('list');
@@ -506,7 +507,7 @@ describe('Select — Searchable mode', (): void => {
   it('search input should have aria-controls pointing to the listbox', (): void => {
     openPanel(fixture);
     const input: HTMLInputElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__search input'
+      '.ui-lib-select__search input',
     );
     const listboxId: string | null = input!.getAttribute('aria-controls');
     expect(listboxId).toBeTruthy();
@@ -517,7 +518,7 @@ describe('Select — Searchable mode', (): void => {
 
   it('live region should exist (for result count announcements)', (): void => {
     const liveRegion: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__sr-live'
+      '.ui-lib-select__sr-live',
     );
     expect(liveRegion).toBeTruthy();
     expect(liveRegion!.getAttribute('aria-live')).toBe('polite');
@@ -527,7 +528,7 @@ describe('Select — Searchable mode', (): void => {
   it('live region should announce result count when filtering', (): void => {
     openPanel(fixture);
     const input: HTMLInputElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__search input'
+      '.ui-lib-select__search input',
     ) as HTMLInputElement;
 
     // Simulate typing 'a' — matches 'Alpha' and 'Gamma'
@@ -536,7 +537,7 @@ describe('Select — Searchable mode', (): void => {
     fixture.detectChanges();
 
     const liveRegion: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__sr-live'
+      '.ui-lib-select__sr-live',
     ) as HTMLElement;
     expect(liveRegion.textContent!.trim()).toMatch(/result/i);
   });
@@ -544,7 +545,7 @@ describe('Select — Searchable mode', (): void => {
   it('live region should be empty when no filter is active', (): void => {
     // Live region is empty without an active filter
     const liveRegion: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-select__sr-live'
+      '.ui-lib-select__sr-live',
     ) as HTMLElement;
     expect(liveRegion.textContent!.trim()).toBe('');
   });
@@ -562,7 +563,7 @@ describe('Select — Group ARIA', (): void => {
   it('grouped options should be wrapped in role="group"', (): void => {
     openPanel(fixture);
     const groups: NodeListOf<HTMLElement> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '[role="group"]'
+      '[role="group"]',
     );
     expect(groups.length).toBe(2);
   });
@@ -570,10 +571,10 @@ describe('Select — Group ARIA', (): void => {
   it('each group container should have aria-label matching group name', (): void => {
     openPanel(fixture);
     const groups: NodeListOf<HTMLElement> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '[role="group"]'
+      '[role="group"]',
     );
     const labels: string[] = Array.from(groups).map(
-      (g: HTMLElement): string => g.getAttribute('aria-label') ?? ''
+      (g: HTMLElement): string => g.getAttribute('aria-label') ?? '',
     );
     expect(labels).toContain('Letters');
     expect(labels).toContain('Numbers');

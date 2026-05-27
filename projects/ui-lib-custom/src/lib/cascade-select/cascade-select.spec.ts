@@ -222,6 +222,14 @@ describe('UiLibCascadeSelect unit', (): void => {
     fixture.componentRef.setInput('placeholder', 'Select city');
     fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
+  });
+
+  afterEach((): void => {
+    // Remove any panels teleported to document.body by tests that do not explicitly close them
+    document.body.querySelectorAll('.ui-lib-cascade-select__panel').forEach((el: Element): void => {
+      el.remove();
+    });
   });
 
   function hostEl(): HTMLElement {
@@ -273,7 +281,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     expect(panelEl()).toBeFalsy();
   });
 
-  it('defaults appendTo to body', (): void => {
+  it('defaults appendTo to body', async (): Promise<void> => {
     const defaultFixture: ComponentFixture<UiLibCascadeSelect> =
       TestBed.createComponent(UiLibCascadeSelect);
     const defaultComponent: UiLibCascadeSelect = defaultFixture.componentInstance;
@@ -284,6 +292,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     defaultFixture.componentRef.setInput('optionGroupLabel', 'name');
     defaultFixture.componentRef.setInput('optionGroupChildren', ['states', 'cities']);
     defaultFixture.detectChanges();
+    await defaultFixture.whenStable(); // Pre-load @defer (on immediate) block
 
     defaultComponent.openPanel(new MouseEvent('click'));
     defaultFixture.detectChanges();
@@ -291,6 +300,11 @@ describe('UiLibCascadeSelect unit', (): void => {
     const panel: HTMLElement | null = document.body.querySelector('.ui-lib-cascade-select__panel');
     expect(panel).toBeTruthy();
     expect(panel?.parentElement).toBe(document.body);
+
+    // Close panel before destroying fixture so the @if block removes the DOM node from body
+    defaultComponent.closePanel(new MouseEvent('click'));
+    defaultFixture.detectChanges();
+    defaultFixture.destroy();
   });
 
   it('keeps panel open for panel clicks and closes on outside clicks when appendTo is body', (): void => {
@@ -302,7 +316,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     const panel: HTMLElement = getRequiredItem(
       Array.from(document.body.querySelectorAll('.ui-lib-cascade-select__panel')),
       0,
-      'body mounted panel'
+      'body mounted panel',
     );
 
     panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -340,8 +354,6 @@ describe('UiLibCascadeSelect unit', (): void => {
 
   it('shows loading content when loading is true', (): void => {
     fixture.componentRef.setInput('loading', true);
-    fixture.detectChanges();
-
     component.panelVisible.set(true);
     fixture.detectChanges();
 
@@ -374,7 +386,7 @@ describe('UiLibCascadeSelect unit', (): void => {
   it('selects leaf option, emits change, and closes panel', (): void => {
     const changeSpy: jest.SpiedFunction<typeof component.cascadeChange.emit> = jest.spyOn(
       component.cascadeChange,
-      'emit'
+      'emit',
     );
 
     openPanelByClick();
@@ -405,7 +417,7 @@ describe('UiLibCascadeSelect unit', (): void => {
   it('emits groupChange when entering a group', (): void => {
     const groupSpy: jest.SpiedFunction<typeof component.groupChange.emit> = jest.spyOn(
       component.groupChange,
-      'emit'
+      'emit',
     );
 
     openPanelByClick();
@@ -424,7 +436,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     fixture.detectChanges();
 
     const firstActive: HTMLElement | null = hostEl().querySelector(
-      '.ui-lib-cascade-select__option--active'
+      '.ui-lib-cascade-select__option--active',
     );
     expect(firstActive?.textContent).toContain('Canada');
 
@@ -432,7 +444,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     fixture.detectChanges();
 
     const secondActive: HTMLElement | null = hostEl().querySelector(
-      '.ui-lib-cascade-select__option--active'
+      '.ui-lib-cascade-select__option--active',
     );
     expect(secondActive?.textContent).toContain('Australia');
   });
@@ -456,7 +468,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     getRequiredItem(optionEls(), 2, 'state option').click();
     fixture.detectChanges();
     getRequiredItem(optionEls(), 4, 'leaf option').dispatchEvent(
-      new MouseEvent('mouseenter', { bubbles: true })
+      new MouseEvent('mouseenter', { bubbles: true }),
     );
     fixture.detectChanges();
 
@@ -473,7 +485,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     getRequiredItem(optionEls(), 2, 'state option').click();
     fixture.detectChanges();
     getRequiredItem(optionEls(), 4, 'leaf option').dispatchEvent(
-      new MouseEvent('mouseenter', { bubbles: true })
+      new MouseEvent('mouseenter', { bubbles: true }),
     );
     fixture.detectChanges();
 
@@ -497,7 +509,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     cmpEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
     fixture.detectChanges();
     let active: HTMLElement | null = hostEl().querySelector(
-      '.ui-lib-cascade-select__option--active'
+      '.ui-lib-cascade-select__option--active',
     );
     expect(active?.textContent).toContain('Canada');
 
@@ -528,12 +540,12 @@ describe('UiLibCascadeSelect unit', (): void => {
     fixture.detectChanges();
 
     const activeOptions: HTMLElement[] = Array.from(
-      hostEl().querySelectorAll('.ui-lib-cascade-select__option--active')
+      hostEl().querySelectorAll('.ui-lib-cascade-select__option--active'),
     );
     expect(
       activeOptions.some((optionEl: HTMLElement): boolean => {
         return optionEl.textContent.includes('Newcastle');
-      })
+      }),
     ).toBeTruthy();
   });
 
@@ -604,14 +616,14 @@ describe('UiLibCascadeSelect unit', (): void => {
   it('showClear clears value and emits clear', (): void => {
     const clearSpy: jest.SpiedFunction<typeof component.clear.emit> = jest.spyOn(
       component.clear,
-      'emit'
+      'emit',
     );
     component.writeValue('TOR');
     fixture.componentRef.setInput('showClear', true);
     fixture.detectChanges();
 
     const clearButton: HTMLElement = hostEl().querySelector(
-      '.ui-lib-cascade-select__clear'
+      '.ui-lib-cascade-select__clear',
     ) as HTMLElement;
     clearButton.click();
     fixture.detectChanges();
@@ -650,17 +662,18 @@ describe('UiLibCascadeSelect forms integration', (): void => {
 
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
 
     const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
     const trigger: HTMLElement = hostElement.querySelector(
-      '.ui-lib-cascade-select__trigger'
+      '.ui-lib-cascade-select__trigger',
     ) as HTMLElement;
 
     trigger.click();
     fixture.detectChanges();
 
     let options: HTMLElement[] = Array.from(
-      hostElement.querySelectorAll('.ui-lib-cascade-select__option')
+      hostElement.querySelectorAll('.ui-lib-cascade-select__option'),
     );
     getRequiredItem(options, 0, 'country option').click();
     fixture.detectChanges();
@@ -683,17 +696,18 @@ describe('UiLibCascadeSelect forms integration', (): void => {
     const fixture: ComponentFixture<ReactiveHostComponent> =
       TestBed.createComponent(ReactiveHostComponent);
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
 
     const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
     const trigger: HTMLElement = hostElement.querySelector(
-      '.ui-lib-cascade-select__trigger'
+      '.ui-lib-cascade-select__trigger',
     ) as HTMLElement;
 
     trigger.click();
     fixture.detectChanges();
 
     let options: HTMLElement[] = Array.from(
-      hostElement.querySelectorAll('.ui-lib-cascade-select__option')
+      hostElement.querySelectorAll('.ui-lib-cascade-select__option'),
     );
     getRequiredItem(options, 0, 'country option').click();
     fixture.detectChanges();
@@ -719,6 +733,7 @@ describe('UiLibCascadeSelect template slots', (): void => {
 
     fixture = TestBed.createComponent(SlotsHostComponent);
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
   });
 
   function hostEl(): HTMLElement {
@@ -727,7 +742,7 @@ describe('UiLibCascadeSelect template slots', (): void => {
 
   it('renders custom option, header, and footer templates', (): void => {
     const trigger: HTMLElement = hostEl().querySelector(
-      '.ui-lib-cascade-select__trigger'
+      '.ui-lib-cascade-select__trigger',
     ) as HTMLElement;
     trigger.click();
     fixture.detectChanges();
@@ -744,7 +759,7 @@ describe('UiLibCascadeSelect template slots', (): void => {
     const cascadeDebugElement: DebugElement = getRequiredItem(
       fixture.debugElement.children,
       0,
-      'cascade debug element'
+      'cascade debug element',
     );
     const cascadeComponent: UiLibCascadeSelect =
       cascadeDebugElement.componentInstance as UiLibCascadeSelect;
@@ -756,13 +771,13 @@ describe('UiLibCascadeSelect template slots', (): void => {
 
   it('renders custom value template after selecting a leaf', (): void => {
     const trigger: HTMLElement = hostEl().querySelector(
-      '.ui-lib-cascade-select__trigger'
+      '.ui-lib-cascade-select__trigger',
     ) as HTMLElement;
     trigger.click();
     fixture.detectChanges();
 
     let options: HTMLElement[] = Array.from(
-      hostEl().querySelectorAll('.ui-lib-cascade-select__option')
+      hostEl().querySelectorAll('.ui-lib-cascade-select__option'),
     );
     getRequiredItem(options, 0, 'country option').click();
     fixture.detectChanges();

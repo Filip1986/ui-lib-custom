@@ -58,7 +58,7 @@
               class="ui-autocomplete-chip-remove"
               type="button"
               (click)="removeChip($index, $event)"
-              [attr.aria-label]="'Remove ' + getChipLabel(chip)"
+              [attr.aria-label]="i18n.translate('autocomplete.remove-chip', { label: getChipLabel(chip) })"
             >
               @if (removeTokenIconTemplate()) {
                 <ng-container *ngTemplateOutlet="removeTokenIconTemplate()" />
@@ -144,7 +144,8 @@
 <!-- Live region: always in DOM so browser observes changes; announces result count to screen readers -->
 <div class="ui-autocomplete-sr-live" aria-live="polite" aria-atomic="true">{{ resultsAnnouncement() }}</div>
 
-@if (panelVisible() && (loading() || visibleOptions().length > 0 || emptyTemplate())) {
+@defer (on immediate) {
+  @if (panelVisible() && (loading() || visibleOptions().length > 0 || emptyTemplate())) {
   <div
     #panelElement
     class="ui-autocomplete-panel"
@@ -310,4 +311,5 @@
       </div>
     }
   </div>
+  }
 }

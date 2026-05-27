@@ -27,6 +27,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── CascadeSelect ─────────────────────────────────────────────────────────
   'cascade-select.clear': 'Clear selection',
+  'cascade-select.sublevel-label': 'Options for {label}',
 
   // ── Listbox ───────────────────────────────────────────────────────────────
   'listbox.select-all': 'Select all options',
@@ -94,6 +95,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── ColorPicker ───────────────────────────────────────────────────────────
   'colorpicker.toggle': 'Open color picker',
+  'colorpicker.trigger': 'Color: {color}, click to open picker',
   'colorpicker.panel': 'Color picker',
   'colorpicker.hue': 'Hue slider',
   'colorpicker.hex.input': 'Hex color value',
@@ -129,6 +131,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
   'chip.remove': 'Remove {label}',
   'autocomplete.dropdown': 'Show suggestions',
+  'autocomplete.remove-chip': 'Remove {label}',
 
   // ── Paginator (dynamic) ───────────────────────────────────────────────────
   'paginator.empty': 'No pages available',

@@ -59,7 +59,8 @@
     >{{ filteredResultsAnnouncement() }}</div>
   }
 
-  @if (open()) {
+  @defer (on immediate) {
+    @if (open()) {
     <!--
       Search input lives OUTSIDE the listbox element.
       role="listbox" may only own role="option" and role="group" elements;
@@ -72,7 +73,7 @@
             type="text"
             [value]="filter()"
             (input)="onFilter($any($event.target).value)"
-            placeholder="Search..."
+            [attr.placeholder]="i18n.translate('select.search.placeholder')"
             [attr.aria-label]="i18n.translate('select.search.aria')"
             aria-autocomplete="list"
             [attr.aria-controls]="listboxId()"
@@ -165,8 +166,9 @@
         }
 
         @if (filteredOptions().length === 0) {
-          <div class="ui-lib-select__empty">No results</div>
+          <div class="ui-lib-select__empty">{{ i18n.translate('select.empty') }}</div>
         }
       </div>
+    }
   }
 </div>

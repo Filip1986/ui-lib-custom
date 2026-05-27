@@ -4,6 +4,20 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-27 [feat(lib): wire all components to UiLibI18nService — replace hardcoded aria-labels]
+Changed:
+  25+ component *.ts files: added inject(UiLibI18nService); placed protected readonly i18n field
+  25+ component *.html files: all static aria-label="..." replaced with [attr.aria-label]="i18n.translate('key')"
+  src/lib/i18n/en.ts: 20+ new translation keys added (colorpicker, datepicker, editor, data-view, etc.)
+  *.spec.ts / *.a11y.spec.ts: updated expected strings to match en.ts values (paginator, data-view, autocomplete, dialog, color-picker)
+  docs/COMPONENT_SCORES.md: 24 component I18n scores lifted (5→8 or 6→8); averages recomputed
+  AI_AGENT_CONTEXT.md: active focus updated
+State: COMPLETE — 6041/6041 tests green; ng build zero warnings; branch feat/i18n-component-wiring
+Verification: npx jest --no-coverage (PASS ✅, 6041 tests); ng build ui-lib-custom (PASS ✅, 0 warnings)
+Next step: Prompt 6 — per-entry-point gzip budget snapshot script (scripts/snapshot-bundle-sizes.mjs)
+
+---
+
 Date: 2026-05-27 [docs(workspace): sprint-a batch 11 — ToggleButton, FloatLabel, InputGroup, IconField, FormField, Icon, IconButton, ButtonGroup]
 Changed:
   docs/COMPETITIVE_BENCHMARKS.md: added 8 sections — ToggleButton + FloatLabel + InputGroup + IconField + FormField (Core Inputs), Icon + IconButton + ButtonGroup (Utilities & Directives); zero unresolved gaps; 3+ differentiators each

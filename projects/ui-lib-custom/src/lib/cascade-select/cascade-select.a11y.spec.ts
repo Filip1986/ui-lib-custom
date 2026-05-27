@@ -54,8 +54,8 @@ const COUNTRIES: CountryNode[] = [
       optionGroupLabel="name"
       [optionGroupChildren]="optionGroupChildren"
       placeholder="Select a city"
-      [ariaLabel]="ariaLabel"
-      [ariaLabelledBy]="ariaLabelledBy"
+      [ariaLabel]="ariaLabel()"
+      [ariaLabelledBy]="ariaLabelledBy()"
       appendTo="self"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
@@ -67,8 +67,10 @@ const COUNTRIES: CountryNode[] = [
 class A11yHostComponent {
   public readonly options: unknown[] = COUNTRIES;
   public readonly optionGroupChildren: string[] = ['states', 'cities'];
-  public ariaLabel: string | null = 'Cascade Select';
-  public ariaLabelledBy: string | null = null;
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
+    'Cascade Select',
+  );
+  public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
   public value: unknown = null;
 }
 
@@ -134,6 +136,7 @@ describe('CascadeSelect accessibility', (): void => {
 
     fixture = TestBed.createComponent(A11yHostComponent);
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
   });
 
   function hostEl(): HTMLElement {
@@ -158,7 +161,7 @@ describe('CascadeSelect accessibility', (): void => {
 
   function getOptionByText(text: string): HTMLElement {
     const option: HTMLElement | undefined = getOptions().find(
-      (optionElement: HTMLElement): boolean => optionElement.textContent.trim().includes(text)
+      (optionElement: HTMLElement): boolean => optionElement.textContent.trim().includes(text),
     );
     if (!option) {
       throw new Error(`Expected option "${text}" to exist.`);
@@ -248,7 +251,7 @@ describe('CascadeSelect accessibility', (): void => {
     fixture.detectChanges();
     openPanel();
     const selectedOption: HTMLElement | null = hostEl().querySelector(
-      '.ui-lib-cascade-select__option[aria-selected="true"]'
+      '.ui-lib-cascade-select__option[aria-selected="true"]',
     );
     expect(selectedOption).toBeTruthy();
     expect(selectedOption?.getAttribute('aria-selected')).toBe('true');
@@ -316,7 +319,8 @@ describe('CascadeSelect accessibility', (): void => {
     openPanel();
     press('ArrowRight');
     const nestedListbox: HTMLElement = getListboxes()[1] as HTMLElement;
-    expect(nestedListbox.getAttribute('aria-label')).toBe('Australia');
+    // i18n translates getLevelAriaLabel to "Options for {label}"
+    expect(nestedListbox.getAttribute('aria-label')).toBe('Options for Australia');
   });
 
   it('sets parent option aria-expanded true while sub-list is open', (): void => {
@@ -345,14 +349,14 @@ describe('CascadeSelect accessibility', (): void => {
   });
 
   it('forwards ariaLabel to host', (): void => {
-    fixture.componentInstance.ariaLabel = 'Cascade Label';
+    fixture.componentInstance.ariaLabel.set('Cascade Label');
     fixture.detectChanges();
     expect(cmpEl().getAttribute('aria-label')).toBe('Cascade Label');
   });
 
   it('forwards ariaLabelledBy to host', (): void => {
-    fixture.componentInstance.ariaLabel = null;
-    fixture.componentInstance.ariaLabelledBy = 'external-label';
+    fixture.componentInstance.ariaLabel.set(null);
+    fixture.componentInstance.ariaLabelledBy.set('external-label');
     fixture.detectChanges();
     expect(cmpEl().getAttribute('aria-labelledby')).toBe('external-label');
   });

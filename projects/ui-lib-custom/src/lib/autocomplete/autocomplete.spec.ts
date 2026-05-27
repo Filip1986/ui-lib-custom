@@ -136,6 +136,14 @@ describe('UiLibAutoComplete', (): void => {
     component = fixture.componentInstance;
     fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
+    await fixture.whenStable(); // Pre-load @defer (on immediate) block
+  });
+
+  afterEach((): void => {
+    // Remove any panels teleported to document.body by tests that do not explicitly close them
+    document.body.querySelectorAll('.ui-autocomplete-panel').forEach((el: Element): void => {
+      el.remove();
+    });
   });
 
   function hostEl(): HTMLElement {
@@ -178,7 +186,7 @@ describe('UiLibAutoComplete', (): void => {
           fixture.componentRef.setInput('variant', variant);
           fixture.detectChanges();
           expect(cmpEl().classList.contains(`ui-lib-autocomplete--${variant}`)).toBeTruthy();
-        }
+        },
       );
     });
 
@@ -235,7 +243,7 @@ describe('UiLibAutoComplete', (): void => {
   });
 
   describe('Single Selection Mode', (): void => {
-    it('defaults appendTo to body', (): void => {
+    it('defaults appendTo to body', async (): Promise<void> => {
       const defaultFixture: ComponentFixture<UiLibAutoComplete> =
         TestBed.createComponent(UiLibAutoComplete);
       const defaultComponent: UiLibAutoComplete = defaultFixture.componentInstance;
@@ -247,6 +255,7 @@ describe('UiLibAutoComplete', (): void => {
       defaultFixture.componentRef.setInput('optionLabel', 'label');
       defaultFixture.componentRef.setInput('optionValue', 'value');
       defaultFixture.detectChanges();
+      await defaultFixture.whenStable(); // Pre-load @defer (on immediate) block
 
       defaultComponent.showPanel();
       defaultFixture.detectChanges();
@@ -254,6 +263,11 @@ describe('UiLibAutoComplete', (): void => {
       const panel: HTMLElement | null = document.body.querySelector('.ui-autocomplete-panel');
       expect(panel).toBeTruthy();
       expect(panel?.parentElement).toBe(document.body);
+
+      // Close panel before destroying fixture so the @if block removes the DOM node from body
+      defaultComponent.hidePanel();
+      defaultFixture.detectChanges();
+      defaultFixture.destroy();
     });
 
     it('mounts the suggestions panel on document body when appendTo is body', (): void => {
@@ -278,7 +292,7 @@ describe('UiLibAutoComplete', (): void => {
       const panel: HTMLElement = getRequiredItem(
         Array.from(document.body.querySelectorAll('.ui-autocomplete-panel')),
         0,
-        'body mounted panel'
+        'body mounted panel',
       );
 
       panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -375,7 +389,7 @@ describe('UiLibAutoComplete', (): void => {
       const clearButton: HTMLElement = getRequiredItem(
         Array.from(hostEl().querySelectorAll('.ui-autocomplete-clear')) as HTMLElement[],
         0,
-        'clear button'
+        'clear button',
       );
       clearButton.click();
       fixture.detectChanges();
@@ -445,7 +459,7 @@ describe('UiLibAutoComplete', (): void => {
       const removeButton: HTMLElement = getRequiredItem(
         Array.from(hostEl().querySelectorAll('.ui-autocomplete-chip-remove')) as HTMLElement[],
         0,
-        'chip remove button'
+        'chip remove button',
       );
       removeButton.click();
       fixture.detectChanges();
@@ -518,7 +532,7 @@ describe('UiLibAutoComplete', (): void => {
       const chip: HTMLElement = getRequiredItem(
         Array.from(hostEl().querySelectorAll('.ui-autocomplete-chip')),
         0,
-        'chip'
+        'chip',
       );
       expect(chip.getAttribute('role')).toBeNull(); // chips are token displays, not listbox options
       expect(chip.getAttribute('aria-label')).toBeTruthy();
@@ -634,7 +648,7 @@ describe('UiLibAutoComplete', (): void => {
       fixture.detectChanges();
 
       expect(hostEl().querySelectorAll('.ui-autocomplete-option-group[role="group"]').length).toBe(
-        2
+        2,
       );
       expect(hostEl().querySelectorAll('.ui-autocomplete-option').length).toBe(2);
     });
@@ -650,8 +664,8 @@ describe('UiLibAutoComplete', (): void => {
           (_: unknown, index: number): { label: string; value: number } => ({
             label: `Item ${index}`,
             value: index,
-          })
-        )
+          }),
+        ),
       );
       component.showPanel();
       fixture.detectChanges();
@@ -672,8 +686,8 @@ describe('UiLibAutoComplete', (): void => {
           (_: unknown, index: number): { label: string; value: number } => ({
             label: `Item ${index}`,
             value: index,
-          })
-        )
+          }),
+        ),
       );
       component.showPanel();
       fixture.detectChanges();
@@ -681,26 +695,27 @@ describe('UiLibAutoComplete', (): void => {
       const viewport: HTMLElement = getRequiredItem(
         Array.from(hostEl().querySelectorAll('.ui-autocomplete-virtual-viewport')),
         0,
-        'virtual viewport'
+        'virtual viewport',
       );
       viewport.dispatchEvent(new Event('scroll'));
       component.onVirtualViewportScroll({ target: { scrollTop: 200 } } as unknown as Event);
 
       expect(
-        (component as unknown as { virtualStartIndex: () => number }).virtualStartIndex()
+        (component as unknown as { virtualStartIndex: () => number }).virtualStartIndex(),
       ).toBe(5);
     });
   });
 
   describe('Template Slots', (): void => {
-    it('renders item, selectedItem, group, header, footer, and empty templates', (): void => {
+    it('renders item, selectedItem, group, header, footer, and empty templates', async (): Promise<void> => {
       const hostFixture: ComponentFixture<TemplateSlotsHostComponent> = TestBed.createComponent(
-        TemplateSlotsHostComponent
+        TemplateSlotsHostComponent,
       );
       hostFixture.detectChanges();
+      await hostFixture.whenStable(); // Pre-load @defer (on immediate) block
 
       const ac: UiLibAutoComplete = hostFixture.debugElement.query(
-        (node): boolean => node.componentInstance instanceof UiLibAutoComplete
+        (node): boolean => node.componentInstance instanceof UiLibAutoComplete,
       ).componentInstance as UiLibAutoComplete;
       ac.showPanel();
       hostFixture.detectChanges();
@@ -724,7 +739,7 @@ describe('UiLibAutoComplete', (): void => {
       const groupPanel: HTMLElement = getRequiredItem(
         Array.from(hostFixture.nativeElement.querySelectorAll('.ui-autocomplete-panel')),
         0,
-        'template-slots group panel'
+        'template-slots group panel',
       );
       expect(groupPanel.querySelector('.custom-group')).toBeTruthy();
 
@@ -775,7 +790,7 @@ describe('UiLibAutoComplete', (): void => {
       const listbox: HTMLElement = getRequiredItem(
         Array.from(hostEl().querySelectorAll('.ui-autocomplete-panel')),
         0,
-        'listbox panel'
+        'listbox panel',
       );
       expect(listbox.getAttribute('role')).toBe('listbox');
 
@@ -804,7 +819,7 @@ describe('UiLibAutoComplete', (): void => {
       hostFixture.detectChanges();
 
       const ac: UiLibAutoComplete = hostFixture.debugElement.query(
-        (node): boolean => node.componentInstance instanceof UiLibAutoComplete
+        (node): boolean => node.componentInstance instanceof UiLibAutoComplete,
       ).componentInstance as UiLibAutoComplete;
       ac.selectOption({ label: 'Alpha', value: 'alpha' }, new MouseEvent('click'));
       hostFixture.detectChanges();
@@ -820,10 +835,10 @@ describe('UiLibAutoComplete', (): void => {
       const control: FormControl<string | null> =
         hostFixture.componentInstance.form.controls.choice;
       const acEl: HTMLElement = hostFixture.nativeElement.querySelector(
-        'ui-lib-autocomplete'
+        'ui-lib-autocomplete',
       ) as HTMLElement;
       const acCmp: UiLibAutoComplete = hostFixture.debugElement.query(
-        (node): boolean => node.componentInstance instanceof UiLibAutoComplete
+        (node): boolean => node.componentInstance instanceof UiLibAutoComplete,
       ).componentInstance as UiLibAutoComplete;
 
       acCmp.selectOption({ label: 'Beta', value: 'beta' }, new MouseEvent('click'));
@@ -842,7 +857,7 @@ describe('UiLibAutoComplete', (): void => {
       expect(acEl.classList.contains('ng-invalid')).toBeTruthy();
 
       const input: HTMLInputElement = hostFixture.nativeElement.querySelector(
-        'input.ui-autocomplete-input'
+        'input.ui-autocomplete-input',
       );
       input.dispatchEvent(new FocusEvent('blur'));
       hostFixture.detectChanges();

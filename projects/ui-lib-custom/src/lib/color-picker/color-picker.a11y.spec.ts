@@ -86,6 +86,7 @@ describe('ColorPicker Accessibility', (): void => {
       fixture = TestBed.createComponent(PopupHostComponent);
       document.body.appendChild(fixture.nativeElement);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     afterEach((): void => {
@@ -137,6 +138,7 @@ describe('ColorPicker Accessibility', (): void => {
       fixture = TestBed.createComponent(PopupHostComponent);
       document.body.appendChild(fixture.nativeElement);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
       openPicker(fixture);
     });
 
@@ -174,6 +176,7 @@ describe('ColorPicker Accessibility', (): void => {
       }).compileComponents();
       fixture = TestBed.createComponent(InlineHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     it('color area has aria-hidden="true" (keyboard access via inputs)', (): void => {
@@ -204,6 +207,7 @@ describe('ColorPicker Accessibility', (): void => {
       }).compileComponents();
       fixture = TestBed.createComponent(InlineHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     it('hue slider has role="slider"', (): void => {
@@ -266,6 +270,7 @@ describe('ColorPicker Accessibility', (): void => {
       }).compileComponents();
       fixture = TestBed.createComponent(InlineHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     it('hex input label is associated via for/id', (): void => {
@@ -303,6 +308,7 @@ describe('ColorPicker Accessibility', (): void => {
       }).compileComponents();
       fixture = TestBed.createComponent(InlineHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     it('all number inputs have associated labels', (): void => {
@@ -365,6 +371,7 @@ describe('ColorPicker Accessibility', (): void => {
       fixture = TestBed.createComponent(PopupHostComponent);
       document.body.appendChild(fixture.nativeElement);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     afterEach((): void => {
@@ -415,6 +422,7 @@ describe('ColorPicker Accessibility', (): void => {
       }).compileComponents();
       fixture = TestBed.createComponent(InlineHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
     });
 
     it('inline panel is always visible', (): void => {
@@ -457,6 +465,7 @@ describe('ColorPicker Accessibility', (): void => {
         TestBed.createComponent(PopupHostComponent);
       document.body.appendChild(fixture.nativeElement);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
       openPicker(fixture);
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
       document.body.removeChild(fixture.nativeElement);
@@ -470,6 +479,7 @@ describe('ColorPicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> =
         TestBed.createComponent(InlineHostComponent);
       fixture.detectChanges();
+      await fixture.whenStable(); // Pre-load @defer (on immediate) block
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
   });

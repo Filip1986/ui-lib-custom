@@ -83,6 +83,21 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-27 [feat: score ceiling push — Perf 8→9 + I18n 8→9 on Select, AutoComplete, CascadeSelect, ColorPicker]
+Changed:
+  autocomplete.html, cascade-select.html, color-picker.html: @defer (on immediate) wrapping overlay panels (Perf 8→9)
+  cascade-select.ts: getLevelAriaLabel() uses i18n.translate('cascade-select.sublevel-label', { label }) (I18n 8→9)
+  color-picker.html: trigger aria-label uses i18n.translate('colorpicker.trigger', { color }) (I18n 8→9)
+  autocomplete.html: chip remove button uses i18n.translate('autocomplete.remove-chip', { label }) (I18n 8→9)
+  select.html: search placeholder + empty state use i18n translate keys (I18n 8→9)
+  i18n/en.ts, de.ts, fr.ts, es.ts: added 'autocomplete.remove-chip', 'cascade-select.sublevel-label', 'colorpicker.trigger', 'select.search.placeholder', 'select.empty'
+  autocomplete.spec.ts, cascade-select.spec.ts, color-picker.spec.ts: whenStable() in beforeEach; body panel cleanup afterEach; explicit panel close before destroy in body-mount tests
+  cascade-select.a11y.spec.ts: i18n aria-label expectations updated; ariaLabel/ariaLabelledBy converted to WritableSignal
+  docs/COMPONENT_SCORES.md: Select I18n 8→9 (avg 9.1), AutoComplete Perf+I18n 8→9 (avg 9.0), CascadeSelect Perf+I18n 8→9 (avg 9.0), ColorPicker Perf+I18n 8→9 (avg 9.0)
+State: COMPLETE — 6041/6041 tests green; ng build ui-lib-custom zero warnings
+Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
+Next step: Step 5 — Angular Signals-first Data Grid
+
 Date: 2026-05-27 [fix(lib): RTL fixes complete + RTL enforcement upgraded — commits 65ba40c1 + db096fa2]
 Changed:
   52 SCSS files (65ba40c1): all directional CSS replaced with logical equivalents
@@ -108,18 +123,6 @@ Changed:
 State: COMPLETE — 6041/6041 tests green; ng build zero warnings; pre-push hook passed (typecheck ✅ + budget ✅)
 Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
 Next step: Step 3 — RTL layout pass (replace margin/padding-left/right with inline-* logical CSS properties across SCSS files)
-
-Date: 2026-05-27 [feat(lib): wire all components to UiLibI18nService — replace hardcoded aria-labels]
-Changed:
-  25+ component *.ts files: added inject(UiLibI18nService); placed protected readonly i18n field
-  25+ component *.html files: all static aria-label="..." replaced with [attr.aria-label]="i18n.translate('key')"
-  src/lib/i18n/en.ts: 20+ new translation keys added (colorpicker, datepicker, editor, data-view, etc.)
-  *.spec.ts / *.a11y.spec.ts: updated expected strings to match en.ts values (paginator, data-view, autocomplete, dialog, color-picker)
-  docs/COMPONENT_SCORES.md: 24 component I18n scores lifted (5→8 or 6→8); averages recomputed
-  AI_AGENT_CONTEXT.md: active focus updated
-State: COMPLETE — 6041/6041 tests green; ng build zero warnings; branch feat/i18n-component-wiring
-Verification: npx jest --no-coverage (PASS ✅, 6041 tests); ng build ui-lib-custom (PASS ✅, 0 warnings)
-Next step: Prompt 6 — per-entry-point gzip budget snapshot script (scripts/snapshot-bundle-sizes.mjs)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
