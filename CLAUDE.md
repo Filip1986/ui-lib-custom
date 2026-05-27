@@ -1,6 +1,9 @@
 # Working Instructions for ui-lib-custom
 
 > Auto-generated from project documentation. This is the stable reference for AI-assisted sessions on this project.
+>
+> **Legacy — migrating to `platform/libs/ui`.** For workspace context read `operator-hq:WORKSPACE.md`
+> (SenseAtlas) and `operator-hq:AI_AGENT_CONTEXT.md` before cross-repo work.
 
 ---
 
