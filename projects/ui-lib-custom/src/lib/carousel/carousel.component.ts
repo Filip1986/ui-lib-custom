@@ -478,12 +478,15 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   /** ARIA label for a numbered slide — `"Slide N of M"`. */
   public ariaSlideNumber(index: number): string {
-    return `Slide ${index + 1} of ${this.totalSlides()}`;
+    return this.i18n.translate('carousel.slide.status', {
+      current: index + 1,
+      total: this.totalSlides(),
+    });
   }
 
   /** ARIA label for a numbered indicator dot. */
   public ariaPageLabel(page: number): string {
-    return `Go to slide ${page + 1}`;
+    return this.i18n.translate('carousel.indicator', { n: page + 1 });
   }
 
   /** Whether orientation is vertical — used in template and SCSS helpers. */

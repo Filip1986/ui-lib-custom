@@ -1,201 +1,201 @@
 import type { UiLibTranslationBundle } from './i18n.types';
 
-/** Default English translation bundle. Keys follow the pattern: `<component>.<token>`. */
-export const UI_LIB_EN: UiLibTranslationBundle = {
+/** French (Français) translation bundle. */
+export const UI_LIB_FR: UiLibTranslationBundle = {
   // ── Global ────────────────────────────────────────────────────────────────
-  'global.close': 'Close',
-  'global.clear': 'Clear',
-  'global.search': 'Search',
-  'global.loading': 'Loading',
-  'global.empty': 'No results found',
-  'global.error': 'An error occurred',
-  'global.required': 'Required',
-  'global.optional': 'Optional',
+  'global.close': 'Fermer',
+  'global.clear': 'Effacer',
+  'global.search': 'Rechercher',
+  'global.loading': 'Chargement',
+  'global.empty': 'Aucun résultat trouvé',
+  'global.error': "Une erreur s'est produite",
+  'global.required': 'Requis',
+  'global.optional': 'Optionnel',
 
   // ── Select / Autocomplete / Listbox ───────────────────────────────────────
-  'select.placeholder': 'Select an option',
-  'select.clear': 'Clear selection',
-  'select.toggle': 'Toggle dropdown',
-  'select.empty': 'No options available',
-  'select.search.placeholder': 'Search options',
-  'select.search.aria': 'Search options',
-  'select.selected.count': '{count} items selected',
+  'select.placeholder': 'Sélectionner une option',
+  'select.clear': 'Effacer la sélection',
+  'select.toggle': 'Basculer le menu déroulant',
+  'select.empty': 'Aucune option disponible',
+  'select.search.placeholder': 'Rechercher des options',
+  'select.search.aria': 'Rechercher des options',
+  'select.selected.count': '{count} éléments sélectionnés',
 
   // ── AutoComplete ──────────────────────────────────────────────────────────
-  'autocomplete.chips-label': 'Selected items',
-  'autocomplete.clear': 'Clear',
+  'autocomplete.chips-label': 'Éléments sélectionnés',
+  'autocomplete.clear': 'Effacer',
 
   // ── CascadeSelect ─────────────────────────────────────────────────────────
-  'cascade-select.clear': 'Clear selection',
+  'cascade-select.clear': 'Effacer la sélection',
 
   // ── Listbox ───────────────────────────────────────────────────────────────
-  'listbox.select-all': 'Select all options',
+  'listbox.select-all': 'Sélectionner toutes les options',
 
   // ── DatePicker ────────────────────────────────────────────────────────────
-  'datepicker.toggle': 'Open calendar',
-  'datepicker.prev.month': 'Previous month',
-  'datepicker.next.month': 'Next month',
-  'datepicker.prev.year': 'Previous year',
-  'datepicker.next.year': 'Next year',
-  'datepicker.prev.decade': 'Previous decade',
-  'datepicker.next.decade': 'Next decade',
-  'datepicker.today': 'Today',
-  'datepicker.clear': 'Clear date',
-  'datepicker.month-picker': 'Month picker',
-  'datepicker.year-picker': 'Year picker',
-  'datepicker.time-panel': 'Time picker',
-  'datepicker.time.hour': 'Hour',
+  'datepicker.toggle': 'Ouvrir le calendrier',
+  'datepicker.prev.month': 'Mois précédent',
+  'datepicker.next.month': 'Mois suivant',
+  'datepicker.prev.year': 'Année précédente',
+  'datepicker.next.year': 'Année suivante',
+  'datepicker.prev.decade': 'Décennie précédente',
+  'datepicker.next.decade': 'Décennie suivante',
+  'datepicker.today': "Aujourd'hui",
+  'datepicker.clear': 'Effacer la date',
+  'datepicker.month-picker': 'Sélecteur de mois',
+  'datepicker.year-picker': "Sélecteur d'année",
+  'datepicker.time-panel': "Sélecteur d'heure",
+  'datepicker.time.hour': 'Heure',
   'datepicker.time.minute': 'Minute',
-  'datepicker.time.second': 'Second',
-  'datepicker.time.inc.hour': 'Increase hour',
-  'datepicker.time.dec.hour': 'Decrease hour',
-  'datepicker.time.inc.minute': 'Increase minute',
-  'datepicker.time.dec.minute': 'Decrease minute',
-  'datepicker.time.inc.second': 'Increase second',
-  'datepicker.time.dec.second': 'Decrease second',
+  'datepicker.time.second': 'Seconde',
+  'datepicker.time.inc.hour': "Augmenter l'heure",
+  'datepicker.time.dec.hour': "Diminuer l'heure",
+  'datepicker.time.inc.minute': 'Augmenter la minute',
+  'datepicker.time.dec.minute': 'Diminuer la minute',
+  'datepicker.time.inc.second': 'Augmenter la seconde',
+  'datepicker.time.dec.second': 'Diminuer la seconde',
 
   // ── Dialog / Drawer / BottomSheet / Popover / ConfirmDialog / DynamicDialog
-  'dialog.close': 'Close dialog',
-  'drawer.close': 'Close',
-  'bottom-sheet.close': 'Close',
-  'popover.close': 'Close',
-  'confirm-dialog.close': 'Close',
-  'dynamic-dialog.close': 'Close',
-  'message.close': 'Close message',
-  'panel.toggle': 'Toggle panel',
+  'dialog.close': 'Fermer la boîte de dialogue',
+  'drawer.close': 'Fermer',
+  'bottom-sheet.close': 'Fermer',
+  'popover.close': 'Fermer',
+  'confirm-dialog.close': 'Fermer',
+  'dynamic-dialog.close': 'Fermer',
+  'message.close': 'Fermer le message',
+  'panel.toggle': 'Basculer le panneau',
 
   // ── Paginator ─────────────────────────────────────────────────────────────
-  'paginator.first': 'First page',
-  'paginator.prev': 'Previous page',
-  'paginator.next': 'Next page',
-  'paginator.last': 'Last page',
-  'paginator.rows.label': 'Rows per page',
-  'paginator.page.report': 'Page {currentPage} of {totalPages}',
-  'paginator.jump': 'Jump to page, press Enter to navigate',
+  'paginator.first': 'Première page',
+  'paginator.prev': 'Page précédente',
+  'paginator.next': 'Page suivante',
+  'paginator.last': 'Dernière page',
+  'paginator.rows.label': 'Lignes par page',
+  'paginator.page.report': 'Page {currentPage} sur {totalPages}',
+  'paginator.jump': 'Aller à la page, appuyer sur Entrée pour naviguer',
   'paginator.nav': 'Pagination',
 
   // ── Upload ────────────────────────────────────────────────────────────────
-  'upload.drop.hint': 'Drag and drop files here, or click to browse',
-  'upload.remove': 'Remove file',
-  'upload.browse': 'Browse files',
+  'upload.drop.hint': 'Glisser-déposer des fichiers ici ou cliquer pour parcourir',
+  'upload.remove': 'Supprimer le fichier',
+  'upload.browse': 'Parcourir les fichiers',
 
   // ── Rating ────────────────────────────────────────────────────────────────
-  'rating.label': 'Rating: {value} out of {max}',
-  'rating.star': 'Star {n}',
+  'rating.label': 'Note : {value} sur {max}',
+  'rating.star': 'Étoile {n}',
 
   // ── Table ─────────────────────────────────────────────────────────────────
-  'table.sort.asc': 'Sort ascending',
-  'table.sort.desc': 'Sort descending',
-  'table.sort.none': 'No sort applied',
+  'table.sort.asc': 'Trier par ordre croissant',
+  'table.sort.desc': 'Trier par ordre décroissant',
+  'table.sort.none': 'Aucun tri appliqué',
 
   // ── Tree ──────────────────────────────────────────────────────────────────
-  'tree.expand': 'Expand node',
-  'tree.collapse': 'Collapse node',
+  'tree.expand': 'Développer le nœud',
+  'tree.collapse': 'Réduire le nœud',
 
   // ── ColorPicker ───────────────────────────────────────────────────────────
-  'colorpicker.toggle': 'Open color picker',
-  'colorpicker.panel': 'Color picker',
-  'colorpicker.hue': 'Hue slider',
-  'colorpicker.hex.input': 'Hex color value',
-  'colorpicker.red.input': 'Red channel',
-  'colorpicker.green.input': 'Green channel',
-  'colorpicker.blue.input': 'Blue channel',
-  'colorpicker.alpha.input': 'Alpha channel',
+  'colorpicker.toggle': 'Ouvrir le sélecteur de couleur',
+  'colorpicker.panel': 'Sélecteur de couleur',
+  'colorpicker.hue': 'Curseur de teinte',
+  'colorpicker.hex.input': 'Valeur hexadécimale de couleur',
+  'colorpicker.red.input': 'Canal rouge',
+  'colorpicker.green.input': 'Canal vert',
+  'colorpicker.blue.input': 'Canal bleu',
+  'colorpicker.alpha.input': 'Canal alpha',
 
   // ── ProgressBar ───────────────────────────────────────────────────────────
-  'progressbar.label': '{value}% complete',
+  'progressbar.label': '{value}% terminé',
 
   // ── Carousel / Galleria ───────────────────────────────────────────────────
-  'carousel.prev': 'Previous slide',
-  'carousel.next': 'Next slide',
-  'carousel.indicator': 'Go to slide {n}',
-  'carousel.slide.status': 'Slide {current} of {total}',
-  'carousel.region': 'Carousel',
-  'carousel.indicators-label': 'Slide indicators',
+  'carousel.prev': 'Diapositive précédente',
+  'carousel.next': 'Diapositive suivante',
+  'carousel.indicator': 'Aller à la diapositive {n}',
+  'carousel.slide.status': 'Diapositive {current} sur {total}',
+  'carousel.region': 'Carrousel',
+  'carousel.indicators-label': 'Indicateurs de diapositive',
 
   // ── OrderList / PickList ──────────────────────────────────────────────────
-  'orderlist.move.up': 'Move up',
-  'orderlist.move.down': 'Move down',
-  'orderlist.move.top': 'Move to top',
-  'orderlist.move.bottom': 'Move to bottom',
-  'picklist.add': 'Add to list',
-  'picklist.remove': 'Remove from list',
-  'picklist.add.all': 'Add all',
-  'picklist.remove.all': 'Remove all',
+  'orderlist.move.up': 'Déplacer vers le haut',
+  'orderlist.move.down': 'Déplacer vers le bas',
+  'orderlist.move.top': 'Déplacer vers le début',
+  'orderlist.move.bottom': 'Déplacer vers la fin',
+  'picklist.add': 'Ajouter à la liste',
+  'picklist.remove': 'Supprimer de la liste',
+  'picklist.add.all': 'Tout ajouter',
+  'picklist.remove.all': 'Tout supprimer',
 
   // ── Toast ─────────────────────────────────────────────────────────────────
-  'toast.close': 'Close notification',
+  'toast.close': 'Fermer la notification',
 
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
-  'chip.remove': 'Remove {label}',
-  'autocomplete.dropdown': 'Show suggestions',
+  'chip.remove': 'Supprimer {label}',
+  'autocomplete.dropdown': 'Afficher les suggestions',
 
   // ── Paginator (dynamic) ───────────────────────────────────────────────────
-  'paginator.empty': 'No pages available',
-  'paginator.page.current': 'Page {page}, current page',
-  'paginator.page.go': 'Go to page {page}',
+  'paginator.empty': 'Aucune page disponible',
+  'paginator.page.current': 'Page {page}, page actuelle',
+  'paginator.page.go': 'Aller à la page {page}',
 
   // ── DataView (dynamic) ────────────────────────────────────────────────────
-  'data-view.go.page': 'Go to page {page}',
+  'data-view.go.page': 'Aller à la page {page}',
 
   // ── Meter Group (dynamic) ─────────────────────────────────────────────────
   'meter-group.segment.default': 'Segment {index}',
-  'meter-group.segment': '{label}: {value} of {max}',
+  'meter-group.segment': '{label} : {value} sur {max}',
 
-  // ── Rating ────────────────────────────────────────────────────────────────
-  'rating.value': 'Rating: {current} out of {total} stars',
-  'rating.star.singular': '{star} star out of {total}',
-  'rating.star.plural': '{star} stars out of {total}',
+  // ── Rating (dynamic) ─────────────────────────────────────────────────────
+  'rating.value': 'Note : {current} sur {total} étoiles',
+  'rating.star.singular': '{star} étoile sur {total}',
+  'rating.star.plural': '{star} étoiles sur {total}',
 
   // ── Tree Select (dynamic) ─────────────────────────────────────────────────
-  'tree-select.options': 'Select options',
-  'tree-select.none-selected': 'No item selected',
-  'tree-select.selected.one': '{label} selected',
-  'tree-select.selected.count': '{count} items selected',
+  'tree-select.options': 'Sélectionner des options',
+  'tree-select.none-selected': 'Aucun élément sélectionné',
+  'tree-select.selected.one': '{label} sélectionné',
+  'tree-select.selected.count': '{count} éléments sélectionnés',
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
-  'table.expand-row': 'Row expansion',
-  'table.select-all': 'Select all rows',
-  'tree-table.filter': 'Filter table',
-  'tree-table.select-row': 'Select row',
-  'tree-table.select-all': 'Select all rows',
+  'table.expand-row': 'Expansion de ligne',
+  'table.select-all': 'Sélectionner toutes les lignes',
+  'tree-table.filter': 'Filtrer le tableau',
+  'tree-table.select-row': 'Sélectionner la ligne',
+  'tree-table.select-all': 'Sélectionner toutes les lignes',
 
   // ── Tabs ──────────────────────────────────────────────────────────────────
-  'tabs.close': 'Close tab',
+  'tabs.close': "Fermer l'onglet",
 
   // ── Menubar ───────────────────────────────────────────────────────────────
-  'menubar.toggle': 'Toggle navigation menu',
+  'menubar.toggle': 'Basculer le menu de navigation',
 
   // ── Input ─────────────────────────────────────────────────────────────────
-  'input.clear': 'Clear input',
-  'input.password-toggle': 'Toggle password visibility',
-  'input-mask.clear': 'Clear',
-  'password.clear': 'Clear password',
+  'input.clear': 'Effacer la saisie',
+  'input.password-toggle': 'Basculer la visibilité du mot de passe',
+  'input-mask.clear': 'Effacer',
+  'password.clear': 'Effacer le mot de passe',
 
   // ── Meter Group ───────────────────────────────────────────────────────────
-  'meter-group.legend': 'Legend',
+  'meter-group.legend': 'Légende',
 
   // ── Terminal ──────────────────────────────────────────────────────────────
-  'terminal.input': 'Terminal command input',
-  'terminal.output': 'Terminal output',
+  'terminal.input': 'Saisie de commande du terminal',
+  'terminal.output': 'Sortie du terminal',
 
   // ── Tree ──────────────────────────────────────────────────────────────────
-  'tree.filter-placeholder': 'Filter tree nodes',
-  'tree-select.clear': 'Clear selection',
+  'tree.filter-placeholder': "Filtrer les nœuds de l'arbre",
+  'tree-select.clear': 'Effacer la sélection',
 
   // ── Upload ────────────────────────────────────────────────────────────────
-  'upload.area': 'File upload area',
-  'upload.toolbar': 'Upload actions',
-  'upload.files-list': 'Files to upload',
-  'upload.dismiss': 'Dismiss validation messages',
+  'upload.area': 'Zone de téléchargement de fichiers',
+  'upload.toolbar': 'Actions de téléchargement',
+  'upload.files-list': 'Fichiers à télécharger',
+  'upload.dismiss': 'Fermer les messages de validation',
 
   // ── Image ─────────────────────────────────────────────────────────────────
-  'image.controls': 'Image controls',
+  'image.controls': "Commandes d'image",
 
   // ── DataView ─────────────────────────────────────────────────────────────
   'data-view.pagination': 'Pagination',
-  'data-view.view-mode': 'View mode',
+  'data-view.view-mode': "Mode d'affichage",
 
   // ── Editor ────────────────────────────────────────────────────────────────
-  'editor.toolbar': 'Formatting options',
+  'editor.toolbar': 'Options de formatage',
 };

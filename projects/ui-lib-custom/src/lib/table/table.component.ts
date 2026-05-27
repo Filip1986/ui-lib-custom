@@ -549,10 +549,13 @@ export class TableComponent {
 
     const pageCount: number = this.pageCount();
     if (pageCount === 0) {
-      return 'No pages available';
+      return this.i18n.translate('paginator.empty');
     }
 
-    return `Page ${this.currentPage() + 1} of ${pageCount}`;
+    return this.i18n.translate('paginator.page.report', {
+      currentPage: this.currentPage() + 1,
+      totalPages: pageCount,
+    });
   });
 
   /** Normalized roving-focus target clamped to the currently rendered grid bounds. */

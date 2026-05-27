@@ -204,16 +204,19 @@ export class PaginatorComponent {
   public readonly pageAnnouncement: Signal<string> = computed<string>((): string => {
     const count: number = this.pageCount();
     if (count === 0) {
-      return 'No pages available';
+      return this.i18n.translate('paginator.empty');
     }
-    return `Page ${this.currentPage() + 1} of ${count}`;
+    return this.i18n.translate('paginator.page.report', {
+      currentPage: this.currentPage() + 1,
+      totalPages: count,
+    });
   });
 
   /** Accessible label for a numbered page-link button. */
   public getPageLinkAriaLabel(pageLink: number): string {
     return pageLink - 1 === this.currentPage()
-      ? `Page ${pageLink}, current page`
-      : `Go to page ${pageLink}`;
+      ? this.i18n.translate('paginator.page.current', { page: pageLink })
+      : this.i18n.translate('paginator.page.go', { page: pageLink });
   }
 
   // ── Page navigation ────────────────────────────────────────────────────────

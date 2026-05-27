@@ -165,7 +165,13 @@ export class MeterGroup {
 
   /** Returns an aria-label for a segment including value and range context. */
   public getSegmentAriaLabel(segment: MeterSegment, index: number): string {
-    const label: string = segment.label.trim() || `Segment ${index + 1}`;
-    return `${label}: ${segment.value} of ${this.max()}`;
+    const label: string =
+      segment.label.trim() ||
+      this.i18n.translate('meter-group.segment.default', { index: index + 1 });
+    return this.i18n.translate('meter-group.segment', {
+      label,
+      value: segment.value,
+      max: this.max(),
+    });
   }
 }

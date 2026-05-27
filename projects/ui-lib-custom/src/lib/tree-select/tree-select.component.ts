@@ -267,7 +267,7 @@ export class TreeSelect implements ControlValueAccessor {
     if (Array.isArray(sel)) {
       if (sel.length === 0) return '';
       if (sel.length === 1) return sel[0]?.label ?? '';
-      return `${sel.length} items selected`;
+      return this.i18n.translate('tree-select.selected.count', { count: sel.length });
     }
 
     return (sel as TreeNode).label ?? '';
@@ -280,28 +280,32 @@ export class TreeSelect implements ControlValueAccessor {
     }
 
     const placeholder: string = this.placeholder().trim();
-    return placeholder || 'Tree select options';
+    return placeholder || this.i18n.translate('tree-select.options');
   });
 
   public readonly selectionAnnouncement: Signal<string> = computed<string>((): string => {
     const selection: TreeNode | TreeNode[] | null = this.selection();
     if (selection === null) {
-      return 'No item selected';
+      return this.i18n.translate('tree-select.none-selected');
     }
 
     if (Array.isArray(selection)) {
       if (selection.length === 0) {
-        return 'No item selected';
+        return this.i18n.translate('tree-select.none-selected');
       }
 
       if (selection.length === 1) {
-        return `${selection[0]?.label ?? 'Item'} selected`;
+        return this.i18n.translate('tree-select.selected.one', {
+          label: selection[0]?.label ?? 'Item',
+        });
       }
 
-      return `${selection.length} items selected`;
+      return this.i18n.translate('tree-select.selected.count', { count: selection.length });
     }
 
-    return `${selection.label ?? 'Item'} selected`;
+    return this.i18n.translate('tree-select.selected.one', {
+      label: (selection as TreeNode).label ?? 'Item',
+    });
   });
 
   // ─── ControlValueAccessor ─────────────────────────────────────────────────
