@@ -14,7 +14,7 @@
     justify-content: center;
     min-width: var(--uilib-avatar-size-md, 2.5rem);
     height: var(--uilib-avatar-size-md, 2.5rem);
-    margin-left: var(--uilib-avatar-group-overlap, -0.75rem);
+    margin-inline-start: var(--uilib-avatar-group-overlap, -0.75rem);
     padding: 0 0.5rem;
     border-radius: 999px;
     background: var(--uilib-avatar-group-overflow-bg, var(--uilib-color-neutral-200, #e5e7eb));
@@ -23,7 +23,7 @@
     font-weight: 600;
   }
   .ui-lib-avatar-group ui-lib-avatar + ui-lib-avatar {
-    margin-left: var(--uilib-avatar-group-overlap, -0.75rem);
+    margin-inline-start: var(--uilib-avatar-group-overlap, -0.75rem);
   }
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-avatar-group,

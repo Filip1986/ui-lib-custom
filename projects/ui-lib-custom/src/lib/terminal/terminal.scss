@@ -104,7 +104,7 @@
 
     &__response {
       color: var(--uilib-terminal-response-color);
-      padding-left: var(--uilib-terminal-response-indent);
+      padding-inline-start: var(--uilib-terminal-response-indent);
       white-space: pre-wrap;
       word-break: break-all;
       margin-top: 0.125rem;

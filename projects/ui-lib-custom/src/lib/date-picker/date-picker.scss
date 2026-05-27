@@ -239,7 +239,7 @@
   .ui-lib-datepicker__panel {
     position: absolute;
     top: calc(100% + var(--uilib-space-2, 0.5rem));
-    left: 0;
+    inset-inline-start: 0;
     min-width: 18rem;
     max-height: var(--uilib-datepicker-panel-max-height, 28rem);
     overflow: auto;
@@ -254,7 +254,7 @@
 
   .ui-lib-datepicker__panel.ui-lib-datepicker__panel--overlay {
     top: auto;
-    left: auto;
+    inset-inline-start: auto;
   }
 
   ui-lib-date-picker.ui-lib-datepicker.ui-lib-datepicker--inline .ui-lib-datepicker__panel {

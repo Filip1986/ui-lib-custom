@@ -137,7 +137,7 @@
   ui-lib-split-button .ui-lib-split-button__menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    inset-inline-start: 0;
     min-width: 100%;
     list-style: none;
     margin: var(--uilib-space-1, 0.25rem) 0 0;

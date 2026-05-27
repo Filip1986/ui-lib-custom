@@ -30,11 +30,8 @@
 
     // Transition
     --uilib-carousel-transition: 500ms ease;
-  }
 
-  // ─── Root layout ──────────────────────────────────────────────────────────────
-
-  .uilib-carousel {
+    // ─── Root layout ────────────────────────────────────────────────────────────
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -77,11 +74,11 @@
   }
 
   .uilib-carousel-item:first-child {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   .uilib-carousel-item:last-child {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   // ─── Vertical layout overrides ────────────────────────────────────────────────

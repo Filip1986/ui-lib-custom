@@ -257,12 +257,12 @@
 
   ui-lib-tabs .ui-lib-tabs.ui-lib-tabs--orientation-horizontal .ui-lib-tabs__indicator {
     bottom: var(--uilib-tabs-indicator-offset-resolved);
-    left: 0;
+    inset-inline-start: 0;
     height: var(--uilib-tabs-indicator-height-resolved);
   }
 
   ui-lib-tabs .ui-lib-tabs.ui-lib-tabs--orientation-vertical .ui-lib-tabs__indicator {
-    right: var(--uilib-tabs-indicator-offset-resolved);
+    inset-inline-end: var(--uilib-tabs-indicator-offset-resolved);
     top: 0;
     width: var(--uilib-tabs-indicator-height-resolved);
   }
@@ -270,8 +270,8 @@
   ui-lib-tabs.ui-lib-tabs--rtl,
   .ui-lib-tabs.ui-lib-tabs--orientation-horizontal,
   .ui-lib-tabs__indicator {
-    left: auto;
-    right: 0;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
   }
 
   ui-lib-tabs.ui-lib-tabs--rtl .ui-lib-tabs__scroll--prev,
@@ -338,7 +338,7 @@
   .ui-lib-tabs__trigger {
     border-bottom: var(--uilib-tabs-border-width-resolved) var(--uilib-tabs-border-style-resolved)
       var(--uilib-tab-border-resolved);
-    border-right: none;
+    border-inline-end: none;
     border-radius: var(--uilib-tab-radius-resolved) 0 0 var(--uilib-tab-radius-resolved);
   }
 
@@ -377,8 +377,8 @@
     grid-area: list;
     flex-direction: column;
     border-bottom: none;
-    border-right: var(--uilib-tabs-border-width-resolved) var(--uilib-tabs-border-style-resolved)
-      var(--uilib-tabs-border-resolved);
+    border-inline-end: var(--uilib-tabs-border-width-resolved)
+      var(--uilib-tabs-border-style-resolved) var(--uilib-tabs-border-resolved);
   }
 
   ui-lib-tabs[data-orientation='vertical'] .ui-lib-tabs__panels {

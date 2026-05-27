@@ -87,17 +87,17 @@
   }
 
   ui-lib-select-button .ui-lib-select-button__item:first-child .ui-lib-button {
-    border-top-left-radius: var(--uilib-shape-base, 6px);
-    border-bottom-left-radius: var(--uilib-shape-base, 6px);
+    border-start-start-radius: var(--uilib-shape-base, 6px);
+    border-end-start-radius: var(--uilib-shape-base, 6px);
   }
 
   ui-lib-select-button .ui-lib-select-button__item:last-child .ui-lib-button {
-    border-top-right-radius: var(--uilib-shape-base, 6px);
-    border-bottom-right-radius: var(--uilib-shape-base, 6px);
+    border-start-end-radius: var(--uilib-shape-base, 6px);
+    border-end-end-radius: var(--uilib-shape-base, 6px);
   }
 
   ui-lib-select-button .ui-lib-select-button__item:not(:first-child) .ui-lib-button {
-    margin-left: -1px;
+    margin-inline-start: -1px;
   }
 
   ui-lib-select-button.ui-lib-select-button--material {

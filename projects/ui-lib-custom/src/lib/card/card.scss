@@ -1,5 +1,7 @@
 @layer uilib.components {
   ui-lib-card {
+    --uilib-card-media-title-font-size: 1.125rem;
+    --uilib-card-media-subtitle-font-size: 0.95rem;
     --uilib-card-header-padding-y-base: 0.75rem;
     --uilib-card-header-padding-x-base: 1rem;
     --uilib-card-body-padding-base: 1rem;
@@ -57,13 +59,13 @@
 
     &__title {
       font-weight: 600;
-      font-size: 1.125rem;
+      font-size: var(--uilib-card-media-title-font-size);
       line-height: 1.4;
       color: var(--uilib-card-text-color, inherit);
     }
 
     &__subtitle {
-      font-size: 0.95rem;
+      font-size: var(--uilib-card-media-subtitle-font-size);
       color: var(--uilib-muted, var(--uilib-color-neutral-600));
       line-height: 1.4;
     }
@@ -181,8 +183,8 @@
         &::after {
           content: '';
           position: absolute;
-          left: var(--uilib-space-4);
-          right: var(--uilib-space-4);
+          inset-inline-start: var(--uilib-space-4);
+          inset-inline-end: var(--uilib-space-4);
           bottom: 0;
           height: 1px;
           background: var(--uilib-card-border, var(--uilib-border, currentColor));
@@ -196,8 +198,8 @@
         &::before {
           content: '';
           position: absolute;
-          left: var(--uilib-space-4);
-          right: var(--uilib-space-4);
+          inset-inline-start: var(--uilib-space-4);
+          inset-inline-end: var(--uilib-space-4);
           top: 0;
           height: 1px;
           background: var(--uilib-card-border, var(--uilib-border, currentColor));

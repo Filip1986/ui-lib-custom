@@ -14,6 +14,7 @@
     --uilib-galleria-thumbnail-size-sm: 3rem;
     --uilib-galleria-thumbnail-size-md: 4rem;
     --uilib-galleria-thumbnail-size-lg: 5.5rem;
+    --uilib-galleria-thumbnail-index-font-size: var(--uilib-font-size-xs, 0.75rem);
 
     // Nav arrows
     --uilib-galleria-nav-bg: rgba(0, 0, 0, 0.45);
@@ -152,11 +153,11 @@
     }
 
     &--prev {
-      left: var(--uilib-galleria-nav-offset);
+      inset-inline-start: var(--uilib-galleria-nav-offset);
     }
 
     &--next {
-      right: var(--uilib-galleria-nav-offset);
+      inset-inline-end: var(--uilib-galleria-nav-offset);
     }
 
     &--disabled,
@@ -178,8 +179,8 @@
   .uilib-galleria__caption {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
     background: var(--uilib-galleria-caption-bg);
     color: var(--uilib-galleria-caption-color);
     padding: var(--uilib-galleria-caption-padding);
@@ -198,8 +199,8 @@
     &--on-item {
       position: absolute;
       bottom: 0;
-      left: 0;
-      right: 0;
+      inset-inline-start: 0;
+      inset-inline-end: 0;
       background: transparent;
       padding: 0.4rem;
     }
@@ -315,7 +316,7 @@
     justify-content: center;
     width: var(--uilib-galleria-thumbnail-size-md);
     height: var(--uilib-galleria-thumbnail-size-md);
-    font-size: 0.75rem;
+    font-size: var(--uilib-galleria-thumbnail-index-font-size);
     color: var(--uilib-page-text-muted, #9ca3af);
   }
 
@@ -376,7 +377,7 @@
   .uilib-galleria__fullscreen-btn {
     position: absolute;
     top: 0.5rem;
-    right: 0.5rem;
+    inset-inline-end: 0.5rem;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -426,7 +427,7 @@
   .uilib-galleria__close-btn {
     position: absolute;
     top: 0.75rem;
-    right: 0.75rem;
+    inset-inline-end: 0.75rem;
     z-index: 3;
     display: flex;
     align-items: center;
@@ -475,12 +476,12 @@
     }
 
     .uilib-galleria__item-nav--prev {
-      left: 0;
+      inset-inline-start: 0;
       border-radius: 0 2px 2px 0;
     }
 
     .uilib-galleria__item-nav--next {
-      right: 0;
+      inset-inline-end: 0;
       border-radius: 2px 0 0 2px;
     }
   }

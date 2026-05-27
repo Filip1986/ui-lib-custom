@@ -21,6 +21,7 @@
     --uilib-toast-item-gap: 0.625rem;
     --uilib-toast-item-border-width: 1px;
     --uilib-toast-item-font-size: 0.875rem;
+    --uilib-toast-detail-font-size: 0.875em;
 
     // Item colour defaults — overridden per severity below
     --uilib-toast-item-bg: var(--uilib-surface, #ffffff);
@@ -49,14 +50,14 @@
 
   ui-lib-toast.ui-lib-toast--top-right {
     top: var(--uilib-toast-offset);
-    right: var(--uilib-toast-offset);
+    inset-inline-end: var(--uilib-toast-offset);
     --uilib-toast-slide-x: 1rem;
     --uilib-toast-slide-y: 0rem;
   }
 
   ui-lib-toast.ui-lib-toast--top-left {
     top: var(--uilib-toast-offset);
-    left: var(--uilib-toast-offset);
+    inset-inline-start: var(--uilib-toast-offset);
     --uilib-toast-slide-x: -1rem;
     --uilib-toast-slide-y: 0rem;
   }
@@ -71,7 +72,7 @@
 
   ui-lib-toast.ui-lib-toast--bottom-right {
     bottom: var(--uilib-toast-offset);
-    right: var(--uilib-toast-offset);
+    inset-inline-end: var(--uilib-toast-offset);
     flex-direction: column-reverse;
     --uilib-toast-slide-x: 1rem;
     --uilib-toast-slide-y: 0rem;
@@ -79,7 +80,7 @@
 
   ui-lib-toast.ui-lib-toast--bottom-left {
     bottom: var(--uilib-toast-offset);
-    left: var(--uilib-toast-offset);
+    inset-inline-start: var(--uilib-toast-offset);
     flex-direction: column-reverse;
     --uilib-toast-slide-x: -1rem;
     --uilib-toast-slide-y: 0rem;
@@ -169,7 +170,7 @@
   }
 
   ui-lib-toast .ui-lib-toast__detail {
-    font-size: 0.875em;
+    font-size: var(--uilib-toast-detail-font-size);
     opacity: 0.85;
     line-height: 1.5;
     margin-top: 0.25rem;
@@ -274,28 +275,28 @@
   // Minimal — no background, only a coloured left accent border
   ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item {
     --uilib-toast-item-bg: var(--uilib-surface, #ffffff);
-    border-left-width: 3px;
-    border-left-style: solid;
+    border-inline-start-width: 3px;
+    border-inline-start-style: solid;
     border-radius: 0;
   }
 
   ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item--success {
-    border-left-color: var(--uilib-color-success-500, #22c55e);
+    border-inline-start-color: var(--uilib-color-success-500, #22c55e);
     --uilib-toast-item-border-color: transparent;
   }
 
   ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item--info {
-    border-left-color: var(--uilib-color-info-500, #3b82f6);
+    border-inline-start-color: var(--uilib-color-info-500, #3b82f6);
     --uilib-toast-item-border-color: transparent;
   }
 
   ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item--warn {
-    border-left-color: var(--uilib-color-warning-500, #f59e0b);
+    border-inline-start-color: var(--uilib-color-warning-500, #f59e0b);
     --uilib-toast-item-border-color: transparent;
   }
 
   ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item--error {
-    border-left-color: var(--uilib-color-error-500, #ef4444);
+    border-inline-start-color: var(--uilib-color-error-500, #ef4444);
     --uilib-toast-item-border-color: transparent;
   }
 

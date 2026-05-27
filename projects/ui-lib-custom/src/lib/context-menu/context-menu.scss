@@ -52,7 +52,7 @@
 
     position: fixed;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 0;
     height: 0;
     overflow: visible;
@@ -162,9 +162,9 @@
   // ── Submenu chevron ──────────────────────────────────────────────────────────
 
   ui-lib-context-menu .ui-lib-context-menu__submenu-icon {
-    margin-left: auto;
-    padding-left: var(--uilib-spacing-3, 0.75rem);
-    font-size: 1em;
+    margin-inline-start: auto;
+    padding-inline-start: var(--uilib-spacing-3, 0.75rem);
+    font-size: inherit;
     opacity: 0.6;
     line-height: 1;
     transition: transform 0.12s ease;
@@ -189,7 +189,7 @@
 
   ui-lib-context-menu .ui-lib-context-menu__submenu {
     position: absolute;
-    left: 100%;
+    inset-inline-start: 100%;
     top: calc(-1 * var(--uilib-context-menu-padding));
     min-width: var(--uilib-context-menu-min-width);
     background: var(--uilib-context-menu-bg);

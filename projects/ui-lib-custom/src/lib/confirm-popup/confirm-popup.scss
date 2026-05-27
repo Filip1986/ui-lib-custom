@@ -85,18 +85,18 @@
   // When popup is above target: arrow at bottom, pointing down
   ui-lib-confirm-popup .ui-lib-confirm-popup__panel--placement-above .ui-lib-confirm-popup__arrow {
     bottom: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    margin-left: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    border-left: var(--uilib-confirm-popup-arrow-size) solid transparent;
-    border-right: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    margin-inline-start: calc(-1 * var(--uilib-confirm-popup-arrow-size));
+    border-inline-start: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    border-inline-end: var(--uilib-confirm-popup-arrow-size) solid transparent;
     border-top: var(--uilib-confirm-popup-arrow-size) solid var(--uilib-confirm-popup-bg);
   }
 
   // When popup is below target: arrow at top, pointing up
   ui-lib-confirm-popup .ui-lib-confirm-popup__panel--placement-below .ui-lib-confirm-popup__arrow {
     top: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    margin-left: calc(-1 * var(--uilib-confirm-popup-arrow-size));
-    border-left: var(--uilib-confirm-popup-arrow-size) solid transparent;
-    border-right: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    margin-inline-start: calc(-1 * var(--uilib-confirm-popup-arrow-size));
+    border-inline-start: var(--uilib-confirm-popup-arrow-size) solid transparent;
+    border-inline-end: var(--uilib-confirm-popup-arrow-size) solid transparent;
     border-bottom: var(--uilib-confirm-popup-arrow-size) solid var(--uilib-confirm-popup-bg);
   }
 

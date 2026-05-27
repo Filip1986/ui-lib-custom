@@ -136,8 +136,8 @@
   .uilib-image__toolbar {
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,7 +175,7 @@
       cursor: not-allowed;
     }
     &--close {
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
   // ─── Preview container and image ──────────────────────────────────────────────

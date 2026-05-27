@@ -126,15 +126,15 @@
   // ---- Keyframe: indeterminate oscillation -------------------------
   @keyframes uilib-progress-bar-indeterminate {
     0% {
-      margin-left: -35%;
+      margin-inline-start: -35%;
     }
 
     60% {
-      margin-left: 110%;
+      margin-inline-start: 110%;
     }
 
     100% {
-      margin-left: 110%;
+      margin-inline-start: 110%;
     }
   }
 

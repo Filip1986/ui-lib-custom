@@ -75,7 +75,7 @@
   .ui-lib-tiered-menu__submenu-icon {
     flex-shrink: 0;
     margin-inline-start: auto;
-    font-size: 1rem;
+    font-size: var(--uilib-tiered-menu-font-size, var(--uilib-font-size-md, 1rem));
     line-height: 1;
     color: var(--uilib-tiered-menu-submenu-icon-color, var(--uilib-color-text-muted, #6b7280));
   }
@@ -91,7 +91,7 @@
   .ui-lib-tiered-menu__submenu-wrapper {
     position: absolute;
     top: 0;
-    left: 100%;
+    inset-inline-start: 100%;
     z-index: var(--uilib-z-overlay, 1000);
 
     background: var(--uilib-tiered-menu-panel-bg, var(--uilib-surface, #fff));
