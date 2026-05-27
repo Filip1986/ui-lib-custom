@@ -137,6 +137,9 @@ These rules apply to every task, no exceptions:
 | Physical directional CSS properties (`margin-left/right`, `padding-left/right`, `border-left/right`, `border-top/bottom-left/right-radius`, `border-left/right-color/width/style`) | Use logical equivalents — see `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule`. Severity: **error** (blocks commits). |
 | `text-align: left` or `text-align: right`                                                        | Use `text-align: start` / `text-align: end` — physical values break RTL layout                               |
 | `left: 0` or `right: 0` when the value IS directional (flush to start/end edge)                 | Use `inset-inline-start: 0` / `inset-inline-end: 0`; `left: 50%` for centering is still valid               |
+| Missing `await fixture.whenStable()` after `detectChanges()` in `beforeEach` of overlay/deferred panel specs | Add it — `@defer (on immediate)` resolves on a microtask; without this the panel view does not exist when tests run |
+| Calling `fixture.destroy()` while a body-mounted panel is open                                   | Call `closePanel()` + `detectChanges()` first — Angular's `@defer` teardown does NOT `removeChild` from `document.body` |
+| Plain class properties in OnPush host components mutated after `whenStable()`                    | Use `WritableSignal` — plain mutations do not trigger `detectChanges()` after `whenStable()` settles the scheduler |
 
 ---
 
@@ -244,6 +247,21 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 - `jest.config.ts` aliases `ui-lib-custom/*` directly to source — import failures usually mean export-map/index drift.
 - Playwright runs against `localhost:4200`; results in `playwright-report/` + `test-results/a11y-results.json`.
 - Known non-blocking warning: `jest-haste-map` module naming collision between root `package.json` and `projects/ui-lib-custom/package.json` — safe to ignore.
+
+### Overlay / deferred panel specs — mandatory checklist
+
+Every component that uses `@defer (on immediate)` **or** `appendTo='body'` (DOM teleportation) must follow all five rules below. Failing any one causes tests to pass individually but fail in a suite run, or leaves orphaned DOM nodes that corrupt subsequent tests.
+
+| # | Rule | Why |
+|---|------|-----|
+| 1 | `await fixture.whenStable()` after `detectChanges()` in every `beforeEach` that sets up such a component | Flushes the `@defer (on immediate)` microtask so the panel view exists before the first test |
+| 2 | Call `closePanel()` + `detectChanges()` **before** `fixture.destroy()` in any test that opens a body-mounted panel | Angular's `@defer` teardown path does not `removeChild` from `document.body`; the `@if` removal must happen while the component is alive |
+| 3 | Add `afterEach` that `querySelectorAll`s the panel class on `document.body` and removes each element | Safety net when a test throws or future tests skip cleanup |
+| 4 | Host component properties that are mutated after `whenStable()` must be `WritableSignal`, not plain class properties | After `whenStable()` settles the CD scheduler, plain property mutations do not trigger `detectChanges()` on `OnPush` components — signals do |
+| 5 | Nested `beforeEach` blocks (e.g. ngModel describe group) must NOT include `whenStable()` — let the test body own it | Premature `whenStable()` in inner beforeEach disrupts `NgModel.writeValue()` propagation timing |
+
+Full rationale and copy-paste patterns: `LIBRARY_CONVENTIONS.md → Testing Overlay / Deferred Panels — Required Patterns`.  
+Reference implementations: `autocomplete.spec.ts`, `cascade-select.spec.ts`, `color-picker.spec.ts`, `select.spec.ts`.
 
 ---
 
