@@ -24,7 +24,7 @@
           type="button"
           class="ui-lib-select__clear"
           (click)="clear()"
-          aria-label="Clear selection"
+          [attr.aria-label]="i18n.translate('select.clear')"
         >
           <!-- Inline SVG X — same path as Dialog/Drawer close buttons; no raw Unicode characters -->
           <svg
@@ -73,7 +73,7 @@
             [value]="filter()"
             (input)="onFilter($any($event.target).value)"
             placeholder="Search..."
-            aria-label="Search options"
+            [attr.aria-label]="i18n.translate('select.search.aria')"
             aria-autocomplete="list"
             [attr.aria-controls]="listboxId()"
           />

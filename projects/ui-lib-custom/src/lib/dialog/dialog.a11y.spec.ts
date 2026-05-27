@@ -14,11 +14,11 @@ interface MatchMediaStub {
   removeListener: (listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown) => void;
   addEventListener: (
     type: string,
-    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown
+    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown,
   ) => void;
   removeEventListener: (
     type: string,
-    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown
+    listener: (this: MediaQueryList, event: MediaQueryListEvent) => unknown,
   ) => void;
   dispatchEvent: (event: Event) => boolean;
 }
@@ -107,7 +107,7 @@ describe('Dialog Accessibility', (): void => {
   });
 
   function createHost(
-    initialState: Partial<DialogA11yHostComponent> = {}
+    initialState: Partial<DialogA11yHostComponent> = {},
   ): ComponentFixture<DialogA11yHostComponent> {
     const fixture: ComponentFixture<DialogA11yHostComponent> =
       TestBed.createComponent(DialogA11yHostComponent);
@@ -133,7 +133,7 @@ describe('Dialog Accessibility', (): void => {
 
   function getPanel(fixture: ComponentFixture<DialogA11yHostComponent>): HTMLElement {
     const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-dialog-panel'
+      '.ui-lib-dialog-panel',
     );
     if (!panel) {
       throw new Error('Expected dialog panel to exist.');
@@ -222,7 +222,7 @@ describe('Dialog Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.first-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
 
       if (!firstFocusable || !footerAction) {
@@ -251,7 +251,7 @@ describe('Dialog Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.first-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
 
       if (!firstFocusable || !footerAction) {
@@ -418,9 +418,9 @@ describe('Dialog Accessibility', (): void => {
       await detectAndFlush(fixture);
 
       const closeButton: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-dialog-close-btn'
+        '.ui-lib-dialog-close-btn',
       );
-      expect(closeButton?.getAttribute('aria-label')).toBe('Close');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Close dialog');
     });
 
     it('maximize button has correct accessible name that updates on toggle', async (): Promise<void> => {
@@ -554,7 +554,7 @@ describe('Dialog Accessibility', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelector('.second-focusable');
       const footerAction: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.footer-action'
+        '.footer-action',
       );
 
       if (!firstFocusable || !secondFocusable || !footerAction) {

@@ -48,7 +48,7 @@
                 class="ui-lib-table__th ui-lib-table__th--expander"
                 scope="col"
                 role="columnheader"
-                aria-label="Row expansion"
+                [attr.aria-label]="i18n.translate('table.expand-row')"
                 [attr.aria-colindex]="ariaColumnIndex(0)"
                 [attr.aria-disabled]="disabled() ? 'true' : null"
                 [attr.tabindex]="gridCellTabIndex(0, 0)"
@@ -82,7 +82,7 @@
                   [disabled]="disabled()"
                   [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                   (change)="onHeaderCheckboxChange($event)"
-                  aria-label="Select all rows"
+                  [attr.aria-label]="i18n.translate('table.select-all')"
                 />
               </th>
             }

@@ -24,6 +24,7 @@ import type {
 } from '@angular/core';
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ConfirmationService } from './confirm-dialog.service';
 import type {
   ConfirmationConfig,
@@ -67,6 +68,7 @@ let nextConfirmDialogId: number = 0;
 })
 export class ConfirmDialog implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly confirmationService: ConfirmationService = inject(ConfirmationService);
   private readonly document: Document = inject(DOCUMENT);
   private readonly injector: Injector = inject(Injector);
@@ -76,7 +78,7 @@ export class ConfirmDialog implements OnDestroy {
   private focusTrap: FocusTrap | null = null;
   private previousFocusEl: HTMLElement | null = null;
   private readonly previousBodyOverflow: WritableSignal<string | null> = signal<string | null>(
-    null
+    null,
   );
   private lastVisible: boolean = false;
 
@@ -169,82 +171,82 @@ export class ConfirmDialog implements OnDestroy {
 
   /** Resolved header — service config wins over the `header` input. */
   public readonly resolvedHeader: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.header ?? this.header()
+    (): string => this.serviceConfig()?.header ?? this.header(),
   );
 
   /** Resolved message — service config wins over the `message` input. */
   public readonly resolvedMessage: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.message ?? this.message()
+    (): string => this.serviceConfig()?.message ?? this.message(),
   );
 
   /** Resolved icon — service config wins over the `icon` input. */
   public readonly resolvedIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => this.serviceConfig()?.icon ?? this.icon()
+    (): string | null => this.serviceConfig()?.icon ?? this.icon(),
   );
 
   /** Resolved accept label. */
   public readonly resolvedAcceptLabel: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.acceptLabel ?? this.acceptLabel()
+    (): string => this.serviceConfig()?.acceptLabel ?? this.acceptLabel(),
   );
 
   /** Resolved reject label. */
   public readonly resolvedRejectLabel: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.rejectLabel ?? this.rejectLabel()
+    (): string => this.serviceConfig()?.rejectLabel ?? this.rejectLabel(),
   );
 
   /** Resolved accept icon. */
   public readonly resolvedAcceptIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => this.serviceConfig()?.acceptIcon ?? this.acceptIcon()
+    (): string | null => this.serviceConfig()?.acceptIcon ?? this.acceptIcon(),
   );
 
   /** Resolved reject icon. */
   public readonly resolvedRejectIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => this.serviceConfig()?.rejectIcon ?? this.rejectIcon()
+    (): string | null => this.serviceConfig()?.rejectIcon ?? this.rejectIcon(),
   );
 
   /** Resolved accept button severity. */
   public readonly resolvedAcceptSeverity: Signal<ConfirmDialogButtonSeverity> =
     computed<ConfirmDialogButtonSeverity>(
       (): ConfirmDialogButtonSeverity =>
-        this.serviceConfig()?.acceptSeverity ?? this.acceptSeverity()
+        this.serviceConfig()?.acceptSeverity ?? this.acceptSeverity(),
     );
 
   /** Resolved reject button severity. */
   public readonly resolvedRejectSeverity: Signal<ConfirmDialogButtonSeverity> =
     computed<ConfirmDialogButtonSeverity>(
       (): ConfirmDialogButtonSeverity =>
-        this.serviceConfig()?.rejectSeverity ?? this.rejectSeverity()
+        this.serviceConfig()?.rejectSeverity ?? this.rejectSeverity(),
     );
 
   /** Resolved closable flag. */
   public readonly resolvedClosable: Signal<boolean> = computed<boolean>(
-    (): boolean => this.serviceConfig()?.closable ?? this.closable()
+    (): boolean => this.serviceConfig()?.closable ?? this.closable(),
   );
 
   /** Resolved dismissableMask flag. */
   public readonly resolvedDismissableMask: Signal<boolean> = computed<boolean>(
-    (): boolean => this.serviceConfig()?.dismissableMask ?? this.dismissableMask()
+    (): boolean => this.serviceConfig()?.dismissableMask ?? this.dismissableMask(),
   );
 
   /** Resolved position. */
   public readonly resolvedPosition: Signal<ConfirmDialogPosition> = computed<ConfirmDialogPosition>(
-    (): ConfirmDialogPosition => this.serviceConfig()?.position ?? this.position()
+    (): ConfirmDialogPosition => this.serviceConfig()?.position ?? this.position(),
   );
 
   /** Resolved defaultFocus. */
   public readonly resolvedDefaultFocus: Signal<ConfirmDialogDefaultFocus> =
     computed<ConfirmDialogDefaultFocus>(
-      (): ConfirmDialogDefaultFocus => this.serviceConfig()?.defaultFocus ?? this.defaultFocus()
+      (): ConfirmDialogDefaultFocus => this.serviceConfig()?.defaultFocus ?? this.defaultFocus(),
     );
 
   /** Resolved blockScroll flag. */
   public readonly resolvedBlockScroll: Signal<boolean> = computed<boolean>(
-    (): boolean => this.serviceConfig()?.blockScroll ?? this.blockScroll()
+    (): boolean => this.serviceConfig()?.blockScroll ?? this.blockScroll(),
   );
 
   /** Effective variant — falls back to ThemeConfigService. */
   public readonly effectiveVariant: Signal<ConfirmDialogVariant> = computed<ConfirmDialogVariant>(
-    (): ConfirmDialogVariant => this.variant() ?? this.themeConfig.variant()
+    (): ConfirmDialogVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Host CSS classes for the overlay container. */
@@ -271,19 +273,19 @@ export class ConfirmDialog implements OnDestroy {
     [
       'ui-lib-confirm-dialog__panel',
       `ui-lib-confirm-dialog--variant-${this.effectiveVariant()}`,
-    ].join(' ')
+    ].join(' '),
   );
 
   /** Accept button CSS classes combining base and severity modifier. */
   public readonly acceptBtnClasses: Signal<string> = computed<string>(
     (): string =>
-      `ui-lib-confirm-dialog__accept-btn ui-lib-confirm-dialog__btn--${this.resolvedAcceptSeverity()}`
+      `ui-lib-confirm-dialog__accept-btn ui-lib-confirm-dialog__btn--${this.resolvedAcceptSeverity()}`,
   );
 
   /** Reject button CSS classes combining base and severity modifier. */
   public readonly rejectBtnClasses: Signal<string> = computed<string>(
     (): string =>
-      `ui-lib-confirm-dialog__reject-btn ui-lib-confirm-dialog__btn--${this.resolvedRejectSeverity()}`
+      `ui-lib-confirm-dialog__reject-btn ui-lib-confirm-dialog__btn--${this.resolvedRejectSeverity()}`,
   );
 
   constructor() {
@@ -339,7 +341,7 @@ export class ConfirmDialog implements OnDestroy {
               this.focusDefaultButton();
             }
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.releaseScrollLock();
@@ -404,7 +406,7 @@ export class ConfirmDialog implements OnDestroy {
 
   private activateFocusTrap(): void {
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-confirm-dialog__panel'
+      '.ui-lib-confirm-dialog__panel',
     );
     if (!panel) {
       return;

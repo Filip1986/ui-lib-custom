@@ -6,7 +6,7 @@
       class="uilib-tree-table-filter-input"
       [placeholder]="globalFilterPlaceholder()"
       [value]="globalFilterText()"
-      aria-label="Filter table"
+      [attr.aria-label]="i18n.translate('tree-table.filter')"
       (input)="onGlobalFilterInput($event)"
     />
     <span class="uilib-tree-table-filter-icon pi pi-search" aria-hidden="true"></span>
@@ -53,7 +53,7 @@
               [class.uilib-tree-table-checkbox--checked]="isAllSelected()"
               [class.uilib-tree-table-checkbox--partial]="isSomeSelected()"
               role="checkbox"
-              aria-label="Select all rows"
+              [attr.aria-label]="i18n.translate('tree-table.select-all')"
               [attr.aria-checked]="isSomeSelected() ? 'mixed' : isAllSelected()"
               tabindex="0"
               (click)="handleSelectAll($event)"
@@ -141,7 +141,7 @@
                 [class.uilib-tree-table-checkbox--checked]="isSelected(flatNode.node)"
                 [class.uilib-tree-table-checkbox--partial]="isPartiallySelected(flatNode.node)"
                 role="checkbox"
-                aria-label="Select row"
+                [attr.aria-label]="i18n.translate('tree-table.select-row')"
                 [attr.aria-checked]="
                   isPartiallySelected(flatNode.node)
                     ? 'mixed'
@@ -149,6 +149,8 @@
                 "
                 tabindex="-1"
                 (click)="handleCheckboxToggle($event, flatNode.node)"
+                (keydown.enter)="handleCheckboxToggle($event, flatNode.node)"
+                (keydown.space)="$event.preventDefault(); handleCheckboxToggle($event, flatNode.node)"
               ></span>
             </td>
           }

@@ -30,6 +30,7 @@ function generateDynamicDialogId(): string {
 }
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { DynamicDialogRef } from './dynamic-dialog-ref';
 import { DYNAMIC_DIALOG_CONFIG } from './dynamic-dialog.types';
 import type {
@@ -59,6 +60,7 @@ export class DynamicDialog implements OnDestroy {
   private readonly config: DynamicDialogConfig = inject(DYNAMIC_DIALOG_CONFIG);
   private readonly ref: DynamicDialogRef = inject(DynamicDialogRef);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly document: Document = inject(DOCUMENT);
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
@@ -70,66 +72,66 @@ export class DynamicDialog implements OnDestroy {
 
   private focusTrap: FocusTrap | null = null;
   private readonly previousBodyOverflow: WritableSignal<string | null> = signal<string | null>(
-    null
+    null,
   );
 
   private readonly componentId: string = generateDynamicDialogId();
 
   /** @internal — set by DialogService via ComponentRef.setInput(). */
   public readonly componentType: InputSignal<Type<unknown> | null> = input<Type<unknown> | null>(
-    null
+    null,
   );
 
   // ---- Resolved config values ----
 
   /** Resolved header text. */
   public readonly resolvedHeader: Signal<string> = computed<string>(
-    (): string => this.config.header ?? ''
+    (): string => this.config.header ?? '',
   );
 
   /** Whether a backdrop is rendered. */
   public readonly resolvedModal: Signal<boolean> = computed<boolean>(
-    (): boolean => this.config.modal ?? true
+    (): boolean => this.config.modal ?? true,
   );
 
   /** Whether the × close button is shown. */
   public readonly resolvedClosable: Signal<boolean> = computed<boolean>(
-    (): boolean => this.config.closable ?? true
+    (): boolean => this.config.closable ?? true,
   );
 
   /** Whether clicking the backdrop closes the dialog. */
   public readonly resolvedDismissableMask: Signal<boolean> = computed<boolean>(
-    (): boolean => this.config.dismissableMask ?? false
+    (): boolean => this.config.dismissableMask ?? false,
   );
 
   /** Whether body scroll is locked while open. */
   public readonly resolvedBlockScroll: Signal<boolean> = computed<boolean>(
-    (): boolean => this.config.blockScroll ?? true
+    (): boolean => this.config.blockScroll ?? true,
   );
 
   /** Dialog panel anchor position. */
   public readonly resolvedPosition: Signal<DynamicDialogPosition> = computed<DynamicDialogPosition>(
-    (): DynamicDialogPosition => this.config.position ?? 'center'
+    (): DynamicDialogPosition => this.config.position ?? 'center',
   );
 
   /** CSS width for the panel, or null when unset. */
   public readonly resolvedWidth: Signal<string | null> = computed<string | null>(
-    (): string | null => this.config.width ?? null
+    (): string | null => this.config.width ?? null,
   );
 
   /** CSS height for the panel, or null when unset. */
   public readonly resolvedHeight: Signal<string | null> = computed<string | null>(
-    (): string | null => this.config.height ?? null
+    (): string | null => this.config.height ?? null,
   );
 
   /** Effective variant — config wins, falls back to ThemeConfigService. */
   public readonly effectiveVariant: Signal<DynamicDialogVariant> = computed<DynamicDialogVariant>(
-    (): DynamicDialogVariant => this.config.variant ?? this.themeConfig.variant()
+    (): DynamicDialogVariant => this.config.variant ?? this.themeConfig.variant(),
   );
 
   /** Whether the header row should be rendered (needs title text OR close button). */
   public readonly showHeader: Signal<boolean> = computed<boolean>(
-    (): boolean => Boolean(this.resolvedHeader()) || this.resolvedClosable()
+    (): boolean => Boolean(this.resolvedHeader()) || this.resolvedClosable(),
   );
 
   /**
@@ -138,12 +140,12 @@ export class DynamicDialog implements OnDestroy {
    * Defaults to 'Dialog' so screen readers always have a meaningful dialog label.
    */
   public readonly resolvedAriaLabel: Signal<string | null> = computed<string | null>(
-    (): string | null => (!this.resolvedHeader() ? (this.config.ariaLabel ?? 'Dialog') : null)
+    (): string | null => (!this.resolvedHeader() ? (this.config.ariaLabel ?? 'Dialog') : null),
   );
 
   /** ID of an element that describes the dialog purpose, or null when not configured. */
   public readonly resolvedAriaDescribedby: Signal<string | null> = computed<string | null>(
-    (): string | null => this.config.ariaDescribedby ?? null
+    (): string | null => this.config.ariaDescribedby ?? null,
   );
 
   /** ID for aria-labelledby on the panel. */
@@ -169,7 +171,7 @@ export class DynamicDialog implements OnDestroy {
     [
       'ui-lib-dynamic-dialog__panel',
       `ui-lib-dynamic-dialog--variant-${this.effectiveVariant()}`,
-    ].join(' ')
+    ].join(' '),
   );
 
   constructor() {
@@ -184,7 +186,7 @@ export class DynamicDialog implements OnDestroy {
         this.renderGuestComponent();
         this.activateFocusTrap();
       },
-      { injector: this.injector }
+      { injector: this.injector },
     );
   }
 
@@ -226,7 +228,7 @@ export class DynamicDialog implements OnDestroy {
 
   private activateFocusTrap(): void {
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-dynamic-dialog__panel'
+      '.ui-lib-dynamic-dialog__panel',
     );
     if (!panel) {
       return;

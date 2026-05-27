@@ -16,6 +16,7 @@ import {
 import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
 import { claimOverlayZIndex, FocusTrap, releaseOverlayZIndex } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { DrawerPosition, DrawerVariant } from './drawer.types';
 export type { DrawerPosition, DrawerVariant } from './drawer.types';
 
@@ -63,6 +64,7 @@ function generateDrawerId(): string {
 })
 export class Drawer implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly document: Document = inject(DOCUMENT);
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
@@ -91,7 +93,7 @@ export class Drawer implements OnDestroy {
    * When provided, the value is set on the panel's `aria-describedby` attribute.
    */
   public readonly ariaDescribedby: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
   /** Visual design variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<DrawerVariant | null> = input<DrawerVariant | null>(null);
@@ -108,11 +110,11 @@ export class Drawer implements OnDestroy {
 
   /** Stable title element id for `aria-labelledby`. */
   public readonly titleId: Signal<string> = computed<string>(
-    (): string => `${this.drawerId}-title`
+    (): string => `${this.drawerId}-title`,
   );
 
   private readonly effectiveVariant: Signal<DrawerVariant> = computed<DrawerVariant>(
-    (): DrawerVariant => this.variant() ?? this.themeConfig.variant()
+    (): DrawerVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed host CSS classes. */
@@ -159,7 +161,7 @@ export class Drawer implements OnDestroy {
                 this.focusTrap.activate();
               }
             },
-            { injector: this.injector }
+            { injector: this.injector },
           );
         }
       } else {

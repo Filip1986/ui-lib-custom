@@ -29,7 +29,7 @@
         <button
           type="button"
           class="ui-lib-drawer__close"
-          aria-label="Close"
+          [attr.aria-label]="i18n.translate('drawer.close')"
           (click)="close()"
         >
           <svg

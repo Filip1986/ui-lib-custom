@@ -13,6 +13,7 @@ import {
 import { Icon } from 'ui-lib-custom/icon';
 import type { StatusIcon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { MessageSeverity, MessageVariant, MessageSize } from './message.types';
 
 export type { MessageSeverity, MessageVariant, MessageSize } from './message.types';
@@ -68,6 +69,7 @@ const SEVERITY_ICON_MAP: Record<MessageSeverity, StatusIcon> = {
 })
 export class Message {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Severity level — controls the colour palette and default icon. */
   public readonly severity: InputSignal<MessageSeverity> = input<MessageSeverity>('info');
@@ -111,7 +113,7 @@ export class Message {
 
   /** Stable host `id` — consumer-provided or auto-generated. */
   public readonly resolvedId: Signal<string> = computed<string>(
-    (): string => this.messageId() ?? this._instanceId
+    (): string => this.messageId() ?? this._instanceId,
   );
 
   /**
@@ -121,22 +123,22 @@ export class Message {
    */
   public readonly liveRole: Signal<'alert' | 'status'> = computed<'alert' | 'status'>(
     (): 'alert' | 'status' =>
-      this.severity() === 'error' || this.severity() === 'warn' ? 'alert' : 'status'
+      this.severity() === 'error' || this.severity() === 'warn' ? 'alert' : 'status',
   );
 
   /** Matching `aria-live` politeness level derived from `liveRole`. */
   public readonly ariaLive: Signal<'assertive' | 'polite'> = computed<'assertive' | 'polite'>(
-    (): 'assertive' | 'polite' => (this.liveRole() === 'alert' ? 'assertive' : 'polite')
+    (): 'assertive' | 'polite' => (this.liveRole() === 'alert' ? 'assertive' : 'polite'),
   );
 
   /** Resolved variant — falls back to the global ThemeConfigService variant. */
   public readonly effectiveVariant: Signal<MessageVariant> = computed<MessageVariant>(
-    (): MessageVariant => this.variant() ?? this.themeConfig.variant()
+    (): MessageVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Resolved icon name — custom icon wins, else severity default. */
   public readonly resolvedIcon: Signal<StatusIcon | string> = computed<StatusIcon | string>(
-    (): StatusIcon | string => this.icon() ?? SEVERITY_ICON_MAP[this.severity()]
+    (): StatusIcon | string => this.icon() ?? SEVERITY_ICON_MAP[this.severity()],
   );
 
   /** Computed CSS classes applied to the host element. */

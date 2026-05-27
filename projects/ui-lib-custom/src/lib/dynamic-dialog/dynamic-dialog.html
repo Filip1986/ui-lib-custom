@@ -26,7 +26,7 @@
         <button
           type="button"
           class="ui-lib-dynamic-dialog__close-btn"
-          aria-label="Close"
+          [attr.aria-label]="i18n.translate('dynamic-dialog.close')"
           (click)="close()"
         >
           <svg

@@ -22,6 +22,7 @@ import type {
 import type { AfterViewInit, OnDestroy } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { INPUT_MASK_DEFAULTS } from './input-mask.types';
 import type { Caret, InputMaskCompleteEvent, InputMaskSize } from './input-mask.types';
 import { MaskEngine } from './mask-engine';
@@ -118,6 +119,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   private androidChrome: boolean = false;
   private viewInitialized: boolean = false;
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly hasIncompleteMask: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly blockedCharacterMessage: WritableSignal<string | null> = signal<string | null>(

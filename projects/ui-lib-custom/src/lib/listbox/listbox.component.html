@@ -40,7 +40,7 @@
           [checked]="allSelected()"
           [disabled]="isDisabled()"
           (change)="toggleAll($event)"
-          aria-label="Select all options"
+          [attr.aria-label]="i18n.translate('listbox.select-all')"
         />
         <span class="ui-lib-listbox__toggle-all-label">Select all</span>
       </label>
@@ -111,7 +111,10 @@
               [attr.aria-disabled]="item.disabled ? 'true' : null"
               [attr.aria-setsize]="optionRows().length"
               [attr.aria-posinset]="item.optionIndex + 1"
+              tabindex="-1"
               (click)="selectOption($event, item)"
+              (keydown.enter)="selectOption($event, item)"
+              (keydown.space)="$event.preventDefault(); selectOption($event, item)"
             >
               @if (multiple() && checkbox()) {
                 <span class="ui-lib-listbox__checkbox-wrap" aria-hidden="true">

@@ -10,9 +10,9 @@
     </label>
   }
 
-  <div class="ui-input-field" (click)="focusInput($event)">
+  <div class="ui-input-field" (click)="focusInput($event)" (keydown.enter)="focusInput()" tabindex="-1" role="presentation">
     <span class="ui-input-prefix">
-      <ng-content select="[prefix]"></ng-content>
+      <ng-content select="[prefix]" />
     </span>
 
     <div class="ui-input-control-wrapper">
@@ -49,7 +49,7 @@
       />
 
       @if (showClear() && value() && !isDisabled()) {
-        <button type="button" class="ui-input-clear" (click)="clear()" aria-label="Clear input">
+        <button type="button" class="ui-input-clear" (click)="clear()" [attr.aria-label]="i18n.translate('input.clear')">
           ×
         </button>
       }
@@ -59,7 +59,7 @@
           type="button"
           class="ui-input-toggle"
           (click)="togglePassword()"
-          aria-label="Toggle password visibility"
+          [attr.aria-label]="i18n.translate('input.password-toggle')"
         >
           <span aria-hidden="true">{{ showPassword() ? 'Hide' : 'Show' }}</span>
         </button>
@@ -67,7 +67,7 @@
     </div>
 
     <span class="ui-input-suffix">
-      <ng-content select="[suffix]"></ng-content>
+      <ng-content select="[suffix]" />
     </span>
   </div>
 

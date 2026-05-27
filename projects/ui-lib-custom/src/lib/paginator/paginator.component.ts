@@ -11,6 +11,7 @@ import {
 import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
 import type { PaginatorPageEvent, PaginatorSize, PaginatorVariant } from './paginator.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 let nextPaginatorId: number = 0;
 
@@ -57,6 +58,7 @@ export class PaginatorComponent {
   public readonly instanceId: string = `ui-lib-paginator-${nextPaginatorId++}`;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Total number of records across all pages. */
   public readonly totalRecords: InputSignal<number> = input<number>(0);

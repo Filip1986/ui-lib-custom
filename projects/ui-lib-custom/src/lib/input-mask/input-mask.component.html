@@ -23,7 +23,7 @@
   (paste)="onPaste($event)"
 />
 @if (showClear() && isFilled() && !isControlDisabled()) {
-  <button type="button" class="ui-lib-input-mask-clear-icon" aria-label="Clear" (click)="clear()">×</button>
+  <button type="button" class="ui-lib-input-mask-clear-icon" [attr.aria-label]="i18n.translate('input-mask.clear')" (click)="clear()">×</button>
 }
 @if (maskFormatHint()) {
   <span [id]="hintId()" class="ui-lib-input-mask-sr-only">Format: {{ maskFormatHint() }}</span>

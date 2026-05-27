@@ -65,7 +65,7 @@
               type="button"
               class="ui-lib-dialog-close-btn"
               (click)="close()"
-              aria-label="Close"
+              [attr.aria-label]="i18n.translate('dialog.close')"
             >
               <svg
                 class="ui-lib-dialog-action-icon"

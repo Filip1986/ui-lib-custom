@@ -162,14 +162,14 @@ class DataViewHostComponent {
   public readonly first: WritableSignal<number> = signal<number>(0);
   public readonly totalRecords: WritableSignal<number | null> = signal<number | null>(null);
   public readonly rowsPerPageOptions: WritableSignal<number[] | null> = signal<number[] | null>(
-    null
+    null,
   );
   public readonly paginatorPosition: WritableSignal<'top' | 'bottom' | 'both'> = signal<
     'top' | 'bottom' | 'both'
   >('bottom');
   public readonly showCurrentPageReport: WritableSignal<boolean> = signal<boolean>(true);
   public readonly currentPageReportTemplate: WritableSignal<string> = signal<string>(
-    'Showing {first} to {last} of {totalRecords} entries'
+    'Showing {first} to {last} of {totalRecords} entries',
   );
 
   public readonly sortField: WritableSignal<string | null> = signal<string | null>(null);
@@ -185,10 +185,10 @@ class DataViewHostComponent {
   public readonly showPaginatorRightTemplate: WritableSignal<boolean> = signal<boolean>(false);
 
   public readonly pageChanges: WritableSignal<DataViewPageEvent[]> = signal<DataViewPageEvent[]>(
-    []
+    [],
   );
   public readonly sortChanges: WritableSignal<DataViewSortEvent[]> = signal<DataViewSortEvent[]>(
-    []
+    [],
   );
 
   public onPageChange(event: DataViewPageEvent): void {
@@ -230,7 +230,7 @@ function dataViewElement(fixture: ComponentFixture<DataViewHostComponent>): HTML
 }
 
 function dataViewComponent(
-  fixture: ComponentFixture<DataViewHostComponent>
+  fixture: ComponentFixture<DataViewHostComponent>,
 ): DataViewComponent<DataViewItem> {
   const debugElement: DebugElement = fixture.debugElement.query(By.directive(DataViewComponent));
   return debugElement.componentInstance as DataViewComponent<DataViewItem>;
@@ -303,7 +303,7 @@ describe('DataViewComponent', (): void => {
     it('renders list items using uiDataViewListItem template', (): void => {
       const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
       const names: string[] = Array.from(
-        hostElement(fixture).querySelectorAll('.list-item-name')
+        hostElement(fixture).querySelectorAll('.list-item-name'),
       ).map((element: Element): string => (element as HTMLElement).textContent.trim());
 
       expect(names).toEqual(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']);
@@ -315,7 +315,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       const names: string[] = Array.from(
-        hostElement(fixture).querySelectorAll('.grid-item-name')
+        hostElement(fixture).querySelectorAll('.grid-item-name'),
       ).map((element: Element): string => (element as HTMLElement).textContent.trim());
 
       expect(names).toEqual(['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']);
@@ -324,7 +324,7 @@ describe('DataViewComponent', (): void => {
     it('provides correct list template context values', (): void => {
       const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
       const rows: HTMLElement[] = Array.from(
-        hostElement(fixture).querySelectorAll('.list-item-template')
+        hostElement(fixture).querySelectorAll('.list-item-template'),
       ) as HTMLElement[];
       const firstRow: HTMLElement | undefined = rows.at(0);
       const lastRow: HTMLElement | undefined = rows.at(-1);
@@ -361,7 +361,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(hostElement(fixture).querySelector('.header-template')?.textContent).toContain(
-        'Header content'
+        'Header content',
       );
     });
 
@@ -371,7 +371,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(hostElement(fixture).querySelector('.footer-template')?.textContent).toContain(
-        'Footer content'
+        'Footer content',
       );
     });
 
@@ -382,7 +382,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(hostElement(fixture).querySelector('.empty-template')?.textContent).toContain(
-        'Custom empty'
+        'Custom empty',
       );
     });
 
@@ -393,7 +393,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(
-        hostElement(fixture).querySelector('.ui-lib-data-view__empty-default')?.textContent
+        hostElement(fixture).querySelector('.ui-lib-data-view__empty-default')?.textContent,
       ).toContain('No data in test');
     });
 
@@ -404,7 +404,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(hostElement(fixture).querySelector('.loading-template')?.textContent).toContain(
-        'Custom loading'
+        'Custom loading',
       );
     });
 
@@ -414,7 +414,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(
-        hostElement(fixture).querySelector('.ui-lib-data-view__loading-default')?.textContent
+        hostElement(fixture).querySelector('.ui-lib-data-view__loading-default')?.textContent,
       ).toContain('Loading...');
     });
   });
@@ -438,7 +438,7 @@ describe('DataViewComponent', (): void => {
 
       const content: HTMLElement = requiredElement<HTMLElement>(
         hostElement(fixture),
-        '.ui-lib-data-view__content--grid'
+        '.ui-lib-data-view__content--grid',
       );
       expect(content.style.getPropertyValue('--uilib-data-view-grid-columns')).toBe('4');
       expect(content.style.getPropertyValue('--uilib-data-view-grid-gap')).toBe('2rem');
@@ -489,7 +489,7 @@ describe('DataViewComponent', (): void => {
 
       const nextButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        'button[aria-label="Go to next page"]'
+        'button[aria-label="Next page"]',
       );
       nextButton.click();
       refreshFixture(fixture);
@@ -497,13 +497,13 @@ describe('DataViewComponent', (): void => {
       expect(fixture.componentInstance.first()).toBe(2);
       const firstVisibleItem: HTMLElement = requiredElement<HTMLElement>(
         hostElement(fixture),
-        '.list-item-name'
+        '.list-item-name',
       );
       expect(firstVisibleItem.textContent).toContain('Item 3');
 
       const previousButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        'button[aria-label="Go to previous page"]'
+        'button[aria-label="Previous page"]',
       );
       previousButton.click();
       refreshFixture(fixture);
@@ -519,7 +519,7 @@ describe('DataViewComponent', (): void => {
 
       const lastButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        'button[aria-label="Go to last page"]'
+        'button[aria-label="Last page"]',
       );
       lastButton.click();
       refreshFixture(fixture);
@@ -528,7 +528,7 @@ describe('DataViewComponent', (): void => {
 
       const firstButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        'button[aria-label="Go to first page"]'
+        'button[aria-label="First page"]',
       );
       firstButton.click();
       refreshFixture(fixture);
@@ -543,16 +543,14 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(
-        requiredElement<HTMLButtonElement>(
-          hostElement(fixture),
-          'button[aria-label="Go to first page"]'
-        ).disabled
+        requiredElement<HTMLButtonElement>(hostElement(fixture), 'button[aria-label="First page"]')
+          .disabled,
       ).toBeTruthy();
       expect(
         requiredElement<HTMLButtonElement>(
           hostElement(fixture),
-          'button[aria-label="Go to previous page"]'
-        ).disabled
+          'button[aria-label="Previous page"]',
+        ).disabled,
       ).toBeTruthy();
     });
 
@@ -564,16 +562,12 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(
-        requiredElement<HTMLButtonElement>(
-          hostElement(fixture),
-          'button[aria-label="Go to next page"]'
-        ).disabled
+        requiredElement<HTMLButtonElement>(hostElement(fixture), 'button[aria-label="Next page"]')
+          .disabled,
       ).toBeTruthy();
       expect(
-        requiredElement<HTMLButtonElement>(
-          hostElement(fixture),
-          'button[aria-label="Go to last page"]'
-        ).disabled
+        requiredElement<HTMLButtonElement>(hostElement(fixture), 'button[aria-label="Last page"]')
+          .disabled,
       ).toBeTruthy();
     });
 
@@ -586,7 +580,7 @@ describe('DataViewComponent', (): void => {
 
       const reportText: string = requiredElement<HTMLElement>(
         hostElement(fixture),
-        '.ui-lib-data-view__page-report'
+        '.ui-lib-data-view__page-report',
       ).textContent.trim();
       expect(reportText).toBe('Showing 3 to 4 of 5 entries');
     });
@@ -601,7 +595,7 @@ describe('DataViewComponent', (): void => {
 
       const select: HTMLSelectElement = requiredElement<HTMLSelectElement>(
         hostElement(fixture),
-        'select.ui-lib-data-view__rows-select'
+        'select.ui-lib-data-view__rows-select',
       );
       select.value = '4';
       select.dispatchEvent(new Event('change', { bubbles: true }));
@@ -654,18 +648,18 @@ describe('DataViewComponent', (): void => {
           (_unused: unknown, index: number): DataViewItem => ({
             id: index + 1,
             name: `Item ${index + 1}`,
-          })
-        )
+          }),
+        ),
       );
       fixture.componentInstance.first.set(6);
       refreshFixture(fixture);
 
       const ellipsisItems: HTMLElement[] = Array.from(
-        hostElement(fixture).querySelectorAll('.ui-lib-data-view__paginator-ellipsis')
+        hostElement(fixture).querySelectorAll('.ui-lib-data-view__paginator-ellipsis'),
       ) as HTMLElement[];
       expect(ellipsisItems.length).toBe(2);
       expect(
-        ellipsisItems.every((item: HTMLElement): boolean => item.textContent.includes('...'))
+        ellipsisItems.every((item: HTMLElement): boolean => item.textContent.includes('...')),
       ).toBe(true);
     });
   });
@@ -684,7 +678,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       const names: string[] = Array.from(
-        hostElement(fixture).querySelectorAll('.list-item-name')
+        hostElement(fixture).querySelectorAll('.list-item-name'),
       ).map((element: Element): string => element.textContent.trim());
       expect(names).toEqual(['Server Item A', 'Server Item B']);
     });
@@ -701,12 +695,12 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(
-        hostElement(fixture).querySelectorAll('.ui-lib-data-view__paginator-page').length
+        hostElement(fixture).querySelectorAll('.ui-lib-data-view__paginator-page').length,
       ).toBeGreaterThan(0);
 
       requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        'button[aria-label="Go to next page"]'
+        'button[aria-label="Next page"]',
       ).click();
       refreshFixture(fixture);
 
@@ -729,7 +723,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       const names: string[] = Array.from(
-        hostElement(fixture).querySelectorAll('.list-item-name')
+        hostElement(fixture).querySelectorAll('.list-item-name'),
       ).map((element: Element): string => element.textContent.trim());
       expect(names).toEqual(['C item', 'A item', 'B item']);
     });
@@ -780,7 +774,7 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       const names: string[] = Array.from(
-        hostElement(fixture).querySelectorAll('.list-item-name')
+        hostElement(fixture).querySelectorAll('.list-item-name'),
       ).map((element: Element): string => element.textContent.trim());
       expect(names).toEqual(['Updated 1', 'Updated 2']);
     });
@@ -795,7 +789,7 @@ describe('DataViewComponent', (): void => {
       expect(component.trackItem(0, item)).toBe(44);
 
       fixture.componentInstance.trackBy.set(
-        (index: number, currentItem: DataViewItem): unknown => `${index}-${currentItem.name}`
+        (index: number, currentItem: DataViewItem): unknown => `${index}-${currentItem.name}`,
       );
       refreshFixture(fixture);
       expect(component.trackItem(2, item)).toBe('2-Tracked');
@@ -820,10 +814,10 @@ describe('DataViewComponent', (): void => {
     it('content container uses role list and item wrappers use listitem', (): void => {
       const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
       expect(
-        hostElement(fixture).querySelector('.ui-lib-data-view__content[role="list"]')
+        hostElement(fixture).querySelector('.ui-lib-data-view__content[role="list"]'),
       ).toBeTruthy();
       const itemRoles: string[] = Array.from(
-        hostElement(fixture).querySelectorAll('.ui-lib-data-view__item')
+        hostElement(fixture).querySelectorAll('.ui-lib-data-view__item'),
       ).map((element: Element): string => (element as HTMLElement).getAttribute('role') ?? '');
       expect(itemRoles.every((role: string): boolean => role === 'listitem')).toBeTruthy();
     });
@@ -835,18 +829,10 @@ describe('DataViewComponent', (): void => {
       refreshFixture(fixture);
 
       expect(hostElement(fixture).querySelector('nav[aria-label="Pagination"]')).toBeTruthy();
-      expect(
-        hostElement(fixture).querySelector('button[aria-label="Go to first page"]')
-      ).toBeTruthy();
-      expect(
-        hostElement(fixture).querySelector('button[aria-label="Go to previous page"]')
-      ).toBeTruthy();
-      expect(
-        hostElement(fixture).querySelector('button[aria-label="Go to next page"]')
-      ).toBeTruthy();
-      expect(
-        hostElement(fixture).querySelector('button[aria-label="Go to last page"]')
-      ).toBeTruthy();
+      expect(hostElement(fixture).querySelector('button[aria-label="First page"]')).toBeTruthy();
+      expect(hostElement(fixture).querySelector('button[aria-label="Previous page"]')).toBeTruthy();
+      expect(hostElement(fixture).querySelector('button[aria-label="Next page"]')).toBeTruthy();
+      expect(hostElement(fixture).querySelector('button[aria-label="Last page"]')).toBeTruthy();
       expect(hostElement(fixture).querySelector('button[aria-label="Go to page 1"]')).toBeTruthy();
     });
 
@@ -858,14 +844,14 @@ describe('DataViewComponent', (): void => {
 
       const currentPageButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        '.ui-lib-data-view__paginator-page[aria-current="page"]'
+        '.ui-lib-data-view__paginator-page[aria-current="page"]',
       );
       expect(currentPageButton.textContent.trim()).toBe('1');
       expect(currentPageButton.disabled).toBeTruthy();
 
       const previousButton: HTMLButtonElement = requiredElement<HTMLButtonElement>(
         hostElement(fixture),
-        'button[aria-label="Go to previous page"]'
+        'button[aria-label="Previous page"]',
       );
       expect(previousButton.disabled).toBeTruthy();
     });

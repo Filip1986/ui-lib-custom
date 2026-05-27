@@ -22,7 +22,7 @@
       <button
         type="button"
         class="ui-lib-bottom-sheet__close"
-        aria-label="Close"
+        [attr.aria-label]="i18n.translate('bottom-sheet.close')"
         (click)="close()"
       >
         <svg

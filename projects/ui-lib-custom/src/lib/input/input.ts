@@ -15,6 +15,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { SHARED_DEFAULTS } from 'ui-lib-custom/core';
 import type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
 
@@ -106,6 +107,7 @@ export class UiLibInput implements ControlValueAccessor {
   });
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly effectiveVariant: Signal<InputVariant> = computed<InputVariant>(
     (): InputVariant => this.variant() ?? this.themeConfig.variant(),

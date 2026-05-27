@@ -51,6 +51,7 @@ import {
   TableHeaderDirective,
 } from './table-templates.directive';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { PaginatorComponent } from 'ui-lib-custom/paginator';
 import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
 
@@ -87,6 +88,7 @@ export class TableComponent {
   // ---------------------------------------------------------------------------
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
 
@@ -118,7 +120,7 @@ export class TableComponent {
    * Use `[(sortOrder)]` for two-way binding.
    */
   public readonly sortOrder: ModelSignal<TableSortOrder> = model<TableSortOrder>(
-    TABLE_DEFAULTS.SORT_ORDER
+    TABLE_DEFAULTS.SORT_ORDER,
   );
 
   /**
@@ -155,12 +157,12 @@ export class TableComponent {
 
   /** BCP 47 locale used for locale-sensitive string comparisons during filtering. */
   public readonly filterLocale: InputSignal<string | undefined> = input<string | undefined>(
-    undefined
+    undefined,
   );
 
   /** Placeholder displayed inside the global filter input. */
   public readonly globalFilterPlaceholder: InputSignal<string> = input<string>(
-    TABLE_DEFAULTS.GLOBAL_FILTER_PLACEHOLDER
+    TABLE_DEFAULTS.GLOBAL_FILTER_PLACEHOLDER,
   );
 
   // ---------------------------------------------------------------------------
@@ -215,12 +217,12 @@ export class TableComponent {
 
   /** Options for the rows-per-page selector in the paginator. */
   public readonly rowsPerPageOptions: InputSignal<number[]> = input<number[]>(
-    TABLE_DEFAULTS.ROWS_PER_PAGE_OPTIONS
+    TABLE_DEFAULTS.ROWS_PER_PAGE_OPTIONS,
   );
 
   /** Template string for the current-page report. Supports `{currentPage}` and `{totalPages}`. */
   public readonly currentPageReportTemplate: InputSignal<string> = input<string>(
-    '{currentPage} of {totalPages}'
+    '{currentPage} of {totalPages}',
   );
 
   // ---------------------------------------------------------------------------
@@ -308,37 +310,37 @@ export class TableComponent {
   /** Optional caption slot template. */
   public readonly captionTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableCaptionDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional custom header template (replaces auto-generated headers). */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableHeaderDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional custom body template (replaces auto-generated rows). */
   public readonly bodyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableBodyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional custom footer template (replaces auto-generated footers). */
   public readonly footerTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableFooterDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional empty-state template. */
   public readonly emptyTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableEmptyDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   /** Optional row-expansion template. */
   public readonly expansionTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     TableExpansionDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   // ---------------------------------------------------------------------------
@@ -356,7 +358,7 @@ export class TableComponent {
 
   /** Per-column filter values, keyed by column field. */
   public readonly columnFilters: WritableSignal<Map<string, string>> = signal<Map<string, string>>(
-    new Map()
+    new Map(),
   );
 
   /** Roving focus position used for keyboard navigation in grid mode. */
@@ -377,7 +379,7 @@ export class TableComponent {
 
   /** Resolved theme variant (falls back to ThemeConfigService). */
   public readonly resolvedVariant: Signal<TableVariant> = computed<TableVariant>(
-    (): TableVariant => this.variant() ?? this.themeConfig.variant()
+    (): TableVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** CSS class string applied to the host element. */
@@ -406,7 +408,7 @@ export class TableComponent {
     if (this.footerTemplate()) return true;
     return this.columns().some(
       (column: TableColumnComponent): boolean =>
-        column.footer() !== '' || column.footerTemplate() !== undefined
+        column.footer() !== '' || column.footerTemplate() !== undefined,
     );
   });
 
@@ -414,7 +416,7 @@ export class TableComponent {
    * Whether any column has a filterable flag set (determines whether the filter row is rendered).
    */
   public readonly hasColumnFilters: Signal<boolean> = computed<boolean>((): boolean =>
-    this.columns().some((column: TableColumnComponent): boolean => column.filterable())
+    this.columns().some((column: TableColumnComponent): boolean => column.filterable()),
   );
 
   /** Data after applying global filter and per-column filters (before pagination). */
@@ -447,7 +449,7 @@ export class TableComponent {
 
   /** Total number of rows after filtering (used by the paginator). */
   public readonly totalRecords: Signal<number> = computed<number>(
-    (): number => this.processedValue().length
+    (): number => this.processedValue().length,
   );
 
   /** Rows visible on the current page. */
@@ -461,7 +463,7 @@ export class TableComponent {
   public readonly emptyContext: Signal<TableEmptyContext> = computed<TableEmptyContext>(
     (): TableEmptyContext => ({
       filtered: this.value().length > 0 && this.filteredValue().length === 0,
-    })
+    }),
   );
 
   /** `true` when a "select all" checkbox should appear checked. */
@@ -494,7 +496,7 @@ export class TableComponent {
 
   /** ARIA role for the table element. */
   public readonly tableRole: Signal<'grid' | 'table'> = computed<'grid' | 'table'>(
-    (): 'grid' | 'table' => (this.isInteractiveGrid() ? 'grid' : 'table')
+    (): 'grid' | 'table' => (this.isInteractiveGrid() ? 'grid' : 'table'),
   );
 
   /** Optional caption linkage used when no explicit aria-label is supplied. */
@@ -502,7 +504,7 @@ export class TableComponent {
     (): string | null =>
       this.ariaLabel() === null && (this.captionTemplate() !== undefined || this.caption() !== null)
         ? this.captionId
-        : null
+        : null,
   );
 
   /** `aria-multiselectable` value for grid mode. */
@@ -519,12 +521,12 @@ export class TableComponent {
 
   /** Header rows rendered before the body rows, used for `aria-rowindex` math. */
   public readonly headerRowCount: Signal<number> = computed<number>((): number =>
-    this.hasColumnFilters() ? 2 : 1
+    this.hasColumnFilters() ? 2 : 1,
   );
 
   /** Total row count announced to assistive technology when rows are paginated. */
   public readonly ariaRowCount: Signal<number | null> = computed<number | null>(
-    (): number | null => (this.paginator() ? this.totalRecords() + this.headerRowCount() : null)
+    (): number | null => (this.paginator() ? this.totalRecords() + this.headerRowCount() : null),
   );
 
   /** Screen-reader announcement for the active sort state. */
@@ -647,7 +649,7 @@ export class TableComponent {
   public sortIconClass(field: string): string {
     if (this.multiSortMode()) {
       const meta: TableSortMeta | undefined = this.multiSortMeta().find(
-        (m: TableSortMeta): boolean => m.field === field
+        (m: TableSortMeta): boolean => m.field === field,
       );
       if (!meta) return 'pi pi-sort-alt';
       return meta.order === 1 ? 'pi pi-sort-amount-up-alt' : 'pi pi-sort-amount-down-alt';
@@ -816,7 +818,7 @@ export class TableComponent {
   public multiSortRank(field: string): number | null {
     if (!this.multiSortMode()) return null;
     const index: number = this.multiSortMeta().findIndex(
-      (meta: TableSortMeta): boolean => meta.field === field
+      (meta: TableSortMeta): boolean => meta.field === field,
     );
     return index === -1 ? null : index + 1;
   }
@@ -855,7 +857,7 @@ export class TableComponent {
   private applyMultiSort(field: string): void {
     const existing: TableSortMeta[] = [...this.multiSortMeta()];
     const index: number = existing.findIndex(
-      (meta: TableSortMeta): boolean => meta.field === field
+      (meta: TableSortMeta): boolean => meta.field === field,
     );
     if (index === -1) {
       existing.push({ field, order: 1 });
@@ -944,7 +946,7 @@ export class TableComponent {
       this.rowSelected.emit({ originalEvent: event, data: row, index });
     } else {
       const newSelection: unknown[] = currentSelection.filter(
-        (r: unknown): boolean => !this.rowsAreEqual(r, row)
+        (r: unknown): boolean => !this.rowsAreEqual(r, row),
       );
       this.selection.set(newSelection);
       this.rowUnselected.emit({ originalEvent: event, data: row, index });
@@ -1018,7 +1020,7 @@ export class TableComponent {
       fields ?? this.columns().map((column: TableColumnComponent): string => column.field());
     return searchFields.some((field: string): boolean => {
       const cellValue: string = this.resolveField(row, field).toLocaleLowerCase(
-        this.filterLocale()
+        this.filterLocale(),
       );
       return this.matchesString(cellValue, normalizedQuery);
     });
@@ -1027,7 +1029,7 @@ export class TableComponent {
   private matchesColumnFilters(row: unknown, filters: Map<string, string>): boolean {
     for (const [field, query] of filters) {
       const cellValue: string = this.resolveField(row, field).toLocaleLowerCase(
-        this.filterLocale()
+        this.filterLocale(),
       );
       const normalizedQuery: string = query.trim().toLocaleLowerCase(this.filterLocale());
       if (!this.matchesString(cellValue, normalizedQuery)) return false;
@@ -1089,7 +1091,7 @@ export class TableComponent {
   private toggleSingleSelection(
     event: MouseEvent | KeyboardEvent,
     row: unknown,
-    index: number
+    index: number,
   ): void {
     if (this.isRowSelected(row)) {
       this.selection.set(null);
@@ -1103,7 +1105,7 @@ export class TableComponent {
   private toggleMultipleSelection(
     event: MouseEvent | KeyboardEvent,
     row: unknown,
-    index: number
+    index: number,
   ): void {
     const currentSelection: unknown[] = Array.isArray(this.selection())
       ? [...(this.selection() as unknown[])]
@@ -1118,7 +1120,7 @@ export class TableComponent {
     if (this.isRowSelected(row)) {
       if (!this.metaKeySelection() || withMeta) {
         const newSelection: unknown[] = currentSelection.filter(
-          (r: unknown): boolean => !this.rowsAreEqual(r, row)
+          (r: unknown): boolean => !this.rowsAreEqual(r, row),
         );
         this.selection.set(newSelection);
         this.rowUnselected.emit({ originalEvent: event, data: row, index });
@@ -1139,7 +1141,7 @@ export class TableComponent {
     event: MouseEvent | KeyboardEvent,
     row: unknown,
     index: number,
-    currentSelection: unknown[]
+    currentSelection: unknown[],
   ): void {
     const displayed: unknown[] = this.displayedRows();
     const start: number = Math.min(this.lastClickedRowIndex, index);
@@ -1206,7 +1208,7 @@ export class TableComponent {
 
   private sortColumnLabel(field: string): string {
     const matchedColumn: TableColumnComponent | undefined = this.columns().find(
-      (column: TableColumnComponent): boolean => (column.sortField() ?? column.field()) === field
+      (column: TableColumnComponent): boolean => (column.sortField() ?? column.field()) === field,
     );
 
     if (matchedColumn === undefined) {
@@ -1231,7 +1233,7 @@ export class TableComponent {
 
     const targetElement: HTMLElement | null =
       this.hostElement.nativeElement.querySelector<HTMLElement>(
-        `[data-grid-row="${nextPosition.row}"][data-grid-col="${nextPosition.column}"]`
+        `[data-grid-row="${nextPosition.row}"][data-grid-col="${nextPosition.column}"]`,
       );
     targetElement?.focus();
   }
@@ -1239,7 +1241,7 @@ export class TableComponent {
   private activateEmbeddedGridControl(row: number, column: number): boolean {
     const targetElement: HTMLElement | null =
       this.hostElement.nativeElement.querySelector<HTMLElement>(
-        `[data-grid-row="${row}"][data-grid-col="${column}"]`
+        `[data-grid-row="${row}"][data-grid-col="${column}"]`,
       );
 
     if (targetElement === null) {
@@ -1248,7 +1250,7 @@ export class TableComponent {
 
     const embeddedControl: HTMLButtonElement | HTMLInputElement | null =
       targetElement.querySelector<HTMLButtonElement | HTMLInputElement>(
-        'button:not([disabled]), input:not([disabled])'
+        'button:not([disabled]), input:not([disabled])',
       );
 
     if (embeddedControl === null) {

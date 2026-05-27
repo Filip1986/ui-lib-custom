@@ -18,6 +18,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { PanelToggleEvent, PanelVariant } from './panel.types';
 
 export type { PanelToggleEvent, PanelVariant } from './panel.types';
@@ -64,6 +65,7 @@ let panelIdCounter: number = 0;
 })
 export class Panel {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private readonly componentId: string = `ui-lib-panel-${(panelIdCounter += 1)}`;
 
@@ -114,11 +116,11 @@ export class Panel {
 
   /** Whether the header section should be rendered at all. */
   public readonly showHeader: Signal<boolean> = computed<boolean>(
-    (): boolean => Boolean(this.header()) || this.toggleable() || this.hasProjectedContent()
+    (): boolean => Boolean(this.header()) || this.toggleable() || this.hasProjectedContent(),
   );
 
   private readonly effectiveVariant: Signal<PanelVariant> = computed<PanelVariant>(
-    (): PanelVariant => this.variant() ?? this.themeConfig.variant()
+    (): PanelVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -144,7 +146,7 @@ export class Panel {
     this.toggled.emit(
       event !== undefined
         ? { collapsed: nextCollapsed, originalEvent: event }
-        : { collapsed: nextCollapsed }
+        : { collapsed: nextCollapsed },
     );
   }
 

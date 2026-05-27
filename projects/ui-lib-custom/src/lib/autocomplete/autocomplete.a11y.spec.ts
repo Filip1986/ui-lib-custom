@@ -502,9 +502,9 @@ describe('UiLibAutoComplete — a11y', (): void => {
       hostEl = fixture.nativeElement as HTMLElement;
     });
 
-    it('dropdown button has aria-label="Show options"', (): void => {
+    it('dropdown button has aria-label="Show suggestions"', (): void => {
       const btn: Element | null = hostEl.querySelector('.ui-autocomplete-dropdown-btn');
-      expect(btn?.getAttribute('aria-label')).toBe('Show options');
+      expect(btn?.getAttribute('aria-label')).toBe('Show suggestions');
     });
 
     it('dropdown button uses inline SVG with aria-hidden="true"', (): void => {
@@ -571,7 +571,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
 
     it('group containers have correct aria-label', (): void => {
       const groups: Element[] = Array.from(
-        hostEl.querySelectorAll('.ui-autocomplete-option-group')
+        hostEl.querySelectorAll('.ui-autocomplete-option-group'),
       );
       expect(groups[0]?.getAttribute('aria-label')).toBe('Letters');
       expect(groups[1]?.getAttribute('aria-label')).toBe('Numbers');
@@ -579,7 +579,7 @@ describe('UiLibAutoComplete — a11y', (): void => {
 
     it('group containers use CSS ::before for visual labels — no DOM label divs', (): void => {
       const labelDivs: NodeListOf<Element> = hostEl.querySelectorAll(
-        '.ui-autocomplete-option-group-label'
+        '.ui-autocomplete-option-group-label',
       );
       expect(labelDivs.length).toBe(0);
     });

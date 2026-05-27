@@ -25,6 +25,7 @@ import type { TreeContext } from './tree-context';
 import { TreeNodeTemplateDirective } from './tree-template-directives';
 import { TreeNodeComponent } from './tree-node';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import type {
   TreeFilterMode,
@@ -80,6 +81,7 @@ let nextTreeId: number = 0;
 })
 export class Tree implements TreeContext {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
@@ -168,7 +170,7 @@ export class Tree implements TreeContext {
   // ─── Derived signals ───────────────────────────────────────────────────────
 
   private readonly resolvedVariant: Signal<TreeVariant> = computed<TreeVariant>(
-    (): TreeVariant => (this.variant() ?? this.themeConfig.variant()) as TreeVariant
+    (): TreeVariant => (this.variant() ?? this.themeConfig.variant()) as TreeVariant,
   );
 
   /** Host class string applied via `[class]` binding. */
@@ -179,12 +181,12 @@ export class Tree implements TreeContext {
       this.styleClass(),
     ]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
   );
 
   /** `aria-label` value for the host — `null` when the input is empty. */
   public readonly hostAriaLabel: Signal<string | null> = computed<string | null>(
-    (): string | null => this.ariaLabel() || null
+    (): string | null => this.ariaLabel() || null,
   );
 
   /** Host `id` value — explicit `hostId` when provided, else the generated instance id. */
@@ -198,7 +200,7 @@ export class Tree implements TreeContext {
     (): true | null => {
       const mode: TreeSelectionMode = this.selectionMode();
       return mode === 'multiple' || mode === 'checkbox' ? true : null;
-    }
+    },
   );
 
   /** Map from node `type` → registered TemplateRef. */
@@ -213,7 +215,7 @@ export class Tree implements TreeContext {
           map.set(directive.type(), directive.templateRef);
         }
         return map;
-      }
+      },
     );
 
   /**
@@ -230,7 +232,7 @@ export class Tree implements TreeContext {
         return null;
       }
       return this.computeFilteredKeys(this.value(), text, this.filterMode());
-    }
+    },
   );
 
   // ─── TreeContext implementation ────────────────────────────────────────────
@@ -259,7 +261,7 @@ export class Tree implements TreeContext {
 
     // multiple or checkbox
     return (currentSelection as TreeNode[]).some(
-      (selected: TreeNode): boolean => selected.key === node.key
+      (selected: TreeNode): boolean => selected.key === node.key,
     );
   }
 
@@ -284,7 +286,7 @@ export class Tree implements TreeContext {
   public getNodePosInSet(node: TreeNode): number {
     const visibleSiblings: TreeNode[] = this.getVisibleSiblings(node);
     const index: number = visibleSiblings.findIndex(
-      (sibling: TreeNode): boolean => sibling.key === node.key
+      (sibling: TreeNode): boolean => sibling.key === node.key,
     );
     return index >= 0 ? index + 1 : 1;
   }
@@ -387,8 +389,8 @@ export class Tree implements TreeContext {
   public handleCheckboxToggle(event: Event, node: TreeNode): void {
     const currentKeys: Set<string> = new Set(
       (Array.isArray(this.selection()) ? (this.selection() as TreeNode[]) : []).map(
-        (selected: TreeNode): string => selected.key
-      )
+        (selected: TreeNode): string => selected.key,
+      ),
     );
 
     const descendantKeys: string[] = this.getDescendantKeys(node);
@@ -409,7 +411,7 @@ export class Tree implements TreeContext {
     // Rebuild the selection array from the key set using a flattened node map.
     const allNodes: TreeNode[] = this.flattenNodes(this.value());
     const nodeMap: Map<string, TreeNode> = new Map<string, TreeNode>(
-      allNodes.map((flatNode: TreeNode): [string, TreeNode] => [flatNode.key, flatNode])
+      allNodes.map((flatNode: TreeNode): [string, TreeNode] => [flatNode.key, flatNode]),
     );
     const newSelection: TreeNode[] = Array.from(currentKeys)
       .map((key: string): TreeNode | undefined => nodeMap.get(key))
@@ -439,7 +441,7 @@ export class Tree implements TreeContext {
       this.elementRef.nativeElement.querySelectorAll<HTMLElement>('[role="treeitem"]');
     const items: HTMLElement[] = Array.from(allItems);
     const focusedIndex: number = items.findIndex(
-      (item: HTMLElement): boolean => item === document.activeElement
+      (item: HTMLElement): boolean => item === document.activeElement,
     );
 
     if (key === KEYBOARD_KEYS.ArrowDown) {
@@ -501,12 +503,12 @@ export class Tree implements TreeContext {
       : [];
 
     const existingIndex: number = currentSelection.findIndex(
-      (selected: TreeNode): boolean => selected.key === node.key
+      (selected: TreeNode): boolean => selected.key === node.key,
     );
 
     if (existingIndex >= 0) {
       const updated: TreeNode[] = currentSelection.filter(
-        (selected: TreeNode): boolean => selected.key !== node.key
+        (selected: TreeNode): boolean => selected.key !== node.key,
       );
       this.selection.set(updated);
       this.nodeUnselect.emit({ originalEvent: event, node });
@@ -557,7 +559,7 @@ export class Tree implements TreeContext {
         this.updatePartialStates(node.children, selectedKeys);
         const descendantKeys: string[] = this.getDescendantKeys(node);
         const checkedCount: number = descendantKeys.filter((key: string): boolean =>
-          selectedKeys.has(key)
+          selectedKeys.has(key),
         ).length;
         node.partialSelected = checkedCount > 0 && checkedCount < descendantKeys.length;
       }
@@ -582,7 +584,7 @@ export class Tree implements TreeContext {
     const visit: (treeNode: TreeNode) => boolean = (treeNode: TreeNode): boolean => {
       const selfMatches: boolean = matchesFilter(treeNode);
       const childrenVisible: boolean = (treeNode.children ?? []).some((child: TreeNode): boolean =>
-        visit(child)
+        visit(child),
       );
 
       const visible: boolean = mode === 'lenient' ? selfMatches || childrenVisible : selfMatches;
@@ -619,7 +621,7 @@ export class Tree implements TreeContext {
   private findVisibleNodePath(targetKey: string): TreeNode[] | null {
     const visit: (nodes: TreeNode[], ancestors: TreeNode[]) => TreeNode[] | null = (
       nodes: TreeNode[],
-      ancestors: TreeNode[]
+      ancestors: TreeNode[],
     ): TreeNode[] | null => {
       for (const node of nodes) {
         if (!this.isNodeFiltered(node)) {
@@ -682,7 +684,7 @@ export class Tree implements TreeContext {
   private expandOrFocusChild(
     focused: HTMLElement,
     items: HTMLElement[],
-    focusedIndex: number
+    focusedIndex: number,
   ): void {
     const toggleButton: HTMLElement | null =
       focused.querySelector<HTMLElement>('.uilib-tree-node-toggle');

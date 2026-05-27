@@ -28,6 +28,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import type { ThemeVariant } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   EDITOR_CSS_CLASSES,
   EDITOR_DEFAULTS,
@@ -80,10 +81,10 @@ const INITIAL_TOOLBAR_STATE: EditorToolbarState = {
 })
 export class EditorComponent implements ControlValueAccessor {
   public readonly variant: InputSignal<ThemeVariant | null> = input<ThemeVariant | null>(
-    EDITOR_DEFAULTS.variant
+    EDITOR_DEFAULTS.variant,
   );
   public readonly size: InputSignal<'sm' | 'md' | 'lg'> = input<'sm' | 'md' | 'lg'>(
-    EDITOR_DEFAULTS.size
+    EDITOR_DEFAULTS.size,
   );
   public readonly placeholder: InputSignal<string> = input<string>(EDITOR_DEFAULTS.placeholder);
   public readonly readonly: InputSignal<boolean> = input<boolean>(EDITOR_DEFAULTS.readonly);
@@ -109,15 +110,15 @@ export class EditorComponent implements ControlValueAccessor {
     signal<EditorToolbarState>(INITIAL_TOOLBAR_STATE);
 
   public readonly hasCustomToolbar: Signal<boolean> = computed<boolean>((): boolean =>
-    Boolean(this.customToolbar())
+    Boolean(this.customToolbar()),
   );
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.cvaDisabled()
+    (): boolean => this.disabled() || this.cvaDisabled(),
   );
 
   public readonly resolvedVariant: Signal<ThemeVariant> = computed<ThemeVariant>(
-    (): ThemeVariant => this.variant() ?? this.themeConfigService.variant()
+    (): ThemeVariant => this.variant() ?? this.themeConfigService.variant(),
   );
 
   public readonly toolbarAriaLabels: typeof EDITOR_TOOLBAR_ARIA_LABELS = EDITOR_TOOLBAR_ARIA_LABELS;
@@ -153,6 +154,7 @@ export class EditorComponent implements ControlValueAccessor {
   });
 
   private readonly themeConfigService: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly documentRef: Document = inject(DOCUMENT);
@@ -423,7 +425,7 @@ export class EditorComponent implements ControlValueAccessor {
 
     const blockFormatValue: string = this.normalizeCommandValue(
       this.getCommandValue('formatBlock'),
-      'p'
+      'p',
     );
 
     this.toolbarState.set({
@@ -553,7 +555,7 @@ export class EditorComponent implements ControlValueAccessor {
   private addDomListener(
     target: Document | HTMLElement,
     eventName: string,
-    listener: EventListener
+    listener: EventListener,
   ): void {
     target.addEventListener(eventName, listener);
     this.cleanupCallbacks.push((): void => {

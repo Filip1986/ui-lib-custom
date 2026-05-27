@@ -19,6 +19,7 @@ import {
 import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   AfterViewChecked,
   AfterViewInit,
@@ -104,6 +105,7 @@ export class VirtualScrollerComponent
   private readonly changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ---------------------------------------------------------------------------
   // Inputs

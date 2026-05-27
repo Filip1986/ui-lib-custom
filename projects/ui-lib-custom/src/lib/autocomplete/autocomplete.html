@@ -33,7 +33,7 @@
     <div
       class="ui-autocomplete-chip-list"
       role="group"
-      aria-label="Selected items"
+      [attr.aria-label]="i18n.translate('autocomplete.chips-label')"
       [attr.aria-disabled]="isDisabled() ? 'true' : null"
     >
       @for (chip of selectedChips(); track chipTrackBy($index, chip)) {
@@ -92,7 +92,7 @@
   }
 
   @if (showClear() && hasValue() && !isDisabled()) {
-    <button class="ui-autocomplete-clear" type="button" (click)="clear($event)" aria-label="Clear">
+    <button class="ui-autocomplete-clear" type="button" (click)="clear($event)" [attr.aria-label]="i18n.translate('autocomplete.clear')">
       <svg
         class="ui-autocomplete-icon"
         aria-hidden="true"
@@ -115,7 +115,7 @@
       class="ui-autocomplete-dropdown-btn"
       type="button"
       [disabled]="isDisabled()"
-      aria-label="Show options"
+      [attr.aria-label]="i18n.translate('autocomplete.dropdown')"
       (click)="onDropdownButtonClick($event)"
     >
       @if (dropdownIconTemplate()) {

@@ -22,7 +22,7 @@
   <div
     #panelElement
     role="dialog"
-    aria-label="Color picker"
+    [attr.aria-label]="i18n.translate('colorpicker.panel')"
     aria-modal="false"
     class="ui-lib-colorpicker__panel"
     [attr.id]="panelId()"
@@ -54,7 +54,7 @@
         #hueElement
         class="ui-lib-colorpicker__hue"
         role="slider"
-        aria-label="Hue"
+        [attr.aria-label]="i18n.translate('colorpicker.hue')"
         aria-valuemin="0"
         aria-valuemax="359"
         [attr.aria-valuenow]="hue()"

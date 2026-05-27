@@ -24,6 +24,7 @@ import type {
 import { DOCUMENT } from '@angular/common';
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { PopoverPlacement, PopoverVariant } from './popover.types';
 
 // Module-level fallback counter for environments without crypto.randomUUID().
@@ -56,6 +57,7 @@ let nextPopoverId: number = 0;
 })
 export class Popover implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
@@ -72,7 +74,7 @@ export class Popover implements OnDestroy {
   public readonly titleId: string = `${this.panelId}-title`;
 
   private readonly targetElement: WritableSignal<HTMLElement | null> = signal<HTMLElement | null>(
-    null
+    null,
   );
 
   /** Computed top position (px) for the popup panel. */
@@ -121,7 +123,7 @@ export class Popover implements OnDestroy {
 
   /** Effective variant — falls back to ThemeConfigService. */
   public readonly effectiveVariant: Signal<PopoverVariant> = computed<PopoverVariant>(
-    (): PopoverVariant => this.variant() ?? this.themeConfig.variant()
+    (): PopoverVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Host CSS classes. */
@@ -176,7 +178,7 @@ export class Popover implements OnDestroy {
               this.shown.emit();
             }
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.positionReady.set(false);
@@ -288,7 +290,7 @@ export class Popover implements OnDestroy {
     const viewportPadding: number = 8;
     left = Math.max(
       viewportPadding,
-      Math.min(left, viewportWidth - panelRect.width - viewportPadding)
+      Math.min(left, viewportWidth - panelRect.width - viewportPadding),
     );
 
     // Arrow points at target center, offset relative to panel left.
@@ -296,7 +298,7 @@ export class Popover implements OnDestroy {
     const arrowHalfWidth: number = 8;
     const clampedArrowLeft: number = Math.max(
       arrowHalfWidth + 4,
-      Math.min(rawArrowLeft, panelRect.width - arrowHalfWidth - 4)
+      Math.min(rawArrowLeft, panelRect.width - arrowHalfWidth - 4),
     );
 
     this.panelTop.set(top);

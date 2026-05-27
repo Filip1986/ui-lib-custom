@@ -21,7 +21,7 @@
         class="uilib-paginator-button uilib-paginator-first"
         [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
         [disabled]="isFirstPage() || isEmpty()"
-        aria-label="Go to first page"
+        [attr.aria-label]="i18n.translate('paginator.first')"
         [attr.aria-disabled]="isFirstPage() || isEmpty()"
         (click)="changePageToFirst($event)"
       >
@@ -39,7 +39,7 @@
       class="uilib-paginator-button uilib-paginator-prev"
       [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
       [disabled]="isFirstPage() || isEmpty()"
-      aria-label="Go to previous page"
+      [attr.aria-label]="i18n.translate('paginator.prev')"
       [attr.aria-disabled]="isFirstPage() || isEmpty()"
       (click)="changePageToPrev($event)"
     >
@@ -73,7 +73,7 @@
       class="uilib-paginator-button uilib-paginator-next"
       [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
       [disabled]="isLastPage() || isEmpty()"
-      aria-label="Go to next page"
+      [attr.aria-label]="i18n.translate('paginator.next')"
       [attr.aria-disabled]="isLastPage() || isEmpty()"
       (click)="changePageToNext($event)"
     >
@@ -90,7 +90,7 @@
         class="uilib-paginator-button uilib-paginator-last"
         [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
         [disabled]="isLastPage() || isEmpty()"
-        aria-label="Go to last page"
+        [attr.aria-label]="i18n.translate('paginator.last')"
         [attr.aria-disabled]="isLastPage() || isEmpty()"
         (click)="changePageToLast($event)"
       >
@@ -110,7 +110,7 @@
         [min]="1"
         [max]="pageCount()"
         [disabled]="isEmpty()"
-        aria-label="Jump to page, press Enter to navigate"
+        [attr.aria-label]="i18n.translate('paginator.jump')"
         placeholder="Page"
         (keydown)="onJumpToPageKeydown($event)"
       />
@@ -122,7 +122,7 @@
         class="uilib-paginator-rpp-select"
         [value]="rows()"
         [disabled]="isEmpty()"
-        aria-label="Rows per page"
+        [attr.aria-label]="i18n.translate('paginator.rows.label')"
         (change)="onRowsPerPageChange($event)"
       >
         @for (option of rowsPerPageOptions()!; track option) {

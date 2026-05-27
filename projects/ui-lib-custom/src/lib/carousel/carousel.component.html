@@ -168,8 +168,9 @@
       <ol
         #indicatorContainer
         class="uilib-carousel-indicator-list"
-        aria-label="Slide indicators"
+        [attr.aria-label]="i18n.translate('carousel.indicators-label')"
         (keydown)="onIndicatorKeydown($event)"
+        tabindex="0"
       >
         @for (dot of dotsArray(); track dot) {
           <li
