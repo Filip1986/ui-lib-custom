@@ -26,7 +26,7 @@ const DOCS_DIR = join(ROOT, 'docs', 'reference', 'components');
 
 // Directories that are not standalone components
 const SKIP_DIRS = new Set([
-  'a11y', 'code-snippet', 'core', 'design-tokens.ts', 'layout',
+  'a11y', 'code-snippet', 'core', 'design-tokens.ts', 'i18n', 'layout',
   'styles', 'syntax-highlighter', 'testing', 'themes', 'theming',
   'ui-lib-custom.spec.ts', 'ui-lib-custom.ts',
 ]);
@@ -76,14 +76,28 @@ function parseReadme(source) {
  * Falls back to the first blockquote in the README, then to a generic placeholder.
  */
 function extractOverview(tsSrc, readmeSrc, displayName) {
-  // 1. Class-level JSDoc — the line after @Component({ and before export class
+  // 1. Class-level JSDoc — find the LAST /** ... */ block immediately before
+  //    @Component(. Split on @Component( so we never pick up module-level
+  //    variable comments that appear earlier in the file.
   if (tsSrc) {
-    const classJsdoc = tsSrc.match(/\/\*\*\s*([\s\S]*?)\s*\*\/\s*@Component/);
-    if (classJsdoc) {
-      const text = classJsdoc[1]
-        .replace(/^\s*\* ?/gm, '')
-        .trim();
-      if (text) return text;
+    const atComponentIdx = tsSrc.indexOf('@Component(');
+    if (atComponentIdx !== -1) {
+      const beforeComponent = tsSrc.slice(0, atComponentIdx);
+      // Find the LAST /** ... */ block in the text before @Component(.
+      // The greedy [\s\S]* prefix forces the engine to consume everything up to
+      // the last /** occurrence, so we only capture the class-level doc.
+      const jsdocMatch = beforeComponent.match(/[\s\S]*\/\*\*([\s\S]*?)\*\/\s*\n?\s*$/);
+      if (jsdocMatch) {
+        const text = jsdocMatch[1]
+          .replace(/\r\n/g, '\n')           // normalise Windows CRLF → LF
+          .replace(/\r/g, '\n')             // normalise stray CR → LF
+          .replace(/^\s*\* ?/gm, '')        // strip leading "* " from each line
+          .replace(/@\w+[\s\S]*/g, '')      // strip @example, @param, @returns etc.
+          .replace(/\n{2,}/g, '\n')         // collapse consecutive blank lines
+          .replace(/\s*\n\s*/g, ' ')        // fold remaining newlines to spaces
+          .trim();
+        if (text) return text;
+      }
     }
   }
   // 2. First blockquote in README (contains architectural notes)
@@ -146,9 +160,12 @@ function extractJsdocBefore(lines, idx) {
   if (k >= 0) jdLines.unshift(lines[k]);
   return jdLines
     .join('\n')
-    .replace(/^\/\*\*/, '')
-    .replace(/\*\/$/, '')
-    .replace(/^\s*\* ?/gm, '')
+    .replace(/\r\n/g, '\n')           // normalise Windows CRLF
+    .replace(/\r/g, '\n')             // normalise stray CR
+    .replace(/^\s*\/\*\*\s?/, '')     // strip leading whitespace + /**
+    .replace(/\s*\*\/\s*$/, '')       // strip */ + trailing whitespace
+    .replace(/^\s*\*\s?/gm, '')       // strip leading " * " from each continuation line
+    .replace(/\s+/g, ' ')             // collapse any remaining whitespace
     .trim();
 }
 

@@ -13,31 +13,31 @@ InputMask component with CVA integration and mask-aware keyboard handling.
 
 ### Inputs
 
-| Name               | Type                                          | Default                                | Description                                                                     |
-| ------------------ | --------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------- |
-| `ariaLabel`        | `string | null`                               | `null`                                 | —                                                                               |
-| `ariaLabelledBy`   | `string | null`                               | `null`                                 | —                                                                               |
-| `autoClear`        | `boolean`                                     | `INPUT_MASK_DEFAULTS.autoClear`        | —                                                                               |
-| `autocomplete`     | `string | undefined`                          | `undefined`                            | —                                                                               |
-| `characterPattern` | `string`                                      | `INPUT_MASK_DEFAULTS.characterPattern` | —                                                                               |
-| `disabled`         | `boolean`                                     | `false`                                | —                                                                               |
-| `errorMessage`     | `string | null`                               | `null`                                 | —                                                                               |
-| `filled`           | `boolean`                                     | `false`                                | —                                                                               |
-| `fluid`            | `boolean`                                     | `false`                                | —                                                                               |
-| `id`               | `string | null`                               | `null`                                 | —                                                                               |
-| `invalid`          | `boolean`                                     | `false`                                | —                                                                               |
-| `keepBuffer`       | `boolean`                                     | `INPUT_MASK_DEFAULTS.keepBuffer`       | —                                                                               |
-| `mask`             | `string`                                      | `''`                                   | —                                                                               |
-| `maskHint`         | `string | null`                               | `null`                                 | —                                                                               |
-| `name`             | `string | undefined`                          | `undefined`                            | —                                                                               |
-| `placeholder`      | `string | undefined`                          | `undefined`                            | —                                                                               |
-| `readonly`         | `boolean`                                     | `false`                                | —                                                                               |
-| `showClear`        | `boolean`                                     | `INPUT_MASK_DEFAULTS.showClear`        | —                                                                               |
-| `size`             | `InputMaskSize`                               | `'md'`                                 | —                                                                               |
-| `slotChar`         | `string`                                      | `INPUT_MASK_DEFAULTS.slotChar`         | —                                                                               |
-| `type`             | `string`                                      | `INPUT_MASK_DEFAULTS.type`             | —                                                                               |
-| `unmask`           | `boolean`                                     | `INPUT_MASK_DEFAULTS.unmask`           | —                                                                               |
-| `variant`          | `'material' | 'bootstrap' | 'minimal' | null` | `null`                                 | /** Design variant override. When null the active global theme variant is used. |
+| Name               | Type                                          | Default                                | Description                                                                 |
+| ------------------ | --------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------- |
+| `ariaLabel`        | `string | null`                               | `null`                                 | —                                                                           |
+| `ariaLabelledBy`   | `string | null`                               | `null`                                 | —                                                                           |
+| `autoClear`        | `boolean`                                     | `INPUT_MASK_DEFAULTS.autoClear`        | —                                                                           |
+| `autocomplete`     | `string | undefined`                          | `undefined`                            | —                                                                           |
+| `characterPattern` | `string`                                      | `INPUT_MASK_DEFAULTS.characterPattern` | —                                                                           |
+| `disabled`         | `boolean`                                     | `false`                                | —                                                                           |
+| `errorMessage`     | `string | null`                               | `null`                                 | —                                                                           |
+| `filled`           | `boolean`                                     | `false`                                | —                                                                           |
+| `fluid`            | `boolean`                                     | `false`                                | —                                                                           |
+| `id`               | `string | null`                               | `null`                                 | —                                                                           |
+| `invalid`          | `boolean`                                     | `false`                                | —                                                                           |
+| `keepBuffer`       | `boolean`                                     | `INPUT_MASK_DEFAULTS.keepBuffer`       | —                                                                           |
+| `mask`             | `string`                                      | `''`                                   | —                                                                           |
+| `maskHint`         | `string | null`                               | `null`                                 | —                                                                           |
+| `name`             | `string | undefined`                          | `undefined`                            | —                                                                           |
+| `placeholder`      | `string | undefined`                          | `undefined`                            | —                                                                           |
+| `readonly`         | `boolean`                                     | `false`                                | —                                                                           |
+| `showClear`        | `boolean`                                     | `INPUT_MASK_DEFAULTS.showClear`        | —                                                                           |
+| `size`             | `InputMaskSize`                               | `'md'`                                 | —                                                                           |
+| `slotChar`         | `string`                                      | `INPUT_MASK_DEFAULTS.slotChar`         | —                                                                           |
+| `type`             | `string`                                      | `INPUT_MASK_DEFAULTS.type`             | —                                                                           |
+| `unmask`           | `boolean`                                     | `INPUT_MASK_DEFAULTS.unmask`           | —                                                                           |
+| `variant`          | `'material' | 'bootstrap' | 'minimal' | null` | `null`                                 | Design variant override. When null the active global theme variant is used. |
 
 ### Outputs
 

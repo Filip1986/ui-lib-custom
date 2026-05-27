@@ -7,54 +7,43 @@
 
 ## Overview
 
-CSS selector matching all focusable elements in the dialog panel. */
-const DIALOG_FOCUSABLE_SELECTOR: string = [
-  'a[href]',
-  'button:not([disabled])',
-  'textarea:not([disabled])',
-  'input:not([disabled]):not([type="hidden"])',
-  'select:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])',
-  '[contenteditable="true"]',
-].join(', ');
-
-/**Dialog component with modal/backdrop and responsive behavior.
+Dialog component with modal/backdrop and responsive behavior.
 
 ## API
 
 ### Inputs
 
-| Name              | Type                        | Default                            | Description                                                                                |
-| ----------------- | --------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ |
-| `ariaDescribedBy` | `string | undefined`        | `undefined`                        | /** Optional aria-describedby pointing to an element that describes the dialog purpose. */ |
-| `ariaLabelledBy`  | `string | undefined`        | `undefined`                        | /** Optional aria-labelledby override. */                                                  |
-| `blockScroll`     | `boolean`                   | `DIALOG_DEFAULTS.BlockScroll`      | /** Enables body scroll lock while a modal dialog is visible. */                           |
-| `breakpoints`     | `Record<string, string>`    | `{ ...DIALOG_DEFAULTS.Breakpoints` | /** Responsive max-width -> width map, e.g. { '960px': '75vw', '640px': '90vw' }. */       |
-| `closable`        | `boolean`                   | `DIALOG_DEFAULTS.Closable`         | /** Controls whether the close button is shown. */                                         |
-| `closeOnEscape`   | `boolean`                   | `DIALOG_DEFAULTS.CloseOnEscape`    | /** Enables closing the dialog with Escape key. */                                         |
-| `dismissableMask` | `boolean`                   | `DIALOG_DEFAULTS.DismissableMask`  | /** Enables closing the dialog by clicking the modal backdrop. */                          |
-| `draggable`       | `boolean`                   | `DIALOG_DEFAULTS.Draggable`        | /** Enables dialog dragging (placeholder for v1 core behavior). */                         |
-| `header`          | `string`                    | `DIALOG_DEFAULTS.Header`           | /** Optional header text fallback when no projected header is supplied. */                 |
-| `headless`        | `boolean`                   | `DIALOG_DEFAULTS.Headless`         | /** Enables headless rendering mode. */                                                    |
-| `maximizable`     | `boolean`                   | `DIALOG_DEFAULTS.Maximizable`      | /** Enables maximize/minimize controls. */                                                 |
-| `modal`           | `boolean`                   | `DIALOG_DEFAULTS.Modal`            | /** Enables modal mode and backdrop rendering. */                                          |
-| `position`        | `DialogPosition`            | `DIALOG_DEFAULTS.Position`         | /** Dialog viewport placement. */                                                          |
-| `styleClass`      | `string | null`             | `null`                             | /** Optional additional CSS class(es) applied to the dialog panel element. */              |
-| `variant`         | `DialogVariant | undefined` | `undefined`                        | /** Optional component variant override. */                                                |
+| Name              | Type                        | Default                            | Description                                                                         |
+| ----------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------- |
+| `ariaDescribedBy` | `string | undefined`        | `undefined`                        | Optional aria-describedby pointing to an element that describes the dialog purpose. |
+| `ariaLabelledBy`  | `string | undefined`        | `undefined`                        | Optional aria-labelledby override.                                                  |
+| `blockScroll`     | `boolean`                   | `DIALOG_DEFAULTS.BlockScroll`      | Enables body scroll lock while a modal dialog is visible.                           |
+| `breakpoints`     | `Record<string, string>`    | `{ ...DIALOG_DEFAULTS.Breakpoints` | Responsive max-width -> width map, e.g. { '960px': '75vw', '640px': '90vw' }.       |
+| `closable`        | `boolean`                   | `DIALOG_DEFAULTS.Closable`         | Controls whether the close button is shown.                                         |
+| `closeOnEscape`   | `boolean`                   | `DIALOG_DEFAULTS.CloseOnEscape`    | Enables closing the dialog with Escape key.                                         |
+| `dismissableMask` | `boolean`                   | `DIALOG_DEFAULTS.DismissableMask`  | Enables closing the dialog by clicking the modal backdrop.                          |
+| `draggable`       | `boolean`                   | `DIALOG_DEFAULTS.Draggable`        | Enables dialog dragging (placeholder for v1 core behavior).                         |
+| `header`          | `string`                    | `DIALOG_DEFAULTS.Header`           | Optional header text fallback when no projected header is supplied.                 |
+| `headless`        | `boolean`                   | `DIALOG_DEFAULTS.Headless`         | Enables headless rendering mode.                                                    |
+| `maximizable`     | `boolean`                   | `DIALOG_DEFAULTS.Maximizable`      | Enables maximize/minimize controls.                                                 |
+| `modal`           | `boolean`                   | `DIALOG_DEFAULTS.Modal`            | Enables modal mode and backdrop rendering.                                          |
+| `position`        | `DialogPosition`            | `DIALOG_DEFAULTS.Position`         | Dialog viewport placement.                                                          |
+| `styleClass`      | `string | null`             | `null`                             | Optional additional CSS class(es) applied to the dialog panel element.              |
+| `variant`         | `DialogVariant | undefined` | `undefined`                        | Optional component variant override.                                                |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default                   | Description                                                                   |
-| --------- | --------- | ------------------------- | ----------------------------------------------------------------------------- |
-| `visible` | `boolean` | `DIALOG_DEFAULTS.Visible` | /** Controls dialog visibility. Supports two-way binding with [(visible)]. */ |
+| Name      | Type      | Default                   | Description                                                            |
+| --------- | --------- | ------------------------- | ---------------------------------------------------------------------- |
+| `visible` | `boolean` | `DIALOG_DEFAULTS.Visible` | Controls dialog visibility. Supports two-way binding with [(visible)]. |
 
 ### Outputs
 
-| Name       | Type                     | Description                                 |
-| ---------- | ------------------------ | ------------------------------------------- |
-| `hide`     | `void`                   | /** Emitted after the dialog is hidden. */  |
-| `maximize` | `{ maximized: boolean }` | /** Emitted when maximize state changes. */ |
-| `show`     | `void`                   | /** Emitted after the dialog is shown. */   |
+| Name       | Type                     | Description                          |
+| ---------- | ------------------------ | ------------------------------------ |
+| `hide`     | `void`                   | Emitted after the dialog is hidden.  |
+| `maximize` | `{ maximized: boolean }` | Emitted when maximize state changes. |
+| `show`     | `void`                   | Emitted after the dialog is shown.   |
 
 ## Content Projection
 

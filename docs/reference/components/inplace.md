@@ -7,56 +7,34 @@
 
 ## Overview
 
-Auto-incrementing counter to generate a unique DOM id per Inplace instance. */
-let nextInplaceId: number = 0;
-
-/** CSS selector matching all standard focusable interactive elements. */
-const FOCUSABLE_SELECTOR: string =
-  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
-/**
-Inplace — inline editing component that toggles between a display and content slot.
-
-The display trigger is a native `<button>` with `aria-expanded` and `aria-controls`
-so screen readers announce the toggle state correctly.  On activation, focus moves
-to the first focusable element inside the content slot; on deactivation it returns
-to the display button.  Pressing Escape while the content is active also deactivates.
-
-Supports three design variants (material / bootstrap / minimal) and falls back to
-the global ThemeConfigService.
-
-@example
-<ui-lib-inplace>
-  <span inplaceDisplay>Click to edit</span>
-  <input inplaceContent type="text" />
-</ui-lib-inplace>
+Inplace — inline editing component that toggles between a display and content slot. The display trigger is a native `<button>` with `aria-expanded` and `aria-controls` so screen readers announce the toggle state correctly.  On activation, focus moves to the first focusable element inside the content slot; on deactivation it returns to the display button.  Pressing Escape while the content is active also deactivates. Supports three design variants (material / bootstrap / minimal) and falls back to the global ThemeConfigService.
 
 ## API
 
 ### Inputs
 
-| Name           | Type                    | Default           | Description                                                                      |
-| -------------- | ----------------------- | ----------------- | -------------------------------------------------------------------------------- |
-| `closable`     | `boolean`               | `false`           | /** When true, a close button is rendered inside the content slot to deactivate. |
-| `closeIcon`    | `string`                | `'pi pi-times'`   | /** Icon class for the close button (e.g. "pi pi-times").                        |
-| `closeLabel`   | `string`                | `'Close editor'`  | /** Accessible label for the close button. Override for i18n.                    |
-| `disabled`     | `boolean`               | `false`           | /** When true, no interaction is allowed and the display slot appears disabled.  |
-| `displayLabel` | `string`                | `'Click to edit'` | /** Accessible label for the display button. Override for i18n.                  |
-| `styleClass`   | `string | null`         | `null`            | /** Additional CSS classes to attach to the host element.                        |
-| `variant`      | `InplaceVariant | null` | `null`            | /** Visual variant — inherits from ThemeConfigService when not set.              |
+| Name           | Type                    | Default           | Description                                                                  |
+| -------------- | ----------------------- | ----------------- | ---------------------------------------------------------------------------- |
+| `closable`     | `boolean`               | `false`           | When true, a close button is rendered inside the content slot to deactivate. |
+| `closeIcon`    | `string`                | `'pi pi-times'`   | Icon class for the close button (e.g. "pi pi-times").                        |
+| `closeLabel`   | `string`                | `'Close editor'`  | Accessible label for the close button. Override for i18n.                    |
+| `disabled`     | `boolean`               | `false`           | When true, no interaction is allowed and the display slot appears disabled.  |
+| `displayLabel` | `string`                | `'Click to edit'` | Accessible label for the display button. Override for i18n.                  |
+| `styleClass`   | `string | null`         | `null`            | Additional CSS classes to attach to the host element.                        |
+| `variant`      | `InplaceVariant | null` | `null`            | Visual variant — inherits from ThemeConfigService when not set.              |
 
 ### Models (two-way bindable)
 
-| Name     | Type      | Default | Description                                                            |
-| -------- | --------- | ------- | ---------------------------------------------------------------------- |
-| `active` | `boolean` | `false` | /** Whether the inplace editor is currently active (two-way bindable). |
+| Name     | Type      | Default | Description                                                        |
+| -------- | --------- | ------- | ------------------------------------------------------------------ |
+| `active` | `boolean` | `false` | Whether the inplace editor is currently active (two-way bindable). |
 
 ### Outputs
 
-| Name          | Type   | Description                                                                           |
-| ------------- | ------ | ------------------------------------------------------------------------------------- |
-| `activated`   | `void` | /** Emitted when the inplace editor transitions to the active (editing) state.        |
-| `deactivated` | `void` | /** Emitted when the inplace editor transitions back to the display (inactive) state. |
+| Name          | Type   | Description                                                                       |
+| ------------- | ------ | --------------------------------------------------------------------------------- |
+| `activated`   | `void` | Emitted when the inplace editor transitions to the active (editing) state.        |
+| `deactivated` | `void` | Emitted when the inplace editor transitions back to the display (inactive) state. |
 
 ## Content Projection
 

@@ -7,22 +7,22 @@
 
 ## Overview
 
-ScrollTop — a floating "back to top" button that appears after the userscrolls past a configurable threshold.Can target the global window (default, `position: fixed`) or a parentscrollable container (`position: absolute`).Three sizes (sm / md / lg) and three design variants (material / bootstrap / minimal).@example<!-- Window target (fixed to viewport) --><ui-lib-scroll-top /><!-- Parent container target --><div style="height: 300px; overflow-y: auto; position: relative;">  <ui-lib-scroll-top target="parent" />  <!-- scrollable content --></div>
+ScrollTop — a floating "back to top" button that appears after the user scrolls past a configurable threshold. Can target the global window (default, `position: fixed`) or a parent scrollable container (`position: absolute`). Three sizes (sm / md / lg) and three design variants (material / bootstrap / minimal).
 
 ## API
 
 ### Inputs
 
-| Name              | Type                      | Default                      | Description                                                                            |
-| ----------------- | ------------------------- | ---------------------------- | -------------------------------------------------------------------------------------- |
-| `behavior`        | `ScrollTopBehavior`       | `'smooth'`                   | /** Native scroll-behavior applied when scrolling back to top. */                      |
-| `buttonAriaLabel` | `string`                  | `ScrollTop.defaultAriaLabel` | /** Accessible label for the button. */                                                |
-| `icon`            | `string`                  | `'pi pi-arrow-up'`           | /** CSS class(es) for the icon (e.g. "pi pi-arrow-up"). */                             |
-| `size`            | `ScrollTopSize`           | `'md'`                       | /** Size of the button. */                                                             |
-| `styleClass`      | `string | null`           | `null`                       | /** Additional CSS classes to attach to the host element. */                           |
-| `target`          | `ScrollTopTarget`         | `'window'`                   | /** Target to listen for scroll events on: the global window or the parent element. */ |
-| `threshold`       | `number`                  | `400`                        | /** Scroll distance in pixels before the button becomes visible. */                    |
-| `variant`         | `ScrollTopVariant | null` | `null`                       | /** Visual variant — inherits from ThemeConfigService when not set. */                 |
+| Name              | Type                      | Default                      | Description                                                                     |
+| ----------------- | ------------------------- | ---------------------------- | ------------------------------------------------------------------------------- |
+| `behavior`        | `ScrollTopBehavior`       | `'smooth'`                   | Native scroll-behavior applied when scrolling back to top.                      |
+| `buttonAriaLabel` | `string`                  | `ScrollTop.defaultAriaLabel` | Accessible label for the button.                                                |
+| `icon`            | `string`                  | `'pi pi-arrow-up'`           | CSS class(es) for the icon (e.g. "pi pi-arrow-up").                             |
+| `size`            | `ScrollTopSize`           | `'md'`                       | Size of the button.                                                             |
+| `styleClass`      | `string | null`           | `null`                       | Additional CSS classes to attach to the host element.                           |
+| `target`          | `ScrollTopTarget`         | `'window'`                   | Target to listen for scroll events on: the global window or the parent element. |
+| `threshold`       | `number`                  | `400`                        | Scroll distance in pixels before the button becomes visible.                    |
+| `variant`         | `ScrollTopVariant | null` | `null`                       | Visual variant — inherits from ThemeConfigService when not set.                 |
 
 ### Outputs
 

@@ -7,44 +7,33 @@
 
 ## Overview
 
-Popover — a lightweight floating panel anchored to a trigger element.
-
-Accepts arbitrary content via `<ng-content>`. Controlled programmatically via
-the `show()`, `hide()`, and `toggle()` methods (call them from a template ref
-or `viewChild`), or declaratively via the `[(visible)]` model binding.
-
-@example
-<!-- Template-ref usage -->
-<button #triggerBtn (click)="op.toggle(triggerBtn)">Info</button>
-<ui-lib-popover #op header="Details">
-  <p>Popover body content goes here.</p>
-</ui-lib-popover>
+Popover — a lightweight floating panel anchored to a trigger element. Accepts arbitrary content via `<ng-content>`. Controlled programmatically via the `show()`, `hide()`, and `toggle()` methods (call them from a template ref or `viewChild`), or declaratively via the `[(visible)]` model binding.
 
 ## API
 
 ### Inputs
 
-| Name              | Type                    | Default | Description                                                                 |
-| ----------------- | ----------------------- | ------- | --------------------------------------------------------------------------- |
-| `closeOnEscape`   | `boolean`               | `true`  | /** When true (default), pressing Escape closes the popover.                |
-| `dismissable`     | `boolean`               | `true`  | /** When true (default), clicking outside the panel closes the popover.     |
-| `header`          | `string | null`         | `null`  | /** Optional header text displayed at the top of the panel.                 |
-| `showCloseButton` | `boolean`               | `false` | /** When true, a close button (×) is rendered in the header area.           |
-| `styleClass`      | `string | null`         | `null`  | /** Additional CSS classes applied to the host element.                     |
-| `variant`         | `PopoverVariant | null` | `null`  | /** Design variant override; inherits from ThemeConfigService when not set. |
+| Name              | Type                    | Default | Description                                                             |
+| ----------------- | ----------------------- | ------- | ----------------------------------------------------------------------- |
+| `closeOnEscape`   | `boolean`               | `true`  | When true (default), pressing Escape closes the popover.                |
+| `dismissable`     | `boolean`               | `true`  | When true (default), clicking outside the panel closes the popover.     |
+| `header`          | `string | null`         | `null`  | Optional header text displayed at the top of the panel.                 |
+| `showCloseButton` | `boolean`               | `false` | When true, a close button (×) is rendered in the header area.           |
+| `styleClass`      | `string | null`         | `null`  | Additional CSS classes applied to the host element.                     |
+| `variant`         | `PopoverVariant | null` | `null`  | Design variant override; inherits from ThemeConfigService when not set. |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                                                                |
-| --------- | --------- | ------- | -------------------------------------------------------------------------- |
-| `visible` | `boolean` | `false` | /** Two-way visibility binding. Use `[(visible)]` for declarative control. |
+| Name      | Type      | Default | Description                                                            |
+| --------- | --------- | ------- | ---------------------------------------------------------------------- |
+| `visible` | `boolean` | `false` | Two-way visibility binding. Use `[(visible)]` for declarative control. |
 
 ### Outputs
 
-| Name     | Type   | Description                                    |
-| -------- | ------ | ---------------------------------------------- |
-| `hidden` | `void` | /** Emitted after the popover is hidden.       |
-| `shown`  | `void` | /** Emitted after the popover becomes visible. |
+| Name     | Type   | Description                                |
+| -------- | ------ | ------------------------------------------ |
+| `hidden` | `void` | Emitted after the popover is hidden.       |
+| `shown`  | `void` | Emitted after the popover becomes visible. |
 
 ## Content Projection
 

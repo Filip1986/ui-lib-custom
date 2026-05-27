@@ -7,65 +7,49 @@
 
 ## Overview
 
-Monotonic counter for unique element IDs. */
-let pickListIdCounter: number = 0;
-
-/**
 PickList component — transfers items between a source list and a target list.
-
-@example
-```html
-<ui-lib-pick-list [(source)]="available" [(target)]="selected">
-  <ng-template uiPickListItem let-item>{{ item.name }}</ng-template>
-</ui-lib-pick-list>
-```
 
 ## API
 
 ### Inputs
 
-| Name                        | Type                     | Default            | Description                                                                                                                           |
-| --------------------------- | ------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `disabled`                  | `boolean`                | `false`            | /** When `true`, all interaction is disabled.                                                                                         |
-| `dragDrop`                  | `boolean`                | `false`            | /** When `true`, items can be reordered and transferred by dragging and dropping.                                                     |
-| `filterBy`                  | `string | null`          | `null`             | /**
-Dot-notation property path used to filter items (e.g. `'name'` or `'address.city'`).
-When `null`, filter inputs are not rendered. |
-| `filterLocale`              | `string | undefined`     | `undefined`        | /** BCP 47 locale tag used for locale-sensitive string comparisons during filtering.                                                  |
-| `metaKeySelection`          | `boolean`                | `false`            | /** When `true`, Ctrl/Meta must be held to toggle multi-select.                                                                       |
-| `showSourceControls`        | `boolean`                | `true`             | /** When `true`, shows reorder controls for the source list.                                                                          |
-| `showTargetControls`        | `boolean`                | `true`             | /** When `true`, shows reorder controls for the target list.                                                                          |
-| `size`                      | `PickListSize`           | `'md'`             | /** Component size token.                                                                                                             |
-| `sourceAriaLabel`           | `string | null`          | `null`             | /** Accessible label for the source listbox element.                                                                                  |
-| `sourceFilterPlaceholder`   | `string`                 | `'Filter'`         | /** Placeholder text shown inside the source list filter input.                                                                       |
-| `sourceHeader`              | `string | null`          | `null`             | /** Caption rendered above the source list.                                                                                           |
-| `sourceMoveBottomAriaLabel` | `string`                 | `'Move to bottom'` | /** Accessible label for the source "Move to bottom" reorder button.                                                                  |
-| `sourceMoveDownAriaLabel`   | `string`                 | `'Move down'`      | /** Accessible label for the source "Move down" reorder button.                                                                       |
-| `sourceMoveTopAriaLabel`    | `string`                 | `'Move to top'`    | /** Accessible label for the source "Move to top" reorder button.                                                                     |
-| `sourceMoveUpAriaLabel`     | `string`                 | `'Move up'`        | /** Accessible label for the source "Move up" reorder button.                                                                         |
-| `stripedRows`               | `boolean`                | `false`            | /** When `true`, alternating rows are rendered with a background tint.                                                                |
-| `styleClass`                | `string | null`          | `null`             | /** Additional CSS class applied to the root element.                                                                                 |
-| `targetAriaLabel`           | `string | null`          | `null`             | /** Accessible label for the target listbox element.                                                                                  |
-| `targetFilterPlaceholder`   | `string`                 | `'Filter'`         | /** Placeholder text shown inside the target list filter input.                                                                       |
-| `targetHeader`              | `string | null`          | `null`             | /** Caption rendered above the target list.                                                                                           |
-| `targetMoveBottomAriaLabel` | `string`                 | `'Move to bottom'` | /** Accessible label for the target "Move to bottom" reorder button.                                                                  |
-| `targetMoveDownAriaLabel`   | `string`                 | `'Move down'`      | /** Accessible label for the target "Move down" reorder button.                                                                       |
-| `targetMoveTopAriaLabel`    | `string`                 | `'Move to top'`    | /** Accessible label for the target "Move to top" reorder button.                                                                     |
-| `targetMoveUpAriaLabel`     | `string`                 | `'Move up'`        | /** Accessible label for the target "Move up" reorder button.                                                                         |
-| `trackBy`                   | `string | null`          | `null`             | /**
-Property key used to identify items for selection equality and `@for` tracking.
-When `null`, item object identity is used.        |
-| `variant`                   | `PickListVariant | null` | `null`             | /**
-Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                          |
+| Name                        | Type                     | Default            | Description                                                                                                                       |
+| --------------------------- | ------------------------ | ------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`                  | `boolean`                | `false`            | When `true`, all interaction is disabled.                                                                                         |
+| `dragDrop`                  | `boolean`                | `false`            | When `true`, items can be reordered and transferred by dragging and dropping.                                                     |
+| `filterBy`                  | `string | null`          | `null`             | Dot-notation property path used to filter items (e.g. `'name'` or `'address.city'`). When `null`, filter inputs are not rendered. |
+| `filterLocale`              | `string | undefined`     | `undefined`        | BCP 47 locale tag used for locale-sensitive string comparisons during filtering.                                                  |
+| `metaKeySelection`          | `boolean`                | `false`            | When `true`, Ctrl/Meta must be held to toggle multi-select.                                                                       |
+| `showSourceControls`        | `boolean`                | `true`             | When `true`, shows reorder controls for the source list.                                                                          |
+| `showTargetControls`        | `boolean`                | `true`             | When `true`, shows reorder controls for the target list.                                                                          |
+| `size`                      | `PickListSize`           | `'md'`             | Component size token.                                                                                                             |
+| `sourceAriaLabel`           | `string | null`          | `null`             | Accessible label for the source listbox element.                                                                                  |
+| `sourceFilterPlaceholder`   | `string`                 | `'Filter'`         | Placeholder text shown inside the source list filter input.                                                                       |
+| `sourceHeader`              | `string | null`          | `null`             | Caption rendered above the source list.                                                                                           |
+| `sourceMoveBottomAriaLabel` | `string`                 | `'Move to bottom'` | Accessible label for the source "Move to bottom" reorder button.                                                                  |
+| `sourceMoveDownAriaLabel`   | `string`                 | `'Move down'`      | Accessible label for the source "Move down" reorder button.                                                                       |
+| `sourceMoveTopAriaLabel`    | `string`                 | `'Move to top'`    | Accessible label for the source "Move to top" reorder button.                                                                     |
+| `sourceMoveUpAriaLabel`     | `string`                 | `'Move up'`        | Accessible label for the source "Move up" reorder button.                                                                         |
+| `stripedRows`               | `boolean`                | `false`            | When `true`, alternating rows are rendered with a background tint.                                                                |
+| `styleClass`                | `string | null`          | `null`             | Additional CSS class applied to the root element.                                                                                 |
+| `targetAriaLabel`           | `string | null`          | `null`             | Accessible label for the target listbox element.                                                                                  |
+| `targetFilterPlaceholder`   | `string`                 | `'Filter'`         | Placeholder text shown inside the target list filter input.                                                                       |
+| `targetHeader`              | `string | null`          | `null`             | Caption rendered above the target list.                                                                                           |
+| `targetMoveBottomAriaLabel` | `string`                 | `'Move to bottom'` | Accessible label for the target "Move to bottom" reorder button.                                                                  |
+| `targetMoveDownAriaLabel`   | `string`                 | `'Move down'`      | Accessible label for the target "Move down" reorder button.                                                                       |
+| `targetMoveTopAriaLabel`    | `string`                 | `'Move to top'`    | Accessible label for the target "Move to top" reorder button.                                                                     |
+| `targetMoveUpAriaLabel`     | `string`                 | `'Move up'`        | Accessible label for the target "Move up" reorder button.                                                                         |
+| `trackBy`                   | `string | null`          | `null`             | Property key used to identify items for selection equality and `@for` tracking. When `null`, item object identity is used.        |
+| `variant`                   | `PickListVariant | null` | `null`             | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                          |
 
 ### Models (two-way bindable)
 
-| Name              | Type        | Default | Description                                                         |
-| ----------------- | ----------- | ------- | ------------------------------------------------------------------- |
-| `source`          | `unknown[]` | `[]`    | /** The source list of items. Mutations emit a new array reference. |
-| `sourceSelection` | `unknown[]` | `[]`    | /** The currently selected items in the source list.                |
-| `target`          | `unknown[]` | `[]`    | /** The target list of items. Mutations emit a new array reference. |
-| `targetSelection` | `unknown[]` | `[]`    | /** The currently selected items in the target list.                |
+| Name              | Type        | Default | Description                                                     |
+| ----------------- | ----------- | ------- | --------------------------------------------------------------- |
+| `source`          | `unknown[]` | `[]`    | The source list of items. Mutations emit a new array reference. |
+| `sourceSelection` | `unknown[]` | `[]`    | The currently selected items in the source list.                |
+| `target`          | `unknown[]` | `[]`    | The target list of items. Mutations emit a new array reference. |
+| `targetSelection` | `unknown[]` | `[]`    | The currently selected items in the target list.                |
 
 ### Outputs
 

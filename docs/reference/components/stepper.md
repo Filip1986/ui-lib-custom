@@ -7,55 +7,30 @@
 
 ## Overview
 
-Stepper — a multi-step wizard component for guided sequential workflows.
-
-Manages step navigation, active-step state, and optional linear (sequential) enforcement.
-Supports horizontal and vertical orientations, and three design variants.
-
-@example
-<!-- Basic horizontal stepper -->
-<ui-lib-stepper [(activeStep)]="currentStep">
-  <ui-lib-stepper-panel header="Account Info">
-    <ng-template #stepperContent>
-      <p>Fill in your account information.</p>
-    </ng-template>
-    <ng-template #stepperFooter>
-      <button (click)="stepper.nextStep()">Next</button>
-    </ng-template>
-  </ui-lib-stepper-panel>
-  <ui-lib-stepper-panel header="Confirmation">
-    <ng-template #stepperContent><p>Review your details.</p></ng-template>
-    <ng-template #stepperFooter>
-      <button (click)="stepper.prevStep()">Back</button>
-      <button (click)="submit()">Submit</button>
-    </ng-template>
-  </ui-lib-stepper-panel>
-</ui-lib-stepper>
+Stepper — a multi-step wizard component for guided sequential workflows. Manages step navigation, active-step state, and optional linear (sequential) enforcement. Supports horizontal and vertical orientations, and three design variants.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                    | Default                      | Description                                                                                                                                  |
-| ------------ | ----------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                | `STEPPER_DEFAULT_ARIA_LABEL` | /** Accessible label announced for the step navigation container.                                                                            |
-| `linear`     | `boolean`               | `false`                      | /**
-When true, users can only advance to the next step sequentially.
-Skipping to later steps is blocked until prior steps have been visited. |
-| `styleClass` | `string | null`         | `null`                       | /** Additional CSS classes to attach to the host element.                                                                                    |
-| `variant`    | `StepperVariant | null` | `null`                       | /** Visual variant — inherits from ThemeConfigService when null.                                                                             |
+| Name         | Type                    | Default                      | Description                                                                                                                              |
+| ------------ | ----------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string`                | `STEPPER_DEFAULT_ARIA_LABEL` | Accessible label announced for the step navigation container.                                                                            |
+| `linear`     | `boolean`               | `false`                      | When true, users can only advance to the next step sequentially. Skipping to later steps is blocked until prior steps have been visited. |
+| `styleClass` | `string | null`         | `null`                       | Additional CSS classes to attach to the host element.                                                                                    |
+| `variant`    | `StepperVariant | null` | `null`                       | Visual variant — inherits from ThemeConfigService when null.                                                                             |
 
 ### Models (two-way bindable)
 
-| Name         | Type     | Default | Description                                                  |
-| ------------ | -------- | ------- | ------------------------------------------------------------ |
-| `activeStep` | `number` | `0`     | /** Currently active step index (0-based). Two-way bindable. |
+| Name         | Type     | Default | Description                                              |
+| ------------ | -------- | ------- | -------------------------------------------------------- |
+| `activeStep` | `number` | `0`     | Currently active step index (0-based). Two-way bindable. |
 
 ### Outputs
 
-| Name         | Type              | Description                                |
-| ------------ | ----------------- | ------------------------------------------ |
-| `stepChange` | `StepChangeEvent` | /** Emitted after the active step changes. |
+| Name         | Type              | Description                            |
+| ------------ | ----------------- | -------------------------------------- |
+| `stepChange` | `StepChangeEvent` | Emitted after the active step changes. |
 
 ## Content Projection
 

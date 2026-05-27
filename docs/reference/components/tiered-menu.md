@@ -7,55 +7,27 @@
 
 ## Overview
 
-Default accessible label exported for test assertions. */
-export const TIERED_MENU_DEFAULT_ARIA_LABEL: string = 'Menu';
-
-/** Module-level counter for unique instance IDs. */
-let nextTieredMenuId: number = 0;
-
-/**
-TieredMenu component — a nested flyout menu supporting arbitrarily deep
-hierarchies. Works in two modes:
-
-- **Inline mode** (`popup="false"`, the default): the menu panel is always
-  rendered in the document flow. Useful for sidebars or inline navigation.
-- **Popup mode** (`popup="true"`): the menu panel is a floating overlay
-  anchored to a trigger element. Control visibility via `toggle(event)`,
-  `show(event)`, and `hide()`.
-
-Usage (inline):
-```html
-<ui-lib-tiered-menu [model]="items" />
-```
-
-Usage (popup):
-```html
-<button (click)="menu.toggle($event)">Open menu</button>
-<ui-lib-tiered-menu #menu [model]="items" [popup]="true" />
-```
+TieredMenu component — a nested flyout menu supporting arbitrarily deep hierarchies. Works in two modes: - **Inline mode** (`popup="false"`, the default): the menu panel is always rendered in the document flow. Useful for sidebars or inline navigation. - **Popup mode** (`popup="true"`): the menu panel is a floating overlay anchored to a trigger element. Control visibility via `toggle(event)`, `show(event)`, and `hide()`. Usage (inline): ```html <ui-lib-tiered-menu [model]="items" /> ``` Usage (popup): ```html <button (click)="menu.toggle($event)">Open menu</button> <ui-lib-tiered-menu #menu [model]="items" [popup]="true" /> ```
 
 ## API
 
 ### Inputs
 
-| Name         | Type                       | Default                          | Description                                                                                                                                                                                             |
-| ------------ | -------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                   | `TIERED_MENU_DEFAULT_ARIA_LABEL` | /** Accessible label for the menu panel (aria-label).                                                                                                                                                   |
-| `model`      | `TieredMenuItem[]`         | `[]`                             | /** Array of menu items to display.                                                                                                                                                                     |
-| `popup`      | `boolean`                  | `false`                          | /**
-When true, the menu renders as a floating popup anchored to the trigger
-element passed to `toggle(event)` or `show(event)`.
-When false (default), the menu is rendered inline in the document flow. |
-| `size`       | `TieredMenuSize`           | `'md'`                           | /** Size token: sm | md | lg.                                                                                                                                                                           |
-| `styleClass` | `string | null`            | `null`                           | /** Extra CSS class appended to the host element.                                                                                                                                                       |
-| `variant`    | `TieredMenuVariant | null` | `null`                           | /** Design-system variant; falls back to ThemeConfigService when null.                                                                                                                                  |
+| Name         | Type                       | Default                          | Description                                                                                                                                                                                         |
+| ------------ | -------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string`                   | `TIERED_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the menu panel (aria-label).                                                                                                                                                   |
+| `model`      | `TieredMenuItem[]`         | `[]`                             | Array of menu items to display.                                                                                                                                                                     |
+| `popup`      | `boolean`                  | `false`                          | When true, the menu renders as a floating popup anchored to the trigger element passed to `toggle(event)` or `show(event)`. When false (default), the menu is rendered inline in the document flow. |
+| `size`       | `TieredMenuSize`           | `'md'`                           | Size token: sm | md | lg.                                                                                                                                                                           |
+| `styleClass` | `string | null`            | `null`                           | Extra CSS class appended to the host element.                                                                                                                                                       |
+| `variant`    | `TieredMenuVariant | null` | `null`                           | Design-system variant; falls back to ThemeConfigService when null.                                                                                                                                  |
 
 ### Outputs
 
-| Name       | Type                         | Description                                       |
-| ---------- | ---------------------------- | ------------------------------------------------- |
-| `menuHide` | `void`                       | /** Emitted when the popup panel is hidden.       |
-| `menuShow` | `MouseEvent | KeyboardEvent` | /** Emitted when the popup panel becomes visible. |
+| Name       | Type                         | Description                                   |
+| ---------- | ---------------------------- | --------------------------------------------- |
+| `menuHide` | `void`                       | Emitted when the popup panel is hidden.       |
+| `menuShow` | `MouseEvent | KeyboardEvent` | Emitted when the popup panel becomes visible. |
 
 ## Content Projection
 

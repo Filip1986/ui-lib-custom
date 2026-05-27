@@ -7,22 +7,20 @@
 
 ## Overview
 
-Monotonic counter for unique Timeline element IDs. */
-let nextTimelineId: number = 0;
-/**Timeline component — renders a series of events along a vertical or horizontal axis.Supports three named template slots via structural directives:- `[uiTimelineMarker]`   — custom dot/icon in the separator track- `[uiTimelineContent]`  — main event body (right/bottom by default)- `[uiTimelineOpposite]` — opposite-side label (left/top by default)@example```html<ui-lib-timeline [value]="events">  <ng-template uiTimelineContent let-event>{{ event.title }}</ng-template></ui-lib-timeline>```
+Timeline component — renders a series of events along a vertical or horizontal axis. Supports three named template slots via structural directives: - `[uiTimelineMarker]`   — custom dot/icon in the separator track - `[uiTimelineContent]`  — main event body (right/bottom by default) - `[uiTimelineOpposite]` — opposite-side label (left/top by default)
 
 ## API
 
 ### Inputs
 
-| Name         | Type                     | Default                       | Description                                                                                                                        |
-| ------------ | ------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `align`      | `TimelineAlign`          | `TIMELINE_DEFAULTS.align`     | /**Event alignment within the layout.Vertical: `'left'` | `'right'` | `'alternate'`Horizontal: `'top'` | `'bottom'`/           |
-| `ariaLabel`  | `string`                 | `TIMELINE_DEFAULTS.ariaLabel` | /** Accessible label for the timeline list. */                                                                                     |
-| `layout`     | `TimelineLayout`         | `TIMELINE_DEFAULTS.layout`    | /**Layout orientation.- `'vertical'` (default) — events stacked top-to-bottom- `'horizontal'` — events arranged left-to-right/ |
-| `size`       | `TimelineSize`           | `TIMELINE_DEFAULTS.size`      | /** Component density size. */                                                                                                     |
-| `styleClass` | `string | null`          | `null`                        | /** Additional CSS class(es) to append to the host element. */                                                                     |
-| `variant`    | `TimelineVariant | null` | `null`                        | /**Visual variant override. When `null`, the variant is inherited from `ThemeConfigService`./                                    |
+| Name         | Type                     | Default                       | Description                                                                                                                  |
+| ------------ | ------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `align`      | `TimelineAlign`          | `TIMELINE_DEFAULTS.align`     | Event alignment within the layout. Vertical: `'left'` | `'right'` | `'alternate'` Horizontal: `'top'` | `'bottom'`           |
+| `ariaLabel`  | `string`                 | `TIMELINE_DEFAULTS.ariaLabel` | Accessible label for the timeline list.                                                                                      |
+| `layout`     | `TimelineLayout`         | `TIMELINE_DEFAULTS.layout`    | Layout orientation. - `'vertical'` (default) — events stacked top-to-bottom - `'horizontal'` — events arranged left-to-right |
+| `size`       | `TimelineSize`           | `TIMELINE_DEFAULTS.size`      | Component density size.                                                                                                      |
+| `styleClass` | `string | null`          | `null`                        | Additional CSS class(es) to append to the host element.                                                                      |
+| `variant`    | `TimelineVariant | null` | `null`                        | Visual variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                    |
 
 ### Outputs
 

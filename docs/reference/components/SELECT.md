@@ -1,7 +1,7 @@
 # Select
 
 **Selector:** `ui-lib-select`
-**Entry point:** `import { UiLibSelect } from 'ui-lib-custom/select'`
+**Entry point:** `import { Select } from 'ui-lib-custom/select'`
 
 ---
 
@@ -13,21 +13,21 @@ Select component with single or multiple selection and optional search.
 
 ### Inputs
 
-| Name             | Type                   | Default | Description |
-| ---------------- | ---------------------- | ------- | ----------- |
-| `options`        | `SelectOption[]`       | `[]`    | Option array. Each item: `{ label, value, disabled?, group? }`. |
-| `variant`        | `SelectVariant \| null` | `null`  | Visual style: `'material' \| 'bootstrap' \| 'minimal'`. Falls back to global theme when `null`. |
-| `size`           | `SelectSize`           | `'md'`  | Control height: `'sm'` (32 px) · `'md'` (40 px) · `'lg'` (48 px). |
-| `multiple`       | `boolean`              | `false` | Enable multi-selection. `ngModel` receives `unknown[]`. |
-| `searchable`     | `boolean`              | `false` | Shows a filter input inside the panel; announces result count via live region. |
-| `placeholder`    | `string`               | `'Select...'` | Text shown when no value is selected. |
-| `disabled`       | `boolean`              | `false` | Disables the control and sets `aria-disabled`. |
-| `loading`        | `boolean`              | `false` | Shows a spinner and blocks interaction; communicates loading state via `aria-disabled`. |
-| `label`          | `string`               | `''`    | Visible label rendered above the control. Automatically linked via `aria-labelledby`. |
-| `ariaLabel`      | `string \| null`       | `null`  | Sets `aria-label` on the host combobox element. Use when no visible label is rendered. |
-| `ariaLabelledBy` | `string \| null`       | `null`  | Sets `aria-labelledby` to an external element id. Overrides the auto-generated label link. |
-| `invalid`        | `boolean`              | `false` | Sets `aria-invalid="true"` and applies the error border colour. |
-| `required`       | `boolean`              | `false` | Sets `aria-required="true"` on the host element. |
+| Name             | Type                   | Default                | Description                                                                                           |
+| ---------------- | ---------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| `ariaLabel`      | `string | null`        | `null`                 | Sets `aria-label` on the host combobox. Use when no visible label is rendered. Default: `null`.       |
+| `ariaLabelledBy` | `string | null`        | `null`                 | Sets `aria-labelledby` to an external element id; overrides the auto-generated link. Default: `null`. |
+| `disabled`       | `boolean`              | `false`                | Disables the control and sets `aria-disabled`. Default: `false`.                                      |
+| `invalid`        | `boolean`              | `false`                | Sets `aria-invalid="true"` and applies error border colour. Default: `false`.                         |
+| `label`          | `string`               | `''`                   | Visible label rendered above the control; linked via `aria-labelledby`. Default: `''`.                |
+| `loading`        | `boolean`              | `false`                | Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`.       |
+| `multiple`       | `boolean`              | `false`                | Enable multi-selection; `ngModel` receives `unknown[]`. Default: `false`.                             |
+| `options`        | `SelectOption[]`       | `[]`                   | Option array. Each item: `{ label, value, disabled?, group? }`. Default: `[]`.                        |
+| `placeholder`    | `string`               | `'Select...'`          | Text shown when no value is selected. Default: `'Select...'`.                                         |
+| `required`       | `boolean`              | `false`                | Sets `aria-required="true"` on the host element. Default: `false`.                                    |
+| `searchable`     | `boolean`              | `false`                | Show filter input inside panel; announces result count via live region. Default: `false`.             |
+| `size`           | `SelectSize`           | `SHARED_DEFAULTS.Size` | Control height: `'sm'` (32px) · `'md'` (40px) · `'lg'` (48px). Default: `'md'`.                       |
+| `variant`        | `SelectVariant | null` | `null`                 | Visual variant. Falls back to global theme when `null`. Default: `null`.                              |
 
 ### Outputs
 
@@ -35,43 +35,50 @@ _none_
 
 ## Content Projection
 
-| Slot | Template variable | Context type | Description |
-|------|-------------------|--------------|-------------|
-| Option template | `#optionTemplate` | `SelectOptionTemplateContext` | Custom render for each option row. Context: `$implicit` (SelectOption), `index`, `selected`, `disabled`, `active`. |
+_none_
 
 ## Theming
 
-| CSS Variable                           | Default                                                                                                  |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--uilib-select-bg`                    | `var(--uilib-surface-dark-1)`                                                                            |
-| `--uilib-select-border`                | `var(--uilib-border-dark)`                                                                               |
-| `--uilib-select-dropdown-bg`           | `var(--uilib-surface-dark-3)`                                                                            |
-| `--uilib-select-empty-padding`         | `calc( var(--uilib-select-empty-padding-base) * var(--uilib-density, 1) )`                               |
-| `--uilib-select-empty-padding-base`    | `0.75rem`                                                                                                |
-| `--uilib-select-group-padding-x`       | `calc( var(--uilib-select-group-padding-x-base) * var(--uilib-density, 1) )`                             |
-| `--uilib-select-group-padding-x-base`  | `0.75rem`                                                                                                |
-| `--uilib-select-group-padding-y`       | `calc( var(--uilib-select-group-padding-y-base) * var(--uilib-density, 1) )`                             |
-| `--uilib-select-group-padding-y-base`  | `0.25rem`                                                                                                |
-| `--uilib-select-option-hover`          | `var( --uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent) )` |
-| `--uilib-select-option-padding-x`      | `calc( var(--uilib-select-option-padding-x-base) * var(--uilib-density, 1) )`                            |
-| `--uilib-select-option-padding-x-base` | `0.75rem`                                                                                                |
-| `--uilib-select-option-padding-y`      | `calc( var(--uilib-select-option-padding-y-base) * var(--uilib-density, 1) )`                            |
-| `--uilib-select-option-padding-y-base` | `0.5rem`                                                                                                 |
-| `--uilib-select-option-selected`       | `color-mix( in srgb, var(--uilib-color-primary-dark) 20%, transparent )`                                 |
-| `--uilib-select-padding-x`             | `calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1))`                                     |
-| `--uilib-select-padding-x-base`        | `0.75rem`                                                                                                |
-| `--uilib-select-padding-y`             | `calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1))`                                     |
-| `--uilib-select-padding-y-base`        | `0.55rem`                                                                                                |
-| `--uilib-select-panel-max-height`      | `260px`                                                                                                  |
-| `--uilib-select-panel-z-index`         | `var(--uilib-z-dropdown, 10)`                                                                            |
-| `--uilib-select-search-padding-x`      | `calc( var(--uilib-select-search-padding-x-base) * var(--uilib-density, 1) )`                            |
-| `--uilib-select-search-padding-x-base` | `0.75rem`                                                                                                |
-| `--uilib-select-search-padding-y`      | `calc( var(--uilib-select-search-padding-y-base) * var(--uilib-density, 1) )`                            |
-| `--uilib-select-search-padding-y-base` | `0.5rem`                                                                                                 |
+| CSS Variable                                 | Default                                                                                                  |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--uilib-select-arrow-font-size`             | `0.8rem`                                                                                                 |
+| `--uilib-select-bg`                          | `var(--uilib-surface-dark-1)`                                                                            |
+| `--uilib-select-border`                      | `var(--uilib-border-dark)`                                                                               |
+| `--uilib-select-control-gap`                 | `0.5rem`                                                                                                 |
+| `--uilib-select-dropdown-bg`                 | `var(--uilib-surface-dark-3)`                                                                            |
+| `--uilib-select-empty-padding`               | `calc( var(--uilib-select-empty-padding-base) * var(--uilib-density, 1) )`                               |
+| `--uilib-select-empty-padding-base`          | `0.75rem`                                                                                                |
+| `--uilib-select-focus-ring-color`            | `var(--uilib-color-primary-500)`                                                                         |
+| `--uilib-select-focus-ring-width`            | `2px`                                                                                                    |
+| `--uilib-select-font-size-lg`                | `1.125rem`                                                                                               |
+| `--uilib-select-group-padding-x`             | `calc( var(--uilib-select-group-padding-x-base) * var(--uilib-density, 1) )`                             |
+| `--uilib-select-group-padding-x-base`        | `0.75rem`                                                                                                |
+| `--uilib-select-group-padding-y`             | `calc( var(--uilib-select-group-padding-y-base) * var(--uilib-density, 1) )`                             |
+| `--uilib-select-group-padding-y-base`        | `0.25rem`                                                                                                |
+| `--uilib-select-label-font-weight`           | `600`                                                                                                    |
+| `--uilib-select-label-gap`                   | `0.35rem`                                                                                                |
+| `--uilib-select-option-gap`                  | `0.5rem`                                                                                                 |
+| `--uilib-select-option-hover`                | `var( --uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent) )` |
+| `--uilib-select-option-padding-x`            | `calc( var(--uilib-select-option-padding-x-base) * var(--uilib-density, 1) )`                            |
+| `--uilib-select-option-padding-x-base`       | `0.75rem`                                                                                                |
+| `--uilib-select-option-padding-y`            | `calc( var(--uilib-select-option-padding-y-base) * var(--uilib-density, 1) )`                            |
+| `--uilib-select-option-padding-y-base`       | `0.5rem`                                                                                                 |
+| `--uilib-select-option-selected`             | `color-mix( in srgb, var(--uilib-color-primary-dark) 20%, transparent )`                                 |
+| `--uilib-select-option-selected-font-weight` | `600`                                                                                                    |
+| `--uilib-select-padding-x`                   | `calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1))`                                     |
+| `--uilib-select-padding-x-base`              | `0.75rem`                                                                                                |
+| `--uilib-select-padding-y`                   | `calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1))`                                     |
+| `--uilib-select-padding-y-base`              | `0.55rem`                                                                                                |
+| `--uilib-select-panel-max-height`            | `260px`                                                                                                  |
+| `--uilib-select-panel-z-index`               | `var(--uilib-z-dropdown, 10)`                                                                            |
+| `--uilib-select-search-padding-x`            | `calc( var(--uilib-select-search-padding-x-base) * var(--uilib-density, 1) )`                            |
+| `--uilib-select-search-padding-x-base`       | `0.75rem`                                                                                                |
+| `--uilib-select-search-padding-y`            | `calc( var(--uilib-select-search-padding-y-base) * var(--uilib-density, 1) )`                            |
+| `--uilib-select-search-padding-y-base`       | `0.5rem`                                                                                                 |
 
 ## Accessibility
 
-**APG pattern:** [Combobox Pattern (ARIA 1.2)](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -161,11 +168,11 @@ _none_
   { label: 'One',   value: 1,   group: 'Numbers' },
 ] -->
 
-<!-- custom option template -->
+<!-- custom option template — rich context: $implicit, index, selected, disabled, active -->
 <ui-lib-select label="User" [options]="users" [(ngModel)]="selectedUser">
-  <ng-template #optionTemplate let-opt>
+  <ng-template #optionTemplate let-opt let-selected="selected" let-active="active">
     <img [src]="opt.value.avatar" alt="" aria-hidden="true" />
-    <span>{{ opt.label }}</span>
+    <span [class.fw-bold]="selected">{{ opt.label }}</span>
   </ng-template>
 </ui-lib-select>
 ```

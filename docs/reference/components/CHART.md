@@ -13,24 +13,24 @@ Generic Chart.js wrapper component with theme-aware reactive updates.
 
 ### Inputs
 
-| Name                  | Type                  | Default   | Description                                                                                        |
-| --------------------- | --------------------- | --------- | -------------------------------------------------------------------------------------------------- |
-| `ariaLabel`           | `string`              | `'Chart'` | /** ARIA label applied to the rendered canvas. */                                                  |
-| `height`              | `string | null`       | `null`    | /** Optional host height override. */                                                              |
-| `maintainAspectRatio` | `boolean`             | `true`    | /** Keeps chart aspect ratio when responsive sizing is enabled. */                                 |
-| `plugins`             | `Plugin<ChartType>[]` | `[]`      | /** Inline Chart.js plugins for this chart instance. */                                            |
-| `responsive`          | `boolean`             | `true`    | /** Enables responsive chart layout behavior. */                                                   |
-| `showDataTable`       | `boolean`             | `true`    | /** When true, renders a visually-hidden data table as an accessible alternative to the canvas. */ |
-| `size`                | `ChartSize`           | `'md'`    | /** Wrapper size token. */                                                                         |
-| `width`               | `string | null`       | `null`    | /** Optional host width override. */                                                               |
+| Name                  | Type                  | Default   | Description                                                                                 |
+| --------------------- | --------------------- | --------- | ------------------------------------------------------------------------------------------- |
+| `ariaLabel`           | `string`              | `'Chart'` | ARIA label applied to the rendered canvas.                                                  |
+| `height`              | `string | null`       | `null`    | Optional host height override.                                                              |
+| `maintainAspectRatio` | `boolean`             | `true`    | Keeps chart aspect ratio when responsive sizing is enabled.                                 |
+| `plugins`             | `Plugin<ChartType>[]` | `[]`      | Inline Chart.js plugins for this chart instance.                                            |
+| `responsive`          | `boolean`             | `true`    | Enables responsive chart layout behavior.                                                   |
+| `showDataTable`       | `boolean`             | `true`    | When true, renders a visually-hidden data table as an accessible alternative to the canvas. |
+| `size`                | `ChartSize`           | `'md'`    | Wrapper size token.                                                                         |
+| `width`               | `string | null`       | `null`    | Optional host width override.                                                               |
 
 ### Outputs
 
-| Name         | Type               | Description                                                     |
-| ------------ | ------------------ | --------------------------------------------------------------- |
-| `chartClick` | `ChartClickEvent`  | /** Emits when a chart data element is clicked. */              |
-| `chartHover` | `ChartClickEvent`  | /** Emits when a chart data element is hovered. */              |
-| `chartReady` | `Chart<ChartType>` | /** Emits after the underlying Chart.js instance is created. */ |
+| Name         | Type               | Description                                              |
+| ------------ | ------------------ | -------------------------------------------------------- |
+| `chartClick` | `ChartClickEvent`  | Emits when a chart data element is clicked.              |
+| `chartHover` | `ChartClickEvent`  | Emits when a chart data element is hovered.              |
+| `chartReady` | `Chart<ChartType>` | Emits after the underlying Chart.js instance is created. |
 
 ## Content Projection
 

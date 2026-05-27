@@ -7,32 +7,32 @@
 
 ## Overview
 
-BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.Bind `[(visible)]` to open/close the sheet. Project your content inside the component;use the `[bottomSheetFooter]` attribute on a child element for a sticky footer slot.@example<ui-lib-bottom-sheet [(visible)]="isOpen" header="Share">  <p>Sheet content here.</p>  <div bottomSheetFooter>    <ui-lib-button (click)="isOpen.set(false)">Done</ui-lib-button>  </div></ui-lib-bottom-sheet>
+BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport. Bind `[(visible)]` to open/close the sheet. Project your content inside the component; use the `[bottomSheetFooter]` attribute on a child element for a sticky footer slot.
 
 ## API
 
 ### Inputs
 
-| Name              | Type            | Default | Description                                                              |
-| ----------------- | --------------- | ------- | ------------------------------------------------------------------------ |
-| `closeOnBackdrop` | `boolean`       | `true`  | /** Whether a click on the backdrop closes the sheet. */                 |
-| `closeOnEscape`   | `boolean`       | `true`  | /** Whether pressing Escape closes the sheet. */                         |
-| `header`          | `string`        | `''`    | /** Optional header text rendered in the sheet header bar. */            |
-| `showBackdrop`    | `boolean`       | `true`  | /** Whether to render the semi-transparent backdrop behind the sheet. */ |
-| `styleClass`      | `string | null` | `null`  | /** Additional CSS classes applied to the host element. */               |
+| Name              | Type            | Default | Description                                                       |
+| ----------------- | --------------- | ------- | ----------------------------------------------------------------- |
+| `closeOnBackdrop` | `boolean`       | `true`  | Whether a click on the backdrop closes the sheet.                 |
+| `closeOnEscape`   | `boolean`       | `true`  | Whether pressing Escape closes the sheet.                         |
+| `header`          | `string`        | `''`    | Optional header text rendered in the sheet header bar.            |
+| `showBackdrop`    | `boolean`       | `true`  | Whether to render the semi-transparent backdrop behind the sheet. |
+| `styleClass`      | `string | null` | `null`  | Additional CSS classes applied to the host element.               |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                                                                   |
-| --------- | --------- | ------- | ----------------------------------------------------------------------------- |
-| `visible` | `boolean` | `false` | /** Whether the sheet is open. Supports two-way binding via `[(visible)]`. */ |
+| Name      | Type      | Default | Description                                                            |
+| --------- | --------- | ------- | ---------------------------------------------------------------------- |
+| `visible` | `boolean` | `false` | Whether the sheet is open. Supports two-way binding via `[(visible)]`. |
 
 ### Outputs
 
-| Name     | Type   | Description                                    |
-| -------- | ------ | ---------------------------------------------- |
-| `hidden` | `void` | /** Emits after the sheet finishes closing. */ |
-| `shown`  | `void` | /** Emits after the sheet finishes opening. */ |
+| Name     | Type   | Description                             |
+| -------- | ------ | --------------------------------------- |
+| `hidden` | `void` | Emits after the sheet finishes closing. |
+| `shown`  | `void` | Emits after the sheet finishes opening. |
 
 ## Content Projection
 

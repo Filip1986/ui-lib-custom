@@ -7,32 +7,26 @@
 
 ## Overview
 
-Default accessible label exported for test assertions. */
-export const MEGA_MENU_DEFAULT_ARIA_LABEL: string = 'Navigation';
-
-/** Auto-incrementing counter to generate unique IDs for each MegaMenu instance. */
-let nextMegaMenuId: number = 0;
-
-/**MegaMenu component — a horizontal (or vertical) navigation bar wheretop-level items can open multi-column mega panels of sub-items.**Basic horizontal usage:**```html<ui-lib-mega-menu [model]="navItems" />```**Vertical usage:**```html<ui-lib-mega-menu [model]="navItems" orientation="vertical" />```
+MegaMenu component — a horizontal (or vertical) navigation bar where top-level items can open multi-column mega panels of sub-items. **Basic horizontal usage:** ```html <ui-lib-mega-menu [model]="navItems" /> ``` **Vertical usage:** ```html <ui-lib-mega-menu [model]="navItems" orientation="vertical" /> ```
 
 ## API
 
 ### Inputs
 
-| Name         | Type                     | Default                        | Description                                                                      |
-| ------------ | ------------------------ | ------------------------------ | -------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                 | `MEGA_MENU_DEFAULT_ARIA_LABEL` | /** Accessible label for the navigation landmark (aria-label on the `<nav>`). */ |
-| `model`      | `MegaMenuItem[]`         | `[]`                           | /** Array of top-level navigation items. */                                      |
-| `size`       | `MegaMenuSize`           | `'md'`                         | /** Size token: sm | md | lg. */                                                 |
-| `styleClass` | `string | null`          | `null`                         | /** Extra CSS class appended to the host element. */                             |
-| `variant`    | `MegaMenuVariant | null` | `null`                         | /** Design-system variant; falls back to ThemeConfigService when null. */        |
+| Name         | Type                     | Default                        | Description                                                               |
+| ------------ | ------------------------ | ------------------------------ | ------------------------------------------------------------------------- |
+| `ariaLabel`  | `string`                 | `MEGA_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (aria-label on the `<nav>`). |
+| `model`      | `MegaMenuItem[]`         | `[]`                           | Array of top-level navigation items.                                      |
+| `size`       | `MegaMenuSize`           | `'md'`                         | Size token: sm | md | lg.                                                 |
+| `styleClass` | `string | null`          | `null`                         | Extra CSS class appended to the host element.                             |
+| `variant`    | `MegaMenuVariant | null` | `null`                         | Design-system variant; falls back to ThemeConfigService when null.        |
 
 ### Outputs
 
-| Name          | Type           | Description                                                                           |
-| ------------- | -------------- | ------------------------------------------------------------------------------------- |
-| `panelClosed` | `void`         | /** Emitted when the currently open mega panel closes. */                             |
-| `panelOpened` | `MegaMenuItem` | /** Emitted when a mega panel opens. Carries the top-level item that triggered it. */ |
+| Name          | Type           | Description                                                                    |
+| ------------- | -------------- | ------------------------------------------------------------------------------ |
+| `panelClosed` | `void`         | Emitted when the currently open mega panel closes.                             |
+| `panelOpened` | `MegaMenuItem` | Emitted when a mega panel opens. Carries the top-level item that triggered it. |
 
 ## Content Projection
 

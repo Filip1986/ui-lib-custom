@@ -7,59 +7,18 @@
 
 ## Overview
 
-CSS selector for naturally interactive elements within a toolbar.
-Used to build the roving-tabindex item list.
-/
-const TOOLBAR_ITEM_SELECTOR: string = [
-  'button:not([disabled])',
-  'a[href]',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-].join(', ');
-
-/**
-Toolbar — a horizontal container with start, center, and end content projection slots.
-
-Use the `uiToolbarStart`, `uiToolbarCenter`, and `uiToolbarEnd` attribute selectors
-to project content into the corresponding slot.
-
-Keyboard interaction follows the WAI-ARIA Toolbar Pattern:
-- `ArrowRight` / `ArrowDown` — focus next item
-- `ArrowLeft` / `ArrowUp` — focus previous item
-- `Home` — focus first item
-- `End` — focus last item
-- `Tab` — exit the toolbar
-
-@example
-<!-- Basic toolbar -->
-<ui-lib-toolbar>
-  <div uiToolbarStart>
-    <button>Home</button>
-  </div>
-  <div uiToolbarCenter>
-    <span>My App</span>
-  </div>
-  <div uiToolbarEnd>
-    <button>Settings</button>
-  </div>
-</ui-lib-toolbar>
-
-<!-- Material variant, large size -->
-<ui-lib-toolbar variant="material" size="lg">
-  <div uiToolbarStart><button>Back</button></div>
-</ui-lib-toolbar>
+Toolbar — a horizontal container with start, center, and end content projection slots. Use the `uiToolbarStart`, `uiToolbarCenter`, and `uiToolbarEnd` attribute selectors to project content into the corresponding slot. Keyboard interaction follows the WAI-ARIA Toolbar Pattern: - `ArrowRight` / `ArrowDown` — focus next item - `ArrowLeft` / `ArrowUp` — focus previous item - `Home` — focus first item - `End` — focus last item - `Tab` — exit the toolbar
 
 ## API
 
 ### Inputs
 
-| Name         | Type                    | Default | Description                                                                                |
-| ------------ | ----------------------- | ------- | ------------------------------------------------------------------------------------------ |
-| `ariaLabel`  | `string | null`         | `null`  | /** Accessible label for the toolbar (recommended when multiple toolbars are on one page). |
-| `size`       | `ToolbarSize`           | `'md'`  | /** Size modifier for the toolbar. Defaults to `'md'`.                                     |
-| `styleClass` | `string | null`         | `null`  | /** Additional CSS classes to attach to the host element.                                  |
-| `variant`    | `ToolbarVariant | null` | `null`  | /** Visual variant — inherits from ThemeConfigService when not set.                        |
+| Name         | Type                    | Default | Description                                                                            |
+| ------------ | ----------------------- | ------- | -------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null`         | `null`  | Accessible label for the toolbar (recommended when multiple toolbars are on one page). |
+| `size`       | `ToolbarSize`           | `'md'`  | Size modifier for the toolbar. Defaults to `'md'`.                                     |
+| `styleClass` | `string | null`         | `null`  | Additional CSS classes to attach to the host element.                                  |
+| `variant`    | `ToolbarVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                        |
 
 ### Outputs
 

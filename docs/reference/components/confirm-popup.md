@@ -7,52 +7,35 @@
 
 ## Overview
 
-ConfirmPopup — a lightweight anchored confirmation popup with accept/reject actions.
-
-Unlike ConfirmDialog, ConfirmPopup has no modal backdrop and anchors near the element
-that triggered it, with an arrow pointing at that element. Drive it programmatically via
-ConfirmPopupService or declaratively via inputs/outputs.
-
-@example
-<!-- In template — place once in your layout -->
-<ui-lib-confirm-popup />
-
-<!-- In component — trigger from a button click -->
-onDeleteClick(event: MouseEvent): void {
-  this.confirmPopupService.confirm({
-    target: event.currentTarget as HTMLElement,
-    message: 'Are you sure?',
-    accept: () => this.delete(),
-  });
-}
+ConfirmPopup — a lightweight anchored confirmation popup with accept/reject actions. Unlike ConfirmDialog, ConfirmPopup has no modal backdrop and anchors near the element that triggered it, with an arrow pointing at that element. Drive it programmatically via ConfirmPopupService or declaratively via inputs/outputs.
 
 ## API
 
 ### Inputs
 
-| Name          | Type            | Default                               | Description                                                                        |
-| ------------- | --------------- | ------------------------------------- | ---------------------------------------------------------------------------------- |
-| `acceptIcon`  | `string | null` | `null`                                | /** CSS class for an icon inside the accept button.                                |
-| `acceptLabel` | `string`        | `'Yes'`                               | /** Accept button label.                                                           |
-| `icon`        | `string | null` | `null`                                | /** CSS class for the icon rendered before the message.                            |
-| `key`         | `string`        | `''`                                  | /** Key that matches incoming ConfirmPopupService calls to this specific instance. |
-| `message`     | `string`        | `'Are you sure you want to proceed?'` | /** Confirmation message text (declarative fallback).                              |
-| `rejectIcon`  | `string | null` | `null`                                | /** CSS class for an icon inside the reject button.                                |
-| `rejectLabel` | `string`        | `'No'`                                | /** Reject button label.                                                           |
-| `styleClass`  | `string | null` | `null`                                | /** Additional CSS classes applied to the host element.                            |
+| Name          | Type            | Default                               | Description                                                                    |
+| ------------- | --------------- | ------------------------------------- | ------------------------------------------------------------------------------ |
+| `acceptIcon`  | `string | null` | `null`                                | CSS class for an icon inside the accept button.                                |
+| `acceptLabel` | `string`        | `'Yes'`                               | Accept button label.                                                           |
+| `icon`        | `string | null` | `null`                                | CSS class for the icon rendered before the message.                            |
+| `key`         | `string`        | `''`                                  | Key that matches incoming ConfirmPopupService calls to this specific instance. |
+| `message`     | `string`        | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                              |
+| `rejectIcon`  | `string | null` | `null`                                | CSS class for an icon inside the reject button.                                |
+| `rejectLabel` | `string`        | `'No'`                                | Reject button label.                                                           |
+| `styleClass`  | `string | null` | `null`                                | Additional CSS classes applied to the host element.                            |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                                                                |
-| --------- | --------- | ------- | -------------------------------------------------------------------------- |
-| `visible` | `boolean` | `false` | /** Two-way visibility binding. Use `[(visible)]` for declarative control. |
+| Name      | Type      | Default | Description                                                            |
+| --------- | --------- | ------- | ---------------------------------------------------------------------- |
+| `visible` | `boolean` | `false` | Two-way visibility binding. Use `[(visible)]` for declarative control. |
 
 ### Outputs
 
-| Name       | Type   | Description                                                                |
-| ---------- | ------ | -------------------------------------------------------------------------- |
-| `accepted` | `void` | /** Emitted when the user clicks the accept button.                        |
-| `rejected` | `void` | /** Emitted when the user clicks the reject button or dismisses the popup. |
+| Name       | Type   | Description                                                            |
+| ---------- | ------ | ---------------------------------------------------------------------- |
+| `accepted` | `void` | Emitted when the user clicks the accept button.                        |
+| `rejected` | `void` | Emitted when the user clicks the reject button or dismisses the popup. |
 
 ## Content Projection
 

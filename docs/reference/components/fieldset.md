@@ -7,30 +7,30 @@
 
 ## Overview
 
-Fieldset — a labelled content container that optionally collapses its body.Supports three design variants (material / bootstrap / minimal) and atoggleable collapse animation driven by the CSS grid-row trick.@example<!-- Basic fieldset --><ui-lib-fieldset legend="Personal Info">  <p>Content here</p></ui-lib-fieldset><!-- Toggleable with two-way binding --><ui-lib-fieldset legend="Advanced" [toggleable]="true" [(collapsed)]="isCollapsed">  <p>Collapsible content</p></ui-lib-fieldset><!-- Custom legend via content projection --><ui-lib-fieldset [toggleable]="true">  <span fieldsetLegend>Custom <strong>Legend</strong></span>  <p>Body content</p></ui-lib-fieldset>
+Fieldset — a labelled content container that optionally collapses its body. Supports three design variants (material / bootstrap / minimal) and a toggleable collapse animation driven by the CSS grid-row trick.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                     | Default | Description                                                                                  |
-| ------------ | ------------------------ | ------- | -------------------------------------------------------------------------------------------- |
-| `legend`     | `string`                 | `''`    | /** Text to render in the legend area. Use `[fieldsetLegend]` projection for custom HTML. */ |
-| `styleClass` | `string | null`          | `null`  | /** Additional CSS classes to attach to the host element. */                                 |
-| `toggleable` | `boolean`                | `false` | /** Whether the fieldset body can be collapsed/expanded by the user. */                      |
-| `variant`    | `FieldsetVariant | null` | `null`  | /** Visual variant — inherits from ThemeConfigService when not set. */                       |
+| Name         | Type                     | Default | Description                                                                           |
+| ------------ | ------------------------ | ------- | ------------------------------------------------------------------------------------- |
+| `legend`     | `string`                 | `''`    | Text to render in the legend area. Use `[fieldsetLegend]` projection for custom HTML. |
+| `styleClass` | `string | null`          | `null`  | Additional CSS classes to attach to the host element.                                 |
+| `toggleable` | `boolean`                | `false` | Whether the fieldset body can be collapsed/expanded by the user.                      |
+| `variant`    | `FieldsetVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                       |
 
 ### Models (two-way bindable)
 
-| Name        | Type      | Default | Description                                                                              |
-| ----------- | --------- | ------- | ---------------------------------------------------------------------------------------- |
-| `collapsed` | `boolean` | `false` | /** Two-way binding for the collapsed state. Only meaningful when toggleable is true. */ |
+| Name        | Type      | Default | Description                                                                       |
+| ----------- | --------- | ------- | --------------------------------------------------------------------------------- |
+| `collapsed` | `boolean` | `false` | Two-way binding for the collapsed state. Only meaningful when toggleable is true. |
 
 ### Outputs
 
-| Name      | Type                  | Description                                                               |
-| --------- | --------------------- | ------------------------------------------------------------------------- |
-| `toggled` | `FieldsetToggleEvent` | /** Emitted after the collapsed state changes when toggleable is true. */ |
+| Name      | Type                  | Description                                                        |
+| --------- | --------------------- | ------------------------------------------------------------------ |
+| `toggled` | `FieldsetToggleEvent` | Emitted after the collapsed state changes when toggleable is true. |
 
 ## Content Projection
 

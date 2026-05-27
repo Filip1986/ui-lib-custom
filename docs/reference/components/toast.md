@@ -7,48 +7,19 @@
 
 ## Overview
 
-Maps ToastSeverity to the closest StatusIcon semantic name. */
-const SEVERITY_ICON_MAP: Record<ToastSeverity, StatusIcon> = {
-  success: 'success',
-  info: 'info',
-  warn: 'warning',
-  error: 'error',
-} as const;
-
-/** Duration of the exit animation in milliseconds — must match the CSS transition. */
-const ANIMATION_DURATION_MS: number = 300;
-
-/**
-Toast component — fixed-position notification overlay driven by ToastService.
-
-Place one instance in your app shell template (outside the router outlet).
-Call ToastService.add() from anywhere in the app to display a notification.
-
-@example
-// app.component.html
-<router-outlet />
-<ui-lib-toast position="top-right" />
-
-// any.component.ts
-private readonly toastService = inject(ToastService);
-this.toastService.add({ severity: 'success', summary: 'Done', detail: 'Changes saved.' });
+Toast component — fixed-position notification overlay driven by ToastService. Place one instance in your app shell template (outside the router outlet). Call ToastService.add() from anywhere in the app to display a notification.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                  | Default       | Description                                                                                                                                                      |
-| ------------ | --------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`        | `string | null`       | `null`        | /**
-Container key — when set, only messages with a matching `key` are displayed.
-Use multiple Toast containers with different keys for different screen regions. |
-| `life`       | `number`              | `3000`        | /**
-Default auto-dismiss duration in milliseconds.
-Individual messages can override this via their own `life` property.                                          |
-| `position`   | `ToastPosition`       | `'top-right'` | /** Screen position of the toast container.                                                                                                                      |
-| `styleClass` | `string | null`       | `null`        | /** Additional CSS class(es) to attach to the host element.                                                                                                      |
-| `variant`    | `ToastVariant | null` | `null`        | /**
-Design variant. When null, falls back to the global ThemeConfigService variant.                                                                              |
+| Name         | Type                  | Default       | Description                                                                                                                                                  |
+| ------------ | --------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `key`        | `string | null`       | `null`        | Container key — when set, only messages with a matching `key` are displayed. Use multiple Toast containers with different keys for different screen regions. |
+| `life`       | `number`              | `3000`        | Default auto-dismiss duration in milliseconds. Individual messages can override this via their own `life` property.                                          |
+| `position`   | `ToastPosition`       | `'top-right'` | Screen position of the toast container.                                                                                                                      |
+| `styleClass` | `string | null`       | `null`        | Additional CSS class(es) to attach to the host element.                                                                                                      |
+| `variant`    | `ToastVariant | null` | `null`        | Design variant. When null, falls back to the global ThemeConfigService variant.                                                                              |
 
 ### Outputs
 

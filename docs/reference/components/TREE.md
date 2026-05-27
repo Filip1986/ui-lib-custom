@@ -7,41 +7,38 @@
 
 ## Overview
 
-Module-level counter for generating unique tree instance IDs. */
-let nextTreeId: number = 0;
-
-/**Tree renders a hierarchical data structure with expand/collapse, threeselection modes (single, multiple, checkbox), optional filtering, andfull three-variant theming.@example```html<ui-lib-tree [value]="nodes" selectionMode="single" [(selection)]="selected">  <ng-template uiTreeNode let-node>    <strong>{{ node.label }}</strong>  </ng-template></ui-lib-tree>```
+Tree renders a hierarchical data structure with expand/collapse, three selection modes (single, multiple, checkbox), optional filtering, and full three-variant theming.
 
 ## API
 
 ### Inputs
 
-| Name                | Type                 | Default       | Description                                                                                                                                               |
-| ------------------- | -------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`         | `string`             | `''`          | /** Accessible label for the tree widget. Used as `aria-label` on the host. */                                                                            |
-| `filter`            | `boolean`            | `false`       | /** When `true`, a filter input is rendered above the tree. */                                                                                            |
-| `filterBy`          | `string`             | `'label'`     | /** Property on TreeNode to search when filtering. Default `'label'`. */                                                                                  |
-| `filterMode`        | `TreeFilterMode`     | `'lenient'`   | /**Filter matching strategy.`'lenient'` (default): a node is visible if it or any descendant matches.`'strict'`: only exact-match nodes are visible./ |
-| `filterPlaceholder` | `string`             | `'Search...'` | /** Placeholder text for the filter input. */                                                                                                             |
-| `hostId`            | `string | null`      | `null`        | /** Optional explicit host id. Falls back to the generated instance id. */                                                                                |
-| `selectionMode`     | `TreeSelectionMode`  | `null`        | /** How nodes respond to click/checkbox interactions. */                                                                                                  |
-| `size`              | `TreeSize`           | `'md'`        | /** Size of node rows. */                                                                                                                                 |
-| `styleClass`        | `string`             | `''`          | /** Extra CSS class applied to the host element. */                                                                                                       |
-| `value`             | `TreeNode[]`         | `[]`          | /** Root-level nodes of the tree. */                                                                                                                      |
-| `variant`           | `TreeVariant | null` | `null`        | /** Design variant. Falls back to ThemeConfigService when `null`. */                                                                                      |
+| Name                | Type                 | Default       | Description                                                                                                                                         |
+| ------------------- | -------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`         | `string`             | `''`          | Accessible label for the tree widget. Used as `aria-label` on the host.                                                                             |
+| `filter`            | `boolean`            | `false`       | When `true`, a filter input is rendered above the tree.                                                                                             |
+| `filterBy`          | `string`             | `'label'`     | Property on TreeNode to search when filtering. Default `'label'`.                                                                                   |
+| `filterMode`        | `TreeFilterMode`     | `'lenient'`   | Filter matching strategy. `'lenient'` (default): a node is visible if it or any descendant matches. `'strict'`: only exact-match nodes are visible. |
+| `filterPlaceholder` | `string`             | `'Search...'` | Placeholder text for the filter input.                                                                                                              |
+| `hostId`            | `string | null`      | `null`        | Optional explicit host id. Falls back to the generated instance id.                                                                                 |
+| `selectionMode`     | `TreeSelectionMode`  | `null`        | How nodes respond to click/checkbox interactions.                                                                                                   |
+| `size`              | `TreeSize`           | `'md'`        | Size of node rows.                                                                                                                                  |
+| `styleClass`        | `string`             | `''`          | Extra CSS class applied to the host element.                                                                                                        |
+| `value`             | `TreeNode[]`         | `[]`          | Root-level nodes of the tree.                                                                                                                       |
+| `variant`           | `TreeVariant | null` | `null`        | Design variant. Falls back to ThemeConfigService when `null`.                                                                                       |
 
 ### Models (two-way bindable)
 
-| Name        | Type                           | Default | Description                                                                 |
-| ----------- | ------------------------------ | ------- | --------------------------------------------------------------------------- |
-| `selection` | `TreeNode | TreeNode[] | null` | `null`  | /** Currently selected node(s). Use `[(selection)]` for two-way binding. */ |
+| Name        | Type                           | Default | Description                                                          |
+| ----------- | ------------------------------ | ------- | -------------------------------------------------------------------- |
+| `selection` | `TreeNode | TreeNode[] | null` | `null`  | Currently selected node(s). Use `[(selection)]` for two-way binding. |
 
 ### Outputs
 
-| Name         | Type                  | Description                                       |
-| ------------ | --------------------- | ------------------------------------------------- |
-| `nodeExpand` | `TreeNodeExpandEvent` | /** Emitted when a node's subtree is expanded. */ |
-| `nodeSelect` | `TreeNodeSelectEvent` | /** Emitted when a node is selected. */           |
+| Name         | Type                  | Description                                |
+| ------------ | --------------------- | ------------------------------------------ |
+| `nodeExpand` | `TreeNodeExpandEvent` | Emitted when a node's subtree is expanded. |
+| `nodeSelect` | `TreeNodeSelectEvent` | Emitted when a node is selected.           |
 
 ## Content Projection
 

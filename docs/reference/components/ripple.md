@@ -13,11 +13,11 @@ The `Ripple` directive adds a Material-style circular wave effect to any element
 
 ### Inputs
 
-| Name             | Type      | Default | Description                                                                                                                                                                     |
-| ---------------- | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `disabled`       | `boolean` | `false` | /** When `true`, no ripple wave is produced on click. */                                                                                                                        |
-| `rippleColor`    | `string`  | `''`    | /**Override the CSS variable `--uilib-ripple-color` inline.Accepts any valid CSS colour value (e.g. `'rgba(0,0,0,0.12)'`).If not provided, the CSS variable value is used./ |
-| `rippleDuration` | `string`  | `''`    | /**Override the animation duration inline (e.g. `'500ms'`).If not provided, the CSS variable `--uilib-ripple-duration` value is used./                                       |
+| Name             | Type      | Default | Description                                                                                                                                                               |
+| ---------------- | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                                                                                                         |
+| `rippleColor`    | `string`  | `''`    | Override the CSS variable `--uilib-ripple-color` inline. Accepts any valid CSS colour value (e.g. `'rgba(0,0,0,0.12)'`). If not provided, the CSS variable value is used. |
+| `rippleDuration` | `string`  | `''`    | Override the animation duration inline (e.g. `'500ms'`). If not provided, the CSS variable `--uilib-ripple-duration` value is used.                                       |
 
 ### Outputs
 

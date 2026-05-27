@@ -7,52 +7,20 @@
 
 ## Overview
 
-Module-level counter for unique ProgressSpinner host IDs. */
-let nextProgressSpinnerId: number = 0;
-
-export type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spinner.types';
-
-/**
-ProgressSpinner — an animated circular spinner indicating an indeterminate loading state.
-
-Renders an SVG circle with a CSS-animated stroke-dashoffset that produces a
-continuously running "arc chase" effect.  The outer SVG also rotates to add
-the characteristic spinning motion.
-
-Three design variants map to the global theme: `material` (colour-cycling arc),
-`bootstrap` (solid primary blue), and `minimal` (muted grey).
-
-@example
-<!-- Default spinner -->
-<ui-lib-progress-spinner />
-
-<!-- Custom size and animation speed -->
-<ui-lib-progress-spinner size="lg" animationDuration="1.5s" />
-
-<!-- Custom stroke and fill -->
-<ui-lib-progress-spinner strokeWidth="4" fill="#f5f5f5" />
+ProgressSpinner — an animated circular spinner indicating an indeterminate loading state. Renders an SVG circle with a CSS-animated stroke-dashoffset that produces a continuously running "arc chase" effect.  The outer SVG also rotates to add the characteristic spinning motion. Three design variants map to the global theme: `material` (colour-cycling arc), `bootstrap` (solid primary blue), and `minimal` (muted grey).
 
 ## API
 
 ### Inputs
 
-| Name                | Type                  | Default                                       | Description                                                                                                                                             |
-| ------------------- | --------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `animationDuration` | `string`              | `PROGRESS_SPINNER_DEFAULTS.animationDuration` | /**
-Duration of one animation cycle (rotation + dash).
-Accepts any valid CSS `<time>` value, e.g. `'1s'`, `'750ms'`.
-Default: `'2s'`.                   |
-| `ariaLabel`         | `string`              | `'Loading...'`                                | /** Accessible label announced to screen readers. Default: `'Loading...'`.                                                                              |
-| `fill`              | `string`              | `PROGRESS_SPINNER_DEFAULTS.fill`              | /**
-Fill color of the SVG circle.
-Accepts any CSS color string.  Use `'none'` for a transparent interior.
-Default: `'none'`.                            |
-| `size`              | `ProgressSpinnerSize` | `PROGRESS_SPINNER_DEFAULTS.size`              | /** Component size token (`'sm'` | `'md'` | `'lg'`). Default: `'md'`.                                                                                   |
-| `strokeWidth`       | `string`              | `PROGRESS_SPINNER_DEFAULTS.strokeWidth`       | /**
-Width of the SVG circle stroke in SVG user-unit coordinates.
-Corresponds to the `stroke-width` attribute on the `<circle>` element.
-Default: `'2'`. |
-| `styleClass`        | `string | null`       | `null`                                        | /** Additional CSS class(es) to apply to the host element.                                                                                              |
+| Name                | Type                  | Default                                       | Description                                                                                                                                         |
+| ------------------- | --------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `animationDuration` | `string`              | `PROGRESS_SPINNER_DEFAULTS.animationDuration` | Duration of one animation cycle (rotation + dash). Accepts any valid CSS `<time>` value, e.g. `'1s'`, `'750ms'`. Default: `'2s'`.                   |
+| `ariaLabel`         | `string`              | `'Loading...'`                                | Accessible label announced to screen readers. Default: `'Loading...'`.                                                                              |
+| `fill`              | `string`              | `PROGRESS_SPINNER_DEFAULTS.fill`              | Fill color of the SVG circle. Accepts any CSS color string. Use `'none'` for a transparent interior. Default: `'none'`.                             |
+| `size`              | `ProgressSpinnerSize` | `PROGRESS_SPINNER_DEFAULTS.size`              | Component size token (`'sm'` | `'md'` | `'lg'`). Default: `'md'`.                                                                                   |
+| `strokeWidth`       | `string`              | `PROGRESS_SPINNER_DEFAULTS.strokeWidth`       | Width of the SVG circle stroke in SVG user-unit coordinates. Corresponds to the `stroke-width` attribute on the `<circle>` element. Default: `'2'`. |
+| `styleClass`        | `string | null`       | `null`                                        | Additional CSS class(es) to apply to the host element.                                                                                              |
 
 ### Outputs
 

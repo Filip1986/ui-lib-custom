@@ -7,64 +7,43 @@
 
 ## Overview
 
-Galleria is a media gallery component for displaying images or other content
-with optional thumbnail navigation, dot indicators, autoplay, and fullscreen mode.
-
-Provide content via ng-template slots:
-- `<ng-template #galleriaItem let-item>` — main item renderer
-- `<ng-template #galleriaThumbnail let-item>` — thumbnail renderer
-- `<ng-template #galleriaCaption let-item>` — caption overlay on the active item
-- `<ng-template #galleriaHeader>` — header above the gallery
-- `<ng-template #galleriaFooter>` — footer below the gallery
-- `<ng-template #galleriaIndicator let-index let-active="active">` — custom indicator
-
-@example
-```html
-<ui-lib-galleria [value]="images" [showThumbnails]="true">
-  <ng-template #galleriaItem let-image>
-    <img [src]="image.src" [alt]="image.alt" />
-  </ng-template>
-  <ng-template #galleriaThumbnail let-image>
-    <img [src]="image.thumbnailSrc" [alt]="image.alt" />
-  </ng-template>
-</ui-lib-galleria>
-```
+Galleria is a media gallery component for displaying images or other content with optional thumbnail navigation, dot indicators, autoplay, and fullscreen mode. Provide content via ng-template slots: - `<ng-template #galleriaItem let-item>` — main item renderer - `<ng-template #galleriaThumbnail let-item>` — thumbnail renderer - `<ng-template #galleriaCaption let-item>` — caption overlay on the active item - `<ng-template #galleriaHeader>` — header above the gallery - `<ng-template #galleriaFooter>` — footer below the gallery - `<ng-template #galleriaIndicator let-index let-active="active">` — custom indicator
 
 ## API
 
 ### Inputs
 
-| Name                        | Type                            | Default                                | Description                                                                                    |
-| --------------------------- | ------------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ariaLabel`                 | `string`                        | `GALLERIA_ARIA_REGION_LABEL`           | /** Accessible label for the gallery landmark. Defaults to the built-in region label constant. |
-| `autoPlay`                  | `boolean`                       | `false`                                | /** When true, the gallery automatically advances to the next item.                            |
-| `circular`                  | `boolean`                       | `false`                                | /** When true, navigation wraps around from the last item to the first and vice versa.         |
-| `containerStyle`            | `Record<string, string> | null` | `null`                                 | /** Inline styles for the gallery container element.                                           |
-| `fullScreen`                | `boolean`                       | `false`                                | /** When true, a fullscreen toggle button is rendered; use `visible` to control open state.    |
-| `lightboxLabel`             | `string | null`                 | `null`                                 | /** Accessible label for the fullscreen dialog container.                                      |
-| `nextLabel`                 | `string | null`                 | `null`                                 | /** Accessible label for the next-item navigation button.                                      |
-| `numScroll`                 | `number`                        | `GALLERIA_DEFAULT_NUM_SCROLL`          | /** Number of thumbnails to scroll per thumbnail-navigator click.                              |
-| `numVisible`                | `number`                        | `GALLERIA_DEFAULT_NUM_VISIBLE`         | /** Number of thumbnails visible in the strip.                                                 |
-| `prevLabel`                 | `string | null`                 | `null`                                 | /** Accessible label for the previous-item navigation button.                                  |
-| `responsiveOptions`         | `GalleriaResponsiveOption[]`    | `[]`                                   | /** Responsive options for breakpoint-based thumbnail counts.                                  |
-| `showIndicators`            | `boolean`                       | `false`                                | /** When true, indicator dots are rendered below/above the gallery.                            |
-| `showIndicatorsOnItem`      | `boolean`                       | `false`                                | /** When true, indicator dots are rendered on top of the active item.                          |
-| `showItemNavigators`        | `boolean`                       | `true`                                 | /** When true, prev/next item navigation arrows are always visible.                            |
-| `showItemNavigatorsOnHover` | `boolean`                       | `false`                                | /** When true, prev/next item navigation arrows appear only while hovering the item.           |
-| `showThumbnailNavigators`   | `boolean`                       | `true`                                 | /** When true, thumbnail-strip navigation arrows are rendered.                                 |
-| `showThumbnails`            | `boolean`                       | `true`                                 | /** When true, the thumbnail strip is rendered.                                                |
-| `size`                      | `GalleriaSize`                  | `'md'`                                 | /** Component size token.                                                                      |
-| `styleClass`                | `string | null`                 | `null`                                 | /** Additional CSS class(es) applied to the host element.                                      |
-| `transitionInterval`        | `number`                        | `GALLERIA_DEFAULT_TRANSITION_INTERVAL` | /** Interval in milliseconds between automatic slide transitions.                              |
-| `value`                     | `GalleriaItem[]`                | `[]`                                   | /** Array of data items to display.                                                            |
-| `variant`                   | `GalleriaVariant | null`        | `null`                                 | /** Design variant; inherits from ThemeConfigService when null.                                |
+| Name                        | Type                            | Default                                | Description                                                                                |
+| --------------------------- | ------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `ariaLabel`                 | `string`                        | `GALLERIA_ARIA_REGION_LABEL`           | Accessible label for the gallery landmark. Defaults to the built-in region label constant. |
+| `autoPlay`                  | `boolean`                       | `false`                                | When true, the gallery automatically advances to the next item.                            |
+| `circular`                  | `boolean`                       | `false`                                | When true, navigation wraps around from the last item to the first and vice versa.         |
+| `containerStyle`            | `Record<string, string> | null` | `null`                                 | Inline styles for the gallery container element.                                           |
+| `fullScreen`                | `boolean`                       | `false`                                | When true, a fullscreen toggle button is rendered; use `visible` to control open state.    |
+| `lightboxLabel`             | `string | null`                 | `null`                                 | Accessible label for the fullscreen dialog container.                                      |
+| `nextLabel`                 | `string | null`                 | `null`                                 | Accessible label for the next-item navigation button.                                      |
+| `numScroll`                 | `number`                        | `GALLERIA_DEFAULT_NUM_SCROLL`          | Number of thumbnails to scroll per thumbnail-navigator click.                              |
+| `numVisible`                | `number`                        | `GALLERIA_DEFAULT_NUM_VISIBLE`         | Number of thumbnails visible in the strip.                                                 |
+| `prevLabel`                 | `string | null`                 | `null`                                 | Accessible label for the previous-item navigation button.                                  |
+| `responsiveOptions`         | `GalleriaResponsiveOption[]`    | `[]`                                   | Responsive options for breakpoint-based thumbnail counts.                                  |
+| `showIndicators`            | `boolean`                       | `false`                                | When true, indicator dots are rendered below/above the gallery.                            |
+| `showIndicatorsOnItem`      | `boolean`                       | `false`                                | When true, indicator dots are rendered on top of the active item.                          |
+| `showItemNavigators`        | `boolean`                       | `true`                                 | When true, prev/next item navigation arrows are always visible.                            |
+| `showItemNavigatorsOnHover` | `boolean`                       | `false`                                | When true, prev/next item navigation arrows appear only while hovering the item.           |
+| `showThumbnailNavigators`   | `boolean`                       | `true`                                 | When true, thumbnail-strip navigation arrows are rendered.                                 |
+| `showThumbnails`            | `boolean`                       | `true`                                 | When true, the thumbnail strip is rendered.                                                |
+| `size`                      | `GalleriaSize`                  | `'md'`                                 | Component size token.                                                                      |
+| `styleClass`                | `string | null`                 | `null`                                 | Additional CSS class(es) applied to the host element.                                      |
+| `transitionInterval`        | `number`                        | `GALLERIA_DEFAULT_TRANSITION_INTERVAL` | Interval in milliseconds between automatic slide transitions.                              |
+| `value`                     | `GalleriaItem[]`                | `[]`                                   | Array of data items to display.                                                            |
+| `variant`                   | `GalleriaVariant | null`        | `null`                                 | Design variant; inherits from ThemeConfigService when null.                                |
 
 ### Models (two-way bindable)
 
-| Name          | Type      | Default | Description                                                   |
-| ------------- | --------- | ------- | ------------------------------------------------------------- |
-| `activeIndex` | `number`  | `0`     | /** Active item index — supports two-way binding.             |
-| `visible`     | `boolean` | `false` | /** Fullscreen overlay visibility — supports two-way binding. |
+| Name          | Type      | Default | Description                                               |
+| ------------- | --------- | ------- | --------------------------------------------------------- |
+| `activeIndex` | `number`  | `0`     | Active item index — supports two-way binding.             |
+| `visible`     | `boolean` | `false` | Fullscreen overlay visibility — supports two-way binding. |
 
 ### Outputs
 

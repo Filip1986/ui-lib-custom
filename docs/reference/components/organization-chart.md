@@ -7,33 +7,18 @@
 
 ## Overview
 
-Module-level counter for generating unique organization-chart instance IDs. */
-let organizationChartIdCounter: number = 0;
-
-/**
-OrganizationChart renders an interactive hierarchical tree of nodes.
-Supports single/multiple selection, collapsible subtrees, custom node
-templates per node type, and three design variants.
-
-@example
-```html
-<ui-lib-organization-chart [value]="nodes" selectionMode="single" [(selection)]="selected">
-  <ng-template uiOrgChartNode let-node>
-    <strong>{{ node.label }}</strong>
-  </ng-template>
-</ui-lib-organization-chart>
-```
+OrganizationChart renders an interactive hierarchical tree of nodes. Supports single/multiple selection, collapsible subtrees, custom node templates per node type, and three design variants.
 
 ## API
 
 ### Inputs
 
-| Name          | Type                      | Default          | Description                                                                   |
-| ------------- | ------------------------- | ---------------- | ----------------------------------------------------------------------------- |
-| `ariaLabel`   | `string`                  | `'Organization'` | /** Accessible label for the tree. Applied to the root tree element.          |
-| `collapsible` | `boolean`                 | `false`          | /** When `true`, nodes with children render an expand/collapse toggle button. |
-| `styleClass`  | `string`                  | `''`             | /** Extra CSS class applied to the host element.                              |
-| `value`       | `OrganizationChartNode[]` | `[]`             | /** Root-level nodes of the tree.                                             |
+| Name          | Type                      | Default          | Description                                                               |
+| ------------- | ------------------------- | ---------------- | ------------------------------------------------------------------------- |
+| `ariaLabel`   | `string`                  | `'Organization'` | Accessible label for the tree. Applied to the root tree element.          |
+| `collapsible` | `boolean`                 | `false`          | When `true`, nodes with children render an expand/collapse toggle button. |
+| `styleClass`  | `string`                  | `''`             | Extra CSS class applied to the host element.                              |
+| `value`       | `OrganizationChartNode[]` | `[]`             | Root-level nodes of the tree.                                             |
 
 ### Outputs
 

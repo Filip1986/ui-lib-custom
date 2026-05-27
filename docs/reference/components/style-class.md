@@ -13,26 +13,18 @@ Toggle Panel
 
 ### Inputs
 
-| Name                 | Type      | Default | Description                                                                                                                                              |
-| -------------------- | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enterActiveClass`   | `string`  | `''`    | /** CSS class(es) added during the enter transition (e.g. a keyframe animation class).                                                                   |
-| `enterDoneClass`     | `string`  | `''`    | /**
-CSS class(es) kept on the target after the enter transition finishes.
-If empty, `enterToClass` is kept instead.                                      |
-| `enterFromClass`     | `string`  | `''`    | /** CSS class(es) applied to the target at the very start of the enter transition.                                                                       |
-| `enterToClass`       | `string`  | `''`    | /** CSS class(es) applied to the target at the end of the enter transition.                                                                              |
-| `hideOnOutsideClick` | `boolean` | `false` | /**
-When `true`, clicking anywhere outside the target element while it is in
-the entered state triggers the leave transition (or removes `toggleClass`). |
-| `leaveActiveClass`   | `string`  | `''`    | /** CSS class(es) added during the leave transition (e.g. a keyframe animation class).                                                                   |
-| `leaveDoneClass`     | `string`  | `''`    | /**
-CSS class(es) kept on the target after the leave transition finishes.
-If empty, `leaveToClass` is kept instead.                                      |
-| `leaveFromClass`     | `string`  | `''`    | /** CSS class(es) applied to the target at the very start of the leave transition.                                                                       |
-| `leaveToClass`       | `string`  | `''`    | /** CSS class(es) applied to the target at the end of the leave transition.                                                                              |
-| `toggleClass`        | `string`  | `''`    | /**
-A single CSS class that is toggled on the target on every click.
-When set, the full enter/leave lifecycle is bypassed.                               |
+| Name                 | Type      | Default | Description                                                                                                                                          |
+| -------------------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enterActiveClass`   | `string`  | `''`    | CSS class(es) added during the enter transition (e.g. a keyframe animation class).                                                                   |
+| `enterDoneClass`     | `string`  | `''`    | CSS class(es) kept on the target after the enter transition finishes. If empty, `enterToClass` is kept instead.                                      |
+| `enterFromClass`     | `string`  | `''`    | CSS class(es) applied to the target at the very start of the enter transition.                                                                       |
+| `enterToClass`       | `string`  | `''`    | CSS class(es) applied to the target at the end of the enter transition.                                                                              |
+| `hideOnOutsideClick` | `boolean` | `false` | When `true`, clicking anywhere outside the target element while it is in the entered state triggers the leave transition (or removes `toggleClass`). |
+| `leaveActiveClass`   | `string`  | `''`    | CSS class(es) added during the leave transition (e.g. a keyframe animation class).                                                                   |
+| `leaveDoneClass`     | `string`  | `''`    | CSS class(es) kept on the target after the leave transition finishes. If empty, `leaveToClass` is kept instead.                                      |
+| `leaveFromClass`     | `string`  | `''`    | CSS class(es) applied to the target at the very start of the leave transition.                                                                       |
+| `leaveToClass`       | `string`  | `''`    | CSS class(es) applied to the target at the end of the leave transition.                                                                              |
+| `toggleClass`        | `string`  | `''`    | A single CSS class that is toggled on the target on every click. When set, the full enter/leave lifecycle is bypassed.                               |
 
 ### Outputs
 

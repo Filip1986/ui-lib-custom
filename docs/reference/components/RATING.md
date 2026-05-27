@@ -7,47 +7,44 @@
 
 ## Overview
 
-Rating component that lets users select a star value from 1 to N via click or keyboard.
-Implements ControlValueAccessor for ngModel and reactive form integration.
+Rating component that lets users select a star value from 1 to N via click or keyboard. Implements ControlValueAccessor for ngModel and reactive form integration.
 
 ## API
 
 ### Inputs
 
-| Name              | Type                            | Default | Description                                                                    |
-| ----------------- | ------------------------------- | ------- | ------------------------------------------------------------------------------ |
-| `ariaLabel`       | `string | null`                 | `null`  | /** Accessible label for the radiogroup element.                               |
-| `ariaLabelledby`  | `string | null`                 | `null`  | /** Explicit aria-labelledby override; overrides ariaLabel when set.           |
-| `autofocus`       | `boolean`                       | `false` | /** When true, the first focusable star receives focus after the first render. |
-| `cancel`          | `boolean`                       | `true`  | /** When true, a cancel button is shown to clear the current value.            |
-| `disabled`        | `boolean`                       | `false` | /** Disables the component entirely.                                           |
-| `iconCancelClass` | `string | null`                 | `null`  | /** Custom CSS class appended to the cancel icon.                              |
-| `iconOffClass`    | `string | null`                 | `null`  | /** Custom CSS class appended to an empty star icon.                           |
-| `iconOffStyle`    | `Record<string, string> | null` | `null`  | /** Inline styles applied to an empty star icon element.                       |
-| `iconOnClass`     | `string | null`                 | `null`  | /** Custom CSS class appended to a filled star icon.                           |
-| `iconOnStyle`     | `Record<string, string> | null` | `null`  | /** Inline styles applied to a filled star icon element.                       |
-| `readonly`        | `boolean`                       | `false` | /** Makes the component read-only: visible but not interactive.                |
-| `size`            | `RatingSize`                    | `'md'`  | /** Size token: sm | md | lg.                                                  |
-| `stars`           | `number`                        | `5`     | /** Number of star icons to render.                                            |
-| `variant`         | `RatingVariant | null`          | `null`  | /** Design-system variant; falls back to ThemeConfigService when null.         |
+| Name              | Type                            | Default | Description                                                                |
+| ----------------- | ------------------------------- | ------- | -------------------------------------------------------------------------- |
+| `ariaLabel`       | `string | null`                 | `null`  | Accessible label for the radiogroup element.                               |
+| `ariaLabelledby`  | `string | null`                 | `null`  | Explicit aria-labelledby override; overrides ariaLabel when set.           |
+| `autofocus`       | `boolean`                       | `false` | When true, the first focusable star receives focus after the first render. |
+| `cancel`          | `boolean`                       | `true`  | When true, a cancel button is shown to clear the current value.            |
+| `disabled`        | `boolean`                       | `false` | Disables the component entirely.                                           |
+| `iconCancelClass` | `string | null`                 | `null`  | Custom CSS class appended to the cancel icon.                              |
+| `iconOffClass`    | `string | null`                 | `null`  | Custom CSS class appended to an empty star icon.                           |
+| `iconOffStyle`    | `Record<string, string> | null` | `null`  | Inline styles applied to an empty star icon element.                       |
+| `iconOnClass`     | `string | null`                 | `null`  | Custom CSS class appended to a filled star icon.                           |
+| `iconOnStyle`     | `Record<string, string> | null` | `null`  | Inline styles applied to a filled star icon element.                       |
+| `readonly`        | `boolean`                       | `false` | Makes the component read-only: visible but not interactive.                |
+| `size`            | `RatingSize`                    | `'md'`  | Size token: sm | md | lg.                                                  |
+| `stars`           | `number`                        | `5`     | Number of star icons to render.                                            |
+| `variant`         | `RatingVariant | null`          | `null`  | Design-system variant; falls back to ThemeConfigService when null.         |
 
 ### Models (two-way bindable)
 
-| Name    | Type            | Default | Description                                                       |
-| ------- | --------------- | ------- | ----------------------------------------------------------------- |
-| `value` | `number | null` | `null`  | /** Current rating value. Supports two-way binding via [(value)]. |
+| Name    | Type            | Default | Description                                                   |
+| ------- | --------------- | ------- | ------------------------------------------------------------- |
+| `value` | `number | null` | `null`  | Current rating value. Supports two-way binding via [(value)]. |
 
 ### Outputs
 
-| Name           | Type                | Description                                                                                                                      |
-| -------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `cleared`      | `Event`             | /** Emitted when the rating is cleared (cancel button, toggle-deselect, or Delete key).                                          |
-| `rate`         | `RatingRateEvent`   | /**
-Emitted when a star is selected. The value is always a positive integer.
-Use `cleared` to detect when the rating is cleared. |
-| `ratingBlur`   | `FocusEvent`        | /** Emitted when any star loses focus.                                                                                           |
-| `ratingChange` | `RatingChangeEvent` | /** Emitted whenever the rating value changes (including clears).                                                                |
-| `ratingFocus`  | `FocusEvent`        | /** Emitted when any star receives focus.                                                                                        |
+| Name           | Type                | Description                                                                                                                  |
+| -------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `cleared`      | `Event`             | Emitted when the rating is cleared (cancel button, toggle-deselect, or Delete key).                                          |
+| `rate`         | `RatingRateEvent`   | Emitted when a star is selected. The value is always a positive integer. Use `cleared` to detect when the rating is cleared. |
+| `ratingBlur`   | `FocusEvent`        | Emitted when any star loses focus.                                                                                           |
+| `ratingChange` | `RatingChangeEvent` | Emitted whenever the rating value changes (including clears).                                                                |
+| `ratingFocus`  | `FocusEvent`        | Emitted when any star receives focus.                                                                                        |
 
 ## Content Projection
 

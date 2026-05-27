@@ -7,54 +7,39 @@
 
 ## Overview
 
-ConfirmDialog — a modal confirmation overlay with configurable accept/reject actions.
-
-Can be driven declaratively via inputs/outputs or programmatically via ConfirmationService.
-Place `<ui-lib-confirm-dialog>` once in your layout; trigger it from any component using
-`ConfirmationService.confirm({ ... })`.
-
-@example
-<!-- In template -->
-<ui-lib-confirm-dialog />
-
-<!-- In component -->
-this.confirmationService.confirm({
-  header: 'Confirm Delete',
-  message: 'This action cannot be undone.',
-  accept: () => this.delete(),
-});
+ConfirmDialog — a modal confirmation overlay with configurable accept/reject actions. Can be driven declaratively via inputs/outputs or programmatically via ConfirmationService. Place `<ui-lib-confirm-dialog>` once in your layout; trigger it from any component using `ConfirmationService.confirm({ ... })`.
 
 ## API
 
 ### Inputs
 
-| Name              | Type            | Default                               | Description                                                                               |
-| ----------------- | --------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `acceptIcon`      | `string | null` | `null`                                | /** CSS class for an icon inside the accept button.                                       |
-| `acceptLabel`     | `string`        | `'Yes'`                               | /** Accept button label.                                                                  |
-| `blockScroll`     | `boolean`       | `true`                                | /** Whether body scroll is locked while the dialog is open.                               |
-| `closable`        | `boolean`       | `true`                                | /** Whether the close (×) button is rendered in the header.                               |
-| `dismissableMask` | `boolean`       | `false`                               | /** Whether clicking the backdrop closes the dialog (invoking reject).                    |
-| `header`          | `string`        | `'Confirmation'`                      | /** Dialog header / title text (declarative fallback).                                    |
-| `icon`            | `string | null` | `null`                                | /** CSS class for the icon rendered before the message.                                   |
-| `key`             | `string`        | `''`                                  | /** Key that matches incoming ConfirmationService calls to this specific dialog instance. |
-| `message`         | `string`        | `'Are you sure you want to proceed?'` | /** Confirmation message text (declarative fallback).                                     |
-| `rejectIcon`      | `string | null` | `null`                                | /** CSS class for an icon inside the reject button.                                       |
-| `rejectLabel`     | `string`        | `'No'`                                | /** Reject button label.                                                                  |
-| `styleClass`      | `string | null` | `null`                                | /** Additional CSS classes applied to the host element.                                   |
+| Name              | Type            | Default                               | Description                                                                           |
+| ----------------- | --------------- | ------------------------------------- | ------------------------------------------------------------------------------------- |
+| `acceptIcon`      | `string | null` | `null`                                | CSS class for an icon inside the accept button.                                       |
+| `acceptLabel`     | `string`        | `'Yes'`                               | Accept button label.                                                                  |
+| `blockScroll`     | `boolean`       | `true`                                | Whether body scroll is locked while the dialog is open.                               |
+| `closable`        | `boolean`       | `true`                                | Whether the close (×) button is rendered in the header.                               |
+| `dismissableMask` | `boolean`       | `false`                               | Whether clicking the backdrop closes the dialog (invoking reject).                    |
+| `header`          | `string`        | `'Confirmation'`                      | Dialog header / title text (declarative fallback).                                    |
+| `icon`            | `string | null` | `null`                                | CSS class for the icon rendered before the message.                                   |
+| `key`             | `string`        | `''`                                  | Key that matches incoming ConfirmationService calls to this specific dialog instance. |
+| `message`         | `string`        | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                                     |
+| `rejectIcon`      | `string | null` | `null`                                | CSS class for an icon inside the reject button.                                       |
+| `rejectLabel`     | `string`        | `'No'`                                | Reject button label.                                                                  |
+| `styleClass`      | `string | null` | `null`                                | Additional CSS classes applied to the host element.                                   |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                                                                |
-| --------- | --------- | ------- | -------------------------------------------------------------------------- |
-| `visible` | `boolean` | `false` | /** Two-way visibility binding. Use `[(visible)]` for declarative control. |
+| Name      | Type      | Default | Description                                                            |
+| --------- | --------- | ------- | ---------------------------------------------------------------------- |
+| `visible` | `boolean` | `false` | Two-way visibility binding. Use `[(visible)]` for declarative control. |
 
 ### Outputs
 
-| Name       | Type   | Description                                                              |
-| ---------- | ------ | ------------------------------------------------------------------------ |
-| `accepted` | `void` | /** Emitted when the user clicks the accept button.                      |
-| `rejected` | `void` | /** Emitted when the user clicks the reject button or closes the dialog. |
+| Name       | Type   | Description                                                          |
+| ---------- | ------ | -------------------------------------------------------------------- |
+| `accepted` | `void` | Emitted when the user clicks the accept button.                      |
+| `rejected` | `void` | Emitted when the user clicks the reject button or closes the dialog. |
 
 ## Content Projection
 

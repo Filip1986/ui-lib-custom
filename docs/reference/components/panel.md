@@ -7,52 +7,30 @@
 
 ## Overview
 
-Panel — a flexible content container with an optional collapsible body.
-
-Supports header text or projected header content, an icon area for actions,
-an optional footer, and three design variants (material / bootstrap / minimal).
-Collapse animation uses the CSS grid-row technique.
-
-@example
-<!-- Basic panel -->
-<ui-lib-panel header="My Panel">
-  <p>Panel body content.</p>
-</ui-lib-panel>
-
-<!-- Toggleable panel with two-way binding -->
-<ui-lib-panel header="Advanced" [toggleable]="true" [(collapsed)]="isCollapsed">
-  <p>Collapsible content.</p>
-</ui-lib-panel>
-
-<!-- Custom header and footer -->
-<ui-lib-panel [toggleable]="true">
-  <span panelHeader>Custom <strong>Header</strong></span>
-  <p>Body content.</p>
-  <div panelFooter>Footer content</div>
-</ui-lib-panel>
+Panel — a flexible content container with an optional collapsible body. Supports header text or projected header content, an icon area for actions, an optional footer, and three design variants (material / bootstrap / minimal). Collapse animation uses the CSS grid-row technique.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                  | Default | Description                                                                       |
-| ------------ | --------------------- | ------- | --------------------------------------------------------------------------------- |
-| `header`     | `string`              | `''`    | /** Text to render in the header. Use `[panelHeader]` projection for custom HTML. |
-| `styleClass` | `string | null`       | `null`  | /** Additional CSS classes to attach to the host element.                         |
-| `toggleable` | `boolean`             | `false` | /** Whether the panel body can be collapsed/expanded by the user.                 |
-| `variant`    | `PanelVariant | null` | `null`  | /** Visual variant — inherits from ThemeConfigService when not set.               |
+| Name         | Type                  | Default | Description                                                                   |
+| ------------ | --------------------- | ------- | ----------------------------------------------------------------------------- |
+| `header`     | `string`              | `''`    | Text to render in the header. Use `[panelHeader]` projection for custom HTML. |
+| `styleClass` | `string | null`       | `null`  | Additional CSS classes to attach to the host element.                         |
+| `toggleable` | `boolean`             | `false` | Whether the panel body can be collapsed/expanded by the user.                 |
+| `variant`    | `PanelVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.               |
 
 ### Models (two-way bindable)
 
-| Name        | Type      | Default | Description                                                                           |
-| ----------- | --------- | ------- | ------------------------------------------------------------------------------------- |
-| `collapsed` | `boolean` | `false` | /** Two-way binding for the collapsed state. Only meaningful when toggleable is true. |
+| Name        | Type      | Default | Description                                                                       |
+| ----------- | --------- | ------- | --------------------------------------------------------------------------------- |
+| `collapsed` | `boolean` | `false` | Two-way binding for the collapsed state. Only meaningful when toggleable is true. |
 
 ### Outputs
 
-| Name      | Type               | Description                                                            |
-| --------- | ------------------ | ---------------------------------------------------------------------- |
-| `toggled` | `PanelToggleEvent` | /** Emitted after the collapsed state changes when toggleable is true. |
+| Name      | Type               | Description                                                        |
+| --------- | ------------------ | ------------------------------------------------------------------ |
+| `toggled` | `PanelToggleEvent` | Emitted after the collapsed state changes when toggleable is true. |
 
 ## Content Projection
 

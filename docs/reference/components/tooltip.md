@@ -13,15 +13,15 @@ An attribute directive that attaches a floating label to any host element. The t
 
 ### Inputs
 
-| Name              | Type                    | Default   | Description                                                                    |
-| ----------------- | ----------------------- | --------- | ------------------------------------------------------------------------------ |
-| `hideDelay`       | `number`                | `0`       | /** Delay in milliseconds before the tooltip disappears after a hide event.    |
-| `showDelay`       | `number`                | `0`       | /** Delay in milliseconds before the tooltip appears after a trigger event.    |
-| `tooltipDisabled` | `boolean`               | `false`   | /** When `true`, the tooltip is never shown regardless of events.              |
-| `tooltipEvent`    | `TooltipEvent`          | `'hover'` | /** Which events trigger the tooltip. Defaults to `'hover'`.                   |
-| `tooltipPosition` | `TooltipPosition`       | `'top'`   | /** Position of the tooltip relative to the host element. Defaults to `'top'`. |
-| `tooltipVariant`  | `TooltipVariant | null` | `null`    | /** Design variant override. Falls back to `ThemeConfigService` when `null`.   |
-| `uiLibTooltip`    | `string`                | `''`      | /** The tooltip label text. An empty string suppresses the tooltip.            |
+| Name              | Type                    | Default   | Description                                                                |
+| ----------------- | ----------------------- | --------- | -------------------------------------------------------------------------- |
+| `hideDelay`       | `number`                | `0`       | Delay in milliseconds before the tooltip disappears after a hide event.    |
+| `showDelay`       | `number`                | `0`       | Delay in milliseconds before the tooltip appears after a trigger event.    |
+| `tooltipDisabled` | `boolean`               | `false`   | When `true`, the tooltip is never shown regardless of events.              |
+| `tooltipEvent`    | `TooltipEvent`          | `'hover'` | Which events trigger the tooltip. Defaults to `'hover'`.                   |
+| `tooltipPosition` | `TooltipPosition`       | `'top'`   | Position of the tooltip relative to the host element. Defaults to `'top'`. |
+| `tooltipVariant`  | `TooltipVariant | null` | `null`    | Design variant override. Falls back to `ThemeConfigService` when `null`.   |
+| `uiLibTooltip`    | `string`                | `''`      | The tooltip label text. An empty string suppresses the tooltip.            |
 
 ### Outputs
 
