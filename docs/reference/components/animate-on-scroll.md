@@ -13,21 +13,21 @@ The observer is created in `ngOnInit` with the values of `threshold` and `rootMa
 
 ### Inputs
 
-| Name         | Type      | Default | Description                                                                                                                     |
-| ------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `disabled`   | `boolean` | `false` | /** When `true`, the directive does nothing and no observer is created. */                                                      |
-| `enterClass` | `string`  | `''`    | /** CSS class(es) (space-separated) to add when the element enters the viewport. */                                             |
-| `leaveClass` | `string`  | `''`    | /** CSS class(es) (space-separated) to add when the element leaves the viewport. Only applied when `once` is false. */          |
-| `once`       | `boolean` | `true`  | /**When `true` (default), the directive unobserves the element after the firstenter event so the animation plays only once./ |
-| `rootMargin` | `string`  | `'0px'` | /** IntersectionObserver rootMargin - margin around the root. */                                                                |
-| `threshold`  | `number`  | `0.1`   | /** IntersectionObserver threshold - ratio of element visibility required to trigger (0-1). */                                  |
+| Name         | Type      | Default | Description                                                                                                               |
+| ------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`   | `boolean` | `false` | When `true`, the directive does nothing and no observer is created.                                                       |
+| `enterClass` | `string`  | `''`    | CSS class(es) (space-separated) to add when the element enters the viewport.                                              |
+| `leaveClass` | `string`  | `''`    | CSS class(es) (space-separated) to add when the element leaves the viewport. Only applied when `once` is false.           |
+| `once`       | `boolean` | `true`  | When `true` (default), the directive unobserves the element after the first enter event so the animation plays only once. |
+| `rootMargin` | `string`  | `'0px'` | IntersectionObserver rootMargin - margin around the root.                                                                 |
+| `threshold`  | `number`  | `0.1`   | IntersectionObserver threshold - ratio of element visibility required to trigger (0-1).                                   |
 
 ### Outputs
 
-| Name    | Type   | Description                                                                                  |
-| ------- | ------ | -------------------------------------------------------------------------------------------- |
-| `enter` | `void` | /** Emitted when the host element enters the viewport. */                                    |
-| `leave` | `void` | /** Emitted when the host element leaves the viewport. Only emitted when `once` is false. */ |
+| Name    | Type   | Description                                                                           |
+| ------- | ------ | ------------------------------------------------------------------------------------- |
+| `enter` | `void` | Emitted when the host element enters the viewport.                                    |
+| `leave` | `void` | Emitted when the host element leaves the viewport. Only emitted when `once` is false. |
 
 ## Content Projection
 

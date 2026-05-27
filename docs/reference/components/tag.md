@@ -7,29 +7,29 @@
 
 ## Overview
 
-Tag — compact label for status, category, or classification.Supports a text label, an optional leading icon, severity-based colouring,three sizes (sm / md / lg), and three design variants (material / bootstrap / minimal).Use the `rounded` input to control border-radius independently of variant.@example<ui-lib-tag value="New" /><ui-lib-tag value="Success" severity="success" /><ui-lib-tag value="Angular" icon="pi pi-bolt" [rounded]="true" />
+Tag — compact label for status, category, or classification. Supports a text label, an optional leading icon, severity-based colouring, three sizes (sm / md / lg), and three design variants (material / bootstrap / minimal). Use the `rounded` input to control border-radius independently of variant.
 
 ## API
 
 ### Inputs
 
-| Name          | Type                | Default         | Description                                                                                            |
-| ------------- | ------------------- | --------------- | ------------------------------------------------------------------------------------------------------ |
-| `dismissible` | `boolean`           | `false`         | /** When true, a remove button is rendered at the end of the tag. */                                   |
-| `icon`        | `string | null`     | `null`          | /** CSS class string for a leading PrimeIcons icon (e.g. "pi pi-check"). */                            |
-| `removeIcon`  | `string`            | `'pi pi-times'` | /** CSS class for the remove icon (defaults to "pi pi-times"). */                                      |
-| `rounded`     | `boolean`           | `false`         | /**When true, the tag uses fully rounded (pill) corners regardless of variant.Defaults to `false`./ |
-| `severity`    | `TagSeverity`       | `'primary'`     | /**Severity colour — maps to a predefined palette.Defaults to `'primary'`./                         |
-| `size`        | `TagSize`           | `'md'`          | /** Size of the tag. Defaults to `'md'`. */                                                            |
-| `styleClass`  | `string | null`     | `null`          | /** Additional CSS classes to attach to the host element. */                                           |
-| `value`       | `string | null`     | `null`          | /** Text displayed inside the tag. */                                                                  |
-| `variant`     | `TagVariant | null` | `null`          | /** Visual variant — inherits from ThemeConfigService when not set. */                                 |
+| Name          | Type                | Default         | Description                                                                                      |
+| ------------- | ------------------- | --------------- | ------------------------------------------------------------------------------------------------ |
+| `dismissible` | `boolean`           | `false`         | When true, a remove button is rendered at the end of the tag.                                    |
+| `icon`        | `string | null`     | `null`          | CSS class string for a leading PrimeIcons icon (e.g. "pi pi-check").                             |
+| `removeIcon`  | `string`            | `'pi pi-times'` | CSS class for the remove icon (defaults to "pi pi-times").                                       |
+| `rounded`     | `boolean`           | `false`         | When true, the tag uses fully rounded (pill) corners regardless of variant. Defaults to `false`. |
+| `severity`    | `TagSeverity`       | `'primary'`     | Severity colour — maps to a predefined palette. Defaults to `'primary'`.                         |
+| `size`        | `TagSize`           | `'md'`          | Size of the tag. Defaults to `'md'`.                                                             |
+| `styleClass`  | `string | null`     | `null`          | Additional CSS classes to attach to the host element.                                            |
+| `value`       | `string | null`     | `null`          | Text displayed inside the tag.                                                                   |
+| `variant`     | `TagVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                                  |
 
 ### Outputs
 
-| Name      | Type         | Description                                       |
-| --------- | ------------ | ------------------------------------------------- |
-| `removed` | `MouseEvent` | /** Emitted when the remove button is clicked. */ |
+| Name      | Type         | Description                                |
+| --------- | ------------ | ------------------------------------------ |
+| `removed` | `MouseEvent` | Emitted when the remove button is clicked. |
 
 ## Content Projection
 

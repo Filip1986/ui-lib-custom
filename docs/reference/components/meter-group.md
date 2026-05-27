@@ -7,22 +7,22 @@
 
 ## Overview
 
-MeterGroup — segmented progress/meter bar component.Renders multiple coloured segments proportional to their values against aconfigurable min/max range.  An optional legend lists each segment's label,colour, and value.  Supports horizontal and vertical orientations and threedesign variants (material / bootstrap / minimal).@example<ui-lib-meter-group  [values]="[    { label: 'Apps', value: 16, color: '#34d399' },    { label: 'Messages', value: 8, color: '#818cf8' }  ]"/>
+MeterGroup — segmented progress/meter bar component. Renders multiple coloured segments proportional to their values against a configurable min/max range.  An optional legend lists each segment's label, colour, and value.  Supports horizontal and vertical orientations and three design variants (material / bootstrap / minimal).
 
 ## API
 
 ### Inputs
 
-| Name         | Type                       | Default         | Description                                                            |
-| ------------ | -------------------------- | --------------- | ---------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                   | `'Meter group'` | /** Accessible label for the meter container group. */                 |
-| `max`        | `number`                   | `100`           | /** Maximum value of the range (default `100`). */                     |
-| `min`        | `number`                   | `0`             | /** Minimum value of the range (default `0`). */                       |
-| `showLabels` | `boolean`                  | `true`          | /** Whether to render the legend. */                                   |
-| `size`       | `MeterGroupSize`           | `'md'`          | /** Component size token. */                                           |
-| `styleClass` | `string | null`            | `null`          | /** Additional CSS classes to attach to the host element. */           |
-| `values`     | `MeterItem[]`              | `[]`            | /** Array of meter segments to render. */                              |
-| `variant`    | `MeterGroupVariant | null` | `null`          | /** Visual variant — inherits from ThemeConfigService when not set. */ |
+| Name         | Type                       | Default         | Description                                                     |
+| ------------ | -------------------------- | --------------- | --------------------------------------------------------------- |
+| `ariaLabel`  | `string`                   | `'Meter group'` | Accessible label for the meter container group.                 |
+| `max`        | `number`                   | `100`           | Maximum value of the range (default `100`).                     |
+| `min`        | `number`                   | `0`             | Minimum value of the range (default `0`).                       |
+| `showLabels` | `boolean`                  | `true`          | Whether to render the legend.                                   |
+| `size`       | `MeterGroupSize`           | `'md'`          | Component size token.                                           |
+| `styleClass` | `string | null`            | `null`          | Additional CSS classes to attach to the host element.           |
+| `values`     | `MeterItem[]`              | `[]`            | Array of meter segments to render.                              |
+| `variant`    | `MeterGroupVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set. |
 
 ### Outputs
 

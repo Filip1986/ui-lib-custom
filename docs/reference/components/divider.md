@@ -7,20 +7,20 @@
 
 ## Overview
 
-Divider — a visual separator that can be horizontal or vertical, withoptional label/icon content projected into the middle.Supports three line types (solid / dashed / dotted), five alignmentoptions, three sizes, and three design variants (material / bootstrap / minimal).@example<!-- Basic horizontal divider --><ui-lib-divider /><!-- With label --><ui-lib-divider>OR</ui-lib-divider><!-- Dashed, aligned left --><ui-lib-divider type="dashed" align="left">Section A</ui-lib-divider><!-- Vertical --><ui-lib-divider orientation="vertical" />
+Divider — a visual separator that can be horizontal or vertical, with optional label/icon content projected into the middle. Supports three line types (solid / dashed / dotted), five alignment options, three sizes, and three design variants (material / bootstrap / minimal).
 
 ## API
 
 ### Inputs
 
-| Name         | Type                    | Default   | Description                                                                                                                                                                                                                                                  |
-| ------------ | ----------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `align`      | `DividerAlign | null`   | `null`    | /**Alignment of the projected content along the divider.- Horizontal: `'left'` | `'center'` | `'right'` (default: `'center'`)- Vertical:   `'top'`  | `'center'` | `'bottom'` (default: `'center'`)Defaults to `null`, which resolves to `'center'`./ |
-| `ariaLabel`  | `string | null`         | `null`    | /**Accessible label announced by assistive technologies.Set this when divider content is meaningful text./                                                                                                                                                |
-| `decorative` | `boolean`               | `false`   | /**Marks divider as decorative-only.When true (and no ariaLabel is set), the divider is hidden from assistive technologies./                                                                                                                              |
-| `styleClass` | `string | null`         | `null`    | /** Additional CSS classes to attach to the host element. */                                                                                                                                                                                                 |
-| `type`       | `DividerType`           | `'solid'` | /**Visual style of the divider line.Defaults to `'solid'`./                                                                                                                                                                                               |
-| `variant`    | `DividerVariant | null` | `null`    | /** Visual variant — inherits from ThemeConfigService when not set. */                                                                                                                                                                                       |
+| Name         | Type                    | Default   | Description                                                                                                                                                                                                                                       |
+| ------------ | ----------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `align`      | `DividerAlign | null`   | `null`    | Alignment of the projected content along the divider. - Horizontal: `'left'` | `'center'` | `'right'` (default: `'center'`) - Vertical: `'top'` | `'center'` | `'bottom'` (default: `'center'`) Defaults to `null`, which resolves to `'center'`. |
+| `ariaLabel`  | `string | null`         | `null`    | Accessible label announced by assistive technologies. Set this when divider content is meaningful text.                                                                                                                                           |
+| `decorative` | `boolean`               | `false`   | Marks divider as decorative-only. When true (and no ariaLabel is set), the divider is hidden from assistive technologies.                                                                                                                         |
+| `styleClass` | `string | null`         | `null`    | Additional CSS classes to attach to the host element.                                                                                                                                                                                             |
+| `type`       | `DividerType`           | `'solid'` | Visual style of the divider line. Defaults to `'solid'`.                                                                                                                                                                                          |
+| `variant`    | `DividerVariant | null` | `null`    | Visual variant — inherits from ThemeConfigService when not set.                                                                                                                                                                                   |
 
 ### Outputs
 

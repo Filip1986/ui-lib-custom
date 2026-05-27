@@ -7,35 +7,35 @@
 
 ## Overview
 
-ImageCompare component — renders two images with a draggable slider dividerso the user can compare a "before" (left) and "after" (right) image.The `value` model (0–100) represents the percentage from the left edge wherethe divider is positioned. Supports keyboard navigation (ArrowLeft/Right,PageUp/Down, Home/End), pointer capture for smooth dragging, three designvariants, three size tokens, and full CSS-variable theming.@example```html<ui-lib-image-compare  leftImage="/before.jpg"  leftAlt="Before"  rightImage="/after.jpg"  rightAlt="After"/>```
+ImageCompare component — renders two images with a draggable slider divider so the user can compare a "before" (left) and "after" (right) image. The `value` model (0–100) represents the percentage from the left edge where the divider is positioned. Supports keyboard navigation (ArrowLeft/Right, PageUp/Down, Home/End), pointer capture for smooth dragging, three design variants, three size tokens, and full CSS-variable theming.
 
 ## API
 
 ### Inputs
 
-| Name         | Type               | Default                    | Description                                                  |
-| ------------ | ------------------ | -------------------------- | ------------------------------------------------------------ |
-| `ariaLabel`  | `string`           | `IMAGE_COMPARE_ARIA_LABEL` | /** Accessible label for the slider handle. */               |
-| `disabled`   | `boolean`          | `false`                    | /** When true, pointer interaction is disabled. */           |
-| `leftAlt`    | `string`           | `''`                       | /** Accessible alt text for the left image. */               |
-| `leftImage`  | `string`           | `''`                       | /** URL of the left (before) image. */                       |
-| `rightAlt`   | `string`           | `''`                       | /** Accessible alt text for the right image. */              |
-| `rightImage` | `string`           | `''`                       | /** URL of the right (after) image. */                       |
-| `size`       | `ImageCompareSize` | `'md'`                     | /** Component size token. */                                 |
-| `styleClass` | `string | null`    | `null`                     | /** Additional CSS class(es) applied to the host element. */ |
+| Name         | Type               | Default                    | Description                                           |
+| ------------ | ------------------ | -------------------------- | ----------------------------------------------------- |
+| `ariaLabel`  | `string`           | `IMAGE_COMPARE_ARIA_LABEL` | Accessible label for the slider handle.               |
+| `disabled`   | `boolean`          | `false`                    | When true, pointer interaction is disabled.           |
+| `leftAlt`    | `string`           | `''`                       | Accessible alt text for the left image.               |
+| `leftImage`  | `string`           | `''`                       | URL of the left (before) image.                       |
+| `rightAlt`   | `string`           | `''`                       | Accessible alt text for the right image.              |
+| `rightImage` | `string`           | `''`                       | URL of the right (after) image.                       |
+| `size`       | `ImageCompareSize` | `'md'`                     | Component size token.                                 |
+| `styleClass` | `string | null`    | `null`                     | Additional CSS class(es) applied to the host element. |
 
 ### Models (two-way bindable)
 
-| Name    | Type     | Default                       | Description                                                                                                         |
-| ------- | -------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `value` | `number` | `IMAGE_COMPARE_DEFAULT_VALUE` | /**Slider position as a percentage (0–100) from the left edge.Supports two-way binding: `[(value)]="position"`./ |
+| Name    | Type     | Default                       | Description                                                                                                   |
+| ------- | -------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `value` | `number` | `IMAGE_COMPARE_DEFAULT_VALUE` | Slider position as a percentage (0–100) from the left edge. Supports two-way binding: `[(value)]="position"`. |
 
 ### Outputs
 
-| Name         | Type     | Description                                                      |
-| ------------ | -------- | ---------------------------------------------------------------- |
-| `slideEnd`   | `number` | /** Emitted when the user releases the handle after dragging. */ |
-| `slideStart` | `number` | /** Emitted when the user starts dragging the handle. */         |
+| Name         | Type     | Description                                               |
+| ------------ | -------- | --------------------------------------------------------- |
+| `slideEnd`   | `number` | Emitted when the user releases the handle after dragging. |
+| `slideStart` | `number` | Emitted when the user starts dragging the handle.         |
 
 ## Content Projection
 

@@ -13,22 +13,22 @@ Card container component with optional header, footer, and theme scope.
 
 ### Inputs
 
-| Name         | Type                           | Default    | Description                        |
-| ------------ | ------------------------------ | ---------- | ---------------------------------- |
-| `ariaLabel`  | `string | null`                | `null`     | —                                  |
-| `bordered`   | `boolean`                      | `false`    | —                                  |
-| `closable`   | `boolean`                      | `false`    | —                                  |
-| `elevation`  | `CardElevation`                | `'medium'` | —                                  |
-| `footerBg`   | `string | null`                | `null`     | —                                  |
-| `headerBg`   | `string | null`                | `null`     | —                                  |
-| `headerIcon` | `SemanticIcon | string | null` | `null`     | —                                  |
-| `hoverable`  | `boolean`                      | `false`    | —                                  |
-| `shadow`     | `string | null`                | `null`     | —                                  |
-| `showFooter` | `boolean | null`               | `null`     | —                                  |
-| `showHeader` | `boolean | null`               | `null`     | —                                  |
-| `subtitle`   | `string | null`                | `null`     | —                                  |
-| `theme`      | `ThemeScopeInput | null`       | `null`     | /** Optional scoped theme override |
-| `variant`    | `CardVariant | null`           | `null`     | —                                  |
+| Name         | Type                           | Default    | Description                    |
+| ------------ | ------------------------------ | ---------- | ------------------------------ |
+| `ariaLabel`  | `string | null`                | `null`     | —                              |
+| `bordered`   | `boolean`                      | `false`    | —                              |
+| `closable`   | `boolean`                      | `false`    | —                              |
+| `elevation`  | `CardElevation`                | `'medium'` | —                              |
+| `footerBg`   | `string | null`                | `null`     | —                              |
+| `headerBg`   | `string | null`                | `null`     | —                              |
+| `headerIcon` | `SemanticIcon | string | null` | `null`     | —                              |
+| `hoverable`  | `boolean`                      | `false`    | —                              |
+| `shadow`     | `string | null`                | `null`     | —                              |
+| `showFooter` | `boolean | null`               | `null`     | —                              |
+| `showHeader` | `boolean | null`               | `null`     | —                              |
+| `subtitle`   | `string | null`                | `null`     | —                              |
+| `theme`      | `ThemeScopeInput | null`       | `null`     | Optional scoped theme override |
+| `variant`    | `CardVariant | null`           | `null`     | —                              |
 
 ### Outputs
 

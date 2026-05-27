@@ -7,29 +7,21 @@
 
 ## Overview
 
-Badge - A performant badge/tag component for labels, status, and counts
-
-Single element rendering with OnPush strategy and signal-based inputs.
-Uses design tokens for consistent styling.
-
-@example
-<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>
-<ui-lib-badge color="danger" variant="outline" size="sm">3</ui-lib-badge>
-<ui-lib-badge color="info" variant="subtle">New</ui-lib-badge>
+Badge - A performant badge/tag component for labels, status, and counts Single element rendering with OnPush strategy and signal-based inputs. Uses design tokens for consistent styling.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                  | Default     | Description                                                                          |
-| ------------ | --------------------- | ----------- | ------------------------------------------------------------------------------------ |
-| `color`      | `BadgeColor`          | `'primary'` | /** Color theme of the badge                                                         |
-| `decorative` | `boolean`             | `false`     | /** Whether the badge is decorative and should be hidden from assistive technologies |
-| `dot`        | `boolean`             | `false`     | /** Whether the badge is a dot (small circular indicator)                            |
-| `label`      | `string | null`       | `null`      | /** Accessible label for the badge, used when screen reader support is needed        |
-| `pill`       | `boolean`             | `false`     | /** Whether the badge is a pill shape (fully rounded)                                |
-| `size`       | `BadgeSize`           | `'md'`      | /** Size of the badge                                                                |
-| `variant`    | `BadgeVariant | null` | `null`      | /** Visual variant of the badge                                                      |
+| Name         | Type                  | Default     | Description                                                                      |
+| ------------ | --------------------- | ----------- | -------------------------------------------------------------------------------- |
+| `color`      | `BadgeColor`          | `'primary'` | Color theme of the badge                                                         |
+| `decorative` | `boolean`             | `false`     | Whether the badge is decorative and should be hidden from assistive technologies |
+| `dot`        | `boolean`             | `false`     | Whether the badge is a dot (small circular indicator)                            |
+| `label`      | `string | null`       | `null`      | Accessible label for the badge, used when screen reader support is needed        |
+| `pill`       | `boolean`             | `false`     | Whether the badge is a pill shape (fully rounded)                                |
+| `size`       | `BadgeSize`           | `'md'`      | Size of the badge                                                                |
+| `variant`    | `BadgeVariant | null` | `null`      | Visual variant of the badge                                                      |
 
 ### Outputs
 

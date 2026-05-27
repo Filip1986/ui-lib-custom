@@ -41,7 +41,12 @@ _none_
 | `--uilib-editor-content-bg`                | `color-mix(in srgb, #000000 16%, #0b1220)`     |
 | `--uilib-editor-content-border-color`      | `color-mix(in srgb, #ffffff 22%, transparent)` |
 | `--uilib-editor-content-color`             | `color-mix(in srgb, #ffffff 88%, #000000)`     |
+| `--uilib-editor-content-h1-font-size`      | `1.75em`                                       |
+| `--uilib-editor-content-h2-font-size`      | `1.5em`                                        |
+| `--uilib-editor-content-h3-font-size`      | `1.25em`                                       |
 | `--uilib-editor-focus-ring-color`          | `color-mix(in srgb, #60a5fa 55%, transparent)` |
+| `--uilib-editor-font-size-lg`              | `16px`                                         |
+| `--uilib-editor-font-size-sm`              | `13px`                                         |
 | `--uilib-editor-placeholder-color`         | `color-mix(in srgb, #ffffff 46%, transparent)` |
 | `--uilib-editor-toolbar-bg`                | `color-mix(in srgb, #ffffff 8%, transparent)`  |
 | `--uilib-editor-toolbar-border-color`      | `color-mix(in srgb, #ffffff 18%, transparent)` |

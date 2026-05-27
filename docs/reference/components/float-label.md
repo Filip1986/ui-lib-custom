@@ -13,9 +13,9 @@ FloatLabel wrapper component scaffold.
 
 ### Inputs
 
-| Name      | Type                | Default  | Description                                                     |
-| --------- | ------------------- | -------- | --------------------------------------------------------------- |
-| `variant` | `FloatLabelVariant` | `'over'` | /** Defines the positioning of the label relative to the input. |
+| Name      | Type                | Default  | Description                                                 |
+| --------- | ------------------- | -------- | ----------------------------------------------------------- |
+| `variant` | `FloatLabelVariant` | `'over'` | Defines the positioning of the label relative to the input. |
 
 ### Outputs
 

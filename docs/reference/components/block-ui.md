@@ -7,23 +7,23 @@
 
 ## Overview
 
-BlockUI - Blocks user interaction on a section of the page by overlaying a mask.Wrap any content in `<ui-lib-block-ui>` and bind `[blocked]` to toggle the mask.Project custom mask content (e.g. a spinner) using the `blockTemplate` attribute selector.@example<ui-lib-block-ui [(blocked)]="isBlocked">  <p>Protected content</p>  <span blockTemplate>Loading…</span></ui-lib-block-ui>
+BlockUI - Blocks user interaction on a section of the page by overlaying a mask. Wrap any content in `<ui-lib-block-ui>` and bind `[blocked]` to toggle the mask. Project custom mask content (e.g. a spinner) using the `blockTemplate` attribute selector.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                    | Default | Description                                                                   |
-| ------------ | ----------------------- | ------- | ----------------------------------------------------------------------------- |
-| `baseZIndex` | `number`                | `0`     | /** Base z-index for the mask layer. When 0 uses the CSS variable default. */ |
-| `styleClass` | `string | null`         | `null`  | /** Additional CSS classes to apply to the host element. */                   |
-| `variant`    | `BlockUIVariant | null` | `null`  | /** Visual variant — inherits from ThemeConfigService when not set. */        |
+| Name         | Type                    | Default | Description                                                            |
+| ------------ | ----------------------- | ------- | ---------------------------------------------------------------------- |
+| `baseZIndex` | `number`                | `0`     | Base z-index for the mask layer. When 0 uses the CSS variable default. |
+| `styleClass` | `string | null`         | `null`  | Additional CSS classes to apply to the host element.                   |
+| `variant`    | `BlockUIVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.        |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                                                                            |
-| --------- | --------- | ------- | -------------------------------------------------------------------------------------- |
-| `blocked` | `boolean` | `false` | /** Whether the content is blocked from user interaction. Supports two-way binding. */ |
+| Name      | Type      | Default | Description                                                                     |
+| --------- | --------- | ------- | ------------------------------------------------------------------------------- |
+| `blocked` | `boolean` | `false` | Whether the content is blocked from user interaction. Supports two-way binding. |
 
 ### Outputs
 

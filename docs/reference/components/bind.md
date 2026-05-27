@@ -13,15 +13,9 @@ Properties are applied via `Renderer2.setProperty`, not `setAttribute`, so
 
 ### Inputs
 
-| Name        | Type                      | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ----------- | ------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `uiLibBind` | `Record<string, unknown>` | `{}`    | /**
-An object whose enumerable own properties are applied as DOM properties on
-the host element. Use DOM property names (`tabIndex`, `ariaHidden`,
-`htmlFor`) rather than lowercase attribute names (`tabindex`, `aria-hidden`,
-`for`). `Record<string, unknown>` is intentionally broad so callers can
-supply any valid native/custom host property. Pass an empty object (`{}`)
-or set an individual key to `null` to clear previously bound properties. |
+| Name        | Type                      | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------- | ------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `uiLibBind` | `Record<string, unknown>` | `{}`    | An object whose enumerable own properties are applied as DOM properties on the host element. Use DOM property names (`tabIndex`, `ariaHidden`, `htmlFor`) rather than lowercase attribute names (`tabindex`, `aria-hidden`, `for`). `Record<string, unknown>` is intentionally broad so callers can supply any valid native/custom host property. Pass an empty object (`{}`) or set an individual key to `null` to clear previously bound properties. |
 
 ### Outputs
 

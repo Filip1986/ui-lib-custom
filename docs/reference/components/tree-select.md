@@ -7,57 +7,46 @@
 
 ## Overview
 
-TreeSelect renders a hierarchical tree structure inside a dropdown panel,
-allowing single, multiple, or checkbox-based selection.
-
-@example
-```html
-<ui-lib-tree-select
-  [nodes]="treeNodes"
-  selectionMode="single"
-  [(selection)]="selectedNode"
-  placeholder="Choose a category"
-/>
-```
+TreeSelect renders a hierarchical tree structure inside a dropdown panel, allowing single, multiple, or checkbox-based selection.
 
 ## API
 
 ### Inputs
 
-| Name                | Type                       | Default                                  | Description                                                                       |
-| ------------------- | -------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------- |
-| `ariaLabel`         | `string | null`            | `null`                                   | /** ARIA label for the trigger.                                                   |
-| `ariaLabelledBy`    | `string | null`            | `null`                                   | /** References an external element that labels this component.                    |
-| `disabled`          | `boolean`                  | `false`                                  | /** When `true`, the component is non-interactive.                                |
-| `emptyMessage`      | `string`                   | `TREE_SELECT_DEFAULTS.emptyMessage`      | /** Message shown when the node list is empty.                                    |
-| `filter`            | `boolean`                  | `false`                                  | /** When `true`, a filter input is rendered inside the panel.                     |
-| `filterPlaceholder` | `string`                   | `TREE_SELECT_DEFAULTS.filterPlaceholder` | /** Placeholder for the filter input inside the panel.                            |
-| `invalid`           | `boolean`                  | `false`                                  | /** When `true`, applies the invalid visual state and `aria-invalid`.             |
-| `loading`           | `boolean`                  | `false`                                  | /** When `true`, a loading spinner is shown and the component is non-interactive. |
-| `nodes`             | `TreeNode[]`               | `[]`                                     | /** Root-level tree nodes to display in the panel.                                |
-| `placeholder`       | `string`                   | `TREE_SELECT_DEFAULTS.placeholder`       | /** Placeholder text shown when no node is selected.                              |
-| `required`          | `boolean`                  | `false`                                  | /** When `true`, sets `aria-required`.                                            |
-| `showClear`         | `boolean`                  | `false`                                  | /** When `true`, shows a clear button when a value is selected.                   |
-| `size`              | `TreeSelectSize`           | `'md'`                                   | /** Size of the trigger element.                                                  |
-| `styleClass`        | `string`                   | `''`                                     | /** Extra CSS class applied to the host element.                                  |
-| `variant`           | `TreeSelectVariant | null` | `null`                                   | /** Design variant. Falls back to ThemeConfigService when `null`.                 |
+| Name                | Type                       | Default                                  | Description                                                                   |
+| ------------------- | -------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------- |
+| `ariaLabel`         | `string | null`            | `null`                                   | ARIA label for the trigger.                                                   |
+| `ariaLabelledBy`    | `string | null`            | `null`                                   | References an external element that labels this component.                    |
+| `disabled`          | `boolean`                  | `false`                                  | When `true`, the component is non-interactive.                                |
+| `emptyMessage`      | `string`                   | `TREE_SELECT_DEFAULTS.emptyMessage`      | Message shown when the node list is empty.                                    |
+| `filter`            | `boolean`                  | `false`                                  | When `true`, a filter input is rendered inside the panel.                     |
+| `filterPlaceholder` | `string`                   | `TREE_SELECT_DEFAULTS.filterPlaceholder` | Placeholder for the filter input inside the panel.                            |
+| `invalid`           | `boolean`                  | `false`                                  | When `true`, applies the invalid visual state and `aria-invalid`.             |
+| `loading`           | `boolean`                  | `false`                                  | When `true`, a loading spinner is shown and the component is non-interactive. |
+| `nodes`             | `TreeNode[]`               | `[]`                                     | Root-level tree nodes to display in the panel.                                |
+| `placeholder`       | `string`                   | `TREE_SELECT_DEFAULTS.placeholder`       | Placeholder text shown when no node is selected.                              |
+| `required`          | `boolean`                  | `false`                                  | When `true`, sets `aria-required`.                                            |
+| `showClear`         | `boolean`                  | `false`                                  | When `true`, shows a clear button when a value is selected.                   |
+| `size`              | `TreeSelectSize`           | `'md'`                                   | Size of the trigger element.                                                  |
+| `styleClass`        | `string`                   | `''`                                     | Extra CSS class applied to the host element.                                  |
+| `variant`           | `TreeSelectVariant | null` | `null`                                   | Design variant. Falls back to ThemeConfigService when `null`.                 |
 
 ### Models (two-way bindable)
 
-| Name           | Type                           | Default | Description                                                              |
-| -------------- | ------------------------------ | ------- | ------------------------------------------------------------------------ |
-| `panelVisible` | `boolean`                      | `false` | /** Controls panel visibility. Settable programmatically.                |
-| `selection`    | `TreeNode | TreeNode[] | null` | `null`  | /** Currently selected node(s). Use `[(selection)]` for two-way binding. |
+| Name           | Type                           | Default | Description                                                          |
+| -------------- | ------------------------------ | ------- | -------------------------------------------------------------------- |
+| `panelVisible` | `boolean`                      | `false` | Controls panel visibility. Settable programmatically.                |
+| `selection`    | `TreeNode | TreeNode[] | null` | `null`  | Currently selected node(s). Use `[(selection)]` for two-way binding. |
 
 ### Outputs
 
-| Name         | Type                  | Description                                                     |
-| ------------ | --------------------- | --------------------------------------------------------------- |
-| `cleared`    | `void`                | /** Emitted when the selection is cleared via the clear button. |
-| `hide`       | `TreeSelectHideEvent` | /** Emitted when the dropdown panel is hidden.                  |
-| `nodeExpand` | `TreeNodeExpandEvent` | /** Emitted when a tree node is expanded.                       |
-| `nodeSelect` | `TreeNodeSelectEvent` | /** Emitted when a tree node is selected.                       |
-| `show`       | `TreeSelectShowEvent` | /** Emitted when the dropdown panel is shown.                   |
+| Name         | Type                  | Description                                                 |
+| ------------ | --------------------- | ----------------------------------------------------------- |
+| `cleared`    | `void`                | Emitted when the selection is cleared via the clear button. |
+| `hide`       | `TreeSelectHideEvent` | Emitted when the dropdown panel is hidden.                  |
+| `nodeExpand` | `TreeNodeExpandEvent` | Emitted when a tree node is expanded.                       |
+| `nodeSelect` | `TreeNodeSelectEvent` | Emitted when a tree node is selected.                       |
+| `show`       | `TreeSelectShowEvent` | Emitted when the dropdown panel is shown.                   |
 
 ## Content Projection
 

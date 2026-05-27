@@ -7,55 +7,38 @@
 
 ## Overview
 
-Carousel is a content slider with support for multiple visible items,
-responsive breakpoints, autoplay, circular mode, touch/swipe, and
-three design variants (Material, Bootstrap, Minimal).
-
-Provide an item template via \`<ng-template carouselItem let-item>\`.
-
-@example
-```html
-<ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1" [circular]="true">
-  <ng-template carouselItem let-product>
-    <div class="product-card">{{ product.name }}</div>
-  </ng-template>
-</ui-lib-carousel>
-```
+Carousel is a content slider with support for multiple visible items, responsive breakpoints, autoplay, circular mode, touch/swipe, and three design variants (Material, Bootstrap, Minimal). Provide an item template via \`<ng-template carouselItem let-item>\`.
 
 ## API
 
 ### Inputs
 
-| Name                     | Type                         | Default                                               | Description                                                                                         |
-| ------------------------ | ---------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `ariaLabel`              | `string`                     | `CAROUSEL_ARIA_REGION_LABEL`                          | /** ARIA label for the carousel landmark region. Falls back to `'Carousel'`.                        |
-| `autoplayInterval`       | `number`                     | `0`                                                   | /**
-Milliseconds between automatic page advances.
-Set to 0 (default) to disable autoplay.           |
-| `circular`               | `boolean`                    | `false`                                               | /** When true, navigation wraps from last item back to first.                                       |
-| `nextAriaLabel`          | `string`                     | `CAROUSEL_ARIA_NEXT_LABEL`                            | /** ARIA label for the "next" button.                                                               |
-| `numScroll`              | `number`                     | `CAROUSEL_DEFAULT_NUM_SCROLL`                         | /** Number of items scrolled per navigation step.                                                   |
-| `numVisible`             | `number`                     | `CAROUSEL_DEFAULT_NUM_VISIBLE`                        | /** Number of items visible in the viewport at once.                                                |
-| `orientation`            | `CarouselOrientation`        | `CAROUSEL_DEFAULT_ORIENTATION as CarouselOrientation` | /** Layout orientation.                                                                             |
-| `pauseLabel`             | `string`                     | `CAROUSEL_ARIA_PAUSE_LABEL`                           | /** ARIA label for the autoplay pause button (when playing).                                        |
-| `playLabel`              | `string`                     | `CAROUSEL_ARIA_PLAY_LABEL`                            | /** ARIA label for the autoplay resume button (when paused).                                        |
-| `prevAriaLabel`          | `string`                     | `CAROUSEL_ARIA_PREV_LABEL`                            | /** ARIA label for the "previous" button.                                                           |
-| `responsiveOptions`      | `CarouselResponsiveOption[]` | `[]`                                                  | /**
-Responsive breakpoint options.
-Applied when viewport width is at or below the breakpoint value. |
-| `showIndicators`         | `boolean`                    | `true`                                                | /** Show or hide the indicator (dot) buttons below the viewport.                                    |
-| `showNavigators`         | `boolean`                    | `true`                                                | /** Show or hide the navigation (prev/next) buttons.                                                |
-| `size`                   | `CarouselSize`               | `'md'`                                                | /** Size token — controls padding, font-size, and button dimensions.                                |
-| `styleClass`             | `string`                     | `''`                                                  | /** Optional extra CSS class applied to the root host element.                                      |
-| `value`                  | `unknown[]`                  | `[]`                                                  | /** Array of data items to display in the carousel.                                                 |
-| `variant`                | `CarouselVariant | null`     | `null`                                                | /** Design variant — controls visual style. Defaults to the global ThemeConfigService variant.      |
-| `verticalViewportHeight` | `string`                     | `CAROUSEL_DEFAULT_VERTICAL_VIEWPORT_HEIGHT`           | /** Viewport height override — only applied in vertical orientation.                                |
+| Name                     | Type                         | Default                                               | Description                                                                                     |
+| ------------------------ | ---------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `ariaLabel`              | `string`                     | `CAROUSEL_ARIA_REGION_LABEL`                          | ARIA label for the carousel landmark region. Falls back to `'Carousel'`.                        |
+| `autoplayInterval`       | `number`                     | `0`                                                   | Milliseconds between automatic page advances. Set to 0 (default) to disable autoplay.           |
+| `circular`               | `boolean`                    | `false`                                               | When true, navigation wraps from last item back to first.                                       |
+| `nextAriaLabel`          | `string`                     | `CAROUSEL_ARIA_NEXT_LABEL`                            | ARIA label for the "next" button.                                                               |
+| `numScroll`              | `number`                     | `CAROUSEL_DEFAULT_NUM_SCROLL`                         | Number of items scrolled per navigation step.                                                   |
+| `numVisible`             | `number`                     | `CAROUSEL_DEFAULT_NUM_VISIBLE`                        | Number of items visible in the viewport at once.                                                |
+| `orientation`            | `CarouselOrientation`        | `CAROUSEL_DEFAULT_ORIENTATION as CarouselOrientation` | Layout orientation.                                                                             |
+| `pauseLabel`             | `string`                     | `CAROUSEL_ARIA_PAUSE_LABEL`                           | ARIA label for the autoplay pause button (when playing).                                        |
+| `playLabel`              | `string`                     | `CAROUSEL_ARIA_PLAY_LABEL`                            | ARIA label for the autoplay resume button (when paused).                                        |
+| `prevAriaLabel`          | `string`                     | `CAROUSEL_ARIA_PREV_LABEL`                            | ARIA label for the "previous" button.                                                           |
+| `responsiveOptions`      | `CarouselResponsiveOption[]` | `[]`                                                  | Responsive breakpoint options. Applied when viewport width is at or below the breakpoint value. |
+| `showIndicators`         | `boolean`                    | `true`                                                | Show or hide the indicator (dot) buttons below the viewport.                                    |
+| `showNavigators`         | `boolean`                    | `true`                                                | Show or hide the navigation (prev/next) buttons.                                                |
+| `size`                   | `CarouselSize`               | `'md'`                                                | Size token — controls padding, font-size, and button dimensions.                                |
+| `styleClass`             | `string`                     | `''`                                                  | Optional extra CSS class applied to the root host element.                                      |
+| `value`                  | `unknown[]`                  | `[]`                                                  | Array of data items to display in the carousel.                                                 |
+| `variant`                | `CarouselVariant | null`     | `null`                                                | Design variant — controls visual style. Defaults to the global ThemeConfigService variant.      |
+| `verticalViewportHeight` | `string`                     | `CAROUSEL_DEFAULT_VERTICAL_VIEWPORT_HEIGHT`           | Viewport height override — only applied in vertical orientation.                                |
 
 ### Outputs
 
-| Name         | Type                | Description                                   |
-| ------------ | ------------------- | --------------------------------------------- |
-| `pageChange` | `CarouselPageEvent` | /** Emitted whenever the active page changes. |
+| Name         | Type                | Description                               |
+| ------------ | ------------------- | ----------------------------------------- |
+| `pageChange` | `CarouselPageEvent` | Emitted whenever the active page changes. |
 
 ## Content Projection
 

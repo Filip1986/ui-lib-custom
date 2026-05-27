@@ -7,17 +7,17 @@
 
 ## Overview
 
-Terminal — an interactive command-line interface component.Renders a command history, a prompt, and a text input.Command processing is delegated to TerminalService: the consumer injects the service,watches the `command` signal via `effect()`, and calls `sendResponse()`.@example// app.component.html<ui-lib-terminal welcomeMessage="Type 'help' to see available commands." prompt="$" />// app.component.tsprivate readonly terminalService = inject(TerminalService);constructor() {  effect(() => {    const cmd = this.terminalService.command();    if (cmd !== null) {      this.terminalService.sendResponse(this.process(cmd.text));    }  });}
+Terminal — an interactive command-line interface component. Renders a command history, a prompt, and a text input. Command processing is delegated to TerminalService: the consumer injects the service, watches the `command` signal via `effect()`, and calls `sendResponse()`.
 
 ## API
 
 ### Inputs
 
-| Name             | Type                     | Default | Description                                                                |
-| ---------------- | ------------------------ | ------- | -------------------------------------------------------------------------- |
-| `prompt`         | `string`                 | `'$'`   | /** The prompt prefix string displayed before each command line. */        |
-| `variant`        | `TerminalVariant | null` | `null`  | /** Design variant. Inherits from ThemeConfigService when not set. */      |
-| `welcomeMessage` | `string`                 | `''`    | /** Optional welcome / banner message shown at the top of the terminal. */ |
+| Name             | Type                     | Default | Description                                                         |
+| ---------------- | ------------------------ | ------- | ------------------------------------------------------------------- |
+| `prompt`         | `string`                 | `'$'`   | The prompt prefix string displayed before each command line.        |
+| `variant`        | `TerminalVariant | null` | `null`  | Design variant. Inherits from ThemeConfigService when not set.      |
+| `welcomeMessage` | `string`                 | `''`    | Optional welcome / banner message shown at the top of the terminal. |
 
 ### Outputs
 

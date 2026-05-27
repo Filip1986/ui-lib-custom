@@ -7,52 +7,49 @@
 
 ## Overview
 
-Monotonic counter for unique element IDs. */
-let listboxIdCounter: number = 0;
-
-/**Listbox component — displays a scrollable list of options with single ormultiple selection, optional inline filtering, option groups, and fullkeyboard navigation.Implements `ControlValueAccessor` for seamless `ngModel` and reactive-formintegration.@example```html<ui-lib-listbox [options]="cities" [(ngModel)]="selectedCity" />```
+Listbox component — displays a scrollable list of options with single or multiple selection, optional inline filtering, option groups, and full keyboard navigation. Implements `ControlValueAccessor` for seamless `ngModel` and reactive-form integration.
 
 ## API
 
 ### Inputs
 
-| Name                  | Type                    | Default                                | Description                                                                                                                                |
-| --------------------- | ----------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ariaLabel`           | `string`                | `''`                                   | /** Accessible label for the listbox element. */                                                                                           |
-| `ariaLabelledBy`      | `string`                | `''`                                   | /** ID of an external element that labels this listbox. */                                                                                 |
-| `checkbox`            | `boolean`               | `false`                                | /** When true and `multiple` is enabled, renders a checkbox beside each item. */                                                           |
-| `disabled`            | `boolean`               | `false`                                | /** When true, disables all interaction. */                                                                                                |
-| `emptyFilterMessage`  | `string`                | `LISTBOX_DEFAULTS.EmptyFilterMessage`  | /** Message shown when the filter produces no matches. */                                                                                  |
-| `emptyMessage`        | `string`                | `LISTBOX_DEFAULTS.EmptyMessage`        | /** Message shown when the options array is empty. */                                                                                      |
-| `filter`              | `boolean`               | `false`                                | /** When true, shows a filter input above the list. */                                                                                     |
-| `filterBy`            | `string`                | `''`                                   | /** Field name to filter against. Defaults to `optionLabel`. */                                                                            |
-| `filterPlaceholder`   | `string`                | `LISTBOX_DEFAULTS.FilterPlaceholder`   | /** Placeholder text for the filter input. */                                                                                              |
-| `group`               | `boolean`               | `false`                                | /** When true, the `options` array is treated as a list of groups. */                                                                      |
-| `multiple`            | `boolean`               | `false`                                | /** When true, multiple options can be selected simultaneously. */                                                                         |
-| `optionDisabled`      | `string`                | `LISTBOX_DEFAULTS.OptionDisabled`      | /** Field name used to determine whether an option is disabled. */                                                                         |
-| `optionGroupChildren` | `string`                | `LISTBOX_DEFAULTS.OptionGroupChildren` | /** Field name that contains the children array inside each option group. */                                                               |
-| `optionGroupLabel`    | `string`                | `LISTBOX_DEFAULTS.OptionGroupLabel`    | /** Field name used as the display label for each option group. */                                                                         |
-| `optionLabel`         | `string`                | `LISTBOX_DEFAULTS.OptionLabel`         | /** Field name used as the display label for each option. */                                                                               |
-| `options`             | `unknown[]`             | `[]`                                   | /** Array of option objects to display in the list. */                                                                                     |
-| `optionValue`         | `string`                | `LISTBOX_DEFAULTS.OptionValue`         | /** Field name used to extract the value for each option. */                                                                               |
-| `readonly`            | `boolean`               | `false`                                | /** When true, prevents value changes but does not grey out the component. */                                                              |
-| `scrollHeight`        | `string`                | `LISTBOX_DEFAULTS.ScrollHeight`        | /** CSS height for the scrollable options container. */                                                                                    |
-| `showToggleAll`       | `boolean`               | `false`                                | /**When true and `multiple` is enabled, shows a "Toggle all" checkbox in theheader to select or deselect every enabled option at once./ |
-| `size`                | `ListboxSize`           | `'md'`                                 | /** Size token controlling padding and font size. */                                                                                       |
-| `striped`             | `boolean`               | `false`                                | /** When true, alternating rows receive a subtle background tint. */                                                                       |
-| `variant`             | `ListboxVariant | null` | `null`                                 | /** Visual design variant. Falls back to the global ThemeConfigService variant. */                                                         |
+| Name                  | Type                    | Default                                | Description                                                                                                                          |
+| --------------------- | ----------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `ariaLabel`           | `string`                | `''`                                   | Accessible label for the listbox element.                                                                                            |
+| `ariaLabelledBy`      | `string`                | `''`                                   | ID of an external element that labels this listbox.                                                                                  |
+| `checkbox`            | `boolean`               | `false`                                | When true and `multiple` is enabled, renders a checkbox beside each item.                                                            |
+| `disabled`            | `boolean`               | `false`                                | When true, disables all interaction.                                                                                                 |
+| `emptyFilterMessage`  | `string`                | `LISTBOX_DEFAULTS.EmptyFilterMessage`  | Message shown when the filter produces no matches.                                                                                   |
+| `emptyMessage`        | `string`                | `LISTBOX_DEFAULTS.EmptyMessage`        | Message shown when the options array is empty.                                                                                       |
+| `filter`              | `boolean`               | `false`                                | When true, shows a filter input above the list.                                                                                      |
+| `filterBy`            | `string`                | `''`                                   | Field name to filter against. Defaults to `optionLabel`.                                                                             |
+| `filterPlaceholder`   | `string`                | `LISTBOX_DEFAULTS.FilterPlaceholder`   | Placeholder text for the filter input.                                                                                               |
+| `group`               | `boolean`               | `false`                                | When true, the `options` array is treated as a list of groups.                                                                       |
+| `multiple`            | `boolean`               | `false`                                | When true, multiple options can be selected simultaneously.                                                                          |
+| `optionDisabled`      | `string`                | `LISTBOX_DEFAULTS.OptionDisabled`      | Field name used to determine whether an option is disabled.                                                                          |
+| `optionGroupChildren` | `string`                | `LISTBOX_DEFAULTS.OptionGroupChildren` | Field name that contains the children array inside each option group.                                                                |
+| `optionGroupLabel`    | `string`                | `LISTBOX_DEFAULTS.OptionGroupLabel`    | Field name used as the display label for each option group.                                                                          |
+| `optionLabel`         | `string`                | `LISTBOX_DEFAULTS.OptionLabel`         | Field name used as the display label for each option.                                                                                |
+| `options`             | `unknown[]`             | `[]`                                   | Array of option objects to display in the list.                                                                                      |
+| `optionValue`         | `string`                | `LISTBOX_DEFAULTS.OptionValue`         | Field name used to extract the value for each option.                                                                                |
+| `readonly`            | `boolean`               | `false`                                | When true, prevents value changes but does not grey out the component.                                                               |
+| `scrollHeight`        | `string`                | `LISTBOX_DEFAULTS.ScrollHeight`        | CSS height for the scrollable options container.                                                                                     |
+| `showToggleAll`       | `boolean`               | `false`                                | When true and `multiple` is enabled, shows a "Toggle all" checkbox in the header to select or deselect every enabled option at once. |
+| `size`                | `ListboxSize`           | `'md'`                                 | Size token controlling padding and font size.                                                                                        |
+| `striped`             | `boolean`               | `false`                                | When true, alternating rows receive a subtle background tint.                                                                        |
+| `variant`             | `ListboxVariant | null` | `null`                                 | Visual design variant. Falls back to the global ThemeConfigService variant.                                                          |
 
 ### Models (two-way bindable)
 
-| Name          | Type     | Default | Description                                                 |
-| ------------- | -------- | ------- | ----------------------------------------------------------- |
-| `filterValue` | `string` | `''`    | /** Two-way binding for the current filter query string. */ |
+| Name          | Type     | Default | Description                                          |
+| ------------- | -------- | ------- | ---------------------------------------------------- |
+| `filterValue` | `string` | `''`    | Two-way binding for the current filter query string. |
 
 ### Outputs
 
-| Name           | Type                 | Description                                   |
-| -------------- | -------------------- | --------------------------------------------- |
-| `filterChange` | `ListboxFilterEvent` | /** Emitted when the filter query changes. */ |
+| Name           | Type                 | Description                            |
+| -------------- | -------------------- | -------------------------------------- |
+| `filterChange` | `ListboxFilterEvent` | Emitted when the filter query changes. |
 
 ## Content Projection
 

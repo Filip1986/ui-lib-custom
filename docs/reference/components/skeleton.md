@@ -7,24 +7,24 @@
 
 ## Overview
 
-Skeleton — content placeholder displayed while real content is loading.Renders an animated shimmer block in rectangle or circle shape. Use width,height, and size inputs to control dimensions. Combine multiple skeletonsto mock realistic page layouts.@example<ui-lib-skeleton width="100%" height="1.5rem" /><ui-lib-skeleton shape="circle" size="4rem" />
+Skeleton — content placeholder displayed while real content is loading. Renders an animated shimmer block in rectangle or circle shape. Use width, height, and size inputs to control dimensions. Combine multiple skeletons to mock realistic page layouts.
 
 ## API
 
 ### Inputs
 
-| Name           | Type                     | Default             | Description                                                                                                                                                 |
-| -------------- | ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `animation`    | `SkeletonAnimation`      | `'wave'`            | /** Animation type. Use 'none' to disable the shimmer. */                                                                                                   |
-| `ariaLabel`    | `string`                 | `'Loading content'` | /** Accessible label announced while the loading placeholder is active. */                                                                                  |
-| `borderRadius` | `string | null`          | `null`              | /** Custom border-radius value. Overrides the shape-derived default. */                                                                                     |
-| `height`       | `string`                 | `'1rem'`            | /** Height of the skeleton. Accepts any valid CSS dimension string (e.g. '1rem', '4rem'). */                                                                |
-| `loading`      | `boolean`                | `true`              | /** Whether the skeleton placeholder is still loading. */                                                                                                   |
-| `shape`        | `SkeletonShape`          | `'rectangle'`       | /** Shape of the skeleton placeholder. */                                                                                                                   |
-| `size`         | `string | null`          | `null`              | /**Convenience shorthand that sets both width and height to the same value.Useful for circle shapes. When set, overrides width and height individually./ |
-| `styleClass`   | `string | null`          | `null`              | /** Additional CSS classes applied to the host element. */                                                                                                  |
-| `variant`      | `SkeletonVariant | null` | `null`              | /** Design variant — inherits from ThemeConfigService when not set. */                                                                                      |
-| `width`        | `string`                 | `'100%'`            | /** Width of the skeleton. Accepts any valid CSS dimension string (e.g. '100%', '12rem'). */                                                                |
+| Name           | Type                     | Default             | Description                                                                                                                                           |
+| -------------- | ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `animation`    | `SkeletonAnimation`      | `'wave'`            | Animation type. Use 'none' to disable the shimmer.                                                                                                    |
+| `ariaLabel`    | `string`                 | `'Loading content'` | Accessible label announced while the loading placeholder is active.                                                                                   |
+| `borderRadius` | `string | null`          | `null`              | Custom border-radius value. Overrides the shape-derived default.                                                                                      |
+| `height`       | `string`                 | `'1rem'`            | Height of the skeleton. Accepts any valid CSS dimension string (e.g. '1rem', '4rem').                                                                 |
+| `loading`      | `boolean`                | `true`              | Whether the skeleton placeholder is still loading.                                                                                                    |
+| `shape`        | `SkeletonShape`          | `'rectangle'`       | Shape of the skeleton placeholder.                                                                                                                    |
+| `size`         | `string | null`          | `null`              | Convenience shorthand that sets both width and height to the same value. Useful for circle shapes. When set, overrides width and height individually. |
+| `styleClass`   | `string | null`          | `null`              | Additional CSS classes applied to the host element.                                                                                                   |
+| `variant`      | `SkeletonVariant | null` | `null`              | Design variant — inherits from ThemeConfigService when not set.                                                                                       |
+| `width`        | `string`                 | `'100%'`            | Width of the skeleton. Accepts any valid CSS dimension string (e.g. '100%', '12rem').                                                                 |
 
 ### Outputs
 

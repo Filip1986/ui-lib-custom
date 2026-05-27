@@ -7,18 +7,15 @@
 
 ## Overview
 
-Internal shell component rendered by DialogService.open().
-
-This component is NOT intended to be placed in templates directly.
-Use DialogService.open(SomeComponent, config) instead.
+Internal shell component rendered by DialogService.open(). This component is NOT intended to be placed in templates directly. Use DialogService.open(SomeComponent, config) instead.
 
 ## API
 
 ### Inputs
 
-| Name            | Type                   | Default | Description                                                       |
-| --------------- | ---------------------- | ------- | ----------------------------------------------------------------- |
-| `componentType` | `Type<unknown> | null` | `null`  | /** @internal — set by DialogService via ComponentRef.setInput(). |
+| Name            | Type                   | Default | Description                                                   |
+| --------------- | ---------------------- | ------- | ------------------------------------------------------------- |
+| `componentType` | `Type<unknown> | null` | `null`  | @internal — set by DialogService via ComponentRef.setInput(). |
 
 ### Outputs
 

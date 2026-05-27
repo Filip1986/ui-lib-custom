@@ -7,30 +7,20 @@
 
 ## Overview
 
-Default value exported for entry-point test assertions. */
-export const BREADCRUMB_DEFAULT_ARIA_LABEL: string = 'Breadcrumb';
-export const BREADCRUMB_DEFAULT_HOME_ARIA_LABEL: string = 'Home';
-
-let nextBreadcrumbId: number = 0;
-
-/**
-Breadcrumb component for displaying hierarchical navigation trails.
-Supports URL links, Angular Router links, and command callbacks.
-Fully accessible with ARIA landmark, `aria-current="page"` on the
-active item, and keyboard activation for command-only items.
+Breadcrumb component for displaying hierarchical navigation trails. Supports URL links, Angular Router links, and command callbacks. Fully accessible with ARIA landmark, `aria-current="page"` on the active item, and keyboard activation for command-only items.
 
 ## API
 
 ### Inputs
 
-| Name         | Type                       | Default                         | Description                                                            |
-| ------------ | -------------------------- | ------------------------------- | ---------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                   | `BREADCRUMB_DEFAULT_ARIA_LABEL` | /** Accessible label for the `<nav>` landmark element.                 |
-| `home`       | `BreadcrumbItem | null`    | `null`                          | /** Optional home item pinned as the first crumb.                      |
-| `model`      | `BreadcrumbItem[]`         | `[]`                            | /** Array of navigation items to display after the optional home item. |
-| `size`       | `BreadcrumbSize`           | `'md'`                          | /** Size token: sm | md | lg.                                          |
-| `styleClass` | `string | null`            | `null`                          | /** Extra CSS class appended to the host element.                      |
-| `variant`    | `BreadcrumbVariant | null` | `null`                          | /** Design-system variant; falls back to ThemeConfigService when null. |
+| Name         | Type                       | Default                         | Description                                                        |
+| ------------ | -------------------------- | ------------------------------- | ------------------------------------------------------------------ |
+| `ariaLabel`  | `string`                   | `BREADCRUMB_DEFAULT_ARIA_LABEL` | Accessible label for the `<nav>` landmark element.                 |
+| `home`       | `BreadcrumbItem | null`    | `null`                          | Optional home item pinned as the first crumb.                      |
+| `model`      | `BreadcrumbItem[]`         | `[]`                            | Array of navigation items to display after the optional home item. |
+| `size`       | `BreadcrumbSize`           | `'md'`                          | Size token: sm | md | lg.                                          |
+| `styleClass` | `string | null`            | `null`                          | Extra CSS class appended to the host element.                      |
+| `variant`    | `BreadcrumbVariant | null` | `null`                          | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
@@ -42,20 +32,22 @@ _none_
 
 ## Theming
 
-| CSS Variable                           | Default                                                                                  |
-| -------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `--uilib-breadcrumb-current-color`     | `var(--uilib-color-neutral-600, #4b5563)`                                                |
-| `--uilib-breadcrumb-disabled-color`    | `var(--uilib-color-neutral-300, #d1d5db)`                                                |
-| `--uilib-breadcrumb-focus-shadow`      | `0 0 0 2px color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 40%, transparent)` |
-| `--uilib-breadcrumb-font-size`         | `var(--uilib-font-size-md, 0.875rem)`                                                    |
-| `--uilib-breadcrumb-font-size-lg`      | `var(--uilib-font-size-lg, 1rem)`                                                        |
-| `--uilib-breadcrumb-font-size-md`      | `var(--uilib-font-size-md, 0.875rem)`                                                    |
-| `--uilib-breadcrumb-font-size-sm`      | `var(--uilib-font-size-sm, 0.75rem)`                                                     |
-| `--uilib-breadcrumb-gap`               | `var(--uilib-spacing-2, 0.5rem)`                                                         |
-| `--uilib-breadcrumb-link-color`        | `var(--uilib-color-primary-500, #3b82f6)`                                                |
-| `--uilib-breadcrumb-link-color-hover`  | `var(--uilib-color-primary-600, #2563eb)`                                                |
-| `--uilib-breadcrumb-separator-color`   | `var(--uilib-color-neutral-400, #9ca3af)`                                                |
-| `--uilib-breadcrumb-separator-content` | `'/'`                                                                                    |
+| CSS Variable                             | Default                                                                                  |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `--uilib-breadcrumb-current-color`       | `var(--uilib-color-neutral-600, #4b5563)`                                                |
+| `--uilib-breadcrumb-disabled-color`      | `var(--uilib-color-neutral-300, #d1d5db)`                                                |
+| `--uilib-breadcrumb-focus-shadow`        | `0 0 0 2px color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 40%, transparent)` |
+| `--uilib-breadcrumb-font-size`           | `var(--uilib-font-size-md, 0.875rem)`                                                    |
+| `--uilib-breadcrumb-font-size-lg`        | `var(--uilib-font-size-lg, 1rem)`                                                        |
+| `--uilib-breadcrumb-font-size-md`        | `var(--uilib-font-size-md, 0.875rem)`                                                    |
+| `--uilib-breadcrumb-font-size-sm`        | `var(--uilib-font-size-sm, 0.75rem)`                                                     |
+| `--uilib-breadcrumb-gap`                 | `var(--uilib-spacing-2, 0.5rem)`                                                         |
+| `--uilib-breadcrumb-item-icon-font-size` | `0.9em`                                                                                  |
+| `--uilib-breadcrumb-link-color`          | `var(--uilib-color-primary-500, #3b82f6)`                                                |
+| `--uilib-breadcrumb-link-color-hover`    | `var(--uilib-color-primary-600, #2563eb)`                                                |
+| `--uilib-breadcrumb-separator-color`     | `var(--uilib-color-neutral-400, #9ca3af)`                                                |
+| `--uilib-breadcrumb-separator-content`   | `'/'`                                                                                    |
+| `--uilib-breadcrumb-separator-font-size` | `0.875em`                                                                                |
 
 ## Accessibility
 

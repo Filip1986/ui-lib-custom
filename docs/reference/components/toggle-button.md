@@ -7,44 +7,43 @@
 
 ## Overview
 
-ToggleButton selects a boolean value via a button with distinct on/off labels and icons.
-Implements ControlValueAccessor for ngModel and reactive-forms support.
+ToggleButton selects a boolean value via a button with distinct on/off labels and icons. Implements ControlValueAccessor for ngModel and reactive-forms support.
 
 ## API
 
 ### Inputs
 
-| Name             | Type                           | Default  | Description                                                                |
-| ---------------- | ------------------------------ | -------- | -------------------------------------------------------------------------- |
-| `allowEmpty`     | `boolean`                      | `true`   | /** When false, an already-checked button cannot be unchecked by clicking. |
-| `ariaLabel`      | `string | null`                | `null`   | /** Accessible label applied to the inner button element.                  |
-| `ariaLabelledBy` | `string | null`                | `null`   | /** ID of an external element that labels this button.                     |
-| `autofocus`      | `boolean`                      | `false`  | /** When true, the button receives focus on load.                          |
-| `checked`        | `boolean | null`               | `null`   | /** Backward-compatible checked input alias. Prefer `pressed`.             |
-| `disabled`       | `boolean`                      | `false`  | /** When true, interaction is disabled.                                    |
-| `iconPos`        | `ToggleButtonIconPos`          | `'left'` | /** Position of the icon relative to the label.                            |
-| `inputId`        | `string | null`                | `null`   | /** ID attribute applied to the inner button element.                      |
-| `offIcon`        | `SemanticIcon | string | null` | `null`   | /** Icon name or CSS class displayed in the off (unchecked) state.         |
-| `offLabel`       | `string`                       | `'No'`   | /** Label displayed when the button is in the off (unchecked) state.       |
-| `onIcon`         | `SemanticIcon | string | null` | `null`   | /** Icon name or CSS class displayed in the on (checked) state.            |
-| `onLabel`        | `string`                       | `'Yes'`  | /** Label displayed when the button is in the on (checked) state.          |
-| `size`           | `ToggleButtonSize`             | `'md'`   | /** Component size token.                                                  |
-| `styleClass`     | `string | null`                | `null`   | /** Additional CSS class(es) applied to the host element.                  |
-| `tabindex`       | `number`                       | `0`      | /** Tab index of the inner button.                                         |
+| Name             | Type                           | Default  | Description                                                            |
+| ---------------- | ------------------------------ | -------- | ---------------------------------------------------------------------- |
+| `allowEmpty`     | `boolean`                      | `true`   | When false, an already-checked button cannot be unchecked by clicking. |
+| `ariaLabel`      | `string | null`                | `null`   | Accessible label applied to the inner button element.                  |
+| `ariaLabelledBy` | `string | null`                | `null`   | ID of an external element that labels this button.                     |
+| `autofocus`      | `boolean`                      | `false`  | When true, the button receives focus on load.                          |
+| `checked`        | `boolean | null`               | `null`   | Backward-compatible checked input alias. Prefer `pressed`.             |
+| `disabled`       | `boolean`                      | `false`  | When true, interaction is disabled.                                    |
+| `iconPos`        | `ToggleButtonIconPos`          | `'left'` | Position of the icon relative to the label.                            |
+| `inputId`        | `string | null`                | `null`   | ID attribute applied to the inner button element.                      |
+| `offIcon`        | `SemanticIcon | string | null` | `null`   | Icon name or CSS class displayed in the off (unchecked) state.         |
+| `offLabel`       | `string`                       | `'No'`   | Label displayed when the button is in the off (unchecked) state.       |
+| `onIcon`         | `SemanticIcon | string | null` | `null`   | Icon name or CSS class displayed in the on (checked) state.            |
+| `onLabel`        | `string`                       | `'Yes'`  | Label displayed when the button is in the on (checked) state.          |
+| `size`           | `ToggleButtonSize`             | `'md'`   | Component size token.                                                  |
+| `styleClass`     | `string | null`                | `null`   | Additional CSS class(es) applied to the host element.                  |
+| `tabindex`       | `number`                       | `0`      | Tab index of the inner button.                                         |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                         |
-| --------- | --------- | ------- | ----------------------------------- |
-| `pressed` | `boolean` | `false` | /** Two-way bindable pressed state. |
+| Name      | Type      | Default | Description                     |
+| --------- | --------- | ------- | ------------------------------- |
+| `pressed` | `boolean` | `false` | Two-way bindable pressed state. |
 
 ### Outputs
 
-| Name                | Type         | Description                                                                 |
-| ------------------- | ------------ | --------------------------------------------------------------------------- |
-| `checkedChange`     | `boolean`    | /** Backward-compatible checkedChange output alias. Prefer `pressedChange`. |
-| `toggleButtonBlur`  | `FocusEvent` | /** Emitted when the inner button loses focus.                              |
-| `toggleButtonFocus` | `FocusEvent` | /** Emitted when the inner button receives focus.                           |
+| Name                | Type         | Description                                                             |
+| ------------------- | ------------ | ----------------------------------------------------------------------- |
+| `checkedChange`     | `boolean`    | Backward-compatible checkedChange output alias. Prefer `pressedChange`. |
+| `toggleButtonBlur`  | `FocusEvent` | Emitted when the inner button loses focus.                              |
+| `toggleButtonFocus` | `FocusEvent` | Emitted when the inner button receives focus.                           |
 
 ## Content Projection
 

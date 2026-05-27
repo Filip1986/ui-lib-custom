@@ -7,41 +7,40 @@
 
 ## Overview
 
-InputOtp component — renders N individual input cells for one-time password entry.
-Supports CVA (ngModel / reactive forms), keyboard navigation, paste, mask, and integer-only modes.
+InputOtp component — renders N individual input cells for one-time password entry. Supports CVA (ngModel / reactive forms), keyboard navigation, paste, mask, and integer-only modes.
 
 ## API
 
 ### Inputs
 
-| Name                      | Type                                          | Default                          | Description                                                                     |
-| ------------------------- | --------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------- |
-| `ariaLabel`               | `string | null`                               | `'One-time passcode'`            | /** Accessible name for the OTP group container.                                |
-| `ariaLabelledBy`          | `string | null`                               | `null`                           | /** Optional external label element id for the OTP group container.             |
-| `digitAriaLabelConnector` | `string`                                      | `'of'`                           | /** Connector text for cell position labels, used for i18n customization.       |
-| `digitAriaLabelPrefix`    | `string`                                      | `'Digit'`                        | /** Prefix for cell position labels, used for i18n customization.               |
-| `disabled`                | `boolean`                                     | `INPUT_OTP_DEFAULTS.disabled`    | /** Disables all input cells.                                                   |
-| `filled`                  | `boolean`                                     | `INPUT_OTP_DEFAULTS.filled`      | /** Applies filled background appearance to each cell.                          |
-| `id`                      | `string | null`                               | `null`                           | /** Optional explicit id for the OTP group container.                           |
-| `integerOnly`             | `boolean`                                     | `INPUT_OTP_DEFAULTS.integerOnly` | /** When true, only digit characters (0-9) are accepted.                        |
-| `invalid`                 | `boolean`                                     | `INPUT_OTP_DEFAULTS.invalid`     | /** Applies invalid (error) styling to all cells.                               |
-| `length`                  | `number`                                      | `INPUT_OTP_DEFAULTS.length`      | /** Number of OTP input cells to render.                                        |
-| `mask`                    | `boolean`                                     | `INPUT_OTP_DEFAULTS.mask`        | /** When true, each cell renders as a password field (dots).                    |
-| `pasteAnnouncement`       | `string`                                      | `'Code entered.'`                | /** Text announced in live region after a successful paste.                     |
-| `readonly`                | `boolean`                                     | `INPUT_OTP_DEFAULTS.readonly`    | /** Makes all input cells read-only.                                            |
-| `size`                    | `InputOtpSize`                                | `INPUT_OTP_DEFAULTS.size`        | /** Size variant: 'sm' | 'md' | 'lg'.                                           |
-| `styleClass`              | `string | undefined`                          | `undefined`                      | /** Extra CSS class applied to each cell input element.                         |
-| `tabindex`                | `number | null`                               | `null`                           | /** Tab index forwarded to each cell input.                                     |
-| `variant`                 | `'material' | 'bootstrap' | 'minimal' | null` | `null`                           | /** Design variant override. When null the active global theme variant is used. |
+| Name                      | Type                                          | Default                          | Description                                                                 |
+| ------------------------- | --------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------- |
+| `ariaLabel`               | `string | null`                               | `'One-time passcode'`            | Accessible name for the OTP group container.                                |
+| `ariaLabelledBy`          | `string | null`                               | `null`                           | Optional external label element id for the OTP group container.             |
+| `digitAriaLabelConnector` | `string`                                      | `'of'`                           | Connector text for cell position labels, used for i18n customization.       |
+| `digitAriaLabelPrefix`    | `string`                                      | `'Digit'`                        | Prefix for cell position labels, used for i18n customization.               |
+| `disabled`                | `boolean`                                     | `INPUT_OTP_DEFAULTS.disabled`    | Disables all input cells.                                                   |
+| `filled`                  | `boolean`                                     | `INPUT_OTP_DEFAULTS.filled`      | Applies filled background appearance to each cell.                          |
+| `id`                      | `string | null`                               | `null`                           | Optional explicit id for the OTP group container.                           |
+| `integerOnly`             | `boolean`                                     | `INPUT_OTP_DEFAULTS.integerOnly` | When true, only digit characters (0-9) are accepted.                        |
+| `invalid`                 | `boolean`                                     | `INPUT_OTP_DEFAULTS.invalid`     | Applies invalid (error) styling to all cells.                               |
+| `length`                  | `number`                                      | `INPUT_OTP_DEFAULTS.length`      | Number of OTP input cells to render.                                        |
+| `mask`                    | `boolean`                                     | `INPUT_OTP_DEFAULTS.mask`        | When true, each cell renders as a password field (dots).                    |
+| `pasteAnnouncement`       | `string`                                      | `'Code entered.'`                | Text announced in live region after a successful paste.                     |
+| `readonly`                | `boolean`                                     | `INPUT_OTP_DEFAULTS.readonly`    | Makes all input cells read-only.                                            |
+| `size`                    | `InputOtpSize`                                | `INPUT_OTP_DEFAULTS.size`        | Size variant: 'sm' | 'md' | 'lg'.                                           |
+| `styleClass`              | `string | undefined`                          | `undefined`                      | Extra CSS class applied to each cell input element.                         |
+| `tabindex`                | `number | null`                               | `null`                           | Tab index forwarded to each cell input.                                     |
+| `variant`                 | `'material' | 'bootstrap' | 'minimal' | null` | `null`                           | Design variant override. When null the active global theme variant is used. |
 
 ### Outputs
 
-| Name        | Type                  | Description                                                 |
-| ----------- | --------------------- | ----------------------------------------------------------- |
-| `blurred`   | `FocusEvent`          | /** Emitted when any cell loses focus.                      |
-| `changed`   | `InputOtpChangeEvent` | /** Emitted whenever the OTP value changes.                 |
-| `completed` | `string`              | /** Emitted when all cells are filled (OTP entry complete). |
-| `focused`   | `FocusEvent`          | /** Emitted when any cell receives focus.                   |
+| Name        | Type                  | Description                                             |
+| ----------- | --------------------- | ------------------------------------------------------- |
+| `blurred`   | `FocusEvent`          | Emitted when any cell loses focus.                      |
+| `changed`   | `InputOtpChangeEvent` | Emitted whenever the OTP value changes.                 |
+| `completed` | `string`              | Emitted when all cells are filled (OTP entry complete). |
+| `focused`   | `FocusEvent`          | Emitted when any cell receives focus.                   |
 
 ## Content Projection
 

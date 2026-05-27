@@ -13,35 +13,35 @@ Tabs container that manages selection, focus, and scroll behavior.
 
 ### Inputs
 
-| Name                 | Type                       | Default                | Description                                                |
-| -------------------- | -------------------------- | ---------------------- | ---------------------------------------------------------- |
-| `activation`         | `TabsActivation`           | `'auto'`               | —                                                          |
-| `align`              | `TabsAlignment`            | `'start'`              | —                                                          |
-| `ariaLabel`          | `string | null`            | `null`                 | —                                                          |
-| `closable`           | `boolean`                  | `false`                | —                                                          |
-| `defaultIndex`       | `number | null`            | `null`                 | —                                                          |
-| `defaultValue`       | `TabsValue | null`         | `null`                 | —                                                          |
-| `dir`                | `'ltr' | 'rtl' | 'auto'`   | `'auto'`               | —                                                          |
-| `disabled`           | `boolean`                  | `false`                | —                                                          |
-| `focusPanelOnSelect` | `boolean`                  | `false`                | /** Moves focus into the active panel on selection.        |
-| `iconPosition`       | `'left' | 'top' | 'right'` | `'left'`               | —                                                          |
-| `lazy`               | `TabsLazyMode`             | `false`                | /** Global lazy rendering mode; can be overridden per tab. |
-| `mode`               | `TabsMode`                 | `'default'`            | /** Controls panel rendering vs navigation-only mode.      |
-| `orientation`        | `TabsOrientation`          | `'horizontal'`         | —                                                          |
-| `scrollBehavior`     | `TabsScrollBehavior`       | `'auto'`               | /** Scroll handling for overflowing tab lists.             |
-| `selectedIndex`      | `number | null`            | `null`                 | —                                                          |
-| `selectedValue`      | `TabsValue | null`         | `null`                 | —                                                          |
-| `size`               | `TabsSize`                 | `SHARED_DEFAULTS.Size` | —                                                          |
-| `variant`            | `TabsVariant | null`       | `null`                 | —                                                          |
+| Name                 | Type                       | Default                | Description                                            |
+| -------------------- | -------------------------- | ---------------------- | ------------------------------------------------------ |
+| `activation`         | `TabsActivation`           | `'auto'`               | —                                                      |
+| `align`              | `TabsAlignment`            | `'start'`              | —                                                      |
+| `ariaLabel`          | `string | null`            | `null`                 | —                                                      |
+| `closable`           | `boolean`                  | `false`                | —                                                      |
+| `defaultIndex`       | `number | null`            | `null`                 | —                                                      |
+| `defaultValue`       | `TabsValue | null`         | `null`                 | —                                                      |
+| `dir`                | `'ltr' | 'rtl' | 'auto'`   | `'auto'`               | —                                                      |
+| `disabled`           | `boolean`                  | `false`                | —                                                      |
+| `focusPanelOnSelect` | `boolean`                  | `false`                | Moves focus into the active panel on selection.        |
+| `iconPosition`       | `'left' | 'top' | 'right'` | `'left'`               | —                                                      |
+| `lazy`               | `TabsLazyMode`             | `false`                | Global lazy rendering mode; can be overridden per tab. |
+| `mode`               | `TabsMode`                 | `'default'`            | Controls panel rendering vs navigation-only mode.      |
+| `orientation`        | `TabsOrientation`          | `'horizontal'`         | —                                                      |
+| `scrollBehavior`     | `TabsScrollBehavior`       | `'auto'`               | Scroll handling for overflowing tab lists.             |
+| `selectedIndex`      | `number | null`            | `null`                 | —                                                      |
+| `selectedValue`      | `TabsValue | null`         | `null`                 | —                                                      |
+| `size`               | `TabsSize`                 | `SHARED_DEFAULTS.Size` | —                                                      |
+| `variant`            | `TabsVariant | null`       | `null`                 | —                                                      |
 
 ### Outputs
 
-| Name                  | Type                                         | Description                                           |
-| --------------------- | -------------------------------------------- | ----------------------------------------------------- |
-| `navigate`            | `{ value: TabsValue | null; index: number }` | /** Emitted when selection occurs in navigation mode. |
-| `selectedIndexChange` | `number`                                     | —                                                     |
-| `tabClose`            | `{ value: TabsValue | null; index: number }` | —                                                     |
-| `tabFocus`            | `{ value: TabsValue | null; index: number }` | —                                                     |
+| Name                  | Type                                         | Description                                       |
+| --------------------- | -------------------------------------------- | ------------------------------------------------- |
+| `navigate`            | `{ value: TabsValue | null; index: number }` | Emitted when selection occurs in navigation mode. |
+| `selectedIndexChange` | `number`                                     | —                                                 |
+| `tabClose`            | `{ value: TabsValue | null; index: number }` | —                                                 |
+| `tabFocus`            | `{ value: TabsValue | null; index: number }` | —                                                 |
 
 ## Content Projection
 

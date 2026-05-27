@@ -7,38 +7,38 @@
 
 ## Overview
 
-Drawer — a panel that slides in from the edge of the viewport.Bind `[(visible)]` to open/close. Project content inside; use `[drawerHeader]`for a custom header or `[drawerFooter]` for a sticky footer.@example<ui-lib-drawer [(visible)]="isOpen" header="Settings" position="right">  <p>Drawer content here.</p>  <div drawerFooter>    <ui-lib-button (click)="isOpen.set(false)">Close</ui-lib-button>  </div></ui-lib-drawer>
+Drawer — a panel that slides in from the edge of the viewport. Bind `[(visible)]` to open/close. Project content inside; use `[drawerHeader]` for a custom header or `[drawerFooter]` for a sticky footer.
 
 ## API
 
 ### Inputs
 
-| Name              | Type                   | Default     | Description                                                                                                                            |
-| ----------------- | ---------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaDescribedby` | `string | undefined`   | `undefined` | /**`id` of an element that describes the drawer panel.When provided, the value is set on the panel's `aria-describedby` attribute./ |
-| `blockScroll`     | `boolean`              | `true`      | /** Whether to lock body scroll while the drawer is open. */                                                                           |
-| `closeOnBackdrop` | `boolean`              | `true`      | /** Whether a click on the backdrop closes the drawer. */                                                                              |
-| `closeOnEscape`   | `boolean`              | `true`      | /** Whether pressing Escape closes the drawer. */                                                                                      |
-| `header`          | `string`               | `''`        | /** Optional header text. Omit to hide the built-in header bar. */                                                                     |
-| `modal`           | `boolean`              | `true`      | /** Whether to render the semi-transparent backdrop behind the drawer. */                                                              |
-| `position`        | `DrawerPosition`       | `'right'`   | /** Which edge the drawer slides in from. */                                                                                           |
-| `showCloseButton` | `boolean`              | `true`      | /** Whether to show the built-in close button in the header. */                                                                        |
-| `size`            | `string`               | `'300px'`   | /** Panel width (left/right) or height (top/bottom). Accepts any CSS length. */                                                        |
-| `styleClass`      | `string | null`        | `null`      | /** Additional CSS classes applied to the host element. */                                                                             |
-| `variant`         | `DrawerVariant | null` | `null`      | /** Visual design variant — inherits from ThemeConfigService when not set. */                                                          |
+| Name              | Type                   | Default     | Description                                                                                                                      |
+| ----------------- | ---------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaDescribedby` | `string | undefined`   | `undefined` | `id` of an element that describes the drawer panel. When provided, the value is set on the panel's `aria-describedby` attribute. |
+| `blockScroll`     | `boolean`              | `true`      | Whether to lock body scroll while the drawer is open.                                                                            |
+| `closeOnBackdrop` | `boolean`              | `true`      | Whether a click on the backdrop closes the drawer.                                                                               |
+| `closeOnEscape`   | `boolean`              | `true`      | Whether pressing Escape closes the drawer.                                                                                       |
+| `header`          | `string`               | `''`        | Optional header text. Omit to hide the built-in header bar.                                                                      |
+| `modal`           | `boolean`              | `true`      | Whether to render the semi-transparent backdrop behind the drawer.                                                               |
+| `position`        | `DrawerPosition`       | `'right'`   | Which edge the drawer slides in from.                                                                                            |
+| `showCloseButton` | `boolean`              | `true`      | Whether to show the built-in close button in the header.                                                                         |
+| `size`            | `string`               | `'300px'`   | Panel width (left/right) or height (top/bottom). Accepts any CSS length.                                                         |
+| `styleClass`      | `string | null`        | `null`      | Additional CSS classes applied to the host element.                                                                              |
+| `variant`         | `DrawerVariant | null` | `null`      | Visual design variant — inherits from ThemeConfigService when not set.                                                           |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                                                                    |
-| --------- | --------- | ------- | ------------------------------------------------------------------------------ |
-| `visible` | `boolean` | `false` | /** Whether the drawer is open. Supports two-way binding via `[(visible)]`. */ |
+| Name      | Type      | Default | Description                                                             |
+| --------- | --------- | ------- | ----------------------------------------------------------------------- |
+| `visible` | `boolean` | `false` | Whether the drawer is open. Supports two-way binding via `[(visible)]`. |
 
 ### Outputs
 
-| Name     | Type   | Description                                     |
-| -------- | ------ | ----------------------------------------------- |
-| `hidden` | `void` | /** Emits after the drawer finishes closing. */ |
-| `shown`  | `void` | /** Emits after the drawer finishes opening. */ |
+| Name     | Type   | Description                              |
+| -------- | ------ | ---------------------------------------- |
+| `hidden` | `void` | Emits after the drawer finishes closing. |
+| `shown`  | `void` | Emits after the drawer finishes opening. |
 
 ## Content Projection
 

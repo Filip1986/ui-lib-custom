@@ -7,53 +7,43 @@
 
 ## Overview
 
-Counter for generating unique IDs. */
-let knobIdCounter: number = 0;
-
-/**
-Knob — a circular dial form control for selecting a numeric value.
-Supports drag interaction, keyboard navigation, CVA (ngModel + reactive forms),
-three design variants, three sizes, and full CSS-variable theming.
+Knob — a circular dial form control for selecting a numeric value. Supports drag interaction, keyboard navigation, CVA (ngModel + reactive forms), three design variants, three sizes, and full CSS-variable theming.
 
 ## API
 
 ### Inputs
 
-| Name            | Type                 | Default                            | Description                                                                                                                   |
-| --------------- | -------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string | undefined` | `undefined`                        | /** Accessible label for the dial element.                                                                                    |
-| `disabled`      | `boolean`            | `KNOB_DEFAULTS.disabled`           | /** Whether the knob is disabled.                                                                                             |
-| `inputId`       | `string`             | ``ui-lib-knob-${++knobIdCounter}`` | /** Unique HTML id forwarded to the SVG element.                                                                              |
-| `max`           | `number`             | `KNOB_DEFAULTS.max`                | /** Maximum allowed value.                                                                                                    |
-| `min`           | `number`             | `KNOB_DEFAULTS.min`                | /** Minimum allowed value.                                                                                                    |
-| `readonly`      | `boolean`            | `KNOB_DEFAULTS.readonly`           | /** Whether the knob is read-only (interactive but value does not change).                                                    |
-| `showValue`     | `boolean`            | `KNOB_DEFAULTS.showValue`          | /** Whether to render the numeric value label inside the dial.                                                                |
-| `size`          | `KnobSize`           | `KNOB_DEFAULTS.size`               | /** Component size token.                                                                                                     |
-| `step`          | `number`             | `KNOB_DEFAULTS.step`               | /** Increment/decrement step for keyboard interaction and drag snapping.                                                      |
-| `strokeWidth`   | `number`             | `KNOB_DEFAULTS.strokeWidth`        | /** Width of the SVG arc stroke in SVG user-unit coordinates.                                                                 |
-| `tabindex`      | `number`             | `KNOB_DEFAULTS.tabindex`           | /** Tab index for keyboard focus.                                                                                             |
-| `textColor`     | `string | null`      | `null`                             | /** Inline color override for the center value text label. Accepts any CSS color.                                             |
-| `valueColor`    | `string | null`      | `null`                             | /** Inline color override for the value (range) arc stroke. Accepts any CSS color.                                            |
-| `valueTemplate` | `string | null`      | `null`                             | /**
-Optional value format template. Use `{value}` as a placeholder for the number.
-Example: `'{value}%'` renders `42%`.       |
-| `variant`       | `KnobVariant | null` | `null`                             | /**
-Design variant override. When null the active global theme variant is used.
-Accepts 'material' | 'bootstrap' | 'minimal'. |
+| Name            | Type                 | Default                            | Description                                                                                                               |
+| --------------- | -------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`     | `string | undefined` | `undefined`                        | Accessible label for the dial element.                                                                                    |
+| `disabled`      | `boolean`            | `KNOB_DEFAULTS.disabled`           | Whether the knob is disabled.                                                                                             |
+| `inputId`       | `string`             | ``ui-lib-knob-${++knobIdCounter}`` | Unique HTML id forwarded to the SVG element.                                                                              |
+| `max`           | `number`             | `KNOB_DEFAULTS.max`                | Maximum allowed value.                                                                                                    |
+| `min`           | `number`             | `KNOB_DEFAULTS.min`                | Minimum allowed value.                                                                                                    |
+| `readonly`      | `boolean`            | `KNOB_DEFAULTS.readonly`           | Whether the knob is read-only (interactive but value does not change).                                                    |
+| `showValue`     | `boolean`            | `KNOB_DEFAULTS.showValue`          | Whether to render the numeric value label inside the dial.                                                                |
+| `size`          | `KnobSize`           | `KNOB_DEFAULTS.size`               | Component size token.                                                                                                     |
+| `step`          | `number`             | `KNOB_DEFAULTS.step`               | Increment/decrement step for keyboard interaction and drag snapping.                                                      |
+| `strokeWidth`   | `number`             | `KNOB_DEFAULTS.strokeWidth`        | Width of the SVG arc stroke in SVG user-unit coordinates.                                                                 |
+| `tabindex`      | `number`             | `KNOB_DEFAULTS.tabindex`           | Tab index for keyboard focus.                                                                                             |
+| `textColor`     | `string | null`      | `null`                             | Inline color override for the center value text label. Accepts any CSS color.                                             |
+| `valueColor`    | `string | null`      | `null`                             | Inline color override for the value (range) arc stroke. Accepts any CSS color.                                            |
+| `valueTemplate` | `string | null`      | `null`                             | Optional value format template. Use `{value}` as a placeholder for the number. Example: `'{value}%'` renders `42%`.       |
+| `variant`       | `KnobVariant | null` | `null`                             | Design variant override. When null the active global theme variant is used. Accepts 'material' | 'bootstrap' | 'minimal'. |
 
 ### Models (two-way bindable)
 
-| Name    | Type     | Default | Description                                                   |
-| ------- | -------- | ------- | ------------------------------------------------------------- |
-| `value` | `number` | `0`     | /** Current value. Two-way bindable via [(value)] or ngModel. |
+| Name    | Type     | Default | Description                                               |
+| ------- | -------- | ------- | --------------------------------------------------------- |
+| `value` | `number` | `0`     | Current value. Two-way bindable via [(value)] or ngModel. |
 
 ### Outputs
 
-| Name         | Type              | Description                                                   |
-| ------------ | ----------------- | ------------------------------------------------------------- |
-| `knobBlur`   | `FocusEvent`      | /** Emits when the knob loses focus.                          |
-| `knobChange` | `KnobChangeEvent` | /** Emits whenever the value changes due to user interaction. |
-| `knobFocus`  | `FocusEvent`      | /** Emits when the knob receives focus.                       |
+| Name         | Type              | Description                                               |
+| ------------ | ----------------- | --------------------------------------------------------- |
+| `knobBlur`   | `FocusEvent`      | Emits when the knob loses focus.                          |
+| `knobChange` | `KnobChangeEvent` | Emits whenever the value changes due to user interaction. |
+| `knobFocus`  | `FocusEvent`      | Emits when the knob receives focus.                       |
 
 ## Content Projection
 

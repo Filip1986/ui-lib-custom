@@ -7,58 +7,40 @@
 
 ## Overview
 
-Default values for the Paginator component. */
-export const PAGINATOR_DEFAULTS: {
-  readonly ROWS: number;
-  readonly PAGE_LINK_SIZE: number;
-  readonly CURRENT_PAGE_REPORT_TEMPLATE: string;
-} = {
-  ROWS: 10,
-  PAGE_LINK_SIZE: 5,
-  CURRENT_PAGE_REPORT_TEMPLATE: '{currentPage} of {totalPages}',
-} as const;
-
-/**
-Paginator provides page-based navigation controls for any list or data set.
-
-Supports three visual variants (material, bootstrap, minimal), three sizes,
-optional first/last buttons, page-link windowing, rows-per-page select,
-and a jump-to-page input.
+Paginator provides page-based navigation controls for any list or data set. Supports three visual variants (material, bootstrap, minimal), three sizes, optional first/last buttons, page-link windowing, rows-per-page select, and a jump-to-page input.
 
 ## API
 
 ### Inputs
 
-| Name                        | Type                      | Default                                           | Description                                                                                                                                    |
-| --------------------------- | ------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alwaysShow`                | `boolean`                 | `true`                                            | /** When false, the paginator hides itself if there is only one page.                                                                          |
-| `ariaLabel`                 | `string`                  | `'Pagination'`                                    | /** Accessible label for the navigation landmark (used on the host element).                                                                   |
-| `currentPageReportTemplate` | `string`                  | `PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE` | /**
-Template string for the current-page report.
-Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}. |
-| `pageLinkSize`              | `number`                  | `PAGINATOR_DEFAULTS.PAGE_LINK_SIZE`               | /** Maximum number of page-link buttons shown in the windowed range.                                                                           |
-| `rowsPerPageOptions`        | `number[] | null`         | `null`                                            | /** Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown.                                                 |
-| `showCurrentPageReport`     | `boolean`                 | `false`                                           | /** Show a summary of the current page position (e.g. "1 of 10").                                                                              |
-| `showFirstLastIcon`         | `boolean`                 | `true`                                            | /** Show buttons to jump to the first and last page.                                                                                           |
-| `showJumpToPageInput`       | `boolean`                 | `false`                                           | /** Show a numeric input that lets the user type a page number and press Enter.                                                                |
-| `showPageLinks`             | `boolean`                 | `true`                                            | /** Show the windowed list of numbered page-link buttons.                                                                                      |
-| `size`                      | `PaginatorSize`           | `'md'`                                            | /** Size token controlling padding and font size.                                                                                              |
-| `styleClass`                | `string`                  | `''`                                              | /** Additional CSS class(es) applied to the inner content wrapper.                                                                             |
-| `totalRecords`              | `number`                  | `0`                                               | /** Total number of records across all pages.                                                                                                  |
-| `variant`                   | `PaginatorVariant | null` | `null`                                            | /** Visual design variant. Falls back to the global ThemeConfigService variant when null.                                                      |
+| Name                        | Type                      | Default                                           | Description                                                                                                                                |
+| --------------------------- | ------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `alwaysShow`                | `boolean`                 | `true`                                            | When false, the paginator hides itself if there is only one page.                                                                          |
+| `ariaLabel`                 | `string`                  | `'Pagination'`                                    | Accessible label for the navigation landmark (used on the host element).                                                                   |
+| `currentPageReportTemplate` | `string`                  | `PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE` | Template string for the current-page report. Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}. |
+| `pageLinkSize`              | `number`                  | `PAGINATOR_DEFAULTS.PAGE_LINK_SIZE`               | Maximum number of page-link buttons shown in the windowed range.                                                                           |
+| `rowsPerPageOptions`        | `number[] | null`         | `null`                                            | Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown.                                                 |
+| `showCurrentPageReport`     | `boolean`                 | `false`                                           | Show a summary of the current page position (e.g. "1 of 10").                                                                              |
+| `showFirstLastIcon`         | `boolean`                 | `true`                                            | Show buttons to jump to the first and last page.                                                                                           |
+| `showJumpToPageInput`       | `boolean`                 | `false`                                           | Show a numeric input that lets the user type a page number and press Enter.                                                                |
+| `showPageLinks`             | `boolean`                 | `true`                                            | Show the windowed list of numbered page-link buttons.                                                                                      |
+| `size`                      | `PaginatorSize`           | `'md'`                                            | Size token controlling padding and font size.                                                                                              |
+| `styleClass`                | `string`                  | `''`                                              | Additional CSS class(es) applied to the inner content wrapper.                                                                             |
+| `totalRecords`              | `number`                  | `0`                                               | Total number of records across all pages.                                                                                                  |
+| `variant`                   | `PaginatorVariant | null` | `null`                                            | Visual design variant. Falls back to the global ThemeConfigService variant when null.                                                      |
 
 ### Models (two-way bindable)
 
-| Name    | Type     | Default                   | Description                                                                     |
-| ------- | -------- | ------------------------- | ------------------------------------------------------------------------------- |
-| `first` | `number` | `0`                       | /** Zero-based index of the first record on the current page. Two-way bindable. |
-| `rows`  | `number` | `PAGINATOR_DEFAULTS.ROWS` | /** Number of records displayed per page. Two-way bindable.                     |
+| Name    | Type     | Default                   | Description                                                                 |
+| ------- | -------- | ------------------------- | --------------------------------------------------------------------------- |
+| `first` | `number` | `0`                       | Zero-based index of the first record on the current page. Two-way bindable. |
+| `rows`  | `number` | `PAGINATOR_DEFAULTS.ROWS` | Number of records displayed per page. Two-way bindable.                     |
 
 ### Outputs
 
-| Name         | Type                 | Description                                                    |
-| ------------ | -------------------- | -------------------------------------------------------------- |
-| `pageChange` | `PaginatorPageEvent` | /** Emitted whenever the active page or rows-per-page changes. |
+| Name         | Type                 | Description                                                |
+| ------------ | -------------------- | ---------------------------------------------------------- |
+| `pageChange` | `PaginatorPageEvent` | Emitted whenever the active page or rows-per-page changes. |
 
 ## Content Projection
 

@@ -7,65 +7,42 @@
 
 ## Overview
 
-Advanced file upload component with drag-and-drop, multi-file support,
-image thumbnails, file validation, and three design variants.
-
-Use `customUpload="true"` and listen to `(uploadHandler)` to control
-the actual HTTP transport in the consuming application.
-
-@example
-```html
-<ui-lib-upload
-  [multiple]="true"
-  [accept]="'image/*'"
-  [maxFileSize]="5000000"
-  [customUpload]="true"
-  (uploadHandler)="upload($event)"
-/>
-```
+Advanced file upload component with drag-and-drop, multi-file support, image thumbnails, file validation, and three design variants. Use `customUpload="true"` and listen to `(uploadHandler)` to control the actual HTTP transport in the consuming application.
 
 ## API
 
 ### Inputs
 
-| Name                      | Type                   | Default                             | Description                                                                                                                                    |
-| ------------------------- | ---------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accept`                  | `string`               | `''`                                | /**
-Comma-separated list of accepted file types passed directly to the
-native `<input accept>` attribute (e.g. `'image/*'` or `'.pdf,.docx'`). |
-| `auto`                    | `boolean`              | `false`                             | /**
-When `true`, triggers `uploadHandler` immediately after file selection
-(only effective when `customUpload` is also `true`).                |
-| `cancelLabel`             | `string`               | `UPLOAD_DEFAULT_CANCEL_LABEL`       | /** Label for the "Cancel" button.                                                                                                             |
-| `chooseLabel`             | `string`               | `UPLOAD_DEFAULT_CHOOSE_LABEL`       | /** Label for the "Choose" button.                                                                                                             |
-| `customUpload`            | `boolean`              | `false`                             | /**
-When `true`, the component does not perform any upload itself.
-Instead it emits `(uploadHandler)` so the consumer can handle transport.    |
-| `disabled`                | `boolean`              | `false`                             | /** Disable all interactions. Defaults to `false`.                                                                                             |
-| `emptyMessage`            | `string`               | `UPLOAD_DEFAULT_EMPTY_MESSAGE`      | /** Text shown inside the drop zone when no files are queued.                                                                                  |
-| `fileLimit`               | `number | null`        | `null`                              | /**
-Maximum number of files that can be queued at once.
-`null` means no limit.                                                                 |
-| `invalidFileLimitMessage` | `string`               | `UPLOAD_INVALID_FILE_LIMIT_MESSAGE` | /** Validation message template when the file limit is exceeded. `{0}` = limit.                                                                |
-| `invalidFileSizeMessage`  | `string`               | `UPLOAD_INVALID_FILE_SIZE_MESSAGE`  | /** Validation message template for oversized files. `{0}` = name, `{1}` = limit.                                                              |
-| `invalidFileTypeMessage`  | `string`               | `UPLOAD_INVALID_FILE_TYPE_MESSAGE`  | /** Validation message template for wrong file types. `{0}` = name, `{1}` = accepted types.                                                    |
-| `maxFileSize`             | `number | null`        | `null`                              | /** Maximum allowed file size in bytes. `null` means no limit.                                                                                 |
-| `multiple`                | `boolean`              | `false`                             | /** Allow selecting more than one file at a time. Defaults to `false`.                                                                         |
-| `previewWidth`            | `number`               | `UPLOAD_DEFAULT_PREVIEW_WIDTH`      | /** Width (and height) of image thumbnail previews in pixels.                                                                                  |
-| `showCancelButton`        | `boolean`              | `true`                              | /** Whether to show the Cancel/clear button. Defaults to `true`.                                                                               |
-| `showUploadButton`        | `boolean`              | `true`                              | /** Whether to show the Upload action button. Defaults to `true`.                                                                              |
-| `size`                    | `UploadSize`           | `'md'`                              | /** Size token. Defaults to `'md'`.                                                                                                            |
-| `styleClass`              | `string | null`        | `null`                              | /** Additional CSS class applied to the root container element.                                                                                |
-| `uploadLabel`             | `string`               | `UPLOAD_DEFAULT_UPLOAD_LABEL`       | /** Label for the "Upload" button.                                                                                                             |
-| `variant`                 | `UploadVariant | null` | `null`                              | /** Design variant. Falls back to the global ThemeConfigService variant when null.                                                             |
+| Name                      | Type                   | Default                             | Description                                                                                                                                |
+| ------------------------- | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `accept`                  | `string`               | `''`                                | Comma-separated list of accepted file types passed directly to the native `<input accept>` attribute (e.g. `'image/*'` or `'.pdf,.docx'`). |
+| `auto`                    | `boolean`              | `false`                             | When `true`, triggers `uploadHandler` immediately after file selection (only effective when `customUpload` is also `true`).                |
+| `cancelLabel`             | `string`               | `UPLOAD_DEFAULT_CANCEL_LABEL`       | Label for the "Cancel" button.                                                                                                             |
+| `chooseLabel`             | `string`               | `UPLOAD_DEFAULT_CHOOSE_LABEL`       | Label for the "Choose" button.                                                                                                             |
+| `customUpload`            | `boolean`              | `false`                             | When `true`, the component does not perform any upload itself. Instead it emits `(uploadHandler)` so the consumer can handle transport.    |
+| `disabled`                | `boolean`              | `false`                             | Disable all interactions. Defaults to `false`.                                                                                             |
+| `emptyMessage`            | `string`               | `UPLOAD_DEFAULT_EMPTY_MESSAGE`      | Text shown inside the drop zone when no files are queued.                                                                                  |
+| `fileLimit`               | `number | null`        | `null`                              | Maximum number of files that can be queued at once. `null` means no limit.                                                                 |
+| `invalidFileLimitMessage` | `string`               | `UPLOAD_INVALID_FILE_LIMIT_MESSAGE` | Validation message template when the file limit is exceeded. `{0}` = limit.                                                                |
+| `invalidFileSizeMessage`  | `string`               | `UPLOAD_INVALID_FILE_SIZE_MESSAGE`  | Validation message template for oversized files. `{0}` = name, `{1}` = limit.                                                              |
+| `invalidFileTypeMessage`  | `string`               | `UPLOAD_INVALID_FILE_TYPE_MESSAGE`  | Validation message template for wrong file types. `{0}` = name, `{1}` = accepted types.                                                    |
+| `maxFileSize`             | `number | null`        | `null`                              | Maximum allowed file size in bytes. `null` means no limit.                                                                                 |
+| `multiple`                | `boolean`              | `false`                             | Allow selecting more than one file at a time. Defaults to `false`.                                                                         |
+| `previewWidth`            | `number`               | `UPLOAD_DEFAULT_PREVIEW_WIDTH`      | Width (and height) of image thumbnail previews in pixels.                                                                                  |
+| `showCancelButton`        | `boolean`              | `true`                              | Whether to show the Cancel/clear button. Defaults to `true`.                                                                               |
+| `showUploadButton`        | `boolean`              | `true`                              | Whether to show the Upload action button. Defaults to `true`.                                                                              |
+| `size`                    | `UploadSize`           | `'md'`                              | Size token. Defaults to `'md'`.                                                                                                            |
+| `styleClass`              | `string | null`        | `null`                              | Additional CSS class applied to the root container element.                                                                                |
+| `uploadLabel`             | `string`               | `UPLOAD_DEFAULT_UPLOAD_LABEL`       | Label for the "Upload" button.                                                                                                             |
+| `variant`                 | `UploadVariant | null` | `null`                              | Design variant. Falls back to the global ThemeConfigService variant when null.                                                             |
 
 ### Outputs
 
-| Name          | Type                | Description                                                            |
-| ------------- | ------------------- | ---------------------------------------------------------------------- |
-| `fileRemove`  | `UploadRemoveEvent` | /** Emitted when the user removes a single file from the queue.        |
-| `fileSelect`  | `UploadSelectEvent` | /** Emitted whenever files are selected (via picker or drag-and-drop). |
-| `uploadClear` | `void`              | /** Emitted when the entire queue is cleared via the Cancel button.    |
+| Name          | Type                | Description                                                        |
+| ------------- | ------------------- | ------------------------------------------------------------------ |
+| `fileRemove`  | `UploadRemoveEvent` | Emitted when the user removes a single file from the queue.        |
+| `fileSelect`  | `UploadSelectEvent` | Emitted whenever files are selected (via picker or drag-and-drop). |
+| `uploadClear` | `void`              | Emitted when the entire queue is cleared via the Cancel button.    |
 
 ## Content Projection
 

@@ -7,38 +7,37 @@
 
 ## Overview
 
-ToggleSwitch presents a boolean on/off control as a sliding pill switch.
-Implements ControlValueAccessor for ngModel and reactive-forms support.
+ToggleSwitch presents a boolean on/off control as a sliding pill switch. Implements ControlValueAccessor for ngModel and reactive-forms support.
 
 ## API
 
 ### Inputs
 
-| Name         | Type               | Default | Description                                                                   |
-| ------------ | ------------------ | ------- | ----------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null`    | `null`  | /** Accessible label applied directly to the native input element.            |
-| `autofocus`  | `boolean`          | `false` | /** When true, the native input receives focus on load.                       |
-| `disabled`   | `boolean`          | `false` | /** When true, interaction is disabled and the control is not focusable.      |
-| `inputId`    | `string | null`    | `null`  | /** ID attribute applied to the native input element.                         |
-| `label`      | `string | null`    | `null`  | /** Optional text label displayed next to the switch.                         |
-| `name`       | `string | null`    | `null`  | /** Name attribute applied to the native input element.                       |
-| `readonly`   | `boolean`          | `false` | /** When true, the state cannot be changed but the control remains focusable. |
-| `size`       | `ToggleSwitchSize` | `'md'`  | /** Component size token.                                                     |
-| `styleClass` | `string | null`    | `null`  | /** Additional CSS class(es) applied to the host element.                     |
-| `tabindex`   | `number`           | `0`     | /** Tab index of the native input element.                                    |
+| Name         | Type               | Default | Description                                                               |
+| ------------ | ------------------ | ------- | ------------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null`    | `null`  | Accessible label applied directly to the native input element.            |
+| `autofocus`  | `boolean`          | `false` | When true, the native input receives focus on load.                       |
+| `disabled`   | `boolean`          | `false` | When true, interaction is disabled and the control is not focusable.      |
+| `inputId`    | `string | null`    | `null`  | ID attribute applied to the native input element.                         |
+| `label`      | `string | null`    | `null`  | Optional text label displayed next to the switch.                         |
+| `name`       | `string | null`    | `null`  | Name attribute applied to the native input element.                       |
+| `readonly`   | `boolean`          | `false` | When true, the state cannot be changed but the control remains focusable. |
+| `size`       | `ToggleSwitchSize` | `'md'`  | Component size token.                                                     |
+| `styleClass` | `string | null`    | `null`  | Additional CSS class(es) applied to the host element.                     |
+| `tabindex`   | `number`           | `0`     | Tab index of the native input element.                                    |
 
 ### Models (two-way bindable)
 
-| Name      | Type      | Default | Description                         |
-| --------- | --------- | ------- | ----------------------------------- |
-| `checked` | `boolean` | `false` | /** Two-way bindable checked state. |
+| Name      | Type      | Default | Description                     |
+| --------- | --------- | ------- | ------------------------------- |
+| `checked` | `boolean` | `false` | Two-way bindable checked state. |
 
 ### Outputs
 
-| Name          | Type         | Description                                       |
-| ------------- | ------------ | ------------------------------------------------- |
-| `switchBlur`  | `FocusEvent` | /** Emitted when the native input loses focus.    |
-| `switchFocus` | `FocusEvent` | /** Emitted when the native input receives focus. |
+| Name          | Type         | Description                                   |
+| ------------- | ------------ | --------------------------------------------- |
+| `switchBlur`  | `FocusEvent` | Emitted when the native input loses focus.    |
+| `switchFocus` | `FocusEvent` | Emitted when the native input receives focus. |
 
 ## Content Projection
 

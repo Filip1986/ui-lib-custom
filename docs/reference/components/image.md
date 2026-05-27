@@ -7,52 +7,39 @@
 
 ## Overview
 
-Image component with optional preview overlay, zoom, and rotation controls.
-
-When `preview` is enabled, clicking the image opens a full-screen overlay
-where the user can zoom in/out and rotate the image.  A hover indicator
-(eye icon by default) signals that the image is clickable.
-
-Content slots:
-- `<ng-template #imageIndicator>` — custom preview-trigger icon overlay
-- `<ng-template #imageError>` — custom content shown when the image fails to load
-
-@example
-```html
-<ui-lib-image src="/photo.jpg" alt="A photo" [preview]="true" />
-```
+Image component with optional preview overlay, zoom, and rotation controls. When `preview` is enabled, clicking the image opens a full-screen overlay where the user can zoom in/out and rotate the image.  A hover indicator (eye icon by default) signals that the image is clickable. Content slots: - `<ng-template #imageIndicator>` — custom preview-trigger icon overlay - `<ng-template #imageError>` — custom content shown when the image fails to load
 
 ## API
 
 ### Inputs
 
-| Name         | Type                            | Default                    | Description                                                                                |
-| ------------ | ------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------ |
-| `alt`        | `string`                        | `''`                       | /** Accessible alt text for the image.                                                     |
-| `ariaLabel`  | `string`                        | `IMAGE_ARIA_PREVIEW_LABEL` | /** Accessible label for the preview button indicator.                                     |
-| `errorSrc`   | `string | null`                 | `null`                     | /** Fallback src displayed when the image fails to load and no error template is provided. |
-| `height`     | `string | null`                 | `null`                     | /** Height attribute passed to the underlying `<img>` element.                             |
-| `imageClass` | `string | null`                 | `null`                     | /** Extra CSS class(es) applied to the `<img>` element.                                    |
-| `imageStyle` | `Record<string, string> | null` | `null`                     | /** Inline style object applied to the `<img>` element.                                    |
-| `preview`    | `boolean`                       | `false`                    | /** When true, clicking the image opens a preview overlay.                                 |
-| `size`       | `ImageSize`                     | `'md'`                     | /** Component size token.                                                                  |
-| `src`        | `string`                        | `''`                       | /** URL of the image to display.                                                           |
-| `styleClass` | `string | null`                 | `null`                     | /** Additional CSS class(es) applied to the host element.                                  |
-| `variant`    | `ImageVariant | null`           | `null`                     | /** Design variant; inherits from ThemeConfigService when null.                            |
-| `width`      | `string | null`                 | `null`                     | /** Width attribute passed to the underlying `<img>` element.                              |
+| Name         | Type                            | Default                    | Description                                                                            |
+| ------------ | ------------------------------- | -------------------------- | -------------------------------------------------------------------------------------- |
+| `alt`        | `string`                        | `''`                       | Accessible alt text for the image.                                                     |
+| `ariaLabel`  | `string`                        | `IMAGE_ARIA_PREVIEW_LABEL` | Accessible label for the preview button indicator.                                     |
+| `errorSrc`   | `string | null`                 | `null`                     | Fallback src displayed when the image fails to load and no error template is provided. |
+| `height`     | `string | null`                 | `null`                     | Height attribute passed to the underlying `<img>` element.                             |
+| `imageClass` | `string | null`                 | `null`                     | Extra CSS class(es) applied to the `<img>` element.                                    |
+| `imageStyle` | `Record<string, string> | null` | `null`                     | Inline style object applied to the `<img>` element.                                    |
+| `preview`    | `boolean`                       | `false`                    | When true, clicking the image opens a preview overlay.                                 |
+| `size`       | `ImageSize`                     | `'md'`                     | Component size token.                                                                  |
+| `src`        | `string`                        | `''`                       | URL of the image to display.                                                           |
+| `styleClass` | `string | null`                 | `null`                     | Additional CSS class(es) applied to the host element.                                  |
+| `variant`    | `ImageVariant | null`           | `null`                     | Design variant; inherits from ThemeConfigService when null.                            |
+| `width`      | `string | null`                 | `null`                     | Width attribute passed to the underlying `<img>` element.                              |
 
 ### Models (two-way bindable)
 
-| Name             | Type      | Default | Description                                                |
-| ---------------- | --------- | ------- | ---------------------------------------------------------- |
-| `previewVisible` | `boolean` | `false` | /** Preview overlay visibility — supports two-way binding. |
+| Name             | Type      | Default | Description                                            |
+| ---------------- | --------- | ------- | ------------------------------------------------------ |
+| `previewVisible` | `boolean` | `false` | Preview overlay visibility — supports two-way binding. |
 
 ### Outputs
 
-| Name         | Type    | Description                                  |
-| ------------ | ------- | -------------------------------------------- |
-| `errorEvent` | `Event` | /** Emitted when the image fails to load.    |
-| `loadEvent`  | `Event` | /** Emitted when the image finishes loading. |
+| Name         | Type    | Description                              |
+| ------------ | ------- | ---------------------------------------- |
+| `errorEvent` | `Event` | Emitted when the image fails to load.    |
+| `loadEvent`  | `Event` | Emitted when the image finishes loading. |
 
 ## Content Projection
 

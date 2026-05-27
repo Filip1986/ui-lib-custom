@@ -7,16 +7,16 @@
 
 ## Overview
 
-ScrollPanel — a styled scrollable container with custom CSS scrollbar theming.Wraps projected content in an overflow container and applies variant-awarecustom scrollbar styles via CSS custom properties. Width and height should beconstrained by the consumer via CSS or inline styles on the host element.The scrollable content region exposes `role="region"` and `tabindex="0"` sokeyboard users can focus it and scroll with Arrow / Page keys. Provide`ariaLabel` to give the region a meaningful accessible name.@example<!-- Basic usage — constrain height via CSS --><ui-lib-scroll-panel ariaLabel="Product description" style="height: 250px;">  <p>Long content...</p></ui-lib-scroll-panel><!-- With explicit variant --><ui-lib-scroll-panel [variant]="'material'" ariaLabel="Gallery" style="height: 300px; width: 400px;">  <img src="large-image.jpg" /></ui-lib-scroll-panel>
+ScrollPanel — a styled scrollable container with custom CSS scrollbar theming. Wraps projected content in an overflow container and applies variant-aware custom scrollbar styles via CSS custom properties. Width and height should be constrained by the consumer via CSS or inline styles on the host element. The scrollable content region exposes `role="region"` and `tabindex="0"` so keyboard users can focus it and scroll with Arrow / Page keys. Provide `ariaLabel` to give the region a meaningful accessible name.
 
 ## API
 
 ### Inputs
 
-| Name         | Type            | Default | Description                                                                                                                                                                                          |
-| ------------ | --------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null` | `null`  | /**Accessible label for the scrollable region (`aria-label` on the innercontent wrapper). Recommended whenever the panel is a meaningful landmark.Falls back to `null` (no label) when omitted./ |
-| `styleClass` | `string | null` | `null`  | /** Additional CSS classes to attach to the host element. */                                                                                                                                         |
+| Name         | Type            | Default | Description                                                                                                                                                                                    |
+| ------------ | --------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null` | `null`  | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel is a meaningful landmark. Falls back to `null` (no label) when omitted. |
+| `styleClass` | `string | null` | `null`  | Additional CSS classes to attach to the host element.                                                                                                                                          |
 
 ### Outputs
 

@@ -42,12 +42,12 @@ SpeedDial scaffold component with public API signals and projection slots.
 
 ### Outputs
 
-| Name          | Type                 | Description                                    |
-| ------------- | -------------------- | ---------------------------------------------- |
-| `buttonBlur`  | `FocusEvent`         | /** Emits when the trigger button loses focus. |
-| `buttonFocus` | `FocusEvent`         | /** Emits when the trigger button gains focus. |
-| `hide`        | `SpeedDialHideEvent` | —                                              |
-| `show`        | `SpeedDialShowEvent` | —                                              |
+| Name          | Type                 | Description                                |
+| ------------- | -------------------- | ------------------------------------------ |
+| `buttonBlur`  | `FocusEvent`         | Emits when the trigger button loses focus. |
+| `buttonFocus` | `FocusEvent`         | Emits when the trigger button gains focus. |
+| `hide`        | `SpeedDialHideEvent` | —                                          |
+| `show`        | `SpeedDialShowEvent` | —                                          |
 
 ## Content Projection
 

@@ -13,12 +13,10 @@ Opt-in only: focus runs only when you explicitly add `uiLibAutoFocus` to an elem
 
 ### Inputs
 
-| Name       | Type            | Default | Description                                                                  |
-| ---------- | --------------- | ------- | ---------------------------------------------------------------------------- |
-| `disabled` | `boolean`       | `false` | /**
-When `true`, autofocus is skipped.                                       |
-| `selector` | `string | null` | `null`  | /**
-Optional CSS selector used to focus a child element instead of the host. |
+| Name       | Type            | Default | Description                                                              |
+| ---------- | --------------- | ------- | ------------------------------------------------------------------------ |
+| `disabled` | `boolean`       | `false` | When `true`, autofocus is skipped.                                       |
+| `selector` | `string | null` | `null`  | Optional CSS selector used to focus a child element instead of the host. |
 
 ### Outputs
 
