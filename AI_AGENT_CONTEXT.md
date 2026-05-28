@@ -83,26 +83,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Step 5 COMPLETE]
+Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Prompt 11 DONE ✅]
 Changed:
-  src/lib/data-grid/data-grid.types.ts: full type definitions (DataGridVariant, DataGridSize, DataGridSortOrder, DataGridSelectionMode, DataGridFilterMatchMode, DataGridResizeMode, DataGridEditMode, DataGridFrozen; interfaces for all events + template contexts)
+  src/lib/data-grid/data-grid.types.ts: full type definitions (variant/size/sort/selection/filter/resize/edit/frozen; all event + template-context interfaces)
   src/lib/data-grid/data-grid.constants.ts: DATA_GRID_DEFAULTS + DATA_GRID_CLASS
-  src/lib/data-grid/data-grid-column.component.ts: render-less column DSL; 5 template directives; all column inputs + template signal queries
-  src/lib/data-grid/data-grid.component.ts: full implementation — virtual scroll (native), column pinning, column resizing, cell editing, lazy load, multi-sort, global filter, row selection, WAI-ARIA grid keyboard navigation; ngAfterViewInit emits initial lazyLoad when lazy=true
-  src/lib/data-grid/data-grid.component.html: complete template; i18n keys; keydown.enter/space on all interactive elements (ESLint a11y clean)
-  src/lib/data-grid/data-grid.component.scss: design tokens + structure in single merged block; logical CSS properties; cascade layer; SCSS clean
-  src/lib/data-grid/data-grid.component.spec.ts: 46 unit tests — rendering, sorting, filtering, pagination, selection, lazy load, virtual scroll, ARIA, CSS classes, empty state, dynamic data, column definitions; ESLint clean
+  src/lib/data-grid/data-grid-column.component.ts: render-less column DSL; 5 template directives
+  src/lib/data-grid/data-grid.component.ts: full implementation — virtual scroll, column pinning, resizing, cell editing, lazy load, multi-sort, global+column filter, row selection, WAI-ARIA grid keyboard nav; initial lazyLoad emitted in ngAfterViewInit
+  src/lib/data-grid/data-grid.component.html + .scss: complete ARIA template; design tokens; cascade layer; logical CSS; 3 variants/sizes
+  src/lib/data-grid/data-grid.component.spec.ts: 46 unit tests (all green)
+  src/lib/data-grid/data-grid.a11y.spec.ts: 35 a11y tests — WAI-ARIA roles, aria-sort lifecycle, aria-rowcount/rowindex/colindex, keyboard sort/selection, checkbox labels, filter labels, empty state, axe audit (6 scenarios)
+  src/lib/data-grid/README.md: full co-located API contract — all inputs/outputs/models, column DSL, template slots, keyboard interactions, 30 CSS tokens, usage examples
   src/lib/data-grid/index.ts: barrel export
-  data-grid/ng-package.json + package.json: entry point wiring
-  projects/ui-lib-custom/package.json: exports + typesVersions updated
+  data-grid/ng-package.json + package.json: entry point wiring; library package.json exports + typesVersions updated
   i18n/en.ts,de.ts,fr.ts,es.ts: 11 new data-grid keys
   test/entry-points.spec.ts: data-grid import test added
   docs/reference/bundle-sizes.json: snapshot updated (data-grid: 144664 B raw / 20962 B gzip)
-  demo/pages/data-grid/: demo page with interactive config, virtual scroll, frozen columns, cell editing, lazy load sections
-  docs/COMPONENT_SCORES.md: DataGrid added (all scores 9 except Docs=8, avg 9.0)
-State: COMPLETE — 6088/6088 tests green (227 suites); ESLint + stylelint clean; ng build ui-lib-custom 0 warnings; pushed to remote ✅
-Verification: npx jest --no-coverage (PASS ✅, 6088 tests, 227 suites); ng build ui-lib-custom (PASS ✅); ESLint data-grid/ + demo/pages/data-grid/ (PASS ✅); git push (PASS ✅)
-Next step: Write data-grid.a11y.spec.ts (ARIA grid keyboard pattern, cell navigation, screen reader labels); write data-grid README.md
+  demo/pages/data-grid/: full demo page (8 sections: interactive config, virtual scroll, frozen cols, cell editing, lazy load, a11y, CSS vars, API ref)
+  docs/COMPONENT_SCORES.md: DataGrid added (avg 9.0; Docs 8 — remaining gap is docs/reference/components/data-grid.md and Storybook stories)
+State: ALL MANDATORY CHECKLIST ITEMS COMPLETE — 6123/6123 tests green (228 suites); ESLint + stylelint clean; pushed ✅
+Verification: npx jest --no-coverage (PASS ✅, 6123 tests, 228 suites); ESLint data-grid/ (PASS ✅); git push (PASS ✅)
+Next step: Prompt 2 (Sprint B — reference doc generator script); then Prompt 5 (Sprint D — reduced-motion stylelint); these unblock all remaining Prompt 7 upgrades
 
 Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
 Changed:
