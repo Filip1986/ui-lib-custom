@@ -2,7 +2,7 @@
 // AUTO-GENERATED — run `node scripts/generate-snippets.mjs` to regenerate.
 // Do not edit manually.
 
-export const selectExampleHtml = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
+export const selectExampleHtml = `<ui-lib-select label="Choose" [options]="options" />`;
 
 export const selectExampleTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +25,7 @@ export const usageHtml = `<ui-lib-select
   label="Choose"
   [options]="options"
   [(ngModel)]="selectedValue"
-></ui-lib-select>`;
+/>`;
 
 export const usageTs = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
