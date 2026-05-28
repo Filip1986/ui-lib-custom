@@ -106,11 +106,11 @@ export class ConfirmDialog implements OnDestroy {
   /** Key that matches incoming ConfirmationService calls to this specific dialog instance. */
   public readonly key: InputSignal<string> = input<string>('');
 
-  /** Dialog header / title text (declarative fallback). */
-  public readonly header: InputSignal<string> = input<string>('Confirmation');
+  /** Dialog header / title text (declarative fallback). Falls back to i18n `confirm-dialog.header`. */
+  public readonly header: InputSignal<string> = input<string>('');
 
-  /** Confirmation message text (declarative fallback). */
-  public readonly message: InputSignal<string> = input<string>('Are you sure you want to proceed?');
+  /** Confirmation message text (declarative fallback). Falls back to i18n `confirm-dialog.message`. */
+  public readonly message: InputSignal<string> = input<string>('');
 
   /** CSS class for the icon rendered before the message. */
   public readonly icon: InputSignal<string | null> = input<string | null>(null);
@@ -169,14 +169,18 @@ export class ConfirmDialog implements OnDestroy {
 
   // ---- Computed resolved values (service config takes precedence over direct inputs) ----
 
-  /** Resolved header — service config wins over the `header` input. */
+  /** Resolved header — service config wins, then explicit input, then i18n fallback. */
   public readonly resolvedHeader: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.header ?? this.header(),
+    (): string =>
+      this.serviceConfig()?.header ??
+      (this.header() || this.i18n.translate('confirm-dialog.header')),
   );
 
-  /** Resolved message — service config wins over the `message` input. */
+  /** Resolved message — service config wins, then explicit input, then i18n fallback. */
   public readonly resolvedMessage: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.message ?? this.message(),
+    (): string =>
+      this.serviceConfig()?.message ??
+      (this.message() || this.i18n.translate('confirm-dialog.message')),
   );
 
   /** Resolved icon — service config wins over the `icon` input. */

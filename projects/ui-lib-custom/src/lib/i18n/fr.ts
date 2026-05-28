@@ -65,6 +65,8 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'popover.close': 'Fermer',
   'popover.label': 'Fenêtre contextuelle',
   'confirm-dialog.close': 'Fermer',
+  'confirm-dialog.header': 'Confirmation',
+  'confirm-dialog.message': 'Voulez-vous vraiment continuer ?',
   'confirm-dialog.accept': 'Oui',
   'confirm-dialog.reject': 'Non',
   'dynamic-dialog.close': 'Fermer',
@@ -185,6 +187,8 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
 
   // ── Meter Group ───────────────────────────────────────────────────────────
   'meter-group.legend': 'Légende',
+  'meter-group.label': 'Groupe de mesures',
+  'meter-group.total': 'Total : {value}',
 
   // ── Terminal ──────────────────────────────────────────────────────────────
   'terminal.input': 'Saisie de commande du terminal',

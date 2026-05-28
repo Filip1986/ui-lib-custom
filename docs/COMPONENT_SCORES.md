@@ -235,7 +235,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | BottomSheet   | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.6 | 🟢     |
 | Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Tooltip       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 7   | 8.8 | 🟢     |
-| ConfirmDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 9   | 8.4 | 🟢     |
+| ConfirmDialog | 9   | 9    | 8    | 8    | 9     | 8   | 8    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
 | ConfirmPopup  | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 7   | 8.7 | 🟢     |
 
 ## Navigation & Menus
@@ -289,7 +289,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Skeleton        | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 8      | 9       | 8    | 8   | 8.6 | 🟢     |
 | ProgressBar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
 | ProgressSpinner | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 8   | 8.9 | 🟢     |
-| MeterGroup      | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | 8   | 8.4 | 🟢     |
+| MeterGroup      | 8   | 9    | 8    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.7 | 🟢     |
 
 ## Utilities & Directives
 

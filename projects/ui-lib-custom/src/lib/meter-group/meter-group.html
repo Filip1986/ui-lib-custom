@@ -23,7 +23,7 @@
 <div
   class="ui-lib-meter-group__meters"
   role="group"
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-label]="resolvedAriaLabel()"
 >
   @for (segment of meterSegments(); track trackSegment($index, segment)) {
     <div

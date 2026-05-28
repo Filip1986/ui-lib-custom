@@ -37,6 +37,10 @@
     --uilib-confirm-dialog-enter-easing: ease-out;
     --uilib-confirm-dialog-backdrop-enter-duration: 150ms;
     --uilib-confirm-dialog-backdrop-enter-easing: ease-out;
+    --uilib-confirm-dialog-interactive-transition-duration: var(
+      --uilib-transition-duration-fast,
+      120ms
+    );
 
     position: fixed;
     inset: 0;
@@ -135,8 +139,8 @@
     align-items: center;
     justify-content: center;
     transition:
-      background-color 120ms ease,
-      color 120ms ease;
+      background-color var(--uilib-confirm-dialog-interactive-transition-duration) ease,
+      color var(--uilib-confirm-dialog-interactive-transition-duration) ease;
 
     &:hover {
       background: var(--uilib-confirm-dialog-close-btn-hover-bg);
@@ -203,10 +207,10 @@
     line-height: 1.5;
     cursor: pointer;
     transition:
-      background-color 120ms ease,
-      border-color 120ms ease,
-      color 120ms ease,
-      box-shadow 120ms ease;
+      background-color var(--uilib-confirm-dialog-interactive-transition-duration) ease,
+      border-color var(--uilib-confirm-dialog-interactive-transition-duration) ease,
+      color var(--uilib-confirm-dialog-interactive-transition-duration) ease,
+      box-shadow var(--uilib-confirm-dialog-interactive-transition-duration) ease;
 
     &:focus-visible {
       outline: 2px solid var(--uilib-color-primary-400, #818cf8);

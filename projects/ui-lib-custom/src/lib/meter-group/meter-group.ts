@@ -96,8 +96,13 @@ export class MeterGroup {
   /** Additional CSS classes to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the meter container group. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Meter group');
+  /** Accessible label for the meter container group. Falls back to i18n `meter-group.label`. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
+
+  /** Resolved aria-label: explicit ariaLabel input > i18n fallback. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('meter-group.label'),
+  );
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<MeterGroupVariant> = computed<MeterGroupVariant>(
@@ -154,8 +159,8 @@ export class MeterGroup {
   );
 
   /** Screen-reader announcement string for the current total. */
-  public readonly totalAnnouncement: Signal<string> = computed<string>(
-    (): string => `Total: ${this.totalValue()}`,
+  public readonly totalAnnouncement: Signal<string> = computed<string>((): string =>
+    this.i18n.translate('meter-group.total', { value: this.totalValue() }),
   );
 
   /** Returns a stable key for segment rendering. */

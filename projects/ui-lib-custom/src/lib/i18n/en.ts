@@ -67,6 +67,8 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'confirm-dialog.close': 'Close',
   'confirm-dialog.accept': 'Yes',
   'confirm-dialog.reject': 'No',
+  'confirm-dialog.header': 'Confirmation',
+  'confirm-dialog.message': 'Are you sure you want to proceed?',
   'dynamic-dialog.close': 'Close',
   'message.close': 'Close message',
   'panel.toggle': 'Toggle panel',
@@ -185,6 +187,8 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── Meter Group ───────────────────────────────────────────────────────────
   'meter-group.legend': 'Legend',
+  'meter-group.label': 'Meter group',
+  'meter-group.total': 'Total: {value}',
 
   // ── Terminal ──────────────────────────────────────────────────────────────
   'terminal.input': 'Terminal command input',
