@@ -292,7 +292,7 @@ describe('UiLibSelect basics', (): void => {
     expect(valueEl.classList.contains('ui-lib-select__placeholder')).toBeTruthy();
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
-    expect((valueText as string).trim()).toBe('Select...');
+    expect((valueText as string).trim()).toBe('Select an option');
   });
 
   it('renders label when provided', (): void => {

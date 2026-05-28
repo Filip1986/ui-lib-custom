@@ -16,7 +16,7 @@
 | `optionGroupLabel` | `string` | `'label'` | Field name for group display labels |
 | `optionGroupChildren` | `string[]` | `[]` | Array of field names for children at each nesting level |
 | `optionDisabled` | `string \| undefined` | `undefined` | Field name that marks an option as disabled |
-| `placeholder` | `string` | `''` | Placeholder text when nothing is selected |
+| `placeholder` | `string` | `''` | Placeholder text when nothing is selected; falls back to the `cascade-select.placeholder` locale key (`'Select'`) |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| undefined` | `undefined` | Visual variant; falls back to ThemeConfigService |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
 | `disabled` | `boolean` | `false` | Disable the component |
@@ -120,3 +120,40 @@ interface CountryNode {
 - Parent options expose `aria-haspopup="listbox"` and `aria-expanded`.
 - `aria-activedescendant` always points at the currently keyboard-focused option, including
   nested sub-lists.
+
+## Theming
+
+All visual properties are exposed as CSS custom properties on the host element:
+
+```css
+ui-lib-cascade-select {
+  --uilib-cascade-select-panel-max-height: 400px;
+  --uilib-cascade-select-focus-ring-width: 2px;
+}
+```
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `--uilib-cascade-select-focus-ring-width` | `3px` | Width of the keyboard focus ring |
+| `--uilib-cascade-select-padding-y-base` | `0.5rem` | Vertical padding of the trigger control |
+| `--uilib-cascade-select-padding-x-base` | `0.75rem` | Horizontal padding of the trigger control |
+| `--uilib-cascade-select-panel-min-width` | `12.5rem` | Minimum width of each dropdown panel level |
+| `--uilib-cascade-select-panel-max-height` | `16.25rem` | Maximum height of each panel level |
+| `--uilib-cascade-select-panel-z-index` | `1000` | Z-index of the dropdown panel |
+| `--uilib-cascade-select-option-padding` | `0.55rem 0.75rem` | Padding of each option row |
+| `--uilib-cascade-select-option-disabled-opacity` | `0.55` | Opacity of disabled options |
+| `--uilib-cascade-select-submenu-icon-size` | `0.75rem` | Size of the sub-menu chevron icon |
+| `--uilib-cascade-select-panel-animation-duration` | `0.16s` | Duration of the panel open animation |
+| `--uilib-cascade-select-level-animation-duration` | `0.18s` | Duration of a nested level slide-in animation |
+
+## Internationalisation
+
+All user-visible strings resolve through `UiLibI18nService`.
+
+| String | Locale key | Default (en) | Input override |
+|--------|-----------|--------------|----------------|
+| Placeholder text | `cascade-select.placeholder` | `Select` | `[placeholder]` |
+| Clear button ARIA label | `cascade-select.clear` | `Clear selection` | — |
+| Sub-level listbox label | `cascade-select.sublevel-label` | `Options for {label}` | — |
+
+APG pattern: [Combobox with Listbox Popup](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)

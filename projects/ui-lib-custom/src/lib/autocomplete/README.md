@@ -109,3 +109,46 @@ All slots use structural directive markers inside `<ui-lib-autocomplete>`.
   </ng-template>
 </ui-lib-autocomplete>
 ```
+
+## Theming
+
+All visual properties are exposed as CSS custom properties on the host element:
+
+```css
+ui-lib-autocomplete {
+  --uilib-autocomplete-panel-max-height: 320px;
+  --uilib-autocomplete-chip-border-radius: 4px;
+}
+```
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `--uilib-autocomplete-panel-max-height` | `260px` | Maximum height of the dropdown panel |
+| `--uilib-autocomplete-panel-z-index` | `1000` | Z-index of the dropdown panel |
+| `--uilib-autocomplete-padding-y-base` | `0.5rem` | Vertical padding of the input wrapper |
+| `--uilib-autocomplete-padding-x-base` | `0.75rem` | Horizontal padding of the input wrapper |
+| `--uilib-autocomplete-option-padding-y-base` | `0.55rem` | Vertical padding of each option |
+| `--uilib-autocomplete-option-padding-x-base` | `0.75rem` | Horizontal padding of each option |
+| `--uilib-autocomplete-focus-ring-width` | `3px` | Width of the keyboard focus ring |
+| `--uilib-autocomplete-chip-bg` | `color-mix(…)` | Chip background color |
+| `--uilib-autocomplete-chip-border-radius` | `999px` | Chip border radius |
+| `--uilib-autocomplete-chip-padding` | `0.2rem 0.5rem` | Chip inner padding |
+| `--uilib-autocomplete-chip-gap` | `0.35rem` | Gap between chips |
+| `--uilib-autocomplete-group-label-font-weight` | `600` | Group header font weight |
+
+## Internationalisation
+
+All user-visible strings resolve through `UiLibI18nService`. Each string has a locale key that can be translated by providing a custom locale object.
+
+| String | Locale key | Default (en) | Notes |
+|--------|-----------|--------------|-------|
+| Listbox accessible name fallback | `autocomplete.suggestions` | `Suggestions` | Used when no `ariaLabel` is provided |
+| Empty-state message | `autocomplete.empty` | `No results found` | Shown when `suggestions` is empty |
+| Single result announcement | `autocomplete.results.one` | `1 result available` | Screen-reader live region |
+| Multiple results announcement | `autocomplete.results.count` | `{count} results available` | Screen-reader live region; `{count}` is replaced |
+| Selected-chips region label | `autocomplete.chips-label` | `Selected items` | — |
+| Clear button label | `autocomplete.clear` | `Clear` | — |
+| Dropdown button label | `autocomplete.dropdown` | `Show suggestions` | — |
+| Chip remove button | `autocomplete.remove-chip` | `Remove {label}` | `{label}` is the chip display text |
+
+APG pattern: [Combobox with List Autocomplete](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)

@@ -97,8 +97,8 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   public readonly multiple: InputSignal<boolean> = input<boolean>(false);
   /** Show filter input inside panel; announces result count via live region. Default: `false`. */
   public readonly searchable: InputSignal<boolean> = input<boolean>(false);
-  /** Text shown when no value is selected. Default: `'Select...'`. */
-  public readonly placeholder: InputSignal<string> = input<string>('Select...');
+  /** Text shown when no value is selected. Default: `''` (uses `select.placeholder` locale key). */
+  public readonly placeholder: InputSignal<string> = input<string>('');
   /** Disables the control and sets `aria-disabled`. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   /** Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`. */
@@ -190,6 +190,10 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
       if (this.ariaLabelledBy()) return this.ariaLabelledBy();
       return this.label() ? this.labelId() : null;
     },
+  );
+
+  public readonly resolvedPlaceholder: Signal<string> = computed<string>(
+    (): string => this.placeholder() || this.i18n.translate('select.placeholder'),
   );
 
   public readonly effectiveVariant: Signal<SelectVariant> = computed<SelectVariant>(

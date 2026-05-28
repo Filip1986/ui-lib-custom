@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 8 — 8.5-cluster batch COMPLETE ✅ (OrganizationChart, Galleria, DynamicDialog, Drawer, ConfirmDialog, Tree, TreeTable, Table, Listbox, VirtualScroller, Paginator, DatePicker — all 8.5→8.7). Next: Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
-- **Next queue:** Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5). Then broader Prompt 8 pass on any remaining sub-8.5 components.
+- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.4 ✅), AutoComplete (9.0→9.2 ✅), CascadeSelect (9.0→9.2 ✅), ColorPicker (9.0→9.1 ✅). Next: push Select to 9.5, AutoComplete/CascadeSelect/ColorPicker to 9.3+.
+- **Next queue:** Continue Prompt 7 ceiling push — API/Perf/Polish/Feel gaps to close; then broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,31 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — Select/AutoComplete/CascadeSelect/ColorPicker i18n + README Theming & Internationalisation sections ✅]
+Changed:
+  select/select.ts: placeholder default '' (was 'Select...'); resolvedPlaceholder computed → i18n.translate('select.placeholder')
+  select/select.html: placeholder() → resolvedPlaceholder() (2 occurrences)
+  select/select.spec.ts: expected placeholder text updated 'Select...' → 'Select an option'
+  select/README.md: placeholder default updated; Theming + Internationalisation sections added
+  autocomplete/autocomplete.ts: removed AUTOCOMPLETE_EMPTY_TEXT plain property;
+    added resolvedEmptyText Signal computed; listboxLabel uses i18n.translate('autocomplete.suggestions');
+    resultsAnnouncement uses autocomplete.results.one / autocomplete.results.count keys
+  autocomplete/autocomplete.html: {{ emptyText }} → {{ resolvedEmptyText() }}
+  autocomplete/README.md: Theming + Internationalisation sections added
+  cascade-select/cascade-select.ts: resolvedPlaceholder computed → i18n.translate('cascade-select.placeholder');
+    getLevelAriaLabel uses resolvedPlaceholder()
+  cascade-select/cascade-select.html: placeholder() → resolvedPlaceholder()
+  cascade-select/README.md: placeholder default note updated; Theming + Internationalisation sections added
+  color-picker/README.md: Theming + Internationalisation sections added
+  i18n/en,de,fr,es.ts: 5 new keys per locale:
+    autocomplete.suggestions / autocomplete.empty / autocomplete.results.one / autocomplete.results.count;
+    cascade-select.placeholder
+  docs/COMPONENT_SCORES.md: Select 9.1→9.4; AutoComplete 9.0→9.2; CascadeSelect 9.0→9.2; ColorPicker 9.0→9.1
+  docs/reference/bundle-sizes.json: baseline updated
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
+Verification: npx eslint (PASS ✅); ng build ✅; npx jest (155 ✅)
+Next step: Continue ceiling push — DX, API, Perf, Feel gaps to close on Select/AutoComplete/CascadeSelect/ColorPicker → 9.5
+
 Date: 2026-05-28 [feat(lib): prompt-8 DatePicker (8.5→8.7) — CSS token, i18n aria labels ✅]
 Changed:
   date-picker/date-picker.scss: --uilib-datepicker-panel-min-width: 18rem; added to host token block;
@@ -118,37 +143,6 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 6123/6123 tests ✅; commit 75fe2bbf ✅
 Verification: npx eslint (all dirs PASS ✅); ng build ✅; npm test (6123 ✅)
 Next step: DatePicker Prompt 8 pass → DONE
-
-Date: 2026-05-28 [feat: Prompt 8 — 8.5-cluster batch: OrganizationChart (8.5→8.7) + Galleria (8.5→8.7) + DynamicDialog (8.5→8.7) ✅]
-Changed:
-  organization-chart/organization-chart.ts: inject UiLibI18nService; ariaLabel input default '' (was 'Organization');
-    resolvedAriaLabel computed signal; onNodeKeydown handler added
-  organization-chart/organization-chart.html: ariaLabel() → resolvedAriaLabel()
-  organization-chart/organization-chart.scss: --uilib-org-chart-node-transition token; transition wired;
-    uilib-org-chart-mount keyframe + animation on host; prefers-reduced-motion expanded
-  organization-chart/organization-chart-node.ts: onNodeKeydown(event: Event) method added
-  organization-chart/organization-chart-node.html: (keydown.enter)/(keydown.space) → onNodeKeydown;
-    [attr.tabindex] → [tabindex] (fixes interactive-supports-focus lint rule)
-  galleria/galleria.ts: ariaLabel input default '' (was GALLERIA_ARIA_REGION_LABEL); host binding
-    uses resolvedAriaLabel(); added resolvedAriaLabel computed; 4 constant class properties
-    (closeAriaLabel/fullscreenAriaLabel/thumbnailPrevAriaLabel/thumbnailNextAriaLabel) → i18n getters;
-    updated previousItemAriaLabel/nextItemAriaLabel/lightboxAriaLabel fallbacks to i18n;
-    removed GALLERIA_ARIA_* constant imports
-  galleria/galleria.html: hardcoded 'Go to image ' interpolation → goToItemAriaLabel($index)
-  galleria/galleria.scss: --uilib-galleria-header-footer-padding token; header/footer padding wired;
-    uilib-galleria-mount keyframe + animation; prefers-reduced-motion expanded
-  dynamic-dialog/dynamic-dialog.ts: 'Dialog' hardcoded fallback → i18n.translate('dynamic-dialog.label')
-  dynamic-dialog/dynamic-dialog.scss: token block added (--uilib-dynamic-dialog-close-btn-size 2rem,
-    --uilib-dynamic-dialog-header-gap 0.5rem); close-btn width/height wired; header gap wired
-  dynamic-dialog/dynamic-dialog.html: backdrop div: role="presentation" aria-hidden="true";
-    <ng-container #dynamicContent></ng-container> → self-closing
-  i18n/en,de,fr,es.ts: organization-chart.label; galleria.label + 6 new galleria keys (close/fullscreen/
-    thumbnail.prev/thumbnail.next/prev/next); dynamic-dialog.label (4 keys × 3 components = 11 new i18n entries)
-  docs/COMPONENT_SCORES.md: OrganizationChart/Galleria/DynamicDialog 8.5→8.7
-  docs/reference/bundle-sizes.json: baseline updated
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 175 tests (org-chart + galleria + dynamic-dialog) ✅
-Verification: npx eslint (PASS ✅); ng build ui-lib-custom (PASS ✅); npx jest (175 ✅); bundlesize (PASS ✅)
-Next step: Continue 8.5-cluster batch on Drawer, ConfirmDialog, Table, TreeTable, Tree, Listbox, VirtualScroller, Paginator
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

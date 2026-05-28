@@ -24,8 +24,13 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   // ── AutoComplete ──────────────────────────────────────────────────────────
   'autocomplete.chips-label': 'Éléments sélectionnés',
   'autocomplete.clear': 'Effacer',
+  'autocomplete.suggestions': 'Suggestions',
+  'autocomplete.empty': 'Aucun résultat trouvé',
+  'autocomplete.results.one': '1 résultat disponible',
+  'autocomplete.results.count': '{count} résultats disponibles',
 
   // ── CascadeSelect ─────────────────────────────────────────────────────────
+  'cascade-select.placeholder': 'Sélectionner',
   'cascade-select.clear': 'Effacer la sélection',
   'cascade-select.sublevel-label': 'Options pour {label}',
 

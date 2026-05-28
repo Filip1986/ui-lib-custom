@@ -11,7 +11,7 @@
       @if (displayValue()) {
         {{ displayValue() }}
       } @else {
-        {{ placeholder() }}
+        {{ resolvedPlaceholder() }}
       }
     </div>
     <div class="ui-lib-select__actions">
@@ -86,7 +86,7 @@
         #panel
         [id]="listboxId()"
         [attr.role]="listboxRole"
-        [attr.aria-label]="placeholder()"
+        [attr.aria-label]="resolvedPlaceholder()"
         [attr.aria-multiselectable]="multiple() ? 'true' : null"
       >
         @for (groupKey of groupKeys(); track groupKey) {

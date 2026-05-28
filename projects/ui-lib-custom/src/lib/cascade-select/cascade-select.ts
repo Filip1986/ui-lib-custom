@@ -294,6 +294,10 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     (): string | null => this.focusedItemId() || null,
   );
 
+  public readonly resolvedPlaceholder: Signal<string> = computed<string>(
+    (): string => this.placeholder() || this.i18n.translate('cascade-select.placeholder'),
+  );
+
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
       CASCADE_SELECT_CLASSNAMES.Root,
@@ -439,12 +443,12 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
   public getLevelAriaLabel(level: number): string {
     if (level === 0) {
-      return this.placeholder();
+      return this.resolvedPlaceholder();
     }
 
     const parent: unknown | undefined = this.activePath()[level - 1];
     if (!parent) {
-      return this.placeholder();
+      return this.resolvedPlaceholder();
     }
     return this.i18n.translate('cascade-select.sublevel-label', {
       label: this.resolveOptionLabel(parent),

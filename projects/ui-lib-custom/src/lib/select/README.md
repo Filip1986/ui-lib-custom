@@ -15,7 +15,7 @@
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
 | `multiple` | `boolean` | `false` | Enables multi-select; ngModel receives `unknown[]` |
 | `searchable` | `boolean` | `false` | Adds a filter input inside the dropdown panel; announces result count via live region |
-| `placeholder` | `string` | `'Select...'` | |
+| `placeholder` | `string` | `''` | Shown when no value is selected; falls back to the `select.placeholder` locale key (`'Select an option'`) |
 | `disabled` | `boolean` | `false` | |
 | `loading` | `boolean` | `false` | Shows a spinner and blocks interaction |
 | ~~`optionTemplate`~~ | _removed_ | — | Replaced by `#optionTemplate` content-child slot (see below). |
@@ -97,3 +97,47 @@ Implements WAI-ARIA **combobox/listbox** pattern (ARIA 1.2):
 - Live region: announces filtered option count when typing in search
 - Clear button: `aria-label="Clear selection"` with decorative SVG icon (`aria-hidden`)
 - Arrow icon: `aria-hidden="true"`
+
+## Theming
+
+All visual properties are exposed as CSS custom properties on the host element. Override at any scope:
+
+```css
+ui-lib-select {
+  --uilib-select-panel-max-height: 320px;
+  --uilib-select-focus-ring-width: 3px;
+}
+```
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `--uilib-select-panel-max-height` | `260px` | Maximum height of the dropdown panel |
+| `--uilib-select-panel-z-index` | `var(--uilib-z-dropdown, 10)` | Z-index of the dropdown panel |
+| `--uilib-select-padding-y-base` | `0.55rem` | Vertical padding of the trigger control |
+| `--uilib-select-padding-x-base` | `0.75rem` | Horizontal padding of the trigger control |
+| `--uilib-select-option-padding-y-base` | `0.5rem` | Vertical padding of each option row |
+| `--uilib-select-option-padding-x-base` | `0.75rem` | Horizontal padding of each option row |
+| `--uilib-select-group-padding-y-base` | `0.25rem` | Vertical padding of a group header |
+| `--uilib-select-group-padding-x-base` | `0.75rem` | Horizontal padding of a group header |
+| `--uilib-select-empty-padding-base` | `0.75rem` | Padding of the empty-state message |
+| `--uilib-select-focus-ring-width` | `2px` | Width of the keyboard focus ring |
+| `--uilib-select-label-font-weight` | `600` | Font weight of the visible label |
+| `--uilib-select-label-gap` | `0.35rem` | Gap between label and control |
+| `--uilib-select-control-gap` | `0.5rem` | Gap between value and actions area |
+| `--uilib-select-arrow-font-size` | `0.8rem` | Font size of the chevron icon |
+
+## Internationalisation
+
+All user-visible strings resolve through `UiLibI18nService`. Each string has a locale key that can be translated by providing a custom locale object. Per-instance overrides are available via the inputs listed below.
+
+| String | Locale key | Default (en) | Input override |
+|--------|-----------|--------------|----------------|
+| Placeholder text | `select.placeholder` | `Select an option` | `[placeholder]` |
+| Empty options message | `select.empty` | `No options available` | — |
+| Search input placeholder | `select.search.placeholder` | `Search options` | — |
+| Search input ARIA label | `select.search.aria` | `Search options` | — |
+| Clear button ARIA label | `select.clear` | `Clear selection` | — |
+| Toggle button ARIA label | `select.toggle` | `Toggle dropdown` | — |
+| Selected count announcement | `select.selected.count` | `{count} items selected` | — |
+
+APG pattern: [Combobox with Listbox Popup](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)

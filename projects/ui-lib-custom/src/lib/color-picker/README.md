@@ -60,3 +60,45 @@
 <ui-lib-color-picker [inline]="true" format="rgb" [(ngModel)]="selectedColor" />
 ```
 
+## Theming
+
+All visual properties are exposed as CSS custom properties on the host element:
+
+```css
+ui-lib-color-picker {
+  --uilib-colorpicker-trigger-width: 2.5rem;
+  --uilib-colorpicker-panel-width: 220px;
+}
+```
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `--uilib-colorpicker-trigger-width` | `2rem` | Width of the swatch trigger button |
+| `--uilib-colorpicker-trigger-height` | `2rem` | Height of the swatch trigger button |
+| `--uilib-colorpicker-panel-width` | `196px` | Width of the color picker panel |
+| `--uilib-colorpicker-panel-padding` | `0.75rem` | Inner padding of the panel |
+| `--uilib-colorpicker-panel-shadow` | `0 4px 12px rgb(0 0 0 / 15%)` | Box shadow of the panel |
+| `--uilib-colorpicker-panel-z-index` | `1000` | Z-index of the popup panel |
+| `--uilib-colorpicker-hue-slider-width` | `18px` | Width of the hue slider track |
+| `--uilib-colorpicker-hue-slider-height` | `11rem` | Height of the hue slider track |
+| `--uilib-colorpicker-selector-size` | `12px` | Size of the color canvas drag handle |
+| `--uilib-colorpicker-focus-ring-width` | `3px` | Width of the keyboard focus ring |
+| `--uilib-colorpicker-label-font-size` | `0.6875rem` | Font size of the channel input labels |
+
+## Internationalisation
+
+All ARIA labels are provided through `UiLibI18nService`. Override them by supplying a custom locale object via `provideUiLibI18n({ locale: { ... } })`.
+
+| String | Locale key | Default (en) |
+|--------|-----------|--------------|
+| Trigger button ARIA label | `colorpicker.trigger` | `Color: {color}, click to open picker` |
+| Toggle button ARIA label | `colorpicker.toggle` | `Open color picker` |
+| Panel ARIA label | `colorpicker.panel` | `Color picker` |
+| Hue slider ARIA label | `colorpicker.hue` | `Hue slider` |
+| Hex input ARIA label | `colorpicker.hex.input` | `Hex color value` |
+| Red channel input ARIA label | `colorpicker.red.input` | `Red channel` |
+| Green channel input ARIA label | `colorpicker.green.input` | `Green channel` |
+| Blue channel input ARIA label | `colorpicker.blue.input` | `Blue channel` |
+| Alpha channel input ARIA label | `colorpicker.alpha.input` | `Alpha channel` |
+
+APG pattern: [Color Picker (custom widget)](https://www.w3.org/WAI/ARIA/apg/)

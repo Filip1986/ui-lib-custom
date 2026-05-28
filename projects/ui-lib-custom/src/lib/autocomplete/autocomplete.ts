@@ -30,7 +30,6 @@ import {
   resolveOverlayAppendTarget,
 } from 'ui-lib-custom/core';
 import {
-  AUTOCOMPLETE_EMPTY_TEXT,
   AUTOCOMPLETE_ID_PREFIX,
   AUTOCOMPLETE_LISTBOX_ROLE,
   AUTOCOMPLETE_OPTION_ID_SEPARATOR,
@@ -271,7 +270,6 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
   public readonly listboxRole: string = AUTOCOMPLETE_LISTBOX_ROLE;
   public readonly optionRole: string = AUTOCOMPLETE_OPTION_ROLE;
-  public readonly emptyText: string = AUTOCOMPLETE_EMPTY_TEXT;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
@@ -325,14 +323,20 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     },
   );
 
+  /** Resolved "no results" message — consumer override or locale fallback. */
+  public readonly resolvedEmptyText: Signal<string> = computed<string>((): string =>
+    this.i18n.translate('autocomplete.empty'),
+  );
+
   /**
    * Accessible name for the listbox panel.
-   * Falls back to 'Suggestions' so axe-core's aria-input-field-name rule is always satisfied
-   * even when the consumer provides no ariaLabel input.
+   * Falls back to the locale `autocomplete.suggestions` key so axe-core's
+   * aria-input-field-name rule is always satisfied even when the consumer
+   * provides no ariaLabel input.
    */
-  protected readonly listboxLabel: Signal<string> = computed<string>((): string => {
-    return this.ariaLabel() ?? 'Suggestions';
-  });
+  protected readonly listboxLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('autocomplete.suggestions'),
+  );
 
   /** Announcement text for the aria-live region — announced to screen readers when suggestions arrive. */
   protected readonly resultsAnnouncement: Signal<string> = computed<string>((): string => {
@@ -343,7 +347,9 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     if (count === 0) {
       return '';
     }
-    return count === 1 ? '1 result available' : `${count} results available`;
+    return count === 1
+      ? this.i18n.translate('autocomplete.results.one')
+      : this.i18n.translate('autocomplete.results.count', { count: String(count) });
   });
 
   protected readonly hasValue: Signal<boolean> = computed<boolean>((): boolean => {
