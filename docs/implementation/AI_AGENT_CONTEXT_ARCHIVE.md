@@ -4,6 +4,24 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-28 [feat: Prompt 3 — APG patterns + usage examples + data-grid.md hand-finish ✅]
+Changed:
+  scripts/fill-apg-patterns.mjs: NEW — maps 100+ components to WAI-ARIA APG pattern URLs
+  scripts/fill-usage-examples.mjs: NEW — 22 component → accurate compilable usage example blocks
+  scripts/generate-reference-doc.mjs: added demo page link in Related section
+  docs/reference/components/data-grid.md: hand-finished
+  docs/COMPONENT_SCORES.md: DataGrid Docs 8→9
+State: COMPLETE — pushed b51cdacb ✅
+Next step: Prompt 1 (Sprint A — Competitive Benchmark Backfill)
+
+Date: 2026-05-28 [feat: Prompt 2 — reference doc generator fix + all 96 docs regenerated ✅]
+Changed:
+  scripts/generate-reference-doc.mjs: fix parseSignals regex; data-grid 3→10 outputs
+  docs/reference/components/*.md: 96 files regenerated
+State: COMPLETE — pushed clean ✅
+
+---
+
 Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Prompt 11 DONE ✅]
 Changed:
   src/lib/data-grid/data-grid.types.ts: full type definitions (variant/size/sort/selection/filter/resize/edit/frozen; all event + template-context interfaces)

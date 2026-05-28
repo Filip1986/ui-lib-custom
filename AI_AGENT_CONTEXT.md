@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 8 — 8.2-cluster batch upgrade (Knob ✅ 8.2→8.7, Avatar ✅ 8.2→8.8). Next targets: Timeline (8.3), DatePicker (8.3), Carousel (8.4). Pattern: typed `ng-template` slot, missing theme token, mount animation, i18n fallback.
+- **Active focus:** Prompt 8 — 8.2-cluster batch upgrade COMPLETE ✅ (Knob 8.2→8.7, Avatar 8.2→8.8, Timeline 8.3→8.7, Carousel 8.4→8.7, ConfirmDialog 8.4→8.5, MeterGroup 8.4→8.7, DatePicker 8.3→8.5, DataView 8.4→8.6). Minimum floor is now **8.5** across all components. Next: begin 8.5-cluster batch or Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
 - **Next queue:** Continue Prompt 8 cluster batch on remaining low-scorers. Then Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
@@ -83,6 +83,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: Prompt 8 — DatePicker (8.3→8.5) + DataView (8.4→8.6) cluster batch ✅]
+Changed:
+  date-picker/date-picker.scss: --uilib-datepicker-disabled-opacity + --uilib-datepicker-cell-disabled-opacity tokens;
+    uilib-datepicker-mount host animation; uilib-datepicker-panel-open slide-in animation; prefers-reduced-motion guard
+  date-picker/date-picker.ts: getDateAriaLabel() hardcoded 'today'/'selected'/'in selected range' replaced with
+    i18n.translate('datepicker.day.today'/'.selected'/'.range')
+  data-view/data-view.component.ts: ariaLabel/controlsAriaLabel/filterAriaLabel/sortAriaLabel/listLayoutAriaLabel/
+    gridLayoutAriaLabel defaults changed to ''; 6 resolvedXxx computed signals; layoutLiveMessage effect uses i18n keys;
+    host binding updated to resolvedAriaLabel()
+  data-view/data-view.component.html: all 5 aria bindings updated to resolved signals
+  data-view/data-view.component.scss: --uilib-data-view-controls-gap token; mount animation; prefers-reduced-motion
+  i18n/en,de,fr,es.ts: datepicker.day.today/.selected/.range; data-view.label/.controls/.filter/.sort/
+    .list-view/.grid-view/.layout.list/.layout.grid (11 new keys across 4 locales)
+  docs/COMPONENT_SCORES.md: DatePicker 8.3→8.5; DataView 8.4→8.6
+  docs/reference/bundle-sizes.json: baseline updated (56fd3226 + ebd63a78)
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 138 date-picker + 64 data-view tests ✅; pushed e181e164 ✅
+Verification: npx eslint date-picker/ data-view/ (PASS ✅); ng build ✅; tests ✅; git push (PASS ✅)
+Next step: Begin 8.5-cluster batch OR Prompt 7 ceiling push on Select/AutoComplete/CascadeSelect/ColorPicker
+
 Date: 2026-05-28 [feat: Prompt 8 — 8.2-cluster batch: Knob (8.2→8.7) + Avatar (8.2→8.8) ✅]
 Changed:
   knob/knob.component.ts: typed #valueLabel slot (KnobValueContext: $implicit, formattedValue, normalized); UiLibI18nService i18n fallback for aria-label; NgTemplateOutlet
@@ -101,34 +120,6 @@ Changed:
 State: COMPLETE — ESLint ✅; ng build zero warnings ✅; 36/36 avatar tests ✅; pushed 519e7609 + 001a12d9 ✅
 Verification: npx eslint avatar/ (PASS ✅); ng build ui-lib-custom (PASS ✅); npx jest avatar --no-coverage (36 ✅); git push (PASS ✅)
 Next step: Prompt 8 continues — Timeline (8.3 → target 8.8), then DatePicker (8.3), Carousel (8.4)
-
-Date: 2026-05-28 [feat: Prompt 3 — APG patterns + usage examples + data-grid.md hand-finish ✅]
-Changed:
-  scripts/fill-apg-patterns.mjs: NEW — maps 100+ components to WAI-ARIA APG pattern URLs
-    (or 'decorative'/'no-dedicated-apg'); filled all 96 doc `<!-- TODO: add WAI-ARIA APG -->` markers;
-    lowercases filename before map lookup (Windows NTFS case-insensitive FS fix)
-  scripts/fill-usage-examples.mjs: NEW — 22 component → accurate compilable usage example blocks;
-    filled all remaining `<!-- TODO: add usage examples -->` markers across 96 docs
-  scripts/generate-reference-doc.mjs: added demo page link in Related section for all regenerated docs
-  docs/reference/components/data-grid.md: hand-finished — Column Inputs table (14 inputs from
-    DataGridColumnComponent), Column Template Slots table (5 directives), Key→Action keyboard table,
-    ARIA Attributes table, Real-World Usage section (lazy load + cell editing), Edge Cases section
-    (empty state / 10k rows / read-only), Migration from PrimeNG Table section
-  docs/COMPONENT_SCORES.md: DataGrid Docs 8→9, avg 9.0→9.1
-State: COMPLETE — 0 APG TODO markers remaining; 0 usage-example TODO markers remaining; pushed ✅ (b51cdacb)
-Verification: node scripts/fill-apg-patterns.mjs (96 files ✅); node scripts/fill-usage-examples.mjs (22 files ✅); git push (PASS ✅)
-Next step: Prompt 1 (Sprint A — Competitive Benchmark Backfill); run on 4-8 components per session
-
-Date: 2026-05-28 [feat: Prompt 2 — reference doc generator fix + all 96 docs regenerated ✅]
-Changed:
-  scripts/generate-reference-doc.mjs: fix parseSignals regex (` = ` → ` =\s*`) so multi-line
-    output() declarations are captured; data-grid 3→10 outputs; tree gained nodeCollapse/nodeUnselect
-  docs/reference/components/*.md: 96 files regenerated via `npm run docs:reference --all`;
-    updated CSS vars, outputs, projection slots from live source; ACCORDION/TREE/BADGE/etc legacy
-    uppercase files updated in-place (Windows case-insensitive FS); data-grid.md added (new)
-State: COMPLETE — generator idempotent; npm run docs:reference passes clean
-Verification: node scripts/generate-reference-doc.mjs data-grid (10 outputs ✅); npm run docs:reference (96 files ✅); git commit clean ✅
-Next step: Prompt 5 (Sprint D — reduced-motion stylelint custom rule + library-wide `prefers-reduced-motion` pass)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
