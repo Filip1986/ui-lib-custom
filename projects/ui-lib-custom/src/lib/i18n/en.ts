@@ -33,6 +33,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'cascade-select.placeholder': 'Select',
   'cascade-select.clear': 'Clear selection',
   'cascade-select.sublevel-label': 'Options for {label}',
+  'cascade-select.loading': 'Loading...',
 
   // ── Listbox ───────────────────────────────────────────────────────────────
   'listbox.select-all': 'Select all options',
