@@ -526,7 +526,7 @@ export class UiLibSelect implements ControlValueAccessor, OnDestroy {
     if (!activeId) return;
 
     requestAnimationFrame((): void => {
-      const element: HTMLElement | null = document.getElementById(activeId);
+      const element: HTMLElement | null = this.document.getElementById(activeId);
       element?.scrollIntoView({ block: 'nearest' });
     });
   }

@@ -580,7 +580,9 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     const triggerRect: DOMRect = trigger.getBoundingClientRect();
     const panelRect: DOMRect = panel.getBoundingClientRect();
 
-    const availableBelow: number = window.innerHeight - triggerRect.bottom;
+    const viewportHeight: number =
+      this.documentRef.defaultView?.innerHeight ?? this.documentRef.documentElement.clientHeight;
+    const availableBelow: number = viewportHeight - triggerRect.bottom;
     const availableAbove: number = triggerRect.top;
 
     if (availableBelow < panelRect.height && availableAbove > availableBelow) {
@@ -710,18 +712,18 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
       this.handleDocumentPointerEnd();
     };
 
-    document.addEventListener('mousemove', mouseMoveHandler);
-    document.addEventListener('mouseup', mouseUpHandler);
-    document.addEventListener('touchmove', touchMoveHandler, { passive: false });
-    document.addEventListener('touchend', touchEndHandler);
-    document.addEventListener('touchcancel', touchEndHandler);
+    this.documentRef.addEventListener('mousemove', mouseMoveHandler);
+    this.documentRef.addEventListener('mouseup', mouseUpHandler);
+    this.documentRef.addEventListener('touchmove', touchMoveHandler, { passive: false });
+    this.documentRef.addEventListener('touchend', touchEndHandler);
+    this.documentRef.addEventListener('touchcancel', touchEndHandler);
 
     this.removeDragListeners = (): void => {
-      document.removeEventListener('mousemove', mouseMoveHandler);
-      document.removeEventListener('mouseup', mouseUpHandler);
-      document.removeEventListener('touchmove', touchMoveHandler);
-      document.removeEventListener('touchend', touchEndHandler);
-      document.removeEventListener('touchcancel', touchEndHandler);
+      this.documentRef.removeEventListener('mousemove', mouseMoveHandler);
+      this.documentRef.removeEventListener('mouseup', mouseUpHandler);
+      this.documentRef.removeEventListener('touchmove', touchMoveHandler);
+      this.documentRef.removeEventListener('touchend', touchEndHandler);
+      this.documentRef.removeEventListener('touchcancel', touchEndHandler);
     };
   }
 

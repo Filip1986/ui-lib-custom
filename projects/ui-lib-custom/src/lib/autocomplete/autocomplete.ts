@@ -535,7 +535,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     this.onTouched();
     this.autocompleteBlur.emit(event);
 
-    window.setTimeout((): void => {
+    setTimeout((): void => {
       if (this.addOnBlur()) {
         this.commitFreeTextValue(event);
       }
@@ -1140,7 +1140,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     }
 
     requestAnimationFrame((): void => {
-      const activeElement: HTMLElement | null = document.getElementById(activeId);
+      const activeElement: HTMLElement | null = this.documentRef.getElementById(activeId);
       if (activeElement) {
         activeElement.scrollIntoView({ block: 'nearest' });
       }

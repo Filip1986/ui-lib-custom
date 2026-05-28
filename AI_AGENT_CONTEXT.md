@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.4 ✅), AutoComplete (9.0→9.2 ✅), CascadeSelect (9.0→9.2 ✅), ColorPicker (9.0→9.1 ✅). Next: push Select to 9.5, AutoComplete/CascadeSelect/ColorPicker to 9.3+.
-- **Next queue:** Continue Prompt 7 ceiling push — API/Perf/Polish/Feel gaps to close; then broader Prompt 8 pass on any remaining sub-8.5 components.
+- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.4 ✅), ColorPicker (9.0→9.3 ✅), CascadeSelect (9.0→9.2 🔄). Next: CascadeSelect → 9.5; AutoComplete → 9.5.
+- **Next queue:** CascadeSelect + AutoComplete ceiling push (need ~4 more categories at 10 each). Then broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,17 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — SSR safety fixes (Select/AutoComplete/ColorPicker Perf+Angular 9→10) ✅]
+Changed:
+  select/select.ts: document.getElementById → this.document.getElementById (inside requestAnimationFrame)
+  autocomplete/autocomplete.ts: window.setTimeout → setTimeout; document.getElementById → this.documentRef.getElementById
+  color-picker/color-picker.ts: window.innerHeight → this.documentRef.defaultView?.innerHeight;
+    all document.addEventListener/removeEventListener → this.documentRef.*
+  docs/COMPONENT_SCORES.md: Select Perf+Angular 9→10 (9.4→9.5); AutoComplete Perf+Angular 9→10 (9.2→9.4);
+    ColorPicker Perf+Angular 9→10 (9.1→9.3)
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
+Next step: CascadeSelect ceiling push → 9.5; AutoComplete → 9.5
+
 Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — Select/AutoComplete/CascadeSelect/ColorPicker i18n + README Theming & Internationalisation sections ✅]
 Changed:
   select/select.ts: placeholder default '' (was 'Select...'); resolvedPlaceholder computed → i18n.translate('select.placeholder')
@@ -122,27 +133,6 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 138 date-picker + 6123 total tests ✅; commit f100f9ae ✅
 Verification: npx eslint date-picker/ (PASS ✅); ng build ui-lib-custom (PASS ✅); npm test (6123 ✅)
 Next step: Prompt 7 ceiling push — Select, AutoComplete, CascadeSelect, ColorPicker → 9.5
-
-Date: 2026-05-28 [feat(lib): prompt-8 8.5-cluster batch 2 — Drawer, ConfirmDialog, Tree, TreeTable, Table, Listbox, VirtualScroller, Paginator ✅]
-Changed:
-  drawer/drawer.scss: --uilib-drawer-close-transition token; uilib-drawer-panel-enter animation (all 4 positions);
-    @keyframes; prefers-reduced-motion guard extended
-  confirm-dialog/confirm-dialog.scss: --uilib-confirm-dialog-close-btn-radius; material variant 999px via token
-  tree/tree.ts+html+scss: resolvedFilterPlaceholder via tree.filter-placeholder; --uilib-tree-node-gap;
-    uilib-tree-mount animation
-  tree-table/tree-table.component.ts+html+scss: resolvedGlobalFilterPlaceholder; --uilib-tree-table-filter-margin-bottom;
-    uilib-tree-table-mount animation
-  table/table.component.scss: --uilib-table-sort-transition-duration; uilib-table-mount animation
-  listbox/listbox.component.ts+html+scss: 3 resolved signals (filterPlaceholder/emptyMessage/emptyFilterMessage);
-    --uilib-listbox-filter-gap; uilib-listbox-mount animation
-  virtual-scroller/virtual-scroller.component.scss+ts: --uilib-scroller-spin-duration; 6 i18n fallbacks in
-    resolvedAriaLabel/liveRegionMessage/formatTotalItemsMessage
-  paginator/paginator.component.ts+scss: resolvedAriaLabel via paginator.nav; uilib-paginator-mount animation
-  i18n/en,de,fr,es.ts: 10 new keys (tree-table.filter-placeholder, listbox.*, virtual-scroller.*)
-  docs/reference/bundle-sizes.json: baseline updated
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 6123/6123 tests ✅; commit 75fe2bbf ✅
-Verification: npx eslint (all dirs PASS ✅); ng build ✅; npm test (6123 ✅)
-Next step: DatePicker Prompt 8 pass → DONE
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
