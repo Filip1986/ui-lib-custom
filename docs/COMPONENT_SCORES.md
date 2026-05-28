@@ -189,7 +189,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Select        | 9   | 9    | 9    | 10   | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.1 | 🟢     |
 | AutoComplete  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | CascadeSelect | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| DatePicker    | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8   | 8.3 | 🟢     |
+| DatePicker    | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 9      | 9       | 9    | 8   | 8.5 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 7   | 8.8 | 🟢     |
 | RadioButton   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 7   | 8.7 | 🟢     |
 | ToggleButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |

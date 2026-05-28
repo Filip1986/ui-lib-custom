@@ -133,9 +133,15 @@
     );
     --uilib-datepicker-day-bg-hover-minimal: color-mix(in srgb, currentColor 6%, transparent);
 
+    // Opacity tokens for disabled states
+    --uilib-datepicker-disabled-opacity: 0.65;
+    --uilib-datepicker-cell-disabled-opacity: 0.6;
+
     position: relative;
     display: inline-flex;
     width: auto;
+    animation: uilib-datepicker-mount var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
   }
 
   ui-lib-date-picker.ui-lib-datepicker.ui-lib-datepicker--fluid {
@@ -240,6 +246,8 @@
     position: absolute;
     top: calc(100% + var(--uilib-space-2, 0.5rem));
     inset-inline-start: 0;
+    animation: uilib-datepicker-panel-open var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
     min-width: 18rem;
     max-height: var(--uilib-datepicker-panel-max-height, 28rem);
     overflow: auto;
@@ -425,7 +433,7 @@
   .ui-lib-datepicker__day--disabled,
   .ui-lib-datepicker__month-cell--disabled,
   .ui-lib-datepicker__year-cell--disabled {
-    opacity: 0.6;
+    opacity: var(--uilib-datepicker-cell-disabled-opacity, 0.6);
     color: var(--uilib-datepicker-day-color-disabled, #9ca3af);
     cursor: not-allowed;
   }
@@ -540,7 +548,7 @@
   }
 
   ui-lib-date-picker.ui-lib-datepicker.ui-lib-datepicker--disabled {
-    opacity: 0.65;
+    opacity: var(--uilib-datepicker-disabled-opacity, 0.65);
     pointer-events: none;
   }
 
@@ -638,7 +646,37 @@
     border: 0;
   }
 
+  @keyframes uilib-datepicker-mount {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes uilib-datepicker-panel-open {
+    from {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    ui-lib-date-picker.ui-lib-datepicker {
+      animation: none;
+    }
+
+    .ui-lib-datepicker__panel {
+      animation: none;
+    }
+
     .ui-lib-datepicker__input,
     .ui-lib-datepicker__trigger,
     .ui-lib-datepicker__clear-button,

@@ -1217,15 +1217,15 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const suffixes: string[] = [];
 
     if (dateMeta.today) {
-      suffixes.push('today');
+      suffixes.push(this.i18n.translate('datepicker.day.today'));
     }
 
     if (dateMeta.selected) {
-      suffixes.push('selected');
+      suffixes.push(this.i18n.translate('datepicker.day.selected'));
     }
 
     if (this.isRangeBetween(dateMeta)) {
-      suffixes.push('in selected range');
+      suffixes.push(this.i18n.translate('datepicker.day.range'));
     }
 
     return suffixes.length > 0 ? `${baseLabel}, ${suffixes.join(', ')}` : baseLabel;

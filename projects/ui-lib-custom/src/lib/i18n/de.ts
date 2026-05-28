@@ -54,6 +54,9 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'datepicker.time.dec.minute': 'Minute verringern',
   'datepicker.time.inc.second': 'Sekunde erhöhen',
   'datepicker.time.dec.second': 'Sekunde verringern',
+  'datepicker.day.today': 'heute',
+  'datepicker.day.selected': 'ausgewählt',
+  'datepicker.day.range': 'im ausgewählten Bereich',
 
   // ── Dialog / Drawer / BottomSheet / Popover / ConfirmDialog / DynamicDialog
   'dialog.close': 'Dialog schließen',
