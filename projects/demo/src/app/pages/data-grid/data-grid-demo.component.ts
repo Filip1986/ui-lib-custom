@@ -313,7 +313,7 @@ export class DataGridDemoComponent {
       description: 'Enables windowed rendering for large datasets.',
     },
     {
-      name: 'virtualScrollHeight',
+      name: 'scrollHeight',
       type: 'string',
       default: "'400px'",
       description: 'Scroll viewport height when virtualScroll is on.',

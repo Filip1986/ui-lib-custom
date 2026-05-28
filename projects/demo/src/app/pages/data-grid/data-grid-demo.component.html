@@ -1,266 +1,271 @@
-<app-doc-page-layout #layout>
-  <!-- ── Sidebar TOC ──────────────────────────────────────────────────── -->
-  <app-doc-toc
-    doc-toc
-    [sections]="sections"
-    (sectionClick)="scrollTo($event)"
+<app-doc-page-layout [sections]="sections">
+
+  <app-doc-page-header
+    docHeader
+    title="Data Grid"
+    description="Signals-first data grid with virtual scroll, frozen columns, cell editing, and full WAI-ARIA grid keyboard navigation."
+    [importCode]="importCode"
   />
 
-  <!-- ── Main content ────────────────────────────────────────────────── -->
-  <div doc-content>
-    <app-doc-page-header
-      title="Data Grid"
-      subtitle="Signals-first data grid with virtual scroll, frozen columns, cell editing, and full WAI-ARIA grid keyboard navigation."
-      [importCode]="importCode"
+  <!-- ── Overview ───────────────────────────────────────────────────── -->
+  <app-doc-section id="overview" title="Overview">
+    <p>
+      The <code>DataGridComponent</code> is the library's flagship premium component. It renders
+      tabular data with a declarative column DSL, supports full client-side or server-side
+      (lazy) operations, and renders only the visible rows when virtual scroll is enabled.
+    </p>
+    <ul>
+      <li><strong>Virtual scroll</strong> — windowed rendering for 10,000+ rows</li>
+      <li><strong>Column pinning</strong> — freeze columns to start or end</li>
+      <li><strong>Column resizing</strong> — drag header edges in expand or fit mode</li>
+      <li><strong>Cell editing</strong> — click-to-edit with custom editor templates</li>
+      <li><strong>Lazy load</strong> — delegate sort/filter/page to a server API</li>
+      <li><strong>Selection</strong> — single, multiple, checkbox, or radio</li>
+      <li><strong>Sorting</strong> — single or multi-column (Ctrl+click)</li>
+      <li><strong>Filtering</strong> — global filter and per-column filter inputs</li>
+    </ul>
+  </app-doc-section>
+
+  <!-- ── Interactive demo ───────────────────────────────────────────── -->
+  <app-doc-section id="interactive-demo" title="Interactive Demo">
+    <!-- Controls -->
+    <div class="demo-controls">
+      <label>
+        Variant
+        <select (change)="activeVariant.set($any($event.target).value)">
+          @for (variant of variants; track variant) {
+            <option [value]="variant" [selected]="variant === activeVariant()">{{ variant }}</option>
+          }
+        </select>
+      </label>
+      <label>
+        Selection
+        <select (change)="selectionMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)">
+          @for (mode of selectionModes; track mode.value) {
+            <option [value]="mode.value ?? 'null'" [selected]="mode.value === selectionMode()">{{ mode.label }}</option>
+          }
+        </select>
+      </label>
+      <label>
+        Edit mode
+        <select (change)="editMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)">
+          @for (mode of editModes; track mode.value) {
+            <option [value]="mode.value ?? 'null'" [selected]="mode.value === editMode()">{{ mode.label }}</option>
+          }
+        </select>
+      </label>
+      <label class="demo-controls__toggle">
+        <input type="checkbox" [checked]="stripedRows()" (change)="stripedRows.set($any($event.target).checked)" />
+        Striped rows
+      </label>
+      <label class="demo-controls__toggle">
+        <input type="checkbox" [checked]="rowHover()" (change)="rowHover.set($any($event.target).checked)" />
+        Row hover
+      </label>
+      <label class="demo-controls__toggle">
+        <input type="checkbox" [checked]="showGridlines()" (change)="showGridlines.set($any($event.target).checked)" />
+        Gridlines
+      </label>
+      <label class="demo-controls__toggle">
+        <input type="checkbox" [checked]="paginatorEnabled()" (change)="paginatorEnabled.set($any($event.target).checked)" />
+        Paginator
+      </label>
+    </div>
+
+    <p class="demo-status">
+      Sort: <strong>{{ lastSortEvent() }}</strong> · Selected: <strong>{{ selectedCount() }}</strong>
+    </p>
+
+    <ui-lib-data-grid
+      [value]="employees()"
+      dataKey="id"
+      [variant]="activeVariant()"
+      [selectionMode]="selectionMode()"
+      [editMode]="editMode()"
+      [(selection)]="selectedRows"
+      [paginator]="paginatorEnabled()"
+      [rows]="5"
+      [rowsPerPageOptions]="[5, 10, 25]"
+      [stripedRows]="stripedRows()"
+      [rowHover]="rowHover()"
+      [showGridlines]="showGridlines()"
+      [resizableColumns]="true"
+      [multiSortMode]="true"
+      caption="Employees"
+      (sorted)="onSortChange($event)"
+    >
+      <ui-lib-data-grid-column field="id" header="ID" [sortable]="true" width="70px" />
+      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" [filterable]="true" [editable]="true" width="180px" />
+      <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" [filterable]="true" />
+      <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
+      <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
+        <ng-template uiDataGridColumnBody let-row>
+          {{ formatSalary(row.salary) }}
+        </ng-template>
+      </ui-lib-data-grid-column>
+      <ui-lib-data-grid-column field="status" header="Status">
+        <ng-template uiDataGridColumnBody let-row>
+          <span [class]="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
+        </ng-template>
+      </ui-lib-data-grid-column>
+      <ui-lib-data-grid-column field="location" header="Location" [sortable]="true" />
+      <ui-lib-data-grid-column field="joinDate" header="Join Date" [sortable]="true" />
+    </ui-lib-data-grid>
+  </app-doc-section>
+
+  <!-- ── Virtual scroll ─────────────────────────────────────────────── -->
+  <app-doc-section id="virtual-scroll" title="Virtual Scroll">
+    <p>
+      Enable <code>[virtualScroll]="true"</code> to render only the visible rows. The grid
+      uses a fixed-row-height model — set <code>[rowHeight]</code> to match your CSS row
+      height. The example below renders 2,000 rows with negligible DOM overhead.
+    </p>
+
+    <ui-lib-data-grid
+      [value]="largeDataset"
+      dataKey="id"
+      [virtualScroll]="true"
+      scrollHeight="420px"
+      [rowHeight]="48"
+      [rowHover]="true"
+      [stickyHeader]="true"
+      caption="2,000 employees (virtual scroll)"
+    >
+      <ui-lib-data-grid-column field="id" header="#" width="70px" [sortable]="true" />
+      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" width="200px" />
+      <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" />
+      <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
+      <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
+        <ng-template uiDataGridColumnBody let-row>
+          {{ formatSalary(row.salary) }}
+        </ng-template>
+      </ui-lib-data-grid-column>
+      <ui-lib-data-grid-column field="location" header="Location" />
+    </ui-lib-data-grid>
+  </app-doc-section>
+
+  <!-- ── Frozen columns ─────────────────────────────────────────────── -->
+  <app-doc-section id="frozen-columns" title="Frozen Columns">
+    <p>
+      Pin columns to the start or end of the grid with <code>frozen="start"</code> or
+      <code>frozen="end"</code>. Frozen columns remain visible while the user scrolls
+      horizontally through the other columns.
+    </p>
+
+    <ui-lib-data-grid
+      [value]="employees()"
+      dataKey="id"
+      [rowHover]="true"
+      caption="Frozen start + end columns"
+    >
+      <ui-lib-data-grid-column field="id" header="ID" frozen="start" width="70px" />
+      <ui-lib-data-grid-column field="name" header="Name" frozen="start" width="180px" [sortable]="true" />
+      <ui-lib-data-grid-column field="department" header="Department" width="160px" />
+      <ui-lib-data-grid-column field="role" header="Role" width="140px" />
+      <ui-lib-data-grid-column field="joinDate" header="Join Date" width="130px" />
+      <ui-lib-data-grid-column field="location" header="Location" width="140px" />
+      <ui-lib-data-grid-column field="salary" header="Salary" frozen="end" width="130px">
+        <ng-template uiDataGridColumnBody let-row>
+          {{ formatSalary(row.salary) }}
+        </ng-template>
+      </ui-lib-data-grid-column>
+      <ui-lib-data-grid-column field="status" header="Status" frozen="end" width="100px">
+        <ng-template uiDataGridColumnBody let-row>
+          <span [class]="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
+        </ng-template>
+      </ui-lib-data-grid-column>
+    </ui-lib-data-grid>
+  </app-doc-section>
+
+  <!-- ── Cell editing ───────────────────────────────────────────────── -->
+  <app-doc-section id="cell-editing" title="Cell Editing">
+    <p>
+      Set <code>[editMode]="'cell'"</code> on the grid and <code>[editable]="true"</code>
+      on individual columns. Click a cell (or press Enter when focused) to enter edit mode.
+      Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to commit; press <kbd>Escape</kbd> to revert.
+    </p>
+
+    <ui-lib-data-grid
+      [value]="employees()"
+      dataKey="id"
+      editMode="cell"
+      [rowHover]="true"
+      caption="Click any Name or Department cell to edit"
+    >
+      <ui-lib-data-grid-column field="id" header="ID" width="70px" />
+      <ui-lib-data-grid-column field="name" header="Name" [editable]="true" width="200px" />
+      <ui-lib-data-grid-column field="department" header="Department" [editable]="true" />
+      <ui-lib-data-grid-column field="role" header="Role" />
+      <ui-lib-data-grid-column field="salary" header="Salary">
+        <ng-template uiDataGridColumnBody let-row>
+          {{ formatSalary(row.salary) }}
+        </ng-template>
+      </ui-lib-data-grid-column>
+    </ui-lib-data-grid>
+  </app-doc-section>
+
+  <!-- ── Lazy load ──────────────────────────────────────────────────── -->
+  <app-doc-section id="lazy-load" title="Lazy Load (Server-Side)">
+    <p>
+      Set <code>[lazy]="true"</code> and <code>[totalRecords]</code> to delegate
+      sort/filter/pagination to your backend. The grid emits a
+      <code>DataGridLazyLoadEvent</code> whenever state changes.
+    </p>
+
+    @if (lazyLoading()) {
+      <p class="demo-status" aria-live="polite">Loading data…</p>
+    }
+
+    <ui-lib-data-grid
+      [value]="lazyRows()"
+      dataKey="id"
+      [lazy]="true"
+      [totalRecords]="lazyTotal()"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [rowHover]="true"
+      (lazyLoad)="onLazyLoad($event)"
+      caption="Server-side: 500 employees"
+    >
+      <ui-lib-data-grid-column field="id" header="#" [sortable]="true" width="70px" />
+      <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" width="200px" />
+      <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" />
+      <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
+      <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
+        <ng-template uiDataGridColumnBody let-row>
+          {{ formatSalary(row.salary) }}
+        </ng-template>
+      </ui-lib-data-grid-column>
+      <ui-lib-data-grid-column field="location" header="Location" />
+    </ui-lib-data-grid>
+  </app-doc-section>
+
+  <!-- ── Accessibility ──────────────────────────────────────────────── -->
+  <app-doc-section id="accessibility" title="Accessibility">
+    <app-doc-keyboard-nav [rows]="keyboardRows" />
+    <app-doc-aria-table [rows]="ariaRows" />
+  </app-doc-section>
+
+  <!-- ── CSS vars ───────────────────────────────────────────────────── -->
+  <app-doc-section id="css-vars" title="CSS Custom Properties">
+    <app-doc-css-vars-table [rows]="cssVarRows" />
+  </app-doc-section>
+
+  <!-- ── API reference ──────────────────────────────────────────────── -->
+  <app-doc-section id="api" title="API Reference">
+    <app-doc-api-reference [rows]="apiRows" />
+  </app-doc-section>
+
+  <app-doc-quality-badge [audit]="qualityAudit" />
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
     />
-
-    <app-doc-quality-badge [audit]="qualityAudit" />
-
-    <!-- ── Overview ───────────────────────────────────────────────────── -->
-    <app-doc-section id="overview" heading="Overview">
-      <p>
-        The <code>DataGridComponent</code> is the library's flagship premium component. It renders
-        tabular data with a declarative column DSL, supports full client-side or server-side
-        (lazy) operations, and renders only the visible rows when virtual scroll is enabled.
-      </p>
-      <ul>
-        <li><strong>Virtual scroll</strong> — windowed rendering for 10,000+ rows</li>
-        <li><strong>Column pinning</strong> — freeze columns to start or end</li>
-        <li><strong>Column resizing</strong> — drag header edges in expand or fit mode</li>
-        <li><strong>Cell editing</strong> — click-to-edit with custom editor templates</li>
-        <li><strong>Lazy load</strong> — delegate sort/filter/page to a server API</li>
-        <li><strong>Selection</strong> — single, multiple, checkbox, or radio</li>
-        <li><strong>Sorting</strong> — single or multi-column (Ctrl+click)</li>
-        <li><strong>Filtering</strong> — global filter and per-column filter inputs</li>
-      </ul>
-    </app-doc-section>
-
-    <!-- ── Interactive demo ───────────────────────────────────────────── -->
-    <app-doc-section id="interactive-demo" heading="Interactive Demo">
-      <!-- Controls -->
-      <div class="demo-controls">
-        <label>
-          Variant
-          <select (change)="activeVariant.set($any($event.target).value)">
-            @for (variant of variants; track variant) {
-              <option [value]="variant" [selected]="variant === activeVariant()">{{ variant }}</option>
-            }
-          </select>
-        </label>
-        <label>
-          Selection
-          <select (change)="selectionMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)">
-            @for (mode of selectionModes; track mode.value) {
-              <option [value]="mode.value ?? 'null'" [selected]="mode.value === selectionMode()">{{ mode.label }}</option>
-            }
-          </select>
-        </label>
-        <label>
-          Edit mode
-          <select (change)="editMode.set($any($event.target).value === 'null' ? null : $any($event.target).value)">
-            @for (mode of editModes; track mode.value) {
-              <option [value]="mode.value ?? 'null'" [selected]="mode.value === editMode()">{{ mode.label }}</option>
-            }
-          </select>
-        </label>
-        <label class="demo-controls__toggle">
-          <input type="checkbox" [checked]="stripedRows()" (change)="stripedRows.set($any($event.target).checked)" />
-          Striped rows
-        </label>
-        <label class="demo-controls__toggle">
-          <input type="checkbox" [checked]="rowHover()" (change)="rowHover.set($any($event.target).checked)" />
-          Row hover
-        </label>
-        <label class="demo-controls__toggle">
-          <input type="checkbox" [checked]="showGridlines()" (change)="showGridlines.set($any($event.target).checked)" />
-          Gridlines
-        </label>
-        <label class="demo-controls__toggle">
-          <input type="checkbox" [checked]="paginatorEnabled()" (change)="paginatorEnabled.set($any($event.target).checked)" />
-          Paginator
-        </label>
-      </div>
-
-      <p class="demo-status">
-        Sort: <strong>{{ lastSortEvent() }}</strong> · Selected: <strong>{{ selectedCount() }}</strong>
-      </p>
-
-      <ui-lib-data-grid
-        [value]="employees()"
-        dataKey="id"
-        [variant]="activeVariant()"
-        [selectionMode]="selectionMode()"
-        [editMode]="editMode()"
-        [(selection)]="selectedRows"
-        [paginator]="paginatorEnabled()"
-        [rows]="5"
-        [rowsPerPageOptions]="[5, 10, 25]"
-        [stripedRows]="stripedRows()"
-        [rowHover]="rowHover()"
-        [showGridlines]="showGridlines()"
-        [resizableColumns]="true"
-        [multiSortMode]="true"
-        caption="Employees"
-        (sortChange)="onSortChange($event)"
-      >
-        <ui-lib-data-grid-column field="id" header="ID" [sortable]="true" width="70px" />
-        <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" [filterable]="true" [editable]="true" width="180px" />
-        <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" [filterable]="true" />
-        <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
-        <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
-          <ng-template uiDataGridColumnBody let-row>
-            {{ formatSalary(row.salary) }}
-          </ng-template>
-        </ui-lib-data-grid-column>
-        <ui-lib-data-grid-column field="status" header="Status">
-          <ng-template uiDataGridColumnBody let-row>
-            <span [class]="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
-          </ng-template>
-        </ui-lib-data-grid-column>
-        <ui-lib-data-grid-column field="location" header="Location" [sortable]="true" />
-        <ui-lib-data-grid-column field="joinDate" header="Join Date" [sortable]="true" />
-      </ui-lib-data-grid>
-    </app-doc-section>
-
-    <!-- ── Virtual scroll ─────────────────────────────────────────────── -->
-    <app-doc-section id="virtual-scroll" heading="Virtual Scroll">
-      <p>
-        Enable <code>[virtualScroll]="true"</code> to render only the visible rows. The grid
-        uses a fixed-row-height model — set <code>[rowHeight]</code> to match your CSS row
-        height. The example below renders 2,000 rows with negligible DOM overhead.
-      </p>
-
-      <ui-lib-data-grid
-        [value]="largeDataset"
-        dataKey="id"
-        [virtualScroll]="true"
-        virtualScrollHeight="420px"
-        [rowHeight]="48"
-        [rowHover]="true"
-        [stickyHeader]="true"
-        caption="2,000 employees (virtual scroll)"
-      >
-        <ui-lib-data-grid-column field="id" header="#" width="70px" [sortable]="true" />
-        <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" width="200px" />
-        <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" />
-        <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
-        <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
-          <ng-template uiDataGridColumnBody let-row>
-            {{ formatSalary(row.salary) }}
-          </ng-template>
-        </ui-lib-data-grid-column>
-        <ui-lib-data-grid-column field="location" header="Location" />
-      </ui-lib-data-grid>
-    </app-doc-section>
-
-    <!-- ── Frozen columns ─────────────────────────────────────────────── -->
-    <app-doc-section id="frozen-columns" heading="Frozen Columns">
-      <p>
-        Pin columns to the start or end of the grid with <code>frozen="start"</code> or
-        <code>frozen="end"</code>. Frozen columns remain visible while the user scrolls
-        horizontally through the other columns.
-      </p>
-
-      <ui-lib-data-grid
-        [value]="employees()"
-        dataKey="id"
-        [rowHover]="true"
-        caption="Frozen start + end columns"
-      >
-        <ui-lib-data-grid-column field="id" header="ID" frozen="start" width="70px" />
-        <ui-lib-data-grid-column field="name" header="Name" frozen="start" width="180px" [sortable]="true" />
-        <ui-lib-data-grid-column field="department" header="Department" width="160px" />
-        <ui-lib-data-grid-column field="role" header="Role" width="140px" />
-        <ui-lib-data-grid-column field="joinDate" header="Join Date" width="130px" />
-        <ui-lib-data-grid-column field="location" header="Location" width="140px" />
-        <ui-lib-data-grid-column field="salary" header="Salary" frozen="end" width="130px">
-          <ng-template uiDataGridColumnBody let-row>
-            {{ formatSalary(row.salary) }}
-          </ng-template>
-        </ui-lib-data-grid-column>
-        <ui-lib-data-grid-column field="status" header="Status" frozen="end" width="100px">
-          <ng-template uiDataGridColumnBody let-row>
-            <span [class]="statusClass(row.status)">{{ statusLabel(row.status) }}</span>
-          </ng-template>
-        </ui-lib-data-grid-column>
-      </ui-lib-data-grid>
-    </app-doc-section>
-
-    <!-- ── Cell editing ───────────────────────────────────────────────── -->
-    <app-doc-section id="cell-editing" heading="Cell Editing">
-      <p>
-        Set <code>[editMode]="'cell'"</code> on the grid and <code>[editable]="true"</code>
-        on individual columns. Click a cell (or press Enter when focused) to enter edit mode.
-        Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to commit; press <kbd>Escape</kbd> to revert.
-      </p>
-
-      <ui-lib-data-grid
-        [value]="employees()"
-        dataKey="id"
-        editMode="cell"
-        [rowHover]="true"
-        caption="Click any Name or Department cell to edit"
-      >
-        <ui-lib-data-grid-column field="id" header="ID" width="70px" />
-        <ui-lib-data-grid-column field="name" header="Name" [editable]="true" width="200px" />
-        <ui-lib-data-grid-column field="department" header="Department" [editable]="true" />
-        <ui-lib-data-grid-column field="role" header="Role" />
-        <ui-lib-data-grid-column field="salary" header="Salary">
-          <ng-template uiDataGridColumnBody let-row>
-            {{ formatSalary(row.salary) }}
-          </ng-template>
-        </ui-lib-data-grid-column>
-      </ui-lib-data-grid>
-    </app-doc-section>
-
-    <!-- ── Lazy load ──────────────────────────────────────────────────── -->
-    <app-doc-section id="lazy-load" heading="Lazy Load (Server-Side)">
-      <p>
-        Set <code>[lazy]="true"</code> and <code>[totalRecords]</code> to delegate
-        sort/filter/pagination to your backend. The grid emits a
-        <code>DataGridLazyLoadEvent</code> whenever state changes.
-      </p>
-
-      <ui-lib-data-grid
-        [value]="lazyRows()"
-        dataKey="id"
-        [lazy]="true"
-        [totalRecords]="lazyTotal()"
-        [loading]="lazyLoading()"
-        [paginator]="true"
-        [rows]="10"
-        [rowsPerPageOptions]="[10, 25, 50]"
-        [rowHover]="true"
-        (lazyLoad)="onLazyLoad($event)"
-        caption="Server-side: 500 employees"
-      >
-        <ui-lib-data-grid-column field="id" header="#" [sortable]="true" width="70px" />
-        <ui-lib-data-grid-column field="name" header="Name" [sortable]="true" width="200px" />
-        <ui-lib-data-grid-column field="department" header="Department" [sortable]="true" />
-        <ui-lib-data-grid-column field="role" header="Role" [sortable]="true" />
-        <ui-lib-data-grid-column field="salary" header="Salary" [sortable]="true">
-          <ng-template uiDataGridColumnBody let-row>
-            {{ formatSalary(row.salary) }}
-          </ng-template>
-        </ui-lib-data-grid-column>
-        <ui-lib-data-grid-column field="location" header="Location" />
-      </ui-lib-data-grid>
-    </app-doc-section>
-
-    <!-- ── Accessibility ──────────────────────────────────────────────── -->
-    <app-doc-section id="accessibility" heading="Accessibility">
-      <app-doc-keyboard-nav [rows]="keyboardRows" />
-      <app-doc-aria-table [rows]="ariaRows" />
-    </app-doc-section>
-
-    <!-- ── CSS vars ───────────────────────────────────────────────────── -->
-    <app-doc-section id="css-vars" heading="CSS Custom Properties">
-      <app-doc-css-vars-table [rows]="cssVarRows" />
-    </app-doc-section>
-
-    <!-- ── API reference ──────────────────────────────────────────────── -->
-    <app-doc-section id="api" heading="API Reference">
-      <app-doc-api-reference [rows]="apiRows" />
-    </app-doc-section>
   </div>
+
 </app-doc-page-layout>
