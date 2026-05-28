@@ -4,6 +4,27 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Prompt 11 DONE ✅]
+Changed:
+  src/lib/data-grid/data-grid.types.ts: full type definitions (variant/size/sort/selection/filter/resize/edit/frozen; all event + template-context interfaces)
+  src/lib/data-grid/data-grid.constants.ts: DATA_GRID_DEFAULTS + DATA_GRID_CLASS
+  src/lib/data-grid/data-grid-column.component.ts: render-less column DSL; 5 template directives
+  src/lib/data-grid/data-grid.component.ts: full implementation — virtual scroll, column pinning, resizing, cell editing, lazy load, multi-sort, global+column filter, row selection, WAI-ARIA grid keyboard nav; initial lazyLoad emitted in ngAfterViewInit
+  src/lib/data-grid/data-grid.component.html + .scss: complete ARIA template; design tokens; cascade layer; logical CSS; 3 variants/sizes
+  src/lib/data-grid/data-grid.component.spec.ts: 46 unit tests (all green)
+  src/lib/data-grid/data-grid.a11y.spec.ts: 35 a11y tests — WAI-ARIA roles, aria-sort lifecycle, aria-rowcount/rowindex/colindex, keyboard sort/selection, checkbox labels, filter labels, empty state, axe audit (6 scenarios)
+  src/lib/data-grid/README.md: full co-located API contract
+  data-grid/ng-package.json + package.json: entry point wiring; library package.json exports + typesVersions updated
+  i18n/en.ts,de.ts,fr.ts,es.ts: 11 new data-grid keys
+  docs/reference/bundle-sizes.json: snapshot updated (data-grid: 144664 B raw / 20962 B gzip)
+  demo/pages/data-grid/: full demo page (8 sections)
+  docs/COMPONENT_SCORES.md: DataGrid added (avg 9.0)
+State: COMPLETE — 6123/6123 tests green (228 suites); pushed ✅
+Verification: npx jest --no-coverage (PASS ✅); ESLint data-grid/ (PASS ✅); git push (PASS ✅)
+Next step: Prompt 2 (Sprint B — reference doc generator script)
+
+---
+
 Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
 Changed:
   input-otp.component.ts: inject UiLibI18nService; digitAriaLabelPrefix/Connector/pasteAnnouncement defaults ''; groupAriaLabel/getCellAriaLabel/announcePasteCompletion use i18n fallback

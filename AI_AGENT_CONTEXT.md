@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** RTL layout pass — **COMPLETE ✅** — 52 SCSS files migrated to logical CSS properties; all `declaration-strict-value` font-size/color errors across 21 files resolved; `property-disallowed-list` severity upgraded to **error** so physical directional properties now block commits; new `LIBRARY_CONVENTIONS.md → Logical CSS / RTL Rule` section added. Commits: `65ba40c1` + `db096fa2` on `feat/i18n-params-locales`.
-- **Next queue:** Step 4: component score ceiling push (6-phase on Select, AutoComplete, CascadeSelect, ColorPicker — target 9.5 on each). Then: Angular Signals-first Data Grid (Step 5).
+- **Active focus:** Prompt 8 — 8.2-cluster batch upgrade (Knob ✅ 8.2→8.7, Avatar ✅ 8.2→8.8). Next targets: Timeline (8.3), DatePicker (8.3), Carousel (8.4). Pattern: typed `ng-template` slot, missing theme token, mount animation, i18n fallback.
+- **Next queue:** Continue Prompt 8 cluster batch on remaining low-scorers. Then Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: Prompt 8 — 8.2-cluster batch: Knob (8.2→8.7) + Avatar (8.2→8.8) ✅]
+Changed:
+  knob/knob.component.ts: typed #valueLabel slot (KnobValueContext: $implicit, formattedValue, normalized); UiLibI18nService i18n fallback for aria-label; NgTemplateOutlet
+  knob/knob.component.html: #valueLabel branch before @else showValue
+  knob/knob.component.scss: --uilib-knob-focus-ring-offset token; transition-duration via --uilib-transition-duration-fast; uilib-knob-mount keyframe; animation declaration; prefers-reduced-motion guard
+  knob/knob.types.ts: KnobValueContext interface exported
+  knob/index.ts: export KnobValueContext
+  avatar/avatar.ts: typed #fallback slot (AvatarFallbackContext: size, shape, variant); UiLibI18nService i18n fallback for ariaLabelResolved + resolvedImageAlt; NgTemplateOutlet
+  avatar/avatar.html: #fallback branch before plain <ng-content />
+  avatar/avatar.scss: --uilib-avatar-font-weight token (600); uilib-avatar-mount keyframe + animation; prefers-reduced-motion guard
+  avatar/avatar.types.ts: AvatarFallbackContext interface
+  avatar/index.ts: export AvatarFallbackContext
+  i18n/en.ts,de.ts,fr.ts,es.ts: knob.dial (Knob) + avatar.label (Avatar) keys in all four locales
+  docs/COMPONENT_SCORES.md: Knob 8.2→8.7; Avatar 8.2→8.8
+  docs/reference/bundle-sizes.json: knob + avatar baselines updated after intentional NgTemplateOutlet + i18n growth
+State: COMPLETE — ESLint ✅; ng build zero warnings ✅; 36/36 avatar tests ✅; pushed 519e7609 + 001a12d9 ✅
+Verification: npx eslint avatar/ (PASS ✅); ng build ui-lib-custom (PASS ✅); npx jest avatar --no-coverage (36 ✅); git push (PASS ✅)
+Next step: Prompt 8 continues — Timeline (8.3 → target 8.8), then DatePicker (8.3), Carousel (8.4)
+
 Date: 2026-05-28 [feat: Prompt 3 — APG patterns + usage examples + data-grid.md hand-finish ✅]
 Changed:
   scripts/fill-apg-patterns.mjs: NEW — maps 100+ components to WAI-ARIA APG pattern URLs
@@ -110,27 +129,6 @@ Changed:
 State: COMPLETE — generator idempotent; npm run docs:reference passes clean
 Verification: node scripts/generate-reference-doc.mjs data-grid (10 outputs ✅); npm run docs:reference (96 files ✅); git commit clean ✅
 Next step: Prompt 5 (Sprint D — reduced-motion stylelint custom rule + library-wide `prefers-reduced-motion` pass)
-
-Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Prompt 11 DONE ✅]
-Changed:
-  src/lib/data-grid/data-grid.types.ts: full type definitions (variant/size/sort/selection/filter/resize/edit/frozen; all event + template-context interfaces)
-  src/lib/data-grid/data-grid.constants.ts: DATA_GRID_DEFAULTS + DATA_GRID_CLASS
-  src/lib/data-grid/data-grid-column.component.ts: render-less column DSL; 5 template directives
-  src/lib/data-grid/data-grid.component.ts: full implementation — virtual scroll, column pinning, resizing, cell editing, lazy load, multi-sort, global+column filter, row selection, WAI-ARIA grid keyboard nav; initial lazyLoad emitted in ngAfterViewInit
-  src/lib/data-grid/data-grid.component.html + .scss: complete ARIA template; design tokens; cascade layer; logical CSS; 3 variants/sizes
-  src/lib/data-grid/data-grid.component.spec.ts: 46 unit tests (all green)
-  src/lib/data-grid/data-grid.a11y.spec.ts: 35 a11y tests — WAI-ARIA roles, aria-sort lifecycle, aria-rowcount/rowindex/colindex, keyboard sort/selection, checkbox labels, filter labels, empty state, axe audit (6 scenarios)
-  src/lib/data-grid/README.md: full co-located API contract — all inputs/outputs/models, column DSL, template slots, keyboard interactions, 30 CSS tokens, usage examples
-  src/lib/data-grid/index.ts: barrel export
-  data-grid/ng-package.json + package.json: entry point wiring; library package.json exports + typesVersions updated
-  i18n/en.ts,de.ts,fr.ts,es.ts: 11 new data-grid keys
-  test/entry-points.spec.ts: data-grid import test added
-  docs/reference/bundle-sizes.json: snapshot updated (data-grid: 144664 B raw / 20962 B gzip)
-  demo/pages/data-grid/: full demo page (8 sections: interactive config, virtual scroll, frozen cols, cell editing, lazy load, a11y, CSS vars, API ref)
-  docs/COMPONENT_SCORES.md: DataGrid added (avg 9.0; Docs 8 — remaining gap is docs/reference/components/data-grid.md and Storybook stories)
-State: ALL MANDATORY CHECKLIST ITEMS COMPLETE — 6123/6123 tests green (228 suites); ESLint + stylelint clean; pushed ✅
-Verification: npx jest --no-coverage (PASS ✅, 6123 tests, 228 suites); ESLint data-grid/ (PASS ✅); git push (PASS ✅)
-Next step: Prompt 2 (Sprint B — reference doc generator script); then Prompt 5 (Sprint D — reduced-motion stylelint); these unblock all remaining Prompt 7 upgrades
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
