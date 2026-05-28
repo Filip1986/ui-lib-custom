@@ -23,7 +23,10 @@ Accordion container managing panel expansion state.
 
 ### Outputs
 
-_none_
+| Name             | Type                   | Description |
+| ---------------- | ---------------------- | ----------- |
+| `expandedChange` | `AccordionChangeEvent` | —           |
+| `panelToggle`    | `AccordionChangeEvent` | —           |
 
 ## Content Projection
 

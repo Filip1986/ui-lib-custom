@@ -13,22 +13,24 @@ The `value` input is a plain `input()` (not `model()`), so two-way binding requi
 
 ### Inputs
 
-| Name       | Type                  | Default                          | Description                                                                                                                                                         |
-| ---------- | --------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `appendTo` | `ColorPickerAppendTo` | `COLOR_PICKER_DEFAULTS.AppendTo` | Where to mount the floating popup panel. `'body'`, a CSS selector string, or an `HTMLElement`. Default: `'body'`.                                                   |
-| `disabled` | `boolean`             | `COLOR_PICKER_DEFAULTS.Disabled` | Disables all interaction and drag handling. Synced with CVA `setDisabledState`. Default: `false`.                                                                   |
-| `format`   | `ColorFormat`         | `COLOR_PICKER_DEFAULTS.Format`   | Output format for emitted color values. `'hex'` → 6-char string; `'rgb'` → `RgbColor`; `'hsb'` → `HsbColor`. Default: `'hex'`.                                      |
-| `inline`   | `boolean`             | `COLOR_PICKER_DEFAULTS.Inline`   | When `true`, renders the picker panel inline at its natural DOM position instead of as a floating popup. Default: `false`.                                          |
-| `inputId`  | `string`              | `COLOR_PICKER_DEFAULTS.InputId`  | Custom `id` for the hidden `<input>` element used by form frameworks. An auto-generated id is used when this is empty.                                              |
-| `tabindex` | `number`              | `COLOR_PICKER_DEFAULTS.TabIndex` | `tabindex` of the trigger swatch button. Default: `0`.                                                                                                              |
-| `value`    | `ColorPickerValue`    | `null`                           | Bound color value. Accepts a hex string, `RgbColor`, or `HsbColor` object depending on `format`. Does not use `model()` — bind via `[(ngModel)]` or reactive forms. |
+| Name       | Type                        | Default                          | Description                                                                                                                                                         |
+| ---------- | --------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appendTo` | `ColorPickerAppendTo`       | `COLOR_PICKER_DEFAULTS.AppendTo` | Where to mount the floating popup panel. `'body'`, a CSS selector string, or an `HTMLElement`. Default: `'body'`.                                                   |
+| `disabled` | `boolean`                   | `COLOR_PICKER_DEFAULTS.Disabled` | Disables all interaction and drag handling. Synced with CVA `setDisabledState`. Default: `false`.                                                                   |
+| `format`   | `ColorFormat`               | `COLOR_PICKER_DEFAULTS.Format`   | Output format for emitted color values. `'hex'` → 6-char string; `'rgb'` → `RgbColor`; `'hsb'` → `HsbColor`. Default: `'hex'`.                                      |
+| `inline`   | `boolean`                   | `COLOR_PICKER_DEFAULTS.Inline`   | When `true`, renders the picker panel inline at its natural DOM position instead of as a floating popup. Default: `false`.                                          |
+| `inputId`  | `string`                    | `COLOR_PICKER_DEFAULTS.InputId`  | Custom `id` for the hidden `<input>` element used by form frameworks. An auto-generated id is used when this is empty.                                              |
+| `tabindex` | `number`                    | `COLOR_PICKER_DEFAULTS.TabIndex` | `tabindex` of the trigger swatch button. Default: `0`.                                                                                                              |
+| `value`    | `ColorPickerValue`          | `null`                           | Bound color value. Accepts a hex string, `RgbColor`, or `HsbColor` object depending on `format`. Does not use `model()` — bind via `[(ngModel)]` or reactive forms. |
+| `variant`  | `ColorPickerVariant | null` | `null`                           | Design variant override. Falls back to `ThemeConfigService.variant()` when `null`.                                                                                  |
 
 ### Outputs
 
-| Name   | Type   | Description                                                      |
-| ------ | ------ | ---------------------------------------------------------------- |
-| `hide` | `void` | Emitted when the popup panel closes. Not emitted in inline mode. |
-| `show` | `void` | Emitted when the popup panel opens. Not emitted in inline mode.  |
+| Name          | Type                     | Description                                                                                                                                                  |
+| ------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `colorChange` | `ColorPickerChangeEvent` | Emitted on every color change — pointer drag, keyboard, or text-input blur. Payload carries `originalEvent` and the formatted `value` according to `format`. |
+| `hide`        | `void`                   | Emitted when the popup panel closes. Not emitted in inline mode.                                                                                             |
+| `show`        | `void`                   | Emitted when the popup panel opens. Not emitted in inline mode.                                                                                              |
 
 ## Content Projection
 

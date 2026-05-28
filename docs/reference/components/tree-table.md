@@ -21,6 +21,7 @@ TreeTable renders hierarchical data as an expandable table. Each `TreeTableNode`
 | `globalFilterPlaceholder` | `string`                  | `'Search...'`                               | Placeholder for the global filter input.                                                                        |
 | `scrollable`              | `boolean`                 | `false`                                     | When `true`, the table body is scrollable and `scrollHeight` constrains it.                                     |
 | `scrollHeight`            | `string | null`           | `null`                                      | CSS height value for the scrollable body, e.g. `'400px'` or `'60vh'`. Only applied when `scrollable` is `true`. |
+| `selectionMode`           | `TreeTableSelectionMode`  | `null`                                      | How rows respond to click interactions.                                                                         |
 | `size`                    | `TreeTableSize`           | `TREE_TABLE_DEFAULTS.SIZE as TreeTableSize` | Row height / density.                                                                                           |
 | `styleClass`              | `string`                  | `''`                                        | Extra CSS class applied to the host element.                                                                    |
 | `value`                   | `TreeTableNode[]`         | `[]`                                        | Root-level nodes to display.                                                                                    |
@@ -36,9 +37,13 @@ TreeTable renders hierarchical data as an expandable table. Each `TreeTableNode`
 
 ### Outputs
 
-| Name         | Type                 | Description                                        |
-| ------------ | -------------------- | -------------------------------------------------- |
-| `sortChange` | `TreeTableSortEvent` | Emitted when the sort column or direction changes. |
+| Name           | Type                         | Description                                        |
+| -------------- | ---------------------------- | -------------------------------------------------- |
+| `nodeCollapse` | `TreeTableNodeCollapseEvent` | Emitted when a node row is collapsed.              |
+| `nodeExpand`   | `TreeTableNodeExpandEvent`   | Emitted when a node row is expanded.               |
+| `nodeSelect`   | `TreeTableNodeSelectEvent`   | Emitted when a node is selected.                   |
+| `nodeUnselect` | `TreeTableNodeSelectEvent`   | Emitted when a node is unselected.                 |
+| `sortChange`   | `TreeTableSortEvent`         | Emitted when the sort column or direction changes. |
 
 ## Content Projection
 
@@ -62,6 +67,7 @@ _none_
 | `--uilib-tree-table-filter-border-focus`     | `1px solid var(--uilib-color-primary, #1976d2)`         |
 | `--uilib-tree-table-filter-border-radius`    | `var(--uilib-radius-sm, 4px)`                           |
 | `--uilib-tree-table-filter-color`            | `var(--uilib-color-text-primary, #212121)`              |
+| `--uilib-tree-table-filter-icon-font-size`   | `var(--uilib-font-size-sm, 0.875rem)`                   |
 | `--uilib-tree-table-filter-padding`          | `0.375rem 2.25rem 0.375rem 0.625rem`                    |
 | `--uilib-tree-table-font-size`               | `var(--uilib-font-size-base, 0.875rem)`                 |
 | `--uilib-tree-table-header-bg`               | `var(--uilib-color-surface-alt, #f5f5f5)`               |
@@ -83,6 +89,7 @@ _none_
 | `--uilib-tree-table-row-color-selected`      | `var(--uilib-color-primary, #1976d2)`                   |
 | `--uilib-tree-table-sort-icon-color`         | `var(--uilib-color-text-secondary, #9e9e9e)`            |
 | `--uilib-tree-table-sort-icon-color-active`  | `var(--uilib-color-primary, #1976d2)`                   |
+| `--uilib-tree-table-sort-icon-font-size`     | `var(--uilib-font-size-xs, 0.75rem)`                    |
 | `--uilib-tree-table-toggle-bg-hover`         | `var(--uilib-color-surface-hover, rgba(0, 0, 0, 0.08))` |
 | `--uilib-tree-table-toggle-color`            | `var(--uilib-color-text-secondary, #616161)`            |
 | `--uilib-tree-table-toggle-size`             | `1.25rem`                                               |

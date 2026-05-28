@@ -13,20 +13,25 @@ ConfirmDialog — a modal confirmation overlay with configurable accept/reject a
 
 ### Inputs
 
-| Name              | Type            | Default                               | Description                                                                           |
-| ----------------- | --------------- | ------------------------------------- | ------------------------------------------------------------------------------------- |
-| `acceptIcon`      | `string | null` | `null`                                | CSS class for an icon inside the accept button.                                       |
-| `acceptLabel`     | `string`        | `'Yes'`                               | Accept button label.                                                                  |
-| `blockScroll`     | `boolean`       | `true`                                | Whether body scroll is locked while the dialog is open.                               |
-| `closable`        | `boolean`       | `true`                                | Whether the close (×) button is rendered in the header.                               |
-| `dismissableMask` | `boolean`       | `false`                               | Whether clicking the backdrop closes the dialog (invoking reject).                    |
-| `header`          | `string`        | `'Confirmation'`                      | Dialog header / title text (declarative fallback).                                    |
-| `icon`            | `string | null` | `null`                                | CSS class for the icon rendered before the message.                                   |
-| `key`             | `string`        | `''`                                  | Key that matches incoming ConfirmationService calls to this specific dialog instance. |
-| `message`         | `string`        | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                                     |
-| `rejectIcon`      | `string | null` | `null`                                | CSS class for an icon inside the reject button.                                       |
-| `rejectLabel`     | `string`        | `'No'`                                | Reject button label.                                                                  |
-| `styleClass`      | `string | null` | `null`                                | Additional CSS classes applied to the host element.                                   |
+| Name              | Type                          | Default                               | Description                                                                               |
+| ----------------- | ----------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `acceptIcon`      | `string | null`               | `null`                                | CSS class for an icon inside the accept button.                                           |
+| `acceptLabel`     | `string`                      | `''`                                  | Accept button label. Defaults to the active locale's 'confirm-dialog.accept' translation. |
+| `acceptSeverity`  | `ConfirmDialogButtonSeverity` | `'primary'`                           | Visual severity applied to the accept button.                                             |
+| `blockScroll`     | `boolean`                     | `true`                                | Whether body scroll is locked while the dialog is open.                                   |
+| `closable`        | `boolean`                     | `true`                                | Whether the close (×) button is rendered in the header.                                   |
+| `defaultFocus`    | `ConfirmDialogDefaultFocus`   | `'accept'`                            | Which button receives initial focus when the dialog opens.                                |
+| `dismissableMask` | `boolean`                     | `false`                               | Whether clicking the backdrop closes the dialog (invoking reject).                        |
+| `header`          | `string`                      | `'Confirmation'`                      | Dialog header / title text (declarative fallback).                                        |
+| `icon`            | `string | null`               | `null`                                | CSS class for the icon rendered before the message.                                       |
+| `key`             | `string`                      | `''`                                  | Key that matches incoming ConfirmationService calls to this specific dialog instance.     |
+| `message`         | `string`                      | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                                         |
+| `position`        | `ConfirmDialogPosition`       | `'center'`                            | Viewport position of the dialog panel.                                                    |
+| `rejectIcon`      | `string | null`               | `null`                                | CSS class for an icon inside the reject button.                                           |
+| `rejectLabel`     | `string`                      | `''`                                  | Reject button label. Defaults to the active locale's 'confirm-dialog.reject' translation. |
+| `rejectSeverity`  | `ConfirmDialogButtonSeverity` | `'secondary'`                         | Visual severity applied to the reject button.                                             |
+| `styleClass`      | `string | null`               | `null`                                | Additional CSS classes applied to the host element.                                       |
+| `variant`         | `ConfirmDialogVariant | null` | `null`                                | Design variant override; inherits from ThemeConfigService when not set.                   |
 
 ### Models (two-way bindable)
 

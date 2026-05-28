@@ -13,10 +13,11 @@ ScrollPanel — a styled scrollable container with custom CSS scrollbar theming.
 
 ### Inputs
 
-| Name         | Type            | Default | Description                                                                                                                                                                                    |
-| ------------ | --------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null` | `null`  | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel is a meaningful landmark. Falls back to `null` (no label) when omitted. |
-| `styleClass` | `string | null` | `null`  | Additional CSS classes to attach to the host element.                                                                                                                                          |
+| Name         | Type                        | Default | Description                                                                                                                                                                                    |
+| ------------ | --------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null`             | `null`  | Accessible label for the scrollable region (`aria-label` on the inner content wrapper). Recommended whenever the panel is a meaningful landmark. Falls back to `null` (no label) when omitted. |
+| `styleClass` | `string | null`             | `null`  | Additional CSS classes to attach to the host element.                                                                                                                                          |
+| `variant`    | `ScrollPanelVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                                                                                                                                |
 
 ### Outputs
 

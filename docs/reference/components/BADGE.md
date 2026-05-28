@@ -45,6 +45,7 @@ _none_
 | `--uilib-badge-border`                | `var(--uilib-border-dark)`                                            |
 | `--uilib-badge-border-color-resolved` | `transparent`                                                         |
 | `--uilib-badge-border-width-resolved` | `0`                                                                   |
+| `--uilib-badge-dot-font-size`         | `0`                                                                   |
 | `--uilib-badge-dot-size`              | `0.5rem`                                                              |
 | `--uilib-badge-fg`                    | `var(--uilib-text-dark-primary)`                                      |
 | `--uilib-badge-fg-resolved`           | `var(--uilib-badge-fg, var(--uilib-color-neutral-900))`               |

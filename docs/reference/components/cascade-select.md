@@ -38,13 +38,15 @@ CascadeSelect component with hierarchical single-value selection.
 
 ### Outputs
 
-| Name                 | Type                     | Description                                                                                                    |
-| -------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `cascadeSelectBlur`  | `FocusEvent`             | Host lost focus. Named `cascadeSelectBlur` (not `blur`) to avoid shadowing the native DOM `blur` event.        |
-| `cascadeSelectFocus` | `FocusEvent`             | Host received focus. Named `cascadeSelectFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
-| `clear`              | `void`                   | Emitted when the clear (×) button is clicked.                                                                  |
-| `hide`               | `CascadeSelectHideEvent` | Emitted when the dropdown panel is closed.                                                                     |
-| `show`               | `CascadeSelectShowEvent` | Emitted when the dropdown panel is opened.                                                                     |
+| Name                 | Type                            | Description                                                                                                                    |
+| -------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `cascadeChange`      | `CascadeSelectChangeEvent`      | Emitted when a leaf option is selected. Named `cascadeChange` (not `change`) to avoid shadowing the native DOM `change` event. |
+| `cascadeSelectBlur`  | `FocusEvent`                    | Host lost focus. Named `cascadeSelectBlur` (not `blur`) to avoid shadowing the native DOM `blur` event.                        |
+| `cascadeSelectFocus` | `FocusEvent`                    | Host received focus. Named `cascadeSelectFocus` (not `focus`) to avoid shadowing the native DOM `focus` event.                 |
+| `clear`              | `void`                          | Emitted when the clear (×) button is clicked.                                                                                  |
+| `groupChange`        | `CascadeSelectGroupChangeEvent` | Emitted when the user navigates into a sub-group at any level.                                                                 |
+| `hide`               | `CascadeSelectHideEvent`        | Emitted when the dropdown panel is closed.                                                                                     |
+| `show`               | `CascadeSelectShowEvent`        | Emitted when the dropdown panel is opened.                                                                                     |
 
 ## Content Projection
 

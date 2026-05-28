@@ -13,16 +13,20 @@ ConfirmPopup — a lightweight anchored confirmation popup with accept/reject ac
 
 ### Inputs
 
-| Name          | Type            | Default                               | Description                                                                    |
-| ------------- | --------------- | ------------------------------------- | ------------------------------------------------------------------------------ |
-| `acceptIcon`  | `string | null` | `null`                                | CSS class for an icon inside the accept button.                                |
-| `acceptLabel` | `string`        | `'Yes'`                               | Accept button label.                                                           |
-| `icon`        | `string | null` | `null`                                | CSS class for the icon rendered before the message.                            |
-| `key`         | `string`        | `''`                                  | Key that matches incoming ConfirmPopupService calls to this specific instance. |
-| `message`     | `string`        | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                              |
-| `rejectIcon`  | `string | null` | `null`                                | CSS class for an icon inside the reject button.                                |
-| `rejectLabel` | `string`        | `'No'`                                | Reject button label.                                                           |
-| `styleClass`  | `string | null` | `null`                                | Additional CSS classes applied to the host element.                            |
+| Name             | Type                         | Default                               | Description                                                                    |
+| ---------------- | ---------------------------- | ------------------------------------- | ------------------------------------------------------------------------------ |
+| `acceptIcon`     | `string | null`              | `null`                                | CSS class for an icon inside the accept button.                                |
+| `acceptLabel`    | `string`                     | `'Yes'`                               | Accept button label.                                                           |
+| `acceptSeverity` | `ConfirmPopupButtonSeverity` | `'primary'`                           | Visual severity applied to the accept button.                                  |
+| `defaultFocus`   | `ConfirmPopupDefaultFocus`   | `'accept'`                            | Which button receives initial focus when the popup opens.                      |
+| `icon`           | `string | null`              | `null`                                | CSS class for the icon rendered before the message.                            |
+| `key`            | `string`                     | `''`                                  | Key that matches incoming ConfirmPopupService calls to this specific instance. |
+| `message`        | `string`                     | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                              |
+| `rejectIcon`     | `string | null`              | `null`                                | CSS class for an icon inside the reject button.                                |
+| `rejectLabel`    | `string`                     | `'No'`                                | Reject button label.                                                           |
+| `rejectSeverity` | `ConfirmPopupButtonSeverity` | `'secondary'`                         | Visual severity applied to the reject button.                                  |
+| `styleClass`     | `string | null`              | `null`                                | Additional CSS classes applied to the host element.                            |
+| `variant`        | `ConfirmPopupVariant | null` | `null`                                | Design variant override; inherits from ThemeConfigService when not set.        |
 
 ### Models (two-way bindable)
 

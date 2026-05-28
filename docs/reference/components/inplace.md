@@ -13,15 +13,15 @@ Inplace — inline editing component that toggles between a display and content 
 
 ### Inputs
 
-| Name           | Type                    | Default           | Description                                                                  |
-| -------------- | ----------------------- | ----------------- | ---------------------------------------------------------------------------- |
-| `closable`     | `boolean`               | `false`           | When true, a close button is rendered inside the content slot to deactivate. |
-| `closeIcon`    | `string`                | `'pi pi-times'`   | Icon class for the close button (e.g. "pi pi-times").                        |
-| `closeLabel`   | `string`                | `'Close editor'`  | Accessible label for the close button. Override for i18n.                    |
-| `disabled`     | `boolean`               | `false`           | When true, no interaction is allowed and the display slot appears disabled.  |
-| `displayLabel` | `string`                | `'Click to edit'` | Accessible label for the display button. Override for i18n.                  |
-| `styleClass`   | `string | null`         | `null`            | Additional CSS classes to attach to the host element.                        |
-| `variant`      | `InplaceVariant | null` | `null`            | Visual variant — inherits from ThemeConfigService when not set.              |
+| Name           | Type                    | Default         | Description                                                                                 |
+| -------------- | ----------------------- | --------------- | ------------------------------------------------------------------------------------------- |
+| `closable`     | `boolean`               | `false`         | When true, a close button is rendered inside the content slot to deactivate.                |
+| `closeIcon`    | `string`                | `'pi pi-times'` | Icon class for the close button (e.g. "pi pi-times").                                       |
+| `closeLabel`   | `string`                | `''`            | Accessible label for the close button. Falls back to locale 'inplace.close' when empty.     |
+| `disabled`     | `boolean`               | `false`         | When true, no interaction is allowed and the display slot appears disabled.                 |
+| `displayLabel` | `string`                | `''`            | Accessible label for the display button. Falls back to locale 'inplace.display' when empty. |
+| `styleClass`   | `string | null`         | `null`          | Additional CSS classes to attach to the host element.                                       |
+| `variant`      | `InplaceVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                             |
 
 ### Models (two-way bindable)
 
@@ -52,6 +52,7 @@ Inplace — inline editing component that toggles between a display and content 
 | `--uilib-inplace-close-button-border-radius` | `var(--uilib-radius-full, 9999px)`               |
 | `--uilib-inplace-close-button-color`         | `var(--uilib-color-text, #374151)`               |
 | `--uilib-inplace-close-button-size`          | `1.75rem`                                        |
+| `--uilib-inplace-close-icon-font-size`       | `0.7em`                                          |
 | `--uilib-inplace-content-gap`                | `0.5rem`                                         |
 | `--uilib-inplace-disabled-opacity`           | `0.5`                                            |
 | `--uilib-inplace-display-bg-hover`           | `rgba(0, 0, 0, 0.04)`                            |

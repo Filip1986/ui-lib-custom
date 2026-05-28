@@ -20,6 +20,7 @@ Galleria is a media gallery component for displaying images or other content wit
 | `circular`                  | `boolean`                       | `false`                                | When true, navigation wraps around from the last item to the first and vice versa.         |
 | `containerStyle`            | `Record<string, string> | null` | `null`                                 | Inline styles for the gallery container element.                                           |
 | `fullScreen`                | `boolean`                       | `false`                                | When true, a fullscreen toggle button is rendered; use `visible` to control open state.    |
+| `indicatorsPosition`        | `GalleriaIndicatorsPosition`    | `'bottom'`                             | Position of the indicator dots.                                                            |
 | `lightboxLabel`             | `string | null`                 | `null`                                 | Accessible label for the fullscreen dialog container.                                      |
 | `nextLabel`                 | `string | null`                 | `null`                                 | Accessible label for the next-item navigation button.                                      |
 | `numScroll`                 | `number`                        | `GALLERIA_DEFAULT_NUM_SCROLL`          | Number of thumbnails to scroll per thumbnail-navigator click.                              |
@@ -34,6 +35,7 @@ Galleria is a media gallery component for displaying images or other content wit
 | `showThumbnails`            | `boolean`                       | `true`                                 | When true, the thumbnail strip is rendered.                                                |
 | `size`                      | `GalleriaSize`                  | `'md'`                                 | Component size token.                                                                      |
 | `styleClass`                | `string | null`                 | `null`                                 | Additional CSS class(es) applied to the host element.                                      |
+| `thumbnailsPosition`        | `GalleriaThumbnailsPosition`    | `'bottom'`                             | Position of the thumbnail strip relative to the main item.                                 |
 | `transitionInterval`        | `number`                        | `GALLERIA_DEFAULT_TRANSITION_INTERVAL` | Interval in milliseconds between automatic slide transitions.                              |
 | `value`                     | `GalleriaItem[]`                | `[]`                                   | Array of data items to display.                                                            |
 | `variant`                   | `GalleriaVariant | null`        | `null`                                 | Design variant; inherits from ThemeConfigService when null.                                |
@@ -83,6 +85,7 @@ _none_
 | `--uilib-galleria-nav-radius`                      | `50%`                                           |
 | `--uilib-galleria-nav-size`                        | `2.5rem`                                        |
 | `--uilib-galleria-thumbnail-gap`                   | `0.25rem`                                       |
+| `--uilib-galleria-thumbnail-index-font-size`       | `var(--uilib-font-size-xs, 0.75rem)`            |
 | `--uilib-galleria-thumbnail-item-border`           | `2px solid transparent`                         |
 | `--uilib-galleria-thumbnail-item-border-active`    | `2px solid var(--uilib-color-primary, #6366f1)` |
 | `--uilib-galleria-thumbnail-item-opacity-inactive` | `0.6`                                           |

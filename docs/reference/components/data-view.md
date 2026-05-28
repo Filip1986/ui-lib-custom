@@ -64,6 +64,7 @@ _none_
 | `--uilib-data-view-bg`                         | `var(--uilib-surface-color, #ffffff)`                                                |
 | `--uilib-data-view-border`                     | `1px solid var(--uilib-border-color, #dee2e6)`                                       |
 | `--uilib-data-view-border-radius`              | `var(--uilib-border-radius, 6px)`                                                    |
+| `--uilib-data-view-control-label-font-size`    | `var(--uilib-font-size-sm, 0.8125rem)`                                               |
 | `--uilib-data-view-empty-color`                | `var(--uilib-text-color-secondary, #6b7280)`                                         |
 | `--uilib-data-view-empty-padding`              | `2rem`                                                                               |
 | `--uilib-data-view-fg`                         | `var(--uilib-text-color, #1f2937)`                                                   |

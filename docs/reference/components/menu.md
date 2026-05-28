@@ -24,10 +24,11 @@ Menu component — a panel of navigable items. Supports both static (inline) and
 
 ### Outputs
 
-| Name       | Type         | Description                                  |
-| ---------- | ------------ | -------------------------------------------- |
-| `menuHide` | `void`       | Emitted when the popup menu is hidden.       |
-| `menuShow` | `MouseEvent` | Emitted when the popup menu becomes visible. |
+| Name        | Type                   | Description                                                                 |
+| ----------- | ---------------------- | --------------------------------------------------------------------------- |
+| `itemClick` | `MenuItemCommandEvent` | Emitted when a non-disabled leaf item is clicked or activated via keyboard. |
+| `menuHide`  | `void`                 | Emitted when the popup menu is hidden.                                      |
+| `menuShow`  | `MouseEvent`           | Emitted when the popup menu becomes visible.                                |
 
 ## Content Projection
 

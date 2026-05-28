@@ -13,16 +13,18 @@ MeterGroup — segmented progress/meter bar component. Renders multiple coloured
 
 ### Inputs
 
-| Name         | Type                       | Default         | Description                                                     |
-| ------------ | -------------------------- | --------------- | --------------------------------------------------------------- |
-| `ariaLabel`  | `string`                   | `'Meter group'` | Accessible label for the meter container group.                 |
-| `max`        | `number`                   | `100`           | Maximum value of the range (default `100`).                     |
-| `min`        | `number`                   | `0`             | Minimum value of the range (default `0`).                       |
-| `showLabels` | `boolean`                  | `true`          | Whether to render the legend.                                   |
-| `size`       | `MeterGroupSize`           | `'md'`          | Component size token.                                           |
-| `styleClass` | `string | null`            | `null`          | Additional CSS classes to attach to the host element.           |
-| `values`     | `MeterItem[]`              | `[]`            | Array of meter segments to render.                              |
-| `variant`    | `MeterGroupVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set. |
+| Name            | Type                       | Default         | Description                                                                                 |
+| --------------- | -------------------------- | --------------- | ------------------------------------------------------------------------------------------- |
+| `ariaLabel`     | `string`                   | `'Meter group'` | Accessible label for the meter container group.                                             |
+| `labelPosition` | `MeterGroupLabelPosition`  | `'end'`         | Position of the legend relative to the bar (`'start'` = above/left, `'end'` = below/right). |
+| `max`           | `number`                   | `100`           | Maximum value of the range (default `100`).                                                 |
+| `min`           | `number`                   | `0`             | Minimum value of the range (default `0`).                                                   |
+| `orientation`   | `MeterGroupOrientation`    | `'horizontal'`  | Bar orientation.                                                                            |
+| `showLabels`    | `boolean`                  | `true`          | Whether to render the legend.                                                               |
+| `size`          | `MeterGroupSize`           | `'md'`          | Component size token.                                                                       |
+| `styleClass`    | `string | null`            | `null`          | Additional CSS classes to attach to the host element.                                       |
+| `values`        | `MeterItem[]`              | `[]`            | Array of meter segments to render.                                                          |
+| `variant`       | `MeterGroupVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                             |
 
 ### Outputs
 
@@ -50,6 +52,7 @@ _none_
 | `--uilib-meter-group-segment-gap`          | `2px`                                 |
 | `--uilib-meter-group-swatch-border-radius` | `var(--uilib-radius-sm, 0.25rem)`     |
 | `--uilib-meter-group-swatch-fg`            | `var(--uilib-color-neutral-50, #fff)` |
+| `--uilib-meter-group-swatch-font-size`     | `0.55rem`                             |
 | `--uilib-meter-group-swatch-size`          | `0.75rem`                             |
 | `--uilib-meter-group-transition`           | `width 0.4s ease, height 0.4s ease`   |
 | `--uilib-meter-group-width-vertical`       | `1rem`                                |

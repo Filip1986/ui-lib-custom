@@ -26,7 +26,10 @@ Native rich text editor with default toolbar and content projection support.
 
 ### Outputs
 
-_none_
+| Name              | Type                         | Description |
+| ----------------- | ---------------------------- | ----------- |
+| `selectionChange` | `EditorSelectionChangeEvent` | —           |
+| `textChange`      | `EditorTextChangeEvent`      | —           |
 
 ## Content Projection
 

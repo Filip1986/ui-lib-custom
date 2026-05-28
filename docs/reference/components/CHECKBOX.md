@@ -58,27 +58,30 @@ Checkbox component with accessible labeling and indeterminate support.
 
 ## Theming
 
-| CSS Variable                           | Default                                                                                                                                  |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `--uilib-checkbox-bg`                  | `var(--uilib-checkbox-bg-color, var(--uilib-surface))`                                                                                   |
-| `--uilib-checkbox-bg-checked`          | `var( --uilib-checkbox-bg-checked-color, var(--uilib-color-primary-500) )`                                                               |
-| `--uilib-checkbox-border`              | `var(--uilib-checkbox-border-color, var(--uilib-color-neutral-400))`                                                                     |
-| `--uilib-checkbox-border-active`       | `var( --uilib-checkbox-border-active-color, var(--uilib-color-primary-600) )`                                                            |
-| `--uilib-checkbox-border-hover`        | `var( --uilib-checkbox-border-hover-color, var(--uilib-color-primary-500) )`                                                             |
-| `--uilib-checkbox-check-color`         | `var(--uilib-color-neutral-50)`                                                                                                          |
-| `--uilib-checkbox-description-color`   | `var( --uilib-checkbox-description-color, var(--uilib-color-neutral-600) )`                                                              |
-| `--uilib-checkbox-filled-bg`           | `var( --uilib-checkbox-filled-bg-color, color-mix(in srgb, var(--uilib-color-neutral-500) 10%, var(--uilib-surface)) )`                  |
-| `--uilib-checkbox-filled-border-color` | `var( --uilib-checkbox-filled-border-color, color-mix(in srgb, var(--uilib-checkbox-border-active) 35%, var(--uilib-checkbox-border)) )` |
-| `--uilib-checkbox-focus-ring`          | `0 0 0 3px color-mix(in srgb, var(--uilib-checkbox-border-hover) 30%, transparent)`                                                      |
-| `--uilib-checkbox-font`                | `var(--uilib-font-ui, inherit)`                                                                                                          |
-| `--uilib-checkbox-gap`                 | `var(--uilib-space-3, 0.75rem)`                                                                                                          |
-| `--uilib-checkbox-padding-base`        | `0rem`                                                                                                                                   |
-| `--uilib-checkbox-radius`              | `var(--uilib-shape-base, 6px)`                                                                                                           |
-| `--uilib-checkbox-size`                | `var(--uilib-checkbox-size-sm)`                                                                                                          |
-| `--uilib-checkbox-size-lg`             | `1.5rem`                                                                                                                                 |
-| `--uilib-checkbox-size-md`             | `1.25rem`                                                                                                                                |
-| `--uilib-checkbox-size-sm`             | `1rem`                                                                                                                                   |
-| `--uilib-checkbox-transition-duration` | `150ms`                                                                                                                                  |
+| CSS Variable                             | Default                                                                                                                                  |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-checkbox-bg`                    | `var(--uilib-checkbox-bg-color, var(--uilib-surface))`                                                                                   |
+| `--uilib-checkbox-bg-checked`            | `var( --uilib-checkbox-bg-checked-color, var(--uilib-color-primary-500) )`                                                               |
+| `--uilib-checkbox-border`                | `var(--uilib-checkbox-border-color, var(--uilib-color-neutral-400))`                                                                     |
+| `--uilib-checkbox-border-active`         | `var( --uilib-checkbox-border-active-color, var(--uilib-color-primary-600) )`                                                            |
+| `--uilib-checkbox-border-hover`          | `var( --uilib-checkbox-border-hover-color, var(--uilib-color-primary-500) )`                                                             |
+| `--uilib-checkbox-check-color`           | `var(--uilib-color-neutral-50)`                                                                                                          |
+| `--uilib-checkbox-description-color`     | `var( --uilib-checkbox-description-color, var(--uilib-color-neutral-600) )`                                                              |
+| `--uilib-checkbox-description-font-size` | `var(--uilib-font-size-sm, 0.875rem)`                                                                                                    |
+| `--uilib-checkbox-filled-bg`             | `var( --uilib-checkbox-filled-bg-color, color-mix(in srgb, var(--uilib-color-neutral-500) 10%, var(--uilib-surface)) )`                  |
+| `--uilib-checkbox-filled-border-color`   | `var( --uilib-checkbox-filled-border-color, color-mix(in srgb, var(--uilib-checkbox-border-active) 35%, var(--uilib-checkbox-border)) )` |
+| `--uilib-checkbox-focus-ring`            | `0 0 0 3px color-mix(in srgb, var(--uilib-checkbox-border-hover) 30%, transparent)`                                                      |
+| `--uilib-checkbox-font`                  | `var(--uilib-font-ui, inherit)`                                                                                                          |
+| `--uilib-checkbox-font-size-md`          | `var(--uilib-font-size-md, 1rem)`                                                                                                        |
+| `--uilib-checkbox-font-size-sm`          | `var(--uilib-font-size-sm, 0.875rem)`                                                                                                    |
+| `--uilib-checkbox-gap`                   | `var(--uilib-space-3, 0.75rem)`                                                                                                          |
+| `--uilib-checkbox-padding-base`          | `0rem`                                                                                                                                   |
+| `--uilib-checkbox-radius`                | `var(--uilib-shape-base, 6px)`                                                                                                           |
+| `--uilib-checkbox-size`                  | `var(--uilib-checkbox-size-sm)`                                                                                                          |
+| `--uilib-checkbox-size-lg`               | `1.5rem`                                                                                                                                 |
+| `--uilib-checkbox-size-md`               | `1.25rem`                                                                                                                                |
+| `--uilib-checkbox-size-sm`               | `1rem`                                                                                                                                   |
+| `--uilib-checkbox-transition-duration`   | `150ms`                                                                                                                                  |
 
 ## Accessibility
 

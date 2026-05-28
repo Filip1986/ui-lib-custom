@@ -34,6 +34,7 @@ _none_
 | CSS Variable                       | Default                                                                                         |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--uilib-toast-animation-duration` | `300ms`                                                                                         |
+| `--uilib-toast-detail-font-size`   | `0.875em`                                                                                       |
 | `--uilib-toast-gap`                | `0.5rem`                                                                                        |
 | `--uilib-toast-item-bg`            | `var(--uilib-surface, #ffffff)`                                                                 |
 | `--uilib-toast-item-border-color`  | `transparent`                                                                                   |

@@ -13,12 +13,13 @@ Stepper — a multi-step wizard component for guided sequential workflows. Manag
 
 ### Inputs
 
-| Name         | Type                    | Default                      | Description                                                                                                                              |
-| ------------ | ----------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                | `STEPPER_DEFAULT_ARIA_LABEL` | Accessible label announced for the step navigation container.                                                                            |
-| `linear`     | `boolean`               | `false`                      | When true, users can only advance to the next step sequentially. Skipping to later steps is blocked until prior steps have been visited. |
-| `styleClass` | `string | null`         | `null`                       | Additional CSS classes to attach to the host element.                                                                                    |
-| `variant`    | `StepperVariant | null` | `null`                       | Visual variant — inherits from ThemeConfigService when null.                                                                             |
+| Name          | Type                    | Default        | Description                                                                                                                              |
+| ------------- | ----------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`   | `string`                | `''`           | Accessible label announced for the step navigation container. When empty the active locale's 'stepper.label' translation is used.        |
+| `linear`      | `boolean`               | `false`        | When true, users can only advance to the next step sequentially. Skipping to later steps is blocked until prior steps have been visited. |
+| `orientation` | `StepperOrientation`    | `'horizontal'` | Layout orientation: 'horizontal' (default) or 'vertical'.                                                                                |
+| `styleClass`  | `string | null`         | `null`         | Additional CSS classes to attach to the host element.                                                                                    |
+| `variant`     | `StepperVariant | null` | `null`         | Visual variant — inherits from ThemeConfigService when null.                                                                             |
 
 ### Models (two-way bindable)
 

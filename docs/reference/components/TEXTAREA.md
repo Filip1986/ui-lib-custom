@@ -40,10 +40,11 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 
 ### Outputs
 
-| Name            | Type         | Description                                                                                                               |
-| --------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `textareaBlur`  | `FocusEvent` | Emits when the textarea loses focus. Named `textareaBlur` (not `blur`) to avoid shadowing the native DOM `blur` event.    |
-| `textareaFocus` | `FocusEvent` | Emits when the textarea gains focus. Named `textareaFocus` (not `focus`) to avoid shadowing the native DOM `focus` event. |
+| Name            | Type                  | Description                                                                                                                                                                  |
+| --------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `textareaBlur`  | `FocusEvent`          | Emits when the textarea loses focus. Named `textareaBlur` (not `blur`) to avoid shadowing the native DOM `blur` event.                                                       |
+| `textareaFocus` | `FocusEvent`          | Emits when the textarea gains focus. Named `textareaFocus` (not `focus`) to avoid shadowing the native DOM `focus` event.                                                    |
+| `valueChange`   | `TextareaChangeEvent` | Emits on every user-driven value change. Named `valueChange` (not `input`) to avoid shadowing the native DOM `input` event that bubbles from the inner `<textarea>` element. |
 
 ## Content Projection
 

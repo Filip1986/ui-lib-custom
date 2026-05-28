@@ -24,7 +24,9 @@ Breadcrumb component for displaying hierarchical navigation trails. Supports URL
 
 ### Outputs
 
-_none_
+| Name        | Type                       | Description                                                            |
+| ----------- | -------------------------- | ---------------------------------------------------------------------- |
+| `itemClick` | `BreadcrumbItemClickEvent` | Emitted when any breadcrumb item is clicked or activated via keyboard. |
 
 ## Content Projection
 

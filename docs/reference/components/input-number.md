@@ -21,6 +21,7 @@ Numeric input with locale-aware parsing/formatting, CVA support, and spinner con
 | `autocomplete`      | `string`                                      | `'off'`                                           | —           |
 | `buttonLayout`      | `InputNumberButtonLayout`                     | `INPUT_NUMBER_DEFAULTS.buttonLayout`              | —           |
 | `currency`          | `string | undefined`                          | `undefined`                                       | —           |
+| `currencyDisplay`   | `InputNumberCurrencyDisplay`                  | `INPUT_NUMBER_DEFAULTS.currencyDisplay`           | —           |
 | `disabled`          | `boolean`                                     | `false`                                           | —           |
 | `filled`            | `boolean`                                     | `false`                                           | —           |
 | `fluid`             | `boolean`                                     | `false`                                           | —           |

@@ -13,20 +13,22 @@ MegaMenu component — a horizontal (or vertical) navigation bar where top-level
 
 ### Inputs
 
-| Name         | Type                     | Default                        | Description                                                               |
-| ------------ | ------------------------ | ------------------------------ | ------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                 | `MEGA_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (aria-label on the `<nav>`). |
-| `model`      | `MegaMenuItem[]`         | `[]`                           | Array of top-level navigation items.                                      |
-| `size`       | `MegaMenuSize`           | `'md'`                         | Size token: sm | md | lg.                                                 |
-| `styleClass` | `string | null`          | `null`                         | Extra CSS class appended to the host element.                             |
-| `variant`    | `MegaMenuVariant | null` | `null`                         | Design-system variant; falls back to ThemeConfigService when null.        |
+| Name          | Type                     | Default                        | Description                                                               |
+| ------------- | ------------------------ | ------------------------------ | ------------------------------------------------------------------------- |
+| `ariaLabel`   | `string`                 | `MEGA_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (aria-label on the `<nav>`). |
+| `model`       | `MegaMenuItem[]`         | `[]`                           | Array of top-level navigation items.                                      |
+| `orientation` | `MegaMenuOrientation`    | `'horizontal'`                 | Layout orientation of the navigation bar.                                 |
+| `size`        | `MegaMenuSize`           | `'md'`                         | Size token: sm | md | lg.                                                 |
+| `styleClass`  | `string | null`          | `null`                         | Extra CSS class appended to the host element.                             |
+| `variant`     | `MegaMenuVariant | null` | `null`                         | Design-system variant; falls back to ThemeConfigService when null.        |
 
 ### Outputs
 
-| Name          | Type           | Description                                                                    |
-| ------------- | -------------- | ------------------------------------------------------------------------------ |
-| `panelClosed` | `void`         | Emitted when the currently open mega panel closes.                             |
-| `panelOpened` | `MegaMenuItem` | Emitted when a mega panel opens. Carries the top-level item that triggered it. |
+| Name          | Type                   | Description                                                                    |
+| ------------- | ---------------------- | ------------------------------------------------------------------------------ |
+| `itemClick`   | `MegaMenuCommandEvent` | Emitted when a non-disabled sub-item is activated.                             |
+| `panelClosed` | `void`                 | Emitted when the currently open mega panel closes.                             |
+| `panelOpened` | `MegaMenuItem`         | Emitted when a mega panel opens. Carries the top-level item that triggered it. |
 
 ## Content Projection
 

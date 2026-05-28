@@ -59,14 +59,16 @@
 
 ### Outputs
 
-| Name              | Type                        | Description |
-| ----------------- | --------------------------- | ----------- |
-| `clear`           | `void`                      | —           |
-| `datePickerBlur`  | `FocusEvent`                | —           |
-| `datePickerFocus` | `FocusEvent`                | —           |
-| `hide`            | `void`                      | —           |
-| `show`            | `void`                      | —           |
-| `yearChange`      | `DatePickerYearChangeEvent` | —           |
+| Name              | Type                         | Description |
+| ----------------- | ---------------------------- | ----------- |
+| `clear`           | `void`                       | —           |
+| `datePickerBlur`  | `FocusEvent`                 | —           |
+| `datePickerFocus` | `FocusEvent`                 | —           |
+| `dateSelect`      | `DatePickerChangeEvent`      | —           |
+| `hide`            | `void`                       | —           |
+| `monthChange`     | `DatePickerMonthChangeEvent` | —           |
+| `show`            | `void`                       | —           |
+| `yearChange`      | `DatePickerYearChangeEvent`  | —           |
 
 ## Content Projection
 

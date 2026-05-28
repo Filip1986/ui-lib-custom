@@ -25,6 +25,7 @@ PrimeNG-inspired autocomplete with single and multiple selection modes.
 | `delay`                 | `number`                           | `300`       | Debounce delay in ms before `completeMethod` fires. Default: `300`.                                                     |
 | `disabled`              | `boolean`                          | `false`     | Disables the control; sets `aria-disabled` on the input. Default: `false`.                                              |
 | `dropdown`              | `boolean`                          | `false`     | Show a dropdown toggle button alongside the input. Default: `false`.                                                    |
+| `dropdownMode`          | `AutoCompleteDropdownMode`         | `'blank'`   | `'blank'` clears the query when the dropdown opens; `'current'` keeps existing text. Default: `'blank'`.                |
 | `filled`                | `boolean`                          | `false`     | Apply a filled background appearance. Default: `false`.                                                                 |
 | `fluid`                 | `boolean`                          | `false`     | Stretch the component to fill its container width. Default: `false`.                                                    |
 | `forceSelection`        | `boolean`                          | `false`     | Restrict value to items from `suggestions` only; rejects free-text on blur. Default: `false`.                           |
@@ -49,6 +50,7 @@ PrimeNG-inspired autocomplete with single and multiple selection modes.
 | `suggestions`           | `unknown[]`                        | `[]`        | Options shown in the dropdown panel. Never filtered internally — update on every `completeMethod` event. Default: `[]`. |
 | `tabindex`              | `number`                           | `0`         | Tab index of the inner `<input>`. Default: `0`.                                                                         |
 | `unique`                | `boolean`                          | `false`     | Prevent duplicate chips in multiple mode. Default: `false`.                                                             |
+| `variant`               | `AutoCompleteVariant | null`       | `null`      | Visual style variant. Falls back to the global ThemeConfigService variant when `null`. Default: `null`.                 |
 | `virtualScroll`         | `boolean`                          | `false`     | Enable virtual scrolling for large suggestion lists. Requires `virtualScrollItemSize`. Default: `false`.                |
 | `virtualScrollItemSize` | `number`                           | `0`         | Item height in px; required when `virtualScroll=true`. Default: `0`.                                                    |
 
@@ -60,7 +62,9 @@ PrimeNG-inspired autocomplete with single and multiple selection modes.
 | `autocompleteFocus` | `FocusEvent`                     | —           |
 | `autocompleteKeyUp` | `KeyboardEvent`                  | —           |
 | `clearEvent`        | `void`                           | —           |
+| `completeMethod`    | `AutoCompleteCompleteEvent`      | —           |
 | `dropdownClick`     | `AutoCompleteDropdownClickEvent` | —           |
+| `optionSelect`      | `AutoCompleteSelectEvent`        | —           |
 | `unselect`          | `AutoCompleteUnselectEvent`      | —           |
 
 ## Content Projection

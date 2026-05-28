@@ -198,7 +198,7 @@ function parseSignals(source) {
 
     // Only consider public readonly signal lines
     if (!/public\s+readonly\s+\w+/.test(line)) continue;
-    if (!/ = (?:input|model|output)[<(]/.test(line + (lines[i + 1] || '') + (lines[i + 2] || ''))) continue;
+    if (!/ =\s*(?:input|model|output)[<(]/.test(line + (lines[i + 1] || '') + (lines[i + 2] || ''))) continue;
 
     const { declLines } = collectDeclarationLines(lines, i);
     const fullDecl = declLines.join(' ').replace(/\s+/g, ' ');

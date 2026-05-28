@@ -32,7 +32,10 @@ Segmented select component that supports single or multiple selection modes.
 
 ### Outputs
 
-_none_
+| Name              | Type                                             | Description |
+| ----------------- | ------------------------------------------------ | ----------- |
+| `selectionChange` | `SelectButtonChangeEvent`                        | —           |
+| `valueChange`     | `SelectButtonValue | SelectButtonValue[] | null` | —           |
 
 ## Content Projection
 

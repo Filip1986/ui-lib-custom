@@ -13,18 +13,19 @@ ToggleSwitch presents a boolean on/off control as a sliding pill switch. Impleme
 
 ### Inputs
 
-| Name         | Type               | Default | Description                                                               |
-| ------------ | ------------------ | ------- | ------------------------------------------------------------------------- |
-| `ariaLabel`  | `string | null`    | `null`  | Accessible label applied directly to the native input element.            |
-| `autofocus`  | `boolean`          | `false` | When true, the native input receives focus on load.                       |
-| `disabled`   | `boolean`          | `false` | When true, interaction is disabled and the control is not focusable.      |
-| `inputId`    | `string | null`    | `null`  | ID attribute applied to the native input element.                         |
-| `label`      | `string | null`    | `null`  | Optional text label displayed next to the switch.                         |
-| `name`       | `string | null`    | `null`  | Name attribute applied to the native input element.                       |
-| `readonly`   | `boolean`          | `false` | When true, the state cannot be changed but the control remains focusable. |
-| `size`       | `ToggleSwitchSize` | `'md'`  | Component size token.                                                     |
-| `styleClass` | `string | null`    | `null`  | Additional CSS class(es) applied to the host element.                     |
-| `tabindex`   | `number`           | `0`     | Tab index of the native input element.                                    |
+| Name         | Type                         | Default | Description                                                               |
+| ------------ | ---------------------------- | ------- | ------------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null`              | `null`  | Accessible label applied directly to the native input element.            |
+| `autofocus`  | `boolean`                    | `false` | When true, the native input receives focus on load.                       |
+| `disabled`   | `boolean`                    | `false` | When true, interaction is disabled and the control is not focusable.      |
+| `inputId`    | `string | null`              | `null`  | ID attribute applied to the native input element.                         |
+| `label`      | `string | null`              | `null`  | Optional text label displayed next to the switch.                         |
+| `name`       | `string | null`              | `null`  | Name attribute applied to the native input element.                       |
+| `readonly`   | `boolean`                    | `false` | When true, the state cannot be changed but the control remains focusable. |
+| `size`       | `ToggleSwitchSize`           | `'md'`  | Component size token.                                                     |
+| `styleClass` | `string | null`              | `null`  | Additional CSS class(es) applied to the host element.                     |
+| `tabindex`   | `number`                     | `0`     | Tab index of the native input element.                                    |
+| `variant`    | `ToggleSwitchVariant | null` | `null`  | Design variant; inherits from ThemeConfigService when null.               |
 
 ### Models (two-way bindable)
 
@@ -34,10 +35,11 @@ ToggleSwitch presents a boolean on/off control as a sliding pill switch. Impleme
 
 ### Outputs
 
-| Name          | Type         | Description                                   |
-| ------------- | ------------ | --------------------------------------------- |
-| `switchBlur`  | `FocusEvent` | Emitted when the native input loses focus.    |
-| `switchFocus` | `FocusEvent` | Emitted when the native input receives focus. |
+| Name           | Type                      | Description                                   |
+| -------------- | ------------------------- | --------------------------------------------- |
+| `switchBlur`   | `FocusEvent`              | Emitted when the native input loses focus.    |
+| `switchChange` | `ToggleSwitchChangeEvent` | Emitted when the toggle state changes.        |
+| `switchFocus`  | `FocusEvent`              | Emitted when the native input receives focus. |
 
 ## Content Projection
 
@@ -51,6 +53,8 @@ ToggleSwitch presents a boolean on/off control as a sliding pill switch. Impleme
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `--uilib-toggle-switch-focus-ring`             | `0 0 0 3px color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 30%, transparent)` |
 | `--uilib-toggle-switch-font`                   | `var(--uilib-font-ui, inherit)`                                                          |
+| `--uilib-toggle-switch-font-size-lg`           | `1.0625rem`                                                                              |
+| `--uilib-toggle-switch-font-size-sm`           | `var(--uilib-font-size-sm, 0.875rem)`                                                    |
 | `--uilib-toggle-switch-gap`                    | `var(--uilib-space-3, 0.75rem)`                                                          |
 | `--uilib-toggle-switch-thumb-bg`               | `var(--uilib-color-neutral-50, #f8fafc)`                                                 |
 | `--uilib-toggle-switch-thumb-bg-checked`       | `var(--uilib-color-neutral-50, #f8fafc)`                                                 |

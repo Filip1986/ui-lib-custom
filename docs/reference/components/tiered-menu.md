@@ -24,10 +24,11 @@ TieredMenu component — a nested flyout menu supporting arbitrarily deep hierar
 
 ### Outputs
 
-| Name       | Type                         | Description                                   |
-| ---------- | ---------------------------- | --------------------------------------------- |
-| `menuHide` | `void`                       | Emitted when the popup panel is hidden.       |
-| `menuShow` | `MouseEvent | KeyboardEvent` | Emitted when the popup panel becomes visible. |
+| Name        | Type                         | Description                                                                 |
+| ----------- | ---------------------------- | --------------------------------------------------------------------------- |
+| `itemClick` | `TieredMenuItemCommandEvent` | Emitted when a non-disabled leaf item is clicked or activated via keyboard. |
+| `menuHide`  | `void`                       | Emitted when the popup panel is hidden.                                     |
+| `menuShow`  | `MouseEvent | KeyboardEvent` | Emitted when the popup panel becomes visible.                               |
 
 ## Content Projection
 

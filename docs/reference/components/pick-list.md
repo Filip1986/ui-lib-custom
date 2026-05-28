@@ -13,34 +13,39 @@ PickList component — transfers items between a source list and a target list.
 
 ### Inputs
 
-| Name                        | Type                     | Default            | Description                                                                                                                       |
-| --------------------------- | ------------------------ | ------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `disabled`                  | `boolean`                | `false`            | When `true`, all interaction is disabled.                                                                                         |
-| `dragDrop`                  | `boolean`                | `false`            | When `true`, items can be reordered and transferred by dragging and dropping.                                                     |
-| `filterBy`                  | `string | null`          | `null`             | Dot-notation property path used to filter items (e.g. `'name'` or `'address.city'`). When `null`, filter inputs are not rendered. |
-| `filterLocale`              | `string | undefined`     | `undefined`        | BCP 47 locale tag used for locale-sensitive string comparisons during filtering.                                                  |
-| `metaKeySelection`          | `boolean`                | `false`            | When `true`, Ctrl/Meta must be held to toggle multi-select.                                                                       |
-| `showSourceControls`        | `boolean`                | `true`             | When `true`, shows reorder controls for the source list.                                                                          |
-| `showTargetControls`        | `boolean`                | `true`             | When `true`, shows reorder controls for the target list.                                                                          |
-| `size`                      | `PickListSize`           | `'md'`             | Component size token.                                                                                                             |
-| `sourceAriaLabel`           | `string | null`          | `null`             | Accessible label for the source listbox element.                                                                                  |
-| `sourceFilterPlaceholder`   | `string`                 | `'Filter'`         | Placeholder text shown inside the source list filter input.                                                                       |
-| `sourceHeader`              | `string | null`          | `null`             | Caption rendered above the source list.                                                                                           |
-| `sourceMoveBottomAriaLabel` | `string`                 | `'Move to bottom'` | Accessible label for the source "Move to bottom" reorder button.                                                                  |
-| `sourceMoveDownAriaLabel`   | `string`                 | `'Move down'`      | Accessible label for the source "Move down" reorder button.                                                                       |
-| `sourceMoveTopAriaLabel`    | `string`                 | `'Move to top'`    | Accessible label for the source "Move to top" reorder button.                                                                     |
-| `sourceMoveUpAriaLabel`     | `string`                 | `'Move up'`        | Accessible label for the source "Move up" reorder button.                                                                         |
-| `stripedRows`               | `boolean`                | `false`            | When `true`, alternating rows are rendered with a background tint.                                                                |
-| `styleClass`                | `string | null`          | `null`             | Additional CSS class applied to the root element.                                                                                 |
-| `targetAriaLabel`           | `string | null`          | `null`             | Accessible label for the target listbox element.                                                                                  |
-| `targetFilterPlaceholder`   | `string`                 | `'Filter'`         | Placeholder text shown inside the target list filter input.                                                                       |
-| `targetHeader`              | `string | null`          | `null`             | Caption rendered above the target list.                                                                                           |
-| `targetMoveBottomAriaLabel` | `string`                 | `'Move to bottom'` | Accessible label for the target "Move to bottom" reorder button.                                                                  |
-| `targetMoveDownAriaLabel`   | `string`                 | `'Move down'`      | Accessible label for the target "Move down" reorder button.                                                                       |
-| `targetMoveTopAriaLabel`    | `string`                 | `'Move to top'`    | Accessible label for the target "Move to top" reorder button.                                                                     |
-| `targetMoveUpAriaLabel`     | `string`                 | `'Move up'`        | Accessible label for the target "Move up" reorder button.                                                                         |
-| `trackBy`                   | `string | null`          | `null`             | Property key used to identify items for selection equality and `@for` tracking. When `null`, item object identity is used.        |
-| `variant`                   | `PickListVariant | null` | `null`             | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                          |
+| Name                        | Type                      | Default                     | Description                                                                                                                       |
+| --------------------------- | ------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`                  | `boolean`                 | `false`                     | When `true`, all interaction is disabled.                                                                                         |
+| `dragDrop`                  | `boolean`                 | `false`                     | When `true`, items can be reordered and transferred by dragging and dropping.                                                     |
+| `filterBy`                  | `string | null`           | `null`                      | Dot-notation property path used to filter items (e.g. `'name'` or `'address.city'`). When `null`, filter inputs are not rendered. |
+| `filterLocale`              | `string | undefined`      | `undefined`                 | BCP 47 locale tag used for locale-sensitive string comparisons during filtering.                                                  |
+| `filterMatchMode`           | `PickListFilterMatchMode` | `'contains'`                | Strategy used when matching the filter query against item fields.                                                                 |
+| `metaKeySelection`          | `boolean`                 | `false`                     | When `true`, Ctrl/Meta must be held to toggle multi-select.                                                                       |
+| `moveAllToSourceAriaLabel`  | `string`                  | `'Move all to source'`      | Accessible label for the "Move all to source" button.                                                                             |
+| `moveAllToTargetAriaLabel`  | `string`                  | `'Move all to target'`      | Accessible label for the "Move all to target" button.                                                                             |
+| `moveToSourceAriaLabel`     | `string`                  | `'Move selected to source'` | Accessible label for the "Move selected to source" button.                                                                        |
+| `moveToTargetAriaLabel`     | `string`                  | `'Move selected to target'` | Accessible label for the "Move selected to target" button.                                                                        |
+| `showSourceControls`        | `boolean`                 | `true`                      | When `true`, shows reorder controls for the source list.                                                                          |
+| `showTargetControls`        | `boolean`                 | `true`                      | When `true`, shows reorder controls for the target list.                                                                          |
+| `size`                      | `PickListSize`            | `'md'`                      | Component size token.                                                                                                             |
+| `sourceAriaLabel`           | `string | null`           | `null`                      | Accessible label for the source listbox element.                                                                                  |
+| `sourceFilterPlaceholder`   | `string`                  | `'Filter'`                  | Placeholder text shown inside the source list filter input.                                                                       |
+| `sourceHeader`              | `string | null`           | `null`                      | Caption rendered above the source list.                                                                                           |
+| `sourceMoveBottomAriaLabel` | `string`                  | `'Move to bottom'`          | Accessible label for the source "Move to bottom" reorder button.                                                                  |
+| `sourceMoveDownAriaLabel`   | `string`                  | `'Move down'`               | Accessible label for the source "Move down" reorder button.                                                                       |
+| `sourceMoveTopAriaLabel`    | `string`                  | `'Move to top'`             | Accessible label for the source "Move to top" reorder button.                                                                     |
+| `sourceMoveUpAriaLabel`     | `string`                  | `'Move up'`                 | Accessible label for the source "Move up" reorder button.                                                                         |
+| `stripedRows`               | `boolean`                 | `false`                     | When `true`, alternating rows are rendered with a background tint.                                                                |
+| `styleClass`                | `string | null`           | `null`                      | Additional CSS class applied to the root element.                                                                                 |
+| `targetAriaLabel`           | `string | null`           | `null`                      | Accessible label for the target listbox element.                                                                                  |
+| `targetFilterPlaceholder`   | `string`                  | `'Filter'`                  | Placeholder text shown inside the target list filter input.                                                                       |
+| `targetHeader`              | `string | null`           | `null`                      | Caption rendered above the target list.                                                                                           |
+| `targetMoveBottomAriaLabel` | `string`                  | `'Move to bottom'`          | Accessible label for the target "Move to bottom" reorder button.                                                                  |
+| `targetMoveDownAriaLabel`   | `string`                  | `'Move down'`               | Accessible label for the target "Move down" reorder button.                                                                       |
+| `targetMoveTopAriaLabel`    | `string`                  | `'Move to top'`             | Accessible label for the target "Move to top" reorder button.                                                                     |
+| `targetMoveUpAriaLabel`     | `string`                  | `'Move up'`                 | Accessible label for the target "Move up" reorder button.                                                                         |
+| `trackBy`                   | `string | null`           | `null`                      | Property key used to identify items for selection equality and `@for` tracking. When `null`, item object identity is used.        |
+| `variant`                   | `PickListVariant | null`  | `null`                      | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                          |
 
 ### Models (two-way bindable)
 
@@ -53,7 +58,17 @@ PickList component — transfers items between a source list and a target list.
 
 ### Outputs
 
-_none_
+| Name                     | Type                           | Description                                                         |
+| ------------------------ | ------------------------------ | ------------------------------------------------------------------- |
+| `movedAllToSource`       | `PickListMoveAllToSourceEvent` | Emitted when all target items are moved to the source list.         |
+| `movedAllToTarget`       | `PickListMoveAllToTargetEvent` | Emitted when all source items are moved to the target list.         |
+| `movedToSource`          | `PickListMoveToSourceEvent`    | Emitted when selected target items are moved to the source list.    |
+| `movedToTarget`          | `PickListMoveToTargetEvent`    | Emitted when selected source items are moved to the target list.    |
+| `reordered`              | `PickListReorderEvent`         | Emitted after a reorder operation within the source or target list. |
+| `sourceFiltered`         | `PickListFilterEvent`          | Emitted when the source filter query changes.                       |
+| `sourceSelectionChanged` | `PickListSelectionChangeEvent` | Emitted when the source selection changes.                          |
+| `targetFiltered`         | `PickListFilterEvent`          | Emitted when the target filter query changes.                       |
+| `targetSelectionChanged` | `PickListSelectionChangeEvent` | Emitted when the target selection changes.                          |
 
 ## Content Projection
 

@@ -35,10 +35,12 @@ Tree renders a hierarchical data structure with expand/collapse, three selection
 
 ### Outputs
 
-| Name         | Type                  | Description                                |
-| ------------ | --------------------- | ------------------------------------------ |
-| `nodeExpand` | `TreeNodeExpandEvent` | Emitted when a node's subtree is expanded. |
-| `nodeSelect` | `TreeNodeSelectEvent` | Emitted when a node is selected.           |
+| Name           | Type                    | Description                                 |
+| -------------- | ----------------------- | ------------------------------------------- |
+| `nodeCollapse` | `TreeNodeCollapseEvent` | Emitted when a node's subtree is collapsed. |
+| `nodeExpand`   | `TreeNodeExpandEvent`   | Emitted when a node's subtree is expanded.  |
+| `nodeSelect`   | `TreeNodeSelectEvent`   | Emitted when a node is selected.            |
+| `nodeUnselect` | `TreeNodeSelectEvent`   | Emitted when a node is unselected.          |
 
 ## Content Projection
 
@@ -61,6 +63,7 @@ _none_
 | `--uilib-tree-filter-border-focus`     | `1px solid var(--uilib-color-primary, #1976d2)`         |
 | `--uilib-tree-filter-border-radius`    | `var(--uilib-radius-sm, 4px)`                           |
 | `--uilib-tree-filter-color`            | `var(--uilib-color-text-primary, #212121)`              |
+| `--uilib-tree-filter-icon-font-size`   | `var(--uilib-font-size-sm, 0.875rem)`                   |
 | `--uilib-tree-filter-padding`          | `0.375rem 2rem 0.375rem 0.625rem`                       |
 | `--uilib-tree-font-size`               | `var(--uilib-font-size-base, 0.875rem)`                 |
 | `--uilib-tree-line-height`             | `1.5`                                                   |
@@ -70,6 +73,7 @@ _none_
 | `--uilib-tree-node-border-radius`      | `var(--uilib-radius-sm, 4px)`                           |
 | `--uilib-tree-node-color`              | `var(--uilib-color-text-primary, #212121)`              |
 | `--uilib-tree-node-color-selected`     | `var(--uilib-color-primary, #1976d2)`                   |
+| `--uilib-tree-node-icon-font-size`     | `0.875em`                                               |
 | `--uilib-tree-node-padding-x`          | `0.5rem`                                                |
 | `--uilib-tree-node-padding-y`          | `0.375rem`                                              |
 | `--uilib-tree-row-gap`                 | `2px`                                                   |

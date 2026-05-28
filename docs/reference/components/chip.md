@@ -42,30 +42,32 @@ Chip — compact element representing an attribute, tag, or action. Supports an 
 
 ## Theming
 
-| CSS Variable                   | Default                                                                         |
-| ------------------------------ | ------------------------------------------------------------------------------- |
-| `--uilib-chip-bg`              | `var(--uilib-color-primary, #6366f1)`                                           |
-| `--uilib-chip-border`          | `none`                                                                          |
-| `--uilib-chip-border-radius`   | `var(--uilib-radius-full, 9999px)`                                              |
-| `--uilib-chip-color`           | `#ffffff`                                                                       |
-| `--uilib-chip-font-size`       | `0.875rem`                                                                      |
-| `--uilib-chip-font-size-lg`    | `1rem`                                                                          |
-| `--uilib-chip-font-size-sm`    | `0.75rem`                                                                       |
-| `--uilib-chip-font-weight`     | `500`                                                                           |
-| `--uilib-chip-gap`             | `0.375rem`                                                                      |
-| `--uilib-chip-image-size`      | `1.5rem`                                                                        |
-| `--uilib-chip-image-size-lg`   | `1.75rem`                                                                       |
-| `--uilib-chip-image-size-sm`   | `1.25rem`                                                                       |
-| `--uilib-chip-padding-x`       | `0.75rem`                                                                       |
-| `--uilib-chip-padding-x-lg`    | `1rem`                                                                          |
-| `--uilib-chip-padding-x-sm`    | `0.5rem`                                                                        |
-| `--uilib-chip-padding-y`       | `0.25rem`                                                                       |
-| `--uilib-chip-padding-y-lg`    | `0.375rem`                                                                      |
-| `--uilib-chip-padding-y-sm`    | `0.125rem`                                                                      |
-| `--uilib-chip-remove-bg`       | `transparent`                                                                   |
-| `--uilib-chip-remove-bg-hover` | `rgba(255, 255, 255, 0.2)`                                                      |
-| `--uilib-chip-remove-color`    | `inherit`                                                                       |
-| `--uilib-chip-transition`      | `var( --uilib-transition-base, background-color 0.2s ease, opacity 0.2s ease )` |
+| CSS Variable                         | Default                                                                         |
+| ------------------------------------ | ------------------------------------------------------------------------------- |
+| `--uilib-chip-bg`                    | `var(--uilib-color-primary, #6366f1)`                                           |
+| `--uilib-chip-border`                | `none`                                                                          |
+| `--uilib-chip-border-radius`         | `var(--uilib-radius-full, 9999px)`                                              |
+| `--uilib-chip-color`                 | `#ffffff`                                                                       |
+| `--uilib-chip-font-size`             | `0.875rem`                                                                      |
+| `--uilib-chip-font-size-lg`          | `1rem`                                                                          |
+| `--uilib-chip-font-size-sm`          | `0.75rem`                                                                       |
+| `--uilib-chip-font-weight`           | `500`                                                                           |
+| `--uilib-chip-gap`                   | `0.375rem`                                                                      |
+| `--uilib-chip-icon-font-size`        | `0.875em`                                                                       |
+| `--uilib-chip-image-size`            | `1.5rem`                                                                        |
+| `--uilib-chip-image-size-lg`         | `1.75rem`                                                                       |
+| `--uilib-chip-image-size-sm`         | `1.25rem`                                                                       |
+| `--uilib-chip-padding-x`             | `0.75rem`                                                                       |
+| `--uilib-chip-padding-x-lg`          | `1rem`                                                                          |
+| `--uilib-chip-padding-x-sm`          | `0.5rem`                                                                        |
+| `--uilib-chip-padding-y`             | `0.25rem`                                                                       |
+| `--uilib-chip-padding-y-lg`          | `0.375rem`                                                                      |
+| `--uilib-chip-padding-y-sm`          | `0.125rem`                                                                      |
+| `--uilib-chip-remove-bg`             | `transparent`                                                                   |
+| `--uilib-chip-remove-bg-hover`       | `rgba(255, 255, 255, 0.2)`                                                      |
+| `--uilib-chip-remove-color`          | `inherit`                                                                       |
+| `--uilib-chip-remove-icon-font-size` | `0.65em`                                                                        |
+| `--uilib-chip-transition`            | `var( --uilib-transition-base, background-color 0.2s ease, opacity 0.2s ease )` |
 
 ## Accessibility
 

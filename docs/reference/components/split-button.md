@@ -30,6 +30,7 @@ SplitButton scaffold component with primary action and dropdown trigger controls
 | `outlined`            | `boolean`                    | `false`          | —           |
 | `raised`              | `boolean`                    | `false`          | —           |
 | `rounded`             | `boolean`                    | `false`          | —           |
+| `severity`            | `SplitButtonSeverity`        | `'primary'`      | —           |
 | `size`                | `SplitButtonSize`            | `'md'`           | —           |
 | `styleClass`          | `string | null`              | `null`           | —           |
 | `tabindex`            | `number`                     | `0`              | —           |
@@ -38,7 +39,12 @@ SplitButton scaffold component with primary action and dropdown trigger controls
 
 ### Outputs
 
-_none_
+| Name          | Type                          | Description                                                                                                                                            |
+| ------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `buttonClick` | `SplitButtonClickEvent`       | Emits when the primary action button is clicked. Named `buttonClick` to avoid shadowing the native DOM `click` event that bubbles from inner elements. |
+| `itemCommand` | `SplitButtonItemCommandEvent` | —                                                                                                                                                      |
+| `menuHide`    | `SplitButtonMenuHideEvent`    | —                                                                                                                                                      |
+| `menuShow`    | `SplitButtonMenuShowEvent`    | —                                                                                                                                                      |
 
 ## Content Projection
 

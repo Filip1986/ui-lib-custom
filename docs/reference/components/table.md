@@ -13,31 +13,32 @@ Table component — displays tabular data with sorting, filtering, selection, pa
 
 ### Inputs
 
-| Name                        | Type                  | Default                                    | Description                                                                                                                                                                                                                    |
-| --------------------------- | --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ariaLabel`                 | `string | null`       | `null`                                     | Accessible label for the table element.                                                                                                                                                                                        |
-| `caption`                   | `string | null`       | `null`                                     | Caption text rendered above the table when no `[uiTableCaption]` template is provided.                                                                                                                                         |
-| `currentPageReportTemplate` | `string`              | `'{currentPage} of {totalPages}'`          | Template string for the current-page report. Supports `{currentPage}` and `{totalPages}`.                                                                                                                                      |
-| `dataKey`                   | `string | null`       | `null`                                     | Dot-notation property key that uniquely identifies each row. Required for row expansion, selection equality, and `@for` tracking.                                                                                              |
-| `disabled`                  | `boolean`             | `false`                                    | When `true`, the entire component is non-interactive.                                                                                                                                                                          |
-| `emptyMessage`              | `string`              | `TABLE_DEFAULTS.EMPTY_MESSAGE`             | Message shown in the empty state when no `[uiTableEmpty]` template is provided.                                                                                                                                                |
-| `filterLocale`              | `string | undefined`  | `undefined`                                | BCP 47 locale used for locale-sensitive string comparisons during filtering.                                                                                                                                                   |
-| `globalFilterFields`        | `string[] | null`     | `null`                                     | Comma-separated list of column fields to include in the global filter. When `null`, all column fields are searched.                                                                                                            |
-| `globalFilterPlaceholder`   | `string`              | `TABLE_DEFAULTS.GLOBAL_FILTER_PLACEHOLDER` | Placeholder displayed inside the global filter input.                                                                                                                                                                          |
-| `metaKeySelection`          | `boolean`             | `false`                                    | When `true`, Ctrl/Meta must be held to toggle multi-row selection. Only relevant in `'multiple'` mode.                                                                                                                         |
-| `multiSortMode`             | `boolean`             | `false`                                    | When `true`, Ctrl+click on a sortable header adds it to the multi-sort stack instead of replacing the active sort.                                                                                                             |
-| `paginator`                 | `boolean`             | `false`                                    | When `true`, renders the built-in paginator below the table.                                                                                                                                                                   |
-| `rowHover`                  | `boolean`             | `false`                                    | When `true`, the pointer cursor and a hover highlight are shown on rows.                                                                                                                                                       |
-| `rowsPerPageOptions`        | `number[]`            | `TABLE_DEFAULTS.ROWS_PER_PAGE_OPTIONS`     | Options for the rows-per-page selector in the paginator.                                                                                                                                                                       |
-| `scrollable`                | `boolean`             | `false`                                    | When `true`, the table renders inside a scrollable wrapper.                                                                                                                                                                    |
-| `scrollHeight`              | `string | null`       | `null`                                     | CSS height of the scrollable body viewport, e.g. `'400px'` or `'60vh'`. Only relevant when `scrollable` is `true`.                                                                                                             |
-| `selectionMode`             | `TableSelectionMode`  | `null`                                     | Row selection mode. - `'single'` — single row selection on click. - `'multiple'` — multi-row selection via Ctrl/Shift + click. - `'checkbox'` — a leading checkbox column handles selection. - `null` — selection is disabled. |
-| `showGridlines`             | `boolean`             | `false`                                    | When `true`, grid lines are drawn between all cells.                                                                                                                                                                           |
-| `size`                      | `TableSize`           | `'md'`                                     | Component size token.                                                                                                                                                                                                          |
-| `stripedRows`               | `boolean`             | `false`                                    | When `true`, alternating rows are rendered with a background tint.                                                                                                                                                             |
-| `styleClass`                | `string | null`       | `null`                                     | Additional CSS class(es) applied to the host element.                                                                                                                                                                          |
-| `value`                     | `unknown[]`           | `[]`                                       | The array of row objects to display.                                                                                                                                                                                           |
-| `variant`                   | `TableVariant | null` | `null`                                     | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                                                                                                                       |
+| Name                        | Type                   | Default                                    | Description                                                                                                                                                                                                                    |
+| --------------------------- | ---------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ariaLabel`                 | `string | null`        | `null`                                     | Accessible label for the table element.                                                                                                                                                                                        |
+| `caption`                   | `string | null`        | `null`                                     | Caption text rendered above the table when no `[uiTableCaption]` template is provided.                                                                                                                                         |
+| `currentPageReportTemplate` | `string`               | `'{currentPage} of {totalPages}'`          | Template string for the current-page report. Supports `{currentPage}` and `{totalPages}`.                                                                                                                                      |
+| `dataKey`                   | `string | null`        | `null`                                     | Dot-notation property key that uniquely identifies each row. Required for row expansion, selection equality, and `@for` tracking.                                                                                              |
+| `disabled`                  | `boolean`              | `false`                                    | When `true`, the entire component is non-interactive.                                                                                                                                                                          |
+| `emptyMessage`              | `string`               | `TABLE_DEFAULTS.EMPTY_MESSAGE`             | Message shown in the empty state when no `[uiTableEmpty]` template is provided.                                                                                                                                                |
+| `filterLocale`              | `string | undefined`   | `undefined`                                | BCP 47 locale used for locale-sensitive string comparisons during filtering.                                                                                                                                                   |
+| `filterMatchMode`           | `TableFilterMatchMode` | `'contains'`                               | Match strategy used for global and per-column text filters.                                                                                                                                                                    |
+| `globalFilterFields`        | `string[] | null`      | `null`                                     | Comma-separated list of column fields to include in the global filter. When `null`, all column fields are searched.                                                                                                            |
+| `globalFilterPlaceholder`   | `string`               | `TABLE_DEFAULTS.GLOBAL_FILTER_PLACEHOLDER` | Placeholder displayed inside the global filter input.                                                                                                                                                                          |
+| `metaKeySelection`          | `boolean`              | `false`                                    | When `true`, Ctrl/Meta must be held to toggle multi-row selection. Only relevant in `'multiple'` mode.                                                                                                                         |
+| `multiSortMode`             | `boolean`              | `false`                                    | When `true`, Ctrl+click on a sortable header adds it to the multi-sort stack instead of replacing the active sort.                                                                                                             |
+| `paginator`                 | `boolean`              | `false`                                    | When `true`, renders the built-in paginator below the table.                                                                                                                                                                   |
+| `rowHover`                  | `boolean`              | `false`                                    | When `true`, the pointer cursor and a hover highlight are shown on rows.                                                                                                                                                       |
+| `rowsPerPageOptions`        | `number[]`             | `TABLE_DEFAULTS.ROWS_PER_PAGE_OPTIONS`     | Options for the rows-per-page selector in the paginator.                                                                                                                                                                       |
+| `scrollable`                | `boolean`              | `false`                                    | When `true`, the table renders inside a scrollable wrapper.                                                                                                                                                                    |
+| `scrollHeight`              | `string | null`        | `null`                                     | CSS height of the scrollable body viewport, e.g. `'400px'` or `'60vh'`. Only relevant when `scrollable` is `true`.                                                                                                             |
+| `selectionMode`             | `TableSelectionMode`   | `null`                                     | Row selection mode. - `'single'` — single row selection on click. - `'multiple'` — multi-row selection via Ctrl/Shift + click. - `'checkbox'` — a leading checkbox column handles selection. - `null` — selection is disabled. |
+| `showGridlines`             | `boolean`              | `false`                                    | When `true`, grid lines are drawn between all cells.                                                                                                                                                                           |
+| `size`                      | `TableSize`            | `'md'`                                     | Component size token.                                                                                                                                                                                                          |
+| `stripedRows`               | `boolean`              | `false`                                    | When `true`, alternating rows are rendered with a background tint.                                                                                                                                                             |
+| `styleClass`                | `string | null`        | `null`                                     | Additional CSS class(es) applied to the host element.                                                                                                                                                                          |
+| `value`                     | `unknown[]`            | `[]`                                       | The array of row objects to display.                                                                                                                                                                                           |
+| `variant`                   | `TableVariant | null`  | `null`                                     | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                                                                                                                       |
 
 ### Models (two-way bindable)
 
@@ -54,11 +55,15 @@ Table component — displays tabular data with sorting, filtering, selection, pa
 
 ### Outputs
 
-| Name          | Type               | Description                                     |
-| ------------- | ------------------ | ----------------------------------------------- |
-| `filtered`    | `TableFilterEvent` | Emitted when a filter value changes.            |
-| `pageChanged` | `TablePageEvent`   | Emitted when the page or rows-per-page changes. |
-| `sorted`      | `TableSortEvent`   | Emitted when the sort order changes.            |
+| Name            | Type                    | Description                                     |
+| --------------- | ----------------------- | ----------------------------------------------- |
+| `filtered`      | `TableFilterEvent`      | Emitted when a filter value changes.            |
+| `pageChanged`   | `TablePageEvent`        | Emitted when the page or rows-per-page changes. |
+| `rowCollapsed`  | `TableRowCollapseEvent` | Emitted when a row is collapsed.                |
+| `rowExpanded`   | `TableRowExpandEvent`   | Emitted when a row is expanded.                 |
+| `rowSelected`   | `TableRowSelectEvent`   | Emitted when a row is selected.                 |
+| `rowUnselected` | `TableRowUnselectEvent` | Emitted when a row is deselected.               |
+| `sorted`        | `TableSortEvent`        | Emitted when the sort order changes.            |
 
 ## Content Projection
 
@@ -66,45 +71,47 @@ _none_
 
 ## Theming
 
-| CSS Variable                           | Default                                                    |
-| -------------------------------------- | ---------------------------------------------------------- |
-| `--uilib-table-bg`                     | `var(--uilib-surface, #ffffff)`                            |
-| `--uilib-table-body-color`             | `var(--uilib-color-text, #212529)`                         |
-| `--uilib-table-body-font-size`         | `inherit`                                                  |
-| `--uilib-table-border-color`           | `var(--uilib-color-border, #dee2e6)`                       |
-| `--uilib-table-border-radius`          | `var(--uilib-radius-md, 6px)`                              |
-| `--uilib-table-border-width`           | `1px`                                                      |
-| `--uilib-table-caption-bg`             | `transparent`                                              |
-| `--uilib-table-caption-color`          | `var(--uilib-color-text, #212529)`                         |
-| `--uilib-table-caption-font-size`      | `1rem`                                                     |
-| `--uilib-table-caption-font-weight`    | `600`                                                      |
-| `--uilib-table-caption-padding`        | `0.75rem 1rem`                                             |
-| `--uilib-table-cell-padding-x`         | `1rem`                                                     |
-| `--uilib-table-cell-padding-y`         | `0.75rem`                                                  |
-| `--uilib-table-checkbox-size`          | `1rem`                                                     |
-| `--uilib-table-expander-bg`            | `transparent`                                              |
-| `--uilib-table-expander-bg-hover`      | `rgba(0, 0, 0, 0.06)`                                      |
-| `--uilib-table-expander-color`         | `var(--uilib-color-text-secondary, #6c757d)`               |
-| `--uilib-table-expander-size`          | `1.5rem`                                                   |
-| `--uilib-table-expansion-bg`           | `rgba(0, 0, 0, 0.015)`                                     |
-| `--uilib-table-filter-font-size`       | `0.8125rem`                                                |
-| `--uilib-table-filter-padding`         | `0.35rem 0.5rem`                                           |
-| `--uilib-table-footer-bg`              | `var(--uilib-surface, #ffffff)`                            |
-| `--uilib-table-header-bg`              | `var(--uilib-surface, #ffffff)`                            |
-| `--uilib-table-header-color`           | `var(--uilib-color-text, #212529)`                         |
-| `--uilib-table-header-font-size`       | `inherit`                                                  |
-| `--uilib-table-header-font-weight`     | `600`                                                      |
-| `--uilib-table-header-padding-x`       | `1rem`                                                     |
-| `--uilib-table-header-padding-y`       | `0.75rem`                                                  |
-| `--uilib-table-paginator-margin-top`   | `0.75rem`                                                  |
-| `--uilib-table-row-bg`                 | `transparent`                                              |
-| `--uilib-table-row-bg-alt`             | `rgba(0, 0, 0, 0.02)`                                      |
-| `--uilib-table-row-bg-hover`           | `rgba(0, 0, 0, 0.04)`                                      |
-| `--uilib-table-row-bg-selected`        | `rgba(var(--uilib-color-primary-rgb, 99, 102, 241), 0.12)` |
-| `--uilib-table-selection-border-color` | `var(--uilib-color-primary, #6366f1)`                      |
-| `--uilib-table-sort-icon-color`        | `var(--uilib-color-text-secondary, #6c757d)`               |
-| `--uilib-table-sort-icon-color-active` | `var(--uilib-color-primary, #6366f1)`                      |
-| `--uilib-table-sort-icon-size`         | `14px`                                                     |
+| CSS Variable                            | Default                                                    |
+| --------------------------------------- | ---------------------------------------------------------- |
+| `--uilib-table-bg`                      | `var(--uilib-surface, #ffffff)`                            |
+| `--uilib-table-body-color`              | `var(--uilib-color-text, #212529)`                         |
+| `--uilib-table-body-font-size`          | `inherit`                                                  |
+| `--uilib-table-border-color`            | `var(--uilib-color-border, #dee2e6)`                       |
+| `--uilib-table-border-radius`           | `var(--uilib-radius-md, 6px)`                              |
+| `--uilib-table-border-width`            | `1px`                                                      |
+| `--uilib-table-caption-bg`              | `transparent`                                              |
+| `--uilib-table-caption-color`           | `var(--uilib-color-text, #212529)`                         |
+| `--uilib-table-caption-font-size`       | `1rem`                                                     |
+| `--uilib-table-caption-font-weight`     | `600`                                                      |
+| `--uilib-table-caption-padding`         | `0.75rem 1rem`                                             |
+| `--uilib-table-cell-padding-x`          | `1rem`                                                     |
+| `--uilib-table-cell-padding-y`          | `0.75rem`                                                  |
+| `--uilib-table-checkbox-size`           | `1rem`                                                     |
+| `--uilib-table-empty-message-font-size` | `0.9em`                                                    |
+| `--uilib-table-expander-bg`             | `transparent`                                              |
+| `--uilib-table-expander-bg-hover`       | `rgba(0, 0, 0, 0.06)`                                      |
+| `--uilib-table-expander-color`          | `var(--uilib-color-text-secondary, #6c757d)`               |
+| `--uilib-table-expander-size`           | `1.5rem`                                                   |
+| `--uilib-table-expansion-bg`            | `rgba(0, 0, 0, 0.015)`                                     |
+| `--uilib-table-filter-font-size`        | `0.8125rem`                                                |
+| `--uilib-table-filter-padding`          | `0.35rem 0.5rem`                                           |
+| `--uilib-table-footer-bg`               | `var(--uilib-surface, #ffffff)`                            |
+| `--uilib-table-header-bg`               | `var(--uilib-surface, #ffffff)`                            |
+| `--uilib-table-header-color`            | `var(--uilib-color-text, #212529)`                         |
+| `--uilib-table-header-font-size`        | `inherit`                                                  |
+| `--uilib-table-header-font-weight`      | `600`                                                      |
+| `--uilib-table-header-padding-x`        | `1rem`                                                     |
+| `--uilib-table-header-padding-y`        | `0.75rem`                                                  |
+| `--uilib-table-paginator-margin-top`    | `0.75rem`                                                  |
+| `--uilib-table-row-bg`                  | `transparent`                                              |
+| `--uilib-table-row-bg-alt`              | `rgba(0, 0, 0, 0.02)`                                      |
+| `--uilib-table-row-bg-hover`            | `rgba(0, 0, 0, 0.04)`                                      |
+| `--uilib-table-row-bg-selected`         | `rgba(var(--uilib-color-primary-rgb, 99, 102, 241), 0.12)` |
+| `--uilib-table-selection-border-color`  | `var(--uilib-color-primary, #6366f1)`                      |
+| `--uilib-table-sort-badge-font-size`    | `0.65em`                                                   |
+| `--uilib-table-sort-icon-color`         | `var(--uilib-color-text-secondary, #6c757d)`               |
+| `--uilib-table-sort-icon-color-active`  | `var(--uilib-color-primary, #6366f1)`                      |
+| `--uilib-table-sort-icon-size`          | `14px`                                                     |
 
 ## Accessibility
 

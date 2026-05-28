@@ -13,20 +13,22 @@ ContextMenu component — an overlay menu triggered on right-click (or programma
 
 ### Inputs
 
-| Name         | Type                | Default                           | Description                                                                                                                                                                                                              |
-| ------------ | ------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ariaLabel`  | `string`            | `CONTEXT_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the menu panel (aria-label).                                                                                                                                                                        |
-| `global`     | `boolean`           | `false`                           | When true, the component automatically listens to the `contextmenu` event on the document, showing the menu on any right-click in the page. Defaults to false; use `show(event)` / `toggle(event)` for targeted control. |
-| `model`      | `ContextMenuItem[]` | `[]`                              | Array of menu items to display in the context menu.                                                                                                                                                                      |
-| `size`       | `ContextMenuSize`   | `'md'`                            | Size token: sm | md | lg.                                                                                                                                                                                                |
-| `styleClass` | `string | null`     | `null`                            | Extra CSS class appended to the host element.                                                                                                                                                                            |
+| Name         | Type                        | Default                           | Description                                                                                                                                                                                                              |
+| ------------ | --------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ariaLabel`  | `string`                    | `CONTEXT_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the menu panel (aria-label).                                                                                                                                                                        |
+| `global`     | `boolean`                   | `false`                           | When true, the component automatically listens to the `contextmenu` event on the document, showing the menu on any right-click in the page. Defaults to false; use `show(event)` / `toggle(event)` for targeted control. |
+| `model`      | `ContextMenuItem[]`         | `[]`                              | Array of menu items to display in the context menu.                                                                                                                                                                      |
+| `size`       | `ContextMenuSize`           | `'md'`                            | Size token: sm | md | lg.                                                                                                                                                                                                |
+| `styleClass` | `string | null`             | `null`                            | Extra CSS class appended to the host element.                                                                                                                                                                            |
+| `variant`    | `ContextMenuVariant | null` | `null`                            | Design-system variant; falls back to ThemeConfigService when null.                                                                                                                                                       |
 
 ### Outputs
 
-| Name       | Type         | Description                            |
-| ---------- | ------------ | -------------------------------------- |
-| `menuHide` | `void`       | Emitted when the menu is hidden.       |
-| `menuShow` | `MouseEvent` | Emitted when the menu becomes visible. |
+| Name        | Type                          | Description                                                                 |
+| ----------- | ----------------------------- | --------------------------------------------------------------------------- |
+| `itemClick` | `ContextMenuItemCommandEvent` | Emitted when a non-disabled leaf item is clicked or activated via keyboard. |
+| `menuHide`  | `void`                        | Emitted when the menu is hidden.                                            |
+| `menuShow`  | `MouseEvent`                  | Emitted when the menu becomes visible.                                      |
 
 ## Content Projection
 

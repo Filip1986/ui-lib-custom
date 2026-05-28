@@ -38,11 +38,12 @@ Advanced file upload component with drag-and-drop, multi-file support, image thu
 
 ### Outputs
 
-| Name          | Type                | Description                                                        |
-| ------------- | ------------------- | ------------------------------------------------------------------ |
-| `fileRemove`  | `UploadRemoveEvent` | Emitted when the user removes a single file from the queue.        |
-| `fileSelect`  | `UploadSelectEvent` | Emitted whenever files are selected (via picker or drag-and-drop). |
-| `uploadClear` | `void`              | Emitted when the entire queue is cleared via the Cancel button.    |
+| Name            | Type                 | Description                                                                                                  |
+| --------------- | -------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `fileRemove`    | `UploadRemoveEvent`  | Emitted when the user removes a single file from the queue.                                                  |
+| `fileSelect`    | `UploadSelectEvent`  | Emitted whenever files are selected (via picker or drag-and-drop).                                           |
+| `uploadClear`   | `void`               | Emitted when the entire queue is cleared via the Cancel button.                                              |
+| `uploadHandler` | `UploadHandlerEvent` | Emitted in `customUpload` mode (or `auto + customUpload`) so the consumer can handle the actual HTTP upload. |
 
 ## Content Projection
 
@@ -79,8 +80,11 @@ _none_
 | `--uilib-upload-drop-zone-min-height`        | `200px`                                        |
 | `--uilib-upload-empty-gap`                   | `0.5rem`                                       |
 | `--uilib-upload-empty-hint-color`            | `var(--uilib-text-color-secondary, #9ca3af)`   |
+| `--uilib-upload-empty-hint-font-size`        | `var(--uilib-font-size-sm, 0.8125rem)`         |
 | `--uilib-upload-empty-icon-color`            | `var(--uilib-text-color-secondary, #9ca3af)`   |
 | `--uilib-upload-empty-link-color`            | `var(--uilib-primary-color, #3b82f6)`          |
+| `--uilib-upload-empty-link-font-size`        | `var(--uilib-font-size-sm, 0.8125rem)`         |
+| `--uilib-upload-empty-message-font-size`     | `0.9375rem`                                    |
 | `--uilib-upload-empty-text-color`            | `var(--uilib-text-color-secondary, #6b7280)`   |
 | `--uilib-upload-fg`                          | `var(--uilib-text-color, #1f2937)`             |
 | `--uilib-upload-file-icon-color`             | `var(--uilib-text-color-secondary, #6b7280)`   |
@@ -91,13 +95,16 @@ _none_
 | `--uilib-upload-file-item-radius`            | `var(--uilib-border-radius, 6px)`              |
 | `--uilib-upload-file-list-gap`               | `0.5rem`                                       |
 | `--uilib-upload-file-name-color`             | `var(--uilib-text-color, #1f2937)`             |
+| `--uilib-upload-file-name-font-size`         | `var(--uilib-font-size-sm, 0.875rem)`          |
 | `--uilib-upload-file-preview-radius`         | `4px`                                          |
 | `--uilib-upload-file-preview-size`           | `3rem`                                         |
 | `--uilib-upload-file-remove-color`           | `var(--uilib-text-color-secondary, #9ca3af)`   |
 | `--uilib-upload-file-remove-hover-color`     | `var(--uilib-danger-color, #ef4444)`           |
 | `--uilib-upload-file-size-color`             | `var(--uilib-text-color-secondary, #6b7280)`   |
+| `--uilib-upload-file-size-font-size`         | `var(--uilib-font-size-xs, 0.75rem)`           |
 | `--uilib-upload-header-bg`                   | `var(--uilib-surface-color-alt, #f8f9fa)`      |
 | `--uilib-upload-header-padding`              | `0.75rem 1rem`                                 |
+| `--uilib-upload-message-font-size`           | `var(--uilib-font-size-sm, 0.8125rem)`         |
 | `--uilib-upload-messages-bg`                 | `#fef2f2`                                      |
 | `--uilib-upload-messages-border`             | `1px solid #fecaca`                            |
 | `--uilib-upload-messages-close-color`        | `#b91c1c`                                      |

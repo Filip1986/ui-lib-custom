@@ -24,7 +24,10 @@ PanelMenu — a vertical, accordion-style navigation menu driven by a `model` ar
 
 ### Outputs
 
-_none_
+| Name          | Type                        | Description                                                            |
+| ------------- | --------------------------- | ---------------------------------------------------------------------- |
+| `itemClick`   | `PanelMenuCommandEvent`     | Emitted when a leaf item is activated (clicked or keyboard-activated). |
+| `panelToggle` | `PanelMenuPanelToggleEvent` | Emitted when a root panel's expansion state changes.                   |
 
 ## Content Projection
 

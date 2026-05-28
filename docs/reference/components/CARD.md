@@ -47,25 +47,27 @@ Card container component with optional header, footer, and theme scope.
 
 ## Theming
 
-| CSS Variable                         | Default                                                                                                                                             |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--uilib-card-bg`                    | `var(--uilib-surface-dark-2)`                                                                                                                       |
-| `--uilib-card-body-padding`          | `calc(var(--uilib-card-body-padding-base) * var(--uilib-density, 1))`                                                                               |
-| `--uilib-card-body-padding-base`     | `1rem`                                                                                                                                              |
-| `--uilib-card-border`                | `var(--uilib-card-border, var(--uilib-border))`                                                                                                     |
-| `--uilib-card-border-width`          | `0`                                                                                                                                                 |
-| `--uilib-card-footer-bg`             | `var(--uilib-card-footer-bg, var(--uilib-surface-alt))`                                                                                             |
-| `--uilib-card-footer-padding`        | `calc( var(--uilib-card-footer-padding-y-base) * var(--uilib-density, 1) ) calc(var(--uilib-card-footer-padding-x-base) * var(--uilib-density, 1))` |
-| `--uilib-card-footer-padding-x-base` | `1rem`                                                                                                                                              |
-| `--uilib-card-footer-padding-y-base` | `0.5rem`                                                                                                                                            |
-| `--uilib-card-header-bg`             | `var(--uilib-card-header-bg, var(--uilib-surface-alt))`                                                                                             |
-| `--uilib-card-header-padding`        | `calc( var(--uilib-card-header-padding-y-base) * var(--uilib-density, 1) ) calc(var(--uilib-card-header-padding-x-base) * var(--uilib-density, 1))` |
-| `--uilib-card-header-padding-x-base` | `1rem`                                                                                                                                              |
-| `--uilib-card-header-padding-y-base` | `0.75rem`                                                                                                                                           |
-| `--uilib-card-radius`                | `var(--uilib-radius-md)`                                                                                                                            |
-| `--uilib-card-shadow`                | `var(--uilib-card-shadow-none, none)`                                                                                                               |
-| `--uilib-card-shadow-hover`          | `var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none))`                                                                                 |
-| `--uilib-card-text-color`            | `var(--uilib-text-dark-primary)`                                                                                                                    |
+| CSS Variable                            | Default                                                                                                                                             |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-card-bg`                       | `var(--uilib-surface-dark-2)`                                                                                                                       |
+| `--uilib-card-body-padding`             | `calc(var(--uilib-card-body-padding-base) * var(--uilib-density, 1))`                                                                               |
+| `--uilib-card-body-padding-base`        | `1rem`                                                                                                                                              |
+| `--uilib-card-border`                   | `var(--uilib-card-border, var(--uilib-border))`                                                                                                     |
+| `--uilib-card-border-width`             | `0`                                                                                                                                                 |
+| `--uilib-card-footer-bg`                | `var(--uilib-card-footer-bg, var(--uilib-surface-alt))`                                                                                             |
+| `--uilib-card-footer-padding`           | `calc( var(--uilib-card-footer-padding-y-base) * var(--uilib-density, 1) ) calc(var(--uilib-card-footer-padding-x-base) * var(--uilib-density, 1))` |
+| `--uilib-card-footer-padding-x-base`    | `1rem`                                                                                                                                              |
+| `--uilib-card-footer-padding-y-base`    | `0.5rem`                                                                                                                                            |
+| `--uilib-card-header-bg`                | `var(--uilib-card-header-bg, var(--uilib-surface-alt))`                                                                                             |
+| `--uilib-card-header-padding`           | `calc( var(--uilib-card-header-padding-y-base) * var(--uilib-density, 1) ) calc(var(--uilib-card-header-padding-x-base) * var(--uilib-density, 1))` |
+| `--uilib-card-header-padding-x-base`    | `1rem`                                                                                                                                              |
+| `--uilib-card-header-padding-y-base`    | `0.75rem`                                                                                                                                           |
+| `--uilib-card-media-subtitle-font-size` | `0.95rem`                                                                                                                                           |
+| `--uilib-card-media-title-font-size`    | `1.125rem`                                                                                                                                          |
+| `--uilib-card-radius`                   | `var(--uilib-radius-md)`                                                                                                                            |
+| `--uilib-card-shadow`                   | `var(--uilib-card-shadow-none, none)`                                                                                                               |
+| `--uilib-card-shadow-hover`             | `var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none))`                                                                                 |
+| `--uilib-card-text-color`               | `var(--uilib-text-dark-primary)`                                                                                                                    |
 
 ## Accessibility
 

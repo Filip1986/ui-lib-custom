@@ -55,7 +55,11 @@ _none_
 | `--uilib-input-border`              | `var(--uilib-border-dark)`                                          |
 | `--uilib-input-border-focus`        | `var(--uilib-color-primary-dark)`                                   |
 | `--uilib-input-border-hover`        | `var(--uilib-border-dark-light)`                                    |
+| `--uilib-input-font-size-lg`        | `var(--uilib-font-size-lg, 1.125rem)`                               |
+| `--uilib-input-font-size-md`        | `var(--uilib-font-size-md, 1rem)`                                   |
+| `--uilib-input-font-size-sm`        | `var(--uilib-font-size-sm, 0.875rem)`                               |
 | `--uilib-input-label-bg`            | `var(--uilib-surface-dark-1)`                                       |
+| `--uilib-input-meta-font-size`      | `var(--uilib-font-size-sm, 0.875rem)`                               |
 | `--uilib-input-min-height`          | `36px`                                                              |
 | `--uilib-input-padding-x`           | `calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1))` |
 | `--uilib-input-padding-x-base`      | `0.75rem`                                                           |

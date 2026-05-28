@@ -13,29 +13,32 @@ RadioButton component with accessible labeling and group selection support via C
 
 ### Inputs
 
-| Name              | Type              | Default | Description                                                  |
-| ----------------- | ----------------- | ------- | ------------------------------------------------------------ |
-| `ariaDescribedby` | `string | null`   | `null`  | Links to helper/error text element ids.                      |
-| `ariaLabel`       | `string | null`   | `null`  | ARIA label when no visible label is provided.                |
-| `ariaLabelledby`  | `string | null`   | `null`  | Explicit aria-labelledby override.                           |
-| `autofocus`       | `boolean`         | `false` | Automatically focuses the input after view init.             |
-| `disabled`        | `boolean`         | `false` | Whether the radio button is disabled.                        |
-| `inputId`         | `string | null`   | `null`  | Id forwarded to the native `<input>` element.                |
-| `invalid`         | `boolean`         | `false` | Explicit invalid state for accessibility and styling.        |
-| `label`           | `string | null`   | `null`  | Label text rendered next to the radio button.                |
-| `name`            | `string | null`   | `null`  | Name attribute shared across the radio group.                |
-| `readonly`        | `boolean`         | `false` | When true the radio button is visible but cannot be changed. |
-| `required`        | `boolean`         | `false` | Whether the native input is required.                        |
-| `size`            | `RadioButtonSize` | `'md'`  | Size token: sm | md | lg.                                    |
-| `tabindex`        | `number`          | `0`     | Tab index for keyboard navigation.                           |
-| `value`           | `unknown`         | `null`  | The value this radio button represents in the group model.   |
+| Name              | Type                        | Default      | Description                                                        |
+| ----------------- | --------------------------- | ------------ | ------------------------------------------------------------------ |
+| `appearance`      | `RadioButtonAppearance`     | `'outlined'` | Visual appearance of the radio box.                                |
+| `ariaDescribedby` | `string | null`             | `null`       | Links to helper/error text element ids.                            |
+| `ariaLabel`       | `string | null`             | `null`       | ARIA label when no visible label is provided.                      |
+| `ariaLabelledby`  | `string | null`             | `null`       | Explicit aria-labelledby override.                                 |
+| `autofocus`       | `boolean`                   | `false`      | Automatically focuses the input after view init.                   |
+| `disabled`        | `boolean`                   | `false`      | Whether the radio button is disabled.                              |
+| `inputId`         | `string | null`             | `null`       | Id forwarded to the native `<input>` element.                      |
+| `invalid`         | `boolean`                   | `false`      | Explicit invalid state for accessibility and styling.              |
+| `label`           | `string | null`             | `null`       | Label text rendered next to the radio button.                      |
+| `name`            | `string | null`             | `null`       | Name attribute shared across the radio group.                      |
+| `readonly`        | `boolean`                   | `false`      | When true the radio button is visible but cannot be changed.       |
+| `required`        | `boolean`                   | `false`      | Whether the native input is required.                              |
+| `size`            | `RadioButtonSize`           | `'md'`       | Size token: sm | md | lg.                                          |
+| `tabindex`        | `number`                    | `0`          | Tab index for keyboard navigation.                                 |
+| `value`           | `unknown`                   | `null`       | The value this radio button represents in the group model.         |
+| `variant`         | `RadioButtonVariant | null` | `null`       | Design-system variant; falls back to ThemeConfigService when null. |
 
 ### Outputs
 
-| Name         | Type         | Description                                |
-| ------------ | ------------ | ------------------------------------------ |
-| `radioBlur`  | `FocusEvent` | Emitted when the native input loses focus. |
-| `radioFocus` | `FocusEvent` | Emitted when the native input gains focus. |
+| Name          | Type                     | Description                                 |
+| ------------- | ------------------------ | ------------------------------------------- |
+| `radioBlur`   | `FocusEvent`             | Emitted when the native input loses focus.  |
+| `radioChange` | `RadioButtonChangeEvent` | Emitted when this radio button is selected. |
+| `radioFocus`  | `FocusEvent`             | Emitted when the native input gains focus.  |
 
 ## Content Projection
 
@@ -55,6 +58,8 @@ RadioButton component with accessible labeling and group selection support via C
 | `--uilib-radio-button-dot-color`           | `var(--uilib-color-neutral-50)`                                                         |
 | `--uilib-radio-button-focus-ring`          | `0 0 0 3px color-mix(in srgb, var(--uilib-radio-button-border-hover) 30%, transparent)` |
 | `--uilib-radio-button-font`                | `var(--uilib-font-ui, inherit)`                                                         |
+| `--uilib-radio-button-font-size-lg`        | `var(--uilib-font-size-md, 1rem)`                                                       |
+| `--uilib-radio-button-font-size-sm`        | `var(--uilib-font-size-sm, 0.875rem)`                                                   |
 | `--uilib-radio-button-gap`                 | `var(--uilib-space-3, 0.75rem)`                                                         |
 | `--uilib-radio-button-label-color`         | `inherit`                                                                               |
 | `--uilib-radio-button-size`                | `var(--uilib-radio-button-size-sm)`                                                     |

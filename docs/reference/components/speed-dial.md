@@ -42,12 +42,15 @@ SpeedDial scaffold component with public API signals and projection slots.
 
 ### Outputs
 
-| Name          | Type                 | Description                                |
-| ------------- | -------------------- | ------------------------------------------ |
-| `buttonBlur`  | `FocusEvent`         | Emits when the trigger button loses focus. |
-| `buttonFocus` | `FocusEvent`         | Emits when the trigger button gains focus. |
-| `hide`        | `SpeedDialHideEvent` | —                                          |
-| `show`        | `SpeedDialShowEvent` | —                                          |
+| Name          | Type                          | Description                                                                                                                                                                                                                                                          |
+| ------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `buttonBlur`  | `FocusEvent`                  | Emits when the trigger button loses focus.                                                                                                                                                                                                                           |
+| `buttonClick` | `SpeedDialClickEvent`         | Emits when the trigger button is activated by click or keyboard.                                                                                                                                                                                                     |
+| `buttonFocus` | `FocusEvent`                  | Emits when the trigger button gains focus.                                                                                                                                                                                                                           |
+| `hide`        | `SpeedDialHideEvent`          | —                                                                                                                                                                                                                                                                    |
+| `itemCommand` | `SpeedDialItemCommandEvent`   | —                                                                                                                                                                                                                                                                    |
+| `panelChange` | `SpeedDialVisibleChangeEvent` | Emits whenever the panel opens or closes, carrying the native event and new visibility state. Named `panelChange` (not `visibleChange`) to avoid shadowing the two-way-binding event that `model<boolean>()` for `visible` generates internally under the same name. |
+| `show`        | `SpeedDialShowEvent`          | —                                                                                                                                                                                                                                                                    |
 
 ## Content Projection
 

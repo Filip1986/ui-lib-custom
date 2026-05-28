@@ -15,10 +15,10 @@ InputOtp component — renders N individual input cells for one-time password en
 
 | Name                      | Type                                          | Default                          | Description                                                                 |
 | ------------------------- | --------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------- |
-| `ariaLabel`               | `string | null`                               | `'One-time passcode'`            | Accessible name for the OTP group container.                                |
+| `ariaLabel`               | `string | null`                               | `null`                           | Accessible name for the OTP group container.                                |
 | `ariaLabelledBy`          | `string | null`                               | `null`                           | Optional external label element id for the OTP group container.             |
-| `digitAriaLabelConnector` | `string`                                      | `'of'`                           | Connector text for cell position labels, used for i18n customization.       |
-| `digitAriaLabelPrefix`    | `string`                                      | `'Digit'`                        | Prefix for cell position labels, used for i18n customization.               |
+| `digitAriaLabelConnector` | `string`                                      | `''`                             | Connector text for cell position labels, used for i18n customization.       |
+| `digitAriaLabelPrefix`    | `string`                                      | `''`                             | Prefix for cell position labels, used for i18n customization.               |
 | `disabled`                | `boolean`                                     | `INPUT_OTP_DEFAULTS.disabled`    | Disables all input cells.                                                   |
 | `filled`                  | `boolean`                                     | `INPUT_OTP_DEFAULTS.filled`      | Applies filled background appearance to each cell.                          |
 | `id`                      | `string | null`                               | `null`                           | Optional explicit id for the OTP group container.                           |
@@ -26,7 +26,7 @@ InputOtp component — renders N individual input cells for one-time password en
 | `invalid`                 | `boolean`                                     | `INPUT_OTP_DEFAULTS.invalid`     | Applies invalid (error) styling to all cells.                               |
 | `length`                  | `number`                                      | `INPUT_OTP_DEFAULTS.length`      | Number of OTP input cells to render.                                        |
 | `mask`                    | `boolean`                                     | `INPUT_OTP_DEFAULTS.mask`        | When true, each cell renders as a password field (dots).                    |
-| `pasteAnnouncement`       | `string`                                      | `'Code entered.'`                | Text announced in live region after a successful paste.                     |
+| `pasteAnnouncement`       | `string`                                      | `''`                             | Text announced in live region after a successful paste.                     |
 | `readonly`                | `boolean`                                     | `INPUT_OTP_DEFAULTS.readonly`    | Makes all input cells read-only.                                            |
 | `size`                    | `InputOtpSize`                                | `INPUT_OTP_DEFAULTS.size`        | Size variant: 'sm' | 'md' | 'lg'.                                           |
 | `styleClass`              | `string | undefined`                          | `undefined`                      | Extra CSS class applied to each cell input element.                         |

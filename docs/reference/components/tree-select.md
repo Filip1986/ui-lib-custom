@@ -26,6 +26,7 @@ TreeSelect renders a hierarchical tree structure inside a dropdown panel, allowi
 | `nodes`             | `TreeNode[]`               | `[]`                                     | Root-level tree nodes to display in the panel.                                |
 | `placeholder`       | `string`                   | `TREE_SELECT_DEFAULTS.placeholder`       | Placeholder text shown when no node is selected.                              |
 | `required`          | `boolean`                  | `false`                                  | When `true`, sets `aria-required`.                                            |
+| `selectionMode`     | `TreeSelectSelectionMode`  | `'single'`                               | Controls how nodes respond to user interaction.                               |
 | `showClear`         | `boolean`                  | `false`                                  | When `true`, shows a clear button when a value is selected.                   |
 | `size`              | `TreeSelectSize`           | `'md'`                                   | Size of the trigger element.                                                  |
 | `styleClass`        | `string`                   | `''`                                     | Extra CSS class applied to the host element.                                  |
@@ -40,13 +41,16 @@ TreeSelect renders a hierarchical tree structure inside a dropdown panel, allowi
 
 ### Outputs
 
-| Name         | Type                  | Description                                                 |
-| ------------ | --------------------- | ----------------------------------------------------------- |
-| `cleared`    | `void`                | Emitted when the selection is cleared via the clear button. |
-| `hide`       | `TreeSelectHideEvent` | Emitted when the dropdown panel is hidden.                  |
-| `nodeExpand` | `TreeNodeExpandEvent` | Emitted when a tree node is expanded.                       |
-| `nodeSelect` | `TreeNodeSelectEvent` | Emitted when a tree node is selected.                       |
-| `show`       | `TreeSelectShowEvent` | Emitted when the dropdown panel is shown.                   |
+| Name           | Type                    | Description                                                 |
+| -------------- | ----------------------- | ----------------------------------------------------------- |
+| `cleared`      | `void`                  | Emitted when the selection is cleared via the clear button. |
+| `hide`         | `TreeSelectHideEvent`   | Emitted when the dropdown panel is hidden.                  |
+| `nodeCollapse` | `TreeNodeCollapseEvent` | Emitted when a tree node is collapsed.                      |
+| `nodeExpand`   | `TreeNodeExpandEvent`   | Emitted when a tree node is expanded.                       |
+| `nodeSelect`   | `TreeNodeSelectEvent`   | Emitted when a tree node is selected.                       |
+| `nodeUnselect` | `TreeNodeSelectEvent`   | Emitted when a tree node is unselected.                     |
+| `show`         | `TreeSelectShowEvent`   | Emitted when the dropdown panel is shown.                   |
+| `treeChange`   | `TreeSelectChangeEvent` | Emitted when the selection changes.                         |
 
 ## Content Projection
 
@@ -54,17 +58,22 @@ _none_
 
 ## Theming
 
-| CSS Variable                                | Default                       |
-| ------------------------------------------- | ----------------------------- |
-| `--uilib-tree-select-panel-max-height`      | `320px`                       |
-| `--uilib-tree-select-panel-radius`          | `var(--uilib-radius-md, 4px)` |
-| `--uilib-tree-select-panel-z-index`         | `var(--uilib-z-overlay, 100)` |
-| `--uilib-tree-select-trigger-min-height-lg` | `48px`                        |
-| `--uilib-tree-select-trigger-min-height-md` | `40px`                        |
-| `--uilib-tree-select-trigger-min-height-sm` | `32px`                        |
-| `--uilib-tree-select-trigger-padding-x`     | `0.5rem`                      |
-| `--uilib-tree-select-trigger-padding-y`     | `0.35rem`                     |
-| `--uilib-tree-select-trigger-radius`        | `var(--uilib-radius-md, 4px)` |
+| CSS Variable                                | Default                               |
+| ------------------------------------------- | ------------------------------------- |
+| `--uilib-tree-select-chevron-font-size`     | `0.8rem`                              |
+| `--uilib-tree-select-clear-font-size`       | `1.1em`                               |
+| `--uilib-tree-select-font-size`             | `var(--uilib-font-size-md, 1rem)`     |
+| `--uilib-tree-select-font-size-lg`          | `var(--uilib-font-size-lg, 1.125rem)` |
+| `--uilib-tree-select-font-size-sm`          | `var(--uilib-font-size-sm, 0.875rem)` |
+| `--uilib-tree-select-panel-max-height`      | `320px`                               |
+| `--uilib-tree-select-panel-radius`          | `var(--uilib-radius-md, 4px)`         |
+| `--uilib-tree-select-panel-z-index`         | `var(--uilib-z-overlay, 100)`         |
+| `--uilib-tree-select-trigger-min-height-lg` | `48px`                                |
+| `--uilib-tree-select-trigger-min-height-md` | `40px`                                |
+| `--uilib-tree-select-trigger-min-height-sm` | `32px`                                |
+| `--uilib-tree-select-trigger-padding-x`     | `0.5rem`                              |
+| `--uilib-tree-select-trigger-padding-y`     | `0.35rem`                             |
+| `--uilib-tree-select-trigger-radius`        | `var(--uilib-radius-md, 4px)`         |
 
 ## Accessibility
 

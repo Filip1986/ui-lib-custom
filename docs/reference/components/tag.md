@@ -61,6 +61,7 @@ Tag — compact label for status, category, or classification. Supports a text l
 | `--uilib-tag-font-size-sm`             | `0.6875rem`                                                                   |
 | `--uilib-tag-font-weight`              | `700`                                                                         |
 | `--uilib-tag-gap`                      | `0.3rem`                                                                      |
+| `--uilib-tag-icon-font-size`           | `0.9em`                                                                       |
 | `--uilib-tag-letter-spacing`           | `0.025em`                                                                     |
 | `--uilib-tag-line-height`              | `1`                                                                           |
 | `--uilib-tag-padding-x`                | `0.5rem`                                                                      |
@@ -74,6 +75,7 @@ Tag — compact label for status, category, or classification. Supports a text l
 | `--uilib-tag-remove-button-color`      | `currentColor`                                                                |
 | `--uilib-tag-remove-button-size`       | `1.25em`                                                                      |
 | `--uilib-tag-remove-button-transition` | `background-color 0.15s ease`                                                 |
+| `--uilib-tag-remove-icon-font-size`    | `0.7em`                                                                       |
 | `--uilib-tag-transition`               | `var( --uilib-transition-base, background-color 0.2s ease, color 0.2s ease )` |
 
 ## Accessibility
