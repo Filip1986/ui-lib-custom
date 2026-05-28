@@ -21,7 +21,11 @@
     --uilib-timeline-font-size: 1rem;
     --uilib-timeline-color: var(--uilib-text-color, #1f2937);
     --uilib-timeline-focus-ring-color: var(--uilib-primary-color, #3b82f6);
+    --uilib-timeline-focus-ring-width: 3px;
+    --uilib-timeline-item-padding-bottom: 1.5rem;
     display: flex;
+    animation: uilib-timeline-mount var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
     color: var(--uilib-timeline-color);
     font-size: var(--uilib-timeline-font-size);
   }
@@ -36,7 +40,7 @@
     .ui-lib-timeline__content,
     .ui-lib-timeline__opposite {
       border-radius: var(--uilib-radius-md, 0.5rem);
-      box-shadow: 0 0 0 3px
+      box-shadow: 0 0 0 var(--uilib-timeline-focus-ring-width)
         color-mix(in srgb, var(--uilib-timeline-focus-ring-color) 22%, transparent);
     }
   }
@@ -68,7 +72,7 @@
     .ui-lib-timeline__content {
       grid-area: content;
       padding-inline-start: var(--uilib-timeline-content-gap);
-      padding-bottom: 1.5rem;
+      padding-bottom: var(--uilib-timeline-item-padding-bottom);
       align-self: flex-start;
       padding-top: calc((var(--uilib-timeline-marker-size) - 1em) / 2);
     }
@@ -295,7 +299,26 @@
     }
   }
 
+  // =============================================================================
+  // Mount animation
+  // =============================================================================
+  @keyframes uilib-timeline-mount {
+    from {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .ui-lib-timeline {
+      animation: none;
+    }
+
     .ui-lib-timeline__dot {
       transform: none !important;
       transition: none;

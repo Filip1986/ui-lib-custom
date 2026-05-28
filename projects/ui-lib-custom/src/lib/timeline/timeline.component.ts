@@ -11,6 +11,7 @@ import {
 import type { InputSignal, Signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   TimelineAlign,
   TimelineItemContext,
@@ -52,12 +53,13 @@ let nextTimelineId: number = 0;
   host: {
     '[class]': 'hostClasses()',
     '[attr.id]': 'instanceId',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
     role: 'list',
   },
 })
 export class TimelineComponent<T> {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   /** Unique instance id used for accessibility attributes. */
   public readonly instanceId: string = `ui-lib-timeline-${nextTimelineId++}`;
   // ---------------------------------------------------------------------------
@@ -71,7 +73,7 @@ export class TimelineComponent<T> {
    * - `'horizontal'` — events arranged left-to-right
    */
   public readonly layout: InputSignal<TimelineLayout> = input<TimelineLayout>(
-    TIMELINE_DEFAULTS.layout
+    TIMELINE_DEFAULTS.layout,
   );
   /**
    * Event alignment within the layout.
@@ -83,14 +85,21 @@ export class TimelineComponent<T> {
    * Visual variant override. When `null`, the variant is inherited from `ThemeConfigService`.
    */
   public readonly variant: InputSignal<TimelineVariant | null> = input<TimelineVariant | null>(
-    null
+    null,
   );
   /** Component density size. */
   public readonly size: InputSignal<TimelineSize> = input<TimelineSize>(TIMELINE_DEFAULTS.size);
   /** Additional CSS class(es) to append to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
-  /** Accessible label for the timeline list. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(TIMELINE_DEFAULTS.ariaLabel);
+  /** Accessible label for the timeline list. Falls back to i18n `timeline.label` when empty. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  // ---------------------------------------------------------------------------
+  // Resolved accessible label
+  // ---------------------------------------------------------------------------
+  /** Resolved aria-label: explicit ariaLabel input > i18n fallback. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('timeline.label'),
+  );
   // ---------------------------------------------------------------------------
   // Content children (template slot directives)
   // ---------------------------------------------------------------------------
@@ -108,7 +117,7 @@ export class TimelineComponent<T> {
   // ---------------------------------------------------------------------------
   /** Resolved theme variant — falls back to global ThemeConfigService value. */
   public readonly resolvedVariant: Signal<TimelineVariant> = computed<TimelineVariant>(
-    (): TimelineVariant => this.variant() ?? this.themeConfig.variant()
+    (): TimelineVariant => this.variant() ?? this.themeConfig.variant(),
   );
   /** Full CSS class string applied to the host element. */
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -138,7 +147,7 @@ export class TimelineComponent<T> {
         last: index === items.length - 1,
         even: index % 2 === 0,
         odd: index % 2 !== 0,
-      })
+      }),
     );
   });
 

@@ -267,7 +267,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8   | 8.5 | 🟢     |
 | DataView          | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | 8   | 8.4 | 🟢     |
 | VirtualScroller   | 8   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8   | 8.5 | 🟢     |
-| Timeline          | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | 7   | 8.3 | 🟢     |
+| Timeline          | 8   | 9    | 8    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.7 | 🟢     |
 | OrderList         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 7   | 8.6 | 🟢     |
 | OrganizationChart | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
 | PickList          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |

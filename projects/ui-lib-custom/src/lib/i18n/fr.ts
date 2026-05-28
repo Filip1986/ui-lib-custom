@@ -253,6 +253,9 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   // ── Avatar ────────────────────────────────────────────────────────────────
   'avatar.label': 'Avatar',
 
+  // ── Timeline ─────────────────────────────────────────────────────────────
+  'timeline.label': 'Chronologie',
+
   // ── SplitButton ───────────────────────────────────────────────────────────
   'split-button.more': "Plus d'options",
   'split-button.menu': 'Menu',

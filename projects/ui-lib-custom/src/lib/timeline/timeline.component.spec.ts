@@ -75,7 +75,7 @@ class TimelineTestHostComponent {
   public readonly layout: WritableSignal<TimelineLayout> = signal<TimelineLayout>('vertical');
   public readonly align: WritableSignal<TimelineAlign> = signal<TimelineAlign>('left');
   public readonly variant: WritableSignal<TimelineVariant | null> = signal<TimelineVariant | null>(
-    null
+    null,
   );
   public readonly size: WritableSignal<TimelineSize> = signal<TimelineSize>('md');
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
@@ -92,7 +92,7 @@ describe('TimelineComponent', (): void => {
   let host: TimelineTestHostComponent;
   function queryAll(selector: string): HTMLElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(selector)
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>(selector),
     );
   }
   function queryOne(selector: string): HTMLElement | null {
@@ -260,7 +260,7 @@ describe('TimelineComponent', (): void => {
       const firstEvent: HTMLElement | null = queryOne('.ui-lib-timeline__event');
       expect(firstEvent).not.toBeNull();
       const beforeConnector: HTMLElement | null = firstEvent!.querySelector(
-        '.ui-lib-timeline__connector--before'
+        '.ui-lib-timeline__connector--before',
       );
       expect(beforeConnector).toBeNull();
     });
@@ -268,7 +268,7 @@ describe('TimelineComponent', (): void => {
       const allEvents: HTMLElement[] = queryAll('.ui-lib-timeline__event');
       const lastEvent: HTMLElement = allEvents[allEvents.length - 1]!;
       const afterConnector: HTMLElement | null = lastEvent.querySelector(
-        '.ui-lib-timeline__connector--after'
+        '.ui-lib-timeline__connector--after',
       );
       expect(afterConnector).toBeNull();
     });
@@ -276,10 +276,10 @@ describe('TimelineComponent', (): void => {
       const allEvents: HTMLElement[] = queryAll('.ui-lib-timeline__event');
       const middleEvent: HTMLElement = allEvents[1]!;
       const beforeConnector: HTMLElement | null = middleEvent.querySelector(
-        '.ui-lib-timeline__connector--before'
+        '.ui-lib-timeline__connector--before',
       );
       const afterConnector: HTMLElement | null = middleEvent.querySelector(
-        '.ui-lib-timeline__connector--after'
+        '.ui-lib-timeline__connector--after',
       );
       expect(beforeConnector).not.toBeNull();
       expect(afterConnector).not.toBeNull();
@@ -318,7 +318,7 @@ describe('TimelineComponent', (): void => {
     it('should render fallback content when no content template is provided', (): void => {
       const defaultContents: HTMLElement[] = queryAll('.ui-lib-timeline__default-content');
       expect(
-        defaultContents.map((element: HTMLElement): string => element.textContent.trim())
+        defaultContents.map((element: HTMLElement): string => element.textContent.trim()),
       ).toEqual(['Event One — 2024-01-01', 'Event Two — 2024-02-01', 'Event Three — 2024-03-01']);
     });
   });
@@ -330,7 +330,6 @@ describe('TimelineComponent', (): void => {
       expect(TIMELINE_DEFAULTS.layout).toBe('vertical');
       expect(TIMELINE_DEFAULTS.align).toBe('left');
       expect(TIMELINE_DEFAULTS.size).toBe('md');
-      expect(TIMELINE_DEFAULTS.ariaLabel).toBe('Timeline');
     });
   });
   // -------------------------------------------------------------------------
