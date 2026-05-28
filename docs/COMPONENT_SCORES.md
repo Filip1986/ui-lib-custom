@@ -5,6 +5,7 @@
 > The hardening queue below is the active prioritized backlog — work top to bottom.
 
 **Gate:** A component is only considered production-quality when every category scores **≥ 8** (12 categories total).
+**Definition of Done:** [`platform/docs/guides/component-definition-of-done.md`](../../platform/docs/guides/component-definition-of-done.md) — canonical ship gate (platform). Legacy scoring: below.
 **Criteria:** [`docs/SCORING_CRITERIA.md`](SCORING_CRITERIA.md) — the canonical checklist defining what each score number means. A score is a count of verified checkboxes, not a gut feeling.
 **Prompt:** Run the 6-phase evolution workflow from [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](prompts/COMPONENT_EVOLUTION_PROMPTS.md).
 **Benchmarks:** [`docs/COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) — per-component parity tables (Category 11 evidence).

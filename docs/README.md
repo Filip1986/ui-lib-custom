@@ -194,8 +194,9 @@ npm run build-storybook
 
 Ready-to-use prompts and the scoring infrastructure for working with AI on this library:
 
+- **[Component Definition of Done](../../platform/docs/guides/component-definition-of-done.md)** — **canonical ship gate** (lives in `platform`; this repo is legacy)
 - **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — master prompt, 6-phase workflow (Architecture → DX → A11y → Performance → Composability → Emotional Polish)
-- **[Scoring Criteria](SCORING_CRITERIA.md)** — 149 binary checkboxes across 11 categories; defines exactly what every score number means — a score is a count, not an opinion
+- **[Scoring Criteria](SCORING_CRITERIA.md)** — 180+ binary checkboxes across 12 categories; port target: `platform/docs/standards/component-quality/`
 - **[Component Quality Scores](COMPONENT_SCORES.md)** — the live scoreboard; scores for all 70+ components, updated after each evolution session
 - **[Competitive Benchmarks](COMPETITIVE_BENCHMARKS.md)** — per-component parity tables vs Angular Material, PrimeNG, Radix UI, Ark UI — evidence for Category 11 scores
 - **[Timeline Component Prompts](prompts/TIMELINE_PROMPTS.md)** — example of a per-component prompt sequence
@@ -218,6 +219,7 @@ Ready-to-use prompts and the scoring infrastructure for working with AI on this 
 | **Get a project overview**      | [Project Summary](reference/project/PROJECT_SUMMARY.md)               |
 | **See version upgrade history** | [Update Log](reference/project/UPDATE_LOG.md)                         |
 | **Verify everything works**     | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) |
+| **Ship a component (quality gate)** | [platform: component-definition-of-done.md](../../platform/docs/guides/component-definition-of-done.md) |
 | **Understand Dialog internals** | [Dialog Implementation](implementation/DIALOG_IMPLEMENTATION.md)      |
 
 ### By Role
@@ -230,11 +232,12 @@ Ready-to-use prompts and the scoring infrastructure for working with AI on this 
 
 **🚀 Contributor (Developing the Library)**
 1. [Vision](VISION.md) - Understand the goals and philosophy
-2. [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for new components
-2. [Architecture Documentation](architecture/ARCHITECTURE.md) - System design
-3. [Project Summary](reference/project/PROJECT_SUMMARY.md) - What's been built
-4. [Update Log](reference/project/UPDATE_LOG.md) - Version history and upgrades
-5. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Testing checklist
+2. [Component Definition of Done (platform)](../../platform/docs/guides/component-definition-of-done.md) - Ship gate before marking any component complete
+3. [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for new components
+4. [Architecture Documentation](architecture/ARCHITECTURE.md) - System design
+5. [Project Summary](reference/project/PROJECT_SUMMARY.md) - What's been built
+6. [Update Log](reference/project/UPDATE_LOG.md) - Version history and upgrades
+7. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Testing checklist
 
 **📦 Publisher (Distributing the Library)**
 1. [Publishing Guide](guides/PUBLISHING_GUIDE.md) - How to publish
