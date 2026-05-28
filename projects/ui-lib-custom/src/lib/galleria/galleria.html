@@ -192,7 +192,7 @@
           role="tab"
           class="uilib-galleria__indicator-btn"
           [class.uilib-galleria__indicator-btn--active]="$index === activeIndex()"
-          [attr.aria-label]="'Go to image ' + ($index + 1)"
+          [attr.aria-label]="goToItemAriaLabel($index)"
           [attr.aria-selected]="$index === activeIndex()"
           (click)="navigateTo($index)"
         >

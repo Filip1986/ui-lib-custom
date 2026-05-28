@@ -25,11 +25,6 @@ import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
-  GALLERIA_ARIA_CLOSE_LABEL,
-  GALLERIA_ARIA_FULLSCREEN_LABEL,
-  GALLERIA_ARIA_REGION_LABEL,
-  GALLERIA_ARIA_THUMBNAIL_NEXT_LABEL,
-  GALLERIA_ARIA_THUMBNAIL_PREV_LABEL,
   GALLERIA_DEFAULT_NUM_SCROLL,
   GALLERIA_DEFAULT_NUM_VISIBLE,
   GALLERIA_DEFAULT_TRANSITION_INTERVAL,
@@ -89,7 +84,7 @@ let galleriaIdCounter: number = 0;
   host: {
     '[class]': 'hostClasses()',
     '[attr.role]': '"region"',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
   },
 })
 export class GalleriaComponent implements OnDestroy {
@@ -214,8 +209,8 @@ export class GalleriaComponent implements OnDestroy {
     string
   > | null>(null);
 
-  /** Accessible label for the gallery landmark. Defaults to the built-in region label constant. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(GALLERIA_ARIA_REGION_LABEL);
+  /** Accessible label for the gallery landmark. Defaults to i18n fallback. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   /** Accessible label for the fullscreen dialog container. */
   public readonly lightboxLabel: InputSignal<string | null> = input<string | null>(null);
@@ -336,26 +331,45 @@ export class GalleriaComponent implements OnDestroy {
     (): string => `${this.componentId}-lightbox`,
   );
 
+  /** Resolved accessible region label — consumer value takes priority; falls back to i18n key. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('galleria.label'),
+  );
+
   /** Resolved previous-item aria-label. */
   public readonly previousItemAriaLabel: Signal<string> = computed<string>((): string =>
-    this.getLabelOrFallback(this.prevLabel(), 'Previous image'),
+    this.getLabelOrFallback(this.prevLabel(), this.i18n.translate('galleria.prev')),
   );
 
   /** Resolved next-item aria-label. */
   public readonly nextItemAriaLabel: Signal<string> = computed<string>((): string =>
-    this.getLabelOrFallback(this.nextLabel(), 'Next image'),
+    this.getLabelOrFallback(this.nextLabel(), this.i18n.translate('galleria.next')),
   );
 
   /** Resolved fullscreen dialog aria-label. */
   public readonly lightboxAriaLabel: Signal<string> = computed<string>((): string =>
-    this.getLabelOrFallback(this.lightboxLabel(), GALLERIA_ARIA_REGION_LABEL),
+    this.getLabelOrFallback(this.lightboxLabel(), this.i18n.translate('galleria.label')),
   );
 
-  // ARIA label constants exposed to the template.
-  public readonly closeAriaLabel: string = GALLERIA_ARIA_CLOSE_LABEL;
-  public readonly fullscreenAriaLabel: string = GALLERIA_ARIA_FULLSCREEN_LABEL;
-  public readonly thumbnailPrevAriaLabel: string = GALLERIA_ARIA_THUMBNAIL_PREV_LABEL;
-  public readonly thumbnailNextAriaLabel: string = GALLERIA_ARIA_THUMBNAIL_NEXT_LABEL;
+  /** ARIA label for the close button — resolved via i18n. */
+  public get closeAriaLabel(): string {
+    return this.i18n.translate('galleria.close');
+  }
+
+  /** ARIA label for the fullscreen open button — resolved via i18n. */
+  public get fullscreenAriaLabel(): string {
+    return this.i18n.translate('galleria.fullscreen');
+  }
+
+  /** ARIA label for the thumbnail-strip previous-scroll button — resolved via i18n. */
+  public get thumbnailPrevAriaLabel(): string {
+    return this.i18n.translate('galleria.thumbnail.prev');
+  }
+
+  /** ARIA label for the thumbnail-strip next-scroll button — resolved via i18n. */
+  public get thumbnailNextAriaLabel(): string {
+    return this.i18n.translate('galleria.thumbnail.next');
+  }
 
   /** Aria-label for the active item slide group. */
   public readonly currentItemAriaLabel: Signal<string> = computed<string>((): string =>

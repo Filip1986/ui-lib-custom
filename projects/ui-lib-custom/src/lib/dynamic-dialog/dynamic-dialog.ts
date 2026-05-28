@@ -137,10 +137,13 @@ export class DynamicDialog implements OnDestroy {
   /**
    * Accessible label for the panel used when no visible `header` text is configured.
    * Returns null when a header is present (aria-labelledby takes priority).
-   * Defaults to 'Dialog' so screen readers always have a meaningful dialog label.
+   * Falls back to the i18n `dynamic-dialog.label` key so screen readers always have a label.
    */
   public readonly resolvedAriaLabel: Signal<string | null> = computed<string | null>(
-    (): string | null => (!this.resolvedHeader() ? (this.config.ariaLabel ?? 'Dialog') : null),
+    (): string | null =>
+      !this.resolvedHeader()
+        ? (this.config.ariaLabel ?? this.i18n.translate('dynamic-dialog.label'))
+        : null,
   );
 
   /** ID of an element that describes the dialog purpose, or null when not configured. */

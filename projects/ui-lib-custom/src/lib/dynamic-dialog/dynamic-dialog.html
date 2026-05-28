@@ -1,5 +1,10 @@
 @if (resolvedModal()) {
-  <div class="ui-lib-dynamic-dialog__backdrop" (click)="onBackdropClick()"></div>
+  <div
+    class="ui-lib-dynamic-dialog__backdrop"
+    role="presentation"
+    aria-hidden="true"
+    (click)="onBackdropClick()"
+  ></div>
 }
 
 <div
@@ -48,6 +53,6 @@
   }
 
   <div class="ui-lib-dynamic-dialog__content">
-    <ng-container #dynamicContent></ng-container>
+    <ng-container #dynamicContent />
   </div>
 </div>

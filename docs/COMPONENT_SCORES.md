@@ -230,7 +230,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component     | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
 | Dialog        | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 9   | 8.6 | 🟢     |
-| DynamicDialog | 9   | 9    | 8    | 9    | 8     | 8   | 8    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
+| DynamicDialog | 9   | 9    | 8    | 9    | 9     | 9   | 8    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
 | Drawer        | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
 | BottomSheet   | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.6 | 🟢     |
 | Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
@@ -269,11 +269,11 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | VirtualScroller   | 8   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8   | 8.5 | 🟢     |
 | Timeline          | 8   | 9    | 8    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.7 | 🟢     |
 | OrderList         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 7   | 8.6 | 🟢     |
-| OrganizationChart | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
+| OrganizationChart | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
 | PickList          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
 | Paginator         | 8   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8   | 8.5 | 🟢     |
 | Carousel          | 8   | 9    | 8    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.7 | 🟢     |
-| Galleria          | 8   | 9    | 8    | 9    | 8     | 8   | 9    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
+| Galleria          | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
 | Chart             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
 ## Feedback & Status

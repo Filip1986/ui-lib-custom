@@ -89,9 +89,20 @@ export class OrganizationChartNodeComponent {
     $implicit: OrganizationChartNode;
   }>((): { $implicit: OrganizationChartNode } => ({ $implicit: this.node() }));
 
-  /** Handles click on the node cell for selection. */
+  /** Handles click or keyboard activation (Enter / Space) on the node cell. */
   protected onNodeClick(event: MouseEvent): void {
     this.ctx.handleNodeClick(event, this.node());
+  }
+
+  /**
+   * Handles Enter / Space keydown on the node cell.
+   * Stops propagation so the parent tree keydown handler does not double-fire `.click()`.
+   */
+  protected onNodeKeydown(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    // Cast is intentional: the event is stored as `originalEvent` in outputs only.
+    this.ctx.handleNodeClick(event as unknown as MouseEvent, this.node());
   }
 
   /** Handles click on the expand/collapse toggle button. */

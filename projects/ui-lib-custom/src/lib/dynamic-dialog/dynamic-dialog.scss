@@ -2,6 +2,11 @@
   // DynamicDialog — shell container rendered by DialogService.open().
   // The host sits fixed over the full viewport; the panel floats above a backdrop.
 
+  ui-lib-dynamic-dialog {
+    --uilib-dynamic-dialog-close-btn-size: 2rem;
+    --uilib-dynamic-dialog-header-gap: 0.5rem;
+  }
+
   .ui-lib-dynamic-dialog {
     position: fixed;
     inset: 0;
@@ -92,7 +97,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: var(--uilib-dynamic-dialog-header-gap, 0.5rem);
       padding: var(--uilib-dynamic-dialog-header-padding, 1.25rem 1.5rem 1rem);
       border-bottom: 1px solid
         var(--uilib-dynamic-dialog-header-border, var(--uilib-surface-border, #e9ecef));
@@ -112,8 +117,8 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 2rem;
-      height: 2rem;
+      width: var(--uilib-dynamic-dialog-close-btn-size, 2rem);
+      height: var(--uilib-dynamic-dialog-close-btn-size, 2rem);
       padding: 0;
       border: none;
       background: transparent;

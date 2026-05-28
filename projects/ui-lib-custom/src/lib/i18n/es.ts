@@ -72,6 +72,7 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'confirm-dialog.message': '¿Está seguro de que desea continuar?',
   'confirm-dialog.accept': 'Sí',
   'confirm-dialog.reject': 'No',
+  'dynamic-dialog.label': 'Cuadro de diálogo',
   'dynamic-dialog.close': 'Cerrar',
   'message.close': 'Cerrar mensaje',
   'panel.toggle': 'Alternar panel',
@@ -239,11 +240,19 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'alert.dismiss': 'Cerrar alerta',
 
   // ── Galleria ──────────────────────────────────────────────────────────────
+  'galleria.label': 'Galería de imágenes',
   'galleria.item': 'Imagen {current} de {total}',
   'galleria.go-to': 'Ir a la imagen {n}',
   'galleria.nav': 'Navegación de imágenes',
+  'galleria.close': 'Cerrar galería',
+  'galleria.fullscreen': 'Ver en pantalla completa',
+  'galleria.thumbnail.prev': 'Miniaturas anteriores',
+  'galleria.thumbnail.next': 'Miniaturas siguientes',
+  'galleria.prev': 'Imagen anterior',
+  'galleria.next': 'Imagen siguiente',
 
   // ── OrganizationChart ─────────────────────────────────────────────────────
+  'organization-chart.label': 'Organigrama',
   'organization-chart.expand': 'Expandir',
   'organization-chart.collapse': 'Contraer',
 

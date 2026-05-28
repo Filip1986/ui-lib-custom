@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 8 — 8.2-cluster batch upgrade COMPLETE ✅ (Knob 8.2→8.7, Avatar 8.2→8.8, Timeline 8.3→8.7, Carousel 8.4→8.7, ConfirmDialog 8.4→8.5, MeterGroup 8.4→8.7, DatePicker 8.3→8.5, DataView 8.4→8.6). Minimum floor is now **8.5** across all components. Next: begin 8.5-cluster batch or Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
+- **Active focus:** Prompt 8 — 8.5-cluster batch in progress (OrganizationChart 8.5→8.7 ✅, Galleria 8.5→8.7 ✅, DynamicDialog 8.5→8.7 ✅). Remaining 8.5-tier components: Drawer, ConfirmDialog, Table, TreeTable, Tree, Listbox, VirtualScroller, Paginator, DatePicker. Next: continue 8.5-cluster or Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
 - **Next queue:** Continue Prompt 8 cluster batch on remaining low-scorers. Then Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
@@ -82,6 +82,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-28 [feat: Prompt 8 — 8.5-cluster batch: OrganizationChart (8.5→8.7) + Galleria (8.5→8.7) + DynamicDialog (8.5→8.7) ✅]
+Changed:
+  organization-chart/organization-chart.ts: inject UiLibI18nService; ariaLabel input default '' (was 'Organization');
+    resolvedAriaLabel computed signal; onNodeKeydown handler added
+  organization-chart/organization-chart.html: ariaLabel() → resolvedAriaLabel()
+  organization-chart/organization-chart.scss: --uilib-org-chart-node-transition token; transition wired;
+    uilib-org-chart-mount keyframe + animation on host; prefers-reduced-motion expanded
+  organization-chart/organization-chart-node.ts: onNodeKeydown(event: Event) method added
+  organization-chart/organization-chart-node.html: (keydown.enter)/(keydown.space) → onNodeKeydown;
+    [attr.tabindex] → [tabindex] (fixes interactive-supports-focus lint rule)
+  galleria/galleria.ts: ariaLabel input default '' (was GALLERIA_ARIA_REGION_LABEL); host binding
+    uses resolvedAriaLabel(); added resolvedAriaLabel computed; 4 constant class properties
+    (closeAriaLabel/fullscreenAriaLabel/thumbnailPrevAriaLabel/thumbnailNextAriaLabel) → i18n getters;
+    updated previousItemAriaLabel/nextItemAriaLabel/lightboxAriaLabel fallbacks to i18n;
+    removed GALLERIA_ARIA_* constant imports
+  galleria/galleria.html: hardcoded 'Go to image ' interpolation → goToItemAriaLabel($index)
+  galleria/galleria.scss: --uilib-galleria-header-footer-padding token; header/footer padding wired;
+    uilib-galleria-mount keyframe + animation; prefers-reduced-motion expanded
+  dynamic-dialog/dynamic-dialog.ts: 'Dialog' hardcoded fallback → i18n.translate('dynamic-dialog.label')
+  dynamic-dialog/dynamic-dialog.scss: token block added (--uilib-dynamic-dialog-close-btn-size 2rem,
+    --uilib-dynamic-dialog-header-gap 0.5rem); close-btn width/height wired; header gap wired
+  dynamic-dialog/dynamic-dialog.html: backdrop div: role="presentation" aria-hidden="true";
+    <ng-container #dynamicContent></ng-container> → self-closing
+  i18n/en,de,fr,es.ts: organization-chart.label; galleria.label + 6 new galleria keys (close/fullscreen/
+    thumbnail.prev/thumbnail.next/prev/next); dynamic-dialog.label (4 keys × 3 components = 11 new i18n entries)
+  docs/COMPONENT_SCORES.md: OrganizationChart/Galleria/DynamicDialog 8.5→8.7
+  docs/reference/bundle-sizes.json: baseline updated
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 175 tests (org-chart + galleria + dynamic-dialog) ✅
+Verification: npx eslint (PASS ✅); ng build ui-lib-custom (PASS ✅); npx jest (175 ✅); bundlesize (PASS ✅)
+Next step: Continue 8.5-cluster batch on Drawer, ConfirmDialog, Table, TreeTable, Tree, Listbox, VirtualScroller, Paginator
 
 Date: 2026-05-28 [feat: Prompt 8 — DatePicker (8.3→8.5) + DataView (8.4→8.6) cluster batch ✅]
 Changed:

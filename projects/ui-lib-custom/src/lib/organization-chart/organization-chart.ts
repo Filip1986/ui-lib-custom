@@ -26,6 +26,7 @@ import { OrgChartNodeTemplateDirective } from './organization-chart-template-dir
 import { OrganizationChartNodeComponent } from './organization-chart-node';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   OrganizationChartNode,
   OrganizationChartNodeExpandEvent,
@@ -76,6 +77,7 @@ export class OrganizationChart implements OrganizationChartContext {
   private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Reactive version counter. Incremented after any tree mutation to force re-renders. */
   private readonly _tick: WritableSignal<number> = signal(0);
@@ -105,8 +107,8 @@ export class OrganizationChart implements OrganizationChartContext {
   /** Extra CSS class applied to the host element. */
   public readonly styleClass: InputSignal<string> = input<string>('');
 
-  /** Accessible label for the tree. Applied to the root tree element. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Organization');
+  /** Accessible label for the tree. Applied to the root tree element. Defaults to i18n fallback. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -142,14 +144,19 @@ export class OrganizationChart implements OrganizationChartContext {
   private readonly resolvedVariant: Signal<OrganizationChartVariant> =
     computed<OrganizationChartVariant>(
       (): OrganizationChartVariant =>
-        (this.variant() ?? this.themeConfig.variant()) as OrganizationChartVariant
+        (this.variant() ?? this.themeConfig.variant()) as OrganizationChartVariant,
     );
 
   /** Host class string applied via `[class]` binding. */
   public readonly hostClasses: Signal<string> = computed<string>((): string =>
     [`ui-lib-organization-chart--variant-${this.resolvedVariant()}`, this.styleClass()]
       .filter(Boolean)
-      .join(' ')
+      .join(' '),
+  );
+
+  /** Resolved accessible label — consumer value takes priority; falls back to i18n key. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('organization-chart.label'),
   );
 
   /** Map from node `type` → registered `TemplateRef`. */
@@ -165,7 +172,7 @@ export class OrganizationChart implements OrganizationChartContext {
         map.set(directive.type(), directive.templateRef);
       }
       return map;
-    }
+    },
   );
 
   // ─── OrganizationChartContext implementation ───────────────────────────────
@@ -175,7 +182,7 @@ export class OrganizationChart implements OrganizationChartContext {
    * template if no specific type is registered, or `null`.
    */
   public getTemplateForNode(
-    node: OrganizationChartNode
+    node: OrganizationChartNode,
   ): TemplateRef<{ $implicit: OrganizationChartNode }> | null {
     const map: ReadonlyMap<
       string,
@@ -239,7 +246,7 @@ export class OrganizationChart implements OrganizationChartContext {
     }
 
     return (currentSelection as OrganizationChartNode[]).some(
-      (selected: OrganizationChartNode): boolean => selected.key === node.key
+      (selected: OrganizationChartNode): boolean => selected.key === node.key,
     );
   }
 
@@ -267,7 +274,7 @@ export class OrganizationChart implements OrganizationChartContext {
       return;
     }
     const focusedIndex: number = items.findIndex(
-      (item: HTMLElement): boolean => item === document.activeElement
+      (item: HTMLElement): boolean => item === document.activeElement,
     );
 
     if (key === KEYBOARD_KEYS.ArrowDown) {
@@ -325,12 +332,12 @@ export class OrganizationChart implements OrganizationChartContext {
       : [];
 
     const existingIndex: number = currentSelection.findIndex(
-      (selected: OrganizationChartNode): boolean => selected.key === node.key
+      (selected: OrganizationChartNode): boolean => selected.key === node.key,
     );
 
     if (existingIndex >= 0) {
       const updated: OrganizationChartNode[] = currentSelection.filter(
-        (selected: OrganizationChartNode): boolean => selected.key !== node.key
+        (selected: OrganizationChartNode): boolean => selected.key !== node.key,
       );
       this.selection.set(updated);
       this.nodeUnselect.emit({ originalEvent: event, node });
@@ -354,10 +361,10 @@ export class OrganizationChart implements OrganizationChartContext {
   private expandOrFocusChild(
     focused: HTMLElement,
     items: HTMLElement[],
-    focusedIndex: number
+    focusedIndex: number,
   ): void {
     const toggleButton: HTMLElement | null = focused.querySelector<HTMLElement>(
-      '.uilib-org-chart-toggle-btn'
+      '.uilib-org-chart-toggle-btn',
     );
     if (!toggleButton) {
       return;
@@ -378,7 +385,7 @@ export class OrganizationChart implements OrganizationChartContext {
    */
   private collapseOrFocusParent(focused: HTMLElement): void {
     const toggleButton: HTMLElement | null = focused.querySelector<HTMLElement>(
-      '.uilib-org-chart-toggle-btn'
+      '.uilib-org-chart-toggle-btn',
     );
     const isExpanded: boolean = focused.getAttribute('aria-expanded') === 'true';
     if (toggleButton && isExpanded) {

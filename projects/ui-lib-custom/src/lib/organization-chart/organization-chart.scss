@@ -28,8 +28,13 @@
     --uilib-org-chart-toggle-radius: 50%;
     --uilib-org-chart-node-label-font-size: var(--uilib-font-size-sm, 0.875rem);
     --uilib-org-chart-toggle-font-size: 0.65rem;
+    --uilib-org-chart-node-transition:
+      background var(--uilib-transition-duration-fast, 0.15s) ease,
+      border-color var(--uilib-transition-duration-fast, 0.15s) ease;
 
     display: flex;
+    animation: uilib-org-chart-mount var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
     flex-direction: column;
     align-items: center;
     overflow: auto;
@@ -67,9 +72,7 @@
       color: var(--uilib-org-chart-node-color);
       text-align: center;
       white-space: nowrap;
-      transition:
-        background 0.15s ease,
-        border-color 0.15s ease;
+      transition: var(--uilib-org-chart-node-transition);
       outline: none;
 
       &:focus-visible {
@@ -273,9 +276,21 @@
     }
   }
 
+  @keyframes uilib-org-chart-mount {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
   // ─── Reduced motion ──────────────────────────────────────────────────────────
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-organization-chart {
+      animation: none;
+
       .uilib-org-chart-node-cell,
       .uilib-org-chart-toggle-icon {
         transition: none;
