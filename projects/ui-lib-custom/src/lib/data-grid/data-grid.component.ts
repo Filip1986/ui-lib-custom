@@ -1174,6 +1174,10 @@ export class DataGridComponent implements OnInit, AfterViewInit {
   /** Called after content is checked — registers scroll listener once the viewport is in the DOM. */
   public ngAfterViewInit(): void {
     this.setupScrollListener();
+    // Emit initial lazy load event so consumer can fetch the first page
+    if (this.lazy()) {
+      this.emitLazyLoad();
+    }
   }
 
   // ---------------------------------------------------------------------------
