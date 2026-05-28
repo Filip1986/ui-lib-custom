@@ -81,7 +81,7 @@ export class DataGridDemoComponent {
       feel: 9,
     },
     apgPattern: { name: 'Grid', url: 'https://www.w3.org/WAI/ARIA/apg/patterns/grid/' },
-    competitiveParity: 'exceeds',
+    competitiveParity: 'pass',
   };
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
@@ -123,7 +123,6 @@ export class DataGridDemoComponent {
     { label: 'Single', value: 'single' },
     { label: 'Multiple', value: 'multiple' },
     { label: 'Checkbox', value: 'checkbox' },
-    { label: 'Radio', value: 'radio' },
   ];
   public readonly editModes: Array<{ label: string; value: DataGridEditMode }> = [
     { label: 'Off', value: null },
