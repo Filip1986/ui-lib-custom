@@ -154,8 +154,12 @@ export class DataGridDemoComponent {
         const field: string = event.sortField;
         const order: number = event.sortOrder !== 0 ? event.sortOrder : 1;
         sorted = sorted.sort((a: Employee, b: Employee): number => {
-          const aVal: string | number = (a as Record<string, unknown>)[field] as string | number;
-          const bVal: string | number = (b as Record<string, unknown>)[field] as string | number;
+          const aVal: string | number = (a as unknown as Record<string, unknown>)[field] as
+            | string
+            | number;
+          const bVal: string | number = (b as unknown as Record<string, unknown>)[field] as
+            | string
+            | number;
           return aVal < bVal ? -order : aVal > bVal ? order : 0;
         });
       }
