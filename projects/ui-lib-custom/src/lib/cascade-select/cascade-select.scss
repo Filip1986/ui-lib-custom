@@ -51,6 +51,17 @@
     --uilib-cascade-select-submenu-icon-size: 0.75rem;
     --uilib-cascade-select-submenu-gap: 0;
 
+    --uilib-cascade-select-separator-color: color-mix(
+      in srgb,
+      var(--uilib-cascade-select-panel-border) 60%,
+      transparent
+    );
+    --uilib-cascade-select-clear-hover-bg: color-mix(
+      in srgb,
+      var(--uilib-color-primary-600) 12%,
+      transparent
+    );
+
     --uilib-cascade-select-transition: border-color 0.15s ease, box-shadow 0.15s ease;
     --uilib-cascade-select-panel-animation-duration: 0.16s;
     --uilib-cascade-select-level-animation-duration: 0.18s;
@@ -116,7 +127,7 @@
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__clear:hover {
-    background: color-mix(in srgb, var(--uilib-color-primary-600) 12%, transparent);
+    background: var(--uilib-cascade-select-clear-hover-bg);
   }
 
   ui-lib-cascade-select .ui-lib-cascade-select__dropdown-icon {
@@ -199,8 +210,7 @@
     min-width: var(--uilib-cascade-select-panel-min-width);
     max-height: var(--uilib-cascade-select-panel-max-height);
     overflow: auto;
-    border-inline-end: 1px solid
-      color-mix(in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent);
+    border-inline-end: 1px solid var(--uilib-cascade-select-separator-color);
     animation: uilib-cascade-select-level-in
       var(--uilib-transition-duration-fast, var(--uilib-cascade-select-level-animation-duration))
       var(--uilib-transition-easing-enter, ease-out) both;
@@ -347,6 +357,11 @@
     --uilib-cascade-select-bg: transparent;
     --uilib-cascade-select-border: color-mix(in srgb, var(--uilib-border) 70%, transparent);
     --uilib-cascade-select-panel-shadow: none;
+    --uilib-cascade-select-option-hover-bg: color-mix(
+      in srgb,
+      var(--uilib-color-primary-600) 6%,
+      transparent
+    );
   }
 
   ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__trigger {
@@ -355,14 +370,14 @@
 
   ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__option:hover,
   ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__option--active {
-    background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+    background: var(--uilib-cascade-select-option-hover-bg);
   }
 
   .ui-lib-cascade-select__panel.ui-lib-cascade-select__panel--minimal
     .ui-lib-cascade-select__option:hover,
   .ui-lib-cascade-select__panel.ui-lib-cascade-select__panel--minimal
     .ui-lib-cascade-select__option--active {
-    background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+    background: var(--uilib-cascade-select-option-hover-bg);
   }
 
   @media (max-width: 48rem) {
@@ -383,8 +398,7 @@
       min-width: 100%;
       max-height: none;
       border-inline-end: none;
-      border-block-end: 1px solid
-        color-mix(in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent);
+      border-block-end: 1px solid var(--uilib-cascade-select-separator-color);
     }
 
     ui-lib-cascade-select .ui-lib-cascade-select__level:last-child,

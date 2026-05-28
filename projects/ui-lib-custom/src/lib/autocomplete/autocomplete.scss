@@ -16,6 +16,8 @@
       var(--uilib-autocomplete-padding-x-base) * var(--uilib-density, 1)
     );
     --uilib-autocomplete-min-height: var(--uilib-input-min-height, 44px);
+    --uilib-autocomplete-option-min-height: var(--uilib-autocomplete-min-height);
+    --uilib-autocomplete-btn-min-size: 2.25rem;
 
     --uilib-autocomplete-bg: var(--uilib-input-bg, var(--uilib-surface));
     --uilib-autocomplete-border: var(--uilib-input-border, var(--uilib-border));
@@ -176,7 +178,7 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    min-height: 44px;
+    min-height: var(--uilib-autocomplete-option-min-height);
     padding: var(--uilib-autocomplete-option-padding);
     cursor: pointer;
     transition:
@@ -268,7 +270,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: var(--uilib-autocomplete-chip-gap);
-    min-height: 44px;
+    min-height: var(--uilib-autocomplete-option-min-height);
   }
 
   ui-lib-autocomplete .ui-autocomplete-chip {
@@ -295,8 +297,8 @@
   ui-lib-autocomplete .ui-autocomplete-chip-remove,
   ui-lib-autocomplete .ui-autocomplete-clear,
   ui-lib-autocomplete .ui-autocomplete-dropdown-btn {
-    min-width: 36px;
-    min-height: 36px;
+    min-width: var(--uilib-autocomplete-btn-min-size);
+    min-height: var(--uilib-autocomplete-btn-min-size);
     border-radius: 999px;
     border: 1px solid transparent;
     background: transparent;
@@ -437,7 +439,7 @@
       var(--uilib-color-primary-700) 15%,
       transparent
     );
-    border-radius: 16px;
+    --uilib-autocomplete-chip-border-radius: 1rem;
   }
 
   ui-lib-autocomplete.ui-lib-autocomplete--bootstrap {
@@ -539,8 +541,8 @@
     ui-lib-autocomplete .ui-autocomplete-clear,
     ui-lib-autocomplete .ui-autocomplete-dropdown-btn,
     ui-lib-autocomplete .ui-autocomplete-chip-remove {
-      min-height: 44px;
-      min-width: 44px;
+      min-height: var(--uilib-autocomplete-option-min-height);
+      min-width: var(--uilib-autocomplete-option-min-height);
     }
   }
   @media (prefers-reduced-motion: reduce) {

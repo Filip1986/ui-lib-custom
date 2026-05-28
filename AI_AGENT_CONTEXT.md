@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.4 ✅), ColorPicker (9.0→9.3 ✅), CascadeSelect (9.0→9.2 🔄). Next: CascadeSelect → 9.5; AutoComplete → 9.5.
-- **Next queue:** CascadeSelect + AutoComplete ceiling push (need ~4 more categories at 10 each). Then broader Prompt 8 pass on any remaining sub-8.5 components.
+- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.3 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
+- **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components. Then ColorPicker → 9.5 (needs 2 more categories at 10: DX + one other).
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — AutoComplete Theme 9→10 + CascadeSelect Perf/Angular/Theme 9→10 (both → 9.5) ✅]
+Changed:
+  autocomplete/autocomplete.scss: added --uilib-autocomplete-option-min-height + --uilib-autocomplete-btn-min-size tokens;
+    replaced raw 44px/36px min-height/min-width in rule bodies; material chip border-radius: 16px → token override
+  autocomplete/README.md: Theming table updated with two new tokens
+  cascade-select/cascade-select.ts: constructor addEventListener deferred to afterNextRender() with
+    DestroyRef.onDestroy cleanup (SSR safety + memory leak → Perf=10 + Angular=10)
+  cascade-select/cascade-select.scss: added --uilib-cascade-select-separator-color +
+    --uilib-cascade-select-clear-hover-bg tokens; inline color-mix() in rule bodies → tokens;
+    minimal variant uses --uilib-cascade-select-option-hover-bg token override
+  cascade-select/cascade-select.html: Loading... → {{ i18n.translate('cascade-select.loading') }}
+  cascade-select/README.md: Theming + I18n tables updated
+  i18n/en,de,fr,es.ts: cascade-select.loading key added (1 key per locale)
+  docs/COMPONENT_SCORES.md: AutoComplete Theme 9→10 (9.4→9.5); CascadeSelect Perf/Angular/Theme 9→10 (9.2→9.5)
+  docs/reference/bundle-sizes.json: baseline updated
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 161/161 tests ✅
+Verification: npx eslint autocomplete/ cascade-select/ (PASS ✅); ng build ✅; npx jest (161 ✅)
+Next step: Broader Prompt 8 pass on sub-8.5 components; ColorPicker → 9.5 if continuing ceiling push
+
 Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — SSR safety fixes (Select/AutoComplete/ColorPicker Perf+Angular 9→10) ✅]
 Changed:
   select/select.ts: document.getElementById → this.document.getElementById (inside requestAnimationFrame)
@@ -118,21 +137,6 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
 Verification: npx eslint (PASS ✅); ng build ✅; npx jest (155 ✅)
 Next step: Continue ceiling push — DX, API, Perf, Feel gaps to close on Select/AutoComplete/CascadeSelect/ColorPicker → 9.5
-
-Date: 2026-05-28 [feat(lib): prompt-8 DatePicker (8.5→8.7) — CSS token, i18n aria labels ✅]
-Changed:
-  date-picker/date-picker.scss: --uilib-datepicker-panel-min-width: 18rem; added to host token block;
-    wired in .ui-lib-datepicker__panel (was a raw value)
-  date-picker/date-picker.html: 5 hardcoded English strings replaced with i18n.translate():
-    'Open date picker' → datepicker.toggle; 'Date picker' → datepicker.panel.label;
-    'Previous/Next month, {month}' → datepicker.prev/next.month.label with { month } param;
-    'Toggle AM/PM, current {value}' → datepicker.ampm.toggle with { value } param
-  i18n/en,de,fr,es.ts: 4 new datepicker keys across all locales
-    (datepicker.panel.label, datepicker.prev.month.label, datepicker.next.month.label, datepicker.ampm.toggle)
-  docs/reference/bundle-sizes.json: baseline updated
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 138 date-picker + 6123 total tests ✅; commit f100f9ae ✅
-Verification: npx eslint date-picker/ (PASS ✅); ng build ui-lib-custom (PASS ✅); npm test (6123 ✅)
-Next step: Prompt 7 ceiling push — Select, AutoComplete, CascadeSelect, ColorPicker → 9.5
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

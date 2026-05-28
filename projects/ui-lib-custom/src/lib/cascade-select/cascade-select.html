@@ -56,7 +56,7 @@
         @if (loadingTemplate()) {
           <ng-container *ngTemplateOutlet="loadingTemplate()" />
         } @else {
-          Loading...
+          {{ i18n.translate('cascade-select.loading') }}
         }
       </div>
     } @else {

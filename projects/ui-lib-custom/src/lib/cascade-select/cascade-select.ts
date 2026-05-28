@@ -2,9 +2,11 @@ import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
   HostListener,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   contentChild,
   forwardRef,
@@ -235,12 +237,22 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     // Wire focus/blur as imperative listeners to prevent Angular from conflating
     // the output names ('focus'/'blur') with the native host events, which would
     // create a circular dispatch via the compiler-generated host-event bindings.
-    const hostEl: HTMLElement = this.hostElement.nativeElement;
-    hostEl.addEventListener('focus', (event: FocusEvent): void => {
-      this.onHostFocus(event);
-    });
-    hostEl.addEventListener('blur', (event: FocusEvent): void => {
-      this.onHostBlur(event);
+    // Deferred to afterNextRender() for SSR safety; cleaned up via DestroyRef.
+    const destroyRef: DestroyRef = inject(DestroyRef);
+    afterNextRender((): void => {
+      const hostEl: HTMLElement = this.hostElement.nativeElement;
+      const focusHandler: (event: FocusEvent) => void = (event: FocusEvent): void => {
+        this.onHostFocus(event);
+      };
+      const blurHandler: (event: FocusEvent) => void = (event: FocusEvent): void => {
+        this.onHostBlur(event);
+      };
+      hostEl.addEventListener('focus', focusHandler);
+      hostEl.addEventListener('blur', blurHandler);
+      destroyRef.onDestroy((): void => {
+        hostEl.removeEventListener('focus', focusHandler);
+        hostEl.removeEventListener('blur', blurHandler);
+      });
     });
   }
 

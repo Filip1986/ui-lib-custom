@@ -129,6 +129,8 @@ ui-lib-autocomplete {
 | `--uilib-autocomplete-padding-x-base` | `0.75rem` | Horizontal padding of the input wrapper |
 | `--uilib-autocomplete-option-padding-y-base` | `0.55rem` | Vertical padding of each option |
 | `--uilib-autocomplete-option-padding-x-base` | `0.75rem` | Horizontal padding of each option |
+| `--uilib-autocomplete-option-min-height` | `(input min-height)` | Minimum height of each option row (also used for mobile touch targets) |
+| `--uilib-autocomplete-btn-min-size` | `2.25rem` | Minimum width and height of the clear, dropdown, and chip-remove buttons |
 | `--uilib-autocomplete-focus-ring-width` | `3px` | Width of the keyboard focus ring |
 | `--uilib-autocomplete-chip-bg` | `color-mix(…)` | Chip background color |
 | `--uilib-autocomplete-chip-border-radius` | `999px` | Chip border radius |

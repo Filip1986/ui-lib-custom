@@ -145,6 +145,8 @@ ui-lib-cascade-select {
 | `--uilib-cascade-select-submenu-icon-size` | `0.75rem` | Size of the sub-menu chevron icon |
 | `--uilib-cascade-select-panel-animation-duration` | `0.16s` | Duration of the panel open animation |
 | `--uilib-cascade-select-level-animation-duration` | `0.18s` | Duration of a nested level slide-in animation |
+| `--uilib-cascade-select-separator-color` | `color-mix(…)` | Color of the border between adjacent option columns |
+| `--uilib-cascade-select-clear-hover-bg` | `color-mix(…)` | Background of the clear button on hover |
 
 ## Internationalisation
 
@@ -155,5 +157,6 @@ All user-visible strings resolve through `UiLibI18nService`.
 | Placeholder text | `cascade-select.placeholder` | `Select` | `[placeholder]` |
 | Clear button ARIA label | `cascade-select.clear` | `Clear selection` | — |
 | Sub-level listbox label | `cascade-select.sublevel-label` | `Options for {label}` | — |
+| Loading text (default slot) | `cascade-select.loading` | `Loading...` | `[loadingTemplate]` |
 
 APG pattern: [Combobox with Listbox Popup](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
