@@ -1,7 +1,7 @@
 # Data Grid
 
 **Selector:** `ui-lib-data-grid`
-**Entry point:** `import { DataGrid } from 'ui-lib-custom/data-grid'`
+**Entry point:** `import { DataGrid, DataGridColumn } from 'ui-lib-custom/data-grid'`
 
 ---
 
@@ -73,9 +73,44 @@ DataGrid component — high-performance grid with virtual scroll, column pinning
 | `rowUnselected`    | `DataGridRowUnselectEvent`      | Emitted when a row is deselected.                              |
 | `sorted`           | `DataGridSortEvent`             | Emitted when the sort order changes.                           |
 
+---
+
+### Column Inputs (`ui-lib-data-grid-column`)
+
+Column definitions are render-less components placed as direct children of `<ui-lib-data-grid>`.
+
+| Name                | Type              | Default  | Description                                                                              |
+| ------------------- | ----------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `field`             | `string`          | `''`     | Dot-notation path used to read the cell value from a row object.                         |
+| `header`            | `string`          | `''`     | Column header text when no `[uiDataGridColumnHeader]` template is provided.              |
+| `footer`            | `string`          | `''`     | Column footer text when no `[uiDataGridColumnFooter]` template is provided.              |
+| `sortable`          | `boolean`         | `false`  | When `true`, clicking the header cycles through sort orders.                             |
+| `sortField`         | `string \| null`  | `null`   | Override field used for sorting. Falls back to `field`.                                  |
+| `filterable`        | `boolean`         | `false`  | When `true`, renders a per-column filter input below the header.                         |
+| `filterField`       | `string \| null`  | `null`   | Override field used for filtering. Falls back to `field`.                                |
+| `filterPlaceholder` | `string`          | `''`     | Placeholder for the column filter input.                                                 |
+| `width`             | `string \| null`  | `null`   | Explicit column width, e.g. `'200px'` or `'15%'`.                                       |
+| `minWidth`          | `string \| null`  | `null`   | Minimum width during resize. Falls back to `DATA_GRID_DEFAULTS.MIN_COLUMN_WIDTH`.        |
+| `frozen`            | `DataGridFrozen`  | `false`  | Pin the column to `'start'` or `'end'`, or leave it scrollable with `false`.            |
+| `resizable`         | `boolean \| null` | `null`   | Per-column resize override. Inherits from the grid-level `resizableColumns` when `null`. |
+| `editable`          | `boolean`         | `false`  | When `true`, cells are editable (requires `editMode` on the parent grid).                |
+| `styleClass`        | `string \| null`  | `null`   | Additional CSS class(es) applied to every `<td>` and `<th>` in this column.             |
+
+### Column Template Slots
+
+| Directive                  | Context                    | Purpose                                      |
+| -------------------------- | -------------------------- | -------------------------------------------- |
+| `[uiDataGridColumnHeader]` | none                       | Custom header cell content                   |
+| `[uiDataGridColumnBody]`   | `DataGridCellContext<T>`   | Custom body cell content                     |
+| `[uiDataGridColumnEditor]` | `DataGridEditorContext<T>` | Inline cell editor (activated by F2 / Enter) |
+| `[uiDataGridColumnFooter]` | none                       | Custom footer cell content                   |
+| `[uiDataGridColumnFilter]` | none                       | Custom column filter widget                  |
+
+---
+
 ## Content Projection
 
-_none_
+_none_ (columns are provided via `<ui-lib-data-grid-column>` child elements)
 
 ## Theming
 
@@ -125,58 +160,215 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/grid/
 
 ### Keyboard Interactions
 
-| Test description                                            |
-| ----------------------------------------------------------- |
-| Enter on a row with selectionMode=                          |
-| Enter on a sortable header sorts ascending                  |
-| Enter twice on a sortable header sorts descending           |
-| Space on a sortable header sorts ascending                  |
-| applies aria-rowcount equal to total records                |
-| applies variant class                                       |
-| aria-rowcount updates when data changes                     |
-| body cells have role=                                       |
-| cells in first row have aria-colindex starting at 1         |
-| column filter input has aria-label                          |
-| empty row has role=                                         |
-| filtered rows update aria-rowcount                          |
-| first data row has aria-rowindex=                           |
-| grid aria-rowcount matches totalRecords in client-side mode |
-| grid has aria-label                                         |
-| grid has aria-rowcount equal to total rows                  |
-| has role=                                                   |
-| header cells have role=                                     |
-| header has aria-sort=                                       |
-| header row has role=                                        |
-| last data row has aria-rowindex equal to row count + 1      |
-| non-sortable column header has no aria-sort attribute       |
-| passes axe after sorting                                    |
-| passes axe in empty state                                   |
-| passes axe on default state                                 |
-| passes axe with checkbox selection                          |
-| passes axe with filter inputs visible                       |
-| passes axe with paginator                                   |
-| row checkboxes have aria-label                              |
-| select-all checkbox has aria-label                          |
-| selecting all then deselecting updates aria state           |
-| sets aria-colindex on data cells                            |
-| sets aria-rowcount to total number of rows                  |
-| sets aria-rowindex on rows based on virtual offset          |
-| sets aria-sort attribute on sorted column header            |
-| unsorted sortable header has aria-sort=                     |
-| updates aria-rowcount when data changes                     |
-| wrapper has role=                                           |
+| Key | Action |
+| --- | ------ |
+| `Tab` / `Shift+Tab` | Move between focusable elements (header cells, filter inputs, data cells) |
+| `Enter` / `Space` | Toggle sort on focused sortable column header |
+| `Enter` | Select focused row (when `selectionMode` is set) |
+| `F2` / `Enter` | Enter cell edit mode on an editable cell |
+| `Escape` | Cancel cell edit |
+| `Tab` | Commit cell edit and advance to the next editable cell |
+| `Enter` | Commit cell edit |
+
+### ARIA Attributes
+
+| Attribute | Element | Description |
+| --------- | ------- | ----------- |
+| `role="grid"` | Grid wrapper | Identifies the grid widget |
+| `role="row"` | Header row, data rows | Row role on every row |
+| `role="columnheader"` | `<th>` cells | Header cells |
+| `role="gridcell"` | `<td>` cells | Data cells |
+| `aria-label` | Grid wrapper | Set via the `ariaLabel` input |
+| `aria-rowcount` | Grid wrapper | Total record count (updates live on filter/page) |
+| `aria-rowindex` | Data rows | 1-based row index (offset-aware for virtual scroll) |
+| `aria-colindex` | Cells | 1-based column index |
+| `aria-sort` | Sortable column headers | `"ascending"`, `"descending"`, or `"none"` |
+| `aria-label` | Filter inputs | `"Filter by <header>"` |
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Minimal sortable grid -->
+<ui-lib-data-grid [value]="rows" ariaLabel="Products">
+  <ui-lib-data-grid-column field="id"    header="ID"    [sortable]="true" width="80px" />
+  <ui-lib-data-grid-column field="name"  header="Name"  [sortable]="true" />
+  <ui-lib-data-grid-column field="price" header="Price" [sortable]="true" width="120px" />
+</ui-lib-data-grid>
+
+<!-- Virtual scroll + frozen columns + checkbox selection -->
+<ui-lib-data-grid
+  [value]="largeDataset"
+  [virtualScroll]="true"
+  scrollHeight="500px"
+  [rowHeight]="48"
+  selectionMode="checkbox"
+  [(selection)]="selectedRows"
+  dataKey="id"
+  ariaLabel="Users"
+>
+  <ui-lib-data-grid-column field="id"       header="ID"       frozen="start" width="80px" />
+  <ui-lib-data-grid-column field="username" header="Username" [sortable]="true" />
+  <ui-lib-data-grid-column field="email"    header="Email"    [filterable]="true" />
+  <ui-lib-data-grid-column field="role"     header="Role"     frozen="end"   width="120px" />
+</ui-lib-data-grid>
+```
+
+## Real-World Usage
+
+### Server-side lazy loading with paginator
+
+```typescript
+@Component({
+  template: `
+    <ui-lib-data-grid
+      [value]="users()"
+      [totalRecords]="total()"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="25"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      dataKey="id"
+      ariaLabel="Users"
+      (lazyLoad)="load($event)"
+    >
+      <ui-lib-data-grid-column field="name"  header="Name"  [sortable]="true" />
+      <ui-lib-data-grid-column field="email" header="Email" [sortable]="true" [filterable]="true" />
+      <ui-lib-data-grid-column field="role"  header="Role"  width="120px" />
+    </ui-lib-data-grid>
+  `,
+})
+export class UserTableComponent {
+  protected users = signal<User[]>([]);
+  protected total = signal(0);
+
+  private userService = inject(UserService);
+
+  protected load(event: DataGridLazyLoadEvent): void {
+    this.userService
+      .getUsers({ offset: event.first, limit: event.rows, sortField: event.sortField })
+      .subscribe(({ items, total }) => {
+        this.users.set(items);
+        this.total.set(total);
+      });
+  }
+}
+```
+
+### Inline cell editing with custom editor template
+
+```html
+<ui-lib-data-grid
+  [value]="products()"
+  editMode="cell"
+  dataKey="id"
+  ariaLabel="Products"
+  (cellEditComplete)="onEditComplete($event)"
+>
+  <ui-lib-data-grid-column field="name" header="Product Name" [editable]="true">
+    <ng-template uiDataGridColumnEditor let-row let-field="field">
+      <input type="text" [(ngModel)]="row[field]" />
+    </ng-template>
+  </ui-lib-data-grid-column>
+
+  <ui-lib-data-grid-column field="price" header="Price" [editable]="true">
+    <ng-template uiDataGridColumnBody let-row>{{ row.price | currency }}</ng-template>
+    <ng-template uiDataGridColumnEditor let-row let-field="field">
+      <input type="number" [(ngModel)]="row[field]" min="0" step="0.01" />
+    </ng-template>
+  </ui-lib-data-grid-column>
+
+  <ui-lib-data-grid-column field="status" header="Status" width="140px">
+    <ng-template uiDataGridColumnBody let-row>
+      <ui-lib-tag [value]="row.status" [severity]="statusSeverity(row.status)" />
+    </ng-template>
+  </ui-lib-data-grid-column>
+</ui-lib-data-grid>
+```
+
+## Edge Cases
+
+### Empty state (filtered vs. no data)
+
+```html
+<ui-lib-data-grid [value]="[]" ariaLabel="Products">
+  <ui-lib-data-grid-column field="name" header="Name" />
+  <ng-template uiDataGridEmpty let-ctx>
+    @if (ctx.filtered) {
+      <p>No products match your search.</p>
+    } @else {
+      <p>No products yet.</p>
+    }
+  </ng-template>
+</ui-lib-data-grid>
+```
+
+### 10 000+ rows with virtual scroll
+
+```html
+<!-- rowHeight must match the actual rendered row height in pixels exactly -->
+<ui-lib-data-grid
+  [value]="tenThousandRows"
+  [virtualScroll]="true"
+  scrollHeight="600px"
+  [rowHeight]="48"
+  dataKey="id"
+  ariaLabel="Large dataset"
+>
+  <ui-lib-data-grid-column field="index" header="#"    width="60px" />
+  <ui-lib-data-grid-column field="name"  header="Name" [sortable]="true" />
+</ui-lib-data-grid>
+```
+
+### Read-only / report grid
+
+```html
+<ui-lib-data-grid
+  [value]="rows"
+  ariaLabel="Q1 2026 Summary"
+  caption="Q1 2026 Summary"
+  [showGridlines]="true"
+  [stripedRows]="true"
+>
+  <ui-lib-data-grid-column field="category" header="Category" />
+  <ui-lib-data-grid-column field="revenue"  header="Revenue" />
+</ui-lib-data-grid>
+```
+
+## Migration from PrimeNG Table
+
+| PrimeNG `p-table` | `ui-lib-data-grid` |
+| ----------------- | ------------------ |
+| `[value]` | `[value]` (same) |
+| `[lazy]="true"` + `(onLazyLoad)` | `[lazy]="true"` + `(lazyLoad)` |
+| `[paginator]="true"` + `[rows]` | `[paginator]="true"` + `[(rows)]` |
+| `[(selection)]` + `selectionMode` | `[(selection)]` + `selectionMode` (same) |
+| `editMode="cell"` | `editMode="cell"` (same) |
+| `[virtualScroll]` + `[virtualScrollItemSize]` | `[virtualScroll]` + `[rowHeight]` |
+| `<p-column field="x" header="Y">` | `<ui-lib-data-grid-column field="x" header="Y" />` |
+| `<ng-template pTemplate="body" let-row>` | `<ng-template uiDataGridColumnBody let-row>` |
+| `<ng-template pTemplate="editor" let-row>` | `<ng-template uiDataGridColumnEditor let-row let-field="field">` |
+| `<ng-template pTemplate="emptymessage">` | `<ng-template uiDataGridEmpty let-ctx>` |
+| `(onRowSelect)` / `(onRowUnselect)` | `(rowSelected)` / `(rowUnselected)` |
+| `(onSort)` | `(sorted)` |
+| `(onFilter)` | `(filtered)` |
+| `(onPage)` | `(paged)` |
+| `(onColResize)` | `(columnResize)` |
+
+**Key differences:**
+
+- All inputs/outputs use Angular Signal API (`input()`, `model()`, `output()`).
+- `[(rows)]` is a two-way bindable `model()` signal, not `@Input`.
+- `selectionMode="checkbox"` automatically prepends the checkbox column.
+- `lazyLoad` event includes `globalFilter`, per-column `filters` map, and full `multiSortMeta` stack.
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#data-grid)
+- [Demo page](/components/data-grid)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/data-grid/README.md)
 

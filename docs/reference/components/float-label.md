@@ -33,7 +33,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** Decorative — no APG pattern
 
 ### Keyboard Interactions
 
@@ -109,6 +109,7 @@ _No component-level CSS variables detected._
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#float-label)
+- [Demo page](/components/float-label)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/float-label/README.md)
 

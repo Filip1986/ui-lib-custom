@@ -68,7 +68,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 
 ### Keyboard Interactions
 
@@ -115,6 +115,7 @@ _none_
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#dock)
+- [Demo page](/components/dock)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/dock/README.md)
 

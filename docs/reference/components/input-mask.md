@@ -78,7 +78,7 @@ InputMask component with CVA integration and mask-aware keyboard handling.
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 
 ### Keyboard Interactions
 
@@ -122,6 +122,7 @@ InputMask component with CVA integration and mask-aware keyboard handling.
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#input-mask)
+- [Demo page](/components/input-mask)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/input-mask/README.md)
 

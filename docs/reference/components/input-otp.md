@@ -70,7 +70,7 @@ InputOtp component — renders N individual input cells for one-time password en
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -129,6 +129,7 @@ InputOtp component — renders N individual input cells for one-time password en
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#input-otp)
+- [Demo page](/components/input-otp)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/input-otp/README.md)
 

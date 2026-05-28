@@ -74,7 +74,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 
 ### Keyboard Interactions
 
@@ -162,6 +162,7 @@ public readonly formatVolumeValue = (value: number): string => `${value}%`;
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#slider)
+- [Demo page](/components/slider)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/slider/README.md)
 

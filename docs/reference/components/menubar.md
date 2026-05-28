@@ -81,7 +81,7 @@ Menubar component — a PrimeNG-inspired horizontal navigation bar where top-lev
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
 
 ### Keyboard Interactions
 
@@ -157,6 +157,7 @@ Menubar component — a PrimeNG-inspired horizontal navigation bar where top-lev
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#menubar)
+- [Demo page](/components/menubar)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/menubar/README.md)
 

@@ -50,7 +50,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 
 ### Keyboard Interactions
 
@@ -92,11 +92,24 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<ui-lib-toolbar>
+  <ng-template uiLibToolbarStart>
+    <ui-lib-button icon="menu" [iconOnly]="true" ariaLabel="Menu" />
+    <span class="app-title">My App</span>
+  </ng-template>
+
+  <ng-template uiLibToolbarEnd>
+    <ui-lib-button icon="search" [iconOnly]="true" ariaLabel="Search" />
+    <ui-lib-button icon="person" [iconOnly]="true" ariaLabel="Profile" />
+  </ng-template>
+</ui-lib-toolbar>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#toolbar)
+- [Demo page](/components/toolbar)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/toolbar/README.md)
 

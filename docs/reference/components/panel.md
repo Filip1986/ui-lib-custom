@@ -62,7 +62,7 @@ Panel — a flexible content container with an optional collapsible body. Suppor
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
 
 ### Keyboard Interactions
 
@@ -96,11 +96,22 @@ Panel — a flexible content container with an optional collapsible body. Suppor
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Static panel -->
+<ui-lib-panel header="Summary">
+  <p>Content inside the panel.</p>
+</ui-lib-panel>
+
+<!-- Toggleable panel (start collapsed) -->
+<ui-lib-panel header="Details" [toggleable]="true" [collapsed]="true">
+  <p>This content is hidden until the user expands the panel.</p>
+</ui-lib-panel>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#panel)
+- [Demo page](/components/panel)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/panel/README.md)
 

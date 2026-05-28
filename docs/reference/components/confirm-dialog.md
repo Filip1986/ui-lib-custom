@@ -86,7 +86,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 ### Keyboard Interactions
 
@@ -120,11 +120,33 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```typescript
+import { ConfirmationService } from 'ui-lib-custom/confirm-dialog';
+
+@Component({
+  providers: [ConfirmationService],
+  template: `
+    <ui-lib-confirm-dialog />
+    <ui-lib-button severity="danger" (click)="confirmDelete()">Delete</ui-lib-button>
+  `,
+})
+export class MyComponent {
+  private confirmation = inject(ConfirmationService);
+
+  confirmDelete(): void {
+    this.confirmation.confirm({
+      message: 'Are you sure you want to delete this item?',
+      header: 'Delete Confirmation',
+      accept: () => this.delete(),
+    });
+  }
+}
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#confirm-dialog)
+- [Demo page](/components/confirm-dialog)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/confirm-dialog/README.md)
 

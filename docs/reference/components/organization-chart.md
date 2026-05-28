@@ -49,7 +49,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -113,6 +113,7 @@ _No component-level CSS variables detected._
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#organization-chart)
+- [Demo page](/components/organization-chart)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/organization-chart/README.md)
 

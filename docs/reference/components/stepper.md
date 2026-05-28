@@ -74,7 +74,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
 
 ### Keyboard Interactions
 
@@ -112,11 +112,30 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<ui-lib-stepper [(activeStep)]="step">
+  <ui-lib-step-panel header="Account">
+    <ui-lib-input placeholder="Email" />
+    <ui-lib-button severity="primary" (click)="step = 1">Next</ui-lib-button>
+  </ui-lib-step-panel>
+
+  <ui-lib-step-panel header="Profile">
+    <ui-lib-input placeholder="Display name" />
+    <ui-lib-button (click)="step = 0">Back</ui-lib-button>
+    <ui-lib-button severity="primary" (click)="step = 2">Next</ui-lib-button>
+  </ui-lib-step-panel>
+
+  <ui-lib-step-panel header="Review">
+    <p>Confirm your details.</p>
+    <ui-lib-button severity="success" (click)="submit()">Submit</ui-lib-button>
+  </ui-lib-step-panel>
+</ui-lib-stepper>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#stepper)
+- [Demo page](/components/stepper)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/stepper/README.md)
 

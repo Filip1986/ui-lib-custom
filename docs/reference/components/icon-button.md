@@ -39,7 +39,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/button/
 
 ### Keyboard Interactions
 
@@ -71,6 +71,7 @@ _none_
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#icon-button)
+- [Demo page](/components/icon-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/icon-button/README.md)
 

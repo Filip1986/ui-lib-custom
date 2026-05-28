@@ -51,7 +51,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** Decorative — no APG pattern
 
 ### Keyboard Interactions
 
@@ -72,11 +72,25 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Horizontal divider (default) -->
+<ui-lib-divider />
+
+<!-- Labelled divider -->
+<ui-lib-divider align="center">or</ui-lib-divider>
+
+<!-- Vertical divider (inside flex row) -->
+<div style="display:flex; height:40px; align-items:center; gap:1rem">
+  <span>Left</span>
+  <ui-lib-divider layout="vertical" />
+  <span>Right</span>
+</div>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#divider)
+- [Demo page](/components/divider)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/divider/README.md)
 

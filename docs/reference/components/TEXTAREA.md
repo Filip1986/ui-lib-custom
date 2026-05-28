@@ -77,7 +77,7 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -140,6 +140,7 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#textarea)
+- [Demo page](/components/textarea)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/textarea/README.md)
 

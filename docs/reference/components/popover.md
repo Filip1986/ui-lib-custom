@@ -66,7 +66,7 @@ Popover — a lightweight floating panel anchored to a trigger element. Accepts 
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 ### Keyboard Interactions
 
@@ -108,11 +108,21 @@ Popover — a lightweight floating panel anchored to a trigger element. Accepts 
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<ui-lib-button (click)="op.toggle($event)">Show Info</ui-lib-button>
+
+<ui-lib-popover #op>
+  <div style="padding: 1rem">
+    <strong>Did you know?</strong>
+    <p>Popovers stay open until dismissed.</p>
+  </div>
+</ui-lib-popover>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#popover)
+- [Demo page](/components/popover)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/popover/README.md)
 

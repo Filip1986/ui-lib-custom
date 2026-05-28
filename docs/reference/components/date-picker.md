@@ -82,7 +82,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 ### Keyboard Interactions
 
@@ -146,6 +146,7 @@ _No component-level CSS variables detected._
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#date-picker)
+- [Demo page](/components/date-picker)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/date-picker/README.md)
 

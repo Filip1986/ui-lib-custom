@@ -50,7 +50,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
 
 ### Keyboard Interactions
 
@@ -93,11 +93,30 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Attribute directive — simplest form -->
+<ui-lib-button uiLibTooltip="Save your changes">Save</ui-lib-button>
+
+<!-- Positioning -->
+<ui-lib-button uiLibTooltip="Copied!" tooltipPosition="top">Copy</ui-lib-button>
+<ui-lib-button uiLibTooltip="Delete" tooltipPosition="bottom" severity="danger">
+  Delete
+</ui-lib-button>
+
+<!-- Disabled tooltip (hidden when button is disabled) -->
+<ui-lib-button
+  uiLibTooltip="Approve"
+  [tooltipDisabled]="!canApprove"
+  [disabled]="!canApprove"
+>
+  Approve
+</ui-lib-button>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#tooltip)
+- [Demo page](/components/tooltip)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/tooltip/README.md)
 

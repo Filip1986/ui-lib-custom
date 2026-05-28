@@ -31,7 +31,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 ### Keyboard Interactions
 
@@ -71,11 +71,33 @@ _No component-level CSS variables detected._
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```typescript
+import { DialogService } from 'ui-lib-custom/dynamic-dialog';
+
+@Component({
+  providers: [DialogService],
+  template: `<ui-lib-button (click)="open()">Open Dialog</ui-lib-button>`,
+})
+export class MyComponent {
+  private dialog = inject(DialogService);
+
+  open(): void {
+    const ref = this.dialog.open(MyDialogContentComponent, {
+      header: 'Edit User',
+      width: '480px',
+      data: { userId: 42 },
+    });
+    ref.onClose.subscribe((result) => {
+      if (result) this.save(result);
+    });
+  }
+}
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#dynamic-dialog)
+- [Demo page](/components/dynamic-dialog)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/dynamic-dialog/README.md)
 

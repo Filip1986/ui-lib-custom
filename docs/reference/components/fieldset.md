@@ -57,7 +57,7 @@ Fieldset — a labelled content container that optionally collapses its body. Su
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -94,11 +94,22 @@ Fieldset — a labelled content container that optionally collapses its body. Su
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Static fieldset -->
+<ui-lib-fieldset legend="Address">
+  <div>Street: 123 Main St</div>
+</ui-lib-fieldset>
+
+<!-- Collapsible fieldset -->
+<ui-lib-fieldset legend="Advanced Options" [toggleable]="true" [collapsed]="true">
+  <p>These settings are rarely needed.</p>
+</ui-lib-fieldset>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#fieldset)
+- [Demo page](/components/fieldset)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/fieldset/README.md)
 

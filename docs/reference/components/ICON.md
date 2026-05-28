@@ -39,7 +39,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** Decorative — no APG pattern
 
 ### Keyboard Interactions
 
@@ -80,6 +80,7 @@ _none_
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#icon)
+- [Demo page](/components/icon)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/icon/README.md)
 

@@ -65,7 +65,7 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 ### Keyboard Interactions
 
@@ -100,11 +100,24 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Trigger + BottomSheet declared in same template -->
+<ui-lib-button (click)="sheet.open()">Open Sheet</ui-lib-button>
+
+<ui-lib-bottom-sheet #sheet>
+  <h2 uilib-bottom-sheet-title>Share</h2>
+  <p>Choose how to share this item.</p>
+  <div uilib-bottom-sheet-actions>
+    <ui-lib-button (click)="sheet.close()">Cancel</ui-lib-button>
+    <ui-lib-button severity="primary" (click)="share()">Share</ui-lib-button>
+  </div>
+</ui-lib-bottom-sheet>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#bottom-sheet)
+- [Demo page](/components/bottom-sheet)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/bottom-sheet/README.md)
 

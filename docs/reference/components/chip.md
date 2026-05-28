@@ -71,7 +71,7 @@ Chip — compact element representing an attribute, tag, or action. Supports an 
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/button/
 
 ### Keyboard Interactions
 
@@ -108,11 +108,29 @@ Chip — compact element representing an attribute, tag, or action. Supports an 
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Static label -->
+<ui-lib-chip label="Angular" />
+
+<!-- Removable chip -->
+<ui-lib-chip
+  label="TypeScript"
+  [removable]="true"
+  (chipRemove)="remove('ts')"
+/>
+
+<!-- Clickable / selectable chip -->
+<ui-lib-chip
+  label="Signals"
+  [selectable]="true"
+  [(selected)]="signalSelected"
+/>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#chip)
+- [Demo page](/components/chip)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/chip/README.md)
 

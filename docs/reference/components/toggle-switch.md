@@ -73,7 +73,7 @@ ToggleSwitch presents a boolean on/off control as a sliding pill switch. Impleme
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/switch/
 
 ### Keyboard Interactions
 
@@ -138,6 +138,7 @@ ToggleSwitch presents a boolean on/off control as a sliding pill switch. Impleme
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#toggle-switch)
+- [Demo page](/components/toggle-switch)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/toggle-switch/README.md)
 

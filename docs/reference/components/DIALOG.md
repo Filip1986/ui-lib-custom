@@ -86,7 +86,7 @@ Dialog component with modal/backdrop and responsive behavior.
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
 ### Keyboard Interactions
 
@@ -147,6 +147,7 @@ Dialog component with modal/backdrop and responsive behavior.
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#dialog)
+- [Demo page](/components/dialog)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/dialog/README.md)
 

@@ -125,7 +125,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 
 ### Keyboard Interactions
 
@@ -223,6 +223,7 @@ _none_
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#autocomplete)
+- [Demo page](/components/autocomplete)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/autocomplete/README.md)
 

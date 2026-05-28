@@ -85,7 +85,7 @@ Checkbox component with accessible labeling and indeterminate support.
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
 
 ### Keyboard Interactions
 
@@ -130,6 +130,7 @@ Checkbox component with accessible labeling and indeterminate support.
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#checkbox)
+- [Demo page](/components/checkbox)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/checkbox/README.md)
 

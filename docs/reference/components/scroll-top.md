@@ -56,7 +56,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -80,11 +80,21 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Renders a floating button that appears after scrolling 400px -->
+<ui-lib-scroll-top [threshold]="400" />
+
+<!-- Inside a scrollable container -->
+<div #scrollTarget style="height: 300px; overflow-y: auto">
+  <p *ngFor="let i of items">Row {{ i }}</p>
+  <ui-lib-scroll-top [target]="scrollTarget" />
+</div>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#scroll-top)
+- [Demo page](/components/scroll-top)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/scroll-top/README.md)
 

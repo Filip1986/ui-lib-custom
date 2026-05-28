@@ -31,7 +31,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -59,11 +59,19 @@ _No component-level CSS variables detected._
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Trap focus inside a modal-like container -->
+<div *ngIf="isOpen" uiLibFocusTrap>
+  <h2>Modal Title</h2>
+  <p>Tab cycles through focusable elements inside this container only.</p>
+  <ui-lib-button (click)="close()">Close</ui-lib-button>
+</div>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#focus-trap)
+- [Demo page](/components/focus-trap)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/focus-trap/README.md)
 

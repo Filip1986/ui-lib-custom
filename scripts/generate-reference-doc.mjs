@@ -512,6 +512,7 @@ function generateDoc(componentName) {
   lines.push('## Related');
   lines.push('');
   lines.push(`- [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#${componentName})`);
+  lines.push(`- [Demo page](/components/${componentName})`);
   lines.push(`- [Design tokens](../systems/DESIGN_TOKENS.md)`);
   lines.push(`- [Co-located README](../../../projects/ui-lib-custom/src/lib/${componentName}/README.md)`);
   lines.push('');

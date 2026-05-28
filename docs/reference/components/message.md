@@ -59,7 +59,7 @@ Message component — inline severity-based status message with optional close a
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/alert/
 
 ### Keyboard Interactions
 
@@ -95,6 +95,7 @@ Message component — inline severity-based status message with optional close a
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#message)
+- [Demo page](/components/message)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/message/README.md)
 

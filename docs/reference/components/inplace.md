@@ -65,7 +65,7 @@ Inplace — inline editing component that toggles between a display and content 
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
 
 ### Keyboard Interactions
 
@@ -96,11 +96,23 @@ Inplace — inline editing component that toggles between a display and content 
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Click to reveal / edit inline -->
+<ui-lib-inplace>
+  <ng-template uiLibInplaceDisplay>
+    <span>Click to edit: {{ value }}</span>
+  </ng-template>
+  <ng-template uiLibInplaceContent>
+    <ui-lib-input [(ngModel)]="value" />
+    <ui-lib-button (click)="save()">Save</ui-lib-button>
+  </ng-template>
+</ui-lib-inplace>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#inplace)
+- [Demo page](/components/inplace)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/inplace/README.md)
 

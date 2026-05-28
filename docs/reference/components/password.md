@@ -70,7 +70,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -132,6 +132,7 @@ _none_
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#password)
+- [Demo page](/components/password)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/password/README.md)
 

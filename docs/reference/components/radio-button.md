@@ -70,7 +70,7 @@ RadioButton component with accessible labeling and group selection support via C
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/radio/
 
 ### Keyboard Interactions
 
@@ -112,11 +112,23 @@ RadioButton component with accessible labeling and group selection support via C
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Standalone with reactive forms -->
+<form [formGroup]="form">
+  <ui-lib-radio-button formControlName="size" value="sm" label="Small" />
+  <ui-lib-radio-button formControlName="size" value="md" label="Medium" />
+  <ui-lib-radio-button formControlName="size" value="lg" label="Large" />
+</form>
+
+<!-- With ngModel -->
+<ui-lib-radio-button [(ngModel)]="selected" value="a" label="Option A" />
+<ui-lib-radio-button [(ngModel)]="selected" value="b" label="Option B" />
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#radio-button)
+- [Demo page](/components/radio-button)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/radio-button/README.md)
 

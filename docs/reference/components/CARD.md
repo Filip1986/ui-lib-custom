@@ -71,7 +71,7 @@ Card container component with optional header, footer, and theme scope.
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** No dedicated APG pattern
 
 ### Keyboard Interactions
 
@@ -143,6 +143,7 @@ Card container component with optional header, footer, and theme scope.
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#card)
+- [Demo page](/components/card)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/card/README.md)
 

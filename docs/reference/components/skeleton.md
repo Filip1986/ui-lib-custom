@@ -47,7 +47,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
+**APG pattern:** Decorative — no APG pattern
 
 ### Keyboard Interactions
 
@@ -69,11 +69,24 @@ _none_
 
 ## Usage Examples
 
-<!-- TODO: add usage examples -->
+```html
+<!-- Text line placeholder -->
+<ui-lib-skeleton width="80%" height="1rem" />
+
+<!-- Card skeleton -->
+<div style="display:flex; gap:1rem; align-items:center">
+  <ui-lib-skeleton shape="circle" size="3rem" />
+  <div style="flex:1">
+    <ui-lib-skeleton width="60%" height="1rem" styleClass="mb-2" />
+    <ui-lib-skeleton width="40%" height="0.75rem" />
+  </div>
+</div>
+```
 
 ## Related
 
 - [Competitive benchmark](../COMPETITIVE_BENCHMARKS.md#skeleton)
+- [Demo page](/components/skeleton)
 - [Design tokens](../systems/DESIGN_TOKENS.md)
 - [Co-located README](../../../projects/ui-lib-custom/src/lib/skeleton/README.md)
 
