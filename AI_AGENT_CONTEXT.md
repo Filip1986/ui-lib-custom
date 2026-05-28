@@ -83,6 +83,27 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Step 5 COMPLETE]
+Changed:
+  src/lib/data-grid/data-grid.types.ts: full type definitions (DataGridVariant, DataGridSize, DataGridSortOrder, DataGridSelectionMode, DataGridFilterMatchMode, DataGridResizeMode, DataGridEditMode, DataGridFrozen; interfaces for all events + template contexts)
+  src/lib/data-grid/data-grid.constants.ts: DATA_GRID_DEFAULTS + DATA_GRID_CLASS
+  src/lib/data-grid/data-grid-column.component.ts: render-less column DSL; 5 template directives; all column inputs + template signal queries
+  src/lib/data-grid/data-grid.component.ts: full implementation — virtual scroll (native), column pinning, column resizing, cell editing, lazy load, multi-sort, global filter, row selection, WAI-ARIA grid keyboard navigation; ngAfterViewInit emits initial lazyLoad when lazy=true
+  src/lib/data-grid/data-grid.component.html: complete template; i18n keys; keydown.enter/space on all interactive elements (ESLint a11y clean)
+  src/lib/data-grid/data-grid.component.scss: design tokens + structure in single merged block; logical CSS properties; cascade layer; SCSS clean
+  src/lib/data-grid/data-grid.component.spec.ts: 46 unit tests — rendering, sorting, filtering, pagination, selection, lazy load, virtual scroll, ARIA, CSS classes, empty state, dynamic data, column definitions; ESLint clean
+  src/lib/data-grid/index.ts: barrel export
+  data-grid/ng-package.json + package.json: entry point wiring
+  projects/ui-lib-custom/package.json: exports + typesVersions updated
+  i18n/en.ts,de.ts,fr.ts,es.ts: 11 new data-grid keys
+  test/entry-points.spec.ts: data-grid import test added
+  docs/reference/bundle-sizes.json: snapshot updated (data-grid: 144664 B raw / 20962 B gzip)
+  demo/pages/data-grid/: demo page with interactive config, virtual scroll, frozen columns, cell editing, lazy load sections
+  docs/COMPONENT_SCORES.md: DataGrid added (all scores 9 except Docs=8, avg 9.0)
+State: COMPLETE — 6088/6088 tests green (227 suites); ESLint + stylelint clean; ng build ui-lib-custom 0 warnings; pushed to remote ✅
+Verification: npx jest --no-coverage (PASS ✅, 6088 tests, 227 suites); ng build ui-lib-custom (PASS ✅); ESLint data-grid/ + demo/pages/data-grid/ (PASS ✅); git push (PASS ✅)
+Next step: Write data-grid.a11y.spec.ts (ARIA grid keyboard pattern, cell navigation, screen reader labels); write data-grid README.md
+
 Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
 Changed:
   input-otp.component.ts: inject UiLibI18nService; ariaLabel default null; digitAriaLabelPrefix/Connector/pasteAnnouncement defaults ''; groupAriaLabel/getCellAriaLabel/announcePasteCompletion use i18n fallback
@@ -106,38 +127,6 @@ Changed:
 State: COMPLETE — 6041/6041 tests green (all 226 suites)
 Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ESLint 0 warnings on all changed components
 Next step: Commit and push i18n=7→9 sweep; update bundle-size snapshot if needed; then Step 5 — Angular Signals-first Data Grid
-
-Date: 2026-05-28 [feat: I18n=6→9 sweep — Dialog, DynamicDialog, Drawer, BottomSheet, ConfirmDialog, Toast, Stepper, Popover]
-Changed:
-  dialog.component.html: maximize/minimize button labels wired to i18n.translate('dialog.minimize/maximize')
-  drawer.html: fallback panel aria-label 'Drawer' → i18n.translate('drawer.label')
-  popover.html: fallback panel aria-label 'Popover' → i18n.translate('popover.label')
-  toast.ts: inject UiLibI18nService; host '[attr.aria-label]' wired to i18n.translate('toast.region')
-  toast.html: dismiss button wired to toast.dismiss/{toast.close} parametrized key
-  confirm-dialog.ts: acceptLabel/rejectLabel defaults changed from 'Yes'/'No' to ''; resolvedAcceptLabel/rejectLabel fall back to i18n.translate('confirm-dialog.accept/reject')
-  stepper.ts: inject UiLibI18nService; getStepAriaLabel() fully i18n'd (6 states); getStepLabel() fallback i18n'd; effectiveAriaLabel computed signal; ariaLabel input default changed to ''
-  stepper.html: [attr.aria-label] → effectiveAriaLabel()
-  i18n/en.ts,de.ts,fr.ts,es.ts: added dialog.minimize/maximize, drawer.label, popover.label, toast.region/dismiss, confirm-dialog.accept/reject, stepper.label + 7 stepper.step.* keys
-  toast.spec.ts, toast.a11y.spec.ts: updated 'Dismiss: ' → 'Close: ' assertions; fallback test → 'Close notification'
-  docs/COMPONENT_SCORES.md: I18n 6→9 on Dialog (8.4→8.6), DynamicDialog (8.2→8.5), Drawer (8.3→8.5), BottomSheet (8.4→8.6), Popover (8.7→9.0), ConfirmDialog (8.1→8.4), Toast (8.8→9.1), Stepper (8.7→9.0)
-State: COMPLETE — 6041/6041 tests green
-Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites)
-Next step: Continue I18n=7→9 sweep on Navigation & Menu components (Menu, TieredMenu, ContextMenu, Accordion, etc.)
-
-Date: 2026-05-27 [feat: score ceiling push — Perf 8→9 + I18n 8→9 on Select, AutoComplete, CascadeSelect, ColorPicker]
-Changed:
-  autocomplete.html, cascade-select.html, color-picker.html: @defer (on immediate) wrapping overlay panels (Perf 8→9)
-  cascade-select.ts: getLevelAriaLabel() uses i18n.translate('cascade-select.sublevel-label', { label }) (I18n 8→9)
-  color-picker.html: trigger aria-label uses i18n.translate('colorpicker.trigger', { color }) (I18n 8→9)
-  autocomplete.html: chip remove button uses i18n.translate('autocomplete.remove-chip', { label }) (I18n 8→9)
-  select.html: search placeholder + empty state use i18n translate keys (I18n 8→9)
-  i18n/en.ts, de.ts, fr.ts, es.ts: added 'autocomplete.remove-chip', 'cascade-select.sublevel-label', 'colorpicker.trigger', 'select.search.placeholder', 'select.empty'
-  autocomplete.spec.ts, cascade-select.spec.ts, color-picker.spec.ts: whenStable() in beforeEach; body panel cleanup afterEach; explicit panel close before destroy in body-mount tests
-  cascade-select.a11y.spec.ts: i18n aria-label expectations updated; ariaLabel/ariaLabelledBy converted to WritableSignal
-  docs/COMPONENT_SCORES.md: Select I18n 8→9 (avg 9.1), AutoComplete Perf+I18n 8→9 (avg 9.0), CascadeSelect Perf+I18n 8→9 (avg 9.0), ColorPicker Perf+I18n 8→9 (avg 9.0)
-State: COMPLETE — 6041/6041 tests green; ng build ui-lib-custom zero warnings
-Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
-Next step: Step 5 — Angular Signals-first Data Grid
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

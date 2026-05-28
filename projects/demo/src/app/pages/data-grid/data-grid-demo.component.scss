@@ -1,0 +1,58 @@
+.demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--uilib-spacing-3, 0.75rem);
+  align-items: center;
+  margin-block-end: var(--uilib-spacing-4, 1rem);
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: var(--uilib-spacing-2, 0.5rem);
+    font-size: var(--uilib-font-size-sm, 0.875rem);
+    font-weight: 500;
+
+    select {
+      padding: var(--uilib-spacing-1, 0.25rem) var(--uilib-spacing-2, 0.5rem);
+      border: 1px solid var(--uilib-color-neutral-300, #d1d5db);
+      border-radius: var(--uilib-radius-sm, 0.25rem);
+      background: var(--uilib-surface-page, #fff);
+      font-size: var(--uilib-font-size-sm, 0.875rem);
+    }
+  }
+
+  &__toggle {
+    cursor: pointer;
+  }
+}
+
+.demo-status {
+  font-size: var(--uilib-font-size-sm, 0.875rem);
+  color: var(--uilib-color-neutral-500, #6b7280);
+  margin-block-end: var(--uilib-spacing-3, 0.75rem);
+}
+
+// Status badges used in body cell templates
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: var(--uilib-font-size-xs, 0.75rem);
+  font-weight: 600;
+
+  &--success {
+    background: var(--uilib-color-green-100, #dcfce7);
+    color: var(--uilib-color-green-700, #15803d);
+  }
+
+  &--warning {
+    background: var(--uilib-color-amber-100, #fef3c7);
+    color: var(--uilib-color-amber-700, #b45309);
+  }
+
+  &--neutral {
+    background: var(--uilib-color-neutral-100, #f3f4f6);
+    color: var(--uilib-color-neutral-600, #4b5563);
+  }
+}

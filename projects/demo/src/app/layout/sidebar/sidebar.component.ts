@@ -188,6 +188,12 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'Data Grid',
+          icon: 'pi pi-table',
+          route: '/data-grid',
+          group: 'Data',
+        },
+        {
           label: 'DataView',
           icon: 'pi pi-circle',
           route: '/data-view',
@@ -954,7 +960,7 @@ export class SidebarComponent {
     this.router.events
       .pipe(
         filter((event: object): event is NavigationEnd => event instanceof NavigationEnd),
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
       )
       .subscribe((event: NavigationEnd): void => {
         this.expandActiveSection(event.urlAfterRedirects);
@@ -977,7 +983,7 @@ export class SidebarComponent {
         }
 
         const hasActiveChild: boolean = item.items.some(
-          (sub: NavItem): boolean => Boolean(sub.route) && sub.route === urlPath
+          (sub: NavItem): boolean => Boolean(sub.route) && sub.route === urlPath,
         );
 
         if (hasActiveChild && !item.expanded) {
@@ -985,7 +991,7 @@ export class SidebarComponent {
         }
 
         return item;
-      })
+      }),
     );
   }
 
@@ -1025,7 +1031,7 @@ export class SidebarComponent {
           sidebarContent.scrollTop = linkRelativeBottom - sidebarContent.clientHeight + padding;
         }
       },
-      { injector: this.injector }
+      { injector: this.injector },
     );
   }
 
@@ -1045,21 +1051,21 @@ export class SidebarComponent {
     });
 
     const sortedGroupNames: string[] = Array.from(groupedItemsByName.keys()).sort(
-      (left: string, right: string): number => this.compareLabels(left, right)
+      (left: string, right: string): number => this.compareLabels(left, right),
     );
 
     const sortedGroupedItems: NavItem[] = sortedGroupNames.flatMap(
       (groupName: string): NavItem[] => {
         const groupItems: NavItem[] = [...(groupedItemsByName.get(groupName) ?? [])].sort(
-          (left: NavItem, right: NavItem): number => this.compareLabels(left.label, right.label)
+          (left: NavItem, right: NavItem): number => this.compareLabels(left.label, right.label),
         );
 
         return [{ label: groupName, isGroupLabel: true }, ...groupItems];
-      }
+      },
     );
 
     const sortedUngroupedItems: NavItem[] = [...ungroupedItems].sort(
-      (left: NavItem, right: NavItem): number => this.compareLabels(left.label, right.label)
+      (left: NavItem, right: NavItem): number => this.compareLabels(left.label, right.label),
     );
 
     return [...sortedGroupedItems, ...sortedUngroupedItems];
@@ -1079,12 +1085,12 @@ export class SidebarComponent {
           return {
             ...it,
             items: it.items.map(
-              (sub: NavItem): NavItem => (sub === item ? { ...sub, expanded: !sub.expanded } : sub)
+              (sub: NavItem): NavItem => (sub === item ? { ...sub, expanded: !sub.expanded } : sub),
             ),
           };
         }
         return it;
-      })
+      }),
     );
   }
 }

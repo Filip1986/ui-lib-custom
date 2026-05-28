@@ -277,4 +277,17 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'input-otp.digit': 'Dígito',
   'input-otp.of': 'de',
   'input-otp.paste': 'Código introducido.',
+
+  // ── DataGrid ──────────────────────────────────────────────────────────────
+  'data-grid.select-all': 'Seleccionar todas las filas',
+  'data-grid.deselect-all': 'Deseleccionar todas las filas',
+  'data-grid.select-row': 'Seleccionar fila',
+  'data-grid.deselect-row': 'Deseleccionar fila',
+  'data-grid.filter-placeholder': 'Filtrar',
+  'data-grid.filter-column': 'Filtrar por {column}',
+  'data-grid.edit-cell': 'Editar celda',
+  'data-grid.sort-asc': 'Ordenar ascendente',
+  'data-grid.sort-desc': 'Ordenar descendente',
+  'data-grid.sort-none': 'Quitar orden',
+  'data-grid.empty': 'No se encontraron registros.',
 };

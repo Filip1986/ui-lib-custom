@@ -33,7 +33,7 @@ export const routes: Routes = [
     path: 'chart',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/chart/chart-demo.component').then(
-        (m: { ChartDemoComponent: Type<unknown> }): Type<unknown> => m.ChartDemoComponent
+        (m: { ChartDemoComponent: Type<unknown> }): Type<unknown> => m.ChartDemoComponent,
       ),
     title: 'Chart - UI Components Library',
   },
@@ -108,7 +108,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/templates/app-shell/app-shell-template.component').then(
         (m: { AppShellTemplateComponent: Type<unknown> }): Type<unknown> =>
-          m.AppShellTemplateComponent
+          m.AppShellTemplateComponent,
       ),
     title: 'App Shell Template - UI Components Library',
   },
@@ -117,7 +117,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/templates/auth-pages/auth-pages-template.component').then(
         (m: { AuthPagesTemplateComponent: Type<unknown> }): Type<unknown> =>
-          m.AuthPagesTemplateComponent
+          m.AuthPagesTemplateComponent,
       ),
     title: 'Auth Pages Template - UI Components Library',
   },
@@ -126,7 +126,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/templates/settings-page/settings-page-template.component').then(
         (m: { SettingsPageTemplateComponent: Type<unknown> }): Type<unknown> =>
-          m.SettingsPageTemplateComponent
+          m.SettingsPageTemplateComponent,
       ),
     title: 'Settings Page Template - UI Components Library',
   },
@@ -135,7 +135,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/templates/error-pages/error-pages-template.component').then(
         (m: { ErrorPagesTemplateComponent: Type<unknown> }): Type<unknown> =>
-          m.ErrorPagesTemplateComponent
+          m.ErrorPagesTemplateComponent,
       ),
     title: 'Error Pages Template - UI Components Library',
   },
@@ -144,7 +144,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/templates/team-profile/team-profile-template.component').then(
         (m: { TeamProfileTemplateComponent: Type<unknown> }): Type<unknown> =>
-          m.TeamProfileTemplateComponent
+          m.TeamProfileTemplateComponent,
       ),
     title: 'Team & Profile Template - UI Components Library',
   },
@@ -154,7 +154,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Admin Dashboard Template — Pro - UI Components Library',
     data: {
@@ -189,7 +189,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'SaaS App Shell Template — Pro - UI Components Library',
     data: {
@@ -224,7 +224,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'CRM Interface Template — Pro - UI Components Library',
     data: {
@@ -259,7 +259,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'E-commerce Admin Template — Pro - UI Components Library',
     data: {
@@ -294,7 +294,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Project Board Template — Pro - UI Components Library',
     data: {
@@ -329,7 +329,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Landing Page Kit Template — Pro - UI Components Library',
     data: {
@@ -364,7 +364,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'AI App Shell Template — Pro - UI Components Library',
     data: {
@@ -400,7 +400,7 @@ export const routes: Routes = [
     path: 'icons',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/icons/icons-demo.component').then(
-        (m: { IconsDemoComponent: Type<unknown> }): Type<unknown> => m.IconsDemoComponent
+        (m: { IconsDemoComponent: Type<unknown> }): Type<unknown> => m.IconsDemoComponent,
       ),
     title: 'Icons - UI Components Library',
   },
@@ -408,7 +408,7 @@ export const routes: Routes = [
     path: 'accordion',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/accordion/accordion-demo.component').then(
-        (m: { AccordionDemoComponent: Type<unknown> }): Type<unknown> => m.AccordionDemoComponent
+        (m: { AccordionDemoComponent: Type<unknown> }): Type<unknown> => m.AccordionDemoComponent,
       ),
     title: 'Accordion - UI Components Library',
   },
@@ -428,7 +428,7 @@ export const routes: Routes = [
     path: 'gallery',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/gallery/gallery-demo.component').then(
-        (m: { GalleryDemoComponent: Type<unknown> }): Type<unknown> => m.GalleryDemoComponent
+        (m: { GalleryDemoComponent: Type<unknown> }): Type<unknown> => m.GalleryDemoComponent,
       ),
     title: 'Galleria - UI Components Library',
   },
@@ -436,7 +436,7 @@ export const routes: Routes = [
     path: 'dialog',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/dialog/dialog-demo.component').then(
-        (m: { DialogDemoComponent: Type<unknown> }): Type<unknown> => m.DialogDemoComponent
+        (m: { DialogDemoComponent: Type<unknown> }): Type<unknown> => m.DialogDemoComponent,
       ),
     title: 'Dialog - UI Components Library',
   },
@@ -445,7 +445,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/autocomplete/autocomplete-demo.component').then(
         (m: { AutoCompleteDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.AutoCompleteDemoComponent
+          m.AutoCompleteDemoComponent,
       ),
     title: 'AutoComplete - UI Components Library',
   },
@@ -454,7 +454,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/animated-on-scroll/animated-on-scroll-demo.component').then(
         (m: { AnimatedOnScrollDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.AnimatedOnScrollDemoComponent
+          m.AnimatedOnScrollDemoComponent,
       ),
     title: 'AnimatedOnScroll - UI Components Library',
   },
@@ -462,7 +462,7 @@ export const routes: Routes = [
     path: 'auto-focus',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/auto-focus/auto-focus-demo.component').then(
-        (m: { AutoFocusDemoComponent: Type<unknown> }): Type<unknown> => m.AutoFocusDemoComponent
+        (m: { AutoFocusDemoComponent: Type<unknown> }): Type<unknown> => m.AutoFocusDemoComponent,
       ),
     title: 'AutoFocus - UI Components Library',
   },
@@ -470,7 +470,7 @@ export const routes: Routes = [
     path: 'avatar',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/avatar/avatar-demo.component').then(
-        (m: { AvatarDemoComponent: Type<unknown> }): Type<unknown> => m.AvatarDemoComponent
+        (m: { AvatarDemoComponent: Type<unknown> }): Type<unknown> => m.AvatarDemoComponent,
       ),
     title: 'Avatar - UI Components Library',
   },
@@ -478,7 +478,7 @@ export const routes: Routes = [
     path: 'bind',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/bind/bind-demo.component').then(
-        (m: { BindDemoComponent: Type<unknown> }): Type<unknown> => m.BindDemoComponent
+        (m: { BindDemoComponent: Type<unknown> }): Type<unknown> => m.BindDemoComponent,
       ),
     title: 'Bind - UI Components Library',
   },
@@ -486,7 +486,7 @@ export const routes: Routes = [
     path: 'block-ui',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/block-ui/block-ui-demo.component').then(
-        (m: { BlockUiDemoComponent: Type<unknown> }): Type<unknown> => m.BlockUiDemoComponent
+        (m: { BlockUiDemoComponent: Type<unknown> }): Type<unknown> => m.BlockUiDemoComponent,
       ),
     title: 'BlockUI - UI Components Library',
   },
@@ -495,7 +495,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/bottom-sheet/bottom-sheet-demo.component').then(
         (m: { BottomSheetDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.BottomSheetDemoComponent
+          m.BottomSheetDemoComponent,
       ),
     title: 'Bottom Sheet - UI Components Library',
   },
@@ -504,7 +504,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/cascade-select/cascade-select-demo.component').then(
         (m: { CascadeSelectDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.CascadeSelectDemoComponent
+          m.CascadeSelectDemoComponent,
       ),
     title: 'CascadeSelect - UI Components Library',
   },
@@ -512,7 +512,7 @@ export const routes: Routes = [
     path: 'carousel',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/carousel/carousel-demo.component').then(
-        (m: { CarouselDemoComponent: Type<unknown> }): Type<unknown> => m.CarouselDemoComponent
+        (m: { CarouselDemoComponent: Type<unknown> }): Type<unknown> => m.CarouselDemoComponent,
       ),
     title: 'Carousel - UI Components Library',
   },
@@ -521,7 +521,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/color-picker/color-picker-demo.component').then(
         (m: { ColorPickerDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ColorPickerDemoComponent
+          m.ColorPickerDemoComponent,
       ),
     title: 'ColorPicker - UI Components Library',
   },
@@ -530,7 +530,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/confirm-dialog/confirm-dialog-demo.component').then(
         (m: { ConfirmDialogDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ConfirmDialogDemoComponent
+          m.ConfirmDialogDemoComponent,
       ),
     title: 'ConfirmDialog - UI Components Library',
   },
@@ -539,7 +539,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/confirm-popup/confirm-popup-demo.component').then(
         (m: { ConfirmPopupDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ConfirmPopupDemoComponent
+          m.ConfirmPopupDemoComponent,
       ),
     title: 'ConfirmPopup - UI Components Library',
   },
@@ -547,7 +547,7 @@ export const routes: Routes = [
     path: 'breadcrumb',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/breadcrumb/breadcrumb-demo.component').then(
-        (m: { BreadcrumbDemoComponent: Type<unknown> }): Type<unknown> => m.BreadcrumbDemoComponent
+        (m: { BreadcrumbDemoComponent: Type<unknown> }): Type<unknown> => m.BreadcrumbDemoComponent,
       ),
     title: 'Breadcrumb - UI Components Library',
   },
@@ -556,7 +556,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/context-menu/context-menu-demo.component').then(
         (m: { ContextMenuDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ContextMenuDemoComponent
+          m.ContextMenuDemoComponent,
       ),
     title: 'ContextMenu - UI Components Library',
   },
@@ -564,7 +564,7 @@ export const routes: Routes = [
     path: 'chip',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/chip/chip-demo.component').then(
-        (m: { ChipDemoComponent: Type<unknown> }): Type<unknown> => m.ChipDemoComponent
+        (m: { ChipDemoComponent: Type<unknown> }): Type<unknown> => m.ChipDemoComponent,
       ),
     title: 'Chip - UI Components Library',
   },
@@ -573,7 +573,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/code-snippet/code-snippet-demo.component').then(
         (m: { CodeSnippetDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.CodeSnippetDemoComponent
+          m.CodeSnippetDemoComponent,
       ),
     title: 'Code Snippet - UI Components Library',
   },
@@ -581,7 +581,7 @@ export const routes: Routes = [
     path: 'class-names',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/class-names/class-names-demo.component').then(
-        (m: { ClassNamesDemoComponent: Type<unknown> }): Type<unknown> => m.ClassNamesDemoComponent
+        (m: { ClassNamesDemoComponent: Type<unknown> }): Type<unknown> => m.ClassNamesDemoComponent,
       ),
     title: 'ClassNames - UI Components Library',
   },
@@ -590,7 +590,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/keyboard-guide/keyboard-guide-demo.component').then(
         (m: { KeyboardGuideDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.KeyboardGuideDemoComponent
+          m.KeyboardGuideDemoComponent,
       ),
     title: 'Keyboard Guide - UI Components Library',
   },
@@ -599,7 +599,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/syntax-highlighter/syntax-highlighter-demo.component').then(
         (m: { SyntaxHighlighterDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.SyntaxHighlighterDemoComponent
+          m.SyntaxHighlighterDemoComponent,
       ),
     title: 'SyntaxHighlighter - UI Components Library',
   },
@@ -607,7 +607,7 @@ export const routes: Routes = [
     path: 'date-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/date-picker/date-picker-demo.component').then(
-        (m: { DatePickerDemoComponent: Type<unknown> }): Type<unknown> => m.DatePickerDemoComponent
+        (m: { DatePickerDemoComponent: Type<unknown> }): Type<unknown> => m.DatePickerDemoComponent,
       ),
     title: 'DatePicker - UI Components Library',
   },
@@ -615,7 +615,7 @@ export const routes: Routes = [
     path: 'divider',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/divider/divider-demo.component').then(
-        (m: { DividerDemoComponent: Type<unknown> }): Type<unknown> => m.DividerDemoComponent
+        (m: { DividerDemoComponent: Type<unknown> }): Type<unknown> => m.DividerDemoComponent,
       ),
     title: 'Divider - UI Components Library',
   },
@@ -623,7 +623,7 @@ export const routes: Routes = [
     path: 'dock',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/dock/dock-demo.component').then(
-        (m: { DockDemoComponent: Type<unknown> }): Type<unknown> => m.DockDemoComponent
+        (m: { DockDemoComponent: Type<unknown> }): Type<unknown> => m.DockDemoComponent,
       ),
     title: 'Dock - UI Components Library',
   },
@@ -631,7 +631,7 @@ export const routes: Routes = [
     path: 'drawer',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/drawer/drawer-demo.component').then(
-        (m: { DrawerDemoComponent: Type<unknown> }): Type<unknown> => m.DrawerDemoComponent
+        (m: { DrawerDemoComponent: Type<unknown> }): Type<unknown> => m.DrawerDemoComponent,
       ),
     title: 'Drawer - UI Components Library',
   },
@@ -640,7 +640,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/dynamic-dialog/dynamic-dialog-demo.component').then(
         (m: { DynamicDialogDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.DynamicDialogDemoComponent
+          m.DynamicDialogDemoComponent,
       ),
     title: 'DynamicDialog - UI Components Library',
   },
@@ -648,7 +648,7 @@ export const routes: Routes = [
     path: 'editor',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/editor/editor-demo.component').then(
-        (m: { EditorDemoComponent: Type<unknown> }): Type<unknown> => m.EditorDemoComponent
+        (m: { EditorDemoComponent: Type<unknown> }): Type<unknown> => m.EditorDemoComponent,
       ),
     title: 'Editor - UI Components Library',
   },
@@ -656,7 +656,7 @@ export const routes: Routes = [
     path: 'fieldset',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/fieldset/fieldset-demo.component').then(
-        (m: { FieldsetDemoComponent: Type<unknown> }): Type<unknown> => m.FieldsetDemoComponent
+        (m: { FieldsetDemoComponent: Type<unknown> }): Type<unknown> => m.FieldsetDemoComponent,
       ),
     title: 'Fieldset - UI Components Library',
   },
@@ -664,7 +664,7 @@ export const routes: Routes = [
     path: 'float-label',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/float-label/float-label-demo.component').then(
-        (m: { FloatLabelDemoComponent: Type<unknown> }): Type<unknown> => m.FloatLabelDemoComponent
+        (m: { FloatLabelDemoComponent: Type<unknown> }): Type<unknown> => m.FloatLabelDemoComponent,
       ),
     title: 'FloatLabel - UI Components Library',
   },
@@ -672,7 +672,7 @@ export const routes: Routes = [
     path: 'focus-trap',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/focus-trap/focus-trap-demo.component').then(
-        (m: { FocusTrapDemoComponent: Type<unknown> }): Type<unknown> => m.FocusTrapDemoComponent
+        (m: { FocusTrapDemoComponent: Type<unknown> }): Type<unknown> => m.FocusTrapDemoComponent,
       ),
     title: 'FocusTrap - UI Components Library',
   },
@@ -680,7 +680,7 @@ export const routes: Routes = [
     path: 'fluid',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/fluid/fluid-demo.component').then(
-        (m: { FluidDemoComponent: Type<unknown> }): Type<unknown> => m.FluidDemoComponent
+        (m: { FluidDemoComponent: Type<unknown> }): Type<unknown> => m.FluidDemoComponent,
       ),
     title: 'Fluid - UI Components Library',
   },
@@ -688,7 +688,7 @@ export const routes: Routes = [
     path: 'icon-field',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/icon-field/icon-field-demo.component').then(
-        (m: { IconFieldDemoComponent: Type<unknown> }): Type<unknown> => m.IconFieldDemoComponent
+        (m: { IconFieldDemoComponent: Type<unknown> }): Type<unknown> => m.IconFieldDemoComponent,
       ),
     title: 'IconField - UI Components Library',
   },
@@ -696,7 +696,7 @@ export const routes: Routes = [
     path: 'image',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/image/image-demo.component').then(
-        (m: { ImageDemoComponent: Type<unknown> }): Type<unknown> => m.ImageDemoComponent
+        (m: { ImageDemoComponent: Type<unknown> }): Type<unknown> => m.ImageDemoComponent,
       ),
     title: 'Image - UI Components Library',
   },
@@ -705,7 +705,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/image-compare/image-compare-demo.component').then(
         (m: { ImageCompareDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ImageCompareDemoComponent
+          m.ImageCompareDemoComponent,
       ),
     title: 'ImageCompare - UI Components Library',
   },
@@ -713,7 +713,7 @@ export const routes: Routes = [
     path: 'input-group',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/input-group/input-group-demo.component').then(
-        (m: { InputGroupDemoComponent: Type<unknown> }): Type<unknown> => m.InputGroupDemoComponent
+        (m: { InputGroupDemoComponent: Type<unknown> }): Type<unknown> => m.InputGroupDemoComponent,
       ),
     title: 'InputGroup - UI Components Library',
   },
@@ -721,7 +721,7 @@ export const routes: Routes = [
     path: 'input-mask',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/input-mask/input-mask-demo.component').then(
-        (m: { InputMaskDemoComponent: Type<unknown> }): Type<unknown> => m.InputMaskDemoComponent
+        (m: { InputMaskDemoComponent: Type<unknown> }): Type<unknown> => m.InputMaskDemoComponent,
       ),
     title: 'InputMask - UI Components Library',
   },
@@ -730,7 +730,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/input-number/input-number-demo.component').then(
         (m: { InputNumberDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.InputNumberDemoComponent
+          m.InputNumberDemoComponent,
       ),
     title: 'InputNumber - UI Components Library',
   },
@@ -738,7 +738,7 @@ export const routes: Routes = [
     path: 'input-otp',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/input-otp/input-otp-demo.component').then(
-        (m: { InputOtpDemoComponent: Type<unknown> }): Type<unknown> => m.InputOtpDemoComponent
+        (m: { InputOtpDemoComponent: Type<unknown> }): Type<unknown> => m.InputOtpDemoComponent,
       ),
     title: 'InputOtp - UI Components Library',
   },
@@ -746,7 +746,7 @@ export const routes: Routes = [
     path: 'key-filter',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/key-filter/key-filter-demo.component').then(
-        (m: { KeyFilterDemoComponent: Type<unknown> }): Type<unknown> => m.KeyFilterDemoComponent
+        (m: { KeyFilterDemoComponent: Type<unknown> }): Type<unknown> => m.KeyFilterDemoComponent,
       ),
     title: 'KeyFilter - UI Components Library',
   },
@@ -754,7 +754,7 @@ export const routes: Routes = [
     path: 'knob',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/knob/knob-demo.component').then(
-        (m: { KnobDemoComponent: Type<unknown> }): Type<unknown> => m.KnobDemoComponent
+        (m: { KnobDemoComponent: Type<unknown> }): Type<unknown> => m.KnobDemoComponent,
       ),
     title: 'Knob - UI Components Library',
   },
@@ -762,7 +762,7 @@ export const routes: Routes = [
     path: 'listbox',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/listbox/listbox-demo.component').then(
-        (m: { ListboxDemoComponent: Type<unknown> }): Type<unknown> => m.ListboxDemoComponent
+        (m: { ListboxDemoComponent: Type<unknown> }): Type<unknown> => m.ListboxDemoComponent,
       ),
     title: 'Listbox - UI Components Library',
   },
@@ -770,7 +770,7 @@ export const routes: Routes = [
     path: 'password',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/password/password-demo.component').then(
-        (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent
+        (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent,
       ),
     title: 'Password - UI Components Library',
   },
@@ -778,7 +778,7 @@ export const routes: Routes = [
     path: 'inplace',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/inplace/inplace-demo.component').then(
-        (m: { InplaceDemoComponent: Type<unknown> }): Type<unknown> => m.InplaceDemoComponent
+        (m: { InplaceDemoComponent: Type<unknown> }): Type<unknown> => m.InplaceDemoComponent,
       ),
     title: 'Inplace - UI Components Library',
   },
@@ -786,7 +786,7 @@ export const routes: Routes = [
     path: 'panel',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/panel/panel-demo.component').then(
-        (m: { PanelDemoComponent: Type<unknown> }): Type<unknown> => m.PanelDemoComponent
+        (m: { PanelDemoComponent: Type<unknown> }): Type<unknown> => m.PanelDemoComponent,
       ),
     title: 'Panel - UI Components Library',
   },
@@ -794,7 +794,7 @@ export const routes: Routes = [
     path: 'password',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/password/password-demo.component').then(
-        (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent
+        (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent,
       ),
     title: 'Password - UI Components Library',
   },
@@ -802,7 +802,7 @@ export const routes: Routes = [
     path: 'popover',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/popover/popover-demo.component').then(
-        (m: { PopoverDemoComponent: Type<unknown> }): Type<unknown> => m.PopoverDemoComponent
+        (m: { PopoverDemoComponent: Type<unknown> }): Type<unknown> => m.PopoverDemoComponent,
       ),
     title: 'Popover - UI Components Library',
   },
@@ -811,7 +811,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/radio-button/radio-button-demo.component').then(
         (m: { RadioButtonDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.RadioButtonDemoComponent
+          m.RadioButtonDemoComponent,
       ),
     title: 'RadioButton - UI Components Library',
   },
@@ -819,15 +819,23 @@ export const routes: Routes = [
     path: 'rating',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/rating/rating-demo.component').then(
-        (m: { RatingDemoComponent: Type<unknown> }): Type<unknown> => m.RatingDemoComponent
+        (m: { RatingDemoComponent: Type<unknown> }): Type<unknown> => m.RatingDemoComponent,
       ),
     title: 'Rating - UI Components Library',
+  },
+  {
+    path: 'data-grid',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/data-grid/data-grid-demo.component').then(
+        (m: { DataGridDemoComponent: Type<unknown> }): Type<unknown> => m.DataGridDemoComponent,
+      ),
+    title: 'Data Grid - UI Components Library',
   },
   {
     path: 'data-view',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/data-view/data-view-demo.component').then(
-        (m: { DataViewDemoComponent: Type<unknown> }): Type<unknown> => m.DataViewDemoComponent
+        (m: { DataViewDemoComponent: Type<unknown> }): Type<unknown> => m.DataViewDemoComponent,
       ),
     title: 'DataView - UI Components Library',
   },
@@ -835,7 +843,7 @@ export const routes: Routes = [
     path: 'order-list',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/order-list/order-list-demo.component').then(
-        (m: { OrderListDemoComponent: Type<unknown> }): Type<unknown> => m.OrderListDemoComponent
+        (m: { OrderListDemoComponent: Type<unknown> }): Type<unknown> => m.OrderListDemoComponent,
       ),
     title: 'OrderList - UI Components Library',
   },
@@ -843,7 +851,7 @@ export const routes: Routes = [
     path: 'mega-menu',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/mega-menu/mega-menu-demo.component').then(
-        (m: { MegaMenuDemoComponent: Type<unknown> }): Type<unknown> => m.MegaMenuDemoComponent
+        (m: { MegaMenuDemoComponent: Type<unknown> }): Type<unknown> => m.MegaMenuDemoComponent,
       ),
     title: 'MegaMenu - UI Components Library',
   },
@@ -851,7 +859,7 @@ export const routes: Routes = [
     path: 'menu',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/menu/menu-demo.component').then(
-        (m: { MenuDemoComponent: Type<unknown> }): Type<unknown> => m.MenuDemoComponent
+        (m: { MenuDemoComponent: Type<unknown> }): Type<unknown> => m.MenuDemoComponent,
       ),
     title: 'Menu - UI Components Library',
   },
@@ -859,7 +867,7 @@ export const routes: Routes = [
     path: 'message',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/message/message-demo.component').then(
-        (m: { MessageDemoComponent: Type<unknown> }): Type<unknown> => m.MessageDemoComponent
+        (m: { MessageDemoComponent: Type<unknown> }): Type<unknown> => m.MessageDemoComponent,
       ),
     title: 'Message - UI Components Library',
   },
@@ -867,7 +875,7 @@ export const routes: Routes = [
     path: 'menubar',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/menubar/menubar-demo.component').then(
-        (m: { MenubarDemoComponent: Type<unknown> }): Type<unknown> => m.MenubarDemoComponent
+        (m: { MenubarDemoComponent: Type<unknown> }): Type<unknown> => m.MenubarDemoComponent,
       ),
     title: 'Menubar - UI Components Library',
   },
@@ -876,7 +884,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/organization-chart/organization-chart-demo.component').then(
         (m: { OrganizationChartDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.OrganizationChartDemoComponent
+          m.OrganizationChartDemoComponent,
       ),
     title: 'OrganizationChart - UI Components Library',
   },
@@ -884,7 +892,7 @@ export const routes: Routes = [
     path: 'meter-group',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/meter-group/meter-group-demo.component').then(
-        (m: { MeterGroupDemoComponent: Type<unknown> }): Type<unknown> => m.MeterGroupDemoComponent
+        (m: { MeterGroupDemoComponent: Type<unknown> }): Type<unknown> => m.MeterGroupDemoComponent,
       ),
     title: 'MeterGroup - UI Components Library',
   },
@@ -892,7 +900,7 @@ export const routes: Routes = [
     path: 'panel-menu',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/panel-menu/panel-menu-demo.component').then(
-        (m: { PanelMenuDemoComponent: Type<unknown> }): Type<unknown> => m.PanelMenuDemoComponent
+        (m: { PanelMenuDemoComponent: Type<unknown> }): Type<unknown> => m.PanelMenuDemoComponent,
       ),
     title: 'PanelMenu - UI Components Library',
   },
@@ -900,7 +908,7 @@ export const routes: Routes = [
     path: 'paginator',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/paginator/paginator-demo.component').then(
-        (m: { PaginatorDemoComponent: Type<unknown> }): Type<unknown> => m.PaginatorDemoComponent
+        (m: { PaginatorDemoComponent: Type<unknown> }): Type<unknown> => m.PaginatorDemoComponent,
       ),
     title: 'Paginator - UI Components Library',
   },
@@ -908,7 +916,7 @@ export const routes: Routes = [
     path: 'pick-list',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pick-list/pick-list-demo.component').then(
-        (m: { PickListDemoComponent: Type<unknown> }): Type<unknown> => m.PickListDemoComponent
+        (m: { PickListDemoComponent: Type<unknown> }): Type<unknown> => m.PickListDemoComponent,
       ),
     title: 'PickList - UI Components Library',
   },
@@ -917,7 +925,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/progress-bar/progress-bar-demo.component').then(
         (m: { ProgressBarDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ProgressBarDemoComponent
+          m.ProgressBarDemoComponent,
       ),
     title: 'ProgressBar - UI Components Library',
   },
@@ -926,7 +934,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/progress-spinner/progress-spinner-demo.component').then(
         (m: { ProgressSpinnerDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ProgressSpinnerDemoComponent
+          m.ProgressSpinnerDemoComponent,
       ),
     title: 'ProgressSpinner - UI Components Library',
   },
@@ -935,7 +943,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/scroll-panel/scroll-panel-demo.component').then(
         (m: { ScrollPanelDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ScrollPanelDemoComponent
+          m.ScrollPanelDemoComponent,
       ),
     title: 'ScrollPanel - UI Components Library',
   },
@@ -943,7 +951,7 @@ export const routes: Routes = [
     path: 'scroller',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/scroller/scroller-demo.component').then(
-        (m: { ScrollerDemoComponent: Type<unknown> }): Type<unknown> => m.ScrollerDemoComponent
+        (m: { ScrollerDemoComponent: Type<unknown> }): Type<unknown> => m.ScrollerDemoComponent,
       ),
     title: 'Scroller - UI Components Library',
   },
@@ -951,7 +959,7 @@ export const routes: Routes = [
     path: 'ripple',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/ripple/ripple-demo.component').then(
-        (m: { RippleDemoComponent: Type<unknown> }): Type<unknown> => m.RippleDemoComponent
+        (m: { RippleDemoComponent: Type<unknown> }): Type<unknown> => m.RippleDemoComponent,
       ),
     title: 'Ripple - UI Components Library',
   },
@@ -959,7 +967,7 @@ export const routes: Routes = [
     path: 'scroll-top',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/scroll-top/scroll-top-demo.component').then(
-        (m: { ScrollTopDemoComponent: Type<unknown> }): Type<unknown> => m.ScrollTopDemoComponent
+        (m: { ScrollTopDemoComponent: Type<unknown> }): Type<unknown> => m.ScrollTopDemoComponent,
       ),
     title: 'ScrollTop - UI Components Library',
   },
@@ -967,7 +975,7 @@ export const routes: Routes = [
     path: 'slider',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/slider/slider-demo.component').then(
-        (m: { SliderDemoComponent: Type<unknown> }): Type<unknown> => m.SliderDemoComponent
+        (m: { SliderDemoComponent: Type<unknown> }): Type<unknown> => m.SliderDemoComponent,
       ),
     title: 'Slider - UI Components Library',
   },
@@ -975,7 +983,7 @@ export const routes: Routes = [
     path: 'skeleton',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/skeleton/skeleton-demo.component').then(
-        (m: { SkeletonDemoComponent: Type<unknown> }): Type<unknown> => m.SkeletonDemoComponent
+        (m: { SkeletonDemoComponent: Type<unknown> }): Type<unknown> => m.SkeletonDemoComponent,
       ),
     title: 'Skeleton - UI Components Library',
   },
@@ -983,7 +991,7 @@ export const routes: Routes = [
     path: 'speed-dial',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/speed-dial/speed-dial-demo.component').then(
-        (m: { SpeedDialDemoComponent: Type<unknown> }): Type<unknown> => m.SpeedDialDemoComponent
+        (m: { SpeedDialDemoComponent: Type<unknown> }): Type<unknown> => m.SpeedDialDemoComponent,
       ),
     title: 'SpeedDial - UI Components Library',
   },
@@ -992,7 +1000,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/split-button/split-button-demo.component').then(
         (m: { SplitButtonDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.SplitButtonDemoComponent
+          m.SplitButtonDemoComponent,
       ),
     title: 'SplitButton - UI Components Library',
   },
@@ -1000,7 +1008,7 @@ export const routes: Routes = [
     path: 'splitter',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Splitter — Coming Soon - UI Components Library',
     data: {
@@ -1018,7 +1026,7 @@ export const routes: Routes = [
     path: 'stepper',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/stepper/stepper-demo.component').then(
-        (m: { StepperDemoComponent: Type<unknown> }): Type<unknown> => m.StepperDemoComponent
+        (m: { StepperDemoComponent: Type<unknown> }): Type<unknown> => m.StepperDemoComponent,
       ),
     title: 'Stepper - UI Components Library',
   },
@@ -1026,7 +1034,7 @@ export const routes: Routes = [
     path: 'style-class',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/style-class/style-class-demo.component').then(
-        (m: { StyleClassDemoComponent: Type<unknown> }): Type<unknown> => m.StyleClassDemoComponent
+        (m: { StyleClassDemoComponent: Type<unknown> }): Type<unknown> => m.StyleClassDemoComponent,
       ),
     title: 'StyleClass - UI Components Library',
   },
@@ -1034,7 +1042,7 @@ export const routes: Routes = [
     path: 'tag',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/tag/tag-demo.component').then(
-        (m: { TagDemoComponent: Type<unknown> }): Type<unknown> => m.TagDemoComponent
+        (m: { TagDemoComponent: Type<unknown> }): Type<unknown> => m.TagDemoComponent,
       ),
     title: 'Tag - UI Components Library',
   },
@@ -1042,7 +1050,7 @@ export const routes: Routes = [
     path: 'terminal',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/terminal/terminal-demo.component').then(
-        (m: { TerminalDemoComponent: Type<unknown> }): Type<unknown> => m.TerminalDemoComponent
+        (m: { TerminalDemoComponent: Type<unknown> }): Type<unknown> => m.TerminalDemoComponent,
       ),
     title: 'Terminal - UI Components Library',
   },
@@ -1050,7 +1058,7 @@ export const routes: Routes = [
     path: 'table',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/table/table-demo.component').then(
-        (m: { TableDemoComponent: Type<unknown> }): Type<unknown> => m.TableDemoComponent
+        (m: { TableDemoComponent: Type<unknown> }): Type<unknown> => m.TableDemoComponent,
       ),
     title: 'Table - UI Components Library',
   },
@@ -1058,7 +1066,7 @@ export const routes: Routes = [
     path: 'tiered-menu',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/tiered-menu/tiered-menu-demo.component').then(
-        (m: { TieredMenuDemoComponent: Type<unknown> }): Type<unknown> => m.TieredMenuDemoComponent
+        (m: { TieredMenuDemoComponent: Type<unknown> }): Type<unknown> => m.TieredMenuDemoComponent,
       ),
     title: 'TieredMenu - UI Components Library',
   },
@@ -1066,7 +1074,7 @@ export const routes: Routes = [
     path: 'timeline',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/timeline/timeline-demo.component').then(
-        (m: { TimelineDemoComponent: Type<unknown> }): Type<unknown> => m.TimelineDemoComponent
+        (m: { TimelineDemoComponent: Type<unknown> }): Type<unknown> => m.TimelineDemoComponent,
       ),
     title: 'Timeline - UI Components Library',
   },
@@ -1074,7 +1082,7 @@ export const routes: Routes = [
     path: 'toolbar',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/toolbar/toolbar-demo.component').then(
-        (m: { ToolbarDemoComponent: Type<unknown> }): Type<unknown> => m.ToolbarDemoComponent
+        (m: { ToolbarDemoComponent: Type<unknown> }): Type<unknown> => m.ToolbarDemoComponent,
       ),
     title: 'Toolbar - UI Components Library',
   },
@@ -1082,7 +1090,7 @@ export const routes: Routes = [
     path: 'toast',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/toast/toast-demo.component').then(
-        (m: { ToastDemoComponent: Type<unknown> }): Type<unknown> => m.ToastDemoComponent
+        (m: { ToastDemoComponent: Type<unknown> }): Type<unknown> => m.ToastDemoComponent,
       ),
     title: 'Toast - UI Components Library',
   },
@@ -1090,7 +1098,7 @@ export const routes: Routes = [
     path: 'tooltip',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/tooltip/tooltip-demo.component').then(
-        (m: { TooltipDemoComponent: Type<unknown> }): Type<unknown> => m.TooltipDemoComponent
+        (m: { TooltipDemoComponent: Type<unknown> }): Type<unknown> => m.TooltipDemoComponent,
       ),
     title: 'Tooltip - UI Components Library',
   },
@@ -1098,7 +1106,7 @@ export const routes: Routes = [
     path: 'tree',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/tree/tree-demo.component').then(
-        (m: { TreeDemoComponent: Type<unknown> }): Type<unknown> => m.TreeDemoComponent
+        (m: { TreeDemoComponent: Type<unknown> }): Type<unknown> => m.TreeDemoComponent,
       ),
     title: 'Tree - UI Components Library',
   },
@@ -1106,7 +1114,7 @@ export const routes: Routes = [
     path: 'tree-table',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/tree-table/tree-table-demo.component').then(
-        (m: { TreeTableDemoComponent: Type<unknown> }): Type<unknown> => m.TreeTableDemoComponent
+        (m: { TreeTableDemoComponent: Type<unknown> }): Type<unknown> => m.TreeTableDemoComponent,
       ),
     title: 'TreeTable - UI Components Library',
   },
@@ -1114,7 +1122,7 @@ export const routes: Routes = [
     path: 'textarea',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/textarea/textarea-demo.component').then(
-        (m: { TextareaDemoComponent: Type<unknown> }): Type<unknown> => m.TextareaDemoComponent
+        (m: { TextareaDemoComponent: Type<unknown> }): Type<unknown> => m.TextareaDemoComponent,
       ),
     title: 'Textarea - UI Components Library',
   },
@@ -1123,7 +1131,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/toggle-button/toggle-button-demo.component').then(
         (m: { ToggleButtonDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ToggleButtonDemoComponent
+          m.ToggleButtonDemoComponent,
       ),
     title: 'ToggleButton - UI Components Library',
   },
@@ -1132,7 +1140,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/toggle-switch/toggle-switch-demo.component').then(
         (m: { ToggleSwitchDemoComponent: Type<unknown> }): Type<unknown> =>
-          m.ToggleSwitchDemoComponent
+          m.ToggleSwitchDemoComponent,
       ),
     title: 'ToggleSwitch - UI Components Library',
   },
@@ -1140,7 +1148,7 @@ export const routes: Routes = [
     path: 'tree-select',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/tree-select/tree-select-demo.component').then(
-        (m: { TreeSelectDemoComponent: Type<unknown> }): Type<unknown> => m.TreeSelectDemoComponent
+        (m: { TreeSelectDemoComponent: Type<unknown> }): Type<unknown> => m.TreeSelectDemoComponent,
       ),
     title: 'TreeSelect - UI Components Library',
   },
@@ -1148,7 +1156,7 @@ export const routes: Routes = [
     path: 'upload',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/upload/upload-demo.component').then(
-        (m: { UploadDemoComponent: Type<unknown> }): Type<unknown> => m.UploadDemoComponent
+        (m: { UploadDemoComponent: Type<unknown> }): Type<unknown> => m.UploadDemoComponent,
       ),
     title: 'Upload - UI Components Library',
   },
@@ -1156,7 +1164,7 @@ export const routes: Routes = [
     path: 'vision',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/vision/vision.component').then(
-        (m: { VisionComponent: Type<unknown> }): Type<unknown> => m.VisionComponent
+        (m: { VisionComponent: Type<unknown> }): Type<unknown> => m.VisionComponent,
       ),
     title: 'Vision - UI Components Library',
   },
@@ -1164,7 +1172,7 @@ export const routes: Routes = [
     path: 'roadmap',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/roadmap/roadmap.component').then(
-        (m: { RoadmapComponent: Type<unknown> }): Type<unknown> => m.RoadmapComponent
+        (m: { RoadmapComponent: Type<unknown> }): Type<unknown> => m.RoadmapComponent,
       ),
     title: 'Roadmap & Progress - UI Components Library',
   },
@@ -1173,7 +1181,7 @@ export const routes: Routes = [
     path: 'date-range-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'DateRangePicker — Coming Soon - UI Components Library',
     data: {
@@ -1192,7 +1200,7 @@ export const routes: Routes = [
     path: 'time-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'TimePicker — Coming Soon - UI Components Library',
     data: {
@@ -1210,7 +1218,7 @@ export const routes: Routes = [
     path: 'empty-state',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Empty State — Coming Soon - UI Components Library',
     data: {
@@ -1229,7 +1237,7 @@ export const routes: Routes = [
     path: 'statistic',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Statistic — Coming Soon - UI Components Library',
     data: {
@@ -1248,7 +1256,7 @@ export const routes: Routes = [
     path: 'typography',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Typography — Coming Soon - UI Components Library',
     data: {
@@ -1267,7 +1275,7 @@ export const routes: Routes = [
     path: 'descriptions',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Descriptions — Coming Soon - UI Components Library',
     data: {
@@ -1285,7 +1293,7 @@ export const routes: Routes = [
     path: 'segmented-control',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Segmented Control — Coming Soon - UI Components Library',
     data: {
@@ -1304,7 +1312,7 @@ export const routes: Routes = [
     path: 'kbd',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Kbd — Coming Soon - UI Components Library',
     data: {
@@ -1323,7 +1331,7 @@ export const routes: Routes = [
     path: 'scroll-area',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Scroll Area — Coming Soon - UI Components Library',
     data: {
@@ -1342,7 +1350,7 @@ export const routes: Routes = [
     path: 'calendar',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Calendar — Coming Soon - UI Components Library',
     data: {
@@ -1361,7 +1369,7 @@ export const routes: Routes = [
     path: 'navigation-menu',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/coming-soon/coming-soon-page.component').then(
-        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent
+        (m: { ComingSoonPageComponent: Type<unknown> }): Type<unknown> => m.ComingSoonPageComponent,
       ),
     title: 'Navigation Menu — Coming Soon - UI Components Library',
     data: {
@@ -1382,7 +1390,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Advanced Data Grid — Pro - UI Components Library',
     data: {
@@ -1420,7 +1428,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Workflow Builder — Pro - UI Components Library',
     data: {
@@ -1456,7 +1464,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Dynamic Form Engine — Pro - UI Components Library',
     data: {
@@ -1492,7 +1500,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Gantt & Scheduler — Pro - UI Components Library',
     data: {
@@ -1528,7 +1536,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'AI UI Kit — Pro - UI Components Library',
     data: {
@@ -1564,7 +1572,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Analytics & Charts Pro — Pro - UI Components Library',
     data: {
@@ -1601,7 +1609,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Rich Text & Document — Pro - UI Components Library',
     data: {
@@ -1637,7 +1645,7 @@ export const routes: Routes = [
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/pro-coming-soon/pro-coming-soon-page.component').then(
         (m: { ProComingSoonPageComponent: Type<unknown> }): Type<unknown> =>
-          m.ProComingSoonPageComponent
+          m.ProComingSoonPageComponent,
       ),
     title: 'Developer Experience Tools — Pro - UI Components Library',
     data: {
