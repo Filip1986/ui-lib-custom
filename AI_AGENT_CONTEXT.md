@@ -83,6 +83,17 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: Prompt 2 — reference doc generator fix + all 96 docs regenerated ✅]
+Changed:
+  scripts/generate-reference-doc.mjs: fix parseSignals regex (` = ` → ` =\s*`) so multi-line
+    output() declarations are captured; data-grid 3→10 outputs; tree gained nodeCollapse/nodeUnselect
+  docs/reference/components/*.md: 96 files regenerated via `npm run docs:reference --all`;
+    updated CSS vars, outputs, projection slots from live source; ACCORDION/TREE/BADGE/etc legacy
+    uppercase files updated in-place (Windows case-insensitive FS); data-grid.md added (new)
+State: COMPLETE — generator idempotent; npm run docs:reference passes clean
+Verification: node scripts/generate-reference-doc.mjs data-grid (10 outputs ✅); npm run docs:reference (96 files ✅); git commit clean ✅
+Next step: Prompt 5 (Sprint D — reduced-motion stylelint custom rule + library-wide `prefers-reduced-motion` pass)
+
 Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Prompt 11 DONE ✅]
 Changed:
   src/lib/data-grid/data-grid.types.ts: full type definitions (variant/size/sort/selection/filter/resize/edit/frozen; all event + template-context interfaces)
