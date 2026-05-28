@@ -213,6 +213,14 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   // ── DataView ─────────────────────────────────────────────────────────────
   'data-view.pagination': 'Seitennavigation',
   'data-view.view-mode': 'Anzeigemodus',
+  'data-view.label': 'Datenliste',
+  'data-view.controls': 'Steuerelemente der Datenansicht',
+  'data-view.filter': 'Elemente filtern',
+  'data-view.sort': 'Elemente sortieren',
+  'data-view.list-view': 'Listenansicht anzeigen',
+  'data-view.grid-view': 'Rasteransicht anzeigen',
+  'data-view.layout.list': 'Listenansicht ausgewählt',
+  'data-view.layout.grid': 'Rasteransicht ausgewählt',
 
   // ── Editor ────────────────────────────────────────────────────────────────
   'editor.toolbar': 'Formatierungsoptionen',

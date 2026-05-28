@@ -69,7 +69,7 @@ let nextDataViewId: number = 0;
     '[class.ui-lib-data-view--loading]': 'loading()',
     '[class.ui-lib-data-view--empty]': 'isEmpty() && !loading()',
     '[attr.id]': 'dataViewId',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
     '[attr.aria-busy]': 'loading()',
   },
 })
@@ -86,13 +86,19 @@ export class DataViewComponent<T> {
   public readonly trackBy: InputSignal<TrackByFunction<T> | null> =
     input<TrackByFunction<T> | null>(null);
   public readonly dataKey: InputSignal<string | null> = input<string | null>(null);
-  public readonly ariaLabel: InputSignal<string> = input<string>('Data list');
-  public readonly controlsAriaLabel: InputSignal<string> = input<string>('Data view controls');
-  public readonly filterAriaLabel: InputSignal<string> = input<string>('Filter items');
+  /** Accessible label for the data view host. Falls back to i18n `data-view.label`. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the controls group. Falls back to i18n `data-view.controls`. */
+  public readonly controlsAriaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the filter input. Falls back to i18n `data-view.filter`. */
+  public readonly filterAriaLabel: InputSignal<string> = input<string>('');
   public readonly filterPlaceholder: InputSignal<string> = input<string>('Filter items');
-  public readonly sortAriaLabel: InputSignal<string> = input<string>('Sort items');
-  public readonly listLayoutAriaLabel: InputSignal<string> = input<string>('Show list view');
-  public readonly gridLayoutAriaLabel: InputSignal<string> = input<string>('Show grid view');
+  /** Accessible label for the sort select. Falls back to i18n `data-view.sort`. */
+  public readonly sortAriaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the list layout button. Falls back to i18n `data-view.list-view`. */
+  public readonly listLayoutAriaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the grid layout button. Falls back to i18n `data-view.grid-view`. */
+  public readonly gridLayoutAriaLabel: InputSignal<string> = input<string>('');
   public readonly paginator: InputSignal<boolean> = input<boolean>(false);
   public readonly rows: InputSignal<number> = input<number>(DATA_VIEW_DEFAULT_ROWS_PER_PAGE);
   public readonly first: ModelSignal<number> = model<number>(0);
@@ -164,10 +170,42 @@ export class DataViewComponent<T> {
 
     effect((): void => {
       this.layoutLiveMessage.set(
-        this.layout() === 'list' ? 'List view selected' : 'Grid view selected',
+        this.layout() === 'list'
+          ? this.i18n.translate('data-view.layout.list')
+          : this.i18n.translate('data-view.layout.grid'),
       );
     });
   }
+
+  /** Resolved aria-label: explicit input > i18n fallback. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('data-view.label'),
+  );
+
+  /** Resolved controls group aria-label: explicit input > i18n fallback. */
+  public readonly resolvedControlsAriaLabel: Signal<string> = computed<string>(
+    (): string => this.controlsAriaLabel() || this.i18n.translate('data-view.controls'),
+  );
+
+  /** Resolved filter input aria-label: explicit input > i18n fallback. */
+  public readonly resolvedFilterAriaLabel: Signal<string> = computed<string>(
+    (): string => this.filterAriaLabel() || this.i18n.translate('data-view.filter'),
+  );
+
+  /** Resolved sort select aria-label: explicit input > i18n fallback. */
+  public readonly resolvedSortAriaLabel: Signal<string> = computed<string>(
+    (): string => this.sortAriaLabel() || this.i18n.translate('data-view.sort'),
+  );
+
+  /** Resolved list layout button aria-label: explicit input > i18n fallback. */
+  public readonly resolvedListLayoutAriaLabel: Signal<string> = computed<string>(
+    (): string => this.listLayoutAriaLabel() || this.i18n.translate('data-view.list-view'),
+  );
+
+  /** Resolved grid layout button aria-label: explicit input > i18n fallback. */
+  public readonly resolvedGridLayoutAriaLabel: Signal<string> = computed<string>(
+    (): string => this.gridLayoutAriaLabel() || this.i18n.translate('data-view.grid-view'),
+  );
 
   public readonly isEmpty: Signal<boolean> = computed<boolean>(
     (): boolean => this.resolveFilteredItems().length === 0,
