@@ -32,7 +32,6 @@ import {
   CAROUSEL_ARIA_PAUSE_LABEL,
   CAROUSEL_ARIA_PLAY_LABEL,
   CAROUSEL_ARIA_PREV_LABEL,
-  CAROUSEL_ARIA_REGION_LABEL,
   CAROUSEL_DEFAULT_NUM_SCROLL,
   CAROUSEL_DEFAULT_NUM_VISIBLE,
   CAROUSEL_DEFAULT_ORIENTATION,
@@ -85,7 +84,7 @@ import { UiLibI18nService } from 'ui-lib-custom/i18n';
     '[class.uilib-carousel-md]': 'size() === "md"',
     '[class.uilib-carousel-lg]': 'size() === "lg"',
     role: 'region',
-    '[attr.aria-label]': 'ariaLabel() || "Carousel"',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
     'aria-roledescription': 'carousel',
   },
 })
@@ -144,6 +143,11 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
     (): CarouselVariant => this.variant() ?? (this.themeConfig.variant() as CarouselVariant),
   );
 
+  /** Resolved ARIA label: explicit ariaLabel input > i18n `carousel.region` fallback. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() || this.i18n.translate('carousel.region'),
+  );
+
   /** Size token — controls padding, font-size, and button dimensions. */
   public readonly size: InputSignal<CarouselSize> = input<CarouselSize>('md');
 
@@ -195,8 +199,8 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   /** ARIA label for the "next" button. */
   public readonly nextAriaLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_NEXT_LABEL);
 
-  /** ARIA label for the carousel landmark region. Falls back to `'Carousel'`. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_REGION_LABEL);
+  /** ARIA label for the carousel landmark region. Falls back to i18n `carousel.region` when empty. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   /** ARIA label for the autoplay pause button (when playing). */
   public readonly pauseLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_PAUSE_LABEL);

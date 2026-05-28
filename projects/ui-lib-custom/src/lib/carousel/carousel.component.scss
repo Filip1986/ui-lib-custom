@@ -31,10 +31,15 @@
     // Transition
     --uilib-carousel-transition: 500ms ease;
 
+    // Nav disabled state
+    --uilib-carousel-nav-disabled-opacity: 0.4;
+
     // ─── Root layout ────────────────────────────────────────────────────────────
     display: flex;
     flex-direction: column;
     width: 100%;
+    animation: uilib-carousel-mount var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
   }
 
   // ─── Content container ────────────────────────────────────────────────────────
@@ -140,7 +145,7 @@
 
     &:disabled,
     &.uilib-carousel-nav-disabled {
-      opacity: 0.4;
+      opacity: var(--uilib-carousel-nav-disabled-opacity);
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -232,9 +237,25 @@
     }
   }
 
+  // ─── Mount animation ──────────────────────────────────────────────────────────
+
+  @keyframes uilib-carousel-mount {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
   // ─── Reduced motion ───────────────────────────────────────────────────────────
 
   @media (prefers-reduced-motion: reduce) {
+    .uilib-carousel {
+      animation: none;
+    }
+
     .uilib-carousel-item-list {
       transition: none !important;
     }
