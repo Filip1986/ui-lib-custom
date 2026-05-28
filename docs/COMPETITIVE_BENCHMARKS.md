@@ -1928,6 +1928,53 @@ _None._
 
 ---
 
+### DataGrid
+
+DataGrid is a signals-first, `role=grid` data grid with virtual scrolling, frozen columns, cell editing, multi-sort, column filter, lazy load, and full WAI-ARIA grid keyboard navigation — the premium flagship component.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour                                           | Angular Material           | PrimeNG    | Radix UI | Ark UI | **ui-lib-custom** |
+|---------------------------------------------------------------|----------------------------|------------|----------|--------|-------------------|
+| `role=grid` (interactive grid semantics)                      | ⚠️ `role=table` on CDK     | ✅          | N/A      | N/A    | ✅                 |
+| Sortable columns with `aria-sort`                             | ✅                          | ✅          | N/A      | N/A    | ✅                 |
+| Row selection (single / multi / checkbox)                     | ✅                          | ✅          | N/A      | N/A    | ✅                 |
+| Arrow-key cell navigation (grid keyboard pattern)             | ❌                          | ⚠️ partial | N/A      | N/A    | ✅                 |
+| F2 / Enter cell editing; Escape to cancel                     | ❌                          | ✅          | N/A      | N/A    | ✅                 |
+| Virtual scrolling (CdkVirtualScrollViewport)                  | ✅ (CDK only)               | ✅          | N/A      | N/A    | ✅                 |
+| `aria-rowcount` / `aria-rowindex` on virtual rows             | ❌                          | ⚠️ partial | N/A      | N/A    | 🚀                |
+| Frozen / pinned columns (start and end)                       | ❌                          | ✅          | N/A      | N/A    | ✅                 |
+| Column resizing (pointer events)                              | ❌                          | ✅          | N/A      | N/A    | ✅                 |
+| Multi-column sort                                             | ❌                          | ✅          | N/A      | N/A    | ✅                 |
+| Global filter + per-column filter                             | ❌                          | ✅          | N/A      | N/A    | ✅                 |
+| Lazy load / server-side data (signal event)                   | ❌                          | ✅          | N/A      | N/A    | ✅                 |
+| Column DSL via child components                               | ⚠️ (`ng-container` heavy)  | ✅          | N/A      | N/A    | ✅                 |
+| Custom cell template via structural directive                 | ⚠️                         | ✅          | N/A      | N/a    | ✅                 |
+| Live region announcing sort / filter results to screen reader | ❌                          | ❌          | N/A      | N/A    | 🚀                |
+| Signal-native API (`input()`, `model()`, `output()`)          | ❌                          | ❌          | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                           | ❌                          | ❌          | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                                 | ❌                          | ❌          | N/A      | N/A    | 🚀                |
+
+#### Gaps
+
+_None — all features listed above are implemented._
+
+#### Differentiators
+
+- **`aria-rowcount` / `aria-rowindex` on virtual scroll**: When scrolling a 10 000-row virtual grid, `aria-rowcount` on `<table>` and `aria-rowindex` on each visible `<tr>` communicate to screen readers that they are reading row 1 of 10 000 — not just row 1 of the dozen visible rows. Neither Angular Material CDK table nor PrimeNG p-table implement this correctly for virtual scroll.
+- **Live region for sort / filter state changes**: Column header sort-direction changes and filter-match counts are announced via a live region (`aria-live=polite`). This means a keyboard-only screen reader user receives confirmation that "Sorted by Price ascending, 42 rows" without having to navigate away from the column header.
+- **Arrow-key cell navigation (full grid pattern)**: Implements the complete WAI-ARIA Grid pattern — arrow keys move between cells, Tab moves between focusable interactive elements inside a cell, Home/End jump to first/last column, Page Up/Down scroll by viewport. PrimeNG's table has partial support (row navigation only); Angular Material's CDK table has none.
+
+#### Reference URLs
+
+- Angular Material: https://material.angular.io/cdk/table/overview (CDK table only — no full data grid)
+- PrimeNG: https://primeng.org/table
+- Radix UI: N/A — no data grid primitive
+- Ark UI: N/A — no data grid primitive
+- APG Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
+
+---
+
 ### Listbox
 
 | Feature / Behaviour                                          | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
@@ -3207,6 +3254,43 @@ None — semantic `as` input, list rendering, and token-only spacing all impleme
 - Radix UI: N/A — no Stack primitive
 - Ark UI: N/A — no Stack primitive
 - APG Pattern: N/A — Stack is a layout utility; no ARIA pattern applies when used as a plain `<div>`
+
+---
+
+### Inline
+
+Inline is a flex-row layout component for horizontal sequences of elements — wrapping, aligned, and spaced from design tokens. It is the horizontal complement to Stack.
+
+#### Feature / Behaviour Parity
+
+| Feature / Behaviour                                    | Angular Material | PrimeNG | Radix UI | Ark UI | ui-lib-custom |
+|--------------------------------------------------------|------------------|---------|----------|--------|---------------|
+| No landmark or ARIA role added by default              | ✅                | ✅       | ✅        | ✅      | ✅             |
+| Wrapping control (`wrap` / `nowrap`)                   | ✅ (Flex Layout)  | ❌       | ✅        | ✅      | ✅             |
+| Alignment along cross-axis (`alignItems`)              | ✅ (Flex Layout)  | ❌       | ✅        | ✅      | ✅             |
+| Justification along main-axis (`justifyContent`)       | ✅ (Flex Layout)  | ❌       | ✅        | ✅      | ✅             |
+| `as` input for semantic HTML element                   | ❌                | ❌       | ✅        | ✅      | ✅             |
+| Spacing exclusively from `--uilib-spacing-*` tokens    | ❌                | ❌       | ❌        | ❌      | ✅             |
+| Reading-order preserved (no CSS `order` reordering)    | ⚠️               | N/A     | ✅        | ✅      | ✅             |
+| Signal-native `gap`, `wrap`, `align`, `as` inputs      | ❌                | ❌       | ❌        | ❌      | 🚀             |
+
+#### Gaps
+
+None — wrapping, alignment, justification, token-only spacing, and reading-order guarantee all implemented.
+
+#### Differentiators
+
+- **Reading-order guarantee**: Inline never uses CSS `order` to rearrange children. The visual left-to-right sequence always matches the DOM order, satisfying WCAG SC 1.3.2 (Meaningful Sequence) by construction. This is the same guarantee as Stack's column direction.
+- **Token-only gap**: The `gap` input maps to the `--uilib-spacing-*` scale — the same tokens used by Stack and Grid — so horizontal spacing in an Inline row is always harmonically related to the vertical spacing in a Stack column.
+- **Signal-native inputs with automatic RTL**: The `align` and `justify` inputs accept logical values (`start` / `end`) rather than physical `left` / `right`, so Inline layouts automatically mirror in RTL languages when the document direction is `rtl`.
+
+#### Reference URLs
+
+- Angular Material: N/A — no Inline component (Flex Layout deprecated)
+- PrimeNG: N/A — no Inline component
+- Radix UI: N/A — no Inline primitive
+- Ark UI: N/A — no Inline primitive
+- APG Pattern: N/A — Inline is a layout utility; WCAG SC 1.3.2 and 1.4.10 govern sequence and reflow
 
 ---
 
