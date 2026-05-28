@@ -9,6 +9,10 @@
   <span class="ui-lib-avatar__label" aria-hidden="true">{{ label() }}</span>
 } @else if (showIcon()) {
   <span class="ui-lib-avatar__icon" [class]="icon()!" aria-hidden="true"></span>
+} @else if (fallbackTemplate(); as tpl) {
+  <!-- Typed fallback slot — receives { size, shape, variant } context -->
+  <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="fallbackContext()" />
 } @else {
+  <!-- Plain content projection fallback -->
   <ng-content />
 }

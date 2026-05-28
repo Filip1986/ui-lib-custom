@@ -250,6 +250,9 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   // ── Knob ──────────────────────────────────────────────────────────────────
   'knob.dial': 'Dial',
 
+  // ── Avatar ────────────────────────────────────────────────────────────────
+  'avatar.label': 'Avatar',
+
   // ── SplitButton ───────────────────────────────────────────────────────────
   'split-button.more': 'More options',
   'split-button.menu': 'Menu',

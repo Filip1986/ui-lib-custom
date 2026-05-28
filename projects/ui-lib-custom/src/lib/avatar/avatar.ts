@@ -2,16 +2,20 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
   inject,
   input,
   ViewEncapsulation,
   type InputSignal,
   type Signal,
+  type TemplateRef,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { AVATAR_GROUP_CONTEXT } from './avatar-group';
-import type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
-export type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
+import type { AvatarFallbackContext, AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
+export type { AvatarFallbackContext, AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
 let nextAvatarId: number = 0;
 /**
  * Avatar - Represents a person or object with an image, initials, or icon.
@@ -27,6 +31,7 @@ let nextAvatarId: number = 0;
 @Component({
   selector: 'ui-lib-avatar',
   standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './avatar.html',
   styleUrl: './avatar.scss',
   host: {
@@ -40,6 +45,7 @@ let nextAvatarId: number = 0;
 })
 export class Avatar {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly isInAvatarGroup: boolean =
     inject(AVATAR_GROUP_CONTEXT, {
       optional: true,
@@ -65,8 +71,29 @@ export class Avatar {
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
   /** Accessible label override for the avatar */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+
+  // ---------------------------------------------------------------------------
+  // Content children (typed template slots)
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Optional custom fallback template shown when no `image`, `label`, or `icon` is set.
+   * Context: `{ size, shape, variant }`.
+   *
+   * @example
+   * ```html
+   * <ui-lib-avatar>
+   *   <ng-template #fallback let-size="size">
+   *     <mat-icon>person</mat-icon>
+   *   </ng-template>
+   * </ui-lib-avatar>
+   * ```
+   */
+  public readonly fallbackTemplate: Signal<TemplateRef<AvatarFallbackContext> | undefined> =
+    contentChild<TemplateRef<AvatarFallbackContext>>('fallback');
+
   public readonly hostRole: Signal<'img' | 'listitem'> = computed<'img' | 'listitem'>(
-    (): 'img' | 'listitem' => (this.isInAvatarGroup ? 'listitem' : 'img')
+    (): 'img' | 'listitem' => (this.isInAvatarGroup ? 'listitem' : 'img'),
   );
   private readonly effectiveVariant: Signal<AvatarVariant> = computed<AvatarVariant>(
     (): AvatarVariant => {
@@ -74,7 +101,7 @@ export class Avatar {
       if (direct) return direct;
       const global: 'material' | 'bootstrap' | 'minimal' = this.themeConfig.variant();
       return global;
-    }
+    },
   );
   /** Computed CSS classes for the host element */
   public readonly avatarClasses: Signal<string> = computed<string>((): string => {
@@ -90,24 +117,34 @@ export class Avatar {
     }
     return classes.join(' ');
   });
-  /** Resolved aria-label: explicit ariaLabel > imageAlt when image > label > null */
+  /** Resolved aria-label: explicit ariaLabel > imageAlt when image > name > label > i18n fallback */
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
       const override: string | null = this.ariaLabel();
       if (override) return override;
       const img: string | null = this.image();
       if (img) return this.resolvedImageAlt();
-      return this.name() || this.label() || 'Avatar';
-    }
+      return this.name() || this.label() || this.i18n.translate('avatar.label');
+    },
   );
+
   public readonly resolvedImageAlt: Signal<string> = computed<string>((): string => {
     const configuredAlt: string = this.imageAlt().trim();
     if (configuredAlt) return configuredAlt;
-    return this.name() || this.label() || 'Avatar';
+    return this.name() || this.label() || this.i18n.translate('avatar.label');
   });
+
+  /** Context object passed to the `#fallback` template slot. */
+  public readonly fallbackContext: Signal<AvatarFallbackContext> = computed<AvatarFallbackContext>(
+    (): AvatarFallbackContext => ({
+      size: this.size(),
+      shape: this.shape(),
+      variant: this.effectiveVariant(),
+    }),
+  );
   /** Whether to show the image slot */
   public readonly showImage: Signal<boolean> = computed<boolean>(
-    (): boolean => this.image() !== null
+    (): boolean => this.image() !== null,
   );
   /** Whether to show the label slot */
   public readonly showLabel: Signal<boolean> = computed<boolean>((): boolean => {

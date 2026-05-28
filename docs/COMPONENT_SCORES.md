@@ -295,7 +295,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
-| Avatar          | 8   | 9    | 8    | 9    | 8     | 8   | 8    | 8      | 9       | 8    | 7   | 8.2 | 🟢     |
+| Avatar          | 8   | 9    | 8    | 10   | 9     | 9   | 8    | 9      | 9       | 9    | 9   | 8.8 | 🟢     |
 | Icon            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8   | 8.7 | 🟢     |
 | IconButton      | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8   | 8.6 | 🟢     |
 | ButtonGroup     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8   | 8.7 | 🟢     |

@@ -12,6 +12,8 @@
     --uilib-avatar-icon-size-sm: 1rem;
     --uilib-avatar-icon-size-md: 1.25rem;
     --uilib-avatar-icon-size-lg: 1.75rem;
+    /* Typography */
+    --uilib-avatar-font-weight: 600;
     /* Default colours */
     --uilib-avatar-bg: var(--uilib-color-primary-100, #dbeafe);
     --uilib-avatar-fg: var(--uilib-color-primary-700, #1d4ed8);
@@ -34,10 +36,12 @@
     border: var(--uilib-avatar-border-width) solid var(--uilib-avatar-border-color);
     border-radius: var(--uilib-avatar-radius);
     font-size: var(--uilib-avatar-font-size);
-    font-weight: 600;
+    font-weight: var(--uilib-avatar-font-weight);
     overflow: hidden;
     user-select: none;
     flex-shrink: 0;
+    animation: uilib-avatar-mount var(--uilib-transition-duration-fast, 0.15s)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
   }
   .ui-lib-avatar:focus-visible {
     outline: 2px solid var(--uilib-avatar-focus-ring, var(--uilib-color-primary-500, #3b82f6));
@@ -108,6 +112,19 @@
       var(--uilib-color-neutral-200, #e5e7eb)
     );
   }
+  /* ── Mount animation ────────────────────────────────────────── */
+  @keyframes uilib-avatar-mount {
+    from {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   /* ── Dark mode ──────────────────────────────────────────────── */
   @media (prefers-color-scheme: dark) {
     .ui-lib-avatar--variant-material {
