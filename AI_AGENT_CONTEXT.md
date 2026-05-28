@@ -19,10 +19,10 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Active Session State
 
-- **Current milestone:** Prompt 7 quality upgrade sprint (week of 2026-05-25) — COMPLETE ✅
+- **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 8 — 8.5-cluster batch in progress (OrganizationChart 8.5→8.7 ✅, Galleria 8.5→8.7 ✅, DynamicDialog 8.5→8.7 ✅). Remaining 8.5-tier components: Drawer, ConfirmDialog, Table, TreeTable, Tree, Listbox, VirtualScroller, Paginator, DatePicker. Next: continue 8.5-cluster or Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
-- **Next queue:** Continue Prompt 8 cluster batch on remaining low-scorers. Then Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
+- **Active focus:** Prompt 8 — 8.5-cluster batch COMPLETE ✅ (OrganizationChart, Galleria, DynamicDialog, Drawer, ConfirmDialog, Tree, TreeTable, Table, Listbox, VirtualScroller, Paginator, DatePicker — all 8.5→8.7). Next: Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5).
+- **Next queue:** Prompt 7 ceiling push (Select, AutoComplete, CascadeSelect, ColorPicker → 9.5). Then broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat(lib): prompt-8 DatePicker (8.5→8.7) — CSS token, i18n aria labels ✅]
+Changed:
+  date-picker/date-picker.scss: --uilib-datepicker-panel-min-width: 18rem; added to host token block;
+    wired in .ui-lib-datepicker__panel (was a raw value)
+  date-picker/date-picker.html: 5 hardcoded English strings replaced with i18n.translate():
+    'Open date picker' → datepicker.toggle; 'Date picker' → datepicker.panel.label;
+    'Previous/Next month, {month}' → datepicker.prev/next.month.label with { month } param;
+    'Toggle AM/PM, current {value}' → datepicker.ampm.toggle with { value } param
+  i18n/en,de,fr,es.ts: 4 new datepicker keys across all locales
+    (datepicker.panel.label, datepicker.prev.month.label, datepicker.next.month.label, datepicker.ampm.toggle)
+  docs/reference/bundle-sizes.json: baseline updated
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 138 date-picker + 6123 total tests ✅; commit f100f9ae ✅
+Verification: npx eslint date-picker/ (PASS ✅); ng build ui-lib-custom (PASS ✅); npm test (6123 ✅)
+Next step: Prompt 7 ceiling push — Select, AutoComplete, CascadeSelect, ColorPicker → 9.5
+
+Date: 2026-05-28 [feat(lib): prompt-8 8.5-cluster batch 2 — Drawer, ConfirmDialog, Tree, TreeTable, Table, Listbox, VirtualScroller, Paginator ✅]
+Changed:
+  drawer/drawer.scss: --uilib-drawer-close-transition token; uilib-drawer-panel-enter animation (all 4 positions);
+    @keyframes; prefers-reduced-motion guard extended
+  confirm-dialog/confirm-dialog.scss: --uilib-confirm-dialog-close-btn-radius; material variant 999px via token
+  tree/tree.ts+html+scss: resolvedFilterPlaceholder via tree.filter-placeholder; --uilib-tree-node-gap;
+    uilib-tree-mount animation
+  tree-table/tree-table.component.ts+html+scss: resolvedGlobalFilterPlaceholder; --uilib-tree-table-filter-margin-bottom;
+    uilib-tree-table-mount animation
+  table/table.component.scss: --uilib-table-sort-transition-duration; uilib-table-mount animation
+  listbox/listbox.component.ts+html+scss: 3 resolved signals (filterPlaceholder/emptyMessage/emptyFilterMessage);
+    --uilib-listbox-filter-gap; uilib-listbox-mount animation
+  virtual-scroller/virtual-scroller.component.scss+ts: --uilib-scroller-spin-duration; 6 i18n fallbacks in
+    resolvedAriaLabel/liveRegionMessage/formatTotalItemsMessage
+  paginator/paginator.component.ts+scss: resolvedAriaLabel via paginator.nav; uilib-paginator-mount animation
+  i18n/en,de,fr,es.ts: 10 new keys (tree-table.filter-placeholder, listbox.*, virtual-scroller.*)
+  docs/reference/bundle-sizes.json: baseline updated
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 6123/6123 tests ✅; commit 75fe2bbf ✅
+Verification: npx eslint (all dirs PASS ✅); ng build ✅; npm test (6123 ✅)
+Next step: DatePicker Prompt 8 pass → DONE
+
 Date: 2026-05-28 [feat: Prompt 8 — 8.5-cluster batch: OrganizationChart (8.5→8.7) + Galleria (8.5→8.7) + DynamicDialog (8.5→8.7) ✅]
 Changed:
   organization-chart/organization-chart.ts: inject UiLibI18nService; ariaLabel input default '' (was 'Organization');
@@ -113,44 +149,6 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 175 tests (org-chart + galleria + dynamic-dialog) ✅
 Verification: npx eslint (PASS ✅); ng build ui-lib-custom (PASS ✅); npx jest (175 ✅); bundlesize (PASS ✅)
 Next step: Continue 8.5-cluster batch on Drawer, ConfirmDialog, Table, TreeTable, Tree, Listbox, VirtualScroller, Paginator
-
-Date: 2026-05-28 [feat: Prompt 8 — DatePicker (8.3→8.5) + DataView (8.4→8.6) cluster batch ✅]
-Changed:
-  date-picker/date-picker.scss: --uilib-datepicker-disabled-opacity + --uilib-datepicker-cell-disabled-opacity tokens;
-    uilib-datepicker-mount host animation; uilib-datepicker-panel-open slide-in animation; prefers-reduced-motion guard
-  date-picker/date-picker.ts: getDateAriaLabel() hardcoded 'today'/'selected'/'in selected range' replaced with
-    i18n.translate('datepicker.day.today'/'.selected'/'.range')
-  data-view/data-view.component.ts: ariaLabel/controlsAriaLabel/filterAriaLabel/sortAriaLabel/listLayoutAriaLabel/
-    gridLayoutAriaLabel defaults changed to ''; 6 resolvedXxx computed signals; layoutLiveMessage effect uses i18n keys;
-    host binding updated to resolvedAriaLabel()
-  data-view/data-view.component.html: all 5 aria bindings updated to resolved signals
-  data-view/data-view.component.scss: --uilib-data-view-controls-gap token; mount animation; prefers-reduced-motion
-  i18n/en,de,fr,es.ts: datepicker.day.today/.selected/.range; data-view.label/.controls/.filter/.sort/
-    .list-view/.grid-view/.layout.list/.layout.grid (11 new keys across 4 locales)
-  docs/COMPONENT_SCORES.md: DatePicker 8.3→8.5; DataView 8.4→8.6
-  docs/reference/bundle-sizes.json: baseline updated (56fd3226 + ebd63a78)
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 138 date-picker + 64 data-view tests ✅; pushed e181e164 ✅
-Verification: npx eslint date-picker/ data-view/ (PASS ✅); ng build ✅; tests ✅; git push (PASS ✅)
-Next step: Begin 8.5-cluster batch OR Prompt 7 ceiling push on Select/AutoComplete/CascadeSelect/ColorPicker
-
-Date: 2026-05-28 [feat: Prompt 8 — 8.2-cluster batch: Knob (8.2→8.7) + Avatar (8.2→8.8) ✅]
-Changed:
-  knob/knob.component.ts: typed #valueLabel slot (KnobValueContext: $implicit, formattedValue, normalized); UiLibI18nService i18n fallback for aria-label; NgTemplateOutlet
-  knob/knob.component.html: #valueLabel branch before @else showValue
-  knob/knob.component.scss: --uilib-knob-focus-ring-offset token; transition-duration via --uilib-transition-duration-fast; uilib-knob-mount keyframe; animation declaration; prefers-reduced-motion guard
-  knob/knob.types.ts: KnobValueContext interface exported
-  knob/index.ts: export KnobValueContext
-  avatar/avatar.ts: typed #fallback slot (AvatarFallbackContext: size, shape, variant); UiLibI18nService i18n fallback for ariaLabelResolved + resolvedImageAlt; NgTemplateOutlet
-  avatar/avatar.html: #fallback branch before plain <ng-content />
-  avatar/avatar.scss: --uilib-avatar-font-weight token (600); uilib-avatar-mount keyframe + animation; prefers-reduced-motion guard
-  avatar/avatar.types.ts: AvatarFallbackContext interface
-  avatar/index.ts: export AvatarFallbackContext
-  i18n/en.ts,de.ts,fr.ts,es.ts: knob.dial (Knob) + avatar.label (Avatar) keys in all four locales
-  docs/COMPONENT_SCORES.md: Knob 8.2→8.7; Avatar 8.2→8.8
-  docs/reference/bundle-sizes.json: knob + avatar baselines updated after intentional NgTemplateOutlet + i18n growth
-State: COMPLETE — ESLint ✅; ng build zero warnings ✅; 36/36 avatar tests ✅; pushed 519e7609 + 001a12d9 ✅
-Verification: npx eslint avatar/ (PASS ✅); ng build ui-lib-custom (PASS ✅); npx jest avatar --no-coverage (36 ✅); git push (PASS ✅)
-Next step: Prompt 8 continues — Timeline (8.3 → target 8.8), then DatePicker (8.3), Carousel (8.4)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
