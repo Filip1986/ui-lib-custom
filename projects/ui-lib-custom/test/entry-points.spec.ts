@@ -8,6 +8,7 @@ import type * as UiLibChart from 'ui-lib-custom/chart';
 import type * as UiLibCodeSnippet from 'ui-lib-custom/code-snippet';
 import type * as UiLibColorPicker from 'ui-lib-custom/color-picker';
 import type * as UiLibCore from 'ui-lib-custom/core';
+import type * as UiLibDataGrid from 'ui-lib-custom/data-grid';
 import type * as UiLibDataView from 'ui-lib-custom/data-view';
 import type * as UiLibOrderList from 'ui-lib-custom/order-list';
 import type * as UiLibDatePicker from 'ui-lib-custom/date-picker';
@@ -151,6 +152,13 @@ describe('Secondary Entry Points', (): void => {
   it('should import from core', async (): Promise<void> => {
     const mod: typeof UiLibCore = await import('ui-lib-custom/core');
     expect(mod.ICON_SIZES).toBeDefined();
+  });
+
+  it('should import from data-grid', async (): Promise<void> => {
+    const mod: typeof UiLibDataGrid = await import('ui-lib-custom/data-grid');
+    expect(mod.DataGridComponent).toBeDefined();
+    expect(mod.DataGridColumnComponent).toBeDefined();
+    expect(mod.DATA_GRID_DEFAULTS).toBeDefined();
   });
 
   it('should import from data-view', async (): Promise<void> => {

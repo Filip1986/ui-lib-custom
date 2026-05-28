@@ -1,0 +1,5 @@
+{
+  "name": "ui-lib-custom/data-grid",
+  "sideEffects": false,
+  "ngPackage": {}
+}

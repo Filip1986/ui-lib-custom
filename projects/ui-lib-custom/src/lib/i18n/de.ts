@@ -278,4 +278,17 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'input-otp.digit': 'Ziffer',
   'input-otp.of': 'von',
   'input-otp.paste': 'Code eingegeben.',
+
+  // ── DataGrid ──────────────────────────────────────────────────────────────
+  'data-grid.select-all': 'Alle Zeilen auswählen',
+  'data-grid.deselect-all': 'Alle Zeilen abwählen',
+  'data-grid.select-row': 'Zeile auswählen',
+  'data-grid.deselect-row': 'Zeile abwählen',
+  'data-grid.filter-placeholder': 'Filtern',
+  'data-grid.filter-column': 'Nach {column} filtern',
+  'data-grid.edit-cell': 'Zelle bearbeiten',
+  'data-grid.sort-asc': 'Aufsteigend sortieren',
+  'data-grid.sort-desc': 'Absteigend sortieren',
+  'data-grid.sort-none': 'Sortierung entfernen',
+  'data-grid.empty': 'Keine Einträge gefunden.',
 };

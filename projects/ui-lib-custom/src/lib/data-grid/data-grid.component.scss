@@ -1,0 +1,527 @@
+@layer uilib.components {
+  // -------------------------------------------------------------------------
+  // Design tokens
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid {
+    // Layout
+    --uilib-data-grid-border-color: var(--uilib-color-neutral-200, #e5e7eb);
+    --uilib-data-grid-border-radius: var(--uilib-radius-md, 0.5rem);
+    --uilib-data-grid-border-width: 1px;
+
+    // Header
+    --uilib-data-grid-header-bg: var(--uilib-color-neutral-50, #f9fafb);
+    --uilib-data-grid-header-color: var(--uilib-color-neutral-700, #374151);
+    --uilib-data-grid-header-font-weight: 600;
+    --uilib-data-grid-header-padding-inline: var(--uilib-spacing-3, 0.75rem);
+    --uilib-data-grid-header-padding-block: var(--uilib-spacing-3, 0.75rem);
+    --uilib-data-grid-header-sort-icon-color: var(--uilib-color-neutral-400, #9ca3af);
+    --uilib-data-grid-header-sort-icon-active-color: var(--uilib-color-primary-600, #4f46e5);
+
+    // Body cells
+    --uilib-data-grid-cell-bg: var(--uilib-surface-page, #ffffff);
+    --uilib-data-grid-cell-color: var(--uilib-color-neutral-900, #111827);
+    --uilib-data-grid-cell-padding-inline: var(--uilib-spacing-3, 0.75rem);
+    --uilib-data-grid-cell-padding-block: var(--uilib-spacing-3, 0.75rem);
+    --uilib-data-grid-cell-border-color: var(--uilib-color-neutral-100, #f3f4f6);
+
+    // Row states
+    --uilib-data-grid-row-hover-bg: var(--uilib-color-primary-50, #eef2ff);
+    --uilib-data-grid-row-selected-bg: var(--uilib-color-primary-100, #e0e7ff);
+    --uilib-data-grid-row-selected-color: var(--uilib-color-neutral-900, #111827);
+    --uilib-data-grid-row-stripe-bg: var(--uilib-color-neutral-50, #f9fafb);
+
+    // Frozen columns
+    --uilib-data-grid-frozen-shadow-start: 4px 0 8px -2px var(--uilib-color-neutral-200, #e5e7eb);
+    --uilib-data-grid-frozen-shadow-end: -4px 0 8px -2px var(--uilib-color-neutral-200, #e5e7eb);
+
+    // Resize handle
+    --uilib-data-grid-resize-handle-color: var(--uilib-color-neutral-300, #d1d5db);
+    --uilib-data-grid-resize-handle-hover-color: var(--uilib-color-primary-500, #6366f1);
+    --uilib-data-grid-resize-handle-width: 4px;
+
+    // Sort indicator
+    --uilib-data-grid-sort-badge-bg: var(--uilib-color-primary-500, #6366f1);
+    --uilib-data-grid-sort-badge-color: var(--uilib-color-neutral-0, #ffffff);
+    --uilib-data-grid-sort-icon-font-size: 0.7rem;
+    --uilib-data-grid-sort-badge-font-size: 0.625rem;
+
+    // Filter
+    --uilib-data-grid-filter-bg: var(--uilib-surface-page, #ffffff);
+    --uilib-data-grid-filter-border-color: var(--uilib-color-neutral-300, #d1d5db);
+    --uilib-data-grid-filter-focus-ring: 0 0 0 2px var(--uilib-color-primary-300, #a5b4fc);
+
+    // Edit
+    --uilib-data-grid-edit-ring: 0 0 0 2px inset var(--uilib-color-primary-500, #6366f1);
+    --uilib-data-grid-editor-bg: var(--uilib-surface-page, #ffffff);
+
+    // Caption
+    --uilib-data-grid-caption-padding: var(--uilib-spacing-3, 0.75rem);
+    --uilib-data-grid-caption-color: var(--uilib-color-neutral-700, #374151);
+    --uilib-data-grid-caption-font-size: var(--uilib-font-size-sm, 0.875rem);
+
+    // Empty state
+    --uilib-data-grid-empty-padding: var(--uilib-spacing-10, 2.5rem);
+    --uilib-data-grid-empty-color: var(--uilib-color-neutral-500, #6b7280);
+
+    // Focus ring
+    --uilib-data-grid-focus-ring: var(
+      --uilib-focus-ring,
+      0 0 0 3px var(--uilib-color-primary-300, #a5b4fc)
+    );
+
+    // Size — md (default)
+    --uilib-data-grid-font-size: var(--uilib-font-size-sm, 0.875rem);
+    --uilib-data-grid-row-height: 3rem; // 48px
+
+    // ── Host structure ──────────────────────────────────────────────────────
+    display: block;
+    width: 100%;
+    font-size: var(--uilib-data-grid-font-size);
+    color: var(--uilib-data-grid-cell-color);
+    border: var(--uilib-data-grid-border-width) solid var(--uilib-data-grid-border-color);
+    border-radius: var(--uilib-data-grid-border-radius);
+    overflow: hidden;
+  }
+
+  // -------------------------------------------------------------------------
+  // Size modifiers
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid--size-sm {
+    --uilib-data-grid-header-padding-inline: var(--uilib-spacing-2, 0.5rem);
+    --uilib-data-grid-header-padding-block: var(--uilib-spacing-2, 0.5rem);
+    --uilib-data-grid-cell-padding-inline: var(--uilib-spacing-2, 0.5rem);
+    --uilib-data-grid-cell-padding-block: var(--uilib-spacing-2, 0.5rem);
+    --uilib-data-grid-font-size: var(--uilib-font-size-xs, 0.75rem);
+    --uilib-data-grid-row-height: 2.5rem; // 40px
+  }
+
+  .ui-lib-data-grid--size-lg {
+    --uilib-data-grid-header-padding-inline: var(--uilib-spacing-4, 1rem);
+    --uilib-data-grid-header-padding-block: var(--uilib-spacing-4, 1rem);
+    --uilib-data-grid-cell-padding-inline: var(--uilib-spacing-4, 1rem);
+    --uilib-data-grid-cell-padding-block: var(--uilib-spacing-4, 1rem);
+    --uilib-data-grid-font-size: var(--uilib-font-size-base, 1rem);
+    --uilib-data-grid-row-height: 3.5rem; // 56px
+  }
+
+  // -------------------------------------------------------------------------
+  // Variant tokens
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid--variant-bootstrap {
+    --uilib-data-grid-border-radius: var(--uilib-radius-sm, 0.25rem);
+    --uilib-data-grid-header-bg: var(--uilib-color-neutral-100, #f3f4f6);
+  }
+
+  .ui-lib-data-grid--variant-minimal {
+    --uilib-data-grid-border-color: transparent;
+    --uilib-data-grid-border-radius: 0;
+    --uilib-data-grid-header-bg: transparent;
+    --uilib-data-grid-cell-border-color: var(--uilib-color-neutral-100, #f3f4f6);
+  }
+
+  // -------------------------------------------------------------------------
+  // Caption
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__caption {
+    padding: var(--uilib-data-grid-caption-padding);
+    color: var(--uilib-data-grid-caption-color);
+    font-size: var(--uilib-data-grid-caption-font-size);
+    font-weight: 600;
+    border-block-end: var(--uilib-data-grid-border-width) solid var(--uilib-data-grid-border-color);
+  }
+
+  // -------------------------------------------------------------------------
+  // Grid wrapper — horizontal scroll + grid context
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__wrapper {
+    display: block;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  // -------------------------------------------------------------------------
+  // Shared row / cell structure
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__header-row,
+  .ui-lib-data-grid__filter-row,
+  .ui-lib-data-grid__row,
+  .ui-lib-data-grid__footer-row {
+    display: flex;
+    align-items: stretch;
+    min-width: max-content;
+  }
+
+  .ui-lib-data-grid__cell {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-inline-size: 0;
+    padding-inline: var(--uilib-data-grid-cell-padding-inline);
+    padding-block: var(--uilib-data-grid-cell-padding-block);
+    background-color: var(--uilib-data-grid-cell-bg);
+    border-block-end: var(--uilib-data-grid-border-width) solid
+      var(--uilib-data-grid-cell-border-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--uilib-data-grid-focus-ring);
+      position: relative;
+      z-index: 3;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Header row
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell--header {
+    background-color: var(--uilib-data-grid-header-bg);
+    color: var(--uilib-data-grid-header-color);
+    font-weight: var(--uilib-data-grid-header-font-weight);
+    padding-inline: var(--uilib-data-grid-header-padding-inline);
+    padding-block: var(--uilib-data-grid-header-padding-block);
+    cursor: default;
+    position: relative;
+    user-select: none;
+
+    &[aria-sort] {
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--uilib-color-neutral-100, #f3f4f6);
+      }
+    }
+  }
+
+  // Sticky header
+  .ui-lib-data-grid--sticky-header .ui-lib-data-grid__header-row {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 4;
+  }
+
+  .ui-lib-data-grid--sticky-header .ui-lib-data-grid__filter-row {
+    position: sticky;
+    inset-block-start: var(--uilib-data-grid-row-height);
+    z-index: 4;
+  }
+
+  // -------------------------------------------------------------------------
+  // Cell content wrapper (for sort icon layout)
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell-content {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // -------------------------------------------------------------------------
+  // Sort icons (CSS-only triangles)
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__sort-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    margin-inline-start: var(--uilib-spacing-1, 0.25rem);
+    color: var(--uilib-data-grid-header-sort-icon-color);
+
+    &::after {
+      content: '↕';
+      font-size: var(--uilib-data-grid-sort-icon-font-size);
+    }
+  }
+
+  .ui-lib-data-grid__sort-icon--sort-asc {
+    color: var(--uilib-data-grid-header-sort-icon-active-color);
+
+    &::after {
+      content: '↑';
+    }
+  }
+
+  .ui-lib-data-grid__sort-icon--sort-desc {
+    color: var(--uilib-data-grid-header-sort-icon-active-color);
+
+    &::after {
+      content: '↓';
+    }
+  }
+
+  .ui-lib-data-grid__sort-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-radius: 50%;
+    background-color: var(--uilib-data-grid-sort-badge-bg);
+    color: var(--uilib-data-grid-sort-badge-color);
+    font-size: var(--uilib-data-grid-sort-badge-font-size);
+    font-weight: 700;
+    margin-inline-start: var(--uilib-spacing-1, 0.25rem);
+    flex-shrink: 0;
+  }
+
+  // -------------------------------------------------------------------------
+  // Resize handle
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__resize-handle {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inline-size: var(--uilib-data-grid-resize-handle-width);
+    cursor: col-resize;
+    background-color: transparent;
+    transition: background-color 150ms ease;
+
+    &:hover {
+      background-color: var(--uilib-data-grid-resize-handle-hover-color);
+    }
+  }
+
+  .ui-lib-data-grid--resizable .ui-lib-data-grid__cell--header {
+    position: relative;
+  }
+
+  // -------------------------------------------------------------------------
+  // Filter row
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell--filter {
+    padding-inline: var(--uilib-spacing-2, 0.5rem);
+    padding-block: var(--uilib-spacing-2, 0.5rem);
+    background-color: var(--uilib-data-grid-filter-bg);
+    border-block-end: var(--uilib-data-grid-border-width) solid var(--uilib-data-grid-border-color);
+  }
+
+  .ui-lib-data-grid__filter-input {
+    inline-size: 100%;
+    padding-inline: var(--uilib-spacing-2, 0.5rem);
+    padding-block: var(--uilib-spacing-1, 0.25rem);
+    border: var(--uilib-data-grid-border-width) solid var(--uilib-data-grid-filter-border-color);
+    border-radius: var(--uilib-radius-sm, 0.25rem);
+    background-color: var(--uilib-data-grid-editor-bg);
+    font-size: inherit;
+    color: inherit;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      box-shadow: var(--uilib-data-grid-filter-focus-ring);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Body
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__body {
+    display: block;
+    position: relative;
+    overflow-x: hidden; // horizontal scroll is on the wrapper
+  }
+
+  .ui-lib-data-grid--scrollable .ui-lib-data-grid__body {
+    overflow-y: auto;
+  }
+
+  .ui-lib-data-grid__virtual-spacer {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 1px;
+    pointer-events: none;
+  }
+
+  .ui-lib-data-grid__rows {
+    position: relative;
+  }
+
+  // -------------------------------------------------------------------------
+  // Data rows
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__row {
+    cursor: default;
+    transition: background-color 120ms ease;
+
+    &:last-child .ui-lib-data-grid__cell {
+      border-block-end: none;
+    }
+  }
+
+  .ui-lib-data-grid--row-hover .ui-lib-data-grid__row:hover .ui-lib-data-grid__cell {
+    background-color: var(--uilib-data-grid-row-hover-bg);
+    cursor: pointer;
+  }
+
+  .ui-lib-data-grid__row--selected .ui-lib-data-grid__cell {
+    background-color: var(--uilib-data-grid-row-selected-bg);
+    color: var(--uilib-data-grid-row-selected-color);
+  }
+
+  .ui-lib-data-grid--striped .ui-lib-data-grid__row--odd .ui-lib-data-grid__cell {
+    background-color: var(--uilib-data-grid-row-stripe-bg);
+  }
+
+  // Gridlines
+  .ui-lib-data-grid--gridlines .ui-lib-data-grid__cell {
+    border-inline-end: var(--uilib-data-grid-border-width) solid
+      var(--uilib-data-grid-cell-border-color);
+
+    &:last-child {
+      border-inline-end: none;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Frozen columns
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell--frozen-start {
+    background-color: inherit;
+
+    .ui-lib-data-grid--has-frozen & {
+      box-shadow: var(--uilib-data-grid-frozen-shadow-start);
+
+      // Suppress shadow on all but the last frozen-start cell
+      &:not(:last-of-type) {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .ui-lib-data-grid__cell--frozen-end {
+    background-color: inherit;
+
+    .ui-lib-data-grid--has-frozen & {
+      box-shadow: var(--uilib-data-grid-frozen-shadow-end);
+
+      &:not(:first-of-type) {
+        box-shadow: none;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Cell editing
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell--editable {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: var(--uilib-data-grid-edit-ring);
+    }
+  }
+
+  .ui-lib-data-grid__cell--editing {
+    box-shadow: var(--uilib-data-grid-edit-ring);
+    padding: 0;
+  }
+
+  .ui-lib-data-grid__cell-editor {
+    inline-size: 100%;
+    block-size: 100%;
+    padding-inline: var(--uilib-data-grid-cell-padding-inline);
+    padding-block: var(--uilib-data-grid-cell-padding-block);
+    border: none;
+    background-color: var(--uilib-data-grid-editor-bg);
+    font-size: inherit;
+    color: inherit;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Checkbox column
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell--checkbox {
+    inline-size: 3rem;
+    min-inline-size: 3rem;
+    max-inline-size: 3rem;
+    justify-content: center;
+  }
+
+  .ui-lib-data-grid__checkbox {
+    inline-size: 1rem;
+    block-size: 1rem;
+    cursor: pointer;
+    accent-color: var(--uilib-color-primary-500, #6366f1);
+  }
+
+  // -------------------------------------------------------------------------
+  // Empty state
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__empty-row {
+    display: flex;
+    min-width: max-content;
+  }
+
+  .ui-lib-data-grid__empty-cell {
+    flex: 1;
+    padding: var(--uilib-data-grid-empty-padding);
+    text-align: center;
+    color: var(--uilib-data-grid-empty-color);
+    font-style: italic;
+  }
+
+  // -------------------------------------------------------------------------
+  // Footer row
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid__cell--footer {
+    background-color: var(--uilib-data-grid-header-bg);
+    font-weight: 600;
+    border-block-start: var(--uilib-data-grid-border-width) solid
+      var(--uilib-data-grid-border-color);
+    border-block-end: none;
+  }
+
+  // -------------------------------------------------------------------------
+  // Virtual scroll
+  // -------------------------------------------------------------------------
+
+  .ui-lib-data-grid--virtual-scroll .ui-lib-data-grid__body {
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .ui-lib-data-grid--virtual-scroll .ui-lib-data-grid__rows {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+  }
+
+  // -------------------------------------------------------------------------
+  // Reduced motion
+  // -------------------------------------------------------------------------
+
+  @media (prefers-reduced-motion: reduce) {
+    .ui-lib-data-grid__row,
+    .ui-lib-data-grid__cell {
+      transition: none;
+    }
+  }
+}
