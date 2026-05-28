@@ -83,6 +83,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: Prompt 3 — APG patterns + usage examples + data-grid.md hand-finish ✅]
+Changed:
+  scripts/fill-apg-patterns.mjs: NEW — maps 100+ components to WAI-ARIA APG pattern URLs
+    (or 'decorative'/'no-dedicated-apg'); filled all 96 doc `<!-- TODO: add WAI-ARIA APG -->` markers;
+    lowercases filename before map lookup (Windows NTFS case-insensitive FS fix)
+  scripts/fill-usage-examples.mjs: NEW — 22 component → accurate compilable usage example blocks;
+    filled all remaining `<!-- TODO: add usage examples -->` markers across 96 docs
+  scripts/generate-reference-doc.mjs: added demo page link in Related section for all regenerated docs
+  docs/reference/components/data-grid.md: hand-finished — Column Inputs table (14 inputs from
+    DataGridColumnComponent), Column Template Slots table (5 directives), Key→Action keyboard table,
+    ARIA Attributes table, Real-World Usage section (lazy load + cell editing), Edge Cases section
+    (empty state / 10k rows / read-only), Migration from PrimeNG Table section
+  docs/COMPONENT_SCORES.md: DataGrid Docs 8→9, avg 9.0→9.1
+State: COMPLETE — 0 APG TODO markers remaining; 0 usage-example TODO markers remaining; pushed ✅ (b51cdacb)
+Verification: node scripts/fill-apg-patterns.mjs (96 files ✅); node scripts/fill-usage-examples.mjs (22 files ✅); git push (PASS ✅)
+Next step: Prompt 1 (Sprint A — Competitive Benchmark Backfill); run on 4-8 components per session
+
 Date: 2026-05-28 [feat: Prompt 2 — reference doc generator fix + all 96 docs regenerated ✅]
 Changed:
   scripts/generate-reference-doc.mjs: fix parseSignals regex (` = ` → ` =\s*`) so multi-line
@@ -114,30 +131,6 @@ Changed:
 State: ALL MANDATORY CHECKLIST ITEMS COMPLETE — 6123/6123 tests green (228 suites); ESLint + stylelint clean; pushed ✅
 Verification: npx jest --no-coverage (PASS ✅, 6123 tests, 228 suites); ESLint data-grid/ (PASS ✅); git push (PASS ✅)
 Next step: Prompt 2 (Sprint B — reference doc generator script); then Prompt 5 (Sprint D — reduced-motion stylelint); these unblock all remaining Prompt 7 upgrades
-
-Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
-Changed:
-  input-otp.component.ts: inject UiLibI18nService; ariaLabel default null; digitAriaLabelPrefix/Connector/pasteAnnouncement defaults ''; groupAriaLabel/getCellAriaLabel/announcePasteCompletion use i18n fallback
-  toggle-button.ts: hasVisibleLabel checks raw onLabel/offLabel (not activeLabel) to preserve icon-only mode; activeLabel uses i18n fallback for 'Yes'/'No'
-  alert.ts + alert.html: inject i18n; dismiss button 'Dismiss alert' → i18n.translate('alert.dismiss')
-  progress-bar.ts + progress-bar.html: inject i18n; 'Complete' → i18n.translate('progressbar.complete')
-  organization-chart-node.ts + html: inject i18n; expand/collapse labels → i18n.translate('organization-chart.expand/collapse')
-  slider.ts + slider.html: inject i18n; 'Minimum/Maximum value' → i18n.translate('slider.min/max')
-  split-button.component.ts + html: inject i18n; 'More options'/'Menu' → i18n.translate('split-button.more/menu')
-  pick-list.component.ts + html: inject i18n; 'Source/Target list' → i18n.translate('picklist.source/target')
-  galleria.ts + galleria.html: inject i18n; image position/navigation labels → i18n computed signals + goToItemAriaLabel()
-  input-number.component.ts + html: inject i18n; increment/decrement labels → computed signals using i18n.translate
-  scroll-top.ts: inject i18n; buttonAriaLabel default '' → resolvedButtonAriaLabel falls back to i18n.translate('scroll-top.label')
-  dock.ts + dock.html: inject i18n; ariaLabel default '' → effectiveAriaLabel computed using i18n.translate('dock.label')
-  inplace.ts + inplace.html: inject i18n; displayLabel/closeLabel defaults '' → effectiveDisplayLabel/CloseLabel computed
-  chart.component.ts + html: inject i18n; ariaLabel default '' → effectiveAriaLabel computed using i18n.translate('chart.label')
-  bar-chart/line-chart/pie-chart/doughnut-chart.component.ts: ariaLabel default '' (was 'Chart')
-  rating.html: 'Clear rating' → i18n.translate('rating.clear')
-  i18n/en.ts,de.ts,fr.ts,es.ts: 28 new keys (alert.dismiss, galleria.*, organization-chart.*, picklist.*, progressbar.complete, rating.clear, slider.min/max, split-button.*, input-number.*, scroll-top.label, dock.label, inplace.*, toggle-button.on/off, chart.label, input-otp.*)
-  docs/COMPONENT_SCORES.md: I18n 7→9 on 13 components + Rating 6→9; all avgs recalculated
-State: COMPLETE — 6041/6041 tests green (all 226 suites)
-Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ESLint 0 warnings on all changed components
-Next step: Commit and push i18n=7→9 sweep; update bundle-size snapshot if needed; then Step 5 — Angular Signals-first Data Grid
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

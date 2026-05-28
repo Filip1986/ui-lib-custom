@@ -4,6 +4,30 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
+Changed:
+  input-otp.component.ts: inject UiLibI18nService; digitAriaLabelPrefix/Connector/pasteAnnouncement defaults ''; groupAriaLabel/getCellAriaLabel/announcePasteCompletion use i18n fallback
+  toggle-button.ts: hasVisibleLabel checks raw onLabel/offLabel; activeLabel uses i18n fallback for 'Yes'/'No'
+  alert.ts+html: inject i18n; dismiss button → i18n.translate('alert.dismiss')
+  progress-bar.ts+html: inject i18n; 'Complete' → i18n.translate('progressbar.complete')
+  organization-chart-node.ts+html: expand/collapse labels → i18n
+  slider.ts+html: 'Minimum/Maximum value' → i18n
+  split-button+html: 'More options'/'Menu' → i18n
+  pick-list+html: 'Source/Target list' → i18n
+  galleria.ts+html: image position/navigation labels → i18n computed signals
+  input-number+html: increment/decrement → computed signals using i18n
+  scroll-top.ts: resolvedButtonAriaLabel falls back to i18n
+  dock.ts+html: effectiveAriaLabel computed using i18n
+  inplace.ts+html: effectiveDisplayLabel/CloseLabel computed
+  chart.ts+html: effectiveAriaLabel computed using i18n
+  rating.html: 'Clear rating' → i18n.translate('rating.clear')
+  i18n/en.ts,de.ts,fr.ts,es.ts: 28 new keys
+  docs/COMPONENT_SCORES.md: I18n 7→9 on 13 components + Rating 6→9
+State: COMPLETE — 6041/6041 tests green (226 suites)
+Verification: npx jest --no-coverage (PASS ✅); ESLint 0 warnings on all changed components
+
+---
+
 Date: 2026-05-27 [feat(lib): wire all components to UiLibI18nService — replace hardcoded aria-labels]
 Changed:
   25+ component *.ts files: added inject(UiLibI18nService); placed protected readonly i18n field
