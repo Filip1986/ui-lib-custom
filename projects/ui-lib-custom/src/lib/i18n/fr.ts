@@ -35,7 +35,9 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   // ── DatePicker ────────────────────────────────────────────────────────────
   'datepicker.toggle': 'Ouvrir le calendrier',
   'datepicker.prev.month': 'Mois précédent',
+  'datepicker.prev.month.label': 'Mois précédent, {month}',
   'datepicker.next.month': 'Mois suivant',
+  'datepicker.next.month.label': 'Mois suivant, {month}',
   'datepicker.prev.year': 'Année précédente',
   'datepicker.next.year': 'Année suivante',
   'datepicker.prev.decade': 'Décennie précédente',
@@ -57,6 +59,8 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'datepicker.day.today': "aujourd'hui",
   'datepicker.day.selected': 'sélectionné',
   'datepicker.day.range': 'dans la plage sélectionnée',
+  'datepicker.panel.label': 'Sélecteur de date',
+  'datepicker.ampm.toggle': 'Basculer AM/PM, actuel {value}',
 
   // ── Dialog / Drawer / BottomSheet / Popover / ConfirmDialog / DynamicDialog
   'dialog.close': 'Fermer la boîte de dialogue',

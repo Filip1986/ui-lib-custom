@@ -40,7 +40,7 @@
             type="button"
             class="ui-lib-datepicker__trigger"
             [disabled]="isDisabled()"
-            [attr.aria-label]="'Open date picker'"
+            [attr.aria-label]="i18n.translate('datepicker.toggle')"
             [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
             [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
             (click)="onTriggerClick($event)"
@@ -61,7 +61,7 @@
       [attr.id]="resolvedInputId() + '-panel'"
       role="dialog"
       [attr.aria-modal]="inline() ? 'false' : 'true'"
-      [attr.aria-label]="ariaLabel() || 'Date picker'"
+      [attr.aria-label]="ariaLabel() || i18n.translate('datepicker.panel.label')"
       (keydown)="onPanelKeydown($event)"
       (click)="$event.stopPropagation()"
     >
@@ -72,7 +72,7 @@
               type="button"
               class="ui-lib-datepicker__prev-button"
               [disabled]="isDisabled() || !canNavigatePrev()"
-              [attr.aria-label]="'Previous month, ' + prevMonthLabel()"
+              [attr.aria-label]="i18n.translate('datepicker.prev.month.label', { month: prevMonthLabel() })"
               (click)="navigateMonth(-1)"
             >
               ‹
@@ -130,7 +130,7 @@
               type="button"
               class="ui-lib-datepicker__next-button"
               [disabled]="isDisabled() || !canNavigateNext()"
-              [attr.aria-label]="'Next month, ' + nextMonthLabel()"
+              [attr.aria-label]="i18n.translate('datepicker.next.month.label', { month: nextMonthLabel() })"
               (click)="navigateMonth(1)"
             >
               ›
@@ -401,7 +401,7 @@
                 type="button"
                 class="ui-lib-datepicker__ampm-toggle"
                 [disabled]="isDisabled()"
-                [attr.aria-label]="'Toggle AM/PM, current ' + currentAmPm()"
+                [attr.aria-label]="i18n.translate('datepicker.ampm.toggle', { value: currentAmPm() })"
                 [attr.aria-pressed]="currentAmPm() === 'PM' ? 'true' : 'false'"
                 (click)="toggleAmPm()"
               >

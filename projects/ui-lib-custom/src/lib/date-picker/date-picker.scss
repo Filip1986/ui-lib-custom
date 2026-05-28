@@ -34,6 +34,7 @@
     --uilib-datepicker-panel-border-radius: var(--uilib-radius-lg, 0.75rem);
     --uilib-datepicker-panel-shadow: var(--uilib-shadow-lg, 0 12px 28px rgb(0 0 0 / 16%));
     --uilib-datepicker-panel-padding: var(--uilib-space-3, 0.75rem);
+    --uilib-datepicker-panel-min-width: 18rem;
     --uilib-datepicker-panel-max-height: 28rem;
     --uilib-datepicker-z-index: var(--uilib-z-overlay, 20);
 
@@ -248,7 +249,7 @@
     inset-inline-start: 0;
     animation: uilib-datepicker-panel-open var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
-    min-width: 18rem;
+    min-width: var(--uilib-datepicker-panel-min-width, 18rem);
     max-height: var(--uilib-datepicker-panel-max-height, 28rem);
     overflow: auto;
     border: 1px solid var(--uilib-datepicker-panel-border-color, #d1d5db);
