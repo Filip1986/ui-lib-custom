@@ -247,6 +247,9 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'slider.min': 'Mindestwert',
   'slider.max': 'Höchstwert',
 
+  // ── Knob ──────────────────────────────────────────────────────────────────
+  'knob.dial': 'Regler',
+
   // ── SplitButton ───────────────────────────────────────────────────────────
   'split-button.more': 'Weitere Optionen',
   'split-button.menu': 'Menü',

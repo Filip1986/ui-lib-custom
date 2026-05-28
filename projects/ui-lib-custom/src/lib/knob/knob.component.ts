@@ -4,6 +4,7 @@ import {
   DestroyRef,
   ViewEncapsulation,
   computed,
+  contentChild,
   forwardRef,
   inject,
   input,
@@ -16,13 +17,16 @@ import type {
   ModelSignal,
   OutputEmitterRef,
   Signal,
+  TemplateRef,
   WritableSignal,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KNOB_DEFAULTS, KNOB_SVG } from './knob.types';
-import type { KnobChangeEvent, KnobSize, KnobVariant } from './knob.types';
+import type { KnobChangeEvent, KnobSize, KnobValueContext, KnobVariant } from './knob.types';
 
 /** Counter for generating unique IDs. */
 let knobIdCounter: number = 0;
@@ -35,6 +39,7 @@ let knobIdCounter: number = 0;
 @Component({
   selector: 'ui-lib-knob',
   standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './knob.component.html',
   styleUrl: './knob.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,7 +56,7 @@ let knobIdCounter: number = 0;
     role: 'slider',
     '[attr.id]': 'inputId()',
     '[attr.tabindex]': 'effectiveTabindex()',
-    '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
     '[attr.aria-valuemin]': 'min()',
     '[attr.aria-valuemax]': 'max()',
     '[attr.aria-valuenow]': 'clampedValue()',
@@ -148,6 +153,27 @@ export class KnobComponent implements ControlValueAccessor {
   public readonly knobBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   // ---------------------------------------------------------------------------
+  // Content children (typed template slots)
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Optional custom template for the value label rendered inside the dial.
+   *
+   * Context: `{ $implicit: number, formattedValue: string, normalized: number }`.
+   *
+   * @example
+   * ```html
+   * <ui-lib-knob [value]="vol">
+   *   <ng-template #valueLabel let-v let-f="formattedValue">
+   *     <tspan>{{ f }}dB</tspan>
+   *   </ng-template>
+   * </ui-lib-knob>
+   * ```
+   */
+  public readonly valueLabelTemplate: Signal<TemplateRef<KnobValueContext> | undefined> =
+    contentChild<TemplateRef<KnobValueContext>>('valueLabel');
+
+  // ---------------------------------------------------------------------------
   // Internal state
   // ---------------------------------------------------------------------------
 
@@ -173,6 +199,7 @@ export class KnobComponent implements ControlValueAccessor {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ---------------------------------------------------------------------------
   // Derived / computed signals
@@ -181,6 +208,23 @@ export class KnobComponent implements ControlValueAccessor {
   /** Active variant, falling back to the global theme variant. */
   protected readonly effectiveVariant: Signal<KnobVariant> = computed<KnobVariant>(
     (): KnobVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /**
+   * Resolved aria-label: uses the explicit `ariaLabel` input if provided,
+   * otherwise falls back to the i18n `knob.dial` translation key.
+   */
+  protected readonly resolvedAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => this.ariaLabel() ?? this.i18n.translate('knob.dial'),
+  );
+
+  /** Template context emitted to the `#valueLabel` slot. */
+  protected readonly valueLabelContext: Signal<KnobValueContext> = computed<KnobValueContext>(
+    (): KnobValueContext => ({
+      $implicit: this.clampedValue(),
+      formattedValue: this.formattedValue(),
+      normalized: this.normalizedValue(),
+    }),
   );
 
   /** Value clamped within [min, max]. */

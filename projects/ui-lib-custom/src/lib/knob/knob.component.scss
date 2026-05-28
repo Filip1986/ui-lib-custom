@@ -22,12 +22,14 @@
     // Focus ring
     --uilib-knob-focus-ring-color: rgba(99, 102, 241, 0.35);
     --uilib-knob-focus-ring-width: 3px;
+    // Configurable outline-offset so consumers can adjust focus indicator distance
+    --uilib-knob-focus-ring-offset: 2px;
 
     // Disabled opacity
     --uilib-knob-disabled-opacity: 0.5;
 
-    // Transition
-    --uilib-knob-transition-duration: 0.15s;
+    // Transition — delegates to the global fast-transition token; falls back to 150 ms
+    --uilib-knob-transition-duration: var(--uilib-transition-duration-fast, 0.15s);
   }
 
   // ---------------------------------------------------------------------------
@@ -82,9 +84,13 @@
     // Focus ring via outline on the SVG child
     &.ui-lib-knob--focused .ui-lib-knob-svg {
       outline: var(--uilib-knob-focus-ring-width) solid var(--uilib-knob-focus-ring-color);
-      outline-offset: 2px;
+      outline-offset: var(--uilib-knob-focus-ring-offset);
       border-radius: 50%;
     }
+
+    // Mount animation — scale and fade in when the knob is first rendered
+    animation: uilib-knob-mount var(--uilib-knob-transition-duration)
+      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
   }
 
   // ---------------------------------------------------------------------------
@@ -168,9 +174,25 @@
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Mount animation keyframes
+  // ---------------------------------------------------------------------------
+  @keyframes uilib-knob-mount {
+    from {
+      opacity: 0;
+      transform: scale(0.88);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-knob {
       --uilib-knob-transition-duration: 0ms;
+      animation: none;
     }
   }
 } // end @layer uilib.components

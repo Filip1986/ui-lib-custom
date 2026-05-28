@@ -25,7 +25,18 @@
   }
 
   <!-- Value label rendered in the centre of the dial -->
-  @if (showValue()) {
+  @if (valueLabelTemplate(); as tpl) {
+    <!-- Custom value-label slot — consumer provides SVG content (e.g. <tspan> elements) -->
+    <text
+      class="ui-lib-knob-value-label"
+      x="50"
+      y="50"
+      text-anchor="middle"
+      dominant-baseline="central"
+    >
+      <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="valueLabelContext()" />
+    </text>
+  } @else if (showValue()) {
     <text
       class="ui-lib-knob-value-label"
       x="50"

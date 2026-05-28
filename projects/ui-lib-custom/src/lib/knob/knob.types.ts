@@ -1,6 +1,28 @@
 /** Public size options for the Knob component. */
 export type KnobSize = 'sm' | 'md' | 'lg';
 
+/**
+ * Template context for the `#valueLabel` slot.
+ * Provides the current value, formatted string, and normalized (0–1) position.
+ *
+ * Usage:
+ * ```html
+ * <ui-lib-knob [value]="vol">
+ *   <ng-template #valueLabel let-v let-f="formattedValue">
+ *     <tspan class="unit">{{ f }}</tspan>
+ *   </ng-template>
+ * </ui-lib-knob>
+ * ```
+ */
+export interface KnobValueContext {
+  /** The raw numeric value (clamped within [min, max]). */
+  $implicit: number;
+  /** The formatted value string (respects the `valueTemplate` input). */
+  formattedValue: string;
+  /** The normalized value in the 0–1 range. */
+  normalized: number;
+}
+
 /** Public design variant options for the Knob component. */
 export type KnobVariant = 'material' | 'bootstrap' | 'minimal';
 
