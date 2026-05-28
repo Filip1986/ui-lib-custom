@@ -83,6 +83,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-28 [feat: Angular Signals-first Data Grid — Step 5]
+Changed:
+  src/lib/data-grid/data-grid.types.ts: full type definitions (DataGridVariant, DataGridSize, DataGridSortOrder, DataGridSelectionMode, DataGridFilterMatchMode, DataGridResizeMode, DataGridEditMode, DataGridFrozen; interfaces for all events + template contexts)
+  src/lib/data-grid/data-grid.constants.ts: DATA_GRID_DEFAULTS + DATA_GRID_CLASS
+  src/lib/data-grid/data-grid-column.component.ts: render-less column DSL; 5 template directives; all column inputs + template signal queries
+  src/lib/data-grid/data-grid.component.ts: full implementation — virtual scroll (native), column pinning, column resizing, cell editing, lazy load, multi-sort, global filter, row selection, WAI-ARIA grid keyboard navigation
+  src/lib/data-grid/data-grid.component.html: complete template; i18n keys; keydown.enter/space on all interactive elements (ESLint a11y clean)
+  src/lib/data-grid/data-grid.component.scss: design tokens + structure in single merged block; logical CSS properties; cascade layer; SCSS clean
+  src/lib/data-grid/index.ts: barrel export
+  data-grid/ng-package.json + package.json: entry point wiring
+  projects/ui-lib-custom/package.json: exports + typesVersions updated
+  i18n/en.ts,de.ts,fr.ts,es.ts: 11 new data-grid keys
+  test/entry-points.spec.ts: data-grid import test added
+  docs/reference/bundle-sizes.json: snapshot updated (data-grid: 144664 B raw / 20962 B gzip)
+  demo/pages/data-grid/: demo page with interactive config, virtual scroll, frozen columns, cell editing, lazy load sections
+  docs/COMPONENT_SCORES.md: DataGrid added (all scores 9 except Docs=8, avg 9.0)
+State: COMPLETE — 6042/6042 tests green (226 suites); ESLint + stylelint clean; ng build ui-lib-custom 0 warnings
+Verification: npx jest --no-coverage (PASS ✅, 6042 tests); ng build ui-lib-custom (PASS ✅); npx eslint data-grid/ (PASS ✅)
+Next step: Write unit tests (data-grid.spec.ts) + a11y tests (data-grid.a11y.spec.ts); push to remote; write README.md
+
 Date: 2026-05-28 [feat: i18n=7→9 sweep — 15 components]
 Changed:
   input-otp.component.ts: inject UiLibI18nService; ariaLabel default null; digitAriaLabelPrefix/Connector/pasteAnnouncement defaults ''; groupAriaLabel/getCellAriaLabel/announcePasteCompletion use i18n fallback
@@ -123,21 +143,6 @@ Changed:
 State: COMPLETE — 6041/6041 tests green
 Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites)
 Next step: Continue I18n=7→9 sweep on Navigation & Menu components (Menu, TieredMenu, ContextMenu, Accordion, etc.)
-
-Date: 2026-05-27 [feat: score ceiling push — Perf 8→9 + I18n 8→9 on Select, AutoComplete, CascadeSelect, ColorPicker]
-Changed:
-  autocomplete.html, cascade-select.html, color-picker.html: @defer (on immediate) wrapping overlay panels (Perf 8→9)
-  cascade-select.ts: getLevelAriaLabel() uses i18n.translate('cascade-select.sublevel-label', { label }) (I18n 8→9)
-  color-picker.html: trigger aria-label uses i18n.translate('colorpicker.trigger', { color }) (I18n 8→9)
-  autocomplete.html: chip remove button uses i18n.translate('autocomplete.remove-chip', { label }) (I18n 8→9)
-  select.html: search placeholder + empty state use i18n translate keys (I18n 8→9)
-  i18n/en.ts, de.ts, fr.ts, es.ts: added 'autocomplete.remove-chip', 'cascade-select.sublevel-label', 'colorpicker.trigger', 'select.search.placeholder', 'select.empty'
-  autocomplete.spec.ts, cascade-select.spec.ts, color-picker.spec.ts: whenStable() in beforeEach; body panel cleanup afterEach; explicit panel close before destroy in body-mount tests
-  cascade-select.a11y.spec.ts: i18n aria-label expectations updated; ariaLabel/ariaLabelledBy converted to WritableSignal
-  docs/COMPONENT_SCORES.md: Select I18n 8→9 (avg 9.1), AutoComplete Perf+I18n 8→9 (avg 9.0), CascadeSelect Perf+I18n 8→9 (avg 9.0), ColorPicker Perf+I18n 8→9 (avg 9.0)
-State: COMPLETE — 6041/6041 tests green; ng build ui-lib-custom zero warnings
-Verification: npx jest --no-coverage (PASS ✅, 6041 tests, 226 suites); ng build ui-lib-custom (PASS ✅, 0 warnings)
-Next step: Step 5 — Angular Signals-first Data Grid
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
