@@ -17,6 +17,12 @@
     --uilib-dialog-close-btn-size: 2rem;
     --uilib-dialog-close-btn-color: var(--uilib-muted);
     --uilib-dialog-close-btn-hover-bg: var(--uilib-surface-alt);
+    --uilib-dialog-close-btn-active-bg: color-mix(
+      in srgb,
+      var(--uilib-muted, #6b7280) 18%,
+      transparent
+    );
+    --uilib-dialog-close-btn-transition: var(--uilib-transition-fast, 150ms ease);
     --uilib-dialog-z-index: var(--uilib-z-modal, 1050);
     --uilib-dialog-enter-duration: 200ms;
     --uilib-dialog-enter-easing: ease-out;
@@ -111,7 +117,6 @@
     border: var(--uilib-dialog-border);
     box-shadow: var(--uilib-dialog-shadow);
     pointer-events: auto;
-    will-change: transform;
     animation: dialog-panel-enter var(--uilib-dialog-enter-duration)
       var(--uilib-dialog-enter-easing);
   }
@@ -173,12 +178,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 150ms ease;
+    transition: background-color var(--uilib-dialog-close-btn-transition);
   }
 
   ui-lib-dialog .ui-lib-dialog-close-btn:hover,
   ui-lib-dialog .ui-lib-dialog-maximize-btn:hover {
     background: var(--uilib-dialog-close-btn-hover-bg);
+  }
+
+  ui-lib-dialog .ui-lib-dialog-close-btn:active,
+  ui-lib-dialog .ui-lib-dialog-maximize-btn:active {
+    background: var(--uilib-dialog-close-btn-active-bg);
   }
 
   ui-lib-dialog .ui-lib-dialog-close-btn:focus-visible,
@@ -222,7 +232,7 @@
 
     .ui-lib-dialog-close-btn,
     .ui-lib-dialog-maximize-btn {
-      border-radius: 999px;
+      border-radius: var(--uilib-radius-full, 9999px);
     }
   }
 

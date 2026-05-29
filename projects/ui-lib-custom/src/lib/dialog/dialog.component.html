@@ -1,5 +1,10 @@
 @if (visible() && modal()) {
-  <div class="ui-lib-dialog-backdrop" (click)="onBackdropClick()"></div>
+  <div
+    class="ui-lib-dialog-backdrop"
+    tabindex="-1"
+    (click)="onBackdropClick()"
+    (keydown.escape)="onBackdropClick()"
+  ></div>
 }
 
 @if (visible()) {

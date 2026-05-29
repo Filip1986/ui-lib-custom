@@ -232,7 +232,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component     | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
-| Dialog        | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 9   | 8.6 | 🟢     |
+| Dialog        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | DynamicDialog | 9   | 9    | 8    | 9    | 9     | 9   | 8    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
 | Drawer        | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 9    | 9   | 8.8 | 🟢     |
 | BottomSheet   | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |

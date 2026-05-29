@@ -91,6 +91,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (Dialog hardening — 8.6→9.0):
+  dialog/dialog.component.scss: removed permanent will-change:transform from .ui-lib-dialog-panel
+    (Perf violation); replaced hardcoded transition:background-color 150ms ease with
+    transition:background-color var(--uilib-dialog-close-btn-transition) on close/maximize btns;
+    added two new tokens --uilib-dialog-close-btn-active-bg and --uilib-dialog-close-btn-transition
+    (backed by var(--uilib-transition-fast) — auto-zeroed by prefers-reduced-motion global block);
+    added :active state for close/maximize buttons; fixed border-radius:999px →
+    var(--uilib-radius-full, 9999px) in material variant nested rules
+  dialog/dialog.component.html: added tabindex="-1" and (keydown.escape) to backdrop div
+    to satisfy @angular-eslint/template/click-events-have-key-events (was 2 warnings)
+  dialog/README.md: expanded from 55 to 130+ lines — added Keyboard Behavior table,
+    ARIA Attributes table, Content Projection Slots table, Variants section, full CSS
+    Custom Properties table (24 tokens documented), additional usage examples
+  docs/COMPONENT_SCORES.md: Dialog Perf/Theme/Docs/Feel all 8→9; avg 8.6→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
+Verification: npx eslint dialog/ (0w); ng build ui-lib-custom (0w)
+Next step: Table hardening (8.6) — Comp=8 needs ng-template row/cell slot (same pattern as DatePicker dateCellTemplate)
+
+Date: 2026-05-29
 Changed (DatePicker hardening — 8.6→9.0):
   date-picker/date-picker.ts: JSDoc added to all 40+ inputs and outputs (IDE hover shows
     description + default for every binding); class-level JSDoc before @Component decorator;
@@ -114,21 +133,9 @@ Changed (Sprint D — reduced-motion audit):
     and --uilib-icon-transition to 0ms. All 100+ components consuming these tokens
     now automatically respect OS-level motion preferences without per-component changes.
   Audit findings: 91/92 SCSS files already had correct prefers-reduced-motion coverage.
-    Components with CSS transitions use transition:none or --*-transition-duration:0ms.
-    Components with @keyframes use animation:none or animation-duration:0ms via token.
-    icon-field.scss uses transform only for static centering (no motion needed).
-    menubar.scss false-positive: animation uses var(--uilib-menubar-transition) as
-    duration — already zeroed to 0ms in reduced-motion block. ✅
 State: COMPLETE — build 0w ✅; bundlesize all 105 entry points within budget ✅
 Verification: ng build ui-lib-custom (0w); npm run bundlesize (all pass)
 Next step: Sprint A (competitive benchmarks) — highest ROI per Opus doc
-
-Date: 2026-05-29
-Changed (Sprint D — reduced-motion audit):
-  themes/themes.scss: @media (prefers-reduced-motion: reduce) inside @layer uilib.tokens;
-    zeros --uilib-transition-fast, --uilib-transition-duration, --uilib-icon-transition
-State: COMPLETE — build 0w ✅; bundlesize all 105 entry points ✅
-Next step: DatePicker hardening (done same session)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
