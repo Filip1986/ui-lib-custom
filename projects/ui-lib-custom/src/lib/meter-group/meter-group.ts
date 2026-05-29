@@ -96,12 +96,12 @@ export class MeterGroup {
   /** Additional CSS classes to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the meter container group. Falls back to i18n `meter-group.label`. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the meter container group. Falls back to i18n `meter-group.label` when null. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Resolved aria-label: explicit ariaLabel input > i18n fallback. */
   public readonly resolvedAriaLabel: Signal<string> = computed<string>(
-    (): string => this.ariaLabel() || this.i18n.translate('meter-group.label'),
+    (): string => this.ariaLabel() ?? this.i18n.translate('meter-group.label'),
   );
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */

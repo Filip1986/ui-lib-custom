@@ -68,9 +68,7 @@ class KnobNgModelHostComponent {
   public readonly showValue: WritableSignal<boolean> = signal<boolean>(true);
   public readonly strokeWidth: WritableSignal<number> = signal<number>(14);
   public readonly valueTemplate: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly ariaLabel: WritableSignal<string | undefined> = signal<string | undefined>(
-    undefined,
-  );
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public value: number = 0;
   public readonly changeEvents: KnobChangeEvent[] = [];
 

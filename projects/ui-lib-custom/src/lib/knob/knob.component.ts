@@ -78,6 +78,7 @@ let knobIdCounter: number = 0;
     '[class.ui-lib-knob--minimal]': 'effectiveVariant() === "minimal"',
     '[style.--uilib-knob-range-color-override]': 'valueColor() || null',
     '[style.--uilib-knob-text-color-override]': 'textColor() || null',
+    '[class]': 'styleClass()',
   },
 })
 export class KnobComponent implements ControlValueAccessor {
@@ -130,8 +131,11 @@ export class KnobComponent implements ControlValueAccessor {
   /** Whether the knob is read-only (interactive but value does not change). */
   public readonly readonly: InputSignal<boolean> = input<boolean>(KNOB_DEFAULTS.readonly);
 
-  /** Accessible label for the dial element. */
-  public readonly ariaLabel: InputSignal<string | undefined> = input<string | undefined>(undefined);
+  /** Accessible label for the dial element. Falls back to i18n `knob.dial` when null. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /** Additional CSS classes applied to the host element. */
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Tab index for keyboard focus. */
   public readonly tabindex: InputSignal<number> = input<number>(KNOB_DEFAULTS.tabindex);

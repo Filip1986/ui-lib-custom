@@ -209,8 +209,8 @@ export class GalleriaComponent implements OnDestroy {
     string
   > | null>(null);
 
-  /** Accessible label for the gallery landmark. Defaults to i18n fallback. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the gallery landmark. Falls back to i18n `galleria.label` when null. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible label for the fullscreen dialog container. */
   public readonly lightboxLabel: InputSignal<string | null> = input<string | null>(null);
@@ -333,7 +333,7 @@ export class GalleriaComponent implements OnDestroy {
 
   /** Resolved accessible region label — consumer value takes priority; falls back to i18n key. */
   public readonly resolvedAriaLabel: Signal<string> = computed<string>(
-    (): string => this.ariaLabel() || this.i18n.translate('galleria.label'),
+    (): string => this.ariaLabel() ?? this.i18n.translate('galleria.label'),
   );
 
   /** Resolved previous-item aria-label. */

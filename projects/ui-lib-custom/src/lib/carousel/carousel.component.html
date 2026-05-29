@@ -41,7 +41,7 @@
           class="uilib-carousel-prev-button"
           [class.uilib-carousel-nav-disabled]="isBackwardDisabled()"
           [disabled]="isBackwardDisabled()"
-          [attr.aria-label]="prevAriaLabel()"
+          [attr.aria-label]="resolvedPrevAriaLabel()"
           (click)="navigateBackward($event)"
         >
           @if (prevIconTemplate()) {
@@ -143,7 +143,7 @@
           class="uilib-carousel-next-button"
           [class.uilib-carousel-nav-disabled]="isForwardDisabled()"
           [disabled]="isForwardDisabled()"
-          [attr.aria-label]="nextAriaLabel()"
+          [attr.aria-label]="resolvedNextAriaLabel()"
           (click)="navigateForward($event)"
         >
           @if (nextIconTemplate()) {

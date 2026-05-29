@@ -91,14 +91,14 @@ export class TimelineComponent<T> {
   public readonly size: InputSignal<TimelineSize> = input<TimelineSize>(TIMELINE_DEFAULTS.size);
   /** Additional CSS class(es) to append to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
-  /** Accessible label for the timeline list. Falls back to i18n `timeline.label` when empty. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  /** Accessible label for the timeline list. Falls back to i18n `timeline.label` when null. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   // ---------------------------------------------------------------------------
   // Resolved accessible label
   // ---------------------------------------------------------------------------
   /** Resolved aria-label: explicit ariaLabel input > i18n fallback. */
   public readonly resolvedAriaLabel: Signal<string> = computed<string>(
-    (): string => this.ariaLabel() || this.i18n.translate('timeline.label'),
+    (): string => this.ariaLabel() ?? this.i18n.translate('timeline.label'),
   );
   // ---------------------------------------------------------------------------
   // Content children (template slot directives)

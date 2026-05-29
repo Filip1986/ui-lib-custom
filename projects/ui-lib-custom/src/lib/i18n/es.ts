@@ -136,6 +136,8 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   // ── Carousel / Galleria ───────────────────────────────────────────────────
   'carousel.prev': 'Diapositiva anterior',
   'carousel.next': 'Diapositiva siguiente',
+  'carousel.pause': 'Pausar reproducción automática',
+  'carousel.play': 'Reanudar reproducción automática',
   'carousel.indicator': 'Ir a la diapositiva {n}',
   'carousel.slide.status': 'Diapositiva {current} de {total}',
   'carousel.region': 'Carrusel',
@@ -257,6 +259,8 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'data-view.grid-view': 'Mostrar vista de cuadrícula',
   'data-view.layout.list': 'Vista de lista seleccionada',
   'data-view.layout.grid': 'Vista de cuadrícula seleccionada',
+  'data-view.empty': 'No se encontraron registros.',
+  'data-view.filter.placeholder': 'Filtrar elementos',
 
   // ── Editor ────────────────────────────────────────────────────────────────
   'editor.toolbar': 'Opciones de formato',

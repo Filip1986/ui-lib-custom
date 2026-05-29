@@ -28,10 +28,6 @@ import type {
   WritableSignal,
 } from '@angular/core';
 import {
-  CAROUSEL_ARIA_NEXT_LABEL,
-  CAROUSEL_ARIA_PAUSE_LABEL,
-  CAROUSEL_ARIA_PLAY_LABEL,
-  CAROUSEL_ARIA_PREV_LABEL,
   CAROUSEL_DEFAULT_NUM_SCROLL,
   CAROUSEL_DEFAULT_NUM_VISIBLE,
   CAROUSEL_DEFAULT_ORIENTATION,
@@ -145,7 +141,27 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   /** Resolved ARIA label: explicit ariaLabel input > i18n `carousel.region` fallback. */
   public readonly resolvedAriaLabel: Signal<string> = computed<string>(
-    (): string => this.ariaLabel() || this.i18n.translate('carousel.region'),
+    (): string => this.ariaLabel() ?? this.i18n.translate('carousel.region'),
+  );
+
+  /** Resolved prev-button label: explicit input > i18n `carousel.prev` fallback. */
+  public readonly resolvedPrevAriaLabel: Signal<string> = computed<string>(
+    (): string => this.prevAriaLabel() ?? this.i18n.translate('carousel.prev'),
+  );
+
+  /** Resolved next-button label: explicit input > i18n `carousel.next` fallback. */
+  public readonly resolvedNextAriaLabel: Signal<string> = computed<string>(
+    (): string => this.nextAriaLabel() ?? this.i18n.translate('carousel.next'),
+  );
+
+  /** Resolved pause label: explicit input > i18n `carousel.pause` fallback. */
+  public readonly resolvedPauseLabel: Signal<string> = computed<string>(
+    (): string => this.pauseLabel() ?? this.i18n.translate('carousel.pause'),
+  );
+
+  /** Resolved play label: explicit input > i18n `carousel.play` fallback. */
+  public readonly resolvedPlayLabel: Signal<string> = computed<string>(
+    (): string => this.playLabel() ?? this.i18n.translate('carousel.play'),
   );
 
   /** Size token — controls padding, font-size, and button dimensions. */
@@ -191,22 +207,22 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   >([]);
 
   /** Optional extra CSS class applied to the root host element. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** ARIA label for the "previous" button. */
-  public readonly prevAriaLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_PREV_LABEL);
+  /** ARIA label for the "previous" button. Falls back to i18n `carousel.prev` when null. */
+  public readonly prevAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** ARIA label for the "next" button. */
-  public readonly nextAriaLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_NEXT_LABEL);
+  /** ARIA label for the "next" button. Falls back to i18n `carousel.next` when null. */
+  public readonly nextAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** ARIA label for the carousel landmark region. Falls back to i18n `carousel.region` when empty. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  /** ARIA label for the carousel landmark region. Falls back to i18n `carousel.region` when null. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** ARIA label for the autoplay pause button (when playing). */
-  public readonly pauseLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_PAUSE_LABEL);
+  /** ARIA label for the autoplay pause button (when playing). Falls back to i18n `carousel.pause` when null. */
+  public readonly pauseLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** ARIA label for the autoplay resume button (when paused). */
-  public readonly playLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_PLAY_LABEL);
+  /** ARIA label for the autoplay resume button (when paused). Falls back to i18n `carousel.play` when null. */
+  public readonly playLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Outputs ─────────────────────────────────────────────────────────────────
 
@@ -339,7 +355,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   /** ARIA label for the autoplay pause/resume button (reactive to `playing` state). */
   public readonly autoplayButtonLabel: Signal<string> = computed((): string =>
-    this.playing() ? this.pauseLabel() : this.playLabel(),
+    this.playing() ? this.resolvedPauseLabel() : this.resolvedPlayLabel(),
   );
 
   /** Total number of real slides (excluding clones). */

@@ -136,6 +136,8 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   // ── Carousel / Galleria ───────────────────────────────────────────────────
   'carousel.prev': 'Vorherige Folie',
   'carousel.next': 'Nächste Folie',
+  'carousel.pause': 'Automatische Wiedergabe anhalten',
+  'carousel.play': 'Automatische Wiedergabe fortsetzen',
   'carousel.indicator': 'Zur Folie {n} gehen',
   'carousel.slide.status': 'Folie {current} von {total}',
   'carousel.region': 'Karussell',
@@ -257,6 +259,8 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'data-view.grid-view': 'Rasteransicht anzeigen',
   'data-view.layout.list': 'Listenansicht ausgewählt',
   'data-view.layout.grid': 'Rasteransicht ausgewählt',
+  'data-view.empty': 'Keine Datensätze gefunden.',
+  'data-view.filter.placeholder': 'Elemente filtern',
 
   // ── Editor ────────────────────────────────────────────────────────────────
   'editor.toolbar': 'Formatierungsoptionen',

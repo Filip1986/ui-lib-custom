@@ -149,13 +149,13 @@ class DataViewHostComponent {
   public readonly layout: WritableSignal<'list' | 'grid'> = signal<'list' | 'grid'>('list');
   public readonly size: WritableSignal<'sm' | 'md' | 'lg'> = signal<'sm' | 'md' | 'lg'>('md');
   public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly emptyMessage: WritableSignal<string> = signal<string>('No records found.');
+  public readonly emptyMessage: WritableSignal<string | null> = signal<string | null>(null);
   public readonly gridColumns: WritableSignal<number> = signal<number>(3);
   public readonly gridGap: WritableSignal<string> = signal<string>('1rem');
   public readonly trackBy: WritableSignal<((index: number, item: DataViewItem) => unknown) | null> =
     signal<((index: number, item: DataViewItem) => unknown) | null>(null);
   public readonly dataKey: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('Data list');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>('Data list');
 
   public readonly paginator: WritableSignal<boolean> = signal<boolean>(false);
   public readonly rows: WritableSignal<number> = signal<number>(10);

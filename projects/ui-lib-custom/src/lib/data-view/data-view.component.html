@@ -110,7 +110,7 @@
       class="ui-lib-data-view__filter-input"
       [id]="filterInputId"
       type="search"
-      [placeholder]="filterPlaceholder()"
+      [placeholder]="resolvedFilterPlaceholder()"
       [attr.aria-label]="resolvedFilterAriaLabel()"
       (input)="onFilterInput($event)"
     />
@@ -177,7 +177,7 @@
       @if (emptyTemplate()) {
         <ng-container [ngTemplateOutlet]="emptyTemplate()!" />
       } @else {
-        <div class="ui-lib-data-view__empty-default">{{ emptyMessage() }}</div>
+        <div class="ui-lib-data-view__empty-default">{{ resolvedEmptyMessage() }}</div>
       }
     </div>
   } @else {

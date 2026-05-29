@@ -21,7 +21,7 @@ import type {
 
 function queryAll<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return fixture.debugElement
     .queryAll(By.css(selector))
@@ -69,7 +69,7 @@ class TestHostComponent {
   public readonly variant: WritableSignal<MeterGroupVariant | null> =
     signal<MeterGroupVariant | null>(null);
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('Meter group');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>('Meter group');
 }
 
 function setup(): { fixture: ComponentFixture<TestHostComponent>; host: TestHostComponent } {
@@ -179,7 +179,7 @@ describe('MeterGroup', (): void => {
     const { fixture } = setup();
     const [firstLabel, secondLabel]: HTMLElement[] = queryAll(
       fixture,
-      '.ui-lib-meter-group__label-text'
+      '.ui-lib-meter-group__label-text',
     );
     expect(firstLabel!.textContent!.trim()).toBe('Apps');
     expect(secondLabel!.textContent!.trim()).toBe('Media');
@@ -289,7 +289,7 @@ describe('MeterGroup', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const iconDebug: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-meter-group__label-swatch .pi-star')
+      By.css('.ui-lib-meter-group__label-swatch .pi-star'),
     );
     expect(iconDebug).toBeTruthy();
   });
@@ -306,7 +306,7 @@ describe('MeterGroup', (): void => {
     const secondHostElement: HTMLElement = secondFixture.nativeElement as HTMLElement;
     const first: HTMLElement = firstHostElement.querySelector('ui-lib-meter-group') as HTMLElement;
     const second: HTMLElement = secondHostElement.querySelector(
-      'ui-lib-meter-group'
+      'ui-lib-meter-group',
     ) as HTMLElement;
     expect(first.id).toMatch(/^ui-lib-meter-group-\d+$/);
     expect(second.id).toMatch(/^ui-lib-meter-group-\d+$/);

@@ -136,6 +136,8 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   // ── Carousel / Galleria ───────────────────────────────────────────────────
   'carousel.prev': 'Previous slide',
   'carousel.next': 'Next slide',
+  'carousel.pause': 'Pause autoplay',
+  'carousel.play': 'Resume autoplay',
   'carousel.indicator': 'Go to slide {n}',
   'carousel.slide.status': 'Slide {current} of {total}',
   'carousel.region': 'Carousel',
@@ -257,6 +259,8 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'data-view.grid-view': 'Show grid view',
   'data-view.layout.list': 'List view selected',
   'data-view.layout.grid': 'Grid view selected',
+  'data-view.empty': 'No records found.',
+  'data-view.filter.placeholder': 'Filter items',
 
   // ── Editor ────────────────────────────────────────────────────────────────
   'editor.toolbar': 'Formatting options',

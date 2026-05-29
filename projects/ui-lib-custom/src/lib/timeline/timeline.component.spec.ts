@@ -79,7 +79,7 @@ class TimelineTestHostComponent {
   );
   public readonly size: WritableSignal<TimelineSize> = signal<TimelineSize>('md');
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('Timeline');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>('Timeline');
   public readonly showContent: WritableSignal<boolean> = signal<boolean>(false);
   public readonly showMarker: WritableSignal<boolean> = signal<boolean>(false);
   public readonly showOpposite: WritableSignal<boolean> = signal<boolean>(false);
