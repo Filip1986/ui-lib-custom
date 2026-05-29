@@ -73,7 +73,14 @@ export class BottomSheet implements OnDestroy {
   public readonly variant: InputSignal<BottomSheetVariant | null> =
     input<BottomSheetVariant | null>(null);
   /** Optional header text rendered in the sheet header bar. */
-  public readonly header: InputSignal<string> = input<string>('');
+  public readonly header: InputSignal<string | null> = input<string | null>(null);
+  /** Whether to render the built-in close button inside the header. Defaults to true. */
+  public readonly showCloseButton: InputSignal<boolean> = input<boolean>(true);
+  /**
+   * ARIA label for the close button.
+   * Falls back to i18n `bottom-sheet.close` when null.
+   */
+  public readonly closeAriaLabel: InputSignal<string | null> = input<string | null>(null);
   /** Whether to render the semi-transparent backdrop behind the sheet. */
   public readonly showBackdrop: InputSignal<boolean> = input<boolean>(true);
   /** Whether a click on the backdrop closes the sheet. */
@@ -90,6 +97,11 @@ export class BottomSheet implements OnDestroy {
 
   private readonly effectiveVariant: Signal<BottomSheetVariant> = computed<BottomSheetVariant>(
     (): BottomSheetVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved close-button ARIA label: explicit input > i18n `bottom-sheet.close` fallback. */
+  public readonly resolvedCloseAriaLabel: Signal<string> = computed<string>(
+    (): string => this.closeAriaLabel() ?? this.i18n.translate('bottom-sheet.close'),
   );
 
   /** Computed host CSS classes. */

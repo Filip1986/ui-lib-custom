@@ -46,7 +46,7 @@ class TestHostComponent {
   public readonly visibleState: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variantState: WritableSignal<BottomSheetVariant | null> =
     signal<BottomSheetVariant | null>(null);
-  public readonly headerState: WritableSignal<string> = signal<string>('');
+  public readonly headerState: WritableSignal<string | null> = signal<string | null>(null);
   public readonly showBackdropState: WritableSignal<boolean> = signal<boolean>(true);
   public readonly closeOnBackdropState: WritableSignal<boolean> = signal<boolean>(true);
   public readonly closeOnEscapeState: WritableSignal<boolean> = signal<boolean>(true);
@@ -56,7 +56,7 @@ class TestHostComponent {
 interface BootstrapOptions {
   visible?: boolean;
   variant?: BottomSheetVariant | null;
-  header?: string;
+  header?: string | null;
   showBackdrop?: boolean;
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
@@ -90,7 +90,7 @@ describe('BottomSheet', (): void => {
       fixture.componentInstance.styleClassState.set(initial.styleClass ?? null);
     fixture.detectChanges();
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
-      'ui-lib-bottom-sheet'
+      'ui-lib-bottom-sheet',
     ) as HTMLElement;
     return { fixture, host };
   }
@@ -184,8 +184,8 @@ describe('BottomSheet', (): void => {
     expect(panel.getAttribute('role')).toBe('dialog');
   });
 
-  it('should not render header when header input is empty', (): void => {
-    const { fixture } = bootstrap({ header: '' });
+  it('should not render header when header input is null', (): void => {
+    const { fixture } = bootstrap({ header: null });
     const headerEl: HTMLElement | null = queryElement(fixture, '.ui-lib-bottom-sheet__header');
     expect(headerEl).toBeNull();
   });
