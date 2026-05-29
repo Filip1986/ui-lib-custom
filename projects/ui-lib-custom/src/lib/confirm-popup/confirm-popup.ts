@@ -23,6 +23,7 @@ import type {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { ConfirmPopupService } from './confirm-popup.service';
 import type {
@@ -70,6 +71,7 @@ let nextConfirmPopupId: number = 0;
 export class ConfirmPopup implements OnDestroy {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly confirmPopupService: ConfirmPopupService = inject(ConfirmPopupService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
@@ -88,7 +90,7 @@ export class ConfirmPopup implements OnDestroy {
     (() => void) | null
   >(null);
   private readonly targetElement: WritableSignal<HTMLElement | null> = signal<HTMLElement | null>(
-    null
+    null,
   );
 
   private readonly componentId: string = this.generateId();
@@ -116,17 +118,17 @@ export class ConfirmPopup implements OnDestroy {
   /** Key that matches incoming ConfirmPopupService calls to this specific instance. */
   public readonly key: InputSignal<string> = input<string>('');
 
-  /** Confirmation message text (declarative fallback). */
-  public readonly message: InputSignal<string> = input<string>('Are you sure you want to proceed?');
+  /** Confirmation message text (declarative fallback); uses i18n default when null. */
+  public readonly message: InputSignal<string | null> = input<string | null>(null);
 
   /** CSS class for the icon rendered before the message. */
   public readonly icon: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accept button label. */
-  public readonly acceptLabel: InputSignal<string> = input<string>('Yes');
+  /** Accept button label; uses i18n default when null. */
+  public readonly acceptLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Reject button label. */
-  public readonly rejectLabel: InputSignal<string> = input<string>('No');
+  /** Reject button label; uses i18n default when null. */
+  public readonly rejectLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** CSS class for an icon inside the accept button. */
   public readonly acceptIcon: InputSignal<string | null> = input<string | null>(null);
@@ -163,64 +165,73 @@ export class ConfirmPopup implements OnDestroy {
 
   // ---- Computed resolved values (service config takes precedence over direct inputs) ----
 
-  /** Resolved message — service config wins over the `message` input. */
+  /** Resolved message — service config wins, then the `message` input, then i18n default. */
   public readonly resolvedMessage: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.message ?? this.message()
+    (): string =>
+      this.serviceConfig()?.message ??
+      this.message() ??
+      this.i18n.translate('confirm-popup.message'),
   );
 
   /** Resolved icon — service config wins over the `icon` input. */
   public readonly resolvedIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => this.serviceConfig()?.icon ?? this.icon()
+    (): string | null => this.serviceConfig()?.icon ?? this.icon(),
   );
 
-  /** Resolved accept label. */
+  /** Resolved accept label — service config wins, then the `acceptLabel` input, then i18n default. */
   public readonly resolvedAcceptLabel: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.acceptLabel ?? this.acceptLabel()
+    (): string =>
+      this.serviceConfig()?.acceptLabel ??
+      this.acceptLabel() ??
+      this.i18n.translate('confirm-popup.accept'),
   );
 
-  /** Resolved reject label. */
+  /** Resolved reject label — service config wins, then the `rejectLabel` input, then i18n default. */
   public readonly resolvedRejectLabel: Signal<string> = computed<string>(
-    (): string => this.serviceConfig()?.rejectLabel ?? this.rejectLabel()
+    (): string =>
+      this.serviceConfig()?.rejectLabel ??
+      this.rejectLabel() ??
+      this.i18n.translate('confirm-popup.reject'),
   );
 
   /** Resolved accept icon. */
   public readonly resolvedAcceptIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => this.serviceConfig()?.acceptIcon ?? this.acceptIcon()
+    (): string | null => this.serviceConfig()?.acceptIcon ?? this.acceptIcon(),
   );
 
   /** Resolved reject icon. */
   public readonly resolvedRejectIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => this.serviceConfig()?.rejectIcon ?? this.rejectIcon()
+    (): string | null => this.serviceConfig()?.rejectIcon ?? this.rejectIcon(),
   );
 
   /** Resolved accept button severity. */
   public readonly resolvedAcceptSeverity: Signal<ConfirmPopupButtonSeverity> =
     computed<ConfirmPopupButtonSeverity>(
       (): ConfirmPopupButtonSeverity =>
-        this.serviceConfig()?.acceptSeverity ?? this.acceptSeverity()
+        this.serviceConfig()?.acceptSeverity ?? this.acceptSeverity(),
     );
 
   /** Resolved reject button severity. */
   public readonly resolvedRejectSeverity: Signal<ConfirmPopupButtonSeverity> =
     computed<ConfirmPopupButtonSeverity>(
       (): ConfirmPopupButtonSeverity =>
-        this.serviceConfig()?.rejectSeverity ?? this.rejectSeverity()
+        this.serviceConfig()?.rejectSeverity ?? this.rejectSeverity(),
     );
 
   /** Resolved defaultFocus. */
   public readonly resolvedDefaultFocus: Signal<ConfirmPopupDefaultFocus> =
     computed<ConfirmPopupDefaultFocus>(
-      (): ConfirmPopupDefaultFocus => this.serviceConfig()?.defaultFocus ?? this.defaultFocus()
+      (): ConfirmPopupDefaultFocus => this.serviceConfig()?.defaultFocus ?? this.defaultFocus(),
     );
 
   /** Accessible name for the panel — the message text serves as the alertdialog label. */
   public readonly panelAriaLabel: Signal<string> = computed<string>((): string =>
-    this.resolvedMessage()
+    this.resolvedMessage(),
   );
 
   /** Effective variant — falls back to ThemeConfigService. */
   public readonly effectiveVariant: Signal<ConfirmPopupVariant> = computed<ConfirmPopupVariant>(
-    (): ConfirmPopupVariant => this.variant() ?? this.themeConfig.variant()
+    (): ConfirmPopupVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Host CSS classes. */
@@ -257,13 +268,13 @@ export class ConfirmPopup implements OnDestroy {
   /** Accept button CSS classes combining base and severity modifier. */
   public readonly acceptBtnClasses: Signal<string> = computed<string>(
     (): string =>
-      `ui-lib-confirm-popup__accept-btn ui-lib-confirm-popup__btn--${this.resolvedAcceptSeverity()}`
+      `ui-lib-confirm-popup__accept-btn ui-lib-confirm-popup__btn--${this.resolvedAcceptSeverity()}`,
   );
 
   /** Reject button CSS classes combining base and severity modifier. */
   public readonly rejectBtnClasses: Signal<string> = computed<string>(
     (): string =>
-      `ui-lib-confirm-popup__reject-btn ui-lib-confirm-popup__btn--${this.resolvedRejectSeverity()}`
+      `ui-lib-confirm-popup__reject-btn ui-lib-confirm-popup__btn--${this.resolvedRejectSeverity()}`,
   );
 
   constructor() {
@@ -325,7 +336,7 @@ export class ConfirmPopup implements OnDestroy {
               this.focusDefaultButton();
             }
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.positionReady.set(false);
@@ -393,7 +404,7 @@ export class ConfirmPopup implements OnDestroy {
     }
 
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-confirm-popup__panel'
+      '.ui-lib-confirm-popup__panel',
     );
     if (!panel) {
       return;
@@ -427,7 +438,7 @@ export class ConfirmPopup implements OnDestroy {
     const viewportPadding: number = 8;
     left = Math.max(
       viewportPadding,
-      Math.min(left, viewportWidth - panelRect.width - viewportPadding)
+      Math.min(left, viewportWidth - panelRect.width - viewportPadding),
     );
 
     // Arrow points at target center, offset relative to panel left.
@@ -435,7 +446,7 @@ export class ConfirmPopup implements OnDestroy {
     const arrowHalfWidth: number = 8;
     const clampedArrowLeft: number = Math.max(
       arrowHalfWidth + 4,
-      Math.min(rawArrowLeft, panelRect.width - arrowHalfWidth - 4)
+      Math.min(rawArrowLeft, panelRect.width - arrowHalfWidth - 4),
     );
 
     this.panelTop.set(top);
@@ -445,7 +456,7 @@ export class ConfirmPopup implements OnDestroy {
 
   private activateFocusTrap(): void {
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-confirm-popup__panel'
+      '.ui-lib-confirm-popup__panel',
     );
     if (!panel) {
       return;

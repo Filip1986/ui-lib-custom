@@ -24,6 +24,7 @@ import {
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   SpeedDialButtonDirective,
@@ -63,6 +64,7 @@ export class SpeedDialComponent {
   private static nextId: number = 0;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
@@ -70,7 +72,7 @@ export class SpeedDialComponent {
   private lastVisibleValue: boolean = false;
 
   public readonly model: InputSignal<readonly SpeedDialItem[]> = input<readonly SpeedDialItem[]>(
-    []
+    [],
   );
   public readonly type: InputSignal<SpeedDialType> = input<SpeedDialType>('linear');
   public readonly direction: InputSignal<SpeedDialDirection> = input<SpeedDialDirection>('up');
@@ -87,7 +89,7 @@ export class SpeedDialComponent {
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
   public readonly tabindex: InputSignal<number> = input<number>(0);
   public readonly variant: InputSignal<SpeedDialVariant | null> = input<SpeedDialVariant | null>(
-    null
+    null,
   );
   public readonly size: InputSignal<SpeedDialSize> = input<SpeedDialSize>('md');
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
@@ -118,15 +120,15 @@ export class SpeedDialComponent {
 
   public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     SpeedDialItemDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly buttonTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     SpeedDialButtonDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
   public readonly iconTemplate: Signal<TemplateRef<unknown> | undefined> = contentChild(
     SpeedDialIconDirective,
-    { read: TemplateRef }
+    { read: TemplateRef },
   );
 
   private readonly itemActionElements: Signal<readonly ElementRef<HTMLElement>[]> =
@@ -150,13 +152,13 @@ export class SpeedDialComponent {
   }
 
   public readonly resolvedVariant: Signal<SpeedDialVariant> = computed<SpeedDialVariant>(
-    (): SpeedDialVariant => this.variant() ?? this.themeConfig.variant()
+    (): SpeedDialVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   public readonly visibleItems: Signal<readonly SpeedDialItem[]> = computed<
     readonly SpeedDialItem[]
   >((): readonly SpeedDialItem[] =>
-    this.model().filter((item: SpeedDialItem): boolean => item.visible !== false)
+    this.model().filter((item: SpeedDialItem): boolean => item.visible !== false),
   );
 
   public readonly itemTransform: Signal<readonly string[]> = computed<readonly string[]>(
@@ -166,14 +168,14 @@ export class SpeedDialComponent {
         direction: this.direction(),
         radius: this.radius(),
         count: this.visibleItems().length,
-      }).map((position: { readonly transform: string }): string => position.transform)
+      }).map((position: { readonly transform: string }): string => position.transform),
   );
 
   public readonly itemTransitionDelay: Signal<readonly string[]> = computed<readonly string[]>(
     (): readonly string[] =>
       this.visibleItems().map(
-        (_item: SpeedDialItem, index: number): string => `${index * this.transitionDelay()}ms`
-      )
+        (_item: SpeedDialItem, index: number): string => `${index * this.transitionDelay()}ms`,
+      ),
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -395,8 +397,8 @@ export class SpeedDialComponent {
     elementRef?.nativeElement.focus();
   }
 
-  public triggerAriaLabel(): string | null {
-    return this.buttonAriaLabel() ?? this.ariaLabel();
+  public triggerAriaLabel(): string {
+    return this.buttonAriaLabel() ?? this.ariaLabel() ?? this.i18n.translate('speed-dial.trigger');
   }
 
   private isLinearDirection(direction: SpeedDialDirection): boolean {
@@ -543,7 +545,7 @@ export class SpeedDialComponent {
 
   private focusTrigger(): void {
     const trigger: HTMLButtonElement | null = this.hostElement.nativeElement.querySelector(
-      '.ui-lib-speed-dial__button'
+      '.ui-lib-speed-dial__button',
     );
     trigger?.focus();
   }

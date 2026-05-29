@@ -17,9 +17,9 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
-  IMAGE_COMPARE_ARIA_LABEL,
   IMAGE_COMPARE_DEFAULT_VALUE,
   IMAGE_COMPARE_KEYBOARD_LARGE_STEP,
   IMAGE_COMPARE_KEYBOARD_STEP,
@@ -68,6 +68,7 @@ export class ImageCompareComponent {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ─── Instance identity ───────────────────────────────────────────────────────
 
@@ -107,8 +108,8 @@ export class ImageCompareComponent {
   /** Additional CSS class(es) applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the slider handle. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(IMAGE_COMPARE_ARIA_LABEL);
+  /** Accessible label for the slider handle; uses i18n default when null. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Two-way binding ─────────────────────────────────────────────────────────
 
@@ -143,27 +144,32 @@ export class ImageCompareComponent {
 
   /** Resolved design variant — falls back to the global theme variant when null. */
   public readonly effectiveVariant: Signal<ImageCompareVariant> = computed<ImageCompareVariant>(
-    (): ImageCompareVariant => this.variant() ?? this.themeConfig.variant()
+    (): ImageCompareVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved aria-label for the slider handle — falls back to the i18n default. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('image-compare.aria-label'),
   );
 
   /** Clamped slider value (0–100). */
   public readonly clampedValue: Signal<number> = computed<number>((): number =>
-    Math.min(IMAGE_COMPARE_MAX, Math.max(IMAGE_COMPARE_MIN, this.value()))
+    Math.min(IMAGE_COMPARE_MAX, Math.max(IMAGE_COMPARE_MIN, this.value())),
   );
 
   /** CSS `left` percentage string for the handle/divider. */
   public readonly handlePosition: Signal<string> = computed<string>(
-    (): string => `${this.clampedValue()}%`
+    (): string => `${this.clampedValue()}%`,
   );
 
   /** Human-readable value text for screen readers (e.g. "45 percent"). */
   public readonly ariaValueText: Signal<string> = computed<string>(
-    (): string => `${Math.round(this.clampedValue())} percent`
+    (): string => `${Math.round(this.clampedValue())} percent`,
   );
 
   /** Clip path for the right image — shows the portion to the right of the divider. */
   public readonly rightClipPath: Signal<string> = computed<string>(
-    (): string => `inset(0 0 0 ${this.clampedValue()}%)`
+    (): string => `inset(0 0 0 ${this.clampedValue()}%)`,
   );
 
   /** Composite CSS class string applied via the host binding. */
@@ -336,7 +342,7 @@ export class ImageCompareComponent {
   private adjustValue(delta: number): void {
     const next: number = Math.min(
       IMAGE_COMPARE_MAX,
-      Math.max(IMAGE_COMPARE_MIN, this.clampedValue() + delta)
+      Math.max(IMAGE_COMPARE_MIN, this.clampedValue() + delta),
     );
     this.value.set(next);
   }

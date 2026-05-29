@@ -239,7 +239,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Tooltip       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 7   | 8.8 | 🟢     |
 | ConfirmDialog | 9   | 9    | 8    | 8    | 9     | 8   | 8    | 8      | 9       | 8    | 9   | 8.5 | 🟢     |
-| ConfirmPopup  | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 7   | 8.7 | 🟢     |
+| ConfirmPopup  | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
 
 ## Navigation & Menus
 
@@ -256,7 +256,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | PanelMenu   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Stepper     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| SpeedDial   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 7   | 8.6 | 🟢     |
+| SpeedDial   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
 
 ## Data Display
 
@@ -305,7 +305,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | ButtonGroup     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8   | 8.7 | 🟢     |
 | SplitButton     | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
 | Image           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8   | 8.7 | 🟢     |
-| ImageCompare    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 7   | 8.8 | 🟢     |
+| ImageCompare    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Upload          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 8   | 8.9 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 8   | 8.9 | 🟢     |

@@ -357,6 +357,17 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'data-grid.sort-none': 'Sortierung entfernen',
   'data-grid.empty': 'Keine Einträge gefunden.',
 
+  // ── ConfirmPopup ──────────────────────────────────────────────────────────
+  'confirm-popup.message': 'Möchten Sie wirklich fortfahren?',
+  'confirm-popup.accept': 'Ja',
+  'confirm-popup.reject': 'Nein',
+
+  // ── SpeedDial ─────────────────────────────────────────────────────────────
+  'speed-dial.trigger': 'Schnellauswahl öffnen',
+
+  // ── ImageCompare ──────────────────────────────────────────────────────────
+  'image-compare.aria-label': 'Bildvergleichsschieberegler',
+
   // ── CodeSnippet ───────────────────────────────────────────────────────────
   'code-snippet.copy': 'Code in Zwischenablage kopieren',
   'code-snippet.copied': 'Kopiert!',

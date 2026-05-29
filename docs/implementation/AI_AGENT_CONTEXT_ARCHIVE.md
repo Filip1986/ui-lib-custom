@@ -1,6 +1,32 @@
-# AI Agent Context Archive
+﻿# AI Agent Context Archive
 
 This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT_CONTEXT.md`.
+
+---
+
+Date: 2026-05-17 [CodeSnippet + SyntaxHighlighter — scored and closed out]
+Changed:
+  docs/COMPONENT_SCORES.md: added CodeSnippet (8.4/10) to Data Display table + New Components queue;
+    added SyntaxHighlighter (8.7/10) to Utilities & Directives table + New Components queue
+  projects/ui-lib-custom/src/lib/code-snippet/code-snippet.html: self-closing tag fix (ESLint warning)
+  AI_AGENT_CONTEXT.md: updated CodeSnippet + SyntaxHighlighter status entries
+State: COMPLETE — both components scored; ESLint clean; 25/25 unit tests passing
+Verification: npx eslint code-snippet/ syntax-highlighter/ --max-warnings 0 ✅; npx jest code-snippet (25/25 ✅)
+Next step: Broader Prompt 8 pass — bring any remaining sub-8.5 components up to gate; then Phase 4 (axe-core audit, Storybook, publish prep)
+
+Date: 2026-05-29 [feat(lib): ColorPicker API 9→10 + I18n 9→10 (9.3→9.5) ✅]
+Changed:
+  color-picker/color-picker.ts: added ariaLabel + ariaLabelledBy signal inputs; resolvedTriggerAriaLabel computed signal
+  color-picker/color-picker.html: wired [attr.aria-label]/[attr.aria-labelledby] to computed; label text → i18n.translate calls
+  color-picker/color-picker.scss: left: -2px → inset-inline-start: -2px (logical CSS)
+  color-picker/index.ts: added ColorPickerAppendTo to type exports
+  color-picker/color-picker.spec.ts: new standalone describe — ariaLabel/ariaLabelledBy + RTL tests (5 tests); fixed extra }); brace
+  color-picker/README.md: ariaLabel + ariaLabelledBy inputs; colorpicker.label.hex/h/s/b locale keys
+  i18n/en,de,fr,es.ts: 4 new keys: colorpicker.label.hex / .label.h / .label.s / .label.b
+  docs/COMPONENT_SCORES.md: ColorPicker API 9→10, I18n 9→10 (avg 9.3→9.5)
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 6128/6128 tests ✅
+Verification: npx eslint color-picker/ (PASS ✅); ng build (0 warnings ✅); npx jest (6128 ✅)
+Next step: Broader Prompt 8 pass on sub-8.5 components
 
 ---
 

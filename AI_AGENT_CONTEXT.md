@@ -1,4 +1,4 @@
-# AI Agent Context
+﻿# AI Agent Context
 
 > Active session context only.
 > Stable architecture, conventions, and workflows live in `AGENTS.md`.
@@ -30,7 +30,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `CodeSnippet` -> ✅ complete + scored + i18n wired (8.6/10 — multi-file tabs, ARIA tablist/tab/tabpanel, syntax highlighting, ariaLabel/ariaLabelledBy inputs, 31 unit tests; ESLint clean)
 - `SyntaxHighlighter` -> ✅ complete + scored (8.7/10 — zero-dep TS/HTML/SCSS/CSS tokenizer; highlight/tokenize/escapeForCode exports; full demo page)
-- **I18n batch pass (2026-05-29)**: Chip (7→8, 8.5), Button (7→9, 8.9), Breadcrumb/ContextMenu/Menu/MegaMenu/PanelMenu/TieredMenu (7→9, 9.0 each), OrderList (7→9, 8.8)
+- **I18n batch pass (2026-05-29)**: Chip (7→8, 8.5), Button (7→9, 8.9), Breadcrumb/ContextMenu/Menu/MegaMenu/PanelMenu/TieredMenu (7→9, 9.0 each), OrderList (7→9, 8.8), ConfirmPopup (7→9, 8.9), SpeedDial (7→9, 8.8), ImageCompare (7→9, 9.0)
 
 - `Accordion` -> ✅ complete + hardened (6-phase, score 9.0/10, 51 tests — 33 unit + 18 a11y)
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
@@ -85,30 +85,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-17 [CodeSnippet + SyntaxHighlighter — scored and closed out]
-Changed:
-  docs/COMPONENT_SCORES.md: added CodeSnippet (8.4/10) to Data Display table + New Components queue;
-    added SyntaxHighlighter (8.7/10) to Utilities & Directives table + New Components queue
-  projects/ui-lib-custom/src/lib/code-snippet/code-snippet.html: self-closing tag fix (ESLint warning)
-  AI_AGENT_CONTEXT.md: updated CodeSnippet + SyntaxHighlighter status entries
-State: COMPLETE — both components scored; ESLint clean; 25/25 unit tests passing
-Verification: npx eslint code-snippet/ syntax-highlighter/ --max-warnings 0 ✅; npx jest code-snippet (25/25 ✅)
-Next step: Broader Prompt 8 pass — bring any remaining sub-8.5 components up to gate; then Phase 4 (axe-core audit, Storybook, publish prep)
-
-Date: 2026-05-29 [feat(lib): ColorPicker API 9→10 + I18n 9→10 (9.3→9.5) ✅]
-Changed:
-  color-picker/color-picker.ts: added ariaLabel + ariaLabelledBy signal inputs; resolvedTriggerAriaLabel computed signal
-  color-picker/color-picker.html: wired [attr.aria-label]/[attr.aria-labelledby] to computed; label text → i18n.translate calls
-  color-picker/color-picker.scss: left: -2px → inset-inline-start: -2px (logical CSS)
-  color-picker/index.ts: added ColorPickerAppendTo to type exports
-  color-picker/color-picker.spec.ts: new standalone describe — ariaLabel/ariaLabelledBy + RTL tests (5 tests); fixed extra }); brace
-  color-picker/README.md: ariaLabel + ariaLabelledBy inputs; colorpicker.label.hex/h/s/b locale keys
-  i18n/en,de,fr,es.ts: 4 new keys: colorpicker.label.hex / .label.h / .label.s / .label.b
-  docs/COMPONENT_SCORES.md: ColorPicker API 9→10, I18n 9→10 (avg 9.3→9.5)
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 6128/6128 tests ✅
-Verification: npx eslint color-picker/ (PASS ✅); ng build (0 warnings ✅); npx jest (6128 ✅)
-Next step: Broader Prompt 8 pass on sub-8.5 components
-
 Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — AutoComplete Theme 9→10 + CascadeSelect Perf/Angular/Theme 9→10 (both → 9.5) ✅]
 Changed:
   autocomplete/autocomplete.scss: added --uilib-autocomplete-option-min-height + --uilib-autocomplete-btn-min-size tokens;
@@ -139,6 +115,19 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
 Next step: CascadeSelect ceiling push → 9.5; AutoComplete → 9.5
 
+
+Date: 2026-05-29 [feat(lib): i18n batch pass — ConfirmPopup/SpeedDial/ImageCompare I18n 7→9]
+Changed:
+  i18n/es.ts: added confirm-popup.{message,accept,reject}, speed-dial.trigger, image-compare.aria-label keys
+  confirm-popup/confirm-popup.ts: injected UiLibI18nService; message/acceptLabel/rejectLabel inputs → string|null;
+    resolvedMessage/resolvedAcceptLabel/resolvedRejectLabel computeds use i18n fallback
+  speed-dial/speed-dial.component.ts: injected UiLibI18nService; triggerAriaLabel() returns i18n fallback
+  image-compare/image-compare.ts: injected UiLibI18nService; ariaLabel → string|null; effectiveAriaLabel computed
+  image-compare/image-compare.html: wired effectiveAriaLabel()
+  docs/COMPONENT_SCORES.md: ConfirmPopup I18n 7→9 (8.7→8.9); SpeedDial I18n 7→9 (8.6→8.8); ImageCompare I18n 7→9 (8.8→9.0)
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 66+84+60 tests ✅
+Verification: npx eslint confirm-popup/ speed-dial/ image-compare/ (0 warnings); ng build (0 warnings); npx jest all pass
+Next step: Handle remaining I18n=7 components (Accordion, Checkbox, RadioButton, ToggleSwitch, SelectButton, Tooltip, Textarea) — document as i18n-neutral or wire DatePicker/Drawer/Table/TreeTable i18n improvements
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
 ---

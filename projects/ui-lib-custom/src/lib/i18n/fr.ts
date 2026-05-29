@@ -357,6 +357,17 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'data-grid.sort-none': 'Supprimer le tri',
   'data-grid.empty': 'Aucun enregistrement trouvé.',
 
+  // ── ConfirmPopup ──────────────────────────────────────────────────────────
+  'confirm-popup.message': 'Voulez-vous vraiment continuer ?',
+  'confirm-popup.accept': 'Oui',
+  'confirm-popup.reject': 'Non',
+
+  // ── SpeedDial ─────────────────────────────────────────────────────────────
+  'speed-dial.trigger': 'Ouvrir la numérotation rapide',
+
+  // ── ImageCompare ──────────────────────────────────────────────────────────
+  'image-compare.aria-label': "Curseur de comparaison d'image",
+
   // ── CodeSnippet ───────────────────────────────────────────────────────────
   'code-snippet.copy': 'Copier le code',
   'code-snippet.copied': 'Copié !',
