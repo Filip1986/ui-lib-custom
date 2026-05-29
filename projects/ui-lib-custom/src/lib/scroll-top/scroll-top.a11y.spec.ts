@@ -34,7 +34,7 @@ class DefaultHostComponent {}
 })
 class ConfigurableHostComponent {
   public readonly threshold: WritableSignal<number> = signal<number>(400);
-  public readonly buttonAriaLabel: WritableSignal<string> = signal<string>('Scroll to top');
+  public readonly buttonAriaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly behavior: WritableSignal<ScrollTopBehavior> = signal<ScrollTopBehavior>('smooth');
 }
 
@@ -173,9 +173,9 @@ describe('ScrollTop Accessibility', (): void => {
     expect(getButton(fixture).getAttribute('aria-label')).toBe('Return to start');
   });
 
-  it('should fall back to the default aria-label when the input is blank', async (): Promise<void> => {
+  it('should fall back to the i18n label when buttonAriaLabel is null', async (): Promise<void> => {
     const fixture: ComponentFixture<ConfigurableHostComponent> = await createConfigurableFixture();
-    fixture.componentInstance.buttonAriaLabel.set('   ');
+    fixture.componentInstance.buttonAriaLabel.set(null);
     fixture.detectChanges();
     await fixture.whenStable();
     expect(getButton(fixture).getAttribute('aria-label')).toBe('Scroll to top');
@@ -184,7 +184,7 @@ describe('ScrollTop Accessibility', (): void => {
   it('should hide the decorative icon from assistive technology', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
     const icon: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.ui-lib-scroll-top__button span'
+      '.ui-lib-scroll-top__button span',
     );
     expect(icon?.getAttribute('aria-hidden')).toBe('true');
   });
@@ -249,7 +249,7 @@ describe('ScrollTop Accessibility', (): void => {
   it('should become visible when the parent scroll position exceeds the threshold', async (): Promise<void> => {
     const fixture: ComponentFixture<ParentTargetHostComponent> = await createParentTargetFixture();
     const parentContainer: HTMLElement | null = getHostElement(fixture).querySelector(
-      '.scroll-top-parent-target'
+      '.scroll-top-parent-target',
     );
     parentContainer!.scrollTop = 180;
     parentContainer!.dispatchEvent(new Event('scroll'));

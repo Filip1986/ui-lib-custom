@@ -105,14 +105,14 @@ describe('Badge Accessibility', (): void => {
     removeFixture(fixture);
   });
 
-  it('falls back to color as aria-label for dot badges without explicit label', async (): Promise<void> => {
+  it('falls back to i18n status-indicator label for unlabelled dot badges', async (): Promise<void> => {
     const fixture: ComponentFixture<BadgeA11yHostComponent> =
       await createFixture(BadgeA11yHostComponent);
     fixture.componentInstance.dot.set(true);
     fixture.componentInstance.color.set('warning');
     fixture.detectChanges();
 
-    expect(getBadgeElement(fixture).getAttribute('aria-label')).toBe('warning');
+    expect(getBadgeElement(fixture).getAttribute('aria-label')).toBe('Status indicator');
     removeFixture(fixture);
   });
 
@@ -156,10 +156,10 @@ describe('Badge Accessibility', (): void => {
 
   it('assigns unique ids to each badge instance', async (): Promise<void> => {
     const fixture: ComponentFixture<BadgeA11yMultipleHostComponent> = await createFixture(
-      BadgeA11yMultipleHostComponent
+      BadgeA11yMultipleHostComponent,
     );
     const badgeElements: HTMLElement[] = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-badge')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-badge'),
     );
     expect(badgeElements.length).toBe(2);
     const ids: string[] = badgeElements

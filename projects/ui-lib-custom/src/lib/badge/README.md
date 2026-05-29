@@ -16,7 +16,9 @@
 | `pill` | `boolean` | `false` | Makes the badge fully rounded (capsule shape) |
 | `dot` | `boolean` | `false` | Renders a small circular indicator with no text; sets `role="status"` automatically |
 | `decorative` | `boolean` | `false` | Marks the badge as decorative only; sets `aria-hidden="true"` and removes live/status semantics |
-| `label` | `string \| null` | `null` | Accessible label for screen readers; dot badges fall back to the `color` value |
+| `pulse` | `boolean` | `false` | Adds a pulsing glow animation to the dot badge (attention indicator). Only meaningful when `dot=true`. Suppressed by `prefers-reduced-motion`. |
+| `label` | `string \| null` | `null` | Accessible label for screen readers. Dot badges fall back to the i18n `badge.status-indicator` key. |
+| `styleClass` | `string \| null` | `null` | Additional CSS classes applied to the host element. |
 
 ## Outputs
 
@@ -31,8 +33,14 @@ _none_
 <!-- Dot status indicator -->
 <ui-lib-badge color="danger" [dot]="true" label="Error status" />
 
+<!-- Pulsing dot — live status, e.g. "online" indicator -->
+<ui-lib-badge color="success" [dot]="true" [pulse]="true" label="Online" />
+
 <!-- Decorative badge (ignored by assistive technology) -->
 <ui-lib-badge [dot]="true" [decorative]="true" />
+
+<!-- Extra CSS class -->
+<ui-lib-badge color="info" styleClass="my-custom-badge">Beta</ui-lib-badge>
 ```
 
 ## Accessibility
@@ -61,3 +69,14 @@ Badge is non-interactive and is not keyboard-focusable by default (`tabIndex = -
 | `--uilib-badge-radius-resolved` | Effective border radius |
 | `--uilib-badge-font-size-resolved` | Effective font size |
 | `--uilib-badge-dot-size` | Dot diameter in dot mode |
+| `--uilib-badge-pulse-spread` | Glow spread radius of the pulse animation (default `4px`) |
+| `--uilib-badge-pulse-duration` | Duration of one pulse cycle (default `1.5s`) |
+| `--uilib-badge-pulse-color` | Glow colour of the pulse (defaults to the badge background) |
+
+## Internationalisation
+
+| i18n key | Default (en) | Overridden by |
+|---|---|---|
+| `badge.status-indicator` | `Status indicator` | `label` input (takes precedence over the i18n fallback) |
+
+The key is only used as the `aria-label` fallback for unlabelled dot badges. Text badges display consumer-projected content and require no translation.

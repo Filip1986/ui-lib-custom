@@ -6,5 +6,10 @@
   [attr.tabindex]="isVisible() ? null : '-1'"
   (click)="scrollToTop()"
 >
-  <span [class]="icon()" aria-hidden="true"></span>
+  <!-- Default icon — rendered when the icon input is non-empty and no slot content is projected -->
+  @if (icon()) {
+    <span [class]="icon()" aria-hidden="true"></span>
+  }
+  <!-- Consumer-provided icon — SVG, component, or any inline markup -->
+  <ng-content select="[uilib-icon]" />
 </button>

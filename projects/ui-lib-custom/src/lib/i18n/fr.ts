@@ -156,6 +156,9 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'toast.close': 'Fermer la notification',
   'toast.dismiss': 'Fermer : {title}',
 
+  // ── Badge ─────────────────────────────────────────────────────────────────
+  'badge.status-indicator': 'Indicateur de statut',
+
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
   'chip.remove': 'Supprimer {label}',
   'chip.remove-unlabelled': 'Supprimer',

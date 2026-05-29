@@ -9,6 +9,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { BadgeVariant, BadgeColor, BadgeSize } from './badge.types';
 
 export type { BadgeVariant, BadgeColor, BadgeSize } from './badge.types';
@@ -45,6 +46,7 @@ let nextBadgeId: number = 0;
 })
 export class Badge {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Visual variant of the badge */
   public readonly variant: InputSignal<BadgeVariant | null> = input<BadgeVariant | null>(null);
@@ -64,8 +66,18 @@ export class Badge {
   /** Whether the badge is decorative and should be hidden from assistive technologies */
   public readonly decorative: InputSignal<boolean> = input<boolean>(false);
 
+  /**
+   * When true, the dot badge pulses with a subtle animation to draw attention.
+   * Automatically suppressed when `prefers-reduced-motion` is active.
+   * Only meaningful when `dot=true`.
+   */
+  public readonly pulse: InputSignal<boolean> = input<boolean>(false);
+
   /** Accessible label for the badge, used when screen reader support is needed */
   public readonly label: InputSignal<string | null> = input<string | null>(null);
+
+  /** Additional CSS classes applied to the host element. */
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   private readonly instanceId: number = nextBadgeId++;
 
@@ -105,15 +117,24 @@ export class Badge {
       classes.push('ui-lib-badge--dot');
     }
 
+    if (this.pulse() && this.dot()) {
+      classes.push('ui-lib-badge--pulse');
+    }
+
+    const extra: string | null = this.styleClass();
+    if (extra) {
+      classes.push(extra);
+    }
+
     return classes.join(' ');
   });
 
-  /** Computed ARIA label for the badge, falls back to color for dot badges */
+  /** Computed ARIA label for the badge — falls back to i18n `badge.status-indicator` for unlabelled dot badges */
   public readonly ariaLabel: Signal<string | null> = computed<string | null>((): string | null => {
     if (this.decorative()) {
       return null;
     }
-    return this.label() ?? (this.dot() ? this.color() : null);
+    return this.label() ?? (this.dot() ? this.i18n.translate('badge.status-indicator') : null);
   });
 
   /** Computed role attribute for the badge, 'status' for dot badges */

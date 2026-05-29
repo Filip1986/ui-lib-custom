@@ -90,8 +90,11 @@ export class ScrollTop implements OnInit {
   /** Native scroll-behavior applied when scrolling back to top. */
   public readonly behavior: InputSignal<ScrollTopBehavior> = input<ScrollTopBehavior>('smooth');
 
-  /** Accessible label for the button. Falls back to the active locale's 'scroll-top.label' when empty. */
-  public readonly buttonAriaLabel: InputSignal<string> = input<string>('');
+  /**
+   * Accessible label for the button.
+   * Falls back to the active locale's `scroll-top.label` key when null.
+   */
+  public readonly buttonAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Size of the button. */
   public readonly size: InputSignal<ScrollTopSize> = input<ScrollTopSize>('md');
@@ -107,11 +110,10 @@ export class ScrollTop implements OnInit {
   /** Whether the button is currently visible (scroll position exceeds threshold). */
   public readonly isVisible: WritableSignal<boolean> = signal<boolean>(false);
 
-  /** Resolved button aria-label — uses the input when non-empty, otherwise falls back to i18n. */
-  public readonly resolvedButtonAriaLabel: Signal<string> = computed<string>((): string => {
-    const ariaLabel: string = this.buttonAriaLabel().trim();
-    return ariaLabel.length > 0 ? ariaLabel : this.i18n.translate('scroll-top.label');
-  });
+  /** Resolved button aria-label — uses the input when provided, otherwise falls back to i18n. */
+  public readonly resolvedButtonAriaLabel: Signal<string> = computed<string>(
+    (): string => this.buttonAriaLabel() ?? this.i18n.translate('scroll-top.label'),
+  );
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ScrollTopVariant> = computed<ScrollTopVariant>(

@@ -220,6 +220,23 @@
     --uilib-badge-dot-size: 1rem;
   }
 
+  /* Pulse animation — attention indicator for live status dots */
+  @keyframes uilib-badge-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--uilib-badge-pulse-color, var(--uilib-badge-bg-resolved));
+    }
+    50% {
+      box-shadow: 0 0 0 var(--uilib-badge-pulse-spread, 4px)
+        var(--uilib-badge-pulse-color, var(--uilib-badge-bg-resolved));
+    }
+  }
+
+  ui-lib-badge.ui-lib-badge--pulse.ui-lib-badge--dot {
+    --uilib-badge-pulse-spread: 4px;
+    animation: uilib-badge-pulse var(--uilib-badge-pulse-duration, 1.5s) ease-in-out infinite;
+  }
+
   [data-theme='dark'] ui-lib-badge {
     --uilib-badge-bg: var(--uilib-surface-dark-3);
     --uilib-badge-bg-subtle: var(--uilib-surface-dark-2);

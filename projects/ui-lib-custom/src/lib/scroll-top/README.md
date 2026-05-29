@@ -23,7 +23,7 @@ import { ScrollTop } from 'ui-lib-custom/scroll-top';
 | `target`          | `'window' \| 'parent'`                     | `'window'`      | Scroll target: the global window or the immediate parent element. |
 | `icon`            | `string`                                   | `'pi pi-arrow-up'` | CSS class(es) for the icon inside the button.              |
 | `behavior`        | `'smooth' \| 'auto'`                       | `'smooth'`      | Native scroll-behavior applied when scrolling to top.         |
-| `buttonAriaLabel` | `string`                                   | `'Scroll to top'` | Accessible label for the icon-only button element.          |
+| `buttonAriaLabel` | `string \| null`                           | `null`            | Accessible label for the button. Falls back to the i18n `scroll-top.label` key. |
 | `size`            | `'sm' \| 'md' \| 'lg'`                    | `'md'`          | Button size.                                                  |
 | `variant`         | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`   | Visual variant. Falls back to `ThemeConfigService` when `null`. |
 | `styleClass`      | `string \| null`                           | `null`          | Additional CSS classes added to the host element.             |
@@ -36,7 +36,20 @@ import { ScrollTop } from 'ui-lib-custom/scroll-top';
 
 ## Content projection
 
-None — this component does not project content.
+| Slot           | Selector        | Description |
+|----------------|-----------------|-------------|
+| Custom icon    | `[uilib-icon]`  | Replaces the class-based icon. Use for SVGs or icon components. Set `icon=""` to suppress the default `<span>` when using this slot. |
+
+### Custom icon example
+
+```html
+<!-- Inline SVG icon (no external icon library dependency) -->
+<ui-lib-scroll-top icon="">
+  <svg uilib-icon viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+    <path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z" fill="currentColor" />
+  </svg>
+</ui-lib-scroll-top>
+```
 
 ## CSS custom properties
 
@@ -106,6 +119,12 @@ The parent must have `position: relative` and `overflow-y: auto` (or `scroll`).
 | `bootstrap` | Square corners, Bootstrap blue, shadow    |
 | `minimal`   | Muted surface, border, square corners     |
 
+## Internationalisation
+
+| i18n key           | Default (en)     | Overridden by           |
+|--------------------|------------------|-------------------------|
+| `scroll-top.label` | `Scroll to top`  | `buttonAriaLabel` input |
+
 ## Accessibility
 
 ### ARIA attributes
@@ -130,7 +149,7 @@ The parent must have `position: relative` and `overflow-y: auto` (or `scroll`).
 
 ### Accessibility notes
 
-- The button uses a guaranteed non-empty accessible name. Blank `buttonAriaLabel` values fall back to `'Scroll to top'`.
+- The button uses a guaranteed non-empty accessible name. When `buttonAriaLabel` is `null` (the default), the i18n `scroll-top.label` key provides the fallback (English: `'Scroll to top'`).
 - Hidden state is handled in both the visual layer and the accessibility layer: the host/button are `aria-hidden`, and the button is removed from the tab order until visible.
 - The button includes a visible `:focus-visible` ring for keyboard users.
 - The icon is decorative only, so screen readers announce just the button label.
