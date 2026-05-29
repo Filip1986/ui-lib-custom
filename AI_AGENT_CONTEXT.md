@@ -91,6 +91,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (Sprint D — reduced-motion audit):
+  themes/themes.scss: Added @media (prefers-reduced-motion: reduce) block inside
+    @layer uilib.tokens that zeros --uilib-transition-fast, --uilib-transition-duration,
+    and --uilib-icon-transition to 0ms. All 100+ components consuming these tokens
+    now automatically respect OS-level motion preferences without per-component changes.
+  Audit findings: 91/92 SCSS files already had correct prefers-reduced-motion coverage.
+    Components with CSS transitions use transition:none or --*-transition-duration:0ms.
+    Components with @keyframes use animation:none or animation-duration:0ms via token.
+    icon-field.scss uses transform only for static centering (no motion needed).
+    menubar.scss false-positive: animation uses var(--uilib-menubar-transition) as
+    duration — already zeroed to 0ms in reduced-motion block. ✅
+State: COMPLETE — build 0w ✅; bundlesize all 105 entry points within budget ✅
+Verification: ng build ui-lib-custom (0w); npm run bundlesize (all pass)
+Next step: Sprint A (competitive benchmarks) — highest ROI per Opus doc
+
+Date: 2026-05-29
 Changed (FocusTrap hardening):
   core/a11y/focus-trap.ts: Added FocusTrapOptions interface (autoFocus, initialFocusSelector,
     restoreFocus, sentinelClass); activate() accepts optional FocusTrapOptions; focusInitialTarget()
@@ -114,46 +130,15 @@ Verification: npx eslint focus-trap/ core/a11y/focus-trap.ts (0w); npx jest focu
 Next step: Commit + push; move to next hardening target (DatePicker or new premium component)
 
 Date: 2026-05-29
-Changed (batch 6):
+Changed (batch 6 — DatePicker I18n):
   date-picker/date-picker.types.ts: today?: string and clear?: string (now optional)
   date-picker/date-picker.constants.ts: removed today:'Today' and clear:'Clear' from DEFAULT_LOCALE
   date-picker/date-picker.ts: added resolvedTodayLabel + resolvedClearLabel computed signals
-    (locale().today ?? i18n.translate('datepicker.today/clear'))
-  date-picker/date-picker.html: {{ locale().today }} → {{ resolvedTodayLabel() }};
-    {{ locale().clear }} → {{ resolvedClearLabel() }}
+  date-picker/date-picker.html: {{ locale().today }} → {{ resolvedTodayLabel() }} etc.
   docs/COMPONENT_SCORES.md: DatePicker I18n 8→9, avg 8.5→8.6
 State: COMPLETE — ESLint 0w ✅; jest date-picker (138 tests) ✅
 Verification: npx eslint date-picker/ (0w); npx jest date-picker (138 pass)
-Next step: Commit + push batch-6; Prompt 8 I18n pass is now fully complete (no remaining I18n=8)
-
-Date: 2026-05-29
-Changed (batch 5):
-  select-button/select-button.ts: UiLibI18nService injected; ariaLabelResolved ?? 'Select options'
-    → ?? i18n.translate('select-button.label')
-  menubar/menubar.ts: ariaLabel input string→null default; resolvedAriaLabel computed; MENUBAR_DEFAULT_ARIA_LABEL
-    now deprecated; i18n 'menubar.label' key as fallback
-  menubar/menubar.html: [attr.aria-label]="ariaLabel()" → resolvedAriaLabel()
-  icon-button/icon-button.ts: UiLibI18nService + inject added; ICON_BUTTON_LOADING_ARIA_LABEL constant
-    removed; ariaLabelResolved uses i18n.translate('icon-button.loading')
-  tabs/tabs.ts: scrollPrevLabel()/scrollNextLabel() return i18n.translate('tabs.scroll.prev/next')
-  input-mask/input-mask.component.ts: INPUT_MASK_DEFAULT_ERROR_MESSAGES constant removed;
-    resolvedErrorMessage uses i18n.translate('input-mask.incomplete/invalid')
-  key-filter/key-filter.directive.ts: UiLibI18nService injected; PASTE_FILTER_ANNOUNCEMENT constant
-    removed; announce uses i18n.translate('key-filter.paste-filter')
-  i18n/en,de,fr,es.ts: 8 new keys per locale — tabs.scroll.prev/next; menubar.label;
-    icon-button.loading; select-button.label; input-mask.incomplete/invalid; key-filter.paste-filter
-  docs/COMPONENT_SCORES.md: bulk I18n 8→9 pass — SelectButton 8.7→8.8, Menubar 8.9→9.0,
-    IconButton 8.6→8.7, Tabs 8.9→9.0, InputMask 8.7→8.8, KeyFilter 8.6→8.7;
-    no-op bumps: Input/Textarea/RadioButton/Accordion/Tooltip/ButtonGroup/CodeSnippet + all
-    layout (Card/Stack/Inline/Grid/Container/FloatLabel/IconField/InputGroup/FormField/Divider/
-    Toolbar/Fluid/Fieldset/Panel/ScrollPanel) + utilities (Icon/BlockUI/ClassNames/Terminal/
-    Ripple/StyleClass/AnimateOnScroll/AutoFocus/Bind)
-State: COMPLETE — ESLint 0w ✅; jest select-button(76)+menubar(84)+icon-button(27)+
-  tabs(41)+input-mask(62)+key-filter(48) = 338 tests ✅
-Verification: eslint 6 components + i18n (0w); jest all 338 pass
-Next step: Commit + push batch-5; only remaining I18n=8 is DatePicker (complex, rich key set
-  already exists — needs ariaLabel null-default verification) and FocusTrap (structural,
-  stays 8.5 regardless)
+Next step: Sprint A (competitive benchmarks) — highest ROI per Opus doc
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
