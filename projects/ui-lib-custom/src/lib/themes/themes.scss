@@ -197,6 +197,22 @@
   }
 
   /* ============================================================
+ * 1a. REDUCED-MOTION OVERRIDES
+ *     Zero out all global transition/duration tokens so that
+ *     every component that consumes them automatically respects
+ *     the user's OS-level motion preference.  Individual
+ *     component SCSS files provide additional animation: none /
+ *     transform: none overrides for keyframe-based effects.
+ * ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --uilib-transition-fast: 0ms;
+      --uilib-transition-duration: 0ms;
+      --uilib-icon-transition: 0ms;
+    }
+  }
+
+  /* ============================================================
  * 2. LIGHT THEME TOKENS
  *    Applied to :root (default) and explicitly to
  *    [data-theme='light'] for forced light mode.
