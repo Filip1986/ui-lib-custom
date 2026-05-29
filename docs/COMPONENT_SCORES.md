@@ -158,7 +158,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ✅ Done (8.7)           |
 | ClassNames        | No ARIA interference                                                                                | ✅ Done (9.1)           |
 | Bind              | No ARIA interference                                                                                | ✅ Done (8.6)           |
-| CodeSnippet       | `role=region`, `role=tablist/tab/tabpanel`, copy button `aria-pressed`, `aria-label` on card       | ✅ Done (8.4)           |
+| CodeSnippet       | `role=region`, `role=tablist/tab/tabpanel`, copy button `aria-pressed`, `aria-label` on card       | ✅ Done (8.6)           |
 | SyntaxHighlighter | Utility — output is XSS-safe escaped HTML; no rendered ARIA concerns                               | ✅ Done (8.7)           |
 
 ---
@@ -278,7 +278,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Carousel          | 8   | 9    | 8    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.7 | 🟢     |
 | Galleria          | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
 | Chart             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| CodeSnippet       | 9   | 9    | 9    | 7    | 8     | 9   | 8    | 9      | 9       | 9    | 6   | 8.4 | 🟢     |
+| CodeSnippet       | 9   | 9    | 9    | 7    | 8     | 9   | 8    | 9      | 9       | 9    | 8   | 8.6 | 🟢     |
 
 ## Feedback & Status
 
