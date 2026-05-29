@@ -2,6 +2,7 @@ export { ColorPicker } from './color-picker';
 
 export type {
   ColorFormat,
+  ColorPickerAppendTo,
   ColorPickerMode,
   ColorPickerVariant,
   RgbColor,

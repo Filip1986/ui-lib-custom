@@ -189,7 +189,7 @@
     border-radius: 3px;
     box-shadow: 0 0 2px rgb(0 0 0 / 60%);
     position: absolute;
-    left: -2px;
+    inset-inline-start: -2px;
     transform: translateY(-50%);
     pointer-events: none;
   }

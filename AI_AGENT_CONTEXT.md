@@ -21,8 +21,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
 - **Library-wide average:** **8.73 / 10** across 100 components (computed 2026-05-26)
-- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.3 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
-- **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components. Then ColorPicker → 9.5 (needs 2 more categories at 10: DX + one other).
+- **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
+- **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** All Tier 1 hardening prompts deleted (one-time-use scaffolding — lessons distilled into `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`). Active prompt system: `docs/prompts/audit/` (3-phase agentic Tier 2 audit). Score index: `docs/prompts/HARDENING_PROMPT_INDEX.md`.
 
@@ -83,6 +83,20 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-29 [feat(lib): ColorPicker API 9→10 + I18n 9→10 (9.3→9.5) ✅]
+Changed:
+  color-picker/color-picker.ts: added ariaLabel + ariaLabelledBy signal inputs; resolvedTriggerAriaLabel computed signal
+  color-picker/color-picker.html: wired [attr.aria-label]/[attr.aria-labelledby] to computed; label text → i18n.translate calls
+  color-picker/color-picker.scss: left: -2px → inset-inline-start: -2px (logical CSS)
+  color-picker/index.ts: added ColorPickerAppendTo to type exports
+  color-picker/color-picker.spec.ts: new standalone describe — ariaLabel/ariaLabelledBy + RTL tests (5 tests); fixed extra }); brace
+  color-picker/README.md: ariaLabel + ariaLabelledBy inputs; colorpicker.label.hex/h/s/b locale keys
+  i18n/en,de,fr,es.ts: 4 new keys: colorpicker.label.hex / .label.h / .label.s / .label.b
+  docs/COMPONENT_SCORES.md: ColorPicker API 9→10, I18n 9→10 (avg 9.3→9.5)
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 6128/6128 tests ✅
+Verification: npx eslint color-picker/ (PASS ✅); ng build (0 warnings ✅); npx jest (6128 ✅)
+Next step: Broader Prompt 8 pass on sub-8.5 components
+
 Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — AutoComplete Theme 9→10 + CascadeSelect Perf/Angular/Theme 9→10 (both → 9.5) ✅]
 Changed:
   autocomplete/autocomplete.scss: added --uilib-autocomplete-option-min-height + --uilib-autocomplete-btn-min-size tokens;
@@ -112,31 +126,6 @@ Changed:
     ColorPicker Perf+Angular 9→10 (9.1→9.3)
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
 Next step: CascadeSelect ceiling push → 9.5; AutoComplete → 9.5
-
-Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — Select/AutoComplete/CascadeSelect/ColorPicker i18n + README Theming & Internationalisation sections ✅]
-Changed:
-  select/select.ts: placeholder default '' (was 'Select...'); resolvedPlaceholder computed → i18n.translate('select.placeholder')
-  select/select.html: placeholder() → resolvedPlaceholder() (2 occurrences)
-  select/select.spec.ts: expected placeholder text updated 'Select...' → 'Select an option'
-  select/README.md: placeholder default updated; Theming + Internationalisation sections added
-  autocomplete/autocomplete.ts: removed AUTOCOMPLETE_EMPTY_TEXT plain property;
-    added resolvedEmptyText Signal computed; listboxLabel uses i18n.translate('autocomplete.suggestions');
-    resultsAnnouncement uses autocomplete.results.one / autocomplete.results.count keys
-  autocomplete/autocomplete.html: {{ emptyText }} → {{ resolvedEmptyText() }}
-  autocomplete/README.md: Theming + Internationalisation sections added
-  cascade-select/cascade-select.ts: resolvedPlaceholder computed → i18n.translate('cascade-select.placeholder');
-    getLevelAriaLabel uses resolvedPlaceholder()
-  cascade-select/cascade-select.html: placeholder() → resolvedPlaceholder()
-  cascade-select/README.md: placeholder default note updated; Theming + Internationalisation sections added
-  color-picker/README.md: Theming + Internationalisation sections added
-  i18n/en,de,fr,es.ts: 5 new keys per locale:
-    autocomplete.suggestions / autocomplete.empty / autocomplete.results.one / autocomplete.results.count;
-    cascade-select.placeholder
-  docs/COMPONENT_SCORES.md: Select 9.1→9.4; AutoComplete 9.0→9.2; CascadeSelect 9.0→9.2; ColorPicker 9.0→9.1
-  docs/reference/bundle-sizes.json: baseline updated
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
-Verification: npx eslint (PASS ✅); ng build ✅; npx jest (155 ✅)
-Next step: Continue ceiling push — DX, API, Perf, Feel gaps to close on Select/AutoComplete/CascadeSelect/ColorPicker → 9.5
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

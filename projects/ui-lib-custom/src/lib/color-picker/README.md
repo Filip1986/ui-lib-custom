@@ -18,6 +18,8 @@
 | `inputId` | `string` | auto-generated | Custom `id` for the hidden `<input>` element |
 | `tabindex` | `number` | `0` | `tabindex` of the trigger swatch button |
 | `appendTo` | `string \| HTMLElement \| undefined` | `'body'` | Where to mount the popup panel — CSS selector, `HTMLElement`, or `'body'` |
+| `ariaLabel` | `string \| null` | `null` | Overrides the trigger button's default i18n `aria-label`. Ignored when `ariaLabelledBy` is set. |
+| `ariaLabelledBy` | `string \| null` | `null` | `id` of an external element that labels the trigger button. When set, `aria-labelledby` is applied and `aria-label` is omitted. |
 
 ## Outputs
 
@@ -100,5 +102,9 @@ All ARIA labels are provided through `UiLibI18nService`. Override them by supply
 | Green channel input ARIA label | `colorpicker.green.input` | `Green channel` |
 | Blue channel input ARIA label | `colorpicker.blue.input` | `Blue channel` |
 | Alpha channel input ARIA label | `colorpicker.alpha.input` | `Alpha channel` |
+| Hex label text | `colorpicker.label.hex` | `Hex` |
+| Hue channel label text | `colorpicker.label.h` | `H` |
+| Saturation channel label text | `colorpicker.label.s` | `S` |
+| Brightness channel label text | `colorpicker.label.b` | `B` |
 
 APG pattern: [Color Picker (custom widget)](https://www.w3.org/WAI/ARIA/apg/)

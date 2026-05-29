@@ -125,6 +125,15 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     COLOR_PICKER_DEFAULTS.AppendTo,
   );
 
+  /** ARIA label for the swatch trigger button. When set, overrides the default i18n label
+   *  (`colorpicker.trigger`). Ignored when `ariaLabelledBy` is also provided. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /** `id` of an external element that labels the trigger button (e.g. a `<label>` in the
+   *  consumer template). When set, `aria-labelledby` is applied to the trigger and
+   *  `aria-label` is omitted so assistive technology reads the external label. */
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+
   /** Emitted on every color change — pointer drag, keyboard, or text-input blur. Payload carries
    *  `originalEvent` and the formatted `value` according to `format`. */
   public readonly colorChange: OutputEmitterRef<ColorPickerChangeEvent> =
@@ -185,6 +194,22 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     }
     return `${this.generatedId}-${COLOR_PICKER_IDS.HiddenInputSuffix}`;
   });
+
+  /** Resolved `aria-label` for the swatch trigger. Returns `null` when `ariaLabelledBy` is
+   *  set (so the trigger uses `aria-labelledby` exclusively). Falls back to the i18n default
+   *  carrying the current color hex value. */
+  public readonly resolvedTriggerAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      if (this.ariaLabelledBy()) {
+        return null; // aria-labelledby takes precedence — omit aria-label
+      }
+      const customLabel: string | null = this.ariaLabel();
+      if (customLabel) {
+        return customLabel;
+      }
+      return this.i18n.translate('colorpicker.trigger', { color: this.displayColor() });
+    },
+  );
 
   public readonly triggerId: Signal<string> = computed<string>(
     (): string => `${this.generatedId}-${COLOR_PICKER_IDS.TriggerSuffix}`,

@@ -714,3 +714,91 @@ describe('ColorPicker forms integration', (): void => {
     });
   });
 });
+
+describe('ColorPicker — ariaLabel, ariaLabelledBy, and RTL', (): void => {
+  let fixture: ComponentFixture<ColorPicker>;
+
+  beforeEach(async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [ColorPicker],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ColorPicker);
+    fixture.componentRef.setInput('appendTo', 'self');
+    fixture.detectChanges();
+    await fixture.whenStable();
+  });
+
+  afterEach((): void => {
+    document.body.querySelectorAll('.ui-lib-colorpicker__panel').forEach((el: Element): void => {
+      el.remove();
+    });
+  });
+
+  function getTrigger(): HTMLButtonElement {
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-lib-colorpicker__trigger',
+    ) as HTMLButtonElement;
+  }
+
+  describe('ariaLabel / ariaLabelledBy inputs', (): void => {
+    it('uses i18n default when neither ariaLabel nor ariaLabelledBy is set', (): void => {
+      const trigger: HTMLButtonElement = getTrigger();
+      expect(trigger.getAttribute('aria-label')).toBeTruthy();
+      expect(trigger.getAttribute('aria-labelledby')).toBeNull();
+    });
+
+    it('overrides trigger aria-label via ariaLabel input', (): void => {
+      fixture.componentRef.setInput('ariaLabel', 'Background color');
+      fixture.detectChanges();
+      expect(getTrigger().getAttribute('aria-label')).toBe('Background color');
+    });
+
+    it('sets aria-labelledby and removes aria-label when ariaLabelledBy is provided', (): void => {
+      fixture.componentRef.setInput('ariaLabelledBy', 'external-label');
+      fixture.detectChanges();
+      const trigger: HTMLButtonElement = getTrigger();
+      expect(trigger.getAttribute('aria-labelledby')).toBe('external-label');
+      expect(trigger.getAttribute('aria-label')).toBeNull();
+    });
+  });
+
+  describe('RTL support', (): void => {
+    it('renders panel without errors in dir="rtl" context', async (): Promise<void> => {
+      const host: HTMLElement = fixture.nativeElement as HTMLElement;
+      host.setAttribute('dir', 'rtl');
+      fixture.componentRef.setInput('inline', true);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const panel: HTMLDivElement | null = host.querySelector(
+        '.ui-lib-colorpicker__panel',
+      ) as HTMLDivElement | null;
+      expect(panel).toBeTruthy();
+
+      const colorArea: HTMLDivElement | null = host.querySelector(
+        '.ui-lib-colorpicker__color-area',
+      ) as HTMLDivElement | null;
+      expect(colorArea).toBeTruthy();
+
+      host.removeAttribute('dir');
+    });
+
+    it('hue handle renders in dir="rtl" context', async (): Promise<void> => {
+      const host: HTMLElement = fixture.nativeElement as HTMLElement;
+      host.setAttribute('dir', 'rtl');
+      fixture.componentRef.setInput('inline', true);
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const hueHandle: HTMLElement | null = host.querySelector(
+        '.ui-lib-colorpicker__hue-handle',
+      ) as HTMLElement | null;
+      // Handle is present and rendered — inset-inline-start CSS ensures correct positioning
+      expect(hueHandle).toBeTruthy();
+
+      host.removeAttribute('dir');
+    });
+  });
+});

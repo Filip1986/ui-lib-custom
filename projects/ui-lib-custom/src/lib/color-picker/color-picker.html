@@ -6,7 +6,8 @@
     [attr.id]="triggerId()"
     [style.background-color]="displayColor()"
     [disabled]="isDisabled()"
-    [attr.aria-label]="i18n.translate('colorpicker.trigger', { color: displayColor() })"
+    [attr.aria-label]="resolvedTriggerAriaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
     aria-haspopup="dialog"
     [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
     [attr.aria-controls]="panelVisible() ? panelId() : null"
@@ -71,7 +72,7 @@
 
     <div class="ui-lib-colorpicker__inputs">
       <div class="ui-lib-colorpicker__input-group ui-lib-colorpicker__input-group--hex">
-        <label [attr.for]="hexInputId()" class="ui-lib-colorpicker__input-label">Hex</label>
+        <label [attr.for]="hexInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.hex') }}</label>
         <input
           [attr.id]="hexInputId()"
           type="text"
@@ -83,7 +84,7 @@
       </div>
       <div class="ui-lib-colorpicker__input-row">
         <div class="ui-lib-colorpicker__input-group">
-          <label [attr.for]="hueInputId()" class="ui-lib-colorpicker__input-label">H</label>
+          <label [attr.for]="hueInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.h') }}</label>
           <input
             [attr.id]="hueInputId()"
             type="number"
@@ -96,7 +97,7 @@
           />
         </div>
         <div class="ui-lib-colorpicker__input-group">
-          <label [attr.for]="satInputId()" class="ui-lib-colorpicker__input-label">S</label>
+          <label [attr.for]="satInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.s') }}</label>
           <input
             [attr.id]="satInputId()"
             type="number"
@@ -109,7 +110,7 @@
           />
         </div>
         <div class="ui-lib-colorpicker__input-group">
-          <label [attr.for]="brightInputId()" class="ui-lib-colorpicker__input-label">B</label>
+          <label [attr.for]="brightInputId()" class="ui-lib-colorpicker__input-label">{{ i18n.translate('colorpicker.label.b') }}</label>
           <input
             [attr.id]="brightInputId()"
             type="number"

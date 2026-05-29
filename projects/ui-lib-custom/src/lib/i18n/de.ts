@@ -125,6 +125,10 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'colorpicker.green.input': 'Grüner Kanal',
   'colorpicker.blue.input': 'Blauer Kanal',
   'colorpicker.alpha.input': 'Alphakanal',
+  'colorpicker.label.hex': 'Hex',
+  'colorpicker.label.h': 'F',
+  'colorpicker.label.s': 'S',
+  'colorpicker.label.b': 'H',
 
   // ── ProgressBar ───────────────────────────────────────────────────────────
   'progressbar.label': '{value}% abgeschlossen',
