@@ -1,4 +1,4 @@
-# ToggleSwitch
+﻿# ToggleSwitch
 
 **Selector:** `ui-lib-toggle-switch`
 **Package:** `ui-lib-custom/toggle-switch`
@@ -102,3 +102,6 @@ On each toggle, `LiveAnnouncerService` announces `"${label} on"` or `"${label} o
 </ui-lib-toggle-switch>
 ```
 
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.

@@ -1,4 +1,4 @@
-# Checkbox
+﻿# Checkbox
 
 **Selector:** `ui-lib-checkbox`
 **Package:** `ui-lib-custom/checkbox`
@@ -89,3 +89,7 @@ or
 - `--uilib-checkbox-transition-duration` controls checkbox motion timing.
 - Reduced motion is respected automatically:
   - `@media (prefers-reduced-motion: reduce) { --uilib-checkbox-transition-duration: 0ms; }`
+
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.

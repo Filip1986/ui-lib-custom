@@ -1,4 +1,4 @@
-# Tooltip
+﻿# Tooltip
 
 An attribute directive that attaches a floating label to any host element. The tooltip is triggered automatically by mouse or keyboard events and positioned with CSS `position: fixed`, so it escapes any `overflow: hidden` ancestor.
 
@@ -119,3 +119,7 @@ Override these on `:root` or a scoped container:
 | `--uilib-tooltip-z-index`         | `var(--uilib-z-tooltip,1060)`  | Stack order                    |
 | `--uilib-tooltip-shadow`          | `0 2px 8px …`                  | Box shadow                     |
 | `--uilib-tooltip-enter-duration`  | `140ms`                        | Transition duration            |
+
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.

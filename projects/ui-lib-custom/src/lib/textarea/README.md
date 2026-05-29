@@ -1,4 +1,4 @@
-# Textarea
+﻿# Textarea
 
 **Selector:** `ui-lib-textarea`
 **Package:** `ui-lib-custom/textarea`
@@ -96,3 +96,7 @@
 | `--uilib-textarea-error-color` | Error text color |
 | `--uilib-textarea-counter-color` | Counter text color |
 | `--uilib-textarea-resize-color` | Native resize-handle accent |
+
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.

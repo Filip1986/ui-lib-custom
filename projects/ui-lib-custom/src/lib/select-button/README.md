@@ -1,4 +1,4 @@
-# SelectButton
+﻿# SelectButton
 
 **Selector:** `ui-lib-select-button`
 **Package:** `ui-lib-custom/select-button`
@@ -106,3 +106,7 @@ The component adapts its ARIA role based on the `multiple` input:
 | `--uilib-select-button-shadow` | `none` | Button shadow |
 | `--uilib-select-button-disabled-opacity` | `0.6` | Opacity when disabled |
 | `--uilib-select-button-invalid-border` | `var(--uilib-color-danger-600)` | Border when invalid |
+
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.

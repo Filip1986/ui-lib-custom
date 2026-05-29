@@ -1,4 +1,4 @@
-# RadioButton
+﻿# RadioButton
 
 **Selector:** `ui-lib-radio-button`
 **Package:** `ui-lib-custom/radio-button`
@@ -149,3 +149,7 @@ public readonly deliveryCtrl = new FormControl('standard');
 | `--uilib-radio-button-bg-checked` | Background/border when selected |
 | `--uilib-radio-button-dot-color` | Inner dot color |
 | `--uilib-radio-button-focus-ring` | Focus-visible ring shadow |
+
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.

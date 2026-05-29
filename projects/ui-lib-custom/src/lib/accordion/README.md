@@ -1,4 +1,4 @@
-# Accordion
+﻿# Accordion
 
 **Selector:** `ui-lib-accordion` (container) / `ui-lib-accordion-panel` (child)
 **Package:** `ui-lib-custom/accordion`
@@ -64,3 +64,7 @@ Use `[accordionToggleIcon]` on an `<ng-template>` for a custom toggle icon; cont
   <ui-lib-accordion-panel header="Beta"  value="s2" [showIcon]="true">Beta body</ui-lib-accordion-panel>
 </ui-lib-accordion>
 ```
+
+## Internationalisation
+
+This component contains no translatable strings — all visible text is supplied by the consumer via inputs or content projection. No UiLibI18nService integration is needed.
