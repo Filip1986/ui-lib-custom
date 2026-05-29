@@ -28,7 +28,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
-- `CodeSnippet` -> ✅ integrated app-wide (demo build clean; all 36 demo pages migrated from app-code-preview)
+- `CodeSnippet` -> ✅ complete + scored (8.4/10 — multi-file tabs, ARIA tablist/tab/tabpanel, syntax highlighting, 25 unit tests; ESLint clean)
+- `SyntaxHighlighter` -> ✅ complete + scored (8.7/10 — zero-dep TS/HTML/SCSS/CSS tokenizer; highlight/tokenize/escapeForCode exports; full demo page)
 
 - `Accordion` -> ✅ complete + hardened (6-phase, score 9.0/10, 51 tests — 33 unit + 18 a11y)
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
@@ -82,6 +83,16 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-17 [CodeSnippet + SyntaxHighlighter — scored and closed out]
+Changed:
+  docs/COMPONENT_SCORES.md: added CodeSnippet (8.4/10) to Data Display table + New Components queue;
+    added SyntaxHighlighter (8.7/10) to Utilities & Directives table + New Components queue
+  projects/ui-lib-custom/src/lib/code-snippet/code-snippet.html: self-closing tag fix (ESLint warning)
+  AI_AGENT_CONTEXT.md: updated CodeSnippet + SyntaxHighlighter status entries
+State: COMPLETE — both components scored; ESLint clean; 25/25 unit tests passing
+Verification: npx eslint code-snippet/ syntax-highlighter/ --max-warnings 0 ✅; npx jest code-snippet (25/25 ✅)
+Next step: Broader Prompt 8 pass — bring any remaining sub-8.5 components up to gate; then Phase 4 (axe-core audit, Storybook, publish prep)
 
 Date: 2026-05-29 [feat(lib): ColorPicker API 9→10 + I18n 9→10 (9.3→9.5) ✅]
 Changed:
