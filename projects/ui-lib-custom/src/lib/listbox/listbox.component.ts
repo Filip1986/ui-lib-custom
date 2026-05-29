@@ -380,6 +380,7 @@ export class ListboxComponent implements ControlValueAccessor {
               value: childRecord[valueField] ?? child,
               disabled: Boolean(childRecord[disabledField]),
               optionIndex: optionIndex++,
+              option: child,
             } satisfies ListboxOptionRow);
           }
 
@@ -405,6 +406,7 @@ export class ListboxComponent implements ControlValueAccessor {
             value: record[valueField] ?? option,
             disabled: Boolean(record[disabledField]),
             optionIndex: optionIndex++,
+            option,
           } satisfies ListboxOptionRow);
         }
       }

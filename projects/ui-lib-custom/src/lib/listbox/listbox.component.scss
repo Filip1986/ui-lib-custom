@@ -84,8 +84,10 @@
     --uilib-listbox-empty-color: var(--uilib-text-muted-color, #6c757d);
     --uilib-listbox-empty-font-size: 0.875rem;
 
-    // Transition
-    --uilib-listbox-transition: background-color 0.15s ease, color 0.15s ease;
+    // Transition — backed by the global fast token so prefers-reduced-motion is auto-covered
+    --uilib-listbox-transition:
+      background-color var(--uilib-transition-fast, 150ms ease),
+      color var(--uilib-transition-fast, 150ms ease);
 
     // ==========================================================================
     // Host layout
@@ -454,9 +456,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-listbox__item,
-    .ui-lib-listbox__checkbox {
-      transition: none;
+    .ui-lib-listbox {
+      --uilib-listbox-transition: none;
     }
   }
 } // end @layer uilib.components

@@ -72,6 +72,8 @@ export interface ListboxOptionRow {
   disabled: boolean;
   /** Zero-based index among non-group rows (used for keyboard navigation). */
   optionIndex: number;
+  /** The raw option object from the consumer's `options` array. Use this in custom item templates to access all original option properties. */
+  option: unknown;
 }
 
 /**
@@ -111,10 +113,12 @@ export interface ListboxFilterEvent {
  * Context passed to the custom item template.
  */
 export interface ListboxItemContext {
-  /** The rendered option row (includes label, value, disabled, optionIndex). */
+  /** The rendered option row (includes label, value, disabled, optionIndex, option). */
   $implicit: ListboxOptionRow;
   /** Whether this option is currently selected. */
   selected: boolean;
+  /** The raw option object from the consumer's `options` array — convenience alias for `$implicit.option`. Use this to access all original option properties with their full shape. */
+  option: unknown;
 }
 
 /**

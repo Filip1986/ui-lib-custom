@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **8.91 / 10** across 102 components (updated 2026-05-29)
+- **Library-wide average:** **8.92 / 10** across 102 components (updated 2026-05-29)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -91,6 +91,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (Listbox hardening — 8.6→9.0):
+  listbox/listbox.types.ts: added `option: unknown` field to ListboxOptionRow (stores the raw
+    option object from consumer's `options` array); added `option: unknown` to ListboxItemContext
+    as a convenience alias for $implicit.option so item templates can access full option properties
+  listbox/listbox.component.ts: updated flatItems() computed to include `option` (the raw option
+    object) in each ListboxOptionRow push — both flat options path and grouped children path
+  listbox/listbox.component.html: added `option: item.option` to #itemTemplate ngTemplateOutletContext;
+    replaced hardcoded "Select all" visible text with {{ i18n.translate('listbox.select-all') }}
+  listbox/listbox.component.scss: changed --uilib-listbox-transition token from raw `0.15s ease`
+    values to `background-color var(--uilib-transition-fast, 150ms ease), color var(--uilib-transition-fast,
+    150ms ease)` (backed by global fast token); replaced element-list reduced-motion block with
+    token-zero: .ui-lib-listbox { --uilib-listbox-transition: none; }
+  listbox/README.md: rewrote content projection section with template context table; fixed input
+    nullability (emptyMessage/emptyFilterMessage/ariaLabel/ariaLabelledBy now show null defaults);
+    expanded CSS token table with defaults column (17 entries); added usage examples for custom
+    item template, group template, and option context access
+  docs/COMPONENT_SCORES.md: Listbox Perf/Comp/Polish/Feel all 8→9; avg 8.6→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
+Verification: npx eslint listbox/ (0w); ng build ui-lib-custom (0w)
+Next step: Alert (8.6) or Chip (8.6) — both have Perf/Theme/Polish/Feel=8 pattern (SCSS token gaps)
+
+Date: 2026-05-29
 Changed (Tree hardening — 8.6→9.0):
   tree/tree.scss: added --uilib-tree-transition token backed by var(--uilib-transition-fast, 150ms ease);
     replaced 5 var(--uilib-transition-duration, 150ms) ease usages across node-row/toggle/toggle-icon/
@@ -114,43 +136,6 @@ Changed (Tree hardening — 8.6→9.0):
 State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
 Verification: npx eslint tree/ (0w); ng build ui-lib-custom (0w)
 Next step: Check remaining sub-9.0 components (TreeSelect 8.7, Listbox 8.6, VirtualScroller 8.7 …)
-
-Date: 2026-05-29
-Changed (TreeTable hardening — 8.6→9.0):
-  tree-table/tree-table.component.scss: added --uilib-tree-table-transition token backed by
-    var(--uilib-transition-fast, 150ms ease); replaced 5 var(--uilib-transition-duration,150ms)ease
-    usages with the component token; added --uilib-tree-table-toggle-border-radius,
-    --uilib-tree-table-checkbox-border-radius, --uilib-tree-table-toggle-bg-active tokens;
-    replaced border-radius:2px with token on checkbox; added :active state on toggle button;
-    added --uilib-tree-table-row-selection-shadow token (default:none, bootstrap:inset shadow)
-    to fix raw rgba() in bootstrap variant rule body; fixed #86b7fe → var(--uilib-color-primary-light)
-    in bootstrap filter-border-focus token definition; replaced element-list reduced-motion block
-    with clean --uilib-tree-table-transition:0ms token zero
-  docs/COMPONENT_SCORES.md: TreeTable Perf/Theme/Polish/Feel all 8→9; avg 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
-Verification: npx eslint tree-table/ (0w); ng build ui-lib-custom (0w)
-Next step: Tree hardening (8.6 — same Perf/Theme/Polish/Feel pattern)
-
-Date: 2026-05-29
-Changed (Table hardening — 8.6→9.0):
-  table/table.component.scss: added --uilib-table-transition token backed by
-    var(--uilib-transition-fast, 150ms ease); replaced 6 hardcoded 0.12s/0.15s transition
-    values with the token; added --uilib-table-expander-border-radius token; replaced
-    border-radius:50% with token on expander-btn and var(--uilib-radius-full,9999px) on sort-badge;
-    added :active state on expander-btn; replaced !important reduced-motion block with clean
-    --uilib-table-transition:0ms token zero
-  table/table.component.ts: added rowClass functional input
-    (row: unknown, index: number) => string | null; added bodyTemplateContext computed
-    ({$implicit: displayedRows, filteredRows: processedValue, allRows: value}); added
-    resolveRowClass() public helper method
-  table/table.component.html: replaced class="ui-lib-table__row" + [class.*] bindings with
-    [class]="resolveRowClass(row, rowIndex)"; added ngTemplateOutletContext to bodyTemplate
-  table/README.md: added rowClass to inputs table; expanded content projection section
-    with per-directive context table; expanded CSS custom properties to 19 entries
-  docs/COMPONENT_SCORES.md: Table Perf/Comp/Polish/Feel all 8→9; avg 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
-Verification: npx eslint table/ (0w); ng build ui-lib-custom (0w)
-Next step: TreeTable hardening (8.6) — Theme=8, Polish=8, Feel=8; likely same SCSS token pattern
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

@@ -42,7 +42,7 @@
           (change)="toggleAll($event)"
           [attr.aria-label]="i18n.translate('listbox.select-all')"
         />
-        <span class="ui-lib-listbox__toggle-all-label">Select all</span>
+        <span class="ui-lib-listbox__toggle-all-label">{{ i18n.translate('listbox.select-all') }}</span>
       </label>
     </div>
   }
@@ -142,7 +142,7 @@
               @if (itemTemplate) {
                 <ng-container
                   [ngTemplateOutlet]="itemTemplate"
-                  [ngTemplateOutletContext]="{ $implicit: item, selected: isSelected(item.value) }"
+                  [ngTemplateOutletContext]="{ $implicit: item, selected: isSelected(item.value), option: item.option }"
                 />
               } @else {
                 <span class="ui-lib-listbox__item-label">{{ item.label }}</span>
