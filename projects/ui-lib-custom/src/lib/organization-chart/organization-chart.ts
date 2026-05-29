@@ -105,10 +105,10 @@ export class OrganizationChart implements OrganizationChartContext {
     input<OrganizationChartVariant | null>(null);
 
   /** Extra CSS class applied to the host element. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible label for the tree. Applied to the root tree element. Defaults to i18n fallback. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -156,7 +156,7 @@ export class OrganizationChart implements OrganizationChartContext {
 
   /** Resolved accessible label — consumer value takes priority; falls back to i18n key. */
   public readonly resolvedAriaLabel: Signal<string> = computed<string>(
-    (): string => this.ariaLabel() || this.i18n.translate('organization-chart.label'),
+    (): string => this.ariaLabel() ?? this.i18n.translate('organization-chart.label'),
   );
 
   /** Map from node `type` → registered `TemplateRef`. */

@@ -1,18 +1,31 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
   computed,
   inject,
   input,
   ViewEncapsulation,
   type InputSignal,
   type Signal,
+  type TemplateRef,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
-import type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './progress-bar.types';
+import type {
+  ProgressBarLabelContext,
+  ProgressBarMode,
+  ProgressBarSize,
+  ProgressBarVariant,
+} from './progress-bar.types';
 
-export type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './progress-bar.types';
+export type {
+  ProgressBarLabelContext,
+  ProgressBarMode,
+  ProgressBarSize,
+  ProgressBarVariant,
+} from './progress-bar.types';
 
 /**
  * ProgressBar — displays a horizontal bar indicating progress or loading state.
@@ -28,6 +41,7 @@ export type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './pro
 @Component({
   selector: 'ui-lib-progress-bar',
   standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './progress-bar.html',
   styleUrl: './progress-bar.scss',
   host: {
@@ -95,6 +109,23 @@ export class ProgressBar {
    */
   public readonly completionLabel: InputSignal<string | null> = input<string | null>(null);
 
+  /**
+   * Optional typed template for the label rendered inside the fill bar.
+   *
+   * ```html
+   * <ui-lib-progress-bar [value]="75">
+   *   <ng-template #labelTemplate let-value="value" let-label="displayLabel">
+   *     {{ label }} done
+   *   </ng-template>
+   * </ui-lib-progress-bar>
+   * ```
+   *
+   * Context: `{ $implicit: number, value: number, displayLabel: string }`.
+   * When not provided, the default percentage / `label` input text is used.
+   */
+  @ContentChild('labelTemplate')
+  public readonly labelTemplate: TemplateRef<ProgressBarLabelContext> | null = null;
+
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ProgressBarVariant> = computed<ProgressBarVariant>(
     (): ProgressBarVariant => this.variant() ?? this.themeConfig.variant(),
@@ -135,6 +166,15 @@ export class ProgressBar {
     }
     return `${Math.round(this.clampedValue())}%`;
   });
+
+  /** Template context object passed to the `#labelTemplate` slot. */
+  public readonly labelContext: Signal<ProgressBarLabelContext> = computed<ProgressBarLabelContext>(
+    (): ProgressBarLabelContext => ({
+      $implicit: this.clampedValue(),
+      value: this.clampedValue(),
+      displayLabel: this.displayLabel(),
+    }),
+  );
 
   /**
    * `aria-valuenow` value.

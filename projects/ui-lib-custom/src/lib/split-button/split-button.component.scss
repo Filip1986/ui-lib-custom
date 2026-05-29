@@ -66,6 +66,11 @@
       transparent
     );
     --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
+
+    // Menu / loading animation tokens — set to none by prefers-reduced-motion
+    --uilib-split-button-menu-animation: uilib-split-button-menu-enter 0.15s ease-out;
+    --uilib-split-button-loading-animation: uilib-split-button-spin 0.8s linear infinite;
+    --uilib-split-button-menu-item-transition: var(--uilib-transition-fast, 150ms ease);
   }
 
   ui-lib-split-button .ui-lib-split-button__container {
@@ -93,14 +98,20 @@
   }
 
   ui-lib-split-button .ui-lib-split-button__default-button {
-    border-radius: var(--uilib-split-button-radius) 0 0 var(--uilib-split-button-radius);
+    border-start-start-radius: var(--uilib-split-button-radius);
+    border-end-start-radius: var(--uilib-split-button-radius);
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
     border-inline-end: var(--uilib-border-width-1, 0.0625rem) solid
       var(--uilib-split-button-divider-color);
     padding: var(--uilib-split-button-padding);
   }
 
   ui-lib-split-button .ui-lib-split-button__menu-button {
-    border-radius: 0 var(--uilib-split-button-radius) var(--uilib-split-button-radius) 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-start-end-radius: var(--uilib-split-button-radius);
+    border-end-end-radius: var(--uilib-split-button-radius);
     padding: var(--uilib-split-button-padding);
     min-inline-size: calc(var(--uilib-split-button-font-size) * 2.25);
   }
@@ -147,7 +158,7 @@
     border-radius: var(--uilib-split-button-menu-radius);
     box-shadow: var(--uilib-split-button-menu-shadow);
     z-index: var(--uilib-split-button-menu-z);
-    animation: uilib-split-button-menu-enter var(--uilib-transition-fast, 0.2s ease) ease-out;
+    animation: var(--uilib-split-button-menu-animation);
   }
 
   ui-lib-split-button .ui-lib-split-button__menu-item {
@@ -161,7 +172,7 @@
     border: none;
     border-radius: 0;
     padding: var(--uilib-split-button-menu-item-padding);
-    transition: background-color var(--uilib-transition-fast, 0.2s ease);
+    transition: background-color var(--uilib-split-button-menu-item-transition);
     cursor: pointer;
   }
 
@@ -182,7 +193,7 @@
   }
 
   ui-lib-split-button .ui-lib-split-button__loading-icon {
-    animation: uilib-split-button-spin 0.8s linear infinite;
+    animation: var(--uilib-split-button-loading-animation);
   }
 
   ui-lib-split-button.ui-lib-split-button--primary {
@@ -383,16 +394,13 @@
     }
   }
 
+  // ---- Reduced motion — token-zero ----------------------------------------
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-split-button .ui-lib-split-button__default-button,
-    ui-lib-split-button .ui-lib-split-button__menu-button,
-    ui-lib-split-button .ui-lib-split-button__menu-item {
-      transition: none;
-    }
-
-    ui-lib-split-button .ui-lib-split-button__menu,
-    ui-lib-split-button .ui-lib-split-button__loading-icon {
-      animation: none;
+    ui-lib-split-button {
+      --uilib-split-button-transition: none;
+      --uilib-split-button-menu-animation: none;
+      --uilib-split-button-loading-animation: none;
+      --uilib-split-button-menu-item-transition: 0ms;
     }
   }
 } // end @layer uilib.components

@@ -1,2 +1,7 @@
 export { ProgressBar } from './progress-bar';
-export type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './progress-bar.types';
+export type {
+  ProgressBarLabelContext,
+  ProgressBarMode,
+  ProgressBarSize,
+  ProgressBarVariant,
+} from './progress-bar.types';
