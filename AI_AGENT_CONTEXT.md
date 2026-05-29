@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **8.92 / 10** across 102 components (updated 2026-05-29)
+- **Library-wide average:** **8.93 / 10** across 102 components (updated 2026-05-29)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -91,6 +91,30 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (Alert + Chip hardening — both 8.6→9.0):
+  alert/alert.scss: complete rewrite — added severity-based token system (bg/fg/border per
+    info/success/warning/error); all 4 severity classes now produce distinct colour schemes via
+    --uilib-alert-{severity}-{property} tokens; added bootstrap-variant severity overrides with
+    Bootstrap's canonical palette hex; added close button --uilib-alert-close-btn-bg-hover/active
+    tokens + hover/active states + transition backed by --uilib-alert-transition:
+    var(--uilib-transition-fast); replaced single transition:none reduced-motion block with
+    token-zero --uilib-alert-transition:0ms
+  alert/README.md: expanded CSS tokens table from 2 to 19 entries with defaults column
+  chip/chip.scss: replaced non-standard --uilib-transition-base fallback with
+    var(--uilib-transition-fast, 150ms ease) on --uilib-chip-transition; added
+    --uilib-chip-remove-transition token; replaced border-radius:50% on image and remove-button
+    with --uilib-chip-image-border-radius/--uilib-chip-remove-border-radius tokens (both backed by
+    var(--uilib-radius-full)); added --uilib-chip-remove-bg-active token + :active state on
+    remove-button; added --uilib-chip-shadow token to replace raw rgba in material variant rule body;
+    replaced element-list reduced-motion block with token-zero
+  chip/README.md: expanded CSS variables table from 12 to 18 entries with defaults column
+  docs/COMPONENT_SCORES.md: Alert Perf/Theme/Polish/Feel all 8→9 (8.6→9.0);
+    Chip Perf/Theme/Polish/Feel all 8→9 (8.6→9.0)
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
+Verification: npx eslint alert/ chip/ (0w); ng build ui-lib-custom (0w)
+Next step: Remaining 8.6/8.7 components — TreeSelect/VirtualScroller/Message/Skeleton/etc.
+
+Date: 2026-05-29
 Changed (Listbox hardening — 8.6→9.0):
   listbox/listbox.types.ts: added `option: unknown` field to ListboxOptionRow (stores the raw
     option object from consumer's `options` array); added `option: unknown` to ListboxItemContext
@@ -111,31 +135,6 @@ Changed (Listbox hardening — 8.6→9.0):
 State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
 Verification: npx eslint listbox/ (0w); ng build ui-lib-custom (0w)
 Next step: Alert (8.6) or Chip (8.6) — both have Perf/Theme/Polish/Feel=8 pattern (SCSS token gaps)
-
-Date: 2026-05-29
-Changed (Tree hardening — 8.6→9.0):
-  tree/tree.scss: added --uilib-tree-transition token backed by var(--uilib-transition-fast, 150ms ease);
-    replaced 5 var(--uilib-transition-duration, 150ms) ease usages across node-row/toggle/toggle-icon/
-    checkbox/filter-input with the component token; added --uilib-tree-toggle-border-radius token
-    (var(--uilib-radius-full, 9999px)) to replace border-radius:50% on toggle button; added
-    --uilib-tree-checkbox-border-radius token (var(--uilib-radius-sm, 3px)) to replace raw 3px;
-    added --uilib-tree-node-selection-shadow token (default:none, bootstrap:0 0 0 2px rgba(...,0.25))
-    to fix raw rgba() in bootstrap variant rule body; fixed #86b7fe → var(--uilib-color-primary-light)
-    in bootstrap filter-border-focus token definition; replaced var(--uilib-color-primary, #0d6efd) in
-    bootstrap node-color/checkbox tokens; added :active state on toggle button; replaced element-list
-    reduced-motion block with clean --uilib-tree-transition:0ms token zero
-  tree/tree.ts: added emptyMessage InputSignal<string|null>(null); added resolvedEmptyMessage
-    computed<string> using i18n.translate('tree.empty') fallback
-  tree/tree.html: replaced hardcoded "No items to display" with {{ resolvedEmptyMessage() }}
-  i18n/en.ts, de.ts, fr.ts, es.ts: added 'tree.empty' key in all 4 locales
-  tree/README.md: expanded CSS custom properties table from 10 to 27 entries with accurate defaults;
-    updated inputs table with emptyMessage, hostId, corrected nullability; updated Accessibility
-    section noting token-zero reduced-motion and localizable empty state; added per-type template
-    and emptyMessage usage examples
-  docs/COMPONENT_SCORES.md: Tree A11y/Docs/Polish/Feel all 8→9; avg 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
-Verification: npx eslint tree/ (0w); ng build ui-lib-custom (0w)
-Next step: Check remaining sub-9.0 components (TreeSelect 8.7, Listbox 8.6, VirtualScroller 8.7 …)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

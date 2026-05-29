@@ -1,66 +1,213 @@
 @layer uilib.components {
-  ui-lib-alert {
-    --uilib-alert-bg: var(--uilib-surface);
-    --uilib-alert-fg: currentColor;
+  // =============================================================================
+  // Alert — design tokens
+  // =============================================================================
 
+  ui-lib-alert {
+    // ---- Surface (info severity as default) --------------------------------
+    --uilib-alert-bg: var(--uilib-color-info-50, #eff6ff);
+    --uilib-alert-fg: var(--uilib-color-info-700, #1d4ed8);
+    --uilib-alert-border: 1px solid var(--uilib-color-info-300, #93c5fd);
+    --uilib-alert-border-radius: var(--uilib-radius-md, 8px);
+    --uilib-alert-shadow: none;
+    --uilib-alert-padding: var(--uilib-inline-md, 1rem);
+    --uilib-alert-gap: var(--uilib-inline-sm, 0.5rem);
+
+    // ---- Severity-specific color tokens ------------------------------------
+    --uilib-alert-info-bg: var(--uilib-color-info-50, #eff6ff);
+    --uilib-alert-info-fg: var(--uilib-color-info-700, #1d4ed8);
+    --uilib-alert-info-border: 1px solid var(--uilib-color-info-300, #93c5fd);
+
+    --uilib-alert-success-bg: var(--uilib-color-success-50, #f0fdf4);
+    --uilib-alert-success-fg: var(--uilib-color-success-700, #15803d);
+    --uilib-alert-success-border: 1px solid var(--uilib-color-success-300, #86efac);
+
+    --uilib-alert-warning-bg: var(--uilib-color-warning-50, #fffbeb);
+    --uilib-alert-warning-fg: var(--uilib-color-warning-700, #b45309);
+    --uilib-alert-warning-border: 1px solid var(--uilib-color-warning-300, #fcd34d);
+
+    --uilib-alert-error-bg: var(--uilib-color-danger-50, #fef2f2);
+    --uilib-alert-error-fg: var(--uilib-color-danger-700, #b91c1c);
+    --uilib-alert-error-border: 1px solid var(--uilib-color-danger-300, #fca5a5);
+
+    // ---- Close button ------------------------------------------------------
+    --uilib-alert-close-btn-bg: transparent;
+    --uilib-alert-close-btn-bg-hover: rgba(0, 0, 0, 0.08);
+    --uilib-alert-close-btn-bg-active: rgba(0, 0, 0, 0.14);
+    --uilib-alert-close-btn-border-radius: var(--uilib-radius-sm, 4px);
+
+    // ---- Motion ------------------------------------------------------------
+    --uilib-alert-transition: var(--uilib-transition-fast, 150ms ease);
+
+    // ---- Host layout -------------------------------------------------------
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: var(--uilib-inline-sm, 0.5rem);
+    gap: var(--uilib-alert-gap);
     align-items: center;
-    padding: var(--uilib-inline-md, 1rem);
-    border-radius: var(--uilib-radius-md);
-    background-color: var(--uilib-alert-bg, var(--uilib-surface));
-    color: var(--uilib-alert-fg, currentColor);
+    padding: var(--uilib-alert-padding);
+    border-radius: var(--uilib-alert-border-radius);
+    background-color: var(--uilib-alert-bg);
+    color: var(--uilib-alert-fg);
+    border: var(--uilib-alert-border);
+    box-shadow: var(--uilib-alert-shadow);
+
+    // ---- Severity modifiers ------------------------------------------------
+
+    &.ui-lib-alert--info {
+      --uilib-alert-bg: var(--uilib-alert-info-bg);
+      --uilib-alert-fg: var(--uilib-alert-info-fg);
+      --uilib-alert-border: var(--uilib-alert-info-border);
+    }
+
+    &.ui-lib-alert--success {
+      --uilib-alert-bg: var(--uilib-alert-success-bg);
+      --uilib-alert-fg: var(--uilib-alert-success-fg);
+      --uilib-alert-border: var(--uilib-alert-success-border);
+    }
+
+    &.ui-lib-alert--warning {
+      --uilib-alert-bg: var(--uilib-alert-warning-bg);
+      --uilib-alert-fg: var(--uilib-alert-warning-fg);
+      --uilib-alert-border: var(--uilib-alert-warning-border);
+    }
+
+    &.ui-lib-alert--error {
+      --uilib-alert-bg: var(--uilib-alert-error-bg);
+      --uilib-alert-fg: var(--uilib-alert-error-fg);
+      --uilib-alert-border: var(--uilib-alert-error-border);
+    }
+
+    // ---- Variant: material -------------------------------------------------
 
     &.ui-lib-alert--material {
-      --uilib-alert-bg: var(--uilib-surface);
+      --uilib-alert-border-radius: var(--uilib-radius-md, 8px);
+      --uilib-alert-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
+
+    // ---- Variant: bootstrap ------------------------------------------------
 
     &.ui-lib-alert--bootstrap {
-      --uilib-alert-bg: var(--uilib-color-primary-50);
+      --uilib-alert-border-radius: var(--uilib-radius-sm, 4px);
+
+      // Bootstrap uses its own semantic palette overrides
+      &.ui-lib-alert--info {
+        --uilib-alert-bg: #cff4fc;
+        --uilib-alert-fg: #055160;
+        --uilib-alert-border: 1px solid #b6effb;
+      }
+      &.ui-lib-alert--success {
+        --uilib-alert-bg: #d1e7dd;
+        --uilib-alert-fg: #0a3622;
+        --uilib-alert-border: 1px solid #a3cfbb;
+      }
+      &.ui-lib-alert--warning {
+        --uilib-alert-bg: #fff3cd;
+        --uilib-alert-fg: #664d03;
+        --uilib-alert-border: 1px solid #ffe69c;
+      }
+      &.ui-lib-alert--error {
+        --uilib-alert-bg: #f8d7da;
+        --uilib-alert-fg: #58151c;
+        --uilib-alert-border: 1px solid #f1aeb5;
+      }
     }
 
+    // ---- Variant: minimal --------------------------------------------------
+
     &.ui-lib-alert--minimal {
-      border: 1px solid var(--uilib-border, currentColor);
+      --uilib-alert-border-radius: 0;
+      --uilib-alert-shadow: none;
+      --uilib-alert-border: none;
+      border-block-start: 3px solid currentColor;
+      background-color: transparent;
     }
   }
+
+  // ---- Icon slot -----------------------------------------------------------
 
   ui-lib-alert .ui-lib-alert__icon {
     color: inherit;
   }
 
+  // ---- Dismiss button ------------------------------------------------------
+
   ui-lib-alert .ui-lib-alert__close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 0.25rem;
     border: 0;
-    padding: 0;
-    background: transparent;
+    border-radius: var(--uilib-alert-close-btn-border-radius);
+    background: var(--uilib-alert-close-btn-bg);
     cursor: pointer;
     color: inherit;
+    transition: background-color var(--uilib-alert-transition);
+
+    &:hover {
+      background: var(--uilib-alert-close-btn-bg-hover);
+    }
+
+    &:active {
+      background: var(--uilib-alert-close-btn-bg-active);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-color-primary-500, currentColor);
+      outline-offset: 2px;
+    }
   }
 
-  ui-lib-alert .ui-lib-alert__close:focus-visible {
-    outline: 2px solid var(--uilib-color-primary-500, currentColor);
-    outline-offset: 2px;
-  }
+  // ---- Dark-mode overrides -------------------------------------------------
 
   [data-theme='dark'] ui-lib-alert {
-    --uilib-alert-bg: var(--uilib-surface-dark-2);
-    --uilib-alert-fg: var(--uilib-text-dark-primary);
+    --uilib-alert-info-bg: rgba(29, 78, 216, 0.15);
+    --uilib-alert-info-fg: var(--uilib-color-info-300, #93c5fd);
+    --uilib-alert-info-border: 1px solid rgba(29, 78, 216, 0.4);
+
+    --uilib-alert-success-bg: rgba(21, 128, 61, 0.15);
+    --uilib-alert-success-fg: var(--uilib-color-success-300, #86efac);
+    --uilib-alert-success-border: 1px solid rgba(21, 128, 61, 0.4);
+
+    --uilib-alert-warning-bg: rgba(180, 83, 9, 0.15);
+    --uilib-alert-warning-fg: var(--uilib-color-warning-300, #fcd34d);
+    --uilib-alert-warning-border: 1px solid rgba(180, 83, 9, 0.4);
+
+    --uilib-alert-error-bg: rgba(185, 28, 28, 0.15);
+    --uilib-alert-error-fg: var(--uilib-color-danger-300, #fca5a5);
+    --uilib-alert-error-border: 1px solid rgba(185, 28, 28, 0.4);
+
+    --uilib-alert-close-btn-bg-hover: rgba(255, 255, 255, 0.1);
+    --uilib-alert-close-btn-bg-active: rgba(255, 255, 255, 0.18);
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']):not([data-theme]) ui-lib-alert {
-      --uilib-alert-bg: var(--uilib-surface-dark-2);
-      --uilib-alert-fg: var(--uilib-text-dark-primary);
+      --uilib-alert-info-bg: rgba(29, 78, 216, 0.15);
+      --uilib-alert-info-fg: var(--uilib-color-info-300, #93c5fd);
+      --uilib-alert-info-border: 1px solid rgba(29, 78, 216, 0.4);
+
+      --uilib-alert-success-bg: rgba(21, 128, 61, 0.15);
+      --uilib-alert-success-fg: var(--uilib-color-success-300, #86efac);
+      --uilib-alert-success-border: 1px solid rgba(21, 128, 61, 0.4);
+
+      --uilib-alert-warning-bg: rgba(180, 83, 9, 0.15);
+      --uilib-alert-warning-fg: var(--uilib-color-warning-300, #fcd34d);
+      --uilib-alert-warning-border: 1px solid rgba(180, 83, 9, 0.4);
+
+      --uilib-alert-error-bg: rgba(185, 28, 28, 0.15);
+      --uilib-alert-error-fg: var(--uilib-color-danger-300, #fca5a5);
+      --uilib-alert-error-border: 1px solid rgba(185, 28, 28, 0.4);
+
+      --uilib-alert-close-btn-bg-hover: rgba(255, 255, 255, 0.1);
+      --uilib-alert-close-btn-bg-active: rgba(255, 255, 255, 0.18);
     }
   }
 
+  // ---- Reduced-motion token-zero -------------------------------------------
+
   @media (prefers-reduced-motion: reduce) {
     ui-lib-alert {
-      transition: none;
-      animation: none;
+      --uilib-alert-transition: 0ms;
     }
   }
 } // end @layer uilib.components

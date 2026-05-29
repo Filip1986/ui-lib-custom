@@ -18,12 +18,13 @@
     --uilib-chip-image-size: 1.5rem;
     --uilib-chip-remove-bg: transparent;
     --uilib-chip-remove-color: inherit;
+    --uilib-chip-shadow: none;
     --uilib-chip-remove-bg-hover: rgba(255, 255, 255, 0.2);
-    --uilib-chip-transition: var(
-      --uilib-transition-base,
-      background-color 0.2s ease,
-      opacity 0.2s ease
-    );
+    --uilib-chip-remove-bg-active: rgba(255, 255, 255, 0.32);
+    --uilib-chip-image-border-radius: var(--uilib-radius-full, 9999px);
+    --uilib-chip-remove-border-radius: var(--uilib-radius-full, 9999px);
+    --uilib-chip-transition: var(--uilib-transition-fast, 150ms ease);
+    --uilib-chip-remove-transition: var(--uilib-transition-fast, 150ms ease);
 
     // sm
     --uilib-chip-padding-y-sm: 0.125rem;
@@ -55,7 +56,9 @@
     font-size: var(--uilib-chip-font-size);
     font-weight: var(--uilib-chip-font-weight);
     font-family: var(--uilib-font-ui, inherit);
-    transition: var(--uilib-chip-transition);
+    transition:
+      background-color var(--uilib-chip-transition),
+      opacity var(--uilib-chip-transition);
     white-space: nowrap;
     user-select: none;
     vertical-align: middle;
@@ -64,7 +67,7 @@
     &__image {
       width: var(--uilib-chip-image-size);
       height: var(--uilib-chip-image-size);
-      border-radius: 50%;
+      border-radius: var(--uilib-chip-image-border-radius);
       object-fit: cover;
       flex-shrink: 0;
     }
@@ -86,16 +89,20 @@
       height: 1.25em;
       padding: 0;
       border: none;
-      border-radius: 50%;
+      border-radius: var(--uilib-chip-remove-border-radius);
       background: var(--uilib-chip-remove-bg);
       color: var(--uilib-chip-remove-color);
       cursor: pointer;
-      transition: background-color 0.15s ease;
+      transition: background-color var(--uilib-chip-remove-transition);
       flex-shrink: 0;
       line-height: 1;
 
       &:hover {
         background: var(--uilib-chip-remove-bg-hover);
+      }
+
+      &:active {
+        background: var(--uilib-chip-remove-bg-active);
       }
 
       &:focus-visible {
@@ -136,7 +143,8 @@
       --uilib-chip-color: #ffffff;
       --uilib-chip-border: none;
       --uilib-chip-border-radius: var(--uilib-radius-full, 9999px);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --uilib-chip-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--uilib-chip-shadow);
     }
 
     // ---- Variant: bootstrap ------------------------------------------
@@ -180,14 +188,11 @@
     }
   }
 
-  // ---- Reduced motion -----------------------------------------------------
+  // ---- Reduced motion — token-zero ----------------------------------------
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-chip {
-      transition: none;
-
-      &__remove-button {
-        transition: none;
-      }
+    ui-lib-chip {
+      --uilib-chip-transition: 0ms;
+      --uilib-chip-remove-transition: 0ms;
     }
   }
 } // end @layer uilib.components
