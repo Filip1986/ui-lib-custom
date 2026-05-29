@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { highlight, escapeForCode } from 'ui-lib-custom/syntax-highlighter';
 import type { SyntaxLanguage } from 'ui-lib-custom/syntax-highlighter';
 import type {
@@ -109,12 +110,20 @@ export class CodeSnippet {
   public readonly maxHeight: InputSignal<string | null> = input<string | null>(null);
   /** Extra CSS classes forwarded to the root element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
+  /**
+   * Custom ARIA label for the code region. Overrides the auto-generated i18n label.
+   * Ignored when `ariaLabelledBy` is also provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** ID(s) of element(s) that label this code region (`aria-labelledby`). Takes precedence over `ariaLabel`. */
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
   /** Emitted after the code is successfully copied to the clipboard. */
   public readonly codeCopied: OutputEmitterRef<void> = output<void>();
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   private readonly sanitizer: DomSanitizer = inject(DomSanitizer);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Index of the currently active tab. */
   public readonly activeTabIndex: WritableSignal<number> = signal<number>(0);
@@ -141,7 +150,7 @@ export class CodeSnippet {
 
   /** Whether more than one tab is present (controls interactive tab styling). */
   public readonly isMultiTab: Signal<boolean> = computed<boolean>(
-    (): boolean => this.effectiveFiles().length > 1
+    (): boolean => this.effectiveFiles().length > 1,
   );
 
   /** The active file, clamped so it never goes out of bounds when the file list changes. */
@@ -152,31 +161,51 @@ export class CodeSnippet {
       // effectiveFiles always has ≥1 entry; non-null assertion is safe after clamping
 
       return fileList[index]!;
-    }
+    },
   );
 
   // ── Derived display properties (all scoped to the active file) ─────────────
 
   public readonly effectiveVariant: Signal<CodeSnippetVariant> = computed<CodeSnippetVariant>(
-    (): CodeSnippetVariant => this.variant() ?? this.themeService.variant()
+    (): CodeSnippetVariant => this.variant() ?? this.themeService.variant(),
   );
 
   public readonly lines: Signal<readonly string[]> = computed<readonly string[]>(
-    (): readonly string[] => this.activeFile().code.split('\n')
+    (): readonly string[] => this.activeFile().code.split('\n'),
   );
 
   public readonly languageIcon: Signal<string | null> = computed<string | null>(
-    (): string | null => LANGUAGE_ICONS[this.activeFile().language]
+    (): string | null => LANGUAGE_ICONS[this.activeFile().language],
   );
 
-  public readonly accessibleLabel: Signal<string> = computed<string>((): string => {
-    const fileList: readonly CodeSnippetFile[] = this.effectiveFiles();
-    if (fileList.length > 1) return `Code snippet with ${fileList.length} file tabs`;
-    const file: CodeSnippetFile = this.activeFile();
-    return file.filename !== LANGUAGE_LABELS[file.language]
-      ? `Code snippet: ${file.filename}`
-      : `${LANGUAGE_LABELS[file.language]} code snippet`;
-  });
+  /**
+   * Resolved `aria-label` for the code region. Returns `null` when `ariaLabelledBy` is set
+   * (so only one labelling mechanism is active at a time). Falls back to the i18n default.
+   */
+  public readonly accessibleLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      if (this.ariaLabelledBy() !== null) return null;
+      const custom: string | null = this.ariaLabel();
+      if (custom !== null) return custom;
+      const fileList: readonly CodeSnippetFile[] = this.effectiveFiles();
+      if (fileList.length > 1) {
+        return this.i18n.translate('code-snippet.label.multi-file', { count: fileList.length });
+      }
+      const file: CodeSnippetFile = this.activeFile();
+      return file.filename !== LANGUAGE_LABELS[file.language]
+        ? this.i18n.translate('code-snippet.label.file', { filename: file.filename })
+        : this.i18n.translate('code-snippet.label.language', {
+            language: LANGUAGE_LABELS[file.language],
+          });
+    },
+  );
+
+  /** Resolved `aria-label` for the copy button, reactive to both copy state and active locale. */
+  public readonly copyAriaLabel: Signal<string> = computed<string>((): string =>
+    this.copied()
+      ? this.i18n.translate('code-snippet.copied')
+      : this.i18n.translate('code-snippet.copy'),
+  );
 
   public readonly rootClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [

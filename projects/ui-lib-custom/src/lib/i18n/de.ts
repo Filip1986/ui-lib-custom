@@ -338,4 +338,11 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'data-grid.sort-desc': 'Absteigend sortieren',
   'data-grid.sort-none': 'Sortierung entfernen',
   'data-grid.empty': 'Keine Einträge gefunden.',
+
+  // ── CodeSnippet ───────────────────────────────────────────────────────────
+  'code-snippet.copy': 'Code in Zwischenablage kopieren',
+  'code-snippet.copied': 'Kopiert!',
+  'code-snippet.label.language': '{language}-Codeausschnitt',
+  'code-snippet.label.file': 'Codeausschnitt: {filename}',
+  'code-snippet.label.multi-file': 'Codeausschnitt mit {count} Dateien',
 };

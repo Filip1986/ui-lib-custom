@@ -1,4 +1,9 @@
-<div [class]="rootClasses()" role="region" [attr.aria-label]="accessibleLabel()">
+<div
+  [class]="rootClasses()"
+  role="region"
+  [attr.aria-label]="accessibleLabel()"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+>
   <!-- Header: window chrome, tab bar, copy button -->
   <div class="ui-lib-code-snippet__header">
     @if (showWindowChrome()) {
@@ -45,7 +50,7 @@
       <button
         type="button"
         class="ui-lib-code-snippet__copy-btn"
-        [attr.aria-label]="copied() ? 'Copied!' : 'Copy code to clipboard'"
+        [attr.aria-label]="copyAriaLabel()"
         [attr.aria-pressed]="copied()"
         (click)="onCopy()"
       >

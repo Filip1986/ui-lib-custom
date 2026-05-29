@@ -7,6 +7,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { CodeSnippet } from './code-snippet';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   CodeSnippetLanguage,
   CodeSnippetVariant,
@@ -17,14 +18,14 @@ import type {
 
 function query<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAll<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -46,6 +47,8 @@ function queryAll<T extends HTMLElement>(
       [variant]="variant()"
       [size]="size()"
       [maxHeight]="maxHeight()"
+      [ariaLabel]="ariaLabel()"
+      [ariaLabelledBy]="ariaLabelledBy()"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,6 +65,8 @@ class TestHostComponent {
     signal<CodeSnippetVariant | null>(null);
   public readonly size: WritableSignal<CodeSnippetSize> = signal<CodeSnippetSize>('md');
   public readonly maxHeight: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
 }
 
 // ─── Suite ────────────────────────────────────────────────────────────────────
@@ -90,7 +95,7 @@ describe('CodeSnippet', (): void => {
   it('renders the code content', (): void => {
     const codeElement: HTMLElement | null = query<HTMLElement>(
       fixture,
-      '.ui-lib-code-snippet__code'
+      '.ui-lib-code-snippet__code',
     );
     expect(codeElement).not.toBeNull();
     expect((codeElement as HTMLElement).textContent).toContain('const x = 1;');
@@ -99,7 +104,7 @@ describe('CodeSnippet', (): void => {
   it('renders the correct number of line numbers', (): void => {
     const lineNumbers: HTMLElement[] = queryAll<HTMLElement>(
       fixture,
-      '.ui-lib-code-snippet__line-number'
+      '.ui-lib-code-snippet__line-number',
     );
     expect(lineNumbers.length).toBe(2);
   });
@@ -109,7 +114,7 @@ describe('CodeSnippet', (): void => {
     fixture.detectChanges();
     const lineNumbers: HTMLElement[] = queryAll<HTMLElement>(
       fixture,
-      '.ui-lib-code-snippet__line-number'
+      '.ui-lib-code-snippet__line-number',
     );
     expect(lineNumbers.length).toBe(3);
   });
@@ -237,7 +242,7 @@ describe('CodeSnippet', (): void => {
   it('marks line numbers as aria-hidden', (): void => {
     const lineNumbers: HTMLElement | null = query<HTMLElement>(
       fixture,
-      '.ui-lib-code-snippet__line-numbers'
+      '.ui-lib-code-snippet__line-numbers',
     );
     expect(lineNumbers).not.toBeNull();
     expect((lineNumbers as HTMLElement).getAttribute('aria-hidden')).toBe('true');
@@ -246,7 +251,7 @@ describe('CodeSnippet', (): void => {
   it('marks window chrome as aria-hidden', (): void => {
     const chrome: HTMLElement | null = query<HTMLElement>(
       fixture,
-      '.ui-lib-code-snippet__window-chrome'
+      '.ui-lib-code-snippet__window-chrome',
     );
     expect(chrome).not.toBeNull();
     expect((chrome as HTMLElement).getAttribute('aria-hidden')).toBe('true');
@@ -255,7 +260,7 @@ describe('CodeSnippet', (): void => {
   it('gives the copy button an accessible label', (): void => {
     const button: HTMLButtonElement | null = query<HTMLButtonElement>(
       fixture,
-      '.ui-lib-code-snippet__copy-btn'
+      '.ui-lib-code-snippet__copy-btn',
     );
     expect(button).not.toBeNull();
     expect((button as HTMLButtonElement).getAttribute('aria-label')).toBe('Copy code to clipboard');
@@ -264,7 +269,7 @@ describe('CodeSnippet', (): void => {
   it('uses type="button" on the copy button', (): void => {
     const button: HTMLButtonElement | null = query<HTMLButtonElement>(
       fixture,
-      '.ui-lib-code-snippet__copy-btn'
+      '.ui-lib-code-snippet__copy-btn',
     );
     expect(button).not.toBeNull();
     expect((button as HTMLButtonElement).type).toBe('button');
@@ -279,7 +284,7 @@ describe('CodeSnippet', (): void => {
 
     const button: HTMLButtonElement | null = query<HTMLButtonElement>(
       fixture,
-      '.ui-lib-code-snippet__copy-btn'
+      '.ui-lib-code-snippet__copy-btn',
     );
     expect(button).not.toBeNull();
     (button as HTMLButtonElement).click();
@@ -297,5 +302,56 @@ describe('CodeSnippet', (): void => {
     const pre: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__pre');
     expect(pre).not.toBeNull();
     expect((pre as HTMLElement).getAttribute('data-language')).toBe('typescript');
+  });
+
+  // ── I18n ─────────────────────────────────────────────────────────────────────
+
+  it('uses i18n key for copy button aria-label', (): void => {
+    const button: HTMLButtonElement | null = query<HTMLButtonElement>(
+      fixture,
+      '.ui-lib-code-snippet__copy-btn',
+    );
+    expect(button).not.toBeNull();
+    expect((button as HTMLButtonElement).getAttribute('aria-label')).toBe('Copy code to clipboard');
+  });
+
+  it('uses i18n key for region aria-label with language', (): void => {
+    host.language.set('typescript');
+    fixture.detectChanges();
+    const card: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__card');
+    expect((card as HTMLElement).getAttribute('aria-label')).toBe('TypeScript code snippet');
+  });
+
+  it('uses i18n key for region aria-label with filename', (): void => {
+    host.filename.set('app.ts');
+    fixture.detectChanges();
+    const card: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__card');
+    expect((card as HTMLElement).getAttribute('aria-label')).toBe('Code snippet: app.ts');
+  });
+
+  it('applies custom ariaLabel when provided', (): void => {
+    host.ariaLabel.set('My custom snippet label');
+    fixture.detectChanges();
+    const card: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__card');
+    expect((card as HTMLElement).getAttribute('aria-label')).toBe('My custom snippet label');
+  });
+
+  it('suppresses aria-label and sets aria-labelledby when ariaLabelledBy is provided', (): void => {
+    host.ariaLabelledBy.set('heading-123');
+    fixture.detectChanges();
+    const card: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__card');
+    expect((card as HTMLElement).getAttribute('aria-label')).toBeNull();
+    expect((card as HTMLElement).getAttribute('aria-labelledby')).toBe('heading-123');
+  });
+
+  it('reflects active locale in copy button label', (): void => {
+    const i18n: UiLibI18nService = TestBed.inject(UiLibI18nService);
+    i18n.setBundle({ 'code-snippet.copy': 'Copiar código' }, 'es');
+    fixture.detectChanges();
+    const button: HTMLButtonElement | null = query<HTMLButtonElement>(
+      fixture,
+      '.ui-lib-code-snippet__copy-btn',
+    );
+    expect((button as HTMLButtonElement).getAttribute('aria-label')).toBe('Copiar código');
   });
 });
