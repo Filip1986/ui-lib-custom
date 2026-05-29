@@ -52,20 +52,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Upload` -> ✅ complete + hardened (6-phase, score 8.9/10, 66 tests — 36 unit + 30 a11y)
 - `Tag` -> ✅ complete + hardened (6-phase, score 8.9/10, 40 tests — 26 unit + 14 a11y)
 - `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
-- `Badge` -> ✅ complete + hardened (6-phase, score 8.4/10, 25 tests — 13 unit + 12 a11y)
+- `Badge` -> ✅ complete + hardened + prompt-8 (score **9.0/10** — pulse dot, i18n status-indicator label, styleClass input)
 - `Chip` -> ✅ complete + hardened + i18n wired (score 8.5/10 I18n 7→8, 53 unit tests + 18 a11y)
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
-- `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
-- `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
-- `DataView` -> ✅ complete + hardened (6-phase, score 8.3/10, 64 tests — 43 unit + 21 a11y)
+- `BottomSheet` -> ✅ prompt-8 hardened (score **9.0/10** — showCloseButton, closeAriaLabel, null header, [uilib-footer] slot)
+- `MeterGroup` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved)
+- `DataView` -> ✅ prompt-8 hardened (score **9.0/10** — resolvedEmptyMessage, resolvedFilterPlaceholder, null-default labels)
 - `Divider` -> ✅ complete + hardened (6-phase, score 8.7/10, 36 tests — 24 unit + 12 a11y)
 - `Fieldset` -> ✅ complete + hardened (6-phase, score 9.0/10, 53 tests — 30 unit + 23 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
-- `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
-- `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
-- `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
+- `ScrollTop` -> ✅ prompt-8 hardened (score **8.9/10** — null ariaLabel, i18n fallback, [uilib-icon] slot)
+- `Carousel` -> ✅ prompt-8 hardened (score **9.0/10** — all 5 aria-label inputs null+resolved, i18n pause/play keys)
+- `Galleria` -> ✅ prompt-8 hardened (score **8.9/10** — ariaLabel null default + resolved)
+- `Timeline` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved)
+- `Knob` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved, styleClass input)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 - `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 37 unit + 31 a11y)
@@ -84,6 +86,27 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-29
+Changed:
+  carousel/carousel.component.ts: 5 aria-label inputs → null defaults; 4 resolved computeds (prev/next/pause/play);
+    autoplayButtonLabel uses resolved labels; CAROUSEL_ARIA_* imports removed
+  carousel/carousel.component.html: prevAriaLabel() → resolvedPrevAriaLabel(); nextAriaLabel() → resolvedNextAriaLabel()
+  i18n/en,de,fr,es.ts: carousel.pause + carousel.play keys added (4 locales each)
+  timeline/timeline.component.ts: ariaLabel string|null null default; resolvedAriaLabel ?? fix
+  galleria/galleria.ts: ariaLabel string|null null default; resolvedAriaLabel ?? fix
+  knob/knob.component.ts: ariaLabel string|null null default; styleClass input added; resolved ?? fix
+  data-view/data-view.component.ts: emptyMessage + filterPlaceholder → string|null null defaults; resolved computeds
+  data-view/data-view.component.html: uses resolvedFilterPlaceholder() + resolvedEmptyMessage()
+  meter-group/meter-group.ts: ariaLabel string|null null default; ?? fix
+  bottom-sheet/bottom-sheet.ts: header → string|null; showCloseButton + closeAriaLabel inputs; resolvedCloseAriaLabel
+  bottom-sheet/bottom-sheet.html: @if(showCloseButton()) guard; resolvedCloseAriaLabel(); [uilib-footer] slot alias
+  8 spec files: WritableSignal types updated to string|null
+  docs/COMPONENT_SCORES.md: Carousel 8.7→9.0; Timeline 8.7→9.0; Galleria 8.7→8.9; Knob 8.7→9.0;
+    DataView 8.6→9.0; MeterGroup 8.7→9.0; BottomSheet 8.6→9.0
+State: COMPLETE — ESLint 0w ✅; ng build ✅; 388 tests ✅; bundlesize ✅; pushed
+Verification: npx eslint carousel/ timeline/ galleria/ knob/ data-view/ meter-group/ bottom-sheet/ (0w); ng build ✅; npx jest (388 pass)
+Next step: Continue Prompt 8 on Avatar + DatePicker; update READMEs for changed components
 
 Date: 2026-05-29 [feat(lib): prompt-8 hardening — ConfirmDialog + Drawer structural improvements + i18n docs batch]
 Changed:
@@ -119,18 +142,6 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 161/161 tests ✅
 Verification: npx eslint autocomplete/ cascade-select/ (PASS ✅); ng build ✅; npx jest (161 ✅)
 Next step: Broader Prompt 8 pass on sub-8.5 components; ColorPicker → 9.5 if continuing ceiling push
-
-Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — SSR safety fixes (Select/AutoComplete/ColorPicker Perf+Angular 9→10) ✅]
-Changed:
-  select/select.ts: document.getElementById → this.document.getElementById (inside requestAnimationFrame)
-  autocomplete/autocomplete.ts: window.setTimeout → setTimeout; document.getElementById → this.documentRef.getElementById
-  color-picker/color-picker.ts: window.innerHeight → this.documentRef.defaultView?.innerHeight;
-    all document.addEventListener/removeEventListener → this.documentRef.*
-  docs/COMPONENT_SCORES.md: Select Perf+Angular 9→10 (9.4→9.5); AutoComplete Perf+Angular 9→10 (9.2→9.4);
-    ColorPicker Perf+Angular 9→10 (9.1→9.3)
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
-Next step: CascadeSelect ceiling push → 9.5; AutoComplete → 9.5
-
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
