@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { PANEL_MENU_CONTEXT } from './panel-menu-context';
 import type { PanelMenuContext } from './panel-menu-context';
 import { PanelMenuSubComponent } from './panel-menu-sub';
@@ -69,6 +70,7 @@ export class PanelMenu implements PanelMenuContext {
   // ── Dependencies ──────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ── Inputs ────────────────────────────────────────────────────────────────
 
@@ -83,7 +85,7 @@ export class PanelMenu implements PanelMenuContext {
 
   /** Design-system variant; falls back to ThemeConfigService when null. */
   public readonly variant: InputSignal<PanelMenuVariant | null> = input<PanelMenuVariant | null>(
-    null
+    null,
   );
 
   /** Size token: sm | md | lg. */
@@ -92,8 +94,11 @@ export class PanelMenu implements PanelMenuContext {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label applied to the root container (aria-label). */
-  public readonly ariaLabel: InputSignal<string> = input<string>(PANEL_MENU_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label applied to the root container (`aria-label`).
+   * Defaults to the i18n `panel-menu.aria-label` key when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly panelMenuId: string = `uilib-panel-menu-${++nextPanelMenuId}`;
   public readonly popupRole: 'menu' = 'menu';
 
@@ -111,7 +116,7 @@ export class PanelMenu implements PanelMenuContext {
 
   /** Set of path keys whose panels are currently expanded. */
   private readonly expandedKeys: WritableSignal<Set<string>> = signal<Set<string>>(
-    new Set<string>()
+    new Set<string>(),
   );
 
   /** Whether the initial-expansion effect has already run. */
@@ -121,7 +126,12 @@ export class PanelMenu implements PanelMenuContext {
 
   /** Resolved variant — falls back to global theme when `variant` is null. */
   public readonly resolvedVariant: Signal<PanelMenuVariant> = computed<PanelMenuVariant>(
-    (): PanelMenuVariant => this.variant() ?? (this.themeConfig.variant() as PanelMenuVariant)
+    (): PanelMenuVariant => this.variant() ?? (this.themeConfig.variant() as PanelMenuVariant),
+  );
+
+  /** Resolved aria-label — i18n fallback when ariaLabel input is null. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('panel-menu.aria-label'),
   );
 
   /** Combined CSS host classes. */
@@ -141,7 +151,7 @@ export class PanelMenu implements PanelMenuContext {
   /** Root items with `visible !== false`. */
   public readonly visibleRootItems: Signal<PanelMenuItem[]> = computed<PanelMenuItem[]>(
     (): PanelMenuItem[] =>
-      this.model().filter((item: PanelMenuItem): boolean => item.visible !== false)
+      this.model().filter((item: PanelMenuItem): boolean => item.visible !== false),
   );
 
   // ── Constructor ───────────────────────────────────────────────────────────
@@ -345,8 +355,8 @@ export class PanelMenu implements PanelMenuContext {
     return Array.from(
       host.querySelectorAll<HTMLElement>(
         `:scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > .ui-lib-panel-menu__panel > .ui-lib-panel-menu__header:not([disabled]),
-         :scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > .ui-lib-panel-menu__panel > .ui-lib-panel-menu__root-link:not([aria-disabled="true"])`
-      )
+         :scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > .ui-lib-panel-menu__panel > .ui-lib-panel-menu__root-link:not([aria-disabled="true"])`,
+      ),
     );
   }
 }

@@ -20,6 +20,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   MegaMenuCommandEvent,
   MegaMenuItem,
@@ -84,7 +85,7 @@ export class MegaMenu implements OnDestroy {
 
   /** Design-system variant; falls back to ThemeConfigService when null. */
   public readonly variant: InputSignal<MegaMenuVariant | null> = input<MegaMenuVariant | null>(
-    null
+    null,
   );
 
   /** Size token: sm | md | lg. */
@@ -93,8 +94,11 @@ export class MegaMenu implements OnDestroy {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the navigation landmark (aria-label on the `<nav>`). */
-  public readonly ariaLabel: InputSignal<string> = input<string>(MEGA_MENU_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label for the navigation landmark (`aria-label` on the `<nav>`).
+   * Defaults to the i18n `mega-menu.aria-label` key when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -144,6 +148,7 @@ export class MegaMenu implements OnDestroy {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly documentRef: Document = inject(DOCUMENT);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector: Injector = inject(Injector);
@@ -152,7 +157,12 @@ export class MegaMenu implements OnDestroy {
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<MegaMenuVariant> = computed<MegaMenuVariant>(
-    (): MegaMenuVariant => this.variant() ?? (this.themeConfig.variant() as MegaMenuVariant)
+    (): MegaMenuVariant => this.variant() ?? (this.themeConfig.variant() as MegaMenuVariant),
+  );
+
+  /** Resolved aria-label — i18n fallback when ariaLabel input is null. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('mega-menu.aria-label'),
   );
 
   /** Combined CSS classes applied to the host element. */
@@ -173,7 +183,7 @@ export class MegaMenu implements OnDestroy {
   /** Top-level items filtered to `visible !== false`. */
   public readonly visibleItems: Signal<MegaMenuItem[]> = computed<MegaMenuItem[]>(
     (): MegaMenuItem[] =>
-      this.model().filter((item: MegaMenuItem): boolean => item.visible !== false)
+      this.model().filter((item: MegaMenuItem): boolean => item.visible !== false),
   );
 
   // ── Event listener bound methods ──────────────────────────────────────────
@@ -185,7 +195,7 @@ export class MegaMenu implements OnDestroy {
   };
 
   private readonly keydownGlobalHandler: (event: KeyboardEvent) => void = (
-    event: KeyboardEvent
+    event: KeyboardEvent,
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
       this.closePanel(true);
@@ -213,7 +223,7 @@ export class MegaMenu implements OnDestroy {
           (): void => {
             this.isPanelPositioned.set(true);
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.isPanelPositioned.set(false);
@@ -330,7 +340,7 @@ export class MegaMenu implements OnDestroy {
               (): void => {
                 this.focusFirstPanelItem();
               },
-              { injector: this.injector }
+              { injector: this.injector },
             );
           }
         } else if (item.command) {
@@ -354,7 +364,7 @@ export class MegaMenu implements OnDestroy {
             (): void => {
               this.focusFirstPanelItem();
             },
-            { injector: this.injector }
+            { injector: this.injector },
           );
         } else if (!isHorizontal) {
           // Vertical: ArrowDown navigates to the next root item
@@ -384,7 +394,7 @@ export class MegaMenu implements OnDestroy {
             (): void => {
               this.focusFirstPanelItem();
             },
-            { injector: this.injector }
+            { injector: this.injector },
           );
         }
         break;
@@ -488,8 +498,8 @@ export class MegaMenu implements OnDestroy {
     if (returnFocus && previousIndex !== -1) {
       const links: HTMLElement[] = Array.from(
         this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
-          '.ui-lib-mega-menu__root-item > .ui-lib-mega-menu__root-link'
-        )
+          '.ui-lib-mega-menu__root-item > .ui-lib-mega-menu__root-link',
+        ),
       );
       const link: HTMLElement | undefined = links[previousIndex];
       link?.focus();
@@ -510,8 +520,8 @@ export class MegaMenu implements OnDestroy {
     this.rovingIndex.set(wrappedIndex);
     const links: HTMLElement[] = Array.from(
       this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
-        '.ui-lib-mega-menu__root-item > .ui-lib-mega-menu__root-link'
-      )
+        '.ui-lib-mega-menu__root-item > .ui-lib-mega-menu__root-link',
+      ),
     );
     const link: HTMLElement | undefined = links[wrappedIndex];
     link?.focus();
@@ -520,7 +530,7 @@ export class MegaMenu implements OnDestroy {
   /** Focuses the first focusable sub-item link in the currently open panel. */
   private focusFirstPanelItem(): void {
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-mega-menu__panel--open .ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+      '.ui-lib-mega-menu__panel--open .ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
     );
     if (panel) {
       panel.focus();
@@ -535,17 +545,17 @@ export class MegaMenu implements OnDestroy {
    */
   private focusPanelItemInDirection(
     direction: 'up' | 'down' | 'left' | 'right',
-    fromEl: HTMLElement
+    fromEl: HTMLElement,
   ): void {
     const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
-      '.ui-lib-mega-menu__panel--open'
+      '.ui-lib-mega-menu__panel--open',
     );
     if (!panel) {
       return;
     }
 
     const columns: HTMLElement[] = Array.from(
-      panel.querySelectorAll<HTMLElement>('ul[role="menu"]')
+      panel.querySelectorAll<HTMLElement>('ul[role="menu"]'),
     );
     const colIndex: number = columns.findIndex((col: HTMLElement): boolean => col.contains(fromEl));
     if (colIndex === -1) {
@@ -559,8 +569,8 @@ export class MegaMenu implements OnDestroy {
       }
       const items: HTMLElement[] = Array.from(
         column.querySelectorAll<HTMLElement>(
-          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
-        )
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
+        ),
       );
       const currentItemIndex: number = items.indexOf(fromEl);
       if (currentItemIndex === -1) {
@@ -579,7 +589,7 @@ export class MegaMenu implements OnDestroy {
           : (colIndex - 1 + totalColumns) % totalColumns;
       const firstItem: HTMLElement | null =
         columns[nextColIndex]?.querySelector<HTMLElement>(
-          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])',
         ) ?? null;
       firstItem?.focus();
     }

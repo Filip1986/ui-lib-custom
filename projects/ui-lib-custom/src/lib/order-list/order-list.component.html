@@ -4,7 +4,7 @@
     type="button"
     class="ui-lib-order-list__control-btn"
     [disabled]="isMoveUpDisabled()"
-    [attr.aria-label]="moveTopAriaLabel()"
+    [attr.aria-label]="effectiveMoveTopAriaLabel()"
     (click)="moveTop()"
   >
     <ui-lib-icon name="arrow-up" />
@@ -13,7 +13,7 @@
     type="button"
     class="ui-lib-order-list__control-btn"
     [disabled]="isMoveUpDisabled()"
-    [attr.aria-label]="moveUpAriaLabel()"
+    [attr.aria-label]="effectiveMoveUpAriaLabel()"
     (click)="moveUp()"
   >
     <ui-lib-icon name="chevron-up" />
@@ -22,7 +22,7 @@
     type="button"
     class="ui-lib-order-list__control-btn"
     [disabled]="isMoveDownDisabled()"
-    [attr.aria-label]="moveDownAriaLabel()"
+    [attr.aria-label]="effectiveMoveDownAriaLabel()"
     (click)="moveDown()"
   >
     <ui-lib-icon name="chevron-down" />
@@ -31,7 +31,7 @@
     type="button"
     class="ui-lib-order-list__control-btn"
     [disabled]="isMoveDownDisabled()"
-    [attr.aria-label]="moveBottomAriaLabel()"
+    [attr.aria-label]="effectiveMoveBottomAriaLabel()"
     (click)="moveBottom()"
   >
     <ui-lib-icon name="arrow-down" />
@@ -59,10 +59,10 @@
         <input
           type="text"
           class="ui-lib-order-list__filter-input"
-          [placeholder]="filterPlaceholder()"
+          [placeholder]="effectiveFilterPlaceholder()"
           [value]="filterQuery()"
           (input)="onFilterInput($event)"
-          [attr.aria-label]="filterPlaceholder()"
+          [attr.aria-label]="effectiveFilterPlaceholder()"
           [disabled]="disabled() || null"
         />
       }
@@ -83,6 +83,8 @@
     (dragleave)="onDragLeave($event)"
   >
     @for (item of displayItems(); track trackByFn($index, item)) {
+      <!-- Keyboard navigation handled by parent listbox (keydown); click selects via pointer -->
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
       <li
         role="option"
         class="ui-lib-order-list__item"

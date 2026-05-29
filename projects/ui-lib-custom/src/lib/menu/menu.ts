@@ -21,6 +21,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { MenuItem, MenuItemCommandEvent, MenuSize, MenuVariant } from './menu.types';
 
 export type { MenuItem, MenuItemCommandEvent, MenuSize, MenuVariant } from './menu.types';
@@ -81,8 +82,11 @@ export class Menu implements OnDestroy {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the menu panel (aria-label). */
-  public readonly ariaLabel: InputSignal<string> = input<string>(MENU_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label for the menu panel (`aria-label`).
+   * Defaults to the i18n `menu.aria-label` key when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -132,6 +136,7 @@ export class Menu implements OnDestroy {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector: Injector = inject(Injector);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private previousFocusEl: HTMLElement | null = null;
 
   // ── View children ─────────────────────────────────────────────────────────
@@ -144,7 +149,12 @@ export class Menu implements OnDestroy {
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<MenuVariant> = computed<MenuVariant>(
-    (): MenuVariant => this.variant() ?? (this.themeConfig.variant() as MenuVariant)
+    (): MenuVariant => this.variant() ?? (this.themeConfig.variant() as MenuVariant),
+  );
+
+  /** Resolved aria-label — i18n fallback when ariaLabel input is null. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('menu.aria-label'),
   );
 
   /** Combined CSS classes applied to the host element. */
@@ -166,7 +176,7 @@ export class Menu implements OnDestroy {
 
   /** Top-level items with `visible !== false`. */
   public readonly visibleItems: Signal<MenuItem[]> = computed<MenuItem[]>((): MenuItem[] =>
-    this.model().filter((item: MenuItem): boolean => item.visible !== false)
+    this.model().filter((item: MenuItem): boolean => item.visible !== false),
   );
 
   /**
@@ -192,7 +202,7 @@ export class Menu implements OnDestroy {
 
   /** Whether the panel should be rendered (static: always; popup: only when visible). */
   public readonly isPanelRendered: Signal<boolean> = computed<boolean>(
-    (): boolean => !this.popup() || this.isVisible()
+    (): boolean => !this.popup() || this.isVisible(),
   );
 
   // ── Event listener bound methods ──────────────────────────────────────────
@@ -204,7 +214,7 @@ export class Menu implements OnDestroy {
   };
 
   private readonly keydownGlobalHandler: (event: KeyboardEvent) => void = (
-    event: KeyboardEvent
+    event: KeyboardEvent,
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
       this.hide(true);
@@ -233,7 +243,7 @@ export class Menu implements OnDestroy {
             this.isPositioned.set(true);
             this.focusByFlatIndex(0);
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.isPositioned.set(false);
@@ -425,7 +435,7 @@ export class Menu implements OnDestroy {
       return;
     }
     const links: NodeListOf<HTMLElement> = panel.querySelectorAll<HTMLElement>(
-      '.ui-lib-menu__link:not([aria-disabled="true"])'
+      '.ui-lib-menu__link:not([aria-disabled="true"])',
     );
     const link: HTMLElement | undefined = links[index];
     if (link) {

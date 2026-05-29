@@ -1,6 +1,6 @@
 <nav
   class="ui-lib-mega-menu__nav"
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-label]="effectiveAriaLabel()"
 >
   <ul
     class="ui-lib-mega-menu__root-list"
@@ -41,7 +41,7 @@
             class="ui-lib-mega-menu__panel"
             [class.ui-lib-mega-menu__panel--open]="isPanelPositioned()"
             [attr.id]="panelId"
-            [attr.aria-label]="item.label ? (item.label + ' submenu') : null"
+            [attr.aria-label]="item.label ? i18n.translate('mega-menu.submenu', { label: item.label }) : null"
           >
             <div class="ui-lib-mega-menu__panel-inner">
               @for (column of item.items; track column.header ?? $index) {

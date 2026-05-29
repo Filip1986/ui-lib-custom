@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   BreadcrumbItem,
   BreadcrumbItemClickEvent,
@@ -52,7 +53,7 @@ let nextBreadcrumbId: number = 0;
   host: {
     role: 'navigation',
     '[attr.id]': 'breadcrumbId',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': 'effectiveAriaLabel()',
     '[class]': 'hostClasses()',
   },
 })
@@ -80,8 +81,11 @@ export class Breadcrumb {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the `<nav>` landmark element. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(BREADCRUMB_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label for the `<nav>` landmark element.
+   * Defaults to the i18n `breadcrumb.aria-label` key when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -105,12 +109,18 @@ export class Breadcrumb {
   // ── Dependencies ─────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   // ── Computed ──────────────────────────────────────────────────────────────
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<BreadcrumbVariant> = computed<BreadcrumbVariant>(
     (): BreadcrumbVariant => this.variant() ?? (this.themeConfig.variant() as BreadcrumbVariant),
+  );
+
+  /** Resolved aria-label — i18n fallback when ariaLabel input is null. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('breadcrumb.aria-label'),
   );
 
   /**

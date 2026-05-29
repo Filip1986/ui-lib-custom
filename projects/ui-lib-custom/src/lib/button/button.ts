@@ -19,6 +19,7 @@ import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import type { BadgeColor } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type ButtonAppearance =
@@ -64,6 +65,7 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
 })
 export class Button implements AfterViewChecked {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
   public readonly appearance: InputSignal<ButtonAppearance> = input<ButtonAppearance>('solid');
@@ -193,8 +195,9 @@ export class Button implements AfterViewChecked {
 
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
-      if (this.loading()) return this.loadingLabel() ?? this.ariaLabel() ?? 'Loading';
-      if (this.iconOnly()) return this.ariaLabel() ?? 'Button';
+      if (this.loading())
+        return this.loadingLabel() ?? this.ariaLabel() ?? this.i18n.translate('button.loading');
+      if (this.iconOnly()) return this.ariaLabel() ?? this.i18n.translate('button.icon-only');
       return this.ariaLabel();
     },
   );

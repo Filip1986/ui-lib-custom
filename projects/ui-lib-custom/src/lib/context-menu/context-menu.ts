@@ -21,6 +21,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   ContextMenuItem,
   ContextMenuItemCommandEvent,
@@ -92,8 +93,11 @@ export class ContextMenu implements OnDestroy {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the menu panel (aria-label). */
-  public readonly ariaLabel: InputSignal<string> = input<string>(CONTEXT_MENU_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label for the context menu panel (`aria-label`).
+   * Defaults to the i18n `context-menu.aria-label` key when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -140,6 +144,7 @@ export class ContextMenu implements OnDestroy {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly documentRef: Document = inject(DOCUMENT);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector: Injector = inject(Injector);
@@ -155,7 +160,12 @@ export class ContextMenu implements OnDestroy {
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<ContextMenuVariant> = computed<ContextMenuVariant>(
-    (): ContextMenuVariant => this.variant() ?? (this.themeConfig.variant() as ContextMenuVariant)
+    (): ContextMenuVariant => this.variant() ?? (this.themeConfig.variant() as ContextMenuVariant),
+  );
+
+  /** Resolved aria-label — i18n fallback when ariaLabel input is null. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('context-menu.aria-label'),
   );
 
   /** Combined CSS classes applied to the host element. */
@@ -175,15 +185,15 @@ export class ContextMenu implements OnDestroy {
   /** Top-level items with `visible !== false`. */
   public readonly visibleItems: Signal<ContextMenuItem[]> = computed<ContextMenuItem[]>(
     (): ContextMenuItem[] =>
-      this.model().filter((item: ContextMenuItem): boolean => item.visible !== false)
+      this.model().filter((item: ContextMenuItem): boolean => item.visible !== false),
   );
 
   /** Top-level, focusable (non-separator, non-disabled) items in DOM order. */
   public readonly flatFocusableItems: Signal<ContextMenuItem[]> = computed<ContextMenuItem[]>(
     (): ContextMenuItem[] =>
       this.visibleItems().filter(
-        (item: ContextMenuItem): boolean => !item.separator && !item.disabled
-      )
+        (item: ContextMenuItem): boolean => !item.separator && !item.disabled,
+      ),
   );
 
   // ── Event listener bound methods ──────────────────────────────────────────
@@ -199,7 +209,7 @@ export class ContextMenu implements OnDestroy {
   };
 
   private readonly keydownHandler: (event: KeyboardEvent) => void = (
-    event: KeyboardEvent
+    event: KeyboardEvent,
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
       this.hide(true);
@@ -236,7 +246,7 @@ export class ContextMenu implements OnDestroy {
             this.isPositioned.set(true);
             this.focusFirstItem();
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.isPositioned.set(false);
@@ -323,7 +333,7 @@ export class ContextMenu implements OnDestroy {
   public onItemActivate(
     event: MouseEvent | KeyboardEvent,
     item: ContextMenuItem,
-    index: number
+    index: number,
   ): void {
     if (item.disabled || item.separator) {
       event.preventDefault();
@@ -401,11 +411,11 @@ export class ContextMenu implements OnDestroy {
               const firstSubLink: HTMLElement | null =
                 panel?.querySelector<HTMLElement>(
                   '.ui-lib-context-menu__item--active .ui-lib-context-menu__submenu' +
-                    ' .ui-lib-context-menu__link:not([aria-disabled="true"])'
+                    ' .ui-lib-context-menu__link:not([aria-disabled="true"])',
                 ) ?? null;
               firstSubLink?.focus();
             },
-            { injector: this.injector }
+            { injector: this.injector },
           );
         }
         break;
@@ -518,7 +528,7 @@ export class ContextMenu implements OnDestroy {
     }
     const links: NodeListOf<HTMLElement> = panel.querySelectorAll<HTMLElement>(
       ':scope > .ui-lib-context-menu__list > .ui-lib-context-menu__item > ' +
-        '.ui-lib-context-menu__link:not([aria-disabled="true"])'
+        '.ui-lib-context-menu__link:not([aria-disabled="true"])',
     );
     const link: HTMLElement | undefined = links[index];
     if (link) {
@@ -561,15 +571,15 @@ export class ContextMenu implements OnDestroy {
    */
   private getAdjacentSubmenuLink(currentLink: HTMLElement, direction: 1 | -1): HTMLElement | null {
     const submenu: HTMLElement | null = currentLink.closest<HTMLElement>(
-      '.ui-lib-context-menu__submenu'
+      '.ui-lib-context-menu__submenu',
     );
     if (!submenu) {
       return null;
     }
     const links: HTMLElement[] = Array.from(
       submenu.querySelectorAll<HTMLElement>(
-        '.ui-lib-context-menu__link:not([aria-disabled="true"])'
-      )
+        '.ui-lib-context-menu__link:not([aria-disabled="true"])',
+      ),
     );
     const currentIndex: number = links.indexOf(currentLink);
     const nextIndex: number = currentIndex + direction;

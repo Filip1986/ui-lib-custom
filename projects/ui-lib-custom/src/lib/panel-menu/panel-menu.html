@@ -1,7 +1,7 @@
 <nav
   class="ui-lib-panel-menu__container"
   role="navigation"
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-label]="effectiveAriaLabel()"
 >
   <div class="ui-lib-panel-menu__list">
     @for (item of visibleRootItems(); track item.id ?? item.label ?? $index) {

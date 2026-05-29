@@ -199,6 +199,22 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   // ── Menubar ───────────────────────────────────────────────────────────────
   'menubar.toggle': 'Alternar menú de navegación',
 
+  // ── Menu / ContextMenu / TieredMenu / MegaMenu / PanelMenu / Breadcrumb ───
+  'breadcrumb.aria-label': 'Ruta de navegación',
+  'context-menu.aria-label': 'Menú contextual',
+  'menu.aria-label': 'Menú',
+  'tiered-menu.aria-label': 'Menú',
+  'mega-menu.aria-label': 'Navegación',
+  'mega-menu.submenu': 'Submenú de {label}',
+  'panel-menu.aria-label': 'Menú de panel',
+
+  // ── Button ────────────────────────────────────────────────────────────────
+  'button.loading': 'Cargando',
+  'button.icon-only': 'Botón',
+
+  // ── OrderList ─────────────────────────────────────────────────────────────
+  'order-list.filter-placeholder': 'Filtrar',
+
   // ── Input ─────────────────────────────────────────────────────────────────
   'input.clear': 'Limpiar entrada',
   'input.password-toggle': 'Alternar visibilidad de contraseña',

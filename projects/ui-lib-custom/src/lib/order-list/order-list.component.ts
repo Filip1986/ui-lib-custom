@@ -43,6 +43,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Icon } from 'ui-lib-custom/icon';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 /** Monotonic counter for unique element IDs. */
 let orderListIdCounter: number = 0;
@@ -77,6 +78,7 @@ export class OrderListComponent {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
   private readonly platformId: object = inject(PLATFORM_ID);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Reference to the listbox `<ul>` element — used for roving-tabindex focus management. */
   private readonly listboxEl: Signal<ElementRef<HTMLElement> | undefined> =
@@ -105,8 +107,11 @@ export class OrderListComponent {
    */
   public readonly filterBy: InputSignal<string | null> = input<string | null>(null);
 
-  /** Placeholder text shown inside the filter input. */
-  public readonly filterPlaceholder: InputSignal<string> = input<string>('Filter');
+  /**
+   * Placeholder text shown inside the filter input.
+   * Defaults to the i18n `order-list.filter-placeholder` key when not provided.
+   */
+  public readonly filterPlaceholder: InputSignal<string | null> = input<string | null>(null);
 
   /** Strategy used when matching filter query against item fields. */
   public readonly filterMatchMode: InputSignal<OrderListFilterMatchMode> =
@@ -156,17 +161,29 @@ export class OrderListComponent {
   /** One or more element IDs that label the listbox element. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the "Move to top" button. */
-  public readonly moveTopAriaLabel: InputSignal<string> = input<string>('Move to top');
+  /**
+   * Accessible label for the "Move to top" button.
+   * Defaults to the i18n `orderlist.move.top` key when not provided.
+   */
+  public readonly moveTopAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the "Move up" button. */
-  public readonly moveUpAriaLabel: InputSignal<string> = input<string>('Move up');
+  /**
+   * Accessible label for the "Move up" button.
+   * Defaults to the i18n `orderlist.move.up` key when not provided.
+   */
+  public readonly moveUpAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the "Move down" button. */
-  public readonly moveDownAriaLabel: InputSignal<string> = input<string>('Move down');
+  /**
+   * Accessible label for the "Move down" button.
+   * Defaults to the i18n `orderlist.move.down` key when not provided.
+   */
+  public readonly moveDownAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the "Move to bottom" button. */
-  public readonly moveBottomAriaLabel: InputSignal<string> = input<string>('Move to bottom');
+  /**
+   * Accessible label for the "Move to bottom" button.
+   * Defaults to the i18n `orderlist.move.bottom` key when not provided.
+   */
+  public readonly moveBottomAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Additional CSS class applied to the root element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
@@ -268,6 +285,31 @@ export class OrderListComponent {
   /** Resolved theme variant (falls back to ThemeConfigService). */
   public readonly resolvedVariant: Signal<OrderListVariant> = computed<OrderListVariant>(
     (): OrderListVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved filter placeholder — i18n fallback when filterPlaceholder input is null. */
+  public readonly effectiveFilterPlaceholder: Signal<string> = computed<string>(
+    (): string => this.filterPlaceholder() ?? this.i18n.translate('order-list.filter-placeholder'),
+  );
+
+  /** Resolved move-to-top aria-label — i18n fallback when input is null. */
+  public readonly effectiveMoveTopAriaLabel: Signal<string> = computed<string>(
+    (): string => this.moveTopAriaLabel() ?? this.i18n.translate('orderlist.move.top'),
+  );
+
+  /** Resolved move-up aria-label — i18n fallback when input is null. */
+  public readonly effectiveMoveUpAriaLabel: Signal<string> = computed<string>(
+    (): string => this.moveUpAriaLabel() ?? this.i18n.translate('orderlist.move.up'),
+  );
+
+  /** Resolved move-down aria-label — i18n fallback when input is null. */
+  public readonly effectiveMoveDownAriaLabel: Signal<string> = computed<string>(
+    (): string => this.moveDownAriaLabel() ?? this.i18n.translate('orderlist.move.down'),
+  );
+
+  /** Resolved move-to-bottom aria-label — i18n fallback when input is null. */
+  public readonly effectiveMoveBottomAriaLabel: Signal<string> = computed<string>(
+    (): string => this.moveBottomAriaLabel() ?? this.i18n.translate('orderlist.move.bottom'),
   );
 
   /** CSS class string applied to the host element. */

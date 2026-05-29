@@ -11,7 +11,7 @@
     <ui-lib-tiered-menu-sub
       [items]="model()"
       [level]="0"
-      [ariaLabel]="ariaLabel()"
+      [ariaLabel]="effectiveAriaLabel()"
       (itemActivated)="onItemActivated($event)"
       (escapeMenu)="onEscapeMenu()"
     />

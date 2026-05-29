@@ -21,6 +21,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { TieredMenuSubComponent } from './tiered-menu-sub';
 import type {
   TieredMenuItem,
@@ -98,7 +99,7 @@ export class TieredMenu implements OnDestroy {
 
   /** Design-system variant; falls back to ThemeConfigService when null. */
   public readonly variant: InputSignal<TieredMenuVariant | null> = input<TieredMenuVariant | null>(
-    null
+    null,
   );
 
   /** Size token: sm | md | lg. */
@@ -107,8 +108,11 @@ export class TieredMenu implements OnDestroy {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the menu panel (aria-label). */
-  public readonly ariaLabel: InputSignal<string> = input<string>(TIERED_MENU_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label for the menu panel (`aria-label`).
+   * Defaults to the i18n `tiered-menu.aria-label` key when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -145,6 +149,7 @@ export class TieredMenu implements OnDestroy {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly documentRef: Document = inject(DOCUMENT);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector: Injector = inject(Injector);
@@ -159,7 +164,12 @@ export class TieredMenu implements OnDestroy {
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<TieredMenuVariant> = computed<TieredMenuVariant>(
-    (): TieredMenuVariant => this.variant() ?? (this.themeConfig.variant() as TieredMenuVariant)
+    (): TieredMenuVariant => this.variant() ?? (this.themeConfig.variant() as TieredMenuVariant),
+  );
+
+  /** Resolved aria-label — i18n fallback when ariaLabel input is null. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('tiered-menu.aria-label'),
   );
 
   /** Combined CSS classes applied to the host element. */
@@ -190,7 +200,7 @@ export class TieredMenu implements OnDestroy {
   };
 
   private readonly keydownHandler: (event: KeyboardEvent) => void = (
-    event: KeyboardEvent
+    event: KeyboardEvent,
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
       this.hide(true);
@@ -219,7 +229,7 @@ export class TieredMenu implements OnDestroy {
             this.isPositioned.set(true);
             this.focusFirstItem();
           },
-          { injector: this.injector }
+          { injector: this.injector },
         );
       } else {
         this.isPositioned.set(false);
@@ -271,7 +281,7 @@ export class TieredMenu implements OnDestroy {
         (): void => {
           elToFocus.focus();
         },
-        { injector: this.injector }
+        { injector: this.injector },
       );
     } else {
       this.previousFocusEl = null;
@@ -294,7 +304,7 @@ export class TieredMenu implements OnDestroy {
 
   /** Whether the root menu list should be rendered. */
   public readonly shouldRenderPanel: Signal<boolean> = computed<boolean>(
-    (): boolean => !this.popup() || this.isVisible()
+    (): boolean => !this.popup() || this.isVisible(),
   );
 
   // ── Event handlers (called from template) ────────────────────────────────
@@ -327,7 +337,7 @@ export class TieredMenu implements OnDestroy {
       return;
     }
     const firstLink: HTMLElement | null = panel.querySelector<HTMLElement>(
-      '.ui-lib-tiered-menu__link:not([aria-disabled="true"])'
+      '.ui-lib-tiered-menu__link:not([aria-disabled="true"])',
     );
     firstLink?.focus();
   }

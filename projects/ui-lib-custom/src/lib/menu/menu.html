@@ -8,7 +8,7 @@
     [style.top.px]="popup() ? menuY() : null"
     [attr.id]="menuId"
     role="menu"
-    [attr.aria-label]="ariaLabel()"
+    [attr.aria-label]="effectiveAriaLabel()"
   >
     <ul class="ui-lib-menu__list" role="presentation">
       @for (item of visibleItems(); track $index) {
