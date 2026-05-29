@@ -1,5 +1,5 @@
 @if (showImage()) {
-  <img class="ui-lib-chip__image" [src]="image()!" [alt]="imageAlt()" />
+  <img class="ui-lib-chip__image" [src]="image()!" [alt]="imageAlt() ?? i18n.translate('chip.image-alt')" />
 }
 @if (showIcon()) {
   <span class="ui-lib-chip__icon" [class]="icon()!" aria-hidden="true"></span>

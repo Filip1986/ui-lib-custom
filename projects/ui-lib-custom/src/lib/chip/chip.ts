@@ -11,6 +11,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { ChipSize, ChipVariant } from './chip.types';
 
 export type { ChipSize, ChipVariant } from './chip.types';
@@ -50,6 +51,7 @@ let nextChipId: number = 0;
 })
 export class Chip {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Stable unique ID for this chip instance. */
   public readonly chipId: string = `ui-lib-chip-${++nextChipId}`;
@@ -63,8 +65,11 @@ export class Chip {
   /** URL of an image to display at the start of the chip. */
   public readonly image: InputSignal<string | null> = input<string | null>(null);
 
-  /** Alt text for the chip image. */
-  public readonly imageAlt: InputSignal<string> = input<string>('Chip');
+  /**
+   * Alt text for the chip image. Defaults to the i18n `chip.image-alt` key when not provided.
+   * Pass `null` explicitly to fall back to the i18n default.
+   */
+  public readonly imageAlt: InputSignal<string | null> = input<string | null>(null);
 
   /** When true, a remove button is rendered at the end of the chip. */
   public readonly removable: InputSignal<boolean> = input<boolean>(false);
@@ -95,7 +100,7 @@ export class Chip {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ChipVariant> = computed<ChipVariant>(
-    (): ChipVariant => this.variant() ?? this.themeConfig.variant()
+    (): ChipVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -123,18 +128,20 @@ export class Chip {
 
   /** Whether to show the image slot. */
   public readonly showImage: Signal<boolean> = computed<boolean>(
-    (): boolean => this.image() !== null
+    (): boolean => this.image() !== null,
   );
 
   /** Whether to show the icon slot (only when no image is set). */
   public readonly showIcon: Signal<boolean> = computed<boolean>(
-    (): boolean => this.image() === null && this.icon() !== null
+    (): boolean => this.image() === null && this.icon() !== null,
   );
 
-  /** Accessible label for the remove button. */
+  /** Accessible label for the remove button — reactive to locale changes. */
   public readonly removeAriaLabel: Signal<string> = computed<string>((): string => {
     const chipLabel: string | null = this.label();
-    return chipLabel ? `Remove ${chipLabel}` : 'Remove';
+    return chipLabel
+      ? this.i18n.translate('chip.remove', { label: chipLabel })
+      : this.i18n.translate('chip.remove-unlabelled');
   });
 
   /**
@@ -144,7 +151,7 @@ export class Chip {
    * for use inside a role="listbox" container.
    */
   public readonly hostRole: Signal<string> = computed<string>((): string =>
-    this.removable() ? 'group' : 'option'
+    this.removable() ? 'group' : 'option',
   );
 
   /**
@@ -153,7 +160,7 @@ export class Chip {
    * (aria-selected is not valid on role="group" used by removable chips.)
    */
   public readonly ariaSelected: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.selectable() && !this.removable() ? String(this.selected()) : null)
+    (): string | null => (this.selectable() && !this.removable() ? String(this.selected()) : null),
   );
 
   /**
@@ -161,7 +168,7 @@ export class Chip {
    * 0 for selectable chips (keyboard-reachable); null (attribute omitted) otherwise.
    */
   public readonly tabIndex: Signal<number | null> = computed<number | null>((): number | null =>
-    this.selectable() ? 0 : null
+    this.selectable() ? 0 : null,
   );
 
   /** Handles host click — toggles selection for selectable chips. */

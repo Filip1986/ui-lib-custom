@@ -158,6 +158,8 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
 
   // ── Chip / AutoComplete ───────────────────────────────────────────────────
   'chip.remove': '{label} entfernen',
+  'chip.remove-unlabelled': 'Entfernen',
+  'chip.image-alt': 'Chip',
   'autocomplete.dropdown': 'Vorschläge anzeigen',
   'autocomplete.remove-chip': '{label} entfernen',
 

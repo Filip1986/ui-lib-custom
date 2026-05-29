@@ -10,6 +10,7 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Chip } from './chip';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { ChipSize, ChipVariant } from './chip.types';
 
 // ---- Minimal test host ------------------------------------------------
@@ -40,7 +41,7 @@ class TestHostComponent {
   public readonly label: WritableSignal<string | null> = signal<string | null>(null);
   public readonly icon: WritableSignal<string | null> = signal<string | null>(null);
   public readonly image: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly imageAlt: WritableSignal<string> = signal<string>('Chip');
+  public readonly imageAlt: WritableSignal<string | null> = signal<string | null>(null);
   public readonly removable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly removeIcon: WritableSignal<string> = signal<string>('pi pi-times');
   public readonly selectable: WritableSignal<boolean> = signal<boolean>(false);
@@ -166,7 +167,7 @@ describe('Chip', (): void => {
   it('should not render remove button when removable is false', (): void => {
     const { fixture } = setup();
     const button: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-chip__remove-button')
+      By.css('.ui-lib-chip__remove-button'),
     );
     expect(button).toBeNull();
   });
@@ -177,7 +178,7 @@ describe('Chip', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const button: DebugElement | null = fixture.debugElement.query(
-      By.css('.ui-lib-chip__remove-button')
+      By.css('.ui-lib-chip__remove-button'),
     );
     expect(button).not.toBeNull();
   });
@@ -199,7 +200,7 @@ describe('Chip', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-chip__remove-button')
+      By.css('.ui-lib-chip__remove-button'),
     ).nativeElement as HTMLButtonElement;
     button.click();
     expect(host.lastRemoveEvent).toBeInstanceOf(MouseEvent);
@@ -212,7 +213,7 @@ describe('Chip', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-chip__remove-button')
+      By.css('.ui-lib-chip__remove-button'),
     ).nativeElement as HTMLButtonElement;
     expect(button.getAttribute('aria-label')).toBe('Remove Vue');
   });
@@ -223,7 +224,7 @@ describe('Chip', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('.ui-lib-chip__remove-button')
+      By.css('.ui-lib-chip__remove-button'),
     ).nativeElement as HTMLButtonElement;
     expect(button.getAttribute('aria-label')).toBe('Remove');
   });
@@ -262,7 +263,7 @@ describe('Chip', (): void => {
     fixture.detectChanges();
     await fixture.whenStable();
     const iconSpan: HTMLElement = fixture.debugElement.query(
-      By.css('.ui-lib-chip__remove-button span')
+      By.css('.ui-lib-chip__remove-button span'),
     ).nativeElement as HTMLElement;
     expect(iconSpan.className).toContain('pi-trash');
   });
@@ -356,5 +357,66 @@ describe('Chip', (): void => {
       .nativeElement as HTMLElement;
     chip.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
     expect(host.lastSelectedChange).toBeNull();
+  });
+
+  // ── I18n ─────────────────────────────────────────────────────────────────────
+
+  it('should use i18n key for remove button aria-label when label is set', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.removable.set(true);
+    host.label.set('Angular');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const button: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-chip__remove-button'),
+    ).nativeElement as HTMLButtonElement;
+    expect(button.getAttribute('aria-label')).toBe('Remove Angular');
+  });
+
+  it('should use i18n remove-unlabelled key when chip has no label', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.removable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const button: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-chip__remove-button'),
+    ).nativeElement as HTMLButtonElement;
+    expect(button.getAttribute('aria-label')).toBe('Remove');
+  });
+
+  it('should reflect locale change in remove button aria-label', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.removable.set(true);
+    host.label.set('Vue');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const i18n: UiLibI18nService = TestBed.inject(UiLibI18nService);
+    i18n.setBundle({ 'chip.remove': 'Supprimer {label}' }, 'fr');
+    fixture.detectChanges();
+    const button: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-chip__remove-button'),
+    ).nativeElement as HTMLButtonElement;
+    expect(button.getAttribute('aria-label')).toBe('Supprimer Vue');
+  });
+
+  it('should use i18n image-alt when imageAlt input is null', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.image.set('/assets/photo.jpg');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const img: HTMLImageElement = fixture.debugElement.query(By.css('.ui-lib-chip__image'))
+      .nativeElement as HTMLImageElement;
+    expect(img.alt).toBe('Chip');
+  });
+
+  it('should prefer explicit imageAlt over i18n default', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.image.set('/assets/photo.jpg');
+    host.imageAlt.set('Profile photo');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const img: HTMLImageElement = fixture.debugElement.query(By.css('.ui-lib-chip__image'))
+      .nativeElement as HTMLImageElement;
+    expect(img.alt).toBe('Profile photo');
   });
 });
