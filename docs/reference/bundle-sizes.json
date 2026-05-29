@@ -2,526 +2,526 @@
   "a11y": {
     "raw": 6995,
     "gzip": 1715,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "accordion": {
     "raw": 58819,
     "gzip": 7270,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "alert": {
-    "raw": 8650,
-    "gzip": 2090,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 17996,
+    "gzip": 2846,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "animate-on-scroll": {
     "raw": 8047,
     "gzip": 2200,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "auto-focus": {
     "raw": 5232,
     "gzip": 1755,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "autocomplete": {
     "raw": 127436,
     "gzip": 17307,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "avatar": {
     "raw": 26449,
     "gzip": 4574,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "badge": {
     "raw": 24615,
     "gzip": 3556,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "bind": {
     "raw": 4389,
     "gzip": 1737,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "block-ui": {
     "raw": 9601,
     "gzip": 2253,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "bottom-sheet": {
     "raw": 23957,
     "gzip": 4495,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "breadcrumb": {
     "raw": 31665,
     "gzip": 4718,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "button": {
     "raw": 82934,
     "gzip": 11741,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "card": {
     "raw": 28457,
     "gzip": 4158,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "carousel": {
     "raw": 74046,
     "gzip": 11619,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "cascade-select": {
     "raw": 93305,
     "gzip": 13598,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "chart": {
     "raw": 65730,
     "gzip": 7996,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "checkbox": {
     "raw": 37313,
     "gzip": 5426,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "chip": {
-    "raw": 21132,
-    "gzip": 4285,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 22248,
+    "gzip": 4343,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "class-names": {
     "raw": 2681,
     "gzip": 1056,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "code-snippet": {
     "raw": 55499,
     "gzip": 8351,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "color-picker": {
     "raw": 74900,
     "gzip": 11490,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "confirm-dialog": {
     "raw": 52094,
     "gzip": 8079,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "confirm-popup": {
     "raw": 44800,
     "gzip": 7356,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "context-menu": {
     "raw": 48876,
     "gzip": 7841,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "core": {
     "raw": 10382,
     "gzip": 2665,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "data-grid": {
     "raw": 145174,
     "gzip": 21042,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "data-view": {
     "raw": 73102,
     "gzip": 9337,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "date-picker": {
-    "raw": 189243,
-    "gzip": 28891,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 196939,
+    "gzip": 31518,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "dialog": {
-    "raw": 56299,
-    "gzip": 9170,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 57181,
+    "gzip": 9251,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "divider": {
-    "raw": 15214,
-    "gzip": 2998,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 15270,
+    "gzip": 3001,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "dock": {
     "raw": 39589,
     "gzip": 6050,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "drawer": {
     "raw": 28939,
     "gzip": 5378,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "dynamic-dialog": {
-    "raw": 28120,
-    "gzip": 6090,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 29448,
+    "gzip": 6179,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "editor": {
     "raw": 62544,
     "gzip": 8147,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "fieldset": {
     "raw": 17533,
     "gzip": 3267,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "float-label": {
     "raw": 18546,
     "gzip": 3172,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "fluid": {
     "raw": 9098,
     "gzip": 2015,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "focus-trap": {
     "raw": 6791,
     "gzip": 2114,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "galleria": {
     "raw": 85939,
     "gzip": 11307,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "i18n": {
-    "raw": 117071,
-    "gzip": 15193,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 117259,
+    "gzip": 15220,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "icon-button": {
-    "raw": 9774,
-    "gzip": 2152,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 9910,
+    "gzip": 2170,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "icon-field": {
     "raw": 13686,
     "gzip": 2167,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "icon": {
-    "raw": 22712,
-    "gzip": 5446,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 22716,
+    "gzip": 5448,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "image-compare": {
     "raw": 32899,
     "gzip": 5494,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "image": {
-    "raw": 49219,
-    "gzip": 8004,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 50335,
+    "gzip": 8085,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "inplace": {
     "raw": 20777,
     "gzip": 4011,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "input-group": {
     "raw": 21875,
     "gzip": 2133,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "input-mask": {
     "raw": 52242,
     "gzip": 9165,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "input-number": {
     "raw": 70585,
     "gzip": 9626,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "input-otp": {
     "raw": 33486,
     "gzip": 6385,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "input": {
     "raw": 35135,
     "gzip": 5074,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "key-filter": {
     "raw": 14627,
     "gzip": 3783,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "knob": {
     "raw": 36063,
     "gzip": 7380,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "layout": {
     "raw": 34947,
     "gzip": 4531,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "listbox": {
-    "raw": 71608,
-    "gzip": 10855,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 71871,
+    "gzip": 10894,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "mega-menu": {
     "raw": 60408,
     "gzip": 8326,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "menu": {
     "raw": 49023,
     "gzip": 7724,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "menubar": {
     "raw": 66327,
     "gzip": 8964,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "message": {
-    "raw": 26528,
-    "gzip": 4613,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 26708,
+    "gzip": 4629,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "meter-group": {
     "raw": 26637,
     "gzip": 4314,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "order-list": {
     "raw": 80396,
     "gzip": 12950,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "organization-chart": {
-    "raw": 48572,
-    "gzip": 8174,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 49164,
+    "gzip": 8236,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "paginator": {
-    "raw": 43762,
-    "gzip": 6623,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 43988,
+    "gzip": 6640,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "panel-menu": {
     "raw": 65164,
     "gzip": 8278,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "panel": {
     "raw": 21967,
     "gzip": 4061,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "password": {
     "raw": 52486,
     "gzip": 7696,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "pick-list": {
     "raw": 115500,
     "gzip": 14250,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "popover": {
     "raw": 28820,
     "gzip": 5497,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "progress-bar": {
-    "raw": 18096,
-    "gzip": 3655,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 20419,
+    "gzip": 4109,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "progress-spinner": {
     "raw": 14097,
     "gzip": 3056,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "radio-button": {
     "raw": 32424,
     "gzip": 5775,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "rating": {
     "raw": 39475,
     "gzip": 7148,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "ripple": {
     "raw": 5660,
     "gzip": 1869,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "scroll-panel": {
     "raw": 14298,
     "gzip": 2615,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "scroll-top": {
     "raw": 21068,
     "gzip": 3994,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "select-button": {
     "raw": 45753,
     "gzip": 6069,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "select": {
     "raw": 60905,
     "gzip": 9625,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "skeleton": {
-    "raw": 14406,
-    "gzip": 2994,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 15106,
+    "gzip": 3020,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "slider": {
     "raw": 42205,
     "gzip": 6776,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "speed-dial": {
     "raw": 55650,
     "gzip": 7786,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "split-button": {
-    "raw": 59858,
-    "gzip": 7660,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 60416,
+    "gzip": 7719,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "stepper": {
     "raw": 54737,
     "gzip": 7045,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "style-class": {
     "raw": 19836,
     "gzip": 4005,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "syntax-highlighter": {
     "raw": 7531,
     "gzip": 2594,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "table": {
-    "raw": 140512,
-    "gzip": 22019,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 143155,
+    "gzip": 22750,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tabs": {
     "raw": 76399,
     "gzip": 10825,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tag": {
     "raw": 25489,
     "gzip": 4124,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "terminal": {
     "raw": 23154,
     "gzip": 4805,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "testing": {
     "raw": 2071,
     "gzip": 856,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "textarea": {
-    "raw": 39120,
-    "gzip": 6434,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 39150,
+    "gzip": 6443,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "theme": {
     "raw": 77262,
     "gzip": 13904,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tiered-menu": {
     "raw": 48472,
     "gzip": 8143,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "timeline": {
     "raw": 36030,
     "gzip": 5620,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "toast": {
     "raw": 34743,
     "gzip": 6130,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "toggle-button": {
-    "raw": 34696,
-    "gzip": 5821,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 34904,
+    "gzip": 5824,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "toggle-switch": {
     "raw": 31864,
     "gzip": 5248,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tokens": {
     "raw": 44932,
     "gzip": 9090,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "toolbar": {
     "raw": 17385,
     "gzip": 3697,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tooltip": {
     "raw": 16317,
     "gzip": 3839,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tree-select": {
-    "raw": 43749,
-    "gzip": 7284,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 45023,
+    "gzip": 7380,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tree-table": {
-    "raw": 90814,
-    "gzip": 12970,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 91542,
+    "gzip": 13027,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "tree": {
-    "raw": 67041,
-    "gzip": 11787,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 68567,
+    "gzip": 11951,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "upload": {
     "raw": 83307,
     "gzip": 11956,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   },
   "virtual-scroller": {
-    "raw": 83257,
-    "gzip": 14427,
-    "measuredAt": "2026-05-29T13:54:34.383Z"
+    "raw": 83693,
+    "gzip": 14463,
+    "measuredAt": "2026-05-29T21:28:06.863Z"
   }
 }
