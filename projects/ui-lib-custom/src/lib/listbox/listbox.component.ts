@@ -143,20 +143,16 @@ export class ListboxComponent implements ControlValueAccessor {
     input<ListboxFilterMatchMode>(LISTBOX_DEFAULTS.FilterMatchMode as ListboxFilterMatchMode);
 
   /** Placeholder text for the filter input. */
-  public readonly filterPlaceholder: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.FilterPlaceholder,
-  );
+  public readonly filterPlaceholder: InputSignal<string | null> = input<string | null>(null);
 
   /** Two-way binding for the current filter query string. */
   public readonly filterValue: ModelSignal<string> = model<string>('');
 
   /** Message shown when the options array is empty. */
-  public readonly emptyMessage: InputSignal<string> = input<string>(LISTBOX_DEFAULTS.EmptyMessage);
+  public readonly emptyMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** Message shown when the filter produces no matches. */
-  public readonly emptyFilterMessage: InputSignal<string> = input<string>(
-    LISTBOX_DEFAULTS.EmptyFilterMessage,
-  );
+  public readonly emptyFilterMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** CSS height for the scrollable options container. */
   public readonly scrollHeight: InputSignal<string> = input<string>(LISTBOX_DEFAULTS.ScrollHeight);
@@ -186,10 +182,10 @@ export class ListboxComponent implements ControlValueAccessor {
   public readonly size: InputSignal<ListboxSize> = input<ListboxSize>('md');
 
   /** Accessible label for the listbox element. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** ID of an external element that labels this listbox. */
-  public readonly ariaLabelledBy: InputSignal<string> = input<string>('');
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
   // ---------------------------------------------------------------------------
   // Outputs
@@ -273,6 +269,31 @@ export class ListboxComponent implements ControlValueAccessor {
   /** Resolved variant, falling back to the global theme service setting. */
   public readonly effectiveVariant: Signal<ListboxVariant> = computed<ListboxVariant>(
     (): ListboxVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved accessible label — falls back to i18n `listbox.label` when not set. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('listbox.label'),
+  );
+
+  /** Resolved empty-list message — falls back to i18n `listbox.empty` when not set. */
+  public readonly resolvedEmptyMessage: Signal<string> = computed<string>(
+    (): string => this.emptyMessage() ?? this.i18n.translate('listbox.empty'),
+  );
+
+  /** Resolved empty-filter message — falls back to i18n `listbox.empty.filter` when not set. */
+  public readonly resolvedEmptyFilterMessage: Signal<string> = computed<string>(
+    (): string => this.emptyFilterMessage() ?? this.i18n.translate('listbox.empty.filter'),
+  );
+
+  /** Resolved filter placeholder — falls back to i18n `listbox.filter.placeholder` when not set. */
+  public readonly resolvedFilterPlaceholder: Signal<string> = computed<string>(
+    (): string => this.filterPlaceholder() ?? this.i18n.translate('listbox.filter.placeholder'),
+  );
+
+  /** Resolved filter aria-label — falls back to i18n `listbox.filter.label` when not set. */
+  public readonly resolvedFilterAriaLabel: Signal<string> = computed<string>((): string =>
+    this.i18n.translate('listbox.filter.label'),
   );
 
   /** CSS classes applied to the host element. */

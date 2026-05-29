@@ -37,6 +37,11 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
 
   // ── Listbox ───────────────────────────────────────────────────────────────
   'listbox.select-all': 'Seleccionar todas las opciones',
+  'listbox.label': 'Lista',
+  'listbox.empty': 'No se encontraron elementos.',
+  'listbox.empty.filter': 'Ningún resultado coincide con su filtro.',
+  'listbox.filter.placeholder': 'Buscar...',
+  'listbox.filter.label': 'Filtrar opciones',
 
   // ── DatePicker ────────────────────────────────────────────────────────────
   'datepicker.toggle': 'Abrir calendario',
@@ -375,6 +380,14 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'image-compare.aria-label': 'Control deslizante de comparación de imágenes',
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
+  // ── VirtualScroller ───────────────────────────────────────────────────────
+  'virtual-scroller.list-label': 'Lista desplazable',
+  'virtual-scroller.grid-label': 'Cuadrícula desplazable',
+  'virtual-scroller.loading': 'Cargando elementos…',
+  'virtual-scroller.loading-more': 'Cargando más elementos.',
+  'virtual-scroller.empty': 'No hay elementos para mostrar.',
+  'virtual-scroller.available': 'elemento(s) disponible(s).',
+
   'code-snippet.tabs': 'Pestañas de archivos',
   'code-snippet.copy': 'Copiar código',
   'code-snippet.copied': '¡Copiado!',

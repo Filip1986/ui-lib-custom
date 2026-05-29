@@ -51,7 +51,7 @@ export const PAGINATOR_DEFAULTS: {
     '[class.ui-lib-paginator--empty]': 'isEmpty()',
     '[attr.id]': 'instanceId',
     '[attr.role]': '"navigation"',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
   },
 })
 export class PaginatorComponent {
@@ -84,6 +84,11 @@ export class PaginatorComponent {
     (): PaginatorVariant => this.variant() ?? (this.themeConfig.variant() as PaginatorVariant),
   );
 
+  /** Resolved accessible label — falls back to i18n `paginator.nav` when not set. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('paginator.nav'),
+  );
+
   /** Size token controlling padding and font size. */
   public readonly size: InputSignal<PaginatorSize> = input<PaginatorSize>('md');
 
@@ -114,10 +119,10 @@ export class PaginatorComponent {
   public readonly showJumpToPageInput: InputSignal<boolean> = input<boolean>(false);
 
   /** Additional CSS class(es) applied to the inner content wrapper. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible label for the navigation landmark (used on the host element). */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Pagination');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Emitted whenever the active page or rows-per-page changes. */
   public readonly pageChange: OutputEmitterRef<PaginatorPageEvent> = output<PaginatorPageEvent>();

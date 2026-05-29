@@ -37,6 +37,11 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
 
   // ── Listbox ───────────────────────────────────────────────────────────────
   'listbox.select-all': 'Sélectionner toutes les options',
+  'listbox.label': 'Liste',
+  'listbox.empty': 'Aucun élément trouvé.',
+  'listbox.empty.filter': 'Aucun résultat ne correspond à votre filtre.',
+  'listbox.filter.placeholder': 'Rechercher...',
+  'listbox.filter.label': 'Filtrer les options',
 
   // ── DatePicker ────────────────────────────────────────────────────────────
   'datepicker.toggle': 'Ouvrir le calendrier',
@@ -376,6 +381,14 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'image-compare.aria-label': "Curseur de comparaison d'image",
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
+  // ── VirtualScroller ───────────────────────────────────────────────────────
+  'virtual-scroller.list-label': 'Liste défilante',
+  'virtual-scroller.grid-label': 'Grille défilante',
+  'virtual-scroller.loading': 'Chargement des éléments…',
+  'virtual-scroller.loading-more': "Chargement d'éléments supplémentaires.",
+  'virtual-scroller.empty': 'Aucun élément à afficher.',
+  'virtual-scroller.available': 'élément(s) disponible(s).',
+
   'code-snippet.tabs': 'Onglets de fichiers',
   'code-snippet.copy': 'Copier le code',
   'code-snippet.copied': 'Copié !',

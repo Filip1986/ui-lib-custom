@@ -88,7 +88,7 @@ class TestHostComponent {
   public readonly items: WritableSignal<unknown[]> = signal<unknown[]>([]);
   public readonly itemSize: WritableSignal<number> = signal<number>(50);
   public readonly scrollHeight: WritableSignal<string> = signal<string>('400px');
-  public readonly styleClass: WritableSignal<string> = signal<string>('');
+  public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly showLoader: WritableSignal<boolean> = signal<boolean>(false);
   public readonly loading: WritableSignal<boolean | undefined> = signal<boolean | undefined>(
@@ -97,7 +97,7 @@ class TestHostComponent {
   public readonly showSpacer: WritableSignal<boolean> = signal<boolean>(true);
   public readonly lazy: WritableSignal<boolean> = signal<boolean>(false);
   public readonly tabIndex: WritableSignal<number> = signal<number>(0);
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly contentRole: WritableSignal<'list' | 'grid'> = signal<'list' | 'grid'>('list');
   public readonly totalRecords: WritableSignal<number | undefined> = signal<number | undefined>(
     undefined,

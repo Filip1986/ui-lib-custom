@@ -21,9 +21,9 @@
         type="text"
         role="searchbox"
         [value]="filterValue()"
-        [placeholder]="filterPlaceholder()"
+        [placeholder]="resolvedFilterPlaceholder()"
         [disabled]="isDisabled()"
-        [attr.aria-label]="'Filter options'"
+        [attr.aria-label]="resolvedFilterAriaLabel()"
         (input)="onFilterInput($event)"
         autocomplete="off"
       />
@@ -57,8 +57,8 @@
     [attr.id]="listboxElementId()"
     [attr.role]="'listbox'"
     [attr.aria-multiselectable]="multiple() ? 'true' : 'false'"
-    [attr.aria-label]="ariaLabel() || null"
-    [attr.aria-labelledby]="ariaLabelledBy() || null"
+    [attr.aria-label]="ariaLabelledBy() ? null : resolvedAriaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
     [attr.aria-activedescendant]="activeDescendantId()"
     [attr.aria-disabled]="isDisabled() ? 'true' : null"
     [attr.aria-readonly]="readonly() ? 'true' : null"
@@ -73,13 +73,13 @@
           @if (emptyFilterTemplate) {
             <ng-container [ngTemplateOutlet]="emptyFilterTemplate" />
           } @else {
-            {{ emptyFilterMessage() }}
+            {{ resolvedEmptyFilterMessage() }}
           }
         } @else {
           @if (emptyTemplate) {
             <ng-container [ngTemplateOutlet]="emptyTemplate" />
           } @else {
-            {{ emptyMessage() }}
+            {{ resolvedEmptyMessage() }}
           }
         }
       </div>

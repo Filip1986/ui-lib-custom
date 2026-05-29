@@ -37,6 +37,11 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── Listbox ───────────────────────────────────────────────────────────────
   'listbox.select-all': 'Select all options',
+  'listbox.label': 'List',
+  'listbox.empty': 'No items found.',
+  'listbox.empty.filter': 'No results match your filter.',
+  'listbox.filter.placeholder': 'Search...',
+  'listbox.filter.label': 'Filter options',
 
   // ── DatePicker ────────────────────────────────────────────────────────────
   'datepicker.toggle': 'Open calendar',
@@ -374,6 +379,14 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── ImageCompare ──────────────────────────────────────────────────────────
   'image-compare.aria-label': 'Image comparison slider',
+
+  // ── VirtualScroller ───────────────────────────────────────────────────────
+  'virtual-scroller.list-label': 'Scrollable list',
+  'virtual-scroller.grid-label': 'Scrollable grid',
+  'virtual-scroller.loading': 'Loading items…',
+  'virtual-scroller.loading-more': 'Loading more items.',
+  'virtual-scroller.empty': 'No items to display.',
+  'virtual-scroller.available': 'item(s) available.',
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
   'code-snippet.tabs': 'File tabs',

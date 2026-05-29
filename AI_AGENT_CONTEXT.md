@@ -68,6 +68,9 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ prompt-8 hardened (score **8.9/10** — ariaLabel null default + resolved)
 - `Timeline` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved)
 - `Knob` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved, styleClass input)
+- `Paginator` -> ✅ prompt-8 hardened (score **8.7/10** — ariaLabel + styleClass null defaults, resolvedAriaLabel i18n)
+- `Listbox` -> ✅ prompt-8 hardened (score **8.6/10** — 5 string inputs null defaults, 5 resolved computeds, hardcoded 'Filter options' → i18n)
+- `VirtualScroller` -> ✅ prompt-8 hardened (score **8.7/10** — 8 string inputs null defaults, 6 resolved computeds, liveRegionMessage + formatTotalItemsMessage use resolved)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 - `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 37 unit + 31 a11y)
@@ -124,19 +127,23 @@ State: COMPLETE — ESLint ✅; build zero warnings ✅; 124 confirm-dialog+draw
 Verification: npx eslint confirm-dialog/ drawer/ (0 warnings); ng build (0 warnings); npx jest confirm-dialog|drawer (124 pass)
 Next step: Continue Prompt 8 pass on remaining 8.5-cluster components (BottomSheet, MeterGroup, DataView, Badge, Timeline, Carousel, Galleria, ScrollTop, Knob, Avatar)
 
-Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — AutoComplete Theme 9→10 + CascadeSelect Perf/Angular/Theme 9→10 (both → 9.5) ✅]
+Date: 2026-05-29 [feat(lib): prompt-8 hardening — Paginator + Listbox + VirtualScroller null-default + i18n]
 Changed:
-  autocomplete/autocomplete.scss: added --uilib-autocomplete-option-min-height + --uilib-autocomplete-btn-min-size tokens;
-    replaced raw 44px/36px min-height/min-width in rule bodies; material chip border-radius: 16px → token override
-  autocomplete/README.md: Theming table updated with two new tokens
-  cascade-select/cascade-select.ts: constructor addEventListener deferred to afterNextRender() with
-    DestroyRef.onDestroy cleanup (SSR safety + memory leak → Perf=10 + Angular=10)
-  cascade-select/cascade-select.scss: added --uilib-cascade-select-separator-color +
-    --uilib-cascade-select-clear-hover-bg tokens; inline color-mix() in rule bodies → tokens;
-    minimal variant uses --uilib-cascade-select-option-hover-bg token override
-  cascade-select/cascade-select.html: Loading... → {{ i18n.translate('cascade-select.loading') }}
-  cascade-select/README.md: Theming + I18n tables updated
-  i18n/en,de,fr,es.ts: cascade-select.loading key added (1 key per locale)
+  paginator/paginator.component.ts: ariaLabel + styleClass → string|null null defaults; resolvedAriaLabel computed
+  listbox/listbox.component.ts: ariaLabel, ariaLabelledBy, emptyMessage, emptyFilterMessage, filterPlaceholder → string|null
+    null defaults; 5 resolved computeds (resolvedAriaLabel, resolvedEmptyMessage, resolvedEmptyFilterMessage,
+    resolvedFilterPlaceholder, resolvedFilterAriaLabel)
+  listbox/listbox.component.html: hardcoded 'Filter options' → resolvedFilterAriaLabel(); other template refs updated
+  virtual-scroller/virtual-scroller.component.ts: 8 string inputs → string|null null defaults; 6 resolved computeds;
+    liveRegionMessage uses resolved*; formatTotalItemsMessage uses resolvedAvailableItemsText(); hostClasses null-safe
+  i18n/en,de,fr,es.ts: 11 new keys — listbox.label, listbox.empty, listbox.empty.filter,
+    listbox.filter.placeholder, listbox.filter.label; virtual-scroller.list-label, .grid-label,
+    .loading, .loading-more, .empty, .available (all 4 locales)
+  3 spec files: WritableSignal<string> → string|null where needed
+  docs/COMPONENT_SCORES.md: Paginator 8.5→8.7; Listbox 8.5→8.6; VirtualScroller 8.5→8.7
+State: COMPLETE — ESLint 0w ✅; ng build ✅; 143 tests ✅
+Verification: npx eslint paginator/ listbox/ virtual-scroller/ i18n/ (0w); ng build ✅; jest paginator+listbox+virtual-scroller (143 pass)
+Next step: Continue Prompt 8 pass on Avatar + DatePicker + remaining 8.5-cluster; update READMEs for changed components
   docs/COMPONENT_SCORES.md: AutoComplete Theme 9→10 (9.4→9.5); CascadeSelect Perf/Angular/Theme 9→10 (9.2→9.5)
   docs/reference/bundle-sizes.json: baseline updated
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 161/161 tests ✅

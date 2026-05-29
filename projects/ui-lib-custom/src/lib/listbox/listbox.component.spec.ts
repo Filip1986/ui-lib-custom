@@ -23,7 +23,7 @@ import type {
 
 function queryEl<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
   if (!element) throw new Error(`Element not found: ${selector}`);
@@ -32,7 +32,7 @@ function queryEl<T extends Element = HTMLElement>(
 
 function queryAllEls<T extends Element = HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -114,7 +114,9 @@ class ListboxNgModelHostComponent {
   public readonly showToggleAll: WritableSignal<boolean> = signal<boolean>(false);
   public readonly striped: WritableSignal<boolean> = signal<boolean>(false);
   public readonly group: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('Choose a fruit');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
+    'Choose a fruit',
+  );
   public value: unknown = null;
   public readonly changeEvents: ListboxChangeEvent[] = [];
   public readonly filterEvents: ListboxFilterEvent[] = [];
@@ -175,7 +177,7 @@ class ListboxMultipleReactiveHostComponent {
 // ---------------------------------------------------------------------------
 
 async function createNgModelFixture(
-  setup?: (host: ListboxNgModelHostComponent) => void
+  setup?: (host: ListboxNgModelHostComponent) => void,
 ): Promise<ComponentFixture<ListboxNgModelHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [ListboxNgModelHostComponent],
@@ -183,7 +185,7 @@ async function createNgModelFixture(
   }).compileComponents();
 
   const fixture: ComponentFixture<ListboxNgModelHostComponent> = TestBed.createComponent(
-    ListboxNgModelHostComponent
+    ListboxNgModelHostComponent,
   );
   setup?.(fixture.componentInstance);
   fixture.detectChanges();
@@ -198,7 +200,7 @@ async function createReactiveFixture(): Promise<ComponentFixture<ListboxReactive
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<ListboxReactiveHostComponent> = TestBed.createComponent(
-    ListboxReactiveHostComponent
+    ListboxReactiveHostComponent,
   );
   fixture.detectChanges();
   await fixture.whenStable();
@@ -214,7 +216,7 @@ async function createMultipleReactiveFixture(): Promise<
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<ListboxMultipleReactiveHostComponent> = TestBed.createComponent(
-    ListboxMultipleReactiveHostComponent
+    ListboxMultipleReactiveHostComponent,
   );
   fixture.detectChanges();
   await fixture.whenStable();
@@ -260,11 +262,11 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const filterInput: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       );
       expect(filterInput).toBeTruthy();
     });
@@ -282,7 +284,7 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       const header: HTMLElement = queryEl(fixture, '.ui-lib-listbox__header');
       expect(header).toBeTruthy();
@@ -291,7 +293,7 @@ describe('ListboxComponent', (): void => {
     it('should not render toggle-all header when showToggleAll=false', async (): Promise<void> => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture();
       const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-listbox__header'
+        '.ui-lib-listbox__header',
       );
       expect(header).toBeNull();
     });
@@ -301,7 +303,7 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
           host.checkbox.set(true);
-        }
+        },
       );
       const checkboxes: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__checkbox');
       expect(checkboxes.length).toBeGreaterThan(0);
@@ -311,7 +313,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.options.set([]);
-        }
+        },
       );
       const empty: HTMLElement = queryEl(fixture, '.ui-lib-listbox__empty');
       expect(empty.textContent!.trim()).toBeTruthy();
@@ -328,12 +330,12 @@ describe('ListboxComponent', (): void => {
         const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
           (host: ListboxNgModelHostComponent): void => {
             host.variant.set(variant);
-          }
+          },
         );
         const hasVariantClass: boolean = hasClass(
           fixture,
           'ui-lib-listbox',
-          `ui-lib-listbox--${variant}`
+          `ui-lib-listbox--${variant}`,
         );
         expect(hasVariantClass).toBe(true);
       });
@@ -350,12 +352,12 @@ describe('ListboxComponent', (): void => {
         const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
           (host: ListboxNgModelHostComponent): void => {
             host.size.set(size);
-          }
+          },
         );
         const hasSizeClass: boolean = hasClass(
           fixture,
           'ui-lib-listbox',
-          `ui-lib-listbox--size-${size}`
+          `ui-lib-listbox--size-${size}`,
         );
         expect(hasSizeClass).toBe(true);
       });
@@ -443,7 +445,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
-        }
+        },
       );
       const items: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__item');
       items[0]!.click();
@@ -461,7 +463,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
-        }
+        },
       );
       const items: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__item');
       items[0]!.click();
@@ -479,7 +481,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
-        }
+        },
       );
       expect(hasClass(fixture, 'ui-lib-listbox', 'ui-lib-listbox--multiple')).toBe(true);
     });
@@ -493,11 +495,11 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       const toggleCheckbox: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.ui-lib-listbox__header input[type="checkbox"]'
+        '.ui-lib-listbox__header input[type="checkbox"]',
       );
       toggleCheckbox.click();
       fixture.detectChanges();
@@ -513,11 +515,11 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
           host.showToggleAll.set(true);
-        }
+        },
       );
       const toggleCheckbox: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.ui-lib-listbox__header input[type="checkbox"]'
+        '.ui-lib-listbox__header input[type="checkbox"]',
       );
       // Select all
       toggleCheckbox.click();
@@ -540,11 +542,11 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const filterInput: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       );
       filterInput.value = 'ban';
       filterInput.dispatchEvent(new Event('input'));
@@ -560,11 +562,11 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const filterInput: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       );
       filterInput.value = 'zzz';
       filterInput.dispatchEvent(new Event('input'));
@@ -579,11 +581,11 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.filter.set(true);
-        }
+        },
       );
       const filterInput: HTMLInputElement = queryEl<HTMLInputElement>(
         fixture,
-        '.ui-lib-listbox__filter-input'
+        '.ui-lib-listbox__filter-input',
       );
       filterInput.value = 'app';
       filterInput.dispatchEvent(new Event('input'));
@@ -602,7 +604,7 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.options.set(GROUPED_OPTIONS as unknown as ListboxOption[]);
           host.group.set(true);
-        }
+        },
       );
       const groupHeaders: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__group-header');
       expect(groupHeaders.length).toBe(2);
@@ -615,7 +617,7 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.options.set(GROUPED_OPTIONS as unknown as ListboxOption[]);
           host.group.set(true);
-        }
+        },
       );
       const items: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__item');
       expect(items.length).toBe(4);
@@ -626,7 +628,7 @@ describe('ListboxComponent', (): void => {
         (host: ListboxNgModelHostComponent): void => {
           host.options.set(GROUPED_OPTIONS as unknown as ListboxOption[]);
           host.group.set(true);
-        }
+        },
       );
       const items: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__item');
       items[0]!.click();
@@ -644,7 +646,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.disabled.set(true);
-        }
+        },
       );
       expect(hasClass(fixture, 'ui-lib-listbox', 'ui-lib-listbox--disabled')).toBe(true);
     });
@@ -653,7 +655,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.disabled.set(true);
-        }
+        },
       );
       const host: HTMLElement = queryEl(fixture, 'ui-lib-listbox');
       expect(host.getAttribute('aria-disabled')).toBe('true');
@@ -667,7 +669,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.readonly.set(true);
-        }
+        },
       );
       expect(hasClass(fixture, 'ui-lib-listbox', 'ui-lib-listbox--readonly')).toBe(true);
     });
@@ -676,7 +678,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.readonly.set(true);
-        }
+        },
       );
       const items: HTMLElement[] = queryAllEls(fixture, '.ui-lib-listbox__item');
       items[0]!.click();
@@ -694,7 +696,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.striped.set(true);
-        }
+        },
       );
       expect(hasClass(fixture, 'ui-lib-listbox', 'ui-lib-listbox--striped')).toBe(true);
     });
@@ -713,7 +715,7 @@ describe('ListboxComponent', (): void => {
       fixture.detectChanges();
 
       listContainer.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -733,12 +735,12 @@ describe('ListboxComponent', (): void => {
 
       // ArrowDown twice to index 1
       listContainer.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
       listContainer.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -832,7 +834,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.multiple.set(true);
-        }
+        },
       );
       const listContainer: HTMLElement = queryEl(fixture, '.ui-lib-listbox__list-container');
       expect(listContainer.getAttribute('aria-multiselectable')).toBe('true');
@@ -848,7 +850,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.disabled.set(true);
-        }
+        },
       );
       const listContainer: HTMLElement = queryEl(fixture, '.ui-lib-listbox__list-container');
       expect(listContainer.getAttribute('aria-disabled')).toBe('true');
@@ -869,7 +871,7 @@ describe('ListboxComponent', (): void => {
       const fixture: ComponentFixture<ListboxNgModelHostComponent> = await createNgModelFixture(
         (host: ListboxNgModelHostComponent): void => {
           host.value = 'banana';
-        }
+        },
       );
       fixture.detectChanges();
       await fixture.whenStable();

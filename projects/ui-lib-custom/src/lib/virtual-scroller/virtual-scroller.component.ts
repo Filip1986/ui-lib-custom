@@ -117,7 +117,7 @@ export class VirtualScrollerComponent
   );
 
   /** Additional CSS class(es) applied to the host element. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** The full array of items to virtualize. */
   public readonly items: InputSignal<unknown[] | null | undefined> = input<
@@ -194,28 +194,28 @@ export class VirtualScrollerComponent
   public readonly tabIndex: InputSignal<number> = input<number>(0);
 
   /** Accessible label for the scrollable region. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Structural role used by assistive technology for the rendered content. */
   public readonly contentRole: InputSignal<'list' | 'grid'> = input<'list' | 'grid'>('list');
 
   /** Default fallback label used when no explicit list ariaLabel is provided. */
-  public readonly defaultListAriaLabel: InputSignal<string> = input<string>('Scrollable list');
+  public readonly defaultListAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Default fallback label used when no explicit grid ariaLabel is provided. */
-  public readonly defaultGridAriaLabel: InputSignal<string> = input<string>('Scrollable grid');
+  public readonly defaultGridAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Localizable message announced while the first batch is loading. */
-  public readonly loadingMessage: InputSignal<string> = input<string>('Loading items…');
+  public readonly loadingMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** Localizable message announced while additional items are loading. */
-  public readonly loadingMoreMessage: InputSignal<string> = input<string>('Loading more items.');
+  public readonly loadingMoreMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** Localizable message announced when the data set is empty. */
-  public readonly emptyMessage: InputSignal<string> = input<string>('No items to display.');
+  public readonly emptyMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** Localizable suffix appended after the announced total item count. */
-  public readonly availableItemsText: InputSignal<string> = input<string>('item(s) available.');
+  public readonly availableItemsText: InputSignal<string | null> = input<string | null>(null);
 
   /**
    * Total number of records available on the server.
@@ -366,19 +366,50 @@ export class VirtualScrollerComponent
     if (this.isBoth()) parts.push('uilib-scroller-both');
     const variantValue: 'material' | 'bootstrap' | 'minimal' = this.effectiveVariant();
     parts.push(`ui-lib-virtual-scroller--${variantValue}`);
-    if (this.styleClass()) parts.push(this.styleClass());
+    const extra: string | null = this.styleClass();
+    if (extra) parts.push(extra);
     return parts.join(' ');
   });
 
+  /** @internal Resolved list aria-label fallback. */
+  protected readonly resolvedDefaultListAriaLabel: Signal<string> = computed<string>(
+    (): string => this.defaultListAriaLabel() ?? this.i18n.translate('virtual-scroller.list-label'),
+  );
+
+  /** @internal Resolved grid aria-label fallback. */
+  protected readonly resolvedDefaultGridAriaLabel: Signal<string> = computed<string>(
+    (): string => this.defaultGridAriaLabel() ?? this.i18n.translate('virtual-scroller.grid-label'),
+  );
+
+  /** @internal Resolved loading message. */
+  protected readonly resolvedLoadingMessage: Signal<string> = computed<string>(
+    (): string => this.loadingMessage() ?? this.i18n.translate('virtual-scroller.loading'),
+  );
+
+  /** @internal Resolved loading-more message. */
+  protected readonly resolvedLoadingMoreMessage: Signal<string> = computed<string>(
+    (): string => this.loadingMoreMessage() ?? this.i18n.translate('virtual-scroller.loading-more'),
+  );
+
+  /** @internal Resolved empty message. */
+  protected readonly resolvedEmptyMessage: Signal<string> = computed<string>(
+    (): string => this.emptyMessage() ?? this.i18n.translate('virtual-scroller.empty'),
+  );
+
+  /** @internal Resolved available-items text. */
+  protected readonly resolvedAvailableItemsText: Signal<string> = computed<string>(
+    (): string => this.availableItemsText() ?? this.i18n.translate('virtual-scroller.available'),
+  );
+
   /** @internal Non-empty label for the scrollable region. */
-  protected readonly resolvedAriaLabel: Signal<string> = computed((): string => {
-    const ariaLabel: string = this.ariaLabel().trim();
-    if (ariaLabel.length > 0) {
-      return ariaLabel;
+  protected readonly resolvedAriaLabel: Signal<string> = computed<string>((): string => {
+    const explicit: string | null = this.ariaLabel();
+    if (explicit !== null && explicit.trim().length > 0) {
+      return explicit;
     }
     return this.contentRole() === 'grid'
-      ? this.defaultGridAriaLabel()
-      : this.defaultListAriaLabel();
+      ? this.resolvedDefaultGridAriaLabel()
+      : this.resolvedDefaultListAriaLabel();
   });
 
   /** @internal Total number of logical items or rows announced to assistive technology. */
@@ -401,15 +432,15 @@ export class VirtualScrollerComponent
   );
 
   /** @internal Polite live region text for loading, empty, and total-count states. */
-  protected readonly liveRegionMessage: Signal<string> = computed((): string => {
+  protected readonly liveRegionMessage: Signal<string> = computed<string>((): string => {
     const totalItemCount: number = this.totalItemCount();
     if (this.internalLoading()) {
       return totalItemCount > 0
-        ? `${this.loadingMoreMessage()} ${this.formatTotalItemsMessage(totalItemCount)}`
-        : this.loadingMessage();
+        ? `${this.resolvedLoadingMoreMessage()} ${this.formatTotalItemsMessage(totalItemCount)}`
+        : this.resolvedLoadingMessage();
     }
     if (totalItemCount === 0) {
-      return this.emptyMessage();
+      return this.resolvedEmptyMessage();
     }
     return this.formatTotalItemsMessage(totalItemCount);
   });
@@ -1561,9 +1592,7 @@ export class VirtualScrollerComponent
   }
 
   private formatTotalItemsMessage(totalItemCount: number): string {
-    const availableItemsText: string = this.availableItemsText().trim();
-    return availableItemsText.length > 0
-      ? `${totalItemCount.toString()} ${availableItemsText}`
-      : totalItemCount.toString();
+    const availableItemsText: string = this.resolvedAvailableItemsText();
+    return `${totalItemCount.toString()} ${availableItemsText}`;
   }
 }
