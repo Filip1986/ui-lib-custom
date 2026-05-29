@@ -421,7 +421,7 @@
             [disabled]="isDisabled()"
             (click)="onTodayButtonClick($event)"
           >
-            {{ locale().today }}
+            {{ resolvedTodayLabel() }}
           </button>
           <button
             type="button"
@@ -429,7 +429,7 @@
             [disabled]="isDisabled()"
             (click)="onClearButtonClick($event)"
           >
-            {{ locale().clear }}
+            {{ resolvedClearLabel() }}
           </button>
         </div>
       }

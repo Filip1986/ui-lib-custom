@@ -234,6 +234,14 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     (): boolean => this.inline() || this.overlayVisible(),
   );
 
+  protected readonly resolvedTodayLabel: Signal<string> = computed<string>(
+    (): string => this.locale().today ?? this.i18n.translate('datepicker.today'),
+  );
+
+  protected readonly resolvedClearLabel: Signal<string> = computed<string>(
+    (): string => this.locale().clear ?? this.i18n.translate('datepicker.clear'),
+  );
+
   public readonly resolvedInputId: Signal<string> = computed<string>((): string => {
     const configuredInputId: string = this.inputId().trim();
     return configuredInputId.length > 0

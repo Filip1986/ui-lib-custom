@@ -58,8 +58,8 @@ export interface DatePickerLocale {
   monthNames: string[];
   monthNamesShort: string[];
   firstDayOfWeek: number;
-  today: string;
-  clear: string;
+  today?: string;
+  clear?: string;
   am: string;
   pm: string;
 }

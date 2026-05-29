@@ -190,8 +190,6 @@ export const DEFAULT_LOCALE: DatePickerLocale = {
     'Dec',
   ],
   firstDayOfWeek: 0,
-  today: 'Today',
-  clear: 'Clear',
   am: 'AM',
   pm: 'PM',
 } as const;
