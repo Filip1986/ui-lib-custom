@@ -4,6 +4,8 @@ A layout wrapper that stretches all descendant form controls to 100 % of the ava
 
 Inspired by PrimeNG's `p-fluid` / `[pFluid]` API.
 
+> **When to use:** wrap a form or form section with `<ui-lib-fluid>` or `[uiLibFluid]` when you want all controls inside to fill the available width — useful in responsive layouts, stacked form layouts, or modals. Use the directive form when you don't want an extra DOM node in the hierarchy.
+
 ---
 
 ## Package path
@@ -45,9 +47,11 @@ import { Fluid, FluidDirective } from 'ui-lib-custom/fluid';
 
 ---
 
-## CSS Variables
+## CSS Custom Properties
 
-The Fluid component does not introduce its own design tokens. The `.ui-lib-fluid` class applies `width: 100%; box-sizing: border-box` to the following descendant selectors:
+_None — Fluid is a pure layout utility that applies `width: 100%; box-sizing: border-box` to form controls. It has no visual styling, so no `--uilib-fluid-*` tokens are needed. There are no theme variants (material/bootstrap/minimal) because fluid width is layout-only and not design-variant-dependent._
+
+The `.ui-lib-fluid` class stretches the following descendant selectors to full width:
 
 - `input`, `textarea`, `select`
 - `button` (excluding internal utility buttons)
