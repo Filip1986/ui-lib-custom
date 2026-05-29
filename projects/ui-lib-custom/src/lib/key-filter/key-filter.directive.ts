@@ -1,11 +1,9 @@
 import { Directive, ElementRef, Renderer2, effect, inject, input, isDevMode } from '@angular/core';
 import type { AfterViewInit, InputSignal, OnDestroy } from '@angular/core';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEY_FILTER_DEFAULTS, KEY_FILTER_PRESET_PATTERNS } from './key-filter.types';
 import type { KeyFilterPreset } from './key-filter.types';
-
-const PASTE_FILTER_ANNOUNCEMENT: string =
-  'Characters not matching the allowed pattern were removed.';
 
 const VISUALLY_HIDDEN_STYLES: Readonly<Record<string, string>> = {
   position: 'absolute',
@@ -46,6 +44,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly renderer: Renderer2 = inject(Renderer2);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   private removeKeydownListener: (() => void) | null = null;
   private removePasteListener: (() => void) | null = null;
@@ -68,11 +67,11 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
    * Useful for toggling validation off at runtime.
    */
   public readonly keyFilterBypass: InputSignal<boolean> = input<boolean>(
-    KEY_FILTER_DEFAULTS.bypass
+    KEY_FILTER_DEFAULTS.bypass,
   );
   public readonly hintText: InputSignal<string | null> = input<string | null>(null);
   public readonly pattern: InputSignal<KeyFilterPreset | null> = input<KeyFilterPreset | null>(
-    null
+    null,
   );
   public readonly regex: InputSignal<RegExp | null> = input<RegExp | null>(null);
 
@@ -97,15 +96,15 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     this.removeKeydownListener = this.renderer.listen(
       hostElement,
       'keydown',
-      (event: KeyboardEvent): void => this.onKeydown(event)
+      (event: KeyboardEvent): void => this.onKeydown(event),
     );
     this.removePasteListener = this.renderer.listen(
       hostElement,
       'paste',
-      (event: ClipboardEvent): void => this.onPaste(event)
+      (event: ClipboardEvent): void => this.onPaste(event),
     );
     this.removeDropListener = this.renderer.listen(hostElement, 'drop', (event: DragEvent): void =>
-      this.onDrop(event)
+      this.onDrop(event),
     );
 
     this.viewInitialized = true;
@@ -164,7 +163,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     event.preventDefault();
 
     const target: HTMLInputElement | HTMLTextAreaElement | null = this.resolveTargetControl(
-      event.target
+      event.target,
     );
     if (!target) {
       return;
@@ -174,7 +173,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     target.value = target.value.slice(0, start) + filtered + target.value.slice(end);
     target.setSelectionRange(start + filtered.length, start + filtered.length);
     target.dispatchEvent(new Event('input', { bubbles: true }));
-    void this.liveAnnouncer.announce(PASTE_FILTER_ANNOUNCEMENT, 'polite');
+    void this.liveAnnouncer.announce(this.i18n.translate('key-filter.paste-filter'), 'polite');
   }
 
   /** Strip disallowed characters from drag-and-dropped text. */
@@ -196,7 +195,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
     event.preventDefault();
     const target: HTMLInputElement | HTMLTextAreaElement | null = this.resolveTargetControl(
-      event.target
+      event.target,
     );
     if (!target) {
       return;
@@ -260,12 +259,12 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
     this.hasWarnedPatternConflict = true;
     console.warn(
-      '[uilibKeyFilter] Both pattern and regex are set. The regex input takes precedence.'
+      '[uilibKeyFilter] Both pattern and regex are set. The regex input takes precedence.',
     );
   }
 
   private resolveTargetControl(
-    target: EventTarget | null
+    target: EventTarget | null,
   ): HTMLInputElement | HTMLTextAreaElement | null {
     if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
       return target;
@@ -311,7 +310,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
       Object.entries(VISUALLY_HIDDEN_STYLES).forEach(
         ([styleName, styleValue]: [string, string]): void => {
           this.renderer.setStyle(hintElement, styleName, styleValue);
-        }
+        },
       );
 
       const nextSibling: ChildNode | null = hostElement.nextSibling;
@@ -345,7 +344,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
   private addDescribedById(control: HTMLInputElement | HTMLTextAreaElement, id: string): void {
     const existingIds: string[] = this.readAriaDescribedByIds(control).filter(
-      (existingId: string): boolean => existingId !== id
+      (existingId: string): boolean => existingId !== id,
     );
     existingIds.push(id);
     this.renderer.setAttribute(control, 'aria-describedby', existingIds.join(' '));
@@ -353,7 +352,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
   private removeDescribedById(control: HTMLInputElement | HTMLTextAreaElement, id: string): void {
     const remainingIds: string[] = this.readAriaDescribedByIds(control).filter(
-      (existingId: string): boolean => existingId !== id
+      (existingId: string): boolean => existingId !== id,
     );
     if (remainingIds.length === 0) {
       this.renderer.removeAttribute(control, 'aria-describedby');

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   isDevMode,
   ViewEncapsulation,
@@ -13,11 +14,10 @@ import { Icon } from 'ui-lib-custom/icon';
 import type { IconSize } from 'ui-lib-custom/icon';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
 import { SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
 
 export type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
-
-const ICON_BUTTON_LOADING_ARIA_LABEL: string = 'Loading, please wait';
 
 /**
  * Icon-only button component with size and variant support.
@@ -37,12 +37,14 @@ export class IconButton implements AfterViewInit {
   >();
   public readonly size: InputSignal<IconButtonSize> = input<IconButtonSize>(SHARED_DEFAULTS.Size);
   public readonly variant: InputSignal<IconButtonVariant> = input<IconButtonVariant>(
-    SHARED_DEFAULTS.Variant
+    SHARED_DEFAULTS.Variant,
   );
   public readonly color: InputSignal<IconButtonColor | null> = input<IconButtonColor | null>(null);
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly loading: InputSignal<boolean> = input<boolean>(false);
   public readonly ariaLabel: InputSignal<string> = input.required<string>();
+
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   public readonly iconSize: Signal<IconSize> = computed<IconSize>((): IconSize => {
     const map: Record<IconButtonSize, IconSize> = {
@@ -54,22 +56,22 @@ export class IconButton implements AfterViewInit {
   });
 
   public readonly resolvedIconName: Signal<SemanticIcon | string> = computed<SemanticIcon | string>(
-    (): SemanticIcon | string => (this.loading() ? 'spinner' : this.icon())
+    (): SemanticIcon | string => (this.loading() ? 'spinner' : this.icon()),
   );
 
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
       if (this.loading()) {
-        return ICON_BUTTON_LOADING_ARIA_LABEL;
+        return this.i18n.translate('icon-button.loading');
       }
 
       const ariaLabel: string = this.ariaLabel().trim();
       return ariaLabel.length > 0 ? ariaLabel : null;
-    }
+    },
   );
 
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
-    (): boolean => this.disabled() || this.loading()
+    (): boolean => this.disabled() || this.loading(),
   );
 
   public readonly buttonClasses: Signal<string> = computed<string>((): string => {

@@ -36,7 +36,7 @@ export type {
   MenubarVariant,
 } from './menubar.types';
 
-/** Default accessible label exported for test assertions. */
+/** @deprecated Use the `menubar.label` i18n key instead. Kept only for backward-compatible test assertions. */
 export const MENUBAR_DEFAULT_ARIA_LABEL: string = 'Navigation';
 
 /** Auto-incrementing counter to generate unique IDs for each Menubar instance. */
@@ -87,8 +87,11 @@ export class Menubar implements OnDestroy {
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label for the navigation landmark (`aria-label` on the `<nav>`). */
-  public readonly ariaLabel: InputSignal<string> = input<string>(MENUBAR_DEFAULT_ARIA_LABEL);
+  /**
+   * Accessible label for the navigation landmark (`aria-label` on the `<nav>`).
+   * Falls back to the i18n `menubar.label` key when omitted.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ── Outputs ─────────────────────────────────────────────────────────────────
 
@@ -132,6 +135,11 @@ export class Menubar implements OnDestroy {
   /** Resolved variant — falls back to the global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<MenubarVariant> = computed<MenubarVariant>(
     (): MenubarVariant => this.variant() ?? (this.themeConfig.variant() as MenubarVariant),
+  );
+
+  /** Resolved aria-label for the nav landmark — consumer input wins, falls back to i18n key. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('menubar.label'),
   );
 
   /** Combined CSS classes applied to the host element. */

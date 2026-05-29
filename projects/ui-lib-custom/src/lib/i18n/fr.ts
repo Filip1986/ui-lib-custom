@@ -227,9 +227,12 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
 
   // ── Tabs ──────────────────────────────────────────────────────────────────
   'tabs.close': "Fermer l'onglet",
+  'tabs.scroll.prev': 'Onglets précédents',
+  'tabs.scroll.next': 'Onglets suivants',
 
   // ── Menubar ───────────────────────────────────────────────────────────────
   'menubar.toggle': 'Basculer le menu de navigation',
+  'menubar.label': 'Navigation',
 
   // ── Menu / ContextMenu / TieredMenu / MegaMenu / PanelMenu / Breadcrumb ───
   'breadcrumb.aria-label': "Fil d'Ariane",
@@ -240,9 +243,11 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'mega-menu.submenu': 'Sous-menu {label}',
   'panel-menu.aria-label': 'Menu de panneau',
 
-  // ── Button ────────────────────────────────────────────────────────────────
+  // ── Button / IconButton / SelectButton ───────────────────────────────────
   'button.loading': 'Chargement',
   'button.icon-only': 'Bouton',
+  'icon-button.loading': 'Chargement en cours, veuillez patienter',
+  'select-button.label': 'Sélectionner une option',
 
   // ── OrderList ─────────────────────────────────────────────────────────────
   'order-list.filter-placeholder': 'Filtrer',
@@ -251,6 +256,13 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'input.clear': 'Effacer la saisie',
   'input.password-toggle': 'Basculer la visibilité du mot de passe',
   'input-mask.clear': 'Effacer',
+  'input-mask.incomplete': 'Veuillez compléter le format requis.',
+  'input-mask.invalid': 'La valeur saisie ne correspond pas au format requis.',
+
+  // ── KeyFilter ─────────────────────────────────────────────────────────────
+  'key-filter.paste-filter':
+    'Les caractères ne correspondant pas au modèle autorisé ont été supprimés.',
+
   'password.clear': 'Effacer le mot de passe',
   'password.show': 'Afficher le mot de passe',
   'password.hide': 'Masquer le mot de passe',

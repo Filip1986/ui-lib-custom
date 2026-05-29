@@ -27,14 +27,6 @@ import { INPUT_MASK_DEFAULTS } from './input-mask.types';
 import type { Caret, InputMaskCompleteEvent, InputMaskSize } from './input-mask.types';
 import { MaskEngine } from './mask-engine';
 
-const INPUT_MASK_DEFAULT_ERROR_MESSAGES: Readonly<{
-  incomplete: string;
-  invalid: string;
-}> = {
-  incomplete: 'Please complete the required format.',
-  invalid: 'The entered value does not match the required format.',
-};
-
 let nextInputMaskInstanceId: number = 0;
 
 /**
@@ -157,8 +149,8 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
     (): string =>
       this.errorMessage() ??
       (this.hasIncompleteMask()
-        ? INPUT_MASK_DEFAULT_ERROR_MESSAGES.incomplete
-        : INPUT_MASK_DEFAULT_ERROR_MESSAGES.invalid),
+        ? this.i18n.translate('input-mask.incomplete')
+        : this.i18n.translate('input-mask.invalid')),
   );
   protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
     (): string | null => {

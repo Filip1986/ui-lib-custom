@@ -25,6 +25,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { Button } from 'ui-lib-custom/button';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
   SHARED_DEFAULTS,
   SHARED_SIZES,
@@ -79,6 +80,7 @@ import type {
 export class SelectButton implements ControlValueAccessor {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   protected readonly themeVariants: typeof SHARED_THEME_VARIANTS = SHARED_THEME_VARIANTS;
 
@@ -167,7 +169,7 @@ export class SelectButton implements ControlValueAccessor {
       if (this.ariaLabelledBy()) {
         return null;
       }
-      return this.ariaLabel() ?? 'Select options';
+      return this.ariaLabel() ?? this.i18n.translate('select-button.label');
     },
   );
 

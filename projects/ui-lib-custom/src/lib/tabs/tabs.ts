@@ -691,12 +691,12 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   /** Label for the previous scroll button. */
   public scrollPrevLabel(): string {
-    return 'Previous tabs';
+    return this.i18n.translate('tabs.scroll.prev');
   }
 
   /** Label for the next scroll button. */
   public scrollNextLabel(): string {
-    return 'Next tabs';
+    return this.i18n.translate('tabs.scroll.next');
   }
 
   /** Icon name for the previous scroll button. */

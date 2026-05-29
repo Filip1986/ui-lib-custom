@@ -227,9 +227,12 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
 
   // ── Tabs ──────────────────────────────────────────────────────────────────
   'tabs.close': 'Cerrar pestaña',
+  'tabs.scroll.prev': 'Pestañas anteriores',
+  'tabs.scroll.next': 'Pestañas siguientes',
 
   // ── Menubar ───────────────────────────────────────────────────────────────
   'menubar.toggle': 'Alternar menú de navegación',
+  'menubar.label': 'Navegación',
 
   // ── Menu / ContextMenu / TieredMenu / MegaMenu / PanelMenu / Breadcrumb ───
   'breadcrumb.aria-label': 'Ruta de navegación',
@@ -240,9 +243,11 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'mega-menu.submenu': 'Submenú de {label}',
   'panel-menu.aria-label': 'Menú de panel',
 
-  // ── Button ────────────────────────────────────────────────────────────────
+  // ── Button / IconButton / SelectButton ───────────────────────────────────
   'button.loading': 'Cargando',
   'button.icon-only': 'Botón',
+  'icon-button.loading': 'Cargando, por favor espere',
+  'select-button.label': 'Seleccionar una opción',
 
   // ── OrderList ─────────────────────────────────────────────────────────────
   'order-list.filter-placeholder': 'Filtrar',
@@ -251,6 +256,13 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'input.clear': 'Limpiar entrada',
   'input.password-toggle': 'Alternar visibilidad de contraseña',
   'input-mask.clear': 'Limpiar',
+  'input-mask.incomplete': 'Por favor, complete el formato requerido.',
+  'input-mask.invalid': 'El valor introducido no coincide con el formato requerido.',
+
+  // ── KeyFilter ─────────────────────────────────────────────────────────────
+  'key-filter.paste-filter':
+    'Los caracteres que no coinciden con el patrón permitido fueron eliminados.',
+
   'password.clear': 'Limpiar contraseña',
   'password.show': 'Mostrar contraseña',
   'password.hide': 'Ocultar contraseña',

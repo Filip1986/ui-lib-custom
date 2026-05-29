@@ -91,6 +91,35 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (batch 5):
+  select-button/select-button.ts: UiLibI18nService injected; ariaLabelResolved ?? 'Select options'
+    → ?? i18n.translate('select-button.label')
+  menubar/menubar.ts: ariaLabel input string→null default; resolvedAriaLabel computed; MENUBAR_DEFAULT_ARIA_LABEL
+    now deprecated; i18n 'menubar.label' key as fallback
+  menubar/menubar.html: [attr.aria-label]="ariaLabel()" → resolvedAriaLabel()
+  icon-button/icon-button.ts: UiLibI18nService + inject added; ICON_BUTTON_LOADING_ARIA_LABEL constant
+    removed; ariaLabelResolved uses i18n.translate('icon-button.loading')
+  tabs/tabs.ts: scrollPrevLabel()/scrollNextLabel() return i18n.translate('tabs.scroll.prev/next')
+  input-mask/input-mask.component.ts: INPUT_MASK_DEFAULT_ERROR_MESSAGES constant removed;
+    resolvedErrorMessage uses i18n.translate('input-mask.incomplete/invalid')
+  key-filter/key-filter.directive.ts: UiLibI18nService injected; PASTE_FILTER_ANNOUNCEMENT constant
+    removed; announce uses i18n.translate('key-filter.paste-filter')
+  i18n/en,de,fr,es.ts: 8 new keys per locale — tabs.scroll.prev/next; menubar.label;
+    icon-button.loading; select-button.label; input-mask.incomplete/invalid; key-filter.paste-filter
+  docs/COMPONENT_SCORES.md: bulk I18n 8→9 pass — SelectButton 8.7→8.8, Menubar 8.9→9.0,
+    IconButton 8.6→8.7, Tabs 8.9→9.0, InputMask 8.7→8.8, KeyFilter 8.6→8.7;
+    no-op bumps: Input/Textarea/RadioButton/Accordion/Tooltip/ButtonGroup/CodeSnippet + all
+    layout (Card/Stack/Inline/Grid/Container/FloatLabel/IconField/InputGroup/FormField/Divider/
+    Toolbar/Fluid/Fieldset/Panel/ScrollPanel) + utilities (Icon/BlockUI/ClassNames/Terminal/
+    Ripple/StyleClass/AnimateOnScroll/AutoFocus/Bind)
+State: COMPLETE — ESLint 0w ✅; jest select-button(76)+menubar(84)+icon-button(27)+
+  tabs(41)+input-mask(62)+key-filter(48) = 338 tests ✅
+Verification: eslint 6 components + i18n (0w); jest all 338 pass
+Next step: Commit + push batch-5; only remaining I18n=8 is DatePicker (complex, rich key set
+  already exists — needs ariaLabel null-default verification) and FocusTrap (structural,
+  stays 8.5 regardless)
+
+Date: 2026-05-29
 Changed:
   password/password.component.ts: promptLabel/weakLabel/mediumLabel/strongLabel → string|null null defaults;
     resolvedPromptLabel/resolvedWeakLabel/resolvedMediumLabel/resolvedStrongLabel computed signals added;
@@ -107,46 +136,6 @@ Verification: eslint password/ chip/ message/ i18n/ (0w); jest password|chip|mes
 Next step: Commit + push batch-4; then continue Prompt 8 on remaining I18n=8 components
   (Input, Textarea, RadioButton, SelectButton, InputMask, KeyFilter, DatePicker, Icon, IconButton,
   ButtonGroup, Menubar, Tabs, Accordion, CodeSnippet — layout/utility components likely no-op)
-
-Date: 2026-05-29
-Changed:
-  tag/tag.ts: UiLibI18nService injected; removeAriaLabel computed uses i18n.translate('tag.remove'/
-    'tag.remove-unlabelled') instead of hardcoded English strings
-  progress-spinner/progress-spinner.ts: UiLibI18nService injected; ariaLabel → string|null null
-    default; resolvedAriaLabel computed; host binding updated
-  progress-spinner/progress-spinner.a11y.spec.ts: default aria-label test updated ('Loading...' → 'Loading')
-  checkbox/checkbox.ts: UiLibI18nService injected; live-announcer strings use i18n keys
-  toggle-switch/toggle-switch.ts: UiLibI18nService injected; live-announcer strings use i18n keys
-  i18n/en,de,fr,es.ts: 10 new keys — progress-spinner.label; tag.remove/remove-unlabelled;
-    checkbox.label/checked/unchecked; toggle-switch.label/on/off
-  docs/COMPONENT_SCORES.md: Tag 8.9→9.0; ProgressSpinner 8.9→9.0; Checkbox 8.9→9.0; ToggleSwitch 8.8→8.9
-State: COMPLETE — ESLint 0w ✅; jest tag(40)+progress-spinner(35)+checkbox(67)+toggle-switch(68) ✅
-Verification: eslint tag/ progress-spinner/ checkbox/ toggle-switch/ i18n/ (0w); jest all pass
-Next step: Build + push batch-3; continue with Password + Chip + Message (batch-4)
-
-Date: 2026-05-29
-Changed:
-  tree-select/tree-select.component.ts: placeholder, filterPlaceholder, styleClass, emptyMessage →
-    string|null null defaults; resolvedPlaceholder, resolvedFilterPlaceholder, resolvedEmptyMessage
-    computed signals added; hostClasses + treeAriaLabel null-safe
-  tree-select/tree-select.component.html: resolved* signals wired in template
-  skeleton/skeleton.ts: UiLibI18nService injected; ariaLabel → string|null; effectiveAriaLabel uses ??
-  upload/upload.component.ts: chooseLabel, uploadLabel, cancelLabel, emptyMessage → string|null null
-    defaults; 4 resolved computeds; unused IMAGE_DEFAULT_* constants removed from import
-  upload/upload.component.html: resolved* labels wired in template
-  image/image.ts: ariaLabel → string|null null default; resolvedAriaLabel computed added; 5 class
-    property ARIA constants removed; IMAGE_ARIA_* imports removed
-  image/image.html: resolvedAriaLabel() on indicator + dialog; i18n.translate() for all toolbar buttons
-    + error fallback aria-label
-  i18n/en,de,fr,es.ts: tree-select.placeholder/filter.placeholder/empty; upload.choose/upload/cancel/empty;
-    image.preview/error/zoom-in/zoom-out/rotate-left/rotate-right/close;
-    skeleton.label (4 locales, 14 new keys)
-  docs/COMPONENT_SCORES.md: TreeSelect 8.6→8.7; Skeleton 8.6→8.7; Image 8.7→8.8; Upload 8.9→9.0
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅; all 302 batch-2 tests ✅
-Verification: eslint tree-select/ skeleton/ upload/ image/ i18n/ (0w); ng build (0w);
-  jest tree-select(79) + skeleton(41) + upload(66) + image(116) all pass
-Next step: Commit + push batch-2; then continue Prompt 8 on remaining I18n=8 components
-  (DatePicker, Chip ×2, Message, etc.)
 
 Date: 2026-05-29 [feat(lib): prompt-8 hardening — ConfirmDialog + Drawer structural improvements + i18n docs batch]
 Changed:
