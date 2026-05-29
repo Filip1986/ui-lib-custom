@@ -171,6 +171,10 @@ div { display: none; }
 
 ---
 
+## CSS Custom Properties
+
+_None — `StyleClass` is a directive with no component styles. It manipulates CSS classes on a target element; all visual styling is applied directly to your target element and the classes you provide._
+
 ## Notes
 
 - The directive registers its click listener **outside Angular zone** via `NgZone.runOutsideAngular` so it never triggers unnecessary change-detection cycles.

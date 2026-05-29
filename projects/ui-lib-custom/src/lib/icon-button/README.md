@@ -29,6 +29,16 @@ _none_
 <ui-lib-icon-button icon="refresh" ariaLabel="Refresh data" [loading]="isRefreshing()" />
 ```
 
+## CSS Custom Properties
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `--uilib-icon-button-min-target-size` | `2.75rem` | Minimum touch target size (width/height) |
+| `--uilib-icon-button-size` | `var(--uilib-icon-button-min-target-size)` | Actual rendered size (overridden per size variant) |
+| `--uilib-icon-button-disabled-opacity` | `0.5` | Opacity applied in the disabled state |
+| `--uilib-icon-button-transition` | `color 150ms ease, background-color 150ms ease, transform 120ms ease` | Button transition shorthand (set to `none` under `prefers-reduced-motion`) |
+| `--uilib-icon-button-loading-animation` | `ui-lib-icon-button-spin 1s linear infinite` | Spinner keyframe animation (set to `none` under `prefers-reduced-motion`) |
+
 ## Sizes
 
 | Size | Touch target | Notes |

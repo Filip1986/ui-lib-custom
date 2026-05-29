@@ -34,6 +34,17 @@
 </div>
 ```
 
+## CSS Custom Properties
+
+These tokens are scoped to the built-in preset classes (not `:root`). Override them on any ancestor element to customise or stagger animations.
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `--uilib-animate-on-scroll-duration` | `600ms` | Transition duration for all preset animations. Set to `0ms` under `prefers-reduced-motion`. |
+| `--uilib-animate-on-scroll-easing` | `cubic-bezier(0.4, 0, 0.2, 1)` | Easing function for all preset transitions |
+| `--uilib-animate-on-scroll-distance` | `30px` | Translate/scale offset for slide/zoom presets |
+| `--uilib-animate-on-scroll-delay` | `0ms` | Per-element delay — override on individual elements to create stagger effects |
+
 ## Accessibility & Progressive Enhancement
 
 - **Reduced motion (WCAG 2.3.3):** users with `prefers-reduced-motion: reduce` never get animated-in content. The directive exits early and keeps content visible.

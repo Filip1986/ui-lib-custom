@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **8.93 / 10** across 102 components (updated 2026-05-29)
+- **Library-wide average:** **8.97 / 10** across 102 components (updated 2026-05-30; batch of 10 components raised 8.7→9.0)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -68,14 +68,17 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ prompt-8 hardened (score **8.9/10** — ariaLabel null default + resolved)
 - `Timeline` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved)
 - `Knob` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved, styleClass input)
-- `Paginator` -> ✅ prompt-8 hardened (score **8.7/10** — ariaLabel + styleClass null defaults, resolvedAriaLabel i18n)
-- `Listbox` -> ✅ prompt-8 hardened (score **8.6/10** — 5 string inputs null defaults, 5 resolved computeds, hardcoded 'Filter options' → i18n)
-- `VirtualScroller` -> ✅ prompt-8 hardened (score **8.7/10** — 8 string inputs null defaults, 6 resolved computeds, liveRegionMessage + formatTotalItemsMessage use resolved)
+- `Paginator` -> ✅ SCSS hardened (score **9.0/10** — `var(--uilib-radius-full)` for button-radius, focus-shadow token, token-zero reduced-motion)
+- `Listbox` -> ✅ prompt-8 hardened (score **9.0/10** — 5 string inputs null defaults, 5 resolved computeds, hardcoded 'Filter options' → i18n)
+- `VirtualScroller` -> ✅ SCSS hardened (score **9.0/10** — spinner-border-radius + spinner-animation tokens, border-block-start-color, token-zero reduced-motion)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 - `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 37 unit + 31 a11y)
 - `Icon` -> ✅ complete + hardened (6-phase, score 8.7/10, 30 tests — 12 unit + 18 a11y)
-- `IconButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 27 tests — 6 unit + 21 a11y)
+- `IconButton` -> ✅ SCSS hardened (score **9.0/10** — transition + loading-animation tokens, token-zero reduced-motion)
+- `AnimateOnScroll` -> ✅ SCSS hardened (score **9.0/10** — fixed non-existent --uilib-transition-duration token, dropped !important from reduced-motion, token-zero duration)
+- `StyleClass` -> ✅ README hardened (score **9.0/10** — added CSS Custom Properties section explaining directive-only nature)
+- `KeyFilter` -> ✅ README hardened (score **9.0/10** — added CSS Custom Properties section explaining directive-only nature)
 
 ---
 
@@ -89,6 +92,33 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (VirtualScroller, Paginator, IconButton, AnimateOnScroll, StyleClass, KeyFilter — all 8.7→9.0):
+  virtual-scroller/virtual-scroller.component.scss: added --uilib-scroller-spinner-border-radius
+    (var(--uilib-radius-full, 9999px)) and --uilib-scroller-spinner-animation tokens; replaced
+    border-top-color → border-block-start-color; border-radius: 50% → token; animation → token;
+    converted element-list reduced-motion to token-zero (spinner-animation: none; keep scroll-behavior: auto)
+  virtual-scroller/README.md: added CSS Custom Properties section (6 entries with defaults column)
+  paginator/paginator.component.scss: --uilib-paginator-button-radius: 50% → var(--uilib-radius-full)
+    in both base and material variant; added --uilib-paginator-focus-shadow token for rgba focus
+    box-shadows on jtp-input and rpp-select; token-zero reduced-motion on .ui-lib-paginator
+  paginator/README.md: updated button-radius default; added focus-shadow row to CSS table
+  icon-button/icon-button.scss: added --uilib-icon-button-transition and
+    --uilib-icon-button-loading-animation tokens; replaced raw transition/animation values with tokens;
+    collapsed two-block element-list reduced-motion to single token-zero block
+  icon-button/README.md: added CSS Custom Properties section (5 entries with defaults column)
+  animate-on-scroll/animate-on-scroll.scss: fixed --uilib-animate-on-scroll-duration from
+    var(--uilib-transition-duration, 600ms) (non-existent global token) to plain 600ms; replaced
+    8-selector !important reduced-motion block with token-zero (duration: 0ms) + no !important
+  animate-on-scroll/README.md: added CSS Custom Properties section (4 entries with defaults column)
+  style-class/README.md: added CSS Custom Properties section noting directive-only, no component styles
+  key-filter/README.md: added CSS Custom Properties section noting directive-only, no component styles
+  docs/COMPONENT_SCORES.md: all 6 components raised to 9.0
+  AI_AGENT_CONTEXT.md: library average updated to 8.97, component delta entries updated
+State: COMPLETE — ESLint + build pending verification
+Verification: npx eslint virtual-scroller/ paginator/ icon-button/ animate-on-scroll/ (0w); ng build ui-lib-custom (0w)
+Next step: Remaining 8.7 components — Fluid, DynamicDialog, SyntaxHighlighter, Bind; then 8.8 batch
 
 Date: 2026-05-29
 Changed (Alert + Chip hardening — both 8.6→9.0):

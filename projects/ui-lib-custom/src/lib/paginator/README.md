@@ -63,13 +63,14 @@
 | `--uilib-paginator-gap` | `0.25rem` | Spacing between controls |
 | `--uilib-paginator-padding` | `0.5rem` | Inner padding for content row |
 | `--uilib-paginator-button-size` | `2.25rem` | Width/height of page and nav buttons |
-| `--uilib-paginator-button-radius` | `50%` | Button border radius (variant-dependent) |
+| `--uilib-paginator-button-radius` | `var(--uilib-radius-full, 9999px)` | Button border radius (variant-dependent) |
 | `--uilib-paginator-button-bg-hover` | `var(--uilib-color-surface-hover)` | Hover background for non-selected buttons |
 | `--uilib-paginator-button-bg-selected` | `var(--uilib-color-primary)` | Active page background |
 | `--uilib-paginator-current-color` | `var(--uilib-color-text-secondary)` | Current-page report text colour |
 | `--uilib-paginator-jtp-width` | `4rem` | Jump-to-page input width |
 | `--uilib-paginator-rpp-height` | `var(--uilib-paginator-button-size)` | Rows-per-page select height |
-| `--uilib-paginator-transition` | `background-color 150ms ease, ...` | Shared transition shorthand (disabled under `prefers-reduced-motion`) |
+| `--uilib-paginator-focus-shadow` | `0 0 0 2px rgba(99, 102, 241, 0.2)` | Focus ring shadow on JTP input and RPP select |
+| `--uilib-paginator-transition` | `background-color 150ms ease, ...` | Shared transition shorthand (set to `none` under `prefers-reduced-motion`) |
 
 ## Accessibility Notes
 
