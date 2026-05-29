@@ -134,6 +134,9 @@ export class Tree implements TreeContext {
   /** Optional explicit host id. Falls back to the generated instance id. */
   public readonly hostId: InputSignal<string | null> = input<string | null>(null);
 
+  /** Override the empty-state message. Falls back to the i18n `tree.empty` string when null. */
+  public readonly emptyMessage: InputSignal<string | null> = input<string | null>(null);
+
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
   /** Currently selected node(s). Use `[(selection)]` for two-way binding. */
@@ -176,6 +179,11 @@ export class Tree implements TreeContext {
   /** Resolved placeholder for the filter input. */
   public readonly resolvedFilterPlaceholder: Signal<string> = computed<string>(
     (): string => this.filterPlaceholder() ?? this.i18n.translate('tree.filter-placeholder'),
+  );
+
+  /** Resolved empty-state message shown when no nodes are present. */
+  public readonly resolvedEmptyMessage: Signal<string> = computed<string>(
+    (): string => this.emptyMessage() ?? this.i18n.translate('tree.empty'),
   );
 
   /** Host class string applied via `[class]` binding. */

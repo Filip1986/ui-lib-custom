@@ -51,6 +51,16 @@
     --uilib-tree-node-icon-font-size: 0.875em;
     --uilib-tree-filter-icon-font-size: var(--uilib-font-size-sm, 0.875rem);
 
+    // Animation / motion
+    --uilib-tree-transition: var(--uilib-transition-fast, 150ms ease);
+
+    // Structural radii
+    --uilib-tree-toggle-border-radius: var(--uilib-radius-full, 9999px);
+    --uilib-tree-checkbox-border-radius: var(--uilib-radius-sm, 3px);
+
+    // Selection shadow (overridden per variant)
+    --uilib-tree-node-selection-shadow: none;
+
     // Base layout
     display: block;
     font-size: var(--uilib-tree-font-size);
@@ -108,8 +118,8 @@
     cursor: default;
     outline: none;
     transition:
-      background-color var(--uilib-transition-duration, 150ms) ease,
-      color var(--uilib-transition-duration, 150ms) ease;
+      background-color var(--uilib-tree-transition),
+      color var(--uilib-tree-transition);
 
     &:hover {
       background: var(--uilib-tree-node-bg-hover);
@@ -141,16 +151,21 @@
     height: var(--uilib-tree-toggle-size);
     padding: 0;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--uilib-tree-toggle-border-radius);
     background: transparent;
     color: var(--uilib-tree-toggle-color);
     cursor: pointer;
     transition:
-      background-color var(--uilib-transition-duration, 150ms) ease,
-      transform var(--uilib-transition-duration, 150ms) ease;
+      background-color var(--uilib-tree-transition),
+      transform var(--uilib-tree-transition);
 
     &:hover {
       background: var(--uilib-tree-toggle-bg-hover);
+    }
+
+    &:active {
+      background: var(--uilib-tree-toggle-bg-hover);
+      opacity: 0.75;
     }
 
     &:focus-visible {
@@ -167,7 +182,7 @@
     border-inline-end: 2px solid currentcolor;
     border-bottom: 2px solid currentcolor;
     transform: rotate(-45deg);
-    transition: transform var(--uilib-transition-duration, 150ms) ease;
+    transition: transform var(--uilib-tree-transition);
   }
 
   .uilib-tree-node-toggle--expanded .uilib-tree-toggle-icon {
@@ -191,12 +206,12 @@
     width: var(--uilib-tree-checkbox-size);
     height: var(--uilib-tree-checkbox-size);
     border: var(--uilib-tree-checkbox-border);
-    border-radius: 3px;
+    border-radius: var(--uilib-tree-checkbox-border-radius);
     background: var(--uilib-tree-checkbox-bg);
     cursor: pointer;
     transition:
-      background-color var(--uilib-transition-duration, 150ms) ease,
-      border-color var(--uilib-transition-duration, 150ms) ease;
+      background-color var(--uilib-tree-transition),
+      border-color var(--uilib-tree-transition);
 
     &:hover {
       border-color: var(--uilib-color-primary, #1976d2);
@@ -283,7 +298,7 @@
     font-size: var(--uilib-tree-font-size);
     box-sizing: border-box;
     outline: none;
-    transition: border-color var(--uilib-transition-duration, 150ms) ease;
+    transition: border-color var(--uilib-tree-transition);
 
     &:focus {
       border: var(--uilib-tree-filter-border-focus);
@@ -338,17 +353,18 @@
     --uilib-tree-node-border-radius: var(--uilib-radius-sm, 4px);
     --uilib-tree-node-bg-hover: rgba(13, 110, 253, 0.08);
     --uilib-tree-node-bg-selected: rgba(13, 110, 253, 0.15);
-    --uilib-tree-node-color-selected: #0d6efd;
-    --uilib-tree-checkbox-bg-checked: #0d6efd;
-    --uilib-tree-checkbox-border-checked: 2px solid #0d6efd;
-    --uilib-tree-filter-border-focus: 1px solid #86b7fe;
+    --uilib-tree-node-color-selected: var(--uilib-color-primary, #0d6efd);
+    --uilib-tree-checkbox-bg-checked: var(--uilib-color-primary, #0d6efd);
+    --uilib-tree-checkbox-border-checked: 2px solid var(--uilib-color-primary, #0d6efd);
+    --uilib-tree-filter-border-focus: 1px solid var(--uilib-color-primary-light, #86b7fe);
+    --uilib-tree-node-selection-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
 
     .uilib-tree-node-row {
       border-radius: var(--uilib-tree-node-border-radius);
     }
 
     .uilib-tree-node-row--selected {
-      box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+      box-shadow: var(--uilib-tree-node-selection-shadow);
     }
   }
 
@@ -404,12 +420,8 @@
   // ─── Reduced-motion overrides ─────────────────────────────────────────────────
 
   @media (prefers-reduced-motion: reduce) {
-    .uilib-tree-node-row,
-    .uilib-tree-node-toggle,
-    .uilib-tree-toggle-icon,
-    .uilib-tree-node-checkbox,
-    .uilib-tree-filter-input {
-      transition: none;
+    .ui-lib-tree {
+      --uilib-tree-transition: 0ms;
     }
   }
 } // end @layer uilib.components

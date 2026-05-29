@@ -287,6 +287,7 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   // ── Tree ──────────────────────────────────────────────────────────────────
   'tree.label': 'Arbre',
   'tree.filter-placeholder': "Filtrer les nœuds de l'arbre",
+  'tree.empty': 'Aucun élément à afficher',
   'tree-select.clear': 'Effacer la sélection',
 
   // ── Upload ────────────────────────────────────────────────────────────────

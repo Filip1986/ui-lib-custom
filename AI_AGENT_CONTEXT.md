@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **8.89 / 10** across 102 components (updated 2026-05-29)
+- **Library-wide average:** **8.91 / 10** across 102 components (updated 2026-05-29)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -91,6 +91,31 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (Tree hardening — 8.6→9.0):
+  tree/tree.scss: added --uilib-tree-transition token backed by var(--uilib-transition-fast, 150ms ease);
+    replaced 5 var(--uilib-transition-duration, 150ms) ease usages across node-row/toggle/toggle-icon/
+    checkbox/filter-input with the component token; added --uilib-tree-toggle-border-radius token
+    (var(--uilib-radius-full, 9999px)) to replace border-radius:50% on toggle button; added
+    --uilib-tree-checkbox-border-radius token (var(--uilib-radius-sm, 3px)) to replace raw 3px;
+    added --uilib-tree-node-selection-shadow token (default:none, bootstrap:0 0 0 2px rgba(...,0.25))
+    to fix raw rgba() in bootstrap variant rule body; fixed #86b7fe → var(--uilib-color-primary-light)
+    in bootstrap filter-border-focus token definition; replaced var(--uilib-color-primary, #0d6efd) in
+    bootstrap node-color/checkbox tokens; added :active state on toggle button; replaced element-list
+    reduced-motion block with clean --uilib-tree-transition:0ms token zero
+  tree/tree.ts: added emptyMessage InputSignal<string|null>(null); added resolvedEmptyMessage
+    computed<string> using i18n.translate('tree.empty') fallback
+  tree/tree.html: replaced hardcoded "No items to display" with {{ resolvedEmptyMessage() }}
+  i18n/en.ts, de.ts, fr.ts, es.ts: added 'tree.empty' key in all 4 locales
+  tree/README.md: expanded CSS custom properties table from 10 to 27 entries with accurate defaults;
+    updated inputs table with emptyMessage, hostId, corrected nullability; updated Accessibility
+    section noting token-zero reduced-motion and localizable empty state; added per-type template
+    and emptyMessage usage examples
+  docs/COMPONENT_SCORES.md: Tree A11y/Docs/Polish/Feel all 8→9; avg 8.6→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
+Verification: npx eslint tree/ (0w); ng build ui-lib-custom (0w)
+Next step: Check remaining sub-9.0 components (TreeSelect 8.7, Listbox 8.6, VirtualScroller 8.7 …)
+
+Date: 2026-05-29
 Changed (TreeTable hardening — 8.6→9.0):
   tree-table/tree-table.component.scss: added --uilib-tree-table-transition token backed by
     var(--uilib-transition-fast, 150ms ease); replaced 5 var(--uilib-transition-duration,150ms)ease
@@ -126,25 +151,6 @@ Changed (Table hardening — 8.6→9.0):
 State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
 Verification: npx eslint table/ (0w); ng build ui-lib-custom (0w)
 Next step: TreeTable hardening (8.6) — Theme=8, Polish=8, Feel=8; likely same SCSS token pattern
-
-Date: 2026-05-29
-Changed (Dialog hardening — 8.6→9.0):
-  dialog/dialog.component.scss: removed permanent will-change:transform from .ui-lib-dialog-panel
-    (Perf violation); replaced hardcoded transition:background-color 150ms ease with
-    transition:background-color var(--uilib-dialog-close-btn-transition) on close/maximize btns;
-    added two new tokens --uilib-dialog-close-btn-active-bg and --uilib-dialog-close-btn-transition
-    (backed by var(--uilib-transition-fast) — auto-zeroed by prefers-reduced-motion global block);
-    added :active state for close/maximize buttons; fixed border-radius:999px →
-    var(--uilib-radius-full, 9999px) in material variant nested rules
-  dialog/dialog.component.html: added tabindex="-1" and (keydown.escape) to backdrop div
-    to satisfy @angular-eslint/template/click-events-have-key-events (was 2 warnings)
-  dialog/README.md: expanded from 55 to 130+ lines — added Keyboard Behavior table,
-    ARIA Attributes table, Content Projection Slots table, Variants section, full CSS
-    Custom Properties table (24 tokens documented), additional usage examples
-  docs/COMPONENT_SCORES.md: Dialog Perf/Theme/Docs/Feel all 8→9; avg 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
-Verification: npx eslint dialog/ (0w); ng build ui-lib-custom (0w)
-Next step: Table hardening (8.6) — Comp=8 needs ng-template row/cell slot (same pattern as DatePicker dateCellTemplate)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
