@@ -85,6 +85,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-29 [feat(lib): prompt-8 hardening — ConfirmDialog + Drawer structural improvements + i18n docs batch]
+Changed:
+  confirm-dialog/confirm-dialog.types.ts: added acceptOnly?: boolean to ConfirmationConfig
+  confirm-dialog/confirm-dialog.ts: added acceptOnly input + resolvedAcceptOnly computed
+  confirm-dialog/confirm-dialog.html: consolidated two @if(visible()) blocks into one; added [uilib-content] slot; wrapped reject button in @if(!resolvedAcceptOnly())
+  confirm-dialog/README.md: documented acceptOnly, [uilib-content] slot, i18n table, ConfirmationConfig.acceptOnly
+  drawer/drawer.html: added [uilib-header] and [uilib-footer] canonical slot aliases alongside legacy [drawerHeader]/[drawerFooter]
+  drawer/drawer.ts: added closeAriaLabel input + effectiveCloseAriaLabel computed; injected UiLibI18nService
+  drawer/README.md: documented closeAriaLabel, canonical slot names, i18n keys section
+  (prev session) code-snippet/code-snippet.ts+html: [uilib-header-actions] + [uilib-footer] slots + effectiveTabsAriaLabel
+  (prev session) 7x README.md i18n-neutral docs: accordion, checkbox, toggle-switch, radio-button, textarea, select-button, tooltip
+  docs/COMPONENT_SCORES.md: ConfirmDialog 8.5→8.8; Drawer 8.5→8.8; CodeSnippet avg 8.6→8.9; 7x I18n 7→8
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 124 confirm-dialog+drawer tests ✅
+Verification: npx eslint confirm-dialog/ drawer/ (0 warnings); ng build (0 warnings); npx jest confirm-dialog|drawer (124 pass)
+Next step: Continue Prompt 8 pass on remaining 8.5-cluster components (BottomSheet, MeterGroup, DataView, Badge, Timeline, Carousel, Galleria, ScrollTop, Knob, Avatar)
+
 Date: 2026-05-29 [feat(lib): prompt-7 ceiling push — AutoComplete Theme 9→10 + CascadeSelect Perf/Angular/Theme 9→10 (both → 9.5) ✅]
 Changed:
   autocomplete/autocomplete.scss: added --uilib-autocomplete-option-min-height + --uilib-autocomplete-btn-min-size tokens;
@@ -116,18 +132,6 @@ State: COMPLETE — ESLint ✅; build zero warnings ✅; 155/155 tests ✅
 Next step: CascadeSelect ceiling push → 9.5; AutoComplete → 9.5
 
 
-Date: 2026-05-29 [feat(lib): i18n batch pass — ConfirmPopup/SpeedDial/ImageCompare I18n 7→9]
-Changed:
-  i18n/es.ts: added confirm-popup.{message,accept,reject}, speed-dial.trigger, image-compare.aria-label keys
-  confirm-popup/confirm-popup.ts: injected UiLibI18nService; message/acceptLabel/rejectLabel inputs → string|null;
-    resolvedMessage/resolvedAcceptLabel/resolvedRejectLabel computeds use i18n fallback
-  speed-dial/speed-dial.component.ts: injected UiLibI18nService; triggerAriaLabel() returns i18n fallback
-  image-compare/image-compare.ts: injected UiLibI18nService; ariaLabel → string|null; effectiveAriaLabel computed
-  image-compare/image-compare.html: wired effectiveAriaLabel()
-  docs/COMPONENT_SCORES.md: ConfirmPopup I18n 7→9 (8.7→8.9); SpeedDial I18n 7→9 (8.6→8.8); ImageCompare I18n 7→9 (8.8→9.0)
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 66+84+60 tests ✅
-Verification: npx eslint confirm-popup/ speed-dial/ image-compare/ (0 warnings); ng build (0 warnings); npx jest all pass
-Next step: Handle remaining I18n=7 components (Accordion, Checkbox, RadioButton, ToggleSwitch, SelectButton, Tooltip, Textarea) — document as i18n-neutral or wire DatePicker/Drawer/Table/TreeTable i18n improvements
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
 ---

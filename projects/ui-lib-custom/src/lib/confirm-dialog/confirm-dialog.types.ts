@@ -48,6 +48,8 @@ export interface ConfirmationConfig {
   position?: ConfirmDialogPosition;
   /** Which button receives focus when the dialog first opens. */
   defaultFocus?: ConfirmDialogDefaultFocus;
+  /** When true, hides the reject button — for acknowledgment-style dialogs. */
+  acceptOnly?: boolean;
   /** Callback invoked when the user clicks the accept button. */
   accept?: () => void;
   /** Callback invoked when the user clicks the reject button or closes the dialog. */

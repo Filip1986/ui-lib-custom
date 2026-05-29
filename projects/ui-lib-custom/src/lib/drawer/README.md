@@ -26,6 +26,7 @@ import { Drawer } from 'ui-lib-custom/drawer';
 | `blockScroll`      | `input<boolean>`                          | `true`      | Lock body scroll while open.                                         |
 | `showCloseButton`  | `input<boolean>`                          | `true`      | Show the × close button in the header.                               |
 | `ariaDescribedby`  | `input<string \| undefined>`              | `undefined` | `id` of a description element; sets `aria-describedby` on the panel. |
+| `closeAriaLabel`   | `input<string \| null>`                   | `null`      | Accessible label for the × close button. Falls back to the i18n `drawer.close` key. |
 | `variant`          | `input<DrawerVariant \| null>`            | `null`      | Design variant; inherits from ThemeConfigService.                    |
 | `styleClass`       | `input<string \| null>`                   | `null`      | Extra CSS classes on the host element.                               |
 
@@ -38,11 +39,11 @@ import { Drawer } from 'ui-lib-custom/drawer';
 
 ## Content projection
 
-| Slot              | Selector          | Description                          |
-|-------------------|-------------------|--------------------------------------|
-| Body              | *(default)*       | Scrollable main content area.        |
-| Custom header     | `[drawerHeader]`  | Replaces the built-in header slot.   |
-| Footer            | `[drawerFooter]`  | Sticky footer area.                  |
+| Slot          | Selector                               | Description                                                        |
+|---------------|----------------------------------------|--------------------------------------------------------------------|
+| Body          | *(default)*                            | Scrollable main content area.                                      |
+| Custom header | `[uilib-header]` *(or `[drawerHeader]`)* | Content rendered before the title in the header bar. The legacy `drawerHeader` attribute is kept for backward compatibility. |
+| Footer        | `[uilib-footer]` *(or `[drawerFooter]`)* | Sticky footer area rendered below the scrollable body. The legacy `drawerFooter` attribute is kept for backward compatibility. |
 
 ## Types
 
@@ -71,13 +72,32 @@ type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
 ```html
 <ui-lib-drawer [(visible)]="isOpen" header="Settings" position="right" size="380px">
   <p>Your settings content here.</p>
-  <div drawerFooter>
+  <div uilib-footer>
     <ui-lib-button (click)="isOpen.set(false)">Close</ui-lib-button>
   </div>
 </ui-lib-drawer>
 
 <ui-lib-button (click)="isOpen.set(true)">Open Drawer</ui-lib-button>
 ```
+
+### Custom header with a back button
+
+```html
+<ui-lib-drawer [(visible)]="isOpen" position="left" [showCloseButton]="false">
+  <div uilib-header>
+    <button type="button" (click)="isOpen.set(false)" aria-label="Go back">←</button>
+    <span>Navigation</span>
+  </div>
+  <nav><!-- nav links --></nav>
+</ui-lib-drawer>
+```
+
+## Internationalisation
+
+| i18n key       | Default (en) | Overridden by          |
+|----------------|--------------|------------------------|
+| `drawer.label` | `Drawer`     | Provide `header` input (switches to `aria-labelledby`); or supply a custom locale bundle |
+| `drawer.close` | `Close`      | `closeAriaLabel` input |
 
 ## Accessibility
 

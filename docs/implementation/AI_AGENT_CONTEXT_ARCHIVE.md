@@ -4,6 +4,21 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-29 [feat(lib): i18n batch pass — ConfirmPopup/SpeedDial/ImageCompare I18n 7→9]
+Changed:
+  i18n/es.ts: added confirm-popup.{message,accept,reject}, speed-dial.trigger, image-compare.aria-label keys
+  confirm-popup/confirm-popup.ts: injected UiLibI18nService; message/acceptLabel/rejectLabel inputs → string|null;
+    resolvedMessage/resolvedAcceptLabel/resolvedRejectLabel computeds use i18n fallback
+  speed-dial/speed-dial.component.ts: injected UiLibI18nService; triggerAriaLabel() returns i18n fallback
+  image-compare/image-compare.ts: injected UiLibI18nService; ariaLabel → string|null; effectiveAriaLabel computed
+  image-compare/image-compare.html: wired effectiveAriaLabel()
+  docs/COMPONENT_SCORES.md: ConfirmPopup I18n 7→9 (8.7→8.9); SpeedDial I18n 7→9 (8.6→8.8); ImageCompare I18n 7→9 (8.8→9.0)
+State: COMPLETE — ESLint ✅; build zero warnings ✅; 66+84+60 tests ✅
+Verification: npx eslint confirm-popup/ speed-dial/ image-compare/ (0 warnings); ng build (0 warnings); npx jest all pass
+Next step: Handle remaining I18n=7 components (Accordion, Checkbox, RadioButton, ToggleSwitch, SelectButton, Tooltip, Textarea)
+
+---
+
 Date: 2026-05-17 [CodeSnippet + SyntaxHighlighter — scored and closed out]
 Changed:
   docs/COMPONENT_SCORES.md: added CodeSnippet (8.4/10) to Data Display table + New Components queue;

@@ -1,8 +1,6 @@
 @if (visible()) {
   <div class="ui-lib-confirm-dialog__backdrop" aria-hidden="true" (click)="onBackdropClick()"></div>
-}
 
-@if (visible()) {
   <div
     [class]="panelClasses()"
     role="alertdialog"
@@ -46,15 +44,21 @@
         <i [class]="resolvedIcon()" class="ui-lib-confirm-dialog__icon" aria-hidden="true"></i>
       }
       <p class="ui-lib-confirm-dialog__message">{{ resolvedMessage() }}</p>
+
+      <!-- Consumer-provided rich content rendered below the message. -->
+      <!-- Set message="" to suppress the default message paragraph. -->
+      <ng-content select="[uilib-content]" />
     </div>
 
     <div class="ui-lib-confirm-dialog__footer">
-      <button type="button" [class]="rejectBtnClasses()" (click)="handleReject()">
-        @if (resolvedRejectIcon()) {
-          <i [class]="resolvedRejectIcon()" aria-hidden="true"></i>
-        }
-        {{ resolvedRejectLabel() }}
-      </button>
+      @if (!resolvedAcceptOnly()) {
+        <button type="button" [class]="rejectBtnClasses()" (click)="handleReject()">
+          @if (resolvedRejectIcon()) {
+            <i [class]="resolvedRejectIcon()" aria-hidden="true"></i>
+          }
+          {{ resolvedRejectLabel() }}
+        </button>
+      }
 
       <button type="button" [class]="acceptBtnClasses()" (click)="handleAccept()">
         @if (resolvedAcceptIcon()) {

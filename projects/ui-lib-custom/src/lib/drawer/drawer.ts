@@ -97,6 +97,11 @@ export class Drawer implements OnDestroy {
   );
   /** Visual design variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<DrawerVariant | null> = input<DrawerVariant | null>(null);
+  /**
+   * Accessible label for the close button. Falls back to the i18n `drawer.close` key when null.
+   * Use to localise the label outside the built-in locale bundles.
+   */
+  public readonly closeAriaLabel: InputSignal<string | null> = input<string | null>(null);
   /** Additional CSS classes applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
@@ -115,6 +120,11 @@ export class Drawer implements OnDestroy {
 
   private readonly effectiveVariant: Signal<DrawerVariant> = computed<DrawerVariant>(
     (): DrawerVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved aria-label for the close button — falls back to the i18n `drawer.close` key. */
+  public readonly effectiveCloseAriaLabel: Signal<string> = computed<string>(
+    (): string => this.closeAriaLabel() ?? this.i18n.translate('drawer.close'),
   );
 
   /** Computed host CSS classes. */

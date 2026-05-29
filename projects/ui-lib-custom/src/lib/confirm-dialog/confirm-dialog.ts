@@ -141,6 +141,12 @@ export class ConfirmDialog implements OnDestroy {
   /** Whether clicking the backdrop closes the dialog (invoking reject). */
   public readonly dismissableMask: InputSignal<boolean> = input<boolean>(false);
 
+  /**
+   * When true the reject button is hidden — use for acknowledgment-style dialogs
+   * where the user only needs to confirm they have read the message (e.g. "I understand").
+   */
+  public readonly acceptOnly: InputSignal<boolean> = input<boolean>(false);
+
   /** Whether body scroll is locked while the dialog is open. */
   public readonly blockScroll: InputSignal<boolean> = input<boolean>(true);
 
@@ -250,6 +256,11 @@ export class ConfirmDialog implements OnDestroy {
   /** Resolved blockScroll flag. */
   public readonly resolvedBlockScroll: Signal<boolean> = computed<boolean>(
     (): boolean => this.serviceConfig()?.blockScroll ?? this.blockScroll(),
+  );
+
+  /** Resolved acceptOnly flag — service config wins over the `acceptOnly` input. */
+  public readonly resolvedAcceptOnly: Signal<boolean> = computed<boolean>(
+    (): boolean => this.serviceConfig()?.acceptOnly ?? this.acceptOnly(),
   );
 
   /** Effective variant — falls back to ThemeConfigService. */

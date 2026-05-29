@@ -21,7 +21,10 @@
 >
   @if (header() || showCloseButton()) {
     <div class="ui-lib-drawer__header">
+      <!-- Legacy slot name (backward compatible) -->
       <ng-content select="[drawerHeader]" />
+      <!-- Canonical uilib-* slot name (preferred) -->
+      <ng-content select="[uilib-header]" />
       @if (header()) {
         <span class="ui-lib-drawer__title" [attr.id]="titleId()">{{ header() }}</span>
       }
@@ -29,7 +32,7 @@
         <button
           type="button"
           class="ui-lib-drawer__close"
-          [attr.aria-label]="i18n.translate('drawer.close')"
+          [attr.aria-label]="effectiveCloseAriaLabel()"
           (click)="close()"
         >
           <svg
@@ -55,6 +58,9 @@
   </div>
 
   <div class="ui-lib-drawer__footer">
+    <!-- Legacy slot name (backward compatible) -->
     <ng-content select="[drawerFooter]" />
+    <!-- Canonical uilib-* slot name (preferred) -->
+    <ng-content select="[uilib-footer]" />
   </div>
 </div>

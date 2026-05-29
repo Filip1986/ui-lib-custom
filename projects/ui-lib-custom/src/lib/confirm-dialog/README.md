@@ -82,6 +82,7 @@ this.confirmationService.confirm({ key: 'delete', message: 'Delete this item?' }
 | `rejectIcon`      | `string \| null`               | `null`                                | CSS class for reject button icon                  |
 | `acceptSeverity`  | `ConfirmDialogButtonSeverity`  | `'primary'`                           | Accept button colour scheme                       |
 | `rejectSeverity`  | `ConfirmDialogButtonSeverity`  | `'secondary'`                         | Reject button colour scheme                       |
+| `acceptOnly`      | `boolean`                      | `false`                               | Hide the reject button (acknowledgment dialogs)   |
 | `closable`        | `boolean`                      | `true`                                | Show/hide the × close button                      |
 | `dismissableMask` | `boolean`                      | `false`                               | Close (reject) on backdrop click                  |
 | `blockScroll`     | `boolean`                      | `true`                                | Lock body scroll while open                       |
@@ -89,6 +90,44 @@ this.confirmationService.confirm({ key: 'delete', message: 'Delete this item?' }
 | `defaultFocus`    | `ConfirmDialogDefaultFocus`    | `'accept'`                            | Initial focused button                            |
 | `variant`         | `ConfirmDialogVariant \| null` | `null`                                | Design variant override                           |
 | `styleClass`      | `string \| null`               | `null`                                | Extra CSS classes on the host                     |
+
+## Content projection
+
+| Slot              | Selector          | Description                                                                       |
+|-------------------|-------------------|-----------------------------------------------------------------------------------|
+| Rich content      | `[uilib-content]` | Extra content rendered below the message paragraph (images, lists, custom markup). Set `message=""` to suppress the default paragraph. |
+
+### Example — acknowledgment dialog with rich content
+
+```html
+<ui-lib-confirm-dialog
+  [(visible)]="showTerms"
+  header="Terms of Service"
+  message=""
+  [acceptOnly]="true"
+  acceptLabel="I understand"
+>
+  <div uilib-content>
+    <p>Please read the following before continuing.</p>
+    <ul>
+      <li>Data is stored securely.</li>
+      <li>You can delete your account at any time.</li>
+    </ul>
+  </div>
+</ui-lib-confirm-dialog>
+```
+
+### Example — programmatic acceptOnly
+
+```ts
+this.confirmationService.confirm({
+  header: 'Session expired',
+  message: 'Your session has expired. Please log in again.',
+  acceptOnly: true,
+  acceptLabel: 'OK',
+  accept: () => this.router.navigate(['/login']),
+});
+```
 
 ## Outputs
 
@@ -118,6 +157,7 @@ this.confirmationService.confirm({ key: 'delete', message: 'Delete this item?' }
 | `rejectIcon`      | `string \| null`              | Reject button icon               |
 | `acceptSeverity`  | `ConfirmDialogButtonSeverity` | Accept button colour             |
 | `rejectSeverity`  | `ConfirmDialogButtonSeverity` | Reject button colour             |
+| `acceptOnly`      | `boolean`                     | Hide the reject button           |
 | `closable`        | `boolean`                     | Show close button                |
 | `dismissableMask` | `boolean`                     | Close on backdrop click          |
 | `blockScroll`     | `boolean`                     | Lock body scroll                 |
@@ -134,6 +174,20 @@ type ConfirmDialogButtonSeverity = 'primary' | 'secondary' | 'success' | 'danger
 type ConfirmDialogPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 type ConfirmDialogDefaultFocus = 'accept' | 'reject' | 'none';
 ```
+
+## Internationalisation
+
+ConfirmDialog falls back to the active locale bundle for default text. Override any key via the corresponding input or `ConfirmationConfig` property.
+
+| i18n key                       | Default (en)                         | Overridden by                        |
+|-------------------------------|--------------------------------------|--------------------------------------|
+| `confirm-dialog.header`       | `Confirmation`                       | `header` input / `ConfirmationConfig.header` |
+| `confirm-dialog.message`      | `Are you sure you want to proceed?`  | `message` input / `ConfirmationConfig.message` |
+| `confirm-dialog.accept`       | `Yes`                                | `acceptLabel` / `ConfirmationConfig.acceptLabel` |
+| `confirm-dialog.reject`       | `No`                                 | `rejectLabel` / `ConfirmationConfig.rejectLabel` |
+| `confirm-dialog.close`        | `Close`                              | (close button `aria-label`, not exposed as input) |
+
+To supply translations outside the built-in bundles, pass your own locale bundle to `UiLibI18nService.registerBundle()` and include the keys above.
 
 ## Accessibility
 
