@@ -9,6 +9,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { PROGRESS_SPINNER_DEFAULTS } from './progress-spinner.types';
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spinner.types';
 
@@ -46,7 +47,7 @@ export type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spi
     '[class]': 'hostClasses()',
     '[attr.id]': 'spinnerId',
     role: 'status',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
     '[attr.aria-busy]': '"true"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +55,7 @@ export type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spi
 })
 export class ProgressSpinner {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Unique host ID for this instance (used to associate aria relationships). */
   public readonly spinnerId: string = `uilib-progress-spinner-${++nextProgressSpinnerId}`;
@@ -68,7 +70,7 @@ export class ProgressSpinner {
    * Default: `'2'`.
    */
   public readonly strokeWidth: InputSignal<string> = input<string>(
-    PROGRESS_SPINNER_DEFAULTS.strokeWidth
+    PROGRESS_SPINNER_DEFAULTS.strokeWidth,
   );
 
   /**
@@ -84,12 +86,12 @@ export class ProgressSpinner {
    * Default: `'2s'`.
    */
   public readonly animationDuration: InputSignal<string> = input<string>(
-    PROGRESS_SPINNER_DEFAULTS.animationDuration
+    PROGRESS_SPINNER_DEFAULTS.animationDuration,
   );
 
   /** Component size token (`'sm'` | `'md'` | `'lg'`). Default: `'md'`. */
   public readonly size: InputSignal<ProgressSpinnerSize> = input<ProgressSpinnerSize>(
-    PROGRESS_SPINNER_DEFAULTS.size
+    PROGRESS_SPINNER_DEFAULTS.size,
   );
 
   /**
@@ -102,17 +104,22 @@ export class ProgressSpinner {
   /** Additional CSS class(es) to apply to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
-  /** Accessible label announced to screen readers. Default: `'Loading...'`. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Loading...');
+  /** Accessible label announced to screen readers. Falls back to the i18n `progress-spinner.label` key. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ---------------------------------------------------------------------------
   // Derived signals
   // ---------------------------------------------------------------------------
 
+  /** Resolved accessible label — explicit input wins, then falls back to i18n key. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('progress-spinner.label'),
+  );
+
   /** Resolved variant — local input wins; falls back to global ThemeConfigService. */
   protected readonly effectiveVariant: Signal<ProgressSpinnerVariant> =
     computed<ProgressSpinnerVariant>(
-      (): ProgressSpinnerVariant => this.variant() ?? this.themeConfig.variant()
+      (): ProgressSpinnerVariant => this.variant() ?? this.themeConfig.variant(),
     );
 
   /** CSS classes applied to the host element. */

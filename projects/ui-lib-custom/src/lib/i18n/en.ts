@@ -135,8 +135,23 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'colorpicker.label.s': 'S',
   'colorpicker.label.b': 'B',
 
-  // ── ProgressBar ───────────────────────────────────────────────────────────
+  // ── ProgressBar / ProgressSpinner ────────────────────────────────────────
   'progressbar.label': '{value}% complete',
+  'progress-spinner.label': 'Loading',
+
+  // ── Tag ───────────────────────────────────────────────────────────────────
+  'tag.remove': 'Remove {value} tag',
+  'tag.remove-unlabelled': 'Remove tag',
+
+  // ── Checkbox ─────────────────────────────────────────────────────────────
+  'checkbox.label': 'Checkbox',
+  'checkbox.checked': 'checked',
+  'checkbox.unchecked': 'unchecked',
+
+  // ── ToggleSwitch ─────────────────────────────────────────────────────────
+  'toggle-switch.label': 'Toggle switch',
+  'toggle-switch.on': 'on',
+  'toggle-switch.off': 'off',
 
   // ── Carousel / Galleria ───────────────────────────────────────────────────
   'carousel.prev': 'Previous slide',

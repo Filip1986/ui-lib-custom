@@ -92,6 +92,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 Date: 2026-05-29
 Changed:
+  tag/tag.ts: UiLibI18nService injected; removeAriaLabel computed uses i18n.translate('tag.remove'/
+    'tag.remove-unlabelled') instead of hardcoded English strings
+  progress-spinner/progress-spinner.ts: UiLibI18nService injected; ariaLabel → string|null null
+    default; resolvedAriaLabel computed; host binding updated
+  progress-spinner/progress-spinner.a11y.spec.ts: default aria-label test updated ('Loading...' → 'Loading')
+  checkbox/checkbox.ts: UiLibI18nService injected; live-announcer strings use i18n keys
+  toggle-switch/toggle-switch.ts: UiLibI18nService injected; live-announcer strings use i18n keys
+  i18n/en,de,fr,es.ts: 10 new keys — progress-spinner.label; tag.remove/remove-unlabelled;
+    checkbox.label/checked/unchecked; toggle-switch.label/on/off
+  docs/COMPONENT_SCORES.md: Tag 8.9→9.0; ProgressSpinner 8.9→9.0; Checkbox 8.9→9.0; ToggleSwitch 8.8→8.9
+State: COMPLETE — ESLint 0w ✅; jest tag(40)+progress-spinner(35)+checkbox(67)+toggle-switch(68) ✅
+Verification: eslint tag/ progress-spinner/ checkbox/ toggle-switch/ i18n/ (0w); jest all pass
+Next step: Build + push batch-3; continue with Password + Chip + Message (batch-4)
+
+Date: 2026-05-29
+Changed:
   tree-select/tree-select.component.ts: placeholder, filterPlaceholder, styleClass, emptyMessage →
     string|null null defaults; resolvedPlaceholder, resolvedFilterPlaceholder, resolvedEmptyMessage
     computed signals added; hostClasses + treeAriaLabel null-safe

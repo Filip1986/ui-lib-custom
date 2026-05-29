@@ -11,6 +11,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { TagSeverity, TagSize, TagVariant } from './tag.types';
 
 export type { TagSeverity, TagSize, TagVariant } from './tag.types';
@@ -45,6 +46,7 @@ let nextTagId: number = 0;
 })
 export class Tag {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Stable unique ID for this tag instance. */
   public readonly tagId: string = `ui-lib-tag-${++nextTagId}`;
@@ -87,7 +89,7 @@ export class Tag {
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<TagVariant> = computed<TagVariant>(
-    (): TagVariant => this.variant() ?? this.themeConfig.variant()
+    (): TagVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -110,18 +112,20 @@ export class Tag {
 
   /** Whether the icon slot should be rendered. */
   public readonly showIcon: Signal<boolean> = computed<boolean>(
-    (): boolean => this.icon() !== null
+    (): boolean => this.icon() !== null,
   );
 
   /** Accessible label for the remove button. */
   public readonly removeAriaLabel: Signal<string> = computed<string>((): string => {
     const tagValue: string | null = this.value();
-    return tagValue ? `Remove ${tagValue} tag` : 'Remove tag';
+    return tagValue
+      ? this.i18n.translate('tag.remove', { value: tagValue })
+      : this.i18n.translate('tag.remove-unlabelled');
   });
 
   /** Host role is status by default, group when dismissible to allow nested button semantics. */
   public readonly hostRole: Signal<string> = computed<string>((): string =>
-    this.dismissible() ? 'group' : 'status'
+    this.dismissible() ? 'group' : 'status',
   );
 
   /** Emits remove event when dismiss button is clicked. */

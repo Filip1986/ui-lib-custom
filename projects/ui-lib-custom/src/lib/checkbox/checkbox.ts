@@ -30,6 +30,7 @@ import type {
   CheckboxAppearance,
 } from './checkbox.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 
 export type {
   CheckboxVariant,
@@ -106,6 +107,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
 
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly nativeInputRef: Signal<ElementRef<HTMLInputElement> | undefined> =
     viewChild<ElementRef<HTMLInputElement>>('nativeInput');
 
@@ -271,8 +273,10 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
 
     this.onCvaTouched();
 
-    const label: string = this.label() ?? this.ariaLabel() ?? 'Checkbox';
-    const state: string = nextValue ? 'checked' : 'unchecked';
+    const label: string = this.label() ?? this.ariaLabel() ?? this.i18n.translate('checkbox.label');
+    const state: string = nextValue
+      ? this.i18n.translate('checkbox.checked')
+      : this.i18n.translate('checkbox.unchecked');
     void this.liveAnnouncer.announce(`${label} ${state}`, 'polite');
   }
 

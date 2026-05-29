@@ -82,7 +82,7 @@ async function createTwoSpinnersFixture(): Promise<ComponentFixture<TwoSpinnersH
 
 function getSpinner(fixture: ComponentFixture<unknown>): HTMLElement {
   return (fixture.nativeElement as HTMLElement).querySelector(
-    'ui-lib-progress-spinner'
+    'ui-lib-progress-spinner',
   ) as HTMLElement;
 }
 
@@ -117,10 +117,10 @@ describe('ProgressSpinner Accessibility', (): void => {
       expect(spinner.getAttribute('role')).toBe('status');
     });
 
-    it('host element has aria-label defaulting to "Loading..."', async (): Promise<void> => {
+    it('host element has aria-label defaulting to the i18n fallback', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const spinner: HTMLElement = getSpinner(fixture);
-      expect(spinner.getAttribute('aria-label')).toBe('Loading...');
+      expect(spinner.getAttribute('aria-label')).toBe('Loading');
     });
 
     it('host element has aria-busy="true"', async (): Promise<void> => {
