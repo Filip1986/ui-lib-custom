@@ -55,6 +55,10 @@
     --uilib-toggle-button-focus-ring: 0 0 0 3px
       color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 35%, transparent);
 
+    // --- Material checked shadow ------------------------------------
+    --uilib-toggle-button-checked-shadow: 0 1px 3px 0
+      color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 40%, transparent);
+
     display: inline-flex;
     position: relative;
     font-family: var(--uilib-toggle-button-font), sans-serif;
@@ -171,8 +175,7 @@
 
   ui-lib-toggle-button.ui-lib-toggle-button--variant-material.ui-lib-toggle-button--checked
     .ui-lib-toggle-button__inner {
-    box-shadow: 0 1px 3px 0
-      color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 40%, transparent);
+    box-shadow: var(--uilib-toggle-button-checked-shadow);
   }
 
   // Bootstrap: tighter radius, classic pill-free look
@@ -182,7 +185,7 @@
 
   // Minimal: pill shape, no hard border — uses translucent fills instead
   ui-lib-toggle-button.ui-lib-toggle-button--variant-minimal {
-    --uilib-toggle-button-radius: 9999px;
+    --uilib-toggle-button-radius: var(--uilib-radius-full, 9999px);
     --uilib-toggle-button-border: transparent;
     --uilib-toggle-button-bg: color-mix(
       in srgb,
@@ -243,8 +246,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-toggle-button .ui-lib-toggle-button__inner {
-      transition: none;
+    ui-lib-toggle-button {
+      --uilib-toggle-button-transition: none;
     }
   }
 } // end @layer uilib.components

@@ -128,6 +128,12 @@
 | `--uilib-image-error-color` | `var(--uilib-color-muted, #9ca3af)` | Icon color in the error placeholder |
 | `--uilib-image-error-icon-size` | `3rem` | Error icon size |
 | `--uilib-image-preview-transition` | `transform 0.2s ease` | CSS transition for zoom/rotate transforms |
+| `--uilib-image-toolbar-btn-radius` | `var(--uilib-radius-full, 9999px)` | Border radius of toolbar action buttons |
+| `--uilib-image-toolbar-btn-transition` | `background-color 0.15s ease` | Hover transition for toolbar buttons; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-image-indicator-transition` | `opacity 0.2s ease, background-color 0.2s ease` | Show/hide transition for the preview indicator; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-image-toolbar-bg-material` | `rgba(0, 0, 0, 0.6)` | Toolbar background in the `material` variant (slightly darker than the default) |
+| `--uilib-image-indicator-bg-minimal` | `rgba(0, 0, 0, 0.35)` | Indicator background in the `minimal` variant |
+| `--uilib-image-indicator-bg-minimal-hover` | `rgba(0, 0, 0, 0.55)` | Indicator hover background in the `minimal` variant |
 
 ## Accessibility
 

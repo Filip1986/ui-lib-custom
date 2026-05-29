@@ -134,8 +134,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | Component         | Key a11y concern                                                                                    | Status                 |
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
-| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
-| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.7)           |
+| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (9.0)           |
+| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (9.0)           |
 | ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ✅ Done (8.8)           |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.6)           |
@@ -150,9 +150,9 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ✅ Done (8.3)           |
-| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done (8.7)           |
+| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done (9.0)           |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done (8.6)           |
-| ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
+| ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done (9.0)           |
 | StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ✅ Done (8.7)           |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
 | AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ✅ Done (8.7)           |
@@ -188,14 +188,14 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
 | Button        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
 | Input         | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 9   | 8.8 | 🟢     |
-| Textarea      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Textarea      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Select        | 9   | 9    | 10   | 10   | 9     | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
 | AutoComplete  | 9   | 9    | 10   | 9    | 10    | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
 | CascadeSelect | 9   | 9    | 10   | 9    | 10    | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
 | DatePicker    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | RadioButton   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.9 | 🟢     |
-| ToggleButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| ToggleButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ToggleSwitch  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.9 | 🟢     |
 | SelectButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
@@ -221,7 +221,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | IconField   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
 | InputGroup  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
 | FormField   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 9    | 9   | 8.8 | 🟢     |
-| Divider     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Divider     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Toolbar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Fluid       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
@@ -300,11 +300,11 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
 | Avatar          | 9   | 9    | 8    | 10   | 9     | 9   | 8    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
-| Icon            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Icon            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | IconButton      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| ButtonGroup     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| ButtonGroup     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | SplitButton     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Image           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Image           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ImageCompare    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Upload          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |

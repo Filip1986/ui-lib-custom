@@ -26,6 +26,7 @@
     --uilib-textarea-resize-color: var(--uilib-border);
     --uilib-textarea-radius: var(--uilib-shape-base, 6px);
     --uilib-textarea-disabled-opacity: 0.6;
+    --uilib-textarea-transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
     // Size — md defaults (overridden per size modifier below)
     --uilib-textarea-padding-x: 0.75rem;
@@ -69,9 +70,7 @@
     background: var(--uilib-textarea-bg);
     border: 1px solid var(--uilib-textarea-border);
     border-radius: var(--uilib-textarea-radius);
-    transition:
-      border-color 0.15s ease,
-      box-shadow 0.15s ease;
+    transition: var(--uilib-textarea-transition);
 
     &:focus-within {
       border-color: var(--uilib-textarea-border-focus);
@@ -272,9 +271,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-textarea .ui-lib-textarea__field,
-    ui-lib-textarea .ui-lib-textarea__control {
-      transition: none;
+    ui-lib-textarea {
+      --uilib-textarea-transition: none;
     }
   }
 } // end @layer uilib.components

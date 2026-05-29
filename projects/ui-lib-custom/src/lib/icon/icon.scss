@@ -22,8 +22,8 @@
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-icon.ui-lib-icon {
-      transition: none;
+    ui-lib-icon {
+      --uilib-icon-transition: none;
     }
   }
 } // end @layer uilib.components

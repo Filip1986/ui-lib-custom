@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **8.99 / 10** across 102 components (updated 2026-05-30; 14 components raised to 9.0 across two batches)
+- **Library-wide average:** **9.00 / 10** across 102 components (updated 2026-05-30; 20 components raised to 9.0 across three batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -59,7 +59,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BottomSheet` -> ✅ prompt-8 hardened (score **9.0/10** — showCloseButton, closeAriaLabel, null header, [uilib-footer] slot)
 - `MeterGroup` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved)
 - `DataView` -> ✅ prompt-8 hardened (score **9.0/10** — resolvedEmptyMessage, resolvedFilterPlaceholder, null-default labels)
-- `Divider` -> ✅ complete + hardened (6-phase, score 8.7/10, 36 tests — 24 unit + 12 a11y)
+- `Divider` -> ✅ SCSS+README hardened (score **9.0/10** — border-top→border-block-start, logical margin-block/margin-inline, token-zero reduced-motion)
 - `Fieldset` -> ✅ complete + hardened (6-phase, score 9.0/10, 53 tests — 30 unit + 23 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
@@ -74,7 +74,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 - `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 37 unit + 31 a11y)
-- `Icon` -> ✅ complete + hardened (6-phase, score 8.7/10, 30 tests — 12 unit + 18 a11y)
+- `Icon` -> ✅ SCSS+README hardened (score **9.0/10** — token-zero reduced-motion, CSS Custom Properties section added to README)
 - `IconButton` -> ✅ SCSS hardened (score **9.0/10** — transition + loading-animation tokens, token-zero reduced-motion)
 - `AnimateOnScroll` -> ✅ SCSS hardened (score **9.0/10** — fixed non-existent --uilib-transition-duration token, dropped !important from reduced-motion, token-zero duration)
 - `StyleClass` -> ✅ README hardened (score **9.0/10** — added CSS Custom Properties section explaining directive-only nature)
@@ -83,6 +83,10 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Fluid` -> ✅ README hardened (score **9.0/10** — renamed CSS Variables→CSS Custom Properties, added "none — layout utility" explanation, "When to use" guidance)
 - `SyntaxHighlighter` -> ✅ README hardened (score **9.0/10** — added Accessibility section, "When to use" guidance)
 - `Bind` -> ✅ README hardened (score **9.0/10** — added CSS Custom Properties section noting directive-only nature)
+- `Textarea` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-textarea-transition token added, token-zero reduced-motion, README CSS Custom Properties table updated)
+- `ToggleButton` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-toggle-button-checked-shadow token; minimal radius: 9999px→var(--uilib-radius-full); token-zero reduced-motion; README CSS Custom Properties section added)
+- `ButtonGroup` -> ✅ SCSS+README hardened (score **9.0/10** — margin-top→margin-block-start in vertical orientation; README Styling Hooks→CSS Custom Properties table)
+- `Image` -> ✅ SCSS+README hardened (score **9.0/10** — toolbar-btn-radius/transition and indicator-transition tokens; toolbar-bg-material and indicator-bg-minimal/hover tokens; top:0→inset-block-start:0; token-zero reduced-motion; README expanded with 6 new token entries)
 
 ---
 
@@ -96,6 +100,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (Textarea, ToggleButton, Icon, ButtonGroup, Divider, Image — all 8.8→9.0):
+  textarea/textarea.scss: added --uilib-textarea-transition token; replaced raw
+    `border-color 0.15s ease, box-shadow 0.15s ease` in field wrapper with token reference;
+    converted element-style reduced-motion to token-zero (--uilib-textarea-transition: none)
+  textarea/README.md: added --uilib-textarea-transition row to CSS Custom Properties table
+  toggle-button/toggle-button.scss: added --uilib-toggle-button-checked-shadow token to host block;
+    material variant box-shadow: raw rgba → var(--uilib-toggle-button-checked-shadow); minimal
+    variant radius: 9999px → var(--uilib-radius-full, 9999px); token-zero reduced-motion
+  toggle-button/README.md: added full CSS Custom Properties section (10 entries with defaults)
+  icon/icon.scss: converted element-level transition:none reduced-motion to token-zero
+    (ui-lib-icon { --uilib-icon-transition: none; })
+  icon/README.md: added CSS Custom Properties section (2 entries: color, transition)
+  button-group/button-group.scss: margin-top → margin-block-start in vertical orientation
+    :not(:first-child) rule (logical CSS fix)
+  button-group/README.md: renamed "Styling hooks" → "CSS Custom Properties" table format
+  divider/divider.scss: horizontal orientation border-top → border-block-start on ::before/::after;
+    margin: var(--v) 0 → margin-block: var(--v); margin-inline: 0 (logical CSS)
+  image/image.scss: added 6 new tokens (toolbar-btn-radius, toolbar-btn-transition,
+    indicator-transition, toolbar-bg-material, indicator-bg-minimal, indicator-bg-minimal-hover);
+    top: 0 → inset-block-start: 0 on toolbar; border-radius: 50% → token on toolbar-btn;
+    raw transitions → token refs; material/minimal variant raw rgba → token refs;
+    collapsed element-list reduced-motion to token-zero (3 transition tokens: none)
+  image/README.md: added 6 new token rows to CSS Custom Properties table
+  docs/COMPONENT_SCORES.md: all 6 components raised to 9.0; tier queue statuses updated
+  AI_AGENT_CONTEXT.md: library average updated to 9.00 (20 components at 9.0 across 3 batches)
+State: COMPLETE — uncommitted; ESLint + build + commit pending
+Verification: npx eslint textarea/ toggle-button/ icon/ button-group/ divider/ image/ (0w expected); ng build ui-lib-custom (0w)
+Next step: Commit batch 3; then continue 8.8 components — SelectButton, InputMask, InputOtp, Password, Rating, Slider, FloatLabel, FormField
 
 Date: 2026-05-30
 Changed (VirtualScroller, Paginator, IconButton, AnimateOnScroll, StyleClass, KeyFilter — all 8.7→9.0):
@@ -147,28 +181,6 @@ Changed (Alert + Chip hardening — both 8.6→9.0):
 State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
 Verification: npx eslint alert/ chip/ (0w); ng build ui-lib-custom (0w)
 Next step: Remaining 8.6/8.7 components — TreeSelect/VirtualScroller/Message/Skeleton/etc.
-
-Date: 2026-05-29
-Changed (Listbox hardening — 8.6→9.0):
-  listbox/listbox.types.ts: added `option: unknown` field to ListboxOptionRow (stores the raw
-    option object from consumer's `options` array); added `option: unknown` to ListboxItemContext
-    as a convenience alias for $implicit.option so item templates can access full option properties
-  listbox/listbox.component.ts: updated flatItems() computed to include `option` (the raw option
-    object) in each ListboxOptionRow push — both flat options path and grouped children path
-  listbox/listbox.component.html: added `option: item.option` to #itemTemplate ngTemplateOutletContext;
-    replaced hardcoded "Select all" visible text with {{ i18n.translate('listbox.select-all') }}
-  listbox/listbox.component.scss: changed --uilib-listbox-transition token from raw `0.15s ease`
-    values to `background-color var(--uilib-transition-fast, 150ms ease), color var(--uilib-transition-fast,
-    150ms ease)` (backed by global fast token); replaced element-list reduced-motion block with
-    token-zero: .ui-lib-listbox { --uilib-listbox-transition: none; }
-  listbox/README.md: rewrote content projection section with template context table; fixed input
-    nullability (emptyMessage/emptyFilterMessage/ariaLabel/ariaLabelledBy now show null defaults);
-    expanded CSS token table with defaults column (17 entries); added usage examples for custom
-    item template, group template, and option context access
-  docs/COMPONENT_SCORES.md: Listbox Perf/Comp/Polish/Feel all 8→9; avg 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
-Verification: npx eslint listbox/ (0w); ng build ui-lib-custom (0w)
-Next step: Alert (8.6) or Chip (8.6) — both have Perf/Theme/Polish/Feel=8 pattern (SCSS token gaps)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
