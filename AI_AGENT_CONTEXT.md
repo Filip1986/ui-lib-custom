@@ -92,25 +92,27 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 Date: 2026-05-29
 Changed:
-  table/table.component.ts: emptyMessage + globalFilterPlaceholder → string|null null defaults;
-    resolvedEmptyMessage + resolvedGlobalFilterPlaceholder computed signals added
-  table/table.component.html: {{ emptyMessage() }} → {{ resolvedEmptyMessage() }}
-  tree-table/tree-table.component.ts: globalFilterPlaceholder, caption, styleClass, ariaLabel →
-    string|null null defaults; resolvedFilterPlaceholder + resolvedAriaLabel computeds;
-    hostClasses rewritten null-safe (parts array + if(extra))
-  tree-table/tree-table.component.html: resolvedFilterPlaceholder(); resolvedAriaLabel()
-  tree/tree.ts: filterPlaceholder, styleClass, ariaLabel → string|null null defaults;
-    resolvedFilterPlaceholder computed; hostAriaLabel: Signal<string> (always resolved, not nullable);
-    hostClasses rewritten null-safe
-  tree/tree.html: resolvedFilterPlaceholder()
-  avatar/avatar.ts: imageAlt → string|null null default; resolvedImageAlt uses ?? chain
-  avatar/avatar.spec.ts + avatar.a11y.spec.ts: WritableSignal<string> → string|null; fallback test uses null
-  i18n/en,de,fr,es.ts: table.empty, table.filter.placeholder, tree-table.label,
-    tree-table.filter.placeholder, tree.label keys added (4 locales)
-  docs/COMPONENT_SCORES.md: Table/TreeTable/Tree 8.5→8.6; Avatar 8.8→8.9
-State: COMPLETE — ESLint 0w ✅; ng build ✅; 309/309 tests ✅
-Verification: eslint table/ tree-table/ tree/ avatar/ (0w); ng build (0w); jest (309 pass)
-Next step: Commit + push; then continue Prompt 8 on DatePicker and remaining 8.5-cluster components
+  tree-select/tree-select.component.ts: placeholder, filterPlaceholder, styleClass, emptyMessage →
+    string|null null defaults; resolvedPlaceholder, resolvedFilterPlaceholder, resolvedEmptyMessage
+    computed signals added; hostClasses + treeAriaLabel null-safe
+  tree-select/tree-select.component.html: resolved* signals wired in template
+  skeleton/skeleton.ts: UiLibI18nService injected; ariaLabel → string|null; effectiveAriaLabel uses ??
+  upload/upload.component.ts: chooseLabel, uploadLabel, cancelLabel, emptyMessage → string|null null
+    defaults; 4 resolved computeds; unused IMAGE_DEFAULT_* constants removed from import
+  upload/upload.component.html: resolved* labels wired in template
+  image/image.ts: ariaLabel → string|null null default; resolvedAriaLabel computed added; 5 class
+    property ARIA constants removed; IMAGE_ARIA_* imports removed
+  image/image.html: resolvedAriaLabel() on indicator + dialog; i18n.translate() for all toolbar buttons
+    + error fallback aria-label
+  i18n/en,de,fr,es.ts: tree-select.placeholder/filter.placeholder/empty; upload.choose/upload/cancel/empty;
+    image.preview/error/zoom-in/zoom-out/rotate-left/rotate-right/close;
+    skeleton.label (4 locales, 14 new keys)
+  docs/COMPONENT_SCORES.md: TreeSelect 8.6→8.7; Skeleton 8.6→8.7; Image 8.7→8.8; Upload 8.9→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅; all 302 batch-2 tests ✅
+Verification: eslint tree-select/ skeleton/ upload/ image/ i18n/ (0w); ng build (0w);
+  jest tree-select(79) + skeleton(41) + upload(66) + image(116) all pass
+Next step: Commit + push batch-2; then continue Prompt 8 on remaining I18n=8 components
+  (DatePicker, Chip ×2, Message, etc.)
 
 Date: 2026-05-29 [feat(lib): prompt-8 hardening — ConfirmDialog + Drawer structural improvements + i18n docs batch]
 Changed:

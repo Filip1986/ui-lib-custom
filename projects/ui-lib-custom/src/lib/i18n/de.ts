@@ -195,6 +195,9 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'tree-select.none-selected': 'Kein Element ausgewählt',
   'tree-select.selected.one': '{label} ausgewählt',
   'tree-select.selected.count': '{count} Elemente ausgewählt',
+  'tree-select.placeholder': 'Knoten auswählen...',
+  'tree-select.filter.placeholder': 'Suchen...',
+  'tree-select.empty': 'Keine Ergebnisse gefunden',
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Zeilenerweiterung',
@@ -254,9 +257,20 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'upload.toolbar': 'Upload-Aktionen',
   'upload.files-list': 'Hochzuladende Dateien',
   'upload.dismiss': 'Validierungsmeldungen schließen',
+  'upload.choose': 'Auswählen',
+  'upload.upload': 'Hochladen',
+  'upload.cancel': 'Abbrechen',
+  'upload.empty': 'Dateien hier ablegen oder klicken zum Hochladen.',
 
   // ── Image ─────────────────────────────────────────────────────────────────
   'image.controls': 'Bildsteuerung',
+  'image.preview': 'Bild in der Vorschau ansehen',
+  'image.error': 'Bild konnte nicht geladen werden',
+  'image.zoom-in': 'Vergrößern',
+  'image.zoom-out': 'Verkleinern',
+  'image.rotate-left': 'Links drehen',
+  'image.rotate-right': 'Rechts drehen',
+  'image.close': 'Vorschau schließen',
 
   // ── DataView ─────────────────────────────────────────────────────────────
   'data-view.pagination': 'Seitennavigation',
@@ -324,6 +338,8 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'knob.dial': 'Regler',
 
   // ── Avatar ────────────────────────────────────────────────────────────────
+  'skeleton.label': 'Inhalt wird geladen',
+
   'avatar.label': 'Avatar',
 
   // ── Timeline ─────────────────────────────────────────────────────────────

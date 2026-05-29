@@ -195,6 +195,9 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'tree-select.none-selected': 'Aucun élément sélectionné',
   'tree-select.selected.one': '{label} sélectionné',
   'tree-select.selected.count': '{count} éléments sélectionnés',
+  'tree-select.placeholder': 'Sélectionner un nœud...',
+  'tree-select.filter.placeholder': 'Rechercher...',
+  'tree-select.empty': 'Aucun résultat trouvé',
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Expansion de ligne',
@@ -254,9 +257,20 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'upload.toolbar': 'Actions de téléchargement',
   'upload.files-list': 'Fichiers à télécharger',
   'upload.dismiss': 'Fermer les messages de validation',
+  'upload.choose': 'Choisir',
+  'upload.upload': 'Télécharger',
+  'upload.cancel': 'Annuler',
+  'upload.empty': 'Glissez-déposez les fichiers ici pour les télécharger.',
 
   // ── Image ─────────────────────────────────────────────────────────────────
   'image.controls': "Commandes d'image",
+  'image.preview': "Aperçu de l'image",
+  'image.error': "Échec du chargement de l'image",
+  'image.zoom-in': 'Agrandir',
+  'image.zoom-out': 'Réduire',
+  'image.rotate-left': 'Faire pivoter à gauche',
+  'image.rotate-right': 'Faire pivoter à droite',
+  'image.close': "Fermer l'aperçu",
 
   // ── DataView ─────────────────────────────────────────────────────────────
   'data-view.pagination': 'Pagination',
@@ -324,6 +338,8 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'knob.dial': 'Cadran',
 
   // ── Avatar ────────────────────────────────────────────────────────────────
+  'skeleton.label': 'Chargement du contenu',
+
   'avatar.label': 'Avatar',
 
   // ── Timeline ─────────────────────────────────────────────────────────────
