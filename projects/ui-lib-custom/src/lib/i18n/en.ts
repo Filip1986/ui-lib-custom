@@ -135,8 +135,23 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'colorpicker.label.s': 'S',
   'colorpicker.label.b': 'B',
 
-  // ── ProgressBar ───────────────────────────────────────────────────────────
+  // ── ProgressBar / ProgressSpinner ────────────────────────────────────────
   'progressbar.label': '{value}% complete',
+  'progress-spinner.label': 'Loading',
+
+  // ── Tag ───────────────────────────────────────────────────────────────────
+  'tag.remove': 'Remove {value} tag',
+  'tag.remove-unlabelled': 'Remove tag',
+
+  // ── Checkbox ─────────────────────────────────────────────────────────────
+  'checkbox.label': 'Checkbox',
+  'checkbox.checked': 'checked',
+  'checkbox.unchecked': 'unchecked',
+
+  // ── ToggleSwitch ─────────────────────────────────────────────────────────
+  'toggle-switch.label': 'Toggle switch',
+  'toggle-switch.on': 'on',
+  'toggle-switch.off': 'off',
 
   // ── Carousel / Galleria ───────────────────────────────────────────────────
   'carousel.prev': 'Previous slide',
@@ -195,6 +210,9 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'tree-select.none-selected': 'No item selected',
   'tree-select.selected.one': '{label} selected',
   'tree-select.selected.count': '{count} items selected',
+  'tree-select.placeholder': 'Select a node...',
+  'tree-select.filter.placeholder': 'Search...',
+  'tree-select.empty': 'No results found',
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Row expansion',
@@ -234,6 +252,16 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'input.password-toggle': 'Toggle password visibility',
   'input-mask.clear': 'Clear',
   'password.clear': 'Clear password',
+  'password.show': 'Show password',
+  'password.hide': 'Hide password',
+  'password.prompt': 'Enter a password',
+  'password.weak': 'Weak',
+  'password.medium': 'Medium',
+  'password.strong': 'Strong',
+  'password.strength.none': 'Password strength: None',
+  'password.strength.weak': 'Password strength: Weak',
+  'password.strength.medium': 'Password strength: Medium',
+  'password.strength.strong': 'Password strength: Strong',
 
   // ── Meter Group ───────────────────────────────────────────────────────────
   'meter-group.legend': 'Legend',
@@ -254,9 +282,20 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'upload.toolbar': 'Upload actions',
   'upload.files-list': 'Files to upload',
   'upload.dismiss': 'Dismiss validation messages',
+  'upload.choose': 'Choose',
+  'upload.upload': 'Upload',
+  'upload.cancel': 'Cancel',
+  'upload.empty': 'Drag and drop files here to upload.',
 
   // ── Image ─────────────────────────────────────────────────────────────────
   'image.controls': 'Image controls',
+  'image.preview': 'Preview image',
+  'image.error': 'Image failed to load',
+  'image.zoom-in': 'Zoom in',
+  'image.zoom-out': 'Zoom out',
+  'image.rotate-left': 'Rotate left',
+  'image.rotate-right': 'Rotate right',
+  'image.close': 'Close preview',
 
   // ── DataView ─────────────────────────────────────────────────────────────
   'data-view.pagination': 'Pagination',
@@ -322,6 +361,9 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
 
   // ── Knob ──────────────────────────────────────────────────────────────────
   'knob.dial': 'Dial',
+
+  // ── Skeleton ─────────────────────────────────────────────────────────────
+  'skeleton.label': 'Loading content',
 
   // ── Avatar ────────────────────────────────────────────────────────────────
   'avatar.label': 'Avatar',

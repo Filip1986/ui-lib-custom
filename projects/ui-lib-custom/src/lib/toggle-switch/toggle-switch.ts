@@ -22,6 +22,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type {
   ToggleSwitchVariant,
   ToggleSwitchSize,
@@ -105,6 +106,7 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly hostElement: ElementRef = inject(ElementRef);
 
   /** Resolved variant — falls back to the global theme variant when none is set on this input. */
@@ -215,8 +217,11 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
     this.onCvaTouched();
     this.switchChange.emit({ checked: nextChecked, originalEvent: event });
 
-    const label: string = this.label() ?? this.ariaLabel() ?? 'Toggle switch';
-    const state: string = nextChecked ? 'on' : 'off';
+    const label: string =
+      this.label() ?? this.ariaLabel() ?? this.i18n.translate('toggle-switch.label');
+    const state: string = nextChecked
+      ? this.i18n.translate('toggle-switch.on')
+      : this.i18n.translate('toggle-switch.off');
     void this.liveAnnouncer.announce(`${label} ${state}`, 'polite');
   }
 

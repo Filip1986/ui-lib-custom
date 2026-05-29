@@ -126,6 +126,11 @@ export class Chip {
     return classes.join(' ');
   });
 
+  /** Resolved alt text for the chip image — consumer input wins, falls back to i18n key. */
+  public readonly resolvedImageAlt: Signal<string> = computed<string>(
+    (): string => this.imageAlt() ?? this.i18n.translate('chip.image-alt'),
+  );
+
   /** Whether to show the image slot. */
   public readonly showImage: Signal<boolean> = computed<boolean>(
     (): boolean => this.image() !== null,

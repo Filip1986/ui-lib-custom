@@ -132,17 +132,17 @@ export class PasswordComponent implements ControlValueAccessor {
   /** Tab-order index for the input. */
   public readonly tabindex: InputSignal<number | undefined> = input<number | undefined>(undefined);
 
-  /** Strength panel label shown before the user starts typing. */
-  public readonly promptLabel: InputSignal<string> = input<string>(PASSWORD_DEFAULTS.promptLabel);
+  /** Strength panel label shown before the user starts typing. Falls back to the i18n `password.prompt` key. */
+  public readonly promptLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Strength panel label shown when the password is classified as weak. */
-  public readonly weakLabel: InputSignal<string> = input<string>(PASSWORD_DEFAULTS.weakLabel);
+  /** Strength panel label shown when the password is classified as weak. Falls back to the i18n `password.weak` key. */
+  public readonly weakLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Strength panel label shown when the password is classified as medium. */
-  public readonly mediumLabel: InputSignal<string> = input<string>(PASSWORD_DEFAULTS.mediumLabel);
+  /** Strength panel label shown when the password is classified as medium. Falls back to the i18n `password.medium` key. */
+  public readonly mediumLabel: InputSignal<string | null> = input<string | null>(null);
 
-  /** Strength panel label shown when the password is classified as strong. */
-  public readonly strongLabel: InputSignal<string> = input<string>(PASSWORD_DEFAULTS.strongLabel);
+  /** Strength panel label shown when the password is classified as strong. Falls back to the i18n `password.strong` key. */
+  public readonly strongLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Regex used to classify a password as medium strength. */
   public readonly mediumRegex: InputSignal<string> = input<string>(PASSWORD_DEFAULTS.mediumRegex);
@@ -211,34 +211,54 @@ export class PasswordComponent implements ControlValueAccessor {
     return '0%';
   });
 
+  /** Resolved prompt label — consumer input wins, falls back to i18n key. */
+  public readonly resolvedPromptLabel: Signal<string> = computed<string>(
+    (): string => this.promptLabel() ?? this.i18n.translate('password.prompt'),
+  );
+
+  /** Resolved weak-strength label — consumer input wins, falls back to i18n key. */
+  public readonly resolvedWeakLabel: Signal<string> = computed<string>(
+    (): string => this.weakLabel() ?? this.i18n.translate('password.weak'),
+  );
+
+  /** Resolved medium-strength label — consumer input wins, falls back to i18n key. */
+  public readonly resolvedMediumLabel: Signal<string> = computed<string>(
+    (): string => this.mediumLabel() ?? this.i18n.translate('password.medium'),
+  );
+
+  /** Resolved strong-strength label — consumer input wins, falls back to i18n key. */
+  public readonly resolvedStrongLabel: Signal<string> = computed<string>(
+    (): string => this.strongLabel() ?? this.i18n.translate('password.strong'),
+  );
+
   /** Text displayed below the meter in the strength panel. */
   protected readonly strengthLabel: Signal<string> = computed<string>((): string => {
     const strengthValue: PasswordStrength | null = this.strength();
     if (strengthValue === 'weak') {
-      return this.weakLabel();
+      return this.resolvedWeakLabel();
     }
     if (strengthValue === 'medium') {
-      return this.mediumLabel();
+      return this.resolvedMediumLabel();
     }
     if (strengthValue === 'strong') {
-      return this.strongLabel();
+      return this.resolvedStrongLabel();
     }
-    return this.promptLabel();
+    return this.resolvedPromptLabel();
   });
 
   /** Accessible description announced via live region when password strength changes. */
   protected readonly strengthDescription: Signal<string> = computed<string>((): string => {
     const strengthValue: PasswordStrength | null = this.strength();
     if (strengthValue === 'weak') {
-      return 'Password strength: Weak';
+      return this.i18n.translate('password.strength.weak');
     }
     if (strengthValue === 'medium') {
-      return 'Password strength: Medium';
+      return this.i18n.translate('password.strength.medium');
     }
     if (strengthValue === 'strong') {
-      return 'Password strength: Strong';
+      return this.i18n.translate('password.strength.strong');
     }
-    return 'Password strength: None';
+    return this.i18n.translate('password.strength.none');
   });
 
   /** Native input type — switches between "password" and "text" when the mask is toggled. */

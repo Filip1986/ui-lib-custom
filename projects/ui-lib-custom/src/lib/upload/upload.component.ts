@@ -38,11 +38,7 @@ import {
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
-  UPLOAD_DEFAULT_CANCEL_LABEL,
-  UPLOAD_DEFAULT_CHOOSE_LABEL,
-  UPLOAD_DEFAULT_EMPTY_MESSAGE,
   UPLOAD_DEFAULT_PREVIEW_WIDTH,
-  UPLOAD_DEFAULT_UPLOAD_LABEL,
   UPLOAD_INVALID_FILE_LIMIT_MESSAGE,
   UPLOAD_INVALID_FILE_SIZE_MESSAGE,
   UPLOAD_INVALID_FILE_TYPE_MESSAGE,
@@ -103,6 +99,26 @@ export class UploadComponent implements OnDestroy {
     (): UploadVariant => this.variant() ?? (this.themeConfig.variant() as UploadVariant),
   );
 
+  /** Resolved label for the "Choose" button. */
+  public readonly resolvedChooseLabel: Signal<string> = computed<string>(
+    (): string => this.chooseLabel() ?? this.i18n.translate('upload.choose'),
+  );
+
+  /** Resolved label for the "Upload" button. */
+  public readonly resolvedUploadLabel: Signal<string> = computed<string>(
+    (): string => this.uploadLabel() ?? this.i18n.translate('upload.upload'),
+  );
+
+  /** Resolved label for the "Cancel" button. */
+  public readonly resolvedCancelLabel: Signal<string> = computed<string>(
+    (): string => this.cancelLabel() ?? this.i18n.translate('upload.cancel'),
+  );
+
+  /** Resolved empty-state message. */
+  public readonly resolvedEmptyMessage: Signal<string> = computed<string>(
+    (): string => this.emptyMessage() ?? this.i18n.translate('upload.empty'),
+  );
+
   /** Size token. Defaults to `'md'`. */
   public readonly size: InputSignal<UploadSize> = input<UploadSize>('md');
 
@@ -134,13 +150,13 @@ export class UploadComponent implements OnDestroy {
   public readonly fileLimit: InputSignal<number | null> = input<number | null>(null);
 
   /** Label for the "Choose" button. */
-  public readonly chooseLabel: InputSignal<string> = input<string>(UPLOAD_DEFAULT_CHOOSE_LABEL);
+  public readonly chooseLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Label for the "Upload" button. */
-  public readonly uploadLabel: InputSignal<string> = input<string>(UPLOAD_DEFAULT_UPLOAD_LABEL);
+  public readonly uploadLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Label for the "Cancel" button. */
-  public readonly cancelLabel: InputSignal<string> = input<string>(UPLOAD_DEFAULT_CANCEL_LABEL);
+  public readonly cancelLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Whether to show the Upload action button. Defaults to `true`. */
   public readonly showUploadButton: InputSignal<boolean> = input<boolean>(true);
@@ -173,7 +189,7 @@ export class UploadComponent implements OnDestroy {
   );
 
   /** Text shown inside the drop zone when no files are queued. */
-  public readonly emptyMessage: InputSignal<string> = input<string>(UPLOAD_DEFAULT_EMPTY_MESSAGE);
+  public readonly emptyMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** Additional CSS class applied to the root container element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);

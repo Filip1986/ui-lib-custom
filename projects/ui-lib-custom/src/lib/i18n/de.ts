@@ -135,8 +135,23 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'colorpicker.label.s': 'S',
   'colorpicker.label.b': 'H',
 
-  // ── ProgressBar ───────────────────────────────────────────────────────────
+  // ── ProgressBar / ProgressSpinner ────────────────────────────────────────
   'progressbar.label': '{value}% abgeschlossen',
+  'progress-spinner.label': 'Wird geladen',
+
+  // ── Tag ───────────────────────────────────────────────────────────────────
+  'tag.remove': '{value}-Tag entfernen',
+  'tag.remove-unlabelled': 'Tag entfernen',
+
+  // ── Checkbox ─────────────────────────────────────────────────────────────
+  'checkbox.label': 'Kontrollkästchen',
+  'checkbox.checked': 'aktiviert',
+  'checkbox.unchecked': 'deaktiviert',
+
+  // ── ToggleSwitch ─────────────────────────────────────────────────────────
+  'toggle-switch.label': 'Umschalter',
+  'toggle-switch.on': 'ein',
+  'toggle-switch.off': 'aus',
 
   // ── Carousel / Galleria ───────────────────────────────────────────────────
   'carousel.prev': 'Vorherige Folie',
@@ -195,6 +210,9 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'tree-select.none-selected': 'Kein Element ausgewählt',
   'tree-select.selected.one': '{label} ausgewählt',
   'tree-select.selected.count': '{count} Elemente ausgewählt',
+  'tree-select.placeholder': 'Knoten auswählen...',
+  'tree-select.filter.placeholder': 'Suchen...',
+  'tree-select.empty': 'Keine Ergebnisse gefunden',
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Zeilenerweiterung',
@@ -234,6 +252,16 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'input.password-toggle': 'Passwortsichtbarkeit umschalten',
   'input-mask.clear': 'Löschen',
   'password.clear': 'Passwort löschen',
+  'password.show': 'Passwort anzeigen',
+  'password.hide': 'Passwort ausblenden',
+  'password.prompt': 'Passwort eingeben',
+  'password.weak': 'Schwach',
+  'password.medium': 'Mittel',
+  'password.strong': 'Stark',
+  'password.strength.none': 'Passwortstärke: Keine',
+  'password.strength.weak': 'Passwortstärke: Schwach',
+  'password.strength.medium': 'Passwortstärke: Mittel',
+  'password.strength.strong': 'Passwortstärke: Stark',
 
   // ── Meter Group ───────────────────────────────────────────────────────────
   'meter-group.legend': 'Legende',
@@ -254,9 +282,20 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'upload.toolbar': 'Upload-Aktionen',
   'upload.files-list': 'Hochzuladende Dateien',
   'upload.dismiss': 'Validierungsmeldungen schließen',
+  'upload.choose': 'Auswählen',
+  'upload.upload': 'Hochladen',
+  'upload.cancel': 'Abbrechen',
+  'upload.empty': 'Dateien hier ablegen oder klicken zum Hochladen.',
 
   // ── Image ─────────────────────────────────────────────────────────────────
   'image.controls': 'Bildsteuerung',
+  'image.preview': 'Bild in der Vorschau ansehen',
+  'image.error': 'Bild konnte nicht geladen werden',
+  'image.zoom-in': 'Vergrößern',
+  'image.zoom-out': 'Verkleinern',
+  'image.rotate-left': 'Links drehen',
+  'image.rotate-right': 'Rechts drehen',
+  'image.close': 'Vorschau schließen',
 
   // ── DataView ─────────────────────────────────────────────────────────────
   'data-view.pagination': 'Seitennavigation',
@@ -324,6 +363,8 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'knob.dial': 'Regler',
 
   // ── Avatar ────────────────────────────────────────────────────────────────
+  'skeleton.label': 'Inhalt wird geladen',
+
   'avatar.label': 'Avatar',
 
   // ── Timeline ─────────────────────────────────────────────────────────────

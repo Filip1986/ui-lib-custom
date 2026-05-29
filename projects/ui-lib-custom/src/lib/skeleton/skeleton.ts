@@ -9,6 +9,7 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skeleton.types';
 
 let nextSkeletonId: number = 0;
@@ -48,6 +49,7 @@ export type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skelet
 })
 export class Skeleton {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly i18n: UiLibI18nService = inject(UiLibI18nService);
 
   /** Unique host ID for this instance. */
   public readonly instanceId: string = `ui-lib-skeleton-${++nextSkeletonId}`;
@@ -78,25 +80,24 @@ export class Skeleton {
 
   /** Design variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<SkeletonVariant | null> = input<SkeletonVariant | null>(
-    null
+    null,
   );
 
   /** Additional CSS classes applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible label announced while the loading placeholder is active. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Loading content');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<SkeletonVariant> = computed<SkeletonVariant>(
-    (): SkeletonVariant => this.variant() ?? this.themeConfig.variant()
+    (): SkeletonVariant => this.variant() ?? this.themeConfig.variant(),
   );
 
-  /** Resolved accessible label — trims empty values back to a sensible default. */
-  public readonly effectiveAriaLabel: Signal<string> = computed<string>((): string => {
-    const label: string = this.ariaLabel().trim();
-    return label.length > 0 ? label : 'Loading content';
-  });
+  /** Resolved accessible label — explicit input wins, then falls back to i18n key. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('skeleton.label'),
+  );
 
   /** Computed CSS classes applied to the host element. */
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -105,7 +106,7 @@ export class Skeleton {
       classes.push(
         'ui-lib-skeleton--loading',
         `ui-lib-skeleton--shape-${this.shape()}`,
-        `ui-lib-skeleton--variant-${this.effectiveVariant()}`
+        `ui-lib-skeleton--variant-${this.effectiveVariant()}`,
       );
       if (this.animation() === 'wave') {
         classes.push('ui-lib-skeleton--wave');
@@ -120,16 +121,16 @@ export class Skeleton {
 
   /** Resolved width — size input takes precedence over width. */
   public readonly effectiveWidth: Signal<string> = computed<string>(
-    (): string => this.size() ?? this.width()
+    (): string => this.size() ?? this.width(),
   );
 
   /** Resolved height — size input takes precedence over height. */
   public readonly effectiveHeight: Signal<string> = computed<string>(
-    (): string => this.size() ?? this.height()
+    (): string => this.size() ?? this.height(),
   );
 
   /** Resolved border-radius — explicit borderRadius overrides shape default. */
   public readonly effectiveBorderRadius: Signal<string | null> = computed<string | null>(
-    (): string | null => this.borderRadius()
+    (): string | null => this.borderRadius(),
   );
 }

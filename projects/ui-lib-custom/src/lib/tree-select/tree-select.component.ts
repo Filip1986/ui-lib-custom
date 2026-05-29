@@ -25,7 +25,7 @@ import { Tree } from 'ui-lib-custom/tree';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import { TREE_SELECT_DEFAULTS, TREE_SELECT_ID_PREFIX } from './tree-select.constants';
+import { TREE_SELECT_ID_PREFIX } from './tree-select.constants';
 import type {
   TreeNode,
   TreeNodeCollapseEvent,
@@ -140,9 +140,7 @@ export class TreeSelect implements ControlValueAccessor {
   public readonly size: InputSignal<TreeSelectSize> = input<TreeSelectSize>('md');
 
   /** Placeholder text shown when no node is selected. */
-  public readonly placeholder: InputSignal<string> = input<string>(
-    TREE_SELECT_DEFAULTS.placeholder,
-  );
+  public readonly placeholder: InputSignal<string | null> = input<string | null>(null);
 
   /** When `true`, the component is non-interactive. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
@@ -154,15 +152,13 @@ export class TreeSelect implements ControlValueAccessor {
   public readonly filter: InputSignal<boolean> = input<boolean>(false);
 
   /** Placeholder for the filter input inside the panel. */
-  public readonly filterPlaceholder: InputSignal<string> = input<string>(
-    TREE_SELECT_DEFAULTS.filterPlaceholder,
-  );
+  public readonly filterPlaceholder: InputSignal<string | null> = input<string | null>(null);
 
   /** When `true`, shows a clear button when a value is selected. */
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
 
   /** Extra CSS class applied to the host element. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** ARIA label for the trigger. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
@@ -177,9 +173,7 @@ export class TreeSelect implements ControlValueAccessor {
   public readonly required: InputSignal<boolean> = input<boolean>(false);
 
   /** Message shown when the node list is empty. */
-  public readonly emptyMessage: InputSignal<string> = input<string>(
-    TREE_SELECT_DEFAULTS.emptyMessage,
-  );
+  public readonly emptyMessage: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -226,6 +220,21 @@ export class TreeSelect implements ControlValueAccessor {
     (): TreeSelectVariant => (this.variant() ?? this.themeConfig.variant()) as TreeSelectVariant,
   );
 
+  /** Resolved placeholder for the trigger display and treeAriaLabel fallback. */
+  public readonly resolvedPlaceholder: Signal<string> = computed<string>(
+    (): string => this.placeholder() ?? this.i18n.translate('tree-select.placeholder'),
+  );
+
+  /** Resolved placeholder for the filter input inside the panel. */
+  public readonly resolvedFilterPlaceholder: Signal<string> = computed<string>(
+    (): string => this.filterPlaceholder() ?? this.i18n.translate('tree-select.filter.placeholder'),
+  );
+
+  /** Resolved empty-state message. */
+  public readonly resolvedEmptyMessage: Signal<string> = computed<string>(
+    (): string => this.emptyMessage() ?? this.i18n.translate('tree-select.empty'),
+  );
+
   /** Host class string applied via `[class]` binding. */
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -237,7 +246,8 @@ export class TreeSelect implements ControlValueAccessor {
     if (this.loading()) classes.push('ui-lib-tree-select--loading');
     if (this.invalid()) classes.push('ui-lib-tree-select--invalid');
     if (this.hasValue()) classes.push('ui-lib-tree-select--has-value');
-    if (this.styleClass()) classes.push(this.styleClass());
+    const extra: string | null = this.styleClass();
+    if (extra) classes.push(extra);
     return classes.join(' ');
   });
 
@@ -279,7 +289,7 @@ export class TreeSelect implements ControlValueAccessor {
       return ariaLabel;
     }
 
-    const placeholder: string = this.placeholder().trim();
+    const placeholder: string = this.placeholder()?.trim() ?? '';
     return placeholder || this.i18n.translate('tree-select.options');
   });
 

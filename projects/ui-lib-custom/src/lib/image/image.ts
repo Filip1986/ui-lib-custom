@@ -26,12 +26,6 @@ import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { UiLibI18nService } from 'ui-lib-custom/i18n';
 import {
-  IMAGE_ARIA_CLOSE_LABEL,
-  IMAGE_ARIA_PREVIEW_LABEL,
-  IMAGE_ARIA_ROTATE_LEFT_LABEL,
-  IMAGE_ARIA_ROTATE_RIGHT_LABEL,
-  IMAGE_ARIA_ZOOM_IN_LABEL,
-  IMAGE_ARIA_ZOOM_OUT_LABEL,
   IMAGE_ROTATE_STEP,
   IMAGE_ZOOM_MAX,
   IMAGE_ZOOM_MIN,
@@ -139,7 +133,7 @@ export class ImageComponent implements OnDestroy {
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible label for the preview button indicator. */
-  public readonly ariaLabel: InputSignal<string> = input<string>(IMAGE_ARIA_PREVIEW_LABEL);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Two-way bindings ─────────────────────────────────────────────────────────
 
@@ -184,19 +178,16 @@ export class ImageComponent implements OnDestroy {
   /** Element that had focus when the preview was opened; used for focus restoration. */
   private previewTriggerElement: HTMLElement | null = null;
 
-  // ─── ARIA label constants exposed to the template ─────────────────────────────
-
-  public readonly closeAriaLabel: string = IMAGE_ARIA_CLOSE_LABEL;
-  public readonly zoomInAriaLabel: string = IMAGE_ARIA_ZOOM_IN_LABEL;
-  public readonly zoomOutAriaLabel: string = IMAGE_ARIA_ZOOM_OUT_LABEL;
-  public readonly rotateLeftAriaLabel: string = IMAGE_ARIA_ROTATE_LEFT_LABEL;
-  public readonly rotateRightAriaLabel: string = IMAGE_ARIA_ROTATE_RIGHT_LABEL;
-
   // ─── Computed ────────────────────────────────────────────────────────────────
 
   /** Resolved design variant — falls back to the global theme variant when null. */
   public readonly effectiveVariant: Signal<ImageVariant> = computed<ImageVariant>(
     (): ImageVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved accessible label for the preview indicator and overlay dialog. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('image.preview'),
   );
 
   /** True when the zoom scale has reached the maximum. */

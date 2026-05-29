@@ -92,25 +92,61 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 Date: 2026-05-29
 Changed:
-  table/table.component.ts: emptyMessage + globalFilterPlaceholder → string|null null defaults;
-    resolvedEmptyMessage + resolvedGlobalFilterPlaceholder computed signals added
-  table/table.component.html: {{ emptyMessage() }} → {{ resolvedEmptyMessage() }}
-  tree-table/tree-table.component.ts: globalFilterPlaceholder, caption, styleClass, ariaLabel →
-    string|null null defaults; resolvedFilterPlaceholder + resolvedAriaLabel computeds;
-    hostClasses rewritten null-safe (parts array + if(extra))
-  tree-table/tree-table.component.html: resolvedFilterPlaceholder(); resolvedAriaLabel()
-  tree/tree.ts: filterPlaceholder, styleClass, ariaLabel → string|null null defaults;
-    resolvedFilterPlaceholder computed; hostAriaLabel: Signal<string> (always resolved, not nullable);
-    hostClasses rewritten null-safe
-  tree/tree.html: resolvedFilterPlaceholder()
-  avatar/avatar.ts: imageAlt → string|null null default; resolvedImageAlt uses ?? chain
-  avatar/avatar.spec.ts + avatar.a11y.spec.ts: WritableSignal<string> → string|null; fallback test uses null
-  i18n/en,de,fr,es.ts: table.empty, table.filter.placeholder, tree-table.label,
-    tree-table.filter.placeholder, tree.label keys added (4 locales)
-  docs/COMPONENT_SCORES.md: Table/TreeTable/Tree 8.5→8.6; Avatar 8.8→8.9
-State: COMPLETE — ESLint 0w ✅; ng build ✅; 309/309 tests ✅
-Verification: eslint table/ tree-table/ tree/ avatar/ (0w); ng build (0w); jest (309 pass)
-Next step: Commit + push; then continue Prompt 8 on DatePicker and remaining 8.5-cluster components
+  password/password.component.ts: promptLabel/weakLabel/mediumLabel/strongLabel → string|null null defaults;
+    resolvedPromptLabel/resolvedWeakLabel/resolvedMediumLabel/resolvedStrongLabel computed signals added;
+    strengthLabel + strengthDescription use resolved* / i18n.translate(); PASSWORD_DEFAULTS label consts removed
+  password/password.component.html: toggle mask button aria-label → i18n.translate('password.show/hide')
+  chip/chip.ts: resolvedImageAlt computed (imageAlt() ?? i18n.translate('chip.image-alt')); i18n already injected
+  chip/chip.html: [alt]="resolvedImageAlt()" (was inline ?? in template)
+  message/message.ts: closeAriaLabel input added (string|null null default); resolvedCloseAriaLabel computed
+  message/message.html: [attr.aria-label]="resolvedCloseAriaLabel()"
+  i18n/en,de,fr,es.ts: 10 new password keys per locale (show/hide/prompt/weak/medium/strong/strength.none/weak/medium/strong)
+  docs/COMPONENT_SCORES.md: Password 8.7→8.8 (I18n 8→9); Chip 8.5→8.6 (I18n 8→9); Message 8.6→8.7 (I18n 8→9)
+State: COMPLETE — ESLint 0w ✅; jest password(80)+chip(53)+message(50) ✅
+Verification: eslint password/ chip/ message/ i18n/ (0w); jest password|chip|message (183 pass)
+Next step: Commit + push batch-4; then continue Prompt 8 on remaining I18n=8 components
+  (Input, Textarea, RadioButton, SelectButton, InputMask, KeyFilter, DatePicker, Icon, IconButton,
+  ButtonGroup, Menubar, Tabs, Accordion, CodeSnippet — layout/utility components likely no-op)
+
+Date: 2026-05-29
+Changed:
+  tag/tag.ts: UiLibI18nService injected; removeAriaLabel computed uses i18n.translate('tag.remove'/
+    'tag.remove-unlabelled') instead of hardcoded English strings
+  progress-spinner/progress-spinner.ts: UiLibI18nService injected; ariaLabel → string|null null
+    default; resolvedAriaLabel computed; host binding updated
+  progress-spinner/progress-spinner.a11y.spec.ts: default aria-label test updated ('Loading...' → 'Loading')
+  checkbox/checkbox.ts: UiLibI18nService injected; live-announcer strings use i18n keys
+  toggle-switch/toggle-switch.ts: UiLibI18nService injected; live-announcer strings use i18n keys
+  i18n/en,de,fr,es.ts: 10 new keys — progress-spinner.label; tag.remove/remove-unlabelled;
+    checkbox.label/checked/unchecked; toggle-switch.label/on/off
+  docs/COMPONENT_SCORES.md: Tag 8.9→9.0; ProgressSpinner 8.9→9.0; Checkbox 8.9→9.0; ToggleSwitch 8.8→8.9
+State: COMPLETE — ESLint 0w ✅; jest tag(40)+progress-spinner(35)+checkbox(67)+toggle-switch(68) ✅
+Verification: eslint tag/ progress-spinner/ checkbox/ toggle-switch/ i18n/ (0w); jest all pass
+Next step: Build + push batch-3; continue with Password + Chip + Message (batch-4)
+
+Date: 2026-05-29
+Changed:
+  tree-select/tree-select.component.ts: placeholder, filterPlaceholder, styleClass, emptyMessage →
+    string|null null defaults; resolvedPlaceholder, resolvedFilterPlaceholder, resolvedEmptyMessage
+    computed signals added; hostClasses + treeAriaLabel null-safe
+  tree-select/tree-select.component.html: resolved* signals wired in template
+  skeleton/skeleton.ts: UiLibI18nService injected; ariaLabel → string|null; effectiveAriaLabel uses ??
+  upload/upload.component.ts: chooseLabel, uploadLabel, cancelLabel, emptyMessage → string|null null
+    defaults; 4 resolved computeds; unused IMAGE_DEFAULT_* constants removed from import
+  upload/upload.component.html: resolved* labels wired in template
+  image/image.ts: ariaLabel → string|null null default; resolvedAriaLabel computed added; 5 class
+    property ARIA constants removed; IMAGE_ARIA_* imports removed
+  image/image.html: resolvedAriaLabel() on indicator + dialog; i18n.translate() for all toolbar buttons
+    + error fallback aria-label
+  i18n/en,de,fr,es.ts: tree-select.placeholder/filter.placeholder/empty; upload.choose/upload/cancel/empty;
+    image.preview/error/zoom-in/zoom-out/rotate-left/rotate-right/close;
+    skeleton.label (4 locales, 14 new keys)
+  docs/COMPONENT_SCORES.md: TreeSelect 8.6→8.7; Skeleton 8.6→8.7; Image 8.7→8.8; Upload 8.9→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅; all 302 batch-2 tests ✅
+Verification: eslint tree-select/ skeleton/ upload/ image/ i18n/ (0w); ng build (0w);
+  jest tree-select(79) + skeleton(41) + upload(66) + image(116) all pass
+Next step: Commit + push batch-2; then continue Prompt 8 on remaining I18n=8 components
+  (DatePicker, Chip ×2, Message, etc.)
 
 Date: 2026-05-29 [feat(lib): prompt-8 hardening — ConfirmDialog + Drawer structural improvements + i18n docs batch]
 Changed:
@@ -127,29 +163,6 @@ Changed:
 State: COMPLETE — ESLint ✅; build zero warnings ✅; 124 confirm-dialog+drawer tests ✅
 Verification: npx eslint confirm-dialog/ drawer/ (0 warnings); ng build (0 warnings); npx jest confirm-dialog|drawer (124 pass)
 Next step: Continue Prompt 8 pass on remaining 8.5-cluster components (BottomSheet, MeterGroup, DataView, Badge, Timeline, Carousel, Galleria, ScrollTop, Knob, Avatar)
-
-Date: 2026-05-29 [feat(lib): prompt-8 hardening — Paginator + Listbox + VirtualScroller null-default + i18n]
-Changed:
-  paginator/paginator.component.ts: ariaLabel + styleClass → string|null null defaults; resolvedAriaLabel computed
-  listbox/listbox.component.ts: ariaLabel, ariaLabelledBy, emptyMessage, emptyFilterMessage, filterPlaceholder → string|null
-    null defaults; 5 resolved computeds (resolvedAriaLabel, resolvedEmptyMessage, resolvedEmptyFilterMessage,
-    resolvedFilterPlaceholder, resolvedFilterAriaLabel)
-  listbox/listbox.component.html: hardcoded 'Filter options' → resolvedFilterAriaLabel(); other template refs updated
-  virtual-scroller/virtual-scroller.component.ts: 8 string inputs → string|null null defaults; 6 resolved computeds;
-    liveRegionMessage uses resolved*; formatTotalItemsMessage uses resolvedAvailableItemsText(); hostClasses null-safe
-  i18n/en,de,fr,es.ts: 11 new keys — listbox.label, listbox.empty, listbox.empty.filter,
-    listbox.filter.placeholder, listbox.filter.label; virtual-scroller.list-label, .grid-label,
-    .loading, .loading-more, .empty, .available (all 4 locales)
-  3 spec files: WritableSignal<string> → string|null where needed
-  docs/COMPONENT_SCORES.md: Paginator 8.5→8.7; Listbox 8.5→8.6; VirtualScroller 8.5→8.7
-State: COMPLETE — ESLint 0w ✅; ng build ✅; 143 tests ✅
-Verification: npx eslint paginator/ listbox/ virtual-scroller/ i18n/ (0w); ng build ✅; jest paginator+listbox+virtual-scroller (143 pass)
-Next step: Continue Prompt 8 pass on Avatar + DatePicker + remaining 8.5-cluster; update READMEs for changed components
-  docs/COMPONENT_SCORES.md: AutoComplete Theme 9→10 (9.4→9.5); CascadeSelect Perf/Angular/Theme 9→10 (9.2→9.5)
-  docs/reference/bundle-sizes.json: baseline updated
-State: COMPLETE — ESLint ✅; build zero warnings ✅; 161/161 tests ✅
-Verification: npx eslint autocomplete/ cascade-select/ (PASS ✅); ng build ✅; npx jest (161 ✅)
-Next step: Broader Prompt 8 pass on sub-8.5 components; ColorPicker → 9.5 if continuing ceiling push
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
