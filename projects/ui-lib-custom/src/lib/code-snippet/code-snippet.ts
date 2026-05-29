@@ -117,6 +117,11 @@ export class CodeSnippet {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** ID(s) of element(s) that label this code region (`aria-labelledby`). Takes precedence over `ariaLabel`. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+  /**
+   * Overrides the `aria-label` on the tab list (multi-file mode only).
+   * Falls back to the i18n `code-snippet.tabs` key when null.
+   */
+  public readonly tabsAriaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Emitted after the code is successfully copied to the clipboard. */
   public readonly codeCopied: OutputEmitterRef<void> = output<void>();
@@ -168,6 +173,11 @@ export class CodeSnippet {
 
   public readonly effectiveVariant: Signal<CodeSnippetVariant> = computed<CodeSnippetVariant>(
     (): CodeSnippetVariant => this.variant() ?? this.themeService.variant(),
+  );
+
+  /** Resolved tab-list aria-label — falls back to the i18n `code-snippet.tabs` key. */
+  public readonly effectiveTabsAriaLabel: Signal<string> = computed<string>(
+    (): string => this.tabsAriaLabel() ?? this.i18n.translate('code-snippet.tabs'),
   );
 
   public readonly lines: Signal<readonly string[]> = computed<readonly string[]>(

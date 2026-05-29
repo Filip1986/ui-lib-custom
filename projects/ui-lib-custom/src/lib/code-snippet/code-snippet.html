@@ -19,7 +19,7 @@
       class="ui-lib-code-snippet__tabs"
       [class.ui-lib-code-snippet__tabs--multi]="isMultiTab()"
       [attr.role]="isMultiTab() ? 'tablist' : null"
-      [attr.aria-label]="isMultiTab() ? 'File tabs' : null"
+      [attr.aria-label]="isMultiTab() ? effectiveTabsAriaLabel() : null"
     >
       @for (file of effectiveFiles(); track file.filename; let index = $index) {
         <button
@@ -86,6 +86,10 @@
         }
       </button>
     }
+
+    <!-- Consumer-provided header actions (e.g. expand/fullscreen, language selector, run button). -->
+    <!-- Projected children are placed directly into the flex header row. -->
+    <ng-content select="[uilib-header-actions]" />
   </div>
 
   <!-- Body: optional line numbers + code — scoped to the active tab's content -->
@@ -111,4 +115,7 @@
       ><code class="ui-lib-code-snippet__code" [innerHTML]="highlightedCode()"></code></pre>
     </div>
   </div>
+
+  <!-- Consumer-provided footer content (e.g. run output, attribution, annotations). -->
+  <ng-content select="[uilib-footer]" />
 </div>

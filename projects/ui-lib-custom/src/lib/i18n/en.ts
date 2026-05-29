@@ -369,6 +369,7 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'image-compare.aria-label': 'Image comparison slider',
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
+  'code-snippet.tabs': 'File tabs',
   'code-snippet.copy': 'Copy code to clipboard',
   'code-snippet.copied': 'Copied!',
   'code-snippet.label.language': '{language} code snippet',

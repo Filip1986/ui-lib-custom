@@ -368,6 +368,7 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'image-compare.aria-label': 'Control deslizante de comparación de imágenes',
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
+  'code-snippet.tabs': 'Pestañas de archivos',
   'code-snippet.copy': 'Copiar código',
   'code-snippet.copied': '¡Copiado!',
   'code-snippet.label.language': 'Fragmento de código {language}',

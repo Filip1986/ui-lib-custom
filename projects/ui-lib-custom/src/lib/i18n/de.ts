@@ -369,6 +369,7 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'image-compare.aria-label': 'Bildvergleichsschieberegler',
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
+  'code-snippet.tabs': 'Datei-Reiter',
   'code-snippet.copy': 'Code in Zwischenablage kopieren',
   'code-snippet.copied': 'Kopiert!',
   'code-snippet.label.language': '{language}-Codeausschnitt',

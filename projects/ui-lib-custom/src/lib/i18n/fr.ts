@@ -369,6 +369,7 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'image-compare.aria-label': "Curseur de comparaison d'image",
 
   // ── CodeSnippet ───────────────────────────────────────────────────────────
+  'code-snippet.tabs': 'Onglets de fichiers',
   'code-snippet.copy': 'Copier le code',
   'code-snippet.copied': 'Copié !',
   'code-snippet.label.language': 'Extrait de code {language}',

@@ -278,7 +278,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Carousel          | 8   | 9    | 8    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.7 | 🟢     |
 | Galleria          | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
 | Chart             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| CodeSnippet       | 9   | 9    | 9    | 7    | 8     | 9   | 8    | 9      | 9       | 9    | 8   | 8.6 | 🟢     |
+| CodeSnippet       | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8   | 8.9 | 🟢     |
 
 ## Feedback & Status
 
