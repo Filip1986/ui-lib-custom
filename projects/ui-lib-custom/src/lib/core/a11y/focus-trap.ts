@@ -10,6 +10,41 @@ const FOCUSABLE_SELECTOR: string = [
 
 let nextFocusTrapId: number = 0;
 
+/** Options controlling focus-trap activation and deactivation behaviour. */
+export interface FocusTrapOptions {
+  /**
+   * When `true` (default), the trap moves focus to the element matching
+   * `initialFocusSelector`, or to the first focusable descendant, immediately
+   * on activation. Set `false` when a parent component manages initial focus.
+   */
+  autoFocus?: boolean;
+  /**
+   * CSS selector identifying the element that should receive focus on
+   * activation. Evaluated as `container.querySelector(selector)`.
+   * Falls back to the first focusable descendant when no match is found.
+   * Only used when `autoFocus` is `true`.
+   */
+  initialFocusSelector?: string | null;
+  /**
+   * When `true` (default), deactivating the trap returns focus to whichever
+   * element was active before the trap was activated.
+   * Set `false` when the activating element will no longer exist after close.
+   */
+  restoreFocus?: boolean;
+  /**
+   * Extra CSS class name(s) added to each sentinel `<span>` element on
+   * activation. Useful for debugging or custom sentinel styling.
+   */
+  sentinelClass?: string | null;
+}
+
+const DEFAULT_OPTIONS: Required<FocusTrapOptions> = {
+  autoFocus: true,
+  initialFocusSelector: null,
+  restoreFocus: true,
+  sentinelClass: null,
+};
+
 /**
  * Reusable keyboard focus trap for overlay containers.
  */
@@ -21,6 +56,8 @@ export class FocusTrap {
   private addedContainerTabIndex: boolean = false;
   private startSentinel: HTMLElement | null = null;
   private endSentinel: HTMLElement | null = null;
+  private activeOptions: Required<FocusTrapOptions> = { ...DEFAULT_OPTIONS };
+
   private readonly onStartSentinelFocus: () => void = (): void => {
     this.focusLastElement();
   };
@@ -36,22 +73,33 @@ export class FocusTrap {
     this.container = container;
   }
 
-  /** Activates focus trapping and moves focus inside the container. */
-  public activate(): void {
+  /** Activates focus trapping and optionally moves focus inside the container. */
+  public activate(options?: FocusTrapOptions): void {
     if (this.active || !this.hasDom()) {
       return;
     }
+
+    this.activeOptions = {
+      autoFocus: options?.autoFocus ?? DEFAULT_OPTIONS.autoFocus,
+      initialFocusSelector: options?.initialFocusSelector ?? DEFAULT_OPTIONS.initialFocusSelector,
+      restoreFocus: options?.restoreFocus ?? DEFAULT_OPTIONS.restoreFocus,
+      sentinelClass: options?.sentinelClass ?? DEFAULT_OPTIONS.sentinelClass,
+    };
 
     const activeElement: Element | null = this.container.ownerDocument.activeElement;
     this.previousFocusedElement = activeElement instanceof HTMLElement ? activeElement : null;
 
     this.attachSentinels();
     this.container.addEventListener('keydown', this.onKeydown);
-    this.focusInitialTarget();
+
+    if (this.activeOptions.autoFocus) {
+      this.focusInitialTarget();
+    }
+
     this.active = true;
   }
 
-  /** Deactivates focus trapping and restores prior focus when possible. */
+  /** Deactivates focus trapping and conditionally restores prior focus. */
   public deactivate(): void {
     if (!this.active || !this.hasDom()) {
       return;
@@ -66,7 +114,12 @@ export class FocusTrap {
     }
 
     this.active = false;
-    this.restoreFocus();
+
+    if (this.activeOptions.restoreFocus) {
+      this.restoreFocusToPrevious();
+    } else {
+      this.previousFocusedElement = null;
+    }
   }
 
   private handleKeydown(event: KeyboardEvent): void {
@@ -111,6 +164,18 @@ export class FocusTrap {
   }
 
   private focusInitialTarget(): void {
+    const selector: string | null = this.activeOptions.initialFocusSelector;
+    if (selector) {
+      const target: HTMLElement | null = this.container.querySelector<HTMLElement>(selector);
+      if (
+        target &&
+        !target.hasAttribute('disabled') &&
+        target.getAttribute('aria-hidden') !== 'true'
+      ) {
+        target.focus();
+        return;
+      }
+    }
     this.focusFirstElement();
   }
 
@@ -142,7 +207,7 @@ export class FocusTrap {
     this.container.focus();
   }
 
-  private restoreFocus(): void {
+  private restoreFocusToPrevious(): void {
     if (this.previousFocusedElement && this.previousFocusedElement.isConnected) {
       this.previousFocusedElement.focus();
     }
@@ -194,6 +259,16 @@ export class FocusTrap {
     sentinel.style.height = '1px';
     sentinel.style.opacity = '0';
     sentinel.style.pointerEvents = 'none';
+
+    const extraClass: string | null = this.activeOptions.sentinelClass;
+    if (extraClass) {
+      extraClass
+        .trim()
+        .split(/\s+/)
+        .forEach((className: string): void => {
+          sentinel.classList.add(className);
+        });
+    }
   }
 
   private detachSentinels(): void {

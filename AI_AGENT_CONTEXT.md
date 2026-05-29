@@ -91,6 +91,29 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (FocusTrap hardening):
+  core/a11y/focus-trap.ts: Added FocusTrapOptions interface (autoFocus, initialFocusSelector,
+    restoreFocus, sentinelClass); activate() accepts optional FocusTrapOptions; focusInitialTarget()
+    uses initialFocusSelector; deactivate() respects restoreFocus; configureSentinel() applies
+    sentinelClass; restoreFocus() renamed to restoreFocusToPrevious() to avoid naming conflict;
+    DEFAULT_OPTIONS constant added; FocusTrapOptions exported
+  focus-trap/focus-trap.ts: Added 4 new inputs (autoFocus, initialFocusSelector, restoreFocus,
+    sentinelClass); activate() renamed activateTrap(); deactivate() renamed deactivateTrap();
+    options read via untracked() to avoid unnecessary effect re-runs; devMode warning when
+    initialFocusSelector finds no match; imports FocusTrapOptions type from ui-lib-custom/core
+  focus-trap/README.md: Documented all 5 inputs; added usage examples for initialFocusSelector,
+    restoreFocus=false, autoFocus=false, sentinelClass debug; CSS hook section; core API example
+    with FocusTrapOptions
+  focus-trap/focus-trap.spec.ts: +9 tests covering initialFocusSelector (match + fallback),
+    autoFocus=false, restoreFocus=false, sentinelClass
+  focus-trap/focus-trap.a11y.spec.ts: +4 tests (axe+initialFocusSelector, axe+restoreFocus,
+    initialFocusSelector focus placement, sentinelClass applied)
+  docs/COMPONENT_SCORES.md: FocusTrap 8.5→9.0 (API/Theme/DX/Polish/Feel all 8→9)
+State: COMPLETE — ESLint 0w ✅; jest focus-trap (44 tests) ✅
+Verification: npx eslint focus-trap/ core/a11y/focus-trap.ts (0w); npx jest focus-trap (44 pass)
+Next step: Commit + push; move to next hardening target (DatePicker or new premium component)
+
+Date: 2026-05-29
 Changed (batch 6):
   date-picker/date-picker.types.ts: today?: string and clear?: string (now optional)
   date-picker/date-picker.constants.ts: removed today:'Today' and clear:'Clear' from DEFAULT_LOCALE
@@ -131,24 +154,6 @@ Verification: eslint 6 components + i18n (0w); jest all 338 pass
 Next step: Commit + push batch-5; only remaining I18n=8 is DatePicker (complex, rich key set
   already exists — needs ariaLabel null-default verification) and FocusTrap (structural,
   stays 8.5 regardless)
-
-Date: 2026-05-29
-Changed:
-  password/password.component.ts: promptLabel/weakLabel/mediumLabel/strongLabel → string|null null defaults;
-    resolvedPromptLabel/resolvedWeakLabel/resolvedMediumLabel/resolvedStrongLabel computed signals added;
-    strengthLabel + strengthDescription use resolved* / i18n.translate(); PASSWORD_DEFAULTS label consts removed
-  password/password.component.html: toggle mask button aria-label → i18n.translate('password.show/hide')
-  chip/chip.ts: resolvedImageAlt computed (imageAlt() ?? i18n.translate('chip.image-alt')); i18n already injected
-  chip/chip.html: [alt]="resolvedImageAlt()" (was inline ?? in template)
-  message/message.ts: closeAriaLabel input added (string|null null default); resolvedCloseAriaLabel computed
-  message/message.html: [attr.aria-label]="resolvedCloseAriaLabel()"
-  i18n/en,de,fr,es.ts: 10 new password keys per locale (show/hide/prompt/weak/medium/strong/strength.none/weak/medium/strong)
-  docs/COMPONENT_SCORES.md: Password 8.7→8.8 (I18n 8→9); Chip 8.5→8.6 (I18n 8→9); Message 8.6→8.7 (I18n 8→9)
-State: COMPLETE — ESLint 0w ✅; jest password(80)+chip(53)+message(50) ✅
-Verification: eslint password/ chip/ message/ i18n/ (0w); jest password|chip|message (183 pass)
-Next step: Commit + push batch-4; then continue Prompt 8 on remaining I18n=8 components
-  (Input, Textarea, RadioButton, SelectButton, InputMask, KeyFilter, DatePicker, Icon, IconButton,
-  ButtonGroup, Menubar, Tabs, Accordion, CodeSnippet — layout/utility components likely no-op)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

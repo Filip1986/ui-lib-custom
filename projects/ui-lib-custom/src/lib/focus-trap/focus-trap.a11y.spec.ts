@@ -70,6 +70,48 @@ class FocusTrapNoFocusableHostComponent {}
   standalone: true,
   imports: [FocusTrapDirective],
   template: `
+    <div
+      id="trap"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="trap-title"
+      uiLibFocusTrap
+      initialFocusSelector="#cancel"
+    >
+      <h2 id="trap-title">Confirm action</h2>
+      <button id="confirm">Confirm</button>
+      <button id="cancel">Cancel</button>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FocusTrapInitialFocusHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [FocusTrapDirective],
+  template: `
+    <button id="trigger">Open</button>
+    <div
+      id="trap"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="trap-title"
+      uiLibFocusTrap
+      [restoreFocus]="false"
+    >
+      <h2 id="trap-title">Dialog</h2>
+      <button id="inside">Inside</button>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FocusTrapNoRestoreHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [FocusTrapDirective],
+  template: `
     <button id="trigger">Trigger</button>
     <div id="trap" [uiLibFocusTrap]="false">
       <button id="inside">Inside</button>
@@ -81,14 +123,14 @@ class FocusTrapNoFocusableHostComponent {}
 class FocusTrapDisabledHostComponent {}
 
 async function createFixture<T>(
-  componentType: Parameters<typeof TestBed.createComponent>[0]
+  componentType: Parameters<typeof TestBed.createComponent>[0],
 ): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [componentType],
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<T> = TestBed.createComponent(
-    componentType as Parameters<typeof TestBed.createComponent<T>>[0]
+    componentType as Parameters<typeof TestBed.createComponent<T>>[0],
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -174,10 +216,10 @@ describe('FocusTrapDirective (a11y)', (): void => {
       await createFixture<FocusTrapMultiHostComponent>(FocusTrapMultiHostComponent);
     const root: HTMLElement = fixture.nativeElement as HTMLElement;
     const firstContainer: HTMLElement = root.querySelector<HTMLElement>(
-      '#first-trap'
+      '#first-trap',
     ) as HTMLElement;
     const secondContainer: HTMLElement = root.querySelector<HTMLElement>(
-      '#second-trap'
+      '#second-trap',
     ) as HTMLElement;
     const firstSentinels: { start: HTMLElement; end: HTMLElement } = querySentinels(firstContainer);
     const secondSentinels: { start: HTMLElement; end: HTMLElement } =
@@ -295,5 +337,48 @@ describe('FocusTrapDirective (a11y)', (): void => {
     inside.focus();
     const prevented: boolean = dispatchTab(inside);
     expect(prevented).toBe(false);
+  });
+
+  it('passes axe checks with initialFocusSelector', async (): Promise<void> => {
+    const fixture: ComponentFixture<FocusTrapInitialFocusHostComponent> =
+      await createFixture<FocusTrapInitialFocusHostComponent>(FocusTrapInitialFocusHostComponent);
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('focuses the element matching initialFocusSelector on activation', async (): Promise<void> => {
+    const fixture: ComponentFixture<FocusTrapInitialFocusHostComponent> =
+      await createFixture<FocusTrapInitialFocusHostComponent>(FocusTrapInitialFocusHostComponent);
+    const root: HTMLElement = fixture.nativeElement as HTMLElement;
+    const cancelButton: HTMLElement = root.querySelector<HTMLElement>('#cancel') as HTMLElement;
+    expect(document.activeElement).toBe(cancelButton);
+  });
+
+  it('passes axe checks with restoreFocus=false', async (): Promise<void> => {
+    const fixture: ComponentFixture<FocusTrapNoRestoreHostComponent> =
+      await createFixture<FocusTrapNoRestoreHostComponent>(FocusTrapNoRestoreHostComponent);
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('applies sentinelClass to both sentinel nodes', async (): Promise<void> => {
+    @Component({
+      standalone: true,
+      imports: [FocusTrapDirective],
+      template: `<div id="trap" uiLibFocusTrap sentinelClass="test-sentinel">
+        <button>A</button>
+      </div>`,
+      changeDetection: ChangeDetectionStrategy.OnPush,
+    })
+    class FocusTrapSentinelClassA11yHostComponent {}
+
+    const fixture: ComponentFixture<FocusTrapSentinelClassA11yHostComponent> =
+      await createFixture<FocusTrapSentinelClassA11yHostComponent>(
+        FocusTrapSentinelClassA11yHostComponent,
+      );
+    const container: HTMLElement = (
+      fixture.nativeElement as HTMLElement
+    ).querySelector<HTMLElement>('#trap') as HTMLElement;
+    const { start, end }: { start: HTMLElement; end: HTMLElement } = querySentinels(container);
+    expect(start.classList.contains('test-sentinel')).toBe(true);
+    expect(end.classList.contains('test-sentinel')).toBe(true);
   });
 });

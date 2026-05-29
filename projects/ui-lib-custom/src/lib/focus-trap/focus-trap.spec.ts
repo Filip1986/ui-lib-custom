@@ -93,7 +93,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDefaultHostComponent> = TestBed.createComponent(
-        FocusTrapDefaultHostComponent
+        FocusTrapDefaultHostComponent,
       );
       detectAndFlush(fixture);
       const debugEl: DebugElement = fixture.debugElement.query(By.directive(FocusTrapDirective));
@@ -107,7 +107,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDefaultHostComponent> = TestBed.createComponent(
-        FocusTrapDefaultHostComponent
+        FocusTrapDefaultHostComponent,
       );
       detectAndFlush(fixture);
       const hostElement: HTMLElement = getHostElement(fixture);
@@ -122,7 +122,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDefaultHostComponent> = TestBed.createComponent(
-        FocusTrapDefaultHostComponent
+        FocusTrapDefaultHostComponent,
       );
       detectAndFlush(fixture);
       const buttonA: HTMLElement = (
@@ -137,7 +137,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDefaultHostComponent> = TestBed.createComponent(
-        FocusTrapDefaultHostComponent
+        FocusTrapDefaultHostComponent,
       );
       detectAndFlush(fixture);
       const nativeEl: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -155,7 +155,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDefaultHostComponent> = TestBed.createComponent(
-        FocusTrapDefaultHostComponent
+        FocusTrapDefaultHostComponent,
       );
       detectAndFlush(fixture);
       const nativeEl: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -175,7 +175,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDisabledHostComponent> = TestBed.createComponent(
-        FocusTrapDisabledHostComponent
+        FocusTrapDisabledHostComponent,
       );
       detectAndFlush(fixture);
       const nativeEl: HTMLElement = fixture.nativeElement as HTMLElement;
@@ -227,6 +227,165 @@ describe('FocusTrapDirective', (): void => {
     });
   });
 
+  describe('initialFocusSelector', (): void => {
+    it('should focus the element matching the selector on activation', (): void => {
+      @Component({
+        selector: 'app-focus-trap-selector-host',
+        standalone: true,
+        imports: [FocusTrapDirective],
+        template: `
+          <div uiLibFocusTrap initialFocusSelector="#second">
+            <button id="first">First</button>
+            <button id="second">Second</button>
+          </div>
+        `,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+      })
+      class FocusTrapSelectorHostComponent {}
+
+      TestBed.configureTestingModule({
+        imports: [FocusTrapSelectorHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<FocusTrapSelectorHostComponent> = TestBed.createComponent(
+        FocusTrapSelectorHostComponent,
+      );
+      detectAndFlush(fixture);
+      const secondButton: HTMLElement = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector<HTMLElement>('#second')!;
+      expect(document.activeElement).toBe(secondButton);
+    });
+
+    it('should fall back to first focusable element when selector matches nothing', (): void => {
+      @Component({
+        selector: 'app-focus-trap-no-match-host',
+        standalone: true,
+        imports: [FocusTrapDirective],
+        template: `
+          <div uiLibFocusTrap initialFocusSelector="#nonexistent">
+            <button id="first">First</button>
+            <button id="second">Second</button>
+          </div>
+        `,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+      })
+      class FocusTrapNoMatchHostComponent {}
+
+      TestBed.configureTestingModule({
+        imports: [FocusTrapNoMatchHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<FocusTrapNoMatchHostComponent> = TestBed.createComponent(
+        FocusTrapNoMatchHostComponent,
+      );
+      detectAndFlush(fixture);
+      const firstButton: HTMLElement = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector<HTMLElement>('#first')!;
+      expect(document.activeElement).toBe(firstButton);
+    });
+  });
+
+  describe('autoFocus=false', (): void => {
+    it('should not move focus on activation when autoFocus is false', (): void => {
+      @Component({
+        selector: 'app-focus-trap-no-autofocus-host',
+        standalone: true,
+        imports: [FocusTrapDirective],
+        template: `
+          <button id="outside">Outside</button>
+          <div uiLibFocusTrap [autoFocus]="false">
+            <button id="first">First</button>
+          </div>
+        `,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+      })
+      class FocusTrapNoAutoFocusHostComponent {}
+
+      TestBed.configureTestingModule({
+        imports: [FocusTrapNoAutoFocusHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<FocusTrapNoAutoFocusHostComponent> = TestBed.createComponent(
+        FocusTrapNoAutoFocusHostComponent,
+      );
+      const outsideButton: HTMLElement = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector<HTMLElement>('#outside')!;
+      outsideButton.focus();
+      detectAndFlush(fixture);
+      // Focus should NOT have moved into the trap
+      expect(document.activeElement).toBe(outsideButton);
+    });
+  });
+
+  describe('restoreFocus=false', (): void => {
+    it('should not restore focus to the trigger when restoreFocus is false', (): void => {
+      @Component({
+        selector: 'app-focus-trap-no-restore-host',
+        standalone: true,
+        imports: [FocusTrapDirective],
+        template: `
+          <button id="trigger">Trigger</button>
+          <div [uiLibFocusTrap]="enabled()" [restoreFocus]="false">
+            <button id="inside">Inside</button>
+          </div>
+        `,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+      })
+      class FocusTrapNoRestoreHostComponent {
+        public readonly enabled: WritableSignal<boolean> = signal<boolean>(true);
+      }
+
+      TestBed.configureTestingModule({
+        imports: [FocusTrapNoRestoreHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<FocusTrapNoRestoreHostComponent> = TestBed.createComponent(
+        FocusTrapNoRestoreHostComponent,
+      );
+      const nativeEl: HTMLElement = fixture.nativeElement as HTMLElement;
+      const triggerButton: HTMLElement = nativeEl.querySelector<HTMLElement>('#trigger')!;
+      triggerButton.focus();
+      detectAndFlush(fixture);
+      fixture.componentInstance.enabled.set(false);
+      detectAndFlush(fixture);
+      // Focus should NOT have been restored to the trigger
+      expect(document.activeElement).not.toBe(triggerButton);
+    });
+  });
+
+  describe('sentinelClass', (): void => {
+    it('should add the extra class to both sentinel nodes', (): void => {
+      @Component({
+        selector: 'app-focus-trap-sentinel-class-host',
+        standalone: true,
+        imports: [FocusTrapDirective],
+        template: `
+          <div uiLibFocusTrap sentinelClass="my-sentinel">
+            <button id="a">A</button>
+          </div>
+        `,
+        changeDetection: ChangeDetectionStrategy.OnPush,
+      })
+      class FocusTrapSentinelClassHostComponent {}
+
+      TestBed.configureTestingModule({
+        imports: [FocusTrapSentinelClassHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<FocusTrapSentinelClassHostComponent> =
+        TestBed.createComponent(FocusTrapSentinelClassHostComponent);
+      detectAndFlush(fixture);
+      const trapEl: HTMLElement = getHostElement(fixture);
+      const startSentinel: HTMLElement = trapEl.previousElementSibling as HTMLElement;
+      const endSentinel: HTMLElement = trapEl.nextElementSibling as HTMLElement;
+      expect(startSentinel.classList.contains('my-sentinel')).toBe(true);
+      expect(endSentinel.classList.contains('my-sentinel')).toBe(true);
+    });
+  });
+
   describe('destruction', (): void => {
     it('should deactivate trap and restore focus on destroy', (): void => {
       @Component({
@@ -252,7 +411,7 @@ describe('FocusTrapDirective', (): void => {
         providers: [provideZonelessChangeDetection()],
       });
       const fixture: ComponentFixture<FocusTrapDestroyHostComponent> = TestBed.createComponent(
-        FocusTrapDestroyHostComponent
+        FocusTrapDestroyHostComponent,
       );
       detectAndFlush(fixture);
       const nativeEl: HTMLElement = fixture.nativeElement as HTMLElement;

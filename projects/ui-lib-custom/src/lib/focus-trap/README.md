@@ -18,9 +18,13 @@ import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 
 ## Inputs
 
-| Name            | Type      | Default | Description                                                                                    |
-| --------------- | --------- | ------- | ---------------------------------------------------------------------------------------------- |
-| `uiLibFocusTrap` | `boolean` | `true`  | When `true`, keyboard focus is trapped within the host element. Set `false` to release at runtime. |
+| Name                   | Type               | Default | Description                                                                                                                        |
+|------------------------|--------------------|---------|------------------------------------------------------------------------------------------------------------------------------------|
+| `uiLibFocusTrap`       | `boolean`          | `true`  | When `true`, keyboard focus is trapped within the host element. Set `false` to release at runtime.                                |
+| `autoFocus`            | `boolean`          | `true`  | When `true`, the first focusable descendant (or `initialFocusSelector` match) receives focus immediately on activation.           |
+| `initialFocusSelector` | `string \| null`   | `null`  | CSS selector for the element that should receive focus on activation. Falls back to first focusable descendant when no match found.|
+| `restoreFocus`         | `boolean`          | `true`  | When `true`, deactivating the trap returns focus to whichever element was active before activation.                               |
+| `sentinelClass`        | `string \| null`   | `null`  | Extra CSS class name(s) added to each sentinel `<span>`. Useful for visual debugging.                                             |
 
 ## Usage
 
@@ -44,6 +48,18 @@ import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 }
 ```
 
+### Focus a specific element on open
+
+Use `initialFocusSelector` to focus the cancel button rather than the first (potentially destructive) action:
+
+```html
+<div role="dialog" aria-modal="true" uiLibFocusTrap initialFocusSelector="#cancel-btn">
+  <h2>Confirm deletion</h2>
+  <button id="confirm-btn" (click)="confirm()">Delete</button>
+  <button id="cancel-btn" (click)="cancel()">Cancel</button>
+</div>
+```
+
 ### Toggle on/off at runtime
 
 ```html
@@ -60,10 +76,40 @@ isTrapActive = signal(true);
 isTrapActive.set(false);
 ```
 
+### Skip focus restoration (activating element is destroyed on close)
+
+```html
+<div [uiLibFocusTrap]="isOpen" [restoreFocus]="false">
+  <button (click)="close()">Close</button>
+</div>
+```
+
+### Disable auto-focus (parent manages focus)
+
+```html
+<div uiLibFocusTrap [autoFocus]="false">
+  <!-- focus is managed externally by the parent component -->
+</div>
+```
+
+### Debug sentinel visibility
+
+```html
+<div uiLibFocusTrap sentinelClass="debug-sentinel">…</div>
+```
+
+```scss
+.debug-sentinel {
+  opacity: 1 !important;
+  outline: 2px solid red;
+  background: rgba(255, 0, 0, 0.1);
+}
+```
+
 ## Keyboard behavior
 
 | Key           | Behavior                                                            |
-| ------------- | ------------------------------------------------------------------- |
+|---------------|---------------------------------------------------------------------|
 | `Tab`         | Move to next focusable descendant; wraps to first after last.       |
 | `Shift + Tab` | Move to previous focusable descendant; wraps to last before first.  |
 
@@ -71,18 +117,26 @@ isTrapActive.set(false);
 
 FocusTrap does not change the host role semantics. It only adds hidden sentinel nodes around the trapped container while active.
 
-| Element | Attribute | Value | Purpose |
-| ------- | --------- | ----- | ------- |
-| Sentinel nodes (start/end) | `tabindex` | `0` | Keep both Tab and Shift+Tab cycles inside the trap. |
-| Sentinel nodes (start/end) | `aria-hidden` | `true` | Keep sentinels out of the accessibility tree. |
+| Element                    | Attribute       | Value    | Purpose                                              |
+|----------------------------|-----------------|----------|------------------------------------------------------|
+| Sentinel nodes (start/end) | `tabindex`      | `0`      | Keep both Tab and Shift+Tab cycles inside the trap.  |
+| Sentinel nodes (start/end) | `aria-hidden`   | `true`   | Keep sentinels out of the accessibility tree.        |
 
-## CSS custom properties
+## CSS
 
-This directive does not expose any CSS custom properties.
+The directive adds `ui-lib-focus-trap` to the host element. Use it as a CSS hook when needed.
 
-| Variable | Default | Description |
-| -------- | ------- | ----------- |
-| _(none)_ | — | FocusTrap is behavior-only; no visual tokens are required. |
+Sentinel nodes receive a predictable structure you can target:
+
+```css
+/* Target sentinel nodes by data attribute */
+[data-ui-lib-focus-trap-sentinel="start"],
+[data-ui-lib-focus-trap-sentinel="end"] {
+  /* custom styles */
+}
+```
+
+Or inject a class via `sentinelClass` input (see above).
 
 ## Focusable elements
 
@@ -92,15 +146,16 @@ If no focusable descendants exist, the container itself receives `tabindex="-1"`
 
 ## Deactivation & focus restoration
 
-When the directive input is set to `false` or the directive is destroyed (e.g. the container is removed from the DOM via `@if`), the trap is released and focus is returned to whichever element was active before the trap was activated.
+When the directive input is set to `false` or the directive is destroyed (e.g. the container is removed from the DOM via `@if`), the trap is released. If `restoreFocus` is `true` (default), focus is returned to whichever element was active before the trap was activated — provided that element is still connected to the DOM.
 
 ## Accessibility notes
 
 - Pair with `role="dialog"` and `aria-modal="true"` on modal containers.
 - Pair with `aria-labelledby` pointing to the dialog title.
 - Combine with scroll-lock on `<body>` for full overlay accessibility.
-- On activation, the first focusable descendant receives focus. If none exist, the container is focused.
-- On deactivation, focus is restored to the element that triggered activation when it is still connected.
+- On activation, focus goes to `initialFocusSelector` match → first focusable descendant → the container itself (when no focusable descendants exist).
+- On deactivation, focus is restored to the trigger element when `restoreFocus` is `true` and the element is still connected.
+- Use `initialFocusSelector` to put initial focus on the "safe" action in confirmation dialogs (typically the cancel/dismiss button).
 
 ## Directive alternative
 
@@ -108,9 +163,15 @@ If you need imperative control (non-Angular or service-level overlays), use the 
 
 ```ts
 import { FocusTrap } from 'ui-lib-custom/core';
+import type { FocusTrapOptions } from 'ui-lib-custom/core';
+
+const options: FocusTrapOptions = {
+  initialFocusSelector: '#cancel-btn',
+  restoreFocus: true,
+};
 
 const trap = new FocusTrap(dialogElement);
-trap.activate();
+trap.activate(options);
 
 // Later:
 trap.deactivate();
