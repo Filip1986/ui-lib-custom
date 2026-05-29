@@ -268,6 +268,22 @@ export class TableComponent {
   /** Additional CSS class(es) applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
+  /**
+   * Optional function that returns additional CSS class(es) to apply to each body row.
+   * Called once per rendered row with the row data object and its zero-based display index.
+   * Return a class string, space-separated classes, or `null` to apply nothing extra.
+   *
+   * @example
+   * ```html
+   * <ui-lib-table [rowClass]="rowClassFn" ...>
+   * ```
+   * ```typescript
+   * rowClassFn = (row: Product) => row.stock === 0 ? 'out-of-stock' : null;
+   * ```
+   */
+  public readonly rowClass: InputSignal<((row: unknown, index: number) => string | null) | null> =
+    input<((row: unknown, index: number) => string | null) | null>(null);
+
   // ---------------------------------------------------------------------------
   // Outputs
   // ---------------------------------------------------------------------------
@@ -474,6 +490,24 @@ export class TableComponent {
     }),
   );
 
+  /**
+   * Context object passed to the `[uiTableBody]` template.
+   * - `$implicit` — the rows visible on the current page (respects pagination, filtering, sorting)
+   * - `filteredRows` — all rows after filtering and sorting, before pagination
+   * - `allRows` — the original `value` array unmodified
+   */
+  public readonly bodyTemplateContext: Signal<{
+    $implicit: unknown[];
+    filteredRows: unknown[];
+    allRows: unknown[];
+  }> = computed<{ $implicit: unknown[]; filteredRows: unknown[]; allRows: unknown[] }>(
+    (): { $implicit: unknown[]; filteredRows: unknown[]; allRows: unknown[] } => ({
+      $implicit: this.displayedRows(),
+      filteredRows: this.processedValue(),
+      allRows: this.value(),
+    }),
+  );
+
   /** `true` when a "select all" checkbox should appear checked. */
   public readonly allRowsSelected: Signal<boolean> = computed<boolean>((): boolean => {
     const mode: TableSelectionMode = this.selectionMode();
@@ -645,6 +679,28 @@ export class TableComponent {
    */
   public cellContext(row: unknown, index: number): TableCellContext {
     return { $implicit: row, index };
+  }
+
+  /**
+   * Builds the full CSS class string for a body row, combining the base row classes
+   * with any extra classes returned by the `rowClass` function input.
+   */
+  public resolveRowClass(row: unknown, index: number): string {
+    const classes: string[] = ['ui-lib-table__row'];
+    if (this.isRowSelected(row)) {
+      classes.push('ui-lib-table__row--selected');
+    }
+    if (this.isRowExpanded(row)) {
+      classes.push('ui-lib-table__row--expanded');
+    }
+    const fn: ((row: unknown, index: number) => string | null) | null = this.rowClass();
+    if (fn !== null) {
+      const extra: string | null = fn(row, index);
+      if (extra) {
+        classes.push(extra);
+      }
+    }
+    return classes.join(' ');
   }
 
   /**

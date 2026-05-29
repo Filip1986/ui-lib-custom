@@ -91,6 +91,27 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (Table hardening — 8.6→9.0):
+  table/table.component.scss: added --uilib-table-transition token backed by
+    var(--uilib-transition-fast, 150ms ease); replaced 6 hardcoded 0.12s/0.15s transition
+    values with the token; added --uilib-table-expander-border-radius token; replaced
+    border-radius:50% with token on expander-btn and var(--uilib-radius-full,9999px) on sort-badge;
+    added :active state on expander-btn; replaced !important reduced-motion block with clean
+    --uilib-table-transition:0ms token zero
+  table/table.component.ts: added rowClass functional input
+    (row: unknown, index: number) => string | null; added bodyTemplateContext computed
+    ({$implicit: displayedRows, filteredRows: processedValue, allRows: value}); added
+    resolveRowClass() public helper method
+  table/table.component.html: replaced class="ui-lib-table__row" + [class.*] bindings with
+    [class]="resolveRowClass(row, rowIndex)"; added ngTemplateOutletContext to bodyTemplate
+  table/README.md: added rowClass to inputs table; expanded content projection section
+    with per-directive context table; expanded CSS custom properties to 19 entries
+  docs/COMPONENT_SCORES.md: Table Perf/Comp/Polish/Feel all 8→9; avg 8.6→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
+Verification: npx eslint table/ (0w); ng build ui-lib-custom (0w)
+Next step: TreeTable hardening (8.6) — Theme=8, Polish=8, Feel=8; likely same SCSS token pattern
+
+Date: 2026-05-29
 Changed (Dialog hardening — 8.6→9.0):
   dialog/dialog.component.scss: removed permanent will-change:transform from .ui-lib-dialog-panel
     (Perf violation); replaced hardcoded transition:background-color 150ms ease with
@@ -125,17 +146,6 @@ Changed (DatePicker hardening — 8.6→9.0):
 State: COMPLETE — ESLint 0w ✅; jest date-picker (138 tests) ✅; build 0w ✅
 Verification: npx eslint date-picker/ (0w); npx jest date-picker (138 pass); ng build 0w
 Next step: Apply same JSDoc + ng-template pattern to Dialog (8.6) and Table (8.6)
-
-Date: 2026-05-29
-Changed (Sprint D — reduced-motion audit):
-  themes/themes.scss: Added @media (prefers-reduced-motion: reduce) block inside
-    @layer uilib.tokens that zeros --uilib-transition-fast, --uilib-transition-duration,
-    and --uilib-icon-transition to 0ms. All 100+ components consuming these tokens
-    now automatically respect OS-level motion preferences without per-component changes.
-  Audit findings: 91/92 SCSS files already had correct prefers-reduced-motion coverage.
-State: COMPLETE — build 0w ✅; bundlesize all 105 entry points within budget ✅
-Verification: ng build ui-lib-custom (0w); npm run bundlesize (all pass)
-Next step: Sprint A (competitive benchmarks) — highest ROI per Opus doc
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

@@ -2,7 +2,25 @@
 
 **Selector:** `ui-lib-table` (container) / `ui-lib-table-column` (column definition)
 **Package:** `ui-lib-custom/table`
-**Content projection:** yes — `<ui-lib-table-column>` children are projected; structural template directives (`[uiTableCaption]`, `[uiTableHeader]`, `[uiTableBody]`, `[uiTableFooter]`, `[uiTableEmpty]`, `[uiTableExpansion]`) replace auto-generated sections; column-level: `[uiTableColumnHeader]`, `[uiTableColumnBody]`, `[uiTableColumnFooter]`, `[uiTableColumnFilter]`
+**Content projection:** yes — `<ui-lib-table-column>` children are projected; structural template directives replace auto-generated sections:
+
+| Directive | Replaces | Context |
+|-----------|----------|---------|
+| `[uiTableCaption]` | Caption slot above the table | none |
+| `[uiTableHeader]` | Entire `<thead>` | none |
+| `[uiTableBody]` | Entire `<tbody>` | `{ $implicit: displayedRows, filteredRows, allRows }` |
+| `[uiTableFooter]` | Entire `<tfoot>` | none |
+| `[uiTableEmpty]` | Empty-state cell | `{ filtered: boolean }` |
+| `[uiTableExpansion]` | Expanded sub-row | `{ $implicit: T, index: number }` |
+
+Column-level directives (place inside `<ui-lib-table-column>`):
+
+| Directive | Replaces | Context |
+|-----------|----------|---------|
+| `[uiTableColumnHeader]` | Header `<th>` content | none |
+| `[uiTableColumnBody]` | Body `<td>` content | `{ $implicit: T, index: number }` |
+| `[uiTableColumnFooter]` | Footer `<td>` content | none |
+| `[uiTableColumnFilter]` | Column filter input | none |
 
 > Sorting, filtering, and pagination all operate client-side on `value[]` by default. `dataKey` is required for row expansion and for correct equality checks in selection mode — omitting it disables both features silently.
 
@@ -46,6 +64,7 @@
 | `caption` | `string \| null` | `null` | Caption text rendered above the table |
 | `ariaLabel` | `string \| null` | `null` | Accessible label for the `<table>` element |
 | `styleClass` | `string \| null` | `null` | Extra CSS class(es) on the host |
+| `rowClass` | `((row, index) => string \| null) \| null` | `null` | Function applied per body row; return extra CSS class(es) or `null` |
 
 ### Outputs
 
@@ -109,6 +128,23 @@ interface TableColumnDefinition {
     <ng-template uiTableColumnBody let-row>{{ row.name | uppercase }}</ng-template>
   </ui-lib-table-column>
 </ui-lib-table>
+
+<!-- Per-row conditional CSS class via rowClass function -->
+<ui-lib-table [value]="products" dataKey="id" [rowClass]="highlightOutOfStock">
+  <ui-lib-table-column field="name" header="Name" />
+  <ui-lib-table-column field="stock" header="Stock" />
+</ui-lib-table>
+
+<!-- Custom body template with typed context (row access, filtering, pagination aware) -->
+<ui-lib-table [value]="products" dataKey="id" [paginator]="true" [rows]="10">
+  <ng-template uiTableBody let-rows>
+    @for (row of rows; track row.id) {
+      <tr>
+        <td>{{ row.name }}</td>
+      </tr>
+    }
+  </ng-template>
+</ui-lib-table>
 ```
 
 ## Selection modes
@@ -161,13 +197,24 @@ table[role="grid|table"]
 
 ## CSS custom properties
 
-| Variable | Purpose |
-|----------|---------|
-| `--uilib-table-border-color` | Grid and wrapper border color |
-| `--uilib-table-header-bg` | Header row background |
-| `--uilib-table-row-bg-hover` | Hovered row background |
-| `--uilib-table-row-bg-selected` | Selected row background |
-| `--uilib-table-selection-border-color` | Focus ring and selection accent |
-| `--uilib-table-sort-icon-color-active` | Active sort indicator color |
-| `--uilib-table-caption-bg` | Caption background |
-| `--uilib-table-paginator-margin-top` | Space above the embedded paginator |
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `--uilib-table-border-radius` | `var(--uilib-radius-md, 6px)` | Wrapper corner radius |
+| `--uilib-table-border-color` | `var(--uilib-color-border, #dee2e6)` | Grid and wrapper border color |
+| `--uilib-table-bg` | `var(--uilib-surface, #fff)` | Table and body background |
+| `--uilib-table-header-bg` | `var(--uilib-surface, #fff)` | Header row background |
+| `--uilib-table-header-color` | `var(--uilib-color-text, #212529)` | Header text color |
+| `--uilib-table-header-font-weight` | `600` | Header font weight |
+| `--uilib-table-row-bg-hover` | `rgba(0,0,0,0.04)` | Hovered row background |
+| `--uilib-table-row-bg-alt` | `rgba(0,0,0,0.02)` | Striped alternate row background |
+| `--uilib-table-row-bg-selected` | `rgba(primary, 0.12)` | Selected row background |
+| `--uilib-table-selection-border-color` | `var(--uilib-color-primary, #6366f1)` | Focus ring and selection accent |
+| `--uilib-table-sort-icon-color-active` | `var(--uilib-color-primary, #6366f1)` | Active sort indicator color |
+| `--uilib-table-expander-size` | `1.5rem` | Expand button width and height |
+| `--uilib-table-expander-border-radius` | `var(--uilib-radius-full, 9999px)` | Expand button corner radius |
+| `--uilib-table-expander-bg-hover` | `rgba(0,0,0,0.06)` | Expand button hover background |
+| `--uilib-table-cell-padding-y` | `0.75rem` | Body cell vertical padding |
+| `--uilib-table-cell-padding-x` | `1rem` | Body cell horizontal padding |
+| `--uilib-table-transition` | `var(--uilib-transition-fast, 150ms ease)` | All row/button/icon transitions; auto-zeroed by `prefers-reduced-motion` |
+| `--uilib-table-caption-bg` | `transparent` | Caption background |
+| `--uilib-table-paginator-margin-top` | `0.75rem` | Space above the embedded paginator |

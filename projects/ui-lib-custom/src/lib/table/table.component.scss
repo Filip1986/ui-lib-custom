@@ -55,7 +55,11 @@
     --uilib-table-expander-bg: transparent;
     --uilib-table-expander-color: var(--uilib-color-text-secondary, #6c757d);
     --uilib-table-expander-bg-hover: rgba(0, 0, 0, 0.06);
+    --uilib-table-expander-border-radius: var(--uilib-radius-full, 9999px);
     --uilib-table-expansion-bg: rgba(0, 0, 0, 0.015);
+
+    // Motion — backed by the global fast token so prefers-reduced-motion zeroing applies
+    --uilib-table-transition: var(--uilib-transition-fast, 150ms ease);
 
     // Paginator gap
     --uilib-table-paginator-margin-top: 0.75rem;
@@ -227,8 +231,8 @@
     vertical-align: middle;
     color: var(--uilib-table-sort-icon-color);
     transition:
-      color 0.12s ease,
-      opacity 0.12s ease;
+      color var(--uilib-table-transition),
+      opacity var(--uilib-table-transition);
 
     .ui-lib-table__th--sorted & {
       color: var(--uilib-table-sort-icon-color-active);
@@ -239,8 +243,8 @@
     width: var(--uilib-table-sort-icon-size);
     height: var(--uilib-table-sort-icon-size);
     transition:
-      opacity 0.12s ease,
-      transform 0.12s ease;
+      opacity var(--uilib-table-transition),
+      transform var(--uilib-table-transition);
 
     &--inactive {
       opacity: 0.4;
@@ -253,7 +257,7 @@
     justify-content: center;
     width: 1.1em;
     height: 1.1em;
-    border-radius: 50%;
+    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-color-primary, #6366f1);
     color: var(--uilib-color-neutral-50, #fff);
     font-size: var(--uilib-table-sort-badge-font-size);
@@ -272,7 +276,7 @@
     background: var(--uilib-table-bg);
     border: 1px solid var(--uilib-table-border-color);
     border-radius: calc(var(--uilib-table-border-radius) * 0.5);
-    transition: border-color 0.15s ease;
+    transition: border-color var(--uilib-table-transition);
     box-sizing: border-box;
 
     &:focus {
@@ -298,7 +302,7 @@
   .ui-lib-table__row {
     border-bottom: var(--uilib-table-border-width) solid var(--uilib-table-border-color);
     background: var(--uilib-table-row-bg);
-    transition: background 0.12s ease;
+    transition: background var(--uilib-table-transition);
 
     &:last-child {
       border-bottom: none;
@@ -407,14 +411,19 @@
     height: var(--uilib-table-expander-size);
     padding: 0;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--uilib-table-expander-border-radius);
     background: var(--uilib-table-expander-bg);
     color: var(--uilib-table-expander-color);
     cursor: pointer;
-    transition: background 0.12s ease;
+    transition: background var(--uilib-table-transition);
 
     &:hover {
       background: var(--uilib-table-expander-bg-hover);
+    }
+
+    &:active {
+      background: var(--uilib-table-expander-bg-hover);
+      opacity: 0.75;
     }
 
     &:focus-visible {
@@ -430,7 +439,7 @@
   .ui-lib-table__expander-icon {
     width: 14px;
     height: 14px;
-    transition: transform 0.12s ease;
+    transition: transform var(--uilib-table-transition);
   }
 
   .ui-lib-table__expansion-row {
@@ -603,16 +612,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-table__row,
-    .ui-lib-table__filter-input,
-    .ui-lib-table__expander-btn,
-    .ui-lib-table__sort-icon,
-    .ui-lib-table__sort-svg,
-    .ui-lib-table__expander-icon,
-    .ui-lib-table__expansion-row,
-    .ui-lib-table__expansion-cell {
-      transition: none !important;
-      animation: none !important;
+    ui-lib-table {
+      /* Zero the component transition token — all six transition usages above are covered. */
+      --uilib-table-transition: 0ms;
     }
   }
 } // end @layer uilib.components

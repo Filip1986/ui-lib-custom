@@ -186,8 +186,11 @@
       <!-- TBODY -->
       <tbody class="ui-lib-table__tbody" role="rowgroup">
         @if (bodyTemplate()) {
-          <!-- Custom body template -->
-          <ng-container [ngTemplateOutlet]="bodyTemplate()!" />
+          <!-- Custom body template — context: { $implicit: displayedRows, filteredRows, allRows } -->
+          <ng-container
+            [ngTemplateOutlet]="bodyTemplate()!"
+            [ngTemplateOutletContext]="bodyTemplateContext()"
+          />
         } @else if (displayedRows().length === 0) {
           <!-- Empty state -->
           <tr class="ui-lib-table__empty-row" role="row">
@@ -213,9 +216,7 @@
           @for (row of displayedRows(); track trackRow($index, row); let rowIndex = $index) {
             <!-- Data row -->
             <tr
-              class="ui-lib-table__row"
-              [class.ui-lib-table__row--selected]="isRowSelected(row)"
-              [class.ui-lib-table__row--expanded]="isRowExpanded(row)"
+              [class]="resolveRowClass(row, rowIndex)"
               role="row"
               [attr.aria-rowindex]="bodyAriaRowIndex(rowIndex)"
               [attr.aria-selected]="selectionMode() ? (isRowSelected(row) ? 'true' : 'false') : null"
