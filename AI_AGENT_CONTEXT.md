@@ -91,6 +91,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-05-29
+Changed (TreeTable hardening — 8.6→9.0):
+  tree-table/tree-table.component.scss: added --uilib-tree-table-transition token backed by
+    var(--uilib-transition-fast, 150ms ease); replaced 5 var(--uilib-transition-duration,150ms)ease
+    usages with the component token; added --uilib-tree-table-toggle-border-radius,
+    --uilib-tree-table-checkbox-border-radius, --uilib-tree-table-toggle-bg-active tokens;
+    replaced border-radius:2px with token on checkbox; added :active state on toggle button;
+    added --uilib-tree-table-row-selection-shadow token (default:none, bootstrap:inset shadow)
+    to fix raw rgba() in bootstrap variant rule body; fixed #86b7fe → var(--uilib-color-primary-light)
+    in bootstrap filter-border-focus token definition; replaced element-list reduced-motion block
+    with clean --uilib-tree-table-transition:0ms token zero
+  docs/COMPONENT_SCORES.md: TreeTable Perf/Theme/Polish/Feel all 8→9; avg 8.6→9.0
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
+Verification: npx eslint tree-table/ (0w); ng build ui-lib-custom (0w)
+Next step: Tree hardening (8.6 — same Perf/Theme/Polish/Feel pattern)
+
+Date: 2026-05-29
 Changed (Table hardening — 8.6→9.0):
   table/table.component.scss: added --uilib-table-transition token backed by
     var(--uilib-transition-fast, 150ms ease); replaced 6 hardcoded 0.12s/0.15s transition
@@ -129,23 +145,6 @@ Changed (Dialog hardening — 8.6→9.0):
 State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
 Verification: npx eslint dialog/ (0w); ng build ui-lib-custom (0w)
 Next step: Table hardening (8.6) — Comp=8 needs ng-template row/cell slot (same pattern as DatePicker dateCellTemplate)
-
-Date: 2026-05-29
-Changed (DatePicker hardening — 8.6→9.0):
-  date-picker/date-picker.ts: JSDoc added to all 40+ inputs and outputs (IDE hover shows
-    description + default for every binding); class-level JSDoc before @Component decorator;
-    removed eslint-disable jsdoc/require-jsdoc; added ContentChild+TemplateRef imports;
-    added NgTemplateOutlet to component imports array; added dateCellTemplate @ContentChild
-    with typed DatePickerDateMeta context (TemplateRef<{ $implicit: DatePickerDateMeta }>)
-  date-picker/date-picker.html: wire dateCellTemplate into day-cell rendering via
-    *ngTemplateOutlet with $implicit: dateMeta context
-  date-picker/date-picker.scss: add --uilib-datepicker-enter-duration CSS token backed by
-    global --uilib-transition-duration; replace undefined --uilib-transition-duration-fast
-    references (2 occurrences) with the new token
-  docs/COMPONENT_SCORES.md: DatePicker API/Perf/Comp/DX all 8→9; avg 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; jest date-picker (138 tests) ✅; build 0w ✅
-Verification: npx eslint date-picker/ (0w); npx jest date-picker (138 pass); ng build 0w
-Next step: Apply same JSDoc + ng-template pattern to Dialog (8.6) and Table (8.6)
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
