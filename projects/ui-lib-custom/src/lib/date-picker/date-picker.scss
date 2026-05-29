@@ -115,6 +115,9 @@
 
     --uilib-datepicker-transition-fast: var(--uilib-transition-fast, 150ms ease);
     --uilib-datepicker-transition-normal: var(--uilib-transition-normal, 200ms ease);
+    /* Enter animation duration — pulled from the global fast token so prefers-reduced-motion
+       zeroing in themes.scss applies automatically. */
+    --uilib-datepicker-enter-duration: var(--uilib-transition-duration, 150ms);
 
     --uilib-datepicker-panel-shadow-material: var(--uilib-shadow-xl, 0 20px 40px rgb(0 0 0 / 18%));
     --uilib-datepicker-panel-shadow-bootstrap: var(--uilib-shadow-md, 0 8px 20px rgb(0 0 0 / 12%));
@@ -141,7 +144,7 @@
     position: relative;
     display: inline-flex;
     width: auto;
-    animation: uilib-datepicker-mount var(--uilib-transition-duration-fast, 0.15s)
+    animation: uilib-datepicker-mount var(--uilib-datepicker-enter-duration, 150ms)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
   }
 
@@ -247,7 +250,7 @@
     position: absolute;
     top: calc(100% + var(--uilib-space-2, 0.5rem));
     inset-inline-start: 0;
-    animation: uilib-datepicker-panel-open var(--uilib-transition-duration-fast, 0.15s)
+    animation: uilib-datepicker-panel-open var(--uilib-datepicker-enter-duration, 150ms)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
     min-width: var(--uilib-datepicker-panel-min-width, 18rem);
     max-height: var(--uilib-datepicker-panel-max-height, 28rem);

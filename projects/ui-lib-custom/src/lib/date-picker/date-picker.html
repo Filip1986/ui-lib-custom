@@ -191,7 +191,9 @@
                                 (mouseenter)="onDateHover(dateMeta)"
                                 (mouseleave)="onDateMouseLeave()"
                               >
-                                @if (!dateMeta.otherMonth || showOtherMonths()) {
+                                @if (dateCellTemplate) {
+                                  <ng-container *ngTemplateOutlet="dateCellTemplate; context: { $implicit: dateMeta }" />
+                                } @else if (!dateMeta.otherMonth || showOtherMonths()) {
                                   {{ dateMeta.day }}
                                 } @else {
                                   <span class="ui-lib-datepicker__day-empty" aria-hidden="true">&nbsp;</span>

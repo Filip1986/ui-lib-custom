@@ -2,8 +2,10 @@ import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
   ElementRef,
   HostListener,
+  TemplateRef,
   ViewChild,
   ViewEncapsulation,
   computed,
@@ -22,6 +24,7 @@ import type {
   AfterViewChecked,
   OnDestroy,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import {
@@ -72,10 +75,11 @@ const DATE_PICKER_PANEL_MODE_CLASSES: readonly string[] = [
 
 let nextDatePickerId: number = 0;
 
+/** Full-featured date/time picker with calendar overlay, range selection, time support, and locale-aware formatting. */
 @Component({
   selector: 'ui-lib-date-picker',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet],
   templateUrl: './date-picker.html',
   styleUrl: './date-picker.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,88 +98,136 @@ let nextDatePickerId: number = 0;
     '[attr.data-disabled]': 'isDisabled() ? "true" : null',
   },
 })
-// eslint-disable-next-line jsdoc/require-jsdoc
 export class DatePickerComponent implements ControlValueAccessor, AfterViewChecked, OnDestroy {
+  /** Selection mode. `'single'` selects one date; `'multiple'` selects several; `'range'` selects a start/end span. Default: `'single'`. */
   public readonly selectionMode: InputSignal<DatePickerSelectionMode> =
     input<DatePickerSelectionMode>(DATE_PICKER_DEFAULTS.SelectionMode);
+  /** Date format string used for both display and parsing (e.g. `'mm/dd/yy'`, `'dd.mm.yy'`). See README for full token reference. Default: `'mm/dd/yy'`. */
   public readonly dateFormat: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.DateFormat);
+  /** Locale object for day/month names, AM/PM labels, and first day of week. Partial overrides are supported — only override what differs from the built-in English locale. */
   public readonly locale: InputSignal<DatePickerLocale> = input<DatePickerLocale>(DEFAULT_LOCALE);
 
+  /** When `true`, the calendar is always visible inline instead of opening as an overlay panel. Default: `false`. */
   public readonly inline: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.Inline);
+  /** When `true`, a calendar icon is rendered next to the input. Use `iconDisplay` to control whether it appears inside the input or as a separate toggle button. Default: `false`. */
   public readonly showIcon: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.ShowIcon);
+  /** Controls where the icon renders when `showIcon` is `true`. `'input'` overlays the icon inside the input field; `'button'` renders a standalone trigger button. Default: `'input'`. */
   public readonly iconDisplay: InputSignal<'input' | 'button'> = input<'input' | 'button'>('input');
+  /** When `true`, a clear (×) button appears when a date is selected, allowing the user to reset the value. Default: `false`. */
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
+  /** Placeholder text displayed in the text input when no date is selected. Default: `''`. */
   public readonly placeholder: InputSignal<string> = input<string>(
     DATE_PICKER_DEFAULTS.Placeholder,
   );
+  /** `id` attribute for the underlying `<input>` element. Useful for associating an external `<label>`. Default: auto-generated. */
   public readonly inputId: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.InputId);
+  /** `name` attribute forwarded to the underlying `<input>` element for form submission. Default: matches `inputId`. */
   public readonly name: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.Name);
+  /** Determines where the calendar panel is appended. `'body'` teleports the panel to `document.body` (avoids overflow clipping); pass a CSS selector string to target a custom container. Default: `'body'`. */
   public readonly appendTo: InputSignal<DatePickerAppendTo> = input<DatePickerAppendTo>(
     DATE_PICKER_DEFAULTS.AppendTo,
   );
 
+  /** Earliest selectable date (inclusive). Dates before this are rendered as disabled. Default: `null` (no lower bound). */
   public readonly minDate: InputSignal<Date | null> = input<Date | null>(
     DATE_PICKER_DEFAULTS.MinDate,
   );
+  /** Latest selectable date (inclusive). Dates after this are rendered as disabled. Default: `null` (no upper bound). */
   public readonly maxDate: InputSignal<Date | null> = input<Date | null>(
     DATE_PICKER_DEFAULTS.MaxDate,
   );
+  /** Array of specific `Date` objects to disable. Each date in this array will be rendered as non-selectable. Default: `[]`. */
   public readonly disabledDates: InputSignal<Date[]> = input<Date[]>([]);
+  /** Array of day-of-week indices (0 = Sunday … 6 = Saturday) to disable across all weeks. Default: `[]`. */
   public readonly disabledDays: InputSignal<number[]> = input<number[]>([]);
+  /** When `true`, days from the previous/next month shown in the current month grid are selectable. Requires `showOtherMonths` to be `true`. Default: `false`. */
   public readonly selectOtherMonths: InputSignal<boolean> = input<boolean>(
     DATE_PICKER_DEFAULTS.SelectOtherMonths,
   );
+  /** When `true`, days from adjacent months are shown in the calendar grid to fill the 6-week layout. Set to `false` for a compact calendar. Default: `true`. */
   public readonly showOtherMonths: InputSignal<boolean> = input<boolean>(
     DATE_PICKER_DEFAULTS.ShowOtherMonths,
   );
 
+  /** The calendar view to open by default. `'date'` shows the day grid; `'month'` shows month selection; `'year'` shows year selection. Default: `'date'`. */
   public readonly view: InputSignal<DatePickerView> = input<DatePickerView>(
     DATE_PICKER_DEFAULTS.View,
   );
+  /** Number of calendar months displayed side by side. Useful for date-range selection across months. Default: `1`. */
   public readonly numberOfMonths: InputSignal<number> = input<number>(1);
+  /** Colon-separated year range available in the year navigator. Format: `'startYear:endYear'`. Default: `'1970:2030'`. */
   public readonly yearRange: InputSignal<string> = input<string>('1970:2030');
+  /** When `true`, a year dropdown is rendered in the calendar header for quick year navigation. Default: `false`. */
   public readonly yearNavigator: InputSignal<boolean> = input<boolean>(false);
+  /** When `true`, a month dropdown is rendered in the calendar header for quick month navigation. Default: `false`. */
   public readonly monthNavigator: InputSignal<boolean> = input<boolean>(false);
 
+  /** When `true`, a time picker (hour/minute, optionally seconds) is appended below the calendar grid. Default: `false`. */
   public readonly showTime: InputSignal<boolean> = input<boolean>(false);
+  /** When `true`, only the time picker is shown — the calendar grid is hidden. Use for time-only inputs. Default: `false`. */
   public readonly timeOnly: InputSignal<boolean> = input<boolean>(false);
+  /** Time display format. `'12'` shows AM/PM; `'24'` uses 24-hour notation. Default: `'24'`. */
   public readonly hourFormat: InputSignal<'12' | '24'> = input<'12' | '24'>('24');
+  /** When `true`, a seconds field is shown in the time picker. Default: `false`. */
   public readonly showSeconds: InputSignal<boolean> = input<boolean>(false);
+  /** Step increment for the hour spinner (e.g. `2` allows only even hours). Default: `1`. */
   public readonly stepHour: InputSignal<number> = input<number>(1);
+  /** Step increment for the minute spinner (e.g. `15` allows only :00/:15/:30/:45). Default: `1`. */
   public readonly stepMinute: InputSignal<number> = input<number>(1);
+  /** Step increment for the seconds spinner. Default: `1`. */
   public readonly stepSecond: InputSignal<number> = input<number>(1);
 
+  /** When `true`, Today and Clear action buttons are displayed in the calendar footer. Default: `false`. */
   public readonly showButtonBar: InputSignal<boolean> = input<boolean>(
     DATE_PICKER_DEFAULTS.ShowButtonBar,
   );
+  /** When `true`, ISO week numbers are shown in a leading column of the calendar grid. Default: `false`. */
   public readonly showWeek: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.ShowWeek);
+  /** Index of the first day of the week (0 = Sunday, 1 = Monday … 6 = Saturday). Overrides `locale.firstDayOfWeek`. Default: `0`. */
   public readonly firstDayOfWeek: InputSignal<number> = input<number>(
     DATE_PICKER_DEFAULTS.FirstDayOfWeek,
   );
 
+  /** Visual variant override. Inherits from `ThemeConfigService` when `null`. Default: `null`. */
   public readonly variant: InputSignal<ThemeVariant | null> = input<ThemeVariant | null>(null);
+  /** Size of the input field and calendar cells. `'sm'` | `'md'` | `'lg'`. Default: `'md'`. */
   public readonly size: InputSignal<DatePickerSize> = input<DatePickerSize>(
     DATE_PICKER_DEFAULTS.Size,
   );
+  /** When `true`, the input renders in filled/surface style instead of the outlined default. Default: `false`. */
   public readonly filled: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.Filled);
+  /** When `true`, the date picker is disabled — the input is not focusable and the panel cannot be opened. Default: `false`. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(DATE_PICKER_DEFAULTS.Disabled);
+  /** When `true`, the input renders in its error/invalid state (red border). Use in tandem with Angular form validation. Default: `false`. */
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  /** When `true`, the component stretches to fill its parent container width (`width: 100%`). Default: `false`. */
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
 
+  /** Accessible label for the date picker input. Overrides any label associated via `ariaLabelledBy`. Default: `null`. */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  /** `id` of an external element that labels this date picker (sets `aria-labelledby`). Use instead of `ariaLabel` when a visible label element exists. Default: `null`. */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+  /** `tabindex` attribute forwarded to the underlying `<input>`. Set to `-1` to remove the input from the tab order. Default: `0`. */
   public readonly tabindex: InputSignal<number> = input<number>(DATE_PICKER_DEFAULTS.TabIndex);
 
+  /** Emitted when a date (or date range) is selected. Payload includes the selected value and its formatted string representation. */
   public readonly dateSelect: OutputEmitterRef<DatePickerChangeEvent> =
     output<DatePickerChangeEvent>();
+  /** Emitted when the calendar navigates to a different month. Payload contains the new year and month indices. */
   public readonly monthChange: OutputEmitterRef<DatePickerMonthChangeEvent> =
     output<DatePickerMonthChangeEvent>();
+  /** Emitted when the calendar navigates to a different year. Payload contains the new year value. */
   public readonly yearChange: OutputEmitterRef<DatePickerYearChangeEvent> =
     output<DatePickerYearChangeEvent>();
+  /** Emitted when the calendar overlay panel opens. */
   public readonly show: OutputEmitterRef<void> = output<void>();
+  /** Emitted when the calendar overlay panel closes. */
   public readonly hide: OutputEmitterRef<void> = output<void>();
+  /** Emitted when the selected value is cleared (via the clear button or the Today/Clear footer bar). */
   public readonly clear: OutputEmitterRef<void> = output<void>();
+  /** Emitted when the date picker input receives focus. */
   public readonly datePickerFocus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  /** Emitted when the date picker input loses focus. */
   public readonly datePickerBlur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   @ViewChild('inputElement', { static: false })
@@ -186,6 +238,23 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
   @ViewChild('panelElement', { static: false })
   public panelElement?: ElementRef<HTMLDivElement>;
+
+  /**
+   * Optional template for custom day-cell rendering. The template receives the full
+   * `DatePickerDateMeta` context as its implicit variable, allowing consumers to render
+   * badges, indicators, or custom markup inside each day cell.
+   *
+   * @example
+   * ```html
+   * <ui-lib-date-picker>
+   *   <ng-template let-date>
+   *     <span [class.has-event]="hasEvent(date.day, date.month)">{{ date.day }}</span>
+   *   </ng-template>
+   * </ui-lib-date-picker>
+   * ```
+   */
+  @ContentChild(TemplateRef)
+  public dateCellTemplate?: TemplateRef<{ $implicit: DatePickerDateMeta }>;
 
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
