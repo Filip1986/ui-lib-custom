@@ -123,13 +123,13 @@ export class Tree implements TreeContext {
   public readonly filterMode: InputSignal<TreeFilterMode> = input<TreeFilterMode>('lenient');
 
   /** Placeholder text for the filter input. */
-  public readonly filterPlaceholder: InputSignal<string> = input<string>('Search...');
+  public readonly filterPlaceholder: InputSignal<string | null> = input<string | null>(null);
 
   /** Extra CSS class applied to the host element. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Accessible label for the tree widget. Used as `aria-label` on the host. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Optional explicit host id. Falls back to the generated instance id. */
   public readonly hostId: InputSignal<string | null> = input<string | null>(null);
@@ -173,20 +173,25 @@ export class Tree implements TreeContext {
     (): TreeVariant => (this.variant() ?? this.themeConfig.variant()) as TreeVariant,
   );
 
-  /** Host class string applied via `[class]` binding. */
-  public readonly hostClasses: Signal<string> = computed<string>((): string =>
-    [
-      `ui-lib-tree--variant-${this.resolvedVariant()}`,
-      `ui-lib-tree--size-${this.size()}`,
-      this.styleClass(),
-    ]
-      .filter(Boolean)
-      .join(' '),
+  /** Resolved placeholder for the filter input. */
+  public readonly resolvedFilterPlaceholder: Signal<string> = computed<string>(
+    (): string => this.filterPlaceholder() ?? this.i18n.translate('tree.filter-placeholder'),
   );
 
-  /** `aria-label` value for the host — `null` when the input is empty. */
-  public readonly hostAriaLabel: Signal<string | null> = computed<string | null>(
-    (): string | null => this.ariaLabel() || null,
+  /** Host class string applied via `[class]` binding. */
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
+    const parts: string[] = [
+      `ui-lib-tree--variant-${this.resolvedVariant()}`,
+      `ui-lib-tree--size-${this.size()}`,
+    ];
+    const extra: string | null = this.styleClass();
+    if (extra) parts.push(extra);
+    return parts.join(' ');
+  });
+
+  /** `aria-label` value for the host — always resolves to an i18n label when no explicit value. */
+  public readonly hostAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.i18n.translate('tree.label'),
   );
 
   /** Host `id` value — explicit `hostId` when provided, else the generated instance id. */

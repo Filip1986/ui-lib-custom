@@ -27,7 +27,7 @@ import { AvatarGroup } from './avatar-group';
 })
 class AvatarA11yHostComponent {
   public readonly image: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly imageAlt: WritableSignal<string> = signal<string>('');
+  public readonly imageAlt: WritableSignal<string | null> = signal<string | null>(null);
   public readonly name: WritableSignal<string | null> = signal<string | null>(null);
   public readonly label: WritableSignal<string | null> = signal<string | null>(null);
   public readonly icon: WritableSignal<string | null> = signal<string | null>(null);
@@ -51,7 +51,7 @@ class AvatarA11yHostComponent {
 })
 class AvatarGroupA11yHostComponent {
   public readonly groupAriaLabel: WritableSignal<string | null> = signal<string | null>(
-    'Project team'
+    'Project team',
   );
   public readonly overflowCount: WritableSignal<number> = signal<number>(2);
   public readonly overflowAriaLabel: WritableSignal<string | null> = signal<string | null>(null);
@@ -85,14 +85,14 @@ async function createFixture<T>(hostComponent: new () => T): Promise<ComponentFi
 
 function queryEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function queryAllEl<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T[] {
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
@@ -112,7 +112,7 @@ describe('Avatar accessibility', (): void => {
     fixture.detectChanges();
 
     expect(queryEl<HTMLImageElement>(fixture, '.ui-lib-avatar__image')?.getAttribute('alt')).toBe(
-      'Jane Doe portrait'
+      'Jane Doe portrait',
     );
   });
 
@@ -124,10 +124,10 @@ describe('Avatar accessibility', (): void => {
     fixture.detectChanges();
 
     expect(queryEl<HTMLImageElement>(fixture, '.ui-lib-avatar__image')?.getAttribute('alt')).toBe(
-      'Jane Doe'
+      'Jane Doe',
     );
     expect(queryEl<HTMLElement>(fixture, 'ui-lib-avatar')?.getAttribute('aria-label')).toBe(
-      'Jane Doe'
+      'Jane Doe',
     );
   });
 
@@ -139,7 +139,7 @@ describe('Avatar accessibility', (): void => {
     fixture.detectChanges();
 
     expect(queryEl<HTMLImageElement>(fixture, '.ui-lib-avatar__image')?.getAttribute('alt')).toBe(
-      'JD'
+      'JD',
     );
   });
 
@@ -151,7 +151,7 @@ describe('Avatar accessibility', (): void => {
     fixture.detectChanges();
 
     expect(queryEl<HTMLElement>(fixture, 'ui-lib-avatar')?.getAttribute('aria-label')).toBe(
-      'Jane Doe'
+      'Jane Doe',
     );
   });
 
@@ -162,7 +162,7 @@ describe('Avatar accessibility', (): void => {
     fixture.detectChanges();
 
     expect(queryEl<HTMLElement>(fixture, 'ui-lib-avatar')?.getAttribute('aria-label')).toBe(
-      'Avatar'
+      'Avatar',
     );
   });
 
@@ -174,7 +174,7 @@ describe('Avatar accessibility', (): void => {
     fixture.detectChanges();
 
     expect(queryEl<HTMLElement>(fixture, 'ui-lib-avatar')?.getAttribute('aria-label')).toBe(
-      'Guest profile'
+      'Guest profile',
     );
   });
 
@@ -184,34 +184,34 @@ describe('Avatar accessibility', (): void => {
     fixture.componentInstance.image.set('/assets/avatar.png');
     fixture.detectChanges();
     expect(
-      queryEl<HTMLImageElement>(fixture, '.ui-lib-avatar__image')?.getAttribute('aria-hidden')
+      queryEl<HTMLImageElement>(fixture, '.ui-lib-avatar__image')?.getAttribute('aria-hidden'),
     ).toBe('true');
 
     fixture.componentInstance.image.set(null);
     fixture.componentInstance.label.set('JD');
     fixture.detectChanges();
     expect(
-      queryEl<HTMLElement>(fixture, '.ui-lib-avatar__label')?.getAttribute('aria-hidden')
+      queryEl<HTMLElement>(fixture, '.ui-lib-avatar__label')?.getAttribute('aria-hidden'),
     ).toBe('true');
 
     fixture.componentInstance.label.set(null);
     fixture.componentInstance.icon.set('pi pi-user');
     fixture.detectChanges();
     expect(queryEl<HTMLElement>(fixture, '.ui-lib-avatar__icon')?.getAttribute('aria-hidden')).toBe(
-      'true'
+      'true',
     );
   });
 
   it('renders avatar groups as role="list"', async (): Promise<void> => {
     const fixture: ComponentFixture<AvatarGroupA11yHostComponent> = await createFixture(
-      AvatarGroupA11yHostComponent
+      AvatarGroupA11yHostComponent,
     );
     expect(queryEl<HTMLElement>(fixture, 'ui-lib-avatar-group')?.getAttribute('role')).toBe('list');
   });
 
   it('renders grouped avatars as listitems', async (): Promise<void> => {
     const fixture: ComponentFixture<AvatarGroupA11yHostComponent> = await createFixture(
-      AvatarGroupA11yHostComponent
+      AvatarGroupA11yHostComponent,
     );
     const avatars: HTMLElement[] = queryAllEl<HTMLElement>(fixture, 'ui-lib-avatar');
     expect(avatars.length).toBe(2);
@@ -222,11 +222,11 @@ describe('Avatar accessibility', (): void => {
 
   it('announces overflow with an accessible listitem label', async (): Promise<void> => {
     const fixture: ComponentFixture<AvatarGroupA11yHostComponent> = await createFixture(
-      AvatarGroupA11yHostComponent
+      AvatarGroupA11yHostComponent,
     );
     const overflow: HTMLElement | null = queryEl<HTMLElement>(
       fixture,
-      '.ui-lib-avatar-group__overflow'
+      '.ui-lib-avatar-group__overflow',
     );
 
     expect(overflow?.getAttribute('role')).toBe('listitem');
@@ -236,7 +236,7 @@ describe('Avatar accessibility', (): void => {
 
   it('generates unique ids across avatar and group instances', async (): Promise<void> => {
     const fixture: ComponentFixture<AvatarMultiInstanceHostComponent> = await createFixture(
-      AvatarMultiInstanceHostComponent
+      AvatarMultiInstanceHostComponent,
     );
     const avatars: HTMLElement[] = queryAllEl<HTMLElement>(fixture, 'ui-lib-avatar');
     const groups: HTMLElement[] = queryAllEl<HTMLElement>(fixture, 'ui-lib-avatar-group');
@@ -269,7 +269,7 @@ describe('Avatar accessibility', (): void => {
 
   it('passes axe for avatar group with overflow indicator', async (): Promise<void> => {
     const fixture: ComponentFixture<AvatarGroupA11yHostComponent> = await createFixture(
-      AvatarGroupA11yHostComponent
+      AvatarGroupA11yHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });

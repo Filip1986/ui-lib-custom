@@ -4,7 +4,7 @@
     <input
       type="text"
       class="uilib-tree-table-filter-input"
-      [placeholder]="globalFilterPlaceholder()"
+      [placeholder]="resolvedFilterPlaceholder()"
       [value]="globalFilterText()"
       [attr.aria-label]="i18n.translate('tree-table.filter')"
       (input)="onGlobalFilterInput($event)"
@@ -27,7 +27,7 @@
   <table
     class="uilib-tree-table-table"
     role="treegrid"
-    [attr.aria-label]="ariaLabel() || caption() || 'Tree table'"
+    [attr.aria-label]="resolvedAriaLabel()"
   >
     <!-- Column width hints -->
     <colgroup>

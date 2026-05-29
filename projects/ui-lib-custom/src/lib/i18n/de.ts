@@ -198,8 +198,12 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Zeilenerweiterung',
+  'table.empty': 'Keine Datensätze gefunden.',
+  'table.filter.placeholder': 'Suchen...',
+  'tree-table.label': 'Baumtabelle',
   'table.select-all': 'Alle Zeilen auswählen',
   'tree-table.filter': 'Tabelle filtern',
+  'tree-table.filter.placeholder': 'Suchen...',
   'tree-table.select-row': 'Zeile auswählen',
   'tree-table.select-all': 'Alle Zeilen auswählen',
 
@@ -241,6 +245,7 @@ export const UI_LIB_DE: UiLibTranslationBundle = {
   'terminal.output': 'Terminal-Ausgabe',
 
   // ── Tree ──────────────────────────────────────────────────────────────────
+  'tree.label': 'Baum',
   'tree.filter-placeholder': 'Baumknoten filtern',
   'tree-select.clear': 'Auswahl löschen',
 

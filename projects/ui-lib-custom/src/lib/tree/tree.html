@@ -4,7 +4,7 @@
     <input
       type="text"
       class="uilib-tree-filter-input"
-      [placeholder]="filterPlaceholder()"
+      [placeholder]="resolvedFilterPlaceholder()"
       [value]="filterText()"
       [attr.aria-label]="i18n.translate('tree.filter-placeholder')"
       (input)="onFilterInput($event)"

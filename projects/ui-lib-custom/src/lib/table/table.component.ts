@@ -161,9 +161,7 @@ export class TableComponent {
   );
 
   /** Placeholder displayed inside the global filter input. */
-  public readonly globalFilterPlaceholder: InputSignal<string> = input<string>(
-    TABLE_DEFAULTS.GLOBAL_FILTER_PLACEHOLDER,
-  );
+  public readonly globalFilterPlaceholder: InputSignal<string | null> = input<string | null>(null);
 
   // ---------------------------------------------------------------------------
   // Selection
@@ -259,7 +257,7 @@ export class TableComponent {
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
 
   /** Message shown in the empty state when no `[uiTableEmpty]` template is provided. */
-  public readonly emptyMessage: InputSignal<string> = input<string>(TABLE_DEFAULTS.EMPTY_MESSAGE);
+  public readonly emptyMessage: InputSignal<string | null> = input<string | null>(null);
 
   /** Caption text rendered above the table when no `[uiTableCaption]` template is provided. */
   public readonly caption: InputSignal<string | null> = input<string | null>(null);
@@ -380,6 +378,16 @@ export class TableComponent {
   /** Resolved theme variant (falls back to ThemeConfigService). */
   public readonly resolvedVariant: Signal<TableVariant> = computed<TableVariant>(
     (): TableVariant => this.variant() ?? this.themeConfig.variant(),
+  );
+
+  /** Resolved placeholder for the global filter input. */
+  public readonly resolvedGlobalFilterPlaceholder: Signal<string> = computed<string>(
+    (): string => this.globalFilterPlaceholder() ?? this.i18n.translate('table.filter.placeholder'),
+  );
+
+  /** Resolved empty-state message. */
+  public readonly resolvedEmptyMessage: Signal<string> = computed<string>(
+    (): string => this.emptyMessage() ?? this.i18n.translate('table.empty'),
   );
 
   /** CSS class string applied to the host element. */

@@ -127,7 +127,7 @@ export class TreeTableComponent {
   public readonly globalFilter: InputSignal<boolean> = input<boolean>(false);
 
   /** Placeholder for the global filter input. */
-  public readonly globalFilterPlaceholder: InputSignal<string> = input<string>('Search...');
+  public readonly globalFilterPlaceholder: InputSignal<string | null> = input<string | null>(null);
 
   /**
    * When `true`, the table body is scrollable and `scrollHeight` constrains it.
@@ -141,16 +141,16 @@ export class TreeTableComponent {
   public readonly scrollHeight: InputSignal<string | null> = input<string | null>(null);
 
   /** Caption text rendered above the table. */
-  public readonly caption: InputSignal<string> = input<string>('');
+  public readonly caption: InputSignal<string | null> = input<string | null>(null);
 
   /** Extra CSS class applied to the host element. */
-  public readonly styleClass: InputSignal<string> = input<string>('');
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /**
    * Accessible name for the treegrid.
-   * Falls back to `caption` text, then to `'Tree table'` when both are empty.
+   * Falls back to `caption` text, then to the i18n `tree-table.label` key when both are absent.
    */
-  public readonly ariaLabel: InputSignal<string> = input<string>('');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -197,17 +197,28 @@ export class TreeTableComponent {
     (): TreeTableVariant => (this.variant() ?? this.themeConfig.variant()) as TreeTableVariant,
   );
 
+  /** Resolved placeholder for the global filter input. */
+  public readonly resolvedFilterPlaceholder: Signal<string> = computed<string>(
+    (): string =>
+      this.globalFilterPlaceholder() ?? this.i18n.translate('tree-table.filter.placeholder'),
+  );
+
+  /** Resolved accessible label — explicit ariaLabel → caption → i18n key. */
+  public readonly resolvedAriaLabel: Signal<string> = computed<string>(
+    (): string => this.ariaLabel() ?? this.caption() ?? this.i18n.translate('tree-table.label'),
+  );
+
   /** Host class string applied via `[class]` binding. */
-  public readonly hostClasses: Signal<string> = computed<string>((): string =>
-    [
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
+    const parts: string[] = [
       `ui-lib-tree-table--variant-${this.resolvedVariant()}`,
       `ui-lib-tree-table--size-${this.size()}`,
-      this.scrollable() ? 'ui-lib-tree-table--scrollable' : '',
-      this.styleClass(),
-    ]
-      .filter(Boolean)
-      .join(' '),
-  );
+    ];
+    if (this.scrollable()) parts.push('ui-lib-tree-table--scrollable');
+    const extra: string | null = this.styleClass();
+    if (extra) parts.push(extra);
+    return parts.join(' ');
+  });
 
   /**
    * Index of the column that renders the expand toggle and depth indentation.

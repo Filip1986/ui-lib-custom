@@ -92,24 +92,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 Date: 2026-05-29
 Changed:
-  carousel/carousel.component.ts: 5 aria-label inputs → null defaults; 4 resolved computeds (prev/next/pause/play);
-    autoplayButtonLabel uses resolved labels; CAROUSEL_ARIA_* imports removed
-  carousel/carousel.component.html: prevAriaLabel() → resolvedPrevAriaLabel(); nextAriaLabel() → resolvedNextAriaLabel()
-  i18n/en,de,fr,es.ts: carousel.pause + carousel.play keys added (4 locales each)
-  timeline/timeline.component.ts: ariaLabel string|null null default; resolvedAriaLabel ?? fix
-  galleria/galleria.ts: ariaLabel string|null null default; resolvedAriaLabel ?? fix
-  knob/knob.component.ts: ariaLabel string|null null default; styleClass input added; resolved ?? fix
-  data-view/data-view.component.ts: emptyMessage + filterPlaceholder → string|null null defaults; resolved computeds
-  data-view/data-view.component.html: uses resolvedFilterPlaceholder() + resolvedEmptyMessage()
-  meter-group/meter-group.ts: ariaLabel string|null null default; ?? fix
-  bottom-sheet/bottom-sheet.ts: header → string|null; showCloseButton + closeAriaLabel inputs; resolvedCloseAriaLabel
-  bottom-sheet/bottom-sheet.html: @if(showCloseButton()) guard; resolvedCloseAriaLabel(); [uilib-footer] slot alias
-  8 spec files: WritableSignal types updated to string|null
-  docs/COMPONENT_SCORES.md: Carousel 8.7→9.0; Timeline 8.7→9.0; Galleria 8.7→8.9; Knob 8.7→9.0;
-    DataView 8.6→9.0; MeterGroup 8.7→9.0; BottomSheet 8.6→9.0
-State: COMPLETE — ESLint 0w ✅; ng build ✅; 388 tests ✅; bundlesize ✅; pushed
-Verification: npx eslint carousel/ timeline/ galleria/ knob/ data-view/ meter-group/ bottom-sheet/ (0w); ng build ✅; npx jest (388 pass)
-Next step: Continue Prompt 8 on Avatar + DatePicker; update READMEs for changed components
+  table/table.component.ts: emptyMessage + globalFilterPlaceholder → string|null null defaults;
+    resolvedEmptyMessage + resolvedGlobalFilterPlaceholder computed signals added
+  table/table.component.html: {{ emptyMessage() }} → {{ resolvedEmptyMessage() }}
+  tree-table/tree-table.component.ts: globalFilterPlaceholder, caption, styleClass, ariaLabel →
+    string|null null defaults; resolvedFilterPlaceholder + resolvedAriaLabel computeds;
+    hostClasses rewritten null-safe (parts array + if(extra))
+  tree-table/tree-table.component.html: resolvedFilterPlaceholder(); resolvedAriaLabel()
+  tree/tree.ts: filterPlaceholder, styleClass, ariaLabel → string|null null defaults;
+    resolvedFilterPlaceholder computed; hostAriaLabel: Signal<string> (always resolved, not nullable);
+    hostClasses rewritten null-safe
+  tree/tree.html: resolvedFilterPlaceholder()
+  avatar/avatar.ts: imageAlt → string|null null default; resolvedImageAlt uses ?? chain
+  avatar/avatar.spec.ts + avatar.a11y.spec.ts: WritableSignal<string> → string|null; fallback test uses null
+  i18n/en,de,fr,es.ts: table.empty, table.filter.placeholder, tree-table.label,
+    tree-table.filter.placeholder, tree.label keys added (4 locales)
+  docs/COMPONENT_SCORES.md: Table/TreeTable/Tree 8.5→8.6; Avatar 8.8→8.9
+State: COMPLETE — ESLint 0w ✅; ng build ✅; 309/309 tests ✅
+Verification: eslint table/ tree-table/ tree/ avatar/ (0w); ng build (0w); jest (309 pass)
+Next step: Commit + push; then continue Prompt 8 on DatePicker and remaining 8.5-cluster components
 
 Date: 2026-05-29 [feat(lib): prompt-8 hardening — ConfirmDialog + Drawer structural improvements + i18n docs batch]
 Changed:

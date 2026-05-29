@@ -198,8 +198,12 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
 
   // ── Table / TreeTable ─────────────────────────────────────────────────────
   'table.expand-row': 'Expansion de ligne',
+  'table.empty': 'Aucun enregistrement trouvé.',
+  'table.filter.placeholder': 'Rechercher...',
+  'tree-table.label': 'Tableau arborescent',
   'table.select-all': 'Sélectionner toutes les lignes',
   'tree-table.filter': 'Filtrer le tableau',
+  'tree-table.filter.placeholder': 'Rechercher...',
   'tree-table.select-row': 'Sélectionner la ligne',
   'tree-table.select-all': 'Sélectionner toutes les lignes',
 
@@ -241,6 +245,7 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'terminal.output': 'Sortie du terminal',
 
   // ── Tree ──────────────────────────────────────────────────────────────────
+  'tree.label': 'Arbre',
   'tree.filter-placeholder': "Filtrer les nœuds de l'arbre",
   'tree-select.clear': 'Effacer la sélection',
 

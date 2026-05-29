@@ -54,7 +54,7 @@ export class Avatar {
   /** URL of the image to display */
   public readonly image: InputSignal<string | null> = input<string | null>(null);
   /** Alternative text for the image */
-  public readonly imageAlt: InputSignal<string> = input<string>('');
+  public readonly imageAlt: InputSignal<string | null> = input<string | null>(null);
   /** Full name announced by assistive technologies */
   public readonly name: InputSignal<string | null> = input<string | null>(null);
   /** Text label (typically initials) to display when no image is provided */
@@ -128,11 +128,10 @@ export class Avatar {
     },
   );
 
-  public readonly resolvedImageAlt: Signal<string> = computed<string>((): string => {
-    const configuredAlt: string = this.imageAlt().trim();
-    if (configuredAlt) return configuredAlt;
-    return this.name() || this.label() || this.i18n.translate('avatar.label');
-  });
+  public readonly resolvedImageAlt: Signal<string> = computed<string>(
+    (): string =>
+      this.imageAlt() ?? this.name() ?? this.label() ?? this.i18n.translate('avatar.label'),
+  );
 
   /** Context object passed to the `#fallback` template slot. */
   public readonly fallbackContext: Signal<AvatarFallbackContext> = computed<AvatarFallbackContext>(
