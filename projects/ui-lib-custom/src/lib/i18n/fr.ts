@@ -252,6 +252,16 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'input.password-toggle': 'Basculer la visibilité du mot de passe',
   'input-mask.clear': 'Effacer',
   'password.clear': 'Effacer le mot de passe',
+  'password.show': 'Afficher le mot de passe',
+  'password.hide': 'Masquer le mot de passe',
+  'password.prompt': 'Entrez un mot de passe',
+  'password.weak': 'Faible',
+  'password.medium': 'Moyen',
+  'password.strong': 'Fort',
+  'password.strength.none': 'Force du mot de passe : aucune',
+  'password.strength.weak': 'Force du mot de passe : faible',
+  'password.strength.medium': 'Force du mot de passe : moyenne',
+  'password.strength.strong': 'Force du mot de passe : forte',
 
   // ── Meter Group ───────────────────────────────────────────────────────────
   'meter-group.legend': 'Légende',

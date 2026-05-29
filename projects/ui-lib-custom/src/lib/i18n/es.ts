@@ -252,6 +252,16 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'input.password-toggle': 'Alternar visibilidad de contraseña',
   'input-mask.clear': 'Limpiar',
   'password.clear': 'Limpiar contraseña',
+  'password.show': 'Mostrar contraseña',
+  'password.hide': 'Ocultar contraseña',
+  'password.prompt': 'Introduzca una contraseña',
+  'password.weak': 'Débil',
+  'password.medium': 'Media',
+  'password.strong': 'Fuerte',
+  'password.strength.none': 'Seguridad de la contraseña: ninguna',
+  'password.strength.weak': 'Seguridad de la contraseña: débil',
+  'password.strength.medium': 'Seguridad de la contraseña: media',
+  'password.strength.strong': 'Seguridad de la contraseña: fuerte',
 
   // ── Meter Group ───────────────────────────────────────────────────────────
   'meter-group.legend': 'Leyenda',

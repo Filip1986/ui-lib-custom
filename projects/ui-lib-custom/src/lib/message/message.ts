@@ -94,6 +94,9 @@ export class Message {
   /** When true, a close button is rendered. */
   public readonly closable: InputSignal<boolean> = input<boolean>(false);
 
+  /** Accessible label for the close button. Falls back to the i18n `message.close` key. */
+  public readonly closeAriaLabel: InputSignal<string | null> = input<string | null>(null);
+
   /** Additional CSS class(es) to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
@@ -139,6 +142,11 @@ export class Message {
   /** Resolved icon name — custom icon wins, else severity default. */
   public readonly resolvedIcon: Signal<StatusIcon | string> = computed<StatusIcon | string>(
     (): StatusIcon | string => this.icon() ?? SEVERITY_ICON_MAP[this.severity()],
+  );
+
+  /** Resolved close button aria-label — consumer input wins, falls back to i18n key. */
+  public readonly resolvedCloseAriaLabel: Signal<string> = computed<string>(
+    (): string => this.closeAriaLabel() ?? this.i18n.translate('message.close'),
   );
 
   /** Computed CSS classes applied to the host element. */
