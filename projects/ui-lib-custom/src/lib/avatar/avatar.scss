@@ -42,6 +42,8 @@
     user-select: none;
     flex-shrink: 0;
     animation: var(--uilib-avatar-mount-animation);
+    /* Promote to compositor layer — GPU-accelerates the scale+fade mount animation */
+    will-change: transform, opacity;
   }
   .ui-lib-avatar:focus-visible {
     outline: 2px solid var(--uilib-avatar-focus-ring, var(--uilib-color-primary-500, #3b82f6));

@@ -62,3 +62,43 @@
 | `PageDown` | Decrease by `step * 10` |
 | `Home` | Set to `min` |
 | `End` | Set to `max` |
+
+## CSS Custom Properties
+
+All visual aspects of the knob are exposed as CSS custom properties, set on the `uilib-knob` host element. Override them per-instance via `[style]` or globally via your own `uilib-knob { ... }` rule.
+
+| Token | Default | Description |
+|---|---|---|
+| `--uilib-knob-track-color` | `#e0e0e0` | Background arc colour |
+| `--uilib-knob-range-color` | `#6366f1` | Value arc colour |
+| `--uilib-knob-text-color` | `#1f2937` | Centre label colour |
+| `--uilib-knob-text-size` | `1.25rem` | Centre label font size |
+| `--uilib-knob-text-weight` | `600` | Centre label font weight |
+| `--uilib-knob-size-sm` | `80px` | Diameter in `sm` size |
+| `--uilib-knob-size-md` | `120px` | Diameter in `md` size |
+| `--uilib-knob-size-lg` | `160px` | Diameter in `lg` size |
+| `--uilib-knob-focus-ring-color` | `rgba(99,102,241,0.35)` | Focus ring colour |
+| `--uilib-knob-focus-ring-width` | `3px` | Focus ring thickness |
+| `--uilib-knob-focus-ring-offset` | `2px` | Gap between knob and focus ring |
+| `--uilib-knob-disabled-opacity` | `0.5` | Opacity when `disabled` |
+| `--uilib-knob-transition-duration` | `var(--uilib-transition-duration-fast, 0.15s)` | Mount animation + arc transition duration |
+
+In addition, the `valueColor` and `textColor` inputs write to `--uilib-knob-range-color-override` and `--uilib-knob-text-color-override` respectively, which take precedence over the base tokens.
+
+### Theming examples
+
+```css
+/* Larger, teal-themed knob for a media player */
+uilib-knob.player-volume {
+  --uilib-knob-range-color: #14b8a6;
+  --uilib-knob-size-md: 160px;
+  --uilib-knob-text-size: 1.5rem;
+}
+
+/* Minimal dark knob */
+uilib-knob.dark-knob {
+  --uilib-knob-track-color: #374151;
+  --uilib-knob-range-color: #e5e7eb;
+  --uilib-knob-text-color: #f9fafb;
+}
+```

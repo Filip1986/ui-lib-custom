@@ -26,6 +26,8 @@
     display: flex;
     animation: uilib-timeline-mount var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    /* Promote to compositor layer — GPU-accelerates the translate+fade mount animation */
+    will-change: transform, opacity;
     color: var(--uilib-timeline-color);
     font-size: var(--uilib-timeline-font-size);
   }

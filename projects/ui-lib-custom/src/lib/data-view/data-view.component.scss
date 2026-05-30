@@ -41,6 +41,8 @@
     display: block;
     animation: uilib-data-view-mount var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    /* Promote to compositor layer — GPU-accelerates the fade-in mount animation */
+    will-change: opacity;
     border: var(--uilib-data-view-border);
     border-radius: var(--uilib-data-view-border-radius);
     background: var(--uilib-data-view-bg);

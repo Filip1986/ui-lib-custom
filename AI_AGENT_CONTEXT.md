@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 47 components raised to 9.0 across nine batches)
+- **Library-wide average:** **9.05 / 10** across 102 components (updated 2026-05-30; batch-10 raised 7 components — Avatar/BottomSheet/Carousel/DataView/Timeline/MeterGroup to 9.1; Knob to 9.2)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -125,6 +125,31 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 10 — Avatar/BottomSheet/Carousel/DataView/Timeline/MeterGroup→9.1; Knob→9.2):
+  avatar/avatar.scss: added will-change: transform, opacity to .ui-lib-avatar (GPU-accelerates
+    scale+fade mount animation)
+  bottom-sheet/bottom-sheet.scss: added will-change: transform to panel (slide-up transition);
+    will-change: opacity to backdrop (fade transition); bottom: 0 → inset-block-end: 0 (logical CSS)
+  carousel/carousel.component.scss: added will-change: opacity to .uilib-carousel host (mount
+    animation); inline-size: 100% replaces width: 100% (logical CSS)
+  data-view/data-view.component.scss: added will-change: opacity to .ui-lib-data-view host
+    (opacity-only mount animation)
+  timeline/timeline.component.scss: added will-change: transform, opacity to .ui-lib-timeline
+    host (translate+fade mount animation)
+  meter-group/meter-group.scss: added will-change: opacity to host (mount animation); added
+    will-change: width, height to __meter segment (width/height fill transition hint)
+  knob/knob.component.scss: added will-change: transform, opacity to .ui-lib-knob (mount
+    animation); width/height → inline-size/block-size on size variants and SVG element;
+    border-radius: 50% → var(--uilib-radius-full, 50%) on focus ring
+  knob/README.md: added full CSS Custom Properties section (13 token rows + dark/custom examples)
+  docs/COMPONENT_SCORES.md: 7 components updated (6→9.1, Knob→9.2)
+  AI_AGENT_CONTEXT.md: library average updated to 9.05
+State: COMPLETE — build verified (0 errors, 0 warnings) ✅
+Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅
+Next step: Remaining 8s in scoring table — Badge Theme=8 (9.0→9.1); FloatLabel Feel=8 (9.0→9.1);
+  AutoFocus Feel=8 (9.0→9.1). Then scan for any new ceiling push opportunities at 9.1→9.2.
 
 Date: 2026-05-30
 Changed (batch 9 — Drawer/ConfirmDialog/Galleria→9.0):

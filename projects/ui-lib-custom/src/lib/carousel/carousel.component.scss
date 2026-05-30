@@ -37,9 +37,11 @@
     // ─── Root layout ────────────────────────────────────────────────────────────
     display: flex;
     flex-direction: column;
-    width: 100%;
+    inline-size: 100%;
     animation: uilib-carousel-mount var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    /* Promote to compositor layer — GPU-accelerates the fade-in mount animation */
+    will-change: opacity;
   }
 
   // ─── Content container ────────────────────────────────────────────────────────

@@ -41,6 +41,8 @@
     font-family: var(--uilib-font-ui, inherit);
     animation: uilib-meter-group-mount var(--uilib-transition-duration-fast, 0.15s)
       var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    /* Promote to compositor layer — GPU-accelerates the fade-in mount animation */
+    will-change: opacity;
 
     // ---- Meter bar container -----------------------------------------
     &__meters {
@@ -60,6 +62,8 @@
       height: 100%;
       min-width: 0;
       flex-shrink: 0;
+      /* Hint browser to prepare compositor layer ahead of width/height fill transitions */
+      will-change: width, height;
 
       &:first-child {
         border-radius: var(--uilib-meter-group-border-radius) 0 0
