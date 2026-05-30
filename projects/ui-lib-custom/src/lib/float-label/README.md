@@ -144,5 +144,5 @@ FloatLabel composes well with:
 | `--uilib-float-label-invalid-color` | `var(--uilib-error-color, #ef4444)` | Label color when control is invalid and dirty |
 | `--uilib-float-label-font-size` | `1rem` | Resting label font size |
 | `--uilib-float-label-active-font-size` | `0.75rem` | Floated/active label font size |
-| `--uilib-float-label-transition` | `0.2s ease` | Label animation timing (duration + easing); set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-float-label-transition` | `0.2s cubic-bezier(0.4, 0, 0.2, 1)` | Label animation timing (duration + easing); set to `0ms` when `prefers-reduced-motion: reduce` |
 | `--uilib-float-label-on-border-radius` | `var(--uilib-input-radius, var(--uilib-shape-base, 6px))` | Floated label chip radius for the `on` variant |

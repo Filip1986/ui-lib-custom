@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.06 / 10** across 102 components (updated 2026-05-30; batch-11 raised Badge to 9.1 via Theme fix; running total: 9 components at 9.1+, Knob at 9.2, four at 9.5)
+- **Library-wide average:** **9.07 / 10** across 102 components (updated 2026-05-30; batch-12 raised FloatLabel/AutoFocus to 9.1; no sub-9.0 or sub-9.1 remaining except structural constraints; four at 9.5, Knob at 9.2, 11 at 9.1)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -125,6 +125,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 12 — FloatLabel/AutoFocus Feel 8→9 → 9.1 each):
+  float-label/float-label.scss: --uilib-float-label-transition default changed from
+    `0.2s ease` → `0.2s cubic-bezier(0.4, 0, 0.2, 1)` (Material Design standard easing;
+    gives float animation a refined deceleration vs. generic ease)
+  float-label/README.md: updated default value in CSS Custom Properties table
+  auto-focus/auto-focus.ts: added `delay: InputSignal<number>` (default 0); when delay>0
+    uses setTimeout + DestroyRef.onDestroy cleanup instead of rAF; extracted
+    attemptFocus() private method for shared logic across both timing paths
+  auto-focus/README.md: documented delay input; updated Timing notes section with delay
+    guidance and 3 usage examples
+  docs/COMPONENT_SCORES.md: FloatLabel Feel 8→9 (9.0→9.1), AutoFocus Feel 8→9 (9.0→9.1)
+State: COMPLETE — build verified; auto-focus tests (24 tests) all pass ✅
+Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅; jest auto-focus (24/24) ✅
+Next step: All individual-category 8s eliminated. Focus shifts to 9.1→9.2 ceiling pushes
+  or new component work. Components with single 10s are candidates for adding a second 10
+  (e.g., Stack/Inline/Grid Docs→10 via comprehensive README pass).
 
 Date: 2026-05-30
 Changed (batch 11 — Badge→9.1):

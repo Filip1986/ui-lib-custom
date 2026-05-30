@@ -1,6 +1,7 @@
 @layer uilib.components {
   .ui-lib-float-label {
-    --uilib-float-label-transition: 0.2s ease;
+    /* Refined Material Design easing — matches Angular's own component motion language */
+    --uilib-float-label-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     position: relative;
 

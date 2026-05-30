@@ -13,6 +13,7 @@
 |------|------|---------|-------|
 | `disabled` | `boolean` | `false` | Set to `true` to skip autofocus |
 | `selector` | `string \| null` | `null` | Optional child selector. When set, the matching child is focused instead of the host. Missing matches do nothing; invalid selectors warn in DEV mode and fall back to the host |
+| `delay` | `number` | `0` | Additional delay in milliseconds before focus is applied. Use when the host is inside an animated container (modal, drawer) that needs time to finish opening. When `0`, focus is deferred one `requestAnimationFrame` tick. When positive, a `setTimeout` is used and cleared automatically on destroy. |
 
 ## Outputs
 
@@ -54,9 +55,21 @@ _none_
 
 ## Timing notes
 
-- The directive intentionally uses a single `requestAnimationFrame` instead of `setTimeout(0)` so focus waits until the next animation frame and does not race the initial mount/animation work.
+- The directive intentionally uses a single `requestAnimationFrame` (default, `delay=0`) so focus waits until the next animation frame and does not race the initial mount/animation work.
 - `afterNextRender` is a good fit for components that own their render lifecycle, but this utility is a directive and only needs one browser-frame deferral after `ngAfterViewInit`.
-- If your flow needs even later timing than the built-in frame deferral, keep `uiLibAutoFocus` disabled and move focus manually from the parent component once the surrounding interaction is ready.
+- When `delay > 0`, a `setTimeout` is used instead of rAF. The pending timer is automatically cancelled via `DestroyRef.onDestroy` if the directive is torn down before it fires.
+- Use `delay` when the host is inside an animated container (modal, drawer, bottom-sheet) whose opening animation changes the scroll position — focusing before the animation settles can cause the browser to scroll the element into view prematurely.
+
+```html
+<!-- Focus after a 300 ms modal-open animation -->
+<input uiLibAutoFocus [delay]="300" />
+
+<!-- Focus immediately (default — one rAF tick) -->
+<input uiLibAutoFocus />
+
+<!-- Conditionally disable autofocus -->
+<input uiLibAutoFocus [disabled]="isMobileViewport()" />
+```
 
 ## CSS Custom Properties
 

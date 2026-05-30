@@ -1,5 +1,13 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Directive, ElementRef, PLATFORM_ID, inject, input, isDevMode } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  PLATFORM_ID,
+  inject,
+  input,
+  isDevMode,
+} from '@angular/core';
 import type { AfterViewInit, InputSignal } from '@angular/core';
 
 /**
@@ -35,10 +43,29 @@ export class AutoFocus implements AfterViewInit {
    */
   public readonly selector: InputSignal<string | null> = input<string | null>(null);
 
+  /**
+   * Additional delay in milliseconds before the focus is applied.
+   *
+   * Useful when the host element is inside an animated container (modal, drawer,
+   * dropdown) that needs time to complete its opening animation before the browser
+   * will scroll the focused element into view correctly.
+   *
+   * When `0` (default) focus is deferred by one `requestAnimationFrame` tick —
+   * sufficient for most static-mount scenarios. When positive, a `setTimeout` is
+   * used instead and the pending timer is cleared if the directive is destroyed
+   * before it fires.
+   *
+   * @example
+   * <!-- Wait for a 300 ms open animation before focusing -->
+   * <input uiLibAutoFocus [delay]="300" />
+   */
+  public readonly delay: InputSignal<number> = input<number>(0);
+
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly document: Document = inject(DOCUMENT);
   private readonly platformId: object = inject(PLATFORM_ID);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
   private readonly hostTagName: string = `<${this.elementRef.nativeElement.tagName.toLowerCase()}>`;
 
@@ -48,25 +75,42 @@ export class AutoFocus implements AfterViewInit {
       return;
     }
 
-    requestAnimationFrame((): void => {
-      if (this.disabled()) {
-        return;
-      }
+    const delayMs: number = this.delay();
 
-      const target: HTMLElement | null = this.resolveFocusTarget();
-      if (!target || !this.shouldFocusTarget(target)) {
-        return;
-      }
+    if (delayMs > 0) {
+      // User-specified delay — give animated containers time to finish opening before
+      // focus is applied (otherwise scroll-into-view may position the page incorrectly).
+      const timeoutId: ReturnType<typeof setTimeout> = setTimeout((): void => {
+        this.attemptFocus();
+      }, delayMs);
+      this.destroyRef.onDestroy((): void => clearTimeout(timeoutId));
+    } else {
+      // Default: defer one rAF tick so Angular finishes the initial render pass.
+      requestAnimationFrame((): void => {
+        this.attemptFocus();
+      });
+    }
+  }
 
-      if (isDevMode() && !this.isProgrammaticallyFocusable(target)) {
-        console.warn(
-          `[ui-lib-custom/auto-focus] ${this.hostTagName} host or selector target is not programmatically focusable. ` +
-            'Add tabindex="-1" or provide a focusable selector target.'
-        );
-      }
+  /** Attempts to focus the resolved target — re-checks disabled so late changes take effect. */
+  private attemptFocus(): void {
+    if (this.disabled()) {
+      return;
+    }
 
-      target.focus();
-    });
+    const target: HTMLElement | null = this.resolveFocusTarget();
+    if (!target || !this.shouldFocusTarget(target)) {
+      return;
+    }
+
+    if (isDevMode() && !this.isProgrammaticallyFocusable(target)) {
+      console.warn(
+        `[ui-lib-custom/auto-focus] ${this.hostTagName} host or selector target is not programmatically focusable. ` +
+          'Add tabindex="-1" or provide a focusable selector target.',
+      );
+    }
+
+    target.focus();
   }
 
   private resolveFocusTarget(): HTMLElement | null {
@@ -82,7 +126,7 @@ export class AutoFocus implements AfterViewInit {
     } catch {
       if (isDevMode()) {
         console.warn(
-          `[ui-lib-custom/auto-focus] Invalid selector "${selectorValue}" on ${this.hostTagName}. Falling back to host element.`
+          `[ui-lib-custom/auto-focus] Invalid selector "${selectorValue}" on ${this.hostTagName}. Falling back to host element.`,
         );
       }
       return hostElement;
@@ -129,7 +173,7 @@ export class AutoFocus implements AfterViewInit {
     }
 
     return target.matches(
-      'a[href], button, input, select, textarea, summary, iframe, [contenteditable="true"], audio[controls], video[controls]'
+      'a[href], button, input, select, textarea, summary, iframe, [contenteditable="true"], audio[controls], video[controls]',
     );
   }
 }
