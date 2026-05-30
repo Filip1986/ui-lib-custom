@@ -38,21 +38,23 @@ _none_
 
 ## Theming
 
-| CSS Variable                           | Default                               |
-| -------------------------------------- | ------------------------------------- |
-| `--uilib-progress-bar-border-radius`   | `var(--uilib-radius-full, 9999px)`    |
-| `--uilib-progress-bar-fill-bg`         | `var(--uilib-color-primary, #6366f1)` |
-| `--uilib-progress-bar-height`          | `1.25rem`                             |
-| `--uilib-progress-bar-height-lg`       | `1.75rem`                             |
-| `--uilib-progress-bar-height-sm`       | `0.625rem`                            |
-| `--uilib-progress-bar-label-color`     | `#fff`                                |
-| `--uilib-progress-bar-label-font-size` | `0.75rem`                             |
-| `--uilib-progress-bar-track-bg`        | `var(--uilib-surface-200, #e5e7eb)`   |
-| `--uilib-progress-bar-transition`      | `width 0.4s ease`                     |
+| CSS Variable                                   | Default                                                      |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| `--uilib-progress-bar-border-radius`           | `var(--uilib-radius-full, 9999px)`                           |
+| `--uilib-progress-bar-fill-bg`                 | `var(--uilib-color-primary, #6366f1)`                        |
+| `--uilib-progress-bar-height`                  | `1.25rem`                                                    |
+| `--uilib-progress-bar-height-lg`               | `1.75rem`                                                    |
+| `--uilib-progress-bar-height-sm`               | `0.625rem`                                                   |
+| `--uilib-progress-bar-indeterminate-animation` | `uilib-progress-bar-indeterminate 1.6s infinite ease-in-out` |
+| `--uilib-progress-bar-label-color`             | `#fff`                                                       |
+| `--uilib-progress-bar-label-font-size`         | `0.75rem`                                                    |
+| `--uilib-progress-bar-shadow`                  | `none`                                                       |
+| `--uilib-progress-bar-track-bg`                | `var(--uilib-surface-200, #e5e7eb)`                          |
+| `--uilib-progress-bar-transition`              | `width 0.4s ease`                                            |
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -87,16 +89,7 @@ _none_
 
 ## Usage Examples
 
-```html
-<!-- Determinate -->
-<ui-lib-progress-bar [value]="uploadProgress" />
-
-<!-- Indeterminate (loading) -->
-<ui-lib-progress-bar mode="indeterminate" />
-
-<!-- With label -->
-<ui-lib-progress-bar [value]="75" [showValue]="true" />
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

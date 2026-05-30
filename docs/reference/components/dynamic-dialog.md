@@ -13,9 +13,9 @@ Internal shell component rendered by DialogService.open(). This component is NOT
 
 ### Inputs
 
-| Name            | Type                   | Default | Description                                                   |
-| --------------- | ---------------------- | ------- | ------------------------------------------------------------- |
-| `componentType` | `Type<unknown> | null` | `null`  | @internal — set by DialogService via ComponentRef.setInput(). |
+| Name            | Type                   | Default | Description |
+| --------------- | ---------------------- | ------- | ----------- |
+| `componentType` | `Type<unknown> | null` | `null`  | —           |
 
 ### Outputs
 
@@ -27,11 +27,21 @@ _none_
 
 ## Theming
 
-_No component-level CSS variables detected._
+| CSS Variable                                | Default                                                                                                        |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `--uilib-dynamic-dialog-backdrop-animation` | `uilib-dynamic-dialog-fade-in 0.2s ease`                                                                       |
+| `--uilib-dynamic-dialog-close-btn-radius`   | `var(--uilib-radius-full, 9999px)`                                                                             |
+| `--uilib-dynamic-dialog-close-btn-size`     | `2rem`                                                                                                         |
+| `--uilib-dynamic-dialog-header-gap`         | `0.5rem`                                                                                                       |
+| `--uilib-dynamic-dialog-panel-animation`    | `uilib-dynamic-dialog-enter 0.2s cubic-bezier(0.4, 0, 0.2, 1)`                                                 |
+| `--uilib-dynamic-dialog-shadow-bootstrap`   | `0 0.5rem 1rem rgba(0, 0, 0, 0.15)`                                                                            |
+| `--uilib-dynamic-dialog-shadow-material`    | `0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12)` |
+| `--uilib-dynamic-dialog-shadow-minimal`     | `0 4px 12px rgba(0, 0, 0, 0.08)`                                                                               |
+| `--uilib-dynamic-dialog-transition`         | `200ms ease`                                                                                                   |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -71,28 +81,7 @@ _No component-level CSS variables detected._
 
 ## Usage Examples
 
-```typescript
-import { DialogService } from 'ui-lib-custom/dynamic-dialog';
-
-@Component({
-  providers: [DialogService],
-  template: `<ui-lib-button (click)="open()">Open Dialog</ui-lib-button>`,
-})
-export class MyComponent {
-  private dialog = inject(DialogService);
-
-  open(): void {
-    const ref = this.dialog.open(MyDialogContentComponent, {
-      header: 'Edit User',
-      width: '480px',
-      data: { userId: 42 },
-    });
-    ref.onClose.subscribe((result) => {
-      if (result) this.save(result);
-    });
-  }
-}
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

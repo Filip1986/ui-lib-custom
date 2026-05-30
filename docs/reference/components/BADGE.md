@@ -13,15 +13,17 @@ Badge - A performant badge/tag component for labels, status, and counts Single e
 
 ### Inputs
 
-| Name         | Type                  | Default     | Description                                                                      |
-| ------------ | --------------------- | ----------- | -------------------------------------------------------------------------------- |
-| `color`      | `BadgeColor`          | `'primary'` | Color theme of the badge                                                         |
-| `decorative` | `boolean`             | `false`     | Whether the badge is decorative and should be hidden from assistive technologies |
-| `dot`        | `boolean`             | `false`     | Whether the badge is a dot (small circular indicator)                            |
-| `label`      | `string | null`       | `null`      | Accessible label for the badge, used when screen reader support is needed        |
-| `pill`       | `boolean`             | `false`     | Whether the badge is a pill shape (fully rounded)                                |
-| `size`       | `BadgeSize`           | `'md'`      | Size of the badge                                                                |
-| `variant`    | `BadgeVariant | null` | `null`      | Visual variant of the badge                                                      |
+| Name         | Type                  | Default     | Description                                                                                                                                                                   |
+| ------------ | --------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color`      | `BadgeColor`          | `'primary'` | Color theme of the badge                                                                                                                                                      |
+| `decorative` | `boolean`             | `false`     | Whether the badge is decorative and should be hidden from assistive technologies                                                                                              |
+| `dot`        | `boolean`             | `false`     | Whether the badge is a dot (small circular indicator)                                                                                                                         |
+| `label`      | `string | null`       | `null`      | Accessible label for the badge, used when screen reader support is needed                                                                                                     |
+| `pill`       | `boolean`             | `false`     | Whether the badge is a pill shape (fully rounded)                                                                                                                             |
+| `pulse`      | `boolean`             | `false`     | When true, the dot badge pulses with a subtle animation to draw attention. Automatically suppressed when `prefers-reduced-motion` is active. Only meaningful when `dot=true`. |
+| `size`       | `BadgeSize`           | `'md'`      | Size of the badge                                                                                                                                                             |
+| `styleClass` | `string | null`       | `null`      | Additional CSS classes applied to the host element.                                                                                                                           |
+| `variant`    | `BadgeVariant | null` | `null`      | Visual variant of the badge                                                                                                                                                   |
 
 ### Outputs
 
@@ -55,30 +57,31 @@ _none_
 | `--uilib-badge-padding-x-resolved`    | `calc( var(--uilib-badge-padding-x-base) * var(--uilib-density, 1) )` |
 | `--uilib-badge-padding-y-base`        | `0.25rem`                                                             |
 | `--uilib-badge-padding-y-resolved`    | `calc( var(--uilib-badge-padding-y-base) * var(--uilib-density, 1) )` |
+| `--uilib-badge-pulse-duration`        | `0ms`                                                                 |
+| `--uilib-badge-pulse-spread`          | `4px`                                                                 |
 | `--uilib-badge-radius-resolved`       | `var(--uilib-badge-radius, var(--uilib-shape-base, 6px))`             |
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
-| Test description                                                        |
-| ----------------------------------------------------------------------- |
-| applies dark theme variables                                            |
-| does not set a live role for non-dot badges                             |
-| falls back to color as aria-label for dot badges without explicit label |
-| has no axe violations in decorative state                               |
-| has no axe violations in default state                                  |
-| has no axe violations in informative dot status state                   |
-| is not keyboard-focusable by default                                    |
-| marks decorative badges as aria-hidden                                  |
-| passes through explicit aria-label for informational badges             |
-| sets aria attributes for dot badges                                     |
-| sets aria-hidden for decorative badges                                  |
-| uses outline variant styles                                             |
-| uses solid variant styles by default                                    |
-| uses subtle variant styles                                              |
+| Test description                                            |
+| ----------------------------------------------------------- |
+| applies dark theme variables                                |
+| does not set a live role for non-dot badges                 |
+| has no axe violations in decorative state                   |
+| has no axe violations in default state                      |
+| has no axe violations in informative dot status state       |
+| is not keyboard-focusable by default                        |
+| marks decorative badges as aria-hidden                      |
+| passes through explicit aria-label for informational badges |
+| sets aria attributes for dot badges                         |
+| sets aria-hidden for decorative badges                      |
+| uses outline variant styles                                 |
+| uses solid variant styles by default                        |
+| uses subtle variant styles                                  |
 
 ## Usage Examples
 
@@ -89,8 +92,14 @@ _none_
 <!-- Dot status indicator -->
 <ui-lib-badge color="danger" [dot]="true" label="Error status" />
 
+<!-- Pulsing dot — live status, e.g. "online" indicator -->
+<ui-lib-badge color="success" [dot]="true" [pulse]="true" label="Online" />
+
 <!-- Decorative badge (ignored by assistive technology) -->
 <ui-lib-badge [dot]="true" [decorative]="true" />
+
+<!-- Extra CSS class -->
+<ui-lib-badge color="info" styleClass="my-custom-badge">Beta</ui-lib-badge>
 ```
 
 ## Related

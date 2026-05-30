@@ -13,10 +13,11 @@ Opt-in only: focus runs only when you explicitly add `uiLibAutoFocus` to an elem
 
 ### Inputs
 
-| Name       | Type            | Default | Description                                                              |
-| ---------- | --------------- | ------- | ------------------------------------------------------------------------ |
-| `disabled` | `boolean`       | `false` | When `true`, autofocus is skipped.                                       |
-| `selector` | `string | null` | `null`  | Optional CSS selector used to focus a child element instead of the host. |
+| Name       | Type            | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ---------- | --------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `delay`    | `number`        | `0`     | Additional delay in milliseconds before the focus is applied. Useful when the host element is inside an animated container (modal, drawer, dropdown) that needs time to complete its opening animation before the browser will scroll the focused element into view correctly. When `0` (default) focus is deferred by one `requestAnimationFrame` tick — sufficient for most static-mount scenarios. When positive, a `setTimeout` is used instead and the pending timer is cleared if the directive is destroyed before it fires. |
+| `disabled` | `boolean`       | `false` | When `true`, autofocus is skipped.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `selector` | `string | null` | `null`  | Optional CSS selector used to focus a child element instead of the host.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 ### Outputs
 
@@ -32,7 +33,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

@@ -31,15 +31,17 @@ _none_
 
 ## Theming
 
-| CSS Variable                           | Default                                    |
-| -------------------------------------- | ------------------------------------------ |
-| `--uilib-icon-button-disabled-opacity` | `0.5`                                      |
-| `--uilib-icon-button-min-target-size`  | `2.75rem`                                  |
-| `--uilib-icon-button-size`             | `var(--uilib-icon-button-min-target-size)` |
+| CSS Variable                            | Default                                                               |
+| --------------------------------------- | --------------------------------------------------------------------- |
+| `--uilib-icon-button-disabled-opacity`  | `0.5`                                                                 |
+| `--uilib-icon-button-loading-animation` | `ui-lib-icon-button-spin 1s linear infinite`                          |
+| `--uilib-icon-button-min-target-size`   | `2.75rem`                                                             |
+| `--uilib-icon-button-size`              | `var(--uilib-icon-button-min-target-size)`                            |
+| `--uilib-icon-button-transition`        | `color 150ms ease, background-color 150ms ease, transform 120ms ease` |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/button/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

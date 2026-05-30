@@ -40,7 +40,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -66,17 +66,7 @@ _No component-level CSS variables detected._
 
 ## Usage Examples
 
-```html
-<!-- Toggle a CSS class on a target element -->
-<ui-lib-button
-  uiLibStyleClass="sidebar--open"
-  [styleClassTarget]="sidebar"
->
-  Toggle Sidebar
-</ui-lib-button>
-
-<aside #sidebar class="sidebar">…</aside>
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

@@ -13,17 +13,17 @@ ImageCompare component — renders two images with a draggable slider divider so
 
 ### Inputs
 
-| Name         | Type                         | Default                    | Description                                                 |
-| ------------ | ---------------------------- | -------------------------- | ----------------------------------------------------------- |
-| `ariaLabel`  | `string`                     | `IMAGE_COMPARE_ARIA_LABEL` | Accessible label for the slider handle.                     |
-| `disabled`   | `boolean`                    | `false`                    | When true, pointer interaction is disabled.                 |
-| `leftAlt`    | `string`                     | `''`                       | Accessible alt text for the left image.                     |
-| `leftImage`  | `string`                     | `''`                       | URL of the left (before) image.                             |
-| `rightAlt`   | `string`                     | `''`                       | Accessible alt text for the right image.                    |
-| `rightImage` | `string`                     | `''`                       | URL of the right (after) image.                             |
-| `size`       | `ImageCompareSize`           | `'md'`                     | Component size token.                                       |
-| `styleClass` | `string | null`              | `null`                     | Additional CSS class(es) applied to the host element.       |
-| `variant`    | `ImageCompareVariant | null` | `null`                     | Design variant; inherits from ThemeConfigService when null. |
+| Name         | Type                         | Default | Description                                                          |
+| ------------ | ---------------------------- | ------- | -------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null`              | `null`  | Accessible label for the slider handle; uses i18n default when null. |
+| `disabled`   | `boolean`                    | `false` | When true, pointer interaction is disabled.                          |
+| `leftAlt`    | `string`                     | `''`    | Accessible alt text for the left image.                              |
+| `leftImage`  | `string`                     | `''`    | URL of the left (before) image.                                      |
+| `rightAlt`   | `string`                     | `''`    | Accessible alt text for the right image.                             |
+| `rightImage` | `string`                     | `''`    | URL of the right (after) image.                                      |
+| `size`       | `ImageCompareSize`           | `'md'`  | Component size token.                                                |
+| `styleClass` | `string | null`              | `null`  | Additional CSS class(es) applied to the host element.                |
+| `variant`    | `ImageCompareVariant | null` | `null`  | Design variant; inherits from ThemeConfigService when null.          |
 
 ### Models (two-way bindable)
 
@@ -62,7 +62,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

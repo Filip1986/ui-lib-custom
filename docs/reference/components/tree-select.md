@@ -13,24 +13,24 @@ TreeSelect renders a hierarchical tree structure inside a dropdown panel, allowi
 
 ### Inputs
 
-| Name                | Type                       | Default                                  | Description                                                                   |
-| ------------------- | -------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------- |
-| `ariaLabel`         | `string | null`            | `null`                                   | ARIA label for the trigger.                                                   |
-| `ariaLabelledBy`    | `string | null`            | `null`                                   | References an external element that labels this component.                    |
-| `disabled`          | `boolean`                  | `false`                                  | When `true`, the component is non-interactive.                                |
-| `emptyMessage`      | `string`                   | `TREE_SELECT_DEFAULTS.emptyMessage`      | Message shown when the node list is empty.                                    |
-| `filter`            | `boolean`                  | `false`                                  | When `true`, a filter input is rendered inside the panel.                     |
-| `filterPlaceholder` | `string`                   | `TREE_SELECT_DEFAULTS.filterPlaceholder` | Placeholder for the filter input inside the panel.                            |
-| `invalid`           | `boolean`                  | `false`                                  | When `true`, applies the invalid visual state and `aria-invalid`.             |
-| `loading`           | `boolean`                  | `false`                                  | When `true`, a loading spinner is shown and the component is non-interactive. |
-| `nodes`             | `TreeNode[]`               | `[]`                                     | Root-level tree nodes to display in the panel.                                |
-| `placeholder`       | `string`                   | `TREE_SELECT_DEFAULTS.placeholder`       | Placeholder text shown when no node is selected.                              |
-| `required`          | `boolean`                  | `false`                                  | When `true`, sets `aria-required`.                                            |
-| `selectionMode`     | `TreeSelectSelectionMode`  | `'single'`                               | Controls how nodes respond to user interaction.                               |
-| `showClear`         | `boolean`                  | `false`                                  | When `true`, shows a clear button when a value is selected.                   |
-| `size`              | `TreeSelectSize`           | `'md'`                                   | Size of the trigger element.                                                  |
-| `styleClass`        | `string`                   | `''`                                     | Extra CSS class applied to the host element.                                  |
-| `variant`           | `TreeSelectVariant | null` | `null`                                   | Design variant. Falls back to ThemeConfigService when `null`.                 |
+| Name                | Type                       | Default    | Description                                                                   |
+| ------------------- | -------------------------- | ---------- | ----------------------------------------------------------------------------- |
+| `ariaLabel`         | `string | null`            | `null`     | ARIA label for the trigger.                                                   |
+| `ariaLabelledBy`    | `string | null`            | `null`     | References an external element that labels this component.                    |
+| `disabled`          | `boolean`                  | `false`    | When `true`, the component is non-interactive.                                |
+| `emptyMessage`      | `string | null`            | `null`     | Message shown when the node list is empty.                                    |
+| `filter`            | `boolean`                  | `false`    | When `true`, a filter input is rendered inside the panel.                     |
+| `filterPlaceholder` | `string | null`            | `null`     | Placeholder for the filter input inside the panel.                            |
+| `invalid`           | `boolean`                  | `false`    | When `true`, applies the invalid visual state and `aria-invalid`.             |
+| `loading`           | `boolean`                  | `false`    | When `true`, a loading spinner is shown and the component is non-interactive. |
+| `nodes`             | `TreeNode[]`               | `[]`       | Root-level tree nodes to display in the panel.                                |
+| `placeholder`       | `string | null`            | `null`     | Placeholder text shown when no node is selected.                              |
+| `required`          | `boolean`                  | `false`    | When `true`, sets `aria-required`.                                            |
+| `selectionMode`     | `TreeSelectSelectionMode`  | `'single'` | Controls how nodes respond to user interaction.                               |
+| `showClear`         | `boolean`                  | `false`    | When `true`, shows a clear button when a value is selected.                   |
+| `size`              | `TreeSelectSize`           | `'md'`     | Size of the trigger element.                                                  |
+| `styleClass`        | `string | null`            | `null`     | Extra CSS class applied to the host element.                                  |
+| `variant`           | `TreeSelectVariant | null` | `null`     | Design variant. Falls back to ThemeConfigService when `null`.                 |
 
 ### Models (two-way bindable)
 
@@ -58,26 +58,32 @@ _none_
 
 ## Theming
 
-| CSS Variable                                | Default                               |
-| ------------------------------------------- | ------------------------------------- |
-| `--uilib-tree-select-chevron-font-size`     | `0.8rem`                              |
-| `--uilib-tree-select-clear-font-size`       | `1.1em`                               |
-| `--uilib-tree-select-font-size`             | `var(--uilib-font-size-md, 1rem)`     |
-| `--uilib-tree-select-font-size-lg`          | `var(--uilib-font-size-lg, 1.125rem)` |
-| `--uilib-tree-select-font-size-sm`          | `var(--uilib-font-size-sm, 0.875rem)` |
-| `--uilib-tree-select-panel-max-height`      | `320px`                               |
-| `--uilib-tree-select-panel-radius`          | `var(--uilib-radius-md, 4px)`         |
-| `--uilib-tree-select-panel-z-index`         | `var(--uilib-z-overlay, 100)`         |
-| `--uilib-tree-select-trigger-min-height-lg` | `48px`                                |
-| `--uilib-tree-select-trigger-min-height-md` | `40px`                                |
-| `--uilib-tree-select-trigger-min-height-sm` | `32px`                                |
-| `--uilib-tree-select-trigger-padding-x`     | `0.5rem`                              |
-| `--uilib-tree-select-trigger-padding-y`     | `0.35rem`                             |
-| `--uilib-tree-select-trigger-radius`        | `var(--uilib-radius-md, 4px)`         |
+| CSS Variable                                | Default                                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------------------- |
+| `--uilib-tree-select-chevron-font-size`     | `0.8rem`                                                                        |
+| `--uilib-tree-select-clear-focus-radius`    | `var(--uilib-radius-sm, 2px)`                                                   |
+| `--uilib-tree-select-clear-font-size`       | `1.1em`                                                                         |
+| `--uilib-tree-select-focus-shadow`          | `0 0 0 3px color-mix(in srgb, var(--uilib-color-primary-500) 20%, transparent)` |
+| `--uilib-tree-select-font-size`             | `var(--uilib-font-size-md, 1rem)`                                               |
+| `--uilib-tree-select-font-size-lg`          | `var(--uilib-font-size-lg, 1.125rem)`                                           |
+| `--uilib-tree-select-font-size-sm`          | `var(--uilib-font-size-sm, 0.875rem)`                                           |
+| `--uilib-tree-select-panel-animation`       | `uilib-tree-select-panel-enter 0.15s ease`                                      |
+| `--uilib-tree-select-panel-max-height`      | `320px`                                                                         |
+| `--uilib-tree-select-panel-radius`          | `var(--uilib-radius-md, 4px)`                                                   |
+| `--uilib-tree-select-panel-z-index`         | `var(--uilib-z-overlay, 100)`                                                   |
+| `--uilib-tree-select-spinner-animation`     | `uilib-tree-select-spin 0.8s linear infinite`                                   |
+| `--uilib-tree-select-spinner-border-radius` | `var(--uilib-radius-full, 9999px)`                                              |
+| `--uilib-tree-select-transition`            | `var(--uilib-transition-fast, 150ms ease)`                                      |
+| `--uilib-tree-select-trigger-min-height-lg` | `48px`                                                                          |
+| `--uilib-tree-select-trigger-min-height-md` | `40px`                                                                          |
+| `--uilib-tree-select-trigger-min-height-sm` | `32px`                                                                          |
+| `--uilib-tree-select-trigger-padding-x`     | `0.5rem`                                                                        |
+| `--uilib-tree-select-trigger-padding-y`     | `0.35rem`                                                                       |
+| `--uilib-tree-select-trigger-radius`        | `var(--uilib-radius-md, 4px)`                                                   |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

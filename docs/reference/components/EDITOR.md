@@ -62,7 +62,7 @@ Native rich text editor with default toolbar and content projection support.
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

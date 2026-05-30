@@ -13,19 +13,20 @@ Tree renders a hierarchical data structure with expand/collapse, three selection
 
 ### Inputs
 
-| Name                | Type                 | Default       | Description                                                                                                                                         |
-| ------------------- | -------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`         | `string`             | `''`          | Accessible label for the tree widget. Used as `aria-label` on the host.                                                                             |
-| `filter`            | `boolean`            | `false`       | When `true`, a filter input is rendered above the tree.                                                                                             |
-| `filterBy`          | `string`             | `'label'`     | Property on TreeNode to search when filtering. Default `'label'`.                                                                                   |
-| `filterMode`        | `TreeFilterMode`     | `'lenient'`   | Filter matching strategy. `'lenient'` (default): a node is visible if it or any descendant matches. `'strict'`: only exact-match nodes are visible. |
-| `filterPlaceholder` | `string`             | `'Search...'` | Placeholder text for the filter input.                                                                                                              |
-| `hostId`            | `string | null`      | `null`        | Optional explicit host id. Falls back to the generated instance id.                                                                                 |
-| `selectionMode`     | `TreeSelectionMode`  | `null`        | How nodes respond to click/checkbox interactions.                                                                                                   |
-| `size`              | `TreeSize`           | `'md'`        | Size of node rows.                                                                                                                                  |
-| `styleClass`        | `string`             | `''`          | Extra CSS class applied to the host element.                                                                                                        |
-| `value`             | `TreeNode[]`         | `[]`          | Root-level nodes of the tree.                                                                                                                       |
-| `variant`           | `TreeVariant | null` | `null`        | Design variant. Falls back to ThemeConfigService when `null`.                                                                                       |
+| Name                | Type                 | Default     | Description                                                                                                                                         |
+| ------------------- | -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`         | `string | null`      | `null`      | Accessible label for the tree widget. Used as `aria-label` on the host.                                                                             |
+| `emptyMessage`      | `string | null`      | `null`      | Override the empty-state message. Falls back to the i18n `tree.empty` string when null.                                                             |
+| `filter`            | `boolean`            | `false`     | When `true`, a filter input is rendered above the tree.                                                                                             |
+| `filterBy`          | `string`             | `'label'`   | Property on TreeNode to search when filtering. Default `'label'`.                                                                                   |
+| `filterMode`        | `TreeFilterMode`     | `'lenient'` | Filter matching strategy. `'lenient'` (default): a node is visible if it or any descendant matches. `'strict'`: only exact-match nodes are visible. |
+| `filterPlaceholder` | `string | null`      | `null`      | Placeholder text for the filter input.                                                                                                              |
+| `hostId`            | `string | null`      | `null`      | Optional explicit host id. Falls back to the generated instance id.                                                                                 |
+| `selectionMode`     | `TreeSelectionMode`  | `null`      | How nodes respond to click/checkbox interactions.                                                                                                   |
+| `size`              | `TreeSize`           | `'md'`      | Size of node rows.                                                                                                                                  |
+| `styleClass`        | `string | null`      | `null`      | Extra CSS class applied to the host element.                                                                                                        |
+| `value`             | `TreeNode[]`         | `[]`        | Root-level nodes of the tree.                                                                                                                       |
+| `variant`           | `TreeVariant | null` | `null`      | Design variant. Falls back to ThemeConfigService when `null`.                                                                                       |
 
 ### Models (two-way bindable)
 
@@ -54,6 +55,7 @@ _none_
 | `--uilib-tree-checkbox-bg-checked`     | `var(--uilib-color-primary, #1976d2)`                   |
 | `--uilib-tree-checkbox-border`         | `2px solid var(--uilib-color-border, #bdbdbd)`          |
 | `--uilib-tree-checkbox-border-checked` | `2px solid var(--uilib-color-primary, #1976d2)`         |
+| `--uilib-tree-checkbox-border-radius`  | `var(--uilib-radius-sm, 3px)`                           |
 | `--uilib-tree-checkbox-color-checked`  | `#ffffff`                                               |
 | `--uilib-tree-checkbox-size`           | `1rem`                                                  |
 | `--uilib-tree-connector-color`         | `var(--uilib-color-border, #e0e0e0)`                    |
@@ -76,14 +78,17 @@ _none_
 | `--uilib-tree-node-icon-font-size`     | `0.875em`                                               |
 | `--uilib-tree-node-padding-x`          | `0.5rem`                                                |
 | `--uilib-tree-node-padding-y`          | `0.375rem`                                              |
+| `--uilib-tree-node-selection-shadow`   | `none`                                                  |
 | `--uilib-tree-row-gap`                 | `2px`                                                   |
 | `--uilib-tree-toggle-bg-hover`         | `var(--uilib-color-surface-hover, rgba(0, 0, 0, 0.08))` |
+| `--uilib-tree-toggle-border-radius`    | `var(--uilib-radius-full, 9999px)`                      |
 | `--uilib-tree-toggle-color`            | `var(--uilib-color-text-secondary, #616161)`            |
 | `--uilib-tree-toggle-size`             | `1.25rem`                                               |
+| `--uilib-tree-transition`              | `var(--uilib-transition-fast, 150ms ease)`              |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -147,6 +152,20 @@ _none_
 <!-- checkbox tree with filter -->
 <ui-lib-tree [value]="nodes" selectionMode="checkbox" ariaLabel="Select files" [(selection)]="checked" [filter]="true">
   <ng-template uiTreeNode let-node>{{ node.label }}</ng-template>
+</ui-lib-tree>
+
+<!-- custom empty-state message -->
+<ui-lib-tree [value]="[]" emptyMessage="No matching results found." ariaLabel="Search results">
+</ui-lib-tree>
+
+<!-- per-type node templates (falls back to 'default' template for unrecognised types) -->
+<ui-lib-tree [value]="nodes" selectionMode="single" ariaLabel="Document tree" [(selection)]="selected">
+  <ng-template uiTreeNode type="folder" let-node>
+    <span class="icon-folder">{{ node.label }}</span>
+  </ng-template>
+  <ng-template uiTreeNode type="default" let-node>
+    <span class="icon-file">{{ node.label }}</span>
+  </ng-template>
 </ui-lib-tree>
 ```
 

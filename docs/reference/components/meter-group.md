@@ -13,18 +13,18 @@ MeterGroup — segmented progress/meter bar component. Renders multiple coloured
 
 ### Inputs
 
-| Name            | Type                       | Default         | Description                                                                                 |
-| --------------- | -------------------------- | --------------- | ------------------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string`                   | `'Meter group'` | Accessible label for the meter container group.                                             |
-| `labelPosition` | `MeterGroupLabelPosition`  | `'end'`         | Position of the legend relative to the bar (`'start'` = above/left, `'end'` = below/right). |
-| `max`           | `number`                   | `100`           | Maximum value of the range (default `100`).                                                 |
-| `min`           | `number`                   | `0`             | Minimum value of the range (default `0`).                                                   |
-| `orientation`   | `MeterGroupOrientation`    | `'horizontal'`  | Bar orientation.                                                                            |
-| `showLabels`    | `boolean`                  | `true`          | Whether to render the legend.                                                               |
-| `size`          | `MeterGroupSize`           | `'md'`          | Component size token.                                                                       |
-| `styleClass`    | `string | null`            | `null`          | Additional CSS classes to attach to the host element.                                       |
-| `values`        | `MeterItem[]`              | `[]`            | Array of meter segments to render.                                                          |
-| `variant`       | `MeterGroupVariant | null` | `null`          | Visual variant — inherits from ThemeConfigService when not set.                             |
+| Name            | Type                       | Default        | Description                                                                                       |
+| --------------- | -------------------------- | -------------- | ------------------------------------------------------------------------------------------------- |
+| `ariaLabel`     | `string | null`            | `null`         | Accessible label for the meter container group. Falls back to i18n `meter-group.label` when null. |
+| `labelPosition` | `MeterGroupLabelPosition`  | `'end'`        | Position of the legend relative to the bar (`'start'` = above/left, `'end'` = below/right).       |
+| `max`           | `number`                   | `100`          | Maximum value of the range (default `100`).                                                       |
+| `min`           | `number`                   | `0`            | Minimum value of the range (default `0`).                                                         |
+| `orientation`   | `MeterGroupOrientation`    | `'horizontal'` | Bar orientation.                                                                                  |
+| `showLabels`    | `boolean`                  | `true`         | Whether to render the legend.                                                                     |
+| `size`          | `MeterGroupSize`           | `'md'`         | Component size token.                                                                             |
+| `styleClass`    | `string | null`            | `null`         | Additional CSS classes to attach to the host element.                                             |
+| `values`        | `MeterItem[]`              | `[]`           | Array of meter segments to render.                                                                |
+| `variant`       | `MeterGroupVariant | null` | `null`         | Visual variant — inherits from ThemeConfigService when not set.                                   |
 
 ### Outputs
 
@@ -49,6 +49,8 @@ _none_
 | `--uilib-meter-group-label-gap`            | `0.75rem`                             |
 | `--uilib-meter-group-label-item-gap`       | `0.375rem`                            |
 | `--uilib-meter-group-label-value-color`    | `var(--uilib-surface-500, #6b7280)`   |
+| `--uilib-meter-group-labels-col-gap`       | `1.25rem`                             |
+| `--uilib-meter-group-labels-row-gap`       | `0.5rem`                              |
 | `--uilib-meter-group-segment-gap`          | `2px`                                 |
 | `--uilib-meter-group-swatch-border-radius` | `var(--uilib-radius-sm, 0.25rem)`     |
 | `--uilib-meter-group-swatch-fg`            | `var(--uilib-color-neutral-50, #fff)` |
@@ -61,7 +63,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

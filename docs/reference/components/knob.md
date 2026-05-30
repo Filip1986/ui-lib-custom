@@ -15,7 +15,7 @@ Knob — a circular dial form control for selecting a numeric value. Supports dr
 
 | Name            | Type                 | Default                            | Description                                                                                                               |
 | --------------- | -------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string | undefined` | `undefined`                        | Accessible label for the dial element.                                                                                    |
+| `ariaLabel`     | `string | null`      | `null`                             | Accessible label for the dial element. Falls back to i18n `knob.dial` when null.                                          |
 | `disabled`      | `boolean`            | `KNOB_DEFAULTS.disabled`           | Whether the knob is disabled.                                                                                             |
 | `inputId`       | `string`             | ``ui-lib-knob-${++knobIdCounter}`` | Unique HTML id forwarded to the SVG element.                                                                              |
 | `max`           | `number`             | `KNOB_DEFAULTS.max`                | Maximum allowed value.                                                                                                    |
@@ -25,6 +25,7 @@ Knob — a circular dial form control for selecting a numeric value. Supports dr
 | `size`          | `KnobSize`           | `KNOB_DEFAULTS.size`               | Component size token.                                                                                                     |
 | `step`          | `number`             | `KNOB_DEFAULTS.step`               | Increment/decrement step for keyboard interaction and drag snapping.                                                      |
 | `strokeWidth`   | `number`             | `KNOB_DEFAULTS.strokeWidth`        | Width of the SVG arc stroke in SVG user-unit coordinates.                                                                 |
+| `styleClass`    | `string | null`      | `null`                             | Additional CSS classes applied to the host element.                                                                       |
 | `tabindex`      | `number`             | `KNOB_DEFAULTS.tabindex`           | Tab index for keyboard focus.                                                                                             |
 | `textColor`     | `string | null`      | `null`                             | Inline color override for the center value text label. Accepts any CSS color.                                             |
 | `valueColor`    | `string | null`      | `null`                             | Inline color override for the value (range) arc stroke. Accepts any CSS color.                                            |
@@ -51,24 +52,25 @@ _none_
 
 ## Theming
 
-| CSS Variable                       | Default                    |
-| ---------------------------------- | -------------------------- |
-| `--uilib-knob-disabled-opacity`    | `0.5`                      |
-| `--uilib-knob-focus-ring-color`    | `rgba(99, 102, 241, 0.35)` |
-| `--uilib-knob-focus-ring-width`    | `3px`                      |
-| `--uilib-knob-range-color`         | `#6366f1`                  |
-| `--uilib-knob-size-lg`             | `160px`                    |
-| `--uilib-knob-size-md`             | `120px`                    |
-| `--uilib-knob-size-sm`             | `80px`                     |
-| `--uilib-knob-text-color`          | `#1f2937`                  |
-| `--uilib-knob-text-size`           | `1.25rem`                  |
-| `--uilib-knob-text-weight`         | `600`                      |
-| `--uilib-knob-track-color`         | `#e0e0e0`                  |
-| `--uilib-knob-transition-duration` | `0.15s`                    |
+| CSS Variable                       | Default                                        |
+| ---------------------------------- | ---------------------------------------------- |
+| `--uilib-knob-disabled-opacity`    | `0.5`                                          |
+| `--uilib-knob-focus-ring-color`    | `rgba(99, 102, 241, 0.35)`                     |
+| `--uilib-knob-focus-ring-offset`   | `2px`                                          |
+| `--uilib-knob-focus-ring-width`    | `3px`                                          |
+| `--uilib-knob-range-color`         | `#6366f1`                                      |
+| `--uilib-knob-size-lg`             | `160px`                                        |
+| `--uilib-knob-size-md`             | `120px`                                        |
+| `--uilib-knob-size-sm`             | `80px`                                         |
+| `--uilib-knob-text-color`          | `#1f2937`                                      |
+| `--uilib-knob-text-size`           | `1.25rem`                                      |
+| `--uilib-knob-text-weight`         | `600`                                          |
+| `--uilib-knob-track-color`         | `#e0e0e0`                                      |
+| `--uilib-knob-transition-duration` | `var(--uilib-transition-duration-fast, 0.15s)` |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/slider/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

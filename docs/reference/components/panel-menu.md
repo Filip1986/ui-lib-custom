@@ -13,14 +13,14 @@ PanelMenu — a vertical, accordion-style navigation menu driven by a `model` ar
 
 ### Inputs
 
-| Name         | Type                      | Default                         | Description                                                                                                                        |
-| ------------ | ------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                  | `PANEL_MENU_DEFAULT_ARIA_LABEL` | Accessible label applied to the root container (aria-label).                                                                       |
-| `model`      | `PanelMenuItem[]`         | `[]`                            | Array of root-level items.                                                                                                         |
-| `multiple`   | `boolean`                 | `false`                         | When `true`, multiple root panels can be expanded simultaneously. When `false` (default) expanding one panel collapses all others. |
-| `size`       | `PanelMenuSize`           | `'md'`                          | Size token: sm | md | lg.                                                                                                          |
-| `styleClass` | `string | null`           | `null`                          | Extra CSS class appended to the host element.                                                                                      |
-| `variant`    | `PanelMenuVariant | null` | `null`                          | Design-system variant; falls back to ThemeConfigService when null.                                                                 |
+| Name         | Type                      | Default | Description                                                                                                                        |
+| ------------ | ------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`  | `string | null`           | `null`  | Accessible label applied to the root container (`aria-label`). Defaults to the i18n `panel-menu.aria-label` key when not provided. |
+| `model`      | `PanelMenuItem[]`         | `[]`    | Array of root-level items.                                                                                                         |
+| `multiple`   | `boolean`                 | `false` | When `true`, multiple root panels can be expanded simultaneously. When `false` (default) expanding one panel collapses all others. |
+| `size`       | `PanelMenuSize`           | `'md'`  | Size token: sm | md | lg.                                                                                                          |
+| `styleClass` | `string | null`           | `null`  | Extra CSS class appended to the host element.                                                                                      |
+| `variant`    | `PanelMenuVariant | null` | `null`  | Design-system variant; falls back to ThemeConfigService when null.                                                                 |
 
 ### Outputs
 
@@ -70,7 +70,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

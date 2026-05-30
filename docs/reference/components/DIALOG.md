@@ -56,37 +56,39 @@ Dialog component with modal/backdrop and responsive behavior.
 
 ## Theming
 
-| CSS Variable                             | Default                                                             |
-| ---------------------------------------- | ------------------------------------------------------------------- |
-| `--uilib-dialog-action-hover-material`   | `var(--uilib-surface-dark-3)`                                       |
-| `--uilib-dialog-backdrop-enter-duration` | `150ms`                                                             |
-| `--uilib-dialog-backdrop-enter-easing`   | `ease-out`                                                          |
-| `--uilib-dialog-bg`                      | `var(--uilib-surface)`                                              |
-| `--uilib-dialog-border`                  | `0 solid transparent`                                               |
-| `--uilib-dialog-border-bootstrap`        | `var(--uilib-border-dark)`                                          |
-| `--uilib-dialog-border-minimal`          | `var(--uilib-border-dark)`                                          |
-| `--uilib-dialog-border-radius`           | `var(--uilib-radius-lg, var(--uilib-shape-base))`                   |
-| `--uilib-dialog-close-btn-color`         | `var(--uilib-muted)`                                                |
-| `--uilib-dialog-close-btn-hover-bg`      | `var(--uilib-surface-alt)`                                          |
-| `--uilib-dialog-close-btn-size`          | `2rem`                                                              |
-| `--uilib-dialog-content-padding`         | `var(--uilib-space-5, 1.25rem)`                                     |
-| `--uilib-dialog-enter-duration`          | `200ms`                                                             |
-| `--uilib-dialog-enter-easing`            | `ease-out`                                                          |
-| `--uilib-dialog-enter-start-scale`       | `0.9`                                                               |
-| `--uilib-dialog-enter-start-translate-y` | `-8px`                                                              |
-| `--uilib-dialog-footer-border-top`       | `1px solid var(--uilib-border)`                                     |
-| `--uilib-dialog-footer-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`          |
-| `--uilib-dialog-header-bg`               | `var(--uilib-surface-alt)`                                          |
-| `--uilib-dialog-header-color`            | `var(--uilib-page-fg)`                                              |
-| `--uilib-dialog-header-font-size`        | `var(--uilib-font-size-lg)`                                         |
-| `--uilib-dialog-header-font-weight`      | `var(--uilib-font-weight-500, 500)`                                 |
-| `--uilib-dialog-header-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`          |
-| `--uilib-dialog-shadow`                  | `var(--uilib-dialog-shadow-material, var(--uilib-shadow-lg, none))` |
-| `--uilib-dialog-z-index`                 | `var(--uilib-z-modal, 1050)`                                        |
+| CSS Variable                             | Default                                                              |
+| ---------------------------------------- | -------------------------------------------------------------------- |
+| `--uilib-dialog-action-hover-material`   | `var(--uilib-surface-dark-3)`                                        |
+| `--uilib-dialog-backdrop-enter-duration` | `150ms`                                                              |
+| `--uilib-dialog-backdrop-enter-easing`   | `ease-out`                                                           |
+| `--uilib-dialog-bg`                      | `var(--uilib-surface)`                                               |
+| `--uilib-dialog-border`                  | `0 solid transparent`                                                |
+| `--uilib-dialog-border-bootstrap`        | `var(--uilib-border-dark)`                                           |
+| `--uilib-dialog-border-minimal`          | `var(--uilib-border-dark)`                                           |
+| `--uilib-dialog-border-radius`           | `var(--uilib-radius-lg, var(--uilib-shape-base))`                    |
+| `--uilib-dialog-close-btn-active-bg`     | `color-mix( in srgb, var(--uilib-muted, #6b7280) 18%, transparent )` |
+| `--uilib-dialog-close-btn-color`         | `var(--uilib-muted)`                                                 |
+| `--uilib-dialog-close-btn-hover-bg`      | `var(--uilib-surface-alt)`                                           |
+| `--uilib-dialog-close-btn-size`          | `2rem`                                                               |
+| `--uilib-dialog-close-btn-transition`    | `var(--uilib-transition-fast, 150ms ease)`                           |
+| `--uilib-dialog-content-padding`         | `var(--uilib-space-5, 1.25rem)`                                      |
+| `--uilib-dialog-enter-duration`          | `200ms`                                                              |
+| `--uilib-dialog-enter-easing`            | `ease-out`                                                           |
+| `--uilib-dialog-enter-start-scale`       | `0.9`                                                                |
+| `--uilib-dialog-enter-start-translate-y` | `-8px`                                                               |
+| `--uilib-dialog-footer-border-top`       | `1px solid var(--uilib-border)`                                      |
+| `--uilib-dialog-footer-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`           |
+| `--uilib-dialog-header-bg`               | `var(--uilib-surface-alt)`                                           |
+| `--uilib-dialog-header-color`            | `var(--uilib-page-fg)`                                               |
+| `--uilib-dialog-header-font-size`        | `var(--uilib-font-size-lg)`                                          |
+| `--uilib-dialog-header-font-weight`      | `var(--uilib-font-weight-500, 500)`                                  |
+| `--uilib-dialog-header-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)`           |
+| `--uilib-dialog-shadow`                  | `var(--uilib-dialog-shadow-material, var(--uilib-shadow-lg, none))`  |
+| `--uilib-dialog-z-index`                 | `var(--uilib-z-modal, 1050)`                                         |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -132,8 +134,8 @@ Dialog component with modal/backdrop and responsive behavior.
 <ui-lib-dialog [(visible)]="isOpen" [modal]="true" header="Confirm action">
   <p>Are you sure you want to continue?</p>
   <div uiLibDialogFooter>
-    <ui-lib-button label="Cancel" (click)="isOpen = false" />
-    <ui-lib-button label="Confirm" severity="primary" (click)="confirm()" />
+    <ui-lib-button label="Cancel" (buttonClick)="isOpen = false" />
+    <ui-lib-button label="Confirm" severity="primary" (buttonClick)="confirm()" />
   </div>
 </ui-lib-dialog>
 
@@ -141,6 +143,34 @@ Dialog component with modal/backdrop and responsive behavior.
 <ui-lib-dialog [(visible)]="isOpen" [modal]="true" [draggable]="true" [maximizable]="true">
   <span uiLibDialogHeader>My custom header</span>
   <p>Dialog body content.</p>
+</ui-lib-dialog>
+
+<!-- non-modal (no backdrop), positioned top-right, Bootstrap variant -->
+<ui-lib-dialog
+  [(visible)]="isOpen"
+  position="top-right"
+  variant="bootstrap"
+  header="Notification"
+>
+  <p>Your export is ready.</p>
+</ui-lib-dialog>
+
+<!-- headless — full control over panel rendering -->
+<ui-lib-dialog [(visible)]="isOpen" [headless]="true">
+  <div uiLibDialogHeadless class="my-custom-panel" role="dialog" aria-label="Custom dialog">
+    <p>Fully custom shell.</p>
+    <button (click)="isOpen = false">Close</button>
+  </div>
+</ui-lib-dialog>
+
+<!-- responsive width with breakpoints -->
+<ui-lib-dialog
+  [(visible)]="isOpen"
+  [modal]="true"
+  header="Settings"
+  [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+>
+  <p>Responsive content.</p>
 </ui-lib-dialog>
 ```
 

@@ -57,28 +57,29 @@ InputMask component with CVA integration and mask-aware keyboard handling.
 
 ## Theming
 
-| CSS Variable                              | Default                                                                                                 |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `--uilib-input-mask-bg`                   | `var(--uilib-surface, transparent)`                                                                     |
-| `--uilib-input-mask-border-color`         | `var(--uilib-border, currentColor)`                                                                     |
-| `--uilib-input-mask-border-radius`        | `var(--uilib-radius-md, 0.5rem)`                                                                        |
-| `--uilib-input-mask-clear-icon-size`      | `1rem`                                                                                                  |
-| `--uilib-input-mask-disabled-opacity`     | `0.6`                                                                                                   |
-| `--uilib-input-mask-error-color`          | `var(--uilib-color-danger-600, currentColor)`                                                           |
-| `--uilib-input-mask-filled-bg`            | `color-mix( in srgb, var(--uilib-input-mask-bg) 84%, var(--uilib-color-neutral-900, currentColor) 4% )` |
-| `--uilib-input-mask-focus-border-color`   | `var(--uilib-color-primary-600, currentColor)`                                                          |
-| `--uilib-input-mask-focus-ring`           | `0 0 0 0.1875rem color-mix(in srgb, var(--uilib-input-mask-focus-border-color) 28%, transparent)`       |
-| `--uilib-input-mask-font-size`            | `var(--uilib-font-size-base, 1rem)`                                                                     |
-| `--uilib-input-mask-icon-color`           | `var(--uilib-muted, currentColor)`                                                                      |
-| `--uilib-input-mask-invalid-border-color` | `var(--uilib-color-danger-600, currentColor)`                                                           |
-| `--uilib-input-mask-padding-x`            | `var(--uilib-space-3, 0.75rem)`                                                                         |
-| `--uilib-input-mask-padding-y`            | `var(--uilib-space-2, 0.5rem)`                                                                          |
-| `--uilib-input-mask-placeholder-color`    | `var(--uilib-muted, currentColor)`                                                                      |
-| `--uilib-input-mask-text-color`           | `var(--uilib-page-fg, currentColor)`                                                                    |
+| CSS Variable                              | Default                                                                                                                                                                 |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-input-mask-bg`                   | `var(--uilib-surface, transparent)`                                                                                                                                     |
+| `--uilib-input-mask-border-color`         | `var(--uilib-border, currentColor)`                                                                                                                                     |
+| `--uilib-input-mask-border-radius`        | `var(--uilib-radius-md, 0.5rem)`                                                                                                                                        |
+| `--uilib-input-mask-clear-icon-size`      | `1rem`                                                                                                                                                                  |
+| `--uilib-input-mask-disabled-opacity`     | `0.6`                                                                                                                                                                   |
+| `--uilib-input-mask-error-color`          | `var(--uilib-color-danger-600, currentColor)`                                                                                                                           |
+| `--uilib-input-mask-filled-bg`            | `color-mix( in srgb, var(--uilib-input-mask-bg) 84%, var(--uilib-color-neutral-900, currentColor) 4% )`                                                                 |
+| `--uilib-input-mask-focus-border-color`   | `var(--uilib-color-primary-600, currentColor)`                                                                                                                          |
+| `--uilib-input-mask-focus-ring`           | `0 0 0 0.1875rem color-mix(in srgb, var(--uilib-input-mask-focus-border-color) 28%, transparent)`                                                                       |
+| `--uilib-input-mask-font-size`            | `var(--uilib-font-size-base, 1rem)`                                                                                                                                     |
+| `--uilib-input-mask-icon-color`           | `var(--uilib-muted, currentColor)`                                                                                                                                      |
+| `--uilib-input-mask-invalid-border-color` | `var(--uilib-color-danger-600, currentColor)`                                                                                                                           |
+| `--uilib-input-mask-padding-x`            | `var(--uilib-space-3, 0.75rem)`                                                                                                                                         |
+| `--uilib-input-mask-padding-y`            | `var(--uilib-space-2, 0.5rem)`                                                                                                                                          |
+| `--uilib-input-mask-placeholder-color`    | `var(--uilib-muted, currentColor)`                                                                                                                                      |
+| `--uilib-input-mask-text-color`           | `var(--uilib-page-fg, currentColor)`                                                                                                                                    |
+| `--uilib-input-mask-transition`           | `border-color var(--uilib-transition-fast, 150ms ease), box-shadow var(--uilib-transition-fast, 150ms ease), background-color var(--uilib-transition-fast, 150ms ease)` |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

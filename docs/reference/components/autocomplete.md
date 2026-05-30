@@ -79,6 +79,7 @@ _none_
 | `--uilib-autocomplete-border`                  | `var(--uilib-input-border, var(--uilib-border))`                                                         |
 | `--uilib-autocomplete-border-focus`            | `var( --uilib-input-border-focus, var(--uilib-color-primary-600) )`                                      |
 | `--uilib-autocomplete-border-radius`           | `var(--uilib-input-radius, var(--uilib-shape-base, 6px))`                                                |
+| `--uilib-autocomplete-btn-min-size`            | `2.25rem`                                                                                                |
 | `--uilib-autocomplete-chip-bg`                 | `color-mix( in srgb, var(--uilib-color-primary-600) 12%, transparent )`                                  |
 | `--uilib-autocomplete-chip-border-radius`      | `999px`                                                                                                  |
 | `--uilib-autocomplete-chip-gap`                | `0.35rem`                                                                                                |
@@ -102,6 +103,7 @@ _none_
 | `--uilib-autocomplete-min-height`              | `var(--uilib-input-min-height, 44px)`                                                                    |
 | `--uilib-autocomplete-option-disabled-opacity` | `0.55`                                                                                                   |
 | `--uilib-autocomplete-option-hover-bg`         | `var( --uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent) )` |
+| `--uilib-autocomplete-option-min-height`       | `var(--uilib-autocomplete-min-height)`                                                                   |
 | `--uilib-autocomplete-option-padding`          | `var(--uilib-autocomplete-option-padding-y) var(--uilib-autocomplete-option-padding-x)`                  |
 | `--uilib-autocomplete-option-padding-x`        | `calc( var(--uilib-autocomplete-option-padding-x-base) * var(--uilib-density, 1) )`                      |
 | `--uilib-autocomplete-option-padding-x-base`   | `0.75rem`                                                                                                |
@@ -125,7 +127,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

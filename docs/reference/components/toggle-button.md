@@ -65,6 +65,7 @@ _none_
 | `--uilib-toggle-button-checked-bg-hover`  | `var(--uilib-color-primary-600, #4f46e5)`                                                   |
 | `--uilib-toggle-button-checked-border`    | `var(--uilib-color-primary-500, #6366f1)`                                                   |
 | `--uilib-toggle-button-checked-color`     | `var(--uilib-color-neutral-50, #f9fafb)`                                                    |
+| `--uilib-toggle-button-checked-shadow`    | `0 1px 3px 0 color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 40%, transparent)`  |
 | `--uilib-toggle-button-color`             | `var(--uilib-color-neutral-700, #374151)`                                                   |
 | `--uilib-toggle-button-focus-ring`        | `0 0 0 3px color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 35%, transparent)`    |
 | `--uilib-toggle-button-font`              | `var(--uilib-font-ui, inherit)`                                                             |
@@ -86,7 +87,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/button/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

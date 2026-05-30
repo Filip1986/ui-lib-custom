@@ -16,7 +16,7 @@ ProgressSpinner — an animated circular spinner indicating an indeterminate loa
 | Name                | Type                            | Default                                       | Description                                                                                                                                         |
 | ------------------- | ------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `animationDuration` | `string`                        | `PROGRESS_SPINNER_DEFAULTS.animationDuration` | Duration of one animation cycle (rotation + dash). Accepts any valid CSS `<time>` value, e.g. `'1s'`, `'750ms'`. Default: `'2s'`.                   |
-| `ariaLabel`         | `string`                        | `'Loading...'`                                | Accessible label announced to screen readers. Default: `'Loading...'`.                                                                              |
+| `ariaLabel`         | `string | null`                 | `null`                                        | Accessible label announced to screen readers. Falls back to the i18n `progress-spinner.label` key.                                                  |
 | `fill`              | `string`                        | `PROGRESS_SPINNER_DEFAULTS.fill`              | Fill color of the SVG circle. Accepts any CSS color string. Use `'none'` for a transparent interior. Default: `'none'`.                             |
 | `size`              | `ProgressSpinnerSize`           | `PROGRESS_SPINNER_DEFAULTS.size`              | Component size token (`'sm'` | `'md'` | `'lg'`). Default: `'md'`.                                                                                   |
 | `strokeWidth`       | `string`                        | `PROGRESS_SPINNER_DEFAULTS.strokeWidth`       | Width of the SVG circle stroke in SVG user-unit coordinates. Corresponds to the `stroke-width` attribute on the `<circle>` element. Default: `'2'`. |
@@ -41,7 +41,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -50,7 +50,7 @@ _none_
 | SVG has aria-hidden=                                        |
 | SVG has focusable=                                          |
 | host element has aria-busy=                                 |
-| host element has aria-label defaulting to                   |
+| host element has aria-label defaulting to the i18n fallback |
 | host element has role=                                      |
 | passes axe — custom ariaLabel                               |
 | passes axe — default state                                  |

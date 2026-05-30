@@ -55,29 +55,30 @@ Multi-line text input with optional auto-resize, character counter, floating-lab
 
 ## Theming
 
-| CSS Variable                        | Default                          |
-| ----------------------------------- | -------------------------------- |
-| `--uilib-textarea-bg`               | `var(--uilib-surface)`           |
-| `--uilib-textarea-border`           | `var(--uilib-border)`            |
-| `--uilib-textarea-border-error`     | `var(--uilib-color-danger-600)`  |
-| `--uilib-textarea-border-focus`     | `var(--uilib-color-primary-600)` |
-| `--uilib-textarea-counter-color`    | `var(--uilib-muted)`             |
-| `--uilib-textarea-disabled-opacity` | `0.6`                            |
-| `--uilib-textarea-error-color`      | `var(--uilib-color-danger-600)`  |
-| `--uilib-textarea-font-size`        | `1rem`                           |
-| `--uilib-textarea-hint-color`       | `var(--uilib-muted)`             |
-| `--uilib-textarea-label-color`      | `var(--uilib-page-fg)`           |
-| `--uilib-textarea-padding-x`        | `0.75rem`                        |
-| `--uilib-textarea-padding-y`        | `0.5rem`                         |
-| `--uilib-textarea-placeholder`      | `var(--uilib-muted)`             |
-| `--uilib-textarea-radius`           | `var(--uilib-shape-base, 6px)`   |
-| `--uilib-textarea-required-color`   | `var(--uilib-color-danger-600)`  |
-| `--uilib-textarea-resize-color`     | `var(--uilib-border)`            |
-| `--uilib-textarea-text`             | `var(--uilib-page-fg)`           |
+| CSS Variable                        | Default                                          |
+| ----------------------------------- | ------------------------------------------------ |
+| `--uilib-textarea-bg`               | `var(--uilib-surface)`                           |
+| `--uilib-textarea-border`           | `var(--uilib-border)`                            |
+| `--uilib-textarea-border-error`     | `var(--uilib-color-danger-600)`                  |
+| `--uilib-textarea-border-focus`     | `var(--uilib-color-primary-600)`                 |
+| `--uilib-textarea-counter-color`    | `var(--uilib-muted)`                             |
+| `--uilib-textarea-disabled-opacity` | `0.6`                                            |
+| `--uilib-textarea-error-color`      | `var(--uilib-color-danger-600)`                  |
+| `--uilib-textarea-font-size`        | `1rem`                                           |
+| `--uilib-textarea-hint-color`       | `var(--uilib-muted)`                             |
+| `--uilib-textarea-label-color`      | `var(--uilib-page-fg)`                           |
+| `--uilib-textarea-padding-x`        | `0.75rem`                                        |
+| `--uilib-textarea-padding-y`        | `0.5rem`                                         |
+| `--uilib-textarea-placeholder`      | `var(--uilib-muted)`                             |
+| `--uilib-textarea-radius`           | `var(--uilib-shape-base, 6px)`                   |
+| `--uilib-textarea-required-color`   | `var(--uilib-color-danger-600)`                  |
+| `--uilib-textarea-resize-color`     | `var(--uilib-border)`                            |
+| `--uilib-textarea-text`             | `var(--uilib-page-fg)`                           |
+| `--uilib-textarea-transition`       | `border-color 0.15s ease, box-shadow 0.15s ease` |
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

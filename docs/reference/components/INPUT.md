@@ -49,29 +49,30 @@ _none_
 
 ## Theming
 
-| CSS Variable                        | Default                                                             |
-| ----------------------------------- | ------------------------------------------------------------------- |
-| `--uilib-input-bg`                  | `var(--uilib-surface-dark-1)`                                       |
-| `--uilib-input-border`              | `var(--uilib-border-dark)`                                          |
-| `--uilib-input-border-focus`        | `var(--uilib-color-primary-dark)`                                   |
-| `--uilib-input-border-hover`        | `var(--uilib-border-dark-light)`                                    |
-| `--uilib-input-font-size-lg`        | `var(--uilib-font-size-lg, 1.125rem)`                               |
-| `--uilib-input-font-size-md`        | `var(--uilib-font-size-md, 1rem)`                                   |
-| `--uilib-input-font-size-sm`        | `var(--uilib-font-size-sm, 0.875rem)`                               |
-| `--uilib-input-label-bg`            | `var(--uilib-surface-dark-1)`                                       |
-| `--uilib-input-meta-font-size`      | `var(--uilib-font-size-sm, 0.875rem)`                               |
-| `--uilib-input-min-height`          | `36px`                                                              |
-| `--uilib-input-padding-x`           | `calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1))` |
-| `--uilib-input-padding-x-base`      | `0.75rem`                                                           |
-| `--uilib-input-padding-y`           | `calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1))` |
-| `--uilib-input-padding-y-base`      | `0.5rem`                                                            |
-| `--uilib-input-placeholder`         | `var(--uilib-text-dark-secondary)`                                  |
-| `--uilib-input-text`                | `var(--uilib-text-dark-primary)`                                    |
-| `--uilib-input-transition-duration` | `0ms`                                                               |
+| CSS Variable                     | Default                                                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `--uilib-input-bg`               | `var(--uilib-surface-dark-1)`                                                                                   |
+| `--uilib-input-border`           | `var(--uilib-border-dark)`                                                                                      |
+| `--uilib-input-border-focus`     | `var(--uilib-color-primary-dark)`                                                                               |
+| `--uilib-input-border-hover`     | `var(--uilib-border-dark-light)`                                                                                |
+| `--uilib-input-font-size-lg`     | `var(--uilib-font-size-lg, 1.125rem)`                                                                           |
+| `--uilib-input-font-size-md`     | `var(--uilib-font-size-md, 1rem)`                                                                               |
+| `--uilib-input-font-size-sm`     | `var(--uilib-font-size-sm, 0.875rem)`                                                                           |
+| `--uilib-input-label-bg`         | `var(--uilib-surface-dark-1)`                                                                                   |
+| `--uilib-input-label-transition` | `transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease, background-color 0.15s ease` |
+| `--uilib-input-meta-font-size`   | `var(--uilib-font-size-sm, 0.875rem)`                                                                           |
+| `--uilib-input-min-height`       | `36px`                                                                                                          |
+| `--uilib-input-padding-x`        | `calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1))`                                             |
+| `--uilib-input-padding-x-base`   | `0.75rem`                                                                                                       |
+| `--uilib-input-padding-y`        | `calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1))`                                             |
+| `--uilib-input-padding-y-base`   | `0.5rem`                                                                                                        |
+| `--uilib-input-placeholder`      | `var(--uilib-text-dark-secondary)`                                                                              |
+| `--uilib-input-text`             | `var(--uilib-text-dark-primary)`                                                                                |
+| `--uilib-input-transition`       | `border-color 0.15s ease, box-shadow 0.15s ease`                                                                |
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

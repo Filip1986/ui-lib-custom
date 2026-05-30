@@ -13,14 +13,14 @@ MegaMenu component — a horizontal (or vertical) navigation bar where top-level
 
 ### Inputs
 
-| Name          | Type                     | Default                        | Description                                                               |
-| ------------- | ------------------------ | ------------------------------ | ------------------------------------------------------------------------- |
-| `ariaLabel`   | `string`                 | `MEGA_MENU_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (aria-label on the `<nav>`). |
-| `model`       | `MegaMenuItem[]`         | `[]`                           | Array of top-level navigation items.                                      |
-| `orientation` | `MegaMenuOrientation`    | `'horizontal'`                 | Layout orientation of the navigation bar.                                 |
-| `size`        | `MegaMenuSize`           | `'md'`                         | Size token: sm | md | lg.                                                 |
-| `styleClass`  | `string | null`          | `null`                         | Extra CSS class appended to the host element.                             |
-| `variant`     | `MegaMenuVariant | null` | `null`                         | Design-system variant; falls back to ThemeConfigService when null.        |
+| Name          | Type                     | Default        | Description                                                                                                                                    |
+| ------------- | ------------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ariaLabel`   | `string | null`          | `null`         | Accessible label for the navigation landmark (`aria-label` on the `<nav>`). Defaults to the i18n `mega-menu.aria-label` key when not provided. |
+| `model`       | `MegaMenuItem[]`         | `[]`           | Array of top-level navigation items.                                                                                                           |
+| `orientation` | `MegaMenuOrientation`    | `'horizontal'` | Layout orientation of the navigation bar.                                                                                                      |
+| `size`        | `MegaMenuSize`           | `'md'`         | Size token: sm | md | lg.                                                                                                                      |
+| `styleClass`  | `string | null`          | `null`         | Extra CSS class appended to the host element.                                                                                                  |
+| `variant`     | `MegaMenuVariant | null` | `null`         | Design-system variant; falls back to ThemeConfigService when null.                                                                             |
 
 ### Outputs
 
@@ -83,7 +83,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

@@ -13,20 +13,20 @@ Image component with optional preview overlay, zoom, and rotation controls. When
 
 ### Inputs
 
-| Name         | Type                            | Default                    | Description                                                                            |
-| ------------ | ------------------------------- | -------------------------- | -------------------------------------------------------------------------------------- |
-| `alt`        | `string`                        | `''`                       | Accessible alt text for the image.                                                     |
-| `ariaLabel`  | `string`                        | `IMAGE_ARIA_PREVIEW_LABEL` | Accessible label for the preview button indicator.                                     |
-| `errorSrc`   | `string | null`                 | `null`                     | Fallback src displayed when the image fails to load and no error template is provided. |
-| `height`     | `string | null`                 | `null`                     | Height attribute passed to the underlying `<img>` element.                             |
-| `imageClass` | `string | null`                 | `null`                     | Extra CSS class(es) applied to the `<img>` element.                                    |
-| `imageStyle` | `Record<string, string> | null` | `null`                     | Inline style object applied to the `<img>` element.                                    |
-| `preview`    | `boolean`                       | `false`                    | When true, clicking the image opens a preview overlay.                                 |
-| `size`       | `ImageSize`                     | `'md'`                     | Component size token.                                                                  |
-| `src`        | `string`                        | `''`                       | URL of the image to display.                                                           |
-| `styleClass` | `string | null`                 | `null`                     | Additional CSS class(es) applied to the host element.                                  |
-| `variant`    | `ImageVariant | null`           | `null`                     | Design variant; inherits from ThemeConfigService when null.                            |
-| `width`      | `string | null`                 | `null`                     | Width attribute passed to the underlying `<img>` element.                              |
+| Name         | Type                            | Default | Description                                                                            |
+| ------------ | ------------------------------- | ------- | -------------------------------------------------------------------------------------- |
+| `alt`        | `string`                        | `''`    | Accessible alt text for the image.                                                     |
+| `ariaLabel`  | `string | null`                 | `null`  | Accessible label for the preview button indicator.                                     |
+| `errorSrc`   | `string | null`                 | `null`  | Fallback src displayed when the image fails to load and no error template is provided. |
+| `height`     | `string | null`                 | `null`  | Height attribute passed to the underlying `<img>` element.                             |
+| `imageClass` | `string | null`                 | `null`  | Extra CSS class(es) applied to the `<img>` element.                                    |
+| `imageStyle` | `Record<string, string> | null` | `null`  | Inline style object applied to the `<img>` element.                                    |
+| `preview`    | `boolean`                       | `false` | When true, clicking the image opens a preview overlay.                                 |
+| `size`       | `ImageSize`                     | `'md'`  | Component size token.                                                                  |
+| `src`        | `string`                        | `''`    | URL of the image to display.                                                           |
+| `styleClass` | `string | null`                 | `null`  | Additional CSS class(es) applied to the host element.                                  |
+| `variant`    | `ImageVariant | null`           | `null`  | Design variant; inherits from ThemeConfigService when null.                            |
+| `width`      | `string | null`                 | `null`  | Width attribute passed to the underlying `<img>` element.                              |
 
 ### Models (two-way bindable)
 
@@ -47,33 +47,39 @@ _none_
 
 ## Theming
 
-| CSS Variable                               | Default                             |
-| ------------------------------------------ | ----------------------------------- |
-| `--uilib-image-error-bg`                   | `var(--uilib-surface, #f3f4f6)`     |
-| `--uilib-image-error-color`                | `var(--uilib-color-muted, #9ca3af)` |
-| `--uilib-image-error-icon-size`            | `3rem`                              |
-| `--uilib-image-indicator-bg`               | `rgba(0, 0, 0, 0.5)`                |
-| `--uilib-image-indicator-bg-hover`         | `rgba(0, 0, 0, 0.7)`                |
-| `--uilib-image-indicator-color`            | `#ffffff`                           |
-| `--uilib-image-indicator-icon-size-lg`     | `1.5rem`                            |
-| `--uilib-image-indicator-icon-size-md`     | `1.25rem`                           |
-| `--uilib-image-indicator-icon-size-sm`     | `1rem`                              |
-| `--uilib-image-mask-bg`                    | `rgba(0, 0, 0, 0.9)`                |
-| `--uilib-image-preview-transition`         | `transform 0.2s ease`               |
-| `--uilib-image-radius`                     | `var(--uilib-radius-md, 0.375rem)`  |
-| `--uilib-image-toolbar-bg`                 | `rgba(0, 0, 0, 0.5)`                |
-| `--uilib-image-toolbar-btn-bg`             | `transparent`                       |
-| `--uilib-image-toolbar-btn-bg-hover`       | `rgba(255, 255, 255, 0.15)`         |
-| `--uilib-image-toolbar-btn-color`          | `#ffffff`                           |
-| `--uilib-image-toolbar-btn-color-disabled` | `rgba(255, 255, 255, 0.35)`         |
-| `--uilib-image-toolbar-btn-icon-size`      | `1.25rem`                           |
-| `--uilib-image-toolbar-btn-size`           | `2.5rem`                            |
-| `--uilib-image-toolbar-gap`                | `0.25rem`                           |
-| `--uilib-image-toolbar-padding`            | `0.5rem`                            |
+| CSS Variable                               | Default                                         |
+| ------------------------------------------ | ----------------------------------------------- |
+| `--uilib-image-error-bg`                   | `var(--uilib-surface, #f3f4f6)`                 |
+| `--uilib-image-error-color`                | `var(--uilib-color-muted, #9ca3af)`             |
+| `--uilib-image-error-icon-size`            | `3rem`                                          |
+| `--uilib-image-indicator-bg`               | `rgba(0, 0, 0, 0.5)`                            |
+| `--uilib-image-indicator-bg-hover`         | `rgba(0, 0, 0, 0.7)`                            |
+| `--uilib-image-indicator-bg-minimal`       | `rgba(0, 0, 0, 0.35)`                           |
+| `--uilib-image-indicator-bg-minimal-hover` | `rgba(0, 0, 0, 0.55)`                           |
+| `--uilib-image-indicator-color`            | `#ffffff`                                       |
+| `--uilib-image-indicator-icon-size-lg`     | `1.5rem`                                        |
+| `--uilib-image-indicator-icon-size-md`     | `1.25rem`                                       |
+| `--uilib-image-indicator-icon-size-sm`     | `1rem`                                          |
+| `--uilib-image-indicator-transition`       | `opacity 0.2s ease, background-color 0.2s ease` |
+| `--uilib-image-mask-bg`                    | `rgba(0, 0, 0, 0.9)`                            |
+| `--uilib-image-preview-transition`         | `transform 0.2s ease`                           |
+| `--uilib-image-radius`                     | `var(--uilib-radius-md, 0.375rem)`              |
+| `--uilib-image-toolbar-bg`                 | `rgba(0, 0, 0, 0.5)`                            |
+| `--uilib-image-toolbar-bg-material`        | `rgba(0, 0, 0, 0.6)`                            |
+| `--uilib-image-toolbar-btn-bg`             | `transparent`                                   |
+| `--uilib-image-toolbar-btn-bg-hover`       | `rgba(255, 255, 255, 0.15)`                     |
+| `--uilib-image-toolbar-btn-color`          | `#ffffff`                                       |
+| `--uilib-image-toolbar-btn-color-disabled` | `rgba(255, 255, 255, 0.35)`                     |
+| `--uilib-image-toolbar-btn-icon-size`      | `1.25rem`                                       |
+| `--uilib-image-toolbar-btn-radius`         | `var(--uilib-radius-full, 9999px)`              |
+| `--uilib-image-toolbar-btn-size`           | `2.5rem`                                        |
+| `--uilib-image-toolbar-btn-transition`     | `background-color 0.15s ease`                   |
+| `--uilib-image-toolbar-gap`                | `0.25rem`                                       |
+| `--uilib-image-toolbar-padding`            | `0.5rem`                                        |
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

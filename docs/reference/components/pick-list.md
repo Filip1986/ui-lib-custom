@@ -44,7 +44,7 @@ PickList component — transfers items between a source list and a target list.
 | `targetMoveDownAriaLabel`   | `string`                  | `'Move down'`               | Accessible label for the target "Move down" reorder button.                                                                       |
 | `targetMoveTopAriaLabel`    | `string`                  | `'Move to top'`             | Accessible label for the target "Move to top" reorder button.                                                                     |
 | `targetMoveUpAriaLabel`     | `string`                  | `'Move up'`                 | Accessible label for the target "Move up" reorder button.                                                                         |
-| `trackBy`                   | `string | null`           | `null`                      | Property key used to identify items for selection equality and `@for` tracking. When `null`, item object identity is used.        |
+| `trackBy`                   | `string | null`           | `null`                      | Property key used to identify items for selection equality and `                                                                  |
 | `variant`                   | `PickListVariant | null`  | `null`                      | Theme variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                          |
 
 ### Models (two-way bindable)
@@ -123,7 +123,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

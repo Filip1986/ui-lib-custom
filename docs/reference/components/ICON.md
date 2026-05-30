@@ -33,13 +33,14 @@ _none_
 
 ## Theming
 
-| CSS Variable         | Default                          |
-| -------------------- | -------------------------------- |
-| `--uilib-icon-color` | `var(--uilib-text-dark-primary)` |
+| CSS Variable              | Default                          |
+| ------------------------- | -------------------------------- |
+| `--uilib-icon-color`      | `var(--uilib-text-dark-primary)` |
+| `--uilib-icon-transition` | `none`                           |
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

@@ -34,7 +34,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -49,13 +49,7 @@ _No component-level CSS variables detected._
 
 ## Usage Examples
 
-```html
-<!-- Fluid directive makes all child inputs fill 100% width -->
-<ui-lib-fluid>
-  <ui-lib-input placeholder="Full-width input" />
-  <ui-lib-select [options]="opts" placeholder="Full-width select" />
-</ui-lib-fluid>
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

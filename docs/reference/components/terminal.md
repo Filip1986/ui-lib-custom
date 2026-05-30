@@ -51,7 +51,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -79,26 +79,7 @@ _none_
 
 ## Usage Examples
 
-```typescript
-@Component({
-  template: `
-    <ui-lib-terminal
-      welcomeMessage="Welcome to the ui-lib terminal."
-      prompt="$"
-      (commandExecute)="onCommand($event)"
-    />
-  `,
-})
-export class MyComponent {
-  onCommand(event: { command: string; callback: (response: string) => void }): void {
-    const responses: Record<string, string> = {
-      help: 'Available commands: help, version, clear',
-      version: '1.0.0',
-    };
-    event.callback(responses[event.command] ?? `Unknown command: ${event.command}`);
-  }
-}
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

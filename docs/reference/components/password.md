@@ -13,34 +13,34 @@ Password field with strength meter, mask toggle, and ControlValueAccessor integr
 
 ### Inputs
 
-| Name              | Type                     | Default                         | Description                                                                                                     |
-| ----------------- | ------------------------ | ------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `appearance`      | `'outlined' | 'filled'`  | `'outlined'`                    | Visual appearance: outlined (default) or filled background.                                                     |
-| `ariaLabel`       | `string | undefined`     | `undefined`                     | Accessible label string for the input.                                                                          |
-| `ariaLabelledBy`  | `string | undefined`     | `undefined`                     | Space-separated IDs of elements that label this input.                                                          |
-| `autocomplete`    | `string | undefined`     | `undefined`                     | Autocomplete attribute value for the native input.                                                              |
-| `disabled`        | `boolean`                | `false`                         | Whether the control is disabled.                                                                                |
-| `errorMessage`    | `string | undefined`     | `undefined`                     | Optional validation error text announced when `invalid` is true.                                                |
-| `feedback`        | `boolean`                | `PASSWORD_DEFAULTS.feedback`    | Whether to display the strength meter panel when the input is focused.                                          |
-| `fluid`           | `boolean`                | `false`                         | Whether the control spans the full width of its container.                                                      |
-| `inputId`         | `string | undefined`     | `undefined`                     | ID applied to the inner input element — use with an associated label element.                                   |
-| `inputStyleClass` | `string | undefined`     | `undefined`                     | Additional CSS class applied to the inner input element.                                                        |
-| `invalid`         | `boolean`                | `false`                         | Whether the control is in an invalid state.                                                                     |
-| `maxLength`       | `number | undefined`     | `undefined`                     | Maximum character length constraint on the input.                                                               |
-| `mediumLabel`     | `string`                 | `PASSWORD_DEFAULTS.mediumLabel` | Strength panel label shown when the password is classified as medium.                                           |
-| `mediumRegex`     | `string`                 | `PASSWORD_DEFAULTS.mediumRegex` | Regex used to classify a password as medium strength.                                                           |
-| `name`            | `string | undefined`     | `undefined`                     | Name attribute for the native input.                                                                            |
-| `placeholder`     | `string | undefined`     | `undefined`                     | Placeholder text for the native input.                                                                          |
-| `promptLabel`     | `string`                 | `PASSWORD_DEFAULTS.promptLabel` | Strength panel label shown before the user starts typing.                                                       |
-| `readonly`        | `boolean`                | `false`                         | Whether the control is read-only.                                                                               |
-| `showClear`       | `boolean`                | `PASSWORD_DEFAULTS.showClear`   | Whether to show a clear button when the field has a value.                                                      |
-| `size`            | `PasswordSize`           | `'md'`                          | Size token: sm, md, or lg.                                                                                      |
-| `strongLabel`     | `string`                 | `PASSWORD_DEFAULTS.strongLabel` | Strength panel label shown when the password is classified as strong.                                           |
-| `strongRegex`     | `string`                 | `PASSWORD_DEFAULTS.strongRegex` | Regex used to classify a password as strong.                                                                    |
-| `tabindex`        | `number | undefined`     | `undefined`                     | Tab-order index for the input.                                                                                  |
-| `toggleMask`      | `boolean`                | `PASSWORD_DEFAULTS.toggleMask`  | Whether to show a button that toggles password visibility.                                                      |
-| `variant`         | `PasswordVariant | null` | `null`                          | Design variant: material, bootstrap, or minimal. Falls back to the global ThemeConfigService variant when null. |
-| `weakLabel`       | `string`                 | `PASSWORD_DEFAULTS.weakLabel`   | Strength panel label shown when the password is classified as weak.                                             |
+| Name              | Type                     | Default                         | Description                                                                                                         |
+| ----------------- | ------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `appearance`      | `'outlined' | 'filled'`  | `'outlined'`                    | Visual appearance: outlined (default) or filled background.                                                         |
+| `ariaLabel`       | `string | undefined`     | `undefined`                     | Accessible label string for the input.                                                                              |
+| `ariaLabelledBy`  | `string | undefined`     | `undefined`                     | Space-separated IDs of elements that label this input.                                                              |
+| `autocomplete`    | `string | undefined`     | `undefined`                     | Autocomplete attribute value for the native input.                                                                  |
+| `disabled`        | `boolean`                | `false`                         | Whether the control is disabled.                                                                                    |
+| `errorMessage`    | `string | undefined`     | `undefined`                     | Optional validation error text announced when `invalid` is true.                                                    |
+| `feedback`        | `boolean`                | `PASSWORD_DEFAULTS.feedback`    | Whether to display the strength meter panel when the input is focused.                                              |
+| `fluid`           | `boolean`                | `false`                         | Whether the control spans the full width of its container.                                                          |
+| `inputId`         | `string | undefined`     | `undefined`                     | ID applied to the inner input element — use with an associated label element.                                       |
+| `inputStyleClass` | `string | undefined`     | `undefined`                     | Additional CSS class applied to the inner input element.                                                            |
+| `invalid`         | `boolean`                | `false`                         | Whether the control is in an invalid state.                                                                         |
+| `maxLength`       | `number | undefined`     | `undefined`                     | Maximum character length constraint on the input.                                                                   |
+| `mediumLabel`     | `string | null`          | `null`                          | Strength panel label shown when the password is classified as medium. Falls back to the i18n `password.medium` key. |
+| `mediumRegex`     | `string`                 | `PASSWORD_DEFAULTS.mediumRegex` | Regex used to classify a password as medium strength.                                                               |
+| `name`            | `string | undefined`     | `undefined`                     | Name attribute for the native input.                                                                                |
+| `placeholder`     | `string | undefined`     | `undefined`                     | Placeholder text for the native input.                                                                              |
+| `promptLabel`     | `string | null`          | `null`                          | Strength panel label shown before the user starts typing. Falls back to the i18n `password.prompt` key.             |
+| `readonly`        | `boolean`                | `false`                         | Whether the control is read-only.                                                                                   |
+| `showClear`       | `boolean`                | `PASSWORD_DEFAULTS.showClear`   | Whether to show a clear button when the field has a value.                                                          |
+| `size`            | `PasswordSize`           | `'md'`                          | Size token: sm, md, or lg.                                                                                          |
+| `strongLabel`     | `string | null`          | `null`                          | Strength panel label shown when the password is classified as strong. Falls back to the i18n `password.strong` key. |
+| `strongRegex`     | `string`                 | `PASSWORD_DEFAULTS.strongRegex` | Regex used to classify a password as strong.                                                                        |
+| `tabindex`        | `number | undefined`     | `undefined`                     | Tab-order index for the input.                                                                                      |
+| `toggleMask`      | `boolean`                | `PASSWORD_DEFAULTS.toggleMask`  | Whether to show a button that toggles password visibility.                                                          |
+| `variant`         | `PasswordVariant | null` | `null`                          | Design variant: material, bootstrap, or minimal. Falls back to the global ThemeConfigService variant when null.     |
+| `weakLabel`       | `string | null`          | `null`                          | Strength panel label shown when the password is classified as weak. Falls back to the i18n `password.weak` key.     |
 
 ### Outputs
 
@@ -67,10 +67,11 @@ _none_
 | `--uilib-password-meter-transition-duration`       | `0ms`                                                           |
 | `--uilib-password-panel-border-radius`             | `4px`                                                           |
 | `--uilib-password-panel-shadow`                    | `0 2px 8px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06)` |
+| `--uilib-password-transition`                      | `border-color 0.15s ease, box-shadow 0.15s ease`                |
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

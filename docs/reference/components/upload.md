@@ -17,11 +17,11 @@ Advanced file upload component with drag-and-drop, multi-file support, image thu
 | ------------------------- | ---------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `accept`                  | `string`               | `''`                                | Comma-separated list of accepted file types passed directly to the native `<input accept>` attribute (e.g. `'image/*'` or `'.pdf,.docx'`). |
 | `auto`                    | `boolean`              | `false`                             | When `true`, triggers `uploadHandler` immediately after file selection (only effective when `customUpload` is also `true`).                |
-| `cancelLabel`             | `string`               | `UPLOAD_DEFAULT_CANCEL_LABEL`       | Label for the "Cancel" button.                                                                                                             |
-| `chooseLabel`             | `string`               | `UPLOAD_DEFAULT_CHOOSE_LABEL`       | Label for the "Choose" button.                                                                                                             |
+| `cancelLabel`             | `string | null`        | `null`                              | Label for the "Cancel" button.                                                                                                             |
+| `chooseLabel`             | `string | null`        | `null`                              | Label for the "Choose" button.                                                                                                             |
 | `customUpload`            | `boolean`              | `false`                             | When `true`, the component does not perform any upload itself. Instead it emits `(uploadHandler)` so the consumer can handle transport.    |
 | `disabled`                | `boolean`              | `false`                             | Disable all interactions. Defaults to `false`.                                                                                             |
-| `emptyMessage`            | `string`               | `UPLOAD_DEFAULT_EMPTY_MESSAGE`      | Text shown inside the drop zone when no files are queued.                                                                                  |
+| `emptyMessage`            | `string | null`        | `null`                              | Text shown inside the drop zone when no files are queued.                                                                                  |
 | `fileLimit`               | `number | null`        | `null`                              | Maximum number of files that can be queued at once. `null` means no limit.                                                                 |
 | `invalidFileLimitMessage` | `string`               | `UPLOAD_INVALID_FILE_LIMIT_MESSAGE` | Validation message template when the file limit is exceeded. `{0}` = limit.                                                                |
 | `invalidFileSizeMessage`  | `string`               | `UPLOAD_INVALID_FILE_SIZE_MESSAGE`  | Validation message template for oversized files. `{0}` = name, `{1}` = limit.                                                              |
@@ -33,7 +33,7 @@ Advanced file upload component with drag-and-drop, multi-file support, image thu
 | `showUploadButton`        | `boolean`              | `true`                              | Whether to show the Upload action button. Defaults to `true`.                                                                              |
 | `size`                    | `UploadSize`           | `'md'`                              | Size token. Defaults to `'md'`.                                                                                                            |
 | `styleClass`              | `string | null`        | `null`                              | Additional CSS class applied to the root container element.                                                                                |
-| `uploadLabel`             | `string`               | `UPLOAD_DEFAULT_UPLOAD_LABEL`       | Label for the "Upload" button.                                                                                                             |
+| `uploadLabel`             | `string | null`        | `null`                              | Label for the "Upload" button.                                                                                                             |
 | `variant`                 | `UploadVariant | null` | `null`                              | Design variant. Falls back to the global ThemeConfigService variant when null.                                                             |
 
 ### Outputs
@@ -117,7 +117,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

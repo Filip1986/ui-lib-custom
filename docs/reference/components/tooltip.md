@@ -7,7 +7,7 @@
 
 ## Overview
 
-An attribute directive that attaches a floating label to any host element. The tooltip is triggered automatically by mouse or keyboard events and positioned with CSS `position: fixed`, so it escapes any `overflow: hidden` ancestor.
+# Tooltip
 
 ## API
 
@@ -50,7 +50,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -93,25 +93,7 @@ _none_
 
 ## Usage Examples
 
-```html
-<!-- Attribute directive — simplest form -->
-<ui-lib-button uiLibTooltip="Save your changes">Save</ui-lib-button>
-
-<!-- Positioning -->
-<ui-lib-button uiLibTooltip="Copied!" tooltipPosition="top">Copy</ui-lib-button>
-<ui-lib-button uiLibTooltip="Delete" tooltipPosition="bottom" severity="danger">
-  Delete
-</ui-lib-button>
-
-<!-- Disabled tooltip (hidden when button is disabled) -->
-<ui-lib-button
-  uiLibTooltip="Approve"
-  [tooltipDisabled]="!canApprove"
-  [disabled]="!canApprove"
->
-  Approve
-</ui-lib-button>
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

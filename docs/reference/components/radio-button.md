@@ -48,29 +48,30 @@ RadioButton component with accessible labeling and group selection support via C
 
 ## Theming
 
-| CSS Variable                               | Default                                                                                 |
-| ------------------------------------------ | --------------------------------------------------------------------------------------- |
-| `--uilib-radio-button-bg`                  | `var(--uilib-surface)`                                                                  |
-| `--uilib-radio-button-bg-checked`          | `var(--uilib-color-primary-500)`                                                        |
-| `--uilib-radio-button-border-active`       | `var(--uilib-color-primary-600)`                                                        |
-| `--uilib-radio-button-border-color`        | `var(--uilib-color-neutral-400)`                                                        |
-| `--uilib-radio-button-border-hover`        | `var(--uilib-color-primary-500)`                                                        |
-| `--uilib-radio-button-dot-color`           | `var(--uilib-color-neutral-50)`                                                         |
-| `--uilib-radio-button-focus-ring`          | `0 0 0 3px color-mix(in srgb, var(--uilib-radio-button-border-hover) 30%, transparent)` |
-| `--uilib-radio-button-font`                | `var(--uilib-font-ui, inherit)`                                                         |
-| `--uilib-radio-button-font-size-lg`        | `var(--uilib-font-size-md, 1rem)`                                                       |
-| `--uilib-radio-button-font-size-sm`        | `var(--uilib-font-size-sm, 0.875rem)`                                                   |
-| `--uilib-radio-button-gap`                 | `var(--uilib-space-3, 0.75rem)`                                                         |
-| `--uilib-radio-button-label-color`         | `inherit`                                                                               |
-| `--uilib-radio-button-size`                | `var(--uilib-radio-button-size-sm)`                                                     |
-| `--uilib-radio-button-size-lg`             | `1.5rem`                                                                                |
-| `--uilib-radio-button-size-md`             | `1.25rem`                                                                               |
-| `--uilib-radio-button-size-sm`             | `1rem`                                                                                  |
-| `--uilib-radio-button-transition-duration` | `0ms`                                                                                   |
+| CSS Variable                           | Default                                                                                 |
+| -------------------------------------- | --------------------------------------------------------------------------------------- |
+| `--uilib-radio-button-bg`              | `var(--uilib-surface)`                                                                  |
+| `--uilib-radio-button-bg-checked`      | `var(--uilib-color-primary-500)`                                                        |
+| `--uilib-radio-button-border-active`   | `var(--uilib-color-primary-600)`                                                        |
+| `--uilib-radio-button-border-color`    | `var(--uilib-color-neutral-400)`                                                        |
+| `--uilib-radio-button-border-hover`    | `var(--uilib-color-primary-500)`                                                        |
+| `--uilib-radio-button-box-transition`  | `border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease`           |
+| `--uilib-radio-button-dot-color`       | `var(--uilib-color-neutral-50)`                                                         |
+| `--uilib-radio-button-focus-ring`      | `0 0 0 3px color-mix(in srgb, var(--uilib-radio-button-border-hover) 30%, transparent)` |
+| `--uilib-radio-button-font`            | `var(--uilib-font-ui, inherit)`                                                         |
+| `--uilib-radio-button-font-size-lg`    | `var(--uilib-font-size-md, 1rem)`                                                       |
+| `--uilib-radio-button-font-size-sm`    | `var(--uilib-font-size-sm, 0.875rem)`                                                   |
+| `--uilib-radio-button-gap`             | `var(--uilib-space-3, 0.75rem)`                                                         |
+| `--uilib-radio-button-icon-transition` | `transform 0.15s ease`                                                                  |
+| `--uilib-radio-button-label-color`     | `inherit`                                                                               |
+| `--uilib-radio-button-size`            | `var(--uilib-radio-button-size-sm)`                                                     |
+| `--uilib-radio-button-size-lg`         | `1.5rem`                                                                                |
+| `--uilib-radio-button-size-md`         | `1.25rem`                                                                               |
+| `--uilib-radio-button-size-sm`         | `1rem`                                                                                  |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/radio/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -112,18 +113,7 @@ RadioButton component with accessible labeling and group selection support via C
 
 ## Usage Examples
 
-```html
-<!-- Standalone with reactive forms -->
-<form [formGroup]="form">
-  <ui-lib-radio-button formControlName="size" value="sm" label="Small" />
-  <ui-lib-radio-button formControlName="size" value="md" label="Medium" />
-  <ui-lib-radio-button formControlName="size" value="lg" label="Large" />
-</form>
-
-<!-- With ngModel -->
-<ui-lib-radio-button [(ngModel)]="selected" value="a" label="Option A" />
-<ui-lib-radio-button [(ngModel)]="selected" value="b" label="Option B" />
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

@@ -59,6 +59,7 @@ _none_
 | `--uilib-cascade-select-bg`                       | `var(--uilib-input-bg, var(--uilib-surface))`                                                            |
 | `--uilib-cascade-select-border`                   | `var(--uilib-input-border, var(--uilib-border))`                                                         |
 | `--uilib-cascade-select-border-focus`             | `var( --uilib-input-border-focus, var(--uilib-color-primary-600) )`                                      |
+| `--uilib-cascade-select-clear-hover-bg`           | `color-mix( in srgb, var(--uilib-color-primary-600) 12%, transparent )`                                  |
 | `--uilib-cascade-select-focus-ring-color`         | `var(--uilib-color-primary-500)`                                                                         |
 | `--uilib-cascade-select-focus-ring-width`         | `3px`                                                                                                    |
 | `--uilib-cascade-select-level-animation-duration` | `0.18s`                                                                                                  |
@@ -81,6 +82,7 @@ _none_
 | `--uilib-cascade-select-panel-z-index`            | `1000`                                                                                                   |
 | `--uilib-cascade-select-placeholder`              | `var(--uilib-input-placeholder, var(--uilib-muted))`                                                     |
 | `--uilib-cascade-select-radius`                   | `var(--uilib-input-radius, var(--uilib-shape-base, 0.375rem))`                                           |
+| `--uilib-cascade-select-separator-color`          | `color-mix( in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent )`                        |
 | `--uilib-cascade-select-submenu-gap`              | `0`                                                                                                      |
 | `--uilib-cascade-select-submenu-icon-size`        | `0.75rem`                                                                                                |
 | `--uilib-cascade-select-text`                     | `var(--uilib-input-text, var(--uilib-page-fg))`                                                          |
@@ -88,7 +90,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

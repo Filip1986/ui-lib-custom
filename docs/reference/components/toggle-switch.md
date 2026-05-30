@@ -69,11 +69,11 @@ ToggleSwitch presents a boolean on/off control as a sliding pill switch. Impleme
 | `--uilib-toggle-switch-track-border-radius`    | `var(--uilib-radius-full, 9999px)`                                                       |
 | `--uilib-toggle-switch-track-height`           | `1.5rem`                                                                                 |
 | `--uilib-toggle-switch-track-width`            | `2.75rem`                                                                                |
-| `--uilib-toggle-switch-transition-duration`    | `var(--uilib-transition-base, 0.2s)`                                                     |
+| `--uilib-toggle-switch-transition-duration`    | `0.2s`                                                                                   |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/switch/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

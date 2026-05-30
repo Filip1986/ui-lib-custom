@@ -65,10 +65,13 @@ _none_
 | `--uilib-split-button-focus-ring`                 | `var( --uilib-button-focus-ring, 0 0 0 var(--uilib-border-width-2, 0.125rem) color-mix(in srgb, var(--uilib-color-primary-500, currentColor) 30%, transparent) )` |
 | `--uilib-split-button-font-size`                  | `var( --uilib-button-font-size-medium, var(--uilib-font-size-md, 1rem) )`                                                                                         |
 | `--uilib-split-button-icon-size`                  | `var(--uilib-icon-size-sm, 1rem)`                                                                                                                                 |
+| `--uilib-split-button-loading-animation`          | `uilib-split-button-spin 0.8s linear infinite`                                                                                                                    |
+| `--uilib-split-button-menu-animation`             | `uilib-split-button-menu-enter 0.15s ease-out`                                                                                                                    |
 | `--uilib-split-button-menu-bg`                    | `var( --uilib-select-dropdown-bg, var(--uilib-surface, transparent) )`                                                                                            |
 | `--uilib-split-button-menu-item-disabled-opacity` | `0.55`                                                                                                                                                            |
 | `--uilib-split-button-menu-item-hover-bg`         | `var( --uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600, currentColor) 8%, transparent) )`                                            |
 | `--uilib-split-button-menu-item-padding`          | `var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem)`                                                                                                      |
+| `--uilib-split-button-menu-item-transition`       | `var(--uilib-transition-fast, 150ms ease)`                                                                                                                        |
 | `--uilib-split-button-menu-radius`                | `var(--uilib-split-button-radius)`                                                                                                                                |
 | `--uilib-split-button-menu-shadow`                | `var( --uilib-select-dropdown-shadow, var(--uilib-shadow-md, none) )`                                                                                             |
 | `--uilib-split-button-menu-z`                     | `var(--uilib-z-overlay, 1000)`                                                                                                                                    |
@@ -80,7 +83,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

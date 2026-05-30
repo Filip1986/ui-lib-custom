@@ -50,31 +50,34 @@ _none_
 
 ## Theming
 
-| CSS Variable                          | Default                                                                   |
-| ------------------------------------- | ------------------------------------------------------------------------- |
-| `--uilib-slider-disabled-opacity`     | `0.5`                                                                     |
-| `--uilib-slider-fill-color`           | `#6366f1`                                                                 |
-| `--uilib-slider-fill-transition`      | `width 0.15s ease, left 0.15s ease, height 0.15s ease, bottom 0.15s ease` |
-| `--uilib-slider-focus-ring-color`     | `rgba(99, 102, 241, 0.35)`                                                |
-| `--uilib-slider-focus-ring-width`     | `3px`                                                                     |
-| `--uilib-slider-handle-bg`            | `#ffffff`                                                                 |
-| `--uilib-slider-handle-border`        | `2px solid #6366f1`                                                       |
-| `--uilib-slider-handle-border-radius` | `50%`                                                                     |
-| `--uilib-slider-handle-hover-scale`   | `1.15`                                                                    |
-| `--uilib-slider-handle-shadow`        | `0 1px 4px rgba(0, 0, 0, 0.25)`                                           |
-| `--uilib-slider-handle-size-lg`       | `28px`                                                                    |
-| `--uilib-slider-handle-size-md`       | `20px`                                                                    |
-| `--uilib-slider-handle-size-sm`       | `14px`                                                                    |
-| `--uilib-slider-track-border-radius`  | `2px`                                                                     |
-| `--uilib-slider-track-color`          | `#e0e0e0`                                                                 |
-| `--uilib-slider-track-height-lg`      | `6px`                                                                     |
-| `--uilib-slider-track-height-md`      | `4px`                                                                     |
-| `--uilib-slider-track-height-sm`      | `2px`                                                                     |
-| `--uilib-slider-vertical-height`      | `200px`                                                                   |
+| CSS Variable                               | Default                                                                         |
+| ------------------------------------------ | ------------------------------------------------------------------------------- |
+| `--uilib-slider-animate-handle-transition` | `left 0.15s ease, bottom 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease` |
+| `--uilib-slider-disabled-opacity`          | `0.5`                                                                           |
+| `--uilib-slider-fill-color`                | `#6366f1`                                                                       |
+| `--uilib-slider-fill-transition`           | `width 0.15s ease, left 0.15s ease, height 0.15s ease, bottom 0.15s ease`       |
+| `--uilib-slider-focus-ring-color`          | `rgba(99, 102, 241, 0.35)`                                                      |
+| `--uilib-slider-focus-ring-width`          | `3px`                                                                           |
+| `--uilib-slider-handle-bg`                 | `#ffffff`                                                                       |
+| `--uilib-slider-handle-border`             | `2px solid #6366f1`                                                             |
+| `--uilib-slider-handle-border-radius`      | `var(--uilib-radius-full, 9999px)`                                              |
+| `--uilib-slider-handle-hover-scale`        | `1.15`                                                                          |
+| `--uilib-slider-handle-shadow`             | `0 1px 4px rgba(0, 0, 0, 0.25)`                                                 |
+| `--uilib-slider-handle-size-lg`            | `28px`                                                                          |
+| `--uilib-slider-handle-size-md`            | `20px`                                                                          |
+| `--uilib-slider-handle-size-sm`            | `14px`                                                                          |
+| `--uilib-slider-handle-transition`         | `transform 0.1s ease, box-shadow 0.1s ease`                                     |
+| `--uilib-slider-track-border-radius`       | `2px`                                                                           |
+| `--uilib-slider-track-color`               | `#e0e0e0`                                                                       |
+| `--uilib-slider-track-height-lg`           | `6px`                                                                           |
+| `--uilib-slider-track-height-md`           | `4px`                                                                           |
+| `--uilib-slider-track-height-sm`           | `2px`                                                                           |
+| `--uilib-slider-track-padding`             | `12px`                                                                          |
+| `--uilib-slider-vertical-height`           | `200px`                                                                         |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/slider/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

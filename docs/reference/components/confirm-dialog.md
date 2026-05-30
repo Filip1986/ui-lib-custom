@@ -13,25 +13,26 @@ ConfirmDialog — a modal confirmation overlay with configurable accept/reject a
 
 ### Inputs
 
-| Name              | Type                          | Default                               | Description                                                                               |
-| ----------------- | ----------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `acceptIcon`      | `string | null`               | `null`                                | CSS class for an icon inside the accept button.                                           |
-| `acceptLabel`     | `string`                      | `''`                                  | Accept button label. Defaults to the active locale's 'confirm-dialog.accept' translation. |
-| `acceptSeverity`  | `ConfirmDialogButtonSeverity` | `'primary'`                           | Visual severity applied to the accept button.                                             |
-| `blockScroll`     | `boolean`                     | `true`                                | Whether body scroll is locked while the dialog is open.                                   |
-| `closable`        | `boolean`                     | `true`                                | Whether the close (×) button is rendered in the header.                                   |
-| `defaultFocus`    | `ConfirmDialogDefaultFocus`   | `'accept'`                            | Which button receives initial focus when the dialog opens.                                |
-| `dismissableMask` | `boolean`                     | `false`                               | Whether clicking the backdrop closes the dialog (invoking reject).                        |
-| `header`          | `string`                      | `'Confirmation'`                      | Dialog header / title text (declarative fallback).                                        |
-| `icon`            | `string | null`               | `null`                                | CSS class for the icon rendered before the message.                                       |
-| `key`             | `string`                      | `''`                                  | Key that matches incoming ConfirmationService calls to this specific dialog instance.     |
-| `message`         | `string`                      | `'Are you sure you want to proceed?'` | Confirmation message text (declarative fallback).                                         |
-| `position`        | `ConfirmDialogPosition`       | `'center'`                            | Viewport position of the dialog panel.                                                    |
-| `rejectIcon`      | `string | null`               | `null`                                | CSS class for an icon inside the reject button.                                           |
-| `rejectLabel`     | `string`                      | `''`                                  | Reject button label. Defaults to the active locale's 'confirm-dialog.reject' translation. |
-| `rejectSeverity`  | `ConfirmDialogButtonSeverity` | `'secondary'`                         | Visual severity applied to the reject button.                                             |
-| `styleClass`      | `string | null`               | `null`                                | Additional CSS classes applied to the host element.                                       |
-| `variant`         | `ConfirmDialogVariant | null` | `null`                                | Design variant override; inherits from ThemeConfigService when not set.                   |
+| Name              | Type                          | Default       | Description                                                                                                                                                         |
+| ----------------- | ----------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `acceptIcon`      | `string | null`               | `null`        | CSS class for an icon inside the accept button.                                                                                                                     |
+| `acceptLabel`     | `string`                      | `''`          | Accept button label. Defaults to the active locale's 'confirm-dialog.accept' translation.                                                                           |
+| `acceptOnly`      | `boolean`                     | `false`       | When true the reject button is hidden — use for acknowledgment-style dialogs where the user only needs to confirm they have read the message (e.g. "I understand"). |
+| `acceptSeverity`  | `ConfirmDialogButtonSeverity` | `'primary'`   | Visual severity applied to the accept button.                                                                                                                       |
+| `blockScroll`     | `boolean`                     | `true`        | Whether body scroll is locked while the dialog is open.                                                                                                             |
+| `closable`        | `boolean`                     | `true`        | Whether the close (×) button is rendered in the header.                                                                                                             |
+| `defaultFocus`    | `ConfirmDialogDefaultFocus`   | `'accept'`    | Which button receives initial focus when the dialog opens.                                                                                                          |
+| `dismissableMask` | `boolean`                     | `false`       | Whether clicking the backdrop closes the dialog (invoking reject).                                                                                                  |
+| `header`          | `string`                      | `''`          | Dialog header / title text (declarative fallback). Falls back to i18n `confirm-dialog.header`.                                                                      |
+| `icon`            | `string | null`               | `null`        | CSS class for the icon rendered before the message.                                                                                                                 |
+| `key`             | `string`                      | `''`          | Key that matches incoming ConfirmationService calls to this specific dialog instance.                                                                               |
+| `message`         | `string`                      | `''`          | Confirmation message text (declarative fallback). Falls back to i18n `confirm-dialog.message`.                                                                      |
+| `position`        | `ConfirmDialogPosition`       | `'center'`    | Viewport position of the dialog panel.                                                                                                                              |
+| `rejectIcon`      | `string | null`               | `null`        | CSS class for an icon inside the reject button.                                                                                                                     |
+| `rejectLabel`     | `string`                      | `''`          | Reject button label. Defaults to the active locale's 'confirm-dialog.reject' translation.                                                                           |
+| `rejectSeverity`  | `ConfirmDialogButtonSeverity` | `'secondary'` | Visual severity applied to the reject button.                                                                                                                       |
+| `styleClass`      | `string | null`               | `null`        | Additional CSS classes applied to the host element.                                                                                                                 |
+| `variant`         | `ConfirmDialogVariant | null` | `null`        | Design variant override; inherits from ThemeConfigService when not set.                                                                                             |
 
 ### Models (two-way bindable)
 
@@ -48,45 +49,48 @@ ConfirmDialog — a modal confirmation overlay with configurable accept/reject a
 
 ## Content Projection
 
-_none_
+| Selector          | Notes |
+| ----------------- | ----- |
+| `[uilib-content]` | —     |
 
 ## Theming
 
-| CSS Variable                                     | Default                                                    |
-| ------------------------------------------------ | ---------------------------------------------------------- |
-| `--uilib-confirm-dialog-backdrop-enter-duration` | `150ms`                                                    |
-| `--uilib-confirm-dialog-backdrop-enter-easing`   | `ease-out`                                                 |
-| `--uilib-confirm-dialog-bg`                      | `var(--uilib-surface)`                                     |
-| `--uilib-confirm-dialog-border`                  | `0 solid transparent`                                      |
-| `--uilib-confirm-dialog-border-radius`           | `var(--uilib-radius-lg, 8px)`                              |
-| `--uilib-confirm-dialog-btn-font-size`           | `var(--uilib-font-size-sm, 0.875rem)`                      |
-| `--uilib-confirm-dialog-btn-font-weight`         | `var(--uilib-font-weight-500, 500)`                        |
-| `--uilib-confirm-dialog-btn-padding`             | `var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem)`  |
-| `--uilib-confirm-dialog-btn-radius`              | `var(--uilib-radius-md, 6px)`                              |
-| `--uilib-confirm-dialog-btn-warning-fg`          | `#1f2937`                                                  |
-| `--uilib-confirm-dialog-close-btn-color`         | `var(--uilib-muted)`                                       |
-| `--uilib-confirm-dialog-close-btn-hover-bg`      | `var(--uilib-surface-alt)`                                 |
-| `--uilib-confirm-dialog-close-btn-size`          | `2rem`                                                     |
-| `--uilib-confirm-dialog-content-padding`         | `var(--uilib-space-5, 1.25rem)`                            |
-| `--uilib-confirm-dialog-enter-duration`          | `200ms`                                                    |
-| `--uilib-confirm-dialog-enter-easing`            | `ease-out`                                                 |
-| `--uilib-confirm-dialog-footer-border-top`       | `1px solid var(--uilib-border)`                            |
-| `--uilib-confirm-dialog-footer-gap`              | `var(--uilib-space-2, 0.5rem)`                             |
-| `--uilib-confirm-dialog-footer-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)` |
-| `--uilib-confirm-dialog-header-bg`               | `var(--uilib-surface-alt)`                                 |
-| `--uilib-confirm-dialog-header-color`            | `var(--uilib-page-fg)`                                     |
-| `--uilib-confirm-dialog-header-font-size`        | `var(--uilib-font-size-lg, 1.125rem)`                      |
-| `--uilib-confirm-dialog-header-font-weight`      | `var(--uilib-font-weight-500, 500)`                        |
-| `--uilib-confirm-dialog-header-padding`          | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)` |
-| `--uilib-confirm-dialog-icon-color`              | `var(--uilib-color-warning-500, #f59e0b)`                  |
-| `--uilib-confirm-dialog-icon-size`               | `2rem`                                                     |
-| `--uilib-confirm-dialog-shadow`                  | `var(--uilib-shadow-lg, none)`                             |
-| `--uilib-confirm-dialog-width`                   | `min(100%, 30rem)`                                         |
-| `--uilib-confirm-dialog-z-index`                 | `var(--uilib-z-modal, 1050)`                               |
+| CSS Variable                                             | Default                                                    |
+| -------------------------------------------------------- | ---------------------------------------------------------- |
+| `--uilib-confirm-dialog-backdrop-enter-duration`         | `150ms`                                                    |
+| `--uilib-confirm-dialog-backdrop-enter-easing`           | `ease-out`                                                 |
+| `--uilib-confirm-dialog-bg`                              | `var(--uilib-surface)`                                     |
+| `--uilib-confirm-dialog-border`                          | `0 solid transparent`                                      |
+| `--uilib-confirm-dialog-border-radius`                   | `var(--uilib-radius-lg, 8px)`                              |
+| `--uilib-confirm-dialog-btn-font-size`                   | `var(--uilib-font-size-sm, 0.875rem)`                      |
+| `--uilib-confirm-dialog-btn-font-weight`                 | `var(--uilib-font-weight-500, 500)`                        |
+| `--uilib-confirm-dialog-btn-padding`                     | `var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem)`  |
+| `--uilib-confirm-dialog-btn-radius`                      | `var(--uilib-radius-md, 6px)`                              |
+| `--uilib-confirm-dialog-btn-warning-fg`                  | `#1f2937`                                                  |
+| `--uilib-confirm-dialog-close-btn-color`                 | `var(--uilib-muted)`                                       |
+| `--uilib-confirm-dialog-close-btn-hover-bg`              | `var(--uilib-surface-alt)`                                 |
+| `--uilib-confirm-dialog-close-btn-size`                  | `2rem`                                                     |
+| `--uilib-confirm-dialog-content-padding`                 | `var(--uilib-space-5, 1.25rem)`                            |
+| `--uilib-confirm-dialog-enter-duration`                  | `200ms`                                                    |
+| `--uilib-confirm-dialog-enter-easing`                    | `ease-out`                                                 |
+| `--uilib-confirm-dialog-footer-border-top`               | `1px solid var(--uilib-border)`                            |
+| `--uilib-confirm-dialog-footer-gap`                      | `var(--uilib-space-2, 0.5rem)`                             |
+| `--uilib-confirm-dialog-footer-padding`                  | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)` |
+| `--uilib-confirm-dialog-header-bg`                       | `var(--uilib-surface-alt)`                                 |
+| `--uilib-confirm-dialog-header-color`                    | `var(--uilib-page-fg)`                                     |
+| `--uilib-confirm-dialog-header-font-size`                | `var(--uilib-font-size-lg, 1.125rem)`                      |
+| `--uilib-confirm-dialog-header-font-weight`              | `var(--uilib-font-weight-500, 500)`                        |
+| `--uilib-confirm-dialog-header-padding`                  | `var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)` |
+| `--uilib-confirm-dialog-icon-color`                      | `var(--uilib-color-warning-500, #f59e0b)`                  |
+| `--uilib-confirm-dialog-icon-size`                       | `2rem`                                                     |
+| `--uilib-confirm-dialog-interactive-transition-duration` | `120ms`                                                    |
+| `--uilib-confirm-dialog-shadow`                          | `var(--uilib-shadow-lg, none)`                             |
+| `--uilib-confirm-dialog-width`                           | `min(100%, 30rem)`                                         |
+| `--uilib-confirm-dialog-z-index`                         | `var(--uilib-z-modal, 1050)`                               |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -120,28 +124,7 @@ _none_
 
 ## Usage Examples
 
-```typescript
-import { ConfirmationService } from 'ui-lib-custom/confirm-dialog';
-
-@Component({
-  providers: [ConfirmationService],
-  template: `
-    <ui-lib-confirm-dialog />
-    <ui-lib-button severity="danger" (click)="confirmDelete()">Delete</ui-lib-button>
-  `,
-})
-export class MyComponent {
-  private confirmation = inject(ConfirmationService);
-
-  confirmDelete(): void {
-    this.confirmation.confirm({
-      message: 'Are you sure you want to delete this item?',
-      header: 'Delete Confirmation',
-      accept: () => this.delete(),
-    });
-  }
-}
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

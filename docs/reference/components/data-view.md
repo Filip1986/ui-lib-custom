@@ -13,31 +13,31 @@ Core DataView shell that renders list/grid item templates with loading and empty
 
 ### Inputs
 
-| Name                        | Type                        | Default                                                 | Description |
-| --------------------------- | --------------------------- | ------------------------------------------------------- | ----------- |
-| `ariaLabel`                 | `string`                    | `'Data list'`                                           | —           |
-| `controlsAriaLabel`         | `string`                    | `'Data view controls'`                                  | —           |
-| `currentPageReportTemplate` | `string`                    | `'Showing {first} to {last} of {totalRecords} entries'` | —           |
-| `dataKey`                   | `string | null`             | `null`                                                  | —           |
-| `emptyMessage`              | `string`                    | `'No records found.'`                                   | —           |
-| `filterAriaLabel`           | `string`                    | `'Filter items'`                                        | —           |
-| `filterPlaceholder`         | `string`                    | `'Filter items'`                                        | —           |
-| `gridColumns`               | `number`                    | `3`                                                     | —           |
-| `gridGap`                   | `string`                    | `'1rem'`                                                | —           |
-| `gridLayoutAriaLabel`       | `string`                    | `'Show grid view'`                                      | —           |
-| `listLayoutAriaLabel`       | `string`                    | `'Show list view'`                                      | —           |
-| `loading`                   | `boolean`                   | `false`                                                 | —           |
-| `paginator`                 | `boolean`                   | `false`                                                 | —           |
-| `paginatorPosition`         | `DataViewPaginatorPosition` | `'bottom'`                                              | —           |
-| `rows`                      | `number`                    | `DATA_VIEW_DEFAULT_ROWS_PER_PAGE`                       | —           |
-| `rowsPerPageOptions`        | `number[] | null`           | `null`                                                  | —           |
-| `showCurrentPageReport`     | `boolean`                   | `true`                                                  | —           |
-| `size`                      | `DataViewSize`              | `'md'`                                                  | —           |
-| `sortAriaLabel`             | `string`                    | `'Sort items'`                                          | —           |
-| `sortField`                 | `string | null`             | `null`                                                  | —           |
-| `sortOrder`                 | `DataViewSortOrder`         | `1`                                                     | —           |
-| `totalRecords`              | `number | null`             | `null`                                                  | —           |
-| `trackBy`                   | `TrackByFunction<T> | null` | `null`                                                  | —           |
+| Name                        | Type                        | Default                                                 | Description                                                                                 |
+| --------------------------- | --------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `ariaLabel`                 | `string | null`             | `null`                                                  | Accessible label for the data view host. Falls back to i18n `data-view.label`.              |
+| `controlsAriaLabel`         | `string | null`             | `null`                                                  | Accessible label for the controls group. Falls back to i18n `data-view.controls`.           |
+| `currentPageReportTemplate` | `string`                    | `'Showing {first} to {last} of {totalRecords} entries'` | —                                                                                           |
+| `dataKey`                   | `string | null`             | `null`                                                  | —                                                                                           |
+| `emptyMessage`              | `string | null`             | `null`                                                  | Empty-state message. Falls back to i18n `data-view.empty` when null.                        |
+| `filterAriaLabel`           | `string | null`             | `null`                                                  | Accessible label for the filter input. Falls back to i18n `data-view.filter`.               |
+| `filterPlaceholder`         | `string | null`             | `null`                                                  | Filter input placeholder text. Falls back to i18n `data-view.filter.placeholder` when null. |
+| `gridColumns`               | `number`                    | `3`                                                     | —                                                                                           |
+| `gridGap`                   | `string`                    | `'1rem'`                                                | —                                                                                           |
+| `gridLayoutAriaLabel`       | `string | null`             | `null`                                                  | Accessible label for the grid layout button. Falls back to i18n `data-view.grid-view`.      |
+| `listLayoutAriaLabel`       | `string | null`             | `null`                                                  | Accessible label for the list layout button. Falls back to i18n `data-view.list-view`.      |
+| `loading`                   | `boolean`                   | `false`                                                 | —                                                                                           |
+| `paginator`                 | `boolean`                   | `false`                                                 | —                                                                                           |
+| `paginatorPosition`         | `DataViewPaginatorPosition` | `'bottom'`                                              | —                                                                                           |
+| `rows`                      | `number`                    | `DATA_VIEW_DEFAULT_ROWS_PER_PAGE`                       | —                                                                                           |
+| `rowsPerPageOptions`        | `number[] | null`           | `null`                                                  | —                                                                                           |
+| `showCurrentPageReport`     | `boolean`                   | `true`                                                  | —                                                                                           |
+| `size`                      | `DataViewSize`              | `'md'`                                                  | —                                                                                           |
+| `sortAriaLabel`             | `string | null`             | `null`                                                  | Accessible label for the sort select. Falls back to i18n `data-view.sort`.                  |
+| `sortField`                 | `string | null`             | `null`                                                  | —                                                                                           |
+| `sortOrder`                 | `DataViewSortOrder`         | `1`                                                     | —                                                                                           |
+| `totalRecords`              | `number | null`             | `null`                                                  | —                                                                                           |
+| `trackBy`                   | `TrackByFunction<T> | null` | `null`                                                  | —                                                                                           |
 
 ### Models (two-way bindable)
 
@@ -65,6 +65,7 @@ _none_
 | `--uilib-data-view-border`                     | `1px solid var(--uilib-border-color, #dee2e6)`                                       |
 | `--uilib-data-view-border-radius`              | `var(--uilib-border-radius, 6px)`                                                    |
 | `--uilib-data-view-control-label-font-size`    | `var(--uilib-font-size-sm, 0.8125rem)`                                               |
+| `--uilib-data-view-controls-gap`               | `0.75rem`                                                                            |
 | `--uilib-data-view-empty-color`                | `var(--uilib-text-color-secondary, #6b7280)`                                         |
 | `--uilib-data-view-empty-padding`              | `2rem`                                                                               |
 | `--uilib-data-view-fg`                         | `var(--uilib-text-color, #1f2937)`                                                   |
@@ -93,7 +94,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

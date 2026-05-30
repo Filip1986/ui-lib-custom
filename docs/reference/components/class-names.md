@@ -29,7 +29,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -42,12 +42,7 @@ _No component-level CSS variables detected._
 
 ## Usage Examples
 
-```html
-<!-- Directive applies CSS classes based on a map -->
-<div [uiLibClassNames]="{ 'is-active': isActive, 'has-error': hasError }">
-  Content
-</div>
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

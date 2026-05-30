@@ -16,7 +16,7 @@ Paginator provides page-based navigation controls for any list or data set. Supp
 | Name                        | Type                      | Default                                           | Description                                                                                                                                |
 | --------------------------- | ------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `alwaysShow`                | `boolean`                 | `true`                                            | When false, the paginator hides itself if there is only one page.                                                                          |
-| `ariaLabel`                 | `string`                  | `'Pagination'`                                    | Accessible label for the navigation landmark (used on the host element).                                                                   |
+| `ariaLabel`                 | `string | null`           | `null`                                            | Accessible label for the navigation landmark (used on the host element).                                                                   |
 | `currentPageReportTemplate` | `string`                  | `PAGINATOR_DEFAULTS.CURRENT_PAGE_REPORT_TEMPLATE` | Template string for the current-page report. Supported placeholders: {currentPage}, {totalPages}, {first}, {last}, {rows}, {totalRecords}. |
 | `pageLinkSize`              | `number`                  | `PAGINATOR_DEFAULTS.PAGE_LINK_SIZE`               | Maximum number of page-link buttons shown in the windowed range.                                                                           |
 | `rowsPerPageOptions`        | `number[] | null`         | `null`                                            | Array of row counts to show in the rows-per-page dropdown. Pass null to hide the dropdown.                                                 |
@@ -25,7 +25,7 @@ Paginator provides page-based navigation controls for any list or data set. Supp
 | `showJumpToPageInput`       | `boolean`                 | `false`                                           | Show a numeric input that lets the user type a page number and press Enter.                                                                |
 | `showPageLinks`             | `boolean`                 | `true`                                            | Show the windowed list of numbered page-link buttons.                                                                                      |
 | `size`                      | `PaginatorSize`           | `'md'`                                            | Size token controlling padding and font size.                                                                                              |
-| `styleClass`                | `string`                  | `''`                                              | Additional CSS class(es) applied to the inner content wrapper.                                                                             |
+| `styleClass`                | `string | null`           | `null`                                            | Additional CSS class(es) applied to the inner content wrapper.                                                                             |
 | `totalRecords`              | `number`                  | `0`                                               | Total number of records across all pages.                                                                                                  |
 | `variant`                   | `PaginatorVariant | null` | `null`                                            | Visual design variant. Falls back to the global ThemeConfigService variant when null.                                                      |
 
@@ -62,10 +62,11 @@ Paginator provides page-based navigation controls for any list or data set. Supp
 | `--uilib-paginator-button-color-hover`    | `var(--uilib-color-text-primary, #374151)`                                                      |
 | `--uilib-paginator-button-color-selected` | `#ffffff`                                                                                       |
 | `--uilib-paginator-button-font-size`      | `0.875rem`                                                                                      |
-| `--uilib-paginator-button-radius`         | `50%`                                                                                           |
+| `--uilib-paginator-button-radius`         | `var(--uilib-radius-full, 9999px)`                                                              |
 | `--uilib-paginator-button-size`           | `2.25rem`                                                                                       |
 | `--uilib-paginator-current-color`         | `var(--uilib-color-text-secondary, #6b7280)`                                                    |
 | `--uilib-paginator-current-font-size`     | `0.875rem`                                                                                      |
+| `--uilib-paginator-focus-shadow`          | `0 0 0 2px rgba(99, 102, 241, 0.2)`                                                             |
 | `--uilib-paginator-gap`                   | `0.25rem`                                                                                       |
 | `--uilib-paginator-icon-size`             | `1rem`                                                                                          |
 | `--uilib-paginator-jtp-bg`                | `var(--uilib-color-surface, #ffffff)`                                                           |
@@ -87,7 +88,7 @@ Paginator provides page-based navigation controls for any list or data set. Supp
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

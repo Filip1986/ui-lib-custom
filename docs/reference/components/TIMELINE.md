@@ -13,14 +13,14 @@ Timeline component — renders a series of events along a vertical or horizontal
 
 ### Inputs
 
-| Name         | Type                     | Default                       | Description                                                                                                                  |
-| ------------ | ------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `align`      | `TimelineAlign`          | `TIMELINE_DEFAULTS.align`     | Event alignment within the layout. Vertical: `'left'` | `'right'` | `'alternate'` Horizontal: `'top'` | `'bottom'`           |
-| `ariaLabel`  | `string`                 | `TIMELINE_DEFAULTS.ariaLabel` | Accessible label for the timeline list.                                                                                      |
-| `layout`     | `TimelineLayout`         | `TIMELINE_DEFAULTS.layout`    | Layout orientation. - `'vertical'` (default) — events stacked top-to-bottom - `'horizontal'` — events arranged left-to-right |
-| `size`       | `TimelineSize`           | `TIMELINE_DEFAULTS.size`      | Component density size.                                                                                                      |
-| `styleClass` | `string | null`          | `null`                        | Additional CSS class(es) to append to the host element.                                                                      |
-| `variant`    | `TimelineVariant | null` | `null`                        | Visual variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                    |
+| Name         | Type                     | Default                    | Description                                                                                                                  |
+| ------------ | ------------------------ | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `align`      | `TimelineAlign`          | `TIMELINE_DEFAULTS.align`  | Event alignment within the layout. Vertical: `'left'` | `'right'` | `'alternate'` Horizontal: `'top'` | `'bottom'`           |
+| `ariaLabel`  | `string | null`          | `null`                     | Accessible label for the timeline list. Falls back to i18n `timeline.label` when null.                                       |
+| `layout`     | `TimelineLayout`         | `TIMELINE_DEFAULTS.layout` | Layout orientation. - `'vertical'` (default) — events stacked top-to-bottom - `'horizontal'` — events arranged left-to-right |
+| `size`       | `TimelineSize`           | `TIMELINE_DEFAULTS.size`   | Component density size.                                                                                                      |
+| `styleClass` | `string | null`          | `null`                     | Additional CSS class(es) to append to the host element.                                                                      |
+| `variant`    | `TimelineVariant | null` | `null`                     | Visual variant override. When `null`, the variant is inherited from `ThemeConfigService`.                                    |
 
 ### Outputs
 
@@ -40,7 +40,9 @@ _none_
 | `--uilib-timeline-content-gap`         | `1rem`                                |
 | `--uilib-timeline-event-gap`           | `0`                                   |
 | `--uilib-timeline-focus-ring-color`    | `var(--uilib-primary-color, #3b82f6)` |
+| `--uilib-timeline-focus-ring-width`    | `3px`                                 |
 | `--uilib-timeline-font-size`           | `1rem`                                |
+| `--uilib-timeline-item-padding-bottom` | `1.5rem`                              |
 | `--uilib-timeline-marker-bg`           | `var(--uilib-primary-color, #3b82f6)` |
 | `--uilib-timeline-marker-border-color` | `var(--uilib-primary-color, #3b82f6)` |
 | `--uilib-timeline-marker-border-width` | `2px`                                 |
@@ -50,7 +52,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

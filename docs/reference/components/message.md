@@ -13,16 +13,17 @@ Message component — inline severity-based status message with optional close a
 
 ### Inputs
 
-| Name         | Type                    | Default  | Description                                                                                                                                                                                                               |
-| ------------ | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `closable`   | `boolean`               | `false`  | When true, a close button is rendered.                                                                                                                                                                                    |
-| `icon`       | `string | null`         | `null`   | Custom icon name to override the default severity icon. Accepts any semantic icon name from the icon library.                                                                                                             |
-| `messageId`  | `string | null`         | `null`   | Optional explicit `id` for the host element. When omitted an auto-generated `ui-lib-message-{n}` id is used. Consumers should bind this to the same value they pass to `aria-describedby` on the associated form control. |
-| `severity`   | `MessageSeverity`       | `'info'` | Severity level — controls the colour palette and default icon.                                                                                                                                                            |
-| `size`       | `MessageSize`           | `'md'`   | Size of the message.                                                                                                                                                                                                      |
-| `styleClass` | `string | null`         | `null`   | Additional CSS class(es) to attach to the host element.                                                                                                                                                                   |
-| `text`       | `string | null`         | `null`   | Optional text content. Can be combined with content projection or used standalone.                                                                                                                                        |
-| `variant`    | `MessageVariant | null` | `null`   | Design variant. When omitted, falls back to the global ThemeConfigService variant.                                                                                                                                        |
+| Name             | Type                    | Default  | Description                                                                                                                                                                                                               |
+| ---------------- | ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `closable`       | `boolean`               | `false`  | When true, a close button is rendered.                                                                                                                                                                                    |
+| `closeAriaLabel` | `string | null`         | `null`   | Accessible label for the close button. Falls back to the i18n `message.close` key.                                                                                                                                        |
+| `icon`           | `string | null`         | `null`   | Custom icon name to override the default severity icon. Accepts any semantic icon name from the icon library.                                                                                                             |
+| `messageId`      | `string | null`         | `null`   | Optional explicit `id` for the host element. When omitted an auto-generated `ui-lib-message-{n}` id is used. Consumers should bind this to the same value they pass to `aria-describedby` on the associated form control. |
+| `severity`       | `MessageSeverity`       | `'info'` | Severity level — controls the colour palette and default icon.                                                                                                                                                            |
+| `size`           | `MessageSize`           | `'md'`   | Size of the message.                                                                                                                                                                                                      |
+| `styleClass`     | `string | null`         | `null`   | Additional CSS class(es) to attach to the host element.                                                                                                                                                                   |
+| `text`           | `string | null`         | `null`   | Optional text content. Can be combined with content projection or used standalone.                                                                                                                                        |
+| `variant`        | `MessageVariant | null` | `null`   | Design variant. When omitted, falls back to the global ThemeConfigService variant.                                                                                                                                        |
 
 ### Outputs
 
@@ -38,28 +39,29 @@ Message component — inline severity-based status message with optional close a
 
 ## Theming
 
-| CSS Variable                   | Default                            |
-| ------------------------------ | ---------------------------------- |
-| `--uilib-message-bg`           | `transparent`                      |
-| `--uilib-message-border-color` | `transparent`                      |
-| `--uilib-message-border-width` | `1px`                              |
-| `--uilib-message-close-color`  | `currentColor`                     |
-| `--uilib-message-fg`           | `inherit`                          |
-| `--uilib-message-font-size-lg` | `1rem`                             |
-| `--uilib-message-font-size-md` | `0.875rem`                         |
-| `--uilib-message-font-size-sm` | `0.8125rem`                        |
-| `--uilib-message-gap-lg`       | `0.625rem`                         |
-| `--uilib-message-gap-md`       | `0.5rem`                           |
-| `--uilib-message-gap-sm`       | `0.375rem`                         |
-| `--uilib-message-icon-color`   | `currentColor`                     |
-| `--uilib-message-padding-lg`   | `0.875rem 1.125rem`                |
-| `--uilib-message-padding-md`   | `0.625rem 0.875rem`                |
-| `--uilib-message-padding-sm`   | `0.375rem 0.625rem`                |
-| `--uilib-message-radius`       | `var(--uilib-radius-md, 0.375rem)` |
+| CSS Variable                   | Default                                    |
+| ------------------------------ | ------------------------------------------ |
+| `--uilib-message-bg`           | `transparent`                              |
+| `--uilib-message-border-color` | `transparent`                              |
+| `--uilib-message-border-width` | `1px`                                      |
+| `--uilib-message-close-color`  | `currentColor`                             |
+| `--uilib-message-fg`           | `inherit`                                  |
+| `--uilib-message-font-size-lg` | `1rem`                                     |
+| `--uilib-message-font-size-md` | `0.875rem`                                 |
+| `--uilib-message-font-size-sm` | `0.8125rem`                                |
+| `--uilib-message-gap-lg`       | `0.625rem`                                 |
+| `--uilib-message-gap-md`       | `0.5rem`                                   |
+| `--uilib-message-gap-sm`       | `0.375rem`                                 |
+| `--uilib-message-icon-color`   | `currentColor`                             |
+| `--uilib-message-padding-lg`   | `0.875rem 1.125rem`                        |
+| `--uilib-message-padding-md`   | `0.625rem 0.875rem`                        |
+| `--uilib-message-padding-sm`   | `0.375rem 0.625rem`                        |
+| `--uilib-message-radius`       | `var(--uilib-radius-md, 0.375rem)`         |
+| `--uilib-message-transition`   | `var(--uilib-transition-fast, 150ms ease)` |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/alert/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

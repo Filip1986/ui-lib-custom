@@ -50,27 +50,28 @@ InputOtp component — renders N individual input cells for one-time password en
 
 ## Theming
 
-| CSS Variable                             | Default                                                                                                |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `--uilib-input-otp-bg`                   | `var(--uilib-surface, transparent)`                                                                    |
-| `--uilib-input-otp-border-color`         | `var(--uilib-border, currentColor)`                                                                    |
-| `--uilib-input-otp-border-radius`        | `var(--uilib-radius-md, 0.5rem)`                                                                       |
-| `--uilib-input-otp-cell-height`          | `2.5rem`                                                                                               |
-| `--uilib-input-otp-cell-width`           | `2.5rem`                                                                                               |
-| `--uilib-input-otp-disabled-opacity`     | `0.6`                                                                                                  |
-| `--uilib-input-otp-filled-bg`            | `color-mix( in srgb, var(--uilib-input-otp-bg) 84%, var(--uilib-color-neutral-900, currentColor) 4% )` |
-| `--uilib-input-otp-focus-border-color`   | `var(--uilib-color-primary-600, currentColor)`                                                         |
-| `--uilib-input-otp-focus-ring`           | `0 0 0 0.1875rem color-mix(in srgb, var(--uilib-input-otp-focus-border-color) 28%, transparent)`       |
-| `--uilib-input-otp-font-size`            | `var(--uilib-font-size-base, 1rem)`                                                                    |
-| `--uilib-input-otp-font-weight`          | `500`                                                                                                  |
-| `--uilib-input-otp-gap`                  | `var(--uilib-space-2, 0.5rem)`                                                                         |
-| `--uilib-input-otp-invalid-border-color` | `var(--uilib-color-danger-600, currentColor)`                                                          |
-| `--uilib-input-otp-placeholder-color`    | `var(--uilib-muted, currentColor)`                                                                     |
-| `--uilib-input-otp-text-color`           | `var(--uilib-page-fg, currentColor)`                                                                   |
+| CSS Variable                             | Default                                                                                                                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--uilib-input-otp-bg`                   | `var(--uilib-surface, transparent)`                                                                                                                                     |
+| `--uilib-input-otp-border-color`         | `var(--uilib-border, currentColor)`                                                                                                                                     |
+| `--uilib-input-otp-border-radius`        | `var(--uilib-radius-md, 0.5rem)`                                                                                                                                        |
+| `--uilib-input-otp-cell-height`          | `2.5rem`                                                                                                                                                                |
+| `--uilib-input-otp-cell-width`           | `2.5rem`                                                                                                                                                                |
+| `--uilib-input-otp-disabled-opacity`     | `0.6`                                                                                                                                                                   |
+| `--uilib-input-otp-filled-bg`            | `color-mix( in srgb, var(--uilib-input-otp-bg) 84%, var(--uilib-color-neutral-900, currentColor) 4% )`                                                                  |
+| `--uilib-input-otp-focus-border-color`   | `var(--uilib-color-primary-600, currentColor)`                                                                                                                          |
+| `--uilib-input-otp-focus-ring`           | `0 0 0 0.1875rem color-mix(in srgb, var(--uilib-input-otp-focus-border-color) 28%, transparent)`                                                                        |
+| `--uilib-input-otp-font-size`            | `var(--uilib-font-size-base, 1rem)`                                                                                                                                     |
+| `--uilib-input-otp-font-weight`          | `500`                                                                                                                                                                   |
+| `--uilib-input-otp-gap`                  | `var(--uilib-space-2, 0.5rem)`                                                                                                                                          |
+| `--uilib-input-otp-invalid-border-color` | `var(--uilib-color-danger-600, currentColor)`                                                                                                                           |
+| `--uilib-input-otp-placeholder-color`    | `var(--uilib-muted, currentColor)`                                                                                                                                      |
+| `--uilib-input-otp-text-color`           | `var(--uilib-page-fg, currentColor)`                                                                                                                                    |
+| `--uilib-input-otp-transition`           | `border-color var(--uilib-transition-fast, 150ms ease), box-shadow var(--uilib-transition-fast, 150ms ease), background-color var(--uilib-transition-fast, 150ms ease)` |
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

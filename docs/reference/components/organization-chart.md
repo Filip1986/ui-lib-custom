@@ -13,14 +13,14 @@ OrganizationChart renders an interactive hierarchical tree of nodes. Supports si
 
 ### Inputs
 
-| Name            | Type                              | Default          | Description                                                                        |
-| --------------- | --------------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
-| `ariaLabel`     | `string`                          | `'Organization'` | Accessible label for the tree. Applied to the root tree element.                   |
-| `collapsible`   | `boolean`                         | `false`          | When `true`, nodes with children render an expand/collapse toggle button.          |
-| `selectionMode` | `OrganizationChartSelectionMode`  | `null`           | Defines how nodes respond to click interactions.                                   |
-| `styleClass`    | `string`                          | `''`             | Extra CSS class applied to the host element.                                       |
-| `value`         | `OrganizationChartNode[]`         | `[]`             | Root-level nodes of the tree.                                                      |
-| `variant`       | `OrganizationChartVariant | null` | `null`           | Design variant. Falls back to the global `ThemeConfigService` variant when `null`. |
+| Name            | Type                              | Default | Description                                                                                 |
+| --------------- | --------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `ariaLabel`     | `string | null`                   | `null`  | Accessible label for the tree. Applied to the root tree element. Defaults to i18n fallback. |
+| `collapsible`   | `boolean`                         | `false` | When `true`, nodes with children render an expand/collapse toggle button.                   |
+| `selectionMode` | `OrganizationChartSelectionMode`  | `null`  | Defines how nodes respond to click interactions.                                            |
+| `styleClass`    | `string | null`                   | `null`  | Extra CSS class applied to the host element.                                                |
+| `value`         | `OrganizationChartNode[]`         | `[]`    | Root-level nodes of the tree.                                                               |
+| `variant`       | `OrganizationChartVariant | null` | `null`  | Design variant. Falls back to the global `ThemeConfigService` variant when `null`.          |
 
 ### Models (two-way bindable)
 
@@ -49,7 +49,7 @@ _No component-level CSS variables detected._
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

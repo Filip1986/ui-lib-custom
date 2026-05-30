@@ -13,13 +13,13 @@ Menubar component — a PrimeNG-inspired horizontal navigation bar where top-lev
 
 ### Inputs
 
-| Name         | Type                    | Default                      | Description                                                                 |
-| ------------ | ----------------------- | ---------------------------- | --------------------------------------------------------------------------- |
-| `ariaLabel`  | `string`                | `MENUBAR_DEFAULT_ARIA_LABEL` | Accessible label for the navigation landmark (`aria-label` on the `<nav>`). |
-| `model`      | `MenubarItem[]`         | `[]`                         | Array of top-level navigation items.                                        |
-| `size`       | `MenubarSize`           | `'md'`                       | Size token: sm | md | lg.                                                   |
-| `styleClass` | `string | null`         | `null`                       | Extra CSS class appended to the host element.                               |
-| `variant`    | `MenubarVariant | null` | `null`                       | Design-system variant; falls back to `ThemeConfigService` when `null`.      |
+| Name         | Type                    | Default | Description                                                                                                                          |
+| ------------ | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `ariaLabel`  | `string | null`         | `null`  | Accessible label for the navigation landmark (`aria-label` on the `<nav>`). Falls back to the i18n `menubar.label` key when omitted. |
+| `model`      | `MenubarItem[]`         | `[]`    | Array of top-level navigation items.                                                                                                 |
+| `size`       | `MenubarSize`           | `'md'`  | Size token: sm | md | lg.                                                                                                            |
+| `styleClass` | `string | null`         | `null`  | Extra CSS class appended to the host element.                                                                                        |
+| `variant`    | `MenubarVariant | null` | `null`  | Design-system variant; falls back to `ThemeConfigService` when `null`.                                                               |
 
 ### Outputs
 
@@ -81,7 +81,7 @@ Menubar component — a PrimeNG-inspired horizontal navigation bar where top-lev
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

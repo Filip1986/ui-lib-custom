@@ -23,7 +23,7 @@ Select component with single or multiple selection and optional search.
 | `loading`        | `boolean`              | `false`                | Shows spinner and blocks interaction; communicates state via `aria-disabled`. Default: `false`.       |
 | `multiple`       | `boolean`              | `false`                | Enable multi-selection; `ngModel` receives `unknown[]`. Default: `false`.                             |
 | `options`        | `SelectOption[]`       | `[]`                   | Option array. Each item: `{ label, value, disabled?, group? }`. Default: `[]`.                        |
-| `placeholder`    | `string`               | `'Select...'`          | Text shown when no value is selected. Default: `'Select...'`.                                         |
+| `placeholder`    | `string`               | `''`                   | Text shown when no value is selected. Default: `''` (uses `select.placeholder` locale key).           |
 | `required`       | `boolean`              | `false`                | Sets `aria-required="true"` on the host element. Default: `false`.                                    |
 | `searchable`     | `boolean`              | `false`                | Show filter input inside panel; announces result count via live region. Default: `false`.             |
 | `size`           | `SelectSize`           | `SHARED_DEFAULTS.Size` | Control height: `'sm'` (32px) · `'md'` (40px) · `'lg'` (48px). Default: `'md'`.                       |
@@ -78,7 +78,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

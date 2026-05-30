@@ -80,7 +80,7 @@ Tag — compact label for status, category, or classification. Supports a text l
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

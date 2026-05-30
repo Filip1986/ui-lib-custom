@@ -29,11 +29,13 @@ _none_
 
 ## Theming
 
-_No component-level CSS variables detected._
+| CSS Variable                     | Default                             |
+| -------------------------------- | ----------------------------------- |
+| `--uilib-float-label-transition` | `0.2s cubic-bezier(0.4, 0, 0.2, 1)` |
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

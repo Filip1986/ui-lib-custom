@@ -35,16 +35,16 @@ _none_
 
 ## Theming
 
-| CSS Variable                         | Default                                   |
-| ------------------------------------ | ----------------------------------------- |
-| `--uilib-animate-on-scroll-delay`    | `0ms`                                     |
-| `--uilib-animate-on-scroll-distance` | `30px`                                    |
-| `--uilib-animate-on-scroll-duration` | `var(--uilib-transition-duration, 600ms)` |
-| `--uilib-animate-on-scroll-easing`   | `cubic-bezier(0.4, 0, 0.2, 1)`            |
+| CSS Variable                         | Default                        |
+| ------------------------------------ | ------------------------------ |
+| `--uilib-animate-on-scroll-delay`    | `0ms`                          |
+| `--uilib-animate-on-scroll-distance` | `30px`                         |
+| `--uilib-animate-on-scroll-duration` | `600ms`                        |
+| `--uilib-animate-on-scroll-easing`   | `cubic-bezier(0.4, 0, 0.2, 1)` |
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

@@ -13,14 +13,16 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ### Inputs
 
-| Name              | Type                        | Default | Description                                                       |
-| ----------------- | --------------------------- | ------- | ----------------------------------------------------------------- |
-| `closeOnBackdrop` | `boolean`                   | `true`  | Whether a click on the backdrop closes the sheet.                 |
-| `closeOnEscape`   | `boolean`                   | `true`  | Whether pressing Escape closes the sheet.                         |
-| `header`          | `string`                    | `''`    | Optional header text rendered in the sheet header bar.            |
-| `showBackdrop`    | `boolean`                   | `true`  | Whether to render the semi-transparent backdrop behind the sheet. |
-| `styleClass`      | `string | null`             | `null`  | Additional CSS classes applied to the host element.               |
-| `variant`         | `BottomSheetVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.   |
+| Name              | Type                        | Default | Description                                                                         |
+| ----------------- | --------------------------- | ------- | ----------------------------------------------------------------------------------- |
+| `closeAriaLabel`  | `string | null`             | `null`  | ARIA label for the close button. Falls back to i18n `bottom-sheet.close` when null. |
+| `closeOnBackdrop` | `boolean`                   | `true`  | Whether a click on the backdrop closes the sheet.                                   |
+| `closeOnEscape`   | `boolean`                   | `true`  | Whether pressing Escape closes the sheet.                                           |
+| `header`          | `string | null`             | `null`  | Optional header text rendered in the sheet header bar.                              |
+| `showBackdrop`    | `boolean`                   | `true`  | Whether to render the semi-transparent backdrop behind the sheet.                   |
+| `showCloseButton` | `boolean`                   | `true`  | Whether to render the built-in close button inside the header. Defaults to true.    |
+| `styleClass`      | `string | null`             | `null`  | Additional CSS classes applied to the host element.                                 |
+| `variant`         | `BottomSheetVariant | null` | `null`  | Visual variant — inherits from ThemeConfigService when not set.                     |
 
 ### Models (two-way bindable)
 
@@ -37,10 +39,10 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ## Content Projection
 
-| Selector              | Notes |
-| --------------------- | ----- |
-| _(default)_           | —     |
-| `[bottomSheetFooter]` | —     |
+| Selector                             | Notes |
+| ------------------------------------ | ----- |
+| _(default)_                          | —     |
+| `[bottomSheetFooter],[uilib-footer]` | —     |
 
 ## Theming
 
@@ -65,7 +67,7 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -100,19 +102,7 @@ BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
 
 ## Usage Examples
 
-```html
-<!-- Trigger + BottomSheet declared in same template -->
-<ui-lib-button (click)="sheet.open()">Open Sheet</ui-lib-button>
-
-<ui-lib-bottom-sheet #sheet>
-  <h2 uilib-bottom-sheet-title>Share</h2>
-  <p>Choose how to share this item.</p>
-  <div uilib-bottom-sheet-actions>
-    <ui-lib-button (click)="sheet.close()">Cancel</ui-lib-button>
-    <ui-lib-button severity="primary" (click)="share()">Share</ui-lib-button>
-  </div>
-</ui-lib-bottom-sheet>
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

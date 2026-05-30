@@ -15,16 +15,16 @@ Listbox component — displays a scrollable list of options with single or multi
 
 | Name                  | Type                     | Default                                                      | Description                                                                                                                          |
 | --------------------- | ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `ariaLabel`           | `string`                 | `''`                                                         | Accessible label for the listbox element.                                                                                            |
-| `ariaLabelledBy`      | `string`                 | `''`                                                         | ID of an external element that labels this listbox.                                                                                  |
+| `ariaLabel`           | `string | null`          | `null`                                                       | Accessible label for the listbox element.                                                                                            |
+| `ariaLabelledBy`      | `string | null`          | `null`                                                       | ID of an external element that labels this listbox.                                                                                  |
 | `checkbox`            | `boolean`                | `false`                                                      | When true and `multiple` is enabled, renders a checkbox beside each item.                                                            |
 | `disabled`            | `boolean`                | `false`                                                      | When true, disables all interaction.                                                                                                 |
-| `emptyFilterMessage`  | `string`                 | `LISTBOX_DEFAULTS.EmptyFilterMessage`                        | Message shown when the filter produces no matches.                                                                                   |
-| `emptyMessage`        | `string`                 | `LISTBOX_DEFAULTS.EmptyMessage`                              | Message shown when the options array is empty.                                                                                       |
+| `emptyFilterMessage`  | `string | null`          | `null`                                                       | Message shown when the filter produces no matches.                                                                                   |
+| `emptyMessage`        | `string | null`          | `null`                                                       | Message shown when the options array is empty.                                                                                       |
 | `filter`              | `boolean`                | `false`                                                      | When true, shows a filter input above the list.                                                                                      |
 | `filterBy`            | `string`                 | `''`                                                         | Field name to filter against. Defaults to `optionLabel`.                                                                             |
 | `filterMatchMode`     | `ListboxFilterMatchMode` | `LISTBOX_DEFAULTS.FilterMatchMode as ListboxFilterMatchMode` | Matching strategy used for the filter.                                                                                               |
-| `filterPlaceholder`   | `string`                 | `LISTBOX_DEFAULTS.FilterPlaceholder`                         | Placeholder text for the filter input.                                                                                               |
+| `filterPlaceholder`   | `string | null`          | `null`                                                       | Placeholder text for the filter input.                                                                                               |
 | `group`               | `boolean`                | `false`                                                      | When true, the `options` array is treated as a list of groups.                                                                       |
 | `multiple`            | `boolean`                | `false`                                                      | When true, multiple options can be selected simultaneously.                                                                          |
 | `optionDisabled`      | `string`                 | `LISTBOX_DEFAULTS.OptionDisabled`                            | Field name used to determine whether an option is disabled.                                                                          |
@@ -59,65 +59,65 @@ _none_
 
 ## Theming
 
-| CSS Variable                                     | Default                                         |
-| ------------------------------------------------ | ----------------------------------------------- |
-| `--uilib-listbox-bg`                             | `var(--uilib-surface-color, #ffffff)`           |
-| `--uilib-listbox-border`                         | `1px solid var(--uilib-border-color, #dee2e6)`  |
-| `--uilib-listbox-border-radius`                  | `var(--uilib-border-radius, 6px)`               |
-| `--uilib-listbox-checkbox-bg-checked`            | `var(--uilib-primary-color, #3b82f6)`           |
-| `--uilib-listbox-checkbox-border`                | `2px solid var(--uilib-border-color, #ced4da)`  |
-| `--uilib-listbox-checkbox-border-checked`        | `2px solid var(--uilib-primary-color, #3b82f6)` |
-| `--uilib-listbox-checkbox-border-radius`         | `3px`                                           |
-| `--uilib-listbox-checkbox-color-checked`         | `#ffffff`                                       |
-| `--uilib-listbox-checkbox-size`                  | `1rem`                                          |
-| `--uilib-listbox-disabled-opacity`               | `0.5`                                           |
-| `--uilib-listbox-empty-color`                    | `var(--uilib-text-muted-color, #6c757d)`        |
-| `--uilib-listbox-empty-font-size`                | `0.875rem`                                      |
-| `--uilib-listbox-empty-padding`                  | `1rem`                                          |
-| `--uilib-listbox-filter-bg`                      | `var(--uilib-surface-color, #ffffff)`           |
-| `--uilib-listbox-filter-border-bottom`           | `1px solid var(--uilib-border-color, #dee2e6)`  |
-| `--uilib-listbox-filter-focus-ring`              | `0 0 0 2px var(--uilib-primary-color, #3b82f6)` |
-| `--uilib-listbox-filter-icon-color`              | `var(--uilib-text-muted-color, #6c757d)`        |
-| `--uilib-listbox-filter-input-color`             | `var(--uilib-text-color, #1f2937)`              |
-| `--uilib-listbox-filter-input-placeholder-color` | `var(--uilib-text-muted-color, #9ca3af)`        |
-| `--uilib-listbox-filter-padding`                 | `0.5rem 0.75rem`                                |
-| `--uilib-listbox-focus-ring`                     | `0 0 0 2px var(--uilib-primary-color, #3b82f6)` |
-| `--uilib-listbox-group-color`                    | `var(--uilib-text-muted-color, #6c757d)`        |
-| `--uilib-listbox-group-font-size`                | `0.75rem`                                       |
-| `--uilib-listbox-group-font-weight`              | `600`                                           |
-| `--uilib-listbox-group-letter-spacing`           | `0.05em`                                        |
-| `--uilib-listbox-group-padding`                  | `0.375rem 0.75rem`                              |
-| `--uilib-listbox-group-text-transform`           | `uppercase`                                     |
-| `--uilib-listbox-header-bg`                      | `var(--uilib-surface-color-alt, #f8f9fa)`       |
-| `--uilib-listbox-header-border-bottom`           | `1px solid var(--uilib-border-color, #dee2e6)`  |
-| `--uilib-listbox-header-padding`                 | `0.5rem 0.75rem`                                |
-| `--uilib-listbox-item-bg`                        | `transparent`                                   |
-| `--uilib-listbox-item-bg-focused`                | `var(--uilib-hover-bg, rgba(0, 0, 0, 0.06))`    |
-| `--uilib-listbox-item-bg-hover`                  | `var(--uilib-hover-bg, rgba(0, 0, 0, 0.04))`    |
-| `--uilib-listbox-item-bg-selected`               | `var(--uilib-primary-color, #3b82f6)`           |
-| `--uilib-listbox-item-bg-striped`                | `var(--uilib-surface-color-alt, #f8f9fa)`       |
-| `--uilib-listbox-item-border-radius`             | `0`                                             |
-| `--uilib-listbox-item-color`                     | `var(--uilib-text-color, #1f2937)`              |
-| `--uilib-listbox-item-color-disabled`            | `var(--uilib-text-muted-color, #9ca3af)`        |
-| `--uilib-listbox-item-color-selected`            | `#ffffff`                                       |
-| `--uilib-listbox-item-cursor-disabled`           | `not-allowed`                                   |
-| `--uilib-listbox-item-font-size`                 | `var(--uilib-listbox-item-font-size-md)`        |
-| `--uilib-listbox-item-font-size-lg`              | `1rem`                                          |
-| `--uilib-listbox-item-font-size-md`              | `0.875rem`                                      |
-| `--uilib-listbox-item-font-size-sm`              | `0.8125rem`                                     |
-| `--uilib-listbox-item-gap`                       | `0.5rem`                                        |
-| `--uilib-listbox-item-padding`                   | `var(--uilib-listbox-item-padding-md)`          |
-| `--uilib-listbox-item-padding-lg`                | `0.75rem 1rem`                                  |
-| `--uilib-listbox-item-padding-md`                | `0.5rem 0.875rem`                               |
-| `--uilib-listbox-item-padding-sm`                | `0.375rem 0.625rem`                             |
-| `--uilib-listbox-list-padding`                   | `0.25rem 0`                                     |
-| `--uilib-listbox-shadow`                         | `none`                                          |
-| `--uilib-listbox-transition`                     | `background-color 0.15s ease, color 0.15s ease` |
-| `--uilib-listbox-width`                          | `100%`                                          |
+| CSS Variable                                     | Default                                                                                                     |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `--uilib-listbox-bg`                             | `var(--uilib-surface-color, #ffffff)`                                                                       |
+| `--uilib-listbox-border`                         | `1px solid var(--uilib-border-color, #dee2e6)`                                                              |
+| `--uilib-listbox-border-radius`                  | `var(--uilib-border-radius, 6px)`                                                                           |
+| `--uilib-listbox-checkbox-bg-checked`            | `var(--uilib-primary-color, #3b82f6)`                                                                       |
+| `--uilib-listbox-checkbox-border`                | `2px solid var(--uilib-border-color, #ced4da)`                                                              |
+| `--uilib-listbox-checkbox-border-checked`        | `2px solid var(--uilib-primary-color, #3b82f6)`                                                             |
+| `--uilib-listbox-checkbox-border-radius`         | `3px`                                                                                                       |
+| `--uilib-listbox-checkbox-color-checked`         | `#ffffff`                                                                                                   |
+| `--uilib-listbox-checkbox-size`                  | `1rem`                                                                                                      |
+| `--uilib-listbox-disabled-opacity`               | `0.5`                                                                                                       |
+| `--uilib-listbox-empty-color`                    | `var(--uilib-text-muted-color, #6c757d)`                                                                    |
+| `--uilib-listbox-empty-font-size`                | `0.875rem`                                                                                                  |
+| `--uilib-listbox-empty-padding`                  | `1rem`                                                                                                      |
+| `--uilib-listbox-filter-bg`                      | `var(--uilib-surface-color, #ffffff)`                                                                       |
+| `--uilib-listbox-filter-border-bottom`           | `1px solid var(--uilib-border-color, #dee2e6)`                                                              |
+| `--uilib-listbox-filter-focus-ring`              | `0 0 0 2px var(--uilib-primary-color, #3b82f6)`                                                             |
+| `--uilib-listbox-filter-icon-color`              | `var(--uilib-text-muted-color, #6c757d)`                                                                    |
+| `--uilib-listbox-filter-input-color`             | `var(--uilib-text-color, #1f2937)`                                                                          |
+| `--uilib-listbox-filter-input-placeholder-color` | `var(--uilib-text-muted-color, #9ca3af)`                                                                    |
+| `--uilib-listbox-filter-padding`                 | `0.5rem 0.75rem`                                                                                            |
+| `--uilib-listbox-focus-ring`                     | `0 0 0 2px var(--uilib-primary-color, #3b82f6)`                                                             |
+| `--uilib-listbox-group-color`                    | `var(--uilib-text-muted-color, #6c757d)`                                                                    |
+| `--uilib-listbox-group-font-size`                | `0.75rem`                                                                                                   |
+| `--uilib-listbox-group-font-weight`              | `600`                                                                                                       |
+| `--uilib-listbox-group-letter-spacing`           | `0.05em`                                                                                                    |
+| `--uilib-listbox-group-padding`                  | `0.375rem 0.75rem`                                                                                          |
+| `--uilib-listbox-group-text-transform`           | `uppercase`                                                                                                 |
+| `--uilib-listbox-header-bg`                      | `var(--uilib-surface-color-alt, #f8f9fa)`                                                                   |
+| `--uilib-listbox-header-border-bottom`           | `1px solid var(--uilib-border-color, #dee2e6)`                                                              |
+| `--uilib-listbox-header-padding`                 | `0.5rem 0.75rem`                                                                                            |
+| `--uilib-listbox-item-bg`                        | `transparent`                                                                                               |
+| `--uilib-listbox-item-bg-focused`                | `var(--uilib-hover-bg, rgba(0, 0, 0, 0.06))`                                                                |
+| `--uilib-listbox-item-bg-hover`                  | `var(--uilib-hover-bg, rgba(0, 0, 0, 0.04))`                                                                |
+| `--uilib-listbox-item-bg-selected`               | `var(--uilib-primary-color, #3b82f6)`                                                                       |
+| `--uilib-listbox-item-bg-striped`                | `var(--uilib-surface-color-alt, #f8f9fa)`                                                                   |
+| `--uilib-listbox-item-border-radius`             | `0`                                                                                                         |
+| `--uilib-listbox-item-color`                     | `var(--uilib-text-color, #1f2937)`                                                                          |
+| `--uilib-listbox-item-color-disabled`            | `var(--uilib-text-muted-color, #9ca3af)`                                                                    |
+| `--uilib-listbox-item-color-selected`            | `#ffffff`                                                                                                   |
+| `--uilib-listbox-item-cursor-disabled`           | `not-allowed`                                                                                               |
+| `--uilib-listbox-item-font-size`                 | `var(--uilib-listbox-item-font-size-md)`                                                                    |
+| `--uilib-listbox-item-font-size-lg`              | `1rem`                                                                                                      |
+| `--uilib-listbox-item-font-size-md`              | `0.875rem`                                                                                                  |
+| `--uilib-listbox-item-font-size-sm`              | `0.8125rem`                                                                                                 |
+| `--uilib-listbox-item-gap`                       | `0.5rem`                                                                                                    |
+| `--uilib-listbox-item-padding`                   | `var(--uilib-listbox-item-padding-md)`                                                                      |
+| `--uilib-listbox-item-padding-lg`                | `0.75rem 1rem`                                                                                              |
+| `--uilib-listbox-item-padding-md`                | `0.5rem 0.875rem`                                                                                           |
+| `--uilib-listbox-item-padding-sm`                | `0.375rem 0.625rem`                                                                                         |
+| `--uilib-listbox-list-padding`                   | `0.25rem 0`                                                                                                 |
+| `--uilib-listbox-shadow`                         | `none`                                                                                                      |
+| `--uilib-listbox-transition`                     | `background-color var(--uilib-transition-fast, 150ms ease), color var(--uilib-transition-fast, 150ms ease)` |
+| `--uilib-listbox-width`                          | `100%`                                                                                                      |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -164,8 +164,10 @@ _none_
 ## Usage Examples
 
 ```html
+<!-- Simple single selection -->
 <ui-lib-listbox [options]="cities" optionLabel="name" [(ngModel)]="selectedCity" />
 
+<!-- Multi-select with filter, checkboxes, and select-all toggle -->
 <ui-lib-listbox
   [options]="cities"
   optionLabel="name"
@@ -175,6 +177,23 @@ _none_
   [showToggleAll]="true"
   [(ngModel)]="selectedCities"
 />
+
+<!-- Custom item template — access the raw option via `option` or via `$implicit.option` -->
+<ui-lib-listbox [options]="products" optionLabel="name" optionValue="id" [(ngModel)]="selectedId">
+  <ng-template #itemTemplate let-row let-selected="selected" let-raw="option">
+    <span class="icon {{ raw.icon }}"></span>
+    <span>{{ row.label }}</span>
+    <span class="price">{{ raw.price | currency }}</span>
+    @if (selected) { <span class="badge">✓</span> }
+  </ng-template>
+</ui-lib-listbox>
+
+<!-- Grouped options with custom group header -->
+<ui-lib-listbox [options]="groupedCities" [group]="true" optionLabel="name" [(ngModel)]="selectedCity">
+  <ng-template #groupTemplate let-group let-label="label">
+    <strong>{{ label }}</strong> ({{ group.$implicit?.items?.length }} cities)
+  </ng-template>
+</ui-lib-listbox>
 ```
 
 ## Related

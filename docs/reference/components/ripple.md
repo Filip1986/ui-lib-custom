@@ -7,17 +7,18 @@
 
 ## Overview
 
-The `Ripple` directive adds a Material-style circular wave effect to any element on click. It is a pure behaviour directive — no component wrapper is needed.
+Indigo ripple
 
 ## API
 
 ### Inputs
 
-| Name             | Type      | Default | Description                                                                                                                                                               |
-| ---------------- | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                                                                                                         |
-| `rippleColor`    | `string`  | `''`    | Override the CSS variable `--uilib-ripple-color` inline. Accepts any valid CSS colour value (e.g. `'rgba(0,0,0,0.12)'`). If not provided, the CSS variable value is used. |
-| `rippleDuration` | `string`  | `''`    | Override the animation duration inline (e.g. `'500ms'`). If not provided, the CSS variable `--uilib-ripple-duration` value is used.                                       |
+| Name             | Type      | Default | Description                                                                                                                                                                        |
+| ---------------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                                                                                                                  |
+| `rippleColor`    | `string`  | `''`    | Override the CSS variable `--uilib-ripple-color` inline. Accepts any valid CSS colour value (e.g. `'rgba(0,0,0,0.12)'`). If not provided, the CSS variable value is used.          |
+| `rippleDuration` | `string`  | `''`    | Override the animation duration inline (e.g. `'500ms'`). If not provided, the CSS variable `--uilib-ripple-duration` value is used.                                                |
+| `rippleEasing`   | `string`  | `''`    | Override the animation easing inline (e.g. `'ease-in-out'`). Accepts any valid CSS timing function value. If not provided, the CSS variable `--uilib-ripple-easing` value is used. |
 
 ### Outputs
 
@@ -37,7 +38,7 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** Decorative — no APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
@@ -62,6 +63,19 @@ _none_
 
 <!-- Custom duration -->
 <button uiLibRipple rippleDuration="400ms">Fast ripple</button>
+
+<!-- Custom easing — linear expand for sharp feedback -->
+<button uiLibRipple rippleEasing="linear">Sharp ripple</button>
+
+<!-- All inline overrides combined -->
+<button
+  uiLibRipple
+  [rippleColor]="'rgba(99, 102, 241, 0.35)'"
+  rippleDuration="350ms"
+  rippleEasing="ease-out"
+>
+  Indigo ripple
+</button>
 
 <!-- Disable ripple conditionally -->
 <button uiLibRipple [disabled]="isLoading">Submit</button>

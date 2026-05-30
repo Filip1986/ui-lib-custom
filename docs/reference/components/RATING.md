@@ -52,24 +52,25 @@ _none_
 
 ## Theming
 
-| CSS Variable                         | Default                                                                                  |
-| ------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `--uilib-rating-cancel-color`        | `var(--uilib-color-neutral-400, #9ca3af)`                                                |
-| `--uilib-rating-cancel-hover-color`  | `var(--uilib-color-danger-500, #ef4444)`                                                 |
-| `--uilib-rating-focus-shadow`        | `0 0 0 2px color-mix(in srgb, var(--uilib-color-primary-500, #f59e0b) 40%, transparent)` |
-| `--uilib-rating-gap`                 | `0.25rem`                                                                                |
-| `--uilib-rating-star-hover-color`    | `var(--uilib-color-primary-400, #fbbf24)`                                                |
-| `--uilib-rating-star-off-color`      | `var(--uilib-color-neutral-300, #d1d5db)`                                                |
-| `--uilib-rating-star-on-color`       | `var(--uilib-color-primary-500, #f59e0b)`                                                |
-| `--uilib-rating-star-size`           | `var(--uilib-rating-star-size-sm)`                                                       |
-| `--uilib-rating-star-size-lg`        | `2rem`                                                                                   |
-| `--uilib-rating-star-size-md`        | `1.5rem`                                                                                 |
-| `--uilib-rating-star-size-sm`        | `1rem`                                                                                   |
-| `--uilib-rating-transition-duration` | `0ms`                                                                                    |
+| CSS Variable                        | Default                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------- |
+| `--uilib-rating-cancel-color`       | `var(--uilib-color-neutral-400, #9ca3af)`                                                |
+| `--uilib-rating-cancel-hover-color` | `var(--uilib-color-danger-500, #ef4444)`                                                 |
+| `--uilib-rating-cancel-transition`  | `color 0.15s ease, transform 0.1s ease`                                                  |
+| `--uilib-rating-focus-shadow`       | `0 0 0 2px color-mix(in srgb, var(--uilib-color-primary-500, #f59e0b) 40%, transparent)` |
+| `--uilib-rating-gap`                | `0.25rem`                                                                                |
+| `--uilib-rating-star-hover-color`   | `var(--uilib-color-primary-400, #fbbf24)`                                                |
+| `--uilib-rating-star-off-color`     | `var(--uilib-color-neutral-300, #d1d5db)`                                                |
+| `--uilib-rating-star-on-color`      | `var(--uilib-color-primary-500, #f59e0b)`                                                |
+| `--uilib-rating-star-size`          | `var(--uilib-rating-star-size-sm)`                                                       |
+| `--uilib-rating-star-size-lg`       | `2rem`                                                                                   |
+| `--uilib-rating-star-size-md`       | `1.5rem`                                                                                 |
+| `--uilib-rating-star-size-sm`       | `1rem`                                                                                   |
+| `--uilib-rating-star-transition`    | `color 0.15s ease, transform 0.1s ease`                                                  |
 
 ## Accessibility
 
-**APG pattern:** https://www.w3.org/WAI/ARIA/apg/patterns/radio/
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 

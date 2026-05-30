@@ -13,16 +13,16 @@ ScrollTop — a floating "back to top" button that appears after the user scroll
 
 ### Inputs
 
-| Name              | Type                      | Default            | Description                                                                                       |
-| ----------------- | ------------------------- | ------------------ | ------------------------------------------------------------------------------------------------- |
-| `behavior`        | `ScrollTopBehavior`       | `'smooth'`         | Native scroll-behavior applied when scrolling back to top.                                        |
-| `buttonAriaLabel` | `string`                  | `''`               | Accessible label for the button. Falls back to the active locale's 'scroll-top.label' when empty. |
-| `icon`            | `string`                  | `'pi pi-arrow-up'` | CSS class(es) for the icon (e.g. "pi pi-arrow-up").                                               |
-| `size`            | `ScrollTopSize`           | `'md'`             | Size of the button.                                                                               |
-| `styleClass`      | `string | null`           | `null`             | Additional CSS classes to attach to the host element.                                             |
-| `target`          | `ScrollTopTarget`         | `'window'`         | Target to listen for scroll events on: the global window or the parent element.                   |
-| `threshold`       | `number`                  | `400`              | Scroll distance in pixels before the button becomes visible.                                      |
-| `variant`         | `ScrollTopVariant | null` | `null`             | Visual variant — inherits from ThemeConfigService when not set.                                   |
+| Name              | Type                      | Default            | Description                                                                                          |
+| ----------------- | ------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------- |
+| `behavior`        | `ScrollTopBehavior`       | `'smooth'`         | Native scroll-behavior applied when scrolling back to top.                                           |
+| `buttonAriaLabel` | `string | null`           | `null`             | Accessible label for the button. Falls back to the active locale's `scroll-top.label` key when null. |
+| `icon`            | `string`                  | `'pi pi-arrow-up'` | CSS class(es) for the icon (e.g. "pi pi-arrow-up").                                                  |
+| `size`            | `ScrollTopSize`           | `'md'`             | Size of the button.                                                                                  |
+| `styleClass`      | `string | null`           | `null`             | Additional CSS classes to attach to the host element.                                                |
+| `target`          | `ScrollTopTarget`         | `'window'`         | Target to listen for scroll events on: the global window or the parent element.                      |
+| `threshold`       | `number`                  | `400`              | Scroll distance in pixels before the button becomes visible.                                         |
+| `variant`         | `ScrollTopVariant | null` | `null`             | Visual variant — inherits from ThemeConfigService when not set.                                      |
 
 ### Outputs
 
@@ -30,7 +30,9 @@ _none_
 
 ## Content Projection
 
-_none_
+| Selector       | Notes |
+| -------------- | ----- |
+| `[uilib-icon]` | —     |
 
 ## Theming
 
@@ -56,40 +58,30 @@ _none_
 
 ## Accessibility
 
-**APG pattern:** No dedicated APG pattern
+**APG pattern:** <!-- TODO: add WAI-ARIA APG pattern URL or "decorative" -->
 
 ### Keyboard Interactions
 
-| Test description                                                         |
-| ------------------------------------------------------------------------ |
-| should allow focus on the visible button for keyboard users              |
-| should apply variant class when variant is set                           |
-| should fall back to the default aria-label when buttonAriaLabel is blank |
-| should fall back to the default aria-label when the input is blank       |
-| should keep the button out of the tab order when hidden                  |
-| should keep the hidden button out of the keyboard tab order              |
-| should pass axe checks for the parent target variant                     |
-| should pass axe checks when visible                                      |
-| should pass axe checks while hidden by default                           |
-| should reactively update a custom aria-label                             |
-| should render a button with the correct aria-label                       |
-| should render a button with the default aria-label                       |
-| should restore keyboard focusability when the button becomes visible     |
-| should restore the button tab order when visible                         |
-| should update aria-label when buttonAriaLabel input changes              |
+| Test description                                                     |
+| -------------------------------------------------------------------- |
+| should allow focus on the visible button for keyboard users          |
+| should apply variant class when variant is set                       |
+| should fall back to the i18n label when buttonAriaLabel is null      |
+| should keep the button out of the tab order when hidden              |
+| should keep the hidden button out of the keyboard tab order          |
+| should pass axe checks for the parent target variant                 |
+| should pass axe checks when visible                                  |
+| should pass axe checks while hidden by default                       |
+| should reactively update a custom aria-label                         |
+| should render a button with the correct aria-label                   |
+| should render a button with the default aria-label                   |
+| should restore keyboard focusability when the button becomes visible |
+| should restore the button tab order when visible                     |
+| should update aria-label when buttonAriaLabel input changes          |
 
 ## Usage Examples
 
-```html
-<!-- Renders a floating button that appears after scrolling 400px -->
-<ui-lib-scroll-top [threshold]="400" />
-
-<!-- Inside a scrollable container -->
-<div #scrollTarget style="height: 300px; overflow-y: auto">
-  <p *ngFor="let i of items">Row {{ i }}</p>
-  <ui-lib-scroll-top [target]="scrollTarget" />
-</div>
-```
+<!-- TODO: add usage examples -->
 
 ## Related
 

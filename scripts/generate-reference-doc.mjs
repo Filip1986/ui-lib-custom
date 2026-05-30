@@ -165,6 +165,7 @@ function extractJsdocBefore(lines, idx) {
     .replace(/^\s*\/\*\*\s?/, '')     // strip leading whitespace + /**
     .replace(/\s*\*\/\s*$/, '')       // strip */ + trailing whitespace
     .replace(/^\s*\*\s?/gm, '')       // strip leading " * " from each continuation line
+    .replace(/@\w[\s\S]*/g, '')       // strip @example, @param, @returns etc. (same as extractOverview)
     .replace(/\s+/g, ' ')             // collapse any remaining whitespace
     .trim();
 }
