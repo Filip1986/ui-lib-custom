@@ -24,14 +24,14 @@ import type { MessageSeverity, MessageVariant, MessageSize } from './message';
 
 function queryElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
 function requireElement<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T {
   const element: T | null = queryElement<T>(fixture, selector);
   if (!element) throw new Error('Element not found: ' + selector);
@@ -49,7 +49,7 @@ const TEST_TEMPLATE: string =
   ' [icon]="icon()"' +
   ' [closable]="closable()"' +
   ' [styleClass]="styleClass()"' +
-  ' (close)="closed = true"' +
+  ' (closed)="closed = true"' +
   ' />';
 
 @Component({
@@ -61,7 +61,7 @@ const TEST_TEMPLATE: string =
 class TestHostComponent {
   public readonly severity: WritableSignal<MessageSeverity> = signal<MessageSeverity>('info');
   public readonly variant: WritableSignal<MessageVariant | null> = signal<MessageVariant | null>(
-    null
+    null,
   );
   public readonly size: WritableSignal<MessageSize> = signal<MessageSize>('md');
   public readonly text: WritableSignal<string | null> = signal<string | null>(null);
@@ -181,7 +181,7 @@ describe('Message', (): void => {
       TestBed.createComponent(HostWithIdComponent);
     fixture.detectChanges();
     const el: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-message'
+      'ui-lib-message',
     ) as HTMLElement;
     expect(el.id).toBe('form-error');
   });
@@ -226,7 +226,7 @@ describe('Message', (): void => {
     const { fixture } = bootstrap();
     const icon: HTMLElement | null = queryElement<HTMLElement>(
       fixture,
-      'ui-lib-icon.ui-lib-message__icon'
+      'ui-lib-icon.ui-lib-message__icon',
     );
     expect(icon).toBeTruthy();
   });
@@ -239,7 +239,7 @@ describe('Message', (): void => {
   it('renders nothing extra when text is null', (): void => {
     const { messageElement } = bootstrap({ text: null });
     const content: HTMLElement = messageElement.querySelector(
-      '.ui-lib-message__content'
+      '.ui-lib-message__content',
     ) as HTMLElement;
     expect(content.textContent).toBe('');
   });
@@ -248,7 +248,7 @@ describe('Message', (): void => {
     const { fixture } = bootstrap({ closable: false });
     const closeButton: HTMLElement | null = queryElement<HTMLElement>(
       fixture,
-      '.ui-lib-message__close'
+      '.ui-lib-message__close',
     );
     expect(closeButton).toBeNull();
   });
@@ -257,7 +257,7 @@ describe('Message', (): void => {
     const { fixture } = bootstrap({ closable: true });
     const closeButton: HTMLElement | null = queryElement<HTMLElement>(
       fixture,
-      '.ui-lib-message__close'
+      '.ui-lib-message__close',
     );
     expect(closeButton).toBeTruthy();
   });
@@ -268,7 +268,7 @@ describe('Message', (): void => {
     expect(closeButton.getAttribute('aria-label')).toBe('Close message');
   });
 
-  it('emits close output when close button is clicked', (): void => {
+  it('emits closed output when close button is clicked', (): void => {
     const { fixture, host } = bootstrap({ closable: true });
     const closeButton: HTMLElement = requireElement<HTMLElement>(fixture, '.ui-lib-message__close');
     closeButton.click();

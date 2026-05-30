@@ -23,7 +23,7 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `close` | `void` | Emitted when the close button is activated; the caller is responsible for removing the message |
+| `closed` | `void` | Emitted when the close button is activated; the caller is responsible for removing the message |
 
 ## Accessibility
 
@@ -43,7 +43,7 @@ The severity icon is decorative and always carries `aria-hidden="true"`.
 <ui-lib-message severity="success" text="Operation completed successfully." />
 
 <!-- closable warning with projected content -->
-<ui-lib-message severity="warn" [closable]="true" (close)="showWarning = false">
+<ui-lib-message severity="warn" [closable]="true" (closed)="showWarning = false">
   Unsaved changes will be <strong>lost</strong>.
 </ui-lib-message>
 ```

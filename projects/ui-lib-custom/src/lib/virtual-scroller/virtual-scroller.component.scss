@@ -15,6 +15,7 @@
     --uilib-scroller-item-border-color: var(--uilib-color-border, #e5e7eb);
     --uilib-scroller-spinner-border-radius: var(--uilib-radius-full, 9999px);
     --uilib-scroller-spinner-animation: uilib-scroller-spin 0.75s linear infinite;
+    --uilib-scroller-focus-ring: 0 0 0 2px var(--uilib-color-focus-ring, #6366f1);
 
     display: block;
   }
@@ -33,6 +34,10 @@
     will-change: scroll-position;
     outline: 0 none;
     scroll-behavior: smooth;
+
+    &:focus-visible {
+      box-shadow: var(--uilib-scroller-focus-ring);
+    }
   }
 
   // -----------------------------------------------------------------------------
