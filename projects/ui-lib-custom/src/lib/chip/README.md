@@ -92,20 +92,26 @@ Default `<ng-content>` slot is available for fully custom chip content when neit
 
 ## CSS variables
 
-| Variable                      | Description                              |
-|-------------------------------|------------------------------------------|
-| `--uilib-chip-bg`             | Chip background colour                   |
-| `--uilib-chip-color`          | Chip text colour                         |
-| `--uilib-chip-border`         | Chip border shorthand                    |
-| `--uilib-chip-border-radius`  | Chip border radius                       |
-| `--uilib-chip-padding-y`      | Vertical padding                         |
-| `--uilib-chip-padding-x`      | Horizontal padding                       |
-| `--uilib-chip-gap`            | Gap between icon/image/label/button      |
-| `--uilib-chip-font-size`      | Font size                                |
-| `--uilib-chip-font-weight`    | Font weight                              |
-| `--uilib-chip-image-size`     | Circular image diameter                  |
-| `--uilib-chip-remove-bg-hover`| Remove button hover background           |
-| `--uilib-chip-transition`     | Transition shorthand (respects `prefers-reduced-motion`) |
+| Variable | Default | Description |
+|---|---|---|
+| `--uilib-chip-bg` | `var(--uilib-color-primary, #6366f1)` | Chip background colour |
+| `--uilib-chip-color` | `#ffffff` | Chip text colour |
+| `--uilib-chip-border` | `none` | Chip border shorthand |
+| `--uilib-chip-border-radius` | `var(--uilib-radius-full, 9999px)` | Chip corner radius |
+| `--uilib-chip-shadow` | `none` | Chip box shadow (material variant adds elevation) |
+| `--uilib-chip-padding-y` | `0.25rem` | Vertical padding |
+| `--uilib-chip-padding-x` | `0.75rem` | Horizontal padding |
+| `--uilib-chip-gap` | `0.375rem` | Gap between icon / image / label / button |
+| `--uilib-chip-font-size` | `0.875rem` | Font size |
+| `--uilib-chip-font-weight` | `500` | Font weight |
+| `--uilib-chip-image-size` | `1.5rem` | Avatar image diameter |
+| `--uilib-chip-image-border-radius` | `var(--uilib-radius-full, 9999px)` | Avatar image corner radius |
+| `--uilib-chip-remove-bg` | `transparent` | Remove button default background |
+| `--uilib-chip-remove-bg-hover` | `rgba(255,255,255,0.2)` | Remove button hover background |
+| `--uilib-chip-remove-bg-active` | `rgba(255,255,255,0.32)` | Remove button pressed background |
+| `--uilib-chip-remove-border-radius` | `var(--uilib-radius-full, 9999px)` | Remove button corner radius |
+| `--uilib-chip-transition` | `var(--uilib-transition-fast, 150ms ease)` | Chip hover/opacity transition; zeroed by `prefers-reduced-motion` |
+| `--uilib-chip-remove-transition` | `var(--uilib-transition-fast, 150ms ease)` | Remove button transition; zeroed by `prefers-reduced-motion` |
 
 ## Accessibility
 

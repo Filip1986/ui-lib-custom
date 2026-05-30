@@ -252,10 +252,10 @@ describe('FloatLabelComponent projection and structure', (): void => {
 
   it('projects input and label content', (): void => {
     const inputDebugElement: DebugElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > input')
+      By.css('ui-lib-float-label > input'),
     );
     const labelDebugElement: DebugElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > label')
+      By.css('ui-lib-float-label > label'),
     );
 
     expect(inputDebugElement).toBeTruthy();
@@ -265,10 +265,10 @@ describe('FloatLabelComponent projection and structure', (): void => {
 
   it('auto-associates a projected label with the generated input id', (): void => {
     const labelElement: HTMLLabelElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > label')
+      By.css('ui-lib-float-label > label'),
     ).nativeElement as HTMLLabelElement;
     const inputElement: HTMLInputElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > input')
+      By.css('ui-lib-float-label > input'),
     ).nativeElement as HTMLInputElement;
 
     expect(inputElement.id).toBeTruthy();
@@ -278,7 +278,7 @@ describe('FloatLabelComponent projection and structure', (): void => {
   it('does not add wrapper nodes around projected content', (): void => {
     const floatLabel: HTMLElement = getFloatLabelElement(fixture);
     const childTagNames: string[] = Array.from(floatLabel.children).map(
-      (element: Element): string => element.tagName.toLowerCase()
+      (element: Element): string => element.tagName.toLowerCase(),
     );
 
     expect(childTagNames).toEqual(['input', 'label']);
@@ -307,12 +307,12 @@ describe('FloatLabelComponent integration contracts', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<GeneratedAssociationHostComponent> = TestBed.createComponent(
-      GeneratedAssociationHostComponent
+      GeneratedAssociationHostComponent,
     );
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label input')
+      By.css('ui-lib-float-label input'),
     ).nativeElement as HTMLInputElement;
 
     expect(inputElement.getAttribute('placeholder')).toBe(' ');
@@ -337,7 +337,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
     expect(selectElement.classList.contains('uilib-inputwrapper-filled')).toBeTruthy();
 
     const controlElement: HTMLElement = fixture.debugElement.query(
-      By.css('.ui-lib-select__control')
+      By.css('.ui-lib-select__control'),
     ).nativeElement as HTMLElement;
     controlElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
@@ -356,10 +356,10 @@ describe('FloatLabelComponent integration contracts', (): void => {
     fixture.detectChanges();
 
     const selectElement: HTMLElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > ui-lib-select')
+      By.css('ui-lib-float-label > ui-lib-select'),
     ).nativeElement as HTMLElement;
     const labelElement: HTMLLabelElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > label')
+      By.css('ui-lib-float-label > label'),
     ).nativeElement as HTMLLabelElement;
 
     expect(labelElement.id).toBeTruthy();
@@ -385,7 +385,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
 
     const inputHostElement: HTMLElement = inputDebugElement.nativeElement as HTMLElement;
     expect(
-      inputHostElement.classList.contains('uilib-filled') || inputComponent.isFilled()
+      inputHostElement.classList.contains('uilib-filled') || inputComponent.isFilled(),
     ).toBeTruthy();
 
     nativeInput.dispatchEvent(new FocusEvent('focus'));
@@ -393,7 +393,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
 
     const floatLabel: HTMLElement = getFloatLabelElement(fixture);
     const labelElement: HTMLLabelElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label > label')
+      By.css('ui-lib-float-label > label'),
     ).nativeElement as HTMLLabelElement;
     expect(floatLabel.contains(nativeInput)).toBeTruthy();
     expect(labelElement.htmlFor).toBe(nativeInput.id);
@@ -406,7 +406,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
     }).compileComponents();
 
     const fixture: ComponentFixture<ReactiveInvalidHostComponent> = TestBed.createComponent(
-      ReactiveInvalidHostComponent
+      ReactiveInvalidHostComponent,
     );
     fixture.detectChanges();
 
@@ -415,7 +415,7 @@ describe('FloatLabelComponent integration contracts', (): void => {
     fixture.detectChanges();
 
     const inputElement: HTMLInputElement = fixture.debugElement.query(
-      By.css('ui-lib-float-label input')
+      By.css('ui-lib-float-label input'),
     ).nativeElement as HTMLInputElement;
 
     expect(inputElement.classList.contains('ng-invalid')).toBeTruthy();
@@ -479,7 +479,7 @@ describe('FloatLabelComponent stylesheet contract', (): void => {
       'src',
       'lib',
       'float-label',
-      'float-label.scss'
+      'float-label.scss',
     );
     const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
@@ -490,7 +490,7 @@ describe('FloatLabelComponent stylesheet contract', (): void => {
     expect(stylesheetSource).toContain(':has(.ng-invalid.ng-dirty) label');
     expect(stylesheetSource).toContain(':has(.uilib-inputwrapper-focus) label');
     expect(stylesheetSource).toContain('&:focus-within label');
-    expect(stylesheetSource).toContain('--uilib-transition-base');
+    expect(stylesheetSource).toContain('--uilib-float-label-transition');
     expect(stylesheetSource).toContain('--uilib-input-radius');
   });
 });

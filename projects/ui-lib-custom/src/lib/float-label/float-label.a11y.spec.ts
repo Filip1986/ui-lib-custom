@@ -112,10 +112,10 @@ function getLabelElement(fixture: ComponentFixture<unknown>): HTMLLabelElement {
 }
 
 function getInputElement(
-  fixture: ComponentFixture<unknown>
+  fixture: ComponentFixture<unknown>,
 ): HTMLInputElement | HTMLTextAreaElement {
   const input: HTMLInputElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    'input'
+    'input',
   );
   if (input !== null) {
     return input;
@@ -253,7 +253,7 @@ describe('FloatLabel Accessibility', (): void => {
         'src',
         'lib',
         'float-label',
-        'float-label.scss'
+        'float-label.scss',
       );
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
@@ -276,7 +276,7 @@ describe('FloatLabel Accessibility', (): void => {
         'src',
         'lib',
         'float-label',
-        'float-label.scss'
+        'float-label.scss',
       );
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
@@ -304,15 +304,17 @@ describe('FloatLabel Accessibility', (): void => {
         'src',
         'lib',
         'float-label',
-        'float-label.scss'
+        'float-label.scss',
       );
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
       expect(stylesheetSource).toContain('prefers-reduced-motion: reduce');
-      expect(stylesheetSource).toContain('transition: none');
+      // Token-zero pattern: the transition token is set to none on the host so all
+      // child transitions that reference var(--uilib-float-label-transition) stop.
+      expect(stylesheetSource).toContain('--uilib-float-label-transition: 0ms');
     });
 
-    it('prefers-reduced-motion block targets the label element inside the component', (): void => {
+    it('prefers-reduced-motion block targets the float-label component host', (): void => {
       const fileSystem: { readFileSync: (filePath: string, encoding: string) => string } =
         require('fs') as { readFileSync: (filePath: string, encoding: string) => string };
       const pathModule: { join: (...parts: string[]) => string } = require('path') as {
@@ -327,12 +329,14 @@ describe('FloatLabel Accessibility', (): void => {
         'src',
         'lib',
         'float-label',
-        'float-label.scss'
+        'float-label.scss',
       );
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
-      // The reduced motion block must scope to the float-label's label, not globally
-      expect(stylesheetSource).toContain('.ui-lib-float-label label');
+      // Token-zero pattern: the reduced-motion block sets the transition token to none
+      // on the host (.ui-lib-float-label), which cascades to all children via CSS variables.
+      expect(stylesheetSource).toContain('.ui-lib-float-label');
+      expect(stylesheetSource).toContain('--uilib-float-label-transition: 0ms');
     });
   });
 
@@ -360,7 +364,7 @@ describe('FloatLabel Accessibility', (): void => {
         'src',
         'lib',
         'float-label',
-        'float-label.scss'
+        'float-label.scss',
       );
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 
@@ -415,7 +419,7 @@ describe('FloatLabel Accessibility', (): void => {
         'src',
         'lib',
         'float-label',
-        'float-label.scss'
+        'float-label.scss',
       );
       const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
 

@@ -71,6 +71,24 @@
 <uilib-input-mask mask="99/99/9999" [unmask]="true" [(ngModel)]="rawDate" />
 ```
 
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-input-mask-padding-y` | `0.5rem` | Vertical padding of the input |
+| `--uilib-input-mask-padding-x` | `0.75rem` | Horizontal padding of the input |
+| `--uilib-input-mask-font-size` | `1rem` | Input font size |
+| `--uilib-input-mask-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Input corner radius |
+| `--uilib-input-mask-border-color` | `var(--uilib-border)` | Default border color |
+| `--uilib-input-mask-bg` | `var(--uilib-surface)` | Input background |
+| `--uilib-input-mask-text-color` | `var(--uilib-page-fg)` | Input text color |
+| `--uilib-input-mask-placeholder-color` | `var(--uilib-muted)` | Placeholder text color |
+| `--uilib-input-mask-focus-border-color` | `var(--uilib-color-primary-600)` | Border color on focus |
+| `--uilib-input-mask-focus-ring` | `0 0 0 3px color-mix(…focus-border-color… 28%)` | Focus ring box-shadow |
+| `--uilib-input-mask-invalid-border-color` | `var(--uilib-color-danger-600)` | Border color when invalid |
+| `--uilib-input-mask-error-color` | `var(--uilib-color-danger-600)` | Error message text color |
+| `--uilib-input-mask-transition` | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Input state transition; set to `none` when `prefers-reduced-motion: reduce` |
+
 ## Security note
 
 `InputMask` controls format, not secrecy. Client-side mask validation can be bypassed, and masked/raw values still exist in browser memory and the DOM. Do not use InputMask as a security control for sensitive data. For secrets or credentials, use dedicated secure fields plus backend validation, encryption, and storage protections.

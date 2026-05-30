@@ -187,7 +187,11 @@ export class ScrollTop implements OnInit {
       this.checkScrollPosition();
     };
 
-    this.scrollEventTarget.addEventListener('scroll', this.scrollListener as EventListener);
+    // { passive: true } lets the browser scroll immediately without waiting for JS —
+    // this is the key performance gain; the handler never calls preventDefault().
+    this.scrollEventTarget.addEventListener('scroll', this.scrollListener as EventListener, {
+      passive: true,
+    });
   }
 
   private unbindScrollListener(): void {

@@ -62,6 +62,10 @@ property form because it is clearer and matches other native properties.
 }
 ```
 
+## CSS Custom Properties
+
+_None — `Bind` is a directive that writes DOM properties. It has no component styles or `--uilib-*` tokens._
+
 ## Native Angular Alternatives
 
 - Use direct bindings like `[id]`, `[title]`, `[tabIndex]` when the property

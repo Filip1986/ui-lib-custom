@@ -279,29 +279,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-speed-dial .ui-lib-speed-dial__button {
-      transition: none;
-    }
-
-    .ui-lib-speed-dial .ui-lib-speed-dial__button ui-lib-icon {
-      transition: none;
-    }
-
-    .ui-lib-speed-dial .ui-lib-speed-dial__list {
-      transition: none;
-    }
-
-    .ui-lib-speed-dial .ui-lib-speed-dial__item {
-      transition: none;
-      animation: none;
-    }
-
-    .ui-lib-speed-dial .ui-lib-speed-dial__action {
-      transition: none;
-    }
-
-    .ui-lib-speed-dial .ui-lib-speed-dial__mask {
-      animation: none;
+    ui-lib-speed-dial {
+      --uilib-speed-dial-transition-duration: 0ms;
     }
   }
 } // end @layer uilib.components

@@ -67,6 +67,21 @@
 </div>
 ```
 
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-toggle-button-radius` | `var(--uilib-radius-base, 6px)` | Button border radius |
+| `--uilib-toggle-button-bg` | `transparent` | Off-state background |
+| `--uilib-toggle-button-border` | `var(--uilib-color-neutral-300)` | Off-state border color |
+| `--uilib-toggle-button-color` | `var(--uilib-color-neutral-700)` | Off-state text color |
+| `--uilib-toggle-button-checked-bg` | `var(--uilib-color-primary-500)` | On-state background |
+| `--uilib-toggle-button-checked-border` | `var(--uilib-color-primary-500)` | On-state border color |
+| `--uilib-toggle-button-checked-color` | `var(--uilib-color-neutral-50)` | On-state text color |
+| `--uilib-toggle-button-checked-shadow` | `0 1px 3px 0 color-mix(…primary-500… 40%, transparent)` | Elevation shadow on checked state (material variant) |
+| `--uilib-toggle-button-focus-ring` | `0 0 0 3px color-mix(…primary-500… 35%, transparent)` | Focus ring box-shadow |
+| `--uilib-toggle-button-transition` | `background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease` | State transition; set to `none` when `prefers-reduced-motion: reduce` |
+
 ## Accessibility notes
 
 - Uses native `<button type="button">` semantics with `aria-pressed="true|false"` to expose toggle state.

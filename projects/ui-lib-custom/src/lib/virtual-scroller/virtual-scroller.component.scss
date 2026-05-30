@@ -13,6 +13,8 @@
     --uilib-scroller-loading-icon-size: 2rem;
     --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #6366f1);
     --uilib-scroller-item-border-color: var(--uilib-color-border, #e5e7eb);
+    --uilib-scroller-spinner-border-radius: var(--uilib-radius-full, 9999px);
+    --uilib-scroller-spinner-animation: uilib-scroller-spin 0.75s linear infinite;
 
     display: block;
   }
@@ -90,9 +92,9 @@
     width: var(--uilib-scroller-loading-icon-size);
     height: var(--uilib-scroller-loading-icon-size);
     border: 3px solid transparent;
-    border-top-color: var(--uilib-scroller-loading-icon-color);
-    border-radius: 50%;
-    animation: uilib-scroller-spin 0.75s linear infinite;
+    border-block-start-color: var(--uilib-scroller-loading-icon-color);
+    border-radius: var(--uilib-scroller-spinner-border-radius);
+    animation: var(--uilib-scroller-spinner-animation);
   }
 
   .uilib-scroller-sr-only {
@@ -176,12 +178,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .uilib-scroller-viewport {
-      scroll-behavior: auto;
+    ui-lib-virtual-scroller {
+      --uilib-scroller-spinner-animation: none;
     }
 
-    .uilib-scroller-loading-icon {
-      animation: none;
+    .uilib-scroller-viewport {
+      scroll-behavior: auto;
     }
   }
 } // end @layer uilib.components

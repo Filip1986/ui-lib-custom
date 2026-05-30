@@ -1,5 +1,6 @@
 @layer uilib.components {
   .ui-lib-float-label {
+    --uilib-float-label-transition: 0.2s ease;
     display: block;
     position: relative;
 
@@ -9,12 +10,11 @@
       top: 50%;
       transform: translateY(-50%);
       transition:
-        top var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
-        transform var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
-        color var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
-        font-size var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
-        background-color
-          var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease));
+        top var(--uilib-float-label-transition, 0.2s ease),
+        transform var(--uilib-float-label-transition, 0.2s ease),
+        color var(--uilib-float-label-transition, 0.2s ease),
+        font-size var(--uilib-float-label-transition, 0.2s ease),
+        background-color var(--uilib-float-label-transition, 0.2s ease);
       line-height: 1;
       inset-inline-start: var(--uilib-float-label-position-x, 0.75rem);
       color: var(--uilib-float-label-color, var(--uilib-text-secondary-color, #6b7280));
@@ -24,7 +24,7 @@
   }
 
   .ui-lib-float-label:has(textarea) label {
-    top: var(--uilib-float-label-position-y, 0.75rem);
+    inset-block-start: var(--uilib-float-label-position-y, 0.75rem);
     transform: translateY(0);
   }
 
@@ -36,7 +36,7 @@
     &:has(.uilib-inputwrapper-focus) label,
     &:has(.uilib-inputwrapper-filled) label,
     &:has(.uilib-filled) label {
-      top: var(--uilib-float-label-over-active-top, 0);
+      inset-block-start: var(--uilib-float-label-over-active-top, 0);
       transform: translateY(-50%);
       font-size: var(--uilib-float-label-active-font-size, 0.75rem);
       font-weight: var(--uilib-float-label-active-font-weight, normal);
@@ -58,7 +58,7 @@
     &:has(.uilib-inputwrapper-focus) label,
     &:has(.uilib-inputwrapper-filled) label,
     &:has(.uilib-filled) label {
-      top: var(--uilib-float-label-in-active-top, 0.25rem);
+      inset-block-start: var(--uilib-float-label-in-active-top, 0.25rem);
       transform: translateY(0);
       font-size: var(--uilib-float-label-active-font-size, 0.75rem);
       font-weight: var(--uilib-float-label-active-font-weight, normal);
@@ -73,7 +73,7 @@
     &:has(.uilib-inputwrapper-focus) label,
     &:has(.uilib-inputwrapper-filled) label,
     &:has(.uilib-filled) label {
-      top: 0;
+      inset-block-start: 0;
       transform: translateY(-50%);
       font-size: var(--uilib-float-label-active-font-size, 0.75rem);
       font-weight: var(--uilib-float-label-active-font-weight, normal);
@@ -112,8 +112,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-float-label label {
-      transition: none;
+    .ui-lib-float-label {
+      --uilib-float-label-transition: 0ms;
     }
   }
 } // end @layer uilib.components

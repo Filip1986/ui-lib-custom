@@ -26,6 +26,9 @@
     --uilib-message-icon-color: currentColor;
     --uilib-message-close-color: currentColor;
 
+    // Transition token — zeroed by prefers-reduced-motion
+    --uilib-message-transition: var(--uilib-transition-fast, 150ms ease);
+
     // Layout
     display: flex;
     align-items: flex-start;
@@ -76,7 +79,7 @@
     color: var(--uilib-message-close-color);
     opacity: 0.7;
     border-radius: var(--uilib-radius-sm, 0.25rem);
-    transition: opacity 0.15s ease;
+    transition: opacity var(--uilib-message-transition);
 
     &:hover {
       opacity: 1;
@@ -192,11 +195,10 @@
     border-inline-start-color: var(--uilib-color-neutral-800, #262626);
   }
 
-  // ─── Reduced motion ───────────────────────────────────────────────────────────
+  // ─── Reduced motion — token-zero ─────────────────────────────────────────────
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-message {
-      transition: none;
-      animation: none;
+    ui-lib-message {
+      --uilib-message-transition: 0ms;
     }
   }
 

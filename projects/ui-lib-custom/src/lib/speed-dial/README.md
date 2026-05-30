@@ -97,3 +97,23 @@ interface SpeedDialItem {
 <!-- circular layout with mask -->
 <ui-lib-speed-dial [model]="actions" type="circle" [mask]="true" (onItemCommand)="run($event)" />
 ```
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-speed-dial-button-size` | `3.25rem` | Trigger button size (width and height) |
+| `--uilib-speed-dial-button-bg` | `var(--uilib-color-primary-600)` | Trigger button background |
+| `--uilib-speed-dial-button-color` | `var(--uilib-color-neutral-50)` | Trigger button icon/text color |
+| `--uilib-speed-dial-button-shadow` | `var(--uilib-shadow-lg)` | Trigger button box shadow |
+| `--uilib-speed-dial-item-size` | `2.75rem` | Action item button size |
+| `--uilib-speed-dial-item-bg` | `var(--uilib-color-primary-600)` | Action item background |
+| `--uilib-speed-dial-item-color` | `var(--uilib-color-neutral-50)` | Action item icon color |
+| `--uilib-speed-dial-item-shadow` | `var(--uilib-shadow-md)` | Action item box shadow |
+| `--uilib-speed-dial-gap` | `var(--uilib-space-2, 0.5rem)` | Gap between action items |
+| `--uilib-speed-dial-radius` | `var(--uilib-radius-full, 9999px)` | Border radius for buttons |
+| `--uilib-speed-dial-mask-bg` | `color-mix(…neutral-900… 50%, transparent)` | Backdrop color when `mask=true` |
+| `--uilib-speed-dial-transition-duration` | `var(--uilib-transition-md, 200ms)` | Duration for all open/close animations; set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-speed-dial-transition-easing` | `var(--uilib-transition-ease-out, ease-out)` | Easing for all animations |
+| `--uilib-speed-dial-rotate-open` | `45deg` | Trigger icon rotation angle when open |
+| `--uilib-speed-dial-focus-ring` | `0 0 0 2px color-mix(…primary-500… 30%, transparent)` | Focus ring box-shadow on buttons |

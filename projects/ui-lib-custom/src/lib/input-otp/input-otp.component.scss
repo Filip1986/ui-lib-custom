@@ -27,6 +27,10 @@
       var(--uilib-color-neutral-900, currentColor) 4%
     );
     --uilib-input-otp-disabled-opacity: 0.6;
+    --uilib-input-otp-transition:
+      border-color var(--uilib-transition-fast, 150ms ease),
+      box-shadow var(--uilib-transition-fast, 150ms ease),
+      background-color var(--uilib-transition-fast, 150ms ease);
 
     // Layout
     display: inline-flex;
@@ -53,10 +57,7 @@
     text-align: center;
     line-height: var(--uilib-input-otp-cell-height);
     cursor: text;
-    transition:
-      border-color var(--uilib-transition-fast, 150ms ease),
-      box-shadow var(--uilib-transition-fast, 150ms ease),
-      background-color var(--uilib-transition-fast, 150ms ease);
+    transition: var(--uilib-input-otp-transition);
 
     &:focus-visible {
       outline: none;
@@ -192,8 +193,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-input-otp .ui-lib-input-otp-cell {
-      transition: none;
+    ui-lib-input-otp {
+      --uilib-input-otp-transition: none;
     }
   }
 } // end @layer uilib.components

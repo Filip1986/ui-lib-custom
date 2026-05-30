@@ -104,6 +104,18 @@ Both `ariaValueText` and `completionLabel` accept arbitrary strings, allowing fu
 <ui-lib-progress-bar [value]="60" color="#10b981" label="Syncing…" />
 ```
 
+### Custom label template
+
+Use `#labelTemplate` for rich label content. The slot receives `{ $implicit: number, value: number, displayLabel: string }`.
+
+```html
+<ui-lib-progress-bar [value]="progress">
+  <ng-template #labelTemplate let-value="value" let-label="displayLabel">
+    <strong>{{ label }}</strong> — step {{ step }} of {{ total }}
+  </ng-template>
+</ui-lib-progress-bar>
+```
+
 ### Sizes
 
 ```html
@@ -120,17 +132,25 @@ Both `ariaValueText` and `completionLabel` accept arbitrary strings, allowing fu
 <ui-lib-progress-bar [value]="70" variant="minimal" />
 ```
 
+## Content projection
+
+| Slot | Template context | Description |
+|------|-----------------|-------------|
+| `#labelTemplate` | `{ $implicit: number, value: number, displayLabel: string }` | Custom content rendered inside the fill bar in place of the default percentage / `label` text. Only rendered when `showValue` is `true` and `mode` is `'determinate'`. |
+
 ## CSS custom properties
 
-| Property                               | Default                         | Description                    |
-|----------------------------------------|---------------------------------|--------------------------------|
-| `--uilib-progress-bar-height`          | `1.25rem`                       | Bar height (md).               |
-| `--uilib-progress-bar-height-sm`       | `0.625rem`                      | Bar height (sm).               |
-| `--uilib-progress-bar-height-lg`       | `1.75rem`                       | Bar height (lg).               |
-| `--uilib-progress-bar-border-radius`   | `var(--uilib-radius-full)`      | Track and fill border radius.  |
-| `--uilib-progress-bar-track-bg`        | `var(--uilib-surface-200)`      | Track background colour.       |
-| `--uilib-progress-bar-fill-bg`         | `var(--uilib-color-primary)`    | Fill background colour.        |
-| `--uilib-progress-bar-label-color`     | `#fff`                          | Label text colour.             |
-| `--uilib-progress-bar-label-font-size` | `0.75rem`                       | Label font size.               |
-| `--uilib-progress-bar-transition`      | `width 0.4s ease`               | Fill width transition.         |
+| Property                                       | Default                                 | Description                    |
+|------------------------------------------------|-----------------------------------------|--------------------------------|
+| `--uilib-progress-bar-height`                  | `1.25rem`                               | Bar height (md).               |
+| `--uilib-progress-bar-height-sm`               | `0.625rem`                              | Bar height (sm).               |
+| `--uilib-progress-bar-height-lg`               | `1.75rem`                               | Bar height (lg).               |
+| `--uilib-progress-bar-border-radius`           | `var(--uilib-radius-full, 9999px)`      | Track and fill border radius.  |
+| `--uilib-progress-bar-track-bg`                | `var(--uilib-surface-200, #e5e7eb)`     | Track background colour.       |
+| `--uilib-progress-bar-fill-bg`                 | `var(--uilib-color-primary, #6366f1)`   | Fill background colour.        |
+| `--uilib-progress-bar-label-color`             | `#fff`                                  | Label text colour.             |
+| `--uilib-progress-bar-label-font-size`         | `0.75rem`                               | Label font size.               |
+| `--uilib-progress-bar-transition`              | `width 0.4s ease`                       | Fill width transition; zeroed by `prefers-reduced-motion` |
+| `--uilib-progress-bar-shadow`                  | `none`                                  | Track box shadow (material variant adds inset elevation). |
+| `--uilib-progress-bar-indeterminate-animation` | `uilib-progress-bar-indeterminate 1.6s infinite ease-in-out` | Indeterminate oscillation animation; set to `none` by `prefers-reduced-motion`. |
 

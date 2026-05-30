@@ -55,7 +55,7 @@ describe('Container', (): void => {
     Object.assign(component, initial);
     fixture.detectChanges();
     const containerElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-container'
+      'ui-lib-container',
     ) as HTMLElement;
     return { fixture, component, containerElement };
   }
@@ -74,41 +74,37 @@ describe('Container', (): void => {
 
   it('should apply max-width from size token', (): void => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.maxWidth).toContain('1024px'); // lg = 1024px fallback
+    expect(containerElement.style.maxInlineSize).toContain('1024px'); // lg = 1024px fallback
   });
 
   it('should apply different sizes', (): void => {
     const { containerElement } = bootstrap({ size: 'sm' });
-    expect(containerElement.style.maxWidth).toContain('640px');
+    expect(containerElement.style.maxInlineSize).toContain('640px');
   });
 
   it('should not center container by default', (): void => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.marginLeft).toBe('');
-    expect(containerElement.style.marginRight).toBe('');
+    expect(containerElement.style.marginInline).toBe('');
   });
 
   it('should not center when centered is false', (): void => {
     const { containerElement } = bootstrap({ centered: false });
-    expect(containerElement.style.marginLeft).toBe('');
-    expect(containerElement.style.marginRight).toBe('');
+    expect(containerElement.style.marginInline).toBe('');
   });
 
   it('should center when centered is true', (): void => {
     const { containerElement } = bootstrap({ centered: true });
-    expect(containerElement.style.marginLeft).toBe('auto');
-    expect(containerElement.style.marginRight).toBe('auto');
+    expect(containerElement.style.marginInline).toBe('auto');
   });
 
   it('should apply padding from design tokens', (): void => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.paddingLeft).toContain('1rem'); // padding 4 = 1rem fallback
-    expect(containerElement.style.paddingRight).toContain('1rem');
+    expect(containerElement.style.paddingInline).toContain('1rem'); // padding 4 = 1rem fallback
   });
 
   it('should apply full width', (): void => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.width).toBe('100%');
+    expect(containerElement.style.inlineSize).toBe('100%');
   });
 
   it('should project content', (): void => {
@@ -121,15 +117,14 @@ describe('Container', (): void => {
   it('creates with no inputs', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
     const containerElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-container'
+      'ui-lib-container',
     ) as HTMLElement;
     expect(containerElement).toBeTruthy();
   });
 
   it('uses inset tokens when inset is set', (): void => {
     const { containerElement } = bootstrap({ inset: 'lg' });
-    expect(containerElement.style.paddingLeft).toContain('1.5rem');
-    expect(containerElement.style.paddingRight).toContain('1.5rem');
+    expect(containerElement.style.paddingInline).toContain('1.5rem');
   });
 
   it('applies dark theme variables', (): void => {

@@ -16,18 +16,18 @@
 | `panelVisible` | `boolean` | `false` | Controls popup visibility |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to `ThemeConfigService` when null |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Trigger and popup density |
-| `placeholder` | `string` | `'Select a node...'` | Trigger text when no item is selected |
+| `placeholder` | `string \| null` | `null` | Trigger text when no item is selected; falls back to i18n `tree-select.placeholder` |
 | `disabled` | `boolean` | `false` | Disables trigger and popup interaction |
 | `loading` | `boolean` | `false` | Shows a spinner and disables interaction |
 | `filter` | `boolean` | `false` | Enables the embedded tree filter input |
-| `filterPlaceholder` | `string` | `'Search...'` | Placeholder text for the filter input |
+| `filterPlaceholder` | `string \| null` | `null` | Placeholder text for the filter input; falls back to i18n `tree-select.filter.placeholder` |
 | `showClear` | `boolean` | `false` | Shows a clear button when a value exists |
-| `styleClass` | `string` | `''` | Extra class applied to the host |
+| `styleClass` | `string \| null` | `null` | Extra class applied to the host |
 | `ariaLabel` | `string \| null` | `null` | Accessible name for the combobox / popup tree |
 | `ariaLabelledBy` | `string \| null` | `null` | External element id used to label the combobox |
 | `invalid` | `boolean` | `false` | Applies invalid styling and `aria-invalid` |
 | `required` | `boolean` | `false` | Applies `aria-required` |
-| `emptyMessage` | `string` | `'No results found'` | Empty-state message when no nodes are available |
+| `emptyMessage` | `string \| null` | `null` | Empty-state message when no nodes are available; falls back to i18n `tree-select.empty` |
 
 ## Outputs
 
@@ -98,22 +98,29 @@
 
 ## CSS Custom Properties
 
-| Variable | Purpose |
-|----------|---------|
-| `--uilib-tree-select-trigger-bg` | Trigger background |
-| `--uilib-tree-select-trigger-border` | Trigger border color |
-| `--uilib-tree-select-trigger-radius` | Trigger border radius |
-| `--uilib-tree-select-trigger-padding-y` | Trigger vertical padding |
-| `--uilib-tree-select-trigger-padding-x` | Trigger horizontal padding |
-| `--uilib-tree-select-placeholder-color` | Placeholder / icon color |
-| `--uilib-tree-select-panel-bg` | Popup panel background |
-| `--uilib-tree-select-panel-border` | Popup panel border color |
-| `--uilib-tree-select-panel-radius` | Popup panel border radius |
-| `--uilib-tree-select-panel-shadow` | Popup panel shadow |
-| `--uilib-tree-select-panel-max-height` | Popup max height |
-| `--uilib-tree-select-panel-z-index` | Popup stacking context |
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `--uilib-tree-select-trigger-bg` | `var(--uilib-surface)` | Trigger background |
+| `--uilib-tree-select-trigger-border` | `var(--uilib-border)` | Trigger border color |
+| `--uilib-tree-select-trigger-radius` | `var(--uilib-shape-base, 6px)` | Trigger border radius |
+| `--uilib-tree-select-trigger-padding-y` | `0.55rem` | Trigger vertical padding |
+| `--uilib-tree-select-trigger-padding-x` | `0.75rem` | Trigger horizontal padding |
+| `--uilib-tree-select-placeholder-color` | `var(--uilib-muted)` | Placeholder / icon color |
+| `--uilib-tree-select-panel-bg` | `var(--uilib-surface)` | Popup panel background |
+| `--uilib-tree-select-panel-border` | `var(--uilib-border)` | Popup panel border color |
+| `--uilib-tree-select-panel-radius` | `var(--uilib-shape-base, 6px)` | Popup panel border radius |
+| `--uilib-tree-select-panel-shadow` | `var(--uilib-shadow-md, none)` | Popup panel box shadow |
+| `--uilib-tree-select-panel-max-height` | `320px` | Popup max height |
+| `--uilib-tree-select-panel-z-index` | `var(--uilib-z-overlay, 100)` | Popup stacking context |
+| `--uilib-tree-select-transition` | `var(--uilib-transition-fast, 150ms ease)` | Trigger / chevron transition; zeroed by `prefers-reduced-motion` |
+| `--uilib-tree-select-panel-animation` | `uilib-tree-select-panel-enter 0.15s ease` | Panel enter animation; set to `none` by `prefers-reduced-motion` |
+| `--uilib-tree-select-spinner-animation` | `uilib-tree-select-spin 0.8s linear infinite` | Loading spinner animation; set to `none` by `prefers-reduced-motion` |
+| `--uilib-tree-select-focus-shadow` | `0 0 0 3px color-mix(…primary 20%)` | Open-state focus ring shadow (bootstrap variant overrides to 0.2rem / 25%) |
+| `--uilib-tree-select-spinner-border-radius` | `var(--uilib-radius-full, 9999px)` | Spinner circle border radius |
+| `--uilib-tree-select-clear-focus-radius` | `var(--uilib-radius-sm, 2px)` | Focus ring radius on the clear button |
 
 ## Notes
 
 - `selectionMode="checkbox"` uses tree-style cascade selection and exposes mixed state through `aria-checked="mixed"` on partially selected branches.
-- Motion-sensitive users are respected through a `prefers-reduced-motion` override that disables trigger, popup, chevron, and spinner animation.
+- All transitions and animations respect `prefers-reduced-motion: reduce` via the token-zero pattern — no `!important` overrides needed.
+- String inputs (`placeholder`, `filterPlaceholder`, `emptyMessage`) accept `null` (default) and fall back to the active locale translation via `UiLibI18nService`.

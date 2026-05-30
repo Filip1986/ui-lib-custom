@@ -92,7 +92,7 @@ function getContainer(fixture: ComponentFixture<unknown>): HTMLElement {
 
 function getAllContainers(fixture: ComponentFixture<unknown>): HTMLElement[] {
   return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-container')
+    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-container'),
   );
 }
 
@@ -164,7 +164,7 @@ describe('Container (a11y)', (): void => {
   it('default: max-width CSS custom property is applied', async (): Promise<void> => {
     const fixture: ComponentFixture<DefaultContainerHost> = await setup(DefaultContainerHost);
     const container: HTMLElement = getContainer(fixture);
-    expect(container.style.maxWidth).toContain('1024px');
+    expect(container.style.maxInlineSize).toContain('1024px');
   });
 
   it('default: projected content is reachable in the DOM', async (): Promise<void> => {

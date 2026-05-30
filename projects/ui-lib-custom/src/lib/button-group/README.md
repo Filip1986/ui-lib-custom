@@ -43,7 +43,9 @@ _none_
 - `orientation="vertical"`: visual layout stacks buttons; keyboard behavior remains native button Tab navigation.
 - If you need arrow-key roving navigation semantics, prefer a dedicated `ui-lib-toolbar` pattern (`role="toolbar"`).
 
-## Styling hooks
+## CSS Custom Properties
 
-- `--uilib-button-group-connected-border-overlap` (default: `-1px`) controls connected border overlap between adjacent buttons.
-- `--uilib-button-group-gap` (default: `0px`) controls spacing between grouped buttons.
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-button-group-gap` | `0px` | Spacing between grouped buttons |
+| `--uilib-button-group-connected-border-overlap` | `-1px` | Negative margin used to collapse adjacent borders in connected mode |

@@ -43,6 +43,12 @@ _none_
 <input [pattern]="'pint'" [regex]="/[0-9]/" />
 ```
 
+## CSS Custom Properties
+
+_None — `KeyFilter` is a directive with no component styles. It manipulates input event behaviour only; all visual formatting is handled by the host `<input>` or `<textarea>` and the consuming application's CSS._
+
+> The visually-hidden hint element inserted by `hintText` uses hardcoded clip-pattern styles (not `--uilib-*` tokens) to ensure the element is invisible across all contexts without any cascade dependency.
+
 ## Accessibility guidance
 
 - Always provide `hintText` for strict filters (for example, `"Numbers only"` or `"Hex characters only"`).

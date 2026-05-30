@@ -103,6 +103,129 @@ type ConfirmPopupDefaultFocus = 'accept' | 'reject' | 'none';
 type ConfirmPopupPlacement = 'above' | 'below';
 ```
 
+## Service injection patterns
+
+### Angular standalone (recommended)
+
+```ts
+// any.component.ts (standalone)
+import { Component, inject } from '@angular/core';
+import { ConfirmPopupService } from 'ui-lib-custom/confirm-popup';
+
+@Component({ /* … */ })
+export class MyComponent {
+  private readonly confirmPopupService = inject(ConfirmPopupService);
+
+  onDeleteClick(event: MouseEvent): void {
+    this.confirmPopupService.confirm({
+      target: event.currentTarget as HTMLElement,
+      message: 'Delete this item permanently?',
+      acceptLabel: 'Delete',
+      acceptSeverity: 'danger',
+      accept: () => this.deleteItem(),
+    });
+  }
+}
+```
+
+### Constructor injection
+
+```ts
+constructor(private readonly confirmPopupService: ConfirmPopupService) {}
+```
+
+## Multiple instances
+
+Use `key` when you need separate popup instances in the same layout (e.g., one in the header, one in the table):
+
+```html
+<!-- app.component.html -->
+<ui-lib-confirm-popup key="header-popup" />
+<ui-lib-confirm-popup key="table-popup" />
+```
+
+```ts
+// Target a specific instance
+this.confirmPopupService.confirm({
+  key: 'table-popup',
+  target: event.currentTarget as HTMLElement,
+  message: 'Remove this row?',
+  accept: () => this.removeRow(),
+});
+
+// Close a specific instance programmatically
+this.confirmPopupService.close('table-popup');
+```
+
+## Common patterns
+
+### Danger confirmation (delete)
+
+```ts
+this.confirmPopupService.confirm({
+  target: event.currentTarget as HTMLElement,
+  message: 'This action cannot be undone.',
+  icon: 'warning',
+  acceptLabel: 'Delete',
+  acceptSeverity: 'danger',
+  rejectLabel: 'Cancel',
+  defaultFocus: 'reject',           // safer default for destructive actions
+  accept: () => this.delete(),
+});
+```
+
+### Low-friction confirmation (publish)
+
+```ts
+this.confirmPopupService.confirm({
+  target: event.currentTarget as HTMLElement,
+  message: 'Publish this draft?',
+  acceptLabel: 'Publish',
+  acceptSeverity: 'success',
+  rejectLabel: 'Not now',
+  defaultFocus: 'accept',
+  accept: () => this.publish(),
+});
+```
+
+### Programmatic close
+
+```ts
+// Close without a user action (e.g., when navigating away)
+this.confirmPopupService.close();
+```
+
+### Reading current state (reactive)
+
+```ts
+// confirmPopupService.confirmation is a Signal<ConfirmPopupConfig | null>
+const isOpen = computed(() => this.confirmPopupService.confirmation() !== null);
+```
+
+## CSS Custom Properties
+
+Override visual styling at any scope without modifying component source.
+
+```css
+/* Global override */
+:root {
+  --uilib-confirm-popup-min-width: 280px;
+  --uilib-confirm-popup-radius: 8px;
+  --uilib-confirm-popup-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+```
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-confirm-popup-radius` | `var(--uilib-shape-base, 6px)` | Panel border radius |
+| `--uilib-confirm-popup-min-width` | `240px` | Minimum popup width |
+| `--uilib-confirm-popup-shadow` | `var(--uilib-shadow-lg, …)` | Panel drop shadow |
+| `--uilib-confirm-popup-bg` | `var(--uilib-surface)` | Panel background |
+| `--uilib-confirm-popup-border` | `var(--uilib-border)` | Panel border colour |
+| `--uilib-confirm-popup-arrow-size` | `8px` | Pointer arrow size |
+| `--uilib-confirm-popup-enter-duration` | `0.15s` | Open animation duration; `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-confirm-popup-leave-duration` | `0.1s` | Close animation duration |
+
 ## Positioning
 
 The popup auto-positions above the target element by default. If there is insufficient space above, it positions below. An arrow points at the center of the target element. The panel is clamped within the viewport.

@@ -23,6 +23,9 @@
     --uilib-radio-button-font-size-lg: var(--uilib-font-size-md, 1rem);
     --uilib-radio-button-font: var(--uilib-font-ui, inherit);
     --uilib-radio-button-label-color: inherit;
+    --uilib-radio-button-box-transition:
+      border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    --uilib-radio-button-icon-transition: transform 0.15s ease;
 
     display: inline-flex;
     align-items: center;
@@ -38,8 +41,8 @@
   // Native input — visually hidden, remains accessible to screen readers and keyboard
   ui-lib-radio-button .ui-lib-radio-button__native-input {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    inline-size: 1px;
+    block-size: 1px;
     padding: 0;
     margin: -1px;
     overflow: hidden;
@@ -53,9 +56,9 @@
 
   ui-lib-radio-button .ui-lib-radio-button__box {
     // Defaults to md size
-    width: var(--uilib-radio-button-size, var(--uilib-radio-button-size-md));
-    height: var(--uilib-radio-button-size, var(--uilib-radio-button-size-md));
-    border-radius: 50%;
+    inline-size: var(--uilib-radio-button-size, var(--uilib-radio-button-size-md));
+    block-size: var(--uilib-radio-button-size, var(--uilib-radio-button-size-md));
+    border-radius: var(--uilib-radius-full, 9999px);
     border: 2px solid var(--uilib-radio-button-border-color);
     background: var(--uilib-radio-button-bg);
     display: inline-flex;
@@ -63,10 +66,7 @@
     align-items: center;
     flex-shrink: 0;
     position: relative;
-    transition:
-      border-color 0.15s ease,
-      background-color 0.15s ease,
-      box-shadow 0.15s ease;
+    transition: var(--uilib-radio-button-box-transition);
   }
 
   ui-lib-radio-button:not(.ui-lib-radio-button--disabled):hover .ui-lib-radio-button__box {
@@ -91,12 +91,12 @@
   // ── Inner dot ────────────────────────────────────────────────────────────────
 
   ui-lib-radio-button .ui-lib-radio-button__icon {
-    width: 45%;
-    height: 45%;
-    border-radius: 50%;
+    inline-size: 45%;
+    block-size: 45%;
+    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-radio-button-dot-color);
     transform: scale(0);
-    transition: transform 0.15s ease;
+    transition: var(--uilib-radio-button-icon-transition);
     pointer-events: none;
   }
 
@@ -222,12 +222,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     ui-lib-radio-button {
-      --uilib-radio-button-transition-duration: 0ms;
-    }
-
-    ui-lib-radio-button .ui-lib-radio-button__box,
-    ui-lib-radio-button .ui-lib-radio-button__icon {
-      transition: none;
+      --uilib-radio-button-box-transition: none;
+      --uilib-radio-button-icon-transition: none;
     }
   }
 } // end @layer uilib.components

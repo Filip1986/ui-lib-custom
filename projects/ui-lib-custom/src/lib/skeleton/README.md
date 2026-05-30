@@ -75,12 +75,14 @@ import { Skeleton } from 'ui-lib-custom/skeleton';
 
 ## CSS Variables
 
-| Variable                              | Default                    | Description                         |
-|---------------------------------------|----------------------------|-------------------------------------|
-| `--uilib-skeleton-bg`                 | `var(--uilib-surface-200)` | Background colour                   |
-| `--uilib-skeleton-shimmer-color`      | `var(--uilib-surface-50)`  | Shimmer highlight colour            |
-| `--uilib-skeleton-border-radius`      | `var(--uilib-radius-md)`   | Corner radius                       |
-| `--uilib-skeleton-animation-duration` | `1.5s`                     | Wave sweep duration                 |
+| Variable                              | Default                                                  | Description                         |
+|---------------------------------------|----------------------------------------------------------|-------------------------------------|
+| `--uilib-skeleton-bg`                 | `var(--uilib-surface-200, #e5e7eb)`                      | Background colour                   |
+| `--uilib-skeleton-shimmer-color`      | `var(--uilib-surface-50, #f9fafb)`                       | Shimmer highlight colour            |
+| `--uilib-skeleton-border-radius`      | `var(--uilib-radius-md, 0.375rem)`                       | Corner radius                       |
+| `--uilib-skeleton-circle-border-radius` | `var(--uilib-radius-full, 9999px)`                     | Border radius used by `shape="circle"` and variant circle overrides |
+| `--uilib-skeleton-animation-duration` | `1.5s`                                                   | Wave sweep duration; override to slow down or speed up the shimmer |
+| `--uilib-skeleton-animation`          | `uilib-skeleton-wave var(--uilib-skeleton-animation-duration) infinite ease-in-out` | Full wave animation shorthand; set to `none` by `prefers-reduced-motion` |
 
 ## ARIA attributes
 

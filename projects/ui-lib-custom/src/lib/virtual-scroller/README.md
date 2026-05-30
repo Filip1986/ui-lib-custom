@@ -88,6 +88,17 @@
 </ui-lib-virtual-scroller>
 ```
 
+## CSS Custom Properties
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `--uilib-scroller-loader-bg` | `rgba(255,255,255,0.7)` | Loading overlay background (variant-dependent) |
+| `--uilib-scroller-loading-icon-size` | `2rem` | Diameter of the spinner icon |
+| `--uilib-scroller-loading-icon-color` | `var(--uilib-color-primary)` | Spinner arc colour |
+| `--uilib-scroller-item-border-color` | `var(--uilib-color-border)` | Border colour used in Bootstrap variant |
+| `--uilib-scroller-spinner-border-radius` | `var(--uilib-radius-full, 9999px)` | Border radius that makes the spinner circular |
+| `--uilib-scroller-spinner-animation` | `uilib-scroller-spin 0.75s linear infinite` | Spinner keyframe animation (set to `none` under `prefers-reduced-motion`) |
+
 ## Accessibility
 
 - The viewport is keyboard focusable by default (`tabIndex=0`) and supports `ArrowUp`, `ArrowDown`, `PageUp`, `PageDown`, `Home`, and `End`. Horizontal and two-axis scrollers also support `ArrowLeft` and `ArrowRight`.

@@ -27,7 +27,7 @@
 
     --uilib-toggle-switch-gap: var(--uilib-space-3, 0.75rem);
     --uilib-toggle-switch-font: var(--uilib-font-ui, inherit);
-    --uilib-toggle-switch-transition-duration: var(--uilib-transition-base, 0.2s);
+    --uilib-toggle-switch-transition-duration: 0.2s;
     --uilib-toggle-switch-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
     --uilib-toggle-switch-font-size-lg: 1.0625rem;
 
@@ -63,8 +63,8 @@
     align-items: center;
     position: relative;
     flex-shrink: 0;
-    width: var(--uilib-toggle-switch-track-width);
-    height: var(--uilib-toggle-switch-track-height);
+    inline-size: var(--uilib-toggle-switch-track-width);
+    block-size: var(--uilib-toggle-switch-track-height);
     border-radius: var(--uilib-toggle-switch-track-border-radius);
     border: 1px solid var(--uilib-toggle-switch-track-border-color);
     background-color: var(--uilib-toggle-switch-track-bg);
@@ -78,9 +78,9 @@
   ui-lib-toggle-switch .ui-lib-toggle-switch__thumb {
     position: absolute;
     inset-inline-start: var(--uilib-toggle-switch-thumb-offset);
-    width: var(--uilib-toggle-switch-thumb-size);
-    height: var(--uilib-toggle-switch-thumb-size);
-    border-radius: 50%;
+    inline-size: var(--uilib-toggle-switch-thumb-size);
+    block-size: var(--uilib-toggle-switch-thumb-size);
+    border-radius: var(--uilib-radius-full, 9999px);
     background-color: var(--uilib-toggle-switch-thumb-bg);
     box-shadow: var(--uilib-toggle-switch-thumb-shadow);
     transition: inset-inline-start var(--uilib-toggle-switch-transition-duration) ease;
@@ -226,12 +226,8 @@
 
   // ── Reduced motion ─────────────────────────────────────────────────────
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-toggle-switch .ui-lib-toggle-switch__thumb {
-      transition: none;
-    }
-
-    ui-lib-toggle-switch .ui-lib-toggle-switch__track {
-      transition: none;
+    ui-lib-toggle-switch {
+      --uilib-toggle-switch-transition-duration: 0ms;
     }
   }
 

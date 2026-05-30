@@ -96,6 +96,7 @@
 | `--uilib-textarea-error-color` | Error text color |
 | `--uilib-textarea-counter-color` | Counter text color |
 | `--uilib-textarea-resize-color` | Native resize-handle accent |
+| `--uilib-textarea-transition` | Border/shadow transition (`border-color 0.15s ease, box-shadow 0.15s ease`); set to `none` when `prefers-reduced-motion: reduce` |
 
 ## Internationalisation
 

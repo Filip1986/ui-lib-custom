@@ -5,6 +5,16 @@
   ui-lib-dynamic-dialog {
     --uilib-dynamic-dialog-close-btn-size: 2rem;
     --uilib-dynamic-dialog-header-gap: 0.5rem;
+    --uilib-dynamic-dialog-close-btn-radius: var(--uilib-radius-full, 9999px);
+    --uilib-dynamic-dialog-transition: 200ms ease;
+    --uilib-dynamic-dialog-panel-animation: uilib-dynamic-dialog-enter 0.2s
+      cubic-bezier(0.4, 0, 0.2, 1);
+    --uilib-dynamic-dialog-backdrop-animation: uilib-dynamic-dialog-fade-in 0.2s ease;
+    --uilib-dynamic-dialog-shadow-material:
+      0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    --uilib-dynamic-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --uilib-dynamic-dialog-shadow-minimal: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   .ui-lib-dynamic-dialog {
@@ -48,7 +58,7 @@
       inset: 0;
       background: var(--uilib-dynamic-dialog-backdrop-bg, rgba(0, 0, 0, 0.4));
       z-index: 0;
-      animation: uilib-dynamic-dialog-fade-in var(--uilib-transition-base, 0.2s) ease;
+      animation: var(--uilib-dynamic-dialog-backdrop-animation);
     }
 
     // ---- Panel ----
@@ -66,29 +76,25 @@
       min-width: var(--uilib-dynamic-dialog-min-width, 300px);
       max-width: var(--uilib-dynamic-dialog-max-width, 90vw);
       max-height: var(--uilib-dynamic-dialog-max-height, 90vh);
-      animation: uilib-dynamic-dialog-enter var(--uilib-transition-base, 0.2s)
-        cubic-bezier(0.4, 0, 0.2, 1);
+      animation: var(--uilib-dynamic-dialog-panel-animation);
       outline: none;
 
       // ---- Variants ----
       &.ui-lib-dynamic-dialog--variant-material {
         border-radius: var(--uilib-dynamic-dialog-radius-material, 12px);
-        box-shadow:
-          0 11px 15px -7px rgba(0, 0, 0, 0.2),
-          0 24px 38px 3px rgba(0, 0, 0, 0.14),
-          0 9px 46px 8px rgba(0, 0, 0, 0.12);
+        box-shadow: var(--uilib-dynamic-dialog-shadow-material);
       }
 
       &.ui-lib-dynamic-dialog--variant-bootstrap {
         border-radius: var(--uilib-dynamic-dialog-radius-bootstrap, 4px);
         border: 1px solid var(--uilib-surface-border, #dee2e6);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        box-shadow: var(--uilib-dynamic-dialog-shadow-bootstrap);
       }
 
       &.ui-lib-dynamic-dialog--variant-minimal {
         border-radius: var(--uilib-dynamic-dialog-radius-minimal, 8px);
         border: 1px solid var(--uilib-surface-border, #e9ecef);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: var(--uilib-dynamic-dialog-shadow-minimal);
       }
     }
 
@@ -99,7 +105,7 @@
       justify-content: space-between;
       gap: var(--uilib-dynamic-dialog-header-gap, 0.5rem);
       padding: var(--uilib-dynamic-dialog-header-padding, 1.25rem 1.5rem 1rem);
-      border-bottom: 1px solid
+      border-block-end: 1px solid
         var(--uilib-dynamic-dialog-header-border, var(--uilib-surface-border, #e9ecef));
       flex-shrink: 0;
     }
@@ -123,11 +129,11 @@
       border: none;
       background: transparent;
       cursor: pointer;
-      border-radius: 50%;
+      border-radius: var(--uilib-dynamic-dialog-close-btn-radius);
       color: var(--uilib-dynamic-dialog-close-color, var(--uilib-page-fg-muted, #6c757d));
       transition:
-        background-color var(--uilib-transition-base, 0.2s) ease,
-        color var(--uilib-transition-base, 0.2s) ease;
+        background-color var(--uilib-dynamic-dialog-transition),
+        color var(--uilib-dynamic-dialog-transition);
 
       &:hover {
         background: var(--uilib-dynamic-dialog-close-hover-bg, rgba(0, 0, 0, 0.06));
@@ -186,7 +192,7 @@
     }
 
     .ui-lib-dynamic-dialog__header {
-      border-bottom-color: var(--uilib-surface-border, rgba(255, 255, 255, 0.1));
+      border-block-end-color: var(--uilib-surface-border, rgba(255, 255, 255, 0.1));
     }
 
     .ui-lib-dynamic-dialog__close-btn:hover {
@@ -204,7 +210,7 @@
       }
 
       .ui-lib-dynamic-dialog__header {
-        border-bottom-color: var(--uilib-surface-border, rgba(255, 255, 255, 0.1));
+        border-block-end-color: var(--uilib-surface-border, rgba(255, 255, 255, 0.1));
       }
 
       .ui-lib-dynamic-dialog__close-btn:hover {
@@ -213,14 +219,12 @@
     }
   }
 
-  // ---- Reduced motion ----
+  // ---- Reduced motion — token-zero ----
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-dynamic-dialog__panel {
-      animation: none;
-    }
-
-    .ui-lib-dynamic-dialog__backdrop {
-      animation: none;
+    ui-lib-dynamic-dialog {
+      --uilib-dynamic-dialog-panel-animation: none;
+      --uilib-dynamic-dialog-backdrop-animation: none;
+      --uilib-dynamic-dialog-transition: none;
     }
   }
 } // end @layer uilib.components

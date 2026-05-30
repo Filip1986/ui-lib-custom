@@ -25,16 +25,27 @@
     --uilib-org-chart-toggle-bg: var(--uilib-surface, #ffffff);
     --uilib-org-chart-toggle-border: 1px solid var(--uilib-border, #d1d5db);
     --uilib-org-chart-toggle-color: var(--uilib-text-secondary, #6b7280);
-    --uilib-org-chart-toggle-radius: 50%;
+    --uilib-org-chart-toggle-radius: var(--uilib-radius-full, 9999px);
     --uilib-org-chart-node-label-font-size: var(--uilib-font-size-sm, 0.875rem);
     --uilib-org-chart-toggle-font-size: 0.65rem;
     --uilib-org-chart-node-transition:
-      background var(--uilib-transition-duration-fast, 0.15s) ease,
-      border-color var(--uilib-transition-duration-fast, 0.15s) ease;
+      background var(--uilib-transition-fast, 150ms ease),
+      border-color var(--uilib-transition-fast, 150ms ease);
+
+    // Toggle icon rotation transition token — zeroed by prefers-reduced-motion
+    --uilib-org-chart-toggle-transition: var(--uilib-transition-fast, 150ms ease);
+
+    // Mount animation token — set to none by prefers-reduced-motion
+    --uilib-org-chart-mount-animation: uilib-org-chart-mount 0.15s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+    // Focus / selection shadow tokens
+    --uilib-org-chart-focus-shadow: 0 0 0 2px var(--uilib-primary-300, #93c5fd);
+    --uilib-org-chart-node-shadow: none;
+    --uilib-org-chart-node-selected-shadow: none;
+    --uilib-org-chart-toggle-shadow: none;
 
     display: flex;
-    animation: uilib-org-chart-mount var(--uilib-transition-duration-fast, 0.15s)
-      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    animation: var(--uilib-org-chart-mount-animation);
     flex-direction: column;
     align-items: center;
     overflow: auto;
@@ -75,8 +86,10 @@
       transition: var(--uilib-org-chart-node-transition);
       outline: none;
 
+      box-shadow: var(--uilib-org-chart-node-shadow);
+
       &:focus-visible {
-        box-shadow: 0 0 0 2px var(--uilib-primary-300, #93c5fd);
+        box-shadow: var(--uilib-org-chart-focus-shadow);
       }
 
       &--selectable {
@@ -91,6 +104,7 @@
         background: var(--uilib-org-chart-node-selected-bg);
         border-color: var(--uilib-org-chart-node-selected-border);
         color: var(--uilib-org-chart-node-selected-color);
+        box-shadow: var(--uilib-org-chart-node-selected-shadow);
       }
     }
 
@@ -125,14 +139,16 @@
         background: var(--uilib-org-chart-node-hover-bg);
       }
 
+      box-shadow: var(--uilib-org-chart-toggle-shadow);
+
       &:focus-visible {
-        box-shadow: 0 0 0 2px var(--uilib-primary-300, #93c5fd);
+        box-shadow: var(--uilib-org-chart-focus-shadow);
       }
     }
 
     .uilib-org-chart-toggle-icon {
       display: inline-block;
-      transition: transform 0.2s ease;
+      transition: transform var(--uilib-org-chart-toggle-transition);
       transform: rotate(0deg);
 
       &--expanded {
@@ -147,7 +163,7 @@
       width: var(--uilib-org-chart-connector-width);
       height: var(--uilib-org-chart-connector-height);
       background: var(--uilib-org-chart-connector-color);
-      margin-top: calc(var(--uilib-org-chart-toggle-size) / 2);
+      margin-block-start: calc(var(--uilib-org-chart-toggle-size) / 2);
     }
 
     // Row that holds all child columns
@@ -209,22 +225,10 @@
     // ─── Variant: Material ────────────────────────────────────────────────────
     &.ui-lib-organization-chart--variant-material {
       --uilib-org-chart-node-border: none;
-
-      .uilib-org-chart-node-cell {
-        box-shadow:
-          0 1px 3px 0 rgb(0 0 0 / 0.1),
-          0 1px 2px -1px rgb(0 0 0 / 0.06);
-
-        &--selected {
-          box-shadow:
-            0 0 0 2px var(--uilib-primary-500, #3b82f6),
-            0 1px 3px 0 rgb(0 0 0 / 0.1);
-        }
-      }
-
-      .uilib-org-chart-toggle-btn {
-        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      }
+      --uilib-org-chart-node-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+      --uilib-org-chart-node-selected-shadow:
+        0 0 0 2px var(--uilib-primary-500, #3b82f6), 0 1px 3px 0 rgb(0 0 0 / 0.1);
+      --uilib-org-chart-toggle-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     }
 
     // ─── Variant: Bootstrap ───────────────────────────────────────────────────
@@ -255,11 +259,11 @@
       }
 
       .uilib-org-chart-node-cell {
-        border-bottom: 2px solid transparent;
+        border-block-end: 2px solid transparent;
 
         &--selected {
           background: transparent;
-          border-bottom-color: var(--uilib-primary-500, #3b82f6);
+          border-block-end-color: var(--uilib-primary-500, #3b82f6);
           color: var(--uilib-primary-700, #1d4ed8);
         }
 
@@ -286,15 +290,12 @@
     }
   }
 
-  // ─── Reduced motion ──────────────────────────────────────────────────────────
+  // ─── Reduced motion — token-zero ────────────────────────────────────────────
   @media (prefers-reduced-motion: reduce) {
     .ui-lib-organization-chart {
-      animation: none;
-
-      .uilib-org-chart-node-cell,
-      .uilib-org-chart-toggle-icon {
-        transition: none;
-      }
+      --uilib-org-chart-mount-animation: none;
+      --uilib-org-chart-node-transition: none;
+      --uilib-org-chart-toggle-transition: 0ms;
     }
   }
 } // end @layer uilib.components

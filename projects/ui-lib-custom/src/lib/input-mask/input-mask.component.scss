@@ -21,6 +21,10 @@
     --uilib-input-mask-disabled-opacity: 0.6;
     --uilib-input-mask-clear-icon-size: 1rem;
     --uilib-input-mask-error-color: var(--uilib-color-danger-600, currentColor);
+    --uilib-input-mask-transition:
+      border-color var(--uilib-transition-fast, 150ms ease),
+      box-shadow var(--uilib-transition-fast, 150ms ease),
+      background-color var(--uilib-transition-fast, 150ms ease);
 
     position: relative;
     display: inline-flex;
@@ -43,10 +47,7 @@
     width: 100%;
     min-inline-size: 0;
     padding: var(--uilib-input-mask-padding-y) var(--uilib-input-mask-padding-x);
-    transition:
-      border-color var(--uilib-transition-fast, 150ms ease),
-      box-shadow var(--uilib-transition-fast, 150ms ease),
-      background-color var(--uilib-transition-fast, 150ms ease);
+    transition: var(--uilib-input-mask-transition);
   }
 
   ui-lib-input-mask input::placeholder {
@@ -141,7 +142,7 @@
   ui-lib-input-mask .ui-lib-input-mask-error {
     color: var(--uilib-input-mask-error-color);
     font-size: var(--uilib-font-size-sm, 0.875rem);
-    margin-top: var(--uilib-space-1, 0.25rem);
+    margin-block-start: var(--uilib-space-1, 0.25rem);
   }
 
   ui-lib-input-mask .ui-lib-input-mask-sr-only {
@@ -157,9 +158,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-input-mask,
-    ui-lib-input-mask input {
-      transition: none;
+    ui-lib-input-mask {
+      --uilib-input-mask-transition: none;
     }
   }
 } // end @layer uilib.components

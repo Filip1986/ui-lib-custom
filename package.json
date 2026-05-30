@@ -266,7 +266,7 @@
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-focus-trap.mjs",
-      "maxSize": "2 kB"
+      "maxSize": "3 kB"
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-galleria.mjs",
@@ -386,7 +386,7 @@
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-progress-bar.mjs",
-      "maxSize": "4 kB"
+      "maxSize": "5 kB"
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-progress-spinner.mjs",
@@ -446,7 +446,7 @@
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-table.mjs",
-      "maxSize": "22 kB"
+      "maxSize": "23 kB"
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tabs.mjs",

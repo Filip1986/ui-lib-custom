@@ -72,3 +72,16 @@ ui-lib-code-snippet {
   --uilib-syntax-keyword: hotpink;
 }
 ```
+
+## Accessibility
+
+- **Color-only cues:** Syntax highlighting uses color alone to differentiate token types, which may be insufficient for users with color-vision deficiency. Pair highlighted code blocks with screen-reader-accessible `<code>` elements and an `aria-label` describing the language (e.g., `aria-label="TypeScript example"`).
+- **Forced colors / high contrast:** In `forced-colors: active` environments the browser overrides all custom color properties. Syntax tokens remain legible because the text is always plain characters — only the color differentiation is lost. Consider providing a plain text fallback or wrapping highlights in a `[data-forced-colors]` pattern.
+- **Reduced motion:** The highlighter produces static HTML — no animations. No `prefers-reduced-motion` handling is required.
+- **Screen reader output:** The `<span>` wrappers carry no ARIA roles or labels; they are purely visual. The underlying code text is always readable by screen readers because `aria-hidden` is not used. Add `role="region"` and `aria-label` to the containing `<pre>` / `<code>` block for landmark navigation.
+
+## When to use
+
+- Use `highlight()` when you need to insert pre-rendered HTML into the DOM (e.g. in `ui-lib-code-snippet`).
+- Use `tokenize()` when you need access to individual tokens — for example, when building a custom renderer, a token-by-token virtual scroller, or a diff viewer.
+- Use `escapeForCode()` when you want to display code in an unsupported language without token colours.

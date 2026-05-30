@@ -61,13 +61,14 @@
       display: flex;
       align-items: center;
       width: 100%;
-      margin: var(--uilib-divider-margin-v) 0;
+      margin-block: var(--uilib-divider-margin-v);
+      margin-inline: 0;
 
       &::before,
       &::after {
         display: block;
         height: 0;
-        border-top: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
+        border-block-start: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
           var(--uilib-divider-color);
       }
 

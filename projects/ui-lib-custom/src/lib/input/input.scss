@@ -3,6 +3,10 @@
     display: grid;
     gap: 0.35rem;
     color: var(--uilib-input-text, var(--uilib-page-fg));
+    --uilib-input-transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    --uilib-input-label-transition:
+      transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease,
+      background-color 0.15s ease;
     --uilib-input-padding-y-base: 0.5rem;
     --uilib-input-padding-x-base: 0.75rem;
     --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
@@ -47,9 +51,7 @@
     border-radius: var(--uilib-input-radius, var(--uilib-shape-base, 6px));
     padding: var(--uilib-input-padding-y, 0.5rem) var(--uilib-input-padding-x, 0.75rem);
     min-height: var(--uilib-input-min-height, 44px);
-    transition:
-      border-color 0.15s ease,
-      box-shadow 0.15s ease;
+    transition: var(--uilib-input-transition);
     position: relative;
     cursor: text;
   }
@@ -92,12 +94,7 @@
     top: 50%;
     transform: translate(var(--uilib-input-label-offset-x, 0), -50%);
     transform-origin: left top;
-    transition:
-      transform 0.15s ease,
-      font-size 0.15s ease,
-      color 0.15s ease,
-      padding 0.15s ease,
-      background-color 0.15s ease;
+    transition: var(--uilib-input-label-transition);
     background: transparent;
     z-index: 1;
     padding: 0;
@@ -264,15 +261,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     ui-lib-input {
-      --uilib-input-transition-duration: 0ms;
-
-      .ui-input-field {
-        transition: none;
-      }
-
-      .ui-input-has-floating .ui-input-label {
-        transition: none;
-      }
+      --uilib-input-transition: none;
+      --uilib-input-label-transition: none;
     }
   }
 } // end @layer uilib.components

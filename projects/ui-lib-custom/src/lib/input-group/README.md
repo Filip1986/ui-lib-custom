@@ -44,3 +44,9 @@ _none_
 - Interactive addons must use real interactive elements (for example, `<button type="button">`), not generic `<div>` containers.
 - Icon-only addon buttons must always have an `aria-label`.
 - Keep `<label for="...">` associated with the actual input id inside the group, not with the group container.
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-input-group-addon-border-radius` | `var(--uilib-border-radius, 6px)` | Corner radius applied to the outermost start/end element in the group |

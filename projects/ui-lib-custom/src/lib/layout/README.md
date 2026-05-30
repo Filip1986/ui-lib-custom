@@ -85,6 +85,18 @@ activating the skip link.  The container does **not** appear in the natural tab 
 - `overflow: hidden` is **never** applied.  Content at the edge of the max-width constraint
   remains reachable for screen-magnification users who pan horizontally.
 
+### CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-container-sm` | `640px` | Max inline-size for `size="sm"` |
+| `--uilib-container-md` | `768px` | Max inline-size for `size="md"` |
+| `--uilib-container-lg` | `1024px` | Max inline-size for `size="lg"` (default) |
+| `--uilib-container-xl` | `1280px` | Max inline-size for `size="xl"` |
+| `--uilib-container-2xl` | `1536px` | Max inline-size for `size="2xl"` |
+| `--uilib-container-full` | `100%` | Max inline-size for `size="full"` |
+| `--uilib-container-fg` | `var(--uilib-text-dark-primary)` | Foreground color override (dark-mode context) |
+
 ---
 
 ## Stack

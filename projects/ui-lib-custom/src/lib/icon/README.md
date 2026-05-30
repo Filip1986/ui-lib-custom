@@ -54,6 +54,13 @@ _none_
 | `xl` | `1.5em` |
 | `2xl` | `2em` |
 
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-icon-color` | `currentColor` | Icon fill/stroke color; override per instance via the `color` input or CSS |
+| `--uilib-icon-transition` | `150ms ease` | Color transition; set to `none` when `prefers-reduced-motion: reduce` |
+
 ## Performance
 
 - Icons are resolved from the already-registered `@ng-icons` bundle and rendered inline through `<ng-icon>`.

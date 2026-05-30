@@ -246,9 +246,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-select-button .ui-lib-select-button__item .ui-lib-button,
-    ui-lib-select-button .ui-lib-select-button__item--selected .ui-lib-button {
-      transition: none;
+    ui-lib-select-button {
+      --uilib-button-transition: none;
     }
   }
 

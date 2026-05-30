@@ -33,6 +33,7 @@
     --uilib-drawer-close-color: var(--uilib-color-text-secondary, #6b7280);
     --uilib-drawer-close-hover-bg: var(--uilib-color-surface-hover, rgba(0, 0, 0, 0.06));
     --uilib-drawer-close-size: 2rem;
+    --uilib-drawer-close-transition: background-color 0.15s ease, color 0.15s ease;
 
     position: fixed;
     inset: 0;
@@ -69,17 +70,19 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    /* Promote panel to its own compositor layer so slide animations are GPU-accelerated */
+    will-change: transform;
     transition: transform var(--uilib-drawer-transition-duration)
       var(--uilib-drawer-transition-easing);
   }
 
   /* ── Position: right (default) ──────────────────────────────────── */
   .ui-lib-drawer--right .ui-lib-drawer__panel {
-    top: 0;
+    inset-block-start: 0;
     inset-inline-end: 0;
-    bottom: 0;
-    width: var(--uilib-drawer-size);
-    max-width: 100vw;
+    inset-block-end: 0;
+    inline-size: var(--uilib-drawer-size);
+    max-inline-size: 100vw;
     transform: translateX(100%);
 
     &.ui-lib-drawer__panel--open {
@@ -89,11 +92,11 @@
 
   /* ── Position: left ─────────────────────────────────────────────── */
   .ui-lib-drawer--left .ui-lib-drawer__panel {
-    top: 0;
+    inset-block-start: 0;
     inset-inline-start: 0;
-    bottom: 0;
-    width: var(--uilib-drawer-size);
-    max-width: 100vw;
+    inset-block-end: 0;
+    inline-size: var(--uilib-drawer-size);
+    max-inline-size: 100vw;
     transform: translateX(-100%);
 
     &.ui-lib-drawer__panel--open {
@@ -103,11 +106,11 @@
 
   /* ── Position: top ──────────────────────────────────────────────── */
   .ui-lib-drawer--top .ui-lib-drawer__panel {
-    top: 0;
+    inset-block-start: 0;
     inset-inline-start: 0;
     inset-inline-end: 0;
-    height: var(--uilib-drawer-size);
-    max-height: 100vh;
+    block-size: var(--uilib-drawer-size);
+    max-block-size: 100vh;
     transform: translateY(-100%);
 
     &.ui-lib-drawer__panel--open {
@@ -117,11 +120,11 @@
 
   /* ── Position: bottom ───────────────────────────────────────────── */
   .ui-lib-drawer--bottom .ui-lib-drawer__panel {
-    bottom: 0;
+    inset-block-end: 0;
     inset-inline-start: 0;
     inset-inline-end: 0;
-    height: var(--uilib-drawer-size);
-    max-height: 100vh;
+    block-size: var(--uilib-drawer-size);
+    max-block-size: 100vh;
     transform: translateY(100%);
 
     &.ui-lib-drawer__panel--open {
@@ -135,9 +138,9 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--uilib-drawer-padding);
-    padding-bottom: calc(var(--uilib-drawer-padding) * 0.75);
+    padding-block-end: calc(var(--uilib-drawer-padding) * 0.75);
     background-color: var(--uilib-drawer-header-bg);
-    border-bottom: var(--uilib-drawer-header-border);
+    border-block-end: var(--uilib-drawer-header-border);
     flex-shrink: 0;
   }
 
@@ -153,17 +156,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-drawer-close-size);
-    height: var(--uilib-drawer-close-size);
+    inline-size: var(--uilib-drawer-close-size);
+    block-size: var(--uilib-drawer-close-size);
     border: none;
     background: transparent;
-    border-radius: 50%;
+    border-radius: var(--uilib-radius-full, 9999px);
     color: var(--uilib-drawer-close-color);
     cursor: pointer;
     flex-shrink: 0;
-    transition:
-      background-color 0.15s ease,
-      color 0.15s ease;
+    transition: var(--uilib-drawer-close-transition);
 
     &:hover {
       background-color: var(--uilib-drawer-close-hover-bg);
@@ -264,6 +265,7 @@
   @media (prefers-reduced-motion: reduce) {
     ui-lib-drawer {
       --uilib-drawer-transition-duration: 0ms;
+      --uilib-drawer-close-transition: none;
     }
   }
 } // end @layer uilib.components

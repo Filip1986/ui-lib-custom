@@ -15,7 +15,7 @@
     // Button dimensions
     --uilib-paginator-button-size: 2.25rem;
     --uilib-paginator-button-font-size: 0.875rem;
-    --uilib-paginator-button-radius: 50%;
+    --uilib-paginator-button-radius: var(--uilib-radius-full, 9999px);
 
     // Button colours (defaults — overridden per variant)
     --uilib-paginator-button-bg: transparent;
@@ -53,6 +53,9 @@
     --uilib-paginator-rpp-color: var(--uilib-color-text-primary, #374151);
     --uilib-paginator-rpp-padding: 0 0.625rem;
 
+    // Focus ring shadow
+    --uilib-paginator-focus-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+
     // Transition
     --uilib-paginator-transition:
       background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
@@ -89,7 +92,7 @@
 
   // ── Variant: Material ─────────────────────────────────────────────────────────
   .ui-lib-paginator--material {
-    --uilib-paginator-button-radius: 50%;
+    --uilib-paginator-button-radius: var(--uilib-radius-full, 9999px);
     --uilib-paginator-button-bg-hover: rgba(99, 102, 241, 0.08);
     --uilib-paginator-button-bg-selected: var(--uilib-color-primary, #6366f1);
     --uilib-paginator-button-color-selected: #ffffff;
@@ -262,7 +265,7 @@
 
     &:focus-visible {
       border-color: var(--uilib-color-primary, #6366f1);
-      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+      box-shadow: var(--uilib-paginator-focus-shadow);
     }
 
     &:disabled {
@@ -287,7 +290,7 @@
 
     &:focus-visible {
       border-color: var(--uilib-color-primary, #6366f1);
-      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+      box-shadow: var(--uilib-paginator-focus-shadow);
     }
 
     &:disabled {
@@ -297,10 +300,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .uilib-paginator-button,
-    .uilib-paginator-jtp-input,
-    .uilib-paginator-rpp-select {
-      transition: none;
+    .ui-lib-paginator {
+      --uilib-paginator-transition: none;
     }
   }
 } // end @layer uilib.components

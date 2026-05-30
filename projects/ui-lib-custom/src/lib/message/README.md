@@ -75,14 +75,21 @@ Associate a `<ui-lib-message>` with a form field so screen readers announce the 
 
 | Property | Default | Description |
 |---|---|---|
-| `--uilib-message-bg` | `transparent` | Background colour |
-| `--uilib-message-fg` | `inherit` | Text colour |
-| `--uilib-message-border-color` | `transparent` | Border colour |
+| `--uilib-message-bg` | `transparent` | Background colour (overridden per severity) |
+| `--uilib-message-fg` | `inherit` | Text colour (overridden per severity) |
+| `--uilib-message-border-color` | `transparent` | Border colour (overridden per severity) |
 | `--uilib-message-icon-color` | `currentColor` | Severity icon colour |
 | `--uilib-message-close-color` | `currentColor` | Close button colour |
-| `--uilib-message-radius` | `var(--uilib-radius-md)` | Border radius |
+| `--uilib-message-radius` | `var(--uilib-radius-md, 0.375rem)` | Border radius |
 | `--uilib-message-border-width` | `1px` | Border width |
-| `--uilib-message-padding-sm/md/lg` | — | Padding by size |
-| `--uilib-message-font-size-sm/md/lg` | — | Font size by size |
-| `--uilib-message-gap-sm/md/lg` | — | Gap between icon and content |
+| `--uilib-message-padding-sm` | `0.375rem 0.625rem` | Padding at `size="sm"` |
+| `--uilib-message-padding-md` | `0.625rem 0.875rem` | Padding at `size="md"` (default) |
+| `--uilib-message-padding-lg` | `0.875rem 1.125rem` | Padding at `size="lg"` |
+| `--uilib-message-font-size-sm` | `0.8125rem` | Font size at `size="sm"` |
+| `--uilib-message-font-size-md` | `0.875rem` | Font size at `size="md"` (default) |
+| `--uilib-message-font-size-lg` | `1rem` | Font size at `size="lg"` |
+| `--uilib-message-gap-sm` | `0.375rem` | Icon-to-content gap at `size="sm"` |
+| `--uilib-message-gap-md` | `0.5rem` | Icon-to-content gap at `size="md"` (default) |
+| `--uilib-message-gap-lg` | `0.625rem` | Icon-to-content gap at `size="lg"` |
+| `--uilib-message-transition` | `var(--uilib-transition-fast, 150ms ease)` | Close button hover transition; zeroed by `prefers-reduced-motion` |
 

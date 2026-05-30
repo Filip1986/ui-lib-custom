@@ -134,8 +134,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | Component         | Key a11y concern                                                                                    | Status                 |
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
-| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
-| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.7)           |
+| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (9.0)           |
+| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (9.0)           |
 | ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ✅ Done (8.8)           |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.6)           |
@@ -150,9 +150,9 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ✅ Done (8.3)           |
-| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done (8.7)           |
+| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done (9.0)           |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done (8.6)           |
-| ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
+| ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done (9.0)           |
 | StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ✅ Done (8.7)           |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
 | AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ✅ Done (8.7)           |
@@ -186,27 +186,27 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component     | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
-| Button        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
-| Input         | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 9   | 8.8 | 🟢     |
-| Textarea      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Button        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Input         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Textarea      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Select        | 9   | 9    | 10   | 10   | 9     | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
 | AutoComplete  | 9   | 9    | 10   | 9    | 10    | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
 | CascadeSelect | 9   | 9    | 10   | 9    | 10    | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
 | DatePicker    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| RadioButton   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.9 | 🟢     |
-| ToggleButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| ToggleSwitch  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.9 | 🟢     |
-| SelectButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| RadioButton   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| ToggleButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| ToggleSwitch  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| SelectButton  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| InputMask     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| InputOtp      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| Password      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| Rating        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| InputMask     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| InputOtp      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Password      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Rating        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Knob          | 9   | 9    | 8    | 10   | 9     | 9   | 8    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Slider        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Slider        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ColorPicker   | 10  | 9    | 10   | 9    | 9     | 9   | 10   | 9      | 10      | 9    | 10  | 9.5 | 🟢     |
-| KeyFilter     | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
+| KeyFilter     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
 ## Layout
 
@@ -216,14 +216,14 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Stack       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Inline      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Grid        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
-| FloatLabel  | 9   | 9    | 10   | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| IconField   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| InputGroup  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| FormField   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 9    | 9   | 8.8 | 🟢     |
-| Divider     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Container   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| FloatLabel  | 9   | 9    | 10   | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 9.0 | 🟢     |
+| IconField   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| InputGroup  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| FormField   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Divider     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Toolbar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Fluid       | 9   | 9    | 9    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
+| Fluid       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ScrollPanel | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
@@ -233,13 +233,13 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component     | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
 | Dialog        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| DynamicDialog | 9   | 9    | 8    | 9    | 9     | 9   | 8    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
-| Drawer        | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 9    | 9   | 8.8 | 🟢     |
+| DynamicDialog | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Drawer        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | BottomSheet   | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Tooltip       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| ConfirmDialog | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.8 | 🟢     |
-| ConfirmPopup  | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
+| ConfirmDialog | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| ConfirmPopup  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
 ## Navigation & Menus
 
@@ -256,7 +256,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | PanelMenu   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Stepper     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| SpeedDial   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| SpeedDial   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
 ## Data Display
 
@@ -266,32 +266,32 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Table             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | TreeTable         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Tree              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| TreeSelect        | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
+| TreeSelect        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Listbox           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | DataView          | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| VirtualScroller   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
+| VirtualScroller   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Timeline          | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| OrderList         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| OrganizationChart | 8   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.7 | 🟢     |
-| PickList          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| Paginator         | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
+| OrderList         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| OrganizationChart | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| PickList          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Paginator         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Carousel          | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Galleria          | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 8.9 | 🟢     |
+| Galleria          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Chart             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| CodeSnippet       | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
+| CodeSnippet       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
 ## Feedback & Status
 
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
-| Alert           | 9   | 9    | 8    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.6 | 🟢     |
+| Alert           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.1 | 🟢     |
 | Badge           | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Tag             | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Chip            | 9   | 9    | 8    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.6 | 🟢     |
-| Message         | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
-| Skeleton        | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
-| ProgressBar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
+| Chip            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Message         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Skeleton        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| ProgressBar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ProgressSpinner | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | MeterGroup      | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
@@ -299,26 +299,26 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | I18n | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|------|-----|--------|
-| Avatar          | 9   | 9    | 8    | 10   | 9     | 9   | 8    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
-| Icon            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| IconButton      | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
-| ButtonGroup     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| SplitButton     | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
-| Image           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
+| Avatar          | 9   | 9    | 8    | 10   | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Icon            | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| IconButton      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| ButtonGroup     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| SplitButton     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| Image           | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ImageCompare    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Upload          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | ClassNames      | 9   | 9    | 10   | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.1 | 🟢     |
 | Terminal        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| Ripple          | 8   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 9   | 8.8 | 🟢     |
-| ScrollTop       | 9   | 9    | 8    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 8.9 | 🟢     |
-| StyleClass      | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
+| Ripple          | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| ScrollTop       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| StyleClass      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 | FocusTrap       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
-| AnimateOnScroll | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.7 | 🟢     |
-| AutoFocus       | 9   | 9    | 10   | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.8 | 🟢     |
-| Bind              | 8   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 9   | 8.6 | 🟢     |
-| SyntaxHighlighter | 9   | 8    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 9    | 9   | 8.7 | 🟢     |
+| AnimateOnScroll | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| AutoFocus       | 9   | 9    | 10   | 9    | 9     | 9   | 9    | 9      | 9       | 8    | 9   | 9.0 | 🟢     |
+| Bind              | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
+| SyntaxHighlighter | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9   | 9.0 | 🟢     |
 
 ---
 

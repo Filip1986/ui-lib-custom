@@ -4,7 +4,16 @@
   [style.background-color]="color()"
 >
   @if (mode() === 'determinate' && showValue()) {
-    <span class="ui-lib-progress-bar__label">{{ displayLabel() }}</span>
+    <span class="ui-lib-progress-bar__label">
+      @if (labelTemplate) {
+        <ng-container
+          [ngTemplateOutlet]="labelTemplate"
+          [ngTemplateOutletContext]="labelContext()"
+        />
+      } @else {
+        {{ displayLabel() }}
+      }
+    </span>
   }
 </div>
 @if (clampedValue() === 100) {

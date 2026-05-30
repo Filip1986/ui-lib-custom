@@ -61,7 +61,7 @@
     .ui-lib-button {
     border-start-start-radius: 0;
     border-start-end-radius: 0;
-    margin-top: var(--uilib-button-group-connected-border-overlap);
+    margin-block-start: var(--uilib-button-group-connected-border-overlap);
     margin-inline-start: 0;
   }
 

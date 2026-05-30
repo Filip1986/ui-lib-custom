@@ -112,15 +112,15 @@
     gap: var(--uilib-pick-list-control-gap);
     flex-shrink: 0;
     align-self: flex-start;
-    padding-top: 0; // aligns with list top after header renders
+    padding-block-start: 0; // aligns with list top after header renders
   }
 
   .ui-lib-pick-list__control-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-pick-list-control-size);
-    height: var(--uilib-pick-list-control-size);
+    inline-size: var(--uilib-pick-list-control-size);
+    block-size: var(--uilib-pick-list-control-size);
     padding: 0;
     background: var(--uilib-pick-list-control-bg);
     color: var(--uilib-pick-list-control-color);
@@ -145,8 +145,8 @@
     }
 
     ui-lib-icon {
-      width: 1rem;
-      height: 1rem;
+      inline-size: 1rem;
+      block-size: 1rem;
       pointer-events: none;
     }
   }
@@ -174,7 +174,7 @@
     padding: var(--uilib-pick-list-header-padding);
     background: var(--uilib-pick-list-header-bg);
     font-weight: var(--uilib-pick-list-header-font-weight);
-    border-bottom: var(--uilib-pick-list-header-border);
+    border-block-end: var(--uilib-pick-list-header-border);
   }
 
   // =============================================================================
@@ -183,7 +183,7 @@
 
   .ui-lib-pick-list__filter {
     padding: var(--uilib-pick-list-filter-padding);
-    border-bottom: var(--uilib-pick-list-filter-border);
+    border-block-end: var(--uilib-pick-list-filter-border);
   }
 
   .ui-lib-pick-list__filter-input {
@@ -238,14 +238,14 @@
     padding: var(--uilib-pick-list-item-padding);
     background: var(--uilib-pick-list-item-bg);
     color: var(--uilib-pick-list-item-color);
-    border-bottom: var(--uilib-pick-list-item-border-bottom);
+    border-block-end: var(--uilib-pick-list-item-border-bottom);
     cursor: pointer;
     user-select: none;
     transition: var(--uilib-pick-list-transition);
     position: relative; // Required for drop-indicator pseudo-elements
 
     &:last-child {
-      border-bottom: none;
+      border-block-end: none;
     }
 
     &:hover:not(.ui-lib-pick-list__item--selected) {
@@ -274,8 +274,8 @@
     content: '';
     position: absolute;
     inset-inline: 0;
-    top: 0;
-    height: var(--uilib-pick-list-drop-indicator-height);
+    inset-block-start: 0;
+    block-size: var(--uilib-pick-list-drop-indicator-height);
     background: var(--uilib-pick-list-drop-indicator-color);
     pointer-events: none;
     z-index: 1;
@@ -285,8 +285,8 @@
     content: '';
     position: absolute;
     inset-inline: 0;
-    bottom: 0;
-    height: var(--uilib-pick-list-drop-indicator-height);
+    inset-block-end: 0;
+    block-size: var(--uilib-pick-list-drop-indicator-height);
     background: var(--uilib-pick-list-drop-indicator-color);
     pointer-events: none;
     z-index: 1;
@@ -321,8 +321,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-pick-list-transfer-size);
-    height: var(--uilib-pick-list-transfer-size);
+    inline-size: var(--uilib-pick-list-transfer-size);
+    block-size: var(--uilib-pick-list-transfer-size);
     padding: 0;
     background: var(--uilib-pick-list-transfer-bg);
     color: var(--uilib-pick-list-transfer-color);
@@ -347,8 +347,8 @@
     }
 
     ui-lib-icon {
-      width: 1.125rem;
-      height: 1.125rem;
+      inline-size: 1.125rem;
+      block-size: 1.125rem;
       pointer-events: none;
     }
   }
@@ -454,12 +454,8 @@
   // =============================================================================
 
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-pick-list,
-    .ui-lib-pick-list__item,
-    .ui-lib-pick-list__control-btn,
-    .ui-lib-pick-list__transfer-btn,
-    .ui-lib-pick-list__filter-input {
-      transition: none;
+    .ui-lib-pick-list {
+      --uilib-pick-list-transition: none;
     }
   }
 

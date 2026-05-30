@@ -62,3 +62,9 @@ For built-in inputs, FormField also exposes a DI context token (`FORM_FIELD_CONT
   <ui-lib-input type="email" />
 </ui-lib-form-field>
 ```
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-form-field-error-animation` | `ui-lib-form-field-error-slide-in 180ms ease-out` | Error message entrance animation; set to `none` when `prefers-reduced-motion: reduce` |

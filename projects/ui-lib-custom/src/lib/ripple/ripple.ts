@@ -38,6 +38,13 @@ export class Ripple implements OnInit, OnDestroy {
    */
   public readonly rippleDuration: InputSignal<string> = input<string>('');
 
+  /**
+   * Override the animation easing inline (e.g. `'ease-in-out'`).
+   * Accepts any valid CSS timing function value.
+   * If not provided, the CSS variable `--uilib-ripple-easing` value is used.
+   */
+  public readonly rippleEasing: InputSignal<string> = input<string>('');
+
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly ngZone: NgZone = inject(NgZone);
@@ -63,7 +70,7 @@ export class Ripple implements OnInit, OnDestroy {
     if (this.clickListener) {
       this.elementRef.nativeElement.removeEventListener(
         'click',
-        this.clickListener as EventListener
+        this.clickListener as EventListener,
       );
       this.clickListener = null;
     }
@@ -123,6 +130,11 @@ export class Ripple implements OnInit, OnDestroy {
       wave.style.setProperty('--uilib-ripple-duration', duration);
     }
 
+    const easing: string = this.rippleEasing();
+    if (easing) {
+      wave.style.setProperty('--uilib-ripple-easing', easing);
+    }
+
     host.appendChild(wave);
 
     wave.addEventListener(
@@ -130,7 +142,7 @@ export class Ripple implements OnInit, OnDestroy {
       (): void => {
         wave.remove();
       },
-      { once: true }
+      { once: true },
     );
   }
 }
