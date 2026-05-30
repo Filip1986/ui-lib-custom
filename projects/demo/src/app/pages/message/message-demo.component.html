@@ -70,7 +70,7 @@
           [size]="playgroundSize()"
           [text]="playgroundText()"
           [closable]="playgroundClosable()"
-          (close)="onPlaygroundClose()"
+          (closed)="onPlaygroundClose()"
         />
       }
     </div>
@@ -177,7 +177,7 @@
             [severity]="severity"
             [closable]="true"
             [text]="'This is a ' + severity + ' message. Click to dismiss.'"
-            (close)="dismissSeverity(severity)"
+            (closed)="dismissSeverity(severity)"
           />
         }
       }

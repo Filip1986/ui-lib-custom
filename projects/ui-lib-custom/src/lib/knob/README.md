@@ -1,10 +1,10 @@
 # Knob
 
-**Selector:** `uilib-knob`
+**Selector:** `ui-lib-knob`
 **Package:** `ui-lib-custom/knob`
 **Content projection:** no — none
 
-> The selector is `uilib-knob` (no hyphen between "ui" and "lib"), which differs from the `ui-lib-*` convention used by other components. Implements `ControlValueAccessor` — use with `ngModel` or reactive forms. Drag sensitivity is fixed at 150px of vertical movement covering the full range.
+> Implements `ControlValueAccessor` — use with `ngModel` or reactive forms. Drag sensitivity is fixed at 150px of vertical movement covering the full range.
 
 ## Inputs
 
@@ -31,18 +31,18 @@
 
 | Name | Payload | Notes |
 |------|---------|-------|
-| `change` | `KnobChangeEvent` | Emitted whenever the value changes due to user interaction. |
-| `focus` | `FocusEvent` | Emitted when the knob receives focus. |
-| `blur` | `FocusEvent` | Emitted when the knob loses focus. |
+| `knobChange` | `KnobChangeEvent` | Emitted whenever the value changes due to user interaction. |
+| `knobFocus` | `FocusEvent` | Emitted when the knob receives focus. |
+| `knobBlur` | `FocusEvent` | Emitted when the knob loses focus. |
 
 ## Usage
 
 ```html
 <!-- basic usage with two-way binding -->
-<uilib-knob [(value)]="volume" [min]="0" [max]="100" />
+<ui-lib-knob [(value)]="volume" [min]="0" [max]="100" />
 
 <!-- percentage display with ngModel -->
-<uilib-knob [(ngModel)]="brightness" [max]="100" valueTemplate="{value}%" />
+<ui-lib-knob [(ngModel)]="brightness" [max]="100" valueTemplate="{value}%" />
 ```
 
 ## Accessibility

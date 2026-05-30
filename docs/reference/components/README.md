@@ -20,7 +20,7 @@ Individual component documentation with complete API references and implementati
 
 - [BADGE.md](BADGE.md) - Complete API reference and usage guide
 
-- [BADGE_IMPLEMENTATION.md](BADGE_IMPLEMENTATION.md) - Implementation details and architecture
+- [BADGE_IMPLEMENTATION.md](../../architecture/BADGE_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -46,7 +46,7 @@ Individual component documentation with complete API references and implementati
 
 - [ACCORDION.md](ACCORDION.md) - Complete API reference and usage guide
 
-- [ACCORDION_IMPLEMENTATION.md](ACCORDION_IMPLEMENTATION.md) - Implementation details and architecture
+- [ACCORDION_IMPLEMENTATION.md](../../architecture/ACCORDION_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -72,7 +72,7 @@ Individual component documentation with complete API references and implementati
 
 - [BUTTON.md](BUTTON.md) - Complete API reference and usage guide
 
-- [BUTTON_IMPLEMENTATION.md](BUTTON_IMPLEMENTATION.md) - Implementation details and architecture
+- [BUTTON_IMPLEMENTATION.md](../../architecture/BUTTON_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -98,7 +98,7 @@ Individual component documentation with complete API references and implementati
 
 - [CARD.md](CARD.md) - API reference and usage guide
 
-- [CARD_IMPLEMENTATION.md](CARD_IMPLEMENTATION.md) - Implementation details and architecture
+- [CARD_IMPLEMENTATION.md](../../architecture/CARD_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -124,7 +124,7 @@ Individual component documentation with complete API references and implementati
 
 - [CHECKBOX.md](CHECKBOX.md) - API reference and usage guide
 
-- [CHECKBOX_IMPLEMENTATION.md](CHECKBOX_IMPLEMENTATION.md) - Implementation details and architecture
+- [CHECKBOX_IMPLEMENTATION.md](../../architecture/CHECKBOX_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -148,7 +148,7 @@ Individual component documentation with complete API references and implementati
 
 - [ICON.md](ICON.md) - API reference and usage guide
 
-- [ICON_IMPLEMENTATION.md](ICON_IMPLEMENTATION.md) - Implementation details and architecture
+- [ICON_IMPLEMENTATION.md](../../architecture/ICON_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -170,7 +170,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [ICON_BUTTON.md](ICON_BUTTON.md) - API reference and implementation notes
+- [icon-button.md](icon-button.md) - API reference and implementation notes
 
 
 
@@ -194,7 +194,7 @@ Individual component documentation with complete API references and implementati
 
 - [INPUT.md](INPUT.md) - API reference and usage guide
 
-- [INPUT_IMPLEMENTATION.md](INPUT_IMPLEMENTATION.md) - Implementation details and architecture
+- [INPUT_IMPLEMENTATION.md](../../architecture/INPUT_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -264,9 +264,9 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [SELECTBUTTON.md](SELECTBUTTON.md) - Complete API reference and usage guide
+- [select-button.md](select-button.md) - Complete API reference and usage guide
 
-- [SELECTBUTTON_IMPLEMENTATION.md](SELECTBUTTON_IMPLEMENTATION.md) - Implementation details and architecture
+- [SELECTBUTTON_IMPLEMENTATION.md](../../architecture/SELECTBUTTON_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -292,7 +292,7 @@ Individual component documentation with complete API references and implementati
 
 - [TABS.md](TABS.md) - API reference and usage guide
 
-- [TABS_IMPLEMENTATION.md](TABS_IMPLEMENTATION.md) - Implementation details and architecture
+- [TABS_IMPLEMENTATION.md](../../architecture/TABS_IMPLEMENTATION.md) - Implementation details and architecture
 
 
 
@@ -402,7 +402,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [COLORPICKER.md](COLORPICKER.md) - API reference and usage guide
+- [color-picker.md](color-picker.md) - API reference and usage guide
 
 
 
@@ -426,7 +426,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [DATEPICKER.md](DATEPICKER.md) - API reference and usage guide
+- [date-picker.md](date-picker.md) - API reference and usage guide
 
 
 
@@ -474,7 +474,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [ICONFIELD.md](ICONFIELD.md) - API reference and usage guide
+- [icon-field.md](icon-field.md) - API reference and usage guide
 
 **Highlights:** Decorative icons default to `aria-hidden`, stay out of the tab order, and the wrapper now reserves CSS-only padding for native inputs plus Input/Password/InputMask/InputNumber compositions.
 
@@ -500,7 +500,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [INPUTGROUP.md](INPUTGROUP.md) - API reference and usage guide
+- [input-group.md](input-group.md) - API reference and usage guide
 
 
 
@@ -524,7 +524,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [INPUTMASK.md](INPUTMASK.md) - API reference and usage guide
+- [input-mask.md](input-mask.md) - API reference and usage guide
 
 
 
@@ -548,7 +548,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [INPUTNUMBER.md](INPUTNUMBER.md) - API reference and usage guide
+- [input-number.md](input-number.md) - API reference and usage guide
 
 
 
@@ -572,7 +572,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [DATAVIEW.md](DATAVIEW.md) - API reference and usage guide
+- [data-view.md](data-view.md) - API reference and usage guide
 
 
 
@@ -620,7 +620,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [SPEEDDIAL.md](SPEEDDIAL.md) - API reference and usage guide
+- [speed-dial.md](speed-dial.md) - API reference and usage guide
 
 
 
@@ -644,7 +644,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [SPLITBUTTON.md](SPLITBUTTON.md) - API reference and usage guide
+- [split-button.md](split-button.md) - API reference and usage guide
 
 **Highlights:** Hardened split menu-button semantics, keyboard navigation, and reduced-motion support.
 
@@ -670,7 +670,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [ORDERLIST.md](ORDERLIST.md) - API reference and usage guide
+- [order-list.md](order-list.md) - API reference and usage guide
 
 
 
@@ -694,7 +694,7 @@ Individual component documentation with complete API references and implementati
 
 **Files:**
 
-- [ORGANIZATIONCHART.md](ORGANIZATIONCHART.md) - API reference and usage guide
+- [organization-chart.md](organization-chart.md) - API reference and usage guide
 
 
 

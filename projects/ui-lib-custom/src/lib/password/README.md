@@ -1,10 +1,10 @@
 # Password
 
-**Selector:** `uilib-password`
+**Selector:** `ui-lib-password`
 **Package:** `ui-lib-custom/password`
 **Content projection:** no — none
 
-> The selector is `uilib-password` (no hyphen after `ui`), unlike most library components that use `ui-lib-*`. The `variant` input defaults to `'material'` instead of inheriting the global theme — set it explicitly for consistent theming.
+> The `variant` input defaults to `'material'` instead of inheriting the global theme — set it explicitly for consistent theming.
 
 ## Inputs
 
@@ -61,7 +61,7 @@ external `<label>` using the component reference:
 
 ```html
 <label [for]="passwordRef.passwordId">New password</label>
-<uilib-password #passwordRef />
+<ui-lib-password #passwordRef />
 ```
 
 When `feedback` is enabled (default), the input automatically has `aria-describedby` pointing to
@@ -96,7 +96,7 @@ an error node linked by `aria-describedby`:
 
 ```html
 <label [for]="passwordRef.passwordId">Password</label>
-<uilib-password #passwordRef [invalid]="true" errorMessage="Password is required" />
+<ui-lib-password #passwordRef [invalid]="true" errorMessage="Password is required" />
 ```
 
 ## Usage
@@ -104,11 +104,11 @@ an error node linked by `aria-describedby`:
 ```html
 <!-- minimal example with label association -->
 <label [for]="passRef.passwordId">Password</label>
-<uilib-password #passRef [(ngModel)]="password" />
+<ui-lib-password #passRef [(ngModel)]="password" />
 
 <!-- with toggle mask, feedback, and clear button -->
 <label [for]="passRef.passwordId">New password</label>
-<uilib-password
+<ui-lib-password
   #passRef
   variant="material"
   [toggleMask]="true"
@@ -119,7 +119,7 @@ an error node linked by `aria-describedby`:
 
 <!-- without strength feedback, with clear button -->
 <label [for]="passRef.passwordId">Password</label>
-<uilib-password
+<ui-lib-password
   #passRef
   [feedback]="false"
   [showClear]="true"
@@ -132,23 +132,23 @@ an error node linked by `aria-describedby`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `--uilib-password-transition` | `border-color 0.15s ease, box-shadow 0.15s ease` | Input border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
-| `--uilib-password-border-color` | `#d1d5db` | Input border color |
-| `--uilib-password-border-color-hover` | `#9ca3af` | Input border color on hover |
-| `--uilib-password-border-color-focus` | `#6366f1` | Input border color on focus |
-| `--uilib-password-border-color-invalid` | `#ef4444` | Input border when invalid |
-| `--uilib-password-focus-ring` | `rgba(99, 102, 241, 0.2)` | Focus ring color |
-| `--uilib-password-bg` | `#ffffff` | Input background |
-| `--uilib-password-color` | `#374151` | Input text color |
-| `--uilib-password-border-radius` | `6px` | Input corner radius |
-| `--uilib-password-icon-color` | `#6b7280` | Toggle/clear icon color |
-| `--uilib-password-panel-bg` | `#ffffff` | Strength panel background |
-| `--uilib-password-panel-border-radius` | `6px` | Strength panel corner radius |
-| `--uilib-password-panel-shadow` | `0 4px 12px rgba(0,0,0,0.08)` | Strength panel shadow |
-| `--uilib-password-meter-bg` | `#e5e7eb` | Meter track background |
-| `--uilib-password-meter-height` | `6px` | Meter track height |
-| `--uilib-password-meter-bg-weak` | `#ef4444` | Meter fill — weak |
-| `--uilib-password-meter-bg-medium` | `#f59e0b` | Meter fill — medium |
-| `--uilib-password-meter-bg-strong` | `#10b981` | Meter fill — strong |
-| `--uilib-password-meter-transition-duration` | `0.4s` | Meter width animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
-| `--uilib-password-meter-color-transition-duration` | `0.25s` | Meter color animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--ui-lib-password-transition` | `border-color 0.15s ease, box-shadow 0.15s ease` | Input border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--ui-lib-password-border-color` | `#d1d5db` | Input border color |
+| `--ui-lib-password-border-color-hover` | `#9ca3af` | Input border color on hover |
+| `--ui-lib-password-border-color-focus` | `#6366f1` | Input border color on focus |
+| `--ui-lib-password-border-color-invalid` | `#ef4444` | Input border when invalid |
+| `--ui-lib-password-focus-ring` | `rgba(99, 102, 241, 0.2)` | Focus ring color |
+| `--ui-lib-password-bg` | `#ffffff` | Input background |
+| `--ui-lib-password-color` | `#374151` | Input text color |
+| `--ui-lib-password-border-radius` | `6px` | Input corner radius |
+| `--ui-lib-password-icon-color` | `#6b7280` | Toggle/clear icon color |
+| `--ui-lib-password-panel-bg` | `#ffffff` | Strength panel background |
+| `--ui-lib-password-panel-border-radius` | `6px` | Strength panel corner radius |
+| `--ui-lib-password-panel-shadow` | `0 4px 12px rgba(0,0,0,0.08)` | Strength panel shadow |
+| `--ui-lib-password-meter-bg` | `#e5e7eb` | Meter track background |
+| `--ui-lib-password-meter-height` | `6px` | Meter track height |
+| `--ui-lib-password-meter-bg-weak` | `#ef4444` | Meter fill — weak |
+| `--ui-lib-password-meter-bg-medium` | `#f59e0b` | Meter fill — medium |
+| `--ui-lib-password-meter-bg-strong` | `#10b981` | Meter fill — strong |
+| `--ui-lib-password-meter-transition-duration` | `0.4s` | Meter width animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--ui-lib-password-meter-color-transition-duration` | `0.25s` | Meter color animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |

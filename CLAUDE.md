@@ -273,7 +273,7 @@ docs/
 ├── COMPONENT_SCORES.md    # Quality scorecard results + prioritized hardening backlog
 ├── getting-started/       QUICK_START.md, TEST_GUIDE.md
 ├── guides/                INTEGRATION_EXAMPLE.md, PUBLISHING_GUIDE.md, ACCESSIBILITY_TESTING.md, THEMING_GUIDE.md
-├── prompts/               COMPONENT_EVOLUTION_PROMPTS.md, TIMELINE_PROMPTS.md
+├── prompts/               COMPONENT_EVOLUTION_PROMPTS.md, HARDENING_PROMPT_INDEX.md
 ├── reference/
 │   ├── components/        One .md per component (API + usage + theming + a11y)
 │   ├── systems/           DESIGN_TOKENS.md, LAYOUT_SYSTEM.md, THEMING.md, ACCESSIBILITY.md

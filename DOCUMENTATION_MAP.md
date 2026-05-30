@@ -65,7 +65,7 @@ docs/
 - [Button](docs/reference/components/BUTTON.md)
 - [Card](docs/reference/components/CARD.md)
 - [Input](docs/reference/components/INPUT.md)
-- [SelectButton](docs/reference/components/SELECTBUTTON.md)
+- [SelectButton](docs/reference/components/select-button.md)
 - [Tabs](docs/reference/components/TABS.md)
 - Checkbox (API only)
 - Icon (API only)
@@ -91,7 +91,7 @@ docs/
 
 1. [COMPONENT_CREATION_GUIDE.md](COMPONENT_CREATION_GUIDE.md) - End-to-end component creation workflow
 2. [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md) - Use design tokens
-3. [docs/reference/components/BADGE_IMPLEMENTATION.md](docs/reference/components/BADGE_IMPLEMENTATION.md) - See example implementation
+3. [docs/architecture/BADGE_IMPLEMENTATION.md](docs/architecture/BADGE_IMPLEMENTATION.md) - See example implementation
 4. [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) - Follow architecture
 
 ### 📊 I want to check or record a component quality score
@@ -214,7 +214,7 @@ docs/
 1. [COMPONENT_CREATION_GUIDE.md](COMPONENT_CREATION_GUIDE.md)
 2. [Architecture](docs/architecture/ARCHITECTURE.md)
 3. [Design Tokens](docs/reference/systems/DESIGN_TOKENS.md)
-4. [Badge Implementation](docs/reference/components/BADGE_IMPLEMENTATION.md) (example)
+4. [Badge Implementation](docs/architecture/BADGE_IMPLEMENTATION.md) (example)
 
 #### 📦 Publisher (releasing the library)
 
@@ -246,7 +246,7 @@ docs/
 
 #### Performance
 
-- [Badge Implementation](docs/reference/components/BADGE_IMPLEMENTATION.md) - Performance details
+- [Badge Implementation](docs/architecture/BADGE_IMPLEMENTATION.md) - Performance details
 - [Layout Implementation](docs/reference/systems/LAYOUT_IMPLEMENTATION.md) - Architecture
 
 #### Integration

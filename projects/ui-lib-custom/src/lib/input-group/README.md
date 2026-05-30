@@ -1,10 +1,10 @@
 # InputGroup
 
-**Selector:** `uilib-input-group`
+**Selector:** `ui-lib-input-group`
 **Package:** `ui-lib-custom/input-group`
 **Content projection:** yes — project your control and optional addons as direct children (`[addonLeft]`, default slot, `[addonRight]`)
 
-> This component is a pure layout stub — it has no inputs, no outputs, and no CVA. It only applies the root CSS class `uilib-input-group` to the host element. All visual composition is achieved through CSS and the projected content structure.
+> This component is a pure layout stub — it has no inputs, no outputs, and no CVA. It only applies the root CSS class `ui-lib-input-group` to the host element. All visual composition is achieved through CSS and the projected content structure.
 
 ## Inputs
 
@@ -19,23 +19,23 @@ _none_
 ```html
 <!-- decorative text addon (not focusable, hidden from a11y tree) -->
 <label for="username-input">Username</label>
-<uilib-input-group>
-  <uilib-input-group-addon addonLeft>
+<ui-lib-input-group>
+  <ui-lib-input-group-addon addonLeft>
     <span aria-hidden="true">@</span>
-  </uilib-input-group-addon>
+  </ui-lib-input-group-addon>
   <input id="username-input" type="text" placeholder="Username" />
-</uilib-input-group>
+</ui-lib-input-group>
 
 <!-- icon-only button addon must have an aria-label -->
 <label for="search-input">Search</label>
-<uilib-input-group>
+<ui-lib-input-group>
   <input id="search-input" type="text" placeholder="Search term" />
-  <uilib-input-group-addon addonRight>
+  <ui-lib-input-group-addon addonRight>
     <button type="button" aria-label="Run search">
       <span aria-hidden="true">🔍</span>
     </button>
-  </uilib-input-group-addon>
-</uilib-input-group>
+  </ui-lib-input-group-addon>
+</ui-lib-input-group>
 ```
 
 ## Accessibility guidance
@@ -49,4 +49,4 @@ _none_
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `--uilib-input-group-addon-border-radius` | `var(--uilib-border-radius, 6px)` | Corner radius applied to the outermost start/end element in the group |
+| `--ui-lib-input-group-addon-border-radius` | `var(--uilib-border-radius, 6px)` | Corner radius applied to the outermost start/end element in the group |

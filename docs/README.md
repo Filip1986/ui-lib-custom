@@ -113,25 +113,25 @@ npm run build-storybook
   - Variants, colors, and sizes
   - Real-world examples
   - Performance characteristics
-  - Implementation: [BADGE_IMPLEMENTATION.md](reference/components/BADGE_IMPLEMENTATION.md)
+  - Implementation: [BADGE_IMPLEMENTATION.md](architecture/BADGE_IMPLEMENTATION.md)
 - **[Button Component](reference/components/BUTTON.md)** - Button component reference
   - Variants, appearances, and sizes
   - Icons, badges, and loading states
-  - Implementation: [BUTTON_IMPLEMENTATION.md](reference/components/BUTTON_IMPLEMENTATION.md)
+  - Implementation: [BUTTON_IMPLEMENTATION.md](architecture/BUTTON_IMPLEMENTATION.md)
 - **[Card Component](reference/components/CARD.md)** - Card component reference
   - Variants, elevations, and slots
-  - Implementation: [CARD_IMPLEMENTATION.md](reference/components/CARD_IMPLEMENTATION.md)
+  - Implementation: [CARD_IMPLEMENTATION.md](architecture/CARD_IMPLEMENTATION.md)
 - **[Input Component](reference/components/INPUT.md)** - Input component reference
   - Floating labels and validation states
   - Form integration
-  - Implementation: [INPUT_IMPLEMENTATION.md](reference/components/INPUT_IMPLEMENTATION.md)
-- **[SelectButton Component](reference/components/SELECTBUTTON.md)** - SelectButton component reference
+  - Implementation: [INPUT_IMPLEMENTATION.md](architecture/INPUT_IMPLEMENTATION.md)
+- **[SelectButton Component](reference/components/select-button.md)** - SelectButton component reference
   - Variants and sizes
   - Form integration and templates
-  - Implementation: [SELECTBUTTON_IMPLEMENTATION.md](reference/components/SELECTBUTTON_IMPLEMENTATION.md)
+  - Implementation: [SELECTBUTTON_IMPLEMENTATION.md](architecture/SELECTBUTTON_IMPLEMENTATION.md)
 - **[Tabs Component](reference/components/TABS.md)** - Tabs component reference
   - Variants, lazy loading, navigation mode
-  - Implementation: [TABS_IMPLEMENTATION.md](reference/components/TABS_IMPLEMENTATION.md)
+  - Implementation: [TABS_IMPLEMENTATION.md](architecture/TABS_IMPLEMENTATION.md)
 - **[Select Component](reference/components/SELECT.md)** - Select/combobox component reference
 - **[Alert Component](reference/components/ALERT.md)** - Alert/status banner reference
 - **[Layout Primitives](reference/components/LAYOUT.md)** - Stack/Inline/Grid/Container reference
@@ -197,9 +197,8 @@ Ready-to-use prompts and the scoring infrastructure for working with AI on this 
 - **[Component Definition of Done](../../platform/docs/guides/component-definition-of-done.md)** — **canonical ship gate** (lives in `platform`; this repo is legacy)
 - **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — master prompt, 6-phase workflow (Architecture → DX → A11y → Performance → Composability → Emotional Polish)
 - **[Scoring Criteria](SCORING_CRITERIA.md)** — 180+ binary checkboxes across 12 categories; port target: `platform/docs/standards/component-quality/`
-- **[Component Quality Scores](COMPONENT_SCORES.md)** — the live scoreboard; scores for all 70+ components, updated after each evolution session
+- **[Component Quality Scores](COMPONENT_SCORES.md)** — the live scoreboard; scores for all 105 components, updated after each evolution session
 - **[Competitive Benchmarks](COMPETITIVE_BENCHMARKS.md)** — per-component parity tables vs Angular Material, PrimeNG, Radix UI, Ark UI — evidence for Category 11 scores
-- **[Timeline Component Prompts](prompts/TIMELINE_PROMPTS.md)** — example of a per-component prompt sequence
 
 ---
 

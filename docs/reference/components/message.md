@@ -87,7 +87,7 @@ Message component — inline severity-based status message with optional close a
 <ui-lib-message severity="success" text="Operation completed successfully." />
 
 <!-- closable warning with projected content -->
-<ui-lib-message severity="warn" [closable]="true" (close)="showWarning = false">
+<ui-lib-message severity="warn" [closable]="true" (closed)="showWarning = false">
   Unsaved changes will be <strong>lost</strong>.
 </ui-lib-message>
 ```

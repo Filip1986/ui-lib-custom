@@ -1,6 +1,6 @@
 # InputOtp
 
-**Selector:** `uilib-input-otp`
+**Selector:** `ui-lib-input-otp`
 **Package:** `ui-lib-custom/input-otp`
 **Content projection:** yes — `[inputOtpError]` slot for invalid-state message
 
@@ -40,15 +40,15 @@
 
 ```html
 <!-- 6-digit numeric OTP -->
-<uilib-input-otp [length]="6" [integerOnly]="true" [(ngModel)]="otpValue" />
+<ui-lib-input-otp [length]="6" [integerOnly]="true" [(ngModel)]="otpValue" />
 
 <!-- masked OTP with completion handler -->
-<uilib-input-otp [length]="4" [mask]="true" (completed)="onComplete($event)" />
+<ui-lib-input-otp [length]="4" [mask]="true" (completed)="onComplete($event)" />
 
 <!-- invalid state + projected error content -->
-<uilib-input-otp [invalid]="otpInvalid" ariaLabel="Verification code" [(ngModel)]="otpValue">
+<ui-lib-input-otp [invalid]="otpInvalid" ariaLabel="Verification code" [(ngModel)]="otpValue">
   <span inputOtpError>Please enter the 6-digit code.</span>
-</uilib-input-otp>
+</ui-lib-input-otp>
 ```
 
 ## Accessibility Notes
@@ -75,15 +75,15 @@
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `--uilib-input-otp-cell-width` | `2.5rem` | Width of each OTP cell |
-| `--uilib-input-otp-cell-height` | `2.5rem` | Height of each OTP cell |
-| `--uilib-input-otp-gap` | `0.5rem` | Gap between cells |
-| `--uilib-input-otp-font-size` | `1rem` | Cell font size |
-| `--uilib-input-otp-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Cell corner radius |
-| `--uilib-input-otp-border-color` | `var(--uilib-border)` | Cell border color |
-| `--uilib-input-otp-bg` | `var(--uilib-surface)` | Cell background |
-| `--uilib-input-otp-text-color` | `var(--uilib-page-fg)` | Cell text color |
-| `--uilib-input-otp-focus-border-color` | `var(--uilib-color-primary-600)` | Cell border on focus |
-| `--uilib-input-otp-focus-ring` | `0 0 0 3px color-mix(…focus-border-color… 28%)` | Focus ring box-shadow |
-| `--uilib-input-otp-invalid-border-color` | `var(--uilib-color-danger-600)` | Cell border when invalid |
-| `--uilib-input-otp-transition` | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Cell state transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--ui-lib-input-otp-cell-width` | `2.5rem` | Width of each OTP cell |
+| `--ui-lib-input-otp-cell-height` | `2.5rem` | Height of each OTP cell |
+| `--ui-lib-input-otp-gap` | `0.5rem` | Gap between cells |
+| `--ui-lib-input-otp-font-size` | `1rem` | Cell font size |
+| `--ui-lib-input-otp-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Cell corner radius |
+| `--ui-lib-input-otp-border-color` | `var(--uilib-border)` | Cell border color |
+| `--ui-lib-input-otp-bg` | `var(--uilib-surface)` | Cell background |
+| `--ui-lib-input-otp-text-color` | `var(--uilib-page-fg)` | Cell text color |
+| `--ui-lib-input-otp-focus-border-color` | `var(--uilib-color-primary-600)` | Cell border on focus |
+| `--ui-lib-input-otp-focus-ring` | `0 0 0 3px color-mix(…focus-border-color… 28%)` | Focus ring box-shadow |
+| `--ui-lib-input-otp-invalid-border-color` | `var(--uilib-color-danger-600)` | Cell border when invalid |
+| `--ui-lib-input-otp-transition` | `border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease` | Cell state transition; set to `none` when `prefers-reduced-motion: reduce` |
