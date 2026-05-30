@@ -21,7 +21,6 @@
     --uilib-galleria-nav-bg-hover: rgba(0, 0, 0, 0.7);
     --uilib-galleria-nav-color: #ffffff;
     --uilib-galleria-nav-size: 2.5rem;
-    --uilib-galleria-nav-radius: 50%;
     --uilib-galleria-nav-offset: 0.5rem;
 
     // Thumbnail nav arrows
@@ -45,6 +44,13 @@
     // Header / Footer
     --uilib-galleria-header-footer-padding: 0.5rem;
 
+    // Animation / transition
+    --uilib-galleria-transition: 0.2s ease;
+    --uilib-galleria-mount-animation: uilib-galleria-mount 0.15s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+    // Nav radius
+    --uilib-galleria-nav-radius: var(--uilib-radius-full, 9999px);
+
     // Fullscreen
     --uilib-galleria-mask-bg: rgba(0, 0, 0, 0.9);
     --uilib-galleria-close-btn-bg: rgba(0, 0, 0, 0.5);
@@ -62,8 +68,7 @@
   .ui-lib-galleria {
     display: block;
     position: relative;
-    animation: uilib-galleria-mount var(--uilib-transition-duration-fast, 0.15s)
-      var(--uilib-transition-easing-enter, cubic-bezier(0.4, 0, 0.2, 1)) both;
+    animation: var(--uilib-galleria-mount-animation);
   }
 
   // ─── Container ───────────────────────────────────────────────────────────────
@@ -121,8 +126,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
 
     img {
       max-width: 100%;
@@ -142,14 +147,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-galleria-nav-size);
-    height: var(--uilib-galleria-nav-size);
+    inline-size: var(--uilib-galleria-nav-size);
+    block-size: var(--uilib-galleria-nav-size);
     border-radius: var(--uilib-galleria-nav-radius);
     background: var(--uilib-galleria-nav-bg);
     color: var(--uilib-galleria-nav-color);
     border: none;
     cursor: pointer;
-    transition: background var(--uilib-transition-base, 0.2s ease);
+    transition: background var(--uilib-galleria-transition);
     opacity: 0.85;
 
     &:hover:not(:disabled) {
@@ -176,14 +181,14 @@
   // When showItemNavigators is false, hide via opacity and reveal on hover (handled by CSS)
   .ui-lib-galleria--show-nav-on-hover .uilib-galleria__item-nav {
     opacity: 0;
-    transition: opacity var(--uilib-transition-base, 0.2s ease);
+    transition: opacity var(--uilib-galleria-transition);
   }
 
   // ─── Caption overlay ─────────────────────────────────────────────────────────
 
   .uilib-galleria__caption {
     position: absolute;
-    bottom: 0;
+    inset-block-end: 0;
     inset-inline-start: 0;
     inset-inline-end: 0;
     background: var(--uilib-galleria-caption-bg);
@@ -223,8 +228,8 @@
     border: none;
     padding: 0.25rem;
     cursor: pointer;
-    border-radius: 50%;
-    transition: transform var(--uilib-transition-base, 0.15s ease);
+    border-radius: var(--uilib-radius-full, 9999px);
+    transition: transform var(--uilib-galleria-transition);
 
     &:hover {
       transform: scale(1.2);
@@ -238,13 +243,13 @@
 
   .uilib-galleria__indicator-dot {
     display: block;
-    width: var(--uilib-galleria-indicator-dot-size);
-    height: var(--uilib-galleria-indicator-dot-size);
-    border-radius: 50%;
+    inline-size: var(--uilib-galleria-indicator-dot-size);
+    block-size: var(--uilib-galleria-indicator-dot-size);
+    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-galleria-indicator-dot-bg);
     transition:
-      background var(--uilib-transition-base, 0.2s ease),
-      transform var(--uilib-transition-base, 0.2s ease);
+      background var(--uilib-galleria-transition),
+      transform var(--uilib-galleria-transition);
   }
 
   // ─── Thumbnail wrapper ───────────────────────────────────────────────────────
@@ -291,8 +296,8 @@
     background: transparent;
     padding: 0;
     transition:
-      border-color var(--uilib-transition-base, 0.2s ease),
-      opacity var(--uilib-transition-base, 0.2s ease);
+      border-color var(--uilib-galleria-transition),
+      opacity var(--uilib-galleria-transition);
     outline: none;
 
     &:hover,
@@ -319,8 +324,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-galleria-thumbnail-size-md);
-    height: var(--uilib-galleria-thumbnail-size-md);
+    inline-size: var(--uilib-galleria-thumbnail-size-md);
+    block-size: var(--uilib-galleria-thumbnail-size-md);
     font-size: var(--uilib-galleria-thumbnail-index-font-size);
     color: var(--uilib-page-text-muted, #9ca3af);
   }
@@ -328,13 +333,13 @@
   // ─── Size variants — thumbnail size ──────────────────────────────────────────
 
   .ui-lib-galleria--size-sm .uilib-galleria__thumbnail-index {
-    width: var(--uilib-galleria-thumbnail-size-sm);
-    height: var(--uilib-galleria-thumbnail-size-sm);
+    inline-size: var(--uilib-galleria-thumbnail-size-sm);
+    block-size: var(--uilib-galleria-thumbnail-size-sm);
   }
 
   .ui-lib-galleria--size-lg .uilib-galleria__thumbnail-index {
-    width: var(--uilib-galleria-thumbnail-size-lg);
-    height: var(--uilib-galleria-thumbnail-size-lg);
+    inline-size: var(--uilib-galleria-thumbnail-size-lg);
+    block-size: var(--uilib-galleria-thumbnail-size-lg);
   }
 
   // ─── Thumbnail navigation arrows ────────────────────────────────────────────
@@ -343,15 +348,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-galleria-thumbnail-nav-size);
-    height: var(--uilib-galleria-thumbnail-nav-size);
-    border-radius: 50%;
+    inline-size: var(--uilib-galleria-thumbnail-nav-size);
+    block-size: var(--uilib-galleria-thumbnail-nav-size);
+    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-galleria-thumbnail-nav-bg);
     color: var(--uilib-galleria-thumbnail-nav-color);
     border: none;
     cursor: pointer;
     flex-shrink: 0;
-    transition: background var(--uilib-transition-base, 0.2s ease);
+    transition: background var(--uilib-galleria-transition);
 
     &:hover:not(:disabled) {
       background: var(--uilib-galleria-thumbnail-nav-bg-hover);
@@ -368,12 +373,12 @@
   // ─── SVG icon helpers ────────────────────────────────────────────────────────
 
   .uilib-galleria__icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
 
     &--sm {
-      width: 1rem;
-      height: 1rem;
+      inline-size: 1rem;
+      block-size: 1rem;
     }
   }
 
@@ -381,20 +386,20 @@
 
   .uilib-galleria__fullscreen-btn {
     position: absolute;
-    top: 0.5rem;
+    inset-block-start: 0.5rem;
     inset-inline-end: 0.5rem;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-galleria-fullscreen-btn-size);
-    height: var(--uilib-galleria-fullscreen-btn-size);
-    border-radius: 50%;
+    inline-size: var(--uilib-galleria-fullscreen-btn-size);
+    block-size: var(--uilib-galleria-fullscreen-btn-size);
+    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-galleria-fullscreen-btn-bg);
     color: var(--uilib-galleria-fullscreen-btn-color);
     border: none;
     cursor: pointer;
-    transition: background var(--uilib-transition-base, 0.2s ease);
+    transition: background var(--uilib-galleria-transition);
     opacity: 0.8;
 
     &:hover {
@@ -417,8 +422,8 @@
 
   .uilib-galleria__fullscreen-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    inline-size: 100vw;
+    block-size: 100vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -431,20 +436,20 @@
 
   .uilib-galleria__close-btn {
     position: absolute;
-    top: 0.75rem;
+    inset-block-start: 0.75rem;
     inset-inline-end: 0.75rem;
     z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--uilib-galleria-close-btn-size);
-    height: var(--uilib-galleria-close-btn-size);
-    border-radius: 50%;
+    inline-size: var(--uilib-galleria-close-btn-size);
+    block-size: var(--uilib-galleria-close-btn-size);
+    border-radius: var(--uilib-radius-full, 9999px);
     background: var(--uilib-galleria-close-btn-bg);
     color: var(--uilib-galleria-close-btn-color);
     border: none;
     cursor: pointer;
-    transition: background var(--uilib-transition-base, 0.2s ease);
+    transition: background var(--uilib-galleria-transition);
 
     &:hover {
       background: var(--uilib-galleria-close-btn-bg-hover);
@@ -459,7 +464,7 @@
     --uilib-galleria-indicator-dot-bg-active: var(--uilib-color-primary, #6366f1);
 
     .uilib-galleria__item-nav {
-      border-radius: 50%;
+      border-radius: var(--uilib-radius-full, 9999px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
@@ -528,18 +533,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ui-lib-galleria {
-      animation: none;
-    }
-
-    .uilib-galleria__slide,
-    .uilib-galleria__item-nav,
-    .uilib-galleria__indicator-btn,
-    .uilib-galleria__indicator-dot,
-    .uilib-galleria__thumbnail-item,
-    .uilib-galleria__thumbnail-nav {
-      transition: none;
-      animation: none;
+    ui-lib-galleria {
+      --uilib-galleria-mount-animation: none;
+      --uilib-galleria-transition: 0ms;
     }
   }
 } // end @layer uilib.components

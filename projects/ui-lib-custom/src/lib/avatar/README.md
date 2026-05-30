@@ -69,12 +69,24 @@ Avatar and AvatarGroup are non-interactive display components and do not impleme
 
 ## CSS Custom Properties
 
-| Variable | Purpose |
-|----------|---------|
-| `--uilib-avatar-size-sm/md/lg` | Avatar dimensions |
-| `--uilib-avatar-font-size-sm/md/lg` | Initials text size |
-| `--uilib-avatar-icon-size-sm/md/lg` | Icon size |
-| `--uilib-avatar-bg` / `--uilib-avatar-fg` | Avatar colors |
-| `--uilib-avatar-border-width` / `--uilib-avatar-border-color` | Avatar border styling |
-| `--uilib-avatar-group-overlap` | Horizontal overlap for stacked avatars |
-| `--uilib-avatar-group-overflow-bg` / `--uilib-avatar-group-overflow-fg` | Overflow badge colors |
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-avatar-size-sm` | `2rem` | Avatar dimensions for `size="sm"` |
+| `--uilib-avatar-size-md` | `2.5rem` | Avatar dimensions for `size="md"` (default) |
+| `--uilib-avatar-size-lg` | `3.5rem` | Avatar dimensions for `size="lg"` |
+| `--uilib-avatar-font-size-sm` | `0.75rem` | Initials text size for `size="sm"` |
+| `--uilib-avatar-font-size-md` | `1rem` | Initials text size for `size="md"` |
+| `--uilib-avatar-font-size-lg` | `1.375rem` | Initials text size for `size="lg"` |
+| `--uilib-avatar-icon-size-sm` | `1rem` | Icon size for `size="sm"` |
+| `--uilib-avatar-icon-size-md` | `1.25rem` | Icon size for `size="md"` |
+| `--uilib-avatar-icon-size-lg` | `1.75rem` | Icon size for `size="lg"` |
+| `--uilib-avatar-font-weight` | `600` | Initials font weight |
+| `--uilib-avatar-bg` | `var(--uilib-color-primary-100)` | Avatar background color |
+| `--uilib-avatar-fg` | `var(--uilib-color-primary-700)` | Avatar foreground / initials color |
+| `--uilib-avatar-border-color` | `var(--uilib-color-neutral-200)` | Border color |
+| `--uilib-avatar-border-width` | `0` | Border width (variants override this) |
+| `--uilib-avatar-radius` | `var(--uilib-radius-full, 9999px)` | Border radius; overridden by `shape` |
+| `--uilib-avatar-mount-animation` | `uilib-avatar-mount 0.15s cubic-bezier(0.4, 0, 0.2, 1) both` | Entrance animation; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-avatar-group-overlap` | `0.5rem` | Negative margin creating stacking overlap in `AvatarGroup` |
+| `--uilib-avatar-group-overflow-bg` | `var(--uilib-color-neutral-200)` | Overflow `+N` badge background |
+| `--uilib-avatar-group-overflow-fg` | `var(--uilib-color-neutral-700)` | Overflow `+N` badge text color |

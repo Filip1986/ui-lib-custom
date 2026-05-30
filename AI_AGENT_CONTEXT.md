@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 34 components raised to 9.0 across five batches)
+- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 39 components raised to 9.0 across six batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -105,6 +105,12 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Drawer` -> ✅ SCSS+README hardened (score **8.9/10** — --uilib-drawer-close-transition token; right/left panel top/bottom/width/max-width→inset-block-*/inline-size; top/bottom panel →inset-block-start/end/block-size; header border-bottom/padding-bottom→block-end; close btn width/height/border-radius→inline-size/block-size/radius-full; token-zero reduced-motion)
 - `ConfirmDialog` -> ✅ SCSS hardened (score **8.9/10** — removed non-existent --uilib-transition-duration-fast fallback; material btn-radius/close-btn 999px→var(--uilib-radius-full,9999px); token-zero --uilib-confirm-dialog-interactive-transition-duration)
 - `Input` -> ✅ SCSS+README hardened (score **8.9/10** — --uilib-input-transition + --uilib-input-label-transition tokens; routed raw multi-property transitions through them; token-zero reduced-motion; README CSS Custom Properties section added)
+- `Container` -> ✅ TS+README hardened (score **9.0/10** — physical margin-left/right→margin-inline, padding-left/right/top/bottom→padding-inline/block in host bindings; width→inline-size/max-inline-size; README CSS Custom Properties section added)
+- `RadioButton` -> ✅ SCSS hardened (score **9.0/10** — --uilib-radio-button-box-transition + icon-transition tokens; width/height→inline-size/block-size on box+icon+native-input; border-radius:50%→radius-full; replaced broken reduced-motion with token-zero)
+- `ToggleSwitch` -> ✅ SCSS hardened (score **9.0/10** — removed non-existent --uilib-transition-base fallback; track/thumb inline-size/block-size; thumb border-radius:50%→radius-full; element-level reduced-motion→host token-zero)
+- `CodeSnippet` -> ✅ SCSS hardened (score **9.0/10** — --uilib-code-snippet-tab-transition + copy-btn-transition tokens; border-bottom→border-block-end on header+tab; width/height→inline-size/block-size on dot/copy-btn/copy-icon; min/max-width→logical; border-radius:50%→radius-full on dots; token-zero reduced-motion)
+- `Galleria` -> ✅ SCSS hardened (score **8.9/10** — --uilib-galleria-transition + mount-animation tokens; replaced all --uilib-transition-base refs; nav-radius→radius-full; border-radius:50%→radius-full on 5 elements; top/bottom→inset-block-start/end; width/height→inline-size/block-size on 6 elements; 100vw/100vh→inline-size/block-size; element-list reduced-motion→host token-zero)
+- `Avatar` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-avatar-radius:50%→radius-full; --uilib-avatar-mount-animation token replacing non-existent global token refs; width/height→inline-size/block-size on avatar+image; shape-circle radius fallback→radius-full; removed !important from reduced-motion; README CSS Custom Properties expanded to full standard table)
 
 ---
 
@@ -118,6 +124,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 6 — Container/RadioButton/ToggleSwitch/CodeSnippet/Avatar→9.0; Galleria→8.9):
+  layout/container.ts: physical margin-left/right→margin-inline; padding-left/right/top/bottom
+    →padding-inline+padding-block; width→inline-size; max-width→max-inline-size
+  layout/README.md: added CSS Custom Properties section for Container (7 token rows)
+  radio-button/radio-button.scss: --uilib-radio-button-box-transition + icon-transition tokens;
+    box/icon/native-input width/height→inline-size/block-size; border-radius:50%→radius-full;
+    replaced broken transition-duration token with proper token-zero using new tokens
+  toggle-switch/toggle-switch.scss: removed --uilib-transition-base fallback (non-existent);
+    track width/height→inline-size/block-size; thumb width/height→logical+border-radius→radius-full;
+    element-level reduced-motion→host token-zero --uilib-toggle-switch-transition-duration:0ms
+  code-snippet/code-snippet.scss: --uilib-code-snippet-tab-transition + copy-btn-transition tokens;
+    header border-bottom→border-block-end; tab border-bottom→border-block-end + border-block-end-color;
+    dot/copy-btn/copy-icon width/height→inline-size/block-size; dot border-radius:50%→radius-full;
+    tabs min-width/tab max-width→min/max-inline-size; token-zero reduced-motion
+  galleria/galleria.scss: --uilib-galleria-transition + mount-animation tokens; removed nav-radius:50%
+    token; replaced all --uilib-transition-base/duration-fast/easing-enter with component tokens;
+    border-radius:50%→radius-full on 5 circle elements; bottom→inset-block-end on caption;
+    top:0.5rem/0.75rem→inset-block-start on fullscreen+close btn; width/height→inline-size/block-size
+    on nav+indicator-dot+icon+fullscreen+close+thumbnail-index (6 sets); element-list reduced-motion
+    →host token-zero (mount-animation:none; transition:0ms)
+  avatar/avatar.scss: --uilib-avatar-radius default 50%→radius-full; --uilib-avatar-mount-animation
+    token replacing non-existent global refs; width/height→inline-size/block-size; shape-circle
+    fallback→radius-full; removed !important from reduced-motion; token-zero mount-animation
+  avatar/README.md: expanded CSS Custom Properties from abbreviated format to full standard table
+    with defaults and descriptions (19 entries)
+  docs/COMPONENT_SCORES.md: 5 components→9.0, Galleria stays 8.9
+  AI_AGENT_CONTEXT.md: 39 components at 9.0 (average stays 9.03)
+State: COMPLETE — build verified (0 errors 0 warnings); awaiting commit
+Verification: ng build ui-lib-custom (0 errors) ✅
+Next step: Commit batch 6; then audit remaining 8.9 components for batch 7
 
 Date: 2026-05-30
 Changed (batch 5 — FloatLabel/FormField/SpeedDial/OrderList/PickList/IconField/InputGroup/AutoFocus→9.0; Ripple/Drawer/ConfirmDialog/Input→8.9):
@@ -152,35 +190,7 @@ State: COMPLETE — build verified; awaiting commit
 Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅
 Next step: Commit batch 5; then audit remaining 8.8 scores for batch 6 targets
 
-Date: 2026-05-30
-Changed (SelectButton, InputMask, InputOtp, Password, Rating, Slider — all 8.8→9.0):
-  select-button/select-button.scss: token-zero reduced-motion by cascading --uilib-button-transition:
-    none onto child button elements from the host context
-  input-mask/input-mask.component.scss: added --uilib-input-mask-transition token; routed input
-    transition through it; margin-top→margin-block-start on error element; token-zero reduced-motion
-  input-mask/README.md: added CSS Custom Properties section (13 entries)
-  input-otp/input-otp.component.scss: added --uilib-input-otp-transition token; routed cell
-    transition through it; token-zero reduced-motion
-  input-otp/README.md: added CSS Custom Properties section (12 entries)
-  password/password.component.scss: added --uilib-password-transition token; replaced non-existent
-    --uilib-transition-duration reference; border-top→border-block-start, border-bottom→border-block-end,
-    border-bottom-color→border-block-end-color, margin-top→margin-block-start; removed !important from
-    reduced-motion; pure token-zero reduced-motion block
-  password/README.md: added CSS Custom Properties section (19 entries)
-  rating/rating.scss: added --uilib-rating-star-transition and --uilib-rating-cancel-transition tokens;
-    routed raw transitions through them; removed non-existent --uilib-rating-transition-duration token;
-    consolidated two duplicate reduced-motion blocks into one clean token-zero + transform:none block
-  rating/README.md: added CSS Custom Properties section (9 entries)
-  slider/slider.scss: --uilib-slider-handle-border-radius: 50%→var(--uilib-radius-full, 9999px);
-    added --uilib-slider-track-padding/handle-transition/animate-handle-transition tokens; routed
-    raw values through tokens; top:0/bottom:0→inset-block-start/end:0 on fill; top:auto→inset-block-start:auto
-    on vertical fill; padding:12px 0/0 12px→token refs; token-zero reduced-motion (3 tokens: none)
-  slider/README.md: added 3 new token rows + defaults column to CSS Custom Properties table
-  docs/COMPONENT_SCORES.md: all 6 components raised to 9.0
-  AI_AGENT_CONTEXT.md: library average updated to 9.01 (26 components at 9.0 across 4 batches)
-State: COMPLETE — uncommitted; ESLint + build + commit pending
-Verification: npx eslint select-button/ input-mask/ input-otp/ password/ rating/ slider/ (0w expected); ng build
-Next step: Commit batch 4; then continue remaining 8.8 — FloatLabel, InputGroup, IconField, FormField, Drawer, ConfirmDialog, SpeedDial, OrderList, PickList, AutoFocus
+<!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 
 Date: 2026-05-30
 Changed (Textarea, ToggleButton, Icon, ButtonGroup, Divider, Image — all 8.8→9.0):
