@@ -160,3 +160,110 @@ _none_ — use native `(click)` on the host element.
 <ui-lib-button size="md" severity="primary">Medium</ui-lib-button>
 <ui-lib-button size="lg" severity="primary">Large</ui-lib-button>
 ```
+
+## CSS Custom Properties
+
+All tokens are set on the `ui-lib-button` host element and cascade to child selectors. Override at any scope: `:root` for global, a component selector for local, or inline `style` for one-off instances.
+
+### Core tokens
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-button-radius` | `var(--uilib-shape-base, 6px)` | Border radius |
+| `--uilib-button-gap` | `var(--uilib-space-2, 0.5rem)` | Gap between icon and label |
+| `--uilib-button-transition` | `all 0.2s ease` | Hover/active transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-button-border-width` | `1px` | Border thickness |
+| `--uilib-button-text-transform` | `none` | Text casing (`uppercase`, `capitalize`, etc.) |
+| `--uilib-button-letter-spacing` | `normal` | Letter spacing |
+| `--uilib-button-disabled-opacity` | `0.5` | Opacity of the disabled state |
+
+### Focus ring tokens
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-button-focus-color` | `var(--uilib-color-primary-500)` | Focus ring inner colour |
+| `--uilib-button-focus-ring-color` | `var(--uilib-color-primary-100)` | Focus ring halo colour |
+| `--uilib-button-focus-ring` | `0 0 0 3px var(--uilib-button-focus-ring-color)` | Full `box-shadow` value for focus ring |
+
+### Shadow tokens
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-button-shadow` | `var(--uilib-shadow-sm, none)` | Resting shadow |
+| `--uilib-button-shadow-hover` | `var(--uilib-shadow-md, …)` | Hover shadow |
+| `--uilib-button-shadow-raised` | `var(--uilib-shadow-md, none)` | Shadow when `raised` is true |
+| `--uilib-button-shadow-raised-hover` | `var(--uilib-shadow-lg, none)` | Hover shadow when `raised` is true |
+
+### Size padding tokens
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-button-padding-y-small` | `var(--uilib-space-1, 0.25rem)` | Vertical padding for `size="sm"` |
+| `--uilib-button-padding-x-small` | `var(--uilib-space-3, 0.75rem)` | Horizontal padding for `size="sm"` |
+| `--uilib-button-padding-y-medium` | `var(--uilib-space-2, 0.5rem)` | Vertical padding for `size="md"` |
+| `--uilib-button-padding-x-medium` | `var(--uilib-space-4, 1rem)` | Horizontal padding for `size="md"` |
+| `--uilib-button-padding-y-large` | `var(--uilib-space-3, 0.75rem)` | Vertical padding for `size="lg"` |
+| `--uilib-button-padding-x-large` | `var(--uilib-space-5, 1.25rem)` | Horizontal padding for `size="lg"` |
+
+### Badge overlay tokens
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-button-badge-offset-x` | `var(--uilib-space-2)` | Horizontal badge offset from corner |
+| `--uilib-button-badge-offset-y` | `var(--uilib-space-2)` | Vertical badge offset from corner |
+| `--uilib-button-badge-radius` | `var(--uilib-shape-base, 6px)` | Badge border radius |
+| `--uilib-button-badge-font-size` | `var(--uilib-font-size-sm)` | Badge font size |
+
+## Composability
+
+Button composes cleanly with the following library components:
+
+### With ButtonGroup
+
+```html
+<ui-lib-button-group>
+  <ui-lib-button appearance="outline" severity="primary">Left</ui-lib-button>
+  <ui-lib-button appearance="outline" severity="primary">Center</ui-lib-button>
+  <ui-lib-button appearance="outline" severity="primary">Right</ui-lib-button>
+</ui-lib-button-group>
+```
+
+### With SplitButton
+
+```html
+<ui-lib-split-button label="Save" (click)="save()" [model]="splitItems" />
+```
+
+### Custom theming via CSS tokens
+
+```css
+/* Brand override — all buttons in the app */
+:root {
+  --uilib-button-radius: 2px;         /* sharp corners */
+  --uilib-button-text-transform: uppercase;
+  --uilib-button-letter-spacing: 0.05em;
+}
+
+/* Override only inside a specific container */
+.sidebar {
+  --uilib-button-padding-x-medium: 0.75rem;
+  --uilib-button-gap: 0.375rem;
+}
+```
+
+### Inside a form (submit button pattern)
+
+```html
+<form (ngSubmit)="submit()">
+  <!-- form fields … -->
+  <ui-lib-button
+    type="submit"
+    severity="primary"
+    [loading]="isSubmitting"
+    loadingLabel="Submitting…"
+    [disabled]="form.invalid"
+  >
+    Submit
+  </ui-lib-button>
+</form>
+```

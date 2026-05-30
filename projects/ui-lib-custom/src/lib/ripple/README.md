@@ -26,6 +26,19 @@ import { Ripple } from 'ui-lib-custom/ripple';
 <!-- Custom duration -->
 <button uiLibRipple rippleDuration="400ms">Fast ripple</button>
 
+<!-- Custom easing — linear expand for sharp feedback -->
+<button uiLibRipple rippleEasing="linear">Sharp ripple</button>
+
+<!-- All inline overrides combined -->
+<button
+  uiLibRipple
+  [rippleColor]="'rgba(99, 102, 241, 0.35)'"
+  rippleDuration="350ms"
+  rippleEasing="ease-out"
+>
+  Indigo ripple
+</button>
+
 <!-- Disable ripple conditionally -->
 <button uiLibRipple [disabled]="isLoading">Submit</button>
 ```
@@ -50,11 +63,12 @@ Override the global defaults in your stylesheet:
 
 ## Inputs
 
-| Input            | Type      | Default | Description                                                                        |
-| ---------------- | --------- | ------- | ---------------------------------------------------------------------------------- |
-| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                  |
-| `rippleColor`    | `string`  | `''`    | Inline override for `--uilib-ripple-color`. Any valid CSS colour (e.g. `rgba(...)`). |
-| `rippleDuration` | `string`  | `''`    | Inline override for `--uilib-ripple-duration` (e.g. `'400ms'`).                    |
+| Input            | Type      | Default | Description                                                                                 |
+| ---------------- | --------- | ------- | ------------------------------------------------------------------------------------------- |
+| `disabled`       | `boolean` | `false` | When `true`, no ripple wave is produced on click.                                           |
+| `rippleColor`    | `string`  | `''`    | Inline override for `--uilib-ripple-color`. Any valid CSS colour (e.g. `rgba(...)`).        |
+| `rippleDuration` | `string`  | `''`    | Inline override for `--uilib-ripple-duration` (e.g. `'400ms'`).                             |
+| `rippleEasing`   | `string`  | `''`    | Inline override for `--uilib-ripple-easing`. Any valid CSS timing function (e.g. `'ease-out'`). |
 
 ## CSS custom properties
 

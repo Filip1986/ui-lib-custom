@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 39 components raised to 9.0 across six batches)
+- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 43 components raised to 9.0 across seven batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -30,7 +30,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `CodeSnippet` -> ✅ complete + scored + i18n wired (8.6/10 — multi-file tabs, ARIA tablist/tab/tabpanel, syntax highlighting, ariaLabel/ariaLabelledBy inputs, 31 unit tests; ESLint clean)
 - `SyntaxHighlighter` -> ✅ complete + scored (8.7/10 — zero-dep TS/HTML/SCSS/CSS tokenizer; highlight/tokenize/escapeForCode exports; full demo page)
-- **I18n batch pass (2026-05-29)**: Chip (7→8, 8.5), Button (7→9, 8.9), Breadcrumb/ContextMenu/Menu/MegaMenu/PanelMenu/TieredMenu (7→9, 9.0 each), OrderList (7→9, 8.8), ConfirmPopup (7→9, 8.9), SpeedDial (7→9, 8.8), ImageCompare (7→9, 9.0)
+- **I18n batch pass (2026-05-29)**: Chip (7→8, 8.5), Button (7→9 i18n, 9.0 after batch-7 Comp fix), Breadcrumb/ContextMenu/Menu/MegaMenu/PanelMenu/TieredMenu (7→9, 9.0 each), OrderList (7→9, 8.8), ConfirmPopup (7→9 i18n, 9.0 after batch-7 DX fix), SpeedDial (7→9, 8.8), ImageCompare (7→9, 9.0)
+- **Batch-7 hardening (2026-05-30)**: Button (Comp 8→9, CSS Custom Properties + composability patterns → 9.0), Input (Comp 8→9, composability patterns → 9.0), ConfirmPopup (DX 8→9, inject()/multiple-instances/CSS tokens → 9.0), Ripple (API 8→9, rippleEasing input added → 9.0)
 
 - `Accordion` -> ✅ complete + hardened (6-phase, score 9.0/10, 51 tests — 33 unit + 18 a11y)
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
@@ -43,7 +44,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
-- `Ripple` -> ✅ complete + hardened (6-phase, score 8.7/10, 29 tests — 19 unit + 10 a11y)
+- `Ripple` -> ✅ complete + hardened (6-phase, score 9.0/10, 29 tests — 19 unit + 10 a11y; batch-7: rippleEasing input added, API complete)
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 - `TreeTable` -> ✅ complete + hardened (6-phase, score 8.5/10, 85 tests — 41 unit + 44 a11y)
@@ -124,6 +125,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 7 — Button/Input/ConfirmPopup/Ripple→9.0):
+  ripple/ripple.ts: added rippleEasing InputSignal<string> input; wired to --uilib-ripple-easing
+    CSS variable in spawnWave() — completes the inline-override API (all 3 CSS vars now have inputs)
+  ripple/README.md: added rippleEasing to Inputs table + usage examples with combined overrides
+  button/README.md: added CSS Custom Properties section (7 core tokens, focus ring, shadow, size
+    padding, badge overlay) + Composability section (ButtonGroup, form submit pattern, CSS overrides)
+  input/README.md: added Composability section (IconField, InputGroup, FormField, inline prefix/suffix,
+    reactive forms with validation — 5 usage patterns with code)
+  confirm-popup/README.md: added inject() pattern, constructor injection, multiple instances with key,
+    common patterns (danger/low-friction/programmatic close/reactive state), CSS Custom Properties (8 rows)
+  docs/COMPONENT_SCORES.md: Button Comp 8→9 (9.0), Input Comp 8→9 (9.0), ConfirmPopup DX 8→9 (9.0),
+    Ripple API 8→9 (9.0) — 4 components raised
+  AI_AGENT_CONTEXT.md: 43 components at 9.0 (average 9.03 unchanged)
+State: COMPLETE — build verified (0 errors 0 warnings); awaiting commit
+Verification: npx eslint projects/ui-lib-custom/src/lib/ripple/ --max-warnings 0 ✅
+              ng build ui-lib-custom (0 errors, 0 warnings) ✅
+Next step: Assess remaining 8.9 components (Drawer/ConfirmDialog/Galleria/ScrollTop — all Perf=8)
+  for batch 8; or begin ceiling push on existing 9.0 components toward 9.1+
 
 Date: 2026-05-30
 Changed (batch 6 — Container/RadioButton/ToggleSwitch/CodeSnippet/Avatar→9.0; Galleria→8.9):

@@ -62,6 +62,67 @@ _none_
 </ui-lib-input>
 ```
 
+## Composability
+
+Input composes with the library's form-layout components. Use these wrappers to add icons, group addons, or provide form-level label/error orchestration.
+
+### With IconField
+
+```html
+<!-- Leading icon inside the field -->
+<ui-lib-icon-field>
+  <ui-lib-input label="Search" placeholder="Type to search…" [(ngModel)]="query" />
+  <ui-lib-icon iconPos="left">search</ui-lib-icon>
+</ui-lib-icon-field>
+```
+
+### With InputGroup (prefix / suffix addons)
+
+```html
+<!-- URL prefix addon -->
+<ui-lib-input-group>
+  <span>https://</span>
+  <ui-lib-input label="Website" [(ngModel)]="url" />
+  <span>.com</span>
+</ui-lib-input-group>
+```
+
+### With FormField (label + hint + error orchestration)
+
+```html
+<ui-lib-form-field
+  label="Email"
+  hint="We'll never share your email"
+  [error]="emailControl.invalid && emailControl.touched ? 'Invalid email' : null"
+>
+  <ui-lib-input type="email" [formControl]="emailControl" />
+</ui-lib-form-field>
+```
+
+### Inline prefix / suffix slots
+
+```html
+<ui-lib-input label="Amount" [(ngModel)]="amount">
+  <span prefix>$</span>
+  <ui-lib-icon suffix>attach_money</ui-lib-icon>
+</ui-lib-input>
+```
+
+### Reactive forms with validation
+
+```ts
+emailControl = new FormControl('', [Validators.required, Validators.email]);
+```
+
+```html
+<ui-lib-input
+  label="Email"
+  type="email"
+  [formControl]="emailControl"
+  [error]="emailControl.invalid && emailControl.dirty ? 'Please enter a valid email' : null"
+/>
+```
+
 ## CSS Custom Properties
 
 | Variable | Default | Description |
