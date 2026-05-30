@@ -183,17 +183,12 @@ export class ScrollTop implements OnInit {
       return;
     }
 
-    let rafId: number | null = null;
     this.scrollListener = (): void => {
-      if (rafId !== null) {
-        return;
-      }
-      rafId = requestAnimationFrame((): void => {
-        rafId = null;
-        this.checkScrollPosition();
-      });
+      this.checkScrollPosition();
     };
 
+    // { passive: true } lets the browser scroll immediately without waiting for JS —
+    // this is the key performance gain; the handler never calls preventDefault().
     this.scrollEventTarget.addEventListener('scroll', this.scrollListener as EventListener, {
       passive: true,
     });
