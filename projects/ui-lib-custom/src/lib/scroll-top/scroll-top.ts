@@ -183,11 +183,20 @@ export class ScrollTop implements OnInit {
       return;
     }
 
+    let rafId: number | null = null;
     this.scrollListener = (): void => {
-      this.checkScrollPosition();
+      if (rafId !== null) {
+        return;
+      }
+      rafId = requestAnimationFrame((): void => {
+        rafId = null;
+        this.checkScrollPosition();
+      });
     };
 
-    this.scrollEventTarget.addEventListener('scroll', this.scrollListener as EventListener);
+    this.scrollEventTarget.addEventListener('scroll', this.scrollListener as EventListener, {
+      passive: true,
+    });
   }
 
   private unbindScrollListener(): void {

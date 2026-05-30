@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 43 components raised to 9.0 across seven batches)
+- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 44 components raised to 9.0 across eight batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -64,7 +64,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Fieldset` -> ✅ complete + hardened (6-phase, score 9.0/10, 53 tests — 30 unit + 23 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
-- `ScrollTop` -> ✅ prompt-8 hardened (score **8.9/10** — null ariaLabel, i18n fallback, [uilib-icon] slot)
+- `ScrollTop` -> ✅ prompt-8 hardened (score **9.0/10** — null ariaLabel, i18n fallback, [uilib-icon] slot; batch-8: passive:true + rAF debounce on scroll listener)
 - `Carousel` -> ✅ prompt-8 hardened (score **9.0/10** — all 5 aria-label inputs null+resolved, i18n pause/play keys)
 - `Galleria` -> ✅ prompt-8 hardened (score **8.9/10** — ariaLabel null default + resolved)
 - `Timeline` -> ✅ prompt-8 hardened (score **9.0/10** — ariaLabel null default + resolved)
@@ -125,6 +125,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 8 — ScrollTop→9.0):
+  scroll-top/scroll-top.ts: scroll listener now uses { passive: true } option (allows browser to
+    optimistically scroll without waiting for JS) + rAF debounce (coalesces multiple scroll events
+    per animation frame so checkScrollPosition is called at most once per rAF tick)
+  docs/COMPONENT_SCORES.md: ScrollTop Perf 8→9 (9.0)
+  AI_AGENT_CONTEXT.md: 44 components at 9.0 (average 9.03 unchanged)
+State: COMPLETE — build verified (0 errors 0 warnings); awaiting commit
+Verification: npx eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 ✅
+              ng build ui-lib-custom (0 errors, 0 warnings) ✅
+Next step: Remaining 8.9 components (Drawer/ConfirmDialog/Galleria — all Perf=8) require overlay
+  architecture changes; pivot to ceiling push on existing 9.0 components or audit new components
 
 Date: 2026-05-30
 Changed (batch 7 — Button/Input/ConfirmPopup/Ripple→9.0):
