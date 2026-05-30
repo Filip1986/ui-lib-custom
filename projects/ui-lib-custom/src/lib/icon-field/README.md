@@ -54,3 +54,15 @@ _none_
 
 - Supported with native `<input>`, `<ui-lib-input>`, `<uilib-password>`, `<uilib-input-mask>`, and `<uilib-input-number>`.
 - Input padding is handled entirely by CSS selectors and `--uilib-icon-field-input-padding-with-icon`; no JavaScript measurement is required.
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-icon-field-icon-color` | `var(--uilib-muted, currentColor)` | Icon color |
+| `--uilib-icon-field-icon-margin` | `0.75rem` | Distance from the icon to the field edge |
+| `--uilib-icon-field-icon-size` | inherited | Icon size (overridden by `sm`/`lg` size context) |
+| `--uilib-icon-field-input-padding-with-icon` | `2.5rem` | Input side padding when an icon is present |
+| `--uilib-icon-field-input-padding-with-icon-sm` | `2rem` | Input side padding for `sm` fields |
+| `--uilib-icon-field-input-padding-with-icon-lg` | `3rem` | Input side padding for `lg` fields |
+| `--uilib-icon-field-icon-margin-minimal` | inherits `--uilib-icon-field-icon-margin` | Icon margin override for the minimal variant |

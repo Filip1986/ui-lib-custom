@@ -57,3 +57,7 @@ _none_
 - The directive intentionally uses a single `requestAnimationFrame` instead of `setTimeout(0)` so focus waits until the next animation frame and does not race the initial mount/animation work.
 - `afterNextRender` is a good fit for components that own their render lifecycle, but this utility is a directive and only needs one browser-frame deferral after `ngAfterViewInit`.
 - If your flow needs even later timing than the built-in frame deferral, keep `uiLibAutoFocus` disabled and move focus manually from the parent component once the surrounding interaction is ready.
+
+## CSS Custom Properties
+
+None — `AutoFocus` is a behaviour-only directive and applies no styles.

@@ -66,6 +66,7 @@ type DrawerPosition = 'left' | 'right' | 'top' | 'bottom';
 | `--uilib-drawer-header-border`       | Header bottom border                |
 | `--uilib-drawer-title-color`         | Title text colour                   |
 | `--uilib-drawer-close-color`         | Close button icon colour            |
+| `--uilib-drawer-close-transition`    | Close button hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |
 
 ## Usage example
 

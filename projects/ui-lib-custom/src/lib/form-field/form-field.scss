@@ -1,6 +1,7 @@
 @layer uilib.components {
   .ui-form-field-error {
-    animation: ui-lib-form-field-error-slide-in 180ms ease-out;
+    --uilib-form-field-error-animation: ui-lib-form-field-error-slide-in 180ms ease-out;
+    animation: var(--uilib-form-field-error-animation);
   }
 
   .ui-form-field-required-indicator {
@@ -9,7 +10,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .ui-form-field-error {
-      animation: none;
+      --uilib-form-field-error-animation: none;
     }
   }
 

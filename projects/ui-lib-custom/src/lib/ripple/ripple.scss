@@ -31,7 +31,7 @@
 
     .ui-lib-ripple-wave {
       position: absolute;
-      border-radius: 50%;
+      border-radius: var(--uilib-radius-full, 9999px);
       background-color: var(--uilib-ripple-color);
       pointer-events: none;
       transform: scale(0);
@@ -67,8 +67,11 @@
   // ---------------------------------------------------------------------------
 
   @media (prefers-reduced-motion: reduce) {
+    .ui-lib-ripple {
+      --uilib-ripple-duration: 0ms;
+    }
+
     .ui-lib-ripple-wave {
-      animation: none;
       display: none;
     }
   }

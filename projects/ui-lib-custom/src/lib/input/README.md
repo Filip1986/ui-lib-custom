@@ -61,3 +61,19 @@ _none_
   <span prefix>@</span>
 </ui-lib-input>
 ```
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-input-transition` | `border-color 0.15s ease, box-shadow 0.15s ease` | Field border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-input-label-transition` | `transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease, background-color 0.15s ease` | Floating label animation; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-input-bg` | `var(--uilib-surface)` | Field background |
+| `--uilib-input-border` | `var(--uilib-border)` | Field border color |
+| `--uilib-input-border-focus` | `var(--uilib-color-primary-600)` | Field border color on focus |
+| `--uilib-input-text` | `var(--uilib-page-fg)` | Field text color |
+| `--uilib-input-placeholder` | `var(--uilib-muted)` | Placeholder / label resting color |
+| `--uilib-input-error` | `var(--uilib-color-danger-600)` | Error state color |
+| `--uilib-input-radius` | `var(--uilib-shape-base, 6px)` | Field border radius |
+| `--uilib-input-min-height` | `44px` | Minimum field height |
+| `--uilib-input-label-bg` | `var(--uilib-input-bg)` | Floating label background (used in `on` variant) |

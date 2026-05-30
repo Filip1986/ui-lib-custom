@@ -219,3 +219,28 @@ ConfirmDialog meets WCAG 2.1 AA requirements for modal dialogs. All features bel
 | `Shift+Tab`       | Move focus backward through dialog controls |
 | `Enter` / `Space` | Activate the focused button                 |
 | `Escape`          | Close the dialog (reject path)              |
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-confirm-dialog-bg` | `var(--uilib-surface)` | Panel background |
+| `--uilib-confirm-dialog-border-radius` | `var(--uilib-radius-lg, 8px)` | Panel corner radius |
+| `--uilib-confirm-dialog-shadow` | `var(--uilib-shadow-lg)` | Panel box shadow |
+| `--uilib-confirm-dialog-z-index` | `var(--uilib-z-modal, 1050)` | Stack order |
+| `--uilib-confirm-dialog-width` | `min(100%, 30rem)` | Panel maximum width |
+| `--uilib-confirm-dialog-header-bg` | `var(--uilib-surface-alt)` | Header area background |
+| `--uilib-confirm-dialog-header-color` | `var(--uilib-page-fg)` | Header text color |
+| `--uilib-confirm-dialog-header-padding` | `1rem 1.25rem` | Header padding |
+| `--uilib-confirm-dialog-header-font-size` | `var(--uilib-font-size-lg, 1.125rem)` | Header title font size |
+| `--uilib-confirm-dialog-content-padding` | `1.25rem` | Content area padding |
+| `--uilib-confirm-dialog-icon-size` | `2rem` | Message icon size |
+| `--uilib-confirm-dialog-icon-color` | `var(--uilib-color-warning-500, #f59e0b)` | Message icon color |
+| `--uilib-confirm-dialog-footer-padding` | `1rem 1.25rem` | Footer padding |
+| `--uilib-confirm-dialog-footer-gap` | `0.5rem` | Gap between footer buttons |
+| `--uilib-confirm-dialog-close-btn-size` | `2rem` | Close button size |
+| `--uilib-confirm-dialog-close-btn-color` | `var(--uilib-muted)` | Close button icon color |
+| `--uilib-confirm-dialog-btn-radius` | `var(--uilib-radius-md, 6px)` | Accept/reject button radius |
+| `--uilib-confirm-dialog-enter-duration` | `200ms` | Panel entrance animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-confirm-dialog-backdrop-enter-duration` | `150ms` | Backdrop entrance animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-confirm-dialog-interactive-transition-duration` | `120ms` | Button and close-button hover transition duration; set to `0ms` when `prefers-reduced-motion: reduce` |

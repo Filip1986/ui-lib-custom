@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.01 / 10** across 102 components (updated 2026-05-30; 26 components raised to 9.0 across four batches)
+- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 34 components raised to 9.0 across five batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -93,6 +93,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ToggleButton` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-toggle-button-checked-shadow token; minimal radius: 9999px→var(--uilib-radius-full); token-zero reduced-motion; README CSS Custom Properties section added)
 - `ButtonGroup` -> ✅ SCSS+README hardened (score **9.0/10** — margin-top→margin-block-start in vertical orientation; README Styling Hooks→CSS Custom Properties table)
 - `Image` -> ✅ SCSS+README hardened (score **9.0/10** — toolbar-btn-radius/transition and indicator-transition tokens; toolbar-bg-material and indicator-bg-minimal/hover tokens; top:0→inset-block-start:0; token-zero reduced-motion; README expanded with 6 new token entries)
+- `FloatLabel` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-float-label-transition token; removed non-existent --uilib-transition-base fallback; top→inset-block-start on textarea label + all active states; token-zero reduced-motion; README updated)
+- `FormField` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-form-field-error-animation token; token-zero reduced-motion; README CSS Custom Properties section added)
+- `SpeedDial` -> ✅ SCSS+README hardened (score **9.0/10** — replaced 6-selector reduced-motion block with single token-zero on host; README CSS Custom Properties section added with 15 entries)
+- `OrderList` -> ✅ SCSS+README hardened (score **9.0/10** — control-btn/icon width/height→inline-size/block-size; header/filter/item border-bottom→border-block-end; drop-before/after top/bottom/height→inset-block-start/end/block-size; token-zero reduced-motion)
+- `PickList` -> ✅ SCSS+README hardened (score **9.0/10** — same logical CSS pass as OrderList; transfer-btn logical sizing; token-zero reduced-motion)
+- `IconField` -> ✅ README hardened (score **9.0/10** — CSS Custom Properties section added with 7 entries)
+- `InputGroup` -> ✅ README hardened (score **9.0/10** — CSS Custom Properties section added with 1 entry)
+- `AutoFocus` -> ✅ README hardened (score **9.0/10** — CSS Custom Properties section added noting directive-only nature)
+- `Ripple` -> ✅ SCSS hardened (score **8.9/10** — border-radius:50%→var(--uilib-radius-full,9999px); token-zero --uilib-ripple-duration + defense-in-depth display:none in reduced-motion)
+- `Drawer` -> ✅ SCSS+README hardened (score **8.9/10** — --uilib-drawer-close-transition token; right/left panel top/bottom/width/max-width→inset-block-*/inline-size; top/bottom panel →inset-block-start/end/block-size; header border-bottom/padding-bottom→block-end; close btn width/height/border-radius→inline-size/block-size/radius-full; token-zero reduced-motion)
+- `ConfirmDialog` -> ✅ SCSS hardened (score **8.9/10** — removed non-existent --uilib-transition-duration-fast fallback; material btn-radius/close-btn 999px→var(--uilib-radius-full,9999px); token-zero --uilib-confirm-dialog-interactive-transition-duration)
+- `Input` -> ✅ SCSS+README hardened (score **8.9/10** — --uilib-input-transition + --uilib-input-label-transition tokens; routed raw multi-property transitions through them; token-zero reduced-motion; README CSS Custom Properties section added)
 
 ---
 
@@ -106,6 +118,39 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 5 — FloatLabel/FormField/SpeedDial/OrderList/PickList/IconField/InputGroup/AutoFocus→9.0; Ripple/Drawer/ConfirmDialog/Input→8.9):
+  float-label/float-label.scss: --uilib-float-label-transition token; top→inset-block-start on textarea
+    label and all three active states; token-zero reduced-motion
+  float-label/README.md: updated --uilib-float-label-transition default (removed invalid token fallback)
+  form-field/form-field.scss: --uilib-form-field-error-animation token; token-zero reduced-motion
+  form-field/README.md: added CSS Custom Properties section (1 entry)
+  speed-dial/speed-dial.component.scss: collapsed 6-selector reduced-motion to single host token-zero
+  speed-dial/README.md: added CSS Custom Properties section (15 entries)
+  order-list/order-list.component.scss: logical CSS pass (width/height→inline-size/block-size; border-bottom
+    →border-block-end; top/bottom/height on drop indicators→inset-block-*/block-size); token-zero reduced-motion
+  pick-list/pick-list.component.scss: same logical CSS pass + transfer-btn logical sizing; token-zero
+    reduced-motion
+  icon-field/README.md: added CSS Custom Properties section (7 entries)
+  input-group/README.md: added CSS Custom Properties section (1 entry)
+  auto-focus/README.md: added CSS Custom Properties section (directive-only — none)
+  ripple/ripple.scss: border-radius:50%→var(--uilib-radius-full,9999px); token-zero --uilib-ripple-duration;
+    defense-in-depth display:none on wave in reduced-motion
+  drawer/drawer.scss: --uilib-drawer-close-transition token; all panel positioning→logical inset-block-*/
+    inline-size; header border-bottom/padding-bottom→border-block-end/padding-block-end; close btn logical
+    sizing + border-radius→radius-full; token-zero reduced-motion
+  drawer/README.md: added --uilib-drawer-close-transition row to CSS Custom Properties table
+  confirm-dialog/confirm-dialog.scss: removed non-existent --uilib-transition-duration-fast fallback;
+    material radius 999px→var(--uilib-radius-full,9999px); token-zero interactive-transition-duration
+  input/input.scss: --uilib-input-transition + --uilib-input-label-transition tokens; raw multi-property
+    transitions routed through tokens; replaced broken transition-duration-only reduced-motion with token-zero
+  input/README.md: added CSS Custom Properties section (11 entries)
+  docs/COMPONENT_SCORES.md: all 12 components updated (8→9.0, 4→8.9)
+  AI_AGENT_CONTEXT.md: library average updated to 9.03 (34 components at 9.0 across 5 batches)
+State: COMPLETE — build verified; awaiting commit
+Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅
+Next step: Commit batch 5; then audit remaining 8.8 scores for batch 6 targets
 
 Date: 2026-05-30
 Changed (SelectButton, InputMask, InputOtp, Password, Rating, Slider — all 8.8→9.0):
@@ -166,11 +211,6 @@ Changed (Textarea, ToggleButton, Icon, ButtonGroup, Divider, Image — all 8.8�
 State: COMPLETE — uncommitted; ESLint + build + commit pending
 Verification: npx eslint textarea/ toggle-button/ icon/ button-group/ divider/ image/ (0w expected); ng build ui-lib-custom (0w)
 Next step: Commit batch 3; then continue 8.8 components — SelectButton, InputMask, InputOtp, Password, Rating, Slider, FloatLabel, FormField
-
-Date: 2026-05-30
-Changed (Textarea, ToggleButton, Icon, ButtonGroup, Divider, Image — all 8.8→9.0):
-  Full details in docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅; committed
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

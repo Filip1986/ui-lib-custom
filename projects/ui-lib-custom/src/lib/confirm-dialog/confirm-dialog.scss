@@ -37,10 +37,7 @@
     --uilib-confirm-dialog-enter-easing: ease-out;
     --uilib-confirm-dialog-backdrop-enter-duration: 150ms;
     --uilib-confirm-dialog-backdrop-enter-easing: ease-out;
-    --uilib-confirm-dialog-interactive-transition-duration: var(
-      --uilib-transition-duration-fast,
-      120ms
-    );
+    --uilib-confirm-dialog-interactive-transition-duration: 120ms;
 
     position: fixed;
     inset: 0;
@@ -289,10 +286,10 @@
     --uilib-confirm-dialog-shadow: var(--uilib-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.15));
     --uilib-confirm-dialog-border-radius: var(--uilib-radius-lg, 12px);
     --uilib-confirm-dialog-border: 0 solid transparent;
-    --uilib-confirm-dialog-btn-radius: 999px;
+    --uilib-confirm-dialog-btn-radius: var(--uilib-radius-full, 9999px);
 
     .ui-lib-confirm-dialog__close-btn {
-      border-radius: 999px;
+      border-radius: var(--uilib-radius-full, 9999px);
     }
   }
 
@@ -330,6 +327,7 @@
     ui-lib-confirm-dialog {
       --uilib-confirm-dialog-enter-duration: 0ms;
       --uilib-confirm-dialog-backdrop-enter-duration: 0ms;
+      --uilib-confirm-dialog-interactive-transition-duration: 0ms;
     }
   }
 
