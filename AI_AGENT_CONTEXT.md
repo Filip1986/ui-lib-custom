@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.05 / 10** across 102 components (updated 2026-05-30; batch-10 raised 7 components — Avatar/BottomSheet/Carousel/DataView/Timeline/MeterGroup to 9.1; Knob to 9.2)
+- **Library-wide average:** **9.06 / 10** across 102 components (updated 2026-05-30; batch-11 raised Badge to 9.1 via Theme fix; running total: 9 components at 9.1+, Knob at 9.2, four at 9.5)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -125,6 +125,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 11 — Badge→9.1):
+  badge/badge.scss: removed both !important violations that broke the CSS cascade:
+    (1) outline variant: moved rule AFTER color rules, changed
+        `background-color: transparent !important` → `--uilib-badge-bg-resolved: transparent`
+        (same specificity + later position wins, consumers can now override via tokens)
+    (2) reduced-motion: `transition: none !important; animation: none !important` →
+        `--uilib-badge-pulse-duration: 0ms; animation: none` (token-zero, no !important)
+    (3) dot: width/height/min-width/min-height → inline-size/block-size/min-inline-size/
+        min-block-size (logical CSS)
+    (4) dot radius: `var(--uilib-badge-radius-dot, 50%)` →
+        `var(--uilib-badge-radius-dot, var(--uilib-radius-full, 50%))` (radius token chain)
+  docs/COMPONENT_SCORES.md: Badge Theme 8→9 (9.0→9.1)
+State: COMPLETE — build verified; badge tests (25 tests) all pass ✅
+Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅; jest badge (25/25) ✅
+Next step: Remaining 8s: FloatLabel Feel=8, AutoFocus Feel=8 — hard to push without new
+  features. Consider broader 9.1→9.2 ceiling push or new component work.
 
 Date: 2026-05-30
 Changed (batch 10 — Avatar/BottomSheet/Carousel/DataView/Timeline/MeterGroup→9.1; Knob→9.2):

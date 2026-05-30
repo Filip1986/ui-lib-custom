@@ -84,16 +84,11 @@
     );
   }
 
-  /* Variants */
+  /* Style variants — solid/subtle defined before color rules; outline defined AFTER so
+     its --uilib-badge-bg-resolved: transparent wins over any color-class token without
+     needing !important (cascade order, same specificity). */
   ui-lib-badge.ui-lib-badge--variant-solid {
     --uilib-badge-border-width-resolved: 0;
-  }
-
-  ui-lib-badge.ui-lib-badge--variant-outline {
-    background-color: transparent !important;
-    border-color: var(--uilib-badge-border-color-resolved, currentColor);
-    color: var(--uilib-badge-fg-resolved, currentColor);
-    --uilib-badge-border-width-resolved: 1px;
   }
 
   ui-lib-badge.ui-lib-badge--variant-subtle {
@@ -190,6 +185,16 @@
     );
   }
 
+  /* Outline variant — placed AFTER color rules so the token override wins in cascade
+     without needing !important (same specificity, later position → wins). */
+  ui-lib-badge.ui-lib-badge--variant-outline {
+    /* Force transparent background via token so consumers can still override with CSS vars */
+    --uilib-badge-bg-resolved: transparent;
+    border-color: var(--uilib-badge-border-color-resolved, currentColor);
+    color: var(--uilib-badge-fg-resolved, currentColor);
+    --uilib-badge-border-width-resolved: 1px;
+  }
+
   /* Shape modifiers */
   ui-lib-badge.ui-lib-badge--pill {
     /* Component-scoped pill radius — set --uilib-badge-radius-pill to customise */
@@ -200,11 +205,12 @@
     --uilib-badge-padding-y-resolved: 0;
     --uilib-badge-padding-x-resolved: 0;
     /* Component-scoped dot radius — set --uilib-badge-radius-dot to customise */
-    --uilib-badge-radius-resolved: var(--uilib-badge-radius-dot, 50%);
-    width: var(--uilib-badge-dot-size, 0.75rem);
-    height: var(--uilib-badge-dot-size, 0.75rem);
-    min-width: var(--uilib-badge-dot-size, 0.75rem);
-    min-height: var(--uilib-badge-dot-size, 0.75rem);
+    --uilib-badge-radius-resolved: var(--uilib-badge-radius-dot, var(--uilib-radius-full, 50%));
+    /* Logical sizing — supports RTL layouts */
+    inline-size: var(--uilib-badge-dot-size, 0.75rem);
+    block-size: var(--uilib-badge-dot-size, 0.75rem);
+    min-inline-size: var(--uilib-badge-dot-size, 0.75rem);
+    min-block-size: var(--uilib-badge-dot-size, 0.75rem);
     font-size: var(--uilib-badge-dot-font-size);
   }
 
@@ -255,8 +261,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     ui-lib-badge.ui-lib-badge {
-      transition: none !important;
-      animation: none !important;
+      /* Token-zero — disables pulse animation without !important so consumers can override */
+      --uilib-badge-pulse-duration: 0ms;
+      animation: none;
     }
   }
 } // end @layer uilib.components
