@@ -97,3 +97,17 @@ Provide either `ariaLabel` or `ariaLabelledby` whenever no visible label exists.
 <!-- read-only display (role="img", aria-label describes the value) -->
 <ui-lib-rating [readonly]="true" [(ngModel)]="rating" />
 ```
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-rating-star-on-color` | `var(--uilib-color-primary-500, #f59e0b)` | Filled star color |
+| `--uilib-rating-star-off-color` | `var(--uilib-color-neutral-300, #d1d5db)` | Empty star color |
+| `--uilib-rating-star-hover-color` | `var(--uilib-color-primary-400, #fbbf24)` | Star color on hover |
+| `--uilib-rating-cancel-color` | `var(--uilib-color-neutral-400, #9ca3af)` | Cancel button color |
+| `--uilib-rating-cancel-hover-color` | `var(--uilib-color-danger-500, #ef4444)` | Cancel button hover color |
+| `--uilib-rating-gap` | `0.25rem` | Gap between stars |
+| `--uilib-rating-focus-shadow` | `0 0 0 2px color-mix(…primary-500… 40%, transparent)` | Focus ring box-shadow |
+| `--uilib-rating-star-transition` | `color 0.15s ease, transform 0.1s ease` | Star hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-rating-cancel-transition` | `color 0.15s ease, transform 0.1s ease` | Cancel hover/color transition; set to `none` when `prefers-reduced-motion: reduce` |

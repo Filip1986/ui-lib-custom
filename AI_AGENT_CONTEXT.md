@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.00 / 10** across 102 components (updated 2026-05-30; 20 components raised to 9.0 across three batches)
+- **Library-wide average:** **9.01 / 10** across 102 components (updated 2026-05-30; 26 components raised to 9.0 across four batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -83,6 +83,12 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Fluid` -> ✅ README hardened (score **9.0/10** — renamed CSS Variables→CSS Custom Properties, added "none — layout utility" explanation, "When to use" guidance)
 - `SyntaxHighlighter` -> ✅ README hardened (score **9.0/10** — added Accessibility section, "When to use" guidance)
 - `Bind` -> ✅ README hardened (score **9.0/10** — added CSS Custom Properties section noting directive-only nature)
+- `SelectButton` -> ✅ SCSS hardened (score **9.0/10** — token-zero reduced-motion via --uilib-button-transition cascade)
+- `InputMask` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-input-mask-transition token, margin-top→margin-block-start, token-zero reduced-motion, README CSS Custom Properties section added)
+- `InputOtp` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-input-otp-transition token, token-zero reduced-motion, README CSS Custom Properties section added)
+- `Password` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-password-transition token, fixed non-existent --uilib-transition-duration, border-top/bottom→block-start/end, margin-top→block-start, removed !important from reduced-motion)
+- `Rating` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-rating-star/cancel-transition tokens, consolidated two duplicate reduced-motion blocks, README CSS Custom Properties section added)
+- `Slider` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-slider-handle-border-radius→var(--uilib-radius-full), --uilib-slider-track-padding token, --uilib-slider-handle-transition and animate-handle-transition tokens, top/bottom→inset-block-start/end on fill, logical padding on vertical track container, token-zero reduced-motion)
 - `Textarea` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-textarea-transition token added, token-zero reduced-motion, README CSS Custom Properties table updated)
 - `ToggleButton` -> ✅ SCSS+README hardened (score **9.0/10** — --uilib-toggle-button-checked-shadow token; minimal radius: 9999px→var(--uilib-radius-full); token-zero reduced-motion; README CSS Custom Properties section added)
 - `ButtonGroup` -> ✅ SCSS+README hardened (score **9.0/10** — margin-top→margin-block-start in vertical orientation; README Styling Hooks→CSS Custom Properties table)
@@ -100,6 +106,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (SelectButton, InputMask, InputOtp, Password, Rating, Slider — all 8.8→9.0):
+  select-button/select-button.scss: token-zero reduced-motion by cascading --uilib-button-transition:
+    none onto child button elements from the host context
+  input-mask/input-mask.component.scss: added --uilib-input-mask-transition token; routed input
+    transition through it; margin-top→margin-block-start on error element; token-zero reduced-motion
+  input-mask/README.md: added CSS Custom Properties section (13 entries)
+  input-otp/input-otp.component.scss: added --uilib-input-otp-transition token; routed cell
+    transition through it; token-zero reduced-motion
+  input-otp/README.md: added CSS Custom Properties section (12 entries)
+  password/password.component.scss: added --uilib-password-transition token; replaced non-existent
+    --uilib-transition-duration reference; border-top→border-block-start, border-bottom→border-block-end,
+    border-bottom-color→border-block-end-color, margin-top→margin-block-start; removed !important from
+    reduced-motion; pure token-zero reduced-motion block
+  password/README.md: added CSS Custom Properties section (19 entries)
+  rating/rating.scss: added --uilib-rating-star-transition and --uilib-rating-cancel-transition tokens;
+    routed raw transitions through them; removed non-existent --uilib-rating-transition-duration token;
+    consolidated two duplicate reduced-motion blocks into one clean token-zero + transform:none block
+  rating/README.md: added CSS Custom Properties section (9 entries)
+  slider/slider.scss: --uilib-slider-handle-border-radius: 50%→var(--uilib-radius-full, 9999px);
+    added --uilib-slider-track-padding/handle-transition/animate-handle-transition tokens; routed
+    raw values through tokens; top:0/bottom:0→inset-block-start/end:0 on fill; top:auto→inset-block-start:auto
+    on vertical fill; padding:12px 0/0 12px→token refs; token-zero reduced-motion (3 tokens: none)
+  slider/README.md: added 3 new token rows + defaults column to CSS Custom Properties table
+  docs/COMPONENT_SCORES.md: all 6 components raised to 9.0
+  AI_AGENT_CONTEXT.md: library average updated to 9.01 (26 components at 9.0 across 4 batches)
+State: COMPLETE — uncommitted; ESLint + build + commit pending
+Verification: npx eslint select-button/ input-mask/ input-otp/ password/ rating/ slider/ (0w expected); ng build
+Next step: Commit batch 4; then continue remaining 8.8 — FloatLabel, InputGroup, IconField, FormField, Drawer, ConfirmDialog, SpeedDial, OrderList, PickList, AutoFocus
 
 Date: 2026-05-30
 Changed (Textarea, ToggleButton, Icon, ButtonGroup, Divider, Image — all 8.8→9.0):
@@ -132,55 +168,9 @@ Verification: npx eslint textarea/ toggle-button/ icon/ button-group/ divider/ i
 Next step: Commit batch 3; then continue 8.8 components — SelectButton, InputMask, InputOtp, Password, Rating, Slider, FloatLabel, FormField
 
 Date: 2026-05-30
-Changed (VirtualScroller, Paginator, IconButton, AnimateOnScroll, StyleClass, KeyFilter — all 8.7→9.0):
-  virtual-scroller/virtual-scroller.component.scss: added --uilib-scroller-spinner-border-radius
-    (var(--uilib-radius-full, 9999px)) and --uilib-scroller-spinner-animation tokens; replaced
-    border-top-color → border-block-start-color; border-radius: 50% → token; animation → token;
-    converted element-list reduced-motion to token-zero (spinner-animation: none; keep scroll-behavior: auto)
-  virtual-scroller/README.md: added CSS Custom Properties section (6 entries with defaults column)
-  paginator/paginator.component.scss: --uilib-paginator-button-radius: 50% → var(--uilib-radius-full)
-    in both base and material variant; added --uilib-paginator-focus-shadow token for rgba focus
-    box-shadows on jtp-input and rpp-select; token-zero reduced-motion on .ui-lib-paginator
-  paginator/README.md: updated button-radius default; added focus-shadow row to CSS table
-  icon-button/icon-button.scss: added --uilib-icon-button-transition and
-    --uilib-icon-button-loading-animation tokens; replaced raw transition/animation values with tokens;
-    collapsed two-block element-list reduced-motion to single token-zero block
-  icon-button/README.md: added CSS Custom Properties section (5 entries with defaults column)
-  animate-on-scroll/animate-on-scroll.scss: fixed --uilib-animate-on-scroll-duration from
-    var(--uilib-transition-duration, 600ms) (non-existent global token) to plain 600ms; replaced
-    8-selector !important reduced-motion block with token-zero (duration: 0ms) + no !important
-  animate-on-scroll/README.md: added CSS Custom Properties section (4 entries with defaults column)
-  style-class/README.md: added CSS Custom Properties section noting directive-only, no component styles
-  key-filter/README.md: added CSS Custom Properties section noting directive-only, no component styles
-  docs/COMPONENT_SCORES.md: all 6 components raised to 9.0
-  AI_AGENT_CONTEXT.md: library average updated to 8.97, component delta entries updated
-State: COMPLETE — ESLint + build pending verification
-Verification: npx eslint virtual-scroller/ paginator/ icon-button/ animate-on-scroll/ (0w); ng build ui-lib-custom (0w)
-Next step: Remaining 8.7 components — Fluid, DynamicDialog, SyntaxHighlighter, Bind; then 8.8 batch
-
-Date: 2026-05-29
-Changed (Alert + Chip hardening — both 8.6→9.0):
-  alert/alert.scss: complete rewrite — added severity-based token system (bg/fg/border per
-    info/success/warning/error); all 4 severity classes now produce distinct colour schemes via
-    --uilib-alert-{severity}-{property} tokens; added bootstrap-variant severity overrides with
-    Bootstrap's canonical palette hex; added close button --uilib-alert-close-btn-bg-hover/active
-    tokens + hover/active states + transition backed by --uilib-alert-transition:
-    var(--uilib-transition-fast); replaced single transition:none reduced-motion block with
-    token-zero --uilib-alert-transition:0ms
-  alert/README.md: expanded CSS tokens table from 2 to 19 entries with defaults column
-  chip/chip.scss: replaced non-standard --uilib-transition-base fallback with
-    var(--uilib-transition-fast, 150ms ease) on --uilib-chip-transition; added
-    --uilib-chip-remove-transition token; replaced border-radius:50% on image and remove-button
-    with --uilib-chip-image-border-radius/--uilib-chip-remove-border-radius tokens (both backed by
-    var(--uilib-radius-full)); added --uilib-chip-remove-bg-active token + :active state on
-    remove-button; added --uilib-chip-shadow token to replace raw rgba in material variant rule body;
-    replaced element-list reduced-motion block with token-zero
-  chip/README.md: expanded CSS variables table from 12 to 18 entries with defaults column
-  docs/COMPONENT_SCORES.md: Alert Perf/Theme/Polish/Feel all 8→9 (8.6→9.0);
-    Chip Perf/Theme/Polish/Feel all 8→9 (8.6→9.0)
-State: COMPLETE — ESLint 0w ✅; ng build 0w ✅
-Verification: npx eslint alert/ chip/ (0w); ng build ui-lib-custom (0w)
-Next step: Remaining 8.6/8.7 components — TreeSelect/VirtualScroller/Message/Skeleton/etc.
+Changed (Textarea, ToggleButton, Icon, ButtonGroup, Divider, Image — all 8.8→9.0):
+  Full details in docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: COMPLETE — ESLint 0w ✅; ng build 0w ✅; committed
 
 <!-- older handoffs: see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md -->
 

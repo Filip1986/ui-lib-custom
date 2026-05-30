@@ -99,5 +99,8 @@ public readonly formatVolumeValue = (value: number): string => `${value}%`;
 | `--uilib-slider-handle-bg` | Thumb background |
 | `--uilib-slider-handle-border` | Thumb border |
 | `--uilib-slider-focus-ring-color` | `:focus-visible` ring color |
-| `--uilib-slider-fill-transition` | Fill animation timing |
+| `--uilib-slider-fill-transition` | Fill animation timing; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-slider-handle-transition` | Handle hover/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-slider-animate-handle-transition` | Handle position transition when `animate=true`; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-slider-track-padding` | Hit-box padding on the track container (`12px`) |
 | `--uilib-slider-vertical-height` | Vertical slider height |

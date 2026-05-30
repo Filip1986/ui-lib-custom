@@ -127,3 +127,28 @@ an error node linked by `aria-describedby`:
   [(ngModel)]="password"
 />
 ```
+
+## CSS Custom Properties
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--uilib-password-transition` | `border-color 0.15s ease, box-shadow 0.15s ease` | Input border/shadow transition; set to `none` when `prefers-reduced-motion: reduce` |
+| `--uilib-password-border-color` | `#d1d5db` | Input border color |
+| `--uilib-password-border-color-hover` | `#9ca3af` | Input border color on hover |
+| `--uilib-password-border-color-focus` | `#6366f1` | Input border color on focus |
+| `--uilib-password-border-color-invalid` | `#ef4444` | Input border when invalid |
+| `--uilib-password-focus-ring` | `rgba(99, 102, 241, 0.2)` | Focus ring color |
+| `--uilib-password-bg` | `#ffffff` | Input background |
+| `--uilib-password-color` | `#374151` | Input text color |
+| `--uilib-password-border-radius` | `6px` | Input corner radius |
+| `--uilib-password-icon-color` | `#6b7280` | Toggle/clear icon color |
+| `--uilib-password-panel-bg` | `#ffffff` | Strength panel background |
+| `--uilib-password-panel-border-radius` | `6px` | Strength panel corner radius |
+| `--uilib-password-panel-shadow` | `0 4px 12px rgba(0,0,0,0.08)` | Strength panel shadow |
+| `--uilib-password-meter-bg` | `#e5e7eb` | Meter track background |
+| `--uilib-password-meter-height` | `6px` | Meter track height |
+| `--uilib-password-meter-bg-weak` | `#ef4444` | Meter fill — weak |
+| `--uilib-password-meter-bg-medium` | `#f59e0b` | Meter fill — medium |
+| `--uilib-password-meter-bg-strong` | `#10b981` | Meter fill — strong |
+| `--uilib-password-meter-transition-duration` | `0.4s` | Meter width animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |
+| `--uilib-password-meter-color-transition-duration` | `0.25s` | Meter color animation duration; set to `0ms` when `prefers-reduced-motion: reduce` |

@@ -18,6 +18,8 @@
     --uilib-rating-star-size-lg: 2rem;
     --uilib-rating-focus-shadow: 0 0 0 2px
       color-mix(in srgb, var(--uilib-color-primary-500, #f59e0b) 40%, transparent);
+    --uilib-rating-star-transition: color 0.15s ease, transform 0.1s ease;
+    --uilib-rating-cancel-transition: color 0.15s ease, transform 0.1s ease;
 
     display: inline-flex;
     align-items: center;
@@ -36,9 +38,7 @@
     border-radius: 2px;
     padding: 2px;
     color: var(--uilib-rating-star-off-color);
-    transition:
-      color 0.15s ease,
-      transform 0.1s ease;
+    transition: var(--uilib-rating-star-transition);
     -webkit-user-select: none;
     user-select: none;
     line-height: 1;
@@ -84,9 +84,7 @@
     padding: 2px;
     margin-inline-end: 0.25rem;
     color: var(--uilib-rating-cancel-color);
-    transition:
-      color 0.15s ease,
-      transform 0.1s ease;
+    transition: var(--uilib-rating-cancel-transition);
     -webkit-user-select: none;
     user-select: none;
     line-height: 1;
@@ -160,19 +158,6 @@
     --uilib-rating-star-off-color: var(--uilib-color-neutral-200, #e5e7eb);
   }
 
-  // ── Reduced motion ────────────────────────────────────────────────────────────
-
-  @media (prefers-reduced-motion: reduce) {
-    ui-lib-rating {
-      --uilib-rating-transition-duration: 0ms;
-
-      .ui-lib-rating__star,
-      .ui-lib-rating__cancel {
-        transition: none;
-      }
-    }
-  }
-
   [data-theme='dark'] ui-lib-rating {
     --uilib-rating-star-off-color: var(--uilib-color-neutral-600, #4b5563);
     --uilib-rating-star-on-color: var(--uilib-color-primary-dark, #fbbf24);
@@ -192,9 +177,9 @@
   // ── Reduced motion ────────────────────────────────────────────────────────────
 
   @media (prefers-reduced-motion: reduce) {
-    ui-lib-rating .ui-lib-rating__star,
-    ui-lib-rating .ui-lib-rating__cancel {
-      transition: none;
+    ui-lib-rating {
+      --uilib-rating-star-transition: none;
+      --uilib-rating-cancel-transition: none;
     }
 
     ui-lib-rating:not(.ui-lib-rating--disabled):not(.ui-lib-rating--readonly)
