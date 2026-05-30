@@ -68,6 +68,8 @@
   .ui-lib-galleria {
     display: block;
     position: relative;
+    /* Promote to compositor layer for GPU-accelerated mount animation */
+    will-change: transform, opacity;
     animation: var(--uilib-galleria-mount-animation);
   }
 

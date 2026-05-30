@@ -100,6 +100,8 @@
     border: var(--uilib-confirm-dialog-border);
     box-shadow: var(--uilib-confirm-dialog-shadow);
     pointer-events: auto;
+    /* Promote panel to compositor layer — GPU-accelerates the enter/exit keyframe animation */
+    will-change: transform, opacity;
     animation: confirm-dialog-panel-enter var(--uilib-confirm-dialog-enter-duration)
       var(--uilib-confirm-dialog-enter-easing);
   }

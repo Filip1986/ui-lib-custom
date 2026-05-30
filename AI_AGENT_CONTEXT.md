@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Prompt 8 quality hardening sprint (week of 2026-05-28) — in progress
-- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 44 components raised to 9.0 across eight batches)
+- **Library-wide average:** **9.03 / 10** across 102 components (updated 2026-05-30; 47 components raised to 9.0 across nine batches)
 - **Active focus:** Prompt 7 ceiling push — Select (9.1→9.5 ✅), AutoComplete (9.0→9.5 ✅), ColorPicker (9.0→9.5 ✅), CascadeSelect (9.0→9.5 ✅). All four ceiling-push targets complete.
 - **Next queue:** Broader Prompt 8 pass on any remaining sub-8.5 components.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
@@ -125,6 +125,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-30
+Changed (batch 9 — Drawer/ConfirmDialog/Galleria→9.0):
+  drawer/drawer.scss: added will-change: transform to .ui-lib-drawer__panel (creates compositor
+    layer ahead of slide-in animation; GPU-accelerates all 4 position variants)
+  confirm-dialog/confirm-dialog.scss: added will-change: transform, opacity to
+    .ui-lib-confirm-dialog__panel (GPU-accelerates keyframe enter/exit animation)
+  galleria/galleria.scss: added will-change: transform, opacity to .ui-lib-galleria (GPU-accelerates
+    the uilib-galleria-mount keyframe animation on initial render)
+  docs/COMPONENT_SCORES.md: Drawer/ConfirmDialog/Galleria Perf 8→9 (all three to 9.0)
+  AI_AGENT_CONTEXT.md: 47 components at 9.0 (average 9.03 unchanged)
+State: COMPLETE — build verified (0 errors 0 warnings); awaiting commit
+Verification: ng build ui-lib-custom (0 errors, 0 warnings) ✅
+Next step: All 102 components are now ≥ 9.0 (3 remaining 8.9 components were Drawer/ConfirmDialog/
+  Galleria — all now 9.0). No sub-9.0 components remain in main scoring tables. Pivot to ceiling
+  push (9.0→9.1+) or audit SyntaxHighlighter/Bind/OrganizationChart stale queue entries.
 
 Date: 2026-05-30
 Changed (batch 8 — ScrollTop→9.0):
