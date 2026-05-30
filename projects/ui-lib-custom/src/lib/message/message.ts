@@ -43,7 +43,7 @@ const SEVERITY_ICON_MAP: Record<MessageSeverity, StatusIcon> = {
  *
  * @example
  * <ui-lib-message severity="success" text="Operation completed successfully." />
- * <ui-lib-message severity="warn" [closable]="true" (close)="onClose()">
+ * <ui-lib-message severity="warn" [closable]="true" (closed)="onClose()">
  *   Unsaved changes will be lost.
  * </ui-lib-message>
  * <!-- inline form validation -->
@@ -112,7 +112,7 @@ export class Message {
   private readonly _instanceId: string = `ui-lib-message-${nextMessageId++}`;
 
   /** Emitted when the close button is activated. */
-  public readonly close: OutputEmitterRef<void> = output<void>();
+  public readonly closed: OutputEmitterRef<void> = output<void>();
 
   /** Stable host `id` — consumer-provided or auto-generated. */
   public readonly resolvedId: Signal<string> = computed<string>(
@@ -165,6 +165,6 @@ export class Message {
 
   /** Handles close button click. */
   public onClose(): void {
-    this.close.emit();
+    this.closed.emit();
   }
 }

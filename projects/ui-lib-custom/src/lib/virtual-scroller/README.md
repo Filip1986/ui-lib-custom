@@ -98,6 +98,7 @@
 | `--uilib-scroller-item-border-color` | `var(--uilib-color-border)` | Border colour used in Bootstrap variant |
 | `--uilib-scroller-spinner-border-radius` | `var(--uilib-radius-full, 9999px)` | Border radius that makes the spinner circular |
 | `--uilib-scroller-spinner-animation` | `uilib-scroller-spin 0.75s linear infinite` | Spinner keyframe animation (set to `none` under `prefers-reduced-motion`) |
+| `--uilib-scroller-focus-ring` | `0 0 0 2px var(--uilib-color-focus-ring, #6366f1)` | `box-shadow` applied to the viewport on `:focus-visible`; override to match your brand focus colour |
 
 ## Accessibility
 
