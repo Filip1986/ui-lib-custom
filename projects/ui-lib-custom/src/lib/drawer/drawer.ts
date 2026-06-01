@@ -58,6 +58,10 @@ function generateDrawerId(): string {
     '[style.--uilib-drawer-size]': 'size()',
     // aria-hidden="true" hides all children from AT when closed; null (removed) when open
     '[attr.aria-hidden]': '!visible() ? true : null',
+    // inert makes the always-in-DOM panel content non-focusable while closed, so the
+    // close button etc. are not reachable inside an aria-hidden subtree (axe
+    // aria-hidden-focus / WCAG 4.1.2). Removed when open so the panel is operable.
+    '[attr.inert]': '!visible() ? true : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

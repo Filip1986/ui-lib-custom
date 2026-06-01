@@ -48,6 +48,7 @@
           class="ui-lib-panel-menu__sub-content"
           [class.ui-lib-panel-menu__sub-content--visible]="isItemExpanded($index)"
           [attr.aria-hidden]="!isItemExpanded($index) ? 'true' : null"
+          [attr.inert]="!isItemExpanded($index) ? true : null"
         >
           <div class="ui-lib-panel-menu__sub-content-inner">
             <ui-lib-panel-menu-sub

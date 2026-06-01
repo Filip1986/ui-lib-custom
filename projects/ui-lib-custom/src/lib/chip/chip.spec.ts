@@ -229,8 +229,20 @@ describe('Chip', (): void => {
     expect(button.getAttribute('aria-label')).toBe('Remove');
   });
 
-  it('should apply role="option" on host when not removable', (): void => {
+  it('applies no host role for a plain (non-removable, non-selectable) chip', (): void => {
     const { fixture } = setup();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    // role="option" outside a listbox violates aria-required-parent — a plain chip
+    // is just a labelled element and carries no role.
+    expect(chip.getAttribute('role')).toBeNull();
+  });
+
+  it('applies role="option" on host when selectable', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
     const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
       .nativeElement as HTMLElement;
     expect(chip.getAttribute('role')).toBe('option');
@@ -246,14 +258,26 @@ describe('Chip', (): void => {
     expect(chip.getAttribute('role')).toBe('group');
   });
 
-  it('should set aria-label on host from label input', async (): Promise<void> => {
+  it('sets host aria-label from label input on a roled (selectable) chip', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.label.set('React');
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.getAttribute('aria-label')).toBe('React');
+  });
+
+  it('does not set a host aria-label on a plain roleless chip (named by visible text)', async (): Promise<void> => {
     const { fixture, host } = setup();
     host.label.set('React');
     fixture.detectChanges();
     await fixture.whenStable();
     const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
       .nativeElement as HTMLElement;
-    expect(chip.getAttribute('aria-label')).toBe('React');
+    expect(chip.getAttribute('aria-label')).toBeNull();
+    expect(chip.textContent).toContain('React');
   });
 
   it('should use custom removeIcon class', async (): Promise<void> => {

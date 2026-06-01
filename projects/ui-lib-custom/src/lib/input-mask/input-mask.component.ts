@@ -164,18 +164,6 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       return ids.length > 0 ? ids.join(' ') : null;
     },
   );
-  protected readonly ariaValueText: Signal<string | null> = computed<string | null>(
-    (): string | null => {
-      const currentValue: string = this.value() ?? '';
-
-      if (this.maskEngine === null) {
-        return currentValue.length > 0 ? currentValue : null;
-      }
-
-      const unmaskedValue: string = this.maskEngine.getUnmaskedValue();
-      return unmaskedValue.length > 0 ? unmaskedValue : null;
-    },
-  );
 
   private onModelChange: (value: string | null) => void = (): void => {};
 

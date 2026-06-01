@@ -78,7 +78,7 @@ async function createIndeterminateFixture(): Promise<ComponentFixture<Indetermin
     providers: [provideZonelessChangeDetection()],
   }).compileComponents();
   const fixture: ComponentFixture<IndeterminateHostComponent> = TestBed.createComponent(
-    IndeterminateHostComponent
+    IndeterminateHostComponent,
   );
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
@@ -193,6 +193,23 @@ describe('ProgressBar Accessibility', (): void => {
       expect(getBar(fixture).getAttribute('aria-label')).toBe('Loading');
     });
 
+    it('aria-label defaults to "Progress" in determinate mode (progressbar must be named)', async (): Promise<void> => {
+      // Configurable host defaults to determinate mode with no ariaLabel/ariaLabelledBy.
+      const fixture: ComponentFixture<ConfigurableHostComponent> =
+        await createConfigurableFixture();
+      expect(getBar(fixture).getAttribute('aria-label')).toBe('Progress');
+    });
+
+    it('determinate default yields to an external aria-labelledby', async (): Promise<void> => {
+      const fixture: ComponentFixture<ConfigurableHostComponent> =
+        await createConfigurableFixture();
+      fixture.componentInstance.ariaLabelledBy.set('progress-heading');
+      fixture.detectChanges();
+      await fixture.whenStable();
+      expect(getBar(fixture).getAttribute('aria-label')).toBeNull();
+      expect(getBar(fixture).getAttribute('aria-labelledby')).toBe('progress-heading');
+    });
+
     it('aria-label reflects ariaLabel input', async (): Promise<void> => {
       const fixture: ComponentFixture<ConfigurableHostComponent> =
         await createConfigurableFixture();
@@ -230,7 +247,7 @@ describe('ProgressBar Accessibility', (): void => {
     it('live region is present when value reaches 100', async (): Promise<void> => {
       const fixture: ComponentFixture<CompleteHostComponent> = await createCompleteFixture();
       const liveRegion: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '[aria-live="polite"]'
+        '[aria-live="polite"]',
       );
       expect(liveRegion).not.toBeNull();
     });
@@ -238,7 +255,7 @@ describe('ProgressBar Accessibility', (): void => {
     it('live region is absent when value is below 100', async (): Promise<void> => {
       const fixture: ComponentFixture<DeterminateHostComponent> = await createDeterminateFixture();
       const liveRegion: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '[aria-live="polite"]'
+        '[aria-live="polite"]',
       );
       expect(liveRegion).toBeNull();
     });
@@ -246,7 +263,7 @@ describe('ProgressBar Accessibility', (): void => {
     it('live region announces "Complete" by default', async (): Promise<void> => {
       const fixture: ComponentFixture<CompleteHostComponent> = await createCompleteFixture();
       const liveRegion: Element = (fixture.nativeElement as HTMLElement).querySelector(
-        '[aria-live="polite"]'
+        '[aria-live="polite"]',
       ) as Element;
       expect(liveRegion.textContent!.trim()).toBe('Complete');
     });
@@ -258,7 +275,7 @@ describe('ProgressBar Accessibility', (): void => {
       fixture.componentInstance.completionLabel.set('Upload fertig');
       fixture.detectChanges();
       const liveRegion: Element = (fixture.nativeElement as HTMLElement).querySelector(
-        '[aria-live="polite"]'
+        '[aria-live="polite"]',
       ) as Element;
       expect(liveRegion.textContent!.trim()).toBe('Upload fertig');
     });
@@ -266,7 +283,7 @@ describe('ProgressBar Accessibility', (): void => {
     it('live region has aria-atomic="true"', async (): Promise<void> => {
       const fixture: ComponentFixture<CompleteHostComponent> = await createCompleteFixture();
       const liveRegion: Element = (fixture.nativeElement as HTMLElement).querySelector(
-        '[aria-live="polite"]'
+        '[aria-live="polite"]',
       ) as Element;
       expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
     });

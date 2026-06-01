@@ -46,6 +46,9 @@ let nextBottomSheetId: number = 0;
   host: {
     '[class]': 'hostClasses()',
     '[attr.aria-hidden]': '!visible()',
+    // Make the closed sheet's content inert so no focusable element lives inside an
+    // aria-hidden subtree (axe aria-hidden-focus / WCAG 4.1.2). Removed when open.
+    '[attr.inert]': '!visible() ? true : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
