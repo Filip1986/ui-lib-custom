@@ -463,4 +463,5 @@ export const UI_LIB_FR: UiLibTranslationBundle = {
   'editor.content.label': 'Éditeur de texte enrichi',
   'orderlist.label': 'Liste réordonnable',
   'autocomplete.input.label': 'Rechercher',
+  'input-mask.input.label': 'Saisie masquée',
 };

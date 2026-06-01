@@ -462,4 +462,5 @@ export const UI_LIB_ES: UiLibTranslationBundle = {
   'editor.content.label': 'Editor de texto enriquecido',
   'orderlist.label': 'Lista reordenable',
   'autocomplete.input.label': 'Buscar',
+  'input-mask.input.label': 'Entrada con máscara',
 };

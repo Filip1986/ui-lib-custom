@@ -463,4 +463,5 @@ export const UI_LIB_EN: UiLibTranslationBundle = {
   'editor.content.label': 'Rich text editor',
   'orderlist.label': 'Reorderable list',
   'autocomplete.input.label': 'Search',
+  'input-mask.input.label': 'Masked input',
 };
