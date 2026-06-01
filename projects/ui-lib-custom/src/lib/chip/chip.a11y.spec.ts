@@ -73,8 +73,10 @@ function buildMockTheme(): {
   standalone: true,
   imports: [Chip],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Decorative chips are roleless; they belong in a plain container, not a listbox
+  // (a listbox requires role="option" children — that is the selectable-chip case).
   template: `
-    <div role="listbox" aria-label="Tags">
+    <div>
       <ui-lib-chip label="Angular" />
       <ui-lib-chip label="React" />
     </div>
@@ -87,7 +89,7 @@ class BasicChipHostComponent {}
   imports: [Chip],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div role="listbox" aria-label="Tags">
+    <div>
       <ui-lib-chip label="Amy" image="/assets/amy.png" imageAlt="Amy Elsner" />
     </div>
   `,
@@ -99,7 +101,7 @@ class ImageChipHostComponent {}
   imports: [Chip],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div role="listbox" aria-label="Tags">
+    <div>
       <ui-lib-chip label="Angular" icon="pi pi-bolt" />
     </div>
   `,
@@ -154,7 +156,7 @@ async function createFixture<T>(component: Type<T>): Promise<ComponentFixture<T>
 
 function query<T extends HTMLElement>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  selector: string,
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
@@ -190,21 +192,21 @@ describe('Chip Accessibility', (): void => {
 
   it('removable chip should have no axe violations', async (): Promise<void> => {
     const fixture: ComponentFixture<RemovableChipHostComponent> = await createFixture(
-      RemovableChipHostComponent
+      RemovableChipHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('selectable chip should have no axe violations', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('selected chip should have no axe violations', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     fixture.componentInstance.selected.set(true);
     fixture.detectChanges();
@@ -214,16 +216,25 @@ describe('Chip Accessibility', (): void => {
 
   // ---- ARIA structure ---------------------------------------------------
 
-  it('non-removable chip should have role="option"', async (): Promise<void> => {
+  it('plain (non-selectable) chip should have no host role', async (): Promise<void> => {
     const fixture: ComponentFixture<BasicChipHostComponent> =
       await createFixture(BasicChipHostComponent);
+    const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
+    // role="option" outside a listbox violates aria-required-parent.
+    expect(chip?.getAttribute('role')).toBeNull();
+  });
+
+  it('selectable chip should have role="option"', async (): Promise<void> => {
+    const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
+      SelectableChipHostComponent,
+    );
     const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
     expect(chip?.getAttribute('role')).toBe('option');
   });
 
   it('removable chip should have role="group"', async (): Promise<void> => {
     const fixture: ComponentFixture<RemovableChipHostComponent> = await createFixture(
-      RemovableChipHostComponent
+      RemovableChipHostComponent,
     );
     const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
     expect(chip?.getAttribute('role')).toBe('group');
@@ -245,7 +256,7 @@ describe('Chip Accessibility', (): void => {
 
   it('remove button icon should have aria-hidden="true"', async (): Promise<void> => {
     const fixture: ComponentFixture<RemovableChipHostComponent> = await createFixture(
-      RemovableChipHostComponent
+      RemovableChipHostComponent,
     );
     const iconSpan: HTMLElement | null = query(fixture, '.ui-lib-chip__remove-button span');
     expect(iconSpan?.getAttribute('aria-hidden')).toBe('true');
@@ -253,11 +264,11 @@ describe('Chip Accessibility', (): void => {
 
   it('remove button should have aria-label "Remove {label}"', async (): Promise<void> => {
     const fixture: ComponentFixture<RemovableChipHostComponent> = await createFixture(
-      RemovableChipHostComponent
+      RemovableChipHostComponent,
     );
     const button: HTMLButtonElement | null = query<HTMLButtonElement>(
       fixture,
-      '.ui-lib-chip__remove-button'
+      '.ui-lib-chip__remove-button',
     );
     expect(button?.getAttribute('aria-label')).toBe('Remove Angular');
   });
@@ -266,7 +277,7 @@ describe('Chip Accessibility', (): void => {
 
   it('selectable chip should have aria-selected="false" when not selected', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
     expect(chip?.getAttribute('aria-selected')).toBe('false');
@@ -274,7 +285,7 @@ describe('Chip Accessibility', (): void => {
 
   it('selectable chip should have aria-selected="true" when selected', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     fixture.componentInstance.selected.set(true);
     fixture.detectChanges();
@@ -285,7 +296,7 @@ describe('Chip Accessibility', (): void => {
 
   it('selectable chip should have tabindex="0"', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
     expect(chip?.getAttribute('tabindex')).toBe('0');
@@ -302,12 +313,12 @@ describe('Chip Accessibility', (): void => {
 
   it('Space key should emit selectedChange on a selectable chip', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
     const emitted: boolean[] = [];
     const chipInstance: Chip = fixture.debugElement.query(
-      (el: DebugElement): boolean => el.name === 'ui-lib-chip'
+      (el: DebugElement): boolean => el.name === 'ui-lib-chip',
     ).componentInstance as Chip;
     chipInstance.selectedChange.subscribe((value: boolean): void => {
       emitted.push(value);
@@ -322,12 +333,12 @@ describe('Chip Accessibility', (): void => {
 
   it('Enter key should emit selectedChange on a selectable chip', async (): Promise<void> => {
     const fixture: ComponentFixture<SelectableChipHostComponent> = await createFixture(
-      SelectableChipHostComponent
+      SelectableChipHostComponent,
     );
     const chip: HTMLElement | null = query(fixture, 'ui-lib-chip');
     const emitted: boolean[] = [];
     const chipInstance: Chip = fixture.debugElement.query(
-      (el: DebugElement): boolean => el.name === 'ui-lib-chip'
+      (el: DebugElement): boolean => el.name === 'ui-lib-chip',
     ).componentInstance as Chip;
     chipInstance.selectedChange.subscribe((value: boolean): void => {
       emitted.push(value);
@@ -346,10 +357,10 @@ describe('Chip Accessibility', (): void => {
     const fixture: ComponentFixture<BasicChipHostComponent> =
       await createFixture(BasicChipHostComponent);
     const chips: NodeListOf<HTMLElement> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      'ui-lib-chip'
+      'ui-lib-chip',
     );
     const ids: string[] = Array.from(chips).map(
-      (chip: HTMLElement): string => chip.getAttribute('id') ?? ''
+      (chip: HTMLElement): string => chip.getAttribute('id') ?? '',
     );
     // All IDs should be non-empty strings
     ids.forEach((id: string): void => {

@@ -38,7 +38,10 @@ let nextChipId: number = 0;
   styleUrl: './chip.scss',
   host: {
     '[class]': 'hostClasses()',
-    '[attr.aria-label]': 'label() ?? null',
+    // Only label the host when it carries a role (group/option). A plain roleless
+    // chip is named by its visible label text; an aria-label there would be
+    // prohibited (aria-prohibited-attr).
+    '[attr.aria-label]': 'hostRole() ? (label() ?? null) : null',
     '[attr.role]': 'hostRole()',
     '[attr.aria-selected]': 'ariaSelected()',
     '[attr.tabindex]': 'tabIndex()',
@@ -151,13 +154,19 @@ export class Chip {
 
   /**
    * Host role.
-   * Removable chips use role="group" (to allow a nested button without violating
-   * the "nested-interactive" ARIA rule). Non-removable chips use role="option"
-   * for use inside a role="listbox" container.
+   * - Removable chips use role="group" (to allow a nested close button without
+   *   violating the "nested-interactive" ARIA rule).
+   * - Selectable chips use role="option" for use inside a role="listbox" container.
+   * - Plain decorative chips get no role: role="option" outside a listbox violates
+   *   aria-required-parent (WCAG 1.3.1), and a standalone chip is just a labelled
+   *   element. Consumers building a selectable chip set provide the listbox parent.
    */
-  public readonly hostRole: Signal<string> = computed<string>((): string =>
-    this.removable() ? 'group' : 'option',
-  );
+  public readonly hostRole: Signal<string | null> = computed<string | null>((): string | null => {
+    if (this.removable()) {
+      return 'group';
+    }
+    return this.selectable() ? 'option' : null;
+  });
 
   /**
    * aria-selected attribute value.
