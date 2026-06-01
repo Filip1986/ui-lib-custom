@@ -55,10 +55,11 @@ jobs:
               body,
             });
 
-  # NOTE: e2e a11y tests are disabled in CI until the library reaches a stable state.
-  # Re-enable by removing the `if: false` condition below.
+  # Full Playwright e2e a11y suite (a11y, a11y-full-sweep, a11y-interactions,
+  # overlay-mounting). Previously disabled via `if: false`; re-enabled now that all
+  # suites pass (74 tests) and the playwright config has retries:2 in CI. This is the
+  # gate that caught the modal-dialog NG0203 render bug — keep it running.
   e2e-a11y-tests:
-    if: false
     runs-on: ubuntu-latest
 
     steps:
