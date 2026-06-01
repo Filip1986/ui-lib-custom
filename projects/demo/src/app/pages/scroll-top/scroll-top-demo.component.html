@@ -49,7 +49,7 @@
       <code>position: relative</code> and <code>overflow-y: auto</code>.
     </p>
     <div class="demo-section__preview">
-      <div class="demo-scrollable-container">
+      <div class="demo-scrollable-container" tabindex="0" role="region" aria-label="Scrollable demo content">
         <ui-lib-scroll-top target="parent" [threshold]="100" />
         @for (item of dummyItems; track item) {
           <div class="demo-scrollable-item">Item {{ item }}</div>
