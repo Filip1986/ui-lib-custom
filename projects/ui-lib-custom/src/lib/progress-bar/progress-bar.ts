@@ -205,7 +205,14 @@ export class ProgressBar {
       if (labelInput !== null) {
         return labelInput;
       }
-      return this.indeterminate() ? 'Loading' : null;
+      // Labelled by an external element — let aria-labelledby provide the name.
+      if (this.ariaLabelledBy()) {
+        return null;
+      }
+      // A progressbar role must always have an accessible name (axe
+      // aria-progressbar-name / WCAG 4.1.2): "Loading" while indeterminate, a generic
+      // "Progress" otherwise. Consumers should pass `ariaLabel` for a descriptive name.
+      return this.indeterminate() ? 'Loading' : 'Progress';
     },
   );
 }
