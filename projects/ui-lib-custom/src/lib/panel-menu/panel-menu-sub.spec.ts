@@ -19,6 +19,15 @@ import type { PanelMenuItem } from './panel-menu.types';
  * It is provided its host context via the PANEL_MENU_CONTEXT token, mocked here.
  */
 
+/** Indexed access under noUncheckedIndexedAccess yields `T | undefined`; assert presence in tests. */
+function at<T>(arr: readonly T[], index: number): T {
+  const value: T | undefined = arr[index];
+  if (value === undefined) {
+    throw new Error(`Expected an element at index ${index}`);
+  }
+  return value;
+}
+
 function createMockContext(): jest.Mocked<PanelMenuContext> {
   return {
     isItemExpanded: jest.fn<boolean, [string]>().mockReturnValue(false),
@@ -125,7 +134,7 @@ describe('PanelMenuSubComponent', (): void => {
   describe('onToggle', (): void => {
     it('toggles an enabled group through the context', (): void => {
       const { sub } = setup([group('G', [leaf('c')])]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
       const event: MouseEvent = new MouseEvent('click');
       const preventSpy: jest.SpyInstance = jest.spyOn(event, 'preventDefault');
 
@@ -137,7 +146,7 @@ describe('PanelMenuSubComponent', (): void => {
 
     it('does not toggle a disabled group', (): void => {
       const { sub } = setup([group('G', [leaf('c')], { disabled: true })]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
       const event: MouseEvent = new MouseEvent('click');
       const preventSpy: jest.SpyInstance = jest.spyOn(event, 'preventDefault');
 
@@ -151,7 +160,7 @@ describe('PanelMenuSubComponent', (): void => {
   describe('onActivate', (): void => {
     it('activates an enabled leaf through the context', (): void => {
       const { sub } = setup([leaf('A')]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
       const event: MouseEvent = new MouseEvent('click');
 
       sub.onActivate(event, item);
@@ -161,7 +170,7 @@ describe('PanelMenuSubComponent', (): void => {
 
     it('does not activate a disabled leaf', (): void => {
       const { sub } = setup([leaf('A', { disabled: true })]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
       const event: MouseEvent = new MouseEvent('click');
       const preventSpy: jest.SpyInstance = jest.spyOn(event, 'preventDefault');
 
@@ -179,7 +188,7 @@ describe('PanelMenuSubComponent', (): void => {
 
     it('Enter on a group toggles it', (): void => {
       const { sub } = setup([group('G', [leaf('c')])]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
 
       sub.onItemKeyDown(keydown('Enter'), item, 0, true);
 
@@ -189,7 +198,7 @@ describe('PanelMenuSubComponent', (): void => {
 
     it('Space on a leaf activates it', (): void => {
       const { sub } = setup([leaf('A')]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
 
       sub.onItemKeyDown(keydown(' '), item, 0, false);
 
@@ -199,7 +208,7 @@ describe('PanelMenuSubComponent', (): void => {
 
     it('Enter on a disabled item does nothing but prevents default', (): void => {
       const { sub } = setup([leaf('A', { disabled: true })]);
-      const item: PanelMenuItem = sub.visibleItems()[0];
+      const item: PanelMenuItem = at(sub.visibleItems(), 0);
       const event: KeyboardEvent = keydown('Enter');
       const preventSpy: jest.SpyInstance = jest.spyOn(event, 'preventDefault');
 
@@ -224,29 +233,29 @@ describe('PanelMenuSubComponent', (): void => {
     it('ArrowDown moves focus to the next interactive item', (): void => {
       const { fixture } = setup([leaf('A'), leaf('B'), leaf('C')]);
       const links: HTMLElement[] = headers(fixture);
-      links[0].focus();
+      at(links, 0).focus();
 
-      links[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+      at(links, 0).dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
 
-      expect(document.activeElement).toBe(links[1]);
+      expect(document.activeElement).toBe(at(links, 1));
     });
 
     it('ArrowUp from the first item wraps to the last', (): void => {
       const { fixture } = setup([leaf('A'), leaf('B'), leaf('C')]);
       const links: HTMLElement[] = headers(fixture);
-      links[0].focus();
+      at(links, 0).focus();
 
-      links[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+      at(links, 0).dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
 
-      expect(document.activeElement).toBe(links[links.length - 1]);
+      expect(document.activeElement).toBe(at(links, links.length - 1));
     });
 
     it('Escape returns focus to the labelled parent panel header', (): void => {
       const { fixture } = setup([leaf('A'), leaf('B')]);
       const links: HTMLElement[] = headers(fixture);
-      links[0].focus();
+      at(links, 0).focus();
 
-      links[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      at(links, 0).dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
 
       expect(document.activeElement?.id).toBe('panel-header');
     });
@@ -260,7 +269,9 @@ describe('PanelMenuSubComponent', (): void => {
       // currentTarget has no closest sub-list — moveFocus must bail without throwing.
       const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
       Object.defineProperty(event, 'currentTarget', { value: orphan });
-      expect((): void => sub.onItemKeyDown(event, sub.visibleItems()[0], 0, false)).not.toThrow();
+      expect((): void =>
+        sub.onItemKeyDown(event, at(sub.visibleItems(), 0), 0, false),
+      ).not.toThrow();
       expect(document.activeElement).toBe(orphan);
 
       orphan.remove();

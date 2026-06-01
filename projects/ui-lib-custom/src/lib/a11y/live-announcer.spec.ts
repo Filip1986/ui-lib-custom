@@ -100,7 +100,7 @@ describe('LiveAnnouncerService — timer-driven branches', (): void => {
   });
 
   it('clears the previous pending timeout when a second announce arrives', async (): Promise<void> => {
-    const clearSpy: jest.SpyInstance = jest.spyOn(global, 'clearTimeout');
+    const clearSpy: jest.SpyInstance = jest.spyOn(globalThis, 'clearTimeout');
 
     void service.announce('First');
     // Second call before the first 100ms elapses must clear the first timeout.
