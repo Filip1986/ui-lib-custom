@@ -93,9 +93,13 @@
   </div>
 
   <!-- Body: optional line numbers + code — scoped to the active tab's content -->
+  <!-- tabindex="0" makes the scrollable body keyboard-operable (axe
+       scrollable-region-focusable / WCAG 2.1.1). The tabpanel branch is also
+       focusable per the ARIA tabs pattern. -->
   <div
     class="ui-lib-code-snippet__body"
     [style.max-height]="maxHeight()"
+    tabindex="0"
     [attr.role]="isMultiTab() ? 'tabpanel' : null"
     [attr.id]="isMultiTab() ? panelId(activeTabIndex()) : null"
     [attr.aria-labelledby]="isMultiTab() ? tabId(activeTabIndex()) : null"
