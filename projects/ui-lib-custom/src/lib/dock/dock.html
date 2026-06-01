@@ -95,6 +95,7 @@
         @else {
           <span
             class="ui-lib-dock__item-link ui-lib-dock__item-link--static"
+            [attr.role]="(item.ariaLabel ?? item.label) ? 'img' : null"
             [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
           >
             @if (itemTemplate()) {
