@@ -94,7 +94,8 @@ let nextTreeSelectId: number = 0;
     '[attr.aria-haspopup]': '"tree"',
     '[attr.aria-controls]': 'panelVisible() ? treeId : null',
     '[attr.aria-describedby]': 'liveRegionId',
-    '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-label]':
+      'ariaLabel() || (ariaLabelledBy() ? null : i18n.translate("tree-select.label"))',
     '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
     '[attr.aria-invalid]': 'invalid() ? "true" : null',
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',

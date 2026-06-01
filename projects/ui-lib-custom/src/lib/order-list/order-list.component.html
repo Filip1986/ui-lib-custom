@@ -74,7 +74,7 @@
     #listboxEl
     role="listbox"
     class="ui-lib-order-list__list"
-    [attr.aria-label]="ariaLabel()"
+    [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('orderlist.label'))"
     [attr.aria-labelledby]="ariaLabelledBy()"
     aria-multiselectable="true"
     [attr.id]="componentId + '-list'"

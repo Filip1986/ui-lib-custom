@@ -260,7 +260,7 @@
   [attr.contenteditable]="!isDisabled() && !readonly()"
   [attr.role]="'textbox'"
   [attr.aria-multiline]="'true'"
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-label]="ariaLabel() || (ariaLabelledBy() ? null : i18n.translate('editor.content.label'))"
   [attr.aria-labelledby]="ariaLabelledBy()"
   [attr.aria-readonly]="readonly() || null"
   [attr.aria-disabled]="isDisabled() || null"
