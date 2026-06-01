@@ -187,60 +187,44 @@ test.describe('Interaction-state accessibility', (): void => {
   });
 
   // ── 5. Dialog ─────────────────────────────────────────────────────────────
-  // FIXME: The dialog panel does not render in the e2e environment even after
-  // basicVisible.set(true) is called and Angular's CD re-runs dialog-demo (confirmed by
-  // aria-expanded updating). The ui-lib-dialog @if (visible()) block never fires.
-  // Root cause: zoneless CD propagation of model() signal from setInput() to @if in the
-  // child component appears not to trigger a re-check in the ng serve dev environment.
-  // Static axe coverage is provided by a11y-full-sweep.spec.ts (/dialog route).
-  // TODO: investigate whether this is an Angular 21 zoneless + model() bug or a test env issue.
-  test.fixme('Dialog — modal open: zero axe violations + focus trap + Escape returns focus', async ({
+  test('Dialog — modal open: zero axe violations + focus trap + Escape returns focus', async ({
     page,
   }: {
     page: Page;
   }): Promise<void> => {
     await page.goto('/dialog');
 
-    // Use Angular's dev-tools API (window.ng — available in ng serve dev mode) to open
-    // the dialog programmatically. This bypasses the CD propagation path and directly
-    // sets the signal, ensuring the dialog opens reliably in the e2e test environment.
-    // Wait for the routed component to be present before querying via ng.getComponent
-    await page.waitForSelector('app-dialog-demo');
-    await page.evaluate((): void => {
-      // Directly mutate the signal — zoneless Angular's reactive scheduler detects
-      // signal changes and schedules a re-render without needing applyChanges().
-      type NgComp = { basicVisible?: { set: (v: boolean) => void } };
-      type NgApi = { getComponent: (el: Element) => NgComp | null };
-      const ng: NgApi | undefined = (window as unknown as { ng?: NgApi }).ng;
-      const demoEl: Element | null = document.querySelector('app-dialog-demo');
-      if (demoEl && ng) {
-        const comp: NgComp | null = ng.getComponent(demoEl);
-        comp?.basicVisible?.set(true);
-      }
-    });
+    // Drive the real user flow: click the trigger button. Its (click) handler calls
+    // basicVisible.set(true); the one-way [visible]="basicVisible()" binding then
+    // renders the dialog's @if (visible()) panel. The click is a genuine DOM event,
+    // so zoneless CD runs synchronously — no window.ng signal-poking required.
+    const triggerHost: Locator = page.locator('app-doc-section#basic ui-lib-button').first();
+    const triggerButton: Locator = triggerHost.locator('button');
+    await triggerButton.click();
 
-    // The trigger locator for focus-return assertion on Escape
-    const trigger: Locator = page.locator('[aria-controls="dialog-basic-content"]');
-
-    // Wait for aria-expanded="true" to appear on the trigger — this is proof that
-    // Angular's reactive scheduler detected the signal change and re-rendered
-    // dialog-demo's template (which also updates [visible]="basicVisible()").
-    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    // Trigger reflects expanded state once CD has propagated the signal.
+    await expect(triggerHost).toHaveAttribute('aria-expanded', 'true');
 
     const dialog: Locator = page.locator('ui-lib-dialog .ui-lib-dialog-panel').first();
     await dialog.waitFor({ state: 'visible' });
 
+    // Modal semantics must be present on the rendered panel.
+    await expect(dialog).toHaveAttribute('role', 'dialog');
+    await expect(dialog).toHaveAttribute('aria-modal', 'true');
+
     await assertAxeClean(page, 'ui-lib-dialog');
 
-    // Tab cycle: focus must stay inside the dialog
-    await page.keyboard.press('Tab');
-    const focusedInDialog: Locator = dialog.locator(':focus');
-    await expect(focusedInDialog).toBeVisible();
+    // Initial focus must land inside the dialog (focus trap moves it off the trigger).
+    await expect(dialog.locator(':focus')).toHaveCount(1);
 
-    // Escape must close and return focus to the trigger
+    // Tab must keep focus inside the dialog (trap, not escape to the page body).
+    await page.keyboard.press('Tab');
+    await expect(dialog.locator(':focus')).toHaveCount(1);
+
+    // Escape must close and return focus to the trigger button that opened it.
     await page.keyboard.press('Escape');
     await expect(dialog).not.toBeVisible();
-    await expect(trigger).toBeFocused();
+    await expect(triggerButton).toBeFocused();
   });
 
   // ── 6. Drawer ─────────────────────────────────────────────────────────────

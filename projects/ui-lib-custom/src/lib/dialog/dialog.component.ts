@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Injector,
   PLATFORM_ID,
   ViewEncapsulation,
   afterNextRender,
@@ -75,6 +76,7 @@ export class DialogComponent implements OnDestroy {
     ElementRef,
   ) as ElementRef<HTMLElement>;
   private readonly document: Document = inject(DOCUMENT);
+  private readonly injector: Injector = inject(Injector);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   protected readonly i18n: UiLibI18nService = inject(UiLibI18nService);
   private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
@@ -418,11 +420,18 @@ export class DialogComponent implements OnDestroy {
         return;
       }
 
-      afterNextRender((): void => {
-        if (this.visible() && this.modal()) {
-          this.activateFocusTrap();
-        }
-      });
+      // `afterNextRender` requires an injection context. This effect callback is NOT
+      // one, so the captured root injector must be passed explicitly — otherwise it
+      // throws NG0203, which aborts the change-detection pass and leaves the modal
+      // dialog's `@if (visible())` panel unrendered.
+      afterNextRender(
+        (): void => {
+          if (this.visible() && this.modal()) {
+            this.activateFocusTrap();
+          }
+        },
+        { injector: this.injector },
+      );
     });
   }
 

@@ -43,6 +43,17 @@ const config: Config = {
     '!<rootDir>/projects/ui-lib-custom/src/lib/**/*.a11y.spec.ts',
   ],
   coverageReporters: ['text', 'lcov'],
+  // Regression ratchet — floors sit just below the values measured 2026-06-01
+  // (stmts 83.9 / branches 70.2 / funcs 87.1 / lines 84.1). Raise these as
+  // coverage climbs; never lower them. Enforced in CI via `npm run test:coverage`.
+  coverageThreshold: {
+    global: {
+      statements: 83,
+      branches: 69,
+      functions: 86,
+      lines: 83,
+    },
+  },
   testMatch: ['**/*.spec.ts'],
   testPathIgnorePatterns: ['<rootDir>/e2e/', '<rootDir>/.claude/'],
 };
