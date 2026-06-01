@@ -44,6 +44,10 @@ Thumbs.db
 *storybook.log
 storybook-static
 
+# Playwright — auto-generated outputs, never commit
+/playwright-report/
+/test-results/
+
 # Claude AI worktrees
 .claude/worktrees/
 # Local Claude settings (machine-specific, never commit)
