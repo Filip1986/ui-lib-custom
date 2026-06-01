@@ -79,13 +79,6 @@
                 role="option"
                 tabindex="-1"
                 [attr.aria-haspopup]="isOptionGroupAtLevel(option, level) ? 'listbox' : null"
-                [attr.aria-expanded]="
-                  isOptionGroupAtLevel(option, level)
-                    ? isSubListOpen(option, level)
-                      ? 'true'
-                      : 'false'
-                    : null
-                "
                 [attr.aria-selected]="isOptionSelected(option) ? 'true' : 'false'"
                 [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
                 [class.ui-lib-cascade-select__option--active]="isOptionActive(level, option)"
