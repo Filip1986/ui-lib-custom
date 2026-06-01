@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
-import type { Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageHeaderComponent } from '@demo/shared/doc-page/doc-page-header.component';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -161,15 +161,15 @@ export class DialogDemoComponent {
     },
   ];
 
-  public basicVisible: boolean = false;
-  public customVisible: boolean = false;
-  public maximizableVisible: boolean = false;
-  public longContentVisible: boolean = false;
-  public nonModalVisible: boolean = false;
-  public responsiveVisible: boolean = false;
-  public draggableVisible: boolean = false;
-  public headlessVisible: boolean = false;
-  public variantVisible: boolean = false;
+  public readonly basicVisible: WritableSignal<boolean> = signal(false);
+  public readonly customVisible: WritableSignal<boolean> = signal(false);
+  public readonly maximizableVisible: WritableSignal<boolean> = signal(false);
+  public readonly longContentVisible: WritableSignal<boolean> = signal(false);
+  public readonly nonModalVisible: WritableSignal<boolean> = signal(false);
+  public readonly responsiveVisible: WritableSignal<boolean> = signal(false);
+  public readonly draggableVisible: WritableSignal<boolean> = signal(false);
+  public readonly headlessVisible: WritableSignal<boolean> = signal(false);
+  public readonly variantVisible: WritableSignal<boolean> = signal(false);
 
   public readonly positions: DialogPosition[] = [
     'center',
