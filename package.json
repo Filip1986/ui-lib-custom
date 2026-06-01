@@ -120,8 +120,8 @@
   "bundlesize": [
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom.mjs",
-      "maxSize": "71 kB",
-      "comment": "Primary barrel (gzip). Measured 69.2 kB 2026-05-26 after Prompt-7 upgrades (Select, AutoComplete, CascadeSelect, ColorPicker). Prefer per-entry imports — this barrel is a legacy compatibility shim and should eventually be deprecated."
+      "maxSize": "72 kB",
+      "comment": "Primary barrel (gzip). Measured 71.1 kB 2026-06-01 after the dialog afterNextRender injector fix (adds Injector injection). Prefer per-entry imports — this barrel is a legacy compatibility shim and should eventually be deprecated."
     },
     {
       "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-a11y.mjs",
