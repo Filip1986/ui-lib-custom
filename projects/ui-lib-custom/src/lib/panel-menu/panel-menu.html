@@ -56,6 +56,7 @@
             [class.ui-lib-panel-menu__content--visible]="isItemExpanded(getRootKey($index))"
             [attr.aria-labelledby]="getPanelHeaderId($index)"
             [attr.aria-hidden]="!isItemExpanded(getRootKey($index)) ? 'true' : null"
+            [attr.inert]="!isItemExpanded(getRootKey($index)) ? true : null"
           >
             <div class="ui-lib-panel-menu__content-inner">
               <ui-lib-panel-menu-sub
