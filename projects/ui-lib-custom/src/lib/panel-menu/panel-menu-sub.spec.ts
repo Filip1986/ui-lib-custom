@@ -264,17 +264,19 @@ describe('PanelMenuSubComponent', (): void => {
       const { sub } = setup([leaf('A')]);
       const orphan: HTMLElement = document.createElement('button');
       document.body.appendChild(orphan);
-      orphan.focus();
+      try {
+        orphan.focus();
 
-      // currentTarget has no closest sub-list — moveFocus must bail without throwing.
-      const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
-      Object.defineProperty(event, 'currentTarget', { value: orphan });
-      expect((): void =>
-        sub.onItemKeyDown(event, at(sub.visibleItems(), 0), 0, false),
-      ).not.toThrow();
-      expect(document.activeElement).toBe(orphan);
-
-      orphan.remove();
+        // currentTarget has no closest sub-list — moveFocus must bail without throwing.
+        const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        Object.defineProperty(event, 'currentTarget', { value: orphan });
+        expect((): void =>
+          sub.onItemKeyDown(event, at(sub.visibleItems(), 0), 0, false),
+        ).not.toThrow();
+        expect(document.activeElement).toBe(orphan);
+      } finally {
+        orphan.remove();
+      }
     });
   });
 });

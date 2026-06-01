@@ -255,12 +255,15 @@ describe('MenubarSubComponent', (): void => {
       const orphan: HTMLElement = document.createElement('a');
       orphan.tabIndex = 0; // an <a> without href is not focusable otherwise
       document.body.appendChild(orphan);
-      orphan.focus();
-      const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
-      Object.defineProperty(event, 'currentTarget', { value: orphan });
-      expect((): void => sub.onItemKeyDown(event, at(sub.visibleItems(), 0), 0)).not.toThrow();
-      expect(document.activeElement).toBe(orphan);
-      orphan.remove();
+      try {
+        orphan.focus();
+        const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        Object.defineProperty(event, 'currentTarget', { value: orphan });
+        expect((): void => sub.onItemKeyDown(event, at(sub.visibleItems(), 0), 0)).not.toThrow();
+        expect(document.activeElement).toBe(orphan);
+      } finally {
+        orphan.remove();
+      }
     });
   });
 });
