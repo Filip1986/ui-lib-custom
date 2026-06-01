@@ -127,6 +127,35 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Recent Handoffs
 
 Date: 2026-06-01
+Changed (test-hardening pass — branch `test-hardening-suite`, PR #284):
+  CRITICAL BUGFIX dialog.component.ts: modal dialogs never opened in real apps. The
+    focus-trap effect called afterNextRender() WITHOUT an injector → inside an effect
+    callback there is no injection context → threw NG0203 → aborted the CD pass → the
+    @if (visible()) panel never rendered. (This is the true root cause of the prior
+    handoff's dialog test.fixme — it was NOT "zoneless model() CD propagation".) Fix:
+    pass { injector: this.injector }. Library-wide sweep confirmed dialog was the only
+    offender; every other overlay already passes the injector.
+  e2e/a11y-interactions.spec.ts: Dialog test un-fixme'd, rewritten to drive the real
+    trigger-click flow (verified in a real browser: open, focus trap, axe, Escape, focus return)
+  CI gating: accessibility.yml now runs the full e2e/ dir (was only a11y.spec.ts); ci.yml unit
+    job switched to test:coverage; jest.config.ts gained a coverageThreshold ratchet (83/69/86/83)
+  NEW specs (branch coverage): a11y/announce.directive.spec.ts (0→100% br),
+    a11y/live-announcer.spec.ts expanded (→85% br), panel-menu/panel-menu-sub.spec.ts (35→87%),
+    menubar/menubar-submenu.spec.ts (41→94%), theming/theme-scope.directive.spec.ts +
+    theming/with-theme-scope.spec.ts (both 0→100% st / 96% br)
+State: Steps 1-2 done + Step 3 (a11y core + menu cluster + theme-scope) done. Remaining big-ticket
+  coverage deferred: theme-config.service.ts (1004 lines, 27% br), theme-editor.service.ts,
+  virtual-scroller (scroll math, hard in jsdom). Steps 4 (mock-theme consolidation + a11y backfill),
+  5 (de-flake sweep: 14 real-timer + 12 overlay specs), 6 (quality pass on toBeTruthy-only) not started.
+Verification:
+  npx jest → 233 suites / 6211 tests pass ✅ (exit 0)
+  npx playwright test e2e/a11y-interactions.spec.ts -g Dialog → 1 passed ✅
+  pre-push typecheck + bundlesize ✅ (branch pushed)
+Next step: decide between investing in the large theme-config/theme-editor/virtual-scroller specs
+  vs. moving to Step 4 (backfill a11y specs for code-snippet/theming) and Step 5 (de-flake sweep,
+  bounded + likely to surface real bugs like the dialog one).
+
+Date: 2026-06-01
 Changed (interaction-state e2e a11y suite + related fixes):
   e2e/a11y-interactions.spec.ts: NEW — 13 interaction-state axe tests (Select, AutoComplete,
     CascadeSelect, DatePicker, Drawer, Menubar, TieredMenu, ContextMenu, Tree, TreeSelect,
