@@ -61,8 +61,9 @@ At the start of every session, read these files in order:
 1. `AI_AGENT_CONTEXT.md` — current milestone, active component status, recent handoffs
 2. `LIBRARY_CONVENTIONS.md` — architectural rules and anti-patterns (source of truth)
 3. `docs/VISION.md` — strategic north star; re-read when making API, DX, or architectural trade-offs
-4. Component doc at `docs/reference/components/<name>.md` — if working on a specific component
-5. `docs/architecture/` — if touching cross-cutting concerns (entry points, theming, tokens)
+4. `docs/DISCOVERIES.md` — living record of non-obvious findings, blocked situations resolved, and patterns discovered during development. Read the relevant category before starting work in that area.
+5. Component doc at `docs/reference/components/<name>.md` — if working on a specific component
+6. `docs/architecture/` — if touching cross-cutting concerns (entry points, theming, tokens)
 
 **Standards reference** (apply to all generated code):
 

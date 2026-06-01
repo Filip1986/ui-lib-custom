@@ -4,6 +4,14 @@
 > Updated whenever a component completes a phase of the evolution workflow.
 > The hardening queue below is the active prioritized backlog — work top to bottom.
 
+> **Audit note (2026-05-30):** A full automated-gate verification ([`GROUND_TRUTH_AUDIT_2026-05-30.md`](reference/project/GROUND_TRUTH_AUDIT_2026-05-30.md))
+> confirmed the codebase is genuinely healthy (8,571 tests pass; build/typecheck/lint/bundles all
+> green) — but also found that these category scores are **self-reported and over-uniform**: real
+> gaps live inside components marked 9.0 (e.g. Paginator's hardcoded `placeholder="Page"` despite
+> I18n 9; the a11y e2e gate isn't pinned to the right server so its default run false-fails and is
+> not CI-enforced — though a clean re-run on a dedicated port passes 5/6, so the components are
+> genuinely axe-clean). Treat the numbers below as directional, not as verified machine checks.
+
 **Gate:** A component is only considered production-quality when every category scores **≥ 8** (12 categories total).
 **Definition of Done:** [`platform/docs/guides/component-definition-of-done.md`](../../platform/docs/guides/component-definition-of-done.md) — canonical ship gate (platform). Legacy scoring: below.
 **Criteria:** [`docs/SCORING_CRITERIA.md`](SCORING_CRITERIA.md) — the canonical checklist defining what each score number means. A score is a count of verified checkboxes, not a gut feeling.

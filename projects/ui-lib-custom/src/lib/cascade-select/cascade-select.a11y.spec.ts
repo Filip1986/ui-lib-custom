@@ -229,10 +229,20 @@ describe('CascadeSelect accessibility', (): void => {
     expect(parentOption.getAttribute('aria-haspopup')).toBe('listbox');
   });
 
-  it('keeps aria-expanded false on parent option before opening child list', (): void => {
+  it('does not set aria-expanded on parent option (aria-expanded is invalid on role=option)', (): void => {
+    // aria-expanded is not in the supported attribute set for role="option" per WAI-ARIA.
+    // Sub-list presence is communicated via aria-haspopup="listbox" on the option,
+    // and the open/closed state via whether the nested listbox is rendered.
     openPanel();
     const parentOption: HTMLElement = getOptions()[0] as HTMLElement;
-    expect(parentOption.getAttribute('aria-expanded')).toBe('false');
+    expect(parentOption.getAttribute('aria-expanded')).toBeNull();
+  });
+
+  it('renders nested listbox when parent option sub-list is open', (): void => {
+    openPanel();
+    expect(getListboxes().length).toBe(1); // only top-level listbox before sub-list opens
+    press('ArrowRight');
+    expect(getListboxes().length).toBe(2); // nested listbox now rendered
   });
 
   it('does not set aria-haspopup for leaf options', (): void => {
@@ -323,11 +333,14 @@ describe('CascadeSelect accessibility', (): void => {
     expect(nestedListbox.getAttribute('aria-label')).toBe('Options for Australia');
   });
 
-  it('sets parent option aria-expanded true while sub-list is open', (): void => {
+  it('still has no aria-expanded on parent option after sub-list opens', (): void => {
+    // Confirmed again after sub-list opens: the nested listbox appearing is what
+    // communicates the open state — not an invalid aria-expanded on role=option.
     openPanel();
     press('ArrowRight');
     const parentOption: HTMLElement = getOptions()[0] as HTMLElement;
-    expect(parentOption.getAttribute('aria-expanded')).toBe('true');
+    expect(parentOption.getAttribute('aria-expanded')).toBeNull();
+    expect(getListboxes().length).toBe(2); // nested listbox is rendered = sub-list is open
   });
 
   it('ArrowLeft closes the current sub-list level', (): void => {
