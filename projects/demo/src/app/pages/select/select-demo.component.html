@@ -107,6 +107,7 @@
           <span class="control-label">Placeholder</span>
           <input
             type="text"
+            aria-label="Placeholder text"
             [value]="placeholder()"
             (input)="placeholder.set($any($event.target).value)"
           />

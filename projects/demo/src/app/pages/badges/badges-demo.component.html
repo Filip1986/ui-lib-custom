@@ -109,7 +109,12 @@
 
           <div class="control">
             <label>Label</label>
-            <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
+            <input
+              type="text"
+              aria-label="Badge label"
+              [value]="text()"
+              (input)="text.set($any($event.target).value)"
+            />
           </div>
         </div>
       </ui-lib-panel>
