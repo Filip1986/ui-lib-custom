@@ -83,7 +83,10 @@ jobs:
           npm run build:demo
 
       - name: Run E2E accessibility tests
-        run: npx playwright test e2e/a11y.spec.ts
+        # Runs the full e2e suite: a11y.spec, a11y-full-sweep (every route at rest),
+        # a11y-interactions (open-state keyboard + axe per widget), and overlay-mounting.
+        # Previously only a11y.spec.ts was gated, so the interaction suite could rot.
+        run: npx playwright test
 
       - name: Upload test results
         if: always()
