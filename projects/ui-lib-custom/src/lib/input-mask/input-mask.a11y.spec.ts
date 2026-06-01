@@ -120,59 +120,59 @@ function sendKeypress(input: HTMLInputElement, character: string): void {
 describe('InputMask Accessibility', (): void => {
   it('axe: has no accessibility violations for a labeled default input mask', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskDefaultHostComponent> = await createFixture(
-      InputMaskDefaultHostComponent
+      InputMaskDefaultHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('axe: has no accessibility violations when invalid is set', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskInvalidHostComponent> = await createFixture(
-      InputMaskInvalidHostComponent
+      InputMaskInvalidHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('axe: has no accessibility violations for disabled and readonly states', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskStateHostComponent> = await createFixture(
-      InputMaskStateHostComponent
+      InputMaskStateHostComponent,
     );
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('sets aria-label when ariaLabel input is provided', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskLabelHostComponent> = await createFixture(
-      InputMaskLabelHostComponent
+      InputMaskLabelHostComponent,
     );
     expect(getSingleInput(fixture).getAttribute('aria-label')).toBe('Phone');
   });
 
   it('sets aria-labelledby when ariaLabelledBy input is provided', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskLabelHostComponent> = await createFixture(
-      InputMaskLabelHostComponent
+      InputMaskLabelHostComponent,
     );
     expect(getSingleInput(fixture).getAttribute('aria-labelledby')).toBe('phone-label');
   });
 
   it('uses explicit id input for the native input id', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskLabelHostComponent> = await createFixture(
-      InputMaskLabelHostComponent
+      InputMaskLabelHostComponent,
     );
     expect(getSingleInput(fixture).id).toBe('phone-id');
   });
 
   it('links aria-describedby to generated hint id by default', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskDefaultHostComponent> = await createFixture(
-      InputMaskDefaultHostComponent
+      InputMaskDefaultHostComponent,
     );
     expect(getSingleInput(fixture).getAttribute('aria-describedby')).toMatch(/-hint$/);
   });
 
   it('renders a default format hint using the mask value', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskDefaultHostComponent> = await createFixture(
-      InputMaskDefaultHostComponent
+      InputMaskDefaultHostComponent,
     );
     const hint: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-input-mask-sr-only'
+      '.ui-lib-input-mask-sr-only',
     );
     expect(hint).toBeTruthy();
     expect((hint as HTMLElement).textContent.trim()).toBe('Format: (999) 999-9999');
@@ -180,10 +180,10 @@ describe('InputMask Accessibility', (): void => {
 
   it('renders a custom format hint from maskHint input', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskLabelHostComponent> = await createFixture(
-      InputMaskLabelHostComponent
+      InputMaskLabelHostComponent,
     );
     const hint: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-input-mask-sr-only'
+      '.ui-lib-input-mask-sr-only',
     );
     expect(hint).toBeTruthy();
     expect((hint as HTMLElement).textContent.trim()).toBe('Format: 3 digits, 3 digits, 4 digits');
@@ -191,24 +191,24 @@ describe('InputMask Accessibility', (): void => {
 
   it('sets aria-invalid on externally invalid mask', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskInvalidHostComponent> = await createFixture(
-      InputMaskInvalidHostComponent
+      InputMaskInvalidHostComponent,
     );
     expect(getSingleInput(fixture).getAttribute('aria-invalid')).toBe('true');
   });
 
   it('links externally invalid state to error id in aria-describedby', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskInvalidHostComponent> = await createFixture(
-      InputMaskInvalidHostComponent
+      InputMaskInvalidHostComponent,
     );
     expect(getSingleInput(fixture).getAttribute('aria-describedby')).toContain('-error');
   });
 
   it('renders error element with role alert for invalid state', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskInvalidHostComponent> = await createFixture(
-      InputMaskInvalidHostComponent
+      InputMaskInvalidHostComponent,
     );
     const error: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-lib-input-mask-error'
+      '.ui-lib-input-mask-error',
     );
     expect(error).toBeTruthy();
     expect((error as HTMLElement).getAttribute('role')).toBe('alert');
@@ -216,7 +216,7 @@ describe('InputMask Accessibility', (): void => {
 
   it('marks incomplete masks as aria-invalid on blur when autoClear is false', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskIncompleteHostComponent> = await createFixture(
-      InputMaskIncompleteHostComponent
+      InputMaskIncompleteHostComponent,
     );
     const input: HTMLInputElement = getSingleInput(fixture);
 
@@ -233,7 +233,7 @@ describe('InputMask Accessibility', (): void => {
 
   it('keeps complete masks aria-valid after blur', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskIncompleteHostComponent> = await createFixture(
-      InputMaskIncompleteHostComponent
+      InputMaskIncompleteHostComponent,
     );
     const input: HTMLInputElement = getSingleInput(fixture);
 
@@ -253,7 +253,7 @@ describe('InputMask Accessibility', (): void => {
 
   it('announces blocked characters via polite live region', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskDefaultHostComponent> = await createFixture(
-      InputMaskDefaultHostComponent
+      InputMaskDefaultHostComponent,
     );
     const input: HTMLInputElement = getSingleInput(fixture);
 
@@ -264,17 +264,17 @@ describe('InputMask Accessibility', (): void => {
     fixture.detectChanges();
 
     const liveRegion: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '[aria-live="polite"].ui-lib-input-mask-sr-only'
+      '[aria-live="polite"].ui-lib-input-mask-sr-only',
     );
     expect(liveRegion).toBeTruthy();
     expect((liveRegion as HTMLElement).textContent.trim()).toContain(
-      'Character "A" does not match'
+      'Character "A" does not match',
     );
   });
 
-  it('uses aria-valuetext for user-entered characters', async (): Promise<void> => {
+  it('does not set aria-valuetext (prohibited on a text input); the value is announced natively', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskDefaultHostComponent> = await createFixture(
-      InputMaskDefaultHostComponent
+      InputMaskDefaultHostComponent,
     );
     const input: HTMLInputElement = getSingleInput(fixture);
 
@@ -286,12 +286,16 @@ describe('InputMask Accessibility', (): void => {
       fixture.detectChanges();
     }
 
-    expect(input.getAttribute('aria-valuetext')).toBe('123');
+    // aria-valuetext is only valid on range widgets (slider/spinbutton/etc.), not a
+    // text input — emitting it fails axe aria-allowed-attr. The typed characters are
+    // already conveyed by the input's own value.
+    expect(input.getAttribute('aria-valuetext')).toBeNull();
+    expect(input.value).toContain('1');
   });
 
   it('reflects disabled and readonly states on native inputs', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskStateHostComponent> = await createFixture(
-      InputMaskStateHostComponent
+      InputMaskStateHostComponent,
     );
     const inputs: NodeListOf<HTMLInputElement> = (
       fixture.nativeElement as HTMLElement
@@ -304,7 +308,7 @@ describe('InputMask Accessibility', (): void => {
 
   it('generates unique ids for multiple input-mask instances', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskMultipleInstanceHostComponent> = await createFixture(
-      InputMaskMultipleInstanceHostComponent
+      InputMaskMultipleInstanceHostComponent,
     );
     const inputs: NodeListOf<HTMLInputElement> = (
       fixture.nativeElement as HTMLElement
@@ -318,7 +322,7 @@ describe('InputMask Accessibility', (): void => {
 
   it('keeps aria-describedby focused on hint when not invalid', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskDefaultHostComponent> = await createFixture(
-      InputMaskDefaultHostComponent
+      InputMaskDefaultHostComponent,
     );
     const describedBy: string | null = getSingleInput(fixture).getAttribute('aria-describedby');
 
@@ -329,7 +333,7 @@ describe('InputMask Accessibility', (): void => {
 
   it('includes both hint and error ids in aria-describedby when invalid', async (): Promise<void> => {
     const fixture: ComponentFixture<InputMaskInvalidHostComponent> = await createFixture(
-      InputMaskInvalidHostComponent
+      InputMaskInvalidHostComponent,
     );
     const describedBy: string | null = getSingleInput(fixture).getAttribute('aria-describedby');
 
